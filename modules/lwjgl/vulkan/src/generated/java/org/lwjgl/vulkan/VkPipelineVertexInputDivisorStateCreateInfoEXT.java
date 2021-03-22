@@ -31,23 +31,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkVertexInputBindingDivisorDescriptionEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure</li>
- * <li>{@code vertexBindingDivisorCount} &ndash; the number of elements in the {@code pVertexBindingDivisors} array.</li>
- * <li>{@code pVertexBindingDivisors} &ndash; a pointer to an array of {@link VkVertexInputBindingDivisorDescriptionEXT} structures, which specifies the divisor value for each binding.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineVertexInputDivisorStateCreateInfoEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t vertexBindingDivisorCount;
- *     {@link VkVertexInputBindingDivisorDescriptionEXT VkVertexInputBindingDivisorDescriptionEXT} const * pVertexBindingDivisors;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #vertexBindingDivisorCount};
+ *     {@link VkVertexInputBindingDivisorDescriptionEXT VkVertexInputBindingDivisorDescriptionEXT} const * {@link #pVertexBindingDivisors};
  * }</code></pre>
  */
 public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct implements NativeResource {
@@ -95,24 +86,24 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code vertexBindingDivisorCount} field. */
+    /** the number of elements in the {@code pVertexBindingDivisors} array. */
     @NativeType("uint32_t")
     public int vertexBindingDivisorCount() { return nvertexBindingDivisorCount(address()); }
-    /** Returns a {@link VkVertexInputBindingDivisorDescriptionEXT.Buffer} view of the struct array pointed to by the {@code pVertexBindingDivisors} field. */
+    /** a pointer to an array of {@link VkVertexInputBindingDivisorDescriptionEXT} structures, which specifies the divisor value for each binding. */
     @NativeType("VkVertexInputBindingDivisorDescriptionEXT const *")
     public VkVertexInputBindingDivisorDescriptionEXT.Buffer pVertexBindingDivisors() { return npVertexBindingDivisors(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineVertexInputDivisorStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineVertexInputDivisorStateCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkVertexInputBindingDivisorDescriptionEXT.Buffer} to the {@code pVertexBindingDivisors} field. */
+    /** Sets the address of the specified {@link VkVertexInputBindingDivisorDescriptionEXT.Buffer} to the {@link #pVertexBindingDivisors} field. */
     public VkPipelineVertexInputDivisorStateCreateInfoEXT pVertexBindingDivisors(@NativeType("VkVertexInputBindingDivisorDescriptionEXT const *") VkVertexInputBindingDivisorDescriptionEXT.Buffer value) { npVertexBindingDivisors(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -360,24 +351,24 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineVertexInputDivisorStateCreateInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineVertexInputDivisorStateCreateInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineVertexInputDivisorStateCreateInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineVertexInputDivisorStateCreateInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code vertexBindingDivisorCount} field. */
+        /** @return the value of the {@link VkPipelineVertexInputDivisorStateCreateInfoEXT#vertexBindingDivisorCount} field. */
         @NativeType("uint32_t")
         public int vertexBindingDivisorCount() { return VkPipelineVertexInputDivisorStateCreateInfoEXT.nvertexBindingDivisorCount(address()); }
-        /** Returns a {@link VkVertexInputBindingDivisorDescriptionEXT.Buffer} view of the struct array pointed to by the {@code pVertexBindingDivisors} field. */
+        /** @return a {@link VkVertexInputBindingDivisorDescriptionEXT.Buffer} view of the struct array pointed to by the {@link VkPipelineVertexInputDivisorStateCreateInfoEXT#pVertexBindingDivisors} field. */
         @NativeType("VkVertexInputBindingDivisorDescriptionEXT const *")
         public VkVertexInputBindingDivisorDescriptionEXT.Buffer pVertexBindingDivisors() { return VkPipelineVertexInputDivisorStateCreateInfoEXT.npVertexBindingDivisors(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineVertexInputDivisorStateCreateInfoEXT#sType} field. */
         public VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineVertexInputDivisorStateCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineVertexInputDivisorStateCreateInfoEXT#pNext} field. */
         public VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineVertexInputDivisorStateCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkVertexInputBindingDivisorDescriptionEXT.Buffer} to the {@code pVertexBindingDivisors} field. */
+        /** Sets the address of the specified {@link VkVertexInputBindingDivisorDescriptionEXT.Buffer} to the {@link VkPipelineVertexInputDivisorStateCreateInfoEXT#pVertexBindingDivisors} field. */
         public VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer pVertexBindingDivisors(@NativeType("VkVertexInputBindingDivisorDescriptionEXT const *") VkVertexInputBindingDivisorDescriptionEXT.Buffer value) { VkPipelineVertexInputDivisorStateCreateInfoEXT.npVertexBindingDivisors(address(), value); return this; }
 
     }

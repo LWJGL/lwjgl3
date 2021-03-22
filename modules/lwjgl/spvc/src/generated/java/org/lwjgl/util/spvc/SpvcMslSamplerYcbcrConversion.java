@@ -94,34 +94,34 @@ public class SpvcMslSamplerYcbcrConversion extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code planes} field. */
+    /** @return the value of the {@code planes} field. */
     @NativeType("unsigned int")
     public int planes() { return nplanes(address()); }
-    /** Returns the value of the {@code resolution} field. */
+    /** @return the value of the {@code resolution} field. */
     @NativeType("spvc_msl_format_resolution")
     public int resolution() { return nresolution(address()); }
-    /** Returns the value of the {@code chroma_filter} field. */
+    /** @return the value of the {@code chroma_filter} field. */
     @NativeType("spvc_msl_sampler_filter")
     public int chroma_filter() { return nchroma_filter(address()); }
-    /** Returns the value of the {@code x_chroma_offset} field. */
+    /** @return the value of the {@code x_chroma_offset} field. */
     @NativeType("spvc_msl_chroma_location")
     public int x_chroma_offset() { return nx_chroma_offset(address()); }
-    /** Returns the value of the {@code y_chroma_offset} field. */
+    /** @return the value of the {@code y_chroma_offset} field. */
     @NativeType("spvc_msl_chroma_location")
     public int y_chroma_offset() { return ny_chroma_offset(address()); }
-    /** Returns a {@link IntBuffer} view of the {@code swizzle} field. */
+    /** @return a {@link IntBuffer} view of the {@code swizzle} field. */
     @NativeType("spvc_msl_component_swizzle[4]")
     public IntBuffer swizzle() { return nswizzle(address()); }
-    /** Returns the value at the specified index of the {@code swizzle} field. */
+    /** @return the value at the specified index of the {@code swizzle} field. */
     @NativeType("spvc_msl_component_swizzle")
     public int swizzle(int index) { return nswizzle(address(), index); }
-    /** Returns the value of the {@code ycbcr_model} field. */
+    /** @return the value of the {@code ycbcr_model} field. */
     @NativeType("spvc_msl_sampler_ycbcr_model_conversion")
     public int ycbcr_model() { return nycbcr_model(address()); }
-    /** Returns the value of the {@code ycbcr_range} field. */
+    /** @return the value of the {@code ycbcr_range} field. */
     @NativeType("spvc_msl_sampler_ycbcr_range")
     public int ycbcr_range() { return nycbcr_range(address()); }
-    /** Returns the value of the {@code bpc} field. */
+    /** @return the value of the {@code bpc} field. */
     @NativeType("unsigned int")
     public int bpc() { return nbpc(address()); }
 
@@ -413,34 +413,34 @@ public class SpvcMslSamplerYcbcrConversion extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code planes} field. */
+        /** @return the value of the {@code planes} field. */
         @NativeType("unsigned int")
         public int planes() { return SpvcMslSamplerYcbcrConversion.nplanes(address()); }
-        /** Returns the value of the {@code resolution} field. */
+        /** @return the value of the {@code resolution} field. */
         @NativeType("spvc_msl_format_resolution")
         public int resolution() { return SpvcMslSamplerYcbcrConversion.nresolution(address()); }
-        /** Returns the value of the {@code chroma_filter} field. */
+        /** @return the value of the {@code chroma_filter} field. */
         @NativeType("spvc_msl_sampler_filter")
         public int chroma_filter() { return SpvcMslSamplerYcbcrConversion.nchroma_filter(address()); }
-        /** Returns the value of the {@code x_chroma_offset} field. */
+        /** @return the value of the {@code x_chroma_offset} field. */
         @NativeType("spvc_msl_chroma_location")
         public int x_chroma_offset() { return SpvcMslSamplerYcbcrConversion.nx_chroma_offset(address()); }
-        /** Returns the value of the {@code y_chroma_offset} field. */
+        /** @return the value of the {@code y_chroma_offset} field. */
         @NativeType("spvc_msl_chroma_location")
         public int y_chroma_offset() { return SpvcMslSamplerYcbcrConversion.ny_chroma_offset(address()); }
-        /** Returns a {@link IntBuffer} view of the {@code swizzle} field. */
+        /** @return a {@link IntBuffer} view of the {@code swizzle} field. */
         @NativeType("spvc_msl_component_swizzle[4]")
         public IntBuffer swizzle() { return SpvcMslSamplerYcbcrConversion.nswizzle(address()); }
-        /** Returns the value at the specified index of the {@code swizzle} field. */
+        /** @return the value at the specified index of the {@code swizzle} field. */
         @NativeType("spvc_msl_component_swizzle")
         public int swizzle(int index) { return SpvcMslSamplerYcbcrConversion.nswizzle(address(), index); }
-        /** Returns the value of the {@code ycbcr_model} field. */
+        /** @return the value of the {@code ycbcr_model} field. */
         @NativeType("spvc_msl_sampler_ycbcr_model_conversion")
         public int ycbcr_model() { return SpvcMslSamplerYcbcrConversion.nycbcr_model(address()); }
-        /** Returns the value of the {@code ycbcr_range} field. */
+        /** @return the value of the {@code ycbcr_range} field. */
         @NativeType("spvc_msl_sampler_ycbcr_range")
         public int ycbcr_range() { return SpvcMslSamplerYcbcrConversion.nycbcr_range(address()); }
-        /** Returns the value of the {@code bpc} field. */
+        /** @return the value of the {@code bpc} field. */
         @NativeType("unsigned int")
         public int bpc() { return SpvcMslSamplerYcbcrConversion.nbpc(address()); }
 

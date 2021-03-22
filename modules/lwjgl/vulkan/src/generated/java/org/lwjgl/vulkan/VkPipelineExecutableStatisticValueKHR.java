@@ -16,23 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * A union describing a pipeline executable statistic.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code b32} &ndash; the 32-bit boolean value if the {@code VkPipelineExecutableStatisticFormatKHR} is {@link KHRPipelineExecutableProperties#VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR}.</li>
- * <li>{@code i64} &ndash; the signed 64-bit integer value if the {@code VkPipelineExecutableStatisticFormatKHR} is {@link KHRPipelineExecutableProperties#VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR}.</li>
- * <li>{@code u64} &ndash; the unsigned 64-bit integer value if the {@code VkPipelineExecutableStatisticFormatKHR} is {@link KHRPipelineExecutableProperties#VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR}.</li>
- * <li>{@code f64} &ndash; the 64-bit floating-point value if the {@code VkPipelineExecutableStatisticFormatKHR} is {@link KHRPipelineExecutableProperties#VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * union VkPipelineExecutableStatisticValueKHR {
- *     VkBool32 b32;
- *     int64_t i64;
- *     uint64_t u64;
- *     double f64;
+ *     VkBool32 {@link #b32};
+ *     int64_t {@link #i64};
+ *     uint64_t {@link #u64};
+ *     double {@link #f64};
  * }</code></pre>
  */
 public class VkPipelineExecutableStatisticValueKHR extends Struct {
@@ -80,16 +71,16 @@ public class VkPipelineExecutableStatisticValueKHR extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code b32} field. */
+    /** the 32-bit boolean value if the {@code VkPipelineExecutableStatisticFormatKHR} is {@link KHRPipelineExecutableProperties#VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR}. */
     @NativeType("VkBool32")
     public boolean b32() { return nb32(address()) != 0; }
-    /** Returns the value of the {@code i64} field. */
+    /** the signed 64-bit integer value if the {@code VkPipelineExecutableStatisticFormatKHR} is {@link KHRPipelineExecutableProperties#VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR}. */
     @NativeType("int64_t")
     public long i64() { return ni64(address()); }
-    /** Returns the value of the {@code u64} field. */
+    /** the unsigned 64-bit integer value if the {@code VkPipelineExecutableStatisticFormatKHR} is {@link KHRPipelineExecutableProperties#VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR}. */
     @NativeType("uint64_t")
     public long u64() { return nu64(address()); }
-    /** Returns the value of the {@code f64} field. */
+    /** the 64-bit floating-point value if the {@code VkPipelineExecutableStatisticFormatKHR} is {@link KHRPipelineExecutableProperties#VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR}. */
     public double f64() { return nf64(address()); }
 
     // -----------------------------------
@@ -170,16 +161,16 @@ public class VkPipelineExecutableStatisticValueKHR extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code b32} field. */
+        /** @return the value of the {@link VkPipelineExecutableStatisticValueKHR#b32} field. */
         @NativeType("VkBool32")
         public boolean b32() { return VkPipelineExecutableStatisticValueKHR.nb32(address()) != 0; }
-        /** Returns the value of the {@code i64} field. */
+        /** @return the value of the {@link VkPipelineExecutableStatisticValueKHR#i64} field. */
         @NativeType("int64_t")
         public long i64() { return VkPipelineExecutableStatisticValueKHR.ni64(address()); }
-        /** Returns the value of the {@code u64} field. */
+        /** @return the value of the {@link VkPipelineExecutableStatisticValueKHR#u64} field. */
         @NativeType("uint64_t")
         public long u64() { return VkPipelineExecutableStatisticValueKHR.nu64(address()); }
-        /** Returns the value of the {@code f64} field. */
+        /** @return the value of the {@link VkPipelineExecutableStatisticValueKHR#f64} field. */
         public double f64() { return VkPipelineExecutableStatisticValueKHR.nf64(address()); }
 
     }

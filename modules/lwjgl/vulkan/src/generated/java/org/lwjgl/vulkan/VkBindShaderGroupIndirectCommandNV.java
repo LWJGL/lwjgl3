@@ -68,7 +68,7 @@ public class VkBindShaderGroupIndirectCommandNV extends Struct implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code groupIndex} field. */
+    /** @return the value of the {@code groupIndex} field. */
     @NativeType("uint32_t")
     public int groupIndex() { return ngroupIndex(address()); }
 
@@ -274,7 +274,7 @@ public class VkBindShaderGroupIndirectCommandNV extends Struct implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code groupIndex} field. */
+        /** @return the value of the {@code groupIndex} field. */
         @NativeType("uint32_t")
         public int groupIndex() { return VkBindShaderGroupIndirectCommandNV.ngroupIndex(address()); }
 

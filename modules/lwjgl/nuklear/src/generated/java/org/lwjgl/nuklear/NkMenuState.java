@@ -74,15 +74,15 @@ public class NkMenuState extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** Returns the value of the {@code w} field. */
+    /** @return the value of the {@code w} field. */
     public float w() { return nw(address()); }
-    /** Returns the value of the {@code h} field. */
+    /** @return the value of the {@code h} field. */
     public float h() { return nh(address()); }
-    /** Returns a {@link NkScroll} view of the {@code offset} field. */
+    /** @return a {@link NkScroll} view of the {@code offset} field. */
     @NativeType("struct nk_scroll")
     public NkScroll offset() { return noffset(address()); }
 
@@ -166,15 +166,15 @@ public class NkMenuState extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return NkMenuState.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return NkMenuState.ny(address()); }
-        /** Returns the value of the {@code w} field. */
+        /** @return the value of the {@code w} field. */
         public float w() { return NkMenuState.nw(address()); }
-        /** Returns the value of the {@code h} field. */
+        /** @return the value of the {@code h} field. */
         public float h() { return NkMenuState.nh(address()); }
-        /** Returns a {@link NkScroll} view of the {@code offset} field. */
+        /** @return a {@link NkScroll} view of the {@code offset} field. */
         @NativeType("struct nk_scroll")
         public NkScroll offset() { return NkMenuState.noffset(address()); }
 

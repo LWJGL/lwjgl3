@@ -79,19 +79,19 @@ public class ParSLSpineList extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code num_vertices} field. */
+    /** @return the value of the {@code num_vertices} field. */
     @NativeType("uint32_t")
     public int num_vertices() { return nnum_vertices(address()); }
-    /** Returns the value of the {@code num_spines} field. */
+    /** @return the value of the {@code num_spines} field. */
     @NativeType("uint16_t")
     public short num_spines() { return nnum_spines(address()); }
-    /** Returns a {@link ParSLPosition.Buffer} view of the struct array pointed to by the {@code vertices} field. */
+    /** @return a {@link ParSLPosition.Buffer} view of the struct array pointed to by the {@code vertices} field. */
     @NativeType("parsl_position *")
     public ParSLPosition.Buffer vertices() { return nvertices(address()); }
-    /** Returns a {@link ShortBuffer} view of the data pointed to by the {@code spine_lengths} field. */
+    /** @return a {@link ShortBuffer} view of the data pointed to by the {@code spine_lengths} field. */
     @NativeType("uint16_t *")
     public ShortBuffer spine_lengths() { return nspine_lengths(address()); }
-    /** Returns the value of the {@code closed} field. */
+    /** @return the value of the {@code closed} field. */
     @NativeType("bool")
     public boolean closed() { return nclosed(address()); }
 
@@ -352,19 +352,19 @@ public class ParSLSpineList extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code num_vertices} field. */
+        /** @return the value of the {@code num_vertices} field. */
         @NativeType("uint32_t")
         public int num_vertices() { return ParSLSpineList.nnum_vertices(address()); }
-        /** Returns the value of the {@code num_spines} field. */
+        /** @return the value of the {@code num_spines} field. */
         @NativeType("uint16_t")
         public short num_spines() { return ParSLSpineList.nnum_spines(address()); }
-        /** Returns a {@link ParSLPosition.Buffer} view of the struct array pointed to by the {@code vertices} field. */
+        /** @return a {@link ParSLPosition.Buffer} view of the struct array pointed to by the {@code vertices} field. */
         @NativeType("parsl_position *")
         public ParSLPosition.Buffer vertices() { return ParSLSpineList.nvertices(address()); }
-        /** Returns a {@link ShortBuffer} view of the data pointed to by the {@code spine_lengths} field. */
+        /** @return a {@link ShortBuffer} view of the data pointed to by the {@code spine_lengths} field. */
         @NativeType("uint16_t *")
         public ShortBuffer spine_lengths() { return ParSLSpineList.nspine_lengths(address()); }
-        /** Returns the value of the {@code closed} field. */
+        /** @return the value of the {@code closed} field. */
         @NativeType("bool")
         public boolean closed() { return ParSLSpineList.nclosed(address()); }
 

@@ -77,19 +77,19 @@ public class VRTextureWithPoseAndDepth extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code handle} field. */
+    /** @return the value of the {@code handle} field. */
     @NativeType("void *")
     public long handle() { return nhandle(address()); }
-    /** Returns the value of the {@code eType} field. */
+    /** @return the value of the {@code eType} field. */
     @NativeType("ETextureType")
     public int eType() { return neType(address()); }
-    /** Returns the value of the {@code eColorSpace} field. */
+    /** @return the value of the {@code eColorSpace} field. */
     @NativeType("EColorSpace")
     public int eColorSpace() { return neColorSpace(address()); }
-    /** Returns a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
+    /** @return a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
     @NativeType("HmdMatrix34_t")
     public HmdMatrix34 mDeviceToAbsoluteTracking() { return nmDeviceToAbsoluteTracking(address()); }
-    /** Returns a {@link VRTextureDepthInfo} view of the {@code depth} field. */
+    /** @return a {@link VRTextureDepthInfo} view of the {@code depth} field. */
     @NativeType("VRTextureDepthInfo_t")
     public VRTextureDepthInfo depth() { return ndepth(address()); }
 
@@ -362,19 +362,19 @@ public class VRTextureWithPoseAndDepth extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code handle} field. */
+        /** @return the value of the {@code handle} field. */
         @NativeType("void *")
         public long handle() { return VRTextureWithPoseAndDepth.nhandle(address()); }
-        /** Returns the value of the {@code eType} field. */
+        /** @return the value of the {@code eType} field. */
         @NativeType("ETextureType")
         public int eType() { return VRTextureWithPoseAndDepth.neType(address()); }
-        /** Returns the value of the {@code eColorSpace} field. */
+        /** @return the value of the {@code eColorSpace} field. */
         @NativeType("EColorSpace")
         public int eColorSpace() { return VRTextureWithPoseAndDepth.neColorSpace(address()); }
-        /** Returns a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
+        /** @return a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
         @NativeType("HmdMatrix34_t")
         public HmdMatrix34 mDeviceToAbsoluteTracking() { return VRTextureWithPoseAndDepth.nmDeviceToAbsoluteTracking(address()); }
-        /** Returns a {@link VRTextureDepthInfo} view of the {@code depth} field. */
+        /** @return a {@link VRTextureDepthInfo} view of the {@code depth} field. */
         @NativeType("VRTextureDepthInfo_t")
         public VRTextureDepthInfo depth() { return VRTextureWithPoseAndDepth.ndepth(address()); }
 

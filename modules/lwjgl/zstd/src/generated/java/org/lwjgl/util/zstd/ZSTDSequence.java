@@ -16,30 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code matchPos} &ndash; match pos in {@code dst}</li>
- * <li>{@code offset} &ndash; 
- * if {@code seqDef.offset > 3}, then this is {@code seqDef.offset - 3}. If {@code seqDef.offset < 3}, then this is the corresponding repeat offset. But
- * if {@code seqDef.offset < 3} and {@code litLength == 0}, this is the  repeat offset before the corresponding repeat offset. And if
- * {@code seqDef.offset == 3} and {@code litLength == 0}, this is the most recent repeat {@code offset - 1}.</li>
- * <li>{@code litLength} &ndash; literal length</li>
- * <li>{@code matchLength} &ndash; match length</li>
- * <li>{@code rep} &ndash; 
- * 0 when {@code seq} not {@code rep} and {@code seqDef.offset} otherwise when {@code litLength == 0} this will be {@code <= 4},otherwise {@code <= 3}
- * like normal.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ZSTD_Sequence {
- *     unsigned int matchPos;
- *     unsigned int offset;
- *     unsigned int litLength;
- *     unsigned int matchLength;
- *     unsigned int rep;
+ *     unsigned int {@link #matchPos};
+ *     unsigned int {@link #offset};
+ *     unsigned int {@link #litLength};
+ *     unsigned int {@link #matchLength};
+ *     unsigned int {@link #rep};
  * }</code></pre>
  */
 @NativeType("struct ZSTD_Sequence")
@@ -91,19 +76,26 @@ public class ZSTDSequence extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code matchPos} field. */
+    /** match pos in {@code dst} */
     @NativeType("unsigned int")
     public int matchPos() { return nmatchPos(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /**
+     * if {@code seqDef.offset > 3}, then this is {@code seqDef.offset - 3}. If {@code seqDef.offset < 3}, then this is the corresponding repeat offset. But
+     * if {@code seqDef.offset < 3} and {@code litLength == 0}, this is the  repeat offset before the corresponding repeat offset. And if
+     * {@code seqDef.offset == 3} and {@code litLength == 0}, this is the most recent repeat {@code offset - 1}.
+     */
     @NativeType("unsigned int")
     public int offset() { return noffset(address()); }
-    /** Returns the value of the {@code litLength} field. */
+    /** literal length */
     @NativeType("unsigned int")
     public int litLength() { return nlitLength(address()); }
-    /** Returns the value of the {@code matchLength} field. */
+    /** match length */
     @NativeType("unsigned int")
     public int matchLength() { return nmatchLength(address()); }
-    /** Returns the value of the {@code rep} field. */
+    /**
+     * 0 when {@code seq} not {@code rep} and {@code seqDef.offset} otherwise when {@code litLength == 0} this will be {@code <= 4},otherwise {@code <= 3}
+     * like normal.
+     */
     @NativeType("unsigned int")
     public int rep() { return nrep(address()); }
 
@@ -299,19 +291,19 @@ public class ZSTDSequence extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code matchPos} field. */
+        /** @return the value of the {@link ZSTDSequence#matchPos} field. */
         @NativeType("unsigned int")
         public int matchPos() { return ZSTDSequence.nmatchPos(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@link ZSTDSequence#offset} field. */
         @NativeType("unsigned int")
         public int offset() { return ZSTDSequence.noffset(address()); }
-        /** Returns the value of the {@code litLength} field. */
+        /** @return the value of the {@link ZSTDSequence#litLength} field. */
         @NativeType("unsigned int")
         public int litLength() { return ZSTDSequence.nlitLength(address()); }
-        /** Returns the value of the {@code matchLength} field. */
+        /** @return the value of the {@link ZSTDSequence#matchLength} field. */
         @NativeType("unsigned int")
         public int matchLength() { return ZSTDSequence.nmatchLength(address()); }
-        /** Returns the value of the {@code rep} field. */
+        /** @return the value of the {@link ZSTDSequence#rep} field. */
         @NativeType("unsigned int")
         public int rep() { return ZSTDSequence.nrep(address()); }
 

@@ -82,25 +82,25 @@ class NkConfigurationStacks extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkConfigStackStyleItem} view of the {@code style_items} field. */
+    /** @return a {@link NkConfigStackStyleItem} view of the {@code style_items} field. */
     @NativeType("struct nk_config_stack_style_item")
     public NkConfigStackStyleItem style_items() { return nstyle_items(address()); }
-    /** Returns a {@link NkConfigStackFloat} view of the {@code floats} field. */
+    /** @return a {@link NkConfigStackFloat} view of the {@code floats} field. */
     @NativeType("struct nk_config_stack_float")
     public NkConfigStackFloat floats() { return nfloats(address()); }
-    /** Returns a {@link NkConfigStackVec2} view of the {@code vectors} field. */
+    /** @return a {@link NkConfigStackVec2} view of the {@code vectors} field. */
     @NativeType("struct nk_config_stack_vec2")
     public NkConfigStackVec2 vectors() { return nvectors(address()); }
-    /** Returns a {@link NkConfigStackFlags} view of the {@code flags} field. */
+    /** @return a {@link NkConfigStackFlags} view of the {@code flags} field. */
     @NativeType("struct nk_config_stack_flags")
     public NkConfigStackFlags flags() { return nflags(address()); }
-    /** Returns a {@link NkConfigStackColor} view of the {@code colors} field. */
+    /** @return a {@link NkConfigStackColor} view of the {@code colors} field. */
     @NativeType("struct nk_config_stack_color")
     public NkConfigStackColor colors() { return ncolors(address()); }
-    /** Returns a {@link NkConfigStackUserFont} view of the {@code fonts} field. */
+    /** @return a {@link NkConfigStackUserFont} view of the {@code fonts} field. */
     @NativeType("struct nk_config_stack_user_font")
     public NkConfigStackUserFont fonts() { return nfonts(address()); }
-    /** Returns a {@link NkConfigStackButtonBehavior} view of the {@code button_behaviors} field. */
+    /** @return a {@link NkConfigStackButtonBehavior} view of the {@code button_behaviors} field. */
     @NativeType("struct nk_config_stack_button_behavior")
     public NkConfigStackButtonBehavior button_behaviors() { return nbutton_behaviors(address()); }
 

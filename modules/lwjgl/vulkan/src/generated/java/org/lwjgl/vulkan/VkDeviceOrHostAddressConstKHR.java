@@ -19,19 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Union specifying a const device or host address.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code deviceAddress} &ndash; a buffer device address as returned by the {@link KHRBufferDeviceAddress#vkGetBufferDeviceAddressKHR GetBufferDeviceAddressKHR} command.</li>
- * <li>{@code hostAddress} &ndash; a const host memory address.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * union VkDeviceOrHostAddressConstKHR {
- *     VkDeviceAddress deviceAddress;
- *     void const * hostAddress;
+ *     VkDeviceAddress {@link #deviceAddress};
+ *     void const * {@link #hostAddress};
  * }</code></pre>
  */
 public class VkDeviceOrHostAddressConstKHR extends Struct implements NativeResource {
@@ -73,16 +66,16 @@ public class VkDeviceOrHostAddressConstKHR extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code deviceAddress} field. */
+    /** a buffer device address as returned by the {@link KHRBufferDeviceAddress#vkGetBufferDeviceAddressKHR GetBufferDeviceAddressKHR} command. */
     @NativeType("VkDeviceAddress")
     public long deviceAddress() { return ndeviceAddress(address()); }
-    /** Returns the value of the {@code hostAddress} field. */
+    /** a const host memory address. */
     @NativeType("void const *")
     public long hostAddress() { return nhostAddress(address()); }
 
-    /** Sets the specified value to the {@code deviceAddress} field. */
+    /** Sets the specified value to the {@link #deviceAddress} field. */
     public VkDeviceOrHostAddressConstKHR deviceAddress(@NativeType("VkDeviceAddress") long value) { ndeviceAddress(address(), value); return this; }
-    /** Sets the specified value to the {@code hostAddress} field. */
+    /** Sets the specified value to the {@link #hostAddress} field. */
     public VkDeviceOrHostAddressConstKHR hostAddress(@NativeType("void const *") long value) { nhostAddress(address(), value); return this; }
 
     /**
@@ -288,16 +281,16 @@ public class VkDeviceOrHostAddressConstKHR extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code deviceAddress} field. */
+        /** @return the value of the {@link VkDeviceOrHostAddressConstKHR#deviceAddress} field. */
         @NativeType("VkDeviceAddress")
         public long deviceAddress() { return VkDeviceOrHostAddressConstKHR.ndeviceAddress(address()); }
-        /** Returns the value of the {@code hostAddress} field. */
+        /** @return the value of the {@link VkDeviceOrHostAddressConstKHR#hostAddress} field. */
         @NativeType("void const *")
         public long hostAddress() { return VkDeviceOrHostAddressConstKHR.nhostAddress(address()); }
 
-        /** Sets the specified value to the {@code deviceAddress} field. */
+        /** Sets the specified value to the {@link VkDeviceOrHostAddressConstKHR#deviceAddress} field. */
         public VkDeviceOrHostAddressConstKHR.Buffer deviceAddress(@NativeType("VkDeviceAddress") long value) { VkDeviceOrHostAddressConstKHR.ndeviceAddress(address(), value); return this; }
-        /** Sets the specified value to the {@code hostAddress} field. */
+        /** Sets the specified value to the {@link VkDeviceOrHostAddressConstKHR#hostAddress} field. */
         public VkDeviceOrHostAddressConstKHR.Buffer hostAddress(@NativeType("void const *") long value) { VkDeviceOrHostAddressConstKHR.nhostAddress(address(), value); return this; }
 
     }

@@ -39,39 +39,22 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkGraphicsPipelineCreateInfo}, {@link VkStencilOpState}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code depthTestEnable} &ndash; controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-depth">depth testing</a> is enabled.</li>
- * <li>{@code depthWriteEnable} &ndash; controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-depth-write">depth writes</a> are enabled when {@code depthTestEnable} is {@link VK10#VK_TRUE TRUE}. Depth writes are always disabled when {@code depthTestEnable} is {@link VK10#VK_FALSE FALSE}.</li>
- * <li>{@code depthCompareOp} &ndash; the comparison operator used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-depth">depth test</a>.</li>
- * <li>{@code depthBoundsTestEnable} &ndash; controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-dbt">depth bounds testing</a> is enabled.</li>
- * <li>{@code stencilTestEnable} &ndash; controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-stencil">stencil testing</a> is enabled.</li>
- * <li>{@code front} &ndash; {@code front} and {@code back} control the parameters of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-stencil">stencil test</a>.</li>
- * <li>{@code back} &ndash; see {@code front}</li>
- * <li>{@code minDepthBounds} &ndash; the minimum depth bound used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-dbt">depth bounds test</a>.</li>
- * <li>{@code maxDepthBounds} &ndash; the maximum depth bound used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-dbt">depth bounds test</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineDepthStencilStateCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineDepthStencilStateCreateFlags flags;
- *     VkBool32 depthTestEnable;
- *     VkBool32 depthWriteEnable;
- *     VkCompareOp depthCompareOp;
- *     VkBool32 depthBoundsTestEnable;
- *     VkBool32 stencilTestEnable;
- *     {@link VkStencilOpState VkStencilOpState} front;
- *     {@link VkStencilOpState VkStencilOpState} back;
- *     float minDepthBounds;
- *     float maxDepthBounds;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineDepthStencilStateCreateFlags {@link #flags};
+ *     VkBool32 {@link #depthTestEnable};
+ *     VkBool32 {@link #depthWriteEnable};
+ *     VkCompareOp {@link #depthCompareOp};
+ *     VkBool32 {@link #depthBoundsTestEnable};
+ *     VkBool32 {@link #stencilTestEnable};
+ *     {@link VkStencilOpState VkStencilOpState} {@link #front};
+ *     {@link VkStencilOpState VkStencilOpState} {@link #back};
+ *     float {@link #minDepthBounds};
+ *     float {@link #maxDepthBounds};
  * }</code></pre>
  */
 public class VkPipelineDepthStencilStateCreateInfo extends Struct implements NativeResource {
@@ -143,66 +126,66 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct implements Nat
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkPipelineDepthStencilStateCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code depthTestEnable} field. */
+    /** controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-depth">depth testing</a> is enabled. */
     @NativeType("VkBool32")
     public boolean depthTestEnable() { return ndepthTestEnable(address()) != 0; }
-    /** Returns the value of the {@code depthWriteEnable} field. */
+    /** controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-depth-write">depth writes</a> are enabled when {@code depthTestEnable} is {@link VK10#VK_TRUE TRUE}. Depth writes are always disabled when {@code depthTestEnable} is {@link VK10#VK_FALSE FALSE}. */
     @NativeType("VkBool32")
     public boolean depthWriteEnable() { return ndepthWriteEnable(address()) != 0; }
-    /** Returns the value of the {@code depthCompareOp} field. */
+    /** the comparison operator used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-depth">depth test</a>. */
     @NativeType("VkCompareOp")
     public int depthCompareOp() { return ndepthCompareOp(address()); }
-    /** Returns the value of the {@code depthBoundsTestEnable} field. */
+    /** controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-dbt">depth bounds testing</a> is enabled. */
     @NativeType("VkBool32")
     public boolean depthBoundsTestEnable() { return ndepthBoundsTestEnable(address()) != 0; }
-    /** Returns the value of the {@code stencilTestEnable} field. */
+    /** controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-stencil">stencil testing</a> is enabled. */
     @NativeType("VkBool32")
     public boolean stencilTestEnable() { return nstencilTestEnable(address()) != 0; }
-    /** Returns a {@link VkStencilOpState} view of the {@code front} field. */
+    /** {@code front} and {@code back} control the parameters of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-stencil">stencil test</a>. */
     public VkStencilOpState front() { return nfront(address()); }
-    /** Returns a {@link VkStencilOpState} view of the {@code back} field. */
+    /** see {@code front} */
     public VkStencilOpState back() { return nback(address()); }
-    /** Returns the value of the {@code minDepthBounds} field. */
+    /** the minimum depth bound used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-dbt">depth bounds test</a>. */
     public float minDepthBounds() { return nminDepthBounds(address()); }
-    /** Returns the value of the {@code maxDepthBounds} field. */
+    /** the maximum depth bound used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-dbt">depth bounds test</a>. */
     public float maxDepthBounds() { return nmaxDepthBounds(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineDepthStencilStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineDepthStencilStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineDepthStencilStateCreateInfo flags(@NativeType("VkPipelineDepthStencilStateCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code depthTestEnable} field. */
+    /** Sets the specified value to the {@link #depthTestEnable} field. */
     public VkPipelineDepthStencilStateCreateInfo depthTestEnable(@NativeType("VkBool32") boolean value) { ndepthTestEnable(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code depthWriteEnable} field. */
+    /** Sets the specified value to the {@link #depthWriteEnable} field. */
     public VkPipelineDepthStencilStateCreateInfo depthWriteEnable(@NativeType("VkBool32") boolean value) { ndepthWriteEnable(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code depthCompareOp} field. */
+    /** Sets the specified value to the {@link #depthCompareOp} field. */
     public VkPipelineDepthStencilStateCreateInfo depthCompareOp(@NativeType("VkCompareOp") int value) { ndepthCompareOp(address(), value); return this; }
-    /** Sets the specified value to the {@code depthBoundsTestEnable} field. */
+    /** Sets the specified value to the {@link #depthBoundsTestEnable} field. */
     public VkPipelineDepthStencilStateCreateInfo depthBoundsTestEnable(@NativeType("VkBool32") boolean value) { ndepthBoundsTestEnable(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code stencilTestEnable} field. */
+    /** Sets the specified value to the {@link #stencilTestEnable} field. */
     public VkPipelineDepthStencilStateCreateInfo stencilTestEnable(@NativeType("VkBool32") boolean value) { nstencilTestEnable(address(), value ? 1 : 0); return this; }
-    /** Copies the specified {@link VkStencilOpState} to the {@code front} field. */
+    /** Copies the specified {@link VkStencilOpState} to the {@link #front} field. */
     public VkPipelineDepthStencilStateCreateInfo front(VkStencilOpState value) { nfront(address(), value); return this; }
-    /** Passes the {@code front} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #front} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkPipelineDepthStencilStateCreateInfo front(java.util.function.Consumer<VkStencilOpState> consumer) { consumer.accept(front()); return this; }
-    /** Copies the specified {@link VkStencilOpState} to the {@code back} field. */
+    /** Copies the specified {@link VkStencilOpState} to the {@link #back} field. */
     public VkPipelineDepthStencilStateCreateInfo back(VkStencilOpState value) { nback(address(), value); return this; }
-    /** Passes the {@code back} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #back} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkPipelineDepthStencilStateCreateInfo back(java.util.function.Consumer<VkStencilOpState> consumer) { consumer.accept(back()); return this; }
-    /** Sets the specified value to the {@code minDepthBounds} field. */
+    /** Sets the specified value to the {@link #minDepthBounds} field. */
     public VkPipelineDepthStencilStateCreateInfo minDepthBounds(float value) { nminDepthBounds(address(), value); return this; }
-    /** Sets the specified value to the {@code maxDepthBounds} field. */
+    /** Sets the specified value to the {@link #maxDepthBounds} field. */
     public VkPipelineDepthStencilStateCreateInfo maxDepthBounds(float value) { nmaxDepthBounds(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -479,66 +462,66 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct implements Nat
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineDepthStencilStateCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineDepthStencilStateCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineDepthStencilStateCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineDepthStencilStateCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkPipelineDepthStencilStateCreateInfo#flags} field. */
         @NativeType("VkPipelineDepthStencilStateCreateFlags")
         public int flags() { return VkPipelineDepthStencilStateCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code depthTestEnable} field. */
+        /** @return the value of the {@link VkPipelineDepthStencilStateCreateInfo#depthTestEnable} field. */
         @NativeType("VkBool32")
         public boolean depthTestEnable() { return VkPipelineDepthStencilStateCreateInfo.ndepthTestEnable(address()) != 0; }
-        /** Returns the value of the {@code depthWriteEnable} field. */
+        /** @return the value of the {@link VkPipelineDepthStencilStateCreateInfo#depthWriteEnable} field. */
         @NativeType("VkBool32")
         public boolean depthWriteEnable() { return VkPipelineDepthStencilStateCreateInfo.ndepthWriteEnable(address()) != 0; }
-        /** Returns the value of the {@code depthCompareOp} field. */
+        /** @return the value of the {@link VkPipelineDepthStencilStateCreateInfo#depthCompareOp} field. */
         @NativeType("VkCompareOp")
         public int depthCompareOp() { return VkPipelineDepthStencilStateCreateInfo.ndepthCompareOp(address()); }
-        /** Returns the value of the {@code depthBoundsTestEnable} field. */
+        /** @return the value of the {@link VkPipelineDepthStencilStateCreateInfo#depthBoundsTestEnable} field. */
         @NativeType("VkBool32")
         public boolean depthBoundsTestEnable() { return VkPipelineDepthStencilStateCreateInfo.ndepthBoundsTestEnable(address()) != 0; }
-        /** Returns the value of the {@code stencilTestEnable} field. */
+        /** @return the value of the {@link VkPipelineDepthStencilStateCreateInfo#stencilTestEnable} field. */
         @NativeType("VkBool32")
         public boolean stencilTestEnable() { return VkPipelineDepthStencilStateCreateInfo.nstencilTestEnable(address()) != 0; }
-        /** Returns a {@link VkStencilOpState} view of the {@code front} field. */
+        /** @return a {@link VkStencilOpState} view of the {@link VkPipelineDepthStencilStateCreateInfo#front} field. */
         public VkStencilOpState front() { return VkPipelineDepthStencilStateCreateInfo.nfront(address()); }
-        /** Returns a {@link VkStencilOpState} view of the {@code back} field. */
+        /** @return a {@link VkStencilOpState} view of the {@link VkPipelineDepthStencilStateCreateInfo#back} field. */
         public VkStencilOpState back() { return VkPipelineDepthStencilStateCreateInfo.nback(address()); }
-        /** Returns the value of the {@code minDepthBounds} field. */
+        /** @return the value of the {@link VkPipelineDepthStencilStateCreateInfo#minDepthBounds} field. */
         public float minDepthBounds() { return VkPipelineDepthStencilStateCreateInfo.nminDepthBounds(address()); }
-        /** Returns the value of the {@code maxDepthBounds} field. */
+        /** @return the value of the {@link VkPipelineDepthStencilStateCreateInfo#maxDepthBounds} field. */
         public float maxDepthBounds() { return VkPipelineDepthStencilStateCreateInfo.nmaxDepthBounds(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineDepthStencilStateCreateInfo#sType} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineDepthStencilStateCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineDepthStencilStateCreateInfo#pNext} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineDepthStencilStateCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkPipelineDepthStencilStateCreateInfo#flags} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer flags(@NativeType("VkPipelineDepthStencilStateCreateFlags") int value) { VkPipelineDepthStencilStateCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code depthTestEnable} field. */
+        /** Sets the specified value to the {@link VkPipelineDepthStencilStateCreateInfo#depthTestEnable} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer depthTestEnable(@NativeType("VkBool32") boolean value) { VkPipelineDepthStencilStateCreateInfo.ndepthTestEnable(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code depthWriteEnable} field. */
+        /** Sets the specified value to the {@link VkPipelineDepthStencilStateCreateInfo#depthWriteEnable} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer depthWriteEnable(@NativeType("VkBool32") boolean value) { VkPipelineDepthStencilStateCreateInfo.ndepthWriteEnable(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code depthCompareOp} field. */
+        /** Sets the specified value to the {@link VkPipelineDepthStencilStateCreateInfo#depthCompareOp} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer depthCompareOp(@NativeType("VkCompareOp") int value) { VkPipelineDepthStencilStateCreateInfo.ndepthCompareOp(address(), value); return this; }
-        /** Sets the specified value to the {@code depthBoundsTestEnable} field. */
+        /** Sets the specified value to the {@link VkPipelineDepthStencilStateCreateInfo#depthBoundsTestEnable} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer depthBoundsTestEnable(@NativeType("VkBool32") boolean value) { VkPipelineDepthStencilStateCreateInfo.ndepthBoundsTestEnable(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code stencilTestEnable} field. */
+        /** Sets the specified value to the {@link VkPipelineDepthStencilStateCreateInfo#stencilTestEnable} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer stencilTestEnable(@NativeType("VkBool32") boolean value) { VkPipelineDepthStencilStateCreateInfo.nstencilTestEnable(address(), value ? 1 : 0); return this; }
-        /** Copies the specified {@link VkStencilOpState} to the {@code front} field. */
+        /** Copies the specified {@link VkStencilOpState} to the {@link VkPipelineDepthStencilStateCreateInfo#front} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer front(VkStencilOpState value) { VkPipelineDepthStencilStateCreateInfo.nfront(address(), value); return this; }
-        /** Passes the {@code front} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkPipelineDepthStencilStateCreateInfo#front} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer front(java.util.function.Consumer<VkStencilOpState> consumer) { consumer.accept(front()); return this; }
-        /** Copies the specified {@link VkStencilOpState} to the {@code back} field. */
+        /** Copies the specified {@link VkStencilOpState} to the {@link VkPipelineDepthStencilStateCreateInfo#back} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer back(VkStencilOpState value) { VkPipelineDepthStencilStateCreateInfo.nback(address(), value); return this; }
-        /** Passes the {@code back} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkPipelineDepthStencilStateCreateInfo#back} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer back(java.util.function.Consumer<VkStencilOpState> consumer) { consumer.accept(back()); return this; }
-        /** Sets the specified value to the {@code minDepthBounds} field. */
+        /** Sets the specified value to the {@link VkPipelineDepthStencilStateCreateInfo#minDepthBounds} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer minDepthBounds(float value) { VkPipelineDepthStencilStateCreateInfo.nminDepthBounds(address(), value); return this; }
-        /** Sets the specified value to the {@code maxDepthBounds} field. */
+        /** Sets the specified value to the {@link VkPipelineDepthStencilStateCreateInfo#maxDepthBounds} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer maxDepthBounds(float value) { VkPipelineDepthStencilStateCreateInfo.nmaxDepthBounds(address(), value); return this; }
 
     }

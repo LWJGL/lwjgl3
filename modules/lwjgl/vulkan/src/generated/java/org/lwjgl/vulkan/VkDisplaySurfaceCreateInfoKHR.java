@@ -50,35 +50,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkExtent2D}, {@link KHRDisplay#vkCreateDisplayPlaneSurfaceKHR CreateDisplayPlaneSurfaceKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; reserved for future use, and <b>must</b> be zero.</li>
- * <li>{@code displayMode} &ndash; a {@code VkDisplayModeKHR} handle specifying the mode to use when displaying this surface.</li>
- * <li>{@code planeIndex} &ndash; the plane on which this surface appears.</li>
- * <li>{@code planeStackIndex} &ndash; the z-order of the plane.</li>
- * <li>{@code transform} &ndash; a {@code VkSurfaceTransformFlagBitsKHR} value specifying the transformation to apply to images as part of the scanout operation.</li>
- * <li>{@code globalAlpha} &ndash; the global alpha value. This value is ignored if {@code alphaMode} is not {@link KHRDisplay#VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR}.</li>
- * <li>{@code alphaMode} &ndash; a {@code VkDisplayPlaneAlphaFlagBitsKHR} value specifying the type of alpha blending to use.</li>
- * <li>{@code imageExtent} &ndash; The size of the presentable images to use with the surface.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDisplaySurfaceCreateInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkDisplaySurfaceCreateFlagsKHR flags;
- *     VkDisplayModeKHR displayMode;
- *     uint32_t planeIndex;
- *     uint32_t planeStackIndex;
- *     VkSurfaceTransformFlagBitsKHR transform;
- *     float globalAlpha;
- *     VkDisplayPlaneAlphaFlagBitsKHR alphaMode;
- *     {@link VkExtent2D VkExtent2D} imageExtent;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkDisplaySurfaceCreateFlagsKHR {@link #flags};
+ *     VkDisplayModeKHR {@link #displayMode};
+ *     uint32_t {@link #planeIndex};
+ *     uint32_t {@link #planeStackIndex};
+ *     VkSurfaceTransformFlagBitsKHR {@link #transform};
+ *     float {@link #globalAlpha};
+ *     VkDisplayPlaneAlphaFlagBitsKHR {@link #alphaMode};
+ *     {@link VkExtent2D VkExtent2D} {@link #imageExtent};
  * }</code></pre>
  */
 public class VkDisplaySurfaceCreateInfoKHR extends Struct implements NativeResource {
@@ -144,56 +129,56 @@ public class VkDisplaySurfaceCreateInfoKHR extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use, and <b>must</b> be zero. */
     @NativeType("VkDisplaySurfaceCreateFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code displayMode} field. */
+    /** a {@code VkDisplayModeKHR} handle specifying the mode to use when displaying this surface. */
     @NativeType("VkDisplayModeKHR")
     public long displayMode() { return ndisplayMode(address()); }
-    /** Returns the value of the {@code planeIndex} field. */
+    /** the plane on which this surface appears. */
     @NativeType("uint32_t")
     public int planeIndex() { return nplaneIndex(address()); }
-    /** Returns the value of the {@code planeStackIndex} field. */
+    /** the z-order of the plane. */
     @NativeType("uint32_t")
     public int planeStackIndex() { return nplaneStackIndex(address()); }
-    /** Returns the value of the {@code transform} field. */
+    /** a {@code VkSurfaceTransformFlagBitsKHR} value specifying the transformation to apply to images as part of the scanout operation. */
     @NativeType("VkSurfaceTransformFlagBitsKHR")
     public int transform() { return ntransform(address()); }
-    /** Returns the value of the {@code globalAlpha} field. */
+    /** the global alpha value. This value is ignored if {@code alphaMode} is not {@link KHRDisplay#VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR}. */
     public float globalAlpha() { return nglobalAlpha(address()); }
-    /** Returns the value of the {@code alphaMode} field. */
+    /** a {@code VkDisplayPlaneAlphaFlagBitsKHR} value specifying the type of alpha blending to use. */
     @NativeType("VkDisplayPlaneAlphaFlagBitsKHR")
     public int alphaMode() { return nalphaMode(address()); }
-    /** Returns a {@link VkExtent2D} view of the {@code imageExtent} field. */
+    /** The size of the presentable images to use with the surface. */
     public VkExtent2D imageExtent() { return nimageExtent(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDisplaySurfaceCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDisplaySurfaceCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkDisplaySurfaceCreateInfoKHR flags(@NativeType("VkDisplaySurfaceCreateFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code displayMode} field. */
+    /** Sets the specified value to the {@link #displayMode} field. */
     public VkDisplaySurfaceCreateInfoKHR displayMode(@NativeType("VkDisplayModeKHR") long value) { ndisplayMode(address(), value); return this; }
-    /** Sets the specified value to the {@code planeIndex} field. */
+    /** Sets the specified value to the {@link #planeIndex} field. */
     public VkDisplaySurfaceCreateInfoKHR planeIndex(@NativeType("uint32_t") int value) { nplaneIndex(address(), value); return this; }
-    /** Sets the specified value to the {@code planeStackIndex} field. */
+    /** Sets the specified value to the {@link #planeStackIndex} field. */
     public VkDisplaySurfaceCreateInfoKHR planeStackIndex(@NativeType("uint32_t") int value) { nplaneStackIndex(address(), value); return this; }
-    /** Sets the specified value to the {@code transform} field. */
+    /** Sets the specified value to the {@link #transform} field. */
     public VkDisplaySurfaceCreateInfoKHR transform(@NativeType("VkSurfaceTransformFlagBitsKHR") int value) { ntransform(address(), value); return this; }
-    /** Sets the specified value to the {@code globalAlpha} field. */
+    /** Sets the specified value to the {@link #globalAlpha} field. */
     public VkDisplaySurfaceCreateInfoKHR globalAlpha(float value) { nglobalAlpha(address(), value); return this; }
-    /** Sets the specified value to the {@code alphaMode} field. */
+    /** Sets the specified value to the {@link #alphaMode} field. */
     public VkDisplaySurfaceCreateInfoKHR alphaMode(@NativeType("VkDisplayPlaneAlphaFlagBitsKHR") int value) { nalphaMode(address(), value); return this; }
-    /** Copies the specified {@link VkExtent2D} to the {@code imageExtent} field. */
+    /** Copies the specified {@link VkExtent2D} to the {@link #imageExtent} field. */
     public VkDisplaySurfaceCreateInfoKHR imageExtent(VkExtent2D value) { nimageExtent(address(), value); return this; }
-    /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkDisplaySurfaceCreateInfoKHR imageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(imageExtent()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -458,56 +443,56 @@ public class VkDisplaySurfaceCreateInfoKHR extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDisplaySurfaceCreateInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDisplaySurfaceCreateInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDisplaySurfaceCreateInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDisplaySurfaceCreateInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkDisplaySurfaceCreateInfoKHR#flags} field. */
         @NativeType("VkDisplaySurfaceCreateFlagsKHR")
         public int flags() { return VkDisplaySurfaceCreateInfoKHR.nflags(address()); }
-        /** Returns the value of the {@code displayMode} field. */
+        /** @return the value of the {@link VkDisplaySurfaceCreateInfoKHR#displayMode} field. */
         @NativeType("VkDisplayModeKHR")
         public long displayMode() { return VkDisplaySurfaceCreateInfoKHR.ndisplayMode(address()); }
-        /** Returns the value of the {@code planeIndex} field. */
+        /** @return the value of the {@link VkDisplaySurfaceCreateInfoKHR#planeIndex} field. */
         @NativeType("uint32_t")
         public int planeIndex() { return VkDisplaySurfaceCreateInfoKHR.nplaneIndex(address()); }
-        /** Returns the value of the {@code planeStackIndex} field. */
+        /** @return the value of the {@link VkDisplaySurfaceCreateInfoKHR#planeStackIndex} field. */
         @NativeType("uint32_t")
         public int planeStackIndex() { return VkDisplaySurfaceCreateInfoKHR.nplaneStackIndex(address()); }
-        /** Returns the value of the {@code transform} field. */
+        /** @return the value of the {@link VkDisplaySurfaceCreateInfoKHR#transform} field. */
         @NativeType("VkSurfaceTransformFlagBitsKHR")
         public int transform() { return VkDisplaySurfaceCreateInfoKHR.ntransform(address()); }
-        /** Returns the value of the {@code globalAlpha} field. */
+        /** @return the value of the {@link VkDisplaySurfaceCreateInfoKHR#globalAlpha} field. */
         public float globalAlpha() { return VkDisplaySurfaceCreateInfoKHR.nglobalAlpha(address()); }
-        /** Returns the value of the {@code alphaMode} field. */
+        /** @return the value of the {@link VkDisplaySurfaceCreateInfoKHR#alphaMode} field. */
         @NativeType("VkDisplayPlaneAlphaFlagBitsKHR")
         public int alphaMode() { return VkDisplaySurfaceCreateInfoKHR.nalphaMode(address()); }
-        /** Returns a {@link VkExtent2D} view of the {@code imageExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@link VkDisplaySurfaceCreateInfoKHR#imageExtent} field. */
         public VkExtent2D imageExtent() { return VkDisplaySurfaceCreateInfoKHR.nimageExtent(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDisplaySurfaceCreateInfoKHR#sType} field. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplaySurfaceCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDisplaySurfaceCreateInfoKHR#pNext} field. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDisplaySurfaceCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkDisplaySurfaceCreateInfoKHR#flags} field. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer flags(@NativeType("VkDisplaySurfaceCreateFlagsKHR") int value) { VkDisplaySurfaceCreateInfoKHR.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code displayMode} field. */
+        /** Sets the specified value to the {@link VkDisplaySurfaceCreateInfoKHR#displayMode} field. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer displayMode(@NativeType("VkDisplayModeKHR") long value) { VkDisplaySurfaceCreateInfoKHR.ndisplayMode(address(), value); return this; }
-        /** Sets the specified value to the {@code planeIndex} field. */
+        /** Sets the specified value to the {@link VkDisplaySurfaceCreateInfoKHR#planeIndex} field. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer planeIndex(@NativeType("uint32_t") int value) { VkDisplaySurfaceCreateInfoKHR.nplaneIndex(address(), value); return this; }
-        /** Sets the specified value to the {@code planeStackIndex} field. */
+        /** Sets the specified value to the {@link VkDisplaySurfaceCreateInfoKHR#planeStackIndex} field. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer planeStackIndex(@NativeType("uint32_t") int value) { VkDisplaySurfaceCreateInfoKHR.nplaneStackIndex(address(), value); return this; }
-        /** Sets the specified value to the {@code transform} field. */
+        /** Sets the specified value to the {@link VkDisplaySurfaceCreateInfoKHR#transform} field. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer transform(@NativeType("VkSurfaceTransformFlagBitsKHR") int value) { VkDisplaySurfaceCreateInfoKHR.ntransform(address(), value); return this; }
-        /** Sets the specified value to the {@code globalAlpha} field. */
+        /** Sets the specified value to the {@link VkDisplaySurfaceCreateInfoKHR#globalAlpha} field. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer globalAlpha(float value) { VkDisplaySurfaceCreateInfoKHR.nglobalAlpha(address(), value); return this; }
-        /** Sets the specified value to the {@code alphaMode} field. */
+        /** Sets the specified value to the {@link VkDisplaySurfaceCreateInfoKHR#alphaMode} field. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer alphaMode(@NativeType("VkDisplayPlaneAlphaFlagBitsKHR") int value) { VkDisplaySurfaceCreateInfoKHR.nalphaMode(address(), value); return this; }
-        /** Copies the specified {@link VkExtent2D} to the {@code imageExtent} field. */
+        /** Copies the specified {@link VkExtent2D} to the {@link VkDisplaySurfaceCreateInfoKHR#imageExtent} field. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer imageExtent(VkExtent2D value) { VkDisplaySurfaceCreateInfoKHR.nimageExtent(address(), value); return this; }
-        /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkDisplaySurfaceCreateInfoKHR#imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkDisplaySurfaceCreateInfoKHR.Buffer imageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(imageExtent()); return this; }
 
     }

@@ -150,70 +150,70 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code vkGetPhysicalDeviceProperties} field. */
+    /** @return the value of the {@code vkGetPhysicalDeviceProperties} field. */
     @NativeType("PFN_vkGetPhysicalDeviceProperties")
     public long vkGetPhysicalDeviceProperties() { return nvkGetPhysicalDeviceProperties(address()); }
-    /** Returns the value of the {@code vkGetPhysicalDeviceMemoryProperties} field. */
+    /** @return the value of the {@code vkGetPhysicalDeviceMemoryProperties} field. */
     @NativeType("PFN_vkGetPhysicalDeviceMemoryProperties")
     public long vkGetPhysicalDeviceMemoryProperties() { return nvkGetPhysicalDeviceMemoryProperties(address()); }
-    /** Returns the value of the {@code vkAllocateMemory} field. */
+    /** @return the value of the {@code vkAllocateMemory} field. */
     @NativeType("PFN_vkAllocateMemory")
     public long vkAllocateMemory() { return nvkAllocateMemory(address()); }
-    /** Returns the value of the {@code vkFreeMemory} field. */
+    /** @return the value of the {@code vkFreeMemory} field. */
     @NativeType("PFN_vkFreeMemory")
     public long vkFreeMemory() { return nvkFreeMemory(address()); }
-    /** Returns the value of the {@code vkMapMemory} field. */
+    /** @return the value of the {@code vkMapMemory} field. */
     @NativeType("PFN_vkMapMemory")
     public long vkMapMemory() { return nvkMapMemory(address()); }
-    /** Returns the value of the {@code vkUnmapMemory} field. */
+    /** @return the value of the {@code vkUnmapMemory} field. */
     @NativeType("PFN_vkUnmapMemory")
     public long vkUnmapMemory() { return nvkUnmapMemory(address()); }
-    /** Returns the value of the {@code vkFlushMappedMemoryRanges} field. */
+    /** @return the value of the {@code vkFlushMappedMemoryRanges} field. */
     @NativeType("PFN_vkFlushMappedMemoryRanges")
     public long vkFlushMappedMemoryRanges() { return nvkFlushMappedMemoryRanges(address()); }
-    /** Returns the value of the {@code vkInvalidateMappedMemoryRanges} field. */
+    /** @return the value of the {@code vkInvalidateMappedMemoryRanges} field. */
     @NativeType("PFN_vkInvalidateMappedMemoryRanges")
     public long vkInvalidateMappedMemoryRanges() { return nvkInvalidateMappedMemoryRanges(address()); }
-    /** Returns the value of the {@code vkBindBufferMemory} field. */
+    /** @return the value of the {@code vkBindBufferMemory} field. */
     @NativeType("PFN_vkBindBufferMemory")
     public long vkBindBufferMemory() { return nvkBindBufferMemory(address()); }
-    /** Returns the value of the {@code vkBindImageMemory} field. */
+    /** @return the value of the {@code vkBindImageMemory} field. */
     @NativeType("PFN_vkBindImageMemory")
     public long vkBindImageMemory() { return nvkBindImageMemory(address()); }
-    /** Returns the value of the {@code vkGetBufferMemoryRequirements} field. */
+    /** @return the value of the {@code vkGetBufferMemoryRequirements} field. */
     @NativeType("PFN_vkGetBufferMemoryRequirements")
     public long vkGetBufferMemoryRequirements() { return nvkGetBufferMemoryRequirements(address()); }
-    /** Returns the value of the {@code vkGetImageMemoryRequirements} field. */
+    /** @return the value of the {@code vkGetImageMemoryRequirements} field. */
     @NativeType("PFN_vkGetImageMemoryRequirements")
     public long vkGetImageMemoryRequirements() { return nvkGetImageMemoryRequirements(address()); }
-    /** Returns the value of the {@code vkCreateBuffer} field. */
+    /** @return the value of the {@code vkCreateBuffer} field. */
     @NativeType("PFN_vkCreateBuffer")
     public long vkCreateBuffer() { return nvkCreateBuffer(address()); }
-    /** Returns the value of the {@code vkDestroyBuffer} field. */
+    /** @return the value of the {@code vkDestroyBuffer} field. */
     @NativeType("PFN_vkDestroyBuffer")
     public long vkDestroyBuffer() { return nvkDestroyBuffer(address()); }
-    /** Returns the value of the {@code vkCreateImage} field. */
+    /** @return the value of the {@code vkCreateImage} field. */
     @NativeType("PFN_vkCreateImage")
     public long vkCreateImage() { return nvkCreateImage(address()); }
-    /** Returns the value of the {@code vkDestroyImage} field. */
+    /** @return the value of the {@code vkDestroyImage} field. */
     @NativeType("PFN_vkDestroyImage")
     public long vkDestroyImage() { return nvkDestroyImage(address()); }
-    /** Returns the value of the {@code vkCmdCopyBuffer} field. */
+    /** @return the value of the {@code vkCmdCopyBuffer} field. */
     @NativeType("PFN_vkCmdCopyBuffer")
     public long vkCmdCopyBuffer() { return nvkCmdCopyBuffer(address()); }
-    /** Returns the value of the {@code vkGetBufferMemoryRequirements2KHR} field. */
+    /** @return the value of the {@code vkGetBufferMemoryRequirements2KHR} field. */
     @NativeType("PFN_vkGetBufferMemoryRequirements2KHR")
     public long vkGetBufferMemoryRequirements2KHR() { return nvkGetBufferMemoryRequirements2KHR(address()); }
-    /** Returns the value of the {@code vkGetImageMemoryRequirements2KHR} field. */
+    /** @return the value of the {@code vkGetImageMemoryRequirements2KHR} field. */
     @NativeType("PFN_vkGetImageMemoryRequirements2KHR")
     public long vkGetImageMemoryRequirements2KHR() { return nvkGetImageMemoryRequirements2KHR(address()); }
-    /** Returns the value of the {@code vkBindBufferMemory2KHR} field. */
+    /** @return the value of the {@code vkBindBufferMemory2KHR} field. */
     @NativeType("PFN_vkBindBufferMemory2KHR")
     public long vkBindBufferMemory2KHR() { return nvkBindBufferMemory2KHR(address()); }
-    /** Returns the value of the {@code vkBindImageMemory2KHR} field. */
+    /** @return the value of the {@code vkBindImageMemory2KHR} field. */
     @NativeType("PFN_vkBindImageMemory2KHR")
     public long vkBindImageMemory2KHR() { return nvkBindImageMemory2KHR(address()); }
-    /** Returns the value of the {@code vkGetPhysicalDeviceMemoryProperties2KHR} field. */
+    /** @return the value of the {@code vkGetPhysicalDeviceMemoryProperties2KHR} field. */
     @NativeType("PFN_vkGetPhysicalDeviceMemoryProperties2KHR")
     public long vkGetPhysicalDeviceMemoryProperties2KHR() { return nvkGetPhysicalDeviceMemoryProperties2KHR(address()); }
 

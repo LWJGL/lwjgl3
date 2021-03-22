@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing a supported swapchain format-color space pair.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code format} &ndash; a {@code VkFormat} that is compatible with the specified surface.</li>
- * <li>{@code colorSpace} &ndash; a presentation {@code VkColorSpaceKHR} that is compatible with the surface.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSurfaceFormatKHR {
- *     VkFormat format;
- *     VkColorSpaceKHR colorSpace;
+ *     VkFormat {@link #format};
+ *     VkColorSpaceKHR {@link #colorSpace};
  * }</code></pre>
  */
 public class VkSurfaceFormatKHR extends Struct implements NativeResource {
@@ -72,10 +65,10 @@ public class VkSurfaceFormatKHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code format} field. */
+    /** a {@code VkFormat} that is compatible with the specified surface. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** Returns the value of the {@code colorSpace} field. */
+    /** a presentation {@code VkColorSpaceKHR} that is compatible with the surface. */
     @NativeType("VkColorSpaceKHR")
     public int colorSpace() { return ncolorSpace(address()); }
 
@@ -265,10 +258,10 @@ public class VkSurfaceFormatKHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code format} field. */
+        /** @return the value of the {@link VkSurfaceFormatKHR#format} field. */
         @NativeType("VkFormat")
         public int format() { return VkSurfaceFormatKHR.nformat(address()); }
-        /** Returns the value of the {@code colorSpace} field. */
+        /** @return the value of the {@link VkSurfaceFormatKHR#colorSpace} field. */
         @NativeType("VkColorSpaceKHR")
         public int colorSpace() { return VkSurfaceFormatKHR.ncolorSpace(address()); }
 

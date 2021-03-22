@@ -75,16 +75,16 @@ public class SpvcHlslRootConstants extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code start} field. */
+    /** @return the value of the {@code start} field. */
     @NativeType("unsigned int")
     public int start() { return nstart(address()); }
-    /** Returns the value of the {@code end} field. */
+    /** @return the value of the {@code end} field. */
     @NativeType("unsigned int")
     public int end() { return nend(address()); }
-    /** Returns the value of the {@code binding} field. */
+    /** @return the value of the {@code binding} field. */
     @NativeType("unsigned int")
     public int binding() { return nbinding(address()); }
-    /** Returns the value of the {@code space} field. */
+    /** @return the value of the {@code space} field. */
     @NativeType("unsigned int")
     public int space() { return nspace(address()); }
 
@@ -323,16 +323,16 @@ public class SpvcHlslRootConstants extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code start} field. */
+        /** @return the value of the {@code start} field. */
         @NativeType("unsigned int")
         public int start() { return SpvcHlslRootConstants.nstart(address()); }
-        /** Returns the value of the {@code end} field. */
+        /** @return the value of the {@code end} field. */
         @NativeType("unsigned int")
         public int end() { return SpvcHlslRootConstants.nend(address()); }
-        /** Returns the value of the {@code binding} field. */
+        /** @return the value of the {@code binding} field. */
         @NativeType("unsigned int")
         public int binding() { return SpvcHlslRootConstants.nbinding(address()); }
-        /** Returns the value of the {@code space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("unsigned int")
         public int space() { return SpvcHlslRootConstants.nspace(address()); }
 

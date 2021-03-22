@@ -16,20 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Used for simulated mouse events in overlay space.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code x} &ndash; coords are in GL space, bottom left of the texture is 0,0</li>
- * <li>{@code button} &ndash; one of:<br><table><tr><td>{@link VR#EVRMouseButton_VRMouseButton_Left}</td><td>{@link VR#EVRMouseButton_VRMouseButton_Right}</td></tr><tr><td>{@link VR#EVRMouseButton_VRMouseButton_Middle}</td></tr></table></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VREvent_Mouse_t {
- *     float x;
+ *     float {@link #x};
  *     float y;
- *     uint32_t button;
+ *     uint32_t {@link #button};
  * }</code></pre>
  */
 @NativeType("struct VREvent_Mouse_t")
@@ -75,11 +68,11 @@ public class VREventMouse extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** coords are in GL space, bottom left of the texture is 0,0 */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** Returns the value of the {@code button} field. */
+    /** one of:<br><table><tr><td>{@link VR#EVRMouseButton_VRMouseButton_Left}</td><td>{@link VR#EVRMouseButton_VRMouseButton_Right}</td></tr><tr><td>{@link VR#EVRMouseButton_VRMouseButton_Middle}</td></tr></table> */
     @NativeType("uint32_t")
     public int button() { return nbutton(address()); }
 
@@ -159,11 +152,11 @@ public class VREventMouse extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link VREventMouse#x} field. */
         public float x() { return VREventMouse.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return VREventMouse.ny(address()); }
-        /** Returns the value of the {@code button} field. */
+        /** @return the value of the {@link VREventMouse#button} field. */
         @NativeType("uint32_t")
         public int button() { return VREventMouse.nbutton(address()); }
 

@@ -20,32 +20,15 @@ import org.lwjgl.system.windows.*;
 /**
  * Receives information about the display device specified by the {@code deviceIndex} parameter of the {@link WGLNVGPUAffinity#wglEnumGpuDevicesNV EnumGpuDevicesNV} function.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code cb} &ndash; 
- * the size of the {@code GPU_DEVICE} structure. Before calling {@link WGLNVGPUAffinity#wglEnumGpuDevicesNV EnumGpuDevicesNV}, set {@code cb} to the size, in bytes, of {@code GPU_DEVICE}.</li>
- * <li>{@code DeviceName[32]} &ndash; 
- * a string identifying the display device name. This will be the same string as stored in the {@code DeviceName} field of the {@code DISPLAY_DEVICE}
- * structure, which is filled in by {@code EnumDisplayDevices}.</li>
- * <li>{@code DeviceString[128]} &ndash; 
- * a string describing the GPU for this display device. It is the same string as stored in the {@code DeviceString} field in the {@code DISPLAY_DEVICE}
- * structure that is filled in by {@code EnumDisplayDevices} when it describes a display adapter (and not a monitor).</li>
- * <li>{@code Flags} &ndash; indicates the state of the display device</li>
- * <li>{@code rcVirtualScreen} &ndash; 
- * specifies the display device rectangle, in virtual screen coordinates. The value of {@code rcVirtualScreen} is undefined if the device is not part of
- * the desktop, i.e. {@code DISPLAY_DEVICE_ATTACHED_TO_DESKTOP} is not set in the {@code Flags} field.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct GPU_DEVICE {
- *     DWORD cb;
- *     CHAR DeviceName[32];
- *     CHAR DeviceString[128];
- *     DWORD Flags;
- *     {@link RECT RECT} rcVirtualScreen;
+ *     DWORD {@link #cb};
+ *     CHAR {@link #DeviceName}[32];
+ *     CHAR {@link #DeviceString}[128];
+ *     DWORD {@link #Flags};
+ *     {@link RECT RECT} {@link #rcVirtualScreen};
  * }</code></pre>
  */
 public class GPU_DEVICE extends Struct implements NativeResource {
@@ -96,25 +79,40 @@ public class GPU_DEVICE extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code cb} field. */
+    /** the size of the {@code GPU_DEVICE} structure. Before calling {@link WGLNVGPUAffinity#wglEnumGpuDevicesNV EnumGpuDevicesNV}, set {@code cb} to the size, in bytes, of {@code GPU_DEVICE}. */
     @NativeType("DWORD")
     public int cb() { return ncb(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code DeviceName} field. */
+    /**
+     * a string identifying the display device name. This will be the same string as stored in the {@code DeviceName} field of the {@code DISPLAY_DEVICE}
+     * structure, which is filled in by {@code EnumDisplayDevices}.
+     */
     @NativeType("CHAR[32]")
     public ByteBuffer DeviceName() { return nDeviceName(address()); }
-    /** Decodes the null-terminated string stored in the {@code DeviceName} field. */
+    /**
+     * a string identifying the display device name. This will be the same string as stored in the {@code DeviceName} field of the {@code DISPLAY_DEVICE}
+     * structure, which is filled in by {@code EnumDisplayDevices}.
+     */
     @NativeType("CHAR[32]")
     public String DeviceNameString() { return nDeviceNameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code DeviceString} field. */
+    /**
+     * a string describing the GPU for this display device. It is the same string as stored in the {@code DeviceString} field in the {@code DISPLAY_DEVICE}
+     * structure that is filled in by {@code EnumDisplayDevices} when it describes a display adapter (and not a monitor).
+     */
     @NativeType("CHAR[128]")
     public ByteBuffer DeviceString() { return nDeviceString(address()); }
-    /** Decodes the null-terminated string stored in the {@code DeviceString} field. */
+    /**
+     * a string describing the GPU for this display device. It is the same string as stored in the {@code DeviceString} field in the {@code DISPLAY_DEVICE}
+     * structure that is filled in by {@code EnumDisplayDevices} when it describes a display adapter (and not a monitor).
+     */
     @NativeType("CHAR[128]")
     public String DeviceStringString() { return nDeviceStringString(address()); }
-    /** Returns the value of the {@code Flags} field. */
+    /** indicates the state of the display device */
     @NativeType("DWORD")
     public int Flags() { return nFlags(address()); }
-    /** Returns a {@link RECT} view of the {@code rcVirtualScreen} field. */
+    /**
+     * specifies the display device rectangle, in virtual screen coordinates. The value of {@code rcVirtualScreen} is undefined if the device is not part of
+     * the desktop, i.e. {@code DISPLAY_DEVICE_ATTACHED_TO_DESKTOP} is not set in the {@code Flags} field.
+     */
     public RECT rcVirtualScreen() { return nrcVirtualScreen(address()); }
 
     // -----------------------------------
@@ -313,25 +311,25 @@ public class GPU_DEVICE extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code cb} field. */
+        /** @return the value of the {@link GPU_DEVICE#cb} field. */
         @NativeType("DWORD")
         public int cb() { return GPU_DEVICE.ncb(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code DeviceName} field. */
+        /** @return a {@link ByteBuffer} view of the {@link GPU_DEVICE#DeviceName} field. */
         @NativeType("CHAR[32]")
         public ByteBuffer DeviceName() { return GPU_DEVICE.nDeviceName(address()); }
-        /** Decodes the null-terminated string stored in the {@code DeviceName} field. */
+        /** @return the null-terminated string stored in the {@link GPU_DEVICE#DeviceName} field. */
         @NativeType("CHAR[32]")
         public String DeviceNameString() { return GPU_DEVICE.nDeviceNameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code DeviceString} field. */
+        /** @return a {@link ByteBuffer} view of the {@link GPU_DEVICE#DeviceString} field. */
         @NativeType("CHAR[128]")
         public ByteBuffer DeviceString() { return GPU_DEVICE.nDeviceString(address()); }
-        /** Decodes the null-terminated string stored in the {@code DeviceString} field. */
+        /** @return the null-terminated string stored in the {@link GPU_DEVICE#DeviceString} field. */
         @NativeType("CHAR[128]")
         public String DeviceStringString() { return GPU_DEVICE.nDeviceStringString(address()); }
-        /** Returns the value of the {@code Flags} field. */
+        /** @return the value of the {@link GPU_DEVICE#Flags} field. */
         @NativeType("DWORD")
         public int Flags() { return GPU_DEVICE.nFlags(address()); }
-        /** Returns a {@link RECT} view of the {@code rcVirtualScreen} field. */
+        /** @return a {@link RECT} view of the {@link GPU_DEVICE#rcVirtualScreen} field. */
         public RECT rcVirtualScreen() { return GPU_DEVICE.nrcVirtualScreen(address()); }
 
     }

@@ -71,16 +71,16 @@ public class SQL_SS_TIME2_STRUCT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code hour} field. */
+    /** @return the value of the {@code hour} field. */
     @NativeType("SQLUSMALLINT")
     public short hour() { return nhour(address()); }
-    /** Returns the value of the {@code minute} field. */
+    /** @return the value of the {@code minute} field. */
     @NativeType("SQLUSMALLINT")
     public short minute() { return nminute(address()); }
-    /** Returns the value of the {@code second} field. */
+    /** @return the value of the {@code second} field. */
     @NativeType("SQLUSMALLINT")
     public short second() { return nsecond(address()); }
-    /** Returns the value of the {@code fraction} field. */
+    /** @return the value of the {@code fraction} field. */
     @NativeType("SQLUINTEGER")
     public int fraction() { return nfraction(address()); }
 
@@ -319,16 +319,16 @@ public class SQL_SS_TIME2_STRUCT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code hour} field. */
+        /** @return the value of the {@code hour} field. */
         @NativeType("SQLUSMALLINT")
         public short hour() { return SQL_SS_TIME2_STRUCT.nhour(address()); }
-        /** Returns the value of the {@code minute} field. */
+        /** @return the value of the {@code minute} field. */
         @NativeType("SQLUSMALLINT")
         public short minute() { return SQL_SS_TIME2_STRUCT.nminute(address()); }
-        /** Returns the value of the {@code second} field. */
+        /** @return the value of the {@code second} field. */
         @NativeType("SQLUSMALLINT")
         public short second() { return SQL_SS_TIME2_STRUCT.nsecond(address()); }
-        /** Returns the value of the {@code fraction} field. */
+        /** @return the value of the {@code fraction} field. */
         @NativeType("SQLUINTEGER")
         public int fraction() { return SQL_SS_TIME2_STRUCT.nfraction(address()); }
 

@@ -62,10 +62,10 @@ public class VREventApplicationLaunch extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code pid} field. */
+    /** @return the value of the {@code pid} field. */
     @NativeType("uint32_t")
     public int pid() { return npid(address()); }
-    /** Returns the value of the {@code unArgsHandle} field. */
+    /** @return the value of the {@code unArgsHandle} field. */
     @NativeType("uint32_t")
     public int unArgsHandle() { return nunArgsHandle(address()); }
 
@@ -143,10 +143,10 @@ public class VREventApplicationLaunch extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code pid} field. */
+        /** @return the value of the {@code pid} field. */
         @NativeType("uint32_t")
         public int pid() { return VREventApplicationLaunch.npid(address()); }
-        /** Returns the value of the {@code unArgsHandle} field. */
+        /** @return the value of the {@code unArgsHandle} field. */
         @NativeType("uint32_t")
         public int unArgsHandle() { return VREventApplicationLaunch.nunArgsHandle(address()); }
 

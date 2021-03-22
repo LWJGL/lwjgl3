@@ -178,40 +178,22 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkDependencyInfoKHR}, {@link VkImageSubresourceRange}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code srcStageMask} &ndash; a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">first synchronization scope</a>.</li>
- * <li>{@code srcAccessMask} &ndash; a {@code VkAccessFlags2KHR} mask of pipeline <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">first access scope</a>.</li>
- * <li>{@code dstStageMask} &ndash; a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">second synchronization scope</a>.
- * 
- * <p>a {@code VkAccessFlags2KHR} mask of pipeline <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">second access scope</a>.</p></li>
- * <li>{@code oldLayout} &ndash; the old layout in an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>.</li>
- * <li>{@code newLayout} &ndash; the new layout in an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>.</li>
- * <li>{@code srcQueueFamilyIndex} &ndash; the source queue family for a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>.</li>
- * <li>{@code dstQueueFamilyIndex} &ndash; the destination queue family for a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>.</li>
- * <li>{@code image} &ndash; a handle to the image affected by this barrier.</li>
- * <li>{@code subresourceRange} &ndash; describes the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-views">image subresource range</a> within {@code image} that is affected by this barrier.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImageMemoryBarrier2KHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineStageFlags2KHR srcStageMask;
- *     VkAccessFlags2KHR srcAccessMask;
- *     VkPipelineStageFlags2KHR dstStageMask;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineStageFlags2KHR {@link #srcStageMask};
+ *     VkAccessFlags2KHR {@link #srcAccessMask};
+ *     VkPipelineStageFlags2KHR {@link #dstStageMask};
  *     VkAccessFlags2KHR dstAccessMask;
- *     VkImageLayout oldLayout;
- *     VkImageLayout newLayout;
- *     uint32_t srcQueueFamilyIndex;
- *     uint32_t dstQueueFamilyIndex;
- *     VkImage image;
- *     {@link VkImageSubresourceRange VkImageSubresourceRange} subresourceRange;
+ *     VkImageLayout {@link #oldLayout};
+ *     VkImageLayout {@link #newLayout};
+ *     uint32_t {@link #srcQueueFamilyIndex};
+ *     uint32_t {@link #dstQueueFamilyIndex};
+ *     VkImage {@link #image};
+ *     {@link VkImageSubresourceRange VkImageSubresourceRange} {@link #subresourceRange};
  * }</code></pre>
  */
 public class VkImageMemoryBarrier2KHR extends Struct implements NativeResource {
@@ -283,67 +265,71 @@ public class VkImageMemoryBarrier2KHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code srcStageMask} field. */
+    /** a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">first synchronization scope</a>. */
     @NativeType("VkPipelineStageFlags2KHR")
     public int srcStageMask() { return nsrcStageMask(address()); }
-    /** Returns the value of the {@code srcAccessMask} field. */
+    /** a {@code VkAccessFlags2KHR} mask of pipeline <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">first access scope</a>. */
     @NativeType("VkAccessFlags2KHR")
     public int srcAccessMask() { return nsrcAccessMask(address()); }
-    /** Returns the value of the {@code dstStageMask} field. */
+    /**
+     * a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">second synchronization scope</a>.
+     * 
+     * <p>a {@code VkAccessFlags2KHR} mask of pipeline <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">second access scope</a>.</p>
+     */
     @NativeType("VkPipelineStageFlags2KHR")
     public int dstStageMask() { return ndstStageMask(address()); }
-    /** Returns the value of the {@code dstAccessMask} field. */
+    /** @return the value of the {@code dstAccessMask} field. */
     @NativeType("VkAccessFlags2KHR")
     public int dstAccessMask() { return ndstAccessMask(address()); }
-    /** Returns the value of the {@code oldLayout} field. */
+    /** the old layout in an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>. */
     @NativeType("VkImageLayout")
     public int oldLayout() { return noldLayout(address()); }
-    /** Returns the value of the {@code newLayout} field. */
+    /** the new layout in an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>. */
     @NativeType("VkImageLayout")
     public int newLayout() { return nnewLayout(address()); }
-    /** Returns the value of the {@code srcQueueFamilyIndex} field. */
+    /** the source queue family for a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>. */
     @NativeType("uint32_t")
     public int srcQueueFamilyIndex() { return nsrcQueueFamilyIndex(address()); }
-    /** Returns the value of the {@code dstQueueFamilyIndex} field. */
+    /** the destination queue family for a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>. */
     @NativeType("uint32_t")
     public int dstQueueFamilyIndex() { return ndstQueueFamilyIndex(address()); }
-    /** Returns the value of the {@code image} field. */
+    /** a handle to the image affected by this barrier. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
-    /** Returns a {@link VkImageSubresourceRange} view of the {@code subresourceRange} field. */
+    /** describes the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-views">image subresource range</a> within {@code image} that is affected by this barrier. */
     public VkImageSubresourceRange subresourceRange() { return nsubresourceRange(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkImageMemoryBarrier2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkImageMemoryBarrier2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code srcStageMask} field. */
+    /** Sets the specified value to the {@link #srcStageMask} field. */
     public VkImageMemoryBarrier2KHR srcStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { nsrcStageMask(address(), value); return this; }
-    /** Sets the specified value to the {@code srcAccessMask} field. */
+    /** Sets the specified value to the {@link #srcAccessMask} field. */
     public VkImageMemoryBarrier2KHR srcAccessMask(@NativeType("VkAccessFlags2KHR") int value) { nsrcAccessMask(address(), value); return this; }
-    /** Sets the specified value to the {@code dstStageMask} field. */
+    /** Sets the specified value to the {@link #dstStageMask} field. */
     public VkImageMemoryBarrier2KHR dstStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { ndstStageMask(address(), value); return this; }
     /** Sets the specified value to the {@code dstAccessMask} field. */
     public VkImageMemoryBarrier2KHR dstAccessMask(@NativeType("VkAccessFlags2KHR") int value) { ndstAccessMask(address(), value); return this; }
-    /** Sets the specified value to the {@code oldLayout} field. */
+    /** Sets the specified value to the {@link #oldLayout} field. */
     public VkImageMemoryBarrier2KHR oldLayout(@NativeType("VkImageLayout") int value) { noldLayout(address(), value); return this; }
-    /** Sets the specified value to the {@code newLayout} field. */
+    /** Sets the specified value to the {@link #newLayout} field. */
     public VkImageMemoryBarrier2KHR newLayout(@NativeType("VkImageLayout") int value) { nnewLayout(address(), value); return this; }
-    /** Sets the specified value to the {@code srcQueueFamilyIndex} field. */
+    /** Sets the specified value to the {@link #srcQueueFamilyIndex} field. */
     public VkImageMemoryBarrier2KHR srcQueueFamilyIndex(@NativeType("uint32_t") int value) { nsrcQueueFamilyIndex(address(), value); return this; }
-    /** Sets the specified value to the {@code dstQueueFamilyIndex} field. */
+    /** Sets the specified value to the {@link #dstQueueFamilyIndex} field. */
     public VkImageMemoryBarrier2KHR dstQueueFamilyIndex(@NativeType("uint32_t") int value) { ndstQueueFamilyIndex(address(), value); return this; }
-    /** Sets the specified value to the {@code image} field. */
+    /** Sets the specified value to the {@link #image} field. */
     public VkImageMemoryBarrier2KHR image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
-    /** Copies the specified {@link VkImageSubresourceRange} to the {@code subresourceRange} field. */
+    /** Copies the specified {@link VkImageSubresourceRange} to the {@link #subresourceRange} field. */
     public VkImageMemoryBarrier2KHR subresourceRange(VkImageSubresourceRange value) { nsubresourceRange(address(), value); return this; }
-    /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageMemoryBarrier2KHR subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -620,67 +606,67 @@ public class VkImageMemoryBarrier2KHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkImageMemoryBarrier2KHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageMemoryBarrier2KHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkImageMemoryBarrier2KHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageMemoryBarrier2KHR.npNext(address()); }
-        /** Returns the value of the {@code srcStageMask} field. */
+        /** @return the value of the {@link VkImageMemoryBarrier2KHR#srcStageMask} field. */
         @NativeType("VkPipelineStageFlags2KHR")
         public int srcStageMask() { return VkImageMemoryBarrier2KHR.nsrcStageMask(address()); }
-        /** Returns the value of the {@code srcAccessMask} field. */
+        /** @return the value of the {@link VkImageMemoryBarrier2KHR#srcAccessMask} field. */
         @NativeType("VkAccessFlags2KHR")
         public int srcAccessMask() { return VkImageMemoryBarrier2KHR.nsrcAccessMask(address()); }
-        /** Returns the value of the {@code dstStageMask} field. */
+        /** @return the value of the {@link VkImageMemoryBarrier2KHR#dstStageMask} field. */
         @NativeType("VkPipelineStageFlags2KHR")
         public int dstStageMask() { return VkImageMemoryBarrier2KHR.ndstStageMask(address()); }
-        /** Returns the value of the {@code dstAccessMask} field. */
+        /** @return the value of the {@code dstAccessMask} field. */
         @NativeType("VkAccessFlags2KHR")
         public int dstAccessMask() { return VkImageMemoryBarrier2KHR.ndstAccessMask(address()); }
-        /** Returns the value of the {@code oldLayout} field. */
+        /** @return the value of the {@link VkImageMemoryBarrier2KHR#oldLayout} field. */
         @NativeType("VkImageLayout")
         public int oldLayout() { return VkImageMemoryBarrier2KHR.noldLayout(address()); }
-        /** Returns the value of the {@code newLayout} field. */
+        /** @return the value of the {@link VkImageMemoryBarrier2KHR#newLayout} field. */
         @NativeType("VkImageLayout")
         public int newLayout() { return VkImageMemoryBarrier2KHR.nnewLayout(address()); }
-        /** Returns the value of the {@code srcQueueFamilyIndex} field. */
+        /** @return the value of the {@link VkImageMemoryBarrier2KHR#srcQueueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int srcQueueFamilyIndex() { return VkImageMemoryBarrier2KHR.nsrcQueueFamilyIndex(address()); }
-        /** Returns the value of the {@code dstQueueFamilyIndex} field. */
+        /** @return the value of the {@link VkImageMemoryBarrier2KHR#dstQueueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int dstQueueFamilyIndex() { return VkImageMemoryBarrier2KHR.ndstQueueFamilyIndex(address()); }
-        /** Returns the value of the {@code image} field. */
+        /** @return the value of the {@link VkImageMemoryBarrier2KHR#image} field. */
         @NativeType("VkImage")
         public long image() { return VkImageMemoryBarrier2KHR.nimage(address()); }
-        /** Returns a {@link VkImageSubresourceRange} view of the {@code subresourceRange} field. */
+        /** @return a {@link VkImageSubresourceRange} view of the {@link VkImageMemoryBarrier2KHR#subresourceRange} field. */
         public VkImageSubresourceRange subresourceRange() { return VkImageMemoryBarrier2KHR.nsubresourceRange(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkImageMemoryBarrier2KHR#sType} field. */
         public VkImageMemoryBarrier2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImageMemoryBarrier2KHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkImageMemoryBarrier2KHR#pNext} field. */
         public VkImageMemoryBarrier2KHR.Buffer pNext(@NativeType("void const *") long value) { VkImageMemoryBarrier2KHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code srcStageMask} field. */
+        /** Sets the specified value to the {@link VkImageMemoryBarrier2KHR#srcStageMask} field. */
         public VkImageMemoryBarrier2KHR.Buffer srcStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { VkImageMemoryBarrier2KHR.nsrcStageMask(address(), value); return this; }
-        /** Sets the specified value to the {@code srcAccessMask} field. */
+        /** Sets the specified value to the {@link VkImageMemoryBarrier2KHR#srcAccessMask} field. */
         public VkImageMemoryBarrier2KHR.Buffer srcAccessMask(@NativeType("VkAccessFlags2KHR") int value) { VkImageMemoryBarrier2KHR.nsrcAccessMask(address(), value); return this; }
-        /** Sets the specified value to the {@code dstStageMask} field. */
+        /** Sets the specified value to the {@link VkImageMemoryBarrier2KHR#dstStageMask} field. */
         public VkImageMemoryBarrier2KHR.Buffer dstStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { VkImageMemoryBarrier2KHR.ndstStageMask(address(), value); return this; }
         /** Sets the specified value to the {@code dstAccessMask} field. */
         public VkImageMemoryBarrier2KHR.Buffer dstAccessMask(@NativeType("VkAccessFlags2KHR") int value) { VkImageMemoryBarrier2KHR.ndstAccessMask(address(), value); return this; }
-        /** Sets the specified value to the {@code oldLayout} field. */
+        /** Sets the specified value to the {@link VkImageMemoryBarrier2KHR#oldLayout} field. */
         public VkImageMemoryBarrier2KHR.Buffer oldLayout(@NativeType("VkImageLayout") int value) { VkImageMemoryBarrier2KHR.noldLayout(address(), value); return this; }
-        /** Sets the specified value to the {@code newLayout} field. */
+        /** Sets the specified value to the {@link VkImageMemoryBarrier2KHR#newLayout} field. */
         public VkImageMemoryBarrier2KHR.Buffer newLayout(@NativeType("VkImageLayout") int value) { VkImageMemoryBarrier2KHR.nnewLayout(address(), value); return this; }
-        /** Sets the specified value to the {@code srcQueueFamilyIndex} field. */
+        /** Sets the specified value to the {@link VkImageMemoryBarrier2KHR#srcQueueFamilyIndex} field. */
         public VkImageMemoryBarrier2KHR.Buffer srcQueueFamilyIndex(@NativeType("uint32_t") int value) { VkImageMemoryBarrier2KHR.nsrcQueueFamilyIndex(address(), value); return this; }
-        /** Sets the specified value to the {@code dstQueueFamilyIndex} field. */
+        /** Sets the specified value to the {@link VkImageMemoryBarrier2KHR#dstQueueFamilyIndex} field. */
         public VkImageMemoryBarrier2KHR.Buffer dstQueueFamilyIndex(@NativeType("uint32_t") int value) { VkImageMemoryBarrier2KHR.ndstQueueFamilyIndex(address(), value); return this; }
-        /** Sets the specified value to the {@code image} field. */
+        /** Sets the specified value to the {@link VkImageMemoryBarrier2KHR#image} field. */
         public VkImageMemoryBarrier2KHR.Buffer image(@NativeType("VkImage") long value) { VkImageMemoryBarrier2KHR.nimage(address(), value); return this; }
-        /** Copies the specified {@link VkImageSubresourceRange} to the {@code subresourceRange} field. */
+        /** Copies the specified {@link VkImageSubresourceRange} to the {@link VkImageMemoryBarrier2KHR#subresourceRange} field. */
         public VkImageMemoryBarrier2KHR.Buffer subresourceRange(VkImageSubresourceRange value) { VkImageMemoryBarrier2KHR.nsubresourceRange(address(), value); return this; }
-        /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkImageMemoryBarrier2KHR#subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageMemoryBarrier2KHR.Buffer subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     }

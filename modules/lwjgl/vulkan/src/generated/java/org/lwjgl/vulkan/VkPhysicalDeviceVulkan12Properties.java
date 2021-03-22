@@ -34,121 +34,64 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <p>{@link VkConformanceVersion}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code driverID} &ndash; a unique identifier for the driver of the physical device.</li>
- * <li>{@code driverName[VK_MAX_DRIVER_NAME_SIZE]} &ndash; an array of {@link VK10#VK_MAX_DRIVER_NAME_SIZE MAX_DRIVER_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the driver.</li>
- * <li>{@code driverInfo[VK_MAX_DRIVER_INFO_SIZE]} &ndash; an array of {@link VK10#VK_MAX_DRIVER_INFO_SIZE MAX_DRIVER_INFO_SIZE} {@code char} containing a null-terminated UTF-8 string with additional information about the driver.</li>
- * <li>{@code conformanceVersion} &ndash; the version of the Vulkan conformance test this driver is conformant against (see {@link VkConformanceVersion}).</li>
- * <li>{@code denormBehaviorIndependence} &ndash; a {@code VkShaderFloatControlsIndependence} value indicating whether, and how, denorm behavior can be set independently for different bit widths.</li>
- * <li>{@code roundingModeIndependence} &ndash; a {@code VkShaderFloatControlsIndependence} value indicating whether, and how, rounding modes can be set independently for different bit widths.</li>
- * <li>{@code shaderSignedZeroInfNanPreserveFloat16} &ndash; a boolean value indicating whether sign of a zero, <code>Nan</code>s and &plusmn;&infin; <b>can</b> be preserved in 16-bit floating-point computations. It also indicates whether the {@code SignedZeroInfNanPreserve} execution mode <b>can</b> be used for 16-bit floating-point types.</li>
- * <li>{@code shaderSignedZeroInfNanPreserveFloat32} &ndash; a boolean value indicating whether sign of a zero, <code>Nan</code>s and &plusmn;&infin; <b>can</b> be preserved in 32-bit floating-point computations. It also indicates whether the {@code SignedZeroInfNanPreserve} execution mode <b>can</b> be used for 32-bit floating-point types.</li>
- * <li>{@code shaderSignedZeroInfNanPreserveFloat64} &ndash; a boolean value indicating whether sign of a zero, <code>Nan</code>s and &plusmn;&infin; <b>can</b> be preserved in 64-bit floating-point computations. It also indicates whether the {@code SignedZeroInfNanPreserve} execution mode <b>can</b> be used for 64-bit floating-point types.</li>
- * <li>{@code shaderDenormPreserveFloat16} &ndash; a boolean value indicating whether denormals <b>can</b> be preserved in 16-bit floating-point computations. It also indicates whether the {@code DenormPreserve} execution mode <b>can</b> be used for 16-bit floating-point types.</li>
- * <li>{@code shaderDenormPreserveFloat32} &ndash; a boolean value indicating whether denormals <b>can</b> be preserved in 32-bit floating-point computations. It also indicates whether the {@code DenormPreserve} execution mode <b>can</b> be used for 32-bit floating-point types.</li>
- * <li>{@code shaderDenormPreserveFloat64} &ndash; a boolean value indicating whether denormals <b>can</b> be preserved in 64-bit floating-point computations. It also indicates whether the {@code DenormPreserve} execution mode <b>can</b> be used for 64-bit floating-point types.</li>
- * <li>{@code shaderDenormFlushToZeroFloat16} &ndash; a boolean value indicating whether denormals <b>can</b> be flushed to zero in 16-bit floating-point computations. It also indicates whether the {@code DenormFlushToZero} execution mode <b>can</b> be used for 16-bit floating-point types.</li>
- * <li>{@code shaderDenormFlushToZeroFloat32} &ndash; a boolean value indicating whether denormals <b>can</b> be flushed to zero in 32-bit floating-point computations. It also indicates whether the {@code DenormFlushToZero} execution mode <b>can</b> be used for 32-bit floating-point types.</li>
- * <li>{@code shaderDenormFlushToZeroFloat64} &ndash; a boolean value indicating whether denormals <b>can</b> be flushed to zero in 64-bit floating-point computations. It also indicates whether the {@code DenormFlushToZero} execution mode <b>can</b> be used for 64-bit floating-point types.</li>
- * <li>{@code shaderRoundingModeRTEFloat16} &ndash; a boolean value indicating whether an implementation supports the round-to-nearest-even rounding mode for 16-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTE} execution mode <b>can</b> be used for 16-bit floating-point types.</li>
- * <li>{@code shaderRoundingModeRTEFloat32} &ndash; a boolean value indicating whether an implementation supports the round-to-nearest-even rounding mode for 32-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTE} execution mode <b>can</b> be used for 32-bit floating-point types.</li>
- * <li>{@code shaderRoundingModeRTEFloat64} &ndash; a boolean value indicating whether an implementation supports the round-to-nearest-even rounding mode for 64-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTE} execution mode <b>can</b> be used for 64-bit floating-point types.</li>
- * <li>{@code shaderRoundingModeRTZFloat16} &ndash; a boolean value indicating whether an implementation supports the round-towards-zero rounding mode for 16-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTZ} execution mode <b>can</b> be used for 16-bit floating-point types.</li>
- * <li>{@code shaderRoundingModeRTZFloat32} &ndash; a boolean value indicating whether an implementation supports the round-towards-zero rounding mode for 32-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTZ} execution mode <b>can</b> be used for 32-bit floating-point types.</li>
- * <li>{@code shaderRoundingModeRTZFloat64} &ndash; a boolean value indicating whether an implementation supports the round-towards-zero rounding mode for 64-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTZ} execution mode <b>can</b> be used for 64-bit floating-point types.</li>
- * <li>{@code maxUpdateAfterBindDescriptorsInAllPools} &ndash; the maximum number of descriptors (summed over all descriptor types) that <b>can</b> be created across all pools that are created with the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} bit set. Pool creation <b>may</b> fail when this limit is exceeded, or when the space this limit represents is unable to satisfy a pool creation due to fragmentation.</li>
- * <li>{@code shaderUniformBufferArrayNonUniformIndexingNative} &ndash; a boolean value indicating whether uniform buffer descriptors natively support nonuniform indexing. If this is {@link VK10#VK_FALSE FALSE}, then a single dynamic instance of an instruction that nonuniformly indexes an array of uniform buffers <b>may</b> execute multiple times in order to access all the descriptors.</li>
- * <li>{@code shaderSampledImageArrayNonUniformIndexingNative} &ndash; a boolean value indicating whether sampler and image descriptors natively support nonuniform indexing. If this is {@link VK10#VK_FALSE FALSE}, then a single dynamic instance of an instruction that nonuniformly indexes an array of samplers or images <b>may</b> execute multiple times in order to access all the descriptors.</li>
- * <li>{@code shaderStorageBufferArrayNonUniformIndexingNative} &ndash; a boolean value indicating whether storage buffer descriptors natively support nonuniform indexing. If this is {@link VK10#VK_FALSE FALSE}, then a single dynamic instance of an instruction that nonuniformly indexes an array of storage buffers <b>may</b> execute multiple times in order to access all the descriptors.</li>
- * <li>{@code shaderStorageImageArrayNonUniformIndexingNative} &ndash; a boolean value indicating whether storage image descriptors natively support nonuniform indexing. If this is {@link VK10#VK_FALSE FALSE}, then a single dynamic instance of an instruction that nonuniformly indexes an array of storage images <b>may</b> execute multiple times in order to access all the descriptors.</li>
- * <li>{@code shaderInputAttachmentArrayNonUniformIndexingNative} &ndash; a boolean value indicating whether input attachment descriptors natively support nonuniform indexing. If this is {@link VK10#VK_FALSE FALSE}, then a single dynamic instance of an instruction that nonuniformly indexes an array of input attachments <b>may</b> execute multiple times in order to access all the descriptors.</li>
- * <li>{@code robustBufferAccessUpdateAfterBind} &ndash; a boolean value indicating whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> <b>can</b> be enabled in a device simultaneously with {@code descriptorBindingUniformBufferUpdateAfterBind}, {@code descriptorBindingStorageBufferUpdateAfterBind}, {@code descriptorBindingUniformTexelBufferUpdateAfterBind}, and/or {@code descriptorBindingStorageTexelBufferUpdateAfterBind}. If this is {@link VK10#VK_FALSE FALSE}, then either {@code robustBufferAccess} <b>must</b> be disabled or all of these update-after-bind features <b>must</b> be disabled.</li>
- * <li>{@code quadDivergentImplicitLod} &ndash; a boolean value indicating whether implicit level of detail calculations for image operations have well-defined results when the image and/or sampler objects used for the instruction are not uniform within a quad. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-derivative-image-operations">Derivative Image Operations</a>.</li>
- * <li>{@code maxPerStageDescriptorUpdateAfterBindSamplers} &ndash; similar to {@code maxPerStageDescriptorSamplers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxPerStageDescriptorUpdateAfterBindUniformBuffers} &ndash; similar to {@code maxPerStageDescriptorUniformBuffers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxPerStageDescriptorUpdateAfterBindStorageBuffers} &ndash; similar to {@code maxPerStageDescriptorStorageBuffers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxPerStageDescriptorUpdateAfterBindSampledImages} &ndash; similar to {@code maxPerStageDescriptorSampledImages} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxPerStageDescriptorUpdateAfterBindStorageImages} &ndash; similar to {@code maxPerStageDescriptorStorageImages} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxPerStageDescriptorUpdateAfterBindInputAttachments} &ndash; similar to {@code maxPerStageDescriptorInputAttachments} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxPerStageUpdateAfterBindResources} &ndash; similar to {@code maxPerStageResources} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxDescriptorSetUpdateAfterBindSamplers} &ndash; similar to {@code maxDescriptorSetSamplers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxDescriptorSetUpdateAfterBindUniformBuffers} &ndash; similar to {@code maxDescriptorSetUniformBuffers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxDescriptorSetUpdateAfterBindUniformBuffersDynamic} &ndash; similar to {@code maxDescriptorSetUniformBuffersDynamic} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. While an application <b>can</b> allocate dynamic uniform buffer descriptors from a pool created with the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT}, bindings for these descriptors <b>must</b> not be present in any descriptor set layout that includes bindings created with {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}.</li>
- * <li>{@code maxDescriptorSetUpdateAfterBindStorageBuffers} &ndash; similar to {@code maxDescriptorSetStorageBuffers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxDescriptorSetUpdateAfterBindStorageBuffersDynamic} &ndash; similar to {@code maxDescriptorSetStorageBuffersDynamic} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. While an application <b>can</b> allocate dynamic storage buffer descriptors from a pool created with the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT}, bindings for these descriptors <b>must</b> not be present in any descriptor set layout that includes bindings created with {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}.</li>
- * <li>{@code maxDescriptorSetUpdateAfterBindSampledImages} &ndash; similar to {@code maxDescriptorSetSampledImages} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxDescriptorSetUpdateAfterBindStorageImages} &ndash; similar to {@code maxDescriptorSetStorageImages} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxDescriptorSetUpdateAfterBindInputAttachments} &ndash; similar to {@code maxDescriptorSetInputAttachments} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code supportedDepthResolveModes} &ndash; a bitmask of {@code VkResolveModeFlagBits} indicating the set of supported depth resolve modes. {@link VK12#VK_RESOLVE_MODE_SAMPLE_ZERO_BIT RESOLVE_MODE_SAMPLE_ZERO_BIT} <b>must</b> be included in the set but implementations <b>may</b> support additional modes.</li>
- * <li>{@code supportedStencilResolveModes} &ndash; a bitmask of {@code VkResolveModeFlagBits} indicating the set of supported stencil resolve modes. {@link VK12#VK_RESOLVE_MODE_SAMPLE_ZERO_BIT RESOLVE_MODE_SAMPLE_ZERO_BIT} <b>must</b> be included in the set but implementations <b>may</b> support additional modes. {@link VK12#VK_RESOLVE_MODE_AVERAGE_BIT RESOLVE_MODE_AVERAGE_BIT} <b>must</b> not be included in the set.</li>
- * <li>{@code independentResolveNone} &ndash; {@link VK10#VK_TRUE TRUE} if the implementation supports setting the depth and stencil resolve modes to different values when one of those modes is {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}. Otherwise the implementation only supports setting both modes to the same value.</li>
- * <li>{@code independentResolve} &ndash; {@link VK10#VK_TRUE TRUE} if the implementation supports all combinations of the supported depth and stencil resolve modes, including setting either depth or stencil resolve mode to {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}. An implementation that supports {@code independentResolve} <b>must</b> also support {@code independentResolveNone}.</li>
- * <li>{@code filterMinmaxSingleComponentFormats} &ndash; a boolean value indicating whether a minimum set of required formats support min/max filtering.</li>
- * <li>{@code filterMinmaxImageComponentMapping} &ndash; a boolean value indicating whether the implementation supports non-identity component mapping of the image when doing min/max filtering.</li>
- * <li>{@code maxTimelineSemaphoreValueDifference} &ndash; indicates the maximum difference allowed by the implementation between the current value of a timeline semaphore and any pending signal or wait operations.</li>
- * <li>{@code framebufferIntegerColorSampleCounts} &ndash; a bitmask of {@code VkSampleCountFlagBits} indicating the color sample counts that are supported for all framebuffer color attachments with integer formats.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceVulkan12Properties {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkDriverId driverID;
- *     char driverName[VK_MAX_DRIVER_NAME_SIZE];
- *     char driverInfo[VK_MAX_DRIVER_INFO_SIZE];
- *     {@link VkConformanceVersion VkConformanceVersion} conformanceVersion;
- *     VkShaderFloatControlsIndependence denormBehaviorIndependence;
- *     VkShaderFloatControlsIndependence roundingModeIndependence;
- *     VkBool32 shaderSignedZeroInfNanPreserveFloat16;
- *     VkBool32 shaderSignedZeroInfNanPreserveFloat32;
- *     VkBool32 shaderSignedZeroInfNanPreserveFloat64;
- *     VkBool32 shaderDenormPreserveFloat16;
- *     VkBool32 shaderDenormPreserveFloat32;
- *     VkBool32 shaderDenormPreserveFloat64;
- *     VkBool32 shaderDenormFlushToZeroFloat16;
- *     VkBool32 shaderDenormFlushToZeroFloat32;
- *     VkBool32 shaderDenormFlushToZeroFloat64;
- *     VkBool32 shaderRoundingModeRTEFloat16;
- *     VkBool32 shaderRoundingModeRTEFloat32;
- *     VkBool32 shaderRoundingModeRTEFloat64;
- *     VkBool32 shaderRoundingModeRTZFloat16;
- *     VkBool32 shaderRoundingModeRTZFloat32;
- *     VkBool32 shaderRoundingModeRTZFloat64;
- *     uint32_t maxUpdateAfterBindDescriptorsInAllPools;
- *     VkBool32 shaderUniformBufferArrayNonUniformIndexingNative;
- *     VkBool32 shaderSampledImageArrayNonUniformIndexingNative;
- *     VkBool32 shaderStorageBufferArrayNonUniformIndexingNative;
- *     VkBool32 shaderStorageImageArrayNonUniformIndexingNative;
- *     VkBool32 shaderInputAttachmentArrayNonUniformIndexingNative;
- *     VkBool32 robustBufferAccessUpdateAfterBind;
- *     VkBool32 quadDivergentImplicitLod;
- *     uint32_t maxPerStageDescriptorUpdateAfterBindSamplers;
- *     uint32_t maxPerStageDescriptorUpdateAfterBindUniformBuffers;
- *     uint32_t maxPerStageDescriptorUpdateAfterBindStorageBuffers;
- *     uint32_t maxPerStageDescriptorUpdateAfterBindSampledImages;
- *     uint32_t maxPerStageDescriptorUpdateAfterBindStorageImages;
- *     uint32_t maxPerStageDescriptorUpdateAfterBindInputAttachments;
- *     uint32_t maxPerStageUpdateAfterBindResources;
- *     uint32_t maxDescriptorSetUpdateAfterBindSamplers;
- *     uint32_t maxDescriptorSetUpdateAfterBindUniformBuffers;
- *     uint32_t maxDescriptorSetUpdateAfterBindUniformBuffersDynamic;
- *     uint32_t maxDescriptorSetUpdateAfterBindStorageBuffers;
- *     uint32_t maxDescriptorSetUpdateAfterBindStorageBuffersDynamic;
- *     uint32_t maxDescriptorSetUpdateAfterBindSampledImages;
- *     uint32_t maxDescriptorSetUpdateAfterBindStorageImages;
- *     uint32_t maxDescriptorSetUpdateAfterBindInputAttachments;
- *     VkResolveModeFlags supportedDepthResolveModes;
- *     VkResolveModeFlags supportedStencilResolveModes;
- *     VkBool32 independentResolveNone;
- *     VkBool32 independentResolve;
- *     VkBool32 filterMinmaxSingleComponentFormats;
- *     VkBool32 filterMinmaxImageComponentMapping;
- *     uint64_t maxTimelineSemaphoreValueDifference;
- *     VkSampleCountFlags framebufferIntegerColorSampleCounts;
+ *     VkDriverId {@link #driverID};
+ *     char {@link #driverName}[VK_MAX_DRIVER_NAME_SIZE];
+ *     char {@link #driverInfo}[VK_MAX_DRIVER_INFO_SIZE];
+ *     {@link VkConformanceVersion VkConformanceVersion} {@link #conformanceVersion};
+ *     VkShaderFloatControlsIndependence {@link #denormBehaviorIndependence};
+ *     VkShaderFloatControlsIndependence {@link #roundingModeIndependence};
+ *     VkBool32 {@link #shaderSignedZeroInfNanPreserveFloat16};
+ *     VkBool32 {@link #shaderSignedZeroInfNanPreserveFloat32};
+ *     VkBool32 {@link #shaderSignedZeroInfNanPreserveFloat64};
+ *     VkBool32 {@link #shaderDenormPreserveFloat16};
+ *     VkBool32 {@link #shaderDenormPreserveFloat32};
+ *     VkBool32 {@link #shaderDenormPreserveFloat64};
+ *     VkBool32 {@link #shaderDenormFlushToZeroFloat16};
+ *     VkBool32 {@link #shaderDenormFlushToZeroFloat32};
+ *     VkBool32 {@link #shaderDenormFlushToZeroFloat64};
+ *     VkBool32 {@link #shaderRoundingModeRTEFloat16};
+ *     VkBool32 {@link #shaderRoundingModeRTEFloat32};
+ *     VkBool32 {@link #shaderRoundingModeRTEFloat64};
+ *     VkBool32 {@link #shaderRoundingModeRTZFloat16};
+ *     VkBool32 {@link #shaderRoundingModeRTZFloat32};
+ *     VkBool32 {@link #shaderRoundingModeRTZFloat64};
+ *     uint32_t {@link #maxUpdateAfterBindDescriptorsInAllPools};
+ *     VkBool32 {@link #shaderUniformBufferArrayNonUniformIndexingNative};
+ *     VkBool32 {@link #shaderSampledImageArrayNonUniformIndexingNative};
+ *     VkBool32 {@link #shaderStorageBufferArrayNonUniformIndexingNative};
+ *     VkBool32 {@link #shaderStorageImageArrayNonUniformIndexingNative};
+ *     VkBool32 {@link #shaderInputAttachmentArrayNonUniformIndexingNative};
+ *     VkBool32 {@link #robustBufferAccessUpdateAfterBind};
+ *     VkBool32 {@link #quadDivergentImplicitLod};
+ *     uint32_t {@link #maxPerStageDescriptorUpdateAfterBindSamplers};
+ *     uint32_t {@link #maxPerStageDescriptorUpdateAfterBindUniformBuffers};
+ *     uint32_t {@link #maxPerStageDescriptorUpdateAfterBindStorageBuffers};
+ *     uint32_t {@link #maxPerStageDescriptorUpdateAfterBindSampledImages};
+ *     uint32_t {@link #maxPerStageDescriptorUpdateAfterBindStorageImages};
+ *     uint32_t {@link #maxPerStageDescriptorUpdateAfterBindInputAttachments};
+ *     uint32_t {@link #maxPerStageUpdateAfterBindResources};
+ *     uint32_t {@link #maxDescriptorSetUpdateAfterBindSamplers};
+ *     uint32_t {@link #maxDescriptorSetUpdateAfterBindUniformBuffers};
+ *     uint32_t {@link #maxDescriptorSetUpdateAfterBindUniformBuffersDynamic};
+ *     uint32_t {@link #maxDescriptorSetUpdateAfterBindStorageBuffers};
+ *     uint32_t {@link #maxDescriptorSetUpdateAfterBindStorageBuffersDynamic};
+ *     uint32_t {@link #maxDescriptorSetUpdateAfterBindSampledImages};
+ *     uint32_t {@link #maxDescriptorSetUpdateAfterBindStorageImages};
+ *     uint32_t {@link #maxDescriptorSetUpdateAfterBindInputAttachments};
+ *     VkResolveModeFlags {@link #supportedDepthResolveModes};
+ *     VkResolveModeFlags {@link #supportedStencilResolveModes};
+ *     VkBool32 {@link #independentResolveNone};
+ *     VkBool32 {@link #independentResolve};
+ *     VkBool32 {@link #filterMinmaxSingleComponentFormats};
+ *     VkBool32 {@link #filterMinmaxImageComponentMapping};
+ *     uint64_t {@link #maxTimelineSemaphoreValueDifference};
+ *     VkSampleCountFlags {@link #framebufferIntegerColorSampleCounts};
  * }</code></pre>
  */
 public class VkPhysicalDeviceVulkan12Properties extends Struct implements NativeResource {
@@ -346,171 +289,171 @@ public class VkPhysicalDeviceVulkan12Properties extends Struct implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code driverID} field. */
+    /** a unique identifier for the driver of the physical device. */
     @NativeType("VkDriverId")
     public int driverID() { return ndriverID(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code driverName} field. */
+    /** an array of {@link VK10#VK_MAX_DRIVER_NAME_SIZE MAX_DRIVER_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the driver. */
     @NativeType("char[VK_MAX_DRIVER_NAME_SIZE]")
     public ByteBuffer driverName() { return ndriverName(address()); }
-    /** Decodes the null-terminated string stored in the {@code driverName} field. */
+    /** an array of {@link VK10#VK_MAX_DRIVER_NAME_SIZE MAX_DRIVER_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the driver. */
     @NativeType("char[VK_MAX_DRIVER_NAME_SIZE]")
     public String driverNameString() { return ndriverNameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code driverInfo} field. */
+    /** an array of {@link VK10#VK_MAX_DRIVER_INFO_SIZE MAX_DRIVER_INFO_SIZE} {@code char} containing a null-terminated UTF-8 string with additional information about the driver. */
     @NativeType("char[VK_MAX_DRIVER_INFO_SIZE]")
     public ByteBuffer driverInfo() { return ndriverInfo(address()); }
-    /** Decodes the null-terminated string stored in the {@code driverInfo} field. */
+    /** an array of {@link VK10#VK_MAX_DRIVER_INFO_SIZE MAX_DRIVER_INFO_SIZE} {@code char} containing a null-terminated UTF-8 string with additional information about the driver. */
     @NativeType("char[VK_MAX_DRIVER_INFO_SIZE]")
     public String driverInfoString() { return ndriverInfoString(address()); }
-    /** Returns a {@link VkConformanceVersion} view of the {@code conformanceVersion} field. */
+    /** the version of the Vulkan conformance test this driver is conformant against (see {@link VkConformanceVersion}). */
     public VkConformanceVersion conformanceVersion() { return nconformanceVersion(address()); }
-    /** Returns the value of the {@code denormBehaviorIndependence} field. */
+    /** a {@code VkShaderFloatControlsIndependence} value indicating whether, and how, denorm behavior can be set independently for different bit widths. */
     @NativeType("VkShaderFloatControlsIndependence")
     public int denormBehaviorIndependence() { return ndenormBehaviorIndependence(address()); }
-    /** Returns the value of the {@code roundingModeIndependence} field. */
+    /** a {@code VkShaderFloatControlsIndependence} value indicating whether, and how, rounding modes can be set independently for different bit widths. */
     @NativeType("VkShaderFloatControlsIndependence")
     public int roundingModeIndependence() { return nroundingModeIndependence(address()); }
-    /** Returns the value of the {@code shaderSignedZeroInfNanPreserveFloat16} field. */
+    /** a boolean value indicating whether sign of a zero, <code>Nan</code>s and &plusmn;&infin; <b>can</b> be preserved in 16-bit floating-point computations. It also indicates whether the {@code SignedZeroInfNanPreserve} execution mode <b>can</b> be used for 16-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderSignedZeroInfNanPreserveFloat16() { return nshaderSignedZeroInfNanPreserveFloat16(address()) != 0; }
-    /** Returns the value of the {@code shaderSignedZeroInfNanPreserveFloat32} field. */
+    /** a boolean value indicating whether sign of a zero, <code>Nan</code>s and &plusmn;&infin; <b>can</b> be preserved in 32-bit floating-point computations. It also indicates whether the {@code SignedZeroInfNanPreserve} execution mode <b>can</b> be used for 32-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderSignedZeroInfNanPreserveFloat32() { return nshaderSignedZeroInfNanPreserveFloat32(address()) != 0; }
-    /** Returns the value of the {@code shaderSignedZeroInfNanPreserveFloat64} field. */
+    /** a boolean value indicating whether sign of a zero, <code>Nan</code>s and &plusmn;&infin; <b>can</b> be preserved in 64-bit floating-point computations. It also indicates whether the {@code SignedZeroInfNanPreserve} execution mode <b>can</b> be used for 64-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderSignedZeroInfNanPreserveFloat64() { return nshaderSignedZeroInfNanPreserveFloat64(address()) != 0; }
-    /** Returns the value of the {@code shaderDenormPreserveFloat16} field. */
+    /** a boolean value indicating whether denormals <b>can</b> be preserved in 16-bit floating-point computations. It also indicates whether the {@code DenormPreserve} execution mode <b>can</b> be used for 16-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderDenormPreserveFloat16() { return nshaderDenormPreserveFloat16(address()) != 0; }
-    /** Returns the value of the {@code shaderDenormPreserveFloat32} field. */
+    /** a boolean value indicating whether denormals <b>can</b> be preserved in 32-bit floating-point computations. It also indicates whether the {@code DenormPreserve} execution mode <b>can</b> be used for 32-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderDenormPreserveFloat32() { return nshaderDenormPreserveFloat32(address()) != 0; }
-    /** Returns the value of the {@code shaderDenormPreserveFloat64} field. */
+    /** a boolean value indicating whether denormals <b>can</b> be preserved in 64-bit floating-point computations. It also indicates whether the {@code DenormPreserve} execution mode <b>can</b> be used for 64-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderDenormPreserveFloat64() { return nshaderDenormPreserveFloat64(address()) != 0; }
-    /** Returns the value of the {@code shaderDenormFlushToZeroFloat16} field. */
+    /** a boolean value indicating whether denormals <b>can</b> be flushed to zero in 16-bit floating-point computations. It also indicates whether the {@code DenormFlushToZero} execution mode <b>can</b> be used for 16-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderDenormFlushToZeroFloat16() { return nshaderDenormFlushToZeroFloat16(address()) != 0; }
-    /** Returns the value of the {@code shaderDenormFlushToZeroFloat32} field. */
+    /** a boolean value indicating whether denormals <b>can</b> be flushed to zero in 32-bit floating-point computations. It also indicates whether the {@code DenormFlushToZero} execution mode <b>can</b> be used for 32-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderDenormFlushToZeroFloat32() { return nshaderDenormFlushToZeroFloat32(address()) != 0; }
-    /** Returns the value of the {@code shaderDenormFlushToZeroFloat64} field. */
+    /** a boolean value indicating whether denormals <b>can</b> be flushed to zero in 64-bit floating-point computations. It also indicates whether the {@code DenormFlushToZero} execution mode <b>can</b> be used for 64-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderDenormFlushToZeroFloat64() { return nshaderDenormFlushToZeroFloat64(address()) != 0; }
-    /** Returns the value of the {@code shaderRoundingModeRTEFloat16} field. */
+    /** a boolean value indicating whether an implementation supports the round-to-nearest-even rounding mode for 16-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTE} execution mode <b>can</b> be used for 16-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderRoundingModeRTEFloat16() { return nshaderRoundingModeRTEFloat16(address()) != 0; }
-    /** Returns the value of the {@code shaderRoundingModeRTEFloat32} field. */
+    /** a boolean value indicating whether an implementation supports the round-to-nearest-even rounding mode for 32-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTE} execution mode <b>can</b> be used for 32-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderRoundingModeRTEFloat32() { return nshaderRoundingModeRTEFloat32(address()) != 0; }
-    /** Returns the value of the {@code shaderRoundingModeRTEFloat64} field. */
+    /** a boolean value indicating whether an implementation supports the round-to-nearest-even rounding mode for 64-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTE} execution mode <b>can</b> be used for 64-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderRoundingModeRTEFloat64() { return nshaderRoundingModeRTEFloat64(address()) != 0; }
-    /** Returns the value of the {@code shaderRoundingModeRTZFloat16} field. */
+    /** a boolean value indicating whether an implementation supports the round-towards-zero rounding mode for 16-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTZ} execution mode <b>can</b> be used for 16-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderRoundingModeRTZFloat16() { return nshaderRoundingModeRTZFloat16(address()) != 0; }
-    /** Returns the value of the {@code shaderRoundingModeRTZFloat32} field. */
+    /** a boolean value indicating whether an implementation supports the round-towards-zero rounding mode for 32-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTZ} execution mode <b>can</b> be used for 32-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderRoundingModeRTZFloat32() { return nshaderRoundingModeRTZFloat32(address()) != 0; }
-    /** Returns the value of the {@code shaderRoundingModeRTZFloat64} field. */
+    /** a boolean value indicating whether an implementation supports the round-towards-zero rounding mode for 64-bit floating-point arithmetic and conversion instructions. It also indicates whether the {@code RoundingModeRTZ} execution mode <b>can</b> be used for 64-bit floating-point types. */
     @NativeType("VkBool32")
     public boolean shaderRoundingModeRTZFloat64() { return nshaderRoundingModeRTZFloat64(address()) != 0; }
-    /** Returns the value of the {@code maxUpdateAfterBindDescriptorsInAllPools} field. */
+    /** the maximum number of descriptors (summed over all descriptor types) that <b>can</b> be created across all pools that are created with the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} bit set. Pool creation <b>may</b> fail when this limit is exceeded, or when the space this limit represents is unable to satisfy a pool creation due to fragmentation. */
     @NativeType("uint32_t")
     public int maxUpdateAfterBindDescriptorsInAllPools() { return nmaxUpdateAfterBindDescriptorsInAllPools(address()); }
-    /** Returns the value of the {@code shaderUniformBufferArrayNonUniformIndexingNative} field. */
+    /** a boolean value indicating whether uniform buffer descriptors natively support nonuniform indexing. If this is {@link VK10#VK_FALSE FALSE}, then a single dynamic instance of an instruction that nonuniformly indexes an array of uniform buffers <b>may</b> execute multiple times in order to access all the descriptors. */
     @NativeType("VkBool32")
     public boolean shaderUniformBufferArrayNonUniformIndexingNative() { return nshaderUniformBufferArrayNonUniformIndexingNative(address()) != 0; }
-    /** Returns the value of the {@code shaderSampledImageArrayNonUniformIndexingNative} field. */
+    /** a boolean value indicating whether sampler and image descriptors natively support nonuniform indexing. If this is {@link VK10#VK_FALSE FALSE}, then a single dynamic instance of an instruction that nonuniformly indexes an array of samplers or images <b>may</b> execute multiple times in order to access all the descriptors. */
     @NativeType("VkBool32")
     public boolean shaderSampledImageArrayNonUniformIndexingNative() { return nshaderSampledImageArrayNonUniformIndexingNative(address()) != 0; }
-    /** Returns the value of the {@code shaderStorageBufferArrayNonUniformIndexingNative} field. */
+    /** a boolean value indicating whether storage buffer descriptors natively support nonuniform indexing. If this is {@link VK10#VK_FALSE FALSE}, then a single dynamic instance of an instruction that nonuniformly indexes an array of storage buffers <b>may</b> execute multiple times in order to access all the descriptors. */
     @NativeType("VkBool32")
     public boolean shaderStorageBufferArrayNonUniformIndexingNative() { return nshaderStorageBufferArrayNonUniformIndexingNative(address()) != 0; }
-    /** Returns the value of the {@code shaderStorageImageArrayNonUniformIndexingNative} field. */
+    /** a boolean value indicating whether storage image descriptors natively support nonuniform indexing. If this is {@link VK10#VK_FALSE FALSE}, then a single dynamic instance of an instruction that nonuniformly indexes an array of storage images <b>may</b> execute multiple times in order to access all the descriptors. */
     @NativeType("VkBool32")
     public boolean shaderStorageImageArrayNonUniformIndexingNative() { return nshaderStorageImageArrayNonUniformIndexingNative(address()) != 0; }
-    /** Returns the value of the {@code shaderInputAttachmentArrayNonUniformIndexingNative} field. */
+    /** a boolean value indicating whether input attachment descriptors natively support nonuniform indexing. If this is {@link VK10#VK_FALSE FALSE}, then a single dynamic instance of an instruction that nonuniformly indexes an array of input attachments <b>may</b> execute multiple times in order to access all the descriptors. */
     @NativeType("VkBool32")
     public boolean shaderInputAttachmentArrayNonUniformIndexingNative() { return nshaderInputAttachmentArrayNonUniformIndexingNative(address()) != 0; }
-    /** Returns the value of the {@code robustBufferAccessUpdateAfterBind} field. */
+    /** a boolean value indicating whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> <b>can</b> be enabled in a device simultaneously with {@code descriptorBindingUniformBufferUpdateAfterBind}, {@code descriptorBindingStorageBufferUpdateAfterBind}, {@code descriptorBindingUniformTexelBufferUpdateAfterBind}, and/or {@code descriptorBindingStorageTexelBufferUpdateAfterBind}. If this is {@link VK10#VK_FALSE FALSE}, then either {@code robustBufferAccess} <b>must</b> be disabled or all of these update-after-bind features <b>must</b> be disabled. */
     @NativeType("VkBool32")
     public boolean robustBufferAccessUpdateAfterBind() { return nrobustBufferAccessUpdateAfterBind(address()) != 0; }
-    /** Returns the value of the {@code quadDivergentImplicitLod} field. */
+    /** a boolean value indicating whether implicit level of detail calculations for image operations have well-defined results when the image and/or sampler objects used for the instruction are not uniform within a quad. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-derivative-image-operations">Derivative Image Operations</a>. */
     @NativeType("VkBool32")
     public boolean quadDivergentImplicitLod() { return nquadDivergentImplicitLod(address()) != 0; }
-    /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindSamplers} field. */
+    /** similar to {@code maxPerStageDescriptorSamplers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxPerStageDescriptorUpdateAfterBindSamplers() { return nmaxPerStageDescriptorUpdateAfterBindSamplers(address()); }
-    /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindUniformBuffers} field. */
+    /** similar to {@code maxPerStageDescriptorUniformBuffers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxPerStageDescriptorUpdateAfterBindUniformBuffers() { return nmaxPerStageDescriptorUpdateAfterBindUniformBuffers(address()); }
-    /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindStorageBuffers} field. */
+    /** similar to {@code maxPerStageDescriptorStorageBuffers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxPerStageDescriptorUpdateAfterBindStorageBuffers() { return nmaxPerStageDescriptorUpdateAfterBindStorageBuffers(address()); }
-    /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindSampledImages} field. */
+    /** similar to {@code maxPerStageDescriptorSampledImages} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxPerStageDescriptorUpdateAfterBindSampledImages() { return nmaxPerStageDescriptorUpdateAfterBindSampledImages(address()); }
-    /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindStorageImages} field. */
+    /** similar to {@code maxPerStageDescriptorStorageImages} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxPerStageDescriptorUpdateAfterBindStorageImages() { return nmaxPerStageDescriptorUpdateAfterBindStorageImages(address()); }
-    /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindInputAttachments} field. */
+    /** similar to {@code maxPerStageDescriptorInputAttachments} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxPerStageDescriptorUpdateAfterBindInputAttachments() { return nmaxPerStageDescriptorUpdateAfterBindInputAttachments(address()); }
-    /** Returns the value of the {@code maxPerStageUpdateAfterBindResources} field. */
+    /** similar to {@code maxPerStageResources} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxPerStageUpdateAfterBindResources() { return nmaxPerStageUpdateAfterBindResources(address()); }
-    /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindSamplers} field. */
+    /** similar to {@code maxDescriptorSetSamplers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxDescriptorSetUpdateAfterBindSamplers() { return nmaxDescriptorSetUpdateAfterBindSamplers(address()); }
-    /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindUniformBuffers} field. */
+    /** similar to {@code maxDescriptorSetUniformBuffers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxDescriptorSetUpdateAfterBindUniformBuffers() { return nmaxDescriptorSetUpdateAfterBindUniformBuffers(address()); }
-    /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindUniformBuffersDynamic} field. */
+    /** similar to {@code maxDescriptorSetUniformBuffersDynamic} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. While an application <b>can</b> allocate dynamic uniform buffer descriptors from a pool created with the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT}, bindings for these descriptors <b>must</b> not be present in any descriptor set layout that includes bindings created with {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}. */
     @NativeType("uint32_t")
     public int maxDescriptorSetUpdateAfterBindUniformBuffersDynamic() { return nmaxDescriptorSetUpdateAfterBindUniformBuffersDynamic(address()); }
-    /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindStorageBuffers} field. */
+    /** similar to {@code maxDescriptorSetStorageBuffers} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxDescriptorSetUpdateAfterBindStorageBuffers() { return nmaxDescriptorSetUpdateAfterBindStorageBuffers(address()); }
-    /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindStorageBuffersDynamic} field. */
+    /** similar to {@code maxDescriptorSetStorageBuffersDynamic} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. While an application <b>can</b> allocate dynamic storage buffer descriptors from a pool created with the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT}, bindings for these descriptors <b>must</b> not be present in any descriptor set layout that includes bindings created with {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}. */
     @NativeType("uint32_t")
     public int maxDescriptorSetUpdateAfterBindStorageBuffersDynamic() { return nmaxDescriptorSetUpdateAfterBindStorageBuffersDynamic(address()); }
-    /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindSampledImages} field. */
+    /** similar to {@code maxDescriptorSetSampledImages} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxDescriptorSetUpdateAfterBindSampledImages() { return nmaxDescriptorSetUpdateAfterBindSampledImages(address()); }
-    /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindStorageImages} field. */
+    /** similar to {@code maxDescriptorSetStorageImages} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxDescriptorSetUpdateAfterBindStorageImages() { return nmaxDescriptorSetUpdateAfterBindStorageImages(address()); }
-    /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindInputAttachments} field. */
+    /** similar to {@code maxDescriptorSetInputAttachments} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxDescriptorSetUpdateAfterBindInputAttachments() { return nmaxDescriptorSetUpdateAfterBindInputAttachments(address()); }
-    /** Returns the value of the {@code supportedDepthResolveModes} field. */
+    /** a bitmask of {@code VkResolveModeFlagBits} indicating the set of supported depth resolve modes. {@link VK12#VK_RESOLVE_MODE_SAMPLE_ZERO_BIT RESOLVE_MODE_SAMPLE_ZERO_BIT} <b>must</b> be included in the set but implementations <b>may</b> support additional modes. */
     @NativeType("VkResolveModeFlags")
     public int supportedDepthResolveModes() { return nsupportedDepthResolveModes(address()); }
-    /** Returns the value of the {@code supportedStencilResolveModes} field. */
+    /** a bitmask of {@code VkResolveModeFlagBits} indicating the set of supported stencil resolve modes. {@link VK12#VK_RESOLVE_MODE_SAMPLE_ZERO_BIT RESOLVE_MODE_SAMPLE_ZERO_BIT} <b>must</b> be included in the set but implementations <b>may</b> support additional modes. {@link VK12#VK_RESOLVE_MODE_AVERAGE_BIT RESOLVE_MODE_AVERAGE_BIT} <b>must</b> not be included in the set. */
     @NativeType("VkResolveModeFlags")
     public int supportedStencilResolveModes() { return nsupportedStencilResolveModes(address()); }
-    /** Returns the value of the {@code independentResolveNone} field. */
+    /** {@link VK10#VK_TRUE TRUE} if the implementation supports setting the depth and stencil resolve modes to different values when one of those modes is {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}. Otherwise the implementation only supports setting both modes to the same value. */
     @NativeType("VkBool32")
     public boolean independentResolveNone() { return nindependentResolveNone(address()) != 0; }
-    /** Returns the value of the {@code independentResolve} field. */
+    /** {@link VK10#VK_TRUE TRUE} if the implementation supports all combinations of the supported depth and stencil resolve modes, including setting either depth or stencil resolve mode to {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}. An implementation that supports {@code independentResolve} <b>must</b> also support {@code independentResolveNone}. */
     @NativeType("VkBool32")
     public boolean independentResolve() { return nindependentResolve(address()) != 0; }
-    /** Returns the value of the {@code filterMinmaxSingleComponentFormats} field. */
+    /** a boolean value indicating whether a minimum set of required formats support min/max filtering. */
     @NativeType("VkBool32")
     public boolean filterMinmaxSingleComponentFormats() { return nfilterMinmaxSingleComponentFormats(address()) != 0; }
-    /** Returns the value of the {@code filterMinmaxImageComponentMapping} field. */
+    /** a boolean value indicating whether the implementation supports non-identity component mapping of the image when doing min/max filtering. */
     @NativeType("VkBool32")
     public boolean filterMinmaxImageComponentMapping() { return nfilterMinmaxImageComponentMapping(address()) != 0; }
-    /** Returns the value of the {@code maxTimelineSemaphoreValueDifference} field. */
+    /** indicates the maximum difference allowed by the implementation between the current value of a timeline semaphore and any pending signal or wait operations. */
     @NativeType("uint64_t")
     public long maxTimelineSemaphoreValueDifference() { return nmaxTimelineSemaphoreValueDifference(address()); }
-    /** Returns the value of the {@code framebufferIntegerColorSampleCounts} field. */
+    /** a bitmask of {@code VkSampleCountFlagBits} indicating the color sample counts that are supported for all framebuffer color attachments with integer formats. */
     @NativeType("VkSampleCountFlags")
     public int framebufferIntegerColorSampleCounts() { return nframebufferIntegerColorSampleCounts(address()); }
 
@@ -841,171 +784,171 @@ public class VkPhysicalDeviceVulkan12Properties extends Struct implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceVulkan12Properties.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceVulkan12Properties.npNext(address()); }
-        /** Returns the value of the {@code driverID} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#driverID} field. */
         @NativeType("VkDriverId")
         public int driverID() { return VkPhysicalDeviceVulkan12Properties.ndriverID(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code driverName} field. */
+        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceVulkan12Properties#driverName} field. */
         @NativeType("char[VK_MAX_DRIVER_NAME_SIZE]")
         public ByteBuffer driverName() { return VkPhysicalDeviceVulkan12Properties.ndriverName(address()); }
-        /** Decodes the null-terminated string stored in the {@code driverName} field. */
+        /** @return the null-terminated string stored in the {@link VkPhysicalDeviceVulkan12Properties#driverName} field. */
         @NativeType("char[VK_MAX_DRIVER_NAME_SIZE]")
         public String driverNameString() { return VkPhysicalDeviceVulkan12Properties.ndriverNameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code driverInfo} field. */
+        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceVulkan12Properties#driverInfo} field. */
         @NativeType("char[VK_MAX_DRIVER_INFO_SIZE]")
         public ByteBuffer driverInfo() { return VkPhysicalDeviceVulkan12Properties.ndriverInfo(address()); }
-        /** Decodes the null-terminated string stored in the {@code driverInfo} field. */
+        /** @return the null-terminated string stored in the {@link VkPhysicalDeviceVulkan12Properties#driverInfo} field. */
         @NativeType("char[VK_MAX_DRIVER_INFO_SIZE]")
         public String driverInfoString() { return VkPhysicalDeviceVulkan12Properties.ndriverInfoString(address()); }
-        /** Returns a {@link VkConformanceVersion} view of the {@code conformanceVersion} field. */
+        /** @return a {@link VkConformanceVersion} view of the {@link VkPhysicalDeviceVulkan12Properties#conformanceVersion} field. */
         public VkConformanceVersion conformanceVersion() { return VkPhysicalDeviceVulkan12Properties.nconformanceVersion(address()); }
-        /** Returns the value of the {@code denormBehaviorIndependence} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#denormBehaviorIndependence} field. */
         @NativeType("VkShaderFloatControlsIndependence")
         public int denormBehaviorIndependence() { return VkPhysicalDeviceVulkan12Properties.ndenormBehaviorIndependence(address()); }
-        /** Returns the value of the {@code roundingModeIndependence} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#roundingModeIndependence} field. */
         @NativeType("VkShaderFloatControlsIndependence")
         public int roundingModeIndependence() { return VkPhysicalDeviceVulkan12Properties.nroundingModeIndependence(address()); }
-        /** Returns the value of the {@code shaderSignedZeroInfNanPreserveFloat16} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderSignedZeroInfNanPreserveFloat16} field. */
         @NativeType("VkBool32")
         public boolean shaderSignedZeroInfNanPreserveFloat16() { return VkPhysicalDeviceVulkan12Properties.nshaderSignedZeroInfNanPreserveFloat16(address()) != 0; }
-        /** Returns the value of the {@code shaderSignedZeroInfNanPreserveFloat32} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderSignedZeroInfNanPreserveFloat32} field. */
         @NativeType("VkBool32")
         public boolean shaderSignedZeroInfNanPreserveFloat32() { return VkPhysicalDeviceVulkan12Properties.nshaderSignedZeroInfNanPreserveFloat32(address()) != 0; }
-        /** Returns the value of the {@code shaderSignedZeroInfNanPreserveFloat64} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderSignedZeroInfNanPreserveFloat64} field. */
         @NativeType("VkBool32")
         public boolean shaderSignedZeroInfNanPreserveFloat64() { return VkPhysicalDeviceVulkan12Properties.nshaderSignedZeroInfNanPreserveFloat64(address()) != 0; }
-        /** Returns the value of the {@code shaderDenormPreserveFloat16} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderDenormPreserveFloat16} field. */
         @NativeType("VkBool32")
         public boolean shaderDenormPreserveFloat16() { return VkPhysicalDeviceVulkan12Properties.nshaderDenormPreserveFloat16(address()) != 0; }
-        /** Returns the value of the {@code shaderDenormPreserveFloat32} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderDenormPreserveFloat32} field. */
         @NativeType("VkBool32")
         public boolean shaderDenormPreserveFloat32() { return VkPhysicalDeviceVulkan12Properties.nshaderDenormPreserveFloat32(address()) != 0; }
-        /** Returns the value of the {@code shaderDenormPreserveFloat64} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderDenormPreserveFloat64} field. */
         @NativeType("VkBool32")
         public boolean shaderDenormPreserveFloat64() { return VkPhysicalDeviceVulkan12Properties.nshaderDenormPreserveFloat64(address()) != 0; }
-        /** Returns the value of the {@code shaderDenormFlushToZeroFloat16} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderDenormFlushToZeroFloat16} field. */
         @NativeType("VkBool32")
         public boolean shaderDenormFlushToZeroFloat16() { return VkPhysicalDeviceVulkan12Properties.nshaderDenormFlushToZeroFloat16(address()) != 0; }
-        /** Returns the value of the {@code shaderDenormFlushToZeroFloat32} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderDenormFlushToZeroFloat32} field. */
         @NativeType("VkBool32")
         public boolean shaderDenormFlushToZeroFloat32() { return VkPhysicalDeviceVulkan12Properties.nshaderDenormFlushToZeroFloat32(address()) != 0; }
-        /** Returns the value of the {@code shaderDenormFlushToZeroFloat64} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderDenormFlushToZeroFloat64} field. */
         @NativeType("VkBool32")
         public boolean shaderDenormFlushToZeroFloat64() { return VkPhysicalDeviceVulkan12Properties.nshaderDenormFlushToZeroFloat64(address()) != 0; }
-        /** Returns the value of the {@code shaderRoundingModeRTEFloat16} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderRoundingModeRTEFloat16} field. */
         @NativeType("VkBool32")
         public boolean shaderRoundingModeRTEFloat16() { return VkPhysicalDeviceVulkan12Properties.nshaderRoundingModeRTEFloat16(address()) != 0; }
-        /** Returns the value of the {@code shaderRoundingModeRTEFloat32} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderRoundingModeRTEFloat32} field. */
         @NativeType("VkBool32")
         public boolean shaderRoundingModeRTEFloat32() { return VkPhysicalDeviceVulkan12Properties.nshaderRoundingModeRTEFloat32(address()) != 0; }
-        /** Returns the value of the {@code shaderRoundingModeRTEFloat64} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderRoundingModeRTEFloat64} field. */
         @NativeType("VkBool32")
         public boolean shaderRoundingModeRTEFloat64() { return VkPhysicalDeviceVulkan12Properties.nshaderRoundingModeRTEFloat64(address()) != 0; }
-        /** Returns the value of the {@code shaderRoundingModeRTZFloat16} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderRoundingModeRTZFloat16} field. */
         @NativeType("VkBool32")
         public boolean shaderRoundingModeRTZFloat16() { return VkPhysicalDeviceVulkan12Properties.nshaderRoundingModeRTZFloat16(address()) != 0; }
-        /** Returns the value of the {@code shaderRoundingModeRTZFloat32} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderRoundingModeRTZFloat32} field. */
         @NativeType("VkBool32")
         public boolean shaderRoundingModeRTZFloat32() { return VkPhysicalDeviceVulkan12Properties.nshaderRoundingModeRTZFloat32(address()) != 0; }
-        /** Returns the value of the {@code shaderRoundingModeRTZFloat64} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderRoundingModeRTZFloat64} field. */
         @NativeType("VkBool32")
         public boolean shaderRoundingModeRTZFloat64() { return VkPhysicalDeviceVulkan12Properties.nshaderRoundingModeRTZFloat64(address()) != 0; }
-        /** Returns the value of the {@code maxUpdateAfterBindDescriptorsInAllPools} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxUpdateAfterBindDescriptorsInAllPools} field. */
         @NativeType("uint32_t")
         public int maxUpdateAfterBindDescriptorsInAllPools() { return VkPhysicalDeviceVulkan12Properties.nmaxUpdateAfterBindDescriptorsInAllPools(address()); }
-        /** Returns the value of the {@code shaderUniformBufferArrayNonUniformIndexingNative} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderUniformBufferArrayNonUniformIndexingNative} field. */
         @NativeType("VkBool32")
         public boolean shaderUniformBufferArrayNonUniformIndexingNative() { return VkPhysicalDeviceVulkan12Properties.nshaderUniformBufferArrayNonUniformIndexingNative(address()) != 0; }
-        /** Returns the value of the {@code shaderSampledImageArrayNonUniformIndexingNative} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderSampledImageArrayNonUniformIndexingNative} field. */
         @NativeType("VkBool32")
         public boolean shaderSampledImageArrayNonUniformIndexingNative() { return VkPhysicalDeviceVulkan12Properties.nshaderSampledImageArrayNonUniformIndexingNative(address()) != 0; }
-        /** Returns the value of the {@code shaderStorageBufferArrayNonUniformIndexingNative} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderStorageBufferArrayNonUniformIndexingNative} field. */
         @NativeType("VkBool32")
         public boolean shaderStorageBufferArrayNonUniformIndexingNative() { return VkPhysicalDeviceVulkan12Properties.nshaderStorageBufferArrayNonUniformIndexingNative(address()) != 0; }
-        /** Returns the value of the {@code shaderStorageImageArrayNonUniformIndexingNative} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderStorageImageArrayNonUniformIndexingNative} field. */
         @NativeType("VkBool32")
         public boolean shaderStorageImageArrayNonUniformIndexingNative() { return VkPhysicalDeviceVulkan12Properties.nshaderStorageImageArrayNonUniformIndexingNative(address()) != 0; }
-        /** Returns the value of the {@code shaderInputAttachmentArrayNonUniformIndexingNative} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#shaderInputAttachmentArrayNonUniformIndexingNative} field. */
         @NativeType("VkBool32")
         public boolean shaderInputAttachmentArrayNonUniformIndexingNative() { return VkPhysicalDeviceVulkan12Properties.nshaderInputAttachmentArrayNonUniformIndexingNative(address()) != 0; }
-        /** Returns the value of the {@code robustBufferAccessUpdateAfterBind} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#robustBufferAccessUpdateAfterBind} field. */
         @NativeType("VkBool32")
         public boolean robustBufferAccessUpdateAfterBind() { return VkPhysicalDeviceVulkan12Properties.nrobustBufferAccessUpdateAfterBind(address()) != 0; }
-        /** Returns the value of the {@code quadDivergentImplicitLod} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#quadDivergentImplicitLod} field. */
         @NativeType("VkBool32")
         public boolean quadDivergentImplicitLod() { return VkPhysicalDeviceVulkan12Properties.nquadDivergentImplicitLod(address()) != 0; }
-        /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindSamplers} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxPerStageDescriptorUpdateAfterBindSamplers} field. */
         @NativeType("uint32_t")
         public int maxPerStageDescriptorUpdateAfterBindSamplers() { return VkPhysicalDeviceVulkan12Properties.nmaxPerStageDescriptorUpdateAfterBindSamplers(address()); }
-        /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindUniformBuffers} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxPerStageDescriptorUpdateAfterBindUniformBuffers} field. */
         @NativeType("uint32_t")
         public int maxPerStageDescriptorUpdateAfterBindUniformBuffers() { return VkPhysicalDeviceVulkan12Properties.nmaxPerStageDescriptorUpdateAfterBindUniformBuffers(address()); }
-        /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindStorageBuffers} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxPerStageDescriptorUpdateAfterBindStorageBuffers} field. */
         @NativeType("uint32_t")
         public int maxPerStageDescriptorUpdateAfterBindStorageBuffers() { return VkPhysicalDeviceVulkan12Properties.nmaxPerStageDescriptorUpdateAfterBindStorageBuffers(address()); }
-        /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindSampledImages} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxPerStageDescriptorUpdateAfterBindSampledImages} field. */
         @NativeType("uint32_t")
         public int maxPerStageDescriptorUpdateAfterBindSampledImages() { return VkPhysicalDeviceVulkan12Properties.nmaxPerStageDescriptorUpdateAfterBindSampledImages(address()); }
-        /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindStorageImages} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxPerStageDescriptorUpdateAfterBindStorageImages} field. */
         @NativeType("uint32_t")
         public int maxPerStageDescriptorUpdateAfterBindStorageImages() { return VkPhysicalDeviceVulkan12Properties.nmaxPerStageDescriptorUpdateAfterBindStorageImages(address()); }
-        /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindInputAttachments} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxPerStageDescriptorUpdateAfterBindInputAttachments} field. */
         @NativeType("uint32_t")
         public int maxPerStageDescriptorUpdateAfterBindInputAttachments() { return VkPhysicalDeviceVulkan12Properties.nmaxPerStageDescriptorUpdateAfterBindInputAttachments(address()); }
-        /** Returns the value of the {@code maxPerStageUpdateAfterBindResources} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxPerStageUpdateAfterBindResources} field. */
         @NativeType("uint32_t")
         public int maxPerStageUpdateAfterBindResources() { return VkPhysicalDeviceVulkan12Properties.nmaxPerStageUpdateAfterBindResources(address()); }
-        /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindSamplers} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxDescriptorSetUpdateAfterBindSamplers} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetUpdateAfterBindSamplers() { return VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindSamplers(address()); }
-        /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindUniformBuffers} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxDescriptorSetUpdateAfterBindUniformBuffers} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetUpdateAfterBindUniformBuffers() { return VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindUniformBuffers(address()); }
-        /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindUniformBuffersDynamic} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxDescriptorSetUpdateAfterBindUniformBuffersDynamic} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetUpdateAfterBindUniformBuffersDynamic() { return VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindUniformBuffersDynamic(address()); }
-        /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindStorageBuffers} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxDescriptorSetUpdateAfterBindStorageBuffers} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetUpdateAfterBindStorageBuffers() { return VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindStorageBuffers(address()); }
-        /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindStorageBuffersDynamic} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxDescriptorSetUpdateAfterBindStorageBuffersDynamic} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetUpdateAfterBindStorageBuffersDynamic() { return VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindStorageBuffersDynamic(address()); }
-        /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindSampledImages} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxDescriptorSetUpdateAfterBindSampledImages} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetUpdateAfterBindSampledImages() { return VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindSampledImages(address()); }
-        /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindStorageImages} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxDescriptorSetUpdateAfterBindStorageImages} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetUpdateAfterBindStorageImages() { return VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindStorageImages(address()); }
-        /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindInputAttachments} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxDescriptorSetUpdateAfterBindInputAttachments} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetUpdateAfterBindInputAttachments() { return VkPhysicalDeviceVulkan12Properties.nmaxDescriptorSetUpdateAfterBindInputAttachments(address()); }
-        /** Returns the value of the {@code supportedDepthResolveModes} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#supportedDepthResolveModes} field. */
         @NativeType("VkResolveModeFlags")
         public int supportedDepthResolveModes() { return VkPhysicalDeviceVulkan12Properties.nsupportedDepthResolveModes(address()); }
-        /** Returns the value of the {@code supportedStencilResolveModes} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#supportedStencilResolveModes} field. */
         @NativeType("VkResolveModeFlags")
         public int supportedStencilResolveModes() { return VkPhysicalDeviceVulkan12Properties.nsupportedStencilResolveModes(address()); }
-        /** Returns the value of the {@code independentResolveNone} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#independentResolveNone} field. */
         @NativeType("VkBool32")
         public boolean independentResolveNone() { return VkPhysicalDeviceVulkan12Properties.nindependentResolveNone(address()) != 0; }
-        /** Returns the value of the {@code independentResolve} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#independentResolve} field. */
         @NativeType("VkBool32")
         public boolean independentResolve() { return VkPhysicalDeviceVulkan12Properties.nindependentResolve(address()) != 0; }
-        /** Returns the value of the {@code filterMinmaxSingleComponentFormats} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#filterMinmaxSingleComponentFormats} field. */
         @NativeType("VkBool32")
         public boolean filterMinmaxSingleComponentFormats() { return VkPhysicalDeviceVulkan12Properties.nfilterMinmaxSingleComponentFormats(address()) != 0; }
-        /** Returns the value of the {@code filterMinmaxImageComponentMapping} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#filterMinmaxImageComponentMapping} field. */
         @NativeType("VkBool32")
         public boolean filterMinmaxImageComponentMapping() { return VkPhysicalDeviceVulkan12Properties.nfilterMinmaxImageComponentMapping(address()) != 0; }
-        /** Returns the value of the {@code maxTimelineSemaphoreValueDifference} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#maxTimelineSemaphoreValueDifference} field. */
         @NativeType("uint64_t")
         public long maxTimelineSemaphoreValueDifference() { return VkPhysicalDeviceVulkan12Properties.nmaxTimelineSemaphoreValueDifference(address()); }
-        /** Returns the value of the {@code framebufferIntegerColorSampleCounts} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#framebufferIntegerColorSampleCounts} field. */
         @NativeType("VkSampleCountFlags")
         public int framebufferIntegerColorSampleCounts() { return VkPhysicalDeviceVulkan12Properties.nframebufferIntegerColorSampleCounts(address()); }
 

@@ -41,21 +41,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkWriteDescriptorSet}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sampler} &ndash; a sampler handle, and is used in descriptor updates for types {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER} and {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} if the binding being updated does not use immutable samplers.</li>
- * <li>{@code imageView} &ndash; {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or an image view handle, and is used in descriptor updates for types {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}, {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}, {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, and {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT}.</li>
- * <li>{@code imageLayout} &ndash; the layout that the image subresources accessible from {@code imageView} will be in at the time this descriptor is accessed. {@code imageLayout} is used in descriptor updates for types {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}, {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}, {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, and {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDescriptorImageInfo {
- *     VkSampler sampler;
- *     VkImageView imageView;
- *     VkImageLayout imageLayout;
+ *     VkSampler {@link #sampler};
+ *     VkImageView {@link #imageView};
+ *     VkImageLayout {@link #imageLayout};
  * }</code></pre>
  */
 public class VkDescriptorImageInfo extends Struct implements NativeResource {
@@ -100,21 +92,21 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sampler} field. */
+    /** a sampler handle, and is used in descriptor updates for types {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER} and {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} if the binding being updated does not use immutable samplers. */
     @NativeType("VkSampler")
     public long sampler() { return nsampler(address()); }
-    /** Returns the value of the {@code imageView} field. */
+    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or an image view handle, and is used in descriptor updates for types {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}, {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}, {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, and {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT}. */
     @NativeType("VkImageView")
     public long imageView() { return nimageView(address()); }
-    /** Returns the value of the {@code imageLayout} field. */
+    /** the layout that the image subresources accessible from {@code imageView} will be in at the time this descriptor is accessed. {@code imageLayout} is used in descriptor updates for types {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}, {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}, {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, and {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT}. */
     @NativeType("VkImageLayout")
     public int imageLayout() { return nimageLayout(address()); }
 
-    /** Sets the specified value to the {@code sampler} field. */
+    /** Sets the specified value to the {@link #sampler} field. */
     public VkDescriptorImageInfo sampler(@NativeType("VkSampler") long value) { nsampler(address(), value); return this; }
-    /** Sets the specified value to the {@code imageView} field. */
+    /** Sets the specified value to the {@link #imageView} field. */
     public VkDescriptorImageInfo imageView(@NativeType("VkImageView") long value) { nimageView(address(), value); return this; }
-    /** Sets the specified value to the {@code imageLayout} field. */
+    /** Sets the specified value to the {@link #imageLayout} field. */
     public VkDescriptorImageInfo imageLayout(@NativeType("VkImageLayout") int value) { nimageLayout(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -337,21 +329,21 @@ public class VkDescriptorImageInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sampler} field. */
+        /** @return the value of the {@link VkDescriptorImageInfo#sampler} field. */
         @NativeType("VkSampler")
         public long sampler() { return VkDescriptorImageInfo.nsampler(address()); }
-        /** Returns the value of the {@code imageView} field. */
+        /** @return the value of the {@link VkDescriptorImageInfo#imageView} field. */
         @NativeType("VkImageView")
         public long imageView() { return VkDescriptorImageInfo.nimageView(address()); }
-        /** Returns the value of the {@code imageLayout} field. */
+        /** @return the value of the {@link VkDescriptorImageInfo#imageLayout} field. */
         @NativeType("VkImageLayout")
         public int imageLayout() { return VkDescriptorImageInfo.nimageLayout(address()); }
 
-        /** Sets the specified value to the {@code sampler} field. */
+        /** Sets the specified value to the {@link VkDescriptorImageInfo#sampler} field. */
         public VkDescriptorImageInfo.Buffer sampler(@NativeType("VkSampler") long value) { VkDescriptorImageInfo.nsampler(address(), value); return this; }
-        /** Sets the specified value to the {@code imageView} field. */
+        /** Sets the specified value to the {@link VkDescriptorImageInfo#imageView} field. */
         public VkDescriptorImageInfo.Buffer imageView(@NativeType("VkImageView") long value) { VkDescriptorImageInfo.nimageView(address(), value); return this; }
-        /** Sets the specified value to the {@code imageLayout} field. */
+        /** Sets the specified value to the {@link VkDescriptorImageInfo#imageLayout} field. */
         public VkDescriptorImageInfo.Buffer imageLayout(@NativeType("VkImageLayout") int value) { VkDescriptorImageInfo.nimageLayout(address(), value); return this; }
 
     }

@@ -65,10 +65,10 @@ public class LTOObjectBuffer extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code Buffer} field. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code Buffer} field. */
     @NativeType("char const *")
     public ByteBuffer Buffer() { return nBuffer(address()); }
-    /** Returns the value of the {@code Size} field. */
+    /** @return the value of the {@code Size} field. */
     @NativeType("size_t")
     public long Size() { return nSize(address()); }
 
@@ -258,10 +258,10 @@ public class LTOObjectBuffer extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code Buffer} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code Buffer} field. */
         @NativeType("char const *")
         public ByteBuffer Buffer() { return LTOObjectBuffer.nBuffer(address()); }
-        /** Returns the value of the {@code Size} field. */
+        /** @return the value of the {@code Size} field. */
         @NativeType("size_t")
         public long Size() { return LTOObjectBuffer.nSize(address()); }
 

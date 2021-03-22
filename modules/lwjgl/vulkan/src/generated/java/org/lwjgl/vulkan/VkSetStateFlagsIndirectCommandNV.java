@@ -18,21 +18,11 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying input data for a single state flag command token.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code data} &ndash; encodes packed state that this command alters.
- * 
- * <ul>
- * <li>Bit 0: If set represents {@link VK10#VK_FRONT_FACE_CLOCKWISE FRONT_FACE_CLOCKWISE}, otherwise {@link VK10#VK_FRONT_FACE_COUNTER_CLOCKWISE FRONT_FACE_COUNTER_CLOCKWISE}</li>
- * </ul></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSetStateFlagsIndirectCommandNV {
- *     uint32_t data;
+ *     uint32_t {@link #data};
  * }</code></pre>
  */
 public class VkSetStateFlagsIndirectCommandNV extends Struct implements NativeResource {
@@ -71,11 +61,17 @@ public class VkSetStateFlagsIndirectCommandNV extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code data} field. */
+    /**
+     * encodes packed state that this command alters.
+     * 
+     * <ul>
+     * <li>Bit 0: If set represents {@link VK10#VK_FRONT_FACE_CLOCKWISE FRONT_FACE_CLOCKWISE}, otherwise {@link VK10#VK_FRONT_FACE_COUNTER_CLOCKWISE FRONT_FACE_COUNTER_CLOCKWISE}</li>
+     * </ul>
+     */
     @NativeType("uint32_t")
     public int data() { return ndata(address()); }
 
-    /** Sets the specified value to the {@code data} field. */
+    /** Sets the specified value to the {@link #data} field. */
     public VkSetStateFlagsIndirectCommandNV data(@NativeType("uint32_t") int value) { ndata(address(), value); return this; }
 
     /**
@@ -277,11 +273,11 @@ public class VkSetStateFlagsIndirectCommandNV extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code data} field. */
+        /** @return the value of the {@link VkSetStateFlagsIndirectCommandNV#data} field. */
         @NativeType("uint32_t")
         public int data() { return VkSetStateFlagsIndirectCommandNV.ndata(address()); }
 
-        /** Sets the specified value to the {@code data} field. */
+        /** Sets the specified value to the {@link VkSetStateFlagsIndirectCommandNV#data} field. */
         public VkSetStateFlagsIndirectCommandNV.Buffer data(@NativeType("uint32_t") int value) { VkSetStateFlagsIndirectCommandNV.ndata(address(), value); return this; }
 
     }

@@ -176,85 +176,85 @@ public class NkStyleWindow extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkStyleWindowHeader} view of the {@code header} field. */
+    /** @return a {@link NkStyleWindowHeader} view of the {@code header} field. */
     @NativeType("struct nk_style_window_header")
     public NkStyleWindowHeader header() { return nheader(address()); }
-    /** Returns a {@link NkStyleItem} view of the {@code fixed_background} field. */
+    /** @return a {@link NkStyleItem} view of the {@code fixed_background} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem fixed_background() { return nfixed_background(address()); }
-    /** Returns a {@link NkColor} view of the {@code background} field. */
+    /** @return a {@link NkColor} view of the {@code background} field. */
     @NativeType("struct nk_color")
     public NkColor background() { return nbackground(address()); }
-    /** Returns a {@link NkColor} view of the {@code border_color} field. */
+    /** @return a {@link NkColor} view of the {@code border_color} field. */
     @NativeType("struct nk_color")
     public NkColor border_color() { return nborder_color(address()); }
-    /** Returns a {@link NkColor} view of the {@code popup_border_color} field. */
+    /** @return a {@link NkColor} view of the {@code popup_border_color} field. */
     @NativeType("struct nk_color")
     public NkColor popup_border_color() { return npopup_border_color(address()); }
-    /** Returns a {@link NkColor} view of the {@code combo_border_color} field. */
+    /** @return a {@link NkColor} view of the {@code combo_border_color} field. */
     @NativeType("struct nk_color")
     public NkColor combo_border_color() { return ncombo_border_color(address()); }
-    /** Returns a {@link NkColor} view of the {@code contextual_border_color} field. */
+    /** @return a {@link NkColor} view of the {@code contextual_border_color} field. */
     @NativeType("struct nk_color")
     public NkColor contextual_border_color() { return ncontextual_border_color(address()); }
-    /** Returns a {@link NkColor} view of the {@code menu_border_color} field. */
+    /** @return a {@link NkColor} view of the {@code menu_border_color} field. */
     @NativeType("struct nk_color")
     public NkColor menu_border_color() { return nmenu_border_color(address()); }
-    /** Returns a {@link NkColor} view of the {@code group_border_color} field. */
+    /** @return a {@link NkColor} view of the {@code group_border_color} field. */
     @NativeType("struct nk_color")
     public NkColor group_border_color() { return ngroup_border_color(address()); }
-    /** Returns a {@link NkColor} view of the {@code tooltip_border_color} field. */
+    /** @return a {@link NkColor} view of the {@code tooltip_border_color} field. */
     @NativeType("struct nk_color")
     public NkColor tooltip_border_color() { return ntooltip_border_color(address()); }
-    /** Returns a {@link NkStyleItem} view of the {@code scaler} field. */
+    /** @return a {@link NkStyleItem} view of the {@code scaler} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem scaler() { return nscaler(address()); }
-    /** Returns the value of the {@code border} field. */
+    /** @return the value of the {@code border} field. */
     public float border() { return nborder(address()); }
-    /** Returns the value of the {@code combo_border} field. */
+    /** @return the value of the {@code combo_border} field. */
     public float combo_border() { return ncombo_border(address()); }
-    /** Returns the value of the {@code contextual_border} field. */
+    /** @return the value of the {@code contextual_border} field. */
     public float contextual_border() { return ncontextual_border(address()); }
-    /** Returns the value of the {@code menu_border} field. */
+    /** @return the value of the {@code menu_border} field. */
     public float menu_border() { return nmenu_border(address()); }
-    /** Returns the value of the {@code group_border} field. */
+    /** @return the value of the {@code group_border} field. */
     public float group_border() { return ngroup_border(address()); }
-    /** Returns the value of the {@code tooltip_border} field. */
+    /** @return the value of the {@code tooltip_border} field. */
     public float tooltip_border() { return ntooltip_border(address()); }
-    /** Returns the value of the {@code popup_border} field. */
+    /** @return the value of the {@code popup_border} field. */
     public float popup_border() { return npopup_border(address()); }
-    /** Returns the value of the {@code min_row_height_padding} field. */
+    /** @return the value of the {@code min_row_height_padding} field. */
     public float min_row_height_padding() { return nmin_row_height_padding(address()); }
-    /** Returns the value of the {@code rounding} field. */
+    /** @return the value of the {@code rounding} field. */
     public float rounding() { return nrounding(address()); }
-    /** Returns a {@link NkVec2} view of the {@code spacing} field. */
+    /** @return a {@link NkVec2} view of the {@code spacing} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 spacing() { return nspacing(address()); }
-    /** Returns a {@link NkVec2} view of the {@code scrollbar_size} field. */
+    /** @return a {@link NkVec2} view of the {@code scrollbar_size} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 scrollbar_size() { return nscrollbar_size(address()); }
-    /** Returns a {@link NkVec2} view of the {@code min_size} field. */
+    /** @return a {@link NkVec2} view of the {@code min_size} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 min_size() { return nmin_size(address()); }
-    /** Returns a {@link NkVec2} view of the {@code padding} field. */
+    /** @return a {@link NkVec2} view of the {@code padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 padding() { return npadding(address()); }
-    /** Returns a {@link NkVec2} view of the {@code group_padding} field. */
+    /** @return a {@link NkVec2} view of the {@code group_padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 group_padding() { return ngroup_padding(address()); }
-    /** Returns a {@link NkVec2} view of the {@code popup_padding} field. */
+    /** @return a {@link NkVec2} view of the {@code popup_padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 popup_padding() { return npopup_padding(address()); }
-    /** Returns a {@link NkVec2} view of the {@code combo_padding} field. */
+    /** @return a {@link NkVec2} view of the {@code combo_padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 combo_padding() { return ncombo_padding(address()); }
-    /** Returns a {@link NkVec2} view of the {@code contextual_padding} field. */
+    /** @return a {@link NkVec2} view of the {@code contextual_padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 contextual_padding() { return ncontextual_padding(address()); }
-    /** Returns a {@link NkVec2} view of the {@code menu_padding} field. */
+    /** @return a {@link NkVec2} view of the {@code menu_padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 menu_padding() { return nmenu_padding(address()); }
-    /** Returns a {@link NkVec2} view of the {@code tooltip_padding} field. */
+    /** @return a {@link NkVec2} view of the {@code tooltip_padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 tooltip_padding() { return ntooltip_padding(address()); }
 
@@ -743,85 +743,85 @@ public class NkStyleWindow extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkStyleWindowHeader} view of the {@code header} field. */
+        /** @return a {@link NkStyleWindowHeader} view of the {@code header} field. */
         @NativeType("struct nk_style_window_header")
         public NkStyleWindowHeader header() { return NkStyleWindow.nheader(address()); }
-        /** Returns a {@link NkStyleItem} view of the {@code fixed_background} field. */
+        /** @return a {@link NkStyleItem} view of the {@code fixed_background} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem fixed_background() { return NkStyleWindow.nfixed_background(address()); }
-        /** Returns a {@link NkColor} view of the {@code background} field. */
+        /** @return a {@link NkColor} view of the {@code background} field. */
         @NativeType("struct nk_color")
         public NkColor background() { return NkStyleWindow.nbackground(address()); }
-        /** Returns a {@link NkColor} view of the {@code border_color} field. */
+        /** @return a {@link NkColor} view of the {@code border_color} field. */
         @NativeType("struct nk_color")
         public NkColor border_color() { return NkStyleWindow.nborder_color(address()); }
-        /** Returns a {@link NkColor} view of the {@code popup_border_color} field. */
+        /** @return a {@link NkColor} view of the {@code popup_border_color} field. */
         @NativeType("struct nk_color")
         public NkColor popup_border_color() { return NkStyleWindow.npopup_border_color(address()); }
-        /** Returns a {@link NkColor} view of the {@code combo_border_color} field. */
+        /** @return a {@link NkColor} view of the {@code combo_border_color} field. */
         @NativeType("struct nk_color")
         public NkColor combo_border_color() { return NkStyleWindow.ncombo_border_color(address()); }
-        /** Returns a {@link NkColor} view of the {@code contextual_border_color} field. */
+        /** @return a {@link NkColor} view of the {@code contextual_border_color} field. */
         @NativeType("struct nk_color")
         public NkColor contextual_border_color() { return NkStyleWindow.ncontextual_border_color(address()); }
-        /** Returns a {@link NkColor} view of the {@code menu_border_color} field. */
+        /** @return a {@link NkColor} view of the {@code menu_border_color} field. */
         @NativeType("struct nk_color")
         public NkColor menu_border_color() { return NkStyleWindow.nmenu_border_color(address()); }
-        /** Returns a {@link NkColor} view of the {@code group_border_color} field. */
+        /** @return a {@link NkColor} view of the {@code group_border_color} field. */
         @NativeType("struct nk_color")
         public NkColor group_border_color() { return NkStyleWindow.ngroup_border_color(address()); }
-        /** Returns a {@link NkColor} view of the {@code tooltip_border_color} field. */
+        /** @return a {@link NkColor} view of the {@code tooltip_border_color} field. */
         @NativeType("struct nk_color")
         public NkColor tooltip_border_color() { return NkStyleWindow.ntooltip_border_color(address()); }
-        /** Returns a {@link NkStyleItem} view of the {@code scaler} field. */
+        /** @return a {@link NkStyleItem} view of the {@code scaler} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem scaler() { return NkStyleWindow.nscaler(address()); }
-        /** Returns the value of the {@code border} field. */
+        /** @return the value of the {@code border} field. */
         public float border() { return NkStyleWindow.nborder(address()); }
-        /** Returns the value of the {@code combo_border} field. */
+        /** @return the value of the {@code combo_border} field. */
         public float combo_border() { return NkStyleWindow.ncombo_border(address()); }
-        /** Returns the value of the {@code contextual_border} field. */
+        /** @return the value of the {@code contextual_border} field. */
         public float contextual_border() { return NkStyleWindow.ncontextual_border(address()); }
-        /** Returns the value of the {@code menu_border} field. */
+        /** @return the value of the {@code menu_border} field. */
         public float menu_border() { return NkStyleWindow.nmenu_border(address()); }
-        /** Returns the value of the {@code group_border} field. */
+        /** @return the value of the {@code group_border} field. */
         public float group_border() { return NkStyleWindow.ngroup_border(address()); }
-        /** Returns the value of the {@code tooltip_border} field. */
+        /** @return the value of the {@code tooltip_border} field. */
         public float tooltip_border() { return NkStyleWindow.ntooltip_border(address()); }
-        /** Returns the value of the {@code popup_border} field. */
+        /** @return the value of the {@code popup_border} field. */
         public float popup_border() { return NkStyleWindow.npopup_border(address()); }
-        /** Returns the value of the {@code min_row_height_padding} field. */
+        /** @return the value of the {@code min_row_height_padding} field. */
         public float min_row_height_padding() { return NkStyleWindow.nmin_row_height_padding(address()); }
-        /** Returns the value of the {@code rounding} field. */
+        /** @return the value of the {@code rounding} field. */
         public float rounding() { return NkStyleWindow.nrounding(address()); }
-        /** Returns a {@link NkVec2} view of the {@code spacing} field. */
+        /** @return a {@link NkVec2} view of the {@code spacing} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 spacing() { return NkStyleWindow.nspacing(address()); }
-        /** Returns a {@link NkVec2} view of the {@code scrollbar_size} field. */
+        /** @return a {@link NkVec2} view of the {@code scrollbar_size} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 scrollbar_size() { return NkStyleWindow.nscrollbar_size(address()); }
-        /** Returns a {@link NkVec2} view of the {@code min_size} field. */
+        /** @return a {@link NkVec2} view of the {@code min_size} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 min_size() { return NkStyleWindow.nmin_size(address()); }
-        /** Returns a {@link NkVec2} view of the {@code padding} field. */
+        /** @return a {@link NkVec2} view of the {@code padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 padding() { return NkStyleWindow.npadding(address()); }
-        /** Returns a {@link NkVec2} view of the {@code group_padding} field. */
+        /** @return a {@link NkVec2} view of the {@code group_padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 group_padding() { return NkStyleWindow.ngroup_padding(address()); }
-        /** Returns a {@link NkVec2} view of the {@code popup_padding} field. */
+        /** @return a {@link NkVec2} view of the {@code popup_padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 popup_padding() { return NkStyleWindow.npopup_padding(address()); }
-        /** Returns a {@link NkVec2} view of the {@code combo_padding} field. */
+        /** @return a {@link NkVec2} view of the {@code combo_padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 combo_padding() { return NkStyleWindow.ncombo_padding(address()); }
-        /** Returns a {@link NkVec2} view of the {@code contextual_padding} field. */
+        /** @return a {@link NkVec2} view of the {@code contextual_padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 contextual_padding() { return NkStyleWindow.ncontextual_padding(address()); }
-        /** Returns a {@link NkVec2} view of the {@code menu_padding} field. */
+        /** @return a {@link NkVec2} view of the {@code menu_padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 menu_padding() { return NkStyleWindow.nmenu_padding(address()); }
-        /** Returns a {@link NkVec2} view of the {@code tooltip_padding} field. */
+        /** @return a {@link NkVec2} view of the {@code tooltip_padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 tooltip_padding() { return NkStyleWindow.ntooltip_padding(address()); }
 

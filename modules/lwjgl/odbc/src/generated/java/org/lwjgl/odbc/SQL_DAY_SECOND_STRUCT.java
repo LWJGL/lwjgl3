@@ -75,19 +75,19 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code day} field. */
+    /** @return the value of the {@code day} field. */
     @NativeType("SQLUINTEGER")
     public int day() { return nday(address()); }
-    /** Returns the value of the {@code hour} field. */
+    /** @return the value of the {@code hour} field. */
     @NativeType("SQLUINTEGER")
     public int hour() { return nhour(address()); }
-    /** Returns the value of the {@code minute} field. */
+    /** @return the value of the {@code minute} field. */
     @NativeType("SQLUINTEGER")
     public int minute() { return nminute(address()); }
-    /** Returns the value of the {@code second} field. */
+    /** @return the value of the {@code second} field. */
     @NativeType("SQLUINTEGER")
     public int second() { return nsecond(address()); }
-    /** Returns the value of the {@code fraction} field. */
+    /** @return the value of the {@code fraction} field. */
     @NativeType("SQLUINTEGER")
     public int fraction() { return nfraction(address()); }
 
@@ -334,19 +334,19 @@ public class SQL_DAY_SECOND_STRUCT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code day} field. */
+        /** @return the value of the {@code day} field. */
         @NativeType("SQLUINTEGER")
         public int day() { return SQL_DAY_SECOND_STRUCT.nday(address()); }
-        /** Returns the value of the {@code hour} field. */
+        /** @return the value of the {@code hour} field. */
         @NativeType("SQLUINTEGER")
         public int hour() { return SQL_DAY_SECOND_STRUCT.nhour(address()); }
-        /** Returns the value of the {@code minute} field. */
+        /** @return the value of the {@code minute} field. */
         @NativeType("SQLUINTEGER")
         public int minute() { return SQL_DAY_SECOND_STRUCT.nminute(address()); }
-        /** Returns the value of the {@code second} field. */
+        /** @return the value of the {@code second} field. */
         @NativeType("SQLUINTEGER")
         public int second() { return SQL_DAY_SECOND_STRUCT.nsecond(address()); }
-        /** Returns the value of the {@code fraction} field. */
+        /** @return the value of the {@code fraction} field. */
         @NativeType("SQLUINTEGER")
         public int fraction() { return SQL_DAY_SECOND_STRUCT.nfraction(address()); }
 

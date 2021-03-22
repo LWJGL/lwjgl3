@@ -74,19 +74,19 @@ public class NkPopupBuffer extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code begin} field. */
+    /** @return the value of the {@code begin} field. */
     @NativeType("nk_size")
     public long begin() { return nbegin(address()); }
-    /** Returns the value of the {@code parent} field. */
+    /** @return the value of the {@code parent} field. */
     @NativeType("nk_size")
     public long parent() { return nparent(address()); }
-    /** Returns the value of the {@code last} field. */
+    /** @return the value of the {@code last} field. */
     @NativeType("nk_size")
     public long last() { return nlast(address()); }
-    /** Returns the value of the {@code end} field. */
+    /** @return the value of the {@code end} field. */
     @NativeType("nk_size")
     public long end() { return nend(address()); }
-    /** Returns the value of the {@code active} field. */
+    /** @return the value of the {@code active} field. */
     @NativeType("nk_bool")
     public boolean active() { return nactive(address()); }
 
@@ -170,19 +170,19 @@ public class NkPopupBuffer extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code begin} field. */
+        /** @return the value of the {@code begin} field. */
         @NativeType("nk_size")
         public long begin() { return NkPopupBuffer.nbegin(address()); }
-        /** Returns the value of the {@code parent} field. */
+        /** @return the value of the {@code parent} field. */
         @NativeType("nk_size")
         public long parent() { return NkPopupBuffer.nparent(address()); }
-        /** Returns the value of the {@code last} field. */
+        /** @return the value of the {@code last} field. */
         @NativeType("nk_size")
         public long last() { return NkPopupBuffer.nlast(address()); }
-        /** Returns the value of the {@code end} field. */
+        /** @return the value of the {@code end} field. */
         @NativeType("nk_size")
         public long end() { return NkPopupBuffer.nend(address()); }
-        /** Returns the value of the {@code active} field. */
+        /** @return the value of the {@code active} field. */
         @NativeType("nk_bool")
         public boolean active() { return NkPopupBuffer.nactive(address()); }
 

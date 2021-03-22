@@ -89,26 +89,26 @@ public class Visual extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code ext_data} field. */
+    /** @return the value of the {@code ext_data} field. */
     @NativeType("void *")
     public long ext_data() { return next_data(address()); }
-    /** Returns the value of the {@code visualid} field. */
+    /** @return the value of the {@code visualid} field. */
     @NativeType("VisualID")
     public long visualid() { return nvisualid(address()); }
-    /** Returns the value of the {@code class} field. */
+    /** @return the value of the {@code class} field. */
     public int class$() { return nclass$(address()); }
-    /** Returns the value of the {@code red_mask} field. */
+    /** @return the value of the {@code red_mask} field. */
     @NativeType("unsigned long")
     public long red_mask() { return nred_mask(address()); }
-    /** Returns the value of the {@code green_mask} field. */
+    /** @return the value of the {@code green_mask} field. */
     @NativeType("unsigned long")
     public long green_mask() { return ngreen_mask(address()); }
-    /** Returns the value of the {@code blue_mask} field. */
+    /** @return the value of the {@code blue_mask} field. */
     @NativeType("unsigned long")
     public long blue_mask() { return nblue_mask(address()); }
-    /** Returns the value of the {@code bits_per_rgb} field. */
+    /** @return the value of the {@code bits_per_rgb} field. */
     public int bits_per_rgb() { return nbits_per_rgb(address()); }
-    /** Returns the value of the {@code map_entries} field. */
+    /** @return the value of the {@code map_entries} field. */
     public int map_entries() { return nmap_entries(address()); }
 
     /** Sets the specified value to the {@code ext_data} field. */
@@ -378,26 +378,26 @@ public class Visual extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code ext_data} field. */
+        /** @return the value of the {@code ext_data} field. */
         @NativeType("void *")
         public long ext_data() { return Visual.next_data(address()); }
-        /** Returns the value of the {@code visualid} field. */
+        /** @return the value of the {@code visualid} field. */
         @NativeType("VisualID")
         public long visualid() { return Visual.nvisualid(address()); }
-        /** Returns the value of the {@code class} field. */
+        /** @return the value of the {@code class} field. */
         public int class$() { return Visual.nclass$(address()); }
-        /** Returns the value of the {@code red_mask} field. */
+        /** @return the value of the {@code red_mask} field. */
         @NativeType("unsigned long")
         public long red_mask() { return Visual.nred_mask(address()); }
-        /** Returns the value of the {@code green_mask} field. */
+        /** @return the value of the {@code green_mask} field. */
         @NativeType("unsigned long")
         public long green_mask() { return Visual.ngreen_mask(address()); }
-        /** Returns the value of the {@code blue_mask} field. */
+        /** @return the value of the {@code blue_mask} field. */
         @NativeType("unsigned long")
         public long blue_mask() { return Visual.nblue_mask(address()); }
-        /** Returns the value of the {@code bits_per_rgb} field. */
+        /** @return the value of the {@code bits_per_rgb} field. */
         public int bits_per_rgb() { return Visual.nbits_per_rgb(address()); }
-        /** Returns the value of the {@code map_entries} field. */
+        /** @return the value of the {@code map_entries} field. */
         public int map_entries() { return Visual.nmap_entries(address()); }
 
         /** Sets the specified value to the {@code ext_data} field. */

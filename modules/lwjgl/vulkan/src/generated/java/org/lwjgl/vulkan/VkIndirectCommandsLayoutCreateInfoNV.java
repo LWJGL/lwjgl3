@@ -73,31 +73,18 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkIndirectCommandsLayoutTokenNV}, {@link NVDeviceGeneratedCommands#vkCreateIndirectCommandsLayoutNV CreateIndirectCommandsLayoutNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkIndirectCommandsLayoutUsageFlagBitsNV} specifying usage hints of this layout.</li>
- * <li>{@code pipelineBindPoint} &ndash; the {@code VkPipelineBindPoint} that this layout targets.</li>
- * <li>{@code tokenCount} &ndash; the length of the individual command sequence.</li>
- * <li>{@code pTokens} &ndash; an array describing each command token in detail. See {@code VkIndirectCommandsTokenTypeNV} and {@link VkIndirectCommandsLayoutTokenNV} below for details.</li>
- * <li>{@code streamCount} &ndash; the number of streams used to provide the token inputs.</li>
- * <li>{@code pStreamStrides} &ndash; an array defining the byte stride for each input stream.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkIndirectCommandsLayoutCreateInfoNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkIndirectCommandsLayoutUsageFlagsNV flags;
- *     VkPipelineBindPoint pipelineBindPoint;
- *     uint32_t tokenCount;
- *     {@link VkIndirectCommandsLayoutTokenNV VkIndirectCommandsLayoutTokenNV} const * pTokens;
- *     uint32_t streamCount;
- *     uint32_t const * pStreamStrides;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkIndirectCommandsLayoutUsageFlagsNV {@link #flags};
+ *     VkPipelineBindPoint {@link #pipelineBindPoint};
+ *     uint32_t {@link #tokenCount};
+ *     {@link VkIndirectCommandsLayoutTokenNV VkIndirectCommandsLayoutTokenNV} const * {@link #pTokens};
+ *     uint32_t {@link #streamCount};
+ *     uint32_t const * {@link #pStreamStrides};
  * }</code></pre>
  */
 public class VkIndirectCommandsLayoutCreateInfoNV extends Struct implements NativeResource {
@@ -157,42 +144,42 @@ public class VkIndirectCommandsLayoutCreateInfoNV extends Struct implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkIndirectCommandsLayoutUsageFlagBitsNV} specifying usage hints of this layout. */
     @NativeType("VkIndirectCommandsLayoutUsageFlagsNV")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code pipelineBindPoint} field. */
+    /** the {@code VkPipelineBindPoint} that this layout targets. */
     @NativeType("VkPipelineBindPoint")
     public int pipelineBindPoint() { return npipelineBindPoint(address()); }
-    /** Returns the value of the {@code tokenCount} field. */
+    /** the length of the individual command sequence. */
     @NativeType("uint32_t")
     public int tokenCount() { return ntokenCount(address()); }
-    /** Returns a {@link VkIndirectCommandsLayoutTokenNV.Buffer} view of the struct array pointed to by the {@code pTokens} field. */
+    /** an array describing each command token in detail. See {@code VkIndirectCommandsTokenTypeNV} and {@link VkIndirectCommandsLayoutTokenNV} below for details. */
     @NativeType("VkIndirectCommandsLayoutTokenNV const *")
     public VkIndirectCommandsLayoutTokenNV.Buffer pTokens() { return npTokens(address()); }
-    /** Returns the value of the {@code streamCount} field. */
+    /** the number of streams used to provide the token inputs. */
     @NativeType("uint32_t")
     public int streamCount() { return nstreamCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pStreamStrides} field. */
+    /** an array defining the byte stride for each input stream. */
     @NativeType("uint32_t const *")
     public IntBuffer pStreamStrides() { return npStreamStrides(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkIndirectCommandsLayoutCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkIndirectCommandsLayoutCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkIndirectCommandsLayoutCreateInfoNV flags(@NativeType("VkIndirectCommandsLayoutUsageFlagsNV") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code pipelineBindPoint} field. */
+    /** Sets the specified value to the {@link #pipelineBindPoint} field. */
     public VkIndirectCommandsLayoutCreateInfoNV pipelineBindPoint(@NativeType("VkPipelineBindPoint") int value) { npipelineBindPoint(address(), value); return this; }
-    /** Sets the address of the specified {@link VkIndirectCommandsLayoutTokenNV.Buffer} to the {@code pTokens} field. */
+    /** Sets the address of the specified {@link VkIndirectCommandsLayoutTokenNV.Buffer} to the {@link #pTokens} field. */
     public VkIndirectCommandsLayoutCreateInfoNV pTokens(@NativeType("VkIndirectCommandsLayoutTokenNV const *") VkIndirectCommandsLayoutTokenNV.Buffer value) { npTokens(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pStreamStrides} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pStreamStrides} field. */
     public VkIndirectCommandsLayoutCreateInfoNV pStreamStrides(@NativeType("uint32_t const *") IntBuffer value) { npStreamStrides(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -466,42 +453,42 @@ public class VkIndirectCommandsLayoutCreateInfoNV extends Struct implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkIndirectCommandsLayoutCreateInfoNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkIndirectCommandsLayoutCreateInfoNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkIndirectCommandsLayoutCreateInfoNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkIndirectCommandsLayoutCreateInfoNV.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkIndirectCommandsLayoutCreateInfoNV#flags} field. */
         @NativeType("VkIndirectCommandsLayoutUsageFlagsNV")
         public int flags() { return VkIndirectCommandsLayoutCreateInfoNV.nflags(address()); }
-        /** Returns the value of the {@code pipelineBindPoint} field. */
+        /** @return the value of the {@link VkIndirectCommandsLayoutCreateInfoNV#pipelineBindPoint} field. */
         @NativeType("VkPipelineBindPoint")
         public int pipelineBindPoint() { return VkIndirectCommandsLayoutCreateInfoNV.npipelineBindPoint(address()); }
-        /** Returns the value of the {@code tokenCount} field. */
+        /** @return the value of the {@link VkIndirectCommandsLayoutCreateInfoNV#tokenCount} field. */
         @NativeType("uint32_t")
         public int tokenCount() { return VkIndirectCommandsLayoutCreateInfoNV.ntokenCount(address()); }
-        /** Returns a {@link VkIndirectCommandsLayoutTokenNV.Buffer} view of the struct array pointed to by the {@code pTokens} field. */
+        /** @return a {@link VkIndirectCommandsLayoutTokenNV.Buffer} view of the struct array pointed to by the {@link VkIndirectCommandsLayoutCreateInfoNV#pTokens} field. */
         @NativeType("VkIndirectCommandsLayoutTokenNV const *")
         public VkIndirectCommandsLayoutTokenNV.Buffer pTokens() { return VkIndirectCommandsLayoutCreateInfoNV.npTokens(address()); }
-        /** Returns the value of the {@code streamCount} field. */
+        /** @return the value of the {@link VkIndirectCommandsLayoutCreateInfoNV#streamCount} field. */
         @NativeType("uint32_t")
         public int streamCount() { return VkIndirectCommandsLayoutCreateInfoNV.nstreamCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pStreamStrides} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkIndirectCommandsLayoutCreateInfoNV#pStreamStrides} field. */
         @NativeType("uint32_t const *")
         public IntBuffer pStreamStrides() { return VkIndirectCommandsLayoutCreateInfoNV.npStreamStrides(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkIndirectCommandsLayoutCreateInfoNV#sType} field. */
         public VkIndirectCommandsLayoutCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkIndirectCommandsLayoutCreateInfoNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkIndirectCommandsLayoutCreateInfoNV#pNext} field. */
         public VkIndirectCommandsLayoutCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkIndirectCommandsLayoutCreateInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkIndirectCommandsLayoutCreateInfoNV#flags} field. */
         public VkIndirectCommandsLayoutCreateInfoNV.Buffer flags(@NativeType("VkIndirectCommandsLayoutUsageFlagsNV") int value) { VkIndirectCommandsLayoutCreateInfoNV.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code pipelineBindPoint} field. */
+        /** Sets the specified value to the {@link VkIndirectCommandsLayoutCreateInfoNV#pipelineBindPoint} field. */
         public VkIndirectCommandsLayoutCreateInfoNV.Buffer pipelineBindPoint(@NativeType("VkPipelineBindPoint") int value) { VkIndirectCommandsLayoutCreateInfoNV.npipelineBindPoint(address(), value); return this; }
-        /** Sets the address of the specified {@link VkIndirectCommandsLayoutTokenNV.Buffer} to the {@code pTokens} field. */
+        /** Sets the address of the specified {@link VkIndirectCommandsLayoutTokenNV.Buffer} to the {@link VkIndirectCommandsLayoutCreateInfoNV#pTokens} field. */
         public VkIndirectCommandsLayoutCreateInfoNV.Buffer pTokens(@NativeType("VkIndirectCommandsLayoutTokenNV const *") VkIndirectCommandsLayoutTokenNV.Buffer value) { VkIndirectCommandsLayoutCreateInfoNV.npTokens(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pStreamStrides} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkIndirectCommandsLayoutCreateInfoNV#pStreamStrides} field. */
         public VkIndirectCommandsLayoutCreateInfoNV.Buffer pStreamStrides(@NativeType("uint32_t const *") IntBuffer value) { VkIndirectCommandsLayoutCreateInfoNV.npStreamStrides(address(), value); return this; }
 
     }

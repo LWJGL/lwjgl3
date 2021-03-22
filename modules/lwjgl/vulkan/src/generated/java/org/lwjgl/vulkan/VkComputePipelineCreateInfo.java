@@ -61,29 +61,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkPipelineShaderStageCreateInfo}, {@link VK10#vkCreateComputePipelines CreateComputePipelines}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkPipelineCreateFlagBits} specifying how the pipeline will be generated.</li>
- * <li>{@code stage} &ndash; a {@link VkPipelineShaderStageCreateInfo} structure describing the compute shader.</li>
- * <li>{@code layout} &ndash; the description of binding locations used by both the pipeline and descriptor sets used with the pipeline.</li>
- * <li>{@code basePipelineHandle} &ndash; a pipeline to derive from</li>
- * <li>{@code basePipelineIndex} &ndash; an index into the {@code pCreateInfos} parameter to use as a pipeline to derive from</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkComputePipelineCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineCreateFlags flags;
- *     {@link VkPipelineShaderStageCreateInfo VkPipelineShaderStageCreateInfo} stage;
- *     VkPipelineLayout layout;
- *     VkPipeline basePipelineHandle;
- *     int32_t basePipelineIndex;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineCreateFlags {@link #flags};
+ *     {@link VkPipelineShaderStageCreateInfo VkPipelineShaderStageCreateInfo} {@link #stage};
+ *     VkPipelineLayout {@link #layout};
+ *     VkPipeline {@link #basePipelineHandle};
+ *     int32_t {@link #basePipelineIndex};
  * }</code></pre>
  */
 public class VkComputePipelineCreateInfo extends Struct implements NativeResource {
@@ -140,42 +128,42 @@ public class VkComputePipelineCreateInfo extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkPipelineCreateFlagBits} specifying how the pipeline will be generated. */
     @NativeType("VkPipelineCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns a {@link VkPipelineShaderStageCreateInfo} view of the {@code stage} field. */
+    /** a {@link VkPipelineShaderStageCreateInfo} structure describing the compute shader. */
     public VkPipelineShaderStageCreateInfo stage() { return nstage(address()); }
-    /** Returns the value of the {@code layout} field. */
+    /** the description of binding locations used by both the pipeline and descriptor sets used with the pipeline. */
     @NativeType("VkPipelineLayout")
     public long layout() { return nlayout(address()); }
-    /** Returns the value of the {@code basePipelineHandle} field. */
+    /** a pipeline to derive from */
     @NativeType("VkPipeline")
     public long basePipelineHandle() { return nbasePipelineHandle(address()); }
-    /** Returns the value of the {@code basePipelineIndex} field. */
+    /** an index into the {@code pCreateInfos} parameter to use as a pipeline to derive from */
     @NativeType("int32_t")
     public int basePipelineIndex() { return nbasePipelineIndex(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkComputePipelineCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkComputePipelineCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkComputePipelineCreateInfo flags(@NativeType("VkPipelineCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Copies the specified {@link VkPipelineShaderStageCreateInfo} to the {@code stage} field. */
+    /** Copies the specified {@link VkPipelineShaderStageCreateInfo} to the {@link #stage} field. */
     public VkComputePipelineCreateInfo stage(VkPipelineShaderStageCreateInfo value) { nstage(address(), value); return this; }
-    /** Passes the {@code stage} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #stage} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkComputePipelineCreateInfo stage(java.util.function.Consumer<VkPipelineShaderStageCreateInfo> consumer) { consumer.accept(stage()); return this; }
-    /** Sets the specified value to the {@code layout} field. */
+    /** Sets the specified value to the {@link #layout} field. */
     public VkComputePipelineCreateInfo layout(@NativeType("VkPipelineLayout") long value) { nlayout(address(), value); return this; }
-    /** Sets the specified value to the {@code basePipelineHandle} field. */
+    /** Sets the specified value to the {@link #basePipelineHandle} field. */
     public VkComputePipelineCreateInfo basePipelineHandle(@NativeType("VkPipeline") long value) { nbasePipelineHandle(address(), value); return this; }
-    /** Sets the specified value to the {@code basePipelineIndex} field. */
+    /** Sets the specified value to the {@link #basePipelineIndex} field. */
     public VkComputePipelineCreateInfo basePipelineIndex(@NativeType("int32_t") int value) { nbasePipelineIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -443,42 +431,42 @@ public class VkComputePipelineCreateInfo extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkComputePipelineCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkComputePipelineCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkComputePipelineCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkComputePipelineCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkComputePipelineCreateInfo#flags} field. */
         @NativeType("VkPipelineCreateFlags")
         public int flags() { return VkComputePipelineCreateInfo.nflags(address()); }
-        /** Returns a {@link VkPipelineShaderStageCreateInfo} view of the {@code stage} field. */
+        /** @return a {@link VkPipelineShaderStageCreateInfo} view of the {@link VkComputePipelineCreateInfo#stage} field. */
         public VkPipelineShaderStageCreateInfo stage() { return VkComputePipelineCreateInfo.nstage(address()); }
-        /** Returns the value of the {@code layout} field. */
+        /** @return the value of the {@link VkComputePipelineCreateInfo#layout} field. */
         @NativeType("VkPipelineLayout")
         public long layout() { return VkComputePipelineCreateInfo.nlayout(address()); }
-        /** Returns the value of the {@code basePipelineHandle} field. */
+        /** @return the value of the {@link VkComputePipelineCreateInfo#basePipelineHandle} field. */
         @NativeType("VkPipeline")
         public long basePipelineHandle() { return VkComputePipelineCreateInfo.nbasePipelineHandle(address()); }
-        /** Returns the value of the {@code basePipelineIndex} field. */
+        /** @return the value of the {@link VkComputePipelineCreateInfo#basePipelineIndex} field. */
         @NativeType("int32_t")
         public int basePipelineIndex() { return VkComputePipelineCreateInfo.nbasePipelineIndex(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkComputePipelineCreateInfo#sType} field. */
         public VkComputePipelineCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkComputePipelineCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkComputePipelineCreateInfo#pNext} field. */
         public VkComputePipelineCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkComputePipelineCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkComputePipelineCreateInfo#flags} field. */
         public VkComputePipelineCreateInfo.Buffer flags(@NativeType("VkPipelineCreateFlags") int value) { VkComputePipelineCreateInfo.nflags(address(), value); return this; }
-        /** Copies the specified {@link VkPipelineShaderStageCreateInfo} to the {@code stage} field. */
+        /** Copies the specified {@link VkPipelineShaderStageCreateInfo} to the {@link VkComputePipelineCreateInfo#stage} field. */
         public VkComputePipelineCreateInfo.Buffer stage(VkPipelineShaderStageCreateInfo value) { VkComputePipelineCreateInfo.nstage(address(), value); return this; }
-        /** Passes the {@code stage} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkComputePipelineCreateInfo#stage} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkComputePipelineCreateInfo.Buffer stage(java.util.function.Consumer<VkPipelineShaderStageCreateInfo> consumer) { consumer.accept(stage()); return this; }
-        /** Sets the specified value to the {@code layout} field. */
+        /** Sets the specified value to the {@link VkComputePipelineCreateInfo#layout} field. */
         public VkComputePipelineCreateInfo.Buffer layout(@NativeType("VkPipelineLayout") long value) { VkComputePipelineCreateInfo.nlayout(address(), value); return this; }
-        /** Sets the specified value to the {@code basePipelineHandle} field. */
+        /** Sets the specified value to the {@link VkComputePipelineCreateInfo#basePipelineHandle} field. */
         public VkComputePipelineCreateInfo.Buffer basePipelineHandle(@NativeType("VkPipeline") long value) { VkComputePipelineCreateInfo.nbasePipelineHandle(address(), value); return this; }
-        /** Sets the specified value to the {@code basePipelineIndex} field. */
+        /** Sets the specified value to the {@link VkComputePipelineCreateInfo#basePipelineIndex} field. */
         public VkComputePipelineCreateInfo.Buffer basePipelineIndex(@NativeType("int32_t") int value) { VkComputePipelineCreateInfo.nbasePipelineIndex(address(), value); return this; }
 
     }

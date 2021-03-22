@@ -79,26 +79,26 @@ public class FFICIF extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code abi} field. */
+    /** @return the value of the {@code abi} field. */
     @NativeType("ffi_abi")
     public int abi() { return nabi(address()); }
-    /** Returns the value of the {@code nargs} field. */
+    /** @return the value of the {@code nargs} field. */
     @NativeType("unsigned")
     public int nargs() { return nnargs(address()); }
     /**
-     * Returns a {@link PointerBuffer} view of the data pointed to by the {@code arg_types} field.
+     * @return a {@link PointerBuffer} view of the data pointed to by the {@code arg_types} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
     @NativeType("ffi_type **")
     public PointerBuffer arg_types(int capacity) { return narg_types(address(), capacity); }
-    /** Returns a {@link FFIType} view of the struct pointed to by the {@code rtype} field. */
+    /** @return a {@link FFIType} view of the struct pointed to by the {@code rtype} field. */
     @NativeType("ffi_type *")
     public FFIType rtype() { return nrtype(address()); }
-    /** Returns the value of the {@code bytes} field. */
+    /** @return the value of the {@code bytes} field. */
     @NativeType("unsigned")
     public int bytes() { return nbytes(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("unsigned")
     public int flags() { return nflags(address()); }
 
@@ -296,26 +296,26 @@ public class FFICIF extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code abi} field. */
+        /** @return the value of the {@code abi} field. */
         @NativeType("ffi_abi")
         public int abi() { return FFICIF.nabi(address()); }
-        /** Returns the value of the {@code nargs} field. */
+        /** @return the value of the {@code nargs} field. */
         @NativeType("unsigned")
         public int nargs() { return FFICIF.nnargs(address()); }
         /**
-         * Returns a {@link PointerBuffer} view of the data pointed to by the {@code arg_types} field.
+         * @return a {@link PointerBuffer} view of the data pointed to by the {@code arg_types} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("ffi_type **")
         public PointerBuffer arg_types(int capacity) { return FFICIF.narg_types(address(), capacity); }
-        /** Returns a {@link FFIType} view of the struct pointed to by the {@code rtype} field. */
+        /** @return a {@link FFIType} view of the struct pointed to by the {@code rtype} field. */
         @NativeType("ffi_type *")
         public FFIType rtype() { return FFICIF.nrtype(address()); }
-        /** Returns the value of the {@code bytes} field. */
+        /** @return the value of the {@code bytes} field. */
         @NativeType("unsigned")
         public int bytes() { return FFICIF.nbytes(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("unsigned")
         public int flags() { return FFICIF.nflags(address()); }
 

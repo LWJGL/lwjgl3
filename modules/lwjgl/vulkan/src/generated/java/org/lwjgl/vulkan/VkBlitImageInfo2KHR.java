@@ -87,33 +87,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkImageBlit2KHR}, {@link KHRCopyCommands2#vkCmdBlitImage2KHR CmdBlitImage2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code srcImage} &ndash; the source image.</li>
- * <li>{@code srcImageLayout} &ndash; the layout of the source image subresources for the blit.</li>
- * <li>{@code dstImage} &ndash; the destination image.</li>
- * <li>{@code dstImageLayout} &ndash; the layout of the destination image subresources for the blit.</li>
- * <li>{@code regionCount} &ndash; the number of regions to blit.</li>
- * <li>{@code pRegions} &ndash; a pointer to an array of {@link VkImageBlit2KHR} structures specifying the regions to blit.</li>
- * <li>{@code filter} &ndash; a {@code VkFilter} specifying the filter to apply if the blits require scaling.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBlitImageInfo2KHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkImage srcImage;
- *     VkImageLayout srcImageLayout;
- *     VkImage dstImage;
- *     VkImageLayout dstImageLayout;
- *     uint32_t regionCount;
- *     {@link VkImageBlit2KHR VkImageBlit2KHR} const * pRegions;
- *     VkFilter filter;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkImage {@link #srcImage};
+ *     VkImageLayout {@link #srcImageLayout};
+ *     VkImage {@link #dstImage};
+ *     VkImageLayout {@link #dstImageLayout};
+ *     uint32_t {@link #regionCount};
+ *     {@link VkImageBlit2KHR VkImageBlit2KHR} const * {@link #pRegions};
+ *     VkFilter {@link #filter};
  * }</code></pre>
  */
 public class VkBlitImageInfo2KHR extends Struct implements NativeResource {
@@ -176,49 +162,49 @@ public class VkBlitImageInfo2KHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code srcImage} field. */
+    /** the source image. */
     @NativeType("VkImage")
     public long srcImage() { return nsrcImage(address()); }
-    /** Returns the value of the {@code srcImageLayout} field. */
+    /** the layout of the source image subresources for the blit. */
     @NativeType("VkImageLayout")
     public int srcImageLayout() { return nsrcImageLayout(address()); }
-    /** Returns the value of the {@code dstImage} field. */
+    /** the destination image. */
     @NativeType("VkImage")
     public long dstImage() { return ndstImage(address()); }
-    /** Returns the value of the {@code dstImageLayout} field. */
+    /** the layout of the destination image subresources for the blit. */
     @NativeType("VkImageLayout")
     public int dstImageLayout() { return ndstImageLayout(address()); }
-    /** Returns the value of the {@code regionCount} field. */
+    /** the number of regions to blit. */
     @NativeType("uint32_t")
     public int regionCount() { return nregionCount(address()); }
-    /** Returns a {@link VkImageBlit2KHR.Buffer} view of the struct array pointed to by the {@code pRegions} field. */
+    /** a pointer to an array of {@link VkImageBlit2KHR} structures specifying the regions to blit. */
     @NativeType("VkImageBlit2KHR const *")
     public VkImageBlit2KHR.Buffer pRegions() { return npRegions(address()); }
-    /** Returns the value of the {@code filter} field. */
+    /** a {@code VkFilter} specifying the filter to apply if the blits require scaling. */
     @NativeType("VkFilter")
     public int filter() { return nfilter(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkBlitImageInfo2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkBlitImageInfo2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code srcImage} field. */
+    /** Sets the specified value to the {@link #srcImage} field. */
     public VkBlitImageInfo2KHR srcImage(@NativeType("VkImage") long value) { nsrcImage(address(), value); return this; }
-    /** Sets the specified value to the {@code srcImageLayout} field. */
+    /** Sets the specified value to the {@link #srcImageLayout} field. */
     public VkBlitImageInfo2KHR srcImageLayout(@NativeType("VkImageLayout") int value) { nsrcImageLayout(address(), value); return this; }
-    /** Sets the specified value to the {@code dstImage} field. */
+    /** Sets the specified value to the {@link #dstImage} field. */
     public VkBlitImageInfo2KHR dstImage(@NativeType("VkImage") long value) { ndstImage(address(), value); return this; }
-    /** Sets the specified value to the {@code dstImageLayout} field. */
+    /** Sets the specified value to the {@link #dstImageLayout} field. */
     public VkBlitImageInfo2KHR dstImageLayout(@NativeType("VkImageLayout") int value) { ndstImageLayout(address(), value); return this; }
-    /** Sets the address of the specified {@link VkImageBlit2KHR.Buffer} to the {@code pRegions} field. */
+    /** Sets the address of the specified {@link VkImageBlit2KHR.Buffer} to the {@link #pRegions} field. */
     public VkBlitImageInfo2KHR pRegions(@NativeType("VkImageBlit2KHR const *") VkImageBlit2KHR.Buffer value) { npRegions(address(), value); return this; }
-    /** Sets the specified value to the {@code filter} field. */
+    /** Sets the specified value to the {@link #filter} field. */
     public VkBlitImageInfo2KHR filter(@NativeType("VkFilter") int value) { nfilter(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -496,49 +482,49 @@ public class VkBlitImageInfo2KHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkBlitImageInfo2KHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBlitImageInfo2KHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkBlitImageInfo2KHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBlitImageInfo2KHR.npNext(address()); }
-        /** Returns the value of the {@code srcImage} field. */
+        /** @return the value of the {@link VkBlitImageInfo2KHR#srcImage} field. */
         @NativeType("VkImage")
         public long srcImage() { return VkBlitImageInfo2KHR.nsrcImage(address()); }
-        /** Returns the value of the {@code srcImageLayout} field. */
+        /** @return the value of the {@link VkBlitImageInfo2KHR#srcImageLayout} field. */
         @NativeType("VkImageLayout")
         public int srcImageLayout() { return VkBlitImageInfo2KHR.nsrcImageLayout(address()); }
-        /** Returns the value of the {@code dstImage} field. */
+        /** @return the value of the {@link VkBlitImageInfo2KHR#dstImage} field. */
         @NativeType("VkImage")
         public long dstImage() { return VkBlitImageInfo2KHR.ndstImage(address()); }
-        /** Returns the value of the {@code dstImageLayout} field. */
+        /** @return the value of the {@link VkBlitImageInfo2KHR#dstImageLayout} field. */
         @NativeType("VkImageLayout")
         public int dstImageLayout() { return VkBlitImageInfo2KHR.ndstImageLayout(address()); }
-        /** Returns the value of the {@code regionCount} field. */
+        /** @return the value of the {@link VkBlitImageInfo2KHR#regionCount} field. */
         @NativeType("uint32_t")
         public int regionCount() { return VkBlitImageInfo2KHR.nregionCount(address()); }
-        /** Returns a {@link VkImageBlit2KHR.Buffer} view of the struct array pointed to by the {@code pRegions} field. */
+        /** @return a {@link VkImageBlit2KHR.Buffer} view of the struct array pointed to by the {@link VkBlitImageInfo2KHR#pRegions} field. */
         @NativeType("VkImageBlit2KHR const *")
         public VkImageBlit2KHR.Buffer pRegions() { return VkBlitImageInfo2KHR.npRegions(address()); }
-        /** Returns the value of the {@code filter} field. */
+        /** @return the value of the {@link VkBlitImageInfo2KHR#filter} field. */
         @NativeType("VkFilter")
         public int filter() { return VkBlitImageInfo2KHR.nfilter(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkBlitImageInfo2KHR#sType} field. */
         public VkBlitImageInfo2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBlitImageInfo2KHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkBlitImageInfo2KHR#pNext} field. */
         public VkBlitImageInfo2KHR.Buffer pNext(@NativeType("void const *") long value) { VkBlitImageInfo2KHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code srcImage} field. */
+        /** Sets the specified value to the {@link VkBlitImageInfo2KHR#srcImage} field. */
         public VkBlitImageInfo2KHR.Buffer srcImage(@NativeType("VkImage") long value) { VkBlitImageInfo2KHR.nsrcImage(address(), value); return this; }
-        /** Sets the specified value to the {@code srcImageLayout} field. */
+        /** Sets the specified value to the {@link VkBlitImageInfo2KHR#srcImageLayout} field. */
         public VkBlitImageInfo2KHR.Buffer srcImageLayout(@NativeType("VkImageLayout") int value) { VkBlitImageInfo2KHR.nsrcImageLayout(address(), value); return this; }
-        /** Sets the specified value to the {@code dstImage} field. */
+        /** Sets the specified value to the {@link VkBlitImageInfo2KHR#dstImage} field. */
         public VkBlitImageInfo2KHR.Buffer dstImage(@NativeType("VkImage") long value) { VkBlitImageInfo2KHR.ndstImage(address(), value); return this; }
-        /** Sets the specified value to the {@code dstImageLayout} field. */
+        /** Sets the specified value to the {@link VkBlitImageInfo2KHR#dstImageLayout} field. */
         public VkBlitImageInfo2KHR.Buffer dstImageLayout(@NativeType("VkImageLayout") int value) { VkBlitImageInfo2KHR.ndstImageLayout(address(), value); return this; }
-        /** Sets the address of the specified {@link VkImageBlit2KHR.Buffer} to the {@code pRegions} field. */
+        /** Sets the address of the specified {@link VkImageBlit2KHR.Buffer} to the {@link VkBlitImageInfo2KHR#pRegions} field. */
         public VkBlitImageInfo2KHR.Buffer pRegions(@NativeType("VkImageBlit2KHR const *") VkImageBlit2KHR.Buffer value) { VkBlitImageInfo2KHR.npRegions(address(), value); return this; }
-        /** Sets the specified value to the {@code filter} field. */
+        /** Sets the specified value to the {@link VkBlitImageInfo2KHR#filter} field. */
         public VkBlitImageInfo2KHR.Buffer filter(@NativeType("VkFilter") int value) { VkBlitImageInfo2KHR.nfilter(address(), value); return this; }
 
     }

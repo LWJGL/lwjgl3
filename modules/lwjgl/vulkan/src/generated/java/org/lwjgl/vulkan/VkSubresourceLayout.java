@@ -46,25 +46,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkImageDrmFormatModifierExplicitCreateInfoEXT}, {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code offset} &ndash; the byte offset from the start of the image or the plane where the image subresource begins.</li>
- * <li>{@code size} &ndash; the size in bytes of the image subresource. {@code size} includes any extra memory that is required based on {@code rowPitch}.</li>
- * <li>{@code rowPitch} &ndash; describes the number of bytes between each row of texels in an image.</li>
- * <li>{@code arrayPitch} &ndash; describes the number of bytes between each array layer of an image.</li>
- * <li>{@code depthPitch} &ndash; describes the number of bytes between each slice of 3D image.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSubresourceLayout {
- *     VkDeviceSize offset;
- *     VkDeviceSize size;
- *     VkDeviceSize rowPitch;
- *     VkDeviceSize arrayPitch;
- *     VkDeviceSize depthPitch;
+ *     VkDeviceSize {@link #offset};
+ *     VkDeviceSize {@link #size};
+ *     VkDeviceSize {@link #rowPitch};
+ *     VkDeviceSize {@link #arrayPitch};
+ *     VkDeviceSize {@link #depthPitch};
  * }</code></pre>
  */
 public class VkSubresourceLayout extends Struct implements NativeResource {
@@ -115,19 +105,19 @@ public class VkSubresourceLayout extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code offset} field. */
+    /** the byte offset from the start of the image or the plane where the image subresource begins. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** the size in bytes of the image subresource. {@code size} includes any extra memory that is required based on {@code rowPitch}. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** Returns the value of the {@code rowPitch} field. */
+    /** describes the number of bytes between each row of texels in an image. */
     @NativeType("VkDeviceSize")
     public long rowPitch() { return nrowPitch(address()); }
-    /** Returns the value of the {@code arrayPitch} field. */
+    /** describes the number of bytes between each array layer of an image. */
     @NativeType("VkDeviceSize")
     public long arrayPitch() { return narrayPitch(address()); }
-    /** Returns the value of the {@code depthPitch} field. */
+    /** describes the number of bytes between each slice of 3D image. */
     @NativeType("VkDeviceSize")
     public long depthPitch() { return ndepthPitch(address()); }
 
@@ -323,19 +313,19 @@ public class VkSubresourceLayout extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@link VkSubresourceLayout#offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkSubresourceLayout.noffset(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link VkSubresourceLayout#size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkSubresourceLayout.nsize(address()); }
-        /** Returns the value of the {@code rowPitch} field. */
+        /** @return the value of the {@link VkSubresourceLayout#rowPitch} field. */
         @NativeType("VkDeviceSize")
         public long rowPitch() { return VkSubresourceLayout.nrowPitch(address()); }
-        /** Returns the value of the {@code arrayPitch} field. */
+        /** @return the value of the {@link VkSubresourceLayout#arrayPitch} field. */
         @NativeType("VkDeviceSize")
         public long arrayPitch() { return VkSubresourceLayout.narrayPitch(address()); }
-        /** Returns the value of the {@code depthPitch} field. */
+        /** @return the value of the {@link VkSubresourceLayout#depthPitch} field. */
         @NativeType("VkDeviceSize")
         public long depthPitch() { return VkSubresourceLayout.ndepthPitch(address()); }
 

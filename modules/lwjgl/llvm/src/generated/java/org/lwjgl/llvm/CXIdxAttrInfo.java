@@ -67,12 +67,12 @@ public class CXIdxAttrInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code kind} field. */
+    /** @return the value of the {@code kind} field. */
     @NativeType("CXIdxAttrKind")
     public int kind() { return nkind(address()); }
-    /** Returns a {@link CXCursor} view of the {@code cursor} field. */
+    /** @return a {@link CXCursor} view of the {@code cursor} field. */
     public CXCursor cursor() { return ncursor(address()); }
-    /** Returns a {@link CXIdxLoc} view of the {@code loc} field. */
+    /** @return a {@link CXIdxLoc} view of the {@code loc} field. */
     public CXIdxLoc loc() { return nloc(address()); }
 
     // -----------------------------------
@@ -263,12 +263,12 @@ public class CXIdxAttrInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code kind} field. */
+        /** @return the value of the {@code kind} field. */
         @NativeType("CXIdxAttrKind")
         public int kind() { return CXIdxAttrInfo.nkind(address()); }
-        /** Returns a {@link CXCursor} view of the {@code cursor} field. */
+        /** @return a {@link CXCursor} view of the {@code cursor} field. */
         public CXCursor cursor() { return CXIdxAttrInfo.ncursor(address()); }
-        /** Returns a {@link CXIdxLoc} view of the {@code loc} field. */
+        /** @return a {@link CXIdxLoc} view of the {@code loc} field. */
         public CXIdxLoc loc() { return CXIdxAttrInfo.nloc(address()); }
 
     }

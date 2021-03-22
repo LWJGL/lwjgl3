@@ -16,27 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Describes a single video mode.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code width} &ndash; the width, in screen coordinates, of the video mode</li>
- * <li>{@code height} &ndash; the height, in screen coordinates, of the video mode</li>
- * <li>{@code redBits} &ndash; the bit depth of the red channel of the video mode</li>
- * <li>{@code greenBits} &ndash; the bit depth of the green channel of the video mode</li>
- * <li>{@code blueBits} &ndash; the bit depth of the blue channel of the video mode</li>
- * <li>{@code refreshRate} &ndash; the refresh rate, in Hz, of the video mode</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct GLFWvidmode {
- *     int width;
- *     int height;
- *     int redBits;
- *     int greenBits;
- *     int blueBits;
- *     int refreshRate;
+ *     int {@link #width};
+ *     int {@link #height};
+ *     int {@link #redBits};
+ *     int {@link #greenBits};
+ *     int {@link #blueBits};
+ *     int {@link #refreshRate};
  * }</code></pre>
  */
 @NativeType("struct GLFWvidmode")
@@ -91,17 +80,17 @@ public class GLFWVidMode extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code width} field. */
+    /** the width, in screen coordinates, of the video mode */
     public int width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** the height, in screen coordinates, of the video mode */
     public int height() { return nheight(address()); }
-    /** Returns the value of the {@code redBits} field. */
+    /** the bit depth of the red channel of the video mode */
     public int redBits() { return nredBits(address()); }
-    /** Returns the value of the {@code greenBits} field. */
+    /** the bit depth of the green channel of the video mode */
     public int greenBits() { return ngreenBits(address()); }
-    /** Returns the value of the {@code blueBits} field. */
+    /** the bit depth of the blue channel of the video mode */
     public int blueBits() { return nblueBits(address()); }
-    /** Returns the value of the {@code refreshRate} field. */
+    /** the refresh rate, in Hz, of the video mode */
     public int refreshRate() { return nrefreshRate(address()); }
 
     // -----------------------------------
@@ -186,17 +175,17 @@ public class GLFWVidMode extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@link GLFWVidMode#width} field. */
         public int width() { return GLFWVidMode.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@link GLFWVidMode#height} field. */
         public int height() { return GLFWVidMode.nheight(address()); }
-        /** Returns the value of the {@code redBits} field. */
+        /** @return the value of the {@link GLFWVidMode#redBits} field. */
         public int redBits() { return GLFWVidMode.nredBits(address()); }
-        /** Returns the value of the {@code greenBits} field. */
+        /** @return the value of the {@link GLFWVidMode#greenBits} field. */
         public int greenBits() { return GLFWVidMode.ngreenBits(address()); }
-        /** Returns the value of the {@code blueBits} field. */
+        /** @return the value of the {@link GLFWVidMode#blueBits} field. */
         public int blueBits() { return GLFWVidMode.nblueBits(address()); }
-        /** Returns the value of the {@code refreshRate} field. */
+        /** @return the value of the {@link GLFWVidMode#refreshRate} field. */
         public int refreshRate() { return GLFWVidMode.nrefreshRate(address()); }
 
     }

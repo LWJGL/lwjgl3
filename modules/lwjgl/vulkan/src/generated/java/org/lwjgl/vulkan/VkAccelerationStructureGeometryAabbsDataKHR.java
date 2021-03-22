@@ -36,23 +36,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkAccelerationStructureGeometryDataKHR}, {@link VkDeviceOrHostAddressConstKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code data} &ndash; a device or host address to memory containing {@link VkAabbPositionsKHR} structures containing position data for each axis-aligned bounding box in the geometry.</li>
- * <li>{@code stride} &ndash; the stride in bytes between each entry in {@code data}. The stride <b>must</b> be a multiple of 8.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkAccelerationStructureGeometryAabbsDataKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} data;
- *     VkDeviceSize stride;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} {@link #data};
+ *     VkDeviceSize {@link #stride};
  * }</code></pre>
  */
 public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implements NativeResource {
@@ -100,27 +91,27 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkDeviceOrHostAddressConstKHR} view of the {@code data} field. */
+    /** a device or host address to memory containing {@link VkAabbPositionsKHR} structures containing position data for each axis-aligned bounding box in the geometry. */
     public VkDeviceOrHostAddressConstKHR data() { return ndata(address()); }
-    /** Returns the value of the {@code stride} field. */
+    /** the stride in bytes between each entry in {@code data}. The stride <b>must</b> be a multiple of 8. */
     @NativeType("VkDeviceSize")
     public long stride() { return nstride(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureGeometryAabbsDataKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureGeometryAabbsDataKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code data} field. */
+    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #data} field. */
     public VkAccelerationStructureGeometryAabbsDataKHR data(VkDeviceOrHostAddressConstKHR value) { ndata(address(), value); return this; }
-    /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #data} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureGeometryAabbsDataKHR data(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(data()); return this; }
-    /** Sets the specified value to the {@code stride} field. */
+    /** Sets the specified value to the {@link #stride} field. */
     public VkAccelerationStructureGeometryAabbsDataKHR stride(@NativeType("VkDeviceSize") long value) { nstride(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -349,27 +340,27 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkAccelerationStructureGeometryAabbsDataKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAccelerationStructureGeometryAabbsDataKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkAccelerationStructureGeometryAabbsDataKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAccelerationStructureGeometryAabbsDataKHR.npNext(address()); }
-        /** Returns a {@link VkDeviceOrHostAddressConstKHR} view of the {@code data} field. */
+        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@link VkAccelerationStructureGeometryAabbsDataKHR#data} field. */
         public VkDeviceOrHostAddressConstKHR data() { return VkAccelerationStructureGeometryAabbsDataKHR.ndata(address()); }
-        /** Returns the value of the {@code stride} field. */
+        /** @return the value of the {@link VkAccelerationStructureGeometryAabbsDataKHR#stride} field. */
         @NativeType("VkDeviceSize")
         public long stride() { return VkAccelerationStructureGeometryAabbsDataKHR.nstride(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureGeometryAabbsDataKHR#sType} field. */
         public VkAccelerationStructureGeometryAabbsDataKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureGeometryAabbsDataKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureGeometryAabbsDataKHR#pNext} field. */
         public VkAccelerationStructureGeometryAabbsDataKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureGeometryAabbsDataKHR.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code data} field. */
+        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkAccelerationStructureGeometryAabbsDataKHR#data} field. */
         public VkAccelerationStructureGeometryAabbsDataKHR.Buffer data(VkDeviceOrHostAddressConstKHR value) { VkAccelerationStructureGeometryAabbsDataKHR.ndata(address(), value); return this; }
-        /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkAccelerationStructureGeometryAabbsDataKHR#data} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureGeometryAabbsDataKHR.Buffer data(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(data()); return this; }
-        /** Sets the specified value to the {@code stride} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureGeometryAabbsDataKHR#stride} field. */
         public VkAccelerationStructureGeometryAabbsDataKHR.Buffer stride(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureGeometryAabbsDataKHR.nstride(address(), value); return this; }
 
     }

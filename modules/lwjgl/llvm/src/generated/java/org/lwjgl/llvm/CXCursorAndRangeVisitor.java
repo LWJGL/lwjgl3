@@ -64,10 +64,10 @@ public class CXCursorAndRangeVisitor extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code context} field. */
+    /** @return the value of the {@code context} field. */
     @NativeType("void *")
     public long context() { return ncontext(address()); }
-    /** Returns the value of the {@code visit} field. */
+    /** @return the value of the {@code visit} field. */
     @NativeType("enum CXVisitorResult (*) (void *, CXCursor, CXSourceRange)")
     public CXCursorAndRangeVisit visit() { return nvisit(address()); }
 
@@ -312,10 +312,10 @@ public class CXCursorAndRangeVisitor extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code context} field. */
+        /** @return the value of the {@code context} field. */
         @NativeType("void *")
         public long context() { return CXCursorAndRangeVisitor.ncontext(address()); }
-        /** Returns the value of the {@code visit} field. */
+        /** @return the value of the {@code visit} field. */
         @NativeType("enum CXVisitorResult (*) (void *, CXCursor, CXSourceRange)")
         public CXCursorAndRangeVisit visit() { return CXCursorAndRangeVisitor.nvisit(address()); }
 

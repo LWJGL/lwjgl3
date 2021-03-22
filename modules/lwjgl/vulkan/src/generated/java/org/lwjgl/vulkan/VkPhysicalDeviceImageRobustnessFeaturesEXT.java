@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTImageRobustness#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code robustImageAccess} &ndash; indicates whether image accesses are tightly bounds-checked against the dimensions of the image view. <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-input-validation">Invalid texels</a> resulting from out of bounds image loads will be replaced as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-texel-replacement">Texel Replacement</a>, with either <code>(0,0,1)</code> or <code>(0,0,0)</code> values inserted for missing G, B, or A components based on the format.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceImageRobustnessFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 robustImageAccess;
+ *     VkBool32 {@link #robustImageAccess};
  * }</code></pre>
  */
 public class VkPhysicalDeviceImageRobustnessFeaturesEXT extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceImageRobustnessFeaturesEXT extends Struct implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code robustImageAccess} field. */
+    /** indicates whether image accesses are tightly bounds-checked against the dimensions of the image view. <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-input-validation">Invalid texels</a> resulting from out of bounds image loads will be replaced as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-texel-replacement">Texel Replacement</a>, with either <code>(0,0,1)</code> or <code>(0,0,0)</code> values inserted for missing G, B, or A components based on the format. */
     @NativeType("VkBool32")
     public boolean robustImageAccess() { return nrobustImageAccess(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceImageRobustnessFeaturesEXT extends Struct implement
     public VkPhysicalDeviceImageRobustnessFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceImageRobustnessFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code robustImageAccess} field. */
+    /** Sets the specified value to the {@link #robustImageAccess} field. */
     public VkPhysicalDeviceImageRobustnessFeaturesEXT robustImageAccess(@NativeType("VkBool32") boolean value) { nrobustImageAccess(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceImageRobustnessFeaturesEXT extends Struct implement
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceImageRobustnessFeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceImageRobustnessFeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code robustImageAccess} field. */
+        /** @return the value of the {@link VkPhysicalDeviceImageRobustnessFeaturesEXT#robustImageAccess} field. */
         @NativeType("VkBool32")
         public boolean robustImageAccess() { return VkPhysicalDeviceImageRobustnessFeaturesEXT.nrobustImageAccess(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceImageRobustnessFeaturesEXT extends Struct implement
         public VkPhysicalDeviceImageRobustnessFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceImageRobustnessFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceImageRobustnessFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceImageRobustnessFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code robustImageAccess} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceImageRobustnessFeaturesEXT#robustImageAccess} field. */
         public VkPhysicalDeviceImageRobustnessFeaturesEXT.Buffer robustImageAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceImageRobustnessFeaturesEXT.nrobustImageAccess(address(), value ? 1 : 0); return this; }
 
     }

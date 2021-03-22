@@ -69,13 +69,13 @@ public class VRTextureDepthInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code handle} field. */
+    /** @return the value of the {@code handle} field. */
     @NativeType("void *")
     public long handle() { return nhandle(address()); }
-    /** Returns a {@link HmdMatrix44} view of the {@code mProjection} field. */
+    /** @return a {@link HmdMatrix44} view of the {@code mProjection} field. */
     @NativeType("HmdMatrix44_t")
     public HmdMatrix44 mProjection() { return nmProjection(address()); }
-    /** Returns a {@link HmdVector2} view of the {@code vRange} field. */
+    /** @return a {@link HmdVector2} view of the {@code vRange} field. */
     @NativeType("HmdVector2_t")
     public HmdVector2 vRange() { return nvRange(address()); }
 
@@ -331,13 +331,13 @@ public class VRTextureDepthInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code handle} field. */
+        /** @return the value of the {@code handle} field. */
         @NativeType("void *")
         public long handle() { return VRTextureDepthInfo.nhandle(address()); }
-        /** Returns a {@link HmdMatrix44} view of the {@code mProjection} field. */
+        /** @return a {@link HmdMatrix44} view of the {@code mProjection} field. */
         @NativeType("HmdMatrix44_t")
         public HmdMatrix44 mProjection() { return VRTextureDepthInfo.nmProjection(address()); }
-        /** Returns a {@link HmdVector2} view of the {@code vRange} field. */
+        /** @return a {@link HmdVector2} view of the {@code vRange} field. */
         @NativeType("HmdVector2_t")
         public HmdVector2 vRange() { return VRTextureDepthInfo.nvRange(address()); }
 

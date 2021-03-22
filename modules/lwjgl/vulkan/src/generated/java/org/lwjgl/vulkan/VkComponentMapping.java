@@ -31,23 +31,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkImageViewCreateInfo}, {@link VkSamplerYcbcrConversionCreateInfo}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code r} &ndash; a {@code VkComponentSwizzle} specifying the component value placed in the R component of the output vector.</li>
- * <li>{@code g} &ndash; a {@code VkComponentSwizzle} specifying the component value placed in the G component of the output vector.</li>
- * <li>{@code b} &ndash; a {@code VkComponentSwizzle} specifying the component value placed in the B component of the output vector.</li>
- * <li>{@code a} &ndash; a {@code VkComponentSwizzle} specifying the component value placed in the A component of the output vector.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkComponentMapping {
- *     VkComponentSwizzle r;
- *     VkComponentSwizzle g;
- *     VkComponentSwizzle b;
- *     VkComponentSwizzle a;
+ *     VkComponentSwizzle {@link #r};
+ *     VkComponentSwizzle {@link #g};
+ *     VkComponentSwizzle {@link #b};
+ *     VkComponentSwizzle {@link #a};
  * }</code></pre>
  */
 public class VkComponentMapping extends Struct implements NativeResource {
@@ -95,26 +86,26 @@ public class VkComponentMapping extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code r} field. */
+    /** a {@code VkComponentSwizzle} specifying the component value placed in the R component of the output vector. */
     @NativeType("VkComponentSwizzle")
     public int r() { return nr(address()); }
-    /** Returns the value of the {@code g} field. */
+    /** a {@code VkComponentSwizzle} specifying the component value placed in the G component of the output vector. */
     @NativeType("VkComponentSwizzle")
     public int g() { return ng(address()); }
-    /** Returns the value of the {@code b} field. */
+    /** a {@code VkComponentSwizzle} specifying the component value placed in the B component of the output vector. */
     @NativeType("VkComponentSwizzle")
     public int b() { return nb(address()); }
-    /** Returns the value of the {@code a} field. */
+    /** a {@code VkComponentSwizzle} specifying the component value placed in the A component of the output vector. */
     @NativeType("VkComponentSwizzle")
     public int a() { return na(address()); }
 
-    /** Sets the specified value to the {@code r} field. */
+    /** Sets the specified value to the {@link #r} field. */
     public VkComponentMapping r(@NativeType("VkComponentSwizzle") int value) { nr(address(), value); return this; }
-    /** Sets the specified value to the {@code g} field. */
+    /** Sets the specified value to the {@link #g} field. */
     public VkComponentMapping g(@NativeType("VkComponentSwizzle") int value) { ng(address(), value); return this; }
-    /** Sets the specified value to the {@code b} field. */
+    /** Sets the specified value to the {@link #b} field. */
     public VkComponentMapping b(@NativeType("VkComponentSwizzle") int value) { nb(address(), value); return this; }
-    /** Sets the specified value to the {@code a} field. */
+    /** Sets the specified value to the {@link #a} field. */
     public VkComponentMapping a(@NativeType("VkComponentSwizzle") int value) { na(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,26 +334,26 @@ public class VkComponentMapping extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code r} field. */
+        /** @return the value of the {@link VkComponentMapping#r} field. */
         @NativeType("VkComponentSwizzle")
         public int r() { return VkComponentMapping.nr(address()); }
-        /** Returns the value of the {@code g} field. */
+        /** @return the value of the {@link VkComponentMapping#g} field. */
         @NativeType("VkComponentSwizzle")
         public int g() { return VkComponentMapping.ng(address()); }
-        /** Returns the value of the {@code b} field. */
+        /** @return the value of the {@link VkComponentMapping#b} field. */
         @NativeType("VkComponentSwizzle")
         public int b() { return VkComponentMapping.nb(address()); }
-        /** Returns the value of the {@code a} field. */
+        /** @return the value of the {@link VkComponentMapping#a} field. */
         @NativeType("VkComponentSwizzle")
         public int a() { return VkComponentMapping.na(address()); }
 
-        /** Sets the specified value to the {@code r} field. */
+        /** Sets the specified value to the {@link VkComponentMapping#r} field. */
         public VkComponentMapping.Buffer r(@NativeType("VkComponentSwizzle") int value) { VkComponentMapping.nr(address(), value); return this; }
-        /** Sets the specified value to the {@code g} field. */
+        /** Sets the specified value to the {@link VkComponentMapping#g} field. */
         public VkComponentMapping.Buffer g(@NativeType("VkComponentSwizzle") int value) { VkComponentMapping.ng(address(), value); return this; }
-        /** Sets the specified value to the {@code b} field. */
+        /** Sets the specified value to the {@link VkComponentMapping#b} field. */
         public VkComponentMapping.Buffer b(@NativeType("VkComponentSwizzle") int value) { VkComponentMapping.nb(address(), value); return this; }
-        /** Sets the specified value to the {@code a} field. */
+        /** Sets the specified value to the {@link VkComponentMapping#a} field. */
         public VkComponentMapping.Buffer a(@NativeType("VkComponentSwizzle") int value) { VkComponentMapping.na(address(), value); return this; }
 
     }

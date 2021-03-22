@@ -75,41 +75,23 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkAttachmentReference2}, {@link VkRenderPassCreateInfo2}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkSubpassDescriptionFlagBits} specifying usage of the subpass.</li>
- * <li>{@code pipelineBindPoint} &ndash; a {@code VkPipelineBindPoint} value specifying the pipeline type supported for this subpass.</li>
- * <li>{@code viewMask} &ndash; a bitfield of view indices describing which views rendering is broadcast to in this subpass, when multiview is enabled.</li>
- * <li>{@code inputAttachmentCount} &ndash; the number of input attachments.</li>
- * <li>{@code pInputAttachments} &ndash; a pointer to an array of {@link VkAttachmentReference2} structures defining the input attachments for this subpass and their layouts.</li>
- * <li>{@code colorAttachmentCount} &ndash; the number of color attachments.</li>
- * <li>{@code pColorAttachments} &ndash; a pointer to an array of {@link VkAttachmentReference2} structures defining the color attachments for this subpass and their layouts.</li>
- * <li>{@code pResolveAttachments} &ndash; an optional array of {@code colorAttachmentCount} {@link VkAttachmentReference2} structures defining the resolve attachments for this subpass and their layouts.</li>
- * <li>{@code pDepthStencilAttachment} &ndash; a pointer to a {@link VkAttachmentReference2} structure specifying the depth/stencil attachment for this subpass and its layout.</li>
- * <li>{@code preserveAttachmentCount} &ndash; the number of preserved attachments.</li>
- * <li>{@code pPreserveAttachments} &ndash; a pointer to an array of {@code preserveAttachmentCount} render pass attachment indices identifying attachments that are not used by this subpass, but whose contents <b>must</b> be preserved throughout the subpass.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSubpassDescription2 {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkSubpassDescriptionFlags flags;
- *     VkPipelineBindPoint pipelineBindPoint;
- *     uint32_t viewMask;
- *     uint32_t inputAttachmentCount;
- *     {@link VkAttachmentReference2 VkAttachmentReference2} const * pInputAttachments;
- *     uint32_t colorAttachmentCount;
- *     {@link VkAttachmentReference2 VkAttachmentReference2} const * pColorAttachments;
- *     {@link VkAttachmentReference2 VkAttachmentReference2} const * pResolveAttachments;
- *     {@link VkAttachmentReference2 VkAttachmentReference2} const * pDepthStencilAttachment;
- *     uint32_t preserveAttachmentCount;
- *     uint32_t const * pPreserveAttachments;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkSubpassDescriptionFlags {@link #flags};
+ *     VkPipelineBindPoint {@link #pipelineBindPoint};
+ *     uint32_t {@link #viewMask};
+ *     uint32_t {@link #inputAttachmentCount};
+ *     {@link VkAttachmentReference2 VkAttachmentReference2} const * {@link #pInputAttachments};
+ *     uint32_t {@link #colorAttachmentCount};
+ *     {@link VkAttachmentReference2 VkAttachmentReference2} const * {@link #pColorAttachments};
+ *     {@link VkAttachmentReference2 VkAttachmentReference2} const * {@link #pResolveAttachments};
+ *     {@link VkAttachmentReference2 VkAttachmentReference2} const * {@link #pDepthStencilAttachment};
+ *     uint32_t {@link #preserveAttachmentCount};
+ *     uint32_t const * {@link #pPreserveAttachments};
  * }</code></pre>
  */
 public class VkSubpassDescription2 extends Struct implements NativeResource {
@@ -184,72 +166,72 @@ public class VkSubpassDescription2 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkSubpassDescriptionFlagBits} specifying usage of the subpass. */
     @NativeType("VkSubpassDescriptionFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code pipelineBindPoint} field. */
+    /** a {@code VkPipelineBindPoint} value specifying the pipeline type supported for this subpass. */
     @NativeType("VkPipelineBindPoint")
     public int pipelineBindPoint() { return npipelineBindPoint(address()); }
-    /** Returns the value of the {@code viewMask} field. */
+    /** a bitfield of view indices describing which views rendering is broadcast to in this subpass, when multiview is enabled. */
     @NativeType("uint32_t")
     public int viewMask() { return nviewMask(address()); }
-    /** Returns the value of the {@code inputAttachmentCount} field. */
+    /** the number of input attachments. */
     @NativeType("uint32_t")
     public int inputAttachmentCount() { return ninputAttachmentCount(address()); }
-    /** Returns a {@link VkAttachmentReference2.Buffer} view of the struct array pointed to by the {@code pInputAttachments} field. */
+    /** a pointer to an array of {@link VkAttachmentReference2} structures defining the input attachments for this subpass and their layouts. */
     @Nullable
     @NativeType("VkAttachmentReference2 const *")
     public VkAttachmentReference2.Buffer pInputAttachments() { return npInputAttachments(address()); }
-    /** Returns the value of the {@code colorAttachmentCount} field. */
+    /** the number of color attachments. */
     @NativeType("uint32_t")
     public int colorAttachmentCount() { return ncolorAttachmentCount(address()); }
-    /** Returns a {@link VkAttachmentReference2.Buffer} view of the struct array pointed to by the {@code pColorAttachments} field. */
+    /** a pointer to an array of {@link VkAttachmentReference2} structures defining the color attachments for this subpass and their layouts. */
     @Nullable
     @NativeType("VkAttachmentReference2 const *")
     public VkAttachmentReference2.Buffer pColorAttachments() { return npColorAttachments(address()); }
-    /** Returns a {@link VkAttachmentReference2.Buffer} view of the struct array pointed to by the {@code pResolveAttachments} field. */
+    /** an optional array of {@code colorAttachmentCount} {@link VkAttachmentReference2} structures defining the resolve attachments for this subpass and their layouts. */
     @Nullable
     @NativeType("VkAttachmentReference2 const *")
     public VkAttachmentReference2.Buffer pResolveAttachments() { return npResolveAttachments(address()); }
-    /** Returns a {@link VkAttachmentReference2} view of the struct pointed to by the {@code pDepthStencilAttachment} field. */
+    /** a pointer to a {@link VkAttachmentReference2} structure specifying the depth/stencil attachment for this subpass and its layout. */
     @Nullable
     @NativeType("VkAttachmentReference2 const *")
     public VkAttachmentReference2 pDepthStencilAttachment() { return npDepthStencilAttachment(address()); }
-    /** Returns the value of the {@code preserveAttachmentCount} field. */
+    /** the number of preserved attachments. */
     @NativeType("uint32_t")
     public int preserveAttachmentCount() { return npreserveAttachmentCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pPreserveAttachments} field. */
+    /** a pointer to an array of {@code preserveAttachmentCount} render pass attachment indices identifying attachments that are not used by this subpass, but whose contents <b>must</b> be preserved throughout the subpass. */
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pPreserveAttachments() { return npPreserveAttachments(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSubpassDescription2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSubpassDescription2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkSubpassDescription2 flags(@NativeType("VkSubpassDescriptionFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code pipelineBindPoint} field. */
+    /** Sets the specified value to the {@link #pipelineBindPoint} field. */
     public VkSubpassDescription2 pipelineBindPoint(@NativeType("VkPipelineBindPoint") int value) { npipelineBindPoint(address(), value); return this; }
-    /** Sets the specified value to the {@code viewMask} field. */
+    /** Sets the specified value to the {@link #viewMask} field. */
     public VkSubpassDescription2 viewMask(@NativeType("uint32_t") int value) { nviewMask(address(), value); return this; }
-    /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@code pInputAttachments} field. */
+    /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@link #pInputAttachments} field. */
     public VkSubpassDescription2 pInputAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { npInputAttachments(address(), value); return this; }
-    /** Sets the specified value to the {@code colorAttachmentCount} field. */
+    /** Sets the specified value to the {@link #colorAttachmentCount} field. */
     public VkSubpassDescription2 colorAttachmentCount(@NativeType("uint32_t") int value) { ncolorAttachmentCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@code pColorAttachments} field. */
+    /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@link #pColorAttachments} field. */
     public VkSubpassDescription2 pColorAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { npColorAttachments(address(), value); return this; }
-    /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@code pResolveAttachments} field. */
+    /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@link #pResolveAttachments} field. */
     public VkSubpassDescription2 pResolveAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { npResolveAttachments(address(), value); return this; }
-    /** Sets the address of the specified {@link VkAttachmentReference2} to the {@code pDepthStencilAttachment} field. */
+    /** Sets the address of the specified {@link VkAttachmentReference2} to the {@link #pDepthStencilAttachment} field. */
     public VkSubpassDescription2 pDepthStencilAttachment(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2 value) { npDepthStencilAttachment(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pPreserveAttachments} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pPreserveAttachments} field. */
     public VkSubpassDescription2 pPreserveAttachments(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npPreserveAttachments(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -557,72 +539,72 @@ public class VkSubpassDescription2 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSubpassDescription2#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSubpassDescription2.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSubpassDescription2#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSubpassDescription2.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkSubpassDescription2#flags} field. */
         @NativeType("VkSubpassDescriptionFlags")
         public int flags() { return VkSubpassDescription2.nflags(address()); }
-        /** Returns the value of the {@code pipelineBindPoint} field. */
+        /** @return the value of the {@link VkSubpassDescription2#pipelineBindPoint} field. */
         @NativeType("VkPipelineBindPoint")
         public int pipelineBindPoint() { return VkSubpassDescription2.npipelineBindPoint(address()); }
-        /** Returns the value of the {@code viewMask} field. */
+        /** @return the value of the {@link VkSubpassDescription2#viewMask} field. */
         @NativeType("uint32_t")
         public int viewMask() { return VkSubpassDescription2.nviewMask(address()); }
-        /** Returns the value of the {@code inputAttachmentCount} field. */
+        /** @return the value of the {@link VkSubpassDescription2#inputAttachmentCount} field. */
         @NativeType("uint32_t")
         public int inputAttachmentCount() { return VkSubpassDescription2.ninputAttachmentCount(address()); }
-        /** Returns a {@link VkAttachmentReference2.Buffer} view of the struct array pointed to by the {@code pInputAttachments} field. */
+        /** @return a {@link VkAttachmentReference2.Buffer} view of the struct array pointed to by the {@link VkSubpassDescription2#pInputAttachments} field. */
         @Nullable
         @NativeType("VkAttachmentReference2 const *")
         public VkAttachmentReference2.Buffer pInputAttachments() { return VkSubpassDescription2.npInputAttachments(address()); }
-        /** Returns the value of the {@code colorAttachmentCount} field. */
+        /** @return the value of the {@link VkSubpassDescription2#colorAttachmentCount} field. */
         @NativeType("uint32_t")
         public int colorAttachmentCount() { return VkSubpassDescription2.ncolorAttachmentCount(address()); }
-        /** Returns a {@link VkAttachmentReference2.Buffer} view of the struct array pointed to by the {@code pColorAttachments} field. */
+        /** @return a {@link VkAttachmentReference2.Buffer} view of the struct array pointed to by the {@link VkSubpassDescription2#pColorAttachments} field. */
         @Nullable
         @NativeType("VkAttachmentReference2 const *")
         public VkAttachmentReference2.Buffer pColorAttachments() { return VkSubpassDescription2.npColorAttachments(address()); }
-        /** Returns a {@link VkAttachmentReference2.Buffer} view of the struct array pointed to by the {@code pResolveAttachments} field. */
+        /** @return a {@link VkAttachmentReference2.Buffer} view of the struct array pointed to by the {@link VkSubpassDescription2#pResolveAttachments} field. */
         @Nullable
         @NativeType("VkAttachmentReference2 const *")
         public VkAttachmentReference2.Buffer pResolveAttachments() { return VkSubpassDescription2.npResolveAttachments(address()); }
-        /** Returns a {@link VkAttachmentReference2} view of the struct pointed to by the {@code pDepthStencilAttachment} field. */
+        /** @return a {@link VkAttachmentReference2} view of the struct pointed to by the {@link VkSubpassDescription2#pDepthStencilAttachment} field. */
         @Nullable
         @NativeType("VkAttachmentReference2 const *")
         public VkAttachmentReference2 pDepthStencilAttachment() { return VkSubpassDescription2.npDepthStencilAttachment(address()); }
-        /** Returns the value of the {@code preserveAttachmentCount} field. */
+        /** @return the value of the {@link VkSubpassDescription2#preserveAttachmentCount} field. */
         @NativeType("uint32_t")
         public int preserveAttachmentCount() { return VkSubpassDescription2.npreserveAttachmentCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pPreserveAttachments} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkSubpassDescription2#pPreserveAttachments} field. */
         @Nullable
         @NativeType("uint32_t const *")
         public IntBuffer pPreserveAttachments() { return VkSubpassDescription2.npPreserveAttachments(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSubpassDescription2#sType} field. */
         public VkSubpassDescription2.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassDescription2.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSubpassDescription2#pNext} field. */
         public VkSubpassDescription2.Buffer pNext(@NativeType("void const *") long value) { VkSubpassDescription2.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkSubpassDescription2#flags} field. */
         public VkSubpassDescription2.Buffer flags(@NativeType("VkSubpassDescriptionFlags") int value) { VkSubpassDescription2.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code pipelineBindPoint} field. */
+        /** Sets the specified value to the {@link VkSubpassDescription2#pipelineBindPoint} field. */
         public VkSubpassDescription2.Buffer pipelineBindPoint(@NativeType("VkPipelineBindPoint") int value) { VkSubpassDescription2.npipelineBindPoint(address(), value); return this; }
-        /** Sets the specified value to the {@code viewMask} field. */
+        /** Sets the specified value to the {@link VkSubpassDescription2#viewMask} field. */
         public VkSubpassDescription2.Buffer viewMask(@NativeType("uint32_t") int value) { VkSubpassDescription2.nviewMask(address(), value); return this; }
-        /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@code pInputAttachments} field. */
+        /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@link VkSubpassDescription2#pInputAttachments} field. */
         public VkSubpassDescription2.Buffer pInputAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { VkSubpassDescription2.npInputAttachments(address(), value); return this; }
-        /** Sets the specified value to the {@code colorAttachmentCount} field. */
+        /** Sets the specified value to the {@link VkSubpassDescription2#colorAttachmentCount} field. */
         public VkSubpassDescription2.Buffer colorAttachmentCount(@NativeType("uint32_t") int value) { VkSubpassDescription2.ncolorAttachmentCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@code pColorAttachments} field. */
+        /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@link VkSubpassDescription2#pColorAttachments} field. */
         public VkSubpassDescription2.Buffer pColorAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { VkSubpassDescription2.npColorAttachments(address(), value); return this; }
-        /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@code pResolveAttachments} field. */
+        /** Sets the address of the specified {@link VkAttachmentReference2.Buffer} to the {@link VkSubpassDescription2#pResolveAttachments} field. */
         public VkSubpassDescription2.Buffer pResolveAttachments(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2.Buffer value) { VkSubpassDescription2.npResolveAttachments(address(), value); return this; }
-        /** Sets the address of the specified {@link VkAttachmentReference2} to the {@code pDepthStencilAttachment} field. */
+        /** Sets the address of the specified {@link VkAttachmentReference2} to the {@link VkSubpassDescription2#pDepthStencilAttachment} field. */
         public VkSubpassDescription2.Buffer pDepthStencilAttachment(@Nullable @NativeType("VkAttachmentReference2 const *") VkAttachmentReference2 value) { VkSubpassDescription2.npDepthStencilAttachment(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pPreserveAttachments} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkSubpassDescription2#pPreserveAttachments} field. */
         public VkSubpassDescription2.Buffer pPreserveAttachments(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkSubpassDescription2.npPreserveAttachments(address(), value); return this; }
 
     }

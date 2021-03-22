@@ -18,23 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying external image format properties.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code imageFormatProperties} &ndash; will be filled in as when calling {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties}, but the values returned <b>may</b> vary depending on the external handle type requested.</li>
- * <li>{@code externalMemoryFeatures} &ndash; a bitmask of {@code VkExternalMemoryFeatureFlagBitsNV}, indicating properties of the external memory handle type ({@link NVExternalMemoryCapabilities#vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV}{@code ::externalHandleType}) being queried, or 0 if the external memory handle type is 0.</li>
- * <li>{@code exportFromImportedHandleTypes} &ndash; a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} containing a bit set for every external handle type that <b>may</b> be used to create memory from which the handles of the type specified in {@link NVExternalMemoryCapabilities#vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV}{@code ::externalHandleType} <b>can</b> be exported, or 0 if the external memory handle type is 0.</li>
- * <li>{@code compatibleHandleTypes} &ndash; a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} containing a bit set for every external handle type that <b>may</b> be specified simultaneously with the handle type specified by {@link NVExternalMemoryCapabilities#vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV}{@code ::externalHandleType} when calling {@link VK10#vkAllocateMemory AllocateMemory}, or 0 if the external memory handle type is 0. {@code compatibleHandleTypes} will always contain {@link NVExternalMemoryCapabilities#vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV}{@code ::externalHandleType}</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkExternalImageFormatPropertiesNV {
- *     {@link VkImageFormatProperties VkImageFormatProperties} imageFormatProperties;
- *     VkExternalMemoryFeatureFlagsNV externalMemoryFeatures;
- *     VkExternalMemoryHandleTypeFlagsNV exportFromImportedHandleTypes;
- *     VkExternalMemoryHandleTypeFlagsNV compatibleHandleTypes;
+ *     {@link VkImageFormatProperties VkImageFormatProperties} {@link #imageFormatProperties};
+ *     VkExternalMemoryFeatureFlagsNV {@link #externalMemoryFeatures};
+ *     VkExternalMemoryHandleTypeFlagsNV {@link #exportFromImportedHandleTypes};
+ *     VkExternalMemoryHandleTypeFlagsNV {@link #compatibleHandleTypes};
  * }</code></pre>
  */
 public class VkExternalImageFormatPropertiesNV extends Struct implements NativeResource {
@@ -82,15 +73,15 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link VkImageFormatProperties} view of the {@code imageFormatProperties} field. */
+    /** will be filled in as when calling {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties}, but the values returned <b>may</b> vary depending on the external handle type requested. */
     public VkImageFormatProperties imageFormatProperties() { return nimageFormatProperties(address()); }
-    /** Returns the value of the {@code externalMemoryFeatures} field. */
+    /** a bitmask of {@code VkExternalMemoryFeatureFlagBitsNV}, indicating properties of the external memory handle type ({@link NVExternalMemoryCapabilities#vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV}{@code ::externalHandleType}) being queried, or 0 if the external memory handle type is 0. */
     @NativeType("VkExternalMemoryFeatureFlagsNV")
     public int externalMemoryFeatures() { return nexternalMemoryFeatures(address()); }
-    /** Returns the value of the {@code exportFromImportedHandleTypes} field. */
+    /** a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} containing a bit set for every external handle type that <b>may</b> be used to create memory from which the handles of the type specified in {@link NVExternalMemoryCapabilities#vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV}{@code ::externalHandleType} <b>can</b> be exported, or 0 if the external memory handle type is 0. */
     @NativeType("VkExternalMemoryHandleTypeFlagsNV")
     public int exportFromImportedHandleTypes() { return nexportFromImportedHandleTypes(address()); }
-    /** Returns the value of the {@code compatibleHandleTypes} field. */
+    /** a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} containing a bit set for every external handle type that <b>may</b> be specified simultaneously with the handle type specified by {@link NVExternalMemoryCapabilities#vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV}{@code ::externalHandleType} when calling {@link VK10#vkAllocateMemory AllocateMemory}, or 0 if the external memory handle type is 0. {@code compatibleHandleTypes} will always contain {@link NVExternalMemoryCapabilities#vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV}{@code ::externalHandleType} */
     @NativeType("VkExternalMemoryHandleTypeFlagsNV")
     public int compatibleHandleTypes() { return ncompatibleHandleTypes(address()); }
 
@@ -284,15 +275,15 @@ public class VkExternalImageFormatPropertiesNV extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link VkImageFormatProperties} view of the {@code imageFormatProperties} field. */
+        /** @return a {@link VkImageFormatProperties} view of the {@link VkExternalImageFormatPropertiesNV#imageFormatProperties} field. */
         public VkImageFormatProperties imageFormatProperties() { return VkExternalImageFormatPropertiesNV.nimageFormatProperties(address()); }
-        /** Returns the value of the {@code externalMemoryFeatures} field. */
+        /** @return the value of the {@link VkExternalImageFormatPropertiesNV#externalMemoryFeatures} field. */
         @NativeType("VkExternalMemoryFeatureFlagsNV")
         public int externalMemoryFeatures() { return VkExternalImageFormatPropertiesNV.nexternalMemoryFeatures(address()); }
-        /** Returns the value of the {@code exportFromImportedHandleTypes} field. */
+        /** @return the value of the {@link VkExternalImageFormatPropertiesNV#exportFromImportedHandleTypes} field. */
         @NativeType("VkExternalMemoryHandleTypeFlagsNV")
         public int exportFromImportedHandleTypes() { return VkExternalImageFormatPropertiesNV.nexportFromImportedHandleTypes(address()); }
-        /** Returns the value of the {@code compatibleHandleTypes} field. */
+        /** @return the value of the {@link VkExternalImageFormatPropertiesNV#compatibleHandleTypes} field. */
         @NativeType("VkExternalMemoryHandleTypeFlagsNV")
         public int compatibleHandleTypes() { return VkExternalImageFormatPropertiesNV.ncompatibleHandleTypes(address()); }
 

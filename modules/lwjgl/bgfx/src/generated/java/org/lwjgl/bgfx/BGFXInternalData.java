@@ -16,19 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Internal data.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code caps} &ndash; renderer capabilities</li>
- * <li>{@code context} &ndash; GL context, or D3D device</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct bgfx_internal_data_t {
- *     {@link BGFXCaps bgfx_caps_t} * caps;
- *     void * context;
+ *     {@link BGFXCaps bgfx_caps_t} * {@link #caps};
+ *     void * {@link #context};
  * }</code></pre>
  */
 @NativeType("struct bgfx_internal_data_t")
@@ -71,10 +64,10 @@ public class BGFXInternalData extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link BGFXCaps} view of the struct pointed to by the {@code caps} field. */
+    /** renderer capabilities */
     @NativeType("bgfx_caps_t *")
     public BGFXCaps caps() { return ncaps(address()); }
-    /** Returns the value of the {@code context} field. */
+    /** GL context, or D3D device */
     @NativeType("void *")
     public long context() { return ncontext(address()); }
 

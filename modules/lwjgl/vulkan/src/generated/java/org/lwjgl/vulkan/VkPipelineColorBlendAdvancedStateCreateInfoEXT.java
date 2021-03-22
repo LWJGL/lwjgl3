@@ -37,25 +37,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code blendOverlap} <b>must</b> be a valid {@code VkBlendOverlapEXT} value</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code srcPremultiplied} &ndash; specifies whether the source color of the blend operation is treated as premultiplied.</li>
- * <li>{@code dstPremultiplied} &ndash; specifies whether the destination color of the blend operation is treated as premultiplied.</li>
- * <li>{@code blendOverlap} &ndash; a {@code VkBlendOverlapEXT} value specifying how the source and destination sample&#8217;s coverage is correlated.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineColorBlendAdvancedStateCreateInfoEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkBool32 srcPremultiplied;
- *     VkBool32 dstPremultiplied;
- *     VkBlendOverlapEXT blendOverlap;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkBool32 {@link #srcPremultiplied};
+ *     VkBool32 {@link #dstPremultiplied};
+ *     VkBlendOverlapEXT {@link #blendOverlap};
  * }</code></pre>
  */
 public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct implements NativeResource {
@@ -106,31 +96,31 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code srcPremultiplied} field. */
+    /** specifies whether the source color of the blend operation is treated as premultiplied. */
     @NativeType("VkBool32")
     public boolean srcPremultiplied() { return nsrcPremultiplied(address()) != 0; }
-    /** Returns the value of the {@code dstPremultiplied} field. */
+    /** specifies whether the destination color of the blend operation is treated as premultiplied. */
     @NativeType("VkBool32")
     public boolean dstPremultiplied() { return ndstPremultiplied(address()) != 0; }
-    /** Returns the value of the {@code blendOverlap} field. */
+    /** a {@code VkBlendOverlapEXT} value specifying how the source and destination sample&#8217;s coverage is correlated. */
     @NativeType("VkBlendOverlapEXT")
     public int blendOverlap() { return nblendOverlap(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineColorBlendAdvancedStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineColorBlendAdvancedStateCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code srcPremultiplied} field. */
+    /** Sets the specified value to the {@link #srcPremultiplied} field. */
     public VkPipelineColorBlendAdvancedStateCreateInfoEXT srcPremultiplied(@NativeType("VkBool32") boolean value) { nsrcPremultiplied(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code dstPremultiplied} field. */
+    /** Sets the specified value to the {@link #dstPremultiplied} field. */
     public VkPipelineColorBlendAdvancedStateCreateInfoEXT dstPremultiplied(@NativeType("VkBool32") boolean value) { ndstPremultiplied(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code blendOverlap} field. */
+    /** Sets the specified value to the {@link #blendOverlap} field. */
     public VkPipelineColorBlendAdvancedStateCreateInfoEXT blendOverlap(@NativeType("VkBlendOverlapEXT") int value) { nblendOverlap(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -365,31 +355,31 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineColorBlendAdvancedStateCreateInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineColorBlendAdvancedStateCreateInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code srcPremultiplied} field. */
+        /** @return the value of the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#srcPremultiplied} field. */
         @NativeType("VkBool32")
         public boolean srcPremultiplied() { return VkPipelineColorBlendAdvancedStateCreateInfoEXT.nsrcPremultiplied(address()) != 0; }
-        /** Returns the value of the {@code dstPremultiplied} field. */
+        /** @return the value of the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#dstPremultiplied} field. */
         @NativeType("VkBool32")
         public boolean dstPremultiplied() { return VkPipelineColorBlendAdvancedStateCreateInfoEXT.ndstPremultiplied(address()) != 0; }
-        /** Returns the value of the {@code blendOverlap} field. */
+        /** @return the value of the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#blendOverlap} field. */
         @NativeType("VkBlendOverlapEXT")
         public int blendOverlap() { return VkPipelineColorBlendAdvancedStateCreateInfoEXT.nblendOverlap(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#sType} field. */
         public VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineColorBlendAdvancedStateCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#pNext} field. */
         public VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineColorBlendAdvancedStateCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code srcPremultiplied} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#srcPremultiplied} field. */
         public VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer srcPremultiplied(@NativeType("VkBool32") boolean value) { VkPipelineColorBlendAdvancedStateCreateInfoEXT.nsrcPremultiplied(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code dstPremultiplied} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#dstPremultiplied} field. */
         public VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer dstPremultiplied(@NativeType("VkBool32") boolean value) { VkPipelineColorBlendAdvancedStateCreateInfoEXT.ndstPremultiplied(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code blendOverlap} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#blendOverlap} field. */
         public VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer blendOverlap(@NativeType("VkBlendOverlapEXT") int value) { VkPipelineColorBlendAdvancedStateCreateInfoEXT.nblendOverlap(address(), value); return this; }
 
     }

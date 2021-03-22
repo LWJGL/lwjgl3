@@ -76,29 +76,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkClearValue}, {@link VkRect2D}, {@link VK10#vkCmdBeginRenderPass CmdBeginRenderPass}, {@link VK12#vkCmdBeginRenderPass2 CmdBeginRenderPass2}, {@link KHRCreateRenderpass2#vkCmdBeginRenderPass2KHR CmdBeginRenderPass2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code renderPass} &ndash; the render pass to begin an instance of.</li>
- * <li>{@code framebuffer} &ndash; the framebuffer containing the attachments that are used with the render pass.</li>
- * <li>{@code renderArea} &ndash; the render area that is affected by the render pass instance, and is described in more detail below.</li>
- * <li>{@code clearValueCount} &ndash; the number of elements in {@code pClearValues}.</li>
- * <li>{@code pClearValues} &ndash; a pointer to an array of {@code clearValueCount} {@link VkClearValue} structures that contains clear values for each attachment, if the attachment uses a {@code loadOp} value of {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR} or if the attachment has a depth/stencil format and uses a {@code stencilLoadOp} value of {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}. The array is indexed by attachment number. Only elements corresponding to cleared attachments are used. Other elements of {@code pClearValues} are ignored.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkRenderPassBeginInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkRenderPass renderPass;
- *     VkFramebuffer framebuffer;
- *     {@link VkRect2D VkRect2D} renderArea;
- *     uint32_t clearValueCount;
- *     {@link VkClearValue VkClearValue} const * pClearValues;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkRenderPass {@link #renderPass};
+ *     VkFramebuffer {@link #framebuffer};
+ *     {@link VkRect2D VkRect2D} {@link #renderArea};
+ *     uint32_t {@link #clearValueCount};
+ *     {@link VkClearValue VkClearValue} const * {@link #pClearValues};
  * }</code></pre>
  */
 public class VkRenderPassBeginInfo extends Struct implements NativeResource {
@@ -155,41 +143,41 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code renderPass} field. */
+    /** the render pass to begin an instance of. */
     @NativeType("VkRenderPass")
     public long renderPass() { return nrenderPass(address()); }
-    /** Returns the value of the {@code framebuffer} field. */
+    /** the framebuffer containing the attachments that are used with the render pass. */
     @NativeType("VkFramebuffer")
     public long framebuffer() { return nframebuffer(address()); }
-    /** Returns a {@link VkRect2D} view of the {@code renderArea} field. */
+    /** the render area that is affected by the render pass instance, and is described in more detail below. */
     public VkRect2D renderArea() { return nrenderArea(address()); }
-    /** Returns the value of the {@code clearValueCount} field. */
+    /** the number of elements in {@code pClearValues}. */
     @NativeType("uint32_t")
     public int clearValueCount() { return nclearValueCount(address()); }
-    /** Returns a {@link VkClearValue.Buffer} view of the struct array pointed to by the {@code pClearValues} field. */
+    /** a pointer to an array of {@code clearValueCount} {@link VkClearValue} structures that contains clear values for each attachment, if the attachment uses a {@code loadOp} value of {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR} or if the attachment has a depth/stencil format and uses a {@code stencilLoadOp} value of {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}. The array is indexed by attachment number. Only elements corresponding to cleared attachments are used. Other elements of {@code pClearValues} are ignored. */
     @Nullable
     @NativeType("VkClearValue const *")
     public VkClearValue.Buffer pClearValues() { return npClearValues(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassBeginInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassBeginInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code renderPass} field. */
+    /** Sets the specified value to the {@link #renderPass} field. */
     public VkRenderPassBeginInfo renderPass(@NativeType("VkRenderPass") long value) { nrenderPass(address(), value); return this; }
-    /** Sets the specified value to the {@code framebuffer} field. */
+    /** Sets the specified value to the {@link #framebuffer} field. */
     public VkRenderPassBeginInfo framebuffer(@NativeType("VkFramebuffer") long value) { nframebuffer(address(), value); return this; }
-    /** Copies the specified {@link VkRect2D} to the {@code renderArea} field. */
+    /** Copies the specified {@link VkRect2D} to the {@link #renderArea} field. */
     public VkRenderPassBeginInfo renderArea(VkRect2D value) { nrenderArea(address(), value); return this; }
-    /** Passes the {@code renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkRenderPassBeginInfo renderArea(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(renderArea()); return this; }
-    /** Sets the address of the specified {@link VkClearValue.Buffer} to the {@code pClearValues} field. */
+    /** Sets the address of the specified {@link VkClearValue.Buffer} to the {@link #pClearValues} field. */
     public VkRenderPassBeginInfo pClearValues(@Nullable @NativeType("VkClearValue const *") VkClearValue.Buffer value) { npClearValues(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -457,41 +445,41 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkRenderPassBeginInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderPassBeginInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkRenderPassBeginInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRenderPassBeginInfo.npNext(address()); }
-        /** Returns the value of the {@code renderPass} field. */
+        /** @return the value of the {@link VkRenderPassBeginInfo#renderPass} field. */
         @NativeType("VkRenderPass")
         public long renderPass() { return VkRenderPassBeginInfo.nrenderPass(address()); }
-        /** Returns the value of the {@code framebuffer} field. */
+        /** @return the value of the {@link VkRenderPassBeginInfo#framebuffer} field. */
         @NativeType("VkFramebuffer")
         public long framebuffer() { return VkRenderPassBeginInfo.nframebuffer(address()); }
-        /** Returns a {@link VkRect2D} view of the {@code renderArea} field. */
+        /** @return a {@link VkRect2D} view of the {@link VkRenderPassBeginInfo#renderArea} field. */
         public VkRect2D renderArea() { return VkRenderPassBeginInfo.nrenderArea(address()); }
-        /** Returns the value of the {@code clearValueCount} field. */
+        /** @return the value of the {@link VkRenderPassBeginInfo#clearValueCount} field. */
         @NativeType("uint32_t")
         public int clearValueCount() { return VkRenderPassBeginInfo.nclearValueCount(address()); }
-        /** Returns a {@link VkClearValue.Buffer} view of the struct array pointed to by the {@code pClearValues} field. */
+        /** @return a {@link VkClearValue.Buffer} view of the struct array pointed to by the {@link VkRenderPassBeginInfo#pClearValues} field. */
         @Nullable
         @NativeType("VkClearValue const *")
         public VkClearValue.Buffer pClearValues() { return VkRenderPassBeginInfo.npClearValues(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkRenderPassBeginInfo#sType} field. */
         public VkRenderPassBeginInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassBeginInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkRenderPassBeginInfo#pNext} field. */
         public VkRenderPassBeginInfo.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassBeginInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code renderPass} field. */
+        /** Sets the specified value to the {@link VkRenderPassBeginInfo#renderPass} field. */
         public VkRenderPassBeginInfo.Buffer renderPass(@NativeType("VkRenderPass") long value) { VkRenderPassBeginInfo.nrenderPass(address(), value); return this; }
-        /** Sets the specified value to the {@code framebuffer} field. */
+        /** Sets the specified value to the {@link VkRenderPassBeginInfo#framebuffer} field. */
         public VkRenderPassBeginInfo.Buffer framebuffer(@NativeType("VkFramebuffer") long value) { VkRenderPassBeginInfo.nframebuffer(address(), value); return this; }
-        /** Copies the specified {@link VkRect2D} to the {@code renderArea} field. */
+        /** Copies the specified {@link VkRect2D} to the {@link VkRenderPassBeginInfo#renderArea} field. */
         public VkRenderPassBeginInfo.Buffer renderArea(VkRect2D value) { VkRenderPassBeginInfo.nrenderArea(address(), value); return this; }
-        /** Passes the {@code renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkRenderPassBeginInfo#renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkRenderPassBeginInfo.Buffer renderArea(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(renderArea()); return this; }
-        /** Sets the address of the specified {@link VkClearValue.Buffer} to the {@code pClearValues} field. */
+        /** Sets the address of the specified {@link VkClearValue.Buffer} to the {@link VkRenderPassBeginInfo#pClearValues} field. */
         public VkRenderPassBeginInfo.Buffer pClearValues(@Nullable @NativeType("VkClearValue const *") VkClearValue.Buffer value) { VkRenderPassBeginInfo.npClearValues(address(), value); return this; }
 
     }

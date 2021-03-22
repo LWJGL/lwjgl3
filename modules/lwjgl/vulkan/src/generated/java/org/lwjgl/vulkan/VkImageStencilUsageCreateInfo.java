@@ -40,21 +40,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code stencilUsage} <b>must</b> not be 0</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code stencilUsage} &ndash; a bitmask of {@code VkImageUsageFlagBits} describing the intended usage of the stencil aspect of the image.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImageStencilUsageCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkImageUsageFlags stencilUsage;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkImageUsageFlags {@link #stencilUsage};
  * }</code></pre>
  */
 public class VkImageStencilUsageCreateInfo extends Struct implements NativeResource {
@@ -99,21 +91,21 @@ public class VkImageStencilUsageCreateInfo extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code stencilUsage} field. */
+    /** a bitmask of {@code VkImageUsageFlagBits} describing the intended usage of the stencil aspect of the image. */
     @NativeType("VkImageUsageFlags")
     public int stencilUsage() { return nstencilUsage(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkImageStencilUsageCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkImageStencilUsageCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code stencilUsage} field. */
+    /** Sets the specified value to the {@link #stencilUsage} field. */
     public VkImageStencilUsageCreateInfo stencilUsage(@NativeType("VkImageUsageFlags") int value) { nstencilUsage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,21 +328,21 @@ public class VkImageStencilUsageCreateInfo extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkImageStencilUsageCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageStencilUsageCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkImageStencilUsageCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageStencilUsageCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code stencilUsage} field. */
+        /** @return the value of the {@link VkImageStencilUsageCreateInfo#stencilUsage} field. */
         @NativeType("VkImageUsageFlags")
         public int stencilUsage() { return VkImageStencilUsageCreateInfo.nstencilUsage(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkImageStencilUsageCreateInfo#sType} field. */
         public VkImageStencilUsageCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkImageStencilUsageCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkImageStencilUsageCreateInfo#pNext} field. */
         public VkImageStencilUsageCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkImageStencilUsageCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code stencilUsage} field. */
+        /** Sets the specified value to the {@link VkImageStencilUsageCreateInfo#stencilUsage} field. */
         public VkImageStencilUsageCreateInfo.Buffer stencilUsage(@NativeType("VkImageUsageFlags") int value) { VkImageStencilUsageCreateInfo.nstencilUsage(address(), value); return this; }
 
     }

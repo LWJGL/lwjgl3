@@ -18,31 +18,17 @@ import org.lwjgl.system.windows.User32;
 /**
  * Win32-specific declarations for AWT native interface.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li><em>&lt;union&gt;</em>
- * 
- * <ul>
- * <li>{@code hwnd} &ndash; the native window handle</li>
- * <li>{@code hbitmap} &ndash; the DDB handle</li>
- * <li>{@code pbits} &ndash; the DIB handle</li>
- * </ul></li>
- * <li>{@code hdc} &ndash; the device context handle. This HDC should always be used instead of the HDC returned from {@code BeginPaint()} or any calls to {@link User32#GetDC}.</li>
- * <li>{@code hpalette} &ndash; the palette handle</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct JAWT_Win32DrawingSurfaceInfo {
  *     union {
- *         HWND hwnd;
- *         HBITMAP hbitmap;
- *         void * pbits;
+ *         HWND {@link #hwnd};
+ *         HBITMAP {@link #hbitmap};
+ *         void * {@link #pbits};
  *     };
- *     HDC hdc;
- *     HPALETTE hpalette;
+ *     HDC {@link #hdc};
+ *     HPALETTE {@link #hpalette};
  * }</code></pre>
  */
 @NativeType("struct JAWT_Win32DrawingSurfaceInfo")
@@ -96,23 +82,23 @@ public class JAWTWin32DrawingSurfaceInfo extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code hwnd} field. */
+    /** the native window handle */
     @NativeType("HWND")
     public long hwnd() { return nhwnd(address()); }
-    /** Returns the value of the {@code hbitmap} field. */
+    /** the DDB handle */
     @NativeType("HBITMAP")
     public long hbitmap() { return nhbitmap(address()); }
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code pbits} field.
-     *
      * @param capacity the number of elements in the returned buffer
+     *
+     * @return the DIB handle
      */
     @NativeType("void *")
     public ByteBuffer pbits(int capacity) { return npbits(address(), capacity); }
-    /** Returns the value of the {@code hdc} field. */
+    /** the device context handle. This HDC should always be used instead of the HDC returned from {@code BeginPaint()} or any calls to {@link User32#GetDC}. */
     @NativeType("HDC")
     public long hdc() { return nhdc(address()); }
-    /** Returns the value of the {@code hpalette} field. */
+    /** the palette handle */
     @NativeType("HPALETTE")
     public long hpalette() { return nhpalette(address()); }
 
@@ -196,23 +182,23 @@ public class JAWTWin32DrawingSurfaceInfo extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code hwnd} field. */
+        /** @return the value of the {@link JAWTWin32DrawingSurfaceInfo#hwnd} field. */
         @NativeType("HWND")
         public long hwnd() { return JAWTWin32DrawingSurfaceInfo.nhwnd(address()); }
-        /** Returns the value of the {@code hbitmap} field. */
+        /** @return the value of the {@link JAWTWin32DrawingSurfaceInfo#hbitmap} field. */
         @NativeType("HBITMAP")
         public long hbitmap() { return JAWTWin32DrawingSurfaceInfo.nhbitmap(address()); }
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code pbits} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@link JAWTWin32DrawingSurfaceInfo#pbits} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("void *")
         public ByteBuffer pbits(int capacity) { return JAWTWin32DrawingSurfaceInfo.npbits(address(), capacity); }
-        /** Returns the value of the {@code hdc} field. */
+        /** @return the value of the {@link JAWTWin32DrawingSurfaceInfo#hdc} field. */
         @NativeType("HDC")
         public long hdc() { return JAWTWin32DrawingSurfaceInfo.nhdc(address()); }
-        /** Returns the value of the {@code hpalette} field. */
+        /** @return the value of the {@link JAWTWin32DrawingSurfaceInfo#hpalette} field. */
         @NativeType("HPALETTE")
         public long hpalette() { return JAWTWin32DrawingSurfaceInfo.nhpalette(address()); }
 

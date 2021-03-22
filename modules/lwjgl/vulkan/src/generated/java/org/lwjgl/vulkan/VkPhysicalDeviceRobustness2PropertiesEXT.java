@@ -28,23 +28,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTRobustness2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code robustStorageBufferAccessSizeAlignment} &ndash; the number of bytes that the range of a storage buffer descriptor is rounded up to when used for bounds-checking when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled. This value is either 1 or 4.</li>
- * <li>{@code robustUniformBufferAccessSizeAlignment} &ndash; the number of bytes that the range of a uniform buffer descriptor is rounded up to when used for bounds-checking when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled. This value is a power of two in the range [1, 256].</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceRobustness2PropertiesEXT {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkDeviceSize robustStorageBufferAccessSizeAlignment;
- *     VkDeviceSize robustUniformBufferAccessSizeAlignment;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkDeviceSize {@link #robustStorageBufferAccessSizeAlignment};
+ *     VkDeviceSize {@link #robustUniformBufferAccessSizeAlignment};
  * }</code></pre>
  */
 public class VkPhysicalDeviceRobustness2PropertiesEXT extends Struct implements NativeResource {
@@ -92,22 +83,22 @@ public class VkPhysicalDeviceRobustness2PropertiesEXT extends Struct implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code robustStorageBufferAccessSizeAlignment} field. */
+    /** the number of bytes that the range of a storage buffer descriptor is rounded up to when used for bounds-checking when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled. This value is either 1 or 4. */
     @NativeType("VkDeviceSize")
     public long robustStorageBufferAccessSizeAlignment() { return nrobustStorageBufferAccessSizeAlignment(address()); }
-    /** Returns the value of the {@code robustUniformBufferAccessSizeAlignment} field. */
+    /** the number of bytes that the range of a uniform buffer descriptor is rounded up to when used for bounds-checking when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled. This value is a power of two in the range [1, 256]. */
     @NativeType("VkDeviceSize")
     public long robustUniformBufferAccessSizeAlignment() { return nrobustUniformBufferAccessSizeAlignment(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceRobustness2PropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceRobustness2PropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,22 +319,22 @@ public class VkPhysicalDeviceRobustness2PropertiesEXT extends Struct implements 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceRobustness2PropertiesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceRobustness2PropertiesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceRobustness2PropertiesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceRobustness2PropertiesEXT.npNext(address()); }
-        /** Returns the value of the {@code robustStorageBufferAccessSizeAlignment} field. */
+        /** @return the value of the {@link VkPhysicalDeviceRobustness2PropertiesEXT#robustStorageBufferAccessSizeAlignment} field. */
         @NativeType("VkDeviceSize")
         public long robustStorageBufferAccessSizeAlignment() { return VkPhysicalDeviceRobustness2PropertiesEXT.nrobustStorageBufferAccessSizeAlignment(address()); }
-        /** Returns the value of the {@code robustUniformBufferAccessSizeAlignment} field. */
+        /** @return the value of the {@link VkPhysicalDeviceRobustness2PropertiesEXT#robustUniformBufferAccessSizeAlignment} field. */
         @NativeType("VkDeviceSize")
         public long robustUniformBufferAccessSizeAlignment() { return VkPhysicalDeviceRobustness2PropertiesEXT.nrobustUniformBufferAccessSizeAlignment(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceRobustness2PropertiesEXT#sType} field. */
         public VkPhysicalDeviceRobustness2PropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRobustness2PropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceRobustness2PropertiesEXT#pNext} field. */
         public VkPhysicalDeviceRobustness2PropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRobustness2PropertiesEXT.npNext(address(), value); return this; }
 
     }

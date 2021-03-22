@@ -36,21 +36,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code decodeMode} <b>must</b> be a valid {@code VkFormat} value</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code decodeMode} &ndash; the intermediate format used to decode ASTC compressed formats.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImageViewASTCDecodeModeEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkFormat decodeMode;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkFormat {@link #decodeMode};
  * }</code></pre>
  */
 public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResource {
@@ -95,21 +87,21 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code decodeMode} field. */
+    /** the intermediate format used to decode ASTC compressed formats. */
     @NativeType("VkFormat")
     public int decodeMode() { return ndecodeMode(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkImageViewASTCDecodeModeEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkImageViewASTCDecodeModeEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code decodeMode} field. */
+    /** Sets the specified value to the {@link #decodeMode} field. */
     public VkImageViewASTCDecodeModeEXT decodeMode(@NativeType("VkFormat") int value) { ndecodeMode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -332,21 +324,21 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkImageViewASTCDecodeModeEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageViewASTCDecodeModeEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkImageViewASTCDecodeModeEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageViewASTCDecodeModeEXT.npNext(address()); }
-        /** Returns the value of the {@code decodeMode} field. */
+        /** @return the value of the {@link VkImageViewASTCDecodeModeEXT#decodeMode} field. */
         @NativeType("VkFormat")
         public int decodeMode() { return VkImageViewASTCDecodeModeEXT.ndecodeMode(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkImageViewASTCDecodeModeEXT#sType} field. */
         public VkImageViewASTCDecodeModeEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageViewASTCDecodeModeEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkImageViewASTCDecodeModeEXT#pNext} field. */
         public VkImageViewASTCDecodeModeEXT.Buffer pNext(@NativeType("void const *") long value) { VkImageViewASTCDecodeModeEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code decodeMode} field. */
+        /** Sets the specified value to the {@link VkImageViewASTCDecodeModeEXT#decodeMode} field. */
         public VkImageViewASTCDecodeModeEXT.Buffer decodeMode(@NativeType("VkFormat") int value) { VkImageViewASTCDecodeModeEXT.ndecodeMode(address(), value); return this; }
 
     }

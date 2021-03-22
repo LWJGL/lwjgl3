@@ -16,21 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code combined_id} &ndash; the ID of the {@code sampler2D} variable</li>
- * <li>{@code image_id} &ndash; the ID of the {@code texture2D} variable</li>
- * <li>{@code sampler_id} &ndash; the ID of the {@code sampler} variable</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct SpvcCombinedImageSampler {
- *     spvc_variable_id combined_id;
- *     spvc_variable_id image_id;
- *     spvc_variable_id sampler_id;
+ *     spvc_variable_id {@link #combined_id};
+ *     spvc_variable_id {@link #image_id};
+ *     spvc_variable_id {@link #sampler_id};
  * }</code></pre>
  */
 public class SpvcCombinedImageSampler extends Struct implements NativeResource {
@@ -75,21 +67,21 @@ public class SpvcCombinedImageSampler extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code combined_id} field. */
+    /** the ID of the {@code sampler2D} variable */
     @NativeType("spvc_variable_id")
     public int combined_id() { return ncombined_id(address()); }
-    /** Returns the value of the {@code image_id} field. */
+    /** the ID of the {@code texture2D} variable */
     @NativeType("spvc_variable_id")
     public int image_id() { return nimage_id(address()); }
-    /** Returns the value of the {@code sampler_id} field. */
+    /** the ID of the {@code sampler} variable */
     @NativeType("spvc_variable_id")
     public int sampler_id() { return nsampler_id(address()); }
 
-    /** Sets the specified value to the {@code combined_id} field. */
+    /** Sets the specified value to the {@link #combined_id} field. */
     public SpvcCombinedImageSampler combined_id(@NativeType("spvc_variable_id") int value) { ncombined_id(address(), value); return this; }
-    /** Sets the specified value to the {@code image_id} field. */
+    /** Sets the specified value to the {@link #image_id} field. */
     public SpvcCombinedImageSampler image_id(@NativeType("spvc_variable_id") int value) { nimage_id(address(), value); return this; }
-    /** Sets the specified value to the {@code sampler_id} field. */
+    /** Sets the specified value to the {@link #sampler_id} field. */
     public SpvcCombinedImageSampler sampler_id(@NativeType("spvc_variable_id") int value) { nsampler_id(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -312,21 +304,21 @@ public class SpvcCombinedImageSampler extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code combined_id} field. */
+        /** @return the value of the {@link SpvcCombinedImageSampler#combined_id} field. */
         @NativeType("spvc_variable_id")
         public int combined_id() { return SpvcCombinedImageSampler.ncombined_id(address()); }
-        /** Returns the value of the {@code image_id} field. */
+        /** @return the value of the {@link SpvcCombinedImageSampler#image_id} field. */
         @NativeType("spvc_variable_id")
         public int image_id() { return SpvcCombinedImageSampler.nimage_id(address()); }
-        /** Returns the value of the {@code sampler_id} field. */
+        /** @return the value of the {@link SpvcCombinedImageSampler#sampler_id} field. */
         @NativeType("spvc_variable_id")
         public int sampler_id() { return SpvcCombinedImageSampler.nsampler_id(address()); }
 
-        /** Sets the specified value to the {@code combined_id} field. */
+        /** Sets the specified value to the {@link SpvcCombinedImageSampler#combined_id} field. */
         public SpvcCombinedImageSampler.Buffer combined_id(@NativeType("spvc_variable_id") int value) { SpvcCombinedImageSampler.ncombined_id(address(), value); return this; }
-        /** Sets the specified value to the {@code image_id} field. */
+        /** Sets the specified value to the {@link SpvcCombinedImageSampler#image_id} field. */
         public SpvcCombinedImageSampler.Buffer image_id(@NativeType("spvc_variable_id") int value) { SpvcCombinedImageSampler.nimage_id(address(), value); return this; }
-        /** Sets the specified value to the {@code sampler_id} field. */
+        /** Sets the specified value to the {@link SpvcCombinedImageSampler#sampler_id} field. */
         public SpvcCombinedImageSampler.Buffer sampler_id(@NativeType("spvc_variable_id") int value) { SpvcCombinedImageSampler.nsampler_id(address(), value); return this; }
 
     }

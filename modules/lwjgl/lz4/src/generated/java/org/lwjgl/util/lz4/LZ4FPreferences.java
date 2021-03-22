@@ -20,24 +20,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * Makes it possible to supply advanced compression instructions to streaming interface. Structure must be first init to 0, using {@code memset()},
  * setting all parameters to default. All reserved fields must be set to zero.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code compressionLevel} &ndash; 0: default (fast mode); values &gt; {@link LZ4HC#LZ4HC_CLEVEL_MAX CLEVEL_MAX} count as {@link LZ4HC#LZ4HC_CLEVEL_MAX CLEVEL_MAX}; values &gt; 0 trigger "fast acceleration"</li>
- * <li>{@code autoFlush} &ndash; 1: always flush, reduces usage of internal buffers</li>
- * <li>{@code favorDecSpeed} &ndash; 1: parser favors decompression speed vs compression ratio. Only works for high compression modes (&ge; {@link LZ4HC#LZ4HC_CLEVEL_OPT_MIN CLEVEL_OPT_MIN}). Since version 1.8.2.</li>
- * <li>{@code reserved[3]} &ndash; must be zero for forward compatibility</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct LZ4F_preferences_t {
  *     {@link LZ4FFrameInfo LZ4F_frameInfo_t} frameInfo;
- *     int compressionLevel;
- *     unsigned autoFlush;
- *     unsigned favorDecSpeed;
- *     unsigned reserved[3];
+ *     int {@link #compressionLevel};
+ *     unsigned {@link #autoFlush};
+ *     unsigned {@link #favorDecSpeed};
+ *     unsigned {@link #reserved}[3];
  * }</code></pre>
  */
 @NativeType("struct LZ4F_preferences_t")
@@ -89,21 +80,21 @@ public class LZ4FPreferences extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link LZ4FFrameInfo} view of the {@code frameInfo} field. */
+    /** @return a {@link LZ4FFrameInfo} view of the {@code frameInfo} field. */
     @NativeType("LZ4F_frameInfo_t")
     public LZ4FFrameInfo frameInfo() { return nframeInfo(address()); }
-    /** Returns the value of the {@code compressionLevel} field. */
+    /** 0: default (fast mode); values &gt; {@link LZ4HC#LZ4HC_CLEVEL_MAX CLEVEL_MAX} count as {@link LZ4HC#LZ4HC_CLEVEL_MAX CLEVEL_MAX}; values &gt; 0 trigger "fast acceleration" */
     public int compressionLevel() { return ncompressionLevel(address()); }
-    /** Returns the value of the {@code autoFlush} field. */
+    /** 1: always flush, reduces usage of internal buffers */
     @NativeType("unsigned")
     public boolean autoFlush() { return nautoFlush(address()) != 0; }
-    /** Returns the value of the {@code favorDecSpeed} field. */
+    /** 1: parser favors decompression speed vs compression ratio. Only works for high compression modes (&ge; {@link LZ4HC#LZ4HC_CLEVEL_OPT_MIN CLEVEL_OPT_MIN}). Since version 1.8.2. */
     @NativeType("unsigned")
     public boolean favorDecSpeed() { return nfavorDecSpeed(address()) != 0; }
-    /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
+    /** must be zero for forward compatibility */
     @NativeType("unsigned[3]")
     public IntBuffer reserved() { return nreserved(address()); }
-    /** Returns the value at the specified index of the {@code reserved} field. */
+    /** must be zero for forward compatibility */
     @NativeType("unsigned")
     public int reserved(int index) { return nreserved(address(), index); }
 
@@ -111,15 +102,15 @@ public class LZ4FPreferences extends Struct implements NativeResource {
     public LZ4FPreferences frameInfo(@NativeType("LZ4F_frameInfo_t") LZ4FFrameInfo value) { nframeInfo(address(), value); return this; }
     /** Passes the {@code frameInfo} field to the specified {@link java.util.function.Consumer Consumer}. */
     public LZ4FPreferences frameInfo(java.util.function.Consumer<LZ4FFrameInfo> consumer) { consumer.accept(frameInfo()); return this; }
-    /** Sets the specified value to the {@code compressionLevel} field. */
+    /** Sets the specified value to the {@link #compressionLevel} field. */
     public LZ4FPreferences compressionLevel(int value) { ncompressionLevel(address(), value); return this; }
-    /** Sets the specified value to the {@code autoFlush} field. */
+    /** Sets the specified value to the {@link #autoFlush} field. */
     public LZ4FPreferences autoFlush(@NativeType("unsigned") boolean value) { nautoFlush(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code favorDecSpeed} field. */
+    /** Sets the specified value to the {@link #favorDecSpeed} field. */
     public LZ4FPreferences favorDecSpeed(@NativeType("unsigned") boolean value) { nfavorDecSpeed(address(), value ? 1 : 0); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
+    /** Copies the specified {@link IntBuffer} to the {@link #reserved} field. */
     public LZ4FPreferences reserved(@NativeType("unsigned[3]") IntBuffer value) { nreserved(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code reserved} field. */
+    /** Sets the specified value at the specified index of the {@link #reserved} field. */
     public LZ4FPreferences reserved(int index, @NativeType("unsigned") int value) { nreserved(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -365,21 +356,21 @@ public class LZ4FPreferences extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link LZ4FFrameInfo} view of the {@code frameInfo} field. */
+        /** @return a {@link LZ4FFrameInfo} view of the {@code frameInfo} field. */
         @NativeType("LZ4F_frameInfo_t")
         public LZ4FFrameInfo frameInfo() { return LZ4FPreferences.nframeInfo(address()); }
-        /** Returns the value of the {@code compressionLevel} field. */
+        /** @return the value of the {@link LZ4FPreferences#compressionLevel} field. */
         public int compressionLevel() { return LZ4FPreferences.ncompressionLevel(address()); }
-        /** Returns the value of the {@code autoFlush} field. */
+        /** @return the value of the {@link LZ4FPreferences#autoFlush} field. */
         @NativeType("unsigned")
         public boolean autoFlush() { return LZ4FPreferences.nautoFlush(address()) != 0; }
-        /** Returns the value of the {@code favorDecSpeed} field. */
+        /** @return the value of the {@link LZ4FPreferences#favorDecSpeed} field. */
         @NativeType("unsigned")
         public boolean favorDecSpeed() { return LZ4FPreferences.nfavorDecSpeed(address()) != 0; }
-        /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
+        /** @return a {@link IntBuffer} view of the {@link LZ4FPreferences#reserved} field. */
         @NativeType("unsigned[3]")
         public IntBuffer reserved() { return LZ4FPreferences.nreserved(address()); }
-        /** Returns the value at the specified index of the {@code reserved} field. */
+        /** @return the value at the specified index of the {@link LZ4FPreferences#reserved} field. */
         @NativeType("unsigned")
         public int reserved(int index) { return LZ4FPreferences.nreserved(address(), index); }
 
@@ -387,15 +378,15 @@ public class LZ4FPreferences extends Struct implements NativeResource {
         public LZ4FPreferences.Buffer frameInfo(@NativeType("LZ4F_frameInfo_t") LZ4FFrameInfo value) { LZ4FPreferences.nframeInfo(address(), value); return this; }
         /** Passes the {@code frameInfo} field to the specified {@link java.util.function.Consumer Consumer}. */
         public LZ4FPreferences.Buffer frameInfo(java.util.function.Consumer<LZ4FFrameInfo> consumer) { consumer.accept(frameInfo()); return this; }
-        /** Sets the specified value to the {@code compressionLevel} field. */
+        /** Sets the specified value to the {@link LZ4FPreferences#compressionLevel} field. */
         public LZ4FPreferences.Buffer compressionLevel(int value) { LZ4FPreferences.ncompressionLevel(address(), value); return this; }
-        /** Sets the specified value to the {@code autoFlush} field. */
+        /** Sets the specified value to the {@link LZ4FPreferences#autoFlush} field. */
         public LZ4FPreferences.Buffer autoFlush(@NativeType("unsigned") boolean value) { LZ4FPreferences.nautoFlush(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code favorDecSpeed} field. */
+        /** Sets the specified value to the {@link LZ4FPreferences#favorDecSpeed} field. */
         public LZ4FPreferences.Buffer favorDecSpeed(@NativeType("unsigned") boolean value) { LZ4FPreferences.nfavorDecSpeed(address(), value ? 1 : 0); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
+        /** Copies the specified {@link IntBuffer} to the {@link LZ4FPreferences#reserved} field. */
         public LZ4FPreferences.Buffer reserved(@NativeType("unsigned[3]") IntBuffer value) { LZ4FPreferences.nreserved(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code reserved} field. */
+        /** Sets the specified value at the specified index of the {@link LZ4FPreferences#reserved} field. */
         public LZ4FPreferences.Buffer reserved(int index, @NativeType("unsigned") int value) { LZ4FPreferences.nreserved(address(), index, value); return this; }
 
     }

@@ -15,17 +15,11 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code type} &ndash; one of:<br><table><tr><td>{@link Nuklear#NK_LAYOUT_DYNAMIC_FIXED LAYOUT_DYNAMIC_FIXED}</td><td>{@link Nuklear#NK_LAYOUT_DYNAMIC_ROW LAYOUT_DYNAMIC_ROW}</td><td>{@link Nuklear#NK_LAYOUT_DYNAMIC_FREE LAYOUT_DYNAMIC_FREE}</td><td>{@link Nuklear#NK_LAYOUT_DYNAMIC LAYOUT_DYNAMIC}</td></tr><tr><td>{@link Nuklear#NK_LAYOUT_STATIC_FIXED LAYOUT_STATIC_FIXED}</td><td>{@link Nuklear#NK_LAYOUT_STATIC_ROW LAYOUT_STATIC_ROW}</td><td>{@link Nuklear#NK_LAYOUT_STATIC_FREE LAYOUT_STATIC_FREE}</td><td>{@link Nuklear#NK_LAYOUT_STATIC LAYOUT_STATIC}</td></tr><tr><td>{@link Nuklear#NK_LAYOUT_TEMPLATE LAYOUT_TEMPLATE}</td><td>{@link Nuklear#NK_LAYOUT_COUNT LAYOUT_COUNT}</td></tr></table></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct nk_row_layout {
- *     enum nk_panel_row_layout_type type;
+ *     enum nk_panel_row_layout_type {@link #type};
  *     int index;
  *     float height;
  *     float min_height;
@@ -113,41 +107,41 @@ public class NkRowLayout extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** one of:<br><table><tr><td>{@link Nuklear#NK_LAYOUT_DYNAMIC_FIXED LAYOUT_DYNAMIC_FIXED}</td><td>{@link Nuklear#NK_LAYOUT_DYNAMIC_ROW LAYOUT_DYNAMIC_ROW}</td><td>{@link Nuklear#NK_LAYOUT_DYNAMIC_FREE LAYOUT_DYNAMIC_FREE}</td><td>{@link Nuklear#NK_LAYOUT_DYNAMIC LAYOUT_DYNAMIC}</td></tr><tr><td>{@link Nuklear#NK_LAYOUT_STATIC_FIXED LAYOUT_STATIC_FIXED}</td><td>{@link Nuklear#NK_LAYOUT_STATIC_ROW LAYOUT_STATIC_ROW}</td><td>{@link Nuklear#NK_LAYOUT_STATIC_FREE LAYOUT_STATIC_FREE}</td><td>{@link Nuklear#NK_LAYOUT_STATIC LAYOUT_STATIC}</td></tr><tr><td>{@link Nuklear#NK_LAYOUT_TEMPLATE LAYOUT_TEMPLATE}</td><td>{@link Nuklear#NK_LAYOUT_COUNT LAYOUT_COUNT}</td></tr></table> */
     @NativeType("enum nk_panel_row_layout_type")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code index} field. */
+    /** @return the value of the {@code index} field. */
     public int index() { return nindex(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** @return the value of the {@code height} field. */
     public float height() { return nheight(address()); }
-    /** Returns the value of the {@code min_height} field. */
+    /** @return the value of the {@code min_height} field. */
     public float min_height() { return nmin_height(address()); }
-    /** Returns the value of the {@code columns} field. */
+    /** @return the value of the {@code columns} field. */
     public int columns() { return ncolumns(address()); }
     /**
-     * Returns a {@link FloatBuffer} view of the data pointed to by the {@code ratio} field.
+     * @return a {@link FloatBuffer} view of the data pointed to by the {@code ratio} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
     @NativeType("float const *")
     public FloatBuffer ratio(int capacity) { return nratio(address(), capacity); }
-    /** Returns the value of the {@code item_width} field. */
+    /** @return the value of the {@code item_width} field. */
     public float item_width() { return nitem_width(address()); }
-    /** Returns the value of the {@code item_height} field. */
+    /** @return the value of the {@code item_height} field. */
     public float item_height() { return nitem_height(address()); }
-    /** Returns the value of the {@code item_offset} field. */
+    /** @return the value of the {@code item_offset} field. */
     public float item_offset() { return nitem_offset(address()); }
-    /** Returns the value of the {@code filled} field. */
+    /** @return the value of the {@code filled} field. */
     public float filled() { return nfilled(address()); }
-    /** Returns a {@link NkRect} view of the {@code item} field. */
+    /** @return a {@link NkRect} view of the {@code item} field. */
     @NativeType("struct nk_rect")
     public NkRect item() { return nitem(address()); }
-    /** Returns the value of the {@code tree_depth} field. */
+    /** @return the value of the {@code tree_depth} field. */
     public int tree_depth() { return ntree_depth(address()); }
-    /** Returns a {@link FloatBuffer} view of the {@code templates} field. */
+    /** @return a {@link FloatBuffer} view of the {@code templates} field. */
     @NativeType("float[16]")
     public FloatBuffer templates() { return ntemplates(address()); }
-    /** Returns the value at the specified index of the {@code templates} field. */
+    /** @return the value at the specified index of the {@code templates} field. */
     public float templates(int index) { return ntemplates(address(), index); }
 
     // -----------------------------------
@@ -250,41 +244,41 @@ public class NkRowLayout extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@link NkRowLayout#type} field. */
         @NativeType("enum nk_panel_row_layout_type")
         public int type() { return NkRowLayout.ntype(address()); }
-        /** Returns the value of the {@code index} field. */
+        /** @return the value of the {@code index} field. */
         public int index() { return NkRowLayout.nindex(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@code height} field. */
         public float height() { return NkRowLayout.nheight(address()); }
-        /** Returns the value of the {@code min_height} field. */
+        /** @return the value of the {@code min_height} field. */
         public float min_height() { return NkRowLayout.nmin_height(address()); }
-        /** Returns the value of the {@code columns} field. */
+        /** @return the value of the {@code columns} field. */
         public int columns() { return NkRowLayout.ncolumns(address()); }
         /**
-         * Returns a {@link FloatBuffer} view of the data pointed to by the {@code ratio} field.
+         * @return a {@link FloatBuffer} view of the data pointed to by the {@code ratio} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("float const *")
         public FloatBuffer ratio(int capacity) { return NkRowLayout.nratio(address(), capacity); }
-        /** Returns the value of the {@code item_width} field. */
+        /** @return the value of the {@code item_width} field. */
         public float item_width() { return NkRowLayout.nitem_width(address()); }
-        /** Returns the value of the {@code item_height} field. */
+        /** @return the value of the {@code item_height} field. */
         public float item_height() { return NkRowLayout.nitem_height(address()); }
-        /** Returns the value of the {@code item_offset} field. */
+        /** @return the value of the {@code item_offset} field. */
         public float item_offset() { return NkRowLayout.nitem_offset(address()); }
-        /** Returns the value of the {@code filled} field. */
+        /** @return the value of the {@code filled} field. */
         public float filled() { return NkRowLayout.nfilled(address()); }
-        /** Returns a {@link NkRect} view of the {@code item} field. */
+        /** @return a {@link NkRect} view of the {@code item} field. */
         @NativeType("struct nk_rect")
         public NkRect item() { return NkRowLayout.nitem(address()); }
-        /** Returns the value of the {@code tree_depth} field. */
+        /** @return the value of the {@code tree_depth} field. */
         public int tree_depth() { return NkRowLayout.ntree_depth(address()); }
-        /** Returns a {@link FloatBuffer} view of the {@code templates} field. */
+        /** @return a {@link FloatBuffer} view of the {@code templates} field. */
         @NativeType("float[16]")
         public FloatBuffer templates() { return NkRowLayout.ntemplates(address()); }
-        /** Returns the value at the specified index of the {@code templates} field. */
+        /** @return the value at the specified index of the {@code templates} field. */
         public float templates(int index) { return NkRowLayout.ntemplates(address(), index); }
 
     }

@@ -40,25 +40,15 @@ import org.lwjgl.system.linux.*;
  * 
  * <p>{@link KHRWaylandSurface#vkCreateWaylandSurfaceKHR CreateWaylandSurfaceKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code display} &ndash; {@code display} and {@code surface} are pointers to the Wayland {@code wl_display} and {@code wl_surface} to associate the surface with.</li>
- * <li>{@code surface} &ndash; see {@code display}</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkWaylandSurfaceCreateInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkWaylandSurfaceCreateFlagsKHR flags;
- *     struct wl_display * display;
- *     struct wl_surface * surface;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkWaylandSurfaceCreateFlagsKHR {@link #flags};
+ *     struct wl_display * {@link #display};
+ *     struct wl_surface * {@link #surface};
  * }</code></pre>
  */
 public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResource {
@@ -109,31 +99,31 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkWaylandSurfaceCreateFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code display} field. */
+    /** {@code display} and {@code surface} are pointers to the Wayland {@code wl_display} and {@code wl_surface} to associate the surface with. */
     @NativeType("struct wl_display *")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code surface} field. */
+    /** see {@code display} */
     @NativeType("struct wl_surface *")
     public long surface() { return nsurface(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkWaylandSurfaceCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkWaylandSurfaceCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkWaylandSurfaceCreateInfoKHR flags(@NativeType("VkWaylandSurfaceCreateFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code display} field. */
+    /** Sets the specified value to the {@link #display} field. */
     public VkWaylandSurfaceCreateInfoKHR display(@NativeType("struct wl_display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@code surface} field. */
+    /** Sets the specified value to the {@link #surface} field. */
     public VkWaylandSurfaceCreateInfoKHR surface(@NativeType("struct wl_surface *") long value) { nsurface(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -390,31 +380,31 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkWaylandSurfaceCreateInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkWaylandSurfaceCreateInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkWaylandSurfaceCreateInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkWaylandSurfaceCreateInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkWaylandSurfaceCreateInfoKHR#flags} field. */
         @NativeType("VkWaylandSurfaceCreateFlagsKHR")
         public int flags() { return VkWaylandSurfaceCreateInfoKHR.nflags(address()); }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@link VkWaylandSurfaceCreateInfoKHR#display} field. */
         @NativeType("struct wl_display *")
         public long display() { return VkWaylandSurfaceCreateInfoKHR.ndisplay(address()); }
-        /** Returns the value of the {@code surface} field. */
+        /** @return the value of the {@link VkWaylandSurfaceCreateInfoKHR#surface} field. */
         @NativeType("struct wl_surface *")
         public long surface() { return VkWaylandSurfaceCreateInfoKHR.nsurface(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkWaylandSurfaceCreateInfoKHR#sType} field. */
         public VkWaylandSurfaceCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkWaylandSurfaceCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkWaylandSurfaceCreateInfoKHR#pNext} field. */
         public VkWaylandSurfaceCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkWaylandSurfaceCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkWaylandSurfaceCreateInfoKHR#flags} field. */
         public VkWaylandSurfaceCreateInfoKHR.Buffer flags(@NativeType("VkWaylandSurfaceCreateFlagsKHR") int value) { VkWaylandSurfaceCreateInfoKHR.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code display} field. */
+        /** Sets the specified value to the {@link VkWaylandSurfaceCreateInfoKHR#display} field. */
         public VkWaylandSurfaceCreateInfoKHR.Buffer display(@NativeType("struct wl_display *") long value) { VkWaylandSurfaceCreateInfoKHR.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@code surface} field. */
+        /** Sets the specified value to the {@link VkWaylandSurfaceCreateInfoKHR#surface} field. */
         public VkWaylandSurfaceCreateInfoKHR.Buffer surface(@NativeType("struct wl_surface *") long value) { VkWaylandSurfaceCreateInfoKHR.nsurface(address(), value); return this; }
 
     }

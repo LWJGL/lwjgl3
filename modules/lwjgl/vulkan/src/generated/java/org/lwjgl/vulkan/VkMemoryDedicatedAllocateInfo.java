@@ -42,23 +42,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>Both of {@code buffer}, and {@code image} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code image} &ndash; {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a handle of an image which this memory will be bound to.</li>
- * <li>{@code buffer} &ndash; {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a handle of a buffer which this memory will be bound to.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkMemoryDedicatedAllocateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkImage image;
- *     VkBuffer buffer;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkImage {@link #image};
+ *     VkBuffer {@link #buffer};
  * }</code></pre>
  */
 public class VkMemoryDedicatedAllocateInfo extends Struct implements NativeResource {
@@ -106,26 +97,26 @@ public class VkMemoryDedicatedAllocateInfo extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code image} field. */
+    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a handle of an image which this memory will be bound to. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
-    /** Returns the value of the {@code buffer} field. */
+    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a handle of a buffer which this memory will be bound to. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryDedicatedAllocateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryDedicatedAllocateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code image} field. */
+    /** Sets the specified value to the {@link #image} field. */
     public VkMemoryDedicatedAllocateInfo image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
-    /** Sets the specified value to the {@code buffer} field. */
+    /** Sets the specified value to the {@link #buffer} field. */
     public VkMemoryDedicatedAllocateInfo buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -354,26 +345,26 @@ public class VkMemoryDedicatedAllocateInfo extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkMemoryDedicatedAllocateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryDedicatedAllocateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkMemoryDedicatedAllocateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMemoryDedicatedAllocateInfo.npNext(address()); }
-        /** Returns the value of the {@code image} field. */
+        /** @return the value of the {@link VkMemoryDedicatedAllocateInfo#image} field. */
         @NativeType("VkImage")
         public long image() { return VkMemoryDedicatedAllocateInfo.nimage(address()); }
-        /** Returns the value of the {@code buffer} field. */
+        /** @return the value of the {@link VkMemoryDedicatedAllocateInfo#buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkMemoryDedicatedAllocateInfo.nbuffer(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkMemoryDedicatedAllocateInfo#sType} field. */
         public VkMemoryDedicatedAllocateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryDedicatedAllocateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkMemoryDedicatedAllocateInfo#pNext} field. */
         public VkMemoryDedicatedAllocateInfo.Buffer pNext(@NativeType("void const *") long value) { VkMemoryDedicatedAllocateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code image} field. */
+        /** Sets the specified value to the {@link VkMemoryDedicatedAllocateInfo#image} field. */
         public VkMemoryDedicatedAllocateInfo.Buffer image(@NativeType("VkImage") long value) { VkMemoryDedicatedAllocateInfo.nimage(address(), value); return this; }
-        /** Sets the specified value to the {@code buffer} field. */
+        /** Sets the specified value to the {@link VkMemoryDedicatedAllocateInfo#buffer} field. */
         public VkMemoryDedicatedAllocateInfo.Buffer buffer(@NativeType("VkBuffer") long value) { VkMemoryDedicatedAllocateInfo.nbuffer(address(), value); return this; }
 
     }

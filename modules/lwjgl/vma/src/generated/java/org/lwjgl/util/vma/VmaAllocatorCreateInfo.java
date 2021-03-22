@@ -21,81 +21,22 @@ import org.lwjgl.vulkan.*;
 /**
  * Description of an Allocator to be created.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code flags} &ndash; flags for created allocator. Use {@code VmaAllocatorCreateFlagBits} enum. One of:<br><table><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT}</td></tr></table></li>
- * <li>{@code physicalDevice} &ndash; Vulkan physical device. It must be valid throughout whole lifetime of created allocator.</li>
- * <li>{@code device} &ndash; Vulkan device. It must be valid throughout whole lifetime of created allocator.</li>
- * <li>{@code preferredLargeHeapBlockSize} &ndash; 
- * preferred size of a single {@code VkDeviceMemory} block to be allocated from large heaps &gt; 1 GiB. Set to 0 to use default, which is currently 256
- * MiB. Optional.</li>
- * <li>{@code pAllocationCallbacks} &ndash; custom CPU memory allocation callbacks. Optional, can be null. When specified, will also be used for all CPU-side memory allocations. Optional.</li>
- * <li>{@code pDeviceMemoryCallbacks} &ndash; informative callbacks for {@code vkAllocateMemory}, {@code vkFreeMemory}. Optional.</li>
- * <li>{@code frameInUseCount} &ndash; 
- * Maximum number of additional frames that are in use at the same time as current frame.
- * 
- * <p>This value is used only when you make allocations with {@link Vma#VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT ALLOCATION_CREATE_CAN_BECOME_LOST_BIT} flag. Such allocation cannot become lost if
- * {@code allocation.lastUseFrameIndex >= allocator.currentFrameIndex - frameInUseCount}.</p>
- * 
- * <p>For example, if you double-buffer your command buffers, so resources used for rendering in previous frame may still be in use by the GPU at the moment
- * you allocate resources needed for the current frame, set this value to 1.</p>
- * 
- * <p>If you want to allow any allocations other than used in the current frame to become lost, set this value to 0.</p></li>
- * <li>{@code pHeapSizeLimit} &ndash; 
- * Either {@code NULL} or a pointer to an array of limits on maximum number of bytes that can be allocated out of particular Vulkan memory heap.
- * 
- * <p>If not {@code NULL}, it must be a pointer to an array of {@code VkPhysicalDeviceMemoryProperties::memoryHeapCount} elements, defining limit on maximum number
- * of bytes that can be allocated out of particular Vulkan memory heap.</p>
- * 
- * <p>Any of the elements may be equal to {@code VK_WHOLE_SIZE}, which means no limit on that heap. This is also the default in case of
- * {@code pHeapSizeLimit = NULL}.</p>
- * 
- * <p>If there is a limit defined for a heap:</p>
- * 
- * <ul>
- * <li>If user tries to allocate more memory from that heap using this allocator, the allocation fails with {@code VK_ERROR_OUT_OF_DEVICE_MEMORY}.</li>
- * <li>If the limit is smaller than heap size reported in {@code VkMemoryHeap::size}, the value of this limit will be reported instead when using
- * {@link Vma#vmaGetMemoryProperties GetMemoryProperties}.</li>
- * </ul>
- * 
- * <p>Warning! Using this feature may not be equivalent to installing a GPU with smaller amount of memory, because graphics driver doesn't necessary fail new
- * allocations with {@code VK_ERROR_OUT_OF_DEVICE_MEMORY} result when memory capacity is exceeded. It may return success and just silently migrate some
- * device memory blocks to system RAM. This driver behavior can also be controlled using {@code VK_AMD_memory_overallocation_behavior} extension.</p></li>
- * <li>{@code pVulkanFunctions} &ndash; pointers to Vulkan functions</li>
- * <li>{@code pRecordSettings} &ndash; 
- * parameters for recording of VMA calls. Can be null.
- * 
- * <p>If not null, it enables recording of calls to VMA functions to a file. If support for recording is not enabled using {@code VMA_RECORDING_ENABLED}
- * macro, creation of the allocator object fails with {@code VK_ERROR_FEATURE_NOT_PRESENT}.</p></li>
- * <li>{@code instance} &ndash; handle to Vulkan instance object.</li>
- * <li>{@code vulkanApiVersion} &ndash; 
- * the highest version of Vulkan that the application is designed to use. (optional)
- * 
- * <p>It must be a value in the format as created by macro {@code VK_MAKE_VERSION} or a constant like: {@code VK_API_VERSION_1_1},
- * {@code VK_API_VERSION_1_0}. The patch version number specified is ignored. Only the major and minor versions are considered. It must be less or equal
- * (preferably equal) to value as passed to {@code vkCreateInstance} as {@code VkApplicationInfo::apiVersion}. Only versions 1.0, 1.1 and 1.2 are supported by
- * the current implementation.</p>
- * 
- * <p>Leaving it initialized to zero is equivalent to {@code VK_API_VERSION_1_0}.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VmaAllocatorCreateInfo {
- *     VmaAllocatorCreateFlags flags;
- *     VkPhysicalDevice physicalDevice;
- *     VkDevice device;
- *     VkDeviceSize preferredLargeHeapBlockSize;
- *     {@link VkAllocationCallbacks VkAllocationCallbacks} const * pAllocationCallbacks;
- *     {@link VmaDeviceMemoryCallbacks VmaDeviceMemoryCallbacks} const * pDeviceMemoryCallbacks;
- *     uint32_t frameInUseCount;
- *     VkDeviceSize const * pHeapSizeLimit;
- *     {@link VmaVulkanFunctions VmaVulkanFunctions} const * pVulkanFunctions;
- *     {@link VmaRecordSettings VmaRecordSettings} const * pRecordSettings;
- *     VkInstance instance;
- *     uint32_t vulkanApiVersion;
+ *     VmaAllocatorCreateFlags {@link #flags};
+ *     VkPhysicalDevice {@link #physicalDevice};
+ *     VkDevice {@link #device};
+ *     VkDeviceSize {@link #preferredLargeHeapBlockSize};
+ *     {@link VkAllocationCallbacks VkAllocationCallbacks} const * {@link #pAllocationCallbacks};
+ *     {@link VmaDeviceMemoryCallbacks VmaDeviceMemoryCallbacks} const * {@link #pDeviceMemoryCallbacks};
+ *     uint32_t {@link #frameInUseCount};
+ *     VkDeviceSize const * {@link #pHeapSizeLimit};
+ *     {@link VmaVulkanFunctions VmaVulkanFunctions} const * {@link #pVulkanFunctions};
+ *     {@link VmaRecordSettings VmaRecordSettings} const * {@link #pRecordSettings};
+ *     VkInstance {@link #instance};
+ *     uint32_t {@link #vulkanApiVersion};
  * }</code></pre>
  */
 public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
@@ -167,74 +108,119 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code flags} field. */
+    /** flags for created allocator. Use {@code VmaAllocatorCreateFlagBits} enum. One of:<br><table><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT}</td></tr></table> */
     @NativeType("VmaAllocatorCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code physicalDevice} field. */
+    /** Vulkan physical device. It must be valid throughout whole lifetime of created allocator. */
     @NativeType("VkPhysicalDevice")
     public long physicalDevice() { return nphysicalDevice(address()); }
-    /** Returns the value of the {@code device} field. */
+    /** Vulkan device. It must be valid throughout whole lifetime of created allocator. */
     @NativeType("VkDevice")
     public long device() { return ndevice(address()); }
-    /** Returns the value of the {@code preferredLargeHeapBlockSize} field. */
+    /**
+     * preferred size of a single {@code VkDeviceMemory} block to be allocated from large heaps &gt; 1 GiB. Set to 0 to use default, which is currently 256
+     * MiB. Optional.
+     */
     @NativeType("VkDeviceSize")
     public long preferredLargeHeapBlockSize() { return npreferredLargeHeapBlockSize(address()); }
-    /** Returns a {@link VkAllocationCallbacks} view of the struct pointed to by the {@code pAllocationCallbacks} field. */
+    /** custom CPU memory allocation callbacks. Optional, can be null. When specified, will also be used for all CPU-side memory allocations. Optional. */
     @Nullable
     @NativeType("VkAllocationCallbacks const *")
     public VkAllocationCallbacks pAllocationCallbacks() { return npAllocationCallbacks(address()); }
-    /** Returns a {@link VmaDeviceMemoryCallbacks} view of the struct pointed to by the {@code pDeviceMemoryCallbacks} field. */
+    /** informative callbacks for {@code vkAllocateMemory}, {@code vkFreeMemory}. Optional. */
     @Nullable
     @NativeType("VmaDeviceMemoryCallbacks const *")
     public VmaDeviceMemoryCallbacks pDeviceMemoryCallbacks() { return npDeviceMemoryCallbacks(address()); }
-    /** Returns the value of the {@code frameInUseCount} field. */
+    /**
+     * Maximum number of additional frames that are in use at the same time as current frame.
+     * 
+     * <p>This value is used only when you make allocations with {@link Vma#VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT ALLOCATION_CREATE_CAN_BECOME_LOST_BIT} flag. Such allocation cannot become lost if
+     * {@code allocation.lastUseFrameIndex >= allocator.currentFrameIndex - frameInUseCount}.</p>
+     * 
+     * <p>For example, if you double-buffer your command buffers, so resources used for rendering in previous frame may still be in use by the GPU at the moment
+     * you allocate resources needed for the current frame, set this value to 1.</p>
+     * 
+     * <p>If you want to allow any allocations other than used in the current frame to become lost, set this value to 0.</p>
+     */
     @NativeType("uint32_t")
     public int frameInUseCount() { return nframeInUseCount(address()); }
     /**
-     * Returns a {@link LongBuffer} view of the data pointed to by the {@code pHeapSizeLimit} field.
-     *
      * @param capacity the number of elements in the returned buffer
+     *
+     * @return Either {@code NULL} or a pointer to an array of limits on maximum number of bytes that can be allocated out of particular Vulkan memory heap.
+     *         
+     *         <p>If not {@code NULL}, it must be a pointer to an array of {@code VkPhysicalDeviceMemoryProperties::memoryHeapCount} elements, defining limit on maximum number
+     *         of bytes that can be allocated out of particular Vulkan memory heap.</p>
+     *         
+     *         <p>Any of the elements may be equal to {@code VK_WHOLE_SIZE}, which means no limit on that heap. This is also the default in case of
+     *         {@code pHeapSizeLimit = NULL}.</p>
+     *         
+     *         <p>If there is a limit defined for a heap:</p>
+     *         
+     *         <ul>
+     *         <li>If user tries to allocate more memory from that heap using this allocator, the allocation fails with {@code VK_ERROR_OUT_OF_DEVICE_MEMORY}.</li>
+     *         <li>If the limit is smaller than heap size reported in {@code VkMemoryHeap::size}, the value of this limit will be reported instead when using
+     *         {@link Vma#vmaGetMemoryProperties GetMemoryProperties}.</li>
+     *         </ul>
+     *         
+     *         <p>Warning! Using this feature may not be equivalent to installing a GPU with smaller amount of memory, because graphics driver doesn't necessary fail new
+     *         allocations with {@code VK_ERROR_OUT_OF_DEVICE_MEMORY} result when memory capacity is exceeded. It may return success and just silently migrate some
+     *         device memory blocks to system RAM. This driver behavior can also be controlled using {@code VK_AMD_memory_overallocation_behavior} extension.</p>
      */
     @Nullable
     @NativeType("VkDeviceSize const *")
     public LongBuffer pHeapSizeLimit(int capacity) { return npHeapSizeLimit(address(), capacity); }
-    /** Returns a {@link VmaVulkanFunctions} view of the struct pointed to by the {@code pVulkanFunctions} field. */
+    /** pointers to Vulkan functions */
     @NativeType("VmaVulkanFunctions const *")
     public VmaVulkanFunctions pVulkanFunctions() { return npVulkanFunctions(address()); }
-    /** Returns a {@link VmaRecordSettings} view of the struct pointed to by the {@code pRecordSettings} field. */
+    /**
+     * parameters for recording of VMA calls. Can be null.
+     * 
+     * <p>If not null, it enables recording of calls to VMA functions to a file. If support for recording is not enabled using {@code VMA_RECORDING_ENABLED}
+     * macro, creation of the allocator object fails with {@code VK_ERROR_FEATURE_NOT_PRESENT}.</p>
+     */
     @Nullable
     @NativeType("VmaRecordSettings const *")
     public VmaRecordSettings pRecordSettings() { return npRecordSettings(address()); }
-    /** Returns the value of the {@code instance} field. */
+    /** handle to Vulkan instance object. */
     @NativeType("VkInstance")
     public long instance() { return ninstance(address()); }
-    /** Returns the value of the {@code vulkanApiVersion} field. */
+    /**
+     * the highest version of Vulkan that the application is designed to use. (optional)
+     * 
+     * <p>It must be a value in the format as created by macro {@code VK_MAKE_VERSION} or a constant like: {@code VK_API_VERSION_1_1},
+     * {@code VK_API_VERSION_1_0}. The patch version number specified is ignored. Only the major and minor versions are considered. It must be less or equal
+     * (preferably equal) to value as passed to {@code vkCreateInstance} as {@code VkApplicationInfo::apiVersion}. Only versions 1.0, 1.1 and 1.2 are supported by
+     * the current implementation.</p>
+     * 
+     * <p>Leaving it initialized to zero is equivalent to {@code VK_API_VERSION_1_0}.</p>
+     */
     @NativeType("uint32_t")
     public int vulkanApiVersion() { return nvulkanApiVersion(address()); }
 
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VmaAllocatorCreateInfo flags(@NativeType("VmaAllocatorCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code physicalDevice} field. */
+    /** Sets the specified value to the {@link #physicalDevice} field. */
     public VmaAllocatorCreateInfo physicalDevice(VkPhysicalDevice value) { nphysicalDevice(address(), value); return this; }
-    /** Sets the specified value to the {@code device} field. */
+    /** Sets the specified value to the {@link #device} field. */
     public VmaAllocatorCreateInfo device(VkDevice value) { ndevice(address(), value); return this; }
-    /** Sets the specified value to the {@code preferredLargeHeapBlockSize} field. */
+    /** Sets the specified value to the {@link #preferredLargeHeapBlockSize} field. */
     public VmaAllocatorCreateInfo preferredLargeHeapBlockSize(@NativeType("VkDeviceSize") long value) { npreferredLargeHeapBlockSize(address(), value); return this; }
-    /** Sets the address of the specified {@link VkAllocationCallbacks} to the {@code pAllocationCallbacks} field. */
+    /** Sets the address of the specified {@link VkAllocationCallbacks} to the {@link #pAllocationCallbacks} field. */
     public VmaAllocatorCreateInfo pAllocationCallbacks(@Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks value) { npAllocationCallbacks(address(), value); return this; }
-    /** Sets the address of the specified {@link VmaDeviceMemoryCallbacks} to the {@code pDeviceMemoryCallbacks} field. */
+    /** Sets the address of the specified {@link VmaDeviceMemoryCallbacks} to the {@link #pDeviceMemoryCallbacks} field. */
     public VmaAllocatorCreateInfo pDeviceMemoryCallbacks(@Nullable @NativeType("VmaDeviceMemoryCallbacks const *") VmaDeviceMemoryCallbacks value) { npDeviceMemoryCallbacks(address(), value); return this; }
-    /** Sets the specified value to the {@code frameInUseCount} field. */
+    /** Sets the specified value to the {@link #frameInUseCount} field. */
     public VmaAllocatorCreateInfo frameInUseCount(@NativeType("uint32_t") int value) { nframeInUseCount(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@code pHeapSizeLimit} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@link #pHeapSizeLimit} field. */
     public VmaAllocatorCreateInfo pHeapSizeLimit(@Nullable @NativeType("VkDeviceSize const *") LongBuffer value) { npHeapSizeLimit(address(), value); return this; }
-    /** Sets the address of the specified {@link VmaVulkanFunctions} to the {@code pVulkanFunctions} field. */
+    /** Sets the address of the specified {@link VmaVulkanFunctions} to the {@link #pVulkanFunctions} field. */
     public VmaAllocatorCreateInfo pVulkanFunctions(@NativeType("VmaVulkanFunctions const *") VmaVulkanFunctions value) { npVulkanFunctions(address(), value); return this; }
-    /** Sets the address of the specified {@link VmaRecordSettings} to the {@code pRecordSettings} field. */
+    /** Sets the address of the specified {@link VmaRecordSettings} to the {@link #pRecordSettings} field. */
     public VmaAllocatorCreateInfo pRecordSettings(@Nullable @NativeType("VmaRecordSettings const *") VmaRecordSettings value) { npRecordSettings(address(), value); return this; }
-    /** Sets the specified value to the {@code instance} field. */
+    /** Sets the specified value to the {@link #instance} field. */
     public VmaAllocatorCreateInfo instance(VkInstance value) { ninstance(address(), value); return this; }
-    /** Sets the specified value to the {@code vulkanApiVersion} field. */
+    /** Sets the specified value to the {@link #vulkanApiVersion} field. */
     public VmaAllocatorCreateInfo vulkanApiVersion(@NativeType("uint32_t") int value) { nvulkanApiVersion(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */

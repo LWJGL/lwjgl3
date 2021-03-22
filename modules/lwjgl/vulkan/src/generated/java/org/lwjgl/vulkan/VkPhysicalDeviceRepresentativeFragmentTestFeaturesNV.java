@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVRepresentativeFragmentTest#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code representativeFragmentTest} &ndash; indicates whether the implementation supports the representative fragment test. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-rep-frag-test">Representative Fragment Test</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 representativeFragmentTest;
+ *     VkBool32 {@link #representativeFragmentTest};
  * }</code></pre>
  */
 public class VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV extends Struct
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code representativeFragmentTest} field. */
+    /** indicates whether the implementation supports the representative fragment test. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-rep-frag-test">Representative Fragment Test</a>. */
     @NativeType("VkBool32")
     public boolean representativeFragmentTest() { return nrepresentativeFragmentTest(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV extends Struct
     public VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code representativeFragmentTest} field. */
+    /** Sets the specified value to the {@link #representativeFragmentTest} field. */
     public VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV representativeFragmentTest(@NativeType("VkBool32") boolean value) { nrepresentativeFragmentTest(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV extends Struct
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.npNext(address()); }
-        /** Returns the value of the {@code representativeFragmentTest} field. */
+        /** @return the value of the {@link VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV#representativeFragmentTest} field. */
         @NativeType("VkBool32")
         public boolean representativeFragmentTest() { return VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.nrepresentativeFragmentTest(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV extends Struct
         public VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code representativeFragmentTest} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV#representativeFragmentTest} field. */
         public VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.Buffer representativeFragmentTest(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.nrepresentativeFragmentTest(address(), value ? 1 : 0); return this; }
 
     }

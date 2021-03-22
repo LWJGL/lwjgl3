@@ -64,10 +64,10 @@ public class VREventNotification extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code ulUserValue} field. */
+    /** @return the value of the {@code ulUserValue} field. */
     @NativeType("uint64_t")
     public long ulUserValue() { return nulUserValue(address()); }
-    /** Returns the value of the {@code notificationId} field. */
+    /** @return the value of the {@code notificationId} field. */
     @NativeType("uint32_t")
     public int notificationId() { return nnotificationId(address()); }
 
@@ -145,10 +145,10 @@ public class VREventNotification extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code ulUserValue} field. */
+        /** @return the value of the {@code ulUserValue} field. */
         @NativeType("uint64_t")
         public long ulUserValue() { return VREventNotification.nulUserValue(address()); }
-        /** Returns the value of the {@code notificationId} field. */
+        /** @return the value of the {@code notificationId} field. */
         @NativeType("uint32_t")
         public int notificationId() { return VREventNotification.nnotificationId(address()); }
 

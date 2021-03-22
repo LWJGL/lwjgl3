@@ -89,43 +89,24 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkPipelineDynamicStateCreateInfo}, {@link VkPipelineLibraryCreateInfoKHR}, {@link VkPipelineShaderStageCreateInfo}, {@link VkRayTracingPipelineInterfaceCreateInfoKHR}, {@link VkRayTracingShaderGroupCreateInfoKHR}, {@link KHRRayTracingPipeline#vkCreateRayTracingPipelinesKHR CreateRayTracingPipelinesKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkPipelineCreateFlagBits} specifying how the pipeline will be generated.</li>
- * <li>{@code stageCount} &ndash; the number of entries in the {@code pStages} array.</li>
- * <li>{@code pStages} &ndash; a pointer to an array of {@code stageCount} {@link VkPipelineShaderStageCreateInfo} structures describing the set of the shader stages to be included in the ray tracing pipeline.</li>
- * <li>{@code groupCount} &ndash; the number of entries in the {@code pGroups} array.</li>
- * <li>{@code pGroups} &ndash; a pointer to an array of {@code groupCount} {@link VkRayTracingShaderGroupCreateInfoKHR} structures describing the set of the shader stages to be included in each shader group in the ray tracing pipeline.</li>
- * <li>{@code maxPipelineRayRecursionDepth} &ndash; the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#ray-tracing-recursion-depth">maximum recursion depth</a> of shaders executed by this pipeline.</li>
- * <li>{@code pLibraryInfo} &ndash; a pointer to a {@link VkPipelineLibraryCreateInfoKHR} structure defining pipeline libraries to include.</li>
- * <li>{@code pLibraryInterface} &ndash; a pointer to a {@link VkRayTracingPipelineInterfaceCreateInfoKHR} structure defining additional information when using pipeline libraries.</li>
- * <li>{@code pDynamicState} &ndash; a pointer to a {@link VkPipelineDynamicStateCreateInfo} structure, and is used to indicate which properties of the pipeline state object are dynamic and <b>can</b> be changed independently of the pipeline state. This <b>can</b> be {@code NULL}, which means no state in the pipeline is considered dynamic.</li>
- * <li>{@code layout} &ndash; the description of binding locations used by both the pipeline and descriptor sets used with the pipeline.</li>
- * <li>{@code basePipelineHandle} &ndash; a pipeline to derive from.</li>
- * <li>{@code basePipelineIndex} &ndash; an index into the {@code pCreateInfos} parameter to use as a pipeline to derive from.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkRayTracingPipelineCreateInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineCreateFlags flags;
- *     uint32_t stageCount;
- *     {@link VkPipelineShaderStageCreateInfo VkPipelineShaderStageCreateInfo} const * pStages;
- *     uint32_t groupCount;
- *     {@link VkRayTracingShaderGroupCreateInfoKHR VkRayTracingShaderGroupCreateInfoKHR} const * pGroups;
- *     uint32_t maxPipelineRayRecursionDepth;
- *     {@link VkPipelineLibraryCreateInfoKHR VkPipelineLibraryCreateInfoKHR} const * pLibraryInfo;
- *     {@link VkRayTracingPipelineInterfaceCreateInfoKHR VkRayTracingPipelineInterfaceCreateInfoKHR} const * pLibraryInterface;
- *     {@link VkPipelineDynamicStateCreateInfo VkPipelineDynamicStateCreateInfo} const * pDynamicState;
- *     VkPipelineLayout layout;
- *     VkPipeline basePipelineHandle;
- *     int32_t basePipelineIndex;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineCreateFlags {@link #flags};
+ *     uint32_t {@link #stageCount};
+ *     {@link VkPipelineShaderStageCreateInfo VkPipelineShaderStageCreateInfo} const * {@link #pStages};
+ *     uint32_t {@link #groupCount};
+ *     {@link VkRayTracingShaderGroupCreateInfoKHR VkRayTracingShaderGroupCreateInfoKHR} const * {@link #pGroups};
+ *     uint32_t {@link #maxPipelineRayRecursionDepth};
+ *     {@link VkPipelineLibraryCreateInfoKHR VkPipelineLibraryCreateInfoKHR} const * {@link #pLibraryInfo};
+ *     {@link VkRayTracingPipelineInterfaceCreateInfoKHR VkRayTracingPipelineInterfaceCreateInfoKHR} const * {@link #pLibraryInterface};
+ *     {@link VkPipelineDynamicStateCreateInfo VkPipelineDynamicStateCreateInfo} const * {@link #pDynamicState};
+ *     VkPipelineLayout {@link #layout};
+ *     VkPipeline {@link #basePipelineHandle};
+ *     int32_t {@link #basePipelineIndex};
  * }</code></pre>
  */
 public class VkRayTracingPipelineCreateInfoKHR extends Struct implements NativeResource {
@@ -203,77 +184,77 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkPipelineCreateFlagBits} specifying how the pipeline will be generated. */
     @NativeType("VkPipelineCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code stageCount} field. */
+    /** the number of entries in the {@code pStages} array. */
     @NativeType("uint32_t")
     public int stageCount() { return nstageCount(address()); }
-    /** Returns a {@link VkPipelineShaderStageCreateInfo.Buffer} view of the struct array pointed to by the {@code pStages} field. */
+    /** a pointer to an array of {@code stageCount} {@link VkPipelineShaderStageCreateInfo} structures describing the set of the shader stages to be included in the ray tracing pipeline. */
     @Nullable
     @NativeType("VkPipelineShaderStageCreateInfo const *")
     public VkPipelineShaderStageCreateInfo.Buffer pStages() { return npStages(address()); }
-    /** Returns the value of the {@code groupCount} field. */
+    /** the number of entries in the {@code pGroups} array. */
     @NativeType("uint32_t")
     public int groupCount() { return ngroupCount(address()); }
-    /** Returns a {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} view of the struct array pointed to by the {@code pGroups} field. */
+    /** a pointer to an array of {@code groupCount} {@link VkRayTracingShaderGroupCreateInfoKHR} structures describing the set of the shader stages to be included in each shader group in the ray tracing pipeline. */
     @Nullable
     @NativeType("VkRayTracingShaderGroupCreateInfoKHR const *")
     public VkRayTracingShaderGroupCreateInfoKHR.Buffer pGroups() { return npGroups(address()); }
-    /** Returns the value of the {@code maxPipelineRayRecursionDepth} field. */
+    /** the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#ray-tracing-recursion-depth">maximum recursion depth</a> of shaders executed by this pipeline. */
     @NativeType("uint32_t")
     public int maxPipelineRayRecursionDepth() { return nmaxPipelineRayRecursionDepth(address()); }
-    /** Returns a {@link VkPipelineLibraryCreateInfoKHR} view of the struct pointed to by the {@code pLibraryInfo} field. */
+    /** a pointer to a {@link VkPipelineLibraryCreateInfoKHR} structure defining pipeline libraries to include. */
     @Nullable
     @NativeType("VkPipelineLibraryCreateInfoKHR const *")
     public VkPipelineLibraryCreateInfoKHR pLibraryInfo() { return npLibraryInfo(address()); }
-    /** Returns a {@link VkRayTracingPipelineInterfaceCreateInfoKHR} view of the struct pointed to by the {@code pLibraryInterface} field. */
+    /** a pointer to a {@link VkRayTracingPipelineInterfaceCreateInfoKHR} structure defining additional information when using pipeline libraries. */
     @Nullable
     @NativeType("VkRayTracingPipelineInterfaceCreateInfoKHR const *")
     public VkRayTracingPipelineInterfaceCreateInfoKHR pLibraryInterface() { return npLibraryInterface(address()); }
-    /** Returns a {@link VkPipelineDynamicStateCreateInfo} view of the struct pointed to by the {@code pDynamicState} field. */
+    /** a pointer to a {@link VkPipelineDynamicStateCreateInfo} structure, and is used to indicate which properties of the pipeline state object are dynamic and <b>can</b> be changed independently of the pipeline state. This <b>can</b> be {@code NULL}, which means no state in the pipeline is considered dynamic. */
     @Nullable
     @NativeType("VkPipelineDynamicStateCreateInfo const *")
     public VkPipelineDynamicStateCreateInfo pDynamicState() { return npDynamicState(address()); }
-    /** Returns the value of the {@code layout} field. */
+    /** the description of binding locations used by both the pipeline and descriptor sets used with the pipeline. */
     @NativeType("VkPipelineLayout")
     public long layout() { return nlayout(address()); }
-    /** Returns the value of the {@code basePipelineHandle} field. */
+    /** a pipeline to derive from. */
     @NativeType("VkPipeline")
     public long basePipelineHandle() { return nbasePipelineHandle(address()); }
-    /** Returns the value of the {@code basePipelineIndex} field. */
+    /** an index into the {@code pCreateInfos} parameter to use as a pipeline to derive from. */
     @NativeType("int32_t")
     public int basePipelineIndex() { return nbasePipelineIndex(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkRayTracingPipelineCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkRayTracingPipelineCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkRayTracingPipelineCreateInfoKHR flags(@NativeType("VkPipelineCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@code pStages} field. */
+    /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link #pStages} field. */
     public VkRayTracingPipelineCreateInfoKHR pStages(@Nullable @NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.Buffer value) { npStages(address(), value); return this; }
-    /** Sets the address of the specified {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} to the {@code pGroups} field. */
+    /** Sets the address of the specified {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} to the {@link #pGroups} field. */
     public VkRayTracingPipelineCreateInfoKHR pGroups(@Nullable @NativeType("VkRayTracingShaderGroupCreateInfoKHR const *") VkRayTracingShaderGroupCreateInfoKHR.Buffer value) { npGroups(address(), value); return this; }
-    /** Sets the specified value to the {@code maxPipelineRayRecursionDepth} field. */
+    /** Sets the specified value to the {@link #maxPipelineRayRecursionDepth} field. */
     public VkRayTracingPipelineCreateInfoKHR maxPipelineRayRecursionDepth(@NativeType("uint32_t") int value) { nmaxPipelineRayRecursionDepth(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPipelineLibraryCreateInfoKHR} to the {@code pLibraryInfo} field. */
+    /** Sets the address of the specified {@link VkPipelineLibraryCreateInfoKHR} to the {@link #pLibraryInfo} field. */
     public VkRayTracingPipelineCreateInfoKHR pLibraryInfo(@Nullable @NativeType("VkPipelineLibraryCreateInfoKHR const *") VkPipelineLibraryCreateInfoKHR value) { npLibraryInfo(address(), value); return this; }
-    /** Sets the address of the specified {@link VkRayTracingPipelineInterfaceCreateInfoKHR} to the {@code pLibraryInterface} field. */
+    /** Sets the address of the specified {@link VkRayTracingPipelineInterfaceCreateInfoKHR} to the {@link #pLibraryInterface} field. */
     public VkRayTracingPipelineCreateInfoKHR pLibraryInterface(@Nullable @NativeType("VkRayTracingPipelineInterfaceCreateInfoKHR const *") VkRayTracingPipelineInterfaceCreateInfoKHR value) { npLibraryInterface(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPipelineDynamicStateCreateInfo} to the {@code pDynamicState} field. */
+    /** Sets the address of the specified {@link VkPipelineDynamicStateCreateInfo} to the {@link #pDynamicState} field. */
     public VkRayTracingPipelineCreateInfoKHR pDynamicState(@Nullable @NativeType("VkPipelineDynamicStateCreateInfo const *") VkPipelineDynamicStateCreateInfo value) { npDynamicState(address(), value); return this; }
-    /** Sets the specified value to the {@code layout} field. */
+    /** Sets the specified value to the {@link #layout} field. */
     public VkRayTracingPipelineCreateInfoKHR layout(@NativeType("VkPipelineLayout") long value) { nlayout(address(), value); return this; }
-    /** Sets the specified value to the {@code basePipelineHandle} field. */
+    /** Sets the specified value to the {@link #basePipelineHandle} field. */
     public VkRayTracingPipelineCreateInfoKHR basePipelineHandle(@NativeType("VkPipeline") long value) { nbasePipelineHandle(address(), value); return this; }
-    /** Sets the specified value to the {@code basePipelineIndex} field. */
+    /** Sets the specified value to the {@link #basePipelineIndex} field. */
     public VkRayTracingPipelineCreateInfoKHR basePipelineIndex(@NativeType("int32_t") int value) { nbasePipelineIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -595,77 +576,77 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkRayTracingPipelineCreateInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRayTracingPipelineCreateInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkRayTracingPipelineCreateInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRayTracingPipelineCreateInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkRayTracingPipelineCreateInfoKHR#flags} field. */
         @NativeType("VkPipelineCreateFlags")
         public int flags() { return VkRayTracingPipelineCreateInfoKHR.nflags(address()); }
-        /** Returns the value of the {@code stageCount} field. */
+        /** @return the value of the {@link VkRayTracingPipelineCreateInfoKHR#stageCount} field. */
         @NativeType("uint32_t")
         public int stageCount() { return VkRayTracingPipelineCreateInfoKHR.nstageCount(address()); }
-        /** Returns a {@link VkPipelineShaderStageCreateInfo.Buffer} view of the struct array pointed to by the {@code pStages} field. */
+        /** @return a {@link VkPipelineShaderStageCreateInfo.Buffer} view of the struct array pointed to by the {@link VkRayTracingPipelineCreateInfoKHR#pStages} field. */
         @Nullable
         @NativeType("VkPipelineShaderStageCreateInfo const *")
         public VkPipelineShaderStageCreateInfo.Buffer pStages() { return VkRayTracingPipelineCreateInfoKHR.npStages(address()); }
-        /** Returns the value of the {@code groupCount} field. */
+        /** @return the value of the {@link VkRayTracingPipelineCreateInfoKHR#groupCount} field. */
         @NativeType("uint32_t")
         public int groupCount() { return VkRayTracingPipelineCreateInfoKHR.ngroupCount(address()); }
-        /** Returns a {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} view of the struct array pointed to by the {@code pGroups} field. */
+        /** @return a {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} view of the struct array pointed to by the {@link VkRayTracingPipelineCreateInfoKHR#pGroups} field. */
         @Nullable
         @NativeType("VkRayTracingShaderGroupCreateInfoKHR const *")
         public VkRayTracingShaderGroupCreateInfoKHR.Buffer pGroups() { return VkRayTracingPipelineCreateInfoKHR.npGroups(address()); }
-        /** Returns the value of the {@code maxPipelineRayRecursionDepth} field. */
+        /** @return the value of the {@link VkRayTracingPipelineCreateInfoKHR#maxPipelineRayRecursionDepth} field. */
         @NativeType("uint32_t")
         public int maxPipelineRayRecursionDepth() { return VkRayTracingPipelineCreateInfoKHR.nmaxPipelineRayRecursionDepth(address()); }
-        /** Returns a {@link VkPipelineLibraryCreateInfoKHR} view of the struct pointed to by the {@code pLibraryInfo} field. */
+        /** @return a {@link VkPipelineLibraryCreateInfoKHR} view of the struct pointed to by the {@link VkRayTracingPipelineCreateInfoKHR#pLibraryInfo} field. */
         @Nullable
         @NativeType("VkPipelineLibraryCreateInfoKHR const *")
         public VkPipelineLibraryCreateInfoKHR pLibraryInfo() { return VkRayTracingPipelineCreateInfoKHR.npLibraryInfo(address()); }
-        /** Returns a {@link VkRayTracingPipelineInterfaceCreateInfoKHR} view of the struct pointed to by the {@code pLibraryInterface} field. */
+        /** @return a {@link VkRayTracingPipelineInterfaceCreateInfoKHR} view of the struct pointed to by the {@link VkRayTracingPipelineCreateInfoKHR#pLibraryInterface} field. */
         @Nullable
         @NativeType("VkRayTracingPipelineInterfaceCreateInfoKHR const *")
         public VkRayTracingPipelineInterfaceCreateInfoKHR pLibraryInterface() { return VkRayTracingPipelineCreateInfoKHR.npLibraryInterface(address()); }
-        /** Returns a {@link VkPipelineDynamicStateCreateInfo} view of the struct pointed to by the {@code pDynamicState} field. */
+        /** @return a {@link VkPipelineDynamicStateCreateInfo} view of the struct pointed to by the {@link VkRayTracingPipelineCreateInfoKHR#pDynamicState} field. */
         @Nullable
         @NativeType("VkPipelineDynamicStateCreateInfo const *")
         public VkPipelineDynamicStateCreateInfo pDynamicState() { return VkRayTracingPipelineCreateInfoKHR.npDynamicState(address()); }
-        /** Returns the value of the {@code layout} field. */
+        /** @return the value of the {@link VkRayTracingPipelineCreateInfoKHR#layout} field. */
         @NativeType("VkPipelineLayout")
         public long layout() { return VkRayTracingPipelineCreateInfoKHR.nlayout(address()); }
-        /** Returns the value of the {@code basePipelineHandle} field. */
+        /** @return the value of the {@link VkRayTracingPipelineCreateInfoKHR#basePipelineHandle} field. */
         @NativeType("VkPipeline")
         public long basePipelineHandle() { return VkRayTracingPipelineCreateInfoKHR.nbasePipelineHandle(address()); }
-        /** Returns the value of the {@code basePipelineIndex} field. */
+        /** @return the value of the {@link VkRayTracingPipelineCreateInfoKHR#basePipelineIndex} field. */
         @NativeType("int32_t")
         public int basePipelineIndex() { return VkRayTracingPipelineCreateInfoKHR.nbasePipelineIndex(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoKHR#sType} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkRayTracingPipelineCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoKHR#pNext} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkRayTracingPipelineCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoKHR#flags} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer flags(@NativeType("VkPipelineCreateFlags") int value) { VkRayTracingPipelineCreateInfoKHR.nflags(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@code pStages} field. */
+        /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link VkRayTracingPipelineCreateInfoKHR#pStages} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer pStages(@Nullable @NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.Buffer value) { VkRayTracingPipelineCreateInfoKHR.npStages(address(), value); return this; }
-        /** Sets the address of the specified {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} to the {@code pGroups} field. */
+        /** Sets the address of the specified {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} to the {@link VkRayTracingPipelineCreateInfoKHR#pGroups} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer pGroups(@Nullable @NativeType("VkRayTracingShaderGroupCreateInfoKHR const *") VkRayTracingShaderGroupCreateInfoKHR.Buffer value) { VkRayTracingPipelineCreateInfoKHR.npGroups(address(), value); return this; }
-        /** Sets the specified value to the {@code maxPipelineRayRecursionDepth} field. */
+        /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoKHR#maxPipelineRayRecursionDepth} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer maxPipelineRayRecursionDepth(@NativeType("uint32_t") int value) { VkRayTracingPipelineCreateInfoKHR.nmaxPipelineRayRecursionDepth(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPipelineLibraryCreateInfoKHR} to the {@code pLibraryInfo} field. */
+        /** Sets the address of the specified {@link VkPipelineLibraryCreateInfoKHR} to the {@link VkRayTracingPipelineCreateInfoKHR#pLibraryInfo} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer pLibraryInfo(@Nullable @NativeType("VkPipelineLibraryCreateInfoKHR const *") VkPipelineLibraryCreateInfoKHR value) { VkRayTracingPipelineCreateInfoKHR.npLibraryInfo(address(), value); return this; }
-        /** Sets the address of the specified {@link VkRayTracingPipelineInterfaceCreateInfoKHR} to the {@code pLibraryInterface} field. */
+        /** Sets the address of the specified {@link VkRayTracingPipelineInterfaceCreateInfoKHR} to the {@link VkRayTracingPipelineCreateInfoKHR#pLibraryInterface} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer pLibraryInterface(@Nullable @NativeType("VkRayTracingPipelineInterfaceCreateInfoKHR const *") VkRayTracingPipelineInterfaceCreateInfoKHR value) { VkRayTracingPipelineCreateInfoKHR.npLibraryInterface(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPipelineDynamicStateCreateInfo} to the {@code pDynamicState} field. */
+        /** Sets the address of the specified {@link VkPipelineDynamicStateCreateInfo} to the {@link VkRayTracingPipelineCreateInfoKHR#pDynamicState} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer pDynamicState(@Nullable @NativeType("VkPipelineDynamicStateCreateInfo const *") VkPipelineDynamicStateCreateInfo value) { VkRayTracingPipelineCreateInfoKHR.npDynamicState(address(), value); return this; }
-        /** Sets the specified value to the {@code layout} field. */
+        /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoKHR#layout} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer layout(@NativeType("VkPipelineLayout") long value) { VkRayTracingPipelineCreateInfoKHR.nlayout(address(), value); return this; }
-        /** Sets the specified value to the {@code basePipelineHandle} field. */
+        /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoKHR#basePipelineHandle} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer basePipelineHandle(@NativeType("VkPipeline") long value) { VkRayTracingPipelineCreateInfoKHR.nbasePipelineHandle(address(), value); return this; }
-        /** Sets the specified value to the {@code basePipelineIndex} field. */
+        /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoKHR#basePipelineIndex} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer basePipelineIndex(@NativeType("int32_t") int value) { VkRayTracingPipelineCreateInfoKHR.nbasePipelineIndex(address(), value); return this; }
 
     }

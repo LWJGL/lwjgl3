@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTDepthClipEnable#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code depthClipEnable} &ndash; indicates that the implementation supports setting the depth clipping operation explicitly via the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT} pipeline state. Otherwise depth clipping is only enabled when {@link VkPipelineRasterizationStateCreateInfo}{@code ::depthClampEnable} is set to {@link VK10#VK_FALSE FALSE}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceDepthClipEnableFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 depthClipEnable;
+ *     VkBool32 {@link #depthClipEnable};
  * }</code></pre>
  */
 public class VkPhysicalDeviceDepthClipEnableFeaturesEXT extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceDepthClipEnableFeaturesEXT extends Struct implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code depthClipEnable} field. */
+    /** indicates that the implementation supports setting the depth clipping operation explicitly via the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT} pipeline state. Otherwise depth clipping is only enabled when {@link VkPipelineRasterizationStateCreateInfo}{@code ::depthClampEnable} is set to {@link VK10#VK_FALSE FALSE}. */
     @NativeType("VkBool32")
     public boolean depthClipEnable() { return ndepthClipEnable(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceDepthClipEnableFeaturesEXT extends Struct implement
     public VkPhysicalDeviceDepthClipEnableFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDepthClipEnableFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code depthClipEnable} field. */
+    /** Sets the specified value to the {@link #depthClipEnable} field. */
     public VkPhysicalDeviceDepthClipEnableFeaturesEXT depthClipEnable(@NativeType("VkBool32") boolean value) { ndepthClipEnable(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceDepthClipEnableFeaturesEXT extends Struct implement
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDepthClipEnableFeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDepthClipEnableFeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code depthClipEnable} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDepthClipEnableFeaturesEXT#depthClipEnable} field. */
         @NativeType("VkBool32")
         public boolean depthClipEnable() { return VkPhysicalDeviceDepthClipEnableFeaturesEXT.ndepthClipEnable(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceDepthClipEnableFeaturesEXT extends Struct implement
         public VkPhysicalDeviceDepthClipEnableFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDepthClipEnableFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDepthClipEnableFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDepthClipEnableFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code depthClipEnable} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDepthClipEnableFeaturesEXT#depthClipEnable} field. */
         public VkPhysicalDeviceDepthClipEnableFeaturesEXT.Buffer depthClipEnable(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDepthClipEnableFeaturesEXT.ndepthClipEnable(address(), value ? 1 : 0); return this; }
 
     }

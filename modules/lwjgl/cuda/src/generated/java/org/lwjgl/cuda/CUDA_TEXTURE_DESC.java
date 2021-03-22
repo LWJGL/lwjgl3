@@ -19,33 +19,19 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Texture descriptor.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code addressMode[3]} &ndash; Address modes</li>
- * <li>{@code filterMode} &ndash; Filter mode</li>
- * <li>{@code flags} &ndash; Flags</li>
- * <li>{@code maxAnisotropy} &ndash; Maximum anisotropy ratio</li>
- * <li>{@code mipmapFilterMode} &ndash; Mipmap filter mode</li>
- * <li>{@code mipmapLevelBias} &ndash; Mipmap level bias</li>
- * <li>{@code minMipmapLevelClamp} &ndash; Mipmap minimum level clamp</li>
- * <li>{@code maxMipmapLevelClamp} &ndash; Mipmap maximum level clamp</li>
- * <li>{@code borderColor[4]} &ndash; Border Color</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUDA_TEXTURE_DESC {
- *     CUaddress_mode addressMode[3];
- *     CUfilter_mode filterMode;
- *     unsigned int flags;
- *     unsigned int maxAnisotropy;
- *     CUfilter_mode mipmapFilterMode;
- *     float mipmapLevelBias;
- *     float minMipmapLevelClamp;
- *     float maxMipmapLevelClamp;
- *     float borderColor[4];
+ *     CUaddress_mode {@link #addressMode}[3];
+ *     CUfilter_mode {@link #filterMode};
+ *     unsigned int {@link #flags};
+ *     unsigned int {@link #maxAnisotropy};
+ *     CUfilter_mode {@link #mipmapFilterMode};
+ *     float {@link #mipmapLevelBias};
+ *     float {@link #minMipmapLevelClamp};
+ *     float {@link #maxMipmapLevelClamp};
+ *     float {@link #borderColor}[4];
  *     int reserved[12];
  * }</code></pre>
  */
@@ -112,62 +98,62 @@ public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link IntBuffer} view of the {@code addressMode} field. */
+    /** Address modes */
     @NativeType("CUaddress_mode[3]")
     public IntBuffer addressMode() { return naddressMode(address()); }
-    /** Returns the value at the specified index of the {@code addressMode} field. */
+    /** Address modes */
     @NativeType("CUaddress_mode")
     public int addressMode(int index) { return naddressMode(address(), index); }
-    /** Returns the value of the {@code filterMode} field. */
+    /** Filter mode */
     @NativeType("CUfilter_mode")
     public int filterMode() { return nfilterMode(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** Flags */
     @NativeType("unsigned int")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code maxAnisotropy} field. */
+    /** Maximum anisotropy ratio */
     @NativeType("unsigned int")
     public int maxAnisotropy() { return nmaxAnisotropy(address()); }
-    /** Returns the value of the {@code mipmapFilterMode} field. */
+    /** Mipmap filter mode */
     @NativeType("CUfilter_mode")
     public int mipmapFilterMode() { return nmipmapFilterMode(address()); }
-    /** Returns the value of the {@code mipmapLevelBias} field. */
+    /** Mipmap level bias */
     public float mipmapLevelBias() { return nmipmapLevelBias(address()); }
-    /** Returns the value of the {@code minMipmapLevelClamp} field. */
+    /** Mipmap minimum level clamp */
     public float minMipmapLevelClamp() { return nminMipmapLevelClamp(address()); }
-    /** Returns the value of the {@code maxMipmapLevelClamp} field. */
+    /** Mipmap maximum level clamp */
     public float maxMipmapLevelClamp() { return nmaxMipmapLevelClamp(address()); }
-    /** Returns a {@link FloatBuffer} view of the {@code borderColor} field. */
+    /** Border Color */
     @NativeType("float[4]")
     public FloatBuffer borderColor() { return nborderColor(address()); }
-    /** Returns the value at the specified index of the {@code borderColor} field. */
+    /** Border Color */
     public float borderColor(int index) { return nborderColor(address(), index); }
-    /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
+    /** @return a {@link IntBuffer} view of the {@code reserved} field. */
     @NativeType("int[12]")
     public IntBuffer reserved() { return nreserved(address()); }
-    /** Returns the value at the specified index of the {@code reserved} field. */
+    /** @return the value at the specified index of the {@code reserved} field. */
     public int reserved(int index) { return nreserved(address(), index); }
 
-    /** Copies the specified {@link IntBuffer} to the {@code addressMode} field. */
+    /** Copies the specified {@link IntBuffer} to the {@link #addressMode} field. */
     public CUDA_TEXTURE_DESC addressMode(@NativeType("CUaddress_mode[3]") IntBuffer value) { naddressMode(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code addressMode} field. */
+    /** Sets the specified value at the specified index of the {@link #addressMode} field. */
     public CUDA_TEXTURE_DESC addressMode(int index, @NativeType("CUaddress_mode") int value) { naddressMode(address(), index, value); return this; }
-    /** Sets the specified value to the {@code filterMode} field. */
+    /** Sets the specified value to the {@link #filterMode} field. */
     public CUDA_TEXTURE_DESC filterMode(@NativeType("CUfilter_mode") int value) { nfilterMode(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public CUDA_TEXTURE_DESC flags(@NativeType("unsigned int") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code maxAnisotropy} field. */
+    /** Sets the specified value to the {@link #maxAnisotropy} field. */
     public CUDA_TEXTURE_DESC maxAnisotropy(@NativeType("unsigned int") int value) { nmaxAnisotropy(address(), value); return this; }
-    /** Sets the specified value to the {@code mipmapFilterMode} field. */
+    /** Sets the specified value to the {@link #mipmapFilterMode} field. */
     public CUDA_TEXTURE_DESC mipmapFilterMode(@NativeType("CUfilter_mode") int value) { nmipmapFilterMode(address(), value); return this; }
-    /** Sets the specified value to the {@code mipmapLevelBias} field. */
+    /** Sets the specified value to the {@link #mipmapLevelBias} field. */
     public CUDA_TEXTURE_DESC mipmapLevelBias(float value) { nmipmapLevelBias(address(), value); return this; }
-    /** Sets the specified value to the {@code minMipmapLevelClamp} field. */
+    /** Sets the specified value to the {@link #minMipmapLevelClamp} field. */
     public CUDA_TEXTURE_DESC minMipmapLevelClamp(float value) { nminMipmapLevelClamp(address(), value); return this; }
-    /** Sets the specified value to the {@code maxMipmapLevelClamp} field. */
+    /** Sets the specified value to the {@link #maxMipmapLevelClamp} field. */
     public CUDA_TEXTURE_DESC maxMipmapLevelClamp(float value) { nmaxMipmapLevelClamp(address(), value); return this; }
-    /** Copies the specified {@link FloatBuffer} to the {@code borderColor} field. */
+    /** Copies the specified {@link FloatBuffer} to the {@link #borderColor} field. */
     public CUDA_TEXTURE_DESC borderColor(@NativeType("float[4]") FloatBuffer value) { nborderColor(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code borderColor} field. */
+    /** Sets the specified value at the specified index of the {@link #borderColor} field. */
     public CUDA_TEXTURE_DESC borderColor(int index, float value) { nborderColor(address(), index, value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
     public CUDA_TEXTURE_DESC reserved(@NativeType("int[12]") IntBuffer value) { nreserved(address(), value); return this; }
@@ -469,62 +455,62 @@ public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link IntBuffer} view of the {@code addressMode} field. */
+        /** @return a {@link IntBuffer} view of the {@link CUDA_TEXTURE_DESC#addressMode} field. */
         @NativeType("CUaddress_mode[3]")
         public IntBuffer addressMode() { return CUDA_TEXTURE_DESC.naddressMode(address()); }
-        /** Returns the value at the specified index of the {@code addressMode} field. */
+        /** @return the value at the specified index of the {@link CUDA_TEXTURE_DESC#addressMode} field. */
         @NativeType("CUaddress_mode")
         public int addressMode(int index) { return CUDA_TEXTURE_DESC.naddressMode(address(), index); }
-        /** Returns the value of the {@code filterMode} field. */
+        /** @return the value of the {@link CUDA_TEXTURE_DESC#filterMode} field. */
         @NativeType("CUfilter_mode")
         public int filterMode() { return CUDA_TEXTURE_DESC.nfilterMode(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link CUDA_TEXTURE_DESC#flags} field. */
         @NativeType("unsigned int")
         public int flags() { return CUDA_TEXTURE_DESC.nflags(address()); }
-        /** Returns the value of the {@code maxAnisotropy} field. */
+        /** @return the value of the {@link CUDA_TEXTURE_DESC#maxAnisotropy} field. */
         @NativeType("unsigned int")
         public int maxAnisotropy() { return CUDA_TEXTURE_DESC.nmaxAnisotropy(address()); }
-        /** Returns the value of the {@code mipmapFilterMode} field. */
+        /** @return the value of the {@link CUDA_TEXTURE_DESC#mipmapFilterMode} field. */
         @NativeType("CUfilter_mode")
         public int mipmapFilterMode() { return CUDA_TEXTURE_DESC.nmipmapFilterMode(address()); }
-        /** Returns the value of the {@code mipmapLevelBias} field. */
+        /** @return the value of the {@link CUDA_TEXTURE_DESC#mipmapLevelBias} field. */
         public float mipmapLevelBias() { return CUDA_TEXTURE_DESC.nmipmapLevelBias(address()); }
-        /** Returns the value of the {@code minMipmapLevelClamp} field. */
+        /** @return the value of the {@link CUDA_TEXTURE_DESC#minMipmapLevelClamp} field. */
         public float minMipmapLevelClamp() { return CUDA_TEXTURE_DESC.nminMipmapLevelClamp(address()); }
-        /** Returns the value of the {@code maxMipmapLevelClamp} field. */
+        /** @return the value of the {@link CUDA_TEXTURE_DESC#maxMipmapLevelClamp} field. */
         public float maxMipmapLevelClamp() { return CUDA_TEXTURE_DESC.nmaxMipmapLevelClamp(address()); }
-        /** Returns a {@link FloatBuffer} view of the {@code borderColor} field. */
+        /** @return a {@link FloatBuffer} view of the {@link CUDA_TEXTURE_DESC#borderColor} field. */
         @NativeType("float[4]")
         public FloatBuffer borderColor() { return CUDA_TEXTURE_DESC.nborderColor(address()); }
-        /** Returns the value at the specified index of the {@code borderColor} field. */
+        /** @return the value at the specified index of the {@link CUDA_TEXTURE_DESC#borderColor} field. */
         public float borderColor(int index) { return CUDA_TEXTURE_DESC.nborderColor(address(), index); }
-        /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
+        /** @return a {@link IntBuffer} view of the {@code reserved} field. */
         @NativeType("int[12]")
         public IntBuffer reserved() { return CUDA_TEXTURE_DESC.nreserved(address()); }
-        /** Returns the value at the specified index of the {@code reserved} field. */
+        /** @return the value at the specified index of the {@code reserved} field. */
         public int reserved(int index) { return CUDA_TEXTURE_DESC.nreserved(address(), index); }
 
-        /** Copies the specified {@link IntBuffer} to the {@code addressMode} field. */
+        /** Copies the specified {@link IntBuffer} to the {@link CUDA_TEXTURE_DESC#addressMode} field. */
         public CUDA_TEXTURE_DESC.Buffer addressMode(@NativeType("CUaddress_mode[3]") IntBuffer value) { CUDA_TEXTURE_DESC.naddressMode(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code addressMode} field. */
+        /** Sets the specified value at the specified index of the {@link CUDA_TEXTURE_DESC#addressMode} field. */
         public CUDA_TEXTURE_DESC.Buffer addressMode(int index, @NativeType("CUaddress_mode") int value) { CUDA_TEXTURE_DESC.naddressMode(address(), index, value); return this; }
-        /** Sets the specified value to the {@code filterMode} field. */
+        /** Sets the specified value to the {@link CUDA_TEXTURE_DESC#filterMode} field. */
         public CUDA_TEXTURE_DESC.Buffer filterMode(@NativeType("CUfilter_mode") int value) { CUDA_TEXTURE_DESC.nfilterMode(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link CUDA_TEXTURE_DESC#flags} field. */
         public CUDA_TEXTURE_DESC.Buffer flags(@NativeType("unsigned int") int value) { CUDA_TEXTURE_DESC.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code maxAnisotropy} field. */
+        /** Sets the specified value to the {@link CUDA_TEXTURE_DESC#maxAnisotropy} field. */
         public CUDA_TEXTURE_DESC.Buffer maxAnisotropy(@NativeType("unsigned int") int value) { CUDA_TEXTURE_DESC.nmaxAnisotropy(address(), value); return this; }
-        /** Sets the specified value to the {@code mipmapFilterMode} field. */
+        /** Sets the specified value to the {@link CUDA_TEXTURE_DESC#mipmapFilterMode} field. */
         public CUDA_TEXTURE_DESC.Buffer mipmapFilterMode(@NativeType("CUfilter_mode") int value) { CUDA_TEXTURE_DESC.nmipmapFilterMode(address(), value); return this; }
-        /** Sets the specified value to the {@code mipmapLevelBias} field. */
+        /** Sets the specified value to the {@link CUDA_TEXTURE_DESC#mipmapLevelBias} field. */
         public CUDA_TEXTURE_DESC.Buffer mipmapLevelBias(float value) { CUDA_TEXTURE_DESC.nmipmapLevelBias(address(), value); return this; }
-        /** Sets the specified value to the {@code minMipmapLevelClamp} field. */
+        /** Sets the specified value to the {@link CUDA_TEXTURE_DESC#minMipmapLevelClamp} field. */
         public CUDA_TEXTURE_DESC.Buffer minMipmapLevelClamp(float value) { CUDA_TEXTURE_DESC.nminMipmapLevelClamp(address(), value); return this; }
-        /** Sets the specified value to the {@code maxMipmapLevelClamp} field. */
+        /** Sets the specified value to the {@link CUDA_TEXTURE_DESC#maxMipmapLevelClamp} field. */
         public CUDA_TEXTURE_DESC.Buffer maxMipmapLevelClamp(float value) { CUDA_TEXTURE_DESC.nmaxMipmapLevelClamp(address(), value); return this; }
-        /** Copies the specified {@link FloatBuffer} to the {@code borderColor} field. */
+        /** Copies the specified {@link FloatBuffer} to the {@link CUDA_TEXTURE_DESC#borderColor} field. */
         public CUDA_TEXTURE_DESC.Buffer borderColor(@NativeType("float[4]") FloatBuffer value) { CUDA_TEXTURE_DESC.nborderColor(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code borderColor} field. */
+        /** Sets the specified value at the specified index of the {@link CUDA_TEXTURE_DESC#borderColor} field. */
         public CUDA_TEXTURE_DESC.Buffer borderColor(int index, float value) { CUDA_TEXTURE_DESC.nborderColor(address(), index, value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
         public CUDA_TEXTURE_DESC.Buffer reserved(@NativeType("int[12]") IntBuffer value) { CUDA_TEXTURE_DESC.nreserved(address(), value); return this; }

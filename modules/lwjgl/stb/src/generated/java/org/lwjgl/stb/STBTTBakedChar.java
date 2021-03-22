@@ -86,23 +86,23 @@ public class STBTTBakedChar extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x0} field. */
+    /** @return the value of the {@code x0} field. */
     @NativeType("unsigned short")
     public short x0() { return nx0(address()); }
-    /** Returns the value of the {@code y0} field. */
+    /** @return the value of the {@code y0} field. */
     @NativeType("unsigned short")
     public short y0() { return ny0(address()); }
-    /** Returns the value of the {@code x1} field. */
+    /** @return the value of the {@code x1} field. */
     @NativeType("unsigned short")
     public short x1() { return nx1(address()); }
-    /** Returns the value of the {@code y1} field. */
+    /** @return the value of the {@code y1} field. */
     @NativeType("unsigned short")
     public short y1() { return ny1(address()); }
-    /** Returns the value of the {@code xoff} field. */
+    /** @return the value of the {@code xoff} field. */
     public float xoff() { return nxoff(address()); }
-    /** Returns the value of the {@code yoff} field. */
+    /** @return the value of the {@code yoff} field. */
     public float yoff() { return nyoff(address()); }
-    /** Returns the value of the {@code xadvance} field. */
+    /** @return the value of the {@code xadvance} field. */
     public float xadvance() { return nxadvance(address()); }
 
     // -----------------------------------
@@ -301,23 +301,23 @@ public class STBTTBakedChar extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x0} field. */
+        /** @return the value of the {@code x0} field. */
         @NativeType("unsigned short")
         public short x0() { return STBTTBakedChar.nx0(address()); }
-        /** Returns the value of the {@code y0} field. */
+        /** @return the value of the {@code y0} field. */
         @NativeType("unsigned short")
         public short y0() { return STBTTBakedChar.ny0(address()); }
-        /** Returns the value of the {@code x1} field. */
+        /** @return the value of the {@code x1} field. */
         @NativeType("unsigned short")
         public short x1() { return STBTTBakedChar.nx1(address()); }
-        /** Returns the value of the {@code y1} field. */
+        /** @return the value of the {@code y1} field. */
         @NativeType("unsigned short")
         public short y1() { return STBTTBakedChar.ny1(address()); }
-        /** Returns the value of the {@code xoff} field. */
+        /** @return the value of the {@code xoff} field. */
         public float xoff() { return STBTTBakedChar.nxoff(address()); }
-        /** Returns the value of the {@code yoff} field. */
+        /** @return the value of the {@code yoff} field. */
         public float yoff() { return STBTTBakedChar.nyoff(address()); }
-        /** Returns the value of the {@code xadvance} field. */
+        /** @return the value of the {@code xadvance} field. */
         public float xadvance() { return STBTTBakedChar.nxadvance(address()); }
 
     }

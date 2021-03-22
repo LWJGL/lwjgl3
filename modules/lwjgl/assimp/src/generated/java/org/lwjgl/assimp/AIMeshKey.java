@@ -18,21 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Binds a anim mesh to a specific point in time.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code mTime} &ndash; The time of this key</li>
- * <li>{@code mValue} &ndash; 
- * Index into the {@link AIMesh}{@code ::mAnimMeshes} array of the mesh coresponding to the {@link AIMeshAnim} hosting this key frame. The referenced anim mesh is
- * evaluated according to the rules defined in the docs for {@link AIAnimMesh}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiMeshKey {
- *     double mTime;
- *     unsigned int mValue;
+ *     double {@link #mTime};
+ *     unsigned int {@link #mValue};
  * }</code></pre>
  */
 @NativeType("struct aiMeshKey")
@@ -75,15 +66,18 @@ public class AIMeshKey extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code mTime} field. */
+    /** The time of this key */
     public double mTime() { return nmTime(address()); }
-    /** Returns the value of the {@code mValue} field. */
+    /**
+     * Index into the {@link AIMesh}{@code ::mAnimMeshes} array of the mesh coresponding to the {@link AIMeshAnim} hosting this key frame. The referenced anim mesh is
+     * evaluated according to the rules defined in the docs for {@link AIAnimMesh}.
+     */
     @NativeType("unsigned int")
     public int mValue() { return nmValue(address()); }
 
-    /** Sets the specified value to the {@code mTime} field. */
+    /** Sets the specified value to the {@link #mTime} field. */
     public AIMeshKey mTime(double value) { nmTime(address(), value); return this; }
-    /** Sets the specified value to the {@code mValue} field. */
+    /** Sets the specified value to the {@link #mValue} field. */
     public AIMeshKey mValue(@NativeType("unsigned int") int value) { nmValue(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,15 +294,15 @@ public class AIMeshKey extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code mTime} field. */
+        /** @return the value of the {@link AIMeshKey#mTime} field. */
         public double mTime() { return AIMeshKey.nmTime(address()); }
-        /** Returns the value of the {@code mValue} field. */
+        /** @return the value of the {@link AIMeshKey#mValue} field. */
         @NativeType("unsigned int")
         public int mValue() { return AIMeshKey.nmValue(address()); }
 
-        /** Sets the specified value to the {@code mTime} field. */
+        /** Sets the specified value to the {@link AIMeshKey#mTime} field. */
         public AIMeshKey.Buffer mTime(double value) { AIMeshKey.nmTime(address(), value); return this; }
-        /** Sets the specified value to the {@code mValue} field. */
+        /** Sets the specified value to the {@link AIMeshKey#mValue} field. */
         public AIMeshKey.Buffer mValue(@NativeType("unsigned int") int value) { AIMeshKey.nmValue(address(), value); return this; }
 
     }

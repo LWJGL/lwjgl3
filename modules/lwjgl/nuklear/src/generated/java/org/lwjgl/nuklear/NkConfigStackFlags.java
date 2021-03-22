@@ -63,12 +63,12 @@ class NkConfigStackFlags extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code head} field. */
+    /** @return the value of the {@code head} field. */
     public int head() { return nhead(address()); }
-    /** Returns a {@link NkConfigStackFlagsElement}.Buffer view of the {@code elements} field. */
+    /** @return a {@link NkConfigStackFlagsElement}.Buffer view of the {@code elements} field. */
     @NativeType("struct nk_config_stack_flags_element[32]")
     public NkConfigStackFlagsElement.Buffer elements() { return nelements(address()); }
-    /** Returns a {@link NkConfigStackFlagsElement} view of the struct at the specified index of the {@code elements} field. */
+    /** @return a {@link NkConfigStackFlagsElement} view of the struct at the specified index of the {@code elements} field. */
     @NativeType("struct nk_config_stack_flags_element")
     public NkConfigStackFlagsElement elements(int index) { return nelements(address(), index); }
 
@@ -150,12 +150,12 @@ class NkConfigStackFlags extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code head} field. */
+        /** @return the value of the {@code head} field. */
         public int head() { return NkConfigStackFlags.nhead(address()); }
-        /** Returns a {@link NkConfigStackFlagsElement}.Buffer view of the {@code elements} field. */
+        /** @return a {@link NkConfigStackFlagsElement}.Buffer view of the {@code elements} field. */
         @NativeType("struct nk_config_stack_flags_element[32]")
         public NkConfigStackFlagsElement.Buffer elements() { return NkConfigStackFlags.nelements(address()); }
-        /** Returns a {@link NkConfigStackFlagsElement} view of the struct at the specified index of the {@code elements} field. */
+        /** @return a {@link NkConfigStackFlagsElement} view of the struct at the specified index of the {@code elements} field. */
         @NativeType("struct nk_config_stack_flags_element")
         public NkConfigStackFlagsElement elements(int index) { return NkConfigStackFlags.nelements(address(), index); }
 

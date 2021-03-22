@@ -20,25 +20,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>This is a part of the old interface. It is recommended to use structure {@link VmaDefragmentationInfo2} and function {@link Vma#vmaDefragmentationBegin DefragmentationBegin} instead.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code maxBytesToMove} &ndash; 
- * maximum total numbers of bytes that can be copied while moving allocations to different places.
- * 
- * <p>Default is {@code VK_WHOLE_SIZ}E, which means no limit.</p></li>
- * <li>{@code maxAllocationsToMove} &ndash; 
- * maximum number of allocations that can be moved to different place.
- * 
- * <p>Default is {@code UINT32_MAX}, which means no limit.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VmaDefragmentationInfo {
- *     VkDeviceSize maxBytesToMove;
- *     uint32_t maxAllocationsToMove;
+ *     VkDeviceSize {@link #maxBytesToMove};
+ *     uint32_t {@link #maxAllocationsToMove};
  * }</code></pre>
  */
 public class VmaDefragmentationInfo extends Struct implements NativeResource {
@@ -80,16 +67,24 @@ public class VmaDefragmentationInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code maxBytesToMove} field. */
+    /**
+     * maximum total numbers of bytes that can be copied while moving allocations to different places.
+     * 
+     * <p>Default is {@code VK_WHOLE_SIZ}E, which means no limit.</p>
+     */
     @NativeType("VkDeviceSize")
     public long maxBytesToMove() { return nmaxBytesToMove(address()); }
-    /** Returns the value of the {@code maxAllocationsToMove} field. */
+    /**
+     * maximum number of allocations that can be moved to different place.
+     * 
+     * <p>Default is {@code UINT32_MAX}, which means no limit.</p>
+     */
     @NativeType("uint32_t")
     public int maxAllocationsToMove() { return nmaxAllocationsToMove(address()); }
 
-    /** Sets the specified value to the {@code maxBytesToMove} field. */
+    /** Sets the specified value to the {@link #maxBytesToMove} field. */
     public VmaDefragmentationInfo maxBytesToMove(@NativeType("VkDeviceSize") long value) { nmaxBytesToMove(address(), value); return this; }
-    /** Sets the specified value to the {@code maxAllocationsToMove} field. */
+    /** Sets the specified value to the {@link #maxAllocationsToMove} field. */
     public VmaDefragmentationInfo maxAllocationsToMove(@NativeType("uint32_t") int value) { nmaxAllocationsToMove(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,16 +301,16 @@ public class VmaDefragmentationInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code maxBytesToMove} field. */
+        /** @return the value of the {@link VmaDefragmentationInfo#maxBytesToMove} field. */
         @NativeType("VkDeviceSize")
         public long maxBytesToMove() { return VmaDefragmentationInfo.nmaxBytesToMove(address()); }
-        /** Returns the value of the {@code maxAllocationsToMove} field. */
+        /** @return the value of the {@link VmaDefragmentationInfo#maxAllocationsToMove} field. */
         @NativeType("uint32_t")
         public int maxAllocationsToMove() { return VmaDefragmentationInfo.nmaxAllocationsToMove(address()); }
 
-        /** Sets the specified value to the {@code maxBytesToMove} field. */
+        /** Sets the specified value to the {@link VmaDefragmentationInfo#maxBytesToMove} field. */
         public VmaDefragmentationInfo.Buffer maxBytesToMove(@NativeType("VkDeviceSize") long value) { VmaDefragmentationInfo.nmaxBytesToMove(address(), value); return this; }
-        /** Sets the specified value to the {@code maxAllocationsToMove} field. */
+        /** Sets the specified value to the {@link VmaDefragmentationInfo#maxAllocationsToMove} field. */
         public VmaDefragmentationInfo.Buffer maxAllocationsToMove(@NativeType("uint32_t") int value) { VmaDefragmentationInfo.nmaxAllocationsToMove(address(), value); return this; }
 
     }

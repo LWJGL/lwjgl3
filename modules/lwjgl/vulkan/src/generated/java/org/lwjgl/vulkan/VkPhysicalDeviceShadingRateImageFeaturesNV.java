@@ -30,21 +30,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVShadingRateImage#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code shadingRateImage} &ndash; indicates that the implementation supports the use of a shading rate image to derive an effective shading rate for fragment processing. It also indicates that the implementation supports the {@code ShadingRateNV} SPIR-V execution mode.</li>
- * <li>{@code shadingRateCoarseSampleOrder} &ndash; indicates that the implementation supports a user-configurable ordering of coverage samples in fragments larger than one pixel.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShadingRateImageFeaturesNV {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 shadingRateImage;
- *     VkBool32 shadingRateCoarseSampleOrder;
+ *     VkBool32 {@link #shadingRateImage};
+ *     VkBool32 {@link #shadingRateCoarseSampleOrder};
  * }</code></pre>
  */
 public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implements NativeResource {
@@ -92,16 +85,16 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code shadingRateImage} field. */
+    /** indicates that the implementation supports the use of a shading rate image to derive an effective shading rate for fragment processing. It also indicates that the implementation supports the {@code ShadingRateNV} SPIR-V execution mode. */
     @NativeType("VkBool32")
     public boolean shadingRateImage() { return nshadingRateImage(address()) != 0; }
-    /** Returns the value of the {@code shadingRateCoarseSampleOrder} field. */
+    /** indicates that the implementation supports a user-configurable ordering of coverage samples in fragments larger than one pixel. */
     @NativeType("VkBool32")
     public boolean shadingRateCoarseSampleOrder() { return nshadingRateCoarseSampleOrder(address()) != 0; }
 
@@ -109,9 +102,9 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
     public VkPhysicalDeviceShadingRateImageFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShadingRateImageFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code shadingRateImage} field. */
+    /** Sets the specified value to the {@link #shadingRateImage} field. */
     public VkPhysicalDeviceShadingRateImageFeaturesNV shadingRateImage(@NativeType("VkBool32") boolean value) { nshadingRateImage(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shadingRateCoarseSampleOrder} field. */
+    /** Sets the specified value to the {@link #shadingRateCoarseSampleOrder} field. */
     public VkPhysicalDeviceShadingRateImageFeaturesNV shadingRateCoarseSampleOrder(@NativeType("VkBool32") boolean value) { nshadingRateCoarseSampleOrder(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -340,16 +333,16 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShadingRateImageFeaturesNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShadingRateImageFeaturesNV.npNext(address()); }
-        /** Returns the value of the {@code shadingRateImage} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShadingRateImageFeaturesNV#shadingRateImage} field. */
         @NativeType("VkBool32")
         public boolean shadingRateImage() { return VkPhysicalDeviceShadingRateImageFeaturesNV.nshadingRateImage(address()) != 0; }
-        /** Returns the value of the {@code shadingRateCoarseSampleOrder} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShadingRateImageFeaturesNV#shadingRateCoarseSampleOrder} field. */
         @NativeType("VkBool32")
         public boolean shadingRateCoarseSampleOrder() { return VkPhysicalDeviceShadingRateImageFeaturesNV.nshadingRateCoarseSampleOrder(address()) != 0; }
 
@@ -357,9 +350,9 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
         public VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShadingRateImageFeaturesNV.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShadingRateImageFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code shadingRateImage} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShadingRateImageFeaturesNV#shadingRateImage} field. */
         public VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer shadingRateImage(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShadingRateImageFeaturesNV.nshadingRateImage(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shadingRateCoarseSampleOrder} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShadingRateImageFeaturesNV#shadingRateCoarseSampleOrder} field. */
         public VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer shadingRateCoarseSampleOrder(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShadingRateImageFeaturesNV.nshadingRateCoarseSampleOrder(address(), value ? 1 : 0); return this; }
 
     }

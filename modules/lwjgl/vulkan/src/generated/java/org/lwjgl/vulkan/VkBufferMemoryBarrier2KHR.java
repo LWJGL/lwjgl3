@@ -141,38 +141,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkDependencyInfoKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code srcStageMask} &ndash; a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">first synchronization scope</a>.</li>
- * <li>{@code srcAccessMask} &ndash; a {@code VkAccessFlags2KHR} mask of pipeline <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">first access scope</a>.</li>
- * <li>{@code dstStageMask} &ndash; a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">second synchronization scope</a>.
- * 
- * <p>a {@code VkAccessFlags2KHR} mask of pipeline <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">second access scope</a>.</p></li>
- * <li>{@code srcQueueFamilyIndex} &ndash; the source queue family for a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>.</li>
- * <li>{@code dstQueueFamilyIndex} &ndash; the destination queue family for a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>.</li>
- * <li>{@code buffer} &ndash; a handle to the buffer whose backing memory is affected by the barrier.</li>
- * <li>{@code offset} &ndash; an offset in bytes into the backing memory for {@code buffer}; this is relative to the base offset as bound to the buffer (see {@link VK10#vkBindBufferMemory BindBufferMemory}).</li>
- * <li>{@code size} &ndash; a size in bytes of the affected area of backing memory for {@code buffer}, or {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} to use the range from {@code offset} to the end of the buffer.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBufferMemoryBarrier2KHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineStageFlags2KHR srcStageMask;
- *     VkAccessFlags2KHR srcAccessMask;
- *     VkPipelineStageFlags2KHR dstStageMask;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineStageFlags2KHR {@link #srcStageMask};
+ *     VkAccessFlags2KHR {@link #srcAccessMask};
+ *     VkPipelineStageFlags2KHR {@link #dstStageMask};
  *     VkAccessFlags2KHR dstAccessMask;
- *     uint32_t srcQueueFamilyIndex;
- *     uint32_t dstQueueFamilyIndex;
- *     VkBuffer buffer;
- *     VkDeviceSize offset;
- *     VkDeviceSize size;
+ *     uint32_t {@link #srcQueueFamilyIndex};
+ *     uint32_t {@link #dstQueueFamilyIndex};
+ *     VkBuffer {@link #buffer};
+ *     VkDeviceSize {@link #offset};
+ *     VkDeviceSize {@link #size};
  * }</code></pre>
  */
 public class VkBufferMemoryBarrier2KHR extends Struct implements NativeResource {
@@ -241,61 +224,65 @@ public class VkBufferMemoryBarrier2KHR extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code srcStageMask} field. */
+    /** a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">first synchronization scope</a>. */
     @NativeType("VkPipelineStageFlags2KHR")
     public int srcStageMask() { return nsrcStageMask(address()); }
-    /** Returns the value of the {@code srcAccessMask} field. */
+    /** a {@code VkAccessFlags2KHR} mask of pipeline <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">first access scope</a>. */
     @NativeType("VkAccessFlags2KHR")
     public int srcAccessMask() { return nsrcAccessMask(address()); }
-    /** Returns the value of the {@code dstStageMask} field. */
+    /**
+     * a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">second synchronization scope</a>.
+     * 
+     * <p>a {@code VkAccessFlags2KHR} mask of pipeline <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">second access scope</a>.</p>
+     */
     @NativeType("VkPipelineStageFlags2KHR")
     public int dstStageMask() { return ndstStageMask(address()); }
-    /** Returns the value of the {@code dstAccessMask} field. */
+    /** @return the value of the {@code dstAccessMask} field. */
     @NativeType("VkAccessFlags2KHR")
     public int dstAccessMask() { return ndstAccessMask(address()); }
-    /** Returns the value of the {@code srcQueueFamilyIndex} field. */
+    /** the source queue family for a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>. */
     @NativeType("uint32_t")
     public int srcQueueFamilyIndex() { return nsrcQueueFamilyIndex(address()); }
-    /** Returns the value of the {@code dstQueueFamilyIndex} field. */
+    /** the destination queue family for a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>. */
     @NativeType("uint32_t")
     public int dstQueueFamilyIndex() { return ndstQueueFamilyIndex(address()); }
-    /** Returns the value of the {@code buffer} field. */
+    /** a handle to the buffer whose backing memory is affected by the barrier. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /** an offset in bytes into the backing memory for {@code buffer}; this is relative to the base offset as bound to the buffer (see {@link VK10#vkBindBufferMemory BindBufferMemory}). */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** a size in bytes of the affected area of backing memory for {@code buffer}, or {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} to use the range from {@code offset} to the end of the buffer. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkBufferMemoryBarrier2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferMemoryBarrier2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code srcStageMask} field. */
+    /** Sets the specified value to the {@link #srcStageMask} field. */
     public VkBufferMemoryBarrier2KHR srcStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { nsrcStageMask(address(), value); return this; }
-    /** Sets the specified value to the {@code srcAccessMask} field. */
+    /** Sets the specified value to the {@link #srcAccessMask} field. */
     public VkBufferMemoryBarrier2KHR srcAccessMask(@NativeType("VkAccessFlags2KHR") int value) { nsrcAccessMask(address(), value); return this; }
-    /** Sets the specified value to the {@code dstStageMask} field. */
+    /** Sets the specified value to the {@link #dstStageMask} field. */
     public VkBufferMemoryBarrier2KHR dstStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { ndstStageMask(address(), value); return this; }
     /** Sets the specified value to the {@code dstAccessMask} field. */
     public VkBufferMemoryBarrier2KHR dstAccessMask(@NativeType("VkAccessFlags2KHR") int value) { ndstAccessMask(address(), value); return this; }
-    /** Sets the specified value to the {@code srcQueueFamilyIndex} field. */
+    /** Sets the specified value to the {@link #srcQueueFamilyIndex} field. */
     public VkBufferMemoryBarrier2KHR srcQueueFamilyIndex(@NativeType("uint32_t") int value) { nsrcQueueFamilyIndex(address(), value); return this; }
-    /** Sets the specified value to the {@code dstQueueFamilyIndex} field. */
+    /** Sets the specified value to the {@link #dstQueueFamilyIndex} field. */
     public VkBufferMemoryBarrier2KHR dstQueueFamilyIndex(@NativeType("uint32_t") int value) { ndstQueueFamilyIndex(address(), value); return this; }
-    /** Sets the specified value to the {@code buffer} field. */
+    /** Sets the specified value to the {@link #buffer} field. */
     public VkBufferMemoryBarrier2KHR buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code offset} field. */
+    /** Sets the specified value to the {@link #offset} field. */
     public VkBufferMemoryBarrier2KHR offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@code size} field. */
+    /** Sets the specified value to the {@link #size} field. */
     public VkBufferMemoryBarrier2KHR size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -566,61 +553,61 @@ public class VkBufferMemoryBarrier2KHR extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkBufferMemoryBarrier2KHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBufferMemoryBarrier2KHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkBufferMemoryBarrier2KHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBufferMemoryBarrier2KHR.npNext(address()); }
-        /** Returns the value of the {@code srcStageMask} field. */
+        /** @return the value of the {@link VkBufferMemoryBarrier2KHR#srcStageMask} field. */
         @NativeType("VkPipelineStageFlags2KHR")
         public int srcStageMask() { return VkBufferMemoryBarrier2KHR.nsrcStageMask(address()); }
-        /** Returns the value of the {@code srcAccessMask} field. */
+        /** @return the value of the {@link VkBufferMemoryBarrier2KHR#srcAccessMask} field. */
         @NativeType("VkAccessFlags2KHR")
         public int srcAccessMask() { return VkBufferMemoryBarrier2KHR.nsrcAccessMask(address()); }
-        /** Returns the value of the {@code dstStageMask} field. */
+        /** @return the value of the {@link VkBufferMemoryBarrier2KHR#dstStageMask} field. */
         @NativeType("VkPipelineStageFlags2KHR")
         public int dstStageMask() { return VkBufferMemoryBarrier2KHR.ndstStageMask(address()); }
-        /** Returns the value of the {@code dstAccessMask} field. */
+        /** @return the value of the {@code dstAccessMask} field. */
         @NativeType("VkAccessFlags2KHR")
         public int dstAccessMask() { return VkBufferMemoryBarrier2KHR.ndstAccessMask(address()); }
-        /** Returns the value of the {@code srcQueueFamilyIndex} field. */
+        /** @return the value of the {@link VkBufferMemoryBarrier2KHR#srcQueueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int srcQueueFamilyIndex() { return VkBufferMemoryBarrier2KHR.nsrcQueueFamilyIndex(address()); }
-        /** Returns the value of the {@code dstQueueFamilyIndex} field. */
+        /** @return the value of the {@link VkBufferMemoryBarrier2KHR#dstQueueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int dstQueueFamilyIndex() { return VkBufferMemoryBarrier2KHR.ndstQueueFamilyIndex(address()); }
-        /** Returns the value of the {@code buffer} field. */
+        /** @return the value of the {@link VkBufferMemoryBarrier2KHR#buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkBufferMemoryBarrier2KHR.nbuffer(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@link VkBufferMemoryBarrier2KHR#offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkBufferMemoryBarrier2KHR.noffset(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link VkBufferMemoryBarrier2KHR#size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkBufferMemoryBarrier2KHR.nsize(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkBufferMemoryBarrier2KHR#sType} field. */
         public VkBufferMemoryBarrier2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferMemoryBarrier2KHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkBufferMemoryBarrier2KHR#pNext} field. */
         public VkBufferMemoryBarrier2KHR.Buffer pNext(@NativeType("void const *") long value) { VkBufferMemoryBarrier2KHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code srcStageMask} field. */
+        /** Sets the specified value to the {@link VkBufferMemoryBarrier2KHR#srcStageMask} field. */
         public VkBufferMemoryBarrier2KHR.Buffer srcStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { VkBufferMemoryBarrier2KHR.nsrcStageMask(address(), value); return this; }
-        /** Sets the specified value to the {@code srcAccessMask} field. */
+        /** Sets the specified value to the {@link VkBufferMemoryBarrier2KHR#srcAccessMask} field. */
         public VkBufferMemoryBarrier2KHR.Buffer srcAccessMask(@NativeType("VkAccessFlags2KHR") int value) { VkBufferMemoryBarrier2KHR.nsrcAccessMask(address(), value); return this; }
-        /** Sets the specified value to the {@code dstStageMask} field. */
+        /** Sets the specified value to the {@link VkBufferMemoryBarrier2KHR#dstStageMask} field. */
         public VkBufferMemoryBarrier2KHR.Buffer dstStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { VkBufferMemoryBarrier2KHR.ndstStageMask(address(), value); return this; }
         /** Sets the specified value to the {@code dstAccessMask} field. */
         public VkBufferMemoryBarrier2KHR.Buffer dstAccessMask(@NativeType("VkAccessFlags2KHR") int value) { VkBufferMemoryBarrier2KHR.ndstAccessMask(address(), value); return this; }
-        /** Sets the specified value to the {@code srcQueueFamilyIndex} field. */
+        /** Sets the specified value to the {@link VkBufferMemoryBarrier2KHR#srcQueueFamilyIndex} field. */
         public VkBufferMemoryBarrier2KHR.Buffer srcQueueFamilyIndex(@NativeType("uint32_t") int value) { VkBufferMemoryBarrier2KHR.nsrcQueueFamilyIndex(address(), value); return this; }
-        /** Sets the specified value to the {@code dstQueueFamilyIndex} field. */
+        /** Sets the specified value to the {@link VkBufferMemoryBarrier2KHR#dstQueueFamilyIndex} field. */
         public VkBufferMemoryBarrier2KHR.Buffer dstQueueFamilyIndex(@NativeType("uint32_t") int value) { VkBufferMemoryBarrier2KHR.ndstQueueFamilyIndex(address(), value); return this; }
-        /** Sets the specified value to the {@code buffer} field. */
+        /** Sets the specified value to the {@link VkBufferMemoryBarrier2KHR#buffer} field. */
         public VkBufferMemoryBarrier2KHR.Buffer buffer(@NativeType("VkBuffer") long value) { VkBufferMemoryBarrier2KHR.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code offset} field. */
+        /** Sets the specified value to the {@link VkBufferMemoryBarrier2KHR#offset} field. */
         public VkBufferMemoryBarrier2KHR.Buffer offset(@NativeType("VkDeviceSize") long value) { VkBufferMemoryBarrier2KHR.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@code size} field. */
+        /** Sets the specified value to the {@link VkBufferMemoryBarrier2KHR#size} field. */
         public VkBufferMemoryBarrier2KHR.Buffer size(@NativeType("VkDeviceSize") long value) { VkBufferMemoryBarrier2KHR.nsize(address(), value); return this; }
 
     }

@@ -65,14 +65,14 @@ public class AppOverrideKeys extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pchKey} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pchKey} field. */
     @NativeType("char *")
     public ByteBuffer pchKey() { return npchKey(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code pchKey} field. */
+    /** @return the null-terminated string pointed to by the {@code pchKey} field. */
     @NativeType("char *")
     public String pchKeyString() { return npchKeyString(address()); }
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code pchValue} field.
+     * @return a {@link ByteBuffer} view of the data pointed to by the {@code pchValue} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
@@ -325,14 +325,14 @@ public class AppOverrideKeys extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pchKey} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pchKey} field. */
         @NativeType("char *")
         public ByteBuffer pchKey() { return AppOverrideKeys.npchKey(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code pchKey} field. */
+        /** @return the null-terminated string pointed to by the {@code pchKey} field. */
         @NativeType("char *")
         public String pchKeyString() { return AppOverrideKeys.npchKeyString(address()); }
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code pchValue} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@code pchValue} field.
          *
          * @param capacity the number of elements in the returned buffer
          */

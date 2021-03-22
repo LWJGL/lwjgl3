@@ -69,15 +69,15 @@ public class CXIdxIBOutletCollectionAttrInfo extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link CXIdxAttrInfo} view of the struct pointed to by the {@code attrInfo} field. */
+    /** @return a {@link CXIdxAttrInfo} view of the struct pointed to by the {@code attrInfo} field. */
     @NativeType("CXIdxAttrInfo const *")
     public CXIdxAttrInfo attrInfo() { return nattrInfo(address()); }
-    /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code objcClass} field. */
+    /** @return a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code objcClass} field. */
     @NativeType("CXIdxEntityInfo const *")
     public CXIdxEntityInfo objcClass() { return nobjcClass(address()); }
-    /** Returns a {@link CXCursor} view of the {@code classCursor} field. */
+    /** @return a {@link CXCursor} view of the {@code classCursor} field. */
     public CXCursor classCursor() { return nclassCursor(address()); }
-    /** Returns a {@link CXIdxLoc} view of the {@code classLoc} field. */
+    /** @return a {@link CXIdxLoc} view of the {@code classLoc} field. */
     public CXIdxLoc classLoc() { return nclassLoc(address()); }
 
     // -----------------------------------
@@ -158,15 +158,15 @@ public class CXIdxIBOutletCollectionAttrInfo extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link CXIdxAttrInfo} view of the struct pointed to by the {@code attrInfo} field. */
+        /** @return a {@link CXIdxAttrInfo} view of the struct pointed to by the {@code attrInfo} field. */
         @NativeType("CXIdxAttrInfo const *")
         public CXIdxAttrInfo attrInfo() { return CXIdxIBOutletCollectionAttrInfo.nattrInfo(address()); }
-        /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code objcClass} field. */
+        /** @return a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code objcClass} field. */
         @NativeType("CXIdxEntityInfo const *")
         public CXIdxEntityInfo objcClass() { return CXIdxIBOutletCollectionAttrInfo.nobjcClass(address()); }
-        /** Returns a {@link CXCursor} view of the {@code classCursor} field. */
+        /** @return a {@link CXCursor} view of the {@code classCursor} field. */
         public CXCursor classCursor() { return CXIdxIBOutletCollectionAttrInfo.nclassCursor(address()); }
-        /** Returns a {@link CXIdxLoc} view of the {@code classLoc} field. */
+        /** @return a {@link CXIdxLoc} view of the {@code classLoc} field. */
         public CXIdxLoc classLoc() { return CXIdxIBOutletCollectionAttrInfo.nclassLoc(address()); }
 
     }

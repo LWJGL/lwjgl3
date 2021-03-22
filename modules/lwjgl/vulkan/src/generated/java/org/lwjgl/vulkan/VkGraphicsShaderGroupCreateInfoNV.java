@@ -41,27 +41,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkGraphicsPipelineShaderGroupsCreateInfoNV}, {@link VkPipelineShaderStageCreateInfo}, {@link VkPipelineTessellationStateCreateInfo}, {@link VkPipelineVertexInputStateCreateInfo}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code stageCount} &ndash; the number of entries in the {@code pStages} array.</li>
- * <li>{@code pStages} &ndash; an array of size {@code stageCount} structures of type {@link VkPipelineShaderStageCreateInfo} describing the set of the shader stages to be included in this shader group.</li>
- * <li>{@code pVertexInputState} &ndash; a pointer to an instance of the {@link VkPipelineVertexInputStateCreateInfo} structure.</li>
- * <li>{@code pTessellationState} &ndash; a pointer to an instance of the {@link VkPipelineTessellationStateCreateInfo} structure, and is ignored if the shader group does not include a tessellation control shader stage and tessellation evaluation shader stage.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkGraphicsShaderGroupCreateInfoNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t stageCount;
- *     {@link VkPipelineShaderStageCreateInfo VkPipelineShaderStageCreateInfo} const * pStages;
- *     {@link VkPipelineVertexInputStateCreateInfo VkPipelineVertexInputStateCreateInfo} const * pVertexInputState;
- *     {@link VkPipelineTessellationStateCreateInfo VkPipelineTessellationStateCreateInfo} const * pTessellationState;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #stageCount};
+ *     {@link VkPipelineShaderStageCreateInfo VkPipelineShaderStageCreateInfo} const * {@link #pStages};
+ *     {@link VkPipelineVertexInputStateCreateInfo VkPipelineVertexInputStateCreateInfo} const * {@link #pVertexInputState};
+ *     {@link VkPipelineTessellationStateCreateInfo VkPipelineTessellationStateCreateInfo} const * {@link #pTessellationState};
  * }</code></pre>
  */
 public class VkGraphicsShaderGroupCreateInfoNV extends Struct implements NativeResource {
@@ -115,36 +104,36 @@ public class VkGraphicsShaderGroupCreateInfoNV extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code stageCount} field. */
+    /** the number of entries in the {@code pStages} array. */
     @NativeType("uint32_t")
     public int stageCount() { return nstageCount(address()); }
-    /** Returns a {@link VkPipelineShaderStageCreateInfo.Buffer} view of the struct array pointed to by the {@code pStages} field. */
+    /** an array of size {@code stageCount} structures of type {@link VkPipelineShaderStageCreateInfo} describing the set of the shader stages to be included in this shader group. */
     @NativeType("VkPipelineShaderStageCreateInfo const *")
     public VkPipelineShaderStageCreateInfo.Buffer pStages() { return npStages(address()); }
-    /** Returns a {@link VkPipelineVertexInputStateCreateInfo} view of the struct pointed to by the {@code pVertexInputState} field. */
+    /** a pointer to an instance of the {@link VkPipelineVertexInputStateCreateInfo} structure. */
     @Nullable
     @NativeType("VkPipelineVertexInputStateCreateInfo const *")
     public VkPipelineVertexInputStateCreateInfo pVertexInputState() { return npVertexInputState(address()); }
-    /** Returns a {@link VkPipelineTessellationStateCreateInfo} view of the struct pointed to by the {@code pTessellationState} field. */
+    /** a pointer to an instance of the {@link VkPipelineTessellationStateCreateInfo} structure, and is ignored if the shader group does not include a tessellation control shader stage and tessellation evaluation shader stage. */
     @Nullable
     @NativeType("VkPipelineTessellationStateCreateInfo const *")
     public VkPipelineTessellationStateCreateInfo pTessellationState() { return npTessellationState(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkGraphicsShaderGroupCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkGraphicsShaderGroupCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@code pStages} field. */
+    /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link #pStages} field. */
     public VkGraphicsShaderGroupCreateInfoNV pStages(@NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.Buffer value) { npStages(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPipelineVertexInputStateCreateInfo} to the {@code pVertexInputState} field. */
+    /** Sets the address of the specified {@link VkPipelineVertexInputStateCreateInfo} to the {@link #pVertexInputState} field. */
     public VkGraphicsShaderGroupCreateInfoNV pVertexInputState(@Nullable @NativeType("VkPipelineVertexInputStateCreateInfo const *") VkPipelineVertexInputStateCreateInfo value) { npVertexInputState(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPipelineTessellationStateCreateInfo} to the {@code pTessellationState} field. */
+    /** Sets the address of the specified {@link VkPipelineTessellationStateCreateInfo} to the {@link #pTessellationState} field. */
     public VkGraphicsShaderGroupCreateInfoNV pTessellationState(@Nullable @NativeType("VkPipelineTessellationStateCreateInfo const *") VkPipelineTessellationStateCreateInfo value) { npTessellationState(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -411,36 +400,36 @@ public class VkGraphicsShaderGroupCreateInfoNV extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkGraphicsShaderGroupCreateInfoNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkGraphicsShaderGroupCreateInfoNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkGraphicsShaderGroupCreateInfoNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkGraphicsShaderGroupCreateInfoNV.npNext(address()); }
-        /** Returns the value of the {@code stageCount} field. */
+        /** @return the value of the {@link VkGraphicsShaderGroupCreateInfoNV#stageCount} field. */
         @NativeType("uint32_t")
         public int stageCount() { return VkGraphicsShaderGroupCreateInfoNV.nstageCount(address()); }
-        /** Returns a {@link VkPipelineShaderStageCreateInfo.Buffer} view of the struct array pointed to by the {@code pStages} field. */
+        /** @return a {@link VkPipelineShaderStageCreateInfo.Buffer} view of the struct array pointed to by the {@link VkGraphicsShaderGroupCreateInfoNV#pStages} field. */
         @NativeType("VkPipelineShaderStageCreateInfo const *")
         public VkPipelineShaderStageCreateInfo.Buffer pStages() { return VkGraphicsShaderGroupCreateInfoNV.npStages(address()); }
-        /** Returns a {@link VkPipelineVertexInputStateCreateInfo} view of the struct pointed to by the {@code pVertexInputState} field. */
+        /** @return a {@link VkPipelineVertexInputStateCreateInfo} view of the struct pointed to by the {@link VkGraphicsShaderGroupCreateInfoNV#pVertexInputState} field. */
         @Nullable
         @NativeType("VkPipelineVertexInputStateCreateInfo const *")
         public VkPipelineVertexInputStateCreateInfo pVertexInputState() { return VkGraphicsShaderGroupCreateInfoNV.npVertexInputState(address()); }
-        /** Returns a {@link VkPipelineTessellationStateCreateInfo} view of the struct pointed to by the {@code pTessellationState} field. */
+        /** @return a {@link VkPipelineTessellationStateCreateInfo} view of the struct pointed to by the {@link VkGraphicsShaderGroupCreateInfoNV#pTessellationState} field. */
         @Nullable
         @NativeType("VkPipelineTessellationStateCreateInfo const *")
         public VkPipelineTessellationStateCreateInfo pTessellationState() { return VkGraphicsShaderGroupCreateInfoNV.npTessellationState(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkGraphicsShaderGroupCreateInfoNV#sType} field. */
         public VkGraphicsShaderGroupCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkGraphicsShaderGroupCreateInfoNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkGraphicsShaderGroupCreateInfoNV#pNext} field. */
         public VkGraphicsShaderGroupCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkGraphicsShaderGroupCreateInfoNV.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@code pStages} field. */
+        /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link VkGraphicsShaderGroupCreateInfoNV#pStages} field. */
         public VkGraphicsShaderGroupCreateInfoNV.Buffer pStages(@NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.Buffer value) { VkGraphicsShaderGroupCreateInfoNV.npStages(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPipelineVertexInputStateCreateInfo} to the {@code pVertexInputState} field. */
+        /** Sets the address of the specified {@link VkPipelineVertexInputStateCreateInfo} to the {@link VkGraphicsShaderGroupCreateInfoNV#pVertexInputState} field. */
         public VkGraphicsShaderGroupCreateInfoNV.Buffer pVertexInputState(@Nullable @NativeType("VkPipelineVertexInputStateCreateInfo const *") VkPipelineVertexInputStateCreateInfo value) { VkGraphicsShaderGroupCreateInfoNV.npVertexInputState(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPipelineTessellationStateCreateInfo} to the {@code pTessellationState} field. */
+        /** Sets the address of the specified {@link VkPipelineTessellationStateCreateInfo} to the {@link VkGraphicsShaderGroupCreateInfoNV#pTessellationState} field. */
         public VkGraphicsShaderGroupCreateInfoNV.Buffer pTessellationState(@Nullable @NativeType("VkPipelineTessellationStateCreateInfo const *") VkPipelineTessellationStateCreateInfo value) { VkGraphicsShaderGroupCreateInfoNV.npTessellationState(address(), value); return this; }
 
     }

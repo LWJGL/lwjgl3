@@ -53,25 +53,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK11#vkBindBufferMemory2 BindBufferMemory2}, {@link KHRBindMemory2#vkBindBufferMemory2KHR BindBufferMemory2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code buffer} &ndash; the buffer to be attached to memory.</li>
- * <li>{@code memory} &ndash; a {@code VkDeviceMemory} object describing the device memory to attach.</li>
- * <li>{@code memoryOffset} &ndash; the start offset of the region of {@code memory} which is to be bound to the buffer. The number of bytes returned in the {@link VkMemoryRequirements}{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified buffer.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBindBufferMemoryInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkBuffer buffer;
- *     VkDeviceMemory memory;
- *     VkDeviceSize memoryOffset;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkBuffer {@link #buffer};
+ *     VkDeviceMemory {@link #memory};
+ *     VkDeviceSize {@link #memoryOffset};
  * }</code></pre>
  */
 public class VkBindBufferMemoryInfo extends Struct implements NativeResource {
@@ -122,31 +112,31 @@ public class VkBindBufferMemoryInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code buffer} field. */
+    /** the buffer to be attached to memory. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
-    /** Returns the value of the {@code memory} field. */
+    /** a {@code VkDeviceMemory} object describing the device memory to attach. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** Returns the value of the {@code memoryOffset} field. */
+    /** the start offset of the region of {@code memory} which is to be bound to the buffer. The number of bytes returned in the {@link VkMemoryRequirements}{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified buffer. */
     @NativeType("VkDeviceSize")
     public long memoryOffset() { return nmemoryOffset(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkBindBufferMemoryInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkBindBufferMemoryInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code buffer} field. */
+    /** Sets the specified value to the {@link #buffer} field. */
     public VkBindBufferMemoryInfo buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code memory} field. */
+    /** Sets the specified value to the {@link #memory} field. */
     public VkBindBufferMemoryInfo memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
-    /** Sets the specified value to the {@code memoryOffset} field. */
+    /** Sets the specified value to the {@link #memoryOffset} field. */
     public VkBindBufferMemoryInfo memoryOffset(@NativeType("VkDeviceSize") long value) { nmemoryOffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -381,31 +371,31 @@ public class VkBindBufferMemoryInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkBindBufferMemoryInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBindBufferMemoryInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkBindBufferMemoryInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBindBufferMemoryInfo.npNext(address()); }
-        /** Returns the value of the {@code buffer} field. */
+        /** @return the value of the {@link VkBindBufferMemoryInfo#buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkBindBufferMemoryInfo.nbuffer(address()); }
-        /** Returns the value of the {@code memory} field. */
+        /** @return the value of the {@link VkBindBufferMemoryInfo#memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkBindBufferMemoryInfo.nmemory(address()); }
-        /** Returns the value of the {@code memoryOffset} field. */
+        /** @return the value of the {@link VkBindBufferMemoryInfo#memoryOffset} field. */
         @NativeType("VkDeviceSize")
         public long memoryOffset() { return VkBindBufferMemoryInfo.nmemoryOffset(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkBindBufferMemoryInfo#sType} field. */
         public VkBindBufferMemoryInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindBufferMemoryInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkBindBufferMemoryInfo#pNext} field. */
         public VkBindBufferMemoryInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindBufferMemoryInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code buffer} field. */
+        /** Sets the specified value to the {@link VkBindBufferMemoryInfo#buffer} field. */
         public VkBindBufferMemoryInfo.Buffer buffer(@NativeType("VkBuffer") long value) { VkBindBufferMemoryInfo.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code memory} field. */
+        /** Sets the specified value to the {@link VkBindBufferMemoryInfo#memory} field. */
         public VkBindBufferMemoryInfo.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkBindBufferMemoryInfo.nmemory(address(), value); return this; }
-        /** Sets the specified value to the {@code memoryOffset} field. */
+        /** Sets the specified value to the {@link VkBindBufferMemoryInfo#memoryOffset} field. */
         public VkBindBufferMemoryInfo.Buffer memoryOffset(@NativeType("VkDeviceSize") long value) { VkBindBufferMemoryInfo.nmemoryOffset(address(), value); return this; }
 
     }

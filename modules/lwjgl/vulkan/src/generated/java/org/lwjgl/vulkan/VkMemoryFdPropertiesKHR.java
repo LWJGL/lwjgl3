@@ -29,21 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link KHRExternalMemoryFd#vkGetMemoryFdPropertiesKHR GetMemoryFdPropertiesKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code memoryTypeBits} &ndash; a bitmask containing one bit set for every memory type which the specified file descriptor <b>can</b> be imported as.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkMemoryFdPropertiesKHR {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint32_t memoryTypeBits;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint32_t {@link #memoryTypeBits};
  * }</code></pre>
  */
 public class VkMemoryFdPropertiesKHR extends Struct implements NativeResource {
@@ -88,19 +80,19 @@ public class VkMemoryFdPropertiesKHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code memoryTypeBits} field. */
+    /** a bitmask containing one bit set for every memory type which the specified file descriptor <b>can</b> be imported as. */
     @NativeType("uint32_t")
     public int memoryTypeBits() { return nmemoryTypeBits(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryFdPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryFdPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,19 +311,19 @@ public class VkMemoryFdPropertiesKHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkMemoryFdPropertiesKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryFdPropertiesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkMemoryFdPropertiesKHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkMemoryFdPropertiesKHR.npNext(address()); }
-        /** Returns the value of the {@code memoryTypeBits} field. */
+        /** @return the value of the {@link VkMemoryFdPropertiesKHR#memoryTypeBits} field. */
         @NativeType("uint32_t")
         public int memoryTypeBits() { return VkMemoryFdPropertiesKHR.nmemoryTypeBits(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkMemoryFdPropertiesKHR#sType} field. */
         public VkMemoryFdPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryFdPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkMemoryFdPropertiesKHR#pNext} field. */
         public VkMemoryFdPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkMemoryFdPropertiesKHR.npNext(address(), value); return this; }
 
     }

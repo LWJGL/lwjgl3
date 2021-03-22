@@ -30,29 +30,16 @@ import static org.lwjgl.system.MemoryUtil.*;
  * ~&lt;name&gt;
  *     A temporary property for internal use.</code></pre>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code mKey} &ndash; Specifies the name of the property (key). Keys are generally case insensitive.</li>
- * <li>{@code mSemantic} &ndash; Textures: Specifies their exact usage semantic. For non-texture properties, this member is always 0 (or, better-said, {@link Assimp#aiTextureType_NONE TextureType_NONE}).</li>
- * <li>{@code mIndex} &ndash; Textures: Specifies the index of the texture. For non-texture properties, this member is always 0.</li>
- * <li>{@code mDataLength} &ndash; Size of the buffer {@code mData} is pointing to, in bytes. This value may not be 0.</li>
- * <li>{@code mType} &ndash; 
- * Type information for the property. Defines the data layout inside the data buffer. This is used by the library internally to perform debug checks and
- * to utilize proper type conversions. (It's probably a hacky solution, but it works.)</li>
- * <li>{@code mData} &ndash; Binary buffer to hold the property's value. The size of the buffer is always mDataLength.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiMaterialProperty {
- *     {@link AIString struct aiString} mKey;
- *     unsigned int mSemantic;
- *     unsigned int mIndex;
- *     unsigned int mDataLength;
- *     aiPropertyTypeInfo mType;
- *     char * mData;
+ *     {@link AIString struct aiString} {@link #mKey};
+ *     unsigned int {@link #mSemantic};
+ *     unsigned int {@link #mIndex};
+ *     unsigned int {@link #mDataLength};
+ *     aiPropertyTypeInfo {@link #mType};
+ *     char * {@link #mData};
  * }</code></pre>
  */
 @NativeType("struct aiMaterialProperty")
@@ -107,22 +94,25 @@ public class AIMaterialProperty extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link AIString} view of the {@code mKey} field. */
+    /** Specifies the name of the property (key). Keys are generally case insensitive. */
     @NativeType("struct aiString")
     public AIString mKey() { return nmKey(address()); }
-    /** Returns the value of the {@code mSemantic} field. */
+    /** Textures: Specifies their exact usage semantic. For non-texture properties, this member is always 0 (or, better-said, {@link Assimp#aiTextureType_NONE TextureType_NONE}). */
     @NativeType("unsigned int")
     public int mSemantic() { return nmSemantic(address()); }
-    /** Returns the value of the {@code mIndex} field. */
+    /** Textures: Specifies the index of the texture. For non-texture properties, this member is always 0. */
     @NativeType("unsigned int")
     public int mIndex() { return nmIndex(address()); }
-    /** Returns the value of the {@code mDataLength} field. */
+    /** Size of the buffer {@code mData} is pointing to, in bytes. This value may not be 0. */
     @NativeType("unsigned int")
     public int mDataLength() { return nmDataLength(address()); }
-    /** Returns the value of the {@code mType} field. */
+    /**
+     * Type information for the property. Defines the data layout inside the data buffer. This is used by the library internally to perform debug checks and
+     * to utilize proper type conversions. (It's probably a hacky solution, but it works.)
+     */
     @NativeType("aiPropertyTypeInfo")
     public int mType() { return nmType(address()); }
-    /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code mData} field. */
+    /** Binary buffer to hold the property's value. The size of the buffer is always mDataLength. */
     @NativeType("char *")
     public ByteBuffer mData() { return nmData(address()); }
 
@@ -208,22 +198,22 @@ public class AIMaterialProperty extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link AIString} view of the {@code mKey} field. */
+        /** @return a {@link AIString} view of the {@link AIMaterialProperty#mKey} field. */
         @NativeType("struct aiString")
         public AIString mKey() { return AIMaterialProperty.nmKey(address()); }
-        /** Returns the value of the {@code mSemantic} field. */
+        /** @return the value of the {@link AIMaterialProperty#mSemantic} field. */
         @NativeType("unsigned int")
         public int mSemantic() { return AIMaterialProperty.nmSemantic(address()); }
-        /** Returns the value of the {@code mIndex} field. */
+        /** @return the value of the {@link AIMaterialProperty#mIndex} field. */
         @NativeType("unsigned int")
         public int mIndex() { return AIMaterialProperty.nmIndex(address()); }
-        /** Returns the value of the {@code mDataLength} field. */
+        /** @return the value of the {@link AIMaterialProperty#mDataLength} field. */
         @NativeType("unsigned int")
         public int mDataLength() { return AIMaterialProperty.nmDataLength(address()); }
-        /** Returns the value of the {@code mType} field. */
+        /** @return the value of the {@link AIMaterialProperty#mType} field. */
         @NativeType("aiPropertyTypeInfo")
         public int mType() { return AIMaterialProperty.nmType(address()); }
-        /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code mData} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link AIMaterialProperty#mData} field. */
         @NativeType("char *")
         public ByteBuffer mData() { return AIMaterialProperty.nmData(address()); }
 

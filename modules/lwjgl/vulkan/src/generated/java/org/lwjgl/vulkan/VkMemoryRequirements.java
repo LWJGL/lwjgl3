@@ -18,21 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying memory requirements.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code size} &ndash; the size, in bytes, of the memory allocation required: for the resource.</li>
- * <li>{@code alignment} &ndash; the alignment, in bytes, of the offset within the allocation required: for the resource.</li>
- * <li>{@code memoryTypeBits} &ndash; a bitmask and contains one bit set for every supported memory type for the resource. Bit {@code i} is set if and only if the memory type {@code i} in the {@link VkPhysicalDeviceMemoryProperties} structure for the physical device is supported for the resource.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkMemoryRequirements {
- *     VkDeviceSize size;
- *     VkDeviceSize alignment;
- *     uint32_t memoryTypeBits;
+ *     VkDeviceSize {@link #size};
+ *     VkDeviceSize {@link #alignment};
+ *     uint32_t {@link #memoryTypeBits};
  * }</code></pre>
  */
 public class VkMemoryRequirements extends Struct implements NativeResource {
@@ -77,13 +69,13 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code size} field. */
+    /** the size, in bytes, of the memory allocation required: for the resource. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** Returns the value of the {@code alignment} field. */
+    /** the alignment, in bytes, of the offset within the allocation required: for the resource. */
     @NativeType("VkDeviceSize")
     public long alignment() { return nalignment(address()); }
-    /** Returns the value of the {@code memoryTypeBits} field. */
+    /** a bitmask and contains one bit set for every supported memory type for the resource. Bit {@code i} is set if and only if the memory type {@code i} in the {@link VkPhysicalDeviceMemoryProperties} structure for the physical device is supported for the resource. */
     @NativeType("uint32_t")
     public int memoryTypeBits() { return nmemoryTypeBits(address()); }
 
@@ -275,13 +267,13 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link VkMemoryRequirements#size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkMemoryRequirements.nsize(address()); }
-        /** Returns the value of the {@code alignment} field. */
+        /** @return the value of the {@link VkMemoryRequirements#alignment} field. */
         @NativeType("VkDeviceSize")
         public long alignment() { return VkMemoryRequirements.nalignment(address()); }
-        /** Returns the value of the {@code memoryTypeBits} field. */
+        /** @return the value of the {@link VkMemoryRequirements#memoryTypeBits} field. */
         @NativeType("uint32_t")
         public int memoryTypeBits() { return VkMemoryRequirements.nmemoryTypeBits(address()); }
 

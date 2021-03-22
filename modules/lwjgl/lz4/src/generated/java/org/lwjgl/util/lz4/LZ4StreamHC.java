@@ -66,13 +66,13 @@ public class LZ4StreamHC extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link PointerBuffer} view of the {@code table} field. */
+    /** @return a {@link PointerBuffer} view of the {@code table} field. */
     @NativeType("size_t[LZ4_STREAMHCSIZE_SIZET]")
     public PointerBuffer table() { return ntable(address()); }
-    /** Returns the value at the specified index of the {@code table} field. */
+    /** @return the value at the specified index of the {@code table} field. */
     @NativeType("size_t")
     public long table(int index) { return ntable(address(), index); }
-    /** Returns a {@link LZ4HCCCtxInternal} view of the {@code internal_donotuse} field. */
+    /** @return a {@link LZ4HCCCtxInternal} view of the {@code internal_donotuse} field. */
     @NativeType("struct LZ4HC_CCtx_internal")
     public LZ4HCCCtxInternal internal_donotuse() { return ninternal_donotuse(address()); }
 
@@ -154,13 +154,13 @@ public class LZ4StreamHC extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link PointerBuffer} view of the {@code table} field. */
+        /** @return a {@link PointerBuffer} view of the {@code table} field. */
         @NativeType("size_t[LZ4_STREAMHCSIZE_SIZET]")
         public PointerBuffer table() { return LZ4StreamHC.ntable(address()); }
-        /** Returns the value at the specified index of the {@code table} field. */
+        /** @return the value at the specified index of the {@code table} field. */
         @NativeType("size_t")
         public long table(int index) { return LZ4StreamHC.ntable(address(), index); }
-        /** Returns a {@link LZ4HCCCtxInternal} view of the {@code internal_donotuse} field. */
+        /** @return a {@link LZ4HCCCtxInternal} view of the {@code internal_donotuse} field. */
         @NativeType("struct LZ4HC_CCtx_internal")
         public LZ4HCCCtxInternal internal_donotuse() { return LZ4StreamHC.ninternal_donotuse(address()); }
 

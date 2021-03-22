@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code deviceGeneratedCommands} &ndash; indicates whether the implementation supports functionality to generate commands on the device. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#device-generated-commands">Device-Generated Commands</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 deviceGeneratedCommands;
+ *     VkBool32 {@link #deviceGeneratedCommands};
  * }</code></pre>
  */
 public class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV extends Struct im
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code deviceGeneratedCommands} field. */
+    /** indicates whether the implementation supports functionality to generate commands on the device. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#device-generated-commands">Device-Generated Commands</a>. */
     @NativeType("VkBool32")
     public boolean deviceGeneratedCommands() { return ndeviceGeneratedCommands(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV extends Struct im
     public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code deviceGeneratedCommands} field. */
+    /** Sets the specified value to the {@link #deviceGeneratedCommands} field. */
     public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV deviceGeneratedCommands(@NativeType("VkBool32") boolean value) { ndeviceGeneratedCommands(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV extends Struct im
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.npNext(address()); }
-        /** Returns the value of the {@code deviceGeneratedCommands} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV#deviceGeneratedCommands} field. */
         @NativeType("VkBool32")
         public boolean deviceGeneratedCommands() { return VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.ndeviceGeneratedCommands(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV extends Struct im
         public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code deviceGeneratedCommands} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV#deviceGeneratedCommands} field. */
         public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.Buffer deviceGeneratedCommands(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.ndeviceGeneratedCommands(address(), value ? 1 : 0); return this; }
 
     }

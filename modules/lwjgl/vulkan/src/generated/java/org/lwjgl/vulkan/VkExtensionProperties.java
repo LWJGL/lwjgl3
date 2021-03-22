@@ -20,19 +20,12 @@ import static org.lwjgl.vulkan.VK10.*;
 /**
  * Structure specifying an extension properties.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code extensionName[VK_MAX_EXTENSION_NAME_SIZE]} &ndash; an array of {@link VK10#VK_MAX_EXTENSION_NAME_SIZE MAX_EXTENSION_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the extension.</li>
- * <li>{@code specVersion} &ndash; the version of this extension. It is an integer, incremented with backward compatible changes.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkExtensionProperties {
- *     char extensionName[VK_MAX_EXTENSION_NAME_SIZE];
- *     uint32_t specVersion;
+ *     char {@link #extensionName}[VK_MAX_EXTENSION_NAME_SIZE];
+ *     uint32_t {@link #specVersion};
  * }</code></pre>
  */
 public class VkExtensionProperties extends Struct implements NativeResource {
@@ -74,13 +67,13 @@ public class VkExtensionProperties extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code extensionName} field. */
+    /** an array of {@link VK10#VK_MAX_EXTENSION_NAME_SIZE MAX_EXTENSION_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the extension. */
     @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
     public ByteBuffer extensionName() { return nextensionName(address()); }
-    /** Decodes the null-terminated string stored in the {@code extensionName} field. */
+    /** an array of {@link VK10#VK_MAX_EXTENSION_NAME_SIZE MAX_EXTENSION_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the extension. */
     @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
     public String extensionNameString() { return nextensionNameString(address()); }
-    /** Returns the value of the {@code specVersion} field. */
+    /** the version of this extension. It is an integer, incremented with backward compatible changes. */
     @NativeType("uint32_t")
     public int specVersion() { return nspecVersion(address()); }
 
@@ -272,13 +265,13 @@ public class VkExtensionProperties extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code extensionName} field. */
+        /** @return a {@link ByteBuffer} view of the {@link VkExtensionProperties#extensionName} field. */
         @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
         public ByteBuffer extensionName() { return VkExtensionProperties.nextensionName(address()); }
-        /** Decodes the null-terminated string stored in the {@code extensionName} field. */
+        /** @return the null-terminated string stored in the {@link VkExtensionProperties#extensionName} field. */
         @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
         public String extensionNameString() { return VkExtensionProperties.nextensionNameString(address()); }
-        /** Returns the value of the {@code specVersion} field. */
+        /** @return the value of the {@link VkExtensionProperties#specVersion} field. */
         @NativeType("uint32_t")
         public int specVersion() { return VkExtensionProperties.nspecVersion(address()); }
 

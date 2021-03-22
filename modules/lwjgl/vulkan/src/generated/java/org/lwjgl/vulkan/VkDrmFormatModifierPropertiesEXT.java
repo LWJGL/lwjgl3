@@ -38,21 +38,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>{@link VkDrmFormatModifierPropertiesListEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code drmFormatModifier} &ndash; a <em>Linux DRM format modifier</em>.</li>
- * <li>{@code drmFormatModifierPlaneCount} &ndash; the number of <em>memory planes</em> in any image created with {@code format} and {@code drmFormatModifier}. An image&#8217;s <em>memory planecount</em> is distinct from its <em>format planecount</em>, as explained below.</li>
- * <li>{@code drmFormatModifierTilingFeatures} &ndash; a bitmask of {@code VkFormatFeatureFlagBits} that are supported by any image created with {@code format} and {@code drmFormatModifier}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDrmFormatModifierPropertiesEXT {
- *     uint64_t drmFormatModifier;
- *     uint32_t drmFormatModifierPlaneCount;
- *     VkFormatFeatureFlags drmFormatModifierTilingFeatures;
+ *     uint64_t {@link #drmFormatModifier};
+ *     uint32_t {@link #drmFormatModifierPlaneCount};
+ *     VkFormatFeatureFlags {@link #drmFormatModifierTilingFeatures};
  * }</code></pre>
  */
 public class VkDrmFormatModifierPropertiesEXT extends Struct {
@@ -97,13 +89,13 @@ public class VkDrmFormatModifierPropertiesEXT extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code drmFormatModifier} field. */
+    /** a <em>Linux DRM format modifier</em>. */
     @NativeType("uint64_t")
     public long drmFormatModifier() { return ndrmFormatModifier(address()); }
-    /** Returns the value of the {@code drmFormatModifierPlaneCount} field. */
+    /** the number of <em>memory planes</em> in any image created with {@code format} and {@code drmFormatModifier}. An image&#8217;s <em>memory planecount</em> is distinct from its <em>format planecount</em>, as explained below. */
     @NativeType("uint32_t")
     public int drmFormatModifierPlaneCount() { return ndrmFormatModifierPlaneCount(address()); }
-    /** Returns the value of the {@code drmFormatModifierTilingFeatures} field. */
+    /** a bitmask of {@code VkFormatFeatureFlagBits} that are supported by any image created with {@code format} and {@code drmFormatModifier}. */
     @NativeType("VkFormatFeatureFlags")
     public int drmFormatModifierTilingFeatures() { return ndrmFormatModifierTilingFeatures(address()); }
 
@@ -183,13 +175,13 @@ public class VkDrmFormatModifierPropertiesEXT extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code drmFormatModifier} field. */
+        /** @return the value of the {@link VkDrmFormatModifierPropertiesEXT#drmFormatModifier} field. */
         @NativeType("uint64_t")
         public long drmFormatModifier() { return VkDrmFormatModifierPropertiesEXT.ndrmFormatModifier(address()); }
-        /** Returns the value of the {@code drmFormatModifierPlaneCount} field. */
+        /** @return the value of the {@link VkDrmFormatModifierPropertiesEXT#drmFormatModifierPlaneCount} field. */
         @NativeType("uint32_t")
         public int drmFormatModifierPlaneCount() { return VkDrmFormatModifierPropertiesEXT.ndrmFormatModifierPlaneCount(address()); }
-        /** Returns the value of the {@code drmFormatModifierTilingFeatures} field. */
+        /** @return the value of the {@link VkDrmFormatModifierPropertiesEXT#drmFormatModifierTilingFeatures} field. */
         @NativeType("VkFormatFeatureFlags")
         public int drmFormatModifierTilingFeatures() { return VkDrmFormatModifierPropertiesEXT.ndrmFormatModifierTilingFeatures(address()); }
 

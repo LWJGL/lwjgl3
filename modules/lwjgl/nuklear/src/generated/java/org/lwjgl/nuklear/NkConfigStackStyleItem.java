@@ -63,12 +63,12 @@ class NkConfigStackStyleItem extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code head} field. */
+    /** @return the value of the {@code head} field. */
     public int head() { return nhead(address()); }
-    /** Returns a {@link NkConfigStackStyleItemElement}.Buffer view of the {@code elements} field. */
+    /** @return a {@link NkConfigStackStyleItemElement}.Buffer view of the {@code elements} field. */
     @NativeType("struct nk_config_stack_style_item_element[16]")
     public NkConfigStackStyleItemElement.Buffer elements() { return nelements(address()); }
-    /** Returns a {@link NkConfigStackStyleItemElement} view of the struct at the specified index of the {@code elements} field. */
+    /** @return a {@link NkConfigStackStyleItemElement} view of the struct at the specified index of the {@code elements} field. */
     @NativeType("struct nk_config_stack_style_item_element")
     public NkConfigStackStyleItemElement elements(int index) { return nelements(address(), index); }
 
@@ -150,12 +150,12 @@ class NkConfigStackStyleItem extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code head} field. */
+        /** @return the value of the {@code head} field. */
         public int head() { return NkConfigStackStyleItem.nhead(address()); }
-        /** Returns a {@link NkConfigStackStyleItemElement}.Buffer view of the {@code elements} field. */
+        /** @return a {@link NkConfigStackStyleItemElement}.Buffer view of the {@code elements} field. */
         @NativeType("struct nk_config_stack_style_item_element[16]")
         public NkConfigStackStyleItemElement.Buffer elements() { return NkConfigStackStyleItem.nelements(address()); }
-        /** Returns a {@link NkConfigStackStyleItemElement} view of the struct at the specified index of the {@code elements} field. */
+        /** @return a {@link NkConfigStackStyleItemElement} view of the struct at the specified index of the {@code elements} field. */
         @NativeType("struct nk_config_stack_style_item_element")
         public NkConfigStackStyleItemElement elements(int index) { return NkConfigStackStyleItem.nelements(address(), index); }
 

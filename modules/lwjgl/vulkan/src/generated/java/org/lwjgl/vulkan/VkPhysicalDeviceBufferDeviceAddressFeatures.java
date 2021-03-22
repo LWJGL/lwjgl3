@@ -35,23 +35,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code bufferDeviceAddress} &ndash; indicates that the implementation supports accessing buffer memory in shaders as storage buffers via an address queried from {@link VK12#vkGetBufferDeviceAddress GetBufferDeviceAddress}.</li>
- * <li>{@code bufferDeviceAddressCaptureReplay} &ndash; indicates that the implementation supports saving and reusing buffer and device addresses, e.g. for trace capture and replay.</li>
- * <li>{@code bufferDeviceAddressMultiDevice} &ndash; indicates that the implementation supports the {@code bufferDeviceAddress} , {@code rayTracingPipeline} and {@code rayQuery} features for logical devices created with multiple physical devices. If this feature is not supported, buffer and acceleration structure addresses <b>must</b> not be queried on a logical device created with more than one physical device.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceBufferDeviceAddressFeatures {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 bufferDeviceAddress;
- *     VkBool32 bufferDeviceAddressCaptureReplay;
- *     VkBool32 bufferDeviceAddressMultiDevice;
+ *     VkBool32 {@link #bufferDeviceAddress};
+ *     VkBool32 {@link #bufferDeviceAddressCaptureReplay};
+ *     VkBool32 {@link #bufferDeviceAddressMultiDevice};
  * }</code></pre>
  */
 public class VkPhysicalDeviceBufferDeviceAddressFeatures extends Struct implements NativeResource {
@@ -102,19 +94,19 @@ public class VkPhysicalDeviceBufferDeviceAddressFeatures extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code bufferDeviceAddress} field. */
+    /** indicates that the implementation supports accessing buffer memory in shaders as storage buffers via an address queried from {@link VK12#vkGetBufferDeviceAddress GetBufferDeviceAddress}. */
     @NativeType("VkBool32")
     public boolean bufferDeviceAddress() { return nbufferDeviceAddress(address()) != 0; }
-    /** Returns the value of the {@code bufferDeviceAddressCaptureReplay} field. */
+    /** indicates that the implementation supports saving and reusing buffer and device addresses, e.g. for trace capture and replay. */
     @NativeType("VkBool32")
     public boolean bufferDeviceAddressCaptureReplay() { return nbufferDeviceAddressCaptureReplay(address()) != 0; }
-    /** Returns the value of the {@code bufferDeviceAddressMultiDevice} field. */
+    /** indicates that the implementation supports the {@code bufferDeviceAddress} , {@code rayTracingPipeline} and {@code rayQuery} features for logical devices created with multiple physical devices. If this feature is not supported, buffer and acceleration structure addresses <b>must</b> not be queried on a logical device created with more than one physical device. */
     @NativeType("VkBool32")
     public boolean bufferDeviceAddressMultiDevice() { return nbufferDeviceAddressMultiDevice(address()) != 0; }
 
@@ -122,11 +114,11 @@ public class VkPhysicalDeviceBufferDeviceAddressFeatures extends Struct implemen
     public VkPhysicalDeviceBufferDeviceAddressFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceBufferDeviceAddressFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code bufferDeviceAddress} field. */
+    /** Sets the specified value to the {@link #bufferDeviceAddress} field. */
     public VkPhysicalDeviceBufferDeviceAddressFeatures bufferDeviceAddress(@NativeType("VkBool32") boolean value) { nbufferDeviceAddress(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code bufferDeviceAddressCaptureReplay} field. */
+    /** Sets the specified value to the {@link #bufferDeviceAddressCaptureReplay} field. */
     public VkPhysicalDeviceBufferDeviceAddressFeatures bufferDeviceAddressCaptureReplay(@NativeType("VkBool32") boolean value) { nbufferDeviceAddressCaptureReplay(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code bufferDeviceAddressMultiDevice} field. */
+    /** Sets the specified value to the {@link #bufferDeviceAddressMultiDevice} field. */
     public VkPhysicalDeviceBufferDeviceAddressFeatures bufferDeviceAddressMultiDevice(@NativeType("VkBool32") boolean value) { nbufferDeviceAddressMultiDevice(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -361,19 +353,19 @@ public class VkPhysicalDeviceBufferDeviceAddressFeatures extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceBufferDeviceAddressFeatures.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceBufferDeviceAddressFeatures.npNext(address()); }
-        /** Returns the value of the {@code bufferDeviceAddress} field. */
+        /** @return the value of the {@link VkPhysicalDeviceBufferDeviceAddressFeatures#bufferDeviceAddress} field. */
         @NativeType("VkBool32")
         public boolean bufferDeviceAddress() { return VkPhysicalDeviceBufferDeviceAddressFeatures.nbufferDeviceAddress(address()) != 0; }
-        /** Returns the value of the {@code bufferDeviceAddressCaptureReplay} field. */
+        /** @return the value of the {@link VkPhysicalDeviceBufferDeviceAddressFeatures#bufferDeviceAddressCaptureReplay} field. */
         @NativeType("VkBool32")
         public boolean bufferDeviceAddressCaptureReplay() { return VkPhysicalDeviceBufferDeviceAddressFeatures.nbufferDeviceAddressCaptureReplay(address()) != 0; }
-        /** Returns the value of the {@code bufferDeviceAddressMultiDevice} field. */
+        /** @return the value of the {@link VkPhysicalDeviceBufferDeviceAddressFeatures#bufferDeviceAddressMultiDevice} field. */
         @NativeType("VkBool32")
         public boolean bufferDeviceAddressMultiDevice() { return VkPhysicalDeviceBufferDeviceAddressFeatures.nbufferDeviceAddressMultiDevice(address()) != 0; }
 
@@ -381,11 +373,11 @@ public class VkPhysicalDeviceBufferDeviceAddressFeatures extends Struct implemen
         public VkPhysicalDeviceBufferDeviceAddressFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceBufferDeviceAddressFeatures.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceBufferDeviceAddressFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceBufferDeviceAddressFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code bufferDeviceAddress} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceBufferDeviceAddressFeatures#bufferDeviceAddress} field. */
         public VkPhysicalDeviceBufferDeviceAddressFeatures.Buffer bufferDeviceAddress(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceBufferDeviceAddressFeatures.nbufferDeviceAddress(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code bufferDeviceAddressCaptureReplay} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceBufferDeviceAddressFeatures#bufferDeviceAddressCaptureReplay} field. */
         public VkPhysicalDeviceBufferDeviceAddressFeatures.Buffer bufferDeviceAddressCaptureReplay(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceBufferDeviceAddressFeatures.nbufferDeviceAddressCaptureReplay(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code bufferDeviceAddressMultiDevice} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceBufferDeviceAddressFeatures#bufferDeviceAddressMultiDevice} field. */
         public VkPhysicalDeviceBufferDeviceAddressFeatures.Buffer bufferDeviceAddressMultiDevice(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceBufferDeviceAddressFeatures.nbufferDeviceAddressMultiDevice(address(), value ? 1 : 0); return this; }
 
     }

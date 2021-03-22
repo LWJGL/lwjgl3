@@ -66,13 +66,13 @@ public class CXIdxLoc extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link PointerBuffer} view of the {@code ptr_data} field. */
+    /** @return a {@link PointerBuffer} view of the {@code ptr_data} field. */
     @NativeType("void *[2]")
     public PointerBuffer ptr_data() { return nptr_data(address()); }
-    /** Returns the value at the specified index of the {@code ptr_data} field. */
+    /** @return the value at the specified index of the {@code ptr_data} field. */
     @NativeType("void *")
     public long ptr_data(int index) { return nptr_data(address(), index); }
-    /** Returns the value of the {@code int_data} field. */
+    /** @return the value of the {@code int_data} field. */
     @NativeType("unsigned")
     public int int_data() { return nint_data(address()); }
 
@@ -266,13 +266,13 @@ public class CXIdxLoc extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link PointerBuffer} view of the {@code ptr_data} field. */
+        /** @return a {@link PointerBuffer} view of the {@code ptr_data} field. */
         @NativeType("void *[2]")
         public PointerBuffer ptr_data() { return CXIdxLoc.nptr_data(address()); }
-        /** Returns the value at the specified index of the {@code ptr_data} field. */
+        /** @return the value at the specified index of the {@code ptr_data} field. */
         @NativeType("void *")
         public long ptr_data(int index) { return CXIdxLoc.nptr_data(address(), index); }
-        /** Returns the value of the {@code int_data} field. */
+        /** @return the value of the {@code int_data} field. */
         @NativeType("unsigned")
         public int int_data() { return CXIdxLoc.nint_data(address()); }
 

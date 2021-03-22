@@ -28,27 +28,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code accelerationStructure} &ndash; indicates whether the implementation supports the acceleration structure functionality. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#acceleration-structure">Acceleration Structures</a>.</li>
- * <li>{@code accelerationStructureCaptureReplay} &ndash; indicates whether the implementation supports saving and reusing acceleration structure device addresses, e.g. for trace capture and replay.</li>
- * <li>{@code accelerationStructureIndirectBuild} &ndash; indicates whether the implementation supports indirect acceleration structure build commands, e.g. {@link KHRAccelerationStructure#vkCmdBuildAccelerationStructuresIndirectKHR CmdBuildAccelerationStructuresIndirectKHR}.</li>
- * <li>{@code accelerationStructureHostCommands} &ndash; indicates whether the implementation supports host side acceleration structure commands, e.g. {@link KHRAccelerationStructure#vkBuildAccelerationStructuresKHR BuildAccelerationStructuresKHR}, {@link KHRAccelerationStructure#vkCopyAccelerationStructureKHR CopyAccelerationStructureKHR}, {@link KHRAccelerationStructure#vkCopyAccelerationStructureToMemoryKHR CopyAccelerationStructureToMemoryKHR}, {@link KHRAccelerationStructure#vkCopyMemoryToAccelerationStructureKHR CopyMemoryToAccelerationStructureKHR}, {@link KHRAccelerationStructure#vkWriteAccelerationStructuresPropertiesKHR WriteAccelerationStructuresPropertiesKHR}.</li>
- * <li>{@code descriptorBindingAccelerationStructureUpdateAfterBind} &ndash; indicates whether the implementation supports updating acceleration structure descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceAccelerationStructureFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 accelerationStructure;
- *     VkBool32 accelerationStructureCaptureReplay;
- *     VkBool32 accelerationStructureIndirectBuild;
- *     VkBool32 accelerationStructureHostCommands;
- *     VkBool32 descriptorBindingAccelerationStructureUpdateAfterBind;
+ *     VkBool32 {@link #accelerationStructure};
+ *     VkBool32 {@link #accelerationStructureCaptureReplay};
+ *     VkBool32 {@link #accelerationStructureIndirectBuild};
+ *     VkBool32 {@link #accelerationStructureHostCommands};
+ *     VkBool32 {@link #descriptorBindingAccelerationStructureUpdateAfterBind};
  * }</code></pre>
  */
 public class VkPhysicalDeviceAccelerationStructureFeaturesKHR extends Struct implements NativeResource {
@@ -105,25 +95,25 @@ public class VkPhysicalDeviceAccelerationStructureFeaturesKHR extends Struct imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code accelerationStructure} field. */
+    /** indicates whether the implementation supports the acceleration structure functionality. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#acceleration-structure">Acceleration Structures</a>. */
     @NativeType("VkBool32")
     public boolean accelerationStructure() { return naccelerationStructure(address()) != 0; }
-    /** Returns the value of the {@code accelerationStructureCaptureReplay} field. */
+    /** indicates whether the implementation supports saving and reusing acceleration structure device addresses, e.g. for trace capture and replay. */
     @NativeType("VkBool32")
     public boolean accelerationStructureCaptureReplay() { return naccelerationStructureCaptureReplay(address()) != 0; }
-    /** Returns the value of the {@code accelerationStructureIndirectBuild} field. */
+    /** indicates whether the implementation supports indirect acceleration structure build commands, e.g. {@link KHRAccelerationStructure#vkCmdBuildAccelerationStructuresIndirectKHR CmdBuildAccelerationStructuresIndirectKHR}. */
     @NativeType("VkBool32")
     public boolean accelerationStructureIndirectBuild() { return naccelerationStructureIndirectBuild(address()) != 0; }
-    /** Returns the value of the {@code accelerationStructureHostCommands} field. */
+    /** indicates whether the implementation supports host side acceleration structure commands, e.g. {@link KHRAccelerationStructure#vkBuildAccelerationStructuresKHR BuildAccelerationStructuresKHR}, {@link KHRAccelerationStructure#vkCopyAccelerationStructureKHR CopyAccelerationStructureKHR}, {@link KHRAccelerationStructure#vkCopyAccelerationStructureToMemoryKHR CopyAccelerationStructureToMemoryKHR}, {@link KHRAccelerationStructure#vkCopyMemoryToAccelerationStructureKHR CopyMemoryToAccelerationStructureKHR}, {@link KHRAccelerationStructure#vkWriteAccelerationStructuresPropertiesKHR WriteAccelerationStructuresPropertiesKHR}. */
     @NativeType("VkBool32")
     public boolean accelerationStructureHostCommands() { return naccelerationStructureHostCommands(address()) != 0; }
-    /** Returns the value of the {@code descriptorBindingAccelerationStructureUpdateAfterBind} field. */
+    /** indicates whether the implementation supports updating acceleration structure descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR}. */
     @NativeType("VkBool32")
     public boolean descriptorBindingAccelerationStructureUpdateAfterBind() { return ndescriptorBindingAccelerationStructureUpdateAfterBind(address()) != 0; }
 
@@ -131,15 +121,15 @@ public class VkPhysicalDeviceAccelerationStructureFeaturesKHR extends Struct imp
     public VkPhysicalDeviceAccelerationStructureFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceAccelerationStructureFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code accelerationStructure} field. */
+    /** Sets the specified value to the {@link #accelerationStructure} field. */
     public VkPhysicalDeviceAccelerationStructureFeaturesKHR accelerationStructure(@NativeType("VkBool32") boolean value) { naccelerationStructure(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code accelerationStructureCaptureReplay} field. */
+    /** Sets the specified value to the {@link #accelerationStructureCaptureReplay} field. */
     public VkPhysicalDeviceAccelerationStructureFeaturesKHR accelerationStructureCaptureReplay(@NativeType("VkBool32") boolean value) { naccelerationStructureCaptureReplay(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code accelerationStructureIndirectBuild} field. */
+    /** Sets the specified value to the {@link #accelerationStructureIndirectBuild} field. */
     public VkPhysicalDeviceAccelerationStructureFeaturesKHR accelerationStructureIndirectBuild(@NativeType("VkBool32") boolean value) { naccelerationStructureIndirectBuild(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code accelerationStructureHostCommands} field. */
+    /** Sets the specified value to the {@link #accelerationStructureHostCommands} field. */
     public VkPhysicalDeviceAccelerationStructureFeaturesKHR accelerationStructureHostCommands(@NativeType("VkBool32") boolean value) { naccelerationStructureHostCommands(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code descriptorBindingAccelerationStructureUpdateAfterBind} field. */
+    /** Sets the specified value to the {@link #descriptorBindingAccelerationStructureUpdateAfterBind} field. */
     public VkPhysicalDeviceAccelerationStructureFeaturesKHR descriptorBindingAccelerationStructureUpdateAfterBind(@NativeType("VkBool32") boolean value) { ndescriptorBindingAccelerationStructureUpdateAfterBind(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -386,25 +376,25 @@ public class VkPhysicalDeviceAccelerationStructureFeaturesKHR extends Struct imp
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceAccelerationStructureFeaturesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceAccelerationStructureFeaturesKHR.npNext(address()); }
-        /** Returns the value of the {@code accelerationStructure} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#accelerationStructure} field. */
         @NativeType("VkBool32")
         public boolean accelerationStructure() { return VkPhysicalDeviceAccelerationStructureFeaturesKHR.naccelerationStructure(address()) != 0; }
-        /** Returns the value of the {@code accelerationStructureCaptureReplay} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#accelerationStructureCaptureReplay} field. */
         @NativeType("VkBool32")
         public boolean accelerationStructureCaptureReplay() { return VkPhysicalDeviceAccelerationStructureFeaturesKHR.naccelerationStructureCaptureReplay(address()) != 0; }
-        /** Returns the value of the {@code accelerationStructureIndirectBuild} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#accelerationStructureIndirectBuild} field. */
         @NativeType("VkBool32")
         public boolean accelerationStructureIndirectBuild() { return VkPhysicalDeviceAccelerationStructureFeaturesKHR.naccelerationStructureIndirectBuild(address()) != 0; }
-        /** Returns the value of the {@code accelerationStructureHostCommands} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#accelerationStructureHostCommands} field. */
         @NativeType("VkBool32")
         public boolean accelerationStructureHostCommands() { return VkPhysicalDeviceAccelerationStructureFeaturesKHR.naccelerationStructureHostCommands(address()) != 0; }
-        /** Returns the value of the {@code descriptorBindingAccelerationStructureUpdateAfterBind} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#descriptorBindingAccelerationStructureUpdateAfterBind} field. */
         @NativeType("VkBool32")
         public boolean descriptorBindingAccelerationStructureUpdateAfterBind() { return VkPhysicalDeviceAccelerationStructureFeaturesKHR.ndescriptorBindingAccelerationStructureUpdateAfterBind(address()) != 0; }
 
@@ -412,15 +402,15 @@ public class VkPhysicalDeviceAccelerationStructureFeaturesKHR extends Struct imp
         public VkPhysicalDeviceAccelerationStructureFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceAccelerationStructureFeaturesKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceAccelerationStructureFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceAccelerationStructureFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code accelerationStructure} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#accelerationStructure} field. */
         public VkPhysicalDeviceAccelerationStructureFeaturesKHR.Buffer accelerationStructure(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceAccelerationStructureFeaturesKHR.naccelerationStructure(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code accelerationStructureCaptureReplay} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#accelerationStructureCaptureReplay} field. */
         public VkPhysicalDeviceAccelerationStructureFeaturesKHR.Buffer accelerationStructureCaptureReplay(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceAccelerationStructureFeaturesKHR.naccelerationStructureCaptureReplay(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code accelerationStructureIndirectBuild} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#accelerationStructureIndirectBuild} field. */
         public VkPhysicalDeviceAccelerationStructureFeaturesKHR.Buffer accelerationStructureIndirectBuild(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceAccelerationStructureFeaturesKHR.naccelerationStructureIndirectBuild(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code accelerationStructureHostCommands} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#accelerationStructureHostCommands} field. */
         public VkPhysicalDeviceAccelerationStructureFeaturesKHR.Buffer accelerationStructureHostCommands(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceAccelerationStructureFeaturesKHR.naccelerationStructureHostCommands(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code descriptorBindingAccelerationStructureUpdateAfterBind} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#descriptorBindingAccelerationStructureUpdateAfterBind} field. */
         public VkPhysicalDeviceAccelerationStructureFeaturesKHR.Buffer descriptorBindingAccelerationStructureUpdateAfterBind(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceAccelerationStructureFeaturesKHR.ndescriptorBindingAccelerationStructureUpdateAfterBind(address(), value ? 1 : 0); return this; }
 
     }

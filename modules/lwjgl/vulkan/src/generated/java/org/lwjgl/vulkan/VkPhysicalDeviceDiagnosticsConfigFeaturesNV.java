@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVDeviceDiagnosticsConfig#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code diagnosticsConfig} &ndash; indicates whether the implementation supports the ability to configure diagnostic tools.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceDiagnosticsConfigFeaturesNV {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 diagnosticsConfig;
+ *     VkBool32 {@link #diagnosticsConfig};
  * }</code></pre>
  */
 public class VkPhysicalDeviceDiagnosticsConfigFeaturesNV extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceDiagnosticsConfigFeaturesNV extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code diagnosticsConfig} field. */
+    /** indicates whether the implementation supports the ability to configure diagnostic tools. */
     @NativeType("VkBool32")
     public boolean diagnosticsConfig() { return ndiagnosticsConfig(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceDiagnosticsConfigFeaturesNV extends Struct implemen
     public VkPhysicalDeviceDiagnosticsConfigFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDiagnosticsConfigFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code diagnosticsConfig} field. */
+    /** Sets the specified value to the {@link #diagnosticsConfig} field. */
     public VkPhysicalDeviceDiagnosticsConfigFeaturesNV diagnosticsConfig(@NativeType("VkBool32") boolean value) { ndiagnosticsConfig(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceDiagnosticsConfigFeaturesNV extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDiagnosticsConfigFeaturesNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDiagnosticsConfigFeaturesNV.npNext(address()); }
-        /** Returns the value of the {@code diagnosticsConfig} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDiagnosticsConfigFeaturesNV#diagnosticsConfig} field. */
         @NativeType("VkBool32")
         public boolean diagnosticsConfig() { return VkPhysicalDeviceDiagnosticsConfigFeaturesNV.ndiagnosticsConfig(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceDiagnosticsConfigFeaturesNV extends Struct implemen
         public VkPhysicalDeviceDiagnosticsConfigFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDiagnosticsConfigFeaturesNV.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDiagnosticsConfigFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDiagnosticsConfigFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code diagnosticsConfig} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDiagnosticsConfigFeaturesNV#diagnosticsConfig} field. */
         public VkPhysicalDeviceDiagnosticsConfigFeaturesNV.Buffer diagnosticsConfig(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDiagnosticsConfigFeaturesNV.ndiagnosticsConfig(address(), value ? 1 : 0); return this; }
 
     }

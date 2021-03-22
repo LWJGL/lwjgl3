@@ -68,13 +68,13 @@ public class VROverlayIntersectionParams extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link HmdVector3} view of the {@code vSource} field. */
+    /** @return a {@link HmdVector3} view of the {@code vSource} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vSource() { return nvSource(address()); }
-    /** Returns a {@link HmdVector3} view of the {@code vDirection} field. */
+    /** @return a {@link HmdVector3} view of the {@code vDirection} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vDirection() { return nvDirection(address()); }
-    /** Returns the value of the {@code eOrigin} field. */
+    /** @return the value of the {@code eOrigin} field. */
     @NativeType("ETrackingUniverseOrigin")
     public int eOrigin() { return neOrigin(address()); }
 
@@ -309,13 +309,13 @@ public class VROverlayIntersectionParams extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link HmdVector3} view of the {@code vSource} field. */
+        /** @return a {@link HmdVector3} view of the {@code vSource} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vSource() { return VROverlayIntersectionParams.nvSource(address()); }
-        /** Returns a {@link HmdVector3} view of the {@code vDirection} field. */
+        /** @return a {@link HmdVector3} view of the {@code vDirection} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vDirection() { return VROverlayIntersectionParams.nvDirection(address()); }
-        /** Returns the value of the {@code eOrigin} field. */
+        /** @return the value of the {@code eOrigin} field. */
         @NativeType("ETrackingUniverseOrigin")
         public int eOrigin() { return VROverlayIntersectionParams.neOrigin(address()); }
 

@@ -16,23 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Layout for generated vertex attributes.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code u_along_curve} &ndash; longitudinal coordinate (see {@link ParStreamlines#PAR_U_MODE_NORMALIZED_DISTANCE parsl_u_mode})</li>
- * <li>{@code v_across_curve} &ndash; either + or - depending on the side</li>
- * <li>{@code spine_to_edge_x} &ndash; normalized vector from spine to edge</li>
- * <li>{@code spine_to_edge_y} &ndash; normalized vector from spine to edge</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct parsl_annotation {
- *     float u_along_curve;
- *     float v_across_curve;
- *     float spine_to_edge_x;
- *     float spine_to_edge_y;
+ *     float {@link #u_along_curve};
+ *     float {@link #v_across_curve};
+ *     float {@link #spine_to_edge_x};
+ *     float {@link #spine_to_edge_y};
  * }</code></pre>
  */
 @NativeType("struct parsl_annotation")
@@ -81,13 +72,13 @@ public class ParSLAnnotation extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code u_along_curve} field. */
+    /** longitudinal coordinate (see {@link ParStreamlines#PAR_U_MODE_NORMALIZED_DISTANCE parsl_u_mode}) */
     public float u_along_curve() { return nu_along_curve(address()); }
-    /** Returns the value of the {@code v_across_curve} field. */
+    /** either + or - depending on the side */
     public float v_across_curve() { return nv_across_curve(address()); }
-    /** Returns the value of the {@code spine_to_edge_x} field. */
+    /** normalized vector from spine to edge */
     public float spine_to_edge_x() { return nspine_to_edge_x(address()); }
-    /** Returns the value of the {@code spine_to_edge_y} field. */
+    /** normalized vector from spine to edge */
     public float spine_to_edge_y() { return nspine_to_edge_y(address()); }
 
     // -----------------------------------
@@ -168,13 +159,13 @@ public class ParSLAnnotation extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code u_along_curve} field. */
+        /** @return the value of the {@link ParSLAnnotation#u_along_curve} field. */
         public float u_along_curve() { return ParSLAnnotation.nu_along_curve(address()); }
-        /** Returns the value of the {@code v_across_curve} field. */
+        /** @return the value of the {@link ParSLAnnotation#v_across_curve} field. */
         public float v_across_curve() { return ParSLAnnotation.nv_across_curve(address()); }
-        /** Returns the value of the {@code spine_to_edge_x} field. */
+        /** @return the value of the {@link ParSLAnnotation#spine_to_edge_x} field. */
         public float spine_to_edge_x() { return ParSLAnnotation.nspine_to_edge_x(address()); }
-        /** Returns the value of the {@code spine_to_edge_y} field. */
+        /** @return the value of the {@link ParSLAnnotation#spine_to_edge_y} field. */
         public float spine_to_edge_y() { return ParSLAnnotation.nspine_to_edge_y(address()); }
 
     }

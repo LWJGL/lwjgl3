@@ -40,23 +40,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code physicalDeviceCount} is not 0, {@code pPhysicalDevices} <b>must</b> be a valid pointer to an array of {@code physicalDeviceCount} valid {@code VkPhysicalDevice} handles</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code physicalDeviceCount} &ndash; the number of elements in the {@code pPhysicalDevices} array.</li>
- * <li>{@code pPhysicalDevices} &ndash; a pointer to an array of physical device handles belonging to the same device group.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDeviceGroupDeviceCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t physicalDeviceCount;
- *     VkPhysicalDevice const * pPhysicalDevices;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #physicalDeviceCount};
+ *     VkPhysicalDevice const * {@link #pPhysicalDevices};
  * }</code></pre>
  */
 public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResource {
@@ -104,25 +95,25 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code physicalDeviceCount} field. */
+    /** the number of elements in the {@code pPhysicalDevices} array. */
     @NativeType("uint32_t")
     public int physicalDeviceCount() { return nphysicalDeviceCount(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code pPhysicalDevices} field. */
+    /** a pointer to an array of physical device handles belonging to the same device group. */
     @Nullable
     @NativeType("VkPhysicalDevice const *")
     public PointerBuffer pPhysicalDevices() { return npPhysicalDevices(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceGroupDeviceCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceGroupDeviceCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code pPhysicalDevices} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #pPhysicalDevices} field. */
     public VkDeviceGroupDeviceCreateInfo pPhysicalDevices(@Nullable @NativeType("VkPhysicalDevice const *") PointerBuffer value) { npPhysicalDevices(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -372,25 +363,25 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDeviceGroupDeviceCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceGroupDeviceCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDeviceGroupDeviceCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceGroupDeviceCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code physicalDeviceCount} field. */
+        /** @return the value of the {@link VkDeviceGroupDeviceCreateInfo#physicalDeviceCount} field. */
         @NativeType("uint32_t")
         public int physicalDeviceCount() { return VkDeviceGroupDeviceCreateInfo.nphysicalDeviceCount(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code pPhysicalDevices} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkDeviceGroupDeviceCreateInfo#pPhysicalDevices} field. */
         @Nullable
         @NativeType("VkPhysicalDevice const *")
         public PointerBuffer pPhysicalDevices() { return VkDeviceGroupDeviceCreateInfo.npPhysicalDevices(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupDeviceCreateInfo#sType} field. */
         public VkDeviceGroupDeviceCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupDeviceCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupDeviceCreateInfo#pNext} field. */
         public VkDeviceGroupDeviceCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupDeviceCreateInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code pPhysicalDevices} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link VkDeviceGroupDeviceCreateInfo#pPhysicalDevices} field. */
         public VkDeviceGroupDeviceCreateInfo.Buffer pPhysicalDevices(@Nullable @NativeType("VkPhysicalDevice const *") PointerBuffer value) { VkDeviceGroupDeviceCreateInfo.npPhysicalDevices(address(), value); return this; }
 
     }

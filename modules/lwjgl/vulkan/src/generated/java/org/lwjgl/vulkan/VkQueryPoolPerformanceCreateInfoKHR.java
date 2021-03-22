@@ -39,25 +39,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link KHRPerformanceQuery#vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR GetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code queueFamilyIndex} &ndash; the queue family index to create this performance query pool for.</li>
- * <li>{@code counterIndexCount} &ndash; size of the {@code pCounterIndices} array.</li>
- * <li>{@code pCounterIndices} &ndash; the array of indices into the {@link KHRPerformanceQuery#vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR EnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR}{@code ::pCounters} to enable in this performance query pool.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkQueryPoolPerformanceCreateInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t queueFamilyIndex;
- *     uint32_t counterIndexCount;
- *     uint32_t const * pCounterIndices;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #queueFamilyIndex};
+ *     uint32_t {@link #counterIndexCount};
+ *     uint32_t const * {@link #pCounterIndices};
  * }</code></pre>
  */
 public class VkQueryPoolPerformanceCreateInfoKHR extends Struct implements NativeResource {
@@ -108,29 +98,29 @@ public class VkQueryPoolPerformanceCreateInfoKHR extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code queueFamilyIndex} field. */
+    /** the queue family index to create this performance query pool for. */
     @NativeType("uint32_t")
     public int queueFamilyIndex() { return nqueueFamilyIndex(address()); }
-    /** Returns the value of the {@code counterIndexCount} field. */
+    /** size of the {@code pCounterIndices} array. */
     @NativeType("uint32_t")
     public int counterIndexCount() { return ncounterIndexCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pCounterIndices} field. */
+    /** the array of indices into the {@link KHRPerformanceQuery#vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR EnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR}{@code ::pCounters} to enable in this performance query pool. */
     @NativeType("uint32_t const *")
     public IntBuffer pCounterIndices() { return npCounterIndices(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkQueryPoolPerformanceCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkQueryPoolPerformanceCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code queueFamilyIndex} field. */
+    /** Sets the specified value to the {@link #queueFamilyIndex} field. */
     public VkQueryPoolPerformanceCreateInfoKHR queueFamilyIndex(@NativeType("uint32_t") int value) { nqueueFamilyIndex(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pCounterIndices} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pCounterIndices} field. */
     public VkQueryPoolPerformanceCreateInfoKHR pCounterIndices(@NativeType("uint32_t const *") IntBuffer value) { npCounterIndices(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -384,29 +374,29 @@ public class VkQueryPoolPerformanceCreateInfoKHR extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkQueryPoolPerformanceCreateInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkQueryPoolPerformanceCreateInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkQueryPoolPerformanceCreateInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkQueryPoolPerformanceCreateInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code queueFamilyIndex} field. */
+        /** @return the value of the {@link VkQueryPoolPerformanceCreateInfoKHR#queueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int queueFamilyIndex() { return VkQueryPoolPerformanceCreateInfoKHR.nqueueFamilyIndex(address()); }
-        /** Returns the value of the {@code counterIndexCount} field. */
+        /** @return the value of the {@link VkQueryPoolPerformanceCreateInfoKHR#counterIndexCount} field. */
         @NativeType("uint32_t")
         public int counterIndexCount() { return VkQueryPoolPerformanceCreateInfoKHR.ncounterIndexCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pCounterIndices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkQueryPoolPerformanceCreateInfoKHR#pCounterIndices} field. */
         @NativeType("uint32_t const *")
         public IntBuffer pCounterIndices() { return VkQueryPoolPerformanceCreateInfoKHR.npCounterIndices(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkQueryPoolPerformanceCreateInfoKHR#sType} field. */
         public VkQueryPoolPerformanceCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkQueryPoolPerformanceCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkQueryPoolPerformanceCreateInfoKHR#pNext} field. */
         public VkQueryPoolPerformanceCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkQueryPoolPerformanceCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code queueFamilyIndex} field. */
+        /** Sets the specified value to the {@link VkQueryPoolPerformanceCreateInfoKHR#queueFamilyIndex} field. */
         public VkQueryPoolPerformanceCreateInfoKHR.Buffer queueFamilyIndex(@NativeType("uint32_t") int value) { VkQueryPoolPerformanceCreateInfoKHR.nqueueFamilyIndex(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pCounterIndices} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkQueryPoolPerformanceCreateInfoKHR#pCounterIndices} field. */
         public VkQueryPoolPerformanceCreateInfoKHR.Buffer pCounterIndices(@NativeType("uint32_t const *") IntBuffer value) { VkQueryPoolPerformanceCreateInfoKHR.npCounterIndices(address(), value); return this; }
 
     }

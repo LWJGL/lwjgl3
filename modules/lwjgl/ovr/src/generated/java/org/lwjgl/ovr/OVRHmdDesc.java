@@ -21,48 +21,27 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
 /**
  * A complete descriptor of the HMD.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code Type} &ndash; this HMD's type. One of:<br><table><tr><td>{@link OVR#ovrHmd_None Hmd_None}</td><td>{@link OVR#ovrHmd_DK1 Hmd_DK1}</td><td>{@link OVR#ovrHmd_DKHD Hmd_DKHD}</td><td>{@link OVR#ovrHmd_DK2 Hmd_DK2}</td><td>{@link OVR#ovrHmd_CB Hmd_CB}</td><td>{@link OVR#ovrHmd_Other Hmd_Other}</td><td>{@link OVR#ovrHmd_E3_2015 Hmd_E3_2015}</td><td>{@link OVR#ovrHmd_ES06 Hmd_ES06}</td><td>{@link OVR#ovrHmd_ES09 Hmd_ES09}</td><td>{@link OVR#ovrHmd_ES11 Hmd_ES11}</td></tr><tr><td>{@link OVR#ovrHmd_CV1 Hmd_CV1}</td><td>{@link OVR#ovrHmd_RiftS Hmd_RiftS}</td></tr></table></li>
- * <li>{@code ProductName[64]} &ndash; name string describing the product: "Oculus Rift DK1", etc.</li>
- * <li>{@code Manufacturer[64]} &ndash; string describing the manufacturer. Usually "Oculus".</li>
- * <li>{@code VendorId} &ndash; HID Vendor ID of the device</li>
- * <li>{@code ProductId} &ndash; HID Product ID of the device</li>
- * <li>{@code SerialNumber[24]} &ndash; HMD serial number</li>
- * <li>{@code FirmwareMajor} &ndash; HMD firmware major version number</li>
- * <li>{@code FirmwareMinor} &ndash; HMD firmware minor version number</li>
- * <li>{@code AvailableHmdCaps} &ndash; available {@code ovrHmdCaps} bits</li>
- * <li>{@code DefaultHmdCaps} &ndash; default {@code ovrHmdCaps} bits</li>
- * <li>{@code AvailableTrackingCaps} &ndash; available {@code ovrTrackingCaps} bits</li>
- * <li>{@code DefaultTrackingCaps} &ndash; default {@code ovrTrackingCaps} bits</li>
- * <li>{@code DefaultEyeFov[ovrEye_Count]} &ndash; the recommended optical FOV for the HMD</li>
- * <li>{@code MaxEyeFov[ovrEye_Count]} &ndash; the maximum optical FOV for the HMD</li>
- * <li>{@code Resolution} &ndash; resolution of the full HMD screen (both eyes) in pixels</li>
- * <li>{@code DisplayRefreshRate} &ndash; refresh rate of the display in cycles per second at the time of HMD creation</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrHmdDesc {
- *     ovrHmdType Type;
+ *     ovrHmdType {@link #Type};
  *     char[4];
- *     char ProductName[64];
- *     char Manufacturer[64];
- *     short VendorId;
- *     short ProductId;
- *     char SerialNumber[24];
- *     short FirmwareMajor;
- *     short FirmwareMinor;
- *     unsigned int AvailableHmdCaps;
- *     unsigned int DefaultHmdCaps;
- *     unsigned int AvailableTrackingCaps;
- *     unsigned int DefaultTrackingCaps;
- *     {@link OVRFovPort ovrFovPort} DefaultEyeFov[ovrEye_Count];
- *     {@link OVRFovPort ovrFovPort} MaxEyeFov[ovrEye_Count];
- *     {@link OVRSizei ovrSizei} Resolution;
- *     float DisplayRefreshRate;
+ *     char {@link #ProductName}[64];
+ *     char {@link #Manufacturer}[64];
+ *     short {@link #VendorId};
+ *     short {@link #ProductId};
+ *     char {@link #SerialNumber}[24];
+ *     short {@link #FirmwareMajor};
+ *     short {@link #FirmwareMinor};
+ *     unsigned int {@link #AvailableHmdCaps};
+ *     unsigned int {@link #DefaultHmdCaps};
+ *     unsigned int {@link #AvailableTrackingCaps};
+ *     unsigned int {@link #DefaultTrackingCaps};
+ *     {@link OVRFovPort ovrFovPort} {@link #DefaultEyeFov}[ovrEye_Count];
+ *     {@link OVRFovPort ovrFovPort} {@link #MaxEyeFov}[ovrEye_Count];
+ *     {@link OVRSizei ovrSizei} {@link #Resolution};
+ *     float {@link #DisplayRefreshRate};
  * }</code></pre>
  */
 @NativeType("struct ovrHmdDesc")
@@ -149,63 +128,63 @@ public class OVRHmdDesc extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code Type} field. */
+    /** this HMD's type. One of:<br><table><tr><td>{@link OVR#ovrHmd_None Hmd_None}</td><td>{@link OVR#ovrHmd_DK1 Hmd_DK1}</td><td>{@link OVR#ovrHmd_DKHD Hmd_DKHD}</td><td>{@link OVR#ovrHmd_DK2 Hmd_DK2}</td><td>{@link OVR#ovrHmd_CB Hmd_CB}</td><td>{@link OVR#ovrHmd_Other Hmd_Other}</td><td>{@link OVR#ovrHmd_E3_2015 Hmd_E3_2015}</td><td>{@link OVR#ovrHmd_ES06 Hmd_ES06}</td><td>{@link OVR#ovrHmd_ES09 Hmd_ES09}</td><td>{@link OVR#ovrHmd_ES11 Hmd_ES11}</td></tr><tr><td>{@link OVR#ovrHmd_CV1 Hmd_CV1}</td><td>{@link OVR#ovrHmd_RiftS Hmd_RiftS}</td></tr></table> */
     @NativeType("ovrHmdType")
     public int Type() { return nType(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code ProductName} field. */
+    /** name string describing the product: "Oculus Rift DK1", etc. */
     @NativeType("char[64]")
     public ByteBuffer ProductName() { return nProductName(address()); }
-    /** Decodes the null-terminated string stored in the {@code ProductName} field. */
+    /** name string describing the product: "Oculus Rift DK1", etc. */
     @NativeType("char[64]")
     public String ProductNameString() { return nProductNameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code Manufacturer} field. */
+    /** string describing the manufacturer. Usually "Oculus". */
     @NativeType("char[64]")
     public ByteBuffer Manufacturer() { return nManufacturer(address()); }
-    /** Decodes the null-terminated string stored in the {@code Manufacturer} field. */
+    /** string describing the manufacturer. Usually "Oculus". */
     @NativeType("char[64]")
     public String ManufacturerString() { return nManufacturerString(address()); }
-    /** Returns the value of the {@code VendorId} field. */
+    /** HID Vendor ID of the device */
     public short VendorId() { return nVendorId(address()); }
-    /** Returns the value of the {@code ProductId} field. */
+    /** HID Product ID of the device */
     public short ProductId() { return nProductId(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code SerialNumber} field. */
+    /** HMD serial number */
     @NativeType("char[24]")
     public ByteBuffer SerialNumber() { return nSerialNumber(address()); }
-    /** Decodes the null-terminated string stored in the {@code SerialNumber} field. */
+    /** HMD serial number */
     @NativeType("char[24]")
     public String SerialNumberString() { return nSerialNumberString(address()); }
-    /** Returns the value of the {@code FirmwareMajor} field. */
+    /** HMD firmware major version number */
     public short FirmwareMajor() { return nFirmwareMajor(address()); }
-    /** Returns the value of the {@code FirmwareMinor} field. */
+    /** HMD firmware minor version number */
     public short FirmwareMinor() { return nFirmwareMinor(address()); }
-    /** Returns the value of the {@code AvailableHmdCaps} field. */
+    /** available {@code ovrHmdCaps} bits */
     @NativeType("unsigned int")
     public int AvailableHmdCaps() { return nAvailableHmdCaps(address()); }
-    /** Returns the value of the {@code DefaultHmdCaps} field. */
+    /** default {@code ovrHmdCaps} bits */
     @NativeType("unsigned int")
     public int DefaultHmdCaps() { return nDefaultHmdCaps(address()); }
-    /** Returns the value of the {@code AvailableTrackingCaps} field. */
+    /** available {@code ovrTrackingCaps} bits */
     @NativeType("unsigned int")
     public int AvailableTrackingCaps() { return nAvailableTrackingCaps(address()); }
-    /** Returns the value of the {@code DefaultTrackingCaps} field. */
+    /** default {@code ovrTrackingCaps} bits */
     @NativeType("unsigned int")
     public int DefaultTrackingCaps() { return nDefaultTrackingCaps(address()); }
-    /** Returns a {@link OVRFovPort}.Buffer view of the {@code DefaultEyeFov} field. */
+    /** the recommended optical FOV for the HMD */
     @NativeType("ovrFovPort[ovrEye_Count]")
     public OVRFovPort.Buffer DefaultEyeFov() { return nDefaultEyeFov(address()); }
-    /** Returns a {@link OVRFovPort} view of the struct at the specified index of the {@code DefaultEyeFov} field. */
+    /** the recommended optical FOV for the HMD */
     @NativeType("ovrFovPort")
     public OVRFovPort DefaultEyeFov(int index) { return nDefaultEyeFov(address(), index); }
-    /** Returns a {@link OVRFovPort}.Buffer view of the {@code MaxEyeFov} field. */
+    /** the maximum optical FOV for the HMD */
     @NativeType("ovrFovPort[ovrEye_Count]")
     public OVRFovPort.Buffer MaxEyeFov() { return nMaxEyeFov(address()); }
-    /** Returns a {@link OVRFovPort} view of the struct at the specified index of the {@code MaxEyeFov} field. */
+    /** the maximum optical FOV for the HMD */
     @NativeType("ovrFovPort")
     public OVRFovPort MaxEyeFov(int index) { return nMaxEyeFov(address(), index); }
-    /** Returns a {@link OVRSizei} view of the {@code Resolution} field. */
+    /** resolution of the full HMD screen (both eyes) in pixels */
     @NativeType("ovrSizei")
     public OVRSizei Resolution() { return nResolution(address()); }
-    /** Returns the value of the {@code DisplayRefreshRate} field. */
+    /** refresh rate of the display in cycles per second at the time of HMD creation */
     public float DisplayRefreshRate() { return nDisplayRefreshRate(address()); }
 
     // -----------------------------------

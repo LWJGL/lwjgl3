@@ -18,145 +18,56 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Contains information about the initialization and environment of a printer or a display device.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code dmDeviceName[32]} &ndash; 
- * A zero-terminated character array that specifies the "friendly" name of the printer or display; for example, "PCL/HP LaserJet" in the case of PCL/HP
- * LaserJet. This string is unique among device drivers. Note that this name may be truncated to fit in the {@code dmDeviceName} array.</li>
- * <li>{@code dmSpecVersion} &ndash; 
- * the version number of the initialization data specification on which the structure is based. To ensure the correct version is used for any operating
- * system, use {@link GDI32#DM_SPECVERSION}.</li>
- * <li>{@code dmDriverVersion} &ndash; the driver version number assigned by the driver developer</li>
- * <li>{@code dmSize} &ndash; 
- * specifies the size, in bytes, of the {@code DEVMODE} structure, not including any private driver-specific data that might follow the structure's
- * public members. Set this member to {@link #SIZEOF} to indicate the version of the {@code DEVMODE} structure being used.</li>
- * <li>{@code dmDriverExtra} &ndash; 
- * contains the number of bytes of private driver-data that follow this structure. If a device driver does not use device-specific information, set this
- * member to zero.</li>
- * <li>{@code dmFields} &ndash; 
- * specifies whether certain members of the {@code DEVMODE} structure have been initialized. If a member is initialized, its corresponding bit is set
- * otherwise the bit is clear. A driver supports only those {@code DEVMODE} members that are appropriate for the printer or display technology.</li>
- * <li><em>&lt;union&gt;</em>
- * 
- * <ul>
- * <li><em>&lt;struct&gt;</em>
- * 
- * <ul>
- * <li>{@code dmOrientation} &ndash; for printer devices only</li>
- * <li>{@code dmPaperSize} &ndash; for printer devices only</li>
- * <li>{@code dmPaperLength} &ndash; for printer devices only</li>
- * <li>{@code dmPaperWidth} &ndash; for printer devices only</li>
- * <li>{@code dmScale} &ndash; for printer devices only</li>
- * <li>{@code dmCopies} &ndash; for printer devices only</li>
- * <li>{@code dmDefaultSource} &ndash; for printer devices only</li>
- * <li>{@code dmPrintQuality} &ndash; for printer devices only</li>
- * </ul></li>
- * <li><em>&lt;struct&gt;</em>
- * 
- * <ul>
- * <li>{@code dmPosition} &ndash; 
- * for display devices only, a {@link POINTL} structure that indicates the positional coordinates of the display device in reference to the desktop
- * area. The primary display device is always located at coordinates (0,0).</li>
- * <li>{@code dmDisplayOrientation} &ndash; 
- * for display devices only, the orientation at which images should be presented. If {@link GDI32#DM_DISPLAYORIENTATION} is not set, this member must be
- * zero. If {@link GDI32#DM_DISPLAYORIENTATION} is set, this member must be one of the following values:<br>{@link GDI32#DMDO_DEFAULT}, {@link GDI32#DMDO_90}, {@link GDI32#DMDO_180}, {@link GDI32#DMDO_270}
- * 
- * <p>To determine whether the display orientation is portrait or landscape orientation, check the ratio of {@code dmPelsWidth} to
- * {@code dmPelsHeight}.</p></li>
- * <li>{@code dmDisplayFixedOutput} &ndash; 
- * for fixed-resolution display devices only, how the display presents a low-resolution mode on a higher-resolution display. For example, if a
- * display device's resolution is fixed at 1024 x 768 pixels but its mode is set to 640 x 480 pixels, the device can either display a 640 x 480
- * image somewhere in the interior of the 1024 x 768 screen space or stretch the 640 x 480 image to fill the larger screen space. If
- * {@link GDI32#DM_DISPLAYFIXEDOUTPUT} is not set, this member must be zero. If {@link GDI32#DM_DISPLAYFIXEDOUTPUT} is set, this member must be one of the
- * following values:<br>{@link GDI32#DMDFO_DEFAULT}, {@link GDI32#DMDFO_CENTER}, {@link GDI32#DMDFO_STRETCH}</li>
- * </ul></li>
- * </ul></li>
- * <li>{@code dmColor} &ndash; for printer devices only</li>
- * <li>{@code dmDuplex} &ndash; for printer devices only</li>
- * <li>{@code dmYResolution} &ndash; for printer devices only</li>
- * <li>{@code dmTTOption} &ndash; for printer devices only</li>
- * <li>{@code dmCollate} &ndash; for printer devices only</li>
- * <li>{@code dmFormName[32]} &ndash; for printer devices only</li>
- * <li>{@code dmLogPixels} &ndash; the number of pixels per logical inch</li>
- * <li>{@code dmBitsPerPel} &ndash; 
- * specifies the color resolution, in bits per pixel, of the display device (for example: 4 bits for 16 colors, 8 bits for 256 colors, or 16 bits for
- * 65,536 colors)</li>
- * <li>{@code dmPelsWidth} &ndash; specifies the width, in pixels, of the visible device surface</li>
- * <li>{@code dmPelsHeight} &ndash; specifies the height, in pixels, of the visible device surface</li>
- * <li><em>&lt;union&gt;</em>
- * 
- * <ul>
- * <li>{@code dmDisplayFlags} &ndash; specifies the device's display mode, one or more of:<br>{@link GDI32#DM_INTERLACED}, {@link GDI32#DMDISPLAYFLAGS_TEXTMODE}</li>
- * <li>{@code dmNup} &ndash; for printer devices only</li>
- * </ul></li>
- * <li>{@code dmDisplayFrequency} &ndash; 
- * specifies the frequency, in hertz (cycles per second), of the display device in a particular mode. This value is also known as the display device's
- * vertical refresh rate.
- * 
- * <p>When you call the {@link User32#EnumDisplaySettingsEx} function, the {@code dmDisplayFrequency} member may return with the value 0 or 1. These values
- * represent the display hardware's default refresh rate. This default rate is typically set by switches on a display card or computer motherboard, or by
- * a configuration program that does not use display functions such as {@code ChangeDisplaySettingsEx}.</p></li>
- * <li>{@code dmICMMethod} &ndash; for printer devices only</li>
- * <li>{@code dmICMIntent} &ndash; for printer devices only</li>
- * <li>{@code dmMediaType} &ndash; for printer devices only</li>
- * <li>{@code dmDitherType} &ndash; for printer devices only</li>
- * <li>{@code dmReserved1} &ndash; not used; must be zero</li>
- * <li>{@code dmReserved2} &ndash; not used; must be zero</li>
- * <li>{@code dmPanningWidth} &ndash; this member must be zero</li>
- * <li>{@code dmPanningHeight} &ndash; this member must be zero</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct DEVMODE {
- *     TCHAR dmDeviceName[32];
- *     WORD dmSpecVersion;
- *     WORD dmDriverVersion;
- *     WORD dmSize;
- *     WORD dmDriverExtra;
- *     DWORD dmFields;
+ *     TCHAR {@link #dmDeviceName}[32];
+ *     WORD {@link #dmSpecVersion};
+ *     WORD {@link #dmDriverVersion};
+ *     WORD {@link #dmSize};
+ *     WORD {@link #dmDriverExtra};
+ *     DWORD {@link #dmFields};
  *     union {
  *         struct {
- *             short dmOrientation;
- *             short dmPaperSize;
- *             short dmPaperLength;
- *             short dmPaperWidth;
- *             short dmScale;
- *             short dmCopies;
- *             short dmDefaultSource;
- *             short dmPrintQuality;
+ *             short {@link #dmOrientation};
+ *             short {@link #dmPaperSize};
+ *             short {@link #dmPaperLength};
+ *             short {@link #dmPaperWidth};
+ *             short {@link #dmScale};
+ *             short {@link #dmCopies};
+ *             short {@link #dmDefaultSource};
+ *             short {@link #dmPrintQuality};
  *         };
  *         struct {
- *             {@link POINTL POINTL} dmPosition;
- *             DWORD dmDisplayOrientation;
- *             DWORD dmDisplayFixedOutput;
+ *             {@link POINTL POINTL} {@link #dmPosition};
+ *             DWORD {@link #dmDisplayOrientation};
+ *             DWORD {@link #dmDisplayFixedOutput};
  *         };
  *     };
- *     short dmColor;
- *     short dmDuplex;
- *     short dmYResolution;
- *     short dmTTOption;
- *     short dmCollate;
- *     TCHAR dmFormName[32];
- *     WORD dmLogPixels;
- *     DWORD dmBitsPerPel;
- *     DWORD dmPelsWidth;
- *     DWORD dmPelsHeight;
+ *     short {@link #dmColor};
+ *     short {@link #dmDuplex};
+ *     short {@link #dmYResolution};
+ *     short {@link #dmTTOption};
+ *     short {@link #dmCollate};
+ *     TCHAR {@link #dmFormName}[32];
+ *     WORD {@link #dmLogPixels};
+ *     DWORD {@link #dmBitsPerPel};
+ *     DWORD {@link #dmPelsWidth};
+ *     DWORD {@link #dmPelsHeight};
  *     union {
- *         DWORD dmDisplayFlags;
- *         DWORD dmNup;
+ *         DWORD {@link #dmDisplayFlags};
+ *         DWORD {@link #dmNup};
  *     };
- *     DWORD dmDisplayFrequency;
- *     DWORD dmICMMethod;
- *     DWORD dmICMIntent;
- *     DWORD dmMediaType;
- *     DWORD dmDitherType;
- *     DWORD dmReserved1;
- *     DWORD dmReserved2;
- *     DWORD dmPanningWidth;
- *     DWORD dmPanningHeight;
+ *     DWORD {@link #dmDisplayFrequency};
+ *     DWORD {@link #dmICMMethod};
+ *     DWORD {@link #dmICMIntent};
+ *     DWORD {@link #dmMediaType};
+ *     DWORD {@link #dmDitherType};
+ *     DWORD {@link #dmReserved1};
+ *     DWORD {@link #dmReserved2};
+ *     DWORD {@link #dmPanningWidth};
+ *     DWORD {@link #dmPanningHeight};
  * }</code></pre>
  */
 public class DEVMODE extends Struct implements NativeResource {
@@ -314,118 +225,161 @@ public class DEVMODE extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code dmDeviceName} field. */
+    /**
+     * A zero-terminated character array that specifies the "friendly" name of the printer or display; for example, "PCL/HP LaserJet" in the case of PCL/HP
+     * LaserJet. This string is unique among device drivers. Note that this name may be truncated to fit in the {@code dmDeviceName} array.
+     */
     @NativeType("TCHAR[32]")
     public ByteBuffer dmDeviceName() { return ndmDeviceName(address()); }
-    /** Decodes the null-terminated string stored in the {@code dmDeviceName} field. */
+    /**
+     * A zero-terminated character array that specifies the "friendly" name of the printer or display; for example, "PCL/HP LaserJet" in the case of PCL/HP
+     * LaserJet. This string is unique among device drivers. Note that this name may be truncated to fit in the {@code dmDeviceName} array.
+     */
     @NativeType("TCHAR[32]")
     public String dmDeviceNameString() { return ndmDeviceNameString(address()); }
-    /** Returns the value of the {@code dmSpecVersion} field. */
+    /**
+     * the version number of the initialization data specification on which the structure is based. To ensure the correct version is used for any operating
+     * system, use {@link GDI32#DM_SPECVERSION}.
+     */
     @NativeType("WORD")
     public short dmSpecVersion() { return ndmSpecVersion(address()); }
-    /** Returns the value of the {@code dmDriverVersion} field. */
+    /** the driver version number assigned by the driver developer */
     @NativeType("WORD")
     public short dmDriverVersion() { return ndmDriverVersion(address()); }
-    /** Returns the value of the {@code dmSize} field. */
+    /**
+     * specifies the size, in bytes, of the {@code DEVMODE} structure, not including any private driver-specific data that might follow the structure's
+     * public members. Set this member to {@link #SIZEOF} to indicate the version of the {@code DEVMODE} structure being used.
+     */
     @NativeType("WORD")
     public short dmSize() { return ndmSize(address()); }
-    /** Returns the value of the {@code dmDriverExtra} field. */
+    /**
+     * contains the number of bytes of private driver-data that follow this structure. If a device driver does not use device-specific information, set this
+     * member to zero.
+     */
     @NativeType("WORD")
     public short dmDriverExtra() { return ndmDriverExtra(address()); }
-    /** Returns the value of the {@code dmFields} field. */
+    /**
+     * specifies whether certain members of the {@code DEVMODE} structure have been initialized. If a member is initialized, its corresponding bit is set
+     * otherwise the bit is clear. A driver supports only those {@code DEVMODE} members that are appropriate for the printer or display technology.
+     */
     @NativeType("DWORD")
     public int dmFields() { return ndmFields(address()); }
-    /** Returns the value of the {@code dmOrientation} field. */
+    /** for printer devices only */
     public short dmOrientation() { return ndmOrientation(address()); }
-    /** Returns the value of the {@code dmPaperSize} field. */
+    /** for printer devices only */
     public short dmPaperSize() { return ndmPaperSize(address()); }
-    /** Returns the value of the {@code dmPaperLength} field. */
+    /** for printer devices only */
     public short dmPaperLength() { return ndmPaperLength(address()); }
-    /** Returns the value of the {@code dmPaperWidth} field. */
+    /** for printer devices only */
     public short dmPaperWidth() { return ndmPaperWidth(address()); }
-    /** Returns the value of the {@code dmScale} field. */
+    /** for printer devices only */
     public short dmScale() { return ndmScale(address()); }
-    /** Returns the value of the {@code dmCopies} field. */
+    /** for printer devices only */
     public short dmCopies() { return ndmCopies(address()); }
-    /** Returns the value of the {@code dmDefaultSource} field. */
+    /** for printer devices only */
     public short dmDefaultSource() { return ndmDefaultSource(address()); }
-    /** Returns the value of the {@code dmPrintQuality} field. */
+    /** for printer devices only */
     public short dmPrintQuality() { return ndmPrintQuality(address()); }
-    /** Returns a {@link POINTL} view of the {@code dmPosition} field. */
+    /**
+     * for display devices only, a {@link POINTL} structure that indicates the positional coordinates of the display device in reference to the desktop
+     * area. The primary display device is always located at coordinates (0,0).
+     */
     public POINTL dmPosition() { return ndmPosition(address()); }
-    /** Returns the value of the {@code dmDisplayOrientation} field. */
+    /**
+     * for display devices only, the orientation at which images should be presented. If {@link GDI32#DM_DISPLAYORIENTATION} is not set, this member must be
+     * zero. If {@link GDI32#DM_DISPLAYORIENTATION} is set, this member must be one of the following values:<br>{@link GDI32#DMDO_DEFAULT}, {@link GDI32#DMDO_90}, {@link GDI32#DMDO_180}, {@link GDI32#DMDO_270}
+     * 
+     * <p>To determine whether the display orientation is portrait or landscape orientation, check the ratio of {@code dmPelsWidth} to
+     * {@code dmPelsHeight}.</p>
+     */
     @NativeType("DWORD")
     public int dmDisplayOrientation() { return ndmDisplayOrientation(address()); }
-    /** Returns the value of the {@code dmDisplayFixedOutput} field. */
+    /**
+     * for fixed-resolution display devices only, how the display presents a low-resolution mode on a higher-resolution display. For example, if a
+     * display device's resolution is fixed at 1024 x 768 pixels but its mode is set to 640 x 480 pixels, the device can either display a 640 x 480
+     * image somewhere in the interior of the 1024 x 768 screen space or stretch the 640 x 480 image to fill the larger screen space. If
+     * {@link GDI32#DM_DISPLAYFIXEDOUTPUT} is not set, this member must be zero. If {@link GDI32#DM_DISPLAYFIXEDOUTPUT} is set, this member must be one of the
+     * following values:<br>{@link GDI32#DMDFO_DEFAULT}, {@link GDI32#DMDFO_CENTER}, {@link GDI32#DMDFO_STRETCH}
+     */
     @NativeType("DWORD")
     public int dmDisplayFixedOutput() { return ndmDisplayFixedOutput(address()); }
-    /** Returns the value of the {@code dmColor} field. */
+    /** for printer devices only */
     public short dmColor() { return ndmColor(address()); }
-    /** Returns the value of the {@code dmDuplex} field. */
+    /** for printer devices only */
     public short dmDuplex() { return ndmDuplex(address()); }
-    /** Returns the value of the {@code dmYResolution} field. */
+    /** for printer devices only */
     public short dmYResolution() { return ndmYResolution(address()); }
-    /** Returns the value of the {@code dmTTOption} field. */
+    /** for printer devices only */
     public short dmTTOption() { return ndmTTOption(address()); }
-    /** Returns the value of the {@code dmCollate} field. */
+    /** for printer devices only */
     public short dmCollate() { return ndmCollate(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code dmFormName} field. */
+    /** for printer devices only */
     @NativeType("TCHAR[32]")
     public ByteBuffer dmFormName() { return ndmFormName(address()); }
-    /** Decodes the null-terminated string stored in the {@code dmFormName} field. */
+    /** for printer devices only */
     @NativeType("TCHAR[32]")
     public String dmFormNameString() { return ndmFormNameString(address()); }
-    /** Returns the value of the {@code dmLogPixels} field. */
+    /** the number of pixels per logical inch */
     @NativeType("WORD")
     public short dmLogPixels() { return ndmLogPixels(address()); }
-    /** Returns the value of the {@code dmBitsPerPel} field. */
+    /**
+     * specifies the color resolution, in bits per pixel, of the display device (for example: 4 bits for 16 colors, 8 bits for 256 colors, or 16 bits for
+     * 65,536 colors)
+     */
     @NativeType("DWORD")
     public int dmBitsPerPel() { return ndmBitsPerPel(address()); }
-    /** Returns the value of the {@code dmPelsWidth} field. */
+    /** specifies the width, in pixels, of the visible device surface */
     @NativeType("DWORD")
     public int dmPelsWidth() { return ndmPelsWidth(address()); }
-    /** Returns the value of the {@code dmPelsHeight} field. */
+    /** specifies the height, in pixels, of the visible device surface */
     @NativeType("DWORD")
     public int dmPelsHeight() { return ndmPelsHeight(address()); }
-    /** Returns the value of the {@code dmDisplayFlags} field. */
+    /** specifies the device's display mode, one or more of:<br>{@link GDI32#DM_INTERLACED}, {@link GDI32#DMDISPLAYFLAGS_TEXTMODE} */
     @NativeType("DWORD")
     public int dmDisplayFlags() { return ndmDisplayFlags(address()); }
-    /** Returns the value of the {@code dmNup} field. */
+    /** for printer devices only */
     @NativeType("DWORD")
     public int dmNup() { return ndmNup(address()); }
-    /** Returns the value of the {@code dmDisplayFrequency} field. */
+    /**
+     * specifies the frequency, in hertz (cycles per second), of the display device in a particular mode. This value is also known as the display device's
+     * vertical refresh rate.
+     * 
+     * <p>When you call the {@link User32#EnumDisplaySettingsEx} function, the {@code dmDisplayFrequency} member may return with the value 0 or 1. These values
+     * represent the display hardware's default refresh rate. This default rate is typically set by switches on a display card or computer motherboard, or by
+     * a configuration program that does not use display functions such as {@code ChangeDisplaySettingsEx}.</p>
+     */
     @NativeType("DWORD")
     public int dmDisplayFrequency() { return ndmDisplayFrequency(address()); }
-    /** Returns the value of the {@code dmICMMethod} field. */
+    /** for printer devices only */
     @NativeType("DWORD")
     public int dmICMMethod() { return ndmICMMethod(address()); }
-    /** Returns the value of the {@code dmICMIntent} field. */
+    /** for printer devices only */
     @NativeType("DWORD")
     public int dmICMIntent() { return ndmICMIntent(address()); }
-    /** Returns the value of the {@code dmMediaType} field. */
+    /** for printer devices only */
     @NativeType("DWORD")
     public int dmMediaType() { return ndmMediaType(address()); }
-    /** Returns the value of the {@code dmDitherType} field. */
+    /** for printer devices only */
     @NativeType("DWORD")
     public int dmDitherType() { return ndmDitherType(address()); }
-    /** Returns the value of the {@code dmReserved1} field. */
+    /** not used; must be zero */
     @NativeType("DWORD")
     public int dmReserved1() { return ndmReserved1(address()); }
-    /** Returns the value of the {@code dmReserved2} field. */
+    /** not used; must be zero */
     @NativeType("DWORD")
     public int dmReserved2() { return ndmReserved2(address()); }
-    /** Returns the value of the {@code dmPanningWidth} field. */
+    /** this member must be zero */
     @NativeType("DWORD")
     public int dmPanningWidth() { return ndmPanningWidth(address()); }
-    /** Returns the value of the {@code dmPanningHeight} field. */
+    /** this member must be zero */
     @NativeType("DWORD")
     public int dmPanningHeight() { return ndmPanningHeight(address()); }
 
-    /** Sets the specified value to the {@code dmSpecVersion} field. */
+    /** Sets the specified value to the {@link #dmSpecVersion} field. */
     public DEVMODE dmSpecVersion(@NativeType("WORD") short value) { ndmSpecVersion(address(), value); return this; }
-    /** Sets the specified value to the {@code dmSize} field. */
+    /** Sets the specified value to the {@link #dmSize} field. */
     public DEVMODE dmSize(@NativeType("WORD") short value) { ndmSize(address(), value); return this; }
-    /** Sets the specified value to the {@code dmDriverExtra} field. */
+    /** Sets the specified value to the {@link #dmDriverExtra} field. */
     public DEVMODE dmDriverExtra(@NativeType("WORD") short value) { ndmDriverExtra(address(), value); return this; }
 
     /**
@@ -709,118 +663,118 @@ public class DEVMODE extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code dmDeviceName} field. */
+        /** @return a {@link ByteBuffer} view of the {@link DEVMODE#dmDeviceName} field. */
         @NativeType("TCHAR[32]")
         public ByteBuffer dmDeviceName() { return DEVMODE.ndmDeviceName(address()); }
-        /** Decodes the null-terminated string stored in the {@code dmDeviceName} field. */
+        /** @return the null-terminated string stored in the {@link DEVMODE#dmDeviceName} field. */
         @NativeType("TCHAR[32]")
         public String dmDeviceNameString() { return DEVMODE.ndmDeviceNameString(address()); }
-        /** Returns the value of the {@code dmSpecVersion} field. */
+        /** @return the value of the {@link DEVMODE#dmSpecVersion} field. */
         @NativeType("WORD")
         public short dmSpecVersion() { return DEVMODE.ndmSpecVersion(address()); }
-        /** Returns the value of the {@code dmDriverVersion} field. */
+        /** @return the value of the {@link DEVMODE#dmDriverVersion} field. */
         @NativeType("WORD")
         public short dmDriverVersion() { return DEVMODE.ndmDriverVersion(address()); }
-        /** Returns the value of the {@code dmSize} field. */
+        /** @return the value of the {@link DEVMODE#dmSize} field. */
         @NativeType("WORD")
         public short dmSize() { return DEVMODE.ndmSize(address()); }
-        /** Returns the value of the {@code dmDriverExtra} field. */
+        /** @return the value of the {@link DEVMODE#dmDriverExtra} field. */
         @NativeType("WORD")
         public short dmDriverExtra() { return DEVMODE.ndmDriverExtra(address()); }
-        /** Returns the value of the {@code dmFields} field. */
+        /** @return the value of the {@link DEVMODE#dmFields} field. */
         @NativeType("DWORD")
         public int dmFields() { return DEVMODE.ndmFields(address()); }
-        /** Returns the value of the {@code dmOrientation} field. */
+        /** @return the value of the {@link DEVMODE#dmOrientation} field. */
         public short dmOrientation() { return DEVMODE.ndmOrientation(address()); }
-        /** Returns the value of the {@code dmPaperSize} field. */
+        /** @return the value of the {@link DEVMODE#dmPaperSize} field. */
         public short dmPaperSize() { return DEVMODE.ndmPaperSize(address()); }
-        /** Returns the value of the {@code dmPaperLength} field. */
+        /** @return the value of the {@link DEVMODE#dmPaperLength} field. */
         public short dmPaperLength() { return DEVMODE.ndmPaperLength(address()); }
-        /** Returns the value of the {@code dmPaperWidth} field. */
+        /** @return the value of the {@link DEVMODE#dmPaperWidth} field. */
         public short dmPaperWidth() { return DEVMODE.ndmPaperWidth(address()); }
-        /** Returns the value of the {@code dmScale} field. */
+        /** @return the value of the {@link DEVMODE#dmScale} field. */
         public short dmScale() { return DEVMODE.ndmScale(address()); }
-        /** Returns the value of the {@code dmCopies} field. */
+        /** @return the value of the {@link DEVMODE#dmCopies} field. */
         public short dmCopies() { return DEVMODE.ndmCopies(address()); }
-        /** Returns the value of the {@code dmDefaultSource} field. */
+        /** @return the value of the {@link DEVMODE#dmDefaultSource} field. */
         public short dmDefaultSource() { return DEVMODE.ndmDefaultSource(address()); }
-        /** Returns the value of the {@code dmPrintQuality} field. */
+        /** @return the value of the {@link DEVMODE#dmPrintQuality} field. */
         public short dmPrintQuality() { return DEVMODE.ndmPrintQuality(address()); }
-        /** Returns a {@link POINTL} view of the {@code dmPosition} field. */
+        /** @return a {@link POINTL} view of the {@link DEVMODE#dmPosition} field. */
         public POINTL dmPosition() { return DEVMODE.ndmPosition(address()); }
-        /** Returns the value of the {@code dmDisplayOrientation} field. */
+        /** @return the value of the {@link DEVMODE#dmDisplayOrientation} field. */
         @NativeType("DWORD")
         public int dmDisplayOrientation() { return DEVMODE.ndmDisplayOrientation(address()); }
-        /** Returns the value of the {@code dmDisplayFixedOutput} field. */
+        /** @return the value of the {@link DEVMODE#dmDisplayFixedOutput} field. */
         @NativeType("DWORD")
         public int dmDisplayFixedOutput() { return DEVMODE.ndmDisplayFixedOutput(address()); }
-        /** Returns the value of the {@code dmColor} field. */
+        /** @return the value of the {@link DEVMODE#dmColor} field. */
         public short dmColor() { return DEVMODE.ndmColor(address()); }
-        /** Returns the value of the {@code dmDuplex} field. */
+        /** @return the value of the {@link DEVMODE#dmDuplex} field. */
         public short dmDuplex() { return DEVMODE.ndmDuplex(address()); }
-        /** Returns the value of the {@code dmYResolution} field. */
+        /** @return the value of the {@link DEVMODE#dmYResolution} field. */
         public short dmYResolution() { return DEVMODE.ndmYResolution(address()); }
-        /** Returns the value of the {@code dmTTOption} field. */
+        /** @return the value of the {@link DEVMODE#dmTTOption} field. */
         public short dmTTOption() { return DEVMODE.ndmTTOption(address()); }
-        /** Returns the value of the {@code dmCollate} field. */
+        /** @return the value of the {@link DEVMODE#dmCollate} field. */
         public short dmCollate() { return DEVMODE.ndmCollate(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code dmFormName} field. */
+        /** @return a {@link ByteBuffer} view of the {@link DEVMODE#dmFormName} field. */
         @NativeType("TCHAR[32]")
         public ByteBuffer dmFormName() { return DEVMODE.ndmFormName(address()); }
-        /** Decodes the null-terminated string stored in the {@code dmFormName} field. */
+        /** @return the null-terminated string stored in the {@link DEVMODE#dmFormName} field. */
         @NativeType("TCHAR[32]")
         public String dmFormNameString() { return DEVMODE.ndmFormNameString(address()); }
-        /** Returns the value of the {@code dmLogPixels} field. */
+        /** @return the value of the {@link DEVMODE#dmLogPixels} field. */
         @NativeType("WORD")
         public short dmLogPixels() { return DEVMODE.ndmLogPixels(address()); }
-        /** Returns the value of the {@code dmBitsPerPel} field. */
+        /** @return the value of the {@link DEVMODE#dmBitsPerPel} field. */
         @NativeType("DWORD")
         public int dmBitsPerPel() { return DEVMODE.ndmBitsPerPel(address()); }
-        /** Returns the value of the {@code dmPelsWidth} field. */
+        /** @return the value of the {@link DEVMODE#dmPelsWidth} field. */
         @NativeType("DWORD")
         public int dmPelsWidth() { return DEVMODE.ndmPelsWidth(address()); }
-        /** Returns the value of the {@code dmPelsHeight} field. */
+        /** @return the value of the {@link DEVMODE#dmPelsHeight} field. */
         @NativeType("DWORD")
         public int dmPelsHeight() { return DEVMODE.ndmPelsHeight(address()); }
-        /** Returns the value of the {@code dmDisplayFlags} field. */
+        /** @return the value of the {@link DEVMODE#dmDisplayFlags} field. */
         @NativeType("DWORD")
         public int dmDisplayFlags() { return DEVMODE.ndmDisplayFlags(address()); }
-        /** Returns the value of the {@code dmNup} field. */
+        /** @return the value of the {@link DEVMODE#dmNup} field. */
         @NativeType("DWORD")
         public int dmNup() { return DEVMODE.ndmNup(address()); }
-        /** Returns the value of the {@code dmDisplayFrequency} field. */
+        /** @return the value of the {@link DEVMODE#dmDisplayFrequency} field. */
         @NativeType("DWORD")
         public int dmDisplayFrequency() { return DEVMODE.ndmDisplayFrequency(address()); }
-        /** Returns the value of the {@code dmICMMethod} field. */
+        /** @return the value of the {@link DEVMODE#dmICMMethod} field. */
         @NativeType("DWORD")
         public int dmICMMethod() { return DEVMODE.ndmICMMethod(address()); }
-        /** Returns the value of the {@code dmICMIntent} field. */
+        /** @return the value of the {@link DEVMODE#dmICMIntent} field. */
         @NativeType("DWORD")
         public int dmICMIntent() { return DEVMODE.ndmICMIntent(address()); }
-        /** Returns the value of the {@code dmMediaType} field. */
+        /** @return the value of the {@link DEVMODE#dmMediaType} field. */
         @NativeType("DWORD")
         public int dmMediaType() { return DEVMODE.ndmMediaType(address()); }
-        /** Returns the value of the {@code dmDitherType} field. */
+        /** @return the value of the {@link DEVMODE#dmDitherType} field. */
         @NativeType("DWORD")
         public int dmDitherType() { return DEVMODE.ndmDitherType(address()); }
-        /** Returns the value of the {@code dmReserved1} field. */
+        /** @return the value of the {@link DEVMODE#dmReserved1} field. */
         @NativeType("DWORD")
         public int dmReserved1() { return DEVMODE.ndmReserved1(address()); }
-        /** Returns the value of the {@code dmReserved2} field. */
+        /** @return the value of the {@link DEVMODE#dmReserved2} field. */
         @NativeType("DWORD")
         public int dmReserved2() { return DEVMODE.ndmReserved2(address()); }
-        /** Returns the value of the {@code dmPanningWidth} field. */
+        /** @return the value of the {@link DEVMODE#dmPanningWidth} field. */
         @NativeType("DWORD")
         public int dmPanningWidth() { return DEVMODE.ndmPanningWidth(address()); }
-        /** Returns the value of the {@code dmPanningHeight} field. */
+        /** @return the value of the {@link DEVMODE#dmPanningHeight} field. */
         @NativeType("DWORD")
         public int dmPanningHeight() { return DEVMODE.ndmPanningHeight(address()); }
 
-        /** Sets the specified value to the {@code dmSpecVersion} field. */
+        /** Sets the specified value to the {@link DEVMODE#dmSpecVersion} field. */
         public DEVMODE.Buffer dmSpecVersion(@NativeType("WORD") short value) { DEVMODE.ndmSpecVersion(address(), value); return this; }
-        /** Sets the specified value to the {@code dmSize} field. */
+        /** Sets the specified value to the {@link DEVMODE#dmSize} field. */
         public DEVMODE.Buffer dmSize(@NativeType("WORD") short value) { DEVMODE.ndmSize(address(), value); return this; }
-        /** Sets the specified value to the {@code dmDriverExtra} field. */
+        /** Sets the specified value to the {@link DEVMODE#dmDriverExtra} field. */
         public DEVMODE.Buffer dmDriverExtra(@NativeType("WORD") short value) { DEVMODE.ndmDriverExtra(address(), value); return this; }
 
     }

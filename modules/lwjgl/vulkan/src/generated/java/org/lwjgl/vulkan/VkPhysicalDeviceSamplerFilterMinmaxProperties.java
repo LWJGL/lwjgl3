@@ -49,23 +49,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code filterMinmaxSingleComponentFormats} &ndash; a boolean value indicating whether a minimum set of required formats support min/max filtering.</li>
- * <li>{@code filterMinmaxImageComponentMapping} &ndash; a boolean value indicating whether the implementation supports non-identity component mapping of the image when doing min/max filtering.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceSamplerFilterMinmaxProperties {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 filterMinmaxSingleComponentFormats;
- *     VkBool32 filterMinmaxImageComponentMapping;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #filterMinmaxSingleComponentFormats};
+ *     VkBool32 {@link #filterMinmaxImageComponentMapping};
  * }</code></pre>
  */
 public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implements NativeResource {
@@ -113,22 +104,22 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code filterMinmaxSingleComponentFormats} field. */
+    /** a boolean value indicating whether a minimum set of required formats support min/max filtering. */
     @NativeType("VkBool32")
     public boolean filterMinmaxSingleComponentFormats() { return nfilterMinmaxSingleComponentFormats(address()) != 0; }
-    /** Returns the value of the {@code filterMinmaxImageComponentMapping} field. */
+    /** a boolean value indicating whether the implementation supports non-identity component mapping of the image when doing min/max filtering. */
     @NativeType("VkBool32")
     public boolean filterMinmaxImageComponentMapping() { return nfilterMinmaxImageComponentMapping(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceSamplerFilterMinmaxProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceSamplerFilterMinmaxProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -349,22 +340,22 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSamplerFilterMinmaxProperties#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceSamplerFilterMinmaxProperties.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSamplerFilterMinmaxProperties#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceSamplerFilterMinmaxProperties.npNext(address()); }
-        /** Returns the value of the {@code filterMinmaxSingleComponentFormats} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSamplerFilterMinmaxProperties#filterMinmaxSingleComponentFormats} field. */
         @NativeType("VkBool32")
         public boolean filterMinmaxSingleComponentFormats() { return VkPhysicalDeviceSamplerFilterMinmaxProperties.nfilterMinmaxSingleComponentFormats(address()) != 0; }
-        /** Returns the value of the {@code filterMinmaxImageComponentMapping} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSamplerFilterMinmaxProperties#filterMinmaxImageComponentMapping} field. */
         @NativeType("VkBool32")
         public boolean filterMinmaxImageComponentMapping() { return VkPhysicalDeviceSamplerFilterMinmaxProperties.nfilterMinmaxImageComponentMapping(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceSamplerFilterMinmaxProperties#sType} field. */
         public VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSamplerFilterMinmaxProperties.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceSamplerFilterMinmaxProperties#pNext} field. */
         public VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSamplerFilterMinmaxProperties.npNext(address(), value); return this; }
 
     }

@@ -50,29 +50,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK10#vkCreateBufferView CreateBufferView}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code buffer} &ndash; a {@code VkBuffer} on which the view will be created.</li>
- * <li>{@code format} &ndash; a {@code VkFormat} describing the format of the data elements in the buffer.</li>
- * <li>{@code offset} &ndash; an offset in bytes from the base address of the buffer. Accesses to the buffer view from shaders use addressing that is relative to this starting offset.</li>
- * <li>{@code range} &ndash; a size in bytes of the buffer view. If {@code range} is equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, the range from {@code offset} to the end of the buffer is used. If {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} is used and the remaining size of the buffer is not a multiple of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#texel-block-size">texel block size</a> of {@code format}, the nearest smaller multiple is used.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBufferViewCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkBufferViewCreateFlags flags;
- *     VkBuffer buffer;
- *     VkFormat format;
- *     VkDeviceSize offset;
- *     VkDeviceSize range;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkBufferViewCreateFlags {@link #flags};
+ *     VkBuffer {@link #buffer};
+ *     VkFormat {@link #format};
+ *     VkDeviceSize {@link #offset};
+ *     VkDeviceSize {@link #range};
  * }</code></pre>
  */
 public class VkBufferViewCreateInfo extends Struct implements NativeResource {
@@ -129,41 +117,41 @@ public class VkBufferViewCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkBufferViewCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code buffer} field. */
+    /** a {@code VkBuffer} on which the view will be created. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
-    /** Returns the value of the {@code format} field. */
+    /** a {@code VkFormat} describing the format of the data elements in the buffer. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /** an offset in bytes from the base address of the buffer. Accesses to the buffer view from shaders use addressing that is relative to this starting offset. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** Returns the value of the {@code range} field. */
+    /** a size in bytes of the buffer view. If {@code range} is equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, the range from {@code offset} to the end of the buffer is used. If {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} is used and the remaining size of the buffer is not a multiple of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#texel-block-size">texel block size</a> of {@code format}, the nearest smaller multiple is used. */
     @NativeType("VkDeviceSize")
     public long range() { return nrange(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkBufferViewCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferViewCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkBufferViewCreateInfo flags(@NativeType("VkBufferViewCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code buffer} field. */
+    /** Sets the specified value to the {@link #buffer} field. */
     public VkBufferViewCreateInfo buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code format} field. */
+    /** Sets the specified value to the {@link #format} field. */
     public VkBufferViewCreateInfo format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
-    /** Sets the specified value to the {@code offset} field. */
+    /** Sets the specified value to the {@link #offset} field. */
     public VkBufferViewCreateInfo offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@code range} field. */
+    /** Sets the specified value to the {@link #range} field. */
     public VkBufferViewCreateInfo range(@NativeType("VkDeviceSize") long value) { nrange(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -410,41 +398,41 @@ public class VkBufferViewCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkBufferViewCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBufferViewCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkBufferViewCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBufferViewCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkBufferViewCreateInfo#flags} field. */
         @NativeType("VkBufferViewCreateFlags")
         public int flags() { return VkBufferViewCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code buffer} field. */
+        /** @return the value of the {@link VkBufferViewCreateInfo#buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkBufferViewCreateInfo.nbuffer(address()); }
-        /** Returns the value of the {@code format} field. */
+        /** @return the value of the {@link VkBufferViewCreateInfo#format} field. */
         @NativeType("VkFormat")
         public int format() { return VkBufferViewCreateInfo.nformat(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@link VkBufferViewCreateInfo#offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkBufferViewCreateInfo.noffset(address()); }
-        /** Returns the value of the {@code range} field. */
+        /** @return the value of the {@link VkBufferViewCreateInfo#range} field. */
         @NativeType("VkDeviceSize")
         public long range() { return VkBufferViewCreateInfo.nrange(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkBufferViewCreateInfo#sType} field. */
         public VkBufferViewCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferViewCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkBufferViewCreateInfo#pNext} field. */
         public VkBufferViewCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkBufferViewCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkBufferViewCreateInfo#flags} field. */
         public VkBufferViewCreateInfo.Buffer flags(@NativeType("VkBufferViewCreateFlags") int value) { VkBufferViewCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code buffer} field. */
+        /** Sets the specified value to the {@link VkBufferViewCreateInfo#buffer} field. */
         public VkBufferViewCreateInfo.Buffer buffer(@NativeType("VkBuffer") long value) { VkBufferViewCreateInfo.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code format} field. */
+        /** Sets the specified value to the {@link VkBufferViewCreateInfo#format} field. */
         public VkBufferViewCreateInfo.Buffer format(@NativeType("VkFormat") int value) { VkBufferViewCreateInfo.nformat(address(), value); return this; }
-        /** Sets the specified value to the {@code offset} field. */
+        /** Sets the specified value to the {@link VkBufferViewCreateInfo#offset} field. */
         public VkBufferViewCreateInfo.Buffer offset(@NativeType("VkDeviceSize") long value) { VkBufferViewCreateInfo.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@code range} field. */
+        /** Sets the specified value to the {@link VkBufferViewCreateInfo#range} field. */
         public VkBufferViewCreateInfo.Buffer range(@NativeType("VkDeviceSize") long value) { VkBufferViewCreateInfo.nrange(address(), value); return this; }
 
     }

@@ -31,21 +31,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li><code>width × height × depth</code> <b>must</b> be less than or equal to {@link VkPhysicalDeviceRayTracingPipelinePropertiesKHR}{@code ::maxRayDispatchInvocationCount}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code width} &ndash; the width of the ray trace query dimensions.</li>
- * <li>{@code height} &ndash; height of the ray trace query dimensions.</li>
- * <li>{@code depth} &ndash; depth of the ray trace query dimensions.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkTraceRaysIndirectCommandKHR {
- *     uint32_t width;
- *     uint32_t height;
- *     uint32_t depth;
+ *     uint32_t {@link #width};
+ *     uint32_t {@link #height};
+ *     uint32_t {@link #depth};
  * }</code></pre>
  */
 public class VkTraceRaysIndirectCommandKHR extends Struct implements NativeResource {
@@ -90,21 +82,21 @@ public class VkTraceRaysIndirectCommandKHR extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code width} field. */
+    /** the width of the ray trace query dimensions. */
     @NativeType("uint32_t")
     public int width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** height of the ray trace query dimensions. */
     @NativeType("uint32_t")
     public int height() { return nheight(address()); }
-    /** Returns the value of the {@code depth} field. */
+    /** depth of the ray trace query dimensions. */
     @NativeType("uint32_t")
     public int depth() { return ndepth(address()); }
 
-    /** Sets the specified value to the {@code width} field. */
+    /** Sets the specified value to the {@link #width} field. */
     public VkTraceRaysIndirectCommandKHR width(@NativeType("uint32_t") int value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@code height} field. */
+    /** Sets the specified value to the {@link #height} field. */
     public VkTraceRaysIndirectCommandKHR height(@NativeType("uint32_t") int value) { nheight(address(), value); return this; }
-    /** Sets the specified value to the {@code depth} field. */
+    /** Sets the specified value to the {@link #depth} field. */
     public VkTraceRaysIndirectCommandKHR depth(@NativeType("uint32_t") int value) { ndepth(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,21 +319,21 @@ public class VkTraceRaysIndirectCommandKHR extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@link VkTraceRaysIndirectCommandKHR#width} field. */
         @NativeType("uint32_t")
         public int width() { return VkTraceRaysIndirectCommandKHR.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@link VkTraceRaysIndirectCommandKHR#height} field. */
         @NativeType("uint32_t")
         public int height() { return VkTraceRaysIndirectCommandKHR.nheight(address()); }
-        /** Returns the value of the {@code depth} field. */
+        /** @return the value of the {@link VkTraceRaysIndirectCommandKHR#depth} field. */
         @NativeType("uint32_t")
         public int depth() { return VkTraceRaysIndirectCommandKHR.ndepth(address()); }
 
-        /** Sets the specified value to the {@code width} field. */
+        /** Sets the specified value to the {@link VkTraceRaysIndirectCommandKHR#width} field. */
         public VkTraceRaysIndirectCommandKHR.Buffer width(@NativeType("uint32_t") int value) { VkTraceRaysIndirectCommandKHR.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@code height} field. */
+        /** Sets the specified value to the {@link VkTraceRaysIndirectCommandKHR#height} field. */
         public VkTraceRaysIndirectCommandKHR.Buffer height(@NativeType("uint32_t") int value) { VkTraceRaysIndirectCommandKHR.nheight(address(), value); return this; }
-        /** Sets the specified value to the {@code depth} field. */
+        /** Sets the specified value to the {@link VkTraceRaysIndirectCommandKHR#depth} field. */
         public VkTraceRaysIndirectCommandKHR.Buffer depth(@NativeType("uint32_t") int value) { VkTraceRaysIndirectCommandKHR.ndepth(address(), value); return this; }
 
     }

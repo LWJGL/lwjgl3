@@ -66,10 +66,10 @@ public class VRBoneTransform extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link HmdVector4} view of the {@code position} field. */
+    /** @return a {@link HmdVector4} view of the {@code position} field. */
     @NativeType("HmdVector4_t")
     public HmdVector4 position$() { return nposition$(address()); }
-    /** Returns a {@link HmdQuaternionf} view of the {@code orientation} field. */
+    /** @return a {@link HmdQuaternionf} view of the {@code orientation} field. */
     @NativeType("HmdQuaternionf_t")
     public HmdQuaternionf orientation() { return norientation(address()); }
 
@@ -259,10 +259,10 @@ public class VRBoneTransform extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link HmdVector4} view of the {@code position} field. */
+        /** @return a {@link HmdVector4} view of the {@code position} field. */
         @NativeType("HmdVector4_t")
         public HmdVector4 position$() { return VRBoneTransform.nposition$(address()); }
-        /** Returns a {@link HmdQuaternionf} view of the {@code orientation} field. */
+        /** @return a {@link HmdQuaternionf} view of the {@code orientation} field. */
         @NativeType("HmdQuaternionf_t")
         public HmdQuaternionf orientation() { return VRBoneTransform.norientation(address()); }
 

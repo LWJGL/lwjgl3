@@ -16,21 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * DebugLoc containing File, Line and Column.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code SourceFile} &ndash; file:</li>
- * <li>{@code SourceLineNumber} &ndash; line:</li>
- * <li>{@code SourceColumnNumber} &ndash; column:</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct LLVMOptRemarkDebugLoc {
- *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} SourceFile;
- *     uint32_t SourceLineNumber;
- *     uint32_t SourceColumnNumber;
+ *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} {@link #SourceFile};
+ *     uint32_t {@link #SourceLineNumber};
+ *     uint32_t {@link #SourceColumnNumber};
  * }</code></pre>
  */
 public class LLVMOptRemarkDebugLoc extends Struct {
@@ -75,12 +67,12 @@ public class LLVMOptRemarkDebugLoc extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code SourceFile} field. */
+    /** file: */
     public LLVMOptRemarkStringRef SourceFile() { return nSourceFile(address()); }
-    /** Returns the value of the {@code SourceLineNumber} field. */
+    /** line: */
     @NativeType("uint32_t")
     public int SourceLineNumber() { return nSourceLineNumber(address()); }
-    /** Returns the value of the {@code SourceColumnNumber} field. */
+    /** column: */
     @NativeType("uint32_t")
     public int SourceColumnNumber() { return nSourceColumnNumber(address()); }
 
@@ -160,12 +152,12 @@ public class LLVMOptRemarkDebugLoc extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code SourceFile} field. */
+        /** @return a {@link LLVMOptRemarkStringRef} view of the {@link LLVMOptRemarkDebugLoc#SourceFile} field. */
         public LLVMOptRemarkStringRef SourceFile() { return LLVMOptRemarkDebugLoc.nSourceFile(address()); }
-        /** Returns the value of the {@code SourceLineNumber} field. */
+        /** @return the value of the {@link LLVMOptRemarkDebugLoc#SourceLineNumber} field. */
         @NativeType("uint32_t")
         public int SourceLineNumber() { return LLVMOptRemarkDebugLoc.nSourceLineNumber(address()); }
-        /** Returns the value of the {@code SourceColumnNumber} field. */
+        /** @return the value of the {@link LLVMOptRemarkDebugLoc#SourceColumnNumber} field. */
         @NativeType("uint32_t")
         public int SourceColumnNumber() { return LLVMOptRemarkDebugLoc.nSourceColumnNumber(address()); }
 

@@ -28,25 +28,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRWorkgroupMemoryExplicitLayout#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code workgroupMemoryExplicitLayout} &ndash; indicates whether the implementation supports the SPIR-V {@code WorkgroupMemoryExplicitLayoutKHR} capability.</li>
- * <li>{@code workgroupMemoryExplicitLayoutScalarBlockLayout} &ndash; indicates whether the implementation supports scalar alignment for laying out Workgroup Blocks.</li>
- * <li>{@code workgroupMemoryExplicitLayout8BitAccess} &ndash; indicates whether objects in the {@code Workgroup} storage class with the {@code Block} decoration <b>can</b> have 8-bit integer members. If this feature is not enabled, 8-bit integer members <b>must</b> not be used in such objects. This also indicates whether shader modules <b>can</b> declare the {@code WorkgroupMemoryExplicitLayout8BitAccessKHR} capability.</li>
- * <li>{@code workgroupMemoryExplicitLayout16BitAccess} &ndash; indicates whether objects in the {@code Workgroup} storage class with the {@code Block} decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also indicates whether shader modules <b>can</b> declare the {@code WorkgroupMemoryExplicitLayout16BitAccessKHR} capability.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 workgroupMemoryExplicitLayout;
- *     VkBool32 workgroupMemoryExplicitLayoutScalarBlockLayout;
- *     VkBool32 workgroupMemoryExplicitLayout8BitAccess;
- *     VkBool32 workgroupMemoryExplicitLayout16BitAccess;
+ *     VkBool32 {@link #workgroupMemoryExplicitLayout};
+ *     VkBool32 {@link #workgroupMemoryExplicitLayoutScalarBlockLayout};
+ *     VkBool32 {@link #workgroupMemoryExplicitLayout8BitAccess};
+ *     VkBool32 {@link #workgroupMemoryExplicitLayout16BitAccess};
  * }</code></pre>
  */
 public class VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR extends Struct implements NativeResource {
@@ -100,22 +91,22 @@ public class VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR extends St
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code workgroupMemoryExplicitLayout} field. */
+    /** indicates whether the implementation supports the SPIR-V {@code WorkgroupMemoryExplicitLayoutKHR} capability. */
     @NativeType("VkBool32")
     public boolean workgroupMemoryExplicitLayout() { return nworkgroupMemoryExplicitLayout(address()) != 0; }
-    /** Returns the value of the {@code workgroupMemoryExplicitLayoutScalarBlockLayout} field. */
+    /** indicates whether the implementation supports scalar alignment for laying out Workgroup Blocks. */
     @NativeType("VkBool32")
     public boolean workgroupMemoryExplicitLayoutScalarBlockLayout() { return nworkgroupMemoryExplicitLayoutScalarBlockLayout(address()) != 0; }
-    /** Returns the value of the {@code workgroupMemoryExplicitLayout8BitAccess} field. */
+    /** indicates whether objects in the {@code Workgroup} storage class with the {@code Block} decoration <b>can</b> have 8-bit integer members. If this feature is not enabled, 8-bit integer members <b>must</b> not be used in such objects. This also indicates whether shader modules <b>can</b> declare the {@code WorkgroupMemoryExplicitLayout8BitAccessKHR} capability. */
     @NativeType("VkBool32")
     public boolean workgroupMemoryExplicitLayout8BitAccess() { return nworkgroupMemoryExplicitLayout8BitAccess(address()) != 0; }
-    /** Returns the value of the {@code workgroupMemoryExplicitLayout16BitAccess} field. */
+    /** indicates whether objects in the {@code Workgroup} storage class with the {@code Block} decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also indicates whether shader modules <b>can</b> declare the {@code WorkgroupMemoryExplicitLayout16BitAccessKHR} capability. */
     @NativeType("VkBool32")
     public boolean workgroupMemoryExplicitLayout16BitAccess() { return nworkgroupMemoryExplicitLayout16BitAccess(address()) != 0; }
 
@@ -123,13 +114,13 @@ public class VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR extends St
     public VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code workgroupMemoryExplicitLayout} field. */
+    /** Sets the specified value to the {@link #workgroupMemoryExplicitLayout} field. */
     public VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR workgroupMemoryExplicitLayout(@NativeType("VkBool32") boolean value) { nworkgroupMemoryExplicitLayout(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code workgroupMemoryExplicitLayoutScalarBlockLayout} field. */
+    /** Sets the specified value to the {@link #workgroupMemoryExplicitLayoutScalarBlockLayout} field. */
     public VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR workgroupMemoryExplicitLayoutScalarBlockLayout(@NativeType("VkBool32") boolean value) { nworkgroupMemoryExplicitLayoutScalarBlockLayout(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code workgroupMemoryExplicitLayout8BitAccess} field. */
+    /** Sets the specified value to the {@link #workgroupMemoryExplicitLayout8BitAccess} field. */
     public VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR workgroupMemoryExplicitLayout8BitAccess(@NativeType("VkBool32") boolean value) { nworkgroupMemoryExplicitLayout8BitAccess(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code workgroupMemoryExplicitLayout16BitAccess} field. */
+    /** Sets the specified value to the {@link #workgroupMemoryExplicitLayout16BitAccess} field. */
     public VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR workgroupMemoryExplicitLayout16BitAccess(@NativeType("VkBool32") boolean value) { nworkgroupMemoryExplicitLayout16BitAccess(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -370,22 +361,22 @@ public class VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR extends St
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.npNext(address()); }
-        /** Returns the value of the {@code workgroupMemoryExplicitLayout} field. */
+        /** @return the value of the {@link VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR#workgroupMemoryExplicitLayout} field. */
         @NativeType("VkBool32")
         public boolean workgroupMemoryExplicitLayout() { return VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.nworkgroupMemoryExplicitLayout(address()) != 0; }
-        /** Returns the value of the {@code workgroupMemoryExplicitLayoutScalarBlockLayout} field. */
+        /** @return the value of the {@link VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR#workgroupMemoryExplicitLayoutScalarBlockLayout} field. */
         @NativeType("VkBool32")
         public boolean workgroupMemoryExplicitLayoutScalarBlockLayout() { return VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.nworkgroupMemoryExplicitLayoutScalarBlockLayout(address()) != 0; }
-        /** Returns the value of the {@code workgroupMemoryExplicitLayout8BitAccess} field. */
+        /** @return the value of the {@link VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR#workgroupMemoryExplicitLayout8BitAccess} field. */
         @NativeType("VkBool32")
         public boolean workgroupMemoryExplicitLayout8BitAccess() { return VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.nworkgroupMemoryExplicitLayout8BitAccess(address()) != 0; }
-        /** Returns the value of the {@code workgroupMemoryExplicitLayout16BitAccess} field. */
+        /** @return the value of the {@link VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR#workgroupMemoryExplicitLayout16BitAccess} field. */
         @NativeType("VkBool32")
         public boolean workgroupMemoryExplicitLayout16BitAccess() { return VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.nworkgroupMemoryExplicitLayout16BitAccess(address()) != 0; }
 
@@ -393,13 +384,13 @@ public class VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR extends St
         public VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code workgroupMemoryExplicitLayout} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR#workgroupMemoryExplicitLayout} field. */
         public VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.Buffer workgroupMemoryExplicitLayout(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.nworkgroupMemoryExplicitLayout(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code workgroupMemoryExplicitLayoutScalarBlockLayout} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR#workgroupMemoryExplicitLayoutScalarBlockLayout} field. */
         public VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.Buffer workgroupMemoryExplicitLayoutScalarBlockLayout(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.nworkgroupMemoryExplicitLayoutScalarBlockLayout(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code workgroupMemoryExplicitLayout8BitAccess} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR#workgroupMemoryExplicitLayout8BitAccess} field. */
         public VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.Buffer workgroupMemoryExplicitLayout8BitAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.nworkgroupMemoryExplicitLayout8BitAccess(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code workgroupMemoryExplicitLayout16BitAccess} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR#workgroupMemoryExplicitLayout16BitAccess} field. */
         public VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.Buffer workgroupMemoryExplicitLayout16BitAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.nworkgroupMemoryExplicitLayout16BitAccess(address(), value ? 1 : 0); return this; }
 
     }

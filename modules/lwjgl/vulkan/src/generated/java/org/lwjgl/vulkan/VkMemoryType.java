@@ -16,19 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Structure specifying memory type.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code propertyFlags} &ndash; a bitmask of {@code VkMemoryPropertyFlagBits} of properties for this memory type.</li>
- * <li>{@code heapIndex} &ndash; describes which memory heap this memory type corresponds to, and <b>must</b> be less than {@code memoryHeapCount} from the {@link VkPhysicalDeviceMemoryProperties} structure.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkMemoryType {
- *     VkMemoryPropertyFlags propertyFlags;
- *     uint32_t heapIndex;
+ *     VkMemoryPropertyFlags {@link #propertyFlags};
+ *     uint32_t {@link #heapIndex};
  * }</code></pre>
  */
 public class VkMemoryType extends Struct {
@@ -70,10 +63,10 @@ public class VkMemoryType extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code propertyFlags} field. */
+    /** a bitmask of {@code VkMemoryPropertyFlagBits} of properties for this memory type. */
     @NativeType("VkMemoryPropertyFlags")
     public int propertyFlags() { return npropertyFlags(address()); }
-    /** Returns the value of the {@code heapIndex} field. */
+    /** describes which memory heap this memory type corresponds to, and <b>must</b> be less than {@code memoryHeapCount} from the {@link VkPhysicalDeviceMemoryProperties} structure. */
     @NativeType("uint32_t")
     public int heapIndex() { return nheapIndex(address()); }
 
@@ -151,10 +144,10 @@ public class VkMemoryType extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code propertyFlags} field. */
+        /** @return the value of the {@link VkMemoryType#propertyFlags} field. */
         @NativeType("VkMemoryPropertyFlags")
         public int propertyFlags() { return VkMemoryType.npropertyFlags(address()); }
-        /** Returns the value of the {@code heapIndex} field. */
+        /** @return the value of the {@link VkMemoryType#heapIndex} field. */
         @NativeType("uint32_t")
         public int heapIndex() { return VkMemoryType.nheapIndex(address()); }
 

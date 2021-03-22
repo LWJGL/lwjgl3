@@ -59,7 +59,7 @@ public class CXIdxContainerInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link CXCursor} view of the {@code cursor} field. */
+    /** @return a {@link CXCursor} view of the {@code cursor} field. */
     public CXCursor cursor() { return ncursor(address()); }
 
     // -----------------------------------
@@ -246,7 +246,7 @@ public class CXIdxContainerInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link CXCursor} view of the {@code cursor} field. */
+        /** @return a {@link CXCursor} view of the {@code cursor} field. */
         public CXCursor cursor() { return CXIdxContainerInfo.ncursor(address()); }
 
     }

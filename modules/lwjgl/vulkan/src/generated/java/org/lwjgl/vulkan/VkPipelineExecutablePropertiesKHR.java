@@ -35,27 +35,16 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <p>{@link KHRPipelineExecutableProperties#vkGetPipelineExecutablePropertiesKHR GetPipelineExecutablePropertiesKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code stages} &ndash; a bitmask of {@code VkShaderStageFlagBits} indicating which shader stages (if any) were principally used as inputs to compile this pipeline executable.</li>
- * <li>{@code name[VK_MAX_DESCRIPTION_SIZE]} &ndash; an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this executable.</li>
- * <li>{@code description[VK_MAX_DESCRIPTION_SIZE]} &ndash; an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a human readable description for this executable.</li>
- * <li>{@code subgroupSize} &ndash; the subgroup size with which this executable is dispatched.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineExecutablePropertiesKHR {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkShaderStageFlags stages;
- *     char name[VK_MAX_DESCRIPTION_SIZE];
- *     char description[VK_MAX_DESCRIPTION_SIZE];
- *     uint32_t subgroupSize;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkShaderStageFlags {@link #stages};
+ *     char {@link #name}[VK_MAX_DESCRIPTION_SIZE];
+ *     char {@link #description}[VK_MAX_DESCRIPTION_SIZE];
+ *     uint32_t {@link #subgroupSize};
  * }</code></pre>
  */
 public class VkPipelineExecutablePropertiesKHR extends Struct implements NativeResource {
@@ -109,34 +98,34 @@ public class VkPipelineExecutablePropertiesKHR extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code stages} field. */
+    /** a bitmask of {@code VkShaderStageFlagBits} indicating which shader stages (if any) were principally used as inputs to compile this pipeline executable. */
     @NativeType("VkShaderStageFlags")
     public int stages() { return nstages(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this executable. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer name() { return nname(address()); }
-    /** Decodes the null-terminated string stored in the {@code name} field. */
+    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this executable. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String nameString() { return nnameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code description} field. */
+    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a human readable description for this executable. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer description() { return ndescription(address()); }
-    /** Decodes the null-terminated string stored in the {@code description} field. */
+    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a human readable description for this executable. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
-    /** Returns the value of the {@code subgroupSize} field. */
+    /** the subgroup size with which this executable is dispatched. */
     @NativeType("uint32_t")
     public int subgroupSize() { return nsubgroupSize(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineExecutablePropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineExecutablePropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -365,34 +354,34 @@ public class VkPipelineExecutablePropertiesKHR extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineExecutablePropertiesKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineExecutablePropertiesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineExecutablePropertiesKHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPipelineExecutablePropertiesKHR.npNext(address()); }
-        /** Returns the value of the {@code stages} field. */
+        /** @return the value of the {@link VkPipelineExecutablePropertiesKHR#stages} field. */
         @NativeType("VkShaderStageFlags")
         public int stages() { return VkPipelineExecutablePropertiesKHR.nstages(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+        /** @return a {@link ByteBuffer} view of the {@link VkPipelineExecutablePropertiesKHR#name} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer name() { return VkPipelineExecutablePropertiesKHR.nname(address()); }
-        /** Decodes the null-terminated string stored in the {@code name} field. */
+        /** @return the null-terminated string stored in the {@link VkPipelineExecutablePropertiesKHR#name} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String nameString() { return VkPipelineExecutablePropertiesKHR.nnameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code description} field. */
+        /** @return a {@link ByteBuffer} view of the {@link VkPipelineExecutablePropertiesKHR#description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer description() { return VkPipelineExecutablePropertiesKHR.ndescription(address()); }
-        /** Decodes the null-terminated string stored in the {@code description} field. */
+        /** @return the null-terminated string stored in the {@link VkPipelineExecutablePropertiesKHR#description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String descriptionString() { return VkPipelineExecutablePropertiesKHR.ndescriptionString(address()); }
-        /** Returns the value of the {@code subgroupSize} field. */
+        /** @return the value of the {@link VkPipelineExecutablePropertiesKHR#subgroupSize} field. */
         @NativeType("uint32_t")
         public int subgroupSize() { return VkPipelineExecutablePropertiesKHR.nsubgroupSize(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineExecutablePropertiesKHR#sType} field. */
         public VkPipelineExecutablePropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineExecutablePropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineExecutablePropertiesKHR#pNext} field. */
         public VkPipelineExecutablePropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPipelineExecutablePropertiesKHR.npNext(address(), value); return this; }
 
     }

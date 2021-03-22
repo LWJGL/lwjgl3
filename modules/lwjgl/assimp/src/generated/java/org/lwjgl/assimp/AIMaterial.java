@@ -23,21 +23,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * functions of {@code aiMaterial} to process material properties, C users have to stick with the {@code aiMaterialGetXXX} family of unbound functions.
  * The library defines a set of standard keys (AI_MATKEY_XXX).</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code mProperties} &ndash; List of all material properties loaded.</li>
- * <li>{@code mNumProperties} &ndash; Number of properties in the data base</li>
- * <li>{@code mNumAllocated} &ndash; Storage allocated</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiMaterial {
- *     {@link AIMaterialProperty struct aiMaterialProperty} ** mProperties;
- *     unsigned int mNumProperties;
- *     unsigned int mNumAllocated;
+ *     {@link AIMaterialProperty struct aiMaterialProperty} ** {@link #mProperties};
+ *     unsigned int {@link #mNumProperties};
+ *     unsigned int {@link #mNumAllocated};
  * }</code></pre>
  */
 @NativeType("struct aiMaterial")
@@ -83,19 +75,19 @@ public class AIMaterial extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mProperties} field. */
+    /** List of all material properties loaded. */
     @NativeType("struct aiMaterialProperty **")
     public PointerBuffer mProperties() { return nmProperties(address()); }
-    /** Returns the value of the {@code mNumProperties} field. */
+    /** Number of properties in the data base */
     @NativeType("unsigned int")
     public int mNumProperties() { return nmNumProperties(address()); }
-    /** Returns the value of the {@code mNumAllocated} field. */
+    /** Storage allocated */
     @NativeType("unsigned int")
     public int mNumAllocated() { return nmNumAllocated(address()); }
 
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code mProperties} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #mProperties} field. */
     public AIMaterial mProperties(@NativeType("struct aiMaterialProperty **") PointerBuffer value) { nmProperties(address(), value); return this; }
-    /** Sets the specified value to the {@code mNumAllocated} field. */
+    /** Sets the specified value to the {@link #mNumAllocated} field. */
     public AIMaterial mNumAllocated(@NativeType("unsigned int") int value) { nmNumAllocated(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -337,19 +329,19 @@ public class AIMaterial extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mProperties} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIMaterial#mProperties} field. */
         @NativeType("struct aiMaterialProperty **")
         public PointerBuffer mProperties() { return AIMaterial.nmProperties(address()); }
-        /** Returns the value of the {@code mNumProperties} field. */
+        /** @return the value of the {@link AIMaterial#mNumProperties} field. */
         @NativeType("unsigned int")
         public int mNumProperties() { return AIMaterial.nmNumProperties(address()); }
-        /** Returns the value of the {@code mNumAllocated} field. */
+        /** @return the value of the {@link AIMaterial#mNumAllocated} field. */
         @NativeType("unsigned int")
         public int mNumAllocated() { return AIMaterial.nmNumAllocated(address()); }
 
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code mProperties} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link AIMaterial#mProperties} field. */
         public AIMaterial.Buffer mProperties(@NativeType("struct aiMaterialProperty **") PointerBuffer value) { AIMaterial.nmProperties(address(), value); return this; }
-        /** Sets the specified value to the {@code mNumAllocated} field. */
+        /** Sets the specified value to the {@link AIMaterial#mNumAllocated} field. */
         public AIMaterial.Buffer mNumAllocated(@NativeType("unsigned int") int value) { AIMaterial.nmNumAllocated(address(), value); return this; }
 
     }

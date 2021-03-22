@@ -19,25 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Contains summary information about the current skeletal pose.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code flFingerCurl[5]} &ndash; 
- * The amount that each finger is 'curled' inwards towards the palm.
- * 
- * <p>In the case of the thumb, this represents how much the thumb is wrapped around the fist. 0 means straight, 1 means fully curled.</p></li>
- * <li>{@code flFingerSplay[4]} &ndash; 
- * The amount that each pair of adjacent fingers are separated.
- * 
- * <p>0 means the digits are touching, 1 means they are fully separated.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VRSkeletalSummaryData_t {
- *     float flFingerCurl[5];
- *     float flFingerSplay[4];
+ *     float {@link #flFingerCurl}[5];
+ *     float {@link #flFingerSplay}[4];
  * }</code></pre>
  */
 @NativeType("struct VRSkeletalSummaryData_t")
@@ -80,15 +67,31 @@ public class VRSkeletalSummaryData extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link FloatBuffer} view of the {@code flFingerCurl} field. */
+    /**
+     * The amount that each finger is 'curled' inwards towards the palm.
+     * 
+     * <p>In the case of the thumb, this represents how much the thumb is wrapped around the fist. 0 means straight, 1 means fully curled.</p>
+     */
     @NativeType("float[5]")
     public FloatBuffer flFingerCurl() { return nflFingerCurl(address()); }
-    /** Returns the value at the specified index of the {@code flFingerCurl} field. */
+    /**
+     * The amount that each finger is 'curled' inwards towards the palm.
+     * 
+     * <p>In the case of the thumb, this represents how much the thumb is wrapped around the fist. 0 means straight, 1 means fully curled.</p>
+     */
     public float flFingerCurl(int index) { return nflFingerCurl(address(), index); }
-    /** Returns a {@link FloatBuffer} view of the {@code flFingerSplay} field. */
+    /**
+     * The amount that each pair of adjacent fingers are separated.
+     * 
+     * <p>0 means the digits are touching, 1 means they are fully separated.</p>
+     */
     @NativeType("float[4]")
     public FloatBuffer flFingerSplay() { return nflFingerSplay(address()); }
-    /** Returns the value at the specified index of the {@code flFingerSplay} field. */
+    /**
+     * The amount that each pair of adjacent fingers are separated.
+     * 
+     * <p>0 means the digits are touching, 1 means they are fully separated.</p>
+     */
     public float flFingerSplay(int index) { return nflFingerSplay(address(), index); }
 
     // -----------------------------------
@@ -285,15 +288,15 @@ public class VRSkeletalSummaryData extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link FloatBuffer} view of the {@code flFingerCurl} field. */
+        /** @return a {@link FloatBuffer} view of the {@link VRSkeletalSummaryData#flFingerCurl} field. */
         @NativeType("float[5]")
         public FloatBuffer flFingerCurl() { return VRSkeletalSummaryData.nflFingerCurl(address()); }
-        /** Returns the value at the specified index of the {@code flFingerCurl} field. */
+        /** @return the value at the specified index of the {@link VRSkeletalSummaryData#flFingerCurl} field. */
         public float flFingerCurl(int index) { return VRSkeletalSummaryData.nflFingerCurl(address(), index); }
-        /** Returns a {@link FloatBuffer} view of the {@code flFingerSplay} field. */
+        /** @return a {@link FloatBuffer} view of the {@link VRSkeletalSummaryData#flFingerSplay} field. */
         @NativeType("float[4]")
         public FloatBuffer flFingerSplay() { return VRSkeletalSummaryData.nflFingerSplay(address()); }
-        /** Returns the value at the specified index of the {@code flFingerSplay} field. */
+        /** @return the value at the specified index of the {@link VRSkeletalSummaryData#flFingerSplay} field. */
         public float flFingerSplay(int index) { return VRSkeletalSummaryData.nflFingerSplay(address(), index); }
 
     }

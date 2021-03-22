@@ -68,15 +68,15 @@ public class STBVorbisComment extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code vendor} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code vendor} field. */
     @NativeType("char *")
     public ByteBuffer vendor() { return nvendor(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code vendor} field. */
+    /** @return the null-terminated string pointed to by the {@code vendor} field. */
     @NativeType("char *")
     public String vendorString() { return nvendorString(address()); }
-    /** Returns the value of the {@code comment_list_length} field. */
+    /** @return the value of the {@code comment_list_length} field. */
     public int comment_list_length() { return ncomment_list_length(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code comment_list} field. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code comment_list} field. */
     @NativeType("char **")
     public PointerBuffer comment_list() { return ncomment_list(address()); }
 
@@ -270,15 +270,15 @@ public class STBVorbisComment extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code vendor} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code vendor} field. */
         @NativeType("char *")
         public ByteBuffer vendor() { return STBVorbisComment.nvendor(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code vendor} field. */
+        /** @return the null-terminated string pointed to by the {@code vendor} field. */
         @NativeType("char *")
         public String vendorString() { return STBVorbisComment.nvendorString(address()); }
-        /** Returns the value of the {@code comment_list_length} field. */
+        /** @return the value of the {@code comment_list_length} field. */
         public int comment_list_length() { return STBVorbisComment.ncomment_list_length(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code comment_list} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code comment_list} field. */
         @NativeType("char **")
         public PointerBuffer comment_list() { return STBVorbisComment.ncomment_list(address()); }
 

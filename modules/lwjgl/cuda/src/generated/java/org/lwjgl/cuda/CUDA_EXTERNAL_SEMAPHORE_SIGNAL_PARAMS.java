@@ -19,17 +19,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * External semaphore signal parameters.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code params} &ndash; Parameters for fence objects
- * 
- * <ul>
- * <li>{@code params.fence} &ndash; Value of fence to be signaled</li>
- * </ul></li>
- * <li>{@code flags} &ndash; Flags reserved for the future. Must be zero.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -40,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         } fence;
  *         unsigned int reserved[16];
  *     } params;
- *     unsigned int flags;
+ *     unsigned int {@link #flags};
  *     unsigned int reserved[16];
  * }</code></pre>
  */
@@ -97,32 +86,32 @@ public class CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS extends Struct implements Nat
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code params.fence.value} field. */
+    /** @return the value of the {@code params.fence.value} field. */
     @NativeType("unsigned long long")
     public long params_fence_value() { return nparams_fence_value(address()); }
-    /** Returns a {@link IntBuffer} view of the {@code params.reserved} field. */
+    /** @return a {@link IntBuffer} view of the {@code params.reserved} field. */
     @NativeType("unsigned int[16]")
     public IntBuffer params_reserved() { return nparams_reserved(address()); }
-    /** Returns the value at the specified index of the {@code params.reserved} field. */
+    /** @return the value at the specified index of the {@code params.reserved} field. */
     @NativeType("unsigned int")
     public int params_reserved(int index) { return nparams_reserved(address(), index); }
-    /** Returns the value of the {@code flags} field. */
+    /** Flags reserved for the future. Must be zero. */
     @NativeType("unsigned int")
     public int flags() { return nflags(address()); }
-    /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
+    /** @return a {@link IntBuffer} view of the {@code reserved} field. */
     @NativeType("unsigned int[16]")
     public IntBuffer reserved() { return nreserved(address()); }
-    /** Returns the value at the specified index of the {@code reserved} field. */
+    /** @return the value at the specified index of the {@code reserved} field. */
     @NativeType("unsigned int")
     public int reserved(int index) { return nreserved(address(), index); }
 
-    /** Sets the specified value to the {@code params.fence.value} field. */
+    /** Sets the specified value to the {@code value} field. */
     public CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS params_fence_value(@NativeType("unsigned long long") long value) { nparams_fence_value(address(), value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@code params.reserved} field. */
+    /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
     public CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS params_reserved(@NativeType("unsigned int[16]") IntBuffer value) { nparams_reserved(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code params.reserved} field. */
+    /** Sets the specified value at the specified index of the {@code reserved} field. */
     public CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS params_reserved(int index, @NativeType("unsigned int") int value) { nparams_reserved(address(), index, value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS flags(@NativeType("unsigned int") int value) { nflags(address(), value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
     public CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS reserved(@NativeType("unsigned int[16]") IntBuffer value) { nreserved(address(), value); return this; }
@@ -377,32 +366,32 @@ public class CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS extends Struct implements Nat
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code params.fence.value} field. */
+        /** @return the value of the {@code params.fence.value} field. */
         @NativeType("unsigned long long")
         public long params_fence_value() { return CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.nparams_fence_value(address()); }
-        /** Returns a {@link IntBuffer} view of the {@code params.reserved} field. */
+        /** @return a {@link IntBuffer} view of the {@code params.reserved} field. */
         @NativeType("unsigned int[16]")
         public IntBuffer params_reserved() { return CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.nparams_reserved(address()); }
-        /** Returns the value at the specified index of the {@code params.reserved} field. */
+        /** @return the value at the specified index of the {@code params.reserved} field. */
         @NativeType("unsigned int")
         public int params_reserved(int index) { return CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.nparams_reserved(address(), index); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS#flags} field. */
         @NativeType("unsigned int")
         public int flags() { return CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.nflags(address()); }
-        /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
+        /** @return a {@link IntBuffer} view of the {@code reserved} field. */
         @NativeType("unsigned int[16]")
         public IntBuffer reserved() { return CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.nreserved(address()); }
-        /** Returns the value at the specified index of the {@code reserved} field. */
+        /** @return the value at the specified index of the {@code reserved} field. */
         @NativeType("unsigned int")
         public int reserved(int index) { return CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.nreserved(address(), index); }
 
-        /** Sets the specified value to the {@code params.fence.value} field. */
+        /** Sets the specified value to the {@code value} field. */
         public CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.Buffer params_fence_value(@NativeType("unsigned long long") long value) { CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.nparams_fence_value(address(), value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@code params.reserved} field. */
+        /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
         public CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.Buffer params_reserved(@NativeType("unsigned int[16]") IntBuffer value) { CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.nparams_reserved(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code params.reserved} field. */
+        /** Sets the specified value at the specified index of the {@code reserved} field. */
         public CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.Buffer params_reserved(int index, @NativeType("unsigned int") int value) { CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.nparams_reserved(address(), index, value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS#flags} field. */
         public CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.Buffer flags(@NativeType("unsigned int") int value) { CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.nflags(address(), value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
         public CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.Buffer reserved(@NativeType("unsigned int[16]") IntBuffer value) { CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS.nreserved(address(), value); return this; }

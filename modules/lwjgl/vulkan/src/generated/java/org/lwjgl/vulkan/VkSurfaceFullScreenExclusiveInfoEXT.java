@@ -29,21 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code fullScreenExclusive} <b>must</b> be a valid {@code VkFullScreenExclusiveEXT} value</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code fullScreenExclusive} &ndash; a {@code VkFullScreenExclusiveEXT} value specifying the preferred full-screen transition behavior.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSurfaceFullScreenExclusiveInfoEXT {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkFullScreenExclusiveEXT fullScreenExclusive;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkFullScreenExclusiveEXT {@link #fullScreenExclusive};
  * }</code></pre>
  */
 public class VkSurfaceFullScreenExclusiveInfoEXT extends Struct implements NativeResource {
@@ -88,21 +80,21 @@ public class VkSurfaceFullScreenExclusiveInfoEXT extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code fullScreenExclusive} field. */
+    /** a {@code VkFullScreenExclusiveEXT} value specifying the preferred full-screen transition behavior. */
     @NativeType("VkFullScreenExclusiveEXT")
     public int fullScreenExclusive() { return nfullScreenExclusive(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSurfaceFullScreenExclusiveInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSurfaceFullScreenExclusiveInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code fullScreenExclusive} field. */
+    /** Sets the specified value to the {@link #fullScreenExclusive} field. */
     public VkSurfaceFullScreenExclusiveInfoEXT fullScreenExclusive(@NativeType("VkFullScreenExclusiveEXT") int value) { nfullScreenExclusive(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,21 +317,21 @@ public class VkSurfaceFullScreenExclusiveInfoEXT extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSurfaceFullScreenExclusiveInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSurfaceFullScreenExclusiveInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSurfaceFullScreenExclusiveInfoEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkSurfaceFullScreenExclusiveInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code fullScreenExclusive} field. */
+        /** @return the value of the {@link VkSurfaceFullScreenExclusiveInfoEXT#fullScreenExclusive} field. */
         @NativeType("VkFullScreenExclusiveEXT")
         public int fullScreenExclusive() { return VkSurfaceFullScreenExclusiveInfoEXT.nfullScreenExclusive(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSurfaceFullScreenExclusiveInfoEXT#sType} field. */
         public VkSurfaceFullScreenExclusiveInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfaceFullScreenExclusiveInfoEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSurfaceFullScreenExclusiveInfoEXT#pNext} field. */
         public VkSurfaceFullScreenExclusiveInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkSurfaceFullScreenExclusiveInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code fullScreenExclusive} field. */
+        /** Sets the specified value to the {@link VkSurfaceFullScreenExclusiveInfoEXT#fullScreenExclusive} field. */
         public VkSurfaceFullScreenExclusiveInfoEXT.Buffer fullScreenExclusive(@NativeType("VkFullScreenExclusiveEXT") int value) { VkSurfaceFullScreenExclusiveInfoEXT.nfullScreenExclusive(address(), value); return this; }
 
     }

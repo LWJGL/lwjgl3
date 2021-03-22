@@ -30,35 +30,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code maxGeometryCount} &ndash; the maximum number of geometries in the bottom level acceleration structure.</li>
- * <li>{@code maxInstanceCount} &ndash; the maximum number of instances in the top level acceleration structure.</li>
- * <li>{@code maxPrimitiveCount} &ndash; the maximum number of triangles or AABBs in all geometries in the bottom level acceleration structure.</li>
- * <li>{@code maxPerStageDescriptorAccelerationStructures} &ndash; the maximum number of acceleration structure bindings that <b>can</b> be accessible to a single shader stage in a pipeline layout. Descriptor bindings with a descriptor type of {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR} count against this limit. Only descriptor bindings in descriptor set layouts created without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set count against this limit.</li>
- * <li>{@code maxPerStageDescriptorUpdateAfterBindAccelerationStructures} &ndash; similar to {@code maxPerStageDescriptorAccelerationStructures} but counts descriptor bindings from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code maxDescriptorSetAccelerationStructures} &ndash; the maximum number of acceleration structure descriptors that <b>can</b> be included in descriptor bindings in a pipeline layout across all pipeline shader stages and descriptor set numbers. Descriptor bindings with a descriptor type of {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR} count against this limit. Only descriptor bindings in descriptor set layouts created without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set count against this limit.</li>
- * <li>{@code maxDescriptorSetUpdateAfterBindAccelerationStructures} &ndash; similar to {@code maxDescriptorSetAccelerationStructures} but counts descriptor bindings from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set.</li>
- * <li>{@code minAccelerationStructureScratchOffsetAlignment} &ndash; the minimum required: alignment, in bytes, for scratch data passed in to an acceleration structure build command.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceAccelerationStructurePropertiesKHR {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint64_t maxGeometryCount;
- *     uint64_t maxInstanceCount;
- *     uint64_t maxPrimitiveCount;
- *     uint32_t maxPerStageDescriptorAccelerationStructures;
- *     uint32_t maxPerStageDescriptorUpdateAfterBindAccelerationStructures;
- *     uint32_t maxDescriptorSetAccelerationStructures;
- *     uint32_t maxDescriptorSetUpdateAfterBindAccelerationStructures;
- *     uint32_t minAccelerationStructureScratchOffsetAlignment;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint64_t {@link #maxGeometryCount};
+ *     uint64_t {@link #maxInstanceCount};
+ *     uint64_t {@link #maxPrimitiveCount};
+ *     uint32_t {@link #maxPerStageDescriptorAccelerationStructures};
+ *     uint32_t {@link #maxPerStageDescriptorUpdateAfterBindAccelerationStructures};
+ *     uint32_t {@link #maxDescriptorSetAccelerationStructures};
+ *     uint32_t {@link #maxDescriptorSetUpdateAfterBindAccelerationStructures};
+ *     uint32_t {@link #minAccelerationStructureScratchOffsetAlignment};
  * }</code></pre>
  */
 public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct implements NativeResource {
@@ -124,40 +109,40 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code maxGeometryCount} field. */
+    /** the maximum number of geometries in the bottom level acceleration structure. */
     @NativeType("uint64_t")
     public long maxGeometryCount() { return nmaxGeometryCount(address()); }
-    /** Returns the value of the {@code maxInstanceCount} field. */
+    /** the maximum number of instances in the top level acceleration structure. */
     @NativeType("uint64_t")
     public long maxInstanceCount() { return nmaxInstanceCount(address()); }
-    /** Returns the value of the {@code maxPrimitiveCount} field. */
+    /** the maximum number of triangles or AABBs in all geometries in the bottom level acceleration structure. */
     @NativeType("uint64_t")
     public long maxPrimitiveCount() { return nmaxPrimitiveCount(address()); }
-    /** Returns the value of the {@code maxPerStageDescriptorAccelerationStructures} field. */
+    /** the maximum number of acceleration structure bindings that <b>can</b> be accessible to a single shader stage in a pipeline layout. Descriptor bindings with a descriptor type of {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR} count against this limit. Only descriptor bindings in descriptor set layouts created without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set count against this limit. */
     @NativeType("uint32_t")
     public int maxPerStageDescriptorAccelerationStructures() { return nmaxPerStageDescriptorAccelerationStructures(address()); }
-    /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindAccelerationStructures} field. */
+    /** similar to {@code maxPerStageDescriptorAccelerationStructures} but counts descriptor bindings from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxPerStageDescriptorUpdateAfterBindAccelerationStructures() { return nmaxPerStageDescriptorUpdateAfterBindAccelerationStructures(address()); }
-    /** Returns the value of the {@code maxDescriptorSetAccelerationStructures} field. */
+    /** the maximum number of acceleration structure descriptors that <b>can</b> be included in descriptor bindings in a pipeline layout across all pipeline shader stages and descriptor set numbers. Descriptor bindings with a descriptor type of {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR} count against this limit. Only descriptor bindings in descriptor set layouts created without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set count against this limit. */
     @NativeType("uint32_t")
     public int maxDescriptorSetAccelerationStructures() { return nmaxDescriptorSetAccelerationStructures(address()); }
-    /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindAccelerationStructures} field. */
+    /** similar to {@code maxDescriptorSetAccelerationStructures} but counts descriptor bindings from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxDescriptorSetUpdateAfterBindAccelerationStructures() { return nmaxDescriptorSetUpdateAfterBindAccelerationStructures(address()); }
-    /** Returns the value of the {@code minAccelerationStructureScratchOffsetAlignment} field. */
+    /** the minimum required: alignment, in bytes, for scratch data passed in to an acceleration structure build command. */
     @NativeType("uint32_t")
     public int minAccelerationStructureScratchOffsetAlignment() { return nminAccelerationStructureScratchOffsetAlignment(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceAccelerationStructurePropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceAccelerationStructurePropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -390,40 +375,40 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceAccelerationStructurePropertiesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceAccelerationStructurePropertiesKHR.npNext(address()); }
-        /** Returns the value of the {@code maxGeometryCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#maxGeometryCount} field. */
         @NativeType("uint64_t")
         public long maxGeometryCount() { return VkPhysicalDeviceAccelerationStructurePropertiesKHR.nmaxGeometryCount(address()); }
-        /** Returns the value of the {@code maxInstanceCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#maxInstanceCount} field. */
         @NativeType("uint64_t")
         public long maxInstanceCount() { return VkPhysicalDeviceAccelerationStructurePropertiesKHR.nmaxInstanceCount(address()); }
-        /** Returns the value of the {@code maxPrimitiveCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#maxPrimitiveCount} field. */
         @NativeType("uint64_t")
         public long maxPrimitiveCount() { return VkPhysicalDeviceAccelerationStructurePropertiesKHR.nmaxPrimitiveCount(address()); }
-        /** Returns the value of the {@code maxPerStageDescriptorAccelerationStructures} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#maxPerStageDescriptorAccelerationStructures} field. */
         @NativeType("uint32_t")
         public int maxPerStageDescriptorAccelerationStructures() { return VkPhysicalDeviceAccelerationStructurePropertiesKHR.nmaxPerStageDescriptorAccelerationStructures(address()); }
-        /** Returns the value of the {@code maxPerStageDescriptorUpdateAfterBindAccelerationStructures} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#maxPerStageDescriptorUpdateAfterBindAccelerationStructures} field. */
         @NativeType("uint32_t")
         public int maxPerStageDescriptorUpdateAfterBindAccelerationStructures() { return VkPhysicalDeviceAccelerationStructurePropertiesKHR.nmaxPerStageDescriptorUpdateAfterBindAccelerationStructures(address()); }
-        /** Returns the value of the {@code maxDescriptorSetAccelerationStructures} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#maxDescriptorSetAccelerationStructures} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetAccelerationStructures() { return VkPhysicalDeviceAccelerationStructurePropertiesKHR.nmaxDescriptorSetAccelerationStructures(address()); }
-        /** Returns the value of the {@code maxDescriptorSetUpdateAfterBindAccelerationStructures} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#maxDescriptorSetUpdateAfterBindAccelerationStructures} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetUpdateAfterBindAccelerationStructures() { return VkPhysicalDeviceAccelerationStructurePropertiesKHR.nmaxDescriptorSetUpdateAfterBindAccelerationStructures(address()); }
-        /** Returns the value of the {@code minAccelerationStructureScratchOffsetAlignment} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#minAccelerationStructureScratchOffsetAlignment} field. */
         @NativeType("uint32_t")
         public int minAccelerationStructureScratchOffsetAlignment() { return VkPhysicalDeviceAccelerationStructurePropertiesKHR.nminAccelerationStructureScratchOffsetAlignment(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#sType} field. */
         public VkPhysicalDeviceAccelerationStructurePropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceAccelerationStructurePropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#pNext} field. */
         public VkPhysicalDeviceAccelerationStructurePropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceAccelerationStructurePropertiesKHR.npNext(address(), value); return this; }
 
     }

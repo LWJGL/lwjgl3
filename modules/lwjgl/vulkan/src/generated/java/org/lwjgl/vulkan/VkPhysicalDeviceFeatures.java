@@ -22,315 +22,65 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@code VkBool32}, {@link VkDeviceCreateInfo}, {@link VkPhysicalDeviceFeatures2}, {@link VK10#vkGetPhysicalDeviceFeatures GetPhysicalDeviceFeatures}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code robustBufferAccess} &ndash; specifies that accesses to buffers are bounds-checked against the range of the buffer descriptor (as determined by {@link VkDescriptorBufferInfo}{@code ::range}, {@link VkBufferViewCreateInfo}{@code ::range}, or the size of the buffer). Out of bounds accesses <b>must</b> not cause application termination, and the effects of shader loads, stores, and atomics <b>must</b> conform to an implementation-dependent behavior as described below.
- * 
- * <ul>
- * <li>A buffer access is considered to be out of bounds if any of the following are true:
- * 
- * <ul>
- * <li>The pointer was formed by {@code OpImageTexelPointer} and the coordinate is less than zero or greater than or equal to the number of whole elements in the bound range.</li>
- * <li>The pointer was not formed by {@code OpImageTexelPointer} and the object pointed to is not wholly contained within the bound range. This includes accesses performed via <em>variable pointers</em> where the buffer descriptor being accessed cannot be statically determined. Uninitialized pointers and pointers equal to {@code OpConstantNull} are treated as pointing to a zero-sized object, so all accesses through such pointers are considered to be out of bounds. Buffer accesses through buffer device addresses are not bounds-checked. If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-cooperativeMatrixRobustBufferAccess">{@code cooperativeMatrixRobustBufferAccess}</a> feature is not enabled, then accesses using {@code OpCooperativeMatrixLoadNV} and {@code OpCooperativeMatrixStoreNV} <b>may</b> not be bounds-checked.
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>If a SPIR-V {@code OpLoad} instruction loads a structure and the tail end of the structure is out of bounds, then all members of the structure are considered out of bounds even if the members at the end are not statically used.</p>
- * </div>
- * </li>
- * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is not enabled and any buffer access is determined to be out of bounds, then any other access of the same type (load, store, or atomic) to the same buffer that accesses an address less than 16 bytes away from the out of bounds address <b>may</b> also be considered out of bounds.</li>
- * <li>If the access is a load that reads from the same memory locations as a prior store in the same shader invocation, with no other intervening accesses to the same memory locations in that shader invocation, then the result of the load <b>may</b> be the value stored by the store instruction, even if the access is out of bounds. If the load is {@code Volatile}, then an out of bounds load <b>must</b> return the appropriate out of bounds value.</li>
- * </ul>
- * </li>
- * <li>Accesses to descriptors written with a {@link VK10#VK_NULL_HANDLE NULL_HANDLE} resource or view are not considered to be out of bounds. Instead, each type of descriptor access defines a specific behavior for accesses to a null descriptor.</li>
- * <li>Out-of-bounds buffer loads will return any of the following values:
- * 
- * <ul>
- * <li>If the access is to a uniform buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, loads of offsets between the end of the descriptor range and the end of the descriptor range rounded up to a multiple of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-robustUniformBufferAccessSizeAlignment">robustUniformBufferAccessSizeAlignment</a> bytes <b>must</b> return either zero values or the contents of the memory at the offset being loaded. Loads of offsets past the descriptor range rounded up to a multiple of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-robustUniformBufferAccessSizeAlignment">robustUniformBufferAccessSizeAlignment</a> bytes <b>must</b> return zero values.</li>
- * <li>If the access is to a storage buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, loads of offsets between the end of the descriptor range and the end of the descriptor range rounded up to a multiple of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-robustStorageBufferAccessSizeAlignment">robustStorageBufferAccessSizeAlignment</a> bytes <b>must</b> return either zero values or the contents of the memory at the offset being loaded. Loads of offsets past the descriptor range rounded up to a multiple of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-robustStorageBufferAccessSizeAlignment">robustStorageBufferAccessSizeAlignment</a> bytes <b>must</b> return zero values. Similarly, stores to addresses between the end of the descriptor range and the end of the descriptor range rounded up to a multiple of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-robustStorageBufferAccessSizeAlignment">robustStorageBufferAccessSizeAlignment</a> bytes <b>may</b> be discarded.</li>
- * <li>Non-atomic accesses to storage buffers that are a multiple of 32 bits <b>may</b> be decomposed into 32-bit accesses that are individually bounds-checked.</li>
- * <li>If the access is to an index buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, zero values <b>must</b> be returned.</li>
- * <li>If the access is to a uniform texel buffer or storage texel buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, zero values <b>must</b> be returned, and then <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-conversion-to-rgba">Conversion to RGBA</a> is applied based on the buffer view&#8217;s format.</li>
- * <li>Values from anywhere within the memory range(s) bound to the buffer (possibly including bytes of memory past the end of the buffer, up to the end of the bound range).</li>
- * <li>Zero values, or <code>(0,0,0,x)</code> vectors for vector reads where x is a valid value represented in the type of the vector components and <b>may</b> be any of:
- * 
- * <ul>
- * <li>0, 1, or the maximum representable positive integer value, for signed or unsigned integer components</li>
- * <li>0.0 or 1.0, for floating-point components</li>
- * </ul>
- * </li>
- * </ul>
- * </li>
- * <li>Out-of-bounds writes <b>may</b> modify values within the memory range(s) bound to the buffer, but <b>must</b> not modify any other memory.
- * 
- * <ul>
- * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, out of bounds writes <b>must</b> not modify any memory.</li>
- * </ul>
- * </li>
- * <li>Out-of-bounds atomics <b>may</b> modify values within the memory range(s) bound to the buffer, but <b>must</b> not modify any other memory, and return an undefined value.
- * 
- * <ul>
- * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, out of bounds atomics <b>must</b> not modify any memory, and return an undefined value.</li>
- * </ul>
- * </li>
- * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is disabled, vertex input attributes are considered out of bounds if the offset of the attribute in the bound vertex buffer range plus the size of the attribute is greater than either:
- * 
- * <ul>
- * <li>{@code vertexBufferRangeSize}, if <code>bindingStride == 0</code>; or</li>
- * <li><code>(vertexBufferRangeSize - (vertexBufferRangeSize % bindingStride))</code></li>
- * </ul>
- * 
- * <p>where {@code vertexBufferRangeSize} is the byte size of the memory range bound to the vertex buffer binding and {@code bindingStride} is the byte stride of the corresponding vertex input binding. Further, if any vertex input attribute using a specific vertex input binding is out of bounds, then all vertex input attributes using that vertex input binding for that vertex shader invocation are considered out of bounds.</p>
- * 
- * <ul>
- * <li>If a vertex input attribute is out of bounds, it will be assigned one of the following values:
- * 
- * <ul>
- * <li>Values from anywhere within the memory range(s) bound to the buffer, converted according to the format of the attribute.</li>
- * <li>Zero values, format converted according to the format of the attribute.</li>
- * <li>Zero values, or <code>(0,0,0,x)</code> vectors, as described above.</li>
- * </ul>
- * </li>
- * </ul>
- * </li>
- * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, vertex input attributes are considered out of bounds if the offset of the attribute in the bound vertex buffer range plus the size of the attribute is greater than the byte size of the memory range bound to the vertex buffer binding.
- * 
- * <ul>
- * <li>If a vertex input attribute is out of bounds, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fxvertex-input-extraction">raw data</a> extracted are zero values, and missing G, B, or A components are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fxvertex-input-extraction">filled with <code>(0,0,1)</code></a>.</li>
- * </ul>
- * </li>
- * <li>If {@code robustBufferAccess} is not enabled, applications <b>must</b> not perform out of bounds accesses.</li>
- * </ul></li>
- * <li>{@code fullDrawIndexUint32} &ndash; specifies the full 32-bit range of indices is supported for indexed draw calls when using a {@code VkIndexType} of {@link VK10#VK_INDEX_TYPE_UINT32 INDEX_TYPE_UINT32}. {@code maxDrawIndexedIndexValue} is the maximum index value that <b>may</b> be used (aside from the primitive restart index, which is always 2<sup>32</sup>-1 when the {@code VkIndexType} is {@link VK10#VK_INDEX_TYPE_UINT32 INDEX_TYPE_UINT32}). If this feature is supported, {@code maxDrawIndexedIndexValue} <b>must</b> be 2<sup>32</sup>-1; otherwise it <b>must</b> be no smaller than 2<sup>24</sup>-1. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxDrawIndexedIndexValue">maxDrawIndexedIndexValue</a>.</li>
- * <li>{@code imageCubeArray} &ndash; specifies whether image views with a {@code VkImageViewType} of {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE_ARRAY IMAGE_VIEW_TYPE_CUBE_ARRAY} <b>can</b> be created, and that the corresponding {@code SampledCubeArray} and {@code ImageCubeArray} SPIR-V capabilities <b>can</b> be used in shader code.</li>
- * <li>{@code independentBlend} &ndash; specifies whether the {@link VkPipelineColorBlendAttachmentState} settings are controlled independently per-attachment. If this feature is not enabled, the {@link VkPipelineColorBlendAttachmentState} settings for all color attachments <b>must</b> be identical. Otherwise, a different {@link VkPipelineColorBlendAttachmentState} <b>can</b> be provided for each bound color attachment.</li>
- * <li>{@code geometryShader} &ndash; specifies whether geometry shaders are supported. If this feature is not enabled, the {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT} and {@link VK10#VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT PIPELINE_STAGE_GEOMETRY_SHADER_BIT} enum values <b>must</b> not be used. This also specifies whether shader modules <b>can</b> declare the {@code Geometry} capability.</li>
- * <li>{@code tessellationShader} &ndash; specifies whether tessellation control and evaluation shaders are supported. If this feature is not enabled, the {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT}, {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, {@link VK10#VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT}, {@link VK10#VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT}, and {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO} enum values <b>must</b> not be used. This also specifies whether shader modules <b>can</b> declare the {@code Tessellation} capability.</li>
- * <li>{@code sampleRateShading} &ndash; specifies whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-sampleshading">Sample Shading</a> and multisample interpolation are supported. If this feature is not enabled, the {@code sampleShadingEnable} member of the {@link VkPipelineMultisampleStateCreateInfo} structure <b>must</b> be set to {@link VK10#VK_FALSE FALSE} and the {@code minSampleShading} member is ignored. This also specifies whether shader modules <b>can</b> declare the {@code SampleRateShading} capability.</li>
- * <li>{@code dualSrcBlend} &ndash; specifies whether blend operations which take two sources are supported. If this feature is not enabled, the {@link VK10#VK_BLEND_FACTOR_SRC1_COLOR BLEND_FACTOR_SRC1_COLOR}, {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR BLEND_FACTOR_ONE_MINUS_SRC1_COLOR}, {@link VK10#VK_BLEND_FACTOR_SRC1_ALPHA BLEND_FACTOR_SRC1_ALPHA}, and {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA} enum values <b>must</b> not be used as source or destination blending factors. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-dsb">Dual-Source Blending</a>.</li>
- * <li>{@code logicOp} &ndash; specifies whether logic operations are supported. If this feature is not enabled, the {@code logicOpEnable} member of the {@link VkPipelineColorBlendStateCreateInfo} structure <b>must</b> be set to {@link VK10#VK_FALSE FALSE}, and the {@code logicOp} member is ignored.</li>
- * <li>{@code multiDrawIndirect} &ndash; specifies whether multiple draw indirect is supported. If this feature is not enabled, the {@code drawCount} parameter to the {@code vkCmdDrawIndirect} and {@code vkCmdDrawIndexedIndirect} commands <b>must</b> be 0 or 1. The {@code maxDrawIndirectCount} member of the {@link VkPhysicalDeviceLimits} structure <b>must</b> also be 1 if this feature is not supported. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxDrawIndirectCount">maxDrawIndirectCount</a>.</li>
- * <li>{@code drawIndirectFirstInstance} &ndash; specifies whether indirect draw calls support the {@code firstInstance} parameter. If this feature is not enabled, the {@code firstInstance} member of all {@link VkDrawIndirectCommand} and {@link VkDrawIndexedIndirectCommand} structures that are provided to the {@code vkCmdDrawIndirect} and {@code vkCmdDrawIndexedIndirect} commands <b>must</b> be 0.</li>
- * <li>{@code depthClamp} &ndash; specifies whether depth clamping is supported. If this feature is not enabled, the {@code depthClampEnable} member of the {@link VkPipelineRasterizationStateCreateInfo} structure <b>must</b> be set to {@link VK10#VK_FALSE FALSE}. Otherwise, setting {@code depthClampEnable} to {@link VK10#VK_TRUE TRUE} will enable depth clamping.</li>
- * <li>{@code depthBiasClamp} &ndash; specifies whether depth bias clamping is supported. If this feature is not enabled, the {@code depthBiasClamp} member of the {@link VkPipelineRasterizationStateCreateInfo} structure <b>must</b> be set to 0.0 unless the {@link VK10#VK_DYNAMIC_STATE_DEPTH_BIAS DYNAMIC_STATE_DEPTH_BIAS} dynamic state is enabled, and the {@code depthBiasClamp} parameter to {@code vkCmdSetDepthBias} <b>must</b> be set to 0.0.</li>
- * <li>{@code fillModeNonSolid} &ndash; specifies whether point and wireframe fill modes are supported. If this feature is not enabled, the {@link VK10#VK_POLYGON_MODE_POINT POLYGON_MODE_POINT} and {@link VK10#VK_POLYGON_MODE_LINE POLYGON_MODE_LINE} enum values <b>must</b> not be used.</li>
- * <li>{@code depthBounds} &ndash; specifies whether depth bounds tests are supported. If this feature is not enabled, the {@code depthBoundsTestEnable} member of the {@link VkPipelineDepthStencilStateCreateInfo} structure <b>must</b> be set to {@link VK10#VK_FALSE FALSE}. When {@code depthBoundsTestEnable} is set to {@link VK10#VK_FALSE FALSE}, the {@code minDepthBounds} and {@code maxDepthBounds} members of the {@link VkPipelineDepthStencilStateCreateInfo} structure are ignored.</li>
- * <li>{@code wideLines} &ndash; specifies whether lines with width other than 1.0 are supported. If this feature is not enabled, the {@code lineWidth} member of the {@link VkPipelineRasterizationStateCreateInfo} structure <b>must</b> be set to 1.0 unless the {@link VK10#VK_DYNAMIC_STATE_LINE_WIDTH DYNAMIC_STATE_LINE_WIDTH} dynamic state is enabled, and the {@code lineWidth} parameter to {@code vkCmdSetLineWidth} <b>must</b> be set to 1.0. When this feature is supported, the range and granularity of supported line widths are indicated by the {@code lineWidthRange} and {@code lineWidthGranularity} members of the {@link VkPhysicalDeviceLimits} structure, respectively.</li>
- * <li>{@code largePoints} &ndash; specifies whether points with size greater than 1.0 are supported. If this feature is not enabled, only a point size of 1.0 written by a shader is supported. The range and granularity of supported point sizes are indicated by the {@code pointSizeRange} and {@code pointSizeGranularity} members of the {@link VkPhysicalDeviceLimits} structure, respectively.</li>
- * <li>{@code alphaToOne} &ndash; specifies whether the implementation is able to replace the alpha value of the fragment shader color output in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-covg">Multisample Coverage</a> fragment operation. If this feature is not enabled, then the {@code alphaToOneEnable} member of the {@link VkPipelineMultisampleStateCreateInfo} structure <b>must</b> be set to {@link VK10#VK_FALSE FALSE}. Otherwise setting {@code alphaToOneEnable} to {@link VK10#VK_TRUE TRUE} will enable alpha-to-one behavior.</li>
- * <li>{@code multiViewport} &ndash; specifies whether more than one viewport is supported. If this feature is not enabled:
- * 
- * <ul>
- * <li>The {@code viewportCount} and {@code scissorCount} members of the {@link VkPipelineViewportStateCreateInfo} structure <b>must</b> be set to 1.</li>
- * <li>The {@code firstViewport} and {@code viewportCount} parameters to the {@code vkCmdSetViewport} command <b>must</b> be set to 0 and 1, respectively.</li>
- * <li>The {@code firstScissor} and {@code scissorCount} parameters to the {@code vkCmdSetScissor} command <b>must</b> be set to 0 and 1, respectively.</li>
- * <li>The {@code exclusiveScissorCount} member of the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} structure <b>must</b> be set to 0 or 1.</li>
- * <li>The {@code firstExclusiveScissor} and {@code exclusiveScissorCount} parameters to the {@code vkCmdSetExclusiveScissorNV} command <b>must</b> be set to 0 and 1, respectively.</li>
- * </ul></li>
- * <li>{@code samplerAnisotropy} &ndash; specifies whether anisotropic filtering is supported. If this feature is not enabled, the {@code anisotropyEnable} member of the {@link VkSamplerCreateInfo} structure <b>must</b> be {@link VK10#VK_FALSE FALSE}.</li>
- * <li>{@code textureCompressionETC2} &ndash; specifies whether all of the ETC2 and EAC compressed texture formats are supported. If this feature is enabled, then the {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT FORMAT_FEATURE_SAMPLED_IMAGE_BIT}, {@link VK10#VK_FORMAT_FEATURE_BLIT_SRC_BIT FORMAT_FEATURE_BLIT_SRC_BIT} and {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT} features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
- * 
- * <ul>
- * <li>{@link VK10#VK_FORMAT_ETC2_R8G8B8_UNORM_BLOCK FORMAT_ETC2_R8G8B8_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ETC2_R8G8B8_SRGB_BLOCK FORMAT_ETC2_R8G8B8_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_EAC_R11_UNORM_BLOCK FORMAT_EAC_R11_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_EAC_R11_SNORM_BLOCK FORMAT_EAC_R11_SNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_EAC_R11G11_UNORM_BLOCK FORMAT_EAC_R11G11_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_EAC_R11G11_SNORM_BLOCK FORMAT_EAC_R11G11_SNORM_BLOCK}</li>
- * </ul>
- * 
- * <p>To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.</p></li>
- * <li>{@code textureCompressionASTC_LDR} &ndash; specifies whether all of the ASTC LDR compressed texture formats are supported. If this feature is enabled, then the {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT FORMAT_FEATURE_SAMPLED_IMAGE_BIT}, {@link VK10#VK_FORMAT_FEATURE_BLIT_SRC_BIT FORMAT_FEATURE_BLIT_SRC_BIT} and {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT} features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
- * 
- * <ul>
- * <li>{@link VK10#VK_FORMAT_ASTC_4x4_UNORM_BLOCK FORMAT_ASTC_4x4_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_4x4_SRGB_BLOCK FORMAT_ASTC_4x4_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_5x4_UNORM_BLOCK FORMAT_ASTC_5x4_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_5x4_SRGB_BLOCK FORMAT_ASTC_5x4_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_5x5_UNORM_BLOCK FORMAT_ASTC_5x5_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_5x5_SRGB_BLOCK FORMAT_ASTC_5x5_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_6x5_UNORM_BLOCK FORMAT_ASTC_6x5_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_6x5_SRGB_BLOCK FORMAT_ASTC_6x5_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_6x6_UNORM_BLOCK FORMAT_ASTC_6x6_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_6x6_SRGB_BLOCK FORMAT_ASTC_6x6_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_8x5_UNORM_BLOCK FORMAT_ASTC_8x5_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_8x5_SRGB_BLOCK FORMAT_ASTC_8x5_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_8x6_UNORM_BLOCK FORMAT_ASTC_8x6_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_8x6_SRGB_BLOCK FORMAT_ASTC_8x6_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_8x8_UNORM_BLOCK FORMAT_ASTC_8x8_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_8x8_SRGB_BLOCK FORMAT_ASTC_8x8_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_10x5_UNORM_BLOCK FORMAT_ASTC_10x5_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_10x5_SRGB_BLOCK FORMAT_ASTC_10x5_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_10x6_UNORM_BLOCK FORMAT_ASTC_10x6_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_10x6_SRGB_BLOCK FORMAT_ASTC_10x6_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_10x8_UNORM_BLOCK FORMAT_ASTC_10x8_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_10x8_SRGB_BLOCK FORMAT_ASTC_10x8_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_10x10_UNORM_BLOCK FORMAT_ASTC_10x10_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_10x10_SRGB_BLOCK FORMAT_ASTC_10x10_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_12x10_UNORM_BLOCK FORMAT_ASTC_12x10_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_12x10_SRGB_BLOCK FORMAT_ASTC_12x10_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_12x12_UNORM_BLOCK FORMAT_ASTC_12x12_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_ASTC_12x12_SRGB_BLOCK FORMAT_ASTC_12x12_SRGB_BLOCK}</li>
- * </ul>
- * 
- * <p>To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.</p></li>
- * <li>{@code textureCompressionBC} &ndash; specifies whether all of the BC compressed texture formats are supported. If this feature is enabled, then the {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT FORMAT_FEATURE_SAMPLED_IMAGE_BIT}, {@link VK10#VK_FORMAT_FEATURE_BLIT_SRC_BIT FORMAT_FEATURE_BLIT_SRC_BIT} and {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT} features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
- * 
- * <ul>
- * <li>{@link VK10#VK_FORMAT_BC1_RGB_UNORM_BLOCK FORMAT_BC1_RGB_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC1_RGB_SRGB_BLOCK FORMAT_BC1_RGB_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC1_RGBA_UNORM_BLOCK FORMAT_BC1_RGBA_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC1_RGBA_SRGB_BLOCK FORMAT_BC1_RGBA_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC2_UNORM_BLOCK FORMAT_BC2_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC2_SRGB_BLOCK FORMAT_BC2_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC3_UNORM_BLOCK FORMAT_BC3_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC3_SRGB_BLOCK FORMAT_BC3_SRGB_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC4_UNORM_BLOCK FORMAT_BC4_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC4_SNORM_BLOCK FORMAT_BC4_SNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC5_UNORM_BLOCK FORMAT_BC5_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC5_SNORM_BLOCK FORMAT_BC5_SNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC6H_UFLOAT_BLOCK FORMAT_BC6H_UFLOAT_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC6H_SFLOAT_BLOCK FORMAT_BC6H_SFLOAT_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC7_UNORM_BLOCK FORMAT_BC7_UNORM_BLOCK}</li>
- * <li>{@link VK10#VK_FORMAT_BC7_SRGB_BLOCK FORMAT_BC7_SRGB_BLOCK}</li>
- * </ul>
- * 
- * <p>To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.</p></li>
- * <li>{@code occlusionQueryPrecise} &ndash; specifies whether occlusion queries returning actual sample counts are supported. Occlusion queries are created in a {@code VkQueryPool} by specifying the {@code queryType} of {@link VK10#VK_QUERY_TYPE_OCCLUSION QUERY_TYPE_OCCLUSION} in the {@link VkQueryPoolCreateInfo} structure which is passed to {@code vkCreateQueryPool}. If this feature is enabled, queries of this type <b>can</b> enable {@link VK10#VK_QUERY_CONTROL_PRECISE_BIT QUERY_CONTROL_PRECISE_BIT} in the {@code flags} parameter to {@code vkCmdBeginQuery}. If this feature is not supported, the implementation supports only boolean occlusion queries. When any samples are passed, boolean queries will return a non-zero result value, otherwise a result value of zero is returned. When this feature is enabled and {@link VK10#VK_QUERY_CONTROL_PRECISE_BIT QUERY_CONTROL_PRECISE_BIT} is set, occlusion queries will report the actual number of samples passed.</li>
- * <li>{@code pipelineStatisticsQuery} &ndash; specifies whether the pipeline statistics queries are supported. If this feature is not enabled, queries of type {@link VK10#VK_QUERY_TYPE_PIPELINE_STATISTICS QUERY_TYPE_PIPELINE_STATISTICS} <b>cannot</b> be created, and none of the {@code VkQueryPipelineStatisticFlagBits} bits <b>can</b> be set in the {@code pipelineStatistics} member of the {@link VkQueryPoolCreateInfo} structure.</li>
- * <li>{@code vertexPipelineStoresAndAtomics} &ndash; specifies whether storage buffers and images support stores and atomic operations in the vertex, tessellation, and geometry shader stages. If this feature is not enabled, all storage image, storage texel buffers, and storage buffer variables used by these stages in shader modules <b>must</b> be decorated with the {@code NonWritable} decoration (or the {@code readonly} memory qualifier in GLSL).</li>
- * <li>{@code fragmentStoresAndAtomics} &ndash; specifies whether storage buffers and images support stores and atomic operations in the fragment shader stage. If this feature is not enabled, all storage image, storage texel buffers, and storage buffer variables used by the fragment stage in shader modules <b>must</b> be decorated with the {@code NonWritable} decoration (or the {@code readonly} memory qualifier in GLSL).</li>
- * <li>{@code shaderTessellationAndGeometryPointSize} &ndash; specifies whether the {@code PointSize} built-in decoration is available in the tessellation control, tessellation evaluation, and geometry shader stages. If this feature is not enabled, members decorated with the {@code PointSize} built-in decoration <b>must</b> not be read from or written to and all points written from a tessellation or geometry shader will have a size of 1.0. This also specifies whether shader modules <b>can</b> declare the {@code TessellationPointSize} capability for tessellation control and evaluation shaders, or if the shader modules <b>can</b> declare the {@code GeometryPointSize} capability for geometry shaders. An implementation supporting this feature <b>must</b> also support one or both of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-tessellationShader">{@code tessellationShader}</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-geometryShader">{@code geometryShader}</a> features.</li>
- * <li>{@code shaderImageGatherExtended} &ndash; specifies whether the extended set of image gather instructions are available in shader code. If this feature is not enabled, the {@code OpImage}*{@code Gather} instructions do not support the {@code Offset} and {@code ConstOffsets} operands. This also specifies whether shader modules <b>can</b> declare the {@code ImageGatherExtended} capability.</li>
- * <li>{@code shaderStorageImageExtendedFormats} &ndash; specifies whether all the “storage image extended formats” below are supported; if this feature is supported, then the {@link VK10#VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT FORMAT_FEATURE_STORAGE_IMAGE_BIT} <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
- * 
- * <ul>
- * <li>{@link VK10#VK_FORMAT_R16G16_SFLOAT FORMAT_R16G16_SFLOAT}</li>
- * <li>{@link VK10#VK_FORMAT_B10G11R11_UFLOAT_PACK32 FORMAT_B10G11R11_UFLOAT_PACK32}</li>
- * <li>{@link VK10#VK_FORMAT_R16_SFLOAT FORMAT_R16_SFLOAT}</li>
- * <li>{@link VK10#VK_FORMAT_R16G16B16A16_UNORM FORMAT_R16G16B16A16_UNORM}</li>
- * <li>{@link VK10#VK_FORMAT_A2B10G10R10_UNORM_PACK32 FORMAT_A2B10G10R10_UNORM_PACK32}</li>
- * <li>{@link VK10#VK_FORMAT_R16G16_UNORM FORMAT_R16G16_UNORM}</li>
- * <li>{@link VK10#VK_FORMAT_R8G8_UNORM FORMAT_R8G8_UNORM}</li>
- * <li>{@link VK10#VK_FORMAT_R16_UNORM FORMAT_R16_UNORM}</li>
- * <li>{@link VK10#VK_FORMAT_R8_UNORM FORMAT_R8_UNORM}</li>
- * <li>{@link VK10#VK_FORMAT_R16G16B16A16_SNORM FORMAT_R16G16B16A16_SNORM}</li>
- * <li>{@link VK10#VK_FORMAT_R16G16_SNORM FORMAT_R16G16_SNORM}</li>
- * <li>{@link VK10#VK_FORMAT_R8G8_SNORM FORMAT_R8G8_SNORM}</li>
- * <li>{@link VK10#VK_FORMAT_R16_SNORM FORMAT_R16_SNORM}</li>
- * <li>{@link VK10#VK_FORMAT_R8_SNORM FORMAT_R8_SNORM}</li>
- * <li>{@link VK10#VK_FORMAT_R16G16_SINT FORMAT_R16G16_SINT}</li>
- * <li>{@link VK10#VK_FORMAT_R8G8_SINT FORMAT_R8G8_SINT}</li>
- * <li>{@link VK10#VK_FORMAT_R16_SINT FORMAT_R16_SINT}</li>
- * <li>{@link VK10#VK_FORMAT_R8_SINT FORMAT_R8_SINT}</li>
- * <li>{@link VK10#VK_FORMAT_A2B10G10R10_UINT_PACK32 FORMAT_A2B10G10R10_UINT_PACK32}</li>
- * <li>{@link VK10#VK_FORMAT_R16G16_UINT FORMAT_R16G16_UINT}</li>
- * <li>{@link VK10#VK_FORMAT_R8G8_UINT FORMAT_R8G8_UINT}</li>
- * <li>{@link VK10#VK_FORMAT_R16_UINT FORMAT_R16_UINT}</li>
- * <li>{@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT}</li>
- * </ul>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>{@code shaderStorageImageExtendedFormats} feature only adds a guarantee of format support, which is specified for the whole physical device. Therefore enabling or disabling the feature via {@link VK10#vkCreateDevice CreateDevice} has no practical effect.</p>
- * 
- * <p>== Description</p>
- * 
- * <p>To query for additional properties, or if the feature is not supported, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats, as usual rules allow.</p>
- * 
- * <p>{@link VK10#VK_FORMAT_R32G32_UINT FORMAT_R32G32_UINT}, {@link VK10#VK_FORMAT_R32G32_SINT FORMAT_R32G32_SINT}, and {@link VK10#VK_FORMAT_R32G32_SFLOAT FORMAT_R32G32_SFLOAT} from {@code StorageImageExtendedFormats} SPIR-V capability, are already covered by core Vulkan <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-mandatory-features-32bit">mandatory format support</a>.</p>
- * </div></li>
- * <li>{@code shaderStorageImageMultisample} &ndash; specifies whether multisampled storage images are supported. If this feature is not enabled, images that are created with a {@code usage} that includes {@link VK10#VK_IMAGE_USAGE_STORAGE_BIT IMAGE_USAGE_STORAGE_BIT} <b>must</b> be created with {@code samples} equal to {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT}. This also specifies whether shader modules <b>can</b> declare the {@code StorageImageMultisample} and {@code ImageMSArray} capabilities.</li>
- * <li>{@code shaderStorageImageReadWithoutFormat} &ndash; specifies whether storage images require a format qualifier to be specified when reading from storage images. If this feature is not enabled, the {@code OpImageRead} instruction <b>must</b> not have an {@code OpTypeImage} of {@code Unknown}. This also specifies whether shader modules <b>can</b> declare the {@code StorageImageReadWithoutFormat} capability.</li>
- * <li>{@code shaderStorageImageWriteWithoutFormat} &ndash; specifies whether storage images require a format qualifier to be specified when writing to storage images. If this feature is not enabled, the {@code OpImageWrite} instruction <b>must</b> not have an {@code OpTypeImage} of {@code Unknown}. This also specifies whether shader modules <b>can</b> declare the {@code StorageImageWriteWithoutFormat} capability.</li>
- * <li>{@code shaderUniformBufferArrayDynamicIndexing} &ndash; specifies whether arrays of uniform buffers <b>can</b> be indexed by <em>dynamically uniform</em> integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER} or {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also specifies whether shader modules <b>can</b> declare the {@code UniformBufferArrayDynamicIndexing} capability.</li>
- * <li>{@code shaderSampledImageArrayDynamicIndexing} &ndash; specifies whether arrays of samplers or sampled images <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER}, {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, or {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also specifies whether shader modules <b>can</b> declare the {@code SampledImageArrayDynamicIndexing} capability.</li>
- * <li>{@code shaderStorageBufferArrayDynamicIndexing} &ndash; specifies whether arrays of storage buffers <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER} or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also specifies whether shader modules <b>can</b> declare the {@code StorageBufferArrayDynamicIndexing} capability.</li>
- * <li>{@code shaderStorageImageArrayDynamicIndexing} &ndash; specifies whether arrays of storage images <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also specifies whether shader modules <b>can</b> declare the {@code StorageImageArrayDynamicIndexing} capability.</li>
- * <li>{@code shaderClipDistance} &ndash; specifies whether clip distances are supported in shader code. If this feature is not enabled, any members decorated with the {@code ClipDistance} built-in decoration <b>must</b> not be read from or written to in shader modules. This also specifies whether shader modules <b>can</b> declare the {@code ClipDistance} capability.</li>
- * <li>{@code shaderCullDistance} &ndash; specifies whether cull distances are supported in shader code. If this feature is not enabled, any members decorated with the {@code CullDistance} built-in decoration <b>must</b> not be read from or written to in shader modules. This also specifies whether shader modules <b>can</b> declare the {@code CullDistance} capability.</li>
- * <li>{@code shaderFloat64} &ndash; specifies whether 64-bit floats (doubles) are supported in shader code. If this feature is not enabled, 64-bit floating-point types <b>must</b> not be used in shader code. This also specifies whether shader modules <b>can</b> declare the {@code Float64} capability. Declaring and using 64-bit floats is enabled for all storage classes that SPIR-V allows with the {@code Float64} capability.</li>
- * <li>{@code shaderInt64} &ndash; specifies whether 64-bit integers (signed and unsigned) are supported in shader code. If this feature is not enabled, 64-bit integer types <b>must</b> not be used in shader code. This also specifies whether shader modules <b>can</b> declare the {@code Int64} capability. Declaring and using 64-bit integers is enabled for all storage classes that SPIR-V allows with the {@code Int64} capability.</li>
- * <li>{@code shaderInt16} &ndash; specifies whether 16-bit integers (signed and unsigned) are supported in shader code. If this feature is not enabled, 16-bit integer types <b>must</b> not be used in shader code. This also specifies whether shader modules <b>can</b> declare the {@code Int16} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Int16} SPIR-V capability: Declaring and using 16-bit integers in the {@code Private}, {@code Workgroup} (for non-Block variables), and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled.</li>
- * <li>{@code shaderResourceResidency} &ndash; specifies whether image operations that return resource residency information are supported in shader code. If this feature is not enabled, the {@code OpImageSparse}* instructions <b>must</b> not be used in shader code. This also specifies whether shader modules <b>can</b> declare the {@code SparseResidency} capability. The feature requires at least one of the {@code sparseResidency}* features to be supported.</li>
- * <li>{@code shaderResourceMinLod} &ndash; specifies whether image operations specifying the minimum resource LOD are supported in shader code. If this feature is not enabled, the {@code MinLod} image operand <b>must</b> not be used in shader code. This also specifies whether shader modules <b>can</b> declare the {@code MinLod} capability.</li>
- * <li>{@code sparseBinding} &ndash; specifies whether resource memory <b>can</b> be managed at opaque sparse block level instead of at the object level. If this feature is not enabled, resource memory <b>must</b> be bound only on a per-object basis using the {@code vkBindBufferMemory} and {@code vkBindImageMemory} commands. In this case, buffers and images <b>must</b> not be created with {@link VK10#VK_BUFFER_CREATE_SPARSE_BINDING_BIT BUFFER_CREATE_SPARSE_BINDING_BIT} and {@link VK10#VK_IMAGE_CREATE_SPARSE_BINDING_BIT IMAGE_CREATE_SPARSE_BINDING_BIT} set in the {@code flags} member of the {@link VkBufferCreateInfo} and {@link VkImageCreateInfo} structures, respectively. Otherwise resource memory <b>can</b> be managed as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#sparsememory-sparseresourcefeatures">Sparse Resource Features</a>.</li>
- * <li>{@code sparseResidencyBuffer} &ndash; specifies whether the device <b>can</b> access partially resident buffers. If this feature is not enabled, buffers <b>must</b> not be created with {@link VK10#VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT BUFFER_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkBufferCreateInfo} structure.</li>
- * <li>{@code sparseResidencyImage2D} &ndash; specifies whether the device <b>can</b> access partially resident 2D images with 1 sample per pixel. If this feature is not enabled, images with an {@code imageType} of {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} and {@code samples} set to {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT} <b>must</b> not be created with {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkImageCreateInfo} structure.</li>
- * <li>{@code sparseResidencyImage3D} &ndash; specifies whether the device <b>can</b> access partially resident 3D images. If this feature is not enabled, images with an {@code imageType} of {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D} <b>must</b> not be created with {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkImageCreateInfo} structure.</li>
- * <li>{@code sparseResidency2Samples} &ndash; specifies whether the physical device <b>can</b> access partially resident 2D images with 2 samples per pixel. If this feature is not enabled, images with an {@code imageType} of {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} and {@code samples} set to {@link VK10#VK_SAMPLE_COUNT_2_BIT SAMPLE_COUNT_2_BIT} <b>must</b> not be created with {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkImageCreateInfo} structure.</li>
- * <li>{@code sparseResidency4Samples} &ndash; specifies whether the physical device <b>can</b> access partially resident 2D images with 4 samples per pixel. If this feature is not enabled, images with an {@code imageType} of {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} and {@code samples} set to {@link VK10#VK_SAMPLE_COUNT_4_BIT SAMPLE_COUNT_4_BIT} <b>must</b> not be created with {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkImageCreateInfo} structure.</li>
- * <li>{@code sparseResidency8Samples} &ndash; specifies whether the physical device <b>can</b> access partially resident 2D images with 8 samples per pixel. If this feature is not enabled, images with an {@code imageType} of {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} and {@code samples} set to {@link VK10#VK_SAMPLE_COUNT_8_BIT SAMPLE_COUNT_8_BIT} <b>must</b> not be created with {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkImageCreateInfo} structure.</li>
- * <li>{@code sparseResidency16Samples} &ndash; specifies whether the physical device <b>can</b> access partially resident 2D images with 16 samples per pixel. If this feature is not enabled, images with an {@code imageType} of {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} and {@code samples} set to {@link VK10#VK_SAMPLE_COUNT_16_BIT SAMPLE_COUNT_16_BIT} <b>must</b> not be created with {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkImageCreateInfo} structure.</li>
- * <li>{@code sparseResidencyAliased} &ndash; specifies whether the physical device <b>can</b> correctly access data aliased into multiple locations. If this feature is not enabled, the {@link VK10#VK_BUFFER_CREATE_SPARSE_ALIASED_BIT BUFFER_CREATE_SPARSE_ALIASED_BIT} and {@link VK10#VK_IMAGE_CREATE_SPARSE_ALIASED_BIT IMAGE_CREATE_SPARSE_ALIASED_BIT} enum values <b>must</b> not be used in {@code flags} members of the {@link VkBufferCreateInfo} and {@link VkImageCreateInfo} structures, respectively.</li>
- * <li>{@code variableMultisampleRate} &ndash; specifies whether all pipelines that will be bound to a command buffer during a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#renderpass-noattachments">subpass which uses no attachments</a> <b>must</b> have the same value for {@link VkPipelineMultisampleStateCreateInfo}{@code ::rasterizationSamples}. If set to {@link VK10#VK_TRUE TRUE}, the implementation supports variable multisample rates in a subpass which uses no attachments. If set to {@link VK10#VK_FALSE FALSE}, then all pipelines bound in such a subpass <b>must</b> have the same multisample rate. This has no effect in situations where a subpass uses any attachments.</li>
- * <li>{@code inheritedQueries} &ndash; specifies whether a secondary command buffer <b>may</b> be executed while a query is active.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceFeatures {
- *     VkBool32 robustBufferAccess;
- *     VkBool32 fullDrawIndexUint32;
- *     VkBool32 imageCubeArray;
- *     VkBool32 independentBlend;
- *     VkBool32 geometryShader;
- *     VkBool32 tessellationShader;
- *     VkBool32 sampleRateShading;
- *     VkBool32 dualSrcBlend;
- *     VkBool32 logicOp;
- *     VkBool32 multiDrawIndirect;
- *     VkBool32 drawIndirectFirstInstance;
- *     VkBool32 depthClamp;
- *     VkBool32 depthBiasClamp;
- *     VkBool32 fillModeNonSolid;
- *     VkBool32 depthBounds;
- *     VkBool32 wideLines;
- *     VkBool32 largePoints;
- *     VkBool32 alphaToOne;
- *     VkBool32 multiViewport;
- *     VkBool32 samplerAnisotropy;
- *     VkBool32 textureCompressionETC2;
- *     VkBool32 textureCompressionASTC_LDR;
- *     VkBool32 textureCompressionBC;
- *     VkBool32 occlusionQueryPrecise;
- *     VkBool32 pipelineStatisticsQuery;
- *     VkBool32 vertexPipelineStoresAndAtomics;
- *     VkBool32 fragmentStoresAndAtomics;
- *     VkBool32 shaderTessellationAndGeometryPointSize;
- *     VkBool32 shaderImageGatherExtended;
- *     VkBool32 shaderStorageImageExtendedFormats;
- *     VkBool32 shaderStorageImageMultisample;
- *     VkBool32 shaderStorageImageReadWithoutFormat;
- *     VkBool32 shaderStorageImageWriteWithoutFormat;
- *     VkBool32 shaderUniformBufferArrayDynamicIndexing;
- *     VkBool32 shaderSampledImageArrayDynamicIndexing;
- *     VkBool32 shaderStorageBufferArrayDynamicIndexing;
- *     VkBool32 shaderStorageImageArrayDynamicIndexing;
- *     VkBool32 shaderClipDistance;
- *     VkBool32 shaderCullDistance;
- *     VkBool32 shaderFloat64;
- *     VkBool32 shaderInt64;
- *     VkBool32 shaderInt16;
- *     VkBool32 shaderResourceResidency;
- *     VkBool32 shaderResourceMinLod;
- *     VkBool32 sparseBinding;
- *     VkBool32 sparseResidencyBuffer;
- *     VkBool32 sparseResidencyImage2D;
- *     VkBool32 sparseResidencyImage3D;
- *     VkBool32 sparseResidency2Samples;
- *     VkBool32 sparseResidency4Samples;
- *     VkBool32 sparseResidency8Samples;
- *     VkBool32 sparseResidency16Samples;
- *     VkBool32 sparseResidencyAliased;
- *     VkBool32 variableMultisampleRate;
- *     VkBool32 inheritedQueries;
+ *     VkBool32 {@link #robustBufferAccess};
+ *     VkBool32 {@link #fullDrawIndexUint32};
+ *     VkBool32 {@link #imageCubeArray};
+ *     VkBool32 {@link #independentBlend};
+ *     VkBool32 {@link #geometryShader};
+ *     VkBool32 {@link #tessellationShader};
+ *     VkBool32 {@link #sampleRateShading};
+ *     VkBool32 {@link #dualSrcBlend};
+ *     VkBool32 {@link #logicOp};
+ *     VkBool32 {@link #multiDrawIndirect};
+ *     VkBool32 {@link #drawIndirectFirstInstance};
+ *     VkBool32 {@link #depthClamp};
+ *     VkBool32 {@link #depthBiasClamp};
+ *     VkBool32 {@link #fillModeNonSolid};
+ *     VkBool32 {@link #depthBounds};
+ *     VkBool32 {@link #wideLines};
+ *     VkBool32 {@link #largePoints};
+ *     VkBool32 {@link #alphaToOne};
+ *     VkBool32 {@link #multiViewport};
+ *     VkBool32 {@link #samplerAnisotropy};
+ *     VkBool32 {@link #textureCompressionETC2};
+ *     VkBool32 {@link #textureCompressionASTC_LDR};
+ *     VkBool32 {@link #textureCompressionBC};
+ *     VkBool32 {@link #occlusionQueryPrecise};
+ *     VkBool32 {@link #pipelineStatisticsQuery};
+ *     VkBool32 {@link #vertexPipelineStoresAndAtomics};
+ *     VkBool32 {@link #fragmentStoresAndAtomics};
+ *     VkBool32 {@link #shaderTessellationAndGeometryPointSize};
+ *     VkBool32 {@link #shaderImageGatherExtended};
+ *     VkBool32 {@link #shaderStorageImageExtendedFormats};
+ *     VkBool32 {@link #shaderStorageImageMultisample};
+ *     VkBool32 {@link #shaderStorageImageReadWithoutFormat};
+ *     VkBool32 {@link #shaderStorageImageWriteWithoutFormat};
+ *     VkBool32 {@link #shaderUniformBufferArrayDynamicIndexing};
+ *     VkBool32 {@link #shaderSampledImageArrayDynamicIndexing};
+ *     VkBool32 {@link #shaderStorageBufferArrayDynamicIndexing};
+ *     VkBool32 {@link #shaderStorageImageArrayDynamicIndexing};
+ *     VkBool32 {@link #shaderClipDistance};
+ *     VkBool32 {@link #shaderCullDistance};
+ *     VkBool32 {@link #shaderFloat64};
+ *     VkBool32 {@link #shaderInt64};
+ *     VkBool32 {@link #shaderInt16};
+ *     VkBool32 {@link #shaderResourceResidency};
+ *     VkBool32 {@link #shaderResourceMinLod};
+ *     VkBool32 {@link #sparseBinding};
+ *     VkBool32 {@link #sparseResidencyBuffer};
+ *     VkBool32 {@link #sparseResidencyImage2D};
+ *     VkBool32 {@link #sparseResidencyImage3D};
+ *     VkBool32 {@link #sparseResidency2Samples};
+ *     VkBool32 {@link #sparseResidency4Samples};
+ *     VkBool32 {@link #sparseResidency8Samples};
+ *     VkBool32 {@link #sparseResidency16Samples};
+ *     VkBool32 {@link #sparseResidencyAliased};
+ *     VkBool32 {@link #variableMultisampleRate};
+ *     VkBool32 {@link #inheritedQueries};
  * }</code></pre>
  */
 public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
@@ -531,281 +281,483 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code robustBufferAccess} field. */
+    /**
+     * specifies that accesses to buffers are bounds-checked against the range of the buffer descriptor (as determined by {@link VkDescriptorBufferInfo}{@code ::range}, {@link VkBufferViewCreateInfo}{@code ::range}, or the size of the buffer). Out of bounds accesses <b>must</b> not cause application termination, and the effects of shader loads, stores, and atomics <b>must</b> conform to an implementation-dependent behavior as described below.
+     * 
+     * <ul>
+     * <li>A buffer access is considered to be out of bounds if any of the following are true:
+     * 
+     * <ul>
+     * <li>The pointer was formed by {@code OpImageTexelPointer} and the coordinate is less than zero or greater than or equal to the number of whole elements in the bound range.</li>
+     * <li>The pointer was not formed by {@code OpImageTexelPointer} and the object pointed to is not wholly contained within the bound range. This includes accesses performed via <em>variable pointers</em> where the buffer descriptor being accessed cannot be statically determined. Uninitialized pointers and pointers equal to {@code OpConstantNull} are treated as pointing to a zero-sized object, so all accesses through such pointers are considered to be out of bounds. Buffer accesses through buffer device addresses are not bounds-checked. If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-cooperativeMatrixRobustBufferAccess">{@code cooperativeMatrixRobustBufferAccess}</a> feature is not enabled, then accesses using {@code OpCooperativeMatrixLoadNV} and {@code OpCooperativeMatrixStoreNV} <b>may</b> not be bounds-checked.
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>If a SPIR-V {@code OpLoad} instruction loads a structure and the tail end of the structure is out of bounds, then all members of the structure are considered out of bounds even if the members at the end are not statically used.</p>
+     * </div>
+     * </li>
+     * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is not enabled and any buffer access is determined to be out of bounds, then any other access of the same type (load, store, or atomic) to the same buffer that accesses an address less than 16 bytes away from the out of bounds address <b>may</b> also be considered out of bounds.</li>
+     * <li>If the access is a load that reads from the same memory locations as a prior store in the same shader invocation, with no other intervening accesses to the same memory locations in that shader invocation, then the result of the load <b>may</b> be the value stored by the store instruction, even if the access is out of bounds. If the load is {@code Volatile}, then an out of bounds load <b>must</b> return the appropriate out of bounds value.</li>
+     * </ul>
+     * </li>
+     * <li>Accesses to descriptors written with a {@link VK10#VK_NULL_HANDLE NULL_HANDLE} resource or view are not considered to be out of bounds. Instead, each type of descriptor access defines a specific behavior for accesses to a null descriptor.</li>
+     * <li>Out-of-bounds buffer loads will return any of the following values:
+     * 
+     * <ul>
+     * <li>If the access is to a uniform buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, loads of offsets between the end of the descriptor range and the end of the descriptor range rounded up to a multiple of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-robustUniformBufferAccessSizeAlignment">robustUniformBufferAccessSizeAlignment</a> bytes <b>must</b> return either zero values or the contents of the memory at the offset being loaded. Loads of offsets past the descriptor range rounded up to a multiple of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-robustUniformBufferAccessSizeAlignment">robustUniformBufferAccessSizeAlignment</a> bytes <b>must</b> return zero values.</li>
+     * <li>If the access is to a storage buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, loads of offsets between the end of the descriptor range and the end of the descriptor range rounded up to a multiple of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-robustStorageBufferAccessSizeAlignment">robustStorageBufferAccessSizeAlignment</a> bytes <b>must</b> return either zero values or the contents of the memory at the offset being loaded. Loads of offsets past the descriptor range rounded up to a multiple of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-robustStorageBufferAccessSizeAlignment">robustStorageBufferAccessSizeAlignment</a> bytes <b>must</b> return zero values. Similarly, stores to addresses between the end of the descriptor range and the end of the descriptor range rounded up to a multiple of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-robustStorageBufferAccessSizeAlignment">robustStorageBufferAccessSizeAlignment</a> bytes <b>may</b> be discarded.</li>
+     * <li>Non-atomic accesses to storage buffers that are a multiple of 32 bits <b>may</b> be decomposed into 32-bit accesses that are individually bounds-checked.</li>
+     * <li>If the access is to an index buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, zero values <b>must</b> be returned.</li>
+     * <li>If the access is to a uniform texel buffer or storage texel buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, zero values <b>must</b> be returned, and then <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-conversion-to-rgba">Conversion to RGBA</a> is applied based on the buffer view&#8217;s format.</li>
+     * <li>Values from anywhere within the memory range(s) bound to the buffer (possibly including bytes of memory past the end of the buffer, up to the end of the bound range).</li>
+     * <li>Zero values, or <code>(0,0,0,x)</code> vectors for vector reads where x is a valid value represented in the type of the vector components and <b>may</b> be any of:
+     * 
+     * <ul>
+     * <li>0, 1, or the maximum representable positive integer value, for signed or unsigned integer components</li>
+     * <li>0.0 or 1.0, for floating-point components</li>
+     * </ul>
+     * </li>
+     * </ul>
+     * </li>
+     * <li>Out-of-bounds writes <b>may</b> modify values within the memory range(s) bound to the buffer, but <b>must</b> not modify any other memory.
+     * 
+     * <ul>
+     * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, out of bounds writes <b>must</b> not modify any memory.</li>
+     * </ul>
+     * </li>
+     * <li>Out-of-bounds atomics <b>may</b> modify values within the memory range(s) bound to the buffer, but <b>must</b> not modify any other memory, and return an undefined value.
+     * 
+     * <ul>
+     * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, out of bounds atomics <b>must</b> not modify any memory, and return an undefined value.</li>
+     * </ul>
+     * </li>
+     * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is disabled, vertex input attributes are considered out of bounds if the offset of the attribute in the bound vertex buffer range plus the size of the attribute is greater than either:
+     * 
+     * <ul>
+     * <li>{@code vertexBufferRangeSize}, if <code>bindingStride == 0</code>; or</li>
+     * <li><code>(vertexBufferRangeSize - (vertexBufferRangeSize % bindingStride))</code></li>
+     * </ul>
+     * 
+     * <p>where {@code vertexBufferRangeSize} is the byte size of the memory range bound to the vertex buffer binding and {@code bindingStride} is the byte stride of the corresponding vertex input binding. Further, if any vertex input attribute using a specific vertex input binding is out of bounds, then all vertex input attributes using that vertex input binding for that vertex shader invocation are considered out of bounds.</p>
+     * 
+     * <ul>
+     * <li>If a vertex input attribute is out of bounds, it will be assigned one of the following values:
+     * 
+     * <ul>
+     * <li>Values from anywhere within the memory range(s) bound to the buffer, converted according to the format of the attribute.</li>
+     * <li>Zero values, format converted according to the format of the attribute.</li>
+     * <li>Zero values, or <code>(0,0,0,x)</code> vectors, as described above.</li>
+     * </ul>
+     * </li>
+     * </ul>
+     * </li>
+     * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled, vertex input attributes are considered out of bounds if the offset of the attribute in the bound vertex buffer range plus the size of the attribute is greater than the byte size of the memory range bound to the vertex buffer binding.
+     * 
+     * <ul>
+     * <li>If a vertex input attribute is out of bounds, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fxvertex-input-extraction">raw data</a> extracted are zero values, and missing G, B, or A components are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fxvertex-input-extraction">filled with <code>(0,0,1)</code></a>.</li>
+     * </ul>
+     * </li>
+     * <li>If {@code robustBufferAccess} is not enabled, applications <b>must</b> not perform out of bounds accesses.</li>
+     * </ul>
+     */
     @NativeType("VkBool32")
     public boolean robustBufferAccess() { return nrobustBufferAccess(address()) != 0; }
-    /** Returns the value of the {@code fullDrawIndexUint32} field. */
+    /** specifies the full 32-bit range of indices is supported for indexed draw calls when using a {@code VkIndexType} of {@link VK10#VK_INDEX_TYPE_UINT32 INDEX_TYPE_UINT32}. {@code maxDrawIndexedIndexValue} is the maximum index value that <b>may</b> be used (aside from the primitive restart index, which is always 2<sup>32</sup>-1 when the {@code VkIndexType} is {@link VK10#VK_INDEX_TYPE_UINT32 INDEX_TYPE_UINT32}). If this feature is supported, {@code maxDrawIndexedIndexValue} <b>must</b> be 2<sup>32</sup>-1; otherwise it <b>must</b> be no smaller than 2<sup>24</sup>-1. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxDrawIndexedIndexValue">maxDrawIndexedIndexValue</a>. */
     @NativeType("VkBool32")
     public boolean fullDrawIndexUint32() { return nfullDrawIndexUint32(address()) != 0; }
-    /** Returns the value of the {@code imageCubeArray} field. */
+    /** specifies whether image views with a {@code VkImageViewType} of {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE_ARRAY IMAGE_VIEW_TYPE_CUBE_ARRAY} <b>can</b> be created, and that the corresponding {@code SampledCubeArray} and {@code ImageCubeArray} SPIR-V capabilities <b>can</b> be used in shader code. */
     @NativeType("VkBool32")
     public boolean imageCubeArray() { return nimageCubeArray(address()) != 0; }
-    /** Returns the value of the {@code independentBlend} field. */
+    /** specifies whether the {@link VkPipelineColorBlendAttachmentState} settings are controlled independently per-attachment. If this feature is not enabled, the {@link VkPipelineColorBlendAttachmentState} settings for all color attachments <b>must</b> be identical. Otherwise, a different {@link VkPipelineColorBlendAttachmentState} <b>can</b> be provided for each bound color attachment. */
     @NativeType("VkBool32")
     public boolean independentBlend() { return nindependentBlend(address()) != 0; }
-    /** Returns the value of the {@code geometryShader} field. */
+    /** specifies whether geometry shaders are supported. If this feature is not enabled, the {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT} and {@link VK10#VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT PIPELINE_STAGE_GEOMETRY_SHADER_BIT} enum values <b>must</b> not be used. This also specifies whether shader modules <b>can</b> declare the {@code Geometry} capability. */
     @NativeType("VkBool32")
     public boolean geometryShader() { return ngeometryShader(address()) != 0; }
-    /** Returns the value of the {@code tessellationShader} field. */
+    /** specifies whether tessellation control and evaluation shaders are supported. If this feature is not enabled, the {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT}, {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, {@link VK10#VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT}, {@link VK10#VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT}, and {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO} enum values <b>must</b> not be used. This also specifies whether shader modules <b>can</b> declare the {@code Tessellation} capability. */
     @NativeType("VkBool32")
     public boolean tessellationShader() { return ntessellationShader(address()) != 0; }
-    /** Returns the value of the {@code sampleRateShading} field. */
+    /** specifies whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-sampleshading">Sample Shading</a> and multisample interpolation are supported. If this feature is not enabled, the {@code sampleShadingEnable} member of the {@link VkPipelineMultisampleStateCreateInfo} structure <b>must</b> be set to {@link VK10#VK_FALSE FALSE} and the {@code minSampleShading} member is ignored. This also specifies whether shader modules <b>can</b> declare the {@code SampleRateShading} capability. */
     @NativeType("VkBool32")
     public boolean sampleRateShading() { return nsampleRateShading(address()) != 0; }
-    /** Returns the value of the {@code dualSrcBlend} field. */
+    /** specifies whether blend operations which take two sources are supported. If this feature is not enabled, the {@link VK10#VK_BLEND_FACTOR_SRC1_COLOR BLEND_FACTOR_SRC1_COLOR}, {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR BLEND_FACTOR_ONE_MINUS_SRC1_COLOR}, {@link VK10#VK_BLEND_FACTOR_SRC1_ALPHA BLEND_FACTOR_SRC1_ALPHA}, and {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA} enum values <b>must</b> not be used as source or destination blending factors. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-dsb">Dual-Source Blending</a>. */
     @NativeType("VkBool32")
     public boolean dualSrcBlend() { return ndualSrcBlend(address()) != 0; }
-    /** Returns the value of the {@code logicOp} field. */
+    /** specifies whether logic operations are supported. If this feature is not enabled, the {@code logicOpEnable} member of the {@link VkPipelineColorBlendStateCreateInfo} structure <b>must</b> be set to {@link VK10#VK_FALSE FALSE}, and the {@code logicOp} member is ignored. */
     @NativeType("VkBool32")
     public boolean logicOp() { return nlogicOp(address()) != 0; }
-    /** Returns the value of the {@code multiDrawIndirect} field. */
+    /** specifies whether multiple draw indirect is supported. If this feature is not enabled, the {@code drawCount} parameter to the {@code vkCmdDrawIndirect} and {@code vkCmdDrawIndexedIndirect} commands <b>must</b> be 0 or 1. The {@code maxDrawIndirectCount} member of the {@link VkPhysicalDeviceLimits} structure <b>must</b> also be 1 if this feature is not supported. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxDrawIndirectCount">maxDrawIndirectCount</a>. */
     @NativeType("VkBool32")
     public boolean multiDrawIndirect() { return nmultiDrawIndirect(address()) != 0; }
-    /** Returns the value of the {@code drawIndirectFirstInstance} field. */
+    /** specifies whether indirect draw calls support the {@code firstInstance} parameter. If this feature is not enabled, the {@code firstInstance} member of all {@link VkDrawIndirectCommand} and {@link VkDrawIndexedIndirectCommand} structures that are provided to the {@code vkCmdDrawIndirect} and {@code vkCmdDrawIndexedIndirect} commands <b>must</b> be 0. */
     @NativeType("VkBool32")
     public boolean drawIndirectFirstInstance() { return ndrawIndirectFirstInstance(address()) != 0; }
-    /** Returns the value of the {@code depthClamp} field. */
+    /** specifies whether depth clamping is supported. If this feature is not enabled, the {@code depthClampEnable} member of the {@link VkPipelineRasterizationStateCreateInfo} structure <b>must</b> be set to {@link VK10#VK_FALSE FALSE}. Otherwise, setting {@code depthClampEnable} to {@link VK10#VK_TRUE TRUE} will enable depth clamping. */
     @NativeType("VkBool32")
     public boolean depthClamp() { return ndepthClamp(address()) != 0; }
-    /** Returns the value of the {@code depthBiasClamp} field. */
+    /** specifies whether depth bias clamping is supported. If this feature is not enabled, the {@code depthBiasClamp} member of the {@link VkPipelineRasterizationStateCreateInfo} structure <b>must</b> be set to 0.0 unless the {@link VK10#VK_DYNAMIC_STATE_DEPTH_BIAS DYNAMIC_STATE_DEPTH_BIAS} dynamic state is enabled, and the {@code depthBiasClamp} parameter to {@code vkCmdSetDepthBias} <b>must</b> be set to 0.0. */
     @NativeType("VkBool32")
     public boolean depthBiasClamp() { return ndepthBiasClamp(address()) != 0; }
-    /** Returns the value of the {@code fillModeNonSolid} field. */
+    /** specifies whether point and wireframe fill modes are supported. If this feature is not enabled, the {@link VK10#VK_POLYGON_MODE_POINT POLYGON_MODE_POINT} and {@link VK10#VK_POLYGON_MODE_LINE POLYGON_MODE_LINE} enum values <b>must</b> not be used. */
     @NativeType("VkBool32")
     public boolean fillModeNonSolid() { return nfillModeNonSolid(address()) != 0; }
-    /** Returns the value of the {@code depthBounds} field. */
+    /** specifies whether depth bounds tests are supported. If this feature is not enabled, the {@code depthBoundsTestEnable} member of the {@link VkPipelineDepthStencilStateCreateInfo} structure <b>must</b> be set to {@link VK10#VK_FALSE FALSE}. When {@code depthBoundsTestEnable} is set to {@link VK10#VK_FALSE FALSE}, the {@code minDepthBounds} and {@code maxDepthBounds} members of the {@link VkPipelineDepthStencilStateCreateInfo} structure are ignored. */
     @NativeType("VkBool32")
     public boolean depthBounds() { return ndepthBounds(address()) != 0; }
-    /** Returns the value of the {@code wideLines} field. */
+    /** specifies whether lines with width other than 1.0 are supported. If this feature is not enabled, the {@code lineWidth} member of the {@link VkPipelineRasterizationStateCreateInfo} structure <b>must</b> be set to 1.0 unless the {@link VK10#VK_DYNAMIC_STATE_LINE_WIDTH DYNAMIC_STATE_LINE_WIDTH} dynamic state is enabled, and the {@code lineWidth} parameter to {@code vkCmdSetLineWidth} <b>must</b> be set to 1.0. When this feature is supported, the range and granularity of supported line widths are indicated by the {@code lineWidthRange} and {@code lineWidthGranularity} members of the {@link VkPhysicalDeviceLimits} structure, respectively. */
     @NativeType("VkBool32")
     public boolean wideLines() { return nwideLines(address()) != 0; }
-    /** Returns the value of the {@code largePoints} field. */
+    /** specifies whether points with size greater than 1.0 are supported. If this feature is not enabled, only a point size of 1.0 written by a shader is supported. The range and granularity of supported point sizes are indicated by the {@code pointSizeRange} and {@code pointSizeGranularity} members of the {@link VkPhysicalDeviceLimits} structure, respectively. */
     @NativeType("VkBool32")
     public boolean largePoints() { return nlargePoints(address()) != 0; }
-    /** Returns the value of the {@code alphaToOne} field. */
+    /** specifies whether the implementation is able to replace the alpha value of the fragment shader color output in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-covg">Multisample Coverage</a> fragment operation. If this feature is not enabled, then the {@code alphaToOneEnable} member of the {@link VkPipelineMultisampleStateCreateInfo} structure <b>must</b> be set to {@link VK10#VK_FALSE FALSE}. Otherwise setting {@code alphaToOneEnable} to {@link VK10#VK_TRUE TRUE} will enable alpha-to-one behavior. */
     @NativeType("VkBool32")
     public boolean alphaToOne() { return nalphaToOne(address()) != 0; }
-    /** Returns the value of the {@code multiViewport} field. */
+    /**
+     * specifies whether more than one viewport is supported. If this feature is not enabled:
+     * 
+     * <ul>
+     * <li>The {@code viewportCount} and {@code scissorCount} members of the {@link VkPipelineViewportStateCreateInfo} structure <b>must</b> be set to 1.</li>
+     * <li>The {@code firstViewport} and {@code viewportCount} parameters to the {@code vkCmdSetViewport} command <b>must</b> be set to 0 and 1, respectively.</li>
+     * <li>The {@code firstScissor} and {@code scissorCount} parameters to the {@code vkCmdSetScissor} command <b>must</b> be set to 0 and 1, respectively.</li>
+     * <li>The {@code exclusiveScissorCount} member of the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} structure <b>must</b> be set to 0 or 1.</li>
+     * <li>The {@code firstExclusiveScissor} and {@code exclusiveScissorCount} parameters to the {@code vkCmdSetExclusiveScissorNV} command <b>must</b> be set to 0 and 1, respectively.</li>
+     * </ul>
+     */
     @NativeType("VkBool32")
     public boolean multiViewport() { return nmultiViewport(address()) != 0; }
-    /** Returns the value of the {@code samplerAnisotropy} field. */
+    /** specifies whether anisotropic filtering is supported. If this feature is not enabled, the {@code anisotropyEnable} member of the {@link VkSamplerCreateInfo} structure <b>must</b> be {@link VK10#VK_FALSE FALSE}. */
     @NativeType("VkBool32")
     public boolean samplerAnisotropy() { return nsamplerAnisotropy(address()) != 0; }
-    /** Returns the value of the {@code textureCompressionETC2} field. */
+    /**
+     * specifies whether all of the ETC2 and EAC compressed texture formats are supported. If this feature is enabled, then the {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT FORMAT_FEATURE_SAMPLED_IMAGE_BIT}, {@link VK10#VK_FORMAT_FEATURE_BLIT_SRC_BIT FORMAT_FEATURE_BLIT_SRC_BIT} and {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT} features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
+     * 
+     * <ul>
+     * <li>{@link VK10#VK_FORMAT_ETC2_R8G8B8_UNORM_BLOCK FORMAT_ETC2_R8G8B8_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ETC2_R8G8B8_SRGB_BLOCK FORMAT_ETC2_R8G8B8_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_EAC_R11_UNORM_BLOCK FORMAT_EAC_R11_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_EAC_R11_SNORM_BLOCK FORMAT_EAC_R11_SNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_EAC_R11G11_UNORM_BLOCK FORMAT_EAC_R11G11_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_EAC_R11G11_SNORM_BLOCK FORMAT_EAC_R11G11_SNORM_BLOCK}</li>
+     * </ul>
+     * 
+     * <p>To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.</p>
+     */
     @NativeType("VkBool32")
     public boolean textureCompressionETC2() { return ntextureCompressionETC2(address()) != 0; }
-    /** Returns the value of the {@code textureCompressionASTC_LDR} field. */
+    /**
+     * specifies whether all of the ASTC LDR compressed texture formats are supported. If this feature is enabled, then the {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT FORMAT_FEATURE_SAMPLED_IMAGE_BIT}, {@link VK10#VK_FORMAT_FEATURE_BLIT_SRC_BIT FORMAT_FEATURE_BLIT_SRC_BIT} and {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT} features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
+     * 
+     * <ul>
+     * <li>{@link VK10#VK_FORMAT_ASTC_4x4_UNORM_BLOCK FORMAT_ASTC_4x4_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_4x4_SRGB_BLOCK FORMAT_ASTC_4x4_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_5x4_UNORM_BLOCK FORMAT_ASTC_5x4_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_5x4_SRGB_BLOCK FORMAT_ASTC_5x4_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_5x5_UNORM_BLOCK FORMAT_ASTC_5x5_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_5x5_SRGB_BLOCK FORMAT_ASTC_5x5_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_6x5_UNORM_BLOCK FORMAT_ASTC_6x5_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_6x5_SRGB_BLOCK FORMAT_ASTC_6x5_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_6x6_UNORM_BLOCK FORMAT_ASTC_6x6_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_6x6_SRGB_BLOCK FORMAT_ASTC_6x6_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_8x5_UNORM_BLOCK FORMAT_ASTC_8x5_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_8x5_SRGB_BLOCK FORMAT_ASTC_8x5_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_8x6_UNORM_BLOCK FORMAT_ASTC_8x6_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_8x6_SRGB_BLOCK FORMAT_ASTC_8x6_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_8x8_UNORM_BLOCK FORMAT_ASTC_8x8_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_8x8_SRGB_BLOCK FORMAT_ASTC_8x8_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_10x5_UNORM_BLOCK FORMAT_ASTC_10x5_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_10x5_SRGB_BLOCK FORMAT_ASTC_10x5_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_10x6_UNORM_BLOCK FORMAT_ASTC_10x6_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_10x6_SRGB_BLOCK FORMAT_ASTC_10x6_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_10x8_UNORM_BLOCK FORMAT_ASTC_10x8_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_10x8_SRGB_BLOCK FORMAT_ASTC_10x8_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_10x10_UNORM_BLOCK FORMAT_ASTC_10x10_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_10x10_SRGB_BLOCK FORMAT_ASTC_10x10_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_12x10_UNORM_BLOCK FORMAT_ASTC_12x10_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_12x10_SRGB_BLOCK FORMAT_ASTC_12x10_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_12x12_UNORM_BLOCK FORMAT_ASTC_12x12_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_ASTC_12x12_SRGB_BLOCK FORMAT_ASTC_12x12_SRGB_BLOCK}</li>
+     * </ul>
+     * 
+     * <p>To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.</p>
+     */
     @NativeType("VkBool32")
     public boolean textureCompressionASTC_LDR() { return ntextureCompressionASTC_LDR(address()) != 0; }
-    /** Returns the value of the {@code textureCompressionBC} field. */
+    /**
+     * specifies whether all of the BC compressed texture formats are supported. If this feature is enabled, then the {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT FORMAT_FEATURE_SAMPLED_IMAGE_BIT}, {@link VK10#VK_FORMAT_FEATURE_BLIT_SRC_BIT FORMAT_FEATURE_BLIT_SRC_BIT} and {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT} features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
+     * 
+     * <ul>
+     * <li>{@link VK10#VK_FORMAT_BC1_RGB_UNORM_BLOCK FORMAT_BC1_RGB_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC1_RGB_SRGB_BLOCK FORMAT_BC1_RGB_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC1_RGBA_UNORM_BLOCK FORMAT_BC1_RGBA_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC1_RGBA_SRGB_BLOCK FORMAT_BC1_RGBA_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC2_UNORM_BLOCK FORMAT_BC2_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC2_SRGB_BLOCK FORMAT_BC2_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC3_UNORM_BLOCK FORMAT_BC3_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC3_SRGB_BLOCK FORMAT_BC3_SRGB_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC4_UNORM_BLOCK FORMAT_BC4_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC4_SNORM_BLOCK FORMAT_BC4_SNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC5_UNORM_BLOCK FORMAT_BC5_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC5_SNORM_BLOCK FORMAT_BC5_SNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC6H_UFLOAT_BLOCK FORMAT_BC6H_UFLOAT_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC6H_SFLOAT_BLOCK FORMAT_BC6H_SFLOAT_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC7_UNORM_BLOCK FORMAT_BC7_UNORM_BLOCK}</li>
+     * <li>{@link VK10#VK_FORMAT_BC7_SRGB_BLOCK FORMAT_BC7_SRGB_BLOCK}</li>
+     * </ul>
+     * 
+     * <p>To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.</p>
+     */
     @NativeType("VkBool32")
     public boolean textureCompressionBC() { return ntextureCompressionBC(address()) != 0; }
-    /** Returns the value of the {@code occlusionQueryPrecise} field. */
+    /** specifies whether occlusion queries returning actual sample counts are supported. Occlusion queries are created in a {@code VkQueryPool} by specifying the {@code queryType} of {@link VK10#VK_QUERY_TYPE_OCCLUSION QUERY_TYPE_OCCLUSION} in the {@link VkQueryPoolCreateInfo} structure which is passed to {@code vkCreateQueryPool}. If this feature is enabled, queries of this type <b>can</b> enable {@link VK10#VK_QUERY_CONTROL_PRECISE_BIT QUERY_CONTROL_PRECISE_BIT} in the {@code flags} parameter to {@code vkCmdBeginQuery}. If this feature is not supported, the implementation supports only boolean occlusion queries. When any samples are passed, boolean queries will return a non-zero result value, otherwise a result value of zero is returned. When this feature is enabled and {@link VK10#VK_QUERY_CONTROL_PRECISE_BIT QUERY_CONTROL_PRECISE_BIT} is set, occlusion queries will report the actual number of samples passed. */
     @NativeType("VkBool32")
     public boolean occlusionQueryPrecise() { return nocclusionQueryPrecise(address()) != 0; }
-    /** Returns the value of the {@code pipelineStatisticsQuery} field. */
+    /** specifies whether the pipeline statistics queries are supported. If this feature is not enabled, queries of type {@link VK10#VK_QUERY_TYPE_PIPELINE_STATISTICS QUERY_TYPE_PIPELINE_STATISTICS} <b>cannot</b> be created, and none of the {@code VkQueryPipelineStatisticFlagBits} bits <b>can</b> be set in the {@code pipelineStatistics} member of the {@link VkQueryPoolCreateInfo} structure. */
     @NativeType("VkBool32")
     public boolean pipelineStatisticsQuery() { return npipelineStatisticsQuery(address()) != 0; }
-    /** Returns the value of the {@code vertexPipelineStoresAndAtomics} field. */
+    /** specifies whether storage buffers and images support stores and atomic operations in the vertex, tessellation, and geometry shader stages. If this feature is not enabled, all storage image, storage texel buffers, and storage buffer variables used by these stages in shader modules <b>must</b> be decorated with the {@code NonWritable} decoration (or the {@code readonly} memory qualifier in GLSL). */
     @NativeType("VkBool32")
     public boolean vertexPipelineStoresAndAtomics() { return nvertexPipelineStoresAndAtomics(address()) != 0; }
-    /** Returns the value of the {@code fragmentStoresAndAtomics} field. */
+    /** specifies whether storage buffers and images support stores and atomic operations in the fragment shader stage. If this feature is not enabled, all storage image, storage texel buffers, and storage buffer variables used by the fragment stage in shader modules <b>must</b> be decorated with the {@code NonWritable} decoration (or the {@code readonly} memory qualifier in GLSL). */
     @NativeType("VkBool32")
     public boolean fragmentStoresAndAtomics() { return nfragmentStoresAndAtomics(address()) != 0; }
-    /** Returns the value of the {@code shaderTessellationAndGeometryPointSize} field. */
+    /** specifies whether the {@code PointSize} built-in decoration is available in the tessellation control, tessellation evaluation, and geometry shader stages. If this feature is not enabled, members decorated with the {@code PointSize} built-in decoration <b>must</b> not be read from or written to and all points written from a tessellation or geometry shader will have a size of 1.0. This also specifies whether shader modules <b>can</b> declare the {@code TessellationPointSize} capability for tessellation control and evaluation shaders, or if the shader modules <b>can</b> declare the {@code GeometryPointSize} capability for geometry shaders. An implementation supporting this feature <b>must</b> also support one or both of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-tessellationShader">{@code tessellationShader}</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-geometryShader">{@code geometryShader}</a> features. */
     @NativeType("VkBool32")
     public boolean shaderTessellationAndGeometryPointSize() { return nshaderTessellationAndGeometryPointSize(address()) != 0; }
-    /** Returns the value of the {@code shaderImageGatherExtended} field. */
+    /** specifies whether the extended set of image gather instructions are available in shader code. If this feature is not enabled, the {@code OpImage}*{@code Gather} instructions do not support the {@code Offset} and {@code ConstOffsets} operands. This also specifies whether shader modules <b>can</b> declare the {@code ImageGatherExtended} capability. */
     @NativeType("VkBool32")
     public boolean shaderImageGatherExtended() { return nshaderImageGatherExtended(address()) != 0; }
-    /** Returns the value of the {@code shaderStorageImageExtendedFormats} field. */
+    /**
+     * specifies whether all the “storage image extended formats” below are supported; if this feature is supported, then the {@link VK10#VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT FORMAT_FEATURE_STORAGE_IMAGE_BIT} <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
+     * 
+     * <ul>
+     * <li>{@link VK10#VK_FORMAT_R16G16_SFLOAT FORMAT_R16G16_SFLOAT}</li>
+     * <li>{@link VK10#VK_FORMAT_B10G11R11_UFLOAT_PACK32 FORMAT_B10G11R11_UFLOAT_PACK32}</li>
+     * <li>{@link VK10#VK_FORMAT_R16_SFLOAT FORMAT_R16_SFLOAT}</li>
+     * <li>{@link VK10#VK_FORMAT_R16G16B16A16_UNORM FORMAT_R16G16B16A16_UNORM}</li>
+     * <li>{@link VK10#VK_FORMAT_A2B10G10R10_UNORM_PACK32 FORMAT_A2B10G10R10_UNORM_PACK32}</li>
+     * <li>{@link VK10#VK_FORMAT_R16G16_UNORM FORMAT_R16G16_UNORM}</li>
+     * <li>{@link VK10#VK_FORMAT_R8G8_UNORM FORMAT_R8G8_UNORM}</li>
+     * <li>{@link VK10#VK_FORMAT_R16_UNORM FORMAT_R16_UNORM}</li>
+     * <li>{@link VK10#VK_FORMAT_R8_UNORM FORMAT_R8_UNORM}</li>
+     * <li>{@link VK10#VK_FORMAT_R16G16B16A16_SNORM FORMAT_R16G16B16A16_SNORM}</li>
+     * <li>{@link VK10#VK_FORMAT_R16G16_SNORM FORMAT_R16G16_SNORM}</li>
+     * <li>{@link VK10#VK_FORMAT_R8G8_SNORM FORMAT_R8G8_SNORM}</li>
+     * <li>{@link VK10#VK_FORMAT_R16_SNORM FORMAT_R16_SNORM}</li>
+     * <li>{@link VK10#VK_FORMAT_R8_SNORM FORMAT_R8_SNORM}</li>
+     * <li>{@link VK10#VK_FORMAT_R16G16_SINT FORMAT_R16G16_SINT}</li>
+     * <li>{@link VK10#VK_FORMAT_R8G8_SINT FORMAT_R8G8_SINT}</li>
+     * <li>{@link VK10#VK_FORMAT_R16_SINT FORMAT_R16_SINT}</li>
+     * <li>{@link VK10#VK_FORMAT_R8_SINT FORMAT_R8_SINT}</li>
+     * <li>{@link VK10#VK_FORMAT_A2B10G10R10_UINT_PACK32 FORMAT_A2B10G10R10_UINT_PACK32}</li>
+     * <li>{@link VK10#VK_FORMAT_R16G16_UINT FORMAT_R16G16_UINT}</li>
+     * <li>{@link VK10#VK_FORMAT_R8G8_UINT FORMAT_R8G8_UINT}</li>
+     * <li>{@link VK10#VK_FORMAT_R16_UINT FORMAT_R16_UINT}</li>
+     * <li>{@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT}</li>
+     * </ul>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>{@code shaderStorageImageExtendedFormats} feature only adds a guarantee of format support, which is specified for the whole physical device. Therefore enabling or disabling the feature via {@link VK10#vkCreateDevice CreateDevice} has no practical effect.</p>
+     * 
+     * <p>== Description</p>
+     * 
+     * <p>To query for additional properties, or if the feature is not supported, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats, as usual rules allow.</p>
+     * 
+     * <p>{@link VK10#VK_FORMAT_R32G32_UINT FORMAT_R32G32_UINT}, {@link VK10#VK_FORMAT_R32G32_SINT FORMAT_R32G32_SINT}, and {@link VK10#VK_FORMAT_R32G32_SFLOAT FORMAT_R32G32_SFLOAT} from {@code StorageImageExtendedFormats} SPIR-V capability, are already covered by core Vulkan <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-mandatory-features-32bit">mandatory format support</a>.</p>
+     * </div>
+     */
     @NativeType("VkBool32")
     public boolean shaderStorageImageExtendedFormats() { return nshaderStorageImageExtendedFormats(address()) != 0; }
-    /** Returns the value of the {@code shaderStorageImageMultisample} field. */
+    /** specifies whether multisampled storage images are supported. If this feature is not enabled, images that are created with a {@code usage} that includes {@link VK10#VK_IMAGE_USAGE_STORAGE_BIT IMAGE_USAGE_STORAGE_BIT} <b>must</b> be created with {@code samples} equal to {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT}. This also specifies whether shader modules <b>can</b> declare the {@code StorageImageMultisample} and {@code ImageMSArray} capabilities. */
     @NativeType("VkBool32")
     public boolean shaderStorageImageMultisample() { return nshaderStorageImageMultisample(address()) != 0; }
-    /** Returns the value of the {@code shaderStorageImageReadWithoutFormat} field. */
+    /** specifies whether storage images require a format qualifier to be specified when reading from storage images. If this feature is not enabled, the {@code OpImageRead} instruction <b>must</b> not have an {@code OpTypeImage} of {@code Unknown}. This also specifies whether shader modules <b>can</b> declare the {@code StorageImageReadWithoutFormat} capability. */
     @NativeType("VkBool32")
     public boolean shaderStorageImageReadWithoutFormat() { return nshaderStorageImageReadWithoutFormat(address()) != 0; }
-    /** Returns the value of the {@code shaderStorageImageWriteWithoutFormat} field. */
+    /** specifies whether storage images require a format qualifier to be specified when writing to storage images. If this feature is not enabled, the {@code OpImageWrite} instruction <b>must</b> not have an {@code OpTypeImage} of {@code Unknown}. This also specifies whether shader modules <b>can</b> declare the {@code StorageImageWriteWithoutFormat} capability. */
     @NativeType("VkBool32")
     public boolean shaderStorageImageWriteWithoutFormat() { return nshaderStorageImageWriteWithoutFormat(address()) != 0; }
-    /** Returns the value of the {@code shaderUniformBufferArrayDynamicIndexing} field. */
+    /** specifies whether arrays of uniform buffers <b>can</b> be indexed by <em>dynamically uniform</em> integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER} or {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also specifies whether shader modules <b>can</b> declare the {@code UniformBufferArrayDynamicIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderUniformBufferArrayDynamicIndexing() { return nshaderUniformBufferArrayDynamicIndexing(address()) != 0; }
-    /** Returns the value of the {@code shaderSampledImageArrayDynamicIndexing} field. */
+    /** specifies whether arrays of samplers or sampled images <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER}, {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, or {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also specifies whether shader modules <b>can</b> declare the {@code SampledImageArrayDynamicIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderSampledImageArrayDynamicIndexing() { return nshaderSampledImageArrayDynamicIndexing(address()) != 0; }
-    /** Returns the value of the {@code shaderStorageBufferArrayDynamicIndexing} field. */
+    /** specifies whether arrays of storage buffers <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER} or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also specifies whether shader modules <b>can</b> declare the {@code StorageBufferArrayDynamicIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderStorageBufferArrayDynamicIndexing() { return nshaderStorageBufferArrayDynamicIndexing(address()) != 0; }
-    /** Returns the value of the {@code shaderStorageImageArrayDynamicIndexing} field. */
+    /** specifies whether arrays of storage images <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also specifies whether shader modules <b>can</b> declare the {@code StorageImageArrayDynamicIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderStorageImageArrayDynamicIndexing() { return nshaderStorageImageArrayDynamicIndexing(address()) != 0; }
-    /** Returns the value of the {@code shaderClipDistance} field. */
+    /** specifies whether clip distances are supported in shader code. If this feature is not enabled, any members decorated with the {@code ClipDistance} built-in decoration <b>must</b> not be read from or written to in shader modules. This also specifies whether shader modules <b>can</b> declare the {@code ClipDistance} capability. */
     @NativeType("VkBool32")
     public boolean shaderClipDistance() { return nshaderClipDistance(address()) != 0; }
-    /** Returns the value of the {@code shaderCullDistance} field. */
+    /** specifies whether cull distances are supported in shader code. If this feature is not enabled, any members decorated with the {@code CullDistance} built-in decoration <b>must</b> not be read from or written to in shader modules. This also specifies whether shader modules <b>can</b> declare the {@code CullDistance} capability. */
     @NativeType("VkBool32")
     public boolean shaderCullDistance() { return nshaderCullDistance(address()) != 0; }
-    /** Returns the value of the {@code shaderFloat64} field. */
+    /** specifies whether 64-bit floats (doubles) are supported in shader code. If this feature is not enabled, 64-bit floating-point types <b>must</b> not be used in shader code. This also specifies whether shader modules <b>can</b> declare the {@code Float64} capability. Declaring and using 64-bit floats is enabled for all storage classes that SPIR-V allows with the {@code Float64} capability. */
     @NativeType("VkBool32")
     public boolean shaderFloat64() { return nshaderFloat64(address()) != 0; }
-    /** Returns the value of the {@code shaderInt64} field. */
+    /** specifies whether 64-bit integers (signed and unsigned) are supported in shader code. If this feature is not enabled, 64-bit integer types <b>must</b> not be used in shader code. This also specifies whether shader modules <b>can</b> declare the {@code Int64} capability. Declaring and using 64-bit integers is enabled for all storage classes that SPIR-V allows with the {@code Int64} capability. */
     @NativeType("VkBool32")
     public boolean shaderInt64() { return nshaderInt64(address()) != 0; }
-    /** Returns the value of the {@code shaderInt16} field. */
+    /** specifies whether 16-bit integers (signed and unsigned) are supported in shader code. If this feature is not enabled, 16-bit integer types <b>must</b> not be used in shader code. This also specifies whether shader modules <b>can</b> declare the {@code Int16} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Int16} SPIR-V capability: Declaring and using 16-bit integers in the {@code Private}, {@code Workgroup} (for non-Block variables), and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled. */
     @NativeType("VkBool32")
     public boolean shaderInt16() { return nshaderInt16(address()) != 0; }
-    /** Returns the value of the {@code shaderResourceResidency} field. */
+    /** specifies whether image operations that return resource residency information are supported in shader code. If this feature is not enabled, the {@code OpImageSparse}* instructions <b>must</b> not be used in shader code. This also specifies whether shader modules <b>can</b> declare the {@code SparseResidency} capability. The feature requires at least one of the {@code sparseResidency}* features to be supported. */
     @NativeType("VkBool32")
     public boolean shaderResourceResidency() { return nshaderResourceResidency(address()) != 0; }
-    /** Returns the value of the {@code shaderResourceMinLod} field. */
+    /** specifies whether image operations specifying the minimum resource LOD are supported in shader code. If this feature is not enabled, the {@code MinLod} image operand <b>must</b> not be used in shader code. This also specifies whether shader modules <b>can</b> declare the {@code MinLod} capability. */
     @NativeType("VkBool32")
     public boolean shaderResourceMinLod() { return nshaderResourceMinLod(address()) != 0; }
-    /** Returns the value of the {@code sparseBinding} field. */
+    /** specifies whether resource memory <b>can</b> be managed at opaque sparse block level instead of at the object level. If this feature is not enabled, resource memory <b>must</b> be bound only on a per-object basis using the {@code vkBindBufferMemory} and {@code vkBindImageMemory} commands. In this case, buffers and images <b>must</b> not be created with {@link VK10#VK_BUFFER_CREATE_SPARSE_BINDING_BIT BUFFER_CREATE_SPARSE_BINDING_BIT} and {@link VK10#VK_IMAGE_CREATE_SPARSE_BINDING_BIT IMAGE_CREATE_SPARSE_BINDING_BIT} set in the {@code flags} member of the {@link VkBufferCreateInfo} and {@link VkImageCreateInfo} structures, respectively. Otherwise resource memory <b>can</b> be managed as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#sparsememory-sparseresourcefeatures">Sparse Resource Features</a>. */
     @NativeType("VkBool32")
     public boolean sparseBinding() { return nsparseBinding(address()) != 0; }
-    /** Returns the value of the {@code sparseResidencyBuffer} field. */
+    /** specifies whether the device <b>can</b> access partially resident buffers. If this feature is not enabled, buffers <b>must</b> not be created with {@link VK10#VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT BUFFER_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkBufferCreateInfo} structure. */
     @NativeType("VkBool32")
     public boolean sparseResidencyBuffer() { return nsparseResidencyBuffer(address()) != 0; }
-    /** Returns the value of the {@code sparseResidencyImage2D} field. */
+    /** specifies whether the device <b>can</b> access partially resident 2D images with 1 sample per pixel. If this feature is not enabled, images with an {@code imageType} of {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} and {@code samples} set to {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT} <b>must</b> not be created with {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkImageCreateInfo} structure. */
     @NativeType("VkBool32")
     public boolean sparseResidencyImage2D() { return nsparseResidencyImage2D(address()) != 0; }
-    /** Returns the value of the {@code sparseResidencyImage3D} field. */
+    /** specifies whether the device <b>can</b> access partially resident 3D images. If this feature is not enabled, images with an {@code imageType} of {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D} <b>must</b> not be created with {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkImageCreateInfo} structure. */
     @NativeType("VkBool32")
     public boolean sparseResidencyImage3D() { return nsparseResidencyImage3D(address()) != 0; }
-    /** Returns the value of the {@code sparseResidency2Samples} field. */
+    /** specifies whether the physical device <b>can</b> access partially resident 2D images with 2 samples per pixel. If this feature is not enabled, images with an {@code imageType} of {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} and {@code samples} set to {@link VK10#VK_SAMPLE_COUNT_2_BIT SAMPLE_COUNT_2_BIT} <b>must</b> not be created with {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkImageCreateInfo} structure. */
     @NativeType("VkBool32")
     public boolean sparseResidency2Samples() { return nsparseResidency2Samples(address()) != 0; }
-    /** Returns the value of the {@code sparseResidency4Samples} field. */
+    /** specifies whether the physical device <b>can</b> access partially resident 2D images with 4 samples per pixel. If this feature is not enabled, images with an {@code imageType} of {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} and {@code samples} set to {@link VK10#VK_SAMPLE_COUNT_4_BIT SAMPLE_COUNT_4_BIT} <b>must</b> not be created with {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkImageCreateInfo} structure. */
     @NativeType("VkBool32")
     public boolean sparseResidency4Samples() { return nsparseResidency4Samples(address()) != 0; }
-    /** Returns the value of the {@code sparseResidency8Samples} field. */
+    /** specifies whether the physical device <b>can</b> access partially resident 2D images with 8 samples per pixel. If this feature is not enabled, images with an {@code imageType} of {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} and {@code samples} set to {@link VK10#VK_SAMPLE_COUNT_8_BIT SAMPLE_COUNT_8_BIT} <b>must</b> not be created with {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkImageCreateInfo} structure. */
     @NativeType("VkBool32")
     public boolean sparseResidency8Samples() { return nsparseResidency8Samples(address()) != 0; }
-    /** Returns the value of the {@code sparseResidency16Samples} field. */
+    /** specifies whether the physical device <b>can</b> access partially resident 2D images with 16 samples per pixel. If this feature is not enabled, images with an {@code imageType} of {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} and {@code samples} set to {@link VK10#VK_SAMPLE_COUNT_16_BIT SAMPLE_COUNT_16_BIT} <b>must</b> not be created with {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} set in the {@code flags} member of the {@link VkImageCreateInfo} structure. */
     @NativeType("VkBool32")
     public boolean sparseResidency16Samples() { return nsparseResidency16Samples(address()) != 0; }
-    /** Returns the value of the {@code sparseResidencyAliased} field. */
+    /** specifies whether the physical device <b>can</b> correctly access data aliased into multiple locations. If this feature is not enabled, the {@link VK10#VK_BUFFER_CREATE_SPARSE_ALIASED_BIT BUFFER_CREATE_SPARSE_ALIASED_BIT} and {@link VK10#VK_IMAGE_CREATE_SPARSE_ALIASED_BIT IMAGE_CREATE_SPARSE_ALIASED_BIT} enum values <b>must</b> not be used in {@code flags} members of the {@link VkBufferCreateInfo} and {@link VkImageCreateInfo} structures, respectively. */
     @NativeType("VkBool32")
     public boolean sparseResidencyAliased() { return nsparseResidencyAliased(address()) != 0; }
-    /** Returns the value of the {@code variableMultisampleRate} field. */
+    /** specifies whether all pipelines that will be bound to a command buffer during a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#renderpass-noattachments">subpass which uses no attachments</a> <b>must</b> have the same value for {@link VkPipelineMultisampleStateCreateInfo}{@code ::rasterizationSamples}. If set to {@link VK10#VK_TRUE TRUE}, the implementation supports variable multisample rates in a subpass which uses no attachments. If set to {@link VK10#VK_FALSE FALSE}, then all pipelines bound in such a subpass <b>must</b> have the same multisample rate. This has no effect in situations where a subpass uses any attachments. */
     @NativeType("VkBool32")
     public boolean variableMultisampleRate() { return nvariableMultisampleRate(address()) != 0; }
-    /** Returns the value of the {@code inheritedQueries} field. */
+    /** specifies whether a secondary command buffer <b>may</b> be executed while a query is active. */
     @NativeType("VkBool32")
     public boolean inheritedQueries() { return ninheritedQueries(address()) != 0; }
 
-    /** Sets the specified value to the {@code robustBufferAccess} field. */
+    /** Sets the specified value to the {@link #robustBufferAccess} field. */
     public VkPhysicalDeviceFeatures robustBufferAccess(@NativeType("VkBool32") boolean value) { nrobustBufferAccess(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code fullDrawIndexUint32} field. */
+    /** Sets the specified value to the {@link #fullDrawIndexUint32} field. */
     public VkPhysicalDeviceFeatures fullDrawIndexUint32(@NativeType("VkBool32") boolean value) { nfullDrawIndexUint32(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code imageCubeArray} field. */
+    /** Sets the specified value to the {@link #imageCubeArray} field. */
     public VkPhysicalDeviceFeatures imageCubeArray(@NativeType("VkBool32") boolean value) { nimageCubeArray(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code independentBlend} field. */
+    /** Sets the specified value to the {@link #independentBlend} field. */
     public VkPhysicalDeviceFeatures independentBlend(@NativeType("VkBool32") boolean value) { nindependentBlend(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code geometryShader} field. */
+    /** Sets the specified value to the {@link #geometryShader} field. */
     public VkPhysicalDeviceFeatures geometryShader(@NativeType("VkBool32") boolean value) { ngeometryShader(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code tessellationShader} field. */
+    /** Sets the specified value to the {@link #tessellationShader} field. */
     public VkPhysicalDeviceFeatures tessellationShader(@NativeType("VkBool32") boolean value) { ntessellationShader(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code sampleRateShading} field. */
+    /** Sets the specified value to the {@link #sampleRateShading} field. */
     public VkPhysicalDeviceFeatures sampleRateShading(@NativeType("VkBool32") boolean value) { nsampleRateShading(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code dualSrcBlend} field. */
+    /** Sets the specified value to the {@link #dualSrcBlend} field. */
     public VkPhysicalDeviceFeatures dualSrcBlend(@NativeType("VkBool32") boolean value) { ndualSrcBlend(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code logicOp} field. */
+    /** Sets the specified value to the {@link #logicOp} field. */
     public VkPhysicalDeviceFeatures logicOp(@NativeType("VkBool32") boolean value) { nlogicOp(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code multiDrawIndirect} field. */
+    /** Sets the specified value to the {@link #multiDrawIndirect} field. */
     public VkPhysicalDeviceFeatures multiDrawIndirect(@NativeType("VkBool32") boolean value) { nmultiDrawIndirect(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code drawIndirectFirstInstance} field. */
+    /** Sets the specified value to the {@link #drawIndirectFirstInstance} field. */
     public VkPhysicalDeviceFeatures drawIndirectFirstInstance(@NativeType("VkBool32") boolean value) { ndrawIndirectFirstInstance(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code depthClamp} field. */
+    /** Sets the specified value to the {@link #depthClamp} field. */
     public VkPhysicalDeviceFeatures depthClamp(@NativeType("VkBool32") boolean value) { ndepthClamp(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code depthBiasClamp} field. */
+    /** Sets the specified value to the {@link #depthBiasClamp} field. */
     public VkPhysicalDeviceFeatures depthBiasClamp(@NativeType("VkBool32") boolean value) { ndepthBiasClamp(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code fillModeNonSolid} field. */
+    /** Sets the specified value to the {@link #fillModeNonSolid} field. */
     public VkPhysicalDeviceFeatures fillModeNonSolid(@NativeType("VkBool32") boolean value) { nfillModeNonSolid(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code depthBounds} field. */
+    /** Sets the specified value to the {@link #depthBounds} field. */
     public VkPhysicalDeviceFeatures depthBounds(@NativeType("VkBool32") boolean value) { ndepthBounds(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code wideLines} field. */
+    /** Sets the specified value to the {@link #wideLines} field. */
     public VkPhysicalDeviceFeatures wideLines(@NativeType("VkBool32") boolean value) { nwideLines(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code largePoints} field. */
+    /** Sets the specified value to the {@link #largePoints} field. */
     public VkPhysicalDeviceFeatures largePoints(@NativeType("VkBool32") boolean value) { nlargePoints(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code alphaToOne} field. */
+    /** Sets the specified value to the {@link #alphaToOne} field. */
     public VkPhysicalDeviceFeatures alphaToOne(@NativeType("VkBool32") boolean value) { nalphaToOne(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code multiViewport} field. */
+    /** Sets the specified value to the {@link #multiViewport} field. */
     public VkPhysicalDeviceFeatures multiViewport(@NativeType("VkBool32") boolean value) { nmultiViewport(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code samplerAnisotropy} field. */
+    /** Sets the specified value to the {@link #samplerAnisotropy} field. */
     public VkPhysicalDeviceFeatures samplerAnisotropy(@NativeType("VkBool32") boolean value) { nsamplerAnisotropy(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code textureCompressionETC2} field. */
+    /** Sets the specified value to the {@link #textureCompressionETC2} field. */
     public VkPhysicalDeviceFeatures textureCompressionETC2(@NativeType("VkBool32") boolean value) { ntextureCompressionETC2(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code textureCompressionASTC_LDR} field. */
+    /** Sets the specified value to the {@link #textureCompressionASTC_LDR} field. */
     public VkPhysicalDeviceFeatures textureCompressionASTC_LDR(@NativeType("VkBool32") boolean value) { ntextureCompressionASTC_LDR(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code textureCompressionBC} field. */
+    /** Sets the specified value to the {@link #textureCompressionBC} field. */
     public VkPhysicalDeviceFeatures textureCompressionBC(@NativeType("VkBool32") boolean value) { ntextureCompressionBC(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code occlusionQueryPrecise} field. */
+    /** Sets the specified value to the {@link #occlusionQueryPrecise} field. */
     public VkPhysicalDeviceFeatures occlusionQueryPrecise(@NativeType("VkBool32") boolean value) { nocclusionQueryPrecise(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code pipelineStatisticsQuery} field. */
+    /** Sets the specified value to the {@link #pipelineStatisticsQuery} field. */
     public VkPhysicalDeviceFeatures pipelineStatisticsQuery(@NativeType("VkBool32") boolean value) { npipelineStatisticsQuery(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code vertexPipelineStoresAndAtomics} field. */
+    /** Sets the specified value to the {@link #vertexPipelineStoresAndAtomics} field. */
     public VkPhysicalDeviceFeatures vertexPipelineStoresAndAtomics(@NativeType("VkBool32") boolean value) { nvertexPipelineStoresAndAtomics(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code fragmentStoresAndAtomics} field. */
+    /** Sets the specified value to the {@link #fragmentStoresAndAtomics} field. */
     public VkPhysicalDeviceFeatures fragmentStoresAndAtomics(@NativeType("VkBool32") boolean value) { nfragmentStoresAndAtomics(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderTessellationAndGeometryPointSize} field. */
+    /** Sets the specified value to the {@link #shaderTessellationAndGeometryPointSize} field. */
     public VkPhysicalDeviceFeatures shaderTessellationAndGeometryPointSize(@NativeType("VkBool32") boolean value) { nshaderTessellationAndGeometryPointSize(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderImageGatherExtended} field. */
+    /** Sets the specified value to the {@link #shaderImageGatherExtended} field. */
     public VkPhysicalDeviceFeatures shaderImageGatherExtended(@NativeType("VkBool32") boolean value) { nshaderImageGatherExtended(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderStorageImageExtendedFormats} field. */
+    /** Sets the specified value to the {@link #shaderStorageImageExtendedFormats} field. */
     public VkPhysicalDeviceFeatures shaderStorageImageExtendedFormats(@NativeType("VkBool32") boolean value) { nshaderStorageImageExtendedFormats(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderStorageImageMultisample} field. */
+    /** Sets the specified value to the {@link #shaderStorageImageMultisample} field. */
     public VkPhysicalDeviceFeatures shaderStorageImageMultisample(@NativeType("VkBool32") boolean value) { nshaderStorageImageMultisample(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderStorageImageReadWithoutFormat} field. */
+    /** Sets the specified value to the {@link #shaderStorageImageReadWithoutFormat} field. */
     public VkPhysicalDeviceFeatures shaderStorageImageReadWithoutFormat(@NativeType("VkBool32") boolean value) { nshaderStorageImageReadWithoutFormat(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderStorageImageWriteWithoutFormat} field. */
+    /** Sets the specified value to the {@link #shaderStorageImageWriteWithoutFormat} field. */
     public VkPhysicalDeviceFeatures shaderStorageImageWriteWithoutFormat(@NativeType("VkBool32") boolean value) { nshaderStorageImageWriteWithoutFormat(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderUniformBufferArrayDynamicIndexing} field. */
+    /** Sets the specified value to the {@link #shaderUniformBufferArrayDynamicIndexing} field. */
     public VkPhysicalDeviceFeatures shaderUniformBufferArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { nshaderUniformBufferArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderSampledImageArrayDynamicIndexing} field. */
+    /** Sets the specified value to the {@link #shaderSampledImageArrayDynamicIndexing} field. */
     public VkPhysicalDeviceFeatures shaderSampledImageArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { nshaderSampledImageArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderStorageBufferArrayDynamicIndexing} field. */
+    /** Sets the specified value to the {@link #shaderStorageBufferArrayDynamicIndexing} field. */
     public VkPhysicalDeviceFeatures shaderStorageBufferArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { nshaderStorageBufferArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderStorageImageArrayDynamicIndexing} field. */
+    /** Sets the specified value to the {@link #shaderStorageImageArrayDynamicIndexing} field. */
     public VkPhysicalDeviceFeatures shaderStorageImageArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { nshaderStorageImageArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderClipDistance} field. */
+    /** Sets the specified value to the {@link #shaderClipDistance} field. */
     public VkPhysicalDeviceFeatures shaderClipDistance(@NativeType("VkBool32") boolean value) { nshaderClipDistance(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderCullDistance} field. */
+    /** Sets the specified value to the {@link #shaderCullDistance} field. */
     public VkPhysicalDeviceFeatures shaderCullDistance(@NativeType("VkBool32") boolean value) { nshaderCullDistance(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderFloat64} field. */
+    /** Sets the specified value to the {@link #shaderFloat64} field. */
     public VkPhysicalDeviceFeatures shaderFloat64(@NativeType("VkBool32") boolean value) { nshaderFloat64(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderInt64} field. */
+    /** Sets the specified value to the {@link #shaderInt64} field. */
     public VkPhysicalDeviceFeatures shaderInt64(@NativeType("VkBool32") boolean value) { nshaderInt64(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderInt16} field. */
+    /** Sets the specified value to the {@link #shaderInt16} field. */
     public VkPhysicalDeviceFeatures shaderInt16(@NativeType("VkBool32") boolean value) { nshaderInt16(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderResourceResidency} field. */
+    /** Sets the specified value to the {@link #shaderResourceResidency} field. */
     public VkPhysicalDeviceFeatures shaderResourceResidency(@NativeType("VkBool32") boolean value) { nshaderResourceResidency(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderResourceMinLod} field. */
+    /** Sets the specified value to the {@link #shaderResourceMinLod} field. */
     public VkPhysicalDeviceFeatures shaderResourceMinLod(@NativeType("VkBool32") boolean value) { nshaderResourceMinLod(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code sparseBinding} field. */
+    /** Sets the specified value to the {@link #sparseBinding} field. */
     public VkPhysicalDeviceFeatures sparseBinding(@NativeType("VkBool32") boolean value) { nsparseBinding(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code sparseResidencyBuffer} field. */
+    /** Sets the specified value to the {@link #sparseResidencyBuffer} field. */
     public VkPhysicalDeviceFeatures sparseResidencyBuffer(@NativeType("VkBool32") boolean value) { nsparseResidencyBuffer(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code sparseResidencyImage2D} field. */
+    /** Sets the specified value to the {@link #sparseResidencyImage2D} field. */
     public VkPhysicalDeviceFeatures sparseResidencyImage2D(@NativeType("VkBool32") boolean value) { nsparseResidencyImage2D(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code sparseResidencyImage3D} field. */
+    /** Sets the specified value to the {@link #sparseResidencyImage3D} field. */
     public VkPhysicalDeviceFeatures sparseResidencyImage3D(@NativeType("VkBool32") boolean value) { nsparseResidencyImage3D(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code sparseResidency2Samples} field. */
+    /** Sets the specified value to the {@link #sparseResidency2Samples} field. */
     public VkPhysicalDeviceFeatures sparseResidency2Samples(@NativeType("VkBool32") boolean value) { nsparseResidency2Samples(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code sparseResidency4Samples} field. */
+    /** Sets the specified value to the {@link #sparseResidency4Samples} field. */
     public VkPhysicalDeviceFeatures sparseResidency4Samples(@NativeType("VkBool32") boolean value) { nsparseResidency4Samples(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code sparseResidency8Samples} field. */
+    /** Sets the specified value to the {@link #sparseResidency8Samples} field. */
     public VkPhysicalDeviceFeatures sparseResidency8Samples(@NativeType("VkBool32") boolean value) { nsparseResidency8Samples(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code sparseResidency16Samples} field. */
+    /** Sets the specified value to the {@link #sparseResidency16Samples} field. */
     public VkPhysicalDeviceFeatures sparseResidency16Samples(@NativeType("VkBool32") boolean value) { nsparseResidency16Samples(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code sparseResidencyAliased} field. */
+    /** Sets the specified value to the {@link #sparseResidencyAliased} field. */
     public VkPhysicalDeviceFeatures sparseResidencyAliased(@NativeType("VkBool32") boolean value) { nsparseResidencyAliased(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code variableMultisampleRate} field. */
+    /** Sets the specified value to the {@link #variableMultisampleRate} field. */
     public VkPhysicalDeviceFeatures variableMultisampleRate(@NativeType("VkBool32") boolean value) { nvariableMultisampleRate(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code inheritedQueries} field. */
+    /** Sets the specified value to the {@link #inheritedQueries} field. */
     public VkPhysicalDeviceFeatures inheritedQueries(@NativeType("VkBool32") boolean value) { ninheritedQueries(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -1340,281 +1292,281 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code robustBufferAccess} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#robustBufferAccess} field. */
         @NativeType("VkBool32")
         public boolean robustBufferAccess() { return VkPhysicalDeviceFeatures.nrobustBufferAccess(address()) != 0; }
-        /** Returns the value of the {@code fullDrawIndexUint32} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#fullDrawIndexUint32} field. */
         @NativeType("VkBool32")
         public boolean fullDrawIndexUint32() { return VkPhysicalDeviceFeatures.nfullDrawIndexUint32(address()) != 0; }
-        /** Returns the value of the {@code imageCubeArray} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#imageCubeArray} field. */
         @NativeType("VkBool32")
         public boolean imageCubeArray() { return VkPhysicalDeviceFeatures.nimageCubeArray(address()) != 0; }
-        /** Returns the value of the {@code independentBlend} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#independentBlend} field. */
         @NativeType("VkBool32")
         public boolean independentBlend() { return VkPhysicalDeviceFeatures.nindependentBlend(address()) != 0; }
-        /** Returns the value of the {@code geometryShader} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#geometryShader} field. */
         @NativeType("VkBool32")
         public boolean geometryShader() { return VkPhysicalDeviceFeatures.ngeometryShader(address()) != 0; }
-        /** Returns the value of the {@code tessellationShader} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#tessellationShader} field. */
         @NativeType("VkBool32")
         public boolean tessellationShader() { return VkPhysicalDeviceFeatures.ntessellationShader(address()) != 0; }
-        /** Returns the value of the {@code sampleRateShading} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#sampleRateShading} field. */
         @NativeType("VkBool32")
         public boolean sampleRateShading() { return VkPhysicalDeviceFeatures.nsampleRateShading(address()) != 0; }
-        /** Returns the value of the {@code dualSrcBlend} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#dualSrcBlend} field. */
         @NativeType("VkBool32")
         public boolean dualSrcBlend() { return VkPhysicalDeviceFeatures.ndualSrcBlend(address()) != 0; }
-        /** Returns the value of the {@code logicOp} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#logicOp} field. */
         @NativeType("VkBool32")
         public boolean logicOp() { return VkPhysicalDeviceFeatures.nlogicOp(address()) != 0; }
-        /** Returns the value of the {@code multiDrawIndirect} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#multiDrawIndirect} field. */
         @NativeType("VkBool32")
         public boolean multiDrawIndirect() { return VkPhysicalDeviceFeatures.nmultiDrawIndirect(address()) != 0; }
-        /** Returns the value of the {@code drawIndirectFirstInstance} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#drawIndirectFirstInstance} field. */
         @NativeType("VkBool32")
         public boolean drawIndirectFirstInstance() { return VkPhysicalDeviceFeatures.ndrawIndirectFirstInstance(address()) != 0; }
-        /** Returns the value of the {@code depthClamp} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#depthClamp} field. */
         @NativeType("VkBool32")
         public boolean depthClamp() { return VkPhysicalDeviceFeatures.ndepthClamp(address()) != 0; }
-        /** Returns the value of the {@code depthBiasClamp} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#depthBiasClamp} field. */
         @NativeType("VkBool32")
         public boolean depthBiasClamp() { return VkPhysicalDeviceFeatures.ndepthBiasClamp(address()) != 0; }
-        /** Returns the value of the {@code fillModeNonSolid} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#fillModeNonSolid} field. */
         @NativeType("VkBool32")
         public boolean fillModeNonSolid() { return VkPhysicalDeviceFeatures.nfillModeNonSolid(address()) != 0; }
-        /** Returns the value of the {@code depthBounds} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#depthBounds} field. */
         @NativeType("VkBool32")
         public boolean depthBounds() { return VkPhysicalDeviceFeatures.ndepthBounds(address()) != 0; }
-        /** Returns the value of the {@code wideLines} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#wideLines} field. */
         @NativeType("VkBool32")
         public boolean wideLines() { return VkPhysicalDeviceFeatures.nwideLines(address()) != 0; }
-        /** Returns the value of the {@code largePoints} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#largePoints} field. */
         @NativeType("VkBool32")
         public boolean largePoints() { return VkPhysicalDeviceFeatures.nlargePoints(address()) != 0; }
-        /** Returns the value of the {@code alphaToOne} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#alphaToOne} field. */
         @NativeType("VkBool32")
         public boolean alphaToOne() { return VkPhysicalDeviceFeatures.nalphaToOne(address()) != 0; }
-        /** Returns the value of the {@code multiViewport} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#multiViewport} field. */
         @NativeType("VkBool32")
         public boolean multiViewport() { return VkPhysicalDeviceFeatures.nmultiViewport(address()) != 0; }
-        /** Returns the value of the {@code samplerAnisotropy} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#samplerAnisotropy} field. */
         @NativeType("VkBool32")
         public boolean samplerAnisotropy() { return VkPhysicalDeviceFeatures.nsamplerAnisotropy(address()) != 0; }
-        /** Returns the value of the {@code textureCompressionETC2} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#textureCompressionETC2} field. */
         @NativeType("VkBool32")
         public boolean textureCompressionETC2() { return VkPhysicalDeviceFeatures.ntextureCompressionETC2(address()) != 0; }
-        /** Returns the value of the {@code textureCompressionASTC_LDR} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#textureCompressionASTC_LDR} field. */
         @NativeType("VkBool32")
         public boolean textureCompressionASTC_LDR() { return VkPhysicalDeviceFeatures.ntextureCompressionASTC_LDR(address()) != 0; }
-        /** Returns the value of the {@code textureCompressionBC} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#textureCompressionBC} field. */
         @NativeType("VkBool32")
         public boolean textureCompressionBC() { return VkPhysicalDeviceFeatures.ntextureCompressionBC(address()) != 0; }
-        /** Returns the value of the {@code occlusionQueryPrecise} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#occlusionQueryPrecise} field. */
         @NativeType("VkBool32")
         public boolean occlusionQueryPrecise() { return VkPhysicalDeviceFeatures.nocclusionQueryPrecise(address()) != 0; }
-        /** Returns the value of the {@code pipelineStatisticsQuery} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#pipelineStatisticsQuery} field. */
         @NativeType("VkBool32")
         public boolean pipelineStatisticsQuery() { return VkPhysicalDeviceFeatures.npipelineStatisticsQuery(address()) != 0; }
-        /** Returns the value of the {@code vertexPipelineStoresAndAtomics} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#vertexPipelineStoresAndAtomics} field. */
         @NativeType("VkBool32")
         public boolean vertexPipelineStoresAndAtomics() { return VkPhysicalDeviceFeatures.nvertexPipelineStoresAndAtomics(address()) != 0; }
-        /** Returns the value of the {@code fragmentStoresAndAtomics} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#fragmentStoresAndAtomics} field. */
         @NativeType("VkBool32")
         public boolean fragmentStoresAndAtomics() { return VkPhysicalDeviceFeatures.nfragmentStoresAndAtomics(address()) != 0; }
-        /** Returns the value of the {@code shaderTessellationAndGeometryPointSize} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderTessellationAndGeometryPointSize} field. */
         @NativeType("VkBool32")
         public boolean shaderTessellationAndGeometryPointSize() { return VkPhysicalDeviceFeatures.nshaderTessellationAndGeometryPointSize(address()) != 0; }
-        /** Returns the value of the {@code shaderImageGatherExtended} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderImageGatherExtended} field. */
         @NativeType("VkBool32")
         public boolean shaderImageGatherExtended() { return VkPhysicalDeviceFeatures.nshaderImageGatherExtended(address()) != 0; }
-        /** Returns the value of the {@code shaderStorageImageExtendedFormats} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderStorageImageExtendedFormats} field. */
         @NativeType("VkBool32")
         public boolean shaderStorageImageExtendedFormats() { return VkPhysicalDeviceFeatures.nshaderStorageImageExtendedFormats(address()) != 0; }
-        /** Returns the value of the {@code shaderStorageImageMultisample} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderStorageImageMultisample} field. */
         @NativeType("VkBool32")
         public boolean shaderStorageImageMultisample() { return VkPhysicalDeviceFeatures.nshaderStorageImageMultisample(address()) != 0; }
-        /** Returns the value of the {@code shaderStorageImageReadWithoutFormat} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderStorageImageReadWithoutFormat} field. */
         @NativeType("VkBool32")
         public boolean shaderStorageImageReadWithoutFormat() { return VkPhysicalDeviceFeatures.nshaderStorageImageReadWithoutFormat(address()) != 0; }
-        /** Returns the value of the {@code shaderStorageImageWriteWithoutFormat} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderStorageImageWriteWithoutFormat} field. */
         @NativeType("VkBool32")
         public boolean shaderStorageImageWriteWithoutFormat() { return VkPhysicalDeviceFeatures.nshaderStorageImageWriteWithoutFormat(address()) != 0; }
-        /** Returns the value of the {@code shaderUniformBufferArrayDynamicIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderUniformBufferArrayDynamicIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderUniformBufferArrayDynamicIndexing() { return VkPhysicalDeviceFeatures.nshaderUniformBufferArrayDynamicIndexing(address()) != 0; }
-        /** Returns the value of the {@code shaderSampledImageArrayDynamicIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderSampledImageArrayDynamicIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderSampledImageArrayDynamicIndexing() { return VkPhysicalDeviceFeatures.nshaderSampledImageArrayDynamicIndexing(address()) != 0; }
-        /** Returns the value of the {@code shaderStorageBufferArrayDynamicIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderStorageBufferArrayDynamicIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderStorageBufferArrayDynamicIndexing() { return VkPhysicalDeviceFeatures.nshaderStorageBufferArrayDynamicIndexing(address()) != 0; }
-        /** Returns the value of the {@code shaderStorageImageArrayDynamicIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderStorageImageArrayDynamicIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderStorageImageArrayDynamicIndexing() { return VkPhysicalDeviceFeatures.nshaderStorageImageArrayDynamicIndexing(address()) != 0; }
-        /** Returns the value of the {@code shaderClipDistance} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderClipDistance} field. */
         @NativeType("VkBool32")
         public boolean shaderClipDistance() { return VkPhysicalDeviceFeatures.nshaderClipDistance(address()) != 0; }
-        /** Returns the value of the {@code shaderCullDistance} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderCullDistance} field. */
         @NativeType("VkBool32")
         public boolean shaderCullDistance() { return VkPhysicalDeviceFeatures.nshaderCullDistance(address()) != 0; }
-        /** Returns the value of the {@code shaderFloat64} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderFloat64} field. */
         @NativeType("VkBool32")
         public boolean shaderFloat64() { return VkPhysicalDeviceFeatures.nshaderFloat64(address()) != 0; }
-        /** Returns the value of the {@code shaderInt64} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderInt64} field. */
         @NativeType("VkBool32")
         public boolean shaderInt64() { return VkPhysicalDeviceFeatures.nshaderInt64(address()) != 0; }
-        /** Returns the value of the {@code shaderInt16} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderInt16} field. */
         @NativeType("VkBool32")
         public boolean shaderInt16() { return VkPhysicalDeviceFeatures.nshaderInt16(address()) != 0; }
-        /** Returns the value of the {@code shaderResourceResidency} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderResourceResidency} field. */
         @NativeType("VkBool32")
         public boolean shaderResourceResidency() { return VkPhysicalDeviceFeatures.nshaderResourceResidency(address()) != 0; }
-        /** Returns the value of the {@code shaderResourceMinLod} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#shaderResourceMinLod} field. */
         @NativeType("VkBool32")
         public boolean shaderResourceMinLod() { return VkPhysicalDeviceFeatures.nshaderResourceMinLod(address()) != 0; }
-        /** Returns the value of the {@code sparseBinding} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#sparseBinding} field. */
         @NativeType("VkBool32")
         public boolean sparseBinding() { return VkPhysicalDeviceFeatures.nsparseBinding(address()) != 0; }
-        /** Returns the value of the {@code sparseResidencyBuffer} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#sparseResidencyBuffer} field. */
         @NativeType("VkBool32")
         public boolean sparseResidencyBuffer() { return VkPhysicalDeviceFeatures.nsparseResidencyBuffer(address()) != 0; }
-        /** Returns the value of the {@code sparseResidencyImage2D} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#sparseResidencyImage2D} field. */
         @NativeType("VkBool32")
         public boolean sparseResidencyImage2D() { return VkPhysicalDeviceFeatures.nsparseResidencyImage2D(address()) != 0; }
-        /** Returns the value of the {@code sparseResidencyImage3D} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#sparseResidencyImage3D} field. */
         @NativeType("VkBool32")
         public boolean sparseResidencyImage3D() { return VkPhysicalDeviceFeatures.nsparseResidencyImage3D(address()) != 0; }
-        /** Returns the value of the {@code sparseResidency2Samples} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#sparseResidency2Samples} field. */
         @NativeType("VkBool32")
         public boolean sparseResidency2Samples() { return VkPhysicalDeviceFeatures.nsparseResidency2Samples(address()) != 0; }
-        /** Returns the value of the {@code sparseResidency4Samples} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#sparseResidency4Samples} field. */
         @NativeType("VkBool32")
         public boolean sparseResidency4Samples() { return VkPhysicalDeviceFeatures.nsparseResidency4Samples(address()) != 0; }
-        /** Returns the value of the {@code sparseResidency8Samples} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#sparseResidency8Samples} field. */
         @NativeType("VkBool32")
         public boolean sparseResidency8Samples() { return VkPhysicalDeviceFeatures.nsparseResidency8Samples(address()) != 0; }
-        /** Returns the value of the {@code sparseResidency16Samples} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#sparseResidency16Samples} field. */
         @NativeType("VkBool32")
         public boolean sparseResidency16Samples() { return VkPhysicalDeviceFeatures.nsparseResidency16Samples(address()) != 0; }
-        /** Returns the value of the {@code sparseResidencyAliased} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#sparseResidencyAliased} field. */
         @NativeType("VkBool32")
         public boolean sparseResidencyAliased() { return VkPhysicalDeviceFeatures.nsparseResidencyAliased(address()) != 0; }
-        /** Returns the value of the {@code variableMultisampleRate} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#variableMultisampleRate} field. */
         @NativeType("VkBool32")
         public boolean variableMultisampleRate() { return VkPhysicalDeviceFeatures.nvariableMultisampleRate(address()) != 0; }
-        /** Returns the value of the {@code inheritedQueries} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures#inheritedQueries} field. */
         @NativeType("VkBool32")
         public boolean inheritedQueries() { return VkPhysicalDeviceFeatures.ninheritedQueries(address()) != 0; }
 
-        /** Sets the specified value to the {@code robustBufferAccess} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#robustBufferAccess} field. */
         public VkPhysicalDeviceFeatures.Buffer robustBufferAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nrobustBufferAccess(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code fullDrawIndexUint32} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#fullDrawIndexUint32} field. */
         public VkPhysicalDeviceFeatures.Buffer fullDrawIndexUint32(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nfullDrawIndexUint32(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code imageCubeArray} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#imageCubeArray} field. */
         public VkPhysicalDeviceFeatures.Buffer imageCubeArray(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nimageCubeArray(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code independentBlend} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#independentBlend} field. */
         public VkPhysicalDeviceFeatures.Buffer independentBlend(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nindependentBlend(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code geometryShader} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#geometryShader} field. */
         public VkPhysicalDeviceFeatures.Buffer geometryShader(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.ngeometryShader(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code tessellationShader} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#tessellationShader} field. */
         public VkPhysicalDeviceFeatures.Buffer tessellationShader(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.ntessellationShader(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code sampleRateShading} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#sampleRateShading} field. */
         public VkPhysicalDeviceFeatures.Buffer sampleRateShading(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nsampleRateShading(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code dualSrcBlend} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#dualSrcBlend} field. */
         public VkPhysicalDeviceFeatures.Buffer dualSrcBlend(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.ndualSrcBlend(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code logicOp} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#logicOp} field. */
         public VkPhysicalDeviceFeatures.Buffer logicOp(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nlogicOp(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code multiDrawIndirect} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#multiDrawIndirect} field. */
         public VkPhysicalDeviceFeatures.Buffer multiDrawIndirect(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nmultiDrawIndirect(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code drawIndirectFirstInstance} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#drawIndirectFirstInstance} field. */
         public VkPhysicalDeviceFeatures.Buffer drawIndirectFirstInstance(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.ndrawIndirectFirstInstance(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code depthClamp} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#depthClamp} field. */
         public VkPhysicalDeviceFeatures.Buffer depthClamp(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.ndepthClamp(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code depthBiasClamp} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#depthBiasClamp} field. */
         public VkPhysicalDeviceFeatures.Buffer depthBiasClamp(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.ndepthBiasClamp(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code fillModeNonSolid} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#fillModeNonSolid} field. */
         public VkPhysicalDeviceFeatures.Buffer fillModeNonSolid(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nfillModeNonSolid(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code depthBounds} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#depthBounds} field. */
         public VkPhysicalDeviceFeatures.Buffer depthBounds(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.ndepthBounds(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code wideLines} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#wideLines} field. */
         public VkPhysicalDeviceFeatures.Buffer wideLines(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nwideLines(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code largePoints} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#largePoints} field. */
         public VkPhysicalDeviceFeatures.Buffer largePoints(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nlargePoints(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code alphaToOne} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#alphaToOne} field. */
         public VkPhysicalDeviceFeatures.Buffer alphaToOne(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nalphaToOne(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code multiViewport} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#multiViewport} field. */
         public VkPhysicalDeviceFeatures.Buffer multiViewport(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nmultiViewport(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code samplerAnisotropy} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#samplerAnisotropy} field. */
         public VkPhysicalDeviceFeatures.Buffer samplerAnisotropy(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nsamplerAnisotropy(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code textureCompressionETC2} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#textureCompressionETC2} field. */
         public VkPhysicalDeviceFeatures.Buffer textureCompressionETC2(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.ntextureCompressionETC2(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code textureCompressionASTC_LDR} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#textureCompressionASTC_LDR} field. */
         public VkPhysicalDeviceFeatures.Buffer textureCompressionASTC_LDR(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.ntextureCompressionASTC_LDR(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code textureCompressionBC} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#textureCompressionBC} field. */
         public VkPhysicalDeviceFeatures.Buffer textureCompressionBC(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.ntextureCompressionBC(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code occlusionQueryPrecise} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#occlusionQueryPrecise} field. */
         public VkPhysicalDeviceFeatures.Buffer occlusionQueryPrecise(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nocclusionQueryPrecise(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code pipelineStatisticsQuery} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#pipelineStatisticsQuery} field. */
         public VkPhysicalDeviceFeatures.Buffer pipelineStatisticsQuery(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.npipelineStatisticsQuery(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code vertexPipelineStoresAndAtomics} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#vertexPipelineStoresAndAtomics} field. */
         public VkPhysicalDeviceFeatures.Buffer vertexPipelineStoresAndAtomics(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nvertexPipelineStoresAndAtomics(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code fragmentStoresAndAtomics} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#fragmentStoresAndAtomics} field. */
         public VkPhysicalDeviceFeatures.Buffer fragmentStoresAndAtomics(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nfragmentStoresAndAtomics(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderTessellationAndGeometryPointSize} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderTessellationAndGeometryPointSize} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderTessellationAndGeometryPointSize(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderTessellationAndGeometryPointSize(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderImageGatherExtended} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderImageGatherExtended} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderImageGatherExtended(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderImageGatherExtended(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderStorageImageExtendedFormats} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderStorageImageExtendedFormats} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderStorageImageExtendedFormats(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderStorageImageExtendedFormats(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderStorageImageMultisample} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderStorageImageMultisample} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderStorageImageMultisample(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderStorageImageMultisample(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderStorageImageReadWithoutFormat} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderStorageImageReadWithoutFormat} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderStorageImageReadWithoutFormat(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderStorageImageReadWithoutFormat(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderStorageImageWriteWithoutFormat} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderStorageImageWriteWithoutFormat} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderStorageImageWriteWithoutFormat(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderStorageImageWriteWithoutFormat(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderUniformBufferArrayDynamicIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderUniformBufferArrayDynamicIndexing} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderUniformBufferArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderUniformBufferArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderSampledImageArrayDynamicIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderSampledImageArrayDynamicIndexing} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderSampledImageArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderSampledImageArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderStorageBufferArrayDynamicIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderStorageBufferArrayDynamicIndexing} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderStorageBufferArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderStorageBufferArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderStorageImageArrayDynamicIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderStorageImageArrayDynamicIndexing} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderStorageImageArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderStorageImageArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderClipDistance} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderClipDistance} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderClipDistance(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderClipDistance(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderCullDistance} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderCullDistance} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderCullDistance(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderCullDistance(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderFloat64} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderFloat64} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderFloat64(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderFloat64(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderInt64} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderInt64} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderInt64(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderInt64(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderInt16} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderInt16} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderInt16(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderInt16(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderResourceResidency} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderResourceResidency} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderResourceResidency(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderResourceResidency(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderResourceMinLod} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#shaderResourceMinLod} field. */
         public VkPhysicalDeviceFeatures.Buffer shaderResourceMinLod(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nshaderResourceMinLod(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code sparseBinding} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#sparseBinding} field. */
         public VkPhysicalDeviceFeatures.Buffer sparseBinding(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nsparseBinding(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code sparseResidencyBuffer} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#sparseResidencyBuffer} field. */
         public VkPhysicalDeviceFeatures.Buffer sparseResidencyBuffer(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nsparseResidencyBuffer(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code sparseResidencyImage2D} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#sparseResidencyImage2D} field. */
         public VkPhysicalDeviceFeatures.Buffer sparseResidencyImage2D(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nsparseResidencyImage2D(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code sparseResidencyImage3D} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#sparseResidencyImage3D} field. */
         public VkPhysicalDeviceFeatures.Buffer sparseResidencyImage3D(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nsparseResidencyImage3D(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code sparseResidency2Samples} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#sparseResidency2Samples} field. */
         public VkPhysicalDeviceFeatures.Buffer sparseResidency2Samples(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nsparseResidency2Samples(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code sparseResidency4Samples} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#sparseResidency4Samples} field. */
         public VkPhysicalDeviceFeatures.Buffer sparseResidency4Samples(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nsparseResidency4Samples(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code sparseResidency8Samples} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#sparseResidency8Samples} field. */
         public VkPhysicalDeviceFeatures.Buffer sparseResidency8Samples(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nsparseResidency8Samples(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code sparseResidency16Samples} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#sparseResidency16Samples} field. */
         public VkPhysicalDeviceFeatures.Buffer sparseResidency16Samples(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nsparseResidency16Samples(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code sparseResidencyAliased} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#sparseResidencyAliased} field. */
         public VkPhysicalDeviceFeatures.Buffer sparseResidencyAliased(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nsparseResidencyAliased(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code variableMultisampleRate} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#variableMultisampleRate} field. */
         public VkPhysicalDeviceFeatures.Buffer variableMultisampleRate(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.nvariableMultisampleRate(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code inheritedQueries} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures#inheritedQueries} field. */
         public VkPhysicalDeviceFeatures.Buffer inheritedQueries(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFeatures.ninheritedQueries(address(), value ? 1 : 0); return this; }
 
     }

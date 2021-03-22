@@ -48,31 +48,18 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkPipelineColorBlendStateCreateInfo}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code blendEnable} &ndash; controls whether blending is enabled for the corresponding color attachment. If blending is not enabled, the source fragment&#8217;s color for that attachment is passed through unmodified.</li>
- * <li>{@code srcColorBlendFactor} &ndash; selects which blend factor is used to determine the source factors <code>(S<sub>r</sub>,S<sub>g</sub>,S<sub>b</sub>)</code>.</li>
- * <li>{@code dstColorBlendFactor} &ndash; selects which blend factor is used to determine the destination factors <code>(D<sub>r</sub>,D<sub>g</sub>,D<sub>b</sub>)</code>.</li>
- * <li>{@code colorBlendOp} &ndash; selects which blend operation is used to calculate the RGB values to write to the color attachment.</li>
- * <li>{@code srcAlphaBlendFactor} &ndash; selects which blend factor is used to determine the source factor <code>S<sub>a</sub></code>.</li>
- * <li>{@code dstAlphaBlendFactor} &ndash; selects which blend factor is used to determine the destination factor <code>D<sub>a</sub></code>.</li>
- * <li>{@code alphaBlendOp} &ndash; selects which blend operation is use to calculate the alpha values to write to the color attachment.</li>
- * <li>{@code colorWriteMask} &ndash; a bitmask of {@code VkColorComponentFlagBits} specifying which of the R, G, B, and/or A components are enabled for writing, as described for the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-color-write-mask">Color Write Mask</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineColorBlendAttachmentState {
- *     VkBool32 blendEnable;
- *     VkBlendFactor srcColorBlendFactor;
- *     VkBlendFactor dstColorBlendFactor;
- *     VkBlendOp colorBlendOp;
- *     VkBlendFactor srcAlphaBlendFactor;
- *     VkBlendFactor dstAlphaBlendFactor;
- *     VkBlendOp alphaBlendOp;
- *     VkColorComponentFlags colorWriteMask;
+ *     VkBool32 {@link #blendEnable};
+ *     VkBlendFactor {@link #srcColorBlendFactor};
+ *     VkBlendFactor {@link #dstColorBlendFactor};
+ *     VkBlendOp {@link #colorBlendOp};
+ *     VkBlendFactor {@link #srcAlphaBlendFactor};
+ *     VkBlendFactor {@link #dstAlphaBlendFactor};
+ *     VkBlendOp {@link #alphaBlendOp};
+ *     VkColorComponentFlags {@link #colorWriteMask};
  * }</code></pre>
  */
 public class VkPipelineColorBlendAttachmentState extends Struct implements NativeResource {
@@ -132,46 +119,46 @@ public class VkPipelineColorBlendAttachmentState extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code blendEnable} field. */
+    /** controls whether blending is enabled for the corresponding color attachment. If blending is not enabled, the source fragment&#8217;s color for that attachment is passed through unmodified. */
     @NativeType("VkBool32")
     public boolean blendEnable() { return nblendEnable(address()) != 0; }
-    /** Returns the value of the {@code srcColorBlendFactor} field. */
+    /** selects which blend factor is used to determine the source factors <code>(S<sub>r</sub>,S<sub>g</sub>,S<sub>b</sub>)</code>. */
     @NativeType("VkBlendFactor")
     public int srcColorBlendFactor() { return nsrcColorBlendFactor(address()); }
-    /** Returns the value of the {@code dstColorBlendFactor} field. */
+    /** selects which blend factor is used to determine the destination factors <code>(D<sub>r</sub>,D<sub>g</sub>,D<sub>b</sub>)</code>. */
     @NativeType("VkBlendFactor")
     public int dstColorBlendFactor() { return ndstColorBlendFactor(address()); }
-    /** Returns the value of the {@code colorBlendOp} field. */
+    /** selects which blend operation is used to calculate the RGB values to write to the color attachment. */
     @NativeType("VkBlendOp")
     public int colorBlendOp() { return ncolorBlendOp(address()); }
-    /** Returns the value of the {@code srcAlphaBlendFactor} field. */
+    /** selects which blend factor is used to determine the source factor <code>S<sub>a</sub></code>. */
     @NativeType("VkBlendFactor")
     public int srcAlphaBlendFactor() { return nsrcAlphaBlendFactor(address()); }
-    /** Returns the value of the {@code dstAlphaBlendFactor} field. */
+    /** selects which blend factor is used to determine the destination factor <code>D<sub>a</sub></code>. */
     @NativeType("VkBlendFactor")
     public int dstAlphaBlendFactor() { return ndstAlphaBlendFactor(address()); }
-    /** Returns the value of the {@code alphaBlendOp} field. */
+    /** selects which blend operation is use to calculate the alpha values to write to the color attachment. */
     @NativeType("VkBlendOp")
     public int alphaBlendOp() { return nalphaBlendOp(address()); }
-    /** Returns the value of the {@code colorWriteMask} field. */
+    /** a bitmask of {@code VkColorComponentFlagBits} specifying which of the R, G, B, and/or A components are enabled for writing, as described for the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-color-write-mask">Color Write Mask</a>. */
     @NativeType("VkColorComponentFlags")
     public int colorWriteMask() { return ncolorWriteMask(address()); }
 
-    /** Sets the specified value to the {@code blendEnable} field. */
+    /** Sets the specified value to the {@link #blendEnable} field. */
     public VkPipelineColorBlendAttachmentState blendEnable(@NativeType("VkBool32") boolean value) { nblendEnable(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code srcColorBlendFactor} field. */
+    /** Sets the specified value to the {@link #srcColorBlendFactor} field. */
     public VkPipelineColorBlendAttachmentState srcColorBlendFactor(@NativeType("VkBlendFactor") int value) { nsrcColorBlendFactor(address(), value); return this; }
-    /** Sets the specified value to the {@code dstColorBlendFactor} field. */
+    /** Sets the specified value to the {@link #dstColorBlendFactor} field. */
     public VkPipelineColorBlendAttachmentState dstColorBlendFactor(@NativeType("VkBlendFactor") int value) { ndstColorBlendFactor(address(), value); return this; }
-    /** Sets the specified value to the {@code colorBlendOp} field. */
+    /** Sets the specified value to the {@link #colorBlendOp} field. */
     public VkPipelineColorBlendAttachmentState colorBlendOp(@NativeType("VkBlendOp") int value) { ncolorBlendOp(address(), value); return this; }
-    /** Sets the specified value to the {@code srcAlphaBlendFactor} field. */
+    /** Sets the specified value to the {@link #srcAlphaBlendFactor} field. */
     public VkPipelineColorBlendAttachmentState srcAlphaBlendFactor(@NativeType("VkBlendFactor") int value) { nsrcAlphaBlendFactor(address(), value); return this; }
-    /** Sets the specified value to the {@code dstAlphaBlendFactor} field. */
+    /** Sets the specified value to the {@link #dstAlphaBlendFactor} field. */
     public VkPipelineColorBlendAttachmentState dstAlphaBlendFactor(@NativeType("VkBlendFactor") int value) { ndstAlphaBlendFactor(address(), value); return this; }
-    /** Sets the specified value to the {@code alphaBlendOp} field. */
+    /** Sets the specified value to the {@link #alphaBlendOp} field. */
     public VkPipelineColorBlendAttachmentState alphaBlendOp(@NativeType("VkBlendOp") int value) { nalphaBlendOp(address(), value); return this; }
-    /** Sets the specified value to the {@code colorWriteMask} field. */
+    /** Sets the specified value to the {@link #colorWriteMask} field. */
     public VkPipelineColorBlendAttachmentState colorWriteMask(@NativeType("VkColorComponentFlags") int value) { ncolorWriteMask(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -424,46 +411,46 @@ public class VkPipelineColorBlendAttachmentState extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code blendEnable} field. */
+        /** @return the value of the {@link VkPipelineColorBlendAttachmentState#blendEnable} field. */
         @NativeType("VkBool32")
         public boolean blendEnable() { return VkPipelineColorBlendAttachmentState.nblendEnable(address()) != 0; }
-        /** Returns the value of the {@code srcColorBlendFactor} field. */
+        /** @return the value of the {@link VkPipelineColorBlendAttachmentState#srcColorBlendFactor} field. */
         @NativeType("VkBlendFactor")
         public int srcColorBlendFactor() { return VkPipelineColorBlendAttachmentState.nsrcColorBlendFactor(address()); }
-        /** Returns the value of the {@code dstColorBlendFactor} field. */
+        /** @return the value of the {@link VkPipelineColorBlendAttachmentState#dstColorBlendFactor} field. */
         @NativeType("VkBlendFactor")
         public int dstColorBlendFactor() { return VkPipelineColorBlendAttachmentState.ndstColorBlendFactor(address()); }
-        /** Returns the value of the {@code colorBlendOp} field. */
+        /** @return the value of the {@link VkPipelineColorBlendAttachmentState#colorBlendOp} field. */
         @NativeType("VkBlendOp")
         public int colorBlendOp() { return VkPipelineColorBlendAttachmentState.ncolorBlendOp(address()); }
-        /** Returns the value of the {@code srcAlphaBlendFactor} field. */
+        /** @return the value of the {@link VkPipelineColorBlendAttachmentState#srcAlphaBlendFactor} field. */
         @NativeType("VkBlendFactor")
         public int srcAlphaBlendFactor() { return VkPipelineColorBlendAttachmentState.nsrcAlphaBlendFactor(address()); }
-        /** Returns the value of the {@code dstAlphaBlendFactor} field. */
+        /** @return the value of the {@link VkPipelineColorBlendAttachmentState#dstAlphaBlendFactor} field. */
         @NativeType("VkBlendFactor")
         public int dstAlphaBlendFactor() { return VkPipelineColorBlendAttachmentState.ndstAlphaBlendFactor(address()); }
-        /** Returns the value of the {@code alphaBlendOp} field. */
+        /** @return the value of the {@link VkPipelineColorBlendAttachmentState#alphaBlendOp} field. */
         @NativeType("VkBlendOp")
         public int alphaBlendOp() { return VkPipelineColorBlendAttachmentState.nalphaBlendOp(address()); }
-        /** Returns the value of the {@code colorWriteMask} field. */
+        /** @return the value of the {@link VkPipelineColorBlendAttachmentState#colorWriteMask} field. */
         @NativeType("VkColorComponentFlags")
         public int colorWriteMask() { return VkPipelineColorBlendAttachmentState.ncolorWriteMask(address()); }
 
-        /** Sets the specified value to the {@code blendEnable} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendAttachmentState#blendEnable} field. */
         public VkPipelineColorBlendAttachmentState.Buffer blendEnable(@NativeType("VkBool32") boolean value) { VkPipelineColorBlendAttachmentState.nblendEnable(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code srcColorBlendFactor} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendAttachmentState#srcColorBlendFactor} field. */
         public VkPipelineColorBlendAttachmentState.Buffer srcColorBlendFactor(@NativeType("VkBlendFactor") int value) { VkPipelineColorBlendAttachmentState.nsrcColorBlendFactor(address(), value); return this; }
-        /** Sets the specified value to the {@code dstColorBlendFactor} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendAttachmentState#dstColorBlendFactor} field. */
         public VkPipelineColorBlendAttachmentState.Buffer dstColorBlendFactor(@NativeType("VkBlendFactor") int value) { VkPipelineColorBlendAttachmentState.ndstColorBlendFactor(address(), value); return this; }
-        /** Sets the specified value to the {@code colorBlendOp} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendAttachmentState#colorBlendOp} field. */
         public VkPipelineColorBlendAttachmentState.Buffer colorBlendOp(@NativeType("VkBlendOp") int value) { VkPipelineColorBlendAttachmentState.ncolorBlendOp(address(), value); return this; }
-        /** Sets the specified value to the {@code srcAlphaBlendFactor} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendAttachmentState#srcAlphaBlendFactor} field. */
         public VkPipelineColorBlendAttachmentState.Buffer srcAlphaBlendFactor(@NativeType("VkBlendFactor") int value) { VkPipelineColorBlendAttachmentState.nsrcAlphaBlendFactor(address(), value); return this; }
-        /** Sets the specified value to the {@code dstAlphaBlendFactor} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendAttachmentState#dstAlphaBlendFactor} field. */
         public VkPipelineColorBlendAttachmentState.Buffer dstAlphaBlendFactor(@NativeType("VkBlendFactor") int value) { VkPipelineColorBlendAttachmentState.ndstAlphaBlendFactor(address(), value); return this; }
-        /** Sets the specified value to the {@code alphaBlendOp} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendAttachmentState#alphaBlendOp} field. */
         public VkPipelineColorBlendAttachmentState.Buffer alphaBlendOp(@NativeType("VkBlendOp") int value) { VkPipelineColorBlendAttachmentState.nalphaBlendOp(address(), value); return this; }
-        /** Sets the specified value to the {@code colorWriteMask} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendAttachmentState#colorWriteMask} field. */
         public VkPipelineColorBlendAttachmentState.Buffer colorWriteMask(@NativeType("VkColorComponentFlags") int value) { VkPipelineColorBlendAttachmentState.ncolorWriteMask(address(), value); return this; }
 
     }

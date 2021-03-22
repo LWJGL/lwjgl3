@@ -86,21 +86,21 @@ public class VkPerformanceValueDataINTEL extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code value32} field. */
+    /** @return the value of the {@code value32} field. */
     @NativeType("uint32_t")
     public int value32() { return nvalue32(address()); }
-    /** Returns the value of the {@code value64} field. */
+    /** @return the value of the {@code value64} field. */
     @NativeType("uint64_t")
     public long value64() { return nvalue64(address()); }
-    /** Returns the value of the {@code valueFloat} field. */
+    /** @return the value of the {@code valueFloat} field. */
     public float valueFloat() { return nvalueFloat(address()); }
-    /** Returns the value of the {@code valueBool} field. */
+    /** @return the value of the {@code valueBool} field. */
     @NativeType("VkBool32")
     public boolean valueBool() { return nvalueBool(address()) != 0; }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code valueString} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code valueString} field. */
     @NativeType("char const *")
     public ByteBuffer valueString() { return nvalueString(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code valueString} field. */
+    /** @return the null-terminated string pointed to by the {@code valueString} field. */
     @NativeType("char const *")
     public String valueStringString() { return nvalueStringString(address()); }
 
@@ -335,21 +335,21 @@ public class VkPerformanceValueDataINTEL extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code value32} field. */
+        /** @return the value of the {@code value32} field. */
         @NativeType("uint32_t")
         public int value32() { return VkPerformanceValueDataINTEL.nvalue32(address()); }
-        /** Returns the value of the {@code value64} field. */
+        /** @return the value of the {@code value64} field. */
         @NativeType("uint64_t")
         public long value64() { return VkPerformanceValueDataINTEL.nvalue64(address()); }
-        /** Returns the value of the {@code valueFloat} field. */
+        /** @return the value of the {@code valueFloat} field. */
         public float valueFloat() { return VkPerformanceValueDataINTEL.nvalueFloat(address()); }
-        /** Returns the value of the {@code valueBool} field. */
+        /** @return the value of the {@code valueBool} field. */
         @NativeType("VkBool32")
         public boolean valueBool() { return VkPerformanceValueDataINTEL.nvalueBool(address()) != 0; }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code valueString} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code valueString} field. */
         @NativeType("char const *")
         public ByteBuffer valueString() { return VkPerformanceValueDataINTEL.nvalueString(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code valueString} field. */
+        /** @return the null-terminated string pointed to by the {@code valueString} field. */
         @NativeType("char const *")
         public String valueStringString() { return VkPerformanceValueDataINTEL.nvalueStringString(address()); }
 

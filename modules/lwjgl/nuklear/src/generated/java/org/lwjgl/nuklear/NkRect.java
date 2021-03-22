@@ -72,13 +72,13 @@ public class NkRect extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** Returns the value of the {@code w} field. */
+    /** @return the value of the {@code w} field. */
     public float w() { return nw(address()); }
-    /** Returns the value of the {@code h} field. */
+    /** @return the value of the {@code h} field. */
     public float h() { return nh(address()); }
 
     /** Sets the specified value to the {@code x} field. */
@@ -316,13 +316,13 @@ public class NkRect extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return NkRect.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return NkRect.ny(address()); }
-        /** Returns the value of the {@code w} field. */
+        /** @return the value of the {@code w} field. */
         public float w() { return NkRect.nw(address()); }
-        /** Returns the value of the {@code h} field. */
+        /** @return the value of the {@code h} field. */
         public float h() { return NkRect.nh(address()); }
 
         /** Sets the specified value to the {@code x} field. */

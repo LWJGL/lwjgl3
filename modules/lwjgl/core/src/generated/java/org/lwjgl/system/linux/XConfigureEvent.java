@@ -19,24 +19,15 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Motion event.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code serial} &ndash; # of last request processed by server</li>
- * <li>{@code send_event} &ndash; true if this came from an {@link X11#XSendEvent} request</li>
- * <li>{@code display} &ndash; {@code Display} the event was read from</li>
- * <li>{@code window} &ndash; window it reported relative to</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XConfigureEvent {
  *     int type;
- *     unsigned long serial;
- *     Bool send_event;
- *     Display * display;
- *     Window window;
+ *     unsigned long {@link #serial};
+ *     Bool {@link #send_event};
+ *     Display * {@link #display};
+ *     Window {@link #window};
  *     int x;
  *     int y;
  *     int width;
@@ -115,46 +106,46 @@ public class XConfigureEvent extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code serial} field. */
+    /** # of last request processed by server */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** Returns the value of the {@code send_event} field. */
+    /** true if this came from an {@link X11#XSendEvent} request */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** Returns the value of the {@code display} field. */
+    /** {@code Display} the event was read from */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code window} field. */
+    /** window it reported relative to */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     public int y() { return ny(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** @return the value of the {@code width} field. */
     public int width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** @return the value of the {@code height} field. */
     public int height() { return nheight(address()); }
-    /** Returns the value of the {@code border_width} field. */
+    /** @return the value of the {@code border_width} field. */
     public int border_width() { return nborder_width(address()); }
-    /** Returns the value of the {@code above} field. */
+    /** @return the value of the {@code above} field. */
     @NativeType("Window")
     public long above() { return nabove(address()); }
-    /** Returns the value of the {@code override_redirect} field. */
+    /** @return the value of the {@code override_redirect} field. */
     @NativeType("Bool")
     public boolean override_redirect() { return noverride_redirect(address()) != 0; }
 
     /** Sets the specified value to the {@code type} field. */
     public XConfigureEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code serial} field. */
+    /** Sets the specified value to the {@link #serial} field. */
     public XConfigureEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@code send_event} field. */
+    /** Sets the specified value to the {@link #send_event} field. */
     public XConfigureEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code display} field. */
+    /** Sets the specified value to the {@link #display} field. */
     public XConfigureEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@code window} field. */
+    /** Sets the specified value to the {@link #window} field. */
     public XConfigureEvent window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
     /** Sets the specified value to the {@code x} field. */
     public XConfigureEvent x(int value) { nx(address(), value); return this; }
@@ -466,46 +457,46 @@ public class XConfigureEvent extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XConfigureEvent.ntype(address()); }
-        /** Returns the value of the {@code serial} field. */
+        /** @return the value of the {@link XConfigureEvent#serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XConfigureEvent.nserial(address()); }
-        /** Returns the value of the {@code send_event} field. */
+        /** @return the value of the {@link XConfigureEvent#send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XConfigureEvent.nsend_event(address()) != 0; }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@link XConfigureEvent#display} field. */
         @NativeType("Display *")
         public long display() { return XConfigureEvent.ndisplay(address()); }
-        /** Returns the value of the {@code window} field. */
+        /** @return the value of the {@link XConfigureEvent#window} field. */
         @NativeType("Window")
         public long window() { return XConfigureEvent.nwindow(address()); }
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         public int x() { return XConfigureEvent.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         public int y() { return XConfigureEvent.ny(address()); }
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@code width} field. */
         public int width() { return XConfigureEvent.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@code height} field. */
         public int height() { return XConfigureEvent.nheight(address()); }
-        /** Returns the value of the {@code border_width} field. */
+        /** @return the value of the {@code border_width} field. */
         public int border_width() { return XConfigureEvent.nborder_width(address()); }
-        /** Returns the value of the {@code above} field. */
+        /** @return the value of the {@code above} field. */
         @NativeType("Window")
         public long above() { return XConfigureEvent.nabove(address()); }
-        /** Returns the value of the {@code override_redirect} field. */
+        /** @return the value of the {@code override_redirect} field. */
         @NativeType("Bool")
         public boolean override_redirect() { return XConfigureEvent.noverride_redirect(address()) != 0; }
 
         /** Sets the specified value to the {@code type} field. */
         public XConfigureEvent.Buffer type(int value) { XConfigureEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code serial} field. */
+        /** Sets the specified value to the {@link XConfigureEvent#serial} field. */
         public XConfigureEvent.Buffer serial(@NativeType("unsigned long") long value) { XConfigureEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@code send_event} field. */
+        /** Sets the specified value to the {@link XConfigureEvent#send_event} field. */
         public XConfigureEvent.Buffer send_event(@NativeType("Bool") boolean value) { XConfigureEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code display} field. */
+        /** Sets the specified value to the {@link XConfigureEvent#display} field. */
         public XConfigureEvent.Buffer display(@NativeType("Display *") long value) { XConfigureEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@code window} field. */
+        /** Sets the specified value to the {@link XConfigureEvent#window} field. */
         public XConfigureEvent.Buffer window(@NativeType("Window") long value) { XConfigureEvent.nwindow(address(), value); return this; }
         /** Sets the specified value to the {@code x} field. */
         public XConfigureEvent.Buffer x(int value) { XConfigureEvent.nx(address(), value); return this; }

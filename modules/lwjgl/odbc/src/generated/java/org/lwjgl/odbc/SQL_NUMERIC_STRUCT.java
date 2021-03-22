@@ -74,19 +74,19 @@ public class SQL_NUMERIC_STRUCT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code precision} field. */
+    /** @return the value of the {@code precision} field. */
     @NativeType("SQLCHAR")
     public byte precision() { return nprecision(address()); }
-    /** Returns the value of the {@code scale} field. */
+    /** @return the value of the {@code scale} field. */
     @NativeType("SQLSCHAR")
     public byte scale() { return nscale(address()); }
-    /** Returns the value of the {@code sign} field. */
+    /** @return the value of the {@code sign} field. */
     @NativeType("SQLCHAR")
     public byte sign() { return nsign(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code val} field. */
+    /** @return a {@link ByteBuffer} view of the {@code val} field. */
     @NativeType("SQLCHAR[SQL_MAX_NUMERIC_LEN]")
     public ByteBuffer val() { return nval(address()); }
-    /** Returns the value at the specified index of the {@code val} field. */
+    /** @return the value at the specified index of the {@code val} field. */
     @NativeType("SQLCHAR")
     public byte val(int index) { return nval(address(), index); }
 
@@ -338,19 +338,19 @@ public class SQL_NUMERIC_STRUCT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code precision} field. */
+        /** @return the value of the {@code precision} field. */
         @NativeType("SQLCHAR")
         public byte precision() { return SQL_NUMERIC_STRUCT.nprecision(address()); }
-        /** Returns the value of the {@code scale} field. */
+        /** @return the value of the {@code scale} field. */
         @NativeType("SQLSCHAR")
         public byte scale() { return SQL_NUMERIC_STRUCT.nscale(address()); }
-        /** Returns the value of the {@code sign} field. */
+        /** @return the value of the {@code sign} field. */
         @NativeType("SQLCHAR")
         public byte sign() { return SQL_NUMERIC_STRUCT.nsign(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code val} field. */
+        /** @return a {@link ByteBuffer} view of the {@code val} field. */
         @NativeType("SQLCHAR[SQL_MAX_NUMERIC_LEN]")
         public ByteBuffer val() { return SQL_NUMERIC_STRUCT.nval(address()); }
-        /** Returns the value at the specified index of the {@code val} field. */
+        /** @return the value at the specified index of the {@code val} field. */
         @NativeType("SQLCHAR")
         public byte val(int index) { return SQL_NUMERIC_STRUCT.nval(address(), index); }
 

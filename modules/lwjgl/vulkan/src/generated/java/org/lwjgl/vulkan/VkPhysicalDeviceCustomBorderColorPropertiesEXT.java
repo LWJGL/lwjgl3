@@ -24,19 +24,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTCustomBorderColor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code maxCustomBorderColorSamplers} &ndash; indicates the maximum number of samplers with custom border colors which <b>can</b> simultaneously exist on a device.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceCustomBorderColorPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     uint32_t maxCustomBorderColorSamplers;
+ *     uint32_t {@link #maxCustomBorderColorSamplers};
  * }</code></pre>
  */
 public class VkPhysicalDeviceCustomBorderColorPropertiesEXT extends Struct implements NativeResource {
@@ -81,13 +75,13 @@ public class VkPhysicalDeviceCustomBorderColorPropertiesEXT extends Struct imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code maxCustomBorderColorSamplers} field. */
+    /** indicates the maximum number of samplers with custom border colors which <b>can</b> simultaneously exist on a device. */
     @NativeType("uint32_t")
     public int maxCustomBorderColorSamplers() { return nmaxCustomBorderColorSamplers(address()); }
 
@@ -312,13 +306,13 @@ public class VkPhysicalDeviceCustomBorderColorPropertiesEXT extends Struct imple
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceCustomBorderColorPropertiesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceCustomBorderColorPropertiesEXT.npNext(address()); }
-        /** Returns the value of the {@code maxCustomBorderColorSamplers} field. */
+        /** @return the value of the {@link VkPhysicalDeviceCustomBorderColorPropertiesEXT#maxCustomBorderColorSamplers} field. */
         @NativeType("uint32_t")
         public int maxCustomBorderColorSamplers() { return VkPhysicalDeviceCustomBorderColorPropertiesEXT.nmaxCustomBorderColorSamplers(address()); }
 

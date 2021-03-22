@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTAstcDecodeMode#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code decodeModeSharedExponent} &ndash; indicates whether the implementation supports decoding ASTC compressed formats to {@link VK10#VK_FORMAT_E5B9G9R9_UFLOAT_PACK32 FORMAT_E5B9G9R9_UFLOAT_PACK32} internal precision.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceASTCDecodeFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 decodeModeSharedExponent;
+ *     VkBool32 {@link #decodeModeSharedExponent};
  * }</code></pre>
  */
 public class VkPhysicalDeviceASTCDecodeFeaturesEXT extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceASTCDecodeFeaturesEXT extends Struct implements Nat
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code decodeModeSharedExponent} field. */
+    /** indicates whether the implementation supports decoding ASTC compressed formats to {@link VK10#VK_FORMAT_E5B9G9R9_UFLOAT_PACK32 FORMAT_E5B9G9R9_UFLOAT_PACK32} internal precision. */
     @NativeType("VkBool32")
     public boolean decodeModeSharedExponent() { return ndecodeModeSharedExponent(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceASTCDecodeFeaturesEXT extends Struct implements Nat
     public VkPhysicalDeviceASTCDecodeFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceASTCDecodeFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code decodeModeSharedExponent} field. */
+    /** Sets the specified value to the {@link #decodeModeSharedExponent} field. */
     public VkPhysicalDeviceASTCDecodeFeaturesEXT decodeModeSharedExponent(@NativeType("VkBool32") boolean value) { ndecodeModeSharedExponent(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceASTCDecodeFeaturesEXT extends Struct implements Nat
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceASTCDecodeFeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceASTCDecodeFeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code decodeModeSharedExponent} field. */
+        /** @return the value of the {@link VkPhysicalDeviceASTCDecodeFeaturesEXT#decodeModeSharedExponent} field. */
         @NativeType("VkBool32")
         public boolean decodeModeSharedExponent() { return VkPhysicalDeviceASTCDecodeFeaturesEXT.ndecodeModeSharedExponent(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceASTCDecodeFeaturesEXT extends Struct implements Nat
         public VkPhysicalDeviceASTCDecodeFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceASTCDecodeFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceASTCDecodeFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceASTCDecodeFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code decodeModeSharedExponent} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceASTCDecodeFeaturesEXT#decodeModeSharedExponent} field. */
         public VkPhysicalDeviceASTCDecodeFeaturesEXT.Buffer decodeModeSharedExponent(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceASTCDecodeFeaturesEXT.ndecodeModeSharedExponent(address(), value ? 1 : 0); return this; }
 
     }

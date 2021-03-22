@@ -16,30 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * One remark entry.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code RemarkType} &ndash; e.g. !Missed, !Passed</li>
- * <li>{@code PassName} &ndash; "Pass": Required</li>
- * <li>{@code RemarkName} &ndash; "Name": Required</li>
- * <li>{@code FunctionName} &ndash; "Function": Required</li>
- * <li>{@code DebugLoc} &ndash; "DebugLoc": Optional</li>
- * <li>{@code Hotness} &ndash; "Hotness": Optional</li>
- * <li>{@code Args} &ndash; "Args": Optional. It is an array of {@code NumArgs} elements.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct LLVMOptRemarkEntry {
- *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} RemarkType;
- *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} PassName;
- *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} RemarkName;
- *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} FunctionName;
- *     {@link LLVMOptRemarkDebugLoc LLVMOptRemarkDebugLoc} DebugLoc;
- *     uint32_t Hotness;
+ *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} {@link #RemarkType};
+ *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} {@link #PassName};
+ *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} {@link #RemarkName};
+ *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} {@link #FunctionName};
+ *     {@link LLVMOptRemarkDebugLoc LLVMOptRemarkDebugLoc} {@link #DebugLoc};
+ *     uint32_t {@link #Hotness};
  *     uint32_t NumArgs;
- *     {@link LLVMOptRemarkArg LLVMOptRemarkArg} * Args;
+ *     {@link LLVMOptRemarkArg LLVMOptRemarkArg} * {@link #Args};
  * }</code></pre>
  */
 public class LLVMOptRemarkEntry extends Struct {
@@ -99,23 +87,23 @@ public class LLVMOptRemarkEntry extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code RemarkType} field. */
+    /** e.g. !Missed, !Passed */
     public LLVMOptRemarkStringRef RemarkType() { return nRemarkType(address()); }
-    /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code PassName} field. */
+    /** "Pass": Required */
     public LLVMOptRemarkStringRef PassName() { return nPassName(address()); }
-    /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code RemarkName} field. */
+    /** "Name": Required */
     public LLVMOptRemarkStringRef RemarkName() { return nRemarkName(address()); }
-    /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code FunctionName} field. */
+    /** "Function": Required */
     public LLVMOptRemarkStringRef FunctionName() { return nFunctionName(address()); }
-    /** Returns a {@link LLVMOptRemarkDebugLoc} view of the {@code DebugLoc} field. */
+    /** "DebugLoc": Optional */
     public LLVMOptRemarkDebugLoc DebugLoc() { return nDebugLoc(address()); }
-    /** Returns the value of the {@code Hotness} field. */
+    /** "Hotness": Optional */
     @NativeType("uint32_t")
     public int Hotness() { return nHotness(address()); }
-    /** Returns the value of the {@code NumArgs} field. */
+    /** @return the value of the {@code NumArgs} field. */
     @NativeType("uint32_t")
     public int NumArgs() { return nNumArgs(address()); }
-    /** Returns a {@link LLVMOptRemarkArg.Buffer} view of the struct array pointed to by the {@code Args} field. */
+    /** "Args": Optional. It is an array of {@code NumArgs} elements. */
     @NativeType("LLVMOptRemarkArg *")
     public LLVMOptRemarkArg.Buffer Args() { return nArgs(address()); }
 
@@ -205,23 +193,23 @@ public class LLVMOptRemarkEntry extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code RemarkType} field. */
+        /** @return a {@link LLVMOptRemarkStringRef} view of the {@link LLVMOptRemarkEntry#RemarkType} field. */
         public LLVMOptRemarkStringRef RemarkType() { return LLVMOptRemarkEntry.nRemarkType(address()); }
-        /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code PassName} field. */
+        /** @return a {@link LLVMOptRemarkStringRef} view of the {@link LLVMOptRemarkEntry#PassName} field. */
         public LLVMOptRemarkStringRef PassName() { return LLVMOptRemarkEntry.nPassName(address()); }
-        /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code RemarkName} field. */
+        /** @return a {@link LLVMOptRemarkStringRef} view of the {@link LLVMOptRemarkEntry#RemarkName} field. */
         public LLVMOptRemarkStringRef RemarkName() { return LLVMOptRemarkEntry.nRemarkName(address()); }
-        /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code FunctionName} field. */
+        /** @return a {@link LLVMOptRemarkStringRef} view of the {@link LLVMOptRemarkEntry#FunctionName} field. */
         public LLVMOptRemarkStringRef FunctionName() { return LLVMOptRemarkEntry.nFunctionName(address()); }
-        /** Returns a {@link LLVMOptRemarkDebugLoc} view of the {@code DebugLoc} field. */
+        /** @return a {@link LLVMOptRemarkDebugLoc} view of the {@link LLVMOptRemarkEntry#DebugLoc} field. */
         public LLVMOptRemarkDebugLoc DebugLoc() { return LLVMOptRemarkEntry.nDebugLoc(address()); }
-        /** Returns the value of the {@code Hotness} field. */
+        /** @return the value of the {@link LLVMOptRemarkEntry#Hotness} field. */
         @NativeType("uint32_t")
         public int Hotness() { return LLVMOptRemarkEntry.nHotness(address()); }
-        /** Returns the value of the {@code NumArgs} field. */
+        /** @return the value of the {@code NumArgs} field. */
         @NativeType("uint32_t")
         public int NumArgs() { return LLVMOptRemarkEntry.nNumArgs(address()); }
-        /** Returns a {@link LLVMOptRemarkArg.Buffer} view of the struct array pointed to by the {@code Args} field. */
+        /** @return a {@link LLVMOptRemarkArg.Buffer} view of the struct array pointed to by the {@link LLVMOptRemarkEntry#Args} field. */
         @NativeType("LLVMOptRemarkArg *")
         public LLVMOptRemarkArg.Buffer Args() { return LLVMOptRemarkEntry.nArgs(address()); }
 

@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code hostQueryReset} &ndash; indicates that the implementation supports resetting queries from the host with {@link VK12#vkResetQueryPool ResetQueryPool}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceHostQueryResetFeatures {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 hostQueryReset;
+ *     VkBool32 {@link #hostQueryReset};
  * }</code></pre>
  */
 public class VkPhysicalDeviceHostQueryResetFeatures extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceHostQueryResetFeatures extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code hostQueryReset} field. */
+    /** indicates that the implementation supports resetting queries from the host with {@link VK12#vkResetQueryPool ResetQueryPool}. */
     @NativeType("VkBool32")
     public boolean hostQueryReset() { return nhostQueryReset(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceHostQueryResetFeatures extends Struct implements Na
     public VkPhysicalDeviceHostQueryResetFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceHostQueryResetFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code hostQueryReset} field. */
+    /** Sets the specified value to the {@link #hostQueryReset} field. */
     public VkPhysicalDeviceHostQueryResetFeatures hostQueryReset(@NativeType("VkBool32") boolean value) { nhostQueryReset(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceHostQueryResetFeatures extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceHostQueryResetFeatures.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceHostQueryResetFeatures.npNext(address()); }
-        /** Returns the value of the {@code hostQueryReset} field. */
+        /** @return the value of the {@link VkPhysicalDeviceHostQueryResetFeatures#hostQueryReset} field. */
         @NativeType("VkBool32")
         public boolean hostQueryReset() { return VkPhysicalDeviceHostQueryResetFeatures.nhostQueryReset(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceHostQueryResetFeatures extends Struct implements Na
         public VkPhysicalDeviceHostQueryResetFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceHostQueryResetFeatures.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceHostQueryResetFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceHostQueryResetFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code hostQueryReset} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceHostQueryResetFeatures#hostQueryReset} field. */
         public VkPhysicalDeviceHostQueryResetFeatures.Buffer hostQueryReset(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceHostQueryResetFeatures.nhostQueryReset(address(), value ? 1 : 0); return this; }
 
     }

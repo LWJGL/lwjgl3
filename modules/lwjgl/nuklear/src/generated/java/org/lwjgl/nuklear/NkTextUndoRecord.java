@@ -70,13 +70,13 @@ public class NkTextUndoRecord extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code where} field. */
+    /** @return the value of the {@code where} field. */
     public int where() { return nwhere(address()); }
-    /** Returns the value of the {@code insert_length} field. */
+    /** @return the value of the {@code insert_length} field. */
     public short insert_length() { return ninsert_length(address()); }
-    /** Returns the value of the {@code delete_length} field. */
+    /** @return the value of the {@code delete_length} field. */
     public short delete_length() { return ndelete_length(address()); }
-    /** Returns the value of the {@code char_storage} field. */
+    /** @return the value of the {@code char_storage} field. */
     public short char_storage() { return nchar_storage(address()); }
 
     // -----------------------------------
@@ -157,13 +157,13 @@ public class NkTextUndoRecord extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code where} field. */
+        /** @return the value of the {@code where} field. */
         public int where() { return NkTextUndoRecord.nwhere(address()); }
-        /** Returns the value of the {@code insert_length} field. */
+        /** @return the value of the {@code insert_length} field. */
         public short insert_length() { return NkTextUndoRecord.ninsert_length(address()); }
-        /** Returns the value of the {@code delete_length} field. */
+        /** @return the value of the {@code delete_length} field. */
         public short delete_length() { return NkTextUndoRecord.ndelete_length(address()); }
-        /** Returns the value of the {@code char_storage} field. */
+        /** @return the value of the {@code char_storage} field. */
         public short char_storage() { return NkTextUndoRecord.nchar_storage(address()); }
 
     }

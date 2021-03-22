@@ -60,35 +60,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkDeviceQueueCreateInfo}, {@link VkPhysicalDeviceFeatures}, {@link VK10#vkCreateDevice CreateDevice}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code queueCreateInfoCount} &ndash; the unsigned integer size of the {@code pQueueCreateInfos} array. Refer to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#devsandqueues-queue-creation">Queue Creation</a> section below for further details.</li>
- * <li>{@code pQueueCreateInfos} &ndash; a pointer to an array of {@link VkDeviceQueueCreateInfo} structures describing the queues that are requested to be created along with the logical device. Refer to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#devsandqueues-queue-creation">Queue Creation</a> section below for further details.</li>
- * <li>{@code enabledLayerCount} &ndash; deprecated and ignored.</li>
- * <li>{@code ppEnabledLayerNames} &ndash; deprecated and ignored. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-layers-devicelayerdeprecation">Device Layer Deprecation</a>.</li>
- * <li>{@code enabledExtensionCount} &ndash; the number of device extensions to enable.</li>
- * <li>{@code ppEnabledExtensionNames} &ndash; a pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings containing the names of extensions to enable for the created device. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-extensions">Extensions</a> section for further details.</li>
- * <li>{@code pEnabledFeatures} &ndash; {@code NULL} or a pointer to a {@link VkPhysicalDeviceFeatures} structure containing boolean indicators of all the features to be enabled. Refer to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features">Features</a> section for further details.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDeviceCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkDeviceCreateFlags flags;
- *     uint32_t queueCreateInfoCount;
- *     {@link VkDeviceQueueCreateInfo VkDeviceQueueCreateInfo} const * pQueueCreateInfos;
- *     uint32_t enabledLayerCount;
- *     char const * const * ppEnabledLayerNames;
- *     uint32_t enabledExtensionCount;
- *     char const * const * ppEnabledExtensionNames;
- *     {@link VkPhysicalDeviceFeatures VkPhysicalDeviceFeatures} const * pEnabledFeatures;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkDeviceCreateFlags {@link #flags};
+ *     uint32_t {@link #queueCreateInfoCount};
+ *     {@link VkDeviceQueueCreateInfo VkDeviceQueueCreateInfo} const * {@link #pQueueCreateInfos};
+ *     uint32_t {@link #enabledLayerCount};
+ *     char const * const * {@link #ppEnabledLayerNames};
+ *     uint32_t {@link #enabledExtensionCount};
+ *     char const * const * {@link #ppEnabledExtensionNames};
+ *     {@link VkPhysicalDeviceFeatures VkPhysicalDeviceFeatures} const * {@link #pEnabledFeatures};
  * }</code></pre>
  */
 public class VkDeviceCreateInfo extends Struct implements NativeResource {
@@ -154,53 +139,53 @@ public class VkDeviceCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkDeviceCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code queueCreateInfoCount} field. */
+    /** the unsigned integer size of the {@code pQueueCreateInfos} array. Refer to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#devsandqueues-queue-creation">Queue Creation</a> section below for further details. */
     @NativeType("uint32_t")
     public int queueCreateInfoCount() { return nqueueCreateInfoCount(address()); }
-    /** Returns a {@link VkDeviceQueueCreateInfo.Buffer} view of the struct array pointed to by the {@code pQueueCreateInfos} field. */
+    /** a pointer to an array of {@link VkDeviceQueueCreateInfo} structures describing the queues that are requested to be created along with the logical device. Refer to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#devsandqueues-queue-creation">Queue Creation</a> section below for further details. */
     @NativeType("VkDeviceQueueCreateInfo const *")
     public VkDeviceQueueCreateInfo.Buffer pQueueCreateInfos() { return npQueueCreateInfos(address()); }
-    /** Returns the value of the {@code enabledLayerCount} field. */
+    /** deprecated and ignored. */
     @NativeType("uint32_t")
     public int enabledLayerCount() { return nenabledLayerCount(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code ppEnabledLayerNames} field. */
+    /** deprecated and ignored. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-layers-devicelayerdeprecation">Device Layer Deprecation</a>. */
     @Nullable
     @NativeType("char const * const *")
     public PointerBuffer ppEnabledLayerNames() { return nppEnabledLayerNames(address()); }
-    /** Returns the value of the {@code enabledExtensionCount} field. */
+    /** the number of device extensions to enable. */
     @NativeType("uint32_t")
     public int enabledExtensionCount() { return nenabledExtensionCount(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code ppEnabledExtensionNames} field. */
+    /** a pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings containing the names of extensions to enable for the created device. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-extensions">Extensions</a> section for further details. */
     @Nullable
     @NativeType("char const * const *")
     public PointerBuffer ppEnabledExtensionNames() { return nppEnabledExtensionNames(address()); }
-    /** Returns a {@link VkPhysicalDeviceFeatures} view of the struct pointed to by the {@code pEnabledFeatures} field. */
+    /** {@code NULL} or a pointer to a {@link VkPhysicalDeviceFeatures} structure containing boolean indicators of all the features to be enabled. Refer to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features">Features</a> section for further details. */
     @Nullable
     @NativeType("VkPhysicalDeviceFeatures const *")
     public VkPhysicalDeviceFeatures pEnabledFeatures() { return npEnabledFeatures(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkDeviceCreateInfo flags(@NativeType("VkDeviceCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDeviceQueueCreateInfo.Buffer} to the {@code pQueueCreateInfos} field. */
+    /** Sets the address of the specified {@link VkDeviceQueueCreateInfo.Buffer} to the {@link #pQueueCreateInfos} field. */
     public VkDeviceCreateInfo pQueueCreateInfos(@NativeType("VkDeviceQueueCreateInfo const *") VkDeviceQueueCreateInfo.Buffer value) { npQueueCreateInfos(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code ppEnabledLayerNames} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #ppEnabledLayerNames} field. */
     public VkDeviceCreateInfo ppEnabledLayerNames(@Nullable @NativeType("char const * const *") PointerBuffer value) { nppEnabledLayerNames(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code ppEnabledExtensionNames} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #ppEnabledExtensionNames} field. */
     public VkDeviceCreateInfo ppEnabledExtensionNames(@Nullable @NativeType("char const * const *") PointerBuffer value) { nppEnabledExtensionNames(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPhysicalDeviceFeatures} to the {@code pEnabledFeatures} field. */
+    /** Sets the address of the specified {@link VkPhysicalDeviceFeatures} to the {@link #pEnabledFeatures} field. */
     public VkDeviceCreateInfo pEnabledFeatures(@Nullable @NativeType("VkPhysicalDeviceFeatures const *") VkPhysicalDeviceFeatures value) { npEnabledFeatures(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -489,53 +474,53 @@ public class VkDeviceCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDeviceCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDeviceCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkDeviceCreateInfo#flags} field. */
         @NativeType("VkDeviceCreateFlags")
         public int flags() { return VkDeviceCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code queueCreateInfoCount} field. */
+        /** @return the value of the {@link VkDeviceCreateInfo#queueCreateInfoCount} field. */
         @NativeType("uint32_t")
         public int queueCreateInfoCount() { return VkDeviceCreateInfo.nqueueCreateInfoCount(address()); }
-        /** Returns a {@link VkDeviceQueueCreateInfo.Buffer} view of the struct array pointed to by the {@code pQueueCreateInfos} field. */
+        /** @return a {@link VkDeviceQueueCreateInfo.Buffer} view of the struct array pointed to by the {@link VkDeviceCreateInfo#pQueueCreateInfos} field. */
         @NativeType("VkDeviceQueueCreateInfo const *")
         public VkDeviceQueueCreateInfo.Buffer pQueueCreateInfos() { return VkDeviceCreateInfo.npQueueCreateInfos(address()); }
-        /** Returns the value of the {@code enabledLayerCount} field. */
+        /** @return the value of the {@link VkDeviceCreateInfo#enabledLayerCount} field. */
         @NativeType("uint32_t")
         public int enabledLayerCount() { return VkDeviceCreateInfo.nenabledLayerCount(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code ppEnabledLayerNames} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkDeviceCreateInfo#ppEnabledLayerNames} field. */
         @Nullable
         @NativeType("char const * const *")
         public PointerBuffer ppEnabledLayerNames() { return VkDeviceCreateInfo.nppEnabledLayerNames(address()); }
-        /** Returns the value of the {@code enabledExtensionCount} field. */
+        /** @return the value of the {@link VkDeviceCreateInfo#enabledExtensionCount} field. */
         @NativeType("uint32_t")
         public int enabledExtensionCount() { return VkDeviceCreateInfo.nenabledExtensionCount(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code ppEnabledExtensionNames} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkDeviceCreateInfo#ppEnabledExtensionNames} field. */
         @Nullable
         @NativeType("char const * const *")
         public PointerBuffer ppEnabledExtensionNames() { return VkDeviceCreateInfo.nppEnabledExtensionNames(address()); }
-        /** Returns a {@link VkPhysicalDeviceFeatures} view of the struct pointed to by the {@code pEnabledFeatures} field. */
+        /** @return a {@link VkPhysicalDeviceFeatures} view of the struct pointed to by the {@link VkDeviceCreateInfo#pEnabledFeatures} field. */
         @Nullable
         @NativeType("VkPhysicalDeviceFeatures const *")
         public VkPhysicalDeviceFeatures pEnabledFeatures() { return VkDeviceCreateInfo.npEnabledFeatures(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDeviceCreateInfo#sType} field. */
         public VkDeviceCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDeviceCreateInfo#pNext} field. */
         public VkDeviceCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkDeviceCreateInfo#flags} field. */
         public VkDeviceCreateInfo.Buffer flags(@NativeType("VkDeviceCreateFlags") int value) { VkDeviceCreateInfo.nflags(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDeviceQueueCreateInfo.Buffer} to the {@code pQueueCreateInfos} field. */
+        /** Sets the address of the specified {@link VkDeviceQueueCreateInfo.Buffer} to the {@link VkDeviceCreateInfo#pQueueCreateInfos} field. */
         public VkDeviceCreateInfo.Buffer pQueueCreateInfos(@NativeType("VkDeviceQueueCreateInfo const *") VkDeviceQueueCreateInfo.Buffer value) { VkDeviceCreateInfo.npQueueCreateInfos(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code ppEnabledLayerNames} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link VkDeviceCreateInfo#ppEnabledLayerNames} field. */
         public VkDeviceCreateInfo.Buffer ppEnabledLayerNames(@Nullable @NativeType("char const * const *") PointerBuffer value) { VkDeviceCreateInfo.nppEnabledLayerNames(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code ppEnabledExtensionNames} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link VkDeviceCreateInfo#ppEnabledExtensionNames} field. */
         public VkDeviceCreateInfo.Buffer ppEnabledExtensionNames(@Nullable @NativeType("char const * const *") PointerBuffer value) { VkDeviceCreateInfo.nppEnabledExtensionNames(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPhysicalDeviceFeatures} to the {@code pEnabledFeatures} field. */
+        /** Sets the address of the specified {@link VkPhysicalDeviceFeatures} to the {@link VkDeviceCreateInfo#pEnabledFeatures} field. */
         public VkDeviceCreateInfo.Buffer pEnabledFeatures(@Nullable @NativeType("VkPhysicalDeviceFeatures const *") VkPhysicalDeviceFeatures value) { VkDeviceCreateInfo.npEnabledFeatures(address(), value); return this; }
 
     }

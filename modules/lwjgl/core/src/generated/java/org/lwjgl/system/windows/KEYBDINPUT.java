@@ -18,31 +18,15 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Contains information about a simulated keyboard event.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code wVk} &ndash; 
- * A virtual-key code.
- * 
- * <p>The code must be a value in the range 1 to 254. If the {@code dwFlags} member specifies {@link User32#KEYEVENTF_UNICODE}, {@code wVk} must be 0.</p></li>
- * <li>{@code wScan} &ndash; 
- * A hardware scan code for the key.
- * 
- * <p>If {@code dwFlags} specifies {@link User32#KEYEVENTF_UNICODE}, {@code wScan} specifies a Unicode character which is to be sent to the foreground application.</p></li>
- * <li>{@code dwFlags} &ndash; specifies various aspects of a keystroke. One of:<br><table><tr><td>{@link User32#KEYEVENTF_EXTENDEDKEY}</td><td>{@link User32#KEYEVENTF_KEYUP}</td><td>{@link User32#KEYEVENTF_SCANCODE}</td><td>{@link User32#KEYEVENTF_UNICODE}</td></tr></table></li>
- * <li>{@code time} &ndash; the time stamp for the event, in milliseconds. If this parameter is zero, the system will provide its own time stamp.</li>
- * <li>{@code dwExtraInfo} &ndash; an additional value associated with the keystroke. Use the {@link User32#GetMessageExtraInfo} function to obtain this information.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct KEYBDINPUT {
- *     WORD wVk;
- *     WORD wScan;
- *     DWORD dwFlags;
- *     DWORD time;
- *     ULONG_PTR dwExtraInfo;
+ *     WORD {@link #wVk};
+ *     WORD {@link #wScan};
+ *     DWORD {@link #dwFlags};
+ *     DWORD {@link #time};
+ *     ULONG_PTR {@link #dwExtraInfo};
  * }</code></pre>
  */
 public class KEYBDINPUT extends Struct implements NativeResource {
@@ -93,31 +77,39 @@ public class KEYBDINPUT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code wVk} field. */
+    /**
+     * A virtual-key code.
+     * 
+     * <p>The code must be a value in the range 1 to 254. If the {@code dwFlags} member specifies {@link User32#KEYEVENTF_UNICODE}, {@code wVk} must be 0.</p>
+     */
     @NativeType("WORD")
     public short wVk() { return nwVk(address()); }
-    /** Returns the value of the {@code wScan} field. */
+    /**
+     * A hardware scan code for the key.
+     * 
+     * <p>If {@code dwFlags} specifies {@link User32#KEYEVENTF_UNICODE}, {@code wScan} specifies a Unicode character which is to be sent to the foreground application.</p>
+     */
     @NativeType("WORD")
     public short wScan() { return nwScan(address()); }
-    /** Returns the value of the {@code dwFlags} field. */
+    /** specifies various aspects of a keystroke. One of:<br><table><tr><td>{@link User32#KEYEVENTF_EXTENDEDKEY}</td><td>{@link User32#KEYEVENTF_KEYUP}</td><td>{@link User32#KEYEVENTF_SCANCODE}</td><td>{@link User32#KEYEVENTF_UNICODE}</td></tr></table> */
     @NativeType("DWORD")
     public int dwFlags() { return ndwFlags(address()); }
-    /** Returns the value of the {@code time} field. */
+    /** the time stamp for the event, in milliseconds. If this parameter is zero, the system will provide its own time stamp. */
     @NativeType("DWORD")
     public int time() { return ntime(address()); }
-    /** Returns the value of the {@code dwExtraInfo} field. */
+    /** an additional value associated with the keystroke. Use the {@link User32#GetMessageExtraInfo} function to obtain this information. */
     @NativeType("ULONG_PTR")
     public long dwExtraInfo() { return ndwExtraInfo(address()); }
 
-    /** Sets the specified value to the {@code wVk} field. */
+    /** Sets the specified value to the {@link #wVk} field. */
     public KEYBDINPUT wVk(@NativeType("WORD") short value) { nwVk(address(), value); return this; }
-    /** Sets the specified value to the {@code wScan} field. */
+    /** Sets the specified value to the {@link #wScan} field. */
     public KEYBDINPUT wScan(@NativeType("WORD") short value) { nwScan(address(), value); return this; }
-    /** Sets the specified value to the {@code dwFlags} field. */
+    /** Sets the specified value to the {@link #dwFlags} field. */
     public KEYBDINPUT dwFlags(@NativeType("DWORD") int value) { ndwFlags(address(), value); return this; }
-    /** Sets the specified value to the {@code time} field. */
+    /** Sets the specified value to the {@link #time} field. */
     public KEYBDINPUT time(@NativeType("DWORD") int value) { ntime(address(), value); return this; }
-    /** Sets the specified value to the {@code dwExtraInfo} field. */
+    /** Sets the specified value to the {@link #dwExtraInfo} field. */
     public KEYBDINPUT dwExtraInfo(@NativeType("ULONG_PTR") long value) { ndwExtraInfo(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -352,31 +344,31 @@ public class KEYBDINPUT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code wVk} field. */
+        /** @return the value of the {@link KEYBDINPUT#wVk} field. */
         @NativeType("WORD")
         public short wVk() { return KEYBDINPUT.nwVk(address()); }
-        /** Returns the value of the {@code wScan} field. */
+        /** @return the value of the {@link KEYBDINPUT#wScan} field. */
         @NativeType("WORD")
         public short wScan() { return KEYBDINPUT.nwScan(address()); }
-        /** Returns the value of the {@code dwFlags} field. */
+        /** @return the value of the {@link KEYBDINPUT#dwFlags} field. */
         @NativeType("DWORD")
         public int dwFlags() { return KEYBDINPUT.ndwFlags(address()); }
-        /** Returns the value of the {@code time} field. */
+        /** @return the value of the {@link KEYBDINPUT#time} field. */
         @NativeType("DWORD")
         public int time() { return KEYBDINPUT.ntime(address()); }
-        /** Returns the value of the {@code dwExtraInfo} field. */
+        /** @return the value of the {@link KEYBDINPUT#dwExtraInfo} field. */
         @NativeType("ULONG_PTR")
         public long dwExtraInfo() { return KEYBDINPUT.ndwExtraInfo(address()); }
 
-        /** Sets the specified value to the {@code wVk} field. */
+        /** Sets the specified value to the {@link KEYBDINPUT#wVk} field. */
         public KEYBDINPUT.Buffer wVk(@NativeType("WORD") short value) { KEYBDINPUT.nwVk(address(), value); return this; }
-        /** Sets the specified value to the {@code wScan} field. */
+        /** Sets the specified value to the {@link KEYBDINPUT#wScan} field. */
         public KEYBDINPUT.Buffer wScan(@NativeType("WORD") short value) { KEYBDINPUT.nwScan(address(), value); return this; }
-        /** Sets the specified value to the {@code dwFlags} field. */
+        /** Sets the specified value to the {@link KEYBDINPUT#dwFlags} field. */
         public KEYBDINPUT.Buffer dwFlags(@NativeType("DWORD") int value) { KEYBDINPUT.ndwFlags(address(), value); return this; }
-        /** Sets the specified value to the {@code time} field. */
+        /** Sets the specified value to the {@link KEYBDINPUT#time} field. */
         public KEYBDINPUT.Buffer time(@NativeType("DWORD") int value) { KEYBDINPUT.ntime(address(), value); return this; }
-        /** Sets the specified value to the {@code dwExtraInfo} field. */
+        /** Sets the specified value to the {@link KEYBDINPUT#dwExtraInfo} field. */
         public KEYBDINPUT.Buffer dwExtraInfo(@NativeType("ULONG_PTR") long value) { KEYBDINPUT.ndwExtraInfo(address(), value); return this; }
 
     }

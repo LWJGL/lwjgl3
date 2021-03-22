@@ -48,23 +48,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code prefersDedicatedAllocation} &ndash; specifies that the implementation would prefer a dedicated allocation for this resource. The application is still free to suballocate the resource but it <b>may</b> get better performance if a dedicated allocation is used.</li>
- * <li>{@code requiresDedicatedAllocation} &ndash; specifies that a dedicated allocation is required for this resource.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkMemoryDedicatedRequirements {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 prefersDedicatedAllocation;
- *     VkBool32 requiresDedicatedAllocation;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #prefersDedicatedAllocation};
+ *     VkBool32 {@link #requiresDedicatedAllocation};
  * }</code></pre>
  */
 public class VkMemoryDedicatedRequirements extends Struct implements NativeResource {
@@ -112,22 +103,22 @@ public class VkMemoryDedicatedRequirements extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code prefersDedicatedAllocation} field. */
+    /** specifies that the implementation would prefer a dedicated allocation for this resource. The application is still free to suballocate the resource but it <b>may</b> get better performance if a dedicated allocation is used. */
     @NativeType("VkBool32")
     public boolean prefersDedicatedAllocation() { return nprefersDedicatedAllocation(address()) != 0; }
-    /** Returns the value of the {@code requiresDedicatedAllocation} field. */
+    /** specifies that a dedicated allocation is required for this resource. */
     @NativeType("VkBool32")
     public boolean requiresDedicatedAllocation() { return nrequiresDedicatedAllocation(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryDedicatedRequirements sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryDedicatedRequirements pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -348,22 +339,22 @@ public class VkMemoryDedicatedRequirements extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkMemoryDedicatedRequirements#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryDedicatedRequirements.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkMemoryDedicatedRequirements#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkMemoryDedicatedRequirements.npNext(address()); }
-        /** Returns the value of the {@code prefersDedicatedAllocation} field. */
+        /** @return the value of the {@link VkMemoryDedicatedRequirements#prefersDedicatedAllocation} field. */
         @NativeType("VkBool32")
         public boolean prefersDedicatedAllocation() { return VkMemoryDedicatedRequirements.nprefersDedicatedAllocation(address()) != 0; }
-        /** Returns the value of the {@code requiresDedicatedAllocation} field. */
+        /** @return the value of the {@link VkMemoryDedicatedRequirements#requiresDedicatedAllocation} field. */
         @NativeType("VkBool32")
         public boolean requiresDedicatedAllocation() { return VkMemoryDedicatedRequirements.nrequiresDedicatedAllocation(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkMemoryDedicatedRequirements#sType} field. */
         public VkMemoryDedicatedRequirements.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryDedicatedRequirements.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkMemoryDedicatedRequirements#pNext} field. */
         public VkMemoryDedicatedRequirements.Buffer pNext(@NativeType("void *") long value) { VkMemoryDedicatedRequirements.npNext(address(), value); return this; }
 
     }

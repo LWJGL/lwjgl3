@@ -17,17 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code stableSrc} &ndash; {@code 1 == src} content will remain present on future calls to {@code LZ4F_compress()}; skip copying {@code src} content within {@code tmp} buffer</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct LZ4F_compressOptions_t {
- *     unsigned stableSrc;
+ *     unsigned {@link #stableSrc};
  *     unsigned reserved[3];
  * }</code></pre>
  */
@@ -71,17 +65,17 @@ public class LZ4FCompressOptions extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code stableSrc} field. */
+    /** {@code 1 == src} content will remain present on future calls to {@code LZ4F_compress()}; skip copying {@code src} content within {@code tmp} buffer */
     @NativeType("unsigned")
     public int stableSrc() { return nstableSrc(address()); }
-    /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
+    /** @return a {@link IntBuffer} view of the {@code reserved} field. */
     @NativeType("unsigned[3]")
     public IntBuffer reserved() { return nreserved(address()); }
-    /** Returns the value at the specified index of the {@code reserved} field. */
+    /** @return the value at the specified index of the {@code reserved} field. */
     @NativeType("unsigned")
     public int reserved(int index) { return nreserved(address(), index); }
 
-    /** Sets the specified value to the {@code stableSrc} field. */
+    /** Sets the specified value to the {@link #stableSrc} field. */
     public LZ4FCompressOptions stableSrc(@NativeType("unsigned") int value) { nstableSrc(address(), value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
     public LZ4FCompressOptions reserved(@NativeType("unsigned[3]") IntBuffer value) { nreserved(address(), value); return this; }
@@ -313,17 +307,17 @@ public class LZ4FCompressOptions extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code stableSrc} field. */
+        /** @return the value of the {@link LZ4FCompressOptions#stableSrc} field. */
         @NativeType("unsigned")
         public int stableSrc() { return LZ4FCompressOptions.nstableSrc(address()); }
-        /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
+        /** @return a {@link IntBuffer} view of the {@code reserved} field. */
         @NativeType("unsigned[3]")
         public IntBuffer reserved() { return LZ4FCompressOptions.nreserved(address()); }
-        /** Returns the value at the specified index of the {@code reserved} field. */
+        /** @return the value at the specified index of the {@code reserved} field. */
         @NativeType("unsigned")
         public int reserved(int index) { return LZ4FCompressOptions.nreserved(address(), index); }
 
-        /** Sets the specified value to the {@code stableSrc} field. */
+        /** Sets the specified value to the {@link LZ4FCompressOptions#stableSrc} field. */
         public LZ4FCompressOptions.Buffer stableSrc(@NativeType("unsigned") int value) { LZ4FCompressOptions.nstableSrc(address(), value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
         public LZ4FCompressOptions.Buffer reserved(@NativeType("unsigned[3]") IntBuffer value) { LZ4FCompressOptions.nreserved(address(), value); return this; }

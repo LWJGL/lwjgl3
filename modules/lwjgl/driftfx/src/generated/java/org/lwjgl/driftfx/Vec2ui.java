@@ -64,10 +64,10 @@ public class Vec2ui extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     @NativeType("unsigned int")
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     @NativeType("unsigned int")
     public int y() { return ny(address()); }
 
@@ -290,10 +290,10 @@ public class Vec2ui extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         @NativeType("unsigned int")
         public int x() { return Vec2ui.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         @NativeType("unsigned int")
         public int y() { return Vec2ui.ny(address()); }
 

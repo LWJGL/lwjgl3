@@ -38,32 +38,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkFramebufferAttachmentsCreateInfo}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkImageCreateFlagBits}, matching the value of {@link VkImageCreateInfo}{@code ::flags} used to create an image that will be used with this framebuffer.</li>
- * <li>{@code usage} &ndash; a bitmask of {@code VkImageUsageFlagBits}, matching the value of {@link VkImageCreateInfo}{@code ::usage} used to create an image used with this framebuffer.</li>
- * <li>{@code width} &ndash; the width of the image view used for rendering.</li>
- * <li>{@code height} &ndash; the height of the image view used for rendering.</li>
- * <li>{@code viewFormatCount} &ndash; the number of entries in the {@code pViewFormats} array, matching the value of {@link VkImageFormatListCreateInfo}{@code ::viewFormatCount} used to create an image used with this framebuffer.</li>
- * <li>{@code pViewFormats} &ndash; an array which lists of all formats which <b>can</b> be used when creating views of the image, matching the value of {@link VkImageFormatListCreateInfo}::pViewFormats used to create an image used with this framebuffer.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkFramebufferAttachmentImageInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkImageCreateFlags flags;
- *     VkImageUsageFlags usage;
- *     uint32_t width;
- *     uint32_t height;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkImageCreateFlags {@link #flags};
+ *     VkImageUsageFlags {@link #usage};
+ *     uint32_t {@link #width};
+ *     uint32_t {@link #height};
  *     uint32_t layerCount;
- *     uint32_t viewFormatCount;
- *     VkFormat const * pViewFormats;
+ *     uint32_t {@link #viewFormatCount};
+ *     VkFormat const * {@link #pViewFormats};
  * }</code></pre>
  */
 public class VkFramebufferAttachmentImageInfo extends Struct implements NativeResource {
@@ -126,50 +113,50 @@ public class VkFramebufferAttachmentImageInfo extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkImageCreateFlagBits}, matching the value of {@link VkImageCreateInfo}{@code ::flags} used to create an image that will be used with this framebuffer. */
     @NativeType("VkImageCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code usage} field. */
+    /** a bitmask of {@code VkImageUsageFlagBits}, matching the value of {@link VkImageCreateInfo}{@code ::usage} used to create an image used with this framebuffer. */
     @NativeType("VkImageUsageFlags")
     public int usage() { return nusage(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** the width of the image view used for rendering. */
     @NativeType("uint32_t")
     public int width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** the height of the image view used for rendering. */
     @NativeType("uint32_t")
     public int height() { return nheight(address()); }
-    /** Returns the value of the {@code layerCount} field. */
+    /** @return the value of the {@code layerCount} field. */
     @NativeType("uint32_t")
     public int layerCount() { return nlayerCount(address()); }
-    /** Returns the value of the {@code viewFormatCount} field. */
+    /** the number of entries in the {@code pViewFormats} array, matching the value of {@link VkImageFormatListCreateInfo}{@code ::viewFormatCount} used to create an image used with this framebuffer. */
     @NativeType("uint32_t")
     public int viewFormatCount() { return nviewFormatCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pViewFormats} field. */
+    /** an array which lists of all formats which <b>can</b> be used when creating views of the image, matching the value of {@link VkImageFormatListCreateInfo}::pViewFormats used to create an image used with this framebuffer. */
     @Nullable
     @NativeType("VkFormat const *")
     public IntBuffer pViewFormats() { return npViewFormats(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkFramebufferAttachmentImageInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkFramebufferAttachmentImageInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkFramebufferAttachmentImageInfo flags(@NativeType("VkImageCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code usage} field. */
+    /** Sets the specified value to the {@link #usage} field. */
     public VkFramebufferAttachmentImageInfo usage(@NativeType("VkImageUsageFlags") int value) { nusage(address(), value); return this; }
-    /** Sets the specified value to the {@code width} field. */
+    /** Sets the specified value to the {@link #width} field. */
     public VkFramebufferAttachmentImageInfo width(@NativeType("uint32_t") int value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@code height} field. */
+    /** Sets the specified value to the {@link #height} field. */
     public VkFramebufferAttachmentImageInfo height(@NativeType("uint32_t") int value) { nheight(address(), value); return this; }
     /** Sets the specified value to the {@code layerCount} field. */
     public VkFramebufferAttachmentImageInfo layerCount(@NativeType("uint32_t") int value) { nlayerCount(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pViewFormats} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pViewFormats} field. */
     public VkFramebufferAttachmentImageInfo pViewFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { npViewFormats(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -449,50 +436,50 @@ public class VkFramebufferAttachmentImageInfo extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkFramebufferAttachmentImageInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkFramebufferAttachmentImageInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkFramebufferAttachmentImageInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkFramebufferAttachmentImageInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkFramebufferAttachmentImageInfo#flags} field. */
         @NativeType("VkImageCreateFlags")
         public int flags() { return VkFramebufferAttachmentImageInfo.nflags(address()); }
-        /** Returns the value of the {@code usage} field. */
+        /** @return the value of the {@link VkFramebufferAttachmentImageInfo#usage} field. */
         @NativeType("VkImageUsageFlags")
         public int usage() { return VkFramebufferAttachmentImageInfo.nusage(address()); }
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@link VkFramebufferAttachmentImageInfo#width} field. */
         @NativeType("uint32_t")
         public int width() { return VkFramebufferAttachmentImageInfo.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@link VkFramebufferAttachmentImageInfo#height} field. */
         @NativeType("uint32_t")
         public int height() { return VkFramebufferAttachmentImageInfo.nheight(address()); }
-        /** Returns the value of the {@code layerCount} field. */
+        /** @return the value of the {@code layerCount} field. */
         @NativeType("uint32_t")
         public int layerCount() { return VkFramebufferAttachmentImageInfo.nlayerCount(address()); }
-        /** Returns the value of the {@code viewFormatCount} field. */
+        /** @return the value of the {@link VkFramebufferAttachmentImageInfo#viewFormatCount} field. */
         @NativeType("uint32_t")
         public int viewFormatCount() { return VkFramebufferAttachmentImageInfo.nviewFormatCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pViewFormats} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkFramebufferAttachmentImageInfo#pViewFormats} field. */
         @Nullable
         @NativeType("VkFormat const *")
         public IntBuffer pViewFormats() { return VkFramebufferAttachmentImageInfo.npViewFormats(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkFramebufferAttachmentImageInfo#sType} field. */
         public VkFramebufferAttachmentImageInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkFramebufferAttachmentImageInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkFramebufferAttachmentImageInfo#pNext} field. */
         public VkFramebufferAttachmentImageInfo.Buffer pNext(@NativeType("void const *") long value) { VkFramebufferAttachmentImageInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkFramebufferAttachmentImageInfo#flags} field. */
         public VkFramebufferAttachmentImageInfo.Buffer flags(@NativeType("VkImageCreateFlags") int value) { VkFramebufferAttachmentImageInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code usage} field. */
+        /** Sets the specified value to the {@link VkFramebufferAttachmentImageInfo#usage} field. */
         public VkFramebufferAttachmentImageInfo.Buffer usage(@NativeType("VkImageUsageFlags") int value) { VkFramebufferAttachmentImageInfo.nusage(address(), value); return this; }
-        /** Sets the specified value to the {@code width} field. */
+        /** Sets the specified value to the {@link VkFramebufferAttachmentImageInfo#width} field. */
         public VkFramebufferAttachmentImageInfo.Buffer width(@NativeType("uint32_t") int value) { VkFramebufferAttachmentImageInfo.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@code height} field. */
+        /** Sets the specified value to the {@link VkFramebufferAttachmentImageInfo#height} field. */
         public VkFramebufferAttachmentImageInfo.Buffer height(@NativeType("uint32_t") int value) { VkFramebufferAttachmentImageInfo.nheight(address(), value); return this; }
         /** Sets the specified value to the {@code layerCount} field. */
         public VkFramebufferAttachmentImageInfo.Buffer layerCount(@NativeType("uint32_t") int value) { VkFramebufferAttachmentImageInfo.nlayerCount(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pViewFormats} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkFramebufferAttachmentImageInfo#pViewFormats} field. */
         public VkFramebufferAttachmentImageInfo.Buffer pViewFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { VkFramebufferAttachmentImageInfo.npViewFormats(address(), value); return this; }
 
     }

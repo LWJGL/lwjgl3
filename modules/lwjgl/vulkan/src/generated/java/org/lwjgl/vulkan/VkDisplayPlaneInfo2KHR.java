@@ -49,21 +49,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link KHRGetDisplayProperties2#vkGetDisplayPlaneCapabilities2KHR GetDisplayPlaneCapabilities2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code mode} &ndash; the display mode the application intends to program when using the specified plane.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDisplayPlaneInfo2KHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkDisplayModeKHR mode;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkDisplayModeKHR {@link #mode};
  *     uint32_t planeIndex;
  * }</code></pre>
  */
@@ -112,24 +104,24 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code mode} field. */
+    /** the display mode the application intends to program when using the specified plane. */
     @NativeType("VkDisplayModeKHR")
     public long mode() { return nmode(address()); }
-    /** Returns the value of the {@code planeIndex} field. */
+    /** @return the value of the {@code planeIndex} field. */
     @NativeType("uint32_t")
     public int planeIndex() { return nplaneIndex(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDisplayPlaneInfo2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDisplayPlaneInfo2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code mode} field. */
+    /** Sets the specified value to the {@link #mode} field. */
     public VkDisplayPlaneInfo2KHR mode(@NativeType("VkDisplayModeKHR") long value) { nmode(address(), value); return this; }
     /** Sets the specified value to the {@code planeIndex} field. */
     public VkDisplayPlaneInfo2KHR planeIndex(@NativeType("uint32_t") int value) { nplaneIndex(address(), value); return this; }
@@ -360,24 +352,24 @@ public class VkDisplayPlaneInfo2KHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDisplayPlaneInfo2KHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDisplayPlaneInfo2KHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDisplayPlaneInfo2KHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDisplayPlaneInfo2KHR.npNext(address()); }
-        /** Returns the value of the {@code mode} field. */
+        /** @return the value of the {@link VkDisplayPlaneInfo2KHR#mode} field. */
         @NativeType("VkDisplayModeKHR")
         public long mode() { return VkDisplayPlaneInfo2KHR.nmode(address()); }
-        /** Returns the value of the {@code planeIndex} field. */
+        /** @return the value of the {@code planeIndex} field. */
         @NativeType("uint32_t")
         public int planeIndex() { return VkDisplayPlaneInfo2KHR.nplaneIndex(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDisplayPlaneInfo2KHR#sType} field. */
         public VkDisplayPlaneInfo2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplayPlaneInfo2KHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDisplayPlaneInfo2KHR#pNext} field. */
         public VkDisplayPlaneInfo2KHR.Buffer pNext(@NativeType("void const *") long value) { VkDisplayPlaneInfo2KHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code mode} field. */
+        /** Sets the specified value to the {@link VkDisplayPlaneInfo2KHR#mode} field. */
         public VkDisplayPlaneInfo2KHR.Buffer mode(@NativeType("VkDisplayModeKHR") long value) { VkDisplayPlaneInfo2KHR.nmode(address(), value); return this; }
         /** Sets the specified value to the {@code planeIndex} field. */
         public VkDisplayPlaneInfo2KHR.Buffer planeIndex(@NativeType("uint32_t") int value) { VkDisplayPlaneInfo2KHR.nplaneIndex(address(), value); return this; }

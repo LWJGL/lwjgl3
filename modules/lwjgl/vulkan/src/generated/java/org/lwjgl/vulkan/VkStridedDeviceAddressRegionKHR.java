@@ -29,21 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link KHRRayTracingPipeline#vkCmdTraceRaysIndirectKHR CmdTraceRaysIndirectKHR}, {@link KHRRayTracingPipeline#vkCmdTraceRaysKHR CmdTraceRaysKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code deviceAddress} &ndash; the device address (as returned by the {@link VK12#vkGetBufferDeviceAddress GetBufferDeviceAddress} command) at which the region starts, or zero if the region is unused.</li>
- * <li>{@code stride} &ndash; the byte stride between consecutive elements.</li>
- * <li>{@code size} &ndash; the size in bytes of the region starting at {@code deviceAddress}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkStridedDeviceAddressRegionKHR {
- *     VkDeviceAddress deviceAddress;
- *     VkDeviceSize stride;
- *     VkDeviceSize size;
+ *     VkDeviceAddress {@link #deviceAddress};
+ *     VkDeviceSize {@link #stride};
+ *     VkDeviceSize {@link #size};
  * }</code></pre>
  */
 public class VkStridedDeviceAddressRegionKHR extends Struct implements NativeResource {
@@ -88,21 +80,21 @@ public class VkStridedDeviceAddressRegionKHR extends Struct implements NativeRes
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code deviceAddress} field. */
+    /** the device address (as returned by the {@link VK12#vkGetBufferDeviceAddress GetBufferDeviceAddress} command) at which the region starts, or zero if the region is unused. */
     @NativeType("VkDeviceAddress")
     public long deviceAddress() { return ndeviceAddress(address()); }
-    /** Returns the value of the {@code stride} field. */
+    /** the byte stride between consecutive elements. */
     @NativeType("VkDeviceSize")
     public long stride() { return nstride(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** the size in bytes of the region starting at {@code deviceAddress}. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
 
-    /** Sets the specified value to the {@code deviceAddress} field. */
+    /** Sets the specified value to the {@link #deviceAddress} field. */
     public VkStridedDeviceAddressRegionKHR deviceAddress(@NativeType("VkDeviceAddress") long value) { ndeviceAddress(address(), value); return this; }
-    /** Sets the specified value to the {@code stride} field. */
+    /** Sets the specified value to the {@link #stride} field. */
     public VkStridedDeviceAddressRegionKHR stride(@NativeType("VkDeviceSize") long value) { nstride(address(), value); return this; }
-    /** Sets the specified value to the {@code size} field. */
+    /** Sets the specified value to the {@link #size} field. */
     public VkStridedDeviceAddressRegionKHR size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,21 +317,21 @@ public class VkStridedDeviceAddressRegionKHR extends Struct implements NativeRes
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code deviceAddress} field. */
+        /** @return the value of the {@link VkStridedDeviceAddressRegionKHR#deviceAddress} field. */
         @NativeType("VkDeviceAddress")
         public long deviceAddress() { return VkStridedDeviceAddressRegionKHR.ndeviceAddress(address()); }
-        /** Returns the value of the {@code stride} field. */
+        /** @return the value of the {@link VkStridedDeviceAddressRegionKHR#stride} field. */
         @NativeType("VkDeviceSize")
         public long stride() { return VkStridedDeviceAddressRegionKHR.nstride(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link VkStridedDeviceAddressRegionKHR#size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkStridedDeviceAddressRegionKHR.nsize(address()); }
 
-        /** Sets the specified value to the {@code deviceAddress} field. */
+        /** Sets the specified value to the {@link VkStridedDeviceAddressRegionKHR#deviceAddress} field. */
         public VkStridedDeviceAddressRegionKHR.Buffer deviceAddress(@NativeType("VkDeviceAddress") long value) { VkStridedDeviceAddressRegionKHR.ndeviceAddress(address(), value); return this; }
-        /** Sets the specified value to the {@code stride} field. */
+        /** Sets the specified value to the {@link VkStridedDeviceAddressRegionKHR#stride} field. */
         public VkStridedDeviceAddressRegionKHR.Buffer stride(@NativeType("VkDeviceSize") long value) { VkStridedDeviceAddressRegionKHR.nstride(address(), value); return this; }
-        /** Sets the specified value to the {@code size} field. */
+        /** Sets the specified value to the {@link VkStridedDeviceAddressRegionKHR#size} field. */
         public VkStridedDeviceAddressRegionKHR.Buffer size(@NativeType("VkDeviceSize") long value) { VkStridedDeviceAddressRegionKHR.nsize(address(), value); return this; }
 
     }

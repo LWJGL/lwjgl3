@@ -18,23 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * A glyph position.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code str} &ndash; position of the glyph in the input string</li>
- * <li>{@code x} &ndash; the x-coordinate of the logical glyph position</li>
- * <li>{@code minx} &ndash; the left bound of the glyph shape</li>
- * <li>{@code maxx} &ndash; the right bound of the glyph shape</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct NVGglyphPosition {
- *     char * str;
- *     float x;
- *     float minx;
- *     float maxx;
+ *     char * {@link #str};
+ *     float {@link #x};
+ *     float {@link #minx};
+ *     float {@link #maxx};
  * }</code></pre>
  */
 @NativeType("struct NVGglyphPosition")
@@ -83,14 +74,14 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code str} field. */
+    /** position of the glyph in the input string */
     @NativeType("char *")
     public long str() { return nstr(address()); }
-    /** Returns the value of the {@code x} field. */
+    /** the x-coordinate of the logical glyph position */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code minx} field. */
+    /** the left bound of the glyph shape */
     public float minx() { return nminx(address()); }
-    /** Returns the value of the {@code maxx} field. */
+    /** the right bound of the glyph shape */
     public float maxx() { return nmaxx(address()); }
 
     // -----------------------------------
@@ -283,14 +274,14 @@ public class NVGGlyphPosition extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code str} field. */
+        /** @return the value of the {@link NVGGlyphPosition#str} field. */
         @NativeType("char *")
         public long str() { return NVGGlyphPosition.nstr(address()); }
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link NVGGlyphPosition#x} field. */
         public float x() { return NVGGlyphPosition.nx(address()); }
-        /** Returns the value of the {@code minx} field. */
+        /** @return the value of the {@link NVGGlyphPosition#minx} field. */
         public float minx() { return NVGGlyphPosition.nminx(address()); }
-        /** Returns the value of the {@code maxx} field. */
+        /** @return the value of the {@link NVGGlyphPosition#maxx} field. */
         public float maxx() { return NVGGlyphPosition.nmaxx(address()); }
 
     }

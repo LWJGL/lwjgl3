@@ -62,25 +62,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK11#vkBindImageMemory2 BindImageMemory2}, {@link KHRBindMemory2#vkBindImageMemory2KHR BindImageMemory2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code image} &ndash; the image to be attached to memory.</li>
- * <li>{@code memory} &ndash; a {@code VkDeviceMemory} object describing the device memory to attach.</li>
- * <li>{@code memoryOffset} &ndash; the start offset of the region of {@code memory} which is to be bound to the image. The number of bytes returned in the {@link VkMemoryRequirements}{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified image.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBindImageMemoryInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkImage image;
- *     VkDeviceMemory memory;
- *     VkDeviceSize memoryOffset;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkImage {@link #image};
+ *     VkDeviceMemory {@link #memory};
+ *     VkDeviceSize {@link #memoryOffset};
  * }</code></pre>
  */
 public class VkBindImageMemoryInfo extends Struct implements NativeResource {
@@ -131,31 +121,31 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code image} field. */
+    /** the image to be attached to memory. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
-    /** Returns the value of the {@code memory} field. */
+    /** a {@code VkDeviceMemory} object describing the device memory to attach. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** Returns the value of the {@code memoryOffset} field. */
+    /** the start offset of the region of {@code memory} which is to be bound to the image. The number of bytes returned in the {@link VkMemoryRequirements}{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified image. */
     @NativeType("VkDeviceSize")
     public long memoryOffset() { return nmemoryOffset(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkBindImageMemoryInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkBindImageMemoryInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code image} field. */
+    /** Sets the specified value to the {@link #image} field. */
     public VkBindImageMemoryInfo image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
-    /** Sets the specified value to the {@code memory} field. */
+    /** Sets the specified value to the {@link #memory} field. */
     public VkBindImageMemoryInfo memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
-    /** Sets the specified value to the {@code memoryOffset} field. */
+    /** Sets the specified value to the {@link #memoryOffset} field. */
     public VkBindImageMemoryInfo memoryOffset(@NativeType("VkDeviceSize") long value) { nmemoryOffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -390,31 +380,31 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkBindImageMemoryInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBindImageMemoryInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkBindImageMemoryInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBindImageMemoryInfo.npNext(address()); }
-        /** Returns the value of the {@code image} field. */
+        /** @return the value of the {@link VkBindImageMemoryInfo#image} field. */
         @NativeType("VkImage")
         public long image() { return VkBindImageMemoryInfo.nimage(address()); }
-        /** Returns the value of the {@code memory} field. */
+        /** @return the value of the {@link VkBindImageMemoryInfo#memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkBindImageMemoryInfo.nmemory(address()); }
-        /** Returns the value of the {@code memoryOffset} field. */
+        /** @return the value of the {@link VkBindImageMemoryInfo#memoryOffset} field. */
         @NativeType("VkDeviceSize")
         public long memoryOffset() { return VkBindImageMemoryInfo.nmemoryOffset(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkBindImageMemoryInfo#sType} field. */
         public VkBindImageMemoryInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindImageMemoryInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkBindImageMemoryInfo#pNext} field. */
         public VkBindImageMemoryInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindImageMemoryInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code image} field. */
+        /** Sets the specified value to the {@link VkBindImageMemoryInfo#image} field. */
         public VkBindImageMemoryInfo.Buffer image(@NativeType("VkImage") long value) { VkBindImageMemoryInfo.nimage(address(), value); return this; }
-        /** Sets the specified value to the {@code memory} field. */
+        /** Sets the specified value to the {@link VkBindImageMemoryInfo#memory} field. */
         public VkBindImageMemoryInfo.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkBindImageMemoryInfo.nmemory(address(), value); return this; }
-        /** Sets the specified value to the {@code memoryOffset} field. */
+        /** Sets the specified value to the {@link VkBindImageMemoryInfo#memoryOffset} field. */
         public VkBindImageMemoryInfo.Buffer memoryOffset(@NativeType("VkDeviceSize") long value) { VkBindImageMemoryInfo.nmemoryOffset(address(), value); return this; }
 
     }

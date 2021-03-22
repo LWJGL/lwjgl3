@@ -22,29 +22,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>The default implementation of the functions utilizes the fXXX functions from the CRT. However, you can supply a custom implementation to Assimp by
  * delivering a custom {@link AIFileIO}. Use this to enable reading from other sources, such as ZIP archives or memory locations.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code ReadProc} &ndash; Callback to read from a file</li>
- * <li>{@code WriteProc} &ndash; Callback to write to a file</li>
- * <li>{@code TellProc} &ndash; Callback to retrieve the current position of the file cursor (ftell())</li>
- * <li>{@code FileSizeProc} &ndash; Callback to retrieve the size of the file, in bytes</li>
- * <li>{@code SeekProc} &ndash; Callback to set the current position of the file cursor (fseek())</li>
- * <li>{@code FlushProc} &ndash; Callback to flush the file contents</li>
- * <li>{@code UserData} &ndash; User-defined, opaque data</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiFile {
- *     {@link AIFileReadProcI aiFileReadProc} ReadProc;
- *     {@link AIFileWriteProcI aiFileWriteProc} WriteProc;
- *     {@link AIFileTellProcI aiFileTellProc} TellProc;
- *     {@link AIFileTellProcI aiFileTellProc} FileSizeProc;
- *     {@link AIFileSeekI aiFileSeek} SeekProc;
- *     {@link AIFileFlushProcI aiFileFlushProc} FlushProc;
- *     aiUserData UserData;
+ *     {@link AIFileReadProcI aiFileReadProc} {@link #ReadProc};
+ *     {@link AIFileWriteProcI aiFileWriteProc} {@link #WriteProc};
+ *     {@link AIFileTellProcI aiFileTellProc} {@link #TellProc};
+ *     {@link AIFileTellProcI aiFileTellProc} {@link #FileSizeProc};
+ *     {@link AIFileSeekI aiFileSeek} {@link #SeekProc};
+ *     {@link AIFileFlushProcI aiFileFlushProc} {@link #FlushProc};
+ *     aiUserData {@link #UserData};
  * }</code></pre>
  */
 @NativeType("struct aiFile")
@@ -102,41 +90,41 @@ public class AIFile extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code ReadProc} field. */
+    /** Callback to read from a file */
     @NativeType("aiFileReadProc")
     public AIFileReadProc ReadProc() { return nReadProc(address()); }
-    /** Returns the value of the {@code WriteProc} field. */
+    /** Callback to write to a file */
     @NativeType("aiFileWriteProc")
     public AIFileWriteProc WriteProc() { return nWriteProc(address()); }
-    /** Returns the value of the {@code TellProc} field. */
+    /** Callback to retrieve the current position of the file cursor (ftell()) */
     @NativeType("aiFileTellProc")
     public AIFileTellProc TellProc() { return nTellProc(address()); }
-    /** Returns the value of the {@code FileSizeProc} field. */
+    /** Callback to retrieve the size of the file, in bytes */
     @NativeType("aiFileTellProc")
     public AIFileTellProc FileSizeProc() { return nFileSizeProc(address()); }
-    /** Returns the value of the {@code SeekProc} field. */
+    /** Callback to set the current position of the file cursor (fseek()) */
     @NativeType("aiFileSeek")
     public AIFileSeek SeekProc() { return nSeekProc(address()); }
-    /** Returns the value of the {@code FlushProc} field. */
+    /** Callback to flush the file contents */
     @NativeType("aiFileFlushProc")
     public AIFileFlushProc FlushProc() { return nFlushProc(address()); }
-    /** Returns the value of the {@code UserData} field. */
+    /** User-defined, opaque data */
     @NativeType("aiUserData")
     public long UserData() { return nUserData(address()); }
 
-    /** Sets the specified value to the {@code ReadProc} field. */
+    /** Sets the specified value to the {@link #ReadProc} field. */
     public AIFile ReadProc(@NativeType("aiFileReadProc") AIFileReadProcI value) { nReadProc(address(), value); return this; }
-    /** Sets the specified value to the {@code WriteProc} field. */
+    /** Sets the specified value to the {@link #WriteProc} field. */
     public AIFile WriteProc(@NativeType("aiFileWriteProc") AIFileWriteProcI value) { nWriteProc(address(), value); return this; }
-    /** Sets the specified value to the {@code TellProc} field. */
+    /** Sets the specified value to the {@link #TellProc} field. */
     public AIFile TellProc(@NativeType("aiFileTellProc") AIFileTellProcI value) { nTellProc(address(), value); return this; }
-    /** Sets the specified value to the {@code FileSizeProc} field. */
+    /** Sets the specified value to the {@link #FileSizeProc} field. */
     public AIFile FileSizeProc(@NativeType("aiFileTellProc") AIFileTellProcI value) { nFileSizeProc(address(), value); return this; }
-    /** Sets the specified value to the {@code SeekProc} field. */
+    /** Sets the specified value to the {@link #SeekProc} field. */
     public AIFile SeekProc(@NativeType("aiFileSeek") AIFileSeekI value) { nSeekProc(address(), value); return this; }
-    /** Sets the specified value to the {@code FlushProc} field. */
+    /** Sets the specified value to the {@link #FlushProc} field. */
     public AIFile FlushProc(@NativeType("aiFileFlushProc") AIFileFlushProcI value) { nFlushProc(address(), value); return this; }
-    /** Sets the specified value to the {@code UserData} field. */
+    /** Sets the specified value to the {@link #UserData} field. */
     public AIFile UserData(@NativeType("aiUserData") long value) { nUserData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -409,41 +397,41 @@ public class AIFile extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code ReadProc} field. */
+        /** @return the value of the {@link AIFile#ReadProc} field. */
         @NativeType("aiFileReadProc")
         public AIFileReadProc ReadProc() { return AIFile.nReadProc(address()); }
-        /** Returns the value of the {@code WriteProc} field. */
+        /** @return the value of the {@link AIFile#WriteProc} field. */
         @NativeType("aiFileWriteProc")
         public AIFileWriteProc WriteProc() { return AIFile.nWriteProc(address()); }
-        /** Returns the value of the {@code TellProc} field. */
+        /** @return the value of the {@link AIFile#TellProc} field. */
         @NativeType("aiFileTellProc")
         public AIFileTellProc TellProc() { return AIFile.nTellProc(address()); }
-        /** Returns the value of the {@code FileSizeProc} field. */
+        /** @return the value of the {@link AIFile#FileSizeProc} field. */
         @NativeType("aiFileTellProc")
         public AIFileTellProc FileSizeProc() { return AIFile.nFileSizeProc(address()); }
-        /** Returns the value of the {@code SeekProc} field. */
+        /** @return the value of the {@link AIFile#SeekProc} field. */
         @NativeType("aiFileSeek")
         public AIFileSeek SeekProc() { return AIFile.nSeekProc(address()); }
-        /** Returns the value of the {@code FlushProc} field. */
+        /** @return the value of the {@link AIFile#FlushProc} field. */
         @NativeType("aiFileFlushProc")
         public AIFileFlushProc FlushProc() { return AIFile.nFlushProc(address()); }
-        /** Returns the value of the {@code UserData} field. */
+        /** @return the value of the {@link AIFile#UserData} field. */
         @NativeType("aiUserData")
         public long UserData() { return AIFile.nUserData(address()); }
 
-        /** Sets the specified value to the {@code ReadProc} field. */
+        /** Sets the specified value to the {@link AIFile#ReadProc} field. */
         public AIFile.Buffer ReadProc(@NativeType("aiFileReadProc") AIFileReadProcI value) { AIFile.nReadProc(address(), value); return this; }
-        /** Sets the specified value to the {@code WriteProc} field. */
+        /** Sets the specified value to the {@link AIFile#WriteProc} field. */
         public AIFile.Buffer WriteProc(@NativeType("aiFileWriteProc") AIFileWriteProcI value) { AIFile.nWriteProc(address(), value); return this; }
-        /** Sets the specified value to the {@code TellProc} field. */
+        /** Sets the specified value to the {@link AIFile#TellProc} field. */
         public AIFile.Buffer TellProc(@NativeType("aiFileTellProc") AIFileTellProcI value) { AIFile.nTellProc(address(), value); return this; }
-        /** Sets the specified value to the {@code FileSizeProc} field. */
+        /** Sets the specified value to the {@link AIFile#FileSizeProc} field. */
         public AIFile.Buffer FileSizeProc(@NativeType("aiFileTellProc") AIFileTellProcI value) { AIFile.nFileSizeProc(address(), value); return this; }
-        /** Sets the specified value to the {@code SeekProc} field. */
+        /** Sets the specified value to the {@link AIFile#SeekProc} field. */
         public AIFile.Buffer SeekProc(@NativeType("aiFileSeek") AIFileSeekI value) { AIFile.nSeekProc(address(), value); return this; }
-        /** Sets the specified value to the {@code FlushProc} field. */
+        /** Sets the specified value to the {@link AIFile#FlushProc} field. */
         public AIFile.Buffer FlushProc(@NativeType("aiFileFlushProc") AIFileFlushProcI value) { AIFile.nFlushProc(address(), value); return this; }
-        /** Sets the specified value to the {@code UserData} field. */
+        /** Sets the specified value to the {@link AIFile#UserData} field. */
         public AIFile.Buffer UserData(@NativeType("aiUserData") long value) { AIFile.nUserData(address(), value); return this; }
 
     }

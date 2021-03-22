@@ -30,19 +30,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code protectedSubmit} &ndash; specifies whether the batch is protected. If {@code protectedSubmit} is {@link VK10#VK_TRUE TRUE}, the batch is protected. If {@code protectedSubmit} is {@link VK10#VK_FALSE FALSE}, the batch is unprotected. If the {@link VkSubmitInfo}{@code ::pNext} chain does not include this structure, the batch is unprotected.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkProtectedSubmitInfo {
  *     VkStructureType sType;
  *     void const * pNext;
- *     VkBool32 protectedSubmit;
+ *     VkBool32 {@link #protectedSubmit};
  * }</code></pre>
  */
 public class VkProtectedSubmitInfo extends Struct implements NativeResource {
@@ -87,13 +81,13 @@ public class VkProtectedSubmitInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code protectedSubmit} field. */
+    /** specifies whether the batch is protected. If {@code protectedSubmit} is {@link VK10#VK_TRUE TRUE}, the batch is protected. If {@code protectedSubmit} is {@link VK10#VK_FALSE FALSE}, the batch is unprotected. If the {@link VkSubmitInfo}{@code ::pNext} chain does not include this structure, the batch is unprotected. */
     @NativeType("VkBool32")
     public boolean protectedSubmit() { return nprotectedSubmit(address()) != 0; }
 
@@ -101,7 +95,7 @@ public class VkProtectedSubmitInfo extends Struct implements NativeResource {
     public VkProtectedSubmitInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkProtectedSubmitInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code protectedSubmit} field. */
+    /** Sets the specified value to the {@link #protectedSubmit} field. */
     public VkProtectedSubmitInfo protectedSubmit(@NativeType("VkBool32") boolean value) { nprotectedSubmit(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -324,13 +318,13 @@ public class VkProtectedSubmitInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkProtectedSubmitInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkProtectedSubmitInfo.npNext(address()); }
-        /** Returns the value of the {@code protectedSubmit} field. */
+        /** @return the value of the {@link VkProtectedSubmitInfo#protectedSubmit} field. */
         @NativeType("VkBool32")
         public boolean protectedSubmit() { return VkProtectedSubmitInfo.nprotectedSubmit(address()) != 0; }
 
@@ -338,7 +332,7 @@ public class VkProtectedSubmitInfo extends Struct implements NativeResource {
         public VkProtectedSubmitInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkProtectedSubmitInfo.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkProtectedSubmitInfo.Buffer pNext(@NativeType("void const *") long value) { VkProtectedSubmitInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code protectedSubmit} field. */
+        /** Sets the specified value to the {@link VkProtectedSubmitInfo#protectedSubmit} field. */
         public VkProtectedSubmitInfo.Buffer protectedSubmit(@NativeType("VkBool32") boolean value) { VkProtectedSubmitInfo.nprotectedSubmit(address(), value ? 1 : 0); return this; }
 
     }

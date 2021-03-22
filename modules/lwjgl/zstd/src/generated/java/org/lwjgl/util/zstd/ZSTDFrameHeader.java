@@ -16,22 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code frameContentSize} &ndash; if == {@link Zstd#ZSTD_CONTENTSIZE_UNKNOWN CONTENTSIZE_UNKNOWN}, it means this field is not available. 0 means "empty"</li>
- * <li>{@code windowSize} &ndash; can be very large, up to &le; {@code frameContentSize}</li>
- * <li>{@code frameType} &ndash; if == {@link ZstdX#ZSTD_skippableFrame skippableFrame}, {@code frameContentSize} is the size of skippable content</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ZSTD_frameHeader {
- *     unsigned long long frameContentSize;
- *     unsigned long long windowSize;
+ *     unsigned long long {@link #frameContentSize};
+ *     unsigned long long {@link #windowSize};
  *     unsigned int blockSizeMax;
- *     ZSTD_frameType_e frameType;
+ *     ZSTD_frameType_e {@link #frameType};
  *     unsigned int headerSize;
  *     unsigned int dictID;
  *     unsigned int checksumFlag;
@@ -92,25 +84,25 @@ public class ZSTDFrameHeader extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code frameContentSize} field. */
+    /** if == {@link Zstd#ZSTD_CONTENTSIZE_UNKNOWN CONTENTSIZE_UNKNOWN}, it means this field is not available. 0 means "empty" */
     @NativeType("unsigned long long")
     public long frameContentSize() { return nframeContentSize(address()); }
-    /** Returns the value of the {@code windowSize} field. */
+    /** can be very large, up to &le; {@code frameContentSize} */
     @NativeType("unsigned long long")
     public long windowSize() { return nwindowSize(address()); }
-    /** Returns the value of the {@code blockSizeMax} field. */
+    /** @return the value of the {@code blockSizeMax} field. */
     @NativeType("unsigned int")
     public int blockSizeMax() { return nblockSizeMax(address()); }
-    /** Returns the value of the {@code frameType} field. */
+    /** if == {@link ZstdX#ZSTD_skippableFrame skippableFrame}, {@code frameContentSize} is the size of skippable content */
     @NativeType("ZSTD_frameType_e")
     public int frameType() { return nframeType(address()); }
-    /** Returns the value of the {@code headerSize} field. */
+    /** @return the value of the {@code headerSize} field. */
     @NativeType("unsigned int")
     public int headerSize() { return nheaderSize(address()); }
-    /** Returns the value of the {@code dictID} field. */
+    /** @return the value of the {@code dictID} field. */
     @NativeType("unsigned int")
     public int dictID() { return ndictID(address()); }
-    /** Returns the value of the {@code checksumFlag} field. */
+    /** @return the value of the {@code checksumFlag} field. */
     @NativeType("unsigned int")
     public int checksumFlag() { return nchecksumFlag(address()); }
 
@@ -310,25 +302,25 @@ public class ZSTDFrameHeader extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code frameContentSize} field. */
+        /** @return the value of the {@link ZSTDFrameHeader#frameContentSize} field. */
         @NativeType("unsigned long long")
         public long frameContentSize() { return ZSTDFrameHeader.nframeContentSize(address()); }
-        /** Returns the value of the {@code windowSize} field. */
+        /** @return the value of the {@link ZSTDFrameHeader#windowSize} field. */
         @NativeType("unsigned long long")
         public long windowSize() { return ZSTDFrameHeader.nwindowSize(address()); }
-        /** Returns the value of the {@code blockSizeMax} field. */
+        /** @return the value of the {@code blockSizeMax} field. */
         @NativeType("unsigned int")
         public int blockSizeMax() { return ZSTDFrameHeader.nblockSizeMax(address()); }
-        /** Returns the value of the {@code frameType} field. */
+        /** @return the value of the {@link ZSTDFrameHeader#frameType} field. */
         @NativeType("ZSTD_frameType_e")
         public int frameType() { return ZSTDFrameHeader.nframeType(address()); }
-        /** Returns the value of the {@code headerSize} field. */
+        /** @return the value of the {@code headerSize} field. */
         @NativeType("unsigned int")
         public int headerSize() { return ZSTDFrameHeader.nheaderSize(address()); }
-        /** Returns the value of the {@code dictID} field. */
+        /** @return the value of the {@code dictID} field. */
         @NativeType("unsigned int")
         public int dictID() { return ZSTDFrameHeader.ndictID(address()); }
-        /** Returns the value of the {@code checksumFlag} field. */
+        /** @return the value of the {@code checksumFlag} field. */
         @NativeType("unsigned int")
         public int checksumFlag() { return ZSTDFrameHeader.nchecksumFlag(address()); }
 

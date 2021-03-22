@@ -66,35 +66,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkRenderPassCreateInfo2}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code srcSubpass} &ndash; the subpass index of the first subpass in the dependency, or {@link VK10#VK_SUBPASS_EXTERNAL SUBPASS_EXTERNAL}.</li>
- * <li>{@code dstSubpass} &ndash; the subpass index of the second subpass in the dependency, or {@link VK10#VK_SUBPASS_EXTERNAL SUBPASS_EXTERNAL}.</li>
- * <li>{@code srcStageMask} &ndash; a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-stages-masks">source stage mask</a>.</li>
- * <li>{@code dstStageMask} &ndash; a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-stages-masks">destination stage mask</a></li>
- * <li>{@code srcAccessMask} &ndash; a bitmask of {@code VkAccessFlagBits} specifying a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-access-masks">source access mask</a>.</li>
- * <li>{@code dstAccessMask} &ndash; a bitmask of {@code VkAccessFlagBits} specifying a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-access-masks">destination access mask</a>.</li>
- * <li>{@code dependencyFlags} &ndash; a bitmask of {@code VkDependencyFlagBits}.</li>
- * <li>{@code viewOffset} &ndash; controls which views in the source subpass the views in the destination subpass depend on.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSubpassDependency2 {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t srcSubpass;
- *     uint32_t dstSubpass;
- *     VkPipelineStageFlags srcStageMask;
- *     VkPipelineStageFlags dstStageMask;
- *     VkAccessFlags srcAccessMask;
- *     VkAccessFlags dstAccessMask;
- *     VkDependencyFlags dependencyFlags;
- *     int32_t viewOffset;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #srcSubpass};
+ *     uint32_t {@link #dstSubpass};
+ *     VkPipelineStageFlags {@link #srcStageMask};
+ *     VkPipelineStageFlags {@link #dstStageMask};
+ *     VkAccessFlags {@link #srcAccessMask};
+ *     VkAccessFlags {@link #dstAccessMask};
+ *     VkDependencyFlags {@link #dependencyFlags};
+ *     int32_t {@link #viewOffset};
  * }</code></pre>
  */
 public class VkSubpassDependency2 extends Struct implements NativeResource {
@@ -160,56 +145,56 @@ public class VkSubpassDependency2 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code srcSubpass} field. */
+    /** the subpass index of the first subpass in the dependency, or {@link VK10#VK_SUBPASS_EXTERNAL SUBPASS_EXTERNAL}. */
     @NativeType("uint32_t")
     public int srcSubpass() { return nsrcSubpass(address()); }
-    /** Returns the value of the {@code dstSubpass} field. */
+    /** the subpass index of the second subpass in the dependency, or {@link VK10#VK_SUBPASS_EXTERNAL SUBPASS_EXTERNAL}. */
     @NativeType("uint32_t")
     public int dstSubpass() { return ndstSubpass(address()); }
-    /** Returns the value of the {@code srcStageMask} field. */
+    /** a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-stages-masks">source stage mask</a>. */
     @NativeType("VkPipelineStageFlags")
     public int srcStageMask() { return nsrcStageMask(address()); }
-    /** Returns the value of the {@code dstStageMask} field. */
+    /** a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-stages-masks">destination stage mask</a> */
     @NativeType("VkPipelineStageFlags")
     public int dstStageMask() { return ndstStageMask(address()); }
-    /** Returns the value of the {@code srcAccessMask} field. */
+    /** a bitmask of {@code VkAccessFlagBits} specifying a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-access-masks">source access mask</a>. */
     @NativeType("VkAccessFlags")
     public int srcAccessMask() { return nsrcAccessMask(address()); }
-    /** Returns the value of the {@code dstAccessMask} field. */
+    /** a bitmask of {@code VkAccessFlagBits} specifying a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-access-masks">destination access mask</a>. */
     @NativeType("VkAccessFlags")
     public int dstAccessMask() { return ndstAccessMask(address()); }
-    /** Returns the value of the {@code dependencyFlags} field. */
+    /** a bitmask of {@code VkDependencyFlagBits}. */
     @NativeType("VkDependencyFlags")
     public int dependencyFlags() { return ndependencyFlags(address()); }
-    /** Returns the value of the {@code viewOffset} field. */
+    /** controls which views in the source subpass the views in the destination subpass depend on. */
     @NativeType("int32_t")
     public int viewOffset() { return nviewOffset(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSubpassDependency2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSubpassDependency2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code srcSubpass} field. */
+    /** Sets the specified value to the {@link #srcSubpass} field. */
     public VkSubpassDependency2 srcSubpass(@NativeType("uint32_t") int value) { nsrcSubpass(address(), value); return this; }
-    /** Sets the specified value to the {@code dstSubpass} field. */
+    /** Sets the specified value to the {@link #dstSubpass} field. */
     public VkSubpassDependency2 dstSubpass(@NativeType("uint32_t") int value) { ndstSubpass(address(), value); return this; }
-    /** Sets the specified value to the {@code srcStageMask} field. */
+    /** Sets the specified value to the {@link #srcStageMask} field. */
     public VkSubpassDependency2 srcStageMask(@NativeType("VkPipelineStageFlags") int value) { nsrcStageMask(address(), value); return this; }
-    /** Sets the specified value to the {@code dstStageMask} field. */
+    /** Sets the specified value to the {@link #dstStageMask} field. */
     public VkSubpassDependency2 dstStageMask(@NativeType("VkPipelineStageFlags") int value) { ndstStageMask(address(), value); return this; }
-    /** Sets the specified value to the {@code srcAccessMask} field. */
+    /** Sets the specified value to the {@link #srcAccessMask} field. */
     public VkSubpassDependency2 srcAccessMask(@NativeType("VkAccessFlags") int value) { nsrcAccessMask(address(), value); return this; }
-    /** Sets the specified value to the {@code dstAccessMask} field. */
+    /** Sets the specified value to the {@link #dstAccessMask} field. */
     public VkSubpassDependency2 dstAccessMask(@NativeType("VkAccessFlags") int value) { ndstAccessMask(address(), value); return this; }
-    /** Sets the specified value to the {@code dependencyFlags} field. */
+    /** Sets the specified value to the {@link #dependencyFlags} field. */
     public VkSubpassDependency2 dependencyFlags(@NativeType("VkDependencyFlags") int value) { ndependencyFlags(address(), value); return this; }
-    /** Sets the specified value to the {@code viewOffset} field. */
+    /** Sets the specified value to the {@link #viewOffset} field. */
     public VkSubpassDependency2 viewOffset(@NativeType("int32_t") int value) { nviewOffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -474,56 +459,56 @@ public class VkSubpassDependency2 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSubpassDependency2#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSubpassDependency2.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSubpassDependency2#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSubpassDependency2.npNext(address()); }
-        /** Returns the value of the {@code srcSubpass} field. */
+        /** @return the value of the {@link VkSubpassDependency2#srcSubpass} field. */
         @NativeType("uint32_t")
         public int srcSubpass() { return VkSubpassDependency2.nsrcSubpass(address()); }
-        /** Returns the value of the {@code dstSubpass} field. */
+        /** @return the value of the {@link VkSubpassDependency2#dstSubpass} field. */
         @NativeType("uint32_t")
         public int dstSubpass() { return VkSubpassDependency2.ndstSubpass(address()); }
-        /** Returns the value of the {@code srcStageMask} field. */
+        /** @return the value of the {@link VkSubpassDependency2#srcStageMask} field. */
         @NativeType("VkPipelineStageFlags")
         public int srcStageMask() { return VkSubpassDependency2.nsrcStageMask(address()); }
-        /** Returns the value of the {@code dstStageMask} field. */
+        /** @return the value of the {@link VkSubpassDependency2#dstStageMask} field. */
         @NativeType("VkPipelineStageFlags")
         public int dstStageMask() { return VkSubpassDependency2.ndstStageMask(address()); }
-        /** Returns the value of the {@code srcAccessMask} field. */
+        /** @return the value of the {@link VkSubpassDependency2#srcAccessMask} field. */
         @NativeType("VkAccessFlags")
         public int srcAccessMask() { return VkSubpassDependency2.nsrcAccessMask(address()); }
-        /** Returns the value of the {@code dstAccessMask} field. */
+        /** @return the value of the {@link VkSubpassDependency2#dstAccessMask} field. */
         @NativeType("VkAccessFlags")
         public int dstAccessMask() { return VkSubpassDependency2.ndstAccessMask(address()); }
-        /** Returns the value of the {@code dependencyFlags} field. */
+        /** @return the value of the {@link VkSubpassDependency2#dependencyFlags} field. */
         @NativeType("VkDependencyFlags")
         public int dependencyFlags() { return VkSubpassDependency2.ndependencyFlags(address()); }
-        /** Returns the value of the {@code viewOffset} field. */
+        /** @return the value of the {@link VkSubpassDependency2#viewOffset} field. */
         @NativeType("int32_t")
         public int viewOffset() { return VkSubpassDependency2.nviewOffset(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSubpassDependency2#sType} field. */
         public VkSubpassDependency2.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassDependency2.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSubpassDependency2#pNext} field. */
         public VkSubpassDependency2.Buffer pNext(@NativeType("void const *") long value) { VkSubpassDependency2.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code srcSubpass} field. */
+        /** Sets the specified value to the {@link VkSubpassDependency2#srcSubpass} field. */
         public VkSubpassDependency2.Buffer srcSubpass(@NativeType("uint32_t") int value) { VkSubpassDependency2.nsrcSubpass(address(), value); return this; }
-        /** Sets the specified value to the {@code dstSubpass} field. */
+        /** Sets the specified value to the {@link VkSubpassDependency2#dstSubpass} field. */
         public VkSubpassDependency2.Buffer dstSubpass(@NativeType("uint32_t") int value) { VkSubpassDependency2.ndstSubpass(address(), value); return this; }
-        /** Sets the specified value to the {@code srcStageMask} field. */
+        /** Sets the specified value to the {@link VkSubpassDependency2#srcStageMask} field. */
         public VkSubpassDependency2.Buffer srcStageMask(@NativeType("VkPipelineStageFlags") int value) { VkSubpassDependency2.nsrcStageMask(address(), value); return this; }
-        /** Sets the specified value to the {@code dstStageMask} field. */
+        /** Sets the specified value to the {@link VkSubpassDependency2#dstStageMask} field. */
         public VkSubpassDependency2.Buffer dstStageMask(@NativeType("VkPipelineStageFlags") int value) { VkSubpassDependency2.ndstStageMask(address(), value); return this; }
-        /** Sets the specified value to the {@code srcAccessMask} field. */
+        /** Sets the specified value to the {@link VkSubpassDependency2#srcAccessMask} field. */
         public VkSubpassDependency2.Buffer srcAccessMask(@NativeType("VkAccessFlags") int value) { VkSubpassDependency2.nsrcAccessMask(address(), value); return this; }
-        /** Sets the specified value to the {@code dstAccessMask} field. */
+        /** Sets the specified value to the {@link VkSubpassDependency2#dstAccessMask} field. */
         public VkSubpassDependency2.Buffer dstAccessMask(@NativeType("VkAccessFlags") int value) { VkSubpassDependency2.ndstAccessMask(address(), value); return this; }
-        /** Sets the specified value to the {@code dependencyFlags} field. */
+        /** Sets the specified value to the {@link VkSubpassDependency2#dependencyFlags} field. */
         public VkSubpassDependency2.Buffer dependencyFlags(@NativeType("VkDependencyFlags") int value) { VkSubpassDependency2.ndependencyFlags(address(), value); return this; }
-        /** Sets the specified value to the {@code viewOffset} field. */
+        /** Sets the specified value to the {@link VkSubpassDependency2#viewOffset} field. */
         public VkSubpassDependency2.Buffer viewOffset(@NativeType("int32_t") int value) { VkSubpassDependency2.nviewOffset(address(), value); return this; }
 
     }

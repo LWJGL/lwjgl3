@@ -34,21 +34,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkPhysicalDeviceProperties}, {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, {@link KHRGetPhysicalDeviceProperties2#vkGetPhysicalDeviceProperties2KHR GetPhysicalDeviceProperties2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code properties} &ndash; a {@link VkPhysicalDeviceProperties} structure describing properties of the physical device. This structure is written with the same values as if it were written by {@link VK10#vkGetPhysicalDeviceProperties GetPhysicalDeviceProperties}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceProperties2 {
- *     VkStructureType sType;
- *     void * pNext;
- *     {@link VkPhysicalDeviceProperties VkPhysicalDeviceProperties} properties;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     {@link VkPhysicalDeviceProperties VkPhysicalDeviceProperties} {@link #properties};
  * }</code></pre>
  */
 public class VkPhysicalDeviceProperties2 extends Struct implements NativeResource {
@@ -93,18 +85,18 @@ public class VkPhysicalDeviceProperties2 extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkPhysicalDeviceProperties} view of the {@code properties} field. */
+    /** a {@link VkPhysicalDeviceProperties} structure describing properties of the physical device. This structure is written with the same values as if it were written by {@link VK10#vkGetPhysicalDeviceProperties GetPhysicalDeviceProperties}. */
     public VkPhysicalDeviceProperties properties() { return nproperties(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceProperties2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -323,18 +315,18 @@ public class VkPhysicalDeviceProperties2 extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceProperties2#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceProperties2.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceProperties2#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceProperties2.npNext(address()); }
-        /** Returns a {@link VkPhysicalDeviceProperties} view of the {@code properties} field. */
+        /** @return a {@link VkPhysicalDeviceProperties} view of the {@link VkPhysicalDeviceProperties2#properties} field. */
         public VkPhysicalDeviceProperties properties() { return VkPhysicalDeviceProperties2.nproperties(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceProperties2#sType} field. */
         public VkPhysicalDeviceProperties2.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceProperties2.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceProperties2#pNext} field. */
         public VkPhysicalDeviceProperties2.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceProperties2.npNext(address(), value); return this; }
 
     }

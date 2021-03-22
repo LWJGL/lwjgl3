@@ -17,33 +17,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code marker[2]} &ndash; buffer marker to free a buffer to a certain offset</li>
- * <li>{@code pool} &ndash; allocator callback for dynamic buffers</li>
- * <li>{@code type} &ndash; memory management type</li>
- * <li>{@code memory} &ndash; memory and size of the current memory block</li>
- * <li>{@code grow_factor} &ndash; growing factor for dynamic memory management</li>
- * <li>{@code allocated} &ndash; total amount of memory allocated</li>
- * <li>{@code needed} &ndash; totally consumed memory given that enough memory is present</li>
- * <li>{@code calls} &ndash; number of allocation calls</li>
- * <li>{@code size} &ndash; current size of the buffer</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct nk_buffer {
- *     {@link NkBufferMarker struct nk_buffer_marker} marker[2];
- *     {@link NkAllocator struct nk_allocator} pool;
- *     enum nk_allocation_type type;
- *     {@link NkMemory struct nk_memory} memory;
- *     float grow_factor;
- *     nk_size allocated;
- *     nk_size needed;
- *     nk_size calls;
- *     nk_size size;
+ *     {@link NkBufferMarker struct nk_buffer_marker} {@link #marker}[2];
+ *     {@link NkAllocator struct nk_allocator} {@link #pool};
+ *     enum nk_allocation_type {@link #type};
+ *     {@link NkMemory struct nk_memory} {@link #memory};
+ *     float {@link #grow_factor};
+ *     nk_size {@link #allocated};
+ *     nk_size {@link #needed};
+ *     nk_size {@link #calls};
+ *     nk_size {@link #size};
  * }</code></pre>
  */
 @NativeType("struct nk_buffer")
@@ -107,33 +93,33 @@ public class NkBuffer extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkBufferMarker}.Buffer view of the {@code marker} field. */
+    /** buffer marker to free a buffer to a certain offset */
     @NativeType("struct nk_buffer_marker[2]")
     public NkBufferMarker.Buffer marker() { return nmarker(address()); }
-    /** Returns a {@link NkBufferMarker} view of the struct at the specified index of the {@code marker} field. */
+    /** buffer marker to free a buffer to a certain offset */
     @NativeType("struct nk_buffer_marker")
     public NkBufferMarker marker(int index) { return nmarker(address(), index); }
-    /** Returns a {@link NkAllocator} view of the {@code pool} field. */
+    /** allocator callback for dynamic buffers */
     @NativeType("struct nk_allocator")
     public NkAllocator pool() { return npool(address()); }
-    /** Returns the value of the {@code type} field. */
+    /** memory management type */
     @NativeType("enum nk_allocation_type")
     public int type() { return ntype(address()); }
-    /** Returns a {@link NkMemory} view of the {@code memory} field. */
+    /** memory and size of the current memory block */
     @NativeType("struct nk_memory")
     public NkMemory memory() { return nmemory(address()); }
-    /** Returns the value of the {@code grow_factor} field. */
+    /** growing factor for dynamic memory management */
     public float grow_factor() { return ngrow_factor(address()); }
-    /** Returns the value of the {@code allocated} field. */
+    /** total amount of memory allocated */
     @NativeType("nk_size")
     public long allocated() { return nallocated(address()); }
-    /** Returns the value of the {@code needed} field. */
+    /** totally consumed memory given that enough memory is present */
     @NativeType("nk_size")
     public long needed() { return nneeded(address()); }
-    /** Returns the value of the {@code calls} field. */
+    /** number of allocation calls */
     @NativeType("nk_size")
     public long calls() { return ncalls(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** current size of the buffer */
     @NativeType("nk_size")
     public long size() { return nsize(address()); }
 
@@ -341,33 +327,33 @@ public class NkBuffer extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkBufferMarker}.Buffer view of the {@code marker} field. */
+        /** @return a {@link NkBufferMarker}.Buffer view of the {@link NkBuffer#marker} field. */
         @NativeType("struct nk_buffer_marker[2]")
         public NkBufferMarker.Buffer marker() { return NkBuffer.nmarker(address()); }
-        /** Returns a {@link NkBufferMarker} view of the struct at the specified index of the {@code marker} field. */
+        /** @return a {@link NkBufferMarker} view of the struct at the specified index of the {@link NkBuffer#marker} field. */
         @NativeType("struct nk_buffer_marker")
         public NkBufferMarker marker(int index) { return NkBuffer.nmarker(address(), index); }
-        /** Returns a {@link NkAllocator} view of the {@code pool} field. */
+        /** @return a {@link NkAllocator} view of the {@link NkBuffer#pool} field. */
         @NativeType("struct nk_allocator")
         public NkAllocator pool() { return NkBuffer.npool(address()); }
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@link NkBuffer#type} field. */
         @NativeType("enum nk_allocation_type")
         public int type() { return NkBuffer.ntype(address()); }
-        /** Returns a {@link NkMemory} view of the {@code memory} field. */
+        /** @return a {@link NkMemory} view of the {@link NkBuffer#memory} field. */
         @NativeType("struct nk_memory")
         public NkMemory memory() { return NkBuffer.nmemory(address()); }
-        /** Returns the value of the {@code grow_factor} field. */
+        /** @return the value of the {@link NkBuffer#grow_factor} field. */
         public float grow_factor() { return NkBuffer.ngrow_factor(address()); }
-        /** Returns the value of the {@code allocated} field. */
+        /** @return the value of the {@link NkBuffer#allocated} field. */
         @NativeType("nk_size")
         public long allocated() { return NkBuffer.nallocated(address()); }
-        /** Returns the value of the {@code needed} field. */
+        /** @return the value of the {@link NkBuffer#needed} field. */
         @NativeType("nk_size")
         public long needed() { return NkBuffer.nneeded(address()); }
-        /** Returns the value of the {@code calls} field. */
+        /** @return the value of the {@link NkBuffer#calls} field. */
         @NativeType("nk_size")
         public long calls() { return NkBuffer.ncalls(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link NkBuffer#size} field. */
         @NativeType("nk_size")
         public long size() { return NkBuffer.nsize(address()); }
 

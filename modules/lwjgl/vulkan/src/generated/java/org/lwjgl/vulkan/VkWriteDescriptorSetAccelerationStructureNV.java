@@ -34,23 +34,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code accelerationStructureCount} <b>must</b> be greater than 0</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code accelerationStructureCount} &ndash; the number of elements in {@code pAccelerationStructures}.</li>
- * <li>{@code pAccelerationStructures} &ndash; are the acceleration structures to update.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkWriteDescriptorSetAccelerationStructureNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t accelerationStructureCount;
- *     VkAccelerationStructureNV const * pAccelerationStructures;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #accelerationStructureCount};
+ *     VkAccelerationStructureNV const * {@link #pAccelerationStructures};
  * }</code></pre>
  */
 public class VkWriteDescriptorSetAccelerationStructureNV extends Struct implements NativeResource {
@@ -98,27 +89,27 @@ public class VkWriteDescriptorSetAccelerationStructureNV extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code accelerationStructureCount} field. */
+    /** the number of elements in {@code pAccelerationStructures}. */
     @NativeType("uint32_t")
     public int accelerationStructureCount() { return naccelerationStructureCount(address()); }
-    /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pAccelerationStructures} field. */
+    /** are the acceleration structures to update. */
     @Nullable
     @NativeType("VkAccelerationStructureNV const *")
     public LongBuffer pAccelerationStructures() { return npAccelerationStructures(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkWriteDescriptorSetAccelerationStructureNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkWriteDescriptorSetAccelerationStructureNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code accelerationStructureCount} field. */
+    /** Sets the specified value to the {@link #accelerationStructureCount} field. */
     public VkWriteDescriptorSetAccelerationStructureNV accelerationStructureCount(@NativeType("uint32_t") int value) { naccelerationStructureCount(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@code pAccelerationStructures} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@link #pAccelerationStructures} field. */
     public VkWriteDescriptorSetAccelerationStructureNV pAccelerationStructures(@Nullable @NativeType("VkAccelerationStructureNV const *") LongBuffer value) { npAccelerationStructures(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -347,27 +338,27 @@ public class VkWriteDescriptorSetAccelerationStructureNV extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkWriteDescriptorSetAccelerationStructureNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkWriteDescriptorSetAccelerationStructureNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkWriteDescriptorSetAccelerationStructureNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkWriteDescriptorSetAccelerationStructureNV.npNext(address()); }
-        /** Returns the value of the {@code accelerationStructureCount} field. */
+        /** @return the value of the {@link VkWriteDescriptorSetAccelerationStructureNV#accelerationStructureCount} field. */
         @NativeType("uint32_t")
         public int accelerationStructureCount() { return VkWriteDescriptorSetAccelerationStructureNV.naccelerationStructureCount(address()); }
-        /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pAccelerationStructures} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkWriteDescriptorSetAccelerationStructureNV#pAccelerationStructures} field. */
         @Nullable
         @NativeType("VkAccelerationStructureNV const *")
         public LongBuffer pAccelerationStructures() { return VkWriteDescriptorSetAccelerationStructureNV.npAccelerationStructures(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkWriteDescriptorSetAccelerationStructureNV#sType} field. */
         public VkWriteDescriptorSetAccelerationStructureNV.Buffer sType(@NativeType("VkStructureType") int value) { VkWriteDescriptorSetAccelerationStructureNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkWriteDescriptorSetAccelerationStructureNV#pNext} field. */
         public VkWriteDescriptorSetAccelerationStructureNV.Buffer pNext(@NativeType("void const *") long value) { VkWriteDescriptorSetAccelerationStructureNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code accelerationStructureCount} field. */
+        /** Sets the specified value to the {@link VkWriteDescriptorSetAccelerationStructureNV#accelerationStructureCount} field. */
         public VkWriteDescriptorSetAccelerationStructureNV.Buffer accelerationStructureCount(@NativeType("uint32_t") int value) { VkWriteDescriptorSetAccelerationStructureNV.naccelerationStructureCount(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@code pAccelerationStructures} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@link VkWriteDescriptorSetAccelerationStructureNV#pAccelerationStructures} field. */
         public VkWriteDescriptorSetAccelerationStructureNV.Buffer pAccelerationStructures(@Nullable @NativeType("VkAccelerationStructureNV const *") LongBuffer value) { VkWriteDescriptorSetAccelerationStructureNV.npAccelerationStructures(address(), value); return this; }
 
     }

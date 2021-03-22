@@ -24,21 +24,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRSurfaceProtectedCapabilities#VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code supportsProtected} &ndash; specifies whether a protected swapchain created from {@link VkPhysicalDeviceSurfaceInfo2KHR}{@code ::surface} for a particular windowing system <b>can</b> be displayed on screen or not. If {@code supportsProtected} is {@link VK10#VK_TRUE TRUE}, then creation of swapchains with the {@link KHRSwapchain#VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR SWAPCHAIN_CREATE_PROTECTED_BIT_KHR} flag set <b>must</b> be supported for {@code surface}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSurfaceProtectedCapabilitiesKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkBool32 supportsProtected;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkBool32 {@link #supportsProtected};
  * }</code></pre>
  */
 public class VkSurfaceProtectedCapabilitiesKHR extends Struct implements NativeResource {
@@ -83,21 +75,21 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code supportsProtected} field. */
+    /** specifies whether a protected swapchain created from {@link VkPhysicalDeviceSurfaceInfo2KHR}{@code ::surface} for a particular windowing system <b>can</b> be displayed on screen or not. If {@code supportsProtected} is {@link VK10#VK_TRUE TRUE}, then creation of swapchains with the {@link KHRSwapchain#VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR SWAPCHAIN_CREATE_PROTECTED_BIT_KHR} flag set <b>must</b> be supported for {@code surface}. */
     @NativeType("VkBool32")
     public boolean supportsProtected() { return nsupportsProtected(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSurfaceProtectedCapabilitiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSurfaceProtectedCapabilitiesKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code supportsProtected} field. */
+    /** Sets the specified value to the {@link #supportsProtected} field. */
     public VkSurfaceProtectedCapabilitiesKHR supportsProtected(@NativeType("VkBool32") boolean value) { nsupportsProtected(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -320,21 +312,21 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSurfaceProtectedCapabilitiesKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSurfaceProtectedCapabilitiesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSurfaceProtectedCapabilitiesKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSurfaceProtectedCapabilitiesKHR.npNext(address()); }
-        /** Returns the value of the {@code supportsProtected} field. */
+        /** @return the value of the {@link VkSurfaceProtectedCapabilitiesKHR#supportsProtected} field. */
         @NativeType("VkBool32")
         public boolean supportsProtected() { return VkSurfaceProtectedCapabilitiesKHR.nsupportsProtected(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSurfaceProtectedCapabilitiesKHR#sType} field. */
         public VkSurfaceProtectedCapabilitiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfaceProtectedCapabilitiesKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSurfaceProtectedCapabilitiesKHR#pNext} field. */
         public VkSurfaceProtectedCapabilitiesKHR.Buffer pNext(@NativeType("void const *") long value) { VkSurfaceProtectedCapabilitiesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code supportsProtected} field. */
+        /** Sets the specified value to the {@link VkSurfaceProtectedCapabilitiesKHR#supportsProtected} field. */
         public VkSurfaceProtectedCapabilitiesKHR.Buffer supportsProtected(@NativeType("VkBool32") boolean value) { VkSurfaceProtectedCapabilitiesKHR.nsupportsProtected(address(), value ? 1 : 0); return this; }
 
     }

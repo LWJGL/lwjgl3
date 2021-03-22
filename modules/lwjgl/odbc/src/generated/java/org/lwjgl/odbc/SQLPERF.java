@@ -187,103 +187,103 @@ public class SQLPERF extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code TimerResolution} field. */
+    /** @return the value of the {@code TimerResolution} field. */
     @NativeType("DWORD")
     public int TimerResolution() { return nTimerResolution(address()); }
-    /** Returns the value of the {@code SQLidu} field. */
+    /** @return the value of the {@code SQLidu} field. */
     @NativeType("DWORD")
     public int SQLidu() { return nSQLidu(address()); }
-    /** Returns the value of the {@code SQLiduRows} field. */
+    /** @return the value of the {@code SQLiduRows} field. */
     @NativeType("DWORD")
     public int SQLiduRows() { return nSQLiduRows(address()); }
-    /** Returns the value of the {@code SQLSelects} field. */
+    /** @return the value of the {@code SQLSelects} field. */
     @NativeType("DWORD")
     public int SQLSelects() { return nSQLSelects(address()); }
-    /** Returns the value of the {@code SQLSelectRows} field. */
+    /** @return the value of the {@code SQLSelectRows} field. */
     @NativeType("DWORD")
     public int SQLSelectRows() { return nSQLSelectRows(address()); }
-    /** Returns the value of the {@code Transactions} field. */
+    /** @return the value of the {@code Transactions} field. */
     @NativeType("DWORD")
     public int Transactions() { return nTransactions(address()); }
-    /** Returns the value of the {@code SQLPrepares} field. */
+    /** @return the value of the {@code SQLPrepares} field. */
     @NativeType("DWORD")
     public int SQLPrepares() { return nSQLPrepares(address()); }
-    /** Returns the value of the {@code ExecDirects} field. */
+    /** @return the value of the {@code ExecDirects} field. */
     @NativeType("DWORD")
     public int ExecDirects() { return nExecDirects(address()); }
-    /** Returns the value of the {@code SQLExecutes} field. */
+    /** @return the value of the {@code SQLExecutes} field. */
     @NativeType("DWORD")
     public int SQLExecutes() { return nSQLExecutes(address()); }
-    /** Returns the value of the {@code CursorOpens} field. */
+    /** @return the value of the {@code CursorOpens} field. */
     @NativeType("DWORD")
     public int CursorOpens() { return nCursorOpens(address()); }
-    /** Returns the value of the {@code CursorSize} field. */
+    /** @return the value of the {@code CursorSize} field. */
     @NativeType("DWORD")
     public int CursorSize() { return nCursorSize(address()); }
-    /** Returns the value of the {@code CursorUsed} field. */
+    /** @return the value of the {@code CursorUsed} field. */
     @NativeType("DWORD")
     public int CursorUsed() { return nCursorUsed(address()); }
-    /** Returns the value of the {@code PercentCursorUsed} field. */
+    /** @return the value of the {@code PercentCursorUsed} field. */
     @NativeType("LDOUBLE")
     public double PercentCursorUsed() { return nPercentCursorUsed(address()); }
-    /** Returns the value of the {@code AvgFetchTime} field. */
+    /** @return the value of the {@code AvgFetchTime} field. */
     @NativeType("LDOUBLE")
     public double AvgFetchTime() { return nAvgFetchTime(address()); }
-    /** Returns the value of the {@code AvgCursorSize} field. */
+    /** @return the value of the {@code AvgCursorSize} field. */
     @NativeType("LDOUBLE")
     public double AvgCursorSize() { return nAvgCursorSize(address()); }
-    /** Returns the value of the {@code AvgCursorUsed} field. */
+    /** @return the value of the {@code AvgCursorUsed} field. */
     @NativeType("LDOUBLE")
     public double AvgCursorUsed() { return nAvgCursorUsed(address()); }
-    /** Returns the value of the {@code SQLFetchTime} field. */
+    /** @return the value of the {@code SQLFetchTime} field. */
     @NativeType("DWORD")
     public int SQLFetchTime() { return nSQLFetchTime(address()); }
-    /** Returns the value of the {@code SQLFetchCount} field. */
+    /** @return the value of the {@code SQLFetchCount} field. */
     @NativeType("DWORD")
     public int SQLFetchCount() { return nSQLFetchCount(address()); }
-    /** Returns the value of the {@code CurrentStmtCount} field. */
+    /** @return the value of the {@code CurrentStmtCount} field. */
     @NativeType("DWORD")
     public int CurrentStmtCount() { return nCurrentStmtCount(address()); }
-    /** Returns the value of the {@code MaxOpenStmt} field. */
+    /** @return the value of the {@code MaxOpenStmt} field. */
     @NativeType("DWORD")
     public int MaxOpenStmt() { return nMaxOpenStmt(address()); }
-    /** Returns the value of the {@code SumOpenStmt} field. */
+    /** @return the value of the {@code SumOpenStmt} field. */
     @NativeType("DWORD")
     public int SumOpenStmt() { return nSumOpenStmt(address()); }
-    /** Returns the value of the {@code CurrentConnectionCount} field. */
+    /** @return the value of the {@code CurrentConnectionCount} field. */
     @NativeType("DWORD")
     public int CurrentConnectionCount() { return nCurrentConnectionCount(address()); }
-    /** Returns the value of the {@code MaxConnectionsOpened} field. */
+    /** @return the value of the {@code MaxConnectionsOpened} field. */
     @NativeType("DWORD")
     public int MaxConnectionsOpened() { return nMaxConnectionsOpened(address()); }
-    /** Returns the value of the {@code SumConnectionsOpened} field. */
+    /** @return the value of the {@code SumConnectionsOpened} field. */
     @NativeType("DWORD")
     public int SumConnectionsOpened() { return nSumConnectionsOpened(address()); }
-    /** Returns the value of the {@code SumConnectiontime} field. */
+    /** @return the value of the {@code SumConnectiontime} field. */
     @NativeType("DWORD")
     public int SumConnectiontime() { return nSumConnectiontime(address()); }
-    /** Returns the value of the {@code AvgTimeOpened} field. */
+    /** @return the value of the {@code AvgTimeOpened} field. */
     @NativeType("LDOUBLE")
     public double AvgTimeOpened() { return nAvgTimeOpened(address()); }
-    /** Returns the value of the {@code ServerRndTrips} field. */
+    /** @return the value of the {@code ServerRndTrips} field. */
     @NativeType("DWORD")
     public int ServerRndTrips() { return nServerRndTrips(address()); }
-    /** Returns the value of the {@code BuffersSent} field. */
+    /** @return the value of the {@code BuffersSent} field. */
     @NativeType("DWORD")
     public int BuffersSent() { return nBuffersSent(address()); }
-    /** Returns the value of the {@code BuffersRec} field. */
+    /** @return the value of the {@code BuffersRec} field. */
     @NativeType("DWORD")
     public int BuffersRec() { return nBuffersRec(address()); }
-    /** Returns the value of the {@code BytesSent} field. */
+    /** @return the value of the {@code BytesSent} field. */
     @NativeType("DWORD")
     public int BytesSent() { return nBytesSent(address()); }
-    /** Returns the value of the {@code BytesRec} field. */
+    /** @return the value of the {@code BytesRec} field. */
     @NativeType("DWORD")
     public int BytesRec() { return nBytesRec(address()); }
-    /** Returns the value of the {@code msExecutionTime} field. */
+    /** @return the value of the {@code msExecutionTime} field. */
     @NativeType("DWORD")
     public int msExecutionTime() { return nmsExecutionTime(address()); }
-    /** Returns the value of the {@code msNetWorkServerTime} field. */
+    /** @return the value of the {@code msNetWorkServerTime} field. */
     @NativeType("DWORD")
     public int msNetWorkServerTime() { return nmsNetWorkServerTime(address()); }
 
@@ -754,103 +754,103 @@ public class SQLPERF extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code TimerResolution} field. */
+        /** @return the value of the {@code TimerResolution} field. */
         @NativeType("DWORD")
         public int TimerResolution() { return SQLPERF.nTimerResolution(address()); }
-        /** Returns the value of the {@code SQLidu} field. */
+        /** @return the value of the {@code SQLidu} field. */
         @NativeType("DWORD")
         public int SQLidu() { return SQLPERF.nSQLidu(address()); }
-        /** Returns the value of the {@code SQLiduRows} field. */
+        /** @return the value of the {@code SQLiduRows} field. */
         @NativeType("DWORD")
         public int SQLiduRows() { return SQLPERF.nSQLiduRows(address()); }
-        /** Returns the value of the {@code SQLSelects} field. */
+        /** @return the value of the {@code SQLSelects} field. */
         @NativeType("DWORD")
         public int SQLSelects() { return SQLPERF.nSQLSelects(address()); }
-        /** Returns the value of the {@code SQLSelectRows} field. */
+        /** @return the value of the {@code SQLSelectRows} field. */
         @NativeType("DWORD")
         public int SQLSelectRows() { return SQLPERF.nSQLSelectRows(address()); }
-        /** Returns the value of the {@code Transactions} field. */
+        /** @return the value of the {@code Transactions} field. */
         @NativeType("DWORD")
         public int Transactions() { return SQLPERF.nTransactions(address()); }
-        /** Returns the value of the {@code SQLPrepares} field. */
+        /** @return the value of the {@code SQLPrepares} field. */
         @NativeType("DWORD")
         public int SQLPrepares() { return SQLPERF.nSQLPrepares(address()); }
-        /** Returns the value of the {@code ExecDirects} field. */
+        /** @return the value of the {@code ExecDirects} field. */
         @NativeType("DWORD")
         public int ExecDirects() { return SQLPERF.nExecDirects(address()); }
-        /** Returns the value of the {@code SQLExecutes} field. */
+        /** @return the value of the {@code SQLExecutes} field. */
         @NativeType("DWORD")
         public int SQLExecutes() { return SQLPERF.nSQLExecutes(address()); }
-        /** Returns the value of the {@code CursorOpens} field. */
+        /** @return the value of the {@code CursorOpens} field. */
         @NativeType("DWORD")
         public int CursorOpens() { return SQLPERF.nCursorOpens(address()); }
-        /** Returns the value of the {@code CursorSize} field. */
+        /** @return the value of the {@code CursorSize} field. */
         @NativeType("DWORD")
         public int CursorSize() { return SQLPERF.nCursorSize(address()); }
-        /** Returns the value of the {@code CursorUsed} field. */
+        /** @return the value of the {@code CursorUsed} field. */
         @NativeType("DWORD")
         public int CursorUsed() { return SQLPERF.nCursorUsed(address()); }
-        /** Returns the value of the {@code PercentCursorUsed} field. */
+        /** @return the value of the {@code PercentCursorUsed} field. */
         @NativeType("LDOUBLE")
         public double PercentCursorUsed() { return SQLPERF.nPercentCursorUsed(address()); }
-        /** Returns the value of the {@code AvgFetchTime} field. */
+        /** @return the value of the {@code AvgFetchTime} field. */
         @NativeType("LDOUBLE")
         public double AvgFetchTime() { return SQLPERF.nAvgFetchTime(address()); }
-        /** Returns the value of the {@code AvgCursorSize} field. */
+        /** @return the value of the {@code AvgCursorSize} field. */
         @NativeType("LDOUBLE")
         public double AvgCursorSize() { return SQLPERF.nAvgCursorSize(address()); }
-        /** Returns the value of the {@code AvgCursorUsed} field. */
+        /** @return the value of the {@code AvgCursorUsed} field. */
         @NativeType("LDOUBLE")
         public double AvgCursorUsed() { return SQLPERF.nAvgCursorUsed(address()); }
-        /** Returns the value of the {@code SQLFetchTime} field. */
+        /** @return the value of the {@code SQLFetchTime} field. */
         @NativeType("DWORD")
         public int SQLFetchTime() { return SQLPERF.nSQLFetchTime(address()); }
-        /** Returns the value of the {@code SQLFetchCount} field. */
+        /** @return the value of the {@code SQLFetchCount} field. */
         @NativeType("DWORD")
         public int SQLFetchCount() { return SQLPERF.nSQLFetchCount(address()); }
-        /** Returns the value of the {@code CurrentStmtCount} field. */
+        /** @return the value of the {@code CurrentStmtCount} field. */
         @NativeType("DWORD")
         public int CurrentStmtCount() { return SQLPERF.nCurrentStmtCount(address()); }
-        /** Returns the value of the {@code MaxOpenStmt} field. */
+        /** @return the value of the {@code MaxOpenStmt} field. */
         @NativeType("DWORD")
         public int MaxOpenStmt() { return SQLPERF.nMaxOpenStmt(address()); }
-        /** Returns the value of the {@code SumOpenStmt} field. */
+        /** @return the value of the {@code SumOpenStmt} field. */
         @NativeType("DWORD")
         public int SumOpenStmt() { return SQLPERF.nSumOpenStmt(address()); }
-        /** Returns the value of the {@code CurrentConnectionCount} field. */
+        /** @return the value of the {@code CurrentConnectionCount} field. */
         @NativeType("DWORD")
         public int CurrentConnectionCount() { return SQLPERF.nCurrentConnectionCount(address()); }
-        /** Returns the value of the {@code MaxConnectionsOpened} field. */
+        /** @return the value of the {@code MaxConnectionsOpened} field. */
         @NativeType("DWORD")
         public int MaxConnectionsOpened() { return SQLPERF.nMaxConnectionsOpened(address()); }
-        /** Returns the value of the {@code SumConnectionsOpened} field. */
+        /** @return the value of the {@code SumConnectionsOpened} field. */
         @NativeType("DWORD")
         public int SumConnectionsOpened() { return SQLPERF.nSumConnectionsOpened(address()); }
-        /** Returns the value of the {@code SumConnectiontime} field. */
+        /** @return the value of the {@code SumConnectiontime} field. */
         @NativeType("DWORD")
         public int SumConnectiontime() { return SQLPERF.nSumConnectiontime(address()); }
-        /** Returns the value of the {@code AvgTimeOpened} field. */
+        /** @return the value of the {@code AvgTimeOpened} field. */
         @NativeType("LDOUBLE")
         public double AvgTimeOpened() { return SQLPERF.nAvgTimeOpened(address()); }
-        /** Returns the value of the {@code ServerRndTrips} field. */
+        /** @return the value of the {@code ServerRndTrips} field. */
         @NativeType("DWORD")
         public int ServerRndTrips() { return SQLPERF.nServerRndTrips(address()); }
-        /** Returns the value of the {@code BuffersSent} field. */
+        /** @return the value of the {@code BuffersSent} field. */
         @NativeType("DWORD")
         public int BuffersSent() { return SQLPERF.nBuffersSent(address()); }
-        /** Returns the value of the {@code BuffersRec} field. */
+        /** @return the value of the {@code BuffersRec} field. */
         @NativeType("DWORD")
         public int BuffersRec() { return SQLPERF.nBuffersRec(address()); }
-        /** Returns the value of the {@code BytesSent} field. */
+        /** @return the value of the {@code BytesSent} field. */
         @NativeType("DWORD")
         public int BytesSent() { return SQLPERF.nBytesSent(address()); }
-        /** Returns the value of the {@code BytesRec} field. */
+        /** @return the value of the {@code BytesRec} field. */
         @NativeType("DWORD")
         public int BytesRec() { return SQLPERF.nBytesRec(address()); }
-        /** Returns the value of the {@code msExecutionTime} field. */
+        /** @return the value of the {@code msExecutionTime} field. */
         @NativeType("DWORD")
         public int msExecutionTime() { return SQLPERF.nmsExecutionTime(address()); }
-        /** Returns the value of the {@code msNetWorkServerTime} field. */
+        /** @return the value of the {@code msNetWorkServerTime} field. */
         @NativeType("DWORD")
         public int msNetWorkServerTime() { return SQLPERF.nmsNetWorkServerTime(address()); }
 

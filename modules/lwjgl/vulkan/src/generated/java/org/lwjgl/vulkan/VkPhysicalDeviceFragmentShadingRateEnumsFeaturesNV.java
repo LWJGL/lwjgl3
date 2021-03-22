@@ -28,23 +28,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVFragmentShadingRateEnums#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code fragmentShadingRateEnums} &ndash; indicates that the implementation supports specifying fragment shading rates using the {@code VkFragmentShadingRateNV} enumerated type.</li>
- * <li>{@code supersampleFragmentShadingRates} &ndash; indicates that the implementation supports fragment shading rate enum values indicating more than one invocation per fragment.</li>
- * <li>{@code noInvocationFragmentShadingRates} &ndash; indicates that the implementation supports a fragment shading rate enum value indicating that no fragment shaders should be invoked when that shading rate is used.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 fragmentShadingRateEnums;
- *     VkBool32 supersampleFragmentShadingRates;
- *     VkBool32 noInvocationFragmentShadingRates;
+ *     VkBool32 {@link #fragmentShadingRateEnums};
+ *     VkBool32 {@link #supersampleFragmentShadingRates};
+ *     VkBool32 {@link #noInvocationFragmentShadingRates};
  * }</code></pre>
  */
 public class VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV extends Struct implements NativeResource {
@@ -95,19 +87,19 @@ public class VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV extends Struct i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code fragmentShadingRateEnums} field. */
+    /** indicates that the implementation supports specifying fragment shading rates using the {@code VkFragmentShadingRateNV} enumerated type. */
     @NativeType("VkBool32")
     public boolean fragmentShadingRateEnums() { return nfragmentShadingRateEnums(address()) != 0; }
-    /** Returns the value of the {@code supersampleFragmentShadingRates} field. */
+    /** indicates that the implementation supports fragment shading rate enum values indicating more than one invocation per fragment. */
     @NativeType("VkBool32")
     public boolean supersampleFragmentShadingRates() { return nsupersampleFragmentShadingRates(address()) != 0; }
-    /** Returns the value of the {@code noInvocationFragmentShadingRates} field. */
+    /** indicates that the implementation supports a fragment shading rate enum value indicating that no fragment shaders should be invoked when that shading rate is used. */
     @NativeType("VkBool32")
     public boolean noInvocationFragmentShadingRates() { return nnoInvocationFragmentShadingRates(address()) != 0; }
 
@@ -115,11 +107,11 @@ public class VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV extends Struct i
     public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code fragmentShadingRateEnums} field. */
+    /** Sets the specified value to the {@link #fragmentShadingRateEnums} field. */
     public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV fragmentShadingRateEnums(@NativeType("VkBool32") boolean value) { nfragmentShadingRateEnums(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code supersampleFragmentShadingRates} field. */
+    /** Sets the specified value to the {@link #supersampleFragmentShadingRates} field. */
     public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV supersampleFragmentShadingRates(@NativeType("VkBool32") boolean value) { nsupersampleFragmentShadingRates(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code noInvocationFragmentShadingRates} field. */
+    /** Sets the specified value to the {@link #noInvocationFragmentShadingRates} field. */
     public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV noInvocationFragmentShadingRates(@NativeType("VkBool32") boolean value) { nnoInvocationFragmentShadingRates(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -354,19 +346,19 @@ public class VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV extends Struct i
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.npNext(address()); }
-        /** Returns the value of the {@code fragmentShadingRateEnums} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV#fragmentShadingRateEnums} field. */
         @NativeType("VkBool32")
         public boolean fragmentShadingRateEnums() { return VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.nfragmentShadingRateEnums(address()) != 0; }
-        /** Returns the value of the {@code supersampleFragmentShadingRates} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV#supersampleFragmentShadingRates} field. */
         @NativeType("VkBool32")
         public boolean supersampleFragmentShadingRates() { return VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.nsupersampleFragmentShadingRates(address()) != 0; }
-        /** Returns the value of the {@code noInvocationFragmentShadingRates} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV#noInvocationFragmentShadingRates} field. */
         @NativeType("VkBool32")
         public boolean noInvocationFragmentShadingRates() { return VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.nnoInvocationFragmentShadingRates(address()) != 0; }
 
@@ -374,11 +366,11 @@ public class VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV extends Struct i
         public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code fragmentShadingRateEnums} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV#fragmentShadingRateEnums} field. */
         public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer fragmentShadingRateEnums(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.nfragmentShadingRateEnums(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code supersampleFragmentShadingRates} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV#supersampleFragmentShadingRates} field. */
         public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer supersampleFragmentShadingRates(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.nsupersampleFragmentShadingRates(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code noInvocationFragmentShadingRates} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV#noInvocationFragmentShadingRates} field. */
         public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer noInvocationFragmentShadingRates(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.nnoInvocationFragmentShadingRates(address(), value ? 1 : 0); return this; }
 
     }

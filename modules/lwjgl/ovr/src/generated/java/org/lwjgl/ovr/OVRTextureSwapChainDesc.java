@@ -18,31 +18,20 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Description used to create a texture swap chain.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code Type} &ndash; must be:<br><table><tr><td>{@link OVR#ovrTexture_2D Texture_2D}</td></tr></table></li>
- * <li>{@code Format} &ndash; one of:<br><table><tr><td>{@link OVR#OVR_FORMAT_UNKNOWN}</td><td>{@link OVR#OVR_FORMAT_B5G6R5_UNORM}</td><td>{@link OVR#OVR_FORMAT_B5G5R5A1_UNORM}</td></tr><tr><td>{@link OVR#OVR_FORMAT_B4G4R4A4_UNORM}</td><td>{@link OVR#OVR_FORMAT_R8G8B8A8_UNORM}</td><td>{@link OVR#OVR_FORMAT_R8G8B8A8_UNORM_SRGB}</td></tr><tr><td>{@link OVR#OVR_FORMAT_B8G8R8A8_UNORM}</td><td>{@link OVR#OVR_FORMAT_B8G8R8_UNORM}</td><td>{@link OVR#OVR_FORMAT_B8G8R8A8_UNORM_SRGB}</td></tr><tr><td>{@link OVR#OVR_FORMAT_B8G8R8X8_UNORM}</td><td>{@link OVR#OVR_FORMAT_B8G8R8X8_UNORM_SRGB}</td><td>{@link OVR#OVR_FORMAT_R16G16B16A16_FLOAT}</td></tr><tr><td>{@link OVR#OVR_FORMAT_R11G11B10_FLOAT}</td><td>{@link OVR#OVR_FORMAT_D16_UNORM}</td><td>{@link OVR#OVR_FORMAT_D24_UNORM_S8_UINT}</td></tr><tr><td>{@link OVR#OVR_FORMAT_D32_FLOAT}</td><td>{@link OVR#OVR_FORMAT_D32_FLOAT_S8X24_UINT}</td><td>{@link OVR#OVR_FORMAT_BC1_UNORM}</td></tr><tr><td>{@link OVR#OVR_FORMAT_BC1_UNORM_SRGB}</td><td>{@link OVR#OVR_FORMAT_BC2_UNORM}</td><td>{@link OVR#OVR_FORMAT_BC2_UNORM_SRGB}</td></tr><tr><td>{@link OVR#OVR_FORMAT_BC3_UNORM}</td><td>{@link OVR#OVR_FORMAT_BC3_UNORM_SRGB}</td><td>{@link OVR#OVR_FORMAT_BC6H_UF16}</td></tr><tr><td>{@link OVR#OVR_FORMAT_BC6H_SF16}</td><td>{@link OVR#OVR_FORMAT_BC7_UNORM}</td><td>{@link OVR#OVR_FORMAT_BC7_UNORM_SRGB}</td></tr></table></li>
- * <li>{@code ArraySize} &ndash; must be 6 for {@link OVR#ovrTexture_Cube Texture_Cube}, 1 for other types</li>
- * <li>{@code StaticImage} &ndash; not buffered in a chain. For images that don't change</li>
- * <li>{@code MiscFlags} &ndash; {@code ovrTextureFlags}. One or more of:<br><table><tr><td>{@link OVR#ovrTextureMisc_None TextureMisc_None}</td><td>{@link OVR#ovrTextureMisc_DX_Typeless TextureMisc_DX_Typeless}</td><td>{@link OVR#ovrTextureMisc_AllowGenerateMips TextureMisc_AllowGenerateMips}</td></tr><tr><td>{@link OVR#ovrTextureMisc_ProtectedContent TextureMisc_ProtectedContent}</td><td>{@link OVR#ovrTextureMisc_AutoGenerateMips TextureMisc_AutoGenerateMips}</td></tr></table></li>
- * <li>{@code BindFlags} &ndash; {@code ovrTextureBindFlags}. Not used for GL. One or more of:<br><table><tr><td>{@link OVR#ovrTextureBind_None TextureBind_None}</td><td>{@link OVR#ovrTextureBind_DX_RenderTarget TextureBind_DX_RenderTarget}</td><td>{@link OVR#ovrTextureBind_DX_UnorderedAccess TextureBind_DX_UnorderedAccess}</td></tr><tr><td>{@link OVR#ovrTextureBind_DX_DepthStencil TextureBind_DX_DepthStencil}</td></tr></table></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrTextureSwapChainDesc {
- *     ovrTextureType Type;
- *     ovrTextureFormat Format;
- *     int ArraySize;
+ *     ovrTextureType {@link #Type};
+ *     ovrTextureFormat {@link #Format};
+ *     int {@link #ArraySize};
  *     int Width;
  *     int Height;
  *     int MipLevels;
  *     int SampleCount;
- *     ovrBool StaticImage;
- *     unsigned int MiscFlags;
- *     unsigned int BindFlags;
+ *     ovrBool {@link #StaticImage};
+ *     unsigned int {@link #MiscFlags};
+ *     unsigned int {@link #BindFlags};
  * }</code></pre>
  */
 @NativeType("struct ovrTextureSwapChainDesc")
@@ -109,37 +98,37 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code Type} field. */
+    /** must be:<br><table><tr><td>{@link OVR#ovrTexture_2D Texture_2D}</td></tr></table> */
     @NativeType("ovrTextureType")
     public int Type() { return nType(address()); }
-    /** Returns the value of the {@code Format} field. */
+    /** one of:<br><table><tr><td>{@link OVR#OVR_FORMAT_UNKNOWN}</td><td>{@link OVR#OVR_FORMAT_B5G6R5_UNORM}</td><td>{@link OVR#OVR_FORMAT_B5G5R5A1_UNORM}</td></tr><tr><td>{@link OVR#OVR_FORMAT_B4G4R4A4_UNORM}</td><td>{@link OVR#OVR_FORMAT_R8G8B8A8_UNORM}</td><td>{@link OVR#OVR_FORMAT_R8G8B8A8_UNORM_SRGB}</td></tr><tr><td>{@link OVR#OVR_FORMAT_B8G8R8A8_UNORM}</td><td>{@link OVR#OVR_FORMAT_B8G8R8_UNORM}</td><td>{@link OVR#OVR_FORMAT_B8G8R8A8_UNORM_SRGB}</td></tr><tr><td>{@link OVR#OVR_FORMAT_B8G8R8X8_UNORM}</td><td>{@link OVR#OVR_FORMAT_B8G8R8X8_UNORM_SRGB}</td><td>{@link OVR#OVR_FORMAT_R16G16B16A16_FLOAT}</td></tr><tr><td>{@link OVR#OVR_FORMAT_R11G11B10_FLOAT}</td><td>{@link OVR#OVR_FORMAT_D16_UNORM}</td><td>{@link OVR#OVR_FORMAT_D24_UNORM_S8_UINT}</td></tr><tr><td>{@link OVR#OVR_FORMAT_D32_FLOAT}</td><td>{@link OVR#OVR_FORMAT_D32_FLOAT_S8X24_UINT}</td><td>{@link OVR#OVR_FORMAT_BC1_UNORM}</td></tr><tr><td>{@link OVR#OVR_FORMAT_BC1_UNORM_SRGB}</td><td>{@link OVR#OVR_FORMAT_BC2_UNORM}</td><td>{@link OVR#OVR_FORMAT_BC2_UNORM_SRGB}</td></tr><tr><td>{@link OVR#OVR_FORMAT_BC3_UNORM}</td><td>{@link OVR#OVR_FORMAT_BC3_UNORM_SRGB}</td><td>{@link OVR#OVR_FORMAT_BC6H_UF16}</td></tr><tr><td>{@link OVR#OVR_FORMAT_BC6H_SF16}</td><td>{@link OVR#OVR_FORMAT_BC7_UNORM}</td><td>{@link OVR#OVR_FORMAT_BC7_UNORM_SRGB}</td></tr></table> */
     @NativeType("ovrTextureFormat")
     public int Format() { return nFormat(address()); }
-    /** Returns the value of the {@code ArraySize} field. */
+    /** must be 6 for {@link OVR#ovrTexture_Cube Texture_Cube}, 1 for other types */
     public int ArraySize() { return nArraySize(address()); }
-    /** Returns the value of the {@code Width} field. */
+    /** @return the value of the {@code Width} field. */
     public int Width() { return nWidth(address()); }
-    /** Returns the value of the {@code Height} field. */
+    /** @return the value of the {@code Height} field. */
     public int Height() { return nHeight(address()); }
-    /** Returns the value of the {@code MipLevels} field. */
+    /** @return the value of the {@code MipLevels} field. */
     public int MipLevels() { return nMipLevels(address()); }
-    /** Returns the value of the {@code SampleCount} field. */
+    /** @return the value of the {@code SampleCount} field. */
     public int SampleCount() { return nSampleCount(address()); }
-    /** Returns the value of the {@code StaticImage} field. */
+    /** not buffered in a chain. For images that don't change */
     @NativeType("ovrBool")
     public boolean StaticImage() { return nStaticImage(address()); }
-    /** Returns the value of the {@code MiscFlags} field. */
+    /** {@code ovrTextureFlags}. One or more of:<br><table><tr><td>{@link OVR#ovrTextureMisc_None TextureMisc_None}</td><td>{@link OVR#ovrTextureMisc_DX_Typeless TextureMisc_DX_Typeless}</td><td>{@link OVR#ovrTextureMisc_AllowGenerateMips TextureMisc_AllowGenerateMips}</td></tr><tr><td>{@link OVR#ovrTextureMisc_ProtectedContent TextureMisc_ProtectedContent}</td><td>{@link OVR#ovrTextureMisc_AutoGenerateMips TextureMisc_AutoGenerateMips}</td></tr></table> */
     @NativeType("unsigned int")
     public int MiscFlags() { return nMiscFlags(address()); }
-    /** Returns the value of the {@code BindFlags} field. */
+    /** {@code ovrTextureBindFlags}. Not used for GL. One or more of:<br><table><tr><td>{@link OVR#ovrTextureBind_None TextureBind_None}</td><td>{@link OVR#ovrTextureBind_DX_RenderTarget TextureBind_DX_RenderTarget}</td><td>{@link OVR#ovrTextureBind_DX_UnorderedAccess TextureBind_DX_UnorderedAccess}</td></tr><tr><td>{@link OVR#ovrTextureBind_DX_DepthStencil TextureBind_DX_DepthStencil}</td></tr></table> */
     @NativeType("unsigned int")
     public int BindFlags() { return nBindFlags(address()); }
 
-    /** Sets the specified value to the {@code Type} field. */
+    /** Sets the specified value to the {@link #Type} field. */
     public OVRTextureSwapChainDesc Type(@NativeType("ovrTextureType") int value) { nType(address(), value); return this; }
-    /** Sets the specified value to the {@code Format} field. */
+    /** Sets the specified value to the {@link #Format} field. */
     public OVRTextureSwapChainDesc Format(@NativeType("ovrTextureFormat") int value) { nFormat(address(), value); return this; }
-    /** Sets the specified value to the {@code ArraySize} field. */
+    /** Sets the specified value to the {@link #ArraySize} field. */
     public OVRTextureSwapChainDesc ArraySize(int value) { nArraySize(address(), value); return this; }
     /** Sets the specified value to the {@code Width} field. */
     public OVRTextureSwapChainDesc Width(int value) { nWidth(address(), value); return this; }
@@ -149,11 +138,11 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
     public OVRTextureSwapChainDesc MipLevels(int value) { nMipLevels(address(), value); return this; }
     /** Sets the specified value to the {@code SampleCount} field. */
     public OVRTextureSwapChainDesc SampleCount(int value) { nSampleCount(address(), value); return this; }
-    /** Sets the specified value to the {@code StaticImage} field. */
+    /** Sets the specified value to the {@link #StaticImage} field. */
     public OVRTextureSwapChainDesc StaticImage(@NativeType("ovrBool") boolean value) { nStaticImage(address(), value); return this; }
-    /** Sets the specified value to the {@code MiscFlags} field. */
+    /** Sets the specified value to the {@link #MiscFlags} field. */
     public OVRTextureSwapChainDesc MiscFlags(@NativeType("unsigned int") int value) { nMiscFlags(address(), value); return this; }
-    /** Sets the specified value to the {@code BindFlags} field. */
+    /** Sets the specified value to the {@link #BindFlags} field. */
     public OVRTextureSwapChainDesc BindFlags(@NativeType("unsigned int") int value) { nBindFlags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -418,37 +407,37 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code Type} field. */
+        /** @return the value of the {@link OVRTextureSwapChainDesc#Type} field. */
         @NativeType("ovrTextureType")
         public int Type() { return OVRTextureSwapChainDesc.nType(address()); }
-        /** Returns the value of the {@code Format} field. */
+        /** @return the value of the {@link OVRTextureSwapChainDesc#Format} field. */
         @NativeType("ovrTextureFormat")
         public int Format() { return OVRTextureSwapChainDesc.nFormat(address()); }
-        /** Returns the value of the {@code ArraySize} field. */
+        /** @return the value of the {@link OVRTextureSwapChainDesc#ArraySize} field. */
         public int ArraySize() { return OVRTextureSwapChainDesc.nArraySize(address()); }
-        /** Returns the value of the {@code Width} field. */
+        /** @return the value of the {@code Width} field. */
         public int Width() { return OVRTextureSwapChainDesc.nWidth(address()); }
-        /** Returns the value of the {@code Height} field. */
+        /** @return the value of the {@code Height} field. */
         public int Height() { return OVRTextureSwapChainDesc.nHeight(address()); }
-        /** Returns the value of the {@code MipLevels} field. */
+        /** @return the value of the {@code MipLevels} field. */
         public int MipLevels() { return OVRTextureSwapChainDesc.nMipLevels(address()); }
-        /** Returns the value of the {@code SampleCount} field. */
+        /** @return the value of the {@code SampleCount} field. */
         public int SampleCount() { return OVRTextureSwapChainDesc.nSampleCount(address()); }
-        /** Returns the value of the {@code StaticImage} field. */
+        /** @return the value of the {@link OVRTextureSwapChainDesc#StaticImage} field. */
         @NativeType("ovrBool")
         public boolean StaticImage() { return OVRTextureSwapChainDesc.nStaticImage(address()); }
-        /** Returns the value of the {@code MiscFlags} field. */
+        /** @return the value of the {@link OVRTextureSwapChainDesc#MiscFlags} field. */
         @NativeType("unsigned int")
         public int MiscFlags() { return OVRTextureSwapChainDesc.nMiscFlags(address()); }
-        /** Returns the value of the {@code BindFlags} field. */
+        /** @return the value of the {@link OVRTextureSwapChainDesc#BindFlags} field. */
         @NativeType("unsigned int")
         public int BindFlags() { return OVRTextureSwapChainDesc.nBindFlags(address()); }
 
-        /** Sets the specified value to the {@code Type} field. */
+        /** Sets the specified value to the {@link OVRTextureSwapChainDesc#Type} field. */
         public OVRTextureSwapChainDesc.Buffer Type(@NativeType("ovrTextureType") int value) { OVRTextureSwapChainDesc.nType(address(), value); return this; }
-        /** Sets the specified value to the {@code Format} field. */
+        /** Sets the specified value to the {@link OVRTextureSwapChainDesc#Format} field. */
         public OVRTextureSwapChainDesc.Buffer Format(@NativeType("ovrTextureFormat") int value) { OVRTextureSwapChainDesc.nFormat(address(), value); return this; }
-        /** Sets the specified value to the {@code ArraySize} field. */
+        /** Sets the specified value to the {@link OVRTextureSwapChainDesc#ArraySize} field. */
         public OVRTextureSwapChainDesc.Buffer ArraySize(int value) { OVRTextureSwapChainDesc.nArraySize(address(), value); return this; }
         /** Sets the specified value to the {@code Width} field. */
         public OVRTextureSwapChainDesc.Buffer Width(int value) { OVRTextureSwapChainDesc.nWidth(address(), value); return this; }
@@ -458,11 +447,11 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
         public OVRTextureSwapChainDesc.Buffer MipLevels(int value) { OVRTextureSwapChainDesc.nMipLevels(address(), value); return this; }
         /** Sets the specified value to the {@code SampleCount} field. */
         public OVRTextureSwapChainDesc.Buffer SampleCount(int value) { OVRTextureSwapChainDesc.nSampleCount(address(), value); return this; }
-        /** Sets the specified value to the {@code StaticImage} field. */
+        /** Sets the specified value to the {@link OVRTextureSwapChainDesc#StaticImage} field. */
         public OVRTextureSwapChainDesc.Buffer StaticImage(@NativeType("ovrBool") boolean value) { OVRTextureSwapChainDesc.nStaticImage(address(), value); return this; }
-        /** Sets the specified value to the {@code MiscFlags} field. */
+        /** Sets the specified value to the {@link OVRTextureSwapChainDesc#MiscFlags} field. */
         public OVRTextureSwapChainDesc.Buffer MiscFlags(@NativeType("unsigned int") int value) { OVRTextureSwapChainDesc.nMiscFlags(address(), value); return this; }
-        /** Sets the specified value to the {@code BindFlags} field. */
+        /** Sets the specified value to the {@link OVRTextureSwapChainDesc#BindFlags} field. */
         public OVRTextureSwapChainDesc.Buffer BindFlags(@NativeType("unsigned int") int value) { OVRTextureSwapChainDesc.nBindFlags(address(), value); return this; }
 
     }

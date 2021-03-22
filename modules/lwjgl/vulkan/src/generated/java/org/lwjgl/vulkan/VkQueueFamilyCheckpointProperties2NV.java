@@ -28,21 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRSynchronization2#VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code checkpointExecutionStageMask} &ndash; a mask indicating which pipeline stages the implementation can execute checkpoint markers in.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkQueueFamilyCheckpointProperties2NV {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkPipelineStageFlags2KHR checkpointExecutionStageMask;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkPipelineStageFlags2KHR {@link #checkpointExecutionStageMask};
  * }</code></pre>
  */
 public class VkQueueFamilyCheckpointProperties2NV extends Struct implements NativeResource {
@@ -87,19 +79,19 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code checkpointExecutionStageMask} field. */
+    /** a mask indicating which pipeline stages the implementation can execute checkpoint markers in. */
     @NativeType("VkPipelineStageFlags2KHR")
     public int checkpointExecutionStageMask() { return ncheckpointExecutionStageMask(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkQueueFamilyCheckpointProperties2NV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkQueueFamilyCheckpointProperties2NV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,19 +310,19 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkQueueFamilyCheckpointProperties2NV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkQueueFamilyCheckpointProperties2NV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkQueueFamilyCheckpointProperties2NV#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkQueueFamilyCheckpointProperties2NV.npNext(address()); }
-        /** Returns the value of the {@code checkpointExecutionStageMask} field. */
+        /** @return the value of the {@link VkQueueFamilyCheckpointProperties2NV#checkpointExecutionStageMask} field. */
         @NativeType("VkPipelineStageFlags2KHR")
         public int checkpointExecutionStageMask() { return VkQueueFamilyCheckpointProperties2NV.ncheckpointExecutionStageMask(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkQueueFamilyCheckpointProperties2NV#sType} field. */
         public VkQueueFamilyCheckpointProperties2NV.Buffer sType(@NativeType("VkStructureType") int value) { VkQueueFamilyCheckpointProperties2NV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkQueueFamilyCheckpointProperties2NV#pNext} field. */
         public VkQueueFamilyCheckpointProperties2NV.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyCheckpointProperties2NV.npNext(address(), value); return this; }
 
     }

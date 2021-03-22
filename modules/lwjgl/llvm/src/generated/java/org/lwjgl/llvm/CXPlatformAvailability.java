@@ -18,30 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Describes the availability of a given entity on a particular platform, e.g., a particular class might only be available on Mac OS 10.7 or newer.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code Platform} &ndash; 
- * a string that describes the platform for which this structure provides availability information.
- * 
- * <p>Possible values are "ios" or "macos".</p></li>
- * <li>{@code Introduced} &ndash; the version number in which this entity was introduced</li>
- * <li>{@code Deprecated} &ndash; the version number in which this entity was deprecated (but is still available)</li>
- * <li>{@code Obsoleted} &ndash; the version number in which this entity was obsoleted, and therefore is no longer available</li>
- * <li>{@code Unavailable} &ndash; whether the entity is unconditionally unavailable on this platform</li>
- * <li>{@code Message} &ndash; an optional message to provide to a user of this API, e.g., to suggest replacement APIs</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CXPlatformAvailability {
- *     {@link CXString CXString} Platform;
- *     {@link CXVersion CXVersion} Introduced;
- *     {@link CXVersion CXVersion} Deprecated;
- *     {@link CXVersion CXVersion} Obsoleted;
- *     int Unavailable;
- *     {@link CXString CXString} Message;
+ *     {@link CXString CXString} {@link #Platform};
+ *     {@link CXVersion CXVersion} {@link #Introduced};
+ *     {@link CXVersion CXVersion} {@link #Deprecated};
+ *     {@link CXVersion CXVersion} {@link #Obsoleted};
+ *     int {@link #Unavailable};
+ *     {@link CXString CXString} {@link #Message};
  * }</code></pre>
  */
 public class CXPlatformAvailability extends Struct implements NativeResource {
@@ -95,17 +81,21 @@ public class CXPlatformAvailability extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link CXString} view of the {@code Platform} field. */
+    /**
+     * a string that describes the platform for which this structure provides availability information.
+     * 
+     * <p>Possible values are "ios" or "macos".</p>
+     */
     public CXString Platform() { return nPlatform(address()); }
-    /** Returns a {@link CXVersion} view of the {@code Introduced} field. */
+    /** the version number in which this entity was introduced */
     public CXVersion Introduced() { return nIntroduced(address()); }
-    /** Returns a {@link CXVersion} view of the {@code Deprecated} field. */
+    /** the version number in which this entity was deprecated (but is still available) */
     public CXVersion Deprecated() { return nDeprecated(address()); }
-    /** Returns a {@link CXVersion} view of the {@code Obsoleted} field. */
+    /** the version number in which this entity was obsoleted, and therefore is no longer available */
     public CXVersion Obsoleted() { return nObsoleted(address()); }
-    /** Returns the value of the {@code Unavailable} field. */
+    /** whether the entity is unconditionally unavailable on this platform */
     public int Unavailable() { return nUnavailable(address()); }
-    /** Returns a {@link CXString} view of the {@code Message} field. */
+    /** an optional message to provide to a user of this API, e.g., to suggest replacement APIs */
     public CXString Message() { return nMessage(address()); }
 
     // -----------------------------------
@@ -302,17 +292,17 @@ public class CXPlatformAvailability extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link CXString} view of the {@code Platform} field. */
+        /** @return a {@link CXString} view of the {@link CXPlatformAvailability#Platform} field. */
         public CXString Platform() { return CXPlatformAvailability.nPlatform(address()); }
-        /** Returns a {@link CXVersion} view of the {@code Introduced} field. */
+        /** @return a {@link CXVersion} view of the {@link CXPlatformAvailability#Introduced} field. */
         public CXVersion Introduced() { return CXPlatformAvailability.nIntroduced(address()); }
-        /** Returns a {@link CXVersion} view of the {@code Deprecated} field. */
+        /** @return a {@link CXVersion} view of the {@link CXPlatformAvailability#Deprecated} field. */
         public CXVersion Deprecated() { return CXPlatformAvailability.nDeprecated(address()); }
-        /** Returns a {@link CXVersion} view of the {@code Obsoleted} field. */
+        /** @return a {@link CXVersion} view of the {@link CXPlatformAvailability#Obsoleted} field. */
         public CXVersion Obsoleted() { return CXPlatformAvailability.nObsoleted(address()); }
-        /** Returns the value of the {@code Unavailable} field. */
+        /** @return the value of the {@link CXPlatformAvailability#Unavailable} field. */
         public int Unavailable() { return CXPlatformAvailability.nUnavailable(address()); }
-        /** Returns a {@link CXString} view of the {@code Message} field. */
+        /** @return a {@link CXString} view of the {@link CXPlatformAvailability#Message} field. */
         public CXString Message() { return CXPlatformAvailability.nMessage(address()); }
 
     }

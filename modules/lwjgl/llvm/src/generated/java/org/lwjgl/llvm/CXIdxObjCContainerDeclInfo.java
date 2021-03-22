@@ -61,10 +61,10 @@ public class CXIdxObjCContainerDeclInfo extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link CXIdxDeclInfo} view of the struct pointed to by the {@code declInfo} field. */
+    /** @return a {@link CXIdxDeclInfo} view of the struct pointed to by the {@code declInfo} field. */
     @NativeType("CXIdxDeclInfo const *")
     public CXIdxDeclInfo declInfo() { return ndeclInfo(address()); }
-    /** Returns the value of the {@code kind} field. */
+    /** @return the value of the {@code kind} field. */
     @NativeType("CXIdxObjCContainerKind")
     public int kind() { return nkind(address()); }
 
@@ -142,10 +142,10 @@ public class CXIdxObjCContainerDeclInfo extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link CXIdxDeclInfo} view of the struct pointed to by the {@code declInfo} field. */
+        /** @return a {@link CXIdxDeclInfo} view of the struct pointed to by the {@code declInfo} field. */
         @NativeType("CXIdxDeclInfo const *")
         public CXIdxDeclInfo declInfo() { return CXIdxObjCContainerDeclInfo.ndeclInfo(address()); }
-        /** Returns the value of the {@code kind} field. */
+        /** @return the value of the {@code kind} field. */
         @NativeType("CXIdxObjCContainerKind")
         public int kind() { return CXIdxObjCContainerDeclInfo.nkind(address()); }
 

@@ -24,23 +24,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code performanceCounterQueryPools} &ndash; indicates whether the implementation supports performance counter query pools.</li>
- * <li>{@code performanceCounterMultipleQueryPools} &ndash; indicates whether the implementation supports using multiple performance query pools in a primary command buffer and secondary command buffers executed within it.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDevicePerformanceQueryFeaturesKHR {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 performanceCounterQueryPools;
- *     VkBool32 performanceCounterMultipleQueryPools;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #performanceCounterQueryPools};
+ *     VkBool32 {@link #performanceCounterMultipleQueryPools};
  * }</code></pre>
  */
 public class VkPhysicalDevicePerformanceQueryFeaturesKHR extends Struct implements NativeResource {
@@ -88,26 +79,26 @@ public class VkPhysicalDevicePerformanceQueryFeaturesKHR extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code performanceCounterQueryPools} field. */
+    /** indicates whether the implementation supports performance counter query pools. */
     @NativeType("VkBool32")
     public boolean performanceCounterQueryPools() { return nperformanceCounterQueryPools(address()) != 0; }
-    /** Returns the value of the {@code performanceCounterMultipleQueryPools} field. */
+    /** indicates whether the implementation supports using multiple performance query pools in a primary command buffer and secondary command buffers executed within it. */
     @NativeType("VkBool32")
     public boolean performanceCounterMultipleQueryPools() { return nperformanceCounterMultipleQueryPools(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePerformanceQueryFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePerformanceQueryFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code performanceCounterQueryPools} field. */
+    /** Sets the specified value to the {@link #performanceCounterQueryPools} field. */
     public VkPhysicalDevicePerformanceQueryFeaturesKHR performanceCounterQueryPools(@NativeType("VkBool32") boolean value) { nperformanceCounterQueryPools(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code performanceCounterMultipleQueryPools} field. */
+    /** Sets the specified value to the {@link #performanceCounterMultipleQueryPools} field. */
     public VkPhysicalDevicePerformanceQueryFeaturesKHR performanceCounterMultipleQueryPools(@NativeType("VkBool32") boolean value) { nperformanceCounterMultipleQueryPools(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,26 +327,26 @@ public class VkPhysicalDevicePerformanceQueryFeaturesKHR extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDevicePerformanceQueryFeaturesKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevicePerformanceQueryFeaturesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDevicePerformanceQueryFeaturesKHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevicePerformanceQueryFeaturesKHR.npNext(address()); }
-        /** Returns the value of the {@code performanceCounterQueryPools} field. */
+        /** @return the value of the {@link VkPhysicalDevicePerformanceQueryFeaturesKHR#performanceCounterQueryPools} field. */
         @NativeType("VkBool32")
         public boolean performanceCounterQueryPools() { return VkPhysicalDevicePerformanceQueryFeaturesKHR.nperformanceCounterQueryPools(address()) != 0; }
-        /** Returns the value of the {@code performanceCounterMultipleQueryPools} field. */
+        /** @return the value of the {@link VkPhysicalDevicePerformanceQueryFeaturesKHR#performanceCounterMultipleQueryPools} field. */
         @NativeType("VkBool32")
         public boolean performanceCounterMultipleQueryPools() { return VkPhysicalDevicePerformanceQueryFeaturesKHR.nperformanceCounterMultipleQueryPools(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePerformanceQueryFeaturesKHR#sType} field. */
         public VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePerformanceQueryFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePerformanceQueryFeaturesKHR#pNext} field. */
         public VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePerformanceQueryFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code performanceCounterQueryPools} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePerformanceQueryFeaturesKHR#performanceCounterQueryPools} field. */
         public VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer performanceCounterQueryPools(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePerformanceQueryFeaturesKHR.nperformanceCounterQueryPools(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code performanceCounterMultipleQueryPools} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePerformanceQueryFeaturesKHR#performanceCounterMultipleQueryPools} field. */
         public VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer performanceCounterMultipleQueryPools(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePerformanceQueryFeaturesKHR.nperformanceCounterMultipleQueryPools(address(), value ? 1 : 0); return this; }
 
     }

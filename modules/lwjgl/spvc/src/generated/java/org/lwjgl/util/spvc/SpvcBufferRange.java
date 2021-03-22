@@ -67,13 +67,13 @@ public class SpvcBufferRange extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code index} field. */
+    /** @return the value of the {@code index} field. */
     @NativeType("unsigned int")
     public int index() { return nindex(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("size_t")
     public long offset() { return noffset(address()); }
-    /** Returns the value of the {@code range} field. */
+    /** @return the value of the {@code range} field. */
     @NativeType("size_t")
     public long range() { return nrange(address()); }
 
@@ -304,13 +304,13 @@ public class SpvcBufferRange extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code index} field. */
+        /** @return the value of the {@code index} field. */
         @NativeType("unsigned int")
         public int index() { return SpvcBufferRange.nindex(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("size_t")
         public long offset() { return SpvcBufferRange.noffset(address()); }
-        /** Returns the value of the {@code range} field. */
+        /** @return the value of the {@code range} field. */
         @NativeType("size_t")
         public long range() { return SpvcBufferRange.nrange(address()); }
 

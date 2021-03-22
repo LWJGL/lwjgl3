@@ -19,27 +19,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Transient vertex buffer.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code data} &ndash; pointer to data</li>
- * <li>{@code size} &ndash; data size</li>
- * <li>{@code startVertex} &ndash; first vertex</li>
- * <li>{@code stride} &ndash; vertex stride</li>
- * <li>{@code handle} &ndash; vertex buffer handle</li>
- * <li>{@code layoutHandle} &ndash; vertex layout handle</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct bgfx_transient_vertex_buffer_t {
- *     uint8_t * data;
- *     uint32_t size;
- *     uint32_t startVertex;
- *     uint16_t stride;
- *     bgfx_vertex_buffer_handle_t handle;
- *     bgfx_vertex_layout_handle_t layoutHandle;
+ *     uint8_t * {@link #data};
+ *     uint32_t {@link #size};
+ *     uint32_t {@link #startVertex};
+ *     uint16_t {@link #stride};
+ *     bgfx_vertex_buffer_handle_t {@link #handle};
+ *     bgfx_vertex_layout_handle_t {@link #layoutHandle};
  * }</code></pre>
  */
 @NativeType("struct bgfx_transient_vertex_buffer_t")
@@ -94,34 +83,34 @@ public class BGFXTransientVertexBuffer extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
+    /** pointer to data */
     @NativeType("uint8_t *")
     public ByteBuffer data() { return ndata(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** data size */
     @NativeType("uint32_t")
     public int size() { return nsize(address()); }
-    /** Returns the value of the {@code startVertex} field. */
+    /** first vertex */
     @NativeType("uint32_t")
     public int startVertex() { return nstartVertex(address()); }
-    /** Returns the value of the {@code stride} field. */
+    /** vertex stride */
     @NativeType("uint16_t")
     public short stride() { return nstride(address()); }
-    /** Returns the value of the {@code handle} field. */
+    /** vertex buffer handle */
     @NativeType("bgfx_vertex_buffer_handle_t")
     public short handle() { return nhandle(address()); }
-    /** Returns the value of the {@code layoutHandle} field. */
+    /** vertex layout handle */
     @NativeType("bgfx_vertex_layout_handle_t")
     public short layoutHandle() { return nlayoutHandle(address()); }
 
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code data} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@link #data} field. */
     public BGFXTransientVertexBuffer data(@NativeType("uint8_t *") ByteBuffer value) { ndata(address(), value); return this; }
-    /** Sets the specified value to the {@code startVertex} field. */
+    /** Sets the specified value to the {@link #startVertex} field. */
     public BGFXTransientVertexBuffer startVertex(@NativeType("uint32_t") int value) { nstartVertex(address(), value); return this; }
-    /** Sets the specified value to the {@code stride} field. */
+    /** Sets the specified value to the {@link #stride} field. */
     public BGFXTransientVertexBuffer stride(@NativeType("uint16_t") short value) { nstride(address(), value); return this; }
-    /** Sets the specified value to the {@code handle} field. */
+    /** Sets the specified value to the {@link #handle} field. */
     public BGFXTransientVertexBuffer handle(@NativeType("bgfx_vertex_buffer_handle_t") short value) { nhandle(address(), value); return this; }
-    /** Sets the specified value to the {@code layoutHandle} field. */
+    /** Sets the specified value to the {@link #layoutHandle} field. */
     public BGFXTransientVertexBuffer layoutHandle(@NativeType("bgfx_vertex_layout_handle_t") short value) { nlayoutHandle(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -381,34 +370,34 @@ public class BGFXTransientVertexBuffer extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link BGFXTransientVertexBuffer#data} field. */
         @NativeType("uint8_t *")
         public ByteBuffer data() { return BGFXTransientVertexBuffer.ndata(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link BGFXTransientVertexBuffer#size} field. */
         @NativeType("uint32_t")
         public int size() { return BGFXTransientVertexBuffer.nsize(address()); }
-        /** Returns the value of the {@code startVertex} field. */
+        /** @return the value of the {@link BGFXTransientVertexBuffer#startVertex} field. */
         @NativeType("uint32_t")
         public int startVertex() { return BGFXTransientVertexBuffer.nstartVertex(address()); }
-        /** Returns the value of the {@code stride} field. */
+        /** @return the value of the {@link BGFXTransientVertexBuffer#stride} field. */
         @NativeType("uint16_t")
         public short stride() { return BGFXTransientVertexBuffer.nstride(address()); }
-        /** Returns the value of the {@code handle} field. */
+        /** @return the value of the {@link BGFXTransientVertexBuffer#handle} field. */
         @NativeType("bgfx_vertex_buffer_handle_t")
         public short handle() { return BGFXTransientVertexBuffer.nhandle(address()); }
-        /** Returns the value of the {@code layoutHandle} field. */
+        /** @return the value of the {@link BGFXTransientVertexBuffer#layoutHandle} field. */
         @NativeType("bgfx_vertex_layout_handle_t")
         public short layoutHandle() { return BGFXTransientVertexBuffer.nlayoutHandle(address()); }
 
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code data} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@link BGFXTransientVertexBuffer#data} field. */
         public BGFXTransientVertexBuffer.Buffer data(@NativeType("uint8_t *") ByteBuffer value) { BGFXTransientVertexBuffer.ndata(address(), value); return this; }
-        /** Sets the specified value to the {@code startVertex} field. */
+        /** Sets the specified value to the {@link BGFXTransientVertexBuffer#startVertex} field. */
         public BGFXTransientVertexBuffer.Buffer startVertex(@NativeType("uint32_t") int value) { BGFXTransientVertexBuffer.nstartVertex(address(), value); return this; }
-        /** Sets the specified value to the {@code stride} field. */
+        /** Sets the specified value to the {@link BGFXTransientVertexBuffer#stride} field. */
         public BGFXTransientVertexBuffer.Buffer stride(@NativeType("uint16_t") short value) { BGFXTransientVertexBuffer.nstride(address(), value); return this; }
-        /** Sets the specified value to the {@code handle} field. */
+        /** Sets the specified value to the {@link BGFXTransientVertexBuffer#handle} field. */
         public BGFXTransientVertexBuffer.Buffer handle(@NativeType("bgfx_vertex_buffer_handle_t") short value) { BGFXTransientVertexBuffer.nhandle(address(), value); return this; }
-        /** Sets the specified value to the {@code layoutHandle} field. */
+        /** Sets the specified value to the {@link BGFXTransientVertexBuffer#layoutHandle} field. */
         public BGFXTransientVertexBuffer.Buffer layoutHandle(@NativeType("bgfx_vertex_layout_handle_t") short value) { BGFXTransientVertexBuffer.nlayoutHandle(address(), value); return this; }
 
     }

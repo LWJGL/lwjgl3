@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRShaderTerminateInvocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code shaderTerminateInvocation} &ndash; specifies whether the implementation supports SPIR-V modules that use the {@code SPV_KHR_terminate_invocation} extension.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 shaderTerminateInvocation;
+ *     VkBool32 {@link #shaderTerminateInvocation};
  * }</code></pre>
  */
 public class VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR extends Struct
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code shaderTerminateInvocation} field. */
+    /** specifies whether the implementation supports SPIR-V modules that use the {@code SPV_KHR_terminate_invocation} extension. */
     @NativeType("VkBool32")
     public boolean shaderTerminateInvocation() { return nshaderTerminateInvocation(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR extends Struct
     public VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderTerminateInvocation} field. */
+    /** Sets the specified value to the {@link #shaderTerminateInvocation} field. */
     public VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR shaderTerminateInvocation(@NativeType("VkBool32") boolean value) { nshaderTerminateInvocation(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR extends Struct
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.npNext(address()); }
-        /** Returns the value of the {@code shaderTerminateInvocation} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR#shaderTerminateInvocation} field. */
         @NativeType("VkBool32")
         public boolean shaderTerminateInvocation() { return VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.nshaderTerminateInvocation(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR extends Struct
         public VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderTerminateInvocation} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR#shaderTerminateInvocation} field. */
         public VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer shaderTerminateInvocation(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.nshaderTerminateInvocation(address(), value ? 1 : 0); return this; }
 
     }

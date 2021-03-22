@@ -61,10 +61,10 @@ public class CXStringSet extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link CXString.Buffer} view of the struct array pointed to by the {@code Strings} field. */
+    /** @return a {@link CXString.Buffer} view of the struct array pointed to by the {@code Strings} field. */
     @NativeType("CXString *")
     public CXString.Buffer Strings() { return nStrings(address()); }
-    /** Returns the value of the {@code Count} field. */
+    /** @return the value of the {@code Count} field. */
     @NativeType("unsigned")
     public int Count() { return nCount(address()); }
 
@@ -142,10 +142,10 @@ public class CXStringSet extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link CXString.Buffer} view of the struct array pointed to by the {@code Strings} field. */
+        /** @return a {@link CXString.Buffer} view of the struct array pointed to by the {@code Strings} field. */
         @NativeType("CXString *")
         public CXString.Buffer Strings() { return CXStringSet.nStrings(address()); }
-        /** Returns the value of the {@code Count} field. */
+        /** @return the value of the {@code Count} field. */
         @NativeType("unsigned")
         public int Count() { return CXStringSet.nCount(address()); }
 

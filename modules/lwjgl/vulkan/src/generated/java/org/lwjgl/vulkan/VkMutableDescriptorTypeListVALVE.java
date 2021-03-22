@@ -41,19 +41,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkMutableDescriptorTypeCreateInfoVALVE}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code descriptorTypeCount} &ndash; the number of elements in {@code pDescriptorTypes}.</li>
- * <li>{@code pDescriptorTypes} &ndash; {@code NULL} or a pointer to an array of {@code descriptorTypeCount} {@code VkDescriptorType} values which define which descriptor types a given binding may mutate to.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkMutableDescriptorTypeListVALVE {
- *     uint32_t descriptorTypeCount;
- *     VkDescriptorType const * pDescriptorTypes;
+ *     uint32_t {@link #descriptorTypeCount};
+ *     VkDescriptorType const * {@link #pDescriptorTypes};
  * }</code></pre>
  */
 public class VkMutableDescriptorTypeListVALVE extends Struct implements NativeResource {
@@ -95,15 +88,15 @@ public class VkMutableDescriptorTypeListVALVE extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code descriptorTypeCount} field. */
+    /** the number of elements in {@code pDescriptorTypes}. */
     @NativeType("uint32_t")
     public int descriptorTypeCount() { return ndescriptorTypeCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDescriptorTypes} field. */
+    /** {@code NULL} or a pointer to an array of {@code descriptorTypeCount} {@code VkDescriptorType} values which define which descriptor types a given binding may mutate to. */
     @Nullable
     @NativeType("VkDescriptorType const *")
     public IntBuffer pDescriptorTypes() { return npDescriptorTypes(address()); }
 
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pDescriptorTypes} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pDescriptorTypes} field. */
     public VkMutableDescriptorTypeListVALVE pDescriptorTypes(@Nullable @NativeType("VkDescriptorType const *") IntBuffer value) { npDescriptorTypes(address(), value); return this; }
 
     /**
@@ -332,15 +325,15 @@ public class VkMutableDescriptorTypeListVALVE extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code descriptorTypeCount} field. */
+        /** @return the value of the {@link VkMutableDescriptorTypeListVALVE#descriptorTypeCount} field. */
         @NativeType("uint32_t")
         public int descriptorTypeCount() { return VkMutableDescriptorTypeListVALVE.ndescriptorTypeCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDescriptorTypes} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkMutableDescriptorTypeListVALVE#pDescriptorTypes} field. */
         @Nullable
         @NativeType("VkDescriptorType const *")
         public IntBuffer pDescriptorTypes() { return VkMutableDescriptorTypeListVALVE.npDescriptorTypes(address()); }
 
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pDescriptorTypes} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkMutableDescriptorTypeListVALVE#pDescriptorTypes} field. */
         public VkMutableDescriptorTypeListVALVE.Buffer pDescriptorTypes(@Nullable @NativeType("VkDescriptorType const *") IntBuffer value) { VkMutableDescriptorTypeListVALVE.npDescriptorTypes(address(), value); return this; }
 
     }

@@ -26,25 +26,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits and properties.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code subsampledLoads} &ndash; specifies if performing image data read with load operations on subsampled attachments will be resampled to the fragment density of the render pass</li>
- * <li>{@code subsampledCoarseReconstructionEarlyAccess} &ndash; specifies if performing image data read with samplers created with {@code flags} containing {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT} in fragment shader will trigger additional reads during {@link VK10#VK_PIPELINE_STAGE_VERTEX_SHADER_BIT PIPELINE_STAGE_VERTEX_SHADER_BIT}</li>
- * <li>{@code maxSubsampledArrayLayers} &ndash; the maximum number of {@code VkImageView} array layers for usages supporting subsampled samplers</li>
- * <li>{@code maxDescriptorSetSubsampledSamplers} &ndash; the maximum number of subsampled samplers that <b>can</b> be included in a {@code VkPipelineLayout}</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceFragmentDensityMap2PropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 subsampledLoads;
- *     VkBool32 subsampledCoarseReconstructionEarlyAccess;
- *     uint32_t maxSubsampledArrayLayers;
- *     uint32_t maxDescriptorSetSubsampledSamplers;
+ *     VkBool32 {@link #subsampledLoads};
+ *     VkBool32 {@link #subsampledCoarseReconstructionEarlyAccess};
+ *     uint32_t {@link #maxSubsampledArrayLayers};
+ *     uint32_t {@link #maxDescriptorSetSubsampledSamplers};
  * }</code></pre>
  */
 public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct implements NativeResource {
@@ -98,22 +89,22 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code subsampledLoads} field. */
+    /** specifies if performing image data read with load operations on subsampled attachments will be resampled to the fragment density of the render pass */
     @NativeType("VkBool32")
     public boolean subsampledLoads() { return nsubsampledLoads(address()) != 0; }
-    /** Returns the value of the {@code subsampledCoarseReconstructionEarlyAccess} field. */
+    /** specifies if performing image data read with samplers created with {@code flags} containing {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT} in fragment shader will trigger additional reads during {@link VK10#VK_PIPELINE_STAGE_VERTEX_SHADER_BIT PIPELINE_STAGE_VERTEX_SHADER_BIT} */
     @NativeType("VkBool32")
     public boolean subsampledCoarseReconstructionEarlyAccess() { return nsubsampledCoarseReconstructionEarlyAccess(address()) != 0; }
-    /** Returns the value of the {@code maxSubsampledArrayLayers} field. */
+    /** the maximum number of {@code VkImageView} array layers for usages supporting subsampled samplers */
     @NativeType("uint32_t")
     public int maxSubsampledArrayLayers() { return nmaxSubsampledArrayLayers(address()); }
-    /** Returns the value of the {@code maxDescriptorSetSubsampledSamplers} field. */
+    /** the maximum number of subsampled samplers that <b>can</b> be included in a {@code VkPipelineLayout} */
     @NativeType("uint32_t")
     public int maxDescriptorSetSubsampledSamplers() { return nmaxDescriptorSetSubsampledSamplers(address()); }
 
@@ -344,22 +335,22 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.npNext(address()); }
-        /** Returns the value of the {@code subsampledLoads} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#subsampledLoads} field. */
         @NativeType("VkBool32")
         public boolean subsampledLoads() { return VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.nsubsampledLoads(address()) != 0; }
-        /** Returns the value of the {@code subsampledCoarseReconstructionEarlyAccess} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#subsampledCoarseReconstructionEarlyAccess} field. */
         @NativeType("VkBool32")
         public boolean subsampledCoarseReconstructionEarlyAccess() { return VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.nsubsampledCoarseReconstructionEarlyAccess(address()) != 0; }
-        /** Returns the value of the {@code maxSubsampledArrayLayers} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#maxSubsampledArrayLayers} field. */
         @NativeType("uint32_t")
         public int maxSubsampledArrayLayers() { return VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.nmaxSubsampledArrayLayers(address()); }
-        /** Returns the value of the {@code maxDescriptorSetSubsampledSamplers} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#maxDescriptorSetSubsampledSamplers} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetSubsampledSamplers() { return VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.nmaxDescriptorSetSubsampledSamplers(address()); }
 

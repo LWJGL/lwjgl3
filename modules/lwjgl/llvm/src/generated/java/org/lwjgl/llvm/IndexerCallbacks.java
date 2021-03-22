@@ -18,21 +18,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * A group of callbacks used by {@link ClangIndex#clang_indexSourceFile indexSourceFile} and {@link ClangIndex#clang_indexTranslationUnit indexTranslationUnit}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code abortQuery} &ndash; called periodically to check whether indexing should be aborted. Should return 0 to continue, and non-zero to abort.</li>
- * <li>{@code diagnostic} &ndash; called at the end of indexing; passes the complete diagnostic set.</li>
- * <li>{@code ppIncludedFile} &ndash; called when a file gets {@code #included/#imported}</li>
- * <li>{@code importedASTFile} &ndash; 
- * Called when a AST file (PCH or module) gets imported.
- * 
- * <p>AST files will not get indexed (there will not be callbacks to index all the entities in an AST file). The recommended action is that, if the AST file
- * is not already indexed, to initiate a new indexing job specific to the AST file.</p></li>
- * <li>{@code startedTranslationUnit} &ndash; called at the beginning of indexing a translation unit</li>
- * <li>{@code indexEntityReference} &ndash; called to index a reference of an entity</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -104,28 +89,33 @@ public class IndexerCallbacks extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code abortQuery} field. */
+    /** called periodically to check whether indexing should be aborted. Should return 0 to continue, and non-zero to abort. */
     @NativeType("int (*) (CXClientData, void *)")
     public IndexerAbortQuery abortQuery() { return nabortQuery(address()); }
-    /** Returns the value of the {@code diagnostic} field. */
+    /** called at the end of indexing; passes the complete diagnostic set. */
     @NativeType("void (*) (CXClientData, CXDiagnosticSet, void *)")
     public IndexerDiagnostic diagnostic() { return ndiagnostic(address()); }
-    /** Returns the value of the {@code enteredMainFile} field. */
+    /** @return the value of the {@code enteredMainFile} field. */
     @NativeType("CXIdxClientFile (*) (CXClientData, CXFile, void *)")
     public IndexerEnteredMainFile enteredMainFile() { return nenteredMainFile(address()); }
-    /** Returns the value of the {@code ppIncludedFile} field. */
+    /** called when a file gets {@code #included/#imported} */
     @NativeType("CXIdxClientFile (*) (CXClientData, CXIdxIncludedFileInfo const *)")
     public IndexerIncludedFile ppIncludedFile() { return nppIncludedFile(address()); }
-    /** Returns the value of the {@code importedASTFile} field. */
+    /**
+     * Called when a AST file (PCH or module) gets imported.
+     * 
+     * <p>AST files will not get indexed (there will not be callbacks to index all the entities in an AST file). The recommended action is that, if the AST file
+     * is not already indexed, to initiate a new indexing job specific to the AST file.</p>
+     */
     @NativeType("CXIdxClientASTFile (*) (CXClientData, CXIdxImportedASTFileInfo const *)")
     public IndexerImportedASTFile importedASTFile() { return nimportedASTFile(address()); }
-    /** Returns the value of the {@code startedTranslationUnit} field. */
+    /** called at the beginning of indexing a translation unit */
     @NativeType("CXIdxClientContainer (*) (CXClientData, void *)")
     public IndexerStartedTranslationUnit startedTranslationUnit() { return nstartedTranslationUnit(address()); }
-    /** Returns the value of the {@code indexDeclaration} field. */
+    /** @return the value of the {@code indexDeclaration} field. */
     @NativeType("void (*) (CXClientData, CXIdxDeclInfo const *)")
     public IndexerIndexDeclaration indexDeclaration() { return nindexDeclaration(address()); }
-    /** Returns the value of the {@code indexEntityReference} field. */
+    /** called to index a reference of an entity */
     @NativeType("void (*) (CXClientData, CXIdxEntityRefInfo const *)")
     public IndexerIndexEntityReference indexEntityReference() { return nindexEntityReference(address()); }
 
@@ -327,28 +317,28 @@ public class IndexerCallbacks extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code abortQuery} field. */
+        /** @return the value of the {@link IndexerCallbacks#abortQuery} field. */
         @NativeType("int (*) (CXClientData, void *)")
         public IndexerAbortQuery abortQuery() { return IndexerCallbacks.nabortQuery(address()); }
-        /** Returns the value of the {@code diagnostic} field. */
+        /** @return the value of the {@link IndexerCallbacks#diagnostic} field. */
         @NativeType("void (*) (CXClientData, CXDiagnosticSet, void *)")
         public IndexerDiagnostic diagnostic() { return IndexerCallbacks.ndiagnostic(address()); }
-        /** Returns the value of the {@code enteredMainFile} field. */
+        /** @return the value of the {@code enteredMainFile} field. */
         @NativeType("CXIdxClientFile (*) (CXClientData, CXFile, void *)")
         public IndexerEnteredMainFile enteredMainFile() { return IndexerCallbacks.nenteredMainFile(address()); }
-        /** Returns the value of the {@code ppIncludedFile} field. */
+        /** @return the value of the {@link IndexerCallbacks#ppIncludedFile} field. */
         @NativeType("CXIdxClientFile (*) (CXClientData, CXIdxIncludedFileInfo const *)")
         public IndexerIncludedFile ppIncludedFile() { return IndexerCallbacks.nppIncludedFile(address()); }
-        /** Returns the value of the {@code importedASTFile} field. */
+        /** @return the value of the {@link IndexerCallbacks#importedASTFile} field. */
         @NativeType("CXIdxClientASTFile (*) (CXClientData, CXIdxImportedASTFileInfo const *)")
         public IndexerImportedASTFile importedASTFile() { return IndexerCallbacks.nimportedASTFile(address()); }
-        /** Returns the value of the {@code startedTranslationUnit} field. */
+        /** @return the value of the {@link IndexerCallbacks#startedTranslationUnit} field. */
         @NativeType("CXIdxClientContainer (*) (CXClientData, void *)")
         public IndexerStartedTranslationUnit startedTranslationUnit() { return IndexerCallbacks.nstartedTranslationUnit(address()); }
-        /** Returns the value of the {@code indexDeclaration} field. */
+        /** @return the value of the {@code indexDeclaration} field. */
         @NativeType("void (*) (CXClientData, CXIdxDeclInfo const *)")
         public IndexerIndexDeclaration indexDeclaration() { return IndexerCallbacks.nindexDeclaration(address()); }
-        /** Returns the value of the {@code indexEntityReference} field. */
+        /** @return the value of the {@link IndexerCallbacks#indexEntityReference} field. */
         @NativeType("void (*) (CXClientData, CXIdxEntityRefInfo const *)")
         public IndexerIndexEntityReference indexEntityReference() { return IndexerCallbacks.nindexEntityReference(address()); }
 

@@ -32,21 +32,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkPhysicalDeviceFeatures}, {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, {@link KHRGetPhysicalDeviceProperties2#vkGetPhysicalDeviceFeatures2KHR GetPhysicalDeviceFeatures2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code features} &ndash; a {@link VkPhysicalDeviceFeatures} structure describing the fine-grained features of the Vulkan 1.0 API.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceFeatures2 {
- *     VkStructureType sType;
- *     void * pNext;
- *     {@link VkPhysicalDeviceFeatures VkPhysicalDeviceFeatures} features;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     {@link VkPhysicalDeviceFeatures VkPhysicalDeviceFeatures} {@link #features};
  * }</code></pre>
  */
 public class VkPhysicalDeviceFeatures2 extends Struct implements NativeResource {
@@ -91,22 +83,22 @@ public class VkPhysicalDeviceFeatures2 extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkPhysicalDeviceFeatures} view of the {@code features} field. */
+    /** a {@link VkPhysicalDeviceFeatures} structure describing the fine-grained features of the Vulkan 1.0 API. */
     public VkPhysicalDeviceFeatures features() { return nfeatures(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceFeatures2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceFeatures2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkPhysicalDeviceFeatures} to the {@code features} field. */
+    /** Copies the specified {@link VkPhysicalDeviceFeatures} to the {@link #features} field. */
     public VkPhysicalDeviceFeatures2 features(VkPhysicalDeviceFeatures value) { nfeatures(address(), value); return this; }
-    /** Passes the {@code features} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #features} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkPhysicalDeviceFeatures2 features(java.util.function.Consumer<VkPhysicalDeviceFeatures> consumer) { consumer.accept(features()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -329,22 +321,22 @@ public class VkPhysicalDeviceFeatures2 extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures2#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceFeatures2.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFeatures2#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceFeatures2.npNext(address()); }
-        /** Returns a {@link VkPhysicalDeviceFeatures} view of the {@code features} field. */
+        /** @return a {@link VkPhysicalDeviceFeatures} view of the {@link VkPhysicalDeviceFeatures2#features} field. */
         public VkPhysicalDeviceFeatures features() { return VkPhysicalDeviceFeatures2.nfeatures(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures2#sType} field. */
         public VkPhysicalDeviceFeatures2.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFeatures2.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFeatures2#pNext} field. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFeatures2.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkPhysicalDeviceFeatures} to the {@code features} field. */
+        /** Copies the specified {@link VkPhysicalDeviceFeatures} to the {@link VkPhysicalDeviceFeatures2#features} field. */
         public VkPhysicalDeviceFeatures2.Buffer features(VkPhysicalDeviceFeatures value) { VkPhysicalDeviceFeatures2.nfeatures(address(), value); return this; }
-        /** Passes the {@code features} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkPhysicalDeviceFeatures2#features} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkPhysicalDeviceFeatures2.Buffer features(java.util.function.Consumer<VkPhysicalDeviceFeatures> consumer) { consumer.accept(features()); return this; }
 
     }

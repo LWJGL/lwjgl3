@@ -37,19 +37,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkDisplayModeCreateInfoKHR}, {@link VkDisplayModePropertiesKHR}, {@link VkExtent2D}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code visibleRegion} &ndash; the 2D extents of the visible region.</li>
- * <li>{@code refreshRate} &ndash; a {@code uint32_t} that is the number of times the display is refreshed each second multiplied by 1000.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDisplayModeParametersKHR {
- *     {@link VkExtent2D VkExtent2D} visibleRegion;
- *     uint32_t refreshRate;
+ *     {@link VkExtent2D VkExtent2D} {@link #visibleRegion};
+ *     uint32_t {@link #refreshRate};
  * }</code></pre>
  */
 public class VkDisplayModeParametersKHR extends Struct implements NativeResource {
@@ -91,17 +84,17 @@ public class VkDisplayModeParametersKHR extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link VkExtent2D} view of the {@code visibleRegion} field. */
+    /** the 2D extents of the visible region. */
     public VkExtent2D visibleRegion() { return nvisibleRegion(address()); }
-    /** Returns the value of the {@code refreshRate} field. */
+    /** a {@code uint32_t} that is the number of times the display is refreshed each second multiplied by 1000. */
     @NativeType("uint32_t")
     public int refreshRate() { return nrefreshRate(address()); }
 
-    /** Copies the specified {@link VkExtent2D} to the {@code visibleRegion} field. */
+    /** Copies the specified {@link VkExtent2D} to the {@link #visibleRegion} field. */
     public VkDisplayModeParametersKHR visibleRegion(VkExtent2D value) { nvisibleRegion(address(), value); return this; }
-    /** Passes the {@code visibleRegion} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #visibleRegion} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkDisplayModeParametersKHR visibleRegion(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(visibleRegion()); return this; }
-    /** Sets the specified value to the {@code refreshRate} field. */
+    /** Sets the specified value to the {@link #refreshRate} field. */
     public VkDisplayModeParametersKHR refreshRate(@NativeType("uint32_t") int value) { nrefreshRate(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,17 +311,17 @@ public class VkDisplayModeParametersKHR extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link VkExtent2D} view of the {@code visibleRegion} field. */
+        /** @return a {@link VkExtent2D} view of the {@link VkDisplayModeParametersKHR#visibleRegion} field. */
         public VkExtent2D visibleRegion() { return VkDisplayModeParametersKHR.nvisibleRegion(address()); }
-        /** Returns the value of the {@code refreshRate} field. */
+        /** @return the value of the {@link VkDisplayModeParametersKHR#refreshRate} field. */
         @NativeType("uint32_t")
         public int refreshRate() { return VkDisplayModeParametersKHR.nrefreshRate(address()); }
 
-        /** Copies the specified {@link VkExtent2D} to the {@code visibleRegion} field. */
+        /** Copies the specified {@link VkExtent2D} to the {@link VkDisplayModeParametersKHR#visibleRegion} field. */
         public VkDisplayModeParametersKHR.Buffer visibleRegion(VkExtent2D value) { VkDisplayModeParametersKHR.nvisibleRegion(address(), value); return this; }
-        /** Passes the {@code visibleRegion} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkDisplayModeParametersKHR#visibleRegion} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkDisplayModeParametersKHR.Buffer visibleRegion(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(visibleRegion()); return this; }
-        /** Sets the specified value to the {@code refreshRate} field. */
+        /** Sets the specified value to the {@link VkDisplayModeParametersKHR#refreshRate} field. */
         public VkDisplayModeParametersKHR.Buffer refreshRate(@NativeType("uint32_t") int value) { VkDisplayModeParametersKHR.nrefreshRate(address(), value); return this; }
 
     }

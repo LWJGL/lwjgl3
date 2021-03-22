@@ -23,21 +23,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>Typically you'll want to build a matrix of this information. However, we keep separate scaling/translation/rotation values to make it easier to process
  * and optimize UV transformations internally.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code mTranslation} &ndash; Translation on the u and v axes. The default value is (0|0).</li>
- * <li>{@code mScaling} &ndash; Scaling on the u and v axes. The default value is (1|1).</li>
- * <li>{@code mRotation} &ndash; Rotation - in counter-clockwise direction. The rotation angle is specified in radians. The rotation center is 0.5f|0.5f. The default value 0.f.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiUVTransform {
- *     {@link AIVector2D struct aiVector2D} mTranslation;
- *     {@link AIVector2D struct aiVector2D} mScaling;
- *     float mRotation;
+ *     {@link AIVector2D struct aiVector2D} {@link #mTranslation};
+ *     {@link AIVector2D struct aiVector2D} {@link #mScaling};
+ *     float {@link #mRotation};
  * }</code></pre>
  */
 @NativeType("struct aiUVTransform")
@@ -83,13 +75,13 @@ public class AIUVTransform extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link AIVector2D} view of the {@code mTranslation} field. */
+    /** Translation on the u and v axes. The default value is (0|0). */
     @NativeType("struct aiVector2D")
     public AIVector2D mTranslation() { return nmTranslation(address()); }
-    /** Returns a {@link AIVector2D} view of the {@code mScaling} field. */
+    /** Scaling on the u and v axes. The default value is (1|1). */
     @NativeType("struct aiVector2D")
     public AIVector2D mScaling() { return nmScaling(address()); }
-    /** Returns the value of the {@code mRotation} field. */
+    /** Rotation - in counter-clockwise direction. The rotation angle is specified in radians. The rotation center is 0.5f|0.5f. The default value 0.f. */
     public float mRotation() { return nmRotation(address()); }
 
     // -----------------------------------
@@ -280,13 +272,13 @@ public class AIUVTransform extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link AIVector2D} view of the {@code mTranslation} field. */
+        /** @return a {@link AIVector2D} view of the {@link AIUVTransform#mTranslation} field. */
         @NativeType("struct aiVector2D")
         public AIVector2D mTranslation() { return AIUVTransform.nmTranslation(address()); }
-        /** Returns a {@link AIVector2D} view of the {@code mScaling} field. */
+        /** @return a {@link AIVector2D} view of the {@link AIUVTransform#mScaling} field. */
         @NativeType("struct aiVector2D")
         public AIVector2D mScaling() { return AIUVTransform.nmScaling(address()); }
-        /** Returns the value of the {@code mRotation} field. */
+        /** @return the value of the {@link AIUVTransform#mRotation} field. */
         public float mRotation() { return AIUVTransform.nmRotation(address()); }
 
     }

@@ -30,21 +30,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link EXTHeadlessSurface#vkCreateHeadlessSurfaceEXT CreateHeadlessSurfaceEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkHeadlessSurfaceCreateInfoEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkHeadlessSurfaceCreateFlagsEXT flags;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkHeadlessSurfaceCreateFlagsEXT {@link #flags};
  * }</code></pre>
  */
 public class VkHeadlessSurfaceCreateInfoEXT extends Struct implements NativeResource {
@@ -89,21 +81,21 @@ public class VkHeadlessSurfaceCreateInfoEXT extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkHeadlessSurfaceCreateFlagsEXT")
     public int flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkHeadlessSurfaceCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkHeadlessSurfaceCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkHeadlessSurfaceCreateInfoEXT flags(@NativeType("VkHeadlessSurfaceCreateFlagsEXT") int value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -326,21 +318,21 @@ public class VkHeadlessSurfaceCreateInfoEXT extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkHeadlessSurfaceCreateInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkHeadlessSurfaceCreateInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkHeadlessSurfaceCreateInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkHeadlessSurfaceCreateInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkHeadlessSurfaceCreateInfoEXT#flags} field. */
         @NativeType("VkHeadlessSurfaceCreateFlagsEXT")
         public int flags() { return VkHeadlessSurfaceCreateInfoEXT.nflags(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkHeadlessSurfaceCreateInfoEXT#sType} field. */
         public VkHeadlessSurfaceCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkHeadlessSurfaceCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkHeadlessSurfaceCreateInfoEXT#pNext} field. */
         public VkHeadlessSurfaceCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkHeadlessSurfaceCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkHeadlessSurfaceCreateInfoEXT#flags} field. */
         public VkHeadlessSurfaceCreateInfoEXT.Buffer flags(@NativeType("VkHeadlessSurfaceCreateFlagsEXT") int value) { VkHeadlessSurfaceCreateInfoEXT.nflags(address(), value); return this; }
 
     }

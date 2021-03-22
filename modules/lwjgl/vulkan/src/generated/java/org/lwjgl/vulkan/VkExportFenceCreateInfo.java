@@ -31,21 +31,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalFenceHandleTypeFlagBits} values</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code handleTypes} &ndash; a bitmask of {@code VkExternalFenceHandleTypeFlagBits} specifying one or more fence handle types the application <b>can</b> export from the resulting fence. The application <b>can</b> request multiple handle types for the same fence.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkExportFenceCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkExternalFenceHandleTypeFlags handleTypes;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkExternalFenceHandleTypeFlags {@link #handleTypes};
  * }</code></pre>
  */
 public class VkExportFenceCreateInfo extends Struct implements NativeResource {
@@ -90,21 +82,21 @@ public class VkExportFenceCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code handleTypes} field. */
+    /** a bitmask of {@code VkExternalFenceHandleTypeFlagBits} specifying one or more fence handle types the application <b>can</b> export from the resulting fence. The application <b>can</b> request multiple handle types for the same fence. */
     @NativeType("VkExternalFenceHandleTypeFlags")
     public int handleTypes() { return nhandleTypes(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkExportFenceCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkExportFenceCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code handleTypes} field. */
+    /** Sets the specified value to the {@link #handleTypes} field. */
     public VkExportFenceCreateInfo handleTypes(@NativeType("VkExternalFenceHandleTypeFlags") int value) { nhandleTypes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,21 +319,21 @@ public class VkExportFenceCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkExportFenceCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkExportFenceCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkExportFenceCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkExportFenceCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code handleTypes} field. */
+        /** @return the value of the {@link VkExportFenceCreateInfo#handleTypes} field. */
         @NativeType("VkExternalFenceHandleTypeFlags")
         public int handleTypes() { return VkExportFenceCreateInfo.nhandleTypes(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkExportFenceCreateInfo#sType} field. */
         public VkExportFenceCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkExportFenceCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkExportFenceCreateInfo#pNext} field. */
         public VkExportFenceCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkExportFenceCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code handleTypes} field. */
+        /** Sets the specified value to the {@link VkExportFenceCreateInfo#handleTypes} field. */
         public VkExportFenceCreateInfo.Buffer handleTypes(@NativeType("VkExternalFenceHandleTypeFlags") int value) { VkExportFenceCreateInfo.nhandleTypes(address(), value); return this; }
 
     }

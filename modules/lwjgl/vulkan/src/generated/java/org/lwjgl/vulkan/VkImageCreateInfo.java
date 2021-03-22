@@ -216,45 +216,25 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkExtent3D}, {@link VK10#vkCreateImage CreateImage}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkImageCreateFlagBits} describing additional parameters of the image.</li>
- * <li>{@code imageType} &ndash; a {@code VkImageType} value specifying the basic dimensionality of the image. Layers in array textures do not count as a dimension for the purposes of the image type.</li>
- * <li>{@code format} &ndash; a {@code VkFormat} describing the format and type of the texel blocks that will be contained in the image.</li>
- * <li>{@code extent} &ndash; a {@link VkExtent3D} describing the number of data elements in each dimension of the base level.</li>
- * <li>{@code mipLevels} &ndash; describes the number of levels of detail available for minified sampling of the image.</li>
- * <li>{@code arrayLayers} &ndash; the number of layers in the image.</li>
- * <li>{@code samples} &ndash; a {@code VkSampleCountFlagBits} specifying the number of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-multisampling">samples per texel</a>.</li>
- * <li>{@code tiling} &ndash; a {@code VkImageTiling} value specifying the tiling arrangement of the texel blocks in memory.</li>
- * <li>{@code usage} &ndash; a bitmask of {@code VkImageUsageFlagBits} describing the intended usage of the image.</li>
- * <li>{@code sharingMode} &ndash; a {@code VkSharingMode} value specifying the sharing mode of the image when it will be accessed by multiple queue families.</li>
- * <li>{@code queueFamilyIndexCount} &ndash; the number of entries in the {@code pQueueFamilyIndices} array.</li>
- * <li>{@code pQueueFamilyIndices} &ndash; a list of queue families that will access this image (ignored if {@code sharingMode} is not {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}).</li>
- * <li>{@code initialLayout} &ndash; a {@code VkImageLayout} value specifying the initial {@code VkImageLayout} of all image subresources of the image. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-layouts">Image Layouts</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImageCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkImageCreateFlags flags;
- *     VkImageType imageType;
- *     VkFormat format;
- *     {@link VkExtent3D VkExtent3D} extent;
- *     uint32_t mipLevels;
- *     uint32_t arrayLayers;
- *     VkSampleCountFlagBits samples;
- *     VkImageTiling tiling;
- *     VkImageUsageFlags usage;
- *     VkSharingMode sharingMode;
- *     uint32_t queueFamilyIndexCount;
- *     uint32_t const * pQueueFamilyIndices;
- *     VkImageLayout initialLayout;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkImageCreateFlags {@link #flags};
+ *     VkImageType {@link #imageType};
+ *     VkFormat {@link #format};
+ *     {@link VkExtent3D VkExtent3D} {@link #extent};
+ *     uint32_t {@link #mipLevels};
+ *     uint32_t {@link #arrayLayers};
+ *     VkSampleCountFlagBits {@link #samples};
+ *     VkImageTiling {@link #tiling};
+ *     VkImageUsageFlags {@link #usage};
+ *     VkSharingMode {@link #sharingMode};
+ *     uint32_t {@link #queueFamilyIndexCount};
+ *     uint32_t const * {@link #pQueueFamilyIndices};
+ *     VkImageLayout {@link #initialLayout};
  * }</code></pre>
  */
 public class VkImageCreateInfo extends Struct implements NativeResource {
@@ -335,81 +315,81 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkImageCreateFlagBits} describing additional parameters of the image. */
     @NativeType("VkImageCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code imageType} field. */
+    /** a {@code VkImageType} value specifying the basic dimensionality of the image. Layers in array textures do not count as a dimension for the purposes of the image type. */
     @NativeType("VkImageType")
     public int imageType() { return nimageType(address()); }
-    /** Returns the value of the {@code format} field. */
+    /** a {@code VkFormat} describing the format and type of the texel blocks that will be contained in the image. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** Returns a {@link VkExtent3D} view of the {@code extent} field. */
+    /** a {@link VkExtent3D} describing the number of data elements in each dimension of the base level. */
     public VkExtent3D extent() { return nextent(address()); }
-    /** Returns the value of the {@code mipLevels} field. */
+    /** describes the number of levels of detail available for minified sampling of the image. */
     @NativeType("uint32_t")
     public int mipLevels() { return nmipLevels(address()); }
-    /** Returns the value of the {@code arrayLayers} field. */
+    /** the number of layers in the image. */
     @NativeType("uint32_t")
     public int arrayLayers() { return narrayLayers(address()); }
-    /** Returns the value of the {@code samples} field. */
+    /** a {@code VkSampleCountFlagBits} specifying the number of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-multisampling">samples per texel</a>. */
     @NativeType("VkSampleCountFlagBits")
     public int samples() { return nsamples(address()); }
-    /** Returns the value of the {@code tiling} field. */
+    /** a {@code VkImageTiling} value specifying the tiling arrangement of the texel blocks in memory. */
     @NativeType("VkImageTiling")
     public int tiling() { return ntiling(address()); }
-    /** Returns the value of the {@code usage} field. */
+    /** a bitmask of {@code VkImageUsageFlagBits} describing the intended usage of the image. */
     @NativeType("VkImageUsageFlags")
     public int usage() { return nusage(address()); }
-    /** Returns the value of the {@code sharingMode} field. */
+    /** a {@code VkSharingMode} value specifying the sharing mode of the image when it will be accessed by multiple queue families. */
     @NativeType("VkSharingMode")
     public int sharingMode() { return nsharingMode(address()); }
-    /** Returns the value of the {@code queueFamilyIndexCount} field. */
+    /** the number of entries in the {@code pQueueFamilyIndices} array. */
     @NativeType("uint32_t")
     public int queueFamilyIndexCount() { return nqueueFamilyIndexCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pQueueFamilyIndices} field. */
+    /** a list of queue families that will access this image (ignored if {@code sharingMode} is not {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}). */
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pQueueFamilyIndices() { return npQueueFamilyIndices(address()); }
-    /** Returns the value of the {@code initialLayout} field. */
+    /** a {@code VkImageLayout} value specifying the initial {@code VkImageLayout} of all image subresources of the image. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-layouts">Image Layouts</a>. */
     @NativeType("VkImageLayout")
     public int initialLayout() { return ninitialLayout(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkImageCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkImageCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkImageCreateInfo flags(@NativeType("VkImageCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code imageType} field. */
+    /** Sets the specified value to the {@link #imageType} field. */
     public VkImageCreateInfo imageType(@NativeType("VkImageType") int value) { nimageType(address(), value); return this; }
-    /** Sets the specified value to the {@code format} field. */
+    /** Sets the specified value to the {@link #format} field. */
     public VkImageCreateInfo format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
-    /** Copies the specified {@link VkExtent3D} to the {@code extent} field. */
+    /** Copies the specified {@link VkExtent3D} to the {@link #extent} field. */
     public VkImageCreateInfo extent(VkExtent3D value) { nextent(address(), value); return this; }
-    /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #extent} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageCreateInfo extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
-    /** Sets the specified value to the {@code mipLevels} field. */
+    /** Sets the specified value to the {@link #mipLevels} field. */
     public VkImageCreateInfo mipLevels(@NativeType("uint32_t") int value) { nmipLevels(address(), value); return this; }
-    /** Sets the specified value to the {@code arrayLayers} field. */
+    /** Sets the specified value to the {@link #arrayLayers} field. */
     public VkImageCreateInfo arrayLayers(@NativeType("uint32_t") int value) { narrayLayers(address(), value); return this; }
-    /** Sets the specified value to the {@code samples} field. */
+    /** Sets the specified value to the {@link #samples} field. */
     public VkImageCreateInfo samples(@NativeType("VkSampleCountFlagBits") int value) { nsamples(address(), value); return this; }
-    /** Sets the specified value to the {@code tiling} field. */
+    /** Sets the specified value to the {@link #tiling} field. */
     public VkImageCreateInfo tiling(@NativeType("VkImageTiling") int value) { ntiling(address(), value); return this; }
-    /** Sets the specified value to the {@code usage} field. */
+    /** Sets the specified value to the {@link #usage} field. */
     public VkImageCreateInfo usage(@NativeType("VkImageUsageFlags") int value) { nusage(address(), value); return this; }
-    /** Sets the specified value to the {@code sharingMode} field. */
+    /** Sets the specified value to the {@link #sharingMode} field. */
     public VkImageCreateInfo sharingMode(@NativeType("VkSharingMode") int value) { nsharingMode(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pQueueFamilyIndices} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pQueueFamilyIndices} field. */
     public VkImageCreateInfo pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npQueueFamilyIndices(address(), value); return this; }
-    /** Sets the specified value to the {@code initialLayout} field. */
+    /** Sets the specified value to the {@link #initialLayout} field. */
     public VkImageCreateInfo initialLayout(@NativeType("VkImageLayout") int value) { ninitialLayout(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -725,81 +705,81 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkImageCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkImageCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkImageCreateInfo#flags} field. */
         @NativeType("VkImageCreateFlags")
         public int flags() { return VkImageCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code imageType} field. */
+        /** @return the value of the {@link VkImageCreateInfo#imageType} field. */
         @NativeType("VkImageType")
         public int imageType() { return VkImageCreateInfo.nimageType(address()); }
-        /** Returns the value of the {@code format} field. */
+        /** @return the value of the {@link VkImageCreateInfo#format} field. */
         @NativeType("VkFormat")
         public int format() { return VkImageCreateInfo.nformat(address()); }
-        /** Returns a {@link VkExtent3D} view of the {@code extent} field. */
+        /** @return a {@link VkExtent3D} view of the {@link VkImageCreateInfo#extent} field. */
         public VkExtent3D extent() { return VkImageCreateInfo.nextent(address()); }
-        /** Returns the value of the {@code mipLevels} field. */
+        /** @return the value of the {@link VkImageCreateInfo#mipLevels} field. */
         @NativeType("uint32_t")
         public int mipLevels() { return VkImageCreateInfo.nmipLevels(address()); }
-        /** Returns the value of the {@code arrayLayers} field. */
+        /** @return the value of the {@link VkImageCreateInfo#arrayLayers} field. */
         @NativeType("uint32_t")
         public int arrayLayers() { return VkImageCreateInfo.narrayLayers(address()); }
-        /** Returns the value of the {@code samples} field. */
+        /** @return the value of the {@link VkImageCreateInfo#samples} field. */
         @NativeType("VkSampleCountFlagBits")
         public int samples() { return VkImageCreateInfo.nsamples(address()); }
-        /** Returns the value of the {@code tiling} field. */
+        /** @return the value of the {@link VkImageCreateInfo#tiling} field. */
         @NativeType("VkImageTiling")
         public int tiling() { return VkImageCreateInfo.ntiling(address()); }
-        /** Returns the value of the {@code usage} field. */
+        /** @return the value of the {@link VkImageCreateInfo#usage} field. */
         @NativeType("VkImageUsageFlags")
         public int usage() { return VkImageCreateInfo.nusage(address()); }
-        /** Returns the value of the {@code sharingMode} field. */
+        /** @return the value of the {@link VkImageCreateInfo#sharingMode} field. */
         @NativeType("VkSharingMode")
         public int sharingMode() { return VkImageCreateInfo.nsharingMode(address()); }
-        /** Returns the value of the {@code queueFamilyIndexCount} field. */
+        /** @return the value of the {@link VkImageCreateInfo#queueFamilyIndexCount} field. */
         @NativeType("uint32_t")
         public int queueFamilyIndexCount() { return VkImageCreateInfo.nqueueFamilyIndexCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pQueueFamilyIndices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkImageCreateInfo#pQueueFamilyIndices} field. */
         @Nullable
         @NativeType("uint32_t const *")
         public IntBuffer pQueueFamilyIndices() { return VkImageCreateInfo.npQueueFamilyIndices(address()); }
-        /** Returns the value of the {@code initialLayout} field. */
+        /** @return the value of the {@link VkImageCreateInfo#initialLayout} field. */
         @NativeType("VkImageLayout")
         public int initialLayout() { return VkImageCreateInfo.ninitialLayout(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkImageCreateInfo#sType} field. */
         public VkImageCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkImageCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkImageCreateInfo#pNext} field. */
         public VkImageCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkImageCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkImageCreateInfo#flags} field. */
         public VkImageCreateInfo.Buffer flags(@NativeType("VkImageCreateFlags") int value) { VkImageCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code imageType} field. */
+        /** Sets the specified value to the {@link VkImageCreateInfo#imageType} field. */
         public VkImageCreateInfo.Buffer imageType(@NativeType("VkImageType") int value) { VkImageCreateInfo.nimageType(address(), value); return this; }
-        /** Sets the specified value to the {@code format} field. */
+        /** Sets the specified value to the {@link VkImageCreateInfo#format} field. */
         public VkImageCreateInfo.Buffer format(@NativeType("VkFormat") int value) { VkImageCreateInfo.nformat(address(), value); return this; }
-        /** Copies the specified {@link VkExtent3D} to the {@code extent} field. */
+        /** Copies the specified {@link VkExtent3D} to the {@link VkImageCreateInfo#extent} field. */
         public VkImageCreateInfo.Buffer extent(VkExtent3D value) { VkImageCreateInfo.nextent(address(), value); return this; }
-        /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkImageCreateInfo#extent} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageCreateInfo.Buffer extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
-        /** Sets the specified value to the {@code mipLevels} field. */
+        /** Sets the specified value to the {@link VkImageCreateInfo#mipLevels} field. */
         public VkImageCreateInfo.Buffer mipLevels(@NativeType("uint32_t") int value) { VkImageCreateInfo.nmipLevels(address(), value); return this; }
-        /** Sets the specified value to the {@code arrayLayers} field. */
+        /** Sets the specified value to the {@link VkImageCreateInfo#arrayLayers} field. */
         public VkImageCreateInfo.Buffer arrayLayers(@NativeType("uint32_t") int value) { VkImageCreateInfo.narrayLayers(address(), value); return this; }
-        /** Sets the specified value to the {@code samples} field. */
+        /** Sets the specified value to the {@link VkImageCreateInfo#samples} field. */
         public VkImageCreateInfo.Buffer samples(@NativeType("VkSampleCountFlagBits") int value) { VkImageCreateInfo.nsamples(address(), value); return this; }
-        /** Sets the specified value to the {@code tiling} field. */
+        /** Sets the specified value to the {@link VkImageCreateInfo#tiling} field. */
         public VkImageCreateInfo.Buffer tiling(@NativeType("VkImageTiling") int value) { VkImageCreateInfo.ntiling(address(), value); return this; }
-        /** Sets the specified value to the {@code usage} field. */
+        /** Sets the specified value to the {@link VkImageCreateInfo#usage} field. */
         public VkImageCreateInfo.Buffer usage(@NativeType("VkImageUsageFlags") int value) { VkImageCreateInfo.nusage(address(), value); return this; }
-        /** Sets the specified value to the {@code sharingMode} field. */
+        /** Sets the specified value to the {@link VkImageCreateInfo#sharingMode} field. */
         public VkImageCreateInfo.Buffer sharingMode(@NativeType("VkSharingMode") int value) { VkImageCreateInfo.nsharingMode(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pQueueFamilyIndices} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkImageCreateInfo#pQueueFamilyIndices} field. */
         public VkImageCreateInfo.Buffer pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkImageCreateInfo.npQueueFamilyIndices(address(), value); return this; }
-        /** Sets the specified value to the {@code initialLayout} field. */
+        /** Sets the specified value to the {@link VkImageCreateInfo#initialLayout} field. */
         public VkImageCreateInfo.Buffer initialLayout(@NativeType("VkImageLayout") int value) { VkImageCreateInfo.ninitialLayout(address(), value); return this; }
 
     }

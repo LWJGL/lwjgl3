@@ -16,13 +16,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code lexicalContainer} &ndash; generally same as {@code semanticContainer} but can be different in cases like out-of-line C++ member functions</li>
- * <li>{@code isImplicit} &ndash; whether the declaration exists in code or was created implicitly by the compiler, e.g. implicit Objective-C methods for properties</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -31,12 +24,12 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link CXCursor CXCursor} cursor;
  *     {@link CXIdxLoc CXIdxLoc} loc;
  *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * semanticContainer;
- *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * lexicalContainer;
+ *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * {@link #lexicalContainer};
  *     int isRedeclaration;
  *     int isDefinition;
  *     int isContainer;
  *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * declAsContainer;
- *     int isImplicit;
+ *     int {@link #isImplicit};
  *     {@link CXIdxAttrInfo CXIdxAttrInfo} const * const * attributes;
  *     unsigned numAttributes;
  *     unsigned flags;
@@ -114,41 +107,41 @@ public class CXIdxDeclInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code entityInfo} field. */
+    /** @return a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code entityInfo} field. */
     @NativeType("CXIdxEntityInfo const *")
     public CXIdxEntityInfo entityInfo() { return nentityInfo(address()); }
-    /** Returns a {@link CXCursor} view of the {@code cursor} field. */
+    /** @return a {@link CXCursor} view of the {@code cursor} field. */
     public CXCursor cursor() { return ncursor(address()); }
-    /** Returns a {@link CXIdxLoc} view of the {@code loc} field. */
+    /** @return a {@link CXIdxLoc} view of the {@code loc} field. */
     public CXIdxLoc loc() { return nloc(address()); }
-    /** Returns a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code semanticContainer} field. */
+    /** @return a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code semanticContainer} field. */
     @NativeType("CXIdxContainerInfo const *")
     public CXIdxContainerInfo semanticContainer() { return nsemanticContainer(address()); }
-    /** Returns a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code lexicalContainer} field. */
+    /** generally same as {@code semanticContainer} but can be different in cases like out-of-line C++ member functions */
     @NativeType("CXIdxContainerInfo const *")
     public CXIdxContainerInfo lexicalContainer() { return nlexicalContainer(address()); }
-    /** Returns the value of the {@code isRedeclaration} field. */
+    /** @return the value of the {@code isRedeclaration} field. */
     @NativeType("int")
     public boolean isRedeclaration() { return nisRedeclaration(address()) != 0; }
-    /** Returns the value of the {@code isDefinition} field. */
+    /** @return the value of the {@code isDefinition} field. */
     @NativeType("int")
     public boolean isDefinition() { return nisDefinition(address()) != 0; }
-    /** Returns the value of the {@code isContainer} field. */
+    /** @return the value of the {@code isContainer} field. */
     @NativeType("int")
     public boolean isContainer() { return nisContainer(address()) != 0; }
-    /** Returns a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code declAsContainer} field. */
+    /** @return a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code declAsContainer} field. */
     @NativeType("CXIdxContainerInfo const *")
     public CXIdxContainerInfo declAsContainer() { return ndeclAsContainer(address()); }
-    /** Returns the value of the {@code isImplicit} field. */
+    /** whether the declaration exists in code or was created implicitly by the compiler, e.g. implicit Objective-C methods for properties */
     @NativeType("int")
     public boolean isImplicit() { return nisImplicit(address()) != 0; }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code attributes} field. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code attributes} field. */
     @NativeType("CXIdxAttrInfo const * const *")
     public PointerBuffer attributes() { return nattributes(address()); }
-    /** Returns the value of the {@code numAttributes} field. */
+    /** @return the value of the {@code numAttributes} field. */
     @NativeType("unsigned")
     public int numAttributes() { return nnumAttributes(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("unsigned")
     public int flags() { return nflags(address()); }
 
@@ -360,41 +353,41 @@ public class CXIdxDeclInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code entityInfo} field. */
+        /** @return a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code entityInfo} field. */
         @NativeType("CXIdxEntityInfo const *")
         public CXIdxEntityInfo entityInfo() { return CXIdxDeclInfo.nentityInfo(address()); }
-        /** Returns a {@link CXCursor} view of the {@code cursor} field. */
+        /** @return a {@link CXCursor} view of the {@code cursor} field. */
         public CXCursor cursor() { return CXIdxDeclInfo.ncursor(address()); }
-        /** Returns a {@link CXIdxLoc} view of the {@code loc} field. */
+        /** @return a {@link CXIdxLoc} view of the {@code loc} field. */
         public CXIdxLoc loc() { return CXIdxDeclInfo.nloc(address()); }
-        /** Returns a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code semanticContainer} field. */
+        /** @return a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code semanticContainer} field. */
         @NativeType("CXIdxContainerInfo const *")
         public CXIdxContainerInfo semanticContainer() { return CXIdxDeclInfo.nsemanticContainer(address()); }
-        /** Returns a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code lexicalContainer} field. */
+        /** @return a {@link CXIdxContainerInfo} view of the struct pointed to by the {@link CXIdxDeclInfo#lexicalContainer} field. */
         @NativeType("CXIdxContainerInfo const *")
         public CXIdxContainerInfo lexicalContainer() { return CXIdxDeclInfo.nlexicalContainer(address()); }
-        /** Returns the value of the {@code isRedeclaration} field. */
+        /** @return the value of the {@code isRedeclaration} field. */
         @NativeType("int")
         public boolean isRedeclaration() { return CXIdxDeclInfo.nisRedeclaration(address()) != 0; }
-        /** Returns the value of the {@code isDefinition} field. */
+        /** @return the value of the {@code isDefinition} field. */
         @NativeType("int")
         public boolean isDefinition() { return CXIdxDeclInfo.nisDefinition(address()) != 0; }
-        /** Returns the value of the {@code isContainer} field. */
+        /** @return the value of the {@code isContainer} field. */
         @NativeType("int")
         public boolean isContainer() { return CXIdxDeclInfo.nisContainer(address()) != 0; }
-        /** Returns a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code declAsContainer} field. */
+        /** @return a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code declAsContainer} field. */
         @NativeType("CXIdxContainerInfo const *")
         public CXIdxContainerInfo declAsContainer() { return CXIdxDeclInfo.ndeclAsContainer(address()); }
-        /** Returns the value of the {@code isImplicit} field. */
+        /** @return the value of the {@link CXIdxDeclInfo#isImplicit} field. */
         @NativeType("int")
         public boolean isImplicit() { return CXIdxDeclInfo.nisImplicit(address()) != 0; }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code attributes} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code attributes} field. */
         @NativeType("CXIdxAttrInfo const * const *")
         public PointerBuffer attributes() { return CXIdxDeclInfo.nattributes(address()); }
-        /** Returns the value of the {@code numAttributes} field. */
+        /** @return the value of the {@code numAttributes} field. */
         @NativeType("unsigned")
         public int numAttributes() { return CXIdxDeclInfo.nnumAttributes(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("unsigned")
         public int flags() { return CXIdxDeclInfo.nflags(address()); }
 

@@ -67,35 +67,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkComponentMapping}, {@link VK11#vkCreateSamplerYcbcrConversion CreateSamplerYcbcrConversion}, {@link KHRSamplerYcbcrConversion#vkCreateSamplerYcbcrConversionKHR CreateSamplerYcbcrConversionKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code format} &ndash; the format of the image from which color information will be retrieved.</li>
- * <li>{@code ycbcrModel} &ndash; describes the color matrix for conversion between color models.</li>
- * <li>{@code ycbcrRange} &ndash; describes whether the encoded values have headroom and foot room, or whether the encoding uses the full numerical range.</li>
- * <li>{@code components} &ndash; applies a <em>swizzle</em> based on {@code VkComponentSwizzle} enums prior to range expansion and color model conversion.</li>
- * <li>{@code xChromaOffset} &ndash; describes the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-chroma-reconstruction">sample location</a> associated with downsampled chroma channels in the x dimension. {@code xChromaOffset} has no effect for formats in which chroma channels are not downsampled horizontally.</li>
- * <li>{@code yChromaOffset} &ndash; describes the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-chroma-reconstruction">sample location</a> associated with downsampled chroma channels in the y dimension. {@code yChromaOffset} has no effect for formats in which the chroma channels are not downsampled vertically.</li>
- * <li>{@code chromaFilter} &ndash; the filter for chroma reconstruction.</li>
- * <li>{@code forceExplicitReconstruction} &ndash; <b>can</b> be used to ensure that reconstruction is done explicitly, if supported.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSamplerYcbcrConversionCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkFormat format;
- *     VkSamplerYcbcrModelConversion ycbcrModel;
- *     VkSamplerYcbcrRange ycbcrRange;
- *     {@link VkComponentMapping VkComponentMapping} components;
- *     VkChromaLocation xChromaOffset;
- *     VkChromaLocation yChromaOffset;
- *     VkFilter chromaFilter;
- *     VkBool32 forceExplicitReconstruction;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkFormat {@link #format};
+ *     VkSamplerYcbcrModelConversion {@link #ycbcrModel};
+ *     VkSamplerYcbcrRange {@link #ycbcrRange};
+ *     {@link VkComponentMapping VkComponentMapping} {@link #components};
+ *     VkChromaLocation {@link #xChromaOffset};
+ *     VkChromaLocation {@link #yChromaOffset};
+ *     VkFilter {@link #chromaFilter};
+ *     VkBool32 {@link #forceExplicitReconstruction};
  * }</code></pre>
  */
 public class VkSamplerYcbcrConversionCreateInfo extends Struct implements NativeResource {
@@ -161,57 +146,57 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code format} field. */
+    /** the format of the image from which color information will be retrieved. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** Returns the value of the {@code ycbcrModel} field. */
+    /** describes the color matrix for conversion between color models. */
     @NativeType("VkSamplerYcbcrModelConversion")
     public int ycbcrModel() { return nycbcrModel(address()); }
-    /** Returns the value of the {@code ycbcrRange} field. */
+    /** describes whether the encoded values have headroom and foot room, or whether the encoding uses the full numerical range. */
     @NativeType("VkSamplerYcbcrRange")
     public int ycbcrRange() { return nycbcrRange(address()); }
-    /** Returns a {@link VkComponentMapping} view of the {@code components} field. */
+    /** applies a <em>swizzle</em> based on {@code VkComponentSwizzle} enums prior to range expansion and color model conversion. */
     public VkComponentMapping components() { return ncomponents(address()); }
-    /** Returns the value of the {@code xChromaOffset} field. */
+    /** describes the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-chroma-reconstruction">sample location</a> associated with downsampled chroma channels in the x dimension. {@code xChromaOffset} has no effect for formats in which chroma channels are not downsampled horizontally. */
     @NativeType("VkChromaLocation")
     public int xChromaOffset() { return nxChromaOffset(address()); }
-    /** Returns the value of the {@code yChromaOffset} field. */
+    /** describes the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-chroma-reconstruction">sample location</a> associated with downsampled chroma channels in the y dimension. {@code yChromaOffset} has no effect for formats in which the chroma channels are not downsampled vertically. */
     @NativeType("VkChromaLocation")
     public int yChromaOffset() { return nyChromaOffset(address()); }
-    /** Returns the value of the {@code chromaFilter} field. */
+    /** the filter for chroma reconstruction. */
     @NativeType("VkFilter")
     public int chromaFilter() { return nchromaFilter(address()); }
-    /** Returns the value of the {@code forceExplicitReconstruction} field. */
+    /** <b>can</b> be used to ensure that reconstruction is done explicitly, if supported. */
     @NativeType("VkBool32")
     public boolean forceExplicitReconstruction() { return nforceExplicitReconstruction(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSamplerYcbcrConversionCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSamplerYcbcrConversionCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code format} field. */
+    /** Sets the specified value to the {@link #format} field. */
     public VkSamplerYcbcrConversionCreateInfo format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
-    /** Sets the specified value to the {@code ycbcrModel} field. */
+    /** Sets the specified value to the {@link #ycbcrModel} field. */
     public VkSamplerYcbcrConversionCreateInfo ycbcrModel(@NativeType("VkSamplerYcbcrModelConversion") int value) { nycbcrModel(address(), value); return this; }
-    /** Sets the specified value to the {@code ycbcrRange} field. */
+    /** Sets the specified value to the {@link #ycbcrRange} field. */
     public VkSamplerYcbcrConversionCreateInfo ycbcrRange(@NativeType("VkSamplerYcbcrRange") int value) { nycbcrRange(address(), value); return this; }
-    /** Copies the specified {@link VkComponentMapping} to the {@code components} field. */
+    /** Copies the specified {@link VkComponentMapping} to the {@link #components} field. */
     public VkSamplerYcbcrConversionCreateInfo components(VkComponentMapping value) { ncomponents(address(), value); return this; }
-    /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #components} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkSamplerYcbcrConversionCreateInfo components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
-    /** Sets the specified value to the {@code xChromaOffset} field. */
+    /** Sets the specified value to the {@link #xChromaOffset} field. */
     public VkSamplerYcbcrConversionCreateInfo xChromaOffset(@NativeType("VkChromaLocation") int value) { nxChromaOffset(address(), value); return this; }
-    /** Sets the specified value to the {@code yChromaOffset} field. */
+    /** Sets the specified value to the {@link #yChromaOffset} field. */
     public VkSamplerYcbcrConversionCreateInfo yChromaOffset(@NativeType("VkChromaLocation") int value) { nyChromaOffset(address(), value); return this; }
-    /** Sets the specified value to the {@code chromaFilter} field. */
+    /** Sets the specified value to the {@link #chromaFilter} field. */
     public VkSamplerYcbcrConversionCreateInfo chromaFilter(@NativeType("VkFilter") int value) { nchromaFilter(address(), value); return this; }
-    /** Sets the specified value to the {@code forceExplicitReconstruction} field. */
+    /** Sets the specified value to the {@link #forceExplicitReconstruction} field. */
     public VkSamplerYcbcrConversionCreateInfo forceExplicitReconstruction(@NativeType("VkBool32") boolean value) { nforceExplicitReconstruction(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -476,57 +461,57 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSamplerYcbcrConversionCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSamplerYcbcrConversionCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSamplerYcbcrConversionCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSamplerYcbcrConversionCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code format} field. */
+        /** @return the value of the {@link VkSamplerYcbcrConversionCreateInfo#format} field. */
         @NativeType("VkFormat")
         public int format() { return VkSamplerYcbcrConversionCreateInfo.nformat(address()); }
-        /** Returns the value of the {@code ycbcrModel} field. */
+        /** @return the value of the {@link VkSamplerYcbcrConversionCreateInfo#ycbcrModel} field. */
         @NativeType("VkSamplerYcbcrModelConversion")
         public int ycbcrModel() { return VkSamplerYcbcrConversionCreateInfo.nycbcrModel(address()); }
-        /** Returns the value of the {@code ycbcrRange} field. */
+        /** @return the value of the {@link VkSamplerYcbcrConversionCreateInfo#ycbcrRange} field. */
         @NativeType("VkSamplerYcbcrRange")
         public int ycbcrRange() { return VkSamplerYcbcrConversionCreateInfo.nycbcrRange(address()); }
-        /** Returns a {@link VkComponentMapping} view of the {@code components} field. */
+        /** @return a {@link VkComponentMapping} view of the {@link VkSamplerYcbcrConversionCreateInfo#components} field. */
         public VkComponentMapping components() { return VkSamplerYcbcrConversionCreateInfo.ncomponents(address()); }
-        /** Returns the value of the {@code xChromaOffset} field. */
+        /** @return the value of the {@link VkSamplerYcbcrConversionCreateInfo#xChromaOffset} field. */
         @NativeType("VkChromaLocation")
         public int xChromaOffset() { return VkSamplerYcbcrConversionCreateInfo.nxChromaOffset(address()); }
-        /** Returns the value of the {@code yChromaOffset} field. */
+        /** @return the value of the {@link VkSamplerYcbcrConversionCreateInfo#yChromaOffset} field. */
         @NativeType("VkChromaLocation")
         public int yChromaOffset() { return VkSamplerYcbcrConversionCreateInfo.nyChromaOffset(address()); }
-        /** Returns the value of the {@code chromaFilter} field. */
+        /** @return the value of the {@link VkSamplerYcbcrConversionCreateInfo#chromaFilter} field. */
         @NativeType("VkFilter")
         public int chromaFilter() { return VkSamplerYcbcrConversionCreateInfo.nchromaFilter(address()); }
-        /** Returns the value of the {@code forceExplicitReconstruction} field. */
+        /** @return the value of the {@link VkSamplerYcbcrConversionCreateInfo#forceExplicitReconstruction} field. */
         @NativeType("VkBool32")
         public boolean forceExplicitReconstruction() { return VkSamplerYcbcrConversionCreateInfo.nforceExplicitReconstruction(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#sType} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerYcbcrConversionCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#pNext} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkSamplerYcbcrConversionCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code format} field. */
+        /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#format} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer format(@NativeType("VkFormat") int value) { VkSamplerYcbcrConversionCreateInfo.nformat(address(), value); return this; }
-        /** Sets the specified value to the {@code ycbcrModel} field. */
+        /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#ycbcrModel} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer ycbcrModel(@NativeType("VkSamplerYcbcrModelConversion") int value) { VkSamplerYcbcrConversionCreateInfo.nycbcrModel(address(), value); return this; }
-        /** Sets the specified value to the {@code ycbcrRange} field. */
+        /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#ycbcrRange} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer ycbcrRange(@NativeType("VkSamplerYcbcrRange") int value) { VkSamplerYcbcrConversionCreateInfo.nycbcrRange(address(), value); return this; }
-        /** Copies the specified {@link VkComponentMapping} to the {@code components} field. */
+        /** Copies the specified {@link VkComponentMapping} to the {@link VkSamplerYcbcrConversionCreateInfo#components} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer components(VkComponentMapping value) { VkSamplerYcbcrConversionCreateInfo.ncomponents(address(), value); return this; }
-        /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkSamplerYcbcrConversionCreateInfo#components} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
-        /** Sets the specified value to the {@code xChromaOffset} field. */
+        /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#xChromaOffset} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer xChromaOffset(@NativeType("VkChromaLocation") int value) { VkSamplerYcbcrConversionCreateInfo.nxChromaOffset(address(), value); return this; }
-        /** Sets the specified value to the {@code yChromaOffset} field. */
+        /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#yChromaOffset} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer yChromaOffset(@NativeType("VkChromaLocation") int value) { VkSamplerYcbcrConversionCreateInfo.nyChromaOffset(address(), value); return this; }
-        /** Sets the specified value to the {@code chromaFilter} field. */
+        /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#chromaFilter} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer chromaFilter(@NativeType("VkFilter") int value) { VkSamplerYcbcrConversionCreateInfo.nchromaFilter(address(), value); return this; }
-        /** Sets the specified value to the {@code forceExplicitReconstruction} field. */
+        /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#forceExplicitReconstruction} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer forceExplicitReconstruction(@NativeType("VkBool32") boolean value) { VkSamplerYcbcrConversionCreateInfo.nforceExplicitReconstruction(address(), value ? 1 : 0); return this; }
 
     }

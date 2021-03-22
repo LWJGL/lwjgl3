@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code separateDepthStencilLayouts} &ndash; indicates whether the implementation supports a {@link VkImageMemoryBarrier} for a depth/stencil image with only one of {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} or {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT} set, and whether {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL}, or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL} can be used.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 separateDepthStencilLayouts;
+ *     VkBool32 {@link #separateDepthStencilLayouts};
  * }</code></pre>
  */
 public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures extends Struct 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code separateDepthStencilLayouts} field. */
+    /** indicates whether the implementation supports a {@link VkImageMemoryBarrier} for a depth/stencil image with only one of {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} or {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT} set, and whether {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL}, or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL} can be used. */
     @NativeType("VkBool32")
     public boolean separateDepthStencilLayouts() { return nseparateDepthStencilLayouts(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures extends Struct 
     public VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code separateDepthStencilLayouts} field. */
+    /** Sets the specified value to the {@link #separateDepthStencilLayouts} field. */
     public VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures separateDepthStencilLayouts(@NativeType("VkBool32") boolean value) { nseparateDepthStencilLayouts(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures extends Struct 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.npNext(address()); }
-        /** Returns the value of the {@code separateDepthStencilLayouts} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures#separateDepthStencilLayouts} field. */
         @NativeType("VkBool32")
         public boolean separateDepthStencilLayouts() { return VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.nseparateDepthStencilLayouts(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures extends Struct 
         public VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code separateDepthStencilLayouts} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures#separateDepthStencilLayouts} field. */
         public VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.Buffer separateDepthStencilLayouts(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.nseparateDepthStencilLayouts(address(), value ? 1 : 0); return this; }
 
     }

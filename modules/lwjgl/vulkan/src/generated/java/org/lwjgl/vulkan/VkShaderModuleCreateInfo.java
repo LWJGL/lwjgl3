@@ -48,25 +48,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK10#vkCreateShaderModule CreateShaderModule}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code codeSize} &ndash; the size, in bytes, of the code pointed to by {@code pCode}.</li>
- * <li>{@code pCode} &ndash; points to code that is used to create the shader module</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkShaderModuleCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkShaderModuleCreateFlags flags;
- *     size_t codeSize;
- *     uint32_t const * pCode;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkShaderModuleCreateFlags {@link #flags};
+ *     size_t {@link #codeSize};
+ *     uint32_t const * {@link #pCode};
  * }</code></pre>
  */
 public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
@@ -117,29 +107,29 @@ public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkShaderModuleCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code codeSize} field. */
+    /** the size, in bytes, of the code pointed to by {@code pCode}. */
     @NativeType("size_t")
     public long codeSize() { return ncodeSize(address()); }
-    /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code pCode} field. */
+    /** points to code that is used to create the shader module */
     @NativeType("uint32_t const *")
     public ByteBuffer pCode() { return npCode(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkShaderModuleCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkShaderModuleCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkShaderModuleCreateInfo flags(@NativeType("VkShaderModuleCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code pCode} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pCode} field. */
     public VkShaderModuleCreateInfo pCode(@NativeType("uint32_t const *") ByteBuffer value) { npCode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -393,29 +383,29 @@ public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkShaderModuleCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkShaderModuleCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkShaderModuleCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkShaderModuleCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkShaderModuleCreateInfo#flags} field. */
         @NativeType("VkShaderModuleCreateFlags")
         public int flags() { return VkShaderModuleCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code codeSize} field. */
+        /** @return the value of the {@link VkShaderModuleCreateInfo#codeSize} field. */
         @NativeType("size_t")
         public long codeSize() { return VkShaderModuleCreateInfo.ncodeSize(address()); }
-        /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code pCode} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkShaderModuleCreateInfo#pCode} field. */
         @NativeType("uint32_t const *")
         public ByteBuffer pCode() { return VkShaderModuleCreateInfo.npCode(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkShaderModuleCreateInfo#sType} field. */
         public VkShaderModuleCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkShaderModuleCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkShaderModuleCreateInfo#pNext} field. */
         public VkShaderModuleCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkShaderModuleCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkShaderModuleCreateInfo#flags} field. */
         public VkShaderModuleCreateInfo.Buffer flags(@NativeType("VkShaderModuleCreateFlags") int value) { VkShaderModuleCreateInfo.nflags(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code pCode} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@link VkShaderModuleCreateInfo#pCode} field. */
         public VkShaderModuleCreateInfo.Buffer pCode(@NativeType("uint32_t const *") ByteBuffer value) { VkShaderModuleCreateInfo.npCode(address(), value); return this; }
 
     }

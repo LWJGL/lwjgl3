@@ -67,13 +67,13 @@ public class SQL_DATE_STRUCT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code year} field. */
+    /** @return the value of the {@code year} field. */
     @NativeType("SQLSMALLINT")
     public short year() { return nyear(address()); }
-    /** Returns the value of the {@code month} field. */
+    /** @return the value of the {@code month} field. */
     @NativeType("SQLUSMALLINT")
     public short month() { return nmonth(address()); }
-    /** Returns the value of the {@code day} field. */
+    /** @return the value of the {@code day} field. */
     @NativeType("SQLUSMALLINT")
     public short day() { return nday(address()); }
 
@@ -304,13 +304,13 @@ public class SQL_DATE_STRUCT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code year} field. */
+        /** @return the value of the {@code year} field. */
         @NativeType("SQLSMALLINT")
         public short year() { return SQL_DATE_STRUCT.nyear(address()); }
-        /** Returns the value of the {@code month} field. */
+        /** @return the value of the {@code month} field. */
         @NativeType("SQLUSMALLINT")
         public short month() { return SQL_DATE_STRUCT.nmonth(address()); }
-        /** Returns the value of the {@code day} field. */
+        /** @return the value of the {@code day} field. */
         @NativeType("SQLUSMALLINT")
         public short day() { return SQL_DATE_STRUCT.nday(address()); }
 

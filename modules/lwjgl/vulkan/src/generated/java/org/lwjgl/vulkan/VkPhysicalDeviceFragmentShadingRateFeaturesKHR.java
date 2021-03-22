@@ -28,23 +28,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code pipelineFragmentShadingRate} &ndash; indicates that the implementation supports the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-pipeline">pipeline fragment shading rate</a>.</li>
- * <li>{@code primitiveFragmentShadingRate} &ndash; indicates that the implementation supports the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-primitive">primitive fragment shading rate</a>.</li>
- * <li>{@code attachmentFragmentShadingRate} &ndash; indicates that the implementation supports the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-attachment">attachment fragment shading rate</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceFragmentShadingRateFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 pipelineFragmentShadingRate;
- *     VkBool32 primitiveFragmentShadingRate;
- *     VkBool32 attachmentFragmentShadingRate;
+ *     VkBool32 {@link #pipelineFragmentShadingRate};
+ *     VkBool32 {@link #primitiveFragmentShadingRate};
+ *     VkBool32 {@link #attachmentFragmentShadingRate};
  * }</code></pre>
  */
 public class VkPhysicalDeviceFragmentShadingRateFeaturesKHR extends Struct implements NativeResource {
@@ -95,19 +87,19 @@ public class VkPhysicalDeviceFragmentShadingRateFeaturesKHR extends Struct imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code pipelineFragmentShadingRate} field. */
+    /** indicates that the implementation supports the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-pipeline">pipeline fragment shading rate</a>. */
     @NativeType("VkBool32")
     public boolean pipelineFragmentShadingRate() { return npipelineFragmentShadingRate(address()) != 0; }
-    /** Returns the value of the {@code primitiveFragmentShadingRate} field. */
+    /** indicates that the implementation supports the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-primitive">primitive fragment shading rate</a>. */
     @NativeType("VkBool32")
     public boolean primitiveFragmentShadingRate() { return nprimitiveFragmentShadingRate(address()) != 0; }
-    /** Returns the value of the {@code attachmentFragmentShadingRate} field. */
+    /** indicates that the implementation supports the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-attachment">attachment fragment shading rate</a>. */
     @NativeType("VkBool32")
     public boolean attachmentFragmentShadingRate() { return nattachmentFragmentShadingRate(address()) != 0; }
 
@@ -115,11 +107,11 @@ public class VkPhysicalDeviceFragmentShadingRateFeaturesKHR extends Struct imple
     public VkPhysicalDeviceFragmentShadingRateFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceFragmentShadingRateFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code pipelineFragmentShadingRate} field. */
+    /** Sets the specified value to the {@link #pipelineFragmentShadingRate} field. */
     public VkPhysicalDeviceFragmentShadingRateFeaturesKHR pipelineFragmentShadingRate(@NativeType("VkBool32") boolean value) { npipelineFragmentShadingRate(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code primitiveFragmentShadingRate} field. */
+    /** Sets the specified value to the {@link #primitiveFragmentShadingRate} field. */
     public VkPhysicalDeviceFragmentShadingRateFeaturesKHR primitiveFragmentShadingRate(@NativeType("VkBool32") boolean value) { nprimitiveFragmentShadingRate(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code attachmentFragmentShadingRate} field. */
+    /** Sets the specified value to the {@link #attachmentFragmentShadingRate} field. */
     public VkPhysicalDeviceFragmentShadingRateFeaturesKHR attachmentFragmentShadingRate(@NativeType("VkBool32") boolean value) { nattachmentFragmentShadingRate(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -354,19 +346,19 @@ public class VkPhysicalDeviceFragmentShadingRateFeaturesKHR extends Struct imple
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceFragmentShadingRateFeaturesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceFragmentShadingRateFeaturesKHR.npNext(address()); }
-        /** Returns the value of the {@code pipelineFragmentShadingRate} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentShadingRateFeaturesKHR#pipelineFragmentShadingRate} field. */
         @NativeType("VkBool32")
         public boolean pipelineFragmentShadingRate() { return VkPhysicalDeviceFragmentShadingRateFeaturesKHR.npipelineFragmentShadingRate(address()) != 0; }
-        /** Returns the value of the {@code primitiveFragmentShadingRate} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentShadingRateFeaturesKHR#primitiveFragmentShadingRate} field. */
         @NativeType("VkBool32")
         public boolean primitiveFragmentShadingRate() { return VkPhysicalDeviceFragmentShadingRateFeaturesKHR.nprimitiveFragmentShadingRate(address()) != 0; }
-        /** Returns the value of the {@code attachmentFragmentShadingRate} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentShadingRateFeaturesKHR#attachmentFragmentShadingRate} field. */
         @NativeType("VkBool32")
         public boolean attachmentFragmentShadingRate() { return VkPhysicalDeviceFragmentShadingRateFeaturesKHR.nattachmentFragmentShadingRate(address()) != 0; }
 
@@ -374,11 +366,11 @@ public class VkPhysicalDeviceFragmentShadingRateFeaturesKHR extends Struct imple
         public VkPhysicalDeviceFragmentShadingRateFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFragmentShadingRateFeaturesKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceFragmentShadingRateFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFragmentShadingRateFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code pipelineFragmentShadingRate} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateFeaturesKHR#pipelineFragmentShadingRate} field. */
         public VkPhysicalDeviceFragmentShadingRateFeaturesKHR.Buffer pipelineFragmentShadingRate(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFragmentShadingRateFeaturesKHR.npipelineFragmentShadingRate(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code primitiveFragmentShadingRate} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateFeaturesKHR#primitiveFragmentShadingRate} field. */
         public VkPhysicalDeviceFragmentShadingRateFeaturesKHR.Buffer primitiveFragmentShadingRate(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFragmentShadingRateFeaturesKHR.nprimitiveFragmentShadingRate(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code attachmentFragmentShadingRate} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateFeaturesKHR#attachmentFragmentShadingRate} field. */
         public VkPhysicalDeviceFragmentShadingRateFeaturesKHR.Buffer attachmentFragmentShadingRate(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFragmentShadingRateFeaturesKHR.nattachmentFragmentShadingRate(address(), value ? 1 : 0); return this; }
 
     }

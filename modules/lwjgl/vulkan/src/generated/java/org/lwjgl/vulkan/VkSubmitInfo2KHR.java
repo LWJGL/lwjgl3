@@ -47,33 +47,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkCommandBufferSubmitInfoKHR}, {@link VkSemaphoreSubmitInfoKHR}, {@link KHRSynchronization2#vkQueueSubmit2KHR QueueSubmit2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkSubmitFlagBitsKHR}.</li>
- * <li>{@code waitSemaphoreInfoCount} &ndash; the number of elements in {@code pWaitSemaphoreInfos}.</li>
- * <li>{@code pWaitSemaphoreInfos} &ndash; a pointer to an array of {@link VkSemaphoreSubmitInfoKHR} structures defining <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-waiting">semaphore wait operations</a>.</li>
- * <li>{@code commandBufferInfoCount} &ndash; the number of elements in {@code pCommandBufferInfos} and the number of command buffers to execute in the batch.</li>
- * <li>{@code pCommandBufferInfos} &ndash; a pointer to an array of {@link VkCommandBufferSubmitInfoKHR} structures describing command buffers to execute in the batch.</li>
- * <li>{@code signalSemaphoreInfoCount} &ndash; the number of elements in {@code pSignalSemaphoreInfos}.</li>
- * <li>{@code pSignalSemaphoreInfos} &ndash; a pointer to an array of {@link VkSemaphoreSubmitInfoKHR} describing <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operations</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSubmitInfo2KHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkSubmitFlagsKHR flags;
- *     uint32_t waitSemaphoreInfoCount;
- *     {@link VkSemaphoreSubmitInfoKHR VkSemaphoreSubmitInfoKHR} const * pWaitSemaphoreInfos;
- *     uint32_t commandBufferInfoCount;
- *     {@link VkCommandBufferSubmitInfoKHR VkCommandBufferSubmitInfoKHR} const * pCommandBufferInfos;
- *     uint32_t signalSemaphoreInfoCount;
- *     {@link VkSemaphoreSubmitInfoKHR VkSemaphoreSubmitInfoKHR} const * pSignalSemaphoreInfos;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkSubmitFlagsKHR {@link #flags};
+ *     uint32_t {@link #waitSemaphoreInfoCount};
+ *     {@link VkSemaphoreSubmitInfoKHR VkSemaphoreSubmitInfoKHR} const * {@link #pWaitSemaphoreInfos};
+ *     uint32_t {@link #commandBufferInfoCount};
+ *     {@link VkCommandBufferSubmitInfoKHR VkCommandBufferSubmitInfoKHR} const * {@link #pCommandBufferInfos};
+ *     uint32_t {@link #signalSemaphoreInfoCount};
+ *     {@link VkSemaphoreSubmitInfoKHR VkSemaphoreSubmitInfoKHR} const * {@link #pSignalSemaphoreInfos};
  * }</code></pre>
  */
 public class VkSubmitInfo2KHR extends Struct implements NativeResource {
@@ -136,48 +122,48 @@ public class VkSubmitInfo2KHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkSubmitFlagBitsKHR}. */
     @NativeType("VkSubmitFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code waitSemaphoreInfoCount} field. */
+    /** the number of elements in {@code pWaitSemaphoreInfos}. */
     @NativeType("uint32_t")
     public int waitSemaphoreInfoCount() { return nwaitSemaphoreInfoCount(address()); }
-    /** Returns a {@link VkSemaphoreSubmitInfoKHR.Buffer} view of the struct array pointed to by the {@code pWaitSemaphoreInfos} field. */
+    /** a pointer to an array of {@link VkSemaphoreSubmitInfoKHR} structures defining <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-waiting">semaphore wait operations</a>. */
     @Nullable
     @NativeType("VkSemaphoreSubmitInfoKHR const *")
     public VkSemaphoreSubmitInfoKHR.Buffer pWaitSemaphoreInfos() { return npWaitSemaphoreInfos(address()); }
-    /** Returns the value of the {@code commandBufferInfoCount} field. */
+    /** the number of elements in {@code pCommandBufferInfos} and the number of command buffers to execute in the batch. */
     @NativeType("uint32_t")
     public int commandBufferInfoCount() { return ncommandBufferInfoCount(address()); }
-    /** Returns a {@link VkCommandBufferSubmitInfoKHR.Buffer} view of the struct array pointed to by the {@code pCommandBufferInfos} field. */
+    /** a pointer to an array of {@link VkCommandBufferSubmitInfoKHR} structures describing command buffers to execute in the batch. */
     @Nullable
     @NativeType("VkCommandBufferSubmitInfoKHR const *")
     public VkCommandBufferSubmitInfoKHR.Buffer pCommandBufferInfos() { return npCommandBufferInfos(address()); }
-    /** Returns the value of the {@code signalSemaphoreInfoCount} field. */
+    /** the number of elements in {@code pSignalSemaphoreInfos}. */
     @NativeType("uint32_t")
     public int signalSemaphoreInfoCount() { return nsignalSemaphoreInfoCount(address()); }
-    /** Returns a {@link VkSemaphoreSubmitInfoKHR.Buffer} view of the struct array pointed to by the {@code pSignalSemaphoreInfos} field. */
+    /** a pointer to an array of {@link VkSemaphoreSubmitInfoKHR} describing <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operations</a>. */
     @Nullable
     @NativeType("VkSemaphoreSubmitInfoKHR const *")
     public VkSemaphoreSubmitInfoKHR.Buffer pSignalSemaphoreInfos() { return npSignalSemaphoreInfos(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSubmitInfo2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSubmitInfo2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkSubmitInfo2KHR flags(@NativeType("VkSubmitFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSemaphoreSubmitInfoKHR.Buffer} to the {@code pWaitSemaphoreInfos} field. */
+    /** Sets the address of the specified {@link VkSemaphoreSubmitInfoKHR.Buffer} to the {@link #pWaitSemaphoreInfos} field. */
     public VkSubmitInfo2KHR pWaitSemaphoreInfos(@Nullable @NativeType("VkSemaphoreSubmitInfoKHR const *") VkSemaphoreSubmitInfoKHR.Buffer value) { npWaitSemaphoreInfos(address(), value); return this; }
-    /** Sets the address of the specified {@link VkCommandBufferSubmitInfoKHR.Buffer} to the {@code pCommandBufferInfos} field. */
+    /** Sets the address of the specified {@link VkCommandBufferSubmitInfoKHR.Buffer} to the {@link #pCommandBufferInfos} field. */
     public VkSubmitInfo2KHR pCommandBufferInfos(@Nullable @NativeType("VkCommandBufferSubmitInfoKHR const *") VkCommandBufferSubmitInfoKHR.Buffer value) { npCommandBufferInfos(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSemaphoreSubmitInfoKHR.Buffer} to the {@code pSignalSemaphoreInfos} field. */
+    /** Sets the address of the specified {@link VkSemaphoreSubmitInfoKHR.Buffer} to the {@link #pSignalSemaphoreInfos} field. */
     public VkSubmitInfo2KHR pSignalSemaphoreInfos(@Nullable @NativeType("VkSemaphoreSubmitInfoKHR const *") VkSemaphoreSubmitInfoKHR.Buffer value) { npSignalSemaphoreInfos(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -462,48 +448,48 @@ public class VkSubmitInfo2KHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSubmitInfo2KHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSubmitInfo2KHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSubmitInfo2KHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSubmitInfo2KHR.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkSubmitInfo2KHR#flags} field. */
         @NativeType("VkSubmitFlagsKHR")
         public int flags() { return VkSubmitInfo2KHR.nflags(address()); }
-        /** Returns the value of the {@code waitSemaphoreInfoCount} field. */
+        /** @return the value of the {@link VkSubmitInfo2KHR#waitSemaphoreInfoCount} field. */
         @NativeType("uint32_t")
         public int waitSemaphoreInfoCount() { return VkSubmitInfo2KHR.nwaitSemaphoreInfoCount(address()); }
-        /** Returns a {@link VkSemaphoreSubmitInfoKHR.Buffer} view of the struct array pointed to by the {@code pWaitSemaphoreInfos} field. */
+        /** @return a {@link VkSemaphoreSubmitInfoKHR.Buffer} view of the struct array pointed to by the {@link VkSubmitInfo2KHR#pWaitSemaphoreInfos} field. */
         @Nullable
         @NativeType("VkSemaphoreSubmitInfoKHR const *")
         public VkSemaphoreSubmitInfoKHR.Buffer pWaitSemaphoreInfos() { return VkSubmitInfo2KHR.npWaitSemaphoreInfos(address()); }
-        /** Returns the value of the {@code commandBufferInfoCount} field. */
+        /** @return the value of the {@link VkSubmitInfo2KHR#commandBufferInfoCount} field. */
         @NativeType("uint32_t")
         public int commandBufferInfoCount() { return VkSubmitInfo2KHR.ncommandBufferInfoCount(address()); }
-        /** Returns a {@link VkCommandBufferSubmitInfoKHR.Buffer} view of the struct array pointed to by the {@code pCommandBufferInfos} field. */
+        /** @return a {@link VkCommandBufferSubmitInfoKHR.Buffer} view of the struct array pointed to by the {@link VkSubmitInfo2KHR#pCommandBufferInfos} field. */
         @Nullable
         @NativeType("VkCommandBufferSubmitInfoKHR const *")
         public VkCommandBufferSubmitInfoKHR.Buffer pCommandBufferInfos() { return VkSubmitInfo2KHR.npCommandBufferInfos(address()); }
-        /** Returns the value of the {@code signalSemaphoreInfoCount} field. */
+        /** @return the value of the {@link VkSubmitInfo2KHR#signalSemaphoreInfoCount} field. */
         @NativeType("uint32_t")
         public int signalSemaphoreInfoCount() { return VkSubmitInfo2KHR.nsignalSemaphoreInfoCount(address()); }
-        /** Returns a {@link VkSemaphoreSubmitInfoKHR.Buffer} view of the struct array pointed to by the {@code pSignalSemaphoreInfos} field. */
+        /** @return a {@link VkSemaphoreSubmitInfoKHR.Buffer} view of the struct array pointed to by the {@link VkSubmitInfo2KHR#pSignalSemaphoreInfos} field. */
         @Nullable
         @NativeType("VkSemaphoreSubmitInfoKHR const *")
         public VkSemaphoreSubmitInfoKHR.Buffer pSignalSemaphoreInfos() { return VkSubmitInfo2KHR.npSignalSemaphoreInfos(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSubmitInfo2KHR#sType} field. */
         public VkSubmitInfo2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSubmitInfo2KHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSubmitInfo2KHR#pNext} field. */
         public VkSubmitInfo2KHR.Buffer pNext(@NativeType("void const *") long value) { VkSubmitInfo2KHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkSubmitInfo2KHR#flags} field. */
         public VkSubmitInfo2KHR.Buffer flags(@NativeType("VkSubmitFlagsKHR") int value) { VkSubmitInfo2KHR.nflags(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSemaphoreSubmitInfoKHR.Buffer} to the {@code pWaitSemaphoreInfos} field. */
+        /** Sets the address of the specified {@link VkSemaphoreSubmitInfoKHR.Buffer} to the {@link VkSubmitInfo2KHR#pWaitSemaphoreInfos} field. */
         public VkSubmitInfo2KHR.Buffer pWaitSemaphoreInfos(@Nullable @NativeType("VkSemaphoreSubmitInfoKHR const *") VkSemaphoreSubmitInfoKHR.Buffer value) { VkSubmitInfo2KHR.npWaitSemaphoreInfos(address(), value); return this; }
-        /** Sets the address of the specified {@link VkCommandBufferSubmitInfoKHR.Buffer} to the {@code pCommandBufferInfos} field. */
+        /** Sets the address of the specified {@link VkCommandBufferSubmitInfoKHR.Buffer} to the {@link VkSubmitInfo2KHR#pCommandBufferInfos} field. */
         public VkSubmitInfo2KHR.Buffer pCommandBufferInfos(@Nullable @NativeType("VkCommandBufferSubmitInfoKHR const *") VkCommandBufferSubmitInfoKHR.Buffer value) { VkSubmitInfo2KHR.npCommandBufferInfos(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSemaphoreSubmitInfoKHR.Buffer} to the {@code pSignalSemaphoreInfos} field. */
+        /** Sets the address of the specified {@link VkSemaphoreSubmitInfoKHR.Buffer} to the {@link VkSubmitInfo2KHR#pSignalSemaphoreInfos} field. */
         public VkSubmitInfo2KHR.Buffer pSignalSemaphoreInfos(@Nullable @NativeType("VkSemaphoreSubmitInfoKHR const *") VkSemaphoreSubmitInfoKHR.Buffer value) { VkSubmitInfo2KHR.npSignalSemaphoreInfos(address(), value); return this; }
 
     }

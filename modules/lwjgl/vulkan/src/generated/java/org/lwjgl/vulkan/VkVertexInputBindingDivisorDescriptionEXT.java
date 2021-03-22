@@ -36,19 +36,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkPipelineVertexInputDivisorStateCreateInfoEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code binding} &ndash; the binding number for which the divisor is specified.</li>
- * <li>{@code divisor} &ndash; the number of successive instances that will use the same value of the vertex attribute when instanced rendering is enabled. For example, if the divisor is N, the same vertex attribute will be applied to N successive instances before moving on to the next vertex attribute. The maximum value of divisor is implementation dependent and can be queried using {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT}{@code ::maxVertexAttribDivisor}. A value of 0 <b>can</b> be used for the divisor if the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-vertexAttributeInstanceRateZeroDivisor">{@code vertexAttributeInstanceRateZeroDivisor}</a> feature is enabled. In this case, the same vertex attribute will be applied to all instances.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkVertexInputBindingDivisorDescriptionEXT {
- *     uint32_t binding;
- *     uint32_t divisor;
+ *     uint32_t {@link #binding};
+ *     uint32_t {@link #divisor};
  * }</code></pre>
  */
 public class VkVertexInputBindingDivisorDescriptionEXT extends Struct implements NativeResource {
@@ -90,16 +83,16 @@ public class VkVertexInputBindingDivisorDescriptionEXT extends Struct implements
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code binding} field. */
+    /** the binding number for which the divisor is specified. */
     @NativeType("uint32_t")
     public int binding() { return nbinding(address()); }
-    /** Returns the value of the {@code divisor} field. */
+    /** the number of successive instances that will use the same value of the vertex attribute when instanced rendering is enabled. For example, if the divisor is N, the same vertex attribute will be applied to N successive instances before moving on to the next vertex attribute. The maximum value of divisor is implementation dependent and can be queried using {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT}{@code ::maxVertexAttribDivisor}. A value of 0 <b>can</b> be used for the divisor if the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-vertexAttributeInstanceRateZeroDivisor">{@code vertexAttributeInstanceRateZeroDivisor}</a> feature is enabled. In this case, the same vertex attribute will be applied to all instances. */
     @NativeType("uint32_t")
     public int divisor() { return ndivisor(address()); }
 
-    /** Sets the specified value to the {@code binding} field. */
+    /** Sets the specified value to the {@link #binding} field. */
     public VkVertexInputBindingDivisorDescriptionEXT binding(@NativeType("uint32_t") int value) { nbinding(address(), value); return this; }
-    /** Sets the specified value to the {@code divisor} field. */
+    /** Sets the specified value to the {@link #divisor} field. */
     public VkVertexInputBindingDivisorDescriptionEXT divisor(@NativeType("uint32_t") int value) { ndivisor(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -316,16 +309,16 @@ public class VkVertexInputBindingDivisorDescriptionEXT extends Struct implements
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code binding} field. */
+        /** @return the value of the {@link VkVertexInputBindingDivisorDescriptionEXT#binding} field. */
         @NativeType("uint32_t")
         public int binding() { return VkVertexInputBindingDivisorDescriptionEXT.nbinding(address()); }
-        /** Returns the value of the {@code divisor} field. */
+        /** @return the value of the {@link VkVertexInputBindingDivisorDescriptionEXT#divisor} field. */
         @NativeType("uint32_t")
         public int divisor() { return VkVertexInputBindingDivisorDescriptionEXT.ndivisor(address()); }
 
-        /** Sets the specified value to the {@code binding} field. */
+        /** Sets the specified value to the {@link VkVertexInputBindingDivisorDescriptionEXT#binding} field. */
         public VkVertexInputBindingDivisorDescriptionEXT.Buffer binding(@NativeType("uint32_t") int value) { VkVertexInputBindingDivisorDescriptionEXT.nbinding(address(), value); return this; }
-        /** Sets the specified value to the {@code divisor} field. */
+        /** Sets the specified value to the {@link VkVertexInputBindingDivisorDescriptionEXT#divisor} field. */
         public VkVertexInputBindingDivisorDescriptionEXT.Buffer divisor(@NativeType("uint32_t") int value) { VkVertexInputBindingDivisorDescriptionEXT.ndivisor(address(), value); return this; }
 
     }

@@ -16,25 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Structure specifying physical device sparse memory properties.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code residencyStandard2DBlockShape} &ndash; {@link VK10#VK_TRUE TRUE} if the physical device will access all single-sample 2D sparse resources using the standard sparse image block shapes (based on image format), as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#sparsememory-sparseblockshapessingle">Standard Sparse Image Block Shapes (Single Sample)</a> table. If this property is not supported the value returned in the {@code imageGranularity} member of the {@link VkSparseImageFormatProperties} structure for single-sample 2D images is not required: to match the standard sparse image block dimensions listed in the table.</li>
- * <li>{@code residencyStandard2DMultisampleBlockShape} &ndash; {@link VK10#VK_TRUE TRUE} if the physical device will access all multisample 2D sparse resources using the standard sparse image block shapes (based on image format), as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#sparsememory-sparseblockshapesmsaa">Standard Sparse Image Block Shapes (MSAA)</a> table. If this property is not supported, the value returned in the {@code imageGranularity} member of the {@link VkSparseImageFormatProperties} structure for multisample 2D images is not required: to match the standard sparse image block dimensions listed in the table.</li>
- * <li>{@code residencyStandard3DBlockShape} &ndash; {@link VK10#VK_TRUE TRUE} if the physical device will access all 3D sparse resources using the standard sparse image block shapes (based on image format), as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#sparsememory-sparseblockshapessingle">Standard Sparse Image Block Shapes (Single Sample)</a> table. If this property is not supported, the value returned in the {@code imageGranularity} member of the {@link VkSparseImageFormatProperties} structure for 3D images is not required: to match the standard sparse image block dimensions listed in the table.</li>
- * <li>{@code residencyAlignedMipSize} &ndash; {@link VK10#VK_TRUE TRUE} if images with mip level dimensions that are not integer multiples of the corresponding dimensions of the sparse image block <b>may</b> be placed in the mip tail. If this property is not reported, only mip levels with dimensions smaller than the {@code imageGranularity} member of the {@link VkSparseImageFormatProperties} structure will be placed in the mip tail. If this property is reported the implementation is allowed to return {@link VK10#VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT} in the {@code flags} member of {@link VkSparseImageFormatProperties}, indicating that mip level dimensions that are not integer multiples of the corresponding dimensions of the sparse image block will be placed in the mip tail.</li>
- * <li>{@code residencyNonResidentStrict} &ndash; specifies whether the physical device <b>can</b> consistently access non-resident regions of a resource. If this property is {@link VK10#VK_TRUE TRUE}, access to non-resident regions of resources will be guaranteed to return values as if the resource were populated with 0; writes to non-resident regions will be discarded.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceSparseProperties {
- *     VkBool32 residencyStandard2DBlockShape;
- *     VkBool32 residencyStandard2DMultisampleBlockShape;
- *     VkBool32 residencyStandard3DBlockShape;
- *     VkBool32 residencyAlignedMipSize;
- *     VkBool32 residencyNonResidentStrict;
+ *     VkBool32 {@link #residencyStandard2DBlockShape};
+ *     VkBool32 {@link #residencyStandard2DMultisampleBlockShape};
+ *     VkBool32 {@link #residencyStandard3DBlockShape};
+ *     VkBool32 {@link #residencyAlignedMipSize};
+ *     VkBool32 {@link #residencyNonResidentStrict};
  * }</code></pre>
  */
 public class VkPhysicalDeviceSparseProperties extends Struct {
@@ -85,19 +75,19 @@ public class VkPhysicalDeviceSparseProperties extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code residencyStandard2DBlockShape} field. */
+    /** {@link VK10#VK_TRUE TRUE} if the physical device will access all single-sample 2D sparse resources using the standard sparse image block shapes (based on image format), as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#sparsememory-sparseblockshapessingle">Standard Sparse Image Block Shapes (Single Sample)</a> table. If this property is not supported the value returned in the {@code imageGranularity} member of the {@link VkSparseImageFormatProperties} structure for single-sample 2D images is not required: to match the standard sparse image block dimensions listed in the table. */
     @NativeType("VkBool32")
     public boolean residencyStandard2DBlockShape() { return nresidencyStandard2DBlockShape(address()) != 0; }
-    /** Returns the value of the {@code residencyStandard2DMultisampleBlockShape} field. */
+    /** {@link VK10#VK_TRUE TRUE} if the physical device will access all multisample 2D sparse resources using the standard sparse image block shapes (based on image format), as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#sparsememory-sparseblockshapesmsaa">Standard Sparse Image Block Shapes (MSAA)</a> table. If this property is not supported, the value returned in the {@code imageGranularity} member of the {@link VkSparseImageFormatProperties} structure for multisample 2D images is not required: to match the standard sparse image block dimensions listed in the table. */
     @NativeType("VkBool32")
     public boolean residencyStandard2DMultisampleBlockShape() { return nresidencyStandard2DMultisampleBlockShape(address()) != 0; }
-    /** Returns the value of the {@code residencyStandard3DBlockShape} field. */
+    /** {@link VK10#VK_TRUE TRUE} if the physical device will access all 3D sparse resources using the standard sparse image block shapes (based on image format), as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#sparsememory-sparseblockshapessingle">Standard Sparse Image Block Shapes (Single Sample)</a> table. If this property is not supported, the value returned in the {@code imageGranularity} member of the {@link VkSparseImageFormatProperties} structure for 3D images is not required: to match the standard sparse image block dimensions listed in the table. */
     @NativeType("VkBool32")
     public boolean residencyStandard3DBlockShape() { return nresidencyStandard3DBlockShape(address()) != 0; }
-    /** Returns the value of the {@code residencyAlignedMipSize} field. */
+    /** {@link VK10#VK_TRUE TRUE} if images with mip level dimensions that are not integer multiples of the corresponding dimensions of the sparse image block <b>may</b> be placed in the mip tail. If this property is not reported, only mip levels with dimensions smaller than the {@code imageGranularity} member of the {@link VkSparseImageFormatProperties} structure will be placed in the mip tail. If this property is reported the implementation is allowed to return {@link VK10#VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT} in the {@code flags} member of {@link VkSparseImageFormatProperties}, indicating that mip level dimensions that are not integer multiples of the corresponding dimensions of the sparse image block will be placed in the mip tail. */
     @NativeType("VkBool32")
     public boolean residencyAlignedMipSize() { return nresidencyAlignedMipSize(address()) != 0; }
-    /** Returns the value of the {@code residencyNonResidentStrict} field. */
+    /** specifies whether the physical device <b>can</b> consistently access non-resident regions of a resource. If this property is {@link VK10#VK_TRUE TRUE}, access to non-resident regions of resources will be guaranteed to return values as if the resource were populated with 0; writes to non-resident regions will be discarded. */
     @NativeType("VkBool32")
     public boolean residencyNonResidentStrict() { return nresidencyNonResidentStrict(address()) != 0; }
 
@@ -181,19 +171,19 @@ public class VkPhysicalDeviceSparseProperties extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code residencyStandard2DBlockShape} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSparseProperties#residencyStandard2DBlockShape} field. */
         @NativeType("VkBool32")
         public boolean residencyStandard2DBlockShape() { return VkPhysicalDeviceSparseProperties.nresidencyStandard2DBlockShape(address()) != 0; }
-        /** Returns the value of the {@code residencyStandard2DMultisampleBlockShape} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSparseProperties#residencyStandard2DMultisampleBlockShape} field. */
         @NativeType("VkBool32")
         public boolean residencyStandard2DMultisampleBlockShape() { return VkPhysicalDeviceSparseProperties.nresidencyStandard2DMultisampleBlockShape(address()) != 0; }
-        /** Returns the value of the {@code residencyStandard3DBlockShape} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSparseProperties#residencyStandard3DBlockShape} field. */
         @NativeType("VkBool32")
         public boolean residencyStandard3DBlockShape() { return VkPhysicalDeviceSparseProperties.nresidencyStandard3DBlockShape(address()) != 0; }
-        /** Returns the value of the {@code residencyAlignedMipSize} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSparseProperties#residencyAlignedMipSize} field. */
         @NativeType("VkBool32")
         public boolean residencyAlignedMipSize() { return VkPhysicalDeviceSparseProperties.nresidencyAlignedMipSize(address()) != 0; }
-        /** Returns the value of the {@code residencyNonResidentStrict} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSparseProperties#residencyNonResidentStrict} field. */
         @NativeType("VkBool32")
         public boolean residencyNonResidentStrict() { return VkPhysicalDeviceSparseProperties.nresidencyNonResidentStrict(address()) != 0; }
 

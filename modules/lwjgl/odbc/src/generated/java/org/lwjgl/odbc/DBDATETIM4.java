@@ -63,10 +63,10 @@ public class DBDATETIM4 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code numdays} field. */
+    /** @return the value of the {@code numdays} field. */
     @NativeType("USHORT")
     public short numdays() { return nnumdays(address()); }
-    /** Returns the value of the {@code nummins} field. */
+    /** @return the value of the {@code nummins} field. */
     @NativeType("USHORT")
     public short nummins() { return nnummins(address()); }
 
@@ -289,10 +289,10 @@ public class DBDATETIM4 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code numdays} field. */
+        /** @return the value of the {@code numdays} field. */
         @NativeType("USHORT")
         public short numdays() { return DBDATETIM4.nnumdays(address()); }
-        /** Returns the value of the {@code nummins} field. */
+        /** @return the value of the {@code nummins} field. */
         @NativeType("USHORT")
         public short nummins() { return DBDATETIM4.nnummins(address()); }
 

@@ -66,27 +66,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkPipelineViewportStateCreateInfo}, {@link VK10#vkCmdSetViewport CmdSetViewport}, {@link EXTExtendedDynamicState#vkCmdSetViewportWithCountEXT CmdSetViewportWithCountEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code x} &ndash; {@code x} and {@code y} are the viewport&#8217;s upper left corner <code>(x,y)</code>.</li>
- * <li>{@code y} &ndash; see {@code x}</li>
- * <li>{@code width} &ndash; {@code width} and {@code height} are the viewport&#8217;s width and height, respectively.</li>
- * <li>{@code height} &ndash; see {@code width}</li>
- * <li>{@code minDepth} &ndash; {@code minDepth} and {@code maxDepth} are the depth range for the viewport.</li>
- * <li>{@code maxDepth} &ndash; see {@code minDepth}</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkViewport {
- *     float x;
- *     float y;
- *     float width;
- *     float height;
- *     float minDepth;
- *     float maxDepth;
+ *     float {@link #x};
+ *     float {@link #y};
+ *     float {@link #width};
+ *     float {@link #height};
+ *     float {@link #minDepth};
+ *     float {@link #maxDepth};
  * }</code></pre>
  */
 public class VkViewport extends Struct implements NativeResource {
@@ -140,30 +129,30 @@ public class VkViewport extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** {@code x} and {@code y} are the viewport&#8217;s upper left corner <code>(x,y)</code>. */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** see {@code x} */
     public float y() { return ny(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** {@code width} and {@code height} are the viewport&#8217;s width and height, respectively. */
     public float width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** see {@code width} */
     public float height() { return nheight(address()); }
-    /** Returns the value of the {@code minDepth} field. */
+    /** {@code minDepth} and {@code maxDepth} are the depth range for the viewport. */
     public float minDepth() { return nminDepth(address()); }
-    /** Returns the value of the {@code maxDepth} field. */
+    /** see {@code minDepth} */
     public float maxDepth() { return nmaxDepth(address()); }
 
-    /** Sets the specified value to the {@code x} field. */
+    /** Sets the specified value to the {@link #x} field. */
     public VkViewport x(float value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@code y} field. */
+    /** Sets the specified value to the {@link #y} field. */
     public VkViewport y(float value) { ny(address(), value); return this; }
-    /** Sets the specified value to the {@code width} field. */
+    /** Sets the specified value to the {@link #width} field. */
     public VkViewport width(float value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@code height} field. */
+    /** Sets the specified value to the {@link #height} field. */
     public VkViewport height(float value) { nheight(address(), value); return this; }
-    /** Sets the specified value to the {@code minDepth} field. */
+    /** Sets the specified value to the {@link #minDepth} field. */
     public VkViewport minDepth(float value) { nminDepth(address(), value); return this; }
-    /** Sets the specified value to the {@code maxDepth} field. */
+    /** Sets the specified value to the {@link #maxDepth} field. */
     public VkViewport maxDepth(float value) { nmaxDepth(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -404,30 +393,30 @@ public class VkViewport extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link VkViewport#x} field. */
         public float x() { return VkViewport.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@link VkViewport#y} field. */
         public float y() { return VkViewport.ny(address()); }
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@link VkViewport#width} field. */
         public float width() { return VkViewport.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@link VkViewport#height} field. */
         public float height() { return VkViewport.nheight(address()); }
-        /** Returns the value of the {@code minDepth} field. */
+        /** @return the value of the {@link VkViewport#minDepth} field. */
         public float minDepth() { return VkViewport.nminDepth(address()); }
-        /** Returns the value of the {@code maxDepth} field. */
+        /** @return the value of the {@link VkViewport#maxDepth} field. */
         public float maxDepth() { return VkViewport.nmaxDepth(address()); }
 
-        /** Sets the specified value to the {@code x} field. */
+        /** Sets the specified value to the {@link VkViewport#x} field. */
         public VkViewport.Buffer x(float value) { VkViewport.nx(address(), value); return this; }
-        /** Sets the specified value to the {@code y} field. */
+        /** Sets the specified value to the {@link VkViewport#y} field. */
         public VkViewport.Buffer y(float value) { VkViewport.ny(address(), value); return this; }
-        /** Sets the specified value to the {@code width} field. */
+        /** Sets the specified value to the {@link VkViewport#width} field. */
         public VkViewport.Buffer width(float value) { VkViewport.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@code height} field. */
+        /** Sets the specified value to the {@link VkViewport#height} field. */
         public VkViewport.Buffer height(float value) { VkViewport.nheight(address(), value); return this; }
-        /** Sets the specified value to the {@code minDepth} field. */
+        /** Sets the specified value to the {@link VkViewport#minDepth} field. */
         public VkViewport.Buffer minDepth(float value) { VkViewport.nminDepth(address(), value); return this; }
-        /** Sets the specified value to the {@code maxDepth} field. */
+        /** Sets the specified value to the {@link VkViewport#maxDepth} field. */
         public VkViewport.Buffer maxDepth(float value) { VkViewport.nmaxDepth(address(), value); return this; }
 
     }

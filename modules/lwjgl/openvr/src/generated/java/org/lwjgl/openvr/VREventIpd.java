@@ -58,7 +58,7 @@ public class VREventIpd extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code ipdMeters} field. */
+    /** @return the value of the {@code ipdMeters} field. */
     public float ipdMeters() { return nipdMeters(address()); }
 
     // -----------------------------------
@@ -133,7 +133,7 @@ public class VREventIpd extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code ipdMeters} field. */
+        /** @return the value of the {@code ipdMeters} field. */
         public float ipdMeters() { return VREventIpd.nipdMeters(address()); }
 
     }

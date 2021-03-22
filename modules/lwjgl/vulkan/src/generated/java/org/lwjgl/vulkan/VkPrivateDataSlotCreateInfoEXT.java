@@ -30,21 +30,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link EXTPrivateData#vkCreatePrivateDataSlotEXT CreatePrivateDataSlotEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkPrivateDataSlotCreateFlagsEXT} specifying additional parameters of the new private data slot</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPrivateDataSlotCreateInfoEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPrivateDataSlotCreateFlagsEXT flags;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPrivateDataSlotCreateFlagsEXT {@link #flags};
  * }</code></pre>
  */
 public class VkPrivateDataSlotCreateInfoEXT extends Struct implements NativeResource {
@@ -89,21 +81,21 @@ public class VkPrivateDataSlotCreateInfoEXT extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkPrivateDataSlotCreateFlagsEXT} specifying additional parameters of the new private data slot */
     @NativeType("VkPrivateDataSlotCreateFlagsEXT")
     public int flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPrivateDataSlotCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPrivateDataSlotCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkPrivateDataSlotCreateInfoEXT flags(@NativeType("VkPrivateDataSlotCreateFlagsEXT") int value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -326,21 +318,21 @@ public class VkPrivateDataSlotCreateInfoEXT extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPrivateDataSlotCreateInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPrivateDataSlotCreateInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPrivateDataSlotCreateInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPrivateDataSlotCreateInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkPrivateDataSlotCreateInfoEXT#flags} field. */
         @NativeType("VkPrivateDataSlotCreateFlagsEXT")
         public int flags() { return VkPrivateDataSlotCreateInfoEXT.nflags(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPrivateDataSlotCreateInfoEXT#sType} field. */
         public VkPrivateDataSlotCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPrivateDataSlotCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPrivateDataSlotCreateInfoEXT#pNext} field. */
         public VkPrivateDataSlotCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPrivateDataSlotCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkPrivateDataSlotCreateInfoEXT#flags} field. */
         public VkPrivateDataSlotCreateInfoEXT.Buffer flags(@NativeType("VkPrivateDataSlotCreateFlagsEXT") int value) { VkPrivateDataSlotCreateInfoEXT.nflags(address(), value); return this; }
 
     }

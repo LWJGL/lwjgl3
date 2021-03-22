@@ -72,15 +72,15 @@ public class NVGLUFramebufferBGFX extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code ctx} field. */
+    /** @return the value of the {@code ctx} field. */
     @NativeType("NVGcontext *")
     public long ctx() { return nctx(address()); }
-    /** Returns the value of the {@code handle} field. */
+    /** @return the value of the {@code handle} field. */
     @NativeType("bgfx_frame_buffer_handle_t")
     public short handle() { return nhandle(address()); }
-    /** Returns the value of the {@code image} field. */
+    /** @return the value of the {@code image} field. */
     public int image() { return nimage(address()); }
-    /** Returns the value of the {@code viewId} field. */
+    /** @return the value of the {@code viewId} field. */
     @NativeType("bgfx_view_id_t")
     public short viewId() { return nviewId(address()); }
 
@@ -162,15 +162,15 @@ public class NVGLUFramebufferBGFX extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code ctx} field. */
+        /** @return the value of the {@code ctx} field. */
         @NativeType("NVGcontext *")
         public long ctx() { return NVGLUFramebufferBGFX.nctx(address()); }
-        /** Returns the value of the {@code handle} field. */
+        /** @return the value of the {@code handle} field. */
         @NativeType("bgfx_frame_buffer_handle_t")
         public short handle() { return NVGLUFramebufferBGFX.nhandle(address()); }
-        /** Returns the value of the {@code image} field. */
+        /** @return the value of the {@code image} field. */
         public int image() { return NVGLUFramebufferBGFX.nimage(address()); }
-        /** Returns the value of the {@code viewId} field. */
+        /** @return the value of the {@code viewId} field. */
         @NativeType("bgfx_view_id_t")
         public short viewId() { return NVGLUFramebufferBGFX.nviewId(address()); }
 

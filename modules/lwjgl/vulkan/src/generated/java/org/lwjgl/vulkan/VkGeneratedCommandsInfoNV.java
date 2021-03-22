@@ -62,45 +62,25 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkIndirectCommandsStreamNV}, {@link NVDeviceGeneratedCommands#vkCmdExecuteGeneratedCommandsNV CmdExecuteGeneratedCommandsNV}, {@link NVDeviceGeneratedCommands#vkCmdPreprocessGeneratedCommandsNV CmdPreprocessGeneratedCommandsNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code pipelineBindPoint} &ndash; the {@code VkPipelineBindPoint} used for the {@code pipeline}.</li>
- * <li>{@code pipeline} &ndash; the {@code VkPipeline} used in the generation and execution process.</li>
- * <li>{@code indirectCommandsLayout} &ndash; the {@code VkIndirectCommandsLayoutNV} that provides the command sequence to generate.</li>
- * <li>{@code streamCount} &ndash; defines the number of input streams</li>
- * <li>{@code pStreams} &ndash; provides an array of {@link VkIndirectCommandsStreamNV} that provide the input data for the tokens used in {@code indirectCommandsLayout}.</li>
- * <li>{@code sequencesCount} &ndash; the maximum number of sequences to reserve. If {@code sequencesCountBuffer} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, this is also the actual number of sequences generated.</li>
- * <li>{@code preprocessBuffer} &ndash; the {@code VkBuffer} that is used for preprocessing the input data for execution. If this structure is used with {@link NVDeviceGeneratedCommands#vkCmdExecuteGeneratedCommandsNV CmdExecuteGeneratedCommandsNV} with its {@code isPreprocessed} set to {@code VK_TRUE}, then the preprocessing step is skipped and data is only read from this buffer.</li>
- * <li>{@code preprocessOffset} &ndash; the byte offset into {@code preprocessBuffer} where the preprocessed data is stored.</li>
- * <li>{@code preprocessSize} &ndash; the maximum byte size within the {@code preprocessBuffer} after the {@code preprocessOffset} that is available for preprocessing.</li>
- * <li>{@code sequencesCountBuffer} &ndash; a {@code VkBuffer} in which the actual number of sequences is provided as single {@code uint32_t} value.</li>
- * <li>{@code sequencesCountOffset} &ndash; the byte offset into {@code sequencesCountBuffer} where the count value is stored.</li>
- * <li>{@code sequencesIndexBuffer} &ndash; a {@code VkBuffer} that encodes the used sequence indices as {@code uint32_t} array.</li>
- * <li>{@code sequencesIndexOffset} &ndash; the byte offset into {@code sequencesIndexBuffer} where the index values start.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkGeneratedCommandsInfoNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineBindPoint pipelineBindPoint;
- *     VkPipeline pipeline;
- *     VkIndirectCommandsLayoutNV indirectCommandsLayout;
- *     uint32_t streamCount;
- *     {@link VkIndirectCommandsStreamNV VkIndirectCommandsStreamNV} const * pStreams;
- *     uint32_t sequencesCount;
- *     VkBuffer preprocessBuffer;
- *     VkDeviceSize preprocessOffset;
- *     VkDeviceSize preprocessSize;
- *     VkBuffer sequencesCountBuffer;
- *     VkDeviceSize sequencesCountOffset;
- *     VkBuffer sequencesIndexBuffer;
- *     VkDeviceSize sequencesIndexOffset;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineBindPoint {@link #pipelineBindPoint};
+ *     VkPipeline {@link #pipeline};
+ *     VkIndirectCommandsLayoutNV {@link #indirectCommandsLayout};
+ *     uint32_t {@link #streamCount};
+ *     {@link VkIndirectCommandsStreamNV VkIndirectCommandsStreamNV} const * {@link #pStreams};
+ *     uint32_t {@link #sequencesCount};
+ *     VkBuffer {@link #preprocessBuffer};
+ *     VkDeviceSize {@link #preprocessOffset};
+ *     VkDeviceSize {@link #preprocessSize};
+ *     VkBuffer {@link #sequencesCountBuffer};
+ *     VkDeviceSize {@link #sequencesCountOffset};
+ *     VkBuffer {@link #sequencesIndexBuffer};
+ *     VkDeviceSize {@link #sequencesIndexOffset};
  * }</code></pre>
  */
 public class VkGeneratedCommandsInfoNV extends Struct implements NativeResource {
@@ -181,79 +161,79 @@ public class VkGeneratedCommandsInfoNV extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code pipelineBindPoint} field. */
+    /** the {@code VkPipelineBindPoint} used for the {@code pipeline}. */
     @NativeType("VkPipelineBindPoint")
     public int pipelineBindPoint() { return npipelineBindPoint(address()); }
-    /** Returns the value of the {@code pipeline} field. */
+    /** the {@code VkPipeline} used in the generation and execution process. */
     @NativeType("VkPipeline")
     public long pipeline() { return npipeline(address()); }
-    /** Returns the value of the {@code indirectCommandsLayout} field. */
+    /** the {@code VkIndirectCommandsLayoutNV} that provides the command sequence to generate. */
     @NativeType("VkIndirectCommandsLayoutNV")
     public long indirectCommandsLayout() { return nindirectCommandsLayout(address()); }
-    /** Returns the value of the {@code streamCount} field. */
+    /** defines the number of input streams */
     @NativeType("uint32_t")
     public int streamCount() { return nstreamCount(address()); }
-    /** Returns a {@link VkIndirectCommandsStreamNV.Buffer} view of the struct array pointed to by the {@code pStreams} field. */
+    /** provides an array of {@link VkIndirectCommandsStreamNV} that provide the input data for the tokens used in {@code indirectCommandsLayout}. */
     @NativeType("VkIndirectCommandsStreamNV const *")
     public VkIndirectCommandsStreamNV.Buffer pStreams() { return npStreams(address()); }
-    /** Returns the value of the {@code sequencesCount} field. */
+    /** the maximum number of sequences to reserve. If {@code sequencesCountBuffer} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, this is also the actual number of sequences generated. */
     @NativeType("uint32_t")
     public int sequencesCount() { return nsequencesCount(address()); }
-    /** Returns the value of the {@code preprocessBuffer} field. */
+    /** the {@code VkBuffer} that is used for preprocessing the input data for execution. If this structure is used with {@link NVDeviceGeneratedCommands#vkCmdExecuteGeneratedCommandsNV CmdExecuteGeneratedCommandsNV} with its {@code isPreprocessed} set to {@code VK_TRUE}, then the preprocessing step is skipped and data is only read from this buffer. */
     @NativeType("VkBuffer")
     public long preprocessBuffer() { return npreprocessBuffer(address()); }
-    /** Returns the value of the {@code preprocessOffset} field. */
+    /** the byte offset into {@code preprocessBuffer} where the preprocessed data is stored. */
     @NativeType("VkDeviceSize")
     public long preprocessOffset() { return npreprocessOffset(address()); }
-    /** Returns the value of the {@code preprocessSize} field. */
+    /** the maximum byte size within the {@code preprocessBuffer} after the {@code preprocessOffset} that is available for preprocessing. */
     @NativeType("VkDeviceSize")
     public long preprocessSize() { return npreprocessSize(address()); }
-    /** Returns the value of the {@code sequencesCountBuffer} field. */
+    /** a {@code VkBuffer} in which the actual number of sequences is provided as single {@code uint32_t} value. */
     @NativeType("VkBuffer")
     public long sequencesCountBuffer() { return nsequencesCountBuffer(address()); }
-    /** Returns the value of the {@code sequencesCountOffset} field. */
+    /** the byte offset into {@code sequencesCountBuffer} where the count value is stored. */
     @NativeType("VkDeviceSize")
     public long sequencesCountOffset() { return nsequencesCountOffset(address()); }
-    /** Returns the value of the {@code sequencesIndexBuffer} field. */
+    /** a {@code VkBuffer} that encodes the used sequence indices as {@code uint32_t} array. */
     @NativeType("VkBuffer")
     public long sequencesIndexBuffer() { return nsequencesIndexBuffer(address()); }
-    /** Returns the value of the {@code sequencesIndexOffset} field. */
+    /** the byte offset into {@code sequencesIndexBuffer} where the index values start. */
     @NativeType("VkDeviceSize")
     public long sequencesIndexOffset() { return nsequencesIndexOffset(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkGeneratedCommandsInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkGeneratedCommandsInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code pipelineBindPoint} field. */
+    /** Sets the specified value to the {@link #pipelineBindPoint} field. */
     public VkGeneratedCommandsInfoNV pipelineBindPoint(@NativeType("VkPipelineBindPoint") int value) { npipelineBindPoint(address(), value); return this; }
-    /** Sets the specified value to the {@code pipeline} field. */
+    /** Sets the specified value to the {@link #pipeline} field. */
     public VkGeneratedCommandsInfoNV pipeline(@NativeType("VkPipeline") long value) { npipeline(address(), value); return this; }
-    /** Sets the specified value to the {@code indirectCommandsLayout} field. */
+    /** Sets the specified value to the {@link #indirectCommandsLayout} field. */
     public VkGeneratedCommandsInfoNV indirectCommandsLayout(@NativeType("VkIndirectCommandsLayoutNV") long value) { nindirectCommandsLayout(address(), value); return this; }
-    /** Sets the address of the specified {@link VkIndirectCommandsStreamNV.Buffer} to the {@code pStreams} field. */
+    /** Sets the address of the specified {@link VkIndirectCommandsStreamNV.Buffer} to the {@link #pStreams} field. */
     public VkGeneratedCommandsInfoNV pStreams(@NativeType("VkIndirectCommandsStreamNV const *") VkIndirectCommandsStreamNV.Buffer value) { npStreams(address(), value); return this; }
-    /** Sets the specified value to the {@code sequencesCount} field. */
+    /** Sets the specified value to the {@link #sequencesCount} field. */
     public VkGeneratedCommandsInfoNV sequencesCount(@NativeType("uint32_t") int value) { nsequencesCount(address(), value); return this; }
-    /** Sets the specified value to the {@code preprocessBuffer} field. */
+    /** Sets the specified value to the {@link #preprocessBuffer} field. */
     public VkGeneratedCommandsInfoNV preprocessBuffer(@NativeType("VkBuffer") long value) { npreprocessBuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code preprocessOffset} field. */
+    /** Sets the specified value to the {@link #preprocessOffset} field. */
     public VkGeneratedCommandsInfoNV preprocessOffset(@NativeType("VkDeviceSize") long value) { npreprocessOffset(address(), value); return this; }
-    /** Sets the specified value to the {@code preprocessSize} field. */
+    /** Sets the specified value to the {@link #preprocessSize} field. */
     public VkGeneratedCommandsInfoNV preprocessSize(@NativeType("VkDeviceSize") long value) { npreprocessSize(address(), value); return this; }
-    /** Sets the specified value to the {@code sequencesCountBuffer} field. */
+    /** Sets the specified value to the {@link #sequencesCountBuffer} field. */
     public VkGeneratedCommandsInfoNV sequencesCountBuffer(@NativeType("VkBuffer") long value) { nsequencesCountBuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code sequencesCountOffset} field. */
+    /** Sets the specified value to the {@link #sequencesCountOffset} field. */
     public VkGeneratedCommandsInfoNV sequencesCountOffset(@NativeType("VkDeviceSize") long value) { nsequencesCountOffset(address(), value); return this; }
-    /** Sets the specified value to the {@code sequencesIndexBuffer} field. */
+    /** Sets the specified value to the {@link #sequencesIndexBuffer} field. */
     public VkGeneratedCommandsInfoNV sequencesIndexBuffer(@NativeType("VkBuffer") long value) { nsequencesIndexBuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code sequencesIndexOffset} field. */
+    /** Sets the specified value to the {@link #sequencesIndexOffset} field. */
     public VkGeneratedCommandsInfoNV sequencesIndexOffset(@NativeType("VkDeviceSize") long value) { nsequencesIndexOffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -567,79 +547,79 @@ public class VkGeneratedCommandsInfoNV extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkGeneratedCommandsInfoNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkGeneratedCommandsInfoNV.npNext(address()); }
-        /** Returns the value of the {@code pipelineBindPoint} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#pipelineBindPoint} field. */
         @NativeType("VkPipelineBindPoint")
         public int pipelineBindPoint() { return VkGeneratedCommandsInfoNV.npipelineBindPoint(address()); }
-        /** Returns the value of the {@code pipeline} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#pipeline} field. */
         @NativeType("VkPipeline")
         public long pipeline() { return VkGeneratedCommandsInfoNV.npipeline(address()); }
-        /** Returns the value of the {@code indirectCommandsLayout} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#indirectCommandsLayout} field. */
         @NativeType("VkIndirectCommandsLayoutNV")
         public long indirectCommandsLayout() { return VkGeneratedCommandsInfoNV.nindirectCommandsLayout(address()); }
-        /** Returns the value of the {@code streamCount} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#streamCount} field. */
         @NativeType("uint32_t")
         public int streamCount() { return VkGeneratedCommandsInfoNV.nstreamCount(address()); }
-        /** Returns a {@link VkIndirectCommandsStreamNV.Buffer} view of the struct array pointed to by the {@code pStreams} field. */
+        /** @return a {@link VkIndirectCommandsStreamNV.Buffer} view of the struct array pointed to by the {@link VkGeneratedCommandsInfoNV#pStreams} field. */
         @NativeType("VkIndirectCommandsStreamNV const *")
         public VkIndirectCommandsStreamNV.Buffer pStreams() { return VkGeneratedCommandsInfoNV.npStreams(address()); }
-        /** Returns the value of the {@code sequencesCount} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#sequencesCount} field. */
         @NativeType("uint32_t")
         public int sequencesCount() { return VkGeneratedCommandsInfoNV.nsequencesCount(address()); }
-        /** Returns the value of the {@code preprocessBuffer} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#preprocessBuffer} field. */
         @NativeType("VkBuffer")
         public long preprocessBuffer() { return VkGeneratedCommandsInfoNV.npreprocessBuffer(address()); }
-        /** Returns the value of the {@code preprocessOffset} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#preprocessOffset} field. */
         @NativeType("VkDeviceSize")
         public long preprocessOffset() { return VkGeneratedCommandsInfoNV.npreprocessOffset(address()); }
-        /** Returns the value of the {@code preprocessSize} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#preprocessSize} field. */
         @NativeType("VkDeviceSize")
         public long preprocessSize() { return VkGeneratedCommandsInfoNV.npreprocessSize(address()); }
-        /** Returns the value of the {@code sequencesCountBuffer} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#sequencesCountBuffer} field. */
         @NativeType("VkBuffer")
         public long sequencesCountBuffer() { return VkGeneratedCommandsInfoNV.nsequencesCountBuffer(address()); }
-        /** Returns the value of the {@code sequencesCountOffset} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#sequencesCountOffset} field. */
         @NativeType("VkDeviceSize")
         public long sequencesCountOffset() { return VkGeneratedCommandsInfoNV.nsequencesCountOffset(address()); }
-        /** Returns the value of the {@code sequencesIndexBuffer} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#sequencesIndexBuffer} field. */
         @NativeType("VkBuffer")
         public long sequencesIndexBuffer() { return VkGeneratedCommandsInfoNV.nsequencesIndexBuffer(address()); }
-        /** Returns the value of the {@code sequencesIndexOffset} field. */
+        /** @return the value of the {@link VkGeneratedCommandsInfoNV#sequencesIndexOffset} field. */
         @NativeType("VkDeviceSize")
         public long sequencesIndexOffset() { return VkGeneratedCommandsInfoNV.nsequencesIndexOffset(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#sType} field. */
         public VkGeneratedCommandsInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkGeneratedCommandsInfoNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#pNext} field. */
         public VkGeneratedCommandsInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkGeneratedCommandsInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code pipelineBindPoint} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#pipelineBindPoint} field. */
         public VkGeneratedCommandsInfoNV.Buffer pipelineBindPoint(@NativeType("VkPipelineBindPoint") int value) { VkGeneratedCommandsInfoNV.npipelineBindPoint(address(), value); return this; }
-        /** Sets the specified value to the {@code pipeline} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#pipeline} field. */
         public VkGeneratedCommandsInfoNV.Buffer pipeline(@NativeType("VkPipeline") long value) { VkGeneratedCommandsInfoNV.npipeline(address(), value); return this; }
-        /** Sets the specified value to the {@code indirectCommandsLayout} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#indirectCommandsLayout} field. */
         public VkGeneratedCommandsInfoNV.Buffer indirectCommandsLayout(@NativeType("VkIndirectCommandsLayoutNV") long value) { VkGeneratedCommandsInfoNV.nindirectCommandsLayout(address(), value); return this; }
-        /** Sets the address of the specified {@link VkIndirectCommandsStreamNV.Buffer} to the {@code pStreams} field. */
+        /** Sets the address of the specified {@link VkIndirectCommandsStreamNV.Buffer} to the {@link VkGeneratedCommandsInfoNV#pStreams} field. */
         public VkGeneratedCommandsInfoNV.Buffer pStreams(@NativeType("VkIndirectCommandsStreamNV const *") VkIndirectCommandsStreamNV.Buffer value) { VkGeneratedCommandsInfoNV.npStreams(address(), value); return this; }
-        /** Sets the specified value to the {@code sequencesCount} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#sequencesCount} field. */
         public VkGeneratedCommandsInfoNV.Buffer sequencesCount(@NativeType("uint32_t") int value) { VkGeneratedCommandsInfoNV.nsequencesCount(address(), value); return this; }
-        /** Sets the specified value to the {@code preprocessBuffer} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#preprocessBuffer} field. */
         public VkGeneratedCommandsInfoNV.Buffer preprocessBuffer(@NativeType("VkBuffer") long value) { VkGeneratedCommandsInfoNV.npreprocessBuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code preprocessOffset} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#preprocessOffset} field. */
         public VkGeneratedCommandsInfoNV.Buffer preprocessOffset(@NativeType("VkDeviceSize") long value) { VkGeneratedCommandsInfoNV.npreprocessOffset(address(), value); return this; }
-        /** Sets the specified value to the {@code preprocessSize} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#preprocessSize} field. */
         public VkGeneratedCommandsInfoNV.Buffer preprocessSize(@NativeType("VkDeviceSize") long value) { VkGeneratedCommandsInfoNV.npreprocessSize(address(), value); return this; }
-        /** Sets the specified value to the {@code sequencesCountBuffer} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#sequencesCountBuffer} field. */
         public VkGeneratedCommandsInfoNV.Buffer sequencesCountBuffer(@NativeType("VkBuffer") long value) { VkGeneratedCommandsInfoNV.nsequencesCountBuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code sequencesCountOffset} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#sequencesCountOffset} field. */
         public VkGeneratedCommandsInfoNV.Buffer sequencesCountOffset(@NativeType("VkDeviceSize") long value) { VkGeneratedCommandsInfoNV.nsequencesCountOffset(address(), value); return this; }
-        /** Sets the specified value to the {@code sequencesIndexBuffer} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#sequencesIndexBuffer} field. */
         public VkGeneratedCommandsInfoNV.Buffer sequencesIndexBuffer(@NativeType("VkBuffer") long value) { VkGeneratedCommandsInfoNV.nsequencesIndexBuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code sequencesIndexOffset} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#sequencesIndexOffset} field. */
         public VkGeneratedCommandsInfoNV.Buffer sequencesIndexOffset(@NativeType("VkDeviceSize") long value) { VkGeneratedCommandsInfoNV.nsequencesIndexOffset(address(), value); return this; }
 
     }

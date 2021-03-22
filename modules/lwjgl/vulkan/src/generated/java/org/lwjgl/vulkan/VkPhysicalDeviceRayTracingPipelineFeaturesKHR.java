@@ -34,27 +34,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code rayTracingPipeline} &ndash; indicates whether the implementation supports the ray tracing pipeline functionality. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#ray-tracing">Ray Tracing</a>.</li>
- * <li>{@code rayTracingPipelineShaderGroupHandleCaptureReplay} &ndash; indicates whether the implementation supports saving and reusing shader group handles, e.g. for trace capture and replay.</li>
- * <li>{@code rayTracingPipelineShaderGroupHandleCaptureReplayMixed} &ndash; indicates whether the implementation supports reuse of shader group handles being arbitrarily mixed with creation of non-reused shader group handles. If this is {@link VK10#VK_FALSE FALSE}, all reused shader group handles <b>must</b> be specified before any non-reused handles <b>may</b> be created.</li>
- * <li>{@code rayTracingPipelineTraceRaysIndirect} &ndash; indicates whether the implementation supports indirect trace ray commands, e.g. {@link KHRRayTracingPipeline#vkCmdTraceRaysIndirectKHR CmdTraceRaysIndirectKHR}.</li>
- * <li>{@code rayTraversalPrimitiveCulling} &ndash; indicates whether the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#ray-traversal-culling-primitive">primitive culling during ray traversal</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceRayTracingPipelineFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 rayTracingPipeline;
- *     VkBool32 rayTracingPipelineShaderGroupHandleCaptureReplay;
- *     VkBool32 rayTracingPipelineShaderGroupHandleCaptureReplayMixed;
- *     VkBool32 rayTracingPipelineTraceRaysIndirect;
- *     VkBool32 rayTraversalPrimitiveCulling;
+ *     VkBool32 {@link #rayTracingPipeline};
+ *     VkBool32 {@link #rayTracingPipelineShaderGroupHandleCaptureReplay};
+ *     VkBool32 {@link #rayTracingPipelineShaderGroupHandleCaptureReplayMixed};
+ *     VkBool32 {@link #rayTracingPipelineTraceRaysIndirect};
+ *     VkBool32 {@link #rayTraversalPrimitiveCulling};
  * }</code></pre>
  */
 public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implements NativeResource {
@@ -111,25 +101,25 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code rayTracingPipeline} field. */
+    /** indicates whether the implementation supports the ray tracing pipeline functionality. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#ray-tracing">Ray Tracing</a>. */
     @NativeType("VkBool32")
     public boolean rayTracingPipeline() { return nrayTracingPipeline(address()) != 0; }
-    /** Returns the value of the {@code rayTracingPipelineShaderGroupHandleCaptureReplay} field. */
+    /** indicates whether the implementation supports saving and reusing shader group handles, e.g. for trace capture and replay. */
     @NativeType("VkBool32")
     public boolean rayTracingPipelineShaderGroupHandleCaptureReplay() { return nrayTracingPipelineShaderGroupHandleCaptureReplay(address()) != 0; }
-    /** Returns the value of the {@code rayTracingPipelineShaderGroupHandleCaptureReplayMixed} field. */
+    /** indicates whether the implementation supports reuse of shader group handles being arbitrarily mixed with creation of non-reused shader group handles. If this is {@link VK10#VK_FALSE FALSE}, all reused shader group handles <b>must</b> be specified before any non-reused handles <b>may</b> be created. */
     @NativeType("VkBool32")
     public boolean rayTracingPipelineShaderGroupHandleCaptureReplayMixed() { return nrayTracingPipelineShaderGroupHandleCaptureReplayMixed(address()) != 0; }
-    /** Returns the value of the {@code rayTracingPipelineTraceRaysIndirect} field. */
+    /** indicates whether the implementation supports indirect trace ray commands, e.g. {@link KHRRayTracingPipeline#vkCmdTraceRaysIndirectKHR CmdTraceRaysIndirectKHR}. */
     @NativeType("VkBool32")
     public boolean rayTracingPipelineTraceRaysIndirect() { return nrayTracingPipelineTraceRaysIndirect(address()) != 0; }
-    /** Returns the value of the {@code rayTraversalPrimitiveCulling} field. */
+    /** indicates whether the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#ray-traversal-culling-primitive">primitive culling during ray traversal</a>. */
     @NativeType("VkBool32")
     public boolean rayTraversalPrimitiveCulling() { return nrayTraversalPrimitiveCulling(address()) != 0; }
 
@@ -137,15 +127,15 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
     public VkPhysicalDeviceRayTracingPipelineFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceRayTracingPipelineFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code rayTracingPipeline} field. */
+    /** Sets the specified value to the {@link #rayTracingPipeline} field. */
     public VkPhysicalDeviceRayTracingPipelineFeaturesKHR rayTracingPipeline(@NativeType("VkBool32") boolean value) { nrayTracingPipeline(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code rayTracingPipelineShaderGroupHandleCaptureReplay} field. */
+    /** Sets the specified value to the {@link #rayTracingPipelineShaderGroupHandleCaptureReplay} field. */
     public VkPhysicalDeviceRayTracingPipelineFeaturesKHR rayTracingPipelineShaderGroupHandleCaptureReplay(@NativeType("VkBool32") boolean value) { nrayTracingPipelineShaderGroupHandleCaptureReplay(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code rayTracingPipelineShaderGroupHandleCaptureReplayMixed} field. */
+    /** Sets the specified value to the {@link #rayTracingPipelineShaderGroupHandleCaptureReplayMixed} field. */
     public VkPhysicalDeviceRayTracingPipelineFeaturesKHR rayTracingPipelineShaderGroupHandleCaptureReplayMixed(@NativeType("VkBool32") boolean value) { nrayTracingPipelineShaderGroupHandleCaptureReplayMixed(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code rayTracingPipelineTraceRaysIndirect} field. */
+    /** Sets the specified value to the {@link #rayTracingPipelineTraceRaysIndirect} field. */
     public VkPhysicalDeviceRayTracingPipelineFeaturesKHR rayTracingPipelineTraceRaysIndirect(@NativeType("VkBool32") boolean value) { nrayTracingPipelineTraceRaysIndirect(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code rayTraversalPrimitiveCulling} field. */
+    /** Sets the specified value to the {@link #rayTraversalPrimitiveCulling} field. */
     public VkPhysicalDeviceRayTracingPipelineFeaturesKHR rayTraversalPrimitiveCulling(@NativeType("VkBool32") boolean value) { nrayTraversalPrimitiveCulling(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -392,25 +382,25 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceRayTracingPipelineFeaturesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceRayTracingPipelineFeaturesKHR.npNext(address()); }
-        /** Returns the value of the {@code rayTracingPipeline} field. */
+        /** @return the value of the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#rayTracingPipeline} field. */
         @NativeType("VkBool32")
         public boolean rayTracingPipeline() { return VkPhysicalDeviceRayTracingPipelineFeaturesKHR.nrayTracingPipeline(address()) != 0; }
-        /** Returns the value of the {@code rayTracingPipelineShaderGroupHandleCaptureReplay} field. */
+        /** @return the value of the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#rayTracingPipelineShaderGroupHandleCaptureReplay} field. */
         @NativeType("VkBool32")
         public boolean rayTracingPipelineShaderGroupHandleCaptureReplay() { return VkPhysicalDeviceRayTracingPipelineFeaturesKHR.nrayTracingPipelineShaderGroupHandleCaptureReplay(address()) != 0; }
-        /** Returns the value of the {@code rayTracingPipelineShaderGroupHandleCaptureReplayMixed} field. */
+        /** @return the value of the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#rayTracingPipelineShaderGroupHandleCaptureReplayMixed} field. */
         @NativeType("VkBool32")
         public boolean rayTracingPipelineShaderGroupHandleCaptureReplayMixed() { return VkPhysicalDeviceRayTracingPipelineFeaturesKHR.nrayTracingPipelineShaderGroupHandleCaptureReplayMixed(address()) != 0; }
-        /** Returns the value of the {@code rayTracingPipelineTraceRaysIndirect} field. */
+        /** @return the value of the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#rayTracingPipelineTraceRaysIndirect} field. */
         @NativeType("VkBool32")
         public boolean rayTracingPipelineTraceRaysIndirect() { return VkPhysicalDeviceRayTracingPipelineFeaturesKHR.nrayTracingPipelineTraceRaysIndirect(address()) != 0; }
-        /** Returns the value of the {@code rayTraversalPrimitiveCulling} field. */
+        /** @return the value of the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#rayTraversalPrimitiveCulling} field. */
         @NativeType("VkBool32")
         public boolean rayTraversalPrimitiveCulling() { return VkPhysicalDeviceRayTracingPipelineFeaturesKHR.nrayTraversalPrimitiveCulling(address()) != 0; }
 
@@ -418,15 +408,15 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
         public VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRayTracingPipelineFeaturesKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRayTracingPipelineFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code rayTracingPipeline} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#rayTracingPipeline} field. */
         public VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer rayTracingPipeline(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRayTracingPipelineFeaturesKHR.nrayTracingPipeline(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code rayTracingPipelineShaderGroupHandleCaptureReplay} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#rayTracingPipelineShaderGroupHandleCaptureReplay} field. */
         public VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer rayTracingPipelineShaderGroupHandleCaptureReplay(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRayTracingPipelineFeaturesKHR.nrayTracingPipelineShaderGroupHandleCaptureReplay(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code rayTracingPipelineShaderGroupHandleCaptureReplayMixed} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#rayTracingPipelineShaderGroupHandleCaptureReplayMixed} field. */
         public VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer rayTracingPipelineShaderGroupHandleCaptureReplayMixed(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRayTracingPipelineFeaturesKHR.nrayTracingPipelineShaderGroupHandleCaptureReplayMixed(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code rayTracingPipelineTraceRaysIndirect} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#rayTracingPipelineTraceRaysIndirect} field. */
         public VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer rayTracingPipelineTraceRaysIndirect(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRayTracingPipelineFeaturesKHR.nrayTracingPipelineTraceRaysIndirect(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code rayTraversalPrimitiveCulling} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#rayTraversalPrimitiveCulling} field. */
         public VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer rayTraversalPrimitiveCulling(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRayTracingPipelineFeaturesKHR.nrayTraversalPrimitiveCulling(address(), value ? 1 : 0); return this; }
 
     }

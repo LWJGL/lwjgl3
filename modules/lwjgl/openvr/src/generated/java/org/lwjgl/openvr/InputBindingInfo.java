@@ -76,34 +76,34 @@ public class InputBindingInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code rchDevicePathName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code rchDevicePathName} field. */
     @NativeType("char[128]")
     public ByteBuffer rchDevicePathName() { return nrchDevicePathName(address()); }
-    /** Decodes the null-terminated string stored in the {@code rchDevicePathName} field. */
+    /** @return the null-terminated string stored in the {@code rchDevicePathName} field. */
     @NativeType("char[128]")
     public String rchDevicePathNameString() { return nrchDevicePathNameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code rchInputPathName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code rchInputPathName} field. */
     @NativeType("char[128]")
     public ByteBuffer rchInputPathName() { return nrchInputPathName(address()); }
-    /** Decodes the null-terminated string stored in the {@code rchInputPathName} field. */
+    /** @return the null-terminated string stored in the {@code rchInputPathName} field. */
     @NativeType("char[128]")
     public String rchInputPathNameString() { return nrchInputPathNameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code rchModeName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code rchModeName} field. */
     @NativeType("char[128]")
     public ByteBuffer rchModeName() { return nrchModeName(address()); }
-    /** Decodes the null-terminated string stored in the {@code rchModeName} field. */
+    /** @return the null-terminated string stored in the {@code rchModeName} field. */
     @NativeType("char[128]")
     public String rchModeNameString() { return nrchModeNameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code rchSlotName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code rchSlotName} field. */
     @NativeType("char[128]")
     public ByteBuffer rchSlotName() { return nrchSlotName(address()); }
-    /** Decodes the null-terminated string stored in the {@code rchSlotName} field. */
+    /** @return the null-terminated string stored in the {@code rchSlotName} field. */
     @NativeType("char[128]")
     public String rchSlotNameString() { return nrchSlotNameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code rchInputSourceType} field. */
+    /** @return a {@link ByteBuffer} view of the {@code rchInputSourceType} field. */
     @NativeType("char[32]")
     public ByteBuffer rchInputSourceType() { return nrchInputSourceType(address()); }
-    /** Decodes the null-terminated string stored in the {@code rchInputSourceType} field. */
+    /** @return the null-terminated string stored in the {@code rchInputSourceType} field. */
     @NativeType("char[32]")
     public String rchInputSourceTypeString() { return nrchInputSourceTypeString(address()); }
 
@@ -309,34 +309,34 @@ public class InputBindingInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code rchDevicePathName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code rchDevicePathName} field. */
         @NativeType("char[128]")
         public ByteBuffer rchDevicePathName() { return InputBindingInfo.nrchDevicePathName(address()); }
-        /** Decodes the null-terminated string stored in the {@code rchDevicePathName} field. */
+        /** @return the null-terminated string stored in the {@code rchDevicePathName} field. */
         @NativeType("char[128]")
         public String rchDevicePathNameString() { return InputBindingInfo.nrchDevicePathNameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code rchInputPathName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code rchInputPathName} field. */
         @NativeType("char[128]")
         public ByteBuffer rchInputPathName() { return InputBindingInfo.nrchInputPathName(address()); }
-        /** Decodes the null-terminated string stored in the {@code rchInputPathName} field. */
+        /** @return the null-terminated string stored in the {@code rchInputPathName} field. */
         @NativeType("char[128]")
         public String rchInputPathNameString() { return InputBindingInfo.nrchInputPathNameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code rchModeName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code rchModeName} field. */
         @NativeType("char[128]")
         public ByteBuffer rchModeName() { return InputBindingInfo.nrchModeName(address()); }
-        /** Decodes the null-terminated string stored in the {@code rchModeName} field. */
+        /** @return the null-terminated string stored in the {@code rchModeName} field. */
         @NativeType("char[128]")
         public String rchModeNameString() { return InputBindingInfo.nrchModeNameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code rchSlotName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code rchSlotName} field. */
         @NativeType("char[128]")
         public ByteBuffer rchSlotName() { return InputBindingInfo.nrchSlotName(address()); }
-        /** Decodes the null-terminated string stored in the {@code rchSlotName} field. */
+        /** @return the null-terminated string stored in the {@code rchSlotName} field. */
         @NativeType("char[128]")
         public String rchSlotNameString() { return InputBindingInfo.nrchSlotNameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code rchInputSourceType} field. */
+        /** @return a {@link ByteBuffer} view of the {@code rchInputSourceType} field. */
         @NativeType("char[32]")
         public ByteBuffer rchInputSourceType() { return InputBindingInfo.nrchInputSourceType(address()); }
-        /** Decodes the null-terminated string stored in the {@code rchInputSourceType} field. */
+        /** @return the null-terminated string stored in the {@code rchInputSourceType} field. */
         @NativeType("char[32]")
         public String rchInputSourceTypeString() { return InputBindingInfo.nrchInputSourceTypeString(address()); }
 

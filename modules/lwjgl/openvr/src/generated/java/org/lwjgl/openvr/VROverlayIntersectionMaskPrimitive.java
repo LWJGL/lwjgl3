@@ -64,10 +64,10 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code m_nPrimitiveType} field. */
+    /** @return the value of the {@code m_nPrimitiveType} field. */
     @NativeType("EVROverlayIntersectionMaskPrimitiveType")
     public int m_nPrimitiveType() { return nm_nPrimitiveType(address()); }
-    /** Returns a {@link VROverlayIntersectionMaskPrimitiveData} view of the {@code m_Primitive} field. */
+    /** @return a {@link VROverlayIntersectionMaskPrimitiveData} view of the {@code m_Primitive} field. */
     @NativeType("VROverlayIntersectionMaskPrimitive_Data_t")
     public VROverlayIntersectionMaskPrimitiveData m_Primitive() { return nm_Primitive(address()); }
 
@@ -292,10 +292,10 @@ public class VROverlayIntersectionMaskPrimitive extends Struct implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code m_nPrimitiveType} field. */
+        /** @return the value of the {@code m_nPrimitiveType} field. */
         @NativeType("EVROverlayIntersectionMaskPrimitiveType")
         public int m_nPrimitiveType() { return VROverlayIntersectionMaskPrimitive.nm_nPrimitiveType(address()); }
-        /** Returns a {@link VROverlayIntersectionMaskPrimitiveData} view of the {@code m_Primitive} field. */
+        /** @return a {@link VROverlayIntersectionMaskPrimitiveData} view of the {@code m_Primitive} field. */
         @NativeType("VROverlayIntersectionMaskPrimitive_Data_t")
         public VROverlayIntersectionMaskPrimitiveData m_Primitive() { return VROverlayIntersectionMaskPrimitive.nm_Primitive(address()); }
 

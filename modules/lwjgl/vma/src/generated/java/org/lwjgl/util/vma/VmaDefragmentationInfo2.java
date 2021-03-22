@@ -23,75 +23,21 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>To be used with function {@link Vma#vmaDefragmentationBegin DefragmentationBegin}.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code flags} &ndash; reserved for future use. Should be 0.</li>
- * <li>{@code allocationCount} &ndash; number of allocations in {@code pAllocations} array</li>
- * <li>{@code pAllocations} &ndash; 
- * Pointer to array of allocations that can be defragmented.
- * 
- * <p>The array should have {@code allocationCount} elements. The array should not contain nulls. Elements in the array should be unique - same allocation
- * cannot occur twice. It is safe to pass allocations that are in the lost state - they are ignored. All allocations not present in this array are
- * considered non-moveable during this defragmentation.</p></li>
- * <li>{@code pAllocationsChanged} &ndash; 
- * Optional, output. Pointer to array that will be filled with information whether the allocation at certain index has been changed during defragmentation.
- * 
- * <p>The array should have {@code allocationCount} elements. You can pass null if you are not interested in this information.</p></li>
- * <li>{@code poolCount} &ndash; number of pools in {@code pPools} array</li>
- * <li>{@code pPools} &ndash; 
- * Either null or pointer to array of pools to be defragmented.
- * 
- * <p>All the allocations in the specified pools can be moved during defragmentation and there is no way to check if they were really moved as in
- * {@code pAllocationsChanged}, so you must query all the allocations in all these pools for new {@code VkDeviceMemory} and offset using
- * {@link Vma#vmaGetAllocationInfo GetAllocationInfo} if you might need to recreate buffers and images bound to them.</p>
- * 
- * <p>The array should have {@code poolCount} elements. The array should not contain nulls. Elements in the array should be unique - same pool cannot occur
- * twice.</p>
- * 
- * <p>Using this array is equivalent to specifying all allocations from the pools in {@code pAllocations}. It might be more efficient.</p></li>
- * <li>{@code maxCpuBytesToMove} &ndash; 
- * Maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on CPU side, like {@code memcpy()},
- * {@code memmove()}.
- * 
- * <p>{@code VK_WHOLE_SIZE} means no limit.</p></li>
- * <li>{@code maxCpuAllocationsToMove} &ndash; 
- * Maximum number of allocations that can be moved to a different place using transfers on CPU side, like {@code memcpy()}, {@code memmove()}.
- * 
- * <p>{@code UINT32_MAX} means no limit.</p></li>
- * <li>{@code maxGpuBytesToMove} &ndash; 
- * Maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on GPU side, posted to
- * {@code commandBuffer}.
- * 
- * <p>{@code VK_WHOLE_SIZE} means no limit.</p></li>
- * <li>{@code maxGpuAllocationsToMove} &ndash; 
- * Maximum number of allocations that can be moved to a different place using transfers on GPU side, posted to {@code commandBuffer}.
- * 
- * <p>{@code UINT32_MAX} means no limit.</p></li>
- * <li>{@code commandBuffer} &ndash; 
- * Optional. Command buffer where GPU copy commands will be posted.
- * 
- * <p>If not null, it must be a valid command buffer handle that supports Transfer queue type. It must be in the recording state and outside of a render pass
- * instance. You need to submit it and make sure it finished execution before calling {@link Vma#vmaDefragmentationEnd DefragmentationEnd}.</p>
- * 
- * <p>Passing null means that only CPU defragmentation will be performed.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VmaDefragmentationInfo2 {
- *     VmaDefragmentationFlags flags;
- *     uint32_t allocationCount;
- *     VmaAllocation * pAllocations;
- *     VkBool32 * pAllocationsChanged;
- *     uint32_t poolCount;
- *     VmaPool const * pPools;
- *     VkDeviceSize maxCpuBytesToMove;
- *     uint32_t maxCpuAllocationsToMove;
- *     VkDeviceSize maxGpuBytesToMove;
- *     uint32_t maxGpuAllocationsToMove;
- *     VkCommandBuffer commandBuffer;
+ *     VmaDefragmentationFlags {@link #flags};
+ *     uint32_t {@link #allocationCount};
+ *     VmaAllocation * {@link #pAllocations};
+ *     VkBool32 * {@link #pAllocationsChanged};
+ *     uint32_t {@link #poolCount};
+ *     VmaPool const * {@link #pPools};
+ *     VkDeviceSize {@link #maxCpuBytesToMove};
+ *     uint32_t {@link #maxCpuAllocationsToMove};
+ *     VkDeviceSize {@link #maxGpuBytesToMove};
+ *     uint32_t {@link #maxGpuAllocationsToMove};
+ *     VkCommandBuffer {@link #commandBuffer};
  * }</code></pre>
  */
 public class VmaDefragmentationInfo2 extends Struct implements NativeResource {
@@ -160,64 +106,110 @@ public class VmaDefragmentationInfo2 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. Should be 0. */
     @NativeType("VmaDefragmentationFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code allocationCount} field. */
+    /** number of allocations in {@code pAllocations} array */
     @NativeType("uint32_t")
     public int allocationCount() { return nallocationCount(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code pAllocations} field. */
+    /**
+     * Pointer to array of allocations that can be defragmented.
+     * 
+     * <p>The array should have {@code allocationCount} elements. The array should not contain nulls. Elements in the array should be unique - same allocation
+     * cannot occur twice. It is safe to pass allocations that are in the lost state - they are ignored. All allocations not present in this array are
+     * considered non-moveable during this defragmentation.</p>
+     */
     @NativeType("VmaAllocation *")
     public PointerBuffer pAllocations() { return npAllocations(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pAllocationsChanged} field. */
+    /**
+     * Optional, output. Pointer to array that will be filled with information whether the allocation at certain index has been changed during defragmentation.
+     * 
+     * <p>The array should have {@code allocationCount} elements. You can pass null if you are not interested in this information.</p>
+     */
     @Nullable
     @NativeType("VkBool32 *")
     public IntBuffer pAllocationsChanged() { return npAllocationsChanged(address()); }
-    /** Returns the value of the {@code poolCount} field. */
+    /** number of pools in {@code pPools} array */
     @NativeType("uint32_t")
     public int poolCount() { return npoolCount(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code pPools} field. */
+    /**
+     * Either null or pointer to array of pools to be defragmented.
+     * 
+     * <p>All the allocations in the specified pools can be moved during defragmentation and there is no way to check if they were really moved as in
+     * {@code pAllocationsChanged}, so you must query all the allocations in all these pools for new {@code VkDeviceMemory} and offset using
+     * {@link Vma#vmaGetAllocationInfo GetAllocationInfo} if you might need to recreate buffers and images bound to them.</p>
+     * 
+     * <p>The array should have {@code poolCount} elements. The array should not contain nulls. Elements in the array should be unique - same pool cannot occur
+     * twice.</p>
+     * 
+     * <p>Using this array is equivalent to specifying all allocations from the pools in {@code pAllocations}. It might be more efficient.</p>
+     */
     @Nullable
     @NativeType("VmaPool const *")
     public PointerBuffer pPools() { return npPools(address()); }
-    /** Returns the value of the {@code maxCpuBytesToMove} field. */
+    /**
+     * Maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on CPU side, like {@code memcpy()},
+     * {@code memmove()}.
+     * 
+     * <p>{@code VK_WHOLE_SIZE} means no limit.</p>
+     */
     @NativeType("VkDeviceSize")
     public long maxCpuBytesToMove() { return nmaxCpuBytesToMove(address()); }
-    /** Returns the value of the {@code maxCpuAllocationsToMove} field. */
+    /**
+     * Maximum number of allocations that can be moved to a different place using transfers on CPU side, like {@code memcpy()}, {@code memmove()}.
+     * 
+     * <p>{@code UINT32_MAX} means no limit.</p>
+     */
     @NativeType("uint32_t")
     public int maxCpuAllocationsToMove() { return nmaxCpuAllocationsToMove(address()); }
-    /** Returns the value of the {@code maxGpuBytesToMove} field. */
+    /**
+     * Maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on GPU side, posted to
+     * {@code commandBuffer}.
+     * 
+     * <p>{@code VK_WHOLE_SIZE} means no limit.</p>
+     */
     @NativeType("VkDeviceSize")
     public long maxGpuBytesToMove() { return nmaxGpuBytesToMove(address()); }
-    /** Returns the value of the {@code maxGpuAllocationsToMove} field. */
+    /**
+     * Maximum number of allocations that can be moved to a different place using transfers on GPU side, posted to {@code commandBuffer}.
+     * 
+     * <p>{@code UINT32_MAX} means no limit.</p>
+     */
     @NativeType("uint32_t")
     public int maxGpuAllocationsToMove() { return nmaxGpuAllocationsToMove(address()); }
-    /** Returns the value of the {@code commandBuffer} field. */
+    /**
+     * Optional. Command buffer where GPU copy commands will be posted.
+     * 
+     * <p>If not null, it must be a valid command buffer handle that supports Transfer queue type. It must be in the recording state and outside of a render pass
+     * instance. You need to submit it and make sure it finished execution before calling {@link Vma#vmaDefragmentationEnd DefragmentationEnd}.</p>
+     * 
+     * <p>Passing null means that only CPU defragmentation will be performed.</p>
+     */
     @Nullable
     @NativeType("VkCommandBuffer")
     public long commandBuffer() { return ncommandBuffer(address()); }
 
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VmaDefragmentationInfo2 flags(@NativeType("VmaDefragmentationFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code allocationCount} field. */
+    /** Sets the specified value to the {@link #allocationCount} field. */
     public VmaDefragmentationInfo2 allocationCount(@NativeType("uint32_t") int value) { nallocationCount(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code pAllocations} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #pAllocations} field. */
     public VmaDefragmentationInfo2 pAllocations(@NativeType("VmaAllocation *") PointerBuffer value) { npAllocations(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pAllocationsChanged} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pAllocationsChanged} field. */
     public VmaDefragmentationInfo2 pAllocationsChanged(@Nullable @NativeType("VkBool32 *") IntBuffer value) { npAllocationsChanged(address(), value); return this; }
-    /** Sets the specified value to the {@code poolCount} field. */
+    /** Sets the specified value to the {@link #poolCount} field. */
     public VmaDefragmentationInfo2 poolCount(@NativeType("uint32_t") int value) { npoolCount(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code pPools} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #pPools} field. */
     public VmaDefragmentationInfo2 pPools(@Nullable @NativeType("VmaPool const *") PointerBuffer value) { npPools(address(), value); return this; }
-    /** Sets the specified value to the {@code maxCpuBytesToMove} field. */
+    /** Sets the specified value to the {@link #maxCpuBytesToMove} field. */
     public VmaDefragmentationInfo2 maxCpuBytesToMove(@NativeType("VkDeviceSize") long value) { nmaxCpuBytesToMove(address(), value); return this; }
-    /** Sets the specified value to the {@code maxCpuAllocationsToMove} field. */
+    /** Sets the specified value to the {@link #maxCpuAllocationsToMove} field. */
     public VmaDefragmentationInfo2 maxCpuAllocationsToMove(@NativeType("uint32_t") int value) { nmaxCpuAllocationsToMove(address(), value); return this; }
-    /** Sets the specified value to the {@code maxGpuBytesToMove} field. */
+    /** Sets the specified value to the {@link #maxGpuBytesToMove} field. */
     public VmaDefragmentationInfo2 maxGpuBytesToMove(@NativeType("VkDeviceSize") long value) { nmaxGpuBytesToMove(address(), value); return this; }
-    /** Sets the specified value to the {@code maxGpuAllocationsToMove} field. */
+    /** Sets the specified value to the {@link #maxGpuAllocationsToMove} field. */
     public VmaDefragmentationInfo2 maxGpuAllocationsToMove(@NativeType("uint32_t") int value) { nmaxGpuAllocationsToMove(address(), value); return this; }
-    /** Sets the specified value to the {@code commandBuffer} field. */
+    /** Sets the specified value to the {@link #commandBuffer} field. */
     public VmaDefragmentationInfo2 commandBuffer(@Nullable VkCommandBuffer value) { ncommandBuffer(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -509,64 +501,64 @@ public class VmaDefragmentationInfo2 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VmaDefragmentationInfo2#flags} field. */
         @NativeType("VmaDefragmentationFlags")
         public int flags() { return VmaDefragmentationInfo2.nflags(address()); }
-        /** Returns the value of the {@code allocationCount} field. */
+        /** @return the value of the {@link VmaDefragmentationInfo2#allocationCount} field. */
         @NativeType("uint32_t")
         public int allocationCount() { return VmaDefragmentationInfo2.nallocationCount(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code pAllocations} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VmaDefragmentationInfo2#pAllocations} field. */
         @NativeType("VmaAllocation *")
         public PointerBuffer pAllocations() { return VmaDefragmentationInfo2.npAllocations(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pAllocationsChanged} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VmaDefragmentationInfo2#pAllocationsChanged} field. */
         @Nullable
         @NativeType("VkBool32 *")
         public IntBuffer pAllocationsChanged() { return VmaDefragmentationInfo2.npAllocationsChanged(address()); }
-        /** Returns the value of the {@code poolCount} field. */
+        /** @return the value of the {@link VmaDefragmentationInfo2#poolCount} field. */
         @NativeType("uint32_t")
         public int poolCount() { return VmaDefragmentationInfo2.npoolCount(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code pPools} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VmaDefragmentationInfo2#pPools} field. */
         @Nullable
         @NativeType("VmaPool const *")
         public PointerBuffer pPools() { return VmaDefragmentationInfo2.npPools(address()); }
-        /** Returns the value of the {@code maxCpuBytesToMove} field. */
+        /** @return the value of the {@link VmaDefragmentationInfo2#maxCpuBytesToMove} field. */
         @NativeType("VkDeviceSize")
         public long maxCpuBytesToMove() { return VmaDefragmentationInfo2.nmaxCpuBytesToMove(address()); }
-        /** Returns the value of the {@code maxCpuAllocationsToMove} field. */
+        /** @return the value of the {@link VmaDefragmentationInfo2#maxCpuAllocationsToMove} field. */
         @NativeType("uint32_t")
         public int maxCpuAllocationsToMove() { return VmaDefragmentationInfo2.nmaxCpuAllocationsToMove(address()); }
-        /** Returns the value of the {@code maxGpuBytesToMove} field. */
+        /** @return the value of the {@link VmaDefragmentationInfo2#maxGpuBytesToMove} field. */
         @NativeType("VkDeviceSize")
         public long maxGpuBytesToMove() { return VmaDefragmentationInfo2.nmaxGpuBytesToMove(address()); }
-        /** Returns the value of the {@code maxGpuAllocationsToMove} field. */
+        /** @return the value of the {@link VmaDefragmentationInfo2#maxGpuAllocationsToMove} field. */
         @NativeType("uint32_t")
         public int maxGpuAllocationsToMove() { return VmaDefragmentationInfo2.nmaxGpuAllocationsToMove(address()); }
-        /** Returns the value of the {@code commandBuffer} field. */
+        /** @return the value of the {@link VmaDefragmentationInfo2#commandBuffer} field. */
         @Nullable
         @NativeType("VkCommandBuffer")
         public long commandBuffer() { return VmaDefragmentationInfo2.ncommandBuffer(address()); }
 
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VmaDefragmentationInfo2#flags} field. */
         public VmaDefragmentationInfo2.Buffer flags(@NativeType("VmaDefragmentationFlags") int value) { VmaDefragmentationInfo2.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code allocationCount} field. */
+        /** Sets the specified value to the {@link VmaDefragmentationInfo2#allocationCount} field. */
         public VmaDefragmentationInfo2.Buffer allocationCount(@NativeType("uint32_t") int value) { VmaDefragmentationInfo2.nallocationCount(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code pAllocations} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link VmaDefragmentationInfo2#pAllocations} field. */
         public VmaDefragmentationInfo2.Buffer pAllocations(@NativeType("VmaAllocation *") PointerBuffer value) { VmaDefragmentationInfo2.npAllocations(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pAllocationsChanged} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VmaDefragmentationInfo2#pAllocationsChanged} field. */
         public VmaDefragmentationInfo2.Buffer pAllocationsChanged(@Nullable @NativeType("VkBool32 *") IntBuffer value) { VmaDefragmentationInfo2.npAllocationsChanged(address(), value); return this; }
-        /** Sets the specified value to the {@code poolCount} field. */
+        /** Sets the specified value to the {@link VmaDefragmentationInfo2#poolCount} field. */
         public VmaDefragmentationInfo2.Buffer poolCount(@NativeType("uint32_t") int value) { VmaDefragmentationInfo2.npoolCount(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code pPools} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link VmaDefragmentationInfo2#pPools} field. */
         public VmaDefragmentationInfo2.Buffer pPools(@Nullable @NativeType("VmaPool const *") PointerBuffer value) { VmaDefragmentationInfo2.npPools(address(), value); return this; }
-        /** Sets the specified value to the {@code maxCpuBytesToMove} field. */
+        /** Sets the specified value to the {@link VmaDefragmentationInfo2#maxCpuBytesToMove} field. */
         public VmaDefragmentationInfo2.Buffer maxCpuBytesToMove(@NativeType("VkDeviceSize") long value) { VmaDefragmentationInfo2.nmaxCpuBytesToMove(address(), value); return this; }
-        /** Sets the specified value to the {@code maxCpuAllocationsToMove} field. */
+        /** Sets the specified value to the {@link VmaDefragmentationInfo2#maxCpuAllocationsToMove} field. */
         public VmaDefragmentationInfo2.Buffer maxCpuAllocationsToMove(@NativeType("uint32_t") int value) { VmaDefragmentationInfo2.nmaxCpuAllocationsToMove(address(), value); return this; }
-        /** Sets the specified value to the {@code maxGpuBytesToMove} field. */
+        /** Sets the specified value to the {@link VmaDefragmentationInfo2#maxGpuBytesToMove} field. */
         public VmaDefragmentationInfo2.Buffer maxGpuBytesToMove(@NativeType("VkDeviceSize") long value) { VmaDefragmentationInfo2.nmaxGpuBytesToMove(address(), value); return this; }
-        /** Sets the specified value to the {@code maxGpuAllocationsToMove} field. */
+        /** Sets the specified value to the {@link VmaDefragmentationInfo2#maxGpuAllocationsToMove} field. */
         public VmaDefragmentationInfo2.Buffer maxGpuAllocationsToMove(@NativeType("uint32_t") int value) { VmaDefragmentationInfo2.nmaxGpuAllocationsToMove(address(), value); return this; }
-        /** Sets the specified value to the {@code commandBuffer} field. */
+        /** Sets the specified value to the {@link VmaDefragmentationInfo2#commandBuffer} field. */
         public VmaDefragmentationInfo2.Buffer commandBuffer(@Nullable VkCommandBuffer value) { VmaDefragmentationInfo2.ncommandBuffer(address(), value); return this; }
 
     }

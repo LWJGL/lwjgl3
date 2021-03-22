@@ -18,21 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying sparse image format properties.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code aspectMask} &ndash; a bitmask {@code VkImageAspectFlagBits} specifying which aspects of the image the properties apply to.</li>
- * <li>{@code imageGranularity} &ndash; the width, height, and depth of the sparse image block in texels or compressed texel blocks.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkSparseImageFormatFlagBits} specifying additional information about the sparse resource.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSparseImageFormatProperties {
- *     VkImageAspectFlags aspectMask;
- *     {@link VkExtent3D VkExtent3D} imageGranularity;
- *     VkSparseImageFormatFlags flags;
+ *     VkImageAspectFlags {@link #aspectMask};
+ *     {@link VkExtent3D VkExtent3D} {@link #imageGranularity};
+ *     VkSparseImageFormatFlags {@link #flags};
  * }</code></pre>
  */
 public class VkSparseImageFormatProperties extends Struct implements NativeResource {
@@ -77,12 +69,12 @@ public class VkSparseImageFormatProperties extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code aspectMask} field. */
+    /** a bitmask {@code VkImageAspectFlagBits} specifying which aspects of the image the properties apply to. */
     @NativeType("VkImageAspectFlags")
     public int aspectMask() { return naspectMask(address()); }
-    /** Returns a {@link VkExtent3D} view of the {@code imageGranularity} field. */
+    /** the width, height, and depth of the sparse image block in texels or compressed texel blocks. */
     public VkExtent3D imageGranularity() { return nimageGranularity(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkSparseImageFormatFlagBits} specifying additional information about the sparse resource. */
     @NativeType("VkSparseImageFormatFlags")
     public int flags() { return nflags(address()); }
 
@@ -274,12 +266,12 @@ public class VkSparseImageFormatProperties extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code aspectMask} field. */
+        /** @return the value of the {@link VkSparseImageFormatProperties#aspectMask} field. */
         @NativeType("VkImageAspectFlags")
         public int aspectMask() { return VkSparseImageFormatProperties.naspectMask(address()); }
-        /** Returns a {@link VkExtent3D} view of the {@code imageGranularity} field. */
+        /** @return a {@link VkExtent3D} view of the {@link VkSparseImageFormatProperties#imageGranularity} field. */
         public VkExtent3D imageGranularity() { return VkSparseImageFormatProperties.nimageGranularity(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkSparseImageFormatProperties#flags} field. */
         @NativeType("VkSparseImageFormatFlags")
         public int flags() { return VkSparseImageFormatProperties.nflags(address()); }
 

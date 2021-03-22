@@ -65,13 +65,13 @@ public class CXIdxObjCInterfaceDeclInfo extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link CXIdxObjCContainerDeclInfo} view of the struct pointed to by the {@code containerInfo} field. */
+    /** @return a {@link CXIdxObjCContainerDeclInfo} view of the struct pointed to by the {@code containerInfo} field. */
     @NativeType("CXIdxObjCContainerDeclInfo const *")
     public CXIdxObjCContainerDeclInfo containerInfo() { return ncontainerInfo(address()); }
-    /** Returns a {@link CXIdxBaseClassInfo} view of the struct pointed to by the {@code superInfo} field. */
+    /** @return a {@link CXIdxBaseClassInfo} view of the struct pointed to by the {@code superInfo} field. */
     @NativeType("CXIdxBaseClassInfo const *")
     public CXIdxBaseClassInfo superInfo() { return nsuperInfo(address()); }
-    /** Returns a {@link CXIdxObjCProtocolRefListInfo} view of the struct pointed to by the {@code protocols} field. */
+    /** @return a {@link CXIdxObjCProtocolRefListInfo} view of the struct pointed to by the {@code protocols} field. */
     @NativeType("CXIdxObjCProtocolRefListInfo const *")
     public CXIdxObjCProtocolRefListInfo protocols() { return nprotocols(address()); }
 
@@ -151,13 +151,13 @@ public class CXIdxObjCInterfaceDeclInfo extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link CXIdxObjCContainerDeclInfo} view of the struct pointed to by the {@code containerInfo} field. */
+        /** @return a {@link CXIdxObjCContainerDeclInfo} view of the struct pointed to by the {@code containerInfo} field. */
         @NativeType("CXIdxObjCContainerDeclInfo const *")
         public CXIdxObjCContainerDeclInfo containerInfo() { return CXIdxObjCInterfaceDeclInfo.ncontainerInfo(address()); }
-        /** Returns a {@link CXIdxBaseClassInfo} view of the struct pointed to by the {@code superInfo} field. */
+        /** @return a {@link CXIdxBaseClassInfo} view of the struct pointed to by the {@code superInfo} field. */
         @NativeType("CXIdxBaseClassInfo const *")
         public CXIdxBaseClassInfo superInfo() { return CXIdxObjCInterfaceDeclInfo.nsuperInfo(address()); }
-        /** Returns a {@link CXIdxObjCProtocolRefListInfo} view of the struct pointed to by the {@code protocols} field. */
+        /** @return a {@link CXIdxObjCProtocolRefListInfo} view of the struct pointed to by the {@code protocols} field. */
         @NativeType("CXIdxObjCProtocolRefListInfo const *")
         public CXIdxObjCProtocolRefListInfo protocols() { return CXIdxObjCInterfaceDeclInfo.nprotocols(address()); }
 

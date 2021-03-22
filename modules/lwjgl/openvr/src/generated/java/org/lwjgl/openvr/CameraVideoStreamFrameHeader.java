@@ -16,12 +16,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code ulFrameExposureTime} &ndash; mid-point of the exposure of the image in host system ticks</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -32,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t nBytesPerPixel;
  *     uint32_t nFrameSequence;
  *     {@link TrackedDevicePose TrackedDevicePose_t} trackedDevicePose;
- *     uint64_t ulFrameExposureTime;
+ *     uint64_t {@link #ulFrameExposureTime};
  * }</code></pre>
  */
 @NativeType("struct CameraVideoStreamFrameHeader_t")
@@ -90,25 +84,25 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code eFrameType} field. */
+    /** @return the value of the {@code eFrameType} field. */
     @NativeType("EVRTrackedCameraFrameType")
     public int eFrameType() { return neFrameType(address()); }
-    /** Returns the value of the {@code nWidth} field. */
+    /** @return the value of the {@code nWidth} field. */
     @NativeType("uint32_t")
     public int nWidth() { return nnWidth(address()); }
-    /** Returns the value of the {@code nHeight} field. */
+    /** @return the value of the {@code nHeight} field. */
     @NativeType("uint32_t")
     public int nHeight() { return nnHeight(address()); }
-    /** Returns the value of the {@code nBytesPerPixel} field. */
+    /** @return the value of the {@code nBytesPerPixel} field. */
     @NativeType("uint32_t")
     public int nBytesPerPixel() { return nnBytesPerPixel(address()); }
-    /** Returns the value of the {@code nFrameSequence} field. */
+    /** @return the value of the {@code nFrameSequence} field. */
     @NativeType("uint32_t")
     public int nFrameSequence() { return nnFrameSequence(address()); }
-    /** Returns a {@link TrackedDevicePose} view of the {@code trackedDevicePose} field. */
+    /** @return a {@link TrackedDevicePose} view of the {@code trackedDevicePose} field. */
     @NativeType("TrackedDevicePose_t")
     public TrackedDevicePose trackedDevicePose() { return ntrackedDevicePose(address()); }
-    /** Returns the value of the {@code ulFrameExposureTime} field. */
+    /** mid-point of the exposure of the image in host system ticks */
     @NativeType("uint64_t")
     public long ulFrameExposureTime() { return nulFrameExposureTime(address()); }
 
@@ -308,25 +302,25 @@ public class CameraVideoStreamFrameHeader extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code eFrameType} field. */
+        /** @return the value of the {@code eFrameType} field. */
         @NativeType("EVRTrackedCameraFrameType")
         public int eFrameType() { return CameraVideoStreamFrameHeader.neFrameType(address()); }
-        /** Returns the value of the {@code nWidth} field. */
+        /** @return the value of the {@code nWidth} field. */
         @NativeType("uint32_t")
         public int nWidth() { return CameraVideoStreamFrameHeader.nnWidth(address()); }
-        /** Returns the value of the {@code nHeight} field. */
+        /** @return the value of the {@code nHeight} field. */
         @NativeType("uint32_t")
         public int nHeight() { return CameraVideoStreamFrameHeader.nnHeight(address()); }
-        /** Returns the value of the {@code nBytesPerPixel} field. */
+        /** @return the value of the {@code nBytesPerPixel} field. */
         @NativeType("uint32_t")
         public int nBytesPerPixel() { return CameraVideoStreamFrameHeader.nnBytesPerPixel(address()); }
-        /** Returns the value of the {@code nFrameSequence} field. */
+        /** @return the value of the {@code nFrameSequence} field. */
         @NativeType("uint32_t")
         public int nFrameSequence() { return CameraVideoStreamFrameHeader.nnFrameSequence(address()); }
-        /** Returns a {@link TrackedDevicePose} view of the {@code trackedDevicePose} field. */
+        /** @return a {@link TrackedDevicePose} view of the {@code trackedDevicePose} field. */
         @NativeType("TrackedDevicePose_t")
         public TrackedDevicePose trackedDevicePose() { return CameraVideoStreamFrameHeader.ntrackedDevicePose(address()); }
-        /** Returns the value of the {@code ulFrameExposureTime} field. */
+        /** @return the value of the {@link CameraVideoStreamFrameHeader#ulFrameExposureTime} field. */
         @NativeType("uint64_t")
         public long ulFrameExposureTime() { return CameraVideoStreamFrameHeader.nulFrameExposureTime(address()); }
 

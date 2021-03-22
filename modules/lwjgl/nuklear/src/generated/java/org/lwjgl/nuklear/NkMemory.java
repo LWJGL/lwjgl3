@@ -62,11 +62,11 @@ public class NkMemory extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code ptr} field. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code ptr} field. */
     @Nullable
     @NativeType("void *")
     public ByteBuffer ptr() { return nptr(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** @return the value of the {@code size} field. */
     @NativeType("nk_size")
     public long size() { return nsize(address()); }
 
@@ -144,11 +144,11 @@ public class NkMemory extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code ptr} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code ptr} field. */
         @Nullable
         @NativeType("void *")
         public ByteBuffer ptr() { return NkMemory.nptr(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("nk_size")
         public long size() { return NkMemory.nsize(address()); }
 

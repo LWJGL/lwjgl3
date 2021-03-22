@@ -18,30 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Information about existing {@code VmaAllocator} object.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code instance} &ndash; 
- * Handle to Vulkan instance object.
- * 
- * <p>This is the same value as has been passed through {@link VmaAllocatorCreateInfo}{@code ::instance}.</p></li>
- * <li>{@code physicalDevice} &ndash; 
- * Handle to Vulkan physical device object.
- * 
- * <p>This is the same value as has been passed through {@link VmaAllocatorCreateInfo}{@code ::physicalDevice}.</p></li>
- * <li>{@code device} &ndash; 
- * Handle to Vulkan device object.
- * 
- * <p>This is the same value as has been passed through {@link VmaAllocatorCreateInfo}{@code ::device}.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VmaAllocatorInfo {
- *     VkInstance instance;
- *     VkPhysicalDevice physicalDevice;
- *     VkDevice device;
+ *     VkInstance {@link #instance};
+ *     VkPhysicalDevice {@link #physicalDevice};
+ *     VkDevice {@link #device};
  * }</code></pre>
  */
 public class VmaAllocatorInfo extends Struct implements NativeResource {
@@ -86,13 +69,25 @@ public class VmaAllocatorInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code instance} field. */
+    /**
+     * Handle to Vulkan instance object.
+     * 
+     * <p>This is the same value as has been passed through {@link VmaAllocatorCreateInfo}{@code ::instance}.</p>
+     */
     @NativeType("VkInstance")
     public long instance() { return ninstance(address()); }
-    /** Returns the value of the {@code physicalDevice} field. */
+    /**
+     * Handle to Vulkan physical device object.
+     * 
+     * <p>This is the same value as has been passed through {@link VmaAllocatorCreateInfo}{@code ::physicalDevice}.</p>
+     */
     @NativeType("VkPhysicalDevice")
     public long physicalDevice() { return nphysicalDevice(address()); }
-    /** Returns the value of the {@code device} field. */
+    /**
+     * Handle to Vulkan device object.
+     * 
+     * <p>This is the same value as has been passed through {@link VmaAllocatorCreateInfo}{@code ::device}.</p>
+     */
     @NativeType("VkDevice")
     public long device() { return ndevice(address()); }
 
@@ -284,13 +279,13 @@ public class VmaAllocatorInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code instance} field. */
+        /** @return the value of the {@link VmaAllocatorInfo#instance} field. */
         @NativeType("VkInstance")
         public long instance() { return VmaAllocatorInfo.ninstance(address()); }
-        /** Returns the value of the {@code physicalDevice} field. */
+        /** @return the value of the {@link VmaAllocatorInfo#physicalDevice} field. */
         @NativeType("VkPhysicalDevice")
         public long physicalDevice() { return VmaAllocatorInfo.nphysicalDevice(address()); }
-        /** Returns the value of the {@code device} field. */
+        /** @return the value of the {@link VmaAllocatorInfo#device} field. */
         @NativeType("VkDevice")
         public long device() { return VmaAllocatorInfo.ndevice(address()); }
 

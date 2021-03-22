@@ -65,13 +65,13 @@ public class LZ4StreamDecode extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link LongBuffer} view of the {@code table} field. */
+    /** @return a {@link LongBuffer} view of the {@code table} field. */
     @NativeType("unsigned long long[LZ4_STREAMDECODESIZE_U64]")
     public LongBuffer table() { return ntable(address()); }
-    /** Returns the value at the specified index of the {@code table} field. */
+    /** @return the value at the specified index of the {@code table} field. */
     @NativeType("unsigned long long")
     public long table(int index) { return ntable(address(), index); }
-    /** Returns a {@link LZ4StreamDecodeInternal} view of the {@code internal_donotuse} field. */
+    /** @return a {@link LZ4StreamDecodeInternal} view of the {@code internal_donotuse} field. */
     @NativeType("LZ4_streamDecode_t_internal")
     public LZ4StreamDecodeInternal internal_donotuse() { return ninternal_donotuse(address()); }
 
@@ -153,13 +153,13 @@ public class LZ4StreamDecode extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link LongBuffer} view of the {@code table} field. */
+        /** @return a {@link LongBuffer} view of the {@code table} field. */
         @NativeType("unsigned long long[LZ4_STREAMDECODESIZE_U64]")
         public LongBuffer table() { return LZ4StreamDecode.ntable(address()); }
-        /** Returns the value at the specified index of the {@code table} field. */
+        /** @return the value at the specified index of the {@code table} field. */
         @NativeType("unsigned long long")
         public long table(int index) { return LZ4StreamDecode.ntable(address(), index); }
-        /** Returns a {@link LZ4StreamDecodeInternal} view of the {@code internal_donotuse} field. */
+        /** @return a {@link LZ4StreamDecodeInternal} view of the {@code internal_donotuse} field. */
         @NativeType("LZ4_streamDecode_t_internal")
         public LZ4StreamDecodeInternal internal_donotuse() { return LZ4StreamDecode.ninternal_donotuse(address()); }
 

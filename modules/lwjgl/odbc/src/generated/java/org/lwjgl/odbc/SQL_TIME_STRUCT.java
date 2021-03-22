@@ -67,13 +67,13 @@ public class SQL_TIME_STRUCT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code hour} field. */
+    /** @return the value of the {@code hour} field. */
     @NativeType("SQLUSMALLINT")
     public short hour() { return nhour(address()); }
-    /** Returns the value of the {@code minute} field. */
+    /** @return the value of the {@code minute} field. */
     @NativeType("SQLUSMALLINT")
     public short minute() { return nminute(address()); }
-    /** Returns the value of the {@code second} field. */
+    /** @return the value of the {@code second} field. */
     @NativeType("SQLUSMALLINT")
     public short second() { return nsecond(address()); }
 
@@ -304,13 +304,13 @@ public class SQL_TIME_STRUCT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code hour} field. */
+        /** @return the value of the {@code hour} field. */
         @NativeType("SQLUSMALLINT")
         public short hour() { return SQL_TIME_STRUCT.nhour(address()); }
-        /** Returns the value of the {@code minute} field. */
+        /** @return the value of the {@code minute} field. */
         @NativeType("SQLUSMALLINT")
         public short minute() { return SQL_TIME_STRUCT.nminute(address()); }
-        /** Returns the value of the {@code second} field. */
+        /** @return the value of the {@code second} field. */
         @NativeType("SQLUSMALLINT")
         public short second() { return SQL_TIME_STRUCT.nsecond(address()); }
 

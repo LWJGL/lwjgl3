@@ -64,10 +64,10 @@ public class NkScroll extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     @NativeType("nk_uint")
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     @NativeType("nk_uint")
     public int y() { return ny(address()); }
 
@@ -257,10 +257,10 @@ public class NkScroll extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         @NativeType("nk_uint")
         public int x() { return NkScroll.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         @NativeType("nk_uint")
         public int y() { return NkScroll.ny(address()); }
 

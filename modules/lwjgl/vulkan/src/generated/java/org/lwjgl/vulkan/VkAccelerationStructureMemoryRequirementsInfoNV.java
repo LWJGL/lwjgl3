@@ -31,23 +31,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link NVRayTracing#vkGetAccelerationStructureMemoryRequirementsNV GetAccelerationStructureMemoryRequirementsNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code type} &ndash; selects the type of memory requirement being queried. {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV} returns the memory requirements for the object itself. {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV} returns the memory requirements for the scratch memory when doing a build. {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV} returns the memory requirements for the scratch memory when doing an update.</li>
- * <li>{@code accelerationStructure} &ndash; the acceleration structure to be queried for memory requirements.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkAccelerationStructureMemoryRequirementsInfoNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkAccelerationStructureMemoryRequirementsTypeNV type;
- *     VkAccelerationStructureNV accelerationStructure;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkAccelerationStructureMemoryRequirementsTypeNV {@link #type};
+ *     VkAccelerationStructureNV {@link #accelerationStructure};
  * }</code></pre>
  */
 public class VkAccelerationStructureMemoryRequirementsInfoNV extends Struct implements NativeResource {
@@ -95,26 +86,26 @@ public class VkAccelerationStructureMemoryRequirementsInfoNV extends Struct impl
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code type} field. */
+    /** selects the type of memory requirement being queried. {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_OBJECT_NV} returns the memory requirements for the object itself. {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_BUILD_SCRATCH_NV} returns the memory requirements for the scratch memory when doing a build. {@link NVRayTracing#VK_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_TYPE_UPDATE_SCRATCH_NV} returns the memory requirements for the scratch memory when doing an update. */
     @NativeType("VkAccelerationStructureMemoryRequirementsTypeNV")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code accelerationStructure} field. */
+    /** the acceleration structure to be queried for memory requirements. */
     @NativeType("VkAccelerationStructureNV")
     public long accelerationStructure() { return naccelerationStructure(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureMemoryRequirementsInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureMemoryRequirementsInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public VkAccelerationStructureMemoryRequirementsInfoNV type(@NativeType("VkAccelerationStructureMemoryRequirementsTypeNV") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code accelerationStructure} field. */
+    /** Sets the specified value to the {@link #accelerationStructure} field. */
     public VkAccelerationStructureMemoryRequirementsInfoNV accelerationStructure(@NativeType("VkAccelerationStructureNV") long value) { naccelerationStructure(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,26 +334,26 @@ public class VkAccelerationStructureMemoryRequirementsInfoNV extends Struct impl
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkAccelerationStructureMemoryRequirementsInfoNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAccelerationStructureMemoryRequirementsInfoNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkAccelerationStructureMemoryRequirementsInfoNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAccelerationStructureMemoryRequirementsInfoNV.npNext(address()); }
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@link VkAccelerationStructureMemoryRequirementsInfoNV#type} field. */
         @NativeType("VkAccelerationStructureMemoryRequirementsTypeNV")
         public int type() { return VkAccelerationStructureMemoryRequirementsInfoNV.ntype(address()); }
-        /** Returns the value of the {@code accelerationStructure} field. */
+        /** @return the value of the {@link VkAccelerationStructureMemoryRequirementsInfoNV#accelerationStructure} field. */
         @NativeType("VkAccelerationStructureNV")
         public long accelerationStructure() { return VkAccelerationStructureMemoryRequirementsInfoNV.naccelerationStructure(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureMemoryRequirementsInfoNV#sType} field. */
         public VkAccelerationStructureMemoryRequirementsInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureMemoryRequirementsInfoNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureMemoryRequirementsInfoNV#pNext} field. */
         public VkAccelerationStructureMemoryRequirementsInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureMemoryRequirementsInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureMemoryRequirementsInfoNV#type} field. */
         public VkAccelerationStructureMemoryRequirementsInfoNV.Buffer type(@NativeType("VkAccelerationStructureMemoryRequirementsTypeNV") int value) { VkAccelerationStructureMemoryRequirementsInfoNV.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code accelerationStructure} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureMemoryRequirementsInfoNV#accelerationStructure} field. */
         public VkAccelerationStructureMemoryRequirementsInfoNV.Buffer accelerationStructure(@NativeType("VkAccelerationStructureNV") long value) { VkAccelerationStructureMemoryRequirementsInfoNV.naccelerationStructure(address(), value); return this; }
 
     }

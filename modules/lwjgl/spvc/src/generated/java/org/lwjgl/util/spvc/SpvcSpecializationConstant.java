@@ -16,19 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code id} &ndash; the ID of the specialization constant</li>
- * <li>{@code constant_id} &ndash; the constant ID of the constant, used in Vulkan during pipeline creation</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct SpvcSpecializationConstant {
- *     spvc_constant_id id;
- *     unsigned int constant_id;
+ *     spvc_constant_id {@link #id};
+ *     unsigned int {@link #constant_id};
  * }</code></pre>
  */
 public class SpvcSpecializationConstant extends Struct implements NativeResource {
@@ -70,16 +63,16 @@ public class SpvcSpecializationConstant extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code id} field. */
+    /** the ID of the specialization constant */
     @NativeType("spvc_constant_id")
     public int id() { return nid(address()); }
-    /** Returns the value of the {@code constant_id} field. */
+    /** the constant ID of the constant, used in Vulkan during pipeline creation */
     @NativeType("unsigned int")
     public int constant_id() { return nconstant_id(address()); }
 
-    /** Sets the specified value to the {@code id} field. */
+    /** Sets the specified value to the {@link #id} field. */
     public SpvcSpecializationConstant id(@NativeType("spvc_constant_id") int value) { nid(address(), value); return this; }
-    /** Sets the specified value to the {@code constant_id} field. */
+    /** Sets the specified value to the {@link #constant_id} field. */
     public SpvcSpecializationConstant constant_id(@NativeType("unsigned int") int value) { nconstant_id(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -296,16 +289,16 @@ public class SpvcSpecializationConstant extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code id} field. */
+        /** @return the value of the {@link SpvcSpecializationConstant#id} field. */
         @NativeType("spvc_constant_id")
         public int id() { return SpvcSpecializationConstant.nid(address()); }
-        /** Returns the value of the {@code constant_id} field. */
+        /** @return the value of the {@link SpvcSpecializationConstant#constant_id} field. */
         @NativeType("unsigned int")
         public int constant_id() { return SpvcSpecializationConstant.nconstant_id(address()); }
 
-        /** Sets the specified value to the {@code id} field. */
+        /** Sets the specified value to the {@link SpvcSpecializationConstant#id} field. */
         public SpvcSpecializationConstant.Buffer id(@NativeType("spvc_constant_id") int value) { SpvcSpecializationConstant.nid(address(), value); return this; }
-        /** Sets the specified value to the {@code constant_id} field. */
+        /** Sets the specified value to the {@link SpvcSpecializationConstant#constant_id} field. */
         public SpvcSpecializationConstant.Buffer constant_id(@NativeType("unsigned int") int value) { SpvcSpecializationConstant.nconstant_id(address(), value); return this; }
 
     }

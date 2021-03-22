@@ -58,7 +58,7 @@ public class VREventScreenshotProgress extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code progress} field. */
+    /** @return the value of the {@code progress} field. */
     public float progress() { return nprogress(address()); }
 
     // -----------------------------------
@@ -133,7 +133,7 @@ public class VREventScreenshotProgress extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code progress} field. */
+        /** @return the value of the {@code progress} field. */
         public float progress() { return VREventScreenshotProgress.nprogress(address()); }
 
     }

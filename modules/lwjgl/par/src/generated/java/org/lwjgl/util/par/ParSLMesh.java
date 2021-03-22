@@ -87,31 +87,31 @@ public class ParSLMesh extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code num_vertices} field. */
+    /** @return the value of the {@code num_vertices} field. */
     @NativeType("uint32_t")
     public int num_vertices() { return nnum_vertices(address()); }
-    /** Returns the value of the {@code num_triangles} field. */
+    /** @return the value of the {@code num_triangles} field. */
     @NativeType("uint32_t")
     public int num_triangles() { return nnum_triangles(address()); }
     /**
-     * Returns a {@link IntBuffer} view of the data pointed to by the {@code triangle_indices} field.
+     * @return a {@link IntBuffer} view of the data pointed to by the {@code triangle_indices} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
     @NativeType("uint32_t *")
     public IntBuffer triangle_indices(int capacity) { return ntriangle_indices(address(), capacity); }
-    /** Returns a {@link ParSLPosition.Buffer} view of the struct array pointed to by the {@code positions} field. */
+    /** @return a {@link ParSLPosition.Buffer} view of the struct array pointed to by the {@code positions} field. */
     @NativeType("parsl_position *")
     public ParSLPosition.Buffer positions() { return npositions(address()); }
-    /** Returns a {@link ParSLAnnotation.Buffer} view of the struct array pointed to by the {@code annotations} field. */
+    /** @return a {@link ParSLAnnotation.Buffer} view of the struct array pointed to by the {@code annotations} field. */
     @Nullable
     @NativeType("parsl_annotation *")
     public ParSLAnnotation.Buffer annotations() { return nannotations(address()); }
-    /** Returns a {@link FloatBuffer} view of the data pointed to by the {@code spine_lengths} field. */
+    /** @return a {@link FloatBuffer} view of the data pointed to by the {@code spine_lengths} field. */
     @Nullable
     @NativeType("float *")
     public FloatBuffer spine_lengths() { return nspine_lengths(address()); }
-    /** Returns a {@link FloatBuffer} view of the data pointed to by the {@code random_offsets} field. */
+    /** @return a {@link FloatBuffer} view of the data pointed to by the {@code random_offsets} field. */
     @Nullable
     @NativeType("float *")
     public FloatBuffer random_offsets() { return nrandom_offsets(address()); }
@@ -200,31 +200,31 @@ public class ParSLMesh extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code num_vertices} field. */
+        /** @return the value of the {@code num_vertices} field. */
         @NativeType("uint32_t")
         public int num_vertices() { return ParSLMesh.nnum_vertices(address()); }
-        /** Returns the value of the {@code num_triangles} field. */
+        /** @return the value of the {@code num_triangles} field. */
         @NativeType("uint32_t")
         public int num_triangles() { return ParSLMesh.nnum_triangles(address()); }
         /**
-         * Returns a {@link IntBuffer} view of the data pointed to by the {@code triangle_indices} field.
+         * @return a {@link IntBuffer} view of the data pointed to by the {@code triangle_indices} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("uint32_t *")
         public IntBuffer triangle_indices(int capacity) { return ParSLMesh.ntriangle_indices(address(), capacity); }
-        /** Returns a {@link ParSLPosition.Buffer} view of the struct array pointed to by the {@code positions} field. */
+        /** @return a {@link ParSLPosition.Buffer} view of the struct array pointed to by the {@code positions} field. */
         @NativeType("parsl_position *")
         public ParSLPosition.Buffer positions() { return ParSLMesh.npositions(address()); }
-        /** Returns a {@link ParSLAnnotation.Buffer} view of the struct array pointed to by the {@code annotations} field. */
+        /** @return a {@link ParSLAnnotation.Buffer} view of the struct array pointed to by the {@code annotations} field. */
         @Nullable
         @NativeType("parsl_annotation *")
         public ParSLAnnotation.Buffer annotations() { return ParSLMesh.nannotations(address()); }
-        /** Returns a {@link FloatBuffer} view of the data pointed to by the {@code spine_lengths} field. */
+        /** @return a {@link FloatBuffer} view of the data pointed to by the {@code spine_lengths} field. */
         @Nullable
         @NativeType("float *")
         public FloatBuffer spine_lengths() { return ParSLMesh.nspine_lengths(address()); }
-        /** Returns a {@link FloatBuffer} view of the data pointed to by the {@code random_offsets} field. */
+        /** @return a {@link FloatBuffer} view of the data pointed to by the {@code random_offsets} field. */
         @Nullable
         @NativeType("float *")
         public FloatBuffer random_offsets() { return ParSLMesh.nrandom_offsets(address()); }

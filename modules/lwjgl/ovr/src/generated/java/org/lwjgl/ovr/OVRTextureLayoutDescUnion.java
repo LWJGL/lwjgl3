@@ -65,10 +65,10 @@ public class OVRTextureLayoutDescUnion extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link OVRTextureLayoutOctilinear}.Buffer view of the {@code Octilinear} field. */
+    /** @return a {@link OVRTextureLayoutOctilinear}.Buffer view of the {@code Octilinear} field. */
     @NativeType("ovrTextureLayoutOctilinear[ovrEye_Count]")
     public OVRTextureLayoutOctilinear.Buffer Octilinear() { return nOctilinear(address()); }
-    /** Returns a {@link OVRTextureLayoutOctilinear} view of the struct at the specified index of the {@code Octilinear} field. */
+    /** @return a {@link OVRTextureLayoutOctilinear} view of the struct at the specified index of the {@code Octilinear} field. */
     @NativeType("ovrTextureLayoutOctilinear")
     public OVRTextureLayoutOctilinear Octilinear(int index) { return nOctilinear(address(), index); }
 
@@ -291,10 +291,10 @@ public class OVRTextureLayoutDescUnion extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link OVRTextureLayoutOctilinear}.Buffer view of the {@code Octilinear} field. */
+        /** @return a {@link OVRTextureLayoutOctilinear}.Buffer view of the {@code Octilinear} field. */
         @NativeType("ovrTextureLayoutOctilinear[ovrEye_Count]")
         public OVRTextureLayoutOctilinear.Buffer Octilinear() { return OVRTextureLayoutDescUnion.nOctilinear(address()); }
-        /** Returns a {@link OVRTextureLayoutOctilinear} view of the struct at the specified index of the {@code Octilinear} field. */
+        /** @return a {@link OVRTextureLayoutOctilinear} view of the struct at the specified index of the {@code Octilinear} field. */
         @NativeType("ovrTextureLayoutOctilinear")
         public OVRTextureLayoutOctilinear Octilinear(int index) { return OVRTextureLayoutDescUnion.nOctilinear(address(), index); }
 

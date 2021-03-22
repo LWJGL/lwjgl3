@@ -54,23 +54,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkExtent3D}, {@link VkQueueFamilyProperties2}, {@link VK10#vkGetPhysicalDeviceQueueFamilyProperties GetPhysicalDeviceQueueFamilyProperties}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code queueFlags} &ndash; a bitmask of {@code VkQueueFlagBits} indicating capabilities of the queues in this queue family.</li>
- * <li>{@code queueCount} &ndash; the unsigned integer count of queues in this queue family. Each queue family <b>must</b> support at least one queue.</li>
- * <li>{@code timestampValidBits} &ndash; the unsigned integer count of meaningful bits in the timestamps written via {@link KHRSynchronization2#vkCmdWriteTimestamp2KHR CmdWriteTimestamp2KHR} or {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp}. The valid range for the count is 36..64 bits, or a value of 0, indicating no support for timestamps. Bits outside the valid range are guaranteed to be zeros.</li>
- * <li>{@code minImageTransferGranularity} &ndash; the minimum granularity supported for image transfer operations on the queues in this queue family.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkQueueFamilyProperties {
- *     VkQueueFlags queueFlags;
- *     uint32_t queueCount;
- *     uint32_t timestampValidBits;
- *     {@link VkExtent3D VkExtent3D} minImageTransferGranularity;
+ *     VkQueueFlags {@link #queueFlags};
+ *     uint32_t {@link #queueCount};
+ *     uint32_t {@link #timestampValidBits};
+ *     {@link VkExtent3D VkExtent3D} {@link #minImageTransferGranularity};
  * }</code></pre>
  */
 public class VkQueueFamilyProperties extends Struct implements NativeResource {
@@ -118,16 +109,16 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code queueFlags} field. */
+    /** a bitmask of {@code VkQueueFlagBits} indicating capabilities of the queues in this queue family. */
     @NativeType("VkQueueFlags")
     public int queueFlags() { return nqueueFlags(address()); }
-    /** Returns the value of the {@code queueCount} field. */
+    /** the unsigned integer count of queues in this queue family. Each queue family <b>must</b> support at least one queue. */
     @NativeType("uint32_t")
     public int queueCount() { return nqueueCount(address()); }
-    /** Returns the value of the {@code timestampValidBits} field. */
+    /** the unsigned integer count of meaningful bits in the timestamps written via {@link KHRSynchronization2#vkCmdWriteTimestamp2KHR CmdWriteTimestamp2KHR} or {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp}. The valid range for the count is 36..64 bits, or a value of 0, indicating no support for timestamps. Bits outside the valid range are guaranteed to be zeros. */
     @NativeType("uint32_t")
     public int timestampValidBits() { return ntimestampValidBits(address()); }
-    /** Returns a {@link VkExtent3D} view of the {@code minImageTransferGranularity} field. */
+    /** the minimum granularity supported for image transfer operations on the queues in this queue family. */
     public VkExtent3D minImageTransferGranularity() { return nminImageTransferGranularity(address()); }
 
     // -----------------------------------
@@ -320,16 +311,16 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code queueFlags} field. */
+        /** @return the value of the {@link VkQueueFamilyProperties#queueFlags} field. */
         @NativeType("VkQueueFlags")
         public int queueFlags() { return VkQueueFamilyProperties.nqueueFlags(address()); }
-        /** Returns the value of the {@code queueCount} field. */
+        /** @return the value of the {@link VkQueueFamilyProperties#queueCount} field. */
         @NativeType("uint32_t")
         public int queueCount() { return VkQueueFamilyProperties.nqueueCount(address()); }
-        /** Returns the value of the {@code timestampValidBits} field. */
+        /** @return the value of the {@link VkQueueFamilyProperties#timestampValidBits} field. */
         @NativeType("uint32_t")
         public int timestampValidBits() { return VkQueueFamilyProperties.ntimestampValidBits(address()); }
-        /** Returns a {@link VkExtent3D} view of the {@code minImageTransferGranularity} field. */
+        /** @return a {@link VkExtent3D} view of the {@link VkQueueFamilyProperties#minImageTransferGranularity} field. */
         public VkExtent3D minImageTransferGranularity() { return VkQueueFamilyProperties.nminImageTransferGranularity(address()); }
 
     }

@@ -58,7 +58,7 @@ public class VREventShowDevTools extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code nBrowserIdentifier} field. */
+    /** @return the value of the {@code nBrowserIdentifier} field. */
     @NativeType("int32_t")
     public int nBrowserIdentifier() { return nnBrowserIdentifier(address()); }
 
@@ -134,7 +134,7 @@ public class VREventShowDevTools extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code nBrowserIdentifier} field. */
+        /** @return the value of the {@code nBrowserIdentifier} field. */
         @NativeType("int32_t")
         public int nBrowserIdentifier() { return VREventShowDevTools.nnBrowserIdentifier(address()); }
 

@@ -68,19 +68,19 @@ public class JNINativeMethod extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
     @NativeType("char *")
     public ByteBuffer name() { return nname(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code name} field. */
+    /** @return the null-terminated string pointed to by the {@code name} field. */
     @NativeType("char *")
     public String nameString() { return nnameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code signature} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code signature} field. */
     @NativeType("char *")
     public ByteBuffer signature() { return nsignature(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code signature} field. */
+    /** @return the null-terminated string pointed to by the {@code signature} field. */
     @NativeType("char *")
     public String signatureString() { return nsignatureString(address()); }
-    /** Returns the value of the {@code fnPtr} field. */
+    /** @return the value of the {@code fnPtr} field. */
     @NativeType("void *")
     public long fnPtr() { return nfnPtr(address()); }
 
@@ -344,19 +344,19 @@ public class JNINativeMethod extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
         @NativeType("char *")
         public ByteBuffer name() { return JNINativeMethod.nname(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code name} field. */
+        /** @return the null-terminated string pointed to by the {@code name} field. */
         @NativeType("char *")
         public String nameString() { return JNINativeMethod.nnameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code signature} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code signature} field. */
         @NativeType("char *")
         public ByteBuffer signature() { return JNINativeMethod.nsignature(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code signature} field. */
+        /** @return the null-terminated string pointed to by the {@code signature} field. */
         @NativeType("char *")
         public String signatureString() { return JNINativeMethod.nsignatureString(address()); }
-        /** Returns the value of the {@code fnPtr} field. */
+        /** @return the value of the {@code fnPtr} field. */
         @NativeType("void *")
         public long fnPtr() { return JNINativeMethod.nfnPtr(address()); }
 

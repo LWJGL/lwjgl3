@@ -39,23 +39,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK12#vkSignalSemaphore SignalSemaphore}, {@link KHRTimelineSemaphore#vkSignalSemaphoreKHR SignalSemaphoreKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code semaphore} &ndash; the handle of the semaphore to signal.</li>
- * <li>{@code value} &ndash; the value to signal.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSemaphoreSignalInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkSemaphore semaphore;
- *     uint64_t value;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkSemaphore {@link #semaphore};
+ *     uint64_t {@link #value};
  * }</code></pre>
  */
 public class VkSemaphoreSignalInfo extends Struct implements NativeResource {
@@ -103,26 +94,26 @@ public class VkSemaphoreSignalInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code semaphore} field. */
+    /** the handle of the semaphore to signal. */
     @NativeType("VkSemaphore")
     public long semaphore() { return nsemaphore(address()); }
-    /** Returns the value of the {@code value} field. */
+    /** the value to signal. */
     @NativeType("uint64_t")
     public long value() { return nvalue(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSemaphoreSignalInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSemaphoreSignalInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code semaphore} field. */
+    /** Sets the specified value to the {@link #semaphore} field. */
     public VkSemaphoreSignalInfo semaphore(@NativeType("VkSemaphore") long value) { nsemaphore(address(), value); return this; }
-    /** Sets the specified value to the {@code value} field. */
+    /** Sets the specified value to the {@link #value} field. */
     public VkSemaphoreSignalInfo value(@NativeType("uint64_t") long value) { nvalue(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -351,26 +342,26 @@ public class VkSemaphoreSignalInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSemaphoreSignalInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSemaphoreSignalInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSemaphoreSignalInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSemaphoreSignalInfo.npNext(address()); }
-        /** Returns the value of the {@code semaphore} field. */
+        /** @return the value of the {@link VkSemaphoreSignalInfo#semaphore} field. */
         @NativeType("VkSemaphore")
         public long semaphore() { return VkSemaphoreSignalInfo.nsemaphore(address()); }
-        /** Returns the value of the {@code value} field. */
+        /** @return the value of the {@link VkSemaphoreSignalInfo#value} field. */
         @NativeType("uint64_t")
         public long value() { return VkSemaphoreSignalInfo.nvalue(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSemaphoreSignalInfo#sType} field. */
         public VkSemaphoreSignalInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSemaphoreSignalInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSemaphoreSignalInfo#pNext} field. */
         public VkSemaphoreSignalInfo.Buffer pNext(@NativeType("void const *") long value) { VkSemaphoreSignalInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code semaphore} field. */
+        /** Sets the specified value to the {@link VkSemaphoreSignalInfo#semaphore} field. */
         public VkSemaphoreSignalInfo.Buffer semaphore(@NativeType("VkSemaphore") long value) { VkSemaphoreSignalInfo.nsemaphore(address(), value); return this; }
-        /** Sets the specified value to the {@code value} field. */
+        /** Sets the specified value to the {@link VkSemaphoreSignalInfo#value} field. */
         public VkSemaphoreSignalInfo.Buffer value(@NativeType("uint64_t") long value) { VkSemaphoreSignalInfo.nvalue(address(), value); return this; }
 
     }

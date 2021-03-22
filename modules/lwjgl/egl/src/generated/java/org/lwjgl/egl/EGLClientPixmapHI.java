@@ -20,27 +20,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * Specifies the width, height, stride, format and memory pointer of the pixmap to be used by the function {@link HIClientpixmap#eglCreatePixmapSurfaceHI CreatePixmapSurfaceHI} to
  * create the {@code PixmapSurface}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code pData} &ndash; 
- * pointer to a memory buffer allocated by the application that will contain the result of the drawing operations. It is up to the application to ensure
- * that the buffer size corresponds to {@code iHeight * iStride * sizeof(pixel)}.</li>
- * <li>{@code iWidth} &ndash; width of the buffer in pixels</li>
- * <li>{@code iHeight} &ndash; 
- * height of the buffer in pixels. The height of the buffer can be negative; in that case the result of the drawing operations will be vertically swapped.
- * When positive, {@code pData} will point at the bottom-left corner of the image; when negative, to the top-left corner.</li>
- * <li>{@code iStride} &ndash; stride of the buffer, in pixels. It is important to note that each row of the buffer must start on 32-bit boundaries.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct EGLClientPixmapHI {
- *     void * pData;
- *     EGLint iWidth;
- *     EGLint iHeight;
- *     EGLint iStride;
+ *     void * {@link #pData};
+ *     EGLint {@link #iWidth};
+ *     EGLint {@link #iHeight};
+ *     EGLint {@link #iStride};
  * }</code></pre>
  */
 @NativeType("struct EGLClientPixmapHI")
@@ -90,29 +77,33 @@ public class EGLClientPixmapHI extends Struct implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code pData} field.
-     *
      * @param capacity the number of elements in the returned buffer
+     *
+     * @return pointer to a memory buffer allocated by the application that will contain the result of the drawing operations. It is up to the application to ensure
+     *         that the buffer size corresponds to {@code iHeight * iStride * sizeof(pixel)}.
      */
     @NativeType("void *")
     public ByteBuffer pData(int capacity) { return npData(address(), capacity); }
-    /** Returns the value of the {@code iWidth} field. */
+    /** width of the buffer in pixels */
     @NativeType("EGLint")
     public int iWidth() { return niWidth(address()); }
-    /** Returns the value of the {@code iHeight} field. */
+    /**
+     * height of the buffer in pixels. The height of the buffer can be negative; in that case the result of the drawing operations will be vertically swapped.
+     * When positive, {@code pData} will point at the bottom-left corner of the image; when negative, to the top-left corner.
+     */
     @NativeType("EGLint")
     public int iHeight() { return niHeight(address()); }
-    /** Returns the value of the {@code iStride} field. */
+    /** stride of the buffer, in pixels. It is important to note that each row of the buffer must start on 32-bit boundaries. */
     @NativeType("EGLint")
     public int iStride() { return niStride(address()); }
 
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code pData} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pData} field. */
     public EGLClientPixmapHI pData(@NativeType("void *") ByteBuffer value) { npData(address(), value); return this; }
-    /** Sets the specified value to the {@code iWidth} field. */
+    /** Sets the specified value to the {@link #iWidth} field. */
     public EGLClientPixmapHI iWidth(@NativeType("EGLint") int value) { niWidth(address(), value); return this; }
-    /** Sets the specified value to the {@code iHeight} field. */
+    /** Sets the specified value to the {@link #iHeight} field. */
     public EGLClientPixmapHI iHeight(@NativeType("EGLint") int value) { niHeight(address(), value); return this; }
-    /** Sets the specified value to the {@code iStride} field. */
+    /** Sets the specified value to the {@link #iStride} field. */
     public EGLClientPixmapHI iStride(@NativeType("EGLint") int value) { niStride(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -363,29 +354,29 @@ public class EGLClientPixmapHI extends Struct implements NativeResource {
         }
 
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code pData} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@link EGLClientPixmapHI#pData} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("void *")
         public ByteBuffer pData(int capacity) { return EGLClientPixmapHI.npData(address(), capacity); }
-        /** Returns the value of the {@code iWidth} field. */
+        /** @return the value of the {@link EGLClientPixmapHI#iWidth} field. */
         @NativeType("EGLint")
         public int iWidth() { return EGLClientPixmapHI.niWidth(address()); }
-        /** Returns the value of the {@code iHeight} field. */
+        /** @return the value of the {@link EGLClientPixmapHI#iHeight} field. */
         @NativeType("EGLint")
         public int iHeight() { return EGLClientPixmapHI.niHeight(address()); }
-        /** Returns the value of the {@code iStride} field. */
+        /** @return the value of the {@link EGLClientPixmapHI#iStride} field. */
         @NativeType("EGLint")
         public int iStride() { return EGLClientPixmapHI.niStride(address()); }
 
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code pData} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@link EGLClientPixmapHI#pData} field. */
         public EGLClientPixmapHI.Buffer pData(@NativeType("void *") ByteBuffer value) { EGLClientPixmapHI.npData(address(), value); return this; }
-        /** Sets the specified value to the {@code iWidth} field. */
+        /** Sets the specified value to the {@link EGLClientPixmapHI#iWidth} field. */
         public EGLClientPixmapHI.Buffer iWidth(@NativeType("EGLint") int value) { EGLClientPixmapHI.niWidth(address(), value); return this; }
-        /** Sets the specified value to the {@code iHeight} field. */
+        /** Sets the specified value to the {@link EGLClientPixmapHI#iHeight} field. */
         public EGLClientPixmapHI.Buffer iHeight(@NativeType("EGLint") int value) { EGLClientPixmapHI.niHeight(address(), value); return this; }
-        /** Sets the specified value to the {@code iStride} field. */
+        /** Sets the specified value to the {@link EGLClientPixmapHI#iStride} field. */
         public EGLClientPixmapHI.Buffer iStride(@NativeType("EGLint") int value) { EGLClientPixmapHI.niStride(address(), value); return this; }
 
     }

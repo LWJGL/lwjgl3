@@ -55,33 +55,19 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <p>{@link VkPhysicalDeviceLimits}, {@link VkPhysicalDeviceProperties2}, {@link VkPhysicalDeviceSparseProperties}, {@link VK10#vkGetPhysicalDeviceProperties GetPhysicalDeviceProperties}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code apiVersion} &ndash; the version of Vulkan supported by the device, encoded as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">Version Numbers</a>.</li>
- * <li>{@code driverVersion} &ndash; the vendor-specified version of the driver.</li>
- * <li>{@code vendorID} &ndash; a unique identifier for the <em>vendor</em> (see below) of the physical device.</li>
- * <li>{@code deviceID} &ndash; a unique identifier for the physical device among devices available from the vendor.</li>
- * <li>{@code deviceType} &ndash; a {@code VkPhysicalDeviceType} specifying the type of device.</li>
- * <li>{@code deviceName[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]} &ndash; an array of {@link VK10#VK_MAX_PHYSICAL_DEVICE_NAME_SIZE MAX_PHYSICAL_DEVICE_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the device.</li>
- * <li>{@code pipelineCacheUUID[VK_UUID_SIZE]} &ndash; an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the device.</li>
- * <li>{@code limits} &ndash; the {@link VkPhysicalDeviceLimits} structure specifying device-specific limits of the physical device. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits">Limits</a> for details.</li>
- * <li>{@code sparseProperties} &ndash; the {@link VkPhysicalDeviceSparseProperties} structure specifying various sparse related properties of the physical device. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#sparsememory-physicalprops">Sparse Properties</a> for details.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceProperties {
- *     uint32_t apiVersion;
- *     uint32_t driverVersion;
- *     uint32_t vendorID;
- *     uint32_t deviceID;
- *     VkPhysicalDeviceType deviceType;
- *     char deviceName[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE];
- *     uint8_t pipelineCacheUUID[VK_UUID_SIZE];
- *     {@link VkPhysicalDeviceLimits VkPhysicalDeviceLimits} limits;
- *     {@link VkPhysicalDeviceSparseProperties VkPhysicalDeviceSparseProperties} sparseProperties;
+ *     uint32_t {@link #apiVersion};
+ *     uint32_t {@link #driverVersion};
+ *     uint32_t {@link #vendorID};
+ *     uint32_t {@link #deviceID};
+ *     VkPhysicalDeviceType {@link #deviceType};
+ *     char {@link #deviceName}[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE];
+ *     uint8_t {@link #pipelineCacheUUID}[VK_UUID_SIZE];
+ *     {@link VkPhysicalDeviceLimits VkPhysicalDeviceLimits} {@link #limits};
+ *     {@link VkPhysicalDeviceSparseProperties VkPhysicalDeviceSparseProperties} {@link #sparseProperties};
  * }</code></pre>
  */
 public class VkPhysicalDeviceProperties extends Struct implements NativeResource {
@@ -144,36 +130,36 @@ public class VkPhysicalDeviceProperties extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code apiVersion} field. */
+    /** the version of Vulkan supported by the device, encoded as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">Version Numbers</a>. */
     @NativeType("uint32_t")
     public int apiVersion() { return napiVersion(address()); }
-    /** Returns the value of the {@code driverVersion} field. */
+    /** the vendor-specified version of the driver. */
     @NativeType("uint32_t")
     public int driverVersion() { return ndriverVersion(address()); }
-    /** Returns the value of the {@code vendorID} field. */
+    /** a unique identifier for the <em>vendor</em> (see below) of the physical device. */
     @NativeType("uint32_t")
     public int vendorID() { return nvendorID(address()); }
-    /** Returns the value of the {@code deviceID} field. */
+    /** a unique identifier for the physical device among devices available from the vendor. */
     @NativeType("uint32_t")
     public int deviceID() { return ndeviceID(address()); }
-    /** Returns the value of the {@code deviceType} field. */
+    /** a {@code VkPhysicalDeviceType} specifying the type of device. */
     @NativeType("VkPhysicalDeviceType")
     public int deviceType() { return ndeviceType(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code deviceName} field. */
+    /** an array of {@link VK10#VK_MAX_PHYSICAL_DEVICE_NAME_SIZE MAX_PHYSICAL_DEVICE_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the device. */
     @NativeType("char[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]")
     public ByteBuffer deviceName() { return ndeviceName(address()); }
-    /** Decodes the null-terminated string stored in the {@code deviceName} field. */
+    /** an array of {@link VK10#VK_MAX_PHYSICAL_DEVICE_NAME_SIZE MAX_PHYSICAL_DEVICE_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the device. */
     @NativeType("char[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]")
     public String deviceNameString() { return ndeviceNameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code pipelineCacheUUID} field. */
+    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the device. */
     @NativeType("uint8_t[VK_UUID_SIZE]")
     public ByteBuffer pipelineCacheUUID() { return npipelineCacheUUID(address()); }
-    /** Returns the value at the specified index of the {@code pipelineCacheUUID} field. */
+    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the device. */
     @NativeType("uint8_t")
     public byte pipelineCacheUUID(int index) { return npipelineCacheUUID(address(), index); }
-    /** Returns a {@link VkPhysicalDeviceLimits} view of the {@code limits} field. */
+    /** the {@link VkPhysicalDeviceLimits} structure specifying device-specific limits of the physical device. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits">Limits</a> for details. */
     public VkPhysicalDeviceLimits limits() { return nlimits(address()); }
-    /** Returns a {@link VkPhysicalDeviceSparseProperties} view of the {@code sparseProperties} field. */
+    /** the {@link VkPhysicalDeviceSparseProperties} structure specifying various sparse related properties of the physical device. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#sparsememory-physicalprops">Sparse Properties</a> for details. */
     public VkPhysicalDeviceSparseProperties sparseProperties() { return nsparseProperties(address()); }
 
     // -----------------------------------
@@ -382,36 +368,36 @@ public class VkPhysicalDeviceProperties extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code apiVersion} field. */
+        /** @return the value of the {@link VkPhysicalDeviceProperties#apiVersion} field. */
         @NativeType("uint32_t")
         public int apiVersion() { return VkPhysicalDeviceProperties.napiVersion(address()); }
-        /** Returns the value of the {@code driverVersion} field. */
+        /** @return the value of the {@link VkPhysicalDeviceProperties#driverVersion} field. */
         @NativeType("uint32_t")
         public int driverVersion() { return VkPhysicalDeviceProperties.ndriverVersion(address()); }
-        /** Returns the value of the {@code vendorID} field. */
+        /** @return the value of the {@link VkPhysicalDeviceProperties#vendorID} field. */
         @NativeType("uint32_t")
         public int vendorID() { return VkPhysicalDeviceProperties.nvendorID(address()); }
-        /** Returns the value of the {@code deviceID} field. */
+        /** @return the value of the {@link VkPhysicalDeviceProperties#deviceID} field. */
         @NativeType("uint32_t")
         public int deviceID() { return VkPhysicalDeviceProperties.ndeviceID(address()); }
-        /** Returns the value of the {@code deviceType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceProperties#deviceType} field. */
         @NativeType("VkPhysicalDeviceType")
         public int deviceType() { return VkPhysicalDeviceProperties.ndeviceType(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code deviceName} field. */
+        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceProperties#deviceName} field. */
         @NativeType("char[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]")
         public ByteBuffer deviceName() { return VkPhysicalDeviceProperties.ndeviceName(address()); }
-        /** Decodes the null-terminated string stored in the {@code deviceName} field. */
+        /** @return the null-terminated string stored in the {@link VkPhysicalDeviceProperties#deviceName} field. */
         @NativeType("char[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]")
         public String deviceNameString() { return VkPhysicalDeviceProperties.ndeviceNameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code pipelineCacheUUID} field. */
+        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceProperties#pipelineCacheUUID} field. */
         @NativeType("uint8_t[VK_UUID_SIZE]")
         public ByteBuffer pipelineCacheUUID() { return VkPhysicalDeviceProperties.npipelineCacheUUID(address()); }
-        /** Returns the value at the specified index of the {@code pipelineCacheUUID} field. */
+        /** @return the value at the specified index of the {@link VkPhysicalDeviceProperties#pipelineCacheUUID} field. */
         @NativeType("uint8_t")
         public byte pipelineCacheUUID(int index) { return VkPhysicalDeviceProperties.npipelineCacheUUID(address(), index); }
-        /** Returns a {@link VkPhysicalDeviceLimits} view of the {@code limits} field. */
+        /** @return a {@link VkPhysicalDeviceLimits} view of the {@link VkPhysicalDeviceProperties#limits} field. */
         public VkPhysicalDeviceLimits limits() { return VkPhysicalDeviceProperties.nlimits(address()); }
-        /** Returns a {@link VkPhysicalDeviceSparseProperties} view of the {@code sparseProperties} field. */
+        /** @return a {@link VkPhysicalDeviceSparseProperties} view of the {@link VkPhysicalDeviceProperties#sparseProperties} field. */
         public VkPhysicalDeviceSparseProperties sparseProperties() { return VkPhysicalDeviceProperties.nsparseProperties(address()); }
 
     }

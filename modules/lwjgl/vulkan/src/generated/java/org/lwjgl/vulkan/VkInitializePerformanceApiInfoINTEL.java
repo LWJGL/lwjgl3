@@ -29,21 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link INTELPerformanceQuery#vkInitializePerformanceApiINTEL InitializePerformanceApiINTEL}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code pUserData} &ndash; a pointer for application data.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkInitializePerformanceApiInfoINTEL {
- *     VkStructureType sType;
- *     void const * pNext;
- *     void * pUserData;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     void * {@link #pUserData};
  * }</code></pre>
  */
 public class VkInitializePerformanceApiInfoINTEL extends Struct implements NativeResource {
@@ -88,21 +80,21 @@ public class VkInitializePerformanceApiInfoINTEL extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code pUserData} field. */
+    /** a pointer for application data. */
     @NativeType("void *")
     public long pUserData() { return npUserData(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkInitializePerformanceApiInfoINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkInitializePerformanceApiInfoINTEL pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code pUserData} field. */
+    /** Sets the specified value to the {@link #pUserData} field. */
     public VkInitializePerformanceApiInfoINTEL pUserData(@NativeType("void *") long value) { npUserData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,21 +317,21 @@ public class VkInitializePerformanceApiInfoINTEL extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkInitializePerformanceApiInfoINTEL#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkInitializePerformanceApiInfoINTEL.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkInitializePerformanceApiInfoINTEL#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkInitializePerformanceApiInfoINTEL.npNext(address()); }
-        /** Returns the value of the {@code pUserData} field. */
+        /** @return the value of the {@link VkInitializePerformanceApiInfoINTEL#pUserData} field. */
         @NativeType("void *")
         public long pUserData() { return VkInitializePerformanceApiInfoINTEL.npUserData(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkInitializePerformanceApiInfoINTEL#sType} field. */
         public VkInitializePerformanceApiInfoINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkInitializePerformanceApiInfoINTEL.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkInitializePerformanceApiInfoINTEL#pNext} field. */
         public VkInitializePerformanceApiInfoINTEL.Buffer pNext(@NativeType("void const *") long value) { VkInitializePerformanceApiInfoINTEL.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code pUserData} field. */
+        /** Sets the specified value to the {@link VkInitializePerformanceApiInfoINTEL#pUserData} field. */
         public VkInitializePerformanceApiInfoINTEL.Buffer pUserData(@NativeType("void *") long value) { VkInitializePerformanceApiInfoINTEL.npUserData(address(), value); return this; }
 
     }

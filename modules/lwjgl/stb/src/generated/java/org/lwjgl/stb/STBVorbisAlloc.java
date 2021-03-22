@@ -67,10 +67,10 @@ public class STBVorbisAlloc extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code alloc_buffer} field. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code alloc_buffer} field. */
     @NativeType("char *")
     public ByteBuffer alloc_buffer() { return nalloc_buffer(address()); }
-    /** Returns the value of the {@code alloc_buffer_length_in_bytes} field. */
+    /** @return the value of the {@code alloc_buffer_length_in_bytes} field. */
     public int alloc_buffer_length_in_bytes() { return nalloc_buffer_length_in_bytes(address()); }
 
     /** Sets the address of the specified {@link ByteBuffer} to the {@code alloc_buffer} field. */
@@ -300,10 +300,10 @@ public class STBVorbisAlloc extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code alloc_buffer} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code alloc_buffer} field. */
         @NativeType("char *")
         public ByteBuffer alloc_buffer() { return STBVorbisAlloc.nalloc_buffer(address()); }
-        /** Returns the value of the {@code alloc_buffer_length_in_bytes} field. */
+        /** @return the value of the {@code alloc_buffer_length_in_bytes} field. */
         public int alloc_buffer_length_in_bytes() { return STBVorbisAlloc.nalloc_buffer_length_in_bytes(address()); }
 
         /** Sets the address of the specified {@link ByteBuffer} to the {@code alloc_buffer} field. */

@@ -81,21 +81,21 @@ public class VkPerformanceCounterResultKHR extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code int32} field. */
+    /** @return the value of the {@code int32} field. */
     @NativeType("int32_t")
     public int int32() { return nint32(address()); }
-    /** Returns the value of the {@code int64} field. */
+    /** @return the value of the {@code int64} field. */
     @NativeType("int64_t")
     public long int64() { return nint64(address()); }
-    /** Returns the value of the {@code uint32} field. */
+    /** @return the value of the {@code uint32} field. */
     @NativeType("uint32_t")
     public int uint32() { return nuint32(address()); }
-    /** Returns the value of the {@code uint64} field. */
+    /** @return the value of the {@code uint64} field. */
     @NativeType("uint64_t")
     public long uint64() { return nuint64(address()); }
-    /** Returns the value of the {@code float32} field. */
+    /** @return the value of the {@code float32} field. */
     public float float32() { return nfloat32(address()); }
-    /** Returns the value of the {@code float64} field. */
+    /** @return the value of the {@code float64} field. */
     public double float64() { return nfloat64(address()); }
 
     /** Sets the specified value to the {@code int32} field. */
@@ -330,21 +330,21 @@ public class VkPerformanceCounterResultKHR extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code int32} field. */
+        /** @return the value of the {@code int32} field. */
         @NativeType("int32_t")
         public int int32() { return VkPerformanceCounterResultKHR.nint32(address()); }
-        /** Returns the value of the {@code int64} field. */
+        /** @return the value of the {@code int64} field. */
         @NativeType("int64_t")
         public long int64() { return VkPerformanceCounterResultKHR.nint64(address()); }
-        /** Returns the value of the {@code uint32} field. */
+        /** @return the value of the {@code uint32} field. */
         @NativeType("uint32_t")
         public int uint32() { return VkPerformanceCounterResultKHR.nuint32(address()); }
-        /** Returns the value of the {@code uint64} field. */
+        /** @return the value of the {@code uint64} field. */
         @NativeType("uint64_t")
         public long uint64() { return VkPerformanceCounterResultKHR.nuint64(address()); }
-        /** Returns the value of the {@code float32} field. */
+        /** @return the value of the {@code float32} field. */
         public float float32() { return VkPerformanceCounterResultKHR.nfloat32(address()); }
-        /** Returns the value of the {@code float64} field. */
+        /** @return the value of the {@code float64} field. */
         public double float64() { return VkPerformanceCounterResultKHR.nfloat64(address()); }
 
         /** Sets the specified value to the {@code int32} field. */

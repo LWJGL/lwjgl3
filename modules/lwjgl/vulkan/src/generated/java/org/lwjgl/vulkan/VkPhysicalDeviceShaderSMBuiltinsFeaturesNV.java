@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVShaderSmBuiltins#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code shaderSMBuiltins} &ndash; indicates whether the implementation supports the SPIR-V {@code ShaderSMBuiltinsNV} capability.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderSMBuiltinsFeaturesNV {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 shaderSMBuiltins;
+ *     VkBool32 {@link #shaderSMBuiltins};
  * }</code></pre>
  */
 public class VkPhysicalDeviceShaderSMBuiltinsFeaturesNV extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceShaderSMBuiltinsFeaturesNV extends Struct implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code shaderSMBuiltins} field. */
+    /** indicates whether the implementation supports the SPIR-V {@code ShaderSMBuiltinsNV} capability. */
     @NativeType("VkBool32")
     public boolean shaderSMBuiltins() { return nshaderSMBuiltins(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceShaderSMBuiltinsFeaturesNV extends Struct implement
     public VkPhysicalDeviceShaderSMBuiltinsFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderSMBuiltinsFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderSMBuiltins} field. */
+    /** Sets the specified value to the {@link #shaderSMBuiltins} field. */
     public VkPhysicalDeviceShaderSMBuiltinsFeaturesNV shaderSMBuiltins(@NativeType("VkBool32") boolean value) { nshaderSMBuiltins(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceShaderSMBuiltinsFeaturesNV extends Struct implement
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.npNext(address()); }
-        /** Returns the value of the {@code shaderSMBuiltins} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderSMBuiltinsFeaturesNV#shaderSMBuiltins} field. */
         @NativeType("VkBool32")
         public boolean shaderSMBuiltins() { return VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.nshaderSMBuiltins(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceShaderSMBuiltinsFeaturesNV extends Struct implement
         public VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderSMBuiltins} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderSMBuiltinsFeaturesNV#shaderSMBuiltins} field. */
         public VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.Buffer shaderSMBuiltins(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.nshaderSMBuiltins(address(), value ? 1 : 0); return this; }
 
     }

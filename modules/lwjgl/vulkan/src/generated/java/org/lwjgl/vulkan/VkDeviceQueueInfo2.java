@@ -41,25 +41,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK11#vkGetDeviceQueue2 GetDeviceQueue2}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of {@link VkDeviceQueueInfo2} is used to provide additional image parameters to {@code vkGetDeviceQueue2}.</li>
- * <li>{@code flags} &ndash; a {@code VkDeviceQueueCreateFlags} value indicating the flags used to create the device queue.</li>
- * <li>{@code queueFamilyIndex} &ndash; the index of the queue family to which the queue belongs.</li>
- * <li>{@code queueIndex} &ndash; the index within this queue family of the queue to retrieve.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDeviceQueueInfo2 {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkDeviceQueueCreateFlags flags;
- *     uint32_t queueFamilyIndex;
- *     uint32_t queueIndex;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkDeviceQueueCreateFlags {@link #flags};
+ *     uint32_t {@link #queueFamilyIndex};
+ *     uint32_t {@link #queueIndex};
  * }</code></pre>
  */
 public class VkDeviceQueueInfo2 extends Struct implements NativeResource {
@@ -110,31 +100,31 @@ public class VkDeviceQueueInfo2 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of {@link VkDeviceQueueInfo2} is used to provide additional image parameters to {@code vkGetDeviceQueue2}. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a {@code VkDeviceQueueCreateFlags} value indicating the flags used to create the device queue. */
     @NativeType("VkDeviceQueueCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code queueFamilyIndex} field. */
+    /** the index of the queue family to which the queue belongs. */
     @NativeType("uint32_t")
     public int queueFamilyIndex() { return nqueueFamilyIndex(address()); }
-    /** Returns the value of the {@code queueIndex} field. */
+    /** the index within this queue family of the queue to retrieve. */
     @NativeType("uint32_t")
     public int queueIndex() { return nqueueIndex(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceQueueInfo2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceQueueInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkDeviceQueueInfo2 flags(@NativeType("VkDeviceQueueCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code queueFamilyIndex} field. */
+    /** Sets the specified value to the {@link #queueFamilyIndex} field. */
     public VkDeviceQueueInfo2 queueFamilyIndex(@NativeType("uint32_t") int value) { nqueueFamilyIndex(address(), value); return this; }
-    /** Sets the specified value to the {@code queueIndex} field. */
+    /** Sets the specified value to the {@link #queueIndex} field. */
     public VkDeviceQueueInfo2 queueIndex(@NativeType("uint32_t") int value) { nqueueIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -369,31 +359,31 @@ public class VkDeviceQueueInfo2 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDeviceQueueInfo2#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceQueueInfo2.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDeviceQueueInfo2#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceQueueInfo2.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkDeviceQueueInfo2#flags} field. */
         @NativeType("VkDeviceQueueCreateFlags")
         public int flags() { return VkDeviceQueueInfo2.nflags(address()); }
-        /** Returns the value of the {@code queueFamilyIndex} field. */
+        /** @return the value of the {@link VkDeviceQueueInfo2#queueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int queueFamilyIndex() { return VkDeviceQueueInfo2.nqueueFamilyIndex(address()); }
-        /** Returns the value of the {@code queueIndex} field. */
+        /** @return the value of the {@link VkDeviceQueueInfo2#queueIndex} field. */
         @NativeType("uint32_t")
         public int queueIndex() { return VkDeviceQueueInfo2.nqueueIndex(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDeviceQueueInfo2#sType} field. */
         public VkDeviceQueueInfo2.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceQueueInfo2.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDeviceQueueInfo2#pNext} field. */
         public VkDeviceQueueInfo2.Buffer pNext(@NativeType("void const *") long value) { VkDeviceQueueInfo2.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkDeviceQueueInfo2#flags} field. */
         public VkDeviceQueueInfo2.Buffer flags(@NativeType("VkDeviceQueueCreateFlags") int value) { VkDeviceQueueInfo2.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code queueFamilyIndex} field. */
+        /** Sets the specified value to the {@link VkDeviceQueueInfo2#queueFamilyIndex} field. */
         public VkDeviceQueueInfo2.Buffer queueFamilyIndex(@NativeType("uint32_t") int value) { VkDeviceQueueInfo2.nqueueFamilyIndex(address(), value); return this; }
-        /** Sets the specified value to the {@code queueIndex} field. */
+        /** Sets the specified value to the {@link VkDeviceQueueInfo2#queueIndex} field. */
         public VkDeviceQueueInfo2.Buffer queueIndex(@NativeType("uint32_t") int value) { VkDeviceQueueInfo2.nqueueIndex(address(), value); return this; }
 
     }

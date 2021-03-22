@@ -25,23 +25,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code flags} <b>must</b> be 0</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code depthClipEnable} &ndash; controls whether depth clipping is enabled as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vertexpostproc-clipping">Primitive Clipping</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineRasterizationDepthClipStateCreateInfoEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineRasterizationDepthClipStateCreateFlagsEXT flags;
- *     VkBool32 depthClipEnable;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineRasterizationDepthClipStateCreateFlagsEXT {@link #flags};
+ *     VkBool32 {@link #depthClipEnable};
  * }</code></pre>
  */
 public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct implements NativeResource {
@@ -89,26 +80,26 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkPipelineRasterizationDepthClipStateCreateFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code depthClipEnable} field. */
+    /** controls whether depth clipping is enabled as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vertexpostproc-clipping">Primitive Clipping</a>. */
     @NativeType("VkBool32")
     public boolean depthClipEnable() { return ndepthClipEnable(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineRasterizationDepthClipStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineRasterizationDepthClipStateCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineRasterizationDepthClipStateCreateInfoEXT flags(@NativeType("VkPipelineRasterizationDepthClipStateCreateFlagsEXT") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code depthClipEnable} field. */
+    /** Sets the specified value to the {@link #depthClipEnable} field. */
     public VkPipelineRasterizationDepthClipStateCreateInfoEXT depthClipEnable(@NativeType("VkBool32") boolean value) { ndepthClipEnable(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -337,26 +328,26 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineRasterizationDepthClipStateCreateInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineRasterizationDepthClipStateCreateInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#flags} field. */
         @NativeType("VkPipelineRasterizationDepthClipStateCreateFlagsEXT")
         public int flags() { return VkPipelineRasterizationDepthClipStateCreateInfoEXT.nflags(address()); }
-        /** Returns the value of the {@code depthClipEnable} field. */
+        /** @return the value of the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#depthClipEnable} field. */
         @NativeType("VkBool32")
         public boolean depthClipEnable() { return VkPipelineRasterizationDepthClipStateCreateInfoEXT.ndepthClipEnable(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#sType} field. */
         public VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineRasterizationDepthClipStateCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#pNext} field. */
         public VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRasterizationDepthClipStateCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#flags} field. */
         public VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer flags(@NativeType("VkPipelineRasterizationDepthClipStateCreateFlagsEXT") int value) { VkPipelineRasterizationDepthClipStateCreateInfoEXT.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code depthClipEnable} field. */
+        /** Sets the specified value to the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#depthClipEnable} field. */
         public VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer depthClipEnable(@NativeType("VkBool32") boolean value) { VkPipelineRasterizationDepthClipStateCreateInfoEXT.ndepthClipEnable(address(), value ? 1 : 0); return this; }
 
     }

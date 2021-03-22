@@ -31,21 +31,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link QCOMRenderPassTransform#VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code transform} &ndash; a {@code VkSurfaceTransformFlagBitsKHR} value describing the transform to be applied to rasterization.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkRenderPassTransformBeginInfoQCOM {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkSurfaceTransformFlagBitsKHR transform;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkSurfaceTransformFlagBitsKHR {@link #transform};
  * }</code></pre>
  */
 public class VkRenderPassTransformBeginInfoQCOM extends Struct implements NativeResource {
@@ -90,21 +82,21 @@ public class VkRenderPassTransformBeginInfoQCOM extends Struct implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code transform} field. */
+    /** a {@code VkSurfaceTransformFlagBitsKHR} value describing the transform to be applied to rasterization. */
     @NativeType("VkSurfaceTransformFlagBitsKHR")
     public int transform() { return ntransform(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassTransformBeginInfoQCOM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassTransformBeginInfoQCOM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code transform} field. */
+    /** Sets the specified value to the {@link #transform} field. */
     public VkRenderPassTransformBeginInfoQCOM transform(@NativeType("VkSurfaceTransformFlagBitsKHR") int value) { ntransform(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,21 +319,21 @@ public class VkRenderPassTransformBeginInfoQCOM extends Struct implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkRenderPassTransformBeginInfoQCOM#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderPassTransformBeginInfoQCOM.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkRenderPassTransformBeginInfoQCOM#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkRenderPassTransformBeginInfoQCOM.npNext(address()); }
-        /** Returns the value of the {@code transform} field. */
+        /** @return the value of the {@link VkRenderPassTransformBeginInfoQCOM#transform} field. */
         @NativeType("VkSurfaceTransformFlagBitsKHR")
         public int transform() { return VkRenderPassTransformBeginInfoQCOM.ntransform(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkRenderPassTransformBeginInfoQCOM#sType} field. */
         public VkRenderPassTransformBeginInfoQCOM.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassTransformBeginInfoQCOM.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkRenderPassTransformBeginInfoQCOM#pNext} field. */
         public VkRenderPassTransformBeginInfoQCOM.Buffer pNext(@NativeType("void *") long value) { VkRenderPassTransformBeginInfoQCOM.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code transform} field. */
+        /** Sets the specified value to the {@link VkRenderPassTransformBeginInfoQCOM#transform} field. */
         public VkRenderPassTransformBeginInfoQCOM.Buffer transform(@NativeType("VkSurfaceTransformFlagBitsKHR") int value) { VkRenderPassTransformBeginInfoQCOM.ntransform(address(), value); return this; }
 
     }

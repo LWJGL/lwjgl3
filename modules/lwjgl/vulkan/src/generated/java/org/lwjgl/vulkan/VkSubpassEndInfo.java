@@ -29,19 +29,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK12#vkCmdEndRenderPass2 CmdEndRenderPass2}, {@link KHRCreateRenderpass2#vkCmdEndRenderPass2KHR CmdEndRenderPass2KHR}, {@link VK12#vkCmdNextSubpass2 CmdNextSubpass2}, {@link KHRCreateRenderpass2#vkCmdNextSubpass2KHR CmdNextSubpass2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSubpassEndInfo {
- *     VkStructureType sType;
- *     void const * pNext;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
  * }</code></pre>
  */
 public class VkSubpassEndInfo extends Struct implements NativeResource {
@@ -83,16 +76,16 @@ public class VkSubpassEndInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSubpassEndInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSubpassEndInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,16 +302,16 @@ public class VkSubpassEndInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSubpassEndInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSubpassEndInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSubpassEndInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSubpassEndInfo.npNext(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSubpassEndInfo#sType} field. */
         public VkSubpassEndInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassEndInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSubpassEndInfo#pNext} field. */
         public VkSubpassEndInfo.Buffer pNext(@NativeType("void const *") long value) { VkSubpassEndInfo.npNext(address(), value); return this; }
 
     }

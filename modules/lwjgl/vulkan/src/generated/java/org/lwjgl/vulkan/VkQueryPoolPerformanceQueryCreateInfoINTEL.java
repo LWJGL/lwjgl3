@@ -25,21 +25,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code performanceCountersSampling} <b>must</b> be a valid {@code VkQueryPoolSamplingModeINTEL} value</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code performanceCountersSampling} &ndash; describe how performance queries should be captured.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkQueryPoolPerformanceQueryCreateInfoINTEL {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkQueryPoolSamplingModeINTEL performanceCountersSampling;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkQueryPoolSamplingModeINTEL {@link #performanceCountersSampling};
  * }</code></pre>
  */
 public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implements NativeResource {
@@ -84,21 +76,21 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code performanceCountersSampling} field. */
+    /** describe how performance queries should be captured. */
     @NativeType("VkQueryPoolSamplingModeINTEL")
     public int performanceCountersSampling() { return nperformanceCountersSampling(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkQueryPoolPerformanceQueryCreateInfoINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkQueryPoolPerformanceQueryCreateInfoINTEL pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code performanceCountersSampling} field. */
+    /** Sets the specified value to the {@link #performanceCountersSampling} field. */
     public VkQueryPoolPerformanceQueryCreateInfoINTEL performanceCountersSampling(@NativeType("VkQueryPoolSamplingModeINTEL") int value) { nperformanceCountersSampling(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,21 +313,21 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkQueryPoolPerformanceQueryCreateInfoINTEL#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkQueryPoolPerformanceQueryCreateInfoINTEL.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkQueryPoolPerformanceQueryCreateInfoINTEL#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkQueryPoolPerformanceQueryCreateInfoINTEL.npNext(address()); }
-        /** Returns the value of the {@code performanceCountersSampling} field. */
+        /** @return the value of the {@link VkQueryPoolPerformanceQueryCreateInfoINTEL#performanceCountersSampling} field. */
         @NativeType("VkQueryPoolSamplingModeINTEL")
         public int performanceCountersSampling() { return VkQueryPoolPerformanceQueryCreateInfoINTEL.nperformanceCountersSampling(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkQueryPoolPerformanceQueryCreateInfoINTEL#sType} field. */
         public VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkQueryPoolPerformanceQueryCreateInfoINTEL.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkQueryPoolPerformanceQueryCreateInfoINTEL#pNext} field. */
         public VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer pNext(@NativeType("void const *") long value) { VkQueryPoolPerformanceQueryCreateInfoINTEL.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code performanceCountersSampling} field. */
+        /** Sets the specified value to the {@link VkQueryPoolPerformanceQueryCreateInfoINTEL#performanceCountersSampling} field. */
         public VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer performanceCountersSampling(@NativeType("VkQueryPoolSamplingModeINTEL") int value) { VkQueryPoolPerformanceQueryCreateInfoINTEL.nperformanceCountersSampling(address(), value); return this; }
 
     }

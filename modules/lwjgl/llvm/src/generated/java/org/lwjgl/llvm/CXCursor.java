@@ -78,15 +78,15 @@ public class CXCursor extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code kind} field. */
+    /** @return the value of the {@code kind} field. */
     @NativeType("enum CXCursorKind")
     public int kind() { return nkind(address()); }
-    /** Returns the value of the {@code xdata} field. */
+    /** @return the value of the {@code xdata} field. */
     public int xdata() { return nxdata(address()); }
-    /** Returns a {@link PointerBuffer} view of the {@code data} field. */
+    /** @return a {@link PointerBuffer} view of the {@code data} field. */
     @NativeType("void const *[3]")
     public PointerBuffer data() { return ndata(address()); }
-    /** Returns the value at the specified index of the {@code data} field. */
+    /** @return the value at the specified index of the {@code data} field. */
     @NativeType("void const *")
     public long data(int index) { return ndata(address(), index); }
 
@@ -282,15 +282,15 @@ public class CXCursor extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code kind} field. */
+        /** @return the value of the {@code kind} field. */
         @NativeType("enum CXCursorKind")
         public int kind() { return CXCursor.nkind(address()); }
-        /** Returns the value of the {@code xdata} field. */
+        /** @return the value of the {@code xdata} field. */
         public int xdata() { return CXCursor.nxdata(address()); }
-        /** Returns a {@link PointerBuffer} view of the {@code data} field. */
+        /** @return a {@link PointerBuffer} view of the {@code data} field. */
         @NativeType("void const *[3]")
         public PointerBuffer data() { return CXCursor.ndata(address()); }
-        /** Returns the value at the specified index of the {@code data} field. */
+        /** @return the value at the specified index of the {@code data} field. */
         @NativeType("void const *")
         public long data(int index) { return CXCursor.ndata(address(), index); }
 

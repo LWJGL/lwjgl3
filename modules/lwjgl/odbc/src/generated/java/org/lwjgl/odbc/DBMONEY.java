@@ -63,10 +63,10 @@ public class DBMONEY extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code mnyhigh} field. */
+    /** @return the value of the {@code mnyhigh} field. */
     @NativeType("LONG")
     public int mnyhigh() { return nmnyhigh(address()); }
-    /** Returns the value of the {@code mnylow} field. */
+    /** @return the value of the {@code mnylow} field. */
     @NativeType("ULONG")
     public int mnylow() { return nmnylow(address()); }
 
@@ -289,10 +289,10 @@ public class DBMONEY extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code mnyhigh} field. */
+        /** @return the value of the {@code mnyhigh} field. */
         @NativeType("LONG")
         public int mnyhigh() { return DBMONEY.nmnyhigh(address()); }
-        /** Returns the value of the {@code mnylow} field. */
+        /** @return the value of the {@code mnylow} field. */
         @NativeType("ULONG")
         public int mnylow() { return DBMONEY.nmnylow(address()); }
 

@@ -33,21 +33,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link EXTExternalMemoryHost#vkGetMemoryHostPointerPropertiesEXT GetMemoryHostPointerPropertiesEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code memoryTypeBits} &ndash; a bitmask containing one bit set for every memory type which the specified host pointer <b>can</b> be imported as.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkMemoryHostPointerPropertiesEXT {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint32_t memoryTypeBits;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint32_t {@link #memoryTypeBits};
  * }</code></pre>
  */
 public class VkMemoryHostPointerPropertiesEXT extends Struct implements NativeResource {
@@ -92,19 +84,19 @@ public class VkMemoryHostPointerPropertiesEXT extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code memoryTypeBits} field. */
+    /** a bitmask containing one bit set for every memory type which the specified host pointer <b>can</b> be imported as. */
     @NativeType("uint32_t")
     public int memoryTypeBits() { return nmemoryTypeBits(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryHostPointerPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryHostPointerPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -323,19 +315,19 @@ public class VkMemoryHostPointerPropertiesEXT extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkMemoryHostPointerPropertiesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryHostPointerPropertiesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkMemoryHostPointerPropertiesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkMemoryHostPointerPropertiesEXT.npNext(address()); }
-        /** Returns the value of the {@code memoryTypeBits} field. */
+        /** @return the value of the {@link VkMemoryHostPointerPropertiesEXT#memoryTypeBits} field. */
         @NativeType("uint32_t")
         public int memoryTypeBits() { return VkMemoryHostPointerPropertiesEXT.nmemoryTypeBits(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkMemoryHostPointerPropertiesEXT#sType} field. */
         public VkMemoryHostPointerPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryHostPointerPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkMemoryHostPointerPropertiesEXT#pNext} field. */
         public VkMemoryHostPointerPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkMemoryHostPointerPropertiesEXT.npNext(address(), value); return this; }
 
     }

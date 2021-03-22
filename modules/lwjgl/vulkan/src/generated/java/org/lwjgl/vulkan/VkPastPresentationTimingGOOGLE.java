@@ -28,25 +28,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link GOOGLEDisplayTiming#vkGetPastPresentationTimingGOOGLE GetPastPresentationTimingGOOGLE}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code presentID} &ndash; an application-provided value that was given to a previous {@code vkQueuePresentKHR} command via {@link VkPresentTimeGOOGLE}{@code ::presentID} (see below). It <b>can</b> be used to uniquely identify a previous present with the {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} command.</li>
- * <li>{@code desiredPresentTime} &ndash; an application-provided value that was given to a previous {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} command via {@link VkPresentTimeGOOGLE}{@code ::desiredPresentTime}. If non-zero, it was used by the application to indicate that an image not be presented any sooner than {@code desiredPresentTime}.</li>
- * <li>{@code actualPresentTime} &ndash; the time when the image of the {@code swapchain} was actually displayed.</li>
- * <li>{@code earliestPresentTime} &ndash; the time when the image of the {@code swapchain} could have been displayed. This <b>may</b> differ from {@code actualPresentTime} if the application requested that the image be presented no sooner than {@link VkPresentTimeGOOGLE}{@code ::desiredPresentTime}.</li>
- * <li>{@code presentMargin} &ndash; an indication of how early the {@code vkQueuePresentKHR} command was processed compared to how soon it needed to be processed, and still be presented at {@code earliestPresentTime}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPastPresentationTimingGOOGLE {
- *     uint32_t presentID;
- *     uint64_t desiredPresentTime;
- *     uint64_t actualPresentTime;
- *     uint64_t earliestPresentTime;
- *     uint64_t presentMargin;
+ *     uint32_t {@link #presentID};
+ *     uint64_t {@link #desiredPresentTime};
+ *     uint64_t {@link #actualPresentTime};
+ *     uint64_t {@link #earliestPresentTime};
+ *     uint64_t {@link #presentMargin};
  * }</code></pre>
  */
 public class VkPastPresentationTimingGOOGLE extends Struct implements NativeResource {
@@ -97,19 +87,19 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code presentID} field. */
+    /** an application-provided value that was given to a previous {@code vkQueuePresentKHR} command via {@link VkPresentTimeGOOGLE}{@code ::presentID} (see below). It <b>can</b> be used to uniquely identify a previous present with the {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} command. */
     @NativeType("uint32_t")
     public int presentID() { return npresentID(address()); }
-    /** Returns the value of the {@code desiredPresentTime} field. */
+    /** an application-provided value that was given to a previous {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} command via {@link VkPresentTimeGOOGLE}{@code ::desiredPresentTime}. If non-zero, it was used by the application to indicate that an image not be presented any sooner than {@code desiredPresentTime}. */
     @NativeType("uint64_t")
     public long desiredPresentTime() { return ndesiredPresentTime(address()); }
-    /** Returns the value of the {@code actualPresentTime} field. */
+    /** the time when the image of the {@code swapchain} was actually displayed. */
     @NativeType("uint64_t")
     public long actualPresentTime() { return nactualPresentTime(address()); }
-    /** Returns the value of the {@code earliestPresentTime} field. */
+    /** the time when the image of the {@code swapchain} could have been displayed. This <b>may</b> differ from {@code actualPresentTime} if the application requested that the image be presented no sooner than {@link VkPresentTimeGOOGLE}{@code ::desiredPresentTime}. */
     @NativeType("uint64_t")
     public long earliestPresentTime() { return nearliestPresentTime(address()); }
-    /** Returns the value of the {@code presentMargin} field. */
+    /** an indication of how early the {@code vkQueuePresentKHR} command was processed compared to how soon it needed to be processed, and still be presented at {@code earliestPresentTime}. */
     @NativeType("uint64_t")
     public long presentMargin() { return npresentMargin(address()); }
 
@@ -305,19 +295,19 @@ public class VkPastPresentationTimingGOOGLE extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code presentID} field. */
+        /** @return the value of the {@link VkPastPresentationTimingGOOGLE#presentID} field. */
         @NativeType("uint32_t")
         public int presentID() { return VkPastPresentationTimingGOOGLE.npresentID(address()); }
-        /** Returns the value of the {@code desiredPresentTime} field. */
+        /** @return the value of the {@link VkPastPresentationTimingGOOGLE#desiredPresentTime} field. */
         @NativeType("uint64_t")
         public long desiredPresentTime() { return VkPastPresentationTimingGOOGLE.ndesiredPresentTime(address()); }
-        /** Returns the value of the {@code actualPresentTime} field. */
+        /** @return the value of the {@link VkPastPresentationTimingGOOGLE#actualPresentTime} field. */
         @NativeType("uint64_t")
         public long actualPresentTime() { return VkPastPresentationTimingGOOGLE.nactualPresentTime(address()); }
-        /** Returns the value of the {@code earliestPresentTime} field. */
+        /** @return the value of the {@link VkPastPresentationTimingGOOGLE#earliestPresentTime} field. */
         @NativeType("uint64_t")
         public long earliestPresentTime() { return VkPastPresentationTimingGOOGLE.nearliestPresentTime(address()); }
-        /** Returns the value of the {@code presentMargin} field. */
+        /** @return the value of the {@link VkPastPresentationTimingGOOGLE#presentMargin} field. */
         @NativeType("uint64_t")
         public long presentMargin() { return VkPastPresentationTimingGOOGLE.npresentMargin(address()); }
 

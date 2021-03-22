@@ -29,21 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code maxFragmentShadingRateInvocationCount} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code maxFragmentShadingRateInvocationCount} &ndash; indicates the maximum number of fragment shader invocations per fragment supported in pipeline, primitive, and attachment fragment shading rates.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkSampleCountFlagBits maxFragmentShadingRateInvocationCount;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkSampleCountFlagBits {@link #maxFragmentShadingRateInvocationCount};
  * }</code></pre>
  */
 public class VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV extends Struct implements NativeResource {
@@ -88,21 +80,21 @@ public class VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV extends Struct
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code maxFragmentShadingRateInvocationCount} field. */
+    /** indicates the maximum number of fragment shader invocations per fragment supported in pipeline, primitive, and attachment fragment shading rates. */
     @NativeType("VkSampleCountFlagBits")
     public int maxFragmentShadingRateInvocationCount() { return nmaxFragmentShadingRateInvocationCount(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code maxFragmentShadingRateInvocationCount} field. */
+    /** Sets the specified value to the {@link #maxFragmentShadingRateInvocationCount} field. */
     public VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV maxFragmentShadingRateInvocationCount(@NativeType("VkSampleCountFlagBits") int value) { nmaxFragmentShadingRateInvocationCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,21 +317,21 @@ public class VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV extends Struct
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.npNext(address()); }
-        /** Returns the value of the {@code maxFragmentShadingRateInvocationCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV#maxFragmentShadingRateInvocationCount} field. */
         @NativeType("VkSampleCountFlagBits")
         public int maxFragmentShadingRateInvocationCount() { return VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.nmaxFragmentShadingRateInvocationCount(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV#sType} field. */
         public VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV#pNext} field. */
         public VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code maxFragmentShadingRateInvocationCount} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV#maxFragmentShadingRateInvocationCount} field. */
         public VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.Buffer maxFragmentShadingRateInvocationCount(@NativeType("VkSampleCountFlagBits") int value) { VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.nmaxFragmentShadingRateInvocationCount(address(), value); return this; }
 
     }

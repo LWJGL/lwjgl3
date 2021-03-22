@@ -48,23 +48,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkAttachmentReference2}, {@link VkExtent2D}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code pFragmentShadingRateAttachment} &ndash; an optional {@link VkAttachmentReference2KHR} structure defining the fragment shading rate attachment for this subpass.</li>
- * <li>{@code shadingRateAttachmentTexelSize} &ndash; specifies the size of the portion of the framebuffer corresponding to each texel in {@code pFragmentShadingRateAttachment}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkFragmentShadingRateAttachmentInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     {@link VkAttachmentReference2 VkAttachmentReference2} const * pFragmentShadingRateAttachment;
- *     {@link VkExtent2D VkExtent2D} shadingRateAttachmentTexelSize;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     {@link VkAttachmentReference2 VkAttachmentReference2} const * {@link #pFragmentShadingRateAttachment};
+ *     {@link VkExtent2D VkExtent2D} {@link #shadingRateAttachmentTexelSize};
  * }</code></pre>
  */
 public class VkFragmentShadingRateAttachmentInfoKHR extends Struct implements NativeResource {
@@ -112,27 +103,27 @@ public class VkFragmentShadingRateAttachmentInfoKHR extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkAttachmentReference2} view of the struct pointed to by the {@code pFragmentShadingRateAttachment} field. */
+    /** an optional {@link VkAttachmentReference2KHR} structure defining the fragment shading rate attachment for this subpass. */
     @NativeType("VkAttachmentReference2 const *")
     public VkAttachmentReference2 pFragmentShadingRateAttachment() { return npFragmentShadingRateAttachment(address()); }
-    /** Returns a {@link VkExtent2D} view of the {@code shadingRateAttachmentTexelSize} field. */
+    /** specifies the size of the portion of the framebuffer corresponding to each texel in {@code pFragmentShadingRateAttachment}. */
     public VkExtent2D shadingRateAttachmentTexelSize() { return nshadingRateAttachmentTexelSize(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkFragmentShadingRateAttachmentInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkFragmentShadingRateAttachmentInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkAttachmentReference2} to the {@code pFragmentShadingRateAttachment} field. */
+    /** Sets the address of the specified {@link VkAttachmentReference2} to the {@link #pFragmentShadingRateAttachment} field. */
     public VkFragmentShadingRateAttachmentInfoKHR pFragmentShadingRateAttachment(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2 value) { npFragmentShadingRateAttachment(address(), value); return this; }
-    /** Copies the specified {@link VkExtent2D} to the {@code shadingRateAttachmentTexelSize} field. */
+    /** Copies the specified {@link VkExtent2D} to the {@link #shadingRateAttachmentTexelSize} field. */
     public VkFragmentShadingRateAttachmentInfoKHR shadingRateAttachmentTexelSize(VkExtent2D value) { nshadingRateAttachmentTexelSize(address(), value); return this; }
-    /** Passes the {@code shadingRateAttachmentTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #shadingRateAttachmentTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkFragmentShadingRateAttachmentInfoKHR shadingRateAttachmentTexelSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(shadingRateAttachmentTexelSize()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -382,27 +373,27 @@ public class VkFragmentShadingRateAttachmentInfoKHR extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkFragmentShadingRateAttachmentInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkFragmentShadingRateAttachmentInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkFragmentShadingRateAttachmentInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkFragmentShadingRateAttachmentInfoKHR.npNext(address()); }
-        /** Returns a {@link VkAttachmentReference2} view of the struct pointed to by the {@code pFragmentShadingRateAttachment} field. */
+        /** @return a {@link VkAttachmentReference2} view of the struct pointed to by the {@link VkFragmentShadingRateAttachmentInfoKHR#pFragmentShadingRateAttachment} field. */
         @NativeType("VkAttachmentReference2 const *")
         public VkAttachmentReference2 pFragmentShadingRateAttachment() { return VkFragmentShadingRateAttachmentInfoKHR.npFragmentShadingRateAttachment(address()); }
-        /** Returns a {@link VkExtent2D} view of the {@code shadingRateAttachmentTexelSize} field. */
+        /** @return a {@link VkExtent2D} view of the {@link VkFragmentShadingRateAttachmentInfoKHR#shadingRateAttachmentTexelSize} field. */
         public VkExtent2D shadingRateAttachmentTexelSize() { return VkFragmentShadingRateAttachmentInfoKHR.nshadingRateAttachmentTexelSize(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkFragmentShadingRateAttachmentInfoKHR#sType} field. */
         public VkFragmentShadingRateAttachmentInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkFragmentShadingRateAttachmentInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkFragmentShadingRateAttachmentInfoKHR#pNext} field. */
         public VkFragmentShadingRateAttachmentInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkFragmentShadingRateAttachmentInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkAttachmentReference2} to the {@code pFragmentShadingRateAttachment} field. */
+        /** Sets the address of the specified {@link VkAttachmentReference2} to the {@link VkFragmentShadingRateAttachmentInfoKHR#pFragmentShadingRateAttachment} field. */
         public VkFragmentShadingRateAttachmentInfoKHR.Buffer pFragmentShadingRateAttachment(@NativeType("VkAttachmentReference2 const *") VkAttachmentReference2 value) { VkFragmentShadingRateAttachmentInfoKHR.npFragmentShadingRateAttachment(address(), value); return this; }
-        /** Copies the specified {@link VkExtent2D} to the {@code shadingRateAttachmentTexelSize} field. */
+        /** Copies the specified {@link VkExtent2D} to the {@link VkFragmentShadingRateAttachmentInfoKHR#shadingRateAttachmentTexelSize} field. */
         public VkFragmentShadingRateAttachmentInfoKHR.Buffer shadingRateAttachmentTexelSize(VkExtent2D value) { VkFragmentShadingRateAttachmentInfoKHR.nshadingRateAttachmentTexelSize(address(), value); return this; }
-        /** Passes the {@code shadingRateAttachmentTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkFragmentShadingRateAttachmentInfoKHR#shadingRateAttachmentTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkFragmentShadingRateAttachmentInfoKHR.Buffer shadingRateAttachmentTexelSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(shadingRateAttachmentTexelSize()); return this; }
 
     }

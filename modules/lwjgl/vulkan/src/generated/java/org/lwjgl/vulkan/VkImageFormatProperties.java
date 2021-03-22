@@ -36,40 +36,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkExtent3D}, {@link VkExternalImageFormatPropertiesNV}, {@link VkImageFormatProperties2}, {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code maxExtent} &ndash; are the maximum image dimensions. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-extentperimagetype">Allowed Extent Values</a> section below for how these values are constrained by {@code type}.</li>
- * <li>{@code maxMipLevels} &ndash; the maximum number of mipmap levels. {@code maxMipLevels} <b>must</b> be equal to the number of levels in the complete mipmap chain based on the <code>maxExtent.width</code>, <code>maxExtent.height</code>, and <code>maxExtent.depth</code>, except when one of the following conditions is true, in which case it <b>may</b> instead be 1:
- * 
- * <ul>
- * <li>{@code vkGetPhysicalDeviceImageFormatProperties}{@code ::tiling} was {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}</li>
- * <li>{@link VkPhysicalDeviceImageFormatInfo2}{@code ::tiling} was {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}</li>
- * <li>the {@link VkPhysicalDeviceImageFormatInfo2}{@code ::pNext} chain included a {@link VkPhysicalDeviceExternalImageFormatInfo} structure with a handle type included in the {@code handleTypes} member for which mipmap image support is not required</li>
- * <li>image {@code format} is one of those listed in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">Formats requiring sampler Y'C<sub>B</sub>C<sub>R</sub> conversion for {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} image views</a></li>
- * <li>{@code flags} contains {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT}</li>
- * </ul></li>
- * <li>{@code maxArrayLayers} &ndash; the maximum number of array layers. {@code maxArrayLayers} <b>must</b> be no less than {@link VkPhysicalDeviceLimits}{@code ::maxImageArrayLayers}, except when one of the following conditions is true, in which case it <b>may</b> instead be 1:
- * 
- * <ul>
- * <li>{@code tiling} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}</li>
- * <li>{@code tiling} is {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL} and {@code type} is {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}</li>
- * <li>{@code format} is one of those listed in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">Formats requiring sampler Y'C<sub>B</sub>C<sub>R</sub> conversion for {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} image views</a></li>
- * <li>If {@code tiling} is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then {@code maxArrayLayers} <b>must</b> not be 0.</li>
- * </ul></li>
- * <li>{@code sampleCounts} &ndash; a bitmask of {@code VkSampleCountFlagBits} specifying all the supported sample counts for this image as described <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-supported-sample-counts">below</a>.</li>
- * <li>{@code maxResourceSize} &ndash; an upper bound on the total image size in bytes, inclusive of all image subresources. Implementations <b>may</b> have an address space limit on total size of a resource, which is advertised by this property. {@code maxResourceSize} <b>must</b> be at least 2<sup>31</sup>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImageFormatProperties {
- *     {@link VkExtent3D VkExtent3D} maxExtent;
- *     uint32_t maxMipLevels;
- *     uint32_t maxArrayLayers;
- *     VkSampleCountFlags sampleCounts;
- *     VkDeviceSize maxResourceSize;
+ *     {@link VkExtent3D VkExtent3D} {@link #maxExtent};
+ *     uint32_t {@link #maxMipLevels};
+ *     uint32_t {@link #maxArrayLayers};
+ *     VkSampleCountFlags {@link #sampleCounts};
+ *     VkDeviceSize {@link #maxResourceSize};
  * }</code></pre>
  */
 public class VkImageFormatProperties extends Struct implements NativeResource {
@@ -120,18 +95,37 @@ public class VkImageFormatProperties extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link VkExtent3D} view of the {@code maxExtent} field. */
+    /** are the maximum image dimensions. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-extentperimagetype">Allowed Extent Values</a> section below for how these values are constrained by {@code type}. */
     public VkExtent3D maxExtent() { return nmaxExtent(address()); }
-    /** Returns the value of the {@code maxMipLevels} field. */
+    /**
+     * the maximum number of mipmap levels. {@code maxMipLevels} <b>must</b> be equal to the number of levels in the complete mipmap chain based on the <code>maxExtent.width</code>, <code>maxExtent.height</code>, and <code>maxExtent.depth</code>, except when one of the following conditions is true, in which case it <b>may</b> instead be 1:
+     * 
+     * <ul>
+     * <li>{@code vkGetPhysicalDeviceImageFormatProperties}{@code ::tiling} was {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}</li>
+     * <li>{@link VkPhysicalDeviceImageFormatInfo2}{@code ::tiling} was {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}</li>
+     * <li>the {@link VkPhysicalDeviceImageFormatInfo2}{@code ::pNext} chain included a {@link VkPhysicalDeviceExternalImageFormatInfo} structure with a handle type included in the {@code handleTypes} member for which mipmap image support is not required</li>
+     * <li>image {@code format} is one of those listed in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">Formats requiring sampler Y'C<sub>B</sub>C<sub>R</sub> conversion for {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} image views</a></li>
+     * <li>{@code flags} contains {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT}</li>
+     * </ul>
+     */
     @NativeType("uint32_t")
     public int maxMipLevels() { return nmaxMipLevels(address()); }
-    /** Returns the value of the {@code maxArrayLayers} field. */
+    /**
+     * the maximum number of array layers. {@code maxArrayLayers} <b>must</b> be no less than {@link VkPhysicalDeviceLimits}{@code ::maxImageArrayLayers}, except when one of the following conditions is true, in which case it <b>may</b> instead be 1:
+     * 
+     * <ul>
+     * <li>{@code tiling} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}</li>
+     * <li>{@code tiling} is {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL} and {@code type} is {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}</li>
+     * <li>{@code format} is one of those listed in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">Formats requiring sampler Y'C<sub>B</sub>C<sub>R</sub> conversion for {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} image views</a></li>
+     * <li>If {@code tiling} is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then {@code maxArrayLayers} <b>must</b> not be 0.</li>
+     * </ul>
+     */
     @NativeType("uint32_t")
     public int maxArrayLayers() { return nmaxArrayLayers(address()); }
-    /** Returns the value of the {@code sampleCounts} field. */
+    /** a bitmask of {@code VkSampleCountFlagBits} specifying all the supported sample counts for this image as described <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-supported-sample-counts">below</a>. */
     @NativeType("VkSampleCountFlags")
     public int sampleCounts() { return nsampleCounts(address()); }
-    /** Returns the value of the {@code maxResourceSize} field. */
+    /** an upper bound on the total image size in bytes, inclusive of all image subresources. Implementations <b>may</b> have an address space limit on total size of a resource, which is advertised by this property. {@code maxResourceSize} <b>must</b> be at least 2<sup>31</sup>. */
     @NativeType("VkDeviceSize")
     public long maxResourceSize() { return nmaxResourceSize(address()); }
 
@@ -327,18 +321,18 @@ public class VkImageFormatProperties extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link VkExtent3D} view of the {@code maxExtent} field. */
+        /** @return a {@link VkExtent3D} view of the {@link VkImageFormatProperties#maxExtent} field. */
         public VkExtent3D maxExtent() { return VkImageFormatProperties.nmaxExtent(address()); }
-        /** Returns the value of the {@code maxMipLevels} field. */
+        /** @return the value of the {@link VkImageFormatProperties#maxMipLevels} field. */
         @NativeType("uint32_t")
         public int maxMipLevels() { return VkImageFormatProperties.nmaxMipLevels(address()); }
-        /** Returns the value of the {@code maxArrayLayers} field. */
+        /** @return the value of the {@link VkImageFormatProperties#maxArrayLayers} field. */
         @NativeType("uint32_t")
         public int maxArrayLayers() { return VkImageFormatProperties.nmaxArrayLayers(address()); }
-        /** Returns the value of the {@code sampleCounts} field. */
+        /** @return the value of the {@link VkImageFormatProperties#sampleCounts} field. */
         @NativeType("VkSampleCountFlags")
         public int sampleCounts() { return VkImageFormatProperties.nsampleCounts(address()); }
-        /** Returns the value of the {@code maxResourceSize} field. */
+        /** @return the value of the {@link VkImageFormatProperties#maxResourceSize} field. */
         @NativeType("VkDeviceSize")
         public long maxResourceSize() { return VkImageFormatProperties.nmaxResourceSize(address()); }
 

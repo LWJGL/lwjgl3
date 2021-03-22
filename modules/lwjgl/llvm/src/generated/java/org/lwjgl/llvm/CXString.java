@@ -69,13 +69,13 @@ public class CXString extends Struct implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
+     * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
     @NativeType("void const *")
     public ByteBuffer data(int capacity) { return ndata(address(), capacity); }
-    /** Returns the value of the {@code private_flags} field. */
+    /** @return the value of the {@code private_flags} field. */
     @NativeType("unsigned")
     public int private_flags() { return nprivate_flags(address()); }
 
@@ -266,13 +266,13 @@ public class CXString extends Struct implements NativeResource {
         }
 
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("void const *")
         public ByteBuffer data(int capacity) { return CXString.ndata(address(), capacity); }
-        /** Returns the value of the {@code private_flags} field. */
+        /** @return the value of the {@code private_flags} field. */
         @NativeType("unsigned")
         public int private_flags() { return CXString.nprivate_flags(address()); }
 

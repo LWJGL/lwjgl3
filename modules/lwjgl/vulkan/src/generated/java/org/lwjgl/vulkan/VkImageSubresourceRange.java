@@ -54,25 +54,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkImageMemoryBarrier}, {@link VkImageMemoryBarrier2KHR}, {@link VkImageViewCreateInfo}, {@link VK10#vkCmdClearColorImage CmdClearColorImage}, {@link VK10#vkCmdClearDepthStencilImage CmdClearDepthStencilImage}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code aspectMask} &ndash; a bitmask of {@code VkImageAspectFlagBits} specifying which aspect(s) of the image are included in the view.</li>
- * <li>{@code baseMipLevel} &ndash; the first mipmap level accessible to the view.</li>
- * <li>{@code levelCount} &ndash; the number of mipmap levels (starting from {@code baseMipLevel}) accessible to the view.</li>
- * <li>{@code baseArrayLayer} &ndash; the first array layer accessible to the view.</li>
- * <li>{@code layerCount} &ndash; the number of array layers (starting from {@code baseArrayLayer}) accessible to the view.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImageSubresourceRange {
- *     VkImageAspectFlags aspectMask;
- *     uint32_t baseMipLevel;
- *     uint32_t levelCount;
- *     uint32_t baseArrayLayer;
- *     uint32_t layerCount;
+ *     VkImageAspectFlags {@link #aspectMask};
+ *     uint32_t {@link #baseMipLevel};
+ *     uint32_t {@link #levelCount};
+ *     uint32_t {@link #baseArrayLayer};
+ *     uint32_t {@link #layerCount};
  * }</code></pre>
  */
 public class VkImageSubresourceRange extends Struct implements NativeResource {
@@ -123,31 +113,31 @@ public class VkImageSubresourceRange extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code aspectMask} field. */
+    /** a bitmask of {@code VkImageAspectFlagBits} specifying which aspect(s) of the image are included in the view. */
     @NativeType("VkImageAspectFlags")
     public int aspectMask() { return naspectMask(address()); }
-    /** Returns the value of the {@code baseMipLevel} field. */
+    /** the first mipmap level accessible to the view. */
     @NativeType("uint32_t")
     public int baseMipLevel() { return nbaseMipLevel(address()); }
-    /** Returns the value of the {@code levelCount} field. */
+    /** the number of mipmap levels (starting from {@code baseMipLevel}) accessible to the view. */
     @NativeType("uint32_t")
     public int levelCount() { return nlevelCount(address()); }
-    /** Returns the value of the {@code baseArrayLayer} field. */
+    /** the first array layer accessible to the view. */
     @NativeType("uint32_t")
     public int baseArrayLayer() { return nbaseArrayLayer(address()); }
-    /** Returns the value of the {@code layerCount} field. */
+    /** the number of array layers (starting from {@code baseArrayLayer}) accessible to the view. */
     @NativeType("uint32_t")
     public int layerCount() { return nlayerCount(address()); }
 
-    /** Sets the specified value to the {@code aspectMask} field. */
+    /** Sets the specified value to the {@link #aspectMask} field. */
     public VkImageSubresourceRange aspectMask(@NativeType("VkImageAspectFlags") int value) { naspectMask(address(), value); return this; }
-    /** Sets the specified value to the {@code baseMipLevel} field. */
+    /** Sets the specified value to the {@link #baseMipLevel} field. */
     public VkImageSubresourceRange baseMipLevel(@NativeType("uint32_t") int value) { nbaseMipLevel(address(), value); return this; }
-    /** Sets the specified value to the {@code levelCount} field. */
+    /** Sets the specified value to the {@link #levelCount} field. */
     public VkImageSubresourceRange levelCount(@NativeType("uint32_t") int value) { nlevelCount(address(), value); return this; }
-    /** Sets the specified value to the {@code baseArrayLayer} field. */
+    /** Sets the specified value to the {@link #baseArrayLayer} field. */
     public VkImageSubresourceRange baseArrayLayer(@NativeType("uint32_t") int value) { nbaseArrayLayer(address(), value); return this; }
-    /** Sets the specified value to the {@code layerCount} field. */
+    /** Sets the specified value to the {@link #layerCount} field. */
     public VkImageSubresourceRange layerCount(@NativeType("uint32_t") int value) { nlayerCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -382,31 +372,31 @@ public class VkImageSubresourceRange extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code aspectMask} field. */
+        /** @return the value of the {@link VkImageSubresourceRange#aspectMask} field. */
         @NativeType("VkImageAspectFlags")
         public int aspectMask() { return VkImageSubresourceRange.naspectMask(address()); }
-        /** Returns the value of the {@code baseMipLevel} field. */
+        /** @return the value of the {@link VkImageSubresourceRange#baseMipLevel} field. */
         @NativeType("uint32_t")
         public int baseMipLevel() { return VkImageSubresourceRange.nbaseMipLevel(address()); }
-        /** Returns the value of the {@code levelCount} field. */
+        /** @return the value of the {@link VkImageSubresourceRange#levelCount} field. */
         @NativeType("uint32_t")
         public int levelCount() { return VkImageSubresourceRange.nlevelCount(address()); }
-        /** Returns the value of the {@code baseArrayLayer} field. */
+        /** @return the value of the {@link VkImageSubresourceRange#baseArrayLayer} field. */
         @NativeType("uint32_t")
         public int baseArrayLayer() { return VkImageSubresourceRange.nbaseArrayLayer(address()); }
-        /** Returns the value of the {@code layerCount} field. */
+        /** @return the value of the {@link VkImageSubresourceRange#layerCount} field. */
         @NativeType("uint32_t")
         public int layerCount() { return VkImageSubresourceRange.nlayerCount(address()); }
 
-        /** Sets the specified value to the {@code aspectMask} field. */
+        /** Sets the specified value to the {@link VkImageSubresourceRange#aspectMask} field. */
         public VkImageSubresourceRange.Buffer aspectMask(@NativeType("VkImageAspectFlags") int value) { VkImageSubresourceRange.naspectMask(address(), value); return this; }
-        /** Sets the specified value to the {@code baseMipLevel} field. */
+        /** Sets the specified value to the {@link VkImageSubresourceRange#baseMipLevel} field. */
         public VkImageSubresourceRange.Buffer baseMipLevel(@NativeType("uint32_t") int value) { VkImageSubresourceRange.nbaseMipLevel(address(), value); return this; }
-        /** Sets the specified value to the {@code levelCount} field. */
+        /** Sets the specified value to the {@link VkImageSubresourceRange#levelCount} field. */
         public VkImageSubresourceRange.Buffer levelCount(@NativeType("uint32_t") int value) { VkImageSubresourceRange.nlevelCount(address(), value); return this; }
-        /** Sets the specified value to the {@code baseArrayLayer} field. */
+        /** Sets the specified value to the {@link VkImageSubresourceRange#baseArrayLayer} field. */
         public VkImageSubresourceRange.Buffer baseArrayLayer(@NativeType("uint32_t") int value) { VkImageSubresourceRange.nbaseArrayLayer(address(), value); return this; }
-        /** Sets the specified value to the {@code layerCount} field. */
+        /** Sets the specified value to the {@link VkImageSubresourceRange#layerCount} field. */
         public VkImageSubresourceRange.Buffer layerCount(@NativeType("uint32_t") int value) { VkImageSubresourceRange.nlayerCount(address(), value); return this; }
 
     }

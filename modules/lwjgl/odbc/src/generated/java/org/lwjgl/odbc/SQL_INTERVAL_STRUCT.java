@@ -77,28 +77,28 @@ public class SQL_INTERVAL_STRUCT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code interval_type} field. */
+    /** @return the value of the {@code interval_type} field. */
     @NativeType("SQLINTERVAL")
     public int interval_type() { return ninterval_type(address()); }
-    /** Returns the value of the {@code interval_sign} field. */
+    /** @return the value of the {@code interval_sign} field. */
     @NativeType("SQLSMALLINT")
     public short interval_sign() { return ninterval_sign(address()); }
-    /** Returns a {@link SQL_YEAR_MONTH_STRUCT} view of the {@code intval.year_month} field. */
+    /** @return a {@link SQL_YEAR_MONTH_STRUCT} view of the {@code intval.year_month} field. */
     public SQL_YEAR_MONTH_STRUCT intval_year_month() { return nintval_year_month(address()); }
-    /** Returns a {@link SQL_DAY_SECOND_STRUCT} view of the {@code intval.day_second} field. */
+    /** @return a {@link SQL_DAY_SECOND_STRUCT} view of the {@code intval.day_second} field. */
     public SQL_DAY_SECOND_STRUCT intval_day_second() { return nintval_day_second(address()); }
 
     /** Sets the specified value to the {@code interval_type} field. */
     public SQL_INTERVAL_STRUCT interval_type(@NativeType("SQLINTERVAL") int value) { ninterval_type(address(), value); return this; }
     /** Sets the specified value to the {@code interval_sign} field. */
     public SQL_INTERVAL_STRUCT interval_sign(@NativeType("SQLSMALLINT") short value) { ninterval_sign(address(), value); return this; }
-    /** Copies the specified {@link SQL_YEAR_MONTH_STRUCT} to the {@code intval.year_month} field. */
+    /** Copies the specified {@link SQL_YEAR_MONTH_STRUCT} to the {@code year_month} field. */
     public SQL_INTERVAL_STRUCT intval_year_month(SQL_YEAR_MONTH_STRUCT value) { nintval_year_month(address(), value); return this; }
-    /** Passes the {@code intval.year_month} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code year_month} field to the specified {@link java.util.function.Consumer Consumer}. */
     public SQL_INTERVAL_STRUCT intval_year_month(java.util.function.Consumer<SQL_YEAR_MONTH_STRUCT> consumer) { consumer.accept(intval_year_month()); return this; }
-    /** Copies the specified {@link SQL_DAY_SECOND_STRUCT} to the {@code intval.day_second} field. */
+    /** Copies the specified {@link SQL_DAY_SECOND_STRUCT} to the {@code day_second} field. */
     public SQL_INTERVAL_STRUCT intval_day_second(SQL_DAY_SECOND_STRUCT value) { nintval_day_second(address(), value); return this; }
-    /** Passes the {@code intval.day_second} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code day_second} field to the specified {@link java.util.function.Consumer Consumer}. */
     public SQL_INTERVAL_STRUCT intval_day_second(java.util.function.Consumer<SQL_DAY_SECOND_STRUCT> consumer) { consumer.accept(intval_day_second()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,28 +327,28 @@ public class SQL_INTERVAL_STRUCT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code interval_type} field. */
+        /** @return the value of the {@code interval_type} field. */
         @NativeType("SQLINTERVAL")
         public int interval_type() { return SQL_INTERVAL_STRUCT.ninterval_type(address()); }
-        /** Returns the value of the {@code interval_sign} field. */
+        /** @return the value of the {@code interval_sign} field. */
         @NativeType("SQLSMALLINT")
         public short interval_sign() { return SQL_INTERVAL_STRUCT.ninterval_sign(address()); }
-        /** Returns a {@link SQL_YEAR_MONTH_STRUCT} view of the {@code intval.year_month} field. */
+        /** @return a {@link SQL_YEAR_MONTH_STRUCT} view of the {@code intval.year_month} field. */
         public SQL_YEAR_MONTH_STRUCT intval_year_month() { return SQL_INTERVAL_STRUCT.nintval_year_month(address()); }
-        /** Returns a {@link SQL_DAY_SECOND_STRUCT} view of the {@code intval.day_second} field. */
+        /** @return a {@link SQL_DAY_SECOND_STRUCT} view of the {@code intval.day_second} field. */
         public SQL_DAY_SECOND_STRUCT intval_day_second() { return SQL_INTERVAL_STRUCT.nintval_day_second(address()); }
 
         /** Sets the specified value to the {@code interval_type} field. */
         public SQL_INTERVAL_STRUCT.Buffer interval_type(@NativeType("SQLINTERVAL") int value) { SQL_INTERVAL_STRUCT.ninterval_type(address(), value); return this; }
         /** Sets the specified value to the {@code interval_sign} field. */
         public SQL_INTERVAL_STRUCT.Buffer interval_sign(@NativeType("SQLSMALLINT") short value) { SQL_INTERVAL_STRUCT.ninterval_sign(address(), value); return this; }
-        /** Copies the specified {@link SQL_YEAR_MONTH_STRUCT} to the {@code intval.year_month} field. */
+        /** Copies the specified {@link SQL_YEAR_MONTH_STRUCT} to the {@code year_month} field. */
         public SQL_INTERVAL_STRUCT.Buffer intval_year_month(SQL_YEAR_MONTH_STRUCT value) { SQL_INTERVAL_STRUCT.nintval_year_month(address(), value); return this; }
-        /** Passes the {@code intval.year_month} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code year_month} field to the specified {@link java.util.function.Consumer Consumer}. */
         public SQL_INTERVAL_STRUCT.Buffer intval_year_month(java.util.function.Consumer<SQL_YEAR_MONTH_STRUCT> consumer) { consumer.accept(intval_year_month()); return this; }
-        /** Copies the specified {@link SQL_DAY_SECOND_STRUCT} to the {@code intval.day_second} field. */
+        /** Copies the specified {@link SQL_DAY_SECOND_STRUCT} to the {@code day_second} field. */
         public SQL_INTERVAL_STRUCT.Buffer intval_day_second(SQL_DAY_SECOND_STRUCT value) { SQL_INTERVAL_STRUCT.nintval_day_second(address(), value); return this; }
-        /** Passes the {@code intval.day_second} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code day_second} field to the specified {@link java.util.function.Consumer Consumer}. */
         public SQL_INTERVAL_STRUCT.Buffer intval_day_second(java.util.function.Consumer<SQL_DAY_SECOND_STRUCT> consumer) { consumer.accept(intval_day_second()); return this; }
 
     }

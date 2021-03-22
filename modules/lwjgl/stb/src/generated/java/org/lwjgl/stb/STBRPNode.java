@@ -70,13 +70,13 @@ public class STBRPNode extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     @NativeType("stbrp_coord")
     public short x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     @NativeType("stbrp_coord")
     public short y() { return ny(address()); }
-    /** Returns a {@link STBRPNode} view of the struct pointed to by the {@code next} field. */
+    /** @return a {@link STBRPNode} view of the struct pointed to by the {@code next} field. */
     @Nullable
     @NativeType("stbrp_node *")
     public STBRPNode next() { return nnext(address()); }
@@ -269,13 +269,13 @@ public class STBRPNode extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         @NativeType("stbrp_coord")
         public short x() { return STBRPNode.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         @NativeType("stbrp_coord")
         public short y() { return STBRPNode.ny(address()); }
-        /** Returns a {@link STBRPNode} view of the struct pointed to by the {@code next} field. */
+        /** @return a {@link STBRPNode} view of the struct pointed to by the {@code next} field. */
         @Nullable
         @NativeType("stbrp_node *")
         public STBRPNode next() { return STBRPNode.nnext(address()); }

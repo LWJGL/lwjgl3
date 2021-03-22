@@ -32,25 +32,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code conservativeRasterizationMode} <b>must</b> be a valid {@code VkConservativeRasterizationModeEXT} value</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code conservativeRasterizationMode} &ndash; the conservative rasterization mode to use.</li>
- * <li>{@code extraPrimitiveOverestimationSize} &ndash; the extra size in pixels to increase the generating primitive during conservative rasterization at each of its edges in {@code X} and {@code Y} equally in screen space beyond the base overestimation specified in {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}{@code ::primitiveOverestimationSize}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineRasterizationConservativeStateCreateInfoEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineRasterizationConservativeStateCreateFlagsEXT flags;
- *     VkConservativeRasterizationModeEXT conservativeRasterizationMode;
- *     float extraPrimitiveOverestimationSize;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineRasterizationConservativeStateCreateFlagsEXT {@link #flags};
+ *     VkConservativeRasterizationModeEXT {@link #conservativeRasterizationMode};
+ *     float {@link #extraPrimitiveOverestimationSize};
  * }</code></pre>
  */
 public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struct implements NativeResource {
@@ -101,30 +91,30 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkPipelineRasterizationConservativeStateCreateFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code conservativeRasterizationMode} field. */
+    /** the conservative rasterization mode to use. */
     @NativeType("VkConservativeRasterizationModeEXT")
     public int conservativeRasterizationMode() { return nconservativeRasterizationMode(address()); }
-    /** Returns the value of the {@code extraPrimitiveOverestimationSize} field. */
+    /** the extra size in pixels to increase the generating primitive during conservative rasterization at each of its edges in {@code X} and {@code Y} equally in screen space beyond the base overestimation specified in {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}{@code ::primitiveOverestimationSize}. */
     public float extraPrimitiveOverestimationSize() { return nextraPrimitiveOverestimationSize(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineRasterizationConservativeStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineRasterizationConservativeStateCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineRasterizationConservativeStateCreateInfoEXT flags(@NativeType("VkPipelineRasterizationConservativeStateCreateFlagsEXT") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code conservativeRasterizationMode} field. */
+    /** Sets the specified value to the {@link #conservativeRasterizationMode} field. */
     public VkPipelineRasterizationConservativeStateCreateInfoEXT conservativeRasterizationMode(@NativeType("VkConservativeRasterizationModeEXT") int value) { nconservativeRasterizationMode(address(), value); return this; }
-    /** Sets the specified value to the {@code extraPrimitiveOverestimationSize} field. */
+    /** Sets the specified value to the {@link #extraPrimitiveOverestimationSize} field. */
     public VkPipelineRasterizationConservativeStateCreateInfoEXT extraPrimitiveOverestimationSize(float value) { nextraPrimitiveOverestimationSize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -359,30 +349,30 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineRasterizationConservativeStateCreateInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineRasterizationConservativeStateCreateInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#flags} field. */
         @NativeType("VkPipelineRasterizationConservativeStateCreateFlagsEXT")
         public int flags() { return VkPipelineRasterizationConservativeStateCreateInfoEXT.nflags(address()); }
-        /** Returns the value of the {@code conservativeRasterizationMode} field. */
+        /** @return the value of the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#conservativeRasterizationMode} field. */
         @NativeType("VkConservativeRasterizationModeEXT")
         public int conservativeRasterizationMode() { return VkPipelineRasterizationConservativeStateCreateInfoEXT.nconservativeRasterizationMode(address()); }
-        /** Returns the value of the {@code extraPrimitiveOverestimationSize} field. */
+        /** @return the value of the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#extraPrimitiveOverestimationSize} field. */
         public float extraPrimitiveOverestimationSize() { return VkPipelineRasterizationConservativeStateCreateInfoEXT.nextraPrimitiveOverestimationSize(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#sType} field. */
         public VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineRasterizationConservativeStateCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#pNext} field. */
         public VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRasterizationConservativeStateCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#flags} field. */
         public VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer flags(@NativeType("VkPipelineRasterizationConservativeStateCreateFlagsEXT") int value) { VkPipelineRasterizationConservativeStateCreateInfoEXT.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code conservativeRasterizationMode} field. */
+        /** Sets the specified value to the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#conservativeRasterizationMode} field. */
         public VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer conservativeRasterizationMode(@NativeType("VkConservativeRasterizationModeEXT") int value) { VkPipelineRasterizationConservativeStateCreateInfoEXT.nconservativeRasterizationMode(address(), value); return this; }
-        /** Sets the specified value to the {@code extraPrimitiveOverestimationSize} field. */
+        /** Sets the specified value to the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#extraPrimitiveOverestimationSize} field. */
         public VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer extraPrimitiveOverestimationSize(float value) { VkPipelineRasterizationConservativeStateCreateInfoEXT.nextraPrimitiveOverestimationSize(address(), value); return this; }
 
     }

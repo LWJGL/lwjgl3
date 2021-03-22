@@ -67,10 +67,10 @@ public class VmaDefragmentationPassInfo extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code moveCount} field. */
+    /** @return the value of the {@code moveCount} field. */
     @NativeType("uint32_t")
     public int moveCount() { return nmoveCount(address()); }
-    /** Returns a {@link VmaDefragmentationPassMoveInfo.Buffer} view of the struct array pointed to by the {@code pMoves} field. */
+    /** @return a {@link VmaDefragmentationPassMoveInfo.Buffer} view of the struct array pointed to by the {@code pMoves} field. */
     @NativeType("VmaDefragmentationPassMoveInfo *")
     public VmaDefragmentationPassMoveInfo.Buffer pMoves() { return npMoves(address()); }
 
@@ -260,10 +260,10 @@ public class VmaDefragmentationPassInfo extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code moveCount} field. */
+        /** @return the value of the {@code moveCount} field. */
         @NativeType("uint32_t")
         public int moveCount() { return VmaDefragmentationPassInfo.nmoveCount(address()); }
-        /** Returns a {@link VmaDefragmentationPassMoveInfo.Buffer} view of the struct array pointed to by the {@code pMoves} field. */
+        /** @return a {@link VmaDefragmentationPassMoveInfo.Buffer} view of the struct array pointed to by the {@code pMoves} field. */
         @NativeType("VmaDefragmentationPassMoveInfo *")
         public VmaDefragmentationPassMoveInfo.Buffer pMoves() { return VmaDefragmentationPassInfo.npMoves(address()); }
 

@@ -28,21 +28,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code inlineUniformBlock} &ndash; indicates whether the implementation supports inline uniform block descriptors. If this feature is not enabled, {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} <b>must</b> not be used.</li>
- * <li>{@code descriptorBindingInlineUniformBlockUpdateAfterBind} &ndash; indicates whether the implementation supports updating inline uniform block descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceInlineUniformBlockFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 inlineUniformBlock;
- *     VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind;
+ *     VkBool32 {@link #inlineUniformBlock};
+ *     VkBool32 {@link #descriptorBindingInlineUniformBlockUpdateAfterBind};
  * }</code></pre>
  */
 public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct implements NativeResource {
@@ -90,16 +83,16 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct implem
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code inlineUniformBlock} field. */
+    /** indicates whether the implementation supports inline uniform block descriptors. If this feature is not enabled, {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} <b>must</b> not be used. */
     @NativeType("VkBool32")
     public boolean inlineUniformBlock() { return ninlineUniformBlock(address()) != 0; }
-    /** Returns the value of the {@code descriptorBindingInlineUniformBlockUpdateAfterBind} field. */
+    /** indicates whether the implementation supports updating inline uniform block descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT}. */
     @NativeType("VkBool32")
     public boolean descriptorBindingInlineUniformBlockUpdateAfterBind() { return ndescriptorBindingInlineUniformBlockUpdateAfterBind(address()) != 0; }
 
@@ -107,9 +100,9 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct implem
     public VkPhysicalDeviceInlineUniformBlockFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceInlineUniformBlockFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code inlineUniformBlock} field. */
+    /** Sets the specified value to the {@link #inlineUniformBlock} field. */
     public VkPhysicalDeviceInlineUniformBlockFeaturesEXT inlineUniformBlock(@NativeType("VkBool32") boolean value) { ninlineUniformBlock(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code descriptorBindingInlineUniformBlockUpdateAfterBind} field. */
+    /** Sets the specified value to the {@link #descriptorBindingInlineUniformBlockUpdateAfterBind} field. */
     public VkPhysicalDeviceInlineUniformBlockFeaturesEXT descriptorBindingInlineUniformBlockUpdateAfterBind(@NativeType("VkBool32") boolean value) { ndescriptorBindingInlineUniformBlockUpdateAfterBind(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -338,16 +331,16 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct implem
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceInlineUniformBlockFeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceInlineUniformBlockFeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code inlineUniformBlock} field. */
+        /** @return the value of the {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT#inlineUniformBlock} field. */
         @NativeType("VkBool32")
         public boolean inlineUniformBlock() { return VkPhysicalDeviceInlineUniformBlockFeaturesEXT.ninlineUniformBlock(address()) != 0; }
-        /** Returns the value of the {@code descriptorBindingInlineUniformBlockUpdateAfterBind} field. */
+        /** @return the value of the {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT#descriptorBindingInlineUniformBlockUpdateAfterBind} field. */
         @NativeType("VkBool32")
         public boolean descriptorBindingInlineUniformBlockUpdateAfterBind() { return VkPhysicalDeviceInlineUniformBlockFeaturesEXT.ndescriptorBindingInlineUniformBlockUpdateAfterBind(address()) != 0; }
 
@@ -355,9 +348,9 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct implem
         public VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceInlineUniformBlockFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceInlineUniformBlockFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code inlineUniformBlock} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT#inlineUniformBlock} field. */
         public VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer inlineUniformBlock(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceInlineUniformBlockFeaturesEXT.ninlineUniformBlock(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code descriptorBindingInlineUniformBlockUpdateAfterBind} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT#descriptorBindingInlineUniformBlockUpdateAfterBind} field. */
         public VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer descriptorBindingInlineUniformBlockUpdateAfterBind(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceInlineUniformBlockFeaturesEXT.ndescriptorBindingInlineUniformBlockUpdateAfterBind(address(), value ? 1 : 0); return this; }
 
     }

@@ -136,31 +136,18 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkComponentMapping}, {@link VkImageSubresourceRange}, {@link VK10#vkCreateImageView CreateImageView}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkImageViewCreateFlagBits} describing additional parameters of the image view.</li>
- * <li>{@code image} &ndash; a {@code VkImage} on which the view will be created.</li>
- * <li>{@code viewType} &ndash; a {@code VkImageViewType} value specifying the type of the image view.</li>
- * <li>{@code format} &ndash; a {@code VkFormat} describing the format and type used to interpret texel blocks in the image.</li>
- * <li>{@code components} &ndash; a {@link VkComponentMapping} specifies a remapping of color components (or of depth or stencil components after they have been converted into color components).</li>
- * <li>{@code subresourceRange} &ndash; a {@link VkImageSubresourceRange} selecting the set of mipmap levels and array layers to be accessible to the view.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImageViewCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkImageViewCreateFlags flags;
- *     VkImage image;
- *     VkImageViewType viewType;
- *     VkFormat format;
- *     {@link VkComponentMapping VkComponentMapping} components;
- *     {@link VkImageSubresourceRange VkImageSubresourceRange} subresourceRange;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkImageViewCreateFlags {@link #flags};
+ *     VkImage {@link #image};
+ *     VkImageViewType {@link #viewType};
+ *     VkFormat {@link #format};
+ *     {@link VkComponentMapping VkComponentMapping} {@link #components};
+ *     {@link VkImageSubresourceRange VkImageSubresourceRange} {@link #subresourceRange};
  * }</code></pre>
  */
 public class VkImageViewCreateInfo extends Struct implements NativeResource {
@@ -220,48 +207,48 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkImageViewCreateFlagBits} describing additional parameters of the image view. */
     @NativeType("VkImageViewCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code image} field. */
+    /** a {@code VkImage} on which the view will be created. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
-    /** Returns the value of the {@code viewType} field. */
+    /** a {@code VkImageViewType} value specifying the type of the image view. */
     @NativeType("VkImageViewType")
     public int viewType() { return nviewType(address()); }
-    /** Returns the value of the {@code format} field. */
+    /** a {@code VkFormat} describing the format and type used to interpret texel blocks in the image. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** Returns a {@link VkComponentMapping} view of the {@code components} field. */
+    /** a {@link VkComponentMapping} specifies a remapping of color components (or of depth or stencil components after they have been converted into color components). */
     public VkComponentMapping components() { return ncomponents(address()); }
-    /** Returns a {@link VkImageSubresourceRange} view of the {@code subresourceRange} field. */
+    /** a {@link VkImageSubresourceRange} selecting the set of mipmap levels and array layers to be accessible to the view. */
     public VkImageSubresourceRange subresourceRange() { return nsubresourceRange(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkImageViewCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkImageViewCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkImageViewCreateInfo flags(@NativeType("VkImageViewCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code image} field. */
+    /** Sets the specified value to the {@link #image} field. */
     public VkImageViewCreateInfo image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
-    /** Sets the specified value to the {@code viewType} field. */
+    /** Sets the specified value to the {@link #viewType} field. */
     public VkImageViewCreateInfo viewType(@NativeType("VkImageViewType") int value) { nviewType(address(), value); return this; }
-    /** Sets the specified value to the {@code format} field. */
+    /** Sets the specified value to the {@link #format} field. */
     public VkImageViewCreateInfo format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
-    /** Copies the specified {@link VkComponentMapping} to the {@code components} field. */
+    /** Copies the specified {@link VkComponentMapping} to the {@link #components} field. */
     public VkImageViewCreateInfo components(VkComponentMapping value) { ncomponents(address(), value); return this; }
-    /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #components} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageViewCreateInfo components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
-    /** Copies the specified {@link VkImageSubresourceRange} to the {@code subresourceRange} field. */
+    /** Copies the specified {@link VkImageSubresourceRange} to the {@link #subresourceRange} field. */
     public VkImageViewCreateInfo subresourceRange(VkImageSubresourceRange value) { nsubresourceRange(address(), value); return this; }
-    /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageViewCreateInfo subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -514,48 +501,48 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkImageViewCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageViewCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkImageViewCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageViewCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkImageViewCreateInfo#flags} field. */
         @NativeType("VkImageViewCreateFlags")
         public int flags() { return VkImageViewCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code image} field. */
+        /** @return the value of the {@link VkImageViewCreateInfo#image} field. */
         @NativeType("VkImage")
         public long image() { return VkImageViewCreateInfo.nimage(address()); }
-        /** Returns the value of the {@code viewType} field. */
+        /** @return the value of the {@link VkImageViewCreateInfo#viewType} field. */
         @NativeType("VkImageViewType")
         public int viewType() { return VkImageViewCreateInfo.nviewType(address()); }
-        /** Returns the value of the {@code format} field. */
+        /** @return the value of the {@link VkImageViewCreateInfo#format} field. */
         @NativeType("VkFormat")
         public int format() { return VkImageViewCreateInfo.nformat(address()); }
-        /** Returns a {@link VkComponentMapping} view of the {@code components} field. */
+        /** @return a {@link VkComponentMapping} view of the {@link VkImageViewCreateInfo#components} field. */
         public VkComponentMapping components() { return VkImageViewCreateInfo.ncomponents(address()); }
-        /** Returns a {@link VkImageSubresourceRange} view of the {@code subresourceRange} field. */
+        /** @return a {@link VkImageSubresourceRange} view of the {@link VkImageViewCreateInfo#subresourceRange} field. */
         public VkImageSubresourceRange subresourceRange() { return VkImageViewCreateInfo.nsubresourceRange(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkImageViewCreateInfo#sType} field. */
         public VkImageViewCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkImageViewCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkImageViewCreateInfo#pNext} field. */
         public VkImageViewCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkImageViewCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkImageViewCreateInfo#flags} field. */
         public VkImageViewCreateInfo.Buffer flags(@NativeType("VkImageViewCreateFlags") int value) { VkImageViewCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code image} field. */
+        /** Sets the specified value to the {@link VkImageViewCreateInfo#image} field. */
         public VkImageViewCreateInfo.Buffer image(@NativeType("VkImage") long value) { VkImageViewCreateInfo.nimage(address(), value); return this; }
-        /** Sets the specified value to the {@code viewType} field. */
+        /** Sets the specified value to the {@link VkImageViewCreateInfo#viewType} field. */
         public VkImageViewCreateInfo.Buffer viewType(@NativeType("VkImageViewType") int value) { VkImageViewCreateInfo.nviewType(address(), value); return this; }
-        /** Sets the specified value to the {@code format} field. */
+        /** Sets the specified value to the {@link VkImageViewCreateInfo#format} field. */
         public VkImageViewCreateInfo.Buffer format(@NativeType("VkFormat") int value) { VkImageViewCreateInfo.nformat(address(), value); return this; }
-        /** Copies the specified {@link VkComponentMapping} to the {@code components} field. */
+        /** Copies the specified {@link VkComponentMapping} to the {@link VkImageViewCreateInfo#components} field. */
         public VkImageViewCreateInfo.Buffer components(VkComponentMapping value) { VkImageViewCreateInfo.ncomponents(address(), value); return this; }
-        /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkImageViewCreateInfo#components} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageViewCreateInfo.Buffer components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
-        /** Copies the specified {@link VkImageSubresourceRange} to the {@code subresourceRange} field. */
+        /** Copies the specified {@link VkImageSubresourceRange} to the {@link VkImageViewCreateInfo#subresourceRange} field. */
         public VkImageViewCreateInfo.Buffer subresourceRange(VkImageSubresourceRange value) { VkImageViewCreateInfo.nsubresourceRange(address(), value); return this; }
-        /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkImageViewCreateInfo#subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageViewCreateInfo.Buffer subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     }

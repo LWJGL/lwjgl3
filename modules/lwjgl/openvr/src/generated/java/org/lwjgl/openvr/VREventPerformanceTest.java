@@ -58,7 +58,7 @@ public class VREventPerformanceTest extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code m_nFidelityLevel} field. */
+    /** @return the value of the {@code m_nFidelityLevel} field. */
     @NativeType("uint32_t")
     public int m_nFidelityLevel() { return nm_nFidelityLevel(address()); }
 
@@ -134,7 +134,7 @@ public class VREventPerformanceTest extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code m_nFidelityLevel} field. */
+        /** @return the value of the {@code m_nFidelityLevel} field. */
         @NativeType("uint32_t")
         public int m_nFidelityLevel() { return VREventPerformanceTest.nm_nFidelityLevel(address()); }
 

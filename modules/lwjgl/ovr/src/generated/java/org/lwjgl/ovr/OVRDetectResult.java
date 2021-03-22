@@ -18,27 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Return values for {@link OVRUtil#ovr_Detect _Detect}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code IsOculusServiceRunning} &ndash; 
- * is {@link OVR#ovrFalse False} when the Oculus Service is not running. This means that the Oculus Service is either uninstalled or stopped.
- * {@code IsOculusHMDConnected} will be {@link OVR#ovrFalse False} in this case.
- * 
- * <p>is {@link OVR#ovrTrue True} when the Oculus Service is running. This means that the Oculus Service is installed and running. {@code IsOculusHMDConnected} will
- * reflect the state of the HMD.</p></li>
- * <li>{@code IsOculusHMDConnected} &ndash; 
- * is {@link OVR#ovrFalse False} when an Oculus HMD is not detected. If the Oculus Service is not running, this will be {@link OVR#ovrFalse False}.
- * 
- * <p>is {@link OVR#ovrTrue True} when an Oculus HMD is detected. This implies that the Oculus Service is also installed and running.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrDetectResult {
- *     ovrBool IsOculusServiceRunning;
- *     ovrBool IsOculusHMDConnected;
+ *     ovrBool {@link #IsOculusServiceRunning};
+ *     ovrBool {@link #IsOculusHMDConnected};
  *     char[6];
  * }</code></pre>
  */
@@ -83,10 +68,20 @@ public class OVRDetectResult extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code IsOculusServiceRunning} field. */
+    /**
+     * is {@link OVR#ovrFalse False} when the Oculus Service is not running. This means that the Oculus Service is either uninstalled or stopped.
+     * {@code IsOculusHMDConnected} will be {@link OVR#ovrFalse False} in this case.
+     * 
+     * <p>is {@link OVR#ovrTrue True} when the Oculus Service is running. This means that the Oculus Service is installed and running. {@code IsOculusHMDConnected} will
+     * reflect the state of the HMD.</p>
+     */
     @NativeType("ovrBool")
     public boolean IsOculusServiceRunning() { return nIsOculusServiceRunning(address()); }
-    /** Returns the value of the {@code IsOculusHMDConnected} field. */
+    /**
+     * is {@link OVR#ovrFalse False} when an Oculus HMD is not detected. If the Oculus Service is not running, this will be {@link OVR#ovrFalse False}.
+     * 
+     * <p>is {@link OVR#ovrTrue True} when an Oculus HMD is detected. This implies that the Oculus Service is also installed and running.</p>
+     */
     @NativeType("ovrBool")
     public boolean IsOculusHMDConnected() { return nIsOculusHMDConnected(address()); }
 
@@ -276,10 +271,10 @@ public class OVRDetectResult extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code IsOculusServiceRunning} field. */
+        /** @return the value of the {@link OVRDetectResult#IsOculusServiceRunning} field. */
         @NativeType("ovrBool")
         public boolean IsOculusServiceRunning() { return OVRDetectResult.nIsOculusServiceRunning(address()); }
-        /** Returns the value of the {@code IsOculusHMDConnected} field. */
+        /** @return the value of the {@link OVRDetectResult#IsOculusHMDConnected} field. */
         @NativeType("ovrBool")
         public boolean IsOculusHMDConnected() { return OVRDetectResult.nIsOculusHMDConnected(address()); }
 

@@ -24,19 +24,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code samplerYcbcrConversion} &ndash; specifies whether the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>. If {@code samplerYcbcrConversion} is {@link VK10#VK_FALSE FALSE}, sampler Y′C<sub>B</sub>C<sub>R</sub> conversion is not supported, and samplers using sampler Y′C<sub>B</sub>C<sub>R</sub> conversion <b>must</b> not be used.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceSamplerYcbcrConversionFeatures {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 samplerYcbcrConversion;
+ *     VkBool32 {@link #samplerYcbcrConversion};
  * }</code></pre>
  */
 public class VkPhysicalDeviceSamplerYcbcrConversionFeatures extends Struct implements NativeResource {
@@ -81,13 +75,13 @@ public class VkPhysicalDeviceSamplerYcbcrConversionFeatures extends Struct imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code samplerYcbcrConversion} field. */
+    /** specifies whether the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>. If {@code samplerYcbcrConversion} is {@link VK10#VK_FALSE FALSE}, sampler Y′C<sub>B</sub>C<sub>R</sub> conversion is not supported, and samplers using sampler Y′C<sub>B</sub>C<sub>R</sub> conversion <b>must</b> not be used. */
     @NativeType("VkBool32")
     public boolean samplerYcbcrConversion() { return nsamplerYcbcrConversion(address()) != 0; }
 
@@ -95,7 +89,7 @@ public class VkPhysicalDeviceSamplerYcbcrConversionFeatures extends Struct imple
     public VkPhysicalDeviceSamplerYcbcrConversionFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSamplerYcbcrConversionFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code samplerYcbcrConversion} field. */
+    /** Sets the specified value to the {@link #samplerYcbcrConversion} field. */
     public VkPhysicalDeviceSamplerYcbcrConversionFeatures samplerYcbcrConversion(@NativeType("VkBool32") boolean value) { nsamplerYcbcrConversion(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,13 +312,13 @@ public class VkPhysicalDeviceSamplerYcbcrConversionFeatures extends Struct imple
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceSamplerYcbcrConversionFeatures.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceSamplerYcbcrConversionFeatures.npNext(address()); }
-        /** Returns the value of the {@code samplerYcbcrConversion} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSamplerYcbcrConversionFeatures#samplerYcbcrConversion} field. */
         @NativeType("VkBool32")
         public boolean samplerYcbcrConversion() { return VkPhysicalDeviceSamplerYcbcrConversionFeatures.nsamplerYcbcrConversion(address()) != 0; }
 
@@ -332,7 +326,7 @@ public class VkPhysicalDeviceSamplerYcbcrConversionFeatures extends Struct imple
         public VkPhysicalDeviceSamplerYcbcrConversionFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSamplerYcbcrConversionFeatures.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSamplerYcbcrConversionFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSamplerYcbcrConversionFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code samplerYcbcrConversion} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceSamplerYcbcrConversionFeatures#samplerYcbcrConversion} field. */
         public VkPhysicalDeviceSamplerYcbcrConversionFeatures.Buffer samplerYcbcrConversion(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceSamplerYcbcrConversionFeatures.nsamplerYcbcrConversion(address(), value ? 1 : 0); return this; }
 
     }

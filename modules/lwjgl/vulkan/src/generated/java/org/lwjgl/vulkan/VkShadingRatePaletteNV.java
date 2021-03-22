@@ -36,19 +36,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkPipelineViewportShadingRateImageStateCreateInfoNV}, {@link NVShadingRateImage#vkCmdSetViewportShadingRatePaletteNV CmdSetViewportShadingRatePaletteNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code shadingRatePaletteEntryCount} &ndash; specifies the number of entries in the shading rate image palette.</li>
- * <li>{@code pShadingRatePaletteEntries} &ndash; a pointer to an array of {@code VkShadingRatePaletteEntryNV} enums defining the shading rate for each palette entry.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkShadingRatePaletteNV {
- *     uint32_t shadingRatePaletteEntryCount;
- *     VkShadingRatePaletteEntryNV const * pShadingRatePaletteEntries;
+ *     uint32_t {@link #shadingRatePaletteEntryCount};
+ *     VkShadingRatePaletteEntryNV const * {@link #pShadingRatePaletteEntries};
  * }</code></pre>
  */
 public class VkShadingRatePaletteNV extends Struct implements NativeResource {
@@ -90,14 +83,14 @@ public class VkShadingRatePaletteNV extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code shadingRatePaletteEntryCount} field. */
+    /** specifies the number of entries in the shading rate image palette. */
     @NativeType("uint32_t")
     public int shadingRatePaletteEntryCount() { return nshadingRatePaletteEntryCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pShadingRatePaletteEntries} field. */
+    /** a pointer to an array of {@code VkShadingRatePaletteEntryNV} enums defining the shading rate for each palette entry. */
     @NativeType("VkShadingRatePaletteEntryNV const *")
     public IntBuffer pShadingRatePaletteEntries() { return npShadingRatePaletteEntries(address()); }
 
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pShadingRatePaletteEntries} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pShadingRatePaletteEntries} field. */
     public VkShadingRatePaletteNV pShadingRatePaletteEntries(@NativeType("VkShadingRatePaletteEntryNV const *") IntBuffer value) { npShadingRatePaletteEntries(address(), value); return this; }
 
     /**
@@ -324,14 +317,14 @@ public class VkShadingRatePaletteNV extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code shadingRatePaletteEntryCount} field. */
+        /** @return the value of the {@link VkShadingRatePaletteNV#shadingRatePaletteEntryCount} field. */
         @NativeType("uint32_t")
         public int shadingRatePaletteEntryCount() { return VkShadingRatePaletteNV.nshadingRatePaletteEntryCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pShadingRatePaletteEntries} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkShadingRatePaletteNV#pShadingRatePaletteEntries} field. */
         @NativeType("VkShadingRatePaletteEntryNV const *")
         public IntBuffer pShadingRatePaletteEntries() { return VkShadingRatePaletteNV.npShadingRatePaletteEntries(address()); }
 
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pShadingRatePaletteEntries} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkShadingRatePaletteNV#pShadingRatePaletteEntries} field. */
         public VkShadingRatePaletteNV.Buffer pShadingRatePaletteEntries(@NativeType("VkShadingRatePaletteEntryNV const *") IntBuffer value) { VkShadingRatePaletteNV.npShadingRatePaletteEntries(address(), value); return this; }
 
     }

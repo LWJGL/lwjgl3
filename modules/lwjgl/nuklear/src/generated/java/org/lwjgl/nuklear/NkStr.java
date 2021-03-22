@@ -21,18 +21,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * should have any contact with this API is if you interact with an {@link NkTextEdit} object inside one of the copy and
  * paste functions and even there only for more advanced cases.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code len} &ndash; in codepoints/runes/glyphs</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct nk_str {
  *     {@link NkBuffer struct nk_buffer} buffer;
- *     int len;
+ *     int {@link #len};
  * }</code></pre>
  */
 @NativeType("struct nk_str")
@@ -75,10 +69,10 @@ public class NkStr extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkBuffer} view of the {@code buffer} field. */
+    /** @return a {@link NkBuffer} view of the {@code buffer} field. */
     @NativeType("struct nk_buffer")
     public NkBuffer buffer() { return nbuffer(address()); }
-    /** Returns the value of the {@code len} field. */
+    /** in codepoints/runes/glyphs */
     public int len() { return nlen(address()); }
 
     // -----------------------------------
@@ -267,10 +261,10 @@ public class NkStr extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkBuffer} view of the {@code buffer} field. */
+        /** @return a {@link NkBuffer} view of the {@code buffer} field. */
         @NativeType("struct nk_buffer")
         public NkBuffer buffer() { return NkStr.nbuffer(address()); }
-        /** Returns the value of the {@code len} field. */
+        /** @return the value of the {@link NkStr#len} field. */
         public int len() { return NkStr.nlen(address()); }
 
     }

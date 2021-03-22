@@ -17,27 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code serial} &ndash; # of last request processed by server</li>
- * <li>{@code send_event} &ndash; true if this came from an {@link X11#XSendEvent} request</li>
- * <li>{@code display} &ndash; {@code Display} the event was read from</li>
- * <li>{@code major_code} &ndash; core is {@code CopyArea} or {@code CopyPlane}</li>
- * <li>{@code minor_code} &ndash; not defined in the core</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XNoExposeEvent {
  *     int type;
- *     unsigned long serial;
- *     Bool send_event;
- *     Display * display;
+ *     unsigned long {@link #serial};
+ *     Bool {@link #send_event};
+ *     Display * {@link #display};
  *     Drawable drawable;
- *     int major_code;
- *     int minor_code;
+ *     int {@link #major_code};
+ *     int {@link #minor_code};
  * }</code></pre>
  */
 public class XNoExposeEvent extends Struct implements NativeResource {
@@ -94,38 +84,38 @@ public class XNoExposeEvent extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code serial} field. */
+    /** # of last request processed by server */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** Returns the value of the {@code send_event} field. */
+    /** true if this came from an {@link X11#XSendEvent} request */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** Returns the value of the {@code display} field. */
+    /** {@code Display} the event was read from */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code drawable} field. */
+    /** @return the value of the {@code drawable} field. */
     @NativeType("Drawable")
     public long drawable() { return ndrawable(address()); }
-    /** Returns the value of the {@code major_code} field. */
+    /** core is {@code CopyArea} or {@code CopyPlane} */
     public int major_code() { return nmajor_code(address()); }
-    /** Returns the value of the {@code minor_code} field. */
+    /** not defined in the core */
     public int minor_code() { return nminor_code(address()); }
 
     /** Sets the specified value to the {@code type} field. */
     public XNoExposeEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code serial} field. */
+    /** Sets the specified value to the {@link #serial} field. */
     public XNoExposeEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@code send_event} field. */
+    /** Sets the specified value to the {@link #send_event} field. */
     public XNoExposeEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code display} field. */
+    /** Sets the specified value to the {@link #display} field. */
     public XNoExposeEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
     /** Sets the specified value to the {@code drawable} field. */
     public XNoExposeEvent drawable(@NativeType("Drawable") long value) { ndrawable(address(), value); return this; }
-    /** Sets the specified value to the {@code major_code} field. */
+    /** Sets the specified value to the {@link #major_code} field. */
     public XNoExposeEvent major_code(int value) { nmajor_code(address(), value); return this; }
-    /** Sets the specified value to the {@code minor_code} field. */
+    /** Sets the specified value to the {@link #minor_code} field. */
     public XNoExposeEvent minor_code(int value) { nminor_code(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -393,38 +383,38 @@ public class XNoExposeEvent extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XNoExposeEvent.ntype(address()); }
-        /** Returns the value of the {@code serial} field. */
+        /** @return the value of the {@link XNoExposeEvent#serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XNoExposeEvent.nserial(address()); }
-        /** Returns the value of the {@code send_event} field. */
+        /** @return the value of the {@link XNoExposeEvent#send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XNoExposeEvent.nsend_event(address()) != 0; }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@link XNoExposeEvent#display} field. */
         @NativeType("Display *")
         public long display() { return XNoExposeEvent.ndisplay(address()); }
-        /** Returns the value of the {@code drawable} field. */
+        /** @return the value of the {@code drawable} field. */
         @NativeType("Drawable")
         public long drawable() { return XNoExposeEvent.ndrawable(address()); }
-        /** Returns the value of the {@code major_code} field. */
+        /** @return the value of the {@link XNoExposeEvent#major_code} field. */
         public int major_code() { return XNoExposeEvent.nmajor_code(address()); }
-        /** Returns the value of the {@code minor_code} field. */
+        /** @return the value of the {@link XNoExposeEvent#minor_code} field. */
         public int minor_code() { return XNoExposeEvent.nminor_code(address()); }
 
         /** Sets the specified value to the {@code type} field. */
         public XNoExposeEvent.Buffer type(int value) { XNoExposeEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code serial} field. */
+        /** Sets the specified value to the {@link XNoExposeEvent#serial} field. */
         public XNoExposeEvent.Buffer serial(@NativeType("unsigned long") long value) { XNoExposeEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@code send_event} field. */
+        /** Sets the specified value to the {@link XNoExposeEvent#send_event} field. */
         public XNoExposeEvent.Buffer send_event(@NativeType("Bool") boolean value) { XNoExposeEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code display} field. */
+        /** Sets the specified value to the {@link XNoExposeEvent#display} field. */
         public XNoExposeEvent.Buffer display(@NativeType("Display *") long value) { XNoExposeEvent.ndisplay(address(), value); return this; }
         /** Sets the specified value to the {@code drawable} field. */
         public XNoExposeEvent.Buffer drawable(@NativeType("Drawable") long value) { XNoExposeEvent.ndrawable(address(), value); return this; }
-        /** Sets the specified value to the {@code major_code} field. */
+        /** Sets the specified value to the {@link XNoExposeEvent#major_code} field. */
         public XNoExposeEvent.Buffer major_code(int value) { XNoExposeEvent.nmajor_code(address(), value); return this; }
-        /** Sets the specified value to the {@code minor_code} field. */
+        /** Sets the specified value to the {@link XNoExposeEvent#minor_code} field. */
         public XNoExposeEvent.Buffer minor_code(int value) { XNoExposeEvent.nminor_code(address(), value); return this; }
 
     }

@@ -34,23 +34,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkMutableDescriptorTypeListVALVE}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code mutableDescriptorTypeListCount} &ndash; the number of elements in {@code pMutableDescriptorTypeLists}.</li>
- * <li>{@code pMutableDescriptorTypeLists} &ndash; a pointer to an array of {@link VkMutableDescriptorTypeListVALVE} structures.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkMutableDescriptorTypeCreateInfoVALVE {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t mutableDescriptorTypeListCount;
- *     {@link VkMutableDescriptorTypeListVALVE VkMutableDescriptorTypeListVALVE} const * pMutableDescriptorTypeLists;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #mutableDescriptorTypeListCount};
+ *     {@link VkMutableDescriptorTypeListVALVE VkMutableDescriptorTypeListVALVE} const * {@link #pMutableDescriptorTypeLists};
  * }</code></pre>
  */
 public class VkMutableDescriptorTypeCreateInfoVALVE extends Struct implements NativeResource {
@@ -98,25 +89,25 @@ public class VkMutableDescriptorTypeCreateInfoVALVE extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code mutableDescriptorTypeListCount} field. */
+    /** the number of elements in {@code pMutableDescriptorTypeLists}. */
     @NativeType("uint32_t")
     public int mutableDescriptorTypeListCount() { return nmutableDescriptorTypeListCount(address()); }
-    /** Returns a {@link VkMutableDescriptorTypeListVALVE.Buffer} view of the struct array pointed to by the {@code pMutableDescriptorTypeLists} field. */
+    /** a pointer to an array of {@link VkMutableDescriptorTypeListVALVE} structures. */
     @Nullable
     @NativeType("VkMutableDescriptorTypeListVALVE const *")
     public VkMutableDescriptorTypeListVALVE.Buffer pMutableDescriptorTypeLists() { return npMutableDescriptorTypeLists(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkMutableDescriptorTypeCreateInfoVALVE sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkMutableDescriptorTypeCreateInfoVALVE pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkMutableDescriptorTypeListVALVE.Buffer} to the {@code pMutableDescriptorTypeLists} field. */
+    /** Sets the address of the specified {@link VkMutableDescriptorTypeListVALVE.Buffer} to the {@link #pMutableDescriptorTypeLists} field. */
     public VkMutableDescriptorTypeCreateInfoVALVE pMutableDescriptorTypeLists(@Nullable @NativeType("VkMutableDescriptorTypeListVALVE const *") VkMutableDescriptorTypeListVALVE.Buffer value) { npMutableDescriptorTypeLists(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -369,25 +360,25 @@ public class VkMutableDescriptorTypeCreateInfoVALVE extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkMutableDescriptorTypeCreateInfoVALVE#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMutableDescriptorTypeCreateInfoVALVE.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkMutableDescriptorTypeCreateInfoVALVE#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMutableDescriptorTypeCreateInfoVALVE.npNext(address()); }
-        /** Returns the value of the {@code mutableDescriptorTypeListCount} field. */
+        /** @return the value of the {@link VkMutableDescriptorTypeCreateInfoVALVE#mutableDescriptorTypeListCount} field. */
         @NativeType("uint32_t")
         public int mutableDescriptorTypeListCount() { return VkMutableDescriptorTypeCreateInfoVALVE.nmutableDescriptorTypeListCount(address()); }
-        /** Returns a {@link VkMutableDescriptorTypeListVALVE.Buffer} view of the struct array pointed to by the {@code pMutableDescriptorTypeLists} field. */
+        /** @return a {@link VkMutableDescriptorTypeListVALVE.Buffer} view of the struct array pointed to by the {@link VkMutableDescriptorTypeCreateInfoVALVE#pMutableDescriptorTypeLists} field. */
         @Nullable
         @NativeType("VkMutableDescriptorTypeListVALVE const *")
         public VkMutableDescriptorTypeListVALVE.Buffer pMutableDescriptorTypeLists() { return VkMutableDescriptorTypeCreateInfoVALVE.npMutableDescriptorTypeLists(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkMutableDescriptorTypeCreateInfoVALVE#sType} field. */
         public VkMutableDescriptorTypeCreateInfoVALVE.Buffer sType(@NativeType("VkStructureType") int value) { VkMutableDescriptorTypeCreateInfoVALVE.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkMutableDescriptorTypeCreateInfoVALVE#pNext} field. */
         public VkMutableDescriptorTypeCreateInfoVALVE.Buffer pNext(@NativeType("void const *") long value) { VkMutableDescriptorTypeCreateInfoVALVE.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkMutableDescriptorTypeListVALVE.Buffer} to the {@code pMutableDescriptorTypeLists} field. */
+        /** Sets the address of the specified {@link VkMutableDescriptorTypeListVALVE.Buffer} to the {@link VkMutableDescriptorTypeCreateInfoVALVE#pMutableDescriptorTypeLists} field. */
         public VkMutableDescriptorTypeCreateInfoVALVE.Buffer pMutableDescriptorTypeLists(@Nullable @NativeType("VkMutableDescriptorTypeListVALVE const *") VkMutableDescriptorTypeListVALVE.Buffer value) { VkMutableDescriptorTypeCreateInfoVALVE.npMutableDescriptorTypeLists(address(), value); return this; }
 
     }

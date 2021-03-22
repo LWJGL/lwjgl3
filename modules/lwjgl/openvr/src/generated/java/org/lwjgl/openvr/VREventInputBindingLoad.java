@@ -70,16 +70,16 @@ public class VREventInputBindingLoad extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code ulAppContainer} field. */
+    /** @return the value of the {@code ulAppContainer} field. */
     @NativeType("PropertyContainerHandle_t")
     public long ulAppContainer() { return nulAppContainer(address()); }
-    /** Returns the value of the {@code pathMessage} field. */
+    /** @return the value of the {@code pathMessage} field. */
     @NativeType("uint64_t")
     public long pathMessage() { return npathMessage(address()); }
-    /** Returns the value of the {@code pathUrl} field. */
+    /** @return the value of the {@code pathUrl} field. */
     @NativeType("uint64_t")
     public long pathUrl() { return npathUrl(address()); }
-    /** Returns the value of the {@code pathControllerType} field. */
+    /** @return the value of the {@code pathControllerType} field. */
     @NativeType("uint64_t")
     public long pathControllerType() { return npathControllerType(address()); }
 
@@ -161,16 +161,16 @@ public class VREventInputBindingLoad extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code ulAppContainer} field. */
+        /** @return the value of the {@code ulAppContainer} field. */
         @NativeType("PropertyContainerHandle_t")
         public long ulAppContainer() { return VREventInputBindingLoad.nulAppContainer(address()); }
-        /** Returns the value of the {@code pathMessage} field. */
+        /** @return the value of the {@code pathMessage} field. */
         @NativeType("uint64_t")
         public long pathMessage() { return VREventInputBindingLoad.npathMessage(address()); }
-        /** Returns the value of the {@code pathUrl} field. */
+        /** @return the value of the {@code pathUrl} field. */
         @NativeType("uint64_t")
         public long pathUrl() { return VREventInputBindingLoad.npathUrl(address()); }
-        /** Returns the value of the {@code pathControllerType} field. */
+        /** @return the value of the {@code pathControllerType} field. */
         @NativeType("uint64_t")
         public long pathControllerType() { return VREventInputBindingLoad.npathControllerType(address()); }
 

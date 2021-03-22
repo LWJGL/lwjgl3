@@ -117,80 +117,80 @@ public class YGStyle extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code direction} field. */
+    /** @return the value of the {@code direction} field. */
     @NativeType("YGDirection")
     public int direction() { return ndirection(address()); }
-    /** Returns the value of the {@code flexDirection} field. */
+    /** @return the value of the {@code flexDirection} field. */
     @NativeType("YGFlexDirection")
     public int flexDirection() { return nflexDirection(address()); }
-    /** Returns the value of the {@code justifyContent} field. */
+    /** @return the value of the {@code justifyContent} field. */
     @NativeType("YGJustify")
     public int justifyContent() { return njustifyContent(address()); }
-    /** Returns the value of the {@code alignContent} field. */
+    /** @return the value of the {@code alignContent} field. */
     @NativeType("YGAlign")
     public int alignContent() { return nalignContent(address()); }
-    /** Returns the value of the {@code alignItems} field. */
+    /** @return the value of the {@code alignItems} field. */
     @NativeType("YGAlign")
     public int alignItems() { return nalignItems(address()); }
-    /** Returns the value of the {@code alignSelf} field. */
+    /** @return the value of the {@code alignSelf} field. */
     @NativeType("YGAlign")
     public int alignSelf() { return nalignSelf(address()); }
-    /** Returns the value of the {@code positionType} field. */
+    /** @return the value of the {@code positionType} field. */
     @NativeType("YGPositionType")
     public int positionType() { return npositionType(address()); }
-    /** Returns the value of the {@code flexWrap} field. */
+    /** @return the value of the {@code flexWrap} field. */
     @NativeType("YGWrap")
     public int flexWrap() { return nflexWrap(address()); }
-    /** Returns the value of the {@code overflow} field. */
+    /** @return the value of the {@code overflow} field. */
     @NativeType("YGOverflow")
     public int overflow() { return noverflow(address()); }
-    /** Returns the value of the {@code display} field. */
+    /** @return the value of the {@code display} field. */
     @NativeType("YGDisplay")
     public int display() { return ndisplay(address()); }
-    /** Returns a {@link YGFloatOptional} view of the {@code flex} field. */
+    /** @return a {@link YGFloatOptional} view of the {@code flex} field. */
     public YGFloatOptional flex() { return nflex(address()); }
-    /** Returns a {@link YGFloatOptional} view of the {@code flexGrow} field. */
+    /** @return a {@link YGFloatOptional} view of the {@code flexGrow} field. */
     public YGFloatOptional flexGrow() { return nflexGrow(address()); }
-    /** Returns a {@link YGFloatOptional} view of the {@code flexShrink} field. */
+    /** @return a {@link YGFloatOptional} view of the {@code flexShrink} field. */
     public YGFloatOptional flexShrink() { return nflexShrink(address()); }
-    /** Returns a {@link CompactValue} view of the {@code flexBasis} field. */
+    /** @return a {@link CompactValue} view of the {@code flexBasis} field. */
     public CompactValue flexBasis() { return nflexBasis(address()); }
-    /** Returns a {@link CompactValue}.Buffer view of the {@code margin} field. */
+    /** @return a {@link CompactValue}.Buffer view of the {@code margin} field. */
     @NativeType("CompactValue[9]")
     public CompactValue.Buffer margin() { return nmargin(address()); }
-    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code margin} field. */
+    /** @return a {@link CompactValue} view of the struct at the specified index of the {@code margin} field. */
     public CompactValue margin(int index) { return nmargin(address(), index); }
-    /** Returns a {@link CompactValue}.Buffer view of the {@code positions} field. */
+    /** @return a {@link CompactValue}.Buffer view of the {@code positions} field. */
     @NativeType("CompactValue[9]")
     public CompactValue.Buffer positions() { return npositions(address()); }
-    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code positions} field. */
+    /** @return a {@link CompactValue} view of the struct at the specified index of the {@code positions} field. */
     public CompactValue positions(int index) { return npositions(address(), index); }
-    /** Returns a {@link CompactValue}.Buffer view of the {@code padding} field. */
+    /** @return a {@link CompactValue}.Buffer view of the {@code padding} field. */
     @NativeType("CompactValue[9]")
     public CompactValue.Buffer padding() { return npadding(address()); }
-    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code padding} field. */
+    /** @return a {@link CompactValue} view of the struct at the specified index of the {@code padding} field. */
     public CompactValue padding(int index) { return npadding(address(), index); }
-    /** Returns a {@link CompactValue}.Buffer view of the {@code border} field. */
+    /** @return a {@link CompactValue}.Buffer view of the {@code border} field. */
     @NativeType("CompactValue[9]")
     public CompactValue.Buffer border() { return nborder(address()); }
-    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code border} field. */
+    /** @return a {@link CompactValue} view of the struct at the specified index of the {@code border} field. */
     public CompactValue border(int index) { return nborder(address(), index); }
-    /** Returns a {@link CompactValue}.Buffer view of the {@code dimensions} field. */
+    /** @return a {@link CompactValue}.Buffer view of the {@code dimensions} field. */
     @NativeType("CompactValue[2]")
     public CompactValue.Buffer dimensions() { return ndimensions(address()); }
-    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code dimensions} field. */
+    /** @return a {@link CompactValue} view of the struct at the specified index of the {@code dimensions} field. */
     public CompactValue dimensions(int index) { return ndimensions(address(), index); }
-    /** Returns a {@link CompactValue}.Buffer view of the {@code minDimensions} field. */
+    /** @return a {@link CompactValue}.Buffer view of the {@code minDimensions} field. */
     @NativeType("CompactValue[2]")
     public CompactValue.Buffer minDimensions() { return nminDimensions(address()); }
-    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code minDimensions} field. */
+    /** @return a {@link CompactValue} view of the struct at the specified index of the {@code minDimensions} field. */
     public CompactValue minDimensions(int index) { return nminDimensions(address(), index); }
-    /** Returns a {@link CompactValue}.Buffer view of the {@code maxDimensions} field. */
+    /** @return a {@link CompactValue}.Buffer view of the {@code maxDimensions} field. */
     @NativeType("CompactValue[2]")
     public CompactValue.Buffer maxDimensions() { return nmaxDimensions(address()); }
-    /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code maxDimensions} field. */
+    /** @return a {@link CompactValue} view of the struct at the specified index of the {@code maxDimensions} field. */
     public CompactValue maxDimensions(int index) { return nmaxDimensions(address(), index); }
-    /** Returns a {@link YGFloatOptional} view of the {@code aspectRatio} field. */
+    /** @return a {@link YGFloatOptional} view of the {@code aspectRatio} field. */
     public YGFloatOptional aspectRatio() { return naspectRatio(address()); }
 
     // -----------------------------------
@@ -336,80 +336,80 @@ public class YGStyle extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code direction} field. */
+        /** @return the value of the {@code direction} field. */
         @NativeType("YGDirection")
         public int direction() { return YGStyle.ndirection(address()); }
-        /** Returns the value of the {@code flexDirection} field. */
+        /** @return the value of the {@code flexDirection} field. */
         @NativeType("YGFlexDirection")
         public int flexDirection() { return YGStyle.nflexDirection(address()); }
-        /** Returns the value of the {@code justifyContent} field. */
+        /** @return the value of the {@code justifyContent} field. */
         @NativeType("YGJustify")
         public int justifyContent() { return YGStyle.njustifyContent(address()); }
-        /** Returns the value of the {@code alignContent} field. */
+        /** @return the value of the {@code alignContent} field. */
         @NativeType("YGAlign")
         public int alignContent() { return YGStyle.nalignContent(address()); }
-        /** Returns the value of the {@code alignItems} field. */
+        /** @return the value of the {@code alignItems} field. */
         @NativeType("YGAlign")
         public int alignItems() { return YGStyle.nalignItems(address()); }
-        /** Returns the value of the {@code alignSelf} field. */
+        /** @return the value of the {@code alignSelf} field. */
         @NativeType("YGAlign")
         public int alignSelf() { return YGStyle.nalignSelf(address()); }
-        /** Returns the value of the {@code positionType} field. */
+        /** @return the value of the {@code positionType} field. */
         @NativeType("YGPositionType")
         public int positionType() { return YGStyle.npositionType(address()); }
-        /** Returns the value of the {@code flexWrap} field. */
+        /** @return the value of the {@code flexWrap} field. */
         @NativeType("YGWrap")
         public int flexWrap() { return YGStyle.nflexWrap(address()); }
-        /** Returns the value of the {@code overflow} field. */
+        /** @return the value of the {@code overflow} field. */
         @NativeType("YGOverflow")
         public int overflow() { return YGStyle.noverflow(address()); }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("YGDisplay")
         public int display() { return YGStyle.ndisplay(address()); }
-        /** Returns a {@link YGFloatOptional} view of the {@code flex} field. */
+        /** @return a {@link YGFloatOptional} view of the {@code flex} field. */
         public YGFloatOptional flex() { return YGStyle.nflex(address()); }
-        /** Returns a {@link YGFloatOptional} view of the {@code flexGrow} field. */
+        /** @return a {@link YGFloatOptional} view of the {@code flexGrow} field. */
         public YGFloatOptional flexGrow() { return YGStyle.nflexGrow(address()); }
-        /** Returns a {@link YGFloatOptional} view of the {@code flexShrink} field. */
+        /** @return a {@link YGFloatOptional} view of the {@code flexShrink} field. */
         public YGFloatOptional flexShrink() { return YGStyle.nflexShrink(address()); }
-        /** Returns a {@link CompactValue} view of the {@code flexBasis} field. */
+        /** @return a {@link CompactValue} view of the {@code flexBasis} field. */
         public CompactValue flexBasis() { return YGStyle.nflexBasis(address()); }
-        /** Returns a {@link CompactValue}.Buffer view of the {@code margin} field. */
+        /** @return a {@link CompactValue}.Buffer view of the {@code margin} field. */
         @NativeType("CompactValue[9]")
         public CompactValue.Buffer margin() { return YGStyle.nmargin(address()); }
-        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code margin} field. */
+        /** @return a {@link CompactValue} view of the struct at the specified index of the {@code margin} field. */
         public CompactValue margin(int index) { return YGStyle.nmargin(address(), index); }
-        /** Returns a {@link CompactValue}.Buffer view of the {@code positions} field. */
+        /** @return a {@link CompactValue}.Buffer view of the {@code positions} field. */
         @NativeType("CompactValue[9]")
         public CompactValue.Buffer positions() { return YGStyle.npositions(address()); }
-        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code positions} field. */
+        /** @return a {@link CompactValue} view of the struct at the specified index of the {@code positions} field. */
         public CompactValue positions(int index) { return YGStyle.npositions(address(), index); }
-        /** Returns a {@link CompactValue}.Buffer view of the {@code padding} field. */
+        /** @return a {@link CompactValue}.Buffer view of the {@code padding} field. */
         @NativeType("CompactValue[9]")
         public CompactValue.Buffer padding() { return YGStyle.npadding(address()); }
-        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code padding} field. */
+        /** @return a {@link CompactValue} view of the struct at the specified index of the {@code padding} field. */
         public CompactValue padding(int index) { return YGStyle.npadding(address(), index); }
-        /** Returns a {@link CompactValue}.Buffer view of the {@code border} field. */
+        /** @return a {@link CompactValue}.Buffer view of the {@code border} field. */
         @NativeType("CompactValue[9]")
         public CompactValue.Buffer border() { return YGStyle.nborder(address()); }
-        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code border} field. */
+        /** @return a {@link CompactValue} view of the struct at the specified index of the {@code border} field. */
         public CompactValue border(int index) { return YGStyle.nborder(address(), index); }
-        /** Returns a {@link CompactValue}.Buffer view of the {@code dimensions} field. */
+        /** @return a {@link CompactValue}.Buffer view of the {@code dimensions} field. */
         @NativeType("CompactValue[2]")
         public CompactValue.Buffer dimensions() { return YGStyle.ndimensions(address()); }
-        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code dimensions} field. */
+        /** @return a {@link CompactValue} view of the struct at the specified index of the {@code dimensions} field. */
         public CompactValue dimensions(int index) { return YGStyle.ndimensions(address(), index); }
-        /** Returns a {@link CompactValue}.Buffer view of the {@code minDimensions} field. */
+        /** @return a {@link CompactValue}.Buffer view of the {@code minDimensions} field. */
         @NativeType("CompactValue[2]")
         public CompactValue.Buffer minDimensions() { return YGStyle.nminDimensions(address()); }
-        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code minDimensions} field. */
+        /** @return a {@link CompactValue} view of the struct at the specified index of the {@code minDimensions} field. */
         public CompactValue minDimensions(int index) { return YGStyle.nminDimensions(address(), index); }
-        /** Returns a {@link CompactValue}.Buffer view of the {@code maxDimensions} field. */
+        /** @return a {@link CompactValue}.Buffer view of the {@code maxDimensions} field. */
         @NativeType("CompactValue[2]")
         public CompactValue.Buffer maxDimensions() { return YGStyle.nmaxDimensions(address()); }
-        /** Returns a {@link CompactValue} view of the struct at the specified index of the {@code maxDimensions} field. */
+        /** @return a {@link CompactValue} view of the struct at the specified index of the {@code maxDimensions} field. */
         public CompactValue maxDimensions(int index) { return YGStyle.nmaxDimensions(address(), index); }
-        /** Returns a {@link YGFloatOptional} view of the {@code aspectRatio} field. */
+        /** @return a {@link YGFloatOptional} view of the {@code aspectRatio} field. */
         public YGFloatOptional aspectRatio() { return YGStyle.naspectRatio(address()); }
 
     }

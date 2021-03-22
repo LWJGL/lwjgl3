@@ -29,21 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link INTELPerformanceQuery#vkCmdSetPerformanceMarkerINTEL CmdSetPerformanceMarkerINTEL}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code marker} &ndash; the marker value that will be recorded into the opaque query results.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPerformanceMarkerInfoINTEL {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint64_t marker;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint64_t {@link #marker};
  * }</code></pre>
  */
 public class VkPerformanceMarkerInfoINTEL extends Struct implements NativeResource {
@@ -88,21 +80,21 @@ public class VkPerformanceMarkerInfoINTEL extends Struct implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code marker} field. */
+    /** the marker value that will be recorded into the opaque query results. */
     @NativeType("uint64_t")
     public long marker() { return nmarker(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPerformanceMarkerInfoINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPerformanceMarkerInfoINTEL pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code marker} field. */
+    /** Sets the specified value to the {@link #marker} field. */
     public VkPerformanceMarkerInfoINTEL marker(@NativeType("uint64_t") long value) { nmarker(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,21 +317,21 @@ public class VkPerformanceMarkerInfoINTEL extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPerformanceMarkerInfoINTEL#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPerformanceMarkerInfoINTEL.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPerformanceMarkerInfoINTEL#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPerformanceMarkerInfoINTEL.npNext(address()); }
-        /** Returns the value of the {@code marker} field. */
+        /** @return the value of the {@link VkPerformanceMarkerInfoINTEL#marker} field. */
         @NativeType("uint64_t")
         public long marker() { return VkPerformanceMarkerInfoINTEL.nmarker(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPerformanceMarkerInfoINTEL#sType} field. */
         public VkPerformanceMarkerInfoINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkPerformanceMarkerInfoINTEL.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPerformanceMarkerInfoINTEL#pNext} field. */
         public VkPerformanceMarkerInfoINTEL.Buffer pNext(@NativeType("void const *") long value) { VkPerformanceMarkerInfoINTEL.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code marker} field. */
+        /** Sets the specified value to the {@link VkPerformanceMarkerInfoINTEL#marker} field. */
         public VkPerformanceMarkerInfoINTEL.Buffer marker(@NativeType("uint64_t") long value) { VkPerformanceMarkerInfoINTEL.nmarker(address(), value); return this; }
 
     }

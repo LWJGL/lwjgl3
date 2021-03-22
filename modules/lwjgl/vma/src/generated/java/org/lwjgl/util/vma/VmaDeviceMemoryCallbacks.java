@@ -73,15 +73,15 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code pfnAllocate} field. */
+    /** @return the value of the {@code pfnAllocate} field. */
     @Nullable
     @NativeType("PFN_vmaAllocateDeviceMemoryFunction")
     public VmaAllocateDeviceMemoryFunction pfnAllocate() { return npfnAllocate(address()); }
-    /** Returns the value of the {@code pfnFree} field. */
+    /** @return the value of the {@code pfnFree} field. */
     @Nullable
     @NativeType("PFN_vmaFreeDeviceMemoryFunction")
     public VmaFreeDeviceMemoryFunction pfnFree() { return npfnFree(address()); }
-    /** Returns the value of the {@code pUserData} field. */
+    /** @return the value of the {@code pUserData} field. */
     @NativeType("void *")
     public long pUserData() { return npUserData(address()); }
 
@@ -312,15 +312,15 @@ public class VmaDeviceMemoryCallbacks extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code pfnAllocate} field. */
+        /** @return the value of the {@code pfnAllocate} field. */
         @Nullable
         @NativeType("PFN_vmaAllocateDeviceMemoryFunction")
         public VmaAllocateDeviceMemoryFunction pfnAllocate() { return VmaDeviceMemoryCallbacks.npfnAllocate(address()); }
-        /** Returns the value of the {@code pfnFree} field. */
+        /** @return the value of the {@code pfnFree} field. */
         @Nullable
         @NativeType("PFN_vmaFreeDeviceMemoryFunction")
         public VmaFreeDeviceMemoryFunction pfnFree() { return VmaDeviceMemoryCallbacks.npfnFree(address()); }
-        /** Returns the value of the {@code pUserData} field. */
+        /** @return the value of the {@code pUserData} field. */
         @NativeType("void *")
         public long pUserData() { return VmaDeviceMemoryCallbacks.npUserData(address()); }
 

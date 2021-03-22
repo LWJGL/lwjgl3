@@ -84,23 +84,23 @@ public class NkStyleChart extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkStyleItem} view of the {@code background} field. */
+    /** @return a {@link NkStyleItem} view of the {@code background} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem background() { return nbackground(address()); }
-    /** Returns a {@link NkColor} view of the {@code border_color} field. */
+    /** @return a {@link NkColor} view of the {@code border_color} field. */
     @NativeType("struct nk_color")
     public NkColor border_color() { return nborder_color(address()); }
-    /** Returns a {@link NkColor} view of the {@code selected_color} field. */
+    /** @return a {@link NkColor} view of the {@code selected_color} field. */
     @NativeType("struct nk_color")
     public NkColor selected_color() { return nselected_color(address()); }
-    /** Returns a {@link NkColor} view of the {@code color} field. */
+    /** @return a {@link NkColor} view of the {@code color} field. */
     @NativeType("struct nk_color")
     public NkColor color() { return ncolor(address()); }
-    /** Returns the value of the {@code border} field. */
+    /** @return the value of the {@code border} field. */
     public float border() { return nborder(address()); }
-    /** Returns the value of the {@code rounding} field. */
+    /** @return the value of the {@code rounding} field. */
     public float rounding() { return nrounding(address()); }
-    /** Returns a {@link NkVec2} view of the {@code padding} field. */
+    /** @return a {@link NkVec2} view of the {@code padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 padding() { return npadding(address()); }
 
@@ -373,23 +373,23 @@ public class NkStyleChart extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkStyleItem} view of the {@code background} field. */
+        /** @return a {@link NkStyleItem} view of the {@code background} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem background() { return NkStyleChart.nbackground(address()); }
-        /** Returns a {@link NkColor} view of the {@code border_color} field. */
+        /** @return a {@link NkColor} view of the {@code border_color} field. */
         @NativeType("struct nk_color")
         public NkColor border_color() { return NkStyleChart.nborder_color(address()); }
-        /** Returns a {@link NkColor} view of the {@code selected_color} field. */
+        /** @return a {@link NkColor} view of the {@code selected_color} field. */
         @NativeType("struct nk_color")
         public NkColor selected_color() { return NkStyleChart.nselected_color(address()); }
-        /** Returns a {@link NkColor} view of the {@code color} field. */
+        /** @return a {@link NkColor} view of the {@code color} field. */
         @NativeType("struct nk_color")
         public NkColor color() { return NkStyleChart.ncolor(address()); }
-        /** Returns the value of the {@code border} field. */
+        /** @return the value of the {@code border} field. */
         public float border() { return NkStyleChart.nborder(address()); }
-        /** Returns the value of the {@code rounding} field. */
+        /** @return the value of the {@code rounding} field. */
         public float rounding() { return NkStyleChart.nrounding(address()); }
-        /** Returns a {@link NkVec2} view of the {@code padding} field. */
+        /** @return a {@link NkVec2} view of the {@code padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 padding() { return NkStyleChart.npadding(address()); }
 

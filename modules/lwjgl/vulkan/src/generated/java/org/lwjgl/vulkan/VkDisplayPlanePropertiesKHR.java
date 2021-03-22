@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing display plane properties.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code currentDisplay} &ndash; the handle of the display the plane is currently associated with. If the plane is not currently attached to any displays, this will be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}.</li>
- * <li>{@code currentStackIndex} &ndash; the current z-order of the plane. This will be between 0 and the value returned by {@code vkGetPhysicalDeviceDisplayPlanePropertiesKHR} in {@code pPropertyCount}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDisplayPlanePropertiesKHR {
- *     VkDisplayKHR currentDisplay;
- *     uint32_t currentStackIndex;
+ *     VkDisplayKHR {@link #currentDisplay};
+ *     uint32_t {@link #currentStackIndex};
  * }</code></pre>
  */
 public class VkDisplayPlanePropertiesKHR extends Struct implements NativeResource {
@@ -72,10 +65,10 @@ public class VkDisplayPlanePropertiesKHR extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code currentDisplay} field. */
+    /** the handle of the display the plane is currently associated with. If the plane is not currently attached to any displays, this will be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}. */
     @NativeType("VkDisplayKHR")
     public long currentDisplay() { return ncurrentDisplay(address()); }
-    /** Returns the value of the {@code currentStackIndex} field. */
+    /** the current z-order of the plane. This will be between 0 and the value returned by {@code vkGetPhysicalDeviceDisplayPlanePropertiesKHR} in {@code pPropertyCount}. */
     @NativeType("uint32_t")
     public int currentStackIndex() { return ncurrentStackIndex(address()); }
 
@@ -265,10 +258,10 @@ public class VkDisplayPlanePropertiesKHR extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code currentDisplay} field. */
+        /** @return the value of the {@link VkDisplayPlanePropertiesKHR#currentDisplay} field. */
         @NativeType("VkDisplayKHR")
         public long currentDisplay() { return VkDisplayPlanePropertiesKHR.ncurrentDisplay(address()); }
-        /** Returns the value of the {@code currentStackIndex} field. */
+        /** @return the value of the {@link VkDisplayPlanePropertiesKHR#currentStackIndex} field. */
         @NativeType("uint32_t")
         public int currentStackIndex() { return VkDisplayPlanePropertiesKHR.ncurrentStackIndex(address()); }
 

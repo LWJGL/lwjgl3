@@ -29,23 +29,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkAccelerationStructureGeometryDataKHR}, {@link VkDeviceOrHostAddressConstKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code arrayOfPointers} &ndash; specifies whether {@code data} is used as an array of addresses or just an array.</li>
- * <li>{@code data} &ndash; either the address of an array of device or host addresses referencing individual {@link VkAccelerationStructureInstanceKHR} structures if {@code arrayOfPointers} is {@link VK10#VK_TRUE TRUE}, or the address of an array of {@link VkAccelerationStructureInstanceKHR} structures.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkAccelerationStructureGeometryInstancesDataKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkBool32 arrayOfPointers;
- *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} data;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkBool32 {@link #arrayOfPointers};
+ *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} {@link #data};
  * }</code></pre>
  */
 public class VkAccelerationStructureGeometryInstancesDataKHR extends Struct implements NativeResource {
@@ -93,27 +84,27 @@ public class VkAccelerationStructureGeometryInstancesDataKHR extends Struct impl
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code arrayOfPointers} field. */
+    /** specifies whether {@code data} is used as an array of addresses or just an array. */
     @NativeType("VkBool32")
     public boolean arrayOfPointers() { return narrayOfPointers(address()) != 0; }
-    /** Returns a {@link VkDeviceOrHostAddressConstKHR} view of the {@code data} field. */
+    /** either the address of an array of device or host addresses referencing individual {@link VkAccelerationStructureInstanceKHR} structures if {@code arrayOfPointers} is {@link VK10#VK_TRUE TRUE}, or the address of an array of {@link VkAccelerationStructureInstanceKHR} structures. */
     public VkDeviceOrHostAddressConstKHR data() { return ndata(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureGeometryInstancesDataKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureGeometryInstancesDataKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code arrayOfPointers} field. */
+    /** Sets the specified value to the {@link #arrayOfPointers} field. */
     public VkAccelerationStructureGeometryInstancesDataKHR arrayOfPointers(@NativeType("VkBool32") boolean value) { narrayOfPointers(address(), value ? 1 : 0); return this; }
-    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code data} field. */
+    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #data} field. */
     public VkAccelerationStructureGeometryInstancesDataKHR data(VkDeviceOrHostAddressConstKHR value) { ndata(address(), value); return this; }
-    /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #data} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureGeometryInstancesDataKHR data(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(data()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -342,27 +333,27 @@ public class VkAccelerationStructureGeometryInstancesDataKHR extends Struct impl
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkAccelerationStructureGeometryInstancesDataKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAccelerationStructureGeometryInstancesDataKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkAccelerationStructureGeometryInstancesDataKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAccelerationStructureGeometryInstancesDataKHR.npNext(address()); }
-        /** Returns the value of the {@code arrayOfPointers} field. */
+        /** @return the value of the {@link VkAccelerationStructureGeometryInstancesDataKHR#arrayOfPointers} field. */
         @NativeType("VkBool32")
         public boolean arrayOfPointers() { return VkAccelerationStructureGeometryInstancesDataKHR.narrayOfPointers(address()) != 0; }
-        /** Returns a {@link VkDeviceOrHostAddressConstKHR} view of the {@code data} field. */
+        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@link VkAccelerationStructureGeometryInstancesDataKHR#data} field. */
         public VkDeviceOrHostAddressConstKHR data() { return VkAccelerationStructureGeometryInstancesDataKHR.ndata(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureGeometryInstancesDataKHR#sType} field. */
         public VkAccelerationStructureGeometryInstancesDataKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureGeometryInstancesDataKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureGeometryInstancesDataKHR#pNext} field. */
         public VkAccelerationStructureGeometryInstancesDataKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureGeometryInstancesDataKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code arrayOfPointers} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureGeometryInstancesDataKHR#arrayOfPointers} field. */
         public VkAccelerationStructureGeometryInstancesDataKHR.Buffer arrayOfPointers(@NativeType("VkBool32") boolean value) { VkAccelerationStructureGeometryInstancesDataKHR.narrayOfPointers(address(), value ? 1 : 0); return this; }
-        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code data} field. */
+        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkAccelerationStructureGeometryInstancesDataKHR#data} field. */
         public VkAccelerationStructureGeometryInstancesDataKHR.Buffer data(VkDeviceOrHostAddressConstKHR value) { VkAccelerationStructureGeometryInstancesDataKHR.ndata(address(), value); return this; }
-        /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkAccelerationStructureGeometryInstancesDataKHR#data} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureGeometryInstancesDataKHR.Buffer data(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(data()); return this; }
 
     }

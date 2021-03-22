@@ -28,57 +28,32 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code shaderInputAttachmentArrayDynamicIndexing} &ndash; indicates whether arrays of input attachments <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code InputAttachmentArrayDynamicIndexing} capability.</li>
- * <li>{@code shaderUniformTexelBufferArrayDynamicIndexing} &ndash; indicates whether arrays of uniform texel buffers <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code UniformTexelBufferArrayDynamicIndexing} capability.</li>
- * <li>{@code shaderStorageTexelBufferArrayDynamicIndexing} &ndash; indicates whether arrays of storage texel buffers <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageTexelBufferArrayDynamicIndexing} capability.</li>
- * <li>{@code shaderUniformBufferArrayNonUniformIndexing} &ndash; indicates whether arrays of uniform buffers <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER} or {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code UniformBufferArrayNonUniformIndexing} capability.</li>
- * <li>{@code shaderSampledImageArrayNonUniformIndexing} &ndash; indicates whether arrays of samplers or sampled images <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER}, {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, or {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code SampledImageArrayNonUniformIndexing} capability.</li>
- * <li>{@code shaderStorageBufferArrayNonUniformIndexing} &ndash; indicates whether arrays of storage buffers <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER} or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageBufferArrayNonUniformIndexing} capability.</li>
- * <li>{@code shaderStorageImageArrayNonUniformIndexing} &ndash; indicates whether arrays of storage images <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageImageArrayNonUniformIndexing} capability.</li>
- * <li>{@code shaderInputAttachmentArrayNonUniformIndexing} &ndash; indicates whether arrays of input attachments <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code InputAttachmentArrayNonUniformIndexing} capability.</li>
- * <li>{@code shaderUniformTexelBufferArrayNonUniformIndexing} &ndash; indicates whether arrays of uniform texel buffers <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code UniformTexelBufferArrayNonUniformIndexing} capability.</li>
- * <li>{@code shaderStorageTexelBufferArrayNonUniformIndexing} &ndash; indicates whether arrays of storage texel buffers <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageTexelBufferArrayNonUniformIndexing} capability.</li>
- * <li>{@code descriptorBindingUniformBufferUpdateAfterBind} &ndash; indicates whether the implementation supports updating uniform buffer descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER}.</li>
- * <li>{@code descriptorBindingSampledImageUpdateAfterBind} &ndash; indicates whether the implementation supports updating sampled image descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER}, {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, or {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}.</li>
- * <li>{@code descriptorBindingStorageImageUpdateAfterBind} &ndash; indicates whether the implementation supports updating storage image descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}.</li>
- * <li>{@code descriptorBindingStorageBufferUpdateAfterBind} &ndash; indicates whether the implementation supports updating storage buffer descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER}.</li>
- * <li>{@code descriptorBindingUniformTexelBufferUpdateAfterBind} &ndash; indicates whether the implementation supports updating uniform texel buffer descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER}.</li>
- * <li>{@code descriptorBindingStorageTexelBufferUpdateAfterBind} &ndash; indicates whether the implementation supports updating storage texel buffer descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER}.</li>
- * <li>{@code descriptorBindingUpdateUnusedWhilePending} &ndash; indicates whether the implementation supports updating descriptors while the set is in use. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT} <b>must</b> not be used.</li>
- * <li>{@code descriptorBindingPartiallyBound} &ndash; indicates whether the implementation supports statically using a descriptor set binding in which some descriptors are not valid. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT} <b>must</b> not be used.</li>
- * <li>{@code descriptorBindingVariableDescriptorCount} &ndash; indicates whether the implementation supports descriptor sets with a variable-sized last binding. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT} <b>must</b> not be used.</li>
- * <li>{@code runtimeDescriptorArray} &ndash; indicates whether the implementation supports the SPIR-V {@code RuntimeDescriptorArray} capability. If this feature is not enabled, descriptors <b>must</b> not be declared in runtime arrays.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceDescriptorIndexingFeatures {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 shaderInputAttachmentArrayDynamicIndexing;
- *     VkBool32 shaderUniformTexelBufferArrayDynamicIndexing;
- *     VkBool32 shaderStorageTexelBufferArrayDynamicIndexing;
- *     VkBool32 shaderUniformBufferArrayNonUniformIndexing;
- *     VkBool32 shaderSampledImageArrayNonUniformIndexing;
- *     VkBool32 shaderStorageBufferArrayNonUniformIndexing;
- *     VkBool32 shaderStorageImageArrayNonUniformIndexing;
- *     VkBool32 shaderInputAttachmentArrayNonUniformIndexing;
- *     VkBool32 shaderUniformTexelBufferArrayNonUniformIndexing;
- *     VkBool32 shaderStorageTexelBufferArrayNonUniformIndexing;
- *     VkBool32 descriptorBindingUniformBufferUpdateAfterBind;
- *     VkBool32 descriptorBindingSampledImageUpdateAfterBind;
- *     VkBool32 descriptorBindingStorageImageUpdateAfterBind;
- *     VkBool32 descriptorBindingStorageBufferUpdateAfterBind;
- *     VkBool32 descriptorBindingUniformTexelBufferUpdateAfterBind;
- *     VkBool32 descriptorBindingStorageTexelBufferUpdateAfterBind;
- *     VkBool32 descriptorBindingUpdateUnusedWhilePending;
- *     VkBool32 descriptorBindingPartiallyBound;
- *     VkBool32 descriptorBindingVariableDescriptorCount;
- *     VkBool32 runtimeDescriptorArray;
+ *     VkBool32 {@link #shaderInputAttachmentArrayDynamicIndexing};
+ *     VkBool32 {@link #shaderUniformTexelBufferArrayDynamicIndexing};
+ *     VkBool32 {@link #shaderStorageTexelBufferArrayDynamicIndexing};
+ *     VkBool32 {@link #shaderUniformBufferArrayNonUniformIndexing};
+ *     VkBool32 {@link #shaderSampledImageArrayNonUniformIndexing};
+ *     VkBool32 {@link #shaderStorageBufferArrayNonUniformIndexing};
+ *     VkBool32 {@link #shaderStorageImageArrayNonUniformIndexing};
+ *     VkBool32 {@link #shaderInputAttachmentArrayNonUniformIndexing};
+ *     VkBool32 {@link #shaderUniformTexelBufferArrayNonUniformIndexing};
+ *     VkBool32 {@link #shaderStorageTexelBufferArrayNonUniformIndexing};
+ *     VkBool32 {@link #descriptorBindingUniformBufferUpdateAfterBind};
+ *     VkBool32 {@link #descriptorBindingSampledImageUpdateAfterBind};
+ *     VkBool32 {@link #descriptorBindingStorageImageUpdateAfterBind};
+ *     VkBool32 {@link #descriptorBindingStorageBufferUpdateAfterBind};
+ *     VkBool32 {@link #descriptorBindingUniformTexelBufferUpdateAfterBind};
+ *     VkBool32 {@link #descriptorBindingStorageTexelBufferUpdateAfterBind};
+ *     VkBool32 {@link #descriptorBindingUpdateUnusedWhilePending};
+ *     VkBool32 {@link #descriptorBindingPartiallyBound};
+ *     VkBool32 {@link #descriptorBindingVariableDescriptorCount};
+ *     VkBool32 {@link #runtimeDescriptorArray};
  * }</code></pre>
  */
 public class VkPhysicalDeviceDescriptorIndexingFeatures extends Struct implements NativeResource {
@@ -180,70 +155,70 @@ public class VkPhysicalDeviceDescriptorIndexingFeatures extends Struct implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code shaderInputAttachmentArrayDynamicIndexing} field. */
+    /** indicates whether arrays of input attachments <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code InputAttachmentArrayDynamicIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderInputAttachmentArrayDynamicIndexing() { return nshaderInputAttachmentArrayDynamicIndexing(address()) != 0; }
-    /** Returns the value of the {@code shaderUniformTexelBufferArrayDynamicIndexing} field. */
+    /** indicates whether arrays of uniform texel buffers <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code UniformTexelBufferArrayDynamicIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderUniformTexelBufferArrayDynamicIndexing() { return nshaderUniformTexelBufferArrayDynamicIndexing(address()) != 0; }
-    /** Returns the value of the {@code shaderStorageTexelBufferArrayDynamicIndexing} field. */
+    /** indicates whether arrays of storage texel buffers <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageTexelBufferArrayDynamicIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderStorageTexelBufferArrayDynamicIndexing() { return nshaderStorageTexelBufferArrayDynamicIndexing(address()) != 0; }
-    /** Returns the value of the {@code shaderUniformBufferArrayNonUniformIndexing} field. */
+    /** indicates whether arrays of uniform buffers <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER} or {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code UniformBufferArrayNonUniformIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderUniformBufferArrayNonUniformIndexing() { return nshaderUniformBufferArrayNonUniformIndexing(address()) != 0; }
-    /** Returns the value of the {@code shaderSampledImageArrayNonUniformIndexing} field. */
+    /** indicates whether arrays of samplers or sampled images <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER}, {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, or {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code SampledImageArrayNonUniformIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderSampledImageArrayNonUniformIndexing() { return nshaderSampledImageArrayNonUniformIndexing(address()) != 0; }
-    /** Returns the value of the {@code shaderStorageBufferArrayNonUniformIndexing} field. */
+    /** indicates whether arrays of storage buffers <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER} or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageBufferArrayNonUniformIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderStorageBufferArrayNonUniformIndexing() { return nshaderStorageBufferArrayNonUniformIndexing(address()) != 0; }
-    /** Returns the value of the {@code shaderStorageImageArrayNonUniformIndexing} field. */
+    /** indicates whether arrays of storage images <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageImageArrayNonUniformIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderStorageImageArrayNonUniformIndexing() { return nshaderStorageImageArrayNonUniformIndexing(address()) != 0; }
-    /** Returns the value of the {@code shaderInputAttachmentArrayNonUniformIndexing} field. */
+    /** indicates whether arrays of input attachments <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code InputAttachmentArrayNonUniformIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderInputAttachmentArrayNonUniformIndexing() { return nshaderInputAttachmentArrayNonUniformIndexing(address()) != 0; }
-    /** Returns the value of the {@code shaderUniformTexelBufferArrayNonUniformIndexing} field. */
+    /** indicates whether arrays of uniform texel buffers <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code UniformTexelBufferArrayNonUniformIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderUniformTexelBufferArrayNonUniformIndexing() { return nshaderUniformTexelBufferArrayNonUniformIndexing(address()) != 0; }
-    /** Returns the value of the {@code shaderStorageTexelBufferArrayNonUniformIndexing} field. */
+    /** indicates whether arrays of storage texel buffers <b>can</b> be indexed by non-uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER} <b>must</b> not be indexed by non-uniform integer expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code StorageTexelBufferArrayNonUniformIndexing} capability. */
     @NativeType("VkBool32")
     public boolean shaderStorageTexelBufferArrayNonUniformIndexing() { return nshaderStorageTexelBufferArrayNonUniformIndexing(address()) != 0; }
-    /** Returns the value of the {@code descriptorBindingUniformBufferUpdateAfterBind} field. */
+    /** indicates whether the implementation supports updating uniform buffer descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER}. */
     @NativeType("VkBool32")
     public boolean descriptorBindingUniformBufferUpdateAfterBind() { return ndescriptorBindingUniformBufferUpdateAfterBind(address()) != 0; }
-    /** Returns the value of the {@code descriptorBindingSampledImageUpdateAfterBind} field. */
+    /** indicates whether the implementation supports updating sampled image descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER}, {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, or {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}. */
     @NativeType("VkBool32")
     public boolean descriptorBindingSampledImageUpdateAfterBind() { return ndescriptorBindingSampledImageUpdateAfterBind(address()) != 0; }
-    /** Returns the value of the {@code descriptorBindingStorageImageUpdateAfterBind} field. */
+    /** indicates whether the implementation supports updating storage image descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}. */
     @NativeType("VkBool32")
     public boolean descriptorBindingStorageImageUpdateAfterBind() { return ndescriptorBindingStorageImageUpdateAfterBind(address()) != 0; }
-    /** Returns the value of the {@code descriptorBindingStorageBufferUpdateAfterBind} field. */
+    /** indicates whether the implementation supports updating storage buffer descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER}. */
     @NativeType("VkBool32")
     public boolean descriptorBindingStorageBufferUpdateAfterBind() { return ndescriptorBindingStorageBufferUpdateAfterBind(address()) != 0; }
-    /** Returns the value of the {@code descriptorBindingUniformTexelBufferUpdateAfterBind} field. */
+    /** indicates whether the implementation supports updating uniform texel buffer descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER}. */
     @NativeType("VkBool32")
     public boolean descriptorBindingUniformTexelBufferUpdateAfterBind() { return ndescriptorBindingUniformTexelBufferUpdateAfterBind(address()) != 0; }
-    /** Returns the value of the {@code descriptorBindingStorageTexelBufferUpdateAfterBind} field. */
+    /** indicates whether the implementation supports updating storage texel buffer descriptors after a set is bound. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} <b>must</b> not be used with {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER}. */
     @NativeType("VkBool32")
     public boolean descriptorBindingStorageTexelBufferUpdateAfterBind() { return ndescriptorBindingStorageTexelBufferUpdateAfterBind(address()) != 0; }
-    /** Returns the value of the {@code descriptorBindingUpdateUnusedWhilePending} field. */
+    /** indicates whether the implementation supports updating descriptors while the set is in use. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT} <b>must</b> not be used. */
     @NativeType("VkBool32")
     public boolean descriptorBindingUpdateUnusedWhilePending() { return ndescriptorBindingUpdateUnusedWhilePending(address()) != 0; }
-    /** Returns the value of the {@code descriptorBindingPartiallyBound} field. */
+    /** indicates whether the implementation supports statically using a descriptor set binding in which some descriptors are not valid. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT} <b>must</b> not be used. */
     @NativeType("VkBool32")
     public boolean descriptorBindingPartiallyBound() { return ndescriptorBindingPartiallyBound(address()) != 0; }
-    /** Returns the value of the {@code descriptorBindingVariableDescriptorCount} field. */
+    /** indicates whether the implementation supports descriptor sets with a variable-sized last binding. If this feature is not enabled, {@link VK12#VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT} <b>must</b> not be used. */
     @NativeType("VkBool32")
     public boolean descriptorBindingVariableDescriptorCount() { return ndescriptorBindingVariableDescriptorCount(address()) != 0; }
-    /** Returns the value of the {@code runtimeDescriptorArray} field. */
+    /** indicates whether the implementation supports the SPIR-V {@code RuntimeDescriptorArray} capability. If this feature is not enabled, descriptors <b>must</b> not be declared in runtime arrays. */
     @NativeType("VkBool32")
     public boolean runtimeDescriptorArray() { return nruntimeDescriptorArray(address()) != 0; }
 
@@ -251,45 +226,45 @@ public class VkPhysicalDeviceDescriptorIndexingFeatures extends Struct implement
     public VkPhysicalDeviceDescriptorIndexingFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderInputAttachmentArrayDynamicIndexing} field. */
+    /** Sets the specified value to the {@link #shaderInputAttachmentArrayDynamicIndexing} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures shaderInputAttachmentArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { nshaderInputAttachmentArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderUniformTexelBufferArrayDynamicIndexing} field. */
+    /** Sets the specified value to the {@link #shaderUniformTexelBufferArrayDynamicIndexing} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures shaderUniformTexelBufferArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { nshaderUniformTexelBufferArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderStorageTexelBufferArrayDynamicIndexing} field. */
+    /** Sets the specified value to the {@link #shaderStorageTexelBufferArrayDynamicIndexing} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures shaderStorageTexelBufferArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { nshaderStorageTexelBufferArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderUniformBufferArrayNonUniformIndexing} field. */
+    /** Sets the specified value to the {@link #shaderUniformBufferArrayNonUniformIndexing} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures shaderUniformBufferArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { nshaderUniformBufferArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderSampledImageArrayNonUniformIndexing} field. */
+    /** Sets the specified value to the {@link #shaderSampledImageArrayNonUniformIndexing} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures shaderSampledImageArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { nshaderSampledImageArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderStorageBufferArrayNonUniformIndexing} field. */
+    /** Sets the specified value to the {@link #shaderStorageBufferArrayNonUniformIndexing} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures shaderStorageBufferArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { nshaderStorageBufferArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderStorageImageArrayNonUniformIndexing} field. */
+    /** Sets the specified value to the {@link #shaderStorageImageArrayNonUniformIndexing} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures shaderStorageImageArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { nshaderStorageImageArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderInputAttachmentArrayNonUniformIndexing} field. */
+    /** Sets the specified value to the {@link #shaderInputAttachmentArrayNonUniformIndexing} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures shaderInputAttachmentArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { nshaderInputAttachmentArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderUniformTexelBufferArrayNonUniformIndexing} field. */
+    /** Sets the specified value to the {@link #shaderUniformTexelBufferArrayNonUniformIndexing} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures shaderUniformTexelBufferArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { nshaderUniformTexelBufferArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderStorageTexelBufferArrayNonUniformIndexing} field. */
+    /** Sets the specified value to the {@link #shaderStorageTexelBufferArrayNonUniformIndexing} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures shaderStorageTexelBufferArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { nshaderStorageTexelBufferArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code descriptorBindingUniformBufferUpdateAfterBind} field. */
+    /** Sets the specified value to the {@link #descriptorBindingUniformBufferUpdateAfterBind} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures descriptorBindingUniformBufferUpdateAfterBind(@NativeType("VkBool32") boolean value) { ndescriptorBindingUniformBufferUpdateAfterBind(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code descriptorBindingSampledImageUpdateAfterBind} field. */
+    /** Sets the specified value to the {@link #descriptorBindingSampledImageUpdateAfterBind} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures descriptorBindingSampledImageUpdateAfterBind(@NativeType("VkBool32") boolean value) { ndescriptorBindingSampledImageUpdateAfterBind(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code descriptorBindingStorageImageUpdateAfterBind} field. */
+    /** Sets the specified value to the {@link #descriptorBindingStorageImageUpdateAfterBind} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures descriptorBindingStorageImageUpdateAfterBind(@NativeType("VkBool32") boolean value) { ndescriptorBindingStorageImageUpdateAfterBind(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code descriptorBindingStorageBufferUpdateAfterBind} field. */
+    /** Sets the specified value to the {@link #descriptorBindingStorageBufferUpdateAfterBind} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures descriptorBindingStorageBufferUpdateAfterBind(@NativeType("VkBool32") boolean value) { ndescriptorBindingStorageBufferUpdateAfterBind(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code descriptorBindingUniformTexelBufferUpdateAfterBind} field. */
+    /** Sets the specified value to the {@link #descriptorBindingUniformTexelBufferUpdateAfterBind} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures descriptorBindingUniformTexelBufferUpdateAfterBind(@NativeType("VkBool32") boolean value) { ndescriptorBindingUniformTexelBufferUpdateAfterBind(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code descriptorBindingStorageTexelBufferUpdateAfterBind} field. */
+    /** Sets the specified value to the {@link #descriptorBindingStorageTexelBufferUpdateAfterBind} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures descriptorBindingStorageTexelBufferUpdateAfterBind(@NativeType("VkBool32") boolean value) { ndescriptorBindingStorageTexelBufferUpdateAfterBind(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code descriptorBindingUpdateUnusedWhilePending} field. */
+    /** Sets the specified value to the {@link #descriptorBindingUpdateUnusedWhilePending} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures descriptorBindingUpdateUnusedWhilePending(@NativeType("VkBool32") boolean value) { ndescriptorBindingUpdateUnusedWhilePending(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code descriptorBindingPartiallyBound} field. */
+    /** Sets the specified value to the {@link #descriptorBindingPartiallyBound} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures descriptorBindingPartiallyBound(@NativeType("VkBool32") boolean value) { ndescriptorBindingPartiallyBound(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code descriptorBindingVariableDescriptorCount} field. */
+    /** Sets the specified value to the {@link #descriptorBindingVariableDescriptorCount} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures descriptorBindingVariableDescriptorCount(@NativeType("VkBool32") boolean value) { ndescriptorBindingVariableDescriptorCount(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code runtimeDescriptorArray} field. */
+    /** Sets the specified value to the {@link #runtimeDescriptorArray} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures runtimeDescriptorArray(@NativeType("VkBool32") boolean value) { nruntimeDescriptorArray(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -626,70 +601,70 @@ public class VkPhysicalDeviceDescriptorIndexingFeatures extends Struct implement
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDescriptorIndexingFeatures.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDescriptorIndexingFeatures.npNext(address()); }
-        /** Returns the value of the {@code shaderInputAttachmentArrayDynamicIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderInputAttachmentArrayDynamicIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderInputAttachmentArrayDynamicIndexing() { return VkPhysicalDeviceDescriptorIndexingFeatures.nshaderInputAttachmentArrayDynamicIndexing(address()) != 0; }
-        /** Returns the value of the {@code shaderUniformTexelBufferArrayDynamicIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderUniformTexelBufferArrayDynamicIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderUniformTexelBufferArrayDynamicIndexing() { return VkPhysicalDeviceDescriptorIndexingFeatures.nshaderUniformTexelBufferArrayDynamicIndexing(address()) != 0; }
-        /** Returns the value of the {@code shaderStorageTexelBufferArrayDynamicIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderStorageTexelBufferArrayDynamicIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderStorageTexelBufferArrayDynamicIndexing() { return VkPhysicalDeviceDescriptorIndexingFeatures.nshaderStorageTexelBufferArrayDynamicIndexing(address()) != 0; }
-        /** Returns the value of the {@code shaderUniformBufferArrayNonUniformIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderUniformBufferArrayNonUniformIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderUniformBufferArrayNonUniformIndexing() { return VkPhysicalDeviceDescriptorIndexingFeatures.nshaderUniformBufferArrayNonUniformIndexing(address()) != 0; }
-        /** Returns the value of the {@code shaderSampledImageArrayNonUniformIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderSampledImageArrayNonUniformIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderSampledImageArrayNonUniformIndexing() { return VkPhysicalDeviceDescriptorIndexingFeatures.nshaderSampledImageArrayNonUniformIndexing(address()) != 0; }
-        /** Returns the value of the {@code shaderStorageBufferArrayNonUniformIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderStorageBufferArrayNonUniformIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderStorageBufferArrayNonUniformIndexing() { return VkPhysicalDeviceDescriptorIndexingFeatures.nshaderStorageBufferArrayNonUniformIndexing(address()) != 0; }
-        /** Returns the value of the {@code shaderStorageImageArrayNonUniformIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderStorageImageArrayNonUniformIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderStorageImageArrayNonUniformIndexing() { return VkPhysicalDeviceDescriptorIndexingFeatures.nshaderStorageImageArrayNonUniformIndexing(address()) != 0; }
-        /** Returns the value of the {@code shaderInputAttachmentArrayNonUniformIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderInputAttachmentArrayNonUniformIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderInputAttachmentArrayNonUniformIndexing() { return VkPhysicalDeviceDescriptorIndexingFeatures.nshaderInputAttachmentArrayNonUniformIndexing(address()) != 0; }
-        /** Returns the value of the {@code shaderUniformTexelBufferArrayNonUniformIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderUniformTexelBufferArrayNonUniformIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderUniformTexelBufferArrayNonUniformIndexing() { return VkPhysicalDeviceDescriptorIndexingFeatures.nshaderUniformTexelBufferArrayNonUniformIndexing(address()) != 0; }
-        /** Returns the value of the {@code shaderStorageTexelBufferArrayNonUniformIndexing} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderStorageTexelBufferArrayNonUniformIndexing} field. */
         @NativeType("VkBool32")
         public boolean shaderStorageTexelBufferArrayNonUniformIndexing() { return VkPhysicalDeviceDescriptorIndexingFeatures.nshaderStorageTexelBufferArrayNonUniformIndexing(address()) != 0; }
-        /** Returns the value of the {@code descriptorBindingUniformBufferUpdateAfterBind} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingUniformBufferUpdateAfterBind} field. */
         @NativeType("VkBool32")
         public boolean descriptorBindingUniformBufferUpdateAfterBind() { return VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingUniformBufferUpdateAfterBind(address()) != 0; }
-        /** Returns the value of the {@code descriptorBindingSampledImageUpdateAfterBind} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingSampledImageUpdateAfterBind} field. */
         @NativeType("VkBool32")
         public boolean descriptorBindingSampledImageUpdateAfterBind() { return VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingSampledImageUpdateAfterBind(address()) != 0; }
-        /** Returns the value of the {@code descriptorBindingStorageImageUpdateAfterBind} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingStorageImageUpdateAfterBind} field. */
         @NativeType("VkBool32")
         public boolean descriptorBindingStorageImageUpdateAfterBind() { return VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingStorageImageUpdateAfterBind(address()) != 0; }
-        /** Returns the value of the {@code descriptorBindingStorageBufferUpdateAfterBind} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingStorageBufferUpdateAfterBind} field. */
         @NativeType("VkBool32")
         public boolean descriptorBindingStorageBufferUpdateAfterBind() { return VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingStorageBufferUpdateAfterBind(address()) != 0; }
-        /** Returns the value of the {@code descriptorBindingUniformTexelBufferUpdateAfterBind} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingUniformTexelBufferUpdateAfterBind} field. */
         @NativeType("VkBool32")
         public boolean descriptorBindingUniformTexelBufferUpdateAfterBind() { return VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingUniformTexelBufferUpdateAfterBind(address()) != 0; }
-        /** Returns the value of the {@code descriptorBindingStorageTexelBufferUpdateAfterBind} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingStorageTexelBufferUpdateAfterBind} field. */
         @NativeType("VkBool32")
         public boolean descriptorBindingStorageTexelBufferUpdateAfterBind() { return VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingStorageTexelBufferUpdateAfterBind(address()) != 0; }
-        /** Returns the value of the {@code descriptorBindingUpdateUnusedWhilePending} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingUpdateUnusedWhilePending} field. */
         @NativeType("VkBool32")
         public boolean descriptorBindingUpdateUnusedWhilePending() { return VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingUpdateUnusedWhilePending(address()) != 0; }
-        /** Returns the value of the {@code descriptorBindingPartiallyBound} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingPartiallyBound} field. */
         @NativeType("VkBool32")
         public boolean descriptorBindingPartiallyBound() { return VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingPartiallyBound(address()) != 0; }
-        /** Returns the value of the {@code descriptorBindingVariableDescriptorCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingVariableDescriptorCount} field. */
         @NativeType("VkBool32")
         public boolean descriptorBindingVariableDescriptorCount() { return VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingVariableDescriptorCount(address()) != 0; }
-        /** Returns the value of the {@code runtimeDescriptorArray} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDescriptorIndexingFeatures#runtimeDescriptorArray} field. */
         @NativeType("VkBool32")
         public boolean runtimeDescriptorArray() { return VkPhysicalDeviceDescriptorIndexingFeatures.nruntimeDescriptorArray(address()) != 0; }
 
@@ -697,45 +672,45 @@ public class VkPhysicalDeviceDescriptorIndexingFeatures extends Struct implement
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDescriptorIndexingFeatures.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDescriptorIndexingFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderInputAttachmentArrayDynamicIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderInputAttachmentArrayDynamicIndexing} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer shaderInputAttachmentArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.nshaderInputAttachmentArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderUniformTexelBufferArrayDynamicIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderUniformTexelBufferArrayDynamicIndexing} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer shaderUniformTexelBufferArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.nshaderUniformTexelBufferArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderStorageTexelBufferArrayDynamicIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderStorageTexelBufferArrayDynamicIndexing} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer shaderStorageTexelBufferArrayDynamicIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.nshaderStorageTexelBufferArrayDynamicIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderUniformBufferArrayNonUniformIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderUniformBufferArrayNonUniformIndexing} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer shaderUniformBufferArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.nshaderUniformBufferArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderSampledImageArrayNonUniformIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderSampledImageArrayNonUniformIndexing} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer shaderSampledImageArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.nshaderSampledImageArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderStorageBufferArrayNonUniformIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderStorageBufferArrayNonUniformIndexing} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer shaderStorageBufferArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.nshaderStorageBufferArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderStorageImageArrayNonUniformIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderStorageImageArrayNonUniformIndexing} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer shaderStorageImageArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.nshaderStorageImageArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderInputAttachmentArrayNonUniformIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderInputAttachmentArrayNonUniformIndexing} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer shaderInputAttachmentArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.nshaderInputAttachmentArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderUniformTexelBufferArrayNonUniformIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderUniformTexelBufferArrayNonUniformIndexing} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer shaderUniformTexelBufferArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.nshaderUniformTexelBufferArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderStorageTexelBufferArrayNonUniformIndexing} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderStorageTexelBufferArrayNonUniformIndexing} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer shaderStorageTexelBufferArrayNonUniformIndexing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.nshaderStorageTexelBufferArrayNonUniformIndexing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code descriptorBindingUniformBufferUpdateAfterBind} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingUniformBufferUpdateAfterBind} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer descriptorBindingUniformBufferUpdateAfterBind(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingUniformBufferUpdateAfterBind(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code descriptorBindingSampledImageUpdateAfterBind} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingSampledImageUpdateAfterBind} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer descriptorBindingSampledImageUpdateAfterBind(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingSampledImageUpdateAfterBind(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code descriptorBindingStorageImageUpdateAfterBind} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingStorageImageUpdateAfterBind} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer descriptorBindingStorageImageUpdateAfterBind(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingStorageImageUpdateAfterBind(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code descriptorBindingStorageBufferUpdateAfterBind} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingStorageBufferUpdateAfterBind} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer descriptorBindingStorageBufferUpdateAfterBind(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingStorageBufferUpdateAfterBind(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code descriptorBindingUniformTexelBufferUpdateAfterBind} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingUniformTexelBufferUpdateAfterBind} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer descriptorBindingUniformTexelBufferUpdateAfterBind(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingUniformTexelBufferUpdateAfterBind(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code descriptorBindingStorageTexelBufferUpdateAfterBind} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingStorageTexelBufferUpdateAfterBind} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer descriptorBindingStorageTexelBufferUpdateAfterBind(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingStorageTexelBufferUpdateAfterBind(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code descriptorBindingUpdateUnusedWhilePending} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingUpdateUnusedWhilePending} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer descriptorBindingUpdateUnusedWhilePending(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingUpdateUnusedWhilePending(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code descriptorBindingPartiallyBound} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingPartiallyBound} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer descriptorBindingPartiallyBound(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingPartiallyBound(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code descriptorBindingVariableDescriptorCount} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#descriptorBindingVariableDescriptorCount} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer descriptorBindingVariableDescriptorCount(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.ndescriptorBindingVariableDescriptorCount(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code runtimeDescriptorArray} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#runtimeDescriptorArray} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer runtimeDescriptorArray(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorIndexingFeatures.nruntimeDescriptorArray(address(), value ? 1 : 0); return this; }
 
     }

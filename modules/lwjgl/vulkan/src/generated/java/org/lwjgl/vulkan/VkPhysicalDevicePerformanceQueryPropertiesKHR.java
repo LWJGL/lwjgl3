@@ -26,21 +26,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the {@link VkPhysicalDevicePerformanceQueryPropertiesKHR} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent properties.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code allowCommandBufferQueryCopies} &ndash; {@link VK10#VK_TRUE TRUE} if the performance query pools are allowed to be used with {@link VK10#vkCmdCopyQueryPoolResults CmdCopyQueryPoolResults}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDevicePerformanceQueryPropertiesKHR {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 allowCommandBufferQueryCopies;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #allowCommandBufferQueryCopies};
  * }</code></pre>
  */
 public class VkPhysicalDevicePerformanceQueryPropertiesKHR extends Struct implements NativeResource {
@@ -85,19 +77,19 @@ public class VkPhysicalDevicePerformanceQueryPropertiesKHR extends Struct implem
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code allowCommandBufferQueryCopies} field. */
+    /** {@link VK10#VK_TRUE TRUE} if the performance query pools are allowed to be used with {@link VK10#vkCmdCopyQueryPoolResults CmdCopyQueryPoolResults}. */
     @NativeType("VkBool32")
     public boolean allowCommandBufferQueryCopies() { return nallowCommandBufferQueryCopies(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePerformanceQueryPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePerformanceQueryPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -316,19 +308,19 @@ public class VkPhysicalDevicePerformanceQueryPropertiesKHR extends Struct implem
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDevicePerformanceQueryPropertiesKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevicePerformanceQueryPropertiesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDevicePerformanceQueryPropertiesKHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevicePerformanceQueryPropertiesKHR.npNext(address()); }
-        /** Returns the value of the {@code allowCommandBufferQueryCopies} field. */
+        /** @return the value of the {@link VkPhysicalDevicePerformanceQueryPropertiesKHR#allowCommandBufferQueryCopies} field. */
         @NativeType("VkBool32")
         public boolean allowCommandBufferQueryCopies() { return VkPhysicalDevicePerformanceQueryPropertiesKHR.nallowCommandBufferQueryCopies(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePerformanceQueryPropertiesKHR#sType} field. */
         public VkPhysicalDevicePerformanceQueryPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePerformanceQueryPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePerformanceQueryPropertiesKHR#pNext} field. */
         public VkPhysicalDevicePerformanceQueryPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePerformanceQueryPropertiesKHR.npNext(address(), value); return this; }
 
     }

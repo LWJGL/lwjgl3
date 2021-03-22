@@ -31,23 +31,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkPipelineViewportSwizzleStateCreateInfoNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code x} &ndash; a {@code VkViewportCoordinateSwizzleNV} value specifying the swizzle operation to apply to the x component of the primitive</li>
- * <li>{@code y} &ndash; a {@code VkViewportCoordinateSwizzleNV} value specifying the swizzle operation to apply to the y component of the primitive</li>
- * <li>{@code z} &ndash; a {@code VkViewportCoordinateSwizzleNV} value specifying the swizzle operation to apply to the z component of the primitive</li>
- * <li>{@code w} &ndash; a {@code VkViewportCoordinateSwizzleNV} value specifying the swizzle operation to apply to the w component of the primitive</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkViewportSwizzleNV {
- *     VkViewportCoordinateSwizzleNV x;
- *     VkViewportCoordinateSwizzleNV y;
- *     VkViewportCoordinateSwizzleNV z;
- *     VkViewportCoordinateSwizzleNV w;
+ *     VkViewportCoordinateSwizzleNV {@link #x};
+ *     VkViewportCoordinateSwizzleNV {@link #y};
+ *     VkViewportCoordinateSwizzleNV {@link #z};
+ *     VkViewportCoordinateSwizzleNV {@link #w};
  * }</code></pre>
  */
 public class VkViewportSwizzleNV extends Struct implements NativeResource {
@@ -95,26 +86,26 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** a {@code VkViewportCoordinateSwizzleNV} value specifying the swizzle operation to apply to the x component of the primitive */
     @NativeType("VkViewportCoordinateSwizzleNV")
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** a {@code VkViewportCoordinateSwizzleNV} value specifying the swizzle operation to apply to the y component of the primitive */
     @NativeType("VkViewportCoordinateSwizzleNV")
     public int y() { return ny(address()); }
-    /** Returns the value of the {@code z} field. */
+    /** a {@code VkViewportCoordinateSwizzleNV} value specifying the swizzle operation to apply to the z component of the primitive */
     @NativeType("VkViewportCoordinateSwizzleNV")
     public int z() { return nz(address()); }
-    /** Returns the value of the {@code w} field. */
+    /** a {@code VkViewportCoordinateSwizzleNV} value specifying the swizzle operation to apply to the w component of the primitive */
     @NativeType("VkViewportCoordinateSwizzleNV")
     public int w() { return nw(address()); }
 
-    /** Sets the specified value to the {@code x} field. */
+    /** Sets the specified value to the {@link #x} field. */
     public VkViewportSwizzleNV x(@NativeType("VkViewportCoordinateSwizzleNV") int value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@code y} field. */
+    /** Sets the specified value to the {@link #y} field. */
     public VkViewportSwizzleNV y(@NativeType("VkViewportCoordinateSwizzleNV") int value) { ny(address(), value); return this; }
-    /** Sets the specified value to the {@code z} field. */
+    /** Sets the specified value to the {@link #z} field. */
     public VkViewportSwizzleNV z(@NativeType("VkViewportCoordinateSwizzleNV") int value) { nz(address(), value); return this; }
-    /** Sets the specified value to the {@code w} field. */
+    /** Sets the specified value to the {@link #w} field. */
     public VkViewportSwizzleNV w(@NativeType("VkViewportCoordinateSwizzleNV") int value) { nw(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,26 +334,26 @@ public class VkViewportSwizzleNV extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link VkViewportSwizzleNV#x} field. */
         @NativeType("VkViewportCoordinateSwizzleNV")
         public int x() { return VkViewportSwizzleNV.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@link VkViewportSwizzleNV#y} field. */
         @NativeType("VkViewportCoordinateSwizzleNV")
         public int y() { return VkViewportSwizzleNV.ny(address()); }
-        /** Returns the value of the {@code z} field. */
+        /** @return the value of the {@link VkViewportSwizzleNV#z} field. */
         @NativeType("VkViewportCoordinateSwizzleNV")
         public int z() { return VkViewportSwizzleNV.nz(address()); }
-        /** Returns the value of the {@code w} field. */
+        /** @return the value of the {@link VkViewportSwizzleNV#w} field. */
         @NativeType("VkViewportCoordinateSwizzleNV")
         public int w() { return VkViewportSwizzleNV.nw(address()); }
 
-        /** Sets the specified value to the {@code x} field. */
+        /** Sets the specified value to the {@link VkViewportSwizzleNV#x} field. */
         public VkViewportSwizzleNV.Buffer x(@NativeType("VkViewportCoordinateSwizzleNV") int value) { VkViewportSwizzleNV.nx(address(), value); return this; }
-        /** Sets the specified value to the {@code y} field. */
+        /** Sets the specified value to the {@link VkViewportSwizzleNV#y} field. */
         public VkViewportSwizzleNV.Buffer y(@NativeType("VkViewportCoordinateSwizzleNV") int value) { VkViewportSwizzleNV.ny(address(), value); return this; }
-        /** Sets the specified value to the {@code z} field. */
+        /** Sets the specified value to the {@link VkViewportSwizzleNV#z} field. */
         public VkViewportSwizzleNV.Buffer z(@NativeType("VkViewportCoordinateSwizzleNV") int value) { VkViewportSwizzleNV.nz(address(), value); return this; }
-        /** Sets the specified value to the {@code w} field. */
+        /** Sets the specified value to the {@link VkViewportSwizzleNV#w} field. */
         public VkViewportSwizzleNV.Buffer w(@NativeType("VkViewportCoordinateSwizzleNV") int value) { VkViewportSwizzleNV.nw(address(), value); return this; }
 
     }

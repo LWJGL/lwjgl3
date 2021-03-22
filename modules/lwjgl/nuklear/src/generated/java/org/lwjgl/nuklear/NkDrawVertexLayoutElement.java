@@ -16,21 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code attribute} &ndash; the vertex attribute. One of:<br><table><tr><td>{@link Nuklear#NK_VERTEX_POSITION VERTEX_POSITION}</td><td>{@link Nuklear#NK_VERTEX_COLOR VERTEX_COLOR}</td><td>{@link Nuklear#NK_VERTEX_TEXCOORD VERTEX_TEXCOORD}</td><td>{@link Nuklear#NK_VERTEX_ATTRIBUTE_COUNT VERTEX_ATTRIBUTE_COUNT}</td></tr></table></li>
- * <li>{@code format} &ndash; the vertex attribute format. One of:<br><table><tr><td>{@link Nuklear#NK_FORMAT_SCHAR FORMAT_SCHAR}</td><td>{@link Nuklear#NK_FORMAT_SSHORT FORMAT_SSHORT}</td><td>{@link Nuklear#NK_FORMAT_SINT FORMAT_SINT}</td><td>{@link Nuklear#NK_FORMAT_UCHAR FORMAT_UCHAR}</td><td>{@link Nuklear#NK_FORMAT_USHORT FORMAT_USHORT}</td></tr><tr><td>{@link Nuklear#NK_FORMAT_UINT FORMAT_UINT}</td><td>{@link Nuklear#NK_FORMAT_FLOAT FORMAT_FLOAT}</td><td>{@link Nuklear#NK_FORMAT_DOUBLE FORMAT_DOUBLE}</td><td>{@link Nuklear#NK_FORMAT_R8G8B8 FORMAT_R8G8B8}</td><td>{@link Nuklear#NK_FORMAT_R16G15B16 FORMAT_R16G15B16}</td></tr><tr><td>{@link Nuklear#NK_FORMAT_R32G32B32 FORMAT_R32G32B32}</td><td>{@link Nuklear#NK_FORMAT_R8G8B8A8 FORMAT_R8G8B8A8}</td><td>{@link Nuklear#NK_FORMAT_B8G8R8A8 FORMAT_B8G8R8A8}</td><td>{@link Nuklear#NK_FORMAT_R16G15B16A16 FORMAT_R16G15B16A16}</td><td>{@link Nuklear#NK_FORMAT_R32G32B32A32 FORMAT_R32G32B32A32}</td></tr><tr><td>{@link Nuklear#NK_FORMAT_R32G32B32A32_FLOAT FORMAT_R32G32B32A32_FLOAT}</td><td>{@link Nuklear#NK_FORMAT_R32G32B32A32_DOUBLE FORMAT_R32G32B32A32_DOUBLE}</td><td>{@link Nuklear#NK_FORMAT_RGB32 FORMAT_RGB32}</td><td>{@link Nuklear#NK_FORMAT_RGBA32 FORMAT_RGBA32}</td></tr></table></li>
- * <li>{@code offset} &ndash; the vertex attribute offset</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct nk_draw_vertex_layout_element {
- *     enum nk_draw_vertex_layout_attribute attribute;
- *     enum nk_draw_vertex_layout_format format;
- *     nk_size offset;
+ *     enum nk_draw_vertex_layout_attribute {@link #attribute};
+ *     enum nk_draw_vertex_layout_format {@link #format};
+ *     nk_size {@link #offset};
  * }</code></pre>
  */
 @NativeType("struct nk_draw_vertex_layout_element")
@@ -76,21 +68,21 @@ public class NkDrawVertexLayoutElement extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code attribute} field. */
+    /** the vertex attribute. One of:<br><table><tr><td>{@link Nuklear#NK_VERTEX_POSITION VERTEX_POSITION}</td><td>{@link Nuklear#NK_VERTEX_COLOR VERTEX_COLOR}</td><td>{@link Nuklear#NK_VERTEX_TEXCOORD VERTEX_TEXCOORD}</td><td>{@link Nuklear#NK_VERTEX_ATTRIBUTE_COUNT VERTEX_ATTRIBUTE_COUNT}</td></tr></table> */
     @NativeType("enum nk_draw_vertex_layout_attribute")
     public int attribute() { return nattribute(address()); }
-    /** Returns the value of the {@code format} field. */
+    /** the vertex attribute format. One of:<br><table><tr><td>{@link Nuklear#NK_FORMAT_SCHAR FORMAT_SCHAR}</td><td>{@link Nuklear#NK_FORMAT_SSHORT FORMAT_SSHORT}</td><td>{@link Nuklear#NK_FORMAT_SINT FORMAT_SINT}</td><td>{@link Nuklear#NK_FORMAT_UCHAR FORMAT_UCHAR}</td><td>{@link Nuklear#NK_FORMAT_USHORT FORMAT_USHORT}</td></tr><tr><td>{@link Nuklear#NK_FORMAT_UINT FORMAT_UINT}</td><td>{@link Nuklear#NK_FORMAT_FLOAT FORMAT_FLOAT}</td><td>{@link Nuklear#NK_FORMAT_DOUBLE FORMAT_DOUBLE}</td><td>{@link Nuklear#NK_FORMAT_R8G8B8 FORMAT_R8G8B8}</td><td>{@link Nuklear#NK_FORMAT_R16G15B16 FORMAT_R16G15B16}</td></tr><tr><td>{@link Nuklear#NK_FORMAT_R32G32B32 FORMAT_R32G32B32}</td><td>{@link Nuklear#NK_FORMAT_R8G8B8A8 FORMAT_R8G8B8A8}</td><td>{@link Nuklear#NK_FORMAT_B8G8R8A8 FORMAT_B8G8R8A8}</td><td>{@link Nuklear#NK_FORMAT_R16G15B16A16 FORMAT_R16G15B16A16}</td><td>{@link Nuklear#NK_FORMAT_R32G32B32A32 FORMAT_R32G32B32A32}</td></tr><tr><td>{@link Nuklear#NK_FORMAT_R32G32B32A32_FLOAT FORMAT_R32G32B32A32_FLOAT}</td><td>{@link Nuklear#NK_FORMAT_R32G32B32A32_DOUBLE FORMAT_R32G32B32A32_DOUBLE}</td><td>{@link Nuklear#NK_FORMAT_RGB32 FORMAT_RGB32}</td><td>{@link Nuklear#NK_FORMAT_RGBA32 FORMAT_RGBA32}</td></tr></table> */
     @NativeType("enum nk_draw_vertex_layout_format")
     public int format() { return nformat(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /** the vertex attribute offset */
     @NativeType("nk_size")
     public long offset() { return noffset(address()); }
 
-    /** Sets the specified value to the {@code attribute} field. */
+    /** Sets the specified value to the {@link #attribute} field. */
     public NkDrawVertexLayoutElement attribute(@NativeType("enum nk_draw_vertex_layout_attribute") int value) { nattribute(address(), value); return this; }
-    /** Sets the specified value to the {@code format} field. */
+    /** Sets the specified value to the {@link #format} field. */
     public NkDrawVertexLayoutElement format(@NativeType("enum nk_draw_vertex_layout_format") int value) { nformat(address(), value); return this; }
-    /** Sets the specified value to the {@code offset} field. */
+    /** Sets the specified value to the {@link #offset} field. */
     public NkDrawVertexLayoutElement offset(@NativeType("nk_size") long value) { noffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -313,21 +305,21 @@ public class NkDrawVertexLayoutElement extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code attribute} field. */
+        /** @return the value of the {@link NkDrawVertexLayoutElement#attribute} field. */
         @NativeType("enum nk_draw_vertex_layout_attribute")
         public int attribute() { return NkDrawVertexLayoutElement.nattribute(address()); }
-        /** Returns the value of the {@code format} field. */
+        /** @return the value of the {@link NkDrawVertexLayoutElement#format} field. */
         @NativeType("enum nk_draw_vertex_layout_format")
         public int format() { return NkDrawVertexLayoutElement.nformat(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@link NkDrawVertexLayoutElement#offset} field. */
         @NativeType("nk_size")
         public long offset() { return NkDrawVertexLayoutElement.noffset(address()); }
 
-        /** Sets the specified value to the {@code attribute} field. */
+        /** Sets the specified value to the {@link NkDrawVertexLayoutElement#attribute} field. */
         public NkDrawVertexLayoutElement.Buffer attribute(@NativeType("enum nk_draw_vertex_layout_attribute") int value) { NkDrawVertexLayoutElement.nattribute(address(), value); return this; }
-        /** Sets the specified value to the {@code format} field. */
+        /** Sets the specified value to the {@link NkDrawVertexLayoutElement#format} field. */
         public NkDrawVertexLayoutElement.Buffer format(@NativeType("enum nk_draw_vertex_layout_format") int value) { NkDrawVertexLayoutElement.nformat(address(), value); return this; }
-        /** Sets the specified value to the {@code offset} field. */
+        /** Sets the specified value to the {@link NkDrawVertexLayoutElement#offset} field. */
         public NkDrawVertexLayoutElement.Buffer offset(@NativeType("nk_size") long value) { NkDrawVertexLayoutElement.noffset(address(), value); return this; }
 
     }

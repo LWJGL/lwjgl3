@@ -85,32 +85,32 @@ public class LZ4StreamInternal extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link IntBuffer} view of the {@code hashTable} field. */
+    /** @return a {@link IntBuffer} view of the {@code hashTable} field. */
     @NativeType("uint32_t[LZ4_HASH_SIZE_U32]")
     public IntBuffer hashTable() { return nhashTable(address()); }
-    /** Returns the value at the specified index of the {@code hashTable} field. */
+    /** @return the value at the specified index of the {@code hashTable} field. */
     @NativeType("uint32_t")
     public int hashTable(int index) { return nhashTable(address(), index); }
-    /** Returns the value of the {@code currentOffset} field. */
+    /** @return the value of the {@code currentOffset} field. */
     @NativeType("uint32_t")
     public int currentOffset() { return ncurrentOffset(address()); }
-    /** Returns the value of the {@code dirty} field. */
+    /** @return the value of the {@code dirty} field. */
     @NativeType("uint16_t")
     public short dirty() { return ndirty(address()); }
-    /** Returns the value of the {@code tableType} field. */
+    /** @return the value of the {@code tableType} field. */
     @NativeType("uint16_t")
     public short tableType() { return ntableType(address()); }
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code dictionary} field.
+     * @return a {@link ByteBuffer} view of the data pointed to by the {@code dictionary} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
     @NativeType("uint8_t const *")
     public ByteBuffer dictionary(int capacity) { return ndictionary(address(), capacity); }
-    /** Returns a {@link LZ4StreamInternal} view of the struct pointed to by the {@code dictCtx} field. */
+    /** @return a {@link LZ4StreamInternal} view of the struct pointed to by the {@code dictCtx} field. */
     @NativeType("LZ4_stream_t_internal * const")
     public LZ4StreamInternal dictCtx() { return ndictCtx(address()); }
-    /** Returns the value of the {@code dictSize} field. */
+    /** @return the value of the {@code dictSize} field. */
     @NativeType("uint32_t")
     public int dictSize() { return ndictSize(address()); }
 
@@ -202,32 +202,32 @@ public class LZ4StreamInternal extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link IntBuffer} view of the {@code hashTable} field. */
+        /** @return a {@link IntBuffer} view of the {@code hashTable} field. */
         @NativeType("uint32_t[LZ4_HASH_SIZE_U32]")
         public IntBuffer hashTable() { return LZ4StreamInternal.nhashTable(address()); }
-        /** Returns the value at the specified index of the {@code hashTable} field. */
+        /** @return the value at the specified index of the {@code hashTable} field. */
         @NativeType("uint32_t")
         public int hashTable(int index) { return LZ4StreamInternal.nhashTable(address(), index); }
-        /** Returns the value of the {@code currentOffset} field. */
+        /** @return the value of the {@code currentOffset} field. */
         @NativeType("uint32_t")
         public int currentOffset() { return LZ4StreamInternal.ncurrentOffset(address()); }
-        /** Returns the value of the {@code dirty} field. */
+        /** @return the value of the {@code dirty} field. */
         @NativeType("uint16_t")
         public short dirty() { return LZ4StreamInternal.ndirty(address()); }
-        /** Returns the value of the {@code tableType} field. */
+        /** @return the value of the {@code tableType} field. */
         @NativeType("uint16_t")
         public short tableType() { return LZ4StreamInternal.ntableType(address()); }
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code dictionary} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@code dictionary} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("uint8_t const *")
         public ByteBuffer dictionary(int capacity) { return LZ4StreamInternal.ndictionary(address(), capacity); }
-        /** Returns a {@link LZ4StreamInternal} view of the struct pointed to by the {@code dictCtx} field. */
+        /** @return a {@link LZ4StreamInternal} view of the struct pointed to by the {@code dictCtx} field. */
         @NativeType("LZ4_stream_t_internal * const")
         public LZ4StreamInternal dictCtx() { return LZ4StreamInternal.ndictCtx(address()); }
-        /** Returns the value of the {@code dictSize} field. */
+        /** @return the value of the {@code dictSize} field. */
         @NativeType("uint32_t")
         public int dictSize() { return LZ4StreamInternal.ndictSize(address()); }
 

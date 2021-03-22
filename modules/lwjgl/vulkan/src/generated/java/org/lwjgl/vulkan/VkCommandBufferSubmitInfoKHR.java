@@ -38,23 +38,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkSubmitInfo2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code commandBuffer} &ndash; a {@code VkCommandBuffer} to be submitted for execution.</li>
- * <li>{@code deviceMask} &ndash; a bitmask indicating which devices in a device group execute the command buffer. A {@code deviceMask} of 0 is equivalent to setting all bits corresponding to valid devices in the group to 1.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkCommandBufferSubmitInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkCommandBuffer commandBuffer;
- *     uint32_t deviceMask;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkCommandBuffer {@link #commandBuffer};
+ *     uint32_t {@link #deviceMask};
  * }</code></pre>
  */
 public class VkCommandBufferSubmitInfoKHR extends Struct implements NativeResource {
@@ -102,26 +93,26 @@ public class VkCommandBufferSubmitInfoKHR extends Struct implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code commandBuffer} field. */
+    /** a {@code VkCommandBuffer} to be submitted for execution. */
     @NativeType("VkCommandBuffer")
     public long commandBuffer() { return ncommandBuffer(address()); }
-    /** Returns the value of the {@code deviceMask} field. */
+    /** a bitmask indicating which devices in a device group execute the command buffer. A {@code deviceMask} of 0 is equivalent to setting all bits corresponding to valid devices in the group to 1. */
     @NativeType("uint32_t")
     public int deviceMask() { return ndeviceMask(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkCommandBufferSubmitInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkCommandBufferSubmitInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code commandBuffer} field. */
+    /** Sets the specified value to the {@link #commandBuffer} field. */
     public VkCommandBufferSubmitInfoKHR commandBuffer(VkCommandBuffer value) { ncommandBuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code deviceMask} field. */
+    /** Sets the specified value to the {@link #deviceMask} field. */
     public VkCommandBufferSubmitInfoKHR deviceMask(@NativeType("uint32_t") int value) { ndeviceMask(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -371,26 +362,26 @@ public class VkCommandBufferSubmitInfoKHR extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkCommandBufferSubmitInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCommandBufferSubmitInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkCommandBufferSubmitInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCommandBufferSubmitInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code commandBuffer} field. */
+        /** @return the value of the {@link VkCommandBufferSubmitInfoKHR#commandBuffer} field. */
         @NativeType("VkCommandBuffer")
         public long commandBuffer() { return VkCommandBufferSubmitInfoKHR.ncommandBuffer(address()); }
-        /** Returns the value of the {@code deviceMask} field. */
+        /** @return the value of the {@link VkCommandBufferSubmitInfoKHR#deviceMask} field. */
         @NativeType("uint32_t")
         public int deviceMask() { return VkCommandBufferSubmitInfoKHR.ndeviceMask(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkCommandBufferSubmitInfoKHR#sType} field. */
         public VkCommandBufferSubmitInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandBufferSubmitInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkCommandBufferSubmitInfoKHR#pNext} field. */
         public VkCommandBufferSubmitInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferSubmitInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code commandBuffer} field. */
+        /** Sets the specified value to the {@link VkCommandBufferSubmitInfoKHR#commandBuffer} field. */
         public VkCommandBufferSubmitInfoKHR.Buffer commandBuffer(VkCommandBuffer value) { VkCommandBufferSubmitInfoKHR.ncommandBuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code deviceMask} field. */
+        /** Sets the specified value to the {@link VkCommandBufferSubmitInfoKHR#deviceMask} field. */
         public VkCommandBufferSubmitInfoKHR.Buffer deviceMask(@NativeType("uint32_t") int value) { VkCommandBufferSubmitInfoKHR.ndeviceMask(address(), value); return this; }
 
     }

@@ -86,28 +86,28 @@ class NkPool extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkAllocator} view of the {@code alloc} field. */
+    /** @return a {@link NkAllocator} view of the {@code alloc} field. */
     @NativeType("struct nk_allocator")
     public NkAllocator alloc() { return nalloc(address()); }
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("enum nk_allocation_type")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code page_count} field. */
+    /** @return the value of the {@code page_count} field. */
     @NativeType("unsigned int")
     public int page_count() { return npage_count(address()); }
-    /** Returns the value of the {@code pages} field. */
+    /** @return the value of the {@code pages} field. */
     @NativeType("struct nk_page *")
     public long pages() { return npages(address()); }
-    /** Returns the value of the {@code freelist} field. */
+    /** @return the value of the {@code freelist} field. */
     @NativeType("struct nk_page_element *")
     public long freelist() { return nfreelist(address()); }
-    /** Returns the value of the {@code capacity} field. */
+    /** @return the value of the {@code capacity} field. */
     @NativeType("unsigned")
     public int capacity$() { return ncapacity$(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** @return the value of the {@code size} field. */
     @NativeType("nk_size")
     public long size() { return nsize(address()); }
-    /** Returns the value of the {@code cap} field. */
+    /** @return the value of the {@code cap} field. */
     @NativeType("nk_size")
     public long cap() { return ncap(address()); }
 
@@ -197,28 +197,28 @@ class NkPool extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkAllocator} view of the {@code alloc} field. */
+        /** @return a {@link NkAllocator} view of the {@code alloc} field. */
         @NativeType("struct nk_allocator")
         public NkAllocator alloc() { return NkPool.nalloc(address()); }
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("enum nk_allocation_type")
         public int type() { return NkPool.ntype(address()); }
-        /** Returns the value of the {@code page_count} field. */
+        /** @return the value of the {@code page_count} field. */
         @NativeType("unsigned int")
         public int page_count() { return NkPool.npage_count(address()); }
-        /** Returns the value of the {@code pages} field. */
+        /** @return the value of the {@code pages} field. */
         @NativeType("struct nk_page *")
         public long pages() { return NkPool.npages(address()); }
-        /** Returns the value of the {@code freelist} field. */
+        /** @return the value of the {@code freelist} field. */
         @NativeType("struct nk_page_element *")
         public long freelist() { return NkPool.nfreelist(address()); }
-        /** Returns the value of the {@code capacity} field. */
+        /** @return the value of the {@code capacity} field. */
         @NativeType("unsigned")
         public int capacity$() { return NkPool.ncapacity$(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("nk_size")
         public long size() { return NkPool.nsize(address()); }
-        /** Returns the value of the {@code cap} field. */
+        /** @return the value of the {@code cap} field. */
         @NativeType("nk_size")
         public long cap() { return NkPool.ncap(address()); }
 

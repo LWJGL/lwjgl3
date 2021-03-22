@@ -39,21 +39,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkImageFormatProperties}, {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2}, {@link KHRGetPhysicalDeviceProperties2#vkGetPhysicalDeviceImageFormatProperties2KHR GetPhysicalDeviceImageFormatProperties2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of {@link VkImageFormatProperties2} is used to allow the specification of additional capabilities to be returned from {@code vkGetPhysicalDeviceImageFormatProperties2}.</li>
- * <li>{@code imageFormatProperties} &ndash; a {@link VkImageFormatProperties} structure in which capabilities are returned.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImageFormatProperties2 {
- *     VkStructureType sType;
- *     void * pNext;
- *     {@link VkImageFormatProperties VkImageFormatProperties} imageFormatProperties;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     {@link VkImageFormatProperties VkImageFormatProperties} {@link #imageFormatProperties};
  * }</code></pre>
  */
 public class VkImageFormatProperties2 extends Struct implements NativeResource {
@@ -98,18 +90,18 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of {@link VkImageFormatProperties2} is used to allow the specification of additional capabilities to be returned from {@code vkGetPhysicalDeviceImageFormatProperties2}. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkImageFormatProperties} view of the {@code imageFormatProperties} field. */
+    /** a {@link VkImageFormatProperties} structure in which capabilities are returned. */
     public VkImageFormatProperties imageFormatProperties() { return nimageFormatProperties(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkImageFormatProperties2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkImageFormatProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,18 +320,18 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkImageFormatProperties2#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageFormatProperties2.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkImageFormatProperties2#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkImageFormatProperties2.npNext(address()); }
-        /** Returns a {@link VkImageFormatProperties} view of the {@code imageFormatProperties} field. */
+        /** @return a {@link VkImageFormatProperties} view of the {@link VkImageFormatProperties2#imageFormatProperties} field. */
         public VkImageFormatProperties imageFormatProperties() { return VkImageFormatProperties2.nimageFormatProperties(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkImageFormatProperties2#sType} field. */
         public VkImageFormatProperties2.Buffer sType(@NativeType("VkStructureType") int value) { VkImageFormatProperties2.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkImageFormatProperties2#pNext} field. */
         public VkImageFormatProperties2.Buffer pNext(@NativeType("void *") long value) { VkImageFormatProperties2.npNext(address(), value); return this; }
 
     }

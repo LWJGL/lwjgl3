@@ -52,29 +52,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkAccelerationStructureCreateInfoNV}, {@link VkGeometryNV}, {@link NVRayTracing#vkCmdBuildAccelerationStructureNV CmdBuildAccelerationStructureNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code type} &ndash; a {@code VkAccelerationStructureTypeNV} value specifying the type of acceleration structure that will be created.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkBuildAccelerationStructureFlagBitsNV} specifying additional parameters of the acceleration structure.</li>
- * <li>{@code instanceCount} &ndash; specifies the number of instances that will be in the new acceleration structure.</li>
- * <li>{@code geometryCount} &ndash; specifies the number of geometries that will be in the new acceleration structure.</li>
- * <li>{@code pGeometries} &ndash; a pointer to an array of {@code geometryCount} {@link VkGeometryNV} structures containing the scene data being passed into the acceleration structure.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkAccelerationStructureInfoNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkAccelerationStructureTypeKHR type;
- *     VkBuildAccelerationStructureFlagsNV flags;
- *     uint32_t instanceCount;
- *     uint32_t geometryCount;
- *     {@link VkGeometryNV VkGeometryNV} const * pGeometries;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkAccelerationStructureTypeKHR {@link #type};
+ *     VkBuildAccelerationStructureFlagsNV {@link #flags};
+ *     uint32_t {@link #instanceCount};
+ *     uint32_t {@link #geometryCount};
+ *     {@link VkGeometryNV VkGeometryNV} const * {@link #pGeometries};
  * }</code></pre>
  */
 public class VkAccelerationStructureInfoNV extends Struct implements NativeResource {
@@ -131,40 +119,40 @@ public class VkAccelerationStructureInfoNV extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code type} field. */
+    /** a {@code VkAccelerationStructureTypeNV} value specifying the type of acceleration structure that will be created. */
     @NativeType("VkAccelerationStructureTypeKHR")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkBuildAccelerationStructureFlagBitsNV} specifying additional parameters of the acceleration structure. */
     @NativeType("VkBuildAccelerationStructureFlagsNV")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code instanceCount} field. */
+    /** specifies the number of instances that will be in the new acceleration structure. */
     @NativeType("uint32_t")
     public int instanceCount() { return ninstanceCount(address()); }
-    /** Returns the value of the {@code geometryCount} field. */
+    /** specifies the number of geometries that will be in the new acceleration structure. */
     @NativeType("uint32_t")
     public int geometryCount() { return ngeometryCount(address()); }
-    /** Returns a {@link VkGeometryNV.Buffer} view of the struct array pointed to by the {@code pGeometries} field. */
+    /** a pointer to an array of {@code geometryCount} {@link VkGeometryNV} structures containing the scene data being passed into the acceleration structure. */
     @Nullable
     @NativeType("VkGeometryNV const *")
     public VkGeometryNV.Buffer pGeometries() { return npGeometries(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public VkAccelerationStructureInfoNV type(@NativeType("VkAccelerationStructureTypeKHR") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkAccelerationStructureInfoNV flags(@NativeType("VkBuildAccelerationStructureFlagsNV") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code instanceCount} field. */
+    /** Sets the specified value to the {@link #instanceCount} field. */
     public VkAccelerationStructureInfoNV instanceCount(@NativeType("uint32_t") int value) { ninstanceCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkGeometryNV.Buffer} to the {@code pGeometries} field. */
+    /** Sets the address of the specified {@link VkGeometryNV.Buffer} to the {@link #pGeometries} field. */
     public VkAccelerationStructureInfoNV pGeometries(@Nullable @NativeType("VkGeometryNV const *") VkGeometryNV.Buffer value) { npGeometries(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -432,40 +420,40 @@ public class VkAccelerationStructureInfoNV extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkAccelerationStructureInfoNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAccelerationStructureInfoNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkAccelerationStructureInfoNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAccelerationStructureInfoNV.npNext(address()); }
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@link VkAccelerationStructureInfoNV#type} field. */
         @NativeType("VkAccelerationStructureTypeKHR")
         public int type() { return VkAccelerationStructureInfoNV.ntype(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkAccelerationStructureInfoNV#flags} field. */
         @NativeType("VkBuildAccelerationStructureFlagsNV")
         public int flags() { return VkAccelerationStructureInfoNV.nflags(address()); }
-        /** Returns the value of the {@code instanceCount} field. */
+        /** @return the value of the {@link VkAccelerationStructureInfoNV#instanceCount} field. */
         @NativeType("uint32_t")
         public int instanceCount() { return VkAccelerationStructureInfoNV.ninstanceCount(address()); }
-        /** Returns the value of the {@code geometryCount} field. */
+        /** @return the value of the {@link VkAccelerationStructureInfoNV#geometryCount} field. */
         @NativeType("uint32_t")
         public int geometryCount() { return VkAccelerationStructureInfoNV.ngeometryCount(address()); }
-        /** Returns a {@link VkGeometryNV.Buffer} view of the struct array pointed to by the {@code pGeometries} field. */
+        /** @return a {@link VkGeometryNV.Buffer} view of the struct array pointed to by the {@link VkAccelerationStructureInfoNV#pGeometries} field. */
         @Nullable
         @NativeType("VkGeometryNV const *")
         public VkGeometryNV.Buffer pGeometries() { return VkAccelerationStructureInfoNV.npGeometries(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureInfoNV#sType} field. */
         public VkAccelerationStructureInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureInfoNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureInfoNV#pNext} field. */
         public VkAccelerationStructureInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureInfoNV#type} field. */
         public VkAccelerationStructureInfoNV.Buffer type(@NativeType("VkAccelerationStructureTypeKHR") int value) { VkAccelerationStructureInfoNV.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureInfoNV#flags} field. */
         public VkAccelerationStructureInfoNV.Buffer flags(@NativeType("VkBuildAccelerationStructureFlagsNV") int value) { VkAccelerationStructureInfoNV.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code instanceCount} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureInfoNV#instanceCount} field. */
         public VkAccelerationStructureInfoNV.Buffer instanceCount(@NativeType("uint32_t") int value) { VkAccelerationStructureInfoNV.ninstanceCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkGeometryNV.Buffer} to the {@code pGeometries} field. */
+        /** Sets the address of the specified {@link VkGeometryNV.Buffer} to the {@link VkAccelerationStructureInfoNV#pGeometries} field. */
         public VkAccelerationStructureInfoNV.Buffer pGeometries(@Nullable @NativeType("VkGeometryNV const *") VkGeometryNV.Buffer value) { VkAccelerationStructureInfoNV.npGeometries(address(), value); return this; }
 
     }

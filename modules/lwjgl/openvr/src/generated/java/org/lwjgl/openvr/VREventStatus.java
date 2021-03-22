@@ -60,7 +60,7 @@ public class VREventStatus extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code statusState} field. */
+    /** @return the value of the {@code statusState} field. */
     @NativeType("uint32_t")
     public int statusState() { return nstatusState(address()); }
 
@@ -136,7 +136,7 @@ public class VREventStatus extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code statusState} field. */
+        /** @return the value of the {@code statusState} field. */
         @NativeType("uint32_t")
         public int statusState() { return VREventStatus.nstatusState(address()); }
 

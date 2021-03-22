@@ -41,21 +41,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code opaqueCaptureAddress} &ndash; the opaque capture address requested for the buffer.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBufferOpaqueCaptureAddressCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint64_t opaqueCaptureAddress;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint64_t {@link #opaqueCaptureAddress};
  * }</code></pre>
  */
 public class VkBufferOpaqueCaptureAddressCreateInfo extends Struct implements NativeResource {
@@ -100,21 +92,21 @@ public class VkBufferOpaqueCaptureAddressCreateInfo extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code opaqueCaptureAddress} field. */
+    /** the opaque capture address requested for the buffer. */
     @NativeType("uint64_t")
     public long opaqueCaptureAddress() { return nopaqueCaptureAddress(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkBufferOpaqueCaptureAddressCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferOpaqueCaptureAddressCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code opaqueCaptureAddress} field. */
+    /** Sets the specified value to the {@link #opaqueCaptureAddress} field. */
     public VkBufferOpaqueCaptureAddressCreateInfo opaqueCaptureAddress(@NativeType("uint64_t") long value) { nopaqueCaptureAddress(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -337,21 +329,21 @@ public class VkBufferOpaqueCaptureAddressCreateInfo extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkBufferOpaqueCaptureAddressCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBufferOpaqueCaptureAddressCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkBufferOpaqueCaptureAddressCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBufferOpaqueCaptureAddressCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code opaqueCaptureAddress} field. */
+        /** @return the value of the {@link VkBufferOpaqueCaptureAddressCreateInfo#opaqueCaptureAddress} field. */
         @NativeType("uint64_t")
         public long opaqueCaptureAddress() { return VkBufferOpaqueCaptureAddressCreateInfo.nopaqueCaptureAddress(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkBufferOpaqueCaptureAddressCreateInfo#sType} field. */
         public VkBufferOpaqueCaptureAddressCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferOpaqueCaptureAddressCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkBufferOpaqueCaptureAddressCreateInfo#pNext} field. */
         public VkBufferOpaqueCaptureAddressCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkBufferOpaqueCaptureAddressCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code opaqueCaptureAddress} field. */
+        /** Sets the specified value to the {@link VkBufferOpaqueCaptureAddressCreateInfo#opaqueCaptureAddress} field. */
         public VkBufferOpaqueCaptureAddressCreateInfo.Buffer opaqueCaptureAddress(@NativeType("uint64_t") long value) { VkBufferOpaqueCaptureAddressCreateInfo.nopaqueCaptureAddress(address(), value); return this; }
 
     }

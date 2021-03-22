@@ -31,27 +31,16 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <p>{@link VkPipelineExecutableStatisticValueKHR}, {@link KHRPipelineExecutableProperties#vkGetPipelineExecutableStatisticsKHR GetPipelineExecutableStatisticsKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code name[VK_MAX_DESCRIPTION_SIZE]} &ndash; an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this statistic.</li>
- * <li>{@code description[VK_MAX_DESCRIPTION_SIZE]} &ndash; an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a human readable description for this statistic.</li>
- * <li>{@code format} &ndash; a {@code VkPipelineExecutableStatisticFormatKHR} value specifying the format of the data found in {@code value}.</li>
- * <li>{@code value} &ndash; the value of this statistic.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineExecutableStatisticKHR {
- *     VkStructureType sType;
- *     void * pNext;
- *     char name[VK_MAX_DESCRIPTION_SIZE];
- *     char description[VK_MAX_DESCRIPTION_SIZE];
- *     VkPipelineExecutableStatisticFormatKHR format;
- *     {@link VkPipelineExecutableStatisticValueKHR VkPipelineExecutableStatisticValueKHR} value;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     char {@link #name}[VK_MAX_DESCRIPTION_SIZE];
+ *     char {@link #description}[VK_MAX_DESCRIPTION_SIZE];
+ *     VkPipelineExecutableStatisticFormatKHR {@link #format};
+ *     {@link VkPipelineExecutableStatisticValueKHR VkPipelineExecutableStatisticValueKHR} {@link #value};
  * }</code></pre>
  */
 public class VkPipelineExecutableStatisticKHR extends Struct implements NativeResource {
@@ -105,33 +94,33 @@ public class VkPipelineExecutableStatisticKHR extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this statistic. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer name() { return nname(address()); }
-    /** Decodes the null-terminated string stored in the {@code name} field. */
+    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this statistic. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String nameString() { return nnameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code description} field. */
+    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a human readable description for this statistic. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer description() { return ndescription(address()); }
-    /** Decodes the null-terminated string stored in the {@code description} field. */
+    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a human readable description for this statistic. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
-    /** Returns the value of the {@code format} field. */
+    /** a {@code VkPipelineExecutableStatisticFormatKHR} value specifying the format of the data found in {@code value}. */
     @NativeType("VkPipelineExecutableStatisticFormatKHR")
     public int format() { return nformat(address()); }
-    /** Returns a {@link VkPipelineExecutableStatisticValueKHR} view of the {@code value} field. */
+    /** the value of this statistic. */
     public VkPipelineExecutableStatisticValueKHR value() { return nvalue(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineExecutableStatisticKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineExecutableStatisticKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -360,33 +349,33 @@ public class VkPipelineExecutableStatisticKHR extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineExecutableStatisticKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineExecutableStatisticKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineExecutableStatisticKHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPipelineExecutableStatisticKHR.npNext(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+        /** @return a {@link ByteBuffer} view of the {@link VkPipelineExecutableStatisticKHR#name} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer name() { return VkPipelineExecutableStatisticKHR.nname(address()); }
-        /** Decodes the null-terminated string stored in the {@code name} field. */
+        /** @return the null-terminated string stored in the {@link VkPipelineExecutableStatisticKHR#name} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String nameString() { return VkPipelineExecutableStatisticKHR.nnameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code description} field. */
+        /** @return a {@link ByteBuffer} view of the {@link VkPipelineExecutableStatisticKHR#description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer description() { return VkPipelineExecutableStatisticKHR.ndescription(address()); }
-        /** Decodes the null-terminated string stored in the {@code description} field. */
+        /** @return the null-terminated string stored in the {@link VkPipelineExecutableStatisticKHR#description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String descriptionString() { return VkPipelineExecutableStatisticKHR.ndescriptionString(address()); }
-        /** Returns the value of the {@code format} field. */
+        /** @return the value of the {@link VkPipelineExecutableStatisticKHR#format} field. */
         @NativeType("VkPipelineExecutableStatisticFormatKHR")
         public int format() { return VkPipelineExecutableStatisticKHR.nformat(address()); }
-        /** Returns a {@link VkPipelineExecutableStatisticValueKHR} view of the {@code value} field. */
+        /** @return a {@link VkPipelineExecutableStatisticValueKHR} view of the {@link VkPipelineExecutableStatisticKHR#value} field. */
         public VkPipelineExecutableStatisticValueKHR value() { return VkPipelineExecutableStatisticKHR.nvalue(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineExecutableStatisticKHR#sType} field. */
         public VkPipelineExecutableStatisticKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineExecutableStatisticKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineExecutableStatisticKHR#pNext} field. */
         public VkPipelineExecutableStatisticKHR.Buffer pNext(@NativeType("void *") long value) { VkPipelineExecutableStatisticKHR.npNext(address(), value); return this; }
 
     }

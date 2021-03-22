@@ -18,25 +18,15 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Platform data.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code ndt} &ndash; native display type (*nix specific)</li>
- * <li>{@code nwh} &ndash; native window handle. If {@code NULL} bgfx will create headless context/device if renderer API supports it.</li>
- * <li>{@code context} &ndash; GL context, or D3D device. If {@code NULL}, bgfx will create context/device.</li>
- * <li>{@code backBuffer} &ndash; GL back-buffer, or D3D render target view. If {@code NULL} bgfx will create back-buffer color surface.</li>
- * <li>{@code backBufferDS} &ndash; backbuffer depth/stencil. If {@code NULL} bgfx will create back-buffer depth/stencil surface.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct bgfx_platform_data_t {
- *     void * ndt;
- *     void * nwh;
- *     void * context;
- *     void * backBuffer;
- *     void * backBufferDS;
+ *     void * {@link #ndt};
+ *     void * {@link #nwh};
+ *     void * {@link #context};
+ *     void * {@link #backBuffer};
+ *     void * {@link #backBufferDS};
  * }</code></pre>
  */
 @NativeType("struct bgfx_platform_data_t")
@@ -88,31 +78,31 @@ public class BGFXPlatformData extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code ndt} field. */
+    /** native display type (*nix specific) */
     @NativeType("void *")
     public long ndt() { return nndt(address()); }
-    /** Returns the value of the {@code nwh} field. */
+    /** native window handle. If {@code NULL} bgfx will create headless context/device if renderer API supports it. */
     @NativeType("void *")
     public long nwh() { return nnwh(address()); }
-    /** Returns the value of the {@code context} field. */
+    /** GL context, or D3D device. If {@code NULL}, bgfx will create context/device. */
     @NativeType("void *")
     public long context() { return ncontext(address()); }
-    /** Returns the value of the {@code backBuffer} field. */
+    /** GL back-buffer, or D3D render target view. If {@code NULL} bgfx will create back-buffer color surface. */
     @NativeType("void *")
     public long backBuffer() { return nbackBuffer(address()); }
-    /** Returns the value of the {@code backBufferDS} field. */
+    /** backbuffer depth/stencil. If {@code NULL} bgfx will create back-buffer depth/stencil surface. */
     @NativeType("void *")
     public long backBufferDS() { return nbackBufferDS(address()); }
 
-    /** Sets the specified value to the {@code ndt} field. */
+    /** Sets the specified value to the {@link #ndt} field. */
     public BGFXPlatformData ndt(@NativeType("void *") long value) { nndt(address(), value); return this; }
-    /** Sets the specified value to the {@code nwh} field. */
+    /** Sets the specified value to the {@link #nwh} field. */
     public BGFXPlatformData nwh(@NativeType("void *") long value) { nnwh(address(), value); return this; }
-    /** Sets the specified value to the {@code context} field. */
+    /** Sets the specified value to the {@link #context} field. */
     public BGFXPlatformData context(@NativeType("void *") long value) { ncontext(address(), value); return this; }
-    /** Sets the specified value to the {@code backBuffer} field. */
+    /** Sets the specified value to the {@link #backBuffer} field. */
     public BGFXPlatformData backBuffer(@NativeType("void *") long value) { nbackBuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code backBufferDS} field. */
+    /** Sets the specified value to the {@link #backBufferDS} field. */
     public BGFXPlatformData backBufferDS(@NativeType("void *") long value) { nbackBufferDS(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */

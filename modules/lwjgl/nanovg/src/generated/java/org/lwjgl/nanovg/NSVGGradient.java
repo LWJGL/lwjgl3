@@ -79,24 +79,24 @@ public class NSVGGradient extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link FloatBuffer} view of the {@code xform} field. */
+    /** @return a {@link FloatBuffer} view of the {@code xform} field. */
     @NativeType("float[6]")
     public FloatBuffer xform() { return nxform(address()); }
-    /** Returns the value at the specified index of the {@code xform} field. */
+    /** @return the value at the specified index of the {@code xform} field. */
     public float xform(int index) { return nxform(address(), index); }
-    /** Returns the value of the {@code spread} field. */
+    /** @return the value of the {@code spread} field. */
     @NativeType("char")
     public byte spread() { return nspread(address()); }
-    /** Returns the value of the {@code fx} field. */
+    /** @return the value of the {@code fx} field. */
     public float fx() { return nfx(address()); }
-    /** Returns the value of the {@code fy} field. */
+    /** @return the value of the {@code fy} field. */
     public float fy() { return nfy(address()); }
-    /** Returns the value of the {@code nstops} field. */
+    /** @return the value of the {@code nstops} field. */
     public int nstops() { return nnstops(address()); }
-    /** Returns a {@link NSVGGradientStop}.Buffer view of the {@code pstops} field. */
+    /** @return a {@link NSVGGradientStop}.Buffer view of the {@code pstops} field. */
     @NativeType("NSVGgradientStop[1]")
     public NSVGGradientStop.Buffer pstops() { return npstops(address()); }
-    /** Returns a {@link NSVGGradientStop} view of the struct at the specified index of the {@code pstops} field. */
+    /** @return a {@link NSVGGradientStop} view of the struct at the specified index of the {@code pstops} field. */
     @NativeType("NSVGgradientStop")
     public NSVGGradientStop pstops(int index) { return npstops(address(), index); }
 
@@ -190,24 +190,24 @@ public class NSVGGradient extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link FloatBuffer} view of the {@code xform} field. */
+        /** @return a {@link FloatBuffer} view of the {@code xform} field. */
         @NativeType("float[6]")
         public FloatBuffer xform() { return NSVGGradient.nxform(address()); }
-        /** Returns the value at the specified index of the {@code xform} field. */
+        /** @return the value at the specified index of the {@code xform} field. */
         public float xform(int index) { return NSVGGradient.nxform(address(), index); }
-        /** Returns the value of the {@code spread} field. */
+        /** @return the value of the {@code spread} field. */
         @NativeType("char")
         public byte spread() { return NSVGGradient.nspread(address()); }
-        /** Returns the value of the {@code fx} field. */
+        /** @return the value of the {@code fx} field. */
         public float fx() { return NSVGGradient.nfx(address()); }
-        /** Returns the value of the {@code fy} field. */
+        /** @return the value of the {@code fy} field. */
         public float fy() { return NSVGGradient.nfy(address()); }
-        /** Returns the value of the {@code nstops} field. */
+        /** @return the value of the {@code nstops} field. */
         public int nstops() { return NSVGGradient.nnstops(address()); }
-        /** Returns a {@link NSVGGradientStop}.Buffer view of the {@code pstops} field. */
+        /** @return a {@link NSVGGradientStop}.Buffer view of the {@code pstops} field. */
         @NativeType("NSVGgradientStop[1]")
         public NSVGGradientStop.Buffer pstops() { return NSVGGradient.npstops(address()); }
-        /** Returns a {@link NSVGGradientStop} view of the struct at the specified index of the {@code pstops} field. */
+        /** @return a {@link NSVGGradientStop} view of the struct at the specified index of the {@code pstops} field. */
         @NativeType("NSVGgradientStop")
         public NSVGGradientStop pstops(int index) { return NSVGGradient.npstops(address(), index); }
 

@@ -40,21 +40,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK11#vkGetImageMemoryRequirements2 GetImageMemoryRequirements2}, {@link KHRGetMemoryRequirements2#vkGetImageMemoryRequirements2KHR GetImageMemoryRequirements2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code image} &ndash; the image to query.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImageMemoryRequirementsInfo2 {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkImage image;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkImage {@link #image};
  * }</code></pre>
  */
 public class VkImageMemoryRequirementsInfo2 extends Struct implements NativeResource {
@@ -99,21 +91,21 @@ public class VkImageMemoryRequirementsInfo2 extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code image} field. */
+    /** the image to query. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkImageMemoryRequirementsInfo2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkImageMemoryRequirementsInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code image} field. */
+    /** Sets the specified value to the {@link #image} field. */
     public VkImageMemoryRequirementsInfo2 image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,21 +328,21 @@ public class VkImageMemoryRequirementsInfo2 extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkImageMemoryRequirementsInfo2#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageMemoryRequirementsInfo2.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkImageMemoryRequirementsInfo2#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageMemoryRequirementsInfo2.npNext(address()); }
-        /** Returns the value of the {@code image} field. */
+        /** @return the value of the {@link VkImageMemoryRequirementsInfo2#image} field. */
         @NativeType("VkImage")
         public long image() { return VkImageMemoryRequirementsInfo2.nimage(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkImageMemoryRequirementsInfo2#sType} field. */
         public VkImageMemoryRequirementsInfo2.Buffer sType(@NativeType("VkStructureType") int value) { VkImageMemoryRequirementsInfo2.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkImageMemoryRequirementsInfo2#pNext} field. */
         public VkImageMemoryRequirementsInfo2.Buffer pNext(@NativeType("void const *") long value) { VkImageMemoryRequirementsInfo2.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code image} field. */
+        /** Sets the specified value to the {@link VkImageMemoryRequirementsInfo2#image} field. */
         public VkImageMemoryRequirementsInfo2.Buffer image(@NativeType("VkImage") long value) { VkImageMemoryRequirementsInfo2.nimage(address(), value); return this; }
 
     }

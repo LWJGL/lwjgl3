@@ -65,13 +65,13 @@ public class VmaDefragmentationPassMoveInfo extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code allocation} field. */
+    /** @return the value of the {@code allocation} field. */
     @NativeType("VmaAllocation")
     public long allocation() { return nallocation(address()); }
-    /** Returns the value of the {@code memory} field. */
+    /** @return the value of the {@code memory} field. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
 
@@ -151,13 +151,13 @@ public class VmaDefragmentationPassMoveInfo extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code allocation} field. */
+        /** @return the value of the {@code allocation} field. */
         @NativeType("VmaAllocation")
         public long allocation() { return VmaDefragmentationPassMoveInfo.nallocation(address()); }
-        /** Returns the value of the {@code memory} field. */
+        /** @return the value of the {@code memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VmaDefragmentationPassMoveInfo.nmemory(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VmaDefragmentationPassMoveInfo.noffset(address()); }
 

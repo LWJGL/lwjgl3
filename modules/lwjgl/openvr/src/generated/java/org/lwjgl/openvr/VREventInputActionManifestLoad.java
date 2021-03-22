@@ -70,16 +70,16 @@ public class VREventInputActionManifestLoad extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code pathAppKey} field. */
+    /** @return the value of the {@code pathAppKey} field. */
     @NativeType("uint64_t")
     public long pathAppKey() { return npathAppKey(address()); }
-    /** Returns the value of the {@code pathMessage} field. */
+    /** @return the value of the {@code pathMessage} field. */
     @NativeType("uint64_t")
     public long pathMessage() { return npathMessage(address()); }
-    /** Returns the value of the {@code pathMessageParam} field. */
+    /** @return the value of the {@code pathMessageParam} field. */
     @NativeType("uint64_t")
     public long pathMessageParam() { return npathMessageParam(address()); }
-    /** Returns the value of the {@code pathManifestPath} field. */
+    /** @return the value of the {@code pathManifestPath} field. */
     @NativeType("uint64_t")
     public long pathManifestPath() { return npathManifestPath(address()); }
 
@@ -161,16 +161,16 @@ public class VREventInputActionManifestLoad extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code pathAppKey} field. */
+        /** @return the value of the {@code pathAppKey} field. */
         @NativeType("uint64_t")
         public long pathAppKey() { return VREventInputActionManifestLoad.npathAppKey(address()); }
-        /** Returns the value of the {@code pathMessage} field. */
+        /** @return the value of the {@code pathMessage} field. */
         @NativeType("uint64_t")
         public long pathMessage() { return VREventInputActionManifestLoad.npathMessage(address()); }
-        /** Returns the value of the {@code pathMessageParam} field. */
+        /** @return the value of the {@code pathMessageParam} field. */
         @NativeType("uint64_t")
         public long pathMessageParam() { return VREventInputActionManifestLoad.npathMessageParam(address()); }
-        /** Returns the value of the {@code pathManifestPath} field. */
+        /** @return the value of the {@code pathManifestPath} field. */
         @NativeType("uint64_t")
         public long pathManifestPath() { return VREventInputActionManifestLoad.npathManifestPath(address()); }
 

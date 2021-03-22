@@ -63,12 +63,12 @@ class NkConfigStackColor extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code head} field. */
+    /** @return the value of the {@code head} field. */
     public int head() { return nhead(address()); }
-    /** Returns a {@link NkConfigStackColorElement}.Buffer view of the {@code elements} field. */
+    /** @return a {@link NkConfigStackColorElement}.Buffer view of the {@code elements} field. */
     @NativeType("struct nk_config_stack_color_element[32]")
     public NkConfigStackColorElement.Buffer elements() { return nelements(address()); }
-    /** Returns a {@link NkConfigStackColorElement} view of the struct at the specified index of the {@code elements} field. */
+    /** @return a {@link NkConfigStackColorElement} view of the struct at the specified index of the {@code elements} field. */
     @NativeType("struct nk_config_stack_color_element")
     public NkConfigStackColorElement elements(int index) { return nelements(address(), index); }
 
@@ -150,12 +150,12 @@ class NkConfigStackColor extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code head} field. */
+        /** @return the value of the {@code head} field. */
         public int head() { return NkConfigStackColor.nhead(address()); }
-        /** Returns a {@link NkConfigStackColorElement}.Buffer view of the {@code elements} field. */
+        /** @return a {@link NkConfigStackColorElement}.Buffer view of the {@code elements} field. */
         @NativeType("struct nk_config_stack_color_element[32]")
         public NkConfigStackColorElement.Buffer elements() { return NkConfigStackColor.nelements(address()); }
-        /** Returns a {@link NkConfigStackColorElement} view of the struct at the specified index of the {@code elements} field. */
+        /** @return a {@link NkConfigStackColorElement} view of the struct at the specified index of the {@code elements} field. */
         @NativeType("struct nk_config_stack_color_element")
         public NkConfigStackColorElement elements(int index) { return NkConfigStackColor.nelements(address(), index); }
 

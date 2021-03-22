@@ -18,23 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Contains information about a libffi type.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code size} &ndash; set by libffi; you should initialize it to zero.</li>
- * <li>{@code alignment} &ndash; set by libffi; you should initialize it to zero.</li>
- * <li>{@code type} &ndash; for a structure, this should be set to {@link LibFFI#FFI_TYPE_STRUCT TYPE_STRUCT}.</li>
- * <li>{@code elements} &ndash; a null-terminated array of pointers to {@code ffi_type} objects. There is one element per field of the struct.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ffi_type {
- *     size_t size;
- *     unsigned short alignment;
- *     unsigned short type;
- *     ffi_type * elements;
+ *     size_t {@link #size};
+ *     unsigned short {@link #alignment};
+ *     unsigned short {@link #type};
+ *     ffi_type * {@link #elements};
  * }</code></pre>
  */
 @NativeType("struct ffi_type")
@@ -83,31 +74,31 @@ public class FFIType extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code size} field. */
+    /** set by libffi; you should initialize it to zero. */
     @NativeType("size_t")
     public long size() { return nsize(address()); }
-    /** Returns the value of the {@code alignment} field. */
+    /** set by libffi; you should initialize it to zero. */
     @NativeType("unsigned short")
     public short alignment() { return nalignment(address()); }
-    /** Returns the value of the {@code type} field. */
+    /** for a structure, this should be set to {@link LibFFI#FFI_TYPE_STRUCT TYPE_STRUCT}. */
     @NativeType("unsigned short")
     public short type() { return ntype(address()); }
     /**
-     * Returns a {@link PointerBuffer} view of the data pointed to by the {@code elements} field.
-     *
      * @param capacity the number of elements in the returned buffer
+     *
+     * @return a null-terminated array of pointers to {@code ffi_type} objects. There is one element per field of the struct.
      */
     @Nullable
     @NativeType("ffi_type *")
     public PointerBuffer elements(int capacity) { return nelements(address(), capacity); }
 
-    /** Sets the specified value to the {@code size} field. */
+    /** Sets the specified value to the {@link #size} field. */
     public FFIType size(@NativeType("size_t") long value) { nsize(address(), value); return this; }
-    /** Sets the specified value to the {@code alignment} field. */
+    /** Sets the specified value to the {@link #alignment} field. */
     public FFIType alignment(@NativeType("unsigned short") short value) { nalignment(address(), value); return this; }
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public FFIType type(@NativeType("unsigned short") short value) { ntype(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code elements} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #elements} field. */
     public FFIType elements(@Nullable @NativeType("ffi_type *") PointerBuffer value) { nelements(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,17 +327,17 @@ public class FFIType extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link FFIType#size} field. */
         @NativeType("size_t")
         public long size() { return FFIType.nsize(address()); }
-        /** Returns the value of the {@code alignment} field. */
+        /** @return the value of the {@link FFIType#alignment} field. */
         @NativeType("unsigned short")
         public short alignment() { return FFIType.nalignment(address()); }
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@link FFIType#type} field. */
         @NativeType("unsigned short")
         public short type() { return FFIType.ntype(address()); }
         /**
-         * Returns a {@link PointerBuffer} view of the data pointed to by the {@code elements} field.
+         * @return a {@link PointerBuffer} view of the data pointed to by the {@link FFIType#elements} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
@@ -354,13 +345,13 @@ public class FFIType extends Struct implements NativeResource {
         @NativeType("ffi_type *")
         public PointerBuffer elements(int capacity) { return FFIType.nelements(address(), capacity); }
 
-        /** Sets the specified value to the {@code size} field. */
+        /** Sets the specified value to the {@link FFIType#size} field. */
         public FFIType.Buffer size(@NativeType("size_t") long value) { FFIType.nsize(address(), value); return this; }
-        /** Sets the specified value to the {@code alignment} field. */
+        /** Sets the specified value to the {@link FFIType#alignment} field. */
         public FFIType.Buffer alignment(@NativeType("unsigned short") short value) { FFIType.nalignment(address(), value); return this; }
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link FFIType#type} field. */
         public FFIType.Buffer type(@NativeType("unsigned short") short value) { FFIType.ntype(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code elements} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link FFIType#elements} field. */
         public FFIType.Buffer elements(@Nullable @NativeType("ffi_type *") PointerBuffer value) { FFIType.nelements(address(), value); return this; }
 
     }

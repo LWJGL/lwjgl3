@@ -24,23 +24,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTShaderImageAtomicInt64#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code shaderImageInt64Atomics} &ndash; indicates whether shaders <b>can</b> support 64-bit unsigned and signed integer atomic operations on images.</li>
- * <li>{@code sparseImageInt64Atomics} &ndash; indicates whether 64-bit integer atomics <b>can</b> be used on sparse images.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 shaderImageInt64Atomics;
- *     VkBool32 sparseImageInt64Atomics;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #shaderImageInt64Atomics};
+ *     VkBool32 {@link #sparseImageInt64Atomics};
  * }</code></pre>
  */
 public class VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT extends Struct implements NativeResource {
@@ -88,26 +79,26 @@ public class VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT extends Struct im
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code shaderImageInt64Atomics} field. */
+    /** indicates whether shaders <b>can</b> support 64-bit unsigned and signed integer atomic operations on images. */
     @NativeType("VkBool32")
     public boolean shaderImageInt64Atomics() { return nshaderImageInt64Atomics(address()) != 0; }
-    /** Returns the value of the {@code sparseImageInt64Atomics} field. */
+    /** indicates whether 64-bit integer atomics <b>can</b> be used on sparse images. */
     @NativeType("VkBool32")
     public boolean sparseImageInt64Atomics() { return nsparseImageInt64Atomics(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderImageInt64Atomics} field. */
+    /** Sets the specified value to the {@link #shaderImageInt64Atomics} field. */
     public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT shaderImageInt64Atomics(@NativeType("VkBool32") boolean value) { nshaderImageInt64Atomics(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code sparseImageInt64Atomics} field. */
+    /** Sets the specified value to the {@link #sparseImageInt64Atomics} field. */
     public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT sparseImageInt64Atomics(@NativeType("VkBool32") boolean value) { nsparseImageInt64Atomics(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,26 +327,26 @@ public class VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT extends Struct im
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code shaderImageInt64Atomics} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT#shaderImageInt64Atomics} field. */
         @NativeType("VkBool32")
         public boolean shaderImageInt64Atomics() { return VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.nshaderImageInt64Atomics(address()) != 0; }
-        /** Returns the value of the {@code sparseImageInt64Atomics} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT#sparseImageInt64Atomics} field. */
         @NativeType("VkBool32")
         public boolean sparseImageInt64Atomics() { return VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.nsparseImageInt64Atomics(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT#sType} field. */
         public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT#pNext} field. */
         public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderImageInt64Atomics} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT#shaderImageInt64Atomics} field. */
         public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.Buffer shaderImageInt64Atomics(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.nshaderImageInt64Atomics(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code sparseImageInt64Atomics} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT#sparseImageInt64Atomics} field. */
         public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.Buffer sparseImageInt64Atomics(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.nsparseImageInt64Atomics(address(), value ? 1 : 0); return this; }
 
     }

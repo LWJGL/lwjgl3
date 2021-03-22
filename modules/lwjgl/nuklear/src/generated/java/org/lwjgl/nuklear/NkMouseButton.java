@@ -66,13 +66,13 @@ public class NkMouseButton extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code down} field. */
+    /** @return the value of the {@code down} field. */
     @NativeType("nk_bool")
     public boolean down() { return ndown(address()); }
-    /** Returns the value of the {@code clicked} field. */
+    /** @return the value of the {@code clicked} field. */
     @NativeType("unsigned int")
     public int clicked() { return nclicked(address()); }
-    /** Returns a {@link NkVec2} view of the {@code clicked_pos} field. */
+    /** @return a {@link NkVec2} view of the {@code clicked_pos} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 clicked_pos() { return nclicked_pos(address()); }
 
@@ -152,13 +152,13 @@ public class NkMouseButton extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code down} field. */
+        /** @return the value of the {@code down} field. */
         @NativeType("nk_bool")
         public boolean down() { return NkMouseButton.ndown(address()); }
-        /** Returns the value of the {@code clicked} field. */
+        /** @return the value of the {@code clicked} field. */
         @NativeType("unsigned int")
         public int clicked() { return NkMouseButton.nclicked(address()); }
-        /** Returns a {@link NkVec2} view of the {@code clicked_pos} field. */
+        /** @return a {@link NkVec2} view of the {@code clicked_pos} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 clicked_pos() { return NkMouseButton.nclicked_pos(address()); }
 

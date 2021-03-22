@@ -18,23 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Specifies the description of a single sensor.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code FrustumHFovInRadians} &ndash; sensor frustum horizontal field-of-view (if present).</li>
- * <li>{@code FrustumVFovInRadians} &ndash; sensor frustum vertical field-of-view (if present).</li>
- * <li>{@code FrustumNearZInMeters} &ndash; sensor frustum near Z (if present).</li>
- * <li>{@code FrustumFarZInMeters} &ndash; sensor frustum far Z (if present).</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrTrackerDesc {
- *     float FrustumHFovInRadians;
- *     float FrustumVFovInRadians;
- *     float FrustumNearZInMeters;
- *     float FrustumFarZInMeters;
+ *     float {@link #FrustumHFovInRadians};
+ *     float {@link #FrustumVFovInRadians};
+ *     float {@link #FrustumNearZInMeters};
+ *     float {@link #FrustumFarZInMeters};
  * }</code></pre>
  */
 @NativeType("struct ovrTrackerDesc")
@@ -84,13 +75,13 @@ public class OVRTrackerDesc extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code FrustumHFovInRadians} field. */
+    /** sensor frustum horizontal field-of-view (if present). */
     public float FrustumHFovInRadians() { return nFrustumHFovInRadians(address()); }
-    /** Returns the value of the {@code FrustumVFovInRadians} field. */
+    /** sensor frustum vertical field-of-view (if present). */
     public float FrustumVFovInRadians() { return nFrustumVFovInRadians(address()); }
-    /** Returns the value of the {@code FrustumNearZInMeters} field. */
+    /** sensor frustum near Z (if present). */
     public float FrustumNearZInMeters() { return nFrustumNearZInMeters(address()); }
-    /** Returns the value of the {@code FrustumFarZInMeters} field. */
+    /** sensor frustum far Z (if present). */
     public float FrustumFarZInMeters() { return nFrustumFarZInMeters(address()); }
 
     // -----------------------------------
@@ -283,13 +274,13 @@ public class OVRTrackerDesc extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code FrustumHFovInRadians} field. */
+        /** @return the value of the {@link OVRTrackerDesc#FrustumHFovInRadians} field. */
         public float FrustumHFovInRadians() { return OVRTrackerDesc.nFrustumHFovInRadians(address()); }
-        /** Returns the value of the {@code FrustumVFovInRadians} field. */
+        /** @return the value of the {@link OVRTrackerDesc#FrustumVFovInRadians} field. */
         public float FrustumVFovInRadians() { return OVRTrackerDesc.nFrustumVFovInRadians(address()); }
-        /** Returns the value of the {@code FrustumNearZInMeters} field. */
+        /** @return the value of the {@link OVRTrackerDesc#FrustumNearZInMeters} field. */
         public float FrustumNearZInMeters() { return OVRTrackerDesc.nFrustumNearZInMeters(address()); }
-        /** Returns the value of the {@code FrustumFarZInMeters} field. */
+        /** @return the value of the {@link OVRTrackerDesc#FrustumFarZInMeters} field. */
         public float FrustumFarZInMeters() { return OVRTrackerDesc.nFrustumFarZInMeters(address()); }
 
     }

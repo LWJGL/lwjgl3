@@ -19,47 +19,22 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure to fill in to modify Remotery default settings.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code port} &ndash; which port to listen for incoming connections on</li>
- * <li>{@code reuse_open_port} &ndash; 
- * when this server exits it can leave the port open in {@code TIME_WAIT} state for a while. This forces subsequent server bind attempts to fail when
- * restarting. If you find restarts fail repeatedly with bind attempts, set this to true to forcibly reuse the open port.</li>
- * <li>{@code limit_connections_to_localhost} &ndash; 
- * Only allow connections on localhost?
- * 
- * <p>For dev builds you may want to access your game from other devices but if you distribute a game to your players with Remotery active, probably best to
- * limit connections to localhost.</p></li>
- * <li>{@code msSleepBetweenServerUpdates} &ndash; how long to sleep between server updates, hopefully trying to give a little CPU back to other threads</li>
- * <li>{@code messageQueueSizeInBytes} &ndash; size of the internal message queues Remotery uses. Will be rounded to page granularity of 64k.</li>
- * <li>{@code maxNbMessagesPerUpdate} &ndash; 
- * if the user continuously pushes to the message queue, the server network code won't get a chance to update unless there's an upper-limit on how many
- * messages can be consumed per loop</li>
- * <li>{@code _malloc} &ndash; callback pointer for memory allocation</li>
- * <li>{@code realloc} &ndash; callback pointer for memory allocation</li>
- * <li>{@code _free} &ndash; callback pointer for memory allocation</li>
- * <li>{@code mm_context} &ndash; memory allocation context pointer</li>
- * <li>{@code input_handler} &ndash; callback pointer for receiving input from the Remotery console</li>
- * <li>{@code input_handler_context} &ndash; context pointer that gets sent to Remotery console callback function</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct rmtSettings {
- *     rmtU16 port;
- *     rmtBool reuse_open_port;
- *     rmtBool limit_connections_to_localhost;
- *     rmtU32 msSleepBetweenServerUpdates;
- *     rmtU32 messageQueueSizeInBytes;
- *     rmtU32 maxNbMessagesPerUpdate;
- *     {@link RMTMallocI rmtMallocPtr} _malloc;
- *     {@link RMTReallocI rmtReallocPtr} realloc;
- *     {@link RMTFreeI rmtFreePtr} _free;
- *     void * mm_context;
- *     {@link RMTInputHandlerI rmtInputHandlerPtr} input_handler;
- *     void * input_handler_context;
+ *     rmtU16 {@link #port};
+ *     rmtBool {@link #reuse_open_port};
+ *     rmtBool {@link #limit_connections_to_localhost};
+ *     rmtU32 {@link #msSleepBetweenServerUpdates};
+ *     rmtU32 {@link #messageQueueSizeInBytes};
+ *     rmtU32 {@link #maxNbMessagesPerUpdate};
+ *     {@link RMTMallocI rmtMallocPtr} {@link #_malloc};
+ *     {@link RMTReallocI rmtReallocPtr} {@link #realloc};
+ *     {@link RMTFreeI rmtFreePtr} {@link #_free};
+ *     void * {@link #mm_context};
+ *     {@link RMTInputHandlerI rmtInputHandlerPtr} {@link #input_handler};
+ *     void * {@link #input_handler_context};
  *     rmtPStr logFilename;
  * }</code></pre>
  */
@@ -136,72 +111,83 @@ public class RMTSettings extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code port} field. */
+    /** which port to listen for incoming connections on */
     @NativeType("rmtU16")
     public short port() { return nport(address()); }
-    /** Returns the value of the {@code reuse_open_port} field. */
+    /**
+     * when this server exits it can leave the port open in {@code TIME_WAIT} state for a while. This forces subsequent server bind attempts to fail when
+     * restarting. If you find restarts fail repeatedly with bind attempts, set this to true to forcibly reuse the open port.
+     */
     @NativeType("rmtBool")
     public int reuse_open_port() { return nreuse_open_port(address()); }
-    /** Returns the value of the {@code limit_connections_to_localhost} field. */
+    /**
+     * Only allow connections on localhost?
+     * 
+     * <p>For dev builds you may want to access your game from other devices but if you distribute a game to your players with Remotery active, probably best to
+     * limit connections to localhost.</p>
+     */
     @NativeType("rmtBool")
     public int limit_connections_to_localhost() { return nlimit_connections_to_localhost(address()); }
-    /** Returns the value of the {@code msSleepBetweenServerUpdates} field. */
+    /** how long to sleep between server updates, hopefully trying to give a little CPU back to other threads */
     @NativeType("rmtU32")
     public int msSleepBetweenServerUpdates() { return nmsSleepBetweenServerUpdates(address()); }
-    /** Returns the value of the {@code messageQueueSizeInBytes} field. */
+    /** size of the internal message queues Remotery uses. Will be rounded to page granularity of 64k. */
     @NativeType("rmtU32")
     public int messageQueueSizeInBytes() { return nmessageQueueSizeInBytes(address()); }
-    /** Returns the value of the {@code maxNbMessagesPerUpdate} field. */
+    /**
+     * if the user continuously pushes to the message queue, the server network code won't get a chance to update unless there's an upper-limit on how many
+     * messages can be consumed per loop
+     */
     @NativeType("rmtU32")
     public int maxNbMessagesPerUpdate() { return nmaxNbMessagesPerUpdate(address()); }
-    /** Returns the value of the {@code _malloc} field. */
+    /** callback pointer for memory allocation */
     @NativeType("rmtMallocPtr")
     public RMTMalloc _malloc() { return n_malloc(address()); }
-    /** Returns the value of the {@code realloc} field. */
+    /** callback pointer for memory allocation */
     @NativeType("rmtReallocPtr")
     public RMTRealloc realloc() { return nrealloc(address()); }
-    /** Returns the value of the {@code _free} field. */
+    /** callback pointer for memory allocation */
     @NativeType("rmtFreePtr")
     public RMTFree _free() { return n_free(address()); }
-    /** Returns the value of the {@code mm_context} field. */
+    /** memory allocation context pointer */
     @NativeType("void *")
     public long mm_context() { return nmm_context(address()); }
-    /** Returns the value of the {@code input_handler} field. */
+    /** callback pointer for receiving input from the Remotery console */
     @NativeType("rmtInputHandlerPtr")
     public RMTInputHandler input_handler() { return ninput_handler(address()); }
-    /** Returns the value of the {@code input_handler_context} field. */
+    /** context pointer that gets sent to Remotery console callback function */
     @NativeType("void *")
     public long input_handler_context() { return ninput_handler_context(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code logFilename} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code logFilename} field. */
     @NativeType("rmtPStr")
     public ByteBuffer logFilename() { return nlogFilename(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code logFilename} field. */
+    /** @return the null-terminated string pointed to by the {@code logFilename} field. */
     @NativeType("rmtPStr")
     public String logFilenameString() { return nlogFilenameString(address()); }
 
-    /** Sets the specified value to the {@code port} field. */
+    /** Sets the specified value to the {@link #port} field. */
     public RMTSettings port(@NativeType("rmtU16") short value) { nport(address(), value); return this; }
-    /** Sets the specified value to the {@code reuse_open_port} field. */
+    /** Sets the specified value to the {@link #reuse_open_port} field. */
     public RMTSettings reuse_open_port(@NativeType("rmtBool") int value) { nreuse_open_port(address(), value); return this; }
-    /** Sets the specified value to the {@code limit_connections_to_localhost} field. */
+    /** Sets the specified value to the {@link #limit_connections_to_localhost} field. */
     public RMTSettings limit_connections_to_localhost(@NativeType("rmtBool") int value) { nlimit_connections_to_localhost(address(), value); return this; }
-    /** Sets the specified value to the {@code msSleepBetweenServerUpdates} field. */
+    /** Sets the specified value to the {@link #msSleepBetweenServerUpdates} field. */
     public RMTSettings msSleepBetweenServerUpdates(@NativeType("rmtU32") int value) { nmsSleepBetweenServerUpdates(address(), value); return this; }
-    /** Sets the specified value to the {@code messageQueueSizeInBytes} field. */
+    /** Sets the specified value to the {@link #messageQueueSizeInBytes} field. */
     public RMTSettings messageQueueSizeInBytes(@NativeType("rmtU32") int value) { nmessageQueueSizeInBytes(address(), value); return this; }
-    /** Sets the specified value to the {@code maxNbMessagesPerUpdate} field. */
+    /** Sets the specified value to the {@link #maxNbMessagesPerUpdate} field. */
     public RMTSettings maxNbMessagesPerUpdate(@NativeType("rmtU32") int value) { nmaxNbMessagesPerUpdate(address(), value); return this; }
-    /** Sets the specified value to the {@code _malloc} field. */
+    /** Sets the specified value to the {@link #_malloc} field. */
     public RMTSettings _malloc(@NativeType("rmtMallocPtr") RMTMallocI value) { n_malloc(address(), value); return this; }
-    /** Sets the specified value to the {@code realloc} field. */
+    /** Sets the specified value to the {@link #realloc} field. */
     public RMTSettings realloc(@NativeType("rmtReallocPtr") RMTReallocI value) { nrealloc(address(), value); return this; }
-    /** Sets the specified value to the {@code _free} field. */
+    /** Sets the specified value to the {@link #_free} field. */
     public RMTSettings _free(@NativeType("rmtFreePtr") RMTFreeI value) { n_free(address(), value); return this; }
-    /** Sets the specified value to the {@code mm_context} field. */
+    /** Sets the specified value to the {@link #mm_context} field. */
     public RMTSettings mm_context(@NativeType("void *") long value) { nmm_context(address(), value); return this; }
-    /** Sets the specified value to the {@code input_handler} field. */
+    /** Sets the specified value to the {@link #input_handler} field. */
     public RMTSettings input_handler(@NativeType("rmtInputHandlerPtr") RMTInputHandlerI value) { ninput_handler(address(), value); return this; }
-    /** Sets the specified value to the {@code input_handler_context} field. */
+    /** Sets the specified value to the {@link #input_handler_context} field. */
     public RMTSettings input_handler_context(@NativeType("void *") long value) { ninput_handler_context(address(), value); return this; }
     /** Sets the address of the specified encoded string to the {@code logFilename} field. */
     public RMTSettings logFilename(@NativeType("rmtPStr") ByteBuffer value) { nlogFilename(address(), value); return this; }

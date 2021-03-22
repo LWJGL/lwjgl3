@@ -64,10 +64,10 @@ public class HmdRect2 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link HmdVector2} view of the {@code vTopLeft} field. */
+    /** @return a {@link HmdVector2} view of the {@code vTopLeft} field. */
     @NativeType("HmdVector2_t")
     public HmdVector2 vTopLeft() { return nvTopLeft(address()); }
-    /** Returns a {@link HmdVector2} view of the {@code vBottomRight} field. */
+    /** @return a {@link HmdVector2} view of the {@code vBottomRight} field. */
     @NativeType("HmdVector2_t")
     public HmdVector2 vBottomRight() { return nvBottomRight(address()); }
 
@@ -294,10 +294,10 @@ public class HmdRect2 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link HmdVector2} view of the {@code vTopLeft} field. */
+        /** @return a {@link HmdVector2} view of the {@code vTopLeft} field. */
         @NativeType("HmdVector2_t")
         public HmdVector2 vTopLeft() { return HmdRect2.nvTopLeft(address()); }
-        /** Returns a {@link HmdVector2} view of the {@code vBottomRight} field. */
+        /** @return a {@link HmdVector2} view of the {@code vBottomRight} field. */
         @NativeType("HmdVector2_t")
         public HmdVector2 vBottomRight() { return HmdRect2.nvBottomRight(address()); }
 

@@ -50,27 +50,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkSubmitInfo2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code semaphore} &ndash; a {@code VkSemaphore} affected by this operation.</li>
- * <li>{@code value} &ndash; either the value used to signal {@code semaphore} or the value waited on by {@code semaphore}, if {@code semaphore} is a timeline semaphore. Otherwise it is ignored.</li>
- * <li>{@code stageMask} &ndash; a {@code VkPipelineStageFlags2KHR} mask of pipeline stages at which the semaphore either waits or is signaled.</li>
- * <li>{@code deviceIndex} &ndash; the index of the device within a device group that executes the semaphore wait or signal operation.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSemaphoreSubmitInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkSemaphore semaphore;
- *     uint64_t value;
- *     VkPipelineStageFlags2KHR stageMask;
- *     uint32_t deviceIndex;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkSemaphore {@link #semaphore};
+ *     uint64_t {@link #value};
+ *     VkPipelineStageFlags2KHR {@link #stageMask};
+ *     uint32_t {@link #deviceIndex};
  * }</code></pre>
  */
 public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
@@ -124,36 +113,36 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code semaphore} field. */
+    /** a {@code VkSemaphore} affected by this operation. */
     @NativeType("VkSemaphore")
     public long semaphore() { return nsemaphore(address()); }
-    /** Returns the value of the {@code value} field. */
+    /** either the value used to signal {@code semaphore} or the value waited on by {@code semaphore}, if {@code semaphore} is a timeline semaphore. Otherwise it is ignored. */
     @NativeType("uint64_t")
     public long value() { return nvalue(address()); }
-    /** Returns the value of the {@code stageMask} field. */
+    /** a {@code VkPipelineStageFlags2KHR} mask of pipeline stages at which the semaphore either waits or is signaled. */
     @NativeType("VkPipelineStageFlags2KHR")
     public int stageMask() { return nstageMask(address()); }
-    /** Returns the value of the {@code deviceIndex} field. */
+    /** the index of the device within a device group that executes the semaphore wait or signal operation. */
     @NativeType("uint32_t")
     public int deviceIndex() { return ndeviceIndex(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSemaphoreSubmitInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSemaphoreSubmitInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code semaphore} field. */
+    /** Sets the specified value to the {@link #semaphore} field. */
     public VkSemaphoreSubmitInfoKHR semaphore(@NativeType("VkSemaphore") long value) { nsemaphore(address(), value); return this; }
-    /** Sets the specified value to the {@code value} field. */
+    /** Sets the specified value to the {@link #value} field. */
     public VkSemaphoreSubmitInfoKHR value(@NativeType("uint64_t") long value) { nvalue(address(), value); return this; }
-    /** Sets the specified value to the {@code stageMask} field. */
+    /** Sets the specified value to the {@link #stageMask} field. */
     public VkSemaphoreSubmitInfoKHR stageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { nstageMask(address(), value); return this; }
-    /** Sets the specified value to the {@code deviceIndex} field. */
+    /** Sets the specified value to the {@link #deviceIndex} field. */
     public VkSemaphoreSubmitInfoKHR deviceIndex(@NativeType("uint32_t") int value) { ndeviceIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -394,36 +383,36 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSemaphoreSubmitInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSemaphoreSubmitInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code semaphore} field. */
+        /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#semaphore} field. */
         @NativeType("VkSemaphore")
         public long semaphore() { return VkSemaphoreSubmitInfoKHR.nsemaphore(address()); }
-        /** Returns the value of the {@code value} field. */
+        /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#value} field. */
         @NativeType("uint64_t")
         public long value() { return VkSemaphoreSubmitInfoKHR.nvalue(address()); }
-        /** Returns the value of the {@code stageMask} field. */
+        /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#stageMask} field. */
         @NativeType("VkPipelineStageFlags2KHR")
         public int stageMask() { return VkSemaphoreSubmitInfoKHR.nstageMask(address()); }
-        /** Returns the value of the {@code deviceIndex} field. */
+        /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#deviceIndex} field. */
         @NativeType("uint32_t")
         public int deviceIndex() { return VkSemaphoreSubmitInfoKHR.ndeviceIndex(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#sType} field. */
         public VkSemaphoreSubmitInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSemaphoreSubmitInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#pNext} field. */
         public VkSemaphoreSubmitInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkSemaphoreSubmitInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code semaphore} field. */
+        /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#semaphore} field. */
         public VkSemaphoreSubmitInfoKHR.Buffer semaphore(@NativeType("VkSemaphore") long value) { VkSemaphoreSubmitInfoKHR.nsemaphore(address(), value); return this; }
-        /** Sets the specified value to the {@code value} field. */
+        /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#value} field. */
         public VkSemaphoreSubmitInfoKHR.Buffer value(@NativeType("uint64_t") long value) { VkSemaphoreSubmitInfoKHR.nvalue(address(), value); return this; }
-        /** Sets the specified value to the {@code stageMask} field. */
+        /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#stageMask} field. */
         public VkSemaphoreSubmitInfoKHR.Buffer stageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { VkSemaphoreSubmitInfoKHR.nstageMask(address(), value); return this; }
-        /** Sets the specified value to the {@code deviceIndex} field. */
+        /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#deviceIndex} field. */
         public VkSemaphoreSubmitInfoKHR.Buffer deviceIndex(@NativeType("uint32_t") int value) { VkSemaphoreSubmitInfoKHR.ndeviceIndex(address(), value); return this; }
 
     }

@@ -84,20 +84,20 @@ public class ParOctasphereConfig extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code corner_radius} field. */
+    /** @return the value of the {@code corner_radius} field. */
     public float corner_radius() { return ncorner_radius(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** @return the value of the {@code width} field. */
     public float width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** @return the value of the {@code height} field. */
     public float height() { return nheight(address()); }
-    /** Returns the value of the {@code depth} field. */
+    /** @return the value of the {@code depth} field. */
     public float depth() { return ndepth(address()); }
-    /** Returns the value of the {@code num_subdivisions} field. */
+    /** @return the value of the {@code num_subdivisions} field. */
     public int num_subdivisions() { return nnum_subdivisions(address()); }
-    /** Returns the value of the {@code uv_mode} field. */
+    /** @return the value of the {@code uv_mode} field. */
     @NativeType("par_octasphere_uv_mode")
     public int uv_mode() { return nuv_mode(address()); }
-    /** Returns the value of the {@code normals_mode} field. */
+    /** @return the value of the {@code normals_mode} field. */
     @NativeType("par_octasphere_normals_mode")
     public int normals_mode() { return nnormals_mode(address()); }
 
@@ -360,20 +360,20 @@ public class ParOctasphereConfig extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code corner_radius} field. */
+        /** @return the value of the {@code corner_radius} field. */
         public float corner_radius() { return ParOctasphereConfig.ncorner_radius(address()); }
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@code width} field. */
         public float width() { return ParOctasphereConfig.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@code height} field. */
         public float height() { return ParOctasphereConfig.nheight(address()); }
-        /** Returns the value of the {@code depth} field. */
+        /** @return the value of the {@code depth} field. */
         public float depth() { return ParOctasphereConfig.ndepth(address()); }
-        /** Returns the value of the {@code num_subdivisions} field. */
+        /** @return the value of the {@code num_subdivisions} field. */
         public int num_subdivisions() { return ParOctasphereConfig.nnum_subdivisions(address()); }
-        /** Returns the value of the {@code uv_mode} field. */
+        /** @return the value of the {@code uv_mode} field. */
         @NativeType("par_octasphere_uv_mode")
         public int uv_mode() { return ParOctasphereConfig.nuv_mode(address()); }
-        /** Returns the value of the {@code normals_mode} field. */
+        /** @return the value of the {@code normals_mode} field. */
         @NativeType("par_octasphere_normals_mode")
         public int normals_mode() { return ParOctasphereConfig.nnormals_mode(address()); }
 

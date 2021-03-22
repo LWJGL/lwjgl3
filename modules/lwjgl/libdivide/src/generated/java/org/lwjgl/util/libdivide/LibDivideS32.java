@@ -64,10 +64,10 @@ public class LibDivideS32 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code magic} field. */
+    /** @return the value of the {@code magic} field. */
     @NativeType("int32_t")
     public int magic() { return nmagic(address()); }
-    /** Returns the value of the {@code more} field. */
+    /** @return the value of the {@code more} field. */
     @NativeType("uint8_t")
     public byte more() { return nmore(address()); }
 
@@ -290,10 +290,10 @@ public class LibDivideS32 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code magic} field. */
+        /** @return the value of the {@code magic} field. */
         @NativeType("int32_t")
         public int magic() { return LibDivideS32.nmagic(address()); }
-        /** Returns the value of the {@code more} field. */
+        /** @return the value of the {@code more} field. */
         @NativeType("uint8_t")
         public byte more() { return LibDivideS32.nmore(address()); }
 

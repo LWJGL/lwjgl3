@@ -79,13 +79,13 @@ public class VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT extends Stru
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code requiredSubgroupSize} field. */
+    /** @return the value of the {@code requiredSubgroupSize} field. */
     @NativeType("uint32_t")
     public int requiredSubgroupSize() { return nrequiredSubgroupSize(address()); }
 
@@ -310,13 +310,13 @@ public class VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT extends Stru
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code requiredSubgroupSize} field. */
+        /** @return the value of the {@code requiredSubgroupSize} field. */
         @NativeType("uint32_t")
         public int requiredSubgroupSize() { return VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.nrequiredSubgroupSize(address()); }
 

@@ -36,19 +36,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkGeneratedCommandsInfoNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code buffer} &ndash; specifies the {@code VkBuffer} storing the functional arguments for each sequence. These arguments <b>can</b> be written by the device.</li>
- * <li>{@code offset} &ndash; specified an offset into {@code buffer} where the arguments start.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkIndirectCommandsStreamNV {
- *     VkBuffer buffer;
- *     VkDeviceSize offset;
+ *     VkBuffer {@link #buffer};
+ *     VkDeviceSize {@link #offset};
  * }</code></pre>
  */
 public class VkIndirectCommandsStreamNV extends Struct implements NativeResource {
@@ -90,16 +83,16 @@ public class VkIndirectCommandsStreamNV extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code buffer} field. */
+    /** specifies the {@code VkBuffer} storing the functional arguments for each sequence. These arguments <b>can</b> be written by the device. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /** specified an offset into {@code buffer} where the arguments start. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
 
-    /** Sets the specified value to the {@code buffer} field. */
+    /** Sets the specified value to the {@link #buffer} field. */
     public VkIndirectCommandsStreamNV buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code offset} field. */
+    /** Sets the specified value to the {@link #offset} field. */
     public VkIndirectCommandsStreamNV offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -316,16 +309,16 @@ public class VkIndirectCommandsStreamNV extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code buffer} field. */
+        /** @return the value of the {@link VkIndirectCommandsStreamNV#buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkIndirectCommandsStreamNV.nbuffer(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@link VkIndirectCommandsStreamNV#offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkIndirectCommandsStreamNV.noffset(address()); }
 
-        /** Sets the specified value to the {@code buffer} field. */
+        /** Sets the specified value to the {@link VkIndirectCommandsStreamNV#buffer} field. */
         public VkIndirectCommandsStreamNV.Buffer buffer(@NativeType("VkBuffer") long value) { VkIndirectCommandsStreamNV.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code offset} field. */
+        /** Sets the specified value to the {@link VkIndirectCommandsStreamNV#offset} field. */
         public VkIndirectCommandsStreamNV.Buffer offset(@NativeType("VkDeviceSize") long value) { VkIndirectCommandsStreamNV.noffset(address(), value); return this; }
 
     }

@@ -66,13 +66,13 @@ public class CXType extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code kind} field. */
+    /** @return the value of the {@code kind} field. */
     @NativeType("enum CXTypeKind")
     public int kind() { return nkind(address()); }
-    /** Returns a {@link PointerBuffer} view of the {@code data} field. */
+    /** @return a {@link PointerBuffer} view of the {@code data} field. */
     @NativeType("void *[2]")
     public PointerBuffer data() { return ndata(address()); }
-    /** Returns the value at the specified index of the {@code data} field. */
+    /** @return the value at the specified index of the {@code data} field. */
     @NativeType("void *")
     public long data(int index) { return ndata(address(), index); }
 
@@ -266,13 +266,13 @@ public class CXType extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code kind} field. */
+        /** @return the value of the {@code kind} field. */
         @NativeType("enum CXTypeKind")
         public int kind() { return CXType.nkind(address()); }
-        /** Returns a {@link PointerBuffer} view of the {@code data} field. */
+        /** @return a {@link PointerBuffer} view of the {@code data} field. */
         @NativeType("void *[2]")
         public PointerBuffer data() { return CXType.ndata(address()); }
-        /** Returns the value at the specified index of the {@code data} field. */
+        /** @return the value at the specified index of the {@code data} field. */
         @NativeType("void *")
         public long data(int index) { return CXType.ndata(address(), index); }
 

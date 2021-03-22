@@ -29,21 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkExternalMemoryProperties}, {@link VK11#vkGetPhysicalDeviceExternalBufferProperties GetPhysicalDeviceExternalBufferProperties}, {@link KHRExternalMemoryCapabilities#vkGetPhysicalDeviceExternalBufferPropertiesKHR GetPhysicalDeviceExternalBufferPropertiesKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code externalMemoryProperties} &ndash; a {@link VkExternalMemoryProperties} structure specifying various capabilities of the external handle type when used with the specified buffer creation parameters.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkExternalBufferProperties {
- *     VkStructureType sType;
- *     void * pNext;
- *     {@link VkExternalMemoryProperties VkExternalMemoryProperties} externalMemoryProperties;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     {@link VkExternalMemoryProperties VkExternalMemoryProperties} {@link #externalMemoryProperties};
  * }</code></pre>
  */
 public class VkExternalBufferProperties extends Struct implements NativeResource {
@@ -88,18 +80,18 @@ public class VkExternalBufferProperties extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkExternalMemoryProperties} view of the {@code externalMemoryProperties} field. */
+    /** a {@link VkExternalMemoryProperties} structure specifying various capabilities of the external handle type when used with the specified buffer creation parameters. */
     public VkExternalMemoryProperties externalMemoryProperties() { return nexternalMemoryProperties(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkExternalBufferProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkExternalBufferProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,18 +310,18 @@ public class VkExternalBufferProperties extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkExternalBufferProperties#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkExternalBufferProperties.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkExternalBufferProperties#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkExternalBufferProperties.npNext(address()); }
-        /** Returns a {@link VkExternalMemoryProperties} view of the {@code externalMemoryProperties} field. */
+        /** @return a {@link VkExternalMemoryProperties} view of the {@link VkExternalBufferProperties#externalMemoryProperties} field. */
         public VkExternalMemoryProperties externalMemoryProperties() { return VkExternalBufferProperties.nexternalMemoryProperties(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkExternalBufferProperties#sType} field. */
         public VkExternalBufferProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalBufferProperties.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkExternalBufferProperties#pNext} field. */
         public VkExternalBufferProperties.Buffer pNext(@NativeType("void *") long value) { VkExternalBufferProperties.npNext(address(), value); return this; }
 
     }

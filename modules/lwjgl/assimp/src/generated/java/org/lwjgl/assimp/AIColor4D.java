@@ -18,23 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Represents a color in Red-Green-Blue space including an alpha component. Color values range from 0 to 1.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code r} &ndash; The red color component</li>
- * <li>{@code g} &ndash; The green color component</li>
- * <li>{@code b} &ndash; The blue color component</li>
- * <li>{@code a} &ndash; The alpha color component</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiColor4D {
- *     float r;
- *     float g;
- *     float b;
- *     float a;
+ *     float {@link #r};
+ *     float {@link #g};
+ *     float {@link #b};
+ *     float {@link #a};
  * }</code></pre>
  */
 @NativeType("struct aiColor4D")
@@ -83,22 +74,22 @@ public class AIColor4D extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code r} field. */
+    /** The red color component */
     public float r() { return nr(address()); }
-    /** Returns the value of the {@code g} field. */
+    /** The green color component */
     public float g() { return ng(address()); }
-    /** Returns the value of the {@code b} field. */
+    /** The blue color component */
     public float b() { return nb(address()); }
-    /** Returns the value of the {@code a} field. */
+    /** The alpha color component */
     public float a() { return na(address()); }
 
-    /** Sets the specified value to the {@code r} field. */
+    /** Sets the specified value to the {@link #r} field. */
     public AIColor4D r(float value) { nr(address(), value); return this; }
-    /** Sets the specified value to the {@code g} field. */
+    /** Sets the specified value to the {@link #g} field. */
     public AIColor4D g(float value) { ng(address(), value); return this; }
-    /** Sets the specified value to the {@code b} field. */
+    /** Sets the specified value to the {@link #b} field. */
     public AIColor4D b(float value) { nb(address(), value); return this; }
-    /** Sets the specified value to the {@code a} field. */
+    /** Sets the specified value to the {@link #a} field. */
     public AIColor4D a(float value) { na(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,22 +318,22 @@ public class AIColor4D extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code r} field. */
+        /** @return the value of the {@link AIColor4D#r} field. */
         public float r() { return AIColor4D.nr(address()); }
-        /** Returns the value of the {@code g} field. */
+        /** @return the value of the {@link AIColor4D#g} field. */
         public float g() { return AIColor4D.ng(address()); }
-        /** Returns the value of the {@code b} field. */
+        /** @return the value of the {@link AIColor4D#b} field. */
         public float b() { return AIColor4D.nb(address()); }
-        /** Returns the value of the {@code a} field. */
+        /** @return the value of the {@link AIColor4D#a} field. */
         public float a() { return AIColor4D.na(address()); }
 
-        /** Sets the specified value to the {@code r} field. */
+        /** Sets the specified value to the {@link AIColor4D#r} field. */
         public AIColor4D.Buffer r(float value) { AIColor4D.nr(address(), value); return this; }
-        /** Sets the specified value to the {@code g} field. */
+        /** Sets the specified value to the {@link AIColor4D#g} field. */
         public AIColor4D.Buffer g(float value) { AIColor4D.ng(address(), value); return this; }
-        /** Sets the specified value to the {@code b} field. */
+        /** Sets the specified value to the {@link AIColor4D#b} field. */
         public AIColor4D.Buffer b(float value) { AIColor4D.nb(address(), value); return this; }
-        /** Sets the specified value to the {@code a} field. */
+        /** Sets the specified value to the {@link AIColor4D#a} field. */
         public AIColor4D.Buffer a(float value) { AIColor4D.na(address(), value); return this; }
 
     }

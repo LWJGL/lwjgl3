@@ -40,35 +40,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link NVCooperativeMatrix#vkGetPhysicalDeviceCooperativeMatrixPropertiesNV GetPhysicalDeviceCooperativeMatrixPropertiesNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code MSize} &ndash; the number of rows in matrices A, C, and D.</li>
- * <li>{@code NSize} &ndash; the number of columns in matrices B, C, D.</li>
- * <li>{@code KSize} &ndash; the number of columns in matrix A and rows in matrix B.</li>
- * <li>{@code AType} &ndash; the component type of matrix A, of type {@code VkComponentTypeNV}.</li>
- * <li>{@code BType} &ndash; the component type of matrix B, of type {@code VkComponentTypeNV}.</li>
- * <li>{@code CType} &ndash; the component type of matrix C, of type {@code VkComponentTypeNV}.</li>
- * <li>{@code DType} &ndash; the component type of matrix D, of type {@code VkComponentTypeNV}.</li>
- * <li>{@code scope} &ndash; the scope of all the matrix types, of type {@code VkScopeNV}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkCooperativeMatrixPropertiesNV {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint32_t MSize;
- *     uint32_t NSize;
- *     uint32_t KSize;
- *     VkComponentTypeNV AType;
- *     VkComponentTypeNV BType;
- *     VkComponentTypeNV CType;
- *     VkComponentTypeNV DType;
- *     VkScopeNV scope;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint32_t {@link #MSize};
+ *     uint32_t {@link #NSize};
+ *     uint32_t {@link #KSize};
+ *     VkComponentTypeNV {@link #AType};
+ *     VkComponentTypeNV {@link #BType};
+ *     VkComponentTypeNV {@link #CType};
+ *     VkComponentTypeNV {@link #DType};
+ *     VkScopeNV {@link #scope};
  * }</code></pre>
  */
 public class VkCooperativeMatrixPropertiesNV extends Struct implements NativeResource {
@@ -134,56 +119,56 @@ public class VkCooperativeMatrixPropertiesNV extends Struct implements NativeRes
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code MSize} field. */
+    /** the number of rows in matrices A, C, and D. */
     @NativeType("uint32_t")
     public int MSize() { return nMSize(address()); }
-    /** Returns the value of the {@code NSize} field. */
+    /** the number of columns in matrices B, C, D. */
     @NativeType("uint32_t")
     public int NSize() { return nNSize(address()); }
-    /** Returns the value of the {@code KSize} field. */
+    /** the number of columns in matrix A and rows in matrix B. */
     @NativeType("uint32_t")
     public int KSize() { return nKSize(address()); }
-    /** Returns the value of the {@code AType} field. */
+    /** the component type of matrix A, of type {@code VkComponentTypeNV}. */
     @NativeType("VkComponentTypeNV")
     public int AType() { return nAType(address()); }
-    /** Returns the value of the {@code BType} field. */
+    /** the component type of matrix B, of type {@code VkComponentTypeNV}. */
     @NativeType("VkComponentTypeNV")
     public int BType() { return nBType(address()); }
-    /** Returns the value of the {@code CType} field. */
+    /** the component type of matrix C, of type {@code VkComponentTypeNV}. */
     @NativeType("VkComponentTypeNV")
     public int CType() { return nCType(address()); }
-    /** Returns the value of the {@code DType} field. */
+    /** the component type of matrix D, of type {@code VkComponentTypeNV}. */
     @NativeType("VkComponentTypeNV")
     public int DType() { return nDType(address()); }
-    /** Returns the value of the {@code scope} field. */
+    /** the scope of all the matrix types, of type {@code VkScopeNV}. */
     @NativeType("VkScopeNV")
     public int scope() { return nscope(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkCooperativeMatrixPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkCooperativeMatrixPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code MSize} field. */
+    /** Sets the specified value to the {@link #MSize} field. */
     public VkCooperativeMatrixPropertiesNV MSize(@NativeType("uint32_t") int value) { nMSize(address(), value); return this; }
-    /** Sets the specified value to the {@code NSize} field. */
+    /** Sets the specified value to the {@link #NSize} field. */
     public VkCooperativeMatrixPropertiesNV NSize(@NativeType("uint32_t") int value) { nNSize(address(), value); return this; }
-    /** Sets the specified value to the {@code KSize} field. */
+    /** Sets the specified value to the {@link #KSize} field. */
     public VkCooperativeMatrixPropertiesNV KSize(@NativeType("uint32_t") int value) { nKSize(address(), value); return this; }
-    /** Sets the specified value to the {@code AType} field. */
+    /** Sets the specified value to the {@link #AType} field. */
     public VkCooperativeMatrixPropertiesNV AType(@NativeType("VkComponentTypeNV") int value) { nAType(address(), value); return this; }
-    /** Sets the specified value to the {@code BType} field. */
+    /** Sets the specified value to the {@link #BType} field. */
     public VkCooperativeMatrixPropertiesNV BType(@NativeType("VkComponentTypeNV") int value) { nBType(address(), value); return this; }
-    /** Sets the specified value to the {@code CType} field. */
+    /** Sets the specified value to the {@link #CType} field. */
     public VkCooperativeMatrixPropertiesNV CType(@NativeType("VkComponentTypeNV") int value) { nCType(address(), value); return this; }
-    /** Sets the specified value to the {@code DType} field. */
+    /** Sets the specified value to the {@link #DType} field. */
     public VkCooperativeMatrixPropertiesNV DType(@NativeType("VkComponentTypeNV") int value) { nDType(address(), value); return this; }
-    /** Sets the specified value to the {@code scope} field. */
+    /** Sets the specified value to the {@link #scope} field. */
     public VkCooperativeMatrixPropertiesNV scope(@NativeType("VkScopeNV") int value) { nscope(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -448,56 +433,56 @@ public class VkCooperativeMatrixPropertiesNV extends Struct implements NativeRes
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkCooperativeMatrixPropertiesNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCooperativeMatrixPropertiesNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkCooperativeMatrixPropertiesNV#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkCooperativeMatrixPropertiesNV.npNext(address()); }
-        /** Returns the value of the {@code MSize} field. */
+        /** @return the value of the {@link VkCooperativeMatrixPropertiesNV#MSize} field. */
         @NativeType("uint32_t")
         public int MSize() { return VkCooperativeMatrixPropertiesNV.nMSize(address()); }
-        /** Returns the value of the {@code NSize} field. */
+        /** @return the value of the {@link VkCooperativeMatrixPropertiesNV#NSize} field. */
         @NativeType("uint32_t")
         public int NSize() { return VkCooperativeMatrixPropertiesNV.nNSize(address()); }
-        /** Returns the value of the {@code KSize} field. */
+        /** @return the value of the {@link VkCooperativeMatrixPropertiesNV#KSize} field. */
         @NativeType("uint32_t")
         public int KSize() { return VkCooperativeMatrixPropertiesNV.nKSize(address()); }
-        /** Returns the value of the {@code AType} field. */
+        /** @return the value of the {@link VkCooperativeMatrixPropertiesNV#AType} field. */
         @NativeType("VkComponentTypeNV")
         public int AType() { return VkCooperativeMatrixPropertiesNV.nAType(address()); }
-        /** Returns the value of the {@code BType} field. */
+        /** @return the value of the {@link VkCooperativeMatrixPropertiesNV#BType} field. */
         @NativeType("VkComponentTypeNV")
         public int BType() { return VkCooperativeMatrixPropertiesNV.nBType(address()); }
-        /** Returns the value of the {@code CType} field. */
+        /** @return the value of the {@link VkCooperativeMatrixPropertiesNV#CType} field. */
         @NativeType("VkComponentTypeNV")
         public int CType() { return VkCooperativeMatrixPropertiesNV.nCType(address()); }
-        /** Returns the value of the {@code DType} field. */
+        /** @return the value of the {@link VkCooperativeMatrixPropertiesNV#DType} field. */
         @NativeType("VkComponentTypeNV")
         public int DType() { return VkCooperativeMatrixPropertiesNV.nDType(address()); }
-        /** Returns the value of the {@code scope} field. */
+        /** @return the value of the {@link VkCooperativeMatrixPropertiesNV#scope} field. */
         @NativeType("VkScopeNV")
         public int scope() { return VkCooperativeMatrixPropertiesNV.nscope(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkCooperativeMatrixPropertiesNV#sType} field. */
         public VkCooperativeMatrixPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkCooperativeMatrixPropertiesNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkCooperativeMatrixPropertiesNV#pNext} field. */
         public VkCooperativeMatrixPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkCooperativeMatrixPropertiesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code MSize} field. */
+        /** Sets the specified value to the {@link VkCooperativeMatrixPropertiesNV#MSize} field. */
         public VkCooperativeMatrixPropertiesNV.Buffer MSize(@NativeType("uint32_t") int value) { VkCooperativeMatrixPropertiesNV.nMSize(address(), value); return this; }
-        /** Sets the specified value to the {@code NSize} field. */
+        /** Sets the specified value to the {@link VkCooperativeMatrixPropertiesNV#NSize} field. */
         public VkCooperativeMatrixPropertiesNV.Buffer NSize(@NativeType("uint32_t") int value) { VkCooperativeMatrixPropertiesNV.nNSize(address(), value); return this; }
-        /** Sets the specified value to the {@code KSize} field. */
+        /** Sets the specified value to the {@link VkCooperativeMatrixPropertiesNV#KSize} field. */
         public VkCooperativeMatrixPropertiesNV.Buffer KSize(@NativeType("uint32_t") int value) { VkCooperativeMatrixPropertiesNV.nKSize(address(), value); return this; }
-        /** Sets the specified value to the {@code AType} field. */
+        /** Sets the specified value to the {@link VkCooperativeMatrixPropertiesNV#AType} field. */
         public VkCooperativeMatrixPropertiesNV.Buffer AType(@NativeType("VkComponentTypeNV") int value) { VkCooperativeMatrixPropertiesNV.nAType(address(), value); return this; }
-        /** Sets the specified value to the {@code BType} field. */
+        /** Sets the specified value to the {@link VkCooperativeMatrixPropertiesNV#BType} field. */
         public VkCooperativeMatrixPropertiesNV.Buffer BType(@NativeType("VkComponentTypeNV") int value) { VkCooperativeMatrixPropertiesNV.nBType(address(), value); return this; }
-        /** Sets the specified value to the {@code CType} field. */
+        /** Sets the specified value to the {@link VkCooperativeMatrixPropertiesNV#CType} field. */
         public VkCooperativeMatrixPropertiesNV.Buffer CType(@NativeType("VkComponentTypeNV") int value) { VkCooperativeMatrixPropertiesNV.nCType(address(), value); return this; }
-        /** Sets the specified value to the {@code DType} field. */
+        /** Sets the specified value to the {@link VkCooperativeMatrixPropertiesNV#DType} field. */
         public VkCooperativeMatrixPropertiesNV.Buffer DType(@NativeType("VkComponentTypeNV") int value) { VkCooperativeMatrixPropertiesNV.nDType(address(), value); return this; }
-        /** Sets the specified value to the {@code scope} field. */
+        /** Sets the specified value to the {@link VkCooperativeMatrixPropertiesNV#scope} field. */
         public VkCooperativeMatrixPropertiesNV.Buffer scope(@NativeType("VkScopeNV") int value) { VkCooperativeMatrixPropertiesNV.nscope(address(), value); return this; }
 
     }

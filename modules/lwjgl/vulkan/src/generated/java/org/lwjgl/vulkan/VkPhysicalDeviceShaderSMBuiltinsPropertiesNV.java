@@ -28,23 +28,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVShaderSmBuiltins#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code shaderSMCount} &ndash; the number of SMs on the device.</li>
- * <li>{@code shaderWarpsPerSM} &ndash; the maximum number of simultaneously executing warps on an SM.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderSMBuiltinsPropertiesNV {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint32_t shaderSMCount;
- *     uint32_t shaderWarpsPerSM;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint32_t {@link #shaderSMCount};
+ *     uint32_t {@link #shaderWarpsPerSM};
  * }</code></pre>
  */
 public class VkPhysicalDeviceShaderSMBuiltinsPropertiesNV extends Struct implements NativeResource {
@@ -92,22 +83,22 @@ public class VkPhysicalDeviceShaderSMBuiltinsPropertiesNV extends Struct impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code shaderSMCount} field. */
+    /** the number of SMs on the device. */
     @NativeType("uint32_t")
     public int shaderSMCount() { return nshaderSMCount(address()); }
-    /** Returns the value of the {@code shaderWarpsPerSM} field. */
+    /** the maximum number of simultaneously executing warps on an SM. */
     @NativeType("uint32_t")
     public int shaderWarpsPerSM() { return nshaderWarpsPerSM(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderSMBuiltinsPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderSMBuiltinsPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,22 +319,22 @@ public class VkPhysicalDeviceShaderSMBuiltinsPropertiesNV extends Struct impleme
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderSMBuiltinsPropertiesNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderSMBuiltinsPropertiesNV#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.npNext(address()); }
-        /** Returns the value of the {@code shaderSMCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderSMBuiltinsPropertiesNV#shaderSMCount} field. */
         @NativeType("uint32_t")
         public int shaderSMCount() { return VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.nshaderSMCount(address()); }
-        /** Returns the value of the {@code shaderWarpsPerSM} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderSMBuiltinsPropertiesNV#shaderWarpsPerSM} field. */
         @NativeType("uint32_t")
         public int shaderWarpsPerSM() { return VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.nshaderWarpsPerSM(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderSMBuiltinsPropertiesNV#sType} field. */
         public VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderSMBuiltinsPropertiesNV#pNext} field. */
         public VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.npNext(address(), value); return this; }
 
     }

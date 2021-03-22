@@ -43,25 +43,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkDebugUtilsMessengerCallbackDataEXT}, {@link EXTDebugUtils#vkSetDebugUtilsObjectNameEXT SetDebugUtilsObjectNameEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code objectType} &ndash; a {@code VkObjectType} specifying the type of the object to be named.</li>
- * <li>{@code objectHandle} &ndash; the object to be named.</li>
- * <li>{@code pObjectName} &ndash; either {@code NULL} or a null-terminated UTF-8 string specifying the name to apply to {@code objectHandle}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDebugUtilsObjectNameInfoEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkObjectType objectType;
- *     uint64_t objectHandle;
- *     char const * pObjectName;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkObjectType {@link #objectType};
+ *     uint64_t {@link #objectHandle};
+ *     char const * {@link #pObjectName};
  * }</code></pre>
  */
 public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResource {
@@ -112,36 +102,36 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code objectType} field. */
+    /** a {@code VkObjectType} specifying the type of the object to be named. */
     @NativeType("VkObjectType")
     public int objectType() { return nobjectType(address()); }
-    /** Returns the value of the {@code objectHandle} field. */
+    /** the object to be named. */
     @NativeType("uint64_t")
     public long objectHandle() { return nobjectHandle(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pObjectName} field. */
+    /** either {@code NULL} or a null-terminated UTF-8 string specifying the name to apply to {@code objectHandle}. */
     @Nullable
     @NativeType("char const *")
     public ByteBuffer pObjectName() { return npObjectName(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code pObjectName} field. */
+    /** either {@code NULL} or a null-terminated UTF-8 string specifying the name to apply to {@code objectHandle}. */
     @Nullable
     @NativeType("char const *")
     public String pObjectNameString() { return npObjectNameString(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDebugUtilsObjectNameInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDebugUtilsObjectNameInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code objectType} field. */
+    /** Sets the specified value to the {@link #objectType} field. */
     public VkDebugUtilsObjectNameInfoEXT objectType(@NativeType("VkObjectType") int value) { nobjectType(address(), value); return this; }
-    /** Sets the specified value to the {@code objectHandle} field. */
+    /** Sets the specified value to the {@link #objectHandle} field. */
     public VkDebugUtilsObjectNameInfoEXT objectHandle(@NativeType("uint64_t") long value) { nobjectHandle(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@code pObjectName} field. */
+    /** Sets the address of the specified encoded string to the {@link #pObjectName} field. */
     public VkDebugUtilsObjectNameInfoEXT pObjectName(@Nullable @NativeType("char const *") ByteBuffer value) { npObjectName(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -381,36 +371,36 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDebugUtilsObjectNameInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDebugUtilsObjectNameInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDebugUtilsObjectNameInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDebugUtilsObjectNameInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code objectType} field. */
+        /** @return the value of the {@link VkDebugUtilsObjectNameInfoEXT#objectType} field. */
         @NativeType("VkObjectType")
         public int objectType() { return VkDebugUtilsObjectNameInfoEXT.nobjectType(address()); }
-        /** Returns the value of the {@code objectHandle} field. */
+        /** @return the value of the {@link VkDebugUtilsObjectNameInfoEXT#objectHandle} field. */
         @NativeType("uint64_t")
         public long objectHandle() { return VkDebugUtilsObjectNameInfoEXT.nobjectHandle(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pObjectName} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkDebugUtilsObjectNameInfoEXT#pObjectName} field. */
         @Nullable
         @NativeType("char const *")
         public ByteBuffer pObjectName() { return VkDebugUtilsObjectNameInfoEXT.npObjectName(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code pObjectName} field. */
+        /** @return the null-terminated string pointed to by the {@link VkDebugUtilsObjectNameInfoEXT#pObjectName} field. */
         @Nullable
         @NativeType("char const *")
         public String pObjectNameString() { return VkDebugUtilsObjectNameInfoEXT.npObjectNameString(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDebugUtilsObjectNameInfoEXT#sType} field. */
         public VkDebugUtilsObjectNameInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDebugUtilsObjectNameInfoEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDebugUtilsObjectNameInfoEXT#pNext} field. */
         public VkDebugUtilsObjectNameInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDebugUtilsObjectNameInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code objectType} field. */
+        /** Sets the specified value to the {@link VkDebugUtilsObjectNameInfoEXT#objectType} field. */
         public VkDebugUtilsObjectNameInfoEXT.Buffer objectType(@NativeType("VkObjectType") int value) { VkDebugUtilsObjectNameInfoEXT.nobjectType(address(), value); return this; }
-        /** Sets the specified value to the {@code objectHandle} field. */
+        /** Sets the specified value to the {@link VkDebugUtilsObjectNameInfoEXT#objectHandle} field. */
         public VkDebugUtilsObjectNameInfoEXT.Buffer objectHandle(@NativeType("uint64_t") long value) { VkDebugUtilsObjectNameInfoEXT.nobjectHandle(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@code pObjectName} field. */
+        /** Sets the address of the specified encoded string to the {@link VkDebugUtilsObjectNameInfoEXT#pObjectName} field. */
         public VkDebugUtilsObjectNameInfoEXT.Buffer pObjectName(@Nullable @NativeType("char const *") ByteBuffer value) { VkDebugUtilsObjectNameInfoEXT.npObjectName(address(), value); return this; }
 
     }

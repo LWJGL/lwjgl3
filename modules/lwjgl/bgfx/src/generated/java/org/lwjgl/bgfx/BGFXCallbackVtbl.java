@@ -19,23 +19,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Callback virtual table.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code fatal} &ndash; the fatal error callback</li>
- * <li>{@code trace_vargs} &ndash; the debug message callback</li>
- * <li>{@code profiler_begin} &ndash; the profiler begin callback</li>
- * <li>{@code profiler_begin_literal} &ndash; the profiler begin literal callback</li>
- * <li>{@code profiler_end} &ndash; the profiler end callback</li>
- * <li>{@code cache_read_size} &ndash; the cache read size callback</li>
- * <li>{@code cache_read} &ndash; the cache read callback</li>
- * <li>{@code cache_write} &ndash; the cache write callback</li>
- * <li>{@code screen_shot} &ndash; the screenshot callback</li>
- * <li>{@code capture_begin} &ndash; the capture begin callback</li>
- * <li>{@code capture_end} &ndash; the capture end callback</li>
- * <li>{@code capture_frame} &ndash; the capture framecallback</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -124,66 +107,66 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code fatal} field. */
+    /** the fatal error callback */
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, bgfx_fatal_t, char const *)")
     public BGFXFatalCallback fatal() { return nfatal(address()); }
-    /** Returns the value of the {@code trace_vargs} field. */
+    /** the debug message callback */
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, char const *, va_list)")
     public BGFXTraceVarArgsCallback trace_vargs() { return ntrace_vargs(address()); }
-    /** Returns the value of the {@code profiler_begin} field. */
+    /** the profiler begin callback */
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, char const *, uint16_t)")
     public BGFXProfilerBegin profiler_begin() { return nprofiler_begin(address()); }
-    /** Returns the value of the {@code profiler_begin_literal} field. */
+    /** the profiler begin literal callback */
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, char const *, uint16_t)")
     public BGFXProfilerBeginLiteral profiler_begin_literal() { return nprofiler_begin_literal(address()); }
-    /** Returns the value of the {@code profiler_end} field. */
+    /** the profiler end callback */
     @NativeType("void (*) (bgfx_callback_interface_t *)")
     public BGFXProfilerEnd profiler_end() { return nprofiler_end(address()); }
-    /** Returns the value of the {@code cache_read_size} field. */
+    /** the cache read size callback */
     @NativeType("uint32_t (*) (bgfx_callback_interface_t *, uint64_t)")
     public BGFXCacheReadSizeCallback cache_read_size() { return ncache_read_size(address()); }
-    /** Returns the value of the {@code cache_read} field. */
+    /** the cache read callback */
     @NativeType("bool (*) (bgfx_callback_interface_t *, uint64_t, void *, uint32_t)")
     public BGFXCacheReadCallback cache_read() { return ncache_read(address()); }
-    /** Returns the value of the {@code cache_write} field. */
+    /** the cache write callback */
     @NativeType("void (*) (bgfx_callback_interface_t *, uint64_t, void const *, uint32_t)")
     public BGFXCacheWriteCallback cache_write() { return ncache_write(address()); }
-    /** Returns the value of the {@code screen_shot} field. */
+    /** the screenshot callback */
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, uint32_t, uint32_t, void const *, uint32_t, bool)")
     public BGFXScreenShotCallback screen_shot() { return nscreen_shot(address()); }
-    /** Returns the value of the {@code capture_begin} field. */
+    /** the capture begin callback */
     @NativeType("void (*) (bgfx_callback_interface_t *, uint32_t, uint32_t, uint32_t, bgfx_texture_format_t, bool)")
     public BGFXCaptureBeginCallback capture_begin() { return ncapture_begin(address()); }
-    /** Returns the value of the {@code capture_end} field. */
+    /** the capture end callback */
     @NativeType("void (*) (bgfx_callback_interface_t *)")
     public BGFXCaptureEndCallback capture_end() { return ncapture_end(address()); }
-    /** Returns the value of the {@code capture_frame} field. */
+    /** the capture framecallback */
     @NativeType("void (*) (bgfx_callback_interface_t *, void const *, uint32_t)")
     public BGFXCaptureFrameCallback capture_frame() { return ncapture_frame(address()); }
 
-    /** Sets the specified value to the {@code fatal} field. */
+    /** Sets the specified value to the {@link #fatal} field. */
     public BGFXCallbackVtbl fatal(@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, bgfx_fatal_t, char const *)") BGFXFatalCallbackI value) { nfatal(address(), value); return this; }
-    /** Sets the specified value to the {@code trace_vargs} field. */
+    /** Sets the specified value to the {@link #trace_vargs} field. */
     public BGFXCallbackVtbl trace_vargs(@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, char const *, va_list)") BGFXTraceVarArgsCallbackI value) { ntrace_vargs(address(), value); return this; }
-    /** Sets the specified value to the {@code profiler_begin} field. */
+    /** Sets the specified value to the {@link #profiler_begin} field. */
     public BGFXCallbackVtbl profiler_begin(@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, char const *, uint16_t)") BGFXProfilerBeginI value) { nprofiler_begin(address(), value); return this; }
-    /** Sets the specified value to the {@code profiler_begin_literal} field. */
+    /** Sets the specified value to the {@link #profiler_begin_literal} field. */
     public BGFXCallbackVtbl profiler_begin_literal(@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, char const *, uint16_t)") BGFXProfilerBeginLiteralI value) { nprofiler_begin_literal(address(), value); return this; }
-    /** Sets the specified value to the {@code profiler_end} field. */
+    /** Sets the specified value to the {@link #profiler_end} field. */
     public BGFXCallbackVtbl profiler_end(@NativeType("void (*) (bgfx_callback_interface_t *)") BGFXProfilerEndI value) { nprofiler_end(address(), value); return this; }
-    /** Sets the specified value to the {@code cache_read_size} field. */
+    /** Sets the specified value to the {@link #cache_read_size} field. */
     public BGFXCallbackVtbl cache_read_size(@NativeType("uint32_t (*) (bgfx_callback_interface_t *, uint64_t)") BGFXCacheReadSizeCallbackI value) { ncache_read_size(address(), value); return this; }
-    /** Sets the specified value to the {@code cache_read} field. */
+    /** Sets the specified value to the {@link #cache_read} field. */
     public BGFXCallbackVtbl cache_read(@NativeType("bool (*) (bgfx_callback_interface_t *, uint64_t, void *, uint32_t)") BGFXCacheReadCallbackI value) { ncache_read(address(), value); return this; }
-    /** Sets the specified value to the {@code cache_write} field. */
+    /** Sets the specified value to the {@link #cache_write} field. */
     public BGFXCallbackVtbl cache_write(@NativeType("void (*) (bgfx_callback_interface_t *, uint64_t, void const *, uint32_t)") BGFXCacheWriteCallbackI value) { ncache_write(address(), value); return this; }
-    /** Sets the specified value to the {@code screen_shot} field. */
+    /** Sets the specified value to the {@link #screen_shot} field. */
     public BGFXCallbackVtbl screen_shot(@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, uint32_t, uint32_t, void const *, uint32_t, bool)") BGFXScreenShotCallbackI value) { nscreen_shot(address(), value); return this; }
-    /** Sets the specified value to the {@code capture_begin} field. */
+    /** Sets the specified value to the {@link #capture_begin} field. */
     public BGFXCallbackVtbl capture_begin(@NativeType("void (*) (bgfx_callback_interface_t *, uint32_t, uint32_t, uint32_t, bgfx_texture_format_t, bool)") BGFXCaptureBeginCallbackI value) { ncapture_begin(address(), value); return this; }
-    /** Sets the specified value to the {@code capture_end} field. */
+    /** Sets the specified value to the {@link #capture_end} field. */
     public BGFXCallbackVtbl capture_end(@NativeType("void (*) (bgfx_callback_interface_t *)") BGFXCaptureEndCallbackI value) { ncapture_end(address(), value); return this; }
-    /** Sets the specified value to the {@code capture_frame} field. */
+    /** Sets the specified value to the {@link #capture_frame} field. */
     public BGFXCallbackVtbl capture_frame(@NativeType("void (*) (bgfx_callback_interface_t *, void const *, uint32_t)") BGFXCaptureFrameCallbackI value) { ncapture_frame(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */

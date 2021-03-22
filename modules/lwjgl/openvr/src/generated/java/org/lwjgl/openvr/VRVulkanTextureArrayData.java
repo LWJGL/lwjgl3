@@ -69,10 +69,10 @@ public class VRVulkanTextureArrayData extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code m_unArrayIndex} field. */
+    /** @return the value of the {@code m_unArrayIndex} field. */
     @NativeType("uint32_t")
     public int m_unArrayIndex() { return nm_unArrayIndex(address()); }
-    /** Returns the value of the {@code m_unArraySize} field. */
+    /** @return the value of the {@code m_unArraySize} field. */
     @NativeType("uint32_t")
     public int m_unArraySize() { return nm_unArraySize(address()); }
 
@@ -295,10 +295,10 @@ public class VRVulkanTextureArrayData extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code m_unArrayIndex} field. */
+        /** @return the value of the {@code m_unArrayIndex} field. */
         @NativeType("uint32_t")
         public int m_unArrayIndex() { return VRVulkanTextureArrayData.nm_unArrayIndex(address()); }
-        /** Returns the value of the {@code m_unArraySize} field. */
+        /** @return the value of the {@code m_unArraySize} field. */
         @NativeType("uint32_t")
         public int m_unArraySize() { return VRVulkanTextureArrayData.nm_unArraySize(address()); }
 

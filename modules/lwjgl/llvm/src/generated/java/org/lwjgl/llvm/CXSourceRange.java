@@ -72,16 +72,16 @@ public class CXSourceRange extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link PointerBuffer} view of the {@code ptr_data} field. */
+    /** @return a {@link PointerBuffer} view of the {@code ptr_data} field. */
     @NativeType("void const *[2]")
     public PointerBuffer ptr_data() { return nptr_data(address()); }
-    /** Returns the value at the specified index of the {@code ptr_data} field. */
+    /** @return the value at the specified index of the {@code ptr_data} field. */
     @NativeType("void const *")
     public long ptr_data(int index) { return nptr_data(address(), index); }
-    /** Returns the value of the {@code begin_int_data} field. */
+    /** @return the value of the {@code begin_int_data} field. */
     @NativeType("unsigned")
     public int begin_int_data() { return nbegin_int_data(address()); }
-    /** Returns the value of the {@code end_int_data} field. */
+    /** @return the value of the {@code end_int_data} field. */
     @NativeType("unsigned")
     public int end_int_data() { return nend_int_data(address()); }
 
@@ -277,16 +277,16 @@ public class CXSourceRange extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link PointerBuffer} view of the {@code ptr_data} field. */
+        /** @return a {@link PointerBuffer} view of the {@code ptr_data} field. */
         @NativeType("void const *[2]")
         public PointerBuffer ptr_data() { return CXSourceRange.nptr_data(address()); }
-        /** Returns the value at the specified index of the {@code ptr_data} field. */
+        /** @return the value at the specified index of the {@code ptr_data} field. */
         @NativeType("void const *")
         public long ptr_data(int index) { return CXSourceRange.nptr_data(address(), index); }
-        /** Returns the value of the {@code begin_int_data} field. */
+        /** @return the value of the {@code begin_int_data} field. */
         @NativeType("unsigned")
         public int begin_int_data() { return CXSourceRange.nbegin_int_data(address()); }
-        /** Returns the value of the {@code end_int_data} field. */
+        /** @return the value of the {@code end_int_data} field. */
         @NativeType("unsigned")
         public int end_int_data() { return CXSourceRange.nend_int_data(address()); }
 

@@ -18,17 +18,11 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure for containing native AWT functions.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code version} &ndash; Version of this structure. This must always be set before calling JAWT_GetAWT()</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct JAWT {
- *     jint version;
+ *     jint {@link #version};
  *     void * GetDrawingSurface;
  *     void * FreeDrawingSurface;
  *     void * Lock;
@@ -99,35 +93,35 @@ public class JAWT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code version} field. */
+    /** Version of this structure. This must always be set before calling JAWT_GetAWT() */
     @NativeType("jint")
     public int version() { return nversion(address()); }
-    /** Returns the value of the {@code GetDrawingSurface} field. */
+    /** @return the value of the {@code GetDrawingSurface} field. */
     @NativeType("void *")
     public long GetDrawingSurface() { return nGetDrawingSurface(address()); }
-    /** Returns the value of the {@code FreeDrawingSurface} field. */
+    /** @return the value of the {@code FreeDrawingSurface} field. */
     @NativeType("void *")
     public long FreeDrawingSurface() { return nFreeDrawingSurface(address()); }
-    /** Returns the value of the {@code Lock} field. */
+    /** @return the value of the {@code Lock} field. */
     @NativeType("void *")
     public long Lock() { return nLock(address()); }
-    /** Returns the value of the {@code Unlock} field. */
+    /** @return the value of the {@code Unlock} field. */
     @NativeType("void *")
     public long Unlock() { return nUnlock(address()); }
-    /** Returns the value of the {@code GetComponent} field. */
+    /** @return the value of the {@code GetComponent} field. */
     @NativeType("void *")
     public long GetComponent() { return nGetComponent(address()); }
-    /** Returns the value of the {@code CreateEmbeddedFrame} field. */
+    /** @return the value of the {@code CreateEmbeddedFrame} field. */
     @NativeType("void *")
     public long CreateEmbeddedFrame() { return nCreateEmbeddedFrame(address()); }
-    /** Returns the value of the {@code SetBounds} field. */
+    /** @return the value of the {@code SetBounds} field. */
     @NativeType("void *")
     public long SetBounds() { return nSetBounds(address()); }
-    /** Returns the value of the {@code SynthesizeWindowActivation} field. */
+    /** @return the value of the {@code SynthesizeWindowActivation} field. */
     @NativeType("void *")
     public long SynthesizeWindowActivation() { return nSynthesizeWindowActivation(address()); }
 
-    /** Sets the specified value to the {@code version} field. */
+    /** Sets the specified value to the {@link #version} field. */
     public JAWT version(@NativeType("jint") int value) { nversion(address(), value); return this; }
 
     /**

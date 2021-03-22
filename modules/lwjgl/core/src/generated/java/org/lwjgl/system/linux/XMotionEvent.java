@@ -19,45 +19,25 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Motion event.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code type} &ndash; the event type. Must be:<br><table><tr><td>{@link X11#MotionNotify}</td></tr></table></li>
- * <li>{@code serial} &ndash; # of last request processed by server</li>
- * <li>{@code send_event} &ndash; true if this came from an {@link X11#XSendEvent} request</li>
- * <li>{@code display} &ndash; {@code Display} the event was read from</li>
- * <li>{@code window} &ndash; window it reported relative to</li>
- * <li>{@code root} &ndash; root window that the event occurred on</li>
- * <li>{@code subwindow} &ndash; child window</li>
- * <li>{@code time} &ndash; milliseconds</li>
- * <li>{@code x} &ndash; pointer x coordinate in event window</li>
- * <li>{@code y} &ndash; pointer y coordinate in event window</li>
- * <li>{@code x_root} &ndash; x coordinate relative to {@code root}</li>
- * <li>{@code y_root} &ndash; y coordinate relative to {@code root}</li>
- * <li>{@code state} &ndash; key or button mask</li>
- * <li>{@code is_hint} &ndash; detail</li>
- * <li>{@code same_screen} &ndash; same screen flag</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XMotionEvent {
- *     int type;
- *     unsigned long serial;
- *     Bool send_event;
- *     Display * display;
- *     Window window;
- *     Window root;
- *     Window subwindow;
- *     Time time;
- *     int x;
- *     int y;
- *     int x_root;
- *     int y_root;
- *     unsigned int state;
- *     char is_hint;
- *     Bool same_screen;
+ *     int {@link #type};
+ *     unsigned long {@link #serial};
+ *     Bool {@link #send_event};
+ *     Display * {@link #display};
+ *     Window {@link #window};
+ *     Window {@link #root};
+ *     Window {@link #subwindow};
+ *     Time {@link #time};
+ *     int {@link #x};
+ *     int {@link #y};
+ *     int {@link #x_root};
+ *     int {@link #y_root};
+ *     unsigned int {@link #state};
+ *     char {@link #is_hint};
+ *     Bool {@link #same_screen};
  * }</code></pre>
  */
 public class XMotionEvent extends Struct implements NativeResource {
@@ -138,76 +118,76 @@ public class XMotionEvent extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** the event type. Must be:<br><table><tr><td>{@link X11#MotionNotify}</td></tr></table> */
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code serial} field. */
+    /** # of last request processed by server */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** Returns the value of the {@code send_event} field. */
+    /** true if this came from an {@link X11#XSendEvent} request */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** Returns the value of the {@code display} field. */
+    /** {@code Display} the event was read from */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code window} field. */
+    /** window it reported relative to */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
-    /** Returns the value of the {@code root} field. */
+    /** root window that the event occurred on */
     @NativeType("Window")
     public long root() { return nroot(address()); }
-    /** Returns the value of the {@code subwindow} field. */
+    /** child window */
     @NativeType("Window")
     public long subwindow() { return nsubwindow(address()); }
-    /** Returns the value of the {@code time} field. */
+    /** milliseconds */
     @NativeType("Time")
     public long time() { return ntime(address()); }
-    /** Returns the value of the {@code x} field. */
+    /** pointer x coordinate in event window */
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** pointer y coordinate in event window */
     public int y() { return ny(address()); }
-    /** Returns the value of the {@code x_root} field. */
+    /** x coordinate relative to {@code root} */
     public int x_root() { return nx_root(address()); }
-    /** Returns the value of the {@code y_root} field. */
+    /** y coordinate relative to {@code root} */
     public int y_root() { return ny_root(address()); }
-    /** Returns the value of the {@code state} field. */
+    /** key or button mask */
     @NativeType("unsigned int")
     public int state() { return nstate(address()); }
-    /** Returns the value of the {@code is_hint} field. */
+    /** detail */
     @NativeType("char")
     public byte is_hint() { return nis_hint(address()); }
-    /** Returns the value of the {@code same_screen} field. */
+    /** same screen flag */
     @NativeType("Bool")
     public boolean same_screen() { return nsame_screen(address()) != 0; }
 
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public XMotionEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code serial} field. */
+    /** Sets the specified value to the {@link #serial} field. */
     public XMotionEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@code send_event} field. */
+    /** Sets the specified value to the {@link #send_event} field. */
     public XMotionEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code display} field. */
+    /** Sets the specified value to the {@link #display} field. */
     public XMotionEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@code window} field. */
+    /** Sets the specified value to the {@link #window} field. */
     public XMotionEvent window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
-    /** Sets the specified value to the {@code root} field. */
+    /** Sets the specified value to the {@link #root} field. */
     public XMotionEvent root(@NativeType("Window") long value) { nroot(address(), value); return this; }
-    /** Sets the specified value to the {@code subwindow} field. */
+    /** Sets the specified value to the {@link #subwindow} field. */
     public XMotionEvent subwindow(@NativeType("Window") long value) { nsubwindow(address(), value); return this; }
-    /** Sets the specified value to the {@code time} field. */
+    /** Sets the specified value to the {@link #time} field. */
     public XMotionEvent time(@NativeType("Time") long value) { ntime(address(), value); return this; }
-    /** Sets the specified value to the {@code x} field. */
+    /** Sets the specified value to the {@link #x} field. */
     public XMotionEvent x(int value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@code y} field. */
+    /** Sets the specified value to the {@link #y} field. */
     public XMotionEvent y(int value) { ny(address(), value); return this; }
-    /** Sets the specified value to the {@code x_root} field. */
+    /** Sets the specified value to the {@link #x_root} field. */
     public XMotionEvent x_root(int value) { nx_root(address(), value); return this; }
-    /** Sets the specified value to the {@code y_root} field. */
+    /** Sets the specified value to the {@link #y_root} field. */
     public XMotionEvent y_root(int value) { ny_root(address(), value); return this; }
-    /** Sets the specified value to the {@code state} field. */
+    /** Sets the specified value to the {@link #state} field. */
     public XMotionEvent state(@NativeType("unsigned int") int value) { nstate(address(), value); return this; }
-    /** Sets the specified value to the {@code is_hint} field. */
+    /** Sets the specified value to the {@link #is_hint} field. */
     public XMotionEvent is_hint(@NativeType("char") byte value) { nis_hint(address(), value); return this; }
-    /** Sets the specified value to the {@code same_screen} field. */
+    /** Sets the specified value to the {@link #same_screen} field. */
     public XMotionEvent same_screen(@NativeType("Bool") boolean value) { nsame_screen(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -523,76 +503,76 @@ public class XMotionEvent extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@link XMotionEvent#type} field. */
         public int type() { return XMotionEvent.ntype(address()); }
-        /** Returns the value of the {@code serial} field. */
+        /** @return the value of the {@link XMotionEvent#serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XMotionEvent.nserial(address()); }
-        /** Returns the value of the {@code send_event} field. */
+        /** @return the value of the {@link XMotionEvent#send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XMotionEvent.nsend_event(address()) != 0; }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@link XMotionEvent#display} field. */
         @NativeType("Display *")
         public long display() { return XMotionEvent.ndisplay(address()); }
-        /** Returns the value of the {@code window} field. */
+        /** @return the value of the {@link XMotionEvent#window} field. */
         @NativeType("Window")
         public long window() { return XMotionEvent.nwindow(address()); }
-        /** Returns the value of the {@code root} field. */
+        /** @return the value of the {@link XMotionEvent#root} field. */
         @NativeType("Window")
         public long root() { return XMotionEvent.nroot(address()); }
-        /** Returns the value of the {@code subwindow} field. */
+        /** @return the value of the {@link XMotionEvent#subwindow} field. */
         @NativeType("Window")
         public long subwindow() { return XMotionEvent.nsubwindow(address()); }
-        /** Returns the value of the {@code time} field. */
+        /** @return the value of the {@link XMotionEvent#time} field. */
         @NativeType("Time")
         public long time() { return XMotionEvent.ntime(address()); }
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link XMotionEvent#x} field. */
         public int x() { return XMotionEvent.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@link XMotionEvent#y} field. */
         public int y() { return XMotionEvent.ny(address()); }
-        /** Returns the value of the {@code x_root} field. */
+        /** @return the value of the {@link XMotionEvent#x_root} field. */
         public int x_root() { return XMotionEvent.nx_root(address()); }
-        /** Returns the value of the {@code y_root} field. */
+        /** @return the value of the {@link XMotionEvent#y_root} field. */
         public int y_root() { return XMotionEvent.ny_root(address()); }
-        /** Returns the value of the {@code state} field. */
+        /** @return the value of the {@link XMotionEvent#state} field. */
         @NativeType("unsigned int")
         public int state() { return XMotionEvent.nstate(address()); }
-        /** Returns the value of the {@code is_hint} field. */
+        /** @return the value of the {@link XMotionEvent#is_hint} field. */
         @NativeType("char")
         public byte is_hint() { return XMotionEvent.nis_hint(address()); }
-        /** Returns the value of the {@code same_screen} field. */
+        /** @return the value of the {@link XMotionEvent#same_screen} field. */
         @NativeType("Bool")
         public boolean same_screen() { return XMotionEvent.nsame_screen(address()) != 0; }
 
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link XMotionEvent#type} field. */
         public XMotionEvent.Buffer type(int value) { XMotionEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code serial} field. */
+        /** Sets the specified value to the {@link XMotionEvent#serial} field. */
         public XMotionEvent.Buffer serial(@NativeType("unsigned long") long value) { XMotionEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@code send_event} field. */
+        /** Sets the specified value to the {@link XMotionEvent#send_event} field. */
         public XMotionEvent.Buffer send_event(@NativeType("Bool") boolean value) { XMotionEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code display} field. */
+        /** Sets the specified value to the {@link XMotionEvent#display} field. */
         public XMotionEvent.Buffer display(@NativeType("Display *") long value) { XMotionEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@code window} field. */
+        /** Sets the specified value to the {@link XMotionEvent#window} field. */
         public XMotionEvent.Buffer window(@NativeType("Window") long value) { XMotionEvent.nwindow(address(), value); return this; }
-        /** Sets the specified value to the {@code root} field. */
+        /** Sets the specified value to the {@link XMotionEvent#root} field. */
         public XMotionEvent.Buffer root(@NativeType("Window") long value) { XMotionEvent.nroot(address(), value); return this; }
-        /** Sets the specified value to the {@code subwindow} field. */
+        /** Sets the specified value to the {@link XMotionEvent#subwindow} field. */
         public XMotionEvent.Buffer subwindow(@NativeType("Window") long value) { XMotionEvent.nsubwindow(address(), value); return this; }
-        /** Sets the specified value to the {@code time} field. */
+        /** Sets the specified value to the {@link XMotionEvent#time} field. */
         public XMotionEvent.Buffer time(@NativeType("Time") long value) { XMotionEvent.ntime(address(), value); return this; }
-        /** Sets the specified value to the {@code x} field. */
+        /** Sets the specified value to the {@link XMotionEvent#x} field. */
         public XMotionEvent.Buffer x(int value) { XMotionEvent.nx(address(), value); return this; }
-        /** Sets the specified value to the {@code y} field. */
+        /** Sets the specified value to the {@link XMotionEvent#y} field. */
         public XMotionEvent.Buffer y(int value) { XMotionEvent.ny(address(), value); return this; }
-        /** Sets the specified value to the {@code x_root} field. */
+        /** Sets the specified value to the {@link XMotionEvent#x_root} field. */
         public XMotionEvent.Buffer x_root(int value) { XMotionEvent.nx_root(address(), value); return this; }
-        /** Sets the specified value to the {@code y_root} field. */
+        /** Sets the specified value to the {@link XMotionEvent#y_root} field. */
         public XMotionEvent.Buffer y_root(int value) { XMotionEvent.ny_root(address(), value); return this; }
-        /** Sets the specified value to the {@code state} field. */
+        /** Sets the specified value to the {@link XMotionEvent#state} field. */
         public XMotionEvent.Buffer state(@NativeType("unsigned int") int value) { XMotionEvent.nstate(address(), value); return this; }
-        /** Sets the specified value to the {@code is_hint} field. */
+        /** Sets the specified value to the {@link XMotionEvent#is_hint} field. */
         public XMotionEvent.Buffer is_hint(@NativeType("char") byte value) { XMotionEvent.nis_hint(address(), value); return this; }
-        /** Sets the specified value to the {@code same_screen} field. */
+        /** Sets the specified value to the {@link XMotionEvent#same_screen} field. */
         public XMotionEvent.Buffer same_screen(@NativeType("Bool") boolean value) { XMotionEvent.nsame_screen(address(), value ? 1 : 0); return this; }
 
     }

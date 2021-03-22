@@ -37,21 +37,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK11#vkGetPhysicalDeviceExternalFenceProperties GetPhysicalDeviceExternalFenceProperties}, {@link KHRExternalFenceCapabilities#vkGetPhysicalDeviceExternalFencePropertiesKHR GetPhysicalDeviceExternalFencePropertiesKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code handleType} &ndash; a {@code VkExternalFenceHandleTypeFlagBits} value indicating an external fence handle type for which capabilities will be returned.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceExternalFenceInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkExternalFenceHandleTypeFlagBits handleType;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkExternalFenceHandleTypeFlagBits {@link #handleType};
  * }</code></pre>
  */
 public class VkPhysicalDeviceExternalFenceInfo extends Struct implements NativeResource {
@@ -96,21 +88,21 @@ public class VkPhysicalDeviceExternalFenceInfo extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code handleType} field. */
+    /** a {@code VkExternalFenceHandleTypeFlagBits} value indicating an external fence handle type for which capabilities will be returned. */
     @NativeType("VkExternalFenceHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceExternalFenceInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceExternalFenceInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code handleType} field. */
+    /** Sets the specified value to the {@link #handleType} field. */
     public VkPhysicalDeviceExternalFenceInfo handleType(@NativeType("VkExternalFenceHandleTypeFlagBits") int value) { nhandleType(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -333,21 +325,21 @@ public class VkPhysicalDeviceExternalFenceInfo extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExternalFenceInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceExternalFenceInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExternalFenceInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPhysicalDeviceExternalFenceInfo.npNext(address()); }
-        /** Returns the value of the {@code handleType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExternalFenceInfo#handleType} field. */
         @NativeType("VkExternalFenceHandleTypeFlagBits")
         public int handleType() { return VkPhysicalDeviceExternalFenceInfo.nhandleType(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExternalFenceInfo#sType} field. */
         public VkPhysicalDeviceExternalFenceInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExternalFenceInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExternalFenceInfo#pNext} field. */
         public VkPhysicalDeviceExternalFenceInfo.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceExternalFenceInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code handleType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExternalFenceInfo#handleType} field. */
         public VkPhysicalDeviceExternalFenceInfo.Buffer handleType(@NativeType("VkExternalFenceHandleTypeFlagBits") int value) { VkPhysicalDeviceExternalFenceInfo.nhandleType(address(), value); return this; }
 
     }

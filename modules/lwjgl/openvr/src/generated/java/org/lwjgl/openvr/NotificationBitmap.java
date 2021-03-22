@@ -76,19 +76,19 @@ public class NotificationBitmap extends Struct implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code m_pImageData} field.
+     * @return a {@link ByteBuffer} view of the data pointed to by the {@code m_pImageData} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
     @NativeType("void *")
     public ByteBuffer m_pImageData(int capacity) { return nm_pImageData(address(), capacity); }
-    /** Returns the value of the {@code m_nWidth} field. */
+    /** @return the value of the {@code m_nWidth} field. */
     @NativeType("int32_t")
     public int m_nWidth() { return nm_nWidth(address()); }
-    /** Returns the value of the {@code m_nHeight} field. */
+    /** @return the value of the {@code m_nHeight} field. */
     @NativeType("int32_t")
     public int m_nHeight() { return nm_nHeight(address()); }
-    /** Returns the value of the {@code m_nBytesPerPixel} field. */
+    /** @return the value of the {@code m_nBytesPerPixel} field. */
     @NativeType("int32_t")
     public int m_nBytesPerPixel() { return nm_nBytesPerPixel(address()); }
 
@@ -349,19 +349,19 @@ public class NotificationBitmap extends Struct implements NativeResource {
         }
 
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code m_pImageData} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@code m_pImageData} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("void *")
         public ByteBuffer m_pImageData(int capacity) { return NotificationBitmap.nm_pImageData(address(), capacity); }
-        /** Returns the value of the {@code m_nWidth} field. */
+        /** @return the value of the {@code m_nWidth} field. */
         @NativeType("int32_t")
         public int m_nWidth() { return NotificationBitmap.nm_nWidth(address()); }
-        /** Returns the value of the {@code m_nHeight} field. */
+        /** @return the value of the {@code m_nHeight} field. */
         @NativeType("int32_t")
         public int m_nHeight() { return NotificationBitmap.nm_nHeight(address()); }
-        /** Returns the value of the {@code m_nBytesPerPixel} field. */
+        /** @return the value of the {@code m_nBytesPerPixel} field. */
         @NativeType("int32_t")
         public int m_nBytesPerPixel() { return NotificationBitmap.nm_nBytesPerPixel(address()); }
 

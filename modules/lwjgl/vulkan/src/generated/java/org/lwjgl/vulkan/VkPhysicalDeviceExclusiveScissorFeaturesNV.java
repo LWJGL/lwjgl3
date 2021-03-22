@@ -30,19 +30,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVScissorExclusive#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code exclusiveScissor} &ndash; indicates that the implementation supports the exclusive scissor test.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceExclusiveScissorFeaturesNV {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 exclusiveScissor;
+ *     VkBool32 {@link #exclusiveScissor};
  * }</code></pre>
  */
 public class VkPhysicalDeviceExclusiveScissorFeaturesNV extends Struct implements NativeResource {
@@ -87,13 +81,13 @@ public class VkPhysicalDeviceExclusiveScissorFeaturesNV extends Struct implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code exclusiveScissor} field. */
+    /** indicates that the implementation supports the exclusive scissor test. */
     @NativeType("VkBool32")
     public boolean exclusiveScissor() { return nexclusiveScissor(address()) != 0; }
 
@@ -101,7 +95,7 @@ public class VkPhysicalDeviceExclusiveScissorFeaturesNV extends Struct implement
     public VkPhysicalDeviceExclusiveScissorFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceExclusiveScissorFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code exclusiveScissor} field. */
+    /** Sets the specified value to the {@link #exclusiveScissor} field. */
     public VkPhysicalDeviceExclusiveScissorFeaturesNV exclusiveScissor(@NativeType("VkBool32") boolean value) { nexclusiveScissor(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -324,13 +318,13 @@ public class VkPhysicalDeviceExclusiveScissorFeaturesNV extends Struct implement
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceExclusiveScissorFeaturesNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceExclusiveScissorFeaturesNV.npNext(address()); }
-        /** Returns the value of the {@code exclusiveScissor} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExclusiveScissorFeaturesNV#exclusiveScissor} field. */
         @NativeType("VkBool32")
         public boolean exclusiveScissor() { return VkPhysicalDeviceExclusiveScissorFeaturesNV.nexclusiveScissor(address()) != 0; }
 
@@ -338,7 +332,7 @@ public class VkPhysicalDeviceExclusiveScissorFeaturesNV extends Struct implement
         public VkPhysicalDeviceExclusiveScissorFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExclusiveScissorFeaturesNV.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceExclusiveScissorFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceExclusiveScissorFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code exclusiveScissor} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExclusiveScissorFeaturesNV#exclusiveScissor} field. */
         public VkPhysicalDeviceExclusiveScissorFeaturesNV.Buffer exclusiveScissor(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceExclusiveScissorFeaturesNV.nexclusiveScissor(address(), value ? 1 : 0); return this; }
 
     }

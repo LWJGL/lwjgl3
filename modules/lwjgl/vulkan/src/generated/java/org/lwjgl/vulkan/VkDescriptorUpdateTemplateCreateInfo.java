@@ -45,35 +45,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkDescriptorUpdateTemplateEntry}, {@link VK11#vkCreateDescriptorUpdateTemplate CreateDescriptorUpdateTemplate}, {@link KHRDescriptorUpdateTemplate#vkCreateDescriptorUpdateTemplateKHR CreateDescriptorUpdateTemplateKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code descriptorUpdateEntryCount} &ndash; the number of elements in the {@code pDescriptorUpdateEntries} array.</li>
- * <li>{@code pDescriptorUpdateEntries} &ndash; a pointer to an array of {@link VkDescriptorUpdateTemplateEntry} structures describing the descriptors to be updated by the descriptor update template.</li>
- * <li>{@code templateType} &ndash; Specifies the type of the descriptor update template. If set to {@link VK11#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET} it <b>can</b> only be used to update descriptor sets with a fixed {@code descriptorSetLayout}. If set to {@link KHRPushDescriptor#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR} it <b>can</b> only be used to push descriptor sets using the provided {@code pipelineBindPoint}, {@code pipelineLayout}, and {@code set} number.</li>
- * <li>{@code descriptorSetLayout} &ndash; the descriptor set layout the parameter update template will be used with. All descriptor sets which are going to be updated through the newly created descriptor update template <b>must</b> be created with this layout. {@code descriptorSetLayout} is the descriptor set layout used to build the descriptor update template. All descriptor sets which are going to be updated through the newly created descriptor update template <b>must</b> be created with a layout that matches (is the same as, or defined identically to) this layout. This parameter is ignored if {@code templateType} is not {@link VK11#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET}.</li>
- * <li>{@code pipelineBindPoint} &ndash; a {@code VkPipelineBindPoint} indicating the type of the pipeline that will use the descriptors. This parameter is ignored if {@code templateType} is not {@link KHRPushDescriptor#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR}</li>
- * <li>{@code pipelineLayout} &ndash; a {@code VkPipelineLayout} object used to program the bindings. This parameter is ignored if {@code templateType} is not {@link KHRPushDescriptor#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR}</li>
- * <li>{@code set} &ndash; the set number of the descriptor set in the pipeline layout that will be updated. This parameter is ignored if {@code templateType} is not {@link KHRPushDescriptor#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR}</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDescriptorUpdateTemplateCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkDescriptorUpdateTemplateCreateFlags flags;
- *     uint32_t descriptorUpdateEntryCount;
- *     {@link VkDescriptorUpdateTemplateEntry VkDescriptorUpdateTemplateEntry} const * pDescriptorUpdateEntries;
- *     VkDescriptorUpdateTemplateType templateType;
- *     VkDescriptorSetLayout descriptorSetLayout;
- *     VkPipelineBindPoint pipelineBindPoint;
- *     VkPipelineLayout pipelineLayout;
- *     uint32_t set;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkDescriptorUpdateTemplateCreateFlags {@link #flags};
+ *     uint32_t {@link #descriptorUpdateEntryCount};
+ *     {@link VkDescriptorUpdateTemplateEntry VkDescriptorUpdateTemplateEntry} const * {@link #pDescriptorUpdateEntries};
+ *     VkDescriptorUpdateTemplateType {@link #templateType};
+ *     VkDescriptorSetLayout {@link #descriptorSetLayout};
+ *     VkPipelineBindPoint {@link #pipelineBindPoint};
+ *     VkPipelineLayout {@link #pipelineLayout};
+ *     uint32_t {@link #set};
  * }</code></pre>
  */
 public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements NativeResource {
@@ -139,54 +124,54 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkDescriptorUpdateTemplateCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code descriptorUpdateEntryCount} field. */
+    /** the number of elements in the {@code pDescriptorUpdateEntries} array. */
     @NativeType("uint32_t")
     public int descriptorUpdateEntryCount() { return ndescriptorUpdateEntryCount(address()); }
-    /** Returns a {@link VkDescriptorUpdateTemplateEntry.Buffer} view of the struct array pointed to by the {@code pDescriptorUpdateEntries} field. */
+    /** a pointer to an array of {@link VkDescriptorUpdateTemplateEntry} structures describing the descriptors to be updated by the descriptor update template. */
     @NativeType("VkDescriptorUpdateTemplateEntry const *")
     public VkDescriptorUpdateTemplateEntry.Buffer pDescriptorUpdateEntries() { return npDescriptorUpdateEntries(address()); }
-    /** Returns the value of the {@code templateType} field. */
+    /** Specifies the type of the descriptor update template. If set to {@link VK11#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET} it <b>can</b> only be used to update descriptor sets with a fixed {@code descriptorSetLayout}. If set to {@link KHRPushDescriptor#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR} it <b>can</b> only be used to push descriptor sets using the provided {@code pipelineBindPoint}, {@code pipelineLayout}, and {@code set} number. */
     @NativeType("VkDescriptorUpdateTemplateType")
     public int templateType() { return ntemplateType(address()); }
-    /** Returns the value of the {@code descriptorSetLayout} field. */
+    /** the descriptor set layout the parameter update template will be used with. All descriptor sets which are going to be updated through the newly created descriptor update template <b>must</b> be created with this layout. {@code descriptorSetLayout} is the descriptor set layout used to build the descriptor update template. All descriptor sets which are going to be updated through the newly created descriptor update template <b>must</b> be created with a layout that matches (is the same as, or defined identically to) this layout. This parameter is ignored if {@code templateType} is not {@link VK11#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET}. */
     @NativeType("VkDescriptorSetLayout")
     public long descriptorSetLayout() { return ndescriptorSetLayout(address()); }
-    /** Returns the value of the {@code pipelineBindPoint} field. */
+    /** a {@code VkPipelineBindPoint} indicating the type of the pipeline that will use the descriptors. This parameter is ignored if {@code templateType} is not {@link KHRPushDescriptor#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR} */
     @NativeType("VkPipelineBindPoint")
     public int pipelineBindPoint() { return npipelineBindPoint(address()); }
-    /** Returns the value of the {@code pipelineLayout} field. */
+    /** a {@code VkPipelineLayout} object used to program the bindings. This parameter is ignored if {@code templateType} is not {@link KHRPushDescriptor#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR} */
     @NativeType("VkPipelineLayout")
     public long pipelineLayout() { return npipelineLayout(address()); }
-    /** Returns the value of the {@code set} field. */
+    /** the set number of the descriptor set in the pipeline layout that will be updated. This parameter is ignored if {@code templateType} is not {@link KHRPushDescriptor#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR} */
     @NativeType("uint32_t")
     public int set() { return nset(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDescriptorUpdateTemplateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDescriptorUpdateTemplateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkDescriptorUpdateTemplateCreateInfo flags(@NativeType("VkDescriptorUpdateTemplateCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDescriptorUpdateTemplateEntry.Buffer} to the {@code pDescriptorUpdateEntries} field. */
+    /** Sets the address of the specified {@link VkDescriptorUpdateTemplateEntry.Buffer} to the {@link #pDescriptorUpdateEntries} field. */
     public VkDescriptorUpdateTemplateCreateInfo pDescriptorUpdateEntries(@NativeType("VkDescriptorUpdateTemplateEntry const *") VkDescriptorUpdateTemplateEntry.Buffer value) { npDescriptorUpdateEntries(address(), value); return this; }
-    /** Sets the specified value to the {@code templateType} field. */
+    /** Sets the specified value to the {@link #templateType} field. */
     public VkDescriptorUpdateTemplateCreateInfo templateType(@NativeType("VkDescriptorUpdateTemplateType") int value) { ntemplateType(address(), value); return this; }
-    /** Sets the specified value to the {@code descriptorSetLayout} field. */
+    /** Sets the specified value to the {@link #descriptorSetLayout} field. */
     public VkDescriptorUpdateTemplateCreateInfo descriptorSetLayout(@NativeType("VkDescriptorSetLayout") long value) { ndescriptorSetLayout(address(), value); return this; }
-    /** Sets the specified value to the {@code pipelineBindPoint} field. */
+    /** Sets the specified value to the {@link #pipelineBindPoint} field. */
     public VkDescriptorUpdateTemplateCreateInfo pipelineBindPoint(@NativeType("VkPipelineBindPoint") int value) { npipelineBindPoint(address(), value); return this; }
-    /** Sets the specified value to the {@code pipelineLayout} field. */
+    /** Sets the specified value to the {@link #pipelineLayout} field. */
     public VkDescriptorUpdateTemplateCreateInfo pipelineLayout(@NativeType("VkPipelineLayout") long value) { npipelineLayout(address(), value); return this; }
-    /** Sets the specified value to the {@code set} field. */
+    /** Sets the specified value to the {@link #set} field. */
     public VkDescriptorUpdateTemplateCreateInfo set(@NativeType("uint32_t") int value) { nset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -470,54 +455,54 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDescriptorUpdateTemplateCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDescriptorUpdateTemplateCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDescriptorUpdateTemplateCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDescriptorUpdateTemplateCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkDescriptorUpdateTemplateCreateInfo#flags} field. */
         @NativeType("VkDescriptorUpdateTemplateCreateFlags")
         public int flags() { return VkDescriptorUpdateTemplateCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code descriptorUpdateEntryCount} field. */
+        /** @return the value of the {@link VkDescriptorUpdateTemplateCreateInfo#descriptorUpdateEntryCount} field. */
         @NativeType("uint32_t")
         public int descriptorUpdateEntryCount() { return VkDescriptorUpdateTemplateCreateInfo.ndescriptorUpdateEntryCount(address()); }
-        /** Returns a {@link VkDescriptorUpdateTemplateEntry.Buffer} view of the struct array pointed to by the {@code pDescriptorUpdateEntries} field. */
+        /** @return a {@link VkDescriptorUpdateTemplateEntry.Buffer} view of the struct array pointed to by the {@link VkDescriptorUpdateTemplateCreateInfo#pDescriptorUpdateEntries} field. */
         @NativeType("VkDescriptorUpdateTemplateEntry const *")
         public VkDescriptorUpdateTemplateEntry.Buffer pDescriptorUpdateEntries() { return VkDescriptorUpdateTemplateCreateInfo.npDescriptorUpdateEntries(address()); }
-        /** Returns the value of the {@code templateType} field. */
+        /** @return the value of the {@link VkDescriptorUpdateTemplateCreateInfo#templateType} field. */
         @NativeType("VkDescriptorUpdateTemplateType")
         public int templateType() { return VkDescriptorUpdateTemplateCreateInfo.ntemplateType(address()); }
-        /** Returns the value of the {@code descriptorSetLayout} field. */
+        /** @return the value of the {@link VkDescriptorUpdateTemplateCreateInfo#descriptorSetLayout} field. */
         @NativeType("VkDescriptorSetLayout")
         public long descriptorSetLayout() { return VkDescriptorUpdateTemplateCreateInfo.ndescriptorSetLayout(address()); }
-        /** Returns the value of the {@code pipelineBindPoint} field. */
+        /** @return the value of the {@link VkDescriptorUpdateTemplateCreateInfo#pipelineBindPoint} field. */
         @NativeType("VkPipelineBindPoint")
         public int pipelineBindPoint() { return VkDescriptorUpdateTemplateCreateInfo.npipelineBindPoint(address()); }
-        /** Returns the value of the {@code pipelineLayout} field. */
+        /** @return the value of the {@link VkDescriptorUpdateTemplateCreateInfo#pipelineLayout} field. */
         @NativeType("VkPipelineLayout")
         public long pipelineLayout() { return VkDescriptorUpdateTemplateCreateInfo.npipelineLayout(address()); }
-        /** Returns the value of the {@code set} field. */
+        /** @return the value of the {@link VkDescriptorUpdateTemplateCreateInfo#set} field. */
         @NativeType("uint32_t")
         public int set() { return VkDescriptorUpdateTemplateCreateInfo.nset(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateCreateInfo#sType} field. */
         public VkDescriptorUpdateTemplateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorUpdateTemplateCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateCreateInfo#pNext} field. */
         public VkDescriptorUpdateTemplateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorUpdateTemplateCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateCreateInfo#flags} field. */
         public VkDescriptorUpdateTemplateCreateInfo.Buffer flags(@NativeType("VkDescriptorUpdateTemplateCreateFlags") int value) { VkDescriptorUpdateTemplateCreateInfo.nflags(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDescriptorUpdateTemplateEntry.Buffer} to the {@code pDescriptorUpdateEntries} field. */
+        /** Sets the address of the specified {@link VkDescriptorUpdateTemplateEntry.Buffer} to the {@link VkDescriptorUpdateTemplateCreateInfo#pDescriptorUpdateEntries} field. */
         public VkDescriptorUpdateTemplateCreateInfo.Buffer pDescriptorUpdateEntries(@NativeType("VkDescriptorUpdateTemplateEntry const *") VkDescriptorUpdateTemplateEntry.Buffer value) { VkDescriptorUpdateTemplateCreateInfo.npDescriptorUpdateEntries(address(), value); return this; }
-        /** Sets the specified value to the {@code templateType} field. */
+        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateCreateInfo#templateType} field. */
         public VkDescriptorUpdateTemplateCreateInfo.Buffer templateType(@NativeType("VkDescriptorUpdateTemplateType") int value) { VkDescriptorUpdateTemplateCreateInfo.ntemplateType(address(), value); return this; }
-        /** Sets the specified value to the {@code descriptorSetLayout} field. */
+        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateCreateInfo#descriptorSetLayout} field. */
         public VkDescriptorUpdateTemplateCreateInfo.Buffer descriptorSetLayout(@NativeType("VkDescriptorSetLayout") long value) { VkDescriptorUpdateTemplateCreateInfo.ndescriptorSetLayout(address(), value); return this; }
-        /** Sets the specified value to the {@code pipelineBindPoint} field. */
+        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateCreateInfo#pipelineBindPoint} field. */
         public VkDescriptorUpdateTemplateCreateInfo.Buffer pipelineBindPoint(@NativeType("VkPipelineBindPoint") int value) { VkDescriptorUpdateTemplateCreateInfo.npipelineBindPoint(address(), value); return this; }
-        /** Sets the specified value to the {@code pipelineLayout} field. */
+        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateCreateInfo#pipelineLayout} field. */
         public VkDescriptorUpdateTemplateCreateInfo.Buffer pipelineLayout(@NativeType("VkPipelineLayout") long value) { VkDescriptorUpdateTemplateCreateInfo.npipelineLayout(address(), value); return this; }
-        /** Sets the specified value to the {@code set} field. */
+        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateCreateInfo#set} field. */
         public VkDescriptorUpdateTemplateCreateInfo.Buffer set(@NativeType("uint32_t") int value) { VkDescriptorUpdateTemplateCreateInfo.nset(address(), value); return this; }
 
     }

@@ -62,31 +62,18 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link KHRAccelerationStructure#vkCreateAccelerationStructureKHR CreateAccelerationStructureKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code createFlags} &ndash; a bitmask of {@code VkAccelerationStructureCreateFlagBitsKHR} specifying additional creation parameters of the acceleration structure.</li>
- * <li>{@code buffer} &ndash; the buffer on which the acceleration structure will be stored.</li>
- * <li>{@code offset} &ndash; an offset in bytes from the base address of the buffer at which the acceleration structure will be stored, and <b>must</b> be a multiple of 256.</li>
- * <li>{@code size} &ndash; the size required for the acceleration structure.</li>
- * <li>{@code type} &ndash; a {@code VkAccelerationStructureTypeKHR} value specifying the type of acceleration structure that will be created.</li>
- * <li>{@code deviceAddress} &ndash; the device address requested for the acceleration structure if the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-accelerationStructureCaptureReplay">{@code accelerationStructureCaptureReplay}</a> feature is being used.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkAccelerationStructureCreateInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkAccelerationStructureCreateFlagsKHR createFlags;
- *     VkBuffer buffer;
- *     VkDeviceSize offset;
- *     VkDeviceSize size;
- *     VkAccelerationStructureTypeKHR type;
- *     VkDeviceAddress deviceAddress;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkAccelerationStructureCreateFlagsKHR {@link #createFlags};
+ *     VkBuffer {@link #buffer};
+ *     VkDeviceSize {@link #offset};
+ *     VkDeviceSize {@link #size};
+ *     VkAccelerationStructureTypeKHR {@link #type};
+ *     VkDeviceAddress {@link #deviceAddress};
  * }</code></pre>
  */
 public class VkAccelerationStructureCreateInfoKHR extends Struct implements NativeResource {
@@ -146,46 +133,46 @@ public class VkAccelerationStructureCreateInfoKHR extends Struct implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code createFlags} field. */
+    /** a bitmask of {@code VkAccelerationStructureCreateFlagBitsKHR} specifying additional creation parameters of the acceleration structure. */
     @NativeType("VkAccelerationStructureCreateFlagsKHR")
     public int createFlags() { return ncreateFlags(address()); }
-    /** Returns the value of the {@code buffer} field. */
+    /** the buffer on which the acceleration structure will be stored. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /** an offset in bytes from the base address of the buffer at which the acceleration structure will be stored, and <b>must</b> be a multiple of 256. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** the size required for the acceleration structure. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** Returns the value of the {@code type} field. */
+    /** a {@code VkAccelerationStructureTypeKHR} value specifying the type of acceleration structure that will be created. */
     @NativeType("VkAccelerationStructureTypeKHR")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code deviceAddress} field. */
+    /** the device address requested for the acceleration structure if the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-accelerationStructureCaptureReplay">{@code accelerationStructureCaptureReplay}</a> feature is being used. */
     @NativeType("VkDeviceAddress")
     public long deviceAddress() { return ndeviceAddress(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code createFlags} field. */
+    /** Sets the specified value to the {@link #createFlags} field. */
     public VkAccelerationStructureCreateInfoKHR createFlags(@NativeType("VkAccelerationStructureCreateFlagsKHR") int value) { ncreateFlags(address(), value); return this; }
-    /** Sets the specified value to the {@code buffer} field. */
+    /** Sets the specified value to the {@link #buffer} field. */
     public VkAccelerationStructureCreateInfoKHR buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code offset} field. */
+    /** Sets the specified value to the {@link #offset} field. */
     public VkAccelerationStructureCreateInfoKHR offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@code size} field. */
+    /** Sets the specified value to the {@link #size} field. */
     public VkAccelerationStructureCreateInfoKHR size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public VkAccelerationStructureCreateInfoKHR type(@NativeType("VkAccelerationStructureTypeKHR") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code deviceAddress} field. */
+    /** Sets the specified value to the {@link #deviceAddress} field. */
     public VkAccelerationStructureCreateInfoKHR deviceAddress(@NativeType("VkDeviceAddress") long value) { ndeviceAddress(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -438,46 +425,46 @@ public class VkAccelerationStructureCreateInfoKHR extends Struct implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkAccelerationStructureCreateInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAccelerationStructureCreateInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkAccelerationStructureCreateInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAccelerationStructureCreateInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code createFlags} field. */
+        /** @return the value of the {@link VkAccelerationStructureCreateInfoKHR#createFlags} field. */
         @NativeType("VkAccelerationStructureCreateFlagsKHR")
         public int createFlags() { return VkAccelerationStructureCreateInfoKHR.ncreateFlags(address()); }
-        /** Returns the value of the {@code buffer} field. */
+        /** @return the value of the {@link VkAccelerationStructureCreateInfoKHR#buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkAccelerationStructureCreateInfoKHR.nbuffer(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@link VkAccelerationStructureCreateInfoKHR#offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkAccelerationStructureCreateInfoKHR.noffset(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link VkAccelerationStructureCreateInfoKHR#size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkAccelerationStructureCreateInfoKHR.nsize(address()); }
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@link VkAccelerationStructureCreateInfoKHR#type} field. */
         @NativeType("VkAccelerationStructureTypeKHR")
         public int type() { return VkAccelerationStructureCreateInfoKHR.ntype(address()); }
-        /** Returns the value of the {@code deviceAddress} field. */
+        /** @return the value of the {@link VkAccelerationStructureCreateInfoKHR#deviceAddress} field. */
         @NativeType("VkDeviceAddress")
         public long deviceAddress() { return VkAccelerationStructureCreateInfoKHR.ndeviceAddress(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#sType} field. */
         public VkAccelerationStructureCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#pNext} field. */
         public VkAccelerationStructureCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code createFlags} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#createFlags} field. */
         public VkAccelerationStructureCreateInfoKHR.Buffer createFlags(@NativeType("VkAccelerationStructureCreateFlagsKHR") int value) { VkAccelerationStructureCreateInfoKHR.ncreateFlags(address(), value); return this; }
-        /** Sets the specified value to the {@code buffer} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#buffer} field. */
         public VkAccelerationStructureCreateInfoKHR.Buffer buffer(@NativeType("VkBuffer") long value) { VkAccelerationStructureCreateInfoKHR.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code offset} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#offset} field. */
         public VkAccelerationStructureCreateInfoKHR.Buffer offset(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureCreateInfoKHR.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@code size} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#size} field. */
         public VkAccelerationStructureCreateInfoKHR.Buffer size(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureCreateInfoKHR.nsize(address(), value); return this; }
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#type} field. */
         public VkAccelerationStructureCreateInfoKHR.Buffer type(@NativeType("VkAccelerationStructureTypeKHR") int value) { VkAccelerationStructureCreateInfoKHR.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code deviceAddress} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#deviceAddress} field. */
         public VkAccelerationStructureCreateInfoKHR.Buffer deviceAddress(@NativeType("VkDeviceAddress") long value) { VkAccelerationStructureCreateInfoKHR.ndeviceAddress(address(), value); return this; }
 
     }

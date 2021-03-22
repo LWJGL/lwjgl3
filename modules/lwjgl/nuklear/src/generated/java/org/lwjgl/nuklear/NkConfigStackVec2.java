@@ -63,12 +63,12 @@ class NkConfigStackVec2 extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code head} field. */
+    /** @return the value of the {@code head} field. */
     public int head() { return nhead(address()); }
-    /** Returns a {@link NkConfigStackVec2Element}.Buffer view of the {@code elements} field. */
+    /** @return a {@link NkConfigStackVec2Element}.Buffer view of the {@code elements} field. */
     @NativeType("struct nk_config_stack_vec2_element[16]")
     public NkConfigStackVec2Element.Buffer elements() { return nelements(address()); }
-    /** Returns a {@link NkConfigStackVec2Element} view of the struct at the specified index of the {@code elements} field. */
+    /** @return a {@link NkConfigStackVec2Element} view of the struct at the specified index of the {@code elements} field. */
     @NativeType("struct nk_config_stack_vec2_element")
     public NkConfigStackVec2Element elements(int index) { return nelements(address(), index); }
 
@@ -150,12 +150,12 @@ class NkConfigStackVec2 extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code head} field. */
+        /** @return the value of the {@code head} field. */
         public int head() { return NkConfigStackVec2.nhead(address()); }
-        /** Returns a {@link NkConfigStackVec2Element}.Buffer view of the {@code elements} field. */
+        /** @return a {@link NkConfigStackVec2Element}.Buffer view of the {@code elements} field. */
         @NativeType("struct nk_config_stack_vec2_element[16]")
         public NkConfigStackVec2Element.Buffer elements() { return NkConfigStackVec2.nelements(address()); }
-        /** Returns a {@link NkConfigStackVec2Element} view of the struct at the specified index of the {@code elements} field. */
+        /** @return a {@link NkConfigStackVec2Element} view of the struct at the specified index of the {@code elements} field. */
         @NativeType("struct nk_config_stack_vec2_element")
         public NkConfigStackVec2Element elements(int index) { return NkConfigStackVec2.nelements(address(), index); }
 

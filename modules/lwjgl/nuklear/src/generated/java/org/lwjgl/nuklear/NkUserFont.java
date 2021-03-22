@@ -16,25 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code userdata} &ndash; user provided font handle</li>
- * <li>{@code height} &ndash; max height of the font</li>
- * <li>{@code width} &ndash; font string width in pixel callback</li>
- * <li>{@code query} &ndash; font glyph callback to query drawing info</li>
- * <li>{@code texture} &ndash; texture handle to the used font atlas or texture</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct nk_user_font {
- *     {@link NkHandle nk_handle} userdata;
- *     float height;
- *     {@link NkTextWidthCallbackI nk_text_width_f} width;
- *     {@link NkQueryFontGlyphCallbackI nk_query_font_glyph_f} query;
- *     {@link NkHandle nk_handle} texture;
+ *     {@link NkHandle nk_handle} {@link #userdata};
+ *     float {@link #height};
+ *     {@link NkTextWidthCallbackI nk_text_width_f} {@link #width};
+ *     {@link NkQueryFontGlyphCallbackI nk_query_font_glyph_f} {@link #query};
+ *     {@link NkHandle nk_handle} {@link #texture};
  * }</code></pre>
  */
 @NativeType("struct nk_user_font")
@@ -86,36 +76,36 @@ public class NkUserFont extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+    /** user provided font handle */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** max height of the font */
     public float height() { return nheight(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** font string width in pixel callback */
     @Nullable
     @NativeType("nk_text_width_f")
     public NkTextWidthCallback width() { return nwidth(address()); }
-    /** Returns the value of the {@code query} field. */
+    /** font glyph callback to query drawing info */
     @Nullable
     @NativeType("nk_query_font_glyph_f")
     public NkQueryFontGlyphCallback query() { return nquery(address()); }
-    /** Returns a {@link NkHandle} view of the {@code texture} field. */
+    /** texture handle to the used font atlas or texture */
     @NativeType("nk_handle")
     public NkHandle texture() { return ntexture(address()); }
 
-    /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
+    /** Copies the specified {@link NkHandle} to the {@link #userdata} field. */
     public NkUserFont userdata(@NativeType("nk_handle") NkHandle value) { nuserdata(address(), value); return this; }
-    /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkUserFont userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
-    /** Sets the specified value to the {@code height} field. */
+    /** Sets the specified value to the {@link #height} field. */
     public NkUserFont height(float value) { nheight(address(), value); return this; }
-    /** Sets the specified value to the {@code width} field. */
+    /** Sets the specified value to the {@link #width} field. */
     public NkUserFont width(@Nullable @NativeType("nk_text_width_f") NkTextWidthCallbackI value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@code query} field. */
+    /** Sets the specified value to the {@link #query} field. */
     public NkUserFont query(@Nullable @NativeType("nk_query_font_glyph_f") NkQueryFontGlyphCallbackI value) { nquery(address(), value); return this; }
-    /** Copies the specified {@link NkHandle} to the {@code texture} field. */
+    /** Copies the specified {@link NkHandle} to the {@link #texture} field. */
     public NkUserFont texture(@NativeType("nk_handle") NkHandle value) { ntexture(address(), value); return this; }
-    /** Passes the {@code texture} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #texture} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkUserFont texture(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(texture()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -350,36 +340,36 @@ public class NkUserFont extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+        /** @return a {@link NkHandle} view of the {@link NkUserFont#userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkUserFont.nuserdata(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@link NkUserFont#height} field. */
         public float height() { return NkUserFont.nheight(address()); }
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@link NkUserFont#width} field. */
         @Nullable
         @NativeType("nk_text_width_f")
         public NkTextWidthCallback width() { return NkUserFont.nwidth(address()); }
-        /** Returns the value of the {@code query} field. */
+        /** @return the value of the {@link NkUserFont#query} field. */
         @Nullable
         @NativeType("nk_query_font_glyph_f")
         public NkQueryFontGlyphCallback query() { return NkUserFont.nquery(address()); }
-        /** Returns a {@link NkHandle} view of the {@code texture} field. */
+        /** @return a {@link NkHandle} view of the {@link NkUserFont#texture} field. */
         @NativeType("nk_handle")
         public NkHandle texture() { return NkUserFont.ntexture(address()); }
 
-        /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
+        /** Copies the specified {@link NkHandle} to the {@link NkUserFont#userdata} field. */
         public NkUserFont.Buffer userdata(@NativeType("nk_handle") NkHandle value) { NkUserFont.nuserdata(address(), value); return this; }
-        /** Passes the {@code userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link NkUserFont#userdata} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkUserFont.Buffer userdata(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(userdata()); return this; }
-        /** Sets the specified value to the {@code height} field. */
+        /** Sets the specified value to the {@link NkUserFont#height} field. */
         public NkUserFont.Buffer height(float value) { NkUserFont.nheight(address(), value); return this; }
-        /** Sets the specified value to the {@code width} field. */
+        /** Sets the specified value to the {@link NkUserFont#width} field. */
         public NkUserFont.Buffer width(@Nullable @NativeType("nk_text_width_f") NkTextWidthCallbackI value) { NkUserFont.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@code query} field. */
+        /** Sets the specified value to the {@link NkUserFont#query} field. */
         public NkUserFont.Buffer query(@Nullable @NativeType("nk_query_font_glyph_f") NkQueryFontGlyphCallbackI value) { NkUserFont.nquery(address(), value); return this; }
-        /** Copies the specified {@link NkHandle} to the {@code texture} field. */
+        /** Copies the specified {@link NkHandle} to the {@link NkUserFont#texture} field. */
         public NkUserFont.Buffer texture(@NativeType("nk_handle") NkHandle value) { NkUserFont.ntexture(address(), value); return this; }
-        /** Passes the {@code texture} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link NkUserFont#texture} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkUserFont.Buffer texture(java.util.function.Consumer<NkHandle> consumer) { consumer.accept(texture()); return this; }
 
     }

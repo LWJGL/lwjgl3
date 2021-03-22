@@ -65,10 +65,10 @@ public class CXComment extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code ASTNode} field. */
+    /** @return the value of the {@code ASTNode} field. */
     @NativeType("void const *")
     public long ASTNode() { return nASTNode(address()); }
-    /** Returns the value of the {@code TranslationUnit} field. */
+    /** @return the value of the {@code TranslationUnit} field. */
     @NativeType("CXTranslationUnit")
     public long TranslationUnit() { return nTranslationUnit(address()); }
 
@@ -258,10 +258,10 @@ public class CXComment extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code ASTNode} field. */
+        /** @return the value of the {@code ASTNode} field. */
         @NativeType("void const *")
         public long ASTNode() { return CXComment.nASTNode(address()); }
-        /** Returns the value of the {@code TranslationUnit} field. */
+        /** @return the value of the {@code TranslationUnit} field. */
         @NativeType("CXTranslationUnit")
         public long TranslationUnit() { return CXComment.nTranslationUnit(address()); }
 

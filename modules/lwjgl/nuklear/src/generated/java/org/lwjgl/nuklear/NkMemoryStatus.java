@@ -80,22 +80,22 @@ public class NkMemoryStatus extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code memory} field. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code memory} field. */
     @NativeType("void *")
     public ByteBuffer memory() { return nmemory(address()); }
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("unsigned int")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** @return the value of the {@code size} field. */
     @NativeType("nk_size")
     public long size() { return nsize(address()); }
-    /** Returns the value of the {@code allocated} field. */
+    /** @return the value of the {@code allocated} field. */
     @NativeType("nk_size")
     public long allocated() { return nallocated(address()); }
-    /** Returns the value of the {@code needed} field. */
+    /** @return the value of the {@code needed} field. */
     @NativeType("nk_size")
     public long needed() { return nneeded(address()); }
-    /** Returns the value of the {@code calls} field. */
+    /** @return the value of the {@code calls} field. */
     @NativeType("nk_size")
     public long calls() { return ncalls(address()); }
 
@@ -293,22 +293,22 @@ public class NkMemoryStatus extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code memory} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code memory} field. */
         @NativeType("void *")
         public ByteBuffer memory() { return NkMemoryStatus.nmemory(address()); }
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("unsigned int")
         public int type() { return NkMemoryStatus.ntype(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("nk_size")
         public long size() { return NkMemoryStatus.nsize(address()); }
-        /** Returns the value of the {@code allocated} field. */
+        /** @return the value of the {@code allocated} field. */
         @NativeType("nk_size")
         public long allocated() { return NkMemoryStatus.nallocated(address()); }
-        /** Returns the value of the {@code needed} field. */
+        /** @return the value of the {@code needed} field. */
         @NativeType("nk_size")
         public long needed() { return NkMemoryStatus.nneeded(address()); }
-        /** Returns the value of the {@code calls} field. */
+        /** @return the value of the {@code calls} field. */
         @NativeType("nk_size")
         public long calls() { return NkMemoryStatus.ncalls(address()); }
 

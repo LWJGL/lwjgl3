@@ -19,23 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * Cumulative stats for current application.  These are not cleared until a new app connects, but they do stop accumulating once the associated app
  * disconnects.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code m_nPid} &ndash; Process id associated with these stats (may no longer be running).</li>
- * <li>{@code m_nNumFramePresents} &ndash; total number of times we called present (includes reprojected frames)</li>
- * <li>{@code m_nNumDroppedFrames} &ndash; total number of times an old frame was re-scanned out (without reprojection)</li>
- * <li>{@code m_nNumReprojectedFrames} &ndash; total number of times a frame was scanned out a second time (with reprojection)</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct Compositor_CumulativeStats {
- *     uint32_t m_nPid;
- *     uint32_t m_nNumFramePresents;
- *     uint32_t m_nNumDroppedFrames;
- *     uint32_t m_nNumReprojectedFrames;
+ *     uint32_t {@link #m_nPid};
+ *     uint32_t {@link #m_nNumFramePresents};
+ *     uint32_t {@link #m_nNumDroppedFrames};
+ *     uint32_t {@link #m_nNumReprojectedFrames};
  *     uint32_t m_nNumFramePresentsOnStartup;
  *     uint32_t m_nNumDroppedFramesOnStartup;
  *     uint32_t m_nNumReprojectedFramesOnStartup;
@@ -128,49 +119,49 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code m_nPid} field. */
+    /** Process id associated with these stats (may no longer be running). */
     @NativeType("uint32_t")
     public int m_nPid() { return nm_nPid(address()); }
-    /** Returns the value of the {@code m_nNumFramePresents} field. */
+    /** total number of times we called present (includes reprojected frames) */
     @NativeType("uint32_t")
     public int m_nNumFramePresents() { return nm_nNumFramePresents(address()); }
-    /** Returns the value of the {@code m_nNumDroppedFrames} field. */
+    /** total number of times an old frame was re-scanned out (without reprojection) */
     @NativeType("uint32_t")
     public int m_nNumDroppedFrames() { return nm_nNumDroppedFrames(address()); }
-    /** Returns the value of the {@code m_nNumReprojectedFrames} field. */
+    /** total number of times a frame was scanned out a second time (with reprojection) */
     @NativeType("uint32_t")
     public int m_nNumReprojectedFrames() { return nm_nNumReprojectedFrames(address()); }
-    /** Returns the value of the {@code m_nNumFramePresentsOnStartup} field. */
+    /** @return the value of the {@code m_nNumFramePresentsOnStartup} field. */
     @NativeType("uint32_t")
     public int m_nNumFramePresentsOnStartup() { return nm_nNumFramePresentsOnStartup(address()); }
-    /** Returns the value of the {@code m_nNumDroppedFramesOnStartup} field. */
+    /** @return the value of the {@code m_nNumDroppedFramesOnStartup} field. */
     @NativeType("uint32_t")
     public int m_nNumDroppedFramesOnStartup() { return nm_nNumDroppedFramesOnStartup(address()); }
-    /** Returns the value of the {@code m_nNumReprojectedFramesOnStartup} field. */
+    /** @return the value of the {@code m_nNumReprojectedFramesOnStartup} field. */
     @NativeType("uint32_t")
     public int m_nNumReprojectedFramesOnStartup() { return nm_nNumReprojectedFramesOnStartup(address()); }
-    /** Returns the value of the {@code m_nNumLoading} field. */
+    /** @return the value of the {@code m_nNumLoading} field. */
     @NativeType("uint32_t")
     public int m_nNumLoading() { return nm_nNumLoading(address()); }
-    /** Returns the value of the {@code m_nNumFramePresentsLoading} field. */
+    /** @return the value of the {@code m_nNumFramePresentsLoading} field. */
     @NativeType("uint32_t")
     public int m_nNumFramePresentsLoading() { return nm_nNumFramePresentsLoading(address()); }
-    /** Returns the value of the {@code m_nNumDroppedFramesLoading} field. */
+    /** @return the value of the {@code m_nNumDroppedFramesLoading} field. */
     @NativeType("uint32_t")
     public int m_nNumDroppedFramesLoading() { return nm_nNumDroppedFramesLoading(address()); }
-    /** Returns the value of the {@code m_nNumReprojectedFramesLoading} field. */
+    /** @return the value of the {@code m_nNumReprojectedFramesLoading} field. */
     @NativeType("uint32_t")
     public int m_nNumReprojectedFramesLoading() { return nm_nNumReprojectedFramesLoading(address()); }
-    /** Returns the value of the {@code m_nNumTimedOut} field. */
+    /** @return the value of the {@code m_nNumTimedOut} field. */
     @NativeType("uint32_t")
     public int m_nNumTimedOut() { return nm_nNumTimedOut(address()); }
-    /** Returns the value of the {@code m_nNumFramePresentsTimedOut} field. */
+    /** @return the value of the {@code m_nNumFramePresentsTimedOut} field. */
     @NativeType("uint32_t")
     public int m_nNumFramePresentsTimedOut() { return nm_nNumFramePresentsTimedOut(address()); }
-    /** Returns the value of the {@code m_nNumDroppedFramesTimedOut} field. */
+    /** @return the value of the {@code m_nNumDroppedFramesTimedOut} field. */
     @NativeType("uint32_t")
     public int m_nNumDroppedFramesTimedOut() { return nm_nNumDroppedFramesTimedOut(address()); }
-    /** Returns the value of the {@code m_nNumReprojectedFramesTimedOut} field. */
+    /** @return the value of the {@code m_nNumReprojectedFramesTimedOut} field. */
     @NativeType("uint32_t")
     public int m_nNumReprojectedFramesTimedOut() { return nm_nNumReprojectedFramesTimedOut(address()); }
 
@@ -386,49 +377,49 @@ public class CompositorCumulativeStats extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code m_nPid} field. */
+        /** @return the value of the {@link CompositorCumulativeStats#m_nPid} field. */
         @NativeType("uint32_t")
         public int m_nPid() { return CompositorCumulativeStats.nm_nPid(address()); }
-        /** Returns the value of the {@code m_nNumFramePresents} field. */
+        /** @return the value of the {@link CompositorCumulativeStats#m_nNumFramePresents} field. */
         @NativeType("uint32_t")
         public int m_nNumFramePresents() { return CompositorCumulativeStats.nm_nNumFramePresents(address()); }
-        /** Returns the value of the {@code m_nNumDroppedFrames} field. */
+        /** @return the value of the {@link CompositorCumulativeStats#m_nNumDroppedFrames} field. */
         @NativeType("uint32_t")
         public int m_nNumDroppedFrames() { return CompositorCumulativeStats.nm_nNumDroppedFrames(address()); }
-        /** Returns the value of the {@code m_nNumReprojectedFrames} field. */
+        /** @return the value of the {@link CompositorCumulativeStats#m_nNumReprojectedFrames} field. */
         @NativeType("uint32_t")
         public int m_nNumReprojectedFrames() { return CompositorCumulativeStats.nm_nNumReprojectedFrames(address()); }
-        /** Returns the value of the {@code m_nNumFramePresentsOnStartup} field. */
+        /** @return the value of the {@code m_nNumFramePresentsOnStartup} field. */
         @NativeType("uint32_t")
         public int m_nNumFramePresentsOnStartup() { return CompositorCumulativeStats.nm_nNumFramePresentsOnStartup(address()); }
-        /** Returns the value of the {@code m_nNumDroppedFramesOnStartup} field. */
+        /** @return the value of the {@code m_nNumDroppedFramesOnStartup} field. */
         @NativeType("uint32_t")
         public int m_nNumDroppedFramesOnStartup() { return CompositorCumulativeStats.nm_nNumDroppedFramesOnStartup(address()); }
-        /** Returns the value of the {@code m_nNumReprojectedFramesOnStartup} field. */
+        /** @return the value of the {@code m_nNumReprojectedFramesOnStartup} field. */
         @NativeType("uint32_t")
         public int m_nNumReprojectedFramesOnStartup() { return CompositorCumulativeStats.nm_nNumReprojectedFramesOnStartup(address()); }
-        /** Returns the value of the {@code m_nNumLoading} field. */
+        /** @return the value of the {@code m_nNumLoading} field. */
         @NativeType("uint32_t")
         public int m_nNumLoading() { return CompositorCumulativeStats.nm_nNumLoading(address()); }
-        /** Returns the value of the {@code m_nNumFramePresentsLoading} field. */
+        /** @return the value of the {@code m_nNumFramePresentsLoading} field. */
         @NativeType("uint32_t")
         public int m_nNumFramePresentsLoading() { return CompositorCumulativeStats.nm_nNumFramePresentsLoading(address()); }
-        /** Returns the value of the {@code m_nNumDroppedFramesLoading} field. */
+        /** @return the value of the {@code m_nNumDroppedFramesLoading} field. */
         @NativeType("uint32_t")
         public int m_nNumDroppedFramesLoading() { return CompositorCumulativeStats.nm_nNumDroppedFramesLoading(address()); }
-        /** Returns the value of the {@code m_nNumReprojectedFramesLoading} field. */
+        /** @return the value of the {@code m_nNumReprojectedFramesLoading} field. */
         @NativeType("uint32_t")
         public int m_nNumReprojectedFramesLoading() { return CompositorCumulativeStats.nm_nNumReprojectedFramesLoading(address()); }
-        /** Returns the value of the {@code m_nNumTimedOut} field. */
+        /** @return the value of the {@code m_nNumTimedOut} field. */
         @NativeType("uint32_t")
         public int m_nNumTimedOut() { return CompositorCumulativeStats.nm_nNumTimedOut(address()); }
-        /** Returns the value of the {@code m_nNumFramePresentsTimedOut} field. */
+        /** @return the value of the {@code m_nNumFramePresentsTimedOut} field. */
         @NativeType("uint32_t")
         public int m_nNumFramePresentsTimedOut() { return CompositorCumulativeStats.nm_nNumFramePresentsTimedOut(address()); }
-        /** Returns the value of the {@code m_nNumDroppedFramesTimedOut} field. */
+        /** @return the value of the {@code m_nNumDroppedFramesTimedOut} field. */
         @NativeType("uint32_t")
         public int m_nNumDroppedFramesTimedOut() { return CompositorCumulativeStats.nm_nNumDroppedFramesTimedOut(address()); }
-        /** Returns the value of the {@code m_nNumReprojectedFramesTimedOut} field. */
+        /** @return the value of the {@code m_nNumReprojectedFramesTimedOut} field. */
         @NativeType("uint32_t")
         public int m_nNumReprojectedFramesTimedOut() { return CompositorCumulativeStats.nm_nNumReprojectedFramesTimedOut(address()); }
 

@@ -24,38 +24,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VALVEMutableDescriptorType#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code mutableDescriptorType} &ndash; indicates that the implementation <b>must</b> support using the {@code VkDescriptorType} of {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} with at least the following descriptor types, where any combination of the types <b>must</b> be supported:
- * 
- * <ul>
- * <li>{@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}</li>
- * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}</li>
- * <li>{@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER}</li>
- * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER}</li>
- * <li>{@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER}</li>
- * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER}</li>
- * </ul>
- * 
- * <p>Additionally, {@code mutableDescriptorType} indicates that:</p>
- * 
- * <ul>
- * <li>Non-uniform descriptor indexing <b>must</b> be supported if all descriptor types in a {@link VkMutableDescriptorTypeListVALVE} for {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} have the corresponding non-uniform indexing features enabled in {@link VkPhysicalDeviceDescriptorIndexingFeatures}.</li>
- * <li>{@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} with {@code descriptorType} of {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} relaxes the list of required descriptor types to the descriptor types which have the corresponding update-after-bind feature enabled in {@link VkPhysicalDeviceDescriptorIndexingFeatures}.</li>
- * <li>Dynamically uniform descriptor indexing <b>must</b> be supported if all descriptor types in a {@link VkMutableDescriptorTypeListVALVE} for {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} have the corresponding dynamic indexing features enabled.</li>
- * <li>{@link VALVEMutableDescriptorType#VK_DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_VALVE DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_VALVE} <b>must</b> be supported.</li>
- * <li>{@link VALVEMutableDescriptorType#VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE} <b>must</b> be supported.</li>
- * </ul></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 mutableDescriptorType;
+ *     VkBool32 {@link #mutableDescriptorType};
  * }</code></pre>
  */
 public class VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE extends Struct implements NativeResource {
@@ -100,13 +75,34 @@ public class VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE extends Struct i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code mutableDescriptorType} field. */
+    /**
+     * indicates that the implementation <b>must</b> support using the {@code VkDescriptorType} of {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} with at least the following descriptor types, where any combination of the types <b>must</b> be supported:
+     * 
+     * <ul>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}</li>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}</li>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER}</li>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER}</li>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER}</li>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER}</li>
+     * </ul>
+     * 
+     * <p>Additionally, {@code mutableDescriptorType} indicates that:</p>
+     * 
+     * <ul>
+     * <li>Non-uniform descriptor indexing <b>must</b> be supported if all descriptor types in a {@link VkMutableDescriptorTypeListVALVE} for {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} have the corresponding non-uniform indexing features enabled in {@link VkPhysicalDeviceDescriptorIndexingFeatures}.</li>
+     * <li>{@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT} with {@code descriptorType} of {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} relaxes the list of required descriptor types to the descriptor types which have the corresponding update-after-bind feature enabled in {@link VkPhysicalDeviceDescriptorIndexingFeatures}.</li>
+     * <li>Dynamically uniform descriptor indexing <b>must</b> be supported if all descriptor types in a {@link VkMutableDescriptorTypeListVALVE} for {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} have the corresponding dynamic indexing features enabled.</li>
+     * <li>{@link VALVEMutableDescriptorType#VK_DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_VALVE DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_VALVE} <b>must</b> be supported.</li>
+     * <li>{@link VALVEMutableDescriptorType#VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_VALVE} <b>must</b> be supported.</li>
+     * </ul>
+     */
     @NativeType("VkBool32")
     public boolean mutableDescriptorType() { return nmutableDescriptorType(address()) != 0; }
 
@@ -114,7 +110,7 @@ public class VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE extends Struct i
     public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code mutableDescriptorType} field. */
+    /** Sets the specified value to the {@link #mutableDescriptorType} field. */
     public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE mutableDescriptorType(@NativeType("VkBool32") boolean value) { nmutableDescriptorType(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -337,13 +333,13 @@ public class VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE extends Struct i
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.npNext(address()); }
-        /** Returns the value of the {@code mutableDescriptorType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE#mutableDescriptorType} field. */
         @NativeType("VkBool32")
         public boolean mutableDescriptorType() { return VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.nmutableDescriptorType(address()) != 0; }
 
@@ -351,7 +347,7 @@ public class VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE extends Struct i
         public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code mutableDescriptorType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE#mutableDescriptorType} field. */
         public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.Buffer mutableDescriptorType(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.nmutableDescriptorType(address(), value ? 1 : 0); return this; }
 
     }

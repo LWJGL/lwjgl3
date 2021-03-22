@@ -94,27 +94,27 @@ public class STBTTPackedchar extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x0} field. */
+    /** @return the value of the {@code x0} field. */
     @NativeType("unsigned short")
     public short x0() { return nx0(address()); }
-    /** Returns the value of the {@code y0} field. */
+    /** @return the value of the {@code y0} field. */
     @NativeType("unsigned short")
     public short y0() { return ny0(address()); }
-    /** Returns the value of the {@code x1} field. */
+    /** @return the value of the {@code x1} field. */
     @NativeType("unsigned short")
     public short x1() { return nx1(address()); }
-    /** Returns the value of the {@code y1} field. */
+    /** @return the value of the {@code y1} field. */
     @NativeType("unsigned short")
     public short y1() { return ny1(address()); }
-    /** Returns the value of the {@code xoff} field. */
+    /** @return the value of the {@code xoff} field. */
     public float xoff() { return nxoff(address()); }
-    /** Returns the value of the {@code yoff} field. */
+    /** @return the value of the {@code yoff} field. */
     public float yoff() { return nyoff(address()); }
-    /** Returns the value of the {@code xadvance} field. */
+    /** @return the value of the {@code xadvance} field. */
     public float xadvance() { return nxadvance(address()); }
-    /** Returns the value of the {@code xoff2} field. */
+    /** @return the value of the {@code xoff2} field. */
     public float xoff2() { return nxoff2(address()); }
-    /** Returns the value of the {@code yoff2} field. */
+    /** @return the value of the {@code yoff2} field. */
     public float yoff2() { return nyoff2(address()); }
 
     /** Sets the specified value to the {@code x0} field. */
@@ -392,27 +392,27 @@ public class STBTTPackedchar extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x0} field. */
+        /** @return the value of the {@code x0} field. */
         @NativeType("unsigned short")
         public short x0() { return STBTTPackedchar.nx0(address()); }
-        /** Returns the value of the {@code y0} field. */
+        /** @return the value of the {@code y0} field. */
         @NativeType("unsigned short")
         public short y0() { return STBTTPackedchar.ny0(address()); }
-        /** Returns the value of the {@code x1} field. */
+        /** @return the value of the {@code x1} field. */
         @NativeType("unsigned short")
         public short x1() { return STBTTPackedchar.nx1(address()); }
-        /** Returns the value of the {@code y1} field. */
+        /** @return the value of the {@code y1} field. */
         @NativeType("unsigned short")
         public short y1() { return STBTTPackedchar.ny1(address()); }
-        /** Returns the value of the {@code xoff} field. */
+        /** @return the value of the {@code xoff} field. */
         public float xoff() { return STBTTPackedchar.nxoff(address()); }
-        /** Returns the value of the {@code yoff} field. */
+        /** @return the value of the {@code yoff} field. */
         public float yoff() { return STBTTPackedchar.nyoff(address()); }
-        /** Returns the value of the {@code xadvance} field. */
+        /** @return the value of the {@code xadvance} field. */
         public float xadvance() { return STBTTPackedchar.nxadvance(address()); }
-        /** Returns the value of the {@code xoff2} field. */
+        /** @return the value of the {@code xoff2} field. */
         public float xoff2() { return STBTTPackedchar.nxoff2(address()); }
-        /** Returns the value of the {@code yoff2} field. */
+        /** @return the value of the {@code yoff2} field. */
         public float yoff2() { return STBTTPackedchar.nyoff2(address()); }
 
         /** Sets the specified value to the {@code x0} field. */

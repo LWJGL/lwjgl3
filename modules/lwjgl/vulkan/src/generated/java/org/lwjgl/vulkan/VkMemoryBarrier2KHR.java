@@ -122,27 +122,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkDependencyInfoKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code srcStageMask} &ndash; a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">first synchronization scope</a>.</li>
- * <li>{@code srcAccessMask} &ndash; a {@code VkAccessFlags2KHR} mask of pipeline <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">first access scope</a>.</li>
- * <li>{@code dstStageMask} &ndash; a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">second synchronization scope</a>.
- * 
- * <p>a {@code VkAccessFlags2KHR} mask of pipeline <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">second access scope</a>.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkMemoryBarrier2KHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineStageFlags2KHR srcStageMask;
- *     VkAccessFlags2KHR srcAccessMask;
- *     VkPipelineStageFlags2KHR dstStageMask;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineStageFlags2KHR {@link #srcStageMask};
+ *     VkAccessFlags2KHR {@link #srcAccessMask};
+ *     VkPipelineStageFlags2KHR {@link #dstStageMask};
  *     VkAccessFlags2KHR dstAccessMask;
  * }</code></pre>
  */
@@ -197,34 +185,38 @@ public class VkMemoryBarrier2KHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code srcStageMask} field. */
+    /** a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">first synchronization scope</a>. */
     @NativeType("VkPipelineStageFlags2KHR")
     public int srcStageMask() { return nsrcStageMask(address()); }
-    /** Returns the value of the {@code srcAccessMask} field. */
+    /** a {@code VkAccessFlags2KHR} mask of pipeline <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">first access scope</a>. */
     @NativeType("VkAccessFlags2KHR")
     public int srcAccessMask() { return nsrcAccessMask(address()); }
-    /** Returns the value of the {@code dstStageMask} field. */
+    /**
+     * a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">second synchronization scope</a>.
+     * 
+     * <p>a {@code VkAccessFlags2KHR} mask of pipeline <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">second access scope</a>.</p>
+     */
     @NativeType("VkPipelineStageFlags2KHR")
     public int dstStageMask() { return ndstStageMask(address()); }
-    /** Returns the value of the {@code dstAccessMask} field. */
+    /** @return the value of the {@code dstAccessMask} field. */
     @NativeType("VkAccessFlags2KHR")
     public int dstAccessMask() { return ndstAccessMask(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryBarrier2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryBarrier2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code srcStageMask} field. */
+    /** Sets the specified value to the {@link #srcStageMask} field. */
     public VkMemoryBarrier2KHR srcStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { nsrcStageMask(address(), value); return this; }
-    /** Sets the specified value to the {@code srcAccessMask} field. */
+    /** Sets the specified value to the {@link #srcAccessMask} field. */
     public VkMemoryBarrier2KHR srcAccessMask(@NativeType("VkAccessFlags2KHR") int value) { nsrcAccessMask(address(), value); return this; }
-    /** Sets the specified value to the {@code dstStageMask} field. */
+    /** Sets the specified value to the {@link #dstStageMask} field. */
     public VkMemoryBarrier2KHR dstStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { ndstStageMask(address(), value); return this; }
     /** Sets the specified value to the {@code dstAccessMask} field. */
     public VkMemoryBarrier2KHR dstAccessMask(@NativeType("VkAccessFlags2KHR") int value) { ndstAccessMask(address(), value); return this; }
@@ -467,34 +459,34 @@ public class VkMemoryBarrier2KHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkMemoryBarrier2KHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryBarrier2KHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkMemoryBarrier2KHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMemoryBarrier2KHR.npNext(address()); }
-        /** Returns the value of the {@code srcStageMask} field. */
+        /** @return the value of the {@link VkMemoryBarrier2KHR#srcStageMask} field. */
         @NativeType("VkPipelineStageFlags2KHR")
         public int srcStageMask() { return VkMemoryBarrier2KHR.nsrcStageMask(address()); }
-        /** Returns the value of the {@code srcAccessMask} field. */
+        /** @return the value of the {@link VkMemoryBarrier2KHR#srcAccessMask} field. */
         @NativeType("VkAccessFlags2KHR")
         public int srcAccessMask() { return VkMemoryBarrier2KHR.nsrcAccessMask(address()); }
-        /** Returns the value of the {@code dstStageMask} field. */
+        /** @return the value of the {@link VkMemoryBarrier2KHR#dstStageMask} field. */
         @NativeType("VkPipelineStageFlags2KHR")
         public int dstStageMask() { return VkMemoryBarrier2KHR.ndstStageMask(address()); }
-        /** Returns the value of the {@code dstAccessMask} field. */
+        /** @return the value of the {@code dstAccessMask} field. */
         @NativeType("VkAccessFlags2KHR")
         public int dstAccessMask() { return VkMemoryBarrier2KHR.ndstAccessMask(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkMemoryBarrier2KHR#sType} field. */
         public VkMemoryBarrier2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryBarrier2KHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkMemoryBarrier2KHR#pNext} field. */
         public VkMemoryBarrier2KHR.Buffer pNext(@NativeType("void const *") long value) { VkMemoryBarrier2KHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code srcStageMask} field. */
+        /** Sets the specified value to the {@link VkMemoryBarrier2KHR#srcStageMask} field. */
         public VkMemoryBarrier2KHR.Buffer srcStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { VkMemoryBarrier2KHR.nsrcStageMask(address(), value); return this; }
-        /** Sets the specified value to the {@code srcAccessMask} field. */
+        /** Sets the specified value to the {@link VkMemoryBarrier2KHR#srcAccessMask} field. */
         public VkMemoryBarrier2KHR.Buffer srcAccessMask(@NativeType("VkAccessFlags2KHR") int value) { VkMemoryBarrier2KHR.nsrcAccessMask(address(), value); return this; }
-        /** Sets the specified value to the {@code dstStageMask} field. */
+        /** Sets the specified value to the {@link VkMemoryBarrier2KHR#dstStageMask} field. */
         public VkMemoryBarrier2KHR.Buffer dstStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { VkMemoryBarrier2KHR.ndstStageMask(address(), value); return this; }
         /** Sets the specified value to the {@code dstAccessMask} field. */
         public VkMemoryBarrier2KHR.Buffer dstAccessMask(@NativeType("VkAccessFlags2KHR") int value) { VkMemoryBarrier2KHR.ndstAccessMask(address(), value); return this; }

@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Contains information about one axis on the controller.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code x} &ndash; Ranges from -1.0 to 1.0 for joysticks and track pads. Ranges from 0.0 to 1.0 for triggers were 0 is fully released.</li>
- * <li>{@code y} &ndash; Ranges from -1.0 to 1.0 for joysticks and track pads. Is always 0.0 for triggers.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VRControllerAxis_t {
- *     float x;
- *     float y;
+ *     float {@link #x};
+ *     float {@link #y};
  * }</code></pre>
  */
 @NativeType("struct VRControllerAxis_t")
@@ -73,14 +66,14 @@ public class VRControllerAxis extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** Ranges from -1.0 to 1.0 for joysticks and track pads. Ranges from 0.0 to 1.0 for triggers were 0 is fully released. */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** Ranges from -1.0 to 1.0 for joysticks and track pads. Is always 0.0 for triggers. */
     public float y() { return ny(address()); }
 
-    /** Sets the specified value to the {@code x} field. */
+    /** Sets the specified value to the {@link #x} field. */
     public VRControllerAxis x(float value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@code y} field. */
+    /** Sets the specified value to the {@link #y} field. */
     public VRControllerAxis y(float value) { ny(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -297,14 +290,14 @@ public class VRControllerAxis extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link VRControllerAxis#x} field. */
         public float x() { return VRControllerAxis.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@link VRControllerAxis#y} field. */
         public float y() { return VRControllerAxis.ny(address()); }
 
-        /** Sets the specified value to the {@code x} field. */
+        /** Sets the specified value to the {@link VRControllerAxis#x} field. */
         public VRControllerAxis.Buffer x(float value) { VRControllerAxis.nx(address(), value); return this; }
-        /** Sets the specified value to the {@code y} field. */
+        /** Sets the specified value to the {@link VRControllerAxis#y} field. */
         public VRControllerAxis.Buffer y(float value) { VRControllerAxis.ny(address(), value); return this; }
 
     }

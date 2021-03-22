@@ -16,21 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code contentSizeFlag} &ndash; 1: content size will be in frame header (when known)</li>
- * <li>{@code checksumFlag} &ndash; 1: generate a 32-bits checksum using XXH64 algorithm at end of frame, for error detection</li>
- * <li>{@code noDictIDFlag} &ndash; 1: no {@code dictID} will be saved into frame header ({@code dictID} is only useful for dictionary compression)</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ZSTD_frameParameters {
- *     int contentSizeFlag;
- *     int checksumFlag;
- *     int noDictIDFlag;
+ *     int {@link #contentSizeFlag};
+ *     int {@link #checksumFlag};
+ *     int {@link #noDictIDFlag};
  * }</code></pre>
  */
 @NativeType("struct ZSTD_frameParameters")
@@ -76,18 +68,18 @@ public class ZSTDFrameParameters extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code contentSizeFlag} field. */
+    /** 1: content size will be in frame header (when known) */
     public int contentSizeFlag() { return ncontentSizeFlag(address()); }
-    /** Returns the value of the {@code checksumFlag} field. */
+    /** 1: generate a 32-bits checksum using XXH64 algorithm at end of frame, for error detection */
     public int checksumFlag() { return nchecksumFlag(address()); }
-    /** Returns the value of the {@code noDictIDFlag} field. */
+    /** 1: no {@code dictID} will be saved into frame header ({@code dictID} is only useful for dictionary compression) */
     public int noDictIDFlag() { return nnoDictIDFlag(address()); }
 
-    /** Sets the specified value to the {@code contentSizeFlag} field. */
+    /** Sets the specified value to the {@link #contentSizeFlag} field. */
     public ZSTDFrameParameters contentSizeFlag(int value) { ncontentSizeFlag(address(), value); return this; }
-    /** Sets the specified value to the {@code checksumFlag} field. */
+    /** Sets the specified value to the {@link #checksumFlag} field. */
     public ZSTDFrameParameters checksumFlag(int value) { nchecksumFlag(address(), value); return this; }
-    /** Sets the specified value to the {@code noDictIDFlag} field. */
+    /** Sets the specified value to the {@link #noDictIDFlag} field. */
     public ZSTDFrameParameters noDictIDFlag(int value) { nnoDictIDFlag(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -310,18 +302,18 @@ public class ZSTDFrameParameters extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code contentSizeFlag} field. */
+        /** @return the value of the {@link ZSTDFrameParameters#contentSizeFlag} field. */
         public int contentSizeFlag() { return ZSTDFrameParameters.ncontentSizeFlag(address()); }
-        /** Returns the value of the {@code checksumFlag} field. */
+        /** @return the value of the {@link ZSTDFrameParameters#checksumFlag} field. */
         public int checksumFlag() { return ZSTDFrameParameters.nchecksumFlag(address()); }
-        /** Returns the value of the {@code noDictIDFlag} field. */
+        /** @return the value of the {@link ZSTDFrameParameters#noDictIDFlag} field. */
         public int noDictIDFlag() { return ZSTDFrameParameters.nnoDictIDFlag(address()); }
 
-        /** Sets the specified value to the {@code contentSizeFlag} field. */
+        /** Sets the specified value to the {@link ZSTDFrameParameters#contentSizeFlag} field. */
         public ZSTDFrameParameters.Buffer contentSizeFlag(int value) { ZSTDFrameParameters.ncontentSizeFlag(address(), value); return this; }
-        /** Sets the specified value to the {@code checksumFlag} field. */
+        /** Sets the specified value to the {@link ZSTDFrameParameters#checksumFlag} field. */
         public ZSTDFrameParameters.Buffer checksumFlag(int value) { ZSTDFrameParameters.nchecksumFlag(address(), value); return this; }
-        /** Sets the specified value to the {@code noDictIDFlag} field. */
+        /** Sets the specified value to the {@link ZSTDFrameParameters#noDictIDFlag} field. */
         public ZSTDFrameParameters.Buffer noDictIDFlag(int value) { ZSTDFrameParameters.nnoDictIDFlag(address(), value); return this; }
 
     }

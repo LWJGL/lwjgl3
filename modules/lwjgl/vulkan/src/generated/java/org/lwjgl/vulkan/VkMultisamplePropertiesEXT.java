@@ -29,21 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkExtent2D}, {@link EXTSampleLocations#vkGetPhysicalDeviceMultisamplePropertiesEXT GetPhysicalDeviceMultisamplePropertiesEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code maxSampleLocationGridSize} &ndash; the maximum size of the pixel grid in which sample locations <b>can</b> vary.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkMultisamplePropertiesEXT {
- *     VkStructureType sType;
- *     void * pNext;
- *     {@link VkExtent2D VkExtent2D} maxSampleLocationGridSize;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     {@link VkExtent2D VkExtent2D} {@link #maxSampleLocationGridSize};
  * }</code></pre>
  */
 public class VkMultisamplePropertiesEXT extends Struct implements NativeResource {
@@ -88,18 +80,18 @@ public class VkMultisamplePropertiesEXT extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkExtent2D} view of the {@code maxSampleLocationGridSize} field. */
+    /** the maximum size of the pixel grid in which sample locations <b>can</b> vary. */
     public VkExtent2D maxSampleLocationGridSize() { return nmaxSampleLocationGridSize(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkMultisamplePropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkMultisamplePropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,18 +310,18 @@ public class VkMultisamplePropertiesEXT extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkMultisamplePropertiesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMultisamplePropertiesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkMultisamplePropertiesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkMultisamplePropertiesEXT.npNext(address()); }
-        /** Returns a {@link VkExtent2D} view of the {@code maxSampleLocationGridSize} field. */
+        /** @return a {@link VkExtent2D} view of the {@link VkMultisamplePropertiesEXT#maxSampleLocationGridSize} field. */
         public VkExtent2D maxSampleLocationGridSize() { return VkMultisamplePropertiesEXT.nmaxSampleLocationGridSize(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkMultisamplePropertiesEXT#sType} field. */
         public VkMultisamplePropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkMultisamplePropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkMultisamplePropertiesEXT#pNext} field. */
         public VkMultisamplePropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkMultisamplePropertiesEXT.npNext(address(), value); return this; }
 
     }

@@ -49,23 +49,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link KHRAccelerationStructure#vkBuildAccelerationStructuresKHR BuildAccelerationStructuresKHR}, {@link KHRAccelerationStructure#vkCmdBuildAccelerationStructuresKHR CmdBuildAccelerationStructuresKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code primitiveCount} &ndash; defines the number of primitives for a corresponding acceleration structure geometry.</li>
- * <li>{@code primitiveOffset} &ndash; defines an offset in bytes into the memory where primitive data is defined.</li>
- * <li>{@code firstVertex} &ndash; the index of the first vertex to build from for triangle geometry.</li>
- * <li>{@code transformOffset} &ndash; defines an offset in bytes into the memory where a transform matrix is defined.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkAccelerationStructureBuildRangeInfoKHR {
- *     uint32_t primitiveCount;
- *     uint32_t primitiveOffset;
- *     uint32_t firstVertex;
- *     uint32_t transformOffset;
+ *     uint32_t {@link #primitiveCount};
+ *     uint32_t {@link #primitiveOffset};
+ *     uint32_t {@link #firstVertex};
+ *     uint32_t {@link #transformOffset};
  * }</code></pre>
  */
 public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements NativeResource {
@@ -113,26 +104,26 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code primitiveCount} field. */
+    /** defines the number of primitives for a corresponding acceleration structure geometry. */
     @NativeType("uint32_t")
     public int primitiveCount() { return nprimitiveCount(address()); }
-    /** Returns the value of the {@code primitiveOffset} field. */
+    /** defines an offset in bytes into the memory where primitive data is defined. */
     @NativeType("uint32_t")
     public int primitiveOffset() { return nprimitiveOffset(address()); }
-    /** Returns the value of the {@code firstVertex} field. */
+    /** the index of the first vertex to build from for triangle geometry. */
     @NativeType("uint32_t")
     public int firstVertex() { return nfirstVertex(address()); }
-    /** Returns the value of the {@code transformOffset} field. */
+    /** defines an offset in bytes into the memory where a transform matrix is defined. */
     @NativeType("uint32_t")
     public int transformOffset() { return ntransformOffset(address()); }
 
-    /** Sets the specified value to the {@code primitiveCount} field. */
+    /** Sets the specified value to the {@link #primitiveCount} field. */
     public VkAccelerationStructureBuildRangeInfoKHR primitiveCount(@NativeType("uint32_t") int value) { nprimitiveCount(address(), value); return this; }
-    /** Sets the specified value to the {@code primitiveOffset} field. */
+    /** Sets the specified value to the {@link #primitiveOffset} field. */
     public VkAccelerationStructureBuildRangeInfoKHR primitiveOffset(@NativeType("uint32_t") int value) { nprimitiveOffset(address(), value); return this; }
-    /** Sets the specified value to the {@code firstVertex} field. */
+    /** Sets the specified value to the {@link #firstVertex} field. */
     public VkAccelerationStructureBuildRangeInfoKHR firstVertex(@NativeType("uint32_t") int value) { nfirstVertex(address(), value); return this; }
-    /** Sets the specified value to the {@code transformOffset} field. */
+    /** Sets the specified value to the {@link #transformOffset} field. */
     public VkAccelerationStructureBuildRangeInfoKHR transformOffset(@NativeType("uint32_t") int value) { ntransformOffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -361,26 +352,26 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code primitiveCount} field. */
+        /** @return the value of the {@link VkAccelerationStructureBuildRangeInfoKHR#primitiveCount} field. */
         @NativeType("uint32_t")
         public int primitiveCount() { return VkAccelerationStructureBuildRangeInfoKHR.nprimitiveCount(address()); }
-        /** Returns the value of the {@code primitiveOffset} field. */
+        /** @return the value of the {@link VkAccelerationStructureBuildRangeInfoKHR#primitiveOffset} field. */
         @NativeType("uint32_t")
         public int primitiveOffset() { return VkAccelerationStructureBuildRangeInfoKHR.nprimitiveOffset(address()); }
-        /** Returns the value of the {@code firstVertex} field. */
+        /** @return the value of the {@link VkAccelerationStructureBuildRangeInfoKHR#firstVertex} field. */
         @NativeType("uint32_t")
         public int firstVertex() { return VkAccelerationStructureBuildRangeInfoKHR.nfirstVertex(address()); }
-        /** Returns the value of the {@code transformOffset} field. */
+        /** @return the value of the {@link VkAccelerationStructureBuildRangeInfoKHR#transformOffset} field. */
         @NativeType("uint32_t")
         public int transformOffset() { return VkAccelerationStructureBuildRangeInfoKHR.ntransformOffset(address()); }
 
-        /** Sets the specified value to the {@code primitiveCount} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureBuildRangeInfoKHR#primitiveCount} field. */
         public VkAccelerationStructureBuildRangeInfoKHR.Buffer primitiveCount(@NativeType("uint32_t") int value) { VkAccelerationStructureBuildRangeInfoKHR.nprimitiveCount(address(), value); return this; }
-        /** Sets the specified value to the {@code primitiveOffset} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureBuildRangeInfoKHR#primitiveOffset} field. */
         public VkAccelerationStructureBuildRangeInfoKHR.Buffer primitiveOffset(@NativeType("uint32_t") int value) { VkAccelerationStructureBuildRangeInfoKHR.nprimitiveOffset(address(), value); return this; }
-        /** Sets the specified value to the {@code firstVertex} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureBuildRangeInfoKHR#firstVertex} field. */
         public VkAccelerationStructureBuildRangeInfoKHR.Buffer firstVertex(@NativeType("uint32_t") int value) { VkAccelerationStructureBuildRangeInfoKHR.nfirstVertex(address(), value); return this; }
-        /** Sets the specified value to the {@code transformOffset} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureBuildRangeInfoKHR#transformOffset} field. */
         public VkAccelerationStructureBuildRangeInfoKHR.Buffer transformOffset(@NativeType("uint32_t") int value) { VkAccelerationStructureBuildRangeInfoKHR.ntransformOffset(address(), value); return this; }
 
     }

@@ -68,16 +68,16 @@ public class InputOriginInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code devicePath} field. */
+    /** @return the value of the {@code devicePath} field. */
     @NativeType("VRInputValueHandle_t")
     public long devicePath() { return ndevicePath(address()); }
-    /** Returns the value of the {@code trackedDeviceIndex} field. */
+    /** @return the value of the {@code trackedDeviceIndex} field. */
     @NativeType("TrackedDeviceIndex_t")
     public int trackedDeviceIndex() { return ntrackedDeviceIndex(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code rchRenderModelComponentName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code rchRenderModelComponentName} field. */
     @NativeType("char[128]")
     public ByteBuffer rchRenderModelComponentName() { return nrchRenderModelComponentName(address()); }
-    /** Decodes the null-terminated string stored in the {@code rchRenderModelComponentName} field. */
+    /** @return the null-terminated string stored in the {@code rchRenderModelComponentName} field. */
     @NativeType("char[128]")
     public String rchRenderModelComponentNameString() { return nrchRenderModelComponentNameString(address()); }
 
@@ -271,16 +271,16 @@ public class InputOriginInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code devicePath} field. */
+        /** @return the value of the {@code devicePath} field. */
         @NativeType("VRInputValueHandle_t")
         public long devicePath() { return InputOriginInfo.ndevicePath(address()); }
-        /** Returns the value of the {@code trackedDeviceIndex} field. */
+        /** @return the value of the {@code trackedDeviceIndex} field. */
         @NativeType("TrackedDeviceIndex_t")
         public int trackedDeviceIndex() { return InputOriginInfo.ntrackedDeviceIndex(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code rchRenderModelComponentName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code rchRenderModelComponentName} field. */
         @NativeType("char[128]")
         public ByteBuffer rchRenderModelComponentName() { return InputOriginInfo.nrchRenderModelComponentName(address()); }
-        /** Decodes the null-terminated string stored in the {@code rchRenderModelComponentName} field. */
+        /** @return the null-terminated string stored in the {@code rchRenderModelComponentName} field. */
         @NativeType("char[128]")
         public String rchRenderModelComponentNameString() { return InputOriginInfo.nrchRenderModelComponentNameString(address()); }
 

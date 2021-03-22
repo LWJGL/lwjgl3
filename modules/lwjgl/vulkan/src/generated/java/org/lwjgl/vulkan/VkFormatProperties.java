@@ -33,21 +33,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkFormatProperties2}, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code linearTilingFeatures} &ndash; a bitmask of {@code VkFormatFeatureFlagBits} specifying features supported by images created with a {@code tiling} parameter of {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}.</li>
- * <li>{@code optimalTilingFeatures} &ndash; a bitmask of {@code VkFormatFeatureFlagBits} specifying features supported by images created with a {@code tiling} parameter of {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}.</li>
- * <li>{@code bufferFeatures} &ndash; a bitmask of {@code VkFormatFeatureFlagBits} specifying features supported by buffers.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkFormatProperties {
- *     VkFormatFeatureFlags linearTilingFeatures;
- *     VkFormatFeatureFlags optimalTilingFeatures;
- *     VkFormatFeatureFlags bufferFeatures;
+ *     VkFormatFeatureFlags {@link #linearTilingFeatures};
+ *     VkFormatFeatureFlags {@link #optimalTilingFeatures};
+ *     VkFormatFeatureFlags {@link #bufferFeatures};
  * }</code></pre>
  */
 public class VkFormatProperties extends Struct implements NativeResource {
@@ -92,13 +84,13 @@ public class VkFormatProperties extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code linearTilingFeatures} field. */
+    /** a bitmask of {@code VkFormatFeatureFlagBits} specifying features supported by images created with a {@code tiling} parameter of {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}. */
     @NativeType("VkFormatFeatureFlags")
     public int linearTilingFeatures() { return nlinearTilingFeatures(address()); }
-    /** Returns the value of the {@code optimalTilingFeatures} field. */
+    /** a bitmask of {@code VkFormatFeatureFlagBits} specifying features supported by images created with a {@code tiling} parameter of {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}. */
     @NativeType("VkFormatFeatureFlags")
     public int optimalTilingFeatures() { return noptimalTilingFeatures(address()); }
-    /** Returns the value of the {@code bufferFeatures} field. */
+    /** a bitmask of {@code VkFormatFeatureFlagBits} specifying features supported by buffers. */
     @NativeType("VkFormatFeatureFlags")
     public int bufferFeatures() { return nbufferFeatures(address()); }
 
@@ -290,13 +282,13 @@ public class VkFormatProperties extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code linearTilingFeatures} field. */
+        /** @return the value of the {@link VkFormatProperties#linearTilingFeatures} field. */
         @NativeType("VkFormatFeatureFlags")
         public int linearTilingFeatures() { return VkFormatProperties.nlinearTilingFeatures(address()); }
-        /** Returns the value of the {@code optimalTilingFeatures} field. */
+        /** @return the value of the {@link VkFormatProperties#optimalTilingFeatures} field. */
         @NativeType("VkFormatFeatureFlags")
         public int optimalTilingFeatures() { return VkFormatProperties.noptimalTilingFeatures(address()); }
-        /** Returns the value of the {@code bufferFeatures} field. */
+        /** @return the value of the {@link VkFormatProperties#bufferFeatures} field. */
         @NativeType("VkFormatFeatureFlags")
         public int bufferFeatures() { return VkFormatProperties.nbufferFeatures(address()); }
 

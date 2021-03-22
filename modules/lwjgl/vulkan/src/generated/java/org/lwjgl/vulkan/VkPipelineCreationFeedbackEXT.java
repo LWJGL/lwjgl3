@@ -24,19 +24,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>{@link VkPipelineCreationFeedbackCreateInfoEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code flags} &ndash; a bitmask of {@code VkPipelineCreationFeedbackFlagBitsEXT} providing feedback about the creation of a pipeline or of a pipeline stage.</li>
- * <li>{@code duration} &ndash; the duration spent creating a pipeline or pipeline stage in nanoseconds.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineCreationFeedbackEXT {
- *     VkPipelineCreationFeedbackFlagsEXT flags;
- *     uint64_t duration;
+ *     VkPipelineCreationFeedbackFlagsEXT {@link #flags};
+ *     uint64_t {@link #duration};
  * }</code></pre>
  */
 public class VkPipelineCreationFeedbackEXT extends Struct {
@@ -78,10 +71,10 @@ public class VkPipelineCreationFeedbackEXT extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkPipelineCreationFeedbackFlagBitsEXT} providing feedback about the creation of a pipeline or of a pipeline stage. */
     @NativeType("VkPipelineCreationFeedbackFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code duration} field. */
+    /** the duration spent creating a pipeline or pipeline stage in nanoseconds. */
     @NativeType("uint64_t")
     public long duration() { return nduration(address()); }
 
@@ -159,10 +152,10 @@ public class VkPipelineCreationFeedbackEXT extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkPipelineCreationFeedbackEXT#flags} field. */
         @NativeType("VkPipelineCreationFeedbackFlagsEXT")
         public int flags() { return VkPipelineCreationFeedbackEXT.nflags(address()); }
-        /** Returns the value of the {@code duration} field. */
+        /** @return the value of the {@link VkPipelineCreationFeedbackEXT#duration} field. */
         @NativeType("uint64_t")
         public long duration() { return VkPipelineCreationFeedbackEXT.nduration(address()); }
 

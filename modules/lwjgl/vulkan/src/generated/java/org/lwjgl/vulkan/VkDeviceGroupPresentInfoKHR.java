@@ -51,25 +51,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code mode} <b>must</b> be a valid {@code VkDeviceGroupPresentModeFlagBitsKHR} value</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code swapchainCount} &ndash; zero or the number of elements in {@code pDeviceMasks}.</li>
- * <li>{@code pDeviceMasks} &ndash; a pointer to an array of device masks, one for each element of {@link VkPresentInfoKHR}::pSwapchains.</li>
- * <li>{@code mode} &ndash; the device group present mode that will be used for this present.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDeviceGroupPresentInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t swapchainCount;
- *     uint32_t const * pDeviceMasks;
- *     VkDeviceGroupPresentModeFlagBitsKHR mode;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #swapchainCount};
+ *     uint32_t const * {@link #pDeviceMasks};
+ *     VkDeviceGroupPresentModeFlagBitsKHR {@link #mode};
  * }</code></pre>
  */
 public class VkDeviceGroupPresentInfoKHR extends Struct implements NativeResource {
@@ -120,30 +110,30 @@ public class VkDeviceGroupPresentInfoKHR extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code swapchainCount} field. */
+    /** zero or the number of elements in {@code pDeviceMasks}. */
     @NativeType("uint32_t")
     public int swapchainCount() { return nswapchainCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDeviceMasks} field. */
+    /** a pointer to an array of device masks, one for each element of {@link VkPresentInfoKHR}::pSwapchains. */
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pDeviceMasks() { return npDeviceMasks(address()); }
-    /** Returns the value of the {@code mode} field. */
+    /** the device group present mode that will be used for this present. */
     @NativeType("VkDeviceGroupPresentModeFlagBitsKHR")
     public int mode() { return nmode(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceGroupPresentInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceGroupPresentInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pDeviceMasks} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pDeviceMasks} field. */
     public VkDeviceGroupPresentInfoKHR pDeviceMasks(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npDeviceMasks(address(), value); return this; }
-    /** Sets the specified value to the {@code mode} field. */
+    /** Sets the specified value to the {@link #mode} field. */
     public VkDeviceGroupPresentInfoKHR mode(@NativeType("VkDeviceGroupPresentModeFlagBitsKHR") int value) { nmode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -399,30 +389,30 @@ public class VkDeviceGroupPresentInfoKHR extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDeviceGroupPresentInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceGroupPresentInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDeviceGroupPresentInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceGroupPresentInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code swapchainCount} field. */
+        /** @return the value of the {@link VkDeviceGroupPresentInfoKHR#swapchainCount} field. */
         @NativeType("uint32_t")
         public int swapchainCount() { return VkDeviceGroupPresentInfoKHR.nswapchainCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDeviceMasks} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkDeviceGroupPresentInfoKHR#pDeviceMasks} field. */
         @Nullable
         @NativeType("uint32_t const *")
         public IntBuffer pDeviceMasks() { return VkDeviceGroupPresentInfoKHR.npDeviceMasks(address()); }
-        /** Returns the value of the {@code mode} field. */
+        /** @return the value of the {@link VkDeviceGroupPresentInfoKHR#mode} field. */
         @NativeType("VkDeviceGroupPresentModeFlagBitsKHR")
         public int mode() { return VkDeviceGroupPresentInfoKHR.nmode(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupPresentInfoKHR#sType} field. */
         public VkDeviceGroupPresentInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupPresentInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupPresentInfoKHR#pNext} field. */
         public VkDeviceGroupPresentInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupPresentInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pDeviceMasks} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkDeviceGroupPresentInfoKHR#pDeviceMasks} field. */
         public VkDeviceGroupPresentInfoKHR.Buffer pDeviceMasks(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkDeviceGroupPresentInfoKHR.npDeviceMasks(address(), value); return this; }
-        /** Sets the specified value to the {@code mode} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupPresentInfoKHR#mode} field. */
         public VkDeviceGroupPresentInfoKHR.Buffer mode(@NativeType("VkDeviceGroupPresentModeFlagBitsKHR") int value) { VkDeviceGroupPresentInfoKHR.nmode(address(), value); return this; }
 
     }

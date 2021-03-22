@@ -21,25 +21,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * provides security settings for objects created by various functions, such as {@code CreateFile}, {@code CreatePipe}, {@code CreateProcess},
  * {@code RegCreateKeyEx}, or {@code RegSaveKeyEx}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code nLength} &ndash; the size, in bytes, of this structure. Set this value to {@link #SIZEOF}.</li>
- * <li>{@code lpSecurityDescriptor} &ndash; 
- * a pointer to a {@code SECURITY_DESCRIPTOR} structure that controls access to the object. If the value of this member is {@code NULL}, the object is assigned
- * the default security descriptor associated with the access token of the calling process. This is not the same as granting access to everyone by
- * assigning a {@code NULL} discretionary access control list (DACL). By default, the default DACL in the access token of a process allows access only to the
- * user represented by the access token.</li>
- * <li>{@code bInheritHandle} &ndash; specifies whether the returned handle is inherited when a new process is created. If this member is {@code TRUE}, the new process inherits the handle.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct SECURITY_ATTRIBUTES {
- *     DWORD nLength;
- *     LPVOID lpSecurityDescriptor;
- *     BOOL bInheritHandle;
+ *     DWORD {@link #nLength};
+ *     LPVOID {@link #lpSecurityDescriptor};
+ *     BOOL {@link #bInheritHandle};
  * }</code></pre>
  */
 public class SECURITY_ATTRIBUTES extends Struct implements NativeResource {
@@ -84,21 +72,26 @@ public class SECURITY_ATTRIBUTES extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code nLength} field. */
+    /** the size, in bytes, of this structure. Set this value to {@link #SIZEOF}. */
     @NativeType("DWORD")
     public int nLength() { return nnLength(address()); }
-    /** Returns the value of the {@code lpSecurityDescriptor} field. */
+    /**
+     * a pointer to a {@code SECURITY_DESCRIPTOR} structure that controls access to the object. If the value of this member is {@code NULL}, the object is assigned
+     * the default security descriptor associated with the access token of the calling process. This is not the same as granting access to everyone by
+     * assigning a {@code NULL} discretionary access control list (DACL). By default, the default DACL in the access token of a process allows access only to the
+     * user represented by the access token.
+     */
     @NativeType("LPVOID")
     public long lpSecurityDescriptor() { return nlpSecurityDescriptor(address()); }
-    /** Returns the value of the {@code bInheritHandle} field. */
+    /** specifies whether the returned handle is inherited when a new process is created. If this member is {@code TRUE}, the new process inherits the handle. */
     @NativeType("BOOL")
     public boolean bInheritHandle() { return nbInheritHandle(address()) != 0; }
 
-    /** Sets the specified value to the {@code nLength} field. */
+    /** Sets the specified value to the {@link #nLength} field. */
     public SECURITY_ATTRIBUTES nLength(@NativeType("DWORD") int value) { nnLength(address(), value); return this; }
-    /** Sets the specified value to the {@code lpSecurityDescriptor} field. */
+    /** Sets the specified value to the {@link #lpSecurityDescriptor} field. */
     public SECURITY_ATTRIBUTES lpSecurityDescriptor(@NativeType("LPVOID") long value) { nlpSecurityDescriptor(address(), value); return this; }
-    /** Sets the specified value to the {@code bInheritHandle} field. */
+    /** Sets the specified value to the {@link #bInheritHandle} field. */
     public SECURITY_ATTRIBUTES bInheritHandle(@NativeType("BOOL") boolean value) { nbInheritHandle(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -342,21 +335,21 @@ public class SECURITY_ATTRIBUTES extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code nLength} field. */
+        /** @return the value of the {@link SECURITY_ATTRIBUTES#nLength} field. */
         @NativeType("DWORD")
         public int nLength() { return SECURITY_ATTRIBUTES.nnLength(address()); }
-        /** Returns the value of the {@code lpSecurityDescriptor} field. */
+        /** @return the value of the {@link SECURITY_ATTRIBUTES#lpSecurityDescriptor} field. */
         @NativeType("LPVOID")
         public long lpSecurityDescriptor() { return SECURITY_ATTRIBUTES.nlpSecurityDescriptor(address()); }
-        /** Returns the value of the {@code bInheritHandle} field. */
+        /** @return the value of the {@link SECURITY_ATTRIBUTES#bInheritHandle} field. */
         @NativeType("BOOL")
         public boolean bInheritHandle() { return SECURITY_ATTRIBUTES.nbInheritHandle(address()) != 0; }
 
-        /** Sets the specified value to the {@code nLength} field. */
+        /** Sets the specified value to the {@link SECURITY_ATTRIBUTES#nLength} field. */
         public SECURITY_ATTRIBUTES.Buffer nLength(@NativeType("DWORD") int value) { SECURITY_ATTRIBUTES.nnLength(address(), value); return this; }
-        /** Sets the specified value to the {@code lpSecurityDescriptor} field. */
+        /** Sets the specified value to the {@link SECURITY_ATTRIBUTES#lpSecurityDescriptor} field. */
         public SECURITY_ATTRIBUTES.Buffer lpSecurityDescriptor(@NativeType("LPVOID") long value) { SECURITY_ATTRIBUTES.nlpSecurityDescriptor(address(), value); return this; }
-        /** Sets the specified value to the {@code bInheritHandle} field. */
+        /** Sets the specified value to the {@link SECURITY_ATTRIBUTES#bInheritHandle} field. */
         public SECURITY_ATTRIBUTES.Buffer bInheritHandle(@NativeType("BOOL") boolean value) { SECURITY_ATTRIBUTES.nbInheritHandle(address(), value ? 1 : 0); return this; }
 
     }

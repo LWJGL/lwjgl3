@@ -28,47 +28,27 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRPortabilitySubset#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code constantAlphaColorBlendFactors} &ndash; indicates whether this implementation supports constant <em>alpha</em> <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-blendfactors">Blend Factors</a> used as source or destination <em>color</em> <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-blending">Blending</a>.</li>
- * <li>{@code events} &ndash; indicates whether this implementation supports synchronization using <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-events">Events</a>.</li>
- * <li>{@code imageViewFormatReinterpretation} &ndash; indicates whether this implementation supports a {@code VkImageView} being created with a texel format containing a different number of components, or a different number of bits in each component, than the texel format of the underlying {@code VkImage}.</li>
- * <li>{@code imageViewFormatSwizzle} &ndash; indicates whether this implementation supports remapping format components using {@link VkImageViewCreateInfo}{@code ::components}.</li>
- * <li>{@code imageView2DOn3DImage} &ndash; indicates whether this implementation supports a {@code VkImage} being created with the {@link VK11#VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT} flag set, permitting a 2D or 2D array image view to be created on a 3D {@code VkImage}.</li>
- * <li>{@code multisampleArrayImage} &ndash; indicates whether this implementation supports a {@code VkImage} being created as a 2D array with multiple samples per texel.</li>
- * <li>{@code mutableComparisonSamplers} &ndash; indicates whether this implementation allows descriptors with comparison samplers to be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#descriptorsets-updates">updated</a>.</li>
- * <li>{@code pointPolygons} &ndash; indicates whether this implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast">Rasterization</a> using a <em>point</em> <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-polygonmode">Polygon Mode</a>.</li>
- * <li>{@code samplerMipLodBias} &ndash; indicates whether this implementation supports setting a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers-mipLodBias">mipmap LOD bias value</a> when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers">creating a sampler</a>.</li>
- * <li>{@code separateStencilMaskRef} &ndash; indicates whether this implementation supports separate front and back <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-stencil">Stencil Test</a> reference values.</li>
- * <li>{@code shaderSampleRateInterpolationFunctions} &ndash; indicates whether this implementation supports fragment shaders which use the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#spirvenv-capabilities-table-InterpolationFunction">{@code InterpolationFunction}</a> capability and the extended instructions {@code InterpolateAtCentroid}, {@code InterpolateAtOffset}, and {@code InterpolateAtSample} from the {@code GLSL.std.450} extended instruction set. This member is only meaningful if the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-sampleRateShading">sampleRateShading</a> feature is supported.</li>
- * <li>{@code tessellationIsolines} &ndash; indicates whether this implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#tessellation-isoline-tessellation">isoline output</a> from the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#tessellation">Tessellation</a> stage of a graphics pipeline. This member is only meaningful if <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-tessellationShader">tessellation shaders</a> are supported.</li>
- * <li>{@code tessellationPointMode} &ndash; indicates whether this implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#tessellation-point-mode">point output</a> from the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#tessellation">Tessellation</a> stage of a graphics pipeline. This member is only meaningful if <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-tessellationShader">tessellation shaders</a> are supported.</li>
- * <li>{@code triangleFans} &ndash; indicates whether this implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#drawing-triangle-fans">Triangle Fans</a> primitive topology.</li>
- * <li>{@code vertexAttributeAccessBeyondStride} &ndash; indicates whether this implementation supports accessing a vertex input attribute beyond the stride of the corresponding vertex input binding.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDevicePortabilitySubsetFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 constantAlphaColorBlendFactors;
- *     VkBool32 events;
- *     VkBool32 imageViewFormatReinterpretation;
- *     VkBool32 imageViewFormatSwizzle;
- *     VkBool32 imageView2DOn3DImage;
- *     VkBool32 multisampleArrayImage;
- *     VkBool32 mutableComparisonSamplers;
- *     VkBool32 pointPolygons;
- *     VkBool32 samplerMipLodBias;
- *     VkBool32 separateStencilMaskRef;
- *     VkBool32 shaderSampleRateInterpolationFunctions;
- *     VkBool32 tessellationIsolines;
- *     VkBool32 tessellationPointMode;
- *     VkBool32 triangleFans;
- *     VkBool32 vertexAttributeAccessBeyondStride;
+ *     VkBool32 {@link #constantAlphaColorBlendFactors};
+ *     VkBool32 {@link #events};
+ *     VkBool32 {@link #imageViewFormatReinterpretation};
+ *     VkBool32 {@link #imageViewFormatSwizzle};
+ *     VkBool32 {@link #imageView2DOn3DImage};
+ *     VkBool32 {@link #multisampleArrayImage};
+ *     VkBool32 {@link #mutableComparisonSamplers};
+ *     VkBool32 {@link #pointPolygons};
+ *     VkBool32 {@link #samplerMipLodBias};
+ *     VkBool32 {@link #separateStencilMaskRef};
+ *     VkBool32 {@link #shaderSampleRateInterpolationFunctions};
+ *     VkBool32 {@link #tessellationIsolines};
+ *     VkBool32 {@link #tessellationPointMode};
+ *     VkBool32 {@link #triangleFans};
+ *     VkBool32 {@link #vertexAttributeAccessBeyondStride};
  * }</code></pre>
  */
 public class VkPhysicalDevicePortabilitySubsetFeaturesKHR extends Struct implements NativeResource {
@@ -155,55 +135,55 @@ public class VkPhysicalDevicePortabilitySubsetFeaturesKHR extends Struct impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code constantAlphaColorBlendFactors} field. */
+    /** indicates whether this implementation supports constant <em>alpha</em> <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-blendfactors">Blend Factors</a> used as source or destination <em>color</em> <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-blending">Blending</a>. */
     @NativeType("VkBool32")
     public boolean constantAlphaColorBlendFactors() { return nconstantAlphaColorBlendFactors(address()) != 0; }
-    /** Returns the value of the {@code events} field. */
+    /** indicates whether this implementation supports synchronization using <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-events">Events</a>. */
     @NativeType("VkBool32")
     public boolean events() { return nevents(address()) != 0; }
-    /** Returns the value of the {@code imageViewFormatReinterpretation} field. */
+    /** indicates whether this implementation supports a {@code VkImageView} being created with a texel format containing a different number of components, or a different number of bits in each component, than the texel format of the underlying {@code VkImage}. */
     @NativeType("VkBool32")
     public boolean imageViewFormatReinterpretation() { return nimageViewFormatReinterpretation(address()) != 0; }
-    /** Returns the value of the {@code imageViewFormatSwizzle} field. */
+    /** indicates whether this implementation supports remapping format components using {@link VkImageViewCreateInfo}{@code ::components}. */
     @NativeType("VkBool32")
     public boolean imageViewFormatSwizzle() { return nimageViewFormatSwizzle(address()) != 0; }
-    /** Returns the value of the {@code imageView2DOn3DImage} field. */
+    /** indicates whether this implementation supports a {@code VkImage} being created with the {@link VK11#VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT} flag set, permitting a 2D or 2D array image view to be created on a 3D {@code VkImage}. */
     @NativeType("VkBool32")
     public boolean imageView2DOn3DImage() { return nimageView2DOn3DImage(address()) != 0; }
-    /** Returns the value of the {@code multisampleArrayImage} field. */
+    /** indicates whether this implementation supports a {@code VkImage} being created as a 2D array with multiple samples per texel. */
     @NativeType("VkBool32")
     public boolean multisampleArrayImage() { return nmultisampleArrayImage(address()) != 0; }
-    /** Returns the value of the {@code mutableComparisonSamplers} field. */
+    /** indicates whether this implementation allows descriptors with comparison samplers to be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#descriptorsets-updates">updated</a>. */
     @NativeType("VkBool32")
     public boolean mutableComparisonSamplers() { return nmutableComparisonSamplers(address()) != 0; }
-    /** Returns the value of the {@code pointPolygons} field. */
+    /** indicates whether this implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast">Rasterization</a> using a <em>point</em> <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-polygonmode">Polygon Mode</a>. */
     @NativeType("VkBool32")
     public boolean pointPolygons() { return npointPolygons(address()) != 0; }
-    /** Returns the value of the {@code samplerMipLodBias} field. */
+    /** indicates whether this implementation supports setting a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers-mipLodBias">mipmap LOD bias value</a> when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers">creating a sampler</a>. */
     @NativeType("VkBool32")
     public boolean samplerMipLodBias() { return nsamplerMipLodBias(address()) != 0; }
-    /** Returns the value of the {@code separateStencilMaskRef} field. */
+    /** indicates whether this implementation supports separate front and back <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-stencil">Stencil Test</a> reference values. */
     @NativeType("VkBool32")
     public boolean separateStencilMaskRef() { return nseparateStencilMaskRef(address()) != 0; }
-    /** Returns the value of the {@code shaderSampleRateInterpolationFunctions} field. */
+    /** indicates whether this implementation supports fragment shaders which use the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#spirvenv-capabilities-table-InterpolationFunction">{@code InterpolationFunction}</a> capability and the extended instructions {@code InterpolateAtCentroid}, {@code InterpolateAtOffset}, and {@code InterpolateAtSample} from the {@code GLSL.std.450} extended instruction set. This member is only meaningful if the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-sampleRateShading">sampleRateShading</a> feature is supported. */
     @NativeType("VkBool32")
     public boolean shaderSampleRateInterpolationFunctions() { return nshaderSampleRateInterpolationFunctions(address()) != 0; }
-    /** Returns the value of the {@code tessellationIsolines} field. */
+    /** indicates whether this implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#tessellation-isoline-tessellation">isoline output</a> from the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#tessellation">Tessellation</a> stage of a graphics pipeline. This member is only meaningful if <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-tessellationShader">tessellation shaders</a> are supported. */
     @NativeType("VkBool32")
     public boolean tessellationIsolines() { return ntessellationIsolines(address()) != 0; }
-    /** Returns the value of the {@code tessellationPointMode} field. */
+    /** indicates whether this implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#tessellation-point-mode">point output</a> from the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#tessellation">Tessellation</a> stage of a graphics pipeline. This member is only meaningful if <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-tessellationShader">tessellation shaders</a> are supported. */
     @NativeType("VkBool32")
     public boolean tessellationPointMode() { return ntessellationPointMode(address()) != 0; }
-    /** Returns the value of the {@code triangleFans} field. */
+    /** indicates whether this implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#drawing-triangle-fans">Triangle Fans</a> primitive topology. */
     @NativeType("VkBool32")
     public boolean triangleFans() { return ntriangleFans(address()) != 0; }
-    /** Returns the value of the {@code vertexAttributeAccessBeyondStride} field. */
+    /** indicates whether this implementation supports accessing a vertex input attribute beyond the stride of the corresponding vertex input binding. */
     @NativeType("VkBool32")
     public boolean vertexAttributeAccessBeyondStride() { return nvertexAttributeAccessBeyondStride(address()) != 0; }
 
@@ -211,35 +191,35 @@ public class VkPhysicalDevicePortabilitySubsetFeaturesKHR extends Struct impleme
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code constantAlphaColorBlendFactors} field. */
+    /** Sets the specified value to the {@link #constantAlphaColorBlendFactors} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR constantAlphaColorBlendFactors(@NativeType("VkBool32") boolean value) { nconstantAlphaColorBlendFactors(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code events} field. */
+    /** Sets the specified value to the {@link #events} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR events(@NativeType("VkBool32") boolean value) { nevents(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code imageViewFormatReinterpretation} field. */
+    /** Sets the specified value to the {@link #imageViewFormatReinterpretation} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR imageViewFormatReinterpretation(@NativeType("VkBool32") boolean value) { nimageViewFormatReinterpretation(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code imageViewFormatSwizzle} field. */
+    /** Sets the specified value to the {@link #imageViewFormatSwizzle} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR imageViewFormatSwizzle(@NativeType("VkBool32") boolean value) { nimageViewFormatSwizzle(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code imageView2DOn3DImage} field. */
+    /** Sets the specified value to the {@link #imageView2DOn3DImage} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR imageView2DOn3DImage(@NativeType("VkBool32") boolean value) { nimageView2DOn3DImage(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code multisampleArrayImage} field. */
+    /** Sets the specified value to the {@link #multisampleArrayImage} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR multisampleArrayImage(@NativeType("VkBool32") boolean value) { nmultisampleArrayImage(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code mutableComparisonSamplers} field. */
+    /** Sets the specified value to the {@link #mutableComparisonSamplers} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR mutableComparisonSamplers(@NativeType("VkBool32") boolean value) { nmutableComparisonSamplers(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code pointPolygons} field. */
+    /** Sets the specified value to the {@link #pointPolygons} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR pointPolygons(@NativeType("VkBool32") boolean value) { npointPolygons(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code samplerMipLodBias} field. */
+    /** Sets the specified value to the {@link #samplerMipLodBias} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR samplerMipLodBias(@NativeType("VkBool32") boolean value) { nsamplerMipLodBias(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code separateStencilMaskRef} field. */
+    /** Sets the specified value to the {@link #separateStencilMaskRef} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR separateStencilMaskRef(@NativeType("VkBool32") boolean value) { nseparateStencilMaskRef(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderSampleRateInterpolationFunctions} field. */
+    /** Sets the specified value to the {@link #shaderSampleRateInterpolationFunctions} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR shaderSampleRateInterpolationFunctions(@NativeType("VkBool32") boolean value) { nshaderSampleRateInterpolationFunctions(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code tessellationIsolines} field. */
+    /** Sets the specified value to the {@link #tessellationIsolines} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR tessellationIsolines(@NativeType("VkBool32") boolean value) { ntessellationIsolines(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code tessellationPointMode} field. */
+    /** Sets the specified value to the {@link #tessellationPointMode} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR tessellationPointMode(@NativeType("VkBool32") boolean value) { ntessellationPointMode(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code triangleFans} field. */
+    /** Sets the specified value to the {@link #triangleFans} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR triangleFans(@NativeType("VkBool32") boolean value) { ntriangleFans(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code vertexAttributeAccessBeyondStride} field. */
+    /** Sets the specified value to the {@link #vertexAttributeAccessBeyondStride} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR vertexAttributeAccessBeyondStride(@NativeType("VkBool32") boolean value) { nvertexAttributeAccessBeyondStride(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -546,55 +526,55 @@ public class VkPhysicalDevicePortabilitySubsetFeaturesKHR extends Struct impleme
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.npNext(address()); }
-        /** Returns the value of the {@code constantAlphaColorBlendFactors} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#constantAlphaColorBlendFactors} field. */
         @NativeType("VkBool32")
         public boolean constantAlphaColorBlendFactors() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.nconstantAlphaColorBlendFactors(address()) != 0; }
-        /** Returns the value of the {@code events} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#events} field. */
         @NativeType("VkBool32")
         public boolean events() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.nevents(address()) != 0; }
-        /** Returns the value of the {@code imageViewFormatReinterpretation} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#imageViewFormatReinterpretation} field. */
         @NativeType("VkBool32")
         public boolean imageViewFormatReinterpretation() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.nimageViewFormatReinterpretation(address()) != 0; }
-        /** Returns the value of the {@code imageViewFormatSwizzle} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#imageViewFormatSwizzle} field. */
         @NativeType("VkBool32")
         public boolean imageViewFormatSwizzle() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.nimageViewFormatSwizzle(address()) != 0; }
-        /** Returns the value of the {@code imageView2DOn3DImage} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#imageView2DOn3DImage} field. */
         @NativeType("VkBool32")
         public boolean imageView2DOn3DImage() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.nimageView2DOn3DImage(address()) != 0; }
-        /** Returns the value of the {@code multisampleArrayImage} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#multisampleArrayImage} field. */
         @NativeType("VkBool32")
         public boolean multisampleArrayImage() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.nmultisampleArrayImage(address()) != 0; }
-        /** Returns the value of the {@code mutableComparisonSamplers} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#mutableComparisonSamplers} field. */
         @NativeType("VkBool32")
         public boolean mutableComparisonSamplers() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.nmutableComparisonSamplers(address()) != 0; }
-        /** Returns the value of the {@code pointPolygons} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#pointPolygons} field. */
         @NativeType("VkBool32")
         public boolean pointPolygons() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.npointPolygons(address()) != 0; }
-        /** Returns the value of the {@code samplerMipLodBias} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#samplerMipLodBias} field. */
         @NativeType("VkBool32")
         public boolean samplerMipLodBias() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.nsamplerMipLodBias(address()) != 0; }
-        /** Returns the value of the {@code separateStencilMaskRef} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#separateStencilMaskRef} field. */
         @NativeType("VkBool32")
         public boolean separateStencilMaskRef() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.nseparateStencilMaskRef(address()) != 0; }
-        /** Returns the value of the {@code shaderSampleRateInterpolationFunctions} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#shaderSampleRateInterpolationFunctions} field. */
         @NativeType("VkBool32")
         public boolean shaderSampleRateInterpolationFunctions() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.nshaderSampleRateInterpolationFunctions(address()) != 0; }
-        /** Returns the value of the {@code tessellationIsolines} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#tessellationIsolines} field. */
         @NativeType("VkBool32")
         public boolean tessellationIsolines() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.ntessellationIsolines(address()) != 0; }
-        /** Returns the value of the {@code tessellationPointMode} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#tessellationPointMode} field. */
         @NativeType("VkBool32")
         public boolean tessellationPointMode() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.ntessellationPointMode(address()) != 0; }
-        /** Returns the value of the {@code triangleFans} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#triangleFans} field. */
         @NativeType("VkBool32")
         public boolean triangleFans() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.ntriangleFans(address()) != 0; }
-        /** Returns the value of the {@code vertexAttributeAccessBeyondStride} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#vertexAttributeAccessBeyondStride} field. */
         @NativeType("VkBool32")
         public boolean vertexAttributeAccessBeyondStride() { return VkPhysicalDevicePortabilitySubsetFeaturesKHR.nvertexAttributeAccessBeyondStride(address()) != 0; }
 
@@ -602,35 +582,35 @@ public class VkPhysicalDevicePortabilitySubsetFeaturesKHR extends Struct impleme
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code constantAlphaColorBlendFactors} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#constantAlphaColorBlendFactors} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer constantAlphaColorBlendFactors(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.nconstantAlphaColorBlendFactors(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code events} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#events} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer events(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.nevents(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code imageViewFormatReinterpretation} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#imageViewFormatReinterpretation} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer imageViewFormatReinterpretation(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.nimageViewFormatReinterpretation(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code imageViewFormatSwizzle} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#imageViewFormatSwizzle} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer imageViewFormatSwizzle(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.nimageViewFormatSwizzle(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code imageView2DOn3DImage} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#imageView2DOn3DImage} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer imageView2DOn3DImage(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.nimageView2DOn3DImage(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code multisampleArrayImage} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#multisampleArrayImage} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer multisampleArrayImage(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.nmultisampleArrayImage(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code mutableComparisonSamplers} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#mutableComparisonSamplers} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer mutableComparisonSamplers(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.nmutableComparisonSamplers(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code pointPolygons} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#pointPolygons} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer pointPolygons(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.npointPolygons(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code samplerMipLodBias} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#samplerMipLodBias} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer samplerMipLodBias(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.nsamplerMipLodBias(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code separateStencilMaskRef} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#separateStencilMaskRef} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer separateStencilMaskRef(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.nseparateStencilMaskRef(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderSampleRateInterpolationFunctions} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#shaderSampleRateInterpolationFunctions} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer shaderSampleRateInterpolationFunctions(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.nshaderSampleRateInterpolationFunctions(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code tessellationIsolines} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#tessellationIsolines} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer tessellationIsolines(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.ntessellationIsolines(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code tessellationPointMode} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#tessellationPointMode} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer tessellationPointMode(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.ntessellationPointMode(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code triangleFans} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#triangleFans} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer triangleFans(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.ntriangleFans(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code vertexAttributeAccessBeyondStride} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#vertexAttributeAccessBeyondStride} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer vertexAttributeAccessBeyondStride(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.nvertexAttributeAccessBeyondStride(address(), value ? 1 : 0); return this; }
 
     }

@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRZeroInitializeWorkgroupMemory#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code shaderZeroInitializeWorkgroupMemory} &ndash; specifies whether the implementation supports initializing a variable in Workgroup storage class.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 shaderZeroInitializeWorkgroupMemory;
+ *     VkBool32 {@link #shaderZeroInitializeWorkgroupMemory};
  * }</code></pre>
  */
 public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends St
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code shaderZeroInitializeWorkgroupMemory} field. */
+    /** specifies whether the implementation supports initializing a variable in Workgroup storage class. */
     @NativeType("VkBool32")
     public boolean shaderZeroInitializeWorkgroupMemory() { return nshaderZeroInitializeWorkgroupMemory(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends St
     public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderZeroInitializeWorkgroupMemory} field. */
+    /** Sets the specified value to the {@link #shaderZeroInitializeWorkgroupMemory} field. */
     public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR shaderZeroInitializeWorkgroupMemory(@NativeType("VkBool32") boolean value) { nshaderZeroInitializeWorkgroupMemory(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends St
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.npNext(address()); }
-        /** Returns the value of the {@code shaderZeroInitializeWorkgroupMemory} field. */
+        /** @return the value of the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR#shaderZeroInitializeWorkgroupMemory} field. */
         @NativeType("VkBool32")
         public boolean shaderZeroInitializeWorkgroupMemory() { return VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.nshaderZeroInitializeWorkgroupMemory(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends St
         public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderZeroInitializeWorkgroupMemory} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR#shaderZeroInitializeWorkgroupMemory} field. */
         public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.Buffer shaderZeroInitializeWorkgroupMemory(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.nshaderZeroInitializeWorkgroupMemory(address(), value ? 1 : 0); return this; }
 
     }

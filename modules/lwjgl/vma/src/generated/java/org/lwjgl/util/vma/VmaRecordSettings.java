@@ -19,23 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Parameters for recording calls to VMA functions. To be used in {@link VmaAllocatorCreateInfo}{@code ::pRecordSettings}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code flags} &ndash; flags for recording. Must be:<br><table><tr><td>{@link Vma#VMA_RECORD_FLUSH_AFTER_CALL_BIT RECORD_FLUSH_AFTER_CALL_BIT}</td></tr></table></li>
- * <li>{@code pFilePath} &ndash; 
- * path to the file that should be written by the recording.
- * 
- * <p>Suggested extension: "csv". If the file already exists, it will be overwritten. It will be opened for the whole time {@code VmaAllocator} object is
- * alive. If opening this file fails, creation of the whole allocator object fails.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VmaRecordSettings {
- *     VmaRecordFlags flags;
- *     char const * pFilePath;
+ *     VmaRecordFlags {@link #flags};
+ *     char const * {@link #pFilePath};
  * }</code></pre>
  */
 public class VmaRecordSettings extends Struct implements NativeResource {
@@ -77,19 +66,29 @@ public class VmaRecordSettings extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code flags} field. */
+    /** flags for recording. Must be:<br><table><tr><td>{@link Vma#VMA_RECORD_FLUSH_AFTER_CALL_BIT RECORD_FLUSH_AFTER_CALL_BIT}</td></tr></table> */
     @NativeType("VmaRecordFlags")
     public int flags() { return nflags(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pFilePath} field. */
+    /**
+     * path to the file that should be written by the recording.
+     * 
+     * <p>Suggested extension: "csv". If the file already exists, it will be overwritten. It will be opened for the whole time {@code VmaAllocator} object is
+     * alive. If opening this file fails, creation of the whole allocator object fails.</p>
+     */
     @NativeType("char const *")
     public ByteBuffer pFilePath() { return npFilePath(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code pFilePath} field. */
+    /**
+     * path to the file that should be written by the recording.
+     * 
+     * <p>Suggested extension: "csv". If the file already exists, it will be overwritten. It will be opened for the whole time {@code VmaAllocator} object is
+     * alive. If opening this file fails, creation of the whole allocator object fails.</p>
+     */
     @NativeType("char const *")
     public String pFilePathString() { return npFilePathString(address()); }
 
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VmaRecordSettings flags(@NativeType("VmaRecordFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@code pFilePath} field. */
+    /** Sets the address of the specified encoded string to the {@link #pFilePath} field. */
     public VmaRecordSettings pFilePath(@NativeType("char const *") ByteBuffer value) { npFilePath(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -332,19 +331,19 @@ public class VmaRecordSettings extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VmaRecordSettings#flags} field. */
         @NativeType("VmaRecordFlags")
         public int flags() { return VmaRecordSettings.nflags(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pFilePath} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VmaRecordSettings#pFilePath} field. */
         @NativeType("char const *")
         public ByteBuffer pFilePath() { return VmaRecordSettings.npFilePath(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code pFilePath} field. */
+        /** @return the null-terminated string pointed to by the {@link VmaRecordSettings#pFilePath} field. */
         @NativeType("char const *")
         public String pFilePathString() { return VmaRecordSettings.npFilePathString(address()); }
 
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VmaRecordSettings#flags} field. */
         public VmaRecordSettings.Buffer flags(@NativeType("VmaRecordFlags") int value) { VmaRecordSettings.nflags(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@code pFilePath} field. */
+        /** Sets the address of the specified encoded string to the {@link VmaRecordSettings#pFilePath} field. */
         public VmaRecordSettings.Buffer pFilePath(@NativeType("char const *") ByteBuffer value) { VmaRecordSettings.npFilePath(address(), value); return this; }
 
     }

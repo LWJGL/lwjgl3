@@ -18,35 +18,15 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Contains information about a display monitor.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code cbSize} &ndash; 
- * the size, in bytes, of the structure.
- * 
- * <p>Set this member to {@link #SIZEOF} before calling the {@link User32#GetMonitorInfo} function. Doing so lets the function determine the type of structure you
- * are passing to it.</p></li>
- * <li>{@code rcMonitor} &ndash; 
- * a {@link RECT} structure that specifies the display monitor rectangle, expressed in virtual-screen coordinates. Note that if the monitor is not the primary
- * display monitor, some of the rectangle's coordinates may be negative values.</li>
- * <li>{@code rcWork} &ndash; 
- * a {@link RECT} structure that specifies the work area rectangle of the display monitor that can be used by applications, expressed in virtual-screen
- * coordinates. Windows uses this rectangle to maximize an application on the monitor. The rest of the area in {@code rcMonitor} contains system windows
- * such as the task bar and side bars. Note that if the monitor is not the primary display monitor, some of the rectangle's coordinates may be negative
- * values.</li>
- * <li>{@code dwFlags} &ndash; the attributes of the display monitor. May be:<br>{@link User32#MONITORINFOF_PRIMARY}</li>
- * <li>{@code szDevice[32]} &ndash; a string that specifies the device name of the monitor being used</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct MONITORINFOEX {
- *     DWORD cbSize;
- *     {@link RECT RECT} rcMonitor;
- *     {@link RECT RECT} rcWork;
- *     DWORD dwFlags;
- *     TCHAR szDevice[32];
+ *     DWORD {@link #cbSize};
+ *     {@link RECT RECT} {@link #rcMonitor};
+ *     {@link RECT RECT} {@link #rcWork};
+ *     DWORD {@link #dwFlags};
+ *     TCHAR {@link #szDevice}[32];
  * }</code></pre>
  */
 public class MONITORINFOEX extends Struct implements NativeResource {
@@ -97,24 +77,37 @@ public class MONITORINFOEX extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code cbSize} field. */
+    /**
+     * the size, in bytes, of the structure.
+     * 
+     * <p>Set this member to {@link #SIZEOF} before calling the {@link User32#GetMonitorInfo} function. Doing so lets the function determine the type of structure you
+     * are passing to it.</p>
+     */
     @NativeType("DWORD")
     public int cbSize() { return ncbSize(address()); }
-    /** Returns a {@link RECT} view of the {@code rcMonitor} field. */
+    /**
+     * a {@link RECT} structure that specifies the display monitor rectangle, expressed in virtual-screen coordinates. Note that if the monitor is not the primary
+     * display monitor, some of the rectangle's coordinates may be negative values.
+     */
     public RECT rcMonitor() { return nrcMonitor(address()); }
-    /** Returns a {@link RECT} view of the {@code rcWork} field. */
+    /**
+     * a {@link RECT} structure that specifies the work area rectangle of the display monitor that can be used by applications, expressed in virtual-screen
+     * coordinates. Windows uses this rectangle to maximize an application on the monitor. The rest of the area in {@code rcMonitor} contains system windows
+     * such as the task bar and side bars. Note that if the monitor is not the primary display monitor, some of the rectangle's coordinates may be negative
+     * values.
+     */
     public RECT rcWork() { return nrcWork(address()); }
-    /** Returns the value of the {@code dwFlags} field. */
+    /** the attributes of the display monitor. May be:<br>{@link User32#MONITORINFOF_PRIMARY} */
     @NativeType("DWORD")
     public int dwFlags() { return ndwFlags(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code szDevice} field. */
+    /** a string that specifies the device name of the monitor being used */
     @NativeType("TCHAR[32]")
     public ByteBuffer szDevice() { return nszDevice(address()); }
-    /** Decodes the null-terminated string stored in the {@code szDevice} field. */
+    /** a string that specifies the device name of the monitor being used */
     @NativeType("TCHAR[32]")
     public String szDeviceString() { return nszDeviceString(address()); }
 
-    /** Sets the specified value to the {@code cbSize} field. */
+    /** Sets the specified value to the {@link #cbSize} field. */
     public MONITORINFOEX cbSize(@NativeType("DWORD") int value) { ncbSize(address(), value); return this; }
 
     /**
@@ -326,24 +319,24 @@ public class MONITORINFOEX extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code cbSize} field. */
+        /** @return the value of the {@link MONITORINFOEX#cbSize} field. */
         @NativeType("DWORD")
         public int cbSize() { return MONITORINFOEX.ncbSize(address()); }
-        /** Returns a {@link RECT} view of the {@code rcMonitor} field. */
+        /** @return a {@link RECT} view of the {@link MONITORINFOEX#rcMonitor} field. */
         public RECT rcMonitor() { return MONITORINFOEX.nrcMonitor(address()); }
-        /** Returns a {@link RECT} view of the {@code rcWork} field. */
+        /** @return a {@link RECT} view of the {@link MONITORINFOEX#rcWork} field. */
         public RECT rcWork() { return MONITORINFOEX.nrcWork(address()); }
-        /** Returns the value of the {@code dwFlags} field. */
+        /** @return the value of the {@link MONITORINFOEX#dwFlags} field. */
         @NativeType("DWORD")
         public int dwFlags() { return MONITORINFOEX.ndwFlags(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code szDevice} field. */
+        /** @return a {@link ByteBuffer} view of the {@link MONITORINFOEX#szDevice} field. */
         @NativeType("TCHAR[32]")
         public ByteBuffer szDevice() { return MONITORINFOEX.nszDevice(address()); }
-        /** Decodes the null-terminated string stored in the {@code szDevice} field. */
+        /** @return the null-terminated string stored in the {@link MONITORINFOEX#szDevice} field. */
         @NativeType("TCHAR[32]")
         public String szDeviceString() { return MONITORINFOEX.nszDeviceString(address()); }
 
-        /** Sets the specified value to the {@code cbSize} field. */
+        /** Sets the specified value to the {@link MONITORINFOEX#cbSize} field. */
         public MONITORINFOEX.Buffer cbSize(@NativeType("DWORD") int value) { MONITORINFOEX.ncbSize(address(), value); return this; }
 
     }

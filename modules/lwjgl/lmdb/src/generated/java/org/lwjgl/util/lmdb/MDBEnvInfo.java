@@ -18,27 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Information about the environment.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code me_mapaddr} &ndash; Address of map, if fixed.</li>
- * <li>{@code me_mapsize} &ndash; Size of the data memory map.</li>
- * <li>{@code me_last_pgno} &ndash; ID of the last used page.</li>
- * <li>{@code me_last_txnid} &ndash; ID of the last committed transaction.</li>
- * <li>{@code me_maxreaders} &ndash; Max reader slots in the environment.</li>
- * <li>{@code me_numreaders} &ndash; Max reader slots used in the environment.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct MDB_envinfo {
- *     void * me_mapaddr;
- *     size_t me_mapsize;
- *     size_t me_last_pgno;
- *     size_t me_last_txnid;
- *     unsigned int me_maxreaders;
- *     unsigned int me_numreaders;
+ *     void * {@link #me_mapaddr};
+ *     size_t {@link #me_mapsize};
+ *     size_t {@link #me_last_pgno};
+ *     size_t {@link #me_last_txnid};
+ *     unsigned int {@link #me_maxreaders};
+ *     unsigned int {@link #me_numreaders};
  * }</code></pre>
  */
 @NativeType("struct MDB_envinfo")
@@ -93,22 +82,22 @@ public class MDBEnvInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code me_mapaddr} field. */
+    /** Address of map, if fixed. */
     @NativeType("void *")
     public long me_mapaddr() { return nme_mapaddr(address()); }
-    /** Returns the value of the {@code me_mapsize} field. */
+    /** Size of the data memory map. */
     @NativeType("size_t")
     public long me_mapsize() { return nme_mapsize(address()); }
-    /** Returns the value of the {@code me_last_pgno} field. */
+    /** ID of the last used page. */
     @NativeType("size_t")
     public long me_last_pgno() { return nme_last_pgno(address()); }
-    /** Returns the value of the {@code me_last_txnid} field. */
+    /** ID of the last committed transaction. */
     @NativeType("size_t")
     public long me_last_txnid() { return nme_last_txnid(address()); }
-    /** Returns the value of the {@code me_maxreaders} field. */
+    /** Max reader slots in the environment. */
     @NativeType("unsigned int")
     public int me_maxreaders() { return nme_maxreaders(address()); }
-    /** Returns the value of the {@code me_numreaders} field. */
+    /** Max reader slots used in the environment. */
     @NativeType("unsigned int")
     public int me_numreaders() { return nme_numreaders(address()); }
 
@@ -306,22 +295,22 @@ public class MDBEnvInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code me_mapaddr} field. */
+        /** @return the value of the {@link MDBEnvInfo#me_mapaddr} field. */
         @NativeType("void *")
         public long me_mapaddr() { return MDBEnvInfo.nme_mapaddr(address()); }
-        /** Returns the value of the {@code me_mapsize} field. */
+        /** @return the value of the {@link MDBEnvInfo#me_mapsize} field. */
         @NativeType("size_t")
         public long me_mapsize() { return MDBEnvInfo.nme_mapsize(address()); }
-        /** Returns the value of the {@code me_last_pgno} field. */
+        /** @return the value of the {@link MDBEnvInfo#me_last_pgno} field. */
         @NativeType("size_t")
         public long me_last_pgno() { return MDBEnvInfo.nme_last_pgno(address()); }
-        /** Returns the value of the {@code me_last_txnid} field. */
+        /** @return the value of the {@link MDBEnvInfo#me_last_txnid} field. */
         @NativeType("size_t")
         public long me_last_txnid() { return MDBEnvInfo.nme_last_txnid(address()); }
-        /** Returns the value of the {@code me_maxreaders} field. */
+        /** @return the value of the {@link MDBEnvInfo#me_maxreaders} field. */
         @NativeType("unsigned int")
         public int me_maxreaders() { return MDBEnvInfo.nme_maxreaders(address()); }
-        /** Returns the value of the {@code me_numreaders} field. */
+        /** @return the value of the {@link MDBEnvInfo#me_numreaders} field. */
         @NativeType("unsigned int")
         public int me_numreaders() { return MDBEnvInfo.nme_numreaders(address()); }
 

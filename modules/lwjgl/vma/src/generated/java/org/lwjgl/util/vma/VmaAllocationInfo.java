@@ -18,61 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Parameters of {@code VmaAllocation} objects, that can be retrieved using function {@link Vma#vmaGetAllocationInfo GetAllocationInfo}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code memoryType} &ndash; 
- * memory type index that this allocation was allocated from.
- * 
- * <p>It never changes.</p></li>
- * <li>{@code deviceMemory} &ndash; 
- * handle to Vulkan memory object.
- * 
- * <p>Same memory object can be shared by multiple allocations.</p>
- * 
- * <p>It can change after call to {@link Vma#vmaDefragment Defragment} if this allocation is passed to the function, or if allocation is lost.</p>
- * 
- * <p>If the allocation is lost, it is equal to {@code VK_NULL_HANDLE}.</p></li>
- * <li>{@code offset} &ndash; 
- * offset in {@code VkDeviceMemory} object to the beginning of this allocation, in bytes. {@code (deviceMemory, offset)} pair is unique to this allocation.
- * 
- * <p>You usually don't need to use this offset. If you create a buffer or an image together with the allocation using e.g. function {@link Vma#vmaCreateBuffer CreateBuffer},
- * {@link Vma#vmaCreateImage CreateImage}, functions that operate on these resources refer to the beginning of the buffer or image, not entire device memory block. Functions like
- * {@link Vma#vmaMapMemory MapMemory}, {@link Vma#vmaBindBufferMemory BindBufferMemory} also refer to the beginning of the allocation and apply this offset automatically.</p>
- * 
- * <p>It can change after call to {@link Vma#vmaDefragment Defragment} if this allocation is passed to the function, or if allocation is lost.</p></li>
- * <li>{@code size} &ndash; 
- * size of this allocation, in bytes.
- * 
- * <p>It never changes, unless allocation is lost.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Allocation size returned in this variable may be greater than the size requested for the resource e.g. as {@code VkBufferCreateInfo::size}. Whole size
- * of the allocation is accessible for operations on memory e.g. using a pointer after mapping with {@link Vma#vmaMapMemory MapMemory}, but operations on the resource e.g.
- * using {@code vkCmdCopyBuffer} must be limited to the size of the resource.</p></div></li>
- * <li>{@code pMappedData} &ndash; 
- * pointer to the beginning of this allocation as mapped data.
- * 
- * <p>If the allocation hasn't been mapped using {@link Vma#vmaMapMemory MapMemory} and hasn't been created with {@link Vma#VMA_ALLOCATION_CREATE_MAPPED_BIT ALLOCATION_CREATE_MAPPED_BIT} flag, this value is null.</p>
- * 
- * <p>It can change after call to {@link Vma#vmaMapMemory MapMemory}, {@link Vma#vmaUnmapMemory UnmapMemory}. It can also change after call to {@link Vma#vmaDefragment Defragment} if this allocation is passed to the function.</p></li>
- * <li>{@code pUserData} &ndash; 
- * custom general-purpose pointer that was passed as {@link VmaAllocationCreateInfo}{@code ::pUserData} or set using {@link Vma#vmaSetAllocationUserData SetAllocationUserData}.
- * 
- * <p>It can change after call to {@link Vma#vmaSetAllocationUserData SetAllocationUserData} for this allocation.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VmaAllocationInfo {
- *     uint32_t memoryType;
- *     VkDeviceMemory deviceMemory;
- *     VkDeviceSize offset;
- *     VkDeviceSize size;
- *     void * pMappedData;
- *     void * pUserData;
+ *     uint32_t {@link #memoryType};
+ *     VkDeviceMemory {@link #deviceMemory};
+ *     VkDeviceSize {@link #offset};
+ *     VkDeviceSize {@link #size};
+ *     void * {@link #pMappedData};
+ *     void * {@link #pUserData};
  * }</code></pre>
  */
 public class VmaAllocationInfo extends Struct implements NativeResource {
@@ -126,22 +81,62 @@ public class VmaAllocationInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code memoryType} field. */
+    /**
+     * memory type index that this allocation was allocated from.
+     * 
+     * <p>It never changes.</p>
+     */
     @NativeType("uint32_t")
     public int memoryType() { return nmemoryType(address()); }
-    /** Returns the value of the {@code deviceMemory} field. */
+    /**
+     * handle to Vulkan memory object.
+     * 
+     * <p>Same memory object can be shared by multiple allocations.</p>
+     * 
+     * <p>It can change after call to {@link Vma#vmaDefragment Defragment} if this allocation is passed to the function, or if allocation is lost.</p>
+     * 
+     * <p>If the allocation is lost, it is equal to {@code VK_NULL_HANDLE}.</p>
+     */
     @NativeType("VkDeviceMemory")
     public long deviceMemory() { return ndeviceMemory(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /**
+     * offset in {@code VkDeviceMemory} object to the beginning of this allocation, in bytes. {@code (deviceMemory, offset)} pair is unique to this allocation.
+     * 
+     * <p>You usually don't need to use this offset. If you create a buffer or an image together with the allocation using e.g. function {@link Vma#vmaCreateBuffer CreateBuffer},
+     * {@link Vma#vmaCreateImage CreateImage}, functions that operate on these resources refer to the beginning of the buffer or image, not entire device memory block. Functions like
+     * {@link Vma#vmaMapMemory MapMemory}, {@link Vma#vmaBindBufferMemory BindBufferMemory} also refer to the beginning of the allocation and apply this offset automatically.</p>
+     * 
+     * <p>It can change after call to {@link Vma#vmaDefragment Defragment} if this allocation is passed to the function, or if allocation is lost.</p>
+     */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** Returns the value of the {@code size} field. */
+    /**
+     * size of this allocation, in bytes.
+     * 
+     * <p>It never changes, unless allocation is lost.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>Allocation size returned in this variable may be greater than the size requested for the resource e.g. as {@code VkBufferCreateInfo::size}. Whole size
+     * of the allocation is accessible for operations on memory e.g. using a pointer after mapping with {@link Vma#vmaMapMemory MapMemory}, but operations on the resource e.g.
+     * using {@code vkCmdCopyBuffer} must be limited to the size of the resource.</p></div>
+     */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** Returns the value of the {@code pMappedData} field. */
+    /**
+     * pointer to the beginning of this allocation as mapped data.
+     * 
+     * <p>If the allocation hasn't been mapped using {@link Vma#vmaMapMemory MapMemory} and hasn't been created with {@link Vma#VMA_ALLOCATION_CREATE_MAPPED_BIT ALLOCATION_CREATE_MAPPED_BIT} flag, this value is null.</p>
+     * 
+     * <p>It can change after call to {@link Vma#vmaMapMemory MapMemory}, {@link Vma#vmaUnmapMemory UnmapMemory}. It can also change after call to {@link Vma#vmaDefragment Defragment} if this allocation is passed to the function.</p>
+     */
     @NativeType("void *")
     public long pMappedData() { return npMappedData(address()); }
-    /** Returns the value of the {@code pUserData} field. */
+    /**
+     * custom general-purpose pointer that was passed as {@link VmaAllocationCreateInfo}{@code ::pUserData} or set using {@link Vma#vmaSetAllocationUserData SetAllocationUserData}.
+     * 
+     * <p>It can change after call to {@link Vma#vmaSetAllocationUserData SetAllocationUserData} for this allocation.</p>
+     */
     @NativeType("void *")
     public long pUserData() { return npUserData(address()); }
 
@@ -339,22 +334,22 @@ public class VmaAllocationInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code memoryType} field. */
+        /** @return the value of the {@link VmaAllocationInfo#memoryType} field. */
         @NativeType("uint32_t")
         public int memoryType() { return VmaAllocationInfo.nmemoryType(address()); }
-        /** Returns the value of the {@code deviceMemory} field. */
+        /** @return the value of the {@link VmaAllocationInfo#deviceMemory} field. */
         @NativeType("VkDeviceMemory")
         public long deviceMemory() { return VmaAllocationInfo.ndeviceMemory(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@link VmaAllocationInfo#offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VmaAllocationInfo.noffset(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link VmaAllocationInfo#size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VmaAllocationInfo.nsize(address()); }
-        /** Returns the value of the {@code pMappedData} field. */
+        /** @return the value of the {@link VmaAllocationInfo#pMappedData} field. */
         @NativeType("void *")
         public long pMappedData() { return VmaAllocationInfo.npMappedData(address()); }
-        /** Returns the value of the {@code pUserData} field. */
+        /** @return the value of the {@link VmaAllocationInfo#pUserData} field. */
         @NativeType("void *")
         public long pUserData() { return VmaAllocationInfo.npUserData(address()); }
 

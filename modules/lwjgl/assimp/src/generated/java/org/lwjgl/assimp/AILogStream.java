@@ -19,19 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Represents a log stream. A log stream receives all log messages and streams them somewhere
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code callback} &ndash; callback to be called</li>
- * <li>{@code user} &ndash; user data to be passed to the callback</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiLogStream {
- *     {@link AILogStreamCallbackI aiLogStreamCallback} callback;
- *     char * user;
+ *     {@link AILogStreamCallbackI aiLogStreamCallback} {@link #callback};
+ *     char * {@link #user};
  * }</code></pre>
  */
 @NativeType("struct aiLogStream")
@@ -74,21 +67,21 @@ public class AILogStream extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code callback} field. */
+    /** callback to be called */
     @NativeType("aiLogStreamCallback")
     public AILogStreamCallback callback() { return ncallback(address()); }
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code user} field.
-     *
      * @param capacity the number of elements in the returned buffer
+     *
+     * @return user data to be passed to the callback
      */
     @Nullable
     @NativeType("char *")
     public ByteBuffer user(int capacity) { return nuser(address(), capacity); }
 
-    /** Sets the specified value to the {@code callback} field. */
+    /** Sets the specified value to the {@link #callback} field. */
     public AILogStream callback(@NativeType("aiLogStreamCallback") AILogStreamCallbackI value) { ncallback(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code user} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@link #user} field. */
     public AILogStream user(@Nullable @NativeType("char *") ByteBuffer value) { nuser(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -326,11 +319,11 @@ public class AILogStream extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code callback} field. */
+        /** @return the value of the {@link AILogStream#callback} field. */
         @NativeType("aiLogStreamCallback")
         public AILogStreamCallback callback() { return AILogStream.ncallback(address()); }
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code user} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@link AILogStream#user} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
@@ -338,9 +331,9 @@ public class AILogStream extends Struct implements NativeResource {
         @NativeType("char *")
         public ByteBuffer user(int capacity) { return AILogStream.nuser(address(), capacity); }
 
-        /** Sets the specified value to the {@code callback} field. */
+        /** Sets the specified value to the {@link AILogStream#callback} field. */
         public AILogStream.Buffer callback(@NativeType("aiLogStreamCallback") AILogStreamCallbackI value) { AILogStream.ncallback(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code user} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@link AILogStream#user} field. */
         public AILogStream.Buffer user(@Nullable @NativeType("char *") ByteBuffer value) { AILogStream.nuser(address(), value); return this; }
 
     }

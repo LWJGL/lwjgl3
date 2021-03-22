@@ -33,25 +33,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK11#vkGetPhysicalDeviceExternalBufferProperties GetPhysicalDeviceExternalBufferProperties}, {@link KHRExternalMemoryCapabilities#vkGetPhysicalDeviceExternalBufferPropertiesKHR GetPhysicalDeviceExternalBufferPropertiesKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkBufferCreateFlagBits} describing additional parameters of the buffer, corresponding to {@link VkBufferCreateInfo}{@code ::flags}.</li>
- * <li>{@code usage} &ndash; a bitmask of {@code VkBufferUsageFlagBits} describing the intended usage of the buffer, corresponding to {@link VkBufferCreateInfo}{@code ::usage}.</li>
- * <li>{@code handleType} &ndash; a {@code VkExternalMemoryHandleTypeFlagBits} value specifying the memory handle type that will be used with the memory associated with the buffer.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceExternalBufferInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkBufferCreateFlags flags;
- *     VkBufferUsageFlags usage;
- *     VkExternalMemoryHandleTypeFlagBits handleType;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkBufferCreateFlags {@link #flags};
+ *     VkBufferUsageFlags {@link #usage};
+ *     VkExternalMemoryHandleTypeFlagBits {@link #handleType};
  * }</code></pre>
  */
 public class VkPhysicalDeviceExternalBufferInfo extends Struct implements NativeResource {
@@ -102,31 +92,31 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkBufferCreateFlagBits} describing additional parameters of the buffer, corresponding to {@link VkBufferCreateInfo}{@code ::flags}. */
     @NativeType("VkBufferCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code usage} field. */
+    /** a bitmask of {@code VkBufferUsageFlagBits} describing the intended usage of the buffer, corresponding to {@link VkBufferCreateInfo}{@code ::usage}. */
     @NativeType("VkBufferUsageFlags")
     public int usage() { return nusage(address()); }
-    /** Returns the value of the {@code handleType} field. */
+    /** a {@code VkExternalMemoryHandleTypeFlagBits} value specifying the memory handle type that will be used with the memory associated with the buffer. */
     @NativeType("VkExternalMemoryHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceExternalBufferInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceExternalBufferInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkPhysicalDeviceExternalBufferInfo flags(@NativeType("VkBufferCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code usage} field. */
+    /** Sets the specified value to the {@link #usage} field. */
     public VkPhysicalDeviceExternalBufferInfo usage(@NativeType("VkBufferUsageFlags") int value) { nusage(address(), value); return this; }
-    /** Sets the specified value to the {@code handleType} field. */
+    /** Sets the specified value to the {@link #handleType} field. */
     public VkPhysicalDeviceExternalBufferInfo handleType(@NativeType("VkExternalMemoryHandleTypeFlagBits") int value) { nhandleType(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -361,31 +351,31 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExternalBufferInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceExternalBufferInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExternalBufferInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPhysicalDeviceExternalBufferInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExternalBufferInfo#flags} field. */
         @NativeType("VkBufferCreateFlags")
         public int flags() { return VkPhysicalDeviceExternalBufferInfo.nflags(address()); }
-        /** Returns the value of the {@code usage} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExternalBufferInfo#usage} field. */
         @NativeType("VkBufferUsageFlags")
         public int usage() { return VkPhysicalDeviceExternalBufferInfo.nusage(address()); }
-        /** Returns the value of the {@code handleType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExternalBufferInfo#handleType} field. */
         @NativeType("VkExternalMemoryHandleTypeFlagBits")
         public int handleType() { return VkPhysicalDeviceExternalBufferInfo.nhandleType(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExternalBufferInfo#sType} field. */
         public VkPhysicalDeviceExternalBufferInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExternalBufferInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExternalBufferInfo#pNext} field. */
         public VkPhysicalDeviceExternalBufferInfo.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceExternalBufferInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExternalBufferInfo#flags} field. */
         public VkPhysicalDeviceExternalBufferInfo.Buffer flags(@NativeType("VkBufferCreateFlags") int value) { VkPhysicalDeviceExternalBufferInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code usage} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExternalBufferInfo#usage} field. */
         public VkPhysicalDeviceExternalBufferInfo.Buffer usage(@NativeType("VkBufferUsageFlags") int value) { VkPhysicalDeviceExternalBufferInfo.nusage(address(), value); return this; }
-        /** Sets the specified value to the {@code handleType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExternalBufferInfo#handleType} field. */
         public VkPhysicalDeviceExternalBufferInfo.Buffer handleType(@NativeType("VkExternalMemoryHandleTypeFlagBits") int value) { VkPhysicalDeviceExternalBufferInfo.nhandleType(address(), value); return this; }
 
     }

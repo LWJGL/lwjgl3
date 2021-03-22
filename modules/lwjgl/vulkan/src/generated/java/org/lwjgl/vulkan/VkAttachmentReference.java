@@ -34,19 +34,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkRenderPassFragmentDensityMapCreateInfoEXT}, {@link VkSubpassDescription}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code attachment} &ndash; either an integer value identifying an attachment at the corresponding index in {@link VkRenderPassCreateInfo}{@code ::pAttachments}, or {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} to signify that this attachment is not used.</li>
- * <li>{@code layout} &ndash; a {@code VkImageLayout} value specifying the layout the attachment uses during the subpass.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkAttachmentReference {
- *     uint32_t attachment;
- *     VkImageLayout layout;
+ *     uint32_t {@link #attachment};
+ *     VkImageLayout {@link #layout};
  * }</code></pre>
  */
 public class VkAttachmentReference extends Struct implements NativeResource {
@@ -88,16 +81,16 @@ public class VkAttachmentReference extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code attachment} field. */
+    /** either an integer value identifying an attachment at the corresponding index in {@link VkRenderPassCreateInfo}{@code ::pAttachments}, or {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} to signify that this attachment is not used. */
     @NativeType("uint32_t")
     public int attachment() { return nattachment(address()); }
-    /** Returns the value of the {@code layout} field. */
+    /** a {@code VkImageLayout} value specifying the layout the attachment uses during the subpass. */
     @NativeType("VkImageLayout")
     public int layout() { return nlayout(address()); }
 
-    /** Sets the specified value to the {@code attachment} field. */
+    /** Sets the specified value to the {@link #attachment} field. */
     public VkAttachmentReference attachment(@NativeType("uint32_t") int value) { nattachment(address(), value); return this; }
-    /** Sets the specified value to the {@code layout} field. */
+    /** Sets the specified value to the {@link #layout} field. */
     public VkAttachmentReference layout(@NativeType("VkImageLayout") int value) { nlayout(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -314,16 +307,16 @@ public class VkAttachmentReference extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code attachment} field. */
+        /** @return the value of the {@link VkAttachmentReference#attachment} field. */
         @NativeType("uint32_t")
         public int attachment() { return VkAttachmentReference.nattachment(address()); }
-        /** Returns the value of the {@code layout} field. */
+        /** @return the value of the {@link VkAttachmentReference#layout} field. */
         @NativeType("VkImageLayout")
         public int layout() { return VkAttachmentReference.nlayout(address()); }
 
-        /** Sets the specified value to the {@code attachment} field. */
+        /** Sets the specified value to the {@link VkAttachmentReference#attachment} field. */
         public VkAttachmentReference.Buffer attachment(@NativeType("uint32_t") int value) { VkAttachmentReference.nattachment(address(), value); return this; }
-        /** Sets the specified value to the {@code layout} field. */
+        /** Sets the specified value to the {@link VkAttachmentReference#layout} field. */
         public VkAttachmentReference.Buffer layout(@NativeType("VkImageLayout") int value) { VkAttachmentReference.nlayout(address(), value); return this; }
 
     }

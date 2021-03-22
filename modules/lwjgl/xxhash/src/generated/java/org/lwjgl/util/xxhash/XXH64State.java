@@ -19,13 +19,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * 64-bit XXH state for stack allocation. Unstable API.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code reserved32} &ndash; required for padding anyway</li>
- * <li>{@code reserved64} &ndash; never read nor write, might be removed in a future version</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -37,8 +30,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XXH32_hash_t v4;
  *     XXH32_hash_t mem64[4];
  *     XXH32_hash_t memsize;
- *     XXH32_hash_t reserved32;
- *     XXH32_hash_t reserved64;
+ *     XXH32_hash_t {@link #reserved32};
+ *     XXH32_hash_t {@link #reserved64};
  * }</code></pre>
  */
 @NativeType("struct XXH64_state_t")
@@ -102,34 +95,34 @@ public class XXH64State extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code total_len} field. */
+    /** @return the value of the {@code total_len} field. */
     @NativeType("XXH32_hash_t")
     public long total_len() { return ntotal_len(address()); }
-    /** Returns the value of the {@code v1} field. */
+    /** @return the value of the {@code v1} field. */
     @NativeType("XXH32_hash_t")
     public long v1() { return nv1(address()); }
-    /** Returns the value of the {@code v2} field. */
+    /** @return the value of the {@code v2} field. */
     @NativeType("XXH32_hash_t")
     public long v2() { return nv2(address()); }
-    /** Returns the value of the {@code v3} field. */
+    /** @return the value of the {@code v3} field. */
     @NativeType("XXH32_hash_t")
     public long v3() { return nv3(address()); }
-    /** Returns the value of the {@code v4} field. */
+    /** @return the value of the {@code v4} field. */
     @NativeType("XXH32_hash_t")
     public long v4() { return nv4(address()); }
-    /** Returns a {@link LongBuffer} view of the {@code mem64} field. */
+    /** @return a {@link LongBuffer} view of the {@code mem64} field. */
     @NativeType("XXH32_hash_t[4]")
     public LongBuffer mem64() { return nmem64(address()); }
-    /** Returns the value at the specified index of the {@code mem64} field. */
+    /** @return the value at the specified index of the {@code mem64} field. */
     @NativeType("XXH32_hash_t")
     public long mem64(int index) { return nmem64(address(), index); }
-    /** Returns the value of the {@code memsize} field. */
+    /** @return the value of the {@code memsize} field. */
     @NativeType("XXH32_hash_t")
     public int memsize() { return nmemsize(address()); }
-    /** Returns the value of the {@code reserved32} field. */
+    /** required for padding anyway */
     @NativeType("XXH32_hash_t")
     public int reserved32() { return nreserved32(address()); }
-    /** Returns the value of the {@code reserved64} field. */
+    /** never read nor write, might be removed in a future version */
     @NativeType("XXH32_hash_t")
     public long reserved64() { return nreserved64(address()); }
 
@@ -337,34 +330,34 @@ public class XXH64State extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code total_len} field. */
+        /** @return the value of the {@code total_len} field. */
         @NativeType("XXH32_hash_t")
         public long total_len() { return XXH64State.ntotal_len(address()); }
-        /** Returns the value of the {@code v1} field. */
+        /** @return the value of the {@code v1} field. */
         @NativeType("XXH32_hash_t")
         public long v1() { return XXH64State.nv1(address()); }
-        /** Returns the value of the {@code v2} field. */
+        /** @return the value of the {@code v2} field. */
         @NativeType("XXH32_hash_t")
         public long v2() { return XXH64State.nv2(address()); }
-        /** Returns the value of the {@code v3} field. */
+        /** @return the value of the {@code v3} field. */
         @NativeType("XXH32_hash_t")
         public long v3() { return XXH64State.nv3(address()); }
-        /** Returns the value of the {@code v4} field. */
+        /** @return the value of the {@code v4} field. */
         @NativeType("XXH32_hash_t")
         public long v4() { return XXH64State.nv4(address()); }
-        /** Returns a {@link LongBuffer} view of the {@code mem64} field. */
+        /** @return a {@link LongBuffer} view of the {@code mem64} field. */
         @NativeType("XXH32_hash_t[4]")
         public LongBuffer mem64() { return XXH64State.nmem64(address()); }
-        /** Returns the value at the specified index of the {@code mem64} field. */
+        /** @return the value at the specified index of the {@code mem64} field. */
         @NativeType("XXH32_hash_t")
         public long mem64(int index) { return XXH64State.nmem64(address(), index); }
-        /** Returns the value of the {@code memsize} field. */
+        /** @return the value of the {@code memsize} field. */
         @NativeType("XXH32_hash_t")
         public int memsize() { return XXH64State.nmemsize(address()); }
-        /** Returns the value of the {@code reserved32} field. */
+        /** @return the value of the {@link XXH64State#reserved32} field. */
         @NativeType("XXH32_hash_t")
         public int reserved32() { return XXH64State.nreserved32(address()); }
-        /** Returns the value of the {@code reserved64} field. */
+        /** @return the value of the {@link XXH64State#reserved64} field. */
         @NativeType("XXH32_hash_t")
         public long reserved64() { return XXH64State.nreserved64(address()); }
 

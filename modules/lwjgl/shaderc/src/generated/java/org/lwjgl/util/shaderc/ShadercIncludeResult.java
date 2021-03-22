@@ -19,27 +19,15 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * An include result.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code source_name} &ndash; 
- * the name of the source file.
- * 
- * <p>The name should be fully resolved in the sense that it should be a unique name in the context of the includer. For example, if the includer maps source
- * names to files in a filesystem, then this name should be the absolute path of the file. For a failed inclusion, this string is empty.</p></li>
- * <li>{@code content} &ndash; the text contents of the source file in the normal case. For a failed inclusion, this contains the error message.</li>
- * <li>{@code user_data} &ndash; user data to be passed along with this request</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct shaderc_include_result {
- *     char const * source_name;
+ *     char const * {@link #source_name};
  *     size_t source_name_length;
- *     char const * content;
+ *     char const * {@link #content};
  *     size_t content_length;
- *     void * user_data;
+ *     void * {@link #user_data};
  * }</code></pre>
  */
 @NativeType("struct shaderc_include_result")
@@ -91,33 +79,43 @@ public class ShadercIncludeResult extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code source_name} field. */
+    /**
+     * the name of the source file.
+     * 
+     * <p>The name should be fully resolved in the sense that it should be a unique name in the context of the includer. For example, if the includer maps source
+     * names to files in a filesystem, then this name should be the absolute path of the file. For a failed inclusion, this string is empty.</p>
+     */
     @NativeType("char const *")
     public ByteBuffer source_name() { return nsource_name(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code source_name} field. */
+    /**
+     * the name of the source file.
+     * 
+     * <p>The name should be fully resolved in the sense that it should be a unique name in the context of the includer. For example, if the includer maps source
+     * names to files in a filesystem, then this name should be the absolute path of the file. For a failed inclusion, this string is empty.</p>
+     */
     @NativeType("char const *")
     public String source_nameString() { return nsource_nameString(address()); }
-    /** Returns the value of the {@code source_name_length} field. */
+    /** @return the value of the {@code source_name_length} field. */
     @NativeType("size_t")
     public long source_name_length() { return nsource_name_length(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code content} field. */
+    /** the text contents of the source file in the normal case. For a failed inclusion, this contains the error message. */
     @NativeType("char const *")
     public ByteBuffer content() { return ncontent(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code content} field. */
+    /** the text contents of the source file in the normal case. For a failed inclusion, this contains the error message. */
     @NativeType("char const *")
     public String contentString() { return ncontentString(address()); }
-    /** Returns the value of the {@code content_length} field. */
+    /** @return the value of the {@code content_length} field. */
     @NativeType("size_t")
     public long content_length() { return ncontent_length(address()); }
-    /** Returns the value of the {@code user_data} field. */
+    /** user data to be passed along with this request */
     @NativeType("void *")
     public long user_data() { return nuser_data(address()); }
 
-    /** Sets the address of the specified encoded string to the {@code source_name} field. */
+    /** Sets the address of the specified encoded string to the {@link #source_name} field. */
     public ShadercIncludeResult source_name(@NativeType("char const *") ByteBuffer value) { nsource_name(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@code content} field. */
+    /** Sets the address of the specified encoded string to the {@link #content} field. */
     public ShadercIncludeResult content(@NativeType("char const *") ByteBuffer value) { ncontent(address(), value); return this; }
-    /** Sets the specified value to the {@code user_data} field. */
+    /** Sets the specified value to the {@link #user_data} field. */
     public ShadercIncludeResult user_data(@NativeType("void *") long value) { nuser_data(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -380,33 +378,33 @@ public class ShadercIncludeResult extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code source_name} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link ShadercIncludeResult#source_name} field. */
         @NativeType("char const *")
         public ByteBuffer source_name() { return ShadercIncludeResult.nsource_name(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code source_name} field. */
+        /** @return the null-terminated string pointed to by the {@link ShadercIncludeResult#source_name} field. */
         @NativeType("char const *")
         public String source_nameString() { return ShadercIncludeResult.nsource_nameString(address()); }
-        /** Returns the value of the {@code source_name_length} field. */
+        /** @return the value of the {@code source_name_length} field. */
         @NativeType("size_t")
         public long source_name_length() { return ShadercIncludeResult.nsource_name_length(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code content} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link ShadercIncludeResult#content} field. */
         @NativeType("char const *")
         public ByteBuffer content() { return ShadercIncludeResult.ncontent(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code content} field. */
+        /** @return the null-terminated string pointed to by the {@link ShadercIncludeResult#content} field. */
         @NativeType("char const *")
         public String contentString() { return ShadercIncludeResult.ncontentString(address()); }
-        /** Returns the value of the {@code content_length} field. */
+        /** @return the value of the {@code content_length} field. */
         @NativeType("size_t")
         public long content_length() { return ShadercIncludeResult.ncontent_length(address()); }
-        /** Returns the value of the {@code user_data} field. */
+        /** @return the value of the {@link ShadercIncludeResult#user_data} field. */
         @NativeType("void *")
         public long user_data() { return ShadercIncludeResult.nuser_data(address()); }
 
-        /** Sets the address of the specified encoded string to the {@code source_name} field. */
+        /** Sets the address of the specified encoded string to the {@link ShadercIncludeResult#source_name} field. */
         public ShadercIncludeResult.Buffer source_name(@NativeType("char const *") ByteBuffer value) { ShadercIncludeResult.nsource_name(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@code content} field. */
+        /** Sets the address of the specified encoded string to the {@link ShadercIncludeResult#content} field. */
         public ShadercIncludeResult.Buffer content(@NativeType("char const *") ByteBuffer value) { ShadercIncludeResult.ncontent(address(), value); return this; }
-        /** Sets the specified value to the {@code user_data} field. */
+        /** Sets the specified value to the {@link ShadercIncludeResult#user_data} field. */
         public ShadercIncludeResult.Buffer user_data(@NativeType("void *") long value) { ShadercIncludeResult.nuser_data(address(), value); return this; }
 
     }

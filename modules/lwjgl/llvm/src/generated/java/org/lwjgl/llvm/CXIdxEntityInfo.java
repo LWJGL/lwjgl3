@@ -87,33 +87,33 @@ public class CXIdxEntityInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code kind} field. */
+    /** @return the value of the {@code kind} field. */
     @NativeType("CXIdxEntityKind")
     public int kind() { return nkind(address()); }
-    /** Returns the value of the {@code templateKind} field. */
+    /** @return the value of the {@code templateKind} field. */
     @NativeType("CXIdxEntityCXXTemplateKind")
     public int templateKind() { return ntemplateKind(address()); }
-    /** Returns the value of the {@code lang} field. */
+    /** @return the value of the {@code lang} field. */
     @NativeType("CXIdxEntityLanguage")
     public int lang() { return nlang(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
     @NativeType("char const *")
     public ByteBuffer name() { return nname(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code name} field. */
+    /** @return the null-terminated string pointed to by the {@code name} field. */
     @NativeType("char const *")
     public String nameString() { return nnameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code USR} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code USR} field. */
     @NativeType("char const *")
     public ByteBuffer USR() { return nUSR(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code USR} field. */
+    /** @return the null-terminated string pointed to by the {@code USR} field. */
     @NativeType("char const *")
     public String USRString() { return nUSRString(address()); }
-    /** Returns a {@link CXCursor} view of the {@code cursor} field. */
+    /** @return a {@link CXCursor} view of the {@code cursor} field. */
     public CXCursor cursor() { return ncursor(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code attributes} field. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code attributes} field. */
     @NativeType("CXIdxAttrInfo const * const *")
     public PointerBuffer attributes() { return nattributes(address()); }
-    /** Returns the value of the {@code numAttributes} field. */
+    /** @return the value of the {@code numAttributes} field. */
     @NativeType("unsigned")
     public int numAttributes() { return nnumAttributes(address()); }
 
@@ -319,33 +319,33 @@ public class CXIdxEntityInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code kind} field. */
+        /** @return the value of the {@code kind} field. */
         @NativeType("CXIdxEntityKind")
         public int kind() { return CXIdxEntityInfo.nkind(address()); }
-        /** Returns the value of the {@code templateKind} field. */
+        /** @return the value of the {@code templateKind} field. */
         @NativeType("CXIdxEntityCXXTemplateKind")
         public int templateKind() { return CXIdxEntityInfo.ntemplateKind(address()); }
-        /** Returns the value of the {@code lang} field. */
+        /** @return the value of the {@code lang} field. */
         @NativeType("CXIdxEntityLanguage")
         public int lang() { return CXIdxEntityInfo.nlang(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
         @NativeType("char const *")
         public ByteBuffer name() { return CXIdxEntityInfo.nname(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code name} field. */
+        /** @return the null-terminated string pointed to by the {@code name} field. */
         @NativeType("char const *")
         public String nameString() { return CXIdxEntityInfo.nnameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code USR} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code USR} field. */
         @NativeType("char const *")
         public ByteBuffer USR() { return CXIdxEntityInfo.nUSR(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code USR} field. */
+        /** @return the null-terminated string pointed to by the {@code USR} field. */
         @NativeType("char const *")
         public String USRString() { return CXIdxEntityInfo.nUSRString(address()); }
-        /** Returns a {@link CXCursor} view of the {@code cursor} field. */
+        /** @return a {@link CXCursor} view of the {@code cursor} field. */
         public CXCursor cursor() { return CXIdxEntityInfo.ncursor(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code attributes} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code attributes} field. */
         @NativeType("CXIdxAttrInfo const * const *")
         public PointerBuffer attributes() { return CXIdxEntityInfo.nattributes(address()); }
-        /** Returns the value of the {@code numAttributes} field. */
+        /** @return the value of the {@code numAttributes} field. */
         @NativeType("unsigned")
         public int numAttributes() { return CXIdxEntityInfo.nnumAttributes(address()); }
 

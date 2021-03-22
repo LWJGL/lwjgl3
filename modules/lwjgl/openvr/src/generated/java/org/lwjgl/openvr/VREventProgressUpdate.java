@@ -78,22 +78,22 @@ public class VREventProgressUpdate extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code ulApplicationPropertyContainer} field. */
+    /** @return the value of the {@code ulApplicationPropertyContainer} field. */
     @NativeType("uint64_t")
     public long ulApplicationPropertyContainer() { return nulApplicationPropertyContainer(address()); }
-    /** Returns the value of the {@code pathDevice} field. */
+    /** @return the value of the {@code pathDevice} field. */
     @NativeType("uint64_t")
     public long pathDevice() { return npathDevice(address()); }
-    /** Returns the value of the {@code pathInputSource} field. */
+    /** @return the value of the {@code pathInputSource} field. */
     @NativeType("uint64_t")
     public long pathInputSource() { return npathInputSource(address()); }
-    /** Returns the value of the {@code pathProgressAction} field. */
+    /** @return the value of the {@code pathProgressAction} field. */
     @NativeType("uint64_t")
     public long pathProgressAction() { return npathProgressAction(address()); }
-    /** Returns the value of the {@code pathIcon} field. */
+    /** @return the value of the {@code pathIcon} field. */
     @NativeType("uint64_t")
     public long pathIcon() { return npathIcon(address()); }
-    /** Returns the value of the {@code fProgress} field. */
+    /** @return the value of the {@code fProgress} field. */
     public float fProgress() { return nfProgress(address()); }
 
     // -----------------------------------
@@ -178,22 +178,22 @@ public class VREventProgressUpdate extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code ulApplicationPropertyContainer} field. */
+        /** @return the value of the {@code ulApplicationPropertyContainer} field. */
         @NativeType("uint64_t")
         public long ulApplicationPropertyContainer() { return VREventProgressUpdate.nulApplicationPropertyContainer(address()); }
-        /** Returns the value of the {@code pathDevice} field. */
+        /** @return the value of the {@code pathDevice} field. */
         @NativeType("uint64_t")
         public long pathDevice() { return VREventProgressUpdate.npathDevice(address()); }
-        /** Returns the value of the {@code pathInputSource} field. */
+        /** @return the value of the {@code pathInputSource} field. */
         @NativeType("uint64_t")
         public long pathInputSource() { return VREventProgressUpdate.npathInputSource(address()); }
-        /** Returns the value of the {@code pathProgressAction} field. */
+        /** @return the value of the {@code pathProgressAction} field. */
         @NativeType("uint64_t")
         public long pathProgressAction() { return VREventProgressUpdate.npathProgressAction(address()); }
-        /** Returns the value of the {@code pathIcon} field. */
+        /** @return the value of the {@code pathIcon} field. */
         @NativeType("uint64_t")
         public long pathIcon() { return VREventProgressUpdate.npathIcon(address()); }
-        /** Returns the value of the {@code fProgress} field. */
+        /** @return the value of the {@code fProgress} field. */
         public float fProgress() { return VREventProgressUpdate.nfProgress(address()); }
 
     }

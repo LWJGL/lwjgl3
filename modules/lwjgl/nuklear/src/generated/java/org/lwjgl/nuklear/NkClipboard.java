@@ -68,14 +68,14 @@ public class NkClipboard extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+    /** @return a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
-    /** Returns the value of the {@code paste} field. */
+    /** @return the value of the {@code paste} field. */
     @Nullable
     @NativeType("nk_plugin_paste")
     public NkPluginPaste paste() { return npaste(address()); }
-    /** Returns the value of the {@code copy} field. */
+    /** @return the value of the {@code copy} field. */
     @Nullable
     @NativeType("nk_plugin_copy")
     public NkPluginCopy copy() { return ncopy(address()); }
@@ -309,14 +309,14 @@ public class NkClipboard extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+        /** @return a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkClipboard.nuserdata(address()); }
-        /** Returns the value of the {@code paste} field. */
+        /** @return the value of the {@code paste} field. */
         @Nullable
         @NativeType("nk_plugin_paste")
         public NkPluginPaste paste() { return NkClipboard.npaste(address()); }
-        /** Returns the value of the {@code copy} field. */
+        /** @return the value of the {@code copy} field. */
         @Nullable
         @NativeType("nk_plugin_copy")
         public NkPluginCopy copy() { return NkClipboard.ncopy(address()); }

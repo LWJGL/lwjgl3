@@ -22,48 +22,18 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>Each node has name, a parent node (except for the root node), a transformation relative to its parent and possibly several child nodes. Simple file
  * formats don't support hierarchical structures - for these formats the imported scene does consist of only a single root node without children.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code mName} &ndash; 
- * The name of the node.
- * 
- * <p>The name might be empty (length of zero) but all nodes which need to be referenced by either bones or animations are named. Multiple nodes may have the
- * same name, except for nodes which are referenced by bones (see {@link AIBone} and {@link AIMesh}{@code ::mBones}). Their names <b>must</b> be unique.</p>
- * 
- * <p>Cameras and lights reference a specific node by name - if there are multiple nodes with this name, they are assigned to each of them.</p>
- * 
- * <p>There are no limitations with regard to the characters contained in the name string as it is usually taken directly from the source file.</p>
- * 
- * <p>Implementations should be able to handle tokens such as whitespace, tabs, line feeds, quotation marks, ampersands etc.</p>
- * 
- * <p>Sometimes assimp introduces new nodes not present in the source file into the hierarchy (usually out of necessity because sometimes the source
- * hierarchy format is simply not compatible). Their names are surrounded by {@code <>} e.g. {@code <DummyRootNode>}.</p></li>
- * <li>{@code mTransformation} &ndash; The transformation relative to the node's parent.</li>
- * <li>{@code mParent} &ndash; Parent node. {@code NULL} if this node is the root node.</li>
- * <li>{@code mNumChildren} &ndash; The number of child nodes of this node.</li>
- * <li>{@code mChildren} &ndash; The child nodes of this node. {@code NULL} if {@code mNumChildren} is 0.</li>
- * <li>{@code mNumMeshes} &ndash; The number of meshes of this node.</li>
- * <li>{@code mMeshes} &ndash; The meshes of this node. Each entry is an index into the mesh list of the {@link AIScene}.</li>
- * <li>{@code mMetadata} &ndash; 
- * Metadata associated with this node or {@code NULL} if there is no metadata.
- * 
- * <p>Whether any metadata is generated depends on the source file format. See the importer notes page for more information on every source file format.
- * Importers that don't document any metadata don't write any.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiNode {
- *     {@link AIString struct aiString} mName;
- *     {@link AIMatrix4x4 struct aiMatrix4x4} mTransformation;
- *     {@link AINode struct aiNode} * mParent;
- *     unsigned int mNumChildren;
- *     {@link AINode struct aiNode} ** mChildren;
- *     unsigned int mNumMeshes;
- *     unsigned int * mMeshes;
- *     {@link AIMetaData struct aiMetadata} * mMetadata;
+ *     {@link AIString struct aiString} {@link #mName};
+ *     {@link AIMatrix4x4 struct aiMatrix4x4} {@link #mTransformation};
+ *     {@link AINode struct aiNode} * {@link #mParent};
+ *     unsigned int {@link #mNumChildren};
+ *     {@link AINode struct aiNode} ** {@link #mChildren};
+ *     unsigned int {@link #mNumMeshes};
+ *     unsigned int * {@link #mMeshes};
+ *     {@link AIMetaData struct aiMetadata} * {@link #mMetadata};
  * }</code></pre>
  */
 @NativeType("struct aiNode")
@@ -124,50 +94,69 @@ public class AINode extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link AIString} view of the {@code mName} field. */
+    /**
+     * The name of the node.
+     * 
+     * <p>The name might be empty (length of zero) but all nodes which need to be referenced by either bones or animations are named. Multiple nodes may have the
+     * same name, except for nodes which are referenced by bones (see {@link AIBone} and {@link AIMesh}{@code ::mBones}). Their names <b>must</b> be unique.</p>
+     * 
+     * <p>Cameras and lights reference a specific node by name - if there are multiple nodes with this name, they are assigned to each of them.</p>
+     * 
+     * <p>There are no limitations with regard to the characters contained in the name string as it is usually taken directly from the source file.</p>
+     * 
+     * <p>Implementations should be able to handle tokens such as whitespace, tabs, line feeds, quotation marks, ampersands etc.</p>
+     * 
+     * <p>Sometimes assimp introduces new nodes not present in the source file into the hierarchy (usually out of necessity because sometimes the source
+     * hierarchy format is simply not compatible). Their names are surrounded by {@code <>} e.g. {@code <DummyRootNode>}.</p>
+     */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
-    /** Returns a {@link AIMatrix4x4} view of the {@code mTransformation} field. */
+    /** The transformation relative to the node's parent. */
     @NativeType("struct aiMatrix4x4")
     public AIMatrix4x4 mTransformation() { return nmTransformation(address()); }
-    /** Returns a {@link AINode} view of the struct pointed to by the {@code mParent} field. */
+    /** Parent node. {@code NULL} if this node is the root node. */
     @Nullable
     @NativeType("struct aiNode *")
     public AINode mParent() { return nmParent(address()); }
-    /** Returns the value of the {@code mNumChildren} field. */
+    /** The number of child nodes of this node. */
     @NativeType("unsigned int")
     public int mNumChildren() { return nmNumChildren(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mChildren} field. */
+    /** The child nodes of this node. {@code NULL} if {@code mNumChildren} is 0. */
     @Nullable
     @NativeType("struct aiNode **")
     public PointerBuffer mChildren() { return nmChildren(address()); }
-    /** Returns the value of the {@code mNumMeshes} field. */
+    /** The number of meshes of this node. */
     @NativeType("unsigned int")
     public int mNumMeshes() { return nmNumMeshes(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code mMeshes} field. */
+    /** The meshes of this node. Each entry is an index into the mesh list of the {@link AIScene}. */
     @Nullable
     @NativeType("unsigned int *")
     public IntBuffer mMeshes() { return nmMeshes(address()); }
-    /** Returns a {@link AIMetaData} view of the struct pointed to by the {@code mMetadata} field. */
+    /**
+     * Metadata associated with this node or {@code NULL} if there is no metadata.
+     * 
+     * <p>Whether any metadata is generated depends on the source file format. See the importer notes page for more information on every source file format.
+     * Importers that don't document any metadata don't write any.</p>
+     */
     @Nullable
     @NativeType("struct aiMetadata *")
     public AIMetaData mMetadata() { return nmMetadata(address()); }
 
-    /** Copies the specified {@link AIString} to the {@code mName} field. */
+    /** Copies the specified {@link AIString} to the {@link #mName} field. */
     public AINode mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
-    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #mName} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AINode mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
-    /** Copies the specified {@link AIMatrix4x4} to the {@code mTransformation} field. */
+    /** Copies the specified {@link AIMatrix4x4} to the {@link #mTransformation} field. */
     public AINode mTransformation(@NativeType("struct aiMatrix4x4") AIMatrix4x4 value) { nmTransformation(address(), value); return this; }
-    /** Passes the {@code mTransformation} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #mTransformation} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AINode mTransformation(java.util.function.Consumer<AIMatrix4x4> consumer) { consumer.accept(mTransformation()); return this; }
-    /** Sets the address of the specified {@link AINode} to the {@code mParent} field. */
+    /** Sets the address of the specified {@link AINode} to the {@link #mParent} field. */
     public AINode mParent(@Nullable @NativeType("struct aiNode *") AINode value) { nmParent(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code mChildren} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #mChildren} field. */
     public AINode mChildren(@Nullable @NativeType("struct aiNode **") PointerBuffer value) { nmChildren(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code mMeshes} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #mMeshes} field. */
     public AINode mMeshes(@Nullable @NativeType("unsigned int *") IntBuffer value) { nmMeshes(address(), value); return this; }
-    /** Sets the address of the specified {@link AIMetaData} to the {@code mMetadata} field. */
+    /** Sets the address of the specified {@link AIMetaData} to the {@link #mMetadata} field. */
     public AINode mMetadata(@Nullable @NativeType("struct aiMetadata *") AIMetaData value) { nmMetadata(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -446,50 +435,50 @@ public class AINode extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link AIString} view of the {@code mName} field. */
+        /** @return a {@link AIString} view of the {@link AINode#mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AINode.nmName(address()); }
-        /** Returns a {@link AIMatrix4x4} view of the {@code mTransformation} field. */
+        /** @return a {@link AIMatrix4x4} view of the {@link AINode#mTransformation} field. */
         @NativeType("struct aiMatrix4x4")
         public AIMatrix4x4 mTransformation() { return AINode.nmTransformation(address()); }
-        /** Returns a {@link AINode} view of the struct pointed to by the {@code mParent} field. */
+        /** @return a {@link AINode} view of the struct pointed to by the {@link AINode#mParent} field. */
         @Nullable
         @NativeType("struct aiNode *")
         public AINode mParent() { return AINode.nmParent(address()); }
-        /** Returns the value of the {@code mNumChildren} field. */
+        /** @return the value of the {@link AINode#mNumChildren} field. */
         @NativeType("unsigned int")
         public int mNumChildren() { return AINode.nmNumChildren(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mChildren} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AINode#mChildren} field. */
         @Nullable
         @NativeType("struct aiNode **")
         public PointerBuffer mChildren() { return AINode.nmChildren(address()); }
-        /** Returns the value of the {@code mNumMeshes} field. */
+        /** @return the value of the {@link AINode#mNumMeshes} field. */
         @NativeType("unsigned int")
         public int mNumMeshes() { return AINode.nmNumMeshes(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code mMeshes} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link AINode#mMeshes} field. */
         @Nullable
         @NativeType("unsigned int *")
         public IntBuffer mMeshes() { return AINode.nmMeshes(address()); }
-        /** Returns a {@link AIMetaData} view of the struct pointed to by the {@code mMetadata} field. */
+        /** @return a {@link AIMetaData} view of the struct pointed to by the {@link AINode#mMetadata} field. */
         @Nullable
         @NativeType("struct aiMetadata *")
         public AIMetaData mMetadata() { return AINode.nmMetadata(address()); }
 
-        /** Copies the specified {@link AIString} to the {@code mName} field. */
+        /** Copies the specified {@link AIString} to the {@link AINode#mName} field. */
         public AINode.Buffer mName(@NativeType("struct aiString") AIString value) { AINode.nmName(address(), value); return this; }
-        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link AINode#mName} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AINode.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
-        /** Copies the specified {@link AIMatrix4x4} to the {@code mTransformation} field. */
+        /** Copies the specified {@link AIMatrix4x4} to the {@link AINode#mTransformation} field. */
         public AINode.Buffer mTransformation(@NativeType("struct aiMatrix4x4") AIMatrix4x4 value) { AINode.nmTransformation(address(), value); return this; }
-        /** Passes the {@code mTransformation} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link AINode#mTransformation} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AINode.Buffer mTransformation(java.util.function.Consumer<AIMatrix4x4> consumer) { consumer.accept(mTransformation()); return this; }
-        /** Sets the address of the specified {@link AINode} to the {@code mParent} field. */
+        /** Sets the address of the specified {@link AINode} to the {@link AINode#mParent} field. */
         public AINode.Buffer mParent(@Nullable @NativeType("struct aiNode *") AINode value) { AINode.nmParent(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code mChildren} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link AINode#mChildren} field. */
         public AINode.Buffer mChildren(@Nullable @NativeType("struct aiNode **") PointerBuffer value) { AINode.nmChildren(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code mMeshes} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link AINode#mMeshes} field. */
         public AINode.Buffer mMeshes(@Nullable @NativeType("unsigned int *") IntBuffer value) { AINode.nmMeshes(address(), value); return this; }
-        /** Sets the address of the specified {@link AIMetaData} to the {@code mMetadata} field. */
+        /** Sets the address of the specified {@link AIMetaData} to the {@link AINode#mMetadata} field. */
         public AINode.Buffer mMetadata(@Nullable @NativeType("struct aiMetadata *") AIMetaData value) { AINode.nmMetadata(address(), value); return this; }
 
     }

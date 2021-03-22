@@ -90,21 +90,21 @@ public class STBTTAlignedQuad extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x0} field. */
+    /** @return the value of the {@code x0} field. */
     public float x0() { return nx0(address()); }
-    /** Returns the value of the {@code y0} field. */
+    /** @return the value of the {@code y0} field. */
     public float y0() { return ny0(address()); }
-    /** Returns the value of the {@code s0} field. */
+    /** @return the value of the {@code s0} field. */
     public float s0() { return ns0(address()); }
-    /** Returns the value of the {@code t0} field. */
+    /** @return the value of the {@code t0} field. */
     public float t0() { return nt0(address()); }
-    /** Returns the value of the {@code x1} field. */
+    /** @return the value of the {@code x1} field. */
     public float x1() { return nx1(address()); }
-    /** Returns the value of the {@code y1} field. */
+    /** @return the value of the {@code y1} field. */
     public float y1() { return ny1(address()); }
-    /** Returns the value of the {@code s1} field. */
+    /** @return the value of the {@code s1} field. */
     public float s1() { return ns1(address()); }
-    /** Returns the value of the {@code t1} field. */
+    /** @return the value of the {@code t1} field. */
     public float t1() { return nt1(address()); }
 
     // -----------------------------------
@@ -305,21 +305,21 @@ public class STBTTAlignedQuad extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x0} field. */
+        /** @return the value of the {@code x0} field. */
         public float x0() { return STBTTAlignedQuad.nx0(address()); }
-        /** Returns the value of the {@code y0} field. */
+        /** @return the value of the {@code y0} field. */
         public float y0() { return STBTTAlignedQuad.ny0(address()); }
-        /** Returns the value of the {@code s0} field. */
+        /** @return the value of the {@code s0} field. */
         public float s0() { return STBTTAlignedQuad.ns0(address()); }
-        /** Returns the value of the {@code t0} field. */
+        /** @return the value of the {@code t0} field. */
         public float t0() { return STBTTAlignedQuad.nt0(address()); }
-        /** Returns the value of the {@code x1} field. */
+        /** @return the value of the {@code x1} field. */
         public float x1() { return STBTTAlignedQuad.nx1(address()); }
-        /** Returns the value of the {@code y1} field. */
+        /** @return the value of the {@code y1} field. */
         public float y1() { return STBTTAlignedQuad.ny1(address()); }
-        /** Returns the value of the {@code s1} field. */
+        /** @return the value of the {@code s1} field. */
         public float s1() { return STBTTAlignedQuad.ns1(address()); }
-        /** Returns the value of the {@code t1} field. */
+        /** @return the value of the {@code t1} field. */
         public float t1() { return STBTTAlignedQuad.nt1(address()); }
 
     }

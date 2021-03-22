@@ -16,23 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Describes a version number of the form {@code major.minor.subminor}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code Major} &ndash; the major version number, e.g., the '10' in '10.7.3'. A negative value indicates that there is no version number at all.</li>
- * <li>{@code Minor} &ndash; the minor version number, e.g., the '7' in '10.7.3'. This value will be negative if no minor version number was provided, e.g., for version '10'.</li>
- * <li>{@code Subminor} &ndash; 
- * the subminor version number, e.g., the '3' in '10.7.3'. This value will be negative if no minor or subminor version number was provided, e.g., in
- * version '10' or '10.7'.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CXVersion {
- *     int Major;
- *     int Minor;
- *     int Subminor;
+ *     int {@link #Major};
+ *     int {@link #Minor};
+ *     int {@link #Subminor};
  * }</code></pre>
  */
 public class CXVersion extends Struct {
@@ -77,11 +67,14 @@ public class CXVersion extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code Major} field. */
+    /** the major version number, e.g., the '10' in '10.7.3'. A negative value indicates that there is no version number at all. */
     public int Major() { return nMajor(address()); }
-    /** Returns the value of the {@code Minor} field. */
+    /** the minor version number, e.g., the '7' in '10.7.3'. This value will be negative if no minor version number was provided, e.g., for version '10'. */
     public int Minor() { return nMinor(address()); }
-    /** Returns the value of the {@code Subminor} field. */
+    /**
+     * the subminor version number, e.g., the '3' in '10.7.3'. This value will be negative if no minor or subminor version number was provided, e.g., in
+     * version '10' or '10.7'.
+     */
     public int Subminor() { return nSubminor(address()); }
 
     // -----------------------------------
@@ -160,11 +153,11 @@ public class CXVersion extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code Major} field. */
+        /** @return the value of the {@link CXVersion#Major} field. */
         public int Major() { return CXVersion.nMajor(address()); }
-        /** Returns the value of the {@code Minor} field. */
+        /** @return the value of the {@link CXVersion#Minor} field. */
         public int Minor() { return CXVersion.nMinor(address()); }
-        /** Returns the value of the {@code Subminor} field. */
+        /** @return the value of the {@link CXVersion#Subminor} field. */
         public int Subminor() { return CXVersion.nSubminor(address()); }
 
     }

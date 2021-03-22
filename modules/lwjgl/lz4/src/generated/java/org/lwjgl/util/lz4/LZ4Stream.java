@@ -65,13 +65,13 @@ public class LZ4Stream extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link LongBuffer} view of the {@code table} field. */
+    /** @return a {@link LongBuffer} view of the {@code table} field. */
     @NativeType("unsigned long long[LZ4_STREAMSIZE_U64]")
     public LongBuffer table() { return ntable(address()); }
-    /** Returns the value at the specified index of the {@code table} field. */
+    /** @return the value at the specified index of the {@code table} field. */
     @NativeType("unsigned long long")
     public long table(int index) { return ntable(address(), index); }
-    /** Returns a {@link LZ4StreamInternal} view of the {@code internal_donotuse} field. */
+    /** @return a {@link LZ4StreamInternal} view of the {@code internal_donotuse} field. */
     @NativeType("struct LZ4_stream_t_internal")
     public LZ4StreamInternal internal_donotuse() { return ninternal_donotuse(address()); }
 
@@ -153,13 +153,13 @@ public class LZ4Stream extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link LongBuffer} view of the {@code table} field. */
+        /** @return a {@link LongBuffer} view of the {@code table} field. */
         @NativeType("unsigned long long[LZ4_STREAMSIZE_U64]")
         public LongBuffer table() { return LZ4Stream.ntable(address()); }
-        /** Returns the value at the specified index of the {@code table} field. */
+        /** @return the value at the specified index of the {@code table} field. */
         @NativeType("unsigned long long")
         public long table(int index) { return LZ4Stream.ntable(address(), index); }
-        /** Returns a {@link LZ4StreamInternal} view of the {@code internal_donotuse} field. */
+        /** @return a {@link LZ4StreamInternal} view of the {@code internal_donotuse} field. */
         @NativeType("struct LZ4_stream_t_internal")
         public LZ4StreamInternal internal_donotuse() { return LZ4Stream.ninternal_donotuse(address()); }
 

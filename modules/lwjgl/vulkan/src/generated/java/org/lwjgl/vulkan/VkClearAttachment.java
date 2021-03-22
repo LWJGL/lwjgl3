@@ -46,21 +46,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkClearValue}, {@link VK10#vkCmdClearAttachments CmdClearAttachments}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code aspectMask} &ndash; a mask selecting the color, depth and/or stencil aspects of the attachment to be cleared.</li>
- * <li>{@code colorAttachment} &ndash; only meaningful if {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} is set in {@code aspectMask}, in which case it is an index to the {@code pColorAttachments} array in the {@link VkSubpassDescription} structure of the current subpass which selects the color attachment to clear.</li>
- * <li>{@code clearValue} &ndash; the color or depth/stencil value to clear the attachment to, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#clears-values">Clear Values</a> below.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkClearAttachment {
- *     VkImageAspectFlags aspectMask;
- *     uint32_t colorAttachment;
- *     {@link VkClearValue VkClearValue} clearValue;
+ *     VkImageAspectFlags {@link #aspectMask};
+ *     uint32_t {@link #colorAttachment};
+ *     {@link VkClearValue VkClearValue} {@link #clearValue};
  * }</code></pre>
  */
 public class VkClearAttachment extends Struct implements NativeResource {
@@ -105,22 +97,22 @@ public class VkClearAttachment extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code aspectMask} field. */
+    /** a mask selecting the color, depth and/or stencil aspects of the attachment to be cleared. */
     @NativeType("VkImageAspectFlags")
     public int aspectMask() { return naspectMask(address()); }
-    /** Returns the value of the {@code colorAttachment} field. */
+    /** only meaningful if {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} is set in {@code aspectMask}, in which case it is an index to the {@code pColorAttachments} array in the {@link VkSubpassDescription} structure of the current subpass which selects the color attachment to clear. */
     @NativeType("uint32_t")
     public int colorAttachment() { return ncolorAttachment(address()); }
-    /** Returns a {@link VkClearValue} view of the {@code clearValue} field. */
+    /** the color or depth/stencil value to clear the attachment to, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#clears-values">Clear Values</a> below. */
     public VkClearValue clearValue() { return nclearValue(address()); }
 
-    /** Sets the specified value to the {@code aspectMask} field. */
+    /** Sets the specified value to the {@link #aspectMask} field. */
     public VkClearAttachment aspectMask(@NativeType("VkImageAspectFlags") int value) { naspectMask(address(), value); return this; }
-    /** Sets the specified value to the {@code colorAttachment} field. */
+    /** Sets the specified value to the {@link #colorAttachment} field. */
     public VkClearAttachment colorAttachment(@NativeType("uint32_t") int value) { ncolorAttachment(address(), value); return this; }
-    /** Copies the specified {@link VkClearValue} to the {@code clearValue} field. */
+    /** Copies the specified {@link VkClearValue} to the {@link #clearValue} field. */
     public VkClearAttachment clearValue(VkClearValue value) { nclearValue(address(), value); return this; }
-    /** Passes the {@code clearValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #clearValue} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkClearAttachment clearValue(java.util.function.Consumer<VkClearValue> consumer) { consumer.accept(clearValue()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,22 +335,22 @@ public class VkClearAttachment extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code aspectMask} field. */
+        /** @return the value of the {@link VkClearAttachment#aspectMask} field. */
         @NativeType("VkImageAspectFlags")
         public int aspectMask() { return VkClearAttachment.naspectMask(address()); }
-        /** Returns the value of the {@code colorAttachment} field. */
+        /** @return the value of the {@link VkClearAttachment#colorAttachment} field. */
         @NativeType("uint32_t")
         public int colorAttachment() { return VkClearAttachment.ncolorAttachment(address()); }
-        /** Returns a {@link VkClearValue} view of the {@code clearValue} field. */
+        /** @return a {@link VkClearValue} view of the {@link VkClearAttachment#clearValue} field. */
         public VkClearValue clearValue() { return VkClearAttachment.nclearValue(address()); }
 
-        /** Sets the specified value to the {@code aspectMask} field. */
+        /** Sets the specified value to the {@link VkClearAttachment#aspectMask} field. */
         public VkClearAttachment.Buffer aspectMask(@NativeType("VkImageAspectFlags") int value) { VkClearAttachment.naspectMask(address(), value); return this; }
-        /** Sets the specified value to the {@code colorAttachment} field. */
+        /** Sets the specified value to the {@link VkClearAttachment#colorAttachment} field. */
         public VkClearAttachment.Buffer colorAttachment(@NativeType("uint32_t") int value) { VkClearAttachment.ncolorAttachment(address(), value); return this; }
-        /** Copies the specified {@link VkClearValue} to the {@code clearValue} field. */
+        /** Copies the specified {@link VkClearValue} to the {@link VkClearAttachment#clearValue} field. */
         public VkClearAttachment.Buffer clearValue(VkClearValue value) { VkClearAttachment.nclearValue(address(), value); return this; }
-        /** Passes the {@code clearValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkClearAttachment#clearValue} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkClearAttachment.Buffer clearValue(java.util.function.Consumer<VkClearValue> consumer) { consumer.accept(clearValue()); return this; }
 
     }

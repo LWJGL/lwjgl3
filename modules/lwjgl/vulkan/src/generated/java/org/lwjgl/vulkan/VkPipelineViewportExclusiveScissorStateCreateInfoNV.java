@@ -43,23 +43,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkRect2D}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code exclusiveScissorCount} &ndash; the number of exclusive scissor rectangles.</li>
- * <li>{@code pExclusiveScissors} &ndash; a pointer to an array of {@link VkRect2D} structures defining exclusive scissor rectangles.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineViewportExclusiveScissorStateCreateInfoNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t exclusiveScissorCount;
- *     {@link VkRect2D VkRect2D} const * pExclusiveScissors;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #exclusiveScissorCount};
+ *     {@link VkRect2D VkRect2D} const * {@link #pExclusiveScissors};
  * }</code></pre>
  */
 public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct implements NativeResource {
@@ -107,25 +98,25 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code exclusiveScissorCount} field. */
+    /** the number of exclusive scissor rectangles. */
     @NativeType("uint32_t")
     public int exclusiveScissorCount() { return nexclusiveScissorCount(address()); }
-    /** Returns a {@link VkRect2D.Buffer} view of the struct array pointed to by the {@code pExclusiveScissors} field. */
+    /** a pointer to an array of {@link VkRect2D} structures defining exclusive scissor rectangles. */
     @Nullable
     @NativeType("VkRect2D const *")
     public VkRect2D.Buffer pExclusiveScissors() { return npExclusiveScissors(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineViewportExclusiveScissorStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineViewportExclusiveScissorStateCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@code pExclusiveScissors} field. */
+    /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@link #pExclusiveScissors} field. */
     public VkPipelineViewportExclusiveScissorStateCreateInfoNV pExclusiveScissors(@Nullable @NativeType("VkRect2D const *") VkRect2D.Buffer value) { npExclusiveScissors(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -375,25 +366,25 @@ public class VkPipelineViewportExclusiveScissorStateCreateInfoNV extends Struct 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineViewportExclusiveScissorStateCreateInfoNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineViewportExclusiveScissorStateCreateInfoNV.npNext(address()); }
-        /** Returns the value of the {@code exclusiveScissorCount} field. */
+        /** @return the value of the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV#exclusiveScissorCount} field. */
         @NativeType("uint32_t")
         public int exclusiveScissorCount() { return VkPipelineViewportExclusiveScissorStateCreateInfoNV.nexclusiveScissorCount(address()); }
-        /** Returns a {@link VkRect2D.Buffer} view of the struct array pointed to by the {@code pExclusiveScissors} field. */
+        /** @return a {@link VkRect2D.Buffer} view of the struct array pointed to by the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV#pExclusiveScissors} field. */
         @Nullable
         @NativeType("VkRect2D const *")
         public VkRect2D.Buffer pExclusiveScissors() { return VkPipelineViewportExclusiveScissorStateCreateInfoNV.npExclusiveScissors(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV#sType} field. */
         public VkPipelineViewportExclusiveScissorStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineViewportExclusiveScissorStateCreateInfoNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV#pNext} field. */
         public VkPipelineViewportExclusiveScissorStateCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkPipelineViewportExclusiveScissorStateCreateInfoNV.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@code pExclusiveScissors} field. */
+        /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV#pExclusiveScissors} field. */
         public VkPipelineViewportExclusiveScissorStateCreateInfoNV.Buffer pExclusiveScissors(@Nullable @NativeType("VkRect2D const *") VkRect2D.Buffer value) { VkPipelineViewportExclusiveScissorStateCreateInfoNV.npExclusiveScissors(address(), value); return this; }
 
     }

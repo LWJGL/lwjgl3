@@ -19,17 +19,11 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * 64-bit canonical representation.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code digest[8]} &ndash; the digest in canonical representation</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XXH64_canonical_t {
- *     unsigned char digest[8];
+ *     unsigned char {@link #digest}[8];
  * }</code></pre>
  */
 @NativeType("struct XXH64_canonical_t")
@@ -69,10 +63,10 @@ public class XXH64Canonical extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code digest} field. */
+    /** the digest in canonical representation */
     @NativeType("unsigned char[8]")
     public ByteBuffer digest() { return ndigest(address()); }
-    /** Returns the value at the specified index of the {@code digest} field. */
+    /** the digest in canonical representation */
     @NativeType("unsigned char")
     public byte digest(int index) { return ndigest(address(), index); }
 
@@ -264,10 +258,10 @@ public class XXH64Canonical extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code digest} field. */
+        /** @return a {@link ByteBuffer} view of the {@link XXH64Canonical#digest} field. */
         @NativeType("unsigned char[8]")
         public ByteBuffer digest() { return XXH64Canonical.ndigest(address()); }
-        /** Returns the value at the specified index of the {@code digest} field. */
+        /** @return the value at the specified index of the {@link XXH64Canonical#digest} field. */
         @NativeType("unsigned char")
         public byte digest(int index) { return XXH64Canonical.ndigest(address(), index); }
 

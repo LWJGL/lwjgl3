@@ -61,10 +61,10 @@ public class HmdVector3d extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link DoubleBuffer} view of the {@code v} field. */
+    /** @return a {@link DoubleBuffer} view of the {@code v} field. */
     @NativeType("double[3]")
     public DoubleBuffer v() { return nv(address()); }
-    /** Returns the value at the specified index of the {@code v} field. */
+    /** @return the value at the specified index of the {@code v} field. */
     public double v(int index) { return nv(address(), index); }
 
     /** Copies the specified {@link DoubleBuffer} to the {@code v} field. */
@@ -282,10 +282,10 @@ public class HmdVector3d extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link DoubleBuffer} view of the {@code v} field. */
+        /** @return a {@link DoubleBuffer} view of the {@code v} field. */
         @NativeType("double[3]")
         public DoubleBuffer v() { return HmdVector3d.nv(address()); }
-        /** Returns the value at the specified index of the {@code v} field. */
+        /** @return the value at the specified index of the {@code v} field. */
         public double v(int index) { return HmdVector3d.nv(address(), index); }
 
         /** Copies the specified {@link DoubleBuffer} to the {@code v} field. */

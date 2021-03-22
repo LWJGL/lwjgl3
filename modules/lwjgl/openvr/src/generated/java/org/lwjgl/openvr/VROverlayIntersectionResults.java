@@ -72,16 +72,16 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link HmdVector3} view of the {@code vPoint} field. */
+    /** @return a {@link HmdVector3} view of the {@code vPoint} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vPoint() { return nvPoint(address()); }
-    /** Returns a {@link HmdVector3} view of the {@code vNormal} field. */
+    /** @return a {@link HmdVector3} view of the {@code vNormal} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vNormal() { return nvNormal(address()); }
-    /** Returns a {@link HmdVector2} view of the {@code vUVs} field. */
+    /** @return a {@link HmdVector2} view of the {@code vUVs} field. */
     @NativeType("HmdVector2_t")
     public HmdVector2 vUVs() { return nvUVs(address()); }
-    /** Returns the value of the {@code fDistance} field. */
+    /** @return the value of the {@code fDistance} field. */
     public float fDistance() { return nfDistance(address()); }
 
     // -----------------------------------
@@ -274,16 +274,16 @@ public class VROverlayIntersectionResults extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link HmdVector3} view of the {@code vPoint} field. */
+        /** @return a {@link HmdVector3} view of the {@code vPoint} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vPoint() { return VROverlayIntersectionResults.nvPoint(address()); }
-        /** Returns a {@link HmdVector3} view of the {@code vNormal} field. */
+        /** @return a {@link HmdVector3} view of the {@code vNormal} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vNormal() { return VROverlayIntersectionResults.nvNormal(address()); }
-        /** Returns a {@link HmdVector2} view of the {@code vUVs} field. */
+        /** @return a {@link HmdVector2} view of the {@code vUVs} field. */
         @NativeType("HmdVector2_t")
         public HmdVector2 vUVs() { return VROverlayIntersectionResults.nvUVs(address()); }
-        /** Returns the value of the {@code fDistance} field. */
+        /** @return the value of the {@code fDistance} field. */
         public float fDistance() { return VROverlayIntersectionResults.nfDistance(address()); }
 
     }

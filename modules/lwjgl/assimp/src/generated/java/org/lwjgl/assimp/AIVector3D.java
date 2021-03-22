@@ -68,11 +68,11 @@ public class AIVector3D extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** Returns the value of the {@code z} field. */
+    /** @return the value of the {@code z} field. */
     public float z() { return nz(address()); }
 
     /** Sets the specified value to the {@code x} field. */
@@ -302,11 +302,11 @@ public class AIVector3D extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return AIVector3D.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return AIVector3D.ny(address()); }
-        /** Returns the value of the {@code z} field. */
+        /** @return the value of the {@code z} field. */
         public float z() { return AIVector3D.nz(address()); }
 
         /** Sets the specified value to the {@code x} field. */

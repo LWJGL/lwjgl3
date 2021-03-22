@@ -58,7 +58,7 @@ public class VREventShowUI extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code eType} field. */
+    /** @return the value of the {@code eType} field. */
     @NativeType("EShowUIType")
     public int eType() { return neType(address()); }
 
@@ -134,7 +134,7 @@ public class VREventShowUI extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code eType} field. */
+        /** @return the value of the {@code eType} field. */
         @NativeType("EShowUIType")
         public int eType() { return VREventShowUI.neType(address()); }
 

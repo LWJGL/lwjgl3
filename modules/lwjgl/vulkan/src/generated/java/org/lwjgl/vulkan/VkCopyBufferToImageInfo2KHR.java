@@ -87,29 +87,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkBufferImageCopy2KHR}, {@link KHRCopyCommands2#vkCmdCopyBufferToImage2KHR CmdCopyBufferToImage2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code srcBuffer} &ndash; the source buffer.</li>
- * <li>{@code dstImage} &ndash; the destination image.</li>
- * <li>{@code dstImageLayout} &ndash; the layout of the destination image subresources for the copy.</li>
- * <li>{@code regionCount} &ndash; the number of regions to copy.</li>
- * <li>{@code pRegions} &ndash; a pointer to an array of {@link VkBufferImageCopy2KHR} structures specifying the regions to copy.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkCopyBufferToImageInfo2KHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkBuffer srcBuffer;
- *     VkImage dstImage;
- *     VkImageLayout dstImageLayout;
- *     uint32_t regionCount;
- *     {@link VkBufferImageCopy2KHR VkBufferImageCopy2KHR} const * pRegions;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkBuffer {@link #srcBuffer};
+ *     VkImage {@link #dstImage};
+ *     VkImageLayout {@link #dstImageLayout};
+ *     uint32_t {@link #regionCount};
+ *     {@link VkBufferImageCopy2KHR VkBufferImageCopy2KHR} const * {@link #pRegions};
  * }</code></pre>
  */
 public class VkCopyBufferToImageInfo2KHR extends Struct implements NativeResource {
@@ -166,39 +154,39 @@ public class VkCopyBufferToImageInfo2KHR extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code srcBuffer} field. */
+    /** the source buffer. */
     @NativeType("VkBuffer")
     public long srcBuffer() { return nsrcBuffer(address()); }
-    /** Returns the value of the {@code dstImage} field. */
+    /** the destination image. */
     @NativeType("VkImage")
     public long dstImage() { return ndstImage(address()); }
-    /** Returns the value of the {@code dstImageLayout} field. */
+    /** the layout of the destination image subresources for the copy. */
     @NativeType("VkImageLayout")
     public int dstImageLayout() { return ndstImageLayout(address()); }
-    /** Returns the value of the {@code regionCount} field. */
+    /** the number of regions to copy. */
     @NativeType("uint32_t")
     public int regionCount() { return nregionCount(address()); }
-    /** Returns a {@link VkBufferImageCopy2KHR.Buffer} view of the struct array pointed to by the {@code pRegions} field. */
+    /** a pointer to an array of {@link VkBufferImageCopy2KHR} structures specifying the regions to copy. */
     @NativeType("VkBufferImageCopy2KHR const *")
     public VkBufferImageCopy2KHR.Buffer pRegions() { return npRegions(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkCopyBufferToImageInfo2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkCopyBufferToImageInfo2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code srcBuffer} field. */
+    /** Sets the specified value to the {@link #srcBuffer} field. */
     public VkCopyBufferToImageInfo2KHR srcBuffer(@NativeType("VkBuffer") long value) { nsrcBuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code dstImage} field. */
+    /** Sets the specified value to the {@link #dstImage} field. */
     public VkCopyBufferToImageInfo2KHR dstImage(@NativeType("VkImage") long value) { ndstImage(address(), value); return this; }
-    /** Sets the specified value to the {@code dstImageLayout} field. */
+    /** Sets the specified value to the {@link #dstImageLayout} field. */
     public VkCopyBufferToImageInfo2KHR dstImageLayout(@NativeType("VkImageLayout") int value) { ndstImageLayout(address(), value); return this; }
-    /** Sets the address of the specified {@link VkBufferImageCopy2KHR.Buffer} to the {@code pRegions} field. */
+    /** Sets the address of the specified {@link VkBufferImageCopy2KHR.Buffer} to the {@link #pRegions} field. */
     public VkCopyBufferToImageInfo2KHR pRegions(@NativeType("VkBufferImageCopy2KHR const *") VkBufferImageCopy2KHR.Buffer value) { npRegions(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -464,39 +452,39 @@ public class VkCopyBufferToImageInfo2KHR extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkCopyBufferToImageInfo2KHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCopyBufferToImageInfo2KHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkCopyBufferToImageInfo2KHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCopyBufferToImageInfo2KHR.npNext(address()); }
-        /** Returns the value of the {@code srcBuffer} field. */
+        /** @return the value of the {@link VkCopyBufferToImageInfo2KHR#srcBuffer} field. */
         @NativeType("VkBuffer")
         public long srcBuffer() { return VkCopyBufferToImageInfo2KHR.nsrcBuffer(address()); }
-        /** Returns the value of the {@code dstImage} field. */
+        /** @return the value of the {@link VkCopyBufferToImageInfo2KHR#dstImage} field. */
         @NativeType("VkImage")
         public long dstImage() { return VkCopyBufferToImageInfo2KHR.ndstImage(address()); }
-        /** Returns the value of the {@code dstImageLayout} field. */
+        /** @return the value of the {@link VkCopyBufferToImageInfo2KHR#dstImageLayout} field. */
         @NativeType("VkImageLayout")
         public int dstImageLayout() { return VkCopyBufferToImageInfo2KHR.ndstImageLayout(address()); }
-        /** Returns the value of the {@code regionCount} field. */
+        /** @return the value of the {@link VkCopyBufferToImageInfo2KHR#regionCount} field. */
         @NativeType("uint32_t")
         public int regionCount() { return VkCopyBufferToImageInfo2KHR.nregionCount(address()); }
-        /** Returns a {@link VkBufferImageCopy2KHR.Buffer} view of the struct array pointed to by the {@code pRegions} field. */
+        /** @return a {@link VkBufferImageCopy2KHR.Buffer} view of the struct array pointed to by the {@link VkCopyBufferToImageInfo2KHR#pRegions} field. */
         @NativeType("VkBufferImageCopy2KHR const *")
         public VkBufferImageCopy2KHR.Buffer pRegions() { return VkCopyBufferToImageInfo2KHR.npRegions(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkCopyBufferToImageInfo2KHR#sType} field. */
         public VkCopyBufferToImageInfo2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkCopyBufferToImageInfo2KHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkCopyBufferToImageInfo2KHR#pNext} field. */
         public VkCopyBufferToImageInfo2KHR.Buffer pNext(@NativeType("void const *") long value) { VkCopyBufferToImageInfo2KHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code srcBuffer} field. */
+        /** Sets the specified value to the {@link VkCopyBufferToImageInfo2KHR#srcBuffer} field. */
         public VkCopyBufferToImageInfo2KHR.Buffer srcBuffer(@NativeType("VkBuffer") long value) { VkCopyBufferToImageInfo2KHR.nsrcBuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code dstImage} field. */
+        /** Sets the specified value to the {@link VkCopyBufferToImageInfo2KHR#dstImage} field. */
         public VkCopyBufferToImageInfo2KHR.Buffer dstImage(@NativeType("VkImage") long value) { VkCopyBufferToImageInfo2KHR.ndstImage(address(), value); return this; }
-        /** Sets the specified value to the {@code dstImageLayout} field. */
+        /** Sets the specified value to the {@link VkCopyBufferToImageInfo2KHR#dstImageLayout} field. */
         public VkCopyBufferToImageInfo2KHR.Buffer dstImageLayout(@NativeType("VkImageLayout") int value) { VkCopyBufferToImageInfo2KHR.ndstImageLayout(address(), value); return this; }
-        /** Sets the address of the specified {@link VkBufferImageCopy2KHR.Buffer} to the {@code pRegions} field. */
+        /** Sets the address of the specified {@link VkBufferImageCopy2KHR.Buffer} to the {@link VkCopyBufferToImageInfo2KHR#pRegions} field. */
         public VkCopyBufferToImageInfo2KHR.Buffer pRegions(@NativeType("VkBufferImageCopy2KHR const *") VkBufferImageCopy2KHR.Buffer value) { VkCopyBufferToImageInfo2KHR.npRegions(address(), value); return this; }
 
     }

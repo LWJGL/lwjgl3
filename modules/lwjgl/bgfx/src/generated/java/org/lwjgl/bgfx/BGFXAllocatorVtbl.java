@@ -19,12 +19,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Allocator virtual table
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code realloc} &ndash; the reallocation callback</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -69,11 +63,11 @@ public class BGFXAllocatorVtbl extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code realloc} field. */
+    /** the reallocation callback */
     @NativeType("void * (*) (bgfx_allocator_interface_t *, void *, size_t, size_t, char *, uint32_t)")
     public BGFXReallocCallback realloc() { return nrealloc(address()); }
 
-    /** Sets the specified value to the {@code realloc} field. */
+    /** Sets the specified value to the {@link #realloc} field. */
     public BGFXAllocatorVtbl realloc(@NativeType("void * (*) (bgfx_allocator_interface_t *, void *, size_t, size_t, char *, uint32_t)") BGFXReallocCallbackI value) { nrealloc(address(), value); return this; }
 
     /**
@@ -296,11 +290,11 @@ public class BGFXAllocatorVtbl extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code realloc} field. */
+        /** @return the value of the {@link BGFXAllocatorVtbl#realloc} field. */
         @NativeType("void * (*) (bgfx_allocator_interface_t *, void *, size_t, size_t, char *, uint32_t)")
         public BGFXReallocCallback realloc() { return BGFXAllocatorVtbl.nrealloc(address()); }
 
-        /** Sets the specified value to the {@code realloc} field. */
+        /** Sets the specified value to the {@link BGFXAllocatorVtbl#realloc} field. */
         public BGFXAllocatorVtbl.Buffer realloc(@NativeType("void * (*) (bgfx_allocator_interface_t *, void *, size_t, size_t, char *, uint32_t)") BGFXReallocCallbackI value) { BGFXAllocatorVtbl.nrealloc(address(), value); return this; }
 
     }

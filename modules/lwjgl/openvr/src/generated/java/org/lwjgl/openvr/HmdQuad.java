@@ -61,10 +61,10 @@ public class HmdQuad extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link HmdVector3}.Buffer view of the {@code vCorners} field. */
+    /** @return a {@link HmdVector3}.Buffer view of the {@code vCorners} field. */
     @NativeType("HmdVector3_t[4]")
     public HmdVector3.Buffer vCorners() { return nvCorners(address()); }
-    /** Returns a {@link HmdVector3} view of the struct at the specified index of the {@code vCorners} field. */
+    /** @return a {@link HmdVector3} view of the struct at the specified index of the {@code vCorners} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vCorners(int index) { return nvCorners(address(), index); }
 
@@ -287,10 +287,10 @@ public class HmdQuad extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link HmdVector3}.Buffer view of the {@code vCorners} field. */
+        /** @return a {@link HmdVector3}.Buffer view of the {@code vCorners} field. */
         @NativeType("HmdVector3_t[4]")
         public HmdVector3.Buffer vCorners() { return HmdQuad.nvCorners(address()); }
-        /** Returns a {@link HmdVector3} view of the struct at the specified index of the {@code vCorners} field. */
+        /** @return a {@link HmdVector3} view of the struct at the specified index of the {@code vCorners} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vCorners(int index) { return HmdQuad.nvCorners(address(), index); }
 

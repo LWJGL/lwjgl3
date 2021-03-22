@@ -61,10 +61,10 @@ public class HmdVector3 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link FloatBuffer} view of the {@code v} field. */
+    /** @return a {@link FloatBuffer} view of the {@code v} field. */
     @NativeType("float[3]")
     public FloatBuffer v() { return nv(address()); }
-    /** Returns the value at the specified index of the {@code v} field. */
+    /** @return the value at the specified index of the {@code v} field. */
     public float v(int index) { return nv(address(), index); }
 
     /** Copies the specified {@link FloatBuffer} to the {@code v} field. */
@@ -282,10 +282,10 @@ public class HmdVector3 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link FloatBuffer} view of the {@code v} field. */
+        /** @return a {@link FloatBuffer} view of the {@code v} field. */
         @NativeType("float[3]")
         public FloatBuffer v() { return HmdVector3.nv(address()); }
-        /** Returns the value at the specified index of the {@code v} field. */
+        /** @return the value at the specified index of the {@code v} field. */
         public float v(int index) { return HmdVector3.nv(address(), index); }
 
         /** Copies the specified {@link FloatBuffer} to the {@code v} field. */

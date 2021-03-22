@@ -39,27 +39,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link NVDeviceGeneratedCommands#vkGetGeneratedCommandsMemoryRequirementsNV GetGeneratedCommandsMemoryRequirementsNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code pipelineBindPoint} &ndash; the {@code VkPipelineBindPoint} of the {@code pipeline} that this buffer memory is intended to be used with during the execution.</li>
- * <li>{@code pipeline} &ndash; the {@code VkPipeline} that this buffer memory is intended to be used with during the execution.</li>
- * <li>{@code indirectCommandsLayout} &ndash; the {@code VkIndirectCommandsLayoutNV} that this buffer memory is intended to be used with.</li>
- * <li>{@code maxSequencesCount} &ndash; the maximum number of sequences that this buffer memory in combination with the other state provided <b>can</b> be used with.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkGeneratedCommandsMemoryRequirementsInfoNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineBindPoint pipelineBindPoint;
- *     VkPipeline pipeline;
- *     VkIndirectCommandsLayoutNV indirectCommandsLayout;
- *     uint32_t maxSequencesCount;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineBindPoint {@link #pipelineBindPoint};
+ *     VkPipeline {@link #pipeline};
+ *     VkIndirectCommandsLayoutNV {@link #indirectCommandsLayout};
+ *     uint32_t {@link #maxSequencesCount};
  * }</code></pre>
  */
 public class VkGeneratedCommandsMemoryRequirementsInfoNV extends Struct implements NativeResource {
@@ -113,36 +102,36 @@ public class VkGeneratedCommandsMemoryRequirementsInfoNV extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code pipelineBindPoint} field. */
+    /** the {@code VkPipelineBindPoint} of the {@code pipeline} that this buffer memory is intended to be used with during the execution. */
     @NativeType("VkPipelineBindPoint")
     public int pipelineBindPoint() { return npipelineBindPoint(address()); }
-    /** Returns the value of the {@code pipeline} field. */
+    /** the {@code VkPipeline} that this buffer memory is intended to be used with during the execution. */
     @NativeType("VkPipeline")
     public long pipeline() { return npipeline(address()); }
-    /** Returns the value of the {@code indirectCommandsLayout} field. */
+    /** the {@code VkIndirectCommandsLayoutNV} that this buffer memory is intended to be used with. */
     @NativeType("VkIndirectCommandsLayoutNV")
     public long indirectCommandsLayout() { return nindirectCommandsLayout(address()); }
-    /** Returns the value of the {@code maxSequencesCount} field. */
+    /** the maximum number of sequences that this buffer memory in combination with the other state provided <b>can</b> be used with. */
     @NativeType("uint32_t")
     public int maxSequencesCount() { return nmaxSequencesCount(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code pipelineBindPoint} field. */
+    /** Sets the specified value to the {@link #pipelineBindPoint} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoNV pipelineBindPoint(@NativeType("VkPipelineBindPoint") int value) { npipelineBindPoint(address(), value); return this; }
-    /** Sets the specified value to the {@code pipeline} field. */
+    /** Sets the specified value to the {@link #pipeline} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoNV pipeline(@NativeType("VkPipeline") long value) { npipeline(address(), value); return this; }
-    /** Sets the specified value to the {@code indirectCommandsLayout} field. */
+    /** Sets the specified value to the {@link #indirectCommandsLayout} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoNV indirectCommandsLayout(@NativeType("VkIndirectCommandsLayoutNV") long value) { nindirectCommandsLayout(address(), value); return this; }
-    /** Sets the specified value to the {@code maxSequencesCount} field. */
+    /** Sets the specified value to the {@link #maxSequencesCount} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoNV maxSequencesCount(@NativeType("uint32_t") int value) { nmaxSequencesCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -383,36 +372,36 @@ public class VkGeneratedCommandsMemoryRequirementsInfoNV extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkGeneratedCommandsMemoryRequirementsInfoNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkGeneratedCommandsMemoryRequirementsInfoNV.npNext(address()); }
-        /** Returns the value of the {@code pipelineBindPoint} field. */
+        /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoNV#pipelineBindPoint} field. */
         @NativeType("VkPipelineBindPoint")
         public int pipelineBindPoint() { return VkGeneratedCommandsMemoryRequirementsInfoNV.npipelineBindPoint(address()); }
-        /** Returns the value of the {@code pipeline} field. */
+        /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoNV#pipeline} field. */
         @NativeType("VkPipeline")
         public long pipeline() { return VkGeneratedCommandsMemoryRequirementsInfoNV.npipeline(address()); }
-        /** Returns the value of the {@code indirectCommandsLayout} field. */
+        /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoNV#indirectCommandsLayout} field. */
         @NativeType("VkIndirectCommandsLayoutNV")
         public long indirectCommandsLayout() { return VkGeneratedCommandsMemoryRequirementsInfoNV.nindirectCommandsLayout(address()); }
-        /** Returns the value of the {@code maxSequencesCount} field. */
+        /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoNV#maxSequencesCount} field. */
         @NativeType("uint32_t")
         public int maxSequencesCount() { return VkGeneratedCommandsMemoryRequirementsInfoNV.nmaxSequencesCount(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsMemoryRequirementsInfoNV#sType} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkGeneratedCommandsMemoryRequirementsInfoNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsMemoryRequirementsInfoNV#pNext} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkGeneratedCommandsMemoryRequirementsInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code pipelineBindPoint} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsMemoryRequirementsInfoNV#pipelineBindPoint} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoNV.Buffer pipelineBindPoint(@NativeType("VkPipelineBindPoint") int value) { VkGeneratedCommandsMemoryRequirementsInfoNV.npipelineBindPoint(address(), value); return this; }
-        /** Sets the specified value to the {@code pipeline} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsMemoryRequirementsInfoNV#pipeline} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoNV.Buffer pipeline(@NativeType("VkPipeline") long value) { VkGeneratedCommandsMemoryRequirementsInfoNV.npipeline(address(), value); return this; }
-        /** Sets the specified value to the {@code indirectCommandsLayout} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsMemoryRequirementsInfoNV#indirectCommandsLayout} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoNV.Buffer indirectCommandsLayout(@NativeType("VkIndirectCommandsLayoutNV") long value) { VkGeneratedCommandsMemoryRequirementsInfoNV.nindirectCommandsLayout(address(), value); return this; }
-        /** Sets the specified value to the {@code maxSequencesCount} field. */
+        /** Sets the specified value to the {@link VkGeneratedCommandsMemoryRequirementsInfoNV#maxSequencesCount} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoNV.Buffer maxSequencesCount(@NativeType("uint32_t") int value) { VkGeneratedCommandsMemoryRequirementsInfoNV.nmaxSequencesCount(address(), value); return this; }
 
     }

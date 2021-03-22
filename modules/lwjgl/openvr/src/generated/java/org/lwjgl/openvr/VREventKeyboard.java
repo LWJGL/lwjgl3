@@ -17,19 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Used for keyboard events.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code cNewInput[8]} &ndash; up to 8 bytes of new input</li>
- * <li>{@code uUserValue} &ndash; possible flags about the new input</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VREvent_Keyboard_t {
- *     char cNewInput[8];
- *     uint64_t uUserValue;
+ *     char {@link #cNewInput}[8];
+ *     uint64_t {@link #uUserValue};
  * }</code></pre>
  */
 @NativeType("struct VREvent_Keyboard_t")
@@ -72,13 +65,13 @@ public class VREventKeyboard extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code cNewInput} field. */
+    /** up to 8 bytes of new input */
     @NativeType("char[8]")
     public ByteBuffer cNewInput() { return ncNewInput(address()); }
-    /** Returns the value at the specified index of the {@code cNewInput} field. */
+    /** up to 8 bytes of new input */
     @NativeType("char")
     public byte cNewInput(int index) { return ncNewInput(address(), index); }
-    /** Returns the value of the {@code uUserValue} field. */
+    /** possible flags about the new input */
     @NativeType("uint64_t")
     public long uUserValue() { return nuUserValue(address()); }
 
@@ -160,13 +153,13 @@ public class VREventKeyboard extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code cNewInput} field. */
+        /** @return a {@link ByteBuffer} view of the {@link VREventKeyboard#cNewInput} field. */
         @NativeType("char[8]")
         public ByteBuffer cNewInput() { return VREventKeyboard.ncNewInput(address()); }
-        /** Returns the value at the specified index of the {@code cNewInput} field. */
+        /** @return the value at the specified index of the {@link VREventKeyboard#cNewInput} field. */
         @NativeType("char")
         public byte cNewInput(int index) { return VREventKeyboard.ncNewInput(address(), index); }
-        /** Returns the value of the {@code uUserValue} field. */
+        /** @return the value of the {@link VREventKeyboard#uUserValue} field. */
         @NativeType("uint64_t")
         public long uUserValue() { return VREventKeyboard.nuUserValue(address()); }
 

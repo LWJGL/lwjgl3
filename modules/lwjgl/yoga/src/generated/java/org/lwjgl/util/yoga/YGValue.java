@@ -63,9 +63,9 @@ public class YGValue extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code value} field. */
+    /** @return the value of the {@code value} field. */
     public float value() { return nvalue(address()); }
-    /** Returns the value of the {@code unit} field. */
+    /** @return the value of the {@code unit} field. */
     @NativeType("YGUnit")
     public int unit() { return nunit(address()); }
 
@@ -288,9 +288,9 @@ public class YGValue extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code value} field. */
+        /** @return the value of the {@code value} field. */
         public float value() { return YGValue.nvalue(address()); }
-        /** Returns the value of the {@code unit} field. */
+        /** @return the value of the {@code unit} field. */
         @NativeType("YGUnit")
         public int unit() { return YGValue.nunit(address()); }
 

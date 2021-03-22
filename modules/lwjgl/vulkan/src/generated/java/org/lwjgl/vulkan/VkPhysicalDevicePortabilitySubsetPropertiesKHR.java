@@ -28,21 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRPortabilitySubset#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code minVertexInputBindingStrideAlignment} &ndash; indicates the minimum alignment for vertex input strides. {@link VkVertexInputBindingDescription}{@code ::stride} <b>must</b> be a multiple of, and at least as large as, this value.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDevicePortabilitySubsetPropertiesKHR {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint32_t minVertexInputBindingStrideAlignment;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint32_t {@link #minVertexInputBindingStrideAlignment};
  * }</code></pre>
  */
 public class VkPhysicalDevicePortabilitySubsetPropertiesKHR extends Struct implements NativeResource {
@@ -87,21 +79,21 @@ public class VkPhysicalDevicePortabilitySubsetPropertiesKHR extends Struct imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code minVertexInputBindingStrideAlignment} field. */
+    /** indicates the minimum alignment for vertex input strides. {@link VkVertexInputBindingDescription}{@code ::stride} <b>must</b> be a multiple of, and at least as large as, this value. */
     @NativeType("uint32_t")
     public int minVertexInputBindingStrideAlignment() { return nminVertexInputBindingStrideAlignment(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePortabilitySubsetPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePortabilitySubsetPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code minVertexInputBindingStrideAlignment} field. */
+    /** Sets the specified value to the {@link #minVertexInputBindingStrideAlignment} field. */
     public VkPhysicalDevicePortabilitySubsetPropertiesKHR minVertexInputBindingStrideAlignment(@NativeType("uint32_t") int value) { nminVertexInputBindingStrideAlignment(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -324,21 +316,21 @@ public class VkPhysicalDevicePortabilitySubsetPropertiesKHR extends Struct imple
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetPropertiesKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevicePortabilitySubsetPropertiesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetPropertiesKHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevicePortabilitySubsetPropertiesKHR.npNext(address()); }
-        /** Returns the value of the {@code minVertexInputBindingStrideAlignment} field. */
+        /** @return the value of the {@link VkPhysicalDevicePortabilitySubsetPropertiesKHR#minVertexInputBindingStrideAlignment} field. */
         @NativeType("uint32_t")
         public int minVertexInputBindingStrideAlignment() { return VkPhysicalDevicePortabilitySubsetPropertiesKHR.nminVertexInputBindingStrideAlignment(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetPropertiesKHR#sType} field. */
         public VkPhysicalDevicePortabilitySubsetPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePortabilitySubsetPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetPropertiesKHR#pNext} field. */
         public VkPhysicalDevicePortabilitySubsetPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePortabilitySubsetPropertiesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code minVertexInputBindingStrideAlignment} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetPropertiesKHR#minVertexInputBindingStrideAlignment} field. */
         public VkPhysicalDevicePortabilitySubsetPropertiesKHR.Buffer minVertexInputBindingStrideAlignment(@NativeType("uint32_t") int value) { VkPhysicalDevicePortabilitySubsetPropertiesKHR.nminVertexInputBindingStrideAlignment(address(), value); return this; }
 
     }

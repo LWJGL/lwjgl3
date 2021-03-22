@@ -23,82 +23,28 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@code VkBool32}, {@code VkColorSpaceKHR}, {@code VkCompositeAlphaFlagBitsKHR}, {@link VkExtent2D}, {@code VkFormat}, {@code VkImageUsageFlags}, {@code VkPresentModeKHR}, {@code VkSharingMode}, {@code VkStructureType}, {@code VkSurfaceKHR}, {@code VkSurfaceTransformFlagBitsKHR}, {@code VkSwapchainCreateFlagsKHR}, {@code VkSwapchainKHR}, {@link KHRDisplaySwapchain#vkCreateSharedSwapchainsKHR CreateSharedSwapchainsKHR}, {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkSwapchainCreateFlagBitsKHR} indicating parameters of the swapchain creation.</li>
- * <li>{@code surface} &ndash; the surface onto which the swapchain will present images. If the creation succeeds, the swapchain becomes associated with {@code surface}.</li>
- * <li>{@code minImageCount} &ndash; the minimum number of presentable images that the application needs. The implementation will either create the swapchain with at least that many images, or it will fail to create the swapchain.</li>
- * <li>{@code imageFormat} &ndash; a {@code VkFormat} value specifying the format the swapchain image(s) will be created with.</li>
- * <li>{@code imageColorSpace} &ndash; a {@code VkColorSpaceKHR} value specifying the way the swapchain interprets image data.</li>
- * <li>{@code imageExtent} &ndash; the size (in pixels) of the swapchain image(s). The behavior is platform-dependent if the image extent does not match the surface&#8217;s {@code currentExtent} as returned by {@code vkGetPhysicalDeviceSurfaceCapabilitiesKHR}.
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>On some platforms, it is normal that {@code maxImageExtent} <b>may</b> become {@code (0, 0)}, for example when the window is minimized. In such a case, it is not possible to create a swapchain due to the Valid Usage requirements.</p>
- * </div></li>
- * <li>{@code imageArrayLayers} &ndash; the number of views in a multiview/stereo surface. For non-stereoscopic-3D applications, this value is 1.</li>
- * <li>{@code imageUsage} &ndash; a bitmask of {@code VkImageUsageFlagBits} describing the intended usage of the (acquired) swapchain images.</li>
- * <li>{@code imageSharingMode} &ndash; the sharing mode used for the image(s) of the swapchain.</li>
- * <li>{@code queueFamilyIndexCount} &ndash; the number of queue families having access to the image(s) of the swapchain when {@code imageSharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}.</li>
- * <li>{@code pQueueFamilyIndices} &ndash; a pointer to an array of queue family indices having access to the images(s) of the swapchain when {@code imageSharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}.</li>
- * <li>{@code preTransform} &ndash; a {@code VkSurfaceTransformFlagBitsKHR} value describing the transform, relative to the presentation engine&#8217;s natural orientation, applied to the image content prior to presentation. If it does not match the {@code currentTransform} value returned by {@code vkGetPhysicalDeviceSurfaceCapabilitiesKHR}, the presentation engine will transform the image content as part of the presentation operation.</li>
- * <li>{@code compositeAlpha} &ndash; a {@code VkCompositeAlphaFlagBitsKHR} value indicating the alpha compositing mode to use when this surface is composited together with other surfaces on certain window systems.</li>
- * <li>{@code presentMode} &ndash; the presentation mode the swapchain will use. A swapchain&#8217;s present mode determines how incoming present requests will be processed and queued internally.</li>
- * <li>{@code clipped} &ndash; specifies whether the Vulkan implementation is allowed to discard rendering operations that affect regions of the surface that are not visible.
- * 
- * <ul>
- * <li>If set to {@link VK10#VK_TRUE TRUE}, the presentable images associated with the swapchain <b>may</b> not own all of their pixels. Pixels in the presentable images that correspond to regions of the target surface obscured by another window on the desktop, or subject to some other clipping mechanism will have undefined content when read back. Fragment shaders <b>may</b> not execute for these pixels, and thus any side effects they would have had will not occur. {@link VK10#VK_TRUE TRUE} value does not guarantee any clipping will occur, but allows more optimal presentation methods to be used on some platforms.</li>
- * <li>If set to {@link VK10#VK_FALSE FALSE}, presentable images associated with the swapchain will own all of the pixels they contain.
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Applications <b>should</b> set this value to {@link VK10#VK_TRUE TRUE} if they do not expect to read back the content of presentable images before presenting them or after reacquiring them, and if their fragment shaders do not have any side effects that require them to run for all pixels in the presentable image.</p>
- * </div>
- * </li>
- * </ul></li>
- * <li>{@code oldSwapchain} &ndash; {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, or the existing non-retired swapchain currently associated with {@code surface}. Providing a valid {@code oldSwapchain} <b>may</b> aid in the resource reuse, and also allows the application to still present any images that are already acquired from it.
- * 
- * <p>Upon calling {@code vkCreateSwapchainKHR} with an {@code oldSwapchain} that is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code oldSwapchain} is retired -- even if creation of the new swapchain fails. The new swapchain is created in the non-retired state whether or not {@code oldSwapchain} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}.</p>
- * 
- * <p>Upon calling {@code vkCreateSwapchainKHR} with an {@code oldSwapchain} that is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, any images from {@code oldSwapchain} that are not acquired by the application <b>may</b> be freed by the implementation, which <b>may</b> occur even if creation of the new swapchain fails. The application <b>can</b> destroy {@code oldSwapchain} to free all memory associated with {@code oldSwapchain}.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Multiple retired swapchains <b>can</b> be associated with the same {@code VkSurfaceKHR} through multiple uses of {@code oldSwapchain} that outnumber calls to {@link KHRSwapchain#vkDestroySwapchainKHR DestroySwapchainKHR}.</p>
- * 
- * <p>== Description</p>
- * 
- * <p>After {@code oldSwapchain} is retired, the application <b>can</b> pass to {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} any images it had already acquired from {@code oldSwapchain}. E.g., an application may present an image from the old swapchain before an image from the new swapchain is ready to be presented. As usual, {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} <b>may</b> fail if {@code oldSwapchain} has entered a state that causes {@link KHRSwapchain#VK_ERROR_OUT_OF_DATE_KHR ERROR_OUT_OF_DATE_KHR} to be returned.</p>
- * 
- * <p>The application <b>can</b> continue to use a shared presentable image obtained from {@code oldSwapchain} until a presentable image is acquired from the new swapchain, as long as it has not entered a state that causes it to return {@link KHRSwapchain#VK_ERROR_OUT_OF_DATE_KHR ERROR_OUT_OF_DATE_KHR}.</p>
- * </div></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSwapchainCreateInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkSwapchainCreateFlagsKHR flags;
- *     VkSurfaceKHR surface;
- *     uint32_t minImageCount;
- *     VkFormat imageFormat;
- *     VkColorSpaceKHR imageColorSpace;
- *     {@link VkExtent2D VkExtent2D} imageExtent;
- *     uint32_t imageArrayLayers;
- *     VkImageUsageFlags imageUsage;
- *     VkSharingMode imageSharingMode;
- *     uint32_t queueFamilyIndexCount;
- *     uint32_t const * pQueueFamilyIndices;
- *     VkSurfaceTransformFlagBitsKHR preTransform;
- *     VkCompositeAlphaFlagBitsKHR compositeAlpha;
- *     VkPresentModeKHR presentMode;
- *     VkBool32 clipped;
- *     VkSwapchainKHR oldSwapchain;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkSwapchainCreateFlagsKHR {@link #flags};
+ *     VkSurfaceKHR {@link #surface};
+ *     uint32_t {@link #minImageCount};
+ *     VkFormat {@link #imageFormat};
+ *     VkColorSpaceKHR {@link #imageColorSpace};
+ *     {@link VkExtent2D VkExtent2D} {@link #imageExtent};
+ *     uint32_t {@link #imageArrayLayers};
+ *     VkImageUsageFlags {@link #imageUsage};
+ *     VkSharingMode {@link #imageSharingMode};
+ *     uint32_t {@link #queueFamilyIndexCount};
+ *     uint32_t const * {@link #pQueueFamilyIndices};
+ *     VkSurfaceTransformFlagBitsKHR {@link #preTransform};
+ *     VkCompositeAlphaFlagBitsKHR {@link #compositeAlpha};
+ *     VkPresentModeKHR {@link #presentMode};
+ *     VkBool32 {@link #clipped};
+ *     VkSwapchainKHR {@link #oldSwapchain};
  * }</code></pre>
  */
 public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
@@ -188,96 +134,133 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkSwapchainCreateFlagBitsKHR} indicating parameters of the swapchain creation. */
     @NativeType("VkSwapchainCreateFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code surface} field. */
+    /** the surface onto which the swapchain will present images. If the creation succeeds, the swapchain becomes associated with {@code surface}. */
     @NativeType("VkSurfaceKHR")
     public long surface() { return nsurface(address()); }
-    /** Returns the value of the {@code minImageCount} field. */
+    /** the minimum number of presentable images that the application needs. The implementation will either create the swapchain with at least that many images, or it will fail to create the swapchain. */
     @NativeType("uint32_t")
     public int minImageCount() { return nminImageCount(address()); }
-    /** Returns the value of the {@code imageFormat} field. */
+    /** a {@code VkFormat} value specifying the format the swapchain image(s) will be created with. */
     @NativeType("VkFormat")
     public int imageFormat() { return nimageFormat(address()); }
-    /** Returns the value of the {@code imageColorSpace} field. */
+    /** a {@code VkColorSpaceKHR} value specifying the way the swapchain interprets image data. */
     @NativeType("VkColorSpaceKHR")
     public int imageColorSpace() { return nimageColorSpace(address()); }
-    /** Returns a {@link VkExtent2D} view of the {@code imageExtent} field. */
+    /**
+     * the size (in pixels) of the swapchain image(s). The behavior is platform-dependent if the image extent does not match the surface&#8217;s {@code currentExtent} as returned by {@code vkGetPhysicalDeviceSurfaceCapabilitiesKHR}.
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>On some platforms, it is normal that {@code maxImageExtent} <b>may</b> become {@code (0, 0)}, for example when the window is minimized. In such a case, it is not possible to create a swapchain due to the Valid Usage requirements.</p>
+     * </div>
+     */
     public VkExtent2D imageExtent() { return nimageExtent(address()); }
-    /** Returns the value of the {@code imageArrayLayers} field. */
+    /** the number of views in a multiview/stereo surface. For non-stereoscopic-3D applications, this value is 1. */
     @NativeType("uint32_t")
     public int imageArrayLayers() { return nimageArrayLayers(address()); }
-    /** Returns the value of the {@code imageUsage} field. */
+    /** a bitmask of {@code VkImageUsageFlagBits} describing the intended usage of the (acquired) swapchain images. */
     @NativeType("VkImageUsageFlags")
     public int imageUsage() { return nimageUsage(address()); }
-    /** Returns the value of the {@code imageSharingMode} field. */
+    /** the sharing mode used for the image(s) of the swapchain. */
     @NativeType("VkSharingMode")
     public int imageSharingMode() { return nimageSharingMode(address()); }
-    /** Returns the value of the {@code queueFamilyIndexCount} field. */
+    /** the number of queue families having access to the image(s) of the swapchain when {@code imageSharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}. */
     @NativeType("uint32_t")
     public int queueFamilyIndexCount() { return nqueueFamilyIndexCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pQueueFamilyIndices} field. */
+    /** a pointer to an array of queue family indices having access to the images(s) of the swapchain when {@code imageSharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}. */
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pQueueFamilyIndices() { return npQueueFamilyIndices(address()); }
-    /** Returns the value of the {@code preTransform} field. */
+    /** a {@code VkSurfaceTransformFlagBitsKHR} value describing the transform, relative to the presentation engine&#8217;s natural orientation, applied to the image content prior to presentation. If it does not match the {@code currentTransform} value returned by {@code vkGetPhysicalDeviceSurfaceCapabilitiesKHR}, the presentation engine will transform the image content as part of the presentation operation. */
     @NativeType("VkSurfaceTransformFlagBitsKHR")
     public int preTransform() { return npreTransform(address()); }
-    /** Returns the value of the {@code compositeAlpha} field. */
+    /** a {@code VkCompositeAlphaFlagBitsKHR} value indicating the alpha compositing mode to use when this surface is composited together with other surfaces on certain window systems. */
     @NativeType("VkCompositeAlphaFlagBitsKHR")
     public int compositeAlpha() { return ncompositeAlpha(address()); }
-    /** Returns the value of the {@code presentMode} field. */
+    /** the presentation mode the swapchain will use. A swapchain&#8217;s present mode determines how incoming present requests will be processed and queued internally. */
     @NativeType("VkPresentModeKHR")
     public int presentMode() { return npresentMode(address()); }
-    /** Returns the value of the {@code clipped} field. */
+    /**
+     * specifies whether the Vulkan implementation is allowed to discard rendering operations that affect regions of the surface that are not visible.
+     * 
+     * <ul>
+     * <li>If set to {@link VK10#VK_TRUE TRUE}, the presentable images associated with the swapchain <b>may</b> not own all of their pixels. Pixels in the presentable images that correspond to regions of the target surface obscured by another window on the desktop, or subject to some other clipping mechanism will have undefined content when read back. Fragment shaders <b>may</b> not execute for these pixels, and thus any side effects they would have had will not occur. {@link VK10#VK_TRUE TRUE} value does not guarantee any clipping will occur, but allows more optimal presentation methods to be used on some platforms.</li>
+     * <li>If set to {@link VK10#VK_FALSE FALSE}, presentable images associated with the swapchain will own all of the pixels they contain.
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>Applications <b>should</b> set this value to {@link VK10#VK_TRUE TRUE} if they do not expect to read back the content of presentable images before presenting them or after reacquiring them, and if their fragment shaders do not have any side effects that require them to run for all pixels in the presentable image.</p>
+     * </div>
+     * </li>
+     * </ul>
+     */
     @NativeType("VkBool32")
     public boolean clipped() { return nclipped(address()) != 0; }
-    /** Returns the value of the {@code oldSwapchain} field. */
+    /**
+     * {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, or the existing non-retired swapchain currently associated with {@code surface}. Providing a valid {@code oldSwapchain} <b>may</b> aid in the resource reuse, and also allows the application to still present any images that are already acquired from it.
+     * 
+     * <p>Upon calling {@code vkCreateSwapchainKHR} with an {@code oldSwapchain} that is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code oldSwapchain} is retired -- even if creation of the new swapchain fails. The new swapchain is created in the non-retired state whether or not {@code oldSwapchain} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}.</p>
+     * 
+     * <p>Upon calling {@code vkCreateSwapchainKHR} with an {@code oldSwapchain} that is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, any images from {@code oldSwapchain} that are not acquired by the application <b>may</b> be freed by the implementation, which <b>may</b> occur even if creation of the new swapchain fails. The application <b>can</b> destroy {@code oldSwapchain} to free all memory associated with {@code oldSwapchain}.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>Multiple retired swapchains <b>can</b> be associated with the same {@code VkSurfaceKHR} through multiple uses of {@code oldSwapchain} that outnumber calls to {@link KHRSwapchain#vkDestroySwapchainKHR DestroySwapchainKHR}.</p>
+     * 
+     * <p>== Description</p>
+     * 
+     * <p>After {@code oldSwapchain} is retired, the application <b>can</b> pass to {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} any images it had already acquired from {@code oldSwapchain}. E.g., an application may present an image from the old swapchain before an image from the new swapchain is ready to be presented. As usual, {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} <b>may</b> fail if {@code oldSwapchain} has entered a state that causes {@link KHRSwapchain#VK_ERROR_OUT_OF_DATE_KHR ERROR_OUT_OF_DATE_KHR} to be returned.</p>
+     * 
+     * <p>The application <b>can</b> continue to use a shared presentable image obtained from {@code oldSwapchain} until a presentable image is acquired from the new swapchain, as long as it has not entered a state that causes it to return {@link KHRSwapchain#VK_ERROR_OUT_OF_DATE_KHR ERROR_OUT_OF_DATE_KHR}.</p>
+     * </div>
+     */
     @NativeType("VkSwapchainKHR")
     public long oldSwapchain() { return noldSwapchain(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSwapchainCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSwapchainCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkSwapchainCreateInfoKHR flags(@NativeType("VkSwapchainCreateFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code surface} field. */
+    /** Sets the specified value to the {@link #surface} field. */
     public VkSwapchainCreateInfoKHR surface(@NativeType("VkSurfaceKHR") long value) { nsurface(address(), value); return this; }
-    /** Sets the specified value to the {@code minImageCount} field. */
+    /** Sets the specified value to the {@link #minImageCount} field. */
     public VkSwapchainCreateInfoKHR minImageCount(@NativeType("uint32_t") int value) { nminImageCount(address(), value); return this; }
-    /** Sets the specified value to the {@code imageFormat} field. */
+    /** Sets the specified value to the {@link #imageFormat} field. */
     public VkSwapchainCreateInfoKHR imageFormat(@NativeType("VkFormat") int value) { nimageFormat(address(), value); return this; }
-    /** Sets the specified value to the {@code imageColorSpace} field. */
+    /** Sets the specified value to the {@link #imageColorSpace} field. */
     public VkSwapchainCreateInfoKHR imageColorSpace(@NativeType("VkColorSpaceKHR") int value) { nimageColorSpace(address(), value); return this; }
-    /** Copies the specified {@link VkExtent2D} to the {@code imageExtent} field. */
+    /** Copies the specified {@link VkExtent2D} to the {@link #imageExtent} field. */
     public VkSwapchainCreateInfoKHR imageExtent(VkExtent2D value) { nimageExtent(address(), value); return this; }
-    /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkSwapchainCreateInfoKHR imageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(imageExtent()); return this; }
-    /** Sets the specified value to the {@code imageArrayLayers} field. */
+    /** Sets the specified value to the {@link #imageArrayLayers} field. */
     public VkSwapchainCreateInfoKHR imageArrayLayers(@NativeType("uint32_t") int value) { nimageArrayLayers(address(), value); return this; }
-    /** Sets the specified value to the {@code imageUsage} field. */
+    /** Sets the specified value to the {@link #imageUsage} field. */
     public VkSwapchainCreateInfoKHR imageUsage(@NativeType("VkImageUsageFlags") int value) { nimageUsage(address(), value); return this; }
-    /** Sets the specified value to the {@code imageSharingMode} field. */
+    /** Sets the specified value to the {@link #imageSharingMode} field. */
     public VkSwapchainCreateInfoKHR imageSharingMode(@NativeType("VkSharingMode") int value) { nimageSharingMode(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pQueueFamilyIndices} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pQueueFamilyIndices} field. */
     public VkSwapchainCreateInfoKHR pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npQueueFamilyIndices(address(), value); return this; }
-    /** Sets the specified value to the {@code preTransform} field. */
+    /** Sets the specified value to the {@link #preTransform} field. */
     public VkSwapchainCreateInfoKHR preTransform(@NativeType("VkSurfaceTransformFlagBitsKHR") int value) { npreTransform(address(), value); return this; }
-    /** Sets the specified value to the {@code compositeAlpha} field. */
+    /** Sets the specified value to the {@link #compositeAlpha} field. */
     public VkSwapchainCreateInfoKHR compositeAlpha(@NativeType("VkCompositeAlphaFlagBitsKHR") int value) { ncompositeAlpha(address(), value); return this; }
-    /** Sets the specified value to the {@code presentMode} field. */
+    /** Sets the specified value to the {@link #presentMode} field. */
     public VkSwapchainCreateInfoKHR presentMode(@NativeType("VkPresentModeKHR") int value) { npresentMode(address(), value); return this; }
-    /** Sets the specified value to the {@code clipped} field. */
+    /** Sets the specified value to the {@link #clipped} field. */
     public VkSwapchainCreateInfoKHR clipped(@NativeType("VkBool32") boolean value) { nclipped(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code oldSwapchain} field. */
+    /** Sets the specified value to the {@link #oldSwapchain} field. */
     public VkSwapchainCreateInfoKHR oldSwapchain(@NativeType("VkSwapchainKHR") long value) { noldSwapchain(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -611,96 +594,96 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSwapchainCreateInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSwapchainCreateInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#flags} field. */
         @NativeType("VkSwapchainCreateFlagsKHR")
         public int flags() { return VkSwapchainCreateInfoKHR.nflags(address()); }
-        /** Returns the value of the {@code surface} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#surface} field. */
         @NativeType("VkSurfaceKHR")
         public long surface() { return VkSwapchainCreateInfoKHR.nsurface(address()); }
-        /** Returns the value of the {@code minImageCount} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#minImageCount} field. */
         @NativeType("uint32_t")
         public int minImageCount() { return VkSwapchainCreateInfoKHR.nminImageCount(address()); }
-        /** Returns the value of the {@code imageFormat} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#imageFormat} field. */
         @NativeType("VkFormat")
         public int imageFormat() { return VkSwapchainCreateInfoKHR.nimageFormat(address()); }
-        /** Returns the value of the {@code imageColorSpace} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#imageColorSpace} field. */
         @NativeType("VkColorSpaceKHR")
         public int imageColorSpace() { return VkSwapchainCreateInfoKHR.nimageColorSpace(address()); }
-        /** Returns a {@link VkExtent2D} view of the {@code imageExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@link VkSwapchainCreateInfoKHR#imageExtent} field. */
         public VkExtent2D imageExtent() { return VkSwapchainCreateInfoKHR.nimageExtent(address()); }
-        /** Returns the value of the {@code imageArrayLayers} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#imageArrayLayers} field. */
         @NativeType("uint32_t")
         public int imageArrayLayers() { return VkSwapchainCreateInfoKHR.nimageArrayLayers(address()); }
-        /** Returns the value of the {@code imageUsage} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#imageUsage} field. */
         @NativeType("VkImageUsageFlags")
         public int imageUsage() { return VkSwapchainCreateInfoKHR.nimageUsage(address()); }
-        /** Returns the value of the {@code imageSharingMode} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#imageSharingMode} field. */
         @NativeType("VkSharingMode")
         public int imageSharingMode() { return VkSwapchainCreateInfoKHR.nimageSharingMode(address()); }
-        /** Returns the value of the {@code queueFamilyIndexCount} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#queueFamilyIndexCount} field. */
         @NativeType("uint32_t")
         public int queueFamilyIndexCount() { return VkSwapchainCreateInfoKHR.nqueueFamilyIndexCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pQueueFamilyIndices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkSwapchainCreateInfoKHR#pQueueFamilyIndices} field. */
         @Nullable
         @NativeType("uint32_t const *")
         public IntBuffer pQueueFamilyIndices() { return VkSwapchainCreateInfoKHR.npQueueFamilyIndices(address()); }
-        /** Returns the value of the {@code preTransform} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#preTransform} field. */
         @NativeType("VkSurfaceTransformFlagBitsKHR")
         public int preTransform() { return VkSwapchainCreateInfoKHR.npreTransform(address()); }
-        /** Returns the value of the {@code compositeAlpha} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#compositeAlpha} field. */
         @NativeType("VkCompositeAlphaFlagBitsKHR")
         public int compositeAlpha() { return VkSwapchainCreateInfoKHR.ncompositeAlpha(address()); }
-        /** Returns the value of the {@code presentMode} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#presentMode} field. */
         @NativeType("VkPresentModeKHR")
         public int presentMode() { return VkSwapchainCreateInfoKHR.npresentMode(address()); }
-        /** Returns the value of the {@code clipped} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#clipped} field. */
         @NativeType("VkBool32")
         public boolean clipped() { return VkSwapchainCreateInfoKHR.nclipped(address()) != 0; }
-        /** Returns the value of the {@code oldSwapchain} field. */
+        /** @return the value of the {@link VkSwapchainCreateInfoKHR#oldSwapchain} field. */
         @NativeType("VkSwapchainKHR")
         public long oldSwapchain() { return VkSwapchainCreateInfoKHR.noldSwapchain(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#sType} field. */
         public VkSwapchainCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSwapchainCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#pNext} field. */
         public VkSwapchainCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkSwapchainCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#flags} field. */
         public VkSwapchainCreateInfoKHR.Buffer flags(@NativeType("VkSwapchainCreateFlagsKHR") int value) { VkSwapchainCreateInfoKHR.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code surface} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#surface} field. */
         public VkSwapchainCreateInfoKHR.Buffer surface(@NativeType("VkSurfaceKHR") long value) { VkSwapchainCreateInfoKHR.nsurface(address(), value); return this; }
-        /** Sets the specified value to the {@code minImageCount} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#minImageCount} field. */
         public VkSwapchainCreateInfoKHR.Buffer minImageCount(@NativeType("uint32_t") int value) { VkSwapchainCreateInfoKHR.nminImageCount(address(), value); return this; }
-        /** Sets the specified value to the {@code imageFormat} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#imageFormat} field. */
         public VkSwapchainCreateInfoKHR.Buffer imageFormat(@NativeType("VkFormat") int value) { VkSwapchainCreateInfoKHR.nimageFormat(address(), value); return this; }
-        /** Sets the specified value to the {@code imageColorSpace} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#imageColorSpace} field. */
         public VkSwapchainCreateInfoKHR.Buffer imageColorSpace(@NativeType("VkColorSpaceKHR") int value) { VkSwapchainCreateInfoKHR.nimageColorSpace(address(), value); return this; }
-        /** Copies the specified {@link VkExtent2D} to the {@code imageExtent} field. */
+        /** Copies the specified {@link VkExtent2D} to the {@link VkSwapchainCreateInfoKHR#imageExtent} field. */
         public VkSwapchainCreateInfoKHR.Buffer imageExtent(VkExtent2D value) { VkSwapchainCreateInfoKHR.nimageExtent(address(), value); return this; }
-        /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkSwapchainCreateInfoKHR#imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkSwapchainCreateInfoKHR.Buffer imageExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(imageExtent()); return this; }
-        /** Sets the specified value to the {@code imageArrayLayers} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#imageArrayLayers} field. */
         public VkSwapchainCreateInfoKHR.Buffer imageArrayLayers(@NativeType("uint32_t") int value) { VkSwapchainCreateInfoKHR.nimageArrayLayers(address(), value); return this; }
-        /** Sets the specified value to the {@code imageUsage} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#imageUsage} field. */
         public VkSwapchainCreateInfoKHR.Buffer imageUsage(@NativeType("VkImageUsageFlags") int value) { VkSwapchainCreateInfoKHR.nimageUsage(address(), value); return this; }
-        /** Sets the specified value to the {@code imageSharingMode} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#imageSharingMode} field. */
         public VkSwapchainCreateInfoKHR.Buffer imageSharingMode(@NativeType("VkSharingMode") int value) { VkSwapchainCreateInfoKHR.nimageSharingMode(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pQueueFamilyIndices} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkSwapchainCreateInfoKHR#pQueueFamilyIndices} field. */
         public VkSwapchainCreateInfoKHR.Buffer pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkSwapchainCreateInfoKHR.npQueueFamilyIndices(address(), value); return this; }
-        /** Sets the specified value to the {@code preTransform} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#preTransform} field. */
         public VkSwapchainCreateInfoKHR.Buffer preTransform(@NativeType("VkSurfaceTransformFlagBitsKHR") int value) { VkSwapchainCreateInfoKHR.npreTransform(address(), value); return this; }
-        /** Sets the specified value to the {@code compositeAlpha} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#compositeAlpha} field. */
         public VkSwapchainCreateInfoKHR.Buffer compositeAlpha(@NativeType("VkCompositeAlphaFlagBitsKHR") int value) { VkSwapchainCreateInfoKHR.ncompositeAlpha(address(), value); return this; }
-        /** Sets the specified value to the {@code presentMode} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#presentMode} field. */
         public VkSwapchainCreateInfoKHR.Buffer presentMode(@NativeType("VkPresentModeKHR") int value) { VkSwapchainCreateInfoKHR.npresentMode(address(), value); return this; }
-        /** Sets the specified value to the {@code clipped} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#clipped} field. */
         public VkSwapchainCreateInfoKHR.Buffer clipped(@NativeType("VkBool32") boolean value) { VkSwapchainCreateInfoKHR.nclipped(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code oldSwapchain} field. */
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#oldSwapchain} field. */
         public VkSwapchainCreateInfoKHR.Buffer oldSwapchain(@NativeType("VkSwapchainKHR") long value) { VkSwapchainCreateInfoKHR.noldSwapchain(address(), value); return this; }
 
     }

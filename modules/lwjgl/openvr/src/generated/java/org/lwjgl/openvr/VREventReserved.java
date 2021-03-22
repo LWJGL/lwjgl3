@@ -80,22 +80,22 @@ public class VREventReserved extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code reserved0} field. */
+    /** @return the value of the {@code reserved0} field. */
     @NativeType("uint64_t")
     public long reserved0() { return nreserved0(address()); }
-    /** Returns the value of the {@code reserved1} field. */
+    /** @return the value of the {@code reserved1} field. */
     @NativeType("uint64_t")
     public long reserved1() { return nreserved1(address()); }
-    /** Returns the value of the {@code reserved2} field. */
+    /** @return the value of the {@code reserved2} field. */
     @NativeType("uint64_t")
     public long reserved2() { return nreserved2(address()); }
-    /** Returns the value of the {@code reserved3} field. */
+    /** @return the value of the {@code reserved3} field. */
     @NativeType("uint64_t")
     public long reserved3() { return nreserved3(address()); }
-    /** Returns the value of the {@code reserved4} field. */
+    /** @return the value of the {@code reserved4} field. */
     @NativeType("uint64_t")
     public long reserved4() { return nreserved4(address()); }
-    /** Returns the value of the {@code reserved5} field. */
+    /** @return the value of the {@code reserved5} field. */
     @NativeType("uint64_t")
     public long reserved5() { return nreserved5(address()); }
 
@@ -181,22 +181,22 @@ public class VREventReserved extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code reserved0} field. */
+        /** @return the value of the {@code reserved0} field. */
         @NativeType("uint64_t")
         public long reserved0() { return VREventReserved.nreserved0(address()); }
-        /** Returns the value of the {@code reserved1} field. */
+        /** @return the value of the {@code reserved1} field. */
         @NativeType("uint64_t")
         public long reserved1() { return VREventReserved.nreserved1(address()); }
-        /** Returns the value of the {@code reserved2} field. */
+        /** @return the value of the {@code reserved2} field. */
         @NativeType("uint64_t")
         public long reserved2() { return VREventReserved.nreserved2(address()); }
-        /** Returns the value of the {@code reserved3} field. */
+        /** @return the value of the {@code reserved3} field. */
         @NativeType("uint64_t")
         public long reserved3() { return VREventReserved.nreserved3(address()); }
-        /** Returns the value of the {@code reserved4} field. */
+        /** @return the value of the {@code reserved4} field. */
         @NativeType("uint64_t")
         public long reserved4() { return VREventReserved.nreserved4(address()); }
-        /** Returns the value of the {@code reserved5} field. */
+        /** @return the value of the {@code reserved5} field. */
         @NativeType("uint64_t")
         public long reserved5() { return VREventReserved.nreserved5(address()); }
 

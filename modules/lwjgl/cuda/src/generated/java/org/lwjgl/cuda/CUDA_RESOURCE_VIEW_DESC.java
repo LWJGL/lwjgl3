@@ -19,31 +19,18 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Resource view descriptor.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code format} &ndash; Resource view format</li>
- * <li>{@code width} &ndash; Width of the resource view</li>
- * <li>{@code height} &ndash; Height of the resource view</li>
- * <li>{@code depth} &ndash; Depth of the resource view</li>
- * <li>{@code firstMipmapLevel} &ndash; First defined mipmap level</li>
- * <li>{@code lastMipmapLevel} &ndash; Last defined mipmap level</li>
- * <li>{@code firstLayer} &ndash; First layer index</li>
- * <li>{@code lastLayer} &ndash; Last layer index</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUDA_RESOURCE_VIEW_DESC {
- *     CUresourceViewFormat format;
- *     size_t width;
- *     size_t height;
- *     size_t depth;
- *     unsigned int firstMipmapLevel;
- *     unsigned int lastMipmapLevel;
- *     unsigned int firstLayer;
- *     unsigned int lastLayer;
+ *     CUresourceViewFormat {@link #format};
+ *     size_t {@link #width};
+ *     size_t {@link #height};
+ *     size_t {@link #depth};
+ *     unsigned int {@link #firstMipmapLevel};
+ *     unsigned int {@link #lastMipmapLevel};
+ *     unsigned int {@link #firstLayer};
+ *     unsigned int {@link #lastLayer};
  *     unsigned int reserved[16];
  * }</code></pre>
  */
@@ -107,52 +94,52 @@ public class CUDA_RESOURCE_VIEW_DESC extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code format} field. */
+    /** Resource view format */
     @NativeType("CUresourceViewFormat")
     public int format() { return nformat(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** Width of the resource view */
     @NativeType("size_t")
     public long width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** Height of the resource view */
     @NativeType("size_t")
     public long height() { return nheight(address()); }
-    /** Returns the value of the {@code depth} field. */
+    /** Depth of the resource view */
     @NativeType("size_t")
     public long depth() { return ndepth(address()); }
-    /** Returns the value of the {@code firstMipmapLevel} field. */
+    /** First defined mipmap level */
     @NativeType("unsigned int")
     public int firstMipmapLevel() { return nfirstMipmapLevel(address()); }
-    /** Returns the value of the {@code lastMipmapLevel} field. */
+    /** Last defined mipmap level */
     @NativeType("unsigned int")
     public int lastMipmapLevel() { return nlastMipmapLevel(address()); }
-    /** Returns the value of the {@code firstLayer} field. */
+    /** First layer index */
     @NativeType("unsigned int")
     public int firstLayer() { return nfirstLayer(address()); }
-    /** Returns the value of the {@code lastLayer} field. */
+    /** Last layer index */
     @NativeType("unsigned int")
     public int lastLayer() { return nlastLayer(address()); }
-    /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
+    /** @return a {@link IntBuffer} view of the {@code reserved} field. */
     @NativeType("unsigned int[16]")
     public IntBuffer reserved() { return nreserved(address()); }
-    /** Returns the value at the specified index of the {@code reserved} field. */
+    /** @return the value at the specified index of the {@code reserved} field. */
     @NativeType("unsigned int")
     public int reserved(int index) { return nreserved(address(), index); }
 
-    /** Sets the specified value to the {@code format} field. */
+    /** Sets the specified value to the {@link #format} field. */
     public CUDA_RESOURCE_VIEW_DESC format(@NativeType("CUresourceViewFormat") int value) { nformat(address(), value); return this; }
-    /** Sets the specified value to the {@code width} field. */
+    /** Sets the specified value to the {@link #width} field. */
     public CUDA_RESOURCE_VIEW_DESC width(@NativeType("size_t") long value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@code height} field. */
+    /** Sets the specified value to the {@link #height} field. */
     public CUDA_RESOURCE_VIEW_DESC height(@NativeType("size_t") long value) { nheight(address(), value); return this; }
-    /** Sets the specified value to the {@code depth} field. */
+    /** Sets the specified value to the {@link #depth} field. */
     public CUDA_RESOURCE_VIEW_DESC depth(@NativeType("size_t") long value) { ndepth(address(), value); return this; }
-    /** Sets the specified value to the {@code firstMipmapLevel} field. */
+    /** Sets the specified value to the {@link #firstMipmapLevel} field. */
     public CUDA_RESOURCE_VIEW_DESC firstMipmapLevel(@NativeType("unsigned int") int value) { nfirstMipmapLevel(address(), value); return this; }
-    /** Sets the specified value to the {@code lastMipmapLevel} field. */
+    /** Sets the specified value to the {@link #lastMipmapLevel} field. */
     public CUDA_RESOURCE_VIEW_DESC lastMipmapLevel(@NativeType("unsigned int") int value) { nlastMipmapLevel(address(), value); return this; }
-    /** Sets the specified value to the {@code firstLayer} field. */
+    /** Sets the specified value to the {@link #firstLayer} field. */
     public CUDA_RESOURCE_VIEW_DESC firstLayer(@NativeType("unsigned int") int value) { nfirstLayer(address(), value); return this; }
-    /** Sets the specified value to the {@code lastLayer} field. */
+    /** Sets the specified value to the {@link #lastLayer} field. */
     public CUDA_RESOURCE_VIEW_DESC lastLayer(@NativeType("unsigned int") int value) { nlastLayer(address(), value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
     public CUDA_RESOURCE_VIEW_DESC reserved(@NativeType("unsigned int[16]") IntBuffer value) { nreserved(address(), value); return this; }
@@ -426,52 +413,52 @@ public class CUDA_RESOURCE_VIEW_DESC extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code format} field. */
+        /** @return the value of the {@link CUDA_RESOURCE_VIEW_DESC#format} field. */
         @NativeType("CUresourceViewFormat")
         public int format() { return CUDA_RESOURCE_VIEW_DESC.nformat(address()); }
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@link CUDA_RESOURCE_VIEW_DESC#width} field. */
         @NativeType("size_t")
         public long width() { return CUDA_RESOURCE_VIEW_DESC.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@link CUDA_RESOURCE_VIEW_DESC#height} field. */
         @NativeType("size_t")
         public long height() { return CUDA_RESOURCE_VIEW_DESC.nheight(address()); }
-        /** Returns the value of the {@code depth} field. */
+        /** @return the value of the {@link CUDA_RESOURCE_VIEW_DESC#depth} field. */
         @NativeType("size_t")
         public long depth() { return CUDA_RESOURCE_VIEW_DESC.ndepth(address()); }
-        /** Returns the value of the {@code firstMipmapLevel} field. */
+        /** @return the value of the {@link CUDA_RESOURCE_VIEW_DESC#firstMipmapLevel} field. */
         @NativeType("unsigned int")
         public int firstMipmapLevel() { return CUDA_RESOURCE_VIEW_DESC.nfirstMipmapLevel(address()); }
-        /** Returns the value of the {@code lastMipmapLevel} field. */
+        /** @return the value of the {@link CUDA_RESOURCE_VIEW_DESC#lastMipmapLevel} field. */
         @NativeType("unsigned int")
         public int lastMipmapLevel() { return CUDA_RESOURCE_VIEW_DESC.nlastMipmapLevel(address()); }
-        /** Returns the value of the {@code firstLayer} field. */
+        /** @return the value of the {@link CUDA_RESOURCE_VIEW_DESC#firstLayer} field. */
         @NativeType("unsigned int")
         public int firstLayer() { return CUDA_RESOURCE_VIEW_DESC.nfirstLayer(address()); }
-        /** Returns the value of the {@code lastLayer} field. */
+        /** @return the value of the {@link CUDA_RESOURCE_VIEW_DESC#lastLayer} field. */
         @NativeType("unsigned int")
         public int lastLayer() { return CUDA_RESOURCE_VIEW_DESC.nlastLayer(address()); }
-        /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
+        /** @return a {@link IntBuffer} view of the {@code reserved} field. */
         @NativeType("unsigned int[16]")
         public IntBuffer reserved() { return CUDA_RESOURCE_VIEW_DESC.nreserved(address()); }
-        /** Returns the value at the specified index of the {@code reserved} field. */
+        /** @return the value at the specified index of the {@code reserved} field. */
         @NativeType("unsigned int")
         public int reserved(int index) { return CUDA_RESOURCE_VIEW_DESC.nreserved(address(), index); }
 
-        /** Sets the specified value to the {@code format} field. */
+        /** Sets the specified value to the {@link CUDA_RESOURCE_VIEW_DESC#format} field. */
         public CUDA_RESOURCE_VIEW_DESC.Buffer format(@NativeType("CUresourceViewFormat") int value) { CUDA_RESOURCE_VIEW_DESC.nformat(address(), value); return this; }
-        /** Sets the specified value to the {@code width} field. */
+        /** Sets the specified value to the {@link CUDA_RESOURCE_VIEW_DESC#width} field. */
         public CUDA_RESOURCE_VIEW_DESC.Buffer width(@NativeType("size_t") long value) { CUDA_RESOURCE_VIEW_DESC.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@code height} field. */
+        /** Sets the specified value to the {@link CUDA_RESOURCE_VIEW_DESC#height} field. */
         public CUDA_RESOURCE_VIEW_DESC.Buffer height(@NativeType("size_t") long value) { CUDA_RESOURCE_VIEW_DESC.nheight(address(), value); return this; }
-        /** Sets the specified value to the {@code depth} field. */
+        /** Sets the specified value to the {@link CUDA_RESOURCE_VIEW_DESC#depth} field. */
         public CUDA_RESOURCE_VIEW_DESC.Buffer depth(@NativeType("size_t") long value) { CUDA_RESOURCE_VIEW_DESC.ndepth(address(), value); return this; }
-        /** Sets the specified value to the {@code firstMipmapLevel} field. */
+        /** Sets the specified value to the {@link CUDA_RESOURCE_VIEW_DESC#firstMipmapLevel} field. */
         public CUDA_RESOURCE_VIEW_DESC.Buffer firstMipmapLevel(@NativeType("unsigned int") int value) { CUDA_RESOURCE_VIEW_DESC.nfirstMipmapLevel(address(), value); return this; }
-        /** Sets the specified value to the {@code lastMipmapLevel} field. */
+        /** Sets the specified value to the {@link CUDA_RESOURCE_VIEW_DESC#lastMipmapLevel} field. */
         public CUDA_RESOURCE_VIEW_DESC.Buffer lastMipmapLevel(@NativeType("unsigned int") int value) { CUDA_RESOURCE_VIEW_DESC.nlastMipmapLevel(address(), value); return this; }
-        /** Sets the specified value to the {@code firstLayer} field. */
+        /** Sets the specified value to the {@link CUDA_RESOURCE_VIEW_DESC#firstLayer} field. */
         public CUDA_RESOURCE_VIEW_DESC.Buffer firstLayer(@NativeType("unsigned int") int value) { CUDA_RESOURCE_VIEW_DESC.nfirstLayer(address(), value); return this; }
-        /** Sets the specified value to the {@code lastLayer} field. */
+        /** Sets the specified value to the {@link CUDA_RESOURCE_VIEW_DESC#lastLayer} field. */
         public CUDA_RESOURCE_VIEW_DESC.Buffer lastLayer(@NativeType("unsigned int") int value) { CUDA_RESOURCE_VIEW_DESC.nlastLayer(address(), value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
         public CUDA_RESOURCE_VIEW_DESC.Buffer reserved(@NativeType("unsigned int[16]") IntBuffer value) { CUDA_RESOURCE_VIEW_DESC.nreserved(address(), value); return this; }

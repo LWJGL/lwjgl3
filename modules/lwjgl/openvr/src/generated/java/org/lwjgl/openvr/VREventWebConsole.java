@@ -58,7 +58,7 @@ public class VREventWebConsole extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code webConsoleHandle} field. */
+    /** @return the value of the {@code webConsoleHandle} field. */
     @NativeType("WebConsoleHandle_t")
     public long webConsoleHandle() { return nwebConsoleHandle(address()); }
 
@@ -134,7 +134,7 @@ public class VREventWebConsole extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code webConsoleHandle} field. */
+        /** @return the value of the {@code webConsoleHandle} field. */
         @NativeType("WebConsoleHandle_t")
         public long webConsoleHandle() { return VREventWebConsole.nwebConsoleHandle(address()); }
 

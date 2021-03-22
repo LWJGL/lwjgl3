@@ -45,23 +45,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkCoarseSampleLocationNV}, {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV}, {@link NVShadingRateImage#vkCmdSetCoarseSampleOrderNV CmdSetCoarseSampleOrderNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code shadingRate} &ndash; a shading rate palette entry that identifies the fragment width and height for the combination of fragment area and per-pixel coverage sample count to control.</li>
- * <li>{@code sampleCount} &ndash; identifies the per-pixel coverage sample count for the combination of fragment area and coverage sample count to control.</li>
- * <li>{@code sampleLocationCount} &ndash; specifies the number of sample locations in the custom ordering.</li>
- * <li>{@code pSampleLocations} &ndash; a pointer to an array of {@link VkCoarseSampleLocationNV} structures specifying the location of each sample in the custom ordering.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkCoarseSampleOrderCustomNV {
- *     VkShadingRatePaletteEntryNV shadingRate;
- *     uint32_t sampleCount;
- *     uint32_t sampleLocationCount;
- *     {@link VkCoarseSampleLocationNV VkCoarseSampleLocationNV} const * pSampleLocations;
+ *     VkShadingRatePaletteEntryNV {@link #shadingRate};
+ *     uint32_t {@link #sampleCount};
+ *     uint32_t {@link #sampleLocationCount};
+ *     {@link VkCoarseSampleLocationNV VkCoarseSampleLocationNV} const * {@link #pSampleLocations};
  * }</code></pre>
  */
 public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResource {
@@ -109,24 +100,24 @@ public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code shadingRate} field. */
+    /** a shading rate palette entry that identifies the fragment width and height for the combination of fragment area and per-pixel coverage sample count to control. */
     @NativeType("VkShadingRatePaletteEntryNV")
     public int shadingRate() { return nshadingRate(address()); }
-    /** Returns the value of the {@code sampleCount} field. */
+    /** identifies the per-pixel coverage sample count for the combination of fragment area and coverage sample count to control. */
     @NativeType("uint32_t")
     public int sampleCount() { return nsampleCount(address()); }
-    /** Returns the value of the {@code sampleLocationCount} field. */
+    /** specifies the number of sample locations in the custom ordering. */
     @NativeType("uint32_t")
     public int sampleLocationCount() { return nsampleLocationCount(address()); }
-    /** Returns a {@link VkCoarseSampleLocationNV.Buffer} view of the struct array pointed to by the {@code pSampleLocations} field. */
+    /** a pointer to an array of {@link VkCoarseSampleLocationNV} structures specifying the location of each sample in the custom ordering. */
     @NativeType("VkCoarseSampleLocationNV const *")
     public VkCoarseSampleLocationNV.Buffer pSampleLocations() { return npSampleLocations(address()); }
 
-    /** Sets the specified value to the {@code shadingRate} field. */
+    /** Sets the specified value to the {@link #shadingRate} field. */
     public VkCoarseSampleOrderCustomNV shadingRate(@NativeType("VkShadingRatePaletteEntryNV") int value) { nshadingRate(address(), value); return this; }
-    /** Sets the specified value to the {@code sampleCount} field. */
+    /** Sets the specified value to the {@link #sampleCount} field. */
     public VkCoarseSampleOrderCustomNV sampleCount(@NativeType("uint32_t") int value) { nsampleCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkCoarseSampleLocationNV.Buffer} to the {@code pSampleLocations} field. */
+    /** Sets the address of the specified {@link VkCoarseSampleLocationNV.Buffer} to the {@link #pSampleLocations} field. */
     public VkCoarseSampleOrderCustomNV pSampleLocations(@NativeType("VkCoarseSampleLocationNV const *") VkCoarseSampleLocationNV.Buffer value) { npSampleLocations(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -374,24 +365,24 @@ public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code shadingRate} field. */
+        /** @return the value of the {@link VkCoarseSampleOrderCustomNV#shadingRate} field. */
         @NativeType("VkShadingRatePaletteEntryNV")
         public int shadingRate() { return VkCoarseSampleOrderCustomNV.nshadingRate(address()); }
-        /** Returns the value of the {@code sampleCount} field. */
+        /** @return the value of the {@link VkCoarseSampleOrderCustomNV#sampleCount} field. */
         @NativeType("uint32_t")
         public int sampleCount() { return VkCoarseSampleOrderCustomNV.nsampleCount(address()); }
-        /** Returns the value of the {@code sampleLocationCount} field. */
+        /** @return the value of the {@link VkCoarseSampleOrderCustomNV#sampleLocationCount} field. */
         @NativeType("uint32_t")
         public int sampleLocationCount() { return VkCoarseSampleOrderCustomNV.nsampleLocationCount(address()); }
-        /** Returns a {@link VkCoarseSampleLocationNV.Buffer} view of the struct array pointed to by the {@code pSampleLocations} field. */
+        /** @return a {@link VkCoarseSampleLocationNV.Buffer} view of the struct array pointed to by the {@link VkCoarseSampleOrderCustomNV#pSampleLocations} field. */
         @NativeType("VkCoarseSampleLocationNV const *")
         public VkCoarseSampleLocationNV.Buffer pSampleLocations() { return VkCoarseSampleOrderCustomNV.npSampleLocations(address()); }
 
-        /** Sets the specified value to the {@code shadingRate} field. */
+        /** Sets the specified value to the {@link VkCoarseSampleOrderCustomNV#shadingRate} field. */
         public VkCoarseSampleOrderCustomNV.Buffer shadingRate(@NativeType("VkShadingRatePaletteEntryNV") int value) { VkCoarseSampleOrderCustomNV.nshadingRate(address(), value); return this; }
-        /** Sets the specified value to the {@code sampleCount} field. */
+        /** Sets the specified value to the {@link VkCoarseSampleOrderCustomNV#sampleCount} field. */
         public VkCoarseSampleOrderCustomNV.Buffer sampleCount(@NativeType("uint32_t") int value) { VkCoarseSampleOrderCustomNV.nsampleCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkCoarseSampleLocationNV.Buffer} to the {@code pSampleLocations} field. */
+        /** Sets the address of the specified {@link VkCoarseSampleLocationNV.Buffer} to the {@link VkCoarseSampleOrderCustomNV#pSampleLocations} field. */
         public VkCoarseSampleOrderCustomNV.Buffer pSampleLocations(@NativeType("VkCoarseSampleLocationNV const *") VkCoarseSampleLocationNV.Buffer value) { VkCoarseSampleOrderCustomNV.npSampleLocations(address(), value); return this; }
 
     }

@@ -63,12 +63,12 @@ class NkConfigStackButtonBehavior extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code head} field. */
+    /** @return the value of the {@code head} field. */
     public int head() { return nhead(address()); }
-    /** Returns a {@link NkConfigStackButtonBehaviorElement}.Buffer view of the {@code elements} field. */
+    /** @return a {@link NkConfigStackButtonBehaviorElement}.Buffer view of the {@code elements} field. */
     @NativeType("struct nk_config_stack_button_behavior_element[8]")
     public NkConfigStackButtonBehaviorElement.Buffer elements() { return nelements(address()); }
-    /** Returns a {@link NkConfigStackButtonBehaviorElement} view of the struct at the specified index of the {@code elements} field. */
+    /** @return a {@link NkConfigStackButtonBehaviorElement} view of the struct at the specified index of the {@code elements} field. */
     @NativeType("struct nk_config_stack_button_behavior_element")
     public NkConfigStackButtonBehaviorElement elements(int index) { return nelements(address(), index); }
 
@@ -150,12 +150,12 @@ class NkConfigStackButtonBehavior extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code head} field. */
+        /** @return the value of the {@code head} field. */
         public int head() { return NkConfigStackButtonBehavior.nhead(address()); }
-        /** Returns a {@link NkConfigStackButtonBehaviorElement}.Buffer view of the {@code elements} field. */
+        /** @return a {@link NkConfigStackButtonBehaviorElement}.Buffer view of the {@code elements} field. */
         @NativeType("struct nk_config_stack_button_behavior_element[8]")
         public NkConfigStackButtonBehaviorElement.Buffer elements() { return NkConfigStackButtonBehavior.nelements(address()); }
-        /** Returns a {@link NkConfigStackButtonBehaviorElement} view of the struct at the specified index of the {@code elements} field. */
+        /** @return a {@link NkConfigStackButtonBehaviorElement} view of the struct at the specified index of the {@code elements} field. */
         @NativeType("struct nk_config_stack_button_behavior_element")
         public NkConfigStackButtonBehaviorElement elements(int index) { return NkConfigStackButtonBehavior.nelements(address(), index); }
 

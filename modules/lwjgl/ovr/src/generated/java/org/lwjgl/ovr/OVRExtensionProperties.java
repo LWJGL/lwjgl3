@@ -18,20 +18,13 @@ import static org.lwjgl.ovr.OVR.OVR_MAX_EXTENSION_NAME_SIZE;
 /**
  * Describes the properties of an API extension.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code extensionId} &ndash; One of enum {@code ovrExtensions} or a dynamic value.</li>
- * <li>{@code extensionVersion} &ndash; OpenXR-like version. Version compatibility is identified by the extension documentation.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrExtensionProperties {
- *     int extensionId;
+ *     int {@link #extensionId};
  *     char extensionName[OVR_MAX_EXTENSION_NAME_SIZE];
- *     uint32_t extensionVersion;
+ *     uint32_t {@link #extensionVersion};
  * }</code></pre>
  */
 @NativeType("struct ovrExtensionProperties")
@@ -77,15 +70,15 @@ public class OVRExtensionProperties extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code extensionId} field. */
+    /** One of enum {@code ovrExtensions} or a dynamic value. */
     public int extensionId() { return nextensionId(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code extensionName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code extensionName} field. */
     @NativeType("char[OVR_MAX_EXTENSION_NAME_SIZE]")
     public ByteBuffer extensionName() { return nextensionName(address()); }
-    /** Decodes the null-terminated string stored in the {@code extensionName} field. */
+    /** @return the null-terminated string stored in the {@code extensionName} field. */
     @NativeType("char[OVR_MAX_EXTENSION_NAME_SIZE]")
     public String extensionNameString() { return nextensionNameString(address()); }
-    /** Returns the value of the {@code extensionVersion} field. */
+    /** OpenXR-like version. Version compatibility is identified by the extension documentation. */
     @NativeType("uint32_t")
     public int extensionVersion() { return nextensionVersion(address()); }
 
@@ -167,15 +160,15 @@ public class OVRExtensionProperties extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code extensionId} field. */
+        /** @return the value of the {@link OVRExtensionProperties#extensionId} field. */
         public int extensionId() { return OVRExtensionProperties.nextensionId(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code extensionName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code extensionName} field. */
         @NativeType("char[OVR_MAX_EXTENSION_NAME_SIZE]")
         public ByteBuffer extensionName() { return OVRExtensionProperties.nextensionName(address()); }
-        /** Decodes the null-terminated string stored in the {@code extensionName} field. */
+        /** @return the null-terminated string stored in the {@code extensionName} field. */
         @NativeType("char[OVR_MAX_EXTENSION_NAME_SIZE]")
         public String extensionNameString() { return OVRExtensionProperties.nextensionNameString(address()); }
-        /** Returns the value of the {@code extensionVersion} field. */
+        /** @return the value of the {@link OVRExtensionProperties#extensionVersion} field. */
         @NativeType("uint32_t")
         public int extensionVersion() { return OVRExtensionProperties.nextensionVersion(address()); }
 

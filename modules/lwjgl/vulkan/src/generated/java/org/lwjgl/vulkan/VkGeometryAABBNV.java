@@ -42,27 +42,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkGeometryDataNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to a structure extending this structure.</li>
- * <li>{@code aabbData} &ndash; the buffer containing axis-aligned bounding box data.</li>
- * <li>{@code numAABBs} &ndash; the number of AABBs in this geometry.</li>
- * <li>{@code stride} &ndash; the stride in bytes between AABBs in {@code aabbData}.</li>
- * <li>{@code offset} &ndash; the offset in bytes of the first AABB in {@code aabbData}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkGeometryAABBNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkBuffer aabbData;
- *     uint32_t numAABBs;
- *     uint32_t stride;
- *     VkDeviceSize offset;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkBuffer {@link #aabbData};
+ *     uint32_t {@link #numAABBs};
+ *     uint32_t {@link #stride};
+ *     VkDeviceSize {@link #offset};
  * }</code></pre>
  */
 public class VkGeometryAABBNV extends Struct implements NativeResource {
@@ -116,36 +105,36 @@ public class VkGeometryAABBNV extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code aabbData} field. */
+    /** the buffer containing axis-aligned bounding box data. */
     @NativeType("VkBuffer")
     public long aabbData() { return naabbData(address()); }
-    /** Returns the value of the {@code numAABBs} field. */
+    /** the number of AABBs in this geometry. */
     @NativeType("uint32_t")
     public int numAABBs() { return nnumAABBs(address()); }
-    /** Returns the value of the {@code stride} field. */
+    /** the stride in bytes between AABBs in {@code aabbData}. */
     @NativeType("uint32_t")
     public int stride() { return nstride(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /** the offset in bytes of the first AABB in {@code aabbData}. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkGeometryAABBNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkGeometryAABBNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code aabbData} field. */
+    /** Sets the specified value to the {@link #aabbData} field. */
     public VkGeometryAABBNV aabbData(@NativeType("VkBuffer") long value) { naabbData(address(), value); return this; }
-    /** Sets the specified value to the {@code numAABBs} field. */
+    /** Sets the specified value to the {@link #numAABBs} field. */
     public VkGeometryAABBNV numAABBs(@NativeType("uint32_t") int value) { nnumAABBs(address(), value); return this; }
-    /** Sets the specified value to the {@code stride} field. */
+    /** Sets the specified value to the {@link #stride} field. */
     public VkGeometryAABBNV stride(@NativeType("uint32_t") int value) { nstride(address(), value); return this; }
-    /** Sets the specified value to the {@code offset} field. */
+    /** Sets the specified value to the {@link #offset} field. */
     public VkGeometryAABBNV offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -386,36 +375,36 @@ public class VkGeometryAABBNV extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkGeometryAABBNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkGeometryAABBNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkGeometryAABBNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkGeometryAABBNV.npNext(address()); }
-        /** Returns the value of the {@code aabbData} field. */
+        /** @return the value of the {@link VkGeometryAABBNV#aabbData} field. */
         @NativeType("VkBuffer")
         public long aabbData() { return VkGeometryAABBNV.naabbData(address()); }
-        /** Returns the value of the {@code numAABBs} field. */
+        /** @return the value of the {@link VkGeometryAABBNV#numAABBs} field. */
         @NativeType("uint32_t")
         public int numAABBs() { return VkGeometryAABBNV.nnumAABBs(address()); }
-        /** Returns the value of the {@code stride} field. */
+        /** @return the value of the {@link VkGeometryAABBNV#stride} field. */
         @NativeType("uint32_t")
         public int stride() { return VkGeometryAABBNV.nstride(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@link VkGeometryAABBNV#offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkGeometryAABBNV.noffset(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkGeometryAABBNV#sType} field. */
         public VkGeometryAABBNV.Buffer sType(@NativeType("VkStructureType") int value) { VkGeometryAABBNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkGeometryAABBNV#pNext} field. */
         public VkGeometryAABBNV.Buffer pNext(@NativeType("void const *") long value) { VkGeometryAABBNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code aabbData} field. */
+        /** Sets the specified value to the {@link VkGeometryAABBNV#aabbData} field. */
         public VkGeometryAABBNV.Buffer aabbData(@NativeType("VkBuffer") long value) { VkGeometryAABBNV.naabbData(address(), value); return this; }
-        /** Sets the specified value to the {@code numAABBs} field. */
+        /** Sets the specified value to the {@link VkGeometryAABBNV#numAABBs} field. */
         public VkGeometryAABBNV.Buffer numAABBs(@NativeType("uint32_t") int value) { VkGeometryAABBNV.nnumAABBs(address(), value); return this; }
-        /** Sets the specified value to the {@code stride} field. */
+        /** Sets the specified value to the {@link VkGeometryAABBNV#stride} field. */
         public VkGeometryAABBNV.Buffer stride(@NativeType("uint32_t") int value) { VkGeometryAABBNV.nstride(address(), value); return this; }
-        /** Sets the specified value to the {@code offset} field. */
+        /** Sets the specified value to the {@link VkGeometryAABBNV#offset} field. */
         public VkGeometryAABBNV.Buffer offset(@NativeType("VkDeviceSize") long value) { VkGeometryAABBNV.noffset(address(), value); return this; }
 
     }

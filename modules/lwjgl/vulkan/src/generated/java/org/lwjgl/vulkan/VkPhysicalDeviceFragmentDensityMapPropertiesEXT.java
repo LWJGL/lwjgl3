@@ -30,23 +30,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkExtent2D}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code minFragmentDensityTexelSize} &ndash; the minimum <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#glossary-fragment-density-texel-size">fragment density texel size</a>.</li>
- * <li>{@code maxFragmentDensityTexelSize} &ndash; the maximum fragment density texel size.</li>
- * <li>{@code fragmentDensityInvocations} &ndash; specifies whether the implementation <b>may</b> invoke additional fragment shader invocations for each covered sample.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceFragmentDensityMapPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     {@link VkExtent2D VkExtent2D} minFragmentDensityTexelSize;
- *     {@link VkExtent2D VkExtent2D} maxFragmentDensityTexelSize;
- *     VkBool32 fragmentDensityInvocations;
+ *     {@link VkExtent2D VkExtent2D} {@link #minFragmentDensityTexelSize};
+ *     {@link VkExtent2D VkExtent2D} {@link #maxFragmentDensityTexelSize};
+ *     VkBool32 {@link #fragmentDensityInvocations};
  * }</code></pre>
  */
 public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct implements NativeResource {
@@ -97,17 +89,17 @@ public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct impl
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkExtent2D} view of the {@code minFragmentDensityTexelSize} field. */
+    /** the minimum <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#glossary-fragment-density-texel-size">fragment density texel size</a>. */
     public VkExtent2D minFragmentDensityTexelSize() { return nminFragmentDensityTexelSize(address()); }
-    /** Returns a {@link VkExtent2D} view of the {@code maxFragmentDensityTexelSize} field. */
+    /** the maximum fragment density texel size. */
     public VkExtent2D maxFragmentDensityTexelSize() { return nmaxFragmentDensityTexelSize(address()); }
-    /** Returns the value of the {@code fragmentDensityInvocations} field. */
+    /** specifies whether the implementation <b>may</b> invoke additional fragment shader invocations for each covered sample. */
     @NativeType("VkBool32")
     public boolean fragmentDensityInvocations() { return nfragmentDensityInvocations(address()) != 0; }
 
@@ -336,17 +328,17 @@ public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct impl
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceFragmentDensityMapPropertiesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceFragmentDensityMapPropertiesEXT.npNext(address()); }
-        /** Returns a {@link VkExtent2D} view of the {@code minFragmentDensityTexelSize} field. */
+        /** @return a {@link VkExtent2D} view of the {@link VkPhysicalDeviceFragmentDensityMapPropertiesEXT#minFragmentDensityTexelSize} field. */
         public VkExtent2D minFragmentDensityTexelSize() { return VkPhysicalDeviceFragmentDensityMapPropertiesEXT.nminFragmentDensityTexelSize(address()); }
-        /** Returns a {@link VkExtent2D} view of the {@code maxFragmentDensityTexelSize} field. */
+        /** @return a {@link VkExtent2D} view of the {@link VkPhysicalDeviceFragmentDensityMapPropertiesEXT#maxFragmentDensityTexelSize} field. */
         public VkExtent2D maxFragmentDensityTexelSize() { return VkPhysicalDeviceFragmentDensityMapPropertiesEXT.nmaxFragmentDensityTexelSize(address()); }
-        /** Returns the value of the {@code fragmentDensityInvocations} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMapPropertiesEXT#fragmentDensityInvocations} field. */
         @NativeType("VkBool32")
         public boolean fragmentDensityInvocations() { return VkPhysicalDeviceFragmentDensityMapPropertiesEXT.nfragmentDensityInvocations(address()) != 0; }
 

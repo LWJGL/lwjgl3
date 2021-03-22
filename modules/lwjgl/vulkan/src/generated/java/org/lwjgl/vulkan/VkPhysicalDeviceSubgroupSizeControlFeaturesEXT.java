@@ -33,21 +33,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTSubgroupSizeControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code subgroupSizeControl} &ndash; indicates whether the implementation supports controlling shader subgroup sizes via the {@link EXTSubgroupSizeControl#VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT} flag and the {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} structure.</li>
- * <li>{@code computeFullSubgroups} &ndash; indicates whether the implementation supports requiring full subgroups in compute shaders via the {@link EXTSubgroupSizeControl#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT} flag.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceSubgroupSizeControlFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 subgroupSizeControl;
- *     VkBool32 computeFullSubgroups;
+ *     VkBool32 {@link #subgroupSizeControl};
+ *     VkBool32 {@link #computeFullSubgroups};
  * }</code></pre>
  */
 public class VkPhysicalDeviceSubgroupSizeControlFeaturesEXT extends Struct implements NativeResource {
@@ -95,16 +88,16 @@ public class VkPhysicalDeviceSubgroupSizeControlFeaturesEXT extends Struct imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code subgroupSizeControl} field. */
+    /** indicates whether the implementation supports controlling shader subgroup sizes via the {@link EXTSubgroupSizeControl#VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT} flag and the {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} structure. */
     @NativeType("VkBool32")
     public boolean subgroupSizeControl() { return nsubgroupSizeControl(address()) != 0; }
-    /** Returns the value of the {@code computeFullSubgroups} field. */
+    /** indicates whether the implementation supports requiring full subgroups in compute shaders via the {@link EXTSubgroupSizeControl#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT} flag. */
     @NativeType("VkBool32")
     public boolean computeFullSubgroups() { return ncomputeFullSubgroups(address()) != 0; }
 
@@ -112,9 +105,9 @@ public class VkPhysicalDeviceSubgroupSizeControlFeaturesEXT extends Struct imple
     public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code subgroupSizeControl} field. */
+    /** Sets the specified value to the {@link #subgroupSizeControl} field. */
     public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT subgroupSizeControl(@NativeType("VkBool32") boolean value) { nsubgroupSizeControl(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code computeFullSubgroups} field. */
+    /** Sets the specified value to the {@link #computeFullSubgroups} field. */
     public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT computeFullSubgroups(@NativeType("VkBool32") boolean value) { ncomputeFullSubgroups(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,16 +336,16 @@ public class VkPhysicalDeviceSubgroupSizeControlFeaturesEXT extends Struct imple
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code subgroupSizeControl} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT#subgroupSizeControl} field. */
         @NativeType("VkBool32")
         public boolean subgroupSizeControl() { return VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.nsubgroupSizeControl(address()) != 0; }
-        /** Returns the value of the {@code computeFullSubgroups} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT#computeFullSubgroups} field. */
         @NativeType("VkBool32")
         public boolean computeFullSubgroups() { return VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.ncomputeFullSubgroups(address()) != 0; }
 
@@ -360,9 +353,9 @@ public class VkPhysicalDeviceSubgroupSizeControlFeaturesEXT extends Struct imple
         public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code subgroupSizeControl} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT#subgroupSizeControl} field. */
         public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.Buffer subgroupSizeControl(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.nsubgroupSizeControl(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code computeFullSubgroups} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT#computeFullSubgroups} field. */
         public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.Buffer computeFullSubgroups(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.ncomputeFullSubgroups(address(), value ? 1 : 0); return this; }
 
     }

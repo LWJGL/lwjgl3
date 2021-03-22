@@ -16,34 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Data for {@link IndexerCallbacks#indexEntityReference}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code cursor} &ndash; reference cursor</li>
- * <li>{@code referencedEntity} &ndash; the entity that gets referenced</li>
- * <li>{@code parentEntity} &ndash; 
- * Immediate "parent" of the reference. For example:
- * 
- * <pre><code>
- * Foo *var;</code></pre>
- * 
- * <p>The parent of reference of type {@code Foo} is the variable {@code var}. For references inside statement bodies of functions/methods, the
- * {@code parentEntity} will be the function/method.</p></li>
- * <li>{@code container} &ndash; lexical container context of the reference</li>
- * <li>{@code role} &ndash; sets of symbol roles of the reference</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CXIdxEntityRefInfo {
  *     CXIdxEntityRefKind kind;
- *     {@link CXCursor CXCursor} cursor;
+ *     {@link CXCursor CXCursor} {@link #cursor};
  *     {@link CXIdxLoc CXIdxLoc} loc;
- *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * referencedEntity;
- *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * parentEntity;
- *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * container;
- *     CXSymbolRole role;
+ *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * {@link #referencedEntity};
+ *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * {@link #parentEntity};
+ *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * {@link #container};
+ *     CXSymbolRole {@link #role};
  * }</code></pre>
  */
 public class CXIdxEntityRefInfo extends Struct {
@@ -100,23 +83,31 @@ public class CXIdxEntityRefInfo extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code kind} field. */
+    /** @return the value of the {@code kind} field. */
     @NativeType("CXIdxEntityRefKind")
     public int kind() { return nkind(address()); }
-    /** Returns a {@link CXCursor} view of the {@code cursor} field. */
+    /** reference cursor */
     public CXCursor cursor() { return ncursor(address()); }
-    /** Returns a {@link CXIdxLoc} view of the {@code loc} field. */
+    /** @return a {@link CXIdxLoc} view of the {@code loc} field. */
     public CXIdxLoc loc() { return nloc(address()); }
-    /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code referencedEntity} field. */
+    /** the entity that gets referenced */
     @NativeType("CXIdxEntityInfo const *")
     public CXIdxEntityInfo referencedEntity() { return nreferencedEntity(address()); }
-    /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code parentEntity} field. */
+    /**
+     * Immediate "parent" of the reference. For example:
+     * 
+     * <pre><code>
+     * Foo *var;</code></pre>
+     * 
+     * <p>The parent of reference of type {@code Foo} is the variable {@code var}. For references inside statement bodies of functions/methods, the
+     * {@code parentEntity} will be the function/method.</p>
+     */
     @NativeType("CXIdxEntityInfo const *")
     public CXIdxEntityInfo parentEntity() { return nparentEntity(address()); }
-    /** Returns a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code container} field. */
+    /** lexical container context of the reference */
     @NativeType("CXIdxContainerInfo const *")
     public CXIdxContainerInfo container() { return ncontainer(address()); }
-    /** Returns the value of the {@code role} field. */
+    /** sets of symbol roles of the reference */
     @NativeType("CXSymbolRole")
     public int role() { return nrole(address()); }
 
@@ -204,23 +195,23 @@ public class CXIdxEntityRefInfo extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code kind} field. */
+        /** @return the value of the {@code kind} field. */
         @NativeType("CXIdxEntityRefKind")
         public int kind() { return CXIdxEntityRefInfo.nkind(address()); }
-        /** Returns a {@link CXCursor} view of the {@code cursor} field. */
+        /** @return a {@link CXCursor} view of the {@link CXIdxEntityRefInfo#cursor} field. */
         public CXCursor cursor() { return CXIdxEntityRefInfo.ncursor(address()); }
-        /** Returns a {@link CXIdxLoc} view of the {@code loc} field. */
+        /** @return a {@link CXIdxLoc} view of the {@code loc} field. */
         public CXIdxLoc loc() { return CXIdxEntityRefInfo.nloc(address()); }
-        /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code referencedEntity} field. */
+        /** @return a {@link CXIdxEntityInfo} view of the struct pointed to by the {@link CXIdxEntityRefInfo#referencedEntity} field. */
         @NativeType("CXIdxEntityInfo const *")
         public CXIdxEntityInfo referencedEntity() { return CXIdxEntityRefInfo.nreferencedEntity(address()); }
-        /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code parentEntity} field. */
+        /** @return a {@link CXIdxEntityInfo} view of the struct pointed to by the {@link CXIdxEntityRefInfo#parentEntity} field. */
         @NativeType("CXIdxEntityInfo const *")
         public CXIdxEntityInfo parentEntity() { return CXIdxEntityRefInfo.nparentEntity(address()); }
-        /** Returns a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code container} field. */
+        /** @return a {@link CXIdxContainerInfo} view of the struct pointed to by the {@link CXIdxEntityRefInfo#container} field. */
         @NativeType("CXIdxContainerInfo const *")
         public CXIdxContainerInfo container() { return CXIdxEntityRefInfo.ncontainer(address()); }
-        /** Returns the value of the {@code role} field. */
+        /** @return the value of the {@link CXIdxEntityRefInfo#role} field. */
         @NativeType("CXSymbolRole")
         public int role() { return CXIdxEntityRefInfo.nrole(address()); }
 

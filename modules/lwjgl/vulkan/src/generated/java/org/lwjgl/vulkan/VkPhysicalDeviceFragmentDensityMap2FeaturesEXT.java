@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTFragmentDensityMap2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code fragmentDensityMapDeferred} &ndash; specifies whether the implementation supports deferred reads of fragment density map image views. If this feature is not enabled, {@link EXTFragmentDensityMap2#VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT} <b>must</b> not be included in {@link VkImageViewCreateInfo}{@code ::flags}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceFragmentDensityMap2FeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 fragmentDensityMapDeferred;
+ *     VkBool32 {@link #fragmentDensityMapDeferred};
  * }</code></pre>
  */
 public class VkPhysicalDeviceFragmentDensityMap2FeaturesEXT extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceFragmentDensityMap2FeaturesEXT extends Struct imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code fragmentDensityMapDeferred} field. */
+    /** specifies whether the implementation supports deferred reads of fragment density map image views. If this feature is not enabled, {@link EXTFragmentDensityMap2#VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT} <b>must</b> not be included in {@link VkImageViewCreateInfo}{@code ::flags}. */
     @NativeType("VkBool32")
     public boolean fragmentDensityMapDeferred() { return nfragmentDensityMapDeferred(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceFragmentDensityMap2FeaturesEXT extends Struct imple
     public VkPhysicalDeviceFragmentDensityMap2FeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceFragmentDensityMap2FeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code fragmentDensityMapDeferred} field. */
+    /** Sets the specified value to the {@link #fragmentDensityMapDeferred} field. */
     public VkPhysicalDeviceFragmentDensityMap2FeaturesEXT fragmentDensityMapDeferred(@NativeType("VkBool32") boolean value) { nfragmentDensityMapDeferred(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceFragmentDensityMap2FeaturesEXT extends Struct imple
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code fragmentDensityMapDeferred} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMap2FeaturesEXT#fragmentDensityMapDeferred} field. */
         @NativeType("VkBool32")
         public boolean fragmentDensityMapDeferred() { return VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.nfragmentDensityMapDeferred(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceFragmentDensityMap2FeaturesEXT extends Struct imple
         public VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code fragmentDensityMapDeferred} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentDensityMap2FeaturesEXT#fragmentDensityMapDeferred} field. */
         public VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.Buffer fragmentDensityMapDeferred(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.nfragmentDensityMapDeferred(address(), value ? 1 : 0); return this; }
 
     }

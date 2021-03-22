@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTPrivateData#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code privateData} &ndash; indicates whether the implementation supports private data. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#private-data">Private Data</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDevicePrivateDataFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 privateData;
+ *     VkBool32 {@link #privateData};
  * }</code></pre>
  */
 public class VkPhysicalDevicePrivateDataFeaturesEXT extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDevicePrivateDataFeaturesEXT extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code privateData} field. */
+    /** indicates whether the implementation supports private data. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#private-data">Private Data</a>. */
     @NativeType("VkBool32")
     public boolean privateData() { return nprivateData(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDevicePrivateDataFeaturesEXT extends Struct implements Na
     public VkPhysicalDevicePrivateDataFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDevicePrivateDataFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code privateData} field. */
+    /** Sets the specified value to the {@link #privateData} field. */
     public VkPhysicalDevicePrivateDataFeaturesEXT privateData(@NativeType("VkBool32") boolean value) { nprivateData(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDevicePrivateDataFeaturesEXT extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevicePrivateDataFeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevicePrivateDataFeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code privateData} field. */
+        /** @return the value of the {@link VkPhysicalDevicePrivateDataFeaturesEXT#privateData} field. */
         @NativeType("VkBool32")
         public boolean privateData() { return VkPhysicalDevicePrivateDataFeaturesEXT.nprivateData(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDevicePrivateDataFeaturesEXT extends Struct implements Na
         public VkPhysicalDevicePrivateDataFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePrivateDataFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDevicePrivateDataFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePrivateDataFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code privateData} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePrivateDataFeaturesEXT#privateData} field. */
         public VkPhysicalDevicePrivateDataFeaturesEXT.Buffer privateData(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePrivateDataFeaturesEXT.nprivateData(address(), value ? 1 : 0); return this; }
 
     }
