@@ -49,7 +49,7 @@ extern "C" {
 #endif
 
 #define XXH_DISPATCH_AVX2    /* enable dispatch towards AVX2 */
-#define XXH_DISPATCH_AVX512  /* enable dispatch towards AVX512 */
+//#define XXH_DISPATCH_AVX512  /* enable dispatch towards AVX512 */
 
 #ifdef XXH_DISPATCH_DEBUG
 /* debug logging */
@@ -71,7 +71,7 @@ extern "C" {
 
 #define XXH_INLINE_ALL
 #define XXH_X86DISPATCH
-#define XXH_TARGET_AVX512 __attribute__((__target__("avx512f")))
+//#define XXH_TARGET_AVX512 __attribute__((__target__("avx512f")))
 #define XXH_TARGET_AVX2 __attribute__((__target__("avx2")))
 #define XXH_TARGET_SSE2 __attribute__((__target__("sse2")))
 #include "xxhash.h"
