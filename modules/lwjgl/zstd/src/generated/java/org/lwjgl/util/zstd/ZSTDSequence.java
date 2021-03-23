@@ -20,7 +20,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct ZSTD_Sequence {
- *     unsigned int {@link #matchPos};
  *     unsigned int {@link #offset};
  *     unsigned int {@link #litLength};
  *     unsigned int {@link #matchLength};
@@ -38,7 +37,6 @@ public class ZSTDSequence extends Struct implements NativeResource {
 
     /** The struct member offsets. */
     public static final int
-        MATCHPOS,
         OFFSET,
         LITLENGTH,
         MATCHLENGTH,
@@ -49,18 +47,16 @@ public class ZSTDSequence extends Struct implements NativeResource {
             __member(4),
             __member(4),
             __member(4),
-            __member(4),
             __member(4)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        MATCHPOS = layout.offsetof(0);
-        OFFSET = layout.offsetof(1);
-        LITLENGTH = layout.offsetof(2);
-        MATCHLENGTH = layout.offsetof(3);
-        REP = layout.offsetof(4);
+        OFFSET = layout.offsetof(0);
+        LITLENGTH = layout.offsetof(1);
+        MATCHLENGTH = layout.offsetof(2);
+        REP = layout.offsetof(3);
     }
 
     /**
@@ -76,25 +72,44 @@ public class ZSTDSequence extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** match pos in {@code dst} */
-    @NativeType("unsigned int")
-    public int matchPos() { return nmatchPos(address()); }
     /**
-     * if {@code seqDef.offset > 3}, then this is {@code seqDef.offset - 3}. If {@code seqDef.offset < 3}, then this is the corresponding repeat offset. But
-     * if {@code seqDef.offset < 3} and {@code litLength == 0}, this is the  repeat offset before the corresponding repeat offset. And if
-     * {@code seqDef.offset == 3} and {@code litLength == 0}, this is the most recent repeat {@code offset - 1}.
+     * the offset of the match. (NOT the same as the offset code)
+     * 
+     * <p>If {@code offset == 0} and {@code matchLength == 0}, this sequence represents the last literals in the block of {@code litLength} size.</p>
      */
     @NativeType("unsigned int")
     public int offset() { return noffset(address()); }
-    /** literal length */
+    /** literal length of the sequence */
     @NativeType("unsigned int")
     public int litLength() { return nlitLength(address()); }
-    /** match length */
+    /**
+     * match length of the sequence.
+     * 
+     * <p>Note: Users of this API may provide a sequence with {@code matchLength == litLength == offset == 0}. In this case, we will treat the sequence as a
+     * marker for a block boundary.</p>
+     */
     @NativeType("unsigned int")
     public int matchLength() { return nmatchLength(address()); }
     /**
-     * 0 when {@code seq} not {@code rep} and {@code seqDef.offset} otherwise when {@code litLength == 0} this will be {@code <= 4},otherwise {@code <= 3}
-     * like normal.
+     * Represents which repeat offset is represented by the field {@code offset}. Ranges from {@code [0, 3]}.
+     * 
+     * <p>Repeat offsets are essentially previous offsets from previous sequences sorted in recency order. For more detail, see
+     * {@code doc/zstd_compression_format.md}.</p>
+     * 
+     * <pre><code>
+     * If rep == 0, then offset does not contain a repeat offset.
+     * If rep &gt; 0:
+     *     If litLength != 0:
+     *         rep == 1 --&gt; offset == repeat_offset_1
+     *         rep == 2 --&gt; offset == repeat_offset_2
+     *         rep == 3 --&gt; offset == repeat_offset_3
+     *     If litLength == 0:
+     *         rep == 1 --&gt; offset == repeat_offset_2
+     *         rep == 2 --&gt; offset == repeat_offset_3
+     *         rep == 3 --&gt; offset == repeat_offset_1 - 1</code></pre>
+     * 
+     * <p>Note: This field is optional. {@link ZstdX#ZSTD_generateSequences generateSequences} will calculate the value of {@code rep}, but repeat offsets do not necessarily need to be calculated
+     * from an external sequence provider's perspective. For example, {@link ZstdX#ZSTD_compressSequences compressSequences} does not use this {@code rep} field at all (as of now).</p>
      */
     @NativeType("unsigned int")
     public int rep() { return nrep(address()); }
@@ -242,8 +257,6 @@ public class ZSTDSequence extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #matchPos}. */
-    public static int nmatchPos(long struct) { return UNSAFE.getInt(null, struct + ZSTDSequence.MATCHPOS); }
     /** Unsafe version of {@link #offset}. */
     public static int noffset(long struct) { return UNSAFE.getInt(null, struct + ZSTDSequence.OFFSET); }
     /** Unsafe version of {@link #litLength}. */
@@ -291,9 +304,6 @@ public class ZSTDSequence extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link ZSTDSequence#matchPos} field. */
-        @NativeType("unsigned int")
-        public int matchPos() { return ZSTDSequence.nmatchPos(address()); }
         /** @return the value of the {@link ZSTDSequence#offset} field. */
         @NativeType("unsigned int")
         public int offset() { return ZSTDSequence.noffset(address()); }

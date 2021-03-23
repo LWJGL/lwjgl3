@@ -109,14 +109,14 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."4",
-        "VERSION_RELEASE".."5"
+        "VERSION_RELEASE".."9"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)")
     StringConstant("Version string.", "VERSION_STRING".."""ZSTD_VERSION_MAJOR + "." + ZSTD_VERSION_MINOR + "." + ZSTD_VERSION_RELEASE""")
 
-    unsigned("versionNumber", "Returns the version number.", void())
-    Nonnull..charASCII.const.p("versionString", "Returns the version string.", void())
+    unsigned("versionNumber", "Returns runtime library version, the value is {@code (MAJOR*100*100 + MINOR*100 + RELEASE)}.", void())
+    Nonnull..charASCII.const.p("versionString", "Returns runtime library version, like \"1.4.5\".", void())
 
     IntConstant(
         "Default compression level.",
@@ -234,7 +234,8 @@ ENABLE_WARNINGS()""")
             """
             Enable long distance matching. This parameter is designed to improve compression ratio for large inputs, by finding large matches at long distance.
             It increases memory usage and window size. Note: enabling this parameter increases default #c_windowLog to 128 MB except when expressly set to a
-            different value.
+            different value. Note: will be enabled by default if {@code ZSTD_c_windowLog &ge; 128 MB} and compression strategy
+            {@code &ge; ZSTD_btopt (== compression level 16+)}.
             """,
             "160"
         ),
@@ -274,12 +275,16 @@ ENABLE_WARNINGS()""")
         "c_dictIDFlag".enum("When applicable, dictionary's ID is written into frame header (default:1)"),
         "c_nbWorkers".enum(
             """
-            Select how many threads will be spawned to compress in parallel. When {@code nbWorkers &ge; 1}, triggers asynchronous mode when used with
-            {@code ZSTD_compressStream*()}: {@code ZSTD_compressStream*()} consumes input and flush output if possible, but immediately gives back control to
-            caller, while compression work is performed in parallel, within worker threads. (note: a strong exception to this rule is when first invocation of
-            #compressStream2() sets #e_end: in which case, {@code ZSTD_compressStream2()} delegates to #compress2(), which is always a blocking call). More
-            workers improve speed, but also increase memory usage. Default value is {@code 0}, aka "single-threaded mode": no worker is spawned, compression is
-            performed inside Caller's thread, all invocations are blocking.
+            Select how many threads will be spawned to compress in parallel.
+            
+            When {@code nbWorkers &ge; 1}, triggers asynchronous mode when invoking {@code ZSTD_compressStream*()}: {@code ZSTD_compressStream*()} consumes
+            input and flush output if possible, but immediately gives back control to caller, while compression work is performed in parallel, within worker
+            thread(s). (note: a strong exception to this rule is when first invocation of #compressStream2() sets #e_end: in which case,
+            {@code ZSTD_compressStream2()} delegates to #compress2(), which is always a blocking call). More workers improve speed, but also increase memory
+            usage.
+            
+            Default value is {@code 0}, aka "single-threaded mode": no worker is spawned, compression is performed inside Caller's thread, and all invocations
+            are blocking.
             """,
             "400"
         ),
@@ -312,7 +317,12 @@ ENABLE_WARNINGS()""")
         "c_experimentalParam4".enum,
         "c_experimentalParam5".enum,
         "c_experimentalParam6".enum,
-        "c_experimentalParam7".enum
+        "c_experimentalParam7".enum,
+        "c_experimentalParam8".enum,
+        "c_experimentalParam9".enum,
+        "c_experimentalParam10".enum,
+        "c_experimentalParam11".enum,
+        "c_experimentalParam12".enum
     ).javaDocLinks
 
     val resetDirectives = EnumConstant(
@@ -357,7 +367,9 @@ ENABLE_WARNINGS()""")
             """,
             "1000"
         ),
-        "d_experimentalParam2".enum
+        "d_experimentalParam2".enum,
+        "d_experimentalParam3".enum,
+        "d_experimentalParam4".enum
     ).javaDocLinks
 
     val endDirectives = EnumConstant(
@@ -771,9 +783,10 @@ ENABLE_WARNINGS()""")
             "Compression parameters cannot be changed once compression is started (save a list of exceptions in multi-threading mode).",
             "{@code outpot->pos} must be &le; {@code dstCapacity}, {@code input->pos} must be &le; {@code srcSize}.",
             "{@code outpot->pos} and {@code input->pos} will be updated. They are guaranteed to remain below their respective limit.",
+            "{@code endOp} must be a valid directive.",
             "When {@code nbWorkers==0} (default), function is blocking: it completes its job before returning to caller.",
             """
-            When {@code nbWorkers&ge;1}, function is non-blocking: it just acquires a copy of input, and distributes jobs to internal worker threads, flush
+            When {@code nbWorkers&ge;1}, function is non-blocking: it copies a portion of input, distributes jobs to internal worker threads, flush to output
             whatever is available, and then immediately returns, just indicating that there is some data remaining to be flushed. The function nonetheless
             guarantees forward progress: it will return only after it reads or write at least 1+ byte.
             """,
@@ -1089,8 +1102,9 @@ ENABLE_WARNINGS()""")
         """
         References a prepared dictionary, to be used for all next compressed frames.
 
-        Note that compression parameters are enforced from within CDict, and supercede any compression parameter previously set within {@code CCtx}. The
-        dictionary will remain valid for future compressed frames using same {@code CCtx}.
+        Note that compression parameters are enforced from within {@code CDict}, and supercede any compression parameter previously set within {@code CCtx}.
+        The parameters ignored are labelled as "superseded-by-cdict" in the {@code ZSTD_cParameter} enum docs. The ignored parameters will be used again if the
+        {@code CCtx} is returned to no-dictionary mode. The dictionary will remain valid for future compressed frames using same {@code CCtx}.
 
         Special: Referencing a #NULL {@code CDict} means "return to no-dictionary mode".
 
@@ -1164,6 +1178,10 @@ ENABLE_WARNINGS()""")
         """
         References a prepared dictionary, to be used to decompress next frames. The dictionary remains active for decompression of future frames using same
         {@code DCtx}.
+        
+        If called with {@code ZSTD_d_refMultipleDDicts} enabled, repeated calls of this function  will store the {@code DDict} references in a table, and the
+        {@code DDict} used for decompression will be determined at decompression time, as per the {@code dict ID} in the frame. The memory for the table is
+        allocated on the first call to {@code refDDict}, and can be freed with #freeDCtx().
 
         Note 1: Currently, only one dictionary can be managed. Referencing a new dictionary effectively "discards" any previous one. Special: referencing a
         #NULL {@code DDict} means "return to no-dictionary mode".

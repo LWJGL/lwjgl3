@@ -767,7 +767,7 @@ float h = layout.dimensions(YGDimensionHeight);""")}
         being backed by a very fast decoder. It also offers a special mode for small data, called dictionary compression, and can create dictionaries from any
         sample set.
         """,
-        library = JNILibrary.create("LibZstd"),
+        library = JNILibrary.create("LibZstd", setupAllocator = true),
         arrayOverloads = false
     );
 

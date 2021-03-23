@@ -13,6 +13,7 @@ val ZSTD_CStream = typedef(ZSTD_CCtx, "ZSTD_CStream")
 val ZSTD_DCtx = "ZSTD_DCtx".opaque
 val ZSTD_DDict = "ZSTD_DDict".opaque
 val ZSTD_DStream = typedef(ZSTD_DCtx, "ZSTD_DStream")
+val ZSTD_threadPool = "ZSTD_threadPool".opaque
 
 val ZSTD_ErrorCode = "ZSTD_ErrorCode".enumType
 
@@ -51,23 +52,46 @@ val ZSTD_bounds = struct(Module.ZSTD, "ZSTDBounds", nativeName = "ZSTD_bounds", 
 }
 
 val ZSTD_Sequence = struct(Module.ZSTD, "ZSTDSequence", nativeName = "ZSTD_Sequence", mutable = false) {
-    unsigned_int("matchPos", "match pos in {@code dst}")
-
     unsigned_int(
         "offset",
         """
-        if {@code seqDef.offset > 3}, then this is {@code seqDef.offset - 3}. If {@code seqDef.offset < 3}, then this is the corresponding repeat offset. But
-        if {@code seqDef.offset < 3} and {@code litLength == 0}, this is the  repeat offset before the corresponding repeat offset. And if
-        {@code seqDef.offset == 3} and {@code litLength == 0}, this is the most recent repeat {@code offset - 1}.
+        the offset of the match. (NOT the same as the offset code)
+
+        If {@code offset == 0} and {@code matchLength == 0}, this sequence represents the last literals in the block of {@code litLength} size.
         """
     )
-    unsigned_int("litLength", "literal length")
-    unsigned_int("matchLength", "match length")
+    unsigned_int("litLength", "literal length of the sequence")
+    unsigned_int(
+        "matchLength",
+        """
+        match length of the sequence.
+        
+        Note: Users of this API may provide a sequence with {@code matchLength == litLength == offset == 0}. In this case, we will treat the sequence as a
+        marker for a block boundary.
+        """
+    )
     unsigned_int(
         "rep",
         """
-        0 when {@code seq} not {@code rep} and {@code seqDef.offset} otherwise when {@code litLength == 0} this will be {@code <= 4},otherwise {@code <= 3}
-        like normal.
+        Represents which repeat offset is represented by the field {@code offset}. Ranges from {@code [0, 3]}.
+
+        Repeat offsets are essentially previous offsets from previous sequences sorted in recency order. For more detail, see
+        {@code doc/zstd_compression_format.md}.
+
+        ${codeBlock("""
+If rep == 0, then offset does not contain a repeat offset.
+If rep > 0:
+    If litLength != 0:
+        rep == 1 --> offset == repeat_offset_1
+        rep == 2 --> offset == repeat_offset_2
+        rep == 3 --> offset == repeat_offset_3
+    If litLength == 0:
+        rep == 1 --> offset == repeat_offset_2
+        rep == 2 --> offset == repeat_offset_3
+        rep == 3 --> offset == repeat_offset_1 - 1""")}
+        
+        Note: This field is optional. #generateSequences() will calculate the value of {@code rep}, but repeat offsets do not necessarily need to be calculated
+        from an external sequence provider's perspective. For example, #compressSequences() does not use this {@code rep} field at all (as of now).
         """
     )
 }

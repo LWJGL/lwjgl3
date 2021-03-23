@@ -46,6 +46,7 @@ public class ZstdErrors {
      * <li>{@link #ZSTD_error_frameIndex_tooLarge error_frameIndex_tooLarge}</li>
      * <li>{@link #ZSTD_error_seekableIO error_seekableIO}</li>
      * <li>{@link #ZSTD_error_dstBuffer_wrong error_dstBuffer_wrong}</li>
+     * <li>{@link #ZSTD_error_srcBuffer_wrong error_srcBuffer_wrong}</li>
      * </ul>
      */
     public static final int
@@ -74,7 +75,8 @@ public class ZstdErrors {
         ZSTD_error_dstBuffer_null                = 74,
         ZSTD_error_frameIndex_tooLarge           = 100,
         ZSTD_error_seekableIO                    = 102,
-        ZSTD_error_dstBuffer_wrong               = 104;
+        ZSTD_error_dstBuffer_wrong               = 104,
+        ZSTD_error_srcBuffer_wrong               = 105;
 
     protected ZstdErrors() {
         throw new UnsupportedOperationException();

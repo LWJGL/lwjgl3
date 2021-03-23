@@ -69,6 +69,34 @@ public class ZstdX {
         ZSTD_f_zstd1_magicless = 1;
 
     /**
+     * This enum controls {@link #ZSTD_d_forceIgnoreChecksum d_forceIgnoreChecksum}. {@code ZSTD_forceIgnoreChecksum_e}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #ZSTD_d_validateChecksum d_validateChecksum}</li>
+     * <li>{@link #ZSTD_d_ignoreChecksum d_ignoreChecksum}</li>
+     * </ul>
+     */
+    public static final int
+        ZSTD_d_validateChecksum = 0,
+        ZSTD_d_ignoreChecksum   = 1;
+
+    /**
+     * This enum controls {@link #ZSTD_d_refMultipleDDicts d_refMultipleDDicts}. {@code ZSTD_refMultipleDDicts_e}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #ZSTD_rmd_refSingleDDict rmd_refSingleDDict}</li>
+     * <li>{@link #ZSTD_rmd_refMultipleDDicts rmd_refMultipleDDicts}</li>
+     * </ul>
+     */
+    public static final int
+        ZSTD_rmd_refSingleDDict    = 0,
+        ZSTD_rmd_refMultipleDDicts = 1;
+
+    /**
      * {@code ZSTD_dictAttachPref_e}
      * 
      * <h5>Enum values:</h5>
@@ -246,6 +274,110 @@ public class ZstdX {
     public static final int ZSTD_c_srcSizeHint = ZSTD_c_experimentalParam7;
 
     /**
+     * Controls whether the new and experimental "dedicated dictionary search structure" can be used. This feature is still rough around the edges, be
+     * prepared for surprising behavior!
+     * 
+     * <h5>How to use it:</h5>
+     * 
+     * <p>When using a {@code CDict}, whether to use this feature or not is controlled at {@code CDict} creation, and it must be set in a {@code CCtxParams} set
+     * passed into that construction (via {@link #ZSTD_createCDict_advanced2 createCDict_advanced2}). A compression will then use the feature or not based on how the {@code CDict} was
+     * constructed; the value of this param, set in the {@code CCtx}, will have no effect.</p>
+     * 
+     * <p>However, when a dictionary buffer is passed into a {@code CCtx}, such as via {@link Zstd#ZSTD_CCtx_loadDictionary CCtx_loadDictionary}, this param can be set on the {@code CCtx} to
+     * control whether the {@code CDict} that is created internally can use the feature or not.</p>
+     * 
+     * <h5>What it does:</h5>
+     * 
+     * <p>Normally, the internal data structures of the {@code CDict} are analogous to what would be stored in a {@code CCtx} after compressing the contents of a
+     * dictionary. To an approximation, a compression using a dictionary can then use those data structures to simply continue what is effectively a streaming
+     * compression where the simulated compression of the dictionary left off. Which is to say, the search structures in the {@code CDict} are normally the
+     * same format as in the {@code CCtx}.</p>
+     * 
+     * <p>It is possible to do better, since the {@code CDict} is not like a {@code CCtx}: the search structures are written once during {@code CDict} creation,
+     * and then are only read after that, while the search structures in the {@code CCtx} are both read and written as the compression goes along. This means
+     * we can choose a search structure for the dictionary that is read-optimized.</p>
+     * 
+     * <p>This feature enables the use of that different structure.</p>
+     * 
+     * <p>Note that some of the members of the {@code ZSTD_compressionParameters} struct have different semantics and constraints in the dedicated search
+     * structure. It is highly recommended that you simply set a compression level in the {@code CCtxParams} you pass into the {@code CDict} creation call,
+     * and avoid messing with the {@code cParams} directly.</p>
+     * 
+     * <h5>Effects:</h5>
+     * 
+     * <p>This will only have any effect when the selected {@code ZSTD_strategy} implementation supports this feature. Currently, that's limited to {@link Zstd#ZSTD_greedy greedy},
+     * {@link Zstd#ZSTD_lazy lazy}, and {@link Zstd#ZSTD_lazy2 lazy2}.</p>
+     * 
+     * <p>Note that this means that the {@code CDict} tables can no longer be copied into the {@code CCtx}, so the {@code dict} attachment mode {@link #ZSTD_dictForceCopy dictForceCopy}
+     * will no longer be useable. The dictionary can only be attached or reloaded.</p>
+     * 
+     * <p>In general, you should expect compression to be faster--sometimes very much so--and {@code CDict} creation to be slightly slower. Eventually, we will
+     * probably make this mode the default.</p>
+     */
+    public static final int ZSTD_c_enableDedicatedDictSearch = ZSTD_c_experimentalParam8;
+
+    /**
+     * Experimental parameter. Default is {@code 0 == disabled}. Set to 1 to enable.
+     * 
+     * <p>Tells the compressor that the {@code ZSTD_inBuffer} will ALWAYS be the same between calls, except for the modifications that zstd makes to pos (the
+     * caller must not modify pos). This is checked by the compressor, and compression will fail if it ever changes. This means the only flush mode that makes
+     * sense is {@link Zstd#ZSTD_e_end e_end}, so zstd will error if {@code ZSTD_e_end} is not used. The data in the {@code ZSTD_inBuffer} in the range {@code [src, src + pos)} MUST
+     * not be modified during compression or you will get data corruption.</p>
+     * 
+     * <p>When this flag is enabled zstd won't allocate an input window buffer, because the user guarantees it can reference the {@code ZSTD_inBuffer} until the
+     * frame is complete. But, it will still allocate an output buffer large enough to fit a block (see {@link #ZSTD_c_stableOutBuffer c_stableOutBuffer}). This will also avoid the
+     * {@code memcpy()} from the input buffer to the input window buffer.</p>
+     * 
+     * <p>NOTE: {@link Zstd#ZSTD_compressStream2 compressStream2} will error if {@code ZSTD_e_end} is not used. That means this flag cannot be used with {@code ZSTD_compressStream*()}.</p>
+     * 
+     * <p>NOTE: So long as the {@code ZSTD_inBuffer} always points to valid memory, using this flag is ALWAYS memory safe, and will never access out-of-bounds
+     * memory. However, compression WILL fail if you violate the preconditions.</p>
+     * 
+     * <p>WARNING: The data in the {@code ZSTD_inBuffer} in the range {@code [dst, dst + pos)} MUST not be modified during compression or you will get data
+     * corruption. This is because zstd needs to reference data in the {@code ZSTD_inBuffer} to find matches. Normally zstd maintains its own window buffer
+     * for this purpose, but passing this flag tells zstd to use the user provided buffer.</p>
+     */
+    public static final int ZSTD_c_stableInBuffer = ZSTD_c_experimentalParam9;
+
+    /**
+     * Experimental parameter. Default is {@code 0 == disabled}. Set to 1 to enable.
+     * 
+     * <p>Tells he compressor that the {@code ZSTD_outBuffer} will not be resized between calls. Specifically: {@code (out.size - out.pos)} will never grow. This
+     * gives the compressor the freedom to say: If the compressed data doesn't fit in the output buffer then return {@link ZstdErrors#ZSTD_error_dstSize_tooSmall error_dstSize_tooSmall}. This allows us to
+     * always decompress directly into the output buffer, instead of decompressing into an internal buffer and copying to the output buffer.</p>
+     * 
+     * <p>When this flag is enabled zstd won't allocate an output buffer, because it can write directly to the {@code ZSTD_outBuffer}. It will still allocate the
+     * input window buffer (see {@link #ZSTD_c_stableInBuffer c_stableInBuffer}).</p>
+     * 
+     * <p>Zstd will check that {@code (out.size - out.pos)} never grows and return an error if it does. While not strictly necessary, this should prevent
+     * surprises.</p>
+     */
+    public static final int ZSTD_c_stableOutBuffer = ZSTD_c_experimentalParam10;
+
+    /**
+     * Default is {@code 0 == ZSTD_sf_noBlockDelimiters}.
+     * 
+     * <p>For use with sequence compression API: {@link #ZSTD_compressSequences compressSequences}.</p>
+     * 
+     * <p>Designates whether or not the given array of {@code ZSTD_Sequence} contains block delimiters and last literals, which are defined as sequences with
+     * {@code offset == 0} and {@code matchLength == 0}. See the definition of {@code ZSTD_Sequence} for more specifics.</p>
+     */
+    public static final int ZSTD_c_blockDelimiters = ZSTD_c_experimentalParam11;
+
+    /**
+     * Default is {@code 0 == disabled}. Set to 1 to enable sequence validation.
+     * 
+     * <p>For use with sequence compression API: {@link #ZSTD_compressSequences compressSequences}. Designates whether or not we validate sequences provided to
+     * {@code ZSTD_compressSequences()} during function execution.</p>
+     * 
+     * <p>Without validation, providing a sequence that does not conform to the zstd spec will cause undefined behavior, and may produce a corrupted block.</p>
+     * 
+     * <p>With validation enabled, a if sequence is invalid (see {@code doc/zstd_compression_format.md} for specifics regarding
+     * {@code offset}/{@code matchlength} requirements) then the function will bail out and return an error.</p>
+     */
+    public static final int ZSTD_c_validateSequences = ZSTD_c_experimentalParam12;
+
+    /**
      * Experimental parameter.
      * 
      * <p>Allows selection between {@code ZSTD_format_e} input compression formats.</p>
@@ -274,6 +406,33 @@ public class ZstdX {
     public static final int ZSTD_d_stableOutBuffer = ZSTD_d_experimentalParam2;
 
     /**
+     * Experimental parameter. Default is {@code 0 == disabled}. Set to 1 to enable
+     * 
+     * <p>Tells the decompressor to skip checksum validation during decompression, regardless of whether checksumming was specified during compression. This
+     * offers some slight performance benefits, and may be useful for debugging. Param has values of type {@code ZSTD_forceIgnoreChecksum_e}.</p>
+     */
+    public static final int ZSTD_d_forceIgnoreChecksum = ZSTD_d_experimentalParam3;
+
+    /**
+     * Experimental parameter. Default is {@code 0 == disabled}. Set to 1 to enable
+     * 
+     * <p>If enabled and {@code dctx} is allocated on the heap, then additional memory will be allocated to store references to multiple {@code ZSTD_DDict}. That
+     * is, multiple calls of {@link Zstd#ZSTD_DCtx_refDDict DCtx_refDDict} using a given {@code ZSTD_DCtx}, rather than overwriting the previous {@code DDict} reference, will instead store all
+     * references. At decompression time, the appropriate {@code dictID} is selected from the set of {@code DDicts} based on the {@code dictID} in the frame.</p>
+     * 
+     * <p>Usage is simply calling {@code ZSTD_DCtx_refDDict()} on multiple dict buffers.</p>
+     * 
+     * <p>Param has values of byte {@code ZSTD_refMultipleDDicts_e}.</p>
+     * 
+     * <p>WARNING: Enabling this parameter and calling {@code ZSTD_DCtx_refDDict()}, will trigger memory allocation for the hash table. {@link Zstd#ZSTD_freeDCtx freeDCtx} also frees
+     * this memory. Memory is allocated as per {@code ZSTD_DCtx::customMem}.</p>
+     * 
+     * <p>Although this function allocates memory for the table, the user is still responsible for memory management of the underlying {@code ZSTD_DDict}
+     * themselves.</p>
+     */
+    public static final int ZSTD_d_refMultipleDDicts = ZSTD_d_experimentalParam4;
+
+    /**
      * {@code ZSTD_literalCompressionMode_e}
      * 
      * <h5>Enum values:</h5>
@@ -292,6 +451,20 @@ public class ZstdX {
         ZSTD_lcm_auto         = 0,
         ZSTD_lcm_huffman      = 1,
         ZSTD_lcm_uncompressed = 2;
+
+    /**
+     * {@code ZSTD_sequenceFormat_e}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #ZSTD_sf_noBlockDelimiters sf_noBlockDelimiters} - Representation of {@code ZSTD_Sequence} has no block delimiters, sequences only.</li>
+     * <li>{@link #ZSTD_sf_explicitBlockDelimiters sf_explicitBlockDelimiters} - Representation of {@code ZSTD_Sequence} contains explicit block delimiters.</li>
+     * </ul>
+     */
+    public static final int
+        ZSTD_sf_noBlockDelimiters       = 0,
+        ZSTD_sf_explicitBlockDelimiters = 1;
 
     protected ZstdX() {
         throw new UnsupportedOperationException();
@@ -354,7 +527,7 @@ public class ZstdX {
      *
      * @param src should point to the start of a series of ZSTD encoded and/or skippable frames
      *
-     * @return upper-bound for the decompressed size of all data in all successive frames, or {@link Zstd#ZSTD_CONTENTSIZE_ERROR CONTENTSIZE_ERROR} if an error occured
+     * @return upper-bound for the decompressed size of all data in all successive frames, or {@link Zstd#ZSTD_CONTENTSIZE_ERROR CONTENTSIZE_ERROR} if an error occurred
      */
     @NativeType("unsigned long long")
     public static long ZSTD_decompressBound(@NativeType("void const *") ByteBuffer src) {
@@ -376,24 +549,120 @@ public class ZstdX {
         return nZSTD_frameHeaderSize(memAddress(src), src.remaining());
     }
 
-    // --- [ ZSTD_getSequences ] ---
+    // --- [ ZSTD_generateSequences ] ---
 
-    /** Unsafe version of: {@link #ZSTD_getSequences getSequences} */
-    public static native long nZSTD_getSequences(long zc, long outSeqs, long outSeqsSize, long src, long srcSize);
+    /** Unsafe version of: {@link #ZSTD_generateSequences generateSequences} */
+    public static native long nZSTD_generateSequences(long zc, long outSeqs, long outSeqsSize, long src, long srcSize);
 
     /**
-     * Extract sequences from the sequence store {@code zc} can be used to insert custom compression params.
+     * Generate sequences using {@link Zstd#ZSTD_compress2 compress2}, given a source buffer.
      * 
-     * <p>This function invokes {@link Zstd#ZSTD_compress2 compress2}.</p>
+     * <p>Each block will end with a dummy sequence with {@code offset == 0}, {@code matchLength == 0}, and {@code litLength == length} of last literals.
+     * {@code litLength} may be {@code == 0}, and if so, then the sequence of {@code (of: 0 ml: 0 ll: 0)} simply acts as a block delimiter.</p>
+     * 
+     * <p>{@code zc} can be used to insert custom compression params. This function invokes {@link Zstd#ZSTD_compress2 compress2}</p>
+     * 
+     * <p>The output of this function can be fed into {@link #ZSTD_compressSequences compressSequences} with {@code CCtx} setting of {@link #ZSTD_c_blockDelimiters c_blockDelimiters} as {@link #ZSTD_sf_explicitBlockDelimiters sf_explicitBlockDelimiters}.</p>
      *
-     * @return number of sequences extracted
+     * @return number of sequences generated
      */
     @NativeType("size_t")
-    public static long ZSTD_getSequences(@NativeType("ZSTD_CCtx *") long zc, @NativeType("ZSTD_Sequence *") ZSTDSequence.Buffer outSeqs, @NativeType("void const *") ByteBuffer src) {
+    public static long ZSTD_generateSequences(@NativeType("ZSTD_CCtx *") long zc, @NativeType("ZSTD_Sequence *") ZSTDSequence.Buffer outSeqs, @NativeType("void const *") ByteBuffer src) {
         if (CHECKS) {
             check(zc);
         }
-        return nZSTD_getSequences(zc, outSeqs.address(), outSeqs.remaining(), memAddress(src), src.remaining());
+        return nZSTD_generateSequences(zc, outSeqs.address(), outSeqs.remaining(), memAddress(src), src.remaining());
+    }
+
+    // --- [ ZSTD_mergeBlockDelimiters ] ---
+
+    /** Unsafe version of: {@link #ZSTD_mergeBlockDelimiters mergeBlockDelimiters} */
+    public static native long nZSTD_mergeBlockDelimiters(long sequences, long seqsSize);
+
+    /**
+     * Given an array of {@code ZSTD_Sequence}, remove all sequences that represent block delimiters/last literals by merging them into into the literals of
+     * the next sequence.
+     * 
+     * <p>As such, the final generated result has no explicit representation of block boundaries, and the final last literals segment is not represented in the
+     * sequences.</p>
+     * 
+     * <p>The output of this function can be fed into {@link #ZSTD_compressSequences compressSequences} with {@code CCtx} setting of {@link #ZSTD_c_blockDelimiters c_blockDelimiters} as {@link #ZSTD_sf_noBlockDelimiters sf_noBlockDelimiters}.</p>
+     *
+     * @return number of sequences left after merging
+     */
+    @NativeType("size_t")
+    public static long ZSTD_mergeBlockDelimiters(@NativeType("ZSTD_Sequence *") ZSTDSequence.Buffer sequences) {
+        return nZSTD_mergeBlockDelimiters(sequences.address(), sequences.remaining());
+    }
+
+    // --- [ ZSTD_compressSequences ] ---
+
+    /** Unsafe version of: {@link #ZSTD_compressSequences compressSequences} */
+    public static native long nZSTD_compressSequences(long cctx, long dst, long dstSize, long inSeqs, long inSeqsSize, long src, long srcSize);
+
+    /**
+     * Compress an array of {@code ZSTD_Sequence}, generated from the original source buffer, into {@code dst}.
+     * 
+     * <p>If a dictionary is included, then the {@code cctx} should reference the {@code dict}. (see: {@link Zstd#ZSTD_CCtx_refCDict CCtx_refCDict}, {@link Zstd#ZSTD_CCtx_loadDictionary CCtx_loadDictionary}, etc.) The entire
+     * source is compressed into a single frame.</p>
+     * 
+     * <p>The compression behavior changes based on {@code cctx} params. In particular:</p>
+     * 
+     * <ul>
+     * <li>If {@code ZSTD_c_blockDelimiters == ZSTD_sf_noBlockDelimiters}, the array of {@code ZSTD_Sequence} is expected to contain no block delimiters
+     * (defined in {@code ZSTD_Sequence}). Block boundaries are roughly determined based on the block size derived from the {@code cctx}, and sequences
+     * may be split. This is the default setting.</li>
+     * <li>If {@code ZSTD_c_blockDelimiters == ZSTD_sf_explicitBlockDelimiters}, the array of {@code ZSTD_Sequence} is expected to contain block delimiters
+     * (defined in {@code ZSTD_Sequence}). Behavior is undefined if no block delimiters are provided.</li>
+     * <li>If {@code ZSTD_c_validateSequences == 0}, this function will blindly accept the sequences provided. Invalid sequences cause undefined behavior. If
+     * {@code ZSTD_c_validateSequences == 1}, then if sequence is invalid (see {@code doc/zstd_compression_format.md} for specifics regarding
+     * offset/matchlength requirements) then the function will bail out and return an error.</li>
+     * </ul>
+     * 
+     * <p>In addition to the two adjustable experimental params, there are other important cctx params.</p>
+     * 
+     * <ul>
+     * <li>{@link Zstd#ZSTD_c_minMatch c_minMatch} MUST be set as less than or equal to the smallest match generated by the match finder. It has a minimum value of {@link #ZSTD_MINMATCH_MIN MINMATCH_MIN}.</li>
+     * <li>{@link Zstd#ZSTD_c_compressionLevel c_compressionLevel} accordingly adjusts the strength of the entropy coder, as it would in typical compression.</li>
+     * <li>{@link Zstd#ZSTD_c_windowLog c_windowLog} affects offset validation: this function will return an error at higher debug levels if a provided offset is larger than what the spec
+     * allows for a given window log and dictionary (if present). See: {@code doc/zstd_compression_format.md}</li>
+     * </ul>
+     * 
+     * <p>Note: Repcodes are, as of now, always re-calculated within this function, so {@code ZSTD_Sequence::rep} is unused.</p>
+     * 
+     * <p>Note 2: Once we integrate ability to ingest repcodes, the explicit block delims mode must respect those repcodes exactly, and cannot emit an RLE block
+     * that disagrees with the {@code repcode} history.</p>
+     *
+     * @return final compressed size or a ZSTD error.
+     */
+    @NativeType("size_t")
+    public static long ZSTD_compressSequences(@NativeType("ZSTD_CCtx * const") long cctx, @NativeType("void *") ByteBuffer dst, @NativeType("ZSTD_Sequence const *") ZSTDSequence.Buffer inSeqs, @NativeType("void const *") ByteBuffer src) {
+        if (CHECKS) {
+            check(cctx);
+        }
+        return nZSTD_compressSequences(cctx, memAddress(dst), dst.remaining(), inSeqs.address(), inSeqs.remaining(), memAddress(src), src.remaining());
+    }
+
+    // --- [ ZSTD_writeSkippableFrame ] ---
+
+    /** Unsafe version of: {@link #ZSTD_writeSkippableFrame writeSkippableFrame} */
+    public static native long nZSTD_writeSkippableFrame(long dst, long dstCapacity, long src, long srcSize, int magicVariant);
+
+    /**
+     * Generates a zstd skippable frame containing data given by {@code src}, and writes it to {@code dst} buffer.
+     * 
+     * <p>Skippable frames begin with a a 4-byte magic number. There are 16 possible choices of magic number, ranging from {@link Zstd#ZSTD_MAGIC_SKIPPABLE_START MAGIC_SKIPPABLE_START} to
+     * {@code ZSTD_MAGIC_SKIPPABLE_START+15}. As such, the parameter {@code magicVariant} controls the exact skippable frame magic number variant used, so the
+     * magic number used will be {@code ZSTD_MAGIC_SKIPPABLE_START + magicVariant}.</p>
+     * 
+     * <p>Returns an error if destination buffer is not large enough, if the source size is not representable with a 4-byte unsigned int, or if the parameter
+     * {@code magicVariant} is greater than 15 (and therefore invalid).</p>
+     *
+     * @return number of bytes written or a ZSTD error
+     */
+    @NativeType("size_t")
+    public static long ZSTD_writeSkippableFrame(@NativeType("void *") ByteBuffer dst, @NativeType("void const *") ByteBuffer src, @NativeType("unsigned") int magicVariant) {
+        return nZSTD_writeSkippableFrame(memAddress(dst), dst.remaining(), memAddress(src), src.remaining(), magicVariant);
     }
 
     // --- [ ZSTD_estimateCCtxSize ] ---
@@ -652,6 +921,61 @@ public class ZstdX {
         return nZSTD_createCDict_advanced(memAddress(dict), dict.remaining(), dictLoadMethod, dictContentType, cParams.address(), customMem.address());
     }
 
+    // --- [ ZSTD_createThreadPool ] ---
+
+    /**
+     * Creates a new thread pool with a given number of threads.
+     * 
+     * <p>Note that the lifetime of such pool must exist while being used.</p>
+     */
+    @NativeType("ZSTD_threadPool *")
+    public static native long ZSTD_createThreadPool(@NativeType("size_t") long numThreads);
+
+    // --- [ ZSTD_freeThreadPool ] ---
+
+    /** Unsafe version of: {@link #ZSTD_freeThreadPool freeThreadPool} */
+    public static native void nZSTD_freeThreadPool(long pool);
+
+    /** Frees a thread pool. */
+    public static void ZSTD_freeThreadPool(@NativeType("ZSTD_threadPool *") long pool) {
+        if (CHECKS) {
+            check(pool);
+        }
+        nZSTD_freeThreadPool(pool);
+    }
+
+    // --- [ ZSTD_CCtx_refThreadPool ] ---
+
+    /** Unsafe version of: {@link #ZSTD_CCtx_refThreadPool CCtx_refThreadPool} */
+    public static native long nZSTD_CCtx_refThreadPool(long cctx, long pool);
+
+    /** Assigns a thread pool to a context (use {@code NULL} argument value to use an internal thread pool). */
+    @NativeType("size_t")
+    public static long ZSTD_CCtx_refThreadPool(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("ZSTD_threadPool *") long pool) {
+        if (CHECKS) {
+            check(cctx);
+        }
+        return nZSTD_CCtx_refThreadPool(cctx, pool);
+    }
+
+    // --- [ ZSTD_createCDict_advanced2 ] ---
+
+    /** Unsafe version of: {@link #ZSTD_createCDict_advanced2 createCDict_advanced2} */
+    public static native long nZSTD_createCDict_advanced2(long dict, long dictSize, int dictLoadMethod, int dictContentType, long cctxParams, long customMem);
+
+    /**
+     * @param dictLoadMethod  one of:<br><table><tr><td>{@link #ZSTD_dlm_byCopy dlm_byCopy}</td><td>{@link #ZSTD_dlm_byRef dlm_byRef}</td></tr></table>
+     * @param dictContentType one of:<br><table><tr><td>{@link #ZSTD_dct_auto dct_auto}</td><td>{@link #ZSTD_dct_rawContent dct_rawContent}</td><td>{@link #ZSTD_dct_fullDict dct_fullDict}</td></tr></table>
+     */
+    @NativeType("ZSTD_CDict *")
+    public static long ZSTD_createCDict_advanced2(@NativeType("void const *") ByteBuffer dict, @NativeType("ZSTD_dictLoadMethod_e") int dictLoadMethod, @NativeType("ZSTD_dictContentType_e") int dictContentType, @NativeType("ZSTD_CCtx_params const *") long cctxParams, @NativeType("ZSTD_customMem") ZSTDCustomMem customMem) {
+        if (CHECKS) {
+            check(cctxParams);
+            ZSTDCustomMem.validate(customMem.address());
+        }
+        return nZSTD_createCDict_advanced2(memAddress(dict), dict.remaining(), dictLoadMethod, dictContentType, cctxParams, customMem.address());
+    }
+
     // --- [ ZSTD_createDDict_advanced ] ---
 
     /** Unsafe version of: {@link #ZSTD_createDDict_advanced createDDict_advanced} */
@@ -685,6 +1009,25 @@ public class ZstdX {
     @NativeType("ZSTD_CDict *")
     public static long ZSTD_createCDict_byReference(@NativeType("void const *") ByteBuffer dictBuffer, int compressionLevel) {
         return nZSTD_createCDict_byReference(memAddress(dictBuffer), dictBuffer.remaining(), compressionLevel);
+    }
+
+    // --- [ ZSTD_getDictID_fromCDict ] ---
+
+    /** Unsafe version of: {@link #ZSTD_getDictID_fromCDict getDictID_fromCDict} */
+    public static native int nZSTD_getDictID_fromCDict(long cdict);
+
+    /**
+     * Provides the {@code dictID} of the dictionary loaded into {@code cdict}.
+     * 
+     * <p>If {@code @return == 0}, the dictionary is not conformant to Zstandard specification, or empty. Non-conformant dictionaries can still be loaded, but as
+     * content-only dictionaries.</p>
+     */
+    @NativeType("unsigned")
+    public static int ZSTD_getDictID_fromCDict(@NativeType("ZSTD_CDict const *") long cdict) {
+        if (CHECKS) {
+            check(cdict);
+        }
+        return nZSTD_getDictID_fromCDict(cdict);
     }
 
     // --- [ ZSTD_getCParams ] ---
@@ -812,12 +1155,12 @@ public class ZstdX {
     /**
      * Gets the requested compression parameter value, selected by {@code enum ZSTD_cParameter}, and stores it into {@code int* value}.
      *
-     * @param param one of:<br><table><tr><td>{@link Zstd#ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link Zstd#ZSTD_c_windowLog c_windowLog}</td><td>{@link Zstd#ZSTD_c_hashLog c_hashLog}</td><td>{@link Zstd#ZSTD_c_chainLog c_chainLog}</td><td>{@link Zstd#ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link Zstd#ZSTD_c_minMatch c_minMatch}</td><td>{@link Zstd#ZSTD_c_targetLength c_targetLength}</td><td>{@link Zstd#ZSTD_c_strategy c_strategy}</td><td>{@link Zstd#ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link Zstd#ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link Zstd#ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link Zstd#ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link Zstd#ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link Zstd#ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link Zstd#ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link Zstd#ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link Zstd#ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link Zstd#ZSTD_c_jobSize c_jobSize}</td><td>{@link Zstd#ZSTD_c_overlapLog c_overlapLog}</td><td>{@link Zstd#ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link Zstd#ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link Zstd#ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link Zstd#ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link Zstd#ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link #ZSTD_c_rsyncable c_rsyncable}</td><td>{@link #ZSTD_c_format c_format}</td><td>{@link #ZSTD_c_forceMaxWindow c_forceMaxWindow}</td><td>{@link #ZSTD_c_forceAttachDict c_forceAttachDict}</td></tr><tr><td>{@link #ZSTD_c_literalCompressionMode c_literalCompressionMode}</td><td>{@link #ZSTD_c_targetCBlockSize c_targetCBlockSize}</td><td>{@link #ZSTD_c_srcSizeHint c_srcSizeHint}</td></tr></table>
+     * @param param one of:<br><table><tr><td>{@link Zstd#ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link Zstd#ZSTD_c_windowLog c_windowLog}</td><td>{@link Zstd#ZSTD_c_hashLog c_hashLog}</td><td>{@link Zstd#ZSTD_c_chainLog c_chainLog}</td><td>{@link Zstd#ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link Zstd#ZSTD_c_minMatch c_minMatch}</td><td>{@link Zstd#ZSTD_c_targetLength c_targetLength}</td><td>{@link Zstd#ZSTD_c_strategy c_strategy}</td><td>{@link Zstd#ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link Zstd#ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link Zstd#ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link Zstd#ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link Zstd#ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link Zstd#ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link Zstd#ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link Zstd#ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link Zstd#ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link Zstd#ZSTD_c_jobSize c_jobSize}</td><td>{@link Zstd#ZSTD_c_overlapLog c_overlapLog}</td><td>{@link Zstd#ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link Zstd#ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link Zstd#ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link Zstd#ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link Zstd#ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link Zstd#ZSTD_c_experimentalParam8 c_experimentalParam8}</td><td>{@link Zstd#ZSTD_c_experimentalParam9 c_experimentalParam9}</td><td>{@link Zstd#ZSTD_c_experimentalParam10 c_experimentalParam10}</td><td>{@link Zstd#ZSTD_c_experimentalParam11 c_experimentalParam11}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam12 c_experimentalParam12}</td><td>{@link #ZSTD_c_rsyncable c_rsyncable}</td><td>{@link #ZSTD_c_format c_format}</td><td>{@link #ZSTD_c_forceMaxWindow c_forceMaxWindow}</td><td>{@link #ZSTD_c_forceAttachDict c_forceAttachDict}</td></tr><tr><td>{@link #ZSTD_c_literalCompressionMode c_literalCompressionMode}</td><td>{@link #ZSTD_c_targetCBlockSize c_targetCBlockSize}</td><td>{@link #ZSTD_c_srcSizeHint c_srcSizeHint}</td><td>{@link #ZSTD_c_enableDedicatedDictSearch c_enableDedicatedDictSearch}</td><td>{@link #ZSTD_c_stableInBuffer c_stableInBuffer}</td></tr><tr><td>{@link #ZSTD_c_stableOutBuffer c_stableOutBuffer}</td><td>{@link #ZSTD_c_blockDelimiters c_blockDelimiters}</td><td>{@link #ZSTD_c_validateSequences c_validateSequences}</td></tr></table>
      *
      * @return 0, or an error code (which can be tested with {@link Zstd#ZSTD_isError isError})
      */
     @NativeType("size_t")
-    public static long ZSTD_CCtx_getParameter(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("ZSTD_cParameter") int param, @NativeType("int *") IntBuffer value) {
+    public static long ZSTD_CCtx_getParameter(@NativeType("ZSTD_CCtx const *") long cctx, @NativeType("ZSTD_cParameter") int param, @NativeType("int *") IntBuffer value) {
         if (CHECKS) {
             check(cctx);
             check(value, 1);
@@ -895,9 +1238,9 @@ public class ZstdX {
      * 
      * <p>Parameters must be applied to a {@code ZSTD_CCtx} using {@link #ZSTD_CCtx_setParametersUsingCCtxParams CCtx_setParametersUsingCCtxParams}.</p>
      *
-     * @param param one of:<br><table><tr><td>{@link Zstd#ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link Zstd#ZSTD_c_windowLog c_windowLog}</td><td>{@link Zstd#ZSTD_c_hashLog c_hashLog}</td><td>{@link Zstd#ZSTD_c_chainLog c_chainLog}</td><td>{@link Zstd#ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link Zstd#ZSTD_c_minMatch c_minMatch}</td><td>{@link Zstd#ZSTD_c_targetLength c_targetLength}</td><td>{@link Zstd#ZSTD_c_strategy c_strategy}</td><td>{@link Zstd#ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link Zstd#ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link Zstd#ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link Zstd#ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link Zstd#ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link Zstd#ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link Zstd#ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link Zstd#ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link Zstd#ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link Zstd#ZSTD_c_jobSize c_jobSize}</td><td>{@link Zstd#ZSTD_c_overlapLog c_overlapLog}</td><td>{@link Zstd#ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link Zstd#ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link Zstd#ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link Zstd#ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link Zstd#ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link #ZSTD_c_rsyncable c_rsyncable}</td><td>{@link #ZSTD_c_format c_format}</td><td>{@link #ZSTD_c_forceMaxWindow c_forceMaxWindow}</td><td>{@link #ZSTD_c_forceAttachDict c_forceAttachDict}</td></tr><tr><td>{@link #ZSTD_c_literalCompressionMode c_literalCompressionMode}</td><td>{@link #ZSTD_c_targetCBlockSize c_targetCBlockSize}</td><td>{@link #ZSTD_c_srcSizeHint c_srcSizeHint}</td></tr></table>
+     * @param param one of:<br><table><tr><td>{@link Zstd#ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link Zstd#ZSTD_c_windowLog c_windowLog}</td><td>{@link Zstd#ZSTD_c_hashLog c_hashLog}</td><td>{@link Zstd#ZSTD_c_chainLog c_chainLog}</td><td>{@link Zstd#ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link Zstd#ZSTD_c_minMatch c_minMatch}</td><td>{@link Zstd#ZSTD_c_targetLength c_targetLength}</td><td>{@link Zstd#ZSTD_c_strategy c_strategy}</td><td>{@link Zstd#ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link Zstd#ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link Zstd#ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link Zstd#ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link Zstd#ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link Zstd#ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link Zstd#ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link Zstd#ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link Zstd#ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link Zstd#ZSTD_c_jobSize c_jobSize}</td><td>{@link Zstd#ZSTD_c_overlapLog c_overlapLog}</td><td>{@link Zstd#ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link Zstd#ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link Zstd#ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link Zstd#ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link Zstd#ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link Zstd#ZSTD_c_experimentalParam8 c_experimentalParam8}</td><td>{@link Zstd#ZSTD_c_experimentalParam9 c_experimentalParam9}</td><td>{@link Zstd#ZSTD_c_experimentalParam10 c_experimentalParam10}</td><td>{@link Zstd#ZSTD_c_experimentalParam11 c_experimentalParam11}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam12 c_experimentalParam12}</td><td>{@link #ZSTD_c_rsyncable c_rsyncable}</td><td>{@link #ZSTD_c_format c_format}</td><td>{@link #ZSTD_c_forceMaxWindow c_forceMaxWindow}</td><td>{@link #ZSTD_c_forceAttachDict c_forceAttachDict}</td></tr><tr><td>{@link #ZSTD_c_literalCompressionMode c_literalCompressionMode}</td><td>{@link #ZSTD_c_targetCBlockSize c_targetCBlockSize}</td><td>{@link #ZSTD_c_srcSizeHint c_srcSizeHint}</td><td>{@link #ZSTD_c_enableDedicatedDictSearch c_enableDedicatedDictSearch}</td><td>{@link #ZSTD_c_stableInBuffer c_stableInBuffer}</td></tr><tr><td>{@link #ZSTD_c_stableOutBuffer c_stableOutBuffer}</td><td>{@link #ZSTD_c_blockDelimiters c_blockDelimiters}</td><td>{@link #ZSTD_c_validateSequences c_validateSequences}</td></tr></table>
      *
-     * @return 0, or an error code (which can be tested with {@link Zstd#ZSTD_isError isError})
+     * @return a code representing success or failure (which can be tested with {@link Zstd#ZSTD_isError isError})
      */
     @NativeType("size_t")
     public static long ZSTD_CCtxParams_setParameter(@NativeType("ZSTD_CCtx_params *") long params, @NativeType("ZSTD_cParameter") int param, int value) {
@@ -915,12 +1258,12 @@ public class ZstdX {
     /**
      * Similar to {@link #ZSTD_CCtx_getParameter CCtx_getParameter}. Gets the requested value of one compression parameter, selected by {@code enum ZSTD_cParameter}.
      *
-     * @param param one of:<br><table><tr><td>{@link Zstd#ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link Zstd#ZSTD_c_windowLog c_windowLog}</td><td>{@link Zstd#ZSTD_c_hashLog c_hashLog}</td><td>{@link Zstd#ZSTD_c_chainLog c_chainLog}</td><td>{@link Zstd#ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link Zstd#ZSTD_c_minMatch c_minMatch}</td><td>{@link Zstd#ZSTD_c_targetLength c_targetLength}</td><td>{@link Zstd#ZSTD_c_strategy c_strategy}</td><td>{@link Zstd#ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link Zstd#ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link Zstd#ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link Zstd#ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link Zstd#ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link Zstd#ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link Zstd#ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link Zstd#ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link Zstd#ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link Zstd#ZSTD_c_jobSize c_jobSize}</td><td>{@link Zstd#ZSTD_c_overlapLog c_overlapLog}</td><td>{@link Zstd#ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link Zstd#ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link Zstd#ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link Zstd#ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link Zstd#ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link #ZSTD_c_rsyncable c_rsyncable}</td><td>{@link #ZSTD_c_format c_format}</td><td>{@link #ZSTD_c_forceMaxWindow c_forceMaxWindow}</td><td>{@link #ZSTD_c_forceAttachDict c_forceAttachDict}</td></tr><tr><td>{@link #ZSTD_c_literalCompressionMode c_literalCompressionMode}</td><td>{@link #ZSTD_c_targetCBlockSize c_targetCBlockSize}</td><td>{@link #ZSTD_c_srcSizeHint c_srcSizeHint}</td></tr></table>
+     * @param param one of:<br><table><tr><td>{@link Zstd#ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link Zstd#ZSTD_c_windowLog c_windowLog}</td><td>{@link Zstd#ZSTD_c_hashLog c_hashLog}</td><td>{@link Zstd#ZSTD_c_chainLog c_chainLog}</td><td>{@link Zstd#ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link Zstd#ZSTD_c_minMatch c_minMatch}</td><td>{@link Zstd#ZSTD_c_targetLength c_targetLength}</td><td>{@link Zstd#ZSTD_c_strategy c_strategy}</td><td>{@link Zstd#ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link Zstd#ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link Zstd#ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link Zstd#ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link Zstd#ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link Zstd#ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link Zstd#ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link Zstd#ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link Zstd#ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link Zstd#ZSTD_c_jobSize c_jobSize}</td><td>{@link Zstd#ZSTD_c_overlapLog c_overlapLog}</td><td>{@link Zstd#ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link Zstd#ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link Zstd#ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link Zstd#ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link Zstd#ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link Zstd#ZSTD_c_experimentalParam8 c_experimentalParam8}</td><td>{@link Zstd#ZSTD_c_experimentalParam9 c_experimentalParam9}</td><td>{@link Zstd#ZSTD_c_experimentalParam10 c_experimentalParam10}</td><td>{@link Zstd#ZSTD_c_experimentalParam11 c_experimentalParam11}</td></tr><tr><td>{@link Zstd#ZSTD_c_experimentalParam12 c_experimentalParam12}</td><td>{@link #ZSTD_c_rsyncable c_rsyncable}</td><td>{@link #ZSTD_c_format c_format}</td><td>{@link #ZSTD_c_forceMaxWindow c_forceMaxWindow}</td><td>{@link #ZSTD_c_forceAttachDict c_forceAttachDict}</td></tr><tr><td>{@link #ZSTD_c_literalCompressionMode c_literalCompressionMode}</td><td>{@link #ZSTD_c_targetCBlockSize c_targetCBlockSize}</td><td>{@link #ZSTD_c_srcSizeHint c_srcSizeHint}</td><td>{@link #ZSTD_c_enableDedicatedDictSearch c_enableDedicatedDictSearch}</td><td>{@link #ZSTD_c_stableInBuffer c_stableInBuffer}</td></tr><tr><td>{@link #ZSTD_c_stableOutBuffer c_stableOutBuffer}</td><td>{@link #ZSTD_c_blockDelimiters c_blockDelimiters}</td><td>{@link #ZSTD_c_validateSequences c_validateSequences}</td></tr></table>
      *
      * @return 0, or an error code (which can be tested with {@link Zstd#ZSTD_isError isError})
      */
     @NativeType("size_t")
-    public static long ZSTD_CCtxParams_getParameter(@NativeType("ZSTD_CCtx_params *") long params, @NativeType("ZSTD_cParameter") int param, @NativeType("int *") IntBuffer value) {
+    public static long ZSTD_CCtxParams_getParameter(@NativeType("ZSTD_CCtx_params const *") long params, @NativeType("ZSTD_cParameter") int param, @NativeType("int *") IntBuffer value) {
         if (CHECKS) {
             check(params);
             check(value, 1);
@@ -1085,6 +1428,25 @@ public class ZstdX {
             check(dctx);
         }
         return nZSTD_DCtx_setMaxWindowSize(dctx, maxWindowSize);
+    }
+
+    // --- [ ZSTD_DCtx_getParameter ] ---
+
+    /** Unsafe version of: {@link #ZSTD_DCtx_getParameter DCtx_getParameter} */
+    public static native long nZSTD_DCtx_getParameter(long dctx, int param, long value);
+
+    /**
+     * Gets the requested decompression parameter value, selected by enum {@code ZSTD_dParameter}, and store it into {@code int*} value.
+     *
+     * @return 0, or an error code (which can be tested with {@link Zstd#ZSTD_isError isError})
+     */
+    @NativeType("size_t")
+    public static long ZSTD_DCtx_getParameter(@NativeType("ZSTD_DCtx *") long dctx, @NativeType("ZSTD_dParameter") int param, @NativeType("int *") IntBuffer value) {
+        if (CHECKS) {
+            check(dctx);
+            check(value, 1);
+        }
+        return nZSTD_DCtx_getParameter(dctx, param, memAddress(value));
     }
 
     // --- [ ZSTD_DCtx_setFormat ] ---
