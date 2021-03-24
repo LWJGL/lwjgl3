@@ -380,11 +380,10 @@
 
         <!-- rpmalloc: requires GCC 4.9 or higher -->
         <local name="rpmalloc.gcc"/>
-        <condition property="rpmalloc.gcc" value="${gcc.prefix}gcc-4.9">
+        <condition property="rpmalloc.gcc" value="${gcc.prefix}gcc-4.9" else="${gcc.prefix}gcc${gcc.suffix}">
             <matches string="${gcc.version}" pattern="[1-3]\.\d|4\.[0-8]"/>
         </condition>
-        <build_simple module="rpmalloc" unless:set="rpmalloc.gcc"/>
-        <build_simple module="rpmalloc" gcc.exec="${rpmalloc.gcc}" if:set="rpmalloc.gcc"/>
+        <build_simple module="rpmalloc" gcc.exec="${rpmalloc.gcc}"/>
 
         <!-- SSE -->
         <build module="sse" simple="true" if:true="${binding.sse}">
@@ -463,8 +462,16 @@
             </source>
         </build>
 
-        <!-- xxHash -->
-        <build module="xxhash" if:true="${binding.xxhash}">
+        <!-- xxHash: build with GCC 4.9 or higher for AVX-512 dispatching -->
+        <local name="xxhash.gcc"/>
+        <condition property="xxhash.gcc" value="${gcc.prefix}gcc-4.9" else="${gcc.prefix}gcc${gcc.suffix}">
+            <matches string="${gcc.version}" pattern="[1-3]\.\d|4\.[0-8]"/>
+        </condition>
+        <local name="xxhash.flags"/>
+        <condition property="xxhash.flags" value="" else="-mavx512f">
+            <isset property="build.arch.arm"/>
+        </condition>
+        <build module="xxhash" flags="-Werror -Wfatal-errors ${xxhash.flags}" gcc.exec="${xxhash.gcc}" if:true="${binding.xxhash}">
             <source>
                 <arg value="-I${src.main.rel}"/>
                 <fileset dir="." includes="${src.generated}/*.c"/>
