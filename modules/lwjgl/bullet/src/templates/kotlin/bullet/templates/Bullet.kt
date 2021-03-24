@@ -625,14 +625,14 @@ val PhysicsClient = "PhysicsClient".nativeClass(Module.BULLET, prefixConstant = 
 
     b3SharedMemoryStatusHandle(
         "ProcessServerStatus",
-        "Νon-blocking check status.",
+        "Non-blocking check status.",
 
         b3PhysicsClientHandle("physClient", "")
     )
 
     int(
         "GetStatusType",
-        "Getσ the physics server return status type.",
+        "Get the physics server return status type.",
 
         b3SharedMemoryStatusHandle("statusHandle", "")
     )

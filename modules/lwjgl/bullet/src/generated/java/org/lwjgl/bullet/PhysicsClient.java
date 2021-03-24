@@ -1165,7 +1165,7 @@ public class PhysicsClient {
     /** Unsafe version of: {@link #b3ProcessServerStatus ProcessServerStatus} */
     public static native long nb3ProcessServerStatus(long physClient);
 
-    /** Νon-blocking check status. */
+    /** Non-blocking check status. */
     @NativeType("b3SharedMemoryStatusHandle")
     public static long b3ProcessServerStatus(@NativeType("b3PhysicsClientHandle") long physClient) {
         if (CHECKS) {
@@ -1179,7 +1179,7 @@ public class PhysicsClient {
     /** Unsafe version of: {@link #b3GetStatusType GetStatusType} */
     public static native int nb3GetStatusType(long statusHandle);
 
-    /** Getσ the physics server return status type. */
+    /** Get the physics server return status type. */
     public static int b3GetStatusType(@NativeType("b3SharedMemoryStatusHandle") long statusHandle) {
         if (CHECKS) {
             check(statusHandle);
