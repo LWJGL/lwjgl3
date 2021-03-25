@@ -11,6 +11,7 @@ import javax.annotation.*;
 import java.lang.reflect.*;
 import java.util.concurrent.*;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -45,6 +46,8 @@ public abstract class Callback implements Pointer, NativeResource {
             }
 
             if (code.get(0) == closure.address()) {
+                apiLog("Closure Registry: simple");
+
                 // When the closure address matches the executable address, we don't have to maintain any mappings.
                 // We can simply cast the executable address to ffi_closure. This is true on many platforms.
                 CLOSURE_REGISTRY = new ClosureRegistry() {
@@ -62,6 +65,8 @@ public abstract class Callback implements Pointer, NativeResource {
                     }
                 };
             } else {
+                apiLog("Closure Registry: ConcurrentHashMap");
+
                 CLOSURE_REGISTRY = new ClosureRegistry() {
                     private final ConcurrentHashMap<Long, FFIClosure> map = new ConcurrentHashMap<>();
 
@@ -153,10 +158,10 @@ public abstract class Callback implements Pointer, NativeResource {
             if (closure == null) {
                 throw new OutOfMemoryError();
             }
-            if (DEBUG_ALLOCATOR) {
-                MemoryManage.DebugAllocator.track(closure.address(), FFIClosure.SIZEOF);
-            }
             executableAddress = code.get(0);
+            if (DEBUG_ALLOCATOR) {
+                MemoryManage.DebugAllocator.track(executableAddress, FFIClosure.SIZEOF);
+            }
         }
 
         long user_data = NewGlobalRef(instance);
