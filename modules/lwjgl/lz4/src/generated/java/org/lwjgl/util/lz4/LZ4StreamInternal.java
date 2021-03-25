@@ -21,13 +21,12 @@ import static org.lwjgl.util.lz4.LZ4.LZ4_HASH_SIZE_U32;
  * 
  * <pre><code>
  * struct LZ4_stream_t_internal {
- *     uint32_t hashTable[LZ4_HASH_SIZE_U32];
- *     uint32_t currentOffset;
- *     uint16_t dirty;
- *     uint16_t tableType;
- *     uint8_t const * dictionary;
+ *     LZ4_u32 hashTable[LZ4_HASH_SIZE_U32];
+ *     LZ4_u32 currentOffset;
+ *     LZ4_u32 tableType;
+ *     LZ4_byte const * dictionary;
  *     {@link LZ4StreamInternal LZ4_stream_t_internal} * const dictCtx;
- *     uint32_t dictSize;
+ *     LZ4_u32 dictSize;
  * }</code></pre>
  */
 @NativeType("struct LZ4_stream_t_internal")
@@ -43,7 +42,6 @@ public class LZ4StreamInternal extends Struct {
     public static final int
         HASHTABLE,
         CURRENTOFFSET,
-        DIRTY,
         TABLETYPE,
         DICTIONARY,
         DICTCTX,
@@ -53,8 +51,7 @@ public class LZ4StreamInternal extends Struct {
         Layout layout = __struct(
             __array(4, LZ4_HASH_SIZE_U32),
             __member(4),
-            __member(2),
-            __member(2),
+            __member(4),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(4)
@@ -65,11 +62,10 @@ public class LZ4StreamInternal extends Struct {
 
         HASHTABLE = layout.offsetof(0);
         CURRENTOFFSET = layout.offsetof(1);
-        DIRTY = layout.offsetof(2);
-        TABLETYPE = layout.offsetof(3);
-        DICTIONARY = layout.offsetof(4);
-        DICTCTX = layout.offsetof(5);
-        DICTSIZE = layout.offsetof(6);
+        TABLETYPE = layout.offsetof(2);
+        DICTIONARY = layout.offsetof(3);
+        DICTCTX = layout.offsetof(4);
+        DICTSIZE = layout.offsetof(5);
     }
 
     /**
@@ -86,32 +82,29 @@ public class LZ4StreamInternal extends Struct {
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link IntBuffer} view of the {@code hashTable} field. */
-    @NativeType("uint32_t[LZ4_HASH_SIZE_U32]")
+    @NativeType("LZ4_u32[LZ4_HASH_SIZE_U32]")
     public IntBuffer hashTable() { return nhashTable(address()); }
     /** @return the value at the specified index of the {@code hashTable} field. */
-    @NativeType("uint32_t")
+    @NativeType("LZ4_u32")
     public int hashTable(int index) { return nhashTable(address(), index); }
     /** @return the value of the {@code currentOffset} field. */
-    @NativeType("uint32_t")
+    @NativeType("LZ4_u32")
     public int currentOffset() { return ncurrentOffset(address()); }
-    /** @return the value of the {@code dirty} field. */
-    @NativeType("uint16_t")
-    public short dirty() { return ndirty(address()); }
     /** @return the value of the {@code tableType} field. */
-    @NativeType("uint16_t")
-    public short tableType() { return ntableType(address()); }
+    @NativeType("LZ4_u32")
+    public int tableType() { return ntableType(address()); }
     /**
      * @return a {@link ByteBuffer} view of the data pointed to by the {@code dictionary} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @NativeType("uint8_t const *")
+    @NativeType("LZ4_byte const *")
     public ByteBuffer dictionary(int capacity) { return ndictionary(address(), capacity); }
     /** @return a {@link LZ4StreamInternal} view of the struct pointed to by the {@code dictCtx} field. */
     @NativeType("LZ4_stream_t_internal * const")
     public LZ4StreamInternal dictCtx() { return ndictCtx(address()); }
     /** @return the value of the {@code dictSize} field. */
-    @NativeType("uint32_t")
+    @NativeType("LZ4_u32")
     public int dictSize() { return ndictSize(address()); }
 
     // -----------------------------------
@@ -153,10 +146,8 @@ public class LZ4StreamInternal extends Struct {
     }
     /** Unsafe version of {@link #currentOffset}. */
     public static int ncurrentOffset(long struct) { return UNSAFE.getInt(null, struct + LZ4StreamInternal.CURRENTOFFSET); }
-    /** Unsafe version of {@link #dirty}. */
-    public static short ndirty(long struct) { return UNSAFE.getShort(null, struct + LZ4StreamInternal.DIRTY); }
     /** Unsafe version of {@link #tableType}. */
-    public static short ntableType(long struct) { return UNSAFE.getShort(null, struct + LZ4StreamInternal.TABLETYPE); }
+    public static int ntableType(long struct) { return UNSAFE.getInt(null, struct + LZ4StreamInternal.TABLETYPE); }
     /** Unsafe version of {@link #dictionary(int) dictionary}. */
     public static ByteBuffer ndictionary(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + LZ4StreamInternal.DICTIONARY), capacity); }
     /** Unsafe version of {@link #dictCtx}. */
@@ -203,32 +194,29 @@ public class LZ4StreamInternal extends Struct {
         }
 
         /** @return a {@link IntBuffer} view of the {@code hashTable} field. */
-        @NativeType("uint32_t[LZ4_HASH_SIZE_U32]")
+        @NativeType("LZ4_u32[LZ4_HASH_SIZE_U32]")
         public IntBuffer hashTable() { return LZ4StreamInternal.nhashTable(address()); }
         /** @return the value at the specified index of the {@code hashTable} field. */
-        @NativeType("uint32_t")
+        @NativeType("LZ4_u32")
         public int hashTable(int index) { return LZ4StreamInternal.nhashTable(address(), index); }
         /** @return the value of the {@code currentOffset} field. */
-        @NativeType("uint32_t")
+        @NativeType("LZ4_u32")
         public int currentOffset() { return LZ4StreamInternal.ncurrentOffset(address()); }
-        /** @return the value of the {@code dirty} field. */
-        @NativeType("uint16_t")
-        public short dirty() { return LZ4StreamInternal.ndirty(address()); }
         /** @return the value of the {@code tableType} field. */
-        @NativeType("uint16_t")
-        public short tableType() { return LZ4StreamInternal.ntableType(address()); }
+        @NativeType("LZ4_u32")
+        public int tableType() { return LZ4StreamInternal.ntableType(address()); }
         /**
          * @return a {@link ByteBuffer} view of the data pointed to by the {@code dictionary} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @NativeType("uint8_t const *")
+        @NativeType("LZ4_byte const *")
         public ByteBuffer dictionary(int capacity) { return LZ4StreamInternal.ndictionary(address(), capacity); }
         /** @return a {@link LZ4StreamInternal} view of the struct pointed to by the {@code dictCtx} field. */
         @NativeType("LZ4_stream_t_internal * const")
         public LZ4StreamInternal dictCtx() { return LZ4StreamInternal.ndictCtx(address()); }
         /** @return the value of the {@code dictSize} field. */
-        @NativeType("uint32_t")
+        @NativeType("LZ4_u32")
         public int dictSize() { return LZ4StreamInternal.ndictSize(address()); }
 
     }

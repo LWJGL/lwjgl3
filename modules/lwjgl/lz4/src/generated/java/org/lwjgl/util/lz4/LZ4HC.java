@@ -69,9 +69,9 @@ public class LZ4HC {
 
     public static final int LZ4HC_HASH_MASK = (LZ4HC_HASHTABLESIZE - 1);
 
-    public static final int LZ4_STREAMHCSIZE = 4 * LZ4HC_HASHTABLESIZE + 2 * LZ4HC_MAXD + 56 + (Pointer.POINTER_SIZE == 16 ? 56 : 0);
+    public static final int LZ4_STREAMHCSIZE = 262200;
 
-    public static final int LZ4_STREAMHCSIZE_SIZET = (LZ4_STREAMHCSIZE / Pointer.POINTER_SIZE);
+    public static final int LZ4_STREAMHCSIZE_VOIDP = (LZ4_STREAMHCSIZE / Pointer.POINTER_SIZE);
 
     protected LZ4HC() {
         throw new UnsupportedOperationException();

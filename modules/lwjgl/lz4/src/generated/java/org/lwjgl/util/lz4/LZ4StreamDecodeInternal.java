@@ -18,9 +18,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct LZ4_streamDecode_t_internal {
- *     uint8_t const * externalDict;
+ *     LZ4_byte const * externalDict;
  *     size_t extDictSize;
- *     uint8_t const * prefixEnd;
+ *     LZ4_byte const * prefixEnd;
  *     size_t prefixSize;
  * }</code></pre>
  */
@@ -75,7 +75,7 @@ public class LZ4StreamDecodeInternal extends Struct {
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @NativeType("uint8_t const *")
+    @NativeType("LZ4_byte const *")
     public ByteBuffer externalDict(int capacity) { return nexternalDict(address(), capacity); }
     /** @return the value of the {@code extDictSize} field. */
     @NativeType("size_t")
@@ -85,7 +85,7 @@ public class LZ4StreamDecodeInternal extends Struct {
      *
      * @param capacity the number of elements in the returned buffer
      */
-    @NativeType("uint8_t const *")
+    @NativeType("LZ4_byte const *")
     public ByteBuffer prefixEnd(int capacity) { return nprefixEnd(address(), capacity); }
     /** @return the value of the {@code prefixSize} field. */
     @NativeType("size_t")
@@ -174,7 +174,7 @@ public class LZ4StreamDecodeInternal extends Struct {
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @NativeType("uint8_t const *")
+        @NativeType("LZ4_byte const *")
         public ByteBuffer externalDict(int capacity) { return LZ4StreamDecodeInternal.nexternalDict(address(), capacity); }
         /** @return the value of the {@code extDictSize} field. */
         @NativeType("size_t")
@@ -184,7 +184,7 @@ public class LZ4StreamDecodeInternal extends Struct {
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @NativeType("uint8_t const *")
+        @NativeType("LZ4_byte const *")
         public ByteBuffer prefixEnd(int capacity) { return LZ4StreamDecodeInternal.nprefixEnd(address(), capacity); }
         /** @return the value of the {@code prefixSize} field. */
         @NativeType("size_t")

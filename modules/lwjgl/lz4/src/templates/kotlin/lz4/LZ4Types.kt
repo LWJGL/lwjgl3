@@ -6,6 +6,11 @@ package lz4
 
 import org.lwjgl.generator.*
 
+val LZ4_i8 = typedef(int8_t, "LZ4_i8")
+val LZ4_byte = typedef(uint8_t, "LZ4_byte")
+val LZ4_u16 = typedef(uint16_t, "LZ4_u16")
+val LZ4_u32 = typedef(uint32_t, "LZ4_u32")
+
 val LZ4_stream_t = "LZ4_stream_t".opaque
 val LZ4_streamDecode_t = "LZ4_streamDecode_t".opaque
 

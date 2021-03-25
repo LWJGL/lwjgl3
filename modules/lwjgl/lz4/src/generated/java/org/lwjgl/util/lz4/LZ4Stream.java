@@ -9,19 +9,20 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-import static org.lwjgl.util.lz4.LZ4.LZ4_STREAMSIZE_U64;
+import static org.lwjgl.util.lz4.LZ4.LZ4_STREAMSIZE_VOIDP;
 
 /**
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * union LZ4_stream_t {
- *     unsigned long long table[LZ4_STREAMSIZE_U64];
+ *     void * table[LZ4_STREAMSIZE_VOIDP];
  *     {@link LZ4StreamInternal struct LZ4_stream_t_internal} internal_donotuse;
  * }</code></pre>
  */
@@ -41,7 +42,7 @@ public class LZ4Stream extends Struct {
 
     static {
         Layout layout = __union(
-            __array(8, LZ4_STREAMSIZE_U64),
+            __array(POINTER_SIZE, LZ4_STREAMSIZE_VOIDP),
             __member(LZ4StreamInternal.SIZEOF, LZ4StreamInternal.ALIGNOF)
         );
 
@@ -65,11 +66,11 @@ public class LZ4Stream extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return a {@link LongBuffer} view of the {@code table} field. */
-    @NativeType("unsigned long long[LZ4_STREAMSIZE_U64]")
-    public LongBuffer table() { return ntable(address()); }
+    /** @return a {@link PointerBuffer} view of the {@code table} field. */
+    @NativeType("void *[LZ4_STREAMSIZE_VOIDP]")
+    public PointerBuffer table() { return ntable(address()); }
     /** @return the value at the specified index of the {@code table} field. */
-    @NativeType("unsigned long long")
+    @NativeType("void *")
     public long table(int index) { return ntable(address(), index); }
     /** @return a {@link LZ4StreamInternal} view of the {@code internal_donotuse} field. */
     @NativeType("struct LZ4_stream_t_internal")
@@ -107,10 +108,10 @@ public class LZ4Stream extends Struct {
     // -----------------------------------
 
     /** Unsafe version of {@link #table}. */
-    public static LongBuffer ntable(long struct) { return memLongBuffer(struct + LZ4Stream.TABLE, LZ4_STREAMSIZE_U64); }
+    public static PointerBuffer ntable(long struct) { return memPointerBuffer(struct + LZ4Stream.TABLE, LZ4_STREAMSIZE_VOIDP); }
     /** Unsafe version of {@link #table(int) table}. */
     public static long ntable(long struct, int index) {
-        return UNSAFE.getLong(null, struct + LZ4Stream.TABLE + check(index, LZ4_STREAMSIZE_U64) * 8);
+        return memGetAddress(struct + LZ4Stream.TABLE + check(index, LZ4_STREAMSIZE_VOIDP) * POINTER_SIZE);
     }
     /** Unsafe version of {@link #internal_donotuse}. */
     public static LZ4StreamInternal ninternal_donotuse(long struct) { return LZ4StreamInternal.create(struct + LZ4Stream.INTERNAL_DONOTUSE); }
@@ -153,11 +154,11 @@ public class LZ4Stream extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link LongBuffer} view of the {@code table} field. */
-        @NativeType("unsigned long long[LZ4_STREAMSIZE_U64]")
-        public LongBuffer table() { return LZ4Stream.ntable(address()); }
+        /** @return a {@link PointerBuffer} view of the {@code table} field. */
+        @NativeType("void *[LZ4_STREAMSIZE_VOIDP]")
+        public PointerBuffer table() { return LZ4Stream.ntable(address()); }
         /** @return the value at the specified index of the {@code table} field. */
-        @NativeType("unsigned long long")
+        @NativeType("void *")
         public long table(int index) { return LZ4Stream.ntable(address(), index); }
         /** @return a {@link LZ4StreamInternal} view of the {@code internal_donotuse} field. */
         @NativeType("struct LZ4_stream_t_internal")

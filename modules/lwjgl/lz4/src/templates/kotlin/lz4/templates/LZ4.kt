@@ -80,7 +80,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."9",
-        "VERSION_RELEASE".."2"
+        "VERSION_RELEASE".."3"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(LZ4_VERSION_MAJOR *100*100 + LZ4_VERSION_MINOR *100 + LZ4_VERSION_RELEASE)")
@@ -109,8 +109,8 @@ ENABLE_WARNINGS()""")
     IntConstant("", "HASHTABLESIZE".."(1 << LZ4_MEMORY_USAGE)")
     IntConstant("", "HASH_SIZE_U32".."(1 << LZ4_HASHLOG)")
 
-    IntConstant("", "STREAMSIZE_U64".."(1 << (LZ4_MEMORY_USAGE-3)) + 4 + (Pointer.POINTER_SIZE == 16 ? 4 : 0)")
-    IntConstant("", "STREAMSIZE".."(LZ4_STREAMSIZE_U64 * Long.BYTES)")
+    IntConstant("", "STREAMSIZE".."16416")
+    IntConstant("", "STREAMSIZE_VOIDP".."LZ4_STREAMSIZE / Pointer.POINTER_SIZE")
 
     IntConstant("", "STREAMDECODESIZE_U64".."4 + (Pointer.POINTER_SIZE == 16 ? 2 : 0)")
     IntConstant("", "STREAMDECODESIZE".."(LZ4_STREAMDECODESIZE_U64 * Long.BYTES)")
@@ -195,7 +195,8 @@ ENABLE_WARNINGS()""")
 
         The larger the acceleration value, the faster the algorithm, but also the lesser the compression. It's a trade-off. It can be fine tuned, with each
         successive value providing roughly +~3% to speed. An acceleration value of "1" is the same as regular #compress_default(). Values &le; 0 will be
-        replaced by {@code ACCELERATION_DEFAULT} (currently == 1, see lz4.c).
+        replaced by {@code LZ4_ACCELERATION_DEFAULT} (currently == 1, see lz4.c). Values &gt; {@code LZ4_ACCELERATION_MAX} will be replaced by
+        {@code LZ4_ACCELERATION_MAX} (currently {@code == 65537}, see lz4.c).
         """,
 
         char.const.p("src", ""),
@@ -249,14 +250,30 @@ ENABLE_WARNINGS()""")
         "decompress_safe_partial",
         """
         Decompresses an LZ4 compressed block, of size {@code srcSize} at position {@code src}, into destination buffer {@code dst} of size {@code dstCapacity}.
-        Up to {@code targetOutputSize} bytes will be decoded. The function stops decoding on reaching this objective, which can boost performance when only the
-        beginning of a block is required.
+        
+        Up to {@code targetOutputSize} bytes will be decoded. The function stops decoding on reaching this objective. This can be useful to boost performance
+        whenever only the beginning of a block is required.
 
-        Note: this function features 2 parameters, {@code targetOutputSize} and {@code dstCapacity}, and expects {@code targetOutputSize &le; dstCapacity}. It
-        effectively stops decoding on reaching {@code targetOutputSize}, so {@code dstCapacity} is kind of redundant. This is because in a previous version of
-        this function, decoding operation would not "break" a sequence in the middle. As a consequence, there was no guarantee that decoding would stop at
-        exactly {@code targetOutputSize}, it could write more bytes, though only up to {@code dstCapacity}. Some "margin" used to be required for this
-        operation to work properly. This is no longer necessary. The function nonetheless keeps its signature, in an effort to not break API.
+        Notes:
+        ${ol(
+            "result can be &lt; {@code targetOutputSize}, if compressed block contains less data.",
+            "{@code targetOutputSize} must be &le; {@code dstCapacity}",
+            """
+            this function effectively stops decoding on reaching {@code targetOutputSize}, so {@code dstCapacity} is kind of redundant. This is because in
+            older versions of this function, decoding operation would still write complete sequences. Therefore, there was no guarantee that it would stop
+            writing at exactly {@code targetOutputSize}, it could write more bytes, though only up to {@code dstCapacity}. Some "margin" used to be required
+            for this operation to work properly. Thankfully, this is no longer necessary. The function nonetheless keeps the same signature, in an effort to
+            preserve API compatibility.
+            """,
+            """
+            if {@code srcSize} is the exact size of the block, then {@code targetOutputSize} can be any value, including larger than the block's decompressed
+            size. The function will, at most, generate block's decompressed size.
+            """,
+            """
+            if {@code srcSize} is <em>larger</em> than block's compressed size, then {@code targetOutputSize} <b>MUST</b> be &le; block's decompressed size.
+            Otherwise, <em>silent corruption will occur</em>.
+            """
+        )}
         """,
 
         char.const.p("src", ""),
@@ -267,10 +284,8 @@ ENABLE_WARNINGS()""")
 
         returnDoc =
         """
-        the number of bytes decoded in {@code dst} (necessarily &le; {@code dstCapacity}). If source stream is detected malformed, function returns a negative
-        result.
-
-        Note: can be &lt; {@code targetOutputSize}, if compressed block contains less data.
+        the number of bytes decoded in {@code dst} (necessarily &le; {@code targetOutputSize}). If source stream is detected malformed, function returns a
+        negative result.
         """
     )
 
