@@ -184,6 +184,31 @@ EnumConstant(
         "Final pass of multi-pass mode"
     )
 )
+EnumConstant(
+    """vpx_codec_cx_pkt_kind 
+	Encoder output packet variants
+ *
+ * This enumeration lists the different kinds of data packets that can be
+ * returned by calls to vpx_codec_get_cx_data(). Algorithms \ref MAY
+ * extend this list to provide additional functionality.""",
+
+    "VPX_CODEC_CX_FRAME_PKT".enum(
+        "Compressed video frame"
+    ),
+    "VPX_CODEC_STATS_PKT".enum(
+        "Two-pass statistics for this frame"
+    ),
+    "VPX_CODEC_FPMB_STATS_PKT".enum(
+        "first pass mb statistics for this frame"
+    ),
+    "VPX_CODEC_PSNR_PKT".enum(
+        "PSNR statistics for this frame"
+    ),
+    "VPX_CODEC_CUSTOM_PKT".enum(
+        "Algorithm extensions",
+		256
+    )
+)
     IntConstant(
         """
 		vpx_enc_frame_flags_t Encoded Frame Flags
@@ -226,13 +251,13 @@ frame is the start of a GOP""",
 	
     vpx_codec_iface_t.p(
         "vpx_codec_vp8_cx",
-		"Get the vp8 algorithm interface",
+		"Get the vp8 encoder algorithm interface",
 		
 		void()
 	)
     vpx_codec_iface_t.p(
         "vpx_codec_vp9_cx",
-		"Get the vp9 algorithm interface",
+		"Get the vp9 encoder algorithm interface",
 		
 		void()
 	)

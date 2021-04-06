@@ -8,10 +8,20 @@
 #include "vpx_decoder.h"
 #include "vpx_image.h"
 #include "vpx_codec.h"
-#include "vp8cx.h"
+#include "vp8dx.h"
 
 
 EXTERN_C_ENTER
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_vpx_VPXDecoder_vpx_1codec_1vp8_1dx(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(intptr_t)vpx_codec_vp8_dx();
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_vpx_VPXDecoder_vpx_1codec_1vp9_1dx(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(intptr_t)vpx_codec_vp9_dx();
+}
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_vpx_VPXDecoder_nvpx_1codec_1dec_1init_1ver(JNIEnv *__env, jclass clazz, jlong ctxAddress, jlong ifaceAddress, jlong cfgAddress, jlong flags, jint ver) {
     vpx_codec_ctx_t *ctx = (vpx_codec_ctx_t *)(intptr_t)ctxAddress;

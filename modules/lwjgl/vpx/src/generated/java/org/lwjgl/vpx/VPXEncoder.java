@@ -215,6 +215,31 @@ public class VPXEncoder {
         VPX_RC_LAST_PASS  = 2;
 
     /**
+     * vpx_codec_cx_pkt_kind 
+     * Encoder output packet variants
+ *
+ * This enumeration lists the different kinds of data packets that can be
+ * returned by calls to vpx_codec_get_cx_data(). Algorithms \ref MAY
+ * extend this list to provide additional functionality.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VPX_CODEC_CX_FRAME_PKT VPX_CODEC_CX_FRAME_PKT} - Compressed video frame</li>
+     * <li>{@link #VPX_CODEC_STATS_PKT VPX_CODEC_STATS_PKT} - Two-pass statistics for this frame</li>
+     * <li>{@link #VPX_CODEC_FPMB_STATS_PKT VPX_CODEC_FPMB_STATS_PKT} - first pass mb statistics for this frame</li>
+     * <li>{@link #VPX_CODEC_PSNR_PKT VPX_CODEC_PSNR_PKT} - PSNR statistics for this frame</li>
+     * <li>{@link #VPX_CODEC_CUSTOM_PKT VPX_CODEC_CUSTOM_PKT} - Algorithm extensions</li>
+     * </ul>
+     */
+    public static final int
+        VPX_CODEC_CX_FRAME_PKT   = 0,
+        VPX_CODEC_STATS_PKT      = 1,
+        VPX_CODEC_FPMB_STATS_PKT = 2,
+        VPX_CODEC_PSNR_PKT       = 3,
+        VPX_CODEC_CUSTOM_PKT     = 0x100;
+
+    /**
      * vpx_enc_frame_flags_t Encoded Frame Flags
  *
  * This type indicates a bitfield to be passed to vpx_codec_encode(), defining
@@ -255,13 +280,13 @@ public class VPXEncoder {
 
     // --- [ vpx_codec_vp8_cx ] ---
 
-    /** Get the vp8 algorithm interface */
+    /** Get the vp8 encoder algorithm interface */
     @NativeType("vpx_codec_iface_t *")
     public static native long vpx_codec_vp8_cx();
 
     // --- [ vpx_codec_vp9_cx ] ---
 
-    /** Get the vp9 algorithm interface */
+    /** Get the vp9 encoder algorithm interface */
     @NativeType("vpx_codec_iface_t *")
     public static native long vpx_codec_vp9_cx();
 

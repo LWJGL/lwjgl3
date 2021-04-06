@@ -654,5 +654,6 @@ val vpx_codec_cx_pkt_t = struct(Module.VPX, "vpx_codec_cx_pkt_t", nativeName = "
      * packet list directly.
      */
     //char pad[128 - sizeof(enum vpx_codec_cx_pkt_kind)]; /**< fixed sz */
+	char("pad", "fixed sz")[128-4]
   }// data;                                               /**< packet data */
 }

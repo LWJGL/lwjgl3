@@ -12,8 +12,21 @@ val VPXDecoder = "VPXDecoder".nativeClass(Module.VPX, prefixConstant = "", prefi
 #include "vpx_decoder.h"
 #include "vpx_image.h"
 #include "vpx_codec.h"
-#include "vp8cx.h"
+#include "vp8dx.h"
 """)
+	
+    vpx_codec_iface_t.p(
+        "vpx_codec_vp8_dx",
+		"Get the vp8 decoder algorithm interface",
+		
+		void()
+	)
+    vpx_codec_iface_t.p(
+        "vpx_codec_vp9_dx",
+		"Get the vp9 decoder algorithm interface",
+		
+		void()
+	)
 	
     vpx_codec_err_t(
         "vpx_codec_dec_init_ver",

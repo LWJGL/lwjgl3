@@ -22,6 +22,18 @@ public class VPXDecoder {
         throw new UnsupportedOperationException();
     }
 
+    // --- [ vpx_codec_vp8_dx ] ---
+
+    /** Get the vp8 decoder algorithm interface */
+    @NativeType("vpx_codec_iface_t *")
+    public static native long vpx_codec_vp8_dx();
+
+    // --- [ vpx_codec_vp9_dx ] ---
+
+    /** Get the vp9 decoder algorithm interface */
+    @NativeType("vpx_codec_iface_t *")
+    public static native long vpx_codec_vp9_dx();
+
     // --- [ vpx_codec_dec_init_ver ] ---
 
     /** Unsafe version of: {@link #vpx_codec_dec_init_ver} */

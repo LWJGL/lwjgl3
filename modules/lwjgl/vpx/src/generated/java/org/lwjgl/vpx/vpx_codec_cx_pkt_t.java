@@ -50,6 +50,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code twopass_stats} &ndash; data for two-pass packet</li>
  * <li>{@code firstpass_mb_stats} &ndash; first pass mb packet</li>
  * <li>{@code raw} &ndash; data for arbitrary packets</li>
+ * <li>{@code pad[124]} &ndash; fixed sz</li>
  * </ul></li>
  * </ul>
  * 
@@ -73,6 +74,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         {@link vpx_fixed_buf_t vpx_fixed_buf_t} twopass_stats;
  *         {@link vpx_fixed_buf_t vpx_fixed_buf_t} firstpass_mb_stats;
  *         {@link vpx_fixed_buf_t vpx_fixed_buf_t} raw;
+ *         char pad[124];
  *     };
  * }</code></pre>
  */
@@ -98,7 +100,8 @@ public class vpx_codec_cx_pkt_t extends Struct implements NativeResource {
         SPATIAL_LAYER_ENCODED,
         TWOPASS_STATS,
         FIRSTPASS_MB_STATS,
-        RAW;
+        RAW,
+        PAD;
 
     static {
         Layout layout = __struct(
@@ -117,7 +120,8 @@ public class vpx_codec_cx_pkt_t extends Struct implements NativeResource {
                 ),
                 __member(vpx_fixed_buf_t.SIZEOF, vpx_fixed_buf_t.ALIGNOF),
                 __member(vpx_fixed_buf_t.SIZEOF, vpx_fixed_buf_t.ALIGNOF),
-                __member(vpx_fixed_buf_t.SIZEOF, vpx_fixed_buf_t.ALIGNOF)
+                __member(vpx_fixed_buf_t.SIZEOF, vpx_fixed_buf_t.ALIGNOF),
+                __array(1, 124)
             )
         );
 
@@ -137,6 +141,7 @@ public class vpx_codec_cx_pkt_t extends Struct implements NativeResource {
         TWOPASS_STATS = layout.offsetof(12);
         FIRSTPASS_MB_STATS = layout.offsetof(13);
         RAW = layout.offsetof(14);
+        PAD = layout.offsetof(15);
     }
 
     /**
@@ -200,6 +205,12 @@ public class vpx_codec_cx_pkt_t extends Struct implements NativeResource {
     public vpx_fixed_buf_t firstpass_mb_stats() { return nfirstpass_mb_stats(address()); }
     /** Returns a {@link vpx_fixed_buf_t} view of the {@code raw} field. */
     public vpx_fixed_buf_t raw() { return nraw(address()); }
+    /** Returns a {@link ByteBuffer} view of the {@code pad} field. */
+    @NativeType("char[124]")
+    public ByteBuffer pad() { return npad(address()); }
+    /** Returns the value at the specified index of the {@code pad} field. */
+    @NativeType("char")
+    public byte pad(int index) { return npad(address(), index); }
 
     /** Sets the specified value to the {@code kind} field. */
     public vpx_codec_cx_pkt_t kind(@NativeType("vpx_codec_cx_pkt_kind") int value) { nkind(address(), value); return this; }
@@ -239,6 +250,10 @@ public class vpx_codec_cx_pkt_t extends Struct implements NativeResource {
     public vpx_codec_cx_pkt_t raw(vpx_fixed_buf_t value) { nraw(address(), value); return this; }
     /** Passes the {@code raw} field to the specified {@link java.util.function.Consumer Consumer}. */
     public vpx_codec_cx_pkt_t raw(java.util.function.Consumer<vpx_fixed_buf_t> consumer) { consumer.accept(raw()); return this; }
+    /** Copies the specified {@link ByteBuffer} to the {@code pad} field. */
+    public vpx_codec_cx_pkt_t pad(@NativeType("char[124]") ByteBuffer value) { npad(address(), value); return this; }
+    /** Sets the specified value at the specified index of the {@code pad} field. */
+    public vpx_codec_cx_pkt_t pad(int index, @NativeType("char") byte value) { npad(address(), index, value); return this; }
 
     /**
      * Copies the specified struct data to this struct.
@@ -433,6 +448,12 @@ public class vpx_codec_cx_pkt_t extends Struct implements NativeResource {
     public static vpx_fixed_buf_t nfirstpass_mb_stats(long struct) { return vpx_fixed_buf_t.create(struct + vpx_codec_cx_pkt_t.FIRSTPASS_MB_STATS); }
     /** Unsafe version of {@link #raw}. */
     public static vpx_fixed_buf_t nraw(long struct) { return vpx_fixed_buf_t.create(struct + vpx_codec_cx_pkt_t.RAW); }
+    /** Unsafe version of {@link #pad}. */
+    public static ByteBuffer npad(long struct) { return memByteBuffer(struct + vpx_codec_cx_pkt_t.PAD, 124); }
+    /** Unsafe version of {@link #pad(int) pad}. */
+    public static byte npad(long struct, int index) {
+        return UNSAFE.getByte(null, struct + vpx_codec_cx_pkt_t.PAD + check(index, 124) * 1);
+    }
 
     /** Unsafe version of {@link #kind(int) kind}. */
     public static void nkind(long struct, int value) { UNSAFE.putInt(null, struct + vpx_codec_cx_pkt_t.KIND, value); }
@@ -481,6 +502,15 @@ public class vpx_codec_cx_pkt_t extends Struct implements NativeResource {
     public static void nfirstpass_mb_stats(long struct, vpx_fixed_buf_t value) { memCopy(value.address(), struct + vpx_codec_cx_pkt_t.FIRSTPASS_MB_STATS, vpx_fixed_buf_t.SIZEOF); }
     /** Unsafe version of {@link #raw(vpx_fixed_buf_t) raw}. */
     public static void nraw(long struct, vpx_fixed_buf_t value) { memCopy(value.address(), struct + vpx_codec_cx_pkt_t.RAW, vpx_fixed_buf_t.SIZEOF); }
+    /** Unsafe version of {@link #pad(ByteBuffer) pad}. */
+    public static void npad(long struct, ByteBuffer value) {
+        if (CHECKS) { checkGT(value, 124); }
+        memCopy(memAddress(value), struct + vpx_codec_cx_pkt_t.PAD, value.remaining() * 1);
+    }
+    /** Unsafe version of {@link #pad(int, byte) pad}. */
+    public static void npad(long struct, int index, byte value) {
+        UNSAFE.putByte(null, struct + vpx_codec_cx_pkt_t.PAD + check(index, 124) * 1, value);
+    }
 
     // -----------------------------------
 
@@ -568,6 +598,12 @@ public class vpx_codec_cx_pkt_t extends Struct implements NativeResource {
         public vpx_fixed_buf_t firstpass_mb_stats() { return vpx_codec_cx_pkt_t.nfirstpass_mb_stats(address()); }
         /** Returns a {@link vpx_fixed_buf_t} view of the {@code raw} field. */
         public vpx_fixed_buf_t raw() { return vpx_codec_cx_pkt_t.nraw(address()); }
+        /** Returns a {@link ByteBuffer} view of the {@code pad} field. */
+        @NativeType("char[124]")
+        public ByteBuffer pad() { return vpx_codec_cx_pkt_t.npad(address()); }
+        /** Returns the value at the specified index of the {@code pad} field. */
+        @NativeType("char")
+        public byte pad(int index) { return vpx_codec_cx_pkt_t.npad(address(), index); }
 
         /** Sets the specified value to the {@code kind} field. */
         public vpx_codec_cx_pkt_t.Buffer kind(@NativeType("vpx_codec_cx_pkt_kind") int value) { vpx_codec_cx_pkt_t.nkind(address(), value); return this; }
@@ -607,6 +643,10 @@ public class vpx_codec_cx_pkt_t extends Struct implements NativeResource {
         public vpx_codec_cx_pkt_t.Buffer raw(vpx_fixed_buf_t value) { vpx_codec_cx_pkt_t.nraw(address(), value); return this; }
         /** Passes the {@code raw} field to the specified {@link java.util.function.Consumer Consumer}. */
         public vpx_codec_cx_pkt_t.Buffer raw(java.util.function.Consumer<vpx_fixed_buf_t> consumer) { consumer.accept(raw()); return this; }
+        /** Copies the specified {@link ByteBuffer} to the {@code pad} field. */
+        public vpx_codec_cx_pkt_t.Buffer pad(@NativeType("char[124]") ByteBuffer value) { vpx_codec_cx_pkt_t.npad(address(), value); return this; }
+        /** Sets the specified value at the specified index of the {@code pad} field. */
+        public vpx_codec_cx_pkt_t.Buffer pad(int index, @NativeType("char") byte value) { vpx_codec_cx_pkt_t.npad(address(), index, value); return this; }
 
     }
 
