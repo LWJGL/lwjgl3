@@ -133,8 +133,8 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     -->
     <local name="java.version.regex"/>
     <property name="java.version.regex" value="[1-9][0-9]+((\.0)*\.[1-9][0-9]*)*(-[a-zA-Z0-9]+)?"/>
-
-    <condition property="jdk14">                             <matches string="${java.version}" pattern="^(?!1[0-3])${java.version.regex}$"/>     </condition>
+    <condition property="jdk15">                             <matches string="${java.version}" pattern="^(?!1[0-4])${java.version.regex}$"/>     </condition>
+    <condition property="jdk14"><or><isset property="jdk15"/><matches string="${java.version}" pattern="^(?!1[0-3])${java.version.regex}$"/></or></condition>
     <condition property="jdk13"><or><isset property="jdk14"/><matches string="${java.version}" pattern="^(?!1[0-2])${java.version.regex}$"/></or></condition>
     <condition property="jdk12"><or><isset property="jdk13"/><matches string="${java.version}" pattern="^(?!1[0-1])${java.version.regex}$"/></or></condition>
     <condition property="jdk11"><or><isset property="jdk12"/><matches string="${java.version}" pattern="^(?!1[0-0])${java.version.regex}$"/></or></condition>

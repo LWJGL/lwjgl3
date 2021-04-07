@@ -422,6 +422,21 @@
                 <fileset dir="." includes="${src.generated}/*.cpp"/>
             </source>
         </build>
+		
+        <!-- vpx -->
+        <build module="vpx" simple="true" if:true="${binding.vpx}">
+            <source>
+                <arg value="-I/media/alex/OS/Users/Alex/Desktop/projects/libvpxli"/>
+                <arg value="-I/media/alex/OS/Users/Alex/Desktop/projects/libvpxli/vpx"/>
+                <arg value="-I/media/alex/OS/Users/Alex/Desktop/projects/libvpxli/bin"/>
+            </source>
+            <link>
+                <arg value="-lm"/>
+                <fileset dir="/media/alex/OS/Users/Alex/Desktop/projects/libvpxli/bin">
+                    <include name="libvpx.a"/>
+                </fileset>
+            </link>
+        </build>
 
         <!-- Vulkan Memory Allocator -->
         <build module="vma" lang="c++" if:true="${binding.vma}">

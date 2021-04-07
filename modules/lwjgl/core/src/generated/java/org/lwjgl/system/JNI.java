@@ -79,7 +79,6 @@ public final class JNI {
     public static native int invokePI(long param0, float param1, long __functionAddress);
     public static native int invokePI(long param0, int param1, long __functionAddress);
     public static native int invokePI(long param0, short param1, long __functionAddress);
-    public static native int invokePI(long param0, boolean param1, long __functionAddress);
     public static native int invokePI(short param0, long param1, long __functionAddress);
     public static native int invokePI(long param0, int param1, float param2, long __functionAddress);
     public static native int invokePI(long param0, int param1, int param2, long __functionAddress);
