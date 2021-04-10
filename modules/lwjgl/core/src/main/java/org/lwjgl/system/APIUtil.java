@@ -19,6 +19,7 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.function.*;
 import java.util.jar.*;
+import java.util.jar.Attributes.Name;
 import java.util.regex.*;
 import java.util.stream.*;
 
@@ -97,19 +98,60 @@ public final class APIUtil {
      * @return the attribute value or null if the attribute was not found or there is no LWJGL JAR file
      */
     public static Optional<String> apiGetManifestValue(String attributeName) {
-        URL url = APIUtil.class.getClassLoader().getResource("org/lwjgl/system/APIUtil.class");
-        if (url != null) {
-            String classURL = url.toString();
-            if (classURL.startsWith("jar:")) {
-                try (InputStream stream = new URL(classURL.substring(0, classURL.lastIndexOf('!') + 1) + '/' + JarFile.MANIFEST_NAME).openStream()) {
-                    return Optional.ofNullable(new Manifest(stream).getMainAttributes().getValue(attributeName));
-                } catch (Exception e) {
-                    e.printStackTrace(DEBUG_STREAM);
-                }
-            }
-        }
+        if (attributeName == null || attributeName.isEmpty()) return Optional.empty();
 
-        return Optional.empty();
+        Package currentPackage = APIUtil.class.getPackage();
+        String manifestValue = null;
+        switch (attributeName.toLowerCase()) {
+            case "implementation-title":
+                manifestValue = currentPackage.getImplementationTitle();
+                return Optional.ofNullable(manifestValue);
+            case "implementation-vendor":
+                manifestValue = currentPackage.getImplementationVendor();
+                return Optional.ofNullable(manifestValue);
+            case "implementation-version":
+                manifestValue = currentPackage.getImplementationVersion();
+                return Optional.ofNullable(manifestValue);
+            case "specification-title":
+                manifestValue = currentPackage.getSpecificationTitle();
+                return Optional.ofNullable(manifestValue);
+            case "specification-vendor":
+                manifestValue = currentPackage.getSpecificationVendor();
+                return Optional.ofNullable(manifestValue);
+            case "specification-version":
+                manifestValue = currentPackage.getSpecificationVersion();
+                return Optional.ofNullable(manifestValue);
+            default:
+                ClassLoader classLoader = APIUtil.class.getClassLoader();
+                URL url = classLoader.getResource("org/lwjgl/system/APIUtil.class");
+                if (url != null) {
+                    String classURL = url.toString();
+                    if (classURL.startsWith("jar:")) { //running in standard JVM
+                        try (InputStream stream = new URL(classURL.substring(0, classURL.lastIndexOf('!') + 1) + '/' + JarFile.MANIFEST_NAME).openStream()) {
+                            return Optional.ofNullable(new Manifest(stream).getMainAttributes().getValue(attributeName));
+                        } catch (Exception e) {
+                            e.printStackTrace(DEBUG_STREAM);
+                        }
+                    } else if (classURL.startsWith("resource:")) { //running with GraalVM's generated native image
+                        try {
+                            //find a MANIFEST.MF resource from one of the LWJGL jars
+                            for (Enumeration<URL> e = classLoader.getResources(JarFile.MANIFEST_NAME); e.hasMoreElements(); ) {
+                                url = e.nextElement();
+                                try (InputStream stream = url.openStream()) {
+                                    Attributes attributes = new Manifest(stream).getMainAttributes();
+                                    //is this manifest resource from LWJGL?
+                                    if ("lwjgl.org".equals(attributes.getValue(Name.IMPLEMENTATION_VENDOR)))
+                                        return Optional.ofNullable(attributes.getValue(attributeName));
+                                }
+                            }
+                        } catch (IOException ioe) {
+                            ioe.printStackTrace(DEBUG_STREAM);
+                        }
+                    }
+                }
+
+                return Optional.empty();
+        }
     }
 
     public static String apiFindLibrary(String start, String name) {
