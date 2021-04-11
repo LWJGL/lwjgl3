@@ -14,6 +14,25 @@ val VPXCodec = "VPXCodec".nativeClass(Module.VPX, prefixConstant = "", prefixMet
 """)
 
     vpx_codec_err_t(
+        "vpx_codec_destroy",
+        """
+Destroy a codec instance
+ *
+ * Destroys a codec context, freeing any associated memory buffers.
+ *
+		""",
+
+        vpx_codec_ctx_t.p("ctx", "Pointer to this instance's context"),
+
+        returnDoc = """
+VPX_CODEC_OK
+     The codec algorithm initialized.
+VPX_CODEC_MEM_ERROR
+     Memory allocation failed.
+		"""
+    )
+
+    vpx_codec_err_t(
         "vpx_codec_control_",
         """
 Control algorithm

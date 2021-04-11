@@ -15,6 +15,29 @@ public class VPXCodec {
         throw new UnsupportedOperationException();
     }
 
+    // --- [ vpx_codec_destroy ] ---
+
+    /** Unsafe version of: {@link #vpx_codec_destroy} */
+    public static native int nvpx_codec_destroy(long ctx);
+
+    /**
+     * Destroy a codec instance
+ *
+ * Destroys a codec context, freeing any associated memory buffers.
+ *
+     *
+     * @param ctx Pointer to this instance's context
+     *
+     * @return VPX_CODEC_OK
+     *         The codec algorithm initialized.
+VPX_CODEC_MEM_ERROR
+     *         Memory allocation failed.
+     */
+    @NativeType("vpx_codec_err_t")
+    public static int vpx_codec_destroy(@NativeType("vpx_codec_ctx_t *") vpx_codec_ctx_t ctx) {
+        return nvpx_codec_destroy(ctx.address());
+    }
+
     // --- [ vpx_codec_control_ ] ---
 
     /** Unsafe version of: {@link #vpx_codec_control_} */
