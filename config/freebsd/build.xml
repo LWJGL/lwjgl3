@@ -2,11 +2,11 @@
   ~ Copyright LWJGL. All rights reserved.
   ~ License terms: https://www.lwjgl.org/license
   -->
-<project name="native-linux" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
+<project name="native-freebsd" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
     <import file="../build-definitions.xml"/>
 
-    <property name="gcc.prefix" value="aarch64-linux-gnu-" if:set="build.arch.arm64"/>
-    <property name="gcc.prefix" value="arm-linux-gnueabihf-" if:set="build.arch.arm32"/>
+    <property name="gcc.prefix" value="aarch64-freebsd-" if:set="build.arch.arm64"/>
+    <property name="gcc.prefix" value="arm-freebsd-" if:set="build.arch.arm32"/>
 
     <condition property="gcc.prefix" value="${gcc.prefix}" else="">
         <isset property="gcc.prefix"/>
@@ -41,7 +41,7 @@
                 <arg line="-O3 @{lto} -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_GNU_SOURCE -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
 
                 <arg value="-I${jni.headers}"/>
-                <arg value="-I${jni.headers}/linux"/>
+                <arg value="-I${jni.headers}/freebsd"/>
 
                 <arg value="-I${module.lwjgl.rel}/core/src/main/c"/>
                 <arg value="-I${module.lwjgl.rel}/core/src/main/c/${platform}"/>
@@ -319,13 +319,13 @@
         <!-- NativeFileDialog -->
         <build module="nfd" simple="true" if:true="${binding.nfd}">
             <beforeCompile>
-                <local name="linux.triplet"/>
-                <condition property="linux.triplet" value="x86_64-linux-gnu"><not><isset property="build.arch.arm"/></not></condition>
-                <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
-                <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
+                <local name="freebsd.triplet"/>
+                <condition property="freebsd.triplet" value="x86_64-freebsd"><not><isset property="build.arch.arm"/></not></condition>
+                <condition property="freebsd.triplet" value="arm-freebsd"><isset property="build.arch.arm32"/></condition>
+                <condition property="freebsd.triplet" value="aarch64-freebsd"><isset property="build.arch.arm64"/></condition>
 
                 <compile>
-                    <arg line="-I/usr/include/gtk-3.0 -I/usr/include/glib-2.0 -I/usr/lib/${linux.triplet}/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0"/>
+                    <arg line="-I/usr/include/gtk-3.0 -I/usr/include/glib-2.0 -I/usr/lib/${freebsd.triplet}/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0"/>
                     <arg value="-I${src.main.rel}"/>
                     <arg value="-I${src.main.rel}/include"/>
                     <fileset dir="." includes="${src.main}/nfd_common.c"/>
