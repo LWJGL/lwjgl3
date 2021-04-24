@@ -87,6 +87,7 @@
 
         <mkdir dir="${lib}/java/openjfx11" if:set="driftfx11"/>
         <property name="platform.openjfx" value="linux" if:set="platform.linux"/>
+        <property name="platform.openjfx" value="freebsd" if:set="platform.freebsd"/>
         <property name="platform.openjfx" value="mac" if:set="platform.macos"/>
         <property name="platform.openjfx" value="win" if:set="platform.windows"/>
 
