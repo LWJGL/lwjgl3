@@ -315,7 +315,15 @@ final class SharedLibraryLoader {
     }
 
     private static boolean workaroundJDK8195129(Path file) {
-        return Platform.get() == Platform.WINDOWS && file.toString().endsWith(".dll");
+        boolean isWinDll = Platform.get() == Platform.WINDOWS && file.toString().endsWith(".dll");
+        if (isWinDll) {
+            // Check for unicode characters if this path is going to be loaded with System.load
+            for (char c : file.toString().toCharArray()) {
+                if (c > '\u007f') {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-
 }
