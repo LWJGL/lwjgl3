@@ -517,6 +517,9 @@ public class XR10 {
         XR_OBJECT_TYPE_ACTION_SET = 5,
         XR_OBJECT_TYPE_ACTION     = 6;
 
+    /** XR_CURRENT_API_VERSION is the current version of the OpenXR API. */
+    public static final long XR_CURRENT_API_VERSION = XR_MAKE_VERSION(1, 0, 14);
+
     /** API Constants */
     public static final int
         XR_TRUE                               = 1,
@@ -538,10 +541,19 @@ public class XR10 {
         XR_MAX_LOCALIZED_ACTION_NAME_SIZE     = 128,
         XR_MIN_COMPOSITION_LAYERS_SUPPORTED   = 16;
 
-    public static final long XR_INFINITE_DURATION = 0x7fffffffffffffffL;
+    public static final long
+        XR_NULL_SYSTEM_ID        = 0,
+        XR_NULL_PATH             = 0,
+        XR_NO_DURATION           = 0,
+        XR_INFINITE_DURATION     = 0x7fffffffffffffffL,
+        XR_MIN_HAPTIC_DURATION   = -1,
+        XR_FREQUENCY_UNSPECIFIED = 0;
 
-    /** XR_CURRENT_API_VERSION is the current version of the OpenXR API. */
-    public static final long XR_CURRENT_API_VERSION = XR_MAKE_VERSION(1, 0, 14);
+    /**
+     * {@code XR_NULL_HANDLE} is a reserved value representing a non-valid object handle. It may be passed to and returned from API functions only when 
+     * specifically allowed.
+     */
+    public static final long XR_NULL_HANDLE = 0x0L;
 
     protected XR10() {
         throw new UnsupportedOperationException();
@@ -1362,7 +1374,7 @@ public class XR10 {
         return (version >>> 48) & 0xffffL;
     }
 
-    // --- [ VK_VERSION_MINOR ] ---
+    // --- [ XR_VERSION_MINOR ] ---
 
     /**
      * Extracts the API minor version number from a packed version number.
@@ -1370,11 +1382,11 @@ public class XR10 {
      * @param version the OpenXR API version
      */
     @NativeType("uint64_t")
-    public static long VK_VERSION_MINOR(@NativeType("uint64_t") long version) {
+    public static long XR_VERSION_MINOR(@NativeType("uint64_t") long version) {
         return (version >>> 32) & 0xffffL;
     }
 
-    // --- [ VK_VERSION_PATCH ] ---
+    // --- [ XR_VERSION_PATCH ] ---
 
     /**
      * Extracts the API patch version number from a packed version number.
@@ -1382,7 +1394,7 @@ public class XR10 {
      * @param version the OpenXR API version
      */
     @NativeType("uint64_t")
-    public static long VK_VERSION_PATCH(@NativeType("uint64_t") long version) {
+    public static long XR_VERSION_PATCH(@NativeType("uint64_t") long version) {
         return version & 0xffffffffL;
     }
 

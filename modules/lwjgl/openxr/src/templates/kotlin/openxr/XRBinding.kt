@@ -32,11 +32,11 @@ private enum class XRFunctionType {
 private val Func.type: XRFunctionType
     get() = when {
         name == "xrGetInstanceProcAddr"                 -> XRFunctionType.PROC // dlsym/GetProcAddress
-        parameters[0].nativeType !is WrappedPointerType -> XRFunctionType.GLOBAL // vkGetInstanceProcAddr: VK_NULL_HANDLE
+        parameters[0].nativeType !is WrappedPointerType -> XRFunctionType.GLOBAL // xrGetInstanceProcAddr: XR_NULL_HANDLE
         parameters[0].nativeType.let {
-            it === XrInstance /*|| it === VkPhysicalDevice*/
-        }                                               -> XRFunctionType.INSTANCE // vkGetInstanceProcAddr: instance handle
-        else                                            -> XRFunctionType.SESSION // vkGetDeviceProcAddr: device handle
+            it === XrInstance
+        }                                               -> XRFunctionType.INSTANCE // xrGetInstanceProcAddr: instance handle
+        else                                            -> XRFunctionType.SESSION // xrGetInstanceProcAddr: session handle
     }
 
 private val Func.isInstanceFunction get() = type === XRFunctionType.INSTANCE && !has<Macro>()
@@ -220,22 +220,22 @@ val XR_BINDING_INSTANCE = Generator.register(object : APIBinding(
 
 })
 
-val XR_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.OPENXR, CAPS_SESSION) {
+val XR_BINDING_SESSION = Generator.register(object : GeneratorTarget(Module.OPENXR, CAPS_SESSION) {
 
     private fun PrintWriter.checkExtensionFunctions(nativeClass: NativeClass, commands: Map<String, Int>) {
         val capName = nativeClass.capName
 
-        val isDeviceExtension = EXTENSION_TYPES[nativeClass.templateName] == "session" || nativeClass.templateName.startsWith("XR")
+        val isSessionExtension = EXTENSION_TYPES[nativeClass.templateName] == "session" || nativeClass.templateName.startsWith("XR")
         val hasDependencies = nativeClass.functions.any { it.has<DependsOn>() }
         print("""
     private static boolean check_${nativeClass.templateName}(FunctionProvider provider, long[] caps""")
-        if (isDeviceExtension || hasDependencies) {
+        if (isSessionExtension || hasDependencies) {
             print(", Set<String> ext")
-        } else if (!isDeviceExtension) {
+        } else if (!isSessionExtension) {
             print(", XRCapabilitiesInstance capsInstance")
         }
         print(""") {
-        if (!${if (isDeviceExtension) {
+        if (!${if (isSessionExtension) {
             "ext.contains(\"$capName\")"
         } else {
             "capsInstance.$capName"
@@ -274,7 +274,7 @@ val XR_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.OPENX
             "static org.lwjgl.system.Checks.*"
         )
 
-        documentation = "Defines the capabilities of a Vulkan {@code VkDevice}."
+        documentation = "Defines the capabilities of an OpenXR {@code XrSession}."
     }
 
     override fun PrintWriter.generateJava() {
@@ -308,7 +308,7 @@ val XR_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.OPENX
 
         println(
             """
-    /** The Vulkan API version number. */
+    /** The OpenXR API version number. */
     public final long apiVersion;
 """
         )

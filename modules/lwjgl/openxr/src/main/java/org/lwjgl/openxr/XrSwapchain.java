@@ -5,11 +5,11 @@
 package org.lwjgl.openxr;
 
 public class XrSwapchain extends DispatchableHandleSession {
-    public XrSwapchain(long handle, XRCapabilitiesSession capabilities) {
-        super(handle, capabilities);
+    public XrSwapchain(long handle, DispatchableHandleSession session) {
+        super(handle, session.getCapabilities());
     }
 
-    public XrSwapchain(long handle, XrSession session) {
-        super(handle, session.getCapabilities());
+    public XrSwapchain(long handle, XRCapabilitiesSession capabilities) {
+        super(handle, capabilities);
     }
 }

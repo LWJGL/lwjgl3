@@ -11,7 +11,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 
-/** Defines the capabilities of a Vulkan {@code VkDevice}. */
+/** Defines the capabilities of an OpenXR {@code XrSession}. */
 public class XRCapabilitiesSession {
 
     // XR10
@@ -122,7 +122,7 @@ public class XRCapabilitiesSession {
     public final long
         xrCreateSpatialGraphNodeSpaceMSFT;
 
-    /** The Vulkan API version number. */
+    /** The OpenXR API version number. */
     public final long apiVersion;
 
     /** When true, {@link XR10} is supported. */

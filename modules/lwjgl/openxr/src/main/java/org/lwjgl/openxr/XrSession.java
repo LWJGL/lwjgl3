@@ -23,7 +23,7 @@ public class XrSession extends DispatchableHandleSession {
         Set<String> set = new HashSet<>(1);
         set.add("OpenXR10");
 
-        return new XRCapabilitiesSession(functionName -> {//TODO just have this run when XRCapabilitiesInstance initializes since XRCapabilitiesSession has no extensions
+        return new XRCapabilitiesSession(functionName -> {
             try (MemoryStack stack = stackPush()) {
                 PointerBuffer pp = stack.mallocPointer(1);
                 callPPPI(handle, memAddress(functionName), memAddress(pp), XR.getGlobalCommands().xrGetInstanceProcAddr);

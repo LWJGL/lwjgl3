@@ -108,7 +108,7 @@ public class XR {
         Set<String> enabledExtensions = new HashSet<>(16);
 
         long majorVersion = XR10.XR_VERSION_MAJOR(apiVersion);
-        long minorVersion = XR10.VK_VERSION_MINOR(apiVersion);
+        long minorVersion = XR10.XR_VERSION_MINOR(apiVersion);
 
         int[] XR_VERSIONS = {
             1
