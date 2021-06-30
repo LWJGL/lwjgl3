@@ -135,7 +135,7 @@ val GLBinding = Generator.register(object : APIBinding(
                 expression
         }.let {
             if (func has DeprecatedGL) {
-                "fc || ${if (it.contains(' ')) "($it)" else it}"
+                "!fc || ${if (it.contains(' ')) "($it)" else it}"
             } else {
                 it
             }
