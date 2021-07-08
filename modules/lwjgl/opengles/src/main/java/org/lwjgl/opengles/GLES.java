@@ -245,7 +245,8 @@ public final class GLES {
      *
      * <p>This method calls {@link #setCapabilities(GLESCapabilities)} with the new instance before returning.</p>
      *
-     * @param bufferFactory a function that allocates a {@link PointerBuffer} given a size. If {@code null}, LWJGL will allocate a GC-managed buffer internally.
+     * @param bufferFactory a function that allocates a {@link PointerBuffer} given a size. The buffer must be filled with zeroes. If {@code null}, LWJGL will
+     *                      allocate a GC-managed buffer internally.
      *
      * @return the {@code GLESCapabilities} instance
      *

@@ -66,6 +66,8 @@ import org.lwjgl.system.*;
  */
 public class AMDVertexShaderTessellator {
 
+    static { GL.initialize(); }
+
     /** Returned by the {@code type} parameter of GetActiveUniform. */
     public static final int
         GL_SAMPLER_BUFFER_AMD              = 0x9001,
@@ -82,8 +84,6 @@ public class AMDVertexShaderTessellator {
 
     /** Accepted by GetFloatv. */
     public static final int GL_TESSELLATION_FACTOR_AMD = 0x9005;
-
-    static { GL.initialize(); }
 
     protected AMDVertexShaderTessellator() {
         throw new UnsupportedOperationException();

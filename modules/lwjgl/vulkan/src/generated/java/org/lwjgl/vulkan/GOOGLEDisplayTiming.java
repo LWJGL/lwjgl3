@@ -29,6 +29,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>The example code for the this extension (like the {@link KHRSurface VK_KHR_surface} and {@code VK_GOOGLE_display_timing} extensions) is contained in the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c ).</p>
  * </div>
  * 
+ * <h5>VK_GOOGLE_display_timing</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_GOOGLE_display_timing}</dd>
@@ -47,6 +49,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_GOOGLE_display_timing:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-02-14</dd>
  * <dt><b>IP Status</b></dt>
@@ -121,6 +128,7 @@ public class GOOGLEDisplayTiming {
      * </ul></dd>
      * <dt>On failure, this command returns</dt>
      * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * <li>{@link VK10#VK_ERROR_DEVICE_LOST ERROR_DEVICE_LOST}</li>
      * <li>{@link KHRSurface#VK_ERROR_SURFACE_LOST_KHR ERROR_SURFACE_LOST_KHR}</li>
      * </ul></dd>
@@ -200,6 +208,7 @@ public class GOOGLEDisplayTiming {
      * </ul></dd>
      * <dt>On failure, this command returns</dt>
      * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * <li>{@link VK10#VK_ERROR_DEVICE_LOST ERROR_DEVICE_LOST}</li>
      * <li>{@link KHRSwapchain#VK_ERROR_OUT_OF_DATE_KHR ERROR_OUT_OF_DATE_KHR}</li>
      * <li>{@link KHRSurface#VK_ERROR_SURFACE_LOST_KHR ERROR_SURFACE_LOST_KHR}</li>

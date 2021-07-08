@@ -88,27 +88,27 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code action} field. */
+    /** @return the value of the {@code action} field. */
     @NativeType("XrAction")
     public long action() { return naction(address()); }
-    /** Returns the value of the {@code binding} field. */
+    /** @return the value of the {@code binding} field. */
     @NativeType("XrPath")
     public long binding() { return nbinding(address()); }
-    /** Returns the value of the {@code onThreshold} field. */
+    /** @return the value of the {@code onThreshold} field. */
     public float onThreshold() { return nonThreshold(address()); }
-    /** Returns the value of the {@code offThreshold} field. */
+    /** @return the value of the {@code offThreshold} field. */
     public float offThreshold() { return noffThreshold(address()); }
-    /** Returns a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code onHaptic} field. */
+    /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code onHaptic} field. */
     @Nullable
     @NativeType("XrHapticBaseHeader const *")
     public XrHapticBaseHeader onHaptic() { return nonHaptic(address()); }
-    /** Returns a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code offHaptic} field. */
+    /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code offHaptic} field. */
     @Nullable
     @NativeType("XrHapticBaseHeader const *")
     public XrHapticBaseHeader offHaptic() { return noffHaptic(address()); }
@@ -401,27 +401,27 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct implements 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrInteractionProfileAnalogThresholdVALVE.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrInteractionProfileAnalogThresholdVALVE.nnext(address()); }
-        /** Returns the value of the {@code action} field. */
+        /** @return the value of the {@code action} field. */
         @NativeType("XrAction")
         public long action() { return XrInteractionProfileAnalogThresholdVALVE.naction(address()); }
-        /** Returns the value of the {@code binding} field. */
+        /** @return the value of the {@code binding} field. */
         @NativeType("XrPath")
         public long binding() { return XrInteractionProfileAnalogThresholdVALVE.nbinding(address()); }
-        /** Returns the value of the {@code onThreshold} field. */
+        /** @return the value of the {@code onThreshold} field. */
         public float onThreshold() { return XrInteractionProfileAnalogThresholdVALVE.nonThreshold(address()); }
-        /** Returns the value of the {@code offThreshold} field. */
+        /** @return the value of the {@code offThreshold} field. */
         public float offThreshold() { return XrInteractionProfileAnalogThresholdVALVE.noffThreshold(address()); }
-        /** Returns a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code onHaptic} field. */
+        /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code onHaptic} field. */
         @Nullable
         @NativeType("XrHapticBaseHeader const *")
         public XrHapticBaseHeader onHaptic() { return XrInteractionProfileAnalogThresholdVALVE.nonHaptic(address()); }
-        /** Returns a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code offHaptic} field. */
+        /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code offHaptic} field. */
         @Nullable
         @NativeType("XrHapticBaseHeader const *")
         public XrHapticBaseHeader offHaptic() { return XrInteractionProfileAnalogThresholdVALVE.noffHaptic(address()); }

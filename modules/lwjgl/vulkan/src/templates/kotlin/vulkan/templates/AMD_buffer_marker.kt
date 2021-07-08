@@ -18,6 +18,7 @@ val AMD_buffer_marker = "AMDBufferMarker".nativeClassVK("AMD_buffer_marker", typ
         <h5>Examples</h5>
         None.
 
+        <h5>VK_AMD_buffer_marker</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_buffer_marker}</dd>
@@ -36,11 +37,19 @@ val AMD_buffer_marker = "AMDBufferMarker".nativeClassVK("AMD_buffer_marker", typ
                 <li>Requires Vulkan 1.0</li>
             </ul></dd>
 
+            <dt><b>Special Use</b></dt>
+            <dd><ul>
+                <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_buffer_marker:%20&amp;body=@drakos-amd%20">drakos-amd</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-01-26</dd>
 
@@ -99,7 +108,15 @@ val AMD_buffer_marker = "AMDBufferMarker".nativeClassVK("AMD_buffer_marker", typ
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code dstOffset} <b>must</b> be less than or equal to the size of {@code dstBuffer} minus 4.</li>
+            <li>{@code pipelineStage} <b>must</b> be a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-pipeline-stages-supported">valid stage</a> for the queue family that was used to create the command pool that {@code commandBuffer} was allocated from</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-geometryShader">geometry shaders</a> feature is not enabled, {@code pipelineStage} <b>must</b> not be #PIPELINE_STAGE_GEOMETRY_SHADER_BIT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code pipelineStage} <b>must</b> not be #PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-conditionalRendering">conditional rendering</a> feature is not enabled, {@code pipelineStage} <b>must</b> not be #PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-fragmentDensityMap">fragment density map</a> feature is not enabled, {@code pipelineStage} <b>must</b> not be #PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-transformFeedback">transform feedback</a> feature is not enabled, {@code pipelineStage} <b>must</b> not be #PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-meshShader">mesh shaders</a> feature is not enabled, {@code pipelineStage} <b>must</b> not be #PIPELINE_STAGE_MESH_SHADER_BIT_NV or #PIPELINE_STAGE_TASK_SHADER_BIT_NV</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-shadingRateImage">shading rate image</a> feature is not enabled, {@code pipelineStage} <b>must</b> not be #PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</li>
+            <li>{@code dstOffset} <b>must</b> be less than or equal to the size of {@code dstBuffer} minus 4</li>
             <li>{@code dstBuffer} <b>must</b> have been created with #BUFFER_USAGE_TRANSFER_DST_BIT usage flag</li>
             <li>If {@code dstBuffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
             <li>{@code dstOffset} <b>must</b> be a multiple of 4</li>

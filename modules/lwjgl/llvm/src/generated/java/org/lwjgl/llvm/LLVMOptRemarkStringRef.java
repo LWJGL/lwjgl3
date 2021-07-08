@@ -63,13 +63,13 @@ public class LLVMOptRemarkStringRef extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code Str} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code Str} field. */
     @NativeType("char const *")
     public ByteBuffer Str() { return nStr(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code Str} field. */
+    /** @return the null-terminated string pointed to by the {@code Str} field. */
     @NativeType("char const *")
     public String StrString() { return nStrString(address()); }
-    /** Returns the value of the {@code Len} field. */
+    /** @return the value of the {@code Len} field. */
     @NativeType("uint32_t")
     public int Len() { return nLen(address()); }
 
@@ -149,13 +149,13 @@ public class LLVMOptRemarkStringRef extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code Str} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code Str} field. */
         @NativeType("char const *")
         public ByteBuffer Str() { return LLVMOptRemarkStringRef.nStr(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code Str} field. */
+        /** @return the null-terminated string pointed to by the {@code Str} field. */
         @NativeType("char const *")
         public String StrString() { return LLVMOptRemarkStringRef.nStrString(address()); }
-        /** Returns the value of the {@code Len} field. */
+        /** @return the value of the {@code Len} field. */
         @NativeType("uint32_t")
         public int Len() { return LLVMOptRemarkStringRef.nLen(address()); }
 

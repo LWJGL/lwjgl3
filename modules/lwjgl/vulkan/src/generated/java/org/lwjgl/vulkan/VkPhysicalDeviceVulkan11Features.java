@@ -28,41 +28,24 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code storageBuffer16BitAccess} &ndash; specifies whether objects in the {@code StorageBuffer} or {@code PhysicalStorageBuffer} storage class with the {@code Block} decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StorageBuffer16BitAccess} capability.</li>
- * <li>{@code uniformAndStorageBuffer16BitAccess} &ndash; specifies whether objects in the {@code Uniform} storage class with the {@code Block} decoration and in the {@code StorageBuffer} or {@code PhysicalStorageBuffer} storage class with the same decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code UniformAndStorageBuffer16BitAccess} capability.</li>
- * <li>{@code storagePushConstant16} &ndash; specifies whether objects in the {@code PushConstant} storage class <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StoragePushConstant16} capability.</li>
- * <li>{@code storageInputOutput16} &ndash; specifies whether objects in the {@code Input} and {@code Output} storage classes <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StorageInputOutput16} capability.</li>
- * <li>{@code multiview} &ndash; specifies whether the implementation supports multiview rendering within a render pass. If this feature is not enabled, the view mask of each subpass <b>must</b> always be zero.</li>
- * <li>{@code multiviewGeometryShader} &ndash; specifies whether the implementation supports multiview rendering within a render pass, with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#geometry">geometry shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include a geometry shader.</li>
- * <li>{@code multiviewTessellationShader} &ndash; specifies whether the implementation supports multiview rendering within a render pass, with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#tessellation">tessellation shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include any tessellation shaders.</li>
- * <li>{@code variablePointersStorageBuffer} &ndash; specifies whether the implementation supports the SPIR-V {@code VariablePointersStorageBuffer} capability. When this feature is not enabled, shader modules <b>must</b> not declare the {@code SPV_KHR_variable_pointers} extension or the {@code VariablePointersStorageBuffer} capability.</li>
- * <li>{@code variablePointers} &ndash; specifies whether the implementation supports the SPIR-V {@code VariablePointers} capability. When this feature is not enabled, shader modules <b>must</b> not declare the {@code VariablePointers} capability.</li>
- * <li>{@code protectedMemory} &ndash; specifies whether protected memory is supported.</li>
- * <li>{@code samplerYcbcrConversion} &ndash; specifies whether the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>. If {@code samplerYcbcrConversion} is {@link VK10#VK_FALSE FALSE}, sampler Y′C<sub>B</sub>C<sub>R</sub> conversion is not supported, and samplers using sampler Y′C<sub>B</sub>C<sub>R</sub> conversion <b>must</b> not be used.</li>
- * <li>{@code shaderDrawParameters} &ndash; specifies whether shader draw parameters are supported.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceVulkan11Features {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 storageBuffer16BitAccess;
- *     VkBool32 uniformAndStorageBuffer16BitAccess;
- *     VkBool32 storagePushConstant16;
- *     VkBool32 storageInputOutput16;
- *     VkBool32 multiview;
- *     VkBool32 multiviewGeometryShader;
- *     VkBool32 multiviewTessellationShader;
- *     VkBool32 variablePointersStorageBuffer;
- *     VkBool32 variablePointers;
- *     VkBool32 protectedMemory;
- *     VkBool32 samplerYcbcrConversion;
- *     VkBool32 shaderDrawParameters;
+ *     VkBool32 {@link #storageBuffer16BitAccess};
+ *     VkBool32 {@link #uniformAndStorageBuffer16BitAccess};
+ *     VkBool32 {@link #storagePushConstant16};
+ *     VkBool32 {@link #storageInputOutput16};
+ *     VkBool32 {@link #multiview};
+ *     VkBool32 {@link #multiviewGeometryShader};
+ *     VkBool32 {@link #multiviewTessellationShader};
+ *     VkBool32 {@link #variablePointersStorageBuffer};
+ *     VkBool32 {@link #variablePointers};
+ *     VkBool32 {@link #protectedMemory};
+ *     VkBool32 {@link #samplerYcbcrConversion};
+ *     VkBool32 {@link #shaderDrawParameters};
  * }</code></pre>
  */
 public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeResource {
@@ -140,46 +123,46 @@ public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code storageBuffer16BitAccess} field. */
+    /** specifies whether objects in the {@code StorageBuffer}, {@code ShaderRecordBufferKHR}, or {@code PhysicalStorageBuffer} storage class with the {@code Block} decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StorageBuffer16BitAccess} capability. */
     @NativeType("VkBool32")
     public boolean storageBuffer16BitAccess() { return nstorageBuffer16BitAccess(address()) != 0; }
-    /** Returns the value of the {@code uniformAndStorageBuffer16BitAccess} field. */
+    /** specifies whether objects in the {@code Uniform} storage class with the {@code Block} decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code UniformAndStorageBuffer16BitAccess} capability. */
     @NativeType("VkBool32")
     public boolean uniformAndStorageBuffer16BitAccess() { return nuniformAndStorageBuffer16BitAccess(address()) != 0; }
-    /** Returns the value of the {@code storagePushConstant16} field. */
+    /** specifies whether objects in the {@code PushConstant} storage class <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StoragePushConstant16} capability. */
     @NativeType("VkBool32")
     public boolean storagePushConstant16() { return nstoragePushConstant16(address()) != 0; }
-    /** Returns the value of the {@code storageInputOutput16} field. */
+    /** specifies whether objects in the {@code Input} and {@code Output} storage classes <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StorageInputOutput16} capability. */
     @NativeType("VkBool32")
     public boolean storageInputOutput16() { return nstorageInputOutput16(address()) != 0; }
-    /** Returns the value of the {@code multiview} field. */
+    /** specifies whether the implementation supports multiview rendering within a render pass. If this feature is not enabled, the view mask of each subpass <b>must</b> always be zero. */
     @NativeType("VkBool32")
     public boolean multiview() { return nmultiview(address()) != 0; }
-    /** Returns the value of the {@code multiviewGeometryShader} field. */
+    /** specifies whether the implementation supports multiview rendering within a render pass, with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#geometry">geometry shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include a geometry shader. */
     @NativeType("VkBool32")
     public boolean multiviewGeometryShader() { return nmultiviewGeometryShader(address()) != 0; }
-    /** Returns the value of the {@code multiviewTessellationShader} field. */
+    /** specifies whether the implementation supports multiview rendering within a render pass, with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#tessellation">tessellation shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include any tessellation shaders. */
     @NativeType("VkBool32")
     public boolean multiviewTessellationShader() { return nmultiviewTessellationShader(address()) != 0; }
-    /** Returns the value of the {@code variablePointersStorageBuffer} field. */
+    /** specifies whether the implementation supports the SPIR-V {@code VariablePointersStorageBuffer} capability. When this feature is not enabled, shader modules <b>must</b> not declare the {@code SPV_KHR_variable_pointers} extension or the {@code VariablePointersStorageBuffer} capability. */
     @NativeType("VkBool32")
     public boolean variablePointersStorageBuffer() { return nvariablePointersStorageBuffer(address()) != 0; }
-    /** Returns the value of the {@code variablePointers} field. */
+    /** specifies whether the implementation supports the SPIR-V {@code VariablePointers} capability. When this feature is not enabled, shader modules <b>must</b> not declare the {@code VariablePointers} capability. */
     @NativeType("VkBool32")
     public boolean variablePointers() { return nvariablePointers(address()) != 0; }
-    /** Returns the value of the {@code protectedMemory} field. */
+    /** specifies whether protected memory is supported. */
     @NativeType("VkBool32")
     public boolean protectedMemory() { return nprotectedMemory(address()) != 0; }
-    /** Returns the value of the {@code samplerYcbcrConversion} field. */
+    /** specifies whether the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>. If {@code samplerYcbcrConversion} is {@link VK10#VK_FALSE FALSE}, sampler Y′C<sub>B</sub>C<sub>R</sub> conversion is not supported, and samplers using sampler Y′C<sub>B</sub>C<sub>R</sub> conversion <b>must</b> not be used. */
     @NativeType("VkBool32")
     public boolean samplerYcbcrConversion() { return nsamplerYcbcrConversion(address()) != 0; }
-    /** Returns the value of the {@code shaderDrawParameters} field. */
+    /** specifies whether shader draw parameters are supported. */
     @NativeType("VkBool32")
     public boolean shaderDrawParameters() { return nshaderDrawParameters(address()) != 0; }
 
@@ -187,29 +170,29 @@ public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeRe
     public VkPhysicalDeviceVulkan11Features sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceVulkan11Features pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code storageBuffer16BitAccess} field. */
+    /** Sets the specified value to the {@link #storageBuffer16BitAccess} field. */
     public VkPhysicalDeviceVulkan11Features storageBuffer16BitAccess(@NativeType("VkBool32") boolean value) { nstorageBuffer16BitAccess(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code uniformAndStorageBuffer16BitAccess} field. */
+    /** Sets the specified value to the {@link #uniformAndStorageBuffer16BitAccess} field. */
     public VkPhysicalDeviceVulkan11Features uniformAndStorageBuffer16BitAccess(@NativeType("VkBool32") boolean value) { nuniformAndStorageBuffer16BitAccess(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code storagePushConstant16} field. */
+    /** Sets the specified value to the {@link #storagePushConstant16} field. */
     public VkPhysicalDeviceVulkan11Features storagePushConstant16(@NativeType("VkBool32") boolean value) { nstoragePushConstant16(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code storageInputOutput16} field. */
+    /** Sets the specified value to the {@link #storageInputOutput16} field. */
     public VkPhysicalDeviceVulkan11Features storageInputOutput16(@NativeType("VkBool32") boolean value) { nstorageInputOutput16(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code multiview} field. */
+    /** Sets the specified value to the {@link #multiview} field. */
     public VkPhysicalDeviceVulkan11Features multiview(@NativeType("VkBool32") boolean value) { nmultiview(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code multiviewGeometryShader} field. */
+    /** Sets the specified value to the {@link #multiviewGeometryShader} field. */
     public VkPhysicalDeviceVulkan11Features multiviewGeometryShader(@NativeType("VkBool32") boolean value) { nmultiviewGeometryShader(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code multiviewTessellationShader} field. */
+    /** Sets the specified value to the {@link #multiviewTessellationShader} field. */
     public VkPhysicalDeviceVulkan11Features multiviewTessellationShader(@NativeType("VkBool32") boolean value) { nmultiviewTessellationShader(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code variablePointersStorageBuffer} field. */
+    /** Sets the specified value to the {@link #variablePointersStorageBuffer} field. */
     public VkPhysicalDeviceVulkan11Features variablePointersStorageBuffer(@NativeType("VkBool32") boolean value) { nvariablePointersStorageBuffer(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code variablePointers} field. */
+    /** Sets the specified value to the {@link #variablePointers} field. */
     public VkPhysicalDeviceVulkan11Features variablePointers(@NativeType("VkBool32") boolean value) { nvariablePointers(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code protectedMemory} field. */
+    /** Sets the specified value to the {@link #protectedMemory} field. */
     public VkPhysicalDeviceVulkan11Features protectedMemory(@NativeType("VkBool32") boolean value) { nprotectedMemory(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code samplerYcbcrConversion} field. */
+    /** Sets the specified value to the {@link #samplerYcbcrConversion} field. */
     public VkPhysicalDeviceVulkan11Features samplerYcbcrConversion(@NativeType("VkBool32") boolean value) { nsamplerYcbcrConversion(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderDrawParameters} field. */
+    /** Sets the specified value to the {@link #shaderDrawParameters} field. */
     public VkPhysicalDeviceVulkan11Features shaderDrawParameters(@NativeType("VkBool32") boolean value) { nshaderDrawParameters(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -498,46 +481,46 @@ public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceVulkan11Features.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceVulkan11Features.npNext(address()); }
-        /** Returns the value of the {@code storageBuffer16BitAccess} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#storageBuffer16BitAccess} field. */
         @NativeType("VkBool32")
         public boolean storageBuffer16BitAccess() { return VkPhysicalDeviceVulkan11Features.nstorageBuffer16BitAccess(address()) != 0; }
-        /** Returns the value of the {@code uniformAndStorageBuffer16BitAccess} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#uniformAndStorageBuffer16BitAccess} field. */
         @NativeType("VkBool32")
         public boolean uniformAndStorageBuffer16BitAccess() { return VkPhysicalDeviceVulkan11Features.nuniformAndStorageBuffer16BitAccess(address()) != 0; }
-        /** Returns the value of the {@code storagePushConstant16} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#storagePushConstant16} field. */
         @NativeType("VkBool32")
         public boolean storagePushConstant16() { return VkPhysicalDeviceVulkan11Features.nstoragePushConstant16(address()) != 0; }
-        /** Returns the value of the {@code storageInputOutput16} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#storageInputOutput16} field. */
         @NativeType("VkBool32")
         public boolean storageInputOutput16() { return VkPhysicalDeviceVulkan11Features.nstorageInputOutput16(address()) != 0; }
-        /** Returns the value of the {@code multiview} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#multiview} field. */
         @NativeType("VkBool32")
         public boolean multiview() { return VkPhysicalDeviceVulkan11Features.nmultiview(address()) != 0; }
-        /** Returns the value of the {@code multiviewGeometryShader} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#multiviewGeometryShader} field. */
         @NativeType("VkBool32")
         public boolean multiviewGeometryShader() { return VkPhysicalDeviceVulkan11Features.nmultiviewGeometryShader(address()) != 0; }
-        /** Returns the value of the {@code multiviewTessellationShader} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#multiviewTessellationShader} field. */
         @NativeType("VkBool32")
         public boolean multiviewTessellationShader() { return VkPhysicalDeviceVulkan11Features.nmultiviewTessellationShader(address()) != 0; }
-        /** Returns the value of the {@code variablePointersStorageBuffer} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#variablePointersStorageBuffer} field. */
         @NativeType("VkBool32")
         public boolean variablePointersStorageBuffer() { return VkPhysicalDeviceVulkan11Features.nvariablePointersStorageBuffer(address()) != 0; }
-        /** Returns the value of the {@code variablePointers} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#variablePointers} field. */
         @NativeType("VkBool32")
         public boolean variablePointers() { return VkPhysicalDeviceVulkan11Features.nvariablePointers(address()) != 0; }
-        /** Returns the value of the {@code protectedMemory} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#protectedMemory} field. */
         @NativeType("VkBool32")
         public boolean protectedMemory() { return VkPhysicalDeviceVulkan11Features.nprotectedMemory(address()) != 0; }
-        /** Returns the value of the {@code samplerYcbcrConversion} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#samplerYcbcrConversion} field. */
         @NativeType("VkBool32")
         public boolean samplerYcbcrConversion() { return VkPhysicalDeviceVulkan11Features.nsamplerYcbcrConversion(address()) != 0; }
-        /** Returns the value of the {@code shaderDrawParameters} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#shaderDrawParameters} field. */
         @NativeType("VkBool32")
         public boolean shaderDrawParameters() { return VkPhysicalDeviceVulkan11Features.nshaderDrawParameters(address()) != 0; }
 
@@ -545,29 +528,29 @@ public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeRe
         public VkPhysicalDeviceVulkan11Features.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVulkan11Features.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVulkan11Features.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code storageBuffer16BitAccess} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#storageBuffer16BitAccess} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer storageBuffer16BitAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Features.nstorageBuffer16BitAccess(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code uniformAndStorageBuffer16BitAccess} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#uniformAndStorageBuffer16BitAccess} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer uniformAndStorageBuffer16BitAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Features.nuniformAndStorageBuffer16BitAccess(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code storagePushConstant16} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#storagePushConstant16} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer storagePushConstant16(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Features.nstoragePushConstant16(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code storageInputOutput16} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#storageInputOutput16} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer storageInputOutput16(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Features.nstorageInputOutput16(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code multiview} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#multiview} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer multiview(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Features.nmultiview(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code multiviewGeometryShader} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#multiviewGeometryShader} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer multiviewGeometryShader(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Features.nmultiviewGeometryShader(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code multiviewTessellationShader} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#multiviewTessellationShader} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer multiviewTessellationShader(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Features.nmultiviewTessellationShader(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code variablePointersStorageBuffer} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#variablePointersStorageBuffer} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer variablePointersStorageBuffer(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Features.nvariablePointersStorageBuffer(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code variablePointers} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#variablePointers} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer variablePointers(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Features.nvariablePointers(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code protectedMemory} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#protectedMemory} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer protectedMemory(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Features.nprotectedMemory(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code samplerYcbcrConversion} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#samplerYcbcrConversion} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer samplerYcbcrConversion(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Features.nsamplerYcbcrConversion(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderDrawParameters} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#shaderDrawParameters} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer shaderDrawParameters(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Features.nshaderDrawParameters(address(), value ? 1 : 0); return this; }
 
     }

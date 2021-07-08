@@ -30,6 +30,8 @@ import org.lwjgl.system.*;
  */
 public class GL20 extends GL15 {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code name} parameter of GetString. */
     public static final int GL_SHADING_LANGUAGE_VERSION = 0x8B8C;
 
@@ -169,8 +171,6 @@ public class GL20 extends GL15 {
         GL_STENCIL_BACK_REF             = 0x8CA3,
         GL_STENCIL_BACK_VALUE_MASK      = 0x8CA4,
         GL_STENCIL_BACK_WRITEMASK       = 0x8CA5;
-
-    static { GL.initialize(); }
 
     protected GL20() {
         throw new UnsupportedOperationException();

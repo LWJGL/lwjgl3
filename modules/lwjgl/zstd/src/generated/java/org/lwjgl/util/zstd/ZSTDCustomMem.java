@@ -69,13 +69,13 @@ public class ZSTDCustomMem extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code customAlloc} field. */
+    /** @return the value of the {@code customAlloc} field. */
     @NativeType("ZSTD_allocFunction")
     public ZSTDAllocFunction customAlloc() { return ncustomAlloc(address()); }
-    /** Returns the value of the {@code customFree} field. */
+    /** @return the value of the {@code customFree} field. */
     @NativeType("ZSTD_freeFunction")
     public ZSTDFreeFunction customFree() { return ncustomFree(address()); }
-    /** Returns the value of the {@code opaque} field. */
+    /** @return the value of the {@code opaque} field. */
     @NativeType("void *")
     public long opaque() { return nopaque(address()); }
 
@@ -329,13 +329,13 @@ public class ZSTDCustomMem extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code customAlloc} field. */
+        /** @return the value of the {@code customAlloc} field. */
         @NativeType("ZSTD_allocFunction")
         public ZSTDAllocFunction customAlloc() { return ZSTDCustomMem.ncustomAlloc(address()); }
-        /** Returns the value of the {@code customFree} field. */
+        /** @return the value of the {@code customFree} field. */
         @NativeType("ZSTD_freeFunction")
         public ZSTDFreeFunction customFree() { return ZSTDCustomMem.ncustomFree(address()); }
-        /** Returns the value of the {@code opaque} field. */
+        /** @return the value of the {@code opaque} field. */
         @NativeType("void *")
         public long opaque() { return ZSTDCustomMem.nopaque(address()); }
 

@@ -17,12 +17,12 @@ import org.lwjgl.system.*;
  */
 public class NVTextureMultisample {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetTexLevelParameter. */
     public static final int
         GL_TEXTURE_COVERAGE_SAMPLES_NV = 0x9045,
         GL_TEXTURE_COLOR_SAMPLES_NV    = 0x9046;
-
-    static { GL.initialize(); }
 
     protected NVTextureMultisample() {
         throw new UnsupportedOperationException();

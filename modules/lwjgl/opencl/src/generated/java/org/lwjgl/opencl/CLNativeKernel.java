@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void *args
  * )</code></pre>
  */
@@ -49,7 +49,7 @@ public abstract class CLNativeKernel extends Callback implements CLNativeKernelI
     }
 
     protected CLNativeKernel() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CLNativeKernel(long functionPointer) {

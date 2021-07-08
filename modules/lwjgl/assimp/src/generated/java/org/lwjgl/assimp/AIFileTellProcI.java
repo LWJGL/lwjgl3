@@ -6,37 +6,47 @@
 package org.lwjgl.assimp;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * <h3>Type</h3>
  * 
  * <pre><code>
- * size_t (*) (
+ * size_t (*{@link #invoke}) (
  *     struct aiFile *pFile
  * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("aiFileTellProc")
-public interface AIFileTellProcI extends CallbackI.P {
+public interface AIFileTellProcI extends CallbackI {
 
-    String SIGNATURE = "(p)p";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_pointer,
+        ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default long callback(long args) {
-        return invoke(
-            dcbArgPointer(args)
+    default void callback(long ret, long args) {
+        long __result = invoke(
+            memGetAddress(memGetAddress(args))
         );
+        apiClosureRetP(ret, __result);
     }
 
     /**
      * File tell procedure.
      *
-     * @param pFile File pointer to find ftell() on
+     * @param pFile file pointer to query
+     *
+     * @return the current file position
      */
     @NativeType("size_t") long invoke(@NativeType("struct aiFile *") long pFile);
 

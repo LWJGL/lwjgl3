@@ -45,7 +45,7 @@ fun templateCustomization() {
 
         IntConstant(
             "The Vulkan registry version used to generate the LWJGL bindings.",
-            "HEADER_VERSION".."131"
+            "HEADER_VERSION".."172"
         )
 
         LongConstant(
@@ -105,6 +105,7 @@ fun templateCustomization() {
 
             "MAX_PHYSICAL_DEVICE_NAME_SIZE".."256",
             "UUID_SIZE".."16",
+            "LUID_SIZE".."8",
             "MAX_EXTENSION_NAME_SIZE".."256",
             "MAX_DESCRIPTION_SIZE".."256",
             "MAX_MEMORY_TYPES".."32",
@@ -115,7 +116,11 @@ fun templateCustomization() {
             "TRUE".."1",
             "FALSE".."0",
             "QUEUE_FAMILY_IGNORED".."(~0)",
-            "SUBPASS_EXTERNAL".."(~0)"
+            "QUEUE_FAMILY_EXTERNAL".."(~0-1)",
+            "SUBPASS_EXTERNAL".."(~0)",
+            "MAX_DEVICE_GROUP_SIZE".."32",
+            "MAX_DRIVER_NAME_SIZE".."256",
+            "MAX_DRIVER_INFO_SIZE".."256"
         )
 
         FloatConstant(
@@ -213,15 +218,7 @@ fun templateCustomization() {
 
         IntConstant(
             "The API version number for Vulkan 1.1.",
-            "API_VERSION_1_1".."VK10.VK_MAKE_VERSION(1, 1, 0)"
-        )
-
-        IntConstant(
-            "API Constants",
-
-            "LUID_SIZE".."8",
-            "QUEUE_FAMILY_EXTERNAL".."(~0-1)",
-            "MAX_DEVICE_GROUP_SIZE".."32"
+            "API_VERSION_1_1".."VK_MAKE_VERSION(1, 1, 0)"
         )
     }
 
@@ -350,31 +347,34 @@ fun templateCustomization() {
 
         IntConstant(
             "The API version number for Vulkan 1.2.",
-            "API_VERSION_1_2".."VK10.VK_MAKE_VERSION(1, 2, 0)"
+            "API_VERSION_1_2".."VK_MAKE_VERSION(1, 2, 0)"
         )
-
-        IntConstant(
-            "API Constants",
-
-            "MAX_DRIVER_NAME_SIZE".."256",
-            "MAX_DRIVER_INFO_SIZE".."256"
-        )
-    }
-
-    VkDeviceGroupPresentCapabilitiesKHR.definition.apply {
-        javaImport("static org.lwjgl.vulkan.VK11.*")
-    }
-
-    VkPhysicalDeviceGroupProperties.definition.apply {
-        javaImport("static org.lwjgl.vulkan.VK11.*")
-    }
-
-    VkPhysicalDeviceIDProperties.definition.apply {
-        javaImport("static org.lwjgl.vulkan.VK10.*")
-        javaImport("static org.lwjgl.vulkan.VK11.*")
     }
 
     NV_ray_tracing.apply {
         MultiType(PointerMapping.DATA_LONG)..this["GetAccelerationStructureHandleNV"].getParam("pData")
     }
+
+    val VkAccelerationStructureInstanceKHR = VkAccelerationStructureInstanceKHR.definition
+
+    VkAccelerationStructureInstanceKHR["instanceCustomIndex"]
+        .getter("nbitfield0(struct) & 0x00_FF_FFFF")
+        .setter("nbitfield0(struct, (nbitfield0(struct) & 0xFF_00_0000) | (value & 0x00_FF_FFFF))")
+    VkAccelerationStructureInstanceKHR["mask"]
+        .getter("nbitfield0(struct) >>> 24")
+        .setter("nbitfield0(struct, (value << 24) | (nbitfield0(struct) & 0x00_FF_FFFF))")
+
+    VkAccelerationStructureInstanceKHR["instanceShaderBindingTableRecordOffset"]
+        .getter("nbitfield1(struct) & 0x00_FF_FFFF")
+        .setter("nbitfield1(struct, (nbitfield1(struct) & 0xFF_00_0000) | (value & 0x00_FF_FFFF))")
+    VkAccelerationStructureInstanceKHR["flags"]
+        .getter("nbitfield1(struct) >>> 24")
+        .setter("nbitfield1(struct, (value << 24) | (nbitfield1(struct) & 0x00_FF_FFFF))")
+
+    val VkAccelerationStructureInstanceNV = VkAccelerationStructureInstanceNV.definition
+
+    VkAccelerationStructureInstanceNV["instanceCustomIndex"].copyAccessors(VkAccelerationStructureInstanceKHR["instanceCustomIndex"])
+    VkAccelerationStructureInstanceNV["mask"].copyAccessors(VkAccelerationStructureInstanceKHR["mask"])
+    VkAccelerationStructureInstanceNV["instanceShaderBindingTableRecordOffset"].copyAccessors(VkAccelerationStructureInstanceKHR["instanceShaderBindingTableRecordOffset"])
+    VkAccelerationStructureInstanceNV["flags"].copyAccessors(VkAccelerationStructureInstanceKHR["flags"])
 }

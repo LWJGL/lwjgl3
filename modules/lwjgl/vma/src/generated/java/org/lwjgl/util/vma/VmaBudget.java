@@ -18,42 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Statistics of current memory usage and available budget, in bytes, for specific memory heap.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code blockBytes} &ndash; Sum size of all {@code VkDeviceMemory} blocks allocated from particular heap, in bytes.</li>
- * <li>{@code allocationBytes} &ndash; 
- * Sum size of all allocations created in particular heap, in bytes.
- * 
- * <p>Usually less or equal than {@code blockBytes}. Difference {@code blockBytes - allocationBytes} is the amount of memory allocated but unused - available
- * for new allocations or wasted due to fragmentation.</p>
- * 
- * <p>It might be greater than {@code blockBytes} if there are some allocations in lost state, as they account to this value as well.</p></li>
- * <li>{@code usage} &ndash; 
- * Estimated current memory usage of the program, in bytes.
- * 
- * <p>Fetched from system using {@code VK_EXT_memory_budget} extension if enabled.</p>
- * 
- * <p>It might be different than {@code blockBytes} (usually higher) due to additional implicit objects also occupying the memory, like swapchain, pipelines,
- * descriptor heaps, command buffers, or {@code VkDeviceMemory} blocks allocated outside of this library, if any.</p></li>
- * <li>{@code budget} &ndash; 
- * Estimated amount of memory available to the program, in bytes.
- * 
- * <p>Fetched from system using {@code VK_EXT_memory_budget} extension if enabled.</p>
- * 
- * <p>It might be different (most probably smaller) than {@code VkMemoryHeap::size[heapIndex]} due to factors external to the program, like other programs
- * also consuming system resources. Difference {@code budget - usage} is the amount of additional memory that can probably be allocated without problems.
- * Exceeding the budget may result in various problems.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VmaBudget {
- *     VkDeviceSize blockBytes;
- *     VkDeviceSize allocationBytes;
- *     VkDeviceSize usage;
- *     VkDeviceSize budget;
+ *     VkDeviceSize {@link #blockBytes};
+ *     VkDeviceSize {@link #allocationBytes};
+ *     VkDeviceSize {@link #usage};
+ *     VkDeviceSize {@link #budget};
  * }</code></pre>
  */
 public class VmaBudget extends Struct implements NativeResource {
@@ -101,16 +73,38 @@ public class VmaBudget extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code blockBytes} field. */
+    /** Sum size of all {@code VkDeviceMemory} blocks allocated from particular heap, in bytes. */
     @NativeType("VkDeviceSize")
     public long blockBytes() { return nblockBytes(address()); }
-    /** Returns the value of the {@code allocationBytes} field. */
+    /**
+     * Sum size of all allocations created in particular heap, in bytes.
+     * 
+     * <p>Usually less or equal than {@code blockBytes}. Difference {@code blockBytes - allocationBytes} is the amount of memory allocated but unused - available
+     * for new allocations or wasted due to fragmentation.</p>
+     * 
+     * <p>It might be greater than {@code blockBytes} if there are some allocations in lost state, as they account to this value as well.</p>
+     */
     @NativeType("VkDeviceSize")
     public long allocationBytes() { return nallocationBytes(address()); }
-    /** Returns the value of the {@code usage} field. */
+    /**
+     * Estimated current memory usage of the program, in bytes.
+     * 
+     * <p>Fetched from system using {@code VK_EXT_memory_budget} extension if enabled.</p>
+     * 
+     * <p>It might be different than {@code blockBytes} (usually higher) due to additional implicit objects also occupying the memory, like swapchain, pipelines,
+     * descriptor heaps, command buffers, or {@code VkDeviceMemory} blocks allocated outside of this library, if any.</p>
+     */
     @NativeType("VkDeviceSize")
     public long usage() { return nusage(address()); }
-    /** Returns the value of the {@code budget} field. */
+    /**
+     * Estimated amount of memory available to the program, in bytes.
+     * 
+     * <p>Fetched from system using {@code VK_EXT_memory_budget} extension if enabled.</p>
+     * 
+     * <p>It might be different (most probably smaller) than {@code VkMemoryHeap::size[heapIndex]} due to factors external to the program, like other programs
+     * also consuming system resources. Difference {@code budget - usage} is the amount of additional memory that can probably be allocated without problems.
+     * Exceeding the budget may result in various problems.</p>
+     */
     @NativeType("VkDeviceSize")
     public long budget() { return nbudget(address()); }
 
@@ -304,16 +298,16 @@ public class VmaBudget extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code blockBytes} field. */
+        /** @return the value of the {@link VmaBudget#blockBytes} field. */
         @NativeType("VkDeviceSize")
         public long blockBytes() { return VmaBudget.nblockBytes(address()); }
-        /** Returns the value of the {@code allocationBytes} field. */
+        /** @return the value of the {@link VmaBudget#allocationBytes} field. */
         @NativeType("VkDeviceSize")
         public long allocationBytes() { return VmaBudget.nallocationBytes(address()); }
-        /** Returns the value of the {@code usage} field. */
+        /** @return the value of the {@link VmaBudget#usage} field. */
         @NativeType("VkDeviceSize")
         public long usage() { return VmaBudget.nusage(address()); }
-        /** Returns the value of the {@code budget} field. */
+        /** @return the value of the {@link VmaBudget#budget} field. */
         @NativeType("VkDeviceSize")
         public long budget() { return VmaBudget.nbudget(address()); }
 

@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     struct aiFile *pFile
  * )</code></pre>
  */
@@ -47,7 +47,7 @@ public abstract class AIFileFlushProc extends Callback implements AIFileFlushPro
     }
 
     protected AIFileFlushProc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     AIFileFlushProc(long functionPointer) {

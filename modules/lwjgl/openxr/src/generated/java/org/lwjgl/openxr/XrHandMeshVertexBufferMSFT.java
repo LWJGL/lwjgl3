@@ -72,16 +72,16 @@ public class XrHandMeshVertexBufferMSFT extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code vertexUpdateTime} field. */
+    /** @return the value of the {@code vertexUpdateTime} field. */
     @NativeType("XrTime")
     public long vertexUpdateTime() { return nvertexUpdateTime(address()); }
-    /** Returns the value of the {@code vertexCapacityInput} field. */
+    /** @return the value of the {@code vertexCapacityInput} field. */
     @NativeType("uint32_t")
     public int vertexCapacityInput() { return nvertexCapacityInput(address()); }
-    /** Returns the value of the {@code vertexCountOutput} field. */
+    /** @return the value of the {@code vertexCountOutput} field. */
     @NativeType("uint32_t")
     public int vertexCountOutput() { return nvertexCountOutput(address()); }
-    /** Returns a {@link XrHandMeshVertexMSFT.Buffer} view of the struct array pointed to by the {@code vertices} field. */
+    /** @return a {@link XrHandMeshVertexMSFT.Buffer} view of the struct array pointed to by the {@code vertices} field. */
     @NativeType("XrHandMeshVertexMSFT *")
     public XrHandMeshVertexMSFT.Buffer vertices() { return nvertices(address()); }
 
@@ -337,16 +337,16 @@ public class XrHandMeshVertexBufferMSFT extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code vertexUpdateTime} field. */
+        /** @return the value of the {@code vertexUpdateTime} field. */
         @NativeType("XrTime")
         public long vertexUpdateTime() { return XrHandMeshVertexBufferMSFT.nvertexUpdateTime(address()); }
-        /** Returns the value of the {@code vertexCapacityInput} field. */
+        /** @return the value of the {@code vertexCapacityInput} field. */
         @NativeType("uint32_t")
         public int vertexCapacityInput() { return XrHandMeshVertexBufferMSFT.nvertexCapacityInput(address()); }
-        /** Returns the value of the {@code vertexCountOutput} field. */
+        /** @return the value of the {@code vertexCountOutput} field. */
         @NativeType("uint32_t")
         public int vertexCountOutput() { return XrHandMeshVertexBufferMSFT.nvertexCountOutput(address()); }
-        /** Returns a {@link XrHandMeshVertexMSFT.Buffer} view of the struct array pointed to by the {@code vertices} field. */
+        /** @return a {@link XrHandMeshVertexMSFT.Buffer} view of the struct array pointed to by the {@code vertices} field. */
         @NativeType("XrHandMeshVertexMSFT *")
         public XrHandMeshVertexMSFT.Buffer vertices() { return XrHandMeshVertexBufferMSFT.nvertices(address()); }
 

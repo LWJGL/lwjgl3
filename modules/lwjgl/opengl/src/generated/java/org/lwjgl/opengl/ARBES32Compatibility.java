@@ -28,13 +28,13 @@ import org.lwjgl.system.*;
  */
 public class ARBES32Compatibility {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetFloatv, GetIntegerv, and GetInteger64v. */
     public static final int
         GL_PRIMITIVE_BOUNDING_BOX_ARB             = 0x92BE,
         GL_MULTISAMPLE_LINE_WIDTH_RANGE_ARB       = 0x9381,
         GL_MULTISAMPLE_LINE_WIDTH_GRANULARITY_ARB = 0x9382;
-
-    static { GL.initialize(); }
 
     protected ARBES32Compatibility() {
         throw new UnsupportedOperationException();

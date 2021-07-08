@@ -6,8 +6,11 @@
 package org.lwjgl.opencl;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be passed to the {@link CL11#clSetMemObjectDestructorCallback SetMemObjectDestructorCallback} method.
@@ -15,25 +18,29 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     cl_mem memobj,
  *     void *user_data
  * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("void (*) (cl_mem, void *)")
-public interface CLMemObjectDestructorCallbackI extends CallbackI.V {
+public interface CLMemObjectDestructorCallbackI extends CallbackI {
 
-    String SIGNATURE = Callback.__stdcall("(pp)v");
+    FFICIF CIF = apiCreateCIF(
+        apiStdcall(),
+        ffi_type_void,
+        ffi_type_pointer, ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args),
-            dcbArgPointer(args)
+            memGetAddress(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE))
         );
     }
 

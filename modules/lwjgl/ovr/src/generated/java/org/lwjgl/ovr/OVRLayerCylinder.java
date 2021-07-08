@@ -47,35 +47,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * when viewing the cylinder's exterior surface. Additionally, while the interface supports an Angle that ranges from {@code [0,2*Pi]} the angle should
  * remain less than {@code 1.9*PI} to avoid artifacts where the cylinder edges converge.</p></div>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code Header} &ndash; {@code Header.Type} must be {@link OVR#ovrLayerType_Cylinder LayerType_Cylinder}</li>
- * <li>{@code ColorTexture} &ndash; contains a single image, never with any stereo view</li>
- * <li>{@code Viewport} &ndash; specifies the ColorTexture sub-rect UV coordinates</li>
- * <li>{@code CylinderPoseCenter} &ndash; 
- * specifies the orientation and position of the center point of a cylinder layer type. The position is in real-world meters not the application's virtual
- * world, but the physical world the user is in. It is relative to the "zero" position set by {@link OVR#ovr_RecenterTrackingOrigin RecenterTrackingOrigin} unless the
- * {@link OVR#ovrLayerFlag_HeadLocked LayerFlag_HeadLocked} flag is used.</li>
- * <li>{@code CylinderRadius} &ndash; radius of the cylinder in meters</li>
- * <li>{@code CylinderAngle} &ndash; angle in radians. Range is from 0 to {@code 2*Pi} exclusive covering the entire cylinder (see diagram and note above).</li>
- * <li>{@code CylinderAspectRatio} &ndash; 
- * custom aspect ratio presumably set based on {@code Viewport}. Used to calculate the height of the cylinder based on the arc-length
- * ({@code CylinderAngle}) and radius ({@code CylinderRadius}) given above. The height of the cylinder is given by:
- * {@code height = (CylinderRadius * CylinderAngle) / CylinderAspectRatio}. Aspect ratio is {@code width / height}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrLayerCylinder {
- *     {@link OVRLayerHeader ovrLayerHeader} Header;
- *     ovrTextureSwapChain ColorTexture;
- *     {@link OVRRecti ovrRecti} Viewport;
- *     {@link OVRPosef ovrPosef} CylinderPoseCenter;
- *     float CylinderRadius;
- *     float CylinderAngle;
- *     float CylinderAspectRatio;
+ *     {@link OVRLayerHeader ovrLayerHeader} {@link #Header};
+ *     ovrTextureSwapChain {@link #ColorTexture};
+ *     {@link OVRRecti ovrRecti} {@link #Viewport};
+ *     {@link OVRPosef ovrPosef} {@link #CylinderPoseCenter};
+ *     float {@link #CylinderRadius};
+ *     float {@link #CylinderAngle};
+ *     float {@link #CylinderAspectRatio};
  * }</code></pre>
  */
 @NativeType("struct ovrLayerCylinder")
@@ -133,44 +115,52 @@ public class OVRLayerCylinder extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
+    /** {@code Header.Type} must be {@link OVR#ovrLayerType_Cylinder LayerType_Cylinder} */
     @NativeType("ovrLayerHeader")
     public OVRLayerHeader Header() { return nHeader(address()); }
-    /** Returns the value of the {@code ColorTexture} field. */
+    /** contains a single image, never with any stereo view */
     @NativeType("ovrTextureSwapChain")
     public long ColorTexture() { return nColorTexture(address()); }
-    /** Returns a {@link OVRRecti} view of the {@code Viewport} field. */
+    /** specifies the ColorTexture sub-rect UV coordinates */
     @NativeType("ovrRecti")
     public OVRRecti Viewport() { return nViewport(address()); }
-    /** Returns a {@link OVRPosef} view of the {@code CylinderPoseCenter} field. */
+    /**
+     * specifies the orientation and position of the center point of a cylinder layer type. The position is in real-world meters not the application's virtual
+     * world, but the physical world the user is in. It is relative to the "zero" position set by {@link OVR#ovr_RecenterTrackingOrigin RecenterTrackingOrigin} unless the
+     * {@link OVR#ovrLayerFlag_HeadLocked LayerFlag_HeadLocked} flag is used.
+     */
     @NativeType("ovrPosef")
     public OVRPosef CylinderPoseCenter() { return nCylinderPoseCenter(address()); }
-    /** Returns the value of the {@code CylinderRadius} field. */
+    /** radius of the cylinder in meters */
     public float CylinderRadius() { return nCylinderRadius(address()); }
-    /** Returns the value of the {@code CylinderAngle} field. */
+    /** angle in radians. Range is from 0 to {@code 2*Pi} exclusive covering the entire cylinder (see diagram and note above). */
     public float CylinderAngle() { return nCylinderAngle(address()); }
-    /** Returns the value of the {@code CylinderAspectRatio} field. */
+    /**
+     * custom aspect ratio presumably set based on {@code Viewport}. Used to calculate the height of the cylinder based on the arc-length
+     * ({@code CylinderAngle}) and radius ({@code CylinderRadius}) given above. The height of the cylinder is given by:
+     * {@code height = (CylinderRadius * CylinderAngle) / CylinderAspectRatio}. Aspect ratio is {@code width / height}.
+     */
     public float CylinderAspectRatio() { return nCylinderAspectRatio(address()); }
 
-    /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
+    /** Copies the specified {@link OVRLayerHeader} to the {@link #Header} field. */
     public OVRLayerCylinder Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { nHeader(address(), value); return this; }
-    /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #Header} field to the specified {@link java.util.function.Consumer Consumer}. */
     public OVRLayerCylinder Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
-    /** Sets the specified value to the {@code ColorTexture} field. */
+    /** Sets the specified value to the {@link #ColorTexture} field. */
     public OVRLayerCylinder ColorTexture(@NativeType("ovrTextureSwapChain") long value) { nColorTexture(address(), value); return this; }
-    /** Copies the specified {@link OVRRecti} to the {@code Viewport} field. */
+    /** Copies the specified {@link OVRRecti} to the {@link #Viewport} field. */
     public OVRLayerCylinder Viewport(@NativeType("ovrRecti") OVRRecti value) { nViewport(address(), value); return this; }
-    /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
     public OVRLayerCylinder Viewport(java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport()); return this; }
-    /** Copies the specified {@link OVRPosef} to the {@code CylinderPoseCenter} field. */
+    /** Copies the specified {@link OVRPosef} to the {@link #CylinderPoseCenter} field. */
     public OVRLayerCylinder CylinderPoseCenter(@NativeType("ovrPosef") OVRPosef value) { nCylinderPoseCenter(address(), value); return this; }
-    /** Passes the {@code CylinderPoseCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #CylinderPoseCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
     public OVRLayerCylinder CylinderPoseCenter(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(CylinderPoseCenter()); return this; }
-    /** Sets the specified value to the {@code CylinderRadius} field. */
+    /** Sets the specified value to the {@link #CylinderRadius} field. */
     public OVRLayerCylinder CylinderRadius(float value) { nCylinderRadius(address(), value); return this; }
-    /** Sets the specified value to the {@code CylinderAngle} field. */
+    /** Sets the specified value to the {@link #CylinderAngle} field. */
     public OVRLayerCylinder CylinderAngle(float value) { nCylinderAngle(address(), value); return this; }
-    /** Sets the specified value to the {@code CylinderAspectRatio} field. */
+    /** Sets the specified value to the {@link #CylinderAspectRatio} field. */
     public OVRLayerCylinder CylinderAspectRatio(float value) { nCylinderAspectRatio(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -438,44 +428,44 @@ public class OVRLayerCylinder extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link OVRLayerHeader} view of the {@code Header} field. */
+        /** @return a {@link OVRLayerHeader} view of the {@link OVRLayerCylinder#Header} field. */
         @NativeType("ovrLayerHeader")
         public OVRLayerHeader Header() { return OVRLayerCylinder.nHeader(address()); }
-        /** Returns the value of the {@code ColorTexture} field. */
+        /** @return the value of the {@link OVRLayerCylinder#ColorTexture} field. */
         @NativeType("ovrTextureSwapChain")
         public long ColorTexture() { return OVRLayerCylinder.nColorTexture(address()); }
-        /** Returns a {@link OVRRecti} view of the {@code Viewport} field. */
+        /** @return a {@link OVRRecti} view of the {@link OVRLayerCylinder#Viewport} field. */
         @NativeType("ovrRecti")
         public OVRRecti Viewport() { return OVRLayerCylinder.nViewport(address()); }
-        /** Returns a {@link OVRPosef} view of the {@code CylinderPoseCenter} field. */
+        /** @return a {@link OVRPosef} view of the {@link OVRLayerCylinder#CylinderPoseCenter} field. */
         @NativeType("ovrPosef")
         public OVRPosef CylinderPoseCenter() { return OVRLayerCylinder.nCylinderPoseCenter(address()); }
-        /** Returns the value of the {@code CylinderRadius} field. */
+        /** @return the value of the {@link OVRLayerCylinder#CylinderRadius} field. */
         public float CylinderRadius() { return OVRLayerCylinder.nCylinderRadius(address()); }
-        /** Returns the value of the {@code CylinderAngle} field. */
+        /** @return the value of the {@link OVRLayerCylinder#CylinderAngle} field. */
         public float CylinderAngle() { return OVRLayerCylinder.nCylinderAngle(address()); }
-        /** Returns the value of the {@code CylinderAspectRatio} field. */
+        /** @return the value of the {@link OVRLayerCylinder#CylinderAspectRatio} field. */
         public float CylinderAspectRatio() { return OVRLayerCylinder.nCylinderAspectRatio(address()); }
 
-        /** Copies the specified {@link OVRLayerHeader} to the {@code Header} field. */
+        /** Copies the specified {@link OVRLayerHeader} to the {@link OVRLayerCylinder#Header} field. */
         public OVRLayerCylinder.Buffer Header(@NativeType("ovrLayerHeader") OVRLayerHeader value) { OVRLayerCylinder.nHeader(address(), value); return this; }
-        /** Passes the {@code Header} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link OVRLayerCylinder#Header} field to the specified {@link java.util.function.Consumer Consumer}. */
         public OVRLayerCylinder.Buffer Header(java.util.function.Consumer<OVRLayerHeader> consumer) { consumer.accept(Header()); return this; }
-        /** Sets the specified value to the {@code ColorTexture} field. */
+        /** Sets the specified value to the {@link OVRLayerCylinder#ColorTexture} field. */
         public OVRLayerCylinder.Buffer ColorTexture(@NativeType("ovrTextureSwapChain") long value) { OVRLayerCylinder.nColorTexture(address(), value); return this; }
-        /** Copies the specified {@link OVRRecti} to the {@code Viewport} field. */
+        /** Copies the specified {@link OVRRecti} to the {@link OVRLayerCylinder#Viewport} field. */
         public OVRLayerCylinder.Buffer Viewport(@NativeType("ovrRecti") OVRRecti value) { OVRLayerCylinder.nViewport(address(), value); return this; }
-        /** Passes the {@code Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link OVRLayerCylinder#Viewport} field to the specified {@link java.util.function.Consumer Consumer}. */
         public OVRLayerCylinder.Buffer Viewport(java.util.function.Consumer<OVRRecti> consumer) { consumer.accept(Viewport()); return this; }
-        /** Copies the specified {@link OVRPosef} to the {@code CylinderPoseCenter} field. */
+        /** Copies the specified {@link OVRPosef} to the {@link OVRLayerCylinder#CylinderPoseCenter} field. */
         public OVRLayerCylinder.Buffer CylinderPoseCenter(@NativeType("ovrPosef") OVRPosef value) { OVRLayerCylinder.nCylinderPoseCenter(address(), value); return this; }
-        /** Passes the {@code CylinderPoseCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link OVRLayerCylinder#CylinderPoseCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
         public OVRLayerCylinder.Buffer CylinderPoseCenter(java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(CylinderPoseCenter()); return this; }
-        /** Sets the specified value to the {@code CylinderRadius} field. */
+        /** Sets the specified value to the {@link OVRLayerCylinder#CylinderRadius} field. */
         public OVRLayerCylinder.Buffer CylinderRadius(float value) { OVRLayerCylinder.nCylinderRadius(address(), value); return this; }
-        /** Sets the specified value to the {@code CylinderAngle} field. */
+        /** Sets the specified value to the {@link OVRLayerCylinder#CylinderAngle} field. */
         public OVRLayerCylinder.Buffer CylinderAngle(float value) { OVRLayerCylinder.nCylinderAngle(address(), value); return this; }
-        /** Sets the specified value to the {@code CylinderAspectRatio} field. */
+        /** Sets the specified value to the {@link OVRLayerCylinder#CylinderAspectRatio} field. */
         public OVRLayerCylinder.Buffer CylinderAspectRatio(float value) { OVRLayerCylinder.nCylinderAspectRatio(address(), value); return this; }
 
     }

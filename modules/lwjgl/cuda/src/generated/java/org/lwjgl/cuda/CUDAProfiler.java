@@ -18,6 +18,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Contains bindings to <a href="https://developer.nvidia.com/cuda-zone">CUDA</a> profiler control functions of the low-level CUDA driver API. */
 public class CUDAProfiler {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            ProfilerInitialize = apiGetFunctionAddress(CU.getLibrary(), "cuProfilerInitialize"),
+            ProfilerStart      = apiGetFunctionAddress(CU.getLibrary(), "cuProfilerStart"),
+            ProfilerStop       = apiGetFunctionAddress(CU.getLibrary(), "cuProfilerStop");
+
+    }
+
     /**
      * Profiler Output Modes. ({@code CUoutput_mode}
      * 
@@ -34,19 +47,6 @@ public class CUDAProfiler {
 
     protected CUDAProfiler() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            ProfilerInitialize = apiGetFunctionAddress(CU.getLibrary(), "cuProfilerInitialize"),
-            ProfilerStart      = apiGetFunctionAddress(CU.getLibrary(), "cuProfilerStart"),
-            ProfilerStop       = apiGetFunctionAddress(CU.getLibrary(), "cuProfilerStop");
-
     }
 
     // --- [ cuProfilerInitialize ] ---

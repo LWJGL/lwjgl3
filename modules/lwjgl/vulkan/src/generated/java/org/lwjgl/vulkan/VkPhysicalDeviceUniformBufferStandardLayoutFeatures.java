@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code uniformBufferStandardLayout} &ndash; indicates that the implementation supports the same layouts for uniform buffers as for storage and other kinds of buffers. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#interfaces-resources-standard-layout">Standard Buffer Layout</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceUniformBufferStandardLayoutFeatures {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 uniformBufferStandardLayout;
+ *     VkBool32 {@link #uniformBufferStandardLayout};
  * }</code></pre>
  */
 public class VkPhysicalDeviceUniformBufferStandardLayoutFeatures extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceUniformBufferStandardLayoutFeatures extends Struct 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code uniformBufferStandardLayout} field. */
+    /** indicates that the implementation supports the same layouts for uniform buffers as for storage and other kinds of buffers. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#interfaces-resources-standard-layout">Standard Buffer Layout</a>. */
     @NativeType("VkBool32")
     public boolean uniformBufferStandardLayout() { return nuniformBufferStandardLayout(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceUniformBufferStandardLayoutFeatures extends Struct 
     public VkPhysicalDeviceUniformBufferStandardLayoutFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceUniformBufferStandardLayoutFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code uniformBufferStandardLayout} field. */
+    /** Sets the specified value to the {@link #uniformBufferStandardLayout} field. */
     public VkPhysicalDeviceUniformBufferStandardLayoutFeatures uniformBufferStandardLayout(@NativeType("VkBool32") boolean value) { nuniformBufferStandardLayout(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceUniformBufferStandardLayoutFeatures extends Struct 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceUniformBufferStandardLayoutFeatures.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceUniformBufferStandardLayoutFeatures.npNext(address()); }
-        /** Returns the value of the {@code uniformBufferStandardLayout} field. */
+        /** @return the value of the {@link VkPhysicalDeviceUniformBufferStandardLayoutFeatures#uniformBufferStandardLayout} field. */
         @NativeType("VkBool32")
         public boolean uniformBufferStandardLayout() { return VkPhysicalDeviceUniformBufferStandardLayoutFeatures.nuniformBufferStandardLayout(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceUniformBufferStandardLayoutFeatures extends Struct 
         public VkPhysicalDeviceUniformBufferStandardLayoutFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceUniformBufferStandardLayoutFeatures.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceUniformBufferStandardLayoutFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceUniformBufferStandardLayoutFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code uniformBufferStandardLayout} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceUniformBufferStandardLayoutFeatures#uniformBufferStandardLayout} field. */
         public VkPhysicalDeviceUniformBufferStandardLayoutFeatures.Buffer uniformBufferStandardLayout(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceUniformBufferStandardLayoutFeatures.nuniformBufferStandardLayout(address(), value ? 1 : 0); return this; }
 
     }

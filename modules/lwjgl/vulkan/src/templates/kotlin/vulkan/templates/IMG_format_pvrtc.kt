@@ -13,6 +13,7 @@ val IMG_format_pvrtc = "IMGFormatPVRTC".nativeClassVK("IMG_format_pvrtc", type =
         """
         {@code VK_IMG_format_pvrtc} provides additional texture compression functionality specific to Imagination Technologies PowerVR Texture compression format (called PVRTC).
 
+        <h5>VK_IMG_format_pvrtc</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_IMG_format_pvrtc}</dd>
@@ -35,7 +36,10 @@ val IMG_format_pvrtc = "IMGFormatPVRTC".nativeClassVK("IMG_format_pvrtc", type =
             <dd><ul>
                 <li>Stuart Smith</li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-09-02</dd>
 

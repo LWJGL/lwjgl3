@@ -33,23 +33,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code dataSize} <b>must</b> be greater than 0</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code dataSize} &ndash; the number of bytes of inline uniform block data pointed to by {@code pData}.</li>
- * <li>{@code pData} &ndash; a pointer to {@code dataSize} number of bytes of data to write to the inline uniform block.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkWriteDescriptorSetInlineUniformBlockEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t dataSize;
- *     void const * pData;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #dataSize};
+ *     void const * {@link #pData};
  * }</code></pre>
  */
 public class VkWriteDescriptorSetInlineUniformBlockEXT extends Struct implements NativeResource {
@@ -97,24 +88,24 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends Struct implements
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code dataSize} field. */
+    /** the number of bytes of inline uniform block data pointed to by {@code pData}. */
     @NativeType("uint32_t")
     public int dataSize() { return ndataSize(address()); }
-    /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code pData} field. */
+    /** a pointer to {@code dataSize} number of bytes of data to write to the inline uniform block. */
     @NativeType("void const *")
     public ByteBuffer pData() { return npData(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkWriteDescriptorSetInlineUniformBlockEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkWriteDescriptorSetInlineUniformBlockEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code pData} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pData} field. */
     public VkWriteDescriptorSetInlineUniformBlockEXT pData(@NativeType("void const *") ByteBuffer value) { npData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -362,24 +353,24 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends Struct implements
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkWriteDescriptorSetInlineUniformBlockEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkWriteDescriptorSetInlineUniformBlockEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkWriteDescriptorSetInlineUniformBlockEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkWriteDescriptorSetInlineUniformBlockEXT.npNext(address()); }
-        /** Returns the value of the {@code dataSize} field. */
+        /** @return the value of the {@link VkWriteDescriptorSetInlineUniformBlockEXT#dataSize} field. */
         @NativeType("uint32_t")
         public int dataSize() { return VkWriteDescriptorSetInlineUniformBlockEXT.ndataSize(address()); }
-        /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code pData} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkWriteDescriptorSetInlineUniformBlockEXT#pData} field. */
         @NativeType("void const *")
         public ByteBuffer pData() { return VkWriteDescriptorSetInlineUniformBlockEXT.npData(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkWriteDescriptorSetInlineUniformBlockEXT#sType} field. */
         public VkWriteDescriptorSetInlineUniformBlockEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkWriteDescriptorSetInlineUniformBlockEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkWriteDescriptorSetInlineUniformBlockEXT#pNext} field. */
         public VkWriteDescriptorSetInlineUniformBlockEXT.Buffer pNext(@NativeType("void const *") long value) { VkWriteDescriptorSetInlineUniformBlockEXT.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code pData} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@link VkWriteDescriptorSetInlineUniformBlockEXT#pData} field. */
         public VkWriteDescriptorSetInlineUniformBlockEXT.Buffer pData(@NativeType("void const *") ByteBuffer value) { VkWriteDescriptorSetInlineUniformBlockEXT.npData(address(), value); return this; }
 
     }

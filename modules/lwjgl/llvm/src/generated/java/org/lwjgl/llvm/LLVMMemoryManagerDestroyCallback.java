@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void *Opaque
  * )</code></pre>
  */
@@ -49,7 +49,7 @@ public abstract class LLVMMemoryManagerDestroyCallback extends Callback implemen
     }
 
     protected LLVMMemoryManagerDestroyCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     LLVMMemoryManagerDestroyCallback(long functionPointer) {

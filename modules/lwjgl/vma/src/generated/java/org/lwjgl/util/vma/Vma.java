@@ -29,17 +29,24 @@ import org.lwjgl.vulkan.*;
  * <p>At program startup:</p>
  * 
  * <ol>
- * <li>Initialize Vulkan to have {@code VkPhysicalDevice} and {@code VkDevice} object.</li>
+ * <li>Initialize Vulkan to have {@code VkPhysicalDevice}, {@code VkDevice} and {@code VkInstance} object.</li>
  * <li>Fill {@link VmaAllocatorCreateInfo} structure and create {@code VmaAllocator} object by calling {@link #vmaCreateAllocator CreateAllocator}.</li>
  * </ol>
  * 
  * <pre><code>
  * VmaAllocatorCreateInfo allocatorInfo = {};
+ * allocatorInfo.vulkanApiVersion = VK_API_VERSION_1_2;
  * allocatorInfo.physicalDevice = physicalDevice;
  * allocatorInfo.device = device;
+ * allocatorInfo.instance = instance;
  * 
  * VmaAllocator allocator;
  * vmaCreateAllocator(&amp;allocatorInfo, &amp;allocator);</code></pre>
+ * 
+ * <p>Only members {@code physicalDevice}, {@code device}, {@code instance} are required. However, you should inform the library which Vulkan version do you
+ * use by setting {@code VmaAllocatorCreateInfo::vulkanApiVersion} and which extensions did you enable by setting {@code VmaAllocatorCreateInfo::flags}
+ * (like {@link #VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT} for {@code VK_KHR_buffer_device_address}). Otherwise, VMA would use only features of Vulkan 1.0 core
+ * with no extensions.</p>
  * 
  * <h4>Resource allocation</h4>
  * 
@@ -263,7 +270,7 @@ import org.lwjgl.vulkan.*;
  * set, you need to manually <b>invalidate</b> cache before reading of mapped pointer and <b>flush</b> cache after writing to mapped pointer. Map/unmap
  * operations don't do that automatically. Vulkan provides following functions for this purpose {@code vkFlushMappedMemoryRangs()},
  * {@code vkInvalidateMappedMemoryRanges()}, but this library provides more convenient functions that refer to given allocation object:
- * {@link #vmaFlushAllocation FlushAllocation}, {@link #vmaInvalidateAllocation InvalidateAllocation}.</p>
+ * {@link #vmaFlushAllocation FlushAllocation}, {@link #vmaInvalidateAllocation InvalidateAllocation}, or multiple objects at once: {@link #vmaFlushAllocations FlushAllocations}, {@link #vmaInvalidateAllocations InvalidateAllocations}.</p>
  * 
  * <p>Regions of memory specified for flush/invalidate must be aligned to {@code VkPhysicalDeviceLimits::nonCoherentAtomSize}. This is automatically ensured
  * by the library. In any memory type that is {@code HOST_VISIBLE} but not {@code HOST_COHERENT}, all allocations within blocks are aligned to this value,
@@ -300,7 +307,7 @@ import org.lwjgl.vulkan.*;
  * 
  * VkMemoryPropertyFlags memFlags;
  * vmaGetMemoryTypeProperties(allocator, allocInfo.memoryType, &amp;memFlags);
- * if((memFlags &amp; VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) == 0)
+ * if((memFlags &amp; VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) != 0)
  * {
  *     // Allocation ended up in mappable memory. You can map it and access it directly.
  *     void* mappedData;
@@ -332,7 +339,7 @@ import org.lwjgl.vulkan.*;
  * VmaAllocationInfo allocInfo;
  * vmaCreateBuffer(allocator, &amp;bufCreateInfo, &amp;allocCreateInfo, &amp;buf, &amp;alloc, &amp;allocInfo);
  * 
- * if(allocInfo.pUserData != nullptr)
+ * if(allocInfo.pMappedData != nullptr)
  * {
  *     // Allocation ended up in mappable memory.
  *     // It's persistently mapped. You can access it directly.
@@ -399,6 +406,105 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>Please note that creating custom memory pools with {@link VmaPoolCreateInfo}{@code ::minBlockCount} set to more than 0 will try to allocate memory blocks
  * without checking whether they fit within budget.</p>
+ * 
+ * <h3>Resource aliasing (overlap)</h3>
+ * 
+ * <p>New explicit graphics APIs (Vulkan and Direct3D 12), thanks to manual memory management, give an opportunity to alias (overlap) multiple resources in
+ * the same region of memory - a feature not available in the old APIs (Direct3D 11, OpenGL). It can be useful to save video memory, but it must be used
+ * with caution.</p>
+ * 
+ * <p>For example, if you know the flow of your whole render frame in advance, you are going to use some intermediate textures or buffers only during a small
+ * range of render passes, and you know these ranges don't overlap in time, you can bind these resources to the same place in memory, even if they have
+ * completely different parameters (width, height, format etc.).</p>
+ * 
+ * <p>Such scenario is possible using VMA, but you need to create your images manually. Then you need to calculate parameters of an allocation to be made
+ * using formula:</p>
+ * 
+ * <ul>
+ * <li>allocation size = max(size of each image)</li>
+ * <li>allocation alignment = max(alignment of each image)</li>
+ * <li>allocation memoryTypeBits = bitwise AND(memoryTypeBits of each image)</li>
+ * </ul>
+ * 
+ * <p>Following example shows two different images bound to the same place in memory, allocated to fit largest of them.</p>
+ * 
+ * <pre><code>
+ * // A 512x512 texture to be sampled.
+ * VkImageCreateInfo img1CreateInfo = { VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO };
+ * img1CreateInfo.imageType = VK_IMAGE_TYPE_2D;
+ * img1CreateInfo.extent.width = 512;
+ * img1CreateInfo.extent.height = 512;
+ * img1CreateInfo.extent.depth = 1;
+ * img1CreateInfo.mipLevels = 10;
+ * img1CreateInfo.arrayLayers = 1;
+ * img1CreateInfo.format = VK_FORMAT_R8G8B8A8_SRGB;
+ * img1CreateInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+ * img1CreateInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+ * img1CreateInfo.usage = VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT;
+ * img1CreateInfo.samples = VK_SAMPLE_COUNT_1_BIT;
+ * 
+ * // A full screen texture to be used as color attachment.
+ * VkImageCreateInfo img2CreateInfo = { VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO };
+ * img2CreateInfo.imageType = VK_IMAGE_TYPE_2D;
+ * img2CreateInfo.extent.width = 1920;
+ * img2CreateInfo.extent.height = 1080;
+ * img2CreateInfo.extent.depth = 1;
+ * img2CreateInfo.mipLevels = 1;
+ * img2CreateInfo.arrayLayers = 1;
+ * img2CreateInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
+ * img2CreateInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+ * img2CreateInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+ * img2CreateInfo.usage = VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
+ * img2CreateInfo.samples = VK_SAMPLE_COUNT_1_BIT;
+ * 
+ * VkImage img1;
+ * res = vkCreateImage(device, &amp;img1CreateInfo, nullptr, &amp;img1);
+ * VkImage img2;
+ * res = vkCreateImage(device, &amp;img2CreateInfo, nullptr, &amp;img2);
+ * 
+ * VkMemoryRequirements img1MemReq;
+ * vkGetImageMemoryRequirements(device, img1, &amp;img1MemReq);
+ * VkMemoryRequirements img2MemReq;
+ * vkGetImageMemoryRequirements(device, img2, &amp;img2MemReq);
+ * 
+ * VkMemoryRequirements finalMemReq = {};
+ * finalMemReq.size = std::max(img1MemReq.size, img2MemReq.size);
+ * finalMemReq.alignment = std::max(img1MemReq.alignment, img2MemReq.alignment);
+ * finalMemReq.memoryTypeBits = img1MemReq.memoryTypeBits &amp; img2MemReq.memoryTypeBits;
+ * // Validate if(finalMemReq.memoryTypeBits != 0)
+ * 
+ * VmaAllocationCreateInfo allocCreateInfo = {};
+ * allocCreateInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;
+ * 
+ * VmaAllocation alloc;
+ * res = vmaAllocateMemory(allocator, &amp;finalMemReq, &amp;allocCreateInfo, &amp;alloc, nullptr);
+ * 
+ * res = vmaBindImageMemory(allocator, alloc, img1);
+ * res = vmaBindImageMemory(allocator, alloc, img2);
+ * 
+ * // You can use img1, img2 here, but not at the same time!
+ * 
+ * vmaFreeMemory(allocator, alloc);
+ * vkDestroyImage(allocator, img2, nullptr);
+ * vkDestroyImage(allocator, img1, nullptr);</code></pre>
+ * 
+ * <p>Remember that using resouces that alias in memory requires proper synchronization. You need to issue a memory barrier to make sure commands that use
+ * {@code img1} and {@code img2} don't overlap on GPU timeline. You also need to treat a resource after aliasing as uninitialized - containing garbage
+ * data. For example, if you use {@code img1} and then want to use {@code img2}, you need to issue an image memory barrier for {@code img2} with
+ * {@code oldLayout = VK_IMAGE_LAYOUT_UNDEFINED}.</p>
+ * 
+ * <p>Additional considerations:</p>
+ * 
+ * <ul>
+ * <li>Vulkan also allows to interpret contents of memory between aliasing resources consistently in some cases. See chapter 11.8. "Memory Aliasing" of
+ * Vulkan specification or {@code VK_IMAGE_CREATE_ALIAS_BIT} flag.</li>
+ * <li>You can create more complex layout where different images and buffers are bound at different offsets inside one large allocation. For example, one
+ * can imagine a big texture used in some render passes, aliasing with a set of many small buffers used between in some further passes. To bind a
+ * resource at non-zero offset of an allocation, use {@link #vmaBindBufferMemory2 BindBufferMemory2} / {@link #vmaBindImageMemory2 BindImageMemory2}.</li>
+ * <li>Before allocating memory for the resources you want to alias, check {@code memoryTypeBits} returned in memory requirements of each resource to make
+ * sure the bits overlap. Some GPUs may expose multiple memory types suitable e.g. only for buffers or images with {@code COLOR_ATTACHMENT} usage, so
+ * the sets of memory types supported by your resources may be disjoint. Aliasing them is not possible in that case.</li>
+ * </ul>
  * 
  * <h3>Custom memory pools</h3>
  * 
@@ -962,6 +1068,12 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>That string is also printed in JSON report created by {@link #vmaBuildStatsString BuildStatsString}.</p>
  * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>Passing string name to VMA allocation doesn't automatically set it to the Vulkan buffer or image created with it. You must do it manually using an
+ * extension like {@code VK_EXT_debug_utils}, which is independent of this library.</p>
+ * </div>
+ * 
  * <h3>Debugging incorrect memory usage</h3>
  * 
  * <p>If you suspect a bug with memory usage, like usage of uninitialized memory or memory being overwritten out of bounds of an allocation, you can use
@@ -1120,7 +1232,8 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>This is a more complex situation. Different solutions are possible, and the best one depends on specific GPU type, but you can use this simple approach
  * for the start. Prefer to write to such resource sequentially (e.g. using {@code memcpy}). Don't perform random access or any reads from it on CPU, as
- * it may be very slow.</p>
+ * it may be very slow. Also note that textures written directly from the host through a mapped pointer need to be in {@code LINEAR} not {@code OPTIMAL}
+ * layout.</p>
  * 
  * <h5>Readback</h5>
  * 
@@ -1146,10 +1259,10 @@ import org.lwjgl.vulkan.*;
  * <p>For resources that you frequently write on CPU and read on GPU, many solutions are possible:</p>
  * 
  * <ol>
- * <li>Create one copy in video memory using {@link #VMA_MEMORY_USAGE_GPU_ONLY MEMORY_USAGE_GPU_ONLY}, second copy in system memory using {@link #VMA_MEMORY_USAGE_CPU_ONLY MEMORY_USAGE_CPU_ONLY} and submit explicit tranfer
- * each time.</li>
- * <li>Create just single copy using {@link #VMA_MEMORY_USAGE_CPU_TO_GPU MEMORY_USAGE_CPU_TO_GPU}, map it and fill it on CPU, read it directly on GPU.</li>
- * <li>Create just single copy using {@link #VMA_MEMORY_USAGE_CPU_ONLY MEMORY_USAGE_CPU_ONLY}, map it and fill it on CPU, read it directly on GPU.</li>
+ * <li>Create one copy in video memory using {@link #VMA_MEMORY_USAGE_GPU_ONLY MEMORY_USAGE_GPU_ONLY}, second copy in system memory using {@link #VMA_MEMORY_USAGE_CPU_ONLY MEMORY_USAGE_CPU_ONLY} and submit explicit
+ * transfer each time.</li>
+ * <li>Create just a single copy using {@link #VMA_MEMORY_USAGE_CPU_TO_GPU MEMORY_USAGE_CPU_TO_GPU}, map it and fill it on CPU, read it directly on GPU.</li>
+ * <li>Create just a single copy using {@link #VMA_MEMORY_USAGE_CPU_ONLY MEMORY_USAGE_CPU_ONLY}, map it and fill it on CPU, read it directly on GPU.</li>
  * </ol>
  * 
  * <p>Which solution is the most efficient depends on your resource and especially on the GPU. It is best to measure it and then make the decision. Some
@@ -1173,6 +1286,9 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>You should take some measurements to decide which option is faster in case of your specific resource.</p>
  * 
+ * <p>Note that textures accessed directly from the host through a mapped pointer need to be in {@code LINEAR} layout, which may slow down their usage on the
+ * device. Textures accessed only by the device and transfer operations can use {@code OPTIMAL} layout.</p>
+ * 
  * <p>If you don't want to specialize your code for specific types of GPUs, you can still make an simple optimization for cases when your resource ends up in
  * mappable memory to use it directly in this case instead of creating CPU-side staging copy. For details see <em>Finding out if memory is mappable</em>.</p>
  * 
@@ -1192,7 +1308,7 @@ import org.lwjgl.vulkan.*;
  * <h4>Device heap memory limit</h4>
  * 
  * <p>When device memory of certain heap runs out of free space, new allocations may fail (returning error code) or they may succeed, silently pushing some
- * existing memory blocks from GPU VRAM to system RAM (which degrades performance). This behavior is implementation-dependant - it depends on GPU vendor
+ * existing memory blocks from GPU VRAM to system RAM (which degrades performance). This behavior is implementation-dependent - it depends on GPU vendor
  * and graphics driver.</p>
  * 
  * <p>On AMD cards it can be controlled while creating Vulkan device object by using {@code VK_AMD_memory_overallocation_behavior} extension, if available.</p>
@@ -1240,9 +1356,98 @@ import org.lwjgl.vulkan.*;
  * <p>To learn more about this extension, see:</p>
  * 
  * <ul>
- * <li><a href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation in Vulkan specification</a></li>
+ * <li><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation in Vulkan specification</a></li>
  * <li><a href="http://asawicki.info/articles/VK_KHR_dedicated_allocation.php5">VK_KHR_dedicated_allocation unofficial manual</a></li>
  * </ul>
+ * 
+ * <h4>VK_AMD_device_coherent_memory</h4>
+ * 
+ * <p>{@code VK_AMD_device_coherent_memory} is a device extension that enables access to additional memory types with
+ * {@code VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD} and {@code VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD} flag. It is useful mostly for allocation of
+ * buffers intended for writing "breadcrumb markers" in between passes or draw calls, which in turn are useful for debugging GPU crash/hang/TDR cases.</p>
+ * 
+ * <p>When the extension is available but has not been enabled, Vulkan physical device still exposes those memory types, but their usage is forbidden. VMA
+ * automatically takes care of that - it returns {@code VK_ERROR_FEATURE_NOT_PRESENT} when an attempt to allocate memory of such type is made.</p>
+ * 
+ * <p>If you want to use this extension in connection with VMA, follow these steps:</p>
+ * 
+ * <h5>Initialization</h5>
+ * 
+ * <ol>
+ * <li>Call {@code vkEnumerateDeviceExtensionProperties} for the physical device. Check if the extension is supported - if returned array of
+ * {@code VkExtensionProperties} contains {@code "VK_AMD_device_coherent_memory"}.</li>
+ * <li>Call {@code vkGetPhysicalDeviceFeatures2} for the physical device instead of old {@code vkGetPhysicalDeviceFeatures}. Attach additional structure
+ * {@code VkPhysicalDeviceCoherentMemoryFeaturesAMD} to {@code VkPhysicalDeviceFeatures2::pNext} to be returned. Check if the device feature is really
+ * supported - check if {@code VkPhysicalDeviceCoherentMemoryFeaturesAMD::deviceCoherentMemory} is true.</li>
+ * <li>While creating device with {@code vkCreateDevice}, enable this extension - add {@code "VK_AMD_device_coherent_memory"} to the list passed as
+ * {@code VkDeviceCreateInfo::ppEnabledExtensionNames}.</li>
+ * <li>While creating the device, also don't set {@code VkDeviceCreateInfo::pEnabledFeatures}. Fill in {@code VkPhysicalDeviceFeatures2} structure instead
+ * and pass it as {@code VkDeviceCreateInfo::pNext}. Enable this device feature - attach additional structure
+ * {@code VkPhysicalDeviceCoherentMemoryFeaturesAMD} to {@code VkPhysicalDeviceFeatures2::pNext} and set its member {@code deviceCoherentMemory} to
+ * {@code VK_TRUE}.</li>
+ * <li>While creating {@code VmaAllocator} with {@link #vmaCreateAllocator CreateAllocator} inform VMA that you have enabled this extension and feature - add
+ * {@link #VMA_ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT} to {@link VmaAllocatorCreateInfo}{@code ::flags}.</li>
+ * </ol>
+ * 
+ * <h5>Usage</h5>
+ * 
+ * <p>After following steps described above, you can create VMA allocations and custom pools out of the special {@code DEVICE_COHERENT} and
+ * {@code DEVICE_UNCACHED} memory types on eligible devices. There are multiple ways to do it, for example:</p>
+ * 
+ * <ul>
+ * <li>You can request or prefer to allocate out of such memory types by adding {@code VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD} to
+ * {@link VmaAllocationCreateInfo}{@code ::requiredFlags} or {@code VmaAllocationCreateInfo::preferredFlags}. Those flags can be freely mixed with other
+ * ways of choosing memory type, like setting {@code VmaAllocationCreateInfo::usage}.</li>
+ * <li>If you manually found memory type index to use for this purpose, force allocation from this specific index by setting
+ * {@code VmaAllocationCreateInfo::memoryTypeBits = 1u << index}.</li>
+ * </ul>
+ * 
+ * <h5>More information</h5>
+ * 
+ * <p>To learn more about this extension, see
+ * <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/chap44.html#VK_AMD_device_coherent_memory">VK_AMD_device_coherent_memory in Vulkan specification</a>.</p>
+ * 
+ * <p>Example use of this extension can be found in the code of the sample and test suite accompanying this library.</p>
+ * 
+ * <h4>Enabling buffer device address</h4>
+ * 
+ * <p>Device extension {@code VK_KHR_buffer_device_address} allows to fetch raw GPU pointer to a buffer and pass it for usage in a shader code. It is
+ * promoted to core Vulkan 1.2.</p>
+ * 
+ * <p>If you want to use this feature in connection with VMA, follow these steps:</p>
+ * 
+ * <h5>Initialization</h5>
+ * 
+ * <ol>
+ * <li>(For Vulkan version &lt; 1.2) Call {@code vkEnumerateDeviceExtensionProperties} for the physical device. Check if the extension is supported - if
+ * returned array of {@code VkExtensionProperties} contains {@code "VK_KHR_buffer_device_address"}.</li>
+ * <li>Call {@code vkGetPhysicalDeviceFeatures2} for the physical device instead of old {@code vkGetPhysicalDeviceFeatures}. Attach additional structure
+ * {@code VkPhysicalDeviceBufferDeviceAddressFeatures*} to {@code VkPhysicalDeviceFeatures2::pNext} to be returned. Check if the device feature is
+ * really supported - check if {@code VkPhysicalDeviceBufferDeviceAddressFeatures*::bufferDeviceAddress} is true.</li>
+ * <li>(For Vulkan version &lt; 1.2) While creating device with {@code vkCreateDevice}, enable this extension - add {@code "VK_KHR_buffer_device_address"}
+ * to the list passed as {@code VkDeviceCreateInfo::ppEnabledExtensionNames}.</li>
+ * <li>While creating the device, also don't set {@code VkDeviceCreateInfo::pEnabledFeatures}. Fill in {@code VkPhysicalDeviceFeatures2} structure instead
+ * and pass it as {@code VkDeviceCreateInfo::pNext}. Enable this device feature - attach additional structure
+ * {@code VkPhysicalDeviceBufferDeviceAddressFeatures*} to {@code VkPhysicalDeviceFeatures2::pNext} and set its member {@code bufferDeviceAddress} to
+ * {@code VK_TRUE}.</li>
+ * <li>While creating {@code VmaAllocator} with {@link #vmaCreateAllocator CreateAllocator} inform VMA that you have enabled this feature - add
+ * {@link #VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT} to {@link VmaAllocatorCreateInfo}{@code ::flags}.</li>
+ * </ol>
+ * 
+ * <h5>Usage</h5>
+ * 
+ * <p>After following steps described above, you can create buffers with {@code VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT*} using VMA. The library
+ * automatically adds {@code VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT*} to allocated memory blocks wherever it might be needed.</p>
+ * 
+ * <p>Please note that the library supports only {@code VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT*}. The second part of this functionality related to
+ * "capture and replay" is not supported, as it is intended for usage in debugging tools like RenderDoc, not in everyday Vulkan usage.</p>
+ * 
+ * <h5>More information</h5>
+ * 
+ * <p>To learn more about this extension, see
+ * <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/chap46.html#VK_KHR_buffer_device_address">VK_KHR_buffer_device_address in Vulkan specification</a></p>
+ * 
+ * <p>Example use of this extension can be found in the code of the sample and test suite accompanying this library.</p>
  * 
  * <h3>General considerations</h3>
  * 
@@ -1308,11 +1513,14 @@ import org.lwjgl.vulkan.*;
  * <li>Allocations for imported/exported external memory. They tend to require explicit memory type index and dedicated allocation anyway, so they don't
  * interact with main features of this library. Such special purpose allocations should be made manually, using {@code vkCreateBuffer()} and
  * {@code vkAllocateMemory()}.</li>
+ * <li>Sub-allocation of parts of one large buffer. Although recommended as a good practice, it is the user's responsibility to implement such logic on
+ * top of VMA.</li>
  * <li>Recreation of buffers and images. Although the library has functions for buffer and image creation ({@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage}), you need to
  * recreate these objects yourself after defragmentation. That's because the big structures {@code VkBufferCreateInfo}, {@code VkImageCreateInfo} are
  * not stored in {@code VmaAllocation} object.</li>
  * <li>Handling CPU memory allocation failures. When dynamically creating small C++ objects in CPU memory (not Vulkan memory), allocation failures are not
- * checked and handled gracefully, because that would complicate code significantly and is usually not needed in desktop PC applications anyway.</li>
+ * checked and handled gracefully, because that would complicate code significantly and is usually not needed in desktop PC applications anyway.
+ * Success of an allocation is just checked with an assert.</li>
  * <li>Code free of any compiler warnings. Maintaining the library to compile and work correctly on so many different platforms is hard enough. Being free
  * of any warnings, on any version of any compiler, is simply not feasible.</li>
  * <li>This is a C++ library with C interface. Bindings or ports to any other programming languages are welcomed as external projects and are not going to
@@ -1320,6 +1528,8 @@ import org.lwjgl.vulkan.*;
  * </ul>
  */
 public class Vma {
+
+    static { LibVma.initialize(); }
 
     /**
      * Flags to be used in {@link VmaRecordSettings}{@code ::flags}.
@@ -1393,13 +1603,64 @@ public class Vma {
      * <p>The extension provides query for current memory usage and budget, which will probably be more accurate than an estimation used by the library
      * otherwise.</p>
      * </li>
+     * <li>{@link #VMA_ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT} - 
+     * Enables usage of {@code VK_AMD_device_coherent_memory} extension.
+     * 
+     * <p>You may set this flag only if you:</p>
+     * 
+     * <ul>
+     * <li>found out that this device extension is supported and enabled it while creating Vulkan device passed as VmaAllocatorCreateInfo::device,</li>
+     * <li>checked that `VkPhysicalDeviceCoherentMemoryFeaturesAMD::deviceCoherentMemory` is true and set it while creating the Vulkan device,</li>
+     * <li>want it to be used internally by this library.</li>
+     * </ul>
+     * 
+     * <p>The extension and accompanying device feature provide access to memory types with `VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD` and `VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD` flags. They are useful mostly for writing breadcrumb markers - a common method for debugging GPU crash/hang/TDR.</p>
+     * 
+     * <p>When the extension is not enabled, such memory types are still enumerated, but their usage is illegal. To protect from this error, if you don't create the allocator with this flag, it will refuse to allocate any memory or create a custom pool in such memory type, returning `VK_ERROR_FEATURE_NOT_PRESENT`.</p>
+     * </li>
+     * <li>{@link #VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT} - 
+     * Enables usage of "buffer device address" feature, which allows you to use function
+     * `vkGetBufferDeviceAddress*` to get raw GPU pointer to a buffer and pass it for usage inside a shader.
+     * 
+     * <p>You may set this flag only if you:</p>
+     * 
+     * <p>1. (For Vulkan version &lt; 1.2) Found as available and enabled device extension
+     * VK_KHR_buffer_device_address.
+     * This extension is promoted to core Vulkan 1.2.
+     * 2. Found as available and enabled device feature `VkPhysicalDeviceBufferDeviceAddressFeatures::bufferDeviceAddress`.</p>
+     * 
+     * <p>When this flag is set, you can create buffers with `VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT` using VMA.
+     * The library automatically adds `VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT` to
+     * allocated memory blocks wherever it might be needed.</p>
+     * 
+     * <p>For more information, see documentation chapter \ref enabling_buffer_device_address.</p>
+     * </li>
+     * <li>{@link #VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT} - 
+     * Enables usage of VK_EXT_memory_priority extension in the library.
+     * 
+     * <p>You may set this flag only if you found available and enabled this device extension,
+     * along with `VkPhysicalDeviceMemoryPriorityFeaturesEXT::memoryPriority == VK_TRUE`,
+     * while creating Vulkan device passed as VmaAllocatorCreateInfo::device.</p>
+     * 
+     * <p>When this flag is used, VmaAllocationCreateInfo::priority and VmaPoolCreateInfo::priority
+     * are used to set priorities of allocated Vulkan memory. Without it, these variables are ignored.</p>
+     * 
+     * <p>A priority must be a floating-point value between 0 and 1, indicating the priority of the allocation relative to other memory allocations.
+     * Larger values are higher priority. The granularity of the priorities is implementation-dependent.
+     * It is automatically passed to every call to `vkAllocateMemory` done by the library using structure `VkMemoryPriorityAllocateInfoEXT`.
+     * The value to be used for default priority is 0.5.
+     * For more details, see the documentation of the VK_EXT_memory_priority extension.</p>
+     * </li>
      * </ul>
      */
     public static final int
-        VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT  = 0x1,
-        VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT = 0x2,
-        VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT         = 0x4,
-        VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT        = 0x8;
+        VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT    = 0x1,
+        VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT   = 0x2,
+        VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT           = 0x4,
+        VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT          = 0x8,
+        VMA_ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT = 0x10,
+        VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT      = 0x20,
+        VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT        = 0x40;
 
     /**
      * {@code VmaMemoryUsage}
@@ -1442,8 +1703,8 @@ public class Vma {
      * 
      * <p>CPU access is typically uncached. Writes may be write-combined.</p>
      * 
-     * <p>Usage: Resources written frequently by host (dynamic), read by device. E.g. textures, vertex buffers, uniform buffers updated every frame or every
-     * draw call.</p>
+     * <p>Usage: Resources written frequently by host (dynamic), read by device. E.g. textures (with LINEAR layout), vertex buffers, uniform buffers updated
+     * every frame or every draw call.</p>
      * </li>
      * <li>{@link #VMA_MEMORY_USAGE_GPU_TO_CPU MEMORY_USAGE_GPU_TO_CPU} - 
      * Memory mappable on host (guarantees to be {@code HOST_VISIBLE}) and cached.
@@ -1512,7 +1773,7 @@ public class Vma {
      * 
      * <p>Pointer to mapped memory will be returned through {@link VmaAllocationInfo}{@code ::pMappedData}.</p>
      * 
-     * <p>Is it valid to use this flag for allocation made from memory type that is not {@code HOST_VISIBLE}. This flag is then ignored and memory is not
+     * <p>It is valid to use this flag for allocation made from memory type that is not {@code HOST_VISIBLE}. This flag is then ignored and memory is not
      * mapped. This is useful if you need an allocation that is efficient to use on GPU ({@code DEVICE_LOCAL}) and still want to map it directly if
      * possible on platforms that support it (e.g. Intel GPU).</p>
      * 
@@ -1631,7 +1892,8 @@ public class Vma {
         VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT                 = 0x8,
         VMA_POOL_CREATE_ALGORITHM_MASK                      = VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT | VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT;
 
-    static { LibVma.initialize(); }
+    /** Flags to be used in {@link #vmaDefragmentationBegin DefragmentationBegin}. {@code VmaDefragmentationFlagBits} */
+    public static final int VMA_DEFRAGMENTATION_FLAG_INCREMENTAL = 0x1;
 
     protected Vma() {
         throw new UnsupportedOperationException();
@@ -1667,6 +1929,24 @@ public class Vma {
             check(allocator);
         }
         nvmaDestroyAllocator(allocator);
+    }
+
+    // --- [ vmaGetAllocatorInfo ] ---
+
+    /** Unsafe version of: {@link #vmaGetAllocatorInfo GetAllocatorInfo} */
+    public static native void nvmaGetAllocatorInfo(long allocator, long pAllocatorInfo);
+
+    /**
+     * Returns information about existing {@code VmaAllocator} object - handle to Vulkan device etc.
+     * 
+     * <p>It might be useful if you want to keep just the {@code VmaAllocator} handle and fetch other required handles to {@code VkPhysicalDevice},
+     * {@code VkDevice} etc. every time using this function.</p>
+     */
+    public static void vmaGetAllocatorInfo(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocatorInfo *") VmaAllocatorInfo pAllocatorInfo) {
+        if (CHECKS) {
+            check(allocator);
+        }
+        nvmaGetAllocatorInfo(allocator, pAllocatorInfo.address());
     }
 
     // --- [ vmaGetPhysicalDeviceProperties ] ---
@@ -2202,7 +2482,7 @@ public class Vma {
      * 
      * <p>Passing {@code VK_NULL_HANDLE} as {@code allocation} is valid. Such function call is just skipped.</p>
      */
-    public static void vmaFreeMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation) {
+    public static void vmaFreeMemory(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation const") long allocation) {
         if (CHECKS) {
             check(allocator);
         }
@@ -2224,35 +2504,11 @@ public class Vma {
      * <p>Allocations in {@code pAllocations} array can come from any memory pools and types. Passing {@code VK_NULL_HANDLE} as elements of {@code pAllocations}
      * array is valid. Such entries are just skipped.</p>
      */
-    public static void vmaFreeMemoryPages(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation *") PointerBuffer pAllocations) {
+    public static void vmaFreeMemoryPages(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation const *") PointerBuffer pAllocations) {
         if (CHECKS) {
             check(allocator);
         }
         nvmaFreeMemoryPages(allocator, pAllocations.remaining(), memAddress(pAllocations));
-    }
-
-    // --- [ vmaResizeAllocation ] ---
-
-    /** Unsafe version of: {@link #vmaResizeAllocation ResizeAllocation} */
-    public static native int nvmaResizeAllocation(long allocator, long allocation, long newSize);
-
-    /**
-     * Deprecated.
-     * 
-     * <p>In version 2.2.0 it used to try to change allocation's size without moving or reallocating it. In current version it returns {@code VK_SUCCESS} only if
-     * {@code newSize} equals current allocation's size. Otherwise returns {@code VK_ERROR_OUT_OF_POOL_MEMORY}, indicating that allocation's size could not be
-     * changed.</p>
-     *
-     * @return {@code VK_SUCCESS} if allocation's size has been successfully changed. Returns {@code VK_ERROR_OUT_OF_POOL_MEMORY} if allocation's size could not be
-     *         changed.
-     */
-    @NativeType("VkResult")
-    public static int vmaResizeAllocation(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkDeviceSize") long newSize) {
-        if (CHECKS) {
-            check(allocator);
-            check(allocation);
-        }
-        return nvmaResizeAllocation(allocator, allocation, newSize);
     }
 
     // --- [ vmaGetAllocationInfo ] ---
@@ -2330,7 +2586,6 @@ public class Vma {
         if (CHECKS) {
             check(allocator);
             check(allocation);
-            check(pUserData);
         }
         nvmaSetAllocationUserData(allocator, allocation, pUserData);
     }
@@ -2474,6 +2729,8 @@ public class Vma {
      * 
      * <p>Warning! {@code offset} and {@code size} are relative to the contents of given {@code allocation}. If you mean whole allocation, you can pass 0 and
      * {@code VK_WHOLE_SIZE}, respectively. Do not pass allocation's offset as {@code offset}!!!</p>
+     * 
+     * <p>This function returns the {@code VkResult} from {@code vkFlushMappedMemoryRanges} if it is called, otherwise {@code VK_SUCCESS}.</p>
      */
     public static void vmaInvalidateAllocation(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkDeviceSize") long offset, @NativeType("VkDeviceSize") long size) {
         if (CHECKS) {
@@ -2481,6 +2738,58 @@ public class Vma {
             check(allocation);
         }
         nvmaInvalidateAllocation(allocator, allocation, offset, size);
+    }
+
+    // --- [ vmaFlushAllocations ] ---
+
+    /** Unsafe version of: {@link #vmaFlushAllocations FlushAllocations} */
+    public static native int nvmaFlushAllocations(long allocator, int allocationCount, long allocations, long offsets, long sizes);
+
+    /**
+     * Flushes memory of given set of allocations.
+     * 
+     * <p>Calls {@code vkFlushMappedMemoryRanges()} for memory associated with given ranges of given allocations. For more information, see documentation of {@link #vmaFlushAllocation FlushAllocation}.</p>
+     * 
+     * <p>This function returns the {@code VkResult} from {@code vkFlushMappedMemoryRanges} if it is called, otherwise {@code VK_SUCCESS}.</p>
+     *
+     * @param offsets If not null, it must point to an array of offsets of regions to flush, relative to the beginning of respective allocations. Null means all ofsets are zero.
+     * @param sizes   If not null, it must point to an array of sizes of regions to flush in respective allocations. Null means `VK_WHOLE_SIZE` for all allocations.
+     */
+    @NativeType("VkResult")
+    public static int vmaFlushAllocations(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation const *") PointerBuffer allocations, @Nullable @NativeType("VkDeviceSize const *") LongBuffer offsets, @Nullable @NativeType("VkDeviceSize const *") LongBuffer sizes) {
+        if (CHECKS) {
+            check(allocator);
+            checkSafe(offsets, allocations.remaining());
+            checkSafe(sizes, allocations.remaining());
+        }
+        return nvmaFlushAllocations(allocator, allocations.remaining(), memAddress(allocations), memAddressSafe(offsets), memAddressSafe(sizes));
+    }
+
+    // --- [ vmaInvalidateAllocations ] ---
+
+    /** Unsafe version of: {@link #vmaInvalidateAllocations InvalidateAllocations} */
+    public static native int nvmaInvalidateAllocations(long allocator, int allocationCount, long allocations, long offsets, long sizes);
+
+    /**
+     * Invalidates memory of given set of allocations.
+     * 
+     * <p>Calls {@code vkInvalidateMappedMemoryRanges()} for memory associated with given ranges of given allocations. For more information, see documentation of {@link #vmaInvalidateAllocation InvalidateAllocation}.</p>
+     * 
+     * <p>This function returns the {@code VkResult} from {@code vkInvalidateMappedMemoryRanges} if it is called, otherwise {@code VK_SUCCESS}.</p>
+     *
+     * @param offsets if not null, it must point to an array of offsets of regions to flush, relative to the beginning of respective allocations. Null means all ofsets
+     *                are zero.
+     * @param sizes   if not null, it must point to an array of sizes of regions to flush in respective allocations. Null means {@code VK_WHOLE_SIZE} for all
+     *                allocations.
+     */
+    @NativeType("VkResult")
+    public static int vmaInvalidateAllocations(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation const *") PointerBuffer allocations, @Nullable @NativeType("VkDeviceSize const *") LongBuffer offsets, @Nullable @NativeType("VkDeviceSize const *") LongBuffer sizes) {
+        if (CHECKS) {
+            check(allocator);
+            checkSafe(offsets, allocations.remaining());
+            checkSafe(sizes, allocations.remaining());
+        }
+        return nvmaInvalidateAllocations(allocator, allocations.remaining(), memAddress(allocations), memAddressSafe(offsets), memAddressSafe(sizes));
     }
 
     // --- [ vmaCheckCorruption ] ---
@@ -2577,6 +2886,30 @@ public class Vma {
         return nvmaDefragmentationEnd(allocator, context);
     }
 
+    // --- [ vmaBeginDefragmentationPass ] ---
+
+    public static native int nvmaBeginDefragmentationPass(long allocator, long context, long pInfo);
+
+    @NativeType("VkResult")
+    public static int vmaBeginDefragmentationPass(@NativeType("VmaAllocator") long allocator, @NativeType("VmaDefragmentationContext") long context, @NativeType("VmaDefragmentationPassInfo *") VmaDefragmentationPassInfo pInfo) {
+        if (CHECKS) {
+            check(allocator);
+        }
+        return nvmaBeginDefragmentationPass(allocator, context, pInfo.address());
+    }
+
+    // --- [ vmaEndDefragmentationPass ] ---
+
+    public static native int nvmaEndDefragmentationPass(long allocator, long context);
+
+    @NativeType("VkResult")
+    public static int vmaEndDefragmentationPass(@NativeType("VmaAllocator") long allocator, @NativeType("VmaDefragmentationContext") long context) {
+        if (CHECKS) {
+            check(allocator);
+        }
+        return nvmaEndDefragmentationPass(allocator, context);
+    }
+
     // --- [ vmaDefragment ] ---
 
     /**
@@ -2622,7 +2955,7 @@ public class Vma {
      * @return {@code VK_SUCCESS} if completed, negative error code in case of error.
      */
     @NativeType("VkResult")
-    public static int vmaDefragment(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation *") PointerBuffer pAllocations, @Nullable @NativeType("VkBool32 *") IntBuffer pAllocationsChanged, @Nullable @NativeType("VmaDefragmentationInfo const *") VmaDefragmentationInfo pDefragmentationInfo, @Nullable @NativeType("VmaDefragmentationStats *") VmaDefragmentationStats pDefragmentationStats) {
+    public static int vmaDefragment(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation const *") PointerBuffer pAllocations, @Nullable @NativeType("VkBool32 *") IntBuffer pAllocationsChanged, @Nullable @NativeType("VmaDefragmentationInfo const *") VmaDefragmentationInfo pDefragmentationInfo, @Nullable @NativeType("VmaDefragmentationStats *") VmaDefragmentationStats pDefragmentationStats) {
         if (CHECKS) {
             check(allocator);
             checkSafe(pAllocationsChanged, pAllocations.remaining());
@@ -2665,7 +2998,7 @@ public class Vma {
      * <p>This function is similar to {@link #vmaBindBufferMemory BindBufferMemory}, but it provides additional parameters.</p>
      * 
      * <p>If {@code pNext} is not null, {@code VmaAllocator} object must have been created with {@link #VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT} flag or with
-     * {@link VmaAllocatorCreateInfo}{@code ::vulkanApiVersion == VK_API_VERSION_1_1}. Otherwise the call fails.</p>
+     * {@link VmaAllocatorCreateInfo}{@code ::vulkanApiVersion >= VK_API_VERSION_1_1}. Otherwise the call fails.</p>
      *
      * @param allocationLocalOffset additional offset to be added while binding, relative to the beginning of the {@code allocatio}n. Normally it should be 0.
      * @param pNext                 a chain of structures to be attached to {@code VkBindBufferMemoryInfoKHR} structure used internally. Normally it should be {@code null}.
@@ -2714,7 +3047,7 @@ public class Vma {
      * <p>This function is similar to {@link #vmaBindImageMemory BindImageMemory}, but it provides additional parameters.</p>
      * 
      * <p>If {@code pNext} is not null, {@code VmaAllocator} object must have been created with {@link #VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT} flag or with
-     * {@link VmaAllocatorCreateInfo}{@code ::vulkanApiVersion == VK_API_VERSION_1_1}. Otherwise the call fails.</p>
+     * {@link VmaAllocatorCreateInfo}{@code ::vulkanApiVersion >= VK_API_VERSION_1_1}. Otherwise the call fails.</p>
      *
      * @param allocationLocalOffset additional offset to be added while binding, relative to the beginning of the {@code allocatio}n. Normally it should be 0.
      * @param pNext                 a chain of structures to be attached to {@code VkBindImageMemoryInfoKHR} structure used internally. Normally it should be null.
@@ -2752,6 +3085,12 @@ public class Vma {
      * whether it requires or prefers the new buffer to have dedicated allocation. If yes, and if dedicated allocation is possible
      * {@link VmaAllocationCreateInfo}{@code ::pool} is null and {@link #VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT ALLOCATION_CREATE_NEVER_ALLOCATE_BIT} is not used), it creates dedicated allocation for this
      * buffer, just like when using {@link #VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT}.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>This function creates a new {@code VkBuffer}. Sub-allocation of parts of one large buffer, although recommended as a good practice, is out of scope of
+     * this library and could be implemented by the user as a higher-level logic on top of VMA.</p>
+     * </div>
      *
      * @param pBuffer         buffer that was created
      * @param pAllocation     allocation that was created
@@ -2787,7 +3126,6 @@ public class Vma {
     public static void vmaDestroyBuffer(@NativeType("VmaAllocator") long allocator, @NativeType("VkBuffer") long buffer, @NativeType("VmaAllocation") long allocation) {
         if (CHECKS) {
             check(allocator);
-            check(allocation);
         }
         nvmaDestroyBuffer(allocator, buffer, allocation);
     }
@@ -2834,7 +3172,6 @@ public class Vma {
     public static void vmaDestroyImage(@NativeType("VmaAllocator") long allocator, @NativeType("VkImage") long image, @NativeType("VmaAllocation") long allocation) {
         if (CHECKS) {
             check(allocator);
-            check(allocation);
         }
         nvmaDestroyImage(allocator, image, allocation);
     }

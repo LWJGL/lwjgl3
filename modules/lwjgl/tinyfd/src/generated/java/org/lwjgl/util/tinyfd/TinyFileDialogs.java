@@ -35,143 +35,176 @@ public class TinyFileDialogs {
 
     static {
         Library.loadSystem(System::load, System::loadLibrary, TinyFileDialogs.class, "org.lwjgl.tinyfd", Platform.mapLibraryNameBundled("lwjgl_tinyfd"));
-        tinyfd_winUtf8().put(0, 1);
+        if (Platform.get() == Platform.WINDOWS) {
+            tinyfd_setGlobalInt("tinyfd_winUtf8", 1);
+        }
     }
+
+    /** Contains tinyfd current version number. */
+    public static final String tinyfd_version = "tinyfd_version";
+
+    /** Contains info about requirements. */
+    public static final String tinyfd_needs = "tinyfd_needs";
+
+    /**
+     * If you pass "tinyfd_query" as {@code aTitle}, the functions will not display the dialogs but will fill {@code tinyfd_response} with the retain solution
+     * and return 0 for console mode, 1 for graphic mode.
+     * 
+     * <p>Possible values for {@code tinyfd_response} are (all lowercase) for the graphic mode:</p>
+     * 
+     * <pre><code>
+     * windows_wchar windows applescript kdialog zenity zenity3 matedialog
+     * shellementary qarma yad python2-tkinter python3-tkinter python-dbus
+     * perl-dbus gxmessage gmessage xmessage xdialog gdialog</code></pre>
+     * 
+     * <p>For the console mode:</p>
+     * 
+     * <pre><code>
+     * dialog whiptail basicinput no_solution</code></pre>
+     */
+    public static final String tinyfd_response = "tinyfd_response";
+
+    /** 0 (default) or 1 : on unix, prints the command line calls */
+    public static final String tinyfd_verbose = "tinyfd_verbose";
+
+    /** 1 (default) or 0 : on unix, hide errors and warnings from called dialogs */
+    public static final String tinyfd_silent = "tinyfd_silent";
+
+    /** Curses dialogs are difficult to use, on windows they are only ascii and uses the unix backslash */
+    public static final String tinyfd_allowCursesDialogs = "tinyfd_allowCursesDialogs";
+
+    /**
+     * 0 (default) or 1. For unix &amp; windows: 0 (graphic mode) or 1 (console mode).
+     * 
+     * <p>0: try to use a graphic solution, if it fails then it uses console mode.</p>
+     * 
+     * <p>1: forces all dialogs into console mode even when an X server is present, it can use the package dialog or dialog.exe. On windows it only make sense
+     * for console applications</p>
+     */
+    public static final String tinyfd_forceConsole = "tinyfd_forceConsole";
+
+    /**
+     * 0 (default) or 1.
+     * 
+     * <p>Some systems don't set the environment variable {@code DISPLAY} even when a graphic display is present. Set this to 1 to tell tinyfiledialogs to
+     * assume the existence of a graphic display.</p>
+     */
+    public static final String tinyfd_assumeGraphicDisplay = "tinyfd_assumeGraphicDisplay";
+
+    /**
+     * On windows, set to 1 if you want to use UTF-8.
+     * 
+     * <p><b>LWJGL note</b>: this is automatically set to 1.</p>
+     */
+    public static final String tinyfd_winUtf8 = "tinyfd_winUtf8";
 
     protected TinyFileDialogs() {
         throw new UnsupportedOperationException();
     }
 
-    // --- [ tinyfd_version ] ---
+    // --- [ tinyfd_getGlobalChar ] ---
 
-    private static native long ntinyfd_version();
+    /** Unsafe version of: {@link #tinyfd_getGlobalChar getGlobalChar} */
+    public static native long ntinyfd_getGlobalChar(long aCharVariableName);
 
-    @NativeType("char *")
-    private static String tinyfd_version() {
-        long __result = ntinyfd_version();
-        return memASCII(__result);
-    }
-
-    /** Contains tinyfd current version number. */
-    public static final String tinyfd_version = tinyfd_version();
-
-    // --- [ tinyfd_needs ] ---
-
-    private static native long ntinyfd_needs();
-
-    @NativeType("char *")
-    private static String tinyfd_needs() {
-        long __result = ntinyfd_needs();
-        return memASCII(__result);
-    }
-
-    /** Contains info about requirements. */
-    public static final String tinyfd_needs = tinyfd_needs();
-
-    // --- [ tinyfd_verbose ] ---
-
-    private static native long ntinyfd_verbose();
-
-    @NativeType("int *")
-    private static IntBuffer tinyfd_verbose() {
-        long __result = ntinyfd_verbose();
-        return memIntBuffer(__result, 1);
-    }
-
-    /** 0 (default) or 1 : on unix, prints the command line calls. */
-    public static final IntBuffer tinyfd_verbose = tinyfd_verbose();
-
-    // --- [ tinyfd_silent ] ---
-
-    private static native long ntinyfd_silent();
-
-    @NativeType("int *")
-    private static IntBuffer tinyfd_silent() {
-        long __result = ntinyfd_silent();
-        return memIntBuffer(__result, 1);
-    }
-
-    /** 1 (default) or 0 : on unix, hide errors and warnings from called dialog. */
-    public static final IntBuffer tinyfd_silent = tinyfd_silent();
-
-    // --- [ tinyfd_allowCursesDialogs ] ---
-
-    private static native long ntinyfd_allowCursesDialogs();
-
-    @NativeType("int *")
-    private static IntBuffer tinyfd_allowCursesDialogs() {
-        long __result = ntinyfd_allowCursesDialogs();
-        return memIntBuffer(__result, 1);
-    }
-
-    /** 0 (default) or 1 : curses dialogs are difficult to use, on windows they are only ascii. */
-    public static final IntBuffer tinyfd_allowCursesDialogs = tinyfd_allowCursesDialogs();
-
-    // --- [ tinyfd_assumeGraphicDisplay ] ---
-
-    private static native long ntinyfd_assumeGraphicDisplay();
-
-    @NativeType("int *")
-    private static IntBuffer tinyfd_assumeGraphicDisplay() {
-        long __result = ntinyfd_assumeGraphicDisplay();
-        return memIntBuffer(__result, 1);
+    /**
+     * @param aCharVariableName one of:<br><table><tr><td>{@link #tinyfd_version version}</td><td>{@link #tinyfd_needs needs}</td><td>{@link #tinyfd_response response}</td></tr></table>
+     *
+     * @return {@code NULL} on error
+     */
+    @Nullable
+    @NativeType("char const *")
+    public static String tinyfd_getGlobalChar(@NativeType("char const *") ByteBuffer aCharVariableName) {
+        if (CHECKS) {
+            checkNT1(aCharVariableName);
+        }
+        long __result = ntinyfd_getGlobalChar(memAddress(aCharVariableName));
+        return memASCIISafe(__result);
     }
 
     /**
-     * 0 (default) or 1 : some systems don't set the environment variable {@code DISPLAY} even when a graphic display is present. Set this to 1 to tell
-     * tinyfiledialogs to assume the existence of a graphic display.
+     * @param aCharVariableName one of:<br><table><tr><td>{@link #tinyfd_version version}</td><td>{@link #tinyfd_needs needs}</td><td>{@link #tinyfd_response response}</td></tr></table>
+     *
+     * @return {@code NULL} on error
      */
-    public static final IntBuffer tinyfd_assumeGraphicDisplay = tinyfd_assumeGraphicDisplay();
-
-    // --- [ tinyfd_winUtf8 ] ---
-
-    private static native long ntinyfd_winUtf8();
-
-    @NativeType("int *")
-    private static IntBuffer tinyfd_winUtf8() {
-        long __result = ntinyfd_winUtf8();
-        return memIntBuffer(__result, 1);
+    @Nullable
+    @NativeType("char const *")
+    public static String tinyfd_getGlobalChar(@NativeType("char const *") CharSequence aCharVariableName) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(aCharVariableName, true);
+            long aCharVariableNameEncoded = stack.getPointerAddress();
+            long __result = ntinyfd_getGlobalChar(aCharVariableNameEncoded);
+            return memASCIISafe(__result);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
-    // --- [ tinyfd_forceConsole ] ---
+    // --- [ tinyfd_getGlobalInt ] ---
 
-    private static native long ntinyfd_forceConsole();
+    /** Unsafe version of: {@link #tinyfd_getGlobalInt getGlobalInt} */
+    public static native int ntinyfd_getGlobalInt(long aIntVariableName);
 
-    @NativeType("int *")
-    private static IntBuffer tinyfd_forceConsole() {
-        long __result = ntinyfd_forceConsole();
-        return memIntBuffer(__result, 1);
+    /**
+     * @param aIntVariableName one of:<br><table><tr><td>{@link #tinyfd_verbose verbose}</td><td>{@link #tinyfd_silent silent}</td><td>{@link #tinyfd_allowCursesDialogs allowCursesDialogs}</td><td>{@link #tinyfd_forceConsole forceConsole}</td><td>{@link #tinyfd_assumeGraphicDisplay assumeGraphicDisplay}</td><td>{@link #tinyfd_winUtf8 winUtf8}</td></tr></table>
+     *
+     * @return -1 on error
+     */
+    public static int tinyfd_getGlobalInt(@NativeType("char const *") ByteBuffer aIntVariableName) {
+        if (CHECKS) {
+            checkNT1(aIntVariableName);
+        }
+        return ntinyfd_getGlobalInt(memAddress(aIntVariableName));
     }
 
     /**
-     * Can be modified at run time.
-     * 
-     * <p>For unix &amp; windows: 0 (graphic mode) or 1 (console mode).</p>
-     * 
-     * <p>0: try to use a graphic solution, if it fails then it uses console mode.
-     * 1: forces all dialogs into console mode even when the X server is present. It will use the package dialog or dialog.exe if installed. On windows it
-     * only makes sense for console applications.</p>
+     * @param aIntVariableName one of:<br><table><tr><td>{@link #tinyfd_verbose verbose}</td><td>{@link #tinyfd_silent silent}</td><td>{@link #tinyfd_allowCursesDialogs allowCursesDialogs}</td><td>{@link #tinyfd_forceConsole forceConsole}</td><td>{@link #tinyfd_assumeGraphicDisplay assumeGraphicDisplay}</td><td>{@link #tinyfd_winUtf8 winUtf8}</td></tr></table>
+     *
+     * @return -1 on error
      */
-    public static final IntBuffer tinyfd_forceConsole = tinyfd_forceConsole();
+    public static int tinyfd_getGlobalInt(@NativeType("char const *") CharSequence aIntVariableName) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(aIntVariableName, true);
+            long aIntVariableNameEncoded = stack.getPointerAddress();
+            return ntinyfd_getGlobalInt(aIntVariableNameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
 
-    // --- [ tinyfd_response ] ---
+    // --- [ tinyfd_setGlobalInt ] ---
 
-    /** Unsafe version of: {@link #tinyfd_response response} */
-    public static native long ntinyfd_response();
+    /** Unsafe version of: {@link #tinyfd_setGlobalInt setGlobalInt} */
+    public static native int ntinyfd_setGlobalInt(long aIntVariableName, int aValue);
 
     /**
-     * If you pass "tinyfd_query" as {@code aTitle}, the functions will not display the dialogs but will fill {@code tinyfd_response} with the retain solution
-     * and return:
-     * 
-     * <p>Possible values for {@code tinyfd_response} are (all lowercase) for the graphic mode: windows applescript zenity zenity3 matedialog kdialog xdialog
-     * tkinter gdialog gxmessage xmessage</p>
-     * 
-     * <p>For the console mode: dialog whiptail basicinput</p>
+     * @param aIntVariableName one of:<br><table><tr><td>{@link #tinyfd_verbose verbose}</td><td>{@link #tinyfd_silent silent}</td><td>{@link #tinyfd_allowCursesDialogs allowCursesDialogs}</td><td>{@link #tinyfd_forceConsole forceConsole}</td><td>{@link #tinyfd_assumeGraphicDisplay assumeGraphicDisplay}</td><td>{@link #tinyfd_winUtf8 winUtf8}</td></tr></table>
+     *
+     * @return -1 on error
      */
-    @NativeType("char *")
-    public static String tinyfd_response() {
-        long __result = ntinyfd_response();
-        return memUTF8(__result);
+    public static int tinyfd_setGlobalInt(@NativeType("char const *") ByteBuffer aIntVariableName, int aValue) {
+        if (CHECKS) {
+            checkNT1(aIntVariableName);
+        }
+        return ntinyfd_setGlobalInt(memAddress(aIntVariableName), aValue);
+    }
+
+    /**
+     * @param aIntVariableName one of:<br><table><tr><td>{@link #tinyfd_verbose verbose}</td><td>{@link #tinyfd_silent silent}</td><td>{@link #tinyfd_allowCursesDialogs allowCursesDialogs}</td><td>{@link #tinyfd_forceConsole forceConsole}</td><td>{@link #tinyfd_assumeGraphicDisplay assumeGraphicDisplay}</td><td>{@link #tinyfd_winUtf8 winUtf8}</td></tr></table>
+     *
+     * @return -1 on error
+     */
+    public static int tinyfd_setGlobalInt(@NativeType("char const *") CharSequence aIntVariableName, int aValue) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(aIntVariableName, true);
+            long aIntVariableNameEncoded = stack.getPointerAddress();
+            return ntinyfd_setGlobalInt(aIntVariableNameEncoded, aValue);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ tinyfd_beep ] ---

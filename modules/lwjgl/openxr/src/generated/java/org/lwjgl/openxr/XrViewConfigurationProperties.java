@@ -71,16 +71,16 @@ public class XrViewConfigurationProperties extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code viewConfigurationType} field. */
+    /** @return the value of the {@code viewConfigurationType} field. */
     @NativeType("XrViewConfigurationType")
     public int viewConfigurationType() { return nviewConfigurationType(address()); }
-    /** Returns the value of the {@code fovMutable} field. */
+    /** @return the value of the {@code fovMutable} field. */
     @NativeType("XrBool32")
     public boolean fovMutable() { return nfovMutable(address()) != 0; }
 
@@ -319,16 +319,16 @@ public class XrViewConfigurationProperties extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrViewConfigurationProperties.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrViewConfigurationProperties.nnext(address()); }
-        /** Returns the value of the {@code viewConfigurationType} field. */
+        /** @return the value of the {@code viewConfigurationType} field. */
         @NativeType("XrViewConfigurationType")
         public int viewConfigurationType() { return XrViewConfigurationProperties.nviewConfigurationType(address()); }
-        /** Returns the value of the {@code fovMutable} field. */
+        /** @return the value of the {@code fovMutable} field. */
         @NativeType("XrBool32")
         public boolean fovMutable() { return XrViewConfigurationProperties.nfovMutable(address()) != 0; }
 

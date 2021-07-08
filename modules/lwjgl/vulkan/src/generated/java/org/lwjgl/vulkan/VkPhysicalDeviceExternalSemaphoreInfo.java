@@ -23,6 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkSemaphoreTypeCreateInfo}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code handleType} <b>must</b> be a valid {@code VkExternalSemaphoreHandleTypeFlagBits} value</li>
  * </ul>
  * 
@@ -30,21 +31,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK11#vkGetPhysicalDeviceExternalSemaphoreProperties GetPhysicalDeviceExternalSemaphoreProperties}, {@link KHRExternalSemaphoreCapabilities#vkGetPhysicalDeviceExternalSemaphorePropertiesKHR GetPhysicalDeviceExternalSemaphorePropertiesKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure</li>
- * <li>{@code pNext} &ndash; NULL or a pointer to an extension-specific structure.</li>
- * <li>{@code handleType} &ndash; a {@code VkExternalSemaphoreHandleTypeFlagBits} value specifying the external semaphore handle type for which capabilities will be returned.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceExternalSemaphoreInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkExternalSemaphoreHandleTypeFlagBits handleType;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkExternalSemaphoreHandleTypeFlagBits {@link #handleType};
  * }</code></pre>
  */
 public class VkPhysicalDeviceExternalSemaphoreInfo extends Struct implements NativeResource {
@@ -89,21 +82,21 @@ public class VkPhysicalDeviceExternalSemaphoreInfo extends Struct implements Nat
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code handleType} field. */
+    /** a {@code VkExternalSemaphoreHandleTypeFlagBits} value specifying the external semaphore handle type for which capabilities will be returned. */
     @NativeType("VkExternalSemaphoreHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceExternalSemaphoreInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceExternalSemaphoreInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code handleType} field. */
+    /** Sets the specified value to the {@link #handleType} field. */
     public VkPhysicalDeviceExternalSemaphoreInfo handleType(@NativeType("VkExternalSemaphoreHandleTypeFlagBits") int value) { nhandleType(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -326,21 +319,21 @@ public class VkPhysicalDeviceExternalSemaphoreInfo extends Struct implements Nat
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExternalSemaphoreInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceExternalSemaphoreInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExternalSemaphoreInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPhysicalDeviceExternalSemaphoreInfo.npNext(address()); }
-        /** Returns the value of the {@code handleType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExternalSemaphoreInfo#handleType} field. */
         @NativeType("VkExternalSemaphoreHandleTypeFlagBits")
         public int handleType() { return VkPhysicalDeviceExternalSemaphoreInfo.nhandleType(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExternalSemaphoreInfo#sType} field. */
         public VkPhysicalDeviceExternalSemaphoreInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExternalSemaphoreInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExternalSemaphoreInfo#pNext} field. */
         public VkPhysicalDeviceExternalSemaphoreInfo.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceExternalSemaphoreInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code handleType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExternalSemaphoreInfo#handleType} field. */
         public VkPhysicalDeviceExternalSemaphoreInfo.Buffer handleType(@NativeType("VkExternalSemaphoreHandleTypeFlagBits") int value) { VkPhysicalDeviceExternalSemaphoreInfo.nhandleType(address(), value); return this; }
 
     }

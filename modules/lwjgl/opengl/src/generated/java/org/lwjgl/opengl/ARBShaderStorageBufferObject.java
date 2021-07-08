@@ -33,6 +33,8 @@ import org.lwjgl.system.*;
  */
 public class ARBShaderStorageBufferObject {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv. */
     public static final int GL_SHADER_STORAGE_BUFFER = 0x90D2;
 
@@ -65,8 +67,6 @@ public class ARBShaderStorageBufferObject {
 
     /** Also, add a new alias for the existing token MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS. */
     public static final int GL_MAX_COMBINED_SHADER_OUTPUT_RESOURCES = 0x8F39;
-
-    static { GL.initialize(); }
 
     protected ARBShaderStorageBufferObject() {
         throw new UnsupportedOperationException();

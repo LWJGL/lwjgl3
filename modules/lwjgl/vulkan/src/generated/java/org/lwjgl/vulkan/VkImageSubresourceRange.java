@@ -26,11 +26,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@code aspectMask} <b>must</b> be only {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}, {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} or {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT} if {@code format} is a color, depth-only or stencil-only format, respectively, except if {@code format} is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>. If using a depth/stencil format with both depth and stencil components, {@code aspectMask} <b>must</b> include at least one of {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} and {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}, and <b>can</b> include both.</p>
  * 
- * <p>When the {@link VkImageSubresourceRange} structure is used to select a subset of the slices of a 3D image's mip level in order to create a 2D or 2D array image view of a 3D image created with {@link KHRMaintenance1#VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR}, {@code baseArrayLayer} and {@code layerCount} specify the first slice index and the number of slices to include in the created image view. Such an image view <b>can</b> be used as a framebuffer attachment that refers only to the specified range of slices of the selected mip level. However, any layout transitions performed on such an attachment view during a render pass instance still apply to the entire subresource referenced which includes all the slices of the selected mip level.</p>
+ * <p>When the {@link VkImageSubresourceRange} structure is used to select a subset of the slices of a 3D image's mip level in order to create a 2D or 2D array image view of a 3D image created with {@link VK11#VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT}, {@code baseArrayLayer} and {@code layerCount} specify the first slice index and the number of slices to include in the created image view. Such an image view <b>can</b> be used as a framebuffer attachment that refers only to the specified range of slices of the selected mip level. However, any layout transitions performed on such an attachment view during a render pass instance still apply to the entire subresource referenced which includes all the slices of the selected mip level.</p>
  * 
  * <p>When using an image view of a depth/stencil image to populate a descriptor set (e.g. for sampling in the shader, or for use as an input attachment), the {@code aspectMask} <b>must</b> only include one bit and selects whether the image view is used for depth reads (i.e. using a floating-point sampler or input attachment in the shader) or stencil reads (i.e. using an unsigned integer sampler or input attachment in the shader). When an image view of a depth/stencil image is used as a depth/stencil framebuffer attachment, the {@code aspectMask} is ignored and both depth and stencil image subresources are used.</p>
- * 
- * <p>The {@link VkComponentMapping} {@code components} member describes a remapping from components of the image to components of the vector returned by shader image instructions. This remapping <b>must</b> be identity for storage image descriptors, input attachment descriptors, framebuffer attachments, and any {@code VkImageView} used with a combined image sampler that enables <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>.</p>
  * 
  * <p>When creating a {@code VkImageView}, if <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled in the sampler, the {@code aspectMask} of a {@code subresourceRange} used by the {@code VkImageView} <b>must</b> be {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}.</p>
  * 
@@ -54,27 +52,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkImageMemoryBarrier}, {@link VkImageViewCreateInfo}, {@link VK10#vkCmdClearColorImage CmdClearColorImage}, {@link VK10#vkCmdClearDepthStencilImage CmdClearDepthStencilImage}</p>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code aspectMask} &ndash; a bitmask of {@code VkImageAspectFlagBits} specifying which aspect(s) of the image are included in the view.</li>
- * <li>{@code baseMipLevel} &ndash; the first mipmap level accessible to the view.</li>
- * <li>{@code levelCount} &ndash; the number of mipmap levels (starting from {@code baseMipLevel}) accessible to the view.</li>
- * <li>{@code baseArrayLayer} &ndash; the first array layer accessible to the view.</li>
- * <li>{@code layerCount} &ndash; the number of array layers (starting from {@code baseArrayLayer}) accessible to the view.</li>
- * </ul>
+ * <p>{@link VkImageMemoryBarrier}, {@link VkImageMemoryBarrier2KHR}, {@link VkImageViewCreateInfo}, {@link VK10#vkCmdClearColorImage CmdClearColorImage}, {@link VK10#vkCmdClearDepthStencilImage CmdClearDepthStencilImage}</p>
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImageSubresourceRange {
- *     VkImageAspectFlags aspectMask;
- *     uint32_t baseMipLevel;
- *     uint32_t levelCount;
- *     uint32_t baseArrayLayer;
- *     uint32_t layerCount;
+ *     VkImageAspectFlags {@link #aspectMask};
+ *     uint32_t {@link #baseMipLevel};
+ *     uint32_t {@link #levelCount};
+ *     uint32_t {@link #baseArrayLayer};
+ *     uint32_t {@link #layerCount};
  * }</code></pre>
  */
 public class VkImageSubresourceRange extends Struct implements NativeResource {
@@ -125,31 +113,31 @@ public class VkImageSubresourceRange extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code aspectMask} field. */
+    /** a bitmask of {@code VkImageAspectFlagBits} specifying which aspect(s) of the image are included in the view. */
     @NativeType("VkImageAspectFlags")
     public int aspectMask() { return naspectMask(address()); }
-    /** Returns the value of the {@code baseMipLevel} field. */
+    /** the first mipmap level accessible to the view. */
     @NativeType("uint32_t")
     public int baseMipLevel() { return nbaseMipLevel(address()); }
-    /** Returns the value of the {@code levelCount} field. */
+    /** the number of mipmap levels (starting from {@code baseMipLevel}) accessible to the view. */
     @NativeType("uint32_t")
     public int levelCount() { return nlevelCount(address()); }
-    /** Returns the value of the {@code baseArrayLayer} field. */
+    /** the first array layer accessible to the view. */
     @NativeType("uint32_t")
     public int baseArrayLayer() { return nbaseArrayLayer(address()); }
-    /** Returns the value of the {@code layerCount} field. */
+    /** the number of array layers (starting from {@code baseArrayLayer}) accessible to the view. */
     @NativeType("uint32_t")
     public int layerCount() { return nlayerCount(address()); }
 
-    /** Sets the specified value to the {@code aspectMask} field. */
+    /** Sets the specified value to the {@link #aspectMask} field. */
     public VkImageSubresourceRange aspectMask(@NativeType("VkImageAspectFlags") int value) { naspectMask(address(), value); return this; }
-    /** Sets the specified value to the {@code baseMipLevel} field. */
+    /** Sets the specified value to the {@link #baseMipLevel} field. */
     public VkImageSubresourceRange baseMipLevel(@NativeType("uint32_t") int value) { nbaseMipLevel(address(), value); return this; }
-    /** Sets the specified value to the {@code levelCount} field. */
+    /** Sets the specified value to the {@link #levelCount} field. */
     public VkImageSubresourceRange levelCount(@NativeType("uint32_t") int value) { nlevelCount(address(), value); return this; }
-    /** Sets the specified value to the {@code baseArrayLayer} field. */
+    /** Sets the specified value to the {@link #baseArrayLayer} field. */
     public VkImageSubresourceRange baseArrayLayer(@NativeType("uint32_t") int value) { nbaseArrayLayer(address(), value); return this; }
-    /** Sets the specified value to the {@code layerCount} field. */
+    /** Sets the specified value to the {@link #layerCount} field. */
     public VkImageSubresourceRange layerCount(@NativeType("uint32_t") int value) { nlayerCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -384,31 +372,31 @@ public class VkImageSubresourceRange extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code aspectMask} field. */
+        /** @return the value of the {@link VkImageSubresourceRange#aspectMask} field. */
         @NativeType("VkImageAspectFlags")
         public int aspectMask() { return VkImageSubresourceRange.naspectMask(address()); }
-        /** Returns the value of the {@code baseMipLevel} field. */
+        /** @return the value of the {@link VkImageSubresourceRange#baseMipLevel} field. */
         @NativeType("uint32_t")
         public int baseMipLevel() { return VkImageSubresourceRange.nbaseMipLevel(address()); }
-        /** Returns the value of the {@code levelCount} field. */
+        /** @return the value of the {@link VkImageSubresourceRange#levelCount} field. */
         @NativeType("uint32_t")
         public int levelCount() { return VkImageSubresourceRange.nlevelCount(address()); }
-        /** Returns the value of the {@code baseArrayLayer} field. */
+        /** @return the value of the {@link VkImageSubresourceRange#baseArrayLayer} field. */
         @NativeType("uint32_t")
         public int baseArrayLayer() { return VkImageSubresourceRange.nbaseArrayLayer(address()); }
-        /** Returns the value of the {@code layerCount} field. */
+        /** @return the value of the {@link VkImageSubresourceRange#layerCount} field. */
         @NativeType("uint32_t")
         public int layerCount() { return VkImageSubresourceRange.nlayerCount(address()); }
 
-        /** Sets the specified value to the {@code aspectMask} field. */
+        /** Sets the specified value to the {@link VkImageSubresourceRange#aspectMask} field. */
         public VkImageSubresourceRange.Buffer aspectMask(@NativeType("VkImageAspectFlags") int value) { VkImageSubresourceRange.naspectMask(address(), value); return this; }
-        /** Sets the specified value to the {@code baseMipLevel} field. */
+        /** Sets the specified value to the {@link VkImageSubresourceRange#baseMipLevel} field. */
         public VkImageSubresourceRange.Buffer baseMipLevel(@NativeType("uint32_t") int value) { VkImageSubresourceRange.nbaseMipLevel(address(), value); return this; }
-        /** Sets the specified value to the {@code levelCount} field. */
+        /** Sets the specified value to the {@link VkImageSubresourceRange#levelCount} field. */
         public VkImageSubresourceRange.Buffer levelCount(@NativeType("uint32_t") int value) { VkImageSubresourceRange.nlevelCount(address(), value); return this; }
-        /** Sets the specified value to the {@code baseArrayLayer} field. */
+        /** Sets the specified value to the {@link VkImageSubresourceRange#baseArrayLayer} field. */
         public VkImageSubresourceRange.Buffer baseArrayLayer(@NativeType("uint32_t") int value) { VkImageSubresourceRange.nbaseArrayLayer(address(), value); return this; }
-        /** Sets the specified value to the {@code layerCount} field. */
+        /** Sets the specified value to the {@link VkImageSubresourceRange#layerCount} field. */
         public VkImageSubresourceRange.Buffer layerCount(@NativeType("uint32_t") int value) { VkImageSubresourceRange.nlayerCount(address(), value); return this; }
 
     }

@@ -140,67 +140,67 @@ public class NkStyleSelectable extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkStyleItem} view of the {@code normal} field. */
+    /** @return a {@link NkStyleItem} view of the {@code normal} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem normal() { return nnormal(address()); }
-    /** Returns a {@link NkStyleItem} view of the {@code hover} field. */
+    /** @return a {@link NkStyleItem} view of the {@code hover} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem hover() { return nhover(address()); }
-    /** Returns a {@link NkStyleItem} view of the {@code pressed} field. */
+    /** @return a {@link NkStyleItem} view of the {@code pressed} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem pressed() { return npressed(address()); }
-    /** Returns a {@link NkStyleItem} view of the {@code normal_active} field. */
+    /** @return a {@link NkStyleItem} view of the {@code normal_active} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem normal_active() { return nnormal_active(address()); }
-    /** Returns a {@link NkStyleItem} view of the {@code hover_active} field. */
+    /** @return a {@link NkStyleItem} view of the {@code hover_active} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem hover_active() { return nhover_active(address()); }
-    /** Returns a {@link NkStyleItem} view of the {@code pressed_active} field. */
+    /** @return a {@link NkStyleItem} view of the {@code pressed_active} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem pressed_active() { return npressed_active(address()); }
-    /** Returns a {@link NkColor} view of the {@code text_normal} field. */
+    /** @return a {@link NkColor} view of the {@code text_normal} field. */
     @NativeType("struct nk_color")
     public NkColor text_normal() { return ntext_normal(address()); }
-    /** Returns a {@link NkColor} view of the {@code text_hover} field. */
+    /** @return a {@link NkColor} view of the {@code text_hover} field. */
     @NativeType("struct nk_color")
     public NkColor text_hover() { return ntext_hover(address()); }
-    /** Returns a {@link NkColor} view of the {@code text_pressed} field. */
+    /** @return a {@link NkColor} view of the {@code text_pressed} field. */
     @NativeType("struct nk_color")
     public NkColor text_pressed() { return ntext_pressed(address()); }
-    /** Returns a {@link NkColor} view of the {@code text_normal_active} field. */
+    /** @return a {@link NkColor} view of the {@code text_normal_active} field. */
     @NativeType("struct nk_color")
     public NkColor text_normal_active() { return ntext_normal_active(address()); }
-    /** Returns a {@link NkColor} view of the {@code text_hover_active} field. */
+    /** @return a {@link NkColor} view of the {@code text_hover_active} field. */
     @NativeType("struct nk_color")
     public NkColor text_hover_active() { return ntext_hover_active(address()); }
-    /** Returns a {@link NkColor} view of the {@code text_pressed_active} field. */
+    /** @return a {@link NkColor} view of the {@code text_pressed_active} field. */
     @NativeType("struct nk_color")
     public NkColor text_pressed_active() { return ntext_pressed_active(address()); }
-    /** Returns a {@link NkColor} view of the {@code text_background} field. */
+    /** @return a {@link NkColor} view of the {@code text_background} field. */
     @NativeType("struct nk_color")
     public NkColor text_background() { return ntext_background(address()); }
-    /** Returns the value of the {@code text_alignment} field. */
+    /** @return the value of the {@code text_alignment} field. */
     @NativeType("nk_flags")
     public int text_alignment() { return ntext_alignment(address()); }
-    /** Returns the value of the {@code rounding} field. */
+    /** @return the value of the {@code rounding} field. */
     public float rounding() { return nrounding(address()); }
-    /** Returns a {@link NkVec2} view of the {@code padding} field. */
+    /** @return a {@link NkVec2} view of the {@code padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 padding() { return npadding(address()); }
-    /** Returns a {@link NkVec2} view of the {@code touch_padding} field. */
+    /** @return a {@link NkVec2} view of the {@code touch_padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 touch_padding() { return ntouch_padding(address()); }
-    /** Returns a {@link NkVec2} view of the {@code image_padding} field. */
+    /** @return a {@link NkVec2} view of the {@code image_padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 image_padding() { return nimage_padding(address()); }
-    /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+    /** @return a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
-    /** Returns the value of the {@code draw_begin} field. */
+    /** @return the value of the {@code draw_begin} field. */
     @Nullable
     @NativeType("nk_draw_begin")
     public NkDrawBeginCallback draw_begin() { return ndraw_begin(address()); }
-    /** Returns the value of the {@code draw_end} field. */
+    /** @return the value of the {@code draw_end} field. */
     @Nullable
     @NativeType("nk_draw_end")
     public NkDrawEndCallback draw_end() { return ndraw_end(address()); }
@@ -610,67 +610,67 @@ public class NkStyleSelectable extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkStyleItem} view of the {@code normal} field. */
+        /** @return a {@link NkStyleItem} view of the {@code normal} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem normal() { return NkStyleSelectable.nnormal(address()); }
-        /** Returns a {@link NkStyleItem} view of the {@code hover} field. */
+        /** @return a {@link NkStyleItem} view of the {@code hover} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem hover() { return NkStyleSelectable.nhover(address()); }
-        /** Returns a {@link NkStyleItem} view of the {@code pressed} field. */
+        /** @return a {@link NkStyleItem} view of the {@code pressed} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem pressed() { return NkStyleSelectable.npressed(address()); }
-        /** Returns a {@link NkStyleItem} view of the {@code normal_active} field. */
+        /** @return a {@link NkStyleItem} view of the {@code normal_active} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem normal_active() { return NkStyleSelectable.nnormal_active(address()); }
-        /** Returns a {@link NkStyleItem} view of the {@code hover_active} field. */
+        /** @return a {@link NkStyleItem} view of the {@code hover_active} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem hover_active() { return NkStyleSelectable.nhover_active(address()); }
-        /** Returns a {@link NkStyleItem} view of the {@code pressed_active} field. */
+        /** @return a {@link NkStyleItem} view of the {@code pressed_active} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem pressed_active() { return NkStyleSelectable.npressed_active(address()); }
-        /** Returns a {@link NkColor} view of the {@code text_normal} field. */
+        /** @return a {@link NkColor} view of the {@code text_normal} field. */
         @NativeType("struct nk_color")
         public NkColor text_normal() { return NkStyleSelectable.ntext_normal(address()); }
-        /** Returns a {@link NkColor} view of the {@code text_hover} field. */
+        /** @return a {@link NkColor} view of the {@code text_hover} field. */
         @NativeType("struct nk_color")
         public NkColor text_hover() { return NkStyleSelectable.ntext_hover(address()); }
-        /** Returns a {@link NkColor} view of the {@code text_pressed} field. */
+        /** @return a {@link NkColor} view of the {@code text_pressed} field. */
         @NativeType("struct nk_color")
         public NkColor text_pressed() { return NkStyleSelectable.ntext_pressed(address()); }
-        /** Returns a {@link NkColor} view of the {@code text_normal_active} field. */
+        /** @return a {@link NkColor} view of the {@code text_normal_active} field. */
         @NativeType("struct nk_color")
         public NkColor text_normal_active() { return NkStyleSelectable.ntext_normal_active(address()); }
-        /** Returns a {@link NkColor} view of the {@code text_hover_active} field. */
+        /** @return a {@link NkColor} view of the {@code text_hover_active} field. */
         @NativeType("struct nk_color")
         public NkColor text_hover_active() { return NkStyleSelectable.ntext_hover_active(address()); }
-        /** Returns a {@link NkColor} view of the {@code text_pressed_active} field. */
+        /** @return a {@link NkColor} view of the {@code text_pressed_active} field. */
         @NativeType("struct nk_color")
         public NkColor text_pressed_active() { return NkStyleSelectable.ntext_pressed_active(address()); }
-        /** Returns a {@link NkColor} view of the {@code text_background} field. */
+        /** @return a {@link NkColor} view of the {@code text_background} field. */
         @NativeType("struct nk_color")
         public NkColor text_background() { return NkStyleSelectable.ntext_background(address()); }
-        /** Returns the value of the {@code text_alignment} field. */
+        /** @return the value of the {@code text_alignment} field. */
         @NativeType("nk_flags")
         public int text_alignment() { return NkStyleSelectable.ntext_alignment(address()); }
-        /** Returns the value of the {@code rounding} field. */
+        /** @return the value of the {@code rounding} field. */
         public float rounding() { return NkStyleSelectable.nrounding(address()); }
-        /** Returns a {@link NkVec2} view of the {@code padding} field. */
+        /** @return a {@link NkVec2} view of the {@code padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 padding() { return NkStyleSelectable.npadding(address()); }
-        /** Returns a {@link NkVec2} view of the {@code touch_padding} field. */
+        /** @return a {@link NkVec2} view of the {@code touch_padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 touch_padding() { return NkStyleSelectable.ntouch_padding(address()); }
-        /** Returns a {@link NkVec2} view of the {@code image_padding} field. */
+        /** @return a {@link NkVec2} view of the {@code image_padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 image_padding() { return NkStyleSelectable.nimage_padding(address()); }
-        /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+        /** @return a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkStyleSelectable.nuserdata(address()); }
-        /** Returns the value of the {@code draw_begin} field. */
+        /** @return the value of the {@code draw_begin} field. */
         @Nullable
         @NativeType("nk_draw_begin")
         public NkDrawBeginCallback draw_begin() { return NkStyleSelectable.ndraw_begin(address()); }
-        /** Returns the value of the {@code draw_end} field. */
+        /** @return the value of the {@code draw_end} field. */
         @Nullable
         @NativeType("nk_draw_end")
         public NkDrawEndCallback draw_end() { return NkStyleSelectable.ndraw_end(address()); }

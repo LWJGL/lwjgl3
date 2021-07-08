@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void * (*) (
+ * void * (*{@link #invoke}) (
  *     void *mm_context,
  *     void *ptr
  * )</code></pre>
@@ -48,7 +48,7 @@ public abstract class RMTFree extends Callback implements RMTFreeI {
     }
 
     protected RMTFree() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     RMTFree(long functionPointer) {

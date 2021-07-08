@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying a two-dimensional extent.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code width} &ndash; the width of the extent.</li>
- * <li>{@code height} &ndash; the height of the extent.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkExtent2D {
- *     uint32_t width;
- *     uint32_t height;
+ *     uint32_t {@link #width};
+ *     uint32_t {@link #height};
  * }</code></pre>
  */
 public class VkExtent2D extends Struct implements NativeResource {
@@ -72,16 +65,16 @@ public class VkExtent2D extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code width} field. */
+    /** the width of the extent. */
     @NativeType("uint32_t")
     public int width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** the height of the extent. */
     @NativeType("uint32_t")
     public int height() { return nheight(address()); }
 
-    /** Sets the specified value to the {@code width} field. */
+    /** Sets the specified value to the {@link #width} field. */
     public VkExtent2D width(@NativeType("uint32_t") int value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@code height} field. */
+    /** Sets the specified value to the {@link #height} field. */
     public VkExtent2D height(@NativeType("uint32_t") int value) { nheight(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -298,16 +291,16 @@ public class VkExtent2D extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@link VkExtent2D#width} field. */
         @NativeType("uint32_t")
         public int width() { return VkExtent2D.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@link VkExtent2D#height} field. */
         @NativeType("uint32_t")
         public int height() { return VkExtent2D.nheight(address()); }
 
-        /** Sets the specified value to the {@code width} field. */
+        /** Sets the specified value to the {@link VkExtent2D#width} field. */
         public VkExtent2D.Buffer width(@NativeType("uint32_t") int value) { VkExtent2D.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@code height} field. */
+        /** Sets the specified value to the {@link VkExtent2D#height} field. */
         public VkExtent2D.Buffer height(@NativeType("uint32_t") int value) { VkExtent2D.nheight(address(), value); return this; }
 
     }

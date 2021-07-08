@@ -74,16 +74,16 @@ public class XrVulkanGraphicsDeviceGetInfoKHR extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code systemId} field. */
+    /** @return the value of the {@code systemId} field. */
     @NativeType("XrSystemId")
     public long systemId() { return nsystemId(address()); }
-    /** Returns the value of the {@code vulkanInstance} field. */
+    /** @return the value of the {@code vulkanInstance} field. */
     @NativeType("VkInstance")
     public long vulkanInstance() { return nvulkanInstance(address()); }
 
@@ -343,16 +343,16 @@ public class XrVulkanGraphicsDeviceGetInfoKHR extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrVulkanGraphicsDeviceGetInfoKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrVulkanGraphicsDeviceGetInfoKHR.nnext(address()); }
-        /** Returns the value of the {@code systemId} field. */
+        /** @return the value of the {@code systemId} field. */
         @NativeType("XrSystemId")
         public long systemId() { return XrVulkanGraphicsDeviceGetInfoKHR.nsystemId(address()); }
-        /** Returns the value of the {@code vulkanInstance} field. */
+        /** @return the value of the {@code vulkanInstance} field. */
         @NativeType("VkInstance")
         public long vulkanInstance() { return XrVulkanGraphicsDeviceGetInfoKHR.nvulkanInstance(address()); }
 

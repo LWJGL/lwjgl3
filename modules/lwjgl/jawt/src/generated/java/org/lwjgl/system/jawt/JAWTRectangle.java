@@ -18,23 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure for a native rectangle.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code x} &ndash; the rectangle X axis coordinate</li>
- * <li>{@code y} &ndash; the rectangle Y axis coordinate</li>
- * <li>{@code width} &ndash; the rectangle width</li>
- * <li>{@code height} &ndash; the rectangle height</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct JAWT_Rectangle {
- *     jint x;
- *     jint y;
- *     jint width;
- *     jint height;
+ *     jint {@link #x};
+ *     jint {@link #y};
+ *     jint {@link #width};
+ *     jint {@link #height};
  * }</code></pre>
  */
 @NativeType("struct JAWT_Rectangle")
@@ -83,26 +74,26 @@ public class JAWTRectangle extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** the rectangle X axis coordinate */
     @NativeType("jint")
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** the rectangle Y axis coordinate */
     @NativeType("jint")
     public int y() { return ny(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** the rectangle width */
     @NativeType("jint")
     public int width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** the rectangle height */
     @NativeType("jint")
     public int height() { return nheight(address()); }
 
-    /** Sets the specified value to the {@code x} field. */
+    /** Sets the specified value to the {@link #x} field. */
     public JAWTRectangle x(@NativeType("jint") int value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@code y} field. */
+    /** Sets the specified value to the {@link #y} field. */
     public JAWTRectangle y(@NativeType("jint") int value) { ny(address(), value); return this; }
-    /** Sets the specified value to the {@code width} field. */
+    /** Sets the specified value to the {@link #width} field. */
     public JAWTRectangle width(@NativeType("jint") int value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@code height} field. */
+    /** Sets the specified value to the {@link #height} field. */
     public JAWTRectangle height(@NativeType("jint") int value) { nheight(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -331,26 +322,26 @@ public class JAWTRectangle extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link JAWTRectangle#x} field. */
         @NativeType("jint")
         public int x() { return JAWTRectangle.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@link JAWTRectangle#y} field. */
         @NativeType("jint")
         public int y() { return JAWTRectangle.ny(address()); }
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@link JAWTRectangle#width} field. */
         @NativeType("jint")
         public int width() { return JAWTRectangle.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@link JAWTRectangle#height} field. */
         @NativeType("jint")
         public int height() { return JAWTRectangle.nheight(address()); }
 
-        /** Sets the specified value to the {@code x} field. */
+        /** Sets the specified value to the {@link JAWTRectangle#x} field. */
         public JAWTRectangle.Buffer x(@NativeType("jint") int value) { JAWTRectangle.nx(address(), value); return this; }
-        /** Sets the specified value to the {@code y} field. */
+        /** Sets the specified value to the {@link JAWTRectangle#y} field. */
         public JAWTRectangle.Buffer y(@NativeType("jint") int value) { JAWTRectangle.ny(address(), value); return this; }
-        /** Sets the specified value to the {@code width} field. */
+        /** Sets the specified value to the {@link JAWTRectangle#width} field. */
         public JAWTRectangle.Buffer width(@NativeType("jint") int value) { JAWTRectangle.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@code height} field. */
+        /** Sets the specified value to the {@link JAWTRectangle#height} field. */
         public JAWTRectangle.Buffer height(@NativeType("jint") int value) { JAWTRectangle.nheight(address(), value); return this; }
 
     }

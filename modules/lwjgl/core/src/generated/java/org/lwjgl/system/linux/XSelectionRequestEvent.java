@@ -19,22 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * SelectionRequest event structure.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code serial} &ndash; # of last request processed by server</li>
- * <li>{@code send_event} &ndash; true if this came from an {@link X11#XSendEvent} request</li>
- * <li>{@code display} &ndash; {@code Display} the event was read from</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XSelectionRequestEvent {
  *     int type;
- *     unsigned long serial;
- *     Bool send_event;
- *     Display * display;
+ *     unsigned long {@link #serial};
+ *     Bool {@link #send_event};
+ *     Display * {@link #display};
  *     Window owner;
  *     Window requestor;
  *     Atom selection;
@@ -106,43 +98,43 @@ public class XSelectionRequestEvent extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code serial} field. */
+    /** # of last request processed by server */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** Returns the value of the {@code send_event} field. */
+    /** true if this came from an {@link X11#XSendEvent} request */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** Returns the value of the {@code display} field. */
+    /** {@code Display} the event was read from */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code owner} field. */
+    /** @return the value of the {@code owner} field. */
     @NativeType("Window")
     public long owner() { return nowner(address()); }
-    /** Returns the value of the {@code requestor} field. */
+    /** @return the value of the {@code requestor} field. */
     @NativeType("Window")
     public long requestor() { return nrequestor(address()); }
-    /** Returns the value of the {@code selection} field. */
+    /** @return the value of the {@code selection} field. */
     @NativeType("Atom")
     public long selection() { return nselection(address()); }
-    /** Returns the value of the {@code target} field. */
+    /** @return the value of the {@code target} field. */
     @NativeType("Atom")
     public long target() { return ntarget(address()); }
-    /** Returns the value of the {@code property} field. */
+    /** @return the value of the {@code property} field. */
     @NativeType("Atom")
     public long property() { return nproperty(address()); }
-    /** Returns the value of the {@code time} field. */
+    /** @return the value of the {@code time} field. */
     @NativeType("Time")
     public long time() { return ntime(address()); }
 
     /** Sets the specified value to the {@code type} field. */
     public XSelectionRequestEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code serial} field. */
+    /** Sets the specified value to the {@link #serial} field. */
     public XSelectionRequestEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@code send_event} field. */
+    /** Sets the specified value to the {@link #send_event} field. */
     public XSelectionRequestEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code display} field. */
+    /** Sets the specified value to the {@link #display} field. */
     public XSelectionRequestEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
     /** Sets the specified value to the {@code owner} field. */
     public XSelectionRequestEvent owner(@NativeType("Window") long value) { nowner(address(), value); return this; }
@@ -440,43 +432,43 @@ public class XSelectionRequestEvent extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XSelectionRequestEvent.ntype(address()); }
-        /** Returns the value of the {@code serial} field. */
+        /** @return the value of the {@link XSelectionRequestEvent#serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XSelectionRequestEvent.nserial(address()); }
-        /** Returns the value of the {@code send_event} field. */
+        /** @return the value of the {@link XSelectionRequestEvent#send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XSelectionRequestEvent.nsend_event(address()) != 0; }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@link XSelectionRequestEvent#display} field. */
         @NativeType("Display *")
         public long display() { return XSelectionRequestEvent.ndisplay(address()); }
-        /** Returns the value of the {@code owner} field. */
+        /** @return the value of the {@code owner} field. */
         @NativeType("Window")
         public long owner() { return XSelectionRequestEvent.nowner(address()); }
-        /** Returns the value of the {@code requestor} field. */
+        /** @return the value of the {@code requestor} field. */
         @NativeType("Window")
         public long requestor() { return XSelectionRequestEvent.nrequestor(address()); }
-        /** Returns the value of the {@code selection} field. */
+        /** @return the value of the {@code selection} field. */
         @NativeType("Atom")
         public long selection() { return XSelectionRequestEvent.nselection(address()); }
-        /** Returns the value of the {@code target} field. */
+        /** @return the value of the {@code target} field. */
         @NativeType("Atom")
         public long target() { return XSelectionRequestEvent.ntarget(address()); }
-        /** Returns the value of the {@code property} field. */
+        /** @return the value of the {@code property} field. */
         @NativeType("Atom")
         public long property() { return XSelectionRequestEvent.nproperty(address()); }
-        /** Returns the value of the {@code time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("Time")
         public long time() { return XSelectionRequestEvent.ntime(address()); }
 
         /** Sets the specified value to the {@code type} field. */
         public XSelectionRequestEvent.Buffer type(int value) { XSelectionRequestEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code serial} field. */
+        /** Sets the specified value to the {@link XSelectionRequestEvent#serial} field. */
         public XSelectionRequestEvent.Buffer serial(@NativeType("unsigned long") long value) { XSelectionRequestEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@code send_event} field. */
+        /** Sets the specified value to the {@link XSelectionRequestEvent#send_event} field. */
         public XSelectionRequestEvent.Buffer send_event(@NativeType("Bool") boolean value) { XSelectionRequestEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code display} field. */
+        /** Sets the specified value to the {@link XSelectionRequestEvent#display} field. */
         public XSelectionRequestEvent.Buffer display(@NativeType("Display *") long value) { XSelectionRequestEvent.ndisplay(address(), value); return this; }
         /** Sets the specified value to the {@code owner} field. */
         public XSelectionRequestEvent.Buffer owner(@NativeType("Window") long value) { XSelectionRequestEvent.nowner(address(), value); return this; }

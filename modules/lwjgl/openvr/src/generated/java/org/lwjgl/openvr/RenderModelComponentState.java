@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Describes state information about a render-model component, including transforms and other dynamic properties.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code mTrackingToComponentRenderModel} &ndash; Transform required when drawing the component render model</li>
- * <li>{@code mTrackingToComponentLocal} &ndash; Transform available for attaching to a local component coordinate system (-Z out from surface )</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct RenderModel_ComponentState_t {
- *     {@link HmdMatrix34 HmdMatrix34_t} mTrackingToComponentRenderModel;
- *     {@link HmdMatrix34 HmdMatrix34_t} mTrackingToComponentLocal;
+ *     {@link HmdMatrix34 HmdMatrix34_t} {@link #mTrackingToComponentRenderModel};
+ *     {@link HmdMatrix34 HmdMatrix34_t} {@link #mTrackingToComponentLocal};
  *     VRComponentProperties uProperties;
  * }</code></pre>
  */
@@ -77,13 +70,13 @@ public class RenderModelComponentState extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link HmdMatrix34} view of the {@code mTrackingToComponentRenderModel} field. */
+    /** Transform required when drawing the component render model */
     @NativeType("HmdMatrix34_t")
     public HmdMatrix34 mTrackingToComponentRenderModel() { return nmTrackingToComponentRenderModel(address()); }
-    /** Returns a {@link HmdMatrix34} view of the {@code mTrackingToComponentLocal} field. */
+    /** Transform available for attaching to a local component coordinate system (-Z out from surface ) */
     @NativeType("HmdMatrix34_t")
     public HmdMatrix34 mTrackingToComponentLocal() { return nmTrackingToComponentLocal(address()); }
-    /** Returns the value of the {@code uProperties} field. */
+    /** @return the value of the {@code uProperties} field. */
     @NativeType("VRComponentProperties")
     public int uProperties() { return nuProperties(address()); }
 
@@ -275,13 +268,13 @@ public class RenderModelComponentState extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link HmdMatrix34} view of the {@code mTrackingToComponentRenderModel} field. */
+        /** @return a {@link HmdMatrix34} view of the {@link RenderModelComponentState#mTrackingToComponentRenderModel} field. */
         @NativeType("HmdMatrix34_t")
         public HmdMatrix34 mTrackingToComponentRenderModel() { return RenderModelComponentState.nmTrackingToComponentRenderModel(address()); }
-        /** Returns a {@link HmdMatrix34} view of the {@code mTrackingToComponentLocal} field. */
+        /** @return a {@link HmdMatrix34} view of the {@link RenderModelComponentState#mTrackingToComponentLocal} field. */
         @NativeType("HmdMatrix34_t")
         public HmdMatrix34 mTrackingToComponentLocal() { return RenderModelComponentState.nmTrackingToComponentLocal(address()); }
-        /** Returns the value of the {@code uProperties} field. */
+        /** @return the value of the {@code uProperties} field. */
         @NativeType("VRComponentProperties")
         public int uProperties() { return RenderModelComponentState.nuProperties(address()); }
 

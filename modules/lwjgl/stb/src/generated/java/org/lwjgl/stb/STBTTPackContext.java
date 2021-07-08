@@ -102,38 +102,38 @@ public class STBTTPackContext extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code user_allocator_context} field. */
+    /** @return the value of the {@code user_allocator_context} field. */
     @NativeType("void *")
     public long user_allocator_context() { return nuser_allocator_context(address()); }
-    /** Returns a {@link STBRPContext} view of the struct pointed to by the {@code pack_info} field. */
+    /** @return a {@link STBRPContext} view of the struct pointed to by the {@code pack_info} field. */
     @NativeType("stbrp_context *")
     public STBRPContext pack_info() { return npack_info(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** @return the value of the {@code width} field. */
     public int width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** @return the value of the {@code height} field. */
     public int height() { return nheight(address()); }
-    /** Returns the value of the {@code stride_in_bytes} field. */
+    /** @return the value of the {@code stride_in_bytes} field. */
     public int stride_in_bytes() { return nstride_in_bytes(address()); }
-    /** Returns the value of the {@code padding} field. */
+    /** @return the value of the {@code padding} field. */
     public int padding() { return npadding(address()); }
-    /** Returns the value of the {@code skip_missing} field. */
+    /** @return the value of the {@code skip_missing} field. */
     @NativeType("int")
     public boolean skip_missing() { return nskip_missing(address()) != 0; }
-    /** Returns the value of the {@code h_oversample} field. */
+    /** @return the value of the {@code h_oversample} field. */
     @NativeType("unsigned int")
     public int h_oversample() { return nh_oversample(address()); }
-    /** Returns the value of the {@code v_oversample} field. */
+    /** @return the value of the {@code v_oversample} field. */
     @NativeType("unsigned int")
     public int v_oversample() { return nv_oversample(address()); }
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code pixels} field.
+     * @return a {@link ByteBuffer} view of the data pointed to by the {@code pixels} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
     @NativeType("unsigned char *")
     public ByteBuffer pixels(int capacity) { return npixels(address(), capacity); }
     /**
-     * Returns a {@link STBRPNode.Buffer} view of the struct array pointed to by the {@code nodes} field.
+     * @return a {@link STBRPNode.Buffer} view of the struct array pointed to by the {@code nodes} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
@@ -344,38 +344,38 @@ public class STBTTPackContext extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code user_allocator_context} field. */
+        /** @return the value of the {@code user_allocator_context} field. */
         @NativeType("void *")
         public long user_allocator_context() { return STBTTPackContext.nuser_allocator_context(address()); }
-        /** Returns a {@link STBRPContext} view of the struct pointed to by the {@code pack_info} field. */
+        /** @return a {@link STBRPContext} view of the struct pointed to by the {@code pack_info} field. */
         @NativeType("stbrp_context *")
         public STBRPContext pack_info() { return STBTTPackContext.npack_info(address()); }
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@code width} field. */
         public int width() { return STBTTPackContext.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@code height} field. */
         public int height() { return STBTTPackContext.nheight(address()); }
-        /** Returns the value of the {@code stride_in_bytes} field. */
+        /** @return the value of the {@code stride_in_bytes} field. */
         public int stride_in_bytes() { return STBTTPackContext.nstride_in_bytes(address()); }
-        /** Returns the value of the {@code padding} field. */
+        /** @return the value of the {@code padding} field. */
         public int padding() { return STBTTPackContext.npadding(address()); }
-        /** Returns the value of the {@code skip_missing} field. */
+        /** @return the value of the {@code skip_missing} field. */
         @NativeType("int")
         public boolean skip_missing() { return STBTTPackContext.nskip_missing(address()) != 0; }
-        /** Returns the value of the {@code h_oversample} field. */
+        /** @return the value of the {@code h_oversample} field. */
         @NativeType("unsigned int")
         public int h_oversample() { return STBTTPackContext.nh_oversample(address()); }
-        /** Returns the value of the {@code v_oversample} field. */
+        /** @return the value of the {@code v_oversample} field. */
         @NativeType("unsigned int")
         public int v_oversample() { return STBTTPackContext.nv_oversample(address()); }
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code pixels} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@code pixels} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("unsigned char *")
         public ByteBuffer pixels(int capacity) { return STBTTPackContext.npixels(address(), capacity); }
         /**
-         * Returns a {@link STBRPNode.Buffer} view of the struct array pointed to by the {@code nodes} field.
+         * @return a {@link STBRPNode.Buffer} view of the struct array pointed to by the {@code nodes} field.
          *
          * @param capacity the number of elements in the returned buffer
          */

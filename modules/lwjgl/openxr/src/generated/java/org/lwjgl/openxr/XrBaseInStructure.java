@@ -64,10 +64,10 @@ public class XrBaseInStructure extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns a {@link XrBaseInStructure} view of the struct pointed to by the {@code next} field. */
+    /** @return a {@link XrBaseInStructure} view of the struct pointed to by the {@code next} field. */
     @NativeType("XrBaseInStructure *")
     public XrBaseInStructure next() { return nnext(address()); }
 
@@ -311,10 +311,10 @@ public class XrBaseInStructure extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrBaseInStructure.ntype(address()); }
-        /** Returns a {@link XrBaseInStructure} view of the struct pointed to by the {@code next} field. */
+        /** @return a {@link XrBaseInStructure} view of the struct pointed to by the {@code next} field. */
         @NativeType("XrBaseInStructure *")
         public XrBaseInStructure next() { return XrBaseInStructure.nnext(address()); }
 

@@ -68,16 +68,16 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code varying} field. */
+    /** @return a {@link ByteBuffer} view of the {@code varying} field. */
     @NativeType("uint8_t[4000]")
     public ByteBuffer varying() { return nvarying(address()); }
-    /** Returns the value at the specified index of the {@code varying} field. */
+    /** @return the value at the specified index of the {@code varying} field. */
     @NativeType("uint8_t")
     public byte varying(int index) { return nvarying(address(), index); }
 
@@ -321,16 +321,16 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataBuffer.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataBuffer.nnext(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code varying} field. */
+        /** @return a {@link ByteBuffer} view of the {@code varying} field. */
         @NativeType("uint8_t[4000]")
         public ByteBuffer varying() { return XrEventDataBuffer.nvarying(address()); }
-        /** Returns the value at the specified index of the {@code varying} field. */
+        /** @return the value at the specified index of the {@code varying} field. */
         @NativeType("uint8_t")
         public byte varying(int index) { return XrEventDataBuffer.nvarying(address(), index); }
 

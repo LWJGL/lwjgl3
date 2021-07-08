@@ -13,6 +13,8 @@ import static org.lwjgl.system.JNI.*;
 /**
  * This extension adds support for an exclusive scissor test to Vulkan. The exclusive scissor test behaves like the scissor test, except that the exclusive scissor test fails for pixels inside the corresponding rectangle and passes for pixels outside the rectangle. If the same rectangle is used for both the scissor and exclusive scissor tests, the exclusive scissor test will pass if and only if the scissor test fails.
  * 
+ * <h5>VK_NV_scissor_exclusive</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_scissor_exclusive}</dd>
@@ -31,6 +33,11 @@ import static org.lwjgl.system.JNI.*;
  * <dd><ul>
  * <li>Pat Brown <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_scissor_exclusive:%20&amp;body=@nvpbrown%20">nvpbrown</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-07-31</dd>
  * <dt><b>IP Status</b></dt>
@@ -95,7 +102,7 @@ public class NVScissorExclusive {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>If the pipeline state object is created with {@link #VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV} enabled, then the exclusive scissor rectangles are set by:</p>
+     * <p>The exclusive scissor rectangles <b>can</b> be set dynamically with the command:</p>
      * 
      * <pre><code>
      * void vkCmdSetExclusiveScissorNV(
@@ -108,14 +115,12 @@ public class NVScissorExclusive {
      * 
      * <p>The scissor rectangles taken from element <code>i</code> of {@code pExclusiveScissors} replace the current state for the scissor index <code>firstExclusiveScissor + i</code>, for <code>i</code> in <code>[0, exclusiveScissorCount)</code>.</p>
      * 
-     * <p>Each scissor rectangle is described by a {@link VkRect2D} structure, with the {@code offset.x} and {@code offset.y} values determining the upper left corner of the scissor rectangle, and the {@code extent.width} and {@code extent.height} values determining the size in pixels.</p>
+     * <p>This command sets the state for a given draw when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-exclusiveScissor">exclusive scissor</a> feature <b>must</b> be enabled.</li>
-     * <li>The bound graphics pipeline <b>must</b> have been created with the {@link #VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV} dynamic state enabled</li>
-     * <li>{@code firstExclusiveScissor} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxViewports}</li>
+     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-exclusiveScissor">exclusive scissor</a> feature <b>must</b> be enabled</li>
      * <li>The sum of {@code firstExclusiveScissor} and {@code exclusiveScissorCount} <b>must</b> be between 1 and {@link VkPhysicalDeviceLimits}{@code ::maxViewports}, inclusive</li>
      * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-multiViewport">multiple viewports</a> feature is not enabled, {@code firstExclusiveScissor} <b>must</b> be 0</li>
      * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-multiViewport">multiple viewports</a> feature is not enabled, {@code exclusiveScissorCount} <b>must</b> be 1</li>

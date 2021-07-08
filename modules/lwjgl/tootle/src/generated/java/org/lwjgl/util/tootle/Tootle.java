@@ -38,6 +38,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class Tootle {
 
+    static { Library.loadSystem(System::load, System::loadLibrary, Tootle.class, "org.lwjgl.tootle", Platform.mapLibraryNameBundled("lwjgl_tootle")); }
+
     /** The default vertex cache size. */
     public static final int TOOTLE_DEFAULT_VCACHE_SIZE = 16;
 
@@ -125,8 +127,6 @@ public class Tootle {
         TOOTLE_OVERDRAW_DIRECT3D = 2,
         TOOTLE_OVERDRAW_RAYTRACE = 3,
         TOOTLE_OVERDRAW_FAST     = 4;
-
-    static { Library.loadSystem(System::load, System::loadLibrary, Tootle.class, "org.lwjgl.tootle", Platform.mapLibraryNameBundled("lwjgl_tootle")); }
 
     protected Tootle() {
         throw new UnsupportedOperationException();

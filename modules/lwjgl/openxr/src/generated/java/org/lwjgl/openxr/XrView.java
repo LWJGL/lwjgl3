@@ -71,15 +71,15 @@ public class XrView extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link XrPosef} view of the {@code pose} field. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** Returns a {@link XrFovf} view of the {@code fov} field. */
+    /** @return a {@link XrFovf} view of the {@code fov} field. */
     public XrFovf fov() { return nfov(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -321,15 +321,15 @@ public class XrView extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrView.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrView.nnext(address()); }
-        /** Returns a {@link XrPosef} view of the {@code pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrView.npose(address()); }
-        /** Returns a {@link XrFovf} view of the {@code fov} field. */
+        /** @return a {@link XrFovf} view of the {@code fov} field. */
         public XrFovf fov() { return XrView.nfov(address()); }
 
         /** Sets the specified value to the {@code type} field. */

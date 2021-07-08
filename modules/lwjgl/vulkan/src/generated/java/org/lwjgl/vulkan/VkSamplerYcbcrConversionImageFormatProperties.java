@@ -24,21 +24,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code combinedImageSamplerDescriptorCount} &ndash; the number of combined image sampler descriptors that the implementation uses to access the format.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSamplerYcbcrConversionImageFormatProperties {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint32_t combinedImageSamplerDescriptorCount;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint32_t {@link #combinedImageSamplerDescriptorCount};
  * }</code></pre>
  */
 public class VkSamplerYcbcrConversionImageFormatProperties extends Struct implements NativeResource {
@@ -83,19 +75,19 @@ public class VkSamplerYcbcrConversionImageFormatProperties extends Struct implem
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code combinedImageSamplerDescriptorCount} field. */
+    /** the number of combined image sampler descriptors that the implementation uses to access the format. */
     @NativeType("uint32_t")
     public int combinedImageSamplerDescriptorCount() { return ncombinedImageSamplerDescriptorCount(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSamplerYcbcrConversionImageFormatProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSamplerYcbcrConversionImageFormatProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -314,19 +306,19 @@ public class VkSamplerYcbcrConversionImageFormatProperties extends Struct implem
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSamplerYcbcrConversionImageFormatProperties#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSamplerYcbcrConversionImageFormatProperties.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSamplerYcbcrConversionImageFormatProperties#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkSamplerYcbcrConversionImageFormatProperties.npNext(address()); }
-        /** Returns the value of the {@code combinedImageSamplerDescriptorCount} field. */
+        /** @return the value of the {@link VkSamplerYcbcrConversionImageFormatProperties#combinedImageSamplerDescriptorCount} field. */
         @NativeType("uint32_t")
         public int combinedImageSamplerDescriptorCount() { return VkSamplerYcbcrConversionImageFormatProperties.ncombinedImageSamplerDescriptorCount(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSamplerYcbcrConversionImageFormatProperties#sType} field. */
         public VkSamplerYcbcrConversionImageFormatProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerYcbcrConversionImageFormatProperties.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSamplerYcbcrConversionImageFormatProperties#pNext} field. */
         public VkSamplerYcbcrConversionImageFormatProperties.Buffer pNext(@NativeType("void *") long value) { VkSamplerYcbcrConversionImageFormatProperties.npNext(address(), value); return this; }
 
     }

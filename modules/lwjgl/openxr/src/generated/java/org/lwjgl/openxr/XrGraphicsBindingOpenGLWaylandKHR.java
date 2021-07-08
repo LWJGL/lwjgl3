@@ -70,13 +70,13 @@ public class XrGraphicsBindingOpenGLWaylandKHR extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code display} field. */
+    /** @return the value of the {@code display} field. */
     @NativeType("struct wl_display *")
     public long display() { return ndisplay(address()); }
 
@@ -328,13 +328,13 @@ public class XrGraphicsBindingOpenGLWaylandKHR extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGraphicsBindingOpenGLWaylandKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrGraphicsBindingOpenGLWaylandKHR.nnext(address()); }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("struct wl_display *")
         public long display() { return XrGraphicsBindingOpenGLWaylandKHR.ndisplay(address()); }
 

@@ -68,12 +68,12 @@ public class XrSwapchainSubImage extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code swapchain} field. */
+    /** @return the value of the {@code swapchain} field. */
     @NativeType("XrSwapchain")
     public long swapchain() { return nswapchain(address()); }
-    /** Returns a {@link XrRect2Di} view of the {@code imageRect} field. */
+    /** @return a {@link XrRect2Di} view of the {@code imageRect} field. */
     public XrRect2Di imageRect() { return nimageRect(address()); }
-    /** Returns the value of the {@code imageArrayIndex} field. */
+    /** @return the value of the {@code imageArrayIndex} field. */
     @NativeType("uint32_t")
     public int imageArrayIndex() { return nimageArrayIndex(address()); }
 
@@ -327,12 +327,12 @@ public class XrSwapchainSubImage extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code swapchain} field. */
+        /** @return the value of the {@code swapchain} field. */
         @NativeType("XrSwapchain")
         public long swapchain() { return XrSwapchainSubImage.nswapchain(address()); }
-        /** Returns a {@link XrRect2Di} view of the {@code imageRect} field. */
+        /** @return a {@link XrRect2Di} view of the {@code imageRect} field. */
         public XrRect2Di imageRect() { return XrSwapchainSubImage.nimageRect(address()); }
-        /** Returns the value of the {@code imageArrayIndex} field. */
+        /** @return the value of the {@code imageArrayIndex} field. */
         @NativeType("uint32_t")
         public int imageArrayIndex() { return XrSwapchainSubImage.nimageArrayIndex(address()); }
 

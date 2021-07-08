@@ -22,26 +22,6 @@ import static org.lwjgl.cuda.CUDA.*;
  */
 public class CUGL {
 
-    /**
-     * Flags to map or unmap a resource. ({@code CUGLmap_flags})
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CU_GL_MAP_RESOURCE_FLAGS_NONE GL_MAP_RESOURCE_FLAGS_NONE}</li>
-     * <li>{@link #CU_GL_MAP_RESOURCE_FLAGS_READ_ONLY GL_MAP_RESOURCE_FLAGS_READ_ONLY}</li>
-     * <li>{@link #CU_GL_MAP_RESOURCE_FLAGS_WRITE_DISCARD GL_MAP_RESOURCE_FLAGS_WRITE_DISCARD}</li>
-     * </ul>
-     */
-    public static final int
-        CU_GL_MAP_RESOURCE_FLAGS_NONE          = 0x1,
-        CU_GL_MAP_RESOURCE_FLAGS_READ_ONLY     = 0x2,
-        CU_GL_MAP_RESOURCE_FLAGS_WRITE_DISCARD = 0x3;
-
-    protected CUGL() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
     public static final class Functions {
 
@@ -61,6 +41,26 @@ public class CUGL {
             GLMapBufferObjectAsync    = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ(__CUDA_API_VERSION("cuGLMapBufferObjectAsync", 2))),
             GLUnmapBufferObjectAsync  = apiGetFunctionAddress(CU.getLibrary(), "cuGLUnmapBufferObjectAsync");
 
+    }
+
+    /**
+     * Flags to map or unmap a resource. ({@code CUGLmap_flags})
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #CU_GL_MAP_RESOURCE_FLAGS_NONE GL_MAP_RESOURCE_FLAGS_NONE}</li>
+     * <li>{@link #CU_GL_MAP_RESOURCE_FLAGS_READ_ONLY GL_MAP_RESOURCE_FLAGS_READ_ONLY}</li>
+     * <li>{@link #CU_GL_MAP_RESOURCE_FLAGS_WRITE_DISCARD GL_MAP_RESOURCE_FLAGS_WRITE_DISCARD}</li>
+     * </ul>
+     */
+    public static final int
+        CU_GL_MAP_RESOURCE_FLAGS_NONE          = 0x1,
+        CU_GL_MAP_RESOURCE_FLAGS_READ_ONLY     = 0x2,
+        CU_GL_MAP_RESOURCE_FLAGS_WRITE_DISCARD = 0x3;
+
+    protected CUGL() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ cuGraphicsGLRegisterBuffer ] ---

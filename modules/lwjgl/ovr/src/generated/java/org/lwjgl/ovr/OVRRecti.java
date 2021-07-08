@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * A 2D rectangle with a position and size. All components are integers.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code Pos} &ndash; the rectangle position</li>
- * <li>{@code Size} &ndash; the rectangle size</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrRecti {
- *     {@link OVRVector2i ovrVector2i} Pos;
- *     {@link OVRSizei ovrSizei} Size;
+ *     {@link OVRVector2i ovrVector2i} {@link #Pos};
+ *     {@link OVRSizei ovrSizei} {@link #Size};
  * }</code></pre>
  */
 @NativeType("struct ovrRecti")
@@ -73,20 +66,20 @@ public class OVRRecti extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link OVRVector2i} view of the {@code Pos} field. */
+    /** the rectangle position */
     @NativeType("ovrVector2i")
     public OVRVector2i Pos() { return nPos(address()); }
-    /** Returns a {@link OVRSizei} view of the {@code Size} field. */
+    /** the rectangle size */
     @NativeType("ovrSizei")
     public OVRSizei Size() { return nSize(address()); }
 
-    /** Copies the specified {@link OVRVector2i} to the {@code Pos} field. */
+    /** Copies the specified {@link OVRVector2i} to the {@link #Pos} field. */
     public OVRRecti Pos(@NativeType("ovrVector2i") OVRVector2i value) { nPos(address(), value); return this; }
-    /** Passes the {@code Pos} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #Pos} field to the specified {@link java.util.function.Consumer Consumer}. */
     public OVRRecti Pos(java.util.function.Consumer<OVRVector2i> consumer) { consumer.accept(Pos()); return this; }
-    /** Copies the specified {@link OVRSizei} to the {@code Size} field. */
+    /** Copies the specified {@link OVRSizei} to the {@link #Size} field. */
     public OVRRecti Size(@NativeType("ovrSizei") OVRSizei value) { nSize(address(), value); return this; }
-    /** Passes the {@code Size} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #Size} field to the specified {@link java.util.function.Consumer Consumer}. */
     public OVRRecti Size(java.util.function.Consumer<OVRSizei> consumer) { consumer.accept(Size()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -303,20 +296,20 @@ public class OVRRecti extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link OVRVector2i} view of the {@code Pos} field. */
+        /** @return a {@link OVRVector2i} view of the {@link OVRRecti#Pos} field. */
         @NativeType("ovrVector2i")
         public OVRVector2i Pos() { return OVRRecti.nPos(address()); }
-        /** Returns a {@link OVRSizei} view of the {@code Size} field. */
+        /** @return a {@link OVRSizei} view of the {@link OVRRecti#Size} field. */
         @NativeType("ovrSizei")
         public OVRSizei Size() { return OVRRecti.nSize(address()); }
 
-        /** Copies the specified {@link OVRVector2i} to the {@code Pos} field. */
+        /** Copies the specified {@link OVRVector2i} to the {@link OVRRecti#Pos} field. */
         public OVRRecti.Buffer Pos(@NativeType("ovrVector2i") OVRVector2i value) { OVRRecti.nPos(address(), value); return this; }
-        /** Passes the {@code Pos} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link OVRRecti#Pos} field to the specified {@link java.util.function.Consumer Consumer}. */
         public OVRRecti.Buffer Pos(java.util.function.Consumer<OVRVector2i> consumer) { consumer.accept(Pos()); return this; }
-        /** Copies the specified {@link OVRSizei} to the {@code Size} field. */
+        /** Copies the specified {@link OVRSizei} to the {@link OVRRecti#Size} field. */
         public OVRRecti.Buffer Size(@NativeType("ovrSizei") OVRSizei value) { OVRRecti.nSize(address(), value); return this; }
-        /** Passes the {@code Size} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link OVRRecti#Size} field to the specified {@link java.util.function.Consumer Consumer}. */
         public OVRRecti.Buffer Size(java.util.function.Consumer<OVRSizei> consumer) { consumer.accept(Size()); return this; }
 
     }

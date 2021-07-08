@@ -18,35 +18,20 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Initialization parameters used by {@link BGFX#bgfx_init init}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code type} &ndash; select rendering backend. When set to {@link BGFX#BGFX_RENDERER_TYPE_COUNT RENDERER_TYPE_COUNT} a default rendering backend will be selected appropriate to the platform. One of:<br><table><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_NOOP RENDERER_TYPE_NOOP}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D9 RENDERER_TYPE_DIRECT3D9}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D11 RENDERER_TYPE_DIRECT3D11}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D12 RENDERER_TYPE_DIRECT3D12}</td></tr><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_GNM RENDERER_TYPE_GNM}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_METAL RENDERER_TYPE_METAL}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_NVN RENDERER_TYPE_NVN}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_OPENGLES RENDERER_TYPE_OPENGLES}</td></tr><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_OPENGL RENDERER_TYPE_OPENGL}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_VULKAN RENDERER_TYPE_VULKAN}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_COUNT RENDERER_TYPE_COUNT}</td></tr></table></li>
- * <li>{@code vendorId} &ndash; vendor PCI id. If set to {@link BGFX#BGFX_PCI_ID_NONE PCI_ID_NONE} it will select the first device. One of:<br><table><tr><td>{@link BGFX#BGFX_PCI_ID_NONE PCI_ID_NONE}</td><td>{@link BGFX#BGFX_PCI_ID_SOFTWARE_RASTERIZER PCI_ID_SOFTWARE_RASTERIZER}</td><td>{@link BGFX#BGFX_PCI_ID_AMD PCI_ID_AMD}</td><td>{@link BGFX#BGFX_PCI_ID_INTEL PCI_ID_INTEL}</td><td>{@link BGFX#BGFX_PCI_ID_NVIDIA PCI_ID_NVIDIA}</td></tr></table></li>
- * <li>{@code deviceId} &ndash; device id. If set to 0 it will select first device, or device with matching id.</li>
- * <li>{@code debug} &ndash; enable device for debugging</li>
- * <li>{@code profile} &ndash; enable device for profiling</li>
- * <li>{@code platformData} &ndash; platform data</li>
- * <li>{@code resolution} &ndash; backbuffer resolution and reset parameters</li>
- * <li>{@code limits} &ndash; configurable runtime limits parameters</li>
- * <li>{@code callback} &ndash; provide application specific callback interface</li>
- * <li>{@code allocator} &ndash; custom allocator. When a custom allocator is not specified, bgfx uses the CRT allocator. Bgfx assumes	custom allocator is thread safe.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct bgfx_init_t {
- *     bgfx_renderer_type_t type;
- *     uint16_t vendorId;
- *     uint16_t deviceId;
- *     bool debug;
- *     bool profile;
- *     {@link BGFXPlatformData bgfx_platform_data_t} platformData;
- *     {@link BGFXResolution bgfx_resolution_t} resolution;
- *     {@link BGFXInitLimits bgfx_init_limits_t} limits;
- *     {@link BGFXCallbackInterface bgfx_callback_interface_t} * callback;
- *     {@link BGFXAllocatorInterface bgfx_allocator_interface_t} * allocator;
+ *     bgfx_renderer_type_t {@link #type};
+ *     uint16_t {@link #vendorId};
+ *     uint16_t {@link #deviceId};
+ *     bool {@link #debug};
+ *     bool {@link #profile};
+ *     {@link BGFXPlatformData bgfx_platform_data_t} {@link #platformData};
+ *     {@link BGFXResolution bgfx_resolution_t} {@link #resolution};
+ *     {@link BGFXInitLimits bgfx_init_limits_t} {@link #limits};
+ *     {@link BGFXCallbackInterface bgfx_callback_interface_t} * {@link #callback};
+ *     {@link BGFXAllocatorInterface bgfx_allocator_interface_t} * {@link #allocator};
  * }</code></pre>
  */
 @NativeType("struct bgfx_init_t")
@@ -113,64 +98,64 @@ public class BGFXInit extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** select rendering backend. When set to {@link BGFX#BGFX_RENDERER_TYPE_COUNT RENDERER_TYPE_COUNT} a default rendering backend will be selected appropriate to the platform. One of:<br><table><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_NOOP RENDERER_TYPE_NOOP}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D9 RENDERER_TYPE_DIRECT3D9}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D11 RENDERER_TYPE_DIRECT3D11}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D12 RENDERER_TYPE_DIRECT3D12}</td></tr><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_GNM RENDERER_TYPE_GNM}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_METAL RENDERER_TYPE_METAL}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_NVN RENDERER_TYPE_NVN}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_OPENGLES RENDERER_TYPE_OPENGLES}</td></tr><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_OPENGL RENDERER_TYPE_OPENGL}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_VULKAN RENDERER_TYPE_VULKAN}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_COUNT RENDERER_TYPE_COUNT}</td></tr></table> */
     @NativeType("bgfx_renderer_type_t")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code vendorId} field. */
+    /** vendor PCI id. If set to {@link BGFX#BGFX_PCI_ID_NONE PCI_ID_NONE} it will select the first device. One of:<br><table><tr><td>{@link BGFX#BGFX_PCI_ID_NONE PCI_ID_NONE}</td><td>{@link BGFX#BGFX_PCI_ID_SOFTWARE_RASTERIZER PCI_ID_SOFTWARE_RASTERIZER}</td><td>{@link BGFX#BGFX_PCI_ID_AMD PCI_ID_AMD}</td><td>{@link BGFX#BGFX_PCI_ID_INTEL PCI_ID_INTEL}</td><td>{@link BGFX#BGFX_PCI_ID_NVIDIA PCI_ID_NVIDIA}</td></tr></table> */
     @NativeType("uint16_t")
     public short vendorId() { return nvendorId(address()); }
-    /** Returns the value of the {@code deviceId} field. */
+    /** device id. If set to 0 it will select first device, or device with matching id. */
     @NativeType("uint16_t")
     public short deviceId() { return ndeviceId(address()); }
-    /** Returns the value of the {@code debug} field. */
+    /** enable device for debugging */
     @NativeType("bool")
     public boolean debug() { return ndebug(address()); }
-    /** Returns the value of the {@code profile} field. */
+    /** enable device for profiling */
     @NativeType("bool")
     public boolean profile() { return nprofile(address()); }
-    /** Returns a {@link BGFXPlatformData} view of the {@code platformData} field. */
+    /** platform data */
     @NativeType("bgfx_platform_data_t")
     public BGFXPlatformData platformData() { return nplatformData(address()); }
-    /** Returns a {@link BGFXResolution} view of the {@code resolution} field. */
+    /** backbuffer resolution and reset parameters */
     @NativeType("bgfx_resolution_t")
     public BGFXResolution resolution() { return nresolution(address()); }
-    /** Returns a {@link BGFXInitLimits} view of the {@code limits} field. */
+    /** configurable runtime limits parameters */
     @NativeType("bgfx_init_limits_t")
     public BGFXInitLimits limits() { return nlimits(address()); }
-    /** Returns a {@link BGFXCallbackInterface} view of the struct pointed to by the {@code callback} field. */
+    /** provide application specific callback interface */
     @Nullable
     @NativeType("bgfx_callback_interface_t *")
     public BGFXCallbackInterface callback() { return ncallback(address()); }
-    /** Returns a {@link BGFXAllocatorInterface} view of the struct pointed to by the {@code allocator} field. */
+    /** custom allocator. When a custom allocator is not specified, bgfx uses the CRT allocator. Bgfx assumes	custom allocator is thread safe. */
     @Nullable
     @NativeType("bgfx_allocator_interface_t *")
     public BGFXAllocatorInterface allocator() { return nallocator(address()); }
 
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public BGFXInit type(@NativeType("bgfx_renderer_type_t") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code vendorId} field. */
+    /** Sets the specified value to the {@link #vendorId} field. */
     public BGFXInit vendorId(@NativeType("uint16_t") short value) { nvendorId(address(), value); return this; }
-    /** Sets the specified value to the {@code deviceId} field. */
+    /** Sets the specified value to the {@link #deviceId} field. */
     public BGFXInit deviceId(@NativeType("uint16_t") short value) { ndeviceId(address(), value); return this; }
-    /** Sets the specified value to the {@code debug} field. */
+    /** Sets the specified value to the {@link #debug} field. */
     public BGFXInit debug(@NativeType("bool") boolean value) { ndebug(address(), value); return this; }
-    /** Sets the specified value to the {@code profile} field. */
+    /** Sets the specified value to the {@link #profile} field. */
     public BGFXInit profile(@NativeType("bool") boolean value) { nprofile(address(), value); return this; }
-    /** Copies the specified {@link BGFXPlatformData} to the {@code platformData} field. */
+    /** Copies the specified {@link BGFXPlatformData} to the {@link #platformData} field. */
     public BGFXInit platformData(@NativeType("bgfx_platform_data_t") BGFXPlatformData value) { nplatformData(address(), value); return this; }
-    /** Passes the {@code platformData} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #platformData} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BGFXInit platformData(java.util.function.Consumer<BGFXPlatformData> consumer) { consumer.accept(platformData()); return this; }
-    /** Copies the specified {@link BGFXResolution} to the {@code resolution} field. */
+    /** Copies the specified {@link BGFXResolution} to the {@link #resolution} field. */
     public BGFXInit resolution(@NativeType("bgfx_resolution_t") BGFXResolution value) { nresolution(address(), value); return this; }
-    /** Passes the {@code resolution} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #resolution} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BGFXInit resolution(java.util.function.Consumer<BGFXResolution> consumer) { consumer.accept(resolution()); return this; }
-    /** Copies the specified {@link BGFXInitLimits} to the {@code limits} field. */
+    /** Copies the specified {@link BGFXInitLimits} to the {@link #limits} field. */
     public BGFXInit limits(@NativeType("bgfx_init_limits_t") BGFXInitLimits value) { nlimits(address(), value); return this; }
-    /** Passes the {@code limits} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #limits} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BGFXInit limits(java.util.function.Consumer<BGFXInitLimits> consumer) { consumer.accept(limits()); return this; }
-    /** Sets the address of the specified {@link BGFXCallbackInterface} to the {@code callback} field. */
+    /** Sets the address of the specified {@link BGFXCallbackInterface} to the {@link #callback} field. */
     public BGFXInit callback(@Nullable @NativeType("bgfx_callback_interface_t *") BGFXCallbackInterface value) { ncallback(address(), value); return this; }
-    /** Sets the address of the specified {@link BGFXAllocatorInterface} to the {@code allocator} field. */
+    /** Sets the address of the specified {@link BGFXAllocatorInterface} to the {@link #allocator} field. */
     public BGFXInit allocator(@Nullable @NativeType("bgfx_allocator_interface_t *") BGFXAllocatorInterface value) { nallocator(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */

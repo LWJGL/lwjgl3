@@ -35,6 +35,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL11 {
 
+    static { GL.initialize(); }
+
     /** AccumOp */
     public static final int
         GL_ACCUM  = 0x100,
@@ -704,8 +706,6 @@ public class GL11 {
         GL_T2F_N3F_V3F                 = 0x2A2B,
         GL_T2F_C4F_N3F_V3F             = 0x2A2C,
         GL_T4F_C4F_N3F_V4F             = 0x2A2D;
-
-    static { GL.initialize(); }
 
     protected GL11() {
         throw new UnsupportedOperationException();

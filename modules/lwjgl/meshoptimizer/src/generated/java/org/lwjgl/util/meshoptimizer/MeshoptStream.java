@@ -74,16 +74,16 @@ public class MeshoptStream extends Struct implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
+     * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
     @NativeType("void const *")
     public ByteBuffer data(int capacity) { return ndata(address(), capacity); }
-    /** Returns the value of the {@code size} field. */
+    /** @return the value of the {@code size} field. */
     @NativeType("size_t")
     public long size() { return nsize(address()); }
-    /** Returns the value of the {@code stride} field. */
+    /** @return the value of the {@code stride} field. */
     @NativeType("size_t")
     public long stride() { return nstride(address()); }
 
@@ -336,16 +336,16 @@ public class MeshoptStream extends Struct implements NativeResource {
         }
 
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("void const *")
         public ByteBuffer data(int capacity) { return MeshoptStream.ndata(address(), capacity); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("size_t")
         public long size() { return MeshoptStream.nsize(address()); }
-        /** Returns the value of the {@code stride} field. */
+        /** @return the value of the {@code stride} field. */
         @NativeType("size_t")
         public long stride() { return MeshoptStream.nstride(address()); }
 

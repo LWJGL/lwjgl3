@@ -41,6 +41,8 @@ import org.lwjgl.system.*;
  */
 public class EXTGeometryShader {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code type} parameter of CreateShader and CreateShaderProgramv, by the {@code pname} parameter of GetProgramPipelineiv and returned in
      * the {@code params} parameter of GetShaderiv when {@code pname} is SHADER_TYPE.
@@ -104,8 +106,6 @@ public class EXTGeometryShader {
 
     /** Accepted by the {@code props} parameter of GetProgramResourceiv. */
     public static final int GL_REFERENCED_BY_GEOMETRY_SHADER_EXT = 0x9309;
-
-    static { GLES.initialize(); }
 
     protected EXTGeometryShader() {
         throw new UnsupportedOperationException();

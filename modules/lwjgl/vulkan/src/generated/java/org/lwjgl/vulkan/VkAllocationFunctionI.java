@@ -6,8 +6,11 @@
 package org.lwjgl.vulkan;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Application-defined memory allocation function.
@@ -34,7 +37,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * <p>For example, {@code pfnAllocation} (or {@code pfnReallocation}) could cause termination of running Vulkan instance(s) on a failed allocation for debugging purposes, either directly or indirectly. In these circumstances, it <b>cannot</b> be assumed that any part of any affected {@code VkInstance} objects are going to operate correctly (even {@link VK10#vkDestroyInstance DestroyInstance}), and the application <b>must</b> ensure it cleans up properly via other means (e.g. process termination).</p>
  * </div>
  * 
- * <p>If {@code pfnAllocation} returns {@code NULL}, and if the implementation is unable to continue correct processing of the current command without the requested allocation, it <b>must</b> treat this as a run-time error, and generate {@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY} at the appropriate time for the command in which the condition was detected, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fundamentals-errorcodes">Return Codes</a>.</p>
+ * <p>If {@code pfnAllocation} returns {@code NULL}, and if the implementation is unable to continue correct processing of the current command without the requested allocation, it <b>must</b> treat this as a runtime error, and generate {@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY} at the appropriate time for the command in which the condition was detected, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fundamentals-errorcodes">Return Codes</a>.</p>
  * 
  * <p>If the implementation is able to continue correct processing of the current command without the requested allocation, then it <b>may</b> do so, and <b>must</b> not generate {@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY} as a result of this failed allocation.</p>
  * 
@@ -44,21 +47,26 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("PFN_vkAllocationFunction")
-public interface VkAllocationFunctionI extends CallbackI.P {
+public interface VkAllocationFunctionI extends CallbackI {
 
-    String SIGNATURE = Callback.__stdcall("(pppi)p");
+    FFICIF CIF = apiCreateCIF(
+        apiStdcall(),
+        ffi_type_pointer,
+        ffi_type_pointer, ffi_type_pointer, ffi_type_pointer, ffi_type_uint32
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default long callback(long args) {
-        return invoke(
-            dcbArgPointer(args),
-            dcbArgPointer(args),
-            dcbArgPointer(args),
-            dcbArgInt(args)
+    default void callback(long ret, long args) {
+        long __result = invoke(
+            memGetAddress(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 3 * POINTER_SIZE))
         );
+        apiClosureRetP(ret, __result);
     }
 
     /**

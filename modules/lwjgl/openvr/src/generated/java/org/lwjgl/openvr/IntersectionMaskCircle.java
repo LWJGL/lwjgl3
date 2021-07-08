@@ -68,11 +68,11 @@ public class IntersectionMaskCircle extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code m_flCenterX} field. */
+    /** @return the value of the {@code m_flCenterX} field. */
     public float m_flCenterX() { return nm_flCenterX(address()); }
-    /** Returns the value of the {@code m_flCenterY} field. */
+    /** @return the value of the {@code m_flCenterY} field. */
     public float m_flCenterY() { return nm_flCenterY(address()); }
-    /** Returns the value of the {@code m_flRadius} field. */
+    /** @return the value of the {@code m_flRadius} field. */
     public float m_flRadius() { return nm_flRadius(address()); }
 
     /** Sets the specified value to the {@code m_flCenterX} field. */
@@ -302,11 +302,11 @@ public class IntersectionMaskCircle extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code m_flCenterX} field. */
+        /** @return the value of the {@code m_flCenterX} field. */
         public float m_flCenterX() { return IntersectionMaskCircle.nm_flCenterX(address()); }
-        /** Returns the value of the {@code m_flCenterY} field. */
+        /** @return the value of the {@code m_flCenterY} field. */
         public float m_flCenterY() { return IntersectionMaskCircle.nm_flCenterY(address()); }
-        /** Returns the value of the {@code m_flRadius} field. */
+        /** @return the value of the {@code m_flRadius} field. */
         public float m_flRadius() { return IntersectionMaskCircle.nm_flRadius(address()); }
 
         /** Sets the specified value to the {@code m_flCenterX} field. */

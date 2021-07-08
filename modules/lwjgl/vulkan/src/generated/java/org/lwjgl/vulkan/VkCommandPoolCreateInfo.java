@@ -18,6 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying parameters of a newly created command pool.
  * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>If the protected memory feature is not enabled, the {@link VK11#VK_COMMAND_POOL_CREATE_PROTECTED_BIT COMMAND_POOL_CREATE_PROTECTED_BIT} bit of {@code flags} <b>must</b> not be set</li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -30,23 +36,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK10#vkCreateCommandPool CreateCommandPool}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkCommandPoolCreateFlagBits} indicating usage behavior for the pool and command buffers allocated from it.</li>
- * <li>{@code queueFamilyIndex} &ndash; designates a queue family as described in section <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#devsandqueues-queueprops">Queue Family Properties</a>. All command buffers allocated from this command pool <b>must</b> be submitted on queues from the same queue family.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkCommandPoolCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkCommandPoolCreateFlags flags;
- *     uint32_t queueFamilyIndex;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkCommandPoolCreateFlags {@link #flags};
+ *     uint32_t {@link #queueFamilyIndex};
  * }</code></pre>
  */
 public class VkCommandPoolCreateInfo extends Struct implements NativeResource {
@@ -94,26 +91,26 @@ public class VkCommandPoolCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkCommandPoolCreateFlagBits} indicating usage behavior for the pool and command buffers allocated from it. */
     @NativeType("VkCommandPoolCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code queueFamilyIndex} field. */
+    /** designates a queue family as described in section <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#devsandqueues-queueprops">Queue Family Properties</a>. All command buffers allocated from this command pool <b>must</b> be submitted on queues from the same queue family. */
     @NativeType("uint32_t")
     public int queueFamilyIndex() { return nqueueFamilyIndex(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkCommandPoolCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkCommandPoolCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkCommandPoolCreateInfo flags(@NativeType("VkCommandPoolCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code queueFamilyIndex} field. */
+    /** Sets the specified value to the {@link #queueFamilyIndex} field. */
     public VkCommandPoolCreateInfo queueFamilyIndex(@NativeType("uint32_t") int value) { nqueueFamilyIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -342,26 +339,26 @@ public class VkCommandPoolCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkCommandPoolCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCommandPoolCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkCommandPoolCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCommandPoolCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkCommandPoolCreateInfo#flags} field. */
         @NativeType("VkCommandPoolCreateFlags")
         public int flags() { return VkCommandPoolCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code queueFamilyIndex} field. */
+        /** @return the value of the {@link VkCommandPoolCreateInfo#queueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int queueFamilyIndex() { return VkCommandPoolCreateInfo.nqueueFamilyIndex(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkCommandPoolCreateInfo#sType} field. */
         public VkCommandPoolCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandPoolCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkCommandPoolCreateInfo#pNext} field. */
         public VkCommandPoolCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkCommandPoolCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkCommandPoolCreateInfo#flags} field. */
         public VkCommandPoolCreateInfo.Buffer flags(@NativeType("VkCommandPoolCreateFlags") int value) { VkCommandPoolCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code queueFamilyIndex} field. */
+        /** Sets the specified value to the {@link VkCommandPoolCreateInfo#queueFamilyIndex} field. */
         public VkCommandPoolCreateInfo.Buffer queueFamilyIndex(@NativeType("uint32_t") int value) { VkCommandPoolCreateInfo.nqueueFamilyIndex(address(), value); return this; }
 
     }

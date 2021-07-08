@@ -62,10 +62,10 @@ class NkConfigStackColorElement extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkColor} view of the struct pointed to by the {@code pValues} field. */
+    /** @return a {@link NkColor} view of the struct pointed to by the {@code pValues} field. */
     @NativeType("struct nk_color *")
     public NkColor pValues() { return npValues(address()); }
-    /** Returns a {@link NkColor} view of the {@code old_value} field. */
+    /** @return a {@link NkColor} view of the {@code old_value} field. */
     @NativeType("struct nk_color")
     public NkColor old_value() { return nold_value(address()); }
 
@@ -143,10 +143,10 @@ class NkConfigStackColorElement extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkColor} view of the struct pointed to by the {@code pValues} field. */
+        /** @return a {@link NkColor} view of the struct pointed to by the {@code pValues} field. */
         @NativeType("struct nk_color *")
         public NkColor pValues() { return NkConfigStackColorElement.npValues(address()); }
-        /** Returns a {@link NkColor} view of the {@code old_value} field. */
+        /** @return a {@link NkColor} view of the {@code old_value} field. */
         @NativeType("struct nk_color")
         public NkColor old_value() { return NkConfigStackColorElement.nold_value(address()); }
 

@@ -68,13 +68,13 @@ public class NkCursor extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkImage} view of the {@code img} field. */
+    /** @return a {@link NkImage} view of the {@code img} field. */
     @NativeType("struct nk_image")
     public NkImage img() { return nimg(address()); }
-    /** Returns a {@link NkVec2} view of the {@code size} field. */
+    /** @return a {@link NkVec2} view of the {@code size} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 size() { return nsize(address()); }
-    /** Returns a {@link NkVec2} view of the {@code offset} field. */
+    /** @return a {@link NkVec2} view of the {@code offset} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 offset() { return noffset(address()); }
 
@@ -311,13 +311,13 @@ public class NkCursor extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkImage} view of the {@code img} field. */
+        /** @return a {@link NkImage} view of the {@code img} field. */
         @NativeType("struct nk_image")
         public NkImage img() { return NkCursor.nimg(address()); }
-        /** Returns a {@link NkVec2} view of the {@code size} field. */
+        /** @return a {@link NkVec2} view of the {@code size} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 size() { return NkCursor.nsize(address()); }
-        /** Returns a {@link NkVec2} view of the {@code offset} field. */
+        /** @return a {@link NkVec2} view of the {@code offset} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 offset() { return NkCursor.noffset(address()); }
 

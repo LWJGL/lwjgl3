@@ -31,6 +31,8 @@ import org.lwjgl.system.*;
  */
 public class OVRMultiview {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of {@link GL30C#glGetFramebufferAttachmentParameteriv GetFramebufferAttachmentParameteriv}. */
     public static final int
         GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR       = 0x9630,
@@ -41,8 +43,6 @@ public class OVRMultiview {
 
     /** Returned by {@link GL30C#glCheckFramebufferStatus CheckFramebufferStatus}. */
     public static final int GL_FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR = 0x9633;
-
-    static { GL.initialize(); }
 
     protected OVRMultiview() {
         throw new UnsupportedOperationException();

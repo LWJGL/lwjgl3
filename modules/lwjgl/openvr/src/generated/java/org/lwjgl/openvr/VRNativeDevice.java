@@ -65,10 +65,10 @@ public class VRNativeDevice extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code handle} field. */
+    /** @return the value of the {@code handle} field. */
     @NativeType("void *")
     public long handle() { return nhandle(address()); }
-    /** Returns the value of the {@code eType} field. */
+    /** @return the value of the {@code eType} field. */
     @NativeType("EDeviceType")
     public int eType() { return neType(address()); }
 
@@ -312,10 +312,10 @@ public class VRNativeDevice extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code handle} field. */
+        /** @return the value of the {@code handle} field. */
         @NativeType("void *")
         public long handle() { return VRNativeDevice.nhandle(address()); }
-        /** Returns the value of the {@code eType} field. */
+        /** @return the value of the {@code eType} field. */
         @NativeType("EDeviceType")
         public int eType() { return VRNativeDevice.neType(address()); }
 

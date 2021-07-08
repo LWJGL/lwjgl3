@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWwindow *window,
  *     int entered
  * )</code></pre>
@@ -54,7 +54,7 @@ public abstract class GLFWCursorEnterCallback extends Callback implements GLFWCu
     }
 
     protected GLFWCursorEnterCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWCursorEnterCallback(long functionPointer) {

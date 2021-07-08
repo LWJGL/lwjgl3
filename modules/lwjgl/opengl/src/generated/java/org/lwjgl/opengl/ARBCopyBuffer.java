@@ -17,6 +17,8 @@ import org.lwjgl.system.*;
  */
 public class ARBCopyBuffer {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the target parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv, MapBufferRange,
      * FlushMappedBufferRange, GetBufferParameteriv, BindBufferRange, BindBufferBase, and CopyBufferSubData.
@@ -24,8 +26,6 @@ public class ARBCopyBuffer {
     public static final int
         GL_COPY_READ_BUFFER  = 0x8F36,
         GL_COPY_WRITE_BUFFER = 0x8F37;
-
-    static { GL.initialize(); }
 
     protected ARBCopyBuffer() {
         throw new UnsupportedOperationException();

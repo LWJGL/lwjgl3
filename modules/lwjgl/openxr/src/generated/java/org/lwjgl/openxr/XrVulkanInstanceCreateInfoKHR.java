@@ -86,25 +86,25 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code systemId} field. */
+    /** @return the value of the {@code systemId} field. */
     @NativeType("XrSystemId")
     public long systemId() { return nsystemId(address()); }
-    /** Returns the value of the {@code createFlags} field. */
+    /** @return the value of the {@code createFlags} field. */
     @NativeType("XrVulkanInstanceCreateFlagsKHR")
     public long createFlags() { return ncreateFlags(address()); }
-    /** Returns the value of the {@code pfnGetInstanceProcAddr} field. */
+    /** @return the value of the {@code pfnGetInstanceProcAddr} field. */
     @NativeType("PFN_vkGetInstanceProcAddr")
     public long pfnGetInstanceProcAddr() { return npfnGetInstanceProcAddr(address()); }
-    /** Returns a {@link VkInstanceCreateInfo} view of the struct pointed to by the {@code vulkanCreateInfo} field. */
+    /** @return a {@link VkInstanceCreateInfo} view of the struct pointed to by the {@code vulkanCreateInfo} field. */
     @NativeType("VkInstanceCreateInfo const *")
     public VkInstanceCreateInfo vulkanCreateInfo() { return nvulkanCreateInfo(address()); }
-    /** Returns a {@link VkAllocationCallbacks} view of the struct pointed to by the {@code vulkanAllocator} field. */
+    /** @return a {@link VkAllocationCallbacks} view of the struct pointed to by the {@code vulkanAllocator} field. */
     @Nullable
     @NativeType("VkAllocationCallbacks const *")
     public VkAllocationCallbacks vulkanAllocator() { return nvulkanAllocator(address()); }
@@ -396,25 +396,25 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrVulkanInstanceCreateInfoKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrVulkanInstanceCreateInfoKHR.nnext(address()); }
-        /** Returns the value of the {@code systemId} field. */
+        /** @return the value of the {@code systemId} field. */
         @NativeType("XrSystemId")
         public long systemId() { return XrVulkanInstanceCreateInfoKHR.nsystemId(address()); }
-        /** Returns the value of the {@code createFlags} field. */
+        /** @return the value of the {@code createFlags} field. */
         @NativeType("XrVulkanInstanceCreateFlagsKHR")
         public long createFlags() { return XrVulkanInstanceCreateInfoKHR.ncreateFlags(address()); }
-        /** Returns the value of the {@code pfnGetInstanceProcAddr} field. */
+        /** @return the value of the {@code pfnGetInstanceProcAddr} field. */
         @NativeType("PFN_vkGetInstanceProcAddr")
         public long pfnGetInstanceProcAddr() { return XrVulkanInstanceCreateInfoKHR.npfnGetInstanceProcAddr(address()); }
-        /** Returns a {@link VkInstanceCreateInfo} view of the struct pointed to by the {@code vulkanCreateInfo} field. */
+        /** @return a {@link VkInstanceCreateInfo} view of the struct pointed to by the {@code vulkanCreateInfo} field. */
         @NativeType("VkInstanceCreateInfo const *")
         public VkInstanceCreateInfo vulkanCreateInfo() { return XrVulkanInstanceCreateInfoKHR.nvulkanCreateInfo(address()); }
-        /** Returns a {@link VkAllocationCallbacks} view of the struct pointed to by the {@code vulkanAllocator} field. */
+        /** @return a {@link VkAllocationCallbacks} view of the struct pointed to by the {@code vulkanAllocator} field. */
         @Nullable
         @NativeType("VkAllocationCallbacks const *")
         public VkAllocationCallbacks vulkanAllocator() { return XrVulkanInstanceCreateInfoKHR.nvulkanAllocator(address()); }

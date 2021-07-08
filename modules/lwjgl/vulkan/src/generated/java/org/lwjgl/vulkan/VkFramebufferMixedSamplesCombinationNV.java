@@ -29,27 +29,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link NVCoverageReductionMode#vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV GetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code coverageReductionMode} &ndash; a {@code VkCoverageReductionModeNV} value specifying the coverage reduction mode.</li>
- * <li>{@code rasterizationSamples} &ndash; specifies the number of rasterization samples in the supported combination.</li>
- * <li>{@code depthStencilSamples} &ndash; specifies the number of samples in the depth stencil attachment in the supported combination. A value of 0 indicates the combination does not have a depth stencil attachment.</li>
- * <li>{@code colorSamples} &ndash; specifies the number of color samples in a color attachment in the supported combination. A value of 0 indicates the combination does not have a color attachment.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkFramebufferMixedSamplesCombinationNV {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkCoverageReductionModeNV coverageReductionMode;
- *     VkSampleCountFlagBits rasterizationSamples;
- *     VkSampleCountFlags depthStencilSamples;
- *     VkSampleCountFlags colorSamples;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkCoverageReductionModeNV {@link #coverageReductionMode};
+ *     VkSampleCountFlagBits {@link #rasterizationSamples};
+ *     VkSampleCountFlags {@link #depthStencilSamples};
+ *     VkSampleCountFlags {@link #colorSamples};
  * }</code></pre>
  */
 public class VkFramebufferMixedSamplesCombinationNV extends Struct implements NativeResource {
@@ -103,28 +92,28 @@ public class VkFramebufferMixedSamplesCombinationNV extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code coverageReductionMode} field. */
+    /** a {@code VkCoverageReductionModeNV} value specifying the coverage reduction mode. */
     @NativeType("VkCoverageReductionModeNV")
     public int coverageReductionMode() { return ncoverageReductionMode(address()); }
-    /** Returns the value of the {@code rasterizationSamples} field. */
+    /** specifies the number of rasterization samples in the supported combination. */
     @NativeType("VkSampleCountFlagBits")
     public int rasterizationSamples() { return nrasterizationSamples(address()); }
-    /** Returns the value of the {@code depthStencilSamples} field. */
+    /** specifies the number of samples in the depth stencil attachment in the supported combination. A value of 0 indicates the combination does not have a depth stencil attachment. */
     @NativeType("VkSampleCountFlags")
     public int depthStencilSamples() { return ndepthStencilSamples(address()); }
-    /** Returns the value of the {@code colorSamples} field. */
+    /** specifies the number of color samples in a color attachment in the supported combination. A value of 0 indicates the combination does not have a color attachment. */
     @NativeType("VkSampleCountFlags")
     public int colorSamples() { return ncolorSamples(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkFramebufferMixedSamplesCombinationNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkFramebufferMixedSamplesCombinationNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -349,28 +338,28 @@ public class VkFramebufferMixedSamplesCombinationNV extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkFramebufferMixedSamplesCombinationNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkFramebufferMixedSamplesCombinationNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkFramebufferMixedSamplesCombinationNV#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkFramebufferMixedSamplesCombinationNV.npNext(address()); }
-        /** Returns the value of the {@code coverageReductionMode} field. */
+        /** @return the value of the {@link VkFramebufferMixedSamplesCombinationNV#coverageReductionMode} field. */
         @NativeType("VkCoverageReductionModeNV")
         public int coverageReductionMode() { return VkFramebufferMixedSamplesCombinationNV.ncoverageReductionMode(address()); }
-        /** Returns the value of the {@code rasterizationSamples} field. */
+        /** @return the value of the {@link VkFramebufferMixedSamplesCombinationNV#rasterizationSamples} field. */
         @NativeType("VkSampleCountFlagBits")
         public int rasterizationSamples() { return VkFramebufferMixedSamplesCombinationNV.nrasterizationSamples(address()); }
-        /** Returns the value of the {@code depthStencilSamples} field. */
+        /** @return the value of the {@link VkFramebufferMixedSamplesCombinationNV#depthStencilSamples} field. */
         @NativeType("VkSampleCountFlags")
         public int depthStencilSamples() { return VkFramebufferMixedSamplesCombinationNV.ndepthStencilSamples(address()); }
-        /** Returns the value of the {@code colorSamples} field. */
+        /** @return the value of the {@link VkFramebufferMixedSamplesCombinationNV#colorSamples} field. */
         @NativeType("VkSampleCountFlags")
         public int colorSamples() { return VkFramebufferMixedSamplesCombinationNV.ncolorSamples(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkFramebufferMixedSamplesCombinationNV#sType} field. */
         public VkFramebufferMixedSamplesCombinationNV.Buffer sType(@NativeType("VkStructureType") int value) { VkFramebufferMixedSamplesCombinationNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkFramebufferMixedSamplesCombinationNV#pNext} field. */
         public VkFramebufferMixedSamplesCombinationNV.Buffer pNext(@NativeType("void *") long value) { VkFramebufferMixedSamplesCombinationNV.npNext(address(), value); return this; }
 
     }

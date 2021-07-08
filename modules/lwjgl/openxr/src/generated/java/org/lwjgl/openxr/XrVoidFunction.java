@@ -39,7 +39,7 @@ public abstract class XrVoidFunction extends Callback implements XrVoidFunctionI
     }
 
     protected XrVoidFunction() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     XrVoidFunction(long functionPointer) {

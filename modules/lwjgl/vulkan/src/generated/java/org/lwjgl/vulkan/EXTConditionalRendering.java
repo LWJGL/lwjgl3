@@ -17,6 +17,8 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>None.</p>
  * 
+ * <h5>VK_EXT_conditional_rendering</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_conditional_rendering}</dd>
@@ -34,6 +36,11 @@ import static org.lwjgl.system.JNI.*;
  * <dd><ul>
  * <li>Vikram Kushwaha <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_conditional_rendering:%20&amp;body=@vkushwaha%20">vkushwaha</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-05-21</dd>
  * <dt><b>IP Status</b></dt>
@@ -185,8 +192,8 @@ public class EXTConditionalRendering {
      * 
      * <ul>
      * <li>Conditional rendering <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#active-conditional-rendering">active</a></li>
-     * <li>If conditional rendering was made <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#active-conditional-rendering">active</a> outside of a render pass instance, it must not be ended inside a render pass instance</li>
-     * <li>If conditional rendering was made <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#active-conditional-rendering">active</a> within a subpass it must be ended in the same subpass</li>
+     * <li>If conditional rendering was made <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#active-conditional-rendering">active</a> outside of a render pass instance, it <b>must</b> not be ended inside a render pass instance</li>
+     * <li>If conditional rendering was made <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#active-conditional-rendering">active</a> within a subpass it <b>must</b> be ended in the same subpass</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

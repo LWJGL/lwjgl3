@@ -35,6 +35,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class OESGetProgramBinary {
 
+    static { GLES.initialize(); }
+
     /** ccepted by the {@code pname} parameter of GetProgramiv. */
     public static final int GL_PROGRAM_BINARY_LENGTH_OES = 0x8741;
 
@@ -42,8 +44,6 @@ public class OESGetProgramBinary {
     public static final int
         GL_NUM_PROGRAM_BINARY_FORMATS_OES = 0x87FE,
         GL_PROGRAM_BINARY_FORMATS_OES     = 0x87FF;
-
-    static { GLES.initialize(); }
 
     protected OESGetProgramBinary() {
         throw new UnsupportedOperationException();

@@ -19,6 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying, for a given subpass/input attachment pair, which aspect <b>can</b> be read.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>An application <b>can</b> access any aspect of an input attachment that does not have a specified aspect mask in the {@code pAspectReferences} array. Otherwise, an application <b>must</b> not access aspect(s) of an input attachment other than those in its specified aspect mask.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -31,23 +35,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkInputAttachmentAspectReference}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code aspectReferenceCount} &ndash; the number of elements in the {@code pAspectReferences} array.</li>
- * <li>{@code pAspectReferences} &ndash; a pointer to an array of {@code aspectReferenceCount} {@link VkInputAttachmentAspectReference} structures describing which aspect(s) <b>can</b> be accessed for a given input attachment within a given subpass.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkRenderPassInputAttachmentAspectCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t aspectReferenceCount;
- *     {@link VkInputAttachmentAspectReference VkInputAttachmentAspectReference} const * pAspectReferences;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #aspectReferenceCount};
+ *     {@link VkInputAttachmentAspectReference VkInputAttachmentAspectReference} const * {@link #pAspectReferences};
  * }</code></pre>
  */
 public class VkRenderPassInputAttachmentAspectCreateInfo extends Struct implements NativeResource {
@@ -95,24 +90,24 @@ public class VkRenderPassInputAttachmentAspectCreateInfo extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code aspectReferenceCount} field. */
+    /** the number of elements in the {@code pAspectReferences} array. */
     @NativeType("uint32_t")
     public int aspectReferenceCount() { return naspectReferenceCount(address()); }
-    /** Returns a {@link VkInputAttachmentAspectReference.Buffer} view of the struct array pointed to by the {@code pAspectReferences} field. */
+    /** a pointer to an array of {@code aspectReferenceCount} {@link VkInputAttachmentAspectReference} structures containing a mask describing which aspect(s) <b>can</b> be accessed for a given input attachment within a given subpass. */
     @NativeType("VkInputAttachmentAspectReference const *")
     public VkInputAttachmentAspectReference.Buffer pAspectReferences() { return npAspectReferences(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassInputAttachmentAspectCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassInputAttachmentAspectCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkInputAttachmentAspectReference.Buffer} to the {@code pAspectReferences} field. */
+    /** Sets the address of the specified {@link VkInputAttachmentAspectReference.Buffer} to the {@link #pAspectReferences} field. */
     public VkRenderPassInputAttachmentAspectCreateInfo pAspectReferences(@NativeType("VkInputAttachmentAspectReference const *") VkInputAttachmentAspectReference.Buffer value) { npAspectReferences(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -360,24 +355,24 @@ public class VkRenderPassInputAttachmentAspectCreateInfo extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkRenderPassInputAttachmentAspectCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderPassInputAttachmentAspectCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkRenderPassInputAttachmentAspectCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRenderPassInputAttachmentAspectCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code aspectReferenceCount} field. */
+        /** @return the value of the {@link VkRenderPassInputAttachmentAspectCreateInfo#aspectReferenceCount} field. */
         @NativeType("uint32_t")
         public int aspectReferenceCount() { return VkRenderPassInputAttachmentAspectCreateInfo.naspectReferenceCount(address()); }
-        /** Returns a {@link VkInputAttachmentAspectReference.Buffer} view of the struct array pointed to by the {@code pAspectReferences} field. */
+        /** @return a {@link VkInputAttachmentAspectReference.Buffer} view of the struct array pointed to by the {@link VkRenderPassInputAttachmentAspectCreateInfo#pAspectReferences} field. */
         @NativeType("VkInputAttachmentAspectReference const *")
         public VkInputAttachmentAspectReference.Buffer pAspectReferences() { return VkRenderPassInputAttachmentAspectCreateInfo.npAspectReferences(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkRenderPassInputAttachmentAspectCreateInfo#sType} field. */
         public VkRenderPassInputAttachmentAspectCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassInputAttachmentAspectCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkRenderPassInputAttachmentAspectCreateInfo#pNext} field. */
         public VkRenderPassInputAttachmentAspectCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassInputAttachmentAspectCreateInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkInputAttachmentAspectReference.Buffer} to the {@code pAspectReferences} field. */
+        /** Sets the address of the specified {@link VkInputAttachmentAspectReference.Buffer} to the {@link VkRenderPassInputAttachmentAspectCreateInfo#pAspectReferences} field. */
         public VkRenderPassInputAttachmentAspectCreateInfo.Buffer pAspectReferences(@NativeType("VkInputAttachmentAspectReference const *") VkInputAttachmentAspectReference.Buffer value) { VkRenderPassInputAttachmentAspectCreateInfo.npAspectReferences(address(), value); return this; }
 
     }

@@ -18,27 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * 3D array descriptor.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code Width} &ndash; Width of 3D array</li>
- * <li>{@code Height} &ndash; Height of 3D array</li>
- * <li>{@code Depth} &ndash; Depth of 3D array</li>
- * <li>{@code Format} &ndash; Array format</li>
- * <li>{@code NumChannels} &ndash; Channels per array element</li>
- * <li>{@code Flags} &ndash; Flags</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUDA_ARRAY3D_DESCRIPTOR {
- *     size_t Width;
- *     size_t Height;
- *     size_t Depth;
- *     CUarray_format Format;
- *     unsigned int NumChannels;
- *     unsigned int Flags;
+ *     size_t {@link #Width};
+ *     size_t {@link #Height};
+ *     size_t {@link #Depth};
+ *     CUarray_format {@link #Format};
+ *     unsigned int {@link #NumChannels};
+ *     unsigned int {@link #Flags};
  * }</code></pre>
  */
 public class CUDA_ARRAY3D_DESCRIPTOR extends Struct implements NativeResource {
@@ -92,36 +81,36 @@ public class CUDA_ARRAY3D_DESCRIPTOR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code Width} field. */
+    /** Width of 3D array */
     @NativeType("size_t")
     public long Width() { return nWidth(address()); }
-    /** Returns the value of the {@code Height} field. */
+    /** Height of 3D array */
     @NativeType("size_t")
     public long Height() { return nHeight(address()); }
-    /** Returns the value of the {@code Depth} field. */
+    /** Depth of 3D array */
     @NativeType("size_t")
     public long Depth() { return nDepth(address()); }
-    /** Returns the value of the {@code Format} field. */
+    /** Array format */
     @NativeType("CUarray_format")
     public int Format() { return nFormat(address()); }
-    /** Returns the value of the {@code NumChannels} field. */
+    /** Channels per array element */
     @NativeType("unsigned int")
     public int NumChannels() { return nNumChannels(address()); }
-    /** Returns the value of the {@code Flags} field. */
+    /** Flags */
     @NativeType("unsigned int")
     public int Flags() { return nFlags(address()); }
 
-    /** Sets the specified value to the {@code Width} field. */
+    /** Sets the specified value to the {@link #Width} field. */
     public CUDA_ARRAY3D_DESCRIPTOR Width(@NativeType("size_t") long value) { nWidth(address(), value); return this; }
-    /** Sets the specified value to the {@code Height} field. */
+    /** Sets the specified value to the {@link #Height} field. */
     public CUDA_ARRAY3D_DESCRIPTOR Height(@NativeType("size_t") long value) { nHeight(address(), value); return this; }
-    /** Sets the specified value to the {@code Depth} field. */
+    /** Sets the specified value to the {@link #Depth} field. */
     public CUDA_ARRAY3D_DESCRIPTOR Depth(@NativeType("size_t") long value) { nDepth(address(), value); return this; }
-    /** Sets the specified value to the {@code Format} field. */
+    /** Sets the specified value to the {@link #Format} field. */
     public CUDA_ARRAY3D_DESCRIPTOR Format(@NativeType("CUarray_format") int value) { nFormat(address(), value); return this; }
-    /** Sets the specified value to the {@code NumChannels} field. */
+    /** Sets the specified value to the {@link #NumChannels} field. */
     public CUDA_ARRAY3D_DESCRIPTOR NumChannels(@NativeType("unsigned int") int value) { nNumChannels(address(), value); return this; }
-    /** Sets the specified value to the {@code Flags} field. */
+    /** Sets the specified value to the {@link #Flags} field. */
     public CUDA_ARRAY3D_DESCRIPTOR Flags(@NativeType("unsigned int") int value) { nFlags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -362,36 +351,36 @@ public class CUDA_ARRAY3D_DESCRIPTOR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code Width} field. */
+        /** @return the value of the {@link CUDA_ARRAY3D_DESCRIPTOR#Width} field. */
         @NativeType("size_t")
         public long Width() { return CUDA_ARRAY3D_DESCRIPTOR.nWidth(address()); }
-        /** Returns the value of the {@code Height} field. */
+        /** @return the value of the {@link CUDA_ARRAY3D_DESCRIPTOR#Height} field. */
         @NativeType("size_t")
         public long Height() { return CUDA_ARRAY3D_DESCRIPTOR.nHeight(address()); }
-        /** Returns the value of the {@code Depth} field. */
+        /** @return the value of the {@link CUDA_ARRAY3D_DESCRIPTOR#Depth} field. */
         @NativeType("size_t")
         public long Depth() { return CUDA_ARRAY3D_DESCRIPTOR.nDepth(address()); }
-        /** Returns the value of the {@code Format} field. */
+        /** @return the value of the {@link CUDA_ARRAY3D_DESCRIPTOR#Format} field. */
         @NativeType("CUarray_format")
         public int Format() { return CUDA_ARRAY3D_DESCRIPTOR.nFormat(address()); }
-        /** Returns the value of the {@code NumChannels} field. */
+        /** @return the value of the {@link CUDA_ARRAY3D_DESCRIPTOR#NumChannels} field. */
         @NativeType("unsigned int")
         public int NumChannels() { return CUDA_ARRAY3D_DESCRIPTOR.nNumChannels(address()); }
-        /** Returns the value of the {@code Flags} field. */
+        /** @return the value of the {@link CUDA_ARRAY3D_DESCRIPTOR#Flags} field. */
         @NativeType("unsigned int")
         public int Flags() { return CUDA_ARRAY3D_DESCRIPTOR.nFlags(address()); }
 
-        /** Sets the specified value to the {@code Width} field. */
+        /** Sets the specified value to the {@link CUDA_ARRAY3D_DESCRIPTOR#Width} field. */
         public CUDA_ARRAY3D_DESCRIPTOR.Buffer Width(@NativeType("size_t") long value) { CUDA_ARRAY3D_DESCRIPTOR.nWidth(address(), value); return this; }
-        /** Sets the specified value to the {@code Height} field. */
+        /** Sets the specified value to the {@link CUDA_ARRAY3D_DESCRIPTOR#Height} field. */
         public CUDA_ARRAY3D_DESCRIPTOR.Buffer Height(@NativeType("size_t") long value) { CUDA_ARRAY3D_DESCRIPTOR.nHeight(address(), value); return this; }
-        /** Sets the specified value to the {@code Depth} field. */
+        /** Sets the specified value to the {@link CUDA_ARRAY3D_DESCRIPTOR#Depth} field. */
         public CUDA_ARRAY3D_DESCRIPTOR.Buffer Depth(@NativeType("size_t") long value) { CUDA_ARRAY3D_DESCRIPTOR.nDepth(address(), value); return this; }
-        /** Sets the specified value to the {@code Format} field. */
+        /** Sets the specified value to the {@link CUDA_ARRAY3D_DESCRIPTOR#Format} field. */
         public CUDA_ARRAY3D_DESCRIPTOR.Buffer Format(@NativeType("CUarray_format") int value) { CUDA_ARRAY3D_DESCRIPTOR.nFormat(address(), value); return this; }
-        /** Sets the specified value to the {@code NumChannels} field. */
+        /** Sets the specified value to the {@link CUDA_ARRAY3D_DESCRIPTOR#NumChannels} field. */
         public CUDA_ARRAY3D_DESCRIPTOR.Buffer NumChannels(@NativeType("unsigned int") int value) { CUDA_ARRAY3D_DESCRIPTOR.nNumChannels(address(), value); return this; }
-        /** Sets the specified value to the {@code Flags} field. */
+        /** Sets the specified value to the {@link CUDA_ARRAY3D_DESCRIPTOR#Flags} field. */
         public CUDA_ARRAY3D_DESCRIPTOR.Buffer Flags(@NativeType("unsigned int") int value) { CUDA_ARRAY3D_DESCRIPTOR.nFlags(address(), value); return this; }
 
     }

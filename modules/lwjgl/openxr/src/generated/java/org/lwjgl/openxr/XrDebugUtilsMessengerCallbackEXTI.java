@@ -6,26 +6,34 @@
 package org.lwjgl.openxr;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 @FunctionalInterface
 @NativeType("PFN_xrDebugUtilsMessengerCallbackEXT")
-public interface XrDebugUtilsMessengerCallbackEXTI extends CallbackI.I {
+public interface XrDebugUtilsMessengerCallbackEXTI extends CallbackI {
 
-    String SIGNATURE = Callback.__stdcall("(llpp)i");
+    FFICIF CIF = apiCreateCIF(
+        apiStdcall(),
+        ffi_type_uint32,
+        ffi_type_uint64, ffi_type_uint64, ffi_type_pointer, ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default int callback(long args) {
-        return invoke(
-            dcbArgLongLong(args),
-            dcbArgLongLong(args),
-            dcbArgPointer(args),
-            dcbArgPointer(args)
+    default void callback(long ret, long args) {
+        int __result = invoke(
+            memGetLong(memGetAddress(args)),
+            memGetLong(memGetAddress(args + POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 3 * POINTER_SIZE))
         );
+        apiClosureRet(ret, __result);
     }
 
     @NativeType("XrBool32") int invoke(@NativeType("XrDebugUtilsMessageSeverityFlagsEXT") long messageSeverity, @NativeType("XrDebugUtilsMessageTypeFlagsEXT") long messageTypes, @NativeType("XrDebugUtilsMessengerCallbackDataEXT const *") long callbackData, @NativeType("void *") long userData);

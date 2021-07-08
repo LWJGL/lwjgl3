@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWwindow *window,
  *     int maximized
  * )</code></pre>
@@ -54,7 +54,7 @@ public abstract class GLFWWindowMaximizeCallback extends Callback implements GLF
     }
 
     protected GLFWWindowMaximizeCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWWindowMaximizeCallback(long functionPointer) {

@@ -11,6 +11,9 @@ import vulkan.*
 val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapchain_colorspace", type = "instance", postfix = EXT) {
     documentation =
         """
+        To be done.
+
+        <h5>VK_EXT_swapchain_colorspace</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_swapchain_colorspace}</dd>
@@ -34,7 +37,10 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
             <dd><ul>
                 <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_swapchain_colorspace:%20&amp;body=@courtney-g%20">courtney-g</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-04-26</dd>
 

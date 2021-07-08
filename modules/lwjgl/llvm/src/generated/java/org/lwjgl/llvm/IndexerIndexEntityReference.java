@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     CXClientData client_data,
  *     CXIdxEntityRefInfo const *info
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class IndexerIndexEntityReference extends Callback implements In
     }
 
     protected IndexerIndexEntityReference() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     IndexerIndexEntityReference(long functionPointer) {

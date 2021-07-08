@@ -48,6 +48,8 @@ import org.lwjgl.system.*;
  */
 public class KHRRobustness {
 
+    static { GL.initialize(); }
+
     /** Returned by {@link #glGetGraphicsResetStatus GetGraphicsResetStatus}. */
     public static final int
         GL_NO_ERROR               = 0x0,
@@ -67,8 +69,6 @@ public class KHRRobustness {
 
     /** Returned by {@link GL11C#glGetError GetError}. */
     public static final int GL_CONTEXT_LOST = 0x507;
-
-    static { GL.initialize(); }
 
     protected KHRRobustness() {
         throw new UnsupportedOperationException();

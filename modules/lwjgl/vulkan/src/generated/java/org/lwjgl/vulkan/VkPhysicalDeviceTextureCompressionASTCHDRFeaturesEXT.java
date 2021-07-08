@@ -28,38 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTTextureCompressionAstcHdr#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code textureCompressionASTC_HDR} &ndash; indicates whether all of the ASTC HDR compressed texture formats are supported. If this feature is enabled, then the {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT FORMAT_FEATURE_SAMPLED_IMAGE_BIT}, {@link VK10#VK_FORMAT_FEATURE_BLIT_SRC_BIT FORMAT_FEATURE_BLIT_SRC_BIT} and {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT} features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
- * 
- * <ul>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_4x4_SFLOAT_BLOCK_EXT FORMAT_ASTC_4x4_SFLOAT_BLOCK_EXT}</li>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_5x4_SFLOAT_BLOCK_EXT FORMAT_ASTC_5x4_SFLOAT_BLOCK_EXT}</li>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_5x5_SFLOAT_BLOCK_EXT FORMAT_ASTC_5x5_SFLOAT_BLOCK_EXT}</li>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_6x5_SFLOAT_BLOCK_EXT FORMAT_ASTC_6x5_SFLOAT_BLOCK_EXT}</li>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_6x6_SFLOAT_BLOCK_EXT FORMAT_ASTC_6x6_SFLOAT_BLOCK_EXT}</li>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_8x5_SFLOAT_BLOCK_EXT FORMAT_ASTC_8x5_SFLOAT_BLOCK_EXT}</li>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_8x6_SFLOAT_BLOCK_EXT FORMAT_ASTC_8x6_SFLOAT_BLOCK_EXT}</li>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_8x8_SFLOAT_BLOCK_EXT FORMAT_ASTC_8x8_SFLOAT_BLOCK_EXT}</li>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_10x5_SFLOAT_BLOCK_EXT FORMAT_ASTC_10x5_SFLOAT_BLOCK_EXT}</li>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_10x6_SFLOAT_BLOCK_EXT FORMAT_ASTC_10x6_SFLOAT_BLOCK_EXT}</li>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_10x8_SFLOAT_BLOCK_EXT FORMAT_ASTC_10x8_SFLOAT_BLOCK_EXT}</li>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_10x10_SFLOAT_BLOCK_EXT FORMAT_ASTC_10x10_SFLOAT_BLOCK_EXT}</li>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_12x10_SFLOAT_BLOCK_EXT FORMAT_ASTC_12x10_SFLOAT_BLOCK_EXT}</li>
- * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_12x12_SFLOAT_BLOCK_EXT FORMAT_ASTC_12x12_SFLOAT_BLOCK_EXT}</li>
- * </ul>
- * 
- * <p>To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 textureCompressionASTC_HDR;
+ *     VkBool32 {@link #textureCompressionASTC_HDR};
  * }</code></pre>
  */
 public class VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT extends Struct implements NativeResource {
@@ -104,13 +79,34 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT extends Struct
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code textureCompressionASTC_HDR} field. */
+    /**
+     * indicates whether all of the ASTC HDR compressed texture formats are supported. If this feature is enabled, then the {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT FORMAT_FEATURE_SAMPLED_IMAGE_BIT}, {@link VK10#VK_FORMAT_FEATURE_BLIT_SRC_BIT FORMAT_FEATURE_BLIT_SRC_BIT} and {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT} features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
+     * 
+     * <ul>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_4x4_SFLOAT_BLOCK_EXT FORMAT_ASTC_4x4_SFLOAT_BLOCK_EXT}</li>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_5x4_SFLOAT_BLOCK_EXT FORMAT_ASTC_5x4_SFLOAT_BLOCK_EXT}</li>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_5x5_SFLOAT_BLOCK_EXT FORMAT_ASTC_5x5_SFLOAT_BLOCK_EXT}</li>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_6x5_SFLOAT_BLOCK_EXT FORMAT_ASTC_6x5_SFLOAT_BLOCK_EXT}</li>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_6x6_SFLOAT_BLOCK_EXT FORMAT_ASTC_6x6_SFLOAT_BLOCK_EXT}</li>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_8x5_SFLOAT_BLOCK_EXT FORMAT_ASTC_8x5_SFLOAT_BLOCK_EXT}</li>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_8x6_SFLOAT_BLOCK_EXT FORMAT_ASTC_8x6_SFLOAT_BLOCK_EXT}</li>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_8x8_SFLOAT_BLOCK_EXT FORMAT_ASTC_8x8_SFLOAT_BLOCK_EXT}</li>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_10x5_SFLOAT_BLOCK_EXT FORMAT_ASTC_10x5_SFLOAT_BLOCK_EXT}</li>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_10x6_SFLOAT_BLOCK_EXT FORMAT_ASTC_10x6_SFLOAT_BLOCK_EXT}</li>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_10x8_SFLOAT_BLOCK_EXT FORMAT_ASTC_10x8_SFLOAT_BLOCK_EXT}</li>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_10x10_SFLOAT_BLOCK_EXT FORMAT_ASTC_10x10_SFLOAT_BLOCK_EXT}</li>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_12x10_SFLOAT_BLOCK_EXT FORMAT_ASTC_12x10_SFLOAT_BLOCK_EXT}</li>
+     * <li>{@link EXTTextureCompressionAstcHdr#VK_FORMAT_ASTC_12x12_SFLOAT_BLOCK_EXT FORMAT_ASTC_12x12_SFLOAT_BLOCK_EXT}</li>
+     * </ul>
+     * 
+     * <p>To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.</p>
+     */
     @NativeType("VkBool32")
     public boolean textureCompressionASTC_HDR() { return ntextureCompressionASTC_HDR(address()) != 0; }
 
@@ -118,7 +114,7 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT extends Struct
     public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code textureCompressionASTC_HDR} field. */
+    /** Sets the specified value to the {@link #textureCompressionASTC_HDR} field. */
     public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT textureCompressionASTC_HDR(@NativeType("VkBool32") boolean value) { ntextureCompressionASTC_HDR(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -341,13 +337,13 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT extends Struct
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code textureCompressionASTC_HDR} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT#textureCompressionASTC_HDR} field. */
         @NativeType("VkBool32")
         public boolean textureCompressionASTC_HDR() { return VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.ntextureCompressionASTC_HDR(address()) != 0; }
 
@@ -355,7 +351,7 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT extends Struct
         public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code textureCompressionASTC_HDR} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT#textureCompressionASTC_HDR} field. */
         public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.Buffer textureCompressionASTC_HDR(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.ntextureCompressionASTC_HDR(address(), value ? 1 : 0); return this; }
 
     }

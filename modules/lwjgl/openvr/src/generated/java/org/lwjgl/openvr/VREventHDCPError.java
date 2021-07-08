@@ -58,7 +58,7 @@ public class VREventHDCPError extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code eCode} field. */
+    /** @return the value of the {@code eCode} field. */
     @NativeType("EHDCPError")
     public int eCode() { return neCode(address()); }
 
@@ -134,7 +134,7 @@ public class VREventHDCPError extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code eCode} field. */
+        /** @return the value of the {@code eCode} field. */
         @NativeType("EHDCPError")
         public int eCode() { return VREventHDCPError.neCode(address()); }
 

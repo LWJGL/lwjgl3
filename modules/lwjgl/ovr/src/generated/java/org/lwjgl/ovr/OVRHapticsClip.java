@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Store a full Haptics clip, which can be used as data source for multiple {@link OVRHapticsBuffer}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code Samples} &ndash; samples stored in opaque format</li>
- * <li>{@code SamplesCount} &ndash; number of samples</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrHapticsClip {
- *     void const * Samples;
- *     int SamplesCount;
+ *     void const * {@link #Samples};
+ *     int {@link #SamplesCount};
  * }</code></pre>
  */
 @NativeType("struct ovrHapticsClip")
@@ -74,13 +67,13 @@ public class OVRHapticsClip extends Struct implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code Samples} field.
-     *
      * @param capacity the number of elements in the returned buffer
+     *
+     * @return samples stored in opaque format
      */
     @NativeType("void const *")
     public ByteBuffer Samples(int capacity) { return nSamples(address(), capacity); }
-    /** Returns the value of the {@code SamplesCount} field. */
+    /** number of samples */
     public int SamplesCount() { return nSamplesCount(address()); }
 
     // -----------------------------------
@@ -270,13 +263,13 @@ public class OVRHapticsClip extends Struct implements NativeResource {
         }
 
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code Samples} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@link OVRHapticsClip#Samples} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("void const *")
         public ByteBuffer Samples(int capacity) { return OVRHapticsClip.nSamples(address(), capacity); }
-        /** Returns the value of the {@code SamplesCount} field. */
+        /** @return the value of the {@link OVRHapticsClip#SamplesCount} field. */
         public int SamplesCount() { return OVRHapticsClip.nSamplesCount(address()); }
 
     }

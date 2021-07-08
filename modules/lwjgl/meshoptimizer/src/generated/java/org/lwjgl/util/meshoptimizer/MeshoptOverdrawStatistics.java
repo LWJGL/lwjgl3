@@ -16,19 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code overdraw} &ndash; shaded pixels / covered pixels; best case 1.0</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct meshopt_OverdrawStatistics {
  *     unsigned int pixels_covered;
  *     unsigned int pixels_shaded;
- *     float overdraw;
+ *     float {@link #overdraw};
  * }</code></pre>
  */
 @NativeType("struct meshopt_OverdrawStatistics")
@@ -74,13 +68,13 @@ public class MeshoptOverdrawStatistics extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code pixels_covered} field. */
+    /** @return the value of the {@code pixels_covered} field. */
     @NativeType("unsigned int")
     public int pixels_covered() { return npixels_covered(address()); }
-    /** Returns the value of the {@code pixels_shaded} field. */
+    /** @return the value of the {@code pixels_shaded} field. */
     @NativeType("unsigned int")
     public int pixels_shaded() { return npixels_shaded(address()); }
-    /** Returns the value of the {@code overdraw} field. */
+    /** shaded pixels / covered pixels; best case 1.0 */
     public float overdraw() { return noverdraw(address()); }
 
     // -----------------------------------
@@ -271,13 +265,13 @@ public class MeshoptOverdrawStatistics extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code pixels_covered} field. */
+        /** @return the value of the {@code pixels_covered} field. */
         @NativeType("unsigned int")
         public int pixels_covered() { return MeshoptOverdrawStatistics.npixels_covered(address()); }
-        /** Returns the value of the {@code pixels_shaded} field. */
+        /** @return the value of the {@code pixels_shaded} field. */
         @NativeType("unsigned int")
         public int pixels_shaded() { return MeshoptOverdrawStatistics.npixels_shaded(address()); }
-        /** Returns the value of the {@code overdraw} field. */
+        /** @return the value of the {@link MeshoptOverdrawStatistics#overdraw} field. */
         public float overdraw() { return MeshoptOverdrawStatistics.noverdraw(address()); }
 
     }

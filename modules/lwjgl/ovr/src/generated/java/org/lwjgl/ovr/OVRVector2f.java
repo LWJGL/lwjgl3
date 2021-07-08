@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * A 2D vector with float components.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code x} &ndash; the vector x component</li>
- * <li>{@code y} &ndash; the vector y component</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrVector2f {
- *     float x;
- *     float y;
+ *     float {@link #x};
+ *     float {@link #y};
  * }</code></pre>
  */
 @NativeType("struct ovrVector2f")
@@ -73,14 +66,14 @@ public class OVRVector2f extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** the vector x component */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** the vector y component */
     public float y() { return ny(address()); }
 
-    /** Sets the specified value to the {@code x} field. */
+    /** Sets the specified value to the {@link #x} field. */
     public OVRVector2f x(float value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@code y} field. */
+    /** Sets the specified value to the {@link #y} field. */
     public OVRVector2f y(float value) { ny(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -297,14 +290,14 @@ public class OVRVector2f extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link OVRVector2f#x} field. */
         public float x() { return OVRVector2f.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@link OVRVector2f#y} field. */
         public float y() { return OVRVector2f.ny(address()); }
 
-        /** Sets the specified value to the {@code x} field. */
+        /** Sets the specified value to the {@link OVRVector2f#x} field. */
         public OVRVector2f.Buffer x(float value) { OVRVector2f.nx(address(), value); return this; }
-        /** Sets the specified value to the {@code y} field. */
+        /** Sets the specified value to the {@link OVRVector2f#y} field. */
         public OVRVector2f.Buffer y(float value) { OVRVector2f.ny(address(), value); return this; }
 
     }

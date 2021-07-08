@@ -17,11 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     VmaAllocator allocator,
  *     uint32_t memoryType,
  *     VkDeviceMemory memory,
- *     VkDeviceSize size
+ *     VkDeviceSize size,
+ *     void *pUserData
  * )</code></pre>
  */
 public abstract class VmaAllocateDeviceMemoryFunction extends Callback implements VmaAllocateDeviceMemoryFunctionI {
@@ -52,7 +53,7 @@ public abstract class VmaAllocateDeviceMemoryFunction extends Callback implement
     }
 
     protected VmaAllocateDeviceMemoryFunction() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     VmaAllocateDeviceMemoryFunction(long functionPointer) {
@@ -69,8 +70,8 @@ public abstract class VmaAllocateDeviceMemoryFunction extends Callback implement
         }
 
         @Override
-        public void invoke(long allocator, int memoryType, long memory, long size) {
-            delegate.invoke(allocator, memoryType, memory, size);
+        public void invoke(long allocator, int memoryType, long memory, long size, long pUserData) {
+            delegate.invoke(allocator, memoryType, memory, size, pUserData);
         }
 
     }

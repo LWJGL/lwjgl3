@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Parameters defined by this structure with the same name as those in {@link VkAttachmentReference} have the identical effect to those parameters.</p>
  * 
- * <p>{@code aspectMask} has the same effect for the described attachment as {@link VkInputAttachmentAspectReference}{@code ::aspectMask} has on each corresponding attachment. It is ignored when this structure is used to describe anything other than an input attachment reference.</p>
+ * <p>{@code aspectMask} is ignored when this structure is used to describe anything other than an input attachment reference.</p>
  * 
  * <p>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is enabled, and {@code attachment} has a depth/stencil format, {@code layout} <b>can</b> be set to a layout that only specifies the layout of the depth aspect.</p>
  * 
@@ -32,45 +32,31 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If {@code attachment} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, {@code layout} <b>must</b> not be {@link VK10#VK_IMAGE_LAYOUT_UNDEFINED IMAGE_LAYOUT_UNDEFINED}, {@link VK10#VK_IMAGE_LAYOUT_PREINITIALIZED IMAGE_LAYOUT_PREINITIALIZED}, or {@link KHRSwapchain#VK_IMAGE_LAYOUT_PRESENT_SRC_KHR IMAGE_LAYOUT_PRESENT_SRC_KHR}</li>
- * <li>If {@code attachment} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, and {@code aspectMask} does not include {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT} or {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT}, {@code layout} <b>must</b> not be {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL}, {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL}, {@link VK11#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL}, or {@link VK11#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL}</li>
- * <li>If {@code attachment} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, and {@code aspectMask} does not include {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}, {@code layout} <b>must</b> not be {@link VK10#VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL}</li>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is not enabled, and {@code attachment} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, {@code layout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL}, or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL},</li>
- * <li>If {@code attachment} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, and {@code aspectMask} includes {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}, {@code layout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL}, or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL},</li>
- * <li>If {@code attachment} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, and {@code aspectMask} includes both {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} and {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}, and {@code layout} is {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL} or {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}, the {@code pNext} chain <b>must</b> include a {@link VkAttachmentReferenceStencilLayout} structure</li>
- * <li>If {@code attachment} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, and {@code aspectMask} includes only {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} then {@code layout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL}, or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL}</li>
- * <li>If {@code attachment} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, and {@code aspectMask} includes only {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT} then {@code layout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL}, or {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2 STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkAttachmentReferenceStencilLayout}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code layout} <b>must</b> be a valid {@code VkImageLayout} value</li>
  * </ul>
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkSubpassDescription2}, {@link VkSubpassDescriptionDepthStencilResolve}</p>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code attachment} &ndash; either an integer value identifying an attachment at the corresponding index in {@link VkRenderPassCreateInfo}{@code ::pAttachments}, or {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} to signify that this attachment is not used.</li>
- * <li>{@code layout} &ndash; a {@code VkImageLayout} value specifying the layout the attachment uses during the subpass.</li>
- * <li>{@code aspectMask} &ndash; a mask of which aspect(s) <b>can</b> be accessed within the specified subpass as an input attachment.</li>
- * </ul>
+ * <p>{@link VkFragmentShadingRateAttachmentInfoKHR}, {@link VkSubpassDescription2}, {@link VkSubpassDescriptionDepthStencilResolve}</p>
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkAttachmentReference2 {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t attachment;
- *     VkImageLayout layout;
- *     VkImageAspectFlags aspectMask;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #attachment};
+ *     VkImageLayout {@link #layout};
+ *     VkImageAspectFlags {@link #aspectMask};
  * }</code></pre>
  */
 public class VkAttachmentReference2 extends Struct implements NativeResource {
@@ -121,31 +107,31 @@ public class VkAttachmentReference2 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code attachment} field. */
+    /** either an integer value identifying an attachment at the corresponding index in {@link VkRenderPassCreateInfo}{@code ::pAttachments}, or {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} to signify that this attachment is not used. */
     @NativeType("uint32_t")
     public int attachment() { return nattachment(address()); }
-    /** Returns the value of the {@code layout} field. */
+    /** a {@code VkImageLayout} value specifying the layout the attachment uses during the subpass. */
     @NativeType("VkImageLayout")
     public int layout() { return nlayout(address()); }
-    /** Returns the value of the {@code aspectMask} field. */
+    /** a mask of which aspect(s) <b>can</b> be accessed within the specified subpass as an input attachment. */
     @NativeType("VkImageAspectFlags")
     public int aspectMask() { return naspectMask(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkAttachmentReference2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkAttachmentReference2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code attachment} field. */
+    /** Sets the specified value to the {@link #attachment} field. */
     public VkAttachmentReference2 attachment(@NativeType("uint32_t") int value) { nattachment(address(), value); return this; }
-    /** Sets the specified value to the {@code layout} field. */
+    /** Sets the specified value to the {@link #layout} field. */
     public VkAttachmentReference2 layout(@NativeType("VkImageLayout") int value) { nlayout(address(), value); return this; }
-    /** Sets the specified value to the {@code aspectMask} field. */
+    /** Sets the specified value to the {@link #aspectMask} field. */
     public VkAttachmentReference2 aspectMask(@NativeType("VkImageAspectFlags") int value) { naspectMask(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -380,31 +366,31 @@ public class VkAttachmentReference2 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkAttachmentReference2#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAttachmentReference2.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkAttachmentReference2#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAttachmentReference2.npNext(address()); }
-        /** Returns the value of the {@code attachment} field. */
+        /** @return the value of the {@link VkAttachmentReference2#attachment} field. */
         @NativeType("uint32_t")
         public int attachment() { return VkAttachmentReference2.nattachment(address()); }
-        /** Returns the value of the {@code layout} field. */
+        /** @return the value of the {@link VkAttachmentReference2#layout} field. */
         @NativeType("VkImageLayout")
         public int layout() { return VkAttachmentReference2.nlayout(address()); }
-        /** Returns the value of the {@code aspectMask} field. */
+        /** @return the value of the {@link VkAttachmentReference2#aspectMask} field. */
         @NativeType("VkImageAspectFlags")
         public int aspectMask() { return VkAttachmentReference2.naspectMask(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkAttachmentReference2#sType} field. */
         public VkAttachmentReference2.Buffer sType(@NativeType("VkStructureType") int value) { VkAttachmentReference2.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkAttachmentReference2#pNext} field. */
         public VkAttachmentReference2.Buffer pNext(@NativeType("void const *") long value) { VkAttachmentReference2.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code attachment} field. */
+        /** Sets the specified value to the {@link VkAttachmentReference2#attachment} field. */
         public VkAttachmentReference2.Buffer attachment(@NativeType("uint32_t") int value) { VkAttachmentReference2.nattachment(address(), value); return this; }
-        /** Sets the specified value to the {@code layout} field. */
+        /** Sets the specified value to the {@link VkAttachmentReference2#layout} field. */
         public VkAttachmentReference2.Buffer layout(@NativeType("VkImageLayout") int value) { VkAttachmentReference2.nlayout(address(), value); return this; }
-        /** Sets the specified value to the {@code aspectMask} field. */
+        /** Sets the specified value to the {@link VkAttachmentReference2#aspectMask} field. */
         public VkAttachmentReference2.Buffer aspectMask(@NativeType("VkImageAspectFlags") int value) { VkAttachmentReference2.naspectMask(address(), value); return this; }
 
     }

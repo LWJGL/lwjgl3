@@ -71,16 +71,16 @@ public class XrInputSourceLocalizedNameGetInfo extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code sourcePath} field. */
+    /** @return the value of the {@code sourcePath} field. */
     @NativeType("XrPath")
     public long sourcePath() { return nsourcePath(address()); }
-    /** Returns the value of the {@code whichComponents} field. */
+    /** @return the value of the {@code whichComponents} field. */
     @NativeType("XrInputSourceLocalizedNameFlags")
     public long whichComponents() { return nwhichComponents(address()); }
 
@@ -319,16 +319,16 @@ public class XrInputSourceLocalizedNameGetInfo extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrInputSourceLocalizedNameGetInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrInputSourceLocalizedNameGetInfo.nnext(address()); }
-        /** Returns the value of the {@code sourcePath} field. */
+        /** @return the value of the {@code sourcePath} field. */
         @NativeType("XrPath")
         public long sourcePath() { return XrInputSourceLocalizedNameGetInfo.nsourcePath(address()); }
-        /** Returns the value of the {@code whichComponents} field. */
+        /** @return the value of the {@code whichComponents} field. */
         @NativeType("XrInputSourceLocalizedNameFlags")
         public long whichComponents() { return XrInputSourceLocalizedNameGetInfo.nwhichComponents(address()); }
 

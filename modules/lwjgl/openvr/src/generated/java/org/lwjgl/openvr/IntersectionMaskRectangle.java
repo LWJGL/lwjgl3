@@ -72,13 +72,13 @@ public class IntersectionMaskRectangle extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code m_flTopLeftX} field. */
+    /** @return the value of the {@code m_flTopLeftX} field. */
     public float m_flTopLeftX() { return nm_flTopLeftX(address()); }
-    /** Returns the value of the {@code m_flTopLeftY} field. */
+    /** @return the value of the {@code m_flTopLeftY} field. */
     public float m_flTopLeftY() { return nm_flTopLeftY(address()); }
-    /** Returns the value of the {@code m_flWidth} field. */
+    /** @return the value of the {@code m_flWidth} field. */
     public float m_flWidth() { return nm_flWidth(address()); }
-    /** Returns the value of the {@code m_flHeight} field. */
+    /** @return the value of the {@code m_flHeight} field. */
     public float m_flHeight() { return nm_flHeight(address()); }
 
     /** Sets the specified value to the {@code m_flTopLeftX} field. */
@@ -316,13 +316,13 @@ public class IntersectionMaskRectangle extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code m_flTopLeftX} field. */
+        /** @return the value of the {@code m_flTopLeftX} field. */
         public float m_flTopLeftX() { return IntersectionMaskRectangle.nm_flTopLeftX(address()); }
-        /** Returns the value of the {@code m_flTopLeftY} field. */
+        /** @return the value of the {@code m_flTopLeftY} field. */
         public float m_flTopLeftY() { return IntersectionMaskRectangle.nm_flTopLeftY(address()); }
-        /** Returns the value of the {@code m_flWidth} field. */
+        /** @return the value of the {@code m_flWidth} field. */
         public float m_flWidth() { return IntersectionMaskRectangle.nm_flWidth(address()); }
-        /** Returns the value of the {@code m_flHeight} field. */
+        /** @return the value of the {@code m_flHeight} field. */
         public float m_flHeight() { return IntersectionMaskRectangle.nm_flHeight(address()); }
 
         /** Sets the specified value to the {@code m_flTopLeftX} field. */

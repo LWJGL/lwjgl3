@@ -74,23 +74,23 @@ public class EXRAttribute extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+    /** @return a {@link ByteBuffer} view of the {@code name} field. */
     @NativeType("char[256]")
     public ByteBuffer name() { return nname(address()); }
-    /** Decodes the null-terminated string stored in the {@code name} field. */
+    /** @return the null-terminated string stored in the {@code name} field. */
     @NativeType("char[256]")
     public String nameString() { return nnameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code type} field. */
+    /** @return a {@link ByteBuffer} view of the {@code type} field. */
     @NativeType("char[256]")
     public ByteBuffer type() { return ntype(address()); }
-    /** Decodes the null-terminated string stored in the {@code type} field. */
+    /** @return the null-terminated string stored in the {@code type} field. */
     @NativeType("char[256]")
     public String typeString() { return ntypeString(address()); }
-    /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code value} field. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code value} field. */
     @Nullable
     @NativeType("unsigned char *")
     public ByteBuffer value() { return nvalue(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** @return the value of the {@code size} field. */
     public int size() { return nsize(address()); }
 
     /** Copies the specified encoded string to the {@code name} field. */
@@ -363,23 +363,23 @@ public class EXRAttribute extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+        /** @return a {@link ByteBuffer} view of the {@code name} field. */
         @NativeType("char[256]")
         public ByteBuffer name() { return EXRAttribute.nname(address()); }
-        /** Decodes the null-terminated string stored in the {@code name} field. */
+        /** @return the null-terminated string stored in the {@code name} field. */
         @NativeType("char[256]")
         public String nameString() { return EXRAttribute.nnameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code type} field. */
+        /** @return a {@link ByteBuffer} view of the {@code type} field. */
         @NativeType("char[256]")
         public ByteBuffer type() { return EXRAttribute.ntype(address()); }
-        /** Decodes the null-terminated string stored in the {@code type} field. */
+        /** @return the null-terminated string stored in the {@code type} field. */
         @NativeType("char[256]")
         public String typeString() { return EXRAttribute.ntypeString(address()); }
-        /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code value} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code value} field. */
         @Nullable
         @NativeType("unsigned char *")
         public ByteBuffer value() { return EXRAttribute.nvalue(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@code size} field. */
         public int size() { return EXRAttribute.nsize(address()); }
 
         /** Copies the specified encoded string to the {@code name} field. */

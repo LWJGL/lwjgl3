@@ -28,21 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRPushDescriptor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code maxPushDescriptors} &ndash; the maximum number of descriptors that <b>can</b> be used in a descriptor set created with {@link KHRPushDescriptor#VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR} set.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDevicePushDescriptorPropertiesKHR {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint32_t maxPushDescriptors;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint32_t {@link #maxPushDescriptors};
  * }</code></pre>
  */
 public class VkPhysicalDevicePushDescriptorPropertiesKHR extends Struct implements NativeResource {
@@ -87,19 +79,19 @@ public class VkPhysicalDevicePushDescriptorPropertiesKHR extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code maxPushDescriptors} field. */
+    /** the maximum number of descriptors that <b>can</b> be used in a descriptor set created with {@link KHRPushDescriptor#VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR} set. */
     @NativeType("uint32_t")
     public int maxPushDescriptors() { return nmaxPushDescriptors(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePushDescriptorPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePushDescriptorPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,19 +310,19 @@ public class VkPhysicalDevicePushDescriptorPropertiesKHR extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDevicePushDescriptorPropertiesKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevicePushDescriptorPropertiesKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDevicePushDescriptorPropertiesKHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevicePushDescriptorPropertiesKHR.npNext(address()); }
-        /** Returns the value of the {@code maxPushDescriptors} field. */
+        /** @return the value of the {@link VkPhysicalDevicePushDescriptorPropertiesKHR#maxPushDescriptors} field. */
         @NativeType("uint32_t")
         public int maxPushDescriptors() { return VkPhysicalDevicePushDescriptorPropertiesKHR.nmaxPushDescriptors(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePushDescriptorPropertiesKHR#sType} field. */
         public VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePushDescriptorPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePushDescriptorPropertiesKHR#pNext} field. */
         public VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePushDescriptorPropertiesKHR.npNext(address(), value); return this; }
 
     }

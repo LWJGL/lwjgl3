@@ -18,6 +18,8 @@ import org.lwjgl.system.*;
  */
 public class AMDOcclusionQueryEvent {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code pname} argument to {@link #glQueryObjectParameteruiAMD QueryObjectParameteruiAMD}, {@link GL15C#glGetQueryObjectiv GetQueryObjectiv}, {@link GL15C#glGetQueryObjectuiv GetQueryObjectuiv},
      * {@link GL33C#glGetQueryObjecti64v GetQueryObjecti64v}, and {@link GL33C#glGetQueryObjectui64v GetQueryObjectui64v}.
@@ -31,8 +33,6 @@ public class AMDOcclusionQueryEvent {
         GL_QUERY_STENCIL_FAIL_EVENT_BIT_AMD      = 0x4,
         GL_QUERY_DEPTH_BOUNDS_FAIL_EVENT_BIT_AMD = 0x8,
         GL_QUERY_ALL_EVENT_BITS_AMD              = 0xFFFFFFFF;
-
-    static { GL.initialize(); }
 
     protected AMDOcclusionQueryEvent() {
         throw new UnsupportedOperationException();

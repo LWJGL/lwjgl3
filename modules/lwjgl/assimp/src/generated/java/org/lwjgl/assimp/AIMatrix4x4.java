@@ -122,37 +122,37 @@ public class AIMatrix4x4 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code a1} field. */
+    /** @return the value of the {@code a1} field. */
     public float a1() { return na1(address()); }
-    /** Returns the value of the {@code a2} field. */
+    /** @return the value of the {@code a2} field. */
     public float a2() { return na2(address()); }
-    /** Returns the value of the {@code a3} field. */
+    /** @return the value of the {@code a3} field. */
     public float a3() { return na3(address()); }
-    /** Returns the value of the {@code a4} field. */
+    /** @return the value of the {@code a4} field. */
     public float a4() { return na4(address()); }
-    /** Returns the value of the {@code b1} field. */
+    /** @return the value of the {@code b1} field. */
     public float b1() { return nb1(address()); }
-    /** Returns the value of the {@code b2} field. */
+    /** @return the value of the {@code b2} field. */
     public float b2() { return nb2(address()); }
-    /** Returns the value of the {@code b3} field. */
+    /** @return the value of the {@code b3} field. */
     public float b3() { return nb3(address()); }
-    /** Returns the value of the {@code b4} field. */
+    /** @return the value of the {@code b4} field. */
     public float b4() { return nb4(address()); }
-    /** Returns the value of the {@code c1} field. */
+    /** @return the value of the {@code c1} field. */
     public float c1() { return nc1(address()); }
-    /** Returns the value of the {@code c2} field. */
+    /** @return the value of the {@code c2} field. */
     public float c2() { return nc2(address()); }
-    /** Returns the value of the {@code c3} field. */
+    /** @return the value of the {@code c3} field. */
     public float c3() { return nc3(address()); }
-    /** Returns the value of the {@code c4} field. */
+    /** @return the value of the {@code c4} field. */
     public float c4() { return nc4(address()); }
-    /** Returns the value of the {@code d1} field. */
+    /** @return the value of the {@code d1} field. */
     public float d1() { return nd1(address()); }
-    /** Returns the value of the {@code d2} field. */
+    /** @return the value of the {@code d2} field. */
     public float d2() { return nd2(address()); }
-    /** Returns the value of the {@code d3} field. */
+    /** @return the value of the {@code d3} field. */
     public float d3() { return nd3(address()); }
-    /** Returns the value of the {@code d4} field. */
+    /** @return the value of the {@code d4} field. */
     public float d4() { return nd4(address()); }
 
     /** Sets the specified value to the {@code a1} field. */
@@ -486,37 +486,37 @@ public class AIMatrix4x4 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code a1} field. */
+        /** @return the value of the {@code a1} field. */
         public float a1() { return AIMatrix4x4.na1(address()); }
-        /** Returns the value of the {@code a2} field. */
+        /** @return the value of the {@code a2} field. */
         public float a2() { return AIMatrix4x4.na2(address()); }
-        /** Returns the value of the {@code a3} field. */
+        /** @return the value of the {@code a3} field. */
         public float a3() { return AIMatrix4x4.na3(address()); }
-        /** Returns the value of the {@code a4} field. */
+        /** @return the value of the {@code a4} field. */
         public float a4() { return AIMatrix4x4.na4(address()); }
-        /** Returns the value of the {@code b1} field. */
+        /** @return the value of the {@code b1} field. */
         public float b1() { return AIMatrix4x4.nb1(address()); }
-        /** Returns the value of the {@code b2} field. */
+        /** @return the value of the {@code b2} field. */
         public float b2() { return AIMatrix4x4.nb2(address()); }
-        /** Returns the value of the {@code b3} field. */
+        /** @return the value of the {@code b3} field. */
         public float b3() { return AIMatrix4x4.nb3(address()); }
-        /** Returns the value of the {@code b4} field. */
+        /** @return the value of the {@code b4} field. */
         public float b4() { return AIMatrix4x4.nb4(address()); }
-        /** Returns the value of the {@code c1} field. */
+        /** @return the value of the {@code c1} field. */
         public float c1() { return AIMatrix4x4.nc1(address()); }
-        /** Returns the value of the {@code c2} field. */
+        /** @return the value of the {@code c2} field. */
         public float c2() { return AIMatrix4x4.nc2(address()); }
-        /** Returns the value of the {@code c3} field. */
+        /** @return the value of the {@code c3} field. */
         public float c3() { return AIMatrix4x4.nc3(address()); }
-        /** Returns the value of the {@code c4} field. */
+        /** @return the value of the {@code c4} field. */
         public float c4() { return AIMatrix4x4.nc4(address()); }
-        /** Returns the value of the {@code d1} field. */
+        /** @return the value of the {@code d1} field. */
         public float d1() { return AIMatrix4x4.nd1(address()); }
-        /** Returns the value of the {@code d2} field. */
+        /** @return the value of the {@code d2} field. */
         public float d2() { return AIMatrix4x4.nd2(address()); }
-        /** Returns the value of the {@code d3} field. */
+        /** @return the value of the {@code d3} field. */
         public float d3() { return AIMatrix4x4.nd3(address()); }
-        /** Returns the value of the {@code d4} field. */
+        /** @return the value of the {@code d4} field. */
         public float d4() { return AIMatrix4x4.nd4(address()); }
 
         /** Sets the specified value to the {@code a1} field. */

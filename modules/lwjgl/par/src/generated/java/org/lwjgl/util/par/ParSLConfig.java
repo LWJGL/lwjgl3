@@ -18,20 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Immutable configuration for a streamlines context.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code flags} &ndash; one or more of:<br><table><tr><td>{@link ParStreamlines#PARSL_FLAG_WIREFRAME FLAG_WIREFRAME}</td><td>{@link ParStreamlines#PARSL_FLAG_ANNOTATIONS FLAG_ANNOTATIONS}</td><td>{@link ParStreamlines#PARSL_FLAG_SPINE_LENGTHS FLAG_SPINE_LENGTHS}</td><td>{@link ParStreamlines#PARSL_FLAG_RANDOM_OFFSETS FLAG_RANDOM_OFFSETS}</td></tr><tr><td>{@link ParStreamlines#PARSL_FLAG_CURVE_GUIPARSL_FLAG_DES FLAG_CURVE_GUIPARSL_FLAG_DES}</td></tr></table></li>
- * <li>{@code u_mode} &ndash; one of:<br><table><tr><td>{@link ParStreamlines#PAR_U_MODE_NORMALIZED_DISTANCE}</td><td>{@link ParStreamlines#PAR_U_MODE_DISTANCE}</td><td>{@link ParStreamlines#PAR_U_MODE_SEGMENT_INDEX}</td></tr><tr><td>{@link ParStreamlines#PAR_U_MODE_SEGMENT_FRACTION}</td></tr></table></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct parsl_config {
  *     float thickness;
- *     uint32_t flags;
- *     int u_mode;
+ *     uint32_t {@link #flags};
+ *     int {@link #u_mode};
  *     float curves_max_flatness;
  *     float streamlines_seed_spacing;
  *     {@link ParSLViewport parsl_viewport} streamlines_seed_viewport;
@@ -93,28 +86,28 @@ public class ParSLConfig extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code thickness} field. */
+    /** @return the value of the {@code thickness} field. */
     public float thickness() { return nthickness(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** one or more of:<br><table><tr><td>{@link ParStreamlines#PARSL_FLAG_WIREFRAME FLAG_WIREFRAME}</td><td>{@link ParStreamlines#PARSL_FLAG_ANNOTATIONS FLAG_ANNOTATIONS}</td><td>{@link ParStreamlines#PARSL_FLAG_SPINE_LENGTHS FLAG_SPINE_LENGTHS}</td><td>{@link ParStreamlines#PARSL_FLAG_RANDOM_OFFSETS FLAG_RANDOM_OFFSETS}</td></tr><tr><td>{@link ParStreamlines#PARSL_FLAG_CURVE_GUIPARSL_FLAG_DES FLAG_CURVE_GUIPARSL_FLAG_DES}</td></tr></table> */
     @NativeType("uint32_t")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code u_mode} field. */
+    /** one of:<br><table><tr><td>{@link ParStreamlines#PAR_U_MODE_NORMALIZED_DISTANCE}</td><td>{@link ParStreamlines#PAR_U_MODE_DISTANCE}</td><td>{@link ParStreamlines#PAR_U_MODE_SEGMENT_INDEX}</td></tr><tr><td>{@link ParStreamlines#PAR_U_MODE_SEGMENT_FRACTION}</td></tr></table> */
     public int u_mode() { return nu_mode(address()); }
-    /** Returns the value of the {@code curves_max_flatness} field. */
+    /** @return the value of the {@code curves_max_flatness} field. */
     public float curves_max_flatness() { return ncurves_max_flatness(address()); }
-    /** Returns the value of the {@code streamlines_seed_spacing} field. */
+    /** @return the value of the {@code streamlines_seed_spacing} field. */
     public float streamlines_seed_spacing() { return nstreamlines_seed_spacing(address()); }
-    /** Returns a {@link ParSLViewport} view of the {@code streamlines_seed_viewport} field. */
+    /** @return a {@link ParSLViewport} view of the {@code streamlines_seed_viewport} field. */
     @NativeType("parsl_viewport")
     public ParSLViewport streamlines_seed_viewport() { return nstreamlines_seed_viewport(address()); }
-    /** Returns the value of the {@code miter_limit} field. */
+    /** @return the value of the {@code miter_limit} field. */
     public float miter_limit() { return nmiter_limit(address()); }
 
     /** Sets the specified value to the {@code thickness} field. */
     public ParSLConfig thickness(float value) { nthickness(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public ParSLConfig flags(@NativeType("uint32_t") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code u_mode} field. */
+    /** Sets the specified value to the {@link #u_mode} field. */
     public ParSLConfig u_mode(int value) { nu_mode(address(), value); return this; }
     /** Sets the specified value to the {@code curves_max_flatness} field. */
     public ParSLConfig curves_max_flatness(float value) { ncurves_max_flatness(address(), value); return this; }
@@ -371,28 +364,28 @@ public class ParSLConfig extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code thickness} field. */
+        /** @return the value of the {@code thickness} field. */
         public float thickness() { return ParSLConfig.nthickness(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link ParSLConfig#flags} field. */
         @NativeType("uint32_t")
         public int flags() { return ParSLConfig.nflags(address()); }
-        /** Returns the value of the {@code u_mode} field. */
+        /** @return the value of the {@link ParSLConfig#u_mode} field. */
         public int u_mode() { return ParSLConfig.nu_mode(address()); }
-        /** Returns the value of the {@code curves_max_flatness} field. */
+        /** @return the value of the {@code curves_max_flatness} field. */
         public float curves_max_flatness() { return ParSLConfig.ncurves_max_flatness(address()); }
-        /** Returns the value of the {@code streamlines_seed_spacing} field. */
+        /** @return the value of the {@code streamlines_seed_spacing} field. */
         public float streamlines_seed_spacing() { return ParSLConfig.nstreamlines_seed_spacing(address()); }
-        /** Returns a {@link ParSLViewport} view of the {@code streamlines_seed_viewport} field. */
+        /** @return a {@link ParSLViewport} view of the {@code streamlines_seed_viewport} field. */
         @NativeType("parsl_viewport")
         public ParSLViewport streamlines_seed_viewport() { return ParSLConfig.nstreamlines_seed_viewport(address()); }
-        /** Returns the value of the {@code miter_limit} field. */
+        /** @return the value of the {@code miter_limit} field. */
         public float miter_limit() { return ParSLConfig.nmiter_limit(address()); }
 
         /** Sets the specified value to the {@code thickness} field. */
         public ParSLConfig.Buffer thickness(float value) { ParSLConfig.nthickness(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link ParSLConfig#flags} field. */
         public ParSLConfig.Buffer flags(@NativeType("uint32_t") int value) { ParSLConfig.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code u_mode} field. */
+        /** Sets the specified value to the {@link ParSLConfig#u_mode} field. */
         public ParSLConfig.Buffer u_mode(int value) { ParSLConfig.nu_mode(address(), value); return this; }
         /** Sets the specified value to the {@code curves_max_flatness} field. */
         public ParSLConfig.Buffer curves_max_flatness(float value) { ParSLConfig.ncurves_max_flatness(address(), value); return this; }

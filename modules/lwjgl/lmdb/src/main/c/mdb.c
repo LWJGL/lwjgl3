@@ -5,7 +5,7 @@
  *	BerkeleyDB API, but much simplified.
  */
 /*
- * Copyright 2011-2020 Howard Chu, Symas Corp.
+ * Copyright 2011-2021 Howard Chu, Symas Corp.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -509,7 +509,7 @@ static txnid_t mdb_debug_start;
 	 *	The string is printed literally, with no format processing.
 	 */
 #define DPUTS(arg)	DPRINTF(("%s", arg))
-	/** Debuging output value of a cursor DBI: Negative in a sub-cursor. */
+	/** Debugging output value of a cursor DBI: Negative in a sub-cursor. */
 #define DDBI(mc) \
 	(((mc)->mc_flags & C_SUB) ? -(int)(mc)->mc_dbi : (int)(mc)->mc_dbi)
 /** @} */
@@ -5958,16 +5958,12 @@ skip:
 
 	if (F_ISSET(leaf->mn_flags, F_DUPDATA)) {
 		mdb_xcursor_init1(mc, leaf);
-	}
-	if (data) {
+		rc = mdb_cursor_first(&mc->mc_xcursor->mx_cursor, data, NULL);
+		if (rc != MDB_SUCCESS)
+			return rc;
+	} else if (data) {
 		if ((rc = mdb_node_read(mc, leaf, data)) != MDB_SUCCESS)
 			return rc;
-
-		if (F_ISSET(leaf->mn_flags, F_DUPDATA)) {
-			rc = mdb_cursor_first(&mc->mc_xcursor->mx_cursor, data, NULL);
-			if (rc != MDB_SUCCESS)
-				return rc;
-		}
 	}
 
 	MDB_GET_KEY(leaf, key);
@@ -5991,7 +5987,8 @@ mdb_cursor_prev(MDB_cursor *mc, MDB_val *key, MDB_val *data, MDB_cursor_op op)
 
 	mp = mc->mc_pg[mc->mc_top];
 
-	if (mc->mc_db->md_flags & MDB_DUPSORT) {
+	if ((mc->mc_db->md_flags & MDB_DUPSORT) &&
+		mc->mc_ki[mc->mc_top] < NUMKEYS(mp)) {
 		leaf = NODEPTR(mp, mc->mc_ki[mc->mc_top]);
 		if (F_ISSET(leaf->mn_flags, F_DUPDATA)) {
 			if (op == MDB_PREV || op == MDB_PREV_DUP) {
@@ -6030,27 +6027,25 @@ mdb_cursor_prev(MDB_cursor *mc, MDB_val *key, MDB_val *data, MDB_cursor_op op)
 	DPRINTF(("==> cursor points to page %"Z"u with %u keys, key index %u",
 	    mdb_dbg_pgno(mp), NUMKEYS(mp), mc->mc_ki[mc->mc_top]));
 
+	if (!IS_LEAF(mp))
+		return MDB_CORRUPTED;
+
 	if (IS_LEAF2(mp)) {
 		key->mv_size = mc->mc_db->md_pad;
 		key->mv_data = LEAF2KEY(mp, mc->mc_ki[mc->mc_top], key->mv_size);
 		return MDB_SUCCESS;
 	}
 
-	mdb_cassert(mc, IS_LEAF(mp));
 	leaf = NODEPTR(mp, mc->mc_ki[mc->mc_top]);
 
 	if (F_ISSET(leaf->mn_flags, F_DUPDATA)) {
 		mdb_xcursor_init1(mc, leaf);
-	}
-	if (data) {
+		rc = mdb_cursor_last(&mc->mc_xcursor->mx_cursor, data, NULL);
+		if (rc != MDB_SUCCESS)
+			return rc;
+	} else if (data) {
 		if ((rc = mdb_node_read(mc, leaf, data)) != MDB_SUCCESS)
 			return rc;
-
-		if (F_ISSET(leaf->mn_flags, F_DUPDATA)) {
-			rc = mdb_cursor_last(&mc->mc_xcursor->mx_cursor, data, NULL);
-			if (rc != MDB_SUCCESS)
-				return rc;
-		}
 	}
 
 	MDB_GET_KEY(leaf, key);
@@ -6206,24 +6201,22 @@ set1:
 
 	if (F_ISSET(leaf->mn_flags, F_DUPDATA)) {
 		mdb_xcursor_init1(mc, leaf);
-	}
-	if (data) {
-		if (F_ISSET(leaf->mn_flags, F_DUPDATA)) {
-			if (op == MDB_SET || op == MDB_SET_KEY || op == MDB_SET_RANGE) {
-				rc = mdb_cursor_first(&mc->mc_xcursor->mx_cursor, data, NULL);
+		if (op == MDB_SET || op == MDB_SET_KEY || op == MDB_SET_RANGE) {
+			rc = mdb_cursor_first(&mc->mc_xcursor->mx_cursor, data, NULL);
+		} else {
+			int ex2, *ex2p;
+			if (op == MDB_GET_BOTH) {
+				ex2p = &ex2;
+				ex2 = 0;
 			} else {
-				int ex2, *ex2p;
-				if (op == MDB_GET_BOTH) {
-					ex2p = &ex2;
-					ex2 = 0;
-				} else {
-					ex2p = NULL;
-				}
-				rc = mdb_cursor_set(&mc->mc_xcursor->mx_cursor, data, NULL, MDB_SET_RANGE, ex2p);
-				if (rc != MDB_SUCCESS)
-					return rc;
+				ex2p = NULL;
 			}
-		} else if (op == MDB_GET_BOTH || op == MDB_GET_BOTH_RANGE) {
+			rc = mdb_cursor_set(&mc->mc_xcursor->mx_cursor, data, NULL, MDB_SET_RANGE, ex2p);
+			if (rc != MDB_SUCCESS)
+				return rc;
+		}
+	} else if (data) {
+		if (op == MDB_GET_BOTH || op == MDB_GET_BOTH_RANGE) {
 			MDB_val olddata;
 			MDB_cmp_func *dcmp;
 			if ((rc = mdb_node_read(mc, leaf, &olddata)) != MDB_SUCCESS)
@@ -6281,22 +6274,23 @@ mdb_cursor_first(MDB_cursor *mc, MDB_val *key, MDB_val *data)
 	mc->mc_ki[mc->mc_top] = 0;
 
 	if (IS_LEAF2(mc->mc_pg[mc->mc_top])) {
-		key->mv_size = mc->mc_db->md_pad;
-		key->mv_data = LEAF2KEY(mc->mc_pg[mc->mc_top], 0, key->mv_size);
+		if ( key ) {
+			key->mv_size = mc->mc_db->md_pad;
+			key->mv_data = LEAF2KEY(mc->mc_pg[mc->mc_top], 0, key->mv_size);
+		}
 		return MDB_SUCCESS;
 	}
 
-	if (data) {
-		if (F_ISSET(leaf->mn_flags, F_DUPDATA)) {
-			mdb_xcursor_init1(mc, leaf);
-			rc = mdb_cursor_first(&mc->mc_xcursor->mx_cursor, data, NULL);
-			if (rc)
-				return rc;
-		} else {
-			if ((rc = mdb_node_read(mc, leaf, data)) != MDB_SUCCESS)
-				return rc;
-		}
+	if (F_ISSET(leaf->mn_flags, F_DUPDATA)) {
+		mdb_xcursor_init1(mc, leaf);
+		rc = mdb_cursor_first(&mc->mc_xcursor->mx_cursor, data, NULL);
+		if (rc)
+			return rc;
+	} else if (data) {
+		if ((rc = mdb_node_read(mc, leaf, data)) != MDB_SUCCESS)
+			return rc;
 	}
+
 	MDB_GET_KEY(leaf, key);
 	return MDB_SUCCESS;
 }
@@ -6323,21 +6317,21 @@ mdb_cursor_last(MDB_cursor *mc, MDB_val *key, MDB_val *data)
 	leaf = NODEPTR(mc->mc_pg[mc->mc_top], mc->mc_ki[mc->mc_top]);
 
 	if (IS_LEAF2(mc->mc_pg[mc->mc_top])) {
-		key->mv_size = mc->mc_db->md_pad;
-		key->mv_data = LEAF2KEY(mc->mc_pg[mc->mc_top], mc->mc_ki[mc->mc_top], key->mv_size);
+		if (key) {
+			key->mv_size = mc->mc_db->md_pad;
+			key->mv_data = LEAF2KEY(mc->mc_pg[mc->mc_top], mc->mc_ki[mc->mc_top], key->mv_size);
+		}
 		return MDB_SUCCESS;
 	}
 
-	if (data) {
-		if (F_ISSET(leaf->mn_flags, F_DUPDATA)) {
-			mdb_xcursor_init1(mc, leaf);
-			rc = mdb_cursor_last(&mc->mc_xcursor->mx_cursor, data, NULL);
-			if (rc)
-				return rc;
-		} else {
-			if ((rc = mdb_node_read(mc, leaf, data)) != MDB_SUCCESS)
-				return rc;
-		}
+	if (F_ISSET(leaf->mn_flags, F_DUPDATA)) {
+		mdb_xcursor_init1(mc, leaf);
+		rc = mdb_cursor_last(&mc->mc_xcursor->mx_cursor, data, NULL);
+		if (rc)
+			return rc;
+	} else if (data) {
+		if ((rc = mdb_node_read(mc, leaf, data)) != MDB_SUCCESS)
+			return rc;
 	}
 
 	MDB_GET_KEY(leaf, key);
@@ -6619,7 +6613,7 @@ mdb_cursor_put(MDB_cursor *mc, MDB_val *key, MDB_val *data,
 
 	dkey.mv_size = 0;
 
-	if (flags == MDB_CURRENT) {
+	if (flags & MDB_CURRENT) {
 		if (!(mc->mc_flags & C_INITIALIZED))
 			return EINVAL;
 		rc = MDB_SUCCESS;
@@ -7014,7 +7008,7 @@ put_sub:
 			xdata.mv_size = 0;
 			xdata.mv_data = "";
 			leaf = NODEPTR(mc->mc_pg[mc->mc_top], mc->mc_ki[mc->mc_top]);
-			if (flags & MDB_CURRENT) {
+			if ((flags & (MDB_CURRENT|MDB_APPENDDUP)) == MDB_CURRENT) {
 				xflags = MDB_CURRENT|MDB_NOSPILL;
 			} else {
 				mdb_xcursor_init1(mc, leaf);
@@ -7118,6 +7112,8 @@ mdb_cursor_del(MDB_cursor *mc, unsigned int flags)
 		return rc;
 
 	mp = mc->mc_pg[mc->mc_top];
+	if (!IS_LEAF(mp))
+		return MDB_CORRUPTED;
 	if (IS_LEAF2(mp))
 		goto del_key;
 	leaf = NODEPTR(mp, mc->mc_ki[mc->mc_top]);
@@ -8489,60 +8485,68 @@ mdb_cursor_del0(MDB_cursor *mc)
 		}
 	}
 	rc = mdb_rebalance(mc);
+	if (rc)
+		goto fail;
 
-	if (rc == MDB_SUCCESS) {
-		/* DB is totally empty now, just bail out.
-		 * Other cursors adjustments were already done
-		 * by mdb_rebalance and aren't needed here.
-		 */
-		if (!mc->mc_snum)
-			return rc;
+	/* DB is totally empty now, just bail out.
+	 * Other cursors adjustments were already done
+	 * by mdb_rebalance and aren't needed here.
+	 */
+	if (!mc->mc_snum) {
+		mc->mc_flags |= C_EOF;
+		return rc;
+	}
 
-		mp = mc->mc_pg[mc->mc_top];
-		nkeys = NUMKEYS(mp);
+	mp = mc->mc_pg[mc->mc_top];
+	nkeys = NUMKEYS(mp);
 
-		/* Adjust other cursors pointing to mp */
-		for (m2 = mc->mc_txn->mt_cursors[dbi]; !rc && m2; m2=m2->mc_next) {
-			m3 = (mc->mc_flags & C_SUB) ? &m2->mc_xcursor->mx_cursor : m2;
-			if (! (m2->mc_flags & m3->mc_flags & C_INITIALIZED))
-				continue;
-			if (m3->mc_snum < mc->mc_snum)
-				continue;
-			if (m3->mc_pg[mc->mc_top] == mp) {
-				/* if m3 points past last node in page, find next sibling */
-				if (m3->mc_ki[mc->mc_top] >= mc->mc_ki[mc->mc_top]) {
-					if (m3->mc_ki[mc->mc_top] >= nkeys) {
-						rc = mdb_cursor_sibling(m3, 1);
-						if (rc == MDB_NOTFOUND) {
-							m3->mc_flags |= C_EOF;
-							rc = MDB_SUCCESS;
-							continue;
+	/* Adjust other cursors pointing to mp */
+	for (m2 = mc->mc_txn->mt_cursors[dbi]; !rc && m2; m2=m2->mc_next) {
+		m3 = (mc->mc_flags & C_SUB) ? &m2->mc_xcursor->mx_cursor : m2;
+		if (!(m2->mc_flags & m3->mc_flags & C_INITIALIZED))
+			continue;
+		if (m3->mc_snum < mc->mc_snum)
+			continue;
+		if (m3->mc_pg[mc->mc_top] == mp) {
+			if (m3->mc_ki[mc->mc_top] >= mc->mc_ki[mc->mc_top]) {
+			/* if m3 points past last node in page, find next sibling */
+				if (m3->mc_ki[mc->mc_top] >= nkeys) {
+					rc = mdb_cursor_sibling(m3, 1);
+					if (rc == MDB_NOTFOUND) {
+						m3->mc_flags |= C_EOF;
+						rc = MDB_SUCCESS;
+						continue;
+					}
+					if (rc)
+						goto fail;
+				}
+				if (m3->mc_xcursor && !(m3->mc_flags & C_EOF)) {
+					MDB_node *node = NODEPTR(m3->mc_pg[m3->mc_top], m3->mc_ki[m3->mc_top]);
+					/* If this node has dupdata, it may need to be reinited
+					 * because its data has moved.
+					 * If the xcursor was not initd it must be reinited.
+					 * Else if node points to a subDB, nothing is needed.
+					 * Else (xcursor was initd, not a subDB) needs mc_pg[0] reset.
+					 */
+					if (node->mn_flags & F_DUPDATA) {
+						if (m3->mc_xcursor->mx_cursor.mc_flags & C_INITIALIZED) {
+							if (!(node->mn_flags & F_SUBDATA))
+								m3->mc_xcursor->mx_cursor.mc_pg[0] = NODEDATA(node);
+						} else {
+							mdb_xcursor_init1(m3, node);
+							rc = mdb_cursor_first(&m3->mc_xcursor->mx_cursor, NULL, NULL);
+							if (rc)
+								goto fail;
 						}
 					}
-					if (mc->mc_db->md_flags & MDB_DUPSORT) {
-						MDB_node *node = NODEPTR(m3->mc_pg[m3->mc_top], m3->mc_ki[m3->mc_top]);
-						/* If this node has dupdata, it may need to be reinited
-						 * because its data has moved.
-						 * If the xcursor was not initd it must be reinited.
-						 * Else if node points to a subDB, nothing is needed.
-						 * Else (xcursor was initd, not a subDB) needs mc_pg[0] reset.
-						 */
-						if (node->mn_flags & F_DUPDATA) {
-							if (m3->mc_xcursor->mx_cursor.mc_flags & C_INITIALIZED) {
-								if (!(node->mn_flags & F_SUBDATA))
-									m3->mc_xcursor->mx_cursor.mc_pg[0] = NODEDATA(node);
-							} else {
-								mdb_xcursor_init1(m3, node);
-								m3->mc_xcursor->mx_cursor.mc_flags |= C_DEL;
-							}
-						}
-					}
+					m3->mc_xcursor->mx_cursor.mc_flags |= C_DEL;
 				}
 			}
 		}
-		mc->mc_flags |= C_DEL;
 	}
+	mc->mc_flags |= C_DEL;
 
+fail:
 	if (rc)
 		mc->mc_txn->mt_flags |= MDB_TXN_ERROR;
 	return rc;

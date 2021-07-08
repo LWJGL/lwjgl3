@@ -83,6 +83,8 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public class NVPathRendering {
 
+    static { GL.initialize(); }
+
     /** Accepted in elements of the {@code commands} array parameter of PathCommandsNV and PathSubCommandsNV. */
     public static final byte
         GL_CLOSE_PATH_NV                         = 0x0,
@@ -348,8 +350,6 @@ public class NVPathRendering {
         GL_EYE_LINEAR_NV    = 0x2400,
         GL_OBJECT_LINEAR_NV = 0x2401,
         GL_CONSTANT_NV      = 0x8576;
-
-    static { GL.initialize(); }
 
     protected NVPathRendering() {
         throw new UnsupportedOperationException();

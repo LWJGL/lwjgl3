@@ -73,19 +73,19 @@ public class XrExtensionProperties extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code extensionName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code extensionName} field. */
     @NativeType("char[XR_MAX_EXTENSION_NAME_SIZE]")
     public ByteBuffer extensionName() { return nextensionName(address()); }
-    /** Decodes the null-terminated string stored in the {@code extensionName} field. */
+    /** @return the null-terminated string stored in the {@code extensionName} field. */
     @NativeType("char[XR_MAX_EXTENSION_NAME_SIZE]")
     public String extensionNameString() { return nextensionNameString(address()); }
-    /** Returns the value of the {@code extensionVersion} field. */
+    /** @return the value of the {@code extensionVersion} field. */
     @NativeType("uint32_t")
     public int extensionVersion() { return nextensionVersion(address()); }
 
@@ -281,19 +281,19 @@ public class XrExtensionProperties extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrExtensionProperties.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrExtensionProperties.nnext(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code extensionName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code extensionName} field. */
         @NativeType("char[XR_MAX_EXTENSION_NAME_SIZE]")
         public ByteBuffer extensionName() { return XrExtensionProperties.nextensionName(address()); }
-        /** Decodes the null-terminated string stored in the {@code extensionName} field. */
+        /** @return the null-terminated string stored in the {@code extensionName} field. */
         @NativeType("char[XR_MAX_EXTENSION_NAME_SIZE]")
         public String extensionNameString() { return XrExtensionProperties.nextensionNameString(address()); }
-        /** Returns the value of the {@code extensionVersion} field. */
+        /** @return the value of the {@code extensionVersion} field. */
         @NativeType("uint32_t")
         public int extensionVersion() { return XrExtensionProperties.nextensionVersion(address()); }
 

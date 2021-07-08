@@ -64,10 +64,10 @@ public class NkStyleText extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkColor} view of the {@code color} field. */
+    /** @return a {@link NkColor} view of the {@code color} field. */
     @NativeType("struct nk_color")
     public NkColor color() { return ncolor(address()); }
-    /** Returns a {@link NkVec2} view of the {@code padding} field. */
+    /** @return a {@link NkVec2} view of the {@code padding} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 padding() { return npadding(address()); }
 
@@ -294,10 +294,10 @@ public class NkStyleText extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkColor} view of the {@code color} field. */
+        /** @return a {@link NkColor} view of the {@code color} field. */
         @NativeType("struct nk_color")
         public NkColor color() { return NkStyleText.ncolor(address()); }
-        /** Returns a {@link NkVec2} view of the {@code padding} field. */
+        /** @return a {@link NkVec2} view of the {@code padding} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 padding() { return NkStyleText.npadding(address()); }
 

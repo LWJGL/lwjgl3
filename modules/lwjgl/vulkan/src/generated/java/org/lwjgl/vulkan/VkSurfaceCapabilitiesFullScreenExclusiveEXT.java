@@ -30,19 +30,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTFullScreenExclusive#VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSurfaceCapabilitiesFullScreenExclusiveEXT {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 fullScreenExclusiveSupported;
  * }</code></pre>
  */
@@ -88,19 +81,19 @@ public class VkSurfaceCapabilitiesFullScreenExclusiveEXT extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code fullScreenExclusiveSupported} field. */
+    /** @return the value of the {@code fullScreenExclusiveSupported} field. */
     @NativeType("VkBool32")
     public boolean fullScreenExclusiveSupported() { return nfullScreenExclusiveSupported(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSurfaceCapabilitiesFullScreenExclusiveEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSurfaceCapabilitiesFullScreenExclusiveEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code fullScreenExclusiveSupported} field. */
     public VkSurfaceCapabilitiesFullScreenExclusiveEXT fullScreenExclusiveSupported(@NativeType("VkBool32") boolean value) { nfullScreenExclusiveSupported(address(), value ? 1 : 0); return this; }
@@ -325,19 +318,19 @@ public class VkSurfaceCapabilitiesFullScreenExclusiveEXT extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSurfaceCapabilitiesFullScreenExclusiveEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSurfaceCapabilitiesFullScreenExclusiveEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSurfaceCapabilitiesFullScreenExclusiveEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkSurfaceCapabilitiesFullScreenExclusiveEXT.npNext(address()); }
-        /** Returns the value of the {@code fullScreenExclusiveSupported} field. */
+        /** @return the value of the {@code fullScreenExclusiveSupported} field. */
         @NativeType("VkBool32")
         public boolean fullScreenExclusiveSupported() { return VkSurfaceCapabilitiesFullScreenExclusiveEXT.nfullScreenExclusiveSupported(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSurfaceCapabilitiesFullScreenExclusiveEXT#sType} field. */
         public VkSurfaceCapabilitiesFullScreenExclusiveEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfaceCapabilitiesFullScreenExclusiveEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSurfaceCapabilitiesFullScreenExclusiveEXT#pNext} field. */
         public VkSurfaceCapabilitiesFullScreenExclusiveEXT.Buffer pNext(@NativeType("void *") long value) { VkSurfaceCapabilitiesFullScreenExclusiveEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code fullScreenExclusiveSupported} field. */
         public VkSurfaceCapabilitiesFullScreenExclusiveEXT.Buffer fullScreenExclusiveSupported(@NativeType("VkBool32") boolean value) { VkSurfaceCapabilitiesFullScreenExclusiveEXT.nfullScreenExclusiveSupported(address(), value ? 1 : 0); return this; }

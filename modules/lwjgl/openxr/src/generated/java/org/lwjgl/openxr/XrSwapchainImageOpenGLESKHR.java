@@ -67,13 +67,13 @@ public class XrSwapchainImageOpenGLESKHR extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code image} field. */
+    /** @return the value of the {@code image} field. */
     @NativeType("uint32_t")
     public int image() { return nimage(address()); }
 
@@ -304,13 +304,13 @@ public class XrSwapchainImageOpenGLESKHR extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSwapchainImageOpenGLESKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSwapchainImageOpenGLESKHR.nnext(address()); }
-        /** Returns the value of the {@code image} field. */
+        /** @return the value of the {@code image} field. */
         @NativeType("uint32_t")
         public int image() { return XrSwapchainImageOpenGLESKHR.nimage(address()); }
 

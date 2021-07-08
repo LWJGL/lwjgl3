@@ -22,28 +22,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2 STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkQueueFamilyCheckpointPropertiesNV}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkQueueFamilyCheckpointProperties2NV} or {@link VkQueueFamilyCheckpointPropertiesNV}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
  * <h5>See Also</h5>
  * 
  * <p>{@link VkQueueFamilyProperties}, {@link VK11#vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2}, {@link KHRGetPhysicalDeviceProperties2#vkGetPhysicalDeviceQueueFamilyProperties2KHR GetPhysicalDeviceQueueFamilyProperties2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code queueFamilyProperties} &ndash; a {@link VkQueueFamilyProperties} structure which is populated with the same values as in {@link VK10#vkGetPhysicalDeviceQueueFamilyProperties GetPhysicalDeviceQueueFamilyProperties}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkQueueFamilyProperties2 {
- *     VkStructureType sType;
- *     void * pNext;
- *     {@link VkQueueFamilyProperties VkQueueFamilyProperties} queueFamilyProperties;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     {@link VkQueueFamilyProperties VkQueueFamilyProperties} {@link #queueFamilyProperties};
  * }</code></pre>
  */
 public class VkQueueFamilyProperties2 extends Struct implements NativeResource {
@@ -88,18 +81,18 @@ public class VkQueueFamilyProperties2 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkQueueFamilyProperties} view of the {@code queueFamilyProperties} field. */
+    /** a {@link VkQueueFamilyProperties} structure which is populated with the same values as in {@link VK10#vkGetPhysicalDeviceQueueFamilyProperties GetPhysicalDeviceQueueFamilyProperties}. */
     public VkQueueFamilyProperties queueFamilyProperties() { return nqueueFamilyProperties(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkQueueFamilyProperties2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkQueueFamilyProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,18 +311,18 @@ public class VkQueueFamilyProperties2 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkQueueFamilyProperties2#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkQueueFamilyProperties2.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkQueueFamilyProperties2#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkQueueFamilyProperties2.npNext(address()); }
-        /** Returns a {@link VkQueueFamilyProperties} view of the {@code queueFamilyProperties} field. */
+        /** @return a {@link VkQueueFamilyProperties} view of the {@link VkQueueFamilyProperties2#queueFamilyProperties} field. */
         public VkQueueFamilyProperties queueFamilyProperties() { return VkQueueFamilyProperties2.nqueueFamilyProperties(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkQueueFamilyProperties2#sType} field. */
         public VkQueueFamilyProperties2.Buffer sType(@NativeType("VkStructureType") int value) { VkQueueFamilyProperties2.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkQueueFamilyProperties2#pNext} field. */
         public VkQueueFamilyProperties2.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyProperties2.npNext(address(), value); return this; }
 
     }

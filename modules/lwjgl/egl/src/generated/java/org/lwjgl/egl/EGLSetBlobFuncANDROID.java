@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void const *key,
  *     EGLsizeiANDROID keySize,
  *     void const *value,
@@ -52,7 +52,7 @@ public abstract class EGLSetBlobFuncANDROID extends Callback implements EGLSetBl
     }
 
     protected EGLSetBlobFuncANDROID() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     EGLSetBlobFuncANDROID(long functionPointer) {

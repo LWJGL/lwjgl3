@@ -13,6 +13,7 @@ val EXT_ycbcr_image_arrays = "EXTYcbcrImageArrays".nativeClassVK("EXT_ycbcr_imag
         """
         This extension allows images of a format that requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion"> Y′C<sub>B</sub>C<sub>R</sub> conversion</a> to be created with multiple array layers, which is otherwise restricted.
 
+        <h5>VK_EXT_ycbcr_image_arrays</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_ycbcr_image_arrays}</dd>
@@ -36,11 +37,14 @@ val EXT_ycbcr_image_arrays = "EXTYcbcrImageArrays".nativeClassVK("EXT_ycbcr_imag
             <dd><ul>
                 <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_ycbcr_image_arrays:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
             </ul></dd>
+        </dl>
 
-            <dt>Last Modified Date</dt>
+        <h5>Other Extension Metadata</h5>
+        <dl>
+            <dt><b>Last Modified Date</b></dt>
             <dd>2019-01-15</dd>
 
-            <dt>Contributors</dt>
+            <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Piers Daniell, NVIDIA</li>
             </ul></dd>

@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWwindow *window,
  *     float xscale,
  *     float yscale
@@ -55,7 +55,7 @@ public abstract class GLFWWindowContentScaleCallback extends Callback implements
     }
 
     protected GLFWWindowContentScaleCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWWindowContentScaleCallback(long functionPointer) {

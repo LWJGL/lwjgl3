@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} is the type of this structure.</li>
- * <li>{@code pNext} is {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} is {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code deviceIndexCount} is the number of elements in {@code pDeviceIndices}.</li>
  * <li>{@code pDeviceIndices} is a pointer to an array of device indices.</li>
  * <li>{@code splitInstanceBindRegionCount} is the number of elements in {@code pSplitInstanceBindRegions}.</li>
@@ -43,11 +43,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>At least one of {@code deviceIndexCount} and {@code splitInstanceBindRegionCount} <b>must</b> be zero.</li>
+ * <li>At least one of {@code deviceIndexCount} and {@code splitInstanceBindRegionCount} <b>must</b> be zero</li>
  * <li>{@code deviceIndexCount} <b>must</b> either be zero or equal to the number of physical devices in the logical device</li>
- * <li>All elements of {@code pDeviceIndices} <b>must</b> be valid device indices.</li>
+ * <li>All elements of {@code pDeviceIndices} <b>must</b> be valid device indices</li>
  * <li>{@code splitInstanceBindRegionCount} <b>must</b> either be zero or equal to the number of physical devices in the logical device squared</li>
- * <li>Elements of {@code pSplitInstanceBindRegions} that correspond to the same instance of an image <b>must</b> not overlap.</li>
+ * <li>Elements of {@code pSplitInstanceBindRegions} that correspond to the same instance of an image <b>must</b> not overlap</li>
  * <li>The {@code offset.x} member of any element of {@code pSplitInstanceBindRegions} <b>must</b> be a multiple of the sparse image block width ({@link VkSparseImageFormatProperties}{@code ::imageGranularity}.width) of all non-metadata aspects of the image</li>
  * <li>The {@code offset.y} member of any element of {@code pSplitInstanceBindRegions} <b>must</b> be a multiple of the sparse image block height ({@link VkSparseImageFormatProperties}{@code ::imageGranularity}.height) of all non-metadata aspects of the image</li>
  * <li>The {@code extent.width} member of any element of {@code pSplitInstanceBindRegions} <b>must</b> either be a multiple of the sparse image block width of all non-metadata aspects of the image, or else {@code extent.width} + {@code offset.x} <b>must</b> equal the width of the image subresource</li>
@@ -129,23 +129,23 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code deviceIndexCount} field. */
+    /** @return the value of the {@code deviceIndexCount} field. */
     @NativeType("uint32_t")
     public int deviceIndexCount() { return ndeviceIndexCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDeviceIndices} field. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDeviceIndices} field. */
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pDeviceIndices() { return npDeviceIndices(address()); }
-    /** Returns the value of the {@code splitInstanceBindRegionCount} field. */
+    /** @return the value of the {@code splitInstanceBindRegionCount} field. */
     @NativeType("uint32_t")
     public int splitInstanceBindRegionCount() { return nsplitInstanceBindRegionCount(address()); }
-    /** Returns a {@link VkRect2D.Buffer} view of the struct array pointed to by the {@code pSplitInstanceBindRegions} field. */
+    /** @return a {@link VkRect2D.Buffer} view of the struct array pointed to by the {@code pSplitInstanceBindRegions} field. */
     @Nullable
     @NativeType("VkRect2D const *")
     public VkRect2D.Buffer pSplitInstanceBindRegions() { return npSplitInstanceBindRegions(address()); }
@@ -419,23 +419,23 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBindImageMemoryDeviceGroupInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBindImageMemoryDeviceGroupInfo.npNext(address()); }
-        /** Returns the value of the {@code deviceIndexCount} field. */
+        /** @return the value of the {@code deviceIndexCount} field. */
         @NativeType("uint32_t")
         public int deviceIndexCount() { return VkBindImageMemoryDeviceGroupInfo.ndeviceIndexCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDeviceIndices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDeviceIndices} field. */
         @Nullable
         @NativeType("uint32_t const *")
         public IntBuffer pDeviceIndices() { return VkBindImageMemoryDeviceGroupInfo.npDeviceIndices(address()); }
-        /** Returns the value of the {@code splitInstanceBindRegionCount} field. */
+        /** @return the value of the {@code splitInstanceBindRegionCount} field. */
         @NativeType("uint32_t")
         public int splitInstanceBindRegionCount() { return VkBindImageMemoryDeviceGroupInfo.nsplitInstanceBindRegionCount(address()); }
-        /** Returns a {@link VkRect2D.Buffer} view of the struct array pointed to by the {@code pSplitInstanceBindRegions} field. */
+        /** @return a {@link VkRect2D.Buffer} view of the struct array pointed to by the {@code pSplitInstanceBindRegions} field. */
         @Nullable
         @NativeType("VkRect2D const *")
         public VkRect2D.Buffer pSplitInstanceBindRegions() { return VkBindImageMemoryDeviceGroupInfo.npSplitInstanceBindRegions(address()); }

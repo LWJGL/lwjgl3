@@ -79,14 +79,14 @@ public class UIVec2 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link IntBuffer} view of the {@code v} field. */
+    /** @return a {@link IntBuffer} view of the {@code v} field. */
     @NativeType("int[2]")
     public IntBuffer v() { return nv(address()); }
-    /** Returns the value at the specified index of the {@code v} field. */
+    /** @return the value at the specified index of the {@code v} field. */
     public int v(int index) { return nv(address(), index); }
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     public int y() { return ny(address()); }
 
     /** Copies the specified {@link IntBuffer} to the {@code v} field. */
@@ -316,14 +316,14 @@ public class UIVec2 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link IntBuffer} view of the {@code v} field. */
+        /** @return a {@link IntBuffer} view of the {@code v} field. */
         @NativeType("int[2]")
         public IntBuffer v() { return UIVec2.nv(address()); }
-        /** Returns the value at the specified index of the {@code v} field. */
+        /** @return the value at the specified index of the {@code v} field. */
         public int v(int index) { return UIVec2.nv(address(), index); }
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         public int x() { return UIVec2.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         public int y() { return UIVec2.ny(address()); }
 
         /** Copies the specified {@link IntBuffer} to the {@code v} field. */

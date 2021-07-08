@@ -46,6 +46,7 @@ val KHR_device_group_creation = "KHRDeviceGroupCreation".nativeClassVK("KHR_devi
 ￿    vkCreateDevice(props[0].physicalDevices[0], &amp;devCreateInfo, NULL, &amp;g_vkDevice);
 ￿    free(props);</code></pre>
 
+        <h5>VK_KHR_device_group_creation</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_device_group_creation}</dd>
@@ -73,7 +74,10 @@ val KHR_device_group_creation = "KHRDeviceGroupCreation".nativeClassVK("KHR_devi
             <dd><ul>
                 <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_device_group_creation:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-10-19</dd>
 

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     CXClientData client_data,
  *     CXIdxDeclInfo const *info
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class IndexerIndexDeclaration extends Callback implements Indexe
     }
 
     protected IndexerIndexDeclaration() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     IndexerIndexDeclaration(long functionPointer) {

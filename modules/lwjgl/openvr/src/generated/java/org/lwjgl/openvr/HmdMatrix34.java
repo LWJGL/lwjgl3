@@ -61,10 +61,10 @@ public class HmdMatrix34 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link FloatBuffer} view of the {@code m} field. */
+    /** @return a {@link FloatBuffer} view of the {@code m} field. */
     @NativeType("float[12]")
     public FloatBuffer m() { return nm(address()); }
-    /** Returns the value at the specified index of the {@code m} field. */
+    /** @return the value at the specified index of the {@code m} field. */
     public float m(int index) { return nm(address(), index); }
 
     /** Copies the specified {@link FloatBuffer} to the {@code m} field. */
@@ -282,10 +282,10 @@ public class HmdMatrix34 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link FloatBuffer} view of the {@code m} field. */
+        /** @return a {@link FloatBuffer} view of the {@code m} field. */
         @NativeType("float[12]")
         public FloatBuffer m() { return HmdMatrix34.nm(address()); }
-        /** Returns the value at the specified index of the {@code m} field. */
+        /** @return the value at the specified index of the {@code m} field. */
         public float m(int index) { return HmdMatrix34.nm(address(), index); }
 
         /** Copies the specified {@link FloatBuffer} to the {@code m} field. */

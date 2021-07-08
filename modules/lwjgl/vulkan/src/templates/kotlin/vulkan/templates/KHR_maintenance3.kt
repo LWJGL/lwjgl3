@@ -23,6 +23,7 @@ val KHR_maintenance3 = "KHRMaintenance3".nativeClassVK("KHR_maintenance3", type 
         <h5>Promotion to Vulkan 1.1</h5>
         All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
+        <h5>VK_KHR_maintenance3</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_maintenance3}</dd>
@@ -51,10 +52,10 @@ val KHR_maintenance3 = "KHRMaintenance3".nativeClassVK("KHR_maintenance3", type 
             <dd><ul>
                 <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_maintenance3:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
             </ul></dd>
+        </dl>
 
-            <dt><b>Status</b></dt>
-            <dd>Draft</dd>
-
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-09-05</dd>
 

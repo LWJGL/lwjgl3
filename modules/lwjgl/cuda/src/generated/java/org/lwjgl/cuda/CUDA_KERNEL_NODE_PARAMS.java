@@ -19,35 +19,20 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * GPU kernel node parameter.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code func} &ndash; Kernel to launch</li>
- * <li>{@code gridDimX} &ndash; Width of grid in blocks</li>
- * <li>{@code gridDimY} &ndash; Height of grid in blocks</li>
- * <li>{@code gridDimZ} &ndash; Depth of grid in blocks</li>
- * <li>{@code blockDimX} &ndash; X dimension of each thread block</li>
- * <li>{@code blockDimY} &ndash; Y dimension of each thread block</li>
- * <li>{@code blockDimZ} &ndash; Z dimension of each thread block</li>
- * <li>{@code sharedMemBytes} &ndash; Dynamic shared-memory size per thread block in bytes</li>
- * <li>{@code kernelParams} &ndash; Array of pointers to kernel parameters</li>
- * <li>{@code extra} &ndash; Extra options</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUDA_KERNEL_NODE_PARAMS {
- *     CUfunction func;
- *     unsigned int gridDimX;
- *     unsigned int gridDimY;
- *     unsigned int gridDimZ;
- *     unsigned int blockDimX;
- *     unsigned int blockDimY;
- *     unsigned int blockDimZ;
- *     unsigned int sharedMemBytes;
- *     void ** kernelParams;
- *     void ** extra;
+ *     CUfunction {@link #func};
+ *     unsigned int {@link #gridDimX};
+ *     unsigned int {@link #gridDimY};
+ *     unsigned int {@link #gridDimZ};
+ *     unsigned int {@link #blockDimX};
+ *     unsigned int {@link #blockDimY};
+ *     unsigned int {@link #blockDimZ};
+ *     unsigned int {@link #sharedMemBytes};
+ *     void ** {@link #kernelParams};
+ *     void ** {@link #extra};
  * }</code></pre>
  */
 public class CUDA_KERNEL_NODE_PARAMS extends Struct implements NativeResource {
@@ -113,64 +98,64 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code func} field. */
+    /** Kernel to launch */
     @NativeType("CUfunction")
     public long func() { return nfunc(address()); }
-    /** Returns the value of the {@code gridDimX} field. */
+    /** Width of grid in blocks */
     @NativeType("unsigned int")
     public int gridDimX() { return ngridDimX(address()); }
-    /** Returns the value of the {@code gridDimY} field. */
+    /** Height of grid in blocks */
     @NativeType("unsigned int")
     public int gridDimY() { return ngridDimY(address()); }
-    /** Returns the value of the {@code gridDimZ} field. */
+    /** Depth of grid in blocks */
     @NativeType("unsigned int")
     public int gridDimZ() { return ngridDimZ(address()); }
-    /** Returns the value of the {@code blockDimX} field. */
+    /** X dimension of each thread block */
     @NativeType("unsigned int")
     public int blockDimX() { return nblockDimX(address()); }
-    /** Returns the value of the {@code blockDimY} field. */
+    /** Y dimension of each thread block */
     @NativeType("unsigned int")
     public int blockDimY() { return nblockDimY(address()); }
-    /** Returns the value of the {@code blockDimZ} field. */
+    /** Z dimension of each thread block */
     @NativeType("unsigned int")
     public int blockDimZ() { return nblockDimZ(address()); }
-    /** Returns the value of the {@code sharedMemBytes} field. */
+    /** Dynamic shared-memory size per thread block in bytes */
     @NativeType("unsigned int")
     public int sharedMemBytes() { return nsharedMemBytes(address()); }
     /**
-     * Returns a {@link PointerBuffer} view of the data pointed to by the {@code kernelParams} field.
-     *
      * @param capacity the number of elements in the returned buffer
+     *
+     * @return Array of pointers to kernel parameters
      */
     @NativeType("void **")
     public PointerBuffer kernelParams(int capacity) { return nkernelParams(address(), capacity); }
     /**
-     * Returns a {@link PointerBuffer} view of the data pointed to by the {@code extra} field.
-     *
      * @param capacity the number of elements in the returned buffer
+     *
+     * @return Extra options
      */
     @NativeType("void **")
     public PointerBuffer extra(int capacity) { return nextra(address(), capacity); }
 
-    /** Sets the specified value to the {@code func} field. */
+    /** Sets the specified value to the {@link #func} field. */
     public CUDA_KERNEL_NODE_PARAMS func(@NativeType("CUfunction") long value) { nfunc(address(), value); return this; }
-    /** Sets the specified value to the {@code gridDimX} field. */
+    /** Sets the specified value to the {@link #gridDimX} field. */
     public CUDA_KERNEL_NODE_PARAMS gridDimX(@NativeType("unsigned int") int value) { ngridDimX(address(), value); return this; }
-    /** Sets the specified value to the {@code gridDimY} field. */
+    /** Sets the specified value to the {@link #gridDimY} field. */
     public CUDA_KERNEL_NODE_PARAMS gridDimY(@NativeType("unsigned int") int value) { ngridDimY(address(), value); return this; }
-    /** Sets the specified value to the {@code gridDimZ} field. */
+    /** Sets the specified value to the {@link #gridDimZ} field. */
     public CUDA_KERNEL_NODE_PARAMS gridDimZ(@NativeType("unsigned int") int value) { ngridDimZ(address(), value); return this; }
-    /** Sets the specified value to the {@code blockDimX} field. */
+    /** Sets the specified value to the {@link #blockDimX} field. */
     public CUDA_KERNEL_NODE_PARAMS blockDimX(@NativeType("unsigned int") int value) { nblockDimX(address(), value); return this; }
-    /** Sets the specified value to the {@code blockDimY} field. */
+    /** Sets the specified value to the {@link #blockDimY} field. */
     public CUDA_KERNEL_NODE_PARAMS blockDimY(@NativeType("unsigned int") int value) { nblockDimY(address(), value); return this; }
-    /** Sets the specified value to the {@code blockDimZ} field. */
+    /** Sets the specified value to the {@link #blockDimZ} field. */
     public CUDA_KERNEL_NODE_PARAMS blockDimZ(@NativeType("unsigned int") int value) { nblockDimZ(address(), value); return this; }
-    /** Sets the specified value to the {@code sharedMemBytes} field. */
+    /** Sets the specified value to the {@link #sharedMemBytes} field. */
     public CUDA_KERNEL_NODE_PARAMS sharedMemBytes(@NativeType("unsigned int") int value) { nsharedMemBytes(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code kernelParams} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #kernelParams} field. */
     public CUDA_KERNEL_NODE_PARAMS kernelParams(@NativeType("void **") PointerBuffer value) { nkernelParams(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code extra} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #extra} field. */
     public CUDA_KERNEL_NODE_PARAMS extra(@NativeType("void **") PointerBuffer value) { nextra(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -458,64 +443,64 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code func} field. */
+        /** @return the value of the {@link CUDA_KERNEL_NODE_PARAMS#func} field. */
         @NativeType("CUfunction")
         public long func() { return CUDA_KERNEL_NODE_PARAMS.nfunc(address()); }
-        /** Returns the value of the {@code gridDimX} field. */
+        /** @return the value of the {@link CUDA_KERNEL_NODE_PARAMS#gridDimX} field. */
         @NativeType("unsigned int")
         public int gridDimX() { return CUDA_KERNEL_NODE_PARAMS.ngridDimX(address()); }
-        /** Returns the value of the {@code gridDimY} field. */
+        /** @return the value of the {@link CUDA_KERNEL_NODE_PARAMS#gridDimY} field. */
         @NativeType("unsigned int")
         public int gridDimY() { return CUDA_KERNEL_NODE_PARAMS.ngridDimY(address()); }
-        /** Returns the value of the {@code gridDimZ} field. */
+        /** @return the value of the {@link CUDA_KERNEL_NODE_PARAMS#gridDimZ} field. */
         @NativeType("unsigned int")
         public int gridDimZ() { return CUDA_KERNEL_NODE_PARAMS.ngridDimZ(address()); }
-        /** Returns the value of the {@code blockDimX} field. */
+        /** @return the value of the {@link CUDA_KERNEL_NODE_PARAMS#blockDimX} field. */
         @NativeType("unsigned int")
         public int blockDimX() { return CUDA_KERNEL_NODE_PARAMS.nblockDimX(address()); }
-        /** Returns the value of the {@code blockDimY} field. */
+        /** @return the value of the {@link CUDA_KERNEL_NODE_PARAMS#blockDimY} field. */
         @NativeType("unsigned int")
         public int blockDimY() { return CUDA_KERNEL_NODE_PARAMS.nblockDimY(address()); }
-        /** Returns the value of the {@code blockDimZ} field. */
+        /** @return the value of the {@link CUDA_KERNEL_NODE_PARAMS#blockDimZ} field. */
         @NativeType("unsigned int")
         public int blockDimZ() { return CUDA_KERNEL_NODE_PARAMS.nblockDimZ(address()); }
-        /** Returns the value of the {@code sharedMemBytes} field. */
+        /** @return the value of the {@link CUDA_KERNEL_NODE_PARAMS#sharedMemBytes} field. */
         @NativeType("unsigned int")
         public int sharedMemBytes() { return CUDA_KERNEL_NODE_PARAMS.nsharedMemBytes(address()); }
         /**
-         * Returns a {@link PointerBuffer} view of the data pointed to by the {@code kernelParams} field.
+         * @return a {@link PointerBuffer} view of the data pointed to by the {@link CUDA_KERNEL_NODE_PARAMS#kernelParams} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("void **")
         public PointerBuffer kernelParams(int capacity) { return CUDA_KERNEL_NODE_PARAMS.nkernelParams(address(), capacity); }
         /**
-         * Returns a {@link PointerBuffer} view of the data pointed to by the {@code extra} field.
+         * @return a {@link PointerBuffer} view of the data pointed to by the {@link CUDA_KERNEL_NODE_PARAMS#extra} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("void **")
         public PointerBuffer extra(int capacity) { return CUDA_KERNEL_NODE_PARAMS.nextra(address(), capacity); }
 
-        /** Sets the specified value to the {@code func} field. */
+        /** Sets the specified value to the {@link CUDA_KERNEL_NODE_PARAMS#func} field. */
         public CUDA_KERNEL_NODE_PARAMS.Buffer func(@NativeType("CUfunction") long value) { CUDA_KERNEL_NODE_PARAMS.nfunc(address(), value); return this; }
-        /** Sets the specified value to the {@code gridDimX} field. */
+        /** Sets the specified value to the {@link CUDA_KERNEL_NODE_PARAMS#gridDimX} field. */
         public CUDA_KERNEL_NODE_PARAMS.Buffer gridDimX(@NativeType("unsigned int") int value) { CUDA_KERNEL_NODE_PARAMS.ngridDimX(address(), value); return this; }
-        /** Sets the specified value to the {@code gridDimY} field. */
+        /** Sets the specified value to the {@link CUDA_KERNEL_NODE_PARAMS#gridDimY} field. */
         public CUDA_KERNEL_NODE_PARAMS.Buffer gridDimY(@NativeType("unsigned int") int value) { CUDA_KERNEL_NODE_PARAMS.ngridDimY(address(), value); return this; }
-        /** Sets the specified value to the {@code gridDimZ} field. */
+        /** Sets the specified value to the {@link CUDA_KERNEL_NODE_PARAMS#gridDimZ} field. */
         public CUDA_KERNEL_NODE_PARAMS.Buffer gridDimZ(@NativeType("unsigned int") int value) { CUDA_KERNEL_NODE_PARAMS.ngridDimZ(address(), value); return this; }
-        /** Sets the specified value to the {@code blockDimX} field. */
+        /** Sets the specified value to the {@link CUDA_KERNEL_NODE_PARAMS#blockDimX} field. */
         public CUDA_KERNEL_NODE_PARAMS.Buffer blockDimX(@NativeType("unsigned int") int value) { CUDA_KERNEL_NODE_PARAMS.nblockDimX(address(), value); return this; }
-        /** Sets the specified value to the {@code blockDimY} field. */
+        /** Sets the specified value to the {@link CUDA_KERNEL_NODE_PARAMS#blockDimY} field. */
         public CUDA_KERNEL_NODE_PARAMS.Buffer blockDimY(@NativeType("unsigned int") int value) { CUDA_KERNEL_NODE_PARAMS.nblockDimY(address(), value); return this; }
-        /** Sets the specified value to the {@code blockDimZ} field. */
+        /** Sets the specified value to the {@link CUDA_KERNEL_NODE_PARAMS#blockDimZ} field. */
         public CUDA_KERNEL_NODE_PARAMS.Buffer blockDimZ(@NativeType("unsigned int") int value) { CUDA_KERNEL_NODE_PARAMS.nblockDimZ(address(), value); return this; }
-        /** Sets the specified value to the {@code sharedMemBytes} field. */
+        /** Sets the specified value to the {@link CUDA_KERNEL_NODE_PARAMS#sharedMemBytes} field. */
         public CUDA_KERNEL_NODE_PARAMS.Buffer sharedMemBytes(@NativeType("unsigned int") int value) { CUDA_KERNEL_NODE_PARAMS.nsharedMemBytes(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code kernelParams} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link CUDA_KERNEL_NODE_PARAMS#kernelParams} field. */
         public CUDA_KERNEL_NODE_PARAMS.Buffer kernelParams(@NativeType("void **") PointerBuffer value) { CUDA_KERNEL_NODE_PARAMS.nkernelParams(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code extra} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link CUDA_KERNEL_NODE_PARAMS#extra} field. */
         public CUDA_KERNEL_NODE_PARAMS.Buffer extra(@NativeType("void **") PointerBuffer value) { CUDA_KERNEL_NODE_PARAMS.nextra(address(), value); return this; }
 
     }

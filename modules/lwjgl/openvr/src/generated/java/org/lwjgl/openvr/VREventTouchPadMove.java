@@ -17,24 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
  * When in mouse input mode you can receive data from the touchpad, these events are only sent if the users finger is on the touchpad (or just released from
  * it). These events are sent to overlays with the {@link VR#VROverlayFlags_SendVRTouchpadEvents} flag set.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code bFingerDown} &ndash; true if the users finger is detected on the touch pad</li>
- * <li>{@code flSecondsFingerDown} &ndash; how long the finger has been down in seconds</li>
- * <li>{@code fValueXFirst} &ndash; these values indicate the starting finger position (so you can do some basic swipe stuff)</li>
- * <li>{@code fValueXRaw} &ndash; this is the raw sampled coordinate without deadzoning</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VREvent_TouchPadMove_t {
- *     bool bFingerDown;
- *     float flSecondsFingerDown;
- *     float fValueXFirst;
+ *     bool {@link #bFingerDown};
+ *     float {@link #flSecondsFingerDown};
+ *     float {@link #fValueXFirst};
  *     float fValueYFirst;
- *     float fValueXRaw;
+ *     float {@link #fValueXRaw};
  *     float fValueYRaw;
  * }</code></pre>
  */
@@ -90,18 +81,18 @@ public class VREventTouchPadMove extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code bFingerDown} field. */
+    /** true if the users finger is detected on the touch pad */
     @NativeType("bool")
     public boolean bFingerDown() { return nbFingerDown(address()); }
-    /** Returns the value of the {@code flSecondsFingerDown} field. */
+    /** how long the finger has been down in seconds */
     public float flSecondsFingerDown() { return nflSecondsFingerDown(address()); }
-    /** Returns the value of the {@code fValueXFirst} field. */
+    /** these values indicate the starting finger position (so you can do some basic swipe stuff) */
     public float fValueXFirst() { return nfValueXFirst(address()); }
-    /** Returns the value of the {@code fValueYFirst} field. */
+    /** @return the value of the {@code fValueYFirst} field. */
     public float fValueYFirst() { return nfValueYFirst(address()); }
-    /** Returns the value of the {@code fValueXRaw} field. */
+    /** this is the raw sampled coordinate without deadzoning */
     public float fValueXRaw() { return nfValueXRaw(address()); }
-    /** Returns the value of the {@code fValueYRaw} field. */
+    /** @return the value of the {@code fValueYRaw} field. */
     public float fValueYRaw() { return nfValueYRaw(address()); }
 
     // -----------------------------------
@@ -186,18 +177,18 @@ public class VREventTouchPadMove extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code bFingerDown} field. */
+        /** @return the value of the {@link VREventTouchPadMove#bFingerDown} field. */
         @NativeType("bool")
         public boolean bFingerDown() { return VREventTouchPadMove.nbFingerDown(address()); }
-        /** Returns the value of the {@code flSecondsFingerDown} field. */
+        /** @return the value of the {@link VREventTouchPadMove#flSecondsFingerDown} field. */
         public float flSecondsFingerDown() { return VREventTouchPadMove.nflSecondsFingerDown(address()); }
-        /** Returns the value of the {@code fValueXFirst} field. */
+        /** @return the value of the {@link VREventTouchPadMove#fValueXFirst} field. */
         public float fValueXFirst() { return VREventTouchPadMove.nfValueXFirst(address()); }
-        /** Returns the value of the {@code fValueYFirst} field. */
+        /** @return the value of the {@code fValueYFirst} field. */
         public float fValueYFirst() { return VREventTouchPadMove.nfValueYFirst(address()); }
-        /** Returns the value of the {@code fValueXRaw} field. */
+        /** @return the value of the {@link VREventTouchPadMove#fValueXRaw} field. */
         public float fValueXRaw() { return VREventTouchPadMove.nfValueXRaw(address()); }
-        /** Returns the value of the {@code fValueYRaw} field. */
+        /** @return the value of the {@code fValueYRaw} field. */
         public float fValueYRaw() { return VREventTouchPadMove.nfValueYRaw(address()); }
 
     }

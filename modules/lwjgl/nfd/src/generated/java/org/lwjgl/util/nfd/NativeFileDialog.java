@@ -62,6 +62,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NativeFileDialog {
 
+    static { LibNFD.initialize(); }
+
     /**
      * Result values.
      * 
@@ -77,8 +79,6 @@ public class NativeFileDialog {
         NFD_ERROR  = 0,
         NFD_OKAY   = 1,
         NFD_CANCEL = 2;
-
-    static { LibNFD.initialize(); }
 
     protected NativeFileDialog() {
         throw new UnsupportedOperationException();

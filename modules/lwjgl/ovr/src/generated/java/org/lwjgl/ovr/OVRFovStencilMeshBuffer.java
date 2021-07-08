@@ -18,27 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Contains the data for the fov-stencil mesh. Parts of the struct are filled by the caller while some parts are filled by the SDK.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code AllocVertexCount} &ndash; to be filled in by caller of {@link OVR#ovr_GetFovStencil GetFovStencil}</li>
- * <li>{@code UsedVertexCount} &ndash; to be filled in by SDK and returned to caller</li>
- * <li>{@code VertexBuffer} &ndash; to be allocated by caller and filled in by SDK</li>
- * <li>{@code AllocIndexCount} &ndash; to be filled in by caller of {@link OVR#ovr_GetFovStencil GetFovStencil}</li>
- * <li>{@code UsedIndexCount} &ndash; to be filled in by SDK and returned to caller</li>
- * <li>{@code IndexBuffer} &ndash; to be allocated by caller and filled in by SDK</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrFovStencilMeshBuffer {
- *     int AllocVertexCount;
- *     int UsedVertexCount;
- *     {@link OVRVector2f ovrVector2f} * VertexBuffer;
- *     int AllocIndexCount;
- *     int UsedIndexCount;
- *     uint16_t * IndexBuffer;
+ *     int {@link #AllocVertexCount};
+ *     int {@link #UsedVertexCount};
+ *     {@link OVRVector2f ovrVector2f} * {@link #VertexBuffer};
+ *     int {@link #AllocIndexCount};
+ *     int {@link #UsedIndexCount};
+ *     uint16_t * {@link #IndexBuffer};
  * }</code></pre>
  */
 @NativeType("struct ovrFovStencilMeshBuffer")
@@ -93,34 +82,34 @@ public class OVRFovStencilMeshBuffer extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code AllocVertexCount} field. */
+    /** to be filled in by caller of {@link OVR#ovr_GetFovStencil GetFovStencil} */
     public int AllocVertexCount() { return nAllocVertexCount(address()); }
-    /** Returns the value of the {@code UsedVertexCount} field. */
+    /** to be filled in by SDK and returned to caller */
     public int UsedVertexCount() { return nUsedVertexCount(address()); }
-    /** Returns a {@link OVRVector2f.Buffer} view of the struct array pointed to by the {@code VertexBuffer} field. */
+    /** to be allocated by caller and filled in by SDK */
     @Nullable
     @NativeType("ovrVector2f *")
     public OVRVector2f.Buffer VertexBuffer() { return nVertexBuffer(address()); }
-    /** Returns the value of the {@code AllocIndexCount} field. */
+    /** to be filled in by caller of {@link OVR#ovr_GetFovStencil GetFovStencil} */
     public int AllocIndexCount() { return nAllocIndexCount(address()); }
-    /** Returns the value of the {@code UsedIndexCount} field. */
+    /** to be filled in by SDK and returned to caller */
     public int UsedIndexCount() { return nUsedIndexCount(address()); }
-    /** Returns a {@link ShortBuffer} view of the data pointed to by the {@code IndexBuffer} field. */
+    /** to be allocated by caller and filled in by SDK */
     @Nullable
     @NativeType("uint16_t *")
     public ShortBuffer IndexBuffer() { return nIndexBuffer(address()); }
 
-    /** Sets the specified value to the {@code AllocVertexCount} field. */
+    /** Sets the specified value to the {@link #AllocVertexCount} field. */
     public OVRFovStencilMeshBuffer AllocVertexCount(int value) { nAllocVertexCount(address(), value); return this; }
-    /** Sets the specified value to the {@code UsedVertexCount} field. */
+    /** Sets the specified value to the {@link #UsedVertexCount} field. */
     public OVRFovStencilMeshBuffer UsedVertexCount(int value) { nUsedVertexCount(address(), value); return this; }
-    /** Sets the address of the specified {@link OVRVector2f.Buffer} to the {@code VertexBuffer} field. */
+    /** Sets the address of the specified {@link OVRVector2f.Buffer} to the {@link #VertexBuffer} field. */
     public OVRFovStencilMeshBuffer VertexBuffer(@Nullable @NativeType("ovrVector2f *") OVRVector2f.Buffer value) { nVertexBuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code AllocIndexCount} field. */
+    /** Sets the specified value to the {@link #AllocIndexCount} field. */
     public OVRFovStencilMeshBuffer AllocIndexCount(int value) { nAllocIndexCount(address(), value); return this; }
-    /** Sets the specified value to the {@code UsedIndexCount} field. */
+    /** Sets the specified value to the {@link #UsedIndexCount} field. */
     public OVRFovStencilMeshBuffer UsedIndexCount(int value) { nUsedIndexCount(address(), value); return this; }
-    /** Sets the address of the specified {@link ShortBuffer} to the {@code IndexBuffer} field. */
+    /** Sets the address of the specified {@link ShortBuffer} to the {@link #IndexBuffer} field. */
     public OVRFovStencilMeshBuffer IndexBuffer(@Nullable @NativeType("uint16_t *") ShortBuffer value) { nIndexBuffer(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -361,34 +350,34 @@ public class OVRFovStencilMeshBuffer extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code AllocVertexCount} field. */
+        /** @return the value of the {@link OVRFovStencilMeshBuffer#AllocVertexCount} field. */
         public int AllocVertexCount() { return OVRFovStencilMeshBuffer.nAllocVertexCount(address()); }
-        /** Returns the value of the {@code UsedVertexCount} field. */
+        /** @return the value of the {@link OVRFovStencilMeshBuffer#UsedVertexCount} field. */
         public int UsedVertexCount() { return OVRFovStencilMeshBuffer.nUsedVertexCount(address()); }
-        /** Returns a {@link OVRVector2f.Buffer} view of the struct array pointed to by the {@code VertexBuffer} field. */
+        /** @return a {@link OVRVector2f.Buffer} view of the struct array pointed to by the {@link OVRFovStencilMeshBuffer#VertexBuffer} field. */
         @Nullable
         @NativeType("ovrVector2f *")
         public OVRVector2f.Buffer VertexBuffer() { return OVRFovStencilMeshBuffer.nVertexBuffer(address()); }
-        /** Returns the value of the {@code AllocIndexCount} field. */
+        /** @return the value of the {@link OVRFovStencilMeshBuffer#AllocIndexCount} field. */
         public int AllocIndexCount() { return OVRFovStencilMeshBuffer.nAllocIndexCount(address()); }
-        /** Returns the value of the {@code UsedIndexCount} field. */
+        /** @return the value of the {@link OVRFovStencilMeshBuffer#UsedIndexCount} field. */
         public int UsedIndexCount() { return OVRFovStencilMeshBuffer.nUsedIndexCount(address()); }
-        /** Returns a {@link ShortBuffer} view of the data pointed to by the {@code IndexBuffer} field. */
+        /** @return a {@link ShortBuffer} view of the data pointed to by the {@link OVRFovStencilMeshBuffer#IndexBuffer} field. */
         @Nullable
         @NativeType("uint16_t *")
         public ShortBuffer IndexBuffer() { return OVRFovStencilMeshBuffer.nIndexBuffer(address()); }
 
-        /** Sets the specified value to the {@code AllocVertexCount} field. */
+        /** Sets the specified value to the {@link OVRFovStencilMeshBuffer#AllocVertexCount} field. */
         public OVRFovStencilMeshBuffer.Buffer AllocVertexCount(int value) { OVRFovStencilMeshBuffer.nAllocVertexCount(address(), value); return this; }
-        /** Sets the specified value to the {@code UsedVertexCount} field. */
+        /** Sets the specified value to the {@link OVRFovStencilMeshBuffer#UsedVertexCount} field. */
         public OVRFovStencilMeshBuffer.Buffer UsedVertexCount(int value) { OVRFovStencilMeshBuffer.nUsedVertexCount(address(), value); return this; }
-        /** Sets the address of the specified {@link OVRVector2f.Buffer} to the {@code VertexBuffer} field. */
+        /** Sets the address of the specified {@link OVRVector2f.Buffer} to the {@link OVRFovStencilMeshBuffer#VertexBuffer} field. */
         public OVRFovStencilMeshBuffer.Buffer VertexBuffer(@Nullable @NativeType("ovrVector2f *") OVRVector2f.Buffer value) { OVRFovStencilMeshBuffer.nVertexBuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code AllocIndexCount} field. */
+        /** Sets the specified value to the {@link OVRFovStencilMeshBuffer#AllocIndexCount} field. */
         public OVRFovStencilMeshBuffer.Buffer AllocIndexCount(int value) { OVRFovStencilMeshBuffer.nAllocIndexCount(address(), value); return this; }
-        /** Sets the specified value to the {@code UsedIndexCount} field. */
+        /** Sets the specified value to the {@link OVRFovStencilMeshBuffer#UsedIndexCount} field. */
         public OVRFovStencilMeshBuffer.Buffer UsedIndexCount(int value) { OVRFovStencilMeshBuffer.nUsedIndexCount(address(), value); return this; }
-        /** Sets the address of the specified {@link ShortBuffer} to the {@code IndexBuffer} field. */
+        /** Sets the address of the specified {@link ShortBuffer} to the {@link OVRFovStencilMeshBuffer#IndexBuffer} field. */
         public OVRFovStencilMeshBuffer.Buffer IndexBuffer(@Nullable @NativeType("uint16_t *") ShortBuffer value) { OVRFovStencilMeshBuffer.nIndexBuffer(address(), value); return this; }
 
     }

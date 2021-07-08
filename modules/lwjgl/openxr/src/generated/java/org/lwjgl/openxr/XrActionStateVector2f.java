@@ -79,21 +79,21 @@ public class XrActionStateVector2f extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link XrVector2f} view of the {@code currentState} field. */
+    /** @return a {@link XrVector2f} view of the {@code currentState} field. */
     public XrVector2f currentState() { return ncurrentState(address()); }
-    /** Returns the value of the {@code changedSinceLastSync} field. */
+    /** @return the value of the {@code changedSinceLastSync} field. */
     @NativeType("XrBool32")
     public boolean changedSinceLastSync() { return nchangedSinceLastSync(address()) != 0; }
-    /** Returns the value of the {@code lastChangeTime} field. */
+    /** @return the value of the {@code lastChangeTime} field. */
     @NativeType("XrTime")
     public long lastChangeTime() { return nlastChangeTime(address()); }
-    /** Returns the value of the {@code isActive} field. */
+    /** @return the value of the {@code isActive} field. */
     @NativeType("XrBool32")
     public boolean isActive() { return nisActive(address()) != 0; }
 
@@ -350,21 +350,21 @@ public class XrActionStateVector2f extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActionStateVector2f.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrActionStateVector2f.nnext(address()); }
-        /** Returns a {@link XrVector2f} view of the {@code currentState} field. */
+        /** @return a {@link XrVector2f} view of the {@code currentState} field. */
         public XrVector2f currentState() { return XrActionStateVector2f.ncurrentState(address()); }
-        /** Returns the value of the {@code changedSinceLastSync} field. */
+        /** @return the value of the {@code changedSinceLastSync} field. */
         @NativeType("XrBool32")
         public boolean changedSinceLastSync() { return XrActionStateVector2f.nchangedSinceLastSync(address()) != 0; }
-        /** Returns the value of the {@code lastChangeTime} field. */
+        /** @return the value of the {@code lastChangeTime} field. */
         @NativeType("XrTime")
         public long lastChangeTime() { return XrActionStateVector2f.nlastChangeTime(address()); }
-        /** Returns the value of the {@code isActive} field. */
+        /** @return the value of the {@code isActive} field. */
         @NativeType("XrBool32")
         public boolean isActive() { return XrActionStateVector2f.nisActive(address()) != 0; }
 

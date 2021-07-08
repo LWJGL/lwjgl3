@@ -23,7 +23,9 @@ import org.lwjgl.system.windows.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If this structure is not present, or if {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for "{@code Synchronization Object Security and Access Rights}"<sup>1</sup>. Further, if the structure is not present, the access rights used depend on the handle type.</p>
+ * <p>If {@link VkExportMemoryAllocateInfo} is not present in the same {@code pNext} chain, this structure is ignored.</p>
+ * 
+ * <p>If {@link VkExportMemoryAllocateInfo} is present in the {@code pNext} chain of {@link VkMemoryAllocateInfo} with a Windows {@code handleType}, but either {@link VkExportMemoryWin32HandleInfoKHR} is not present in the {@code pNext} chain, or if it is but {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for "{@code Synchronization Object Security and Access Rights}"<sup>1</sup>. Further, if the structure is not present, the access rights used depend on the handle type.</p>
  * 
  * <p>For handles of the following types:</p>
  * 
@@ -47,7 +49,7 @@ import org.lwjgl.system.windows.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} does not include {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT}, {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT}, {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT}, or {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT}, a {@link VkExportMemoryWin32HandleInfoKHR} structure <b>must</b> not be included in the {@code pNext} chain of {@link VkMemoryAllocateInfo}.</li>
+ * <li>If {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} does not include {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT}, {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT}, {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT}, or {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT}, a {@link VkExportMemoryWin32HandleInfoKHR} structure <b>must</b> not be included in the {@code pNext} chain of {@link VkMemoryAllocateInfo}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -57,25 +59,15 @@ import org.lwjgl.system.windows.*;
  * <li>If {@code pAttributes} is not {@code NULL}, {@code pAttributes} <b>must</b> be a valid pointer to a valid {@code SECURITY_ATTRIBUTES} value</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code pAttributes} &ndash; a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle.</li>
- * <li>{@code dwAccess} &ndash; a {@code DWORD} specifying access rights of the handle.</li>
- * <li>{@code name} &ndash; a null-terminated UTF-16 string to associate with the underlying resource referenced by NT handles exported from the created memory.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkExportMemoryWin32HandleInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     {@link SECURITY_ATTRIBUTES SECURITY_ATTRIBUTES} const * pAttributes;
- *     DWORD dwAccess;
- *     LPCWSTR name;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     {@link SECURITY_ATTRIBUTES SECURITY_ATTRIBUTES} const * {@link #pAttributes};
+ *     DWORD {@link #dwAccess};
+ *     LPCWSTR {@link #name};
  * }</code></pre>
  */
 public class VkExportMemoryWin32HandleInfoKHR extends Struct implements NativeResource {
@@ -126,35 +118,35 @@ public class VkExportMemoryWin32HandleInfoKHR extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link SECURITY_ATTRIBUTES} view of the struct pointed to by the {@code pAttributes} field. */
+    /** a pointer to a Windows {@code SECURITY_ATTRIBUTES} structure specifying security attributes of the handle. */
     @Nullable
     @NativeType("SECURITY_ATTRIBUTES const *")
     public SECURITY_ATTRIBUTES pAttributes() { return npAttributes(address()); }
-    /** Returns the value of the {@code dwAccess} field. */
+    /** a {@code DWORD} specifying access rights of the handle. */
     @NativeType("DWORD")
     public int dwAccess() { return ndwAccess(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
+    /** a null-terminated UTF-16 string to associate with the payload referenced by NT handles exported from the created memory. */
     @NativeType("LPCWSTR")
     public ByteBuffer name() { return nname(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code name} field. */
+    /** a null-terminated UTF-16 string to associate with the payload referenced by NT handles exported from the created memory. */
     @NativeType("LPCWSTR")
     public String nameString() { return nnameString(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkExportMemoryWin32HandleInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkExportMemoryWin32HandleInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link SECURITY_ATTRIBUTES} to the {@code pAttributes} field. */
+    /** Sets the address of the specified {@link SECURITY_ATTRIBUTES} to the {@link #pAttributes} field. */
     public VkExportMemoryWin32HandleInfoKHR pAttributes(@Nullable @NativeType("SECURITY_ATTRIBUTES const *") SECURITY_ATTRIBUTES value) { npAttributes(address(), value); return this; }
-    /** Sets the specified value to the {@code dwAccess} field. */
+    /** Sets the specified value to the {@link #dwAccess} field. */
     public VkExportMemoryWin32HandleInfoKHR dwAccess(@NativeType("DWORD") int value) { ndwAccess(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@code name} field. */
+    /** Sets the address of the specified encoded string to the {@link #name} field. */
     public VkExportMemoryWin32HandleInfoKHR name(@NativeType("LPCWSTR") ByteBuffer value) { nname(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -419,35 +411,35 @@ public class VkExportMemoryWin32HandleInfoKHR extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkExportMemoryWin32HandleInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkExportMemoryWin32HandleInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkExportMemoryWin32HandleInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkExportMemoryWin32HandleInfoKHR.npNext(address()); }
-        /** Returns a {@link SECURITY_ATTRIBUTES} view of the struct pointed to by the {@code pAttributes} field. */
+        /** @return a {@link SECURITY_ATTRIBUTES} view of the struct pointed to by the {@link VkExportMemoryWin32HandleInfoKHR#pAttributes} field. */
         @Nullable
         @NativeType("SECURITY_ATTRIBUTES const *")
         public SECURITY_ATTRIBUTES pAttributes() { return VkExportMemoryWin32HandleInfoKHR.npAttributes(address()); }
-        /** Returns the value of the {@code dwAccess} field. */
+        /** @return the value of the {@link VkExportMemoryWin32HandleInfoKHR#dwAccess} field. */
         @NativeType("DWORD")
         public int dwAccess() { return VkExportMemoryWin32HandleInfoKHR.ndwAccess(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkExportMemoryWin32HandleInfoKHR#name} field. */
         @NativeType("LPCWSTR")
         public ByteBuffer name() { return VkExportMemoryWin32HandleInfoKHR.nname(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code name} field. */
+        /** @return the null-terminated string pointed to by the {@link VkExportMemoryWin32HandleInfoKHR#name} field. */
         @NativeType("LPCWSTR")
         public String nameString() { return VkExportMemoryWin32HandleInfoKHR.nnameString(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkExportMemoryWin32HandleInfoKHR#sType} field. */
         public VkExportMemoryWin32HandleInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkExportMemoryWin32HandleInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkExportMemoryWin32HandleInfoKHR#pNext} field. */
         public VkExportMemoryWin32HandleInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkExportMemoryWin32HandleInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link SECURITY_ATTRIBUTES} to the {@code pAttributes} field. */
+        /** Sets the address of the specified {@link SECURITY_ATTRIBUTES} to the {@link VkExportMemoryWin32HandleInfoKHR#pAttributes} field. */
         public VkExportMemoryWin32HandleInfoKHR.Buffer pAttributes(@Nullable @NativeType("SECURITY_ATTRIBUTES const *") SECURITY_ATTRIBUTES value) { VkExportMemoryWin32HandleInfoKHR.npAttributes(address(), value); return this; }
-        /** Sets the specified value to the {@code dwAccess} field. */
+        /** Sets the specified value to the {@link VkExportMemoryWin32HandleInfoKHR#dwAccess} field. */
         public VkExportMemoryWin32HandleInfoKHR.Buffer dwAccess(@NativeType("DWORD") int value) { VkExportMemoryWin32HandleInfoKHR.ndwAccess(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@code name} field. */
+        /** Sets the address of the specified encoded string to the {@link VkExportMemoryWin32HandleInfoKHR#name} field. */
         public VkExportMemoryWin32HandleInfoKHR.Buffer name(@NativeType("LPCWSTR") ByteBuffer value) { VkExportMemoryWin32HandleInfoKHR.nname(address(), value); return this; }
 
     }

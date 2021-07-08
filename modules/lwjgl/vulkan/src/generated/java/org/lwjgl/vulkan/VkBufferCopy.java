@@ -28,21 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK10#vkCmdCopyBuffer CmdCopyBuffer}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code srcOffset} &ndash; the starting offset in bytes from the start of {@code srcBuffer}.</li>
- * <li>{@code dstOffset} &ndash; the starting offset in bytes from the start of {@code dstBuffer}.</li>
- * <li>{@code size} &ndash; the number of bytes to copy.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBufferCopy {
- *     VkDeviceSize srcOffset;
- *     VkDeviceSize dstOffset;
- *     VkDeviceSize size;
+ *     VkDeviceSize {@link #srcOffset};
+ *     VkDeviceSize {@link #dstOffset};
+ *     VkDeviceSize {@link #size};
  * }</code></pre>
  */
 public class VkBufferCopy extends Struct implements NativeResource {
@@ -87,21 +79,21 @@ public class VkBufferCopy extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code srcOffset} field. */
+    /** the starting offset in bytes from the start of {@code srcBuffer}. */
     @NativeType("VkDeviceSize")
     public long srcOffset() { return nsrcOffset(address()); }
-    /** Returns the value of the {@code dstOffset} field. */
+    /** the starting offset in bytes from the start of {@code dstBuffer}. */
     @NativeType("VkDeviceSize")
     public long dstOffset() { return ndstOffset(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** the number of bytes to copy. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
 
-    /** Sets the specified value to the {@code srcOffset} field. */
+    /** Sets the specified value to the {@link #srcOffset} field. */
     public VkBufferCopy srcOffset(@NativeType("VkDeviceSize") long value) { nsrcOffset(address(), value); return this; }
-    /** Sets the specified value to the {@code dstOffset} field. */
+    /** Sets the specified value to the {@link #dstOffset} field. */
     public VkBufferCopy dstOffset(@NativeType("VkDeviceSize") long value) { ndstOffset(address(), value); return this; }
-    /** Sets the specified value to the {@code size} field. */
+    /** Sets the specified value to the {@link #size} field. */
     public VkBufferCopy size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -324,21 +316,21 @@ public class VkBufferCopy extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code srcOffset} field. */
+        /** @return the value of the {@link VkBufferCopy#srcOffset} field. */
         @NativeType("VkDeviceSize")
         public long srcOffset() { return VkBufferCopy.nsrcOffset(address()); }
-        /** Returns the value of the {@code dstOffset} field. */
+        /** @return the value of the {@link VkBufferCopy#dstOffset} field. */
         @NativeType("VkDeviceSize")
         public long dstOffset() { return VkBufferCopy.ndstOffset(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link VkBufferCopy#size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkBufferCopy.nsize(address()); }
 
-        /** Sets the specified value to the {@code srcOffset} field. */
+        /** Sets the specified value to the {@link VkBufferCopy#srcOffset} field. */
         public VkBufferCopy.Buffer srcOffset(@NativeType("VkDeviceSize") long value) { VkBufferCopy.nsrcOffset(address(), value); return this; }
-        /** Sets the specified value to the {@code dstOffset} field. */
+        /** Sets the specified value to the {@link VkBufferCopy#dstOffset} field. */
         public VkBufferCopy.Buffer dstOffset(@NativeType("VkDeviceSize") long value) { VkBufferCopy.ndstOffset(address(), value); return this; }
-        /** Sets the specified value to the {@code size} field. */
+        /** Sets the specified value to the {@link VkBufferCopy#size} field. */
         public VkBufferCopy.Buffer size(@NativeType("VkDeviceSize") long value) { VkBufferCopy.nsize(address(), value); return this; }
 
     }

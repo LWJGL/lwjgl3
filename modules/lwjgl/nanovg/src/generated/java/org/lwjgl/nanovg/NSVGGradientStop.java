@@ -62,10 +62,10 @@ public class NSVGGradientStop extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code color} field. */
+    /** @return the value of the {@code color} field. */
     @NativeType("unsigned int")
     public int color() { return ncolor(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /** @return the value of the {@code offset} field. */
     public float offset() { return noffset(address()); }
 
     // -----------------------------------
@@ -142,10 +142,10 @@ public class NSVGGradientStop extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code color} field. */
+        /** @return the value of the {@code color} field. */
         @NativeType("unsigned int")
         public int color() { return NSVGGradientStop.ncolor(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@code offset} field. */
         public float offset() { return NSVGGradientStop.noffset(address()); }
 
     }

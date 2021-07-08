@@ -21,30 +21,22 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code pixelX} <b>must</b> be less than the width (in pixels) of the fragment.</li>
- * <li>{@code pixelY} <b>must</b> be less than the height (in pixels) of the fragment.</li>
- * <li>{@code sample} <b>must</b> be less than the number of coverage samples in each pixel belonging to the fragment.</li>
+ * <li>{@code pixelX} <b>must</b> be less than the width (in pixels) of the fragment</li>
+ * <li>{@code pixelY} <b>must</b> be less than the height (in pixels) of the fragment</li>
+ * <li>{@code sample} <b>must</b> be less than the number of coverage samples in each pixel belonging to the fragment</li>
  * </ul>
  * 
  * <h5>See Also</h5>
  * 
  * <p>{@link VkCoarseSampleOrderCustomNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code pixelX} &ndash; added to the x coordinate of the upper-leftmost pixel of each fragment to identify the pixel containing the coverage sample.</li>
- * <li>{@code pixelY} &ndash; added to the y coordinate of the upper-leftmost pixel of each fragment to identify the pixel containing the coverage sample.</li>
- * <li>{@code sample} &ndash; the number of the coverage sample in the pixel identified by {@code pixelX} and {@code pixelY}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkCoarseSampleLocationNV {
- *     uint32_t pixelX;
- *     uint32_t pixelY;
- *     uint32_t sample;
+ *     uint32_t {@link #pixelX};
+ *     uint32_t {@link #pixelY};
+ *     uint32_t {@link #sample};
  * }</code></pre>
  */
 public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
@@ -89,21 +81,21 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code pixelX} field. */
+    /** added to the x coordinate of the upper-leftmost pixel of each fragment to identify the pixel containing the coverage sample. */
     @NativeType("uint32_t")
     public int pixelX() { return npixelX(address()); }
-    /** Returns the value of the {@code pixelY} field. */
+    /** added to the y coordinate of the upper-leftmost pixel of each fragment to identify the pixel containing the coverage sample. */
     @NativeType("uint32_t")
     public int pixelY() { return npixelY(address()); }
-    /** Returns the value of the {@code sample} field. */
+    /** the number of the coverage sample in the pixel identified by {@code pixelX} and {@code pixelY}. */
     @NativeType("uint32_t")
     public int sample() { return nsample(address()); }
 
-    /** Sets the specified value to the {@code pixelX} field. */
+    /** Sets the specified value to the {@link #pixelX} field. */
     public VkCoarseSampleLocationNV pixelX(@NativeType("uint32_t") int value) { npixelX(address(), value); return this; }
-    /** Sets the specified value to the {@code pixelY} field. */
+    /** Sets the specified value to the {@link #pixelY} field. */
     public VkCoarseSampleLocationNV pixelY(@NativeType("uint32_t") int value) { npixelY(address(), value); return this; }
-    /** Sets the specified value to the {@code sample} field. */
+    /** Sets the specified value to the {@link #sample} field. */
     public VkCoarseSampleLocationNV sample(@NativeType("uint32_t") int value) { nsample(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -326,21 +318,21 @@ public class VkCoarseSampleLocationNV extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code pixelX} field. */
+        /** @return the value of the {@link VkCoarseSampleLocationNV#pixelX} field. */
         @NativeType("uint32_t")
         public int pixelX() { return VkCoarseSampleLocationNV.npixelX(address()); }
-        /** Returns the value of the {@code pixelY} field. */
+        /** @return the value of the {@link VkCoarseSampleLocationNV#pixelY} field. */
         @NativeType("uint32_t")
         public int pixelY() { return VkCoarseSampleLocationNV.npixelY(address()); }
-        /** Returns the value of the {@code sample} field. */
+        /** @return the value of the {@link VkCoarseSampleLocationNV#sample} field. */
         @NativeType("uint32_t")
         public int sample() { return VkCoarseSampleLocationNV.nsample(address()); }
 
-        /** Sets the specified value to the {@code pixelX} field. */
+        /** Sets the specified value to the {@link VkCoarseSampleLocationNV#pixelX} field. */
         public VkCoarseSampleLocationNV.Buffer pixelX(@NativeType("uint32_t") int value) { VkCoarseSampleLocationNV.npixelX(address(), value); return this; }
-        /** Sets the specified value to the {@code pixelY} field. */
+        /** Sets the specified value to the {@link VkCoarseSampleLocationNV#pixelY} field. */
         public VkCoarseSampleLocationNV.Buffer pixelY(@NativeType("uint32_t") int value) { VkCoarseSampleLocationNV.npixelY(address(), value); return this; }
-        /** Sets the specified value to the {@code sample} field. */
+        /** Sets the specified value to the {@link VkCoarseSampleLocationNV#sample} field. */
         public VkCoarseSampleLocationNV.Buffer sample(@NativeType("uint32_t") int value) { VkCoarseSampleLocationNV.nsample(address(), value); return this; }
 
     }

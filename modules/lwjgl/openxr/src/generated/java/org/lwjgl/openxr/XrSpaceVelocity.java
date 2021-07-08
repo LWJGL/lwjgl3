@@ -75,18 +75,18 @@ public class XrSpaceVelocity extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code velocityFlags} field. */
+    /** @return the value of the {@code velocityFlags} field. */
     @NativeType("XrSpaceVelocityFlags")
     public long velocityFlags() { return nvelocityFlags(address()); }
-    /** Returns a {@link XrVector3f} view of the {@code linearVelocity} field. */
+    /** @return a {@link XrVector3f} view of the {@code linearVelocity} field. */
     public XrVector3f linearVelocity() { return nlinearVelocity(address()); }
-    /** Returns a {@link XrVector3f} view of the {@code angularVelocity} field. */
+    /** @return a {@link XrVector3f} view of the {@code angularVelocity} field. */
     public XrVector3f angularVelocity() { return nangularVelocity(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -336,18 +336,18 @@ public class XrSpaceVelocity extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceVelocity.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSpaceVelocity.nnext(address()); }
-        /** Returns the value of the {@code velocityFlags} field. */
+        /** @return the value of the {@code velocityFlags} field. */
         @NativeType("XrSpaceVelocityFlags")
         public long velocityFlags() { return XrSpaceVelocity.nvelocityFlags(address()); }
-        /** Returns a {@link XrVector3f} view of the {@code linearVelocity} field. */
+        /** @return a {@link XrVector3f} view of the {@code linearVelocity} field. */
         public XrVector3f linearVelocity() { return XrSpaceVelocity.nlinearVelocity(address()); }
-        /** Returns a {@link XrVector3f} view of the {@code angularVelocity} field. */
+        /** @return a {@link XrVector3f} view of the {@code angularVelocity} field. */
         public XrVector3f angularVelocity() { return XrSpaceVelocity.nangularVelocity(address()); }
 
         /** Sets the specified value to the {@code type} field. */

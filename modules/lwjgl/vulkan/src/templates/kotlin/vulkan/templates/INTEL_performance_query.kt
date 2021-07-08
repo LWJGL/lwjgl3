@@ -15,14 +15,14 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 
         Such a library is available at : https://github.com/intel/metrics-discovery
 
-        Performance analysis tools such as GPA (https://software.intel.com/en-us/gpa) make use of this extension and the metrics-discovery library to present the data in a human readable way.
+        Performance analysis tools such as <a target="_blank" href="https://software.intel.com/content/www/us/en/develop/tools/graphics-performance-analyzers.html">Graphics Performance Analyzers</a> make use of this extension and the metrics-discovery library to present the data in a human readable way.
 
         <h5>Example Code</h5>
         <pre><code>
 ￿// A previously created device
 ￿VkDevice device;
 ￿
-￿// A queue from from device
+￿// A queue derived from the device
 ￿VkQueue queue;
 ￿
 ￿VkInitializePerformanceApiInfoINTEL performanceApiInfoIntel = {
@@ -35,7 +35,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 ￿  device,
 ￿  &amp;performanceApiInfoIntel);
 ￿
-￿VkQueryPoolCreateInfoINTEL queryPoolIntel = {
+￿VkQueryPoolPerformanceQueryCreateInfoINTEL queryPoolIntel = {
 ￿  VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL,
 ￿  NULL,
 ￿  VK_QUERY_POOL_SAMPLING_MODE_MANUAL_INTEL,
@@ -150,6 +150,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 ￿// The data can then be passed back to metrics-discovery from which
 ￿// human readable values can be queried.</code></pre>
 
+        <h5>VK_INTEL_performance_query</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_INTEL_performance_query}</dd>
@@ -161,18 +162,26 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
             <dd>211</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
             </ul></dd>
 
+            <dt><b>Special Use</b></dt>
+            <dd><ul>
+                <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Lionel Landwerlin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_INTEL_performance_query:%20&amp;body=@llandwerlin%20">llandwerlin</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-05-16</dd>
 
@@ -190,7 +199,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
     IntConstant(
         "The extension specification version.",
 
-        "INTEL_PERFORMANCE_QUERY_SPEC_VERSION".."1"
+        "INTEL_PERFORMANCE_QUERY_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -202,6 +211,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
+        "STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL".."1000210000",
         "STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL".."1000210000",
         "STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL".."1000210001",
         "STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL".."1000210002",
@@ -243,7 +253,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
         </ul>
 
         <h5>See Also</h5>
-        ##VkQueryPoolCreateInfoINTEL
+        ##VkQueryPoolPerformanceQueryCreateInfoINTEL
         """,
 
         "QUERY_POOL_SAMPLING_MODE_MANUAL_INTEL".."0"
@@ -385,6 +395,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 
         <h5>Host Synchronization</h5>
         <ul>
+            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
             <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
         </ul>
 
@@ -439,6 +450,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 
         <h5>Host Synchronization</h5>
         <ul>
+            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
             <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
         </ul>
 
@@ -485,7 +497,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code pOverrideInfo} <b>must</b> not be used with a {@code VkPerformanceOverrideTypeINTEL} that is not reported available by {@code vkGetPerformanceParameterINTEL}.</li>
+            <li>{@code pOverrideInfo} <b>must</b> not be used with a {@code VkPerformanceOverrideTypeINTEL} that is not reported available by {@code vkGetPerformanceParameterINTEL}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -498,6 +510,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 
         <h5>Host Synchronization</h5>
         <ul>
+            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
             <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
         </ul>
 
@@ -588,14 +601,19 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code configuration} <b>must</b> not be released before all command buffers submitted while the configuration was set are in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">pending state</a>.</li>
+            <li>{@code configuration} <b>must</b> not be released before all command buffers submitted while the configuration was set are in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">pending state</a></li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code configuration} <b>must</b> be a valid {@code VkPerformanceConfigurationINTEL} handle</li>
-            <li>{@code configuration} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+            <li>If {@code configuration} is not #NULL_HANDLE, {@code configuration} <b>must</b> be a valid {@code VkPerformanceConfigurationINTEL} handle</li>
+            <li>If {@code configuration} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+        </ul>
+
+        <h5>Host Synchronization</h5>
+        <ul>
+            <li>Host access to {@code configuration} <b>must</b> be externally synchronized</li>
         </ul>
 
         <h5>Return Codes</h5>

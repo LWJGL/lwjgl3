@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTBlendOperationAdvanced#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code advancedBlendCoherentOperations} &ndash; specifies whether blending using <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-blend-advanced">advanced blend operations</a> is guaranteed to execute atomically and in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#drawing-primitive-order">primitive order</a>. If this is {@link VK10#VK_TRUE TRUE}, {@link EXTBlendOperationAdvanced#VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT} is treated the same as {@link VK10#VK_ACCESS_COLOR_ATTACHMENT_READ_BIT ACCESS_COLOR_ATTACHMENT_READ_BIT}, and advanced blending needs no additional synchronization over basic blending. If this is {@link VK10#VK_FALSE FALSE}, then memory dependencies are required to guarantee order between two advanced blending operations that occur on the same sample.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 advancedBlendCoherentOperations;
+ *     VkBool32 {@link #advancedBlendCoherentOperations};
  * }</code></pre>
  */
 public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code advancedBlendCoherentOperations} field. */
+    /** specifies whether blending using <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-blend-advanced">advanced blend operations</a> is guaranteed to execute atomically and in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#drawing-primitive-order">primitive order</a>. If this is {@link VK10#VK_TRUE TRUE}, {@link EXTBlendOperationAdvanced#VK_ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT ACCESS_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT} is treated the same as {@link VK10#VK_ACCESS_COLOR_ATTACHMENT_READ_BIT ACCESS_COLOR_ATTACHMENT_READ_BIT}, and advanced blending needs no additional synchronization over basic blending. If this is {@link VK10#VK_FALSE FALSE}, then memory dependencies are required to guarantee order between two advanced blending operations that occur on the same sample. */
     @NativeType("VkBool32")
     public boolean advancedBlendCoherentOperations() { return nadvancedBlendCoherentOperations(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
     public VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code advancedBlendCoherentOperations} field. */
+    /** Sets the specified value to the {@link #advancedBlendCoherentOperations} field. */
     public VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT advancedBlendCoherentOperations(@NativeType("VkBool32") boolean value) { nadvancedBlendCoherentOperations(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code advancedBlendCoherentOperations} field. */
+        /** @return the value of the {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT#advancedBlendCoherentOperations} field. */
         @NativeType("VkBool32")
         public boolean advancedBlendCoherentOperations() { return VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.nadvancedBlendCoherentOperations(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
         public VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code advancedBlendCoherentOperations} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT#advancedBlendCoherentOperations} field. */
         public VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer advancedBlendCoherentOperations(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.nadvancedBlendCoherentOperations(address(), value ? 1 : 0); return this; }
 
     }

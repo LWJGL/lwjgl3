@@ -20,6 +20,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>If a device lost error occurs, the application <b>may</b> then query the implementation for the last markers to cross specific implementation-defined pipeline stages, in order to narrow down which commands were executing at the time and might have caused the failure.</p>
  * 
+ * <h5>VK_NV_device_diagnostic_checkpoints</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_device_diagnostic_checkpoints}</dd>
@@ -38,6 +40,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>Nuno Subtil <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_device_diagnostic_checkpoints:%20&amp;body=@nsubtil%20">nsubtil</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-07-16</dd>
  * <dt><b>Contributors</b></dt>
@@ -101,6 +108,7 @@ public class NVDeviceDiagnosticCheckpoints {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 

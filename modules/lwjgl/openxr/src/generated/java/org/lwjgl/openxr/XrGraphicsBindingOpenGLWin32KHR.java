@@ -74,16 +74,16 @@ public class XrGraphicsBindingOpenGLWin32KHR extends Struct implements NativeRes
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code hDC} field. */
+    /** @return the value of the {@code hDC} field. */
     @NativeType("HDC")
     public long hDC() { return nhDC(address()); }
-    /** Returns the value of the {@code hGLRC} field. */
+    /** @return the value of the {@code hGLRC} field. */
     @NativeType("HGLRC")
     public long hGLRC() { return nhGLRC(address()); }
 
@@ -344,16 +344,16 @@ public class XrGraphicsBindingOpenGLWin32KHR extends Struct implements NativeRes
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGraphicsBindingOpenGLWin32KHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrGraphicsBindingOpenGLWin32KHR.nnext(address()); }
-        /** Returns the value of the {@code hDC} field. */
+        /** @return the value of the {@code hDC} field. */
         @NativeType("HDC")
         public long hDC() { return XrGraphicsBindingOpenGLWin32KHR.nhDC(address()); }
-        /** Returns the value of the {@code hGLRC} field. */
+        /** @return the value of the {@code hGLRC} field. */
         @NativeType("HGLRC")
         public long hGLRC() { return XrGraphicsBindingOpenGLWin32KHR.nhGLRC(address()); }
 

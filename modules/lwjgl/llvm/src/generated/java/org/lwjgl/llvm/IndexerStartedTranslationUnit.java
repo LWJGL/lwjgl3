@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * CXIdxClientContainer (*) (
+ * CXIdxClientContainer (*{@link #invoke}) (
  *     CXClientData client_data,
  *     void *reserved
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class IndexerStartedTranslationUnit extends Callback implements 
     }
 
     protected IndexerStartedTranslationUnit() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     IndexerStartedTranslationUnit(long functionPointer) {

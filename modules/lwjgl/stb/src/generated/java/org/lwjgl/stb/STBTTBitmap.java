@@ -19,23 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Bitmap data.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code w} &ndash; the bitmap width</li>
- * <li>{@code h} &ndash; the bitmap height</li>
- * <li>{@code stride} &ndash; the row stride, in bytes</li>
- * <li>{@code pixels} &ndash; the bitmap data</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct stbtt__bitmap {
- *     int w;
- *     int h;
- *     int stride;
- *     unsigned char * pixels;
+ *     int {@link #w};
+ *     int {@link #h};
+ *     int {@link #stride};
+ *     unsigned char * {@link #pixels};
  * }</code></pre>
  */
 @NativeType("struct stbtt__bitmap")
@@ -84,27 +75,27 @@ public class STBTTBitmap extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code w} field. */
+    /** the bitmap width */
     public int w() { return nw(address()); }
-    /** Returns the value of the {@code h} field. */
+    /** the bitmap height */
     public int h() { return nh(address()); }
-    /** Returns the value of the {@code stride} field. */
+    /** the row stride, in bytes */
     public int stride() { return nstride(address()); }
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code pixels} field.
-     *
      * @param capacity the number of elements in the returned buffer
+     *
+     * @return the bitmap data
      */
     @NativeType("unsigned char *")
     public ByteBuffer pixels(int capacity) { return npixels(address(), capacity); }
 
-    /** Sets the specified value to the {@code w} field. */
+    /** Sets the specified value to the {@link #w} field. */
     public STBTTBitmap w(int value) { nw(address(), value); return this; }
-    /** Sets the specified value to the {@code h} field. */
+    /** Sets the specified value to the {@link #h} field. */
     public STBTTBitmap h(int value) { nh(address(), value); return this; }
-    /** Sets the specified value to the {@code stride} field. */
+    /** Sets the specified value to the {@link #stride} field. */
     public STBTTBitmap stride(int value) { nstride(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code pixels} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pixels} field. */
     public STBTTBitmap pixels(@NativeType("unsigned char *") ByteBuffer value) { npixels(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -354,27 +345,27 @@ public class STBTTBitmap extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code w} field. */
+        /** @return the value of the {@link STBTTBitmap#w} field. */
         public int w() { return STBTTBitmap.nw(address()); }
-        /** Returns the value of the {@code h} field. */
+        /** @return the value of the {@link STBTTBitmap#h} field. */
         public int h() { return STBTTBitmap.nh(address()); }
-        /** Returns the value of the {@code stride} field. */
+        /** @return the value of the {@link STBTTBitmap#stride} field. */
         public int stride() { return STBTTBitmap.nstride(address()); }
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code pixels} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@link STBTTBitmap#pixels} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("unsigned char *")
         public ByteBuffer pixels(int capacity) { return STBTTBitmap.npixels(address(), capacity); }
 
-        /** Sets the specified value to the {@code w} field. */
+        /** Sets the specified value to the {@link STBTTBitmap#w} field. */
         public STBTTBitmap.Buffer w(int value) { STBTTBitmap.nw(address(), value); return this; }
-        /** Sets the specified value to the {@code h} field. */
+        /** Sets the specified value to the {@link STBTTBitmap#h} field. */
         public STBTTBitmap.Buffer h(int value) { STBTTBitmap.nh(address(), value); return this; }
-        /** Sets the specified value to the {@code stride} field. */
+        /** Sets the specified value to the {@link STBTTBitmap#stride} field. */
         public STBTTBitmap.Buffer stride(int value) { STBTTBitmap.nstride(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code pixels} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@link STBTTBitmap#pixels} field. */
         public STBTTBitmap.Buffer pixels(@NativeType("unsigned char *") ByteBuffer value) { STBTTBitmap.npixels(address(), value); return this; }
 
     }

@@ -20,10 +20,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to the GLFW library's X11 native access functions. */
 public class GLFWNativeX11 {
 
-    protected GLFWNativeX11() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
     public static final class Functions {
 
@@ -38,6 +34,10 @@ public class GLFWNativeX11 {
             SetX11SelectionString = apiGetFunctionAddress(GLFW.getLibrary(), "glfwSetX11SelectionString"),
             GetX11SelectionString = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetX11SelectionString");
 
+    }
+
+    protected GLFWNativeX11() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ glfwGetX11Display ] ---

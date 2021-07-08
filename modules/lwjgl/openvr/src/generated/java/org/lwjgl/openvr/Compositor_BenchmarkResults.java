@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Provides compositor benchmark results to the app.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code m_flMegaPixelsPerSecond} &ndash; Measurement of GPU MP/s performed by compositor benchmark</li>
- * <li>{@code m_flHmdRecommendedMegaPixelsPerSecond} &ndash; Recommended default MP/s given the HMD resolution, refresh, and panel mask.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct Compositor_BenchmarkResults {
- *     float m_flMegaPixelsPerSecond;
- *     float m_flHmdRecommendedMegaPixelsPerSecond;
+ *     float {@link #m_flMegaPixelsPerSecond};
+ *     float {@link #m_flHmdRecommendedMegaPixelsPerSecond};
  * }</code></pre>
  */
 public class Compositor_BenchmarkResults extends Struct implements NativeResource {
@@ -72,9 +65,9 @@ public class Compositor_BenchmarkResults extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code m_flMegaPixelsPerSecond} field. */
+    /** Measurement of GPU MP/s performed by compositor benchmark */
     public float m_flMegaPixelsPerSecond() { return nm_flMegaPixelsPerSecond(address()); }
-    /** Returns the value of the {@code m_flHmdRecommendedMegaPixelsPerSecond} field. */
+    /** Recommended default MP/s given the HMD resolution, refresh, and panel mask. */
     public float m_flHmdRecommendedMegaPixelsPerSecond() { return nm_flHmdRecommendedMegaPixelsPerSecond(address()); }
 
     // -----------------------------------
@@ -263,9 +256,9 @@ public class Compositor_BenchmarkResults extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code m_flMegaPixelsPerSecond} field. */
+        /** @return the value of the {@link Compositor_BenchmarkResults#m_flMegaPixelsPerSecond} field. */
         public float m_flMegaPixelsPerSecond() { return Compositor_BenchmarkResults.nm_flMegaPixelsPerSecond(address()); }
-        /** Returns the value of the {@code m_flHmdRecommendedMegaPixelsPerSecond} field. */
+        /** @return the value of the {@link Compositor_BenchmarkResults#m_flHmdRecommendedMegaPixelsPerSecond} field. */
         public float m_flHmdRecommendedMegaPixelsPerSecond() { return Compositor_BenchmarkResults.nm_flHmdRecommendedMegaPixelsPerSecond(address()); }
 
     }

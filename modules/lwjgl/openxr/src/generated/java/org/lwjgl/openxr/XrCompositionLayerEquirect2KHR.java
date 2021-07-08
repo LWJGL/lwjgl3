@@ -100,32 +100,32 @@ public class XrCompositionLayerEquirect2KHR extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code layerFlags} field. */
+    /** @return the value of the {@code layerFlags} field. */
     @NativeType("XrCompositionLayerFlags")
     public long layerFlags() { return nlayerFlags(address()); }
-    /** Returns the value of the {@code space} field. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** Returns the value of the {@code eyeVisibility} field. */
+    /** @return the value of the {@code eyeVisibility} field. */
     @NativeType("XrEyeVisibility")
     public int eyeVisibility() { return neyeVisibility(address()); }
-    /** Returns a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
+    /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
-    /** Returns a {@link XrPosef} view of the {@code pose} field. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** Returns the value of the {@code radius} field. */
+    /** @return the value of the {@code radius} field. */
     public float radius() { return nradius(address()); }
-    /** Returns the value of the {@code centralHorizontalAngle} field. */
+    /** @return the value of the {@code centralHorizontalAngle} field. */
     public float centralHorizontalAngle() { return ncentralHorizontalAngle(address()); }
-    /** Returns the value of the {@code upperVerticalAngle} field. */
+    /** @return the value of the {@code upperVerticalAngle} field. */
     public float upperVerticalAngle() { return nupperVerticalAngle(address()); }
-    /** Returns the value of the {@code lowerVerticalAngle} field. */
+    /** @return the value of the {@code lowerVerticalAngle} field. */
     public float lowerVerticalAngle() { return nlowerVerticalAngle(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -445,32 +445,32 @@ public class XrCompositionLayerEquirect2KHR extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerEquirect2KHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerEquirect2KHR.nnext(address()); }
-        /** Returns the value of the {@code layerFlags} field. */
+        /** @return the value of the {@code layerFlags} field. */
         @NativeType("XrCompositionLayerFlags")
         public long layerFlags() { return XrCompositionLayerEquirect2KHR.nlayerFlags(address()); }
-        /** Returns the value of the {@code space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrCompositionLayerEquirect2KHR.nspace(address()); }
-        /** Returns the value of the {@code eyeVisibility} field. */
+        /** @return the value of the {@code eyeVisibility} field. */
         @NativeType("XrEyeVisibility")
         public int eyeVisibility() { return XrCompositionLayerEquirect2KHR.neyeVisibility(address()); }
-        /** Returns a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
+        /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
         public XrSwapchainSubImage subImage() { return XrCompositionLayerEquirect2KHR.nsubImage(address()); }
-        /** Returns a {@link XrPosef} view of the {@code pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrCompositionLayerEquirect2KHR.npose(address()); }
-        /** Returns the value of the {@code radius} field. */
+        /** @return the value of the {@code radius} field. */
         public float radius() { return XrCompositionLayerEquirect2KHR.nradius(address()); }
-        /** Returns the value of the {@code centralHorizontalAngle} field. */
+        /** @return the value of the {@code centralHorizontalAngle} field. */
         public float centralHorizontalAngle() { return XrCompositionLayerEquirect2KHR.ncentralHorizontalAngle(address()); }
-        /** Returns the value of the {@code upperVerticalAngle} field. */
+        /** @return the value of the {@code upperVerticalAngle} field. */
         public float upperVerticalAngle() { return XrCompositionLayerEquirect2KHR.nupperVerticalAngle(address()); }
-        /** Returns the value of the {@code lowerVerticalAngle} field. */
+        /** @return the value of the {@code lowerVerticalAngle} field. */
         public float lowerVerticalAngle() { return XrCompositionLayerEquirect2KHR.nlowerVerticalAngle(address()); }
 
         /** Sets the specified value to the {@code type} field. */

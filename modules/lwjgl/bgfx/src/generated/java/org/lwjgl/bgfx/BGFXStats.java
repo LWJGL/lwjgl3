@@ -21,93 +21,49 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TOPOLOGY_COUNT;
  * 
  * <p>All time values are high-resolution timestamps, while time frequencies define timestamps-per-second for that hardware.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code cpuTimeFrame} &ndash; CPU time between two {@link BGFX#bgfx_frame frame} calls</li>
- * <li>{@code cpuTimeBegin} &ndash; Render thread CPU submit begin time</li>
- * <li>{@code cpuTimeEnd} &ndash; Render thread CPU submit end time</li>
- * <li>{@code cpuTimerFreq} &ndash; CPU timer frequency. Timestamps-per-second.</li>
- * <li>{@code gpuTimeBegin} &ndash; GPU frame begin time</li>
- * <li>{@code gpuTimeEnd} &ndash; GPU frame end time</li>
- * <li>{@code gpuTimerFreq} &ndash; GPU timer frequency</li>
- * <li>{@code waitRender} &ndash; time spent waiting for render backend thread to finish issuing draw commands to underlying graphics API</li>
- * <li>{@code waitSubmit} &ndash; time spent waiting for submit thread to advance to next frame</li>
- * <li>{@code numDraw} &ndash; number of draw calls submitted</li>
- * <li>{@code numCompute} &ndash; number of compute calls submitted</li>
- * <li>{@code numBlit} &ndash; number of blit calls submitted</li>
- * <li>{@code maxGpuLatency} &ndash; GPU driver latency</li>
- * <li>{@code numDynamicIndexBuffers} &ndash; number of used dynamic index buffers</li>
- * <li>{@code numDynamicVertexBuffers} &ndash; number of used dynamic vertex buffers</li>
- * <li>{@code numFrameBuffers} &ndash; number of used frame buffers</li>
- * <li>{@code numIndexBuffers} &ndash; number of used index buffers</li>
- * <li>{@code numOcclusionQueries} &ndash; number of used occlusion queries</li>
- * <li>{@code numPrograms} &ndash; number of used programs</li>
- * <li>{@code numShaders} &ndash; number of used shaders</li>
- * <li>{@code numTextures} &ndash; number of used textures</li>
- * <li>{@code numUniforms} &ndash; number of used uniforms</li>
- * <li>{@code numVertexBuffers} &ndash; number of used vertex buffers</li>
- * <li>{@code numVertexLayouts} &ndash; number of used vertex layouts</li>
- * <li>{@code textureMemoryUsed} &ndash; estimate of texture memory used</li>
- * <li>{@code rtMemoryUsed} &ndash; estimate of render target memory used</li>
- * <li>{@code transientVbUsed} &ndash; amount of transient vertex buffer used</li>
- * <li>{@code transientIbUsed} &ndash; amount of transient index buffer used</li>
- * <li>{@code numPrims[BGFX_TOPOLOGY_COUNT]} &ndash; number of primitives rendered</li>
- * <li>{@code gpuMemoryMax} &ndash; maximum available GPU memory for application</li>
- * <li>{@code gpuMemoryUsed} &ndash; amount of GPU memory used by the application</li>
- * <li>{@code width} &ndash; backbuffer width in pixels</li>
- * <li>{@code height} &ndash; backbuffer height in pixels</li>
- * <li>{@code textWidth} &ndash; debug text width in characters</li>
- * <li>{@code textHeight} &ndash; debug text height in characters</li>
- * <li>{@code numViews} &ndash; number of view stats</li>
- * <li>{@code viewStats} &ndash; array of view stats</li>
- * <li>{@code numEncoders} &ndash; number of encoders used during frame</li>
- * <li>{@code encoderStats} &ndash; array of encoder stats</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct bgfx_stats_t {
- *     int64_t cpuTimeFrame;
- *     int64_t cpuTimeBegin;
- *     int64_t cpuTimeEnd;
- *     int64_t cpuTimerFreq;
- *     int64_t gpuTimeBegin;
- *     int64_t gpuTimeEnd;
- *     int64_t gpuTimerFreq;
- *     int64_t waitRender;
- *     int64_t waitSubmit;
- *     uint32_t numDraw;
- *     uint32_t numCompute;
- *     uint32_t numBlit;
- *     uint32_t maxGpuLatency;
- *     uint16_t numDynamicIndexBuffers;
- *     uint16_t numDynamicVertexBuffers;
- *     uint16_t numFrameBuffers;
- *     uint16_t numIndexBuffers;
- *     uint16_t numOcclusionQueries;
- *     uint16_t numPrograms;
- *     uint16_t numShaders;
- *     uint16_t numTextures;
- *     uint16_t numUniforms;
- *     uint16_t numVertexBuffers;
- *     uint16_t numVertexLayouts;
- *     int64_t textureMemoryUsed;
- *     int64_t rtMemoryUsed;
- *     int32_t transientVbUsed;
- *     int32_t transientIbUsed;
- *     uint32_t numPrims[BGFX_TOPOLOGY_COUNT];
- *     int64_t gpuMemoryMax;
- *     int64_t gpuMemoryUsed;
- *     uint16_t width;
- *     uint16_t height;
- *     uint16_t textWidth;
- *     uint16_t textHeight;
- *     uint16_t numViews;
- *     {@link BGFXViewStats bgfx_view_stats_t} * viewStats;
- *     uint16_t numEncoders;
- *     {@link BGFXEncoderStats bgfx_encoder_stats_t} * encoderStats;
+ *     int64_t {@link #cpuTimeFrame};
+ *     int64_t {@link #cpuTimeBegin};
+ *     int64_t {@link #cpuTimeEnd};
+ *     int64_t {@link #cpuTimerFreq};
+ *     int64_t {@link #gpuTimeBegin};
+ *     int64_t {@link #gpuTimeEnd};
+ *     int64_t {@link #gpuTimerFreq};
+ *     int64_t {@link #waitRender};
+ *     int64_t {@link #waitSubmit};
+ *     uint32_t {@link #numDraw};
+ *     uint32_t {@link #numCompute};
+ *     uint32_t {@link #numBlit};
+ *     uint32_t {@link #maxGpuLatency};
+ *     uint16_t {@link #numDynamicIndexBuffers};
+ *     uint16_t {@link #numDynamicVertexBuffers};
+ *     uint16_t {@link #numFrameBuffers};
+ *     uint16_t {@link #numIndexBuffers};
+ *     uint16_t {@link #numOcclusionQueries};
+ *     uint16_t {@link #numPrograms};
+ *     uint16_t {@link #numShaders};
+ *     uint16_t {@link #numTextures};
+ *     uint16_t {@link #numUniforms};
+ *     uint16_t {@link #numVertexBuffers};
+ *     uint16_t {@link #numVertexLayouts};
+ *     int64_t {@link #textureMemoryUsed};
+ *     int64_t {@link #rtMemoryUsed};
+ *     int32_t {@link #transientVbUsed};
+ *     int32_t {@link #transientIbUsed};
+ *     uint32_t {@link #numPrims}[BGFX_TOPOLOGY_COUNT];
+ *     int64_t {@link #gpuMemoryMax};
+ *     int64_t {@link #gpuMemoryUsed};
+ *     uint16_t {@link #width};
+ *     uint16_t {@link #height};
+ *     uint16_t {@link #textWidth};
+ *     uint16_t {@link #textHeight};
+ *     uint16_t {@link #numViews};
+ *     {@link BGFXViewStats bgfx_view_stats_t} * {@link #viewStats};
+ *     uint16_t {@link #numEncoders};
+ *     {@link BGFXEncoderStats bgfx_encoder_stats_t} * {@link #encoderStats};
  * }</code></pre>
  */
 @NativeType("struct bgfx_stats_t")
@@ -261,124 +217,124 @@ public class BGFXStats extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code cpuTimeFrame} field. */
+    /** CPU time between two {@link BGFX#bgfx_frame frame} calls */
     @NativeType("int64_t")
     public long cpuTimeFrame() { return ncpuTimeFrame(address()); }
-    /** Returns the value of the {@code cpuTimeBegin} field. */
+    /** Render thread CPU submit begin time */
     @NativeType("int64_t")
     public long cpuTimeBegin() { return ncpuTimeBegin(address()); }
-    /** Returns the value of the {@code cpuTimeEnd} field. */
+    /** Render thread CPU submit end time */
     @NativeType("int64_t")
     public long cpuTimeEnd() { return ncpuTimeEnd(address()); }
-    /** Returns the value of the {@code cpuTimerFreq} field. */
+    /** CPU timer frequency. Timestamps-per-second. */
     @NativeType("int64_t")
     public long cpuTimerFreq() { return ncpuTimerFreq(address()); }
-    /** Returns the value of the {@code gpuTimeBegin} field. */
+    /** GPU frame begin time */
     @NativeType("int64_t")
     public long gpuTimeBegin() { return ngpuTimeBegin(address()); }
-    /** Returns the value of the {@code gpuTimeEnd} field. */
+    /** GPU frame end time */
     @NativeType("int64_t")
     public long gpuTimeEnd() { return ngpuTimeEnd(address()); }
-    /** Returns the value of the {@code gpuTimerFreq} field. */
+    /** GPU timer frequency */
     @NativeType("int64_t")
     public long gpuTimerFreq() { return ngpuTimerFreq(address()); }
-    /** Returns the value of the {@code waitRender} field. */
+    /** time spent waiting for render backend thread to finish issuing draw commands to underlying graphics API */
     @NativeType("int64_t")
     public long waitRender() { return nwaitRender(address()); }
-    /** Returns the value of the {@code waitSubmit} field. */
+    /** time spent waiting for submit thread to advance to next frame */
     @NativeType("int64_t")
     public long waitSubmit() { return nwaitSubmit(address()); }
-    /** Returns the value of the {@code numDraw} field. */
+    /** number of draw calls submitted */
     @NativeType("uint32_t")
     public int numDraw() { return nnumDraw(address()); }
-    /** Returns the value of the {@code numCompute} field. */
+    /** number of compute calls submitted */
     @NativeType("uint32_t")
     public int numCompute() { return nnumCompute(address()); }
-    /** Returns the value of the {@code numBlit} field. */
+    /** number of blit calls submitted */
     @NativeType("uint32_t")
     public int numBlit() { return nnumBlit(address()); }
-    /** Returns the value of the {@code maxGpuLatency} field. */
+    /** GPU driver latency */
     @NativeType("uint32_t")
     public int maxGpuLatency() { return nmaxGpuLatency(address()); }
-    /** Returns the value of the {@code numDynamicIndexBuffers} field. */
+    /** number of used dynamic index buffers */
     @NativeType("uint16_t")
     public short numDynamicIndexBuffers() { return nnumDynamicIndexBuffers(address()); }
-    /** Returns the value of the {@code numDynamicVertexBuffers} field. */
+    /** number of used dynamic vertex buffers */
     @NativeType("uint16_t")
     public short numDynamicVertexBuffers() { return nnumDynamicVertexBuffers(address()); }
-    /** Returns the value of the {@code numFrameBuffers} field. */
+    /** number of used frame buffers */
     @NativeType("uint16_t")
     public short numFrameBuffers() { return nnumFrameBuffers(address()); }
-    /** Returns the value of the {@code numIndexBuffers} field. */
+    /** number of used index buffers */
     @NativeType("uint16_t")
     public short numIndexBuffers() { return nnumIndexBuffers(address()); }
-    /** Returns the value of the {@code numOcclusionQueries} field. */
+    /** number of used occlusion queries */
     @NativeType("uint16_t")
     public short numOcclusionQueries() { return nnumOcclusionQueries(address()); }
-    /** Returns the value of the {@code numPrograms} field. */
+    /** number of used programs */
     @NativeType("uint16_t")
     public short numPrograms() { return nnumPrograms(address()); }
-    /** Returns the value of the {@code numShaders} field. */
+    /** number of used shaders */
     @NativeType("uint16_t")
     public short numShaders() { return nnumShaders(address()); }
-    /** Returns the value of the {@code numTextures} field. */
+    /** number of used textures */
     @NativeType("uint16_t")
     public short numTextures() { return nnumTextures(address()); }
-    /** Returns the value of the {@code numUniforms} field. */
+    /** number of used uniforms */
     @NativeType("uint16_t")
     public short numUniforms() { return nnumUniforms(address()); }
-    /** Returns the value of the {@code numVertexBuffers} field. */
+    /** number of used vertex buffers */
     @NativeType("uint16_t")
     public short numVertexBuffers() { return nnumVertexBuffers(address()); }
-    /** Returns the value of the {@code numVertexLayouts} field. */
+    /** number of used vertex layouts */
     @NativeType("uint16_t")
     public short numVertexLayouts() { return nnumVertexLayouts(address()); }
-    /** Returns the value of the {@code textureMemoryUsed} field. */
+    /** estimate of texture memory used */
     @NativeType("int64_t")
     public long textureMemoryUsed() { return ntextureMemoryUsed(address()); }
-    /** Returns the value of the {@code rtMemoryUsed} field. */
+    /** estimate of render target memory used */
     @NativeType("int64_t")
     public long rtMemoryUsed() { return nrtMemoryUsed(address()); }
-    /** Returns the value of the {@code transientVbUsed} field. */
+    /** amount of transient vertex buffer used */
     @NativeType("int32_t")
     public int transientVbUsed() { return ntransientVbUsed(address()); }
-    /** Returns the value of the {@code transientIbUsed} field. */
+    /** amount of transient index buffer used */
     @NativeType("int32_t")
     public int transientIbUsed() { return ntransientIbUsed(address()); }
-    /** Returns a {@link IntBuffer} view of the {@code numPrims} field. */
+    /** number of primitives rendered */
     @NativeType("uint32_t[BGFX_TOPOLOGY_COUNT]")
     public IntBuffer numPrims() { return nnumPrims(address()); }
-    /** Returns the value at the specified index of the {@code numPrims} field. */
+    /** number of primitives rendered */
     @NativeType("uint32_t")
     public int numPrims(int index) { return nnumPrims(address(), index); }
-    /** Returns the value of the {@code gpuMemoryMax} field. */
+    /** maximum available GPU memory for application */
     @NativeType("int64_t")
     public long gpuMemoryMax() { return ngpuMemoryMax(address()); }
-    /** Returns the value of the {@code gpuMemoryUsed} field. */
+    /** amount of GPU memory used by the application */
     @NativeType("int64_t")
     public long gpuMemoryUsed() { return ngpuMemoryUsed(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** backbuffer width in pixels */
     @NativeType("uint16_t")
     public short width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** backbuffer height in pixels */
     @NativeType("uint16_t")
     public short height() { return nheight(address()); }
-    /** Returns the value of the {@code textWidth} field. */
+    /** debug text width in characters */
     @NativeType("uint16_t")
     public short textWidth() { return ntextWidth(address()); }
-    /** Returns the value of the {@code textHeight} field. */
+    /** debug text height in characters */
     @NativeType("uint16_t")
     public short textHeight() { return ntextHeight(address()); }
-    /** Returns the value of the {@code numViews} field. */
+    /** number of view stats */
     @NativeType("uint16_t")
     public short numViews() { return nnumViews(address()); }
-    /** Returns a {@link BGFXViewStats.Buffer} view of the struct array pointed to by the {@code viewStats} field. */
+    /** array of view stats */
     @NativeType("bgfx_view_stats_t *")
     public BGFXViewStats.Buffer viewStats() { return nviewStats(address()); }
-    /** Returns the value of the {@code numEncoders} field. */
+    /** number of encoders used during frame */
     @NativeType("uint16_t")
     public short numEncoders() { return nnumEncoders(address()); }
-    /** Returns a {@link BGFXEncoderStats.Buffer} view of the struct array pointed to by the {@code encoderStats} field. */
+    /** array of encoder stats */
     @NativeType("bgfx_encoder_stats_t *")
     public BGFXEncoderStats.Buffer encoderStats() { return nencoderStats(address()); }
 
@@ -534,124 +490,124 @@ public class BGFXStats extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code cpuTimeFrame} field. */
+        /** @return the value of the {@link BGFXStats#cpuTimeFrame} field. */
         @NativeType("int64_t")
         public long cpuTimeFrame() { return BGFXStats.ncpuTimeFrame(address()); }
-        /** Returns the value of the {@code cpuTimeBegin} field. */
+        /** @return the value of the {@link BGFXStats#cpuTimeBegin} field. */
         @NativeType("int64_t")
         public long cpuTimeBegin() { return BGFXStats.ncpuTimeBegin(address()); }
-        /** Returns the value of the {@code cpuTimeEnd} field. */
+        /** @return the value of the {@link BGFXStats#cpuTimeEnd} field. */
         @NativeType("int64_t")
         public long cpuTimeEnd() { return BGFXStats.ncpuTimeEnd(address()); }
-        /** Returns the value of the {@code cpuTimerFreq} field. */
+        /** @return the value of the {@link BGFXStats#cpuTimerFreq} field. */
         @NativeType("int64_t")
         public long cpuTimerFreq() { return BGFXStats.ncpuTimerFreq(address()); }
-        /** Returns the value of the {@code gpuTimeBegin} field. */
+        /** @return the value of the {@link BGFXStats#gpuTimeBegin} field. */
         @NativeType("int64_t")
         public long gpuTimeBegin() { return BGFXStats.ngpuTimeBegin(address()); }
-        /** Returns the value of the {@code gpuTimeEnd} field. */
+        /** @return the value of the {@link BGFXStats#gpuTimeEnd} field. */
         @NativeType("int64_t")
         public long gpuTimeEnd() { return BGFXStats.ngpuTimeEnd(address()); }
-        /** Returns the value of the {@code gpuTimerFreq} field. */
+        /** @return the value of the {@link BGFXStats#gpuTimerFreq} field. */
         @NativeType("int64_t")
         public long gpuTimerFreq() { return BGFXStats.ngpuTimerFreq(address()); }
-        /** Returns the value of the {@code waitRender} field. */
+        /** @return the value of the {@link BGFXStats#waitRender} field. */
         @NativeType("int64_t")
         public long waitRender() { return BGFXStats.nwaitRender(address()); }
-        /** Returns the value of the {@code waitSubmit} field. */
+        /** @return the value of the {@link BGFXStats#waitSubmit} field. */
         @NativeType("int64_t")
         public long waitSubmit() { return BGFXStats.nwaitSubmit(address()); }
-        /** Returns the value of the {@code numDraw} field. */
+        /** @return the value of the {@link BGFXStats#numDraw} field. */
         @NativeType("uint32_t")
         public int numDraw() { return BGFXStats.nnumDraw(address()); }
-        /** Returns the value of the {@code numCompute} field. */
+        /** @return the value of the {@link BGFXStats#numCompute} field. */
         @NativeType("uint32_t")
         public int numCompute() { return BGFXStats.nnumCompute(address()); }
-        /** Returns the value of the {@code numBlit} field. */
+        /** @return the value of the {@link BGFXStats#numBlit} field. */
         @NativeType("uint32_t")
         public int numBlit() { return BGFXStats.nnumBlit(address()); }
-        /** Returns the value of the {@code maxGpuLatency} field. */
+        /** @return the value of the {@link BGFXStats#maxGpuLatency} field. */
         @NativeType("uint32_t")
         public int maxGpuLatency() { return BGFXStats.nmaxGpuLatency(address()); }
-        /** Returns the value of the {@code numDynamicIndexBuffers} field. */
+        /** @return the value of the {@link BGFXStats#numDynamicIndexBuffers} field. */
         @NativeType("uint16_t")
         public short numDynamicIndexBuffers() { return BGFXStats.nnumDynamicIndexBuffers(address()); }
-        /** Returns the value of the {@code numDynamicVertexBuffers} field. */
+        /** @return the value of the {@link BGFXStats#numDynamicVertexBuffers} field. */
         @NativeType("uint16_t")
         public short numDynamicVertexBuffers() { return BGFXStats.nnumDynamicVertexBuffers(address()); }
-        /** Returns the value of the {@code numFrameBuffers} field. */
+        /** @return the value of the {@link BGFXStats#numFrameBuffers} field. */
         @NativeType("uint16_t")
         public short numFrameBuffers() { return BGFXStats.nnumFrameBuffers(address()); }
-        /** Returns the value of the {@code numIndexBuffers} field. */
+        /** @return the value of the {@link BGFXStats#numIndexBuffers} field. */
         @NativeType("uint16_t")
         public short numIndexBuffers() { return BGFXStats.nnumIndexBuffers(address()); }
-        /** Returns the value of the {@code numOcclusionQueries} field. */
+        /** @return the value of the {@link BGFXStats#numOcclusionQueries} field. */
         @NativeType("uint16_t")
         public short numOcclusionQueries() { return BGFXStats.nnumOcclusionQueries(address()); }
-        /** Returns the value of the {@code numPrograms} field. */
+        /** @return the value of the {@link BGFXStats#numPrograms} field. */
         @NativeType("uint16_t")
         public short numPrograms() { return BGFXStats.nnumPrograms(address()); }
-        /** Returns the value of the {@code numShaders} field. */
+        /** @return the value of the {@link BGFXStats#numShaders} field. */
         @NativeType("uint16_t")
         public short numShaders() { return BGFXStats.nnumShaders(address()); }
-        /** Returns the value of the {@code numTextures} field. */
+        /** @return the value of the {@link BGFXStats#numTextures} field. */
         @NativeType("uint16_t")
         public short numTextures() { return BGFXStats.nnumTextures(address()); }
-        /** Returns the value of the {@code numUniforms} field. */
+        /** @return the value of the {@link BGFXStats#numUniforms} field. */
         @NativeType("uint16_t")
         public short numUniforms() { return BGFXStats.nnumUniforms(address()); }
-        /** Returns the value of the {@code numVertexBuffers} field. */
+        /** @return the value of the {@link BGFXStats#numVertexBuffers} field. */
         @NativeType("uint16_t")
         public short numVertexBuffers() { return BGFXStats.nnumVertexBuffers(address()); }
-        /** Returns the value of the {@code numVertexLayouts} field. */
+        /** @return the value of the {@link BGFXStats#numVertexLayouts} field. */
         @NativeType("uint16_t")
         public short numVertexLayouts() { return BGFXStats.nnumVertexLayouts(address()); }
-        /** Returns the value of the {@code textureMemoryUsed} field. */
+        /** @return the value of the {@link BGFXStats#textureMemoryUsed} field. */
         @NativeType("int64_t")
         public long textureMemoryUsed() { return BGFXStats.ntextureMemoryUsed(address()); }
-        /** Returns the value of the {@code rtMemoryUsed} field. */
+        /** @return the value of the {@link BGFXStats#rtMemoryUsed} field. */
         @NativeType("int64_t")
         public long rtMemoryUsed() { return BGFXStats.nrtMemoryUsed(address()); }
-        /** Returns the value of the {@code transientVbUsed} field. */
+        /** @return the value of the {@link BGFXStats#transientVbUsed} field. */
         @NativeType("int32_t")
         public int transientVbUsed() { return BGFXStats.ntransientVbUsed(address()); }
-        /** Returns the value of the {@code transientIbUsed} field. */
+        /** @return the value of the {@link BGFXStats#transientIbUsed} field. */
         @NativeType("int32_t")
         public int transientIbUsed() { return BGFXStats.ntransientIbUsed(address()); }
-        /** Returns a {@link IntBuffer} view of the {@code numPrims} field. */
+        /** @return a {@link IntBuffer} view of the {@link BGFXStats#numPrims} field. */
         @NativeType("uint32_t[BGFX_TOPOLOGY_COUNT]")
         public IntBuffer numPrims() { return BGFXStats.nnumPrims(address()); }
-        /** Returns the value at the specified index of the {@code numPrims} field. */
+        /** @return the value at the specified index of the {@link BGFXStats#numPrims} field. */
         @NativeType("uint32_t")
         public int numPrims(int index) { return BGFXStats.nnumPrims(address(), index); }
-        /** Returns the value of the {@code gpuMemoryMax} field. */
+        /** @return the value of the {@link BGFXStats#gpuMemoryMax} field. */
         @NativeType("int64_t")
         public long gpuMemoryMax() { return BGFXStats.ngpuMemoryMax(address()); }
-        /** Returns the value of the {@code gpuMemoryUsed} field. */
+        /** @return the value of the {@link BGFXStats#gpuMemoryUsed} field. */
         @NativeType("int64_t")
         public long gpuMemoryUsed() { return BGFXStats.ngpuMemoryUsed(address()); }
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@link BGFXStats#width} field. */
         @NativeType("uint16_t")
         public short width() { return BGFXStats.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@link BGFXStats#height} field. */
         @NativeType("uint16_t")
         public short height() { return BGFXStats.nheight(address()); }
-        /** Returns the value of the {@code textWidth} field. */
+        /** @return the value of the {@link BGFXStats#textWidth} field. */
         @NativeType("uint16_t")
         public short textWidth() { return BGFXStats.ntextWidth(address()); }
-        /** Returns the value of the {@code textHeight} field. */
+        /** @return the value of the {@link BGFXStats#textHeight} field. */
         @NativeType("uint16_t")
         public short textHeight() { return BGFXStats.ntextHeight(address()); }
-        /** Returns the value of the {@code numViews} field. */
+        /** @return the value of the {@link BGFXStats#numViews} field. */
         @NativeType("uint16_t")
         public short numViews() { return BGFXStats.nnumViews(address()); }
-        /** Returns a {@link BGFXViewStats.Buffer} view of the struct array pointed to by the {@code viewStats} field. */
+        /** @return a {@link BGFXViewStats.Buffer} view of the struct array pointed to by the {@link BGFXStats#viewStats} field. */
         @NativeType("bgfx_view_stats_t *")
         public BGFXViewStats.Buffer viewStats() { return BGFXStats.nviewStats(address()); }
-        /** Returns the value of the {@code numEncoders} field. */
+        /** @return the value of the {@link BGFXStats#numEncoders} field. */
         @NativeType("uint16_t")
         public short numEncoders() { return BGFXStats.nnumEncoders(address()); }
-        /** Returns a {@link BGFXEncoderStats.Buffer} view of the struct array pointed to by the {@code encoderStats} field. */
+        /** @return a {@link BGFXEncoderStats.Buffer} view of the struct array pointed to by the {@link BGFXStats#encoderStats} field. */
         @NativeType("bgfx_encoder_stats_t *")
         public BGFXEncoderStats.Buffer encoderStats() { return BGFXStats.nencoderStats(address()); }
 

@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} is the type of this structure.</li>
- * <li>{@code pNext} is {@code NULL} or a pointer to an extension-specific structure.</li>
+ * <li>{@code pNext} is {@code NULL} or a pointer to a structure extending this structure.</li>
  * <li>{@code deviceIndexCount} is the number of elements in {@code pDeviceIndices}.</li>
  * <li>{@code pDeviceIndices} is a pointer to an array of device indices.</li>
  * </ul>
@@ -105,16 +105,16 @@ public class VkBindBufferMemoryDeviceGroupInfo extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code deviceIndexCount} field. */
+    /** @return the value of the {@code deviceIndexCount} field. */
     @NativeType("uint32_t")
     public int deviceIndexCount() { return ndeviceIndexCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDeviceIndices} field. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDeviceIndices} field. */
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pDeviceIndices() { return npDeviceIndices(address()); }
@@ -373,16 +373,16 @@ public class VkBindBufferMemoryDeviceGroupInfo extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBindBufferMemoryDeviceGroupInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBindBufferMemoryDeviceGroupInfo.npNext(address()); }
-        /** Returns the value of the {@code deviceIndexCount} field. */
+        /** @return the value of the {@code deviceIndexCount} field. */
         @NativeType("uint32_t")
         public int deviceIndexCount() { return VkBindBufferMemoryDeviceGroupInfo.ndeviceIndexCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDeviceIndices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDeviceIndices} field. */
         @Nullable
         @NativeType("uint32_t const *")
         public IntBuffer pDeviceIndices() { return VkBindBufferMemoryDeviceGroupInfo.npDeviceIndices(address()); }

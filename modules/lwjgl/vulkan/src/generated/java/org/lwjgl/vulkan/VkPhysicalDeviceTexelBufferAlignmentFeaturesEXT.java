@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTTexelBufferAlignment#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code texelBufferAlignment} &ndash; indicates whether the implementation uses more specific alignment requirements advertised in {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT} rather than {@link VkPhysicalDeviceLimits}{@code ::minTexelBufferOffsetAlignment}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 texelBufferAlignment;
+ *     VkBool32 {@link #texelBufferAlignment};
  * }</code></pre>
  */
 public class VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT extends Struct impl
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code texelBufferAlignment} field. */
+    /** indicates whether the implementation uses more specific alignment requirements advertised in {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT} rather than {@link VkPhysicalDeviceLimits}{@code ::minTexelBufferOffsetAlignment}. */
     @NativeType("VkBool32")
     public boolean texelBufferAlignment() { return ntexelBufferAlignment(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT extends Struct impl
     public VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code texelBufferAlignment} field. */
+    /** Sets the specified value to the {@link #texelBufferAlignment} field. */
     public VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT texelBufferAlignment(@NativeType("VkBool32") boolean value) { ntexelBufferAlignment(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT extends Struct impl
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code texelBufferAlignment} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT#texelBufferAlignment} field. */
         @NativeType("VkBool32")
         public boolean texelBufferAlignment() { return VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.ntexelBufferAlignment(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT extends Struct impl
         public VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code texelBufferAlignment} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT#texelBufferAlignment} field. */
         public VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.Buffer texelBufferAlignment(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.ntexelBufferAlignment(address(), value ? 1 : 0); return this; }
 
     }

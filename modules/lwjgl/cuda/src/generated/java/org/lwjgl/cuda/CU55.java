@@ -24,6 +24,21 @@ import static org.lwjgl.cuda.CUDA.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>. */
 public class CU55 extends CU50 {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            LinkCreate   = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuLinkCreate", 2)),
+            LinkAddData  = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuLinkAddData", 2)),
+            LinkAddFile  = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuLinkAddFile", 2)),
+            LinkComplete = apiGetFunctionAddress(CU.getLibrary(), "cuLinkComplete"),
+            LinkDestroy  = apiGetFunctionAddress(CU.getLibrary(), "cuLinkDestroy");
+
+    }
+
     /**
      * Device code formats. ({@code CUjitInputType})
      * 
@@ -66,21 +81,6 @@ public class CU55 extends CU50 {
 
     protected CU55() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            LinkCreate   = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuLinkCreate", 2)),
-            LinkAddData  = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuLinkAddData", 2)),
-            LinkAddFile  = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuLinkAddFile", 2)),
-            LinkComplete = apiGetFunctionAddress(CU.getLibrary(), "cuLinkComplete"),
-            LinkDestroy  = apiGetFunctionAddress(CU.getLibrary(), "cuLinkDestroy");
-
     }
 
     // --- [ cuLinkCreate ] ---

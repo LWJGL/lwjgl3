@@ -16,19 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * GPU info.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code vendorId} &ndash; vendor PCI id. One of:<br><table><tr><td>{@link BGFX#BGFX_PCI_ID_NONE PCI_ID_NONE}</td><td>{@link BGFX#BGFX_PCI_ID_SOFTWARE_RASTERIZER PCI_ID_SOFTWARE_RASTERIZER}</td><td>{@link BGFX#BGFX_PCI_ID_AMD PCI_ID_AMD}</td><td>{@link BGFX#BGFX_PCI_ID_INTEL PCI_ID_INTEL}</td><td>{@link BGFX#BGFX_PCI_ID_NVIDIA PCI_ID_NVIDIA}</td></tr></table></li>
- * <li>{@code deviceId} &ndash; device id</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct bgfx_caps_gpu_t {
- *     uint16_t vendorId;
- *     uint16_t deviceId;
+ *     uint16_t {@link #vendorId};
+ *     uint16_t {@link #deviceId};
  * }</code></pre>
  */
 @NativeType("struct bgfx_caps_gpu_t")
@@ -71,10 +64,10 @@ public class BGFXCapsGPU extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code vendorId} field. */
+    /** vendor PCI id. One of:<br><table><tr><td>{@link BGFX#BGFX_PCI_ID_NONE PCI_ID_NONE}</td><td>{@link BGFX#BGFX_PCI_ID_SOFTWARE_RASTERIZER PCI_ID_SOFTWARE_RASTERIZER}</td><td>{@link BGFX#BGFX_PCI_ID_AMD PCI_ID_AMD}</td><td>{@link BGFX#BGFX_PCI_ID_INTEL PCI_ID_INTEL}</td><td>{@link BGFX#BGFX_PCI_ID_NVIDIA PCI_ID_NVIDIA}</td></tr></table> */
     @NativeType("uint16_t")
     public short vendorId() { return nvendorId(address()); }
-    /** Returns the value of the {@code deviceId} field. */
+    /** device id */
     @NativeType("uint16_t")
     public short deviceId() { return ndeviceId(address()); }
 
@@ -152,10 +145,10 @@ public class BGFXCapsGPU extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code vendorId} field. */
+        /** @return the value of the {@link BGFXCapsGPU#vendorId} field. */
         @NativeType("uint16_t")
         public short vendorId() { return BGFXCapsGPU.nvendorId(address()); }
-        /** Returns the value of the {@code deviceId} field. */
+        /** @return the value of the {@link BGFXCapsGPU#deviceId} field. */
         @NativeType("uint16_t")
         public short deviceId() { return BGFXCapsGPU.ndeviceId(address()); }
 

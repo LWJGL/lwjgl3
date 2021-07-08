@@ -30,6 +30,8 @@ import org.lwjgl.system.*;
  */
 public class ARBProvokingVertex {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code mode} parameter of ProvokingVertex. */
     public static final int
         GL_FIRST_VERTEX_CONVENTION = 0x8E4D,
@@ -39,8 +41,6 @@ public class ARBProvokingVertex {
     public static final int
         GL_PROVOKING_VERTEX                         = 0x8E4F,
         GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION = 0x8E4C;
-
-    static { GL.initialize(); }
 
     protected ARBProvokingVertex() {
         throw new UnsupportedOperationException();

@@ -29,10 +29,10 @@ import org.lwjgl.system.*;
  */
 public class NVInstancedArrays {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameters of GetVertexAttribfv, and GetVertexAttribiv. */
     public static final int GL_VERTEX_ATTRIB_ARRAY_DIVISOR_NV = 0x88FE;
-
-    static { GLES.initialize(); }
 
     protected NVInstancedArrays() {
         throw new UnsupportedOperationException();

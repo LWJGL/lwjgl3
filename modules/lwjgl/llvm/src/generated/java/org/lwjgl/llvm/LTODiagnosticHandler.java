@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     lto_codegen_diagnostic_severity_t severity,
  *     char const *diag,
  *     void *ctxt
@@ -51,7 +51,7 @@ public abstract class LTODiagnosticHandler extends Callback implements LTODiagno
     }
 
     protected LTODiagnosticHandler() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     LTODiagnosticHandler(long functionPointer) {

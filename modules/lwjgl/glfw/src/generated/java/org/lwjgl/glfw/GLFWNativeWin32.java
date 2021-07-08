@@ -17,10 +17,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to the GLFW library's Win32 native access functions. */
 public class GLFWNativeWin32 {
 
-    protected GLFWNativeWin32() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
     public static final class Functions {
 
@@ -33,6 +29,10 @@ public class GLFWNativeWin32 {
             GetWin32Window    = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetWin32Window"),
             AttachWin32Window = apiGetFunctionAddress(GLFW.getLibrary(), "glfwAttachWin32Window");
 
+    }
+
+    protected GLFWNativeWin32() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ glfwGetWin32Adapter ] ---

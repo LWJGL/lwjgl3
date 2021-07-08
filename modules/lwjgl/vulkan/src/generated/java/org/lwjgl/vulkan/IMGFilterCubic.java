@@ -28,6 +28,8 @@ package org.lwjgl.vulkan;
  *         &amp;createInfo,
  *         &amp;sampler);</code></pre>
  * 
+ * <h5>VK_IMG_filter_cubic</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_IMG_filter_cubic}</dd>
@@ -45,6 +47,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_IMG_filter_cubic:%20&amp;body=@tobski%20">tobski</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-02-23</dd>
  * <dt><b>Contributors</b></dt>

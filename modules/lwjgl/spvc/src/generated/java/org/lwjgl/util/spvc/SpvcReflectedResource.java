@@ -17,36 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code id} &ndash; Resources are identified with their SPIR-V ID. This is the ID of the OpVariable.</li>
- * <li>{@code base_type_id} &ndash; 
- * The base type of the declared resource.
- * 
- * <p>This type is the base type which ignores pointers and arrays of the {@code type_id}. This is mostly useful to parse decorations of the underlying
- * type. {@code base_type_id} can also be obtained with {@code get_type(get_type(type_id).self)}.</p></li>
- * <li>{@code type_id} &ndash; 
- * The type ID of the variable which includes arrays and all type modifications.
- * 
- * <p>This type ID is not suitable for parsing {@code OpMemberDecoration} of a struct and other decorations in general since these modifications typically
- * happen on the {@code base_type_id}.</p></li>
- * <li>{@code name} &ndash; 
- * The declared name ({@code OpName}) of the resource.
- * 
- * <p>For Buffer blocks, the name actually reflects the externally visible {@code Block} name. This name can be retrieved again by using either
- * {@code get_name(id)} or {@code get_name(base_type_id)} depending if it's a buffer block or not. This name can be an empty string in which case
- * {@code get_fallback_name(id)} can be used which obtains a suitable fallback identifier for an ID.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct SpvcReflectedResource {
- *     spvc_variable_id id;
- *     spvc_type_id base_type_id;
- *     spvc_type_id type_id;
- *     char const * name;
+ *     spvc_variable_id {@link #id};
+ *     spvc_type_id {@link #base_type_id};
+ *     spvc_type_id {@link #type_id};
+ *     char const * {@link #name};
  * }</code></pre>
  */
 public class SpvcReflectedResource extends Struct implements NativeResource {
@@ -94,29 +72,51 @@ public class SpvcReflectedResource extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code id} field. */
+    /** Resources are identified with their SPIR-V ID. This is the ID of the OpVariable. */
     @NativeType("spvc_variable_id")
     public int id() { return nid(address()); }
-    /** Returns the value of the {@code base_type_id} field. */
+    /**
+     * The base type of the declared resource.
+     * 
+     * <p>This type is the base type which ignores pointers and arrays of the {@code type_id}. This is mostly useful to parse decorations of the underlying
+     * type. {@code base_type_id} can also be obtained with {@code get_type(get_type(type_id).self)}.</p>
+     */
     @NativeType("spvc_type_id")
     public int base_type_id() { return nbase_type_id(address()); }
-    /** Returns the value of the {@code type_id} field. */
+    /**
+     * The type ID of the variable which includes arrays and all type modifications.
+     * 
+     * <p>This type ID is not suitable for parsing {@code OpMemberDecoration} of a struct and other decorations in general since these modifications typically
+     * happen on the {@code base_type_id}.</p>
+     */
     @NativeType("spvc_type_id")
     public int type_id() { return ntype_id(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
+    /**
+     * The declared name ({@code OpName}) of the resource.
+     * 
+     * <p>For Buffer blocks, the name actually reflects the externally visible {@code Block} name. This name can be retrieved again by using either
+     * {@code get_name(id)} or {@code get_name(base_type_id)} depending if it's a buffer block or not. This name can be an empty string in which case
+     * {@code get_fallback_name(id)} can be used which obtains a suitable fallback identifier for an ID.</p>
+     */
     @NativeType("char const *")
     public ByteBuffer name() { return nname(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code name} field. */
+    /**
+     * The declared name ({@code OpName}) of the resource.
+     * 
+     * <p>For Buffer blocks, the name actually reflects the externally visible {@code Block} name. This name can be retrieved again by using either
+     * {@code get_name(id)} or {@code get_name(base_type_id)} depending if it's a buffer block or not. This name can be an empty string in which case
+     * {@code get_fallback_name(id)} can be used which obtains a suitable fallback identifier for an ID.</p>
+     */
     @NativeType("char const *")
     public String nameString() { return nnameString(address()); }
 
-    /** Sets the specified value to the {@code id} field. */
+    /** Sets the specified value to the {@link #id} field. */
     public SpvcReflectedResource id(@NativeType("spvc_variable_id") int value) { nid(address(), value); return this; }
-    /** Sets the specified value to the {@code base_type_id} field. */
+    /** Sets the specified value to the {@link #base_type_id} field. */
     public SpvcReflectedResource base_type_id(@NativeType("spvc_type_id") int value) { nbase_type_id(address(), value); return this; }
-    /** Sets the specified value to the {@code type_id} field. */
+    /** Sets the specified value to the {@link #type_id} field. */
     public SpvcReflectedResource type_id(@NativeType("spvc_type_id") int value) { ntype_id(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@code name} field. */
+    /** Sets the address of the specified encoded string to the {@link #name} field. */
     public SpvcReflectedResource name(@NativeType("char const *") ByteBuffer value) { nname(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -371,29 +371,29 @@ public class SpvcReflectedResource extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code id} field. */
+        /** @return the value of the {@link SpvcReflectedResource#id} field. */
         @NativeType("spvc_variable_id")
         public int id() { return SpvcReflectedResource.nid(address()); }
-        /** Returns the value of the {@code base_type_id} field. */
+        /** @return the value of the {@link SpvcReflectedResource#base_type_id} field. */
         @NativeType("spvc_type_id")
         public int base_type_id() { return SpvcReflectedResource.nbase_type_id(address()); }
-        /** Returns the value of the {@code type_id} field. */
+        /** @return the value of the {@link SpvcReflectedResource#type_id} field. */
         @NativeType("spvc_type_id")
         public int type_id() { return SpvcReflectedResource.ntype_id(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link SpvcReflectedResource#name} field. */
         @NativeType("char const *")
         public ByteBuffer name() { return SpvcReflectedResource.nname(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code name} field. */
+        /** @return the null-terminated string pointed to by the {@link SpvcReflectedResource#name} field. */
         @NativeType("char const *")
         public String nameString() { return SpvcReflectedResource.nnameString(address()); }
 
-        /** Sets the specified value to the {@code id} field. */
+        /** Sets the specified value to the {@link SpvcReflectedResource#id} field. */
         public SpvcReflectedResource.Buffer id(@NativeType("spvc_variable_id") int value) { SpvcReflectedResource.nid(address(), value); return this; }
-        /** Sets the specified value to the {@code base_type_id} field. */
+        /** Sets the specified value to the {@link SpvcReflectedResource#base_type_id} field. */
         public SpvcReflectedResource.Buffer base_type_id(@NativeType("spvc_type_id") int value) { SpvcReflectedResource.nbase_type_id(address(), value); return this; }
-        /** Sets the specified value to the {@code type_id} field. */
+        /** Sets the specified value to the {@link SpvcReflectedResource#type_id} field. */
         public SpvcReflectedResource.Buffer type_id(@NativeType("spvc_type_id") int value) { SpvcReflectedResource.ntype_id(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@code name} field. */
+        /** Sets the address of the specified encoded string to the {@link SpvcReflectedResource#name} field. */
         public SpvcReflectedResource.Buffer name(@NativeType("char const *") ByteBuffer value) { SpvcReflectedResource.nname(address(), value); return this; }
 
     }

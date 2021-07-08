@@ -86,32 +86,32 @@ public class XrActionCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code actionName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code actionName} field. */
     @NativeType("char[XR_MAX_ACTION_NAME_SIZE]")
     public ByteBuffer actionName() { return nactionName(address()); }
-    /** Decodes the null-terminated string stored in the {@code actionName} field. */
+    /** @return the null-terminated string stored in the {@code actionName} field. */
     @NativeType("char[XR_MAX_ACTION_NAME_SIZE]")
     public String actionNameString() { return nactionNameString(address()); }
-    /** Returns the value of the {@code actionType} field. */
+    /** @return the value of the {@code actionType} field. */
     @NativeType("XrActionType")
     public int actionType() { return nactionType(address()); }
-    /** Returns the value of the {@code countSubactionPaths} field. */
+    /** @return the value of the {@code countSubactionPaths} field. */
     @NativeType("uint32_t")
     public int countSubactionPaths() { return ncountSubactionPaths(address()); }
-    /** Returns a {@link LongBuffer} view of the data pointed to by the {@code subactionPaths} field. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code subactionPaths} field. */
     @Nullable
     @NativeType("XrPath const *")
     public LongBuffer subactionPaths() { return nsubactionPaths(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code localizedActionName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code localizedActionName} field. */
     @NativeType("char[XR_MAX_LOCALIZED_ACTION_NAME_SIZE]")
     public ByteBuffer localizedActionName() { return nlocalizedActionName(address()); }
-    /** Decodes the null-terminated string stored in the {@code localizedActionName} field. */
+    /** @return the null-terminated string stored in the {@code localizedActionName} field. */
     @NativeType("char[XR_MAX_LOCALIZED_ACTION_NAME_SIZE]")
     public String localizedActionNameString() { return nlocalizedActionNameString(address()); }
 
@@ -390,32 +390,32 @@ public class XrActionCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActionCreateInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrActionCreateInfo.nnext(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code actionName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code actionName} field. */
         @NativeType("char[XR_MAX_ACTION_NAME_SIZE]")
         public ByteBuffer actionName() { return XrActionCreateInfo.nactionName(address()); }
-        /** Decodes the null-terminated string stored in the {@code actionName} field. */
+        /** @return the null-terminated string stored in the {@code actionName} field. */
         @NativeType("char[XR_MAX_ACTION_NAME_SIZE]")
         public String actionNameString() { return XrActionCreateInfo.nactionNameString(address()); }
-        /** Returns the value of the {@code actionType} field. */
+        /** @return the value of the {@code actionType} field. */
         @NativeType("XrActionType")
         public int actionType() { return XrActionCreateInfo.nactionType(address()); }
-        /** Returns the value of the {@code countSubactionPaths} field. */
+        /** @return the value of the {@code countSubactionPaths} field. */
         @NativeType("uint32_t")
         public int countSubactionPaths() { return XrActionCreateInfo.ncountSubactionPaths(address()); }
-        /** Returns a {@link LongBuffer} view of the data pointed to by the {@code subactionPaths} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code subactionPaths} field. */
         @Nullable
         @NativeType("XrPath const *")
         public LongBuffer subactionPaths() { return XrActionCreateInfo.nsubactionPaths(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code localizedActionName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code localizedActionName} field. */
         @NativeType("char[XR_MAX_LOCALIZED_ACTION_NAME_SIZE]")
         public ByteBuffer localizedActionName() { return XrActionCreateInfo.nlocalizedActionName(address()); }
-        /** Decodes the null-terminated string stored in the {@code localizedActionName} field. */
+        /** @return the null-terminated string stored in the {@code localizedActionName} field. */
         @NativeType("char[XR_MAX_LOCALIZED_ACTION_NAME_SIZE]")
         public String localizedActionNameString() { return XrActionCreateInfo.nlocalizedActionNameString(address()); }
 

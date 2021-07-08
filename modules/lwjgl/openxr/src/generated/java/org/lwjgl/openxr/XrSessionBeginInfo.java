@@ -67,13 +67,13 @@ public class XrSessionBeginInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code primaryViewConfigurationType} field. */
+    /** @return the value of the {@code primaryViewConfigurationType} field. */
     @NativeType("XrViewConfigurationType")
     public int primaryViewConfigurationType() { return nprimaryViewConfigurationType(address()); }
 
@@ -304,13 +304,13 @@ public class XrSessionBeginInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSessionBeginInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSessionBeginInfo.nnext(address()); }
-        /** Returns the value of the {@code primaryViewConfigurationType} field. */
+        /** @return the value of the {@code primaryViewConfigurationType} field. */
         @NativeType("XrViewConfigurationType")
         public int primaryViewConfigurationType() { return XrSessionBeginInfo.nprimaryViewConfigurationType(address()); }
 

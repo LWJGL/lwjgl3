@@ -24,10 +24,6 @@ import org.lwjgl.vulkan.*;
 /** Native bindings to the GLFW library's Vulkan functions. */
 public class GLFWVulkan {
 
-    protected GLFWVulkan() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
     public static final class Functions {
 
@@ -45,8 +41,12 @@ public class GLFWVulkan {
 
     static {
         if (Platform.get() == Platform.MACOSX) {
-            setPathLWJGL();
+            setPath(VK.getFunctionProvider());
         }
+    }
+
+    protected GLFWVulkan() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ glfwVulkanSupported ] ---
@@ -300,12 +300,6 @@ public class GLFWVulkan {
         return invokePPPPI(instance.address(), window, memAddressSafe(allocator), surface, __functionAddress);
     }
 
-    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setPath(String)} with the path of the Vulkan shared library loaded by LWJGL. */
-    @Deprecated
-    public static void setPathLWJGL() {
-        setPath(VK.getFunctionProvider());
-    }
-    
     /**
      * Calls {@link #setPath(String)} with the path of the specified {@link SharedLibrary}.
      * 

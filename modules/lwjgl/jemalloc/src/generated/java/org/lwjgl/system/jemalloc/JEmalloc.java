@@ -32,46 +32,6 @@ import static org.lwjgl.system.Pointer.*;
  */
 public class JEmalloc {
 
-    /** The major version. */
-    public static final int JEMALLOC_VERSION_MAJOR = 5;
-
-    /** The minor version. */
-    public static final int JEMALLOC_VERSION_MINOR = 2;
-
-    /** The bugfix version. */
-    public static final int JEMALLOC_VERSION_BUGFIX = 0;
-
-    /** The revision number. */
-    public static final int JEMALLOC_VERSION_NREV = 0;
-
-    /** The globally unique identifier (git commit hash). */
-    public static final String JEMALLOC_VERSION_GID = "b0b3e49a54ec29e32636f4577d9d5a896d67fd20";
-
-    /** The version string. */
-    public static final String JEMALLOC_VERSION = JEMALLOC_VERSION_MAJOR + "." + JEMALLOC_VERSION_MINOR + "." + JEMALLOC_VERSION_BUGFIX + "-" + JEMALLOC_VERSION_NREV + "-g" + JEMALLOC_VERSION_GID;
-
-    /**
-     * Initialize newly allocated memory to contain zero bytes. In the growing reallocation case, the real size prior to reallocation defines the boundary
-     * between untouched bytes and those that are initialized to contain zero bytes. If this macro is absent, newly allocated memory is uninitialized.
-     */
-    public static final int MALLOCX_ZERO = 0x40;
-
-    /**
-     * Do not use a thread-specific cache (tcache). Unless {@link #MALLOCX_TCACHE} or {@code MALLOCX_TCACHE_NONE} is specified, an automatically managed
-     * tcache will be used under many circumstances. This macro cannot be used in the same {@code flags} argument as {@code MALLOCX_TCACHE(tc)}.
-     */
-    public static final int MALLOCX_TCACHE_NONE = MALLOCX_TCACHE(-1);
-
-    /** Use as arena index in "arena.&lt;i&gt;.{purge,decay,dss}" and "stats.arenas.&lt;i&gt;.*" mallctl interfaces to select all arenas. */
-    public static final int MALLCTL_ARENAS_ALL = 0x1000;
-
-    /** Use as arena index in "stats.arenas.&lt;i&gt;.*" mallctl interfaces to select destroyed arenas. */
-    public static final int MALLCTL_ARENAS_DESTROYED = 0x1001;
-
-    protected JEmalloc() {
-        throw new UnsupportedOperationException();
-    }
-
     private static final SharedLibrary JEMALLOC = Library.loadNative(JEmalloc.class, "org.lwjgl.jemalloc", Configuration.JEMALLOC_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("jemalloc")), true);
 
     /** Contains the function pointers loaded from the jemalloc {@link SharedLibrary}. */
@@ -108,12 +68,52 @@ public class JEmalloc {
         return JEMALLOC;
     }
 
+    /** The major version. */
+    public static final int JEMALLOC_VERSION_MAJOR = 5;
+
+    /** The minor version. */
+    public static final int JEMALLOC_VERSION_MINOR = 2;
+
+    /** The bugfix version. */
+    public static final int JEMALLOC_VERSION_BUGFIX = 0;
+
+    /** The revision number. */
+    public static final int JEMALLOC_VERSION_NREV = 0;
+
+    /** The globally unique identifier (git commit hash). */
+    public static final String JEMALLOC_VERSION_GID = "b0b3e49a54ec29e32636f4577d9d5a896d67fd20";
+
+    /** The version string. */
+    public static final String JEMALLOC_VERSION = JEMALLOC_VERSION_MAJOR + "." + JEMALLOC_VERSION_MINOR + "." + JEMALLOC_VERSION_BUGFIX + "-" + JEMALLOC_VERSION_NREV + "-g" + JEMALLOC_VERSION_GID;
+
+    /**
+     * Initialize newly allocated memory to contain zero bytes. In the growing reallocation case, the real size prior to reallocation defines the boundary
+     * between untouched bytes and those that are initialized to contain zero bytes. If this macro is absent, newly allocated memory is uninitialized.
+     */
+    public static final int MALLOCX_ZERO = 0x40;
+
+    /**
+     * Do not use a thread-specific cache (tcache). Unless {@link #MALLOCX_TCACHE} or {@code MALLOCX_TCACHE_NONE} is specified, an automatically managed
+     * tcache will be used under many circumstances. This macro cannot be used in the same {@code flags} argument as {@code MALLOCX_TCACHE(tc)}.
+     */
+    public static final int MALLOCX_TCACHE_NONE = MALLOCX_TCACHE(-1);
+
+    /** Use as arena index in "arena.&lt;i&gt;.{purge,decay,dss}" and "stats.arenas.&lt;i&gt;.*" mallctl interfaces to select all arenas. */
+    public static final int MALLCTL_ARENAS_ALL = 0x1000;
+
+    /** Use as arena index in "stats.arenas.&lt;i&gt;.*" mallctl interfaces to select destroyed arenas. */
+    public static final int MALLCTL_ARENAS_DESTROYED = 0x1001;
+
     static {
         // Force jemalloc to initialize before anyone else uses it.
         // This avoids a dangerous race when the first jemalloc functions are called concurrently.
         if (Platform.get() == Platform.WINDOWS) {
             nje_free(nje_malloc(8));
         }
+    }
+
+    protected JEmalloc() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ je_malloc_message ] ---

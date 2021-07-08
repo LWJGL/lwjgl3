@@ -20,6 +20,25 @@ import org.lwjgl.system.windows.*;
 /** Native bindings to WGL functionality. */
 public class WGL {
 
+    /** Contains the function pointers loaded from {@code GL.getFunctionProvider()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            CreateContext      = apiGetFunctionAddress(GL.getFunctionProvider(), "wglCreateContext"),
+            CreateLayerContext = apiGetFunctionAddress(GL.getFunctionProvider(), "wglCreateLayerContext"),
+            CopyContext        = apiGetFunctionAddress(GL.getFunctionProvider(), "wglCopyContext"),
+            DeleteContext      = apiGetFunctionAddress(GL.getFunctionProvider(), "wglDeleteContext"),
+            GetCurrentContext  = apiGetFunctionAddress(GL.getFunctionProvider(), "wglGetCurrentContext"),
+            GetCurrentDC       = apiGetFunctionAddress(GL.getFunctionProvider(), "wglGetCurrentDC"),
+            GetProcAddress     = apiGetFunctionAddress(GL.getFunctionProvider(), "wglGetProcAddress"),
+            MakeCurrent        = apiGetFunctionAddress(GL.getFunctionProvider(), "wglMakeCurrent"),
+            ShareLists         = apiGetFunctionAddress(GL.getFunctionProvider(), "wglShareLists");
+
+    }
+
     /** UseFontOutlines format. */
     public static final int
         WGL_FONT_LINES    = 0,
@@ -61,25 +80,6 @@ public class WGL {
 
     protected WGL() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code GL.getFunctionProvider()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            CreateContext      = apiGetFunctionAddress(GL.getFunctionProvider(), "wglCreateContext"),
-            CreateLayerContext = apiGetFunctionAddress(GL.getFunctionProvider(), "wglCreateLayerContext"),
-            CopyContext        = apiGetFunctionAddress(GL.getFunctionProvider(), "wglCopyContext"),
-            DeleteContext      = apiGetFunctionAddress(GL.getFunctionProvider(), "wglDeleteContext"),
-            GetCurrentContext  = apiGetFunctionAddress(GL.getFunctionProvider(), "wglGetCurrentContext"),
-            GetCurrentDC       = apiGetFunctionAddress(GL.getFunctionProvider(), "wglGetCurrentDC"),
-            GetProcAddress     = apiGetFunctionAddress(GL.getFunctionProvider(), "wglGetProcAddress"),
-            MakeCurrent        = apiGetFunctionAddress(GL.getFunctionProvider(), "wglMakeCurrent"),
-            ShareLists         = apiGetFunctionAddress(GL.getFunctionProvider(), "wglShareLists");
-
     }
 
     // --- [ wglCreateContext ] ---

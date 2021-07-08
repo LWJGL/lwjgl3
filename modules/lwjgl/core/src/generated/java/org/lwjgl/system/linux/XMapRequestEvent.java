@@ -17,22 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code serial} &ndash; # of last request processed by server</li>
- * <li>{@code send_event} &ndash; true if this came from an {@link X11#XSendEvent} request</li>
- * <li>{@code display} &ndash; {@code Display} the event was read from</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XMapRequestEvent {
  *     int type;
- *     unsigned long serial;
- *     Bool send_event;
- *     Display * display;
+ *     unsigned long {@link #serial};
+ *     Bool {@link #send_event};
+ *     Display * {@link #display};
  *     Window parent;
  *     Window window;
  * }</code></pre>
@@ -88,31 +80,31 @@ public class XMapRequestEvent extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code serial} field. */
+    /** # of last request processed by server */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** Returns the value of the {@code send_event} field. */
+    /** true if this came from an {@link X11#XSendEvent} request */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** Returns the value of the {@code display} field. */
+    /** {@code Display} the event was read from */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code parent} field. */
+    /** @return the value of the {@code parent} field. */
     @NativeType("Window")
     public long parent() { return nparent(address()); }
-    /** Returns the value of the {@code window} field. */
+    /** @return the value of the {@code window} field. */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
 
     /** Sets the specified value to the {@code type} field. */
     public XMapRequestEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code serial} field. */
+    /** Sets the specified value to the {@link #serial} field. */
     public XMapRequestEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@code send_event} field. */
+    /** Sets the specified value to the {@link #send_event} field. */
     public XMapRequestEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code display} field. */
+    /** Sets the specified value to the {@link #display} field. */
     public XMapRequestEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
     /** Sets the specified value to the {@code parent} field. */
     public XMapRequestEvent parent(@NativeType("Window") long value) { nparent(address(), value); return this; }
@@ -378,31 +370,31 @@ public class XMapRequestEvent extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XMapRequestEvent.ntype(address()); }
-        /** Returns the value of the {@code serial} field. */
+        /** @return the value of the {@link XMapRequestEvent#serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XMapRequestEvent.nserial(address()); }
-        /** Returns the value of the {@code send_event} field. */
+        /** @return the value of the {@link XMapRequestEvent#send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XMapRequestEvent.nsend_event(address()) != 0; }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@link XMapRequestEvent#display} field. */
         @NativeType("Display *")
         public long display() { return XMapRequestEvent.ndisplay(address()); }
-        /** Returns the value of the {@code parent} field. */
+        /** @return the value of the {@code parent} field. */
         @NativeType("Window")
         public long parent() { return XMapRequestEvent.nparent(address()); }
-        /** Returns the value of the {@code window} field. */
+        /** @return the value of the {@code window} field. */
         @NativeType("Window")
         public long window() { return XMapRequestEvent.nwindow(address()); }
 
         /** Sets the specified value to the {@code type} field. */
         public XMapRequestEvent.Buffer type(int value) { XMapRequestEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code serial} field. */
+        /** Sets the specified value to the {@link XMapRequestEvent#serial} field. */
         public XMapRequestEvent.Buffer serial(@NativeType("unsigned long") long value) { XMapRequestEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@code send_event} field. */
+        /** Sets the specified value to the {@link XMapRequestEvent#send_event} field. */
         public XMapRequestEvent.Buffer send_event(@NativeType("Bool") boolean value) { XMapRequestEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code display} field. */
+        /** Sets the specified value to the {@link XMapRequestEvent#display} field. */
         public XMapRequestEvent.Buffer display(@NativeType("Display *") long value) { XMapRequestEvent.ndisplay(address(), value); return this; }
         /** Sets the specified value to the {@code parent} field. */
         public XMapRequestEvent.Buffer parent(@NativeType("Window") long value) { XMapRequestEvent.nparent(address(), value); return this; }

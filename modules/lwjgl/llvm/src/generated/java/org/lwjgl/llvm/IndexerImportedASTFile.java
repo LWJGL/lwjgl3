@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * CXIdxClientASTFile (*) (
+ * CXIdxClientASTFile (*{@link #invoke}) (
  *     CXClientData client_data,
  *     CXIdxImportedASTFileInfo const *info
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class IndexerImportedASTFile extends Callback implements Indexer
     }
 
     protected IndexerImportedASTFile() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     IndexerImportedASTFile(long functionPointer) {

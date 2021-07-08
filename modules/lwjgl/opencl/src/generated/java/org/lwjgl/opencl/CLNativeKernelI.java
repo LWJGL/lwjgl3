@@ -6,8 +6,11 @@
 package org.lwjgl.opencl;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be passed to the {@link CL10#clEnqueueNativeKernel EnqueueNativeKernel} method.
@@ -15,23 +18,27 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void *args
  * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("void (*) (void *)")
-public interface CLNativeKernelI extends CallbackI.V {
+public interface CLNativeKernelI extends CallbackI {
 
-    String SIGNATURE = Callback.__stdcall("(p)v");
+    FFICIF CIF = apiCreateCIF(
+        apiStdcall(),
+        ffi_type_void,
+        ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args)
+            memGetAddress(memGetAddress(args))
         );
     }
 

@@ -76,19 +76,19 @@ public class XrInteractionProfileSuggestedBinding extends Struct implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code interactionProfile} field. */
+    /** @return the value of the {@code interactionProfile} field. */
     @NativeType("XrPath")
     public long interactionProfile() { return ninteractionProfile(address()); }
-    /** Returns the value of the {@code countSuggestedBindings} field. */
+    /** @return the value of the {@code countSuggestedBindings} field. */
     @NativeType("uint32_t")
     public int countSuggestedBindings() { return ncountSuggestedBindings(address()); }
-    /** Returns a {@link XrActionSuggestedBinding.Buffer} view of the struct array pointed to by the {@code suggestedBindings} field. */
+    /** @return a {@link XrActionSuggestedBinding.Buffer} view of the struct array pointed to by the {@code suggestedBindings} field. */
     @NativeType("XrActionSuggestedBinding const *")
     public XrActionSuggestedBinding.Buffer suggestedBindings() { return nsuggestedBindings(address()); }
 
@@ -355,19 +355,19 @@ public class XrInteractionProfileSuggestedBinding extends Struct implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrInteractionProfileSuggestedBinding.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrInteractionProfileSuggestedBinding.nnext(address()); }
-        /** Returns the value of the {@code interactionProfile} field. */
+        /** @return the value of the {@code interactionProfile} field. */
         @NativeType("XrPath")
         public long interactionProfile() { return XrInteractionProfileSuggestedBinding.ninteractionProfile(address()); }
-        /** Returns the value of the {@code countSuggestedBindings} field. */
+        /** @return the value of the {@code countSuggestedBindings} field. */
         @NativeType("uint32_t")
         public int countSuggestedBindings() { return XrInteractionProfileSuggestedBinding.ncountSuggestedBindings(address()); }
-        /** Returns a {@link XrActionSuggestedBinding.Buffer} view of the struct array pointed to by the {@code suggestedBindings} field. */
+        /** @return a {@link XrActionSuggestedBinding.Buffer} view of the struct array pointed to by the {@code suggestedBindings} field. */
         @NativeType("XrActionSuggestedBinding const *")
         public XrActionSuggestedBinding.Buffer suggestedBindings() { return XrInteractionProfileSuggestedBinding.nsuggestedBindings(address()); }
 

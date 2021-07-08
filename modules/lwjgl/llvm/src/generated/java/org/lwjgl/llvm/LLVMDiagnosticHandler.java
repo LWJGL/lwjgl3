@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     LLVMDiagnosticInfoRef DiagnosticInfo,
  *     void *DiagnosticContext
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class LLVMDiagnosticHandler extends Callback implements LLVMDiag
     }
 
     protected LLVMDiagnosticHandler() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     LLVMDiagnosticHandler(long functionPointer) {

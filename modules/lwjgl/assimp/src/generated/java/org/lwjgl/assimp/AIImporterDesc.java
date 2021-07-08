@@ -22,40 +22,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * means a lot of maintenance as importers / exporters are added to Assimp, so it might be useful to have a common mechanism to query some rough importer
  * characteristics.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code mName} &ndash; Full name of the importer (i.e. Blender3D importer)</li>
- * <li>{@code mAuthor} &ndash; Original author (left blank if unknown or whole assimp team)</li>
- * <li>{@code mMaintainer} &ndash; Current maintainer, left blank if the author maintains</li>
- * <li>{@code mComments} &ndash; Implementation comments, i.e. unimplemented features</li>
- * <li>{@code mFlags} &ndash; These flags indicate some characteristics common to many importers.</li>
- * <li>{@code mMinMajor} &ndash; Minimum major format that can be loaded in major.minor style.</li>
- * <li>{@code mMinMinor} &ndash; Minimum minor format that can be loaded in major.minor style.</li>
- * <li>{@code mMaxMajor} &ndash; Maximum major format that can be loaded in major.minor style.</li>
- * <li>{@code mMaxMinor} &ndash; Maximum minor format that can be loaded in major.minor style.</li>
- * <li>{@code mFileExtensions} &ndash; 
- * List of file extensions this importer can handle. List entries are separated by space characters. All entries are lower case without a leading dot
- * (i.e. "xml dae" would be a valid value. Note that multiple importers may respond to the same file extension - assimp calls all importers in the order
- * in which they are registered and each importer gets the opportunity to load the file until one importer "claims" the file. Apart from file extension
- * checks, importers typically use other methods to quickly reject files (i.e. magic words) so this does not mean that common or generic file extensions
- * such as XML would be tediously slow.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiImporterDesc {
- *     char const * mName;
- *     char const * mAuthor;
- *     char const * mMaintainer;
- *     char const * mComments;
- *     unsigned int mFlags;
- *     unsigned int mMinMajor;
- *     unsigned int mMinMinor;
- *     unsigned int mMaxMajor;
- *     unsigned int mMaxMinor;
- *     char const * mFileExtensions;
+ *     char const * {@link #mName};
+ *     char const * {@link #mAuthor};
+ *     char const * {@link #mMaintainer};
+ *     char const * {@link #mComments};
+ *     unsigned int {@link #mFlags};
+ *     unsigned int {@link #mMinMajor};
+ *     unsigned int {@link #mMinMinor};
+ *     unsigned int {@link #mMaxMajor};
+ *     unsigned int {@link #mMaxMinor};
+ *     char const * {@link #mFileExtensions};
  * }</code></pre>
  */
 @NativeType("struct aiImporterDesc")
@@ -122,71 +102,83 @@ public class AIImporterDesc extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code mName} field. */
+    /** Full name of the importer (i.e. Blender3D importer) */
     @NativeType("char const *")
     public ByteBuffer mName() { return nmName(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code mName} field. */
+    /** Full name of the importer (i.e. Blender3D importer) */
     @NativeType("char const *")
     public String mNameString() { return nmNameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code mAuthor} field. */
+    /** Original author (left blank if unknown or whole assimp team) */
     @NativeType("char const *")
     public ByteBuffer mAuthor() { return nmAuthor(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code mAuthor} field. */
+    /** Original author (left blank if unknown or whole assimp team) */
     @NativeType("char const *")
     public String mAuthorString() { return nmAuthorString(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code mMaintainer} field. */
+    /** Current maintainer, left blank if the author maintains */
     @NativeType("char const *")
     public ByteBuffer mMaintainer() { return nmMaintainer(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code mMaintainer} field. */
+    /** Current maintainer, left blank if the author maintains */
     @NativeType("char const *")
     public String mMaintainerString() { return nmMaintainerString(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code mComments} field. */
+    /** Implementation comments, i.e. unimplemented features */
     @NativeType("char const *")
     public ByteBuffer mComments() { return nmComments(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code mComments} field. */
+    /** Implementation comments, i.e. unimplemented features */
     @NativeType("char const *")
     public String mCommentsString() { return nmCommentsString(address()); }
-    /** Returns the value of the {@code mFlags} field. */
+    /** These flags indicate some characteristics common to many importers. */
     @NativeType("unsigned int")
     public int mFlags() { return nmFlags(address()); }
-    /** Returns the value of the {@code mMinMajor} field. */
+    /** Minimum major format that can be loaded in major.minor style. */
     @NativeType("unsigned int")
     public int mMinMajor() { return nmMinMajor(address()); }
-    /** Returns the value of the {@code mMinMinor} field. */
+    /** Minimum minor format that can be loaded in major.minor style. */
     @NativeType("unsigned int")
     public int mMinMinor() { return nmMinMinor(address()); }
-    /** Returns the value of the {@code mMaxMajor} field. */
+    /** Maximum major format that can be loaded in major.minor style. */
     @NativeType("unsigned int")
     public int mMaxMajor() { return nmMaxMajor(address()); }
-    /** Returns the value of the {@code mMaxMinor} field. */
+    /** Maximum minor format that can be loaded in major.minor style. */
     @NativeType("unsigned int")
     public int mMaxMinor() { return nmMaxMinor(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code mFileExtensions} field. */
+    /**
+     * List of file extensions this importer can handle. List entries are separated by space characters. All entries are lower case without a leading dot
+     * (i.e. "xml dae" would be a valid value. Note that multiple importers may respond to the same file extension - assimp calls all importers in the order
+     * in which they are registered and each importer gets the opportunity to load the file until one importer "claims" the file. Apart from file extension
+     * checks, importers typically use other methods to quickly reject files (i.e. magic words) so this does not mean that common or generic file extensions
+     * such as XML would be tediously slow.
+     */
     @NativeType("char const *")
     public ByteBuffer mFileExtensions() { return nmFileExtensions(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code mFileExtensions} field. */
+    /**
+     * List of file extensions this importer can handle. List entries are separated by space characters. All entries are lower case without a leading dot
+     * (i.e. "xml dae" would be a valid value. Note that multiple importers may respond to the same file extension - assimp calls all importers in the order
+     * in which they are registered and each importer gets the opportunity to load the file until one importer "claims" the file. Apart from file extension
+     * checks, importers typically use other methods to quickly reject files (i.e. magic words) so this does not mean that common or generic file extensions
+     * such as XML would be tediously slow.
+     */
     @NativeType("char const *")
     public String mFileExtensionsString() { return nmFileExtensionsString(address()); }
 
-    /** Sets the address of the specified encoded string to the {@code mName} field. */
+    /** Sets the address of the specified encoded string to the {@link #mName} field. */
     public AIImporterDesc mName(@NativeType("char const *") ByteBuffer value) { nmName(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@code mAuthor} field. */
+    /** Sets the address of the specified encoded string to the {@link #mAuthor} field. */
     public AIImporterDesc mAuthor(@NativeType("char const *") ByteBuffer value) { nmAuthor(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@code mMaintainer} field. */
+    /** Sets the address of the specified encoded string to the {@link #mMaintainer} field. */
     public AIImporterDesc mMaintainer(@NativeType("char const *") ByteBuffer value) { nmMaintainer(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@code mComments} field. */
+    /** Sets the address of the specified encoded string to the {@link #mComments} field. */
     public AIImporterDesc mComments(@NativeType("char const *") ByteBuffer value) { nmComments(address(), value); return this; }
-    /** Sets the specified value to the {@code mFlags} field. */
+    /** Sets the specified value to the {@link #mFlags} field. */
     public AIImporterDesc mFlags(@NativeType("unsigned int") int value) { nmFlags(address(), value); return this; }
-    /** Sets the specified value to the {@code mMinMajor} field. */
+    /** Sets the specified value to the {@link #mMinMajor} field. */
     public AIImporterDesc mMinMajor(@NativeType("unsigned int") int value) { nmMinMajor(address(), value); return this; }
-    /** Sets the specified value to the {@code mMinMinor} field. */
+    /** Sets the specified value to the {@link #mMinMinor} field. */
     public AIImporterDesc mMinMinor(@NativeType("unsigned int") int value) { nmMinMinor(address(), value); return this; }
-    /** Sets the specified value to the {@code mMaxMajor} field. */
+    /** Sets the specified value to the {@link #mMaxMajor} field. */
     public AIImporterDesc mMaxMajor(@NativeType("unsigned int") int value) { nmMaxMajor(address(), value); return this; }
-    /** Sets the specified value to the {@code mMaxMinor} field. */
+    /** Sets the specified value to the {@link #mMaxMinor} field. */
     public AIImporterDesc mMaxMinor(@NativeType("unsigned int") int value) { nmMaxMinor(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@code mFileExtensions} field. */
+    /** Sets the address of the specified encoded string to the {@link #mFileExtensions} field. */
     public AIImporterDesc mFileExtensions(@NativeType("char const *") ByteBuffer value) { nmFileExtensions(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -501,71 +493,71 @@ public class AIImporterDesc extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code mName} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link AIImporterDesc#mName} field. */
         @NativeType("char const *")
         public ByteBuffer mName() { return AIImporterDesc.nmName(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code mName} field. */
+        /** @return the null-terminated string pointed to by the {@link AIImporterDesc#mName} field. */
         @NativeType("char const *")
         public String mNameString() { return AIImporterDesc.nmNameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code mAuthor} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link AIImporterDesc#mAuthor} field. */
         @NativeType("char const *")
         public ByteBuffer mAuthor() { return AIImporterDesc.nmAuthor(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code mAuthor} field. */
+        /** @return the null-terminated string pointed to by the {@link AIImporterDesc#mAuthor} field. */
         @NativeType("char const *")
         public String mAuthorString() { return AIImporterDesc.nmAuthorString(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code mMaintainer} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link AIImporterDesc#mMaintainer} field. */
         @NativeType("char const *")
         public ByteBuffer mMaintainer() { return AIImporterDesc.nmMaintainer(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code mMaintainer} field. */
+        /** @return the null-terminated string pointed to by the {@link AIImporterDesc#mMaintainer} field. */
         @NativeType("char const *")
         public String mMaintainerString() { return AIImporterDesc.nmMaintainerString(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code mComments} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link AIImporterDesc#mComments} field. */
         @NativeType("char const *")
         public ByteBuffer mComments() { return AIImporterDesc.nmComments(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code mComments} field. */
+        /** @return the null-terminated string pointed to by the {@link AIImporterDesc#mComments} field. */
         @NativeType("char const *")
         public String mCommentsString() { return AIImporterDesc.nmCommentsString(address()); }
-        /** Returns the value of the {@code mFlags} field. */
+        /** @return the value of the {@link AIImporterDesc#mFlags} field. */
         @NativeType("unsigned int")
         public int mFlags() { return AIImporterDesc.nmFlags(address()); }
-        /** Returns the value of the {@code mMinMajor} field. */
+        /** @return the value of the {@link AIImporterDesc#mMinMajor} field. */
         @NativeType("unsigned int")
         public int mMinMajor() { return AIImporterDesc.nmMinMajor(address()); }
-        /** Returns the value of the {@code mMinMinor} field. */
+        /** @return the value of the {@link AIImporterDesc#mMinMinor} field. */
         @NativeType("unsigned int")
         public int mMinMinor() { return AIImporterDesc.nmMinMinor(address()); }
-        /** Returns the value of the {@code mMaxMajor} field. */
+        /** @return the value of the {@link AIImporterDesc#mMaxMajor} field. */
         @NativeType("unsigned int")
         public int mMaxMajor() { return AIImporterDesc.nmMaxMajor(address()); }
-        /** Returns the value of the {@code mMaxMinor} field. */
+        /** @return the value of the {@link AIImporterDesc#mMaxMinor} field. */
         @NativeType("unsigned int")
         public int mMaxMinor() { return AIImporterDesc.nmMaxMinor(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code mFileExtensions} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link AIImporterDesc#mFileExtensions} field. */
         @NativeType("char const *")
         public ByteBuffer mFileExtensions() { return AIImporterDesc.nmFileExtensions(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code mFileExtensions} field. */
+        /** @return the null-terminated string pointed to by the {@link AIImporterDesc#mFileExtensions} field. */
         @NativeType("char const *")
         public String mFileExtensionsString() { return AIImporterDesc.nmFileExtensionsString(address()); }
 
-        /** Sets the address of the specified encoded string to the {@code mName} field. */
+        /** Sets the address of the specified encoded string to the {@link AIImporterDesc#mName} field. */
         public AIImporterDesc.Buffer mName(@NativeType("char const *") ByteBuffer value) { AIImporterDesc.nmName(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@code mAuthor} field. */
+        /** Sets the address of the specified encoded string to the {@link AIImporterDesc#mAuthor} field. */
         public AIImporterDesc.Buffer mAuthor(@NativeType("char const *") ByteBuffer value) { AIImporterDesc.nmAuthor(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@code mMaintainer} field. */
+        /** Sets the address of the specified encoded string to the {@link AIImporterDesc#mMaintainer} field. */
         public AIImporterDesc.Buffer mMaintainer(@NativeType("char const *") ByteBuffer value) { AIImporterDesc.nmMaintainer(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@code mComments} field. */
+        /** Sets the address of the specified encoded string to the {@link AIImporterDesc#mComments} field. */
         public AIImporterDesc.Buffer mComments(@NativeType("char const *") ByteBuffer value) { AIImporterDesc.nmComments(address(), value); return this; }
-        /** Sets the specified value to the {@code mFlags} field. */
+        /** Sets the specified value to the {@link AIImporterDesc#mFlags} field. */
         public AIImporterDesc.Buffer mFlags(@NativeType("unsigned int") int value) { AIImporterDesc.nmFlags(address(), value); return this; }
-        /** Sets the specified value to the {@code mMinMajor} field. */
+        /** Sets the specified value to the {@link AIImporterDesc#mMinMajor} field. */
         public AIImporterDesc.Buffer mMinMajor(@NativeType("unsigned int") int value) { AIImporterDesc.nmMinMajor(address(), value); return this; }
-        /** Sets the specified value to the {@code mMinMinor} field. */
+        /** Sets the specified value to the {@link AIImporterDesc#mMinMinor} field. */
         public AIImporterDesc.Buffer mMinMinor(@NativeType("unsigned int") int value) { AIImporterDesc.nmMinMinor(address(), value); return this; }
-        /** Sets the specified value to the {@code mMaxMajor} field. */
+        /** Sets the specified value to the {@link AIImporterDesc#mMaxMajor} field. */
         public AIImporterDesc.Buffer mMaxMajor(@NativeType("unsigned int") int value) { AIImporterDesc.nmMaxMajor(address(), value); return this; }
-        /** Sets the specified value to the {@code mMaxMinor} field. */
+        /** Sets the specified value to the {@link AIImporterDesc#mMaxMinor} field. */
         public AIImporterDesc.Buffer mMaxMinor(@NativeType("unsigned int") int value) { AIImporterDesc.nmMaxMinor(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@code mFileExtensions} field. */
+        /** Sets the address of the specified encoded string to the {@link AIImporterDesc#mFileExtensions} field. */
         public AIImporterDesc.Buffer mFileExtensions(@NativeType("char const *") ByteBuffer value) { AIImporterDesc.nmFileExtensions(address(), value); return this; }
 
     }

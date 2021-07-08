@@ -8,6 +8,8 @@ package org.lwjgl.vulkan;
 /**
  * A {@code dma_buf} is a type of file descriptor, defined by the Linux kernel, that allows sharing memory across kernel device drivers and across processes. This extension enables applications to import a {@code dma_buf} as {@code VkDeviceMemory}, to export {@code VkDeviceMemory} as a {@code dma_buf}, and to create {@code VkBuffer} objects that <b>can</b> be bound to that memory.
  * 
+ * <h5>VK_EXT_external_memory_dma_buf</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_external_memory_dma_buf}</dd>
@@ -26,6 +28,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Chad Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_external_memory_dma_buf:%20&amp;body=@chadversary%20">chadversary</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-10-10</dd>
  * <dt><b>IP Status</b></dt>

@@ -72,16 +72,16 @@ public class XrHandJointVelocitiesEXT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code jointCount} field. */
+    /** @return the value of the {@code jointCount} field. */
     @NativeType("uint32_t")
     public int jointCount() { return njointCount(address()); }
-    /** Returns a {@link XrHandJointVelocityEXT.Buffer} view of the struct array pointed to by the {@code jointVelocities} field. */
+    /** @return a {@link XrHandJointVelocityEXT.Buffer} view of the struct array pointed to by the {@code jointVelocities} field. */
     @NativeType("XrHandJointVelocityEXT *")
     public XrHandJointVelocityEXT.Buffer jointVelocities() { return njointVelocities(address()); }
 
@@ -337,16 +337,16 @@ public class XrHandJointVelocitiesEXT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHandJointVelocitiesEXT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrHandJointVelocitiesEXT.nnext(address()); }
-        /** Returns the value of the {@code jointCount} field. */
+        /** @return the value of the {@code jointCount} field. */
         @NativeType("uint32_t")
         public int jointCount() { return XrHandJointVelocitiesEXT.njointCount(address()); }
-        /** Returns a {@link XrHandJointVelocityEXT.Buffer} view of the struct array pointed to by the {@code jointVelocities} field. */
+        /** @return a {@link XrHandJointVelocityEXT.Buffer} view of the struct array pointed to by the {@code jointVelocities} field. */
         @NativeType("XrHandJointVelocityEXT *")
         public XrHandJointVelocityEXT.Buffer jointVelocities() { return XrHandJointVelocitiesEXT.njointVelocities(address()); }
 

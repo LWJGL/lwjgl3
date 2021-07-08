@@ -28,21 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code pointClippingBehavior} &ndash; a {@code VkPointClippingBehavior} value specifying the point clipping behavior supported by the implementation.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDevicePointClippingProperties {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkPointClippingBehavior pointClippingBehavior;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkPointClippingBehavior {@link #pointClippingBehavior};
  * }</code></pre>
  */
 public class VkPhysicalDevicePointClippingProperties extends Struct implements NativeResource {
@@ -87,19 +79,19 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code pointClippingBehavior} field. */
+    /** a {@code VkPointClippingBehavior} value specifying the point clipping behavior supported by the implementation. */
     @NativeType("VkPointClippingBehavior")
     public int pointClippingBehavior() { return npointClippingBehavior(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePointClippingProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePointClippingProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,19 +310,19 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDevicePointClippingProperties#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevicePointClippingProperties.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDevicePointClippingProperties#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevicePointClippingProperties.npNext(address()); }
-        /** Returns the value of the {@code pointClippingBehavior} field. */
+        /** @return the value of the {@link VkPhysicalDevicePointClippingProperties#pointClippingBehavior} field. */
         @NativeType("VkPointClippingBehavior")
         public int pointClippingBehavior() { return VkPhysicalDevicePointClippingProperties.npointClippingBehavior(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePointClippingProperties#sType} field. */
         public VkPhysicalDevicePointClippingProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePointClippingProperties.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePointClippingProperties#pNext} field. */
         public VkPhysicalDevicePointClippingProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePointClippingProperties.npNext(address(), value); return this; }
 
     }

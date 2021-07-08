@@ -72,16 +72,16 @@ public class XrActionStateGetInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code action} field. */
+    /** @return the value of the {@code action} field. */
     @NativeType("XrAction")
     public long action() { return naction(address()); }
-    /** Returns the value of the {@code subactionPath} field. */
+    /** @return the value of the {@code subactionPath} field. */
     @NativeType("XrPath")
     public long subactionPath() { return nsubactionPath(address()); }
 
@@ -341,16 +341,16 @@ public class XrActionStateGetInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActionStateGetInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrActionStateGetInfo.nnext(address()); }
-        /** Returns the value of the {@code action} field. */
+        /** @return the value of the {@code action} field. */
         @NativeType("XrAction")
         public long action() { return XrActionStateGetInfo.naction(address()); }
-        /** Returns the value of the {@code subactionPath} field. */
+        /** @return the value of the {@code subactionPath} field. */
         @NativeType("XrPath")
         public long subactionPath() { return XrActionStateGetInfo.nsubactionPath(address()); }
 

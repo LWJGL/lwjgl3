@@ -10,6 +10,8 @@ package org.lwjgl.vulkan;
  * 
  * <p>When this extension is enabled, the HDR profile is supported for all ASTC formats listed in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#appendix-compressedtex-astc"> ASTC Compressed Image Formats</a>.</p>
  * 
+ * <h5>VK_EXT_texture_compression_astc_hdr</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_texture_compression_astc_hdr}</dd>
@@ -28,6 +30,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_texture_compression_astc_hdr:%20&amp;body=@janharaldfredriksen-arm%20">janharaldfredriksen-arm</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-05-28</dd>
  * <dt><b>IP Status</b></dt>

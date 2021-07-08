@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void *userData
  * )</code></pre>
  */
@@ -49,7 +49,7 @@ public abstract class CUhostFn extends Callback implements CUhostFnI {
     }
 
     protected CUhostFn() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CUhostFn(long functionPointer) {

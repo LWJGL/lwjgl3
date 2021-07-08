@@ -67,13 +67,13 @@ public class XrSystemEyeGazeInteractionPropertiesEXT extends Struct implements N
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code supportsEyeGazeInteraction} field. */
+    /** @return the value of the {@code supportsEyeGazeInteraction} field. */
     @NativeType("XrBool32")
     public boolean supportsEyeGazeInteraction() { return nsupportsEyeGazeInteraction(address()) != 0; }
 
@@ -304,13 +304,13 @@ public class XrSystemEyeGazeInteractionPropertiesEXT extends Struct implements N
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemEyeGazeInteractionPropertiesEXT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemEyeGazeInteractionPropertiesEXT.nnext(address()); }
-        /** Returns the value of the {@code supportsEyeGazeInteraction} field. */
+        /** @return the value of the {@code supportsEyeGazeInteraction} field. */
         @NativeType("XrBool32")
         public boolean supportsEyeGazeInteraction() { return XrSystemEyeGazeInteractionPropertiesEXT.nsupportsEyeGazeInteraction(address()) != 0; }
 

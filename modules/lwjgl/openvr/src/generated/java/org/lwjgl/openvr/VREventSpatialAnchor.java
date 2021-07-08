@@ -58,7 +58,7 @@ public class VREventSpatialAnchor extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code unHandle} field. */
+    /** @return the value of the {@code unHandle} field. */
     @NativeType("SpatialAnchorHandle_t")
     public int unHandle() { return nunHandle(address()); }
 
@@ -134,7 +134,7 @@ public class VREventSpatialAnchor extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code unHandle} field. */
+        /** @return the value of the {@code unHandle} field. */
         @NativeType("SpatialAnchorHandle_t")
         public int unHandle() { return VREventSpatialAnchor.nunHandle(address()); }
 

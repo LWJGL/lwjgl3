@@ -28,6 +28,12 @@ public class CLTest {
     private void createCL() {
         try {
             CL.getFunctionProvider();
+
+            try (MemoryStack stack = stackPush()) {
+                IntBuffer pi = stack.mallocInt(1);
+                checkCLError(clGetPlatformIDs(null, pi));
+            }
+
             CL.destroy();
         } catch (Throwable t) {
             throw new SkipException("Skipped because OpenCL initialization failed [" + t.getMessage() + "]");
@@ -282,10 +288,10 @@ public class CLTest {
                 clSetEventCallback(e, CL_COMPLETE, eventCallback = CLEventCallback.create((event, event_command_exec_status, user_data) -> {
                     assertEquals(event, e);
                     assertEquals(event_command_exec_status, CL_COMPLETE);
-                    assertEquals(user_data, 0xDEADBEEF);
+                    assertEquals(user_data, 0xDEADBEEFL);
 
                     eventLatch.countDown();
-                }), 0xDEADBEEF)
+                }), 0xDEADBEEFL)
             );
 
             checkCLError(clSetUserEventStatus(e, CL_COMPLETE));

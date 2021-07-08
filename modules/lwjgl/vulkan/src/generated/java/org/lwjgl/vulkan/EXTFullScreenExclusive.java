@@ -20,6 +20,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Applications can choose between explicitly disallowing or allowing this behavior, letting the implementation decide, or managing this mode of operation directly using the new {@link #vkAcquireFullScreenExclusiveModeEXT AcquireFullScreenExclusiveModeEXT} and {@link #vkReleaseFullScreenExclusiveModeEXT ReleaseFullScreenExclusiveModeEXT} commands.</p>
  * 
+ * <h5>VK_EXT_full_screen_exclusive</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_full_screen_exclusive}</dd>
@@ -41,6 +43,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_full_screen_exclusive:%20&amp;body=@cubanismo%20">cubanismo</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-03-12</dd>
  * <dt><b>IP Status</b></dt>

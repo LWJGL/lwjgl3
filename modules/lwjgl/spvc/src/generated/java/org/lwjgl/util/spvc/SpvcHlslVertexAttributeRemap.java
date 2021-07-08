@@ -66,13 +66,13 @@ public class SpvcHlslVertexAttributeRemap extends Struct implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code location} field. */
+    /** @return the value of the {@code location} field. */
     @NativeType("unsigned int")
     public int location() { return nlocation(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code semantic} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code semantic} field. */
     @NativeType("char const *")
     public ByteBuffer semantic() { return nsemantic(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code semantic} field. */
+    /** @return the null-terminated string pointed to by the {@code semantic} field. */
     @NativeType("char const *")
     public String semanticString() { return nsemanticString(address()); }
 
@@ -321,13 +321,13 @@ public class SpvcHlslVertexAttributeRemap extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code location} field. */
+        /** @return the value of the {@code location} field. */
         @NativeType("unsigned int")
         public int location() { return SpvcHlslVertexAttributeRemap.nlocation(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code semantic} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code semantic} field. */
         @NativeType("char const *")
         public ByteBuffer semantic() { return SpvcHlslVertexAttributeRemap.nsemantic(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code semantic} field. */
+        /** @return the null-terminated string pointed to by the {@code semantic} field. */
         @NativeType("char const *")
         public String semanticString() { return SpvcHlslVertexAttributeRemap.nsemanticString(address()); }
 

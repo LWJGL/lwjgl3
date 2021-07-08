@@ -101,7 +101,7 @@ This build includes the following changes:
 #### Known Issues
 
 - Vulkan: GLFW configuration for MoltenVK is broken in LWJGL 3.2.3. (#502)
-    * This issue is fixed in LWJGL 3.2.4.
+    * This issue is fixed in LWJGL 3.3.0.
 
 ### 3.2.2
 

@@ -18,23 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Provides boundary test information.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code IsTriggering} &ndash; True if the boundary system is being triggered. Note that due to fade in/out effects this may not exactly match visibility.</li>
- * <li>{@code ClosestDistance} &ndash; Distance to the closest play area or outer boundary surface</li>
- * <li>{@code ClosestPoint} &ndash; Closest point on the boundary surface</li>
- * <li>{@code ClosestPointNormal} &ndash; Unit surface normal of the closest boundary surface</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrBoundaryTestResult {
- *     ovrBool IsTriggering;
- *     float ClosestDistance;
- *     {@link OVRVector3f ovrVector3f} ClosestPoint;
- *     {@link OVRVector3f ovrVector3f} ClosestPointNormal;
+ *     ovrBool {@link #IsTriggering};
+ *     float {@link #ClosestDistance};
+ *     {@link OVRVector3f ovrVector3f} {@link #ClosestPoint};
+ *     {@link OVRVector3f ovrVector3f} {@link #ClosestPointNormal};
  * }</code></pre>
  */
 @NativeType("struct ovrBoundaryTestResult")
@@ -83,15 +74,15 @@ public class OVRBoundaryTestResult extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code IsTriggering} field. */
+    /** True if the boundary system is being triggered. Note that due to fade in/out effects this may not exactly match visibility. */
     @NativeType("ovrBool")
     public boolean IsTriggering() { return nIsTriggering(address()); }
-    /** Returns the value of the {@code ClosestDistance} field. */
+    /** Distance to the closest play area or outer boundary surface */
     public float ClosestDistance() { return nClosestDistance(address()); }
-    /** Returns a {@link OVRVector3f} view of the {@code ClosestPoint} field. */
+    /** Closest point on the boundary surface */
     @NativeType("ovrVector3f")
     public OVRVector3f ClosestPoint() { return nClosestPoint(address()); }
-    /** Returns a {@link OVRVector3f} view of the {@code ClosestPointNormal} field. */
+    /** Unit surface normal of the closest boundary surface */
     @NativeType("ovrVector3f")
     public OVRVector3f ClosestPointNormal() { return nClosestPointNormal(address()); }
 
@@ -285,15 +276,15 @@ public class OVRBoundaryTestResult extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code IsTriggering} field. */
+        /** @return the value of the {@link OVRBoundaryTestResult#IsTriggering} field. */
         @NativeType("ovrBool")
         public boolean IsTriggering() { return OVRBoundaryTestResult.nIsTriggering(address()); }
-        /** Returns the value of the {@code ClosestDistance} field. */
+        /** @return the value of the {@link OVRBoundaryTestResult#ClosestDistance} field. */
         public float ClosestDistance() { return OVRBoundaryTestResult.nClosestDistance(address()); }
-        /** Returns a {@link OVRVector3f} view of the {@code ClosestPoint} field. */
+        /** @return a {@link OVRVector3f} view of the {@link OVRBoundaryTestResult#ClosestPoint} field. */
         @NativeType("ovrVector3f")
         public OVRVector3f ClosestPoint() { return OVRBoundaryTestResult.nClosestPoint(address()); }
-        /** Returns a {@link OVRVector3f} view of the {@code ClosestPointNormal} field. */
+        /** @return a {@link OVRVector3f} view of the {@link OVRBoundaryTestResult#ClosestPointNormal} field. */
         @NativeType("ovrVector3f")
         public OVRVector3f ClosestPointNormal() { return OVRBoundaryTestResult.nClosestPointNormal(address()); }
 

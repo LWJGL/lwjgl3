@@ -25,51 +25,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>If rpmalloc is built with {@code ENABLE_GUARDS}, {@code memory_overwrite} may be set to detect writes before or after allocated memory blocks. This is
  * not enabled in the default LWJGL build.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code memory_map} &ndash; the memory map callback function</li>
- * <li>{@code memory_unmap} &ndash; the memory unmap callback function</li>
- * <li>{@code page_size} &ndash; 
- * the size of memory pages.
- * 
- * <p>The page size MUST be a power of two in {@code [512,16384]} range (2<sup>9</sup> to 2<sup>14</sup>) unless 0 - set to 0 to use system page size. All
- * memory mapping requests to {@code memory_map} will be made with size set to a multiple of the page size.</p>
- * 
- * <p>Used if {@code RPMALLOC_CONFIGURABLE} is defined to 1, otherwise system page size is used.</p></li>
- * <li>{@code span_size} &ndash; 
- * size of a span of memory blocks.
- * 
- * <p>MUST be a power of two, and in {@code [4096,262144]} range (unless 0 - set to 0 to use the default span size).</p>
- * 
- * <p>Used if {@code RPMALLOC_CONFIGURABLE} is defined to 1.</p></li>
- * <li>{@code span_map_count} &ndash; 
- * number of spans to map at each request to map new virtual memory blocks.
- * 
- * <p>This can be used to minimize the system call overhead at the cost of virtual memory address space. The extra mapped pages will not be written until
- * actually used, so physical committed memory should not be affected in the default implementation.</p>
- * 
- * <p>Will be aligned to a multiple of spans that match memory page size in case of huge pages.</p></li>
- * <li>{@code enable_huge_pages} &ndash; 
- * enable use of large/huge pages.
- * 
- * <p>If this flag is set to non-zero and page size is zero, the allocator will try to enable huge pages and auto detect the configuration. If this is set to
- * non-zero and page_size is also non-zero, the allocator will assume huge pages have been configured and enabled prior to initializing the allocator.</p>
- * 
- * <p>For Windows, see <a href="https://docs.microsoft.com/en-us/windows/desktop/memory/large-page-support">large-page-support</a>. For Linux, see
- * <a href="https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt">hugetlbpage.txt</a>.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct rpmalloc_config_t {
  *     void * (*{@link RPMemoryMapCallbackI memory_map}) (size_t size, size_t *offset);
  *     void (*{@link RPMemoryUnmapCallbackI memory_unmap}) (void *address, size_t size, size_t offset, int release);
- *     size_t page_size;
- *     size_t span_size;
- *     size_t span_map_count;
- *     int enable_huge_pages;
+ *     size_t {@link #page_size};
+ *     size_t {@link #span_size};
+ *     size_t {@link #span_map_count};
+ *     int {@link #enable_huge_pages};
  *     char[4];
  * }</code></pre>
  */
@@ -126,38 +91,66 @@ public class RPMallocConfig extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code memory_map} field. */
+    /** the memory map callback function */
     @Nullable
     @NativeType("void * (*) (size_t, size_t *)")
     public RPMemoryMapCallback memory_map() { return nmemory_map(address()); }
-    /** Returns the value of the {@code memory_unmap} field. */
+    /** the memory unmap callback function */
     @Nullable
     @NativeType("void (*) (void *, size_t, size_t, int)")
     public RPMemoryUnmapCallback memory_unmap() { return nmemory_unmap(address()); }
-    /** Returns the value of the {@code page_size} field. */
+    /**
+     * the size of memory pages.
+     * 
+     * <p>The page size MUST be a power of two in {@code [512,16384]} range (2<sup>9</sup> to 2<sup>14</sup>) unless 0 - set to 0 to use system page size. All
+     * memory mapping requests to {@code memory_map} will be made with size set to a multiple of the page size.</p>
+     * 
+     * <p>Used if {@code RPMALLOC_CONFIGURABLE} is defined to 1, otherwise system page size is used.</p>
+     */
     @NativeType("size_t")
     public long page_size() { return npage_size(address()); }
-    /** Returns the value of the {@code span_size} field. */
+    /**
+     * size of a span of memory blocks.
+     * 
+     * <p>MUST be a power of two, and in {@code [4096,262144]} range (unless 0 - set to 0 to use the default span size).</p>
+     * 
+     * <p>Used if {@code RPMALLOC_CONFIGURABLE} is defined to 1.</p>
+     */
     @NativeType("size_t")
     public long span_size() { return nspan_size(address()); }
-    /** Returns the value of the {@code span_map_count} field. */
+    /**
+     * number of spans to map at each request to map new virtual memory blocks.
+     * 
+     * <p>This can be used to minimize the system call overhead at the cost of virtual memory address space. The extra mapped pages will not be written until
+     * actually used, so physical committed memory should not be affected in the default implementation.</p>
+     * 
+     * <p>Will be aligned to a multiple of spans that match memory page size in case of huge pages.</p>
+     */
     @NativeType("size_t")
     public long span_map_count() { return nspan_map_count(address()); }
-    /** Returns the value of the {@code enable_huge_pages} field. */
+    /**
+     * enable use of large/huge pages.
+     * 
+     * <p>If this flag is set to non-zero and page size is zero, the allocator will try to enable huge pages and auto detect the configuration. If this is set to
+     * non-zero and page_size is also non-zero, the allocator will assume huge pages have been configured and enabled prior to initializing the allocator.</p>
+     * 
+     * <p>For Windows, see <a href="https://docs.microsoft.com/en-us/windows/desktop/memory/large-page-support">large-page-support</a>. For Linux, see
+     * <a href="https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt">hugetlbpage.txt</a>.</p>
+     */
     @NativeType("int")
     public boolean enable_huge_pages() { return nenable_huge_pages(address()) != 0; }
 
-    /** Sets the specified value to the {@code memory_map} field. */
+    /** Sets the specified value to the {@link #memory_map} field. */
     public RPMallocConfig memory_map(@Nullable @NativeType("void * (*) (size_t, size_t *)") RPMemoryMapCallbackI value) { nmemory_map(address(), value); return this; }
-    /** Sets the specified value to the {@code memory_unmap} field. */
+    /** Sets the specified value to the {@link #memory_unmap} field. */
     public RPMallocConfig memory_unmap(@Nullable @NativeType("void (*) (void *, size_t, size_t, int)") RPMemoryUnmapCallbackI value) { nmemory_unmap(address(), value); return this; }
-    /** Sets the specified value to the {@code page_size} field. */
+    /** Sets the specified value to the {@link #page_size} field. */
     public RPMallocConfig page_size(@NativeType("size_t") long value) { npage_size(address(), value); return this; }
-    /** Sets the specified value to the {@code span_size} field. */
+    /** Sets the specified value to the {@link #span_size} field. */
     public RPMallocConfig span_size(@NativeType("size_t") long value) { nspan_size(address(), value); return this; }
-    /** Sets the specified value to the {@code span_map_count} field. */
+    /** Sets the specified value to the {@link #span_map_count} field. */
     public RPMallocConfig span_map_count(@NativeType("size_t") long value) { nspan_map_count(address(), value); return this; }
-    /** Sets the specified value to the {@code enable_huge_pages} field. */
+    /** Sets the specified value to the {@link #enable_huge_pages} field. */
     public RPMallocConfig enable_huge_pages(@NativeType("int") boolean value) { nenable_huge_pages(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */

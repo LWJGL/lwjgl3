@@ -28,6 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code vertexOffset} <b>must</b> be less than the size of {@code vertexData}</li>
  * <li>{@code vertexOffset} <b>must</b> be a multiple of the component size of {@code vertexFormat}</li>
  * <li>{@code vertexFormat} <b>must</b> be one of {@link VK10#VK_FORMAT_R32G32B32_SFLOAT FORMAT_R32G32B32_SFLOAT}, {@link VK10#VK_FORMAT_R32G32_SFLOAT FORMAT_R32G32_SFLOAT}, {@link VK10#VK_FORMAT_R16G16B16_SFLOAT FORMAT_R16G16B16_SFLOAT}, {@link VK10#VK_FORMAT_R16G16_SFLOAT FORMAT_R16G16_SFLOAT}, {@link VK10#VK_FORMAT_R16G16_SNORM FORMAT_R16G16_SNORM}, or {@link VK10#VK_FORMAT_R16G16B16_SNORM FORMAT_R16G16B16_SNORM}</li>
+ * <li>{@code vertexStride} <b>must</b> be less than or equal to <code>2<sup>32</sup>-1</code></li>
  * <li>{@code indexOffset} <b>must</b> be less than the size of {@code indexData}</li>
  * <li>{@code indexOffset} <b>must</b> be a multiple of the element size of {@code indexType}</li>
  * <li>{@code indexType} <b>must</b> be {@link VK10#VK_INDEX_TYPE_UINT16 INDEX_TYPE_UINT16}, {@link VK10#VK_INDEX_TYPE_UINT32 INDEX_TYPE_UINT32}, or {@link NVRayTracing#VK_INDEX_TYPE_NONE_NV INDEX_TYPE_NONE_NV}</li>
@@ -55,41 +56,23 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkGeometryDataNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code vertexData} &ndash; the buffer containing vertex data for this geometry.</li>
- * <li>{@code vertexOffset} &ndash; the offset in bytes within {@code vertexData} containing vertex data for this geometry.</li>
- * <li>{@code vertexCount} &ndash; the number of valid vertices.</li>
- * <li>{@code vertexStride} &ndash; the stride in bytes between each vertex.</li>
- * <li>{@code vertexFormat} &ndash; the format of each vertex element.</li>
- * <li>{@code indexData} &ndash; the buffer containing index data for this geometry.</li>
- * <li>{@code indexOffset} &ndash; the offset in bytes within {@code indexData} containing index data for this geometry.</li>
- * <li>{@code indexCount} &ndash; the number of indices to include in this geometry.</li>
- * <li>{@code indexType} &ndash; the format of each index.</li>
- * <li>{@code transformData} &ndash; a buffer containing optional reference to an array of 32-bit floats representing a 3x4 row major affine transformation matrix for this geometry.</li>
- * <li>{@code transformOffset} &ndash; the offset in bytes in {@code transformData} of the transform information described above.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkGeometryTrianglesNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkBuffer vertexData;
- *     VkDeviceSize vertexOffset;
- *     uint32_t vertexCount;
- *     VkDeviceSize vertexStride;
- *     VkFormat vertexFormat;
- *     VkBuffer indexData;
- *     VkDeviceSize indexOffset;
- *     uint32_t indexCount;
- *     VkIndexType indexType;
- *     VkBuffer transformData;
- *     VkDeviceSize transformOffset;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkBuffer {@link #vertexData};
+ *     VkDeviceSize {@link #vertexOffset};
+ *     uint32_t {@link #vertexCount};
+ *     VkDeviceSize {@link #vertexStride};
+ *     VkFormat {@link #vertexFormat};
+ *     VkBuffer {@link #indexData};
+ *     VkDeviceSize {@link #indexOffset};
+ *     uint32_t {@link #indexCount};
+ *     VkIndexType {@link #indexType};
+ *     VkBuffer {@link #transformData};
+ *     VkDeviceSize {@link #transformOffset};
  * }</code></pre>
  */
 public class VkGeometryTrianglesNV extends Struct implements NativeResource {
@@ -164,71 +147,71 @@ public class VkGeometryTrianglesNV extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code vertexData} field. */
+    /** the buffer containing vertex data for this geometry. */
     @NativeType("VkBuffer")
     public long vertexData() { return nvertexData(address()); }
-    /** Returns the value of the {@code vertexOffset} field. */
+    /** the offset in bytes within {@code vertexData} containing vertex data for this geometry. */
     @NativeType("VkDeviceSize")
     public long vertexOffset() { return nvertexOffset(address()); }
-    /** Returns the value of the {@code vertexCount} field. */
+    /** the number of valid vertices. */
     @NativeType("uint32_t")
     public int vertexCount() { return nvertexCount(address()); }
-    /** Returns the value of the {@code vertexStride} field. */
+    /** the stride in bytes between each vertex. */
     @NativeType("VkDeviceSize")
     public long vertexStride() { return nvertexStride(address()); }
-    /** Returns the value of the {@code vertexFormat} field. */
+    /** a {@code VkFormat} describing the format of each vertex element. */
     @NativeType("VkFormat")
     public int vertexFormat() { return nvertexFormat(address()); }
-    /** Returns the value of the {@code indexData} field. */
+    /** the buffer containing index data for this geometry. */
     @NativeType("VkBuffer")
     public long indexData() { return nindexData(address()); }
-    /** Returns the value of the {@code indexOffset} field. */
+    /** the offset in bytes within {@code indexData} containing index data for this geometry. */
     @NativeType("VkDeviceSize")
     public long indexOffset() { return nindexOffset(address()); }
-    /** Returns the value of the {@code indexCount} field. */
+    /** the number of indices to include in this geometry. */
     @NativeType("uint32_t")
     public int indexCount() { return nindexCount(address()); }
-    /** Returns the value of the {@code indexType} field. */
+    /** a {@code VkIndexType} describing the format of each index. */
     @NativeType("VkIndexType")
     public int indexType() { return nindexType(address()); }
-    /** Returns the value of the {@code transformData} field. */
+    /** an optional buffer containing an {@link VkTransformMatrixNV} structure defining a transformation to be applied to this geometry. */
     @NativeType("VkBuffer")
     public long transformData() { return ntransformData(address()); }
-    /** Returns the value of the {@code transformOffset} field. */
+    /** the offset in bytes in {@code transformData} of the transform information described above. */
     @NativeType("VkDeviceSize")
     public long transformOffset() { return ntransformOffset(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkGeometryTrianglesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkGeometryTrianglesNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code vertexData} field. */
+    /** Sets the specified value to the {@link #vertexData} field. */
     public VkGeometryTrianglesNV vertexData(@NativeType("VkBuffer") long value) { nvertexData(address(), value); return this; }
-    /** Sets the specified value to the {@code vertexOffset} field. */
+    /** Sets the specified value to the {@link #vertexOffset} field. */
     public VkGeometryTrianglesNV vertexOffset(@NativeType("VkDeviceSize") long value) { nvertexOffset(address(), value); return this; }
-    /** Sets the specified value to the {@code vertexCount} field. */
+    /** Sets the specified value to the {@link #vertexCount} field. */
     public VkGeometryTrianglesNV vertexCount(@NativeType("uint32_t") int value) { nvertexCount(address(), value); return this; }
-    /** Sets the specified value to the {@code vertexStride} field. */
+    /** Sets the specified value to the {@link #vertexStride} field. */
     public VkGeometryTrianglesNV vertexStride(@NativeType("VkDeviceSize") long value) { nvertexStride(address(), value); return this; }
-    /** Sets the specified value to the {@code vertexFormat} field. */
+    /** Sets the specified value to the {@link #vertexFormat} field. */
     public VkGeometryTrianglesNV vertexFormat(@NativeType("VkFormat") int value) { nvertexFormat(address(), value); return this; }
-    /** Sets the specified value to the {@code indexData} field. */
+    /** Sets the specified value to the {@link #indexData} field. */
     public VkGeometryTrianglesNV indexData(@NativeType("VkBuffer") long value) { nindexData(address(), value); return this; }
-    /** Sets the specified value to the {@code indexOffset} field. */
+    /** Sets the specified value to the {@link #indexOffset} field. */
     public VkGeometryTrianglesNV indexOffset(@NativeType("VkDeviceSize") long value) { nindexOffset(address(), value); return this; }
-    /** Sets the specified value to the {@code indexCount} field. */
+    /** Sets the specified value to the {@link #indexCount} field. */
     public VkGeometryTrianglesNV indexCount(@NativeType("uint32_t") int value) { nindexCount(address(), value); return this; }
-    /** Sets the specified value to the {@code indexType} field. */
+    /** Sets the specified value to the {@link #indexType} field. */
     public VkGeometryTrianglesNV indexType(@NativeType("VkIndexType") int value) { nindexType(address(), value); return this; }
-    /** Sets the specified value to the {@code transformData} field. */
+    /** Sets the specified value to the {@link #transformData} field. */
     public VkGeometryTrianglesNV transformData(@NativeType("VkBuffer") long value) { ntransformData(address(), value); return this; }
-    /** Sets the specified value to the {@code transformOffset} field. */
+    /** Sets the specified value to the {@link #transformOffset} field. */
     public VkGeometryTrianglesNV transformOffset(@NativeType("VkDeviceSize") long value) { ntransformOffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -511,71 +494,71 @@ public class VkGeometryTrianglesNV extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkGeometryTrianglesNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkGeometryTrianglesNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkGeometryTrianglesNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkGeometryTrianglesNV.npNext(address()); }
-        /** Returns the value of the {@code vertexData} field. */
+        /** @return the value of the {@link VkGeometryTrianglesNV#vertexData} field. */
         @NativeType("VkBuffer")
         public long vertexData() { return VkGeometryTrianglesNV.nvertexData(address()); }
-        /** Returns the value of the {@code vertexOffset} field. */
+        /** @return the value of the {@link VkGeometryTrianglesNV#vertexOffset} field. */
         @NativeType("VkDeviceSize")
         public long vertexOffset() { return VkGeometryTrianglesNV.nvertexOffset(address()); }
-        /** Returns the value of the {@code vertexCount} field. */
+        /** @return the value of the {@link VkGeometryTrianglesNV#vertexCount} field. */
         @NativeType("uint32_t")
         public int vertexCount() { return VkGeometryTrianglesNV.nvertexCount(address()); }
-        /** Returns the value of the {@code vertexStride} field. */
+        /** @return the value of the {@link VkGeometryTrianglesNV#vertexStride} field. */
         @NativeType("VkDeviceSize")
         public long vertexStride() { return VkGeometryTrianglesNV.nvertexStride(address()); }
-        /** Returns the value of the {@code vertexFormat} field. */
+        /** @return the value of the {@link VkGeometryTrianglesNV#vertexFormat} field. */
         @NativeType("VkFormat")
         public int vertexFormat() { return VkGeometryTrianglesNV.nvertexFormat(address()); }
-        /** Returns the value of the {@code indexData} field. */
+        /** @return the value of the {@link VkGeometryTrianglesNV#indexData} field. */
         @NativeType("VkBuffer")
         public long indexData() { return VkGeometryTrianglesNV.nindexData(address()); }
-        /** Returns the value of the {@code indexOffset} field. */
+        /** @return the value of the {@link VkGeometryTrianglesNV#indexOffset} field. */
         @NativeType("VkDeviceSize")
         public long indexOffset() { return VkGeometryTrianglesNV.nindexOffset(address()); }
-        /** Returns the value of the {@code indexCount} field. */
+        /** @return the value of the {@link VkGeometryTrianglesNV#indexCount} field. */
         @NativeType("uint32_t")
         public int indexCount() { return VkGeometryTrianglesNV.nindexCount(address()); }
-        /** Returns the value of the {@code indexType} field. */
+        /** @return the value of the {@link VkGeometryTrianglesNV#indexType} field. */
         @NativeType("VkIndexType")
         public int indexType() { return VkGeometryTrianglesNV.nindexType(address()); }
-        /** Returns the value of the {@code transformData} field. */
+        /** @return the value of the {@link VkGeometryTrianglesNV#transformData} field. */
         @NativeType("VkBuffer")
         public long transformData() { return VkGeometryTrianglesNV.ntransformData(address()); }
-        /** Returns the value of the {@code transformOffset} field. */
+        /** @return the value of the {@link VkGeometryTrianglesNV#transformOffset} field. */
         @NativeType("VkDeviceSize")
         public long transformOffset() { return VkGeometryTrianglesNV.ntransformOffset(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkGeometryTrianglesNV#sType} field. */
         public VkGeometryTrianglesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkGeometryTrianglesNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkGeometryTrianglesNV#pNext} field. */
         public VkGeometryTrianglesNV.Buffer pNext(@NativeType("void const *") long value) { VkGeometryTrianglesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code vertexData} field. */
+        /** Sets the specified value to the {@link VkGeometryTrianglesNV#vertexData} field. */
         public VkGeometryTrianglesNV.Buffer vertexData(@NativeType("VkBuffer") long value) { VkGeometryTrianglesNV.nvertexData(address(), value); return this; }
-        /** Sets the specified value to the {@code vertexOffset} field. */
+        /** Sets the specified value to the {@link VkGeometryTrianglesNV#vertexOffset} field. */
         public VkGeometryTrianglesNV.Buffer vertexOffset(@NativeType("VkDeviceSize") long value) { VkGeometryTrianglesNV.nvertexOffset(address(), value); return this; }
-        /** Sets the specified value to the {@code vertexCount} field. */
+        /** Sets the specified value to the {@link VkGeometryTrianglesNV#vertexCount} field. */
         public VkGeometryTrianglesNV.Buffer vertexCount(@NativeType("uint32_t") int value) { VkGeometryTrianglesNV.nvertexCount(address(), value); return this; }
-        /** Sets the specified value to the {@code vertexStride} field. */
+        /** Sets the specified value to the {@link VkGeometryTrianglesNV#vertexStride} field. */
         public VkGeometryTrianglesNV.Buffer vertexStride(@NativeType("VkDeviceSize") long value) { VkGeometryTrianglesNV.nvertexStride(address(), value); return this; }
-        /** Sets the specified value to the {@code vertexFormat} field. */
+        /** Sets the specified value to the {@link VkGeometryTrianglesNV#vertexFormat} field. */
         public VkGeometryTrianglesNV.Buffer vertexFormat(@NativeType("VkFormat") int value) { VkGeometryTrianglesNV.nvertexFormat(address(), value); return this; }
-        /** Sets the specified value to the {@code indexData} field. */
+        /** Sets the specified value to the {@link VkGeometryTrianglesNV#indexData} field. */
         public VkGeometryTrianglesNV.Buffer indexData(@NativeType("VkBuffer") long value) { VkGeometryTrianglesNV.nindexData(address(), value); return this; }
-        /** Sets the specified value to the {@code indexOffset} field. */
+        /** Sets the specified value to the {@link VkGeometryTrianglesNV#indexOffset} field. */
         public VkGeometryTrianglesNV.Buffer indexOffset(@NativeType("VkDeviceSize") long value) { VkGeometryTrianglesNV.nindexOffset(address(), value); return this; }
-        /** Sets the specified value to the {@code indexCount} field. */
+        /** Sets the specified value to the {@link VkGeometryTrianglesNV#indexCount} field. */
         public VkGeometryTrianglesNV.Buffer indexCount(@NativeType("uint32_t") int value) { VkGeometryTrianglesNV.nindexCount(address(), value); return this; }
-        /** Sets the specified value to the {@code indexType} field. */
+        /** Sets the specified value to the {@link VkGeometryTrianglesNV#indexType} field. */
         public VkGeometryTrianglesNV.Buffer indexType(@NativeType("VkIndexType") int value) { VkGeometryTrianglesNV.nindexType(address(), value); return this; }
-        /** Sets the specified value to the {@code transformData} field. */
+        /** Sets the specified value to the {@link VkGeometryTrianglesNV#transformData} field. */
         public VkGeometryTrianglesNV.Buffer transformData(@NativeType("VkBuffer") long value) { VkGeometryTrianglesNV.ntransformData(address(), value); return this; }
-        /** Sets the specified value to the {@code transformOffset} field. */
+        /** Sets the specified value to the {@link VkGeometryTrianglesNV#transformOffset} field. */
         public VkGeometryTrianglesNV.Buffer transformOffset(@NativeType("VkDeviceSize") long value) { VkGeometryTrianglesNV.ntransformOffset(address(), value); return this; }
 
     }

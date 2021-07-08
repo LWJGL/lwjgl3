@@ -30,6 +30,8 @@ import org.lwjgl.system.*;
  */
 public class EXTProvokingVertex {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code mode} parameter of ProvokingVertexEXT. */
     public static final int
         GL_FIRST_VERTEX_CONVENTION_EXT = 0x8E4D,
@@ -39,8 +41,6 @@ public class EXTProvokingVertex {
     public static final int
         GL_PROVOKING_VERTEX_EXT                         = 0x8E4F,
         GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION_EXT = 0x8E4C;
-
-    static { GL.initialize(); }
 
     protected EXTProvokingVertex() {
         throw new UnsupportedOperationException();

@@ -6,8 +6,11 @@
 package org.lwjgl.vulkan;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Application-defined memory free function.
@@ -31,18 +34,22 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("PFN_vkFreeFunction")
-public interface VkFreeFunctionI extends CallbackI.V {
+public interface VkFreeFunctionI extends CallbackI {
 
-    String SIGNATURE = Callback.__stdcall("(pp)v");
+    FFICIF CIF = apiCreateCIF(
+        apiStdcall(),
+        ffi_type_void,
+        ffi_type_pointer, ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args),
-            dcbArgPointer(args)
+            memGetAddress(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE))
         );
     }
 

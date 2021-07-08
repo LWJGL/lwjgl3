@@ -21,10 +21,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMORC {
 
-    protected LLVMORC() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -49,6 +45,10 @@ public class LLVMORC {
             OrcRegisterJITEventListener   = LLVMCore.getLibrary().getFunctionAddress("LLVMOrcRegisterJITEventListener"),
             OrcUnregisterJITEventListener = LLVMCore.getLibrary().getFunctionAddress("LLVMOrcUnregisterJITEventListener");
 
+    }
+
+    protected LLVMORC() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMOrcCreateInstance ] ---

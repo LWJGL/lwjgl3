@@ -72,16 +72,16 @@ public class LLVMOpInfo1 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link LLVMOpInfoSymbol1} view of the {@code AddSymbol} field. */
+    /** @return a {@link LLVMOpInfoSymbol1} view of the {@code AddSymbol} field. */
     @NativeType("struct LLVMOpInfoSymbol1")
     public LLVMOpInfoSymbol1 AddSymbol() { return nAddSymbol(address()); }
-    /** Returns a {@link LLVMOpInfoSymbol1} view of the {@code SubtractSymbol} field. */
+    /** @return a {@link LLVMOpInfoSymbol1} view of the {@code SubtractSymbol} field. */
     @NativeType("struct LLVMOpInfoSymbol1")
     public LLVMOpInfoSymbol1 SubtractSymbol() { return nSubtractSymbol(address()); }
-    /** Returns the value of the {@code Value} field. */
+    /** @return the value of the {@code Value} field. */
     @NativeType("uint64_t")
     public long Value() { return nValue(address()); }
-    /** Returns the value of the {@code VariantKind} field. */
+    /** @return the value of the {@code VariantKind} field. */
     @NativeType("uint64_t")
     public long VariantKind() { return nVariantKind(address()); }
 
@@ -324,16 +324,16 @@ public class LLVMOpInfo1 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link LLVMOpInfoSymbol1} view of the {@code AddSymbol} field. */
+        /** @return a {@link LLVMOpInfoSymbol1} view of the {@code AddSymbol} field. */
         @NativeType("struct LLVMOpInfoSymbol1")
         public LLVMOpInfoSymbol1 AddSymbol() { return LLVMOpInfo1.nAddSymbol(address()); }
-        /** Returns a {@link LLVMOpInfoSymbol1} view of the {@code SubtractSymbol} field. */
+        /** @return a {@link LLVMOpInfoSymbol1} view of the {@code SubtractSymbol} field. */
         @NativeType("struct LLVMOpInfoSymbol1")
         public LLVMOpInfoSymbol1 SubtractSymbol() { return LLVMOpInfo1.nSubtractSymbol(address()); }
-        /** Returns the value of the {@code Value} field. */
+        /** @return the value of the {@code Value} field. */
         @NativeType("uint64_t")
         public long Value() { return LLVMOpInfo1.nValue(address()); }
-        /** Returns the value of the {@code VariantKind} field. */
+        /** @return the value of the {@code VariantKind} field. */
         @NativeType("uint64_t")
         public long VariantKind() { return LLVMOpInfo1.nVariantKind(address()); }
 

@@ -70,15 +70,15 @@ public class ImuSample extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code fSampleTime} field. */
+    /** @return the value of the {@code fSampleTime} field. */
     public double fSampleTime() { return nfSampleTime(address()); }
-    /** Returns a {@link HmdVector3d} view of the {@code vAccel} field. */
+    /** @return a {@link HmdVector3d} view of the {@code vAccel} field. */
     @NativeType("HmdVector3d_t")
     public HmdVector3d vAccel() { return nvAccel(address()); }
-    /** Returns a {@link HmdVector3d} view of the {@code vGyro} field. */
+    /** @return a {@link HmdVector3d} view of the {@code vGyro} field. */
     @NativeType("HmdVector3d_t")
     public HmdVector3d vGyro() { return nvGyro(address()); }
-    /** Returns the value of the {@code unOffScaleFlags} field. */
+    /** @return the value of the {@code unOffScaleFlags} field. */
     @NativeType("uint32_t")
     public int unOffScaleFlags() { return nunOffScaleFlags(address()); }
 
@@ -160,15 +160,15 @@ public class ImuSample extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code fSampleTime} field. */
+        /** @return the value of the {@code fSampleTime} field. */
         public double fSampleTime() { return ImuSample.nfSampleTime(address()); }
-        /** Returns a {@link HmdVector3d} view of the {@code vAccel} field. */
+        /** @return a {@link HmdVector3d} view of the {@code vAccel} field. */
         @NativeType("HmdVector3d_t")
         public HmdVector3d vAccel() { return ImuSample.nvAccel(address()); }
-        /** Returns a {@link HmdVector3d} view of the {@code vGyro} field. */
+        /** @return a {@link HmdVector3d} view of the {@code vGyro} field. */
         @NativeType("HmdVector3d_t")
         public HmdVector3d vGyro() { return ImuSample.nvGyro(address()); }
-        /** Returns the value of the {@code unOffScaleFlags} field. */
+        /** @return the value of the {@code unOffScaleFlags} field. */
         @NativeType("uint32_t")
         public int unOffScaleFlags() { return ImuSample.nunOffScaleFlags(address()); }
 

@@ -27,6 +27,8 @@ import org.lwjgl.system.*;
  */
 public class EXTTextureStorage {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code value} parameter of GetTexParameter{if}v. */
     public static final int GL_TEXTURE_IMMUTABLE_FORMAT_EXT = 0x912F;
 
@@ -55,8 +57,6 @@ public class EXTTextureStorage {
         GL_R16F_EXT               = 0x822D,
         GL_RG16F_EXT              = 0x822F,
         GL_RGB_RAW_422_APPLE      = 0x8A51;
-
-    static { GLES.initialize(); }
 
     protected EXTTextureStorage() {
         throw new UnsupportedOperationException();

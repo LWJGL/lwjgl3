@@ -71,13 +71,13 @@ public class XrColor4f extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code r} field. */
+    /** @return the value of the {@code r} field. */
     public float r() { return nr(address()); }
-    /** Returns the value of the {@code g} field. */
+    /** @return the value of the {@code g} field. */
     public float g() { return ng(address()); }
-    /** Returns the value of the {@code b} field. */
+    /** @return the value of the {@code b} field. */
     public float b() { return nb(address()); }
-    /** Returns the value of the {@code a} field. */
+    /** @return the value of the {@code a} field. */
     public float a() { return na(address()); }
 
     /** Sets the specified value to the {@code r} field. */
@@ -315,13 +315,13 @@ public class XrColor4f extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code r} field. */
+        /** @return the value of the {@code r} field. */
         public float r() { return XrColor4f.nr(address()); }
-        /** Returns the value of the {@code g} field. */
+        /** @return the value of the {@code g} field. */
         public float g() { return XrColor4f.ng(address()); }
-        /** Returns the value of the {@code b} field. */
+        /** @return the value of the {@code b} field. */
         public float b() { return XrColor4f.nb(address()); }
-        /** Returns the value of the {@code a} field. */
+        /** @return the value of the {@code a} field. */
         public float a() { return XrColor4f.na(address()); }
 
         /** Sets the specified value to the {@code r} field. */

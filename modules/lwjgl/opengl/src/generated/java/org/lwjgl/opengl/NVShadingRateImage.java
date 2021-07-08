@@ -43,6 +43,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVShadingRateImage {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code cap} parameter of {@link CGL#CGLEnable Enable}, {@link CGL#CGLDisable Disable}, and {@link CGL#CGLIsEnabled IsEnabled}, by the {@code target} parameter of {@link GL30C#glEnablei Enablei}, {@link GL30C#glDisablei Disablei},
      * {@link GL30C#glIsEnabledi IsEnabledi}, {@link EXTDrawBuffers2#glEnableIndexedEXT EnableIndexedEXT}, {@link EXTDrawBuffers2#glDisableIndexedEXT DisableIndexedEXT}, and {@link EXTDrawBuffers2#glIsEnabledIndexedEXT IsEnabledIndexedEXT}, and by the {@code pname} parameter of {@link GL11C#glGetBooleanv GetBooleanv},
@@ -82,8 +84,6 @@ public class NVShadingRateImage {
         GL_SHADING_RATE_SAMPLE_ORDER_DEFAULT_NV      = 0x95AE,
         GL_SHADING_RATE_SAMPLE_ORDER_PIXEL_MAJOR_NV  = 0x95AF,
         GL_SHADING_RATE_SAMPLE_ORDER_SAMPLE_MAJOR_NV = 0x95B0;
-
-    static { GL.initialize(); }
 
     protected NVShadingRateImage() {
         throw new UnsupportedOperationException();

@@ -28,19 +28,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkSampleLocationsInfoEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code x} &ndash; the horizontal coordinate of the sample&#8217;s location.</li>
- * <li>{@code y} &ndash; the vertical coordinate of the sample&#8217;s location.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSampleLocationEXT {
- *     float x;
- *     float y;
+ *     float {@link #x};
+ *     float {@link #y};
  * }</code></pre>
  */
 public class VkSampleLocationEXT extends Struct implements NativeResource {
@@ -82,14 +75,14 @@ public class VkSampleLocationEXT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** the horizontal coordinate of the sample&#8217;s location. */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** the vertical coordinate of the sample&#8217;s location. */
     public float y() { return ny(address()); }
 
-    /** Sets the specified value to the {@code x} field. */
+    /** Sets the specified value to the {@link #x} field. */
     public VkSampleLocationEXT x(float value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@code y} field. */
+    /** Sets the specified value to the {@link #y} field. */
     public VkSampleLocationEXT y(float value) { ny(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,14 +299,14 @@ public class VkSampleLocationEXT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link VkSampleLocationEXT#x} field. */
         public float x() { return VkSampleLocationEXT.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@link VkSampleLocationEXT#y} field. */
         public float y() { return VkSampleLocationEXT.ny(address()); }
 
-        /** Sets the specified value to the {@code x} field. */
+        /** Sets the specified value to the {@link VkSampleLocationEXT#x} field. */
         public VkSampleLocationEXT.Buffer x(float value) { VkSampleLocationEXT.nx(address(), value); return this; }
-        /** Sets the specified value to the {@code y} field. */
+        /** Sets the specified value to the {@link VkSampleLocationEXT#y} field. */
         public VkSampleLocationEXT.Buffer y(float value) { VkSampleLocationEXT.ny(address(), value); return this; }
 
     }

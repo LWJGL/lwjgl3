@@ -29,21 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkDisplayPropertiesKHR}, {@link KHRGetDisplayProperties2#vkGetPhysicalDeviceDisplayProperties2KHR GetPhysicalDeviceDisplayProperties2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code displayProperties} &ndash; a {@link VkDisplayPropertiesKHR} structure.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDisplayProperties2KHR {
- *     VkStructureType sType;
- *     void * pNext;
- *     {@link VkDisplayPropertiesKHR VkDisplayPropertiesKHR} displayProperties;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     {@link VkDisplayPropertiesKHR VkDisplayPropertiesKHR} {@link #displayProperties};
  * }</code></pre>
  */
 public class VkDisplayProperties2KHR extends Struct implements NativeResource {
@@ -88,18 +80,18 @@ public class VkDisplayProperties2KHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkDisplayPropertiesKHR} view of the {@code displayProperties} field. */
+    /** a {@link VkDisplayPropertiesKHR} structure. */
     public VkDisplayPropertiesKHR displayProperties() { return ndisplayProperties(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDisplayProperties2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDisplayProperties2KHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,18 +310,18 @@ public class VkDisplayProperties2KHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDisplayProperties2KHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDisplayProperties2KHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDisplayProperties2KHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkDisplayProperties2KHR.npNext(address()); }
-        /** Returns a {@link VkDisplayPropertiesKHR} view of the {@code displayProperties} field. */
+        /** @return a {@link VkDisplayPropertiesKHR} view of the {@link VkDisplayProperties2KHR#displayProperties} field. */
         public VkDisplayPropertiesKHR displayProperties() { return VkDisplayProperties2KHR.ndisplayProperties(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDisplayProperties2KHR#sType} field. */
         public VkDisplayProperties2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplayProperties2KHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDisplayProperties2KHR#pNext} field. */
         public VkDisplayProperties2KHR.Buffer pNext(@NativeType("void *") long value) { VkDisplayProperties2KHR.npNext(address(), value); return this; }
 
     }

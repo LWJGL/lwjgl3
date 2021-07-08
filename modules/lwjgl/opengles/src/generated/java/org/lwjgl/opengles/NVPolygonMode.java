@@ -18,6 +18,8 @@ import org.lwjgl.system.*;
  */
 public class NVPolygonMode {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter to GetIntegerv. */
     public static final int GL_POLYGON_MODE_NV = 0xB40;
 
@@ -31,8 +33,6 @@ public class NVPolygonMode {
         GL_POINT_NV = 0x1B00,
         GL_LINE_NV  = 0x1B01,
         GL_FILL_NV  = 0x1B02;
-
-    static { GLES.initialize(); }
 
     protected NVPolygonMode() {
         throw new UnsupportedOperationException();

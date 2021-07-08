@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     char const *Reason
  * )</code></pre>
  */
@@ -49,7 +49,7 @@ public abstract class LLVMFatalErrorHandler extends Callback implements LLVMFata
     }
 
     protected LLVMFatalErrorHandler() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     LLVMFatalErrorHandler(long functionPointer) {

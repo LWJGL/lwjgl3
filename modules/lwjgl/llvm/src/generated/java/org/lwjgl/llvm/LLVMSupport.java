@@ -19,10 +19,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMSupport {
 
-    protected LLVMSupport() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -35,6 +31,10 @@ public class LLVMSupport {
             SearchForAddressOfSymbol = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSearchForAddressOfSymbol"),
             AddSymbol                = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddSymbol");
 
+    }
+
+    protected LLVMSupport() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMLoadLibraryPermanently ] ---

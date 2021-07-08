@@ -67,13 +67,13 @@ public class XrViewState extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code viewStateFlags} field. */
+    /** @return the value of the {@code viewStateFlags} field. */
     @NativeType("XrViewStateFlags")
     public long viewStateFlags() { return nviewStateFlags(address()); }
 
@@ -304,13 +304,13 @@ public class XrViewState extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrViewState.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrViewState.nnext(address()); }
-        /** Returns the value of the {@code viewStateFlags} field. */
+        /** @return the value of the {@code viewStateFlags} field. */
         @NativeType("XrViewStateFlags")
         public long viewStateFlags() { return XrViewState.nviewStateFlags(address()); }
 

@@ -26,19 +26,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 'clean' submeshes. Furthermore there is a configuration option ({@link Assimp#AI_CONFIG_PP_SBP_REMOVE}) to force {@link Assimp#aiProcess_SortByPType Process_SortByPType} to remove specific kinds of
  * primitives from the imported scene, completely and forever.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code mNumIndices} &ndash; Number of indices defining this face. The maximum value for this member is {@link Assimp#AI_MAX_FACE_INDICES}.</li>
- * <li>{@code mIndices} &ndash; Pointer to the indices array. Size of the array is given in {@code numIndices}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiFace {
- *     unsigned int mNumIndices;
- *     unsigned int * mIndices;
+ *     unsigned int {@link #mNumIndices};
+ *     unsigned int * {@link #mIndices};
  * }</code></pre>
  */
 @NativeType("struct aiFace")
@@ -81,14 +74,14 @@ public class AIFace extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code mNumIndices} field. */
+    /** Number of indices defining this face. The maximum value for this member is {@link Assimp#AI_MAX_FACE_INDICES}. */
     @NativeType("unsigned int")
     public int mNumIndices() { return nmNumIndices(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code mIndices} field. */
+    /** Pointer to the indices array. Size of the array is given in {@code numIndices}. */
     @NativeType("unsigned int *")
     public IntBuffer mIndices() { return nmIndices(address()); }
 
-    /** Sets the address of the specified {@link IntBuffer} to the {@code mIndices} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #mIndices} field. */
     public AIFace mIndices(@NativeType("unsigned int *") IntBuffer value) { nmIndices(address(), value); return this; }
 
     /**
@@ -315,14 +308,14 @@ public class AIFace extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code mNumIndices} field. */
+        /** @return the value of the {@link AIFace#mNumIndices} field. */
         @NativeType("unsigned int")
         public int mNumIndices() { return AIFace.nmNumIndices(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code mIndices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link AIFace#mIndices} field. */
         @NativeType("unsigned int *")
         public IntBuffer mIndices() { return AIFace.nmIndices(address()); }
 
-        /** Sets the address of the specified {@link IntBuffer} to the {@code mIndices} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link AIFace#mIndices} field. */
         public AIFace.Buffer mIndices(@NativeType("unsigned int *") IntBuffer value) { AIFace.nmIndices(address(), value); return this; }
 
     }

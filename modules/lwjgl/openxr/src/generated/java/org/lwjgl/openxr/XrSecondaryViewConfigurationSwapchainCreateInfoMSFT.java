@@ -67,13 +67,13 @@ public class XrSecondaryViewConfigurationSwapchainCreateInfoMSFT extends Struct 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code viewConfigurationType} field. */
+    /** @return the value of the {@code viewConfigurationType} field. */
     @NativeType("XrViewConfigurationType")
     public int viewConfigurationType() { return nviewConfigurationType(address()); }
 
@@ -304,13 +304,13 @@ public class XrSecondaryViewConfigurationSwapchainCreateInfoMSFT extends Struct 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.nnext(address()); }
-        /** Returns the value of the {@code viewConfigurationType} field. */
+        /** @return the value of the {@code viewConfigurationType} field. */
         @NativeType("XrViewConfigurationType")
         public int viewConfigurationType() { return XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.nviewConfigurationType(address()); }
 

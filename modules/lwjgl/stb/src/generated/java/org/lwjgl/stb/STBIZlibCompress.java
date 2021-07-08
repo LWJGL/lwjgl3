@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * unsigned char * (*) (
+ * unsigned char * (*{@link #invoke}) (
  *     unsigned char *data,
  *     int data_len,
  *     int *out_len,
@@ -52,7 +52,7 @@ public abstract class STBIZlibCompress extends Callback implements STBIZlibCompr
     }
 
     protected STBIZlibCompress() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     STBIZlibCompress(long functionPointer) {

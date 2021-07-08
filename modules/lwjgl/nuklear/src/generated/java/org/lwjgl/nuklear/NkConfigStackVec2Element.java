@@ -62,10 +62,10 @@ class NkConfigStackVec2Element extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkVec2} view of the struct pointed to by the {@code pValues} field. */
+    /** @return a {@link NkVec2} view of the struct pointed to by the {@code pValues} field. */
     @NativeType("struct nk_vec2 *")
     public NkVec2 pValues() { return npValues(address()); }
-    /** Returns a {@link NkVec2} view of the {@code old_value} field. */
+    /** @return a {@link NkVec2} view of the {@code old_value} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 old_value() { return nold_value(address()); }
 
@@ -143,10 +143,10 @@ class NkConfigStackVec2Element extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkVec2} view of the struct pointed to by the {@code pValues} field. */
+        /** @return a {@link NkVec2} view of the struct pointed to by the {@code pValues} field. */
         @NativeType("struct nk_vec2 *")
         public NkVec2 pValues() { return NkConfigStackVec2Element.npValues(address()); }
-        /** Returns a {@link NkVec2} view of the {@code old_value} field. */
+        /** @return a {@link NkVec2} view of the {@code old_value} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 old_value() { return NkConfigStackVec2Element.nold_value(address()); }
 

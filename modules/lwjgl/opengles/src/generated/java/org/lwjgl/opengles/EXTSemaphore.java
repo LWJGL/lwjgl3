@@ -39,6 +39,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTSemaphore {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetFloatv, GetIntegerv, GetInteger64v, {@link #glGetUnsignedBytevEXT GetUnsignedBytevEXT}, and the
      * {@code target} parameter of GetBooleani_v, GetIntegeri_v,GetFloati_v, GetDoublei_v, GetInteger64i_v, and {@link #glGetUnsignedBytei_vEXT GetUnsignedBytei_vEXT}.
@@ -62,8 +64,6 @@ public class EXTSemaphore {
         GL_LAYOUT_TRANSFER_DST_EXT                       = 0x9593,
         GL_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_EXT = 0x9530,
         GL_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_EXT = 0x9531;
-
-    static { GLES.initialize(); }
 
     protected EXTSemaphore() {
         throw new UnsupportedOperationException();

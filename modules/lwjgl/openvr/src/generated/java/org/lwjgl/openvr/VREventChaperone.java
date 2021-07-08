@@ -62,10 +62,10 @@ public class VREventChaperone extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code m_nPreviousUniverse} field. */
+    /** @return the value of the {@code m_nPreviousUniverse} field. */
     @NativeType("uint64_t")
     public long m_nPreviousUniverse() { return nm_nPreviousUniverse(address()); }
-    /** Returns the value of the {@code m_nCurrentUniverse} field. */
+    /** @return the value of the {@code m_nCurrentUniverse} field. */
     @NativeType("uint64_t")
     public long m_nCurrentUniverse() { return nm_nCurrentUniverse(address()); }
 
@@ -143,10 +143,10 @@ public class VREventChaperone extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code m_nPreviousUniverse} field. */
+        /** @return the value of the {@code m_nPreviousUniverse} field. */
         @NativeType("uint64_t")
         public long m_nPreviousUniverse() { return VREventChaperone.nm_nPreviousUniverse(address()); }
-        /** Returns the value of the {@code m_nCurrentUniverse} field. */
+        /** @return the value of the {@code m_nCurrentUniverse} field. */
         @NativeType("uint64_t")
         public long m_nCurrentUniverse() { return VREventChaperone.nm_nCurrentUniverse(address()); }
 

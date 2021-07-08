@@ -96,30 +96,30 @@ public class XrCompositionLayerCylinderKHR extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code layerFlags} field. */
+    /** @return the value of the {@code layerFlags} field. */
     @NativeType("XrCompositionLayerFlags")
     public long layerFlags() { return nlayerFlags(address()); }
-    /** Returns the value of the {@code space} field. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** Returns the value of the {@code eyeVisibility} field. */
+    /** @return the value of the {@code eyeVisibility} field. */
     @NativeType("XrEyeVisibility")
     public int eyeVisibility() { return neyeVisibility(address()); }
-    /** Returns a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
+    /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
-    /** Returns a {@link XrPosef} view of the {@code pose} field. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** Returns the value of the {@code radius} field. */
+    /** @return the value of the {@code radius} field. */
     public float radius() { return nradius(address()); }
-    /** Returns the value of the {@code centralAngle} field. */
+    /** @return the value of the {@code centralAngle} field. */
     public float centralAngle() { return ncentralAngle(address()); }
-    /** Returns the value of the {@code aspectRatio} field. */
+    /** @return the value of the {@code aspectRatio} field. */
     public float aspectRatio() { return naspectRatio(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -431,30 +431,30 @@ public class XrCompositionLayerCylinderKHR extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerCylinderKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerCylinderKHR.nnext(address()); }
-        /** Returns the value of the {@code layerFlags} field. */
+        /** @return the value of the {@code layerFlags} field. */
         @NativeType("XrCompositionLayerFlags")
         public long layerFlags() { return XrCompositionLayerCylinderKHR.nlayerFlags(address()); }
-        /** Returns the value of the {@code space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrCompositionLayerCylinderKHR.nspace(address()); }
-        /** Returns the value of the {@code eyeVisibility} field. */
+        /** @return the value of the {@code eyeVisibility} field. */
         @NativeType("XrEyeVisibility")
         public int eyeVisibility() { return XrCompositionLayerCylinderKHR.neyeVisibility(address()); }
-        /** Returns a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
+        /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
         public XrSwapchainSubImage subImage() { return XrCompositionLayerCylinderKHR.nsubImage(address()); }
-        /** Returns a {@link XrPosef} view of the {@code pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrCompositionLayerCylinderKHR.npose(address()); }
-        /** Returns the value of the {@code radius} field. */
+        /** @return the value of the {@code radius} field. */
         public float radius() { return XrCompositionLayerCylinderKHR.nradius(address()); }
-        /** Returns the value of the {@code centralAngle} field. */
+        /** @return the value of the {@code centralAngle} field. */
         public float centralAngle() { return XrCompositionLayerCylinderKHR.ncentralAngle(address()); }
-        /** Returns the value of the {@code aspectRatio} field. */
+        /** @return the value of the {@code aspectRatio} field. */
         public float aspectRatio() { return XrCompositionLayerCylinderKHR.naspectRatio(address()); }
 
         /** Sets the specified value to the {@code type} field. */

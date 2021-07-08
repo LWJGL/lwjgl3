@@ -19,10 +19,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to the GLFW library's WGL native access functions. */
 public class GLFWNativeWGL {
 
-    protected GLFWNativeWGL() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
     public static final class Functions {
 
@@ -32,6 +28,10 @@ public class GLFWNativeWGL {
         public static final long
             GetWGLContext = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetWGLContext");
 
+    }
+
+    protected GLFWNativeWGL() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ glfwGetWGLContext ] ---
@@ -56,12 +56,6 @@ public class GLFWNativeWGL {
         return invokePP(window, __functionAddress);
     }
 
-    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setPath(String)} with the path of the OpenGL shared library loaded by LWJGL. */
-    @Deprecated
-    public static void setPathLWJGL() {
-        setPath(GL.getFunctionProvider());
-    }
-    
     /**
      * Calls {@link #setPath(String)} with the path of the specified {@link SharedLibrary}.
      * 

@@ -64,10 +64,10 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code register_space} field. */
+    /** @return the value of the {@code register_space} field. */
     @NativeType("unsigned")
     public int register_space() { return nregister_space(address()); }
-    /** Returns the value of the {@code register_binding} field. */
+    /** @return the value of the {@code register_binding} field. */
     @NativeType("unsigned")
     public int register_binding() { return nregister_binding(address()); }
 
@@ -290,10 +290,10 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code register_space} field. */
+        /** @return the value of the {@code register_space} field. */
         @NativeType("unsigned")
         public int register_space() { return SpvcHLSLResourceBindingMapping.nregister_space(address()); }
-        /** Returns the value of the {@code register_binding} field. */
+        /** @return the value of the {@code register_binding} field. */
         @NativeType("unsigned")
         public int register_binding() { return SpvcHLSLResourceBindingMapping.nregister_binding(address()); }
 

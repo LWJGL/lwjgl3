@@ -64,10 +64,10 @@ public class XrActiveActionSet extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code actionSet} field. */
+    /** @return the value of the {@code actionSet} field. */
     @NativeType("XrActionSet")
     public long actionSet() { return nactionSet(address()); }
-    /** Returns the value of the {@code subactionPath} field. */
+    /** @return the value of the {@code subactionPath} field. */
     @NativeType("XrPath")
     public long subactionPath() { return nsubactionPath(address()); }
 
@@ -311,10 +311,10 @@ public class XrActiveActionSet extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code actionSet} field. */
+        /** @return the value of the {@code actionSet} field. */
         @NativeType("XrActionSet")
         public long actionSet() { return XrActiveActionSet.nactionSet(address()); }
-        /** Returns the value of the {@code subactionPath} field. */
+        /** @return the value of the {@code subactionPath} field. */
         @NativeType("XrPath")
         public long subactionPath() { return XrActiveActionSet.nsubactionPath(address()); }
 

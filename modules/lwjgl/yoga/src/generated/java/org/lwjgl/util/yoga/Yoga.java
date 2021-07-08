@@ -64,6 +64,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class Yoga {
 
+    static { LibYoga.initialize(); }
+
     public static final float YGUndefined = Float.NaN;
 
     /**
@@ -322,8 +324,6 @@ public class Yoga {
         YGWrapNoWrap  = 0,
         YGWrapWrap    = 1,
         YGWrapReverse = 2;
-
-    static { LibYoga.initialize(); }
 
     protected Yoga() {
         throw new UnsupportedOperationException();

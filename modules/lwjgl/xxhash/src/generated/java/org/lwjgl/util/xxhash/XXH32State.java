@@ -95,34 +95,34 @@ public class XXH32State extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code total_len_32} field. */
+    /** @return the value of the {@code total_len_32} field. */
     @NativeType("XXH32_hash_t")
     public int total_len_32() { return ntotal_len_32(address()); }
-    /** Returns the value of the {@code large_len} field. */
+    /** @return the value of the {@code large_len} field. */
     @NativeType("XXH32_hash_t")
     public int large_len() { return nlarge_len(address()); }
-    /** Returns the value of the {@code v1} field. */
+    /** @return the value of the {@code v1} field. */
     @NativeType("XXH32_hash_t")
     public int v1() { return nv1(address()); }
-    /** Returns the value of the {@code v2} field. */
+    /** @return the value of the {@code v2} field. */
     @NativeType("XXH32_hash_t")
     public int v2() { return nv2(address()); }
-    /** Returns the value of the {@code v3} field. */
+    /** @return the value of the {@code v3} field. */
     @NativeType("XXH32_hash_t")
     public int v3() { return nv3(address()); }
-    /** Returns the value of the {@code v4} field. */
+    /** @return the value of the {@code v4} field. */
     @NativeType("XXH32_hash_t")
     public int v4() { return nv4(address()); }
-    /** Returns a {@link IntBuffer} view of the {@code mem32} field. */
+    /** @return a {@link IntBuffer} view of the {@code mem32} field. */
     @NativeType("XXH32_hash_t[4]")
     public IntBuffer mem32() { return nmem32(address()); }
-    /** Returns the value at the specified index of the {@code mem32} field. */
+    /** @return the value at the specified index of the {@code mem32} field. */
     @NativeType("XXH32_hash_t")
     public int mem32(int index) { return nmem32(address(), index); }
-    /** Returns the value of the {@code memsize} field. */
+    /** @return the value of the {@code memsize} field. */
     @NativeType("XXH32_hash_t")
     public int memsize() { return nmemsize(address()); }
-    /** Returns the value of the {@code reserved} field. */
+    /** @return the value of the {@code reserved} field. */
     @NativeType("XXH32_hash_t")
     public int reserved() { return nreserved(address()); }
 
@@ -330,34 +330,34 @@ public class XXH32State extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code total_len_32} field. */
+        /** @return the value of the {@code total_len_32} field. */
         @NativeType("XXH32_hash_t")
         public int total_len_32() { return XXH32State.ntotal_len_32(address()); }
-        /** Returns the value of the {@code large_len} field. */
+        /** @return the value of the {@code large_len} field. */
         @NativeType("XXH32_hash_t")
         public int large_len() { return XXH32State.nlarge_len(address()); }
-        /** Returns the value of the {@code v1} field. */
+        /** @return the value of the {@code v1} field. */
         @NativeType("XXH32_hash_t")
         public int v1() { return XXH32State.nv1(address()); }
-        /** Returns the value of the {@code v2} field. */
+        /** @return the value of the {@code v2} field. */
         @NativeType("XXH32_hash_t")
         public int v2() { return XXH32State.nv2(address()); }
-        /** Returns the value of the {@code v3} field. */
+        /** @return the value of the {@code v3} field. */
         @NativeType("XXH32_hash_t")
         public int v3() { return XXH32State.nv3(address()); }
-        /** Returns the value of the {@code v4} field. */
+        /** @return the value of the {@code v4} field. */
         @NativeType("XXH32_hash_t")
         public int v4() { return XXH32State.nv4(address()); }
-        /** Returns a {@link IntBuffer} view of the {@code mem32} field. */
+        /** @return a {@link IntBuffer} view of the {@code mem32} field. */
         @NativeType("XXH32_hash_t[4]")
         public IntBuffer mem32() { return XXH32State.nmem32(address()); }
-        /** Returns the value at the specified index of the {@code mem32} field. */
+        /** @return the value at the specified index of the {@code mem32} field. */
         @NativeType("XXH32_hash_t")
         public int mem32(int index) { return XXH32State.nmem32(address(), index); }
-        /** Returns the value of the {@code memsize} field. */
+        /** @return the value of the {@code memsize} field. */
         @NativeType("XXH32_hash_t")
         public int memsize() { return XXH32State.nmemsize(address()); }
-        /** Returns the value of the {@code reserved} field. */
+        /** @return the value of the {@code reserved} field. */
         @NativeType("XXH32_hash_t")
         public int reserved() { return XXH32State.nreserved(address()); }
 

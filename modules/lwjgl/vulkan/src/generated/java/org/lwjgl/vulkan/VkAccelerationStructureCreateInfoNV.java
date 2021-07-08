@@ -36,23 +36,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkAccelerationStructureInfoNV}, {@link NVRayTracing#vkCreateAccelerationStructureNV CreateAccelerationStructureNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code compactedSize} &ndash; the size from the result of {@link NVRayTracing#vkCmdWriteAccelerationStructuresPropertiesNV CmdWriteAccelerationStructuresPropertiesNV} if this acceleration structure is going to be the target of a compacting copy.</li>
- * <li>{@code info} &ndash; the {@link VkAccelerationStructureInfoNV} structure specifying further parameters of the created acceleration structure.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkAccelerationStructureCreateInfoNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkDeviceSize compactedSize;
- *     {@link VkAccelerationStructureInfoNV VkAccelerationStructureInfoNV} info;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkDeviceSize {@link #compactedSize};
+ *     {@link VkAccelerationStructureInfoNV VkAccelerationStructureInfoNV} {@link #info};
  * }</code></pre>
  */
 public class VkAccelerationStructureCreateInfoNV extends Struct implements NativeResource {
@@ -100,27 +91,27 @@ public class VkAccelerationStructureCreateInfoNV extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code compactedSize} field. */
+    /** the size from the result of {@link NVRayTracing#vkCmdWriteAccelerationStructuresPropertiesNV CmdWriteAccelerationStructuresPropertiesNV} if this acceleration structure is going to be the target of a compacting copy. */
     @NativeType("VkDeviceSize")
     public long compactedSize() { return ncompactedSize(address()); }
-    /** Returns a {@link VkAccelerationStructureInfoNV} view of the {@code info} field. */
+    /** the {@link VkAccelerationStructureInfoNV} structure specifying further parameters of the created acceleration structure. */
     public VkAccelerationStructureInfoNV info() { return ninfo(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code compactedSize} field. */
+    /** Sets the specified value to the {@link #compactedSize} field. */
     public VkAccelerationStructureCreateInfoNV compactedSize(@NativeType("VkDeviceSize") long value) { ncompactedSize(address(), value); return this; }
-    /** Copies the specified {@link VkAccelerationStructureInfoNV} to the {@code info} field. */
+    /** Copies the specified {@link VkAccelerationStructureInfoNV} to the {@link #info} field. */
     public VkAccelerationStructureCreateInfoNV info(VkAccelerationStructureInfoNV value) { ninfo(address(), value); return this; }
-    /** Passes the {@code info} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #info} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureCreateInfoNV info(java.util.function.Consumer<VkAccelerationStructureInfoNV> consumer) { consumer.accept(info()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -370,27 +361,27 @@ public class VkAccelerationStructureCreateInfoNV extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkAccelerationStructureCreateInfoNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAccelerationStructureCreateInfoNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkAccelerationStructureCreateInfoNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAccelerationStructureCreateInfoNV.npNext(address()); }
-        /** Returns the value of the {@code compactedSize} field. */
+        /** @return the value of the {@link VkAccelerationStructureCreateInfoNV#compactedSize} field. */
         @NativeType("VkDeviceSize")
         public long compactedSize() { return VkAccelerationStructureCreateInfoNV.ncompactedSize(address()); }
-        /** Returns a {@link VkAccelerationStructureInfoNV} view of the {@code info} field. */
+        /** @return a {@link VkAccelerationStructureInfoNV} view of the {@link VkAccelerationStructureCreateInfoNV#info} field. */
         public VkAccelerationStructureInfoNV info() { return VkAccelerationStructureCreateInfoNV.ninfo(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoNV#sType} field. */
         public VkAccelerationStructureCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureCreateInfoNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoNV#pNext} field. */
         public VkAccelerationStructureCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureCreateInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code compactedSize} field. */
+        /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoNV#compactedSize} field. */
         public VkAccelerationStructureCreateInfoNV.Buffer compactedSize(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureCreateInfoNV.ncompactedSize(address(), value); return this; }
-        /** Copies the specified {@link VkAccelerationStructureInfoNV} to the {@code info} field. */
+        /** Copies the specified {@link VkAccelerationStructureInfoNV} to the {@link VkAccelerationStructureCreateInfoNV#info} field. */
         public VkAccelerationStructureCreateInfoNV.Buffer info(VkAccelerationStructureInfoNV value) { VkAccelerationStructureCreateInfoNV.ninfo(address(), value); return this; }
-        /** Passes the {@code info} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkAccelerationStructureCreateInfoNV#info} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureCreateInfoNV.Buffer info(java.util.function.Consumer<VkAccelerationStructureInfoNV> consumer) { consumer.accept(info()); return this; }
 
     }

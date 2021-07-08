@@ -27,6 +27,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBMatrixPalette {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code pname} parameters of GetFloatv, GetDoublev, and IsEnabled, by the {@code mode} parameter of MatrixMode, and by the {@code cap}
      * parameters of Enable and Disable.
@@ -53,8 +55,6 @@ public class ARBMatrixPalette {
 
     /** Accepted by the {@code pname} parameter of GetPointerv. */
     public static final int GL_MATRIX_INDEX_ARRAY_POINTER_ARB = 0x8849;
-
-    static { GL.initialize(); }
 
     protected ARBMatrixPalette() {
         throw new UnsupportedOperationException();

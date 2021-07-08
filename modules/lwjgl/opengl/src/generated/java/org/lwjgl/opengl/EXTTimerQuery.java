@@ -33,10 +33,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTTimerQuery {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv. */
     public static final int GL_TIME_ELAPSED_EXT = 0x88BF;
-
-    static { GL.initialize(); }
 
     protected EXTTimerQuery() {
         throw new UnsupportedOperationException();

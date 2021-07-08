@@ -18,6 +18,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>. */
 public class CU41 extends CU40 {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            DeviceGetByPCIBusId = apiGetFunctionAddress(CU.getLibrary(), "cuDeviceGetByPCIBusId"),
+            DeviceGetPCIBusId   = apiGetFunctionAddress(CU.getLibrary(), "cuDeviceGetPCIBusId"),
+            IpcGetEventHandle   = apiGetFunctionAddress(CU.getLibrary(), "cuIpcGetEventHandle"),
+            IpcGetMemHandle     = apiGetFunctionAddress(CU.getLibrary(), "cuIpcGetMemHandle"),
+            IpcCloseMemHandle   = apiGetFunctionAddress(CU.getLibrary(), "cuIpcCloseMemHandle");
+
+    }
+
     public static final int CU_IPC_HANDLE_SIZE = 64;
 
     /**
@@ -33,21 +48,6 @@ public class CU41 extends CU40 {
 
     protected CU41() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            DeviceGetByPCIBusId = apiGetFunctionAddress(CU.getLibrary(), "cuDeviceGetByPCIBusId"),
-            DeviceGetPCIBusId   = apiGetFunctionAddress(CU.getLibrary(), "cuDeviceGetPCIBusId"),
-            IpcGetEventHandle   = apiGetFunctionAddress(CU.getLibrary(), "cuIpcGetEventHandle"),
-            IpcGetMemHandle     = apiGetFunctionAddress(CU.getLibrary(), "cuIpcGetMemHandle"),
-            IpcCloseMemHandle   = apiGetFunctionAddress(CU.getLibrary(), "cuIpcCloseMemHandle");
-
     }
 
     // --- [ cuDeviceGetByPCIBusId ] ---

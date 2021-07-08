@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * return structure for command buffer checkpoint data.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>The stages at which a checkpoint marker <b>can</b> be executed are implementation-defined and <b>can</b> be queried by calling {@link VK11#vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2}.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -25,29 +29,18 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * </ul>
  * 
- * <p>Note that the stages at which a checkpoint marker <b>can</b> be executed are implementation-defined and <b>can</b> be queried by calling {@link VK11#vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2}.</p>
- * 
  * <h5>See Also</h5>
  * 
  * <p>{@link NVDeviceDiagnosticCheckpoints#vkGetQueueCheckpointDataNV GetQueueCheckpointDataNV}</p>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code stage} &ndash; indicates which pipeline stage the checkpoint marker data refers to.</li>
- * <li>{@code pCheckpointMarker} &ndash; contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to.</li>
- * </ul>
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkCheckpointDataNV {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkPipelineStageFlagBits stage;
- *     void * pCheckpointMarker;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkPipelineStageFlagBits {@link #stage};
+ *     void * {@link #pCheckpointMarker};
  * }</code></pre>
  */
 public class VkCheckpointDataNV extends Struct implements NativeResource {
@@ -95,22 +88,22 @@ public class VkCheckpointDataNV extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code stage} field. */
+    /** indicates which pipeline stage the checkpoint marker data refers to. */
     @NativeType("VkPipelineStageFlagBits")
     public int stage() { return nstage(address()); }
-    /** Returns the value of the {@code pCheckpointMarker} field. */
+    /** contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to. */
     @NativeType("void *")
     public long pCheckpointMarker() { return npCheckpointMarker(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkCheckpointDataNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkCheckpointDataNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -331,22 +324,22 @@ public class VkCheckpointDataNV extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkCheckpointDataNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCheckpointDataNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkCheckpointDataNV#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkCheckpointDataNV.npNext(address()); }
-        /** Returns the value of the {@code stage} field. */
+        /** @return the value of the {@link VkCheckpointDataNV#stage} field. */
         @NativeType("VkPipelineStageFlagBits")
         public int stage() { return VkCheckpointDataNV.nstage(address()); }
-        /** Returns the value of the {@code pCheckpointMarker} field. */
+        /** @return the value of the {@link VkCheckpointDataNV#pCheckpointMarker} field. */
         @NativeType("void *")
         public long pCheckpointMarker() { return VkCheckpointDataNV.npCheckpointMarker(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkCheckpointDataNV#sType} field. */
         public VkCheckpointDataNV.Buffer sType(@NativeType("VkStructureType") int value) { VkCheckpointDataNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkCheckpointDataNV#pNext} field. */
         public VkCheckpointDataNV.Buffer pNext(@NativeType("void *") long value) { VkCheckpointDataNV.npNext(address(), value); return this; }
 
     }

@@ -368,7 +368,7 @@ typedef struct {
         GLuint("list", "the command list"),
         GLuint("segment", "the segment"),
         void.const.p.p("indirects", "the array of GPU addresses"),
-        size_t.const.p("sizes", "the array of command lengths"),
+        GLsizei.const.p("sizes", "the array of command lengths"),
         GLuint.const.p("states", "the array of state object names"),
         GLuint.const.p("fbos", "the array of framebuffer object names"),
         AutoSize("indirects", "sizes", "states", "fbos")..GLuint("count", "the number of commands")

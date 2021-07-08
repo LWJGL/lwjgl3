@@ -21,6 +21,93 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMLTO {
 
+    static { LibLLVM.initialize(); }
+
+    private static final SharedLibrary LTO = Library.loadNative(LLVMLTO.class, "org.lwjgl.llvm", Configuration.LLVM_LTO_LIBRARY_NAME, "LTO");
+
+    /** Contains the function pointers loaded from the LTO {@link SharedLibrary}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            get_version                                                      = apiGetFunctionAddress(LTO, "lto_get_version"),
+            get_error_message                                                = apiGetFunctionAddress(LTO, "lto_get_error_message"),
+            module_is_object_file                                            = apiGetFunctionAddress(LTO, "lto_module_is_object_file"),
+            module_is_object_file_for_target                                 = apiGetFunctionAddress(LTO, "lto_module_is_object_file_for_target"),
+            module_has_objc_category                                         = apiGetFunctionAddress(LTO, "lto_module_has_objc_category"),
+            module_is_object_file_in_memory                                  = apiGetFunctionAddress(LTO, "lto_module_is_object_file_in_memory"),
+            module_is_object_file_in_memory_for_target                       = apiGetFunctionAddress(LTO, "lto_module_is_object_file_in_memory_for_target"),
+            module_create                                                    = apiGetFunctionAddress(LTO, "lto_module_create"),
+            module_create_from_memory                                        = apiGetFunctionAddress(LTO, "lto_module_create_from_memory"),
+            module_create_from_memory_with_path                              = apiGetFunctionAddress(LTO, "lto_module_create_from_memory_with_path"),
+            module_create_in_local_context                                   = apiGetFunctionAddress(LTO, "lto_module_create_in_local_context"),
+            module_create_in_codegen_context                                 = apiGetFunctionAddress(LTO, "lto_module_create_in_codegen_context"),
+            module_create_from_fd                                            = apiGetFunctionAddress(LTO, "lto_module_create_from_fd"),
+            module_create_from_fd_at_offset                                  = apiGetFunctionAddress(LTO, "lto_module_create_from_fd_at_offset"),
+            module_dispose                                                   = apiGetFunctionAddress(LTO, "lto_module_dispose"),
+            module_get_target_triple                                         = apiGetFunctionAddress(LTO, "lto_module_get_target_triple"),
+            module_set_target_triple                                         = apiGetFunctionAddress(LTO, "lto_module_set_target_triple"),
+            module_get_num_symbols                                           = apiGetFunctionAddress(LTO, "lto_module_get_num_symbols"),
+            module_get_symbol_name                                           = apiGetFunctionAddress(LTO, "lto_module_get_symbol_name"),
+            module_get_symbol_attribute                                      = apiGetFunctionAddress(LTO, "lto_module_get_symbol_attribute"),
+            module_get_linkeropts                                            = apiGetFunctionAddress(LTO, "lto_module_get_linkeropts"),
+            codegen_set_diagnostic_handler                                   = apiGetFunctionAddress(LTO, "lto_codegen_set_diagnostic_handler"),
+            codegen_create                                                   = apiGetFunctionAddress(LTO, "lto_codegen_create"),
+            codegen_create_in_local_context                                  = apiGetFunctionAddress(LTO, "lto_codegen_create_in_local_context"),
+            codegen_dispose                                                  = apiGetFunctionAddress(LTO, "lto_codegen_dispose"),
+            codegen_add_module                                               = apiGetFunctionAddress(LTO, "lto_codegen_add_module"),
+            codegen_set_module                                               = apiGetFunctionAddress(LTO, "lto_codegen_set_module"),
+            codegen_set_debug_model                                          = apiGetFunctionAddress(LTO, "lto_codegen_set_debug_model"),
+            codegen_set_pic_model                                            = apiGetFunctionAddress(LTO, "lto_codegen_set_pic_model"),
+            codegen_set_cpu                                                  = apiGetFunctionAddress(LTO, "lto_codegen_set_cpu"),
+            codegen_set_assembler_path                                       = apiGetFunctionAddress(LTO, "lto_codegen_set_assembler_path"),
+            codegen_set_assembler_args                                       = apiGetFunctionAddress(LTO, "lto_codegen_set_assembler_args"),
+            codegen_add_must_preserve_symbol                                 = apiGetFunctionAddress(LTO, "lto_codegen_add_must_preserve_symbol"),
+            codegen_write_merged_modules                                     = apiGetFunctionAddress(LTO, "lto_codegen_write_merged_modules"),
+            codegen_compile                                                  = apiGetFunctionAddress(LTO, "lto_codegen_compile"),
+            codegen_compile_to_file                                          = apiGetFunctionAddress(LTO, "lto_codegen_compile_to_file"),
+            codegen_optimize                                                 = apiGetFunctionAddress(LTO, "lto_codegen_optimize"),
+            codegen_compile_optimized                                        = apiGetFunctionAddress(LTO, "lto_codegen_compile_optimized"),
+            api_version                                                      = apiGetFunctionAddress(LTO, "lto_api_version"),
+            codegen_debug_options                                            = apiGetFunctionAddress(LTO, "lto_codegen_debug_options"),
+            initialize_disassembler                                          = apiGetFunctionAddress(LTO, "lto_initialize_disassembler"),
+            codegen_set_should_internalize                                   = apiGetFunctionAddress(LTO, "lto_codegen_set_should_internalize"),
+            codegen_set_should_embed_uselists                                = apiGetFunctionAddress(LTO, "lto_codegen_set_should_embed_uselists"),
+            thinlto_create_codegen                                           = apiGetFunctionAddress(LTO, "thinlto_create_codegen"),
+            thinlto_codegen_dispose                                          = apiGetFunctionAddress(LTO, "thinlto_codegen_dispose"),
+            thinlto_codegen_add_module                                       = apiGetFunctionAddress(LTO, "thinlto_codegen_add_module"),
+            thinlto_codegen_process                                          = apiGetFunctionAddress(LTO, "thinlto_codegen_process"),
+            thinlto_module_get_num_objects                                   = apiGetFunctionAddress(LTO, "thinlto_module_get_num_objects"),
+            thinlto_module_get_object                                        = apiGetFunctionAddress(LTO, "thinlto_module_get_object"),
+            thinlto_module_get_num_object_files                              = apiGetFunctionAddress(LTO, "thinlto_module_get_num_object_files"),
+            thinlto_module_get_object_file                                   = apiGetFunctionAddress(LTO, "thinlto_module_get_object_file"),
+            thinlto_codegen_set_pic_model                                    = apiGetFunctionAddress(LTO, "thinlto_codegen_set_pic_model"),
+            thinlto_codegen_set_savetemps_dir                                = apiGetFunctionAddress(LTO, "thinlto_codegen_set_savetemps_dir"),
+            thinlto_set_generated_objects_dir                                = apiGetFunctionAddress(LTO, "thinlto_set_generated_objects_dir"),
+            thinlto_codegen_set_cpu                                          = apiGetFunctionAddress(LTO, "thinlto_codegen_set_cpu"),
+            thinlto_codegen_disable_codegen                                  = apiGetFunctionAddress(LTO, "thinlto_codegen_disable_codegen"),
+            thinlto_codegen_set_codegen_only                                 = apiGetFunctionAddress(LTO, "thinlto_codegen_set_codegen_only"),
+            thinlto_debug_options                                            = apiGetFunctionAddress(LTO, "thinlto_debug_options"),
+            module_is_thinlto                                                = apiGetFunctionAddress(LTO, "lto_module_is_thinlto"),
+            thinlto_codegen_add_must_preserve_symbol                         = apiGetFunctionAddress(LTO, "thinlto_codegen_add_must_preserve_symbol"),
+            thinlto_codegen_add_cross_referenced_symbol                      = apiGetFunctionAddress(LTO, "thinlto_codegen_add_cross_referenced_symbol"),
+            thinlto_codegen_set_cache_dir                                    = apiGetFunctionAddress(LTO, "thinlto_codegen_set_cache_dir"),
+            thinlto_codegen_set_cache_pruning_interval                       = apiGetFunctionAddress(LTO, "thinlto_codegen_set_cache_pruning_interval"),
+            thinlto_codegen_set_final_cache_size_relative_to_available_space = apiGetFunctionAddress(LTO, "thinlto_codegen_set_final_cache_size_relative_to_available_space"),
+            thinlto_codegen_set_cache_entry_expiration                       = apiGetFunctionAddress(LTO, "thinlto_codegen_set_cache_entry_expiration"),
+            thinlto_codegen_set_cache_size_bytes                             = LTO.getFunctionAddress("thinlto_codegen_set_cache_size_bytes"),
+            thinlto_codegen_set_cache_size_megabytes                         = LTO.getFunctionAddress("thinlto_codegen_set_cache_size_megabytes"),
+            thinlto_codegen_set_cache_size_files                             = LTO.getFunctionAddress("thinlto_codegen_set_cache_size_files");
+
+    }
+
+    /** Returns the LTO {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return LTO;
+    }
+
     public static final int LTOAPI_VERSION = 23;
 
     /**
@@ -123,95 +210,8 @@ public class LLVMLTO {
         LTODS_REMARK  = 3,
         LTODS_NOTE    = 2;
 
-    static { LibLLVM.initialize(); }
-
     protected LLVMLTO() {
         throw new UnsupportedOperationException();
-    }
-
-    private static final SharedLibrary LTO = Library.loadNative(LLVMLTO.class, "org.lwjgl.llvm", Configuration.LLVM_LTO_LIBRARY_NAME, "LTO");
-
-    /** Contains the function pointers loaded from the LTO {@link SharedLibrary}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            get_version                                                      = apiGetFunctionAddress(LTO, "lto_get_version"),
-            get_error_message                                                = apiGetFunctionAddress(LTO, "lto_get_error_message"),
-            module_is_object_file                                            = apiGetFunctionAddress(LTO, "lto_module_is_object_file"),
-            module_is_object_file_for_target                                 = apiGetFunctionAddress(LTO, "lto_module_is_object_file_for_target"),
-            module_has_objc_category                                         = apiGetFunctionAddress(LTO, "lto_module_has_objc_category"),
-            module_is_object_file_in_memory                                  = apiGetFunctionAddress(LTO, "lto_module_is_object_file_in_memory"),
-            module_is_object_file_in_memory_for_target                       = apiGetFunctionAddress(LTO, "lto_module_is_object_file_in_memory_for_target"),
-            module_create                                                    = apiGetFunctionAddress(LTO, "lto_module_create"),
-            module_create_from_memory                                        = apiGetFunctionAddress(LTO, "lto_module_create_from_memory"),
-            module_create_from_memory_with_path                              = apiGetFunctionAddress(LTO, "lto_module_create_from_memory_with_path"),
-            module_create_in_local_context                                   = apiGetFunctionAddress(LTO, "lto_module_create_in_local_context"),
-            module_create_in_codegen_context                                 = apiGetFunctionAddress(LTO, "lto_module_create_in_codegen_context"),
-            module_create_from_fd                                            = apiGetFunctionAddress(LTO, "lto_module_create_from_fd"),
-            module_create_from_fd_at_offset                                  = apiGetFunctionAddress(LTO, "lto_module_create_from_fd_at_offset"),
-            module_dispose                                                   = apiGetFunctionAddress(LTO, "lto_module_dispose"),
-            module_get_target_triple                                         = apiGetFunctionAddress(LTO, "lto_module_get_target_triple"),
-            module_set_target_triple                                         = apiGetFunctionAddress(LTO, "lto_module_set_target_triple"),
-            module_get_num_symbols                                           = apiGetFunctionAddress(LTO, "lto_module_get_num_symbols"),
-            module_get_symbol_name                                           = apiGetFunctionAddress(LTO, "lto_module_get_symbol_name"),
-            module_get_symbol_attribute                                      = apiGetFunctionAddress(LTO, "lto_module_get_symbol_attribute"),
-            module_get_linkeropts                                            = apiGetFunctionAddress(LTO, "lto_module_get_linkeropts"),
-            codegen_set_diagnostic_handler                                   = apiGetFunctionAddress(LTO, "lto_codegen_set_diagnostic_handler"),
-            codegen_create                                                   = apiGetFunctionAddress(LTO, "lto_codegen_create"),
-            codegen_create_in_local_context                                  = apiGetFunctionAddress(LTO, "lto_codegen_create_in_local_context"),
-            codegen_dispose                                                  = apiGetFunctionAddress(LTO, "lto_codegen_dispose"),
-            codegen_add_module                                               = apiGetFunctionAddress(LTO, "lto_codegen_add_module"),
-            codegen_set_module                                               = apiGetFunctionAddress(LTO, "lto_codegen_set_module"),
-            codegen_set_debug_model                                          = apiGetFunctionAddress(LTO, "lto_codegen_set_debug_model"),
-            codegen_set_pic_model                                            = apiGetFunctionAddress(LTO, "lto_codegen_set_pic_model"),
-            codegen_set_cpu                                                  = apiGetFunctionAddress(LTO, "lto_codegen_set_cpu"),
-            codegen_set_assembler_path                                       = apiGetFunctionAddress(LTO, "lto_codegen_set_assembler_path"),
-            codegen_set_assembler_args                                       = apiGetFunctionAddress(LTO, "lto_codegen_set_assembler_args"),
-            codegen_add_must_preserve_symbol                                 = apiGetFunctionAddress(LTO, "lto_codegen_add_must_preserve_symbol"),
-            codegen_write_merged_modules                                     = apiGetFunctionAddress(LTO, "lto_codegen_write_merged_modules"),
-            codegen_compile                                                  = apiGetFunctionAddress(LTO, "lto_codegen_compile"),
-            codegen_compile_to_file                                          = apiGetFunctionAddress(LTO, "lto_codegen_compile_to_file"),
-            codegen_optimize                                                 = apiGetFunctionAddress(LTO, "lto_codegen_optimize"),
-            codegen_compile_optimized                                        = apiGetFunctionAddress(LTO, "lto_codegen_compile_optimized"),
-            api_version                                                      = apiGetFunctionAddress(LTO, "lto_api_version"),
-            codegen_debug_options                                            = apiGetFunctionAddress(LTO, "lto_codegen_debug_options"),
-            initialize_disassembler                                          = apiGetFunctionAddress(LTO, "lto_initialize_disassembler"),
-            codegen_set_should_internalize                                   = apiGetFunctionAddress(LTO, "lto_codegen_set_should_internalize"),
-            codegen_set_should_embed_uselists                                = apiGetFunctionAddress(LTO, "lto_codegen_set_should_embed_uselists"),
-            thinlto_create_codegen                                           = apiGetFunctionAddress(LTO, "thinlto_create_codegen"),
-            thinlto_codegen_dispose                                          = apiGetFunctionAddress(LTO, "thinlto_codegen_dispose"),
-            thinlto_codegen_add_module                                       = apiGetFunctionAddress(LTO, "thinlto_codegen_add_module"),
-            thinlto_codegen_process                                          = apiGetFunctionAddress(LTO, "thinlto_codegen_process"),
-            thinlto_module_get_num_objects                                   = apiGetFunctionAddress(LTO, "thinlto_module_get_num_objects"),
-            thinlto_module_get_object                                        = apiGetFunctionAddress(LTO, "thinlto_module_get_object"),
-            thinlto_module_get_num_object_files                              = apiGetFunctionAddress(LTO, "thinlto_module_get_num_object_files"),
-            thinlto_module_get_object_file                                   = apiGetFunctionAddress(LTO, "thinlto_module_get_object_file"),
-            thinlto_codegen_set_pic_model                                    = apiGetFunctionAddress(LTO, "thinlto_codegen_set_pic_model"),
-            thinlto_codegen_set_savetemps_dir                                = apiGetFunctionAddress(LTO, "thinlto_codegen_set_savetemps_dir"),
-            thinlto_set_generated_objects_dir                                = apiGetFunctionAddress(LTO, "thinlto_set_generated_objects_dir"),
-            thinlto_codegen_set_cpu                                          = apiGetFunctionAddress(LTO, "thinlto_codegen_set_cpu"),
-            thinlto_codegen_disable_codegen                                  = apiGetFunctionAddress(LTO, "thinlto_codegen_disable_codegen"),
-            thinlto_codegen_set_codegen_only                                 = apiGetFunctionAddress(LTO, "thinlto_codegen_set_codegen_only"),
-            thinlto_debug_options                                            = apiGetFunctionAddress(LTO, "thinlto_debug_options"),
-            module_is_thinlto                                                = apiGetFunctionAddress(LTO, "lto_module_is_thinlto"),
-            thinlto_codegen_add_must_preserve_symbol                         = apiGetFunctionAddress(LTO, "thinlto_codegen_add_must_preserve_symbol"),
-            thinlto_codegen_add_cross_referenced_symbol                      = apiGetFunctionAddress(LTO, "thinlto_codegen_add_cross_referenced_symbol"),
-            thinlto_codegen_set_cache_dir                                    = apiGetFunctionAddress(LTO, "thinlto_codegen_set_cache_dir"),
-            thinlto_codegen_set_cache_pruning_interval                       = apiGetFunctionAddress(LTO, "thinlto_codegen_set_cache_pruning_interval"),
-            thinlto_codegen_set_final_cache_size_relative_to_available_space = apiGetFunctionAddress(LTO, "thinlto_codegen_set_final_cache_size_relative_to_available_space"),
-            thinlto_codegen_set_cache_entry_expiration                       = apiGetFunctionAddress(LTO, "thinlto_codegen_set_cache_entry_expiration"),
-            thinlto_codegen_set_cache_size_bytes                             = LTO.getFunctionAddress("thinlto_codegen_set_cache_size_bytes"),
-            thinlto_codegen_set_cache_size_megabytes                         = LTO.getFunctionAddress("thinlto_codegen_set_cache_size_megabytes"),
-            thinlto_codegen_set_cache_size_files                             = LTO.getFunctionAddress("thinlto_codegen_set_cache_size_files");
-
-    }
-
-    /** Returns the LTO {@link SharedLibrary}. */
-    public static SharedLibrary getLibrary() {
-        return LTO;
     }
 
     // --- [ lto_get_version ] ---

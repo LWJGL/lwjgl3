@@ -14,6 +14,8 @@ package org.lwjgl.vulkan;
  * 
  * <p>All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
  * 
+ * <h5>VK_KHR_image_format_list</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_image_format_list}</dd>
@@ -35,6 +37,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Jason Ekstrand <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_image_format_list:%20&amp;body=@jekstrand%20">jekstrand</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-03-20</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>

@@ -31,6 +31,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVExplicitMultisample {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetMultisamplefvNV. */
     public static final int GL_SAMPLE_POSITION_NV = 0x8E50;
 
@@ -57,8 +59,6 @@ public class NVExplicitMultisample {
         GL_SAMPLER_RENDERBUFFER_NV              = 0x8E56,
         GL_INT_SAMPLER_RENDERBUFFER_NV          = 0x8E57,
         GL_UNSIGNED_INT_SAMPLER_RENDERBUFFER_NV = 0x8E58;
-
-    static { GL.initialize(); }
 
     protected NVExplicitMultisample() {
         throw new UnsupportedOperationException();

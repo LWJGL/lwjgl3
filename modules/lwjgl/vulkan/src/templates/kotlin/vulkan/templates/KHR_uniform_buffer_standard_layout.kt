@@ -11,15 +11,14 @@ import vulkan.*
 val KHR_uniform_buffer_standard_layout = "KHRUniformBufferStandardLayout".nativeClassVK("KHR_uniform_buffer_standard_layout", type = "device", postfix = KHR) {
     documentation =
         """
-        <h5>Short Description</h5>
-        Enables tighter array and struct packing to be used with uniform buffers.
+        This extension enables tighter array and struct packing to be used with uniform buffers.
 
-        <h5>Description</h5>
-        This extension modifies the alignment rules for uniform buffers, allowing for tighter packing of arrays and structures. This allows, for example, the std430 layout, as defined in <a target="_blank" href="https://www.khronos.org/registry/OpenGL/specs/gl/GLSLangSpec.4.60.pdf">GLSL</a> to be supported in uniform buffers.
+        It modifies the alignment rules for uniform buffers, allowing for tighter packing of arrays and structures. This allows, for example, the std430 layout, as defined in <a target="_blank" href="https://www.khronos.org/registry/OpenGL/specs/gl/GLSLangSpec.4.60.pdf">GLSL</a> to be supported in uniform buffers.
 
         <h5>Promotion to Vulkan 1.2</h5>
         All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
+        <h5>VK_KHR_uniform_buffer_standard_layout</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_uniform_buffer_standard_layout}</dd>
@@ -48,7 +47,10 @@ val KHR_uniform_buffer_standard_layout = "KHRUniformBufferStandardLayout".native
             <dd><ul>
                 <li>Graeme Leese <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_uniform_buffer_standard_layout:%20&amp;body=@gnl21%20">gnl21</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-01-25</dd>
 

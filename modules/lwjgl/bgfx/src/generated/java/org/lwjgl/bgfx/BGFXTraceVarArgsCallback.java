@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     bgfx_callback_interface_t *_this,
  *     char const *_filePath,
  *     uint16_t _line,
@@ -55,7 +55,7 @@ public abstract class BGFXTraceVarArgsCallback extends Callback implements BGFXT
     }
 
     protected BGFXTraceVarArgsCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     BGFXTraceVarArgsCallback(long functionPointer) {

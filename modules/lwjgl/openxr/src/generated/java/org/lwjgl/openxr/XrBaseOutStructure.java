@@ -64,10 +64,10 @@ public class XrBaseOutStructure extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns a {@link XrBaseOutStructure} view of the struct pointed to by the {@code next} field. */
+    /** @return a {@link XrBaseOutStructure} view of the struct pointed to by the {@code next} field. */
     @NativeType("XrBaseOutStructure *")
     public XrBaseOutStructure next() { return nnext(address()); }
 
@@ -311,10 +311,10 @@ public class XrBaseOutStructure extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrBaseOutStructure.ntype(address()); }
-        /** Returns a {@link XrBaseOutStructure} view of the struct pointed to by the {@code next} field. */
+        /** @return a {@link XrBaseOutStructure} view of the struct pointed to by the {@code next} field. */
         @NativeType("XrBaseOutStructure *")
         public XrBaseOutStructure next() { return XrBaseOutStructure.nnext(address()); }
 

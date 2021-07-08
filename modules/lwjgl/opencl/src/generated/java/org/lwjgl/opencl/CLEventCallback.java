@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     cl_event event,
  *     cl_int event_command_exec_status,
  *     void *user_data
@@ -51,7 +51,7 @@ public abstract class CLEventCallback extends Callback implements CLEventCallbac
     }
 
     protected CLEventCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CLEventCallback(long functionPointer) {

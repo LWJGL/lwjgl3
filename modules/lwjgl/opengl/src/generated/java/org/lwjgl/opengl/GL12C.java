@@ -42,6 +42,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL12C extends GL11C {
 
+    static { GL.initialize(); }
+
     /** Aliases for smooth points and lines. */
     public static final int
         GL_ALIASED_LINE_WIDTH_RANGE      = 0x846E,
@@ -120,8 +122,6 @@ public class GL12C extends GL11C {
     public static final int
         GL_MAX_ELEMENTS_VERTICES = 0x80E8,
         GL_MAX_ELEMENTS_INDICES  = 0x80E9;
-
-    static { GL.initialize(); }
 
     protected GL12C() {
         throw new UnsupportedOperationException();

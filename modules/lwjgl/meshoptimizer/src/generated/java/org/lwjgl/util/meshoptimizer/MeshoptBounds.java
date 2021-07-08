@@ -17,25 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code center[3]} &ndash; bounding sphere, useful for frustum and occlusion culling</li>
- * <li>{@code cone_apex[3]} &ndash; normal cone, useful for backface culling</li>
- * <li>{@code cone_cutoff} &ndash; {@code cos(angle/2)}</li>
- * <li>{@code cone_axis_s8[3]} &ndash; normal cone axis and cutoff, stored in 8-bit {@code SNORM} format; decode using {@code x/127.0}</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct meshopt_Bounds {
- *     float center[3];
+ *     float {@link #center}[3];
  *     float radius;
- *     float cone_apex[3];
+ *     float {@link #cone_apex}[3];
  *     float cone_axis[3];
- *     float cone_cutoff;
- *     char cone_axis_s8[3];
+ *     float {@link #cone_cutoff};
+ *     char {@link #cone_axis_s8}[3];
  *     char cone_cutoff_s8;
  * }</code></pre>
  */
@@ -94,32 +85,32 @@ public class MeshoptBounds extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link FloatBuffer} view of the {@code center} field. */
+    /** bounding sphere, useful for frustum and occlusion culling */
     @NativeType("float[3]")
     public FloatBuffer center() { return ncenter(address()); }
-    /** Returns the value at the specified index of the {@code center} field. */
+    /** bounding sphere, useful for frustum and occlusion culling */
     public float center(int index) { return ncenter(address(), index); }
-    /** Returns the value of the {@code radius} field. */
+    /** @return the value of the {@code radius} field. */
     public float radius() { return nradius(address()); }
-    /** Returns a {@link FloatBuffer} view of the {@code cone_apex} field. */
+    /** normal cone, useful for backface culling */
     @NativeType("float[3]")
     public FloatBuffer cone_apex() { return ncone_apex(address()); }
-    /** Returns the value at the specified index of the {@code cone_apex} field. */
+    /** normal cone, useful for backface culling */
     public float cone_apex(int index) { return ncone_apex(address(), index); }
-    /** Returns a {@link FloatBuffer} view of the {@code cone_axis} field. */
+    /** @return a {@link FloatBuffer} view of the {@code cone_axis} field. */
     @NativeType("float[3]")
     public FloatBuffer cone_axis() { return ncone_axis(address()); }
-    /** Returns the value at the specified index of the {@code cone_axis} field. */
+    /** @return the value at the specified index of the {@code cone_axis} field. */
     public float cone_axis(int index) { return ncone_axis(address(), index); }
-    /** Returns the value of the {@code cone_cutoff} field. */
+    /** {@code cos(angle/2)} */
     public float cone_cutoff() { return ncone_cutoff(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code cone_axis_s8} field. */
+    /** normal cone axis and cutoff, stored in 8-bit {@code SNORM} format; decode using {@code x/127.0} */
     @NativeType("char[3]")
     public ByteBuffer cone_axis_s8() { return ncone_axis_s8(address()); }
-    /** Returns the value at the specified index of the {@code cone_axis_s8} field. */
+    /** normal cone axis and cutoff, stored in 8-bit {@code SNORM} format; decode using {@code x/127.0} */
     @NativeType("char")
     public byte cone_axis_s8(int index) { return ncone_axis_s8(address(), index); }
-    /** Returns the value of the {@code cone_cutoff_s8} field. */
+    /** @return the value of the {@code cone_cutoff_s8} field. */
     @NativeType("char")
     public byte cone_cutoff_s8() { return ncone_cutoff_s8(address()); }
 
@@ -335,32 +326,32 @@ public class MeshoptBounds extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link FloatBuffer} view of the {@code center} field. */
+        /** @return a {@link FloatBuffer} view of the {@link MeshoptBounds#center} field. */
         @NativeType("float[3]")
         public FloatBuffer center() { return MeshoptBounds.ncenter(address()); }
-        /** Returns the value at the specified index of the {@code center} field. */
+        /** @return the value at the specified index of the {@link MeshoptBounds#center} field. */
         public float center(int index) { return MeshoptBounds.ncenter(address(), index); }
-        /** Returns the value of the {@code radius} field. */
+        /** @return the value of the {@code radius} field. */
         public float radius() { return MeshoptBounds.nradius(address()); }
-        /** Returns a {@link FloatBuffer} view of the {@code cone_apex} field. */
+        /** @return a {@link FloatBuffer} view of the {@link MeshoptBounds#cone_apex} field. */
         @NativeType("float[3]")
         public FloatBuffer cone_apex() { return MeshoptBounds.ncone_apex(address()); }
-        /** Returns the value at the specified index of the {@code cone_apex} field. */
+        /** @return the value at the specified index of the {@link MeshoptBounds#cone_apex} field. */
         public float cone_apex(int index) { return MeshoptBounds.ncone_apex(address(), index); }
-        /** Returns a {@link FloatBuffer} view of the {@code cone_axis} field. */
+        /** @return a {@link FloatBuffer} view of the {@code cone_axis} field. */
         @NativeType("float[3]")
         public FloatBuffer cone_axis() { return MeshoptBounds.ncone_axis(address()); }
-        /** Returns the value at the specified index of the {@code cone_axis} field. */
+        /** @return the value at the specified index of the {@code cone_axis} field. */
         public float cone_axis(int index) { return MeshoptBounds.ncone_axis(address(), index); }
-        /** Returns the value of the {@code cone_cutoff} field. */
+        /** @return the value of the {@link MeshoptBounds#cone_cutoff} field. */
         public float cone_cutoff() { return MeshoptBounds.ncone_cutoff(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code cone_axis_s8} field. */
+        /** @return a {@link ByteBuffer} view of the {@link MeshoptBounds#cone_axis_s8} field. */
         @NativeType("char[3]")
         public ByteBuffer cone_axis_s8() { return MeshoptBounds.ncone_axis_s8(address()); }
-        /** Returns the value at the specified index of the {@code cone_axis_s8} field. */
+        /** @return the value at the specified index of the {@link MeshoptBounds#cone_axis_s8} field. */
         @NativeType("char")
         public byte cone_axis_s8(int index) { return MeshoptBounds.ncone_axis_s8(address(), index); }
-        /** Returns the value of the {@code cone_cutoff_s8} field. */
+        /** @return the value of the {@code cone_cutoff_s8} field. */
         @NativeType("char")
         public byte cone_cutoff_s8() { return MeshoptBounds.ncone_cutoff_s8(address()); }
 

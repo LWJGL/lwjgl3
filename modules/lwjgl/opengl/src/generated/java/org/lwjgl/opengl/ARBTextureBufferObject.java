@@ -32,6 +32,8 @@ import org.lwjgl.system.*;
  */
 public class ARBTextureBufferObject {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code target} parameter of BindBuffer, BufferData, BufferSubData, MapBuffer, MapBufferRangeARB, BindTexture, UnmapBuffer,
      * GetBufferSubData, GetBufferParameteriv, GetBufferPointerv, and TexBufferARB, and the {@code pname} parameter of GetBooleanv, GetDoublev, GetFloatv, and
@@ -45,8 +47,6 @@ public class ARBTextureBufferObject {
         GL_TEXTURE_BINDING_BUFFER_ARB            = 0x8C2C,
         GL_TEXTURE_BUFFER_DATA_STORE_BINDING_ARB = 0x8C2D,
         GL_TEXTURE_BUFFER_FORMAT_ARB             = 0x8C2E;
-
-    static { GL.initialize(); }
 
     protected ARBTextureBufferObject() {
         throw new UnsupportedOperationException();

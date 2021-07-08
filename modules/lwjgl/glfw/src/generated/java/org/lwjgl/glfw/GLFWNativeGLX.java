@@ -19,10 +19,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to the GLFW library's GLX native access functions. */
 public class GLFWNativeGLX {
 
-    protected GLFWNativeGLX() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
     public static final class Functions {
 
@@ -33,6 +29,10 @@ public class GLFWNativeGLX {
             GetGLXContext = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetGLXContext"),
             GetGLXWindow  = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetGLXWindow");
 
+    }
+
+    protected GLFWNativeGLX() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ glfwGetGLXContext ] ---
@@ -77,12 +77,6 @@ public class GLFWNativeGLX {
             check(window);
         }
         return invokePP(window, __functionAddress);
-    }
-
-    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setPath(String)} with the path of the OpenGL shared library loaded by LWJGL. */
-    @Deprecated
-    public static void setPathLWJGL() {
-        setPath(GL.getFunctionProvider());
     }
 
     /**

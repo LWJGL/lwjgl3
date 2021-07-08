@@ -23,6 +23,8 @@ import org.lwjgl.system.*;
  */
 public class GL21 extends GL20 {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_CURRENT_RASTER_SECONDARY_COLOR = 0x845F;
 
@@ -62,8 +64,6 @@ public class GL21 extends GL20 {
         GL_COMPRESSED_SRGB_ALPHA       = 0x8C49,
         GL_COMPRESSED_SLUMINANCE       = 0x8C4A,
         GL_COMPRESSED_SLUMINANCE_ALPHA = 0x8C4B;
-
-    static { GL.initialize(); }
 
     protected GL21() {
         throw new UnsupportedOperationException();

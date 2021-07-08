@@ -6,7 +6,9 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension allows uint8_t indices to be used with {@link VK10#vkCmdBindIndexBuffer CmdBindIndexBuffer}.
+ * This extension allows {@code uint8_t} indices to be used with {@link VK10#vkCmdBindIndexBuffer CmdBindIndexBuffer}.
+ * 
+ * <h5>VK_EXT_index_type_uint8</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -25,6 +27,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_index_type_uint8:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-05-02</dd>
  * <dt><b>IP Status</b></dt>

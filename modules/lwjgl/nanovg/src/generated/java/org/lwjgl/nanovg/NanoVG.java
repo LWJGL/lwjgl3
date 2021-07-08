@@ -109,6 +109,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NanoVG {
 
+    static { LibNanoVG.initialize(); }
+
     /** PI */
     public static final float NVG_PI = 3.1415927f;
 
@@ -269,8 +271,6 @@ public class NanoVG {
         NVG_IMAGE_FLIPY            = 1<<3,
         NVG_IMAGE_PREMULTIPLIED    = 1<<4,
         NVG_IMAGE_NEAREST          = 1<<5;
-
-    static { LibNanoVG.initialize(); }
 
     protected NanoVG() {
         throw new UnsupportedOperationException();

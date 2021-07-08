@@ -76,19 +76,19 @@ public class XrHandJointLocationsEXT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code isActive} field. */
+    /** @return the value of the {@code isActive} field. */
     @NativeType("XrBool32")
     public boolean isActive() { return nisActive(address()) != 0; }
-    /** Returns the value of the {@code jointCount} field. */
+    /** @return the value of the {@code jointCount} field. */
     @NativeType("uint32_t")
     public int jointCount() { return njointCount(address()); }
-    /** Returns a {@link XrHandJointLocationEXT.Buffer} view of the struct array pointed to by the {@code jointLocations} field. */
+    /** @return a {@link XrHandJointLocationEXT.Buffer} view of the struct array pointed to by the {@code jointLocations} field. */
     @NativeType("XrHandJointLocationEXT *")
     public XrHandJointLocationEXT.Buffer jointLocations() { return njointLocations(address()); }
 
@@ -352,19 +352,19 @@ public class XrHandJointLocationsEXT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHandJointLocationsEXT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrHandJointLocationsEXT.nnext(address()); }
-        /** Returns the value of the {@code isActive} field. */
+        /** @return the value of the {@code isActive} field. */
         @NativeType("XrBool32")
         public boolean isActive() { return XrHandJointLocationsEXT.nisActive(address()) != 0; }
-        /** Returns the value of the {@code jointCount} field. */
+        /** @return the value of the {@code jointCount} field. */
         @NativeType("uint32_t")
         public int jointCount() { return XrHandJointLocationsEXT.njointCount(address()); }
-        /** Returns a {@link XrHandJointLocationEXT.Buffer} view of the struct array pointed to by the {@code jointLocations} field. */
+        /** @return a {@link XrHandJointLocationEXT.Buffer} view of the struct array pointed to by the {@code jointLocations} field. */
         @NativeType("XrHandJointLocationEXT *")
         public XrHandJointLocationEXT.Buffer jointLocations() { return XrHandJointLocationsEXT.njointLocations(address()); }
 

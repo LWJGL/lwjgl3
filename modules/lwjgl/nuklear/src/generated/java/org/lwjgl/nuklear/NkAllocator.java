@@ -68,14 +68,14 @@ public class NkAllocator extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+    /** @return a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
-    /** Returns the value of the {@code alloc} field. */
+    /** @return the value of the {@code alloc} field. */
     @Nullable
     @NativeType("nk_plugin_alloc")
     public NkPluginAlloc alloc() { return nalloc(address()); }
-    /** Returns the value of the {@code mfree} field. */
+    /** @return the value of the {@code mfree} field. */
     @Nullable
     @NativeType("nk_plugin_free")
     public NkPluginFree mfree() { return nmfree(address()); }
@@ -309,14 +309,14 @@ public class NkAllocator extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+        /** @return a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkAllocator.nuserdata(address()); }
-        /** Returns the value of the {@code alloc} field. */
+        /** @return the value of the {@code alloc} field. */
         @Nullable
         @NativeType("nk_plugin_alloc")
         public NkPluginAlloc alloc() { return NkAllocator.nalloc(address()); }
-        /** Returns the value of the {@code mfree} field. */
+        /** @return the value of the {@code mfree} field. */
         @Nullable
         @NativeType("nk_plugin_free")
         public NkPluginFree mfree() { return NkAllocator.nmfree(address()); }

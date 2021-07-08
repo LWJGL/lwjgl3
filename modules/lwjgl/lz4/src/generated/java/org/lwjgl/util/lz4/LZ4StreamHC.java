@@ -15,14 +15,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-import static org.lwjgl.util.lz4.LZ4HC.LZ4_STREAMHCSIZE_SIZET;
+import static org.lwjgl.util.lz4.LZ4HC.LZ4_STREAMHCSIZE_VOIDP;
 
 /**
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * union LZ4_streamHC_t {
- *     size_t table[LZ4_STREAMHCSIZE_SIZET];
+ *     size_t table[LZ4_STREAMHCSIZE_VOIDP];
  *     {@link LZ4HCCCtxInternal struct LZ4HC_CCtx_internal} internal_donotuse;
  * }</code></pre>
  */
@@ -42,7 +42,7 @@ public class LZ4StreamHC extends Struct {
 
     static {
         Layout layout = __union(
-            __array(POINTER_SIZE, LZ4_STREAMHCSIZE_SIZET),
+            __array(POINTER_SIZE, LZ4_STREAMHCSIZE_VOIDP),
             __member(LZ4HCCCtxInternal.SIZEOF, LZ4HCCCtxInternal.ALIGNOF)
         );
 
@@ -66,13 +66,13 @@ public class LZ4StreamHC extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link PointerBuffer} view of the {@code table} field. */
-    @NativeType("size_t[LZ4_STREAMHCSIZE_SIZET]")
+    /** @return a {@link PointerBuffer} view of the {@code table} field. */
+    @NativeType("size_t[LZ4_STREAMHCSIZE_VOIDP]")
     public PointerBuffer table() { return ntable(address()); }
-    /** Returns the value at the specified index of the {@code table} field. */
+    /** @return the value at the specified index of the {@code table} field. */
     @NativeType("size_t")
     public long table(int index) { return ntable(address(), index); }
-    /** Returns a {@link LZ4HCCCtxInternal} view of the {@code internal_donotuse} field. */
+    /** @return a {@link LZ4HCCCtxInternal} view of the {@code internal_donotuse} field. */
     @NativeType("struct LZ4HC_CCtx_internal")
     public LZ4HCCCtxInternal internal_donotuse() { return ninternal_donotuse(address()); }
 
@@ -108,10 +108,10 @@ public class LZ4StreamHC extends Struct {
     // -----------------------------------
 
     /** Unsafe version of {@link #table}. */
-    public static PointerBuffer ntable(long struct) { return memPointerBuffer(struct + LZ4StreamHC.TABLE, LZ4_STREAMHCSIZE_SIZET); }
+    public static PointerBuffer ntable(long struct) { return memPointerBuffer(struct + LZ4StreamHC.TABLE, LZ4_STREAMHCSIZE_VOIDP); }
     /** Unsafe version of {@link #table(int) table}. */
     public static long ntable(long struct, int index) {
-        return memGetAddress(struct + LZ4StreamHC.TABLE + check(index, LZ4_STREAMHCSIZE_SIZET) * POINTER_SIZE);
+        return memGetAddress(struct + LZ4StreamHC.TABLE + check(index, LZ4_STREAMHCSIZE_VOIDP) * POINTER_SIZE);
     }
     /** Unsafe version of {@link #internal_donotuse}. */
     public static LZ4HCCCtxInternal ninternal_donotuse(long struct) { return LZ4HCCCtxInternal.create(struct + LZ4StreamHC.INTERNAL_DONOTUSE); }
@@ -154,13 +154,13 @@ public class LZ4StreamHC extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link PointerBuffer} view of the {@code table} field. */
-        @NativeType("size_t[LZ4_STREAMHCSIZE_SIZET]")
+        /** @return a {@link PointerBuffer} view of the {@code table} field. */
+        @NativeType("size_t[LZ4_STREAMHCSIZE_VOIDP]")
         public PointerBuffer table() { return LZ4StreamHC.ntable(address()); }
-        /** Returns the value at the specified index of the {@code table} field. */
+        /** @return the value at the specified index of the {@code table} field. */
         @NativeType("size_t")
         public long table(int index) { return LZ4StreamHC.ntable(address(), index); }
-        /** Returns a {@link LZ4HCCCtxInternal} view of the {@code internal_donotuse} field. */
+        /** @return a {@link LZ4HCCCtxInternal} view of the {@code internal_donotuse} field. */
         @NativeType("struct LZ4HC_CCtx_internal")
         public LZ4HCCCtxInternal internal_donotuse() { return LZ4StreamHC.ninternal_donotuse(address()); }
 

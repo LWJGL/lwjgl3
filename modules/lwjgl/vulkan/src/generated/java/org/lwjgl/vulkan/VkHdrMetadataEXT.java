@@ -34,35 +34,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkXYColorEXT}, {@link EXTHdrMetadata#vkSetHdrMetadataEXT SetHdrMetadataEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code displayPrimaryRed} &ndash; the mastering display&#8217;s red primary in chromaticity coordinates</li>
- * <li>{@code displayPrimaryGreen} &ndash; the mastering display&#8217;s green primary in chromaticity coordinates</li>
- * <li>{@code displayPrimaryBlue} &ndash; the mastering display&#8217;s blue primary in chromaticity coordinates</li>
- * <li>{@code whitePoint} &ndash; the mastering display&#8217;s white-point in chromaticity coordinates</li>
- * <li>{@code maxLuminance} &ndash; the maximum luminance of the mastering display in nits</li>
- * <li>{@code minLuminance} &ndash; the minimum luminance of the mastering display in nits</li>
- * <li>{@code maxContentLightLevel} &ndash; content&#8217;s maximum luminance in nits</li>
- * <li>{@code maxFrameAverageLightLevel} &ndash; the maximum frame average light level in nits</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkHdrMetadataEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     {@link VkXYColorEXT VkXYColorEXT} displayPrimaryRed;
- *     {@link VkXYColorEXT VkXYColorEXT} displayPrimaryGreen;
- *     {@link VkXYColorEXT VkXYColorEXT} displayPrimaryBlue;
- *     {@link VkXYColorEXT VkXYColorEXT} whitePoint;
- *     float maxLuminance;
- *     float minLuminance;
- *     float maxContentLightLevel;
- *     float maxFrameAverageLightLevel;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     {@link VkXYColorEXT VkXYColorEXT} {@link #displayPrimaryRed};
+ *     {@link VkXYColorEXT VkXYColorEXT} {@link #displayPrimaryGreen};
+ *     {@link VkXYColorEXT VkXYColorEXT} {@link #displayPrimaryBlue};
+ *     {@link VkXYColorEXT VkXYColorEXT} {@link #whitePoint};
+ *     float {@link #maxLuminance};
+ *     float {@link #minLuminance};
+ *     float {@link #maxContentLightLevel};
+ *     float {@link #maxFrameAverageLightLevel};
  * }</code></pre>
  */
 public class VkHdrMetadataEXT extends Struct implements NativeResource {
@@ -128,56 +113,56 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkXYColorEXT} view of the {@code displayPrimaryRed} field. */
+    /** the reference monitor&#8217;s red primary in chromaticity coordinates */
     public VkXYColorEXT displayPrimaryRed() { return ndisplayPrimaryRed(address()); }
-    /** Returns a {@link VkXYColorEXT} view of the {@code displayPrimaryGreen} field. */
+    /** the reference monitor&#8217;s green primary in chromaticity coordinates */
     public VkXYColorEXT displayPrimaryGreen() { return ndisplayPrimaryGreen(address()); }
-    /** Returns a {@link VkXYColorEXT} view of the {@code displayPrimaryBlue} field. */
+    /** the reference monitor&#8217;s blue primary in chromaticity coordinates */
     public VkXYColorEXT displayPrimaryBlue() { return ndisplayPrimaryBlue(address()); }
-    /** Returns a {@link VkXYColorEXT} view of the {@code whitePoint} field. */
+    /** the reference monitor&#8217;s white-point in chromaticity coordinates */
     public VkXYColorEXT whitePoint() { return nwhitePoint(address()); }
-    /** Returns the value of the {@code maxLuminance} field. */
+    /** the maximum luminance of the reference monitor in nits */
     public float maxLuminance() { return nmaxLuminance(address()); }
-    /** Returns the value of the {@code minLuminance} field. */
+    /** the minimum luminance of the reference monitor in nits */
     public float minLuminance() { return nminLuminance(address()); }
-    /** Returns the value of the {@code maxContentLightLevel} field. */
+    /** content&#8217;s maximum luminance in nits */
     public float maxContentLightLevel() { return nmaxContentLightLevel(address()); }
-    /** Returns the value of the {@code maxFrameAverageLightLevel} field. */
+    /** the maximum frame average light level in nits */
     public float maxFrameAverageLightLevel() { return nmaxFrameAverageLightLevel(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkHdrMetadataEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkHdrMetadataEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkXYColorEXT} to the {@code displayPrimaryRed} field. */
+    /** Copies the specified {@link VkXYColorEXT} to the {@link #displayPrimaryRed} field. */
     public VkHdrMetadataEXT displayPrimaryRed(VkXYColorEXT value) { ndisplayPrimaryRed(address(), value); return this; }
-    /** Passes the {@code displayPrimaryRed} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #displayPrimaryRed} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkHdrMetadataEXT displayPrimaryRed(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(displayPrimaryRed()); return this; }
-    /** Copies the specified {@link VkXYColorEXT} to the {@code displayPrimaryGreen} field. */
+    /** Copies the specified {@link VkXYColorEXT} to the {@link #displayPrimaryGreen} field. */
     public VkHdrMetadataEXT displayPrimaryGreen(VkXYColorEXT value) { ndisplayPrimaryGreen(address(), value); return this; }
-    /** Passes the {@code displayPrimaryGreen} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #displayPrimaryGreen} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkHdrMetadataEXT displayPrimaryGreen(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(displayPrimaryGreen()); return this; }
-    /** Copies the specified {@link VkXYColorEXT} to the {@code displayPrimaryBlue} field. */
+    /** Copies the specified {@link VkXYColorEXT} to the {@link #displayPrimaryBlue} field. */
     public VkHdrMetadataEXT displayPrimaryBlue(VkXYColorEXT value) { ndisplayPrimaryBlue(address(), value); return this; }
-    /** Passes the {@code displayPrimaryBlue} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #displayPrimaryBlue} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkHdrMetadataEXT displayPrimaryBlue(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(displayPrimaryBlue()); return this; }
-    /** Copies the specified {@link VkXYColorEXT} to the {@code whitePoint} field. */
+    /** Copies the specified {@link VkXYColorEXT} to the {@link #whitePoint} field. */
     public VkHdrMetadataEXT whitePoint(VkXYColorEXT value) { nwhitePoint(address(), value); return this; }
-    /** Passes the {@code whitePoint} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #whitePoint} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkHdrMetadataEXT whitePoint(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(whitePoint()); return this; }
-    /** Sets the specified value to the {@code maxLuminance} field. */
+    /** Sets the specified value to the {@link #maxLuminance} field. */
     public VkHdrMetadataEXT maxLuminance(float value) { nmaxLuminance(address(), value); return this; }
-    /** Sets the specified value to the {@code minLuminance} field. */
+    /** Sets the specified value to the {@link #minLuminance} field. */
     public VkHdrMetadataEXT minLuminance(float value) { nminLuminance(address(), value); return this; }
-    /** Sets the specified value to the {@code maxContentLightLevel} field. */
+    /** Sets the specified value to the {@link #maxContentLightLevel} field. */
     public VkHdrMetadataEXT maxContentLightLevel(float value) { nmaxContentLightLevel(address(), value); return this; }
-    /** Sets the specified value to the {@code maxFrameAverageLightLevel} field. */
+    /** Sets the specified value to the {@link #maxFrameAverageLightLevel} field. */
     public VkHdrMetadataEXT maxFrameAverageLightLevel(float value) { nmaxFrameAverageLightLevel(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -442,56 +427,56 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkHdrMetadataEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkHdrMetadataEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkHdrMetadataEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkHdrMetadataEXT.npNext(address()); }
-        /** Returns a {@link VkXYColorEXT} view of the {@code displayPrimaryRed} field. */
+        /** @return a {@link VkXYColorEXT} view of the {@link VkHdrMetadataEXT#displayPrimaryRed} field. */
         public VkXYColorEXT displayPrimaryRed() { return VkHdrMetadataEXT.ndisplayPrimaryRed(address()); }
-        /** Returns a {@link VkXYColorEXT} view of the {@code displayPrimaryGreen} field. */
+        /** @return a {@link VkXYColorEXT} view of the {@link VkHdrMetadataEXT#displayPrimaryGreen} field. */
         public VkXYColorEXT displayPrimaryGreen() { return VkHdrMetadataEXT.ndisplayPrimaryGreen(address()); }
-        /** Returns a {@link VkXYColorEXT} view of the {@code displayPrimaryBlue} field. */
+        /** @return a {@link VkXYColorEXT} view of the {@link VkHdrMetadataEXT#displayPrimaryBlue} field. */
         public VkXYColorEXT displayPrimaryBlue() { return VkHdrMetadataEXT.ndisplayPrimaryBlue(address()); }
-        /** Returns a {@link VkXYColorEXT} view of the {@code whitePoint} field. */
+        /** @return a {@link VkXYColorEXT} view of the {@link VkHdrMetadataEXT#whitePoint} field. */
         public VkXYColorEXT whitePoint() { return VkHdrMetadataEXT.nwhitePoint(address()); }
-        /** Returns the value of the {@code maxLuminance} field. */
+        /** @return the value of the {@link VkHdrMetadataEXT#maxLuminance} field. */
         public float maxLuminance() { return VkHdrMetadataEXT.nmaxLuminance(address()); }
-        /** Returns the value of the {@code minLuminance} field. */
+        /** @return the value of the {@link VkHdrMetadataEXT#minLuminance} field. */
         public float minLuminance() { return VkHdrMetadataEXT.nminLuminance(address()); }
-        /** Returns the value of the {@code maxContentLightLevel} field. */
+        /** @return the value of the {@link VkHdrMetadataEXT#maxContentLightLevel} field. */
         public float maxContentLightLevel() { return VkHdrMetadataEXT.nmaxContentLightLevel(address()); }
-        /** Returns the value of the {@code maxFrameAverageLightLevel} field. */
+        /** @return the value of the {@link VkHdrMetadataEXT#maxFrameAverageLightLevel} field. */
         public float maxFrameAverageLightLevel() { return VkHdrMetadataEXT.nmaxFrameAverageLightLevel(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkHdrMetadataEXT#sType} field. */
         public VkHdrMetadataEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkHdrMetadataEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkHdrMetadataEXT#pNext} field. */
         public VkHdrMetadataEXT.Buffer pNext(@NativeType("void const *") long value) { VkHdrMetadataEXT.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkXYColorEXT} to the {@code displayPrimaryRed} field. */
+        /** Copies the specified {@link VkXYColorEXT} to the {@link VkHdrMetadataEXT#displayPrimaryRed} field. */
         public VkHdrMetadataEXT.Buffer displayPrimaryRed(VkXYColorEXT value) { VkHdrMetadataEXT.ndisplayPrimaryRed(address(), value); return this; }
-        /** Passes the {@code displayPrimaryRed} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkHdrMetadataEXT#displayPrimaryRed} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkHdrMetadataEXT.Buffer displayPrimaryRed(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(displayPrimaryRed()); return this; }
-        /** Copies the specified {@link VkXYColorEXT} to the {@code displayPrimaryGreen} field. */
+        /** Copies the specified {@link VkXYColorEXT} to the {@link VkHdrMetadataEXT#displayPrimaryGreen} field. */
         public VkHdrMetadataEXT.Buffer displayPrimaryGreen(VkXYColorEXT value) { VkHdrMetadataEXT.ndisplayPrimaryGreen(address(), value); return this; }
-        /** Passes the {@code displayPrimaryGreen} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkHdrMetadataEXT#displayPrimaryGreen} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkHdrMetadataEXT.Buffer displayPrimaryGreen(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(displayPrimaryGreen()); return this; }
-        /** Copies the specified {@link VkXYColorEXT} to the {@code displayPrimaryBlue} field. */
+        /** Copies the specified {@link VkXYColorEXT} to the {@link VkHdrMetadataEXT#displayPrimaryBlue} field. */
         public VkHdrMetadataEXT.Buffer displayPrimaryBlue(VkXYColorEXT value) { VkHdrMetadataEXT.ndisplayPrimaryBlue(address(), value); return this; }
-        /** Passes the {@code displayPrimaryBlue} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkHdrMetadataEXT#displayPrimaryBlue} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkHdrMetadataEXT.Buffer displayPrimaryBlue(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(displayPrimaryBlue()); return this; }
-        /** Copies the specified {@link VkXYColorEXT} to the {@code whitePoint} field. */
+        /** Copies the specified {@link VkXYColorEXT} to the {@link VkHdrMetadataEXT#whitePoint} field. */
         public VkHdrMetadataEXT.Buffer whitePoint(VkXYColorEXT value) { VkHdrMetadataEXT.nwhitePoint(address(), value); return this; }
-        /** Passes the {@code whitePoint} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkHdrMetadataEXT#whitePoint} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkHdrMetadataEXT.Buffer whitePoint(java.util.function.Consumer<VkXYColorEXT> consumer) { consumer.accept(whitePoint()); return this; }
-        /** Sets the specified value to the {@code maxLuminance} field. */
+        /** Sets the specified value to the {@link VkHdrMetadataEXT#maxLuminance} field. */
         public VkHdrMetadataEXT.Buffer maxLuminance(float value) { VkHdrMetadataEXT.nmaxLuminance(address(), value); return this; }
-        /** Sets the specified value to the {@code minLuminance} field. */
+        /** Sets the specified value to the {@link VkHdrMetadataEXT#minLuminance} field. */
         public VkHdrMetadataEXT.Buffer minLuminance(float value) { VkHdrMetadataEXT.nminLuminance(address(), value); return this; }
-        /** Sets the specified value to the {@code maxContentLightLevel} field. */
+        /** Sets the specified value to the {@link VkHdrMetadataEXT#maxContentLightLevel} field. */
         public VkHdrMetadataEXT.Buffer maxContentLightLevel(float value) { VkHdrMetadataEXT.nmaxContentLightLevel(address(), value); return this; }
-        /** Sets the specified value to the {@code maxFrameAverageLightLevel} field. */
+        /** Sets the specified value to the {@link VkHdrMetadataEXT#maxFrameAverageLightLevel} field. */
         public VkHdrMetadataEXT.Buffer maxFrameAverageLightLevel(float value) { VkHdrMetadataEXT.nmaxFrameAverageLightLevel(address(), value); return this; }
 
     }

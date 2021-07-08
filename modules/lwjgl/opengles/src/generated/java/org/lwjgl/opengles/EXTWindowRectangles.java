@@ -37,6 +37,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTWindowRectangles {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code mode} parameter of {@link #glWindowRectanglesEXT WindowRectanglesEXT}. */
     public static final int
         GL_INCLUSIVE_EXT = 0x8F10,
@@ -53,8 +55,6 @@ public class EXTWindowRectangles {
         GL_WINDOW_RECTANGLE_MODE_EXT = 0x8F13,
         GL_MAX_WINDOW_RECTANGLES_EXT = 0x8F14,
         GL_NUM_WINDOW_RECTANGLES_EXT = 0x8F15;
-
-    static { GLES.initialize(); }
 
     protected EXTWindowRectangles() {
         throw new UnsupportedOperationException();

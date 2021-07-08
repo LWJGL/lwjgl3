@@ -21,6 +21,8 @@ import org.lwjgl.system.*;
  */
 public class AMDStencilOperationExtended {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code sfail}, {@code dpfail} and {@code dppass} parameters of StencilOp and StencilOpSeparate. */
     public static final int
         GL_SET_AMD           = 0x874A,
@@ -30,8 +32,6 @@ public class AMDStencilOperationExtended {
     public static final int
         GL_STENCIL_OP_VALUE_AMD      = 0x874C,
         GL_STENCIL_BACK_OP_VALUE_AMD = 0x874D;
-
-    static { GL.initialize(); }
 
     protected AMDStencilOperationExtended() {
         throw new UnsupportedOperationException();

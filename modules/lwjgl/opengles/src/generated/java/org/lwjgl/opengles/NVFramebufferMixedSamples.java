@@ -47,6 +47,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVFramebufferMixedSamples {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled. */
     public static final int
         GL_RASTER_MULTISAMPLE_EXT       = 0x9327,
@@ -66,8 +68,6 @@ public class NVFramebufferMixedSamples {
         GL_MIXED_STENCIL_SAMPLES_SUPPORTED_NV    = 0x9330,
         GL_COVERAGE_MODULATION_NV                = 0x9332,
         GL_COVERAGE_MODULATION_TABLE_SIZE_NV     = 0x9333;
-
-    static { GLES.initialize(); }
 
     protected NVFramebufferMixedSamples() {
         throw new UnsupportedOperationException();

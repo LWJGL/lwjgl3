@@ -30,8 +30,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code handleType} <b>must</b> have been included in {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} when {@code memory} was created.</li>
- * <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle.</li>
+ * <li>{@code handleType} <b>must</b> have been included in {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} when {@code memory} was created</li>
+ * <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -47,23 +47,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link KHRExternalMemoryFd#vkGetMemoryFdKHR GetMemoryFdKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code memory} &ndash; the memory object from which the handle will be exported.</li>
- * <li>{@code handleType} &ndash; the type of handle requested.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkMemoryGetFdInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkDeviceMemory memory;
- *     VkExternalMemoryHandleTypeFlagBits handleType;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkDeviceMemory {@link #memory};
+ *     VkExternalMemoryHandleTypeFlagBits {@link #handleType};
  * }</code></pre>
  */
 public class VkMemoryGetFdInfoKHR extends Struct implements NativeResource {
@@ -111,26 +102,26 @@ public class VkMemoryGetFdInfoKHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code memory} field. */
+    /** the memory object from which the handle will be exported. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** Returns the value of the {@code handleType} field. */
+    /** the type of handle requested. */
     @NativeType("VkExternalMemoryHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryGetFdInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryGetFdInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code memory} field. */
+    /** Sets the specified value to the {@link #memory} field. */
     public VkMemoryGetFdInfoKHR memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
-    /** Sets the specified value to the {@code handleType} field. */
+    /** Sets the specified value to the {@link #handleType} field. */
     public VkMemoryGetFdInfoKHR handleType(@NativeType("VkExternalMemoryHandleTypeFlagBits") int value) { nhandleType(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -359,26 +350,26 @@ public class VkMemoryGetFdInfoKHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkMemoryGetFdInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryGetFdInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkMemoryGetFdInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMemoryGetFdInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code memory} field. */
+        /** @return the value of the {@link VkMemoryGetFdInfoKHR#memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkMemoryGetFdInfoKHR.nmemory(address()); }
-        /** Returns the value of the {@code handleType} field. */
+        /** @return the value of the {@link VkMemoryGetFdInfoKHR#handleType} field. */
         @NativeType("VkExternalMemoryHandleTypeFlagBits")
         public int handleType() { return VkMemoryGetFdInfoKHR.nhandleType(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkMemoryGetFdInfoKHR#sType} field. */
         public VkMemoryGetFdInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryGetFdInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkMemoryGetFdInfoKHR#pNext} field. */
         public VkMemoryGetFdInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkMemoryGetFdInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code memory} field. */
+        /** Sets the specified value to the {@link VkMemoryGetFdInfoKHR#memory} field. */
         public VkMemoryGetFdInfoKHR.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkMemoryGetFdInfoKHR.nmemory(address(), value); return this; }
-        /** Sets the specified value to the {@code handleType} field. */
+        /** Sets the specified value to the {@link VkMemoryGetFdInfoKHR#handleType} field. */
         public VkMemoryGetFdInfoKHR.Buffer handleType(@NativeType("VkExternalMemoryHandleTypeFlagBits") int value) { VkMemoryGetFdInfoKHR.nhandleType(address(), value); return this; }
 
     }

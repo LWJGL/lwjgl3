@@ -17,30 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code serial} &ndash; # of last request processed by server</li>
- * <li>{@code send_event} &ndash; true if this came from an {@link X11#XSendEvent} request</li>
- * <li>{@code display} &ndash; {@code Display} the event was read from</li>
- * <li>{@code window} &ndash; window it reported relative to</li>
- * <li>{@code request} &ndash; one of:<br><table><tr><td>{@link X11#MappingModifier}</td><td>{@link X11#MappingKeyboard}</td><td>{@link X11#MappingPointer}</td></tr></table></li>
- * <li>{@code first_keycode} &ndash; first keycode</li>
- * <li>{@code count} &ndash; defines range of change w. {@code first_keycode}</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XMappingEvent {
  *     int type;
- *     unsigned long serial;
- *     Bool send_event;
- *     Display * display;
- *     Window window;
- *     int request;
- *     int first_keycode;
- *     int count;
+ *     unsigned long {@link #serial};
+ *     Bool {@link #send_event};
+ *     Display * {@link #display};
+ *     Window {@link #window};
+ *     int {@link #request};
+ *     int {@link #first_keycode};
+ *     int {@link #count};
  * }</code></pre>
  */
 public class XMappingEvent extends Struct implements NativeResource {
@@ -100,42 +88,42 @@ public class XMappingEvent extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code serial} field. */
+    /** # of last request processed by server */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** Returns the value of the {@code send_event} field. */
+    /** true if this came from an {@link X11#XSendEvent} request */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** Returns the value of the {@code display} field. */
+    /** {@code Display} the event was read from */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code window} field. */
+    /** window it reported relative to */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
-    /** Returns the value of the {@code request} field. */
+    /** one of:<br><table><tr><td>{@link X11#MappingModifier}</td><td>{@link X11#MappingKeyboard}</td><td>{@link X11#MappingPointer}</td></tr></table> */
     public int request() { return nrequest(address()); }
-    /** Returns the value of the {@code first_keycode} field. */
+    /** first keycode */
     public int first_keycode() { return nfirst_keycode(address()); }
-    /** Returns the value of the {@code count} field. */
+    /** defines range of change w. {@code first_keycode} */
     public int count() { return ncount(address()); }
 
     /** Sets the specified value to the {@code type} field. */
     public XMappingEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code serial} field. */
+    /** Sets the specified value to the {@link #serial} field. */
     public XMappingEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@code send_event} field. */
+    /** Sets the specified value to the {@link #send_event} field. */
     public XMappingEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code display} field. */
+    /** Sets the specified value to the {@link #display} field. */
     public XMappingEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@code window} field. */
+    /** Sets the specified value to the {@link #window} field. */
     public XMappingEvent window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
-    /** Sets the specified value to the {@code request} field. */
+    /** Sets the specified value to the {@link #request} field. */
     public XMappingEvent request(int value) { nrequest(address(), value); return this; }
-    /** Sets the specified value to the {@code first_keycode} field. */
+    /** Sets the specified value to the {@link #first_keycode} field. */
     public XMappingEvent first_keycode(int value) { nfirst_keycode(address(), value); return this; }
-    /** Sets the specified value to the {@code count} field. */
+    /** Sets the specified value to the {@link #count} field. */
     public XMappingEvent count(int value) { ncount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -409,42 +397,42 @@ public class XMappingEvent extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XMappingEvent.ntype(address()); }
-        /** Returns the value of the {@code serial} field. */
+        /** @return the value of the {@link XMappingEvent#serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XMappingEvent.nserial(address()); }
-        /** Returns the value of the {@code send_event} field. */
+        /** @return the value of the {@link XMappingEvent#send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XMappingEvent.nsend_event(address()) != 0; }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@link XMappingEvent#display} field. */
         @NativeType("Display *")
         public long display() { return XMappingEvent.ndisplay(address()); }
-        /** Returns the value of the {@code window} field. */
+        /** @return the value of the {@link XMappingEvent#window} field. */
         @NativeType("Window")
         public long window() { return XMappingEvent.nwindow(address()); }
-        /** Returns the value of the {@code request} field. */
+        /** @return the value of the {@link XMappingEvent#request} field. */
         public int request() { return XMappingEvent.nrequest(address()); }
-        /** Returns the value of the {@code first_keycode} field. */
+        /** @return the value of the {@link XMappingEvent#first_keycode} field. */
         public int first_keycode() { return XMappingEvent.nfirst_keycode(address()); }
-        /** Returns the value of the {@code count} field. */
+        /** @return the value of the {@link XMappingEvent#count} field. */
         public int count() { return XMappingEvent.ncount(address()); }
 
         /** Sets the specified value to the {@code type} field. */
         public XMappingEvent.Buffer type(int value) { XMappingEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code serial} field. */
+        /** Sets the specified value to the {@link XMappingEvent#serial} field. */
         public XMappingEvent.Buffer serial(@NativeType("unsigned long") long value) { XMappingEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@code send_event} field. */
+        /** Sets the specified value to the {@link XMappingEvent#send_event} field. */
         public XMappingEvent.Buffer send_event(@NativeType("Bool") boolean value) { XMappingEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code display} field. */
+        /** Sets the specified value to the {@link XMappingEvent#display} field. */
         public XMappingEvent.Buffer display(@NativeType("Display *") long value) { XMappingEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@code window} field. */
+        /** Sets the specified value to the {@link XMappingEvent#window} field. */
         public XMappingEvent.Buffer window(@NativeType("Window") long value) { XMappingEvent.nwindow(address(), value); return this; }
-        /** Sets the specified value to the {@code request} field. */
+        /** Sets the specified value to the {@link XMappingEvent#request} field. */
         public XMappingEvent.Buffer request(int value) { XMappingEvent.nrequest(address(), value); return this; }
-        /** Sets the specified value to the {@code first_keycode} field. */
+        /** Sets the specified value to the {@link XMappingEvent#first_keycode} field. */
         public XMappingEvent.Buffer first_keycode(int value) { XMappingEvent.nfirst_keycode(address(), value); return this; }
-        /** Sets the specified value to the {@code count} field. */
+        /** Sets the specified value to the {@link XMappingEvent#count} field. */
         public XMappingEvent.Buffer count(int value) { XMappingEvent.ncount(address(), value); return this; }
 
     }

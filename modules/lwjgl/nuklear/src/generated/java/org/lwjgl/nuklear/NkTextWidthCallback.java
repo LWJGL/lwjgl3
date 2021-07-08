@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * float (*) (
+ * float (*{@link #invoke}) (
  *     nk_handle handle,
  *     float h,
  *     char const *text,
@@ -52,7 +52,7 @@ public abstract class NkTextWidthCallback extends Callback implements NkTextWidt
     }
 
     protected NkTextWidthCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkTextWidthCallback(long functionPointer) {

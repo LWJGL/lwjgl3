@@ -67,13 +67,13 @@ public class XrControllerModelKeyStateMSFT extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code modelKey} field. */
+    /** @return the value of the {@code modelKey} field. */
     @NativeType("XrControllerModelKeyMSFT")
     public long modelKey() { return nmodelKey(address()); }
 
@@ -304,13 +304,13 @@ public class XrControllerModelKeyStateMSFT extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrControllerModelKeyStateMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrControllerModelKeyStateMSFT.nnext(address()); }
-        /** Returns the value of the {@code modelKey} field. */
+        /** @return the value of the {@code modelKey} field. */
         @NativeType("XrControllerModelKeyMSFT")
         public long modelKey() { return XrControllerModelKeyStateMSFT.nmodelKey(address()); }
 

@@ -6,8 +6,11 @@
 package org.lwjgl.system.macosx;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be passed to the {@link CoreGraphics#CGEventTapCreate EventTapCreate} method.
@@ -15,7 +18,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * CGEventRef (*) (
+ * CGEventRef (*{@link #invoke}) (
  *     CGEventTapProxy proxy,
  *     CGEventType type,
  *     CGEventRef event,
@@ -24,21 +27,26 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("CGEventRef (*) (CGEventTapProxy, CGEventType, CGEventRef, void *)")
-public interface CGEventTapCallBackI extends CallbackI.P {
+public interface CGEventTapCallBackI extends CallbackI {
 
-    String SIGNATURE = "(pipp)p";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_pointer,
+        ffi_type_pointer, ffi_type_uint32, ffi_type_pointer, ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default long callback(long args) {
-        return invoke(
-            dcbArgPointer(args),
-            dcbArgInt(args),
-            dcbArgPointer(args),
-            dcbArgPointer(args)
+    default void callback(long ret, long args) {
+        long __result = invoke(
+            memGetAddress(memGetAddress(args)),
+            memGetInt(memGetAddress(args + POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 3 * POINTER_SIZE))
         );
+        apiClosureRetP(ret, __result);
     }
 
     /**

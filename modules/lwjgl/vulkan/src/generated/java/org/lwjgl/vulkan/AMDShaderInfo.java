@@ -79,6 +79,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     free(disassembly);
  * }</code></pre>
  * 
+ * <h5>VK_AMD_shader_info</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_AMD_shader_info}</dd>
@@ -92,10 +94,19 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
  * </ul></dd>
+ * <dt><b>Special Use</b></dt>
+ * <dd><ul>
+ * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Jaakko Konttinen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_shader_info:%20&amp;body=@jaakkoamd%20">jaakkoamd</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-10-09</dd>
  * <dt><b>IP Status</b></dt>
@@ -217,7 +228,7 @@ public class AMDShaderInfo {
      * @param shaderStage identifies the particular shader within the pipeline about which information is being queried.
      * @param infoType    describes what kind of information is being queried.
      * @param pInfoSize   a pointer to a value related to the amount of data the query returns, as described below.
-     * @param pInfo       either NULL or a pointer to a buffer.
+     * @param pInfo       either {@code NULL} or a pointer to a buffer.
      */
     @NativeType("VkResult")
     public static int vkGetShaderInfoAMD(VkDevice device, @NativeType("VkPipeline") long pipeline, @NativeType("VkShaderStageFlagBits") int shaderStage, @NativeType("VkShaderInfoTypeAMD") int infoType, @NativeType("size_t *") PointerBuffer pInfoSize, @Nullable @NativeType("void *") ByteBuffer pInfo) {

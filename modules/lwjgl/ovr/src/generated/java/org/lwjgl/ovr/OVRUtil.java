@@ -17,6 +17,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to the libOVR utility functions. */
 public class OVRUtil {
 
+    static { LibOVR.initialize(); }
+
     /**
      * Enumerates modifications to the projection matrix based on the application's needs.
      * 
@@ -68,8 +70,6 @@ public class OVRUtil {
     public static final int
         ovrHapticsGenMode_PointSample = 0,
         ovrHapticsGenMode_Count       = 1;
-
-    static { LibOVR.initialize(); }
 
     protected OVRUtil() {
         throw new UnsupportedOperationException();

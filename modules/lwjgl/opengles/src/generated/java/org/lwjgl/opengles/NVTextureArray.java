@@ -31,6 +31,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVTextureArray {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code target} parameter of TexImage3DNV, TexSubImage3DNV, CopyTexSubImage3DNV, CompressedTexImage3DNV, CompressedTexSubImage3DNV,
      * TexParameteri, TexParameteriv, TexParameterf, TexParameterfv, GenerateMipmap, and BindTexture.
@@ -52,8 +54,6 @@ public class NVTextureArray {
     public static final int
         GL_UNPACK_SKIP_IMAGES_NV  = 0x806D,
         GL_UNPACK_IMAGE_HEIGHT_NV = 0x806E;
-
-    static { GLES.initialize(); }
 
     protected NVTextureArray() {
         throw new UnsupportedOperationException();

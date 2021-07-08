@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVCoverageReductionMode#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code coverageReductionMode} &ndash; indicates whether the implementation supports coverage reduction modes. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-coverage-reduction">Coverage Reduction</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceCoverageReductionModeFeaturesNV {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 coverageReductionMode;
+ *     VkBool32 {@link #coverageReductionMode};
  * }</code></pre>
  */
 public class VkPhysicalDeviceCoverageReductionModeFeaturesNV extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceCoverageReductionModeFeaturesNV extends Struct impl
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code coverageReductionMode} field. */
+    /** indicates whether the implementation supports coverage reduction modes. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-coverage-reduction">Coverage Reduction</a>. */
     @NativeType("VkBool32")
     public boolean coverageReductionMode() { return ncoverageReductionMode(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceCoverageReductionModeFeaturesNV extends Struct impl
     public VkPhysicalDeviceCoverageReductionModeFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceCoverageReductionModeFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code coverageReductionMode} field. */
+    /** Sets the specified value to the {@link #coverageReductionMode} field. */
     public VkPhysicalDeviceCoverageReductionModeFeaturesNV coverageReductionMode(@NativeType("VkBool32") boolean value) { ncoverageReductionMode(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceCoverageReductionModeFeaturesNV extends Struct impl
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceCoverageReductionModeFeaturesNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceCoverageReductionModeFeaturesNV.npNext(address()); }
-        /** Returns the value of the {@code coverageReductionMode} field. */
+        /** @return the value of the {@link VkPhysicalDeviceCoverageReductionModeFeaturesNV#coverageReductionMode} field. */
         @NativeType("VkBool32")
         public boolean coverageReductionMode() { return VkPhysicalDeviceCoverageReductionModeFeaturesNV.ncoverageReductionMode(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceCoverageReductionModeFeaturesNV extends Struct impl
         public VkPhysicalDeviceCoverageReductionModeFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCoverageReductionModeFeaturesNV.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceCoverageReductionModeFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCoverageReductionModeFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code coverageReductionMode} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceCoverageReductionModeFeaturesNV#coverageReductionMode} field. */
         public VkPhysicalDeviceCoverageReductionModeFeaturesNV.Buffer coverageReductionMode(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCoverageReductionModeFeaturesNV.ncoverageReductionMode(address(), value ? 1 : 0); return this; }
 
     }

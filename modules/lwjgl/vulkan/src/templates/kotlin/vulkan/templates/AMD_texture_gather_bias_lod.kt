@@ -63,6 +63,7 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
 ￿    // specified format configuration.
 ￿}</code></pre>
 
+        <h5>VK_AMD_texture_gather_bias_lod</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_texture_gather_bias_lod}</dd>
@@ -86,7 +87,10 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
             <dd><ul>
                 <li>Rex Xu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_texture_gather_bias_lod:%20&amp;body=@amdrexu%20">amdrexu</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-03-21</dd>
 
@@ -95,7 +99,7 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>Requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_texture_gather_bias_lod.html">{@code SPV_AMD_texture_gather_bias_lod}</a> SPIR-V extension.</li>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_texture_gather_bias_lod.html">{@code SPV_AMD_texture_gather_bias_lod}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

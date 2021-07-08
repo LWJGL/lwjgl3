@@ -25,6 +25,8 @@ package org.lwjgl.vulkan;
  * <p>The {@code ShaderViewportIndexLayerNV} capability is equivalent to the {@code ShaderViewportIndexLayerEXT} capability added by {@link EXTShaderViewportIndexLayer VK_EXT_shader_viewport_index_layer}.</p>
  * </div>
  * 
+ * <h5>VK_NV_viewport_array2</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_viewport_array2}</dd>
@@ -42,12 +44,17 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_viewport_array2:%20&amp;body=@dgkoch%20">dgkoch</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-02-15</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_viewport_array2.html">{@code SPV_NV_viewport_array2}</a> SPIR-V extension.</li>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_array2.txt">{@code GL_NV_viewport_array2}</a> extension for GLSL source languages.</li>
+ * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_viewport_array2.html">{@code SPV_NV_viewport_array2}</a></li>
+ * <li>This extension provides API support for <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_array2.txt">{@code GL_NV_viewport_array2}</a></li>
  * <li>This extension requires the {@code geometryShader} and {@code multiViewport} features.</li>
  * <li>This extension interacts with the {@code tessellationShader} feature.</li>
  * </ul></dd>

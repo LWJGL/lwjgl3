@@ -519,56 +519,39 @@ class NativeClass internal constructor(
         }
         println(" {")
 
+        if (hasFunctions && (binding == null || functions.any(Func::hasCustomJNI)) && (module.library != null || binding !is SimpleBinding)) {
+            println(if (module.library == null)
+                "\n${t}static { Library.initialize(); }"
+            else
+                module.library.expression(module)
+                    .let { library ->
+                        if (library.contains('\n'))
+                            """
+    static {
+        ${library.trim()}
+    }"""
+                        else if (library.endsWith(");"))
+                            "\n${t}static { $library }"
+                        else
+                            "\n${t}static { Library.loadSystem(System::load, System::loadLibrary, $className.class, \"${module.java}\", Platform.mapLibraryNameBundled(\"$library\")); }"
+                    })
+        }
+        if (binding is SimpleBinding) {
+            binding.generateFunctionSetup(this, this@NativeClass)
+        }
+
         constantBlocks.forEach {
             it.generate(this)
         }
 
-        fun PrintWriter.libraryInit() {
-            if (module.library != null || binding !is SimpleBinding) {
-                println(if (module.library == null)
-                    "\n${t}static { Library.initialize(); }"
-                else
-                    module.library.expression(module)
-                        .let { library ->
-                            if (library.contains('\n'))
-                                """
-    static {
-        ${library.trim()}
-    }"""
-                            else if (library.endsWith(");"))
-                                "\n${t}static { $library }"
-                            else
-                                "\n${t}static { Library.loadSystem(System::load, System::loadLibrary, $className.class, \"${module.java}\", Platform.mapLibraryNameBundled(\"$library\")); }"
-                        })
-            }
-        }
-
         if (hasFunctions || binding is SimpleBinding) {
-            if (binding != null) {
-                if (functions.any(Func::hasCustomJNI))
-                    libraryInit()
+            printCustomMethods(static = true)
 
-                if (binding is SimpleBinding || functions.any { !it.hasExplicitFunctionAddress }) {
-                    println("""
+            // This allows binding classes to be "statically" extended. Not a good practice, but usable with static imports.
+            println("""
     ${if (isOpen) "protected" else "private"} $className() {
         throw new UnsupportedOperationException();
     }""")
-                    if (binding is SimpleBinding) {
-                        binding.generateFunctionSetup(this, this@NativeClass)
-                    }
-                }
-                printCustomMethods(static = true)
-            } else {
-                libraryInit()
-
-                printCustomMethods(static = true)
-
-                // This allows binding classes to be "statically" extended. Not a good practice, but usable with static imports.
-                println("""
-    ${if (isOpen) "protected" else "private"} $className() {
-        throw new UnsupportedOperationException();
-    }""")
-            }
         } else {
             println("\n$t${if (isOpen) "protected" else "private"} $className() {}")
         }

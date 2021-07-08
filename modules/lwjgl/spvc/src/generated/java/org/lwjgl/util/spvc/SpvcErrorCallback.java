@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void *userdata,
  *     char const *error
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class SpvcErrorCallback extends Callback implements SpvcErrorCal
     }
 
     protected SpvcErrorCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     SpvcErrorCallback(long functionPointer) {

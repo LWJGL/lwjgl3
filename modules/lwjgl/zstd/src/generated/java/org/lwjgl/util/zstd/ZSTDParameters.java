@@ -64,10 +64,10 @@ public class ZSTDParameters extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ZSTDCompressionParameters} view of the {@code cParams} field. */
+    /** @return a {@link ZSTDCompressionParameters} view of the {@code cParams} field. */
     @NativeType("ZSTD_compressionParameters")
     public ZSTDCompressionParameters cParams() { return ncParams(address()); }
-    /** Returns a {@link ZSTDFrameParameters} view of the {@code fParams} field. */
+    /** @return a {@link ZSTDFrameParameters} view of the {@code fParams} field. */
     @NativeType("ZSTD_frameParameters")
     public ZSTDFrameParameters fParams() { return nfParams(address()); }
 
@@ -294,10 +294,10 @@ public class ZSTDParameters extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ZSTDCompressionParameters} view of the {@code cParams} field. */
+        /** @return a {@link ZSTDCompressionParameters} view of the {@code cParams} field. */
         @NativeType("ZSTD_compressionParameters")
         public ZSTDCompressionParameters cParams() { return ZSTDParameters.ncParams(address()); }
-        /** Returns a {@link ZSTDFrameParameters} view of the {@code fParams} field. */
+        /** @return a {@link ZSTDFrameParameters} view of the {@code fParams} field. */
         @NativeType("ZSTD_frameParameters")
         public ZSTDFrameParameters fParams() { return ZSTDParameters.nfParams(address()); }
 

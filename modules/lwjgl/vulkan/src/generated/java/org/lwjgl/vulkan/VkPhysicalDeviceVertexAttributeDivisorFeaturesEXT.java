@@ -28,23 +28,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTVertexAttributeDivisor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code vertexAttributeInstanceRateDivisor} &ndash; specifies whether vertex attribute fetching may be repeated in case of instanced rendering.</li>
- * <li>{@code vertexAttributeInstanceRateZeroDivisor} &ndash; specifies whether a zero value for {@link VkVertexInputBindingDivisorDescriptionEXT}{@code ::divisor} is supported.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 vertexAttributeInstanceRateDivisor;
- *     VkBool32 vertexAttributeInstanceRateZeroDivisor;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #vertexAttributeInstanceRateDivisor};
+ *     VkBool32 {@link #vertexAttributeInstanceRateZeroDivisor};
  * }</code></pre>
  */
 public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct implements NativeResource {
@@ -92,26 +83,26 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code vertexAttributeInstanceRateDivisor} field. */
+    /** specifies whether vertex attribute fetching may be repeated in case of instanced rendering. */
     @NativeType("VkBool32")
     public boolean vertexAttributeInstanceRateDivisor() { return nvertexAttributeInstanceRateDivisor(address()) != 0; }
-    /** Returns the value of the {@code vertexAttributeInstanceRateZeroDivisor} field. */
+    /** specifies whether a zero value for {@link VkVertexInputBindingDivisorDescriptionEXT}{@code ::divisor} is supported. */
     @NativeType("VkBool32")
     public boolean vertexAttributeInstanceRateZeroDivisor() { return nvertexAttributeInstanceRateZeroDivisor(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code vertexAttributeInstanceRateDivisor} field. */
+    /** Sets the specified value to the {@link #vertexAttributeInstanceRateDivisor} field. */
     public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT vertexAttributeInstanceRateDivisor(@NativeType("VkBool32") boolean value) { nvertexAttributeInstanceRateDivisor(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code vertexAttributeInstanceRateZeroDivisor} field. */
+    /** Sets the specified value to the {@link #vertexAttributeInstanceRateZeroDivisor} field. */
     public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT vertexAttributeInstanceRateZeroDivisor(@NativeType("VkBool32") boolean value) { nvertexAttributeInstanceRateZeroDivisor(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -340,26 +331,26 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code vertexAttributeInstanceRateDivisor} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#vertexAttributeInstanceRateDivisor} field. */
         @NativeType("VkBool32")
         public boolean vertexAttributeInstanceRateDivisor() { return VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.nvertexAttributeInstanceRateDivisor(address()) != 0; }
-        /** Returns the value of the {@code vertexAttributeInstanceRateZeroDivisor} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#vertexAttributeInstanceRateZeroDivisor} field. */
         @NativeType("VkBool32")
         public boolean vertexAttributeInstanceRateZeroDivisor() { return VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.nvertexAttributeInstanceRateZeroDivisor(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#sType} field. */
         public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code vertexAttributeInstanceRateDivisor} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#vertexAttributeInstanceRateDivisor} field. */
         public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer vertexAttributeInstanceRateDivisor(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.nvertexAttributeInstanceRateDivisor(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code vertexAttributeInstanceRateZeroDivisor} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#vertexAttributeInstanceRateZeroDivisor} field. */
         public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer vertexAttributeInstanceRateZeroDivisor(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.nvertexAttributeInstanceRateZeroDivisor(address(), value ? 1 : 0); return this; }
 
     }

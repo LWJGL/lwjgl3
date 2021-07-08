@@ -13,6 +13,8 @@ import static org.lwjgl.system.JNI.*;
 /**
  * Applications may wish to import memory from the Direct 3D API, or export memory to other Vulkan instances. This extension provides a set of capability queries that allow applications determine what types of win32 memory handles an implementation supports for a given set of use cases.
  * 
+ * <h5>VK_NV_external_memory_capabilities</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_external_memory_capabilities}</dd>
@@ -39,6 +41,11 @@ import static org.lwjgl.system.JNI.*;
  * <dd><ul>
  * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_external_memory_capabilities:%20&amp;body=@cubanismo%20">cubanismo</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-08-19</dd>
  * <dt><b>IP Status</b></dt>

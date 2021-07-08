@@ -17,17 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * A single vertex in a render model.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code vPosition} &ndash; position in meters in device space</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct RenderModel_Vertex_t {
- *     {@link HmdVector3 HmdVector3_t} vPosition;
+ *     {@link HmdVector3 HmdVector3_t} {@link #vPosition};
  *     {@link HmdVector3 HmdVector3_t} vNormal;
  *     float rfTextureCoord[2];
  * }</code></pre>
@@ -75,16 +69,16 @@ public class RenderModelVertex extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link HmdVector3} view of the {@code vPosition} field. */
+    /** position in meters in device space */
     @NativeType("HmdVector3_t")
     public HmdVector3 vPosition() { return nvPosition(address()); }
-    /** Returns a {@link HmdVector3} view of the {@code vNormal} field. */
+    /** @return a {@link HmdVector3} view of the {@code vNormal} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vNormal() { return nvNormal(address()); }
-    /** Returns a {@link FloatBuffer} view of the {@code rfTextureCoord} field. */
+    /** @return a {@link FloatBuffer} view of the {@code rfTextureCoord} field. */
     @NativeType("float[2]")
     public FloatBuffer rfTextureCoord() { return nrfTextureCoord(address()); }
-    /** Returns the value at the specified index of the {@code rfTextureCoord} field. */
+    /** @return the value at the specified index of the {@code rfTextureCoord} field. */
     public float rfTextureCoord(int index) { return nrfTextureCoord(address(), index); }
 
     // -----------------------------------
@@ -167,16 +161,16 @@ public class RenderModelVertex extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link HmdVector3} view of the {@code vPosition} field. */
+        /** @return a {@link HmdVector3} view of the {@link RenderModelVertex#vPosition} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vPosition() { return RenderModelVertex.nvPosition(address()); }
-        /** Returns a {@link HmdVector3} view of the {@code vNormal} field. */
+        /** @return a {@link HmdVector3} view of the {@code vNormal} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vNormal() { return RenderModelVertex.nvNormal(address()); }
-        /** Returns a {@link FloatBuffer} view of the {@code rfTextureCoord} field. */
+        /** @return a {@link FloatBuffer} view of the {@code rfTextureCoord} field. */
         @NativeType("float[2]")
         public FloatBuffer rfTextureCoord() { return RenderModelVertex.nrfTextureCoord(address()); }
-        /** Returns the value at the specified index of the {@code rfTextureCoord} field. */
+        /** @return the value at the specified index of the {@code rfTextureCoord} field. */
         public float rfTextureCoord(int index) { return RenderModelVertex.nrfTextureCoord(address(), index); }
 
     }

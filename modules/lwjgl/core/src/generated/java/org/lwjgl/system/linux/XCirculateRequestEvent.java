@@ -17,26 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code serial} &ndash; # of last request processed by server</li>
- * <li>{@code send_event} &ndash; true if this came from an {@link X11#XSendEvent} request</li>
- * <li>{@code display} &ndash; {@code Display} the event was read from</li>
- * <li>{@code place} &ndash; one of:<br><table><tr><td>{@link X11#PlaceOnTop}</td><td>{@link X11#PlaceOnBottom}</td></tr></table></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XCirculateRequestEvent {
  *     int type;
- *     unsigned long serial;
- *     Bool send_event;
- *     Display * display;
+ *     unsigned long {@link #serial};
+ *     Bool {@link #send_event};
+ *     Display * {@link #display};
  *     Window parent;
  *     Window window;
- *     int place;
+ *     int {@link #place};
  * }</code></pre>
  */
 public class XCirculateRequestEvent extends Struct implements NativeResource {
@@ -93,39 +84,39 @@ public class XCirculateRequestEvent extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code serial} field. */
+    /** # of last request processed by server */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** Returns the value of the {@code send_event} field. */
+    /** true if this came from an {@link X11#XSendEvent} request */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** Returns the value of the {@code display} field. */
+    /** {@code Display} the event was read from */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code parent} field. */
+    /** @return the value of the {@code parent} field. */
     @NativeType("Window")
     public long parent() { return nparent(address()); }
-    /** Returns the value of the {@code window} field. */
+    /** @return the value of the {@code window} field. */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
-    /** Returns the value of the {@code place} field. */
+    /** one of:<br><table><tr><td>{@link X11#PlaceOnTop}</td><td>{@link X11#PlaceOnBottom}</td></tr></table> */
     public int place() { return nplace(address()); }
 
     /** Sets the specified value to the {@code type} field. */
     public XCirculateRequestEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code serial} field. */
+    /** Sets the specified value to the {@link #serial} field. */
     public XCirculateRequestEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@code send_event} field. */
+    /** Sets the specified value to the {@link #send_event} field. */
     public XCirculateRequestEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code display} field. */
+    /** Sets the specified value to the {@link #display} field. */
     public XCirculateRequestEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
     /** Sets the specified value to the {@code parent} field. */
     public XCirculateRequestEvent parent(@NativeType("Window") long value) { nparent(address(), value); return this; }
     /** Sets the specified value to the {@code window} field. */
     public XCirculateRequestEvent window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
-    /** Sets the specified value to the {@code place} field. */
+    /** Sets the specified value to the {@link #place} field. */
     public XCirculateRequestEvent place(int value) { nplace(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -393,39 +384,39 @@ public class XCirculateRequestEvent extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XCirculateRequestEvent.ntype(address()); }
-        /** Returns the value of the {@code serial} field. */
+        /** @return the value of the {@link XCirculateRequestEvent#serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XCirculateRequestEvent.nserial(address()); }
-        /** Returns the value of the {@code send_event} field. */
+        /** @return the value of the {@link XCirculateRequestEvent#send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XCirculateRequestEvent.nsend_event(address()) != 0; }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@link XCirculateRequestEvent#display} field. */
         @NativeType("Display *")
         public long display() { return XCirculateRequestEvent.ndisplay(address()); }
-        /** Returns the value of the {@code parent} field. */
+        /** @return the value of the {@code parent} field. */
         @NativeType("Window")
         public long parent() { return XCirculateRequestEvent.nparent(address()); }
-        /** Returns the value of the {@code window} field. */
+        /** @return the value of the {@code window} field. */
         @NativeType("Window")
         public long window() { return XCirculateRequestEvent.nwindow(address()); }
-        /** Returns the value of the {@code place} field. */
+        /** @return the value of the {@link XCirculateRequestEvent#place} field. */
         public int place() { return XCirculateRequestEvent.nplace(address()); }
 
         /** Sets the specified value to the {@code type} field. */
         public XCirculateRequestEvent.Buffer type(int value) { XCirculateRequestEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code serial} field. */
+        /** Sets the specified value to the {@link XCirculateRequestEvent#serial} field. */
         public XCirculateRequestEvent.Buffer serial(@NativeType("unsigned long") long value) { XCirculateRequestEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@code send_event} field. */
+        /** Sets the specified value to the {@link XCirculateRequestEvent#send_event} field. */
         public XCirculateRequestEvent.Buffer send_event(@NativeType("Bool") boolean value) { XCirculateRequestEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code display} field. */
+        /** Sets the specified value to the {@link XCirculateRequestEvent#display} field. */
         public XCirculateRequestEvent.Buffer display(@NativeType("Display *") long value) { XCirculateRequestEvent.ndisplay(address(), value); return this; }
         /** Sets the specified value to the {@code parent} field. */
         public XCirculateRequestEvent.Buffer parent(@NativeType("Window") long value) { XCirculateRequestEvent.nparent(address(), value); return this; }
         /** Sets the specified value to the {@code window} field. */
         public XCirculateRequestEvent.Buffer window(@NativeType("Window") long value) { XCirculateRequestEvent.nwindow(address(), value); return this; }
-        /** Sets the specified value to the {@code place} field. */
+        /** Sets the specified value to the {@link XCirculateRequestEvent#place} field. */
         public XCirculateRequestEvent.Buffer place(int value) { XCirculateRequestEvent.nplace(address(), value); return this; }
 
     }

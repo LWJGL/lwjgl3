@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void *user_data,
  *     shaderc_include_result *include_result
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class ShadercIncludeResultRelease extends Callback implements Sh
     }
 
     protected ShadercIncludeResultRelease() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     ShadercIncludeResultRelease(long functionPointer) {

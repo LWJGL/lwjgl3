@@ -18,6 +18,7 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
 
         The base functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
+        <h5>VK_KHR_descriptor_update_template</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_descriptor_update_template}</dd>
@@ -45,7 +46,10 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
             <dd><ul>
                 <li>Markus Tavenrath <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_descriptor_update_template:%20&amp;body=@mtavenrath%20">mtavenrath</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-09-05</dd>
 
@@ -134,7 +138,7 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
         VkDevice("device", "the logical device that updates the descriptor sets."),
         VkDescriptorSet("descriptorSet", "the descriptor set to update"),
         VkDescriptorUpdateTemplate("descriptorUpdateTemplate", "a {@code VkDescriptorUpdateTemplate} object specifying the update mapping between {@code pData} and the descriptor set to update."),
-        opaque_const_p("pData", "a pointer to memory containing one or more ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} structures used to write the descriptors.")
+        opaque_const_p("pData", "a pointer to memory containing one or more ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} structures or {@code VkAccelerationStructureKHR} or {@code VkAccelerationStructureNV} handles used to write the descriptors.")
     )
 
     DependsOn("VK_KHR_push_descriptor")..void(
@@ -156,7 +160,7 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
         <h5>Valid Usage</h5>
         <ul>
             <li>The {@code pipelineBindPoint} specified during the creation of the descriptor update template <b>must</b> be supported by the {@code commandBuffer}&#8217;s parent {@code VkCommandPool}&#8217;s queue family</li>
-            <li>{@code pData} <b>must</b> be a valid pointer to a memory containing one or more valid instances of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} in a layout defined by {@code descriptorUpdateTemplate} when it was created with #CreateDescriptorUpdateTemplateKHR()</li>
+            <li>{@code pData} <b>must</b> be a valid pointer to a memory containing one or more valid instances of ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} in a layout defined by {@code descriptorUpdateTemplate} when it was created with #CreateDescriptorUpdateTemplate()</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

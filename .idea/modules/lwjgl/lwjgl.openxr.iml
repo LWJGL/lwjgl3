@@ -15,5 +15,6 @@
     <orderEntry type="module" module-name="lwjgl.egl" />
     <orderEntry type="module" module-name="lwjgl.opengl" />
     <orderEntry type="library" scope="PROVIDED" name="jsr305" level="project" />
+    <orderEntry type="module" module-name="lwjgl.glfw" />
   </component>
 </module>

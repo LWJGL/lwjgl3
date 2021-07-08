@@ -78,6 +78,8 @@ package org.lwjgl.vulkan;
  *         memory,
  *         0);</code></pre>
  * 
+ * <h5>VK_NV_dedicated_allocation</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_dedicated_allocation}</dd>
@@ -104,6 +106,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_dedicated_allocation:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-05-31</dd>
  * <dt><b>IP Status</b></dt>

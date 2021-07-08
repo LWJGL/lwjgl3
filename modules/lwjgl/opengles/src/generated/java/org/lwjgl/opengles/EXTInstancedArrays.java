@@ -30,10 +30,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTInstancedArrays {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameters of GetVertexAttribfv and GetVertexAttribiv. */
     public static final int GL_VERTEX_ATTRIB_ARRAY_DIVISOR_EXT = 0x88FE;
-
-    static { GLES.initialize(); }
 
     protected EXTInstancedArrays() {
         throw new UnsupportedOperationException();

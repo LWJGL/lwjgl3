@@ -22,6 +22,17 @@ import static org.lwjgl.cuda.CUDA.*;
  */
 public class CUGL65 extends CUGL {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            GLGetDevices = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuGLGetDevices", 2));
+
+    }
+
     /**
      * CUDA devices corresponding to an OpenGL device. ({@code CUGLDeviceList})
      * 
@@ -40,17 +51,6 @@ public class CUGL65 extends CUGL {
 
     protected CUGL65() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            GLGetDevices = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuGLGetDevices", 2));
-
     }
 
     // --- [ cuGLGetDevices ] ---

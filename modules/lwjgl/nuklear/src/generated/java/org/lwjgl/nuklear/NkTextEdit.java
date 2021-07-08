@@ -118,46 +118,46 @@ public class NkTextEdit extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkClipboard} view of the {@code clip} field. */
+    /** @return a {@link NkClipboard} view of the {@code clip} field. */
     @NativeType("struct nk_clipboard")
     public NkClipboard clip() { return nclip(address()); }
-    /** Returns a {@link NkStr} view of the {@code string} field. */
+    /** @return a {@link NkStr} view of the {@code string} field. */
     @NativeType("struct nk_str")
     public NkStr string() { return nstring(address()); }
-    /** Returns the value of the {@code filter} field. */
+    /** @return the value of the {@code filter} field. */
     @Nullable
     @NativeType("nk_plugin_filter")
     public NkPluginFilter filter() { return nfilter(address()); }
-    /** Returns a {@link NkVec2} view of the {@code scrollbar} field. */
+    /** @return a {@link NkVec2} view of the {@code scrollbar} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 scrollbar() { return nscrollbar(address()); }
-    /** Returns the value of the {@code cursor} field. */
+    /** @return the value of the {@code cursor} field. */
     public int cursor() { return ncursor(address()); }
-    /** Returns the value of the {@code select_start} field. */
+    /** @return the value of the {@code select_start} field. */
     public int select_start() { return nselect_start(address()); }
-    /** Returns the value of the {@code select_end} field. */
+    /** @return the value of the {@code select_end} field. */
     public int select_end() { return nselect_end(address()); }
-    /** Returns the value of the {@code mode} field. */
+    /** @return the value of the {@code mode} field. */
     @NativeType("unsigned char")
     public byte mode() { return nmode(address()); }
-    /** Returns the value of the {@code cursor_at_end_of_line} field. */
+    /** @return the value of the {@code cursor_at_end_of_line} field. */
     @NativeType("bool")
     public boolean cursor_at_end_of_line() { return ncursor_at_end_of_line(address()); }
-    /** Returns the value of the {@code initialized} field. */
+    /** @return the value of the {@code initialized} field. */
     @NativeType("bool")
     public boolean initialized() { return ninitialized(address()); }
-    /** Returns the value of the {@code has_preferred_x} field. */
+    /** @return the value of the {@code has_preferred_x} field. */
     @NativeType("bool")
     public boolean has_preferred_x() { return nhas_preferred_x(address()); }
-    /** Returns the value of the {@code single_line} field. */
+    /** @return the value of the {@code single_line} field. */
     @NativeType("bool")
     public boolean single_line() { return nsingle_line(address()); }
-    /** Returns the value of the {@code active} field. */
+    /** @return the value of the {@code active} field. */
     @NativeType("bool")
     public boolean active() { return nactive(address()); }
-    /** Returns the value of the {@code preferred_x} field. */
+    /** @return the value of the {@code preferred_x} field. */
     public float preferred_x() { return npreferred_x(address()); }
-    /** Returns a {@link NkTextUndoState} view of the {@code undo} field. */
+    /** @return a {@link NkTextUndoState} view of the {@code undo} field. */
     @NativeType("struct nk_text_undo_state")
     public NkTextUndoState undo() { return nundo(address()); }
 
@@ -373,46 +373,46 @@ public class NkTextEdit extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkClipboard} view of the {@code clip} field. */
+        /** @return a {@link NkClipboard} view of the {@code clip} field. */
         @NativeType("struct nk_clipboard")
         public NkClipboard clip() { return NkTextEdit.nclip(address()); }
-        /** Returns a {@link NkStr} view of the {@code string} field. */
+        /** @return a {@link NkStr} view of the {@code string} field. */
         @NativeType("struct nk_str")
         public NkStr string() { return NkTextEdit.nstring(address()); }
-        /** Returns the value of the {@code filter} field. */
+        /** @return the value of the {@code filter} field. */
         @Nullable
         @NativeType("nk_plugin_filter")
         public NkPluginFilter filter() { return NkTextEdit.nfilter(address()); }
-        /** Returns a {@link NkVec2} view of the {@code scrollbar} field. */
+        /** @return a {@link NkVec2} view of the {@code scrollbar} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 scrollbar() { return NkTextEdit.nscrollbar(address()); }
-        /** Returns the value of the {@code cursor} field. */
+        /** @return the value of the {@code cursor} field. */
         public int cursor() { return NkTextEdit.ncursor(address()); }
-        /** Returns the value of the {@code select_start} field. */
+        /** @return the value of the {@code select_start} field. */
         public int select_start() { return NkTextEdit.nselect_start(address()); }
-        /** Returns the value of the {@code select_end} field. */
+        /** @return the value of the {@code select_end} field. */
         public int select_end() { return NkTextEdit.nselect_end(address()); }
-        /** Returns the value of the {@code mode} field. */
+        /** @return the value of the {@code mode} field. */
         @NativeType("unsigned char")
         public byte mode() { return NkTextEdit.nmode(address()); }
-        /** Returns the value of the {@code cursor_at_end_of_line} field. */
+        /** @return the value of the {@code cursor_at_end_of_line} field. */
         @NativeType("bool")
         public boolean cursor_at_end_of_line() { return NkTextEdit.ncursor_at_end_of_line(address()); }
-        /** Returns the value of the {@code initialized} field. */
+        /** @return the value of the {@code initialized} field. */
         @NativeType("bool")
         public boolean initialized() { return NkTextEdit.ninitialized(address()); }
-        /** Returns the value of the {@code has_preferred_x} field. */
+        /** @return the value of the {@code has_preferred_x} field. */
         @NativeType("bool")
         public boolean has_preferred_x() { return NkTextEdit.nhas_preferred_x(address()); }
-        /** Returns the value of the {@code single_line} field. */
+        /** @return the value of the {@code single_line} field. */
         @NativeType("bool")
         public boolean single_line() { return NkTextEdit.nsingle_line(address()); }
-        /** Returns the value of the {@code active} field. */
+        /** @return the value of the {@code active} field. */
         @NativeType("bool")
         public boolean active() { return NkTextEdit.nactive(address()); }
-        /** Returns the value of the {@code preferred_x} field. */
+        /** @return the value of the {@code preferred_x} field. */
         public float preferred_x() { return NkTextEdit.npreferred_x(address()); }
-        /** Returns a {@link NkTextUndoState} view of the {@code undo} field. */
+        /** @return a {@link NkTextUndoState} view of the {@code undo} field. */
         @NativeType("struct nk_text_undo_state")
         public NkTextUndoState undo() { return NkTextEdit.nundo(address()); }
 

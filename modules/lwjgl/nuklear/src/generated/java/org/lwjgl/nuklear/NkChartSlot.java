@@ -90,27 +90,27 @@ public class NkChartSlot extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("enum nk_chart_type")
     public int type() { return ntype(address()); }
-    /** Returns a {@link NkColor} view of the {@code color} field. */
+    /** @return a {@link NkColor} view of the {@code color} field. */
     @NativeType("struct nk_color")
     public NkColor color() { return ncolor(address()); }
-    /** Returns a {@link NkColor} view of the {@code highlight} field. */
+    /** @return a {@link NkColor} view of the {@code highlight} field. */
     @NativeType("struct nk_color")
     public NkColor highlight() { return nhighlight(address()); }
-    /** Returns the value of the {@code min} field. */
+    /** @return the value of the {@code min} field. */
     public float min() { return nmin(address()); }
-    /** Returns the value of the {@code max} field. */
+    /** @return the value of the {@code max} field. */
     public float max() { return nmax(address()); }
-    /** Returns the value of the {@code range} field. */
+    /** @return the value of the {@code range} field. */
     public float range() { return nrange(address()); }
-    /** Returns the value of the {@code count} field. */
+    /** @return the value of the {@code count} field. */
     public int count() { return ncount(address()); }
-    /** Returns a {@link NkVec2} view of the {@code last} field. */
+    /** @return a {@link NkVec2} view of the {@code last} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 last() { return nlast(address()); }
-    /** Returns the value of the {@code index} field. */
+    /** @return the value of the {@code index} field. */
     public int index() { return nindex(address()); }
 
     // -----------------------------------
@@ -201,27 +201,27 @@ public class NkChartSlot extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("enum nk_chart_type")
         public int type() { return NkChartSlot.ntype(address()); }
-        /** Returns a {@link NkColor} view of the {@code color} field. */
+        /** @return a {@link NkColor} view of the {@code color} field. */
         @NativeType("struct nk_color")
         public NkColor color() { return NkChartSlot.ncolor(address()); }
-        /** Returns a {@link NkColor} view of the {@code highlight} field. */
+        /** @return a {@link NkColor} view of the {@code highlight} field. */
         @NativeType("struct nk_color")
         public NkColor highlight() { return NkChartSlot.nhighlight(address()); }
-        /** Returns the value of the {@code min} field. */
+        /** @return the value of the {@code min} field. */
         public float min() { return NkChartSlot.nmin(address()); }
-        /** Returns the value of the {@code max} field. */
+        /** @return the value of the {@code max} field. */
         public float max() { return NkChartSlot.nmax(address()); }
-        /** Returns the value of the {@code range} field. */
+        /** @return the value of the {@code range} field. */
         public float range() { return NkChartSlot.nrange(address()); }
-        /** Returns the value of the {@code count} field. */
+        /** @return the value of the {@code count} field. */
         public int count() { return NkChartSlot.ncount(address()); }
-        /** Returns a {@link NkVec2} view of the {@code last} field. */
+        /** @return a {@link NkVec2} view of the {@code last} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 last() { return NkChartSlot.nlast(address()); }
-        /** Returns the value of the {@code index} field. */
+        /** @return the value of the {@code index} field. */
         public int index() { return NkChartSlot.nindex(address()); }
 
     }

@@ -71,15 +71,15 @@ public class XrEventDataDisplayRefreshRateChangedFB extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code fromDisplayRefreshRate} field. */
+    /** @return the value of the {@code fromDisplayRefreshRate} field. */
     public float fromDisplayRefreshRate() { return nfromDisplayRefreshRate(address()); }
-    /** Returns the value of the {@code toDisplayRefreshRate} field. */
+    /** @return the value of the {@code toDisplayRefreshRate} field. */
     public float toDisplayRefreshRate() { return ntoDisplayRefreshRate(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -317,15 +317,15 @@ public class XrEventDataDisplayRefreshRateChangedFB extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataDisplayRefreshRateChangedFB.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataDisplayRefreshRateChangedFB.nnext(address()); }
-        /** Returns the value of the {@code fromDisplayRefreshRate} field. */
+        /** @return the value of the {@code fromDisplayRefreshRate} field. */
         public float fromDisplayRefreshRate() { return XrEventDataDisplayRefreshRateChangedFB.nfromDisplayRefreshRate(address()); }
-        /** Returns the value of the {@code toDisplayRefreshRate} field. */
+        /** @return the value of the {@code toDisplayRefreshRate} field. */
         public float toDisplayRefreshRate() { return XrEventDataDisplayRefreshRateChangedFB.ntoDisplayRefreshRate(address()); }
 
         /** Sets the specified value to the {@code type} field. */

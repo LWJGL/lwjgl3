@@ -36,21 +36,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link EXTCalibratedTimestamps#vkGetCalibratedTimestampsEXT GetCalibratedTimestampsEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code timeDomain} &ndash; a {@code VkTimeDomainEXT} value specifying the time domain from which the calibrated timestamp value should be returned.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkCalibratedTimestampInfoEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkTimeDomainEXT timeDomain;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkTimeDomainEXT {@link #timeDomain};
  * }</code></pre>
  */
 public class VkCalibratedTimestampInfoEXT extends Struct implements NativeResource {
@@ -95,21 +87,21 @@ public class VkCalibratedTimestampInfoEXT extends Struct implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code timeDomain} field. */
+    /** a {@code VkTimeDomainEXT} value specifying the time domain from which the calibrated timestamp value should be returned. */
     @NativeType("VkTimeDomainEXT")
     public int timeDomain() { return ntimeDomain(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkCalibratedTimestampInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkCalibratedTimestampInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code timeDomain} field. */
+    /** Sets the specified value to the {@link #timeDomain} field. */
     public VkCalibratedTimestampInfoEXT timeDomain(@NativeType("VkTimeDomainEXT") int value) { ntimeDomain(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -332,21 +324,21 @@ public class VkCalibratedTimestampInfoEXT extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkCalibratedTimestampInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCalibratedTimestampInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkCalibratedTimestampInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCalibratedTimestampInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code timeDomain} field. */
+        /** @return the value of the {@link VkCalibratedTimestampInfoEXT#timeDomain} field. */
         @NativeType("VkTimeDomainEXT")
         public int timeDomain() { return VkCalibratedTimestampInfoEXT.ntimeDomain(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkCalibratedTimestampInfoEXT#sType} field. */
         public VkCalibratedTimestampInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkCalibratedTimestampInfoEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkCalibratedTimestampInfoEXT#pNext} field. */
         public VkCalibratedTimestampInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkCalibratedTimestampInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code timeDomain} field. */
+        /** Sets the specified value to the {@link VkCalibratedTimestampInfoEXT#timeDomain} field. */
         public VkCalibratedTimestampInfoEXT.Buffer timeDomain(@NativeType("VkTimeDomainEXT") int value) { VkCalibratedTimestampInfoEXT.ntimeDomain(address(), value); return this; }
 
     }

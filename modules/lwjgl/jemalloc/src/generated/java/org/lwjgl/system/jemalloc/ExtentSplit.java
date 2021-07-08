@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * bool (*) (
+ * bool (*{@link #invoke}) (
  *     extent_hooks_t *extent_hooks,
  *     void *addr,
  *     size_t size,
@@ -55,7 +55,7 @@ public abstract class ExtentSplit extends Callback implements ExtentSplitI {
     }
 
     protected ExtentSplit() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     ExtentSplit(long functionPointer) {

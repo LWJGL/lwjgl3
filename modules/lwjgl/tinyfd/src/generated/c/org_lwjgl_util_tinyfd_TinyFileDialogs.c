@@ -5,55 +5,25 @@
  */
 #include "common_tools.h"
 #include "tinyfiledialogs.h"
-#ifndef LWJGL_WINDOWS
-    static int tinyfd_winUtf8;
-#endif
 
 EXTERN_C_ENTER
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1version(JNIEnv *__env, jclass clazz) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1getGlobalChar(JNIEnv *__env, jclass clazz, jlong aCharVariableNameAddress) {
+    char const *aCharVariableName = (char const *)(intptr_t)aCharVariableNameAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)tinyfd_version;
+    return (jlong)(intptr_t)tinyfd_getGlobalChar(aCharVariableName);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1needs(JNIEnv *__env, jclass clazz) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1getGlobalInt(JNIEnv *__env, jclass clazz, jlong aIntVariableNameAddress) {
+    char const *aIntVariableName = (char const *)(intptr_t)aIntVariableNameAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)tinyfd_needs;
+    return (jint)tinyfd_getGlobalInt(aIntVariableName);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1verbose(JNIEnv *__env, jclass clazz) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1setGlobalInt(JNIEnv *__env, jclass clazz, jlong aIntVariableNameAddress, jint aValue) {
+    char const *aIntVariableName = (char const *)(intptr_t)aIntVariableNameAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)&tinyfd_verbose;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1silent(JNIEnv *__env, jclass clazz) {
-    UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)&tinyfd_silent;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1allowCursesDialogs(JNIEnv *__env, jclass clazz) {
-    UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)&tinyfd_allowCursesDialogs;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1assumeGraphicDisplay(JNIEnv *__env, jclass clazz) {
-    UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)&tinyfd_assumeGraphicDisplay;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1winUtf8(JNIEnv *__env, jclass clazz) {
-    UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)&tinyfd_winUtf8;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1forceConsole(JNIEnv *__env, jclass clazz) {
-    UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)&tinyfd_forceConsole;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_ntinyfd_1response(JNIEnv *__env, jclass clazz) {
-    UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)tinyfd_response;
+    return (jint)tinyfd_setGlobalInt(aIntVariableName, aValue);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_tinyfd_TinyFileDialogs_tinyfd_1beep(JNIEnv *__env, jclass clazz) {

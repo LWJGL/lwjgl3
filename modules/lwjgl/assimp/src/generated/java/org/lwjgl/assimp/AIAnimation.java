@@ -19,35 +19,19 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * An animation consists of keyframe data for a number of nodes. For each node affected by the animation a separate series of data is given.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code mName} &ndash; 
- * The name of the animation. If the modeling package this data was exported from does support only a single animation channel, this name is usually empty
- * (length is zero).</li>
- * <li>{@code mDuration} &ndash; Duration of the animation in ticks.</li>
- * <li>{@code mTicksPerSecond} &ndash; Ticks per second. 0 if not specified in the imported file</li>
- * <li>{@code mNumChannels} &ndash; The number of bone animation channels. Each channel affects a single node.</li>
- * <li>{@code mChannels} &ndash; The node animation channels. Each channel affects a single node. The array is {@code mNumChannels} in size.</li>
- * <li>{@code mNumMeshChannels} &ndash; The number of mesh animation channels. Each channel affects a single mesh and defines vertex-based animation.</li>
- * <li>{@code mMeshChannels} &ndash; The mesh animation channels. Each channel affects a single mesh. The array is {@code mNumMeshChannels} in size.</li>
- * <li>{@code mNumMorphMeshChannels} &ndash; the number of mesh animation channels. Each channel affects a single mesh and defines morphing animation.</li>
- * <li>{@code mMorphMeshChannels} &ndash; the morph mesh animation channels. Each channel affects a single mesh. The array is {@code mNumMorphMeshChannels} in size.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiAnimation {
- *     {@link AIString struct aiString} mName;
- *     double mDuration;
- *     double mTicksPerSecond;
- *     unsigned int mNumChannels;
- *     {@link AINodeAnim struct aiNodeAnim} ** mChannels;
- *     unsigned int mNumMeshChannels;
- *     {@link AIMeshAnim struct aiMeshAnim} ** mMeshChannels;
- *     unsigned int mNumMorphMeshChannels;
- *     {@link AIMeshMorphAnim struct aiMeshMorphAnim} ** mMorphMeshChannels;
+ *     {@link AIString struct aiString} {@link #mName};
+ *     double {@link #mDuration};
+ *     double {@link #mTicksPerSecond};
+ *     unsigned int {@link #mNumChannels};
+ *     {@link AINodeAnim struct aiNodeAnim} ** {@link #mChannels};
+ *     unsigned int {@link #mNumMeshChannels};
+ *     {@link AIMeshAnim struct aiMeshAnim} ** {@link #mMeshChannels};
+ *     unsigned int {@link #mNumMorphMeshChannels};
+ *     {@link AIMeshMorphAnim struct aiMeshMorphAnim} ** {@link #mMorphMeshChannels};
  * }</code></pre>
  */
 @NativeType("struct aiAnimation")
@@ -111,48 +95,51 @@ public class AIAnimation extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link AIString} view of the {@code mName} field. */
+    /**
+     * The name of the animation. If the modeling package this data was exported from does support only a single animation channel, this name is usually empty
+     * (length is zero).
+     */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
-    /** Returns the value of the {@code mDuration} field. */
+    /** Duration of the animation in ticks. */
     public double mDuration() { return nmDuration(address()); }
-    /** Returns the value of the {@code mTicksPerSecond} field. */
+    /** Ticks per second. 0 if not specified in the imported file */
     public double mTicksPerSecond() { return nmTicksPerSecond(address()); }
-    /** Returns the value of the {@code mNumChannels} field. */
+    /** The number of bone animation channels. Each channel affects a single node. */
     @NativeType("unsigned int")
     public int mNumChannels() { return nmNumChannels(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mChannels} field. */
+    /** The node animation channels. Each channel affects a single node. The array is {@code mNumChannels} in size. */
     @Nullable
     @NativeType("struct aiNodeAnim **")
     public PointerBuffer mChannels() { return nmChannels(address()); }
-    /** Returns the value of the {@code mNumMeshChannels} field. */
+    /** The number of mesh animation channels. Each channel affects a single mesh and defines vertex-based animation. */
     @NativeType("unsigned int")
     public int mNumMeshChannels() { return nmNumMeshChannels(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mMeshChannels} field. */
+    /** The mesh animation channels. Each channel affects a single mesh. The array is {@code mNumMeshChannels} in size. */
     @Nullable
     @NativeType("struct aiMeshAnim **")
     public PointerBuffer mMeshChannels() { return nmMeshChannels(address()); }
-    /** Returns the value of the {@code mNumMorphMeshChannels} field. */
+    /** the number of mesh animation channels. Each channel affects a single mesh and defines morphing animation. */
     @NativeType("unsigned int")
     public int mNumMorphMeshChannels() { return nmNumMorphMeshChannels(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mMorphMeshChannels} field. */
+    /** the morph mesh animation channels. Each channel affects a single mesh. The array is {@code mNumMorphMeshChannels} in size. */
     @Nullable
     @NativeType("struct aiMeshMorphAnim **")
     public PointerBuffer mMorphMeshChannels() { return nmMorphMeshChannels(address()); }
 
-    /** Copies the specified {@link AIString} to the {@code mName} field. */
+    /** Copies the specified {@link AIString} to the {@link #mName} field. */
     public AIAnimation mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
-    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #mName} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIAnimation mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
-    /** Sets the specified value to the {@code mDuration} field. */
+    /** Sets the specified value to the {@link #mDuration} field. */
     public AIAnimation mDuration(double value) { nmDuration(address(), value); return this; }
-    /** Sets the specified value to the {@code mTicksPerSecond} field. */
+    /** Sets the specified value to the {@link #mTicksPerSecond} field. */
     public AIAnimation mTicksPerSecond(double value) { nmTicksPerSecond(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code mChannels} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #mChannels} field. */
     public AIAnimation mChannels(@Nullable @NativeType("struct aiNodeAnim **") PointerBuffer value) { nmChannels(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code mMeshChannels} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #mMeshChannels} field. */
     public AIAnimation mMeshChannels(@Nullable @NativeType("struct aiMeshAnim **") PointerBuffer value) { nmMeshChannels(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code mMorphMeshChannels} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #mMorphMeshChannels} field. */
     public AIAnimation mMorphMeshChannels(@Nullable @NativeType("struct aiMeshMorphAnim **") PointerBuffer value) { nmMorphMeshChannels(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -434,48 +421,48 @@ public class AIAnimation extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link AIString} view of the {@code mName} field. */
+        /** @return a {@link AIString} view of the {@link AIAnimation#mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AIAnimation.nmName(address()); }
-        /** Returns the value of the {@code mDuration} field. */
+        /** @return the value of the {@link AIAnimation#mDuration} field. */
         public double mDuration() { return AIAnimation.nmDuration(address()); }
-        /** Returns the value of the {@code mTicksPerSecond} field. */
+        /** @return the value of the {@link AIAnimation#mTicksPerSecond} field. */
         public double mTicksPerSecond() { return AIAnimation.nmTicksPerSecond(address()); }
-        /** Returns the value of the {@code mNumChannels} field. */
+        /** @return the value of the {@link AIAnimation#mNumChannels} field. */
         @NativeType("unsigned int")
         public int mNumChannels() { return AIAnimation.nmNumChannels(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mChannels} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIAnimation#mChannels} field. */
         @Nullable
         @NativeType("struct aiNodeAnim **")
         public PointerBuffer mChannels() { return AIAnimation.nmChannels(address()); }
-        /** Returns the value of the {@code mNumMeshChannels} field. */
+        /** @return the value of the {@link AIAnimation#mNumMeshChannels} field. */
         @NativeType("unsigned int")
         public int mNumMeshChannels() { return AIAnimation.nmNumMeshChannels(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mMeshChannels} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIAnimation#mMeshChannels} field. */
         @Nullable
         @NativeType("struct aiMeshAnim **")
         public PointerBuffer mMeshChannels() { return AIAnimation.nmMeshChannels(address()); }
-        /** Returns the value of the {@code mNumMorphMeshChannels} field. */
+        /** @return the value of the {@link AIAnimation#mNumMorphMeshChannels} field. */
         @NativeType("unsigned int")
         public int mNumMorphMeshChannels() { return AIAnimation.nmNumMorphMeshChannels(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code mMorphMeshChannels} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIAnimation#mMorphMeshChannels} field. */
         @Nullable
         @NativeType("struct aiMeshMorphAnim **")
         public PointerBuffer mMorphMeshChannels() { return AIAnimation.nmMorphMeshChannels(address()); }
 
-        /** Copies the specified {@link AIString} to the {@code mName} field. */
+        /** Copies the specified {@link AIString} to the {@link AIAnimation#mName} field. */
         public AIAnimation.Buffer mName(@NativeType("struct aiString") AIString value) { AIAnimation.nmName(address(), value); return this; }
-        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link AIAnimation#mName} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIAnimation.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
-        /** Sets the specified value to the {@code mDuration} field. */
+        /** Sets the specified value to the {@link AIAnimation#mDuration} field. */
         public AIAnimation.Buffer mDuration(double value) { AIAnimation.nmDuration(address(), value); return this; }
-        /** Sets the specified value to the {@code mTicksPerSecond} field. */
+        /** Sets the specified value to the {@link AIAnimation#mTicksPerSecond} field. */
         public AIAnimation.Buffer mTicksPerSecond(double value) { AIAnimation.nmTicksPerSecond(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code mChannels} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link AIAnimation#mChannels} field. */
         public AIAnimation.Buffer mChannels(@Nullable @NativeType("struct aiNodeAnim **") PointerBuffer value) { AIAnimation.nmChannels(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code mMeshChannels} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link AIAnimation#mMeshChannels} field. */
         public AIAnimation.Buffer mMeshChannels(@Nullable @NativeType("struct aiMeshAnim **") PointerBuffer value) { AIAnimation.nmMeshChannels(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code mMorphMeshChannels} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link AIAnimation#mMorphMeshChannels} field. */
         public AIAnimation.Buffer mMorphMeshChannels(@Nullable @NativeType("struct aiMeshMorphAnim **") PointerBuffer value) { AIAnimation.nmMorphMeshChannels(address(), value); return this; }
 
     }

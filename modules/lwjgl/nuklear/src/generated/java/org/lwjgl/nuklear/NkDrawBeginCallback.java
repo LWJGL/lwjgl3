@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * float (*) (
+ * float (*{@link #invoke}) (
  *     struct nk_command_buffer *buffer,
  *     nk_handle userdata
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class NkDrawBeginCallback extends Callback implements NkDrawBegi
     }
 
     protected NkDrawBeginCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkDrawBeginCallback(long functionPointer) {

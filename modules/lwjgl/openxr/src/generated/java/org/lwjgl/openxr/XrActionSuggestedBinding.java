@@ -64,10 +64,10 @@ public class XrActionSuggestedBinding extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code action} field. */
+    /** @return the value of the {@code action} field. */
     @NativeType("XrAction")
     public long action() { return naction(address()); }
-    /** Returns the value of the {@code binding} field. */
+    /** @return the value of the {@code binding} field. */
     @NativeType("XrPath")
     public long binding() { return nbinding(address()); }
 
@@ -311,10 +311,10 @@ public class XrActionSuggestedBinding extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code action} field. */
+        /** @return the value of the {@code action} field. */
         @NativeType("XrAction")
         public long action() { return XrActionSuggestedBinding.naction(address()); }
-        /** Returns the value of the {@code binding} field. */
+        /** @return the value of the {@code binding} field. */
         @NativeType("XrPath")
         public long binding() { return XrActionSuggestedBinding.nbinding(address()); }
 

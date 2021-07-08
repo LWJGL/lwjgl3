@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWwindow *window,
  *     double xoffset,
  *     double yoffset
@@ -55,7 +55,7 @@ public abstract class GLFWScrollCallback extends Callback implements GLFWScrollC
     }
 
     protected GLFWScrollCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWScrollCallback(long functionPointer) {

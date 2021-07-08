@@ -29,6 +29,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class OESTextureBorderClamp {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code pname} parameter of TexParameteriv, TexParameterfv, SamplerParameteriv, SamplerParameterfv, TexParameterIivOES,
      * TexParameterIuivOES, SamplerParameterIivOES, SamplerParameterIuivOES, GetTexParameteriv, GetTexParameterfv, GetTexParameterIivOES,
@@ -44,8 +46,6 @@ public class OESTextureBorderClamp {
      * or TEXTURE_WRAP_R.
      */
     public static final int GL_CLAMP_TO_BORDER_OES = 0x812D;
-
-    static { GLES.initialize(); }
 
     protected OESTextureBorderClamp() {
         throw new UnsupportedOperationException();

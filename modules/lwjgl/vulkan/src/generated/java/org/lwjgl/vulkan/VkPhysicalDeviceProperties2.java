@@ -26,29 +26,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT}, {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}, {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV}, {@link VkPhysicalDeviceDepthStencilResolveProperties}, {@link VkPhysicalDeviceDescriptorIndexingProperties}, {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT}, {@link VkPhysicalDeviceDriverProperties}, {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT}, {@link VkPhysicalDeviceFloatControlsProperties}, {@link VkPhysicalDeviceFragmentDensityMapPropertiesEXT}, {@link VkPhysicalDeviceIDProperties}, {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT}, {@link VkPhysicalDeviceLineRasterizationPropertiesEXT}, {@link VkPhysicalDeviceMaintenance3Properties}, {@link VkPhysicalDeviceMeshShaderPropertiesNV}, {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX}, {@link VkPhysicalDeviceMultiviewProperties}, {@link VkPhysicalDevicePCIBusInfoPropertiesEXT}, {@link VkPhysicalDevicePerformanceQueryPropertiesKHR}, {@link VkPhysicalDevicePointClippingProperties}, {@link VkPhysicalDeviceProtectedMemoryProperties}, {@link VkPhysicalDevicePushDescriptorPropertiesKHR}, {@link VkPhysicalDeviceRayTracingPropertiesNV}, {@link VkPhysicalDeviceSampleLocationsPropertiesEXT}, {@link VkPhysicalDeviceSamplerFilterMinmaxProperties}, {@link VkPhysicalDeviceShaderCoreProperties2AMD}, {@link VkPhysicalDeviceShaderCorePropertiesAMD}, {@link VkPhysicalDeviceShaderSMBuiltinsPropertiesNV}, {@link VkPhysicalDeviceShadingRateImagePropertiesNV}, {@link VkPhysicalDeviceSubgroupProperties}, {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT}, {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT}, {@link VkPhysicalDeviceTimelineSemaphoreProperties}, {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT}, {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT}, {@link VkPhysicalDeviceVulkan11Properties}, or {@link VkPhysicalDeviceVulkan12Properties}</li>
- * <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR}, {@link VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT}, {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}, {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV}, {@link VkPhysicalDeviceCustomBorderColorPropertiesEXT}, {@link VkPhysicalDeviceDepthStencilResolveProperties}, {@link VkPhysicalDeviceDescriptorIndexingProperties}, {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV}, {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT}, {@link VkPhysicalDeviceDriverProperties}, {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT}, {@link VkPhysicalDeviceFloatControlsProperties}, {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT}, {@link VkPhysicalDeviceFragmentDensityMapPropertiesEXT}, {@link VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV}, {@link VkPhysicalDeviceFragmentShadingRatePropertiesKHR}, {@link VkPhysicalDeviceIDProperties}, {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT}, {@link VkPhysicalDeviceLineRasterizationPropertiesEXT}, {@link VkPhysicalDeviceMaintenance3Properties}, {@link VkPhysicalDeviceMeshShaderPropertiesNV}, {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX}, {@link VkPhysicalDeviceMultiviewProperties}, {@link VkPhysicalDevicePCIBusInfoPropertiesEXT}, {@link VkPhysicalDevicePerformanceQueryPropertiesKHR}, {@link VkPhysicalDevicePointClippingProperties}, {@link VkPhysicalDevicePortabilitySubsetPropertiesKHR}, {@link VkPhysicalDeviceProtectedMemoryProperties}, {@link VkPhysicalDevicePushDescriptorPropertiesKHR}, {@link VkPhysicalDeviceRayTracingPipelinePropertiesKHR}, {@link VkPhysicalDeviceRayTracingPropertiesNV}, {@link VkPhysicalDeviceRobustness2PropertiesEXT}, {@link VkPhysicalDeviceSampleLocationsPropertiesEXT}, {@link VkPhysicalDeviceSamplerFilterMinmaxProperties}, {@link VkPhysicalDeviceShaderCoreProperties2AMD}, {@link VkPhysicalDeviceShaderCorePropertiesAMD}, {@link VkPhysicalDeviceShaderSMBuiltinsPropertiesNV}, {@link VkPhysicalDeviceShadingRateImagePropertiesNV}, {@link VkPhysicalDeviceSubgroupProperties}, {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT}, {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT}, {@link VkPhysicalDeviceTimelineSemaphoreProperties}, {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT}, {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT}, {@link VkPhysicalDeviceVulkan11Properties}, or {@link VkPhysicalDeviceVulkan12Properties}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
  * <h5>See Also</h5>
  * 
  * <p>{@link VkPhysicalDeviceProperties}, {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, {@link KHRGetPhysicalDeviceProperties2#vkGetPhysicalDeviceProperties2KHR GetPhysicalDeviceProperties2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code properties} &ndash; a {@link VkPhysicalDeviceProperties} structure describing properties of the physical device. This structure is written with the same values as if it were written by {@link VK10#vkGetPhysicalDeviceProperties GetPhysicalDeviceProperties}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceProperties2 {
- *     VkStructureType sType;
- *     void * pNext;
- *     {@link VkPhysicalDeviceProperties VkPhysicalDeviceProperties} properties;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     {@link VkPhysicalDeviceProperties VkPhysicalDeviceProperties} {@link #properties};
  * }</code></pre>
  */
 public class VkPhysicalDeviceProperties2 extends Struct implements NativeResource {
@@ -93,18 +85,18 @@ public class VkPhysicalDeviceProperties2 extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkPhysicalDeviceProperties} view of the {@code properties} field. */
+    /** a {@link VkPhysicalDeviceProperties} structure describing properties of the physical device. This structure is written with the same values as if it were written by {@link VK10#vkGetPhysicalDeviceProperties GetPhysicalDeviceProperties}. */
     public VkPhysicalDeviceProperties properties() { return nproperties(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceProperties2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -323,18 +315,18 @@ public class VkPhysicalDeviceProperties2 extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceProperties2#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceProperties2.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceProperties2#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceProperties2.npNext(address()); }
-        /** Returns a {@link VkPhysicalDeviceProperties} view of the {@code properties} field. */
+        /** @return a {@link VkPhysicalDeviceProperties} view of the {@link VkPhysicalDeviceProperties2#properties} field. */
         public VkPhysicalDeviceProperties properties() { return VkPhysicalDeviceProperties2.nproperties(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceProperties2#sType} field. */
         public VkPhysicalDeviceProperties2.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceProperties2.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceProperties2#pNext} field. */
         public VkPhysicalDeviceProperties2.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceProperties2.npNext(address(), value); return this; }
 
     }

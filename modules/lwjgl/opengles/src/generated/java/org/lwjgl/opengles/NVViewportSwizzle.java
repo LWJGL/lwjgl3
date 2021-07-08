@@ -21,6 +21,8 @@ import org.lwjgl.system.*;
  */
 public class NVViewportSwizzle {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code swizzlex}, {@code swizzley}, {@code swizzlez}, and {@code swizzlew} parameters of ViewportSwizzleNV. */
     public static final int
         GL_VIEWPORT_SWIZZLE_POSITIVE_X_NV = 0x9350,
@@ -38,8 +40,6 @@ public class NVViewportSwizzle {
         GL_VIEWPORT_SWIZZLE_Y_NV = 0x9359,
         GL_VIEWPORT_SWIZZLE_Z_NV = 0x935A,
         GL_VIEWPORT_SWIZZLE_W_NV = 0x935B;
-
-    static { GLES.initialize(); }
 
     protected NVViewportSwizzle() {
         throw new UnsupportedOperationException();

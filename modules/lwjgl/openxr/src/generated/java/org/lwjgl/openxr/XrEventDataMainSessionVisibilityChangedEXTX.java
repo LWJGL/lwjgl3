@@ -71,16 +71,16 @@ public class XrEventDataMainSessionVisibilityChangedEXTX extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code visible} field. */
+    /** @return the value of the {@code visible} field. */
     @NativeType("XrBool32")
     public boolean visible() { return nvisible(address()) != 0; }
-    /** Returns the value of the {@code flags} field. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("XrOverlayMainSessionFlagsEXTX")
     public long flags() { return nflags(address()); }
 
@@ -319,16 +319,16 @@ public class XrEventDataMainSessionVisibilityChangedEXTX extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataMainSessionVisibilityChangedEXTX.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataMainSessionVisibilityChangedEXTX.nnext(address()); }
-        /** Returns the value of the {@code visible} field. */
+        /** @return the value of the {@code visible} field. */
         @NativeType("XrBool32")
         public boolean visible() { return XrEventDataMainSessionVisibilityChangedEXTX.nvisible(address()) != 0; }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("XrOverlayMainSessionFlagsEXTX")
         public long flags() { return XrEventDataMainSessionVisibilityChangedEXTX.nflags(address()); }
 

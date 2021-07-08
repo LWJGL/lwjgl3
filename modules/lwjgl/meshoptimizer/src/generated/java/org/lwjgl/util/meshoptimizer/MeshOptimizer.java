@@ -323,9 +323,9 @@ import static java.lang.Float.*;
  */
 public class MeshOptimizer {
 
-    public static final int MESHOPTIMIZER_VERSION = 130;
-
     static { LibMeshOptimizer.initialize(); }
+
+    public static final int MESHOPTIMIZER_VERSION = 130;
 
     protected MeshOptimizer() {
         throw new UnsupportedOperationException();

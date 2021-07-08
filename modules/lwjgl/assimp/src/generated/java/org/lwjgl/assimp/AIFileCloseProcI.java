@@ -6,40 +6,47 @@
 package org.lwjgl.assimp;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     struct aiFileIO *pFileIO,
  *     struct aiFile *pFile
  * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("aiFileCloseProc")
-public interface AIFileCloseProcI extends CallbackI.V {
+public interface AIFileCloseProcI extends CallbackI {
 
-    String SIGNATURE = "(pp)v";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_void,
+        ffi_type_pointer, ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args),
-            dcbArgPointer(args)
+            memGetAddress(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE))
         );
     }
 
     /**
      * File close procedure
      *
-     * @param pFileIO FileIO system pointer
-     * @param pFile   File pointer to close
+     * @param pFileIO {@code FileIO} pointer
+     * @param pFile   file pointer to close
      */
     void invoke(@NativeType("struct aiFileIO *") long pFileIO, @NativeType("struct aiFile *") long pFile);
 

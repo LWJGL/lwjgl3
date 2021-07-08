@@ -75,18 +75,18 @@ public class XrHapticVibration extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code duration} field. */
+    /** @return the value of the {@code duration} field. */
     @NativeType("XrDuration")
     public long duration() { return nduration(address()); }
-    /** Returns the value of the {@code frequency} field. */
+    /** @return the value of the {@code frequency} field. */
     public float frequency() { return nfrequency(address()); }
-    /** Returns the value of the {@code amplitude} field. */
+    /** @return the value of the {@code amplitude} field. */
     public float amplitude() { return namplitude(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -332,18 +332,18 @@ public class XrHapticVibration extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHapticVibration.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrHapticVibration.nnext(address()); }
-        /** Returns the value of the {@code duration} field. */
+        /** @return the value of the {@code duration} field. */
         @NativeType("XrDuration")
         public long duration() { return XrHapticVibration.nduration(address()); }
-        /** Returns the value of the {@code frequency} field. */
+        /** @return the value of the {@code frequency} field. */
         public float frequency() { return XrHapticVibration.nfrequency(address()); }
-        /** Returns the value of the {@code amplitude} field. */
+        /** @return the value of the {@code amplitude} field. */
         public float amplitude() { return XrHapticVibration.namplitude(address()); }
 
         /** Sets the specified value to the {@code type} field. */

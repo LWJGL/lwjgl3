@@ -71,16 +71,16 @@ public class XrHandTrackerCreateInfoEXT extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code hand} field. */
+    /** @return the value of the {@code hand} field. */
     @NativeType("XrHandEXT")
     public int hand() { return nhand(address()); }
-    /** Returns the value of the {@code handJointSet} field. */
+    /** @return the value of the {@code handJointSet} field. */
     @NativeType("XrHandJointSetEXT")
     public int handJointSet() { return nhandJointSet(address()); }
 
@@ -319,16 +319,16 @@ public class XrHandTrackerCreateInfoEXT extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHandTrackerCreateInfoEXT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrHandTrackerCreateInfoEXT.nnext(address()); }
-        /** Returns the value of the {@code hand} field. */
+        /** @return the value of the {@code hand} field. */
         @NativeType("XrHandEXT")
         public int hand() { return XrHandTrackerCreateInfoEXT.nhand(address()); }
-        /** Returns the value of the {@code handJointSet} field. */
+        /** @return the value of the {@code handJointSet} field. */
         @NativeType("XrHandJointSetEXT")
         public int handJointSet() { return XrHandTrackerCreateInfoEXT.nhandJointSet(address()); }
 

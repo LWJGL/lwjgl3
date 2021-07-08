@@ -65,11 +65,11 @@ public class AIMetaDataEntry extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code mType} field. */
+    /** @return the value of the {@code mType} field. */
     @NativeType("aiMetadataType")
     public int mType() { return nmType(address()); }
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code mData} field.
+     * @return a {@link ByteBuffer} view of the data pointed to by the {@code mData} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
@@ -316,11 +316,11 @@ public class AIMetaDataEntry extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code mType} field. */
+        /** @return the value of the {@code mType} field. */
         @NativeType("aiMetadataType")
         public int mType() { return AIMetaDataEntry.nmType(address()); }
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code mData} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@code mData} field.
          *
          * @param capacity the number of elements in the returned buffer
          */

@@ -46,6 +46,8 @@ import org.lwjgl.system.*;
  */
 public class ARBInternalformatQuery2 {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code target} parameter of GetInternalformativ and GetInternalformati64v. */
     public static final int
         GL_TEXTURE_1D                   = 0xDE0,
@@ -169,8 +171,6 @@ public class ARBInternalformatQuery2 {
         GL_VIEW_CLASS_RGTC2_RG       = 0x82D1,
         GL_VIEW_CLASS_BPTC_UNORM     = 0x82D2,
         GL_VIEW_CLASS_BPTC_FLOAT     = 0x82D3;
-
-    static { GL.initialize(); }
 
     protected ARBInternalformatQuery2() {
         throw new UnsupportedOperationException();

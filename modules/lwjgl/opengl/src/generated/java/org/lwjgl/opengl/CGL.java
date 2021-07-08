@@ -22,6 +22,64 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to CGL. */
 public class CGL {
 
+    /** Contains the function pointers loaded from {@code GL.getFunctionProvider()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            GetCurrentContext         = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetCurrentContext"),
+            SetCurrentContext         = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetCurrentContext"),
+            GetShareGroup             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetShareGroup"),
+            ChoosePixelFormat         = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLChoosePixelFormat"),
+            DestroyPixelFormat        = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDestroyPixelFormat"),
+            DescribePixelFormat       = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDescribePixelFormat"),
+            ReleasePixelFormat        = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLReleasePixelFormat"),
+            RetainPixelFormat         = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLRetainPixelFormat"),
+            GetPixelFormatRetainCount = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetPixelFormatRetainCount"),
+            QueryRendererInfo         = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLQueryRendererInfo"),
+            DestroyRendererInfo       = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDestroyRendererInfo"),
+            DescribeRenderer          = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDescribeRenderer"),
+            CreateContext             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLCreateContext"),
+            DestroyContext            = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDestroyContext"),
+            CopyContext               = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLCopyContext"),
+            RetainContext             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLRetainContext"),
+            ReleaseContext            = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLReleaseContext"),
+            GetContextRetainCount     = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetContextRetainCount"),
+            GetPixelFormat            = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetPixelFormat"),
+            CreatePBuffer             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLCreatePBuffer"),
+            DestroyPBuffer            = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDestroyPBuffer"),
+            DescribePBuffer           = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDescribePBuffer"),
+            TexImagePBuffer           = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLTexImagePBuffer"),
+            RetainPBuffer             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLRetainPBuffer"),
+            ReleasePBuffer            = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLReleasePBuffer"),
+            GetPBufferRetainCount     = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetPBufferRetainCount"),
+            SetOffScreen              = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetOffScreen"),
+            GetOffScreen              = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetOffScreen"),
+            SetFullScreen             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetFullScreen"),
+            SetFullScreenOnDisplay    = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetFullScreenOnDisplay"),
+            SetPBuffer                = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetPBuffer"),
+            GetPBuffer                = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetPBuffer"),
+            ClearDrawable             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLClearDrawable"),
+            FlushDrawable             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLFlushDrawable"),
+            Enable                    = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLEnable"),
+            Disable                   = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDisable"),
+            IsEnabled                 = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLIsEnabled"),
+            SetParameter              = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetParameter"),
+            GetParameter              = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetParameter"),
+            SetVirtualScreen          = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetVirtualScreen"),
+            GetVirtualScreen          = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetVirtualScreen"),
+            UpdateContext             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLUpdateContext"),
+            SetGlobalOption           = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetGlobalOption"),
+            GetGlobalOption           = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetGlobalOption"),
+            LockContext               = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLLockContext"),
+            UnlockContext             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLUnlockContext"),
+            GetVersion                = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetVersion"),
+            ErrorString               = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLErrorString");
+
+    }
+
     /** Attribute names for {@link #CGLChoosePixelFormat ChoosePixelFormat} and {@link #CGLDescribePixelFormat DescribePixelFormat}. */
     public static final int
         kCGLPFAAllRenderers                       = 1,
@@ -225,64 +283,6 @@ public class CGL {
 
     protected CGL() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code GL.getFunctionProvider()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            GetCurrentContext         = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetCurrentContext"),
-            SetCurrentContext         = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetCurrentContext"),
-            GetShareGroup             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetShareGroup"),
-            ChoosePixelFormat         = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLChoosePixelFormat"),
-            DestroyPixelFormat        = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDestroyPixelFormat"),
-            DescribePixelFormat       = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDescribePixelFormat"),
-            ReleasePixelFormat        = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLReleasePixelFormat"),
-            RetainPixelFormat         = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLRetainPixelFormat"),
-            GetPixelFormatRetainCount = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetPixelFormatRetainCount"),
-            QueryRendererInfo         = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLQueryRendererInfo"),
-            DestroyRendererInfo       = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDestroyRendererInfo"),
-            DescribeRenderer          = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDescribeRenderer"),
-            CreateContext             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLCreateContext"),
-            DestroyContext            = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDestroyContext"),
-            CopyContext               = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLCopyContext"),
-            RetainContext             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLRetainContext"),
-            ReleaseContext            = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLReleaseContext"),
-            GetContextRetainCount     = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetContextRetainCount"),
-            GetPixelFormat            = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetPixelFormat"),
-            CreatePBuffer             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLCreatePBuffer"),
-            DestroyPBuffer            = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDestroyPBuffer"),
-            DescribePBuffer           = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDescribePBuffer"),
-            TexImagePBuffer           = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLTexImagePBuffer"),
-            RetainPBuffer             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLRetainPBuffer"),
-            ReleasePBuffer            = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLReleasePBuffer"),
-            GetPBufferRetainCount     = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetPBufferRetainCount"),
-            SetOffScreen              = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetOffScreen"),
-            GetOffScreen              = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetOffScreen"),
-            SetFullScreen             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetFullScreen"),
-            SetFullScreenOnDisplay    = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetFullScreenOnDisplay"),
-            SetPBuffer                = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetPBuffer"),
-            GetPBuffer                = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetPBuffer"),
-            ClearDrawable             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLClearDrawable"),
-            FlushDrawable             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLFlushDrawable"),
-            Enable                    = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLEnable"),
-            Disable                   = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLDisable"),
-            IsEnabled                 = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLIsEnabled"),
-            SetParameter              = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetParameter"),
-            GetParameter              = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetParameter"),
-            SetVirtualScreen          = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetVirtualScreen"),
-            GetVirtualScreen          = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetVirtualScreen"),
-            UpdateContext             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLUpdateContext"),
-            SetGlobalOption           = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLSetGlobalOption"),
-            GetGlobalOption           = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetGlobalOption"),
-            LockContext               = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLLockContext"),
-            UnlockContext             = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLUnlockContext"),
-            GetVersion                = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLGetVersion"),
-            ErrorString               = apiGetFunctionAddress(GL.getFunctionProvider(), "CGLErrorString");
-
     }
 
     // --- [ CGLGetCurrentContext ] ---

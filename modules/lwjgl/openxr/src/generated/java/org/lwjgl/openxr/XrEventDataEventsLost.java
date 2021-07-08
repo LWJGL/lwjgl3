@@ -67,13 +67,13 @@ public class XrEventDataEventsLost extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code lostEventCount} field. */
+    /** @return the value of the {@code lostEventCount} field. */
     @NativeType("uint32_t")
     public int lostEventCount() { return nlostEventCount(address()); }
 
@@ -304,13 +304,13 @@ public class XrEventDataEventsLost extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataEventsLost.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataEventsLost.nnext(address()); }
-        /** Returns the value of the {@code lostEventCount} field. */
+        /** @return the value of the {@code lostEventCount} field. */
         @NativeType("uint32_t")
         public int lostEventCount() { return XrEventDataEventsLost.nlostEventCount(address()); }
 

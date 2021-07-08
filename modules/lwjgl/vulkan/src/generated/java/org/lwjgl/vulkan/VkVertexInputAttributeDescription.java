@@ -37,23 +37,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkPipelineVertexInputStateCreateInfo}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code location} &ndash; the shader binding location number for this attribute.</li>
- * <li>{@code binding} &ndash; the binding number which this attribute takes its data from.</li>
- * <li>{@code format} &ndash; the size and type of the vertex attribute data.</li>
- * <li>{@code offset} &ndash; a byte offset of this attribute relative to the start of an element in the vertex input binding.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkVertexInputAttributeDescription {
- *     uint32_t location;
- *     uint32_t binding;
- *     VkFormat format;
- *     uint32_t offset;
+ *     uint32_t {@link #location};
+ *     uint32_t {@link #binding};
+ *     VkFormat {@link #format};
+ *     uint32_t {@link #offset};
  * }</code></pre>
  */
 public class VkVertexInputAttributeDescription extends Struct implements NativeResource {
@@ -101,26 +92,26 @@ public class VkVertexInputAttributeDescription extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code location} field. */
+    /** the shader binding location number for this attribute. */
     @NativeType("uint32_t")
     public int location() { return nlocation(address()); }
-    /** Returns the value of the {@code binding} field. */
+    /** the binding number which this attribute takes its data from. */
     @NativeType("uint32_t")
     public int binding() { return nbinding(address()); }
-    /** Returns the value of the {@code format} field. */
+    /** the size and type of the vertex attribute data. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /** a byte offset of this attribute relative to the start of an element in the vertex input binding. */
     @NativeType("uint32_t")
     public int offset() { return noffset(address()); }
 
-    /** Sets the specified value to the {@code location} field. */
+    /** Sets the specified value to the {@link #location} field. */
     public VkVertexInputAttributeDescription location(@NativeType("uint32_t") int value) { nlocation(address(), value); return this; }
-    /** Sets the specified value to the {@code binding} field. */
+    /** Sets the specified value to the {@link #binding} field. */
     public VkVertexInputAttributeDescription binding(@NativeType("uint32_t") int value) { nbinding(address(), value); return this; }
-    /** Sets the specified value to the {@code format} field. */
+    /** Sets the specified value to the {@link #format} field. */
     public VkVertexInputAttributeDescription format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
-    /** Sets the specified value to the {@code offset} field. */
+    /** Sets the specified value to the {@link #offset} field. */
     public VkVertexInputAttributeDescription offset(@NativeType("uint32_t") int value) { noffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -349,26 +340,26 @@ public class VkVertexInputAttributeDescription extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code location} field. */
+        /** @return the value of the {@link VkVertexInputAttributeDescription#location} field. */
         @NativeType("uint32_t")
         public int location() { return VkVertexInputAttributeDescription.nlocation(address()); }
-        /** Returns the value of the {@code binding} field. */
+        /** @return the value of the {@link VkVertexInputAttributeDescription#binding} field. */
         @NativeType("uint32_t")
         public int binding() { return VkVertexInputAttributeDescription.nbinding(address()); }
-        /** Returns the value of the {@code format} field. */
+        /** @return the value of the {@link VkVertexInputAttributeDescription#format} field. */
         @NativeType("VkFormat")
         public int format() { return VkVertexInputAttributeDescription.nformat(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@link VkVertexInputAttributeDescription#offset} field. */
         @NativeType("uint32_t")
         public int offset() { return VkVertexInputAttributeDescription.noffset(address()); }
 
-        /** Sets the specified value to the {@code location} field. */
+        /** Sets the specified value to the {@link VkVertexInputAttributeDescription#location} field. */
         public VkVertexInputAttributeDescription.Buffer location(@NativeType("uint32_t") int value) { VkVertexInputAttributeDescription.nlocation(address(), value); return this; }
-        /** Sets the specified value to the {@code binding} field. */
+        /** Sets the specified value to the {@link VkVertexInputAttributeDescription#binding} field. */
         public VkVertexInputAttributeDescription.Buffer binding(@NativeType("uint32_t") int value) { VkVertexInputAttributeDescription.nbinding(address(), value); return this; }
-        /** Sets the specified value to the {@code format} field. */
+        /** Sets the specified value to the {@link VkVertexInputAttributeDescription#format} field. */
         public VkVertexInputAttributeDescription.Buffer format(@NativeType("VkFormat") int value) { VkVertexInputAttributeDescription.nformat(address(), value); return this; }
-        /** Sets the specified value to the {@code offset} field. */
+        /** Sets the specified value to the {@link VkVertexInputAttributeDescription#offset} field. */
         public VkVertexInputAttributeDescription.Buffer offset(@NativeType("uint32_t") int value) { VkVertexInputAttributeDescription.noffset(address(), value); return this; }
 
     }

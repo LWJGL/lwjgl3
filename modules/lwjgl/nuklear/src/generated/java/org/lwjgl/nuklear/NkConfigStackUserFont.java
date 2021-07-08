@@ -63,12 +63,12 @@ class NkConfigStackUserFont extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code head} field. */
+    /** @return the value of the {@code head} field. */
     public int head() { return nhead(address()); }
-    /** Returns a {@link NkConfigStackUserFontElement}.Buffer view of the {@code elements} field. */
+    /** @return a {@link NkConfigStackUserFontElement}.Buffer view of the {@code elements} field. */
     @NativeType("struct nk_config_stack_user_font_element[8]")
     public NkConfigStackUserFontElement.Buffer elements() { return nelements(address()); }
-    /** Returns a {@link NkConfigStackUserFontElement} view of the struct at the specified index of the {@code elements} field. */
+    /** @return a {@link NkConfigStackUserFontElement} view of the struct at the specified index of the {@code elements} field. */
     @NativeType("struct nk_config_stack_user_font_element")
     public NkConfigStackUserFontElement elements(int index) { return nelements(address(), index); }
 
@@ -150,12 +150,12 @@ class NkConfigStackUserFont extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code head} field. */
+        /** @return the value of the {@code head} field. */
         public int head() { return NkConfigStackUserFont.nhead(address()); }
-        /** Returns a {@link NkConfigStackUserFontElement}.Buffer view of the {@code elements} field. */
+        /** @return a {@link NkConfigStackUserFontElement}.Buffer view of the {@code elements} field. */
         @NativeType("struct nk_config_stack_user_font_element[8]")
         public NkConfigStackUserFontElement.Buffer elements() { return NkConfigStackUserFont.nelements(address()); }
-        /** Returns a {@link NkConfigStackUserFontElement} view of the struct at the specified index of the {@code elements} field. */
+        /** @return a {@link NkConfigStackUserFontElement} view of the struct at the specified index of the {@code elements} field. */
         @NativeType("struct nk_config_stack_user_font_element")
         public NkConfigStackUserFontElement elements(int index) { return NkConfigStackUserFont.nelements(address(), index); }
 

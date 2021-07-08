@@ -23,10 +23,10 @@ import org.lwjgl.system.*;
  */
 public class ARBVertexArrayObject {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_VERTEX_ARRAY_BINDING = 0x85B5;
-
-    static { GL.initialize(); }
 
     protected ARBVertexArrayObject() {
         throw new UnsupportedOperationException();

@@ -28,19 +28,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkPresentRegionsKHR}, {@link VkRectLayerKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code rectangleCount} &ndash; the number of rectangles in {@code pRectangles}, or zero if the entire image has changed and should be presented.</li>
- * <li>{@code pRectangles} &ndash; either {@code NULL} or a pointer to an array of {@link VkRectLayerKHR} structures. The {@link VkRectLayerKHR} structure is the framebuffer coordinates, plus layer, of a portion of a presentable image that has changed and <b>must</b> be presented. If non-{@code NULL}, each entry in {@code pRectangles} is a rectangle of the given image that has changed since the last image was presented to the given swapchain.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPresentRegionKHR {
- *     uint32_t rectangleCount;
- *     {@link VkRectLayerKHR VkRectLayerKHR} const * pRectangles;
+ *     uint32_t {@link #rectangleCount};
+ *     {@link VkRectLayerKHR VkRectLayerKHR} const * {@link #pRectangles};
  * }</code></pre>
  */
 public class VkPresentRegionKHR extends Struct implements NativeResource {
@@ -82,17 +75,17 @@ public class VkPresentRegionKHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code rectangleCount} field. */
+    /** the number of rectangles in {@code pRectangles}, or zero if the entire image has changed and should be presented. */
     @NativeType("uint32_t")
     public int rectangleCount() { return nrectangleCount(address()); }
-    /** Returns a {@link VkRectLayerKHR.Buffer} view of the struct array pointed to by the {@code pRectangles} field. */
+    /** either {@code NULL} or a pointer to an array of {@link VkRectLayerKHR} structures. The {@link VkRectLayerKHR} structure is the framebuffer coordinates, plus layer, of a portion of a presentable image that has changed and <b>must</b> be presented. If non-{@code NULL}, each entry in {@code pRectangles} is a rectangle of the given image that has changed since the last image was presented to the given swapchain. */
     @Nullable
     @NativeType("VkRectLayerKHR const *")
     public VkRectLayerKHR.Buffer pRectangles() { return npRectangles(address()); }
 
-    /** Sets the specified value to the {@code rectangleCount} field. */
+    /** Sets the specified value to the {@link #rectangleCount} field. */
     public VkPresentRegionKHR rectangleCount(@NativeType("uint32_t") int value) { nrectangleCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkRectLayerKHR.Buffer} to the {@code pRectangles} field. */
+    /** Sets the address of the specified {@link VkRectLayerKHR.Buffer} to the {@link #pRectangles} field. */
     public VkPresentRegionKHR pRectangles(@Nullable @NativeType("VkRectLayerKHR const *") VkRectLayerKHR.Buffer value) { npRectangles(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,17 +302,17 @@ public class VkPresentRegionKHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code rectangleCount} field. */
+        /** @return the value of the {@link VkPresentRegionKHR#rectangleCount} field. */
         @NativeType("uint32_t")
         public int rectangleCount() { return VkPresentRegionKHR.nrectangleCount(address()); }
-        /** Returns a {@link VkRectLayerKHR.Buffer} view of the struct array pointed to by the {@code pRectangles} field. */
+        /** @return a {@link VkRectLayerKHR.Buffer} view of the struct array pointed to by the {@link VkPresentRegionKHR#pRectangles} field. */
         @Nullable
         @NativeType("VkRectLayerKHR const *")
         public VkRectLayerKHR.Buffer pRectangles() { return VkPresentRegionKHR.npRectangles(address()); }
 
-        /** Sets the specified value to the {@code rectangleCount} field. */
+        /** Sets the specified value to the {@link VkPresentRegionKHR#rectangleCount} field. */
         public VkPresentRegionKHR.Buffer rectangleCount(@NativeType("uint32_t") int value) { VkPresentRegionKHR.nrectangleCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkRectLayerKHR.Buffer} to the {@code pRectangles} field. */
+        /** Sets the address of the specified {@link VkRectLayerKHR.Buffer} to the {@link VkPresentRegionKHR#pRectangles} field. */
         public VkPresentRegionKHR.Buffer pRectangles(@Nullable @NativeType("VkRectLayerKHR const *") VkRectLayerKHR.Buffer value) { VkPresentRegionKHR.npRectangles(address(), value); return this; }
 
     }

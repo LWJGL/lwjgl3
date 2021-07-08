@@ -16,50 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code flags} &ndash; use {@code VmaAllocationCreateFlagBits} enum. One or more of:<br><table><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT ALLOCATION_CREATE_NEVER_ALLOCATE_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_MAPPED_BIT ALLOCATION_CREATE_MAPPED_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT ALLOCATION_CREATE_CAN_BECOME_LOST_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT ALLOCATION_CREATE_UPPER_ADDRESS_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_DONT_BIND_BIT ALLOCATION_CREATE_DONT_BIND_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_WITHIN_BUDGET_BIT ALLOCATION_CREATE_WITHIN_BUDGET_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_MIN_FRAGMENTATION_BIT ALLOCATION_CREATE_STRATEGY_MIN_FRAGMENTATION_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_MASK ALLOCATION_CREATE_STRATEGY_MASK}</td></tr></table></li>
- * <li>{@code usage} &ndash; intended usage of memory.
- * 
- * <p>You can leave {@link Vma#VMA_MEMORY_USAGE_UNKNOWN MEMORY_USAGE_UNKNOWN} if you specify memory requirements in other way. If {@code pool} is not null, this member is ignored. One of:<br></p><table><tr><td>{@link Vma#VMA_MEMORY_USAGE_UNKNOWN MEMORY_USAGE_UNKNOWN}</td><td>{@link Vma#VMA_MEMORY_USAGE_GPU_ONLY MEMORY_USAGE_GPU_ONLY}</td><td>{@link Vma#VMA_MEMORY_USAGE_CPU_ONLY MEMORY_USAGE_CPU_ONLY}</td></tr><tr><td>{@link Vma#VMA_MEMORY_USAGE_CPU_TO_GPU MEMORY_USAGE_CPU_TO_GPU}</td><td>{@link Vma#VMA_MEMORY_USAGE_GPU_TO_CPU MEMORY_USAGE_GPU_TO_CPU}</td><td>{@link Vma#VMA_MEMORY_USAGE_CPU_COPY MEMORY_USAGE_CPU_COPY}</td></tr><tr><td>{@link Vma#VMA_MEMORY_USAGE_GPU_LAZILY_ALLOCATED MEMORY_USAGE_GPU_LAZILY_ALLOCATED}</td></tr></table></li>
- * <li>{@code requiredFlags} &ndash; 
- * flags that must be set in a Memory Type chosen for an allocation.
- * 
- * <p>Leave 0 if you specify memory requirements in other way. If {@code pool} is not null, this member is ignored.</p></li>
- * <li>{@code preferredFlags} &ndash; 
- * flags that preferably should be set in a memory type chosen for an allocation.
- * 
- * <p>Set to 0 if no additional flags are prefered. If {@code pool} is not null, this member is ignored.</p></li>
- * <li>{@code memoryTypeBits} &ndash; 
- * bitmask containing one bit set for every memory type acceptable for this allocation.
- * 
- * <p>Value 0 is equivalent to {@code UINT32_MAX} - it means any memory type is accepted if it meets other requirements specified by this structure, with no
- * further restrictions on memory type index. If {@code pool} is not null, this member is ignored.</p></li>
- * <li>{@code pool} &ndash; 
- * pool that this allocation should be created in.
- * 
- * <p>Leave {@code VK_NULL_HANDLE} to allocate from default pool. If not null, members: {@code usage}, {@code requiredFlags}, {@code preferredFlags},
- * {@code memoryTypeBits} are ignored.</p></li>
- * <li>{@code pUserData} &ndash; 
- * custom general-purpose pointer that will be stored in {@code VmaAllocation}, can be read as {@link VmaAllocationInfo}{@code ::pUserData} and changed using
- * {@link Vma#vmaSetAllocationUserData SetAllocationUserData}.
- * 
- * <p>If {@link Vma#VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT} is used, it must be either null or pointer to a null-terminated string. The string will be then copied
- * to internal buffer, so it doesn't need to be valid after allocation call.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VmaAllocationCreateInfo {
- *     VmaAllocationCreateFlags flags;
- *     VmaMemoryUsage usage;
- *     VkMemoryPropertyFlags requiredFlags;
- *     VkMemoryPropertyFlags preferredFlags;
- *     uint32_t memoryTypeBits;
- *     VmaPool pool;
- *     void * pUserData;
+ *     VmaAllocationCreateFlags {@link #flags};
+ *     VmaMemoryUsage {@link #usage};
+ *     VkMemoryPropertyFlags {@link #requiredFlags};
+ *     VkMemoryPropertyFlags {@link #preferredFlags};
+ *     uint32_t {@link #memoryTypeBits};
+ *     VmaPool {@link #pool};
+ *     void * {@link #pUserData};
+ *     float {@link #priority};
  * }</code></pre>
  */
 public class VmaAllocationCreateInfo extends Struct implements NativeResource {
@@ -78,7 +46,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
         PREFERREDFLAGS,
         MEMORYTYPEBITS,
         POOL,
-        PUSERDATA;
+        PUSERDATA,
+        PRIORITY;
 
     static {
         Layout layout = __struct(
@@ -88,7 +57,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
             __member(4),
             __member(4),
             __member(POINTER_SIZE),
-            __member(POINTER_SIZE)
+            __member(POINTER_SIZE),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -101,6 +71,7 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
         MEMORYTYPEBITS = layout.offsetof(4);
         POOL = layout.offsetof(5);
         PUSERDATA = layout.offsetof(6);
+        PRIORITY = layout.offsetof(7);
     }
 
     /**
@@ -116,42 +87,80 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code flags} field. */
+    /** use {@code VmaAllocationCreateFlagBits} enum. One or more of:<br><table><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT ALLOCATION_CREATE_NEVER_ALLOCATE_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_MAPPED_BIT ALLOCATION_CREATE_MAPPED_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT ALLOCATION_CREATE_CAN_BECOME_LOST_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT ALLOCATION_CREATE_CAN_MAKE_OTHER_LOST_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT ALLOCATION_CREATE_UPPER_ADDRESS_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_DONT_BIND_BIT ALLOCATION_CREATE_DONT_BIND_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_WITHIN_BUDGET_BIT ALLOCATION_CREATE_WITHIN_BUDGET_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT ALLOCATION_CREATE_STRATEGY_WORST_FIT_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT}</td></tr><tr><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_MIN_FRAGMENTATION_BIT ALLOCATION_CREATE_STRATEGY_MIN_FRAGMENTATION_BIT}</td><td>{@link Vma#VMA_ALLOCATION_CREATE_STRATEGY_MASK ALLOCATION_CREATE_STRATEGY_MASK}</td></tr></table> */
     @NativeType("VmaAllocationCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code usage} field. */
+    /**
+     * intended usage of memory.
+     * 
+     * <p>You can leave {@link Vma#VMA_MEMORY_USAGE_UNKNOWN MEMORY_USAGE_UNKNOWN} if you specify memory requirements in other way. If {@code pool} is not null, this member is ignored. One of:<br></p><table><tr><td>{@link Vma#VMA_MEMORY_USAGE_UNKNOWN MEMORY_USAGE_UNKNOWN}</td><td>{@link Vma#VMA_MEMORY_USAGE_GPU_ONLY MEMORY_USAGE_GPU_ONLY}</td><td>{@link Vma#VMA_MEMORY_USAGE_CPU_ONLY MEMORY_USAGE_CPU_ONLY}</td></tr><tr><td>{@link Vma#VMA_MEMORY_USAGE_CPU_TO_GPU MEMORY_USAGE_CPU_TO_GPU}</td><td>{@link Vma#VMA_MEMORY_USAGE_GPU_TO_CPU MEMORY_USAGE_GPU_TO_CPU}</td><td>{@link Vma#VMA_MEMORY_USAGE_CPU_COPY MEMORY_USAGE_CPU_COPY}</td></tr><tr><td>{@link Vma#VMA_MEMORY_USAGE_GPU_LAZILY_ALLOCATED MEMORY_USAGE_GPU_LAZILY_ALLOCATED}</td></tr></table>
+     */
     @NativeType("VmaMemoryUsage")
     public int usage() { return nusage(address()); }
-    /** Returns the value of the {@code requiredFlags} field. */
+    /**
+     * flags that must be set in a Memory Type chosen for an allocation.
+     * 
+     * <p>Leave 0 if you specify memory requirements in other way. If {@code pool} is not null, this member is ignored.</p>
+     */
     @NativeType("VkMemoryPropertyFlags")
     public int requiredFlags() { return nrequiredFlags(address()); }
-    /** Returns the value of the {@code preferredFlags} field. */
+    /**
+     * flags that preferably should be set in a memory type chosen for an allocation.
+     * 
+     * <p>Set to 0 if no additional flags are preferred. If {@code pool} is not null, this member is ignored.</p>
+     */
     @NativeType("VkMemoryPropertyFlags")
     public int preferredFlags() { return npreferredFlags(address()); }
-    /** Returns the value of the {@code memoryTypeBits} field. */
+    /**
+     * bitmask containing one bit set for every memory type acceptable for this allocation.
+     * 
+     * <p>Value 0 is equivalent to {@code UINT32_MAX} - it means any memory type is accepted if it meets other requirements specified by this structure, with no
+     * further restrictions on memory type index. If {@code pool} is not null, this member is ignored.</p>
+     */
     @NativeType("uint32_t")
     public int memoryTypeBits() { return nmemoryTypeBits(address()); }
-    /** Returns the value of the {@code pool} field. */
+    /**
+     * pool that this allocation should be created in.
+     * 
+     * <p>Leave {@code VK_NULL_HANDLE} to allocate from default pool. If not null, members: {@code usage}, {@code requiredFlags}, {@code preferredFlags},
+     * {@code memoryTypeBits} are ignored.</p>
+     */
     @NativeType("VmaPool")
     public long pool() { return npool(address()); }
-    /** Returns the value of the {@code pUserData} field. */
+    /**
+     * custom general-purpose pointer that will be stored in {@code VmaAllocation}, can be read as {@link VmaAllocationInfo}{@code ::pUserData} and changed using
+     * {@link Vma#vmaSetAllocationUserData SetAllocationUserData}.
+     * 
+     * <p>If {@link Vma#VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT} is used, it must be either null or pointer to a null-terminated string. The string will be then copied
+     * to internal buffer, so it doesn't need to be valid after allocation call.</p>
+     */
     @NativeType("void *")
     public long pUserData() { return npUserData(address()); }
+    /**
+     * A floating-point value between 0 and 1, indicating the priority of the allocation relative to other memory allocations.
+     * 
+     * <p>It is used only when {@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT} flag was used during creation of the {@code VmaAllocator} object and this allocation
+     * ends up as dedicated or is explicitly forced as dedicated using {@link Vma#VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT}. Otherwise, it has the priority of a memory
+     * block where it is placed and this variable is ignored.</p>
+     */
+    public float priority() { return npriority(address()); }
 
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VmaAllocationCreateInfo flags(@NativeType("VmaAllocationCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code usage} field. */
+    /** Sets the specified value to the {@link #usage} field. */
     public VmaAllocationCreateInfo usage(@NativeType("VmaMemoryUsage") int value) { nusage(address(), value); return this; }
-    /** Sets the specified value to the {@code requiredFlags} field. */
+    /** Sets the specified value to the {@link #requiredFlags} field. */
     public VmaAllocationCreateInfo requiredFlags(@NativeType("VkMemoryPropertyFlags") int value) { nrequiredFlags(address(), value); return this; }
-    /** Sets the specified value to the {@code preferredFlags} field. */
+    /** Sets the specified value to the {@link #preferredFlags} field. */
     public VmaAllocationCreateInfo preferredFlags(@NativeType("VkMemoryPropertyFlags") int value) { npreferredFlags(address(), value); return this; }
-    /** Sets the specified value to the {@code memoryTypeBits} field. */
+    /** Sets the specified value to the {@link #memoryTypeBits} field. */
     public VmaAllocationCreateInfo memoryTypeBits(@NativeType("uint32_t") int value) { nmemoryTypeBits(address(), value); return this; }
-    /** Sets the specified value to the {@code pool} field. */
+    /** Sets the specified value to the {@link #pool} field. */
     public VmaAllocationCreateInfo pool(@NativeType("VmaPool") long value) { npool(address(), value); return this; }
-    /** Sets the specified value to the {@code pUserData} field. */
+    /** Sets the specified value to the {@link #pUserData} field. */
     public VmaAllocationCreateInfo pUserData(@NativeType("void *") long value) { npUserData(address(), value); return this; }
+    /** Sets the specified value to the {@link #priority} field. */
+    public VmaAllocationCreateInfo priority(float value) { npriority(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaAllocationCreateInfo set(
@@ -161,7 +170,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
         int preferredFlags,
         int memoryTypeBits,
         long pool,
-        long pUserData
+        long pUserData,
+        float priority
     ) {
         flags(flags);
         usage(usage);
@@ -170,6 +180,7 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
         memoryTypeBits(memoryTypeBits);
         pool(pool);
         pUserData(pUserData);
+        priority(priority);
 
         return this;
     }
@@ -343,6 +354,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
     public static long npool(long struct) { return memGetAddress(struct + VmaAllocationCreateInfo.POOL); }
     /** Unsafe version of {@link #pUserData}. */
     public static long npUserData(long struct) { return memGetAddress(struct + VmaAllocationCreateInfo.PUSERDATA); }
+    /** Unsafe version of {@link #priority}. */
+    public static float npriority(long struct) { return UNSAFE.getFloat(null, struct + VmaAllocationCreateInfo.PRIORITY); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocationCreateInfo.FLAGS, value); }
@@ -358,6 +371,8 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
     public static void npool(long struct, long value) { memPutAddress(struct + VmaAllocationCreateInfo.POOL, value); }
     /** Unsafe version of {@link #pUserData(long) pUserData}. */
     public static void npUserData(long struct, long value) { memPutAddress(struct + VmaAllocationCreateInfo.PUSERDATA, value); }
+    /** Unsafe version of {@link #priority(float) priority}. */
+    public static void npriority(long struct, float value) { UNSAFE.putFloat(null, struct + VmaAllocationCreateInfo.PRIORITY, value); }
 
     // -----------------------------------
 
@@ -397,42 +412,46 @@ public class VmaAllocationCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VmaAllocationCreateInfo#flags} field. */
         @NativeType("VmaAllocationCreateFlags")
         public int flags() { return VmaAllocationCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code usage} field. */
+        /** @return the value of the {@link VmaAllocationCreateInfo#usage} field. */
         @NativeType("VmaMemoryUsage")
         public int usage() { return VmaAllocationCreateInfo.nusage(address()); }
-        /** Returns the value of the {@code requiredFlags} field. */
+        /** @return the value of the {@link VmaAllocationCreateInfo#requiredFlags} field. */
         @NativeType("VkMemoryPropertyFlags")
         public int requiredFlags() { return VmaAllocationCreateInfo.nrequiredFlags(address()); }
-        /** Returns the value of the {@code preferredFlags} field. */
+        /** @return the value of the {@link VmaAllocationCreateInfo#preferredFlags} field. */
         @NativeType("VkMemoryPropertyFlags")
         public int preferredFlags() { return VmaAllocationCreateInfo.npreferredFlags(address()); }
-        /** Returns the value of the {@code memoryTypeBits} field. */
+        /** @return the value of the {@link VmaAllocationCreateInfo#memoryTypeBits} field. */
         @NativeType("uint32_t")
         public int memoryTypeBits() { return VmaAllocationCreateInfo.nmemoryTypeBits(address()); }
-        /** Returns the value of the {@code pool} field. */
+        /** @return the value of the {@link VmaAllocationCreateInfo#pool} field. */
         @NativeType("VmaPool")
         public long pool() { return VmaAllocationCreateInfo.npool(address()); }
-        /** Returns the value of the {@code pUserData} field. */
+        /** @return the value of the {@link VmaAllocationCreateInfo#pUserData} field. */
         @NativeType("void *")
         public long pUserData() { return VmaAllocationCreateInfo.npUserData(address()); }
+        /** @return the value of the {@link VmaAllocationCreateInfo#priority} field. */
+        public float priority() { return VmaAllocationCreateInfo.npriority(address()); }
 
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VmaAllocationCreateInfo#flags} field. */
         public VmaAllocationCreateInfo.Buffer flags(@NativeType("VmaAllocationCreateFlags") int value) { VmaAllocationCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code usage} field. */
+        /** Sets the specified value to the {@link VmaAllocationCreateInfo#usage} field. */
         public VmaAllocationCreateInfo.Buffer usage(@NativeType("VmaMemoryUsage") int value) { VmaAllocationCreateInfo.nusage(address(), value); return this; }
-        /** Sets the specified value to the {@code requiredFlags} field. */
+        /** Sets the specified value to the {@link VmaAllocationCreateInfo#requiredFlags} field. */
         public VmaAllocationCreateInfo.Buffer requiredFlags(@NativeType("VkMemoryPropertyFlags") int value) { VmaAllocationCreateInfo.nrequiredFlags(address(), value); return this; }
-        /** Sets the specified value to the {@code preferredFlags} field. */
+        /** Sets the specified value to the {@link VmaAllocationCreateInfo#preferredFlags} field. */
         public VmaAllocationCreateInfo.Buffer preferredFlags(@NativeType("VkMemoryPropertyFlags") int value) { VmaAllocationCreateInfo.npreferredFlags(address(), value); return this; }
-        /** Sets the specified value to the {@code memoryTypeBits} field. */
+        /** Sets the specified value to the {@link VmaAllocationCreateInfo#memoryTypeBits} field. */
         public VmaAllocationCreateInfo.Buffer memoryTypeBits(@NativeType("uint32_t") int value) { VmaAllocationCreateInfo.nmemoryTypeBits(address(), value); return this; }
-        /** Sets the specified value to the {@code pool} field. */
+        /** Sets the specified value to the {@link VmaAllocationCreateInfo#pool} field. */
         public VmaAllocationCreateInfo.Buffer pool(@NativeType("VmaPool") long value) { VmaAllocationCreateInfo.npool(address(), value); return this; }
-        /** Sets the specified value to the {@code pUserData} field. */
+        /** Sets the specified value to the {@link VmaAllocationCreateInfo#pUserData} field. */
         public VmaAllocationCreateInfo.Buffer pUserData(@NativeType("void *") long value) { VmaAllocationCreateInfo.npUserData(address(), value); return this; }
+        /** Sets the specified value to the {@link VmaAllocationCreateInfo#priority} field. */
+        public VmaAllocationCreateInfo.Buffer priority(float value) { VmaAllocationCreateInfo.npriority(address(), value); return this; }
 
     }
 

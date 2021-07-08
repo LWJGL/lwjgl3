@@ -71,16 +71,16 @@ public class XrBindingModificationsKHR extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code bindingModificationCount} field. */
+    /** @return the value of the {@code bindingModificationCount} field. */
     @NativeType("uint32_t")
     public int bindingModificationCount() { return nbindingModificationCount(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code bindingModifications} field. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code bindingModifications} field. */
     @Nullable
     @NativeType("XrBindingModificationBaseHeaderKHR const * const *")
     public PointerBuffer bindingModifications() { return nbindingModifications(address()); }
@@ -320,16 +320,16 @@ public class XrBindingModificationsKHR extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrBindingModificationsKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrBindingModificationsKHR.nnext(address()); }
-        /** Returns the value of the {@code bindingModificationCount} field. */
+        /** @return the value of the {@code bindingModificationCount} field. */
         @NativeType("uint32_t")
         public int bindingModificationCount() { return XrBindingModificationsKHR.nbindingModificationCount(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code bindingModifications} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code bindingModifications} field. */
         @Nullable
         @NativeType("XrBindingModificationBaseHeaderKHR const * const *")
         public PointerBuffer bindingModifications() { return XrBindingModificationsKHR.nbindingModifications(address()); }

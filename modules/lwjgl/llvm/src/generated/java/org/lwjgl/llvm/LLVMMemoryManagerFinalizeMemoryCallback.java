@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * LLVMBool (*) (
+ * LLVMBool (*{@link #invoke}) (
  *     void *Opaque,
  *     char **ErrMsg
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class LLVMMemoryManagerFinalizeMemoryCallback extends Callback i
     }
 
     protected LLVMMemoryManagerFinalizeMemoryCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     LLVMMemoryManagerFinalizeMemoryCallback(long functionPointer) {

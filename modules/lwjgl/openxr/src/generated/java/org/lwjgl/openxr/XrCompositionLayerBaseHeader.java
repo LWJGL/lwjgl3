@@ -72,16 +72,16 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code layerFlags} field. */
+    /** @return the value of the {@code layerFlags} field. */
     @NativeType("XrCompositionLayerFlags")
     public long layerFlags() { return nlayerFlags(address()); }
-    /** Returns the value of the {@code space} field. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
 
@@ -341,16 +341,16 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerBaseHeader.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerBaseHeader.nnext(address()); }
-        /** Returns the value of the {@code layerFlags} field. */
+        /** @return the value of the {@code layerFlags} field. */
         @NativeType("XrCompositionLayerFlags")
         public long layerFlags() { return XrCompositionLayerBaseHeader.nlayerFlags(address()); }
-        /** Returns the value of the {@code space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrCompositionLayerBaseHeader.nspace(address()); }
 

@@ -13,13 +13,13 @@ import static org.lwjgl.system.JNI.*;
 /** The EXT_conformance_automation extension. */
 public class EXTConformanceAutomation {
 
+    static { Library.initialize(); }
+
     /** The extension specification version. */
     public static final int XR_EXT_conformance_automation_SPEC_VERSION = 1;
 
     /** The extension name. */
     public static final String XR_EXT_CONFORMANCE_AUTOMATION_EXTENSION_NAME = "XR_EXT_conformance_automation";
-
-    static { Library.initialize(); }
 
     protected EXTConformanceAutomation() {
         throw new UnsupportedOperationException();

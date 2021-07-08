@@ -16,7 +16,9 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The {@code VK_EXT_metal_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@link KHRSurface VK_KHR_surface} extension) from dlink:CAMetalLayer, which is the native rendering surface of Apple's Metal framework.
+ * The {@code VK_EXT_metal_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@link KHRSurface VK_KHR_surface} extension) from {@code CAMetalLayer}, which is the native rendering surface of Apple's Metal framework.
+ * 
+ * <h5>VK_EXT_metal_surface</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -36,6 +38,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>Dzmitry Malyshau <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_metal_surface:%20&amp;body=@kvark%20">kvark</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-10-01</dd>
  * <dt><b>IP Status</b></dt>
@@ -79,7 +86,7 @@ public class EXTMetalSurface {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To create a {@code VkSurfaceKHR} object for a dlink:CAMetalLayer, call:</p>
+     * <p>To create a {@code VkSurfaceKHR} object for a {@code CAMetalLayer}, call:</p>
      * 
      * <pre><code>
      * VkResult vkCreateMetalSurfaceEXT(

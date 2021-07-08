@@ -588,6 +588,16 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
+        Set whether the fbx importer will read weights.
+
+        Property type: bool. The default value is true (1)
+        """,
+
+        "AI_CONFIG_IMPORT_FBX_READ_WEIGHTS".."IMPORT_FBX_READ_WEIGHTS"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Set whether the fbx importer will act in strict mode in which only FBX 2013 is supported and any other sub formats are rejected. FBX 2013 is the
         primary target for the importer, so this format is best supported and well-tested.
 
@@ -1289,7 +1299,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
     ).noPrefix()
 
     EnumConstant(
-        "Standard return type for some library functions. Rarely used.",
+        "Standard return type for some library functions, rarely used. (@code aiReturn}",
 
         "Return_SUCCESS".enum("Indicates that a function was successful.", 0x0),
         "Return_FAILURE".enum("Indicates that a function failed.", -0x1),
@@ -1604,11 +1614,11 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
     /*aiLogStream(
         "GetPredefinedLogStream",
         """
-        Get one of the predefine log streams. This is the quick'n'easy solution to access Assimp's log system. Attaching a log stream can slightly reduce
-        Assimp's overall import performance.
+        Get one of the predefine log streams.
+
+        This is the quick'n'easy solution to access Assimp's log system. Attaching a log stream can slightly reduce Assimp's overall import performance.
 
         Usage is rather simple (this will stream the log to a file, named log.txt, and the stdout stream of the process:
-
         ${codeBlock("""
 struct aiLogStream c;
 c = aiGetPredefinedLogStream(aiDefaultLogStream_FILE, "log.txt");
@@ -1620,52 +1630,60 @@ aiAttachLogStream(&c);""")}
         aiDefaultLogStream("pStreams", "One of the {@code aiDefaultLogStream} enumerated values.", "DefaultLogStream_\\w+"),
         nullable..charUTF8.const.p("file", "Solely for the #DefaultLogStream_FILE flag: specifies the file to write to. Pass #NULL for all other flags."),
 
-        returnDoc = "The log stream. callback is set to #NULL if something went wrong."
+        returnDoc = "The log stream. {@code callback} is set to #NULL if something went wrong."
     )*/
 
-    /*javaImport("static org.lwjgl.system.dyncall.DynCall.*")
+    javaImport(
+        "org.lwjgl.system.libffi.*",
+        "static org.lwjgl.system.libffi.LibFFI.*"
+    )
 
     customMethod("""
     private static final long GetPredefinedLogStream = ASSIMP.getFunctionAddress("aiGetPredefinedLogStream");
+    
+    private static final FFICIF GetPredefinedLogStreamCIF = apiCreateCIF(
+        FFI_DEFAULT_ABI, apiCreateStruct(ffi_type_pointer, ffi_type_pointer),
+        ffi_type_uint32, ffi_type_pointer
+    );
 
     /** Unsafe version of: {@link #aiGetPredefinedLogStream GetPredefinedLogStream} */
     public static void naiGetPredefinedLogStream(int pStreams, long file, long __result) {
-        long s = dcNewStruct(2, 0);
-        dcStructField(s, DC_SIGCHAR_POINTER, 0, 1);
-        dcStructField(s, DC_SIGCHAR_POINTER, 0, 1);
-        dcCloseStruct(s);
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            long values = stack.nmalloc(POINTER_SIZE,POINTER_SIZE * 2);
+            memPutInt(values, pStreams);
+            memPutAddress(values + POINTER_SIZE, file);
 
-        long vm = dcNewCallVM(8192);
-        dcMode(vm, DC_CALL_C_DEFAULT);
-        {
-            dcReset(vm);
-            dcArgInt(vm, pStreams);
-            dcArgPointer(vm, file);
-            dcCallStruct(vm, GetPredefinedLogStream, s, __result);
+            long arguments = stack.nmalloc(POINTER_SIZE,POINTER_SIZE * 2);
+            memPutAddress(arguments, values);
+            memPutAddress(arguments + POINTER_SIZE, values + POINTER_SIZE);
+
+            nffi_call(GetPredefinedLogStreamCIF.address(), GetPredefinedLogStream, __result, arguments);
+        } finally {
+            stack.setPointer(stackPointer);
         }
-        dcFree(vm);
-        dcFreeStruct(s);
     }
 
     /**
-     * Get one of the predefine log streams. This is the quick'n'easy solution to access Assimp's log system. Attaching a log stream can slightly reduce
-     * Assimp's overall import performance.
+     * Get one of the predefine log streams.
+     *
+     * <p>This is the quick'n'easy solution to access Assimp's log system. Attaching a log stream can slightly reduce Assimp's overall import performance.</p>
      *
      * <p>Usage is rather simple (this will stream the log to a file, named log.txt, and the stdout stream of the process:</p>
      *
-     * <code><pre>
+     * <pre><code>
      * struct aiLogStream c;
      * c = aiGetPredefinedLogStream(aiDefaultLogStream_FILE, "log.txt");
-     * aiAttachLogStream(&c);
+     * aiAttachLogStream(&amp;c);
      * c = aiGetPredefinedLogStream(aiDefaultLogStream_STDOUT, NULL);
-     * aiAttachLogStream(&c);</pre></code>
+     * aiAttachLogStream(&amp;c);</code></pre>
      *
      * @param pStreams One of the {@code aiDefaultLogStream} enumerated values. One of:<br><table><tr><td>{@link #aiDefaultLogStream_FILE DefaultLogStream_FILE}</td><td>{@link #aiDefaultLogStream_STDOUT DefaultLogStream_STDOUT}</td><td>{@link #aiDefaultLogStream_STDERR DefaultLogStream_STDERR}</td></tr><tr><td>{@link #aiDefaultLogStream_DEBUGGER DefaultLogStream_DEBUGGER}</td></tr></table>
      * @param file     Solely for the {@link #aiDefaultLogStream_FILE DefaultLogStream_FILE} flag: specifies the file to write to. Pass {@code NULL} for all other flags.
-     * @param __result The log stream. callback is set to {@code NULL} if something went wrong.
+     * @param __result The log stream. {@code callback} is set to {@code NULL} if something went wrong.
      */
     @NativeType("struct aiLogStream")
-    public static AILogStream aiGetPredefinedLogStream(@NativeType("aiDefaultLogStream") int pStreams, @Nullable @NativeType("char const *") ByteBuffer file, AILogStream __result) {
+    public static AILogStream aiGetPredefinedLogStream(@NativeType("aiDefaultLogStream") int pStreams, @Nullable @NativeType("char const *") ByteBuffer file, @NativeType("struct aiLogStream") AILogStream __result) {
         if (CHECKS) {
             checkNT1Safe(file);
         }
@@ -1674,34 +1692,35 @@ aiAttachLogStream(&c);""")}
     }
 
     /**
-     * Get one of the predefine log streams. This is the quick'n'easy solution to access Assimp's log system. Attaching a log stream can slightly reduce
-     * Assimp's overall import performance.
+     * Get one of the predefine log streams.
+     *
+     * <p>This is the quick'n'easy solution to access Assimp's log system. Attaching a log stream can slightly reduce Assimp's overall import performance.</p>
      *
      * <p>Usage is rather simple (this will stream the log to a file, named log.txt, and the stdout stream of the process:</p>
      *
-     * <code><pre>
+     * <pre><code>
      * struct aiLogStream c;
      * c = aiGetPredefinedLogStream(aiDefaultLogStream_FILE, "log.txt");
-     * aiAttachLogStream(&c);
+     * aiAttachLogStream(&amp;c);
      * c = aiGetPredefinedLogStream(aiDefaultLogStream_STDOUT, NULL);
-     * aiAttachLogStream(&c);</pre></code>
+     * aiAttachLogStream(&amp;c);</code></pre>
      *
      * @param pStreams One of the {@code aiDefaultLogStream} enumerated values. One of:<br><table><tr><td>{@link #aiDefaultLogStream_FILE DefaultLogStream_FILE}</td><td>{@link #aiDefaultLogStream_STDOUT DefaultLogStream_STDOUT}</td><td>{@link #aiDefaultLogStream_STDERR DefaultLogStream_STDERR}</td></tr><tr><td>{@link #aiDefaultLogStream_DEBUGGER DefaultLogStream_DEBUGGER}</td></tr></table>
      * @param file     Solely for the {@link #aiDefaultLogStream_FILE DefaultLogStream_FILE} flag: specifies the file to write to. Pass {@code NULL} for all other flags.
-     * @param __result The log stream. callback is set to {@code NULL} if something went wrong.
+     * @param __result The log stream. {@code callback} is set to {@code NULL} if something went wrong.
      */
     @NativeType("struct aiLogStream")
-    public static AILogStream aiGetPredefinedLogStream(@NativeType("aiDefaultLogStream") int pStreams, @Nullable @NativeType("char const *") CharSequence file, AILogStream __result) {
-        MemoryStack stack        = stackGet();
-        int         stackPointer = stack.getPointer();
+    public static AILogStream aiGetPredefinedLogStream(@NativeType("aiDefaultLogStream") int pStreams, @Nullable @NativeType("char const *") CharSequence file, @NativeType("struct aiLogStream") AILogStream __result) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            ByteBuffer fileEncoded = stack.UTF8Safe(file);
-            naiGetPredefinedLogStream(pStreams, memAddressSafe(fileEncoded), __result.address());
+            stack.nUTF8Safe(file, true);
+            long fileEncoded = file == null ? NULL : stack.getPointerAddress();
+            naiGetPredefinedLogStream(pStreams, fileEncoded, __result.address());
             return __result;
         } finally {
             stack.setPointer(stackPointer);
         }
-    }""")*/
+    }""")
 
     void(
         "AttachLogStream",
@@ -2861,6 +2880,14 @@ aiAttachLogStream(&c);""")}
         "AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS".."\$mat.gltf.pbrSpecularGlossiness",
         "AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_GLOSSINESS_FACTOR".."\$mat.gltf.pbrMetallicRoughness.glossinessFactor",
         "AI_MATKEY_GLTF_UNLIT".."\$mat.gltf.unlit",
+        "AI_MATKEY_GLTF_MATERIAL_SHEEN".."\$mat.gltf.materialSheen",
+        "AI_MATKEY_GLTF_MATERIAL_SHEEN_COLOR_FACTOR".."\$mat.gltf.materialSheen.sheenColorFactor",
+        "AI_MATKEY_GLTF_MATERIAL_SHEEN_ROUGHNESS_FACTOR".."\$mat.gltf.materialSheen.sheenRoughnessFactor",
+        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT".."\$mat.gltf.materialClearcoat",
+        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_FACTOR".."\$mat.gltf.materialClearcoat.clearcoatFactor",
+        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_ROUGHNESS_FACTOR".."\$mat.gltf.materialClearcoat.clearcoatRoughnessFactor",
+        "AI_MATKEY_GLTF_MATERIAL_TRANSMISSION".."\$mat.gltf.materialTransmission",
+        "AI_MATKEY_GLTF_MATERIAL_TRANSMISSION_FACTOR".."\$mat.gltf.materialTransmission.transmissionFactor",
 
         "_AI_MATKEY_GLTF_TEXTURE_TEXCOORD_BASE".."\$tex.file.texCoord",
         "_AI_MATKEY_GLTF_MAPPINGNAME_BASE".."\$tex.mappingname",
@@ -2874,7 +2901,13 @@ aiAttachLogStream(&c);""")}
     IntConstant(
         "",
         "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_TEXTURE".."aiTextureType_DIFFUSE",
-        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN"
+        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN",
+        "AI_MATKEY_GLTF_MATERIAL_SHEEN_COLOR_TEXTURE".."aiTextureType_UNKNOWN",
+        "AI_MATKEY_GLTF_MATERIAL_SHEEN_ROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN",
+        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_TEXTURE".."aiTextureType_UNKNOWN",
+        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_ROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN",
+        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_NORMAL_TEXTURE".."aiTextureType_UNKNOWN",
+        "AI_MATKEY_GLTF_MATERIAL_TRANSMISSION_TEXTURE".."aiTextureType_UNKNOWN"
     ).noPrefix()
 
     charASCII.const.p(

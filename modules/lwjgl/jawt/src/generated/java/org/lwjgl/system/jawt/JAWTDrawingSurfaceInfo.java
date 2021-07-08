@@ -14,28 +14,15 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code platformInfo} &ndash; 
- * Pointer to the platform-specific information. This can be safely cast to a {@code JAWT_Win32DrawingSurfaceInfo} on Windows or a
- * {@code JAWT_X11DrawingSurfaceInfo} on Solaris. On Mac OS X this is a pointer to a {@code NSObject} that conforms to the {@code JAWT_SurfaceLayers}
- * protocol.</li>
- * <li>{@code ds} &ndash; Cached pointer to the underlying drawing surface.</li>
- * <li>{@code bounds} &ndash; Bounding rectangle of the drawing surface.</li>
- * <li>{@code clipSize} &ndash; Number of rectangles in the clip.</li>
- * <li>{@code clip} &ndash; Clip rectangle array.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct JAWT_DrawingSurfaceInfo {
- *     void * platformInfo;
- *     {@link JAWTDrawingSurface JAWT_DrawingSurface} * ds;
- *     {@link JAWTRectangle JAWT_Rectangle} bounds;
- *     jint clipSize;
- *     {@link JAWTRectangle JAWT_Rectangle} * clip;
+ *     void * {@link #platformInfo};
+ *     {@link JAWTDrawingSurface JAWT_DrawingSurface} * {@link #ds};
+ *     {@link JAWTRectangle JAWT_Rectangle} {@link #bounds};
+ *     jint {@link #clipSize};
+ *     {@link JAWTRectangle JAWT_Rectangle} * {@link #clip};
  * }</code></pre>
  */
 @NativeType("struct JAWT_DrawingSurfaceInfo")
@@ -87,19 +74,23 @@ public class JAWTDrawingSurfaceInfo extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code platformInfo} field. */
+    /**
+     * Pointer to the platform-specific information. This can be safely cast to a {@code JAWT_Win32DrawingSurfaceInfo} on Windows or a
+     * {@code JAWT_X11DrawingSurfaceInfo} on Solaris. On Mac OS X this is a pointer to a {@code NSObject} that conforms to the {@code JAWT_SurfaceLayers}
+     * protocol.
+     */
     @NativeType("void *")
     public long platformInfo() { return nplatformInfo(address()); }
-    /** Returns a {@link JAWTDrawingSurface} view of the struct pointed to by the {@code ds} field. */
+    /** Cached pointer to the underlying drawing surface. */
     @NativeType("JAWT_DrawingSurface *")
     public JAWTDrawingSurface ds() { return nds(address()); }
-    /** Returns a {@link JAWTRectangle} view of the {@code bounds} field. */
+    /** Bounding rectangle of the drawing surface. */
     @NativeType("JAWT_Rectangle")
     public JAWTRectangle bounds() { return nbounds(address()); }
-    /** Returns the value of the {@code clipSize} field. */
+    /** Number of rectangles in the clip. */
     @NativeType("jint")
     public int clipSize() { return nclipSize(address()); }
-    /** Returns a {@link JAWTRectangle.Buffer} view of the struct array pointed to by the {@code clip} field. */
+    /** Clip rectangle array. */
     @NativeType("JAWT_Rectangle *")
     public JAWTRectangle.Buffer clip() { return nclip(address()); }
 
@@ -183,19 +174,19 @@ public class JAWTDrawingSurfaceInfo extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code platformInfo} field. */
+        /** @return the value of the {@link JAWTDrawingSurfaceInfo#platformInfo} field. */
         @NativeType("void *")
         public long platformInfo() { return JAWTDrawingSurfaceInfo.nplatformInfo(address()); }
-        /** Returns a {@link JAWTDrawingSurface} view of the struct pointed to by the {@code ds} field. */
+        /** @return a {@link JAWTDrawingSurface} view of the struct pointed to by the {@link JAWTDrawingSurfaceInfo#ds} field. */
         @NativeType("JAWT_DrawingSurface *")
         public JAWTDrawingSurface ds() { return JAWTDrawingSurfaceInfo.nds(address()); }
-        /** Returns a {@link JAWTRectangle} view of the {@code bounds} field. */
+        /** @return a {@link JAWTRectangle} view of the {@link JAWTDrawingSurfaceInfo#bounds} field. */
         @NativeType("JAWT_Rectangle")
         public JAWTRectangle bounds() { return JAWTDrawingSurfaceInfo.nbounds(address()); }
-        /** Returns the value of the {@code clipSize} field. */
+        /** @return the value of the {@link JAWTDrawingSurfaceInfo#clipSize} field. */
         @NativeType("jint")
         public int clipSize() { return JAWTDrawingSurfaceInfo.nclipSize(address()); }
-        /** Returns a {@link JAWTRectangle.Buffer} view of the struct array pointed to by the {@code clip} field. */
+        /** @return a {@link JAWTRectangle.Buffer} view of the struct array pointed to by the {@link JAWTDrawingSurfaceInfo#clip} field. */
         @NativeType("JAWT_Rectangle *")
         public JAWTRectangle.Buffer clip() { return JAWTDrawingSurfaceInfo.nclip(address()); }
 

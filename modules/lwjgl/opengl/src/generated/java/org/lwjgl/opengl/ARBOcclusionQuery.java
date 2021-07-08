@@ -58,6 +58,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBOcclusionQuery {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code target} parameter of BeginQueryARB, EndQueryARB, and GetQueryivARB. */
     public static final int GL_SAMPLES_PASSED_ARB = 0x8914;
 
@@ -70,8 +72,6 @@ public class ARBOcclusionQuery {
     public static final int
         GL_QUERY_RESULT_ARB           = 0x8866,
         GL_QUERY_RESULT_AVAILABLE_ARB = 0x8867;
-
-    static { GL.initialize(); }
 
     protected ARBOcclusionQuery() {
         throw new UnsupportedOperationException();

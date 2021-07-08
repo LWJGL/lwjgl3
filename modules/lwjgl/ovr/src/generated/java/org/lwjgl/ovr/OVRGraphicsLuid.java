@@ -21,17 +21,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>For Windows this is a LUID type.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code Reserved[8]} &ndash; public definition reserves space for graphics API-specific implementation.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrGraphicsLuid {
- *     char Reserved[8];
+ *     char {@link #Reserved}[8];
  * }</code></pre>
  */
 @NativeType("struct ovrGraphicsLuid")
@@ -72,10 +66,10 @@ public class OVRGraphicsLuid extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code Reserved} field. */
+    /** public definition reserves space for graphics API-specific implementation. */
     @NativeType("char[8]")
     public ByteBuffer Reserved() { return nReserved(address()); }
-    /** Returns the value at the specified index of the {@code Reserved} field. */
+    /** public definition reserves space for graphics API-specific implementation. */
     @NativeType("char")
     public byte Reserved(int index) { return nReserved(address(), index); }
 
@@ -267,10 +261,10 @@ public class OVRGraphicsLuid extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code Reserved} field. */
+        /** @return a {@link ByteBuffer} view of the {@link OVRGraphicsLuid#Reserved} field. */
         @NativeType("char[8]")
         public ByteBuffer Reserved() { return OVRGraphicsLuid.nReserved(address()); }
-        /** Returns the value at the specified index of the {@code Reserved} field. */
+        /** @return the value at the specified index of the {@link OVRGraphicsLuid#Reserved} field. */
         @NativeType("char")
         public byte Reserved(int index) { return OVRGraphicsLuid.nReserved(address(), index); }
 

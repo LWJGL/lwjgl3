@@ -66,13 +66,13 @@ public class CXIdxCXXClassDeclInfo extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link CXIdxDeclInfo} view of the struct pointed to by the {@code declInfo} field. */
+    /** @return a {@link CXIdxDeclInfo} view of the struct pointed to by the {@code declInfo} field. */
     @NativeType("CXIdxDeclInfo const *")
     public CXIdxDeclInfo declInfo() { return ndeclInfo(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code bases} field. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code bases} field. */
     @NativeType("CXIdxBaseClassInfo const * const *")
     public PointerBuffer bases() { return nbases(address()); }
-    /** Returns the value of the {@code numBases} field. */
+    /** @return the value of the {@code numBases} field. */
     @NativeType("unsigned")
     public int numBases() { return nnumBases(address()); }
 
@@ -152,13 +152,13 @@ public class CXIdxCXXClassDeclInfo extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link CXIdxDeclInfo} view of the struct pointed to by the {@code declInfo} field. */
+        /** @return a {@link CXIdxDeclInfo} view of the struct pointed to by the {@code declInfo} field. */
         @NativeType("CXIdxDeclInfo const *")
         public CXIdxDeclInfo declInfo() { return CXIdxCXXClassDeclInfo.ndeclInfo(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code bases} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code bases} field. */
         @NativeType("CXIdxBaseClassInfo const * const *")
         public PointerBuffer bases() { return CXIdxCXXClassDeclInfo.nbases(address()); }
-        /** Returns the value of the {@code numBases} field. */
+        /** @return the value of the {@code numBases} field. */
         @NativeType("unsigned")
         public int numBases() { return CXIdxCXXClassDeclInfo.nnumBases(address()); }
 

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void *user_data
  * )</code></pre>
  */
@@ -49,7 +49,7 @@ public abstract class CXExecuteOnThread extends Callback implements CXExecuteOnT
     }
 
     protected CXExecuteOnThread() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CXExecuteOnThread(long functionPointer) {

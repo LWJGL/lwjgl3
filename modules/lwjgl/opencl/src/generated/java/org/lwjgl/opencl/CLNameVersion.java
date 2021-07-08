@@ -64,13 +64,13 @@ public class CLNameVersion extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code version} field. */
+    /** @return the value of the {@code version} field. */
     @NativeType("cl_version")
     public int version() { return nversion(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+    /** @return a {@link ByteBuffer} view of the {@code name} field. */
     @NativeType("char[64]")
     public ByteBuffer name() { return nname(address()); }
-    /** Decodes the null-terminated string stored in the {@code name} field. */
+    /** @return the null-terminated string stored in the {@code name} field. */
     @NativeType("char[64]")
     public String nameString() { return nnameString(address()); }
 
@@ -262,13 +262,13 @@ public class CLNameVersion extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code version} field. */
+        /** @return the value of the {@code version} field. */
         @NativeType("cl_version")
         public int version() { return CLNameVersion.nversion(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+        /** @return a {@link ByteBuffer} view of the {@code name} field. */
         @NativeType("char[64]")
         public ByteBuffer name() { return CLNameVersion.nname(address()); }
-        /** Decodes the null-terminated string stored in the {@code name} field. */
+        /** @return the null-terminated string stored in the {@code name} field. */
         @NativeType("char[64]")
         public String nameString() { return CLNameVersion.nnameString(address()); }
 

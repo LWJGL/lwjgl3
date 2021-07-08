@@ -26,6 +26,8 @@ import org.lwjgl.system.*;
  */
 public class GL15 extends GL14 {
 
+    static { GL.initialize(); }
+
     /** New token names. */
     public static final int
         GL_FOG_COORD_SRC                  = 0x8450,
@@ -108,8 +110,6 @@ public class GL15 extends GL14 {
     public static final int
         GL_QUERY_RESULT           = 0x8866,
         GL_QUERY_RESULT_AVAILABLE = 0x8867;
-
-    static { GL.initialize(); }
 
     protected GL15() {
         throw new UnsupportedOperationException();

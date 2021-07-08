@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void * (*) (
+ * void * (*{@link #invoke}) (
  *     bgfx_allocator_interface_t *_this,
  *     void *_ptr,
  *     size_t _size,
@@ -54,7 +54,7 @@ public abstract class BGFXReallocCallback extends Callback implements BGFXReallo
     }
 
     protected BGFXReallocCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     BGFXReallocCallback(long functionPointer) {

@@ -16,7 +16,13 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The {@code VK_MVK_macos_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@link KHRSurface VK_KHR_surface} extension) that refers to an {@code NSView}, the native surface type of macOS, which is underpinned by a dlink:CAMetalLayer, to support rendering to the surface using Apple's Metal framework.
+ * The {@code VK_MVK_macos_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@link KHRSurface VK_KHR_surface} extension) based on an {@code NSView}, the native surface type of macOS, which is underpinned by a {@code CAMetalLayer}, to support rendering to the surface using Apple's Metal framework.
+ * 
+ * <h5>Deprecation by {@code VK_EXT_metal_surface}</h5>
+ * 
+ * <p>The {@code VK_MVK_macos_surface} extension is considered deprecated and has been superseded by the {@link EXTMetalSurface VK_EXT_metal_surface} extension.</p>
+ * 
+ * <h5>VK_MVK_macos_surface</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -26,18 +32,27 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>124</dd>
  * <dt><b>Revision</b></dt>
- * <dd>2</dd>
+ * <dd>3</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
  * <li>Requires {@link KHRSurface VK_KHR_surface}</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Deprecated</em> by {@link EXTMetalSurface VK_EXT_metal_surface} extension</li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Bill Hollings <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_MVK_macos_surface:%20&amp;body=@billhollings%20">billhollings</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2017-02-24</dd>
+ * <dd>2020-07-31</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -49,7 +64,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class MVKMacosSurface {
 
     /** The extension specification version. */
-    public static final int VK_MVK_MACOS_SURFACE_SPEC_VERSION = 2;
+    public static final int VK_MVK_MACOS_SURFACE_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String VK_MVK_MACOS_SURFACE_EXTENSION_NAME = "VK_MVK_macos_surface";
@@ -79,7 +94,7 @@ public class MVKMacosSurface {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To create a {@code VkSurfaceKHR} object for a macOS {@code NSView}, call:</p>
+     * <p>To create a {@code VkSurfaceKHR} object for a macOS {@code NSView} or {@code CAMetalLayer}, call:</p>
      * 
      * <pre><code>
      * VkResult vkCreateMacOSSurfaceMVK(
@@ -87,6 +102,13 @@ public class MVKMacosSurface {
      *     const VkMacOSSurfaceCreateInfoMVK*          pCreateInfo,
      *     const VkAllocationCallbacks*                pAllocator,
      *     VkSurfaceKHR*                               pSurface);</code></pre>
+     * 
+     * <h5>Description</h5>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>The {@code vkCreateMacOSSurfaceMVK} function is considered deprecated and has been superseded by {@link EXTMetalSurface#vkCreateMetalSurfaceEXT CreateMetalSurfaceEXT} from the {@link EXTMetalSurface VK_EXT_metal_surface} extension.</p>
+     * </div>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

@@ -78,19 +78,19 @@ public class EXRChannelInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+    /** @return a {@link ByteBuffer} view of the {@code name} field. */
     @NativeType("char[256]")
     public ByteBuffer name() { return nname(address()); }
-    /** Decodes the null-terminated string stored in the {@code name} field. */
+    /** @return the null-terminated string stored in the {@code name} field. */
     @NativeType("char[256]")
     public String nameString() { return nnameString(address()); }
-    /** Returns the value of the {@code pixel_type} field. */
+    /** @return the value of the {@code pixel_type} field. */
     public int pixel_type() { return npixel_type(address()); }
-    /** Returns the value of the {@code x_sampling} field. */
+    /** @return the value of the {@code x_sampling} field. */
     public int x_sampling() { return nx_sampling(address()); }
-    /** Returns the value of the {@code y_sampling} field. */
+    /** @return the value of the {@code y_sampling} field. */
     public int y_sampling() { return ny_sampling(address()); }
-    /** Returns the value of the {@code p_linear} field. */
+    /** @return the value of the {@code p_linear} field. */
     @NativeType("unsigned char")
     public byte p_linear() { return np_linear(address()); }
 
@@ -345,19 +345,19 @@ public class EXRChannelInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+        /** @return a {@link ByteBuffer} view of the {@code name} field. */
         @NativeType("char[256]")
         public ByteBuffer name() { return EXRChannelInfo.nname(address()); }
-        /** Decodes the null-terminated string stored in the {@code name} field. */
+        /** @return the null-terminated string stored in the {@code name} field. */
         @NativeType("char[256]")
         public String nameString() { return EXRChannelInfo.nnameString(address()); }
-        /** Returns the value of the {@code pixel_type} field. */
+        /** @return the value of the {@code pixel_type} field. */
         public int pixel_type() { return EXRChannelInfo.npixel_type(address()); }
-        /** Returns the value of the {@code x_sampling} field. */
+        /** @return the value of the {@code x_sampling} field. */
         public int x_sampling() { return EXRChannelInfo.nx_sampling(address()); }
-        /** Returns the value of the {@code y_sampling} field. */
+        /** @return the value of the {@code y_sampling} field. */
         public int y_sampling() { return EXRChannelInfo.ny_sampling(address()); }
-        /** Returns the value of the {@code p_linear} field. */
+        /** @return the value of the {@code p_linear} field. */
         @NativeType("unsigned char")
         public byte p_linear() { return EXRChannelInfo.np_linear(address()); }
 

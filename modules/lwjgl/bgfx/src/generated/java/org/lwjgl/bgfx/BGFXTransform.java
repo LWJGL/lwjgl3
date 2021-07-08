@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Transform data.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code data} &ndash; pointer to first 4x4 matrix</li>
- * <li>{@code num} &ndash; number of matrices</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct bgfx_transform_t {
- *     float * data;
- *     uint16_t num;
+ *     float * {@link #data};
+ *     uint16_t {@link #num};
  * }</code></pre>
  */
 @NativeType("struct bgfx_transform_t")
@@ -73,10 +66,10 @@ public class BGFXTransform extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link FloatBuffer} view of the data pointed to by the {@code data} field. */
+    /** pointer to first 4x4 matrix */
     @NativeType("float *")
     public FloatBuffer data() { return ndata(address()); }
-    /** Returns the value of the {@code num} field. */
+    /** number of matrices */
     @NativeType("uint16_t")
     public short num() { return nnum(address()); }
 
@@ -266,10 +259,10 @@ public class BGFXTransform extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link FloatBuffer} view of the data pointed to by the {@code data} field. */
+        /** @return a {@link FloatBuffer} view of the data pointed to by the {@link BGFXTransform#data} field. */
         @NativeType("float *")
         public FloatBuffer data() { return BGFXTransform.ndata(address()); }
-        /** Returns the value of the {@code num} field. */
+        /** @return the value of the {@link BGFXTransform#num} field. */
         @NativeType("uint16_t")
         public short num() { return BGFXTransform.nnum(address()); }
 

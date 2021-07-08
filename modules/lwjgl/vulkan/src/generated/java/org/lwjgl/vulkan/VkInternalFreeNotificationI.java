@@ -6,8 +6,11 @@
 package org.lwjgl.vulkan;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Application-defined memory free notification function.
@@ -29,20 +32,24 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("PFN_vkInternalFreeNotification")
-public interface VkInternalFreeNotificationI extends CallbackI.V {
+public interface VkInternalFreeNotificationI extends CallbackI {
 
-    String SIGNATURE = Callback.__stdcall("(ppii)v");
+    FFICIF CIF = apiCreateCIF(
+        apiStdcall(),
+        ffi_type_void,
+        ffi_type_pointer, ffi_type_pointer, ffi_type_uint32, ffi_type_uint32
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args),
-            dcbArgPointer(args),
-            dcbArgInt(args),
-            dcbArgInt(args)
+            memGetAddress(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 3 * POINTER_SIZE))
         );
     }
 

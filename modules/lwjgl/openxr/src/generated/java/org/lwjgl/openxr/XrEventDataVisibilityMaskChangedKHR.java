@@ -76,19 +76,19 @@ public class XrEventDataVisibilityMaskChangedKHR extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code session} field. */
+    /** @return the value of the {@code session} field. */
     @NativeType("XrSession")
     public long session() { return nsession(address()); }
-    /** Returns the value of the {@code viewConfigurationType} field. */
+    /** @return the value of the {@code viewConfigurationType} field. */
     @NativeType("XrViewConfigurationType")
     public int viewConfigurationType() { return nviewConfigurationType(address()); }
-    /** Returns the value of the {@code viewIndex} field. */
+    /** @return the value of the {@code viewIndex} field. */
     @NativeType("uint32_t")
     public int viewIndex() { return nviewIndex(address()); }
 
@@ -356,19 +356,19 @@ public class XrEventDataVisibilityMaskChangedKHR extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataVisibilityMaskChangedKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataVisibilityMaskChangedKHR.nnext(address()); }
-        /** Returns the value of the {@code session} field. */
+        /** @return the value of the {@code session} field. */
         @NativeType("XrSession")
         public long session() { return XrEventDataVisibilityMaskChangedKHR.nsession(address()); }
-        /** Returns the value of the {@code viewConfigurationType} field. */
+        /** @return the value of the {@code viewConfigurationType} field. */
         @NativeType("XrViewConfigurationType")
         public int viewConfigurationType() { return XrEventDataVisibilityMaskChangedKHR.nviewConfigurationType(address()); }
-        /** Returns the value of the {@code viewIndex} field. */
+        /** @return the value of the {@code viewIndex} field. */
         @NativeType("uint32_t")
         public int viewIndex() { return XrEventDataVisibilityMaskChangedKHR.nviewIndex(address()); }
 

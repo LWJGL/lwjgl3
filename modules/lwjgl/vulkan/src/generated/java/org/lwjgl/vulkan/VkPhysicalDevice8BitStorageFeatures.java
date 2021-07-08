@@ -24,25 +24,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code storageBuffer8BitAccess} &ndash; indicates whether objects in the {@code StorageBuffer} or {@code PhysicalStorageBuffer} storage class with the {@code Block} decoration <b>can</b> have 8-bit integer members. If this feature is not enabled, 8-bit integer members <b>must</b> not be used in such objects. This also indicates whether shader modules <b>can</b> declare the {@code StorageBuffer8BitAccess} capability.</li>
- * <li>{@code uniformAndStorageBuffer8BitAccess} &ndash; indicates whether objects in the {@code Uniform} storage class with the {@code Block} decoration and in the {@code StorageBuffer} or {@code PhysicalStorageBuffer} storage class with the same decoration <b>can</b> have 8-bit integer members. If this feature is not enabled, 8-bit integer members <b>must</b> not be used in such objects. This also indicates whether shader modules <b>can</b> declare the {@code UniformAndStorageBuffer8BitAccess} capability.</li>
- * <li>{@code storagePushConstant8} &ndash; indicates whether objects in the {@code PushConstant} storage class <b>can</b> have 8-bit integer members. If this feature is not enabled, 8-bit integer members <b>must</b> not be used in such objects. This also indicates whether shader modules <b>can</b> declare the {@code StoragePushConstant8} capability.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDevice8BitStorageFeatures {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 storageBuffer8BitAccess;
- *     VkBool32 uniformAndStorageBuffer8BitAccess;
- *     VkBool32 storagePushConstant8;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #storageBuffer8BitAccess};
+ *     VkBool32 {@link #uniformAndStorageBuffer8BitAccess};
+ *     VkBool32 {@link #storagePushConstant8};
  * }</code></pre>
  */
 public class VkPhysicalDevice8BitStorageFeatures extends Struct implements NativeResource {
@@ -93,31 +83,31 @@ public class VkPhysicalDevice8BitStorageFeatures extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code storageBuffer8BitAccess} field. */
+    /** indicates whether objects in the {@code StorageBuffer}, {@code ShaderRecordBufferKHR}, or {@code PhysicalStorageBuffer} storage class with the {@code Block} decoration <b>can</b> have 8-bit integer members. If this feature is not enabled, 8-bit integer members <b>must</b> not be used in such objects. This also indicates whether shader modules <b>can</b> declare the {@code StorageBuffer8BitAccess} capability. */
     @NativeType("VkBool32")
     public boolean storageBuffer8BitAccess() { return nstorageBuffer8BitAccess(address()) != 0; }
-    /** Returns the value of the {@code uniformAndStorageBuffer8BitAccess} field. */
+    /** indicates whether objects in the {@code Uniform} storage class with the {@code Block} decoration <b>can</b> have 8-bit integer members. If this feature is not enabled, 8-bit integer members <b>must</b> not be used in such objects. This also indicates whether shader modules <b>can</b> declare the {@code UniformAndStorageBuffer8BitAccess} capability. */
     @NativeType("VkBool32")
     public boolean uniformAndStorageBuffer8BitAccess() { return nuniformAndStorageBuffer8BitAccess(address()) != 0; }
-    /** Returns the value of the {@code storagePushConstant8} field. */
+    /** indicates whether objects in the {@code PushConstant} storage class <b>can</b> have 8-bit integer members. If this feature is not enabled, 8-bit integer members <b>must</b> not be used in such objects. This also indicates whether shader modules <b>can</b> declare the {@code StoragePushConstant8} capability. */
     @NativeType("VkBool32")
     public boolean storagePushConstant8() { return nstoragePushConstant8(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevice8BitStorageFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevice8BitStorageFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code storageBuffer8BitAccess} field. */
+    /** Sets the specified value to the {@link #storageBuffer8BitAccess} field. */
     public VkPhysicalDevice8BitStorageFeatures storageBuffer8BitAccess(@NativeType("VkBool32") boolean value) { nstorageBuffer8BitAccess(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code uniformAndStorageBuffer8BitAccess} field. */
+    /** Sets the specified value to the {@link #uniformAndStorageBuffer8BitAccess} field. */
     public VkPhysicalDevice8BitStorageFeatures uniformAndStorageBuffer8BitAccess(@NativeType("VkBool32") boolean value) { nuniformAndStorageBuffer8BitAccess(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code storagePushConstant8} field. */
+    /** Sets the specified value to the {@link #storagePushConstant8} field. */
     public VkPhysicalDevice8BitStorageFeatures storagePushConstant8(@NativeType("VkBool32") boolean value) { nstoragePushConstant8(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -352,31 +342,31 @@ public class VkPhysicalDevice8BitStorageFeatures extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDevice8BitStorageFeatures#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevice8BitStorageFeatures.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDevice8BitStorageFeatures#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevice8BitStorageFeatures.npNext(address()); }
-        /** Returns the value of the {@code storageBuffer8BitAccess} field. */
+        /** @return the value of the {@link VkPhysicalDevice8BitStorageFeatures#storageBuffer8BitAccess} field. */
         @NativeType("VkBool32")
         public boolean storageBuffer8BitAccess() { return VkPhysicalDevice8BitStorageFeatures.nstorageBuffer8BitAccess(address()) != 0; }
-        /** Returns the value of the {@code uniformAndStorageBuffer8BitAccess} field. */
+        /** @return the value of the {@link VkPhysicalDevice8BitStorageFeatures#uniformAndStorageBuffer8BitAccess} field. */
         @NativeType("VkBool32")
         public boolean uniformAndStorageBuffer8BitAccess() { return VkPhysicalDevice8BitStorageFeatures.nuniformAndStorageBuffer8BitAccess(address()) != 0; }
-        /** Returns the value of the {@code storagePushConstant8} field. */
+        /** @return the value of the {@link VkPhysicalDevice8BitStorageFeatures#storagePushConstant8} field. */
         @NativeType("VkBool32")
         public boolean storagePushConstant8() { return VkPhysicalDevice8BitStorageFeatures.nstoragePushConstant8(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevice8BitStorageFeatures#sType} field. */
         public VkPhysicalDevice8BitStorageFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevice8BitStorageFeatures.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevice8BitStorageFeatures#pNext} field. */
         public VkPhysicalDevice8BitStorageFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevice8BitStorageFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code storageBuffer8BitAccess} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevice8BitStorageFeatures#storageBuffer8BitAccess} field. */
         public VkPhysicalDevice8BitStorageFeatures.Buffer storageBuffer8BitAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDevice8BitStorageFeatures.nstorageBuffer8BitAccess(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code uniformAndStorageBuffer8BitAccess} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevice8BitStorageFeatures#uniformAndStorageBuffer8BitAccess} field. */
         public VkPhysicalDevice8BitStorageFeatures.Buffer uniformAndStorageBuffer8BitAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDevice8BitStorageFeatures.nuniformAndStorageBuffer8BitAccess(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code storagePushConstant8} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevice8BitStorageFeatures#storagePushConstant8} field. */
         public VkPhysicalDevice8BitStorageFeatures.Buffer storagePushConstant8(@NativeType("VkBool32") boolean value) { VkPhysicalDevice8BitStorageFeatures.nstoragePushConstant8(address(), value ? 1 : 0); return this; }
 
     }

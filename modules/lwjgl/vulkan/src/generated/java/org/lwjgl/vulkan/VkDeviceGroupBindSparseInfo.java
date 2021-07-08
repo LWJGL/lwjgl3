@@ -27,8 +27,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code resourceDeviceIndex} and {@code memoryDeviceIndex} <b>must</b> both be valid device indices.</li>
- * <li>Each memory allocation bound in this batch <b>must</b> have allocated an instance for {@code memoryDeviceIndex}.</li>
+ * <li>{@code resourceDeviceIndex} and {@code memoryDeviceIndex} <b>must</b> both be valid device indices</li>
+ * <li>Each memory allocation bound in this batch <b>must</b> have allocated an instance for {@code memoryDeviceIndex}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -37,23 +37,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code resourceDeviceIndex} &ndash; a device index indicating which instance of the resource is bound.</li>
- * <li>{@code memoryDeviceIndex} &ndash; a device index indicating which instance of the memory the resource instance is bound to.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDeviceGroupBindSparseInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t resourceDeviceIndex;
- *     uint32_t memoryDeviceIndex;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #resourceDeviceIndex};
+ *     uint32_t {@link #memoryDeviceIndex};
  * }</code></pre>
  */
 public class VkDeviceGroupBindSparseInfo extends Struct implements NativeResource {
@@ -101,26 +92,26 @@ public class VkDeviceGroupBindSparseInfo extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code resourceDeviceIndex} field. */
+    /** a device index indicating which instance of the resource is bound. */
     @NativeType("uint32_t")
     public int resourceDeviceIndex() { return nresourceDeviceIndex(address()); }
-    /** Returns the value of the {@code memoryDeviceIndex} field. */
+    /** a device index indicating which instance of the memory the resource instance is bound to. */
     @NativeType("uint32_t")
     public int memoryDeviceIndex() { return nmemoryDeviceIndex(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceGroupBindSparseInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceGroupBindSparseInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code resourceDeviceIndex} field. */
+    /** Sets the specified value to the {@link #resourceDeviceIndex} field. */
     public VkDeviceGroupBindSparseInfo resourceDeviceIndex(@NativeType("uint32_t") int value) { nresourceDeviceIndex(address(), value); return this; }
-    /** Sets the specified value to the {@code memoryDeviceIndex} field. */
+    /** Sets the specified value to the {@link #memoryDeviceIndex} field. */
     public VkDeviceGroupBindSparseInfo memoryDeviceIndex(@NativeType("uint32_t") int value) { nmemoryDeviceIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -349,26 +340,26 @@ public class VkDeviceGroupBindSparseInfo extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDeviceGroupBindSparseInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceGroupBindSparseInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDeviceGroupBindSparseInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceGroupBindSparseInfo.npNext(address()); }
-        /** Returns the value of the {@code resourceDeviceIndex} field. */
+        /** @return the value of the {@link VkDeviceGroupBindSparseInfo#resourceDeviceIndex} field. */
         @NativeType("uint32_t")
         public int resourceDeviceIndex() { return VkDeviceGroupBindSparseInfo.nresourceDeviceIndex(address()); }
-        /** Returns the value of the {@code memoryDeviceIndex} field. */
+        /** @return the value of the {@link VkDeviceGroupBindSparseInfo#memoryDeviceIndex} field. */
         @NativeType("uint32_t")
         public int memoryDeviceIndex() { return VkDeviceGroupBindSparseInfo.nmemoryDeviceIndex(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupBindSparseInfo#sType} field. */
         public VkDeviceGroupBindSparseInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupBindSparseInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupBindSparseInfo#pNext} field. */
         public VkDeviceGroupBindSparseInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupBindSparseInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code resourceDeviceIndex} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupBindSparseInfo#resourceDeviceIndex} field. */
         public VkDeviceGroupBindSparseInfo.Buffer resourceDeviceIndex(@NativeType("uint32_t") int value) { VkDeviceGroupBindSparseInfo.nresourceDeviceIndex(address(), value); return this; }
-        /** Sets the specified value to the {@code memoryDeviceIndex} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupBindSparseInfo#memoryDeviceIndex} field. */
         public VkDeviceGroupBindSparseInfo.Buffer memoryDeviceIndex(@NativeType("uint32_t") int value) { VkDeviceGroupBindSparseInfo.nmemoryDeviceIndex(address(), value); return this; }
 
     }

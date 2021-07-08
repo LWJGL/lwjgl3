@@ -29,10 +29,10 @@ import org.lwjgl.system.*;
  */
 public class ARBInstancedArrays {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameters of GetVertexAttribdv, GetVertexAttribfv, and GetVertexAttribiv. */
     public static final int GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ARB = 0x88FE;
-
-    static { GL.initialize(); }
 
     protected ARBInstancedArrays() {
         throw new UnsupportedOperationException();

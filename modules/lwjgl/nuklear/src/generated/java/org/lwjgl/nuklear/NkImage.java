@@ -73,19 +73,19 @@ public class NkImage extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkHandle} view of the {@code handle} field. */
+    /** @return a {@link NkHandle} view of the {@code handle} field. */
     @NativeType("nk_handle")
     public NkHandle handle() { return nhandle(address()); }
-    /** Returns the value of the {@code w} field. */
+    /** @return the value of the {@code w} field. */
     @NativeType("unsigned short")
     public short w() { return nw(address()); }
-    /** Returns the value of the {@code h} field. */
+    /** @return the value of the {@code h} field. */
     @NativeType("unsigned short")
     public short h() { return nh(address()); }
-    /** Returns a {@link ShortBuffer} view of the {@code region} field. */
+    /** @return a {@link ShortBuffer} view of the {@code region} field. */
     @NativeType("unsigned short[4]")
     public ShortBuffer region() { return nregion(address()); }
-    /** Returns the value at the specified index of the {@code region} field. */
+    /** @return the value at the specified index of the {@code region} field. */
     @NativeType("unsigned short")
     public short region(int index) { return nregion(address(), index); }
 
@@ -339,19 +339,19 @@ public class NkImage extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkHandle} view of the {@code handle} field. */
+        /** @return a {@link NkHandle} view of the {@code handle} field. */
         @NativeType("nk_handle")
         public NkHandle handle() { return NkImage.nhandle(address()); }
-        /** Returns the value of the {@code w} field. */
+        /** @return the value of the {@code w} field. */
         @NativeType("unsigned short")
         public short w() { return NkImage.nw(address()); }
-        /** Returns the value of the {@code h} field. */
+        /** @return the value of the {@code h} field. */
         @NativeType("unsigned short")
         public short h() { return NkImage.nh(address()); }
-        /** Returns a {@link ShortBuffer} view of the {@code region} field. */
+        /** @return a {@link ShortBuffer} view of the {@code region} field. */
         @NativeType("unsigned short[4]")
         public ShortBuffer region() { return NkImage.nregion(address()); }
-        /** Returns the value at the specified index of the {@code region} field. */
+        /** @return the value at the specified index of the {@code region} field. */
         @NativeType("unsigned short")
         public short region(int index) { return NkImage.nregion(address(), index); }
 

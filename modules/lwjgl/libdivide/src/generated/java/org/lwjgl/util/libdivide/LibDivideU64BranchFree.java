@@ -64,10 +64,10 @@ public class LibDivideU64BranchFree extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code magic} field. */
+    /** @return the value of the {@code magic} field. */
     @NativeType("uint64_t")
     public long magic() { return nmagic(address()); }
-    /** Returns the value of the {@code more} field. */
+    /** @return the value of the {@code more} field. */
     @NativeType("uint8_t")
     public byte more() { return nmore(address()); }
 
@@ -290,10 +290,10 @@ public class LibDivideU64BranchFree extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code magic} field. */
+        /** @return the value of the {@code magic} field. */
         @NativeType("uint64_t")
         public long magic() { return LibDivideU64BranchFree.nmagic(address()); }
-        /** Returns the value of the {@code more} field. */
+        /** @return the value of the {@code more} field. */
         @NativeType("uint8_t")
         public byte more() { return LibDivideU64BranchFree.nmore(address()); }
 

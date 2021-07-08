@@ -41,6 +41,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTMemoryObject {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code pname} parameter of TexParameter{ifx}{v}, TexParameterI{i ui}v, TextureParameter{if}{v}, TextureParameterI{i ui}v,
      * GetTexParameter{if}v, GetTexParameterI{i ui}v, GetTextureParameter{if}v, and GetTextureParameterI{i ui}v.
@@ -78,8 +80,6 @@ public class EXTMemoryObject {
 
     /** Constant values. */
     public static final int GL_UUID_SIZE_EXT = 16;
-
-    static { GLES.initialize(); }
 
     protected EXTMemoryObject() {
         throw new UnsupportedOperationException();

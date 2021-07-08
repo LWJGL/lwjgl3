@@ -6,8 +6,11 @@
 package org.lwjgl.nuklear;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be set to the {@link NkClipboard} struct.
@@ -15,25 +18,29 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     nk_handle handle,
  *     struct nk_text_edit *edit
  * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("nk_plugin_paste")
-public interface NkPluginPasteI extends CallbackI.V {
+public interface NkPluginPasteI extends CallbackI {
 
-    String SIGNATURE = "(pp)v";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_void,
+        ffi_type_pointer, ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args),
-            dcbArgPointer(args)
+            memGetAddress(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE))
         );
     }
 

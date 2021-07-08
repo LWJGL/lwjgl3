@@ -19,7 +19,7 @@ import java.nio.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * int (*) (
+ * int (*{@link #invoke}) (
  *     void *user,
  *     char *data,
  *     int size
@@ -53,7 +53,7 @@ public abstract class STBIReadCallback extends Callback implements STBIReadCallb
     }
 
     protected STBIReadCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     STBIReadCallback(long functionPointer) {

@@ -18,31 +18,18 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Stores the memory requirements for different components (e.g. meshes, materials, animations) of an import. All sizes are in bytes.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code textures} &ndash; Storage allocated for texture data</li>
- * <li>{@code materials} &ndash; Storage allocated for material data</li>
- * <li>{@code meshes} &ndash; Storage allocated for mesh data</li>
- * <li>{@code nodes} &ndash; Storage allocated for node data</li>
- * <li>{@code animations} &ndash; Storage allocated for animation data</li>
- * <li>{@code cameras} &ndash; Storage allocated for camera data</li>
- * <li>{@code lights} &ndash; Storage allocated for light data</li>
- * <li>{@code total} &ndash; Total storage allocated for the full import.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiMemoryInfo {
- *     unsigned int textures;
- *     unsigned int materials;
- *     unsigned int meshes;
- *     unsigned int nodes;
- *     unsigned int animations;
- *     unsigned int cameras;
- *     unsigned int lights;
- *     unsigned int total;
+ *     unsigned int {@link #textures};
+ *     unsigned int {@link #materials};
+ *     unsigned int {@link #meshes};
+ *     unsigned int {@link #nodes};
+ *     unsigned int {@link #animations};
+ *     unsigned int {@link #cameras};
+ *     unsigned int {@link #lights};
+ *     unsigned int {@link #total};
  * }</code></pre>
  */
 @NativeType("struct aiMemoryInfo")
@@ -103,28 +90,28 @@ public class AIMemoryInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code textures} field. */
+    /** Storage allocated for texture data */
     @NativeType("unsigned int")
     public int textures() { return ntextures(address()); }
-    /** Returns the value of the {@code materials} field. */
+    /** Storage allocated for material data */
     @NativeType("unsigned int")
     public int materials() { return nmaterials(address()); }
-    /** Returns the value of the {@code meshes} field. */
+    /** Storage allocated for mesh data */
     @NativeType("unsigned int")
     public int meshes() { return nmeshes(address()); }
-    /** Returns the value of the {@code nodes} field. */
+    /** Storage allocated for node data */
     @NativeType("unsigned int")
     public int nodes() { return nnodes(address()); }
-    /** Returns the value of the {@code animations} field. */
+    /** Storage allocated for animation data */
     @NativeType("unsigned int")
     public int animations() { return nanimations(address()); }
-    /** Returns the value of the {@code cameras} field. */
+    /** Storage allocated for camera data */
     @NativeType("unsigned int")
     public int cameras() { return ncameras(address()); }
-    /** Returns the value of the {@code lights} field. */
+    /** Storage allocated for light data */
     @NativeType("unsigned int")
     public int lights() { return nlights(address()); }
-    /** Returns the value of the {@code total} field. */
+    /** Total storage allocated for the full import. */
     @NativeType("unsigned int")
     public int total() { return ntotal(address()); }
 
@@ -326,28 +313,28 @@ public class AIMemoryInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code textures} field. */
+        /** @return the value of the {@link AIMemoryInfo#textures} field. */
         @NativeType("unsigned int")
         public int textures() { return AIMemoryInfo.ntextures(address()); }
-        /** Returns the value of the {@code materials} field. */
+        /** @return the value of the {@link AIMemoryInfo#materials} field. */
         @NativeType("unsigned int")
         public int materials() { return AIMemoryInfo.nmaterials(address()); }
-        /** Returns the value of the {@code meshes} field. */
+        /** @return the value of the {@link AIMemoryInfo#meshes} field. */
         @NativeType("unsigned int")
         public int meshes() { return AIMemoryInfo.nmeshes(address()); }
-        /** Returns the value of the {@code nodes} field. */
+        /** @return the value of the {@link AIMemoryInfo#nodes} field. */
         @NativeType("unsigned int")
         public int nodes() { return AIMemoryInfo.nnodes(address()); }
-        /** Returns the value of the {@code animations} field. */
+        /** @return the value of the {@link AIMemoryInfo#animations} field. */
         @NativeType("unsigned int")
         public int animations() { return AIMemoryInfo.nanimations(address()); }
-        /** Returns the value of the {@code cameras} field. */
+        /** @return the value of the {@link AIMemoryInfo#cameras} field. */
         @NativeType("unsigned int")
         public int cameras() { return AIMemoryInfo.ncameras(address()); }
-        /** Returns the value of the {@code lights} field. */
+        /** @return the value of the {@link AIMemoryInfo#lights} field. */
         @NativeType("unsigned int")
         public int lights() { return AIMemoryInfo.nlights(address()); }
-        /** Returns the value of the {@code total} field. */
+        /** @return the value of the {@link AIMemoryInfo#total} field. */
         @NativeType("unsigned int")
         public int total() { return AIMemoryInfo.ntotal(address()); }
 

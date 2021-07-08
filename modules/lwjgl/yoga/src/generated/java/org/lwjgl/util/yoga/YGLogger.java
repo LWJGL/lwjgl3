@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * int (*) (
+ * int (*{@link #invoke}) (
  *     YGConfigRef config,
  *     YGNodeRef node,
  *     YGLogLevel level,
@@ -51,7 +51,7 @@ public abstract class YGLogger extends Callback implements YGLoggerI {
     }
 
     protected YGLogger() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     YGLogger(long functionPointer) {

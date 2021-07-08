@@ -19,17 +19,11 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * A 4x4 matrix with float components.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code M[16]} &ndash; the matrix components</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrMatrix4f {
- *     float M[16];
+ *     float {@link #M}[16];
  * }</code></pre>
  */
 @NativeType("struct ovrMatrix4f")
@@ -69,15 +63,15 @@ public class OVRMatrix4f extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link FloatBuffer} view of the {@code M} field. */
+    /** the matrix components */
     @NativeType("float[16]")
     public FloatBuffer M() { return nM(address()); }
-    /** Returns the value at the specified index of the {@code M} field. */
+    /** the matrix components */
     public float M(int index) { return nM(address(), index); }
 
-    /** Copies the specified {@link FloatBuffer} to the {@code M} field. */
+    /** Copies the specified {@link FloatBuffer} to the {@link #M} field. */
     public OVRMatrix4f M(@NativeType("float[16]") FloatBuffer value) { nM(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code M} field. */
+    /** Sets the specified value at the specified index of the {@link #M} field. */
     public OVRMatrix4f M(int index, float value) { nM(address(), index, value); return this; }
 
     /**
@@ -290,15 +284,15 @@ public class OVRMatrix4f extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link FloatBuffer} view of the {@code M} field. */
+        /** @return a {@link FloatBuffer} view of the {@link OVRMatrix4f#M} field. */
         @NativeType("float[16]")
         public FloatBuffer M() { return OVRMatrix4f.nM(address()); }
-        /** Returns the value at the specified index of the {@code M} field. */
+        /** @return the value at the specified index of the {@link OVRMatrix4f#M} field. */
         public float M(int index) { return OVRMatrix4f.nM(address(), index); }
 
-        /** Copies the specified {@link FloatBuffer} to the {@code M} field. */
+        /** Copies the specified {@link FloatBuffer} to the {@link OVRMatrix4f#M} field. */
         public OVRMatrix4f.Buffer M(@NativeType("float[16]") FloatBuffer value) { OVRMatrix4f.nM(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code M} field. */
+        /** Sets the specified value at the specified index of the {@link OVRMatrix4f#M} field. */
         public OVRMatrix4f.Buffer M(int index, float value) { OVRMatrix4f.nM(address(), index, value); return this; }
 
     }

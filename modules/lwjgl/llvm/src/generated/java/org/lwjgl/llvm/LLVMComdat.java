@@ -17,6 +17,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMComdat {
 
+    /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            GetOrInsertComdat      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetOrInsertComdat"),
+            GetComdat              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetComdat"),
+            SetComdat              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetComdat"),
+            GetComdatSelectionKind = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetComdatSelectionKind"),
+            SetComdatSelectionKind = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetComdatSelectionKind");
+
+    }
+
     /**
      * {@code LLVMComdatSelectionKind}
      * 
@@ -39,21 +54,6 @@ public class LLVMComdat {
 
     protected LLVMComdat() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            GetOrInsertComdat      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetOrInsertComdat"),
-            GetComdat              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetComdat"),
-            SetComdat              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetComdat"),
-            GetComdatSelectionKind = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetComdatSelectionKind"),
-            SetComdatSelectionKind = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetComdatSelectionKind");
-
     }
 
     // --- [ LLVMGetOrInsertComdat ] ---

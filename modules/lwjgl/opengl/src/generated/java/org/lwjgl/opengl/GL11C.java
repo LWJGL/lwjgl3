@@ -35,6 +35,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL11C {
 
+    static { GL.initialize(); }
+
     /** AlphaFunction */
     public static final int
         GL_NEVER    = 0x200,
@@ -319,8 +321,6 @@ public class GL11C {
 
     /** vertex_array */
     public static final int GL_VERTEX_ARRAY = 0x8074;
-
-    static { GL.initialize(); }
 
     protected GL11C() {
         throw new UnsupportedOperationException();

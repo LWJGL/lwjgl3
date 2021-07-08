@@ -40,6 +40,7 @@ val NVX_multiview_per_view_attributes = "NVXMultiviewPerViewAttributes".nativeCl
 ￿    gl_Position = buf.mvpPerView[gl_ViewIndex] * position;
 ￿}</code></pre>
 
+        <h5>VK_NVX_multiview_per_view_attributes</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NVX_multiview_per_view_attributes}</dd>
@@ -63,7 +64,10 @@ val NVX_multiview_per_view_attributes = "NVXMultiviewPerViewAttributes".nativeCl
             <dd><ul>
                 <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NVX_multiview_per_view_attributes:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-01-13</dd>
 
@@ -72,8 +76,8 @@ val NVX_multiview_per_view_attributes = "NVXMultiviewPerViewAttributes".nativeCl
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NVX_multiview_per_view_attributes.html">{@code SPV_NVX_multiview_per_view_attributes}</a> SPIR-V extension.</li>
-                <li>This extension requires the {@code GL_NVX_multiview_per_view_attributes} extension for GLSL source languages.</li>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NVX_multiview_per_view_attributes.html">{@code SPV_NVX_multiview_per_view_attributes}</a></li>
+                <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nvx/GL_NVX_multiview_per_view_attributes.txt">{@code GL_NVX_multiview_per_view_attributes}</a></li>
                 <li>This extension interacts with {@link NVViewportArray2 VK_NV_viewport_array2}.</li>
             </ul></dd>
 

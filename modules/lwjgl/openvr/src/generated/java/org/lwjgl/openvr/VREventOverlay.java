@@ -16,17 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Used for a few events about overlays.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code overlayHandle} &ndash; one of:<br><table><tr><td>{@link VR#EVRState_VRState_Undefined}</td><td>{@link VR#EVRState_VRState_Off}</td><td>{@link VR#EVRState_VRState_Searching}</td></tr><tr><td>{@link VR#EVRState_VRState_Searching_Alert}</td><td>{@link VR#EVRState_VRState_Ready}</td><td>{@link VR#EVRState_VRState_Ready_Alert}</td></tr><tr><td>{@link VR#EVRState_VRState_NotReady}</td><td>{@link VR#EVRState_VRState_Standby}</td><td>{@link VR#EVRState_VRState_Ready_Alert_Low}</td></tr></table></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VREvent_Overlay_t {
- *     uint64_t overlayHandle;
+ *     uint64_t {@link #overlayHandle};
  *     uint64_t devicePath;
  * }</code></pre>
  */
@@ -70,10 +64,10 @@ public class VREventOverlay extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code overlayHandle} field. */
+    /** one of:<br><table><tr><td>{@link VR#EVRState_VRState_Undefined}</td><td>{@link VR#EVRState_VRState_Off}</td><td>{@link VR#EVRState_VRState_Searching}</td></tr><tr><td>{@link VR#EVRState_VRState_Searching_Alert}</td><td>{@link VR#EVRState_VRState_Ready}</td><td>{@link VR#EVRState_VRState_Ready_Alert}</td></tr><tr><td>{@link VR#EVRState_VRState_NotReady}</td><td>{@link VR#EVRState_VRState_Standby}</td><td>{@link VR#EVRState_VRState_Ready_Alert_Low}</td></tr></table> */
     @NativeType("uint64_t")
     public long overlayHandle() { return noverlayHandle(address()); }
-    /** Returns the value of the {@code devicePath} field. */
+    /** @return the value of the {@code devicePath} field. */
     @NativeType("uint64_t")
     public long devicePath() { return ndevicePath(address()); }
 
@@ -151,10 +145,10 @@ public class VREventOverlay extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code overlayHandle} field. */
+        /** @return the value of the {@link VREventOverlay#overlayHandle} field. */
         @NativeType("uint64_t")
         public long overlayHandle() { return VREventOverlay.noverlayHandle(address()); }
-        /** Returns the value of the {@code devicePath} field. */
+        /** @return the value of the {@code devicePath} field. */
         @NativeType("uint64_t")
         public long devicePath() { return VREventOverlay.ndevicePath(address()); }
 

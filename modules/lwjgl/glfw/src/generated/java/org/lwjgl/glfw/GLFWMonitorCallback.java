@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWmonitor *monitor,
  *     int event
  * )</code></pre>
@@ -54,7 +54,7 @@ public abstract class GLFWMonitorCallback extends Callback implements GLFWMonito
     }
 
     protected GLFWMonitorCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWMonitorCallback(long functionPointer) {

@@ -20,6 +20,8 @@ import org.lwjgl.system.*;
  */
 public class EXTBlendMinmax {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code mode} parameter of BlendEquationEXT. */
     public static final int
         GL_FUNC_ADD_EXT = 0x8006,
@@ -28,8 +30,6 @@ public class EXTBlendMinmax {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_BLEND_EQUATION_EXT = 0x8009;
-
-    static { GL.initialize(); }
 
     protected EXTBlendMinmax() {
         throw new UnsupportedOperationException();

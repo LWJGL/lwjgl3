@@ -76,19 +76,19 @@ public class XrActionSpaceCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code action} field. */
+    /** @return the value of the {@code action} field. */
     @NativeType("XrAction")
     public long action() { return naction(address()); }
-    /** Returns the value of the {@code subactionPath} field. */
+    /** @return the value of the {@code subactionPath} field. */
     @NativeType("XrPath")
     public long subactionPath() { return nsubactionPath(address()); }
-    /** Returns a {@link XrPosef} view of the {@code poseInActionSpace} field. */
+    /** @return a {@link XrPosef} view of the {@code poseInActionSpace} field. */
     public XrPosef poseInActionSpace() { return nposeInActionSpace(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -357,19 +357,19 @@ public class XrActionSpaceCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActionSpaceCreateInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrActionSpaceCreateInfo.nnext(address()); }
-        /** Returns the value of the {@code action} field. */
+        /** @return the value of the {@code action} field. */
         @NativeType("XrAction")
         public long action() { return XrActionSpaceCreateInfo.naction(address()); }
-        /** Returns the value of the {@code subactionPath} field. */
+        /** @return the value of the {@code subactionPath} field. */
         @NativeType("XrPath")
         public long subactionPath() { return XrActionSpaceCreateInfo.nsubactionPath(address()); }
-        /** Returns a {@link XrPosef} view of the {@code poseInActionSpace} field. */
+        /** @return a {@link XrPosef} view of the {@code poseInActionSpace} field. */
         public XrPosef poseInActionSpace() { return XrActionSpaceCreateInfo.nposeInActionSpace(address()); }
 
         /** Sets the specified value to the {@code type} field. */

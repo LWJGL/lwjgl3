@@ -19,35 +19,15 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Tracking state at a given absolute time (describes predicted HMD pose etc). Returned by {@link OVR#ovr_GetTrackingState GetTrackingState}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code HeadPose} &ndash; 
- * Predicted head pose (and derivatives) at the requested absolute time. The look-ahead interval is equal to
- * {@code (HeadPose.TimeInSeconds - RawSensorData.TimeInSeconds)}.</li>
- * <li>{@code StatusFlags} &ndash; {@code HeadPose} tracking status described by {@code ovrStatusBits}.</li>
- * <li>{@code HandPoses[2]} &ndash; 
- * The most recent calculated pose for each hand when hand controller tracking is present. {@code HandPoses[ovrHand_Left]} refers to the left hand and
- * {@code HandPoses[ovrHand_Right]} to the right hand. These values can be combined with {@code ovrInputState} for complete hand controller information.</li>
- * <li>{@code HandStatusFlags[2]} &ndash; {@code HandPoses} status flags described by {@code ovrStatusBits}.</li>
- * <li>{@code CalibratedOrigin} &ndash; 
- * the pose of the origin captured during calibration.
- * 
- * <p>Like all other poses here, this is expressed in the space set by {@link OVR#ovr_RecenterTrackingOrigin RecenterTrackingOrigin}, or {@link OVR#ovr_SpecifyTrackingOrigin SpecifyTrackingOrigin} and so will change every time
- * either of those functions are called. This pose can be used to calculate where the calibrated origin lands in the new recentered space. If an
- * application never calls {@link OVR#ovr_RecenterTrackingOrigin RecenterTrackingOrigin} or {@link OVR#ovr_SpecifyTrackingOrigin SpecifyTrackingOrigin}, expect this value to be the identity pose and as such will point
- * respective origin based on {@code ovrTrackingOrigin} requested when calling {@link OVR#ovr_GetTrackingState GetTrackingState}.</p></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrTrackingState {
- *     {@link OVRPoseStatef ovrPoseStatef} HeadPose;
- *     unsigned int StatusFlags;
- *     {@link OVRPoseStatef ovrPoseStatef} HandPoses[2];
- *     unsigned int HandStatusFlags[2];
- *     {@link OVRPosef ovrPosef} CalibratedOrigin;
+ *     {@link OVRPoseStatef ovrPoseStatef} {@link #HeadPose};
+ *     unsigned int {@link #StatusFlags};
+ *     {@link OVRPoseStatef ovrPoseStatef} {@link #HandPoses}[2];
+ *     unsigned int {@link #HandStatusFlags}[2];
+ *     {@link OVRPosef ovrPosef} {@link #CalibratedOrigin};
  * }</code></pre>
  */
 @NativeType("struct ovrTrackingState")
@@ -99,25 +79,41 @@ public class OVRTrackingState extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link OVRPoseStatef} view of the {@code HeadPose} field. */
+    /**
+     * Predicted head pose (and derivatives) at the requested absolute time. The look-ahead interval is equal to
+     * {@code (HeadPose.TimeInSeconds - RawSensorData.TimeInSeconds)}.
+     */
     @NativeType("ovrPoseStatef")
     public OVRPoseStatef HeadPose() { return nHeadPose(address()); }
-    /** Returns the value of the {@code StatusFlags} field. */
+    /** {@code HeadPose} tracking status described by {@code ovrStatusBits}. */
     @NativeType("unsigned int")
     public int StatusFlags() { return nStatusFlags(address()); }
-    /** Returns a {@link OVRPoseStatef}.Buffer view of the {@code HandPoses} field. */
+    /**
+     * The most recent calculated pose for each hand when hand controller tracking is present. {@code HandPoses[ovrHand_Left]} refers to the left hand and
+     * {@code HandPoses[ovrHand_Right]} to the right hand. These values can be combined with {@code ovrInputState} for complete hand controller information.
+     */
     @NativeType("ovrPoseStatef[2]")
     public OVRPoseStatef.Buffer HandPoses() { return nHandPoses(address()); }
-    /** Returns a {@link OVRPoseStatef} view of the struct at the specified index of the {@code HandPoses} field. */
+    /**
+     * The most recent calculated pose for each hand when hand controller tracking is present. {@code HandPoses[ovrHand_Left]} refers to the left hand and
+     * {@code HandPoses[ovrHand_Right]} to the right hand. These values can be combined with {@code ovrInputState} for complete hand controller information.
+     */
     @NativeType("ovrPoseStatef")
     public OVRPoseStatef HandPoses(int index) { return nHandPoses(address(), index); }
-    /** Returns a {@link IntBuffer} view of the {@code HandStatusFlags} field. */
+    /** {@code HandPoses} status flags described by {@code ovrStatusBits}. */
     @NativeType("unsigned int[2]")
     public IntBuffer HandStatusFlags() { return nHandStatusFlags(address()); }
-    /** Returns the value at the specified index of the {@code HandStatusFlags} field. */
+    /** {@code HandPoses} status flags described by {@code ovrStatusBits}. */
     @NativeType("unsigned int")
     public int HandStatusFlags(int index) { return nHandStatusFlags(address(), index); }
-    /** Returns a {@link OVRPosef} view of the {@code CalibratedOrigin} field. */
+    /**
+     * the pose of the origin captured during calibration.
+     * 
+     * <p>Like all other poses here, this is expressed in the space set by {@link OVR#ovr_RecenterTrackingOrigin RecenterTrackingOrigin}, or {@link OVR#ovr_SpecifyTrackingOrigin SpecifyTrackingOrigin} and so will change every time
+     * either of those functions are called. This pose can be used to calculate where the calibrated origin lands in the new recentered space. If an
+     * application never calls {@link OVR#ovr_RecenterTrackingOrigin RecenterTrackingOrigin} or {@link OVR#ovr_SpecifyTrackingOrigin SpecifyTrackingOrigin}, expect this value to be the identity pose and as such will point
+     * respective origin based on {@code ovrTrackingOrigin} requested when calling {@link OVR#ovr_GetTrackingState GetTrackingState}.</p>
+     */
     @NativeType("ovrPosef")
     public OVRPosef CalibratedOrigin() { return nCalibratedOrigin(address()); }
 
@@ -321,25 +317,25 @@ public class OVRTrackingState extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link OVRPoseStatef} view of the {@code HeadPose} field. */
+        /** @return a {@link OVRPoseStatef} view of the {@link OVRTrackingState#HeadPose} field. */
         @NativeType("ovrPoseStatef")
         public OVRPoseStatef HeadPose() { return OVRTrackingState.nHeadPose(address()); }
-        /** Returns the value of the {@code StatusFlags} field. */
+        /** @return the value of the {@link OVRTrackingState#StatusFlags} field. */
         @NativeType("unsigned int")
         public int StatusFlags() { return OVRTrackingState.nStatusFlags(address()); }
-        /** Returns a {@link OVRPoseStatef}.Buffer view of the {@code HandPoses} field. */
+        /** @return a {@link OVRPoseStatef}.Buffer view of the {@link OVRTrackingState#HandPoses} field. */
         @NativeType("ovrPoseStatef[2]")
         public OVRPoseStatef.Buffer HandPoses() { return OVRTrackingState.nHandPoses(address()); }
-        /** Returns a {@link OVRPoseStatef} view of the struct at the specified index of the {@code HandPoses} field. */
+        /** @return a {@link OVRPoseStatef} view of the struct at the specified index of the {@link OVRTrackingState#HandPoses} field. */
         @NativeType("ovrPoseStatef")
         public OVRPoseStatef HandPoses(int index) { return OVRTrackingState.nHandPoses(address(), index); }
-        /** Returns a {@link IntBuffer} view of the {@code HandStatusFlags} field. */
+        /** @return a {@link IntBuffer} view of the {@link OVRTrackingState#HandStatusFlags} field. */
         @NativeType("unsigned int[2]")
         public IntBuffer HandStatusFlags() { return OVRTrackingState.nHandStatusFlags(address()); }
-        /** Returns the value at the specified index of the {@code HandStatusFlags} field. */
+        /** @return the value at the specified index of the {@link OVRTrackingState#HandStatusFlags} field. */
         @NativeType("unsigned int")
         public int HandStatusFlags(int index) { return OVRTrackingState.nHandStatusFlags(address(), index); }
-        /** Returns a {@link OVRPosef} view of the {@code CalibratedOrigin} field. */
+        /** @return a {@link OVRPosef} view of the {@link OVRTrackingState#CalibratedOrigin} field. */
         @NativeType("ovrPosef")
         public OVRPosef CalibratedOrigin() { return OVRTrackingState.nCalibratedOrigin(address()); }
 

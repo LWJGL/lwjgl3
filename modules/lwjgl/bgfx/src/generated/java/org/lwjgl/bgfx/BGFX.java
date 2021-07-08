@@ -23,8 +23,211 @@ import static org.lwjgl.system.Pointer.*;
 /** Native bindings to the C API of the <a target="_blank" href="https://github.com/bkaradzic/bgfx">bgfx</a> library. */
 public class BGFX {
 
+    private static final SharedLibrary BGFX = Library.loadNative(BGFX.class, "org.lwjgl.bgfx", Configuration.BGFX_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("bgfx")), true);
+
+    /** Contains the function pointers loaded from the bgfx {@link SharedLibrary}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            attachment_init                                      = apiGetFunctionAddress(BGFX, "bgfx_attachment_init"),
+            vertex_layout_begin                                  = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_begin"),
+            vertex_layout_add                                    = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_add"),
+            vertex_layout_decode                                 = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_decode"),
+            vertex_layout_has                                    = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_has"),
+            vertex_layout_skip                                   = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_skip"),
+            vertex_layout_end                                    = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_end"),
+            vertex_pack                                          = apiGetFunctionAddress(BGFX, "bgfx_vertex_pack"),
+            vertex_unpack                                        = apiGetFunctionAddress(BGFX, "bgfx_vertex_unpack"),
+            vertex_convert                                       = apiGetFunctionAddress(BGFX, "bgfx_vertex_convert"),
+            weld_vertices                                        = apiGetFunctionAddress(BGFX, "bgfx_weld_vertices"),
+            topology_convert                                     = apiGetFunctionAddress(BGFX, "bgfx_topology_convert"),
+            topology_sort_tri_list                               = apiGetFunctionAddress(BGFX, "bgfx_topology_sort_tri_list"),
+            get_supported_renderers                              = apiGetFunctionAddress(BGFX, "bgfx_get_supported_renderers"),
+            get_renderer_name                                    = apiGetFunctionAddress(BGFX, "bgfx_get_renderer_name"),
+            init_ctor                                            = apiGetFunctionAddress(BGFX, "bgfx_init_ctor"),
+            init                                                 = apiGetFunctionAddress(BGFX, "bgfx_init"),
+            shutdown                                             = apiGetFunctionAddress(BGFX, "bgfx_shutdown"),
+            reset                                                = apiGetFunctionAddress(BGFX, "bgfx_reset"),
+            frame                                                = apiGetFunctionAddress(BGFX, "bgfx_frame"),
+            get_renderer_type                                    = apiGetFunctionAddress(BGFX, "bgfx_get_renderer_type"),
+            get_caps                                             = apiGetFunctionAddress(BGFX, "bgfx_get_caps"),
+            get_stats                                            = apiGetFunctionAddress(BGFX, "bgfx_get_stats"),
+            alloc                                                = apiGetFunctionAddress(BGFX, "bgfx_alloc"),
+            copy                                                 = apiGetFunctionAddress(BGFX, "bgfx_copy"),
+            make_ref                                             = apiGetFunctionAddress(BGFX, "bgfx_make_ref"),
+            make_ref_release                                     = apiGetFunctionAddress(BGFX, "bgfx_make_ref_release"),
+            set_debug                                            = apiGetFunctionAddress(BGFX, "bgfx_set_debug"),
+            dbg_text_clear                                       = apiGetFunctionAddress(BGFX, "bgfx_dbg_text_clear"),
+            dbg_text_printf                                      = apiGetFunctionAddress(BGFX, "bgfx_dbg_text_printf"),
+            dbg_text_vprintf                                     = apiGetFunctionAddress(BGFX, "bgfx_dbg_text_vprintf"),
+            dbg_text_image                                       = apiGetFunctionAddress(BGFX, "bgfx_dbg_text_image"),
+            create_index_buffer                                  = apiGetFunctionAddress(BGFX, "bgfx_create_index_buffer"),
+            set_index_buffer_name                                = apiGetFunctionAddress(BGFX, "bgfx_set_index_buffer_name"),
+            destroy_index_buffer                                 = apiGetFunctionAddress(BGFX, "bgfx_destroy_index_buffer"),
+            create_vertex_layout                                 = apiGetFunctionAddress(BGFX, "bgfx_create_vertex_layout"),
+            destroy_vertex_layout                                = apiGetFunctionAddress(BGFX, "bgfx_destroy_vertex_layout"),
+            create_vertex_buffer                                 = apiGetFunctionAddress(BGFX, "bgfx_create_vertex_buffer"),
+            set_vertex_buffer_name                               = apiGetFunctionAddress(BGFX, "bgfx_set_vertex_buffer_name"),
+            destroy_vertex_buffer                                = apiGetFunctionAddress(BGFX, "bgfx_destroy_vertex_buffer"),
+            create_dynamic_index_buffer                          = apiGetFunctionAddress(BGFX, "bgfx_create_dynamic_index_buffer"),
+            create_dynamic_index_buffer_mem                      = apiGetFunctionAddress(BGFX, "bgfx_create_dynamic_index_buffer_mem"),
+            update_dynamic_index_buffer                          = apiGetFunctionAddress(BGFX, "bgfx_update_dynamic_index_buffer"),
+            destroy_dynamic_index_buffer                         = apiGetFunctionAddress(BGFX, "bgfx_destroy_dynamic_index_buffer"),
+            create_dynamic_vertex_buffer                         = apiGetFunctionAddress(BGFX, "bgfx_create_dynamic_vertex_buffer"),
+            create_dynamic_vertex_buffer_mem                     = apiGetFunctionAddress(BGFX, "bgfx_create_dynamic_vertex_buffer_mem"),
+            update_dynamic_vertex_buffer                         = apiGetFunctionAddress(BGFX, "bgfx_update_dynamic_vertex_buffer"),
+            destroy_dynamic_vertex_buffer                        = apiGetFunctionAddress(BGFX, "bgfx_destroy_dynamic_vertex_buffer"),
+            get_avail_transient_index_buffer                     = apiGetFunctionAddress(BGFX, "bgfx_get_avail_transient_index_buffer"),
+            get_avail_transient_vertex_buffer                    = apiGetFunctionAddress(BGFX, "bgfx_get_avail_transient_vertex_buffer"),
+            get_avail_instance_data_buffer                       = apiGetFunctionAddress(BGFX, "bgfx_get_avail_instance_data_buffer"),
+            alloc_transient_index_buffer                         = apiGetFunctionAddress(BGFX, "bgfx_alloc_transient_index_buffer"),
+            alloc_transient_vertex_buffer                        = apiGetFunctionAddress(BGFX, "bgfx_alloc_transient_vertex_buffer"),
+            alloc_transient_buffers                              = apiGetFunctionAddress(BGFX, "bgfx_alloc_transient_buffers"),
+            alloc_instance_data_buffer                           = apiGetFunctionAddress(BGFX, "bgfx_alloc_instance_data_buffer"),
+            create_indirect_buffer                               = apiGetFunctionAddress(BGFX, "bgfx_create_indirect_buffer"),
+            destroy_indirect_buffer                              = apiGetFunctionAddress(BGFX, "bgfx_destroy_indirect_buffer"),
+            create_shader                                        = apiGetFunctionAddress(BGFX, "bgfx_create_shader"),
+            get_shader_uniforms                                  = apiGetFunctionAddress(BGFX, "bgfx_get_shader_uniforms"),
+            set_shader_name                                      = apiGetFunctionAddress(BGFX, "bgfx_set_shader_name"),
+            destroy_shader                                       = apiGetFunctionAddress(BGFX, "bgfx_destroy_shader"),
+            create_program                                       = apiGetFunctionAddress(BGFX, "bgfx_create_program"),
+            create_compute_program                               = apiGetFunctionAddress(BGFX, "bgfx_create_compute_program"),
+            destroy_program                                      = apiGetFunctionAddress(BGFX, "bgfx_destroy_program"),
+            is_texture_valid                                     = apiGetFunctionAddress(BGFX, "bgfx_is_texture_valid"),
+            calc_texture_size                                    = apiGetFunctionAddress(BGFX, "bgfx_calc_texture_size"),
+            create_texture                                       = apiGetFunctionAddress(BGFX, "bgfx_create_texture"),
+            create_texture_2d                                    = apiGetFunctionAddress(BGFX, "bgfx_create_texture_2d"),
+            create_texture_2d_scaled                             = apiGetFunctionAddress(BGFX, "bgfx_create_texture_2d_scaled"),
+            create_texture_3d                                    = apiGetFunctionAddress(BGFX, "bgfx_create_texture_3d"),
+            create_texture_cube                                  = apiGetFunctionAddress(BGFX, "bgfx_create_texture_cube"),
+            update_texture_2d                                    = apiGetFunctionAddress(BGFX, "bgfx_update_texture_2d"),
+            update_texture_3d                                    = apiGetFunctionAddress(BGFX, "bgfx_update_texture_3d"),
+            update_texture_cube                                  = apiGetFunctionAddress(BGFX, "bgfx_update_texture_cube"),
+            read_texture                                         = apiGetFunctionAddress(BGFX, "bgfx_read_texture"),
+            set_texture_name                                     = apiGetFunctionAddress(BGFX, "bgfx_set_texture_name"),
+            get_direct_access_ptr                                = apiGetFunctionAddress(BGFX, "bgfx_get_direct_access_ptr"),
+            destroy_texture                                      = apiGetFunctionAddress(BGFX, "bgfx_destroy_texture"),
+            create_frame_buffer                                  = apiGetFunctionAddress(BGFX, "bgfx_create_frame_buffer"),
+            create_frame_buffer_scaled                           = apiGetFunctionAddress(BGFX, "bgfx_create_frame_buffer_scaled"),
+            create_frame_buffer_from_handles                     = apiGetFunctionAddress(BGFX, "bgfx_create_frame_buffer_from_handles"),
+            create_frame_buffer_from_attachment                  = apiGetFunctionAddress(BGFX, "bgfx_create_frame_buffer_from_attachment"),
+            create_frame_buffer_from_nwh                         = apiGetFunctionAddress(BGFX, "bgfx_create_frame_buffer_from_nwh"),
+            set_frame_buffer_name                                = apiGetFunctionAddress(BGFX, "bgfx_set_frame_buffer_name"),
+            get_texture                                          = apiGetFunctionAddress(BGFX, "bgfx_get_texture"),
+            destroy_frame_buffer                                 = apiGetFunctionAddress(BGFX, "bgfx_destroy_frame_buffer"),
+            create_uniform                                       = apiGetFunctionAddress(BGFX, "bgfx_create_uniform"),
+            get_uniform_info                                     = apiGetFunctionAddress(BGFX, "bgfx_get_uniform_info"),
+            destroy_uniform                                      = apiGetFunctionAddress(BGFX, "bgfx_destroy_uniform"),
+            create_occlusion_query                               = apiGetFunctionAddress(BGFX, "bgfx_create_occlusion_query"),
+            get_result                                           = apiGetFunctionAddress(BGFX, "bgfx_get_result"),
+            destroy_occlusion_query                              = apiGetFunctionAddress(BGFX, "bgfx_destroy_occlusion_query"),
+            set_palette_color                                    = apiGetFunctionAddress(BGFX, "bgfx_set_palette_color"),
+            set_palette_color_rgba8                              = apiGetFunctionAddress(BGFX, "bgfx_set_palette_color_rgba8"),
+            set_view_name                                        = apiGetFunctionAddress(BGFX, "bgfx_set_view_name"),
+            set_view_rect                                        = apiGetFunctionAddress(BGFX, "bgfx_set_view_rect"),
+            set_view_rect_ratio                                  = apiGetFunctionAddress(BGFX, "bgfx_set_view_rect_ratio"),
+            set_view_scissor                                     = apiGetFunctionAddress(BGFX, "bgfx_set_view_scissor"),
+            set_view_clear                                       = apiGetFunctionAddress(BGFX, "bgfx_set_view_clear"),
+            set_view_clear_mrt                                   = apiGetFunctionAddress(BGFX, "bgfx_set_view_clear_mrt"),
+            set_view_mode                                        = apiGetFunctionAddress(BGFX, "bgfx_set_view_mode"),
+            set_view_frame_buffer                                = apiGetFunctionAddress(BGFX, "bgfx_set_view_frame_buffer"),
+            set_view_transform                                   = apiGetFunctionAddress(BGFX, "bgfx_set_view_transform"),
+            set_view_order                                       = apiGetFunctionAddress(BGFX, "bgfx_set_view_order"),
+            reset_view                                           = apiGetFunctionAddress(BGFX, "bgfx_reset_view"),
+            encoder_begin                                        = apiGetFunctionAddress(BGFX, "bgfx_encoder_begin"),
+            encoder_end                                          = apiGetFunctionAddress(BGFX, "bgfx_encoder_end"),
+            encoder_set_marker                                   = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_marker"),
+            encoder_set_state                                    = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_state"),
+            encoder_set_condition                                = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_condition"),
+            encoder_set_stencil                                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_stencil"),
+            encoder_set_scissor                                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_scissor"),
+            encoder_set_scissor_cached                           = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_scissor_cached"),
+            encoder_set_transform                                = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transform"),
+            encoder_set_transform_cached                         = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transform_cached"),
+            encoder_alloc_transform                              = apiGetFunctionAddress(BGFX, "bgfx_encoder_alloc_transform"),
+            encoder_set_uniform                                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_uniform"),
+            encoder_set_index_buffer                             = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_index_buffer"),
+            encoder_set_dynamic_index_buffer                     = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_dynamic_index_buffer"),
+            encoder_set_transient_index_buffer                   = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transient_index_buffer"),
+            encoder_set_vertex_buffer                            = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_vertex_buffer"),
+            encoder_set_vertex_buffer_with_layout                = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_vertex_buffer_with_layout"),
+            encoder_set_dynamic_vertex_buffer                    = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_dynamic_vertex_buffer"),
+            encoder_set_dynamic_vertex_buffer_with_layout        = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_dynamic_vertex_buffer_with_layout"),
+            encoder_set_transient_vertex_buffer                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transient_vertex_buffer"),
+            encoder_set_transient_vertex_buffer_with_layout      = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transient_vertex_buffer_with_layout"),
+            encoder_set_vertex_count                             = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_vertex_count"),
+            encoder_set_instance_data_buffer                     = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_instance_data_buffer"),
+            encoder_set_instance_data_from_vertex_buffer         = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_instance_data_from_vertex_buffer"),
+            encoder_set_instance_data_from_dynamic_vertex_buffer = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_instance_data_from_dynamic_vertex_buffer"),
+            encoder_set_instance_count                           = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_instance_count"),
+            encoder_set_texture                                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_texture"),
+            encoder_touch                                        = apiGetFunctionAddress(BGFX, "bgfx_encoder_touch"),
+            encoder_submit                                       = apiGetFunctionAddress(BGFX, "bgfx_encoder_submit"),
+            encoder_submit_occlusion_query                       = apiGetFunctionAddress(BGFX, "bgfx_encoder_submit_occlusion_query"),
+            encoder_submit_indirect                              = apiGetFunctionAddress(BGFX, "bgfx_encoder_submit_indirect"),
+            encoder_set_compute_index_buffer                     = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_compute_index_buffer"),
+            encoder_set_compute_vertex_buffer                    = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_compute_vertex_buffer"),
+            encoder_set_compute_dynamic_index_buffer             = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_compute_dynamic_index_buffer"),
+            encoder_set_compute_dynamic_vertex_buffer            = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_compute_dynamic_vertex_buffer"),
+            encoder_set_compute_indirect_buffer                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_compute_indirect_buffer"),
+            encoder_set_image                                    = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_image"),
+            encoder_dispatch                                     = apiGetFunctionAddress(BGFX, "bgfx_encoder_dispatch"),
+            encoder_dispatch_indirect                            = apiGetFunctionAddress(BGFX, "bgfx_encoder_dispatch_indirect"),
+            encoder_discard                                      = apiGetFunctionAddress(BGFX, "bgfx_encoder_discard"),
+            encoder_blit                                         = apiGetFunctionAddress(BGFX, "bgfx_encoder_blit"),
+            request_screen_shot                                  = apiGetFunctionAddress(BGFX, "bgfx_request_screen_shot"),
+            set_marker                                           = apiGetFunctionAddress(BGFX, "bgfx_set_marker"),
+            set_state                                            = apiGetFunctionAddress(BGFX, "bgfx_set_state"),
+            set_condition                                        = apiGetFunctionAddress(BGFX, "bgfx_set_condition"),
+            set_stencil                                          = apiGetFunctionAddress(BGFX, "bgfx_set_stencil"),
+            set_scissor                                          = apiGetFunctionAddress(BGFX, "bgfx_set_scissor"),
+            set_scissor_cached                                   = apiGetFunctionAddress(BGFX, "bgfx_set_scissor_cached"),
+            set_transform                                        = apiGetFunctionAddress(BGFX, "bgfx_set_transform"),
+            set_transform_cached                                 = apiGetFunctionAddress(BGFX, "bgfx_set_transform_cached"),
+            alloc_transform                                      = apiGetFunctionAddress(BGFX, "bgfx_alloc_transform"),
+            set_uniform                                          = apiGetFunctionAddress(BGFX, "bgfx_set_uniform"),
+            set_index_buffer                                     = apiGetFunctionAddress(BGFX, "bgfx_set_index_buffer"),
+            set_dynamic_index_buffer                             = apiGetFunctionAddress(BGFX, "bgfx_set_dynamic_index_buffer"),
+            set_transient_index_buffer                           = apiGetFunctionAddress(BGFX, "bgfx_set_transient_index_buffer"),
+            set_vertex_buffer                                    = apiGetFunctionAddress(BGFX, "bgfx_set_vertex_buffer"),
+            set_vertex_buffer_with_layout                        = apiGetFunctionAddress(BGFX, "bgfx_set_vertex_buffer_with_layout"),
+            set_dynamic_vertex_buffer                            = apiGetFunctionAddress(BGFX, "bgfx_set_dynamic_vertex_buffer"),
+            set_dynamic_vertex_buffer_with_layout                = apiGetFunctionAddress(BGFX, "bgfx_set_dynamic_vertex_buffer_with_layout"),
+            set_transient_vertex_buffer                          = apiGetFunctionAddress(BGFX, "bgfx_set_transient_vertex_buffer"),
+            set_transient_vertex_buffer_with_layout              = apiGetFunctionAddress(BGFX, "bgfx_set_transient_vertex_buffer_with_layout"),
+            set_vertex_count                                     = apiGetFunctionAddress(BGFX, "bgfx_set_vertex_count"),
+            set_instance_data_buffer                             = apiGetFunctionAddress(BGFX, "bgfx_set_instance_data_buffer"),
+            set_instance_data_from_vertex_buffer                 = apiGetFunctionAddress(BGFX, "bgfx_set_instance_data_from_vertex_buffer"),
+            set_instance_data_from_dynamic_vertex_buffer         = apiGetFunctionAddress(BGFX, "bgfx_set_instance_data_from_dynamic_vertex_buffer"),
+            set_instance_count                                   = apiGetFunctionAddress(BGFX, "bgfx_set_instance_count"),
+            set_texture                                          = apiGetFunctionAddress(BGFX, "bgfx_set_texture"),
+            touch                                                = apiGetFunctionAddress(BGFX, "bgfx_touch"),
+            submit                                               = apiGetFunctionAddress(BGFX, "bgfx_submit"),
+            submit_occlusion_query                               = apiGetFunctionAddress(BGFX, "bgfx_submit_occlusion_query"),
+            submit_indirect                                      = apiGetFunctionAddress(BGFX, "bgfx_submit_indirect"),
+            set_compute_index_buffer                             = apiGetFunctionAddress(BGFX, "bgfx_set_compute_index_buffer"),
+            set_compute_vertex_buffer                            = apiGetFunctionAddress(BGFX, "bgfx_set_compute_vertex_buffer"),
+            set_compute_dynamic_index_buffer                     = apiGetFunctionAddress(BGFX, "bgfx_set_compute_dynamic_index_buffer"),
+            set_compute_dynamic_vertex_buffer                    = apiGetFunctionAddress(BGFX, "bgfx_set_compute_dynamic_vertex_buffer"),
+            set_compute_indirect_buffer                          = apiGetFunctionAddress(BGFX, "bgfx_set_compute_indirect_buffer"),
+            set_image                                            = apiGetFunctionAddress(BGFX, "bgfx_set_image"),
+            dispatch                                             = apiGetFunctionAddress(BGFX, "bgfx_dispatch"),
+            dispatch_indirect                                    = apiGetFunctionAddress(BGFX, "bgfx_dispatch_indirect"),
+            discard                                              = apiGetFunctionAddress(BGFX, "bgfx_discard"),
+            blit                                                 = apiGetFunctionAddress(BGFX, "bgfx_blit");
+
+    }
+
+    /** Returns the bgfx {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return BGFX;
+    }
+
     /** API version */
-    public static final int BGFX_API_VERSION = 109;
+    public static final int BGFX_API_VERSION = 112;
 
     /** Invalid handle */
     public static final short BGFX_INVALID_HANDLE = (short)0xFFFF;
@@ -387,31 +590,31 @@ public class BGFX {
         BGFX_CAPS_DRAW_INDIRECT            = 0x10L,
         BGFX_CAPS_FRAGMENT_DEPTH           = 0x20L,
         BGFX_CAPS_FRAGMENT_ORDERING        = 0x40L,
-        BGFX_CAPS_FRAMEBUFFER_RW           = 0x80L,
-        BGFX_CAPS_GRAPHICS_DEBUGGER        = 0x100L,
-        BGFX_CAPS_RESERVED                 = 0x200L,
-        BGFX_CAPS_HDR10                    = 0x400L,
-        BGFX_CAPS_HIDPI                    = 0x800L,
-        BGFX_CAPS_INDEX32                  = 0x1000L,
-        BGFX_CAPS_INSTANCING               = 0x2000L,
-        BGFX_CAPS_OCCLUSION_QUERY          = 0x4000L,
-        BGFX_CAPS_RENDERER_MULTITHREADED   = 0x8000L,
-        BGFX_CAPS_SWAP_CHAIN               = 0x10000L,
-        BGFX_CAPS_TEXTURE_2D_ARRAY         = 0x20000L,
-        BGFX_CAPS_TEXTURE_3D               = 0x40000L,
-        BGFX_CAPS_TEXTURE_BLIT             = 0x180000L,
-        BGFX_CAPS_TEXTURE_COMPARE_RESERVED = 0x100000L,
-        BGFX_CAPS_TEXTURE_COMPARE_LEQUAL   = 0x200000L,
+        BGFX_CAPS_GRAPHICS_DEBUGGER        = 0x80L,
+        BGFX_CAPS_HDR10                    = 0x100L,
+        BGFX_CAPS_HIDPI                    = 0x200L,
+        BGFX_CAPS_IMAGE_RW                 = 0x400L,
+        BGFX_CAPS_INDEX32                  = 0x800L,
+        BGFX_CAPS_INSTANCING               = 0x1000L,
+        BGFX_CAPS_OCCLUSION_QUERY          = 0x2000L,
+        BGFX_CAPS_RENDERER_MULTITHREADED   = 0x4000L,
+        BGFX_CAPS_SWAP_CHAIN               = 0x8000L,
+        BGFX_CAPS_TEXTURE_2D_ARRAY         = 0x10000L,
+        BGFX_CAPS_TEXTURE_3D               = 0x20000L,
+        BGFX_CAPS_TEXTURE_BLIT             = 0x40000L,
+        BGFX_CAPS_TEXTURE_COMPARE_RESERVED = 0x80000L,
+        BGFX_CAPS_TEXTURE_COMPARE_LEQUAL   = 0x100000L,
         BGFX_CAPS_TEXTURE_COMPARE_ALL      = BGFX_CAPS_TEXTURE_COMPARE_RESERVED | BGFX_CAPS_TEXTURE_COMPARE_LEQUAL,
-        BGFX_CAPS_TEXTURE_CUBE_ARRAY       = 0x400000L,
-        BGFX_CAPS_TEXTURE_DIRECT_ACCESS    = 0x800000L,
-        BGFX_CAPS_TEXTURE_READ_BACK        = 0x1000000L,
-        BGFX_CAPS_VERTEX_ATTRIB_HALF       = 0x2000000L,
-        BGFX_CAPS_VERTEX_ATTRIB_UINT10     = 0x4000000L,
-        BGFX_CAPS_VERTEX_ID                = 0x8000000L;
+        BGFX_CAPS_TEXTURE_CUBE_ARRAY       = 0x200000L,
+        BGFX_CAPS_TEXTURE_DIRECT_ACCESS    = 0x400000L,
+        BGFX_CAPS_TEXTURE_READ_BACK        = 0x800000L,
+        BGFX_CAPS_VERTEX_ATTRIB_HALF       = 0x1000000L,
+        BGFX_CAPS_VERTEX_ATTRIB_UINT10     = 0x2000000L,
+        BGFX_CAPS_VERTEX_ID                = 0x4000000L,
+        BGFX_CAPS_VIEWPORT_LAYER_ARRAY     = 0x8000000L;
 
     /** Format caps */
-    public static final short
+    public static final int
         BGFX_CAPS_FORMAT_TEXTURE_NONE             = 0x0,
         BGFX_CAPS_FORMAT_TEXTURE_2D               = 0x1,
         BGFX_CAPS_FORMAT_TEXTURE_2D_SRGB          = 0x2,
@@ -423,11 +626,12 @@ public class BGFX {
         BGFX_CAPS_FORMAT_TEXTURE_CUBE_SRGB        = 0x80,
         BGFX_CAPS_FORMAT_TEXTURE_CUBE_EMULATED    = 0x100,
         BGFX_CAPS_FORMAT_TEXTURE_VERTEX           = 0x200,
-        BGFX_CAPS_FORMAT_TEXTURE_IMAGE            = 0x400,
-        BGFX_CAPS_FORMAT_TEXTURE_FRAMEBUFFER      = 0x800,
-        BGFX_CAPS_FORMAT_TEXTURE_FRAMEBUFFER_MSAA = 0x1000,
-        BGFX_CAPS_FORMAT_TEXTURE_MSAA             = 0x2000,
-        BGFX_CAPS_FORMAT_TEXTURE_MIP_AUTOGEN      = 0x4000;
+        BGFX_CAPS_FORMAT_TEXTURE_IMAGE_READ       = 0x400,
+        BGFX_CAPS_FORMAT_TEXTURE_IMAGE_WRITE      = 0x800,
+        BGFX_CAPS_FORMAT_TEXTURE_FRAMEBUFFER      = 0x1000,
+        BGFX_CAPS_FORMAT_TEXTURE_FRAMEBUFFER_MSAA = 0x2000,
+        BGFX_CAPS_FORMAT_TEXTURE_MSAA             = 0x4000,
+        BGFX_CAPS_FORMAT_TEXTURE_MIP_AUTOGEN      = 0x8000;
 
     /** Resolve flags. */
     public static final byte
@@ -969,228 +1173,26 @@ public class BGFX {
         throw new UnsupportedOperationException();
     }
 
-    private static final SharedLibrary BGFX = Library.loadNative(BGFX.class, "org.lwjgl.bgfx", Configuration.BGFX_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("bgfx")), true);
-
-    /** Contains the function pointers loaded from the bgfx {@link SharedLibrary}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            attachment_init                                      = apiGetFunctionAddress(BGFX, "bgfx_attachment_init"),
-            vertex_layout_begin                                  = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_begin"),
-            vertex_layout_add                                    = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_add"),
-            vertex_layout_decode                                 = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_decode"),
-            vertex_layout_has                                    = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_has"),
-            vertex_layout_skip                                   = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_skip"),
-            vertex_layout_end                                    = apiGetFunctionAddress(BGFX, "bgfx_vertex_layout_end"),
-            vertex_pack                                          = apiGetFunctionAddress(BGFX, "bgfx_vertex_pack"),
-            vertex_unpack                                        = apiGetFunctionAddress(BGFX, "bgfx_vertex_unpack"),
-            vertex_convert                                       = apiGetFunctionAddress(BGFX, "bgfx_vertex_convert"),
-            weld_vertices                                        = apiGetFunctionAddress(BGFX, "bgfx_weld_vertices"),
-            topology_convert                                     = apiGetFunctionAddress(BGFX, "bgfx_topology_convert"),
-            topology_sort_tri_list                               = apiGetFunctionAddress(BGFX, "bgfx_topology_sort_tri_list"),
-            get_supported_renderers                              = apiGetFunctionAddress(BGFX, "bgfx_get_supported_renderers"),
-            get_renderer_name                                    = apiGetFunctionAddress(BGFX, "bgfx_get_renderer_name"),
-            init_ctor                                            = apiGetFunctionAddress(BGFX, "bgfx_init_ctor"),
-            init                                                 = apiGetFunctionAddress(BGFX, "bgfx_init"),
-            shutdown                                             = apiGetFunctionAddress(BGFX, "bgfx_shutdown"),
-            reset                                                = apiGetFunctionAddress(BGFX, "bgfx_reset"),
-            frame                                                = apiGetFunctionAddress(BGFX, "bgfx_frame"),
-            get_renderer_type                                    = apiGetFunctionAddress(BGFX, "bgfx_get_renderer_type"),
-            get_caps                                             = apiGetFunctionAddress(BGFX, "bgfx_get_caps"),
-            get_stats                                            = apiGetFunctionAddress(BGFX, "bgfx_get_stats"),
-            alloc                                                = apiGetFunctionAddress(BGFX, "bgfx_alloc"),
-            copy                                                 = apiGetFunctionAddress(BGFX, "bgfx_copy"),
-            make_ref                                             = apiGetFunctionAddress(BGFX, "bgfx_make_ref"),
-            make_ref_release                                     = apiGetFunctionAddress(BGFX, "bgfx_make_ref_release"),
-            set_debug                                            = apiGetFunctionAddress(BGFX, "bgfx_set_debug"),
-            dbg_text_clear                                       = apiGetFunctionAddress(BGFX, "bgfx_dbg_text_clear"),
-            dbg_text_printf                                      = apiGetFunctionAddress(BGFX, "bgfx_dbg_text_printf"),
-            dbg_text_vprintf                                     = apiGetFunctionAddress(BGFX, "bgfx_dbg_text_vprintf"),
-            dbg_text_image                                       = apiGetFunctionAddress(BGFX, "bgfx_dbg_text_image"),
-            create_index_buffer                                  = apiGetFunctionAddress(BGFX, "bgfx_create_index_buffer"),
-            set_index_buffer_name                                = apiGetFunctionAddress(BGFX, "bgfx_set_index_buffer_name"),
-            destroy_index_buffer                                 = apiGetFunctionAddress(BGFX, "bgfx_destroy_index_buffer"),
-            create_vertex_layout                                 = apiGetFunctionAddress(BGFX, "bgfx_create_vertex_layout"),
-            destroy_vertex_layout                                = apiGetFunctionAddress(BGFX, "bgfx_destroy_vertex_layout"),
-            create_vertex_buffer                                 = apiGetFunctionAddress(BGFX, "bgfx_create_vertex_buffer"),
-            set_vertex_buffer_name                               = apiGetFunctionAddress(BGFX, "bgfx_set_vertex_buffer_name"),
-            destroy_vertex_buffer                                = apiGetFunctionAddress(BGFX, "bgfx_destroy_vertex_buffer"),
-            create_dynamic_index_buffer                          = apiGetFunctionAddress(BGFX, "bgfx_create_dynamic_index_buffer"),
-            create_dynamic_index_buffer_mem                      = apiGetFunctionAddress(BGFX, "bgfx_create_dynamic_index_buffer_mem"),
-            update_dynamic_index_buffer                          = apiGetFunctionAddress(BGFX, "bgfx_update_dynamic_index_buffer"),
-            destroy_dynamic_index_buffer                         = apiGetFunctionAddress(BGFX, "bgfx_destroy_dynamic_index_buffer"),
-            create_dynamic_vertex_buffer                         = apiGetFunctionAddress(BGFX, "bgfx_create_dynamic_vertex_buffer"),
-            create_dynamic_vertex_buffer_mem                     = apiGetFunctionAddress(BGFX, "bgfx_create_dynamic_vertex_buffer_mem"),
-            update_dynamic_vertex_buffer                         = apiGetFunctionAddress(BGFX, "bgfx_update_dynamic_vertex_buffer"),
-            destroy_dynamic_vertex_buffer                        = apiGetFunctionAddress(BGFX, "bgfx_destroy_dynamic_vertex_buffer"),
-            get_avail_transient_index_buffer                     = apiGetFunctionAddress(BGFX, "bgfx_get_avail_transient_index_buffer"),
-            get_avail_transient_vertex_buffer                    = apiGetFunctionAddress(BGFX, "bgfx_get_avail_transient_vertex_buffer"),
-            get_avail_instance_data_buffer                       = apiGetFunctionAddress(BGFX, "bgfx_get_avail_instance_data_buffer"),
-            alloc_transient_index_buffer                         = apiGetFunctionAddress(BGFX, "bgfx_alloc_transient_index_buffer"),
-            alloc_transient_vertex_buffer                        = apiGetFunctionAddress(BGFX, "bgfx_alloc_transient_vertex_buffer"),
-            alloc_transient_buffers                              = apiGetFunctionAddress(BGFX, "bgfx_alloc_transient_buffers"),
-            alloc_instance_data_buffer                           = apiGetFunctionAddress(BGFX, "bgfx_alloc_instance_data_buffer"),
-            create_indirect_buffer                               = apiGetFunctionAddress(BGFX, "bgfx_create_indirect_buffer"),
-            destroy_indirect_buffer                              = apiGetFunctionAddress(BGFX, "bgfx_destroy_indirect_buffer"),
-            create_shader                                        = apiGetFunctionAddress(BGFX, "bgfx_create_shader"),
-            get_shader_uniforms                                  = apiGetFunctionAddress(BGFX, "bgfx_get_shader_uniforms"),
-            set_shader_name                                      = apiGetFunctionAddress(BGFX, "bgfx_set_shader_name"),
-            destroy_shader                                       = apiGetFunctionAddress(BGFX, "bgfx_destroy_shader"),
-            create_program                                       = apiGetFunctionAddress(BGFX, "bgfx_create_program"),
-            create_compute_program                               = apiGetFunctionAddress(BGFX, "bgfx_create_compute_program"),
-            destroy_program                                      = apiGetFunctionAddress(BGFX, "bgfx_destroy_program"),
-            is_texture_valid                                     = apiGetFunctionAddress(BGFX, "bgfx_is_texture_valid"),
-            calc_texture_size                                    = apiGetFunctionAddress(BGFX, "bgfx_calc_texture_size"),
-            create_texture                                       = apiGetFunctionAddress(BGFX, "bgfx_create_texture"),
-            create_texture_2d                                    = apiGetFunctionAddress(BGFX, "bgfx_create_texture_2d"),
-            create_texture_2d_scaled                             = apiGetFunctionAddress(BGFX, "bgfx_create_texture_2d_scaled"),
-            create_texture_3d                                    = apiGetFunctionAddress(BGFX, "bgfx_create_texture_3d"),
-            create_texture_cube                                  = apiGetFunctionAddress(BGFX, "bgfx_create_texture_cube"),
-            update_texture_2d                                    = apiGetFunctionAddress(BGFX, "bgfx_update_texture_2d"),
-            update_texture_3d                                    = apiGetFunctionAddress(BGFX, "bgfx_update_texture_3d"),
-            update_texture_cube                                  = apiGetFunctionAddress(BGFX, "bgfx_update_texture_cube"),
-            read_texture                                         = apiGetFunctionAddress(BGFX, "bgfx_read_texture"),
-            set_texture_name                                     = apiGetFunctionAddress(BGFX, "bgfx_set_texture_name"),
-            get_direct_access_ptr                                = apiGetFunctionAddress(BGFX, "bgfx_get_direct_access_ptr"),
-            destroy_texture                                      = apiGetFunctionAddress(BGFX, "bgfx_destroy_texture"),
-            create_frame_buffer                                  = apiGetFunctionAddress(BGFX, "bgfx_create_frame_buffer"),
-            create_frame_buffer_scaled                           = apiGetFunctionAddress(BGFX, "bgfx_create_frame_buffer_scaled"),
-            create_frame_buffer_from_handles                     = apiGetFunctionAddress(BGFX, "bgfx_create_frame_buffer_from_handles"),
-            create_frame_buffer_from_attachment                  = apiGetFunctionAddress(BGFX, "bgfx_create_frame_buffer_from_attachment"),
-            create_frame_buffer_from_nwh                         = apiGetFunctionAddress(BGFX, "bgfx_create_frame_buffer_from_nwh"),
-            set_frame_buffer_name                                = apiGetFunctionAddress(BGFX, "bgfx_set_frame_buffer_name"),
-            get_texture                                          = apiGetFunctionAddress(BGFX, "bgfx_get_texture"),
-            destroy_frame_buffer                                 = apiGetFunctionAddress(BGFX, "bgfx_destroy_frame_buffer"),
-            create_uniform                                       = apiGetFunctionAddress(BGFX, "bgfx_create_uniform"),
-            get_uniform_info                                     = apiGetFunctionAddress(BGFX, "bgfx_get_uniform_info"),
-            destroy_uniform                                      = apiGetFunctionAddress(BGFX, "bgfx_destroy_uniform"),
-            create_occlusion_query                               = apiGetFunctionAddress(BGFX, "bgfx_create_occlusion_query"),
-            get_result                                           = apiGetFunctionAddress(BGFX, "bgfx_get_result"),
-            destroy_occlusion_query                              = apiGetFunctionAddress(BGFX, "bgfx_destroy_occlusion_query"),
-            set_palette_color                                    = apiGetFunctionAddress(BGFX, "bgfx_set_palette_color"),
-            set_palette_color_rgba8                              = apiGetFunctionAddress(BGFX, "bgfx_set_palette_color_rgba8"),
-            set_view_name                                        = apiGetFunctionAddress(BGFX, "bgfx_set_view_name"),
-            set_view_rect                                        = apiGetFunctionAddress(BGFX, "bgfx_set_view_rect"),
-            set_view_rect_ratio                                  = apiGetFunctionAddress(BGFX, "bgfx_set_view_rect_ratio"),
-            set_view_scissor                                     = apiGetFunctionAddress(BGFX, "bgfx_set_view_scissor"),
-            set_view_clear                                       = apiGetFunctionAddress(BGFX, "bgfx_set_view_clear"),
-            set_view_clear_mrt                                   = apiGetFunctionAddress(BGFX, "bgfx_set_view_clear_mrt"),
-            set_view_mode                                        = apiGetFunctionAddress(BGFX, "bgfx_set_view_mode"),
-            set_view_frame_buffer                                = apiGetFunctionAddress(BGFX, "bgfx_set_view_frame_buffer"),
-            set_view_transform                                   = apiGetFunctionAddress(BGFX, "bgfx_set_view_transform"),
-            set_view_order                                       = apiGetFunctionAddress(BGFX, "bgfx_set_view_order"),
-            reset_view                                           = apiGetFunctionAddress(BGFX, "bgfx_reset_view"),
-            encoder_begin                                        = apiGetFunctionAddress(BGFX, "bgfx_encoder_begin"),
-            encoder_end                                          = apiGetFunctionAddress(BGFX, "bgfx_encoder_end"),
-            encoder_set_marker                                   = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_marker"),
-            encoder_set_state                                    = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_state"),
-            encoder_set_condition                                = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_condition"),
-            encoder_set_stencil                                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_stencil"),
-            encoder_set_scissor                                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_scissor"),
-            encoder_set_scissor_cached                           = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_scissor_cached"),
-            encoder_set_transform                                = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transform"),
-            encoder_set_transform_cached                         = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transform_cached"),
-            encoder_alloc_transform                              = apiGetFunctionAddress(BGFX, "bgfx_encoder_alloc_transform"),
-            encoder_set_uniform                                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_uniform"),
-            encoder_set_index_buffer                             = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_index_buffer"),
-            encoder_set_dynamic_index_buffer                     = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_dynamic_index_buffer"),
-            encoder_set_transient_index_buffer                   = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transient_index_buffer"),
-            encoder_set_vertex_buffer                            = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_vertex_buffer"),
-            encoder_set_vertex_buffer_with_layout                = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_vertex_buffer_with_layout"),
-            encoder_set_dynamic_vertex_buffer                    = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_dynamic_vertex_buffer"),
-            encoder_set_dynamic_vertex_buffer_with_layout        = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_dynamic_vertex_buffer_with_layout"),
-            encoder_set_transient_vertex_buffer                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transient_vertex_buffer"),
-            encoder_set_transient_vertex_buffer_with_layout      = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_transient_vertex_buffer_with_layout"),
-            encoder_set_vertex_count                             = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_vertex_count"),
-            encoder_set_instance_data_buffer                     = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_instance_data_buffer"),
-            encoder_set_instance_data_from_vertex_buffer         = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_instance_data_from_vertex_buffer"),
-            encoder_set_instance_data_from_dynamic_vertex_buffer = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_instance_data_from_dynamic_vertex_buffer"),
-            encoder_set_instance_count                           = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_instance_count"),
-            encoder_set_texture                                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_texture"),
-            encoder_touch                                        = apiGetFunctionAddress(BGFX, "bgfx_encoder_touch"),
-            encoder_submit                                       = apiGetFunctionAddress(BGFX, "bgfx_encoder_submit"),
-            encoder_submit_occlusion_query                       = apiGetFunctionAddress(BGFX, "bgfx_encoder_submit_occlusion_query"),
-            encoder_submit_indirect                              = apiGetFunctionAddress(BGFX, "bgfx_encoder_submit_indirect"),
-            encoder_set_compute_index_buffer                     = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_compute_index_buffer"),
-            encoder_set_compute_vertex_buffer                    = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_compute_vertex_buffer"),
-            encoder_set_compute_dynamic_index_buffer             = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_compute_dynamic_index_buffer"),
-            encoder_set_compute_dynamic_vertex_buffer            = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_compute_dynamic_vertex_buffer"),
-            encoder_set_compute_indirect_buffer                  = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_compute_indirect_buffer"),
-            encoder_set_image                                    = apiGetFunctionAddress(BGFX, "bgfx_encoder_set_image"),
-            encoder_dispatch                                     = apiGetFunctionAddress(BGFX, "bgfx_encoder_dispatch"),
-            encoder_dispatch_indirect                            = apiGetFunctionAddress(BGFX, "bgfx_encoder_dispatch_indirect"),
-            encoder_discard                                      = apiGetFunctionAddress(BGFX, "bgfx_encoder_discard"),
-            encoder_blit                                         = apiGetFunctionAddress(BGFX, "bgfx_encoder_blit"),
-            request_screen_shot                                  = apiGetFunctionAddress(BGFX, "bgfx_request_screen_shot"),
-            set_marker                                           = apiGetFunctionAddress(BGFX, "bgfx_set_marker"),
-            set_state                                            = apiGetFunctionAddress(BGFX, "bgfx_set_state"),
-            set_condition                                        = apiGetFunctionAddress(BGFX, "bgfx_set_condition"),
-            set_stencil                                          = apiGetFunctionAddress(BGFX, "bgfx_set_stencil"),
-            set_scissor                                          = apiGetFunctionAddress(BGFX, "bgfx_set_scissor"),
-            set_scissor_cached                                   = apiGetFunctionAddress(BGFX, "bgfx_set_scissor_cached"),
-            set_transform                                        = apiGetFunctionAddress(BGFX, "bgfx_set_transform"),
-            set_transform_cached                                 = apiGetFunctionAddress(BGFX, "bgfx_set_transform_cached"),
-            alloc_transform                                      = apiGetFunctionAddress(BGFX, "bgfx_alloc_transform"),
-            set_uniform                                          = apiGetFunctionAddress(BGFX, "bgfx_set_uniform"),
-            set_index_buffer                                     = apiGetFunctionAddress(BGFX, "bgfx_set_index_buffer"),
-            set_dynamic_index_buffer                             = apiGetFunctionAddress(BGFX, "bgfx_set_dynamic_index_buffer"),
-            set_transient_index_buffer                           = apiGetFunctionAddress(BGFX, "bgfx_set_transient_index_buffer"),
-            set_vertex_buffer                                    = apiGetFunctionAddress(BGFX, "bgfx_set_vertex_buffer"),
-            set_vertex_buffer_with_layout                        = apiGetFunctionAddress(BGFX, "bgfx_set_vertex_buffer_with_layout"),
-            set_dynamic_vertex_buffer                            = apiGetFunctionAddress(BGFX, "bgfx_set_dynamic_vertex_buffer"),
-            set_dynamic_vertex_buffer_with_layout                = apiGetFunctionAddress(BGFX, "bgfx_set_dynamic_vertex_buffer_with_layout"),
-            set_transient_vertex_buffer                          = apiGetFunctionAddress(BGFX, "bgfx_set_transient_vertex_buffer"),
-            set_transient_vertex_buffer_with_layout              = apiGetFunctionAddress(BGFX, "bgfx_set_transient_vertex_buffer_with_layout"),
-            set_vertex_count                                     = apiGetFunctionAddress(BGFX, "bgfx_set_vertex_count"),
-            set_instance_data_buffer                             = apiGetFunctionAddress(BGFX, "bgfx_set_instance_data_buffer"),
-            set_instance_data_from_vertex_buffer                 = apiGetFunctionAddress(BGFX, "bgfx_set_instance_data_from_vertex_buffer"),
-            set_instance_data_from_dynamic_vertex_buffer         = apiGetFunctionAddress(BGFX, "bgfx_set_instance_data_from_dynamic_vertex_buffer"),
-            set_instance_count                                   = apiGetFunctionAddress(BGFX, "bgfx_set_instance_count"),
-            set_texture                                          = apiGetFunctionAddress(BGFX, "bgfx_set_texture"),
-            touch                                                = apiGetFunctionAddress(BGFX, "bgfx_touch"),
-            submit                                               = apiGetFunctionAddress(BGFX, "bgfx_submit"),
-            submit_occlusion_query                               = apiGetFunctionAddress(BGFX, "bgfx_submit_occlusion_query"),
-            submit_indirect                                      = apiGetFunctionAddress(BGFX, "bgfx_submit_indirect"),
-            set_compute_index_buffer                             = apiGetFunctionAddress(BGFX, "bgfx_set_compute_index_buffer"),
-            set_compute_vertex_buffer                            = apiGetFunctionAddress(BGFX, "bgfx_set_compute_vertex_buffer"),
-            set_compute_dynamic_index_buffer                     = apiGetFunctionAddress(BGFX, "bgfx_set_compute_dynamic_index_buffer"),
-            set_compute_dynamic_vertex_buffer                    = apiGetFunctionAddress(BGFX, "bgfx_set_compute_dynamic_vertex_buffer"),
-            set_compute_indirect_buffer                          = apiGetFunctionAddress(BGFX, "bgfx_set_compute_indirect_buffer"),
-            set_image                                            = apiGetFunctionAddress(BGFX, "bgfx_set_image"),
-            dispatch                                             = apiGetFunctionAddress(BGFX, "bgfx_dispatch"),
-            dispatch_indirect                                    = apiGetFunctionAddress(BGFX, "bgfx_dispatch_indirect"),
-            discard                                              = apiGetFunctionAddress(BGFX, "bgfx_discard"),
-            blit                                                 = apiGetFunctionAddress(BGFX, "bgfx_blit");
-
-    }
-
-    /** Returns the bgfx {@link SharedLibrary}. */
-    public static SharedLibrary getLibrary() {
-        return BGFX;
-    }
-
     // --- [ bgfx_attachment_init ] ---
 
     /** Unsafe version of: {@link #bgfx_attachment_init attachment_init} */
-    public static void nbgfx_attachment_init(long _this, short _handle, int _access, short _layer, short _mip, byte _resolve) {
+    public static void nbgfx_attachment_init(long _this, short _handle, int _access, short _layer, short _numLayers, short _mip, byte _resolve) {
         long __functionAddress = Functions.attachment_init;
-        invokePV(_this, _handle, _access, _layer, _mip, _resolve, __functionAddress);
+        invokePV(_this, _handle, _access, _layer, _numLayers, _mip, _resolve, __functionAddress);
     }
 
     /**
      * Init attachment.
      *
-     * @param _handle  render target texture handle
-     * @param _access  access. One of:<br><table><tr><td>{@link #BGFX_ACCESS_READ ACCESS_READ}</td><td>{@link #BGFX_ACCESS_WRITE ACCESS_WRITE}</td><td>{@link #BGFX_ACCESS_READWRITE ACCESS_READWRITE}</td></tr></table>
-     * @param _layer   cubemap side or depth layer/slice
-     * @param _mip     mip level
-     * @param _resolve resolve flags. One of:<br><table><tr><td>{@link #BGFX_RESOLVE_NONE RESOLVE_NONE}</td><td>{@link #BGFX_RESOLVE_AUTO_GEN_MIPS RESOLVE_AUTO_GEN_MIPS}</td></tr></table>
+     * @param _handle    render target texture handle
+     * @param _access    access. One of:<br><table><tr><td>{@link #BGFX_ACCESS_READ ACCESS_READ}</td><td>{@link #BGFX_ACCESS_WRITE ACCESS_WRITE}</td><td>{@link #BGFX_ACCESS_READWRITE ACCESS_READWRITE}</td></tr></table>
+     * @param _layer     cubemap side or depth layer/slice to use
+     * @param _numLayers number of texture layer/slice(s) in array to use
+     * @param _mip       mip level
+     * @param _resolve   resolve flags. One of:<br><table><tr><td>{@link #BGFX_RESOLVE_NONE RESOLVE_NONE}</td><td>{@link #BGFX_RESOLVE_AUTO_GEN_MIPS RESOLVE_AUTO_GEN_MIPS}</td></tr></table>
      */
-    public static void bgfx_attachment_init(@NativeType("bgfx_attachment_t *") BGFXAttachment _this, @NativeType("bgfx_texture_handle_t") short _handle, @NativeType("bgfx_access_t") int _access, @NativeType("uint16_t") int _layer, @NativeType("uint16_t") int _mip, @NativeType("uint8_t") int _resolve) {
-        nbgfx_attachment_init(_this.address(), _handle, _access, (short)_layer, (short)_mip, (byte)_resolve);
+    public static void bgfx_attachment_init(@NativeType("bgfx_attachment_t *") BGFXAttachment _this, @NativeType("bgfx_texture_handle_t") short _handle, @NativeType("bgfx_access_t") int _access, @NativeType("uint16_t") int _layer, @NativeType("uint16_t") int _numLayers, @NativeType("uint16_t") int _mip, @NativeType("uint8_t") int _resolve) {
+        nbgfx_attachment_init(_this.address(), _handle, _access, (short)_layer, (short)_numLayers, (short)_mip, (byte)_resolve);
     }
 
     // --- [ bgfx_vertex_layout_begin ] ---
@@ -2648,9 +2650,9 @@ public class BGFX {
     // --- [ bgfx_alloc_transient_index_buffer ] ---
 
     /** Unsafe version of: {@link #bgfx_alloc_transient_index_buffer alloc_transient_index_buffer} */
-    public static void nbgfx_alloc_transient_index_buffer(long _tib, int _num) {
+    public static void nbgfx_alloc_transient_index_buffer(long _tib, int _num, boolean _index32) {
         long __functionAddress = Functions.alloc_transient_index_buffer;
-        invokePV(_tib, _num, __functionAddress);
+        invokePV(_tib, _num, _index32, __functionAddress);
     }
 
     /**
@@ -2658,11 +2660,12 @@ public class BGFX {
      * 
      * <p>Only 16-bit index buffer is supported.</p>
      *
-     * @param _tib {@link BGFXTransientIndexBuffer} structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls
-     * @param _num number of indices to allocate
+     * @param _tib     {@link BGFXTransientIndexBuffer} structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls
+     * @param _num     number of indices to allocate
+     * @param _index32 set to {@code true} if input indices will be 32-bit
      */
-    public static void bgfx_alloc_transient_index_buffer(@NativeType("bgfx_transient_index_buffer_t *") BGFXTransientIndexBuffer _tib, @NativeType("uint32_t") int _num) {
-        nbgfx_alloc_transient_index_buffer(_tib.address(), _num);
+    public static void bgfx_alloc_transient_index_buffer(@NativeType("bgfx_transient_index_buffer_t *") BGFXTransientIndexBuffer _tib, @NativeType("uint32_t") int _num, @NativeType("bool") boolean _index32) {
+        nbgfx_alloc_transient_index_buffer(_tib.address(), _num, _index32);
     }
 
     // --- [ bgfx_alloc_transient_vertex_buffer ] ---

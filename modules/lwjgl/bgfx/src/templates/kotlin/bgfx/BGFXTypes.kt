@@ -176,6 +176,7 @@ val bgfx_transient_index_buffer_t = struct(Module.BGFX, "BGFXTransientIndexBuffe
     AutoSize("data")..uint32_t("size", "data size")
     uint32_t("startIndex", "first index")
     bgfx_index_buffer_handle_t("handle", "index buffer handle")
+    bool("isIndex16", "index buffer format is 16-bits if true, otherwise it is 32-bit")
 }
 
 val bgfx_transient_vertex_buffer_t = struct(Module.BGFX, "BGFXTransientVertexBuffer", nativeName = "bgfx_transient_vertex_buffer_t") {
@@ -228,7 +229,8 @@ val bgfx_attachment_t = struct(Module.BGFX, "BGFXAttachment", nativeName = "bgfx
     bgfx_access_t("access", "attachment access")
     bgfx_texture_handle_t("handle", "render target texture handle")
     uint16_t("mip", "mip level")
-    uint16_t("layer", "cubemap side or depth layer/slice")
+    uint16_t("layer", "cubemap side or depth layer/slice to use")
+    uint16_t("numLayers", "number of texture layer/slice(s) in array to use")
     uint8_t("resolve", "resolve flags").links("RESOLVE_\\w+")
 }
 

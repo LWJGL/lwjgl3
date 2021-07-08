@@ -19,12 +19,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * The opaque {@code stbrp_context} struct.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code extra[2]} &ndash; we allocate two extra nodes so optimal user-node-count is {@code width} not {@code width+2}</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -37,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int num_nodes;
  *     {@link STBRPNode stbrp_node} * active_head;
  *     {@link STBRPNode stbrp_node} * free_head;
- *     {@link STBRPNode stbrp_node} extra[2];
+ *     {@link STBRPNode stbrp_node} {@link #extra}[2];
  * }</code></pre>
  */
 @NativeType("struct stbrp_context")
@@ -101,30 +95,30 @@ public class STBRPContext extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code width} field. */
+    /** @return the value of the {@code width} field. */
     public int width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** @return the value of the {@code height} field. */
     public int height() { return nheight(address()); }
-    /** Returns the value of the {@code align} field. */
+    /** @return the value of the {@code align} field. */
     public int align() { return nalign(address()); }
-    /** Returns the value of the {@code init_mode} field. */
+    /** @return the value of the {@code init_mode} field. */
     public int init_mode() { return ninit_mode(address()); }
-    /** Returns the value of the {@code heuristic} field. */
+    /** @return the value of the {@code heuristic} field. */
     public int heuristic() { return nheuristic(address()); }
-    /** Returns the value of the {@code num_nodes} field. */
+    /** @return the value of the {@code num_nodes} field. */
     public int num_nodes() { return nnum_nodes(address()); }
-    /** Returns a {@link STBRPNode} view of the struct pointed to by the {@code active_head} field. */
+    /** @return a {@link STBRPNode} view of the struct pointed to by the {@code active_head} field. */
     @Nullable
     @NativeType("stbrp_node *")
     public STBRPNode active_head() { return nactive_head(address()); }
-    /** Returns a {@link STBRPNode} view of the struct pointed to by the {@code free_head} field. */
+    /** @return a {@link STBRPNode} view of the struct pointed to by the {@code free_head} field. */
     @Nullable
     @NativeType("stbrp_node *")
     public STBRPNode free_head() { return nfree_head(address()); }
-    /** Returns a {@link STBRPNode}.Buffer view of the {@code extra} field. */
+    /** we allocate two extra nodes so optimal user-node-count is {@code width} not {@code width+2} */
     @NativeType("stbrp_node[2]")
     public STBRPNode.Buffer extra() { return nextra(address()); }
-    /** Returns a {@link STBRPNode} view of the struct at the specified index of the {@code extra} field. */
+    /** we allocate two extra nodes so optimal user-node-count is {@code width} not {@code width+2} */
     @NativeType("stbrp_node")
     public STBRPNode extra(int index) { return nextra(address(), index); }
 
@@ -332,30 +326,30 @@ public class STBRPContext extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@code width} field. */
         public int width() { return STBRPContext.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@code height} field. */
         public int height() { return STBRPContext.nheight(address()); }
-        /** Returns the value of the {@code align} field. */
+        /** @return the value of the {@code align} field. */
         public int align() { return STBRPContext.nalign(address()); }
-        /** Returns the value of the {@code init_mode} field. */
+        /** @return the value of the {@code init_mode} field. */
         public int init_mode() { return STBRPContext.ninit_mode(address()); }
-        /** Returns the value of the {@code heuristic} field. */
+        /** @return the value of the {@code heuristic} field. */
         public int heuristic() { return STBRPContext.nheuristic(address()); }
-        /** Returns the value of the {@code num_nodes} field. */
+        /** @return the value of the {@code num_nodes} field. */
         public int num_nodes() { return STBRPContext.nnum_nodes(address()); }
-        /** Returns a {@link STBRPNode} view of the struct pointed to by the {@code active_head} field. */
+        /** @return a {@link STBRPNode} view of the struct pointed to by the {@code active_head} field. */
         @Nullable
         @NativeType("stbrp_node *")
         public STBRPNode active_head() { return STBRPContext.nactive_head(address()); }
-        /** Returns a {@link STBRPNode} view of the struct pointed to by the {@code free_head} field. */
+        /** @return a {@link STBRPNode} view of the struct pointed to by the {@code free_head} field. */
         @Nullable
         @NativeType("stbrp_node *")
         public STBRPNode free_head() { return STBRPContext.nfree_head(address()); }
-        /** Returns a {@link STBRPNode}.Buffer view of the {@code extra} field. */
+        /** @return a {@link STBRPNode}.Buffer view of the {@link STBRPContext#extra} field. */
         @NativeType("stbrp_node[2]")
         public STBRPNode.Buffer extra() { return STBRPContext.nextra(address()); }
-        /** Returns a {@link STBRPNode} view of the struct at the specified index of the {@code extra} field. */
+        /** @return a {@link STBRPNode} view of the struct at the specified index of the {@link STBRPContext#extra} field. */
         @NativeType("stbrp_node")
         public STBRPNode extra(int index) { return STBRPContext.nextra(address(), index); }
 

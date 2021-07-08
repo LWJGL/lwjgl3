@@ -16,25 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Calculated statistics of memory usage in entire allocator.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code blockCount} &ndash; number of {@code VkDeviceMemory} Vulkan memory blocks allocated</li>
- * <li>{@code allocationCount} &ndash; number of {@code VmaAllocation} allocation objects allocated</li>
- * <li>{@code unusedRangeCount} &ndash; number of free ranges of memory between allocations</li>
- * <li>{@code usedBytes} &ndash; total number of bytes occupied by all allocations</li>
- * <li>{@code unusedBytes} &ndash; total number of bytes occupied by unused ranges</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VmaStatInfo {
- *     uint32_t blockCount;
- *     uint32_t allocationCount;
- *     uint32_t unusedRangeCount;
- *     VkDeviceSize usedBytes;
- *     VkDeviceSize unusedBytes;
+ *     uint32_t {@link #blockCount};
+ *     uint32_t {@link #allocationCount};
+ *     uint32_t {@link #unusedRangeCount};
+ *     VkDeviceSize {@link #usedBytes};
+ *     VkDeviceSize {@link #unusedBytes};
  *     VkDeviceSize allocationSizeMin;
  *     VkDeviceSize allocationSizeAvg;
  *     VkDeviceSize allocationSizeMax;
@@ -109,37 +99,37 @@ public class VmaStatInfo extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code blockCount} field. */
+    /** number of {@code VkDeviceMemory} Vulkan memory blocks allocated */
     @NativeType("uint32_t")
     public int blockCount() { return nblockCount(address()); }
-    /** Returns the value of the {@code allocationCount} field. */
+    /** number of {@code VmaAllocation} allocation objects allocated */
     @NativeType("uint32_t")
     public int allocationCount() { return nallocationCount(address()); }
-    /** Returns the value of the {@code unusedRangeCount} field. */
+    /** number of free ranges of memory between allocations */
     @NativeType("uint32_t")
     public int unusedRangeCount() { return nunusedRangeCount(address()); }
-    /** Returns the value of the {@code usedBytes} field. */
+    /** total number of bytes occupied by all allocations */
     @NativeType("VkDeviceSize")
     public long usedBytes() { return nusedBytes(address()); }
-    /** Returns the value of the {@code unusedBytes} field. */
+    /** total number of bytes occupied by unused ranges */
     @NativeType("VkDeviceSize")
     public long unusedBytes() { return nunusedBytes(address()); }
-    /** Returns the value of the {@code allocationSizeMin} field. */
+    /** @return the value of the {@code allocationSizeMin} field. */
     @NativeType("VkDeviceSize")
     public long allocationSizeMin() { return nallocationSizeMin(address()); }
-    /** Returns the value of the {@code allocationSizeAvg} field. */
+    /** @return the value of the {@code allocationSizeAvg} field. */
     @NativeType("VkDeviceSize")
     public long allocationSizeAvg() { return nallocationSizeAvg(address()); }
-    /** Returns the value of the {@code allocationSizeMax} field. */
+    /** @return the value of the {@code allocationSizeMax} field. */
     @NativeType("VkDeviceSize")
     public long allocationSizeMax() { return nallocationSizeMax(address()); }
-    /** Returns the value of the {@code unusedRangeSizeMin} field. */
+    /** @return the value of the {@code unusedRangeSizeMin} field. */
     @NativeType("VkDeviceSize")
     public long unusedRangeSizeMin() { return nunusedRangeSizeMin(address()); }
-    /** Returns the value of the {@code unusedRangeSizeAvg} field. */
+    /** @return the value of the {@code unusedRangeSizeAvg} field. */
     @NativeType("VkDeviceSize")
     public long unusedRangeSizeAvg() { return nunusedRangeSizeAvg(address()); }
-    /** Returns the value of the {@code unusedRangeSizeMax} field. */
+    /** @return the value of the {@code unusedRangeSizeMax} field. */
     @NativeType("VkDeviceSize")
     public long unusedRangeSizeMax() { return nunusedRangeSizeMax(address()); }
 
@@ -235,37 +225,37 @@ public class VmaStatInfo extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code blockCount} field. */
+        /** @return the value of the {@link VmaStatInfo#blockCount} field. */
         @NativeType("uint32_t")
         public int blockCount() { return VmaStatInfo.nblockCount(address()); }
-        /** Returns the value of the {@code allocationCount} field. */
+        /** @return the value of the {@link VmaStatInfo#allocationCount} field. */
         @NativeType("uint32_t")
         public int allocationCount() { return VmaStatInfo.nallocationCount(address()); }
-        /** Returns the value of the {@code unusedRangeCount} field. */
+        /** @return the value of the {@link VmaStatInfo#unusedRangeCount} field. */
         @NativeType("uint32_t")
         public int unusedRangeCount() { return VmaStatInfo.nunusedRangeCount(address()); }
-        /** Returns the value of the {@code usedBytes} field. */
+        /** @return the value of the {@link VmaStatInfo#usedBytes} field. */
         @NativeType("VkDeviceSize")
         public long usedBytes() { return VmaStatInfo.nusedBytes(address()); }
-        /** Returns the value of the {@code unusedBytes} field. */
+        /** @return the value of the {@link VmaStatInfo#unusedBytes} field. */
         @NativeType("VkDeviceSize")
         public long unusedBytes() { return VmaStatInfo.nunusedBytes(address()); }
-        /** Returns the value of the {@code allocationSizeMin} field. */
+        /** @return the value of the {@code allocationSizeMin} field. */
         @NativeType("VkDeviceSize")
         public long allocationSizeMin() { return VmaStatInfo.nallocationSizeMin(address()); }
-        /** Returns the value of the {@code allocationSizeAvg} field. */
+        /** @return the value of the {@code allocationSizeAvg} field. */
         @NativeType("VkDeviceSize")
         public long allocationSizeAvg() { return VmaStatInfo.nallocationSizeAvg(address()); }
-        /** Returns the value of the {@code allocationSizeMax} field. */
+        /** @return the value of the {@code allocationSizeMax} field. */
         @NativeType("VkDeviceSize")
         public long allocationSizeMax() { return VmaStatInfo.nallocationSizeMax(address()); }
-        /** Returns the value of the {@code unusedRangeSizeMin} field. */
+        /** @return the value of the {@code unusedRangeSizeMin} field. */
         @NativeType("VkDeviceSize")
         public long unusedRangeSizeMin() { return VmaStatInfo.nunusedRangeSizeMin(address()); }
-        /** Returns the value of the {@code unusedRangeSizeAvg} field. */
+        /** @return the value of the {@code unusedRangeSizeAvg} field. */
         @NativeType("VkDeviceSize")
         public long unusedRangeSizeAvg() { return VmaStatInfo.nunusedRangeSizeAvg(address()); }
-        /** Returns the value of the {@code unusedRangeSizeMax} field. */
+        /** @return the value of the {@code unusedRangeSizeMax} field. */
         @NativeType("VkDeviceSize")
         public long unusedRangeSizeMax() { return VmaStatInfo.nunusedRangeSizeMax(address()); }
 

@@ -13,16 +13,13 @@ import static org.lwjgl.system.JNI.*;
 
 import javax.annotation.*;
 import org.lwjgl.egl.EGL;
+import org.lwjgl.egl.EGL10;
 import org.lwjgl.opengles.GLES;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Native bindings to the GLFW library's EGL native access functions. */
 public class GLFWNativeEGL {
-
-    protected GLFWNativeEGL() {
-        throw new UnsupportedOperationException();
-    }
 
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
     public static final class Functions {
@@ -35,6 +32,10 @@ public class GLFWNativeEGL {
             GetEGLContext = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLContext"),
             GetEGLSurface = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLSurface");
 
+    }
+
+    protected GLFWNativeEGL() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ glfwGetEGLDisplay ] ---
@@ -96,12 +97,6 @@ public class GLFWNativeEGL {
         return invokePP(window, __functionAddress);
     }
 
-    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setEGLPath(String)} with the path of the EGL shared library loaded by LWJGL. */
-    @Deprecated
-    public static void setEGLPathLWJGL() {
-        setEGLPath(EGL.getFunctionProvider());
-    }
-
     /**
      * Calls {@link #setEGLPath(String)} with the path of the specified {@link SharedLibrary}.
      * 
@@ -141,12 +136,6 @@ public class GLFWNativeEGL {
         }
     }
     
-    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setGLESPath(String)} with the path of the OpenGL ES shared library loaded by LWJGL. */
-    @Deprecated
-    public static void setGLESPathLWJGL() {
-        setGLESPath(GLES.getFunctionProvider());
-    }
-
     /**
      * Calls {@link #setGLESPath(String)} with the path of the specified {@link SharedLibrary}.
      * 

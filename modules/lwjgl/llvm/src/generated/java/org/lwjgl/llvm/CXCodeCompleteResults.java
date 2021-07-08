@@ -21,19 +21,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>This data structure contains the results of code completion, as produced by {@link ClangIndex#clang_codeCompleteAt codeCompleteAt}. Its contents must be freed by
  * {@link ClangIndex#clang_disposeCodeCompleteResults disposeCodeCompleteResults}.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code Results} &ndash; the code-completion results</li>
- * <li>{@code NumResults} &ndash; the number of code-completion results stored in the {@code Results} array</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CXCodeCompleteResults {
- *     {@link CXCompletionResult CXCompletionResult} * Results;
- *     unsigned NumResults;
+ *     {@link CXCompletionResult CXCompletionResult} * {@link #Results};
+ *     unsigned {@link #NumResults};
  * }</code></pre>
  */
 public class CXCodeCompleteResults extends Struct implements NativeResource {
@@ -75,10 +68,10 @@ public class CXCodeCompleteResults extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link CXCompletionResult.Buffer} view of the struct array pointed to by the {@code Results} field. */
+    /** the code-completion results */
     @NativeType("CXCompletionResult *")
     public CXCompletionResult.Buffer Results() { return nResults(address()); }
-    /** Returns the value of the {@code NumResults} field. */
+    /** the number of code-completion results stored in the {@code Results} array */
     @NativeType("unsigned")
     public int NumResults() { return nNumResults(address()); }
 
@@ -268,10 +261,10 @@ public class CXCodeCompleteResults extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link CXCompletionResult.Buffer} view of the struct array pointed to by the {@code Results} field. */
+        /** @return a {@link CXCompletionResult.Buffer} view of the struct array pointed to by the {@link CXCodeCompleteResults#Results} field. */
         @NativeType("CXCompletionResult *")
         public CXCompletionResult.Buffer Results() { return CXCodeCompleteResults.nResults(address()); }
-        /** Returns the value of the {@code NumResults} field. */
+        /** @return the value of the {@link CXCodeCompleteResults#NumResults} field. */
         @NativeType("unsigned")
         public int NumResults() { return CXCodeCompleteResults.nNumResults(address()); }
 

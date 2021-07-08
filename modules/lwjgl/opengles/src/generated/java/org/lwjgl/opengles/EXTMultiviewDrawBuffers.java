@@ -36,6 +36,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTMultiviewDrawBuffers {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code location} parameter of DrawBuffersIndexedEXT. */
     public static final int
         GL_COLOR_ATTACHMENT_EXT = 0x90F0,
@@ -48,8 +50,6 @@ public class EXTMultiviewDrawBuffers {
 
     /** Accepted by the {@code target} parameter of GetInteger. */
     public static final int GL_MAX_MULTIVIEW_BUFFERS_EXT = 0x90F2;
-
-    static { GLES.initialize(); }
 
     protected EXTMultiviewDrawBuffers() {
         throw new UnsupportedOperationException();

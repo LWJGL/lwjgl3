@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO}</li>
  * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkExportSemaphoreCreateInfo}, {@link VkExportSemaphoreWin32HandleInfoKHR}, or {@link VkSemaphoreTypeCreateInfo}</li>
- * <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * </ul>
  * 
@@ -31,21 +31,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK10#vkCreateSemaphore CreateSemaphore}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSemaphoreCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkSemaphoreCreateFlags flags;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkSemaphoreCreateFlags {@link #flags};
  * }</code></pre>
  */
 public class VkSemaphoreCreateInfo extends Struct implements NativeResource {
@@ -90,21 +82,21 @@ public class VkSemaphoreCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkSemaphoreCreateFlags")
     public int flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSemaphoreCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSemaphoreCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkSemaphoreCreateInfo flags(@NativeType("VkSemaphoreCreateFlags") int value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,21 +319,21 @@ public class VkSemaphoreCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSemaphoreCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSemaphoreCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSemaphoreCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSemaphoreCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkSemaphoreCreateInfo#flags} field. */
         @NativeType("VkSemaphoreCreateFlags")
         public int flags() { return VkSemaphoreCreateInfo.nflags(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSemaphoreCreateInfo#sType} field. */
         public VkSemaphoreCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSemaphoreCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSemaphoreCreateInfo#pNext} field. */
         public VkSemaphoreCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkSemaphoreCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkSemaphoreCreateInfo#flags} field. */
         public VkSemaphoreCreateInfo.Buffer flags(@NativeType("VkSemaphoreCreateFlags") int value) { VkSemaphoreCreateInfo.nflags(address(), value); return this; }
 
     }

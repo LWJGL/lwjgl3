@@ -8,6 +8,8 @@ package org.lwjgl.vulkan;
 /**
  * This extension introduces the ability to back uniform blocks directly with descriptor sets by storing inline uniform data within descriptor pool storage. Compared to push constants this new construct allows uniform data to be reused across multiple disjoint sets of draw or dispatch commands and <b>may</b> enable uniform data to be accessed with less indirections compared to uniforms backed by buffer memory.
  * 
+ * <h5>VK_EXT_inline_uniform_block</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_inline_uniform_block}</dd>
@@ -27,6 +29,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_inline_uniform_block:%20&amp;body=@aqnuep%20">aqnuep</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-08-01</dd>
  * <dt><b>IP Status</b></dt>

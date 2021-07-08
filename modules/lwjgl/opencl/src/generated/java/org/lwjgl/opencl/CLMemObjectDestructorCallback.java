@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     cl_mem memobj,
  *     void *user_data
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class CLMemObjectDestructorCallback extends Callback implements 
     }
 
     protected CLMemObjectDestructorCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CLMemObjectDestructorCallback(long functionPointer) {

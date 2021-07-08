@@ -69,9 +69,9 @@ public class CompactValue extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code value} field. */
+    /** @return the value of the {@code value} field. */
     public float value() { return nvalue(address()); }
-    /** Returns the value of the {@code repr} field. */
+    /** @return the value of the {@code repr} field. */
     @NativeType("uint32_t")
     public int repr() { return nrepr(address()); }
 
@@ -210,9 +210,9 @@ public class CompactValue extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code value} field. */
+        /** @return the value of the {@code value} field. */
         public float value() { return CompactValue.nvalue(address()); }
-        /** Returns the value of the {@code repr} field. */
+        /** @return the value of the {@code repr} field. */
         @NativeType("uint32_t")
         public int repr() { return CompactValue.nrepr(address()); }
 

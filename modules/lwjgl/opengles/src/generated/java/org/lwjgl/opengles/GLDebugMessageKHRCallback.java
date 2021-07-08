@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLenum source,
  *     GLenum type,
  *     GLuint id,
@@ -55,7 +55,7 @@ public abstract class GLDebugMessageKHRCallback extends Callback implements GLDe
     }
 
     protected GLDebugMessageKHRCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLDebugMessageKHRCallback(long functionPointer) {

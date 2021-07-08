@@ -70,17 +70,17 @@ public class VmaStats extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link VmaStatInfo}.Buffer view of the {@code memoryType} field. */
+    /** @return a {@link VmaStatInfo}.Buffer view of the {@code memoryType} field. */
     @NativeType("VmaStatInfo[32]")
     public VmaStatInfo.Buffer memoryType() { return nmemoryType(address()); }
-    /** Returns a {@link VmaStatInfo} view of the struct at the specified index of the {@code memoryType} field. */
+    /** @return a {@link VmaStatInfo} view of the struct at the specified index of the {@code memoryType} field. */
     public VmaStatInfo memoryType(int index) { return nmemoryType(address(), index); }
-    /** Returns a {@link VmaStatInfo}.Buffer view of the {@code memoryHeap} field. */
+    /** @return a {@link VmaStatInfo}.Buffer view of the {@code memoryHeap} field. */
     @NativeType("VmaStatInfo[16]")
     public VmaStatInfo.Buffer memoryHeap() { return nmemoryHeap(address()); }
-    /** Returns a {@link VmaStatInfo} view of the struct at the specified index of the {@code memoryHeap} field. */
+    /** @return a {@link VmaStatInfo} view of the struct at the specified index of the {@code memoryHeap} field. */
     public VmaStatInfo memoryHeap(int index) { return nmemoryHeap(address(), index); }
-    /** Returns a {@link VmaStatInfo} view of the {@code total} field. */
+    /** @return a {@link VmaStatInfo} view of the {@code total} field. */
     public VmaStatInfo total() { return ntotal(address()); }
 
     // -----------------------------------
@@ -279,17 +279,17 @@ public class VmaStats extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link VmaStatInfo}.Buffer view of the {@code memoryType} field. */
+        /** @return a {@link VmaStatInfo}.Buffer view of the {@code memoryType} field. */
         @NativeType("VmaStatInfo[32]")
         public VmaStatInfo.Buffer memoryType() { return VmaStats.nmemoryType(address()); }
-        /** Returns a {@link VmaStatInfo} view of the struct at the specified index of the {@code memoryType} field. */
+        /** @return a {@link VmaStatInfo} view of the struct at the specified index of the {@code memoryType} field. */
         public VmaStatInfo memoryType(int index) { return VmaStats.nmemoryType(address(), index); }
-        /** Returns a {@link VmaStatInfo}.Buffer view of the {@code memoryHeap} field. */
+        /** @return a {@link VmaStatInfo}.Buffer view of the {@code memoryHeap} field. */
         @NativeType("VmaStatInfo[16]")
         public VmaStatInfo.Buffer memoryHeap() { return VmaStats.nmemoryHeap(address()); }
-        /** Returns a {@link VmaStatInfo} view of the struct at the specified index of the {@code memoryHeap} field. */
+        /** @return a {@link VmaStatInfo} view of the struct at the specified index of the {@code memoryHeap} field. */
         public VmaStatInfo memoryHeap(int index) { return VmaStats.nmemoryHeap(address(), index); }
-        /** Returns a {@link VmaStatInfo} view of the {@code total} field. */
+        /** @return a {@link VmaStatInfo} view of the {@code total} field. */
         public VmaStatInfo total() { return VmaStats.ntotal(address()); }
 
     }

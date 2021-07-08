@@ -19,6 +19,8 @@ package org.lwjgl.vulkan;
  * <li>A coverage reduction step is added to Fragment Operations which converts a set of covered raster/depth/stencil samples to a set of color samples that perform blending and color writes. The coverage reduction step also includes an optional coverage modulation step, multiplying color values by a fractional opacity corresponding to the number of associated raster/depth/stencil samples covered.</li>
  * </ul>
  * 
+ * <h5>VK_NV_framebuffer_mixed_samples</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_NV_framebuffer_mixed_samples}</dd>
@@ -36,6 +38,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_framebuffer_mixed_samples:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-06-04</dd>
  * <dt><b>Contributors</b></dt>

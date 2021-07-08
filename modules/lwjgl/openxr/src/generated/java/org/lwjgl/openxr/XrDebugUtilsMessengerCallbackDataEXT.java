@@ -92,41 +92,41 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code messageId} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code messageId} field. */
     @NativeType("char const *")
     public ByteBuffer messageId() { return nmessageId(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code messageId} field. */
+    /** @return the null-terminated string pointed to by the {@code messageId} field. */
     @NativeType("char const *")
     public String messageIdString() { return nmessageIdString(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code functionName} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code functionName} field. */
     @NativeType("char const *")
     public ByteBuffer functionName() { return nfunctionName(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code functionName} field. */
+    /** @return the null-terminated string pointed to by the {@code functionName} field. */
     @NativeType("char const *")
     public String functionNameString() { return nfunctionNameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code message} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code message} field. */
     @NativeType("char const *")
     public ByteBuffer message() { return nmessage(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code message} field. */
+    /** @return the null-terminated string pointed to by the {@code message} field. */
     @NativeType("char const *")
     public String messageString() { return nmessageString(address()); }
-    /** Returns the value of the {@code objectCount} field. */
+    /** @return the value of the {@code objectCount} field. */
     @NativeType("uint32_t")
     public int objectCount() { return nobjectCount(address()); }
-    /** Returns a {@link XrDebugUtilsObjectNameInfoEXT.Buffer} view of the struct array pointed to by the {@code objects} field. */
+    /** @return a {@link XrDebugUtilsObjectNameInfoEXT.Buffer} view of the struct array pointed to by the {@code objects} field. */
     @Nullable
     @NativeType("XrDebugUtilsObjectNameInfoEXT *")
     public XrDebugUtilsObjectNameInfoEXT.Buffer objects() { return nobjects(address()); }
-    /** Returns the value of the {@code sessionLabelCount} field. */
+    /** @return the value of the {@code sessionLabelCount} field. */
     @NativeType("uint32_t")
     public int sessionLabelCount() { return nsessionLabelCount(address()); }
-    /** Returns a {@link XrDebugUtilsLabelEXT.Buffer} view of the struct array pointed to by the {@code sessionLabels} field. */
+    /** @return a {@link XrDebugUtilsLabelEXT.Buffer} view of the struct array pointed to by the {@code sessionLabels} field. */
     @Nullable
     @NativeType("XrDebugUtilsLabelEXT *")
     public XrDebugUtilsLabelEXT.Buffer sessionLabels() { return nsessionLabels(address()); }
@@ -444,41 +444,41 @@ public class XrDebugUtilsMessengerCallbackDataEXT extends Struct implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrDebugUtilsMessengerCallbackDataEXT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrDebugUtilsMessengerCallbackDataEXT.nnext(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code messageId} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code messageId} field. */
         @NativeType("char const *")
         public ByteBuffer messageId() { return XrDebugUtilsMessengerCallbackDataEXT.nmessageId(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code messageId} field. */
+        /** @return the null-terminated string pointed to by the {@code messageId} field. */
         @NativeType("char const *")
         public String messageIdString() { return XrDebugUtilsMessengerCallbackDataEXT.nmessageIdString(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code functionName} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code functionName} field. */
         @NativeType("char const *")
         public ByteBuffer functionName() { return XrDebugUtilsMessengerCallbackDataEXT.nfunctionName(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code functionName} field. */
+        /** @return the null-terminated string pointed to by the {@code functionName} field. */
         @NativeType("char const *")
         public String functionNameString() { return XrDebugUtilsMessengerCallbackDataEXT.nfunctionNameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code message} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code message} field. */
         @NativeType("char const *")
         public ByteBuffer message() { return XrDebugUtilsMessengerCallbackDataEXT.nmessage(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code message} field. */
+        /** @return the null-terminated string pointed to by the {@code message} field. */
         @NativeType("char const *")
         public String messageString() { return XrDebugUtilsMessengerCallbackDataEXT.nmessageString(address()); }
-        /** Returns the value of the {@code objectCount} field. */
+        /** @return the value of the {@code objectCount} field. */
         @NativeType("uint32_t")
         public int objectCount() { return XrDebugUtilsMessengerCallbackDataEXT.nobjectCount(address()); }
-        /** Returns a {@link XrDebugUtilsObjectNameInfoEXT.Buffer} view of the struct array pointed to by the {@code objects} field. */
+        /** @return a {@link XrDebugUtilsObjectNameInfoEXT.Buffer} view of the struct array pointed to by the {@code objects} field. */
         @Nullable
         @NativeType("XrDebugUtilsObjectNameInfoEXT *")
         public XrDebugUtilsObjectNameInfoEXT.Buffer objects() { return XrDebugUtilsMessengerCallbackDataEXT.nobjects(address()); }
-        /** Returns the value of the {@code sessionLabelCount} field. */
+        /** @return the value of the {@code sessionLabelCount} field. */
         @NativeType("uint32_t")
         public int sessionLabelCount() { return XrDebugUtilsMessengerCallbackDataEXT.nsessionLabelCount(address()); }
-        /** Returns a {@link XrDebugUtilsLabelEXT.Buffer} view of the struct array pointed to by the {@code sessionLabels} field. */
+        /** @return a {@link XrDebugUtilsLabelEXT.Buffer} view of the struct array pointed to by the {@code sessionLabels} field. */
         @Nullable
         @NativeType("XrDebugUtilsLabelEXT *")
         public XrDebugUtilsLabelEXT.Buffer sessionLabels() { return XrDebugUtilsMessengerCallbackDataEXT.nsessionLabels(address()); }

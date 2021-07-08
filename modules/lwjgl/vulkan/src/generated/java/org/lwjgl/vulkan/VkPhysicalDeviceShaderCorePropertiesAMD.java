@@ -28,46 +28,26 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link AMDShaderCoreProperties#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code shaderEngineCount} &ndash; an unsigned integer value indicating the number of shader engines found inside the shader core of the physical device.</li>
- * <li>{@code shaderArraysPerEngineCount} &ndash; an unsigned integer value indicating the number of shader arrays inside a shader engine. Each shader array has its own scan converter, set of compute units, and a render back end (color and depth buffers). Shader arrays within a shader engine share shader processor input (wave launcher) and shader export (export buffer) units. Currently, a shader engine can have one or two shader arrays.</li>
- * <li>{@code computeUnitsPerShaderArray} &ndash; an unsigned integer value indicating the physical number of compute units within a shader array. The active number of compute units in a shader array <b>may</b> be lower. A compute unit houses a set of SIMDs along with a sequencer module and a local data store.</li>
- * <li>{@code simdPerComputeUnit} &ndash; an unsigned integer value indicating the number of SIMDs inside a compute unit. Each SIMD processes a single instruction at a time.</li>
- * <li>{@code wavefrontSize} &ndash; an unsigned integer value indicating the maximum size of a subgroup.</li>
- * <li>{@code sgprsPerSimd} &ndash; an unsigned integer value indicating the number of physical Scalar General Purpose Registers (SGPRs) per SIMD.</li>
- * <li>{@code minSgprAllocation} &ndash; an unsigned integer value indicating the minimum number of SGPRs allocated for a wave.</li>
- * <li>{@code maxSgprAllocation} &ndash; an unsigned integer value indicating the maximum number of SGPRs allocated for a wave.</li>
- * <li>{@code sgprAllocationGranularity} &ndash; an unsigned integer value indicating the granularity of SGPR allocation for a wave.</li>
- * <li>{@code vgprsPerSimd} &ndash; an unsigned integer value indicating the number of physical Vector General Purpose Registers (VGPRs) per SIMD.</li>
- * <li>{@code minVgprAllocation} &ndash; an unsigned integer value indicating the minimum number of VGPRs allocated for a wave.</li>
- * <li>{@code maxVgprAllocation} &ndash; an unsigned integer value indicating the maximum number of VGPRs allocated for a wave.</li>
- * <li>{@code vgprAllocationGranularity} &ndash; an unsigned integer value indicating the granularity of VGPR allocation for a wave.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderCorePropertiesAMD {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint32_t shaderEngineCount;
- *     uint32_t shaderArraysPerEngineCount;
- *     uint32_t computeUnitsPerShaderArray;
- *     uint32_t simdPerComputeUnit;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint32_t {@link #shaderEngineCount};
+ *     uint32_t {@link #shaderArraysPerEngineCount};
+ *     uint32_t {@link #computeUnitsPerShaderArray};
+ *     uint32_t {@link #simdPerComputeUnit};
  *     uint32_t wavefrontsPerSimd;
- *     uint32_t wavefrontSize;
- *     uint32_t sgprsPerSimd;
- *     uint32_t minSgprAllocation;
- *     uint32_t maxSgprAllocation;
- *     uint32_t sgprAllocationGranularity;
- *     uint32_t vgprsPerSimd;
- *     uint32_t minVgprAllocation;
- *     uint32_t maxVgprAllocation;
- *     uint32_t vgprAllocationGranularity;
+ *     uint32_t {@link #wavefrontSize};
+ *     uint32_t {@link #sgprsPerSimd};
+ *     uint32_t {@link #minSgprAllocation};
+ *     uint32_t {@link #maxSgprAllocation};
+ *     uint32_t {@link #sgprAllocationGranularity};
+ *     uint32_t {@link #vgprsPerSimd};
+ *     uint32_t {@link #minVgprAllocation};
+ *     uint32_t {@link #maxVgprAllocation};
+ *     uint32_t {@link #vgprAllocationGranularity};
  * }</code></pre>
  */
 public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct implements NativeResource {
@@ -151,58 +131,58 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct implements N
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code shaderEngineCount} field. */
+    /** an unsigned integer value indicating the number of shader engines found inside the shader core of the physical device. */
     @NativeType("uint32_t")
     public int shaderEngineCount() { return nshaderEngineCount(address()); }
-    /** Returns the value of the {@code shaderArraysPerEngineCount} field. */
+    /** an unsigned integer value indicating the number of shader arrays inside a shader engine. Each shader array has its own scan converter, set of compute units, and a render back end (color and depth buffers). Shader arrays within a shader engine share shader processor input (wave launcher) and shader export (export buffer) units. Currently, a shader engine can have one or two shader arrays. */
     @NativeType("uint32_t")
     public int shaderArraysPerEngineCount() { return nshaderArraysPerEngineCount(address()); }
-    /** Returns the value of the {@code computeUnitsPerShaderArray} field. */
+    /** an unsigned integer value indicating the physical number of compute units within a shader array. The active number of compute units in a shader array <b>may</b> be lower. A compute unit houses a set of SIMDs along with a sequencer module and a local data store. */
     @NativeType("uint32_t")
     public int computeUnitsPerShaderArray() { return ncomputeUnitsPerShaderArray(address()); }
-    /** Returns the value of the {@code simdPerComputeUnit} field. */
+    /** an unsigned integer value indicating the number of SIMDs inside a compute unit. Each SIMD processes a single instruction at a time. */
     @NativeType("uint32_t")
     public int simdPerComputeUnit() { return nsimdPerComputeUnit(address()); }
-    /** Returns the value of the {@code wavefrontsPerSimd} field. */
+    /** @return the value of the {@code wavefrontsPerSimd} field. */
     @NativeType("uint32_t")
     public int wavefrontsPerSimd() { return nwavefrontsPerSimd(address()); }
-    /** Returns the value of the {@code wavefrontSize} field. */
+    /** an unsigned integer value indicating the maximum size of a subgroup. */
     @NativeType("uint32_t")
     public int wavefrontSize() { return nwavefrontSize(address()); }
-    /** Returns the value of the {@code sgprsPerSimd} field. */
+    /** an unsigned integer value indicating the number of physical Scalar General Purpose Registers (SGPRs) per SIMD. */
     @NativeType("uint32_t")
     public int sgprsPerSimd() { return nsgprsPerSimd(address()); }
-    /** Returns the value of the {@code minSgprAllocation} field. */
+    /** an unsigned integer value indicating the minimum number of SGPRs allocated for a wave. */
     @NativeType("uint32_t")
     public int minSgprAllocation() { return nminSgprAllocation(address()); }
-    /** Returns the value of the {@code maxSgprAllocation} field. */
+    /** an unsigned integer value indicating the maximum number of SGPRs allocated for a wave. */
     @NativeType("uint32_t")
     public int maxSgprAllocation() { return nmaxSgprAllocation(address()); }
-    /** Returns the value of the {@code sgprAllocationGranularity} field. */
+    /** an unsigned integer value indicating the granularity of SGPR allocation for a wave. */
     @NativeType("uint32_t")
     public int sgprAllocationGranularity() { return nsgprAllocationGranularity(address()); }
-    /** Returns the value of the {@code vgprsPerSimd} field. */
+    /** an unsigned integer value indicating the number of physical Vector General Purpose Registers (VGPRs) per SIMD. */
     @NativeType("uint32_t")
     public int vgprsPerSimd() { return nvgprsPerSimd(address()); }
-    /** Returns the value of the {@code minVgprAllocation} field. */
+    /** an unsigned integer value indicating the minimum number of VGPRs allocated for a wave. */
     @NativeType("uint32_t")
     public int minVgprAllocation() { return nminVgprAllocation(address()); }
-    /** Returns the value of the {@code maxVgprAllocation} field. */
+    /** an unsigned integer value indicating the maximum number of VGPRs allocated for a wave. */
     @NativeType("uint32_t")
     public int maxVgprAllocation() { return nmaxVgprAllocation(address()); }
-    /** Returns the value of the {@code vgprAllocationGranularity} field. */
+    /** an unsigned integer value indicating the granularity of VGPR allocation for a wave. */
     @NativeType("uint32_t")
     public int vgprAllocationGranularity() { return nvgprAllocationGranularity(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderCorePropertiesAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderCorePropertiesAMD pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -447,58 +427,58 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct implements N
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderCorePropertiesAMD.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderCorePropertiesAMD.npNext(address()); }
-        /** Returns the value of the {@code shaderEngineCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#shaderEngineCount} field. */
         @NativeType("uint32_t")
         public int shaderEngineCount() { return VkPhysicalDeviceShaderCorePropertiesAMD.nshaderEngineCount(address()); }
-        /** Returns the value of the {@code shaderArraysPerEngineCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#shaderArraysPerEngineCount} field. */
         @NativeType("uint32_t")
         public int shaderArraysPerEngineCount() { return VkPhysicalDeviceShaderCorePropertiesAMD.nshaderArraysPerEngineCount(address()); }
-        /** Returns the value of the {@code computeUnitsPerShaderArray} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#computeUnitsPerShaderArray} field. */
         @NativeType("uint32_t")
         public int computeUnitsPerShaderArray() { return VkPhysicalDeviceShaderCorePropertiesAMD.ncomputeUnitsPerShaderArray(address()); }
-        /** Returns the value of the {@code simdPerComputeUnit} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#simdPerComputeUnit} field. */
         @NativeType("uint32_t")
         public int simdPerComputeUnit() { return VkPhysicalDeviceShaderCorePropertiesAMD.nsimdPerComputeUnit(address()); }
-        /** Returns the value of the {@code wavefrontsPerSimd} field. */
+        /** @return the value of the {@code wavefrontsPerSimd} field. */
         @NativeType("uint32_t")
         public int wavefrontsPerSimd() { return VkPhysicalDeviceShaderCorePropertiesAMD.nwavefrontsPerSimd(address()); }
-        /** Returns the value of the {@code wavefrontSize} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#wavefrontSize} field. */
         @NativeType("uint32_t")
         public int wavefrontSize() { return VkPhysicalDeviceShaderCorePropertiesAMD.nwavefrontSize(address()); }
-        /** Returns the value of the {@code sgprsPerSimd} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#sgprsPerSimd} field. */
         @NativeType("uint32_t")
         public int sgprsPerSimd() { return VkPhysicalDeviceShaderCorePropertiesAMD.nsgprsPerSimd(address()); }
-        /** Returns the value of the {@code minSgprAllocation} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#minSgprAllocation} field. */
         @NativeType("uint32_t")
         public int minSgprAllocation() { return VkPhysicalDeviceShaderCorePropertiesAMD.nminSgprAllocation(address()); }
-        /** Returns the value of the {@code maxSgprAllocation} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#maxSgprAllocation} field. */
         @NativeType("uint32_t")
         public int maxSgprAllocation() { return VkPhysicalDeviceShaderCorePropertiesAMD.nmaxSgprAllocation(address()); }
-        /** Returns the value of the {@code sgprAllocationGranularity} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#sgprAllocationGranularity} field. */
         @NativeType("uint32_t")
         public int sgprAllocationGranularity() { return VkPhysicalDeviceShaderCorePropertiesAMD.nsgprAllocationGranularity(address()); }
-        /** Returns the value of the {@code vgprsPerSimd} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#vgprsPerSimd} field. */
         @NativeType("uint32_t")
         public int vgprsPerSimd() { return VkPhysicalDeviceShaderCorePropertiesAMD.nvgprsPerSimd(address()); }
-        /** Returns the value of the {@code minVgprAllocation} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#minVgprAllocation} field. */
         @NativeType("uint32_t")
         public int minVgprAllocation() { return VkPhysicalDeviceShaderCorePropertiesAMD.nminVgprAllocation(address()); }
-        /** Returns the value of the {@code maxVgprAllocation} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#maxVgprAllocation} field. */
         @NativeType("uint32_t")
         public int maxVgprAllocation() { return VkPhysicalDeviceShaderCorePropertiesAMD.nmaxVgprAllocation(address()); }
-        /** Returns the value of the {@code vgprAllocationGranularity} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderCorePropertiesAMD#vgprAllocationGranularity} field. */
         @NativeType("uint32_t")
         public int vgprAllocationGranularity() { return VkPhysicalDeviceShaderCorePropertiesAMD.nvgprAllocationGranularity(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderCorePropertiesAMD#sType} field. */
         public VkPhysicalDeviceShaderCorePropertiesAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderCorePropertiesAMD.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderCorePropertiesAMD#pNext} field. */
         public VkPhysicalDeviceShaderCorePropertiesAMD.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderCorePropertiesAMD.npNext(address(), value); return this; }
 
     }

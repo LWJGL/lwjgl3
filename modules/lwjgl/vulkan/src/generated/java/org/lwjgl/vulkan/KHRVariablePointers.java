@@ -14,6 +14,8 @@ package org.lwjgl.vulkan;
  * 
  * <p>All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted, however support for the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-variablePointersStorageBuffer"> {@code variablePointersStorageBuffer}</a> feature is made optional. The original type, enum and command names are still available as aliases of the core functionality.</p>
  * 
+ * <h5>VK_KHR_variable_pointers</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_variable_pointers}</dd>
@@ -37,13 +39,18 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_variable_pointers:%20&amp;body=@critsec%20">critsec</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-09-05</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_variable_pointers.html">{@code SPV_KHR_variable_pointers}</a> SPIR-V extension.</li>
+ * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_variable_pointers.html">{@code SPV_KHR_variable_pointers}</a></li>
  * <li>Promoted to Vulkan 1.1 Core</li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
@@ -74,13 +81,13 @@ public final class KHRVariablePointers {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR}</li>
      * </ul>
      */
     public static final int
-        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR  = 1000120000,
-        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR = 1000120000;
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES_KHR = 1000120000,
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES_KHR  = 1000120000;
 
     private KHRVariablePointers() {}
 

@@ -16,6 +16,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export Windows handles from Vulkan memory objects and to import Vulkan memory objects from Windows handles exported from other Vulkan memory objects or from similar resources in other APIs.
  * 
+ * <h5>VK_KHR_external_memory_win32</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_external_memory_win32}</dd>
@@ -34,6 +36,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_external_memory_win32:%20&amp;body=@cubanismo%20">cubanismo</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-10-21</dd>
  * <dt><b>IP Status</b></dt>
@@ -92,7 +99,7 @@ public class KHRExternalMemoryWin32 {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To export a Windows handle representing the underlying resources of a Vulkan device memory object, call:</p>
+     * <p>To export a Windows handle representing the payload of a Vulkan device memory object, call:</p>
      * 
      * <pre><code>
      * VkResult vkGetMemoryWin32HandleKHR(
@@ -102,7 +109,12 @@ public class KHRExternalMemoryWin32 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>For handle types defined as NT handles, the handles returned by {@code vkGetMemoryWin32HandleKHR} are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the {@code CloseHandle} system call when they are no longer needed.</p>
+     * <p>For handle types defined as NT handles, the handles returned by {@code vkGetMemoryWin32HandleKHR} are owned by the application and hold a reference to their payload. To avoid leaking resources, the application <b>must</b> release ownership of them using the {@code CloseHandle} system call when they are no longer needed.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>Non-NT handle types do not add a reference to their associated payload. If the original object owning the payload is destroyed, all resources and handles sharing that payload will become invalid.</p>
+     * </div>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -132,7 +144,7 @@ public class KHRExternalMemoryWin32 {
      *
      * @param device              the logical device that created the device memory being exported.
      * @param pGetWin32HandleInfo a pointer to a {@link VkMemoryGetWin32HandleInfoKHR} structure containing parameters of the export operation.
-     * @param pHandle             will return the Windows handle representing the underlying resources of the device memory object.
+     * @param pHandle             will return the Windows handle representing the payload of the device memory object.
      */
     @NativeType("VkResult")
     public static int vkGetMemoryWin32HandleKHR(VkDevice device, @NativeType("VkMemoryGetWin32HandleInfoKHR const *") VkMemoryGetWin32HandleInfoKHR pGetWin32HandleInfo, @NativeType("HANDLE *") PointerBuffer pHandle) {
@@ -171,8 +183,8 @@ public class KHRExternalMemoryWin32 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code handle} <b>must</b> be an external memory handle created outside of the Vulkan API.</li>
-     * <li>{@code handleType} <b>must</b> not be one of the handle types defined as opaque.</li>
+     * <li>{@code handle} <b>must</b> be an external memory handle created outside of the Vulkan API</li>
+     * <li>{@code handleType} <b>must</b> not be one of the handle types defined as opaque</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -192,6 +204,7 @@ public class KHRExternalMemoryWin32 {
      * </ul></dd>
      * <dt>On failure, this command returns</dt>
      * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * <li>{@link VK11#VK_ERROR_INVALID_EXTERNAL_HANDLE ERROR_INVALID_EXTERNAL_HANDLE}</li>
      * </ul></dd>
      * </dl>

@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWwindow *window,
  *     int key,
  *     int scancode,
@@ -55,7 +55,7 @@ public abstract class GLFWKeyCallback extends Callback implements GLFWKeyCallbac
     }
 
     protected GLFWKeyCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWKeyCallback(long functionPointer) {

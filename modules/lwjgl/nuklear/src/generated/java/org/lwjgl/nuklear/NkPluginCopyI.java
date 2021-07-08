@@ -6,8 +6,11 @@
 package org.lwjgl.nuklear;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be set to the {@link NkClipboard} struct.
@@ -15,7 +18,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     nk_handle handle,
  *     char const *text,
  *     int len
@@ -23,19 +26,23 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("nk_plugin_copy")
-public interface NkPluginCopyI extends CallbackI.V {
+public interface NkPluginCopyI extends CallbackI {
 
-    String SIGNATURE = "(ppi)v";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_void,
+        ffi_type_pointer, ffi_type_pointer, ffi_type_sint32
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args),
-            dcbArgPointer(args),
-            dcbArgInt(args)
+            memGetAddress(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 2 * POINTER_SIZE))
         );
     }
 

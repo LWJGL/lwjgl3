@@ -64,10 +64,10 @@ public class XXH128Hash extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code low64} field. */
+    /** @return the value of the {@code low64} field. */
     @NativeType("XXH32_hash_t")
     public long low64() { return nlow64(address()); }
-    /** Returns the value of the {@code high64} field. */
+    /** @return the value of the {@code high64} field. */
     @NativeType("XXH32_hash_t")
     public long high64() { return nhigh64(address()); }
 
@@ -257,10 +257,10 @@ public class XXH128Hash extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code low64} field. */
+        /** @return the value of the {@code low64} field. */
         @NativeType("XXH32_hash_t")
         public long low64() { return XXH128Hash.nlow64(address()); }
-        /** Returns the value of the {@code high64} field. */
+        /** @return the value of the {@code high64} field. */
         @NativeType("XXH32_hash_t")
         public long high64() { return XXH128Hash.nhigh64(address()); }
 

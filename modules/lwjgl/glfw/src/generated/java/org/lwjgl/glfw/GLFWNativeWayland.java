@@ -14,10 +14,6 @@ import static org.lwjgl.system.JNI.*;
 /** Native bindings to the GLFW library's Wayland native access functions. */
 public class GLFWNativeWayland {
 
-    protected GLFWNativeWayland() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
     public static final class Functions {
 
@@ -29,6 +25,10 @@ public class GLFWNativeWayland {
             GetWaylandMonitor = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetWaylandMonitor"),
             GetWaylandWindow  = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetWaylandWindow");
 
+    }
+
+    protected GLFWNativeWayland() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ glfwGetWaylandDisplay ] ---

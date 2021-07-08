@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     YGNodeRef node
  * )</code></pre>
  */
@@ -47,7 +47,7 @@ public abstract class YGPrintFunc extends Callback implements YGPrintFuncI {
     }
 
     protected YGPrintFunc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     YGPrintFunc(long functionPointer) {

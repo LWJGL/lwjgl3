@@ -81,28 +81,28 @@ public class XrApiLayerProperties extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code layerName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code layerName} field. */
     @NativeType("char[XR_MAX_API_LAYER_NAME_SIZE]")
     public ByteBuffer layerName() { return nlayerName(address()); }
-    /** Decodes the null-terminated string stored in the {@code layerName} field. */
+    /** @return the null-terminated string stored in the {@code layerName} field. */
     @NativeType("char[XR_MAX_API_LAYER_NAME_SIZE]")
     public String layerNameString() { return nlayerNameString(address()); }
-    /** Returns the value of the {@code specVersion} field. */
+    /** @return the value of the {@code specVersion} field. */
     @NativeType("XrVersion")
     public long specVersion() { return nspecVersion(address()); }
-    /** Returns the value of the {@code layerVersion} field. */
+    /** @return the value of the {@code layerVersion} field. */
     @NativeType("uint32_t")
     public int layerVersion() { return nlayerVersion(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code description} field. */
+    /** @return a {@link ByteBuffer} view of the {@code description} field. */
     @NativeType("char[XR_MAX_API_LAYER_DESCRIPTION_SIZE]")
     public ByteBuffer description() { return ndescription(address()); }
-    /** Decodes the null-terminated string stored in the {@code description} field. */
+    /** @return the null-terminated string stored in the {@code description} field. */
     @NativeType("char[XR_MAX_API_LAYER_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
 
@@ -304,28 +304,28 @@ public class XrApiLayerProperties extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrApiLayerProperties.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrApiLayerProperties.nnext(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code layerName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code layerName} field. */
         @NativeType("char[XR_MAX_API_LAYER_NAME_SIZE]")
         public ByteBuffer layerName() { return XrApiLayerProperties.nlayerName(address()); }
-        /** Decodes the null-terminated string stored in the {@code layerName} field. */
+        /** @return the null-terminated string stored in the {@code layerName} field. */
         @NativeType("char[XR_MAX_API_LAYER_NAME_SIZE]")
         public String layerNameString() { return XrApiLayerProperties.nlayerNameString(address()); }
-        /** Returns the value of the {@code specVersion} field. */
+        /** @return the value of the {@code specVersion} field. */
         @NativeType("XrVersion")
         public long specVersion() { return XrApiLayerProperties.nspecVersion(address()); }
-        /** Returns the value of the {@code layerVersion} field. */
+        /** @return the value of the {@code layerVersion} field. */
         @NativeType("uint32_t")
         public int layerVersion() { return XrApiLayerProperties.nlayerVersion(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code description} field. */
+        /** @return a {@link ByteBuffer} view of the {@code description} field. */
         @NativeType("char[XR_MAX_API_LAYER_DESCRIPTION_SIZE]")
         public ByteBuffer description() { return XrApiLayerProperties.ndescription(address()); }
-        /** Decodes the null-terminated string stored in the {@code description} field. */
+        /** @return the null-terminated string stored in the {@code description} field. */
         @NativeType("char[XR_MAX_API_LAYER_DESCRIPTION_SIZE]")
         public String descriptionString() { return XrApiLayerProperties.ndescriptionString(address()); }
 

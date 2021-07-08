@@ -71,16 +71,16 @@ public class XrActionsSyncInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code countActiveActionSets} field. */
+    /** @return the value of the {@code countActiveActionSets} field. */
     @NativeType("uint32_t")
     public int countActiveActionSets() { return ncountActiveActionSets(address()); }
-    /** Returns a {@link XrActiveActionSet.Buffer} view of the struct array pointed to by the {@code activeActionSets} field. */
+    /** @return a {@link XrActiveActionSet.Buffer} view of the struct array pointed to by the {@code activeActionSets} field. */
     @Nullable
     @NativeType("XrActiveActionSet const *")
     public XrActiveActionSet.Buffer activeActionSets() { return nactiveActionSets(address()); }
@@ -320,16 +320,16 @@ public class XrActionsSyncInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActionsSyncInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrActionsSyncInfo.nnext(address()); }
-        /** Returns the value of the {@code countActiveActionSets} field. */
+        /** @return the value of the {@code countActiveActionSets} field. */
         @NativeType("uint32_t")
         public int countActiveActionSets() { return XrActionsSyncInfo.ncountActiveActionSets(address()); }
-        /** Returns a {@link XrActiveActionSet.Buffer} view of the struct array pointed to by the {@code activeActionSets} field. */
+        /** @return a {@link XrActiveActionSet.Buffer} view of the struct array pointed to by the {@code activeActionSets} field. */
         @Nullable
         @NativeType("XrActiveActionSet const *")
         public XrActiveActionSet.Buffer activeActionSets() { return XrActionsSyncInfo.nactiveActionSets(address()); }

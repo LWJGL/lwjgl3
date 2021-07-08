@@ -63,10 +63,10 @@ public class XrOffset2Di extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     @NativeType("int32_t")
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     @NativeType("int32_t")
     public int y() { return ny(address()); }
 
@@ -289,10 +289,10 @@ public class XrOffset2Di extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         @NativeType("int32_t")
         public int x() { return XrOffset2Di.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         @NativeType("int32_t")
         public int y() { return XrOffset2Di.ny(address()); }
 

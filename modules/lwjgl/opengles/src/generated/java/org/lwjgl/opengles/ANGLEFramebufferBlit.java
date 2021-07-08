@@ -18,6 +18,8 @@ import org.lwjgl.system.*;
  */
 public class ANGLEFramebufferBlit {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code target} parameter of BindFramebuffer, CheckFramebufferStatus, FramebufferTexture2D, FramebufferTexture3DOES,
      * FramebufferRenderbuffer, and GetFramebufferAttachmentParameteriv.
@@ -30,8 +32,6 @@ public class ANGLEFramebufferBlit {
     public static final int
         GL_DRAW_FRAMEBUFFER_BINDING_ANGLE = 0x8CA6,
         GL_READ_FRAMEBUFFER_BINDING_ANGLE = 0x8CAA;
-
-    static { GLES.initialize(); }
 
     protected ANGLEFramebufferBlit() {
         throw new UnsupportedOperationException();

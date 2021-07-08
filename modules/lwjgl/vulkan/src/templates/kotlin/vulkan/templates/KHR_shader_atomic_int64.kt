@@ -14,8 +14,9 @@ val KHR_shader_atomic_int64 = "KHRShaderAtomicInt64".nativeClassVK("KHR_shader_a
         This extension advertises the SPIR-V <b>Int64Atomics</b> capability for Vulkan, which allows a shader to contain 64-bit atomic operations on signed and unsigned integers. The supported operations include OpAtomicMin, OpAtomicMax, OpAtomicAnd, OpAtomicOr, OpAtomicXor, OpAtomicAdd, OpAtomicExchange, and OpAtomicCompareExchange.
 
         <h5>Promotion to Vulkan 1.2</h5>
-        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the {@code shaderBufferInt64Atomics} capability is optional. The original type, enum and command names are still available as aliases of the core functionality.
 
+        <h5>VK_KHR_shader_atomic_int64</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_shader_atomic_int64}</dd>
@@ -44,18 +45,17 @@ val KHR_shader_atomic_int64 = "KHRShaderAtomicInt64".nativeClassVK("KHR_shader_a
             <dd><ul>
                 <li>Aaron Hagan <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_atomic_int64:%20&amp;body=@ahagan%20">ahagan</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-07-05</dd>
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
                 <li>Promoted to Vulkan 1.2 Core</li>
-            </ul></dd>
-
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_gpu_shader_int64.txt">{@code GL_ARB_gpu_shader_int64}</a> and <a target="_blank" href="https://github.com/KhronosGroup/GLSL/tree/master/extensions/ext/GL_EXT_shader_atomic_int64.txt">{@code GL_EXT_shader_atomic_int64}</a> extensions for GLSL source languages.</li>
+                <li>This extension enables <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_gpu_shader_int64.txt">{@code GL_ARB_gpu_shader_int64}</a> and <a target="_blank" href="https://raw.githubusercontent.com/KhronosGroup/GLSL/master/extensions/ext/GL_EXT_shader_atomic_int64.txt">{@code GL_EXT_shader_atomic_int64}</a> for GLSL source languages.</li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

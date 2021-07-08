@@ -74,6 +74,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBShadingLanguageInclude {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code type} parameter of NamedStringARB. */
     public static final int GL_SHADER_INCLUDE_ARB = 0x8DAE;
 
@@ -81,8 +83,6 @@ public class ARBShadingLanguageInclude {
     public static final int
         GL_NAMED_STRING_LENGTH_ARB = 0x8DE9,
         GL_NAMED_STRING_TYPE_ARB   = 0x8DEA;
-
-    static { GL.initialize(); }
 
     protected ARBShadingLanguageInclude() {
         throw new UnsupportedOperationException();

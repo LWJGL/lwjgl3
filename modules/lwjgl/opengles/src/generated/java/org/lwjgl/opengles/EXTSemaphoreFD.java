@@ -17,10 +17,10 @@ import org.lwjgl.system.*;
  */
 public class EXTSemaphoreFD {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code handleType} parameter of ImportMemoryFdEXT() or ImportSemaphoreFdEXT(). */
     public static final int GL_HANDLE_TYPE_OPAQUE_FD_EXT = 0x9586;
-
-    static { GLES.initialize(); }
 
     protected EXTSemaphoreFD() {
         throw new UnsupportedOperationException();

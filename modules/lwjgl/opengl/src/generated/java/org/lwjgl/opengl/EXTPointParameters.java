@@ -59,14 +59,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTPointParameters {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of glPointParameterfvEXT, and the {@code pname} of glGet. */
     public static final int
         GL_POINT_SIZE_MIN_EXT            = 0x8126,
         GL_POINT_SIZE_MAX_EXT            = 0x8127,
         GL_POINT_FADE_THRESHOLD_SIZE_EXT = 0x8128,
         GL_DISTANCE_ATTENUATION_EXT      = 0x8129;
-
-    static { GL.initialize(); }
 
     protected EXTPointParameters() {
         throw new UnsupportedOperationException();

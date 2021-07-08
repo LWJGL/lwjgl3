@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWwindow *window,
  *     int width,
  *     int height
@@ -53,7 +53,7 @@ public abstract class GLFWWindowSizeCallback extends Callback implements GLFWWin
     }
 
     protected GLFWWindowSizeCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWWindowSizeCallback(long functionPointer) {

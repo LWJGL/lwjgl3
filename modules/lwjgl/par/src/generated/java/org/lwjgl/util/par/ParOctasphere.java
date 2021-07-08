@@ -46,6 +46,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ParOctasphere {
 
+    static { LibPar.initialize(); }
+
     public static final int par_octasphere_PAR_OCTASPHERE_MAX_SUBDIVISIONS = 5;
 
     /** {@code par_octasphere_uv_mode} */
@@ -53,8 +55,6 @@ public class ParOctasphere {
 
     /** {@code par_octasphere_normals_mode} */
     public static final int par_octasphere_NORMALS_SMOOTH = 0;
-
-    static { LibPar.initialize(); }
 
     protected ParOctasphere() {
         throw new UnsupportedOperationException();

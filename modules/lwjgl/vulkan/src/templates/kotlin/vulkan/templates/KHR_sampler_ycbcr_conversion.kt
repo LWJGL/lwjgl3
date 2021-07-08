@@ -11,11 +11,14 @@ import vulkan.*
 val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KHR_sampler_ycbcr_conversion", type = "device", postfix = KHR) {
     documentation =
         """
-        This extension provides the ability to perform specified color space conversions during texture sampling operations. It also adds a selection of multi-planar formats, including the ability to bind memory to the planes of an image collectively or separately.
+        The use of Y′C<sub>B</sub>C<sub>R</sub> sampler conversion is an area in 3D graphics not used by most Vulkan developers. It's mainly used for processing inputs from video decoders and cameras. The use of the extension assumes basic knowledge of Y′C<sub>B</sub>C<sub>R</sub> concepts.
+
+        This extension provides the ability to perform specified color space conversions during texture sampling operations for the Y′C<sub>B</sub>C<sub>R</sub> color space natively. It also adds a selection of multi-planar formats, image aspect plane, and the ability to bind memory to the planes of an image collectively or separately.
 
         <h5>Promotion to Vulkan 1.1</h5>
-        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. However, if Vulkan 1.1 is supported and this extension is not, the {@code samplerYcbcrConversion} capability is optional. The original type, enum and command names are still available as aliases of the core functionality.
 
+        <h5>VK_KHR_sampler_ycbcr_conversion</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_sampler_ycbcr_conversion}</dd>
@@ -47,7 +50,10 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
             <dd><ul>
                 <li>Andrew Garrard <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_sampler_ycbcr_conversion:%20&amp;body=@fluppeteer%20">fluppeteer</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-08-11</dd>
 

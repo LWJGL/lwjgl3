@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * When an error occurs during application development, a common question is "What tools are actually running right now?" This extension adds the ability to query that information directly from the Vulkan implementation.
  * 
- * <p>Outdated versions of one tool might not play nicely with another, or perhaps a tool is not actually running when it should have been. Trying to figure that out can cause headaches as it's necessary to consult each known tool to figure out what's going on - in some cases the tool might not even be known.</p>
+ * <p>Outdated versions of one tool might not play nicely with another, or perhaps a tool is not actually running when it should have been. Trying to figure that out can cause headaches as it is necessary to consult each known tool to figure out what is going on -- in some cases the tool might not even be known.</p>
  * 
  * <p>Typically, the expectation is that developers will simply print out this information for visual inspection when an issue occurs, however a small amount of semantic information about what the tool is doing is provided to help identify it programmatically. For example, if the advertised limits or features of an implementation are unexpected, is there a tool active which modifies these limits? Or if an application is providing debug markers, but the implementation is not actually doing anything with that information, this can quickly point that out.</p>
  * 
@@ -47,6 +47,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     }
  * }</code></pre>
  * 
+ * <h5>VK_EXT_tooling_info</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_tooling_info}</dd>
@@ -64,6 +66,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_tooling_info:%20&amp;body=@tobski%20">tobski</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-11-05</dd>
  * <dt><b>Contributors</b></dt>
@@ -160,17 +167,16 @@ public class EXTToolingInfo {
      * 
      * <h5>Description</h5>
      * 
-     * <p>If {@code pToolProperties} is {@code NULL}, the implementation will return the number of tools currently active on {@code physicalDevice} in {@code pToolCount}.</p>
+     * <p>If {@code pToolProperties} is {@code NULL}, then the number of tools currently active on {@code physicalDevice} is returned in {@code pToolCount}. Otherwise, {@code pToolCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pToolProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pToolProperties}. If {@code pToolCount} is less than the number of currently active tools, at most {@code pToolCount} structures will be written.</p>
      * 
-     * <p>If {@code pToolProperties} is not {@code NULL}, its elements are populate with information about active tools, up to the number stored in {@code pToolCount}; the number of elements actually returned is returned in {@code pToolCount}.</p>
+     * <p>The count and properties of active tools <b>may</b> change in response to events outside the scope of the specification. An application <b>should</b> assume these properties might change at any given time.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
      * <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
      * <li>{@code pToolCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
-     * <li>If {@code pToolProperties} is not {@code NULL}, {@code pToolProperties} <b>must</b> be a valid pointer to an array of {@code pToolCount} {@link VkPhysicalDeviceToolPropertiesEXT} structures</li>
-     * <li>If {@code pToolProperties} is not {@code NULL}, the value referenced by {@code pToolCount} <b>must</b> be greater than 0</li>
+     * <li>If the value referenced by {@code pToolCount} is not 0, and {@code pToolProperties} is not {@code NULL}, {@code pToolProperties} <b>must</b> be a valid pointer to an array of {@code pToolCount} {@link VkPhysicalDeviceToolPropertiesEXT} structures</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -181,6 +187,10 @@ public class EXTToolingInfo {
      * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
      * <li>{@link VK10#VK_INCOMPLETE INCOMPLETE}</li>
      * </ul></dd>
+     * <dt>On failure, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
+     * </ul></dd>
      * </dl>
      * 
      * <h5>See Also</h5>
@@ -189,7 +199,7 @@ public class EXTToolingInfo {
      *
      * @param physicalDevice  the handle to the physical device to query for active tools.
      * @param pToolCount      a pointer to an integer describing the number of tools active on {@code physicalDevice}.
-     * @param pToolProperties either {@code NULL} or a pointer to an array of {@link VkPhysicalDeviceToolPropertiesEXT} instances.
+     * @param pToolProperties either {@code NULL} or a pointer to an array of {@link VkPhysicalDeviceToolPropertiesEXT} structures.
      */
     @NativeType("VkResult")
     public static int vkGetPhysicalDeviceToolPropertiesEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pToolCount, @Nullable @NativeType("VkPhysicalDeviceToolPropertiesEXT *") VkPhysicalDeviceToolPropertiesEXT.Buffer pToolProperties) {

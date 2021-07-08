@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * bool (*) (
+ * bool (*{@link #invoke}) (
  *     extent_hooks_t *extent_hooks,
  *     void *addr,
  *     size_t size,
@@ -54,7 +54,7 @@ public abstract class ExtentCommit extends Callback implements ExtentCommitI {
     }
 
     protected ExtentCommit() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     ExtentCommit(long functionPointer) {

@@ -970,65 +970,170 @@ if (nb_packets > 0)
         void()
     )
 
-    javaImport("static org.lwjgl.system.dyncall.DynCall.*")
+    javaImport(
+        "org.lwjgl.system.libffi.*",
+        "static org.lwjgl.system.MemoryStack.*",
+        "static org.lwjgl.system.libffi.LibFFI.*"
+    )
 
     customMethod("""
-    public static class CTLRequest {
-        private int request;
+    public abstract static class CTLRequest {
+        protected final FFICIF cif;
+        protected final int    request;
 
-        CTLRequest(int request) {
+        CTLRequest(FFICIF cif, int request) {
+            this.cif = cif;
             this.request = request;
         }
 
-        int apply(long st, long __functionAddress) {
-            long vm = dcNewCallVM(32);
-            try {
-                dcMode(vm, DC_CALL_C_ELLIPSIS);
-                dcReset(vm);
-                dcArgPointer(vm, st);
-                dcArgInt(vm, request);
-
-                dcMode(vm, DC_CALL_C_ELLIPSIS_VARARGS);
-                apply(vm);
-
-                return dcCallInt(vm, __functionAddress);
-            } finally {
-                dcFree(vm);
-            }
-        }
-
-        void apply(long vm) {}
+        abstract int apply(long st, long __functionAddress);
     }
 
-    public static class CTLRequestSetI extends CTLRequest {
+    public static class CTLRequestV extends CTLRequest {
+        private static final FFICIF CIF = apiCreateCIFVar(
+            FFI_DEFAULT_ABI, 2, ffi_type_sint,
+            ffi_type_pointer, ffi_type_sint
+        );
+
+        CTLRequestV(int request) {
+            super(CIF, request);
+        }
+
+        @Override
+        int apply(long st, long __functionAddress) {
+            try (MemoryStack stack = stackPush()) {
+                ByteBuffer arguments = stack.malloc(POINTER_SIZE + Integer.BYTES);
+                PointerBuffer.put(arguments, 0, st);
+                arguments.putInt(POINTER_SIZE, request);
+
+                ByteBuffer rvalue = stack.calloc(POINTER_SIZE, POINTER_SIZE);
+
+                long avalues = memAddress(arguments);
+
+                ffi_call(
+                    cif, __functionAddress, rvalue,
+                    stack.mallocPointer(2)
+                        .put(0, avalues)
+                        .put(1, avalues + POINTER_SIZE)
+                );
+                return rvalue.getInt(0);
+            }
+        }
+    }
+
+    public static class CTLRequestI extends CTLRequest {
+        private static final FFICIF CIF = apiCreateCIFVar(
+            FFI_DEFAULT_ABI, 2, ffi_type_sint,
+            ffi_type_pointer, ffi_type_sint, ffi_type_sint32
+        );
+
         private int value;
 
-        CTLRequestSetI(int request, int value) {
-            super(request);
+        CTLRequestI(int request, int value) {
+            super(CIF, request);
             this.value = value;
         }
 
         @Override
-        void apply(long vm) {
-            dcArgInt(vm, value);
+        int apply(long st, long __functionAddress) {
+            try (MemoryStack stack = stackPush()) {
+                ByteBuffer arguments = stack.malloc(POINTER_SIZE + 2 * Integer.BYTES);
+                PointerBuffer.put(arguments, 0, st);
+                arguments.putInt(POINTER_SIZE, request);
+                arguments.putInt(POINTER_SIZE + Integer.BYTES, value);
+
+                ByteBuffer rvalue = stack.calloc(POINTER_SIZE, POINTER_SIZE);
+
+                long avalues = memAddress(arguments);
+
+                ffi_call(
+                    cif, __functionAddress, rvalue,
+                    stack.mallocPointer(3)
+                        .put(0, avalues)
+                        .put(1, avalues + POINTER_SIZE)
+                        .put(2, avalues + POINTER_SIZE + Integer.BYTES)
+                );
+                return rvalue.getInt(0);
+            }
         }
     }
 
-    public static class CTLRequestGetI extends CTLRequest {
-        private IntBuffer value;
+    public static class CTLRequestP extends CTLRequest {
+        private static final FFICIF CIF = apiCreateCIFVar(
+            FFI_DEFAULT_ABI, 2, ffi_type_sint,
+            ffi_type_pointer, ffi_type_sint, ffi_type_pointer
+        );
 
-        CTLRequestGetI(int request, IntBuffer value) {
-            super(request);
+        private long address;
 
-            if (CHECKS) {
-                check(value, 1);
+        CTLRequestP(int request, long address) {
+            super(CIF, request);
+            this.address = address;
+        }
+
+        @Override
+        int apply(long st, long __functionAddress) {
+            try (MemoryStack stack = stackPush()) {
+                ByteBuffer arguments = stack.malloc(POINTER_SIZE + Integer.BYTES + POINTER_SIZE);
+                PointerBuffer.put(arguments, 0, st);
+                arguments.putInt(POINTER_SIZE, request);
+                PointerBuffer.put(arguments, POINTER_SIZE + Integer.BYTES, address);
+
+                ByteBuffer rvalue = stack.calloc(POINTER_SIZE, POINTER_SIZE);
+
+                long avalues = memAddress(arguments);
+
+                ffi_call(
+                    cif, __functionAddress, rvalue,
+                    stack.mallocPointer(3)
+                        .put(0, avalues)
+                        .put(1, avalues + POINTER_SIZE)
+                        .put(2, avalues + POINTER_SIZE + Integer.BYTES)
+                );
+                return rvalue.getInt(0);
             }
+        }
+    }
+
+    public static class CTLRequestPI extends CTLRequest {
+        private static final FFICIF CIF = apiCreateCIFVar(
+            FFI_DEFAULT_ABI, 2, ffi_type_sint,
+            ffi_type_pointer, ffi_type_sint, ffi_type_pointer, ffi_type_sint32
+        );
+
+        private long address;
+        private int value;
+
+        CTLRequestPI(int request, long address, int value) {
+            super(CIF, request);
+
+            this.address = address;
             this.value = value;
         }
 
         @Override
-        void apply(long vm) {
-            dcArgPointer(vm, memAddress(value));
+        int apply(long st, long __functionAddress) {
+            try (MemoryStack stack = stackPush()) {
+                ByteBuffer arguments = stack.malloc(POINTER_SIZE + Integer.BYTES + POINTER_SIZE + Integer.BYTES);
+                PointerBuffer.put(arguments, 0, st);
+                arguments.putInt(POINTER_SIZE, request);
+                PointerBuffer.put(arguments, POINTER_SIZE + Integer.BYTES, address);
+                arguments.putInt(POINTER_SIZE + Integer.BYTES + POINTER_SIZE, value);
+
+                ByteBuffer rvalue = stack.calloc(POINTER_SIZE, POINTER_SIZE);
+
+                long avalues = memAddress(arguments);
+
+                ffi_call(
+                    cif, __functionAddress, rvalue,
+                    stack.mallocPointer(4)
+                        .put(0, avalues)
+                        .put(1, avalues + POINTER_SIZE)
+                        .put(2, avalues + POINTER_SIZE + Integer.BYTES)
+                        .put(3, avalues + POINTER_SIZE + Integer.BYTES + POINTER_SIZE)
+                );
+                return rvalue.getInt(0);
+            }
         }
     }
 
@@ -1039,7 +1144,7 @@ if (nb_packets > 0)
      * @param request CTL request
      */
     public static int opus_encoder_ctl(@NativeType("OpusEncoder *") long st, int request) {
-        return new CTLRequest(request).apply(st, Functions.encoder_ctl);
+        return new CTLRequestV(request).apply(st, Functions.encoder_ctl);
     }
 
     /**
@@ -1059,7 +1164,7 @@ if (nb_packets > 0)
      * @param request CTL request
      */
     public static int opus_decoder_ctl(@NativeType("OpusDecoder *") long st, int request) {
-        return new CTLRequest(request).apply(st, Functions.decoder_ctl);
+        return new CTLRequestV(request).apply(st, Functions.decoder_ctl);
     }
 
     /**
@@ -1079,14 +1184,14 @@ if (nb_packets > 0)
      *
      * @param value 0-10, inclusive
      */
-    public static CTLRequest OPUS_SET_COMPLEXITY(int value) { return new CTLRequestSetI(OPUS_SET_COMPLEXITY_REQUEST, value); }
+    public static CTLRequest OPUS_SET_COMPLEXITY(int value) { return new CTLRequestI(OPUS_SET_COMPLEXITY_REQUEST, value); }
 
     /**
      * Gets the encoder's complexity configuration.
      *
      * @return a value in the range 0-10, inclusive
      */
-    public static CTLRequest OPUS_GET_COMPLEXITY(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_COMPLEXITY_REQUEST, value); }
+    public static CTLRequest OPUS_GET_COMPLEXITY(IntBuffer value) { return new CTLRequestP(OPUS_GET_COMPLEXITY_REQUEST, memAddress(value)); }
 
     /**
      * Configures the bitrate in the encoder.
@@ -1097,14 +1202,14 @@ if (nb_packets > 0)
      *
      * @param value bitrate in bits per second. The default is determined based on the number of channels and the input sampling rate.
      */
-    public static CTLRequest OPUS_SET_BITRATE(int value) { return new CTLRequestSetI(OPUS_SET_BITRATE_REQUEST, value); }
+    public static CTLRequest OPUS_SET_BITRATE(int value) { return new CTLRequestI(OPUS_SET_BITRATE_REQUEST, value); }
 
     /**
      * Gets the encoder's bitrate configuration.
      *
      * @return the bitrate in bits per second. The default is determined based on the number of channels and the input sampling rate.
      */
-    public static CTLRequest OPUS_GET_BITRATE(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_BITRATE_REQUEST, value); }
+    public static CTLRequest OPUS_GET_BITRATE(IntBuffer value) { return new CTLRequestP(OPUS_GET_BITRATE_REQUEST, memAddress(value)); }
 
     /**
      * Enables or disables variable bitrate (VBR) in the encoder.
@@ -1117,7 +1222,7 @@ if (nb_packets > 0)
      * <dt>1</dt><dd>VBR (default). The exact type of VBR is controlled by #OPUS_SET_VBR_CONSTRAINT.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_SET_VBR(int value) { return new CTLRequestSetI(OPUS_SET_VBR_REQUEST, value); }
+    public static CTLRequest OPUS_SET_VBR(int value) { return new CTLRequestI(OPUS_SET_VBR_REQUEST, value); }
 
     /**
      * Determines if variable bitrate (VBR) is enabled in the encoder.
@@ -1128,7 +1233,7 @@ if (nb_packets > 0)
      * <dt>1</dt><dd>VBR (default). The exact type of VBR may be retrieved via {@link #OPUS_GET_VBR_CONSTRAINT}.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_GET_VBR(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_VBR_REQUEST, value); }
+    public static CTLRequest OPUS_GET_VBR(IntBuffer value) { return new CTLRequestP(OPUS_GET_VBR_REQUEST, memAddress(value)); }
 
     /**
      * Enables or disables constrained VBR in the encoder.
@@ -1142,7 +1247,7 @@ if (nb_packets > 0)
      * <dt>1</dt><dd>Constrained VBR (default). This creates a maximum of one frame of buffering delay assuming a transport with a serialization speed of the nominal bitrate.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_SET_VBR_CONSTRAINT(int value) { return new CTLRequestSetI(OPUS_SET_VBR_CONSTRAINT_REQUEST, value); }
+    public static CTLRequest OPUS_SET_VBR_CONSTRAINT(int value) { return new CTLRequestI(OPUS_SET_VBR_CONSTRAINT_REQUEST, value); }
 
     /**
      * Determines if constrained VBR is enabled in the encoder.
@@ -1153,7 +1258,7 @@ if (nb_packets > 0)
      * <dt>1</dt><dd>Constrained VBR (default).</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_GET_VBR_CONSTRAINT(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_VBR_CONSTRAINT_REQUEST, value); }
+    public static CTLRequest OPUS_GET_VBR_CONSTRAINT(IntBuffer value) { return new CTLRequestP(OPUS_GET_VBR_CONSTRAINT_REQUEST, memAddress(value)); }
 
     /**
      * Configures mono/stereo forcing in the encoder.
@@ -1168,7 +1273,7 @@ if (nb_packets > 0)
      * <dt>2</dt>         <dd>Forced stereo</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_SET_FORCE_CHANNELS(int value) { return new CTLRequestSetI(OPUS_SET_FORCE_CHANNELS_REQUEST, value); }
+    public static CTLRequest OPUS_SET_FORCE_CHANNELS(int value) { return new CTLRequestI(OPUS_SET_FORCE_CHANNELS_REQUEST, value); }
 
     /**
      * Gets the encoder's forced channel configuration.
@@ -1180,7 +1285,7 @@ if (nb_packets > 0)
      * <dt>2</dt>         <dd>Forced stereo</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_GET_FORCE_CHANNELS(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_FORCE_CHANNELS_REQUEST, value); }
+    public static CTLRequest OPUS_GET_FORCE_CHANNELS(IntBuffer value) { return new CTLRequestP(OPUS_GET_FORCE_CHANNELS_REQUEST, memAddress(value)); }
 
     /**
      * Configures the maximum bandpass that the encoder will select automatically.
@@ -1198,7 +1303,7 @@ if (nb_packets > 0)
      * <dt>{@link #OPUS_BANDWIDTH_FULLBAND}</dt>     <dd>20 kHz passband (default)</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_SET_MAX_BANDWIDTH(int value) { return new CTLRequestSetI(OPUS_SET_MAX_BANDWIDTH_REQUEST, value); }
+    public static CTLRequest OPUS_SET_MAX_BANDWIDTH(int value) { return new CTLRequestI(OPUS_SET_MAX_BANDWIDTH_REQUEST, value); }
 
     /**
      * Gets the encoder's configured maximum allowed bandpass.
@@ -1212,7 +1317,7 @@ if (nb_packets > 0)
      * <dt>{@link #OPUS_BANDWIDTH_FULLBAND}</dt>     <dd>20 kHz passband (default)</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_GET_MAX_BANDWIDTH(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_MAX_BANDWIDTH_REQUEST, value); }
+    public static CTLRequest OPUS_GET_MAX_BANDWIDTH(IntBuffer value) { return new CTLRequestP(OPUS_GET_MAX_BANDWIDTH_REQUEST, memAddress(value)); }
 
     /**
      * Sets the encoder's bandpass to a specific value.
@@ -1231,7 +1336,7 @@ if (nb_packets > 0)
      * <dt>{@link #OPUS_BANDWIDTH_FULLBAND}</dt>     <dd>20 kHz passband (default)</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_SET_BANDWIDTH(int value) { return new CTLRequestSetI(OPUS_SET_BANDWIDTH_REQUEST, value); }
+    public static CTLRequest OPUS_SET_BANDWIDTH(int value) { return new CTLRequestI(OPUS_SET_BANDWIDTH_REQUEST, value); }
 
     /**
      * Gets the encoder's configured bandpass or the decoder's last bandpass.
@@ -1246,7 +1351,7 @@ if (nb_packets > 0)
      * <dt>{@link #OPUS_BANDWIDTH_FULLBAND}</dt>     <dd>20 kHz passband (default)</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_GET_BANDWIDTH(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_BANDWIDTH_REQUEST, value); }
+    public static CTLRequest OPUS_GET_BANDWIDTH(IntBuffer value) { return new CTLRequestP(OPUS_GET_BANDWIDTH_REQUEST, memAddress(value)); }
 
     /**
      * Configures the type of signal being encoded.
@@ -1260,7 +1365,7 @@ if (nb_packets > 0)
      * <dt>{@link #OPUS_SIGNAL_MUSIC}</dt><dd>Bias thresholds towards choosing MDCT modes.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_SET_SIGNAL(int value) { return new CTLRequestSetI(OPUS_SET_SIGNAL_REQUEST, value); }
+    public static CTLRequest OPUS_SET_SIGNAL(int value) { return new CTLRequestI(OPUS_SET_SIGNAL_REQUEST, value); }
 
     /**
      * Gets the encoder's configured signal type.
@@ -1272,7 +1377,7 @@ if (nb_packets > 0)
      * <dt>{@link #OPUS_SIGNAL_MUSIC}</dt><dd>Bias thresholds towards choosing MDCT modes.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_GET_SIGNAL(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_SIGNAL_REQUEST, value); }
+    public static CTLRequest OPUS_GET_SIGNAL(IntBuffer value) { return new CTLRequestP(OPUS_GET_SIGNAL_REQUEST, memAddress(value)); }
 
     /**
      * Configures the encoder's intended application.
@@ -1286,7 +1391,7 @@ if (nb_packets > 0)
      * <dt>{@link #OPUS_APPLICATION_RESTRICTED_LOWDELAY}</dt><dd>Configure the minimum possible coding delay by disabling certain modes of operation.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_SET_APPLICATION(int value) { return new CTLRequestSetI(OPUS_SET_APPLICATION_REQUEST, value); }
+    public static CTLRequest OPUS_SET_APPLICATION(int value) { return new CTLRequestI(OPUS_SET_APPLICATION_REQUEST, value); }
 
     /**
      * Gets the encoder's configured application.
@@ -1298,7 +1403,7 @@ if (nb_packets > 0)
      * <dt>{@link #OPUS_APPLICATION_RESTRICTED_LOWDELAY}</dt><dd>Configure the minimum possible coding delay by disabling certain modes of operation.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_GET_APPLICATION(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_APPLICATION_REQUEST, value); }
+    public static CTLRequest OPUS_GET_APPLICATION(IntBuffer value) { return new CTLRequestP(OPUS_GET_APPLICATION_REQUEST, memAddress(value)); }
 
     /**
      * Gets the total samples of delay added by the entire codec.
@@ -1312,7 +1417,7 @@ if (nb_packets > 0)
      *
      * @return number of lookahead samples
      */
-    public static CTLRequest OPUS_GET_LOOKAHEAD(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_LOOKAHEAD_REQUEST, value); }
+    public static CTLRequest OPUS_GET_LOOKAHEAD(IntBuffer value) { return new CTLRequestP(OPUS_GET_LOOKAHEAD_REQUEST, memAddress(value)); }
 
     /**
      * Configures the encoder's use of inband forward error correction (FEC).
@@ -1325,7 +1430,7 @@ if (nb_packets > 0)
      * <dt>1</dt><dd>Enable inband FEC.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_SET_INBAND_FEC(int value) { return new CTLRequestSetI(OPUS_SET_INBAND_FEC_REQUEST, value); }
+    public static CTLRequest OPUS_SET_INBAND_FEC(int value) { return new CTLRequestI(OPUS_SET_INBAND_FEC_REQUEST, value); }
 
     /**
      * Gets encoder's configured use of inband forward error correction.
@@ -1336,7 +1441,7 @@ if (nb_packets > 0)
      * <dt>1</dt><dd>Inband FEC enabled.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_GET_INBAND_FEC(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_INBAND_FEC_REQUEST, value); }
+    public static CTLRequest OPUS_GET_INBAND_FEC(IntBuffer value) { return new CTLRequestP(OPUS_GET_INBAND_FEC_REQUEST, memAddress(value)); }
 
     /**
      * Configures the encoder's expected packet loss percentage.
@@ -1346,14 +1451,14 @@ if (nb_packets > 0)
      *
      * @param value loss percentage in the range 0-100, inclusive (default: 0)
      */
-    public static CTLRequest OPUS_SET_PACKET_LOSS_PERC(int value) { return new CTLRequestSetI(OPUS_SET_PACKET_LOSS_PERC_REQUEST, value); }
+    public static CTLRequest OPUS_SET_PACKET_LOSS_PERC(int value) { return new CTLRequestI(OPUS_SET_PACKET_LOSS_PERC_REQUEST, value); }
 
     /**
      * Gets the encoder's configured packet loss percentage.
      *
      * @return the configured loss percentage in the range 0-100, inclusive (default: 0)
      */
-    public static CTLRequest OPUS_GET_PACKET_LOSS_PERC(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_PACKET_LOSS_PERC_REQUEST, value); }
+    public static CTLRequest OPUS_GET_PACKET_LOSS_PERC(IntBuffer value) { return new CTLRequestP(OPUS_GET_PACKET_LOSS_PERC_REQUEST, memAddress(value)); }
 
     /**
      * Configures the encoder's use of discontinuous transmission (DTX).
@@ -1366,7 +1471,7 @@ if (nb_packets > 0)
      * <dt>1</dt><dd>Enabled DTX.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_SET_DTX(int value) { return new CTLRequestSetI(OPUS_SET_DTX_REQUEST, value); }
+    public static CTLRequest OPUS_SET_DTX(int value) { return new CTLRequestI(OPUS_SET_DTX_REQUEST, value); }
 
     /**
      * Gets encoder's configured use of discontinuous transmission.
@@ -1377,7 +1482,7 @@ if (nb_packets > 0)
      * <dt>1</dt><dd>DTX enabled.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_GET_DTX(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_DTX_REQUEST, value); }
+    public static CTLRequest OPUS_GET_DTX(IntBuffer value) { return new CTLRequestP(OPUS_GET_DTX_REQUEST, memAddress(value)); }
 
     /**
      * Configures the depth of signal being encoded.
@@ -1393,14 +1498,14 @@ if (nb_packets > 0)
      *
      * @param value input precision in bits, between 8 and 24 (default: 24).
      */
-    public static CTLRequest OPUS_SET_LSB_DEPTH(int value) { return new CTLRequestSetI(OPUS_SET_LSB_DEPTH_REQUEST, value); }
+    public static CTLRequest OPUS_SET_LSB_DEPTH(int value) { return new CTLRequestI(OPUS_SET_LSB_DEPTH_REQUEST, value); }
 
     /**
      * Gets the encoder's configured signal depth.
      *
      * @return input precision in bits, between 8 and 24 (default: 24).
      */
-    public static CTLRequest OPUS_GET_LSB_DEPTH(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_LSB_DEPTH_REQUEST, value); }
+    public static CTLRequest OPUS_GET_LSB_DEPTH(IntBuffer value) { return new CTLRequestP(OPUS_GET_LSB_DEPTH_REQUEST, memAddress(value)); }
 
     /**
      * Configures the encoder's use of variable duration frames.
@@ -1423,7 +1528,7 @@ if (nb_packets > 0)
      * <dt>{@link #OPUS_FRAMESIZE_120_MS}</dt><dd>Use 120 ms frames.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_SET_EXPERT_FRAME_DURATION(int value) { return new CTLRequestSetI(OPUS_SET_EXPERT_FRAME_DURATION_REQUEST, value); }
+    public static CTLRequest OPUS_SET_EXPERT_FRAME_DURATION(int value) { return new CTLRequestI(OPUS_SET_EXPERT_FRAME_DURATION_REQUEST, value); }
 
     /**
      * Gets the encoder's configured use of variable duration frames.
@@ -1442,7 +1547,7 @@ if (nb_packets > 0)
      * <dt>{@link #OPUS_FRAMESIZE_120_MS}</dt><dd>Use 120 ms frames.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_GET_EXPERT_FRAME_DURATION(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_EXPERT_FRAME_DURATION_REQUEST, value); }
+    public static CTLRequest OPUS_GET_EXPERT_FRAME_DURATION(IntBuffer value) { return new CTLRequestP(OPUS_GET_EXPERT_FRAME_DURATION_REQUEST, memAddress(value)); }
 
     /**
      * If set to 1, disables almost all use of prediction, making frames almost completely independent. This reduces quality.
@@ -1453,7 +1558,7 @@ if (nb_packets > 0)
      * <dt>1</dt><dd>Disable prediction.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_SET_PREDICTION_DISABLED(int value) { return new CTLRequestSetI(OPUS_SET_PREDICTION_DISABLED_REQUEST, value); }
+    public static CTLRequest OPUS_SET_PREDICTION_DISABLED(int value) { return new CTLRequestI(OPUS_SET_PREDICTION_DISABLED_REQUEST, value); }
 
     /**
      * Gets the encoder's configured prediction status.
@@ -1464,7 +1569,7 @@ if (nb_packets > 0)
      * <dt>1</dt><dd>Prediction disabled.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_GET_PREDICTION_DISABLED(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_PREDICTION_DISABLED_REQUEST, value); }
+    public static CTLRequest OPUS_GET_PREDICTION_DISABLED(IntBuffer value) { return new CTLRequestP(OPUS_GET_PREDICTION_DISABLED_REQUEST, memAddress(value)); }
 
     /**
      * Gets the final state of the codec's entropy coder.
@@ -1474,7 +1579,7 @@ if (nb_packets > 0)
      *
      * @return entropy coder state
      */
-    public static CTLRequest OPUS_GET_FINAL_RANGE(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_FINAL_RANGE_REQUEST, value); }
+    public static CTLRequest OPUS_GET_FINAL_RANGE(IntBuffer value) { return new CTLRequestP(OPUS_GET_FINAL_RANGE_REQUEST, memAddress(value)); }
 
     /**
      * Gets the sampling rate the encoder or decoder was initialized with.
@@ -1483,7 +1588,7 @@ if (nb_packets > 0)
      *
      * @return sampling rate of encoder or decoder.
      */
-    public static CTLRequest OPUS_GET_SAMPLE_RATE(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_SAMPLE_RATE_REQUEST, value); }
+    public static CTLRequest OPUS_GET_SAMPLE_RATE(IntBuffer value) { return new CTLRequestP(OPUS_GET_SAMPLE_RATE_REQUEST, memAddress(value)); }
 
     /**
      * If set to 1, disables the use of phase inversion for intensity stereo, improving the quality of mono downmixes, but slightly reducing normal stereo
@@ -1498,7 +1603,7 @@ if (nb_packets > 0)
      * <dt>1</dt><dd>Disable phase inversion.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_SET_PHASE_INVERSION_DISABLED(int value) { return new CTLRequestSetI(OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST, value); }
+    public static CTLRequest OPUS_SET_PHASE_INVERSION_DISABLED(int value) { return new CTLRequestI(OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST, value); }
 
     /**
      * Gets the encoder's configured phase inversion status.
@@ -1509,7 +1614,7 @@ if (nb_packets > 0)
      * <dt>1</dt><dd>Stereo phase inversion disabled.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_GET_PHASE_INVERSION_DISABLED(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST, value); }
+    public static CTLRequest OPUS_GET_PHASE_INVERSION_DISABLED(IntBuffer value) { return new CTLRequestP(OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST, memAddress(value)); }
 
     /**
      * Gets the DTX state of the encoder.
@@ -1522,7 +1627,7 @@ if (nb_packets > 0)
      * <dt>1</dt><dd>The encoder is in DTX.</dd>
      * </dl>
      */
-    public static CTLRequest OPUS_GET_IN_DTX(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_IN_DTX_REQUEST, value); }
+    public static CTLRequest OPUS_GET_IN_DTX(IntBuffer value) { return new CTLRequestP(OPUS_GET_IN_DTX_REQUEST, memAddress(value)); }
 
     /**
      * Configures decoder gain adjustment.
@@ -1534,21 +1639,21 @@ if (nb_packets > 0)
      *
      * @param value amount to scale PCM signal by in Q8 dB units.
      */
-    public static CTLRequest OPUS_SET_GAIN(int value) { return new CTLRequestSetI(OPUS_SET_GAIN_REQUEST, value); }
+    public static CTLRequest OPUS_SET_GAIN(int value) { return new CTLRequestI(OPUS_SET_GAIN_REQUEST, value); }
 
     /**
      * Gets the decoder's configured gain adjustment.
      *
      * @return amount to scale PCM signal by in Q8 dB units.
      */
-    public static CTLRequest OPUS_GET_GAIN(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_GAIN_REQUEST, value); }
+    public static CTLRequest OPUS_GET_GAIN(IntBuffer value) { return new CTLRequestP(OPUS_GET_GAIN_REQUEST, memAddress(value)); }
 
     /**
      * Gets the duration (in samples) of the last packet successfully decoded or concealed.
      *
      * @return number of samples (at current sampling rate).
      */
-    public static CTLRequest OPUS_GET_LAST_PACKET_DURATION(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_LAST_PACKET_DURATION_REQUEST, value); }
+    public static CTLRequest OPUS_GET_LAST_PACKET_DURATION(IntBuffer value) { return new CTLRequestP(OPUS_GET_LAST_PACKET_DURATION_REQUEST, memAddress(value)); }
 
     /**
      * Gets the pitch of the last decoded frame, if available.
@@ -1560,6 +1665,6 @@ if (nb_packets > 0)
      *
      * @return pitch period at 48 kHz (or 0 if not available)
      */
-    public static CTLRequest OPUS_GET_PITCH(IntBuffer value) { return new CTLRequestGetI(OPUS_GET_PITCH_REQUEST, value); }
+    public static CTLRequest OPUS_GET_PITCH(IntBuffer value) { return new CTLRequestP(OPUS_GET_PITCH_REQUEST, memAddress(value)); }
     """)
 }

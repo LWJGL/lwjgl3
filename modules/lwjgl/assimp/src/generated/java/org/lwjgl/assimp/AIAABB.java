@@ -64,10 +64,10 @@ public class AIAABB extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link AIVector3D} view of the {@code mMin} field. */
+    /** @return a {@link AIVector3D} view of the {@code mMin} field. */
     @NativeType("struct aiVector3D")
     public AIVector3D mMin() { return nmMin(address()); }
-    /** Returns a {@link AIVector3D} view of the {@code mMax} field. */
+    /** @return a {@link AIVector3D} view of the {@code mMax} field. */
     @NativeType("struct aiVector3D")
     public AIVector3D mMax() { return nmMax(address()); }
 
@@ -294,10 +294,10 @@ public class AIAABB extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link AIVector3D} view of the {@code mMin} field. */
+        /** @return a {@link AIVector3D} view of the {@code mMin} field. */
         @NativeType("struct aiVector3D")
         public AIVector3D mMin() { return AIAABB.nmMin(address()); }
-        /** Returns a {@link AIVector3D} view of the {@code mMax} field. */
+        /** @return a {@link AIVector3D} view of the {@code mMax} field. */
         @NativeType("struct aiVector3D")
         public AIVector3D mMax() { return AIAABB.nmMax(address()); }
 

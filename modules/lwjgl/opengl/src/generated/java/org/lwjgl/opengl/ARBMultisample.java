@@ -27,6 +27,8 @@ import org.lwjgl.system.*;
  */
 public class ARBMultisample {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
      * GetDoublev.
@@ -46,8 +48,6 @@ public class ARBMultisample {
         GL_SAMPLES_ARB                = 0x80A9,
         GL_SAMPLE_COVERAGE_VALUE_ARB  = 0x80AA,
         GL_SAMPLE_COVERAGE_INVERT_ARB = 0x80AB;
-
-    static { GL.initialize(); }
 
     protected ARBMultisample() {
         throw new UnsupportedOperationException();

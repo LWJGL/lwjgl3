@@ -18,39 +18,19 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Specifies status information for the current session.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code IsVisible} &ndash; True if the process has VR focus and thus is visible in the HMD.</li>
- * <li>{@code HmdPresent} &ndash; True if an HMD is present.</li>
- * <li>{@code HmdMounted} &ndash; True if the HMD is on the user's head.</li>
- * <li>{@code DisplayLost} &ndash; True if the session is in a display-lost state. See {@link OVR#ovr_SubmitFrame SubmitFrame}.</li>
- * <li>{@code ShouldQuit} &ndash; True if the application should initiate shutdown.</li>
- * <li>{@code ShouldRecenter} &ndash; True if UX has requested re-centering. Must call {@link OVR#ovr_ClearShouldRecenterFlag ClearShouldRecenterFlag}, {@link OVR#ovr_RecenterTrackingOrigin RecenterTrackingOrigin} or {@link OVR#ovr_SpecifyTrackingOrigin SpecifyTrackingOrigin}.</li>
- * <li>{@code HasInputFocus} &ndash; 
- * True if the application is the foreground application and receives input (e.g. Touch controller state). If this is false then the application is in the
- * background (but possibly still visible) should hide any input representations such as hands.</li>
- * <li>{@code OverlayPresent} &ndash; 
- * True if a system overlay is present, such as a dashboard. In this case the application (if visible) should pause while still drawing, avoid drawing
- * near-field graphics so they don't visually fight with the system overlay, and consume fewer CPU and GPU resources.
- * 
- * <p>Deprecated, do not use.</p></li>
- * <li>{@code DepthRequested} &ndash; True if runtime is requesting that the application provide depth buffers with projection layers.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrSessionStatus {
- *     ovrBool IsVisible;
- *     ovrBool HmdPresent;
- *     ovrBool HmdMounted;
- *     ovrBool DisplayLost;
- *     ovrBool ShouldQuit;
- *     ovrBool ShouldRecenter;
- *     ovrBool HasInputFocus;
- *     ovrBool OverlayPresent;
- *     ovrBool DepthRequested;
+ *     ovrBool {@link #IsVisible};
+ *     ovrBool {@link #HmdPresent};
+ *     ovrBool {@link #HmdMounted};
+ *     ovrBool {@link #DisplayLost};
+ *     ovrBool {@link #ShouldQuit};
+ *     ovrBool {@link #ShouldRecenter};
+ *     ovrBool {@link #HasInputFocus};
+ *     ovrBool {@link #OverlayPresent};
+ *     ovrBool {@link #DepthRequested};
  * }</code></pre>
  */
 @NativeType("struct ovrSessionStatus")
@@ -114,31 +94,39 @@ public class OVRSessionStatus extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code IsVisible} field. */
+    /** True if the process has VR focus and thus is visible in the HMD. */
     @NativeType("ovrBool")
     public boolean IsVisible() { return nIsVisible(address()); }
-    /** Returns the value of the {@code HmdPresent} field. */
+    /** True if an HMD is present. */
     @NativeType("ovrBool")
     public boolean HmdPresent() { return nHmdPresent(address()); }
-    /** Returns the value of the {@code HmdMounted} field. */
+    /** True if the HMD is on the user's head. */
     @NativeType("ovrBool")
     public boolean HmdMounted() { return nHmdMounted(address()); }
-    /** Returns the value of the {@code DisplayLost} field. */
+    /** True if the session is in a display-lost state. See {@link OVR#ovr_SubmitFrame SubmitFrame}. */
     @NativeType("ovrBool")
     public boolean DisplayLost() { return nDisplayLost(address()); }
-    /** Returns the value of the {@code ShouldQuit} field. */
+    /** True if the application should initiate shutdown. */
     @NativeType("ovrBool")
     public boolean ShouldQuit() { return nShouldQuit(address()); }
-    /** Returns the value of the {@code ShouldRecenter} field. */
+    /** True if UX has requested re-centering. Must call {@link OVR#ovr_ClearShouldRecenterFlag ClearShouldRecenterFlag}, {@link OVR#ovr_RecenterTrackingOrigin RecenterTrackingOrigin} or {@link OVR#ovr_SpecifyTrackingOrigin SpecifyTrackingOrigin}. */
     @NativeType("ovrBool")
     public boolean ShouldRecenter() { return nShouldRecenter(address()); }
-    /** Returns the value of the {@code HasInputFocus} field. */
+    /**
+     * True if the application is the foreground application and receives input (e.g. Touch controller state). If this is false then the application is in the
+     * background (but possibly still visible) should hide any input representations such as hands.
+     */
     @NativeType("ovrBool")
     public boolean HasInputFocus() { return nHasInputFocus(address()); }
-    /** Returns the value of the {@code OverlayPresent} field. */
+    /**
+     * True if a system overlay is present, such as a dashboard. In this case the application (if visible) should pause while still drawing, avoid drawing
+     * near-field graphics so they don't visually fight with the system overlay, and consume fewer CPU and GPU resources.
+     * 
+     * <p>Deprecated, do not use.</p>
+     */
     @NativeType("ovrBool")
     public boolean OverlayPresent() { return nOverlayPresent(address()); }
-    /** Returns the value of the {@code DepthRequested} field. */
+    /** True if runtime is requesting that the application provide depth buffers with projection layers. */
     @NativeType("ovrBool")
     public boolean DepthRequested() { return nDepthRequested(address()); }
 
@@ -342,31 +330,31 @@ public class OVRSessionStatus extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code IsVisible} field. */
+        /** @return the value of the {@link OVRSessionStatus#IsVisible} field. */
         @NativeType("ovrBool")
         public boolean IsVisible() { return OVRSessionStatus.nIsVisible(address()); }
-        /** Returns the value of the {@code HmdPresent} field. */
+        /** @return the value of the {@link OVRSessionStatus#HmdPresent} field. */
         @NativeType("ovrBool")
         public boolean HmdPresent() { return OVRSessionStatus.nHmdPresent(address()); }
-        /** Returns the value of the {@code HmdMounted} field. */
+        /** @return the value of the {@link OVRSessionStatus#HmdMounted} field. */
         @NativeType("ovrBool")
         public boolean HmdMounted() { return OVRSessionStatus.nHmdMounted(address()); }
-        /** Returns the value of the {@code DisplayLost} field. */
+        /** @return the value of the {@link OVRSessionStatus#DisplayLost} field. */
         @NativeType("ovrBool")
         public boolean DisplayLost() { return OVRSessionStatus.nDisplayLost(address()); }
-        /** Returns the value of the {@code ShouldQuit} field. */
+        /** @return the value of the {@link OVRSessionStatus#ShouldQuit} field. */
         @NativeType("ovrBool")
         public boolean ShouldQuit() { return OVRSessionStatus.nShouldQuit(address()); }
-        /** Returns the value of the {@code ShouldRecenter} field. */
+        /** @return the value of the {@link OVRSessionStatus#ShouldRecenter} field. */
         @NativeType("ovrBool")
         public boolean ShouldRecenter() { return OVRSessionStatus.nShouldRecenter(address()); }
-        /** Returns the value of the {@code HasInputFocus} field. */
+        /** @return the value of the {@link OVRSessionStatus#HasInputFocus} field. */
         @NativeType("ovrBool")
         public boolean HasInputFocus() { return OVRSessionStatus.nHasInputFocus(address()); }
-        /** Returns the value of the {@code OverlayPresent} field. */
+        /** @return the value of the {@link OVRSessionStatus#OverlayPresent} field. */
         @NativeType("ovrBool")
         public boolean OverlayPresent() { return OVRSessionStatus.nOverlayPresent(address()); }
-        /** Returns the value of the {@code DepthRequested} field. */
+        /** @return the value of the {@link OVRSessionStatus#DepthRequested} field. */
         @NativeType("ovrBool")
         public boolean DepthRequested() { return OVRSessionStatus.nDepthRequested(address()); }
 

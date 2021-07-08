@@ -15,6 +15,8 @@ import org.lwjgl.system.*;
  */
 public class NVAlphaToCoverageDitherControl {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code param} parameter of {@link #glAlphaToCoverageDitherControlNV AlphaToCoverageDitherControlNV}. */
     public static final int
         GL_ALPHA_TO_COVERAGE_DITHER_DEFAULT_NV = 0x934D,
@@ -23,8 +25,6 @@ public class NVAlphaToCoverageDitherControl {
 
     /** Accepted by the {@code param} of {@link GLES20#glGetIntegerv GetIntegerv}. */
     public static final int GL_ALPHA_TO_COVERAGE_DITHER_MODE_NV = 0x92BF;
-
-    static { GLES.initialize(); }
 
     protected NVAlphaToCoverageDitherControl() {
         throw new UnsupportedOperationException();

@@ -89,6 +89,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVShaderBufferLoad {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBufferParameterui64vNV, GetNamedBufferParameterui64vNV. */
     public static final int GL_BUFFER_GPU_ADDRESS_NV = 0x8F1D;
 
@@ -97,8 +99,6 @@ public class NVShaderBufferLoad {
 
     /** Accepted by the {@code value} parameter of GetIntegerui64vNV. */
     public static final int GL_MAX_SHADER_BUFFER_ADDRESS_NV = 0x8F35;
-
-    static { GL.initialize(); }
 
     protected NVShaderBufferLoad() {
         throw new UnsupportedOperationException();

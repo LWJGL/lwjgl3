@@ -67,13 +67,13 @@ public class XrSystemHandTrackingPropertiesEXT extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code supportsHandTracking} field. */
+    /** @return the value of the {@code supportsHandTracking} field. */
     @NativeType("XrBool32")
     public boolean supportsHandTracking() { return nsupportsHandTracking(address()) != 0; }
 
@@ -304,13 +304,13 @@ public class XrSystemHandTrackingPropertiesEXT extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemHandTrackingPropertiesEXT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemHandTrackingPropertiesEXT.nnext(address()); }
-        /** Returns the value of the {@code supportsHandTracking} field. */
+        /** @return the value of the {@code supportsHandTracking} field. */
         @NativeType("XrBool32")
         public boolean supportsHandTracking() { return XrSystemHandTrackingPropertiesEXT.nsupportsHandTracking(address()) != 0; }
 

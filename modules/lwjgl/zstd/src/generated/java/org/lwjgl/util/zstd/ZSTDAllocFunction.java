@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void * (*) (
+ * void * (*{@link #invoke}) (
  *     void *opaque,
  *     size_t size
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class ZSTDAllocFunction extends Callback implements ZSTDAllocFun
     }
 
     protected ZSTDAllocFunction() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     ZSTDAllocFunction(long functionPointer) {

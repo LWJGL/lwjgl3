@@ -29,21 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkDisplayPlanePropertiesKHR}, {@link KHRGetDisplayProperties2#vkGetPhysicalDeviceDisplayPlaneProperties2KHR GetPhysicalDeviceDisplayPlaneProperties2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code displayPlaneProperties} &ndash; a {@link VkDisplayPlanePropertiesKHR} structure.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDisplayPlaneProperties2KHR {
- *     VkStructureType sType;
- *     void * pNext;
- *     {@link VkDisplayPlanePropertiesKHR VkDisplayPlanePropertiesKHR} displayPlaneProperties;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     {@link VkDisplayPlanePropertiesKHR VkDisplayPlanePropertiesKHR} {@link #displayPlaneProperties};
  * }</code></pre>
  */
 public class VkDisplayPlaneProperties2KHR extends Struct implements NativeResource {
@@ -88,18 +80,18 @@ public class VkDisplayPlaneProperties2KHR extends Struct implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkDisplayPlanePropertiesKHR} view of the {@code displayPlaneProperties} field. */
+    /** a {@link VkDisplayPlanePropertiesKHR} structure. */
     public VkDisplayPlanePropertiesKHR displayPlaneProperties() { return ndisplayPlaneProperties(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDisplayPlaneProperties2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDisplayPlaneProperties2KHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,18 +310,18 @@ public class VkDisplayPlaneProperties2KHR extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDisplayPlaneProperties2KHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDisplayPlaneProperties2KHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDisplayPlaneProperties2KHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkDisplayPlaneProperties2KHR.npNext(address()); }
-        /** Returns a {@link VkDisplayPlanePropertiesKHR} view of the {@code displayPlaneProperties} field. */
+        /** @return a {@link VkDisplayPlanePropertiesKHR} view of the {@link VkDisplayPlaneProperties2KHR#displayPlaneProperties} field. */
         public VkDisplayPlanePropertiesKHR displayPlaneProperties() { return VkDisplayPlaneProperties2KHR.ndisplayPlaneProperties(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDisplayPlaneProperties2KHR#sType} field. */
         public VkDisplayPlaneProperties2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplayPlaneProperties2KHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDisplayPlaneProperties2KHR#pNext} field. */
         public VkDisplayPlaneProperties2KHR.Buffer pNext(@NativeType("void *") long value) { VkDisplayPlaneProperties2KHR.npNext(address(), value); return this; }
 
     }

@@ -8,6 +8,8 @@ package org.lwjgl.vulkan;
 /**
  * This extension enables applications to use multisampled rendering with a depth/stencil sample count that is larger than the color sample count. Having a depth/stencil sample count larger than the color sample count allows maintaining geometry and coverage information at a higher sample rate than color information. All samples are depth/stencil tested, but only the first color sample count number of samples get a corresponding color output.
  * 
+ * <h5>VK_AMD_mixed_attachment_samples</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_AMD_mixed_attachment_samples}</dd>
@@ -25,6 +27,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Matthaeus G. Chajdas <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_mixed_attachment_samples:%20&amp;body=@anteru%20">anteru</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-07-24</dd>
  * <dt><b>Contributors</b></dt>

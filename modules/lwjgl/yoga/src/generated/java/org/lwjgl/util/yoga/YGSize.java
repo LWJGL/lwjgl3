@@ -63,9 +63,9 @@ public class YGSize extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code width} field. */
+    /** @return the value of the {@code width} field. */
     public float width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** @return the value of the {@code height} field. */
     public float height() { return nheight(address()); }
 
     /** Sets the specified value to the {@code width} field. */
@@ -287,9 +287,9 @@ public class YGSize extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@code width} field. */
         public float width() { return YGSize.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@code height} field. */
         public float height() { return YGSize.nheight(address()); }
 
         /** Sets the specified value to the {@code width} field. */

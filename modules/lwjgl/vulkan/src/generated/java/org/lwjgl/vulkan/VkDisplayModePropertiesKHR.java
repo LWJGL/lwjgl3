@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing display mode properties.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code displayMode} &ndash; a handle to the display mode described in this structure. This handle will be valid for the lifetime of the Vulkan instance.</li>
- * <li>{@code parameters} &ndash; a {@link VkDisplayModeParametersKHR} structure describing the display parameters associated with {@code displayMode}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDisplayModePropertiesKHR {
- *     VkDisplayModeKHR displayMode;
- *     {@link VkDisplayModeParametersKHR VkDisplayModeParametersKHR} parameters;
+ *     VkDisplayModeKHR {@link #displayMode};
+ *     {@link VkDisplayModeParametersKHR VkDisplayModeParametersKHR} {@link #parameters};
  * }</code></pre>
  */
 public class VkDisplayModePropertiesKHR extends Struct implements NativeResource {
@@ -72,10 +65,10 @@ public class VkDisplayModePropertiesKHR extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code displayMode} field. */
+    /** a handle to the display mode described in this structure. This handle will be valid for the lifetime of the Vulkan instance. */
     @NativeType("VkDisplayModeKHR")
     public long displayMode() { return ndisplayMode(address()); }
-    /** Returns a {@link VkDisplayModeParametersKHR} view of the {@code parameters} field. */
+    /** a {@link VkDisplayModeParametersKHR} structure describing the display parameters associated with {@code displayMode}. */
     public VkDisplayModeParametersKHR parameters() { return nparameters(address()); }
 
     // -----------------------------------
@@ -264,10 +257,10 @@ public class VkDisplayModePropertiesKHR extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code displayMode} field. */
+        /** @return the value of the {@link VkDisplayModePropertiesKHR#displayMode} field. */
         @NativeType("VkDisplayModeKHR")
         public long displayMode() { return VkDisplayModePropertiesKHR.ndisplayMode(address()); }
-        /** Returns a {@link VkDisplayModeParametersKHR} view of the {@code parameters} field. */
+        /** @return a {@link VkDisplayModeParametersKHR} view of the {@link VkDisplayModePropertiesKHR#parameters} field. */
         public VkDisplayModeParametersKHR parameters() { return VkDisplayModePropertiesKHR.nparameters(address()); }
 
     }

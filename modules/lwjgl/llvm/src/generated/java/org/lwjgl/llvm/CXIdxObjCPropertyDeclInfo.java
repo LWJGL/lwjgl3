@@ -65,13 +65,13 @@ public class CXIdxObjCPropertyDeclInfo extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link CXIdxDeclInfo} view of the struct pointed to by the {@code declInfo} field. */
+    /** @return a {@link CXIdxDeclInfo} view of the struct pointed to by the {@code declInfo} field. */
     @NativeType("CXIdxDeclInfo const *")
     public CXIdxDeclInfo declInfo() { return ndeclInfo(address()); }
-    /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code getter} field. */
+    /** @return a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code getter} field. */
     @NativeType("CXIdxEntityInfo const *")
     public CXIdxEntityInfo getter() { return ngetter(address()); }
-    /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code setter} field. */
+    /** @return a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code setter} field. */
     @NativeType("CXIdxEntityInfo const *")
     public CXIdxEntityInfo setter() { return nsetter(address()); }
 
@@ -151,13 +151,13 @@ public class CXIdxObjCPropertyDeclInfo extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link CXIdxDeclInfo} view of the struct pointed to by the {@code declInfo} field. */
+        /** @return a {@link CXIdxDeclInfo} view of the struct pointed to by the {@code declInfo} field. */
         @NativeType("CXIdxDeclInfo const *")
         public CXIdxDeclInfo declInfo() { return CXIdxObjCPropertyDeclInfo.ndeclInfo(address()); }
-        /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code getter} field. */
+        /** @return a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code getter} field. */
         @NativeType("CXIdxEntityInfo const *")
         public CXIdxEntityInfo getter() { return CXIdxObjCPropertyDeclInfo.ngetter(address()); }
-        /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code setter} field. */
+        /** @return a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code setter} field. */
         @NativeType("CXIdxEntityInfo const *")
         public CXIdxEntityInfo setter() { return CXIdxObjCPropertyDeclInfo.nsetter(address()); }
 

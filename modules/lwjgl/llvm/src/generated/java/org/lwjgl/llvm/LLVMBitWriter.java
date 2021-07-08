@@ -17,10 +17,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMBitWriter {
 
-    protected LLVMBitWriter() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -33,6 +29,10 @@ public class LLVMBitWriter {
             WriteBitcodeToFileHandle   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMWriteBitcodeToFileHandle"),
             WriteBitcodeToMemoryBuffer = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMWriteBitcodeToMemoryBuffer");
 
+    }
+
+    protected LLVMBitWriter() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMWriteBitcodeToFile ] ---

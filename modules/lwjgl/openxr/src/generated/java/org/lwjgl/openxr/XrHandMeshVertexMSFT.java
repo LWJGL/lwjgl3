@@ -63,9 +63,9 @@ public class XrHandMeshVertexMSFT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link XrVector3f} view of the {@code position} field. */
+    /** @return a {@link XrVector3f} view of the {@code position} field. */
     public XrVector3f position$() { return nposition$(address()); }
-    /** Returns a {@link XrVector3f} view of the {@code normal} field. */
+    /** @return a {@link XrVector3f} view of the {@code normal} field. */
     public XrVector3f normal() { return nnormal(address()); }
 
     /** Copies the specified {@link XrVector3f} to the {@code position} field. */
@@ -291,9 +291,9 @@ public class XrHandMeshVertexMSFT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link XrVector3f} view of the {@code position} field. */
+        /** @return a {@link XrVector3f} view of the {@code position} field. */
         public XrVector3f position$() { return XrHandMeshVertexMSFT.nposition$(address()); }
-        /** Returns a {@link XrVector3f} view of the {@code normal} field. */
+        /** @return a {@link XrVector3f} view of the {@code normal} field. */
         public XrVector3f normal() { return XrHandMeshVertexMSFT.nnormal(address()); }
 
         /** Copies the specified {@link XrVector3f} to the {@code position} field. */

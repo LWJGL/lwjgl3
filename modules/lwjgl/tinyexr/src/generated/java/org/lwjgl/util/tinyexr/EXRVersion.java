@@ -16,25 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code version} &ndash; this must be 2</li>
- * <li>{@code tiled} &ndash; tile format image</li>
- * <li>{@code long_name} &ndash; long name attribute</li>
- * <li>{@code non_image} &ndash; deep image(EXR 2.0)</li>
- * <li>{@code multipart} &ndash; multi-part(EXR 2.0)</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct EXRVersion {
- *     int version;
- *     int tiled;
- *     int long_name;
- *     int non_image;
- *     int multipart;
+ *     int {@link #version};
+ *     int {@link #tiled};
+ *     int {@link #long_name};
+ *     int {@link #non_image};
+ *     int {@link #multipart};
  * }</code></pre>
  */
 public class EXRVersion extends Struct implements NativeResource {
@@ -85,30 +75,30 @@ public class EXRVersion extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code version} field. */
+    /** this must be 2 */
     public int version() { return nversion(address()); }
-    /** Returns the value of the {@code tiled} field. */
+    /** tile format image; not zero for only a single-part "normal" tiled file (according to spec.) */
     @NativeType("int")
     public boolean tiled() { return ntiled(address()) != 0; }
-    /** Returns the value of the {@code long_name} field. */
+    /** long name attribute */
     @NativeType("int")
     public boolean long_name() { return nlong_name(address()) != 0; }
-    /** Returns the value of the {@code non_image} field. */
+    /** deep image(EXR 2.0); for a multi-part file, indicates that at least one part is of type {@code deep*} (according to spec.) */
     @NativeType("int")
     public boolean non_image() { return nnon_image(address()) != 0; }
-    /** Returns the value of the {@code multipart} field. */
+    /** multi-part(EXR 2.0) */
     @NativeType("int")
     public boolean multipart() { return nmultipart(address()) != 0; }
 
-    /** Sets the specified value to the {@code version} field. */
+    /** Sets the specified value to the {@link #version} field. */
     public EXRVersion version(int value) { nversion(address(), value); return this; }
-    /** Sets the specified value to the {@code tiled} field. */
+    /** Sets the specified value to the {@link #tiled} field. */
     public EXRVersion tiled(@NativeType("int") boolean value) { ntiled(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code long_name} field. */
+    /** Sets the specified value to the {@link #long_name} field. */
     public EXRVersion long_name(@NativeType("int") boolean value) { nlong_name(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code non_image} field. */
+    /** Sets the specified value to the {@link #non_image} field. */
     public EXRVersion non_image(@NativeType("int") boolean value) { nnon_image(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code multipart} field. */
+    /** Sets the specified value to the {@link #multipart} field. */
     public EXRVersion multipart(@NativeType("int") boolean value) { nmultipart(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,30 +333,30 @@ public class EXRVersion extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code version} field. */
+        /** @return the value of the {@link EXRVersion#version} field. */
         public int version() { return EXRVersion.nversion(address()); }
-        /** Returns the value of the {@code tiled} field. */
+        /** @return the value of the {@link EXRVersion#tiled} field. */
         @NativeType("int")
         public boolean tiled() { return EXRVersion.ntiled(address()) != 0; }
-        /** Returns the value of the {@code long_name} field. */
+        /** @return the value of the {@link EXRVersion#long_name} field. */
         @NativeType("int")
         public boolean long_name() { return EXRVersion.nlong_name(address()) != 0; }
-        /** Returns the value of the {@code non_image} field. */
+        /** @return the value of the {@link EXRVersion#non_image} field. */
         @NativeType("int")
         public boolean non_image() { return EXRVersion.nnon_image(address()) != 0; }
-        /** Returns the value of the {@code multipart} field. */
+        /** @return the value of the {@link EXRVersion#multipart} field. */
         @NativeType("int")
         public boolean multipart() { return EXRVersion.nmultipart(address()) != 0; }
 
-        /** Sets the specified value to the {@code version} field. */
+        /** Sets the specified value to the {@link EXRVersion#version} field. */
         public EXRVersion.Buffer version(int value) { EXRVersion.nversion(address(), value); return this; }
-        /** Sets the specified value to the {@code tiled} field. */
+        /** Sets the specified value to the {@link EXRVersion#tiled} field. */
         public EXRVersion.Buffer tiled(@NativeType("int") boolean value) { EXRVersion.ntiled(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code long_name} field. */
+        /** Sets the specified value to the {@link EXRVersion#long_name} field. */
         public EXRVersion.Buffer long_name(@NativeType("int") boolean value) { EXRVersion.nlong_name(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code non_image} field. */
+        /** Sets the specified value to the {@link EXRVersion#non_image} field. */
         public EXRVersion.Buffer non_image(@NativeType("int") boolean value) { EXRVersion.nnon_image(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code multipart} field. */
+        /** Sets the specified value to the {@link EXRVersion#multipart} field. */
         public EXRVersion.Buffer multipart(@NativeType("int") boolean value) { EXRVersion.nmultipart(address(), value ? 1 : 0); return this; }
 
     }

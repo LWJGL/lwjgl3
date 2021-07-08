@@ -128,7 +128,8 @@ public final class AL {
      * Creates a new {@link ALCapabilities} instance for the OpenAL context that is current in the current thread or process.
      *
      * @param alcCaps       the {@link ALCCapabilities} of the device associated with the current context
-     * @param bufferFactory a function that allocates a {@link PointerBuffer} given a size. If {@code null}, LWJGL will allocate a GC-managed buffer internally.
+     * @param bufferFactory a function that allocates a {@link PointerBuffer} given a size. The buffer must be filled with zeroes. If {@code null}, LWJGL will
+     *                      allocate a GC-managed buffer internally.
      *
      * @return the ALCapabilities instance
      */
@@ -136,7 +137,7 @@ public final class AL {
         // We'll use alGetProcAddress for both core and extension entry points.
         // To do that, we need to first grab the alGetProcAddress function from
         // the OpenAL native library.
-        long alGetProcAddress = ALC.getFunctionProvider().getFunctionAddress(NULL,"alGetProcAddress");
+        long alGetProcAddress = ALC.getFunctionProvider().getFunctionAddress(NULL, "alGetProcAddress");
         if (alGetProcAddress == NULL) {
             throw new RuntimeException("A core AL function is missing. Make sure that the OpenAL library has been loaded correctly.");
         }

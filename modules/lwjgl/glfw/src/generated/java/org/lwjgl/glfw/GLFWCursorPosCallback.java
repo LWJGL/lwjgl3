@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWwindow *window,
  *     double xpos,
  *     double ypos
@@ -55,7 +55,7 @@ public abstract class GLFWCursorPosCallback extends Callback implements GLFWCurs
     }
 
     protected GLFWCursorPosCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWCursorPosCallback(long functionPointer) {

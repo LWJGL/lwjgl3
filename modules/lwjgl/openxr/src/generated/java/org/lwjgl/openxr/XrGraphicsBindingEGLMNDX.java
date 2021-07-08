@@ -80,22 +80,22 @@ public class XrGraphicsBindingEGLMNDX extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code getProcAddress} field. */
+    /** @return the value of the {@code getProcAddress} field. */
     @NativeType("PFNEGLGETPROCADDRESSPROC")
     public long getProcAddress() { return ngetProcAddress(address()); }
-    /** Returns the value of the {@code display} field. */
+    /** @return the value of the {@code display} field. */
     @NativeType("EGLDisplay")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code config} field. */
+    /** @return the value of the {@code config} field. */
     @NativeType("EGLConfig")
     public long config() { return nconfig(address()); }
-    /** Returns the value of the {@code context} field. */
+    /** @return the value of the {@code context} field. */
     @NativeType("EGLContext")
     public long context() { return ncontext(address()); }
 
@@ -374,22 +374,22 @@ public class XrGraphicsBindingEGLMNDX extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGraphicsBindingEGLMNDX.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrGraphicsBindingEGLMNDX.nnext(address()); }
-        /** Returns the value of the {@code getProcAddress} field. */
+        /** @return the value of the {@code getProcAddress} field. */
         @NativeType("PFNEGLGETPROCADDRESSPROC")
         public long getProcAddress() { return XrGraphicsBindingEGLMNDX.ngetProcAddress(address()); }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("EGLDisplay")
         public long display() { return XrGraphicsBindingEGLMNDX.ndisplay(address()); }
-        /** Returns the value of the {@code config} field. */
+        /** @return the value of the {@code config} field. */
         @NativeType("EGLConfig")
         public long config() { return XrGraphicsBindingEGLMNDX.nconfig(address()); }
-        /** Returns the value of the {@code context} field. */
+        /** @return the value of the {@code context} field. */
         @NativeType("EGLContext")
         public long context() { return XrGraphicsBindingEGLMNDX.ncontext(address()); }
 

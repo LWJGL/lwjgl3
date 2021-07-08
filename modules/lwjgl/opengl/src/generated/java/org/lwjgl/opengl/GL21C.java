@@ -27,6 +27,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL21C extends GL20C {
 
+    static { GL.initialize(); }
+
     /** Returned by the {@code type} parameter of GetActiveUniform. */
     public static final int
         GL_FLOAT_MAT2x3 = 0x8B65,
@@ -57,8 +59,6 @@ public class GL21C extends GL20C {
         GL_SRGB8_ALPHA8          = 0x8C43,
         GL_COMPRESSED_SRGB       = 0x8C48,
         GL_COMPRESSED_SRGB_ALPHA = 0x8C49;
-
-    static { GL.initialize(); }
 
     protected GL21C() {
         throw new UnsupportedOperationException();

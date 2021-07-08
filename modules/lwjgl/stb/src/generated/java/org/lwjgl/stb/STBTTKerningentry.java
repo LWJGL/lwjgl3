@@ -68,11 +68,11 @@ public class STBTTKerningentry extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code glyph1} field. */
+    /** @return the value of the {@code glyph1} field. */
     public int glyph1() { return nglyph1(address()); }
-    /** Returns the value of the {@code glyph2} field. */
+    /** @return the value of the {@code glyph2} field. */
     public int glyph2() { return nglyph2(address()); }
-    /** Returns the value of the {@code advance} field. */
+    /** @return the value of the {@code advance} field. */
     public int advance() { return nadvance(address()); }
 
     // -----------------------------------
@@ -263,11 +263,11 @@ public class STBTTKerningentry extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code glyph1} field. */
+        /** @return the value of the {@code glyph1} field. */
         public int glyph1() { return STBTTKerningentry.nglyph1(address()); }
-        /** Returns the value of the {@code glyph2} field. */
+        /** @return the value of the {@code glyph2} field. */
         public int glyph2() { return STBTTKerningentry.nglyph2(address()); }
-        /** Returns the value of the {@code advance} field. */
+        /** @return the value of the {@code advance} field. */
         public int advance() { return STBTTKerningentry.nadvance(address()); }
 
     }

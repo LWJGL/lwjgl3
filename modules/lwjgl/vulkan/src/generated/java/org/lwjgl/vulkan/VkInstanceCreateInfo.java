@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO STRUCTURE_TYPE_INSTANCE_CREATE_INFO}</li>
  * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDebugReportCallbackCreateInfoEXT}, {@link VkDebugUtilsMessengerCreateInfoEXT}, {@link VkValidationFeaturesEXT}, or {@link VkValidationFlagsEXT}</li>
- * <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique, with the exception of structures of type {@link VkDebugUtilsMessengerCreateInfoEXT}</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>If {@code pApplicationInfo} is not {@code NULL}, {@code pApplicationInfo} <b>must</b> be a valid pointer to a valid {@link VkApplicationInfo} structure</li>
  * <li>If {@code enabledLayerCount} is not 0, {@code ppEnabledLayerNames} <b>must</b> be a valid pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings</li>
@@ -35,31 +35,18 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkApplicationInfo}, {@link VK10#vkCreateInstance CreateInstance}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code pApplicationInfo} &ndash; {@code NULL} or a pointer to a {@link VkApplicationInfo} structure. If not {@code NULL}, this information helps implementations recognize behavior inherent to classes of applications. {@link VkApplicationInfo} is defined in detail below.</li>
- * <li>{@code enabledLayerCount} &ndash; the number of global layers to enable.</li>
- * <li>{@code ppEnabledLayerNames} &ndash; a pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings containing the names of layers to enable for the created instance. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-layers">Layers</a> section for further details.</li>
- * <li>{@code enabledExtensionCount} &ndash; the number of global extensions to enable.</li>
- * <li>{@code ppEnabledExtensionNames} &ndash; a pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings containing the names of extensions to enable.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkInstanceCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkInstanceCreateFlags flags;
- *     {@link VkApplicationInfo VkApplicationInfo} const * pApplicationInfo;
- *     uint32_t enabledLayerCount;
- *     char const * const * ppEnabledLayerNames;
- *     uint32_t enabledExtensionCount;
- *     char const * const * ppEnabledExtensionNames;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkInstanceCreateFlags {@link #flags};
+ *     {@link VkApplicationInfo VkApplicationInfo} const * {@link #pApplicationInfo};
+ *     uint32_t {@link #enabledLayerCount};
+ *     char const * const * {@link #ppEnabledLayerNames};
+ *     uint32_t {@link #enabledExtensionCount};
+ *     char const * const * {@link #ppEnabledExtensionNames};
  * }</code></pre>
  */
 public class VkInstanceCreateInfo extends Struct implements NativeResource {
@@ -119,45 +106,45 @@ public class VkInstanceCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkInstanceCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns a {@link VkApplicationInfo} view of the struct pointed to by the {@code pApplicationInfo} field. */
+    /** {@code NULL} or a pointer to a {@link VkApplicationInfo} structure. If not {@code NULL}, this information helps implementations recognize behavior inherent to classes of applications. {@link VkApplicationInfo} is defined in detail below. */
     @Nullable
     @NativeType("VkApplicationInfo const *")
     public VkApplicationInfo pApplicationInfo() { return npApplicationInfo(address()); }
-    /** Returns the value of the {@code enabledLayerCount} field. */
+    /** the number of global layers to enable. */
     @NativeType("uint32_t")
     public int enabledLayerCount() { return nenabledLayerCount(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code ppEnabledLayerNames} field. */
+    /** a pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings containing the names of layers to enable for the created instance. The layers are loaded in the order they are listed in this array, with the first array element being the closest to the application, and the last array element being the closest to the driver. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-layers">Layers</a> section for further details. */
     @Nullable
     @NativeType("char const * const *")
     public PointerBuffer ppEnabledLayerNames() { return nppEnabledLayerNames(address()); }
-    /** Returns the value of the {@code enabledExtensionCount} field. */
+    /** the number of global extensions to enable. */
     @NativeType("uint32_t")
     public int enabledExtensionCount() { return nenabledExtensionCount(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code ppEnabledExtensionNames} field. */
+    /** a pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings containing the names of extensions to enable. */
     @Nullable
     @NativeType("char const * const *")
     public PointerBuffer ppEnabledExtensionNames() { return nppEnabledExtensionNames(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkInstanceCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkInstanceCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkInstanceCreateInfo flags(@NativeType("VkInstanceCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified {@link VkApplicationInfo} to the {@code pApplicationInfo} field. */
+    /** Sets the address of the specified {@link VkApplicationInfo} to the {@link #pApplicationInfo} field. */
     public VkInstanceCreateInfo pApplicationInfo(@Nullable @NativeType("VkApplicationInfo const *") VkApplicationInfo value) { npApplicationInfo(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code ppEnabledLayerNames} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #ppEnabledLayerNames} field. */
     public VkInstanceCreateInfo ppEnabledLayerNames(@Nullable @NativeType("char const * const *") PointerBuffer value) { nppEnabledLayerNames(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code ppEnabledExtensionNames} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #ppEnabledExtensionNames} field. */
     public VkInstanceCreateInfo ppEnabledExtensionNames(@Nullable @NativeType("char const * const *") PointerBuffer value) { nppEnabledExtensionNames(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -432,45 +419,45 @@ public class VkInstanceCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkInstanceCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkInstanceCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkInstanceCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkInstanceCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkInstanceCreateInfo#flags} field. */
         @NativeType("VkInstanceCreateFlags")
         public int flags() { return VkInstanceCreateInfo.nflags(address()); }
-        /** Returns a {@link VkApplicationInfo} view of the struct pointed to by the {@code pApplicationInfo} field. */
+        /** @return a {@link VkApplicationInfo} view of the struct pointed to by the {@link VkInstanceCreateInfo#pApplicationInfo} field. */
         @Nullable
         @NativeType("VkApplicationInfo const *")
         public VkApplicationInfo pApplicationInfo() { return VkInstanceCreateInfo.npApplicationInfo(address()); }
-        /** Returns the value of the {@code enabledLayerCount} field. */
+        /** @return the value of the {@link VkInstanceCreateInfo#enabledLayerCount} field. */
         @NativeType("uint32_t")
         public int enabledLayerCount() { return VkInstanceCreateInfo.nenabledLayerCount(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code ppEnabledLayerNames} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkInstanceCreateInfo#ppEnabledLayerNames} field. */
         @Nullable
         @NativeType("char const * const *")
         public PointerBuffer ppEnabledLayerNames() { return VkInstanceCreateInfo.nppEnabledLayerNames(address()); }
-        /** Returns the value of the {@code enabledExtensionCount} field. */
+        /** @return the value of the {@link VkInstanceCreateInfo#enabledExtensionCount} field. */
         @NativeType("uint32_t")
         public int enabledExtensionCount() { return VkInstanceCreateInfo.nenabledExtensionCount(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code ppEnabledExtensionNames} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkInstanceCreateInfo#ppEnabledExtensionNames} field. */
         @Nullable
         @NativeType("char const * const *")
         public PointerBuffer ppEnabledExtensionNames() { return VkInstanceCreateInfo.nppEnabledExtensionNames(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkInstanceCreateInfo#sType} field. */
         public VkInstanceCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkInstanceCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkInstanceCreateInfo#pNext} field. */
         public VkInstanceCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkInstanceCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkInstanceCreateInfo#flags} field. */
         public VkInstanceCreateInfo.Buffer flags(@NativeType("VkInstanceCreateFlags") int value) { VkInstanceCreateInfo.nflags(address(), value); return this; }
-        /** Sets the address of the specified {@link VkApplicationInfo} to the {@code pApplicationInfo} field. */
+        /** Sets the address of the specified {@link VkApplicationInfo} to the {@link VkInstanceCreateInfo#pApplicationInfo} field. */
         public VkInstanceCreateInfo.Buffer pApplicationInfo(@Nullable @NativeType("VkApplicationInfo const *") VkApplicationInfo value) { VkInstanceCreateInfo.npApplicationInfo(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code ppEnabledLayerNames} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link VkInstanceCreateInfo#ppEnabledLayerNames} field. */
         public VkInstanceCreateInfo.Buffer ppEnabledLayerNames(@Nullable @NativeType("char const * const *") PointerBuffer value) { VkInstanceCreateInfo.nppEnabledLayerNames(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code ppEnabledExtensionNames} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link VkInstanceCreateInfo#ppEnabledExtensionNames} field. */
         public VkInstanceCreateInfo.Buffer ppEnabledExtensionNames(@Nullable @NativeType("char const * const *") PointerBuffer value) { VkInstanceCreateInfo.nppEnabledExtensionNames(address(), value); return this; }
 
     }

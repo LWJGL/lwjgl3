@@ -19,19 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Represents an UTF-8 string, zero byte terminated.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code length} &ndash; Binary length of the string excluding the terminal 0.</li>
- * <li>{@code data[Assimp.MAXLEN]} &ndash; String buffer.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiString {
- *     ai_uint32 length;
- *     char data[Assimp.MAXLEN];
+ *     ai_uint32 {@link #length};
+ *     char {@link #data}[Assimp.MAXLEN];
  * }</code></pre>
  */
 @NativeType("struct aiString")
@@ -74,17 +67,17 @@ public class AIString extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code length} field. */
+    /** Binary length of the string excluding the terminal 0. */
     @NativeType("ai_uint32")
     public int length() { return nlength(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code data} field. */
+    /** String buffer. */
     @NativeType("char[Assimp.MAXLEN]")
     public ByteBuffer data() { return ndata(address()); }
-    /** Decodes the null-terminated string stored in the {@code data} field. */
+    /** String buffer. */
     @NativeType("char[Assimp.MAXLEN]")
     public String dataString() { return ndataString(address()); }
 
-    /** Copies the specified encoded string to the {@code data} field. */
+    /** Copies the specified encoded string to the {@link #data} field. */
     public AIString data(@NativeType("char[Assimp.MAXLEN]") ByteBuffer value) { ndata(address(), value); return this; }
 
     /**
@@ -299,17 +292,17 @@ public class AIString extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code length} field. */
+        /** @return the value of the {@link AIString#length} field. */
         @NativeType("ai_uint32")
         public int length() { return AIString.nlength(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code data} field. */
+        /** @return a {@link ByteBuffer} view of the {@link AIString#data} field. */
         @NativeType("char[Assimp.MAXLEN]")
         public ByteBuffer data() { return AIString.ndata(address()); }
-        /** Decodes the null-terminated string stored in the {@code data} field. */
+        /** @return the null-terminated string stored in the {@link AIString#data} field. */
         @NativeType("char[Assimp.MAXLEN]")
         public String dataString() { return AIString.ndataString(address()); }
 
-        /** Copies the specified encoded string to the {@code data} field. */
+        /** Copies the specified encoded string to the {@link AIString#data} field. */
         public AIString.Buffer data(@NativeType("char[Assimp.MAXLEN]") ByteBuffer value) { AIString.ndata(address(), value); return this; }
 
     }

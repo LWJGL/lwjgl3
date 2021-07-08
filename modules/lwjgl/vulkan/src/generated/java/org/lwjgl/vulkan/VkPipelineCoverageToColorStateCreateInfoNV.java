@@ -20,11 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@code coverageToColorEnable} is {@link VK10#VK_TRUE TRUE}, the fragment coverage information is treated as a bitmask with one bit for each sample (as in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-samplemask">Sample Mask</a> section), and this bitmask replaces the first component of the color value corresponding to the fragment shader output location with {@code Location} equal to {@code coverageToColorLocation} and {@code Index} equal to zero. If the color attachment format has fewer bits than the sample coverage, the low bits of the sample coverage bitmask are taken without any clamping. If the color attachment format has more bits than the sample coverage, the high bits of the sample coverage bitmask are filled with zeros.</p>
+ * <p>If the {@code pNext} chain of {@link VkPipelineMultisampleStateCreateInfo} includes a {@link VkPipelineCoverageToColorStateCreateInfoNV} structure, then that structure controls whether the fragment coverage is substituted for a fragment color output and, if so, which output is replaced.</p>
  * 
- * <p>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-sampleshading">Sample Shading</a> is in use, the coverage bitmask only has bits set for samples that correspond to the fragment shader invocation that shades those samples.</p>
- * 
- * <p>This pipeline stage occurs after sample counting and before blending, and is always performed after fragment shading regardless of the setting of {@code EarlyFragmentTests}.</p>
+ * <p>If {@code coverageToColorEnable} is {@link VK10#VK_TRUE TRUE}, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-multisampling-coverage-mask">coverage mask</a> replaces the first component of the color value corresponding to the fragment shader output location with {@code Location} equal to {@code coverageToColorLocation} and {@code Index} equal to zero. If the color attachment format has fewer bits than the coverage mask, the low bits of the sample coverage mask are taken without any clamping. If the color attachment format has more bits than the coverage mask, the high bits of the sample coverage mask are filled with zeros.</p>
  * 
  * <p>If {@code coverageToColorEnable} is {@link VK10#VK_FALSE FALSE}, these operations are skipped. If this structure is not present, it is as if {@code coverageToColorEnable} is {@link VK10#VK_FALSE FALSE}.</p>
  * 
@@ -41,25 +39,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code flags} <b>must</b> be 0</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code coverageToColorEnable} &ndash; controls whether the fragment coverage value replaces a fragment color output.</li>
- * <li>{@code coverageToColorLocation} &ndash; controls which fragment shader color output value is replaced.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineCoverageToColorStateCreateInfoNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineCoverageToColorStateCreateFlagsNV flags;
- *     VkBool32 coverageToColorEnable;
- *     uint32_t coverageToColorLocation;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineCoverageToColorStateCreateFlagsNV {@link #flags};
+ *     VkBool32 {@link #coverageToColorEnable};
+ *     uint32_t {@link #coverageToColorLocation};
  * }</code></pre>
  */
 public class VkPipelineCoverageToColorStateCreateInfoNV extends Struct implements NativeResource {
@@ -110,31 +98,31 @@ public class VkPipelineCoverageToColorStateCreateInfoNV extends Struct implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkPipelineCoverageToColorStateCreateFlagsNV")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code coverageToColorEnable} field. */
+    /** controls whether the fragment coverage value replaces a fragment color output. */
     @NativeType("VkBool32")
     public boolean coverageToColorEnable() { return ncoverageToColorEnable(address()) != 0; }
-    /** Returns the value of the {@code coverageToColorLocation} field. */
+    /** controls which fragment shader color output value is replaced. */
     @NativeType("uint32_t")
     public int coverageToColorLocation() { return ncoverageToColorLocation(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineCoverageToColorStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineCoverageToColorStateCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineCoverageToColorStateCreateInfoNV flags(@NativeType("VkPipelineCoverageToColorStateCreateFlagsNV") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code coverageToColorEnable} field. */
+    /** Sets the specified value to the {@link #coverageToColorEnable} field. */
     public VkPipelineCoverageToColorStateCreateInfoNV coverageToColorEnable(@NativeType("VkBool32") boolean value) { ncoverageToColorEnable(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code coverageToColorLocation} field. */
+    /** Sets the specified value to the {@link #coverageToColorLocation} field. */
     public VkPipelineCoverageToColorStateCreateInfoNV coverageToColorLocation(@NativeType("uint32_t") int value) { ncoverageToColorLocation(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -369,31 +357,31 @@ public class VkPipelineCoverageToColorStateCreateInfoNV extends Struct implement
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineCoverageToColorStateCreateInfoNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineCoverageToColorStateCreateInfoNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineCoverageToColorStateCreateInfoNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineCoverageToColorStateCreateInfoNV.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkPipelineCoverageToColorStateCreateInfoNV#flags} field. */
         @NativeType("VkPipelineCoverageToColorStateCreateFlagsNV")
         public int flags() { return VkPipelineCoverageToColorStateCreateInfoNV.nflags(address()); }
-        /** Returns the value of the {@code coverageToColorEnable} field. */
+        /** @return the value of the {@link VkPipelineCoverageToColorStateCreateInfoNV#coverageToColorEnable} field. */
         @NativeType("VkBool32")
         public boolean coverageToColorEnable() { return VkPipelineCoverageToColorStateCreateInfoNV.ncoverageToColorEnable(address()) != 0; }
-        /** Returns the value of the {@code coverageToColorLocation} field. */
+        /** @return the value of the {@link VkPipelineCoverageToColorStateCreateInfoNV#coverageToColorLocation} field. */
         @NativeType("uint32_t")
         public int coverageToColorLocation() { return VkPipelineCoverageToColorStateCreateInfoNV.ncoverageToColorLocation(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineCoverageToColorStateCreateInfoNV#sType} field. */
         public VkPipelineCoverageToColorStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineCoverageToColorStateCreateInfoNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineCoverageToColorStateCreateInfoNV#pNext} field. */
         public VkPipelineCoverageToColorStateCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkPipelineCoverageToColorStateCreateInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkPipelineCoverageToColorStateCreateInfoNV#flags} field. */
         public VkPipelineCoverageToColorStateCreateInfoNV.Buffer flags(@NativeType("VkPipelineCoverageToColorStateCreateFlagsNV") int value) { VkPipelineCoverageToColorStateCreateInfoNV.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code coverageToColorEnable} field. */
+        /** Sets the specified value to the {@link VkPipelineCoverageToColorStateCreateInfoNV#coverageToColorEnable} field. */
         public VkPipelineCoverageToColorStateCreateInfoNV.Buffer coverageToColorEnable(@NativeType("VkBool32") boolean value) { VkPipelineCoverageToColorStateCreateInfoNV.ncoverageToColorEnable(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code coverageToColorLocation} field. */
+        /** Sets the specified value to the {@link VkPipelineCoverageToColorStateCreateInfoNV#coverageToColorLocation} field. */
         public VkPipelineCoverageToColorStateCreateInfoNV.Buffer coverageToColorLocation(@NativeType("uint32_t") int value) { VkPipelineCoverageToColorStateCreateInfoNV.ncoverageToColorLocation(address(), value); return this; }
 
     }

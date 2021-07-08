@@ -16,25 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code bActive} &ndash; whether or not this action is currently available to be bound in the active action set</li>
- * <li>{@code activeOrigin} &ndash; the origin that caused this action's current state</li>
- * <li>{@code bState} &ndash; the current state of this action; will be true if currently pressed</li>
- * <li>{@code bChanged} &ndash; this is true if the state has changed since the last frame</li>
- * <li>{@code fUpdateTime} &ndash; time relative to now when this event happened. Will be negative to indicate a past time.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct InputDigitalActionData_t {
- *     bool bActive;
- *     VRInputValueHandle_t activeOrigin;
- *     bool bState;
- *     bool bChanged;
- *     float fUpdateTime;
+ *     bool {@link #bActive};
+ *     VRInputValueHandle_t {@link #activeOrigin};
+ *     bool {@link #bState};
+ *     bool {@link #bChanged};
+ *     float {@link #fUpdateTime};
  * }</code></pre>
  */
 @NativeType("struct InputDigitalActionData_t")
@@ -86,19 +76,19 @@ public class InputDigitalActionData extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code bActive} field. */
+    /** whether or not this action is currently available to be bound in the active action set */
     @NativeType("bool")
     public boolean bActive() { return nbActive(address()); }
-    /** Returns the value of the {@code activeOrigin} field. */
+    /** the origin that caused this action's current state */
     @NativeType("VRInputValueHandle_t")
     public long activeOrigin() { return nactiveOrigin(address()); }
-    /** Returns the value of the {@code bState} field. */
+    /** the current state of this action; will be true if currently pressed */
     @NativeType("bool")
     public boolean bState() { return nbState(address()); }
-    /** Returns the value of the {@code bChanged} field. */
+    /** this is true if the state has changed since the last frame */
     @NativeType("bool")
     public boolean bChanged() { return nbChanged(address()); }
-    /** Returns the value of the {@code fUpdateTime} field. */
+    /** time relative to now when this event happened. Will be negative to indicate a past time. */
     public float fUpdateTime() { return nfUpdateTime(address()); }
 
     // -----------------------------------
@@ -293,19 +283,19 @@ public class InputDigitalActionData extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code bActive} field. */
+        /** @return the value of the {@link InputDigitalActionData#bActive} field. */
         @NativeType("bool")
         public boolean bActive() { return InputDigitalActionData.nbActive(address()); }
-        /** Returns the value of the {@code activeOrigin} field. */
+        /** @return the value of the {@link InputDigitalActionData#activeOrigin} field. */
         @NativeType("VRInputValueHandle_t")
         public long activeOrigin() { return InputDigitalActionData.nactiveOrigin(address()); }
-        /** Returns the value of the {@code bState} field. */
+        /** @return the value of the {@link InputDigitalActionData#bState} field. */
         @NativeType("bool")
         public boolean bState() { return InputDigitalActionData.nbState(address()); }
-        /** Returns the value of the {@code bChanged} field. */
+        /** @return the value of the {@link InputDigitalActionData#bChanged} field. */
         @NativeType("bool")
         public boolean bChanged() { return InputDigitalActionData.nbChanged(address()); }
-        /** Returns the value of the {@code fUpdateTime} field. */
+        /** @return the value of the {@link InputDigitalActionData#fUpdateTime} field. */
         public float fUpdateTime() { return InputDigitalActionData.nfUpdateTime(address()); }
 
     }

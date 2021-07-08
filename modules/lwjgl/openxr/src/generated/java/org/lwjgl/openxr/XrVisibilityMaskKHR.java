@@ -87,29 +87,29 @@ public class XrVisibilityMaskKHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code vertexCapacityInput} field. */
+    /** @return the value of the {@code vertexCapacityInput} field. */
     @NativeType("uint32_t")
     public int vertexCapacityInput() { return nvertexCapacityInput(address()); }
-    /** Returns the value of the {@code vertexCountOutput} field. */
+    /** @return the value of the {@code vertexCountOutput} field. */
     @NativeType("uint32_t")
     public int vertexCountOutput() { return nvertexCountOutput(address()); }
-    /** Returns a {@link XrVector2f.Buffer} view of the struct array pointed to by the {@code vertices} field. */
+    /** @return a {@link XrVector2f.Buffer} view of the struct array pointed to by the {@code vertices} field. */
     @Nullable
     @NativeType("XrVector2f *")
     public XrVector2f.Buffer vertices() { return nvertices(address()); }
-    /** Returns the value of the {@code indexCapacityInput} field. */
+    /** @return the value of the {@code indexCapacityInput} field. */
     @NativeType("uint32_t")
     public int indexCapacityInput() { return nindexCapacityInput(address()); }
-    /** Returns the value of the {@code indexCountOutput} field. */
+    /** @return the value of the {@code indexCountOutput} field. */
     @NativeType("uint32_t")
     public int indexCountOutput() { return nindexCountOutput(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code indices} field. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code indices} field. */
     @Nullable
     @NativeType("uint32_t *")
     public IntBuffer indices() { return nindices(address()); }
@@ -381,29 +381,29 @@ public class XrVisibilityMaskKHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrVisibilityMaskKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrVisibilityMaskKHR.nnext(address()); }
-        /** Returns the value of the {@code vertexCapacityInput} field. */
+        /** @return the value of the {@code vertexCapacityInput} field. */
         @NativeType("uint32_t")
         public int vertexCapacityInput() { return XrVisibilityMaskKHR.nvertexCapacityInput(address()); }
-        /** Returns the value of the {@code vertexCountOutput} field. */
+        /** @return the value of the {@code vertexCountOutput} field. */
         @NativeType("uint32_t")
         public int vertexCountOutput() { return XrVisibilityMaskKHR.nvertexCountOutput(address()); }
-        /** Returns a {@link XrVector2f.Buffer} view of the struct array pointed to by the {@code vertices} field. */
+        /** @return a {@link XrVector2f.Buffer} view of the struct array pointed to by the {@code vertices} field. */
         @Nullable
         @NativeType("XrVector2f *")
         public XrVector2f.Buffer vertices() { return XrVisibilityMaskKHR.nvertices(address()); }
-        /** Returns the value of the {@code indexCapacityInput} field. */
+        /** @return the value of the {@code indexCapacityInput} field. */
         @NativeType("uint32_t")
         public int indexCapacityInput() { return XrVisibilityMaskKHR.nindexCapacityInput(address()); }
-        /** Returns the value of the {@code indexCountOutput} field. */
+        /** @return the value of the {@code indexCountOutput} field. */
         @NativeType("uint32_t")
         public int indexCountOutput() { return XrVisibilityMaskKHR.nindexCountOutput(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code indices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code indices} field. */
         @Nullable
         @NativeType("uint32_t *")
         public IntBuffer indices() { return XrVisibilityMaskKHR.nindices(address()); }

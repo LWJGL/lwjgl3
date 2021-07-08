@@ -6,8 +6,11 @@
 package org.lwjgl.util.shaderc;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be passed to the {@link Shaderc#shaderc_compile_options_set_include_callbacks compile_options_set_include_callbacks} function.
@@ -15,7 +18,7 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * shaderc_include_result * (*) (
+ * shaderc_include_result * (*{@link #invoke}) (
  *     void *user_data,
  *     char const *requested_source,
  *     int type,
@@ -25,22 +28,27 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("shaderc_include_resolve_fn")
-public interface ShadercIncludeResolveI extends CallbackI.P {
+public interface ShadercIncludeResolveI extends CallbackI {
 
-    String SIGNATURE = "(ppipp)p";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_pointer,
+        ffi_type_pointer, ffi_type_pointer, ffi_type_sint32, ffi_type_pointer, ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default long callback(long args) {
-        return invoke(
-            dcbArgPointer(args),
-            dcbArgPointer(args),
-            dcbArgInt(args),
-            dcbArgPointer(args),
-            dcbArgPointer(args)
+    default void callback(long ret, long args) {
+        long __result = invoke(
+            memGetAddress(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 3 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 4 * POINTER_SIZE))
         );
+        apiClosureRetP(ret, __result);
     }
 
     /**

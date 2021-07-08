@@ -16,25 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Resource usage information about a particular shader within a pipeline.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code numUsedVgprs} &ndash; the number of vector instruction general-purpose registers used by this shader.</li>
- * <li>{@code numUsedSgprs} &ndash; the number of scalar instruction general-purpose registers used by this shader.</li>
- * <li>{@code ldsSizePerLocalWorkGroup} &ndash; the maximum local data store size per work group in bytes.</li>
- * <li>{@code ldsUsageSizeInBytes} &ndash; the LDS usage size in bytes per work group by this shader.</li>
- * <li>{@code scratchMemUsageInBytes} &ndash; the scratch memory usage in bytes by this shader.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkShaderResourceUsageAMD {
- *     uint32_t numUsedVgprs;
- *     uint32_t numUsedSgprs;
- *     uint32_t ldsSizePerLocalWorkGroup;
- *     size_t ldsUsageSizeInBytes;
- *     size_t scratchMemUsageInBytes;
+ *     uint32_t {@link #numUsedVgprs};
+ *     uint32_t {@link #numUsedSgprs};
+ *     uint32_t {@link #ldsSizePerLocalWorkGroup};
+ *     size_t {@link #ldsUsageSizeInBytes};
+ *     size_t {@link #scratchMemUsageInBytes};
  * }</code></pre>
  */
 public class VkShaderResourceUsageAMD extends Struct {
@@ -85,19 +75,19 @@ public class VkShaderResourceUsageAMD extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code numUsedVgprs} field. */
+    /** the number of vector instruction general-purpose registers used by this shader. */
     @NativeType("uint32_t")
     public int numUsedVgprs() { return nnumUsedVgprs(address()); }
-    /** Returns the value of the {@code numUsedSgprs} field. */
+    /** the number of scalar instruction general-purpose registers used by this shader. */
     @NativeType("uint32_t")
     public int numUsedSgprs() { return nnumUsedSgprs(address()); }
-    /** Returns the value of the {@code ldsSizePerLocalWorkGroup} field. */
+    /** the maximum local data store size per work group in bytes. */
     @NativeType("uint32_t")
     public int ldsSizePerLocalWorkGroup() { return nldsSizePerLocalWorkGroup(address()); }
-    /** Returns the value of the {@code ldsUsageSizeInBytes} field. */
+    /** the LDS usage size in bytes per work group by this shader. */
     @NativeType("size_t")
     public long ldsUsageSizeInBytes() { return nldsUsageSizeInBytes(address()); }
-    /** Returns the value of the {@code scratchMemUsageInBytes} field. */
+    /** the scratch memory usage in bytes by this shader. */
     @NativeType("size_t")
     public long scratchMemUsageInBytes() { return nscratchMemUsageInBytes(address()); }
 
@@ -181,19 +171,19 @@ public class VkShaderResourceUsageAMD extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code numUsedVgprs} field. */
+        /** @return the value of the {@link VkShaderResourceUsageAMD#numUsedVgprs} field. */
         @NativeType("uint32_t")
         public int numUsedVgprs() { return VkShaderResourceUsageAMD.nnumUsedVgprs(address()); }
-        /** Returns the value of the {@code numUsedSgprs} field. */
+        /** @return the value of the {@link VkShaderResourceUsageAMD#numUsedSgprs} field. */
         @NativeType("uint32_t")
         public int numUsedSgprs() { return VkShaderResourceUsageAMD.nnumUsedSgprs(address()); }
-        /** Returns the value of the {@code ldsSizePerLocalWorkGroup} field. */
+        /** @return the value of the {@link VkShaderResourceUsageAMD#ldsSizePerLocalWorkGroup} field. */
         @NativeType("uint32_t")
         public int ldsSizePerLocalWorkGroup() { return VkShaderResourceUsageAMD.nldsSizePerLocalWorkGroup(address()); }
-        /** Returns the value of the {@code ldsUsageSizeInBytes} field. */
+        /** @return the value of the {@link VkShaderResourceUsageAMD#ldsUsageSizeInBytes} field. */
         @NativeType("size_t")
         public long ldsUsageSizeInBytes() { return VkShaderResourceUsageAMD.nldsUsageSizeInBytes(address()); }
-        /** Returns the value of the {@code scratchMemUsageInBytes} field. */
+        /** @return the value of the {@link VkShaderResourceUsageAMD#scratchMemUsageInBytes} field. */
         @NativeType("size_t")
         public long scratchMemUsageInBytes() { return VkShaderResourceUsageAMD.nscratchMemUsageInBytes(address()); }
 

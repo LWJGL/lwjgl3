@@ -24,25 +24,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code vulkanMemoryModel} &ndash; indicates whether the Vulkan Memory Model is supported, as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-model">Vulkan Memory Model</a>. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModel} capability.</li>
- * <li>{@code vulkanMemoryModelDeviceScope} &ndash; indicates whether the Vulkan Memory Model can use {@code Device} scope synchronization. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModelDeviceScope} capability.</li>
- * <li>{@code vulkanMemoryModelAvailabilityVisibilityChains} &ndash; indicates whether the Vulkan Memory Model can use <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-model-availability-visibility">availability and visibility chains</a> with more than one element.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceVulkanMemoryModelFeatures {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 vulkanMemoryModel;
- *     VkBool32 vulkanMemoryModelDeviceScope;
- *     VkBool32 vulkanMemoryModelAvailabilityVisibilityChains;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #vulkanMemoryModel};
+ *     VkBool32 {@link #vulkanMemoryModelDeviceScope};
+ *     VkBool32 {@link #vulkanMemoryModelAvailabilityVisibilityChains};
  * }</code></pre>
  */
 public class VkPhysicalDeviceVulkanMemoryModelFeatures extends Struct implements NativeResource {
@@ -93,31 +83,31 @@ public class VkPhysicalDeviceVulkanMemoryModelFeatures extends Struct implements
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code vulkanMemoryModel} field. */
+    /** indicates whether the Vulkan Memory Model is supported, as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-model">Vulkan Memory Model</a>. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModel} capability. */
     @NativeType("VkBool32")
     public boolean vulkanMemoryModel() { return nvulkanMemoryModel(address()) != 0; }
-    /** Returns the value of the {@code vulkanMemoryModelDeviceScope} field. */
+    /** indicates whether the Vulkan Memory Model can use {@code Device} scope synchronization. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModelDeviceScope} capability. */
     @NativeType("VkBool32")
     public boolean vulkanMemoryModelDeviceScope() { return nvulkanMemoryModelDeviceScope(address()) != 0; }
-    /** Returns the value of the {@code vulkanMemoryModelAvailabilityVisibilityChains} field. */
+    /** indicates whether the Vulkan Memory Model can use <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-model-availability-visibility">availability and visibility chains</a> with more than one element. */
     @NativeType("VkBool32")
     public boolean vulkanMemoryModelAvailabilityVisibilityChains() { return nvulkanMemoryModelAvailabilityVisibilityChains(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceVulkanMemoryModelFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceVulkanMemoryModelFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code vulkanMemoryModel} field. */
+    /** Sets the specified value to the {@link #vulkanMemoryModel} field. */
     public VkPhysicalDeviceVulkanMemoryModelFeatures vulkanMemoryModel(@NativeType("VkBool32") boolean value) { nvulkanMemoryModel(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code vulkanMemoryModelDeviceScope} field. */
+    /** Sets the specified value to the {@link #vulkanMemoryModelDeviceScope} field. */
     public VkPhysicalDeviceVulkanMemoryModelFeatures vulkanMemoryModelDeviceScope(@NativeType("VkBool32") boolean value) { nvulkanMemoryModelDeviceScope(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code vulkanMemoryModelAvailabilityVisibilityChains} field. */
+    /** Sets the specified value to the {@link #vulkanMemoryModelAvailabilityVisibilityChains} field. */
     public VkPhysicalDeviceVulkanMemoryModelFeatures vulkanMemoryModelAvailabilityVisibilityChains(@NativeType("VkBool32") boolean value) { nvulkanMemoryModelAvailabilityVisibilityChains(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -352,31 +342,31 @@ public class VkPhysicalDeviceVulkanMemoryModelFeatures extends Struct implements
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceVulkanMemoryModelFeatures.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceVulkanMemoryModelFeatures.npNext(address()); }
-        /** Returns the value of the {@code vulkanMemoryModel} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#vulkanMemoryModel} field. */
         @NativeType("VkBool32")
         public boolean vulkanMemoryModel() { return VkPhysicalDeviceVulkanMemoryModelFeatures.nvulkanMemoryModel(address()) != 0; }
-        /** Returns the value of the {@code vulkanMemoryModelDeviceScope} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#vulkanMemoryModelDeviceScope} field. */
         @NativeType("VkBool32")
         public boolean vulkanMemoryModelDeviceScope() { return VkPhysicalDeviceVulkanMemoryModelFeatures.nvulkanMemoryModelDeviceScope(address()) != 0; }
-        /** Returns the value of the {@code vulkanMemoryModelAvailabilityVisibilityChains} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#vulkanMemoryModelAvailabilityVisibilityChains} field. */
         @NativeType("VkBool32")
         public boolean vulkanMemoryModelAvailabilityVisibilityChains() { return VkPhysicalDeviceVulkanMemoryModelFeatures.nvulkanMemoryModelAvailabilityVisibilityChains(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#sType} field. */
         public VkPhysicalDeviceVulkanMemoryModelFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVulkanMemoryModelFeatures.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#pNext} field. */
         public VkPhysicalDeviceVulkanMemoryModelFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVulkanMemoryModelFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code vulkanMemoryModel} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#vulkanMemoryModel} field. */
         public VkPhysicalDeviceVulkanMemoryModelFeatures.Buffer vulkanMemoryModel(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkanMemoryModelFeatures.nvulkanMemoryModel(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code vulkanMemoryModelDeviceScope} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#vulkanMemoryModelDeviceScope} field. */
         public VkPhysicalDeviceVulkanMemoryModelFeatures.Buffer vulkanMemoryModelDeviceScope(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkanMemoryModelFeatures.nvulkanMemoryModelDeviceScope(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code vulkanMemoryModelAvailabilityVisibilityChains} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#vulkanMemoryModelAvailabilityVisibilityChains} field. */
         public VkPhysicalDeviceVulkanMemoryModelFeatures.Buffer vulkanMemoryModelAvailabilityVisibilityChains(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkanMemoryModelFeatures.nvulkanMemoryModelAvailabilityVisibilityChains(address(), value ? 1 : 0); return this; }
 
     }

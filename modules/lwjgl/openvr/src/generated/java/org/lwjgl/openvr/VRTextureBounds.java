@@ -74,13 +74,13 @@ public class VRTextureBounds extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code uMin} field. */
+    /** @return the value of the {@code uMin} field. */
     public float uMin() { return nuMin(address()); }
-    /** Returns the value of the {@code vMin} field. */
+    /** @return the value of the {@code vMin} field. */
     public float vMin() { return nvMin(address()); }
-    /** Returns the value of the {@code uMax} field. */
+    /** @return the value of the {@code uMax} field. */
     public float uMax() { return nuMax(address()); }
-    /** Returns the value of the {@code vMax} field. */
+    /** @return the value of the {@code vMax} field. */
     public float vMax() { return nvMax(address()); }
 
     /** Sets the specified value to the {@code uMin} field. */
@@ -318,13 +318,13 @@ public class VRTextureBounds extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code uMin} field. */
+        /** @return the value of the {@code uMin} field. */
         public float uMin() { return VRTextureBounds.nuMin(address()); }
-        /** Returns the value of the {@code vMin} field. */
+        /** @return the value of the {@code vMin} field. */
         public float vMin() { return VRTextureBounds.nvMin(address()); }
-        /** Returns the value of the {@code uMax} field. */
+        /** @return the value of the {@code uMax} field. */
         public float uMax() { return VRTextureBounds.nuMax(address()); }
-        /** Returns the value of the {@code vMax} field. */
+        /** @return the value of the {@code vMax} field. */
         public float vMax() { return VRTextureBounds.nvMax(address()); }
 
         /** Sets the specified value to the {@code uMin} field. */

@@ -16,12 +16,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Used for events about processes.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code bConnectionLost} &ndash; if the associated event was triggered by a connection loss</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -29,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint32_t pid;
  *     uint32_t oldPid;
  *     bool bForced;
- *     bool bConnectionLost;
+ *     bool {@link #bConnectionLost};
  * }</code></pre>
  */
 @NativeType("struct VREvent_Process_t")
@@ -78,16 +72,16 @@ public class VREventProcess extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code pid} field. */
+    /** @return the value of the {@code pid} field. */
     @NativeType("uint32_t")
     public int pid() { return npid(address()); }
-    /** Returns the value of the {@code oldPid} field. */
+    /** @return the value of the {@code oldPid} field. */
     @NativeType("uint32_t")
     public int oldPid() { return noldPid(address()); }
-    /** Returns the value of the {@code bForced} field. */
+    /** @return the value of the {@code bForced} field. */
     @NativeType("bool")
     public boolean bForced() { return nbForced(address()); }
-    /** Returns the value of the {@code bConnectionLost} field. */
+    /** if the associated event was triggered by a connection loss */
     @NativeType("bool")
     public boolean bConnectionLost() { return nbConnectionLost(address()); }
 
@@ -169,16 +163,16 @@ public class VREventProcess extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code pid} field. */
+        /** @return the value of the {@code pid} field. */
         @NativeType("uint32_t")
         public int pid() { return VREventProcess.npid(address()); }
-        /** Returns the value of the {@code oldPid} field. */
+        /** @return the value of the {@code oldPid} field. */
         @NativeType("uint32_t")
         public int oldPid() { return VREventProcess.noldPid(address()); }
-        /** Returns the value of the {@code bForced} field. */
+        /** @return the value of the {@code bForced} field. */
         @NativeType("bool")
         public boolean bForced() { return VREventProcess.nbForced(address()); }
-        /** Returns the value of the {@code bConnectionLost} field. */
+        /** @return the value of the {@link VREventProcess#bConnectionLost} field. */
         @NativeType("bool")
         public boolean bConnectionLost() { return VREventProcess.nbConnectionLost(address()); }
 

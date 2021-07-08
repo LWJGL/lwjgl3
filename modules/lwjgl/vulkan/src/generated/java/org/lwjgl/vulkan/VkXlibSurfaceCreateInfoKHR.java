@@ -24,8 +24,8 @@ import org.lwjgl.system.linux.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code dpy} <b>must</b> point to a valid Xlib {@code Display}.</li>
- * <li>{@code window} <b>must</b> be a valid Xlib {@code Window}.</li>
+ * <li>{@code dpy} <b>must</b> point to a valid Xlib {@code Display}</li>
+ * <li>{@code window} <b>must</b> be a valid Xlib {@code Window}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -40,25 +40,15 @@ import org.lwjgl.system.linux.*;
  * 
  * <p>{@link KHRXlibSurface#vkCreateXlibSurfaceKHR CreateXlibSurfaceKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code dpy} &ndash; a pointer to an Xlib {@code Display} connection to the X server.</li>
- * <li>{@code window} &ndash; an Xlib {@code Window} to associate the surface with.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkXlibSurfaceCreateInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkXlibSurfaceCreateFlagsKHR flags;
- *     Display * dpy;
- *     Window window;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkXlibSurfaceCreateFlagsKHR {@link #flags};
+ *     Display * {@link #dpy};
+ *     Window {@link #window};
  * }</code></pre>
  */
 public class VkXlibSurfaceCreateInfoKHR extends Struct implements NativeResource {
@@ -109,31 +99,31 @@ public class VkXlibSurfaceCreateInfoKHR extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkXlibSurfaceCreateFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code dpy} field. */
+    /** a pointer to an Xlib {@code Display} connection to the X server. */
     @NativeType("Display *")
     public long dpy() { return ndpy(address()); }
-    /** Returns the value of the {@code window} field. */
+    /** an Xlib {@code Window} to associate the surface with. */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkXlibSurfaceCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkXlibSurfaceCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkXlibSurfaceCreateInfoKHR flags(@NativeType("VkXlibSurfaceCreateFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code dpy} field. */
+    /** Sets the specified value to the {@link #dpy} field. */
     public VkXlibSurfaceCreateInfoKHR dpy(@NativeType("Display *") long value) { ndpy(address(), value); return this; }
-    /** Sets the specified value to the {@code window} field. */
+    /** Sets the specified value to the {@link #window} field. */
     public VkXlibSurfaceCreateInfoKHR window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -389,31 +379,31 @@ public class VkXlibSurfaceCreateInfoKHR extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkXlibSurfaceCreateInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkXlibSurfaceCreateInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkXlibSurfaceCreateInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkXlibSurfaceCreateInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkXlibSurfaceCreateInfoKHR#flags} field. */
         @NativeType("VkXlibSurfaceCreateFlagsKHR")
         public int flags() { return VkXlibSurfaceCreateInfoKHR.nflags(address()); }
-        /** Returns the value of the {@code dpy} field. */
+        /** @return the value of the {@link VkXlibSurfaceCreateInfoKHR#dpy} field. */
         @NativeType("Display *")
         public long dpy() { return VkXlibSurfaceCreateInfoKHR.ndpy(address()); }
-        /** Returns the value of the {@code window} field. */
+        /** @return the value of the {@link VkXlibSurfaceCreateInfoKHR#window} field. */
         @NativeType("Window")
         public long window() { return VkXlibSurfaceCreateInfoKHR.nwindow(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkXlibSurfaceCreateInfoKHR#sType} field. */
         public VkXlibSurfaceCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkXlibSurfaceCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkXlibSurfaceCreateInfoKHR#pNext} field. */
         public VkXlibSurfaceCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkXlibSurfaceCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkXlibSurfaceCreateInfoKHR#flags} field. */
         public VkXlibSurfaceCreateInfoKHR.Buffer flags(@NativeType("VkXlibSurfaceCreateFlagsKHR") int value) { VkXlibSurfaceCreateInfoKHR.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code dpy} field. */
+        /** Sets the specified value to the {@link VkXlibSurfaceCreateInfoKHR#dpy} field. */
         public VkXlibSurfaceCreateInfoKHR.Buffer dpy(@NativeType("Display *") long value) { VkXlibSurfaceCreateInfoKHR.ndpy(address(), value); return this; }
-        /** Sets the specified value to the {@code window} field. */
+        /** Sets the specified value to the {@link VkXlibSurfaceCreateInfoKHR#window} field. */
         public VkXlibSurfaceCreateInfoKHR.Buffer window(@NativeType("Window") long value) { VkXlibSurfaceCreateInfoKHR.nwindow(address(), value); return this; }
 
     }

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * int (*) (
+ * int (*{@link #invoke}) (
  *     char const *msg,
  *     void *ctx
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class MDBMsgFunc extends Callback implements MDBMsgFuncI {
     }
 
     protected MDBMsgFunc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     MDBMsgFunc(long functionPointer) {

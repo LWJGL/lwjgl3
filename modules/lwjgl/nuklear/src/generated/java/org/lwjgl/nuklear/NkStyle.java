@@ -147,77 +147,77 @@ public class NkStyle extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkUserFont} view of the struct pointed to by the {@code font} field. */
+    /** @return a {@link NkUserFont} view of the struct pointed to by the {@code font} field. */
     @Nullable
     @NativeType("struct nk_user_font *")
     public NkUserFont font() { return nfont(address()); }
-    /** Returns a {@link PointerBuffer} view of the {@code cursors} field. */
+    /** @return a {@link PointerBuffer} view of the {@code cursors} field. */
     @NativeType("struct nk_cursor *[NK_CURSOR_COUNT]")
     public PointerBuffer cursors() { return ncursors(address()); }
-    /** Returns a {@link NkCursor} view of the pointer at the specified index of the {@code cursors} field. */
+    /** @return a {@link NkCursor} view of the pointer at the specified index of the {@code cursors} field. */
     @Nullable
     @NativeType("struct nk_cursor *")
     public NkCursor cursors(int index) { return ncursors(address(), index); }
-    /** Returns a {@link NkCursor} view of the struct pointed to by the {@code cursor_active} field. */
+    /** @return a {@link NkCursor} view of the struct pointed to by the {@code cursor_active} field. */
     @Nullable
     @NativeType("struct nk_cursor *")
     public NkCursor cursor_active() { return ncursor_active(address()); }
-    /** Returns a {@link NkCursor} view of the struct pointed to by the {@code cursor_last} field. */
+    /** @return a {@link NkCursor} view of the struct pointed to by the {@code cursor_last} field. */
     @Nullable
     @NativeType("struct nk_cursor *")
     public NkCursor cursor_last() { return ncursor_last(address()); }
-    /** Returns the value of the {@code cursor_visible} field. */
+    /** @return the value of the {@code cursor_visible} field. */
     @NativeType("int")
     public boolean cursor_visible() { return ncursor_visible(address()) != 0; }
-    /** Returns a {@link NkStyleText} view of the {@code text} field. */
+    /** @return a {@link NkStyleText} view of the {@code text} field. */
     @NativeType("struct nk_style_text")
     public NkStyleText text() { return ntext(address()); }
-    /** Returns a {@link NkStyleButton} view of the {@code button} field. */
+    /** @return a {@link NkStyleButton} view of the {@code button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton button() { return nbutton(address()); }
-    /** Returns a {@link NkStyleButton} view of the {@code contextual_button} field. */
+    /** @return a {@link NkStyleButton} view of the {@code contextual_button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton contextual_button() { return ncontextual_button(address()); }
-    /** Returns a {@link NkStyleButton} view of the {@code menu_button} field. */
+    /** @return a {@link NkStyleButton} view of the {@code menu_button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton menu_button() { return nmenu_button(address()); }
-    /** Returns a {@link NkStyleToggle} view of the {@code option} field. */
+    /** @return a {@link NkStyleToggle} view of the {@code option} field. */
     @NativeType("struct nk_style_toggle")
     public NkStyleToggle option() { return noption(address()); }
-    /** Returns a {@link NkStyleToggle} view of the {@code checkbox} field. */
+    /** @return a {@link NkStyleToggle} view of the {@code checkbox} field. */
     @NativeType("struct nk_style_toggle")
     public NkStyleToggle checkbox() { return ncheckbox(address()); }
-    /** Returns a {@link NkStyleSelectable} view of the {@code selectable} field. */
+    /** @return a {@link NkStyleSelectable} view of the {@code selectable} field. */
     @NativeType("struct nk_style_selectable")
     public NkStyleSelectable selectable() { return nselectable(address()); }
-    /** Returns a {@link NkStyleSlider} view of the {@code slider} field. */
+    /** @return a {@link NkStyleSlider} view of the {@code slider} field. */
     @NativeType("struct nk_style_slider")
     public NkStyleSlider slider() { return nslider(address()); }
-    /** Returns a {@link NkStyleProgress} view of the {@code progress} field. */
+    /** @return a {@link NkStyleProgress} view of the {@code progress} field. */
     @NativeType("struct nk_style_progress")
     public NkStyleProgress progress() { return nprogress(address()); }
-    /** Returns a {@link NkStyleProperty} view of the {@code property} field. */
+    /** @return a {@link NkStyleProperty} view of the {@code property} field. */
     @NativeType("struct nk_style_property")
     public NkStyleProperty property() { return nproperty(address()); }
-    /** Returns a {@link NkStyleEdit} view of the {@code edit} field. */
+    /** @return a {@link NkStyleEdit} view of the {@code edit} field. */
     @NativeType("struct nk_style_edit")
     public NkStyleEdit edit() { return nedit(address()); }
-    /** Returns a {@link NkStyleChart} view of the {@code chart} field. */
+    /** @return a {@link NkStyleChart} view of the {@code chart} field. */
     @NativeType("struct nk_style_chart")
     public NkStyleChart chart() { return nchart(address()); }
-    /** Returns a {@link NkStyleScrollbar} view of the {@code scrollh} field. */
+    /** @return a {@link NkStyleScrollbar} view of the {@code scrollh} field. */
     @NativeType("struct nk_style_scrollbar")
     public NkStyleScrollbar scrollh() { return nscrollh(address()); }
-    /** Returns a {@link NkStyleScrollbar} view of the {@code scrollv} field. */
+    /** @return a {@link NkStyleScrollbar} view of the {@code scrollv} field. */
     @NativeType("struct nk_style_scrollbar")
     public NkStyleScrollbar scrollv() { return nscrollv(address()); }
-    /** Returns a {@link NkStyleTab} view of the {@code tab} field. */
+    /** @return a {@link NkStyleTab} view of the {@code tab} field. */
     @NativeType("struct nk_style_tab")
     public NkStyleTab tab() { return ntab(address()); }
-    /** Returns a {@link NkStyleCombo} view of the {@code combo} field. */
+    /** @return a {@link NkStyleCombo} view of the {@code combo} field. */
     @NativeType("struct nk_style_combo")
     public NkStyleCombo combo() { return ncombo(address()); }
-    /** Returns a {@link NkStyleWindow} view of the {@code window} field. */
+    /** @return a {@link NkStyleWindow} view of the {@code window} field. */
     @NativeType("struct nk_style_window")
     public NkStyleWindow window() { return nwindow(address()); }
 
@@ -649,77 +649,77 @@ public class NkStyle extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkUserFont} view of the struct pointed to by the {@code font} field. */
+        /** @return a {@link NkUserFont} view of the struct pointed to by the {@code font} field. */
         @Nullable
         @NativeType("struct nk_user_font *")
         public NkUserFont font() { return NkStyle.nfont(address()); }
-        /** Returns a {@link PointerBuffer} view of the {@code cursors} field. */
+        /** @return a {@link PointerBuffer} view of the {@code cursors} field. */
         @NativeType("struct nk_cursor *[NK_CURSOR_COUNT]")
         public PointerBuffer cursors() { return NkStyle.ncursors(address()); }
-        /** Returns a {@link NkCursor} view of the pointer at the specified index of the {@code cursors} field. */
+        /** @return a {@link NkCursor} view of the pointer at the specified index of the {@code cursors} field. */
         @Nullable
         @NativeType("struct nk_cursor *")
         public NkCursor cursors(int index) { return NkStyle.ncursors(address(), index); }
-        /** Returns a {@link NkCursor} view of the struct pointed to by the {@code cursor_active} field. */
+        /** @return a {@link NkCursor} view of the struct pointed to by the {@code cursor_active} field. */
         @Nullable
         @NativeType("struct nk_cursor *")
         public NkCursor cursor_active() { return NkStyle.ncursor_active(address()); }
-        /** Returns a {@link NkCursor} view of the struct pointed to by the {@code cursor_last} field. */
+        /** @return a {@link NkCursor} view of the struct pointed to by the {@code cursor_last} field. */
         @Nullable
         @NativeType("struct nk_cursor *")
         public NkCursor cursor_last() { return NkStyle.ncursor_last(address()); }
-        /** Returns the value of the {@code cursor_visible} field. */
+        /** @return the value of the {@code cursor_visible} field. */
         @NativeType("int")
         public boolean cursor_visible() { return NkStyle.ncursor_visible(address()) != 0; }
-        /** Returns a {@link NkStyleText} view of the {@code text} field. */
+        /** @return a {@link NkStyleText} view of the {@code text} field. */
         @NativeType("struct nk_style_text")
         public NkStyleText text() { return NkStyle.ntext(address()); }
-        /** Returns a {@link NkStyleButton} view of the {@code button} field. */
+        /** @return a {@link NkStyleButton} view of the {@code button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton button() { return NkStyle.nbutton(address()); }
-        /** Returns a {@link NkStyleButton} view of the {@code contextual_button} field. */
+        /** @return a {@link NkStyleButton} view of the {@code contextual_button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton contextual_button() { return NkStyle.ncontextual_button(address()); }
-        /** Returns a {@link NkStyleButton} view of the {@code menu_button} field. */
+        /** @return a {@link NkStyleButton} view of the {@code menu_button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton menu_button() { return NkStyle.nmenu_button(address()); }
-        /** Returns a {@link NkStyleToggle} view of the {@code option} field. */
+        /** @return a {@link NkStyleToggle} view of the {@code option} field. */
         @NativeType("struct nk_style_toggle")
         public NkStyleToggle option() { return NkStyle.noption(address()); }
-        /** Returns a {@link NkStyleToggle} view of the {@code checkbox} field. */
+        /** @return a {@link NkStyleToggle} view of the {@code checkbox} field. */
         @NativeType("struct nk_style_toggle")
         public NkStyleToggle checkbox() { return NkStyle.ncheckbox(address()); }
-        /** Returns a {@link NkStyleSelectable} view of the {@code selectable} field. */
+        /** @return a {@link NkStyleSelectable} view of the {@code selectable} field. */
         @NativeType("struct nk_style_selectable")
         public NkStyleSelectable selectable() { return NkStyle.nselectable(address()); }
-        /** Returns a {@link NkStyleSlider} view of the {@code slider} field. */
+        /** @return a {@link NkStyleSlider} view of the {@code slider} field. */
         @NativeType("struct nk_style_slider")
         public NkStyleSlider slider() { return NkStyle.nslider(address()); }
-        /** Returns a {@link NkStyleProgress} view of the {@code progress} field. */
+        /** @return a {@link NkStyleProgress} view of the {@code progress} field. */
         @NativeType("struct nk_style_progress")
         public NkStyleProgress progress() { return NkStyle.nprogress(address()); }
-        /** Returns a {@link NkStyleProperty} view of the {@code property} field. */
+        /** @return a {@link NkStyleProperty} view of the {@code property} field. */
         @NativeType("struct nk_style_property")
         public NkStyleProperty property() { return NkStyle.nproperty(address()); }
-        /** Returns a {@link NkStyleEdit} view of the {@code edit} field. */
+        /** @return a {@link NkStyleEdit} view of the {@code edit} field. */
         @NativeType("struct nk_style_edit")
         public NkStyleEdit edit() { return NkStyle.nedit(address()); }
-        /** Returns a {@link NkStyleChart} view of the {@code chart} field. */
+        /** @return a {@link NkStyleChart} view of the {@code chart} field. */
         @NativeType("struct nk_style_chart")
         public NkStyleChart chart() { return NkStyle.nchart(address()); }
-        /** Returns a {@link NkStyleScrollbar} view of the {@code scrollh} field. */
+        /** @return a {@link NkStyleScrollbar} view of the {@code scrollh} field. */
         @NativeType("struct nk_style_scrollbar")
         public NkStyleScrollbar scrollh() { return NkStyle.nscrollh(address()); }
-        /** Returns a {@link NkStyleScrollbar} view of the {@code scrollv} field. */
+        /** @return a {@link NkStyleScrollbar} view of the {@code scrollv} field. */
         @NativeType("struct nk_style_scrollbar")
         public NkStyleScrollbar scrollv() { return NkStyle.nscrollv(address()); }
-        /** Returns a {@link NkStyleTab} view of the {@code tab} field. */
+        /** @return a {@link NkStyleTab} view of the {@code tab} field. */
         @NativeType("struct nk_style_tab")
         public NkStyleTab tab() { return NkStyle.ntab(address()); }
-        /** Returns a {@link NkStyleCombo} view of the {@code combo} field. */
+        /** @return a {@link NkStyleCombo} view of the {@code combo} field. */
         @NativeType("struct nk_style_combo")
         public NkStyleCombo combo() { return NkStyle.ncombo(address()); }
-        /** Returns a {@link NkStyleWindow} view of the {@code window} field. */
+        /** @return a {@link NkStyleWindow} view of the {@code window} field. */
         @NativeType("struct nk_style_window")
         public NkStyleWindow window() { return NkStyle.nwindow(address()); }
 

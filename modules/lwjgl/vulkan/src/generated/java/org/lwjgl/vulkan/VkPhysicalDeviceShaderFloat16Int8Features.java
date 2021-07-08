@@ -24,23 +24,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code shaderFloat16} &ndash; indicates whether 16-bit floats (halfs) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Float16} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Float16} SPIR-V capability: Declaring and using 16-bit floats in the {@code Private}, {@code Workgroup}, and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled.</li>
- * <li>{@code shaderInt8} &ndash; indicates whether 8-bit integers (signed and unsigned) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Int8} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Int8} SPIR-V capability: Declaring and using 8-bit integers in the {@code Private}, {@code Workgroup}, and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderFloat16Int8Features {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 shaderFloat16;
- *     VkBool32 shaderInt8;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #shaderFloat16};
+ *     VkBool32 {@link #shaderInt8};
  * }</code></pre>
  */
 public class VkPhysicalDeviceShaderFloat16Int8Features extends Struct implements NativeResource {
@@ -88,26 +79,26 @@ public class VkPhysicalDeviceShaderFloat16Int8Features extends Struct implements
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code shaderFloat16} field. */
+    /** indicates whether 16-bit floats (halfs) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Float16} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Float16} SPIR-V capability: Declaring and using 16-bit floats in the {@code Private}, {@code Workgroup} (for non-Block variables), and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled. */
     @NativeType("VkBool32")
     public boolean shaderFloat16() { return nshaderFloat16(address()) != 0; }
-    /** Returns the value of the {@code shaderInt8} field. */
+    /** indicates whether 8-bit integers (signed and unsigned) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Int8} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Int8} SPIR-V capability: Declaring and using 8-bit integers in the {@code Private}, {@code Workgroup} (for non-Block variables), and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled. */
     @NativeType("VkBool32")
     public boolean shaderInt8() { return nshaderInt8(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderFloat16Int8Features sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderFloat16Int8Features pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderFloat16} field. */
+    /** Sets the specified value to the {@link #shaderFloat16} field. */
     public VkPhysicalDeviceShaderFloat16Int8Features shaderFloat16(@NativeType("VkBool32") boolean value) { nshaderFloat16(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderInt8} field. */
+    /** Sets the specified value to the {@link #shaderInt8} field. */
     public VkPhysicalDeviceShaderFloat16Int8Features shaderInt8(@NativeType("VkBool32") boolean value) { nshaderInt8(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,26 +327,26 @@ public class VkPhysicalDeviceShaderFloat16Int8Features extends Struct implements
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderFloat16Int8Features#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderFloat16Int8Features.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderFloat16Int8Features#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderFloat16Int8Features.npNext(address()); }
-        /** Returns the value of the {@code shaderFloat16} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderFloat16Int8Features#shaderFloat16} field. */
         @NativeType("VkBool32")
         public boolean shaderFloat16() { return VkPhysicalDeviceShaderFloat16Int8Features.nshaderFloat16(address()) != 0; }
-        /** Returns the value of the {@code shaderInt8} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderFloat16Int8Features#shaderInt8} field. */
         @NativeType("VkBool32")
         public boolean shaderInt8() { return VkPhysicalDeviceShaderFloat16Int8Features.nshaderInt8(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderFloat16Int8Features#sType} field. */
         public VkPhysicalDeviceShaderFloat16Int8Features.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderFloat16Int8Features.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderFloat16Int8Features#pNext} field. */
         public VkPhysicalDeviceShaderFloat16Int8Features.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderFloat16Int8Features.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderFloat16} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderFloat16Int8Features#shaderFloat16} field. */
         public VkPhysicalDeviceShaderFloat16Int8Features.Buffer shaderFloat16(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderFloat16Int8Features.nshaderFloat16(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderInt8} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderFloat16Int8Features#shaderInt8} field. */
         public VkPhysicalDeviceShaderFloat16Int8Features.Buffer shaderInt8(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderFloat16Int8Features.nshaderInt8(address(), value ? 1 : 0); return this; }
 
     }

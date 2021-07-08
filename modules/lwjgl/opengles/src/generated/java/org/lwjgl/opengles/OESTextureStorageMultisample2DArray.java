@@ -15,6 +15,8 @@ import org.lwjgl.system.*;
  */
 public class OESTextureStorageMultisample2DArray {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code target} parameter of BindTexture, TexStorage3DMultisampleOES, GetInternalformativ, TexParameter{if}*, GetTexParameter{if}v and
      * GetTexLevelParameter{if}v. Also, the texture object indicated by the {@code texture} argument to FramebufferTextureLayer can be
@@ -30,8 +32,6 @@ public class OESTextureStorageMultisample2DArray {
         GL_SAMPLER_2D_MULTISAMPLE_ARRAY_OES              = 0x910B,
         GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY_OES          = 0x910C,
         GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY_OES = 0x910D;
-
-    static { GLES.initialize(); }
 
     protected OESTextureStorageMultisample2DArray() {
         throw new UnsupportedOperationException();

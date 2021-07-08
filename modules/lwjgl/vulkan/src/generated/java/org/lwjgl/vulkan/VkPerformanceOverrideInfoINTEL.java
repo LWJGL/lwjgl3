@@ -30,23 +30,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link INTELPerformanceQuery#vkCmdSetPerformanceOverrideINTEL CmdSetPerformanceOverrideINTEL}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code type} &ndash; the particular {@code VkPerformanceOverrideTypeINTEL} to set.</li>
- * <li>{@code enable} &ndash; defines whether the override is enabled.</li>
- * <li>{@code parameter} &ndash; a potential required parameter for the override.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPerformanceOverrideInfoINTEL {
  *     VkStructureType sType;
  *     void const * pNext;
- *     VkPerformanceOverrideTypeINTEL type;
- *     VkBool32 enable;
- *     uint64_t parameter;
+ *     VkPerformanceOverrideTypeINTEL {@link #type};
+ *     VkBool32 {@link #enable};
+ *     uint64_t {@link #parameter};
  * }</code></pre>
  */
 public class VkPerformanceOverrideInfoINTEL extends Struct implements NativeResource {
@@ -97,19 +89,19 @@ public class VkPerformanceOverrideInfoINTEL extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code type} field. */
+    /** the particular {@code VkPerformanceOverrideTypeINTEL} to set. */
     @NativeType("VkPerformanceOverrideTypeINTEL")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code enable} field. */
+    /** defines whether the override is enabled. */
     @NativeType("VkBool32")
     public boolean enable() { return nenable(address()) != 0; }
-    /** Returns the value of the {@code parameter} field. */
+    /** a potential required parameter for the override. */
     @NativeType("uint64_t")
     public long parameter() { return nparameter(address()); }
 
@@ -117,11 +109,11 @@ public class VkPerformanceOverrideInfoINTEL extends Struct implements NativeReso
     public VkPerformanceOverrideInfoINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPerformanceOverrideInfoINTEL pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public VkPerformanceOverrideInfoINTEL type(@NativeType("VkPerformanceOverrideTypeINTEL") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code enable} field. */
+    /** Sets the specified value to the {@link #enable} field. */
     public VkPerformanceOverrideInfoINTEL enable(@NativeType("VkBool32") boolean value) { nenable(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code parameter} field. */
+    /** Sets the specified value to the {@link #parameter} field. */
     public VkPerformanceOverrideInfoINTEL parameter(@NativeType("uint64_t") long value) { nparameter(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -356,19 +348,19 @@ public class VkPerformanceOverrideInfoINTEL extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPerformanceOverrideInfoINTEL.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPerformanceOverrideInfoINTEL.npNext(address()); }
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@link VkPerformanceOverrideInfoINTEL#type} field. */
         @NativeType("VkPerformanceOverrideTypeINTEL")
         public int type() { return VkPerformanceOverrideInfoINTEL.ntype(address()); }
-        /** Returns the value of the {@code enable} field. */
+        /** @return the value of the {@link VkPerformanceOverrideInfoINTEL#enable} field. */
         @NativeType("VkBool32")
         public boolean enable() { return VkPerformanceOverrideInfoINTEL.nenable(address()) != 0; }
-        /** Returns the value of the {@code parameter} field. */
+        /** @return the value of the {@link VkPerformanceOverrideInfoINTEL#parameter} field. */
         @NativeType("uint64_t")
         public long parameter() { return VkPerformanceOverrideInfoINTEL.nparameter(address()); }
 
@@ -376,11 +368,11 @@ public class VkPerformanceOverrideInfoINTEL extends Struct implements NativeReso
         public VkPerformanceOverrideInfoINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkPerformanceOverrideInfoINTEL.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPerformanceOverrideInfoINTEL.Buffer pNext(@NativeType("void const *") long value) { VkPerformanceOverrideInfoINTEL.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link VkPerformanceOverrideInfoINTEL#type} field. */
         public VkPerformanceOverrideInfoINTEL.Buffer type(@NativeType("VkPerformanceOverrideTypeINTEL") int value) { VkPerformanceOverrideInfoINTEL.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code enable} field. */
+        /** Sets the specified value to the {@link VkPerformanceOverrideInfoINTEL#enable} field. */
         public VkPerformanceOverrideInfoINTEL.Buffer enable(@NativeType("VkBool32") boolean value) { VkPerformanceOverrideInfoINTEL.nenable(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code parameter} field. */
+        /** Sets the specified value to the {@link VkPerformanceOverrideInfoINTEL#parameter} field. */
         public VkPerformanceOverrideInfoINTEL.Buffer parameter(@NativeType("uint64_t") long value) { VkPerformanceOverrideInfoINTEL.nparameter(address(), value); return this; }
 
     }

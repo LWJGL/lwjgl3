@@ -18,6 +18,7 @@ val NV_compute_shader_derivatives = "NVComputeShaderDerivatives".nativeClassVK("
         <h5>Examples</h5>
         None.
 
+        <h5>VK_NV_compute_shader_derivatives</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_compute_shader_derivatives}</dd>
@@ -41,12 +42,21 @@ val NV_compute_shader_derivatives = "NVComputeShaderDerivatives".nativeClassVK("
             <dd><ul>
                 <li>Pat Brown <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_compute_shader_derivatives:%20&amp;body=@nvpbrown%20">nvpbrown</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-07-19</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_compute_shader_derivatives.html">{@code SPV_NV_compute_shader_derivatives}</a></li>
+                <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nv/GLSL_NV_compute_shader_derivatives.txt">{@code GL_NV_compute_shader_derivatives}</a></li>
+            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>

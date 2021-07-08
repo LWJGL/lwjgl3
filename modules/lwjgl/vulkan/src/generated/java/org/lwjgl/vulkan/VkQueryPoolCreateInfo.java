@@ -35,7 +35,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkQueryPoolPerformanceCreateInfoKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkQueryPoolPerformanceCreateInfoKHR} or {@link VkQueryPoolPerformanceQueryCreateInfoINTEL}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>{@code queryType} <b>must</b> be a valid {@code VkQueryType} value</li>
  * </ul>
@@ -44,27 +45,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK10#vkCreateQueryPool CreateQueryPool}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code queryType} &ndash; a {@code VkQueryType} value specifying the type of queries managed by the pool.</li>
- * <li>{@code queryCount} &ndash; the number of queries managed by the pool.</li>
- * <li>{@code pipelineStatistics} &ndash; a bitmask of {@code VkQueryPipelineStatisticFlagBits} specifying which counters will be returned in queries on the new pool, as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#queries-pipestats">Pipeline Statistics Queries</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkQueryPoolCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkQueryPoolCreateFlags flags;
- *     VkQueryType queryType;
- *     uint32_t queryCount;
- *     VkQueryPipelineStatisticFlags pipelineStatistics;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkQueryPoolCreateFlags {@link #flags};
+ *     VkQueryType {@link #queryType};
+ *     uint32_t {@link #queryCount};
+ *     VkQueryPipelineStatisticFlags {@link #pipelineStatistics};
  * }</code></pre>
  */
 public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
@@ -118,36 +108,36 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkQueryPoolCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code queryType} field. */
+    /** a {@code VkQueryType} value specifying the type of queries managed by the pool. */
     @NativeType("VkQueryType")
     public int queryType() { return nqueryType(address()); }
-    /** Returns the value of the {@code queryCount} field. */
+    /** the number of queries managed by the pool. */
     @NativeType("uint32_t")
     public int queryCount() { return nqueryCount(address()); }
-    /** Returns the value of the {@code pipelineStatistics} field. */
+    /** a bitmask of {@code VkQueryPipelineStatisticFlagBits} specifying which counters will be returned in queries on the new pool, as described below in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#queries-pipestats">Pipeline Statistics Queries</a>. */
     @NativeType("VkQueryPipelineStatisticFlags")
     public int pipelineStatistics() { return npipelineStatistics(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkQueryPoolCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkQueryPoolCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkQueryPoolCreateInfo flags(@NativeType("VkQueryPoolCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code queryType} field. */
+    /** Sets the specified value to the {@link #queryType} field. */
     public VkQueryPoolCreateInfo queryType(@NativeType("VkQueryType") int value) { nqueryType(address(), value); return this; }
-    /** Sets the specified value to the {@code queryCount} field. */
+    /** Sets the specified value to the {@link #queryCount} field. */
     public VkQueryPoolCreateInfo queryCount(@NativeType("uint32_t") int value) { nqueryCount(address(), value); return this; }
-    /** Sets the specified value to the {@code pipelineStatistics} field. */
+    /** Sets the specified value to the {@link #pipelineStatistics} field. */
     public VkQueryPoolCreateInfo pipelineStatistics(@NativeType("VkQueryPipelineStatisticFlags") int value) { npipelineStatistics(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -388,36 +378,36 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkQueryPoolCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkQueryPoolCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkQueryPoolCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkQueryPoolCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkQueryPoolCreateInfo#flags} field. */
         @NativeType("VkQueryPoolCreateFlags")
         public int flags() { return VkQueryPoolCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code queryType} field. */
+        /** @return the value of the {@link VkQueryPoolCreateInfo#queryType} field. */
         @NativeType("VkQueryType")
         public int queryType() { return VkQueryPoolCreateInfo.nqueryType(address()); }
-        /** Returns the value of the {@code queryCount} field. */
+        /** @return the value of the {@link VkQueryPoolCreateInfo#queryCount} field. */
         @NativeType("uint32_t")
         public int queryCount() { return VkQueryPoolCreateInfo.nqueryCount(address()); }
-        /** Returns the value of the {@code pipelineStatistics} field. */
+        /** @return the value of the {@link VkQueryPoolCreateInfo#pipelineStatistics} field. */
         @NativeType("VkQueryPipelineStatisticFlags")
         public int pipelineStatistics() { return VkQueryPoolCreateInfo.npipelineStatistics(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkQueryPoolCreateInfo#sType} field. */
         public VkQueryPoolCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkQueryPoolCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkQueryPoolCreateInfo#pNext} field. */
         public VkQueryPoolCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkQueryPoolCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkQueryPoolCreateInfo#flags} field. */
         public VkQueryPoolCreateInfo.Buffer flags(@NativeType("VkQueryPoolCreateFlags") int value) { VkQueryPoolCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code queryType} field. */
+        /** Sets the specified value to the {@link VkQueryPoolCreateInfo#queryType} field. */
         public VkQueryPoolCreateInfo.Buffer queryType(@NativeType("VkQueryType") int value) { VkQueryPoolCreateInfo.nqueryType(address(), value); return this; }
-        /** Sets the specified value to the {@code queryCount} field. */
+        /** Sets the specified value to the {@link VkQueryPoolCreateInfo#queryCount} field. */
         public VkQueryPoolCreateInfo.Buffer queryCount(@NativeType("uint32_t") int value) { VkQueryPoolCreateInfo.nqueryCount(address(), value); return this; }
-        /** Sets the specified value to the {@code pipelineStatistics} field. */
+        /** Sets the specified value to the {@link VkQueryPoolCreateInfo#pipelineStatistics} field. */
         public VkQueryPoolCreateInfo.Buffer pipelineStatistics(@NativeType("VkQueryPipelineStatisticFlags") int value) { VkQueryPoolCreateInfo.npipelineStatistics(address(), value); return this; }
 
     }

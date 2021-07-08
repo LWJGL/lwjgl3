@@ -67,8 +67,8 @@ ENABLE_WARNINGS()""")
     IntConstant("", "HASHTABLESIZE".."(1 << LZ4HC_HASH_LOG)")
     IntConstant("", "HASH_MASK".."(LZ4HC_HASHTABLESIZE - 1)")
 
-    IntConstant("", "LZ4_STREAMHCSIZE".."4 * LZ4HC_HASHTABLESIZE + 2 * LZ4HC_MAXD + 56 + (Pointer.POINTER_SIZE == 16 ? 56 : 0)").noPrefix()
-    IntConstant("", "LZ4_STREAMHCSIZE_SIZET".."(LZ4_STREAMHCSIZE / Pointer.POINTER_SIZE)").noPrefix()
+    IntConstant("", "LZ4_STREAMHCSIZE".."262200").noPrefix()
+    IntConstant("", "LZ4_STREAMHCSIZE_VOIDP".."(LZ4_STREAMHCSIZE / Pointer.POINTER_SIZE)").noPrefix()
 
     int(
         "compress_HC",

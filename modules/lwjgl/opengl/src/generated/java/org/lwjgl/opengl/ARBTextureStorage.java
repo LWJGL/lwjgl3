@@ -27,10 +27,10 @@ import org.lwjgl.system.*;
  */
 public class ARBTextureStorage {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code value} parameter of GetTexParameter{if}v. */
     public static final int GL_TEXTURE_IMMUTABLE_FORMAT = 0x912F;
-
-    static { GL.initialize(); }
 
     protected ARBTextureStorage() {
         throw new UnsupportedOperationException();

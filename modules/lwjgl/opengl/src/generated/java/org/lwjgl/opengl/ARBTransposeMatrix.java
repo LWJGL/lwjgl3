@@ -28,14 +28,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBTransposeMatrix {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
         GL_TRANSPOSE_MODELVIEW_MATRIX_ARB  = 0x84E3,
         GL_TRANSPOSE_PROJECTION_MATRIX_ARB = 0x84E4,
         GL_TRANSPOSE_TEXTURE_MATRIX_ARB    = 0x84E5,
         GL_TRANSPOSE_COLOR_MATRIX_ARB      = 0x84E6;
-
-    static { GL.initialize(); }
 
     protected ARBTransposeMatrix() {
         throw new UnsupportedOperationException();

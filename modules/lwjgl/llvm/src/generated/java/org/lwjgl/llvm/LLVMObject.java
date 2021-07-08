@@ -16,10 +16,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMObject {
 
-    protected LLVMObject() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -56,6 +52,10 @@ public class LLVMObject {
             GetRelocationTypeName     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetRelocationTypeName"),
             GetRelocationValueString  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetRelocationValueString");
 
+    }
+
+    protected LLVMObject() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMCreateObjectFile ] ---

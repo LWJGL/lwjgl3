@@ -3,14 +3,14 @@
   ~ Copyright LWJGL. All rights reserved.
   ~ License terms: https://www.lwjgl.org/license
   -->
-<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="LWJGL cross-platform tests">
     <test name="core">
         <packages>
             <package name="org.lwjgl"/>
             <package name="org.lwjgl.system"/>
-            <package name="org.lwjgl.system.dyncall"/>
             <package name="org.lwjgl.system.libc"/>
+            <package name="org.lwjgl.system.libffi"/>
         </packages>
     </test>
     <test name="libdivide" parallel="methods" thread-count="4">
@@ -56,6 +56,11 @@
     <test name="sse">
         <packages>
             <package name="org.lwjgl.util.simd"/>
+        </packages>
+    </test>
+    <test name="vulkan">
+        <packages>
+            <package name="org.lwjgl.vulkan"/>
         </packages>
     </test>
     <test name="yoga">

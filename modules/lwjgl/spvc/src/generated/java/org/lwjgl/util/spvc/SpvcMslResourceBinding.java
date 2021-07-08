@@ -88,22 +88,22 @@ public class SpvcMslResourceBinding extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code stage} field. */
+    /** @return the value of the {@code stage} field. */
     @NativeType("SpvExecutionModel")
     public int stage() { return nstage(address()); }
-    /** Returns the value of the {@code desc_set} field. */
+    /** @return the value of the {@code desc_set} field. */
     @NativeType("unsigned int")
     public int desc_set() { return ndesc_set(address()); }
-    /** Returns the value of the {@code binding} field. */
+    /** @return the value of the {@code binding} field. */
     @NativeType("unsigned int")
     public int binding() { return nbinding(address()); }
-    /** Returns the value of the {@code msl_buffer} field. */
+    /** @return the value of the {@code msl_buffer} field. */
     @NativeType("unsigned int")
     public int msl_buffer() { return nmsl_buffer(address()); }
-    /** Returns the value of the {@code msl_texture} field. */
+    /** @return the value of the {@code msl_texture} field. */
     @NativeType("unsigned int")
     public int msl_texture() { return nmsl_texture(address()); }
-    /** Returns the value of the {@code msl_sampler} field. */
+    /** @return the value of the {@code msl_sampler} field. */
     @NativeType("unsigned int")
     public int msl_sampler() { return nmsl_sampler(address()); }
 
@@ -358,22 +358,22 @@ public class SpvcMslResourceBinding extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code stage} field. */
+        /** @return the value of the {@code stage} field. */
         @NativeType("SpvExecutionModel")
         public int stage() { return SpvcMslResourceBinding.nstage(address()); }
-        /** Returns the value of the {@code desc_set} field. */
+        /** @return the value of the {@code desc_set} field. */
         @NativeType("unsigned int")
         public int desc_set() { return SpvcMslResourceBinding.ndesc_set(address()); }
-        /** Returns the value of the {@code binding} field. */
+        /** @return the value of the {@code binding} field. */
         @NativeType("unsigned int")
         public int binding() { return SpvcMslResourceBinding.nbinding(address()); }
-        /** Returns the value of the {@code msl_buffer} field. */
+        /** @return the value of the {@code msl_buffer} field. */
         @NativeType("unsigned int")
         public int msl_buffer() { return SpvcMslResourceBinding.nmsl_buffer(address()); }
-        /** Returns the value of the {@code msl_texture} field. */
+        /** @return the value of the {@code msl_texture} field. */
         @NativeType("unsigned int")
         public int msl_texture() { return SpvcMslResourceBinding.nmsl_texture(address()); }
-        /** Returns the value of the {@code msl_sampler} field. */
+        /** @return the value of the {@code msl_sampler} field. */
         @NativeType("unsigned int")
         public int msl_sampler() { return SpvcMslResourceBinding.nmsl_sampler(address()); }
 

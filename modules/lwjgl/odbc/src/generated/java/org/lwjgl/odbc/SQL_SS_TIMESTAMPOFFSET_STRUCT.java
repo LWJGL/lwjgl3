@@ -91,31 +91,31 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code year} field. */
+    /** @return the value of the {@code year} field. */
     @NativeType("SQLSMALLINT")
     public short year() { return nyear(address()); }
-    /** Returns the value of the {@code month} field. */
+    /** @return the value of the {@code month} field. */
     @NativeType("SQLUSMALLINT")
     public short month() { return nmonth(address()); }
-    /** Returns the value of the {@code day} field. */
+    /** @return the value of the {@code day} field. */
     @NativeType("SQLUSMALLINT")
     public short day() { return nday(address()); }
-    /** Returns the value of the {@code hour} field. */
+    /** @return the value of the {@code hour} field. */
     @NativeType("SQLUSMALLINT")
     public short hour() { return nhour(address()); }
-    /** Returns the value of the {@code minute} field. */
+    /** @return the value of the {@code minute} field. */
     @NativeType("SQLUSMALLINT")
     public short minute() { return nminute(address()); }
-    /** Returns the value of the {@code second} field. */
+    /** @return the value of the {@code second} field. */
     @NativeType("SQLUSMALLINT")
     public short second() { return nsecond(address()); }
-    /** Returns the value of the {@code fraction} field. */
+    /** @return the value of the {@code fraction} field. */
     @NativeType("SQLUINTEGER")
     public int fraction() { return nfraction(address()); }
-    /** Returns the value of the {@code timezone_hour} field. */
+    /** @return the value of the {@code timezone_hour} field. */
     @NativeType("SQLSMALLINT")
     public short timezone_hour() { return ntimezone_hour(address()); }
-    /** Returns the value of the {@code timezone_minute} field. */
+    /** @return the value of the {@code timezone_minute} field. */
     @NativeType("SQLSMALLINT")
     public short timezone_minute() { return ntimezone_minute(address()); }
 
@@ -394,31 +394,31 @@ public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code year} field. */
+        /** @return the value of the {@code year} field. */
         @NativeType("SQLSMALLINT")
         public short year() { return SQL_SS_TIMESTAMPOFFSET_STRUCT.nyear(address()); }
-        /** Returns the value of the {@code month} field. */
+        /** @return the value of the {@code month} field. */
         @NativeType("SQLUSMALLINT")
         public short month() { return SQL_SS_TIMESTAMPOFFSET_STRUCT.nmonth(address()); }
-        /** Returns the value of the {@code day} field. */
+        /** @return the value of the {@code day} field. */
         @NativeType("SQLUSMALLINT")
         public short day() { return SQL_SS_TIMESTAMPOFFSET_STRUCT.nday(address()); }
-        /** Returns the value of the {@code hour} field. */
+        /** @return the value of the {@code hour} field. */
         @NativeType("SQLUSMALLINT")
         public short hour() { return SQL_SS_TIMESTAMPOFFSET_STRUCT.nhour(address()); }
-        /** Returns the value of the {@code minute} field. */
+        /** @return the value of the {@code minute} field. */
         @NativeType("SQLUSMALLINT")
         public short minute() { return SQL_SS_TIMESTAMPOFFSET_STRUCT.nminute(address()); }
-        /** Returns the value of the {@code second} field. */
+        /** @return the value of the {@code second} field. */
         @NativeType("SQLUSMALLINT")
         public short second() { return SQL_SS_TIMESTAMPOFFSET_STRUCT.nsecond(address()); }
-        /** Returns the value of the {@code fraction} field. */
+        /** @return the value of the {@code fraction} field. */
         @NativeType("SQLUINTEGER")
         public int fraction() { return SQL_SS_TIMESTAMPOFFSET_STRUCT.nfraction(address()); }
-        /** Returns the value of the {@code timezone_hour} field. */
+        /** @return the value of the {@code timezone_hour} field. */
         @NativeType("SQLSMALLINT")
         public short timezone_hour() { return SQL_SS_TIMESTAMPOFFSET_STRUCT.ntimezone_hour(address()); }
-        /** Returns the value of the {@code timezone_minute} field. */
+        /** @return the value of the {@code timezone_minute} field. */
         @NativeType("SQLSMALLINT")
         public short timezone_minute() { return SQL_SS_TIMESTAMPOFFSET_STRUCT.ntimezone_minute(address()); }
 

@@ -12,9 +12,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>As a consequence, applications should always check for the presence of the extension string for each individual physical device for which they intend to issue the new query for and should not have any assumptions about the availability of the extension on any given platform.</p>
  * 
- * <h5>Examples</h5>
- * 
- * <p>None.</p>
+ * <h5>VK_EXT_pci_bus_info</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -34,6 +32,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Matthaeus G. Chajdas <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_pci_bus_info:%20&amp;body=@anteru%20">anteru</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-12-10</dd>
  * <dt><b>IP Status</b></dt>

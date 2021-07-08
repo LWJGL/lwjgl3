@@ -22,6 +22,36 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to libX11. */
 public class X11 {
 
+    private static final SharedLibrary X11 = Library.loadNative(X11.class, "org.lwjgl", null, "libX11.so.6", "libX11.so");
+
+    /** Contains the function pointers loaded from the X11 {@link SharedLibrary}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            XOpenDisplay             = apiGetFunctionAddress(X11, "XOpenDisplay"),
+            XCloseDisplay            = apiGetFunctionAddress(X11, "XCloseDisplay"),
+            XDefaultScreen           = apiGetFunctionAddress(X11, "XDefaultScreen"),
+            XRootWindow              = apiGetFunctionAddress(X11, "XRootWindow"),
+            XCreateColormap          = apiGetFunctionAddress(X11, "XCreateColormap"),
+            XFreeColormap            = apiGetFunctionAddress(X11, "XFreeColormap"),
+            XCreateWindow            = apiGetFunctionAddress(X11, "XCreateWindow"),
+            XDestroyWindow           = apiGetFunctionAddress(X11, "XDestroyWindow"),
+            XFree                    = apiGetFunctionAddress(X11, "XFree"),
+            XSendEvent               = apiGetFunctionAddress(X11, "XSendEvent"),
+            XDisplayMotionBufferSize = apiGetFunctionAddress(X11, "XDisplayMotionBufferSize"),
+            XGetMotionEvents         = apiGetFunctionAddress(X11, "XGetMotionEvents"),
+            XTranslateCoordinates    = apiGetFunctionAddress(X11, "XTranslateCoordinates");
+
+    }
+
+    /** Returns the X11 {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return X11;
+    }
+
     /** Boolean values */
     public static final int
         True  = 1,
@@ -413,36 +443,6 @@ public class X11 {
 
     protected X11() {
         throw new UnsupportedOperationException();
-    }
-
-    private static final SharedLibrary X11 = Library.loadNative(X11.class, "org.lwjgl", null, "libX11.so.6", "libX11.so");
-
-    /** Contains the function pointers loaded from the X11 {@link SharedLibrary}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            XOpenDisplay             = apiGetFunctionAddress(X11, "XOpenDisplay"),
-            XCloseDisplay            = apiGetFunctionAddress(X11, "XCloseDisplay"),
-            XDefaultScreen           = apiGetFunctionAddress(X11, "XDefaultScreen"),
-            XRootWindow              = apiGetFunctionAddress(X11, "XRootWindow"),
-            XCreateColormap          = apiGetFunctionAddress(X11, "XCreateColormap"),
-            XFreeColormap            = apiGetFunctionAddress(X11, "XFreeColormap"),
-            XCreateWindow            = apiGetFunctionAddress(X11, "XCreateWindow"),
-            XDestroyWindow           = apiGetFunctionAddress(X11, "XDestroyWindow"),
-            XFree                    = apiGetFunctionAddress(X11, "XFree"),
-            XSendEvent               = apiGetFunctionAddress(X11, "XSendEvent"),
-            XDisplayMotionBufferSize = apiGetFunctionAddress(X11, "XDisplayMotionBufferSize"),
-            XGetMotionEvents         = apiGetFunctionAddress(X11, "XGetMotionEvents"),
-            XTranslateCoordinates    = apiGetFunctionAddress(X11, "XTranslateCoordinates");
-
-    }
-
-    /** Returns the X11 {@link SharedLibrary}. */
-    public static SharedLibrary getLibrary() {
-        return X11;
     }
 
     // --- [ XOpenDisplay ] ---

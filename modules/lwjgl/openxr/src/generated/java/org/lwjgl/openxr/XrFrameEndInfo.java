@@ -79,22 +79,22 @@ public class XrFrameEndInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code displayTime} field. */
+    /** @return the value of the {@code displayTime} field. */
     @NativeType("XrTime")
     public long displayTime() { return ndisplayTime(address()); }
-    /** Returns the value of the {@code environmentBlendMode} field. */
+    /** @return the value of the {@code environmentBlendMode} field. */
     @NativeType("XrEnvironmentBlendMode")
     public int environmentBlendMode() { return nenvironmentBlendMode(address()); }
-    /** Returns the value of the {@code layerCount} field. */
+    /** @return the value of the {@code layerCount} field. */
     @NativeType("uint32_t")
     public int layerCount() { return nlayerCount(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code layers} field. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code layers} field. */
     @Nullable
     @NativeType("XrCompositionLayerBaseHeader const * const *")
     public PointerBuffer layers() { return nlayers(address()); }
@@ -350,22 +350,22 @@ public class XrFrameEndInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFrameEndInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrFrameEndInfo.nnext(address()); }
-        /** Returns the value of the {@code displayTime} field. */
+        /** @return the value of the {@code displayTime} field. */
         @NativeType("XrTime")
         public long displayTime() { return XrFrameEndInfo.ndisplayTime(address()); }
-        /** Returns the value of the {@code environmentBlendMode} field. */
+        /** @return the value of the {@code environmentBlendMode} field. */
         @NativeType("XrEnvironmentBlendMode")
         public int environmentBlendMode() { return XrFrameEndInfo.nenvironmentBlendMode(address()); }
-        /** Returns the value of the {@code layerCount} field. */
+        /** @return the value of the {@code layerCount} field. */
         @NativeType("uint32_t")
         public int layerCount() { return XrFrameEndInfo.nlayerCount(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code layers} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code layers} field. */
         @Nullable
         @NativeType("XrCompositionLayerBaseHeader const * const *")
         public PointerBuffer layers() { return XrFrameEndInfo.nlayers(address()); }

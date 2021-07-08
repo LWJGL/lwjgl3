@@ -19,21 +19,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Per-operation parameters for ::cuStreamBatchMemOp.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code waitValue}
- * 
- * <ul>
- * <li>{@code waitValue.alias} &ndash; For driver internal use. Initial value is unimportant.</li>
- * </ul></li>
- * <li>{@code writeValue}
- * 
- * <ul>
- * <li>{@code writeValue.alias} &ndash; For driver internal use. Initial value is unimportant.</li>
- * </ul></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -47,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *             cuuint64_t value64;
  *         };
  *         unsigned int flags;
- *         CUdeviceptr alias;
+ *         CUdeviceptr {@link #waitValue_alias alias};
  *     } waitValue;
  *     struct {
  *         CUstreamBatchMemOpType operation;
@@ -57,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *             cuuint64_t value64;
  *         };
  *         unsigned int flags;
- *         CUdeviceptr alias;
+ *         CUdeviceptr {@link #writeValue_alias alias};
  *     } writeValue;
  *     struct {
  *         CUstreamBatchMemOpType operation;
@@ -163,87 +148,87 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code operation} field. */
+    /** @return the value of the {@code operation} field. */
     @NativeType("CUstreamBatchMemOpType")
     public int operation() { return noperation(address()); }
-    /** Returns the value of the {@code waitValue.operation} field. */
+    /** @return the value of the {@code waitValue.operation} field. */
     @NativeType("CUstreamBatchMemOpType")
     public int waitValue_operation() { return nwaitValue_operation(address()); }
-    /** Returns the value of the {@code waitValue.address} field. */
+    /** @return the value of the {@code waitValue.address} field. */
     @NativeType("CUdeviceptr")
     public long waitValue_address() { return nwaitValue_address(address()); }
-    /** Returns the value of the {@code waitValue.value} field. */
+    /** @return the value of the {@code waitValue.value} field. */
     @NativeType("cuuint32_t")
     public int waitValue_value() { return nwaitValue_value(address()); }
-    /** Returns the value of the {@code waitValue.value64} field. */
+    /** @return the value of the {@code waitValue.value64} field. */
     @NativeType("cuuint64_t")
     public long waitValue_value64() { return nwaitValue_value64(address()); }
-    /** Returns the value of the {@code waitValue.flags} field. */
+    /** @return the value of the {@code waitValue.flags} field. */
     @NativeType("unsigned int")
     public int waitValue_flags() { return nwaitValue_flags(address()); }
-    /** Returns the value of the {@code waitValue.alias} field. */
+    /** For driver internal use. Initial value is unimportant. */
     @NativeType("CUdeviceptr")
     public long waitValue_alias() { return nwaitValue_alias(address()); }
-    /** Returns the value of the {@code writeValue.operation} field. */
+    /** @return the value of the {@code writeValue.operation} field. */
     @NativeType("CUstreamBatchMemOpType")
     public int writeValue_operation() { return nwriteValue_operation(address()); }
-    /** Returns the value of the {@code writeValue.address} field. */
+    /** @return the value of the {@code writeValue.address} field. */
     @NativeType("CUdeviceptr")
     public long writeValue_address() { return nwriteValue_address(address()); }
-    /** Returns the value of the {@code writeValue.value} field. */
+    /** @return the value of the {@code writeValue.value} field. */
     @NativeType("cuuint32_t")
     public int writeValue_value() { return nwriteValue_value(address()); }
-    /** Returns the value of the {@code writeValue.value64} field. */
+    /** @return the value of the {@code writeValue.value64} field. */
     @NativeType("cuuint64_t")
     public long writeValue_value64() { return nwriteValue_value64(address()); }
-    /** Returns the value of the {@code writeValue.flags} field. */
+    /** @return the value of the {@code writeValue.flags} field. */
     @NativeType("unsigned int")
     public int writeValue_flags() { return nwriteValue_flags(address()); }
-    /** Returns the value of the {@code writeValue.alias} field. */
+    /** For driver internal use. Initial value is unimportant. */
     @NativeType("CUdeviceptr")
     public long writeValue_alias() { return nwriteValue_alias(address()); }
-    /** Returns the value of the {@code flushRemoteWrites.operation} field. */
+    /** @return the value of the {@code flushRemoteWrites.operation} field. */
     @NativeType("CUstreamBatchMemOpType")
     public int flushRemoteWrites_operation() { return nflushRemoteWrites_operation(address()); }
-    /** Returns the value of the {@code flushRemoteWrites.flags} field. */
+    /** @return the value of the {@code flushRemoteWrites.flags} field. */
     @NativeType("unsigned int")
     public int flushRemoteWrites_flags() { return nflushRemoteWrites_flags(address()); }
-    /** Returns a {@link LongBuffer} view of the {@code pad} field. */
+    /** @return a {@link LongBuffer} view of the {@code pad} field. */
     @NativeType("cuuint64_t[6]")
     public LongBuffer pad() { return npad(address()); }
-    /** Returns the value at the specified index of the {@code pad} field. */
+    /** @return the value at the specified index of the {@code pad} field. */
     @NativeType("cuuint64_t")
     public long pad(int index) { return npad(address(), index); }
 
     /** Sets the specified value to the {@code operation} field. */
     public CUstreamBatchMemOpParams operation(@NativeType("CUstreamBatchMemOpType") int value) { noperation(address(), value); return this; }
-    /** Sets the specified value to the {@code waitValue.operation} field. */
+    /** Sets the specified value to the {@code operation} field. */
     public CUstreamBatchMemOpParams waitValue_operation(@NativeType("CUstreamBatchMemOpType") int value) { nwaitValue_operation(address(), value); return this; }
-    /** Sets the specified value to the {@code waitValue.address} field. */
+    /** Sets the specified value to the {@code address} field. */
     public CUstreamBatchMemOpParams waitValue_address(@NativeType("CUdeviceptr") long value) { nwaitValue_address(address(), value); return this; }
-    /** Sets the specified value to the {@code waitValue.value} field. */
+    /** Sets the specified value to the {@code value} field. */
     public CUstreamBatchMemOpParams waitValue_value(@NativeType("cuuint32_t") int value) { nwaitValue_value(address(), value); return this; }
-    /** Sets the specified value to the {@code waitValue.value64} field. */
+    /** Sets the specified value to the {@code value64} field. */
     public CUstreamBatchMemOpParams waitValue_value64(@NativeType("cuuint64_t") long value) { nwaitValue_value64(address(), value); return this; }
-    /** Sets the specified value to the {@code waitValue.flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public CUstreamBatchMemOpParams waitValue_flags(@NativeType("unsigned int") int value) { nwaitValue_flags(address(), value); return this; }
-    /** Sets the specified value to the {@code waitValue.alias} field. */
+    /** Sets the specified value to the {@link #waitValue_alias} field. */
     public CUstreamBatchMemOpParams waitValue_alias(@NativeType("CUdeviceptr") long value) { nwaitValue_alias(address(), value); return this; }
-    /** Sets the specified value to the {@code writeValue.operation} field. */
+    /** Sets the specified value to the {@code operation} field. */
     public CUstreamBatchMemOpParams writeValue_operation(@NativeType("CUstreamBatchMemOpType") int value) { nwriteValue_operation(address(), value); return this; }
-    /** Sets the specified value to the {@code writeValue.address} field. */
+    /** Sets the specified value to the {@code address} field. */
     public CUstreamBatchMemOpParams writeValue_address(@NativeType("CUdeviceptr") long value) { nwriteValue_address(address(), value); return this; }
-    /** Sets the specified value to the {@code writeValue.value} field. */
+    /** Sets the specified value to the {@code value} field. */
     public CUstreamBatchMemOpParams writeValue_value(@NativeType("cuuint32_t") int value) { nwriteValue_value(address(), value); return this; }
-    /** Sets the specified value to the {@code writeValue.value64} field. */
+    /** Sets the specified value to the {@code value64} field. */
     public CUstreamBatchMemOpParams writeValue_value64(@NativeType("cuuint64_t") long value) { nwriteValue_value64(address(), value); return this; }
-    /** Sets the specified value to the {@code writeValue.flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public CUstreamBatchMemOpParams writeValue_flags(@NativeType("unsigned int") int value) { nwriteValue_flags(address(), value); return this; }
-    /** Sets the specified value to the {@code writeValue.alias} field. */
+    /** Sets the specified value to the {@link #writeValue_alias} field. */
     public CUstreamBatchMemOpParams writeValue_alias(@NativeType("CUdeviceptr") long value) { nwriteValue_alias(address(), value); return this; }
-    /** Sets the specified value to the {@code flushRemoteWrites.operation} field. */
+    /** Sets the specified value to the {@code operation} field. */
     public CUstreamBatchMemOpParams flushRemoteWrites_operation(@NativeType("CUstreamBatchMemOpType") int value) { nflushRemoteWrites_operation(address(), value); return this; }
-    /** Sets the specified value to the {@code flushRemoteWrites.flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public CUstreamBatchMemOpParams flushRemoteWrites_flags(@NativeType("unsigned int") int value) { nflushRemoteWrites_flags(address(), value); return this; }
     /** Copies the specified {@link LongBuffer} to the {@code pad} field. */
     public CUstreamBatchMemOpParams pad(@NativeType("cuuint64_t[6]") LongBuffer value) { npad(address(), value); return this; }
@@ -520,87 +505,87 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code operation} field. */
+        /** @return the value of the {@code operation} field. */
         @NativeType("CUstreamBatchMemOpType")
         public int operation() { return CUstreamBatchMemOpParams.noperation(address()); }
-        /** Returns the value of the {@code waitValue.operation} field. */
+        /** @return the value of the {@code waitValue.operation} field. */
         @NativeType("CUstreamBatchMemOpType")
         public int waitValue_operation() { return CUstreamBatchMemOpParams.nwaitValue_operation(address()); }
-        /** Returns the value of the {@code waitValue.address} field. */
+        /** @return the value of the {@code waitValue.address} field. */
         @NativeType("CUdeviceptr")
         public long waitValue_address() { return CUstreamBatchMemOpParams.nwaitValue_address(address()); }
-        /** Returns the value of the {@code waitValue.value} field. */
+        /** @return the value of the {@code waitValue.value} field. */
         @NativeType("cuuint32_t")
         public int waitValue_value() { return CUstreamBatchMemOpParams.nwaitValue_value(address()); }
-        /** Returns the value of the {@code waitValue.value64} field. */
+        /** @return the value of the {@code waitValue.value64} field. */
         @NativeType("cuuint64_t")
         public long waitValue_value64() { return CUstreamBatchMemOpParams.nwaitValue_value64(address()); }
-        /** Returns the value of the {@code waitValue.flags} field. */
+        /** @return the value of the {@code waitValue.flags} field. */
         @NativeType("unsigned int")
         public int waitValue_flags() { return CUstreamBatchMemOpParams.nwaitValue_flags(address()); }
-        /** Returns the value of the {@code waitValue.alias} field. */
+        /** @return the value of the {@link CUstreamBatchMemOpParams#waitValue_alias} field. */
         @NativeType("CUdeviceptr")
         public long waitValue_alias() { return CUstreamBatchMemOpParams.nwaitValue_alias(address()); }
-        /** Returns the value of the {@code writeValue.operation} field. */
+        /** @return the value of the {@code writeValue.operation} field. */
         @NativeType("CUstreamBatchMemOpType")
         public int writeValue_operation() { return CUstreamBatchMemOpParams.nwriteValue_operation(address()); }
-        /** Returns the value of the {@code writeValue.address} field. */
+        /** @return the value of the {@code writeValue.address} field. */
         @NativeType("CUdeviceptr")
         public long writeValue_address() { return CUstreamBatchMemOpParams.nwriteValue_address(address()); }
-        /** Returns the value of the {@code writeValue.value} field. */
+        /** @return the value of the {@code writeValue.value} field. */
         @NativeType("cuuint32_t")
         public int writeValue_value() { return CUstreamBatchMemOpParams.nwriteValue_value(address()); }
-        /** Returns the value of the {@code writeValue.value64} field. */
+        /** @return the value of the {@code writeValue.value64} field. */
         @NativeType("cuuint64_t")
         public long writeValue_value64() { return CUstreamBatchMemOpParams.nwriteValue_value64(address()); }
-        /** Returns the value of the {@code writeValue.flags} field. */
+        /** @return the value of the {@code writeValue.flags} field. */
         @NativeType("unsigned int")
         public int writeValue_flags() { return CUstreamBatchMemOpParams.nwriteValue_flags(address()); }
-        /** Returns the value of the {@code writeValue.alias} field. */
+        /** @return the value of the {@link CUstreamBatchMemOpParams#writeValue_alias} field. */
         @NativeType("CUdeviceptr")
         public long writeValue_alias() { return CUstreamBatchMemOpParams.nwriteValue_alias(address()); }
-        /** Returns the value of the {@code flushRemoteWrites.operation} field. */
+        /** @return the value of the {@code flushRemoteWrites.operation} field. */
         @NativeType("CUstreamBatchMemOpType")
         public int flushRemoteWrites_operation() { return CUstreamBatchMemOpParams.nflushRemoteWrites_operation(address()); }
-        /** Returns the value of the {@code flushRemoteWrites.flags} field. */
+        /** @return the value of the {@code flushRemoteWrites.flags} field. */
         @NativeType("unsigned int")
         public int flushRemoteWrites_flags() { return CUstreamBatchMemOpParams.nflushRemoteWrites_flags(address()); }
-        /** Returns a {@link LongBuffer} view of the {@code pad} field. */
+        /** @return a {@link LongBuffer} view of the {@code pad} field. */
         @NativeType("cuuint64_t[6]")
         public LongBuffer pad() { return CUstreamBatchMemOpParams.npad(address()); }
-        /** Returns the value at the specified index of the {@code pad} field. */
+        /** @return the value at the specified index of the {@code pad} field. */
         @NativeType("cuuint64_t")
         public long pad(int index) { return CUstreamBatchMemOpParams.npad(address(), index); }
 
         /** Sets the specified value to the {@code operation} field. */
         public CUstreamBatchMemOpParams.Buffer operation(@NativeType("CUstreamBatchMemOpType") int value) { CUstreamBatchMemOpParams.noperation(address(), value); return this; }
-        /** Sets the specified value to the {@code waitValue.operation} field. */
+        /** Sets the specified value to the {@code operation} field. */
         public CUstreamBatchMemOpParams.Buffer waitValue_operation(@NativeType("CUstreamBatchMemOpType") int value) { CUstreamBatchMemOpParams.nwaitValue_operation(address(), value); return this; }
-        /** Sets the specified value to the {@code waitValue.address} field. */
+        /** Sets the specified value to the {@code address} field. */
         public CUstreamBatchMemOpParams.Buffer waitValue_address(@NativeType("CUdeviceptr") long value) { CUstreamBatchMemOpParams.nwaitValue_address(address(), value); return this; }
-        /** Sets the specified value to the {@code waitValue.value} field. */
+        /** Sets the specified value to the {@code value} field. */
         public CUstreamBatchMemOpParams.Buffer waitValue_value(@NativeType("cuuint32_t") int value) { CUstreamBatchMemOpParams.nwaitValue_value(address(), value); return this; }
-        /** Sets the specified value to the {@code waitValue.value64} field. */
+        /** Sets the specified value to the {@code value64} field. */
         public CUstreamBatchMemOpParams.Buffer waitValue_value64(@NativeType("cuuint64_t") long value) { CUstreamBatchMemOpParams.nwaitValue_value64(address(), value); return this; }
-        /** Sets the specified value to the {@code waitValue.flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public CUstreamBatchMemOpParams.Buffer waitValue_flags(@NativeType("unsigned int") int value) { CUstreamBatchMemOpParams.nwaitValue_flags(address(), value); return this; }
-        /** Sets the specified value to the {@code waitValue.alias} field. */
+        /** Sets the specified value to the {@link CUstreamBatchMemOpParams#waitValue_alias} field. */
         public CUstreamBatchMemOpParams.Buffer waitValue_alias(@NativeType("CUdeviceptr") long value) { CUstreamBatchMemOpParams.nwaitValue_alias(address(), value); return this; }
-        /** Sets the specified value to the {@code writeValue.operation} field. */
+        /** Sets the specified value to the {@code operation} field. */
         public CUstreamBatchMemOpParams.Buffer writeValue_operation(@NativeType("CUstreamBatchMemOpType") int value) { CUstreamBatchMemOpParams.nwriteValue_operation(address(), value); return this; }
-        /** Sets the specified value to the {@code writeValue.address} field. */
+        /** Sets the specified value to the {@code address} field. */
         public CUstreamBatchMemOpParams.Buffer writeValue_address(@NativeType("CUdeviceptr") long value) { CUstreamBatchMemOpParams.nwriteValue_address(address(), value); return this; }
-        /** Sets the specified value to the {@code writeValue.value} field. */
+        /** Sets the specified value to the {@code value} field. */
         public CUstreamBatchMemOpParams.Buffer writeValue_value(@NativeType("cuuint32_t") int value) { CUstreamBatchMemOpParams.nwriteValue_value(address(), value); return this; }
-        /** Sets the specified value to the {@code writeValue.value64} field. */
+        /** Sets the specified value to the {@code value64} field. */
         public CUstreamBatchMemOpParams.Buffer writeValue_value64(@NativeType("cuuint64_t") long value) { CUstreamBatchMemOpParams.nwriteValue_value64(address(), value); return this; }
-        /** Sets the specified value to the {@code writeValue.flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public CUstreamBatchMemOpParams.Buffer writeValue_flags(@NativeType("unsigned int") int value) { CUstreamBatchMemOpParams.nwriteValue_flags(address(), value); return this; }
-        /** Sets the specified value to the {@code writeValue.alias} field. */
+        /** Sets the specified value to the {@link CUstreamBatchMemOpParams#writeValue_alias} field. */
         public CUstreamBatchMemOpParams.Buffer writeValue_alias(@NativeType("CUdeviceptr") long value) { CUstreamBatchMemOpParams.nwriteValue_alias(address(), value); return this; }
-        /** Sets the specified value to the {@code flushRemoteWrites.operation} field. */
+        /** Sets the specified value to the {@code operation} field. */
         public CUstreamBatchMemOpParams.Buffer flushRemoteWrites_operation(@NativeType("CUstreamBatchMemOpType") int value) { CUstreamBatchMemOpParams.nflushRemoteWrites_operation(address(), value); return this; }
-        /** Sets the specified value to the {@code flushRemoteWrites.flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public CUstreamBatchMemOpParams.Buffer flushRemoteWrites_flags(@NativeType("unsigned int") int value) { CUstreamBatchMemOpParams.nflushRemoteWrites_flags(address(), value); return this; }
         /** Copies the specified {@link LongBuffer} to the {@code pad} field. */
         public CUstreamBatchMemOpParams.Buffer pad(@NativeType("cuuint64_t[6]") LongBuffer value) { CUstreamBatchMemOpParams.npad(address(), value); return this; }

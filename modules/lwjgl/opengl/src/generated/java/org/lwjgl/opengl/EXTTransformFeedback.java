@@ -42,6 +42,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTTransformFeedback {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv,
      * BindBufferRangeEXT, BindBufferOffsetEXT and BindBufferBaseEXT.
@@ -86,8 +88,6 @@ public class EXTTransformFeedback {
         GL_TRANSFORM_FEEDBACK_VARYINGS_EXT           = 0x8C83,
         GL_TRANSFORM_FEEDBACK_BUFFER_MODE_EXT        = 0x8C7F,
         GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT = 0x8C76;
-
-    static { GL.initialize(); }
 
     protected EXTTransformFeedback() {
         throw new UnsupportedOperationException();

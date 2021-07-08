@@ -8,9 +8,16 @@ package org.lwjgl.vulkan;
 /**
  * The {@code VK_KHR_vulkan_memory_model} extension allows use of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#memory-model">Vulkan Memory Model</a>, which formally defines how to synchronize memory accesses to the same memory locations performed by multiple shader invocations.
  * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>Version 3 of the spec added a member ({@code vulkanMemoryModelAvailabilityVisibilityChains}) to {@link VkPhysicalDeviceVulkanMemoryModelFeaturesKHR}, which is an incompatible change from version 2.</p>
+ * </div>
+ * 
  * <h5>Promotion to Vulkan 1.2</h5>
  * 
- * <p>All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * <p>All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the {@code vulkanMemoryModel} capability is optional. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * 
+ * <h5>VK_KHR_vulkan_memory_model</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -33,6 +40,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_vulkan_memory_model:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-12-10</dd>
  * <dt><b>IP Status</b></dt>

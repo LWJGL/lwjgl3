@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWwindow *window,
  *     int count,
  *     char const **names
@@ -55,7 +55,7 @@ public abstract class GLFWDropCallback extends Callback implements GLFWDropCallb
     }
 
     protected GLFWDropCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWDropCallback(long functionPointer) {

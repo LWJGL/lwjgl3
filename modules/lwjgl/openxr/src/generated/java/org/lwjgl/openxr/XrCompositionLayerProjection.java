@@ -80,22 +80,22 @@ public class XrCompositionLayerProjection extends Struct implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code layerFlags} field. */
+    /** @return the value of the {@code layerFlags} field. */
     @NativeType("XrCompositionLayerFlags")
     public long layerFlags() { return nlayerFlags(address()); }
-    /** Returns the value of the {@code space} field. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** Returns the value of the {@code viewCount} field. */
+    /** @return the value of the {@code viewCount} field. */
     @NativeType("uint32_t")
     public int viewCount() { return nviewCount(address()); }
-    /** Returns a {@link XrCompositionLayerProjectionView.Buffer} view of the struct array pointed to by the {@code views} field. */
+    /** @return a {@link XrCompositionLayerProjectionView.Buffer} view of the struct array pointed to by the {@code views} field. */
     @NativeType("XrCompositionLayerProjectionView const *")
     public XrCompositionLayerProjectionView.Buffer views() { return nviews(address()); }
 
@@ -371,22 +371,22 @@ public class XrCompositionLayerProjection extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerProjection.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerProjection.nnext(address()); }
-        /** Returns the value of the {@code layerFlags} field. */
+        /** @return the value of the {@code layerFlags} field. */
         @NativeType("XrCompositionLayerFlags")
         public long layerFlags() { return XrCompositionLayerProjection.nlayerFlags(address()); }
-        /** Returns the value of the {@code space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrCompositionLayerProjection.nspace(address()); }
-        /** Returns the value of the {@code viewCount} field. */
+        /** @return the value of the {@code viewCount} field. */
         @NativeType("uint32_t")
         public int viewCount() { return XrCompositionLayerProjection.nviewCount(address()); }
-        /** Returns a {@link XrCompositionLayerProjectionView.Buffer} view of the struct array pointed to by the {@code views} field. */
+        /** @return a {@link XrCompositionLayerProjectionView.Buffer} view of the struct array pointed to by the {@code views} field. */
         @NativeType("XrCompositionLayerProjectionView const *")
         public XrCompositionLayerProjectionView.Buffer views() { return XrCompositionLayerProjection.nviews(address()); }
 

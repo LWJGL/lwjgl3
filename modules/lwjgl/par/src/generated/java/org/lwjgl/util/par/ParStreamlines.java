@@ -17,6 +17,8 @@ import static org.lwjgl.system.Checks.*;
  */
 public class ParStreamlines {
 
+    static { LibPar.initialize(); }
+
     /**
      * Configures how the library assigns UV coordinates.
      * 
@@ -49,8 +51,6 @@ public class ParStreamlines {
 
     /** Draws control points */
     public static final int PARSL_FLAG_CURVE_GUIPARSL_FLAG_DES = 1 << 4;
-
-    static { LibPar.initialize(); }
 
     protected ParStreamlines() {
         throw new UnsupportedOperationException();

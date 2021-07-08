@@ -63,10 +63,10 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code year} field. */
+    /** @return the value of the {@code year} field. */
     @NativeType("SQLUINTEGER")
     public int year() { return nyear(address()); }
-    /** Returns the value of the {@code month} field. */
+    /** @return the value of the {@code month} field. */
     @NativeType("SQLUINTEGER")
     public int month() { return nmonth(address()); }
 
@@ -289,10 +289,10 @@ public class SQL_YEAR_MONTH_STRUCT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code year} field. */
+        /** @return the value of the {@code year} field. */
         @NativeType("SQLUINTEGER")
         public int year() { return SQL_YEAR_MONTH_STRUCT.nyear(address()); }
-        /** Returns the value of the {@code month} field. */
+        /** @return the value of the {@code month} field. */
         @NativeType("SQLUINTEGER")
         public int month() { return SQL_YEAR_MONTH_STRUCT.nmonth(address()); }
 

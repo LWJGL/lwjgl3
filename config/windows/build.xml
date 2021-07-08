@@ -147,11 +147,18 @@ EXPORTS
         <!-- CORE -->
         <build module="core" flags="/Wall /WX /wd4710 /wd4711">
             <compileargs>
-                <arg value="/I${src.main}\dyncall"/>
+                <arg value="/I${src.main}\libffi"/>
+                <arg value="/I${src.main}\libffi\aarch64" if:set="build.arch.arm64"/>
+                <arg value="/I${src.main}\libffi\arm" if:set="build.arch.arm32"/>
+                <arg value="/I${src.main}\libffi\x86" unless:set="build.arch.arm"/>
+                <!-- for libffi/x86/ffitarget.h -->
+                <arg value="/DX86_WIN32" if:set="build.arch.x86"/>
+                <arg value="/DX86_WIN64" if:set="build.arch.x64"/>
             </compileargs>
             <source>
                 <fileset dir=".">
                     <include name="${src.main}/*.c"/>
+                    <exclude name="${src.main}/org_lwjgl_system_SharedLibraryUtil.c"/>
                     <include name="${src.generated}/*.c"/>
                     <include name="${src.generated}/${platform}/*.c"/>
                     <include name="${module.lwjgl}/jawt/src/generated/c/*.c" if:true="${binding.jawt}"/>
@@ -159,14 +166,12 @@ EXPORTS
             </source>
             <beforeLink>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency module="core" artifact="core/dyncall_s.lib"/>
-                    <update-dependency module="core" artifact="core/dyncallback_s.lib"/>
-                    <update-dependency module="core" artifact="core/dynload_s.lib"/>
+                    <update-dependency module="core" artifact="core/libffi.lib"/>
                 </parallel>
             </beforeLink>
             <link>
                 <fileset dir="${lib.native}/org/lwjgl">
-                    <include name="dyn*.lib"/>
+                    <include name="libffi.lib"/>
                 </fileset>
             </link>
         </build>
@@ -492,7 +497,6 @@ EXPORTS
             <update-dependency module="openxr" artifact="openxr_loader.dll"/>
             <update-dependency module="opus" artifact="opus.dll"/>
             <update-dependency module="shaderc" artifact="shaderc.dll"/>
-            <update-dependency module="shaderc" artifact="shaderc_spvc.dll"/>
             <update-dependency module="spvc" artifact="spirv-cross.dll"/>
 
             </parallel>

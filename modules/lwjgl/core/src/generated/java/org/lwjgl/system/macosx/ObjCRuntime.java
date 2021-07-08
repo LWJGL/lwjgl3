@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * long currentThread = invokePPP(NSThread, sel_getUid("currentThread"), objc_msgSend);</code></pre>
  * 
  * <p>The safe way to use objc_msgSend in C code is to cast it to an appropriate function pointer. This is exactly what the {@link org.lwjgl.system.JNI JNI}
- * class does. If a particular function signature is not available, {@link org.lwjgl.system.dyncall.DynCall DynCall} may be used to invoke it.</p>
+ * class does. If a particular function signature is not available, {@link org.lwjgl.system.libffi.LibFFI LibFFI} may be used to invoke it.</p>
  * 
  * <p>The functions not exposed are:</p>
  * 
@@ -46,59 +46,6 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul>
  */
 public class ObjCRuntime {
-
-    /** Nil value. */
-    public static final long nil = 0x0L;
-
-    /** Boolean values. */
-    public static final byte
-        YES = 1,
-        NO  = 0;
-
-    /** Types. */
-    public static final char
-        _C_ID       = '@',
-        _C_CLASS    = '#',
-        _C_SEL      = ':',
-        _C_CHR      = 'c',
-        _C_UCHR     = 'C',
-        _C_SHT      = 's',
-        _C_USHT     = 'S',
-        _C_INT      = 'i',
-        _C_UINT     = 'I',
-        _C_LNG      = 'l',
-        _C_ULNG     = 'L',
-        _C_LNG_LNG  = 'q',
-        _C_ULNG_LNG = 'Q',
-        _C_FLT      = 'f',
-        _C_DBL      = 'd',
-        _C_BFLD     = 'b',
-        _C_BOOL     = 'B',
-        _C_VOID     = 'v',
-        _C_UNDEF    = '?',
-        _C_PTR      = '^',
-        _C_CHARPTR  = '*',
-        _C_ATOM     = '%',
-        _C_ARY_B    = '[',
-        _C_ARY_E    = ']',
-        _C_UNION_B  = '(',
-        _C_UNION_E  = ')',
-        _C_STRUCT_B = '{',
-        _C_STRUCT_E = '}',
-        _C_VECTOR   = '!',
-        _C_CONST    = 'r';
-
-    /** Policies related to associative references. */
-    public static final int
-        OBJC_ASSOCIATION_ASSIGN           = 0,
-        OBJC_ASSOCIATION_RETAIN_NONATOMIC = 1,
-        OBJC_ASSOCIATION_COPY_NONATOMIC   = 3,
-        OBJC_ASSOCIATION_RETAIN           = 1401,
-        OBJC_ASSOCIATION_COPY             = 1403;
-
-    protected ObjCRuntime() {
-        throw new UnsupportedOperationException();
-    }
 
     private static final SharedLibrary OBJC = Library.loadNative(ObjCRuntime.class, "org.lwjgl", "objc");
 
@@ -214,6 +161,59 @@ public class ObjCRuntime {
     /** Returns the objc {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {
         return OBJC;
+    }
+
+    /** Nil value. */
+    public static final long nil = 0x0L;
+
+    /** Boolean values. */
+    public static final byte
+        YES = 1,
+        NO  = 0;
+
+    /** Types. */
+    public static final char
+        _C_ID       = '@',
+        _C_CLASS    = '#',
+        _C_SEL      = ':',
+        _C_CHR      = 'c',
+        _C_UCHR     = 'C',
+        _C_SHT      = 's',
+        _C_USHT     = 'S',
+        _C_INT      = 'i',
+        _C_UINT     = 'I',
+        _C_LNG      = 'l',
+        _C_ULNG     = 'L',
+        _C_LNG_LNG  = 'q',
+        _C_ULNG_LNG = 'Q',
+        _C_FLT      = 'f',
+        _C_DBL      = 'd',
+        _C_BFLD     = 'b',
+        _C_BOOL     = 'B',
+        _C_VOID     = 'v',
+        _C_UNDEF    = '?',
+        _C_PTR      = '^',
+        _C_CHARPTR  = '*',
+        _C_ATOM     = '%',
+        _C_ARY_B    = '[',
+        _C_ARY_E    = ']',
+        _C_UNION_B  = '(',
+        _C_UNION_E  = ')',
+        _C_STRUCT_B = '{',
+        _C_STRUCT_E = '}',
+        _C_VECTOR   = '!',
+        _C_CONST    = 'r';
+
+    /** Policies related to associative references. */
+    public static final int
+        OBJC_ASSOCIATION_ASSIGN           = 0,
+        OBJC_ASSOCIATION_RETAIN_NONATOMIC = 1,
+        OBJC_ASSOCIATION_COPY_NONATOMIC   = 3,
+        OBJC_ASSOCIATION_RETAIN           = 1401,
+        OBJC_ASSOCIATION_COPY             = 1403;
+
+    protected ObjCRuntime() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ object_copy ] ---

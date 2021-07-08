@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-sparseResidencyBuffer">sparse buffer residency</a> feature is not enabled, {@code flags} <b>must</b> not contain {@link VK10#VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT BUFFER_CREATE_SPARSE_RESIDENCY_BIT}</li>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-sparseResidencyAliased">sparse aliased residency</a> feature is not enabled, {@code flags} <b>must</b> not contain {@link VK10#VK_BUFFER_CREATE_SPARSE_ALIASED_BIT BUFFER_CREATE_SPARSE_ALIASED_BIT}</li>
  * <li>If {@code flags} contains {@link VK10#VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT BUFFER_CREATE_SPARSE_RESIDENCY_BIT} or {@link VK10#VK_BUFFER_CREATE_SPARSE_ALIASED_BIT BUFFER_CREATE_SPARSE_ALIASED_BIT}, it <b>must</b> also contain {@link VK10#VK_BUFFER_CREATE_SPARSE_BINDING_BIT BUFFER_CREATE_SPARSE_BINDING_BIT}</li>
- * <li>If the {@code pNext} chain includes a {@link VkExternalMemoryBufferCreateInfo} structure, its {@code handleTypes} member <b>must</b> only contain bits that are also in {@link VkExternalBufferProperties}{@code ::externalMemoryProperties}.compatibleHandleTypes, as returned by {@link VK11#vkGetPhysicalDeviceExternalBufferProperties GetPhysicalDeviceExternalBufferProperties} with {@code pExternalBufferInfo}-&gt;handleType equal to any one of the handle types specified in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes}</li>
+ * <li>If the {@code pNext} chain includes a {@link VkExternalMemoryBufferCreateInfo} structure, its {@code handleTypes} member <b>must</b> only contain bits that are also in {@link VkExternalBufferProperties}{@code ::externalMemoryProperties}.compatibleHandleTypes, as returned by {@link VK11#vkGetPhysicalDeviceExternalBufferProperties GetPhysicalDeviceExternalBufferProperties} with {@code pExternalBufferInfo}&#8594;handleType equal to any one of the handle types specified in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes}</li>
  * <li>If the protected memory feature is not enabled, {@code flags} <b>must</b> not contain {@link VK11#VK_BUFFER_CREATE_PROTECTED_BIT BUFFER_CREATE_PROTECTED_BIT}</li>
  * <li>If any of the bits {@link VK10#VK_BUFFER_CREATE_SPARSE_BINDING_BIT BUFFER_CREATE_SPARSE_BINDING_BIT}, {@link VK10#VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT BUFFER_CREATE_SPARSE_RESIDENCY_BIT}, or {@link VK10#VK_BUFFER_CREATE_SPARSE_ALIASED_BIT BUFFER_CREATE_SPARSE_ALIASED_BIT} are set, {@link VK11#VK_BUFFER_CREATE_PROTECTED_BIT BUFFER_CREATE_PROTECTED_BIT} <b>must</b> not also be set</li>
  * <li>If the {@code pNext} chain includes a {@link VkDedicatedAllocationBufferCreateInfoNV} structure, and the {@code dedicatedAllocation} member of the chained structure is {@link VK10#VK_TRUE TRUE}, then {@code flags} <b>must</b> not include {@link VK10#VK_BUFFER_CREATE_SPARSE_BINDING_BIT BUFFER_CREATE_SPARSE_BINDING_BIT}, {@link VK10#VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT BUFFER_CREATE_SPARSE_RESIDENCY_BIT}, or {@link VK10#VK_BUFFER_CREATE_SPARSE_ALIASED_BIT BUFFER_CREATE_SPARSE_ALIASED_BIT}</li>
@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO STRUCTURE_TYPE_BUFFER_CREATE_INFO}</li>
  * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkBufferDeviceAddressCreateInfoEXT}, {@link VkBufferOpaqueCaptureAddressCreateInfo}, {@link VkDedicatedAllocationBufferCreateInfoNV}, or {@link VkExternalMemoryBufferCreateInfo}</li>
- * <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkBufferCreateFlagBits} values</li>
  * <li>{@code usage} <b>must</b> be a valid combination of {@code VkBufferUsageFlagBits} values</li>
  * <li>{@code usage} <b>must</b> not be 0</li>
@@ -55,31 +55,18 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK10#vkCreateBuffer CreateBuffer}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkBufferCreateFlagBits} specifying additional parameters of the buffer.</li>
- * <li>{@code size} &ndash; the size in bytes of the buffer to be created.</li>
- * <li>{@code usage} &ndash; a bitmask of {@code VkBufferUsageFlagBits} specifying allowed usages of the buffer.</li>
- * <li>{@code sharingMode} &ndash; a {@code VkSharingMode} value specifying the sharing mode of the buffer when it will be accessed by multiple queue families.</li>
- * <li>{@code queueFamilyIndexCount} &ndash; the number of entries in the {@code pQueueFamilyIndices} array.</li>
- * <li>{@code pQueueFamilyIndices} &ndash; a list of queue families that will access this buffer (ignored if {@code sharingMode} is not {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}).</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBufferCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkBufferCreateFlags flags;
- *     VkDeviceSize size;
- *     VkBufferUsageFlags usage;
- *     VkSharingMode sharingMode;
- *     uint32_t queueFamilyIndexCount;
- *     uint32_t const * pQueueFamilyIndices;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkBufferCreateFlags {@link #flags};
+ *     VkDeviceSize {@link #size};
+ *     VkBufferUsageFlags {@link #usage};
+ *     VkSharingMode {@link #sharingMode};
+ *     uint32_t {@link #queueFamilyIndexCount};
+ *     uint32_t const * {@link #pQueueFamilyIndices};
  * }</code></pre>
  */
 public class VkBufferCreateInfo extends Struct implements NativeResource {
@@ -139,45 +126,45 @@ public class VkBufferCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkBufferCreateFlagBits} specifying additional parameters of the buffer. */
     @NativeType("VkBufferCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** the size in bytes of the buffer to be created. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** Returns the value of the {@code usage} field. */
+    /** a bitmask of {@code VkBufferUsageFlagBits} specifying allowed usages of the buffer. */
     @NativeType("VkBufferUsageFlags")
     public int usage() { return nusage(address()); }
-    /** Returns the value of the {@code sharingMode} field. */
+    /** a {@code VkSharingMode} value specifying the sharing mode of the buffer when it will be accessed by multiple queue families. */
     @NativeType("VkSharingMode")
     public int sharingMode() { return nsharingMode(address()); }
-    /** Returns the value of the {@code queueFamilyIndexCount} field. */
+    /** the number of entries in the {@code pQueueFamilyIndices} array. */
     @NativeType("uint32_t")
     public int queueFamilyIndexCount() { return nqueueFamilyIndexCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pQueueFamilyIndices} field. */
+    /** a list of queue families that will access this buffer (ignored if {@code sharingMode} is not {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}). */
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pQueueFamilyIndices() { return npQueueFamilyIndices(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkBufferCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkBufferCreateInfo flags(@NativeType("VkBufferCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code size} field. */
+    /** Sets the specified value to the {@link #size} field. */
     public VkBufferCreateInfo size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
-    /** Sets the specified value to the {@code usage} field. */
+    /** Sets the specified value to the {@link #usage} field. */
     public VkBufferCreateInfo usage(@NativeType("VkBufferUsageFlags") int value) { nusage(address(), value); return this; }
-    /** Sets the specified value to the {@code sharingMode} field. */
+    /** Sets the specified value to the {@link #sharingMode} field. */
     public VkBufferCreateInfo sharingMode(@NativeType("VkSharingMode") int value) { nsharingMode(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pQueueFamilyIndices} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pQueueFamilyIndices} field. */
     public VkBufferCreateInfo pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npQueueFamilyIndices(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -451,45 +438,45 @@ public class VkBufferCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkBufferCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBufferCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkBufferCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBufferCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkBufferCreateInfo#flags} field. */
         @NativeType("VkBufferCreateFlags")
         public int flags() { return VkBufferCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link VkBufferCreateInfo#size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkBufferCreateInfo.nsize(address()); }
-        /** Returns the value of the {@code usage} field. */
+        /** @return the value of the {@link VkBufferCreateInfo#usage} field. */
         @NativeType("VkBufferUsageFlags")
         public int usage() { return VkBufferCreateInfo.nusage(address()); }
-        /** Returns the value of the {@code sharingMode} field. */
+        /** @return the value of the {@link VkBufferCreateInfo#sharingMode} field. */
         @NativeType("VkSharingMode")
         public int sharingMode() { return VkBufferCreateInfo.nsharingMode(address()); }
-        /** Returns the value of the {@code queueFamilyIndexCount} field. */
+        /** @return the value of the {@link VkBufferCreateInfo#queueFamilyIndexCount} field. */
         @NativeType("uint32_t")
         public int queueFamilyIndexCount() { return VkBufferCreateInfo.nqueueFamilyIndexCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pQueueFamilyIndices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkBufferCreateInfo#pQueueFamilyIndices} field. */
         @Nullable
         @NativeType("uint32_t const *")
         public IntBuffer pQueueFamilyIndices() { return VkBufferCreateInfo.npQueueFamilyIndices(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkBufferCreateInfo#sType} field. */
         public VkBufferCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkBufferCreateInfo#pNext} field. */
         public VkBufferCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkBufferCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkBufferCreateInfo#flags} field. */
         public VkBufferCreateInfo.Buffer flags(@NativeType("VkBufferCreateFlags") int value) { VkBufferCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code size} field. */
+        /** Sets the specified value to the {@link VkBufferCreateInfo#size} field. */
         public VkBufferCreateInfo.Buffer size(@NativeType("VkDeviceSize") long value) { VkBufferCreateInfo.nsize(address(), value); return this; }
-        /** Sets the specified value to the {@code usage} field. */
+        /** Sets the specified value to the {@link VkBufferCreateInfo#usage} field. */
         public VkBufferCreateInfo.Buffer usage(@NativeType("VkBufferUsageFlags") int value) { VkBufferCreateInfo.nusage(address(), value); return this; }
-        /** Sets the specified value to the {@code sharingMode} field. */
+        /** Sets the specified value to the {@link VkBufferCreateInfo#sharingMode} field. */
         public VkBufferCreateInfo.Buffer sharingMode(@NativeType("VkSharingMode") int value) { VkBufferCreateInfo.nsharingMode(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pQueueFamilyIndices} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkBufferCreateInfo#pQueueFamilyIndices} field. */
         public VkBufferCreateInfo.Buffer pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkBufferCreateInfo.npQueueFamilyIndices(address(), value); return this; }
 
     }

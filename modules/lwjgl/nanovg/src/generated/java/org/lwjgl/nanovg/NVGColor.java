@@ -19,35 +19,17 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * A NanoVG color.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li><em>&lt;union&gt;</em>
- * 
- * <ul>
- * <li>{@code rgba[4]} &ndash; an array of 4 color components</li>
- * <li><em>&lt;struct&gt;</em>
- * 
- * <ul>
- * <li>{@code r} &ndash; the color red component</li>
- * <li>{@code g} &ndash; the color green component</li>
- * <li>{@code b} &ndash; the color blue component</li>
- * <li>{@code a} &ndash; the color alpha component</li>
- * </ul></li>
- * </ul></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct NVGcolor {
  *     union {
- *         float rgba[4];
+ *         float {@link #rgba}[4];
  *         struct {
- *             float r;
- *             float g;
- *             float b;
- *             float a;
+ *             float {@link #r};
+ *             float {@link #g};
+ *             float {@link #b};
+ *             float {@link #a};
  *         };
  *     };
  * }</code></pre>
@@ -105,31 +87,31 @@ public class NVGColor extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link FloatBuffer} view of the {@code rgba} field. */
+    /** an array of 4 color components */
     @NativeType("float[4]")
     public FloatBuffer rgba() { return nrgba(address()); }
-    /** Returns the value at the specified index of the {@code rgba} field. */
+    /** an array of 4 color components */
     public float rgba(int index) { return nrgba(address(), index); }
-    /** Returns the value of the {@code r} field. */
+    /** the color red component */
     public float r() { return nr(address()); }
-    /** Returns the value of the {@code g} field. */
+    /** the color green component */
     public float g() { return ng(address()); }
-    /** Returns the value of the {@code b} field. */
+    /** the color blue component */
     public float b() { return nb(address()); }
-    /** Returns the value of the {@code a} field. */
+    /** the color alpha component */
     public float a() { return na(address()); }
 
-    /** Copies the specified {@link FloatBuffer} to the {@code rgba} field. */
+    /** Copies the specified {@link FloatBuffer} to the {@link #rgba} field. */
     public NVGColor rgba(@NativeType("float[4]") FloatBuffer value) { nrgba(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code rgba} field. */
+    /** Sets the specified value at the specified index of the {@link #rgba} field. */
     public NVGColor rgba(int index, float value) { nrgba(address(), index, value); return this; }
-    /** Sets the specified value to the {@code r} field. */
+    /** Sets the specified value to the {@link #r} field. */
     public NVGColor r(float value) { nr(address(), value); return this; }
-    /** Sets the specified value to the {@code g} field. */
+    /** Sets the specified value to the {@link #g} field. */
     public NVGColor g(float value) { ng(address(), value); return this; }
-    /** Sets the specified value to the {@code b} field. */
+    /** Sets the specified value to the {@link #b} field. */
     public NVGColor b(float value) { nb(address(), value); return this; }
-    /** Sets the specified value to the {@code a} field. */
+    /** Sets the specified value to the {@link #a} field. */
     public NVGColor a(float value) { na(address(), value); return this; }
 
     /**
@@ -358,31 +340,31 @@ public class NVGColor extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link FloatBuffer} view of the {@code rgba} field. */
+        /** @return a {@link FloatBuffer} view of the {@link NVGColor#rgba} field. */
         @NativeType("float[4]")
         public FloatBuffer rgba() { return NVGColor.nrgba(address()); }
-        /** Returns the value at the specified index of the {@code rgba} field. */
+        /** @return the value at the specified index of the {@link NVGColor#rgba} field. */
         public float rgba(int index) { return NVGColor.nrgba(address(), index); }
-        /** Returns the value of the {@code r} field. */
+        /** @return the value of the {@link NVGColor#r} field. */
         public float r() { return NVGColor.nr(address()); }
-        /** Returns the value of the {@code g} field. */
+        /** @return the value of the {@link NVGColor#g} field. */
         public float g() { return NVGColor.ng(address()); }
-        /** Returns the value of the {@code b} field. */
+        /** @return the value of the {@link NVGColor#b} field. */
         public float b() { return NVGColor.nb(address()); }
-        /** Returns the value of the {@code a} field. */
+        /** @return the value of the {@link NVGColor#a} field. */
         public float a() { return NVGColor.na(address()); }
 
-        /** Copies the specified {@link FloatBuffer} to the {@code rgba} field. */
+        /** Copies the specified {@link FloatBuffer} to the {@link NVGColor#rgba} field. */
         public NVGColor.Buffer rgba(@NativeType("float[4]") FloatBuffer value) { NVGColor.nrgba(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code rgba} field. */
+        /** Sets the specified value at the specified index of the {@link NVGColor#rgba} field. */
         public NVGColor.Buffer rgba(int index, float value) { NVGColor.nrgba(address(), index, value); return this; }
-        /** Sets the specified value to the {@code r} field. */
+        /** Sets the specified value to the {@link NVGColor#r} field. */
         public NVGColor.Buffer r(float value) { NVGColor.nr(address(), value); return this; }
-        /** Sets the specified value to the {@code g} field. */
+        /** Sets the specified value to the {@link NVGColor#g} field. */
         public NVGColor.Buffer g(float value) { NVGColor.ng(address(), value); return this; }
-        /** Sets the specified value to the {@code b} field. */
+        /** Sets the specified value to the {@link NVGColor#b} field. */
         public NVGColor.Buffer b(float value) { NVGColor.nb(address(), value); return this; }
-        /** Sets the specified value to the {@code a} field. */
+        /** Sets the specified value to the {@link NVGColor#a} field. */
         public NVGColor.Buffer a(float value) { NVGColor.na(address(), value); return this; }
 
     }

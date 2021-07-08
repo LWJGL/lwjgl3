@@ -19,6 +19,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to the OpenGL 1.2 optional imaging subset. */
 public class ARBImaging {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
      * GetDoublev, and by the {@code target} parameter of ColorTable, CopyColorTable, ColorTableParameteriv, ColorTableParameterfv,
@@ -200,8 +202,6 @@ public class ARBImaging {
     public static final int
         GL_FUNC_SUBTRACT         = 0x800A,
         GL_FUNC_REVERSE_SUBTRACT = 0x800B;
-
-    static { GL.initialize(); }
 
     protected ARBImaging() {
         throw new UnsupportedOperationException();

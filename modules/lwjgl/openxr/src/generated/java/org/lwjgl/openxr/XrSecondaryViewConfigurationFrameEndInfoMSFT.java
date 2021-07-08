@@ -72,16 +72,16 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code viewConfigurationCount} field. */
+    /** @return the value of the {@code viewConfigurationCount} field. */
     @NativeType("uint32_t")
     public int viewConfigurationCount() { return nviewConfigurationCount(address()); }
-    /** Returns a {@link XrSecondaryViewConfigurationLayerInfoMSFT.Buffer} view of the struct array pointed to by the {@code viewConfigurationLayersInfo} field. */
+    /** @return a {@link XrSecondaryViewConfigurationLayerInfoMSFT.Buffer} view of the struct array pointed to by the {@code viewConfigurationLayersInfo} field. */
     @NativeType("XrSecondaryViewConfigurationLayerInfoMSFT const *")
     public XrSecondaryViewConfigurationLayerInfoMSFT.Buffer viewConfigurationLayersInfo() { return nviewConfigurationLayersInfo(address()); }
 
@@ -340,16 +340,16 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSecondaryViewConfigurationFrameEndInfoMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSecondaryViewConfigurationFrameEndInfoMSFT.nnext(address()); }
-        /** Returns the value of the {@code viewConfigurationCount} field. */
+        /** @return the value of the {@code viewConfigurationCount} field. */
         @NativeType("uint32_t")
         public int viewConfigurationCount() { return XrSecondaryViewConfigurationFrameEndInfoMSFT.nviewConfigurationCount(address()); }
-        /** Returns a {@link XrSecondaryViewConfigurationLayerInfoMSFT.Buffer} view of the struct array pointed to by the {@code viewConfigurationLayersInfo} field. */
+        /** @return a {@link XrSecondaryViewConfigurationLayerInfoMSFT.Buffer} view of the struct array pointed to by the {@code viewConfigurationLayersInfo} field. */
         @NativeType("XrSecondaryViewConfigurationLayerInfoMSFT const *")
         public XrSecondaryViewConfigurationLayerInfoMSFT.Buffer viewConfigurationLayersInfo() { return XrSecondaryViewConfigurationFrameEndInfoMSFT.nviewConfigurationLayersInfo(address()); }
 

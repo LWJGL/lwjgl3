@@ -12,6 +12,7 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
     javaImport(
         "javax.annotation.*",
         "org.lwjgl.egl.EGL",
+        "org.lwjgl.egl.EGL10",
         "org.lwjgl.opengles.GLES",
         "static org.lwjgl.system.MemoryUtil.*"
     )
@@ -59,12 +60,6 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
     )
 
     customMethod("""
-    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setEGLPath(String)} with the path of the EGL shared library loaded by LWJGL. */
-    @Deprecated
-    public static void setEGLPathLWJGL() {
-        setEGLPath(EGL.getFunctionProvider());
-    }
-
     /**
      * Calls {@link #setEGLPath(String)} with the path of the specified {@link SharedLibrary}.
      * 
@@ -104,12 +99,6 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
         }
     }
     
-    /** Deprecated (to be removed in LWJGL 3.3). Calls {@link #setGLESPath(String)} with the path of the OpenGL ES shared library loaded by LWJGL. */
-    @Deprecated
-    public static void setGLESPathLWJGL() {
-        setGLESPath(GLES.getFunctionProvider());
-    }
-
     /**
      * Calls {@link #setGLESPath(String)} with the path of the specified {@link SharedLibrary}.
      * 

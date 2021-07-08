@@ -16,23 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Frame timing data provided by direct mode drivers.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code m_nSize} &ndash; sSet to {@code sizeof( DriverDirectMode_FrameTiming )}</li>
- * <li>{@code m_nNumFramePresents} &ndash; number of times frame was presented</li>
- * <li>{@code m_nNumMisPresented} &ndash; number of times frame was presented on a vsync other than it was originally predicted to</li>
- * <li>{@code m_nNumDroppedFrames} &ndash; number of additional times previous frame was scanned out (i.e. compositor missed vsync)</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct DriverDirectMode_FrameTiming {
- *     uint32_t m_nSize;
- *     uint32_t m_nNumFramePresents;
- *     uint32_t m_nNumMisPresented;
- *     uint32_t m_nNumDroppedFrames;
+ *     uint32_t {@link #m_nSize};
+ *     uint32_t {@link #m_nNumFramePresents};
+ *     uint32_t {@link #m_nNumMisPresented};
+ *     uint32_t {@link #m_nNumDroppedFrames};
  *     uint32_t m_nReprojectionFlags;
  * }</code></pre>
  */
@@ -85,19 +76,19 @@ public class DriverDirectModeFrameTiming extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code m_nSize} field. */
+    /** sSet to {@code sizeof( DriverDirectMode_FrameTiming )} */
     @NativeType("uint32_t")
     public int m_nSize() { return nm_nSize(address()); }
-    /** Returns the value of the {@code m_nNumFramePresents} field. */
+    /** number of times frame was presented */
     @NativeType("uint32_t")
     public int m_nNumFramePresents() { return nm_nNumFramePresents(address()); }
-    /** Returns the value of the {@code m_nNumMisPresented} field. */
+    /** number of times frame was presented on a vsync other than it was originally predicted to */
     @NativeType("uint32_t")
     public int m_nNumMisPresented() { return nm_nNumMisPresented(address()); }
-    /** Returns the value of the {@code m_nNumDroppedFrames} field. */
+    /** number of additional times previous frame was scanned out (i.e. compositor missed vsync) */
     @NativeType("uint32_t")
     public int m_nNumDroppedFrames() { return nm_nNumDroppedFrames(address()); }
-    /** Returns the value of the {@code m_nReprojectionFlags} field. */
+    /** @return the value of the {@code m_nReprojectionFlags} field. */
     @NativeType("uint32_t")
     public int m_nReprojectionFlags() { return nm_nReprojectionFlags(address()); }
 
@@ -181,19 +172,19 @@ public class DriverDirectModeFrameTiming extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code m_nSize} field. */
+        /** @return the value of the {@link DriverDirectModeFrameTiming#m_nSize} field. */
         @NativeType("uint32_t")
         public int m_nSize() { return DriverDirectModeFrameTiming.nm_nSize(address()); }
-        /** Returns the value of the {@code m_nNumFramePresents} field. */
+        /** @return the value of the {@link DriverDirectModeFrameTiming#m_nNumFramePresents} field. */
         @NativeType("uint32_t")
         public int m_nNumFramePresents() { return DriverDirectModeFrameTiming.nm_nNumFramePresents(address()); }
-        /** Returns the value of the {@code m_nNumMisPresented} field. */
+        /** @return the value of the {@link DriverDirectModeFrameTiming#m_nNumMisPresented} field. */
         @NativeType("uint32_t")
         public int m_nNumMisPresented() { return DriverDirectModeFrameTiming.nm_nNumMisPresented(address()); }
-        /** Returns the value of the {@code m_nNumDroppedFrames} field. */
+        /** @return the value of the {@link DriverDirectModeFrameTiming#m_nNumDroppedFrames} field. */
         @NativeType("uint32_t")
         public int m_nNumDroppedFrames() { return DriverDirectModeFrameTiming.nm_nNumDroppedFrames(address()); }
-        /** Returns the value of the {@code m_nReprojectionFlags} field. */
+        /** @return the value of the {@code m_nReprojectionFlags} field. */
         @NativeType("uint32_t")
         public int m_nReprojectionFlags() { return DriverDirectModeFrameTiming.nm_nReprojectionFlags(address()); }
 

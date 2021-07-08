@@ -17,21 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  * Element of the "Args" list. The key might give more information about what are the semantics of the value, e.g. "Callee" will tell you that the value
  * is a symbol that names a function.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code Key} &ndash; e.g. "Callee"</li>
- * <li>{@code Value} &ndash; e.g. "malloc"</li>
- * <li>{@code DebugLoc} &ndash; "DebugLoc": Optional</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct LLVMOptRemarkArg {
- *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} Key;
- *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} Value;
- *     {@link LLVMOptRemarkDebugLoc LLVMOptRemarkDebugLoc} DebugLoc;
+ *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} {@link #Key};
+ *     {@link LLVMOptRemarkStringRef LLVMOptRemarkStringRef} {@link #Value};
+ *     {@link LLVMOptRemarkDebugLoc LLVMOptRemarkDebugLoc} {@link #DebugLoc};
  * }</code></pre>
  */
 public class LLVMOptRemarkArg extends Struct {
@@ -76,11 +68,11 @@ public class LLVMOptRemarkArg extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code Key} field. */
+    /** e.g. "Callee" */
     public LLVMOptRemarkStringRef Key() { return nKey(address()); }
-    /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code Value} field. */
+    /** e.g. "malloc" */
     public LLVMOptRemarkStringRef Value() { return nValue(address()); }
-    /** Returns a {@link LLVMOptRemarkDebugLoc} view of the {@code DebugLoc} field. */
+    /** "DebugLoc": Optional */
     public LLVMOptRemarkDebugLoc DebugLoc() { return nDebugLoc(address()); }
 
     // -----------------------------------
@@ -159,11 +151,11 @@ public class LLVMOptRemarkArg extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code Key} field. */
+        /** @return a {@link LLVMOptRemarkStringRef} view of the {@link LLVMOptRemarkArg#Key} field. */
         public LLVMOptRemarkStringRef Key() { return LLVMOptRemarkArg.nKey(address()); }
-        /** Returns a {@link LLVMOptRemarkStringRef} view of the {@code Value} field. */
+        /** @return a {@link LLVMOptRemarkStringRef} view of the {@link LLVMOptRemarkArg#Value} field. */
         public LLVMOptRemarkStringRef Value() { return LLVMOptRemarkArg.nValue(address()); }
-        /** Returns a {@link LLVMOptRemarkDebugLoc} view of the {@code DebugLoc} field. */
+        /** @return a {@link LLVMOptRemarkDebugLoc} view of the {@link LLVMOptRemarkArg#DebugLoc} field. */
         public LLVMOptRemarkDebugLoc DebugLoc() { return LLVMOptRemarkArg.nDebugLoc(address()); }
 
     }

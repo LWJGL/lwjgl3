@@ -169,7 +169,12 @@
         <!-- CORE -->
         <build module="core" flags="-Werror -Wfatal-errors -Wall -Wextra -pedantic">
             <source>
-                <arg value="-I${src.main.rel}/dyncall"/>
+                <arg value="-I${src.main.rel}/libffi"/>
+                <arg value="-I${src.main.rel}/libffi/aarch64" if:set="build.arch.arm64"/>
+                <arg value="-I${src.main.rel}/libffi/arm" if:set="build.arch.arm32"/>
+                <arg value="-I${src.main.rel}/libffi/x86" unless:set="build.arch.arm"/>
+                <!-- for libffi/x86/ffitarget.h -->
+                <arg value="-DX86_64" if:set="build.arch.x64"/>
                 <fileset dir=".">
                     <include name="${src.main}/*.c"/>
                     <include name="${src.generated}/*.c"/>
@@ -179,14 +184,12 @@
             </source>
             <beforeLink>
                 <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency module="core" artifact="core/libdyncall_s.a"/>
-                    <update-dependency module="core" artifact="core/libdyncallback_s.a"/>
-                    <update-dependency module="core" artifact="core/libdynload_s.a"/>
+                    <update-dependency module="core" artifact="core/libffi.a"/>
                 </parallel>
             </beforeLink>
             <link>
                 <fileset dir="${lib.native}/org/lwjgl">
-                    <include name="libdyn*.a"/>
+                    <include name="libffi.a"/>
                 </fileset>
                 <arg value="-ldl"/>
             </link>
@@ -282,18 +285,14 @@
                     <arg value="-I${module.lwjgl.rel}/xxhash/src/main/c"/>
                     <fileset dir="." includes="${src.main}/*.c"/>
                     <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxhash.c"/>
-                    <!--<fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxh_x86dispatch.c" unless:set="build.arch.arm"/>-->
                 </compile>
             </beforeCompile>
         </build>
 
         <!-- Meow -->
         <local name="meow.flags"/>
-        <condition property="meow.flags" value="-maes -msse4.2" else="-march=armv8-a+crypto">
-            <or>
-                <isset property="build.arch.x64"/>
-                <isset property="build.arch.x86"/>
-            </or>
+        <condition property="meow.flags" value="-march=armv8-a+crypto" else="-maes -msse4.2">
+            <isset property="build.arch.arm"/>
         </condition>
         <build module="meow" simple="true" flags="-Werror -Wfatal-errors ${meow.flags}" if:true="${binding.meow}"/>
 
@@ -320,14 +319,13 @@
         <!-- NativeFileDialog -->
         <build module="nfd" simple="true" if:true="${binding.nfd}">
             <beforeCompile>
-                <local name="gtk3"/>
-                <local name="stderr"/>
-                <exec outputproperty="gtk3" errorproperty="stderr" executable="pkg-config" failonerror="true" taskname="gtk-3.0">
-                    <arg line="--cflags gtk+-3.0"/>
-                </exec>
+                <local name="linux.triplet"/>
+                <condition property="linux.triplet" value="x86_64-linux-gnu"><not><isset property="build.arch.arm"/></not></condition>
+                <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
+                <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
 
                 <compile>
-                    <arg line="${gtk3}"/>
+                    <arg line="-I/usr/include/gtk-3.0 -I/usr/include/glib-2.0 -I/usr/lib/${linux.triplet}/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0"/>
                     <arg value="-I${src.main.rel}"/>
                     <arg value="-I${src.main.rel}/include"/>
                     <fileset dir="." includes="${src.main}/nfd_common.c"/>
@@ -382,11 +380,10 @@
 
         <!-- rpmalloc: requires GCC 4.9 or higher -->
         <local name="rpmalloc.gcc"/>
-        <condition property="rpmalloc.gcc" value="${gcc.prefix}gcc-4.9">
+        <condition property="rpmalloc.gcc" value="${gcc.prefix}gcc-4.9" else="${gcc.prefix}gcc${gcc.suffix}">
             <matches string="${gcc.version}" pattern="[1-3]\.\d|4\.[0-8]"/>
         </condition>
-        <build_simple module="rpmalloc" unless:set="rpmalloc.gcc"/>
-        <build_simple module="rpmalloc" gcc.exec="${rpmalloc.gcc}" if:set="rpmalloc.gcc"/>
+        <build_simple module="rpmalloc" gcc.exec="${rpmalloc.gcc}"/>
 
         <!-- SSE -->
         <build module="sse" simple="true" if:true="${binding.sse}">
@@ -465,12 +462,20 @@
             </source>
         </build>
 
-        <!-- xxHash -->
-        <build module="xxhash" if:true="${binding.xxhash}">
+        <!-- xxHash: build with GCC 4.9 or higher for AVX-512 dispatching -->
+        <local name="xxhash.gcc"/>
+        <condition property="xxhash.gcc" value="${gcc.prefix}gcc-4.9" else="${gcc.prefix}gcc${gcc.suffix}">
+            <matches string="${gcc.version}" pattern="[1-3]\.\d|4\.[0-8]"/>
+        </condition>
+        <local name="xxhash.flags"/>
+        <condition property="xxhash.flags" value="" else="-mavx512f">
+            <isset property="build.arch.arm"/>
+        </condition>
+        <build module="xxhash" flags="-Werror -Wfatal-errors ${xxhash.flags}" gcc.exec="${xxhash.gcc}" if:true="${binding.xxhash}">
             <source>
                 <arg value="-I${src.main.rel}"/>
                 <fileset dir="." includes="${src.generated}/*.c"/>
-                <!--<fileset dir="." includes="${src.main}/xxh_x86dispatch.c" unless:set="build.arch.arm"/>-->
+                <fileset dir="." includes="${src.main}/xxh_x86dispatch.c" unless:set="build.arch.arm"/>
             </source>
         </build>
 
@@ -494,7 +499,6 @@
                     <fileset dir="." includes="${src.main}/decompress/*.c"/>
                     <fileset dir="." includes="${src.main}/dictBuilder/*.c"/>
                     <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxhash.c"/>
-                    <!--<fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxh_x86dispatch.c" unless:set="build.arch.arm"/>-->
                 </compile>
             </beforeCompile>
             <source>
@@ -527,7 +531,6 @@
             <update-dependency module="openvr" artifact="libopenvr_api.so"/>
             <update-dependency module="opus" artifact="libopus.so"/>
             <update-dependency module="shaderc" artifact="libshaderc.so"/>
-            <update-dependency module="shaderc" artifact="libshaderc_spvc.so"/>
             <update-dependency module="spvc" artifact="libspirv-cross.so"/>
 
             </parallel>

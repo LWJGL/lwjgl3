@@ -11,13 +11,13 @@ import vulkan.*
 val NV_shader_sm_builtins = "NVShaderSmBuiltins".nativeClassVK("NV_shader_sm_builtins", type = "device", postfix = NV) {
     documentation =
         """
-        <h5>Description</h5>
         This extension provides the ability to determine device-specific properties on NVIDIA GPUs. It provides the number of streaming multiprocessors (SMs), the maximum number of warps (subgroups) that can run on an SM, and shader builtins to enable invocations to identify which SM and warp a shader invocation is executing on.
 
         This extension enables support for the SPIR-V {@code ShaderSMBuiltinsNV} capability.
 
         These properties and built-ins <b>should</b> typically only be used for debugging purposes.
 
+        <h5>VK_NV_shader_sm_builtins</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_shader_sm_builtins}</dd>
@@ -40,7 +40,10 @@ val NV_shader_sm_builtins = "NVShaderSmBuiltins".nativeClassVK("NV_shader_sm_bui
             <dd><ul>
                 <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_shader_sm_builtins:%20&amp;body=@dgkoch%20">dgkoch</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-05-28</dd>
 

@@ -75,6 +75,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBRobustness {
 
+    static { GL.initialize(); }
+
     /** Returned by GetGraphicsResetStatusARB. */
     public static final int
         GL_GUILTY_CONTEXT_RESET_ARB   = 0x8253,
@@ -91,8 +93,6 @@ public class ARBRobustness {
 
     /** Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS. */
     public static final int GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT_ARB = 0x4;
-
-    static { GL.initialize(); }
 
     protected ARBRobustness() {
         throw new UnsupportedOperationException();

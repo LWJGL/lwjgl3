@@ -39,6 +39,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL32C extends GL31C {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetIntegerv. */
     public static final int GL_CONTEXT_PROFILE_MASK = 0x9126;
 
@@ -191,8 +193,6 @@ public class GL32C extends GL31C {
         GL_TIMEOUT_EXPIRED     = 0x911B,
         GL_CONDITION_SATISFIED = 0x911C,
         GL_WAIT_FAILED         = 0x911D;
-
-    static { GL.initialize(); }
 
     protected GL32C() {
         throw new UnsupportedOperationException();

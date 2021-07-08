@@ -23,28 +23,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_EVENT_CREATE_INFO STRUCTURE_TYPE_EVENT_CREATE_INFO}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
+ * <li>{@code flags} <b>must</b> be a valid combination of {@code VkEventCreateFlagBits} values</li>
  * </ul>
  * 
  * <h5>See Also</h5>
  * 
  * <p>{@link VK10#vkCreateEvent CreateEvent}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkEventCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkEventCreateFlags flags;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkEventCreateFlags {@link #flags};
  * }</code></pre>
  */
 public class VkEventCreateInfo extends Struct implements NativeResource {
@@ -89,21 +81,21 @@ public class VkEventCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkEventCreateFlagBits} defining additional creation parameters. */
     @NativeType("VkEventCreateFlags")
     public int flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkEventCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkEventCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkEventCreateInfo flags(@NativeType("VkEventCreateFlags") int value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -326,21 +318,21 @@ public class VkEventCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkEventCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkEventCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkEventCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkEventCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkEventCreateInfo#flags} field. */
         @NativeType("VkEventCreateFlags")
         public int flags() { return VkEventCreateInfo.nflags(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkEventCreateInfo#sType} field. */
         public VkEventCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkEventCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkEventCreateInfo#pNext} field. */
         public VkEventCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkEventCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkEventCreateInfo#flags} field. */
         public VkEventCreateInfo.Buffer flags(@NativeType("VkEventCreateFlags") int value) { VkEventCreateInfo.nflags(address(), value); return this; }
 
     }

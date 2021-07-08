@@ -11,8 +11,9 @@ import vulkan.*
 val EXT_direct_mode_display = "EXTDirectModeDisplay".nativeClassVK("EXT_direct_mode_display", type = "instance", postfix = EXT) {
     documentation =
         """
-        This is extension, along with related platform exentions, allows applications to take exclusive control of displays associated with a native windowing system. This is especially useful for virtual reality applications that wish to hide HMDs (head mounted displays) from the native platform's display management system, desktop, and/or other applications.
+        This is extension, along with related platform extensions, allows applications to take exclusive control of displays associated with a native windowing system. This is especially useful for virtual reality applications that wish to hide HMDs (head mounted displays) from the native platform's display management system, desktop, and/or other applications.
 
+        <h5>VK_EXT_direct_mode_display</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_direct_mode_display}</dd>
@@ -36,7 +37,10 @@ val EXT_direct_mode_display = "EXTDirectModeDisplay".nativeClassVK("EXT_direct_m
             <dd><ul>
                 <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_direct_mode_display:%20&amp;body=@cubanismo%20">cubanismo</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-12-13</dd>
 
@@ -83,6 +87,7 @@ val EXT_direct_mode_display = "EXTDirectModeDisplay".nativeClassVK("EXT_direct_m
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
             <li>{@code display} <b>must</b> be a valid {@code VkDisplayKHR} handle</li>
+            <li>{@code display} <b>must</b> have been created, allocated, or retrieved from {@code physicalDevice}</li>
         </ul>
 
         <h5>Return Codes</h5>

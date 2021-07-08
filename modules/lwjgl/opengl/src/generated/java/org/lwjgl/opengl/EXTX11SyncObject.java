@@ -29,10 +29,10 @@ import org.lwjgl.system.*;
  */
 public class EXTX11SyncObject {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code external_sync_type} parameter of ImportSyncEXT. */
     public static final int GL_SYNC_X11_FENCE_EXT = 0x90E1;
-
-    static { GL.initialize(); }
 
     protected EXTX11SyncObject() {
         throw new UnsupportedOperationException();

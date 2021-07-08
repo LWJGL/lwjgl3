@@ -42,6 +42,8 @@ import org.lwjgl.system.*;
  */
 public class GL30 extends GL21 {
 
+    static { GL.initialize(); }
+
     /** GetTarget */
     public static final int
         GL_MAJOR_VERSION                       = 0x821B,
@@ -473,8 +475,6 @@ public class GL30 extends GL21 {
      * GetDoublev.
      */
     public static final int GL_FRAMEBUFFER_SRGB = 0x8DB9;
-
-    static { GL.initialize(); }
 
     protected GL30() {
         throw new UnsupportedOperationException();

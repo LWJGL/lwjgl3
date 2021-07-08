@@ -71,16 +71,16 @@ public class XrSessionCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code createFlags} field. */
+    /** @return the value of the {@code createFlags} field. */
     @NativeType("XrSessionCreateFlags")
     public long createFlags() { return ncreateFlags(address()); }
-    /** Returns the value of the {@code systemId} field. */
+    /** @return the value of the {@code systemId} field. */
     @NativeType("XrSystemId")
     public long systemId() { return nsystemId(address()); }
 
@@ -319,16 +319,16 @@ public class XrSessionCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSessionCreateInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSessionCreateInfo.nnext(address()); }
-        /** Returns the value of the {@code createFlags} field. */
+        /** @return the value of the {@code createFlags} field. */
         @NativeType("XrSessionCreateFlags")
         public long createFlags() { return XrSessionCreateInfo.ncreateFlags(address()); }
-        /** Returns the value of the {@code systemId} field. */
+        /** @return the value of the {@code systemId} field. */
         @NativeType("XrSystemId")
         public long systemId() { return XrSessionCreateInfo.nsystemId(address()); }
 

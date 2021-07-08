@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Defines the x- and y- coordinates of a point.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code x} &ndash; the x-coordinate of the point</li>
- * <li>{@code y} &ndash; the y-coordinate of the point</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct POINT {
- *     LONG x;
- *     LONG y;
+ *     LONG {@link #x};
+ *     LONG {@link #y};
  * }</code></pre>
  */
 public class POINT extends Struct implements NativeResource {
@@ -72,16 +65,16 @@ public class POINT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** the x-coordinate of the point */
     @NativeType("LONG")
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** the y-coordinate of the point */
     @NativeType("LONG")
     public int y() { return ny(address()); }
 
-    /** Sets the specified value to the {@code x} field. */
+    /** Sets the specified value to the {@link #x} field. */
     public POINT x(@NativeType("LONG") int value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@code y} field. */
+    /** Sets the specified value to the {@link #y} field. */
     public POINT y(@NativeType("LONG") int value) { ny(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -298,16 +291,16 @@ public class POINT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link POINT#x} field. */
         @NativeType("LONG")
         public int x() { return POINT.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@link POINT#y} field. */
         @NativeType("LONG")
         public int y() { return POINT.ny(address()); }
 
-        /** Sets the specified value to the {@code x} field. */
+        /** Sets the specified value to the {@link POINT#x} field. */
         public POINT.Buffer x(@NativeType("LONG") int value) { POINT.nx(address(), value); return this; }
-        /** Sets the specified value to the {@code y} field. */
+        /** Sets the specified value to the {@link POINT#y} field. */
         public POINT.Buffer y(@NativeType("LONG") int value) { POINT.ny(address(), value); return this; }
 
     }

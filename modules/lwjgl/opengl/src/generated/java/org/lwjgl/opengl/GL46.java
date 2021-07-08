@@ -34,6 +34,8 @@ import org.lwjgl.system.*;
  */
 public class GL46 extends GL45 {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv,
      * MapBufferRange, FlushMappedBufferRange, GetBufferParameteriv, and CopyBufferSubData.
@@ -90,8 +92,6 @@ public class GL46 extends GL45 {
     public static final int
         GL_TRANSFORM_FEEDBACK_OVERFLOW        = 0x82EC,
         GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW = 0x82ED;
-
-    static { GL.initialize(); }
 
     protected GL46() {
         throw new UnsupportedOperationException();

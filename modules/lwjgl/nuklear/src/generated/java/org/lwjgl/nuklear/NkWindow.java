@@ -126,60 +126,60 @@ public class NkWindow extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code seq} field. */
+    /** @return the value of the {@code seq} field. */
     @NativeType("unsigned int")
     public int seq() { return nseq(address()); }
-    /** Returns the value of the {@code name} field. */
+    /** @return the value of the {@code name} field. */
     @NativeType("nk_hash")
     public int name() { return nname(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code name_string} field. */
+    /** @return a {@link ByteBuffer} view of the {@code name_string} field. */
     @NativeType("char[64]")
     public ByteBuffer name_string() { return nname_string(address()); }
-    /** Decodes the null-terminated string stored in the {@code name_string} field. */
+    /** @return the null-terminated string stored in the {@code name_string} field. */
     @NativeType("char[64]")
     public String name_stringString() { return nname_stringString(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("nk_flags")
     public int flags() { return nflags(address()); }
-    /** Returns a {@link NkRect} view of the {@code bounds} field. */
+    /** @return a {@link NkRect} view of the {@code bounds} field. */
     @NativeType("struct nk_rect")
     public NkRect bounds() { return nbounds(address()); }
-    /** Returns a {@link NkScroll} view of the {@code scrollbar} field. */
+    /** @return a {@link NkScroll} view of the {@code scrollbar} field. */
     @NativeType("struct nk_scroll")
     public NkScroll scrollbar() { return nscrollbar(address()); }
-    /** Returns a {@link NkCommandBuffer} view of the {@code buffer} field. */
+    /** @return a {@link NkCommandBuffer} view of the {@code buffer} field. */
     @NativeType("struct nk_command_buffer")
     public NkCommandBuffer buffer() { return nbuffer(address()); }
-    /** Returns a {@link NkPanel} view of the struct pointed to by the {@code layout} field. */
+    /** @return a {@link NkPanel} view of the struct pointed to by the {@code layout} field. */
     @NativeType("struct nk_panel *")
     public NkPanel layout() { return nlayout(address()); }
-    /** Returns the value of the {@code scrollbar_hiding_timer} field. */
+    /** @return the value of the {@code scrollbar_hiding_timer} field. */
     public float scrollbar_hiding_timer() { return nscrollbar_hiding_timer(address()); }
-    /** Returns a {@link NkPropertyState} view of the {@code property} field. */
+    /** @return a {@link NkPropertyState} view of the {@code property} field. */
     @NativeType("struct nk_property_state")
     public NkPropertyState property() { return nproperty(address()); }
-    /** Returns a {@link NkPopupState} view of the {@code popup} field. */
+    /** @return a {@link NkPopupState} view of the {@code popup} field. */
     @NativeType("struct nk_popup_state")
     public NkPopupState popup() { return npopup(address()); }
-    /** Returns a {@link NkEditState} view of the {@code edit} field. */
+    /** @return a {@link NkEditState} view of the {@code edit} field. */
     @NativeType("struct nk_edit_state")
     public NkEditState edit() { return nedit(address()); }
-    /** Returns the value of the {@code scrolled} field. */
+    /** @return the value of the {@code scrolled} field. */
     @NativeType("unsigned int")
     public int scrolled() { return nscrolled(address()); }
-    /** Returns the value of the {@code tables} field. */
+    /** @return the value of the {@code tables} field. */
     @NativeType("struct nk_table *")
     public long tables() { return ntables(address()); }
-    /** Returns the value of the {@code table_count} field. */
+    /** @return the value of the {@code table_count} field. */
     @NativeType("unsigned int")
     public int table_count() { return ntable_count(address()); }
-    /** Returns a {@link NkWindow} view of the struct pointed to by the {@code next} field. */
+    /** @return a {@link NkWindow} view of the struct pointed to by the {@code next} field. */
     @NativeType("struct nk_window *")
     public NkWindow next() { return nnext(address()); }
-    /** Returns a {@link NkWindow} view of the struct pointed to by the {@code prev} field. */
+    /** @return a {@link NkWindow} view of the struct pointed to by the {@code prev} field. */
     @NativeType("struct nk_window *")
     public NkWindow prev() { return nprev(address()); }
-    /** Returns a {@link NkWindow} view of the struct pointed to by the {@code parent} field. */
+    /** @return a {@link NkWindow} view of the struct pointed to by the {@code parent} field. */
     @NativeType("struct nk_window *")
     public NkWindow parent() { return nparent(address()); }
 
@@ -291,60 +291,60 @@ public class NkWindow extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code seq} field. */
+        /** @return the value of the {@code seq} field. */
         @NativeType("unsigned int")
         public int seq() { return NkWindow.nseq(address()); }
-        /** Returns the value of the {@code name} field. */
+        /** @return the value of the {@code name} field. */
         @NativeType("nk_hash")
         public int name() { return NkWindow.nname(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code name_string} field. */
+        /** @return a {@link ByteBuffer} view of the {@code name_string} field. */
         @NativeType("char[64]")
         public ByteBuffer name_string() { return NkWindow.nname_string(address()); }
-        /** Decodes the null-terminated string stored in the {@code name_string} field. */
+        /** @return the null-terminated string stored in the {@code name_string} field. */
         @NativeType("char[64]")
         public String name_stringString() { return NkWindow.nname_stringString(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("nk_flags")
         public int flags() { return NkWindow.nflags(address()); }
-        /** Returns a {@link NkRect} view of the {@code bounds} field. */
+        /** @return a {@link NkRect} view of the {@code bounds} field. */
         @NativeType("struct nk_rect")
         public NkRect bounds() { return NkWindow.nbounds(address()); }
-        /** Returns a {@link NkScroll} view of the {@code scrollbar} field. */
+        /** @return a {@link NkScroll} view of the {@code scrollbar} field. */
         @NativeType("struct nk_scroll")
         public NkScroll scrollbar() { return NkWindow.nscrollbar(address()); }
-        /** Returns a {@link NkCommandBuffer} view of the {@code buffer} field. */
+        /** @return a {@link NkCommandBuffer} view of the {@code buffer} field. */
         @NativeType("struct nk_command_buffer")
         public NkCommandBuffer buffer() { return NkWindow.nbuffer(address()); }
-        /** Returns a {@link NkPanel} view of the struct pointed to by the {@code layout} field. */
+        /** @return a {@link NkPanel} view of the struct pointed to by the {@code layout} field. */
         @NativeType("struct nk_panel *")
         public NkPanel layout() { return NkWindow.nlayout(address()); }
-        /** Returns the value of the {@code scrollbar_hiding_timer} field. */
+        /** @return the value of the {@code scrollbar_hiding_timer} field. */
         public float scrollbar_hiding_timer() { return NkWindow.nscrollbar_hiding_timer(address()); }
-        /** Returns a {@link NkPropertyState} view of the {@code property} field. */
+        /** @return a {@link NkPropertyState} view of the {@code property} field. */
         @NativeType("struct nk_property_state")
         public NkPropertyState property() { return NkWindow.nproperty(address()); }
-        /** Returns a {@link NkPopupState} view of the {@code popup} field. */
+        /** @return a {@link NkPopupState} view of the {@code popup} field. */
         @NativeType("struct nk_popup_state")
         public NkPopupState popup() { return NkWindow.npopup(address()); }
-        /** Returns a {@link NkEditState} view of the {@code edit} field. */
+        /** @return a {@link NkEditState} view of the {@code edit} field. */
         @NativeType("struct nk_edit_state")
         public NkEditState edit() { return NkWindow.nedit(address()); }
-        /** Returns the value of the {@code scrolled} field. */
+        /** @return the value of the {@code scrolled} field. */
         @NativeType("unsigned int")
         public int scrolled() { return NkWindow.nscrolled(address()); }
-        /** Returns the value of the {@code tables} field. */
+        /** @return the value of the {@code tables} field. */
         @NativeType("struct nk_table *")
         public long tables() { return NkWindow.ntables(address()); }
-        /** Returns the value of the {@code table_count} field. */
+        /** @return the value of the {@code table_count} field. */
         @NativeType("unsigned int")
         public int table_count() { return NkWindow.ntable_count(address()); }
-        /** Returns a {@link NkWindow} view of the struct pointed to by the {@code next} field. */
+        /** @return a {@link NkWindow} view of the struct pointed to by the {@code next} field. */
         @NativeType("struct nk_window *")
         public NkWindow next() { return NkWindow.nnext(address()); }
-        /** Returns a {@link NkWindow} view of the struct pointed to by the {@code prev} field. */
+        /** @return a {@link NkWindow} view of the struct pointed to by the {@code prev} field. */
         @NativeType("struct nk_window *")
         public NkWindow prev() { return NkWindow.nprev(address()); }
-        /** Returns a {@link NkWindow} view of the struct pointed to by the {@code parent} field. */
+        /** @return a {@link NkWindow} view of the struct pointed to by the {@code parent} field. */
         @NativeType("struct nk_window *")
         public NkWindow parent() { return NkWindow.nparent(address()); }
 

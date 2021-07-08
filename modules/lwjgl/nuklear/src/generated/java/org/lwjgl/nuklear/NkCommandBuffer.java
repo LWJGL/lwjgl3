@@ -82,25 +82,25 @@ public class NkCommandBuffer extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkBuffer} view of the struct pointed to by the {@code base} field. */
+    /** @return a {@link NkBuffer} view of the struct pointed to by the {@code base} field. */
     @Nullable
     @NativeType("struct nk_buffer *")
     public NkBuffer base() { return nbase(address()); }
-    /** Returns a {@link NkRect} view of the {@code clip} field. */
+    /** @return a {@link NkRect} view of the {@code clip} field. */
     @NativeType("struct nk_rect")
     public NkRect clip() { return nclip(address()); }
-    /** Returns the value of the {@code use_clipping} field. */
+    /** @return the value of the {@code use_clipping} field. */
     public int use_clipping() { return nuse_clipping(address()); }
-    /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+    /** @return a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
-    /** Returns the value of the {@code begin} field. */
+    /** @return the value of the {@code begin} field. */
     @NativeType("nk_size")
     public long begin() { return nbegin(address()); }
-    /** Returns the value of the {@code end} field. */
+    /** @return the value of the {@code end} field. */
     @NativeType("nk_size")
     public long end() { return nend(address()); }
-    /** Returns the value of the {@code last} field. */
+    /** @return the value of the {@code last} field. */
     @NativeType("nk_size")
     public long last() { return nlast(address()); }
 
@@ -188,25 +188,25 @@ public class NkCommandBuffer extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkBuffer} view of the struct pointed to by the {@code base} field. */
+        /** @return a {@link NkBuffer} view of the struct pointed to by the {@code base} field. */
         @Nullable
         @NativeType("struct nk_buffer *")
         public NkBuffer base() { return NkCommandBuffer.nbase(address()); }
-        /** Returns a {@link NkRect} view of the {@code clip} field. */
+        /** @return a {@link NkRect} view of the {@code clip} field. */
         @NativeType("struct nk_rect")
         public NkRect clip() { return NkCommandBuffer.nclip(address()); }
-        /** Returns the value of the {@code use_clipping} field. */
+        /** @return the value of the {@code use_clipping} field. */
         public int use_clipping() { return NkCommandBuffer.nuse_clipping(address()); }
-        /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+        /** @return a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkCommandBuffer.nuserdata(address()); }
-        /** Returns the value of the {@code begin} field. */
+        /** @return the value of the {@code begin} field. */
         @NativeType("nk_size")
         public long begin() { return NkCommandBuffer.nbegin(address()); }
-        /** Returns the value of the {@code end} field. */
+        /** @return the value of the {@code end} field. */
         @NativeType("nk_size")
         public long end() { return NkCommandBuffer.nend(address()); }
-        /** Returns the value of the {@code last} field. */
+        /** @return the value of the {@code last} field. */
         @NativeType("nk_size")
         public long last() { return NkCommandBuffer.nlast(address()); }
 

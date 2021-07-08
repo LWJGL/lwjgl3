@@ -256,6 +256,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class STBTruetype {
 
+    static { LibSTB.initialize(); }
+
     /** Vertex type. */
     public static final byte
         STBTT_vmove  = 1,
@@ -335,8 +337,6 @@ public class STBTruetype {
         STBTT_MAC_LANG_SWEDISH            = 5,
         STBTT_MAC_LANG_CHINESE_SIMPLIFIED = 33,
         STBTT_MAC_LANG_CHINESE_TRAD       = 19;
-
-    static { LibSTB.initialize(); }
 
     protected STBTruetype() {
         throw new UnsupportedOperationException();

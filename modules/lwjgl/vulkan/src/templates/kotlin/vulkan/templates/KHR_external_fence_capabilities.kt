@@ -16,6 +16,7 @@ val KHR_external_fence_capabilities = "KHRExternalFenceCapabilities".nativeClass
         <h5>Promotion to Vulkan 1.1</h5>
         All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
+        <h5>VK_KHR_external_fence_capabilities</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_external_fence_capabilities}</dd>
@@ -44,7 +45,10 @@ val KHR_external_fence_capabilities = "KHRExternalFenceCapabilities".nativeClass
             <dd><ul>
                 <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_external_fence_capabilities:%20&amp;body=@critsec%20">critsec</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-05-08</dd>
 
@@ -83,7 +87,8 @@ val KHR_external_fence_capabilities = "KHRExternalFenceCapabilities".nativeClass
         "Extends {@code VkStructureType}.",
 
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR".."1000112000",
-        "STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES_KHR".."1000112001"
+        "STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES_KHR".."1000112001",
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR".."1000071004"
     )
 
     EnumConstant(

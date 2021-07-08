@@ -72,16 +72,16 @@ public class XrSpatialAnchorSpaceCreateInfoMSFT extends Struct implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code anchor} field. */
+    /** @return the value of the {@code anchor} field. */
     @NativeType("XrSpatialAnchorMSFT")
     public long anchor() { return nanchor(address()); }
-    /** Returns a {@link XrPosef} view of the {@code poseInAnchorSpace} field. */
+    /** @return a {@link XrPosef} view of the {@code poseInAnchorSpace} field. */
     public XrPosef poseInAnchorSpace() { return nposeInAnchorSpace(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -342,16 +342,16 @@ public class XrSpatialAnchorSpaceCreateInfoMSFT extends Struct implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorSpaceCreateInfoMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpatialAnchorSpaceCreateInfoMSFT.nnext(address()); }
-        /** Returns the value of the {@code anchor} field. */
+        /** @return the value of the {@code anchor} field. */
         @NativeType("XrSpatialAnchorMSFT")
         public long anchor() { return XrSpatialAnchorSpaceCreateInfoMSFT.nanchor(address()); }
-        /** Returns a {@link XrPosef} view of the {@code poseInAnchorSpace} field. */
+        /** @return a {@link XrPosef} view of the {@code poseInAnchorSpace} field. */
         public XrPosef poseInAnchorSpace() { return XrSpatialAnchorSpaceCreateInfoMSFT.nposeInAnchorSpace(address()); }
 
         /** Sets the specified value to the {@code type} field. */

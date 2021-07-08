@@ -75,19 +75,19 @@ public class XrFrameState extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code predictedDisplayTime} field. */
+    /** @return the value of the {@code predictedDisplayTime} field. */
     @NativeType("XrTime")
     public long predictedDisplayTime() { return npredictedDisplayTime(address()); }
-    /** Returns the value of the {@code predictedDisplayPeriod} field. */
+    /** @return the value of the {@code predictedDisplayPeriod} field. */
     @NativeType("XrDuration")
     public long predictedDisplayPeriod() { return npredictedDisplayPeriod(address()); }
-    /** Returns the value of the {@code shouldRender} field. */
+    /** @return the value of the {@code shouldRender} field. */
     @NativeType("XrBool32")
     public boolean shouldRender() { return nshouldRender(address()) != 0; }
 
@@ -334,19 +334,19 @@ public class XrFrameState extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFrameState.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrFrameState.nnext(address()); }
-        /** Returns the value of the {@code predictedDisplayTime} field. */
+        /** @return the value of the {@code predictedDisplayTime} field. */
         @NativeType("XrTime")
         public long predictedDisplayTime() { return XrFrameState.npredictedDisplayTime(address()); }
-        /** Returns the value of the {@code predictedDisplayPeriod} field. */
+        /** @return the value of the {@code predictedDisplayPeriod} field. */
         @NativeType("XrDuration")
         public long predictedDisplayPeriod() { return XrFrameState.npredictedDisplayPeriod(address()); }
-        /** Returns the value of the {@code shouldRender} field. */
+        /** @return the value of the {@code shouldRender} field. */
         @NativeType("XrBool32")
         public boolean shouldRender() { return XrFrameState.nshouldRender(address()) != 0; }
 

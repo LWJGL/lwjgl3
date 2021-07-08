@@ -60,9 +60,9 @@ import static org.lwjgl.vulkan.VK10.*;
  * <p>For each pair of elements <b>X</b> and <b>Y</b> returned in {@code memoryTypes}, <b>X</b> <b>must</b> be placed at a lower index position than <b>Y</b> if:</p>
  * 
  * <ul>
- * <li>either the set of bit flags returned in the {@code propertyFlags} member of <b>X</b> is a strict subset of the set of bit flags returned in the {@code propertyFlags} member of <b>Y</b>; or</li>
+ * <li>the set of bit flags returned in the {@code propertyFlags} member of <b>X</b> is a strict subset of the set of bit flags returned in the {@code propertyFlags} member of <b>Y</b>; or</li>
  * <li>the {@code propertyFlags} members of <b>X</b> and <b>Y</b> are equal, and <b>X</b> belongs to a memory heap with greater performance (as determined in an implementation-specific manner) ; or</li>
- * <li>or the {@code propertyFlags} members of <b>X</b> includes {@link AMDDeviceCoherentMemory#VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD} or {@link AMDDeviceCoherentMemory#VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD} and <b>Y</b> does not</li>
+ * <li>the {@code propertyFlags} members of <b>Y</b> includes {@link AMDDeviceCoherentMemory#VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD} or {@link AMDDeviceCoherentMemory#VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD} and <b>X</b> does not</li>
  * </ul>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -115,23 +115,14 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <p>{@link VkMemoryHeap}, {@link VkMemoryType}, {@link VkPhysicalDeviceMemoryProperties2}, {@link VK10#vkGetPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code memoryTypeCount} &ndash; the number of valid elements in the {@code memoryTypes} array.</li>
- * <li>{@code memoryTypes[VK_MAX_MEMORY_TYPES]} &ndash; an array of {@link VK10#VK_MAX_MEMORY_TYPES MAX_MEMORY_TYPES} {@link VkMemoryType} structures describing the <em>memory types</em> that <b>can</b> be used to access memory allocated from the heaps specified by {@code memoryHeaps}.</li>
- * <li>{@code memoryHeapCount} &ndash; the number of valid elements in the {@code memoryHeaps} array.</li>
- * <li>{@code memoryHeaps[VK_MAX_MEMORY_HEAPS]} &ndash; an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@link VkMemoryHeap} structures describing the <em>memory heaps</em> from which memory <b>can</b> be allocated.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceMemoryProperties {
- *     uint32_t memoryTypeCount;
- *     {@link VkMemoryType VkMemoryType} memoryTypes[VK_MAX_MEMORY_TYPES];
- *     uint32_t memoryHeapCount;
- *     {@link VkMemoryHeap VkMemoryHeap} memoryHeaps[VK_MAX_MEMORY_HEAPS];
+ *     uint32_t {@link #memoryTypeCount};
+ *     {@link VkMemoryType VkMemoryType} {@link #memoryTypes}[VK_MAX_MEMORY_TYPES];
+ *     uint32_t {@link #memoryHeapCount};
+ *     {@link VkMemoryHeap VkMemoryHeap} {@link #memoryHeaps}[VK_MAX_MEMORY_HEAPS];
  * }</code></pre>
  */
 public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeResource {
@@ -179,21 +170,21 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code memoryTypeCount} field. */
+    /** the number of valid elements in the {@code memoryTypes} array. */
     @NativeType("uint32_t")
     public int memoryTypeCount() { return nmemoryTypeCount(address()); }
-    /** Returns a {@link VkMemoryType}.Buffer view of the {@code memoryTypes} field. */
+    /** an array of {@link VK10#VK_MAX_MEMORY_TYPES MAX_MEMORY_TYPES} {@link VkMemoryType} structures describing the <em>memory types</em> that <b>can</b> be used to access memory allocated from the heaps specified by {@code memoryHeaps}. */
     @NativeType("VkMemoryType[VK_MAX_MEMORY_TYPES]")
     public VkMemoryType.Buffer memoryTypes() { return nmemoryTypes(address()); }
-    /** Returns a {@link VkMemoryType} view of the struct at the specified index of the {@code memoryTypes} field. */
+    /** an array of {@link VK10#VK_MAX_MEMORY_TYPES MAX_MEMORY_TYPES} {@link VkMemoryType} structures describing the <em>memory types</em> that <b>can</b> be used to access memory allocated from the heaps specified by {@code memoryHeaps}. */
     public VkMemoryType memoryTypes(int index) { return nmemoryTypes(address(), index); }
-    /** Returns the value of the {@code memoryHeapCount} field. */
+    /** the number of valid elements in the {@code memoryHeaps} array. */
     @NativeType("uint32_t")
     public int memoryHeapCount() { return nmemoryHeapCount(address()); }
-    /** Returns a {@link VkMemoryHeap}.Buffer view of the {@code memoryHeaps} field. */
+    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@link VkMemoryHeap} structures describing the <em>memory heaps</em> from which memory <b>can</b> be allocated. */
     @NativeType("VkMemoryHeap[VK_MAX_MEMORY_HEAPS]")
     public VkMemoryHeap.Buffer memoryHeaps() { return nmemoryHeaps(address()); }
-    /** Returns a {@link VkMemoryHeap} view of the struct at the specified index of the {@code memoryHeaps} field. */
+    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@link VkMemoryHeap} structures describing the <em>memory heaps</em> from which memory <b>can</b> be allocated. */
     public VkMemoryHeap memoryHeaps(int index) { return nmemoryHeaps(address(), index); }
 
     // -----------------------------------
@@ -394,21 +385,21 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code memoryTypeCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMemoryProperties#memoryTypeCount} field. */
         @NativeType("uint32_t")
         public int memoryTypeCount() { return VkPhysicalDeviceMemoryProperties.nmemoryTypeCount(address()); }
-        /** Returns a {@link VkMemoryType}.Buffer view of the {@code memoryTypes} field. */
+        /** @return a {@link VkMemoryType}.Buffer view of the {@link VkPhysicalDeviceMemoryProperties#memoryTypes} field. */
         @NativeType("VkMemoryType[VK_MAX_MEMORY_TYPES]")
         public VkMemoryType.Buffer memoryTypes() { return VkPhysicalDeviceMemoryProperties.nmemoryTypes(address()); }
-        /** Returns a {@link VkMemoryType} view of the struct at the specified index of the {@code memoryTypes} field. */
+        /** @return a {@link VkMemoryType} view of the struct at the specified index of the {@link VkPhysicalDeviceMemoryProperties#memoryTypes} field. */
         public VkMemoryType memoryTypes(int index) { return VkPhysicalDeviceMemoryProperties.nmemoryTypes(address(), index); }
-        /** Returns the value of the {@code memoryHeapCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMemoryProperties#memoryHeapCount} field. */
         @NativeType("uint32_t")
         public int memoryHeapCount() { return VkPhysicalDeviceMemoryProperties.nmemoryHeapCount(address()); }
-        /** Returns a {@link VkMemoryHeap}.Buffer view of the {@code memoryHeaps} field. */
+        /** @return a {@link VkMemoryHeap}.Buffer view of the {@link VkPhysicalDeviceMemoryProperties#memoryHeaps} field. */
         @NativeType("VkMemoryHeap[VK_MAX_MEMORY_HEAPS]")
         public VkMemoryHeap.Buffer memoryHeaps() { return VkPhysicalDeviceMemoryProperties.nmemoryHeaps(address()); }
-        /** Returns a {@link VkMemoryHeap} view of the struct at the specified index of the {@code memoryHeaps} field. */
+        /** @return a {@link VkMemoryHeap} view of the struct at the specified index of the {@link VkPhysicalDeviceMemoryProperties#memoryHeaps} field. */
         public VkMemoryHeap memoryHeaps(int index) { return VkPhysicalDeviceMemoryProperties.nmemoryHeaps(address(), index); }
 
     }

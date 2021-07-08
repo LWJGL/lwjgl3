@@ -57,7 +57,7 @@ public class YGFloatOptional extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code value} field. */
+    /** @return the value of the {@code value} field. */
     public float value() { return nvalue(address()); }
 
     // -----------------------------------
@@ -136,7 +136,7 @@ public class YGFloatOptional extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code value} field. */
+        /** @return the value of the {@code value} field. */
         public float value() { return YGFloatOptional.nvalue(address()); }
 
     }

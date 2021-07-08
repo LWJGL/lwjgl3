@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     bgfx_callback_interface_t *_this,
  *     void const *_data,
  *     uint32_t _size
@@ -51,7 +51,7 @@ public abstract class BGFXCaptureFrameCallback extends Callback implements BGFXC
     }
 
     protected BGFXCaptureFrameCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     BGFXCaptureFrameCallback(long functionPointer) {

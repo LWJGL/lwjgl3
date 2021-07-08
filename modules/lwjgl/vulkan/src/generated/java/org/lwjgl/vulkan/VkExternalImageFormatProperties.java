@@ -28,21 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkExternalMemoryProperties}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code externalMemoryProperties} &ndash; a {@link VkExternalMemoryProperties} structure specifying various capabilities of the external handle type when used with the specified image creation parameters.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkExternalImageFormatProperties {
- *     VkStructureType sType;
- *     void * pNext;
- *     {@link VkExternalMemoryProperties VkExternalMemoryProperties} externalMemoryProperties;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     {@link VkExternalMemoryProperties VkExternalMemoryProperties} {@link #externalMemoryProperties};
  * }</code></pre>
  */
 public class VkExternalImageFormatProperties extends Struct implements NativeResource {
@@ -87,18 +79,18 @@ public class VkExternalImageFormatProperties extends Struct implements NativeRes
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkExternalMemoryProperties} view of the {@code externalMemoryProperties} field. */
+    /** a {@link VkExternalMemoryProperties} structure specifying various capabilities of the external handle type when used with the specified image creation parameters. */
     public VkExternalMemoryProperties externalMemoryProperties() { return nexternalMemoryProperties(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkExternalImageFormatProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkExternalImageFormatProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -317,18 +309,18 @@ public class VkExternalImageFormatProperties extends Struct implements NativeRes
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkExternalImageFormatProperties#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkExternalImageFormatProperties.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkExternalImageFormatProperties#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkExternalImageFormatProperties.npNext(address()); }
-        /** Returns a {@link VkExternalMemoryProperties} view of the {@code externalMemoryProperties} field. */
+        /** @return a {@link VkExternalMemoryProperties} view of the {@link VkExternalImageFormatProperties#externalMemoryProperties} field. */
         public VkExternalMemoryProperties externalMemoryProperties() { return VkExternalImageFormatProperties.nexternalMemoryProperties(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkExternalImageFormatProperties#sType} field. */
         public VkExternalImageFormatProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalImageFormatProperties.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkExternalImageFormatProperties#pNext} field. */
         public VkExternalImageFormatProperties.Buffer pNext(@NativeType("void *") long value) { VkExternalImageFormatProperties.npNext(address(), value); return this; }
 
     }

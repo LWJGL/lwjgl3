@@ -50,6 +50,7 @@ val EXT_astc_decode_mode = "EXTAstcDecodeMode".nativeClassVK("EXT_astc_decode_mo
 ￿        NULL,
 ￿        &amp;imageView);</code></pre>
 
+        <h5>VK_EXT_astc_decode_mode</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_astc_decode_mode}</dd>
@@ -73,11 +74,14 @@ val EXT_astc_decode_mode = "EXTAstcDecodeMode".nativeClassVK("EXT_astc_decode_mo
             <dd><ul>
                 <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_astc_decode_mode:%20&amp;body=@janharaldfredriksen-arm%20">janharaldfredriksen-arm</a></li>
             </ul></dd>
+        </dl>
 
-            <dt>Last Modified Date</dt>
+        <h5>Other Extension Metadata</h5>
+        <dl>
+            <dt><b>Last Modified Date</b></dt>
             <dd>2018-08-07</dd>
 
-            <dt>Contributors</dt>
+            <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jan-Harald Fredriksen, Arm</li>
             </ul></dd>

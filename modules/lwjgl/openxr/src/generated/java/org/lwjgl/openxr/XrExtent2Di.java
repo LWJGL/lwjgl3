@@ -63,10 +63,10 @@ public class XrExtent2Di extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code width} field. */
+    /** @return the value of the {@code width} field. */
     @NativeType("int32_t")
     public int width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** @return the value of the {@code height} field. */
     @NativeType("int32_t")
     public int height() { return nheight(address()); }
 
@@ -289,10 +289,10 @@ public class XrExtent2Di extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@code width} field. */
         @NativeType("int32_t")
         public int width() { return XrExtent2Di.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@code height} field. */
         @NativeType("int32_t")
         public int height() { return XrExtent2Di.nheight(address()); }
 

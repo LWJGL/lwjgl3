@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void *_ptr,
  *     void *_userData
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class BGFXReleaseFunctionCallback extends Callback implements BG
     }
 
     protected BGFXReleaseFunctionCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     BGFXReleaseFunctionCallback(long functionPointer) {

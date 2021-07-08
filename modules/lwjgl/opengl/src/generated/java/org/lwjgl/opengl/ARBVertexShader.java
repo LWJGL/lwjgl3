@@ -31,6 +31,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBVertexShader {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code shaderType} argument of CreateShaderObjectARB and returned by the {@code params} parameter of GetObjectParameter{if}vARB. */
     public static final int GL_VERTEX_SHADER_ARB = 0x8B31;
 
@@ -77,8 +79,6 @@ public class ARBVertexShader {
         GL_FLOAT_MAT2_ARB = 0x8B5A,
         GL_FLOAT_MAT3_ARB = 0x8B5B,
         GL_FLOAT_MAT4_ARB = 0x8B5C;
-
-    static { GL.initialize(); }
 
     protected ARBVertexShader() {
         throw new UnsupportedOperationException();

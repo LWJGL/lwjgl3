@@ -25,6 +25,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVTimelineSemaphore {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of SemaphoreParameterivNV and GetSemaphoreParameterivNV. */
     public static final int GL_SEMAPHORE_TYPE_NV = 0x95B3;
 
@@ -38,8 +40,6 @@ public class NVTimelineSemaphore {
 
     /** Accepted by the {@code pname} parameter to GetIntegerv, GetFloatv, GetDoublev, GetInteger64v, and GetBooleanv. */
     public static final int GL_MAX_TIMELINE_SEMAPHORE_VALUE_DIFFERENCE_NV = 0x95B6;
-
-    static { GL.initialize(); }
 
     protected NVTimelineSemaphore() {
         throw new UnsupportedOperationException();

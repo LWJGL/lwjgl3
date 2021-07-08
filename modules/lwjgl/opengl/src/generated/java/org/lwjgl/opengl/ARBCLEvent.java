@@ -20,13 +20,13 @@ import static org.lwjgl.system.Checks.*;
  */
 public class ARBCLEvent {
 
+    static { GL.initialize(); }
+
     /** Returned in {@code values} for {@link GL32C#glGetSynciv GetSynciv} {@code pname} {@link GL32#GL_OBJECT_TYPE OBJECT_TYPE}. */
     public static final int GL_SYNC_CL_EVENT_ARB = 0x8240;
 
     /** Returned in {@code values} for {@link GL32C#glGetSynciv GetSynciv} {@code pname} {@link GL32#GL_SYNC_CONDITION SYNC_CONDITION}. */
     public static final int GL_SYNC_CL_EVENT_COMPLETE_ARB = 0x8241;
-
-    static { GL.initialize(); }
 
     protected ARBCLEvent() {
         throw new UnsupportedOperationException();

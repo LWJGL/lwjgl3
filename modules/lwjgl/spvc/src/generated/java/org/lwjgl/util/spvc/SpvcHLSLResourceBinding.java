@@ -84,25 +84,25 @@ public class SpvcHLSLResourceBinding extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code stage} field. */
+    /** @return the value of the {@code stage} field. */
     @NativeType("SpvExecutionModel")
     public int stage() { return nstage(address()); }
-    /** Returns the value of the {@code desc_set} field. */
+    /** @return the value of the {@code desc_set} field. */
     @NativeType("unsigned")
     public int desc_set() { return ndesc_set(address()); }
-    /** Returns the value of the {@code binding} field. */
+    /** @return the value of the {@code binding} field. */
     @NativeType("unsigned")
     public int binding() { return nbinding(address()); }
-    /** Returns a {@link SpvcHLSLResourceBindingMapping} view of the {@code cbv} field. */
+    /** @return a {@link SpvcHLSLResourceBindingMapping} view of the {@code cbv} field. */
     @NativeType("spvc_hlsl_resource_binding_mapping")
     public SpvcHLSLResourceBindingMapping cbv() { return ncbv(address()); }
-    /** Returns a {@link SpvcHLSLResourceBindingMapping} view of the {@code uav} field. */
+    /** @return a {@link SpvcHLSLResourceBindingMapping} view of the {@code uav} field. */
     @NativeType("spvc_hlsl_resource_binding_mapping")
     public SpvcHLSLResourceBindingMapping uav() { return nuav(address()); }
-    /** Returns a {@link SpvcHLSLResourceBindingMapping} view of the {@code srv} field. */
+    /** @return a {@link SpvcHLSLResourceBindingMapping} view of the {@code srv} field. */
     @NativeType("spvc_hlsl_resource_binding_mapping")
     public SpvcHLSLResourceBindingMapping srv() { return nsrv(address()); }
-    /** Returns a {@link SpvcHLSLResourceBindingMapping} view of the {@code sampler} field. */
+    /** @return a {@link SpvcHLSLResourceBindingMapping} view of the {@code sampler} field. */
     @NativeType("spvc_hlsl_resource_binding_mapping")
     public SpvcHLSLResourceBindingMapping sampler() { return nsampler(address()); }
 
@@ -373,25 +373,25 @@ public class SpvcHLSLResourceBinding extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code stage} field. */
+        /** @return the value of the {@code stage} field. */
         @NativeType("SpvExecutionModel")
         public int stage() { return SpvcHLSLResourceBinding.nstage(address()); }
-        /** Returns the value of the {@code desc_set} field. */
+        /** @return the value of the {@code desc_set} field. */
         @NativeType("unsigned")
         public int desc_set() { return SpvcHLSLResourceBinding.ndesc_set(address()); }
-        /** Returns the value of the {@code binding} field. */
+        /** @return the value of the {@code binding} field. */
         @NativeType("unsigned")
         public int binding() { return SpvcHLSLResourceBinding.nbinding(address()); }
-        /** Returns a {@link SpvcHLSLResourceBindingMapping} view of the {@code cbv} field. */
+        /** @return a {@link SpvcHLSLResourceBindingMapping} view of the {@code cbv} field. */
         @NativeType("spvc_hlsl_resource_binding_mapping")
         public SpvcHLSLResourceBindingMapping cbv() { return SpvcHLSLResourceBinding.ncbv(address()); }
-        /** Returns a {@link SpvcHLSLResourceBindingMapping} view of the {@code uav} field. */
+        /** @return a {@link SpvcHLSLResourceBindingMapping} view of the {@code uav} field. */
         @NativeType("spvc_hlsl_resource_binding_mapping")
         public SpvcHLSLResourceBindingMapping uav() { return SpvcHLSLResourceBinding.nuav(address()); }
-        /** Returns a {@link SpvcHLSLResourceBindingMapping} view of the {@code srv} field. */
+        /** @return a {@link SpvcHLSLResourceBindingMapping} view of the {@code srv} field. */
         @NativeType("spvc_hlsl_resource_binding_mapping")
         public SpvcHLSLResourceBindingMapping srv() { return SpvcHLSLResourceBinding.nsrv(address()); }
-        /** Returns a {@link SpvcHLSLResourceBindingMapping} view of the {@code sampler} field. */
+        /** @return a {@link SpvcHLSLResourceBindingMapping} view of the {@code sampler} field. */
         @NativeType("spvc_hlsl_resource_binding_mapping")
         public SpvcHLSLResourceBindingMapping sampler() { return SpvcHLSLResourceBinding.nsampler(address()); }
 

@@ -75,17 +75,17 @@ public class XrCompositionLayerProjectionView extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link XrPosef} view of the {@code pose} field. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** Returns a {@link XrFovf} view of the {@code fov} field. */
+    /** @return a {@link XrFovf} view of the {@code fov} field. */
     public XrFovf fov() { return nfov(address()); }
-    /** Returns a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
+    /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -358,17 +358,17 @@ public class XrCompositionLayerProjectionView extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerProjectionView.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerProjectionView.nnext(address()); }
-        /** Returns a {@link XrPosef} view of the {@code pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrCompositionLayerProjectionView.npose(address()); }
-        /** Returns a {@link XrFovf} view of the {@code fov} field. */
+        /** @return a {@link XrFovf} view of the {@code fov} field. */
         public XrFovf fov() { return XrCompositionLayerProjectionView.nfov(address()); }
-        /** Returns a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
+        /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
         public XrSwapchainSubImage subImage() { return XrCompositionLayerProjectionView.nsubImage(address()); }
 
         /** Sets the specified value to the {@code type} field. */

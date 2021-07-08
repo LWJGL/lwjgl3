@@ -13,8 +13,8 @@ val jshort = IntegerType("jshort", PrimitiveMapping.SHORT)
 val jint = IntegerType("jint", PrimitiveMapping.INT)
 val jlong = IntegerType("jlong", PrimitiveMapping.LONG)
 
-val jfloat = IntegerType("jfloat", PrimitiveMapping.FLOAT)
-val jdouble = IntegerType("jdouble", PrimitiveMapping.DOUBLE)
+val jfloat = PrimitiveType("jfloat", PrimitiveMapping.FLOAT)
+val jdouble = PrimitiveType("jdouble", PrimitiveMapping.DOUBLE)
 
 val jbooleanArray = JObjectType("jbooleanArray", ByteArray::class)
 val jbyteArray = JObjectType("jbyteArray", ByteArray::class)

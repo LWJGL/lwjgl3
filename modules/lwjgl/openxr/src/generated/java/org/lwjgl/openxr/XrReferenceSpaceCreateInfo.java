@@ -71,16 +71,16 @@ public class XrReferenceSpaceCreateInfo extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code referenceSpaceType} field. */
+    /** @return the value of the {@code referenceSpaceType} field. */
     @NativeType("XrReferenceSpaceType")
     public int referenceSpaceType() { return nreferenceSpaceType(address()); }
-    /** Returns a {@link XrPosef} view of the {@code poseInReferenceSpace} field. */
+    /** @return a {@link XrPosef} view of the {@code poseInReferenceSpace} field. */
     public XrPosef poseInReferenceSpace() { return nposeInReferenceSpace(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -320,16 +320,16 @@ public class XrReferenceSpaceCreateInfo extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrReferenceSpaceCreateInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrReferenceSpaceCreateInfo.nnext(address()); }
-        /** Returns the value of the {@code referenceSpaceType} field. */
+        /** @return the value of the {@code referenceSpaceType} field. */
         @NativeType("XrReferenceSpaceType")
         public int referenceSpaceType() { return XrReferenceSpaceCreateInfo.nreferenceSpaceType(address()); }
-        /** Returns a {@link XrPosef} view of the {@code poseInReferenceSpace} field. */
+        /** @return a {@link XrPosef} view of the {@code poseInReferenceSpace} field. */
         public XrPosef poseInReferenceSpace() { return XrReferenceSpaceCreateInfo.nposeInReferenceSpace(address()); }
 
         /** Sets the specified value to the {@code type} field. */

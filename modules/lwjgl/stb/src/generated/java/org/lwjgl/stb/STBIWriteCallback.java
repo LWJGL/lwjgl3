@@ -19,7 +19,7 @@ import java.nio.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void *context,
  *     void *data,
  *     int size
@@ -53,7 +53,7 @@ public abstract class STBIWriteCallback extends Callback implements STBIWriteCal
     }
 
     protected STBIWriteCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     STBIWriteCallback(long functionPointer) {

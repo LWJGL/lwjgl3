@@ -17,6 +17,7 @@ val AMD_gcn_shader = "AMDGCNShader".nativeClassVK("AMD_gcn_shader", type = "devi
             <li><a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_gcn_shader.html">{@code SPV_AMD_gcn_shader}</a></li>
         </ul>
 
+        <h5>VK_AMD_gcn_shader</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_AMD_gcn_shader}</dd>
@@ -39,12 +40,20 @@ val AMD_gcn_shader = "AMDGCNShader".nativeClassVK("AMD_gcn_shader", type = "devi
             <dd><ul>
                 <li>Dominik Witczak <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_gcn_shader:%20&amp;body=@dominikwitczakamd%20">dominikwitczakamd</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-05-30</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_gcn_shader.html">{@code SPV_AMD_gcn_shader}</a></li>
+            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>

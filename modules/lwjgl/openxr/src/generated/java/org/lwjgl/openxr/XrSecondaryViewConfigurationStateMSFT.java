@@ -71,16 +71,16 @@ public class XrSecondaryViewConfigurationStateMSFT extends Struct implements Nat
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code viewConfigurationType} field. */
+    /** @return the value of the {@code viewConfigurationType} field. */
     @NativeType("XrViewConfigurationType")
     public int viewConfigurationType() { return nviewConfigurationType(address()); }
-    /** Returns the value of the {@code active} field. */
+    /** @return the value of the {@code active} field. */
     @NativeType("XrBool32")
     public boolean active() { return nactive(address()) != 0; }
 
@@ -319,16 +319,16 @@ public class XrSecondaryViewConfigurationStateMSFT extends Struct implements Nat
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSecondaryViewConfigurationStateMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSecondaryViewConfigurationStateMSFT.nnext(address()); }
-        /** Returns the value of the {@code viewConfigurationType} field. */
+        /** @return the value of the {@code viewConfigurationType} field. */
         @NativeType("XrViewConfigurationType")
         public int viewConfigurationType() { return XrSecondaryViewConfigurationStateMSFT.nviewConfigurationType(address()); }
-        /** Returns the value of the {@code active} field. */
+        /** @return the value of the {@code active} field. */
         @NativeType("XrBool32")
         public boolean active() { return XrSecondaryViewConfigurationStateMSFT.nactive(address()) != 0; }
 

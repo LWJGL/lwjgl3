@@ -71,13 +71,13 @@ public class XrFovf extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code angleLeft} field. */
+    /** @return the value of the {@code angleLeft} field. */
     public float angleLeft() { return nangleLeft(address()); }
-    /** Returns the value of the {@code angleRight} field. */
+    /** @return the value of the {@code angleRight} field. */
     public float angleRight() { return nangleRight(address()); }
-    /** Returns the value of the {@code angleUp} field. */
+    /** @return the value of the {@code angleUp} field. */
     public float angleUp() { return nangleUp(address()); }
-    /** Returns the value of the {@code angleDown} field. */
+    /** @return the value of the {@code angleDown} field. */
     public float angleDown() { return nangleDown(address()); }
 
     /** Sets the specified value to the {@code angleLeft} field. */
@@ -315,13 +315,13 @@ public class XrFovf extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code angleLeft} field. */
+        /** @return the value of the {@code angleLeft} field. */
         public float angleLeft() { return XrFovf.nangleLeft(address()); }
-        /** Returns the value of the {@code angleRight} field. */
+        /** @return the value of the {@code angleRight} field. */
         public float angleRight() { return XrFovf.nangleRight(address()); }
-        /** Returns the value of the {@code angleUp} field. */
+        /** @return the value of the {@code angleUp} field. */
         public float angleUp() { return XrFovf.nangleUp(address()); }
-        /** Returns the value of the {@code angleDown} field. */
+        /** @return the value of the {@code angleDown} field. */
         public float angleDown() { return XrFovf.nangleDown(address()); }
 
         /** Sets the specified value to the {@code angleLeft} field. */

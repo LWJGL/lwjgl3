@@ -67,13 +67,13 @@ public class XrSwapchainImageWaitInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code timeout} field. */
+    /** @return the value of the {@code timeout} field. */
     @NativeType("XrDuration")
     public long timeout() { return ntimeout(address()); }
 
@@ -304,13 +304,13 @@ public class XrSwapchainImageWaitInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSwapchainImageWaitInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSwapchainImageWaitInfo.nnext(address()); }
-        /** Returns the value of the {@code timeout} field. */
+        /** @return the value of the {@code timeout} field. */
         @NativeType("XrDuration")
         public long timeout() { return XrSwapchainImageWaitInfo.ntimeout(address()); }
 

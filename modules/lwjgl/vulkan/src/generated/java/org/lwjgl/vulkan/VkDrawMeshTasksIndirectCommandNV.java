@@ -32,19 +32,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link NVMeshShader#vkCmdDrawMeshTasksIndirectNV CmdDrawMeshTasksIndirectNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code taskCount} &ndash; the number of local workgroups to dispatch in the X dimension. Y and Z dimension are implicitly set to one.</li>
- * <li>{@code firstTask} &ndash; the X component of the first workgroup ID.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDrawMeshTasksIndirectCommandNV {
- *     uint32_t taskCount;
- *     uint32_t firstTask;
+ *     uint32_t {@link #taskCount};
+ *     uint32_t {@link #firstTask};
  * }</code></pre>
  */
 public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeResource {
@@ -86,16 +79,16 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code taskCount} field. */
+    /** the number of local workgroups to dispatch in the X dimension. Y and Z dimension are implicitly set to one. */
     @NativeType("uint32_t")
     public int taskCount() { return ntaskCount(address()); }
-    /** Returns the value of the {@code firstTask} field. */
+    /** the X component of the first workgroup ID. */
     @NativeType("uint32_t")
     public int firstTask() { return nfirstTask(address()); }
 
-    /** Sets the specified value to the {@code taskCount} field. */
+    /** Sets the specified value to the {@link #taskCount} field. */
     public VkDrawMeshTasksIndirectCommandNV taskCount(@NativeType("uint32_t") int value) { ntaskCount(address(), value); return this; }
-    /** Sets the specified value to the {@code firstTask} field. */
+    /** Sets the specified value to the {@link #firstTask} field. */
     public VkDrawMeshTasksIndirectCommandNV firstTask(@NativeType("uint32_t") int value) { nfirstTask(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -312,16 +305,16 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code taskCount} field. */
+        /** @return the value of the {@link VkDrawMeshTasksIndirectCommandNV#taskCount} field. */
         @NativeType("uint32_t")
         public int taskCount() { return VkDrawMeshTasksIndirectCommandNV.ntaskCount(address()); }
-        /** Returns the value of the {@code firstTask} field. */
+        /** @return the value of the {@link VkDrawMeshTasksIndirectCommandNV#firstTask} field. */
         @NativeType("uint32_t")
         public int firstTask() { return VkDrawMeshTasksIndirectCommandNV.nfirstTask(address()); }
 
-        /** Sets the specified value to the {@code taskCount} field. */
+        /** Sets the specified value to the {@link VkDrawMeshTasksIndirectCommandNV#taskCount} field. */
         public VkDrawMeshTasksIndirectCommandNV.Buffer taskCount(@NativeType("uint32_t") int value) { VkDrawMeshTasksIndirectCommandNV.ntaskCount(address(), value); return this; }
-        /** Sets the specified value to the {@code firstTask} field. */
+        /** Sets the specified value to the {@link VkDrawMeshTasksIndirectCommandNV#firstTask} field. */
         public VkDrawMeshTasksIndirectCommandNV.Buffer firstTask(@NativeType("uint32_t") int value) { VkDrawMeshTasksIndirectCommandNV.nfirstTask(address(), value); return this; }
 
     }

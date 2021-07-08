@@ -67,13 +67,13 @@ public class XrEventDataInstanceLossPending extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code lossTime} field. */
+    /** @return the value of the {@code lossTime} field. */
     @NativeType("XrTime")
     public long lossTime() { return nlossTime(address()); }
 
@@ -304,13 +304,13 @@ public class XrEventDataInstanceLossPending extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataInstanceLossPending.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataInstanceLossPending.nnext(address()); }
-        /** Returns the value of the {@code lossTime} field. */
+        /** @return the value of the {@code lossTime} field. */
         @NativeType("XrTime")
         public long lossTime() { return XrEventDataInstanceLossPending.nlossTime(address()); }
 

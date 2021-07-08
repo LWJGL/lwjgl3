@@ -88,28 +88,28 @@ public class XrInstanceCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code createFlags} field. */
+    /** @return the value of the {@code createFlags} field. */
     @NativeType("XrInstanceCreateFlags")
     public long createFlags() { return ncreateFlags(address()); }
-    /** Returns a {@link XrApplicationInfo} view of the {@code applicationInfo} field. */
+    /** @return a {@link XrApplicationInfo} view of the {@code applicationInfo} field. */
     public XrApplicationInfo applicationInfo() { return napplicationInfo(address()); }
-    /** Returns the value of the {@code enabledApiLayerCount} field. */
+    /** @return the value of the {@code enabledApiLayerCount} field. */
     @NativeType("uint32_t")
     public int enabledApiLayerCount() { return nenabledApiLayerCount(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code enabledApiLayerNames} field. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code enabledApiLayerNames} field. */
     @Nullable
     @NativeType("char const * const *")
     public PointerBuffer enabledApiLayerNames() { return nenabledApiLayerNames(address()); }
-    /** Returns the value of the {@code enabledExtensionCount} field. */
+    /** @return the value of the {@code enabledExtensionCount} field. */
     @NativeType("uint32_t")
     public int enabledExtensionCount() { return nenabledExtensionCount(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code enabledExtensionNames} field. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code enabledExtensionNames} field. */
     @Nullable
     @NativeType("char const * const *")
     public PointerBuffer enabledExtensionNames() { return nenabledExtensionNames(address()); }
@@ -401,28 +401,28 @@ public class XrInstanceCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrInstanceCreateInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrInstanceCreateInfo.nnext(address()); }
-        /** Returns the value of the {@code createFlags} field. */
+        /** @return the value of the {@code createFlags} field. */
         @NativeType("XrInstanceCreateFlags")
         public long createFlags() { return XrInstanceCreateInfo.ncreateFlags(address()); }
-        /** Returns a {@link XrApplicationInfo} view of the {@code applicationInfo} field. */
+        /** @return a {@link XrApplicationInfo} view of the {@code applicationInfo} field. */
         public XrApplicationInfo applicationInfo() { return XrInstanceCreateInfo.napplicationInfo(address()); }
-        /** Returns the value of the {@code enabledApiLayerCount} field. */
+        /** @return the value of the {@code enabledApiLayerCount} field. */
         @NativeType("uint32_t")
         public int enabledApiLayerCount() { return XrInstanceCreateInfo.nenabledApiLayerCount(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code enabledApiLayerNames} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code enabledApiLayerNames} field. */
         @Nullable
         @NativeType("char const * const *")
         public PointerBuffer enabledApiLayerNames() { return XrInstanceCreateInfo.nenabledApiLayerNames(address()); }
-        /** Returns the value of the {@code enabledExtensionCount} field. */
+        /** @return the value of the {@code enabledExtensionCount} field. */
         @NativeType("uint32_t")
         public int enabledExtensionCount() { return XrInstanceCreateInfo.nenabledExtensionCount(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code enabledExtensionNames} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code enabledExtensionNames} field. */
         @Nullable
         @NativeType("char const * const *")
         public PointerBuffer enabledExtensionNames() { return XrInstanceCreateInfo.nenabledExtensionNames(address()); }

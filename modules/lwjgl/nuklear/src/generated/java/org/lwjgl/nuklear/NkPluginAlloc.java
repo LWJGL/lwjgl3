@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void * (*) (
+ * void * (*{@link #invoke}) (
  *     nk_handle handle,
  *     void *old,
  *     nk_size size
@@ -49,7 +49,7 @@ public abstract class NkPluginAlloc extends Callback implements NkPluginAllocI {
     }
 
     protected NkPluginAlloc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkPluginAlloc(long functionPointer) {

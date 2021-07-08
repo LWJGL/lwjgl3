@@ -6,8 +6,11 @@
 package org.lwjgl.cuda;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be passed to the {@link CU65#cuOccupancyMaxPotentialBlockSize OccupancyMaxPotentialBlockSize} and {@link CU65#cuOccupancyMaxPotentialBlockSizeWithFlags OccupancyMaxPotentialBlockSizeWithFlags} methods.
@@ -15,24 +18,29 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * size_t (*) (
+ * size_t (*{@link #invoke}) (
  *     int blockSize
  * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("size_t (*) (int)")
-public interface CUoccupancyB2DSizeI extends CallbackI.P {
+public interface CUoccupancyB2DSizeI extends CallbackI {
 
-    String SIGNATURE = Callback.__stdcall("(i)p");
+    FFICIF CIF = apiCreateCIF(
+        apiStdcall(),
+        ffi_type_pointer,
+        ffi_type_sint32
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default long callback(long args) {
-        return invoke(
-            dcbArgInt(args)
+    default void callback(long ret, long args) {
+        long __result = invoke(
+            memGetInt(memGetAddress(args))
         );
+        apiClosureRetP(ret, __result);
     }
 
     /**

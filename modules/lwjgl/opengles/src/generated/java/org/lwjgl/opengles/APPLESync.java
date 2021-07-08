@@ -35,6 +35,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class APPLESync {
 
+    static { GLES.initialize(); }
+
     /** Accepted as the {@code pname} parameter of GetInteger64vAPPLE. */
     public static final int GL_MAX_SERVER_WAIT_TIMEOUT_APPLE = 0x9111;
 
@@ -71,8 +73,6 @@ public class APPLESync {
 
     /** Accepted by the {@code type} parameter of LabelObjectEXT and GetObjectLabelEXT. */
     public static final int GL_SYNC_OBJECT_APPLE = 0x8A53;
-
-    static { GLES.initialize(); }
 
     protected APPLESync() {
         throw new UnsupportedOperationException();

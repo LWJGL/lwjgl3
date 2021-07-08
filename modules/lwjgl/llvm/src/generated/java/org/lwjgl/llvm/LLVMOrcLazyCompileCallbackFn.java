@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * uint64_t (*) (
+ * uint64_t (*{@link #invoke}) (
  *     LLVMOrcJITStackRef JITStack,
  *     void *CallbackCtx
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class LLVMOrcLazyCompileCallbackFn extends Callback implements L
     }
 
     protected LLVMOrcLazyCompileCallbackFn() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     LLVMOrcLazyCompileCallbackFn(long functionPointer) {

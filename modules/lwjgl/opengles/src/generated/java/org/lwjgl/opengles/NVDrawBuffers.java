@@ -25,6 +25,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVDrawBuffers {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
         GL_MAX_DRAW_BUFFERS_NV = 0x8824,
@@ -63,8 +65,6 @@ public class NVDrawBuffers {
         GL_COLOR_ATTACHMENT13_NV = 0x8CED,
         GL_COLOR_ATTACHMENT14_NV = 0x8CEE,
         GL_COLOR_ATTACHMENT15_NV = 0x8CEF;
-
-    static { GLES.initialize(); }
 
     protected NVDrawBuffers() {
         throw new UnsupportedOperationException();

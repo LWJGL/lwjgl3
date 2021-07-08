@@ -37,21 +37,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code deviceMask} &ndash; the initial value of the command buffer&#8217;s device mask.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDeviceGroupCommandBufferBeginInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t deviceMask;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #deviceMask};
  * }</code></pre>
  */
 public class VkDeviceGroupCommandBufferBeginInfo extends Struct implements NativeResource {
@@ -96,21 +88,21 @@ public class VkDeviceGroupCommandBufferBeginInfo extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code deviceMask} field. */
+    /** the initial value of the command buffer&#8217;s device mask. */
     @NativeType("uint32_t")
     public int deviceMask() { return ndeviceMask(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceGroupCommandBufferBeginInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceGroupCommandBufferBeginInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code deviceMask} field. */
+    /** Sets the specified value to the {@link #deviceMask} field. */
     public VkDeviceGroupCommandBufferBeginInfo deviceMask(@NativeType("uint32_t") int value) { ndeviceMask(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -333,21 +325,21 @@ public class VkDeviceGroupCommandBufferBeginInfo extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDeviceGroupCommandBufferBeginInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceGroupCommandBufferBeginInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDeviceGroupCommandBufferBeginInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceGroupCommandBufferBeginInfo.npNext(address()); }
-        /** Returns the value of the {@code deviceMask} field. */
+        /** @return the value of the {@link VkDeviceGroupCommandBufferBeginInfo#deviceMask} field. */
         @NativeType("uint32_t")
         public int deviceMask() { return VkDeviceGroupCommandBufferBeginInfo.ndeviceMask(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupCommandBufferBeginInfo#sType} field. */
         public VkDeviceGroupCommandBufferBeginInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupCommandBufferBeginInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupCommandBufferBeginInfo#pNext} field. */
         public VkDeviceGroupCommandBufferBeginInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupCommandBufferBeginInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code deviceMask} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupCommandBufferBeginInfo#deviceMask} field. */
         public VkDeviceGroupCommandBufferBeginInfo.Buffer deviceMask(@NativeType("uint32_t") int value) { VkDeviceGroupCommandBufferBeginInfo.ndeviceMask(address(), value); return this; }
 
     }

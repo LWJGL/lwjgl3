@@ -34,6 +34,28 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If {@code flags} includes {@link VK10#VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT}, then the attachment is treated as if it shares physical memory with another attachment in the same render pass. This information limits the ability of the implementation to reorder certain operations (like layout transitions and the {@code loadOp}) such that it is not improperly reordered against other uses of the same physical memory via a different attachment. This is described in more detail below.</p>
  * 
+ * <p>If a render pass uses multiple attachments that alias the same device memory, those attachments <b>must</b> each include the {@link VK10#VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} bit in their attachment description flags. Attachments aliasing the same memory occurs in multiple ways:</p>
+ * 
+ * <ul>
+ * <li>Multiple attachments being assigned the same image view as part of framebuffer creation.</li>
+ * <li>Attachments using distinct image views that correspond to the same image subresource of an image.</li>
+ * <li>Attachments using views of distinct image subresources which are bound to overlapping memory ranges.</li>
+ * </ul>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>Render passes <b>must</b> include subpass dependencies (either directly or via a subpass dependency chain) between any two subpasses that operate on the same attachment or aliasing attachments and those subpass dependencies <b>must</b> include execution and memory dependencies separating uses of the aliases, if at least one of those subpasses writes to one of the aliases. These dependencies <b>must</b> not include the {@link VK10#VK_DEPENDENCY_BY_REGION_BIT DEPENDENCY_BY_REGION_BIT} if the aliases are views of distinct image subresources which overlap in memory.</p>
+ * </div>
+ * 
+ * <p>Multiple attachments that alias the same memory <b>must</b> not be used in a single subpass. A given attachment index <b>must</b> not be used multiple times in a single subpass, with one exception: two subpass attachments <b>can</b> use the same attachment index if at least one use is as an input attachment and neither use is as a resolve or preserve attachment. In other words, the same view <b>can</b> be used simultaneously as an input and color or depth/stencil attachment, but <b>must</b> not be used as multiple color or depth/stencil attachments nor as resolve or preserve attachments. The precise set of valid scenarios is described in more detail <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#renderpass-feedbackloop">below</a>.</p>
+ * 
+ * <p>If a set of attachments alias each other, then all except the first to be used in the render pass <b>must</b> use an {@code initialLayout} of {@link VK10#VK_IMAGE_LAYOUT_UNDEFINED IMAGE_LAYOUT_UNDEFINED}, since the earlier uses of the other aliases make their contents undefined. Once an alias has been used and a different alias has been used after it, the first alias <b>must</b> not be used in any later subpasses. However, an application <b>can</b> assign the same image view to multiple aliasing attachment indices, which allows that image view to be used multiple times even if other aliases are used in between.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>Once an attachment needs the {@link VK10#VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} bit, there <b>should</b> be no additional cost of introducing additional aliases, and using these additional aliases <b>may</b> allow more efficient clearing of the attachments on multiple uses via {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}.</p>
+ * </div>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
@@ -72,33 +94,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkRenderPassCreateInfo}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code flags} &ndash; a bitmask of {@code VkAttachmentDescriptionFlagBits} specifying additional properties of the attachment.</li>
- * <li>{@code format} &ndash; a {@code VkFormat} value specifying the format of the image view that will be used for the attachment.</li>
- * <li>{@code samples} &ndash; the number of samples of the image as defined in {@code VkSampleCountFlagBits}.</li>
- * <li>{@code loadOp} &ndash; a {@code VkAttachmentLoadOp} value specifying how the contents of color and depth components of the attachment are treated at the beginning of the subpass where it is first used.</li>
- * <li>{@code storeOp} &ndash; a {@code VkAttachmentStoreOp} value specifying how the contents of color and depth components of the attachment are treated at the end of the subpass where it is last used.</li>
- * <li>{@code stencilLoadOp} &ndash; a {@code VkAttachmentLoadOp} value specifying how the contents of stencil components of the attachment are treated at the beginning of the subpass where it is first used.</li>
- * <li>{@code stencilStoreOp} &ndash; a {@code VkAttachmentStoreOp} value specifying how the contents of stencil components of the attachment are treated at the end of the last subpass where it is used.</li>
- * <li>{@code initialLayout} &ndash; the layout the attachment image subresource will be in when a render pass instance begins.</li>
- * <li>{@code finalLayout} &ndash; the layout the attachment image subresource will be transitioned to when a render pass instance ends.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkAttachmentDescription {
- *     VkAttachmentDescriptionFlags flags;
- *     VkFormat format;
- *     VkSampleCountFlagBits samples;
- *     VkAttachmentLoadOp loadOp;
- *     VkAttachmentStoreOp storeOp;
- *     VkAttachmentLoadOp stencilLoadOp;
- *     VkAttachmentStoreOp stencilStoreOp;
- *     VkImageLayout initialLayout;
- *     VkImageLayout finalLayout;
+ *     VkAttachmentDescriptionFlags {@link #flags};
+ *     VkFormat {@link #format};
+ *     VkSampleCountFlagBits {@link #samples};
+ *     VkAttachmentLoadOp {@link #loadOp};
+ *     VkAttachmentStoreOp {@link #storeOp};
+ *     VkAttachmentLoadOp {@link #stencilLoadOp};
+ *     VkAttachmentStoreOp {@link #stencilStoreOp};
+ *     VkImageLayout {@link #initialLayout};
+ *     VkImageLayout {@link #finalLayout};
  * }</code></pre>
  */
 public class VkAttachmentDescription extends Struct implements NativeResource {
@@ -161,51 +169,51 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkAttachmentDescriptionFlagBits} specifying additional properties of the attachment. */
     @NativeType("VkAttachmentDescriptionFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code format} field. */
+    /** a {@code VkFormat} value specifying the format of the image view that will be used for the attachment. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** Returns the value of the {@code samples} field. */
+    /** the number of samples of the image as defined in {@code VkSampleCountFlagBits}. */
     @NativeType("VkSampleCountFlagBits")
     public int samples() { return nsamples(address()); }
-    /** Returns the value of the {@code loadOp} field. */
+    /** a {@code VkAttachmentLoadOp} value specifying how the contents of color and depth components of the attachment are treated at the beginning of the subpass where it is first used. */
     @NativeType("VkAttachmentLoadOp")
     public int loadOp() { return nloadOp(address()); }
-    /** Returns the value of the {@code storeOp} field. */
+    /** a {@code VkAttachmentStoreOp} value specifying how the contents of color and depth components of the attachment are treated at the end of the subpass where it is last used. */
     @NativeType("VkAttachmentStoreOp")
     public int storeOp() { return nstoreOp(address()); }
-    /** Returns the value of the {@code stencilLoadOp} field. */
+    /** a {@code VkAttachmentLoadOp} value specifying how the contents of stencil components of the attachment are treated at the beginning of the subpass where it is first used. */
     @NativeType("VkAttachmentLoadOp")
     public int stencilLoadOp() { return nstencilLoadOp(address()); }
-    /** Returns the value of the {@code stencilStoreOp} field. */
+    /** a {@code VkAttachmentStoreOp} value specifying how the contents of stencil components of the attachment are treated at the end of the last subpass where it is used. */
     @NativeType("VkAttachmentStoreOp")
     public int stencilStoreOp() { return nstencilStoreOp(address()); }
-    /** Returns the value of the {@code initialLayout} field. */
+    /** the layout the attachment image subresource will be in when a render pass instance begins. */
     @NativeType("VkImageLayout")
     public int initialLayout() { return ninitialLayout(address()); }
-    /** Returns the value of the {@code finalLayout} field. */
+    /** the layout the attachment image subresource will be transitioned to when a render pass instance ends. */
     @NativeType("VkImageLayout")
     public int finalLayout() { return nfinalLayout(address()); }
 
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkAttachmentDescription flags(@NativeType("VkAttachmentDescriptionFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code format} field. */
+    /** Sets the specified value to the {@link #format} field. */
     public VkAttachmentDescription format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
-    /** Sets the specified value to the {@code samples} field. */
+    /** Sets the specified value to the {@link #samples} field. */
     public VkAttachmentDescription samples(@NativeType("VkSampleCountFlagBits") int value) { nsamples(address(), value); return this; }
-    /** Sets the specified value to the {@code loadOp} field. */
+    /** Sets the specified value to the {@link #loadOp} field. */
     public VkAttachmentDescription loadOp(@NativeType("VkAttachmentLoadOp") int value) { nloadOp(address(), value); return this; }
-    /** Sets the specified value to the {@code storeOp} field. */
+    /** Sets the specified value to the {@link #storeOp} field. */
     public VkAttachmentDescription storeOp(@NativeType("VkAttachmentStoreOp") int value) { nstoreOp(address(), value); return this; }
-    /** Sets the specified value to the {@code stencilLoadOp} field. */
+    /** Sets the specified value to the {@link #stencilLoadOp} field. */
     public VkAttachmentDescription stencilLoadOp(@NativeType("VkAttachmentLoadOp") int value) { nstencilLoadOp(address(), value); return this; }
-    /** Sets the specified value to the {@code stencilStoreOp} field. */
+    /** Sets the specified value to the {@link #stencilStoreOp} field. */
     public VkAttachmentDescription stencilStoreOp(@NativeType("VkAttachmentStoreOp") int value) { nstencilStoreOp(address(), value); return this; }
-    /** Sets the specified value to the {@code initialLayout} field. */
+    /** Sets the specified value to the {@link #initialLayout} field. */
     public VkAttachmentDescription initialLayout(@NativeType("VkImageLayout") int value) { ninitialLayout(address(), value); return this; }
-    /** Sets the specified value to the {@code finalLayout} field. */
+    /** Sets the specified value to the {@link #finalLayout} field. */
     public VkAttachmentDescription finalLayout(@NativeType("VkImageLayout") int value) { nfinalLayout(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -464,51 +472,51 @@ public class VkAttachmentDescription extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkAttachmentDescription#flags} field. */
         @NativeType("VkAttachmentDescriptionFlags")
         public int flags() { return VkAttachmentDescription.nflags(address()); }
-        /** Returns the value of the {@code format} field. */
+        /** @return the value of the {@link VkAttachmentDescription#format} field. */
         @NativeType("VkFormat")
         public int format() { return VkAttachmentDescription.nformat(address()); }
-        /** Returns the value of the {@code samples} field. */
+        /** @return the value of the {@link VkAttachmentDescription#samples} field. */
         @NativeType("VkSampleCountFlagBits")
         public int samples() { return VkAttachmentDescription.nsamples(address()); }
-        /** Returns the value of the {@code loadOp} field. */
+        /** @return the value of the {@link VkAttachmentDescription#loadOp} field. */
         @NativeType("VkAttachmentLoadOp")
         public int loadOp() { return VkAttachmentDescription.nloadOp(address()); }
-        /** Returns the value of the {@code storeOp} field. */
+        /** @return the value of the {@link VkAttachmentDescription#storeOp} field. */
         @NativeType("VkAttachmentStoreOp")
         public int storeOp() { return VkAttachmentDescription.nstoreOp(address()); }
-        /** Returns the value of the {@code stencilLoadOp} field. */
+        /** @return the value of the {@link VkAttachmentDescription#stencilLoadOp} field. */
         @NativeType("VkAttachmentLoadOp")
         public int stencilLoadOp() { return VkAttachmentDescription.nstencilLoadOp(address()); }
-        /** Returns the value of the {@code stencilStoreOp} field. */
+        /** @return the value of the {@link VkAttachmentDescription#stencilStoreOp} field. */
         @NativeType("VkAttachmentStoreOp")
         public int stencilStoreOp() { return VkAttachmentDescription.nstencilStoreOp(address()); }
-        /** Returns the value of the {@code initialLayout} field. */
+        /** @return the value of the {@link VkAttachmentDescription#initialLayout} field. */
         @NativeType("VkImageLayout")
         public int initialLayout() { return VkAttachmentDescription.ninitialLayout(address()); }
-        /** Returns the value of the {@code finalLayout} field. */
+        /** @return the value of the {@link VkAttachmentDescription#finalLayout} field. */
         @NativeType("VkImageLayout")
         public int finalLayout() { return VkAttachmentDescription.nfinalLayout(address()); }
 
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkAttachmentDescription#flags} field. */
         public VkAttachmentDescription.Buffer flags(@NativeType("VkAttachmentDescriptionFlags") int value) { VkAttachmentDescription.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code format} field. */
+        /** Sets the specified value to the {@link VkAttachmentDescription#format} field. */
         public VkAttachmentDescription.Buffer format(@NativeType("VkFormat") int value) { VkAttachmentDescription.nformat(address(), value); return this; }
-        /** Sets the specified value to the {@code samples} field. */
+        /** Sets the specified value to the {@link VkAttachmentDescription#samples} field. */
         public VkAttachmentDescription.Buffer samples(@NativeType("VkSampleCountFlagBits") int value) { VkAttachmentDescription.nsamples(address(), value); return this; }
-        /** Sets the specified value to the {@code loadOp} field. */
+        /** Sets the specified value to the {@link VkAttachmentDescription#loadOp} field. */
         public VkAttachmentDescription.Buffer loadOp(@NativeType("VkAttachmentLoadOp") int value) { VkAttachmentDescription.nloadOp(address(), value); return this; }
-        /** Sets the specified value to the {@code storeOp} field. */
+        /** Sets the specified value to the {@link VkAttachmentDescription#storeOp} field. */
         public VkAttachmentDescription.Buffer storeOp(@NativeType("VkAttachmentStoreOp") int value) { VkAttachmentDescription.nstoreOp(address(), value); return this; }
-        /** Sets the specified value to the {@code stencilLoadOp} field. */
+        /** Sets the specified value to the {@link VkAttachmentDescription#stencilLoadOp} field. */
         public VkAttachmentDescription.Buffer stencilLoadOp(@NativeType("VkAttachmentLoadOp") int value) { VkAttachmentDescription.nstencilLoadOp(address(), value); return this; }
-        /** Sets the specified value to the {@code stencilStoreOp} field. */
+        /** Sets the specified value to the {@link VkAttachmentDescription#stencilStoreOp} field. */
         public VkAttachmentDescription.Buffer stencilStoreOp(@NativeType("VkAttachmentStoreOp") int value) { VkAttachmentDescription.nstencilStoreOp(address(), value); return this; }
-        /** Sets the specified value to the {@code initialLayout} field. */
+        /** Sets the specified value to the {@link VkAttachmentDescription#initialLayout} field. */
         public VkAttachmentDescription.Buffer initialLayout(@NativeType("VkImageLayout") int value) { VkAttachmentDescription.ninitialLayout(address(), value); return this; }
-        /** Sets the specified value to the {@code finalLayout} field. */
+        /** Sets the specified value to the {@link VkAttachmentDescription#finalLayout} field. */
         public VkAttachmentDescription.Buffer finalLayout(@NativeType("VkImageLayout") int value) { VkAttachmentDescription.nfinalLayout(address(), value); return this; }
 
     }

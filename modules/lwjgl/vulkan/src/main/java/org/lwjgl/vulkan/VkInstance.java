@@ -20,7 +20,7 @@ import static org.lwjgl.vulkan.VK10.*;
 public class VkInstance extends DispatchableHandleInstance {
 
     /**
-     * Creates a {@link VkInstance} instance for the specified native handle.
+     * Creates a {@code VkInstance} instance for the specified native handle.
      *
      * @param handle the native {@code VkInstance} handle
      * @param ci     the {@link VkInstanceCreateInfo} structured used to create the {@code VkInstance}.
@@ -32,9 +32,9 @@ public class VkInstance extends DispatchableHandleInstance {
     private static VKCapabilitiesInstance getInstanceCapabilities(long handle, VkInstanceCreateInfo ci) {
         VkApplicationInfo appInfo = ci.pApplicationInfo();
 
-        int apiVersion = appInfo != null
+        int apiVersion = appInfo != null && appInfo.apiVersion() != 0
             ? appInfo.apiVersion()
-            : VK.getInstanceVersionSupported();
+            : VK_API_VERSION_1_0;
 
         return new VKCapabilitiesInstance(functionName -> {
             long address = callPPP(handle, memAddress(functionName), VK.getGlobalCommands().vkGetInstanceProcAddr);

@@ -62,10 +62,10 @@ public class CXFileUniqueID extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link LongBuffer} view of the {@code data} field. */
+    /** @return a {@link LongBuffer} view of the {@code data} field. */
     @NativeType("unsigned long long[3]")
     public LongBuffer data() { return ndata(address()); }
-    /** Returns the value at the specified index of the {@code data} field. */
+    /** @return the value at the specified index of the {@code data} field. */
     @NativeType("unsigned long long")
     public long data(int index) { return ndata(address(), index); }
 
@@ -257,10 +257,10 @@ public class CXFileUniqueID extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link LongBuffer} view of the {@code data} field. */
+        /** @return a {@link LongBuffer} view of the {@code data} field. */
         @NativeType("unsigned long long[3]")
         public LongBuffer data() { return CXFileUniqueID.ndata(address()); }
-        /** Returns the value at the specified index of the {@code data} field. */
+        /** @return the value at the specified index of the {@code data} field. */
         @NativeType("unsigned long long")
         public long data(int index) { return CXFileUniqueID.ndata(address(), index); }
 

@@ -194,6 +194,8 @@ import org.lwjgl.system.*;
  */
 public class ARBFramebufferObject {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code target} parameter of BindFramebuffer, CheckFramebufferStatus, FramebufferTexture{1D|2D|3D}, FramebufferRenderbuffer, and
      * GetFramebufferAttachmentParameteriv.
@@ -320,8 +322,6 @@ public class ARBFramebufferObject {
 
     /** Accepted by the {@code value} parameter of GetTexLevelParameter. */
     public static final int GL_TEXTURE_STENCIL_SIZE = 0x88F1;
-
-    static { GL.initialize(); }
 
     protected ARBFramebufferObject() {
         throw new UnsupportedOperationException();

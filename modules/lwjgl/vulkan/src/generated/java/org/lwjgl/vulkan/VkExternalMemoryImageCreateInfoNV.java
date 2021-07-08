@@ -25,21 +25,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code handleTypes} &ndash; a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} specifying one or more external memory handle types.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkExternalMemoryImageCreateInfoNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkExternalMemoryHandleTypeFlagsNV handleTypes;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkExternalMemoryHandleTypeFlagsNV {@link #handleTypes};
  * }</code></pre>
  */
 public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeResource {
@@ -84,21 +76,21 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code handleTypes} field. */
+    /** zero, or a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} specifying one or more external memory handle types. */
     @NativeType("VkExternalMemoryHandleTypeFlagsNV")
     public int handleTypes() { return nhandleTypes(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkExternalMemoryImageCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkExternalMemoryImageCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code handleTypes} field. */
+    /** Sets the specified value to the {@link #handleTypes} field. */
     public VkExternalMemoryImageCreateInfoNV handleTypes(@NativeType("VkExternalMemoryHandleTypeFlagsNV") int value) { nhandleTypes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,21 +313,21 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkExternalMemoryImageCreateInfoNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkExternalMemoryImageCreateInfoNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkExternalMemoryImageCreateInfoNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkExternalMemoryImageCreateInfoNV.npNext(address()); }
-        /** Returns the value of the {@code handleTypes} field. */
+        /** @return the value of the {@link VkExternalMemoryImageCreateInfoNV#handleTypes} field. */
         @NativeType("VkExternalMemoryHandleTypeFlagsNV")
         public int handleTypes() { return VkExternalMemoryImageCreateInfoNV.nhandleTypes(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkExternalMemoryImageCreateInfoNV#sType} field. */
         public VkExternalMemoryImageCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalMemoryImageCreateInfoNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkExternalMemoryImageCreateInfoNV#pNext} field. */
         public VkExternalMemoryImageCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkExternalMemoryImageCreateInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code handleTypes} field. */
+        /** Sets the specified value to the {@link VkExternalMemoryImageCreateInfoNV#handleTypes} field. */
         public VkExternalMemoryImageCreateInfoNV.Buffer handleTypes(@NativeType("VkExternalMemoryHandleTypeFlagsNV") int value) { VkExternalMemoryImageCreateInfoNV.nhandleTypes(address(), value); return this; }
 
     }

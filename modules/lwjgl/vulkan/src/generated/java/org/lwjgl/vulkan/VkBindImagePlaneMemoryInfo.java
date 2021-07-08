@@ -21,9 +21,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the image&#8217;s tiling is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR} or {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}, then {@code planeAspect} <b>must</b> be a single valid <em>format plane</em> for the image. (That is, {@code planeAspect} <b>must</b> be {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT} or {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT} for “{@code _2PLANE}” formats and {@code planeAspect} <b>must</b> be {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT}, {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT}, or {@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT} for “{@code _3PLANE}” formats.)</li>
- * <li>If the image&#8217;s tiling is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then {@code planeAspect} <b>must</b> be a single valid <em>memory plane</em> for the image. (That is, {@code aspectMask} <b>must</b> specify a plane index that is less than the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkDrmFormatModifierPropertiesEXT">{@code drmFormatModifierPlaneCount}</a> associated with the image&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkImageCreateInfo">{@code format}</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkImageDrmFormatModifierPropertiesEXT">{@code drmFormatModifier}</a>.)</li>
- * <li>A single call to {@link VK11#vkBindImageMemory2 BindImageMemory2} <b>must</b> bind all or none of the planes of an image (i.e. bindings to all planes of an image <b>must</b> be made in a single {@link VK11#vkBindImageMemory2 BindImageMemory2} call), as separate bindings</li>
+ * <li>If the image&#8217;s {@code tiling} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR} or {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}, then {@code planeAspect} <b>must</b> be a single valid <em>format plane</em> for the image (that is, for a two-plane image {@code planeAspect} <b>must</b> be {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT} or {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT}, and for a three-plane image {@code planeAspect} <b>must</b> be {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT}, {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT} or {@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT})</li>
+ * <li>If the image&#8217;s {@code tiling} is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then {@code planeAspect} <b>must</b> be a single valid <em>memory plane</em> for the image (that is, {@code aspectMask} <b>must</b> specify a plane index that is less than the {@link VkDrmFormatModifierPropertiesEXT}{@code ::drmFormatModifierPlaneCount} associated with the image&#8217;s {@code format} and {@link VkImageDrmFormatModifierPropertiesEXT}{@code ::drmFormatModifier})</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -33,21 +32,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code planeAspect} <b>must</b> be a valid {@code VkImageAspectFlagBits} value</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code planeAspect} &ndash; the aspect of the disjoint image plane to bind.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBindImagePlaneMemoryInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkImageAspectFlagBits planeAspect;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkImageAspectFlagBits {@link #planeAspect};
  * }</code></pre>
  */
 public class VkBindImagePlaneMemoryInfo extends Struct implements NativeResource {
@@ -92,21 +83,21 @@ public class VkBindImagePlaneMemoryInfo extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code planeAspect} field. */
+    /** the aspect of the disjoint image plane to bind. */
     @NativeType("VkImageAspectFlagBits")
     public int planeAspect() { return nplaneAspect(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkBindImagePlaneMemoryInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkBindImagePlaneMemoryInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code planeAspect} field. */
+    /** Sets the specified value to the {@link #planeAspect} field. */
     public VkBindImagePlaneMemoryInfo planeAspect(@NativeType("VkImageAspectFlagBits") int value) { nplaneAspect(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -329,21 +320,21 @@ public class VkBindImagePlaneMemoryInfo extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkBindImagePlaneMemoryInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBindImagePlaneMemoryInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkBindImagePlaneMemoryInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBindImagePlaneMemoryInfo.npNext(address()); }
-        /** Returns the value of the {@code planeAspect} field. */
+        /** @return the value of the {@link VkBindImagePlaneMemoryInfo#planeAspect} field. */
         @NativeType("VkImageAspectFlagBits")
         public int planeAspect() { return VkBindImagePlaneMemoryInfo.nplaneAspect(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkBindImagePlaneMemoryInfo#sType} field. */
         public VkBindImagePlaneMemoryInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindImagePlaneMemoryInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkBindImagePlaneMemoryInfo#pNext} field. */
         public VkBindImagePlaneMemoryInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindImagePlaneMemoryInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code planeAspect} field. */
+        /** Sets the specified value to the {@link VkBindImagePlaneMemoryInfo#planeAspect} field. */
         public VkBindImagePlaneMemoryInfo.Buffer planeAspect(@NativeType("VkImageAspectFlagBits") int value) { VkBindImagePlaneMemoryInfo.nplaneAspect(address(), value); return this; }
 
     }

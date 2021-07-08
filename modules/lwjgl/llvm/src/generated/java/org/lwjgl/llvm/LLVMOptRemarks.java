@@ -18,12 +18,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMOptRemarks {
 
-    public static final int OPT_REMARKS_API_VERSION = 0;
-
-    protected LLVMOptRemarks() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -38,6 +32,12 @@ public class LLVMOptRemarks {
             OptRemarkParserDispose         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOptRemarkParserDispose"),
             OptRemarkVersion               = LLVMCore.getLibrary().getFunctionAddress("LLVMOptRemarkVersion");
 
+    }
+
+    public static final int OPT_REMARKS_API_VERSION = 0;
+
+    protected LLVMOptRemarks() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMOptRemarkParserCreate ] ---

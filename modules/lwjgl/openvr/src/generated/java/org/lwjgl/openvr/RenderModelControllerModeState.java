@@ -16,17 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code bScrollWheelVisible} &ndash; is this controller currently set to be in a scroll wheel mode</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct RenderModel_ControllerMode_State_t {
- *     bool bScrollWheelVisible;
+ *     bool {@link #bScrollWheelVisible};
  * }</code></pre>
  */
 @NativeType("struct RenderModel_ControllerMode_State_t")
@@ -66,11 +60,11 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code bScrollWheelVisible} field. */
+    /** is this controller currently set to be in a scroll wheel mode */
     @NativeType("bool")
     public boolean bScrollWheelVisible() { return nbScrollWheelVisible(address()); }
 
-    /** Sets the specified value to the {@code bScrollWheelVisible} field. */
+    /** Sets the specified value to the {@link #bScrollWheelVisible} field. */
     public RenderModelControllerModeState bScrollWheelVisible(@NativeType("bool") boolean value) { nbScrollWheelVisible(address(), value); return this; }
 
     /**
@@ -272,11 +266,11 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code bScrollWheelVisible} field. */
+        /** @return the value of the {@link RenderModelControllerModeState#bScrollWheelVisible} field. */
         @NativeType("bool")
         public boolean bScrollWheelVisible() { return RenderModelControllerModeState.nbScrollWheelVisible(address()); }
 
-        /** Sets the specified value to the {@code bScrollWheelVisible} field. */
+        /** Sets the specified value to the {@link RenderModelControllerModeState#bScrollWheelVisible} field. */
         public RenderModelControllerModeState.Buffer bScrollWheelVisible(@NativeType("bool") boolean value) { RenderModelControllerModeState.nbScrollWheelVisible(address(), value); return this; }
 
     }

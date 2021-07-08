@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * YGNodeRef (*) (
+ * YGNodeRef (*{@link #invoke}) (
  *     YGNodeRef oldNode,
  *     YGNodeRef owner,
  *     int childIndex
@@ -49,7 +49,7 @@ public abstract class YGCloneNodeFunc extends Callback implements YGCloneNodeFun
     }
 
     protected YGCloneNodeFunc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     YGCloneNodeFunc(long functionPointer) {

@@ -33,6 +33,89 @@ import static org.lwjgl.system.Pointer.*;
  */
 public class SQL {
 
+    private static final SharedLibrary ODBC = Library.loadNative(SQL.class, "org.lwjgl.odbc", Configuration.ODBC_LIBRARY_NAME, "odbc32", "odbc");
+
+    /** Contains the function pointers loaded from the odbc {@link SharedLibrary}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            AllocHandle      = apiGetFunctionAddress(ODBC, "SQLAllocHandle"),
+            Connect          = apiGetFunctionAddress(ODBC, "SQLConnectW"),
+            DataSources      = ODBC.getFunctionAddress("SQLDataSourcesW"),
+            GetInfo          = apiGetFunctionAddress(ODBC, "SQLGetInfoW"),
+            GetFunctions     = apiGetFunctionAddress(ODBC, "SQLGetFunctions"),
+            GetTypeInfo      = apiGetFunctionAddress(ODBC, "SQLGetTypeInfoW"),
+            SetConnectAttr   = apiGetFunctionAddress(ODBC, "SQLSetConnectAttrW"),
+            GetConnectAttr   = apiGetFunctionAddress(ODBC, "SQLGetConnectAttrW"),
+            SetEnvAttr       = apiGetFunctionAddress(ODBC, "SQLSetEnvAttr"),
+            GetEnvAttr       = apiGetFunctionAddress(ODBC, "SQLGetEnvAttr"),
+            SetStmtAttr      = apiGetFunctionAddress(ODBC, "SQLSetStmtAttrW"),
+            GetStmtAttr      = apiGetFunctionAddress(ODBC, "SQLGetStmtAttrW"),
+            GetDescField     = apiGetFunctionAddress(ODBC, "SQLGetDescFieldW"),
+            GetDescRec       = apiGetFunctionAddress(ODBC, "SQLGetDescRecW"),
+            SetDescField     = apiGetFunctionAddress(ODBC, "SQLSetDescFieldW"),
+            SetDescRec       = apiGetFunctionAddress(ODBC, "SQLSetDescRec"),
+            CopyDesc         = apiGetFunctionAddress(ODBC, "SQLCopyDesc"),
+            Prepare          = apiGetFunctionAddress(ODBC, "SQLPrepareW"),
+            GetCursorName    = apiGetFunctionAddress(ODBC, "SQLGetCursorNameW"),
+            SetCursorName    = apiGetFunctionAddress(ODBC, "SQLSetCursorNameW"),
+            Execute          = apiGetFunctionAddress(ODBC, "SQLExecute"),
+            ExecDirect       = apiGetFunctionAddress(ODBC, "SQLExecDirectW"),
+            ParamData        = apiGetFunctionAddress(ODBC, "SQLParamData"),
+            PutData          = apiGetFunctionAddress(ODBC, "SQLPutData"),
+            RowCount         = apiGetFunctionAddress(ODBC, "SQLRowCount"),
+            NumResultCols    = apiGetFunctionAddress(ODBC, "SQLNumResultCols"),
+            DescribeCol      = apiGetFunctionAddress(ODBC, "SQLDescribeColW"),
+            ColAttribute     = apiGetFunctionAddress(ODBC, "SQLColAttributeW"),
+            BindCol          = apiGetFunctionAddress(ODBC, "SQLBindCol"),
+            Fetch            = apiGetFunctionAddress(ODBC, "SQLFetch"),
+            FetchScroll      = apiGetFunctionAddress(ODBC, "SQLFetchScroll"),
+            GetData          = apiGetFunctionAddress(ODBC, "SQLGetData"),
+            GetDiagField     = apiGetFunctionAddress(ODBC, "SQLGetDiagFieldW"),
+            GetDiagRec       = apiGetFunctionAddress(ODBC, "SQLGetDiagRecW"),
+            FreeStmt         = apiGetFunctionAddress(ODBC, "SQLFreeStmt"),
+            CloseCursor      = apiGetFunctionAddress(ODBC, "SQLCloseCursor"),
+            Cancel           = apiGetFunctionAddress(ODBC, "SQLCancel"),
+            CancelHandle     = ODBC.getFunctionAddress("SQLCancelHandle"),
+            EndTran          = apiGetFunctionAddress(ODBC, "SQLEndTran"),
+            Disconnect       = apiGetFunctionAddress(ODBC, "SQLDisconnect"),
+            FreeHandle       = apiGetFunctionAddress(ODBC, "SQLFreeHandle"),
+            CompleteAsync    = ODBC.getFunctionAddress("SQLCompleteAsync"),
+            Columns          = apiGetFunctionAddress(ODBC, "SQLColumnsW"),
+            SpecialColumns   = apiGetFunctionAddress(ODBC, "SQLSpecialColumnsW"),
+            Statistics       = apiGetFunctionAddress(ODBC, "SQLStatisticsW"),
+            Tables           = apiGetFunctionAddress(ODBC, "SQLTablesW"),
+            Transact         = ODBC.getFunctionAddress("SQLTransact"),
+            DriverConnect    = apiGetFunctionAddress(ODBC, "SQLDriverConnectW"),
+            BrowseConnect    = apiGetFunctionAddress(ODBC, "SQLBrowseConnectW"),
+            BulkOperations   = apiGetFunctionAddress(ODBC, "SQLBulkOperations"),
+            ColumnPrivileges = apiGetFunctionAddress(ODBC, "SQLColumnPrivilegesW"),
+            DescribeParam    = apiGetFunctionAddress(ODBC, "SQLDescribeParam"),
+            ExtendedFetch    = apiGetFunctionAddress(ODBC, "SQLExtendedFetch"),
+            ForeignKeys      = apiGetFunctionAddress(ODBC, "SQLForeignKeysW"),
+            MoreResults      = apiGetFunctionAddress(ODBC, "SQLMoreResults"),
+            NativeSql        = apiGetFunctionAddress(ODBC, "SQLNativeSqlW"),
+            NumParams        = apiGetFunctionAddress(ODBC, "SQLNumParams"),
+            ParamOptions     = apiGetFunctionAddress(ODBC, "SQLParamOptions"),
+            PrimaryKeys      = apiGetFunctionAddress(ODBC, "SQLPrimaryKeysW"),
+            ProcedureColumns = apiGetFunctionAddress(ODBC, "SQLProcedureColumnsW"),
+            Procedures       = apiGetFunctionAddress(ODBC, "SQLProceduresW"),
+            SetPos           = apiGetFunctionAddress(ODBC, "SQLSetPos"),
+            TablePrivileges  = apiGetFunctionAddress(ODBC, "SQLTablePrivilegesW"),
+            Drivers          = ODBC.getFunctionAddress("SQLDriversW"),
+            BindParameter    = apiGetFunctionAddress(ODBC, "SQLBindParameter"),
+            AllocHandleStd   = ODBC.getFunctionAddress("SQLAllocHandleStd");
+
+    }
+
+    /** Returns the odbc {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return ODBC;
+    }
+
     /** Special length/indicator values. */
     public static final short
         SQL_NULL_DATA    = -1,
@@ -1996,89 +2079,6 @@ public class SQL {
 
     protected SQL() {
         throw new UnsupportedOperationException();
-    }
-
-    private static final SharedLibrary ODBC = Library.loadNative(SQL.class, "org.lwjgl.odbc", Configuration.ODBC_LIBRARY_NAME, "odbc32", "odbc");
-
-    /** Contains the function pointers loaded from the odbc {@link SharedLibrary}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            AllocHandle      = apiGetFunctionAddress(ODBC, "SQLAllocHandle"),
-            Connect          = apiGetFunctionAddress(ODBC, "SQLConnectW"),
-            DataSources      = ODBC.getFunctionAddress("SQLDataSourcesW"),
-            GetInfo          = apiGetFunctionAddress(ODBC, "SQLGetInfoW"),
-            GetFunctions     = apiGetFunctionAddress(ODBC, "SQLGetFunctions"),
-            GetTypeInfo      = apiGetFunctionAddress(ODBC, "SQLGetTypeInfoW"),
-            SetConnectAttr   = apiGetFunctionAddress(ODBC, "SQLSetConnectAttrW"),
-            GetConnectAttr   = apiGetFunctionAddress(ODBC, "SQLGetConnectAttrW"),
-            SetEnvAttr       = apiGetFunctionAddress(ODBC, "SQLSetEnvAttr"),
-            GetEnvAttr       = apiGetFunctionAddress(ODBC, "SQLGetEnvAttr"),
-            SetStmtAttr      = apiGetFunctionAddress(ODBC, "SQLSetStmtAttrW"),
-            GetStmtAttr      = apiGetFunctionAddress(ODBC, "SQLGetStmtAttrW"),
-            GetDescField     = apiGetFunctionAddress(ODBC, "SQLGetDescFieldW"),
-            GetDescRec       = apiGetFunctionAddress(ODBC, "SQLGetDescRecW"),
-            SetDescField     = apiGetFunctionAddress(ODBC, "SQLSetDescFieldW"),
-            SetDescRec       = apiGetFunctionAddress(ODBC, "SQLSetDescRec"),
-            CopyDesc         = apiGetFunctionAddress(ODBC, "SQLCopyDesc"),
-            Prepare          = apiGetFunctionAddress(ODBC, "SQLPrepareW"),
-            GetCursorName    = apiGetFunctionAddress(ODBC, "SQLGetCursorNameW"),
-            SetCursorName    = apiGetFunctionAddress(ODBC, "SQLSetCursorNameW"),
-            Execute          = apiGetFunctionAddress(ODBC, "SQLExecute"),
-            ExecDirect       = apiGetFunctionAddress(ODBC, "SQLExecDirectW"),
-            ParamData        = apiGetFunctionAddress(ODBC, "SQLParamData"),
-            PutData          = apiGetFunctionAddress(ODBC, "SQLPutData"),
-            RowCount         = apiGetFunctionAddress(ODBC, "SQLRowCount"),
-            NumResultCols    = apiGetFunctionAddress(ODBC, "SQLNumResultCols"),
-            DescribeCol      = apiGetFunctionAddress(ODBC, "SQLDescribeColW"),
-            ColAttribute     = apiGetFunctionAddress(ODBC, "SQLColAttributeW"),
-            BindCol          = apiGetFunctionAddress(ODBC, "SQLBindCol"),
-            Fetch            = apiGetFunctionAddress(ODBC, "SQLFetch"),
-            FetchScroll      = apiGetFunctionAddress(ODBC, "SQLFetchScroll"),
-            GetData          = apiGetFunctionAddress(ODBC, "SQLGetData"),
-            GetDiagField     = apiGetFunctionAddress(ODBC, "SQLGetDiagFieldW"),
-            GetDiagRec       = apiGetFunctionAddress(ODBC, "SQLGetDiagRecW"),
-            FreeStmt         = apiGetFunctionAddress(ODBC, "SQLFreeStmt"),
-            CloseCursor      = apiGetFunctionAddress(ODBC, "SQLCloseCursor"),
-            Cancel           = apiGetFunctionAddress(ODBC, "SQLCancel"),
-            CancelHandle     = ODBC.getFunctionAddress("SQLCancelHandle"),
-            EndTran          = apiGetFunctionAddress(ODBC, "SQLEndTran"),
-            Disconnect       = apiGetFunctionAddress(ODBC, "SQLDisconnect"),
-            FreeHandle       = apiGetFunctionAddress(ODBC, "SQLFreeHandle"),
-            CompleteAsync    = ODBC.getFunctionAddress("SQLCompleteAsync"),
-            Columns          = apiGetFunctionAddress(ODBC, "SQLColumnsW"),
-            SpecialColumns   = apiGetFunctionAddress(ODBC, "SQLSpecialColumnsW"),
-            Statistics       = apiGetFunctionAddress(ODBC, "SQLStatisticsW"),
-            Tables           = apiGetFunctionAddress(ODBC, "SQLTablesW"),
-            Transact         = ODBC.getFunctionAddress("SQLTransact"),
-            DriverConnect    = apiGetFunctionAddress(ODBC, "SQLDriverConnectW"),
-            BrowseConnect    = apiGetFunctionAddress(ODBC, "SQLBrowseConnectW"),
-            BulkOperations   = apiGetFunctionAddress(ODBC, "SQLBulkOperations"),
-            ColumnPrivileges = apiGetFunctionAddress(ODBC, "SQLColumnPrivilegesW"),
-            DescribeParam    = apiGetFunctionAddress(ODBC, "SQLDescribeParam"),
-            ExtendedFetch    = apiGetFunctionAddress(ODBC, "SQLExtendedFetch"),
-            ForeignKeys      = apiGetFunctionAddress(ODBC, "SQLForeignKeysW"),
-            MoreResults      = apiGetFunctionAddress(ODBC, "SQLMoreResults"),
-            NativeSql        = apiGetFunctionAddress(ODBC, "SQLNativeSqlW"),
-            NumParams        = apiGetFunctionAddress(ODBC, "SQLNumParams"),
-            ParamOptions     = apiGetFunctionAddress(ODBC, "SQLParamOptions"),
-            PrimaryKeys      = apiGetFunctionAddress(ODBC, "SQLPrimaryKeysW"),
-            ProcedureColumns = apiGetFunctionAddress(ODBC, "SQLProcedureColumnsW"),
-            Procedures       = apiGetFunctionAddress(ODBC, "SQLProceduresW"),
-            SetPos           = apiGetFunctionAddress(ODBC, "SQLSetPos"),
-            TablePrivileges  = apiGetFunctionAddress(ODBC, "SQLTablePrivilegesW"),
-            Drivers          = ODBC.getFunctionAddress("SQLDriversW"),
-            BindParameter    = apiGetFunctionAddress(ODBC, "SQLBindParameter"),
-            AllocHandleStd   = ODBC.getFunctionAddress("SQLAllocHandleStd");
-
-    }
-
-    /** Returns the odbc {@link SharedLibrary}. */
-    public static SharedLibrary getLibrary() {
-        return ODBC;
     }
 
     // --- [ SQLAllocHandle ] ---

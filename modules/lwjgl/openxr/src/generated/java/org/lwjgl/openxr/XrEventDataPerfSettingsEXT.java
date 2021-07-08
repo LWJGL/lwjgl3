@@ -79,22 +79,22 @@ public class XrEventDataPerfSettingsEXT extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code domain} field. */
+    /** @return the value of the {@code domain} field. */
     @NativeType("XrPerfSettingsDomainEXT")
     public int domain() { return ndomain(address()); }
-    /** Returns the value of the {@code subDomain} field. */
+    /** @return the value of the {@code subDomain} field. */
     @NativeType("XrPerfSettingsSubDomainEXT")
     public int subDomain() { return nsubDomain(address()); }
-    /** Returns the value of the {@code fromLevel} field. */
+    /** @return the value of the {@code fromLevel} field. */
     @NativeType("XrPerfSettingsNotificationLevelEXT")
     public int fromLevel() { return nfromLevel(address()); }
-    /** Returns the value of the {@code toLevel} field. */
+    /** @return the value of the {@code toLevel} field. */
     @NativeType("XrPerfSettingsNotificationLevelEXT")
     public int toLevel() { return ntoLevel(address()); }
 
@@ -349,22 +349,22 @@ public class XrEventDataPerfSettingsEXT extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataPerfSettingsEXT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataPerfSettingsEXT.nnext(address()); }
-        /** Returns the value of the {@code domain} field. */
+        /** @return the value of the {@code domain} field. */
         @NativeType("XrPerfSettingsDomainEXT")
         public int domain() { return XrEventDataPerfSettingsEXT.ndomain(address()); }
-        /** Returns the value of the {@code subDomain} field. */
+        /** @return the value of the {@code subDomain} field. */
         @NativeType("XrPerfSettingsSubDomainEXT")
         public int subDomain() { return XrEventDataPerfSettingsEXT.nsubDomain(address()); }
-        /** Returns the value of the {@code fromLevel} field. */
+        /** @return the value of the {@code fromLevel} field. */
         @NativeType("XrPerfSettingsNotificationLevelEXT")
         public int fromLevel() { return XrEventDataPerfSettingsEXT.nfromLevel(address()); }
-        /** Returns the value of the {@code toLevel} field. */
+        /** @return the value of the {@code toLevel} field. */
         @NativeType("XrPerfSettingsNotificationLevelEXT")
         public int toLevel() { return XrEventDataPerfSettingsEXT.ntoLevel(address()); }
 

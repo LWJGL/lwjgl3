@@ -30,21 +30,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code modes} <b>must</b> not be 0</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code modes} &ndash; a bitfield of modes that the swapchain <b>can</b> be used with.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDeviceGroupSwapchainCreateInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkDeviceGroupPresentModeFlagsKHR modes;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkDeviceGroupPresentModeFlagsKHR {@link #modes};
  * }</code></pre>
  */
 public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements NativeResource {
@@ -89,21 +81,21 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code modes} field. */
+    /** a bitfield of modes that the swapchain <b>can</b> be used with. */
     @NativeType("VkDeviceGroupPresentModeFlagsKHR")
     public int modes() { return nmodes(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceGroupSwapchainCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceGroupSwapchainCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code modes} field. */
+    /** Sets the specified value to the {@link #modes} field. */
     public VkDeviceGroupSwapchainCreateInfoKHR modes(@NativeType("VkDeviceGroupPresentModeFlagsKHR") int value) { nmodes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -326,21 +318,21 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDeviceGroupSwapchainCreateInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceGroupSwapchainCreateInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDeviceGroupSwapchainCreateInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceGroupSwapchainCreateInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code modes} field. */
+        /** @return the value of the {@link VkDeviceGroupSwapchainCreateInfoKHR#modes} field. */
         @NativeType("VkDeviceGroupPresentModeFlagsKHR")
         public int modes() { return VkDeviceGroupSwapchainCreateInfoKHR.nmodes(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupSwapchainCreateInfoKHR#sType} field. */
         public VkDeviceGroupSwapchainCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupSwapchainCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupSwapchainCreateInfoKHR#pNext} field. */
         public VkDeviceGroupSwapchainCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupSwapchainCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code modes} field. */
+        /** Sets the specified value to the {@link VkDeviceGroupSwapchainCreateInfoKHR#modes} field. */
         public VkDeviceGroupSwapchainCreateInfoKHR.Buffer modes(@NativeType("VkDeviceGroupPresentModeFlagsKHR") int value) { VkDeviceGroupSwapchainCreateInfoKHR.nmodes(address(), value); return this; }
 
     }

@@ -24,21 +24,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link AMDTextureGatherBiasLod#VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL}.</li>
- * <li>{@code supportsTextureGatherLODBiasAMD} &ndash; tells if the image format can be used with texture gather bias/LOD functions, as introduced by the {@link AMDTextureGatherBiasLod VK_AMD_texture_gather_bias_lod} extension. This field is set by the implementation. User-specified value is ignored.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkTextureLODGatherFormatPropertiesAMD {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 supportsTextureGatherLODBiasAMD;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #supportsTextureGatherLODBiasAMD};
  * }</code></pre>
  */
 public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements NativeResource {
@@ -83,19 +75,19 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL}. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code supportsTextureGatherLODBiasAMD} field. */
+    /** tells if the image format can be used with texture gather bias/LOD functions, as introduced by the {@code VK_AMD_texture_gather_bias_lod.html[VK_AMD_texture_gather_bias_lod]} extension. This field is set by the implementation. User-specified value is ignored. */
     @NativeType("VkBool32")
     public boolean supportsTextureGatherLODBiasAMD() { return nsupportsTextureGatherLODBiasAMD(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkTextureLODGatherFormatPropertiesAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkTextureLODGatherFormatPropertiesAMD pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -314,19 +306,19 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkTextureLODGatherFormatPropertiesAMD#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkTextureLODGatherFormatPropertiesAMD.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkTextureLODGatherFormatPropertiesAMD#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkTextureLODGatherFormatPropertiesAMD.npNext(address()); }
-        /** Returns the value of the {@code supportsTextureGatherLODBiasAMD} field. */
+        /** @return the value of the {@link VkTextureLODGatherFormatPropertiesAMD#supportsTextureGatherLODBiasAMD} field. */
         @NativeType("VkBool32")
         public boolean supportsTextureGatherLODBiasAMD() { return VkTextureLODGatherFormatPropertiesAMD.nsupportsTextureGatherLODBiasAMD(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkTextureLODGatherFormatPropertiesAMD#sType} field. */
         public VkTextureLODGatherFormatPropertiesAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkTextureLODGatherFormatPropertiesAMD.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkTextureLODGatherFormatPropertiesAMD#pNext} field. */
         public VkTextureLODGatherFormatPropertiesAMD.Buffer pNext(@NativeType("void *") long value) { VkTextureLODGatherFormatPropertiesAMD.npNext(address(), value); return this; }
 
     }

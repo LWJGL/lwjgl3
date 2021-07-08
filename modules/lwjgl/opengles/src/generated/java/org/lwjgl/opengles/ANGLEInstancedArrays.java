@@ -30,10 +30,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ANGLEInstancedArrays {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameters of GetVertexAttribfv and GetVertexAttribiv. */
     public static final int GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE = 0x88FE;
-
-    static { GLES.initialize(); }
 
     protected ANGLEInstancedArrays() {
         throw new UnsupportedOperationException();

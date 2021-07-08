@@ -417,31 +417,6 @@ class Func(
 
             if (it.nativeType === va_list && i != parameters.lastIndex)
                 it.error("The va_list type can only be used on the last parameter of a function")
-
-            if (it.nativeType is FunctionType && !it.nativeType.function.skipNative) {
-                if (!hasReferenceFor<UserData>(it)) {
-                    it.error("Missing UserData parameter for callback parameter: ${it.name}")
-                }
-                Expression(
-                    "${if (it.has(nullable)) "${it.name} == null ? NULL : " else ""}${it.nativeType.function.className}.DELEGATE",
-                    keepParam = true,
-                    skipNormal = true
-                )..it
-            }
-
-            if (it.has<UserData>()) {
-                val callbackParamName = it.get<UserData>().reference
-                val callbackParam = paramMap[callbackParamName]
-                if (callbackParam == null) {
-                    it.error("Callback reference does not exist: UserData($callbackParamName)")
-                } else if (callbackParam.nativeType !is FunctionType) {
-                    it.error("UserData reference must be a callback parameter: UserData($callbackParamName)")
-                }
-                Expression(
-                    "$callbackParamName.$ADDRESS",
-                    skipNormal = true
-                )..it
-            }
         }
     }
 

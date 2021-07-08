@@ -18,12 +18,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying the allocation parameters for command buffer object.
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code commandBufferCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -37,25 +31,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK10#vkAllocateCommandBuffers AllocateCommandBuffers}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code commandPool} &ndash; the command pool from which the command buffers are allocated.</li>
- * <li>{@code level} &ndash; a {@code VkCommandBufferLevel} value specifying the command buffer level.</li>
- * <li>{@code commandBufferCount} &ndash; the number of command buffers to allocate from the pool.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkCommandBufferAllocateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkCommandPool commandPool;
- *     VkCommandBufferLevel level;
- *     uint32_t commandBufferCount;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkCommandPool {@link #commandPool};
+ *     VkCommandBufferLevel {@link #level};
+ *     uint32_t {@link #commandBufferCount};
  * }</code></pre>
  */
 public class VkCommandBufferAllocateInfo extends Struct implements NativeResource {
@@ -106,31 +90,31 @@ public class VkCommandBufferAllocateInfo extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code commandPool} field. */
+    /** the command pool from which the command buffers are allocated. */
     @NativeType("VkCommandPool")
     public long commandPool() { return ncommandPool(address()); }
-    /** Returns the value of the {@code level} field. */
+    /** a {@code VkCommandBufferLevel} value specifying the command buffer level. */
     @NativeType("VkCommandBufferLevel")
     public int level() { return nlevel(address()); }
-    /** Returns the value of the {@code commandBufferCount} field. */
+    /** the number of command buffers to allocate from the pool. */
     @NativeType("uint32_t")
     public int commandBufferCount() { return ncommandBufferCount(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkCommandBufferAllocateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkCommandBufferAllocateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code commandPool} field. */
+    /** Sets the specified value to the {@link #commandPool} field. */
     public VkCommandBufferAllocateInfo commandPool(@NativeType("VkCommandPool") long value) { ncommandPool(address(), value); return this; }
-    /** Sets the specified value to the {@code level} field. */
+    /** Sets the specified value to the {@link #level} field. */
     public VkCommandBufferAllocateInfo level(@NativeType("VkCommandBufferLevel") int value) { nlevel(address(), value); return this; }
-    /** Sets the specified value to the {@code commandBufferCount} field. */
+    /** Sets the specified value to the {@link #commandBufferCount} field. */
     public VkCommandBufferAllocateInfo commandBufferCount(@NativeType("uint32_t") int value) { ncommandBufferCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -365,31 +349,31 @@ public class VkCommandBufferAllocateInfo extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkCommandBufferAllocateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCommandBufferAllocateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkCommandBufferAllocateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCommandBufferAllocateInfo.npNext(address()); }
-        /** Returns the value of the {@code commandPool} field. */
+        /** @return the value of the {@link VkCommandBufferAllocateInfo#commandPool} field. */
         @NativeType("VkCommandPool")
         public long commandPool() { return VkCommandBufferAllocateInfo.ncommandPool(address()); }
-        /** Returns the value of the {@code level} field. */
+        /** @return the value of the {@link VkCommandBufferAllocateInfo#level} field. */
         @NativeType("VkCommandBufferLevel")
         public int level() { return VkCommandBufferAllocateInfo.nlevel(address()); }
-        /** Returns the value of the {@code commandBufferCount} field. */
+        /** @return the value of the {@link VkCommandBufferAllocateInfo#commandBufferCount} field. */
         @NativeType("uint32_t")
         public int commandBufferCount() { return VkCommandBufferAllocateInfo.ncommandBufferCount(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkCommandBufferAllocateInfo#sType} field. */
         public VkCommandBufferAllocateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandBufferAllocateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkCommandBufferAllocateInfo#pNext} field. */
         public VkCommandBufferAllocateInfo.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferAllocateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code commandPool} field. */
+        /** Sets the specified value to the {@link VkCommandBufferAllocateInfo#commandPool} field. */
         public VkCommandBufferAllocateInfo.Buffer commandPool(@NativeType("VkCommandPool") long value) { VkCommandBufferAllocateInfo.ncommandPool(address(), value); return this; }
-        /** Sets the specified value to the {@code level} field. */
+        /** Sets the specified value to the {@link VkCommandBufferAllocateInfo#level} field. */
         public VkCommandBufferAllocateInfo.Buffer level(@NativeType("VkCommandBufferLevel") int value) { VkCommandBufferAllocateInfo.nlevel(address(), value); return this; }
-        /** Sets the specified value to the {@code commandBufferCount} field. */
+        /** Sets the specified value to the {@link VkCommandBufferAllocateInfo#commandBufferCount} field. */
         public VkCommandBufferAllocateInfo.Buffer commandBufferCount(@NativeType("uint32_t") int value) { VkCommandBufferAllocateInfo.ncommandBufferCount(address(), value); return this; }
 
     }

@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Defines a method.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code name} &ndash; the name of the method at runtime</li>
- * <li>{@code types} &ndash; the types of the method arguments</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct objc_method_description {
- *     SEL name;
- *     char * types;
+ *     SEL {@link #name};
+ *     char * {@link #types};
  * }</code></pre>
  */
 @NativeType("struct objc_method_description")
@@ -73,13 +66,13 @@ public class ObjCMethodDescription extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code name} field. */
+    /** the name of the method at runtime */
     @NativeType("SEL")
     public long name() { return nname(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code types} field. */
+    /** the types of the method arguments */
     @NativeType("char *")
     public ByteBuffer types() { return ntypes(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code types} field. */
+    /** the types of the method arguments */
     @NativeType("char *")
     public String typesString() { return ntypesString(address()); }
 
@@ -271,13 +264,13 @@ public class ObjCMethodDescription extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code name} field. */
+        /** @return the value of the {@link ObjCMethodDescription#name} field. */
         @NativeType("SEL")
         public long name() { return ObjCMethodDescription.nname(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code types} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link ObjCMethodDescription#types} field. */
         @NativeType("char *")
         public ByteBuffer types() { return ObjCMethodDescription.ntypes(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code types} field. */
+        /** @return the null-terminated string pointed to by the {@link ObjCMethodDescription#types} field. */
         @NativeType("char *")
         public String typesString() { return ObjCMethodDescription.ntypesString(address()); }
 

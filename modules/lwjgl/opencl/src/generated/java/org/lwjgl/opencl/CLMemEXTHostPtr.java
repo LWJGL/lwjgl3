@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Accepted by the {@code host_ptr} argument of {@link CL10#clCreateBuffer CreateBuffer}, {@link CL10#clCreateImage2D CreateImage2D} and {@link CL10#clCreateImage3D CreateImage3D}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code allocation_type} &ndash; type of external memory allocation. Legal values will be defined in layered extensions.</li>
- * <li>{@code host_cache_policy} &ndash; host cache policy for this external memory allocation</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct cl_mem_ext_host_ptr {
- *     cl_uint allocation_type;
- *     cl_uint host_cache_policy;
+ *     cl_uint {@link #allocation_type};
+ *     cl_uint {@link #host_cache_policy};
  * }</code></pre>
  */
 @NativeType("struct cl_mem_ext_host_ptr")
@@ -73,16 +66,16 @@ public class CLMemEXTHostPtr extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code allocation_type} field. */
+    /** type of external memory allocation. Legal values will be defined in layered extensions. */
     @NativeType("cl_uint")
     public int allocation_type() { return nallocation_type(address()); }
-    /** Returns the value of the {@code host_cache_policy} field. */
+    /** host cache policy for this external memory allocation */
     @NativeType("cl_uint")
     public int host_cache_policy() { return nhost_cache_policy(address()); }
 
-    /** Sets the specified value to the {@code allocation_type} field. */
+    /** Sets the specified value to the {@link #allocation_type} field. */
     public CLMemEXTHostPtr allocation_type(@NativeType("cl_uint") int value) { nallocation_type(address(), value); return this; }
-    /** Sets the specified value to the {@code host_cache_policy} field. */
+    /** Sets the specified value to the {@link #host_cache_policy} field. */
     public CLMemEXTHostPtr host_cache_policy(@NativeType("cl_uint") int value) { nhost_cache_policy(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,16 +292,16 @@ public class CLMemEXTHostPtr extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code allocation_type} field. */
+        /** @return the value of the {@link CLMemEXTHostPtr#allocation_type} field. */
         @NativeType("cl_uint")
         public int allocation_type() { return CLMemEXTHostPtr.nallocation_type(address()); }
-        /** Returns the value of the {@code host_cache_policy} field. */
+        /** @return the value of the {@link CLMemEXTHostPtr#host_cache_policy} field. */
         @NativeType("cl_uint")
         public int host_cache_policy() { return CLMemEXTHostPtr.nhost_cache_policy(address()); }
 
-        /** Sets the specified value to the {@code allocation_type} field. */
+        /** Sets the specified value to the {@link CLMemEXTHostPtr#allocation_type} field. */
         public CLMemEXTHostPtr.Buffer allocation_type(@NativeType("cl_uint") int value) { CLMemEXTHostPtr.nallocation_type(address(), value); return this; }
-        /** Sets the specified value to the {@code host_cache_policy} field. */
+        /** Sets the specified value to the {@link CLMemEXTHostPtr#host_cache_policy} field. */
         public CLMemEXTHostPtr.Buffer host_cache_policy(@NativeType("cl_uint") int value) { CLMemEXTHostPtr.nhost_cache_policy(address(), value); return this; }
 
     }

@@ -28,6 +28,8 @@ import org.lwjgl.system.*;
  */
 public class NVFramebufferMultisample {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetRenderbufferParameteriv. */
     public static final int GL_RENDERBUFFER_SAMPLES_NV = 0x8CAB;
 
@@ -36,8 +38,6 @@ public class NVFramebufferMultisample {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv. */
     public static final int GL_MAX_SAMPLES_NV = 0x8D57;
-
-    static { GLES.initialize(); }
 
     protected NVFramebufferMultisample() {
         throw new UnsupportedOperationException();

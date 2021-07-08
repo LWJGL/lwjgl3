@@ -67,13 +67,13 @@ public class XrControllerModelNodeStateMSFT extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link XrPosef} view of the {@code nodePose} field. */
+    /** @return a {@link XrPosef} view of the {@code nodePose} field. */
     public XrPosef nodePose() { return nnodePose(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -305,13 +305,13 @@ public class XrControllerModelNodeStateMSFT extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrControllerModelNodeStateMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrControllerModelNodeStateMSFT.nnext(address()); }
-        /** Returns a {@link XrPosef} view of the {@code nodePose} field. */
+        /** @return a {@link XrPosef} view of the {@code nodePose} field. */
         public XrPosef nodePose() { return XrControllerModelNodeStateMSFT.nnodePose(address()); }
 
         /** Sets the specified value to the {@code type} field. */

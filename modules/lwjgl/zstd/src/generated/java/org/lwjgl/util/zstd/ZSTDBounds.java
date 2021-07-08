@@ -68,12 +68,12 @@ public class ZSTDBounds extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code error} field. */
+    /** @return the value of the {@code error} field. */
     @NativeType("size_t")
     public long error() { return nerror(address()); }
-    /** Returns the value of the {@code lowerBound} field. */
+    /** @return the value of the {@code lowerBound} field. */
     public int lowerBound() { return nlowerBound(address()); }
-    /** Returns the value of the {@code upperBound} field. */
+    /** @return the value of the {@code upperBound} field. */
     public int upperBound() { return nupperBound(address()); }
 
     // -----------------------------------
@@ -264,12 +264,12 @@ public class ZSTDBounds extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code error} field. */
+        /** @return the value of the {@code error} field. */
         @NativeType("size_t")
         public long error() { return ZSTDBounds.nerror(address()); }
-        /** Returns the value of the {@code lowerBound} field. */
+        /** @return the value of the {@code lowerBound} field. */
         public int lowerBound() { return ZSTDBounds.nlowerBound(address()); }
-        /** Returns the value of the {@code upperBound} field. */
+        /** @return the value of the {@code upperBound} field. */
         public int upperBound() { return ZSTDBounds.nupperBound(address()); }
 
     }

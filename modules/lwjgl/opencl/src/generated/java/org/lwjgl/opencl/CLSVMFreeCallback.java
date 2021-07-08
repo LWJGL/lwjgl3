@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     cl_command_queue queue,
  *     cl_uint num_svm_pointers,
  *     void **svm_pointers,
@@ -52,7 +52,7 @@ public abstract class CLSVMFreeCallback extends Callback implements CLSVMFreeCal
     }
 
     protected CLSVMFreeCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CLSVMFreeCallback(long functionPointer) {

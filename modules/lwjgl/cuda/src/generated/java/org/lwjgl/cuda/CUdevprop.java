@@ -19,35 +19,20 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Legacy device properties.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code maxThreadsPerBlock} &ndash; Maximum number of threads per block</li>
- * <li>{@code maxThreadsDim[3]} &ndash; Maximum size of each dimension of a block</li>
- * <li>{@code maxGridSize[3]} &ndash; Maximum size of each dimension of a grid</li>
- * <li>{@code sharedMemPerBlock} &ndash; Shared memory available per block in bytes</li>
- * <li>{@code totalConstantMemory} &ndash; Constant memory available on device in bytes</li>
- * <li>{@code SIMDWidth} &ndash; Warp size in threads</li>
- * <li>{@code memPitch} &ndash; Maximum pitch in bytes allowed by memory copies</li>
- * <li>{@code regsPerBlock} &ndash; 32-bit registers available per block</li>
- * <li>{@code clockRate} &ndash; Clock frequency in kilohertz</li>
- * <li>{@code textureAlign} &ndash; Alignment requirement for textures</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUdevprop {
- *     int maxThreadsPerBlock;
- *     int maxThreadsDim[3];
- *     int maxGridSize[3];
- *     int sharedMemPerBlock;
- *     int totalConstantMemory;
- *     int SIMDWidth;
- *     int memPitch;
- *     int regsPerBlock;
- *     int clockRate;
- *     int textureAlign;
+ *     int {@link #maxThreadsPerBlock};
+ *     int {@link #maxThreadsDim}[3];
+ *     int {@link #maxGridSize}[3];
+ *     int {@link #sharedMemPerBlock};
+ *     int {@link #totalConstantMemory};
+ *     int {@link #SIMDWidth};
+ *     int {@link #memPitch};
+ *     int {@link #regsPerBlock};
+ *     int {@link #clockRate};
+ *     int {@link #textureAlign};
  * }</code></pre>
  */
 public class CUdevprop extends Struct implements NativeResource {
@@ -113,56 +98,56 @@ public class CUdevprop extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code maxThreadsPerBlock} field. */
+    /** Maximum number of threads per block */
     public int maxThreadsPerBlock() { return nmaxThreadsPerBlock(address()); }
-    /** Returns a {@link IntBuffer} view of the {@code maxThreadsDim} field. */
+    /** Maximum size of each dimension of a block */
     @NativeType("int[3]")
     public IntBuffer maxThreadsDim() { return nmaxThreadsDim(address()); }
-    /** Returns the value at the specified index of the {@code maxThreadsDim} field. */
+    /** Maximum size of each dimension of a block */
     public int maxThreadsDim(int index) { return nmaxThreadsDim(address(), index); }
-    /** Returns a {@link IntBuffer} view of the {@code maxGridSize} field. */
+    /** Maximum size of each dimension of a grid */
     @NativeType("int[3]")
     public IntBuffer maxGridSize() { return nmaxGridSize(address()); }
-    /** Returns the value at the specified index of the {@code maxGridSize} field. */
+    /** Maximum size of each dimension of a grid */
     public int maxGridSize(int index) { return nmaxGridSize(address(), index); }
-    /** Returns the value of the {@code sharedMemPerBlock} field. */
+    /** Shared memory available per block in bytes */
     public int sharedMemPerBlock() { return nsharedMemPerBlock(address()); }
-    /** Returns the value of the {@code totalConstantMemory} field. */
+    /** Constant memory available on device in bytes */
     public int totalConstantMemory() { return ntotalConstantMemory(address()); }
-    /** Returns the value of the {@code SIMDWidth} field. */
+    /** Warp size in threads */
     public int SIMDWidth() { return nSIMDWidth(address()); }
-    /** Returns the value of the {@code memPitch} field. */
+    /** Maximum pitch in bytes allowed by memory copies */
     public int memPitch() { return nmemPitch(address()); }
-    /** Returns the value of the {@code regsPerBlock} field. */
+    /** 32-bit registers available per block */
     public int regsPerBlock() { return nregsPerBlock(address()); }
-    /** Returns the value of the {@code clockRate} field. */
+    /** Clock frequency in kilohertz */
     public int clockRate() { return nclockRate(address()); }
-    /** Returns the value of the {@code textureAlign} field. */
+    /** Alignment requirement for textures */
     public int textureAlign() { return ntextureAlign(address()); }
 
-    /** Sets the specified value to the {@code maxThreadsPerBlock} field. */
+    /** Sets the specified value to the {@link #maxThreadsPerBlock} field. */
     public CUdevprop maxThreadsPerBlock(int value) { nmaxThreadsPerBlock(address(), value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@code maxThreadsDim} field. */
+    /** Copies the specified {@link IntBuffer} to the {@link #maxThreadsDim} field. */
     public CUdevprop maxThreadsDim(@NativeType("int[3]") IntBuffer value) { nmaxThreadsDim(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code maxThreadsDim} field. */
+    /** Sets the specified value at the specified index of the {@link #maxThreadsDim} field. */
     public CUdevprop maxThreadsDim(int index, int value) { nmaxThreadsDim(address(), index, value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@code maxGridSize} field. */
+    /** Copies the specified {@link IntBuffer} to the {@link #maxGridSize} field. */
     public CUdevprop maxGridSize(@NativeType("int[3]") IntBuffer value) { nmaxGridSize(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code maxGridSize} field. */
+    /** Sets the specified value at the specified index of the {@link #maxGridSize} field. */
     public CUdevprop maxGridSize(int index, int value) { nmaxGridSize(address(), index, value); return this; }
-    /** Sets the specified value to the {@code sharedMemPerBlock} field. */
+    /** Sets the specified value to the {@link #sharedMemPerBlock} field. */
     public CUdevprop sharedMemPerBlock(int value) { nsharedMemPerBlock(address(), value); return this; }
-    /** Sets the specified value to the {@code totalConstantMemory} field. */
+    /** Sets the specified value to the {@link #totalConstantMemory} field. */
     public CUdevprop totalConstantMemory(int value) { ntotalConstantMemory(address(), value); return this; }
-    /** Sets the specified value to the {@code SIMDWidth} field. */
+    /** Sets the specified value to the {@link #SIMDWidth} field. */
     public CUdevprop SIMDWidth(int value) { nSIMDWidth(address(), value); return this; }
-    /** Sets the specified value to the {@code memPitch} field. */
+    /** Sets the specified value to the {@link #memPitch} field. */
     public CUdevprop memPitch(int value) { nmemPitch(address(), value); return this; }
-    /** Sets the specified value to the {@code regsPerBlock} field. */
+    /** Sets the specified value to the {@link #regsPerBlock} field. */
     public CUdevprop regsPerBlock(int value) { nregsPerBlock(address(), value); return this; }
-    /** Sets the specified value to the {@code clockRate} field. */
+    /** Sets the specified value to the {@link #clockRate} field. */
     public CUdevprop clockRate(int value) { nclockRate(address(), value); return this; }
-    /** Sets the specified value to the {@code textureAlign} field. */
+    /** Sets the specified value to the {@link #textureAlign} field. */
     public CUdevprop textureAlign(int value) { ntextureAlign(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -449,56 +434,56 @@ public class CUdevprop extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code maxThreadsPerBlock} field. */
+        /** @return the value of the {@link CUdevprop#maxThreadsPerBlock} field. */
         public int maxThreadsPerBlock() { return CUdevprop.nmaxThreadsPerBlock(address()); }
-        /** Returns a {@link IntBuffer} view of the {@code maxThreadsDim} field. */
+        /** @return a {@link IntBuffer} view of the {@link CUdevprop#maxThreadsDim} field. */
         @NativeType("int[3]")
         public IntBuffer maxThreadsDim() { return CUdevprop.nmaxThreadsDim(address()); }
-        /** Returns the value at the specified index of the {@code maxThreadsDim} field. */
+        /** @return the value at the specified index of the {@link CUdevprop#maxThreadsDim} field. */
         public int maxThreadsDim(int index) { return CUdevprop.nmaxThreadsDim(address(), index); }
-        /** Returns a {@link IntBuffer} view of the {@code maxGridSize} field. */
+        /** @return a {@link IntBuffer} view of the {@link CUdevprop#maxGridSize} field. */
         @NativeType("int[3]")
         public IntBuffer maxGridSize() { return CUdevprop.nmaxGridSize(address()); }
-        /** Returns the value at the specified index of the {@code maxGridSize} field. */
+        /** @return the value at the specified index of the {@link CUdevprop#maxGridSize} field. */
         public int maxGridSize(int index) { return CUdevprop.nmaxGridSize(address(), index); }
-        /** Returns the value of the {@code sharedMemPerBlock} field. */
+        /** @return the value of the {@link CUdevprop#sharedMemPerBlock} field. */
         public int sharedMemPerBlock() { return CUdevprop.nsharedMemPerBlock(address()); }
-        /** Returns the value of the {@code totalConstantMemory} field. */
+        /** @return the value of the {@link CUdevprop#totalConstantMemory} field. */
         public int totalConstantMemory() { return CUdevprop.ntotalConstantMemory(address()); }
-        /** Returns the value of the {@code SIMDWidth} field. */
+        /** @return the value of the {@link CUdevprop#SIMDWidth} field. */
         public int SIMDWidth() { return CUdevprop.nSIMDWidth(address()); }
-        /** Returns the value of the {@code memPitch} field. */
+        /** @return the value of the {@link CUdevprop#memPitch} field. */
         public int memPitch() { return CUdevprop.nmemPitch(address()); }
-        /** Returns the value of the {@code regsPerBlock} field. */
+        /** @return the value of the {@link CUdevprop#regsPerBlock} field. */
         public int regsPerBlock() { return CUdevprop.nregsPerBlock(address()); }
-        /** Returns the value of the {@code clockRate} field. */
+        /** @return the value of the {@link CUdevprop#clockRate} field. */
         public int clockRate() { return CUdevprop.nclockRate(address()); }
-        /** Returns the value of the {@code textureAlign} field. */
+        /** @return the value of the {@link CUdevprop#textureAlign} field. */
         public int textureAlign() { return CUdevprop.ntextureAlign(address()); }
 
-        /** Sets the specified value to the {@code maxThreadsPerBlock} field. */
+        /** Sets the specified value to the {@link CUdevprop#maxThreadsPerBlock} field. */
         public CUdevprop.Buffer maxThreadsPerBlock(int value) { CUdevprop.nmaxThreadsPerBlock(address(), value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@code maxThreadsDim} field. */
+        /** Copies the specified {@link IntBuffer} to the {@link CUdevprop#maxThreadsDim} field. */
         public CUdevprop.Buffer maxThreadsDim(@NativeType("int[3]") IntBuffer value) { CUdevprop.nmaxThreadsDim(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code maxThreadsDim} field. */
+        /** Sets the specified value at the specified index of the {@link CUdevprop#maxThreadsDim} field. */
         public CUdevprop.Buffer maxThreadsDim(int index, int value) { CUdevprop.nmaxThreadsDim(address(), index, value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@code maxGridSize} field. */
+        /** Copies the specified {@link IntBuffer} to the {@link CUdevprop#maxGridSize} field. */
         public CUdevprop.Buffer maxGridSize(@NativeType("int[3]") IntBuffer value) { CUdevprop.nmaxGridSize(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code maxGridSize} field. */
+        /** Sets the specified value at the specified index of the {@link CUdevprop#maxGridSize} field. */
         public CUdevprop.Buffer maxGridSize(int index, int value) { CUdevprop.nmaxGridSize(address(), index, value); return this; }
-        /** Sets the specified value to the {@code sharedMemPerBlock} field. */
+        /** Sets the specified value to the {@link CUdevprop#sharedMemPerBlock} field. */
         public CUdevprop.Buffer sharedMemPerBlock(int value) { CUdevprop.nsharedMemPerBlock(address(), value); return this; }
-        /** Sets the specified value to the {@code totalConstantMemory} field. */
+        /** Sets the specified value to the {@link CUdevprop#totalConstantMemory} field. */
         public CUdevprop.Buffer totalConstantMemory(int value) { CUdevprop.ntotalConstantMemory(address(), value); return this; }
-        /** Sets the specified value to the {@code SIMDWidth} field. */
+        /** Sets the specified value to the {@link CUdevprop#SIMDWidth} field. */
         public CUdevprop.Buffer SIMDWidth(int value) { CUdevprop.nSIMDWidth(address(), value); return this; }
-        /** Sets the specified value to the {@code memPitch} field. */
+        /** Sets the specified value to the {@link CUdevprop#memPitch} field. */
         public CUdevprop.Buffer memPitch(int value) { CUdevprop.nmemPitch(address(), value); return this; }
-        /** Sets the specified value to the {@code regsPerBlock} field. */
+        /** Sets the specified value to the {@link CUdevprop#regsPerBlock} field. */
         public CUdevprop.Buffer regsPerBlock(int value) { CUdevprop.nregsPerBlock(address(), value); return this; }
-        /** Sets the specified value to the {@code clockRate} field. */
+        /** Sets the specified value to the {@link CUdevprop#clockRate} field. */
         public CUdevprop.Buffer clockRate(int value) { CUdevprop.nclockRate(address(), value); return this; }
-        /** Sets the specified value to the {@code textureAlign} field. */
+        /** Sets the specified value to the {@link CUdevprop#textureAlign} field. */
         public CUdevprop.Buffer textureAlign(int value) { CUdevprop.ntextureAlign(address(), value); return this; }
 
     }

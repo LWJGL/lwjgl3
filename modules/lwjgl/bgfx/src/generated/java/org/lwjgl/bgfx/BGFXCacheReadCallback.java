@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * bool (*) (
+ * bool (*{@link #invoke}) (
  *     bgfx_callback_interface_t *_this,
  *     uint64_t _id,
  *     void *_data,
@@ -52,7 +52,7 @@ public abstract class BGFXCacheReadCallback extends Callback implements BGFXCach
     }
 
     protected BGFXCacheReadCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     BGFXCacheReadCallback(long functionPointer) {

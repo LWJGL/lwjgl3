@@ -1,12 +1,11 @@
 [![Maven Central](https://img.shields.io/maven-central/v/org.lwjgl/lwjgl.svg?label=maven%20central)](https://search.maven.org/search?q=g:org.lwjgl)
 [![API Javadoc](https://img.shields.io/badge/API-docs-blue.svg)](https://javadoc.lwjgl.org/)
 [![License](https://img.shields.io/badge/license-BSD-blue.svg?colorB=lightgray)](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md)
-[![Slack Status](https://slackin-bfxneqmzsp.now.sh/badge.svg)](http://slack.lwjgl.org/)
 
 [![Backers on Open Collective](https://opencollective.com/lwjgl/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/lwjgl/sponsors/badge.svg)](#sponsors)
 ![Size](https://img.shields.io/github/repo-size/LWJGL/lwjgl3.svg?label=size&colorB=lightgray)
-[![Build Status](https://travis-ci.org/LWJGL-CI/lwjgl3.svg?branch=master-linux64)](https://travis-ci.org/LWJGL-CI/lwjgl3)
+[![Build Status](https://img.shields.io/github/workflow/status/LWJGL-CI/glfw/LWJGL%20Build?logo=github)](https://github.com/LWJGL-CI/lwjgl3/actions/workflows/CI.yml)
 
 ## LWJGL - Lightweight Java Game Library 3
 
@@ -34,7 +33,8 @@ Useful links:
 Contact:
 
 - [Forum](http://forum.lwjgl.org)
-- [Slack](https://lwjgl.slack.com/) (invitations [here](http://slack.lwjgl.org/))
+- [Slack](https://lwjgl.slack.com/) (click [this](http://slack.lwjgl.org/) to join)
+- [Discord](https://discord.gg/6CywMCs)
 - [Twitter](https://twitter.com/LWJGL)
 
 If you'd like to contribute, see [doc/README](https://github.com/LWJGL/lwjgl3/tree/master/doc)
@@ -174,8 +174,8 @@ improve the chances of a quick and useful response.
 |-------|-----------|
 |[Bullet Physics](http://bulletphysics.org/)|Real-time collision detection and multi-physics simulation for VR, games, visual effects, robotics, machine learning etc.|
 |[CUDA](https://developer.nvidia.com/cuda-zone/)|A parallel computing platform and programming model developed by NVIDIA for general computing on GPUs.|
-|[dyncall](http://www.dyncall.org/)|Encapsulates architecture-, OS- and compiler-specific function call semantics in a virtual bind argument parameters from left to right and then call interface allowing programmers to call C functions in a completely dynamic manner.|
 |[jemalloc](http://jemalloc.net/)|A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support.|
+|[libffi](https://sourceware.org)|A portable, high level programming interface to various calling conventions.|
 |[libdivide](https://libdivide.com/)|A library that replaces expensive integer divides with comparatively cheap multiplication and bitshifts.|
 |[LLVM](https://llvm.org/)|A collection of modular and reusable compiler and toolchain technologies.|
 |[LMDB](https://symas.com/products/lightning-memory-mapped-database/)|An extraordinarily fast, memory-efficient database. With memory-mapped files, it has the read performance of a pure in-memory database while retaining the persistence of standard disk-based databases.|

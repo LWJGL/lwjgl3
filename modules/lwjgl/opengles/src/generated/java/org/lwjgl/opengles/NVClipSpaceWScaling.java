@@ -31,6 +31,8 @@ import org.lwjgl.system.*;
  */
 public class NVClipSpaceWScaling {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled. */
     public static final int GL_VIEWPORT_POSITION_W_SCALE_NV = 0x937C;
 
@@ -38,8 +40,6 @@ public class NVClipSpaceWScaling {
     public static final int
         GL_VIEWPORT_POSITION_W_SCALE_X_COEFF = 0x937D,
         GL_VIEWPORT_POSITION_W_SCALE_Y_COEFF = 0x937E;
-
-    static { GLES.initialize(); }
 
     protected NVClipSpaceWScaling() {
         throw new UnsupportedOperationException();

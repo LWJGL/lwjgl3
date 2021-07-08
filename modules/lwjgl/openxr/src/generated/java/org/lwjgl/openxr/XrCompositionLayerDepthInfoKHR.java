@@ -83,21 +83,21 @@ public class XrCompositionLayerDepthInfoKHR extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
+    /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
-    /** Returns the value of the {@code minDepth} field. */
+    /** @return the value of the {@code minDepth} field. */
     public float minDepth() { return nminDepth(address()); }
-    /** Returns the value of the {@code maxDepth} field. */
+    /** @return the value of the {@code maxDepth} field. */
     public float maxDepth() { return nmaxDepth(address()); }
-    /** Returns the value of the {@code nearZ} field. */
+    /** @return the value of the {@code nearZ} field. */
     public float nearZ() { return nnearZ(address()); }
-    /** Returns the value of the {@code farZ} field. */
+    /** @return the value of the {@code farZ} field. */
     public float farZ() { return nfarZ(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -382,21 +382,21 @@ public class XrCompositionLayerDepthInfoKHR extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerDepthInfoKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerDepthInfoKHR.nnext(address()); }
-        /** Returns a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
+        /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
         public XrSwapchainSubImage subImage() { return XrCompositionLayerDepthInfoKHR.nsubImage(address()); }
-        /** Returns the value of the {@code minDepth} field. */
+        /** @return the value of the {@code minDepth} field. */
         public float minDepth() { return XrCompositionLayerDepthInfoKHR.nminDepth(address()); }
-        /** Returns the value of the {@code maxDepth} field. */
+        /** @return the value of the {@code maxDepth} field. */
         public float maxDepth() { return XrCompositionLayerDepthInfoKHR.nmaxDepth(address()); }
-        /** Returns the value of the {@code nearZ} field. */
+        /** @return the value of the {@code nearZ} field. */
         public float nearZ() { return XrCompositionLayerDepthInfoKHR.nnearZ(address()); }
-        /** Returns the value of the {@code farZ} field. */
+        /** @return the value of the {@code farZ} field. */
         public float farZ() { return XrCompositionLayerDepthInfoKHR.nfarZ(address()); }
 
         /** Sets the specified value to the {@code type} field. */

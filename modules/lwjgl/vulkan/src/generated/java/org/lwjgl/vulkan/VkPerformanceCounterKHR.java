@@ -32,27 +32,16 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <p>{@link KHRPerformanceQuery#vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR EnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code unit} &ndash; a {@code VkPerformanceCounterUnitKHR} specifying the unit that the counter data will record.</li>
- * <li>{@code scope} &ndash; a {@code VkPerformanceCounterScopeKHR} specifying the scope that the counter belongs to.</li>
- * <li>{@code storage} &ndash; a {@code VkPerformanceCounterStorageKHR} specifying the storage type that the counter&#8217;s data uses.</li>
- * <li>{@code uuid[VK_UUID_SIZE]} &ndash; an array of size {@link VK10#VK_UUID_SIZE UUID_SIZE}, containing 8-bit values that represent a universally unique identifier for the counter of the physical device.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPerformanceCounterKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPerformanceCounterUnitKHR unit;
- *     VkPerformanceCounterScopeKHR scope;
- *     VkPerformanceCounterStorageKHR storage;
- *     uint8_t uuid[VK_UUID_SIZE];
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPerformanceCounterUnitKHR {@link #unit};
+ *     VkPerformanceCounterScopeKHR {@link #scope};
+ *     VkPerformanceCounterStorageKHR {@link #storage};
+ *     uint8_t {@link #uuid}[VK_UUID_SIZE];
  * }</code></pre>
  */
 public class VkPerformanceCounterKHR extends Struct implements NativeResource {
@@ -106,31 +95,31 @@ public class VkPerformanceCounterKHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code unit} field. */
+    /** a {@code VkPerformanceCounterUnitKHR} specifying the unit that the counter data will record. */
     @NativeType("VkPerformanceCounterUnitKHR")
     public int unit() { return nunit(address()); }
-    /** Returns the value of the {@code scope} field. */
+    /** a {@code VkPerformanceCounterScopeKHR} specifying the scope that the counter belongs to. */
     @NativeType("VkPerformanceCounterScopeKHR")
     public int scope() { return nscope(address()); }
-    /** Returns the value of the {@code storage} field. */
+    /** a {@code VkPerformanceCounterStorageKHR} specifying the storage type that the counter&#8217;s data uses. */
     @NativeType("VkPerformanceCounterStorageKHR")
     public int storage() { return nstorage(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code uuid} field. */
+    /** an array of size {@link VK10#VK_UUID_SIZE UUID_SIZE}, containing 8-bit values that represent a universally unique identifier for the counter of the physical device. */
     @NativeType("uint8_t[VK_UUID_SIZE]")
     public ByteBuffer uuid() { return nuuid(address()); }
-    /** Returns the value at the specified index of the {@code uuid} field. */
+    /** an array of size {@link VK10#VK_UUID_SIZE UUID_SIZE}, containing 8-bit values that represent a universally unique identifier for the counter of the physical device. */
     @NativeType("uint8_t")
     public byte uuid(int index) { return nuuid(address(), index); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPerformanceCounterKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPerformanceCounterKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -359,31 +348,31 @@ public class VkPerformanceCounterKHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPerformanceCounterKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPerformanceCounterKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPerformanceCounterKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPerformanceCounterKHR.npNext(address()); }
-        /** Returns the value of the {@code unit} field. */
+        /** @return the value of the {@link VkPerformanceCounterKHR#unit} field. */
         @NativeType("VkPerformanceCounterUnitKHR")
         public int unit() { return VkPerformanceCounterKHR.nunit(address()); }
-        /** Returns the value of the {@code scope} field. */
+        /** @return the value of the {@link VkPerformanceCounterKHR#scope} field. */
         @NativeType("VkPerformanceCounterScopeKHR")
         public int scope() { return VkPerformanceCounterKHR.nscope(address()); }
-        /** Returns the value of the {@code storage} field. */
+        /** @return the value of the {@link VkPerformanceCounterKHR#storage} field. */
         @NativeType("VkPerformanceCounterStorageKHR")
         public int storage() { return VkPerformanceCounterKHR.nstorage(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code uuid} field. */
+        /** @return a {@link ByteBuffer} view of the {@link VkPerformanceCounterKHR#uuid} field. */
         @NativeType("uint8_t[VK_UUID_SIZE]")
         public ByteBuffer uuid() { return VkPerformanceCounterKHR.nuuid(address()); }
-        /** Returns the value at the specified index of the {@code uuid} field. */
+        /** @return the value at the specified index of the {@link VkPerformanceCounterKHR#uuid} field. */
         @NativeType("uint8_t")
         public byte uuid(int index) { return VkPerformanceCounterKHR.nuuid(address(), index); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPerformanceCounterKHR#sType} field. */
         public VkPerformanceCounterKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPerformanceCounterKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPerformanceCounterKHR#pNext} field. */
         public VkPerformanceCounterKHR.Buffer pNext(@NativeType("void const *") long value) { VkPerformanceCounterKHR.npNext(address(), value); return this; }
 
     }

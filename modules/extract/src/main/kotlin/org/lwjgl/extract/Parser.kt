@@ -15,7 +15,7 @@ internal fun parseSimpleType(name: String, nativeName: String, type: String) = "
 
 internal fun parseTypedef(nativeName: String, type: CXType) = "val $nativeName = typedef(${type.lwjgl}, \"$nativeName\")"
 
-@UseExperimental(ExperimentalUnsignedTypes::class)
+@OptIn(ExperimentalUnsignedTypes::class)
 private fun parseConstant(header: Header, nativeName: String, value: String, doc: Documentation?): String {
     val noPrefix = !nativeName.startsWith(header.prefixConstant)
 
@@ -180,7 +180,7 @@ internal class Enum(
 internal fun CXCursor.parseEnum(context: ExtractionContext, name: String, typedef: Boolean): Enum {
     val constants = ArrayList<EnumConstant>()
 
-    clang_visitChildren(this) { enumConstantDecl, _ ->
+    CXCursorVisitor.create { enumConstantDecl, _, _ ->
         val constantName = enumConstantDecl.spelling
 
         val doc = stackPush().use { stack ->
@@ -188,7 +188,7 @@ internal fun CXCursor.parseEnum(context: ExtractionContext, name: String, typede
         }
 
         val size = constants.size
-        clang_visitChildren(enumConstantDecl) { enumValue, _ ->
+        CXCursorVisitor.create { enumValue, _, _ ->
             constants.add(
                 EnumConstant(
                     constantName,
@@ -199,7 +199,7 @@ internal fun CXCursor.parseEnum(context: ExtractionContext, name: String, typede
                 )
             )
             CXChildVisit_Continue
-        }
+        }.use { clang_visitChildren(enumConstantDecl, it, NULL) }
         if (constants.size == size) {
             constants.add(
                 EnumConstant(
@@ -211,7 +211,7 @@ internal fun CXCursor.parseEnum(context: ExtractionContext, name: String, typede
             )
         }
         CXChildVisit_Continue
-    }
+    }.use { clang_visitChildren(this, it, NULL) }
 
     stackPush().use { stack ->
         val doc = clang_Cursor_getParsedComment(this, CXComment.mallocStack(stack))
@@ -267,7 +267,7 @@ private fun CXCursor.parseStructMembers(
     val attributes = ArrayList<String>()
     val members = ArrayList<String>()
 
-    clang_visitChildren(this) { fieldDecl, _ ->
+    CXCursorVisitor.create { fieldDecl, _, _ ->
         if (fieldDecl.kind() == CXCursor_UnexposedAttr) {
             attributes.add(context.getSource(fieldDecl))
         } else {
@@ -365,7 +365,7 @@ private fun CXCursor.parseStructMembers(
             }
         }
         CXChildVisit_Continue
-    }
+    }.use { clang_visitChildren(this, it, NULL) }
 
     return "${attributes.joinToString("\n", postfix = if (attributes.isEmpty()) "" else "\n$indent") { "// $it" }}${members.joinToString("\n$indent")}"
 }
@@ -414,14 +414,14 @@ private fun CXCursor.anonymousFunctionProto(
     documentation: String = "Instances of this interface may be passed to the #FIXME() method."
 ): String {
     val args = ArrayList<CXCursor>(clang_getNumArgTypes(proto))
-    clang_visitChildren(this) { cursor, _ ->
+    CXCursorVisitor.create { cursor, _, _ ->
         if (clang_getCursorKind(cursor) == CXCursor_ParmDecl) {
             val cp = CXCursor.mallocStack(stack)
             memCopy(cursor, cp)
             args.add(cp)
         }
         CXChildVisit_Continue
-    }
+    }.use { clang_visitChildren(this, it, NULL) }
 
     val doc = clang_Cursor_getParsedComment(this, CXComment.mallocStack(stack)).parse()
     val docIndent = "$indent$t$t"
@@ -438,14 +438,14 @@ $indent}"""
 
 internal fun CXCursor.parseCallback(header: Header, type: CXType, name: String): String = stackPush().use { stack ->
     val args = ArrayList<CXCursor>(clang_getNumArgTypes(type))
-    clang_visitChildren(this) { cursor, _ ->
+    CXCursorVisitor.create { cursor, _, _ ->
         if (clang_getCursorKind(cursor) == CXCursor_ParmDecl) {
             val cp = CXCursor.mallocStack(stack)
             memCopy(cursor, cp)
             args.add(cp)
         }
         CXChildVisit_Continue
-    }
+    }.use { clang_visitChildren(this, it, NULL) }
 
     val doc = clang_Cursor_getParsedComment(this, CXComment.mallocStack(stack)).parse()
 
@@ -470,14 +470,14 @@ internal fun CXCursor.parseFunction(header: Header): String = stackPush().use { 
     }
     val type = clang_getCursorType(this, CXType.mallocStack(stack))
     val args = ArrayList<CXCursor>()
-    clang_visitChildren(this) { cursor, _ ->
+    CXCursorVisitor.create { cursor, _, _ ->
         if (clang_getCursorKind(cursor) == CXCursor_ParmDecl) {
             val cp = CXCursor.mallocStack(stack)
             memCopy(cursor, cp)
             args.add(cp)
         }
         CXChildVisit_Continue
-    }
+    }.use { clang_visitChildren(this, it, NULL) }
 
     val doc = clang_Cursor_getParsedComment(this, CXComment.mallocStack(stack)).parse()
 
@@ -603,10 +603,10 @@ internal fun CXCursor.parseMacro(
 
 private fun CXCursor.hasChild(traversal: Int = CXChildVisit_Continue, predicate: (CXCursor) -> Boolean): Boolean {
     var result = false
-    clang_visitChildren(this) { child, _ ->
+    CXCursorVisitor.create { child, _, _ ->
         result = predicate(child)
         traversal
-    }
+    }.use { clang_visitChildren(this, it, NULL) }
     return result
 }
 

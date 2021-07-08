@@ -85,27 +85,27 @@ public class XrSystemProperties extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code systemId} field. */
+    /** @return the value of the {@code systemId} field. */
     @NativeType("XrSystemId")
     public long systemId() { return nsystemId(address()); }
-    /** Returns the value of the {@code vendorId} field. */
+    /** @return the value of the {@code vendorId} field. */
     @NativeType("uint32_t")
     public int vendorId() { return nvendorId(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code systemName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code systemName} field. */
     @NativeType("char[XR_MAX_SYSTEM_NAME_SIZE]")
     public ByteBuffer systemName() { return nsystemName(address()); }
-    /** Decodes the null-terminated string stored in the {@code systemName} field. */
+    /** @return the null-terminated string stored in the {@code systemName} field. */
     @NativeType("char[XR_MAX_SYSTEM_NAME_SIZE]")
     public String systemNameString() { return nsystemNameString(address()); }
-    /** Returns a {@link XrSystemGraphicsProperties} view of the {@code graphicsProperties} field. */
+    /** @return a {@link XrSystemGraphicsProperties} view of the {@code graphicsProperties} field. */
     public XrSystemGraphicsProperties graphicsProperties() { return ngraphicsProperties(address()); }
-    /** Returns a {@link XrSystemTrackingProperties} view of the {@code trackingProperties} field. */
+    /** @return a {@link XrSystemTrackingProperties} view of the {@code trackingProperties} field. */
     public XrSystemTrackingProperties trackingProperties() { return ntrackingProperties(address()); }
 
     // -----------------------------------
@@ -306,27 +306,27 @@ public class XrSystemProperties extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemProperties.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemProperties.nnext(address()); }
-        /** Returns the value of the {@code systemId} field. */
+        /** @return the value of the {@code systemId} field. */
         @NativeType("XrSystemId")
         public long systemId() { return XrSystemProperties.nsystemId(address()); }
-        /** Returns the value of the {@code vendorId} field. */
+        /** @return the value of the {@code vendorId} field. */
         @NativeType("uint32_t")
         public int vendorId() { return XrSystemProperties.nvendorId(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code systemName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code systemName} field. */
         @NativeType("char[XR_MAX_SYSTEM_NAME_SIZE]")
         public ByteBuffer systemName() { return XrSystemProperties.nsystemName(address()); }
-        /** Decodes the null-terminated string stored in the {@code systemName} field. */
+        /** @return the null-terminated string stored in the {@code systemName} field. */
         @NativeType("char[XR_MAX_SYSTEM_NAME_SIZE]")
         public String systemNameString() { return XrSystemProperties.nsystemNameString(address()); }
-        /** Returns a {@link XrSystemGraphicsProperties} view of the {@code graphicsProperties} field. */
+        /** @return a {@link XrSystemGraphicsProperties} view of the {@code graphicsProperties} field. */
         public XrSystemGraphicsProperties graphicsProperties() { return XrSystemProperties.ngraphicsProperties(address()); }
-        /** Returns a {@link XrSystemTrackingProperties} view of the {@code trackingProperties} field. */
+        /** @return a {@link XrSystemTrackingProperties} view of the {@code trackingProperties} field. */
         public XrSystemTrackingProperties trackingProperties() { return XrSystemProperties.ntrackingProperties(address()); }
 
     }

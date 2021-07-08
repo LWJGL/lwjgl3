@@ -32,6 +32,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTBufferStorage {
 
+    static { GLES.initialize(); }
+
     /** Accepted in the {@code flags} parameter of BufferStorageEXT and NamedBufferStorageEXT. */
     public static final int
         GL_MAP_PERSISTENT_BIT_EXT  = 0x40,
@@ -46,8 +48,6 @@ public class EXTBufferStorage {
 
     /** Accepted by the {@code barriers} parameter of MemoryBarrier. */
     public static final int GL_CLIENT_MAPPED_BUFFER_BARRIER_BIT_EXT = 0x4000;
-
-    static { GLES.initialize(); }
 
     protected EXTBufferStorage() {
         throw new UnsupportedOperationException();

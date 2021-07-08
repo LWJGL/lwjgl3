@@ -19,14 +19,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Image IO callbacks, used by {@link STBImage#stbi_load_from_callbacks load_from_callbacks}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code read} &ndash; fill {@code data} with {@code size} bytes. Return number of bytes actually read.</li>
- * <li>{@code skip} &ndash; skip the next {@code n} bytes, or {@code unget} the last -n bytes if negative</li>
- * <li>{@code eof} &ndash; returns nonzero if we are at end of file/data</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -79,21 +71,21 @@ public class STBIIOCallbacks extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code read} field. */
+    /** fill {@code data} with {@code size} bytes. Return number of bytes actually read. */
     @NativeType("int (*) (void *, char *, int)")
     public STBIReadCallback read() { return nread(address()); }
-    /** Returns the value of the {@code skip} field. */
+    /** skip the next {@code n} bytes, or {@code unget} the last -n bytes if negative */
     @NativeType("void (*) (void *, int)")
     public STBISkipCallback skip() { return nskip(address()); }
-    /** Returns the value of the {@code eof} field. */
+    /** returns nonzero if we are at end of file/data */
     @NativeType("int (*) (void *)")
     public STBIEOFCallback eof() { return neof(address()); }
 
-    /** Sets the specified value to the {@code read} field. */
+    /** Sets the specified value to the {@link #read} field. */
     public STBIIOCallbacks read(@NativeType("int (*) (void *, char *, int)") STBIReadCallbackI value) { nread(address(), value); return this; }
-    /** Sets the specified value to the {@code skip} field. */
+    /** Sets the specified value to the {@link #skip} field. */
     public STBIIOCallbacks skip(@NativeType("void (*) (void *, int)") STBISkipCallbackI value) { nskip(address(), value); return this; }
-    /** Sets the specified value to the {@code eof} field. */
+    /** Sets the specified value to the {@link #eof} field. */
     public STBIIOCallbacks eof(@NativeType("int (*) (void *)") STBIEOFCallbackI value) { neof(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -339,21 +331,21 @@ public class STBIIOCallbacks extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code read} field. */
+        /** @return the value of the {@link STBIIOCallbacks#read} field. */
         @NativeType("int (*) (void *, char *, int)")
         public STBIReadCallback read() { return STBIIOCallbacks.nread(address()); }
-        /** Returns the value of the {@code skip} field. */
+        /** @return the value of the {@link STBIIOCallbacks#skip} field. */
         @NativeType("void (*) (void *, int)")
         public STBISkipCallback skip() { return STBIIOCallbacks.nskip(address()); }
-        /** Returns the value of the {@code eof} field. */
+        /** @return the value of the {@link STBIIOCallbacks#eof} field. */
         @NativeType("int (*) (void *)")
         public STBIEOFCallback eof() { return STBIIOCallbacks.neof(address()); }
 
-        /** Sets the specified value to the {@code read} field. */
+        /** Sets the specified value to the {@link STBIIOCallbacks#read} field. */
         public STBIIOCallbacks.Buffer read(@NativeType("int (*) (void *, char *, int)") STBIReadCallbackI value) { STBIIOCallbacks.nread(address(), value); return this; }
-        /** Sets the specified value to the {@code skip} field. */
+        /** Sets the specified value to the {@link STBIIOCallbacks#skip} field. */
         public STBIIOCallbacks.Buffer skip(@NativeType("void (*) (void *, int)") STBISkipCallbackI value) { STBIIOCallbacks.nskip(address(), value); return this; }
-        /** Sets the specified value to the {@code eof} field. */
+        /** Sets the specified value to the {@link STBIIOCallbacks#eof} field. */
         public STBIIOCallbacks.Buffer eof(@NativeType("int (*) (void *)") STBIEOFCallbackI value) { STBIIOCallbacks.neof(address(), value); return this; }
 
     }

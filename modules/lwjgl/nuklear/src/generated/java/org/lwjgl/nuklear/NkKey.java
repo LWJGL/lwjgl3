@@ -62,10 +62,10 @@ public class NkKey extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code down} field. */
+    /** @return the value of the {@code down} field. */
     @NativeType("nk_bool")
     public boolean down() { return ndown(address()); }
-    /** Returns the value of the {@code clicked} field. */
+    /** @return the value of the {@code clicked} field. */
     @NativeType("unsigned int")
     public int clicked() { return nclicked(address()); }
 
@@ -143,10 +143,10 @@ public class NkKey extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code down} field. */
+        /** @return the value of the {@code down} field. */
         @NativeType("nk_bool")
         public boolean down() { return NkKey.ndown(address()); }
-        /** Returns the value of the {@code clicked} field. */
+        /** @return the value of the {@code clicked} field. */
         @NativeType("unsigned int")
         public int clicked() { return NkKey.nclicked(address()); }
 

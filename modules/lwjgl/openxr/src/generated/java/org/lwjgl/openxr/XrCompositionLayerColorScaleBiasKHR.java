@@ -71,15 +71,15 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link XrColor4f} view of the {@code colorScale} field. */
+    /** @return a {@link XrColor4f} view of the {@code colorScale} field. */
     public XrColor4f colorScale() { return ncolorScale(address()); }
-    /** Returns a {@link XrColor4f} view of the {@code colorBias} field. */
+    /** @return a {@link XrColor4f} view of the {@code colorBias} field. */
     public XrColor4f colorBias() { return ncolorBias(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -321,15 +321,15 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerColorScaleBiasKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerColorScaleBiasKHR.nnext(address()); }
-        /** Returns a {@link XrColor4f} view of the {@code colorScale} field. */
+        /** @return a {@link XrColor4f} view of the {@code colorScale} field. */
         public XrColor4f colorScale() { return XrCompositionLayerColorScaleBiasKHR.ncolorScale(address()); }
-        /** Returns a {@link XrColor4f} view of the {@code colorBias} field. */
+        /** @return a {@link XrColor4f} view of the {@code colorBias} field. */
         public XrColor4f colorBias() { return XrCompositionLayerColorScaleBiasKHR.ncolorBias(address()); }
 
         /** Sets the specified value to the {@code type} field. */

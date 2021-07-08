@@ -37,6 +37,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class RPmalloc {
 
+    static { LibRPmalloc.initialize(); }
+
     /** Flag to {@link #rpaligned_realloc aligned_realloc} to not preserve content in reallocation. */
     public static final int RPMALLOC_NO_PRESERVE = 1;
 
@@ -45,8 +47,6 @@ public class RPmalloc {
      * like a call to realloc which failes to allocate a new block).
      */
     public static final int RPMALLOC_GROW_OR_FAIL = 2;
-
-    static { LibRPmalloc.initialize(); }
 
     protected RPmalloc() {
         throw new UnsupportedOperationException();
@@ -132,8 +132,17 @@ public class RPmalloc {
 
     // --- [ rpmalloc_thread_finalize ] ---
 
-    /** Finalizes allocator for calling thread. */
-    public static native void rpmalloc_thread_finalize();
+    /** Unsafe version of: {@link #rpmalloc_thread_finalize malloc_thread_finalize} */
+    public static native void nrpmalloc_thread_finalize(int release_caches);
+
+    /**
+     * Finalizes allocator for calling thread.
+     *
+     * @param release_caches pass non-zero to release thread caches to global cache
+     */
+    public static void rpmalloc_thread_finalize(@NativeType("int") boolean release_caches) {
+        nrpmalloc_thread_finalize(release_caches ? 1 : 0);
+    }
 
     // --- [ rpmalloc_thread_collect ] ---
 

@@ -21,7 +21,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>{@code renderArea} is the render area that is affected by the render pass instance. The effects of attachment load, store and multisample resolve operations are restricted to the pixels whose x and y coordinates fall within the render area on all attachments. The render area extends to all layers of {@code framebuffer}. The application <b>must</b> ensure (using scissor if necessary) that all rendering is contained within the render area. The render area <b>must</b> be contained within the framebuffer dimensions.</p>
+ * <p>{@code renderArea} is the render area that is affected by the render pass instance. The effects of attachment load, store and multisample resolve operations are restricted to the pixels whose x and y coordinates fall within the render area on all attachments. The render area extends to all layers of {@code framebuffer}. The application <b>must</b> ensure (using scissor if necessary) that all rendering is contained within the render area. The render area, after any transform specified by {@link VkRenderPassTransformBeginInfoQCOM}{@code ::transform} is applied, <b>must</b> be contained within the framebuffer dimensions.</p>
+ * 
+ * <p>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vertexpostproc-renderpass-transform">render pass transform</a> is enabled, then {@code renderArea} <b>must</b> equal the framebuffer pre-transformed dimensions. After {@code renderArea} has been transformed by {@link VkRenderPassTransformBeginInfoQCOM}{@code ::transform}, the resulting render area <b>must</b> be equal to the framebuffer dimensions.</p>
  * 
  * <p>When multiview is enabled, the resolve operation at the end of a subpass applies to all views in the view mask.</p>
  * 
@@ -34,30 +36,39 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code clearValueCount} <b>must</b> be greater than the largest attachment index in {@code renderPass} that specifies a {@code loadOp} (or {@code stencilLoadOp}, if the attachment has a depth/stencil format) of {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}</li>
- * <li>{@code renderPass} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#renderpass-compatibility">compatible</a> with the {@code renderPass} member of the {@link VkFramebufferCreateInfo} structure specified when creating {@code framebuffer}.</li>
+ * <li>{@code renderPass} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#renderpass-compatibility">compatible</a> with the {@code renderPass} member of the {@link VkFramebufferCreateInfo} structure specified when creating {@code framebuffer}</li>
+ * <li>If the {@code pNext} chain does not contain {@link VkDeviceGroupRenderPassBeginInfo} or its {@code deviceRenderAreaCount} member is equal to 0, {@code renderArea.offset.x} <b>must</b> be greater than or equal to 0</li>
+ * <li>If the {@code pNext} chain does not contain {@link VkDeviceGroupRenderPassBeginInfo} or its {@code deviceRenderAreaCount} member is equal to 0, {@code renderArea.offset.y} <b>must</b> be greater than or equal to 0</li>
+ * <li>If the {@code pNext} chain does not contain {@link VkDeviceGroupRenderPassBeginInfo} or its {@code deviceRenderAreaCount} member is equal to 0, <code>renderArea.offset.x + renderArea.offset.width</code> <b>must</b> be less than or equal to {@link VkFramebufferCreateInfo}{@code ::width} the {@code framebuffer} was created with</li>
+ * <li>If the {@code pNext} chain does not contain {@link VkDeviceGroupRenderPassBeginInfo} or its {@code deviceRenderAreaCount} member is equal to 0, <code>renderArea.offset.y + renderArea.offset.height</code> <b>must</b> be less than or equal to {@link VkFramebufferCreateInfo}{@code ::height} the {@code framebuffer} was created with</li>
+ * <li>If the {@code pNext} chain contains {@link VkDeviceGroupRenderPassBeginInfo}, the {@code offset.x} member of each element of {@code pDeviceRenderAreas} <b>must</b> be greater than or equal to 0</li>
+ * <li>If the {@code pNext} chain contains {@link VkDeviceGroupRenderPassBeginInfo}, the {@code offset.y} member of each element of {@code pDeviceRenderAreas} <b>must</b> be greater than or equal to 0</li>
+ * <li>If the {@code pNext} chain contains {@link VkDeviceGroupRenderPassBeginInfo}, <code>offset.x offset.width</code> of each element of {@code pDeviceRenderAreas} <b>must</b> be less than or equal to {@link VkFramebufferCreateInfo}{@code ::width} the {@code framebuffer} was created with</li>
+ * <li>If the {@code pNext} chain contains {@link VkDeviceGroupRenderPassBeginInfo}, <code>offset.y offset.height</code> of each element of {@code pDeviceRenderAreas} <b>must</b> be less than or equal to {@link VkFramebufferCreateInfo}{@code ::height} the {@code framebuffer} was created with</li>
  * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that did not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, and the {@code pNext} chain includes a {@link VkRenderPassAttachmentBeginInfo} structure, its {@code attachmentCount} <b>must</b> be zero</li>
  * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code attachmentCount} of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be equal to the value of {@link VkFramebufferAttachmentsCreateInfo}{@code ::attachmentImageInfoCount} used to create {@code framebuffer}</li>
- * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link KHRImagelessFramebuffer#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR FRAMEBUFFER_CREATE_IMAGELESS_BIT_KHR}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> have been created on the same {@code VkDevice} as {@code framebuffer} and {@code renderPass}</li>
- * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} of an image created with a value of {@link VkImageCreateInfo}{@code ::flags} equal to the {@code flags} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfoKHR}{@code ::pAttachments} used to create {@code framebuffer}</li>
- * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} of an image created with a value of {@link VkImageCreateInfo}{@code ::usage} equal to the {@code usage} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfo}{@code ::pAttachments} used to create {@code framebuffer}</li>
- * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} with a width equal to the {@code width} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfo}{@code ::pAttachments} used to create {@code framebuffer}</li>
- * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} with a height equal to the {@code height} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfo}{@code ::pAttachments} used to create {@code framebuffer}</li>
- * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} of an image created with a value of {@link VkImageViewCreateInfo}{@code ::subresourceRange}.layerCount equal to the {@code layerCount} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfo}{@code ::pAttachments} used to create {@code framebuffer}</li>
- * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} of an image created with a value of {@link VkImageFormatListCreateInfo}{@code ::viewFormatCount} equal to the {@code viewFormatCount} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfo}{@code ::pAttachments} used to create {@code framebuffer}</li>
- * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} of an image created with a set of elements in {@link VkImageFormatListCreateInfo}{@code ::pViewFormats} equal to the set of elements in the {@code pViewFormats} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfo}{@code ::pAttachments} used to create {@code framebuffer}</li>
+ * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> have been created on the same {@code VkDevice} as {@code framebuffer} and {@code renderPass}</li>
+ * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} of an image created with a value of {@link VkImageCreateInfo}{@code ::flags} equal to the {@code flags} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfo}{@code ::pAttachmentImageInfos} used to create {@code framebuffer}</li>
+ * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-inherited-usage">an inherited usage</a> equal to the {@code usage} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfo}{@code ::pAttachmentImageInfos} used to create {@code framebuffer}</li>
+ * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} with a width equal to the {@code width} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfo}{@code ::pAttachmentImageInfos} used to create {@code framebuffer}</li>
+ * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} with a height equal to the {@code height} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfo}{@code ::pAttachmentImageInfos} used to create {@code framebuffer}</li>
+ * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} of an image created with a value of {@link VkImageViewCreateInfo}{@code ::subresourceRange}.layerCount equal to the {@code layerCount} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfo}{@code ::pAttachmentImageInfos} used to create {@code framebuffer}</li>
+ * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} of an image created with a value of {@link VkImageFormatListCreateInfo}{@code ::viewFormatCount} equal to the {@code viewFormatCount} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfo}{@code ::pAttachmentImageInfos} used to create {@code framebuffer}</li>
+ * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} of an image created with a set of elements in {@link VkImageFormatListCreateInfo}{@code ::pViewFormats} equal to the set of elements in the {@code pViewFormats} member of the corresponding element of {@link VkFramebufferAttachmentsCreateInfo}{@code ::pAttachmentImageInfos} used to create {@code framebuffer}</li>
  * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} of an image created with a value of {@link VkImageViewCreateInfo}{@code ::format} equal to the corresponding value of {@link VkAttachmentDescription}{@code ::format} in {@code renderPass}</li>
  * <li>If {@code framebuffer} was created with a {@link VkFramebufferCreateInfo}{@code ::flags} value that included {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of the {@code pAttachments} member of a {@link VkRenderPassAttachmentBeginInfo} structure included in the {@code pNext} chain <b>must</b> be a {@code VkImageView} of an image created with a value of {@link VkImageCreateInfo}{@code ::samples} equal to the corresponding value of {@link VkAttachmentDescription}{@code ::samples} in {@code renderPass}</li>
+ * <li>If the {@code pNext} chain includes {@link VkRenderPassTransformBeginInfoQCOM}, {@code renderArea.offset} <b>must</b> equal (0,0)</li>
+ * <li>If the {@code pNext} chain includes {@link VkRenderPassTransformBeginInfoQCOM}, {@code renderArea.extent} transformed by {@link VkRenderPassTransformBeginInfoQCOM}{@code ::transform} <b>must</b> equal the {@code framebuffer} dimensions</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupRenderPassBeginInfo}, {@link VkRenderPassAttachmentBeginInfo}, or {@link VkRenderPassSampleLocationsBeginInfoEXT}</li>
- * <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupRenderPassBeginInfo}, {@link VkRenderPassAttachmentBeginInfo}, {@link VkRenderPassSampleLocationsBeginInfoEXT}, or {@link VkRenderPassTransformBeginInfoQCOM}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code renderPass} <b>must</b> be a valid {@code VkRenderPass} handle</li>
  * <li>{@code framebuffer} <b>must</b> be a valid {@code VkFramebuffer} handle</li>
- * <li>If {@code clearValueCount} is not 0, {@code pClearValues} <b>must</b> be a valid pointer to an array of {@code clearValueCount} {@link VkClearValue} unions</li>
  * <li>Both of {@code framebuffer}, and {@code renderPass} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
  * </ul>
  * 
@@ -65,29 +76,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkClearValue}, {@link VkRect2D}, {@link VK10#vkCmdBeginRenderPass CmdBeginRenderPass}, {@link VK12#vkCmdBeginRenderPass2 CmdBeginRenderPass2}, {@link KHRCreateRenderpass2#vkCmdBeginRenderPass2KHR CmdBeginRenderPass2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code renderPass} &ndash; the render pass to begin an instance of.</li>
- * <li>{@code framebuffer} &ndash; the framebuffer containing the attachments that are used with the render pass.</li>
- * <li>{@code renderArea} &ndash; the render area that is affected by the render pass instance, and is described in more detail below.</li>
- * <li>{@code clearValueCount} &ndash; the number of elements in {@code pClearValues}.</li>
- * <li>{@code pClearValues} &ndash; a pointer to an array of {@code clearValueCount} {@link VkClearValue} structures that contains clear values for each attachment, if the attachment uses a {@code loadOp} value of {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR} or if the attachment has a depth/stencil format and uses a {@code stencilLoadOp} value of {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}. The array is indexed by attachment number. Only elements corresponding to cleared attachments are used. Other elements of {@code pClearValues} are ignored.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkRenderPassBeginInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkRenderPass renderPass;
- *     VkFramebuffer framebuffer;
- *     {@link VkRect2D VkRect2D} renderArea;
- *     uint32_t clearValueCount;
- *     {@link VkClearValue VkClearValue} const * pClearValues;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkRenderPass {@link #renderPass};
+ *     VkFramebuffer {@link #framebuffer};
+ *     {@link VkRect2D VkRect2D} {@link #renderArea};
+ *     uint32_t {@link #clearValueCount};
+ *     {@link VkClearValue VkClearValue} const * {@link #pClearValues};
  * }</code></pre>
  */
 public class VkRenderPassBeginInfo extends Struct implements NativeResource {
@@ -144,41 +143,41 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code renderPass} field. */
+    /** the render pass to begin an instance of. */
     @NativeType("VkRenderPass")
     public long renderPass() { return nrenderPass(address()); }
-    /** Returns the value of the {@code framebuffer} field. */
+    /** the framebuffer containing the attachments that are used with the render pass. */
     @NativeType("VkFramebuffer")
     public long framebuffer() { return nframebuffer(address()); }
-    /** Returns a {@link VkRect2D} view of the {@code renderArea} field. */
+    /** the render area that is affected by the render pass instance, and is described in more detail below. */
     public VkRect2D renderArea() { return nrenderArea(address()); }
-    /** Returns the value of the {@code clearValueCount} field. */
+    /** the number of elements in {@code pClearValues}. */
     @NativeType("uint32_t")
     public int clearValueCount() { return nclearValueCount(address()); }
-    /** Returns a {@link VkClearValue.Buffer} view of the struct array pointed to by the {@code pClearValues} field. */
+    /** a pointer to an array of {@code clearValueCount} {@link VkClearValue} structures that contains clear values for each attachment, if the attachment uses a {@code loadOp} value of {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR} or if the attachment has a depth/stencil format and uses a {@code stencilLoadOp} value of {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}. The array is indexed by attachment number. Only elements corresponding to cleared attachments are used. Other elements of {@code pClearValues} are ignored. */
     @Nullable
     @NativeType("VkClearValue const *")
     public VkClearValue.Buffer pClearValues() { return npClearValues(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassBeginInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassBeginInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code renderPass} field. */
+    /** Sets the specified value to the {@link #renderPass} field. */
     public VkRenderPassBeginInfo renderPass(@NativeType("VkRenderPass") long value) { nrenderPass(address(), value); return this; }
-    /** Sets the specified value to the {@code framebuffer} field. */
+    /** Sets the specified value to the {@link #framebuffer} field. */
     public VkRenderPassBeginInfo framebuffer(@NativeType("VkFramebuffer") long value) { nframebuffer(address(), value); return this; }
-    /** Copies the specified {@link VkRect2D} to the {@code renderArea} field. */
+    /** Copies the specified {@link VkRect2D} to the {@link #renderArea} field. */
     public VkRenderPassBeginInfo renderArea(VkRect2D value) { nrenderArea(address(), value); return this; }
-    /** Passes the {@code renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkRenderPassBeginInfo renderArea(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(renderArea()); return this; }
-    /** Sets the address of the specified {@link VkClearValue.Buffer} to the {@code pClearValues} field. */
+    /** Sets the address of the specified {@link VkClearValue.Buffer} to the {@link #pClearValues} field. */
     public VkRenderPassBeginInfo pClearValues(@Nullable @NativeType("VkClearValue const *") VkClearValue.Buffer value) { npClearValues(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -446,41 +445,41 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkRenderPassBeginInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderPassBeginInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkRenderPassBeginInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRenderPassBeginInfo.npNext(address()); }
-        /** Returns the value of the {@code renderPass} field. */
+        /** @return the value of the {@link VkRenderPassBeginInfo#renderPass} field. */
         @NativeType("VkRenderPass")
         public long renderPass() { return VkRenderPassBeginInfo.nrenderPass(address()); }
-        /** Returns the value of the {@code framebuffer} field. */
+        /** @return the value of the {@link VkRenderPassBeginInfo#framebuffer} field. */
         @NativeType("VkFramebuffer")
         public long framebuffer() { return VkRenderPassBeginInfo.nframebuffer(address()); }
-        /** Returns a {@link VkRect2D} view of the {@code renderArea} field. */
+        /** @return a {@link VkRect2D} view of the {@link VkRenderPassBeginInfo#renderArea} field. */
         public VkRect2D renderArea() { return VkRenderPassBeginInfo.nrenderArea(address()); }
-        /** Returns the value of the {@code clearValueCount} field. */
+        /** @return the value of the {@link VkRenderPassBeginInfo#clearValueCount} field. */
         @NativeType("uint32_t")
         public int clearValueCount() { return VkRenderPassBeginInfo.nclearValueCount(address()); }
-        /** Returns a {@link VkClearValue.Buffer} view of the struct array pointed to by the {@code pClearValues} field. */
+        /** @return a {@link VkClearValue.Buffer} view of the struct array pointed to by the {@link VkRenderPassBeginInfo#pClearValues} field. */
         @Nullable
         @NativeType("VkClearValue const *")
         public VkClearValue.Buffer pClearValues() { return VkRenderPassBeginInfo.npClearValues(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkRenderPassBeginInfo#sType} field. */
         public VkRenderPassBeginInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassBeginInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkRenderPassBeginInfo#pNext} field. */
         public VkRenderPassBeginInfo.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassBeginInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code renderPass} field. */
+        /** Sets the specified value to the {@link VkRenderPassBeginInfo#renderPass} field. */
         public VkRenderPassBeginInfo.Buffer renderPass(@NativeType("VkRenderPass") long value) { VkRenderPassBeginInfo.nrenderPass(address(), value); return this; }
-        /** Sets the specified value to the {@code framebuffer} field. */
+        /** Sets the specified value to the {@link VkRenderPassBeginInfo#framebuffer} field. */
         public VkRenderPassBeginInfo.Buffer framebuffer(@NativeType("VkFramebuffer") long value) { VkRenderPassBeginInfo.nframebuffer(address(), value); return this; }
-        /** Copies the specified {@link VkRect2D} to the {@code renderArea} field. */
+        /** Copies the specified {@link VkRect2D} to the {@link VkRenderPassBeginInfo#renderArea} field. */
         public VkRenderPassBeginInfo.Buffer renderArea(VkRect2D value) { VkRenderPassBeginInfo.nrenderArea(address(), value); return this; }
-        /** Passes the {@code renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkRenderPassBeginInfo#renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkRenderPassBeginInfo.Buffer renderArea(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(renderArea()); return this; }
-        /** Sets the address of the specified {@link VkClearValue.Buffer} to the {@code pClearValues} field. */
+        /** Sets the address of the specified {@link VkClearValue.Buffer} to the {@link VkRenderPassBeginInfo#pClearValues} field. */
         public VkRenderPassBeginInfo.Buffer pClearValues(@Nullable @NativeType("VkClearValue const *") VkClearValue.Buffer value) { VkRenderPassBeginInfo.npClearValues(address(), value); return this; }
 
     }

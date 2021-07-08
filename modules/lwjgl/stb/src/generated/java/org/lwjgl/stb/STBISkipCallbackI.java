@@ -6,8 +6,11 @@
 package org.lwjgl.stb;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Instances of this interface may be set to the {@code skip} field of the {@link STBIIOCallbacks} struct.
@@ -15,25 +18,29 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void *user,
  *     int n
  * )</code></pre>
  */
 @FunctionalInterface
 @NativeType("void (*) (void *, int)")
-public interface STBISkipCallbackI extends CallbackI.V {
+public interface STBISkipCallbackI extends CallbackI {
 
-    String SIGNATURE = "(pi)v";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_void,
+        ffi_type_pointer, ffi_type_sint32
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke(
-            dcbArgPointer(args),
-            dcbArgInt(args)
+            memGetAddress(memGetAddress(args)),
+            memGetInt(memGetAddress(args + POINTER_SIZE))
         );
     }
 

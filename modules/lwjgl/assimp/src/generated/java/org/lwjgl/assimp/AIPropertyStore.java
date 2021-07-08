@@ -62,7 +62,7 @@ public class AIPropertyStore extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sentinel} field. */
+    /** @return the value of the {@code sentinel} field. */
     @NativeType("char")
     public byte sentinel() { return nsentinel(address()); }
 
@@ -268,7 +268,7 @@ public class AIPropertyStore extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sentinel} field. */
+        /** @return the value of the {@code sentinel} field. */
         @NativeType("char")
         public byte sentinel() { return AIPropertyStore.nsentinel(address()); }
 

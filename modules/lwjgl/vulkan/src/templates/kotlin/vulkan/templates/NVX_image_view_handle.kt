@@ -13,6 +13,7 @@ val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_h
         """
         This extension allows applications to query an opaque handle from an image view for use as a sampled image or storage image. This provides no direct functionality itself.
 
+        <h5>VK_NVX_image_view_handle</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NVX_image_view_handle}</dd>
@@ -24,7 +25,7 @@ val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_h
             <dd>31</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -35,9 +36,12 @@ val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_h
             <dd><ul>
                 <li>Eric Werness <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NVX_image_view_handle:%20&amp;body=@ewerness%20">ewerness</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2018-12-07</dd>
+            <dd>2020-04-03</dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -51,7 +55,7 @@ val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_h
     IntConstant(
         "The extension specification version.",
 
-        "NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION".."1"
+        "NVX_IMAGE_VIEW_HANDLE_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -63,7 +67,8 @@ val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_h
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
-        "STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX".."1000030000"
+        "STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX".."1000030000",
+        "STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX".."1000030001"
     )
 
     uint32_t(
@@ -91,5 +96,50 @@ val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_h
 
         VkDevice("device", "the logical device that owns the image view."),
         VkImageViewHandleInfoNVX.const.p("pInfo", "describes the image view to query and type of handle.")
+    )
+
+    VkResult(
+        "GetImageViewAddressNVX",
+        """
+        Get the device address of an image view.
+
+        <h5>C Specification</h5>
+        To get the device address for an image view, call:
+
+        <pre><code>
+￿VkResult vkGetImageViewAddressNVX(
+￿    VkDevice                                    device,
+￿    VkImageView                                 imageView,
+￿    VkImageViewAddressPropertiesNVX*            pProperties);</code></pre>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+            <li>{@code imageView} <b>must</b> be a valid {@code VkImageView} handle</li>
+            <li>{@code pProperties} <b>must</b> be a valid pointer to a ##VkImageViewAddressPropertiesNVX structure</li>
+            <li>{@code imageView} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+        </ul>
+
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_UNKNOWN</li>
+            </ul></dd>
+        </dl>
+
+        <h5>See Also</h5>
+        ##VkImageViewAddressPropertiesNVX
+        """,
+
+        VkDevice("device", "the logical device that owns the image view."),
+        VkImageView("imageView", "a handle to the image view."),
+        VkImageViewAddressPropertiesNVX.p("pProperties", "contains the device address and size when the call returns.")
     )
 }

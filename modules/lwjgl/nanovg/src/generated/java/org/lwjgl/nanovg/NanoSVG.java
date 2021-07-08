@@ -34,6 +34,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NanoSVG {
 
+    static { LibNanoVG.initialize(); }
+
     /**
      * NSVGpaintType
      * 
@@ -116,8 +118,6 @@ public class NanoSVG {
 
     /** NSVGflags */
     public static final int NSVG_FLAGS_VISIBLE = 0x01;
-
-    static { LibNanoVG.initialize(); }
 
     protected NanoSVG() {
         throw new UnsupportedOperationException();

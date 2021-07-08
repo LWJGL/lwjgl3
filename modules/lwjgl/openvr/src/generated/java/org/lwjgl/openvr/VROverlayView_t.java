@@ -67,13 +67,13 @@ public class VROverlayView_t extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code overlayHandle} field. */
+    /** @return the value of the {@code overlayHandle} field. */
     @NativeType("VROverlayHandle_t")
     public long overlayHandle() { return noverlayHandle(address()); }
-    /** Returns a {@link Texture} view of the {@code texture} field. */
+    /** @return a {@link Texture} view of the {@code texture} field. */
     @NativeType("Texture_t")
     public Texture texture() { return ntexture(address()); }
-    /** Returns a {@link VRTextureBounds} view of the {@code textureBounds} field. */
+    /** @return a {@link VRTextureBounds} view of the {@code textureBounds} field. */
     @NativeType("VRTextureBounds_t")
     public VRTextureBounds textureBounds() { return ntextureBounds(address()); }
 
@@ -265,13 +265,13 @@ public class VROverlayView_t extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code overlayHandle} field. */
+        /** @return the value of the {@code overlayHandle} field. */
         @NativeType("VROverlayHandle_t")
         public long overlayHandle() { return VROverlayView_t.noverlayHandle(address()); }
-        /** Returns a {@link Texture} view of the {@code texture} field. */
+        /** @return a {@link Texture} view of the {@code texture} field. */
         @NativeType("Texture_t")
         public Texture texture() { return VROverlayView_t.ntexture(address()); }
-        /** Returns a {@link VRTextureBounds} view of the {@code textureBounds} field. */
+        /** @return a {@link VRTextureBounds} view of the {@code textureBounds} field. */
         @NativeType("VRTextureBounds_t")
         public VRTextureBounds textureBounds() { return VROverlayView_t.ntextureBounds(address()); }
 

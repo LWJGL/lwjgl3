@@ -71,16 +71,16 @@ public class XrHandMeshSpaceCreateInfoMSFT extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code handPoseType} field. */
+    /** @return the value of the {@code handPoseType} field. */
     @NativeType("XrHandPoseTypeMSFT")
     public int handPoseType() { return nhandPoseType(address()); }
-    /** Returns a {@link XrPosef} view of the {@code poseInHandMeshSpace} field. */
+    /** @return a {@link XrPosef} view of the {@code poseInHandMeshSpace} field. */
     public XrPosef poseInHandMeshSpace() { return nposeInHandMeshSpace(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -320,16 +320,16 @@ public class XrHandMeshSpaceCreateInfoMSFT extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHandMeshSpaceCreateInfoMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrHandMeshSpaceCreateInfoMSFT.nnext(address()); }
-        /** Returns the value of the {@code handPoseType} field. */
+        /** @return the value of the {@code handPoseType} field. */
         @NativeType("XrHandPoseTypeMSFT")
         public int handPoseType() { return XrHandMeshSpaceCreateInfoMSFT.nhandPoseType(address()); }
-        /** Returns a {@link XrPosef} view of the {@code poseInHandMeshSpace} field. */
+        /** @return a {@link XrPosef} view of the {@code poseInHandMeshSpace} field. */
         public XrPosef poseInHandMeshSpace() { return XrHandMeshSpaceCreateInfoMSFT.nposeInHandMeshSpace(address()); }
 
         /** Sets the specified value to the {@code type} field. */

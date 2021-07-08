@@ -45,6 +45,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVGPUMulticast {
 
+    static { GL.initialize(); }
+
     /** Accepted in the {@code flags} parameter of BufferStorage and NamedBufferStorageEXT. */
     public static final int GL_PER_GPU_STORAGE_BIT_NV = 0x800;
 
@@ -62,8 +64,6 @@ public class NVGPUMulticast {
 
     /** Accepted by the {@code pname} parameter of GetMultisamplefv. */
     public static final int GL_MULTICAST_PROGRAMMABLE_SAMPLE_LOCATION_NV = 0x9549;
-
-    static { GL.initialize(); }
 
     protected NVGPUMulticast() {
         throw new UnsupportedOperationException();

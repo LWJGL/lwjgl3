@@ -69,7 +69,7 @@ public final class ALCDemo {
         }
         checkALCError(device);
 
-        ALCapabilities caps = AL.createCapabilities(deviceCaps, MemoryUtil::memAllocPointer);
+        ALCapabilities caps = AL.createCapabilities(deviceCaps, MemoryUtil::memCallocPointer);
 
         System.out.println("ALC_FREQUENCY     : " + alcGetInteger(device, ALC_FREQUENCY) + "Hz");
         System.out.println("ALC_REFRESH       : " + alcGetInteger(device, ALC_REFRESH) + "Hz");

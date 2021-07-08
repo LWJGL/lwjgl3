@@ -63,13 +63,13 @@ class NkConfigStackFloatElement extends Struct {
     public int sizeof() { return SIZEOF; }
 
     /**
-     * Returns a {@link FloatBuffer} view of the data pointed to by the {@code pValues} field.
+     * @return a {@link FloatBuffer} view of the data pointed to by the {@code pValues} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
     @NativeType("float *")
     public FloatBuffer pValues(int capacity) { return npValues(address(), capacity); }
-    /** Returns the value of the {@code old_value} field. */
+    /** @return the value of the {@code old_value} field. */
     public float old_value() { return nold_value(address()); }
 
     // -----------------------------------
@@ -147,13 +147,13 @@ class NkConfigStackFloatElement extends Struct {
         }
 
         /**
-         * Returns a {@link FloatBuffer} view of the data pointed to by the {@code pValues} field.
+         * @return a {@link FloatBuffer} view of the data pointed to by the {@code pValues} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("float *")
         public FloatBuffer pValues(int capacity) { return NkConfigStackFloatElement.npValues(address(), capacity); }
-        /** Returns the value of the {@code old_value} field. */
+        /** @return the value of the {@code old_value} field. */
         public float old_value() { return NkConfigStackFloatElement.nold_value(address()); }
 
     }

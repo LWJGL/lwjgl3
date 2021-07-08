@@ -20,10 +20,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to the GLFW library's NSGL native access functions. */
 public class GLFWNativeNSGL {
 
-    protected GLFWNativeNSGL() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
     public static final class Functions {
 
@@ -33,6 +29,10 @@ public class GLFWNativeNSGL {
         public static final long
             GetNSGLContext = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetNSGLContext");
 
+    }
+
+    protected GLFWNativeNSGL() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ glfwGetNSGLContext ] ---

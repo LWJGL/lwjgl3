@@ -76,18 +76,18 @@ public class XrSpatialAnchorCreateInfoMSFT extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code space} field. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** Returns a {@link XrPosef} view of the {@code pose} field. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** Returns the value of the {@code time} field. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
 
@@ -357,18 +357,18 @@ public class XrSpatialAnchorCreateInfoMSFT extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorCreateInfoMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpatialAnchorCreateInfoMSFT.nnext(address()); }
-        /** Returns the value of the {@code space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrSpatialAnchorCreateInfoMSFT.nspace(address()); }
-        /** Returns a {@link XrPosef} view of the {@code pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrSpatialAnchorCreateInfoMSFT.npose(address()); }
-        /** Returns the value of the {@code time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrSpatialAnchorCreateInfoMSFT.ntime(address()); }
 

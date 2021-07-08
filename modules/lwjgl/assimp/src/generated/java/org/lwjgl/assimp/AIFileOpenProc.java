@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * struct aiFile * (*) (
+ * struct aiFile * (*{@link #invoke}) (
  *     struct aiFileIO *pFileIO,
  *     char const *fileName,
  *     char const *openMode
@@ -49,7 +49,7 @@ public abstract class AIFileOpenProc extends Callback implements AIFileOpenProcI
     }
 
     protected AIFileOpenProc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     AIFileOpenProc(long functionPointer) {

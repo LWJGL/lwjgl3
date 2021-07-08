@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     CUstream hStream,
  *     CUresult status,
  *     void *userData
@@ -51,7 +51,7 @@ public abstract class CUstreamCallback extends Callback implements CUstreamCallb
     }
 
     protected CUstreamCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CUstreamCallback(long functionPointer) {

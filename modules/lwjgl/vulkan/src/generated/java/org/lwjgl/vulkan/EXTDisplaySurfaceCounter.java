@@ -11,7 +11,9 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * This is extension defines a vertical blanking period counter associated with display surfaces. It provides a mechanism to query support for such a counter from a {@code VkSurfaceKHR} object.
+ * This extension defines a vertical blanking period counter associated with display surfaces. It provides a mechanism to query support for such a counter from a {@code VkSurfaceKHR} object.
+ * 
+ * <h5>VK_EXT_display_surface_counter</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -31,6 +33,11 @@ import static org.lwjgl.system.JNI.*;
  * <dd><ul>
  * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_display_surface_counter:%20&amp;body=@cubanismo%20">cubanismo</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-12-13</dd>
  * <dt><b>IP Status</b></dt>
@@ -73,14 +80,22 @@ public class EXTDisplaySurfaceCounter {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_SURFACE_COUNTER_VBLANK_EXT SURFACE_COUNTER_VBLANK_EXT} specifies a counter incrementing once every time a vertical blanking period occurs on the display associated with the surface.</li>
+     * <li>{@link #VK_SURFACE_COUNTER_VBLANK_BIT_EXT SURFACE_COUNTER_VBLANK_BIT_EXT} specifies a counter incrementing once every time a vertical blanking period occurs on the display associated with the surface.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
      * 
      * <p>{@code VkSurfaceCounterFlagsEXT}, {@link EXTDisplayControl#vkGetSwapchainCounterEXT GetSwapchainCounterEXT}</p>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_SURFACE_COUNTER_VBLANK_EXT SURFACE_COUNTER_VBLANK_EXT}</li>
+     * </ul>
      */
-    public static final int VK_SURFACE_COUNTER_VBLANK_EXT = 0x1;
+    public static final int
+        VK_SURFACE_COUNTER_VBLANK_BIT_EXT = 0x1,
+        VK_SURFACE_COUNTER_VBLANK_EXT     = 0x1;
 
     protected EXTDisplaySurfaceCounter() {
         throw new UnsupportedOperationException();
@@ -112,7 +127,7 @@ public class EXTDisplaySurfaceCounter {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@code vkGetPhysicalDeviceSurfaceCapabilities2EXT} behaves similarly to {@link KHRSurface#vkGetPhysicalDeviceSurfaceCapabilitiesKHR GetPhysicalDeviceSurfaceCapabilitiesKHR}, with the ability to return extended information by adding extension structures to the {@code pNext} chain of its {@code pSurfaceCapabilities} parameter.</p>
+     * <p>{@code vkGetPhysicalDeviceSurfaceCapabilities2EXT} behaves similarly to {@link KHRSurface#vkGetPhysicalDeviceSurfaceCapabilitiesKHR GetPhysicalDeviceSurfaceCapabilitiesKHR}, with the ability to return extended information by adding extending structures to the {@code pNext} chain of its {@code pSurfaceCapabilities} parameter.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

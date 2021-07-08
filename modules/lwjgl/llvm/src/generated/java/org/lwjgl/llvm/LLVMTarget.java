@@ -19,24 +19,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMTarget {
 
-    /**
-     * {@code enum LLVMByteOrdering}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMBigEndian BigEndian}</li>
-     * <li>{@link #LLVMLittleEndian LittleEndian}</li>
-     * </ul>
-     */
-    public static final int
-        LLVMBigEndian    = 0,
-        LLVMLittleEndian = 1;
-
-    protected LLVMTarget() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
     public static final class Functions {
 
@@ -67,6 +49,24 @@ public class LLVMTarget {
             ElementAtOffset            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMElementAtOffset"),
             OffsetOfElement            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMOffsetOfElement");
 
+    }
+
+    /**
+     * {@code enum LLVMByteOrdering}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMBigEndian BigEndian}</li>
+     * <li>{@link #LLVMLittleEndian LittleEndian}</li>
+     * </ul>
+     */
+    public static final int
+        LLVMBigEndian    = 0,
+        LLVMLittleEndian = 1;
+
+    protected LLVMTarget() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ LLVMGetModuleDataLayout ] ---

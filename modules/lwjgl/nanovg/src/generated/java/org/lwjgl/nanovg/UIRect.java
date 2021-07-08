@@ -87,18 +87,18 @@ public class UIRect extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link IntBuffer} view of the {@code v} field. */
+    /** @return a {@link IntBuffer} view of the {@code v} field. */
     @NativeType("int[4]")
     public IntBuffer v() { return nv(address()); }
-    /** Returns the value at the specified index of the {@code v} field. */
+    /** @return the value at the specified index of the {@code v} field. */
     public int v(int index) { return nv(address(), index); }
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     public int y() { return ny(address()); }
-    /** Returns the value of the {@code w} field. */
+    /** @return the value of the {@code w} field. */
     public int w() { return nw(address()); }
-    /** Returns the value of the {@code h} field. */
+    /** @return the value of the {@code h} field. */
     public int h() { return nh(address()); }
 
     /** Copies the specified {@link IntBuffer} to the {@code v} field. */
@@ -340,18 +340,18 @@ public class UIRect extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link IntBuffer} view of the {@code v} field. */
+        /** @return a {@link IntBuffer} view of the {@code v} field. */
         @NativeType("int[4]")
         public IntBuffer v() { return UIRect.nv(address()); }
-        /** Returns the value at the specified index of the {@code v} field. */
+        /** @return the value at the specified index of the {@code v} field. */
         public int v(int index) { return UIRect.nv(address(), index); }
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         public int x() { return UIRect.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         public int y() { return UIRect.ny(address()); }
-        /** Returns the value of the {@code w} field. */
+        /** @return the value of the {@code w} field. */
         public int w() { return UIRect.nw(address()); }
-        /** Returns the value of the {@code h} field. */
+        /** @return the value of the {@code h} field. */
         public int h() { return UIRect.nh(address()); }
 
         /** Copies the specified {@link IntBuffer} to the {@code v} field. */

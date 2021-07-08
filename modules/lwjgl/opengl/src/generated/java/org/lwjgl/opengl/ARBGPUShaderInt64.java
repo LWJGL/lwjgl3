@@ -32,6 +32,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBGPUShaderInt64 {
 
+    static { GL.initialize(); }
+
     /** Returned by the {@code type} parameter of GetActiveAttrib, GetActiveUniform, and GetTransformFeedbackVarying. */
     public static final int
         GL_INT64_ARB               = 0x140E,
@@ -42,8 +44,6 @@ public class ARBGPUShaderInt64 {
         GL_UNSIGNED_INT64_VEC2_ARB = 0x8FF5,
         GL_UNSIGNED_INT64_VEC3_ARB = 0x8FF6,
         GL_UNSIGNED_INT64_VEC4_ARB = 0x8FF7;
-
-    static { GL.initialize(); }
 
     protected ARBGPUShaderInt64() {
         throw new UnsupportedOperationException();

@@ -32,6 +32,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL15C extends GL14C {
 
+    static { GL.initialize(); }
+
     /** New token names. */
     public static final int GL_SRC1_ALPHA = 0x8589;
 
@@ -91,8 +93,6 @@ public class GL15C extends GL14C {
     public static final int
         GL_QUERY_RESULT           = 0x8866,
         GL_QUERY_RESULT_AVAILABLE = 0x8867;
-
-    static { GL.initialize(); }
 
     protected GL15C() {
         throw new UnsupportedOperationException();

@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     MDB_val *item,
  *     void *oldptr,
  *     void *newptr,
@@ -56,7 +56,7 @@ public abstract class MDBRelFunc extends Callback implements MDBRelFuncI {
     }
 
     protected MDBRelFunc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     MDBRelFunc(long functionPointer) {

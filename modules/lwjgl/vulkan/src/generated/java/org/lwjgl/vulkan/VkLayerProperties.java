@@ -20,23 +20,14 @@ import static org.lwjgl.vulkan.VK10.*;
 /**
  * Structure specifying layer properties.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code layerName[VK_MAX_EXTENSION_NAME_SIZE]} &ndash; an array of {@link VK10#VK_MAX_EXTENSION_NAME_SIZE MAX_EXTENSION_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the layer. Use this name in the {@code ppEnabledLayerNames} array passed in the {@link VkInstanceCreateInfo} structure to enable this layer for an instance.</li>
- * <li>{@code specVersion} &ndash; the Vulkan version the layer was written to, encoded as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">Version Numbers</a>.</li>
- * <li>{@code implementationVersion} &ndash; the version of this layer. It is an integer, increasing with backward compatible changes.</li>
- * <li>{@code description[VK_MAX_DESCRIPTION_SIZE]} &ndash; an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which provides additional details that <b>can</b> be used by the application to identify the layer.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkLayerProperties {
- *     char layerName[VK_MAX_EXTENSION_NAME_SIZE];
- *     uint32_t specVersion;
- *     uint32_t implementationVersion;
- *     char description[VK_MAX_DESCRIPTION_SIZE];
+ *     char {@link #layerName}[VK_MAX_EXTENSION_NAME_SIZE];
+ *     uint32_t {@link #specVersion};
+ *     uint32_t {@link #implementationVersion};
+ *     char {@link #description}[VK_MAX_DESCRIPTION_SIZE];
  * }</code></pre>
  */
 public class VkLayerProperties extends Struct implements NativeResource {
@@ -84,22 +75,22 @@ public class VkLayerProperties extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code layerName} field. */
+    /** an array of {@link VK10#VK_MAX_EXTENSION_NAME_SIZE MAX_EXTENSION_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the layer. Use this name in the {@code ppEnabledLayerNames} array passed in the {@link VkInstanceCreateInfo} structure to enable this layer for an instance. */
     @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
     public ByteBuffer layerName() { return nlayerName(address()); }
-    /** Decodes the null-terminated string stored in the {@code layerName} field. */
+    /** an array of {@link VK10#VK_MAX_EXTENSION_NAME_SIZE MAX_EXTENSION_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the layer. Use this name in the {@code ppEnabledLayerNames} array passed in the {@link VkInstanceCreateInfo} structure to enable this layer for an instance. */
     @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
     public String layerNameString() { return nlayerNameString(address()); }
-    /** Returns the value of the {@code specVersion} field. */
+    /** the Vulkan version the layer was written to, encoded as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">Version Numbers</a>. */
     @NativeType("uint32_t")
     public int specVersion() { return nspecVersion(address()); }
-    /** Returns the value of the {@code implementationVersion} field. */
+    /** the version of this layer. It is an integer, increasing with backward compatible changes. */
     @NativeType("uint32_t")
     public int implementationVersion() { return nimplementationVersion(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code description} field. */
+    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which provides additional details that <b>can</b> be used by the application to identify the layer. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer description() { return ndescription(address()); }
-    /** Decodes the null-terminated string stored in the {@code description} field. */
+    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which provides additional details that <b>can</b> be used by the application to identify the layer. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
 
@@ -297,22 +288,22 @@ public class VkLayerProperties extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code layerName} field. */
+        /** @return a {@link ByteBuffer} view of the {@link VkLayerProperties#layerName} field. */
         @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
         public ByteBuffer layerName() { return VkLayerProperties.nlayerName(address()); }
-        /** Decodes the null-terminated string stored in the {@code layerName} field. */
+        /** @return the null-terminated string stored in the {@link VkLayerProperties#layerName} field. */
         @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
         public String layerNameString() { return VkLayerProperties.nlayerNameString(address()); }
-        /** Returns the value of the {@code specVersion} field. */
+        /** @return the value of the {@link VkLayerProperties#specVersion} field. */
         @NativeType("uint32_t")
         public int specVersion() { return VkLayerProperties.nspecVersion(address()); }
-        /** Returns the value of the {@code implementationVersion} field. */
+        /** @return the value of the {@link VkLayerProperties#implementationVersion} field. */
         @NativeType("uint32_t")
         public int implementationVersion() { return VkLayerProperties.nimplementationVersion(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code description} field. */
+        /** @return a {@link ByteBuffer} view of the {@link VkLayerProperties#description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer description() { return VkLayerProperties.ndescription(address()); }
-        /** Decodes the null-terminated string stored in the {@code description} field. */
+        /** @return the null-terminated string stored in the {@link VkLayerProperties#description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String descriptionString() { return VkLayerProperties.ndescriptionString(address()); }
 

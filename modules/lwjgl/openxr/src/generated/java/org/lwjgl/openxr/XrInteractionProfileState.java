@@ -67,13 +67,13 @@ public class XrInteractionProfileState extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code interactionProfile} field. */
+    /** @return the value of the {@code interactionProfile} field. */
     @NativeType("XrPath")
     public long interactionProfile() { return ninteractionProfile(address()); }
 
@@ -304,13 +304,13 @@ public class XrInteractionProfileState extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrInteractionProfileState.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrInteractionProfileState.nnext(address()); }
-        /** Returns the value of the {@code interactionProfile} field. */
+        /** @return the value of the {@code interactionProfile} field. */
         @NativeType("XrPath")
         public long interactionProfile() { return XrInteractionProfileState.ninteractionProfile(address()); }
 

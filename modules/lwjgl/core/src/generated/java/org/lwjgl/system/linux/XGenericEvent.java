@@ -19,27 +19,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * GenericEvent. This event is the standard event for all newer extensions.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code type} &ndash; of event. Must be:<br><table><tr><td>{@link X11#GenericEvent}</td></tr></table></li>
- * <li>{@code serial} &ndash; # of last request processed by server</li>
- * <li>{@code send_event} &ndash; true if this came from an {@link X11#XSendEvent} request</li>
- * <li>{@code display} &ndash; {@code Display} the event was read from</li>
- * <li>{@code extension} &ndash; major opcode of extension that caused the event</li>
- * <li>{@code evtype} &ndash; actual event type</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XGenericEvent {
- *     int type;
- *     unsigned long serial;
- *     Bool send_event;
- *     Display * display;
- *     int extension;
- *     int evtype;
+ *     int {@link #type};
+ *     unsigned long {@link #serial};
+ *     Bool {@link #send_event};
+ *     Display * {@link #display};
+ *     int {@link #extension};
+ *     int {@link #evtype};
  * }</code></pre>
  */
 public class XGenericEvent extends Struct implements NativeResource {
@@ -93,33 +82,33 @@ public class XGenericEvent extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** of event. Must be:<br><table><tr><td>{@link X11#GenericEvent}</td></tr></table> */
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code serial} field. */
+    /** # of last request processed by server */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** Returns the value of the {@code send_event} field. */
+    /** true if this came from an {@link X11#XSendEvent} request */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** Returns the value of the {@code display} field. */
+    /** {@code Display} the event was read from */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code extension} field. */
+    /** major opcode of extension that caused the event */
     public int extension() { return nextension(address()); }
-    /** Returns the value of the {@code evtype} field. */
+    /** actual event type */
     public int evtype() { return nevtype(address()); }
 
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public XGenericEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code serial} field. */
+    /** Sets the specified value to the {@link #serial} field. */
     public XGenericEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@code send_event} field. */
+    /** Sets the specified value to the {@link #send_event} field. */
     public XGenericEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code display} field. */
+    /** Sets the specified value to the {@link #display} field. */
     public XGenericEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@code extension} field. */
+    /** Sets the specified value to the {@link #extension} field. */
     public XGenericEvent extension(int value) { nextension(address(), value); return this; }
-    /** Sets the specified value to the {@code evtype} field. */
+    /** Sets the specified value to the {@link #evtype} field. */
     public XGenericEvent evtype(int value) { nevtype(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -381,33 +370,33 @@ public class XGenericEvent extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@link XGenericEvent#type} field. */
         public int type() { return XGenericEvent.ntype(address()); }
-        /** Returns the value of the {@code serial} field. */
+        /** @return the value of the {@link XGenericEvent#serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XGenericEvent.nserial(address()); }
-        /** Returns the value of the {@code send_event} field. */
+        /** @return the value of the {@link XGenericEvent#send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XGenericEvent.nsend_event(address()) != 0; }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@link XGenericEvent#display} field. */
         @NativeType("Display *")
         public long display() { return XGenericEvent.ndisplay(address()); }
-        /** Returns the value of the {@code extension} field. */
+        /** @return the value of the {@link XGenericEvent#extension} field. */
         public int extension() { return XGenericEvent.nextension(address()); }
-        /** Returns the value of the {@code evtype} field. */
+        /** @return the value of the {@link XGenericEvent#evtype} field. */
         public int evtype() { return XGenericEvent.nevtype(address()); }
 
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link XGenericEvent#type} field. */
         public XGenericEvent.Buffer type(int value) { XGenericEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code serial} field. */
+        /** Sets the specified value to the {@link XGenericEvent#serial} field. */
         public XGenericEvent.Buffer serial(@NativeType("unsigned long") long value) { XGenericEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@code send_event} field. */
+        /** Sets the specified value to the {@link XGenericEvent#send_event} field. */
         public XGenericEvent.Buffer send_event(@NativeType("Bool") boolean value) { XGenericEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code display} field. */
+        /** Sets the specified value to the {@link XGenericEvent#display} field. */
         public XGenericEvent.Buffer display(@NativeType("Display *") long value) { XGenericEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@code extension} field. */
+        /** Sets the specified value to the {@link XGenericEvent#extension} field. */
         public XGenericEvent.Buffer extension(int value) { XGenericEvent.nextension(address(), value); return this; }
-        /** Sets the specified value to the {@code evtype} field. */
+        /** Sets the specified value to the {@link XGenericEvent#evtype} field. */
         public XGenericEvent.Buffer evtype(int value) { XGenericEvent.nevtype(address(), value); return this; }
 
     }

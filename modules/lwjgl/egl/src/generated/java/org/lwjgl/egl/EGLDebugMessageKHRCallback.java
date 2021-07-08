@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     EGLenum error,
  *     char const *command,
  *     EGLint messageType,
@@ -54,7 +54,7 @@ public abstract class EGLDebugMessageKHRCallback extends Callback implements EGL
     }
 
     protected EGLDebugMessageKHRCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     EGLDebugMessageKHRCallback(long functionPointer) {

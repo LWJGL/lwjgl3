@@ -62,10 +62,10 @@ class NkConfigStackStyleItemElement extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkStyleItem} view of the struct pointed to by the {@code pValues} field. */
+    /** @return a {@link NkStyleItem} view of the struct pointed to by the {@code pValues} field. */
     @NativeType("struct nk_style_item *")
     public NkStyleItem pValues() { return npValues(address()); }
-    /** Returns a {@link NkStyleItem} view of the {@code old_value} field. */
+    /** @return a {@link NkStyleItem} view of the {@code old_value} field. */
     @NativeType("struct nk_style_item")
     public NkStyleItem old_value() { return nold_value(address()); }
 
@@ -143,10 +143,10 @@ class NkConfigStackStyleItemElement extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkStyleItem} view of the struct pointed to by the {@code pValues} field. */
+        /** @return a {@link NkStyleItem} view of the struct pointed to by the {@code pValues} field. */
         @NativeType("struct nk_style_item *")
         public NkStyleItem pValues() { return NkConfigStackStyleItemElement.npValues(address()); }
-        /** Returns a {@link NkStyleItem} view of the {@code old_value} field. */
+        /** @return a {@link NkStyleItem} view of the {@code old_value} field. */
         @NativeType("struct nk_style_item")
         public NkStyleItem old_value() { return NkConfigStackStyleItemElement.nold_value(address()); }
 

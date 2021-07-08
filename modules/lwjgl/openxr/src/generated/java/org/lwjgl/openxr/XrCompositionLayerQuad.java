@@ -88,26 +88,26 @@ public class XrCompositionLayerQuad extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code layerFlags} field. */
+    /** @return the value of the {@code layerFlags} field. */
     @NativeType("XrCompositionLayerFlags")
     public long layerFlags() { return nlayerFlags(address()); }
-    /** Returns the value of the {@code space} field. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** Returns the value of the {@code eyeVisibility} field. */
+    /** @return the value of the {@code eyeVisibility} field. */
     @NativeType("XrEyeVisibility")
     public int eyeVisibility() { return neyeVisibility(address()); }
-    /** Returns a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
+    /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
-    /** Returns a {@link XrPosef} view of the {@code pose} field. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** Returns a {@link XrExtent2Df} view of the {@code size} field. */
+    /** @return a {@link XrExtent2Df} view of the {@code size} field. */
     public XrExtent2Df size() { return nsize(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -405,26 +405,26 @@ public class XrCompositionLayerQuad extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerQuad.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerQuad.nnext(address()); }
-        /** Returns the value of the {@code layerFlags} field. */
+        /** @return the value of the {@code layerFlags} field. */
         @NativeType("XrCompositionLayerFlags")
         public long layerFlags() { return XrCompositionLayerQuad.nlayerFlags(address()); }
-        /** Returns the value of the {@code space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrCompositionLayerQuad.nspace(address()); }
-        /** Returns the value of the {@code eyeVisibility} field. */
+        /** @return the value of the {@code eyeVisibility} field. */
         @NativeType("XrEyeVisibility")
         public int eyeVisibility() { return XrCompositionLayerQuad.neyeVisibility(address()); }
-        /** Returns a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
+        /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
         public XrSwapchainSubImage subImage() { return XrCompositionLayerQuad.nsubImage(address()); }
-        /** Returns a {@link XrPosef} view of the {@code pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrCompositionLayerQuad.npose(address()); }
-        /** Returns a {@link XrExtent2Df} view of the {@code size} field. */
+        /** @return a {@link XrExtent2Df} view of the {@code size} field. */
         public XrExtent2Df size() { return XrCompositionLayerQuad.nsize(address()); }
 
         /** Sets the specified value to the {@code type} field. */

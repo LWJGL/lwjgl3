@@ -58,7 +58,7 @@ public class VREventSeatedZeroPoseReset extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code bResetBySystemMenu} field. */
+    /** @return the value of the {@code bResetBySystemMenu} field. */
     @NativeType("bool")
     public boolean bResetBySystemMenu() { return nbResetBySystemMenu(address()); }
 
@@ -134,7 +134,7 @@ public class VREventSeatedZeroPoseReset extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code bResetBySystemMenu} field. */
+        /** @return the value of the {@code bResetBySystemMenu} field. */
         @NativeType("bool")
         public boolean bResetBySystemMenu() { return VREventSeatedZeroPoseReset.nbResetBySystemMenu(address()); }
 

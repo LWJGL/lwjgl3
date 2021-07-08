@@ -20,6 +20,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
         The example code for the {@code VK_KHR_surface} and {@link KHRSwapchain VK_KHR_swapchain} extensions was removed from the appendix after revision 1.0.29. This WSI example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c).
         </div>
 
+        <h5>VK_KHR_surface</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_surface}</dd>
@@ -43,7 +44,10 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
                 <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_surface:%20&amp;body=@cubanismo%20">cubanismo</a></li>
                 <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_surface:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-08-25</dd>
 
@@ -111,7 +115,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
         </ul>
 
         <h5>See Also</h5>
-        ##VkDisplaySurfaceCreateInfoKHR, ##VkSurfaceCapabilities2EXT, ##VkSurfaceCapabilitiesKHR, {@code VkSurfaceTransformFlagsKHR}, ##VkSwapchainCreateInfoKHR
+        ##VkCommandBufferInheritanceRenderPassTransformInfoQCOM, ##VkCopyCommandTransformInfoQCOM, ##VkDisplaySurfaceCreateInfoKHR, ##VkRenderPassTransformBeginInfoQCOM, ##VkSurfaceCapabilities2EXT, ##VkSurfaceCapabilitiesKHR, {@code VkSurfaceTransformFlagsKHR}, ##VkSwapchainCreateInfoKHR
         """,
 
         "SURFACE_TRANSFORM_IDENTITY_BIT_KHR".enum(0x00000001),
@@ -127,26 +131,45 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
     EnumConstant(
         """
-        VkCompositeAlphaFlagBitsKHR - alpha compositing modes supported on a device
+        VkPresentModeKHR - presentation mode supported for a surface
 
         <h5>Description</h5>
-        These values are described as follows:
-
         <ul>
-            <li>#COMPOSITE_ALPHA_OPAQUE_BIT_KHR: The alpha channel, if it exists, of the images is ignored in the compositing process. Instead, the image is treated as if it has a constant alpha of 1.0.</li>
-            <li>#COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR: The alpha channel, if it exists, of the images is respected in the compositing process. The non-alpha channels of the image are expected to already be multiplied by the alpha channel by the application.</li>
-            <li>#COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR: The alpha channel, if it exists, of the images is respected in the compositing process. The non-alpha channels of the image are not expected to already be multiplied by the alpha channel by the application; instead, the compositor will multiply the non-alpha channels of the image by the alpha channel during compositing.</li>
-            <li>#COMPOSITE_ALPHA_INHERIT_BIT_KHR: The way in which the presentation engine treats the alpha channel in the images is unknown to the Vulkan API. Instead, the application is responsible for setting the composite alpha blending mode using native window system commands. If the application does not set the blending mode using native window system commands, then a platform-specific default will be used.</li>
+            <li>#PRESENT_MODE_IMMEDIATE_KHR specifies that the presentation engine does not wait for a vertical blanking period to update the current image, meaning this mode <b>may</b> result in visible tearing. No internal queuing of presentation requests is needed, as the requests are applied immediately.</li>
+            <li>#PRESENT_MODE_MAILBOX_KHR specifies that the presentation engine waits for the next vertical blanking period to update the current image. Tearing <b>cannot</b> be observed. An internal single-entry queue is used to hold pending presentation requests. If the queue is full when a new presentation request is received, the new request replaces the existing entry, and any images associated with the prior entry become available for re-use by the application. One request is removed from the queue and processed during each vertical blanking period in which the queue is non-empty.</li>
+            <li>#PRESENT_MODE_FIFO_KHR specifies that the presentation engine waits for the next vertical blanking period to update the current image. Tearing <b>cannot</b> be observed. An internal queue is used to hold pending presentation requests. New requests are appended to the end of the queue, and one request is removed from the beginning of the queue and processed during each vertical blanking period in which the queue is non-empty. This is the only value of {@code presentMode} that is required: to be supported.</li>
+            <li>#PRESENT_MODE_FIFO_RELAXED_KHR specifies that the presentation engine generally waits for the next vertical blanking period to update the current image. If a vertical blanking period has already passed since the last update of the current image then the presentation engine does not wait for another vertical blanking period for the update, meaning this mode <b>may</b> result in visible tearing in this case. This mode is useful for reducing visual stutter with an application that will mostly present a new image before the next vertical blanking period, but may occasionally be late, and present a new image just after the next vertical blanking period. An internal queue is used to hold pending presentation requests. New requests are appended to the end of the queue, and one request is removed from the beginning of the queue and processed during or after each vertical blanking period in which the queue is non-empty.</li>
+            <li>#PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR specifies that the presentation engine and application have concurrent access to a single image, which is referred to as a <em>shared presentable image</em>. The presentation engine is only required to update the current image after a new presentation request is received. Therefore the application <b>must</b> make a presentation request whenever an update is required. However, the presentation engine <b>may</b> update the current image at any point, meaning this mode <b>may</b> result in visible tearing.</li>
+            <li>#PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR specifies that the presentation engine and application have concurrent access to a single image, which is referred to as a <em>shared presentable image</em>. The presentation engine periodically updates the current image on its regular refresh cycle. The application is only required to make one initial presentation request, after which the presentation engine <b>must</b> update the current image without any need for further presentation requests. The application <b>can</b> indicate the image contents have been updated by making a presentation request, but this does not guarantee the timing of when it will be updated. This mode <b>may</b> result in visible tearing if rendering to the image is not timed correctly.</li>
         </ul>
 
+        The supported {@code VkImageUsageFlagBits} of the presentable images of a swapchain created for a surface <b>may</b> differ depending on the presentation mode, and can be determined as per the table below:
+
+        <h6>Presentable image usage queries</h6>
+        <table class="lwjgl">
+            <thead><tr><th>Presentation mode</th><th>Image usage flags</th></tr></thead>
+            <tbody>
+                <tr><td>#PRESENT_MODE_IMMEDIATE_KHR</td><td>##VkSurfaceCapabilitiesKHR{@code ::supportedUsageFlags}</td></tr>
+                <tr><td>#PRESENT_MODE_MAILBOX_KHR</td><td>##VkSurfaceCapabilitiesKHR{@code ::supportedUsageFlags}</td></tr>
+                <tr><td>#PRESENT_MODE_FIFO_KHR</td><td>##VkSurfaceCapabilitiesKHR{@code ::supportedUsageFlags}</td></tr>
+                <tr><td>#PRESENT_MODE_FIFO_RELAXED_KHR</td><td>##VkSurfaceCapabilitiesKHR{@code ::supportedUsageFlags}</td></tr>
+                <tr><td>#PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR</td><td>##VkSharedPresentSurfaceCapabilitiesKHR{@code ::sharedPresentSupportedUsageFlags}</td></tr>
+                <tr><td>#PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR</td><td>##VkSharedPresentSurfaceCapabilitiesKHR{@code ::sharedPresentSupportedUsageFlags}</td></tr>
+            </tbody>
+        </table>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        For reference, the mode indicated by #PRESENT_MODE_FIFO_KHR is equivalent to the behavior of {wgl|glX|egl}SwapBuffers with a swap interval of 1, while the mode indicated by #PRESENT_MODE_FIFO_RELAXED_KHR is equivalent to the behavior of {wgl|glX}SwapBuffers with a swap interval of -1 (from the {WGL|GLX}_EXT_swap_control_tear extensions).
+        </div>
+
         <h5>See Also</h5>
-        {@code VkCompositeAlphaFlagsKHR}, ##VkSwapchainCreateInfoKHR
+        ##VkSwapchainCreateInfoKHR, #GetPhysicalDeviceSurfacePresentModes2EXT(), #GetPhysicalDeviceSurfacePresentModesKHR()
         """,
 
-        "COMPOSITE_ALPHA_OPAQUE_BIT_KHR".enum(0x00000001),
-        "COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR".enum(0x00000002),
-        "COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR".enum(0x00000004),
-        "COMPOSITE_ALPHA_INHERIT_BIT_KHR".enum(0x00000008)
+        "PRESENT_MODE_IMMEDIATE_KHR".."0",
+        "PRESENT_MODE_MAILBOX_KHR".."1",
+        "PRESENT_MODE_FIFO_KHR".."2",
+        "PRESENT_MODE_FIFO_RELAXED_KHR".."3"
     )
 
     EnumConstant(
@@ -223,45 +246,26 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
     EnumConstant(
         """
-        VkPresentModeKHR - presentation mode supported for a surface
+        VkCompositeAlphaFlagBitsKHR - alpha compositing modes supported on a device
 
         <h5>Description</h5>
+        These values are described as follows:
+
         <ul>
-            <li>#PRESENT_MODE_IMMEDIATE_KHR specifies that the presentation engine does not wait for a vertical blanking period to update the current image, meaning this mode <b>may</b> result in visible tearing. No internal queuing of presentation requests is needed, as the requests are applied immediately.</li>
-            <li>#PRESENT_MODE_MAILBOX_KHR specifies that the presentation engine waits for the next vertical blanking period to update the current image. Tearing <b>cannot</b> be observed. An internal single-entry queue is used to hold pending presentation requests. If the queue is full when a new presentation request is received, the new request replaces the existing entry, and any images associated with the prior entry become available for re-use by the application. One request is removed from the queue and processed during each vertical blanking period in which the queue is non-empty.</li>
-            <li>#PRESENT_MODE_FIFO_KHR specifies that the presentation engine waits for the next vertical blanking period to update the current image. Tearing <b>cannot</b> be observed. An internal queue is used to hold pending presentation requests. New requests are appended to the end of the queue, and one request is removed from the beginning of the queue and processed during each vertical blanking period in which the queue is non-empty. This is the only value of {@code presentMode} that is required: to be supported.</li>
-            <li>#PRESENT_MODE_FIFO_RELAXED_KHR specifies that the presentation engine generally waits for the next vertical blanking period to update the current image. If a vertical blanking period has already passed since the last update of the current image then the presentation engine does not wait for another vertical blanking period for the update, meaning this mode <b>may</b> result in visible tearing in this case. This mode is useful for reducing visual stutter with an application that will mostly present a new image before the next vertical blanking period, but may occasionally be late, and present a new image just after the next vertical blanking period. An internal queue is used to hold pending presentation requests. New requests are appended to the end of the queue, and one request is removed from the beginning of the queue and processed during or after each vertical blanking period in which the queue is non-empty.</li>
-            <li>#PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR specifies that the presentation engine and application have concurrent access to a single image, which is referred to as a <em>shared presentable image</em>. The presentation engine is only required to update the current image after a new presentation request is received. Therefore the application <b>must</b> make a presentation request whenever an update is required. However, the presentation engine <b>may</b> update the current image at any point, meaning this mode <b>may</b> result in visible tearing.</li>
-            <li>#PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR specifies that the presentation engine and application have concurrent access to a single image, which is referred to as a <em>shared presentable image</em>. The presentation engine periodically updates the current image on its regular refresh cycle. The application is only required to make one initial presentation request, after which the presentation engine <b>must</b> update the current image without any need for further presentation requests. The application <b>can</b> indicate the image contents have been updated by making a presentation request, but this does not guarantee the timing of when it will be updated. This mode <b>may</b> result in visible tearing if rendering to the image is not timed correctly.</li>
+            <li>#COMPOSITE_ALPHA_OPAQUE_BIT_KHR: The alpha channel, if it exists, of the images is ignored in the compositing process. Instead, the image is treated as if it has a constant alpha of 1.0.</li>
+            <li>#COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR: The alpha channel, if it exists, of the images is respected in the compositing process. The non-alpha channels of the image are expected to already be multiplied by the alpha channel by the application.</li>
+            <li>#COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR: The alpha channel, if it exists, of the images is respected in the compositing process. The non-alpha channels of the image are not expected to already be multiplied by the alpha channel by the application; instead, the compositor will multiply the non-alpha channels of the image by the alpha channel during compositing.</li>
+            <li>#COMPOSITE_ALPHA_INHERIT_BIT_KHR: The way in which the presentation engine treats the alpha channel in the images is unknown to the Vulkan API. Instead, the application is responsible for setting the composite alpha blending mode using native window system commands. If the application does not set the blending mode using native window system commands, then a platform-specific default will be used.</li>
         </ul>
 
-        The supported {@code VkImageUsageFlagBits} of the presentable images of a swapchain created for a surface <b>may</b> differ depending on the presentation mode, and can be determined as per the table below:
-
-        <h6>Presentable image usage queries</h6>
-        <table class="lwjgl">
-            <thead><tr><th>Presentation mode</th><th>Image usage flags</th></tr></thead>
-            <tbody>
-                <tr><td>#PRESENT_MODE_IMMEDIATE_KHR</td><td>##VkSurfaceCapabilitiesKHR{@code ::supportedUsageFlags}</td></tr>
-                <tr><td>#PRESENT_MODE_MAILBOX_KHR</td><td>##VkSurfaceCapabilitiesKHR{@code ::supportedUsageFlags}</td></tr>
-                <tr><td>#PRESENT_MODE_FIFO_KHR</td><td>##VkSurfaceCapabilitiesKHR{@code ::supportedUsageFlags}</td></tr>
-                <tr><td>#PRESENT_MODE_FIFO_RELAXED_KHR</td><td>##VkSurfaceCapabilitiesKHR{@code ::supportedUsageFlags}</td></tr>
-                <tr><td>#PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR</td><td>##VkSharedPresentSurfaceCapabilitiesKHR{@code ::sharedPresentSupportedUsageFlags}</td></tr>
-                <tr><td>#PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR</td><td>##VkSharedPresentSurfaceCapabilitiesKHR{@code ::sharedPresentSupportedUsageFlags}</td></tr>
-            </tbody>
-        </table>
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        For reference, the mode indicated by #PRESENT_MODE_FIFO_KHR is equivalent to the behavior of {wgl|glX|egl}SwapBuffers with a swap interval of 1, while the mode indicated by #PRESENT_MODE_FIFO_RELAXED_KHR is equivalent to the behavior of {wgl|glX}SwapBuffers with a swap interval of -1 (from the {WGL|GLX}_EXT_swap_control_tear extensions).
-        </div>
-
         <h5>See Also</h5>
-        ##VkSwapchainCreateInfoKHR, #GetPhysicalDeviceSurfacePresentModes2EXT(), #GetPhysicalDeviceSurfacePresentModesKHR()
+        {@code VkCompositeAlphaFlagsKHR}, ##VkSwapchainCreateInfoKHR
         """,
 
-        "PRESENT_MODE_IMMEDIATE_KHR".."0",
-        "PRESENT_MODE_MAILBOX_KHR".."1",
-        "PRESENT_MODE_FIFO_KHR".."2",
-        "PRESENT_MODE_FIFO_RELAXED_KHR".."3"
+        "COMPOSITE_ALPHA_OPAQUE_BIT_KHR".enum(0x00000001),
+        "COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR".enum(0x00000002),
+        "COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR".enum(0x00000004),
+        "COMPOSITE_ALPHA_INHERIT_BIT_KHR".enum(0x00000008)
     )
 
     void(
@@ -430,7 +434,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code surface} must be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism.</li>
+            <li>{@code surface} <b>must</b> be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

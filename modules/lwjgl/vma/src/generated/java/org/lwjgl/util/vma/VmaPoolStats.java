@@ -18,31 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Describes parameter of existing {@code VmaPool}.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code size} &ndash; total amount of {@code VkDeviceMemory} allocated from Vulkan for this pool, in bytes</li>
- * <li>{@code unusedSize} &ndash; total number of bytes in the pool not used by any {@code VmaAllocation}</li>
- * <li>{@code allocationCount} &ndash; number of {@code VmaAllocation} objects created from this pool that were not destroyed or lost</li>
- * <li>{@code unusedRangeCount} &ndash; number of continuous memory ranges in the pool not used by any {@code VmaAllocation}</li>
- * <li>{@code unusedRangeSizeMax} &ndash; 
- * size of the largest continuous free memory region available for new allocation.
- * 
- * <p>Making a new allocation of that size is not guaranteed to succeed because of possible additional margin required to respect alignment and buffer/imag
- * granularity.</p></li>
- * <li>{@code blockCount} &ndash; number of {@code VkDeviceMemory} blocks allocated for this pool</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VmaPoolStats {
- *     VkDeviceSize size;
- *     VkDeviceSize unusedSize;
- *     size_t allocationCount;
- *     size_t unusedRangeCount;
- *     VkDeviceSize unusedRangeSizeMax;
- *     size_t blockCount;
+ *     VkDeviceSize {@link #size};
+ *     VkDeviceSize {@link #unusedSize};
+ *     size_t {@link #allocationCount};
+ *     size_t {@link #unusedRangeCount};
+ *     VkDeviceSize {@link #unusedRangeSizeMax};
+ *     size_t {@link #blockCount};
  * }</code></pre>
  */
 public class VmaPoolStats extends Struct implements NativeResource {
@@ -96,22 +81,27 @@ public class VmaPoolStats extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code size} field. */
+    /** total amount of {@code VkDeviceMemory} allocated from Vulkan for this pool, in bytes */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** Returns the value of the {@code unusedSize} field. */
+    /** total number of bytes in the pool not used by any {@code VmaAllocation} */
     @NativeType("VkDeviceSize")
     public long unusedSize() { return nunusedSize(address()); }
-    /** Returns the value of the {@code allocationCount} field. */
+    /** number of {@code VmaAllocation} objects created from this pool that were not destroyed or lost */
     @NativeType("size_t")
     public long allocationCount() { return nallocationCount(address()); }
-    /** Returns the value of the {@code unusedRangeCount} field. */
+    /** number of continuous memory ranges in the pool not used by any {@code VmaAllocation} */
     @NativeType("size_t")
     public long unusedRangeCount() { return nunusedRangeCount(address()); }
-    /** Returns the value of the {@code unusedRangeSizeMax} field. */
+    /**
+     * size of the largest continuous free memory region available for new allocation.
+     * 
+     * <p>Making a new allocation of that size is not guaranteed to succeed because of possible additional margin required to respect alignment and buffer/imag
+     * granularity.</p>
+     */
     @NativeType("VkDeviceSize")
     public long unusedRangeSizeMax() { return nunusedRangeSizeMax(address()); }
-    /** Returns the value of the {@code blockCount} field. */
+    /** number of {@code VkDeviceMemory} blocks allocated for this pool */
     @NativeType("size_t")
     public long blockCount() { return nblockCount(address()); }
 
@@ -309,22 +299,22 @@ public class VmaPoolStats extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link VmaPoolStats#size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VmaPoolStats.nsize(address()); }
-        /** Returns the value of the {@code unusedSize} field. */
+        /** @return the value of the {@link VmaPoolStats#unusedSize} field. */
         @NativeType("VkDeviceSize")
         public long unusedSize() { return VmaPoolStats.nunusedSize(address()); }
-        /** Returns the value of the {@code allocationCount} field. */
+        /** @return the value of the {@link VmaPoolStats#allocationCount} field. */
         @NativeType("size_t")
         public long allocationCount() { return VmaPoolStats.nallocationCount(address()); }
-        /** Returns the value of the {@code unusedRangeCount} field. */
+        /** @return the value of the {@link VmaPoolStats#unusedRangeCount} field. */
         @NativeType("size_t")
         public long unusedRangeCount() { return VmaPoolStats.nunusedRangeCount(address()); }
-        /** Returns the value of the {@code unusedRangeSizeMax} field. */
+        /** @return the value of the {@link VmaPoolStats#unusedRangeSizeMax} field. */
         @NativeType("VkDeviceSize")
         public long unusedRangeSizeMax() { return VmaPoolStats.nunusedRangeSizeMax(address()); }
-        /** Returns the value of the {@code blockCount} field. */
+        /** @return the value of the {@link VmaPoolStats#blockCount} field. */
         @NativeType("size_t")
         public long blockCount() { return VmaPoolStats.nblockCount(address()); }
 

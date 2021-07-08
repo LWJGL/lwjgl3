@@ -73,19 +73,19 @@ public class XrInstanceProperties extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code runtimeVersion} field. */
+    /** @return the value of the {@code runtimeVersion} field. */
     @NativeType("XrVersion")
     public long runtimeVersion() { return nruntimeVersion(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code runtimeName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code runtimeName} field. */
     @NativeType("char[XR_MAX_RUNTIME_NAME_SIZE]")
     public ByteBuffer runtimeName() { return nruntimeName(address()); }
-    /** Decodes the null-terminated string stored in the {@code runtimeName} field. */
+    /** @return the null-terminated string stored in the {@code runtimeName} field. */
     @NativeType("char[XR_MAX_RUNTIME_NAME_SIZE]")
     public String runtimeNameString() { return nruntimeNameString(address()); }
 
@@ -281,19 +281,19 @@ public class XrInstanceProperties extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrInstanceProperties.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrInstanceProperties.nnext(address()); }
-        /** Returns the value of the {@code runtimeVersion} field. */
+        /** @return the value of the {@code runtimeVersion} field. */
         @NativeType("XrVersion")
         public long runtimeVersion() { return XrInstanceProperties.nruntimeVersion(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code runtimeName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code runtimeName} field. */
         @NativeType("char[XR_MAX_RUNTIME_NAME_SIZE]")
         public ByteBuffer runtimeName() { return XrInstanceProperties.nruntimeName(address()); }
-        /** Decodes the null-terminated string stored in the {@code runtimeName} field. */
+        /** @return the null-terminated string stored in the {@code runtimeName} field. */
         @NativeType("char[XR_MAX_RUNTIME_NAME_SIZE]")
         public String runtimeNameString() { return XrInstanceProperties.nruntimeNameString(address()); }
 

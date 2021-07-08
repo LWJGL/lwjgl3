@@ -71,16 +71,16 @@ public class XrSpaceLocation extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code locationFlags} field. */
+    /** @return the value of the {@code locationFlags} field. */
     @NativeType("XrSpaceLocationFlags")
     public long locationFlags() { return nlocationFlags(address()); }
-    /** Returns a {@link XrPosef} view of the {@code pose} field. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -320,16 +320,16 @@ public class XrSpaceLocation extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceLocation.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSpaceLocation.nnext(address()); }
-        /** Returns the value of the {@code locationFlags} field. */
+        /** @return the value of the {@code locationFlags} field. */
         @NativeType("XrSpaceLocationFlags")
         public long locationFlags() { return XrSpaceLocation.nlocationFlags(address()); }
-        /** Returns a {@link XrPosef} view of the {@code pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrSpaceLocation.npose(address()); }
 
         /** Sets the specified value to the {@code type} field. */

@@ -84,11 +84,11 @@ public class NkListView extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code begin} field. */
+    /** @return the value of the {@code begin} field. */
     public int begin() { return nbegin(address()); }
-    /** Returns the value of the {@code end} field. */
+    /** @return the value of the {@code end} field. */
     public int end() { return nend(address()); }
-    /** Returns the value of the {@code count} field. */
+    /** @return the value of the {@code count} field. */
     public int count() { return ncount(address()); }
 
     // -----------------------------------
@@ -283,11 +283,11 @@ public class NkListView extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code begin} field. */
+        /** @return the value of the {@code begin} field. */
         public int begin() { return NkListView.nbegin(address()); }
-        /** Returns the value of the {@code end} field. */
+        /** @return the value of the {@code end} field. */
         public int end() { return NkListView.nend(address()); }
-        /** Returns the value of the {@code count} field. */
+        /** @return the value of the {@code count} field. */
         public int count() { return NkListView.ncount(address()); }
 
     }

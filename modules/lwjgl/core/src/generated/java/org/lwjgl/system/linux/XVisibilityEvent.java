@@ -17,26 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code serial} &ndash; # of last request processed by server</li>
- * <li>{@code send_event} &ndash; true if this came from an {@link X11#XSendEvent} request</li>
- * <li>{@code display} &ndash; {@code Display} the event was read from</li>
- * <li>{@code window} &ndash; window it reported relative to</li>
- * <li>{@code state} &ndash; visibility state</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XVisibilityEvent {
  *     int type;
- *     unsigned long serial;
- *     Bool send_event;
- *     Display * display;
- *     Window window;
- *     int state;
+ *     unsigned long {@link #serial};
+ *     Bool {@link #send_event};
+ *     Display * {@link #display};
+ *     Window {@link #window};
+ *     int {@link #state};
  * }</code></pre>
  */
 public class XVisibilityEvent extends Struct implements NativeResource {
@@ -90,34 +80,34 @@ public class XVisibilityEvent extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code serial} field. */
+    /** # of last request processed by server */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** Returns the value of the {@code send_event} field. */
+    /** true if this came from an {@link X11#XSendEvent} request */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** Returns the value of the {@code display} field. */
+    /** {@code Display} the event was read from */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code window} field. */
+    /** window it reported relative to */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
-    /** Returns the value of the {@code state} field. */
+    /** visibility state */
     public int state() { return nstate(address()); }
 
     /** Sets the specified value to the {@code type} field. */
     public XVisibilityEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code serial} field. */
+    /** Sets the specified value to the {@link #serial} field. */
     public XVisibilityEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@code send_event} field. */
+    /** Sets the specified value to the {@link #send_event} field. */
     public XVisibilityEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code display} field. */
+    /** Sets the specified value to the {@link #display} field. */
     public XVisibilityEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@code window} field. */
+    /** Sets the specified value to the {@link #window} field. */
     public XVisibilityEvent window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
-    /** Sets the specified value to the {@code state} field. */
+    /** Sets the specified value to the {@link #state} field. */
     public XVisibilityEvent state(int value) { nstate(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -379,34 +369,34 @@ public class XVisibilityEvent extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XVisibilityEvent.ntype(address()); }
-        /** Returns the value of the {@code serial} field. */
+        /** @return the value of the {@link XVisibilityEvent#serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XVisibilityEvent.nserial(address()); }
-        /** Returns the value of the {@code send_event} field. */
+        /** @return the value of the {@link XVisibilityEvent#send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XVisibilityEvent.nsend_event(address()) != 0; }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@link XVisibilityEvent#display} field. */
         @NativeType("Display *")
         public long display() { return XVisibilityEvent.ndisplay(address()); }
-        /** Returns the value of the {@code window} field. */
+        /** @return the value of the {@link XVisibilityEvent#window} field. */
         @NativeType("Window")
         public long window() { return XVisibilityEvent.nwindow(address()); }
-        /** Returns the value of the {@code state} field. */
+        /** @return the value of the {@link XVisibilityEvent#state} field. */
         public int state() { return XVisibilityEvent.nstate(address()); }
 
         /** Sets the specified value to the {@code type} field. */
         public XVisibilityEvent.Buffer type(int value) { XVisibilityEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code serial} field. */
+        /** Sets the specified value to the {@link XVisibilityEvent#serial} field. */
         public XVisibilityEvent.Buffer serial(@NativeType("unsigned long") long value) { XVisibilityEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@code send_event} field. */
+        /** Sets the specified value to the {@link XVisibilityEvent#send_event} field. */
         public XVisibilityEvent.Buffer send_event(@NativeType("Bool") boolean value) { XVisibilityEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code display} field. */
+        /** Sets the specified value to the {@link XVisibilityEvent#display} field. */
         public XVisibilityEvent.Buffer display(@NativeType("Display *") long value) { XVisibilityEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@code window} field. */
+        /** Sets the specified value to the {@link XVisibilityEvent#window} field. */
         public XVisibilityEvent.Buffer window(@NativeType("Window") long value) { XVisibilityEvent.nwindow(address(), value); return this; }
-        /** Sets the specified value to the {@code state} field. */
+        /** Sets the specified value to the {@link XVisibilityEvent#state} field. */
         public XVisibilityEvent.Buffer state(int value) { XVisibilityEvent.nstate(address(), value); return this; }
 
     }

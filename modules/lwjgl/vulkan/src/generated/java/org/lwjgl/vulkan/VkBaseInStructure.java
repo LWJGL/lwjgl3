@@ -26,19 +26,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkBaseInStructure}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the structure type of the structure being iterated through.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to the next structure in a structure chain.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBaseInStructure {
- *     VkStructureType sType;
- *     {@link VkBaseInStructure VkBaseInStructure} * pNext;
+ *     VkStructureType {@link #sType};
+ *     {@link VkBaseInStructure VkBaseInStructure} * {@link #pNext};
  * }</code></pre>
  */
 public class VkBaseInStructure extends Struct implements NativeResource {
@@ -80,17 +73,17 @@ public class VkBaseInStructure extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the structure type of the structure being iterated through. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns a {@link VkBaseInStructure} view of the struct pointed to by the {@code pNext} field. */
+    /** {@code NULL} or a pointer to the next structure in a structure chain. */
     @Nullable
     @NativeType("VkBaseInStructure *")
     public VkBaseInStructure pNext() { return npNext(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkBaseInStructure sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the address of the specified {@link VkBaseInStructure} to the {@code pNext} field. */
+    /** Sets the address of the specified {@link VkBaseInStructure} to the {@link #pNext} field. */
     public VkBaseInStructure pNext(@Nullable @NativeType("VkBaseInStructure *") VkBaseInStructure value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -307,17 +300,17 @@ public class VkBaseInStructure extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkBaseInStructure#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBaseInStructure.nsType(address()); }
-        /** Returns a {@link VkBaseInStructure} view of the struct pointed to by the {@code pNext} field. */
+        /** @return a {@link VkBaseInStructure} view of the struct pointed to by the {@link VkBaseInStructure#pNext} field. */
         @Nullable
         @NativeType("VkBaseInStructure *")
         public VkBaseInStructure pNext() { return VkBaseInStructure.npNext(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkBaseInStructure#sType} field. */
         public VkBaseInStructure.Buffer sType(@NativeType("VkStructureType") int value) { VkBaseInStructure.nsType(address(), value); return this; }
-        /** Sets the address of the specified {@link VkBaseInStructure} to the {@code pNext} field. */
+        /** Sets the address of the specified {@link VkBaseInStructure} to the {@link VkBaseInStructure#pNext} field. */
         public VkBaseInStructure.Buffer pNext(@Nullable @NativeType("VkBaseInStructure *") VkBaseInStructure value) { VkBaseInStructure.npNext(address(), value); return this; }
 
     }

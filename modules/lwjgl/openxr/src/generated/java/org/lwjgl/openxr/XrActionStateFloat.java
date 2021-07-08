@@ -79,21 +79,21 @@ public class XrActionStateFloat extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code currentState} field. */
+    /** @return the value of the {@code currentState} field. */
     public float currentState() { return ncurrentState(address()); }
-    /** Returns the value of the {@code changedSinceLastSync} field. */
+    /** @return the value of the {@code changedSinceLastSync} field. */
     @NativeType("XrBool32")
     public boolean changedSinceLastSync() { return nchangedSinceLastSync(address()) != 0; }
-    /** Returns the value of the {@code lastChangeTime} field. */
+    /** @return the value of the {@code lastChangeTime} field. */
     @NativeType("XrTime")
     public long lastChangeTime() { return nlastChangeTime(address()); }
-    /** Returns the value of the {@code isActive} field. */
+    /** @return the value of the {@code isActive} field. */
     @NativeType("XrBool32")
     public boolean isActive() { return nisActive(address()) != 0; }
 
@@ -348,21 +348,21 @@ public class XrActionStateFloat extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActionStateFloat.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrActionStateFloat.nnext(address()); }
-        /** Returns the value of the {@code currentState} field. */
+        /** @return the value of the {@code currentState} field. */
         public float currentState() { return XrActionStateFloat.ncurrentState(address()); }
-        /** Returns the value of the {@code changedSinceLastSync} field. */
+        /** @return the value of the {@code changedSinceLastSync} field. */
         @NativeType("XrBool32")
         public boolean changedSinceLastSync() { return XrActionStateFloat.nchangedSinceLastSync(address()) != 0; }
-        /** Returns the value of the {@code lastChangeTime} field. */
+        /** @return the value of the {@code lastChangeTime} field. */
         @NativeType("XrTime")
         public long lastChangeTime() { return XrActionStateFloat.nlastChangeTime(address()); }
-        /** Returns the value of the {@code isActive} field. */
+        /** @return the value of the {@code isActive} field. */
         @NativeType("XrBool32")
         public boolean isActive() { return XrActionStateFloat.nisActive(address()) != 0; }
 

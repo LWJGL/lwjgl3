@@ -36,6 +36,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVSampleLocations {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
         GL_SAMPLE_LOCATION_SUBPIXEL_BITS_NV           = 0x933D,
@@ -52,8 +54,6 @@ public class NVSampleLocations {
     public static final int
         GL_FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_NV = 0x9342,
         GL_FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_NV    = 0x9343;
-
-    static { GL.initialize(); }
 
     protected NVSampleLocations() {
         throw new UnsupportedOperationException();

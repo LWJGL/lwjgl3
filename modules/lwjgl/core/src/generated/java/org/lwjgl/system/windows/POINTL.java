@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Contains the coordinates of a point.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code x} &ndash; the horizontal (x) coordinate of the point</li>
- * <li>{@code y} &ndash; the vertical (y) coordinate of the point.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct POINTL {
- *     LONG x;
- *     LONG y;
+ *     LONG {@link #x};
+ *     LONG {@link #y};
  * }</code></pre>
  */
 public class POINTL extends Struct implements NativeResource {
@@ -72,16 +65,16 @@ public class POINTL extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** the horizontal (x) coordinate of the point */
     @NativeType("LONG")
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** the vertical (y) coordinate of the point. */
     @NativeType("LONG")
     public int y() { return ny(address()); }
 
-    /** Sets the specified value to the {@code x} field. */
+    /** Sets the specified value to the {@link #x} field. */
     public POINTL x(@NativeType("LONG") int value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@code y} field. */
+    /** Sets the specified value to the {@link #y} field. */
     public POINTL y(@NativeType("LONG") int value) { ny(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -298,16 +291,16 @@ public class POINTL extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link POINTL#x} field. */
         @NativeType("LONG")
         public int x() { return POINTL.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@link POINTL#y} field. */
         @NativeType("LONG")
         public int y() { return POINTL.ny(address()); }
 
-        /** Sets the specified value to the {@code x} field. */
+        /** Sets the specified value to the {@link POINTL#x} field. */
         public POINTL.Buffer x(@NativeType("LONG") int value) { POINTL.nx(address(), value); return this; }
-        /** Sets the specified value to the {@code y} field. */
+        /** Sets the specified value to the {@link POINTL#y} field. */
         public POINTL.Buffer y(@NativeType("LONG") int value) { POINTL.ny(address(), value); return this; }
 
     }

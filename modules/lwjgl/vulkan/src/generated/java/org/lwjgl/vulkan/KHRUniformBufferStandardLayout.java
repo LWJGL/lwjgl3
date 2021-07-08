@@ -6,17 +6,15 @@
 package org.lwjgl.vulkan;
 
 /**
- * <h5>Short Description</h5>
+ * This extension enables tighter array and struct packing to be used with uniform buffers.
  * 
- * <p>Enables tighter array and struct packing to be used with uniform buffers.</p>
- * 
- * <h5>Description</h5>
- * 
- * <p>This extension modifies the alignment rules for uniform buffers, allowing for tighter packing of arrays and structures. This allows, for example, the std430 layout, as defined in <a target="_blank" href="https://www.khronos.org/registry/OpenGL/specs/gl/GLSLangSpec.4.60.pdf">GLSL</a> to be supported in uniform buffers.</p>
+ * <p>It modifies the alignment rules for uniform buffers, allowing for tighter packing of arrays and structures. This allows, for example, the std430 layout, as defined in <a target="_blank" href="https://www.khronos.org/registry/OpenGL/specs/gl/GLSLangSpec.4.60.pdf">GLSL</a> to be supported in uniform buffers.</p>
  * 
  * <h5>Promotion to Vulkan 1.2</h5>
  * 
  * <p>All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * 
+ * <h5>VK_KHR_uniform_buffer_standard_layout</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -40,6 +38,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Graeme Leese <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_uniform_buffer_standard_layout:%20&amp;body=@gnl21%20">gnl21</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-01-25</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>

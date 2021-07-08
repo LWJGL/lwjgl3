@@ -67,12 +67,12 @@ public class XrHandJointLocationEXT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code locationFlags} field. */
+    /** @return the value of the {@code locationFlags} field. */
     @NativeType("XrSpaceLocationFlags")
     public long locationFlags() { return nlocationFlags(address()); }
-    /** Returns a {@link XrPosef} view of the {@code pose} field. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** Returns the value of the {@code radius} field. */
+    /** @return the value of the {@code radius} field. */
     public float radius() { return nradius(address()); }
 
     /** Sets the specified value to the {@code locationFlags} field. */
@@ -304,12 +304,12 @@ public class XrHandJointLocationEXT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code locationFlags} field. */
+        /** @return the value of the {@code locationFlags} field. */
         @NativeType("XrSpaceLocationFlags")
         public long locationFlags() { return XrHandJointLocationEXT.nlocationFlags(address()); }
-        /** Returns a {@link XrPosef} view of the {@code pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrHandJointLocationEXT.npose(address()); }
-        /** Returns the value of the {@code radius} field. */
+        /** @return the value of the {@code radius} field. */
         public float radius() { return XrHandJointLocationEXT.nradius(address()); }
 
         /** Sets the specified value to the {@code locationFlags} field. */

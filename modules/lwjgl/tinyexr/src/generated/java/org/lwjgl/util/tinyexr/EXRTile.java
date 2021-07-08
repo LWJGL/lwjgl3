@@ -17,14 +17,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code width} &ndash; actual width in a tile</li>
- * <li>{@code height} &ndash; actual height in a tile</li>
- * <li>{@code images} &ndash; image[channels][pixels]</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -33,9 +25,9 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int offset_y;
  *     int level_x;
  *     int level_y;
- *     int width;
- *     int height;
- *     unsigned char ** images;
+ *     int {@link #width};
+ *     int {@link #height};
+ *     unsigned char ** {@link #images};
  * }</code></pre>
  */
 public class EXRTile extends Struct implements NativeResource {
@@ -92,22 +84,22 @@ public class EXRTile extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code offset_x} field. */
+    /** @return the value of the {@code offset_x} field. */
     public int offset_x() { return noffset_x(address()); }
-    /** Returns the value of the {@code offset_y} field. */
+    /** @return the value of the {@code offset_y} field. */
     public int offset_y() { return noffset_y(address()); }
-    /** Returns the value of the {@code level_x} field. */
+    /** @return the value of the {@code level_x} field. */
     public int level_x() { return nlevel_x(address()); }
-    /** Returns the value of the {@code level_y} field. */
+    /** @return the value of the {@code level_y} field. */
     public int level_y() { return nlevel_y(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** actual width in a tile */
     public int width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** actual height in a tile */
     public int height() { return nheight(address()); }
     /**
-     * Returns a {@link PointerBuffer} view of the data pointed to by the {@code images} field.
-     *
      * @param capacity the number of elements in the returned buffer
+     *
+     * @return image[channels][pixels]
      */
     @NativeType("unsigned char **")
     public PointerBuffer images(int capacity) { return nimages(address(), capacity); }
@@ -120,11 +112,11 @@ public class EXRTile extends Struct implements NativeResource {
     public EXRTile level_x(int value) { nlevel_x(address(), value); return this; }
     /** Sets the specified value to the {@code level_y} field. */
     public EXRTile level_y(int value) { nlevel_y(address(), value); return this; }
-    /** Sets the specified value to the {@code width} field. */
+    /** Sets the specified value to the {@link #width} field. */
     public EXRTile width(int value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@code height} field. */
+    /** Sets the specified value to the {@link #height} field. */
     public EXRTile height(int value) { nheight(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@code images} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@link #images} field. */
     public EXRTile images(@NativeType("unsigned char **") PointerBuffer value) { nimages(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -392,20 +384,20 @@ public class EXRTile extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code offset_x} field. */
+        /** @return the value of the {@code offset_x} field. */
         public int offset_x() { return EXRTile.noffset_x(address()); }
-        /** Returns the value of the {@code offset_y} field. */
+        /** @return the value of the {@code offset_y} field. */
         public int offset_y() { return EXRTile.noffset_y(address()); }
-        /** Returns the value of the {@code level_x} field. */
+        /** @return the value of the {@code level_x} field. */
         public int level_x() { return EXRTile.nlevel_x(address()); }
-        /** Returns the value of the {@code level_y} field. */
+        /** @return the value of the {@code level_y} field. */
         public int level_y() { return EXRTile.nlevel_y(address()); }
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@link EXRTile#width} field. */
         public int width() { return EXRTile.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@link EXRTile#height} field. */
         public int height() { return EXRTile.nheight(address()); }
         /**
-         * Returns a {@link PointerBuffer} view of the data pointed to by the {@code images} field.
+         * @return a {@link PointerBuffer} view of the data pointed to by the {@link EXRTile#images} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
@@ -420,11 +412,11 @@ public class EXRTile extends Struct implements NativeResource {
         public EXRTile.Buffer level_x(int value) { EXRTile.nlevel_x(address(), value); return this; }
         /** Sets the specified value to the {@code level_y} field. */
         public EXRTile.Buffer level_y(int value) { EXRTile.nlevel_y(address(), value); return this; }
-        /** Sets the specified value to the {@code width} field. */
+        /** Sets the specified value to the {@link EXRTile#width} field. */
         public EXRTile.Buffer width(int value) { EXRTile.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@code height} field. */
+        /** Sets the specified value to the {@link EXRTile#height} field. */
         public EXRTile.Buffer height(int value) { EXRTile.nheight(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@code images} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@link EXRTile#images} field. */
         public EXRTile.Buffer images(@NativeType("unsigned char **") PointerBuffer value) { EXRTile.nimages(address(), value); return this; }
 
     }

@@ -22,24 +22,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>Each {@code CXUnsavedFile} instance provides the name of a file on the system along with the current contents of that file that have not yet been saved
  * to disk.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code Filename} &ndash; 
- * the file whose contents have not yet been saved.
- * 
- * <p>This file must already exist in the file system.</p></li>
- * <li>{@code Contents} &ndash; a buffer containing the unsaved contents of this file</li>
- * <li>{@code Length} &ndash; the length of the unsaved contents of this buffer</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CXUnsavedFile {
- *     char const * Filename;
- *     char const * Contents;
- *     unsigned long Length;
+ *     char const * {@link #Filename};
+ *     char const * {@link #Contents};
+ *     unsigned long {@link #Length};
  * }</code></pre>
  */
 @NativeType("struct CXUnsavedFile")
@@ -85,22 +74,30 @@ public class CXUnsavedFile extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code Filename} field. */
+    /**
+     * the file whose contents have not yet been saved.
+     * 
+     * <p>This file must already exist in the file system.</p>
+     */
     @NativeType("char const *")
     public ByteBuffer Filename() { return nFilename(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code Filename} field. */
+    /**
+     * the file whose contents have not yet been saved.
+     * 
+     * <p>This file must already exist in the file system.</p>
+     */
     @NativeType("char const *")
     public String FilenameString() { return nFilenameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code Contents} field. */
+    /** a buffer containing the unsaved contents of this file */
     @NativeType("char const *")
     public ByteBuffer Contents() { return nContents(address()); }
-    /** Returns the value of the {@code Length} field. */
+    /** the length of the unsaved contents of this buffer */
     @NativeType("unsigned long")
     public long Length() { return nLength(address()); }
 
-    /** Sets the address of the specified encoded string to the {@code Filename} field. */
+    /** Sets the address of the specified encoded string to the {@link #Filename} field. */
     public CXUnsavedFile Filename(@NativeType("char const *") ByteBuffer value) { nFilename(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code Contents} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@link #Contents} field. */
     public CXUnsavedFile Contents(@NativeType("char const *") ByteBuffer value) { nContents(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -348,22 +345,22 @@ public class CXUnsavedFile extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code Filename} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link CXUnsavedFile#Filename} field. */
         @NativeType("char const *")
         public ByteBuffer Filename() { return CXUnsavedFile.nFilename(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code Filename} field. */
+        /** @return the null-terminated string pointed to by the {@link CXUnsavedFile#Filename} field. */
         @NativeType("char const *")
         public String FilenameString() { return CXUnsavedFile.nFilenameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code Contents} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link CXUnsavedFile#Contents} field. */
         @NativeType("char const *")
         public ByteBuffer Contents() { return CXUnsavedFile.nContents(address()); }
-        /** Returns the value of the {@code Length} field. */
+        /** @return the value of the {@link CXUnsavedFile#Length} field. */
         @NativeType("unsigned long")
         public long Length() { return CXUnsavedFile.nLength(address()); }
 
-        /** Sets the address of the specified encoded string to the {@code Filename} field. */
+        /** Sets the address of the specified encoded string to the {@link CXUnsavedFile#Filename} field. */
         public CXUnsavedFile.Buffer Filename(@NativeType("char const *") ByteBuffer value) { CXUnsavedFile.nFilename(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code Contents} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@link CXUnsavedFile#Contents} field. */
         public CXUnsavedFile.Buffer Contents(@NativeType("char const *") ByteBuffer value) { CXUnsavedFile.nContents(address(), value); return this; }
 
     }

@@ -117,55 +117,55 @@ public class NkDrawList extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkRect} view of the {@code clip_rect} field. */
+    /** @return a {@link NkRect} view of the {@code clip_rect} field. */
     @NativeType("struct nk_rect")
     public NkRect clip_rect() { return nclip_rect(address()); }
-    /** Returns a {@link NkVec2}.Buffer view of the {@code circle_vtx} field. */
+    /** @return a {@link NkVec2}.Buffer view of the {@code circle_vtx} field. */
     @NativeType("struct nk_vec2[12]")
     public NkVec2.Buffer circle_vtx() { return ncircle_vtx(address()); }
-    /** Returns a {@link NkVec2} view of the struct at the specified index of the {@code circle_vtx} field. */
+    /** @return a {@link NkVec2} view of the struct at the specified index of the {@code circle_vtx} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 circle_vtx(int index) { return ncircle_vtx(address(), index); }
-    /** Returns a {@link NkConvertConfig} view of the {@code config} field. */
+    /** @return a {@link NkConvertConfig} view of the {@code config} field. */
     @NativeType("struct nk_convert_config")
     public NkConvertConfig config() { return nconfig(address()); }
-    /** Returns a {@link NkBuffer} view of the struct pointed to by the {@code buffer} field. */
+    /** @return a {@link NkBuffer} view of the struct pointed to by the {@code buffer} field. */
     @Nullable
     @NativeType("struct nk_buffer *")
     public NkBuffer buffer() { return nbuffer(address()); }
-    /** Returns a {@link NkBuffer} view of the struct pointed to by the {@code vertices} field. */
+    /** @return a {@link NkBuffer} view of the struct pointed to by the {@code vertices} field. */
     @Nullable
     @NativeType("struct nk_buffer *")
     public NkBuffer vertices() { return nvertices(address()); }
-    /** Returns a {@link NkBuffer} view of the struct pointed to by the {@code elements} field. */
+    /** @return a {@link NkBuffer} view of the struct pointed to by the {@code elements} field. */
     @Nullable
     @NativeType("struct nk_buffer *")
     public NkBuffer elements() { return nelements(address()); }
-    /** Returns the value of the {@code element_count} field. */
+    /** @return the value of the {@code element_count} field. */
     @NativeType("unsigned int")
     public int element_count() { return nelement_count(address()); }
-    /** Returns the value of the {@code vertex_count} field. */
+    /** @return the value of the {@code vertex_count} field. */
     @NativeType("unsigned int")
     public int vertex_count() { return nvertex_count(address()); }
-    /** Returns the value of the {@code cmd_count} field. */
+    /** @return the value of the {@code cmd_count} field. */
     @NativeType("unsigned int")
     public int cmd_count() { return ncmd_count(address()); }
-    /** Returns the value of the {@code cmd_offset} field. */
+    /** @return the value of the {@code cmd_offset} field. */
     @NativeType("nk_size")
     public long cmd_offset() { return ncmd_offset(address()); }
-    /** Returns the value of the {@code path_count} field. */
+    /** @return the value of the {@code path_count} field. */
     @NativeType("unsigned int")
     public int path_count() { return npath_count(address()); }
-    /** Returns the value of the {@code path_offset} field. */
+    /** @return the value of the {@code path_offset} field. */
     @NativeType("unsigned int")
     public int path_offset() { return npath_offset(address()); }
-    /** Returns the value of the {@code line_AA} field. */
+    /** @return the value of the {@code line_AA} field. */
     @NativeType("enum nk_anti_aliasing")
     public int line_AA() { return nline_AA(address()); }
-    /** Returns the value of the {@code shape_AA} field. */
+    /** @return the value of the {@code shape_AA} field. */
     @NativeType("enum nk_anti_aliasing")
     public int shape_AA() { return nshape_AA(address()); }
-    /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+    /** @return a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
 
@@ -385,55 +385,55 @@ public class NkDrawList extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkRect} view of the {@code clip_rect} field. */
+        /** @return a {@link NkRect} view of the {@code clip_rect} field. */
         @NativeType("struct nk_rect")
         public NkRect clip_rect() { return NkDrawList.nclip_rect(address()); }
-        /** Returns a {@link NkVec2}.Buffer view of the {@code circle_vtx} field. */
+        /** @return a {@link NkVec2}.Buffer view of the {@code circle_vtx} field. */
         @NativeType("struct nk_vec2[12]")
         public NkVec2.Buffer circle_vtx() { return NkDrawList.ncircle_vtx(address()); }
-        /** Returns a {@link NkVec2} view of the struct at the specified index of the {@code circle_vtx} field. */
+        /** @return a {@link NkVec2} view of the struct at the specified index of the {@code circle_vtx} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 circle_vtx(int index) { return NkDrawList.ncircle_vtx(address(), index); }
-        /** Returns a {@link NkConvertConfig} view of the {@code config} field. */
+        /** @return a {@link NkConvertConfig} view of the {@code config} field. */
         @NativeType("struct nk_convert_config")
         public NkConvertConfig config() { return NkDrawList.nconfig(address()); }
-        /** Returns a {@link NkBuffer} view of the struct pointed to by the {@code buffer} field. */
+        /** @return a {@link NkBuffer} view of the struct pointed to by the {@code buffer} field. */
         @Nullable
         @NativeType("struct nk_buffer *")
         public NkBuffer buffer() { return NkDrawList.nbuffer(address()); }
-        /** Returns a {@link NkBuffer} view of the struct pointed to by the {@code vertices} field. */
+        /** @return a {@link NkBuffer} view of the struct pointed to by the {@code vertices} field. */
         @Nullable
         @NativeType("struct nk_buffer *")
         public NkBuffer vertices() { return NkDrawList.nvertices(address()); }
-        /** Returns a {@link NkBuffer} view of the struct pointed to by the {@code elements} field. */
+        /** @return a {@link NkBuffer} view of the struct pointed to by the {@code elements} field. */
         @Nullable
         @NativeType("struct nk_buffer *")
         public NkBuffer elements() { return NkDrawList.nelements(address()); }
-        /** Returns the value of the {@code element_count} field. */
+        /** @return the value of the {@code element_count} field. */
         @NativeType("unsigned int")
         public int element_count() { return NkDrawList.nelement_count(address()); }
-        /** Returns the value of the {@code vertex_count} field. */
+        /** @return the value of the {@code vertex_count} field. */
         @NativeType("unsigned int")
         public int vertex_count() { return NkDrawList.nvertex_count(address()); }
-        /** Returns the value of the {@code cmd_count} field. */
+        /** @return the value of the {@code cmd_count} field. */
         @NativeType("unsigned int")
         public int cmd_count() { return NkDrawList.ncmd_count(address()); }
-        /** Returns the value of the {@code cmd_offset} field. */
+        /** @return the value of the {@code cmd_offset} field. */
         @NativeType("nk_size")
         public long cmd_offset() { return NkDrawList.ncmd_offset(address()); }
-        /** Returns the value of the {@code path_count} field. */
+        /** @return the value of the {@code path_count} field. */
         @NativeType("unsigned int")
         public int path_count() { return NkDrawList.npath_count(address()); }
-        /** Returns the value of the {@code path_offset} field. */
+        /** @return the value of the {@code path_offset} field. */
         @NativeType("unsigned int")
         public int path_offset() { return NkDrawList.npath_offset(address()); }
-        /** Returns the value of the {@code line_AA} field. */
+        /** @return the value of the {@code line_AA} field. */
         @NativeType("enum nk_anti_aliasing")
         public int line_AA() { return NkDrawList.nline_AA(address()); }
-        /** Returns the value of the {@code shape_AA} field. */
+        /** @return the value of the {@code shape_AA} field. */
         @NativeType("enum nk_anti_aliasing")
         public int shape_AA() { return NkDrawList.nshape_AA(address()); }
-        /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+        /** @return a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkDrawList.nuserdata(address()); }
 

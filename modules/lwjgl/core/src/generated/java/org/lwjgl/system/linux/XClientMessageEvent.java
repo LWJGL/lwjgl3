@@ -25,24 +25,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * values, ten 16-bit values, and five 32-bit values. Particular message types might not make use of all these values. The X server places no
  * interpretation on the values in the {@code window}, {@code message_type}, or {@code data} members.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code serial} &ndash; # of last request processed by server</li>
- * <li>{@code send_event} &ndash; true if this came from an {@link X11#XSendEvent} request</li>
- * <li>{@code display} &ndash; {@code Display} the event was read from</li>
- * <li>{@code window} &ndash; window it reported relative to</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XClientMessageEvent {
  *     int type;
- *     unsigned long serial;
- *     Bool send_event;
- *     Display * display;
- *     Window window;
+ *     unsigned long {@link #serial};
+ *     Bool {@link #send_event};
+ *     Display * {@link #display};
+ *     Window {@link #window};
  *     Atom message_type;
  *     int format;
  *     struct {
@@ -119,67 +110,67 @@ public class XClientMessageEvent extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code serial} field. */
+    /** # of last request processed by server */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** Returns the value of the {@code send_event} field. */
+    /** true if this came from an {@link X11#XSendEvent} request */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** Returns the value of the {@code display} field. */
+    /** {@code Display} the event was read from */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code window} field. */
+    /** window it reported relative to */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
-    /** Returns the value of the {@code message_type} field. */
+    /** @return the value of the {@code message_type} field. */
     @NativeType("Atom")
     public long message_type() { return nmessage_type(address()); }
-    /** Returns the value of the {@code format} field. */
+    /** @return the value of the {@code format} field. */
     public int format() { return nformat(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code data.b} field. */
+    /** @return a {@link ByteBuffer} view of the {@code data.b} field. */
     @NativeType("char[20]")
     public ByteBuffer data_b() { return ndata_b(address()); }
-    /** Returns the value at the specified index of the {@code data.b} field. */
+    /** @return the value at the specified index of the {@code data.b} field. */
     @NativeType("char")
     public byte data_b(int index) { return ndata_b(address(), index); }
-    /** Returns a {@link ShortBuffer} view of the {@code data.s} field. */
+    /** @return a {@link ShortBuffer} view of the {@code data.s} field. */
     @NativeType("short[10]")
     public ShortBuffer data_s() { return ndata_s(address()); }
-    /** Returns the value at the specified index of the {@code data.s} field. */
+    /** @return the value at the specified index of the {@code data.s} field. */
     public short data_s(int index) { return ndata_s(address(), index); }
-    /** Returns a {@link CLongBuffer} view of the {@code data.l} field. */
+    /** @return a {@link CLongBuffer} view of the {@code data.l} field. */
     @NativeType("long[5]")
     public CLongBuffer data_l() { return ndata_l(address()); }
-    /** Returns the value at the specified index of the {@code data.l} field. */
+    /** @return the value at the specified index of the {@code data.l} field. */
     public long data_l(int index) { return ndata_l(address(), index); }
 
     /** Sets the specified value to the {@code type} field. */
     public XClientMessageEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code serial} field. */
+    /** Sets the specified value to the {@link #serial} field. */
     public XClientMessageEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@code send_event} field. */
+    /** Sets the specified value to the {@link #send_event} field. */
     public XClientMessageEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code display} field. */
+    /** Sets the specified value to the {@link #display} field. */
     public XClientMessageEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@code window} field. */
+    /** Sets the specified value to the {@link #window} field. */
     public XClientMessageEvent window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
     /** Sets the specified value to the {@code message_type} field. */
     public XClientMessageEvent message_type(@NativeType("Atom") long value) { nmessage_type(address(), value); return this; }
     /** Sets the specified value to the {@code format} field. */
     public XClientMessageEvent format(int value) { nformat(address(), value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@code data.b} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@code b} field. */
     public XClientMessageEvent data_b(@NativeType("char[20]") ByteBuffer value) { ndata_b(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code data.b} field. */
+    /** Sets the specified value at the specified index of the {@code b} field. */
     public XClientMessageEvent data_b(int index, @NativeType("char") byte value) { ndata_b(address(), index, value); return this; }
-    /** Copies the specified {@link ShortBuffer} to the {@code data.s} field. */
+    /** Copies the specified {@link ShortBuffer} to the {@code s} field. */
     public XClientMessageEvent data_s(@NativeType("short[10]") ShortBuffer value) { ndata_s(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code data.s} field. */
+    /** Sets the specified value at the specified index of the {@code s} field. */
     public XClientMessageEvent data_s(int index, short value) { ndata_s(address(), index, value); return this; }
-    /** Copies the specified {@link CLongBuffer} to the {@code data.l} field. */
+    /** Copies the specified {@link CLongBuffer} to the {@code l} field. */
     public XClientMessageEvent data_l(@NativeType("long[5]") CLongBuffer value) { ndata_l(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code data.l} field. */
+    /** Sets the specified value at the specified index of the {@code l} field. */
     public XClientMessageEvent data_l(int index, long value) { ndata_l(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -498,67 +489,67 @@ public class XClientMessageEvent extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XClientMessageEvent.ntype(address()); }
-        /** Returns the value of the {@code serial} field. */
+        /** @return the value of the {@link XClientMessageEvent#serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XClientMessageEvent.nserial(address()); }
-        /** Returns the value of the {@code send_event} field. */
+        /** @return the value of the {@link XClientMessageEvent#send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XClientMessageEvent.nsend_event(address()) != 0; }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@link XClientMessageEvent#display} field. */
         @NativeType("Display *")
         public long display() { return XClientMessageEvent.ndisplay(address()); }
-        /** Returns the value of the {@code window} field. */
+        /** @return the value of the {@link XClientMessageEvent#window} field. */
         @NativeType("Window")
         public long window() { return XClientMessageEvent.nwindow(address()); }
-        /** Returns the value of the {@code message_type} field. */
+        /** @return the value of the {@code message_type} field. */
         @NativeType("Atom")
         public long message_type() { return XClientMessageEvent.nmessage_type(address()); }
-        /** Returns the value of the {@code format} field. */
+        /** @return the value of the {@code format} field. */
         public int format() { return XClientMessageEvent.nformat(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code data.b} field. */
+        /** @return a {@link ByteBuffer} view of the {@code data.b} field. */
         @NativeType("char[20]")
         public ByteBuffer data_b() { return XClientMessageEvent.ndata_b(address()); }
-        /** Returns the value at the specified index of the {@code data.b} field. */
+        /** @return the value at the specified index of the {@code data.b} field. */
         @NativeType("char")
         public byte data_b(int index) { return XClientMessageEvent.ndata_b(address(), index); }
-        /** Returns a {@link ShortBuffer} view of the {@code data.s} field. */
+        /** @return a {@link ShortBuffer} view of the {@code data.s} field. */
         @NativeType("short[10]")
         public ShortBuffer data_s() { return XClientMessageEvent.ndata_s(address()); }
-        /** Returns the value at the specified index of the {@code data.s} field. */
+        /** @return the value at the specified index of the {@code data.s} field. */
         public short data_s(int index) { return XClientMessageEvent.ndata_s(address(), index); }
-        /** Returns a {@link CLongBuffer} view of the {@code data.l} field. */
+        /** @return a {@link CLongBuffer} view of the {@code data.l} field. */
         @NativeType("long[5]")
         public CLongBuffer data_l() { return XClientMessageEvent.ndata_l(address()); }
-        /** Returns the value at the specified index of the {@code data.l} field. */
+        /** @return the value at the specified index of the {@code data.l} field. */
         public long data_l(int index) { return XClientMessageEvent.ndata_l(address(), index); }
 
         /** Sets the specified value to the {@code type} field. */
         public XClientMessageEvent.Buffer type(int value) { XClientMessageEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code serial} field. */
+        /** Sets the specified value to the {@link XClientMessageEvent#serial} field. */
         public XClientMessageEvent.Buffer serial(@NativeType("unsigned long") long value) { XClientMessageEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@code send_event} field. */
+        /** Sets the specified value to the {@link XClientMessageEvent#send_event} field. */
         public XClientMessageEvent.Buffer send_event(@NativeType("Bool") boolean value) { XClientMessageEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code display} field. */
+        /** Sets the specified value to the {@link XClientMessageEvent#display} field. */
         public XClientMessageEvent.Buffer display(@NativeType("Display *") long value) { XClientMessageEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@code window} field. */
+        /** Sets the specified value to the {@link XClientMessageEvent#window} field. */
         public XClientMessageEvent.Buffer window(@NativeType("Window") long value) { XClientMessageEvent.nwindow(address(), value); return this; }
         /** Sets the specified value to the {@code message_type} field. */
         public XClientMessageEvent.Buffer message_type(@NativeType("Atom") long value) { XClientMessageEvent.nmessage_type(address(), value); return this; }
         /** Sets the specified value to the {@code format} field. */
         public XClientMessageEvent.Buffer format(int value) { XClientMessageEvent.nformat(address(), value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@code data.b} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code b} field. */
         public XClientMessageEvent.Buffer data_b(@NativeType("char[20]") ByteBuffer value) { XClientMessageEvent.ndata_b(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code data.b} field. */
+        /** Sets the specified value at the specified index of the {@code b} field. */
         public XClientMessageEvent.Buffer data_b(int index, @NativeType("char") byte value) { XClientMessageEvent.ndata_b(address(), index, value); return this; }
-        /** Copies the specified {@link ShortBuffer} to the {@code data.s} field. */
+        /** Copies the specified {@link ShortBuffer} to the {@code s} field. */
         public XClientMessageEvent.Buffer data_s(@NativeType("short[10]") ShortBuffer value) { XClientMessageEvent.ndata_s(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code data.s} field. */
+        /** Sets the specified value at the specified index of the {@code s} field. */
         public XClientMessageEvent.Buffer data_s(int index, short value) { XClientMessageEvent.ndata_s(address(), index, value); return this; }
-        /** Copies the specified {@link CLongBuffer} to the {@code data.l} field. */
+        /** Copies the specified {@link CLongBuffer} to the {@code l} field. */
         public XClientMessageEvent.Buffer data_l(@NativeType("long[5]") CLongBuffer value) { XClientMessageEvent.ndata_l(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code data.l} field. */
+        /** Sets the specified value at the specified index of the {@code l} field. */
         public XClientMessageEvent.Buffer data_l(int index, long value) { XClientMessageEvent.ndata_l(address(), index, value); return this; }
 
     }

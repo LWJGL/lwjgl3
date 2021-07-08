@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * A time-value pair specifying a certain 3D vector for the given time.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code mTime} &ndash; The time of this key</li>
- * <li>{@code mValue} &ndash; The value of this key</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiVectorKey {
- *     double mTime;
- *     {@link AIVector3D struct aiVector3D} mValue;
+ *     double {@link #mTime};
+ *     {@link AIVector3D struct aiVector3D} {@link #mValue};
  * }</code></pre>
  */
 @NativeType("struct aiVectorKey")
@@ -73,17 +66,17 @@ public class AIVectorKey extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code mTime} field. */
+    /** The time of this key */
     public double mTime() { return nmTime(address()); }
-    /** Returns a {@link AIVector3D} view of the {@code mValue} field. */
+    /** The value of this key */
     @NativeType("struct aiVector3D")
     public AIVector3D mValue() { return nmValue(address()); }
 
-    /** Sets the specified value to the {@code mTime} field. */
+    /** Sets the specified value to the {@link #mTime} field. */
     public AIVectorKey mTime(double value) { nmTime(address(), value); return this; }
-    /** Copies the specified {@link AIVector3D} to the {@code mValue} field. */
+    /** Copies the specified {@link AIVector3D} to the {@link #mValue} field. */
     public AIVectorKey mValue(@NativeType("struct aiVector3D") AIVector3D value) { nmValue(address(), value); return this; }
-    /** Passes the {@code mValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #mValue} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIVectorKey mValue(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mValue()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,17 +293,17 @@ public class AIVectorKey extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code mTime} field. */
+        /** @return the value of the {@link AIVectorKey#mTime} field. */
         public double mTime() { return AIVectorKey.nmTime(address()); }
-        /** Returns a {@link AIVector3D} view of the {@code mValue} field. */
+        /** @return a {@link AIVector3D} view of the {@link AIVectorKey#mValue} field. */
         @NativeType("struct aiVector3D")
         public AIVector3D mValue() { return AIVectorKey.nmValue(address()); }
 
-        /** Sets the specified value to the {@code mTime} field. */
+        /** Sets the specified value to the {@link AIVectorKey#mTime} field. */
         public AIVectorKey.Buffer mTime(double value) { AIVectorKey.nmTime(address(), value); return this; }
-        /** Copies the specified {@link AIVector3D} to the {@code mValue} field. */
+        /** Copies the specified {@link AIVector3D} to the {@link AIVectorKey#mValue} field. */
         public AIVectorKey.Buffer mValue(@NativeType("struct aiVector3D") AIVector3D value) { AIVectorKey.nmValue(address(), value); return this; }
-        /** Passes the {@code mValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link AIVectorKey#mValue} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIVectorKey.Buffer mValue(java.util.function.Consumer<AIVector3D> consumer) { consumer.accept(mValue()); return this; }
 
     }

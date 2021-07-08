@@ -28,23 +28,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code maxPerSetDescriptors} &ndash; a maximum number of descriptors (summed over all descriptor types) in a single descriptor set that is guaranteed to satisfy any implementation-dependent constraints on the size of a descriptor set itself. Applications <b>can</b> query whether a descriptor set that goes beyond this limit is supported using {@link VK11#vkGetDescriptorSetLayoutSupport GetDescriptorSetLayoutSupport}.</li>
- * <li>{@code maxMemoryAllocationSize} &ndash; the maximum size of a memory allocation that <b>can</b> be created, even if there is more space available in the heap.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceMaintenance3Properties {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint32_t maxPerSetDescriptors;
- *     VkDeviceSize maxMemoryAllocationSize;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint32_t {@link #maxPerSetDescriptors};
+ *     VkDeviceSize {@link #maxMemoryAllocationSize};
  * }</code></pre>
  */
 public class VkPhysicalDeviceMaintenance3Properties extends Struct implements NativeResource {
@@ -92,22 +83,22 @@ public class VkPhysicalDeviceMaintenance3Properties extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code maxPerSetDescriptors} field. */
+    /** a maximum number of descriptors (summed over all descriptor types) in a single descriptor set that is guaranteed to satisfy any implementation-dependent constraints on the size of a descriptor set itself. Applications <b>can</b> query whether a descriptor set that goes beyond this limit is supported using {@link VK11#vkGetDescriptorSetLayoutSupport GetDescriptorSetLayoutSupport}. */
     @NativeType("uint32_t")
     public int maxPerSetDescriptors() { return nmaxPerSetDescriptors(address()); }
-    /** Returns the value of the {@code maxMemoryAllocationSize} field. */
+    /** the maximum size of a memory allocation that <b>can</b> be created, even if there is more space available in the heap. */
     @NativeType("VkDeviceSize")
     public long maxMemoryAllocationSize() { return nmaxMemoryAllocationSize(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMaintenance3Properties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMaintenance3Properties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,22 +319,22 @@ public class VkPhysicalDeviceMaintenance3Properties extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMaintenance3Properties#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMaintenance3Properties.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMaintenance3Properties#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMaintenance3Properties.npNext(address()); }
-        /** Returns the value of the {@code maxPerSetDescriptors} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMaintenance3Properties#maxPerSetDescriptors} field. */
         @NativeType("uint32_t")
         public int maxPerSetDescriptors() { return VkPhysicalDeviceMaintenance3Properties.nmaxPerSetDescriptors(address()); }
-        /** Returns the value of the {@code maxMemoryAllocationSize} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMaintenance3Properties#maxMemoryAllocationSize} field. */
         @NativeType("VkDeviceSize")
         public long maxMemoryAllocationSize() { return VkPhysicalDeviceMaintenance3Properties.nmaxMemoryAllocationSize(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance3Properties#sType} field. */
         public VkPhysicalDeviceMaintenance3Properties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMaintenance3Properties.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance3Properties#pNext} field. */
         public VkPhysicalDeviceMaintenance3Properties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMaintenance3Properties.npNext(address(), value); return this; }
 
     }

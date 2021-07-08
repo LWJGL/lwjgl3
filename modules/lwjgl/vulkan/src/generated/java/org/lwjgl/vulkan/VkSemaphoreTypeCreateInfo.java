@@ -29,28 +29,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-timelineSemaphore">{@code timelineSemaphore}</a> feature is not enabled, {@code semaphoreType} <b>must</b> not equal {@link VK12#VK_SEMAPHORE_TYPE_TIMELINE SEMAPHORE_TYPE_TIMELINE}</li>
- * <li>If {@code semaphoreType} is {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}, {@code initialValue} <b>must</b> be zero.</li>
+ * <li>If {@code semaphoreType} is {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}, {@code initialValue} <b>must</b> be zero</li>
  * </ul>
  * 
  * <p>If no {@link VkSemaphoreTypeCreateInfo} structure is included in the {@code pNext} chain of {@link VkSemaphoreCreateInfo}, then the created semaphore will have a default {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}.</p>
- * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code semaphoreType} &ndash; a {@code VkSemaphoreType} value specifying the type of the semaphore.</li>
- * <li>{@code initialValue} &ndash; the initial payload value if {@code semaphoreType} is {@link VK12#VK_SEMAPHORE_TYPE_TIMELINE SEMAPHORE_TYPE_TIMELINE}.</li>
- * </ul>
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSemaphoreTypeCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkSemaphoreType semaphoreType;
- *     uint64_t initialValue;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkSemaphoreType {@link #semaphoreType};
+ *     uint64_t {@link #initialValue};
  * }</code></pre>
  */
 public class VkSemaphoreTypeCreateInfo extends Struct implements NativeResource {
@@ -98,26 +89,26 @@ public class VkSemaphoreTypeCreateInfo extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code semaphoreType} field. */
+    /** a {@code VkSemaphoreType} value specifying the type of the semaphore. */
     @NativeType("VkSemaphoreType")
     public int semaphoreType() { return nsemaphoreType(address()); }
-    /** Returns the value of the {@code initialValue} field. */
+    /** the initial payload value if {@code semaphoreType} is {@link VK12#VK_SEMAPHORE_TYPE_TIMELINE SEMAPHORE_TYPE_TIMELINE}. */
     @NativeType("uint64_t")
     public long initialValue() { return ninitialValue(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSemaphoreTypeCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSemaphoreTypeCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code semaphoreType} field. */
+    /** Sets the specified value to the {@link #semaphoreType} field. */
     public VkSemaphoreTypeCreateInfo semaphoreType(@NativeType("VkSemaphoreType") int value) { nsemaphoreType(address(), value); return this; }
-    /** Sets the specified value to the {@code initialValue} field. */
+    /** Sets the specified value to the {@link #initialValue} field. */
     public VkSemaphoreTypeCreateInfo initialValue(@NativeType("uint64_t") long value) { ninitialValue(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -346,26 +337,26 @@ public class VkSemaphoreTypeCreateInfo extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSemaphoreTypeCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSemaphoreTypeCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSemaphoreTypeCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSemaphoreTypeCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code semaphoreType} field. */
+        /** @return the value of the {@link VkSemaphoreTypeCreateInfo#semaphoreType} field. */
         @NativeType("VkSemaphoreType")
         public int semaphoreType() { return VkSemaphoreTypeCreateInfo.nsemaphoreType(address()); }
-        /** Returns the value of the {@code initialValue} field. */
+        /** @return the value of the {@link VkSemaphoreTypeCreateInfo#initialValue} field. */
         @NativeType("uint64_t")
         public long initialValue() { return VkSemaphoreTypeCreateInfo.ninitialValue(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSemaphoreTypeCreateInfo#sType} field. */
         public VkSemaphoreTypeCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSemaphoreTypeCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSemaphoreTypeCreateInfo#pNext} field. */
         public VkSemaphoreTypeCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkSemaphoreTypeCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code semaphoreType} field. */
+        /** Sets the specified value to the {@link VkSemaphoreTypeCreateInfo#semaphoreType} field. */
         public VkSemaphoreTypeCreateInfo.Buffer semaphoreType(@NativeType("VkSemaphoreType") int value) { VkSemaphoreTypeCreateInfo.nsemaphoreType(address(), value); return this; }
-        /** Sets the specified value to the {@code initialValue} field. */
+        /** Sets the specified value to the {@link VkSemaphoreTypeCreateInfo#initialValue} field. */
         public VkSemaphoreTypeCreateInfo.Buffer initialValue(@NativeType("uint64_t") long value) { VkSemaphoreTypeCreateInfo.ninitialValue(address(), value); return this; }
 
     }

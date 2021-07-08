@@ -63,9 +63,9 @@ public class XrVector2f extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
 
     /** Sets the specified value to the {@code x} field. */
@@ -287,9 +287,9 @@ public class XrVector2f extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return XrVector2f.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return XrVector2f.ny(address()); }
 
         /** Sets the specified value to the {@code x} field. */

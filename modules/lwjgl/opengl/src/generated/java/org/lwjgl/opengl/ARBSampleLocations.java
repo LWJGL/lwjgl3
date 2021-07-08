@@ -36,6 +36,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBSampleLocations {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
         GL_SAMPLE_LOCATION_SUBPIXEL_BITS_ARB           = 0x933D,
@@ -50,8 +52,6 @@ public class ARBSampleLocations {
     public static final int
         GL_FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_ARB = 0x9342,
         GL_FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_ARB    = 0x9343;
-
-    static { GL.initialize(); }
 
     protected ARBSampleLocations() {
         throw new UnsupportedOperationException();

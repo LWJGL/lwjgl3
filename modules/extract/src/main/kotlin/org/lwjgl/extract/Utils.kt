@@ -58,10 +58,10 @@ internal fun dump(root: CXCursor, stream: PrintStream, depth: Int) {
             clang_getCursorKindSpelling(clang_getCursorKind(root), stack.str).str
         )
     }
-    clang_visitChildren(root) { child, _ ->
+    CXCursorVisitor.create { child, _, _ ->
         dump(child, stream, depth + 1)
         CXChildVisit_Continue
-    }
+    }.use { clang_visitChildren(root, it, NULL) }
 }
 
 internal fun CXCursor.text(source: String): String {

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     cl_program program,
  *     void *user_data
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class CLProgramReleaseCallback extends Callback implements CLPro
     }
 
     protected CLProgramReleaseCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CLProgramReleaseCallback(long functionPointer) {

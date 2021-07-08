@@ -25,6 +25,8 @@ import org.lwjgl.system.*;
  */
 public class OESSampleShading {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
      * GetInteger64v.
@@ -33,8 +35,6 @@ public class OESSampleShading {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, and GetFloatv. */
     public static final int GL_MIN_SAMPLE_SHADING_VALUE_OES = 0x8C37;
-
-    static { GLES.initialize(); }
 
     protected OESSampleShading() {
         throw new UnsupportedOperationException();

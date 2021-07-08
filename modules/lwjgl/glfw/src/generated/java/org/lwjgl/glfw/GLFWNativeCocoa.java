@@ -14,10 +14,6 @@ import static org.lwjgl.system.JNI.*;
 /** Native bindings to the GLFW library's Cocoa native access functions. */
 public class GLFWNativeCocoa {
 
-    protected GLFWNativeCocoa() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
     public static final class Functions {
 
@@ -28,6 +24,10 @@ public class GLFWNativeCocoa {
             GetCocoaMonitor = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetCocoaMonitor"),
             GetCocoaWindow  = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetCocoaWindow");
 
+    }
+
+    protected GLFWNativeCocoa() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ glfwGetCocoaMonitor ] ---

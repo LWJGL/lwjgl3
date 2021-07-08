@@ -50,6 +50,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBVertexProgram {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code cap} parameter of Disable, Enable, and IsEnabled, by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
      * GetDoublev, and by the {@code target} parameter of ProgramStringARB, BindProgramARB, ProgramEnvParameter4[df][v]ARB, ProgramLocalParameter4[df][v]ARB,
@@ -160,8 +162,6 @@ public class ARBVertexProgram {
         GL_MATRIX29_ARB = 0x88DD,
         GL_MATRIX30_ARB = 0x88DE,
         GL_MATRIX31_ARB = 0x88DF;
-
-    static { GL.initialize(); }
 
     protected ARBVertexProgram() {
         throw new UnsupportedOperationException();

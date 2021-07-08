@@ -71,16 +71,16 @@ public class XrSessionCreateInfoOverlayEXTX extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code createFlags} field. */
+    /** @return the value of the {@code createFlags} field. */
     @NativeType("XrOverlaySessionCreateFlagsEXTX")
     public long createFlags() { return ncreateFlags(address()); }
-    /** Returns the value of the {@code sessionLayersPlacement} field. */
+    /** @return the value of the {@code sessionLayersPlacement} field. */
     @NativeType("uint32_t")
     public int sessionLayersPlacement() { return nsessionLayersPlacement(address()); }
 
@@ -319,16 +319,16 @@ public class XrSessionCreateInfoOverlayEXTX extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSessionCreateInfoOverlayEXTX.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSessionCreateInfoOverlayEXTX.nnext(address()); }
-        /** Returns the value of the {@code createFlags} field. */
+        /** @return the value of the {@code createFlags} field. */
         @NativeType("XrOverlaySessionCreateFlagsEXTX")
         public long createFlags() { return XrSessionCreateInfoOverlayEXTX.ncreateFlags(address()); }
-        /** Returns the value of the {@code sessionLayersPlacement} field. */
+        /** @return the value of the {@code sessionLayersPlacement} field. */
         @NativeType("uint32_t")
         public int sessionLayersPlacement() { return XrSessionCreateInfoOverlayEXTX.nsessionLayersPlacement(address()); }
 

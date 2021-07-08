@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Provides information about the last error.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code Result} &ndash; the result from the last API call that generated an error {@code ovrResult}</li>
- * <li>{@code ErrorString[512]} &ndash; a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrErrorInfo {
- *     ovrResult Result;
- *     char ErrorString[512];
+ *     ovrResult {@link #Result};
+ *     char {@link #ErrorString}[512];
  * }</code></pre>
  */
 @NativeType("struct ovrErrorInfo")
@@ -73,13 +66,13 @@ public class OVRErrorInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code Result} field. */
+    /** the result from the last API call that generated an error {@code ovrResult} */
     @NativeType("ovrResult")
     public int Result() { return nResult(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code ErrorString} field. */
+    /** a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions */
     @NativeType("char[512]")
     public ByteBuffer ErrorString() { return nErrorString(address()); }
-    /** Decodes the null-terminated string stored in the {@code ErrorString} field. */
+    /** a UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions */
     @NativeType("char[512]")
     public String ErrorStringString() { return nErrorStringString(address()); }
 
@@ -271,13 +264,13 @@ public class OVRErrorInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code Result} field. */
+        /** @return the value of the {@link OVRErrorInfo#Result} field. */
         @NativeType("ovrResult")
         public int Result() { return OVRErrorInfo.nResult(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code ErrorString} field. */
+        /** @return a {@link ByteBuffer} view of the {@link OVRErrorInfo#ErrorString} field. */
         @NativeType("char[512]")
         public ByteBuffer ErrorString() { return OVRErrorInfo.nErrorString(address()); }
-        /** Decodes the null-terminated string stored in the {@code ErrorString} field. */
+        /** @return the null-terminated string stored in the {@link OVRErrorInfo#ErrorString} field. */
         @NativeType("char[512]")
         public String ErrorStringString() { return OVRErrorInfo.nErrorStringString(address()); }
 

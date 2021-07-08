@@ -40,30 +40,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Copies are done layer by layer starting with image layer {@code baseArrayLayer} member of {@code imageSubresource}. {@code layerCount} layers are copied from the source image or to the destination image.</p>
  * 
+ * <p>For purpose of valid usage statements here and in related copy commands, a <em>blocked image</em> is defined as:</p>
+ * 
+ * <ul>
+ * <li>an image with a <em>single-plane</em>, “{@code _422}” format, which is treated as a format with a 2 × 1 compressed texel block, or</li>
+ * <li>a compressed image.</li>
+ * </ul>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the calling command&#8217;s {@code VkImage} parameter&#8217;s format is not a depth/stencil format or a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>, then {@code bufferOffset} <b>must</b> be a multiple of the format&#8217;s texel block size.</li>
- * <li>If the calling command&#8217;s {@code VkImage} parameter&#8217;s format is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>, then {@code bufferOffset} <b>must</b> be a multiple of the element size of the compatible format for the format and the {@code aspectMask} of the {@code imageSubresource} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-compatible-planes">Compatible formats of planes of multi-planar formats</a></li>
- * <li>{@code bufferOffset} <b>must</b> be a multiple of 4</li>
  * <li>{@code bufferRowLength} <b>must</b> be 0, or greater than or equal to the {@code width} member of {@code imageExtent}</li>
  * <li>{@code bufferImageHeight} <b>must</b> be 0, or greater than or equal to the {@code height} member of {@code imageExtent}</li>
- * <li>{@code imageOffset.x} and <code>(imageExtent.width imageOffset.x)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the image subresource width where this refers to the width of the <em>plane</em> of the image involved in the copy in the case of a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a></li>
- * <li>{@code imageOffset.y} and <code>(imageExtent.height imageOffset.y)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the image subresource height where this refers to the height of the <em>plane</em> of the image involved in the copy in the case of a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a></li>
- * <li>If the calling command&#8217;s {@code srcImage} ({@link VK10#vkCmdCopyImageToBuffer CmdCopyImageToBuffer}) or {@code dstImage} ({@link VK10#vkCmdCopyBufferToImage CmdCopyBufferToImage}) is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D}, then {@code imageOffset.y} <b>must</b> be 0 and {@code imageExtent.height} <b>must</b> be 1.</li>
- * <li>{@code imageOffset.z} and <code>(imageExtent.depth imageOffset.z)</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the image subresource depth</li>
- * <li>If the calling command&#8217;s {@code srcImage} ({@link VK10#vkCmdCopyImageToBuffer CmdCopyImageToBuffer}) or {@code dstImage} ({@link VK10#vkCmdCopyBufferToImage CmdCopyBufferToImage}) is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D} or {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, then {@code imageOffset.z} <b>must</b> be 0 and {@code imageExtent.depth} <b>must</b> be 1</li>
- * <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “{@code _422}” image format, {@code bufferRowLength} <b>must</b> be a multiple of the compressed texel block width</li>
- * <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “{@code _422}” image format, {@code bufferImageHeight} <b>must</b> be a multiple of the compressed texel block height</li>
- * <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “{@code _422}” image format, all members of {@code imageOffset} <b>must</b> be a multiple of the corresponding dimensions of the compressed texel block</li>
- * <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “{@code _422}” image format, {@code bufferOffset} <b>must</b> be a multiple of the compressed texel block size in bytes</li>
- * <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “{@code _422}” image format, {@code imageExtent.width} <b>must</b> be a multiple of the compressed texel block width or <code>(imageExtent.width imageOffset.x)</code> <b>must</b> equal the image subresource width</li>
- * <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “{@code _422}” image format, {@code imageExtent.height} <b>must</b> be a multiple of the compressed texel block height or <code>(imageExtent.height imageOffset.y)</code> <b>must</b> equal the image subresource height</li>
- * <li>If the calling command&#8217;s {@code VkImage} parameter is a compressed image, or a <em>single-plane</em>, “{@code _422}” image format, {@code imageExtent.depth} <b>must</b> be a multiple of the compressed texel block depth or <code>(imageExtent.depth imageOffset.z)</code> <b>must</b> equal the image subresource depth</li>
- * <li>The {@code aspectMask} member of {@code imageSubresource} <b>must</b> specify aspects present in the calling command&#8217;s {@code VkImage} parameter</li>
- * <li>If the calling command&#8217;s {@code VkImage} parameter&#8217;s format is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a>, then the {@code aspectMask} member of {@code imageSubresource} <b>must</b> be {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT}, {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT}, or {@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT} (with {@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT} valid only for image formats with three planes)</li>
  * <li>The {@code aspectMask} member of {@code imageSubresource} <b>must</b> only have a single bit set</li>
- * <li>If the calling command&#8217;s {@code VkImage} parameter is of {@code VkImageType} {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}, the {@code baseArrayLayer} and {@code layerCount} members of {@code imageSubresource} <b>must</b> be 0 and 1, respectively</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -76,27 +65,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkExtent3D}, {@link VkImageSubresourceLayers}, {@link VkOffset3D}, {@link VK10#vkCmdCopyBufferToImage CmdCopyBufferToImage}, {@link VK10#vkCmdCopyImageToBuffer CmdCopyImageToBuffer}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code bufferOffset} &ndash; the offset in bytes from the start of the buffer object where the image data is copied from or to.</li>
- * <li>{@code bufferRowLength} &ndash; {@code bufferRowLength} and {@code bufferImageHeight} specify in texels a subregion of a larger two- or three-dimensional image in buffer memory, and control the addressing calculations. If either of these values is zero, that aspect of the buffer memory is considered to be tightly packed according to the {@code imageExtent}.</li>
- * <li>{@code bufferImageHeight} &ndash; see {@code bufferRowLength}</li>
- * <li>{@code imageSubresource} &ndash; a {@link VkImageSubresourceLayers} used to specify the specific image subresources of the image used for the source or destination image data.</li>
- * <li>{@code imageOffset} &ndash; selects the initial {@code x}, {@code y}, {@code z} offsets in texels of the sub-region of the source or destination image data.</li>
- * <li>{@code imageExtent} &ndash; the size in texels of the image to copy in {@code width}, {@code height} and {@code depth}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBufferImageCopy {
- *     VkDeviceSize bufferOffset;
- *     uint32_t bufferRowLength;
- *     uint32_t bufferImageHeight;
- *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} imageSubresource;
- *     {@link VkOffset3D VkOffset3D} imageOffset;
- *     {@link VkExtent3D VkExtent3D} imageExtent;
+ *     VkDeviceSize {@link #bufferOffset};
+ *     uint32_t {@link #bufferRowLength};
+ *     uint32_t {@link #bufferImageHeight};
+ *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} {@link #imageSubresource};
+ *     {@link VkOffset3D VkOffset3D} {@link #imageOffset};
+ *     {@link VkExtent3D VkExtent3D} {@link #imageExtent};
  * }</code></pre>
  */
 public class VkBufferImageCopy extends Struct implements NativeResource {
@@ -150,39 +128,39 @@ public class VkBufferImageCopy extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code bufferOffset} field. */
+    /** the offset in bytes from the start of the buffer object where the image data is copied from or to. */
     @NativeType("VkDeviceSize")
     public long bufferOffset() { return nbufferOffset(address()); }
-    /** Returns the value of the {@code bufferRowLength} field. */
+    /** {@code bufferRowLength} and {@code bufferImageHeight} specify in texels a subregion of a larger two- or three-dimensional image in buffer memory, and control the addressing calculations. If either of these values is zero, that aspect of the buffer memory is considered to be tightly packed according to the {@code imageExtent}. */
     @NativeType("uint32_t")
     public int bufferRowLength() { return nbufferRowLength(address()); }
-    /** Returns the value of the {@code bufferImageHeight} field. */
+    /** see {@code bufferRowLength} */
     @NativeType("uint32_t")
     public int bufferImageHeight() { return nbufferImageHeight(address()); }
-    /** Returns a {@link VkImageSubresourceLayers} view of the {@code imageSubresource} field. */
+    /** a {@link VkImageSubresourceLayers} used to specify the specific image subresources of the image used for the source or destination image data. */
     public VkImageSubresourceLayers imageSubresource() { return nimageSubresource(address()); }
-    /** Returns a {@link VkOffset3D} view of the {@code imageOffset} field. */
+    /** selects the initial {@code x}, {@code y}, {@code z} offsets in texels of the sub-region of the source or destination image data. */
     public VkOffset3D imageOffset() { return nimageOffset(address()); }
-    /** Returns a {@link VkExtent3D} view of the {@code imageExtent} field. */
+    /** the size in texels of the image to copy in {@code width}, {@code height} and {@code depth}. */
     public VkExtent3D imageExtent() { return nimageExtent(address()); }
 
-    /** Sets the specified value to the {@code bufferOffset} field. */
+    /** Sets the specified value to the {@link #bufferOffset} field. */
     public VkBufferImageCopy bufferOffset(@NativeType("VkDeviceSize") long value) { nbufferOffset(address(), value); return this; }
-    /** Sets the specified value to the {@code bufferRowLength} field. */
+    /** Sets the specified value to the {@link #bufferRowLength} field. */
     public VkBufferImageCopy bufferRowLength(@NativeType("uint32_t") int value) { nbufferRowLength(address(), value); return this; }
-    /** Sets the specified value to the {@code bufferImageHeight} field. */
+    /** Sets the specified value to the {@link #bufferImageHeight} field. */
     public VkBufferImageCopy bufferImageHeight(@NativeType("uint32_t") int value) { nbufferImageHeight(address(), value); return this; }
-    /** Copies the specified {@link VkImageSubresourceLayers} to the {@code imageSubresource} field. */
+    /** Copies the specified {@link VkImageSubresourceLayers} to the {@link #imageSubresource} field. */
     public VkBufferImageCopy imageSubresource(VkImageSubresourceLayers value) { nimageSubresource(address(), value); return this; }
-    /** Passes the {@code imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkBufferImageCopy imageSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(imageSubresource()); return this; }
-    /** Copies the specified {@link VkOffset3D} to the {@code imageOffset} field. */
+    /** Copies the specified {@link VkOffset3D} to the {@link #imageOffset} field. */
     public VkBufferImageCopy imageOffset(VkOffset3D value) { nimageOffset(address(), value); return this; }
-    /** Passes the {@code imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkBufferImageCopy imageOffset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(imageOffset()); return this; }
-    /** Copies the specified {@link VkExtent3D} to the {@code imageExtent} field. */
+    /** Copies the specified {@link VkExtent3D} to the {@link #imageExtent} field. */
     public VkBufferImageCopy imageExtent(VkExtent3D value) { nimageExtent(address(), value); return this; }
-    /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkBufferImageCopy imageExtent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(imageExtent()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -423,39 +401,39 @@ public class VkBufferImageCopy extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code bufferOffset} field. */
+        /** @return the value of the {@link VkBufferImageCopy#bufferOffset} field. */
         @NativeType("VkDeviceSize")
         public long bufferOffset() { return VkBufferImageCopy.nbufferOffset(address()); }
-        /** Returns the value of the {@code bufferRowLength} field. */
+        /** @return the value of the {@link VkBufferImageCopy#bufferRowLength} field. */
         @NativeType("uint32_t")
         public int bufferRowLength() { return VkBufferImageCopy.nbufferRowLength(address()); }
-        /** Returns the value of the {@code bufferImageHeight} field. */
+        /** @return the value of the {@link VkBufferImageCopy#bufferImageHeight} field. */
         @NativeType("uint32_t")
         public int bufferImageHeight() { return VkBufferImageCopy.nbufferImageHeight(address()); }
-        /** Returns a {@link VkImageSubresourceLayers} view of the {@code imageSubresource} field. */
+        /** @return a {@link VkImageSubresourceLayers} view of the {@link VkBufferImageCopy#imageSubresource} field. */
         public VkImageSubresourceLayers imageSubresource() { return VkBufferImageCopy.nimageSubresource(address()); }
-        /** Returns a {@link VkOffset3D} view of the {@code imageOffset} field. */
+        /** @return a {@link VkOffset3D} view of the {@link VkBufferImageCopy#imageOffset} field. */
         public VkOffset3D imageOffset() { return VkBufferImageCopy.nimageOffset(address()); }
-        /** Returns a {@link VkExtent3D} view of the {@code imageExtent} field. */
+        /** @return a {@link VkExtent3D} view of the {@link VkBufferImageCopy#imageExtent} field. */
         public VkExtent3D imageExtent() { return VkBufferImageCopy.nimageExtent(address()); }
 
-        /** Sets the specified value to the {@code bufferOffset} field. */
+        /** Sets the specified value to the {@link VkBufferImageCopy#bufferOffset} field. */
         public VkBufferImageCopy.Buffer bufferOffset(@NativeType("VkDeviceSize") long value) { VkBufferImageCopy.nbufferOffset(address(), value); return this; }
-        /** Sets the specified value to the {@code bufferRowLength} field. */
+        /** Sets the specified value to the {@link VkBufferImageCopy#bufferRowLength} field. */
         public VkBufferImageCopy.Buffer bufferRowLength(@NativeType("uint32_t") int value) { VkBufferImageCopy.nbufferRowLength(address(), value); return this; }
-        /** Sets the specified value to the {@code bufferImageHeight} field. */
+        /** Sets the specified value to the {@link VkBufferImageCopy#bufferImageHeight} field. */
         public VkBufferImageCopy.Buffer bufferImageHeight(@NativeType("uint32_t") int value) { VkBufferImageCopy.nbufferImageHeight(address(), value); return this; }
-        /** Copies the specified {@link VkImageSubresourceLayers} to the {@code imageSubresource} field. */
+        /** Copies the specified {@link VkImageSubresourceLayers} to the {@link VkBufferImageCopy#imageSubresource} field. */
         public VkBufferImageCopy.Buffer imageSubresource(VkImageSubresourceLayers value) { VkBufferImageCopy.nimageSubresource(address(), value); return this; }
-        /** Passes the {@code imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkBufferImageCopy#imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkBufferImageCopy.Buffer imageSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(imageSubresource()); return this; }
-        /** Copies the specified {@link VkOffset3D} to the {@code imageOffset} field. */
+        /** Copies the specified {@link VkOffset3D} to the {@link VkBufferImageCopy#imageOffset} field. */
         public VkBufferImageCopy.Buffer imageOffset(VkOffset3D value) { VkBufferImageCopy.nimageOffset(address(), value); return this; }
-        /** Passes the {@code imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkBufferImageCopy#imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkBufferImageCopy.Buffer imageOffset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(imageOffset()); return this; }
-        /** Copies the specified {@link VkExtent3D} to the {@code imageExtent} field. */
+        /** Copies the specified {@link VkExtent3D} to the {@link VkBufferImageCopy#imageExtent} field. */
         public VkBufferImageCopy.Buffer imageExtent(VkExtent3D value) { VkBufferImageCopy.nimageExtent(address(), value); return this; }
-        /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkBufferImageCopy#imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkBufferImageCopy.Buffer imageExtent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(imageExtent()); return this; }
 
     }

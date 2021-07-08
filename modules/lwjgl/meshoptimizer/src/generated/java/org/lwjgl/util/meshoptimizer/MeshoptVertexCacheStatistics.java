@@ -16,21 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code acmr} &ndash; transformed vertices / triangle count; best case 0.5, worst case 3.0, optimum depends on topology</li>
- * <li>{@code atvr} &ndash; transformed vertices / vertex count; best case 1.0, worst case 6.0, optimum is 1.0 (each vertex is transformed once)</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct meshopt_VertexCacheStatistics {
  *     unsigned int vertices_transformed;
  *     unsigned int warps_executed;
- *     float acmr;
- *     float atvr;
+ *     float {@link #acmr};
+ *     float {@link #atvr};
  * }</code></pre>
  */
 @NativeType("struct meshopt_VertexCacheStatistics")
@@ -79,15 +72,15 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code vertices_transformed} field. */
+    /** @return the value of the {@code vertices_transformed} field. */
     @NativeType("unsigned int")
     public int vertices_transformed() { return nvertices_transformed(address()); }
-    /** Returns the value of the {@code warps_executed} field. */
+    /** @return the value of the {@code warps_executed} field. */
     @NativeType("unsigned int")
     public int warps_executed() { return nwarps_executed(address()); }
-    /** Returns the value of the {@code acmr} field. */
+    /** transformed vertices / triangle count; best case 0.5, worst case 3.0, optimum depends on topology */
     public float acmr() { return nacmr(address()); }
-    /** Returns the value of the {@code atvr} field. */
+    /** transformed vertices / vertex count; best case 1.0, worst case 6.0, optimum is 1.0 (each vertex is transformed once) */
     public float atvr() { return natvr(address()); }
 
     // -----------------------------------
@@ -280,15 +273,15 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code vertices_transformed} field. */
+        /** @return the value of the {@code vertices_transformed} field. */
         @NativeType("unsigned int")
         public int vertices_transformed() { return MeshoptVertexCacheStatistics.nvertices_transformed(address()); }
-        /** Returns the value of the {@code warps_executed} field. */
+        /** @return the value of the {@code warps_executed} field. */
         @NativeType("unsigned int")
         public int warps_executed() { return MeshoptVertexCacheStatistics.nwarps_executed(address()); }
-        /** Returns the value of the {@code acmr} field. */
+        /** @return the value of the {@link MeshoptVertexCacheStatistics#acmr} field. */
         public float acmr() { return MeshoptVertexCacheStatistics.nacmr(address()); }
-        /** Returns the value of the {@code atvr} field. */
+        /** @return the value of the {@link MeshoptVertexCacheStatistics#atvr} field. */
         public float atvr() { return MeshoptVertexCacheStatistics.natvr(address()); }
 
     }

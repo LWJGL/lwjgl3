@@ -40,6 +40,8 @@ import org.lwjgl.system.*;
  */
 public class GL12 extends GL11 {
 
+    static { GL.initialize(); }
+
     /** Aliases for smooth points and lines. */
     public static final int
         GL_ALIASED_POINT_SIZE_RANGE      = 0x846D,
@@ -133,8 +135,6 @@ public class GL12 extends GL11 {
     public static final int
         GL_MAX_ELEMENTS_VERTICES = 0x80E8,
         GL_MAX_ELEMENTS_INDICES  = 0x80E9;
-
-    static { GL.initialize(); }
 
     protected GL12() {
         throw new UnsupportedOperationException();

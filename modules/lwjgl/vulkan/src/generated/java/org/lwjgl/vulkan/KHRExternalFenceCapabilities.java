@@ -17,6 +17,8 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
  * 
+ * <h5>VK_KHR_external_fence_capabilities</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_external_fence_capabilities}</dd>
@@ -39,6 +41,11 @@ import static org.lwjgl.system.JNI.*;
  * <dd><ul>
  * <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_external_fence_capabilities:%20&amp;body=@critsec%20">critsec</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-05-08</dd>
  * <dt><b>IP Status</b></dt>
@@ -73,11 +80,13 @@ public class KHRExternalFenceCapabilities {
      * <ul>
      * <li>{@link #VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES_KHR STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR}</li>
      * </ul>
      */
     public static final int
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR = 1000112000,
-        VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES_KHR           = 1000112001;
+        VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES_KHR           = 1000112001,
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR       = 1000071004;
 
     /** VK_LUID_SIZE_KHR */
     public static final int VK_LUID_SIZE_KHR = 8;

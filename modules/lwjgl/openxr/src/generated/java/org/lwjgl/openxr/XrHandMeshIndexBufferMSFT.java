@@ -72,16 +72,16 @@ public class XrHandMeshIndexBufferMSFT extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code indexBufferKey} field. */
+    /** @return the value of the {@code indexBufferKey} field. */
     @NativeType("uint32_t")
     public int indexBufferKey() { return nindexBufferKey(address()); }
-    /** Returns the value of the {@code indexCapacityInput} field. */
+    /** @return the value of the {@code indexCapacityInput} field. */
     @NativeType("uint32_t")
     public int indexCapacityInput() { return nindexCapacityInput(address()); }
-    /** Returns the value of the {@code indexCountOutput} field. */
+    /** @return the value of the {@code indexCountOutput} field. */
     @NativeType("uint32_t")
     public int indexCountOutput() { return nindexCountOutput(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code indices} field. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code indices} field. */
     @NativeType("uint32_t *")
     public IntBuffer indices() { return nindices(address()); }
 
@@ -337,16 +337,16 @@ public class XrHandMeshIndexBufferMSFT extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code indexBufferKey} field. */
+        /** @return the value of the {@code indexBufferKey} field. */
         @NativeType("uint32_t")
         public int indexBufferKey() { return XrHandMeshIndexBufferMSFT.nindexBufferKey(address()); }
-        /** Returns the value of the {@code indexCapacityInput} field. */
+        /** @return the value of the {@code indexCapacityInput} field. */
         @NativeType("uint32_t")
         public int indexCapacityInput() { return XrHandMeshIndexBufferMSFT.nindexCapacityInput(address()); }
-        /** Returns the value of the {@code indexCountOutput} field. */
+        /** @return the value of the {@code indexCountOutput} field. */
         @NativeType("uint32_t")
         public int indexCountOutput() { return XrHandMeshIndexBufferMSFT.nindexCountOutput(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code indices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code indices} field. */
         @NativeType("uint32_t *")
         public IntBuffer indices() { return XrHandMeshIndexBufferMSFT.nindices(address()); }
 

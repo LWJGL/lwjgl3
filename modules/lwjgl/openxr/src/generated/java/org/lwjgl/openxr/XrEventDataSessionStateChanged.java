@@ -76,19 +76,19 @@ public class XrEventDataSessionStateChanged extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code session} field. */
+    /** @return the value of the {@code session} field. */
     @NativeType("XrSession")
     public long session() { return nsession(address()); }
-    /** Returns the value of the {@code state} field. */
+    /** @return the value of the {@code state} field. */
     @NativeType("XrSessionState")
     public int state() { return nstate(address()); }
-    /** Returns the value of the {@code time} field. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
 
@@ -356,19 +356,19 @@ public class XrEventDataSessionStateChanged extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataSessionStateChanged.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataSessionStateChanged.nnext(address()); }
-        /** Returns the value of the {@code session} field. */
+        /** @return the value of the {@code session} field. */
         @NativeType("XrSession")
         public long session() { return XrEventDataSessionStateChanged.nsession(address()); }
-        /** Returns the value of the {@code state} field. */
+        /** @return the value of the {@code state} field. */
         @NativeType("XrSessionState")
         public int state() { return XrEventDataSessionStateChanged.nstate(address()); }
-        /** Returns the value of the {@code time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrEventDataSessionStateChanged.ntime(address()); }
 

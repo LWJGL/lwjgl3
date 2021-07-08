@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * A 2D vector with integer components.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code x} &ndash; the vector x component</li>
- * <li>{@code y} &ndash; the vector y component</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrVector2i {
- *     int x;
- *     int y;
+ *     int {@link #x};
+ *     int {@link #y};
  * }</code></pre>
  */
 @NativeType("struct ovrVector2i")
@@ -73,14 +66,14 @@ public class OVRVector2i extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** the vector x component */
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** the vector y component */
     public int y() { return ny(address()); }
 
-    /** Sets the specified value to the {@code x} field. */
+    /** Sets the specified value to the {@link #x} field. */
     public OVRVector2i x(int value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@code y} field. */
+    /** Sets the specified value to the {@link #y} field. */
     public OVRVector2i y(int value) { ny(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -297,14 +290,14 @@ public class OVRVector2i extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link OVRVector2i#x} field. */
         public int x() { return OVRVector2i.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@link OVRVector2i#y} field. */
         public int y() { return OVRVector2i.ny(address()); }
 
-        /** Sets the specified value to the {@code x} field. */
+        /** Sets the specified value to the {@link OVRVector2i#x} field. */
         public OVRVector2i.Buffer x(int value) { OVRVector2i.nx(address(), value); return this; }
-        /** Sets the specified value to the {@code y} field. */
+        /** Sets the specified value to the {@link OVRVector2i#y} field. */
         public OVRVector2i.Buffer y(int value) { OVRVector2i.ny(address(), value); return this; }
 
     }

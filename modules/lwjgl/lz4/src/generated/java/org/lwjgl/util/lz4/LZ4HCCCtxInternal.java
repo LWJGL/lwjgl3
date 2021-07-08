@@ -17,34 +17,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.lz4.LZ4HC.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code end} &ndash; next block here to continue on current prefix</li>
- * <li>{@code base} &ndash; All index relative to this position</li>
- * <li>{@code dictBase} &ndash; alternate base for {@code extDict}</li>
- * <li>{@code dictLimit} &ndash; below that point, need {@code extDict}</li>
- * <li>{@code lowLimit} &ndash; below that point, no more {@code dict}</li>
- * <li>{@code nextToUpdate} &ndash; index from which to continue dictionary update</li>
- * <li>{@code favorDecSpeed} &ndash; favor decompression speed if this flag set, otherwise, favor compression ratio</li>
- * <li>{@code dirty} &ndash; stream has to be fully reset if this flag is set</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct LZ4HC_CCtx_internal {
- *     uint32_t hashTable[LZ4HC_HASHTABLESIZE];
- *     uint16_t chainTable[LZ4HC_MAXD];
- *     uint8_t const * end;
- *     uint8_t const * base;
- *     uint8_t const * dictBase;
- *     uint32_t dictLimit;
- *     uint32_t lowLimit;
- *     uint32_t nextToUpdate;
+ *     LZ4_u32 hashTable[LZ4HC_HASHTABLESIZE];
+ *     LZ4_u16 chainTable[LZ4HC_MAXD];
+ *     LZ4_byte const * {@link #end};
+ *     LZ4_byte const * {@link #base};
+ *     LZ4_byte const * {@link #dictBase};
+ *     LZ4_u32 {@link #dictLimit};
+ *     LZ4_u32 {@link #lowLimit};
+ *     LZ4_u32 {@link #nextToUpdate};
  *     short compressionLevel;
- *     int8_t favorDecSpeed;
- *     int8_t dirty;
+ *     LZ4_i8 {@link #favorDecSpeed};
+ *     LZ4_i8 {@link #dirty};
  *     {@link LZ4HCCCtxInternal LZ4HC_CCtx_internal} * const dictCtx;
  * }</code></pre>
  */
@@ -118,57 +105,57 @@ public class LZ4HCCCtxInternal extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link IntBuffer} view of the {@code hashTable} field. */
-    @NativeType("uint32_t[LZ4HC_HASHTABLESIZE]")
+    /** @return a {@link IntBuffer} view of the {@code hashTable} field. */
+    @NativeType("LZ4_u32[LZ4HC_HASHTABLESIZE]")
     public IntBuffer hashTable() { return nhashTable(address()); }
-    /** Returns the value at the specified index of the {@code hashTable} field. */
-    @NativeType("uint32_t")
+    /** @return the value at the specified index of the {@code hashTable} field. */
+    @NativeType("LZ4_u32")
     public int hashTable(int index) { return nhashTable(address(), index); }
-    /** Returns a {@link ShortBuffer} view of the {@code chainTable} field. */
-    @NativeType("uint16_t[LZ4HC_MAXD]")
+    /** @return a {@link ShortBuffer} view of the {@code chainTable} field. */
+    @NativeType("LZ4_u16[LZ4HC_MAXD]")
     public ShortBuffer chainTable() { return nchainTable(address()); }
-    /** Returns the value at the specified index of the {@code chainTable} field. */
-    @NativeType("uint16_t")
+    /** @return the value at the specified index of the {@code chainTable} field. */
+    @NativeType("LZ4_u16")
     public short chainTable(int index) { return nchainTable(address(), index); }
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code end} field.
-     *
      * @param capacity the number of elements in the returned buffer
+     *
+     * @return next block here to continue on current prefix
      */
-    @NativeType("uint8_t const *")
+    @NativeType("LZ4_byte const *")
     public ByteBuffer end(int capacity) { return nend(address(), capacity); }
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code base} field.
-     *
      * @param capacity the number of elements in the returned buffer
+     *
+     * @return All index relative to this position
      */
-    @NativeType("uint8_t const *")
+    @NativeType("LZ4_byte const *")
     public ByteBuffer base(int capacity) { return nbase(address(), capacity); }
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code dictBase} field.
-     *
      * @param capacity the number of elements in the returned buffer
+     *
+     * @return alternate base for {@code extDict}
      */
-    @NativeType("uint8_t const *")
+    @NativeType("LZ4_byte const *")
     public ByteBuffer dictBase(int capacity) { return ndictBase(address(), capacity); }
-    /** Returns the value of the {@code dictLimit} field. */
-    @NativeType("uint32_t")
+    /** below that point, need {@code extDict} */
+    @NativeType("LZ4_u32")
     public int dictLimit() { return ndictLimit(address()); }
-    /** Returns the value of the {@code lowLimit} field. */
-    @NativeType("uint32_t")
+    /** below that point, no more {@code dict} */
+    @NativeType("LZ4_u32")
     public int lowLimit() { return nlowLimit(address()); }
-    /** Returns the value of the {@code nextToUpdate} field. */
-    @NativeType("uint32_t")
+    /** index from which to continue dictionary update */
+    @NativeType("LZ4_u32")
     public int nextToUpdate() { return nnextToUpdate(address()); }
-    /** Returns the value of the {@code compressionLevel} field. */
+    /** @return the value of the {@code compressionLevel} field. */
     public short compressionLevel() { return ncompressionLevel(address()); }
-    /** Returns the value of the {@code favorDecSpeed} field. */
-    @NativeType("int8_t")
+    /** favor decompression speed if this flag set, otherwise, favor compression ratio */
+    @NativeType("LZ4_i8")
     public byte favorDecSpeed() { return nfavorDecSpeed(address()); }
-    /** Returns the value of the {@code dirty} field. */
-    @NativeType("int8_t")
+    /** stream has to be fully reset if this flag is set */
+    @NativeType("LZ4_i8")
     public byte dirty() { return ndirty(address()); }
-    /** Returns a {@link LZ4HCCCtxInternal} view of the struct pointed to by the {@code dictCtx} field. */
+    /** @return a {@link LZ4HCCCtxInternal} view of the struct pointed to by the {@code dictCtx} field. */
     @NativeType("LZ4HC_CCtx_internal * const")
     public LZ4HCCCtxInternal dictCtx() { return ndictCtx(address()); }
 
@@ -274,57 +261,57 @@ public class LZ4HCCCtxInternal extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link IntBuffer} view of the {@code hashTable} field. */
-        @NativeType("uint32_t[LZ4HC_HASHTABLESIZE]")
+        /** @return a {@link IntBuffer} view of the {@code hashTable} field. */
+        @NativeType("LZ4_u32[LZ4HC_HASHTABLESIZE]")
         public IntBuffer hashTable() { return LZ4HCCCtxInternal.nhashTable(address()); }
-        /** Returns the value at the specified index of the {@code hashTable} field. */
-        @NativeType("uint32_t")
+        /** @return the value at the specified index of the {@code hashTable} field. */
+        @NativeType("LZ4_u32")
         public int hashTable(int index) { return LZ4HCCCtxInternal.nhashTable(address(), index); }
-        /** Returns a {@link ShortBuffer} view of the {@code chainTable} field. */
-        @NativeType("uint16_t[LZ4HC_MAXD]")
+        /** @return a {@link ShortBuffer} view of the {@code chainTable} field. */
+        @NativeType("LZ4_u16[LZ4HC_MAXD]")
         public ShortBuffer chainTable() { return LZ4HCCCtxInternal.nchainTable(address()); }
-        /** Returns the value at the specified index of the {@code chainTable} field. */
-        @NativeType("uint16_t")
+        /** @return the value at the specified index of the {@code chainTable} field. */
+        @NativeType("LZ4_u16")
         public short chainTable(int index) { return LZ4HCCCtxInternal.nchainTable(address(), index); }
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code end} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@link LZ4HCCCtxInternal#end} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @NativeType("uint8_t const *")
+        @NativeType("LZ4_byte const *")
         public ByteBuffer end(int capacity) { return LZ4HCCCtxInternal.nend(address(), capacity); }
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code base} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@link LZ4HCCCtxInternal#base} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @NativeType("uint8_t const *")
+        @NativeType("LZ4_byte const *")
         public ByteBuffer base(int capacity) { return LZ4HCCCtxInternal.nbase(address(), capacity); }
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code dictBase} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@link LZ4HCCCtxInternal#dictBase} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
-        @NativeType("uint8_t const *")
+        @NativeType("LZ4_byte const *")
         public ByteBuffer dictBase(int capacity) { return LZ4HCCCtxInternal.ndictBase(address(), capacity); }
-        /** Returns the value of the {@code dictLimit} field. */
-        @NativeType("uint32_t")
+        /** @return the value of the {@link LZ4HCCCtxInternal#dictLimit} field. */
+        @NativeType("LZ4_u32")
         public int dictLimit() { return LZ4HCCCtxInternal.ndictLimit(address()); }
-        /** Returns the value of the {@code lowLimit} field. */
-        @NativeType("uint32_t")
+        /** @return the value of the {@link LZ4HCCCtxInternal#lowLimit} field. */
+        @NativeType("LZ4_u32")
         public int lowLimit() { return LZ4HCCCtxInternal.nlowLimit(address()); }
-        /** Returns the value of the {@code nextToUpdate} field. */
-        @NativeType("uint32_t")
+        /** @return the value of the {@link LZ4HCCCtxInternal#nextToUpdate} field. */
+        @NativeType("LZ4_u32")
         public int nextToUpdate() { return LZ4HCCCtxInternal.nnextToUpdate(address()); }
-        /** Returns the value of the {@code compressionLevel} field. */
+        /** @return the value of the {@code compressionLevel} field. */
         public short compressionLevel() { return LZ4HCCCtxInternal.ncompressionLevel(address()); }
-        /** Returns the value of the {@code favorDecSpeed} field. */
-        @NativeType("int8_t")
+        /** @return the value of the {@link LZ4HCCCtxInternal#favorDecSpeed} field. */
+        @NativeType("LZ4_i8")
         public byte favorDecSpeed() { return LZ4HCCCtxInternal.nfavorDecSpeed(address()); }
-        /** Returns the value of the {@code dirty} field. */
-        @NativeType("int8_t")
+        /** @return the value of the {@link LZ4HCCCtxInternal#dirty} field. */
+        @NativeType("LZ4_i8")
         public byte dirty() { return LZ4HCCCtxInternal.ndirty(address()); }
-        /** Returns a {@link LZ4HCCCtxInternal} view of the struct pointed to by the {@code dictCtx} field. */
+        /** @return a {@link LZ4HCCCtxInternal} view of the struct pointed to by the {@code dictCtx} field. */
         @NativeType("LZ4HC_CCtx_internal * const")
         public LZ4HCCCtxInternal dictCtx() { return LZ4HCCCtxInternal.ndictCtx(address()); }
 

@@ -79,19 +79,19 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code recommendedNearZ} field. */
+    /** @return the value of the {@code recommendedNearZ} field. */
     public float recommendedNearZ() { return nrecommendedNearZ(address()); }
-    /** Returns the value of the {@code minNearZ} field. */
+    /** @return the value of the {@code minNearZ} field. */
     public float minNearZ() { return nminNearZ(address()); }
-    /** Returns the value of the {@code recommendedFarZ} field. */
+    /** @return the value of the {@code recommendedFarZ} field. */
     public float recommendedFarZ() { return nrecommendedFarZ(address()); }
-    /** Returns the value of the {@code maxFarZ} field. */
+    /** @return the value of the {@code maxFarZ} field. */
     public float maxFarZ() { return nmaxFarZ(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -345,19 +345,19 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrViewConfigurationDepthRangeEXT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrViewConfigurationDepthRangeEXT.nnext(address()); }
-        /** Returns the value of the {@code recommendedNearZ} field. */
+        /** @return the value of the {@code recommendedNearZ} field. */
         public float recommendedNearZ() { return XrViewConfigurationDepthRangeEXT.nrecommendedNearZ(address()); }
-        /** Returns the value of the {@code minNearZ} field. */
+        /** @return the value of the {@code minNearZ} field. */
         public float minNearZ() { return XrViewConfigurationDepthRangeEXT.nminNearZ(address()); }
-        /** Returns the value of the {@code recommendedFarZ} field. */
+        /** @return the value of the {@code recommendedFarZ} field. */
         public float recommendedFarZ() { return XrViewConfigurationDepthRangeEXT.nrecommendedFarZ(address()); }
-        /** Returns the value of the {@code maxFarZ} field. */
+        /** @return the value of the {@code maxFarZ} field. */
         public float maxFarZ() { return XrViewConfigurationDepthRangeEXT.nmaxFarZ(address()); }
 
         /** Sets the specified value to the {@code type} field. */

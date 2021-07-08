@@ -17,21 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code mNumProperties} &ndash; Length of the {@code mKeys} and {@code mValues} arrays, respectively</li>
- * <li>{@code mKeys} &ndash; Arrays of keys, may not be {@code NULL}. Entries in this array may not be {@code NULL} as well.</li>
- * <li>{@code mValues} &ndash; Arrays of values, may not be {@code NULL}. Entries in this array may be {@code NULL} if the corresponding property key has no assigned value.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiMetadata {
- *     unsigned int mNumProperties;
- *     {@link AIString struct aiString} * mKeys;
- *     {@link AIMetaDataEntry struct aiMetadataEntry} * mValues;
+ *     unsigned int {@link #mNumProperties};
+ *     {@link AIString struct aiString} * {@link #mKeys};
+ *     {@link AIMetaDataEntry struct aiMetadataEntry} * {@link #mValues};
  * }</code></pre>
  */
 @NativeType("struct aiMetadata")
@@ -77,21 +69,21 @@ public class AIMetaData extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code mNumProperties} field. */
+    /** Length of the {@code mKeys} and {@code mValues} arrays, respectively */
     @NativeType("unsigned int")
     public int mNumProperties() { return nmNumProperties(address()); }
-    /** Returns a {@link AIString.Buffer} view of the struct array pointed to by the {@code mKeys} field. */
+    /** Arrays of keys, may not be {@code NULL}. Entries in this array may not be {@code NULL} as well. */
     @NativeType("struct aiString *")
     public AIString.Buffer mKeys() { return nmKeys(address()); }
-    /** Returns a {@link AIMetaDataEntry.Buffer} view of the struct array pointed to by the {@code mValues} field. */
+    /** Arrays of values, may not be {@code NULL}. Entries in this array may be {@code NULL} if the corresponding property key has no assigned value. */
     @NativeType("struct aiMetadataEntry *")
     public AIMetaDataEntry.Buffer mValues() { return nmValues(address()); }
 
-    /** Sets the specified value to the {@code mNumProperties} field. */
+    /** Sets the specified value to the {@link #mNumProperties} field. */
     public AIMetaData mNumProperties(@NativeType("unsigned int") int value) { nmNumProperties(address(), value); return this; }
-    /** Sets the address of the specified {@link AIString.Buffer} to the {@code mKeys} field. */
+    /** Sets the address of the specified {@link AIString.Buffer} to the {@link #mKeys} field. */
     public AIMetaData mKeys(@NativeType("struct aiString *") AIString.Buffer value) { nmKeys(address(), value); return this; }
-    /** Sets the address of the specified {@link AIMetaDataEntry.Buffer} to the {@code mValues} field. */
+    /** Sets the address of the specified {@link AIMetaDataEntry.Buffer} to the {@link #mValues} field. */
     public AIMetaData mValues(@NativeType("struct aiMetadataEntry *") AIMetaDataEntry.Buffer value) { nmValues(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -339,21 +331,21 @@ public class AIMetaData extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code mNumProperties} field. */
+        /** @return the value of the {@link AIMetaData#mNumProperties} field. */
         @NativeType("unsigned int")
         public int mNumProperties() { return AIMetaData.nmNumProperties(address()); }
-        /** Returns a {@link AIString.Buffer} view of the struct array pointed to by the {@code mKeys} field. */
+        /** @return a {@link AIString.Buffer} view of the struct array pointed to by the {@link AIMetaData#mKeys} field. */
         @NativeType("struct aiString *")
         public AIString.Buffer mKeys() { return AIMetaData.nmKeys(address()); }
-        /** Returns a {@link AIMetaDataEntry.Buffer} view of the struct array pointed to by the {@code mValues} field. */
+        /** @return a {@link AIMetaDataEntry.Buffer} view of the struct array pointed to by the {@link AIMetaData#mValues} field. */
         @NativeType("struct aiMetadataEntry *")
         public AIMetaDataEntry.Buffer mValues() { return AIMetaData.nmValues(address()); }
 
-        /** Sets the specified value to the {@code mNumProperties} field. */
+        /** Sets the specified value to the {@link AIMetaData#mNumProperties} field. */
         public AIMetaData.Buffer mNumProperties(@NativeType("unsigned int") int value) { AIMetaData.nmNumProperties(address(), value); return this; }
-        /** Sets the address of the specified {@link AIString.Buffer} to the {@code mKeys} field. */
+        /** Sets the address of the specified {@link AIString.Buffer} to the {@link AIMetaData#mKeys} field. */
         public AIMetaData.Buffer mKeys(@NativeType("struct aiString *") AIString.Buffer value) { AIMetaData.nmKeys(address(), value); return this; }
-        /** Sets the address of the specified {@link AIMetaDataEntry.Buffer} to the {@code mValues} field. */
+        /** Sets the address of the specified {@link AIMetaDataEntry.Buffer} to the {@link AIMetaData#mValues} field. */
         public AIMetaData.Buffer mValues(@NativeType("struct aiMetadataEntry *") AIMetaDataEntry.Buffer value) { AIMetaData.nmValues(address(), value); return this; }
 
     }

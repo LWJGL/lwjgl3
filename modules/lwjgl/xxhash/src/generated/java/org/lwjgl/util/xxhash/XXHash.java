@@ -41,6 +41,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class XXHash {
 
+    static { LibXXHash.initialize(); }
+
     /**
      * Error codes.
      * 
@@ -70,8 +72,6 @@ public class XXHash {
     public static final int XXH_3_SECRET_SIZE_MIN = 0x88;
 
     public static final int XXH_SECRET_DEFAULT_SIZE = 192;
-
-    static { LibXXHash.initialize(); }
 
     protected XXHash() {
         throw new UnsupportedOperationException();

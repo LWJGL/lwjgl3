@@ -6,6 +6,7 @@ package org.lwjgl.system.windows;
 
 import org.lwjgl.system.*;
 
+import javax.annotation.*;
 import java.nio.*;
 
 import static org.lwjgl.system.MemoryStack.*;
@@ -45,6 +46,29 @@ public class WindowsLibrary extends SharedLibrary.Default {
             throw new UnsatisfiedLinkError("Failed to load library: " + name + " (error code = " + getLastError() + ")");
         }
         return handle;
+    }
+
+    @Nullable
+    @Override
+    public String getPath() {
+        int maxLen = 256;
+
+        ByteBuffer buffer = memAlloc(maxLen);
+        try {
+            while (true) {
+                int len = GetModuleFileName(address(), buffer);
+                int err = getLastError();
+                if (err == 0) {
+                    return len == 0 ? null : memUTF16(buffer, len);
+                }
+                if (err != 0x7A/*ERROR_INSUFFICIENT_BUFFER*/) {
+                    return null;
+                }
+                buffer = memRealloc(buffer, maxLen = maxLen * 3 / 2);
+            }
+        } finally {
+            memFree(buffer);
+        }
     }
 
     @Override

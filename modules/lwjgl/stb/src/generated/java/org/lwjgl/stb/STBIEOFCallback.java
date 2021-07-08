@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * int (*) (
+ * int (*{@link #invoke}) (
  *     void *user
  * )</code></pre>
  */
@@ -49,7 +49,7 @@ public abstract class STBIEOFCallback extends Callback implements STBIEOFCallbac
     }
 
     protected STBIEOFCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     STBIEOFCallback(long functionPointer) {

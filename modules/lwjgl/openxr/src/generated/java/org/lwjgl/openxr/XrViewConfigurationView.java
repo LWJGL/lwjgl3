@@ -87,28 +87,28 @@ public class XrViewConfigurationView extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code recommendedImageRectWidth} field. */
+    /** @return the value of the {@code recommendedImageRectWidth} field. */
     @NativeType("uint32_t")
     public int recommendedImageRectWidth() { return nrecommendedImageRectWidth(address()); }
-    /** Returns the value of the {@code maxImageRectWidth} field. */
+    /** @return the value of the {@code maxImageRectWidth} field. */
     @NativeType("uint32_t")
     public int maxImageRectWidth() { return nmaxImageRectWidth(address()); }
-    /** Returns the value of the {@code recommendedImageRectHeight} field. */
+    /** @return the value of the {@code recommendedImageRectHeight} field. */
     @NativeType("uint32_t")
     public int recommendedImageRectHeight() { return nrecommendedImageRectHeight(address()); }
-    /** Returns the value of the {@code maxImageRectHeight} field. */
+    /** @return the value of the {@code maxImageRectHeight} field. */
     @NativeType("uint32_t")
     public int maxImageRectHeight() { return nmaxImageRectHeight(address()); }
-    /** Returns the value of the {@code recommendedSwapchainSampleCount} field. */
+    /** @return the value of the {@code recommendedSwapchainSampleCount} field. */
     @NativeType("uint32_t")
     public int recommendedSwapchainSampleCount() { return nrecommendedSwapchainSampleCount(address()); }
-    /** Returns the value of the {@code maxSwapchainSampleCount} field. */
+    /** @return the value of the {@code maxSwapchainSampleCount} field. */
     @NativeType("uint32_t")
     public int maxSwapchainSampleCount() { return nmaxSwapchainSampleCount(address()); }
 
@@ -379,28 +379,28 @@ public class XrViewConfigurationView extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrViewConfigurationView.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrViewConfigurationView.nnext(address()); }
-        /** Returns the value of the {@code recommendedImageRectWidth} field. */
+        /** @return the value of the {@code recommendedImageRectWidth} field. */
         @NativeType("uint32_t")
         public int recommendedImageRectWidth() { return XrViewConfigurationView.nrecommendedImageRectWidth(address()); }
-        /** Returns the value of the {@code maxImageRectWidth} field. */
+        /** @return the value of the {@code maxImageRectWidth} field. */
         @NativeType("uint32_t")
         public int maxImageRectWidth() { return XrViewConfigurationView.nmaxImageRectWidth(address()); }
-        /** Returns the value of the {@code recommendedImageRectHeight} field. */
+        /** @return the value of the {@code recommendedImageRectHeight} field. */
         @NativeType("uint32_t")
         public int recommendedImageRectHeight() { return XrViewConfigurationView.nrecommendedImageRectHeight(address()); }
-        /** Returns the value of the {@code maxImageRectHeight} field. */
+        /** @return the value of the {@code maxImageRectHeight} field. */
         @NativeType("uint32_t")
         public int maxImageRectHeight() { return XrViewConfigurationView.nmaxImageRectHeight(address()); }
-        /** Returns the value of the {@code recommendedSwapchainSampleCount} field. */
+        /** @return the value of the {@code recommendedSwapchainSampleCount} field. */
         @NativeType("uint32_t")
         public int recommendedSwapchainSampleCount() { return XrViewConfigurationView.nrecommendedSwapchainSampleCount(address()); }
-        /** Returns the value of the {@code maxSwapchainSampleCount} field. */
+        /** @return the value of the {@code maxSwapchainSampleCount} field. */
         @NativeType("uint32_t")
         public int maxSwapchainSampleCount() { return XrViewConfigurationView.nmaxSwapchainSampleCount(address()); }
 

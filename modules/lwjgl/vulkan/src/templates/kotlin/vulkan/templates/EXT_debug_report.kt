@@ -61,6 +61,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 ￿    vkDestroyDebugReportCallbackEXT(instance, cb2);
 ￿    vkDestroyDebugReportCallbackEXT(instance, cb3);</code></pre>
 
+        <h5>VK_EXT_debug_report</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_debug_report}</dd>
@@ -84,13 +85,21 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
                 <li><em>Deprecated</em> by {@link EXTDebugUtils VK_EXT_debug_utils} extension</li>
             </ul></dd>
 
+            <dt><b>Special Use</b></dt>
+            <dd><ul>
+                <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">Debugging tools</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_debug_report:%20&amp;body=@courtney-g%20">courtney-g</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2017-09-12</dd>
+            <dd>2020-12-14</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -145,10 +154,34 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 
     EnumConstant(
         """
+        VkDebugReportFlagBitsEXT - Bitmask specifying events which cause a debug report callback
+
+        <h5>Description</h5>
+        <ul>
+            <li>#DEBUG_REPORT_ERROR_BIT_EXT specifies that the application has violated a valid usage condition of the specification.</li>
+            <li>#DEBUG_REPORT_WARNING_BIT_EXT specifies use of Vulkan that <b>may</b> expose an app bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases <b>may</b> point to behavior that is almost certainly bad when unintended such as using an image whose memory has not been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
+            <li>#DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT specifies a potentially non-optimal use of Vulkan, e.g. using #CmdClearColorImage() when setting ##VkAttachmentDescription{@code ::loadOp} to #ATTACHMENT_LOAD_OP_CLEAR would have worked.</li>
+            <li>#DEBUG_REPORT_INFORMATION_BIT_EXT specifies an informational message such as resource details that may be handy when debugging an application.</li>
+            <li>#DEBUG_REPORT_DEBUG_BIT_EXT specifies diagnostic information from the implementation and layers.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        {@code VkDebugReportFlagsEXT}
+        """,
+
+        "DEBUG_REPORT_INFORMATION_BIT_EXT".enum(0x00000001),
+        "DEBUG_REPORT_WARNING_BIT_EXT".enum(0x00000002),
+        "DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT".enum(0x00000004),
+        "DEBUG_REPORT_ERROR_BIT_EXT".enum(0x00000008),
+        "DEBUG_REPORT_DEBUG_BIT_EXT".enum(0x00000010)
+    )
+
+    EnumConstant(
+        """
         VkDebugReportObjectTypeEXT - Specify the type of an object handle
 
         <h5>Description</h5>
-        <h6>VkDebugReportObjectTypeEXT and Vulkan Handle Relationship</h6>
+        <h6>{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</h6>
         <table class="lwjgl">
             <thead><tr><th>{@code VkDebugReportObjectTypeEXT}</th><th>Vulkan Handle Type</th></tr></thead>
             <tbody>
@@ -183,8 +216,6 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
                 <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT</td><td>{@code VkDebugReportCallbackEXT}</td></tr>
                 <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT</td><td>{@code VkDisplayKHR}</td></tr>
                 <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT</td><td>{@code VkDisplayModeKHR}</td></tr>
-                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT</td><td>{@code VkObjectTableNVX}</td></tr>
-                <tr><td>#DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT</td><td>{@code VkIndirectCommandsLayoutNVX}</td></tr>
                 <tr><td>#DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_EXT</td><td>{@code VkDescriptorUpdateTemplate}</td></tr>
             </tbody>
         </table>
@@ -229,34 +260,8 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         "DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT".."28",
         "DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT".."29",
         "DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT".."30",
-        "DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT".."31",
-        "DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT".."32",
         "DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT".."33",
         "DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT".."33"
-    )
-
-    EnumConstant(
-        """
-        VkDebugReportFlagBitsEXT - Bitmask specifying events which cause a debug report callback
-
-        <h5>Description</h5>
-        <ul>
-            <li>#DEBUG_REPORT_ERROR_BIT_EXT specifies that the application has violated a valid usage condition of the specification.</li>
-            <li>#DEBUG_REPORT_WARNING_BIT_EXT specifies use of Vulkan that <b>may</b> expose an app bug. Such cases may not be immediately harmful, such as a fragment shader outputting to a location with no attachment. Other cases <b>may</b> point to behavior that is almost certainly bad when unintended such as using an image whose memory has not been filled. In general if you see a warning but you know that the behavior is intended/desired, then simply ignore the warning.</li>
-            <li>#DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT specifies a potentially non-optimal use of Vulkan, e.g. using #CmdClearColorImage() when setting ##VkAttachmentDescription{@code ::loadOp} to #ATTACHMENT_LOAD_OP_CLEAR would have worked.</li>
-            <li>#DEBUG_REPORT_INFORMATION_BIT_EXT specifies an informational message such as resource details that may be handy when debugging an application.</li>
-            <li>#DEBUG_REPORT_DEBUG_BIT_EXT specifies diagnostic information from the implementation and layers.</li>
-        </ul>
-
-        <h5>See Also</h5>
-        {@code VkDebugReportFlagsEXT}
-        """,
-
-        "DEBUG_REPORT_INFORMATION_BIT_EXT".enum(0x00000001),
-        "DEBUG_REPORT_WARNING_BIT_EXT".enum(0x00000002),
-        "DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT".enum(0x00000004),
-        "DEBUG_REPORT_ERROR_BIT_EXT".enum(0x00000008),
-        "DEBUG_REPORT_DEBUG_BIT_EXT".enum(0x00000010)
     )
 
     VkResult(
@@ -330,9 +335,9 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code instance} <b>must</b> be a valid {@code VkInstance} handle</li>
-            <li>{@code callback} <b>must</b> be a valid {@code VkDebugReportCallbackEXT} handle</li>
+            <li>If {@code callback} is not #NULL_HANDLE, {@code callback} <b>must</b> be a valid {@code VkDebugReportCallbackEXT} handle</li>
             <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
-            <li>{@code callback} <b>must</b> have been created, allocated, or retrieved from {@code instance}</li>
+            <li>If {@code callback} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code instance}</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -374,7 +379,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code object} <b>must</b> be a Vulkan object or #NULL_HANDLE</li>
-            <li>If {@code objectType} is not #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT and {@code object} is not #NULL_HANDLE, {@code object} <b>must</b> be a Vulkan object of the corresponding type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#debug-report-object-types">{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</a>.</li>
+            <li>If {@code objectType} is not #DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT and {@code object} is not #NULL_HANDLE, {@code object} <b>must</b> be a Vulkan object of the corresponding type associated with {@code objectType} as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#debug-report-object-types">{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</a></li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -391,7 +396,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         VkInstance("instance", "the debug stream&#8217;s {@code VkInstance}."),
         VkDebugReportFlagsEXT("flags", "specifies the {@code VkDebugReportFlagBitsEXT} classification of this event/message."),
         VkDebugReportObjectTypeEXT("objectType", "a {@code VkDebugReportObjectTypeEXT} specifying the type of object being used or created at the time the event was triggered."),
-        uint64_t("object", "this is the object where the issue was detected. {@code object} <b>can</b> be #NULL_HANDLE if there is no object associated with the event."),
+        uint64_t("object", "the object where the issue was detected. {@code object} <b>can</b> be #NULL_HANDLE if there is no object associated with the event."),
         size_t("location", "an application defined value."),
         int32_t("messageCode", "an application defined value."),
         charUTF8.const.p("pLayerPrefix", "the abbreviation of the component making this event/message."),

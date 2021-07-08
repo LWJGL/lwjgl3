@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void * (*) (
+ * void * (*{@link #invoke}) (
  *     void *canvas,
  *     short x,
  *     short y,
@@ -52,7 +52,7 @@ public abstract class NkCommandCustomCallback extends Callback implements NkComm
     }
 
     protected NkCommandCustomCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkCommandCustomCallback(long functionPointer) {

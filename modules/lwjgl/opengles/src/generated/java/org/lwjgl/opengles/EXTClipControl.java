@@ -22,6 +22,8 @@ import org.lwjgl.system.*;
  */
 public class EXTClipControl {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code origin} parameter of {@link #glClipControlEXT ClipControlEXT}. */
     public static final int
         GL_LOWER_LEFT_EXT = 0x8CA1,
@@ -36,8 +38,6 @@ public class EXTClipControl {
     public static final int
         GL_CLIP_ORIGIN_EXT     = 0x935C,
         GL_CLIP_DEPTH_MODE_EXT = 0x935D;
-
-    static { GLES.initialize(); }
 
     protected EXTClipControl() {
         throw new UnsupportedOperationException();

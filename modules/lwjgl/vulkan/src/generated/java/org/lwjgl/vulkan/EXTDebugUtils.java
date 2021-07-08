@@ -46,10 +46,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkDebugUtilsMessengerEXT cb1, cb2, cb3;
  * 
  *     // Must call extension functions through a function pointer:
- *     PFN_vkCreateDebugUtilsMessengerEXT pfnCreateDebugUtilsMessengerEXT = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetDeviceProcAddr(device, "vkCreateDebugUtilsMessengerEXT");
- *     PFN_vkDestroyDebugUtilsMessengerEXT pfnDestroyDebugUtilsMessengerEXT = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetDeviceProcAddr(device, "vkDestroyDebugUtilsMessengerEXT");
+ *     PFN_vkCreateDebugUtilsMessengerEXT pfnCreateDebugUtilsMessengerEXT = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
+ *     PFN_vkDestroyDebugUtilsMessengerEXT pfnDestroyDebugUtilsMessengerEXT = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
  * 
- *     VkDebugUtilsMessengeCreateInfoEXT callback1 = {
+ *     VkDebugUtilsMessengerCreateInfoEXT callback1 = {
  *             VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,  // sType
  *             NULL,                                                     // pNext
  *             0,                                                        // flags
@@ -66,7 +66,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     }
  * 
  *     callback1.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
- *     callback1.pfnCallback = myDebugBreak;
+ *     callback1.pfnUserCallback = myDebugBreak;
  *     callback1.pUserData = NULL;
  *     res = pfnCreateDebugUtilsMessengerEXT(instance, &amp;callback1, NULL, &amp;cb2);
  *     if (res != VK_SUCCESS) {
@@ -100,11 +100,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Associate a name with an image, for easier debugging in external tools or with validation layers that can print a friendly name when referring to objects in error messages.</p>
  * 
  * <pre><code>
+ *     extern VkInstance instance;
  *     extern VkDevice device;
  *     extern VkImage image;
  * 
  *     // Must call extension functions through a function pointer:
- *     PFN_vkSetDebugUtilsObjectNameEXT pfnSetDebugUtilsObjectNameEXT = (PFN_vkSetDebugUtilsObjectNameEXT)vkGetDeviceProcAddr(device, "vkSetDebugUtilsObjectNameEXT");
+ *     PFN_vkSetDebugUtilsObjectNameEXT pfnSetDebugUtilsObjectNameEXT = (PFN_vkSetDebugUtilsObjectNameEXT)vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectNameEXT");
  * 
  *     // Set a name on the image
  *     const VkDebugUtilsObjectNameInfoEXT imageNameInfo =
@@ -127,15 +128,15 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Annotating regions of a workload with naming information so that offline analysis tools can display a more usable visualization of the commands submitted.</p>
  * 
  * <pre><code>
- *     extern VkDevice device;
+ *     extern VkInstance instance;
  *     extern VkCommandBuffer commandBuffer;
  * 
  *     // Must call extension functions through a function pointer:
- *     PFN_vkQueueBeginDebugUtilsLabelEXT pfnQueueBeginDebugUtilsLabelEXT = (PFN_vkQueueBeginDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkQueueBeginDebugUtilsLabelEXT");
- *     PFN_vkQueueEndDebugUtilsLabelEXT pfnQueueEndDebugUtilsLabelEXT = (PFN_vkQueueEndDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkQueueEndDebugUtilsLabelEXT");
- *     PFN_vkCmdBeginDebugUtilsLabelEXT pfnCmdBeginDebugUtilsLabelEXT = (PFN_vkCmdBeginDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkCmdBeginDebugUtilsLabelEXT");
- *     PFN_vkCmdEndDebugUtilsLabelEXT pfnCmdEndDebugUtilsLabelEXT = (PFN_vkCmdEndDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkCmdEndDebugUtilsLabelEXT");
- *     PFN_vkCmdInsertDebugUtilsLabelEXT pfnCmdInsertDebugUtilsLabelEXT = (PFN_vkCmdInsertDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkCmdInsertDebugUtilsLabelEXT");
+ *     PFN_vkQueueBeginDebugUtilsLabelEXT pfnQueueBeginDebugUtilsLabelEXT = (PFN_vkQueueBeginDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkQueueBeginDebugUtilsLabelEXT");
+ *     PFN_vkQueueEndDebugUtilsLabelEXT pfnQueueEndDebugUtilsLabelEXT = (PFN_vkQueueEndDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkQueueEndDebugUtilsLabelEXT");
+ *     PFN_vkCmdBeginDebugUtilsLabelEXT pfnCmdBeginDebugUtilsLabelEXT = (PFN_vkCmdBeginDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkCmdBeginDebugUtilsLabelEXT");
+ *     PFN_vkCmdEndDebugUtilsLabelEXT pfnCmdEndDebugUtilsLabelEXT = (PFN_vkCmdEndDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkCmdEndDebugUtilsLabelEXT");
+ *     PFN_vkCmdInsertDebugUtilsLabelEXT pfnCmdInsertDebugUtilsLabelEXT = (PFN_vkCmdInsertDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkCmdInsertDebugUtilsLabelEXT");
  * 
  *     // Describe the area being rendered
  *     const VkDebugUtilsLabelEXT houseLabel =
@@ -219,6 +220,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     // End the queue label region
  *     pfnQueueEndDebugUtilsLabelEXT(queue);</code></pre>
  * 
+ * <h5>VK_EXT_debug_utils</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_debug_utils}</dd>
@@ -227,19 +230,28 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>129</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
+ * </ul></dd>
+ * <dt><b>Special Use</b></dt>
+ * <dd><ul>
+ * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">Debugging tools</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Mark Young <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_debug_utils:%20&amp;body=@marky-lunarg%20">marky-lunarg</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2017-09-14</dd>
+ * <dd>2020-04-03</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Dependencies</b></dt>
@@ -262,13 +274,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Dan Baker, Oxide Games</li>
  * <li>Kyle Spagnoli, NVIDIA</li>
  * <li>Jon Ashburn, LunarG</li>
+ * <li>Piers Daniell, NVIDIA</li>
  * </ul></dd>
  * </dl>
  */
 public class EXTDebugUtils {
 
     /** The extension specification version. */
-    public static final int VK_EXT_DEBUG_UTILS_SPEC_VERSION = 1;
+    public static final int VK_EXT_DEBUG_UTILS_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_EXT_DEBUG_UTILS_EXTENSION_NAME = "VK_EXT_debug_utils";
@@ -366,8 +379,8 @@ public class EXTDebugUtils {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code pNameInfo}-&gt;objectType <b>must</b> not be {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}</li>
-     * <li>{@code pNameInfo}-&gt;objectHandle <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
+     * <li>{@code pNameInfo}&#8594;objectType <b>must</b> not be {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}</li>
+     * <li>{@code pNameInfo}&#8594;objectHandle <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -380,7 +393,7 @@ public class EXTDebugUtils {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
-     * <li>Host access to {@code pNameInfo.objectHandle} <b>must</b> be externally synchronized</li>
+     * <li>Host access to {@code pNameInfo}&#8594;objectHandle <b>must</b> be externally synchronized</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -441,7 +454,7 @@ public class EXTDebugUtils {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
-     * <li>Host access to {@code pTagInfo.objectHandle} <b>must</b> be externally synchronized</li>
+     * <li>Host access to {@code pTagInfo}&#8594;objectHandle <b>must</b> be externally synchronized</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -650,6 +663,7 @@ public class EXTDebugUtils {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -692,7 +706,7 @@ public class EXTDebugUtils {
      * 
      * <ul>
      * <li>There <b>must</b> be an outstanding {@code vkCmdBeginDebugUtilsLabelEXT} command prior to the {@code vkCmdEndDebugUtilsLabelEXT} on the queue that {@code commandBuffer} is submitted to</li>
-     * <li>If {@code commandBuffer} is a secondary command buffer, there <b>must</b> be an outstanding {@code vkCmdBeginDebugUtilsLabelEXT} command recorded to {@code commandBuffer} that has not previously been ended by a call to {@code vkCmdEndDebugUtilsLabelEXT}.</li>
+     * <li>If {@code commandBuffer} is a secondary command buffer, there <b>must</b> be an outstanding {@code vkCmdBeginDebugUtilsLabelEXT} command recorded to {@code commandBuffer} that has not previously been ended by a call to {@code vkCmdEndDebugUtilsLabelEXT}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -706,6 +720,7 @@ public class EXTDebugUtils {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -762,6 +777,7 @@ public class EXTDebugUtils {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -886,9 +902,9 @@ public class EXTDebugUtils {
      * 
      * <ul>
      * <li>{@code instance} <b>must</b> be a valid {@code VkInstance} handle</li>
-     * <li>{@code messenger} <b>must</b> be a valid {@code VkDebugUtilsMessengerEXT} handle</li>
+     * <li>If {@code messenger} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code messenger} <b>must</b> be a valid {@code VkDebugUtilsMessengerEXT} handle</li>
      * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
-     * <li>{@code messenger} <b>must</b> have been created, allocated, or retrieved from {@code instance}</li>
+     * <li>If {@code messenger} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code instance}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -944,7 +960,7 @@ public class EXTDebugUtils {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The {@code objectType} member of each element of {@code pCallbackData}-&gt;pObjects <b>must</b> not be {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}</li>
+     * <li>The {@code objectType} member of each element of {@code pCallbackData}&#8594;pObjects <b>must</b> not be {@link VK10#VK_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

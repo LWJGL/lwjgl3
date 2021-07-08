@@ -28,21 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code shaderSubgroupExtendedTypes} &ndash; a boolean that specifies whether subgroup operations can use 8-bit integer, 16-bit integer, 64-bit integer, 16-bit floating-point, and vectors of these types if the implementation supports the types.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 shaderSubgroupExtendedTypes;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #shaderSubgroupExtendedTypes};
  * }</code></pre>
  */
 public class VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures extends Struct implements NativeResource {
@@ -87,21 +79,21 @@ public class VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures extends Struct 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code shaderSubgroupExtendedTypes} field. */
+    /** a boolean that specifies whether subgroup operations can use 8-bit integer, 16-bit integer, 64-bit integer, 16-bit floating-point, and vectors of these types in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-group-operations">group operations</a> with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-scope-subgroup">subgroup scope</a>if the implementation supports the types. */
     @NativeType("VkBool32")
     public boolean shaderSubgroupExtendedTypes() { return nshaderSubgroupExtendedTypes(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderSubgroupExtendedTypes} field. */
+    /** Sets the specified value to the {@link #shaderSubgroupExtendedTypes} field. */
     public VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures shaderSubgroupExtendedTypes(@NativeType("VkBool32") boolean value) { nshaderSubgroupExtendedTypes(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -324,21 +316,21 @@ public class VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures extends Struct 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.npNext(address()); }
-        /** Returns the value of the {@code shaderSubgroupExtendedTypes} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures#shaderSubgroupExtendedTypes} field. */
         @NativeType("VkBool32")
         public boolean shaderSubgroupExtendedTypes() { return VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.nshaderSubgroupExtendedTypes(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures#sType} field. */
         public VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures#pNext} field. */
         public VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderSubgroupExtendedTypes} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures#shaderSubgroupExtendedTypes} field. */
         public VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.Buffer shaderSubgroupExtendedTypes(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.nshaderSubgroupExtendedTypes(address(), value ? 1 : 0); return this; }
 
     }

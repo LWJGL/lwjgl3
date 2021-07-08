@@ -10,6 +10,8 @@ package org.lwjgl.vulkan;
  * 
  * <p>When using GLSL source-based shading languages, the {@code clockRealtime}*{@code EXT}() timing functions map to the {@code OpReadClockKHR} instruction with a scope of {@code Device}, and the {@code clock}*{@code ARB}() timing functions map to the {@code OpReadClockKHR} instruction with a scope of {@code Subgroup}.</p>
  * 
+ * <h5>VK_KHR_shader_clock</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_shader_clock}</dd>
@@ -28,6 +30,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Aaron Hagan <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_clock:%20&amp;body=@ahagan%20">ahagan</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-4-25</dd>
  * <dt><b>IP Status</b></dt>
@@ -35,8 +42,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_shader_clock.html">{@code SPV_KHR_shader_clock}</a>.</li>
- * <li>This extension enables <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_clock.txt">{@code ARB_shader_clock}</a> for GLSL source languages.</li>
- * <li>This extension enables <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_shader_realtime_clock.txt">{@code EXT_shader_realtime_clock}</a> for GLSL source languages.</li>
+ * <li>This extension provides API support for <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_clock.txt">{@code ARB_shader_clock}</a> and <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_shader_realtime_clock.txt">{@code EXT_shader_realtime_clock}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

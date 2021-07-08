@@ -5,15 +5,18 @@
 package org.lwjgl.system;
 
 import org.lwjgl.*;
+import org.lwjgl.system.libffi.*;
 
 import javax.annotation.*;
 import java.lang.reflect.*;
+import java.util.concurrent.*;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.dyncall.DynCallback.*;
 import static org.lwjgl.system.jni.JNINativeInterface.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Base class for dynamically created native functions that call into Java code.
@@ -24,52 +27,76 @@ public abstract class Callback implements Pointer, NativeResource {
 
     private static final boolean DEBUG_ALLOCATOR = Configuration.DEBUG_MEMORY_ALLOCATOR.get(false);
 
-    private static final long
-        VOID,
-        BOOLEAN,
-        BYTE,
-        SHORT,
-        INT,
-        LONG,
-        CLONG,
-        FLOAT,
-        DOUBLE,
-        PTR;
+    private static final ClosureRegistry CLOSURE_REGISTRY;
+
+    private interface ClosureRegistry {
+        void put(long executableAddress, FFIClosure closure);
+        FFIClosure get(long executableAddress);
+        FFIClosure remove(long executableAddress);
+    }
 
     static {
-        // Setup native callbacks
+        // Detect whether we need to maintain a mapping from executable addresses to FFIClosure structs.
         try (MemoryStack stack = stackPush()) {
-            Class<?>[] params = new Class<?>[] {long.class};
+            PointerBuffer code = stack.mallocPointer(1);
 
-            Method[] methods = {
-                CallbackI.V.class.getDeclaredMethod("callback", params),
-                CallbackI.Z.class.getDeclaredMethod("callback", params),
-                CallbackI.B.class.getDeclaredMethod("callback", params),
-                CallbackI.S.class.getDeclaredMethod("callback", params),
-                CallbackI.I.class.getDeclaredMethod("callback", params),
-                CallbackI.J.class.getDeclaredMethod("callback", params),
-                CallbackI.N.class.getDeclaredMethod("callback", params),
-                CallbackI.F.class.getDeclaredMethod("callback", params),
-                CallbackI.D.class.getDeclaredMethod("callback", params),
-                CallbackI.P.class.getDeclaredMethod("callback", params)
-            };
+            FFIClosure closure = ffi_closure_alloc(FFIClosure.SIZEOF, code);
+            if (closure == null) {
+                throw new OutOfMemoryError();
+            }
 
-            PointerBuffer callbacks = stack.mallocPointer(methods.length);
+            if (code.get(0) == closure.address()) {
+                apiLog("Closure Registry: simple");
 
-            getNativeCallbacks(methods, memAddress(callbacks));
+                // When the closure address matches the executable address, we don't have to maintain any mappings.
+                // We can simply cast the executable address to ffi_closure. This is true on many platforms.
+                CLOSURE_REGISTRY = new ClosureRegistry() {
+                    @Override
+                    public void put(long executableAddress, FFIClosure closure) {
+                        // no-op
+                    }
+                    @Override
+                    public FFIClosure get(long executableAddress) {
+                        return FFIClosure.create(executableAddress);
+                    }
+                    @Override
+                    public FFIClosure remove(long executableAddress) {
+                        return get(executableAddress);
+                    }
+                };
+            } else {
+                apiLog("Closure Registry: ConcurrentHashMap");
 
-            VOID = callbacks.get();
-            BOOLEAN = callbacks.get();
-            BYTE = callbacks.get();
-            SHORT = callbacks.get();
-            INT = callbacks.get();
-            LONG = callbacks.get();
-            CLONG = callbacks.get();
-            FLOAT = callbacks.get();
-            DOUBLE = callbacks.get();
-            PTR = callbacks.get();
+                CLOSURE_REGISTRY = new ClosureRegistry() {
+                    private final ConcurrentHashMap<Long, FFIClosure> map = new ConcurrentHashMap<>();
+
+                    @Override
+                    public void put(long executableAddress, FFIClosure closure) {
+                        map.put(executableAddress, closure);
+                    }
+                    @Override
+                    public FFIClosure get(long executableAddress) {
+                        return map.get(executableAddress);
+                    }
+                    @Override
+                    public FFIClosure remove(long executableAddress) {
+                        return map.remove(executableAddress);
+                    }
+                };
+            }
+            ffi_closure_free(closure);
+        }
+    }
+
+    /** Address of the native callback handler that will call the Java method when the native callback function is invoked. */
+    private static final long CALLBACK_HANDLER;
+
+    static {
+        // Setup the native callback handler.
+        try {
+            CALLBACK_HANDLER = getCallbackHandler(CallbackI.class.getDeclaredMethod("callback", long.class, long.class));
         } catch (Exception e) {
-            throw new IllegalStateException("Failed to initialize native callbacks.", e);
+            throw new IllegalStateException("Failed to initialize the native callback handler.", e);
         }
 
         MemoryUtil.getAllocator();
@@ -78,12 +105,12 @@ public abstract class Callback implements Pointer, NativeResource {
     private long address;
 
     /**
-     * Creates a callback instance using the specified dyncall signature
+     * Creates a callback instance using the specified libffi CIF.
      *
-     * @param signature the dyncall signature
+     * @param cif the libffi CIF
      */
-    protected Callback(String signature) {
-        this.address = create(signature, this);
+    protected Callback(FFICIF cif) {
+        this.address = create(cif, this);
     }
 
     /**
@@ -108,62 +135,47 @@ public abstract class Callback implements Pointer, NativeResource {
         free(address());
     }
 
-    private static native long getNativeCallbacks(Method[] methods, long callbacks);
-
-    public static String __stdcall(String signature) {
-        return Platform.get() == Platform.WINDOWS && Pointer.BITS32 ? "_s" + signature : signature;
-    }
+    private static native long getCallbackHandler(Method callback);
 
     /**
      * Creates a native function that delegates to the specified instance when called.
      *
      * <p>The native function uses the default calling convention.</p>
      *
-     * @param signature the {@code dyncall} function signature
-     * @param instance  the callback instance
+     * @param cif      the {@code libffi} CIF
+     * @param instance the callback instance
      *
      * @return the dynamically generated native function
      */
-    static long create(String signature, Object instance) {
-        long funcptr = getNativeFunction(signature.charAt(signature.length() - 1));
+    static long create(FFICIF cif, Object instance) {
+        FFIClosure closure;
 
-        long handle = dcbNewCallback(signature, funcptr, NewGlobalRef(instance));
-        if (handle == NULL) {
-            throw new IllegalStateException("Failed to create the DCCallback object");
+        long executableAddress;
+        try (MemoryStack stack = stackPush()) {
+            PointerBuffer code = stack.mallocPointer(1);
+
+            closure = ffi_closure_alloc(FFIClosure.SIZEOF, code);
+            if (closure == null) {
+                throw new OutOfMemoryError();
+            }
+            executableAddress = code.get(0);
+            if (DEBUG_ALLOCATOR) {
+                MemoryManage.DebugAllocator.track(executableAddress, FFIClosure.SIZEOF);
+            }
         }
 
-        if (DEBUG_ALLOCATOR) {
-            MemoryManage.DebugAllocator.track(handle, 2L * POINTER_SIZE);
+        long user_data = NewGlobalRef(instance);
+
+        int errcode = ffi_prep_closure_loc(closure, cif, CALLBACK_HANDLER, user_data, executableAddress);
+        if (errcode != FFI_OK) {
+            DeleteGlobalRef(user_data);
+            ffi_closure_free(closure);
+            throw new RuntimeException("Failed to prepare the libffi closure");
         }
 
-        return handle;
-    }
+        CLOSURE_REGISTRY.put(executableAddress, closure);
 
-    private static long getNativeFunction(char type) {
-        switch (type) {
-            case 'v':
-                return VOID;
-            case 'B':
-                return BOOLEAN;
-            case 'c':
-                return BYTE;
-            case 's':
-                return SHORT;
-            case 'i':
-                return INT;
-            case 'l':
-                return LONG;
-            case 'j':
-                return CLONG;
-            case 'p':
-                return PTR;
-            case 'f':
-                return FLOAT;
-            case 'd':
-                return DOUBLE;
-            default:
-                throw new IllegalArgumentException();
-        }
+        return executableAddress;
     }
 
     /**
@@ -175,7 +187,7 @@ public abstract class Callback implements Pointer, NativeResource {
      * @return the {@code CallbackI} instance
      */
     public static <T extends CallbackI> T get(long functionPointer) {
-        return memGlobalRefToObject(dcbGetUserData(functionPointer));
+        return memGlobalRefToObject(CLOSURE_REGISTRY.get(functionPointer).user_data());
     }
 
     /** Like {@link #get}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
@@ -194,8 +206,10 @@ public abstract class Callback implements Pointer, NativeResource {
             MemoryManage.DebugAllocator.untrack(functionPointer);
         }
 
-        DeleteGlobalRef(dcbGetUserData(functionPointer));
-        dcbFreeCallback(functionPointer);
+        FFIClosure closure = CLOSURE_REGISTRY.get(functionPointer);
+
+        DeleteGlobalRef(closure.user_data());
+        ffi_closure_free(closure);
     }
 
     public boolean equals(Object o) {

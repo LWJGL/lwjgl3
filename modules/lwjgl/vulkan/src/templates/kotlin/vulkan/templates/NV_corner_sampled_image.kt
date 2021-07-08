@@ -15,14 +15,15 @@ val NV_corner_sampled_image = "NVCornerSampledImage".nativeClassVK("NV_corner_sa
 
         <ul>
             <li>Texels are centered on integer coordinates. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#textures-unnormalized-to-integer">Unnormalized Texel Coordinate Operations</a></li>
-            <li>Normalized coordinates are scaled using <code>coord * (dim - 1)</code> rather than <code>coord * dim</code>, where dim is the size of one dimension of the image. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#textures-normalized-to-unnormalized">normalized texel coordinate transform</a>.</li>
-            <li>Partial derivatives are scaled using <code>coord * (dim - 1)</code> rather than <code>coord * dim</code>. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#textures-scale-factor">Scale Factor Operation</a>.</li>
+            <li>Normalized coordinates are scaled using <code>coord × (dim - 1)</code> rather than <code>coord × dim</code>, where dim is the size of one dimension of the image. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#textures-normalized-to-unnormalized">normalized texel coordinate transform</a>.</li>
+            <li>Partial derivatives are scaled using <code>coord × (dim - 1)</code> rather than <code>coord × dim</code>. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#textures-scale-factor">Scale Factor Operation</a>.</li>
             <li>Calculation of the next higher lod size goes according to <code>⌈dim / 2⌉</code> rather than <code>⌊dim / 2⌋</code>. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#resources-image-miplevel-sizing">Image Miplevel Sizing</a>.</li>
             <li>The minimum level size is 2x2 for 2D images and 2x2x2 for 3D images. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#resources-image-miplevel-sizing">Image Miplevel Sizing</a>.</li>
         </ul>
 
         This image organization is designed to facilitate a system like Ptex with separate textures for each face of a subdivision or polygon mesh. Placing sample locations at pixel corners allows applications to maintain continuity between adjacent patches by duplicating values along shared edges. Additionally, using the modified mipmapping logic along with texture dimensions of the form <code>2<sup>n</sup>+1</code> allows continuity across shared edges even if the adjacent patches use different level-of-detail values.
 
+        <h5>VK_NV_corner_sampled_image</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_corner_sampled_image}</dd>
@@ -46,7 +47,10 @@ val NV_corner_sampled_image = "NVCornerSampledImage".nativeClassVK("NV_corner_sa
             <dd><ul>
                 <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_corner_sampled_image:%20&amp;body=@dgkoch%20">dgkoch</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-08-13</dd>
 

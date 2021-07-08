@@ -77,19 +77,19 @@ public class VRVulkanDevice extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code m_pInstance} field. */
+    /** @return the value of the {@code m_pInstance} field. */
     @NativeType("VkInstance_T *")
     public long m_pInstance() { return nm_pInstance(address()); }
-    /** Returns the value of the {@code m_pDevice} field. */
+    /** @return the value of the {@code m_pDevice} field. */
     @NativeType("VkDevice_T *")
     public long m_pDevice() { return nm_pDevice(address()); }
-    /** Returns the value of the {@code m_pPhysicalDevice} field. */
+    /** @return the value of the {@code m_pPhysicalDevice} field. */
     @NativeType("VkPhysicalDevice_T *")
     public long m_pPhysicalDevice() { return nm_pPhysicalDevice(address()); }
-    /** Returns the value of the {@code m_pQueue} field. */
+    /** @return the value of the {@code m_pQueue} field. */
     @NativeType("VkQueue_T *")
     public long m_pQueue() { return nm_pQueue(address()); }
-    /** Returns the value of the {@code m_uQueueFamilyIndex} field. */
+    /** @return the value of the {@code m_uQueueFamilyIndex} field. */
     @NativeType("uint32_t")
     public int m_uQueueFamilyIndex() { return nm_uQueueFamilyIndex(address()); }
 
@@ -360,19 +360,19 @@ public class VRVulkanDevice extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code m_pInstance} field. */
+        /** @return the value of the {@code m_pInstance} field. */
         @NativeType("VkInstance_T *")
         public long m_pInstance() { return VRVulkanDevice.nm_pInstance(address()); }
-        /** Returns the value of the {@code m_pDevice} field. */
+        /** @return the value of the {@code m_pDevice} field. */
         @NativeType("VkDevice_T *")
         public long m_pDevice() { return VRVulkanDevice.nm_pDevice(address()); }
-        /** Returns the value of the {@code m_pPhysicalDevice} field. */
+        /** @return the value of the {@code m_pPhysicalDevice} field. */
         @NativeType("VkPhysicalDevice_T *")
         public long m_pPhysicalDevice() { return VRVulkanDevice.nm_pPhysicalDevice(address()); }
-        /** Returns the value of the {@code m_pQueue} field. */
+        /** @return the value of the {@code m_pQueue} field. */
         @NativeType("VkQueue_T *")
         public long m_pQueue() { return VRVulkanDevice.nm_pQueue(address()); }
-        /** Returns the value of the {@code m_uQueueFamilyIndex} field. */
+        /** @return the value of the {@code m_uQueueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int m_uQueueFamilyIndex() { return VRVulkanDevice.nm_uQueueFamilyIndex(address()); }
 

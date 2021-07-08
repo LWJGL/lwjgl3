@@ -171,7 +171,7 @@ public class Gears {
         });
 
         glfwMakeContextCurrent(window);
-        GL.createCapabilities(MemoryUtil::memAllocPointer);
+        GL.createCapabilities(MemoryUtil::memCallocPointer);
         debugProc = GLUtil.setupDebugMessageCallback();
 
         gears = new GLXGears();

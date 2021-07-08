@@ -63,10 +63,10 @@ public class XrSystemTrackingProperties extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code orientationTracking} field. */
+    /** @return the value of the {@code orientationTracking} field. */
     @NativeType("XrBool32")
     public boolean orientationTracking() { return norientationTracking(address()) != 0; }
-    /** Returns the value of the {@code positionTracking} field. */
+    /** @return the value of the {@code positionTracking} field. */
     @NativeType("XrBool32")
     public boolean positionTracking() { return npositionTracking(address()) != 0; }
 
@@ -289,10 +289,10 @@ public class XrSystemTrackingProperties extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code orientationTracking} field. */
+        /** @return the value of the {@code orientationTracking} field. */
         @NativeType("XrBool32")
         public boolean orientationTracking() { return XrSystemTrackingProperties.norientationTracking(address()) != 0; }
-        /** Returns the value of the {@code positionTracking} field. */
+        /** @return the value of the {@code positionTracking} field. */
         @NativeType("XrBool32")
         public boolean positionTracking() { return XrSystemTrackingProperties.npositionTracking(address()) != 0; }
 

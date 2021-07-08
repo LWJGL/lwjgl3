@@ -57,7 +57,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The total number of bindings with a {@code descriptorType} of {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT}{@code ::maxDescriptorSetUpdateAfterBindInlineUniformBlocks}</li>
  * <li>Any two elements of {@code pPushConstantRanges} <b>must</b> not include the same stage in {@code stageFlags}</li>
  * <li>{@code pSetLayouts} <b>must</b> not contain more than one descriptor set layout that was created with {@link KHRPushDescriptor#VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR} set</li>
+ * <li>The total number of bindings in descriptor set layouts created without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set with a {@code descriptorType} of {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR} accessible to any given shader stage across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR}{@code ::maxPerStageDescriptorAccelerationStructures}</li>
+ * <li>The total number of bindings with a {@code descriptorType} of {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR} to any given shader stage across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR}{@code ::maxPerStageDescriptorUpdateAfterBindAccelerationStructures}</li>
+ * <li>The total number of bindings in descriptor set layouts created without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set with a {@code descriptorType} of {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR} accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR}{@code ::maxDescriptorSetAccelerationStructures}</li>
+ * <li>The total number of bindings with a {@code descriptorType} of {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR} accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR}{@code ::maxDescriptorSetUpdateAfterBindAccelerationStructures}</li>
  * <li>The total number of bindings with a {@code descriptorType} of {@link NVRayTracing#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV} accessible across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to {@link VkPhysicalDeviceRayTracingPropertiesNV}{@code ::maxDescriptorSetAccelerationStructures}</li>
+ * <li>The total number of {@code pImmutableSamplers} created with {@code flags} containing {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT} or {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT} across all shader stages and across all elements of {@code pSetLayouts} <b>must</b> be less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxDescriptorSetSubsampledSamplers">{@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT}{@code ::maxDescriptorSetSubsampledSamplers}</a></li>
+ * <li>Any element of {@code pSetLayouts} <b>must</b> not have been created with the {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_VALVE DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_VALVE} bit set</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -74,34 +80,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkPushConstantRange}, {@link VK10#vkCreatePipelineLayout CreatePipelineLayout}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code setLayoutCount} &ndash; the number of descriptor sets included in the pipeline layout.</li>
- * <li>{@code pSetLayouts} &ndash; a pointer to an array of {@code VkDescriptorSetLayout} objects.</li>
- * <li>{@code pushConstantRangeCount} &ndash; the number of push constant ranges included in the pipeline layout.</li>
- * <li>{@code pPushConstantRanges} &ndash; a pointer to an array of {@link VkPushConstantRange} structures defining a set of push constant ranges for use in a single pipeline layout. In addition to descriptor set layouts, a pipeline layout also describes how many push constants <b>can</b> be accessed by each stage of the pipeline.
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Push constants represent a high speed path to modify constant data in pipelines that is expected to outperform memory-backed resource updates.</p>
- * </div></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineLayoutCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineLayoutCreateFlags flags;
- *     uint32_t setLayoutCount;
- *     VkDescriptorSetLayout const * pSetLayouts;
- *     uint32_t pushConstantRangeCount;
- *     {@link VkPushConstantRange VkPushConstantRange} const * pPushConstantRanges;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineLayoutCreateFlags {@link #flags};
+ *     uint32_t {@link #setLayoutCount};
+ *     VkDescriptorSetLayout const * {@link #pSetLayouts};
+ *     uint32_t {@link #pushConstantRangeCount};
+ *     {@link VkPushConstantRange VkPushConstantRange} const * {@link #pPushConstantRanges};
  * }</code></pre>
  */
 public class VkPipelineLayoutCreateInfo extends Struct implements NativeResource {
@@ -158,39 +147,46 @@ public class VkPipelineLayoutCreateInfo extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkPipelineLayoutCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code setLayoutCount} field. */
+    /** the number of descriptor sets included in the pipeline layout. */
     @NativeType("uint32_t")
     public int setLayoutCount() { return nsetLayoutCount(address()); }
-    /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pSetLayouts} field. */
+    /** a pointer to an array of {@code VkDescriptorSetLayout} objects. */
     @Nullable
     @NativeType("VkDescriptorSetLayout const *")
     public LongBuffer pSetLayouts() { return npSetLayouts(address()); }
-    /** Returns the value of the {@code pushConstantRangeCount} field. */
+    /** the number of push constant ranges included in the pipeline layout. */
     @NativeType("uint32_t")
     public int pushConstantRangeCount() { return npushConstantRangeCount(address()); }
-    /** Returns a {@link VkPushConstantRange.Buffer} view of the struct array pointed to by the {@code pPushConstantRanges} field. */
+    /**
+     * a pointer to an array of {@link VkPushConstantRange} structures defining a set of push constant ranges for use in a single pipeline layout. In addition to descriptor set layouts, a pipeline layout also describes how many push constants <b>can</b> be accessed by each stage of the pipeline.
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>Push constants represent a high speed path to modify constant data in pipelines that is expected to outperform memory-backed resource updates.</p>
+     * </div>
+     */
     @Nullable
     @NativeType("VkPushConstantRange const *")
     public VkPushConstantRange.Buffer pPushConstantRanges() { return npPushConstantRanges(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineLayoutCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineLayoutCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineLayoutCreateInfo flags(@NativeType("VkPipelineLayoutCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@code pSetLayouts} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@link #pSetLayouts} field. */
     public VkPipelineLayoutCreateInfo pSetLayouts(@Nullable @NativeType("VkDescriptorSetLayout const *") LongBuffer value) { npSetLayouts(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@code pPushConstantRanges} field. */
+    /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@link #pPushConstantRanges} field. */
     public VkPipelineLayoutCreateInfo pPushConstantRanges(@Nullable @NativeType("VkPushConstantRange const *") VkPushConstantRange.Buffer value) { npPushConstantRanges(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -459,39 +455,39 @@ public class VkPipelineLayoutCreateInfo extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineLayoutCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineLayoutCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineLayoutCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineLayoutCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkPipelineLayoutCreateInfo#flags} field. */
         @NativeType("VkPipelineLayoutCreateFlags")
         public int flags() { return VkPipelineLayoutCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code setLayoutCount} field. */
+        /** @return the value of the {@link VkPipelineLayoutCreateInfo#setLayoutCount} field. */
         @NativeType("uint32_t")
         public int setLayoutCount() { return VkPipelineLayoutCreateInfo.nsetLayoutCount(address()); }
-        /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pSetLayouts} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkPipelineLayoutCreateInfo#pSetLayouts} field. */
         @Nullable
         @NativeType("VkDescriptorSetLayout const *")
         public LongBuffer pSetLayouts() { return VkPipelineLayoutCreateInfo.npSetLayouts(address()); }
-        /** Returns the value of the {@code pushConstantRangeCount} field. */
+        /** @return the value of the {@link VkPipelineLayoutCreateInfo#pushConstantRangeCount} field. */
         @NativeType("uint32_t")
         public int pushConstantRangeCount() { return VkPipelineLayoutCreateInfo.npushConstantRangeCount(address()); }
-        /** Returns a {@link VkPushConstantRange.Buffer} view of the struct array pointed to by the {@code pPushConstantRanges} field. */
+        /** @return a {@link VkPushConstantRange.Buffer} view of the struct array pointed to by the {@link VkPipelineLayoutCreateInfo#pPushConstantRanges} field. */
         @Nullable
         @NativeType("VkPushConstantRange const *")
         public VkPushConstantRange.Buffer pPushConstantRanges() { return VkPipelineLayoutCreateInfo.npPushConstantRanges(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineLayoutCreateInfo#sType} field. */
         public VkPipelineLayoutCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineLayoutCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineLayoutCreateInfo#pNext} field. */
         public VkPipelineLayoutCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineLayoutCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkPipelineLayoutCreateInfo#flags} field. */
         public VkPipelineLayoutCreateInfo.Buffer flags(@NativeType("VkPipelineLayoutCreateFlags") int value) { VkPipelineLayoutCreateInfo.nflags(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@code pSetLayouts} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@link VkPipelineLayoutCreateInfo#pSetLayouts} field. */
         public VkPipelineLayoutCreateInfo.Buffer pSetLayouts(@Nullable @NativeType("VkDescriptorSetLayout const *") LongBuffer value) { VkPipelineLayoutCreateInfo.npSetLayouts(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@code pPushConstantRanges} field. */
+        /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@link VkPipelineLayoutCreateInfo#pPushConstantRanges} field. */
         public VkPipelineLayoutCreateInfo.Buffer pPushConstantRanges(@Nullable @NativeType("VkPushConstantRange const *") VkPushConstantRange.Buffer value) { VkPipelineLayoutCreateInfo.npPushConstantRanges(address(), value); return this; }
 
     }

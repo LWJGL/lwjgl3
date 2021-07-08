@@ -6,8 +6,6 @@ package org.lwjgl.system;
 
 import javax.annotation.*;
 
-import static org.lwjgl.system.dyncall.DynLoad.*;
-
 /** A {@link FunctionProvider} implementation that opens a platform-specific shared library and returns functions pointers from it. */
 public interface SharedLibrary extends FunctionProvider, NativeResource, Pointer {
 
@@ -36,11 +34,6 @@ public interface SharedLibrary extends FunctionProvider, NativeResource, Pointer
             return name;
         }
 
-        @Nullable
-        @Override public String getPath() {
-            String path = dlGetLibraryPath(address(), 256);
-            return path.isEmpty() ? null : path;
-        }
     }
 
     abstract class Delegate implements SharedLibrary {

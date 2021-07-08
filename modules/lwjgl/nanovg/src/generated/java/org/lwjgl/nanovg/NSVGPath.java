@@ -15,25 +15,15 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code pts} &ndash; cubic bezier points: {@code x0,y0, [cpx1,cpx1,cpx2,cpy2,x1,y1], ...}</li>
- * <li>{@code npts} &ndash; total number of bezier points</li>
- * <li>{@code closed} &ndash; flag indicating if shapes should be treated as closed</li>
- * <li>{@code bounds[4]} &ndash; tight bounding box of the shape {@code [minx,miny,maxx,maxy]}</li>
- * <li>{@code next} &ndash; pointer to next path, or {@code NULL} if last element</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct NSVGpath {
- *     float * pts;
- *     int npts;
- *     char closed;
- *     float bounds[4];
- *     {@link NSVGPath NSVGpath} * next;
+ *     float * {@link #pts};
+ *     int {@link #npts};
+ *     char {@link #closed};
+ *     float {@link #bounds}[4];
+ *     {@link NSVGPath NSVGpath} * {@link #next};
  * }</code></pre>
  */
 @NativeType("struct NSVGpath")
@@ -85,20 +75,20 @@ public class NSVGPath extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link FloatBuffer} view of the data pointed to by the {@code pts} field. */
+    /** cubic bezier points: {@code x0,y0, [cpx1,cpx1,cpx2,cpy2,x1,y1], ...} */
     @NativeType("float *")
     public FloatBuffer pts() { return npts(address()); }
-    /** Returns the value of the {@code npts} field. */
+    /** total number of bezier points */
     public int npts() { return nnpts(address()); }
-    /** Returns the value of the {@code closed} field. */
+    /** flag indicating if shapes should be treated as closed */
     @NativeType("char")
     public byte closed() { return nclosed(address()); }
-    /** Returns a {@link FloatBuffer} view of the {@code bounds} field. */
+    /** tight bounding box of the shape {@code [minx,miny,maxx,maxy]} */
     @NativeType("float[4]")
     public FloatBuffer bounds() { return nbounds(address()); }
-    /** Returns the value at the specified index of the {@code bounds} field. */
+    /** tight bounding box of the shape {@code [minx,miny,maxx,maxy]} */
     public float bounds(int index) { return nbounds(address(), index); }
-    /** Returns a {@link NSVGPath} view of the struct pointed to by the {@code next} field. */
+    /** pointer to next path, or {@code NULL} if last element */
     @NativeType("NSVGpath *")
     public NSVGPath next() { return nnext(address()); }
 
@@ -186,20 +176,20 @@ public class NSVGPath extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link FloatBuffer} view of the data pointed to by the {@code pts} field. */
+        /** @return a {@link FloatBuffer} view of the data pointed to by the {@link NSVGPath#pts} field. */
         @NativeType("float *")
         public FloatBuffer pts() { return NSVGPath.npts(address()); }
-        /** Returns the value of the {@code npts} field. */
+        /** @return the value of the {@link NSVGPath#npts} field. */
         public int npts() { return NSVGPath.nnpts(address()); }
-        /** Returns the value of the {@code closed} field. */
+        /** @return the value of the {@link NSVGPath#closed} field. */
         @NativeType("char")
         public byte closed() { return NSVGPath.nclosed(address()); }
-        /** Returns a {@link FloatBuffer} view of the {@code bounds} field. */
+        /** @return a {@link FloatBuffer} view of the {@link NSVGPath#bounds} field. */
         @NativeType("float[4]")
         public FloatBuffer bounds() { return NSVGPath.nbounds(address()); }
-        /** Returns the value at the specified index of the {@code bounds} field. */
+        /** @return the value at the specified index of the {@link NSVGPath#bounds} field. */
         public float bounds(int index) { return NSVGPath.nbounds(address(), index); }
-        /** Returns a {@link NSVGPath} view of the struct pointed to by the {@code next} field. */
+        /** @return a {@link NSVGPath} view of the struct pointed to by the {@link NSVGPath#next} field. */
         @NativeType("NSVGpath *")
         public NSVGPath next() { return NSVGPath.nnext(address()); }
 

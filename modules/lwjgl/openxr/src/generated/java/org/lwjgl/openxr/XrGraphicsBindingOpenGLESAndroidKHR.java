@@ -76,19 +76,19 @@ public class XrGraphicsBindingOpenGLESAndroidKHR extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code display} field. */
+    /** @return the value of the {@code display} field. */
     @NativeType("EGLDisplay")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code config} field. */
+    /** @return the value of the {@code config} field. */
     @NativeType("EGLConfig")
     public long config() { return nconfig(address()); }
-    /** Returns the value of the {@code context} field. */
+    /** @return the value of the {@code context} field. */
     @NativeType("EGLContext")
     public long context() { return ncontext(address()); }
 
@@ -358,19 +358,19 @@ public class XrGraphicsBindingOpenGLESAndroidKHR extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGraphicsBindingOpenGLESAndroidKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrGraphicsBindingOpenGLESAndroidKHR.nnext(address()); }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("EGLDisplay")
         public long display() { return XrGraphicsBindingOpenGLESAndroidKHR.ndisplay(address()); }
-        /** Returns the value of the {@code config} field. */
+        /** @return the value of the {@code config} field. */
         @NativeType("EGLConfig")
         public long config() { return XrGraphicsBindingOpenGLESAndroidKHR.nconfig(address()); }
-        /** Returns the value of the {@code context} field. */
+        /** @return the value of the {@code context} field. */
         @NativeType("EGLContext")
         public long context() { return XrGraphicsBindingOpenGLESAndroidKHR.ncontext(address()); }
 

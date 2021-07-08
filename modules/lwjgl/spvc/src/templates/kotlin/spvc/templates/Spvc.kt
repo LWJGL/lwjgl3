@@ -33,7 +33,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         """
 
     IntConstant("", "C_API_VERSION_MAJOR".."0")
-    IntConstant("", "C_API_VERSION_MINOR".."39")
+    IntConstant("", "C_API_VERSION_MINOR".."45")
     IntConstant("", "C_API_VERSION_PATCH".."0")
 
     IntConstant("", "COMPILER_OPTION_COMMON_BIT"..0x1000000)
@@ -457,6 +457,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "COMPILER_OPTION_MSL_TEXTURE_1D_AS_2D".enum("", "44 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_ENABLE_BASE_INDEX_ZERO".enum("", "45 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_IOS_FRAMEBUFFER_FETCH_SUBPASS".enum("", "46 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_FRAMEBUFFER_FETCH_SUBPASS".enum("", "46 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_INVARIANT_FP_MATH".enum("", "47 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_EMULATE_CUBEMAP_ARRAY".enum("", "48 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_ENABLE_DECORATION_BINDING".enum("", "49 | SPVC_COMPILER_OPTION_MSL_BIT"),
@@ -478,7 +479,15 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "COMPILER_OPTION_MSL_VERTEX_INDEX_TYPE".enum("", "65 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_GLSL_FORCE_FLATTENED_IO_BLOCKS".enum("", "66 | SPVC_COMPILER_OPTION_GLSL_BIT"),
         "COMPILER_OPTION_MSL_MULTIVIEW_LAYERED_RENDERING".enum("", "67 | SPVC_COMPILER_OPTION_MSL_BIT"),
-        "COMPILER_OPTION_MSL_ARRAYED_SUBPASS_INPUT".enum("", "68 | SPVC_COMPILER_OPTION_MSL_BIT")
+        "COMPILER_OPTION_MSL_ARRAYED_SUBPASS_INPUT".enum("", "68 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_R32UI_LINEAR_TEXTURE_ALIGNMENT".enum("", "69 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_R32UI_ALIGNMENT_CONSTANT_ID".enum("", "70 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_HLSL_FLATTEN_MATRIX_VERTEX_INPUT_SEMANTICS".enum("", "71 | SPVC_COMPILER_OPTION_HLSL_BIT"),
+        "COMPILER_OPTION_MSL_IOS_USE_SIMDGROUP_FUNCTIONS".enum("", "72 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_EMULATE_SUBGROUPS".enum("", "73 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_FIXED_SUBGROUP_SIZE".enum("", "74 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_FORCE_SAMPLE_RATE_SHADING".enum("", "75 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_IOS_SUPPORT_BASE_VERTEX_INSTANCE".enum("", "76 | SPVC_COMPILER_OPTION_MSL_BIT"),
     )
 
     void(
@@ -942,6 +951,21 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         spvc_compiler("compiler", ""),
         unsigned_int("desc_set", ""),
         unsigned_int("binding", "")
+    )
+
+    spvc_result(
+        "compiler_msl_set_combined_sampler_suffix",
+        "",
+
+        spvc_compiler("compiler", ""),
+        charUTF8.const.p("suffix", "")
+    )
+
+    charUTF8.const.p(
+        "compiler_msl_get_combined_sampler_suffix",
+        "",
+
+        spvc_compiler("compiler", "")
     )
 
     spvc_result(

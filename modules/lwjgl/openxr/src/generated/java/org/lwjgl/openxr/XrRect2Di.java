@@ -63,9 +63,9 @@ public class XrRect2Di extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link XrOffset2Di} view of the {@code offset} field. */
+    /** @return a {@link XrOffset2Di} view of the {@code offset} field. */
     public XrOffset2Di offset() { return noffset(address()); }
-    /** Returns a {@link XrExtent2Di} view of the {@code extent} field. */
+    /** @return a {@link XrExtent2Di} view of the {@code extent} field. */
     public XrExtent2Di extent() { return nextent(address()); }
 
     /** Copies the specified {@link XrOffset2Di} to the {@code offset} field. */
@@ -291,9 +291,9 @@ public class XrRect2Di extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link XrOffset2Di} view of the {@code offset} field. */
+        /** @return a {@link XrOffset2Di} view of the {@code offset} field. */
         public XrOffset2Di offset() { return XrRect2Di.noffset(address()); }
-        /** Returns a {@link XrExtent2Di} view of the {@code extent} field. */
+        /** @return a {@link XrExtent2Di} view of the {@code extent} field. */
         public XrExtent2Di extent() { return XrRect2Di.nextent(address()); }
 
         /** Copies the specified {@link XrOffset2Di} to the {@code offset} field. */

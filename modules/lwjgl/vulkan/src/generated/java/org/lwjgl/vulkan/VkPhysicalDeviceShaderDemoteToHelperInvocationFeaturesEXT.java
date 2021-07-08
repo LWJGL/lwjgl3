@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTShaderDemoteToHelperInvocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code shaderDemoteToHelperInvocation} &ndash; indicates whether the implementation supports the SPIR-V {@code DemoteToHelperInvocationEXT} capability.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 shaderDemoteToHelperInvocation;
+ *     VkBool32 {@link #shaderDemoteToHelperInvocation};
  * }</code></pre>
  */
 public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends S
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code shaderDemoteToHelperInvocation} field. */
+    /** indicates whether the implementation supports the SPIR-V {@code DemoteToHelperInvocationEXT} capability. */
     @NativeType("VkBool32")
     public boolean shaderDemoteToHelperInvocation() { return nshaderDemoteToHelperInvocation(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends S
     public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderDemoteToHelperInvocation} field. */
+    /** Sets the specified value to the {@link #shaderDemoteToHelperInvocation} field. */
     public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT shaderDemoteToHelperInvocation(@NativeType("VkBool32") boolean value) { nshaderDemoteToHelperInvocation(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends S
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.npNext(address()); }
-        /** Returns the value of the {@code shaderDemoteToHelperInvocation} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT#shaderDemoteToHelperInvocation} field. */
         @NativeType("VkBool32")
         public boolean shaderDemoteToHelperInvocation() { return VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.nshaderDemoteToHelperInvocation(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends S
         public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderDemoteToHelperInvocation} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT#shaderDemoteToHelperInvocation} field. */
         public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.Buffer shaderDemoteToHelperInvocation(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.nshaderDemoteToHelperInvocation(address(), value ? 1 : 0); return this; }
 
     }

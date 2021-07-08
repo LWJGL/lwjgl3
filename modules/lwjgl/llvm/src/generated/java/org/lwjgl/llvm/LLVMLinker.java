@@ -13,6 +13,17 @@ import static org.lwjgl.system.JNI.*;
 
 public class LLVMLinker {
 
+    /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            LinkModules2 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMLinkModules2");
+
+    }
+
     /**
      * This enum is provided for backwards-compatibility only. It has no effect.
      * 
@@ -31,17 +42,6 @@ public class LLVMLinker {
 
     protected LLVMLinker() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            LinkModules2 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMLinkModules2");
-
     }
 
     // --- [ LLVMLinkModules2 ] ---

@@ -75,19 +75,19 @@ public class XrSystemHandTrackingMeshPropertiesMSFT extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code supportsHandTrackingMesh} field. */
+    /** @return the value of the {@code supportsHandTrackingMesh} field. */
     @NativeType("XrBool32")
     public boolean supportsHandTrackingMesh() { return nsupportsHandTrackingMesh(address()) != 0; }
-    /** Returns the value of the {@code maxHandMeshIndexCount} field. */
+    /** @return the value of the {@code maxHandMeshIndexCount} field. */
     @NativeType("uint32_t")
     public int maxHandMeshIndexCount() { return nmaxHandMeshIndexCount(address()); }
-    /** Returns the value of the {@code maxHandMeshVertexCount} field. */
+    /** @return the value of the {@code maxHandMeshVertexCount} field. */
     @NativeType("uint32_t")
     public int maxHandMeshVertexCount() { return nmaxHandMeshVertexCount(address()); }
 
@@ -334,19 +334,19 @@ public class XrSystemHandTrackingMeshPropertiesMSFT extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemHandTrackingMeshPropertiesMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemHandTrackingMeshPropertiesMSFT.nnext(address()); }
-        /** Returns the value of the {@code supportsHandTrackingMesh} field. */
+        /** @return the value of the {@code supportsHandTrackingMesh} field. */
         @NativeType("XrBool32")
         public boolean supportsHandTrackingMesh() { return XrSystemHandTrackingMeshPropertiesMSFT.nsupportsHandTrackingMesh(address()) != 0; }
-        /** Returns the value of the {@code maxHandMeshIndexCount} field. */
+        /** @return the value of the {@code maxHandMeshIndexCount} field. */
         @NativeType("uint32_t")
         public int maxHandMeshIndexCount() { return XrSystemHandTrackingMeshPropertiesMSFT.nmaxHandMeshIndexCount(address()); }
-        /** Returns the value of the {@code maxHandMeshVertexCount} field. */
+        /** @return the value of the {@code maxHandMeshVertexCount} field. */
         @NativeType("uint32_t")
         public int maxHandMeshVertexCount() { return XrSystemHandTrackingMeshPropertiesMSFT.nmaxHandMeshVertexCount(address()); }
 

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     cl_context context,
  *     void *user_data
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class CLContextDestructorCallback extends Callback implements CL
     }
 
     protected CLContextDestructorCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CLContextDestructorCallback(long functionPointer) {

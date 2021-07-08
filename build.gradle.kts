@@ -63,8 +63,10 @@ enum class Platforms(val classifier: String) {
     LINUX_ARM64("linux-arm64"),
     LINUX_ARM32("linux-arm32"),
     MACOS("macos"),
+    MACOS_ARM64("macos-arm64"),
     WINDOWS("windows"),
-    WINDOWS_X86("windows-x86");
+    WINDOWS_X86("windows-x86"),
+    WINDOWS_ARM64("windows-arm64");
 
     companion object {
         val ALL = values()
@@ -86,12 +88,16 @@ enum class Artifacts(
     BGFX(
         "lwjgl-bgfx", "LWJGL - bgfx bindings",
         "A cross-platform, graphics API agnostic rendering library. It provides a high performance, low level abstraction for common platform graphics APIs like OpenGL, Direct3D and Apple Metal.",
-        *Platforms.ALL
+        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32,
+        Platforms.MACOS, Platforms.MACOS_ARM64,
+        Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
     BULLET(
         "lwjgl-bullet", "LWJGL - Bullet bindings",
         "Real-time collision detection and multi-physics simulation for VR, games, visual effects, robotics, machine learning etc.",
-        *Platforms.ALL
+        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32,
+        Platforms.MACOS,
+        Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
     CUDA(
         "lwjgl-cuda", "LWJGL - CUDA bindings",
@@ -143,7 +149,9 @@ enum class Artifacts(
     MEOW(
         "lwjgl-meow", "LWJGL - Meow hash bindings",
         "An extremely fast non-cryptographic hash.",
-        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
+        Platforms.LINUX, Platforms.LINUX_ARM64,
+        Platforms.MACOS, Platforms.MACOS_ARM64,
+        Platforms.WINDOWS, Platforms.WINDOWS_X86, Platforms.WINDOWS_ARM64
     ),
     MESHOPTIMIZER(
         "lwjgl-meshoptimizer", "LWJGL - meshoptimizer bindings",
@@ -158,7 +166,7 @@ enum class Artifacts(
     NFD(
         "lwjgl-nfd", "LWJGL - Native File Dialog bindings",
         "A tiny, neat C library that portably invokes native file open and save dialogs.",
-        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS, Platforms.WINDOWS_X86
+        *Platforms.ALL
     ),
     NUKLEAR(
         "lwjgl-nuklear", "LWJGL - Nuklear bindings",
@@ -266,7 +274,7 @@ enum class Artifacts(
     VULKAN(
         "lwjgl-vulkan", "LWJGL - Vulkan bindings",
         "A new generation graphics and compute API that provides high-efficiency, cross-platform access to modern GPUs used in a wide variety of devices from PCs and consoles to mobile phones and embedded platforms.",
-        Platforms.MACOS
+        Platforms.MACOS, Platforms.MACOS_ARM64
     ),
     XXHASH(
         "lwjgl-xxhash", "LWJGL - xxHash bindings",

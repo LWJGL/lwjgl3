@@ -14,19 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code containerHandle} &ndash; property container handle of the device with the haptic component</li>
- * <li>{@code componentHandle} &ndash; which haptic component needs to vibrate</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VREvent_HapticVibration_t {
- *     uint64_t containerHandle;
- *     uint64_t componentHandle;
+ *     uint64_t {@link #containerHandle};
+ *     uint64_t {@link #componentHandle};
  *     float fDurationSeconds;
  *     float fFrequency;
  *     float fAmplitude;
@@ -81,17 +74,17 @@ public class VREventHapticVibration extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code containerHandle} field. */
+    /** property container handle of the device with the haptic component */
     @NativeType("uint64_t")
     public long containerHandle() { return ncontainerHandle(address()); }
-    /** Returns the value of the {@code componentHandle} field. */
+    /** which haptic component needs to vibrate */
     @NativeType("uint64_t")
     public long componentHandle() { return ncomponentHandle(address()); }
-    /** Returns the value of the {@code fDurationSeconds} field. */
+    /** @return the value of the {@code fDurationSeconds} field. */
     public float fDurationSeconds() { return nfDurationSeconds(address()); }
-    /** Returns the value of the {@code fFrequency} field. */
+    /** @return the value of the {@code fFrequency} field. */
     public float fFrequency() { return nfFrequency(address()); }
-    /** Returns the value of the {@code fAmplitude} field. */
+    /** @return the value of the {@code fAmplitude} field. */
     public float fAmplitude() { return nfAmplitude(address()); }
 
     // -----------------------------------
@@ -174,17 +167,17 @@ public class VREventHapticVibration extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code containerHandle} field. */
+        /** @return the value of the {@link VREventHapticVibration#containerHandle} field. */
         @NativeType("uint64_t")
         public long containerHandle() { return VREventHapticVibration.ncontainerHandle(address()); }
-        /** Returns the value of the {@code componentHandle} field. */
+        /** @return the value of the {@link VREventHapticVibration#componentHandle} field. */
         @NativeType("uint64_t")
         public long componentHandle() { return VREventHapticVibration.ncomponentHandle(address()); }
-        /** Returns the value of the {@code fDurationSeconds} field. */
+        /** @return the value of the {@code fDurationSeconds} field. */
         public float fDurationSeconds() { return VREventHapticVibration.nfDurationSeconds(address()); }
-        /** Returns the value of the {@code fFrequency} field. */
+        /** @return the value of the {@code fFrequency} field. */
         public float fFrequency() { return VREventHapticVibration.nfFrequency(address()); }
-        /** Returns the value of the {@code fAmplitude} field. */
+        /** @return the value of the {@code fAmplitude} field. */
         public float fAmplitude() { return VREventHapticVibration.nfAmplitude(address()); }
 
     }

@@ -99,37 +99,37 @@ public class XrSwapchainCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code createFlags} field. */
+    /** @return the value of the {@code createFlags} field. */
     @NativeType("XrSwapchainCreateFlags")
     public long createFlags() { return ncreateFlags(address()); }
-    /** Returns the value of the {@code usageFlags} field. */
+    /** @return the value of the {@code usageFlags} field. */
     @NativeType("XrSwapchainUsageFlags")
     public long usageFlags() { return nusageFlags(address()); }
-    /** Returns the value of the {@code format} field. */
+    /** @return the value of the {@code format} field. */
     @NativeType("int64_t")
     public long format() { return nformat(address()); }
-    /** Returns the value of the {@code sampleCount} field. */
+    /** @return the value of the {@code sampleCount} field. */
     @NativeType("uint32_t")
     public int sampleCount() { return nsampleCount(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** @return the value of the {@code width} field. */
     @NativeType("uint32_t")
     public int width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** @return the value of the {@code height} field. */
     @NativeType("uint32_t")
     public int height() { return nheight(address()); }
-    /** Returns the value of the {@code faceCount} field. */
+    /** @return the value of the {@code faceCount} field. */
     @NativeType("uint32_t")
     public int faceCount() { return nfaceCount(address()); }
-    /** Returns the value of the {@code arraySize} field. */
+    /** @return the value of the {@code arraySize} field. */
     @NativeType("uint32_t")
     public int arraySize() { return narraySize(address()); }
-    /** Returns the value of the {@code mipCount} field. */
+    /** @return the value of the {@code mipCount} field. */
     @NativeType("uint32_t")
     public int mipCount() { return nmipCount(address()); }
 
@@ -424,37 +424,37 @@ public class XrSwapchainCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSwapchainCreateInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSwapchainCreateInfo.nnext(address()); }
-        /** Returns the value of the {@code createFlags} field. */
+        /** @return the value of the {@code createFlags} field. */
         @NativeType("XrSwapchainCreateFlags")
         public long createFlags() { return XrSwapchainCreateInfo.ncreateFlags(address()); }
-        /** Returns the value of the {@code usageFlags} field. */
+        /** @return the value of the {@code usageFlags} field. */
         @NativeType("XrSwapchainUsageFlags")
         public long usageFlags() { return XrSwapchainCreateInfo.nusageFlags(address()); }
-        /** Returns the value of the {@code format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("int64_t")
         public long format() { return XrSwapchainCreateInfo.nformat(address()); }
-        /** Returns the value of the {@code sampleCount} field. */
+        /** @return the value of the {@code sampleCount} field. */
         @NativeType("uint32_t")
         public int sampleCount() { return XrSwapchainCreateInfo.nsampleCount(address()); }
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@code width} field. */
         @NativeType("uint32_t")
         public int width() { return XrSwapchainCreateInfo.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@code height} field. */
         @NativeType("uint32_t")
         public int height() { return XrSwapchainCreateInfo.nheight(address()); }
-        /** Returns the value of the {@code faceCount} field. */
+        /** @return the value of the {@code faceCount} field. */
         @NativeType("uint32_t")
         public int faceCount() { return XrSwapchainCreateInfo.nfaceCount(address()); }
-        /** Returns the value of the {@code arraySize} field. */
+        /** @return the value of the {@code arraySize} field. */
         @NativeType("uint32_t")
         public int arraySize() { return XrSwapchainCreateInfo.narraySize(address()); }
-        /** Returns the value of the {@code mipCount} field. */
+        /** @return the value of the {@code mipCount} field. */
         @NativeType("uint32_t")
         public int mipCount() { return XrSwapchainCreateInfo.nmipCount(address()); }
 

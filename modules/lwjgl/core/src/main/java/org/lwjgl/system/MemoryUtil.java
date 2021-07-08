@@ -7,12 +7,13 @@ package org.lwjgl.system;
 import org.lwjgl.*;
 import org.lwjgl.system.MemoryManage.*;
 import org.lwjgl.system.MemoryUtil.MemoryAllocationReport.*;
-import org.lwjgl.system.jni.*;
 
 import javax.annotation.*;
+import java.lang.reflect.*;
 import java.nio.*;
 import java.nio.charset.*;
 import java.util.*;
+import java.util.function.*;
 
 import static java.lang.Character.*;
 import static java.lang.Math.*;
@@ -98,7 +99,6 @@ public final class MemoryUtil {
     static {
         Library.initialize();
 
-        //ACCESSOR = MemoryAccess.getInstance();
         ByteBuffer bb = ByteBuffer.allocateDirect(0).order(NATIVE_ORDER);
 
         BUFFER_BYTE = bb.getClass();
@@ -119,18 +119,13 @@ public final class MemoryUtil {
 
             ADDRESS = getAddressOffset();
 
-            int oopSize = UNSAFE.arrayIndexScale(Object[].class);
-
-            long offset = (max(max(max(MARK, POSITION), LIMIT), CAPACITY) + 4 + (oopSize - 1)) & ~Integer.toUnsignedLong(oopSize - 1);
-            long a      = memAddress(bb);
-
-            PARENT_BYTE = getParentOffset(offset, oopSize, bb, bb.duplicate().order(bb.order()));
-            PARENT_SHORT = getParentOffset(offset, oopSize, memShortBuffer(a, 0), bb.asShortBuffer());
-            PARENT_CHAR = getParentOffset(offset, oopSize, memCharBuffer(a, 0), bb.asCharBuffer());
-            PARENT_INT = getParentOffset(offset, oopSize, memIntBuffer(a, 0), bb.asIntBuffer());
-            PARENT_LONG = getParentOffset(offset, oopSize, memLongBuffer(a, 0), bb.asLongBuffer());
-            PARENT_FLOAT = getParentOffset(offset, oopSize, memFloatBuffer(a, 0), bb.asFloatBuffer());
-            PARENT_DOUBLE = getParentOffset(offset, oopSize, memDoubleBuffer(a, 0), bb.asDoubleBuffer());
+            PARENT_BYTE = getFieldOffsetObject(bb.duplicate().order(bb.order()), bb);
+            PARENT_SHORT = getFieldOffsetObject(bb.asShortBuffer(), bb);
+            PARENT_CHAR = getFieldOffsetObject(bb.asCharBuffer(), bb);
+            PARENT_INT = getFieldOffsetObject(bb.asIntBuffer(), bb);
+            PARENT_LONG = getFieldOffsetObject(bb.asLongBuffer(), bb);
+            PARENT_FLOAT = getFieldOffsetObject(bb.asFloatBuffer(), bb);
+            PARENT_DOUBLE = getFieldOffsetObject(bb.asDoubleBuffer(), bb);
         } catch (Throwable t) {
             throw new UnsupportedOperationException(t);
         }
@@ -1963,18 +1958,6 @@ public final class MemoryUtil {
      */
     public static native <T> T memGlobalRefToObject(long globalRef);
 
-    /** Deprecated, use {@link JNINativeInterface#NewGlobalRef} instead. */
-    @Deprecated public static long memNewGlobalRef(Object obj) { return NewGlobalRef(obj); }
-
-    /** Deprecated, use {@link JNINativeInterface#DeleteGlobalRef} instead. */
-    @Deprecated public static void memDeleteGlobalRef(long globalRef) { DeleteGlobalRef(globalRef); }
-
-    /** Deprecated, use {@link JNINativeInterface#NewWeakGlobalRef} instead. */
-    @Deprecated public static long memNewWeakGlobalRef(Object obj) { return NewWeakGlobalRef(obj); }
-
-    /** Deprecated, use {@link JNINativeInterface#DeleteWeakGlobalRef} instead. */
-    @Deprecated public static void memDeleteWeakGlobalRef(long globalRef) { DeleteWeakGlobalRef(globalRef);}
-
     /*  -------------------------------------
         -------------------------------------
                   TEXT ENCODING API
@@ -3128,78 +3111,65 @@ public final class MemoryUtil {
         throw new UnsupportedOperationException("LWJGL requires sun.misc.Unsafe to be available.");
     }
 
-    private static long getAddressOffset() {
-        long MAGIC_ADDRESS = 0xDEADBEEF8BADF00DL;
-        if (BITS32) {
-            MAGIC_ADDRESS &= 0xFFFFFFFFL;
+    private static long getFieldOffset(Class<?> containerType, Class<?> fieldType, LongPredicate predicate) {
+        Class<?> c = containerType;
+        while (c != Object.class) {
+            Field[] fields = c.getDeclaredFields();
+            for (Field field : fields) {
+                if (!field.getType().isAssignableFrom(fieldType) || Modifier.isStatic(field.getModifiers()) || field.isSynthetic()) {
+                    continue;
+                }
+
+                long offset = UNSAFE.objectFieldOffset(field);
+                if (predicate.test(offset)) {
+                    return offset;
+                }
+            }
+            c = c.getSuperclass();
         }
+        throw new UnsupportedOperationException("Failed to find field offset in class.");
+    }
+
+    private static long getFieldOffsetInt(Object container, int value) {
+        return getFieldOffset(container.getClass(), int.class, offset -> UNSAFE.getInt(container, offset) == value);
+    }
+
+    private static long getFieldOffsetObject(Object container, Object value) {
+        return getFieldOffset(container.getClass(), value.getClass(), offset -> UNSAFE.getObject(container, offset) == value);
+    }
+
+    private static long getAddressOffset() {
+        long MAGIC_ADDRESS = 0xDEADBEEF8BADF00DL & (BITS32 ? 0xFFFF_FFFFL : 0xFFFF_FFFF_FFFF_FFFFL);
 
         ByteBuffer bb = Objects.requireNonNull(NewDirectByteBuffer(MAGIC_ADDRESS, 0));
 
-        long offset = 8L; // 8 byte aligned, cannot be at 0
-        while (true) {
-            if (UNSAFE.getLong(bb, offset) == MAGIC_ADDRESS) {
-                return offset;
-            }
-            offset += 8L;
-        }
+        return getFieldOffset(bb.getClass(), long.class, offset -> UNSAFE.getLong(bb, offset) == MAGIC_ADDRESS);
     }
 
     private static final int MAGIC_CAPACITY = 0x0D15EA5E;
     private static final int MAGIC_POSITION = 0x00FACADE;
 
-    private static long getIntFieldOffset(ByteBuffer bb, int magicValue) {
-        long offset = 4L; // 4 byte aligned, cannot be at 0
-        while (true) {
-            if (UNSAFE.getInt(bb, offset) == magicValue) {
-                return offset;
-            }
-            offset += 4L;
-        }
-    }
-
     private static long getMarkOffset() {
         ByteBuffer bb = Objects.requireNonNull(NewDirectByteBuffer(1L, 0));
-        return getIntFieldOffset(bb, -1);
+        return getFieldOffsetInt(bb, -1);
     }
 
     private static long getPositionOffset() {
         ByteBuffer bb = Objects.requireNonNull(NewDirectByteBuffer(-1L, MAGIC_CAPACITY));
         bb.position(MAGIC_POSITION);
-        return getIntFieldOffset(bb, MAGIC_POSITION);
+        return getFieldOffsetInt(bb, MAGIC_POSITION);
     }
 
     private static long getLimitOffset() {
         ByteBuffer bb = Objects.requireNonNull(NewDirectByteBuffer(-1L, MAGIC_CAPACITY));
         bb.limit(MAGIC_POSITION);
-        return getIntFieldOffset(bb, MAGIC_POSITION);
+        return getFieldOffsetInt(bb, MAGIC_POSITION);
     }
 
     private static long getCapacityOffset() {
         ByteBuffer bb = Objects.requireNonNull(NewDirectByteBuffer(-1L, MAGIC_CAPACITY));
         bb.limit(0);
-        return getIntFieldOffset(bb, MAGIC_CAPACITY);
-    }
-
-    private static <T extends Buffer> long getParentOffset(long offset, int oopSize, T buffer, T bufferWithAttachment) {
-        switch (oopSize) {
-            case Integer.BYTES: // 32-bit or 64-bit with compressed oops
-                while (true) {
-                    if (UNSAFE.getInt(buffer, offset) != UNSAFE.getInt(bufferWithAttachment, offset)) {
-                        return offset;
-                    }
-                    offset += oopSize;
-                }
-            case Long.BYTES: // 64-bit with uncompressed oops
-                while (true) {
-                    if (UNSAFE.getLong(buffer, offset) != UNSAFE.getLong(bufferWithAttachment, offset)) {
-                        return offset;
-                    }
-                    offset += oopSize;
-                }
-            default:
-                throw new IllegalStateException();
-        }
+        return getFieldOffsetInt(bb, MAGIC_CAPACITY);
     }
 
     @SuppressWarnings("unchecked")

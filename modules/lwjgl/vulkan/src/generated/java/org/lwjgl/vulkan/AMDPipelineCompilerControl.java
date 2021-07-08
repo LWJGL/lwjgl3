@@ -12,6 +12,8 @@ package org.lwjgl.vulkan;
  * 
  * <p>None.</p>
  * 
+ * <h5>VK_AMD_pipeline_compiler_control</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_AMD_pipeline_compiler_control}</dd>
@@ -29,6 +31,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Matthaeus G. Chajdas <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_pipeline_compiler_control:%20&amp;body=@anteru%20">anteru</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-07-26</dd>
  * <dt><b>IP Status</b></dt>

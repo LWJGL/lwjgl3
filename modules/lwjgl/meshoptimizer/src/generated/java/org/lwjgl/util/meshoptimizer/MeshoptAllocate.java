@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void * (*) (
+ * void * (*{@link #invoke}) (
  *     size_t size
  * )</code></pre>
  */
@@ -49,7 +49,7 @@ public abstract class MeshoptAllocate extends Callback implements MeshoptAllocat
     }
 
     protected MeshoptAllocate() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     MeshoptAllocate(long functionPointer) {

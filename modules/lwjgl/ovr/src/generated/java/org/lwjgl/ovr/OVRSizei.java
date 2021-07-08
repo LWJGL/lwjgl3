@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * A 2D size with integer components.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code w} &ndash; the width</li>
- * <li>{@code h} &ndash; the height</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ovrSizei {
- *     int w;
- *     int h;
+ *     int {@link #w};
+ *     int {@link #h};
  * }</code></pre>
  */
 @NativeType("struct ovrSizei")
@@ -73,14 +66,14 @@ public class OVRSizei extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code w} field. */
+    /** the width */
     public int w() { return nw(address()); }
-    /** Returns the value of the {@code h} field. */
+    /** the height */
     public int h() { return nh(address()); }
 
-    /** Sets the specified value to the {@code w} field. */
+    /** Sets the specified value to the {@link #w} field. */
     public OVRSizei w(int value) { nw(address(), value); return this; }
-    /** Sets the specified value to the {@code h} field. */
+    /** Sets the specified value to the {@link #h} field. */
     public OVRSizei h(int value) { nh(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -297,14 +290,14 @@ public class OVRSizei extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code w} field. */
+        /** @return the value of the {@link OVRSizei#w} field. */
         public int w() { return OVRSizei.nw(address()); }
-        /** Returns the value of the {@code h} field. */
+        /** @return the value of the {@link OVRSizei#h} field. */
         public int h() { return OVRSizei.nh(address()); }
 
-        /** Sets the specified value to the {@code w} field. */
+        /** Sets the specified value to the {@link OVRSizei#w} field. */
         public OVRSizei.Buffer w(int value) { OVRSizei.nw(address(), value); return this; }
-        /** Sets the specified value to the {@code h} field. */
+        /** Sets the specified value to the {@link OVRSizei#h} field. */
         public OVRSizei.Buffer h(int value) { OVRSizei.nh(address(), value); return this; }
 
     }

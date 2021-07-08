@@ -18,19 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying a viewport.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code xcoeff} &ndash; {@code xcoeff} and {@code ycoeff} are the viewport&#8217;s W scaling factor for x and y respectively.</li>
- * <li>{@code ycoeff} &ndash; see {@code xcoeff}</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkViewportWScalingNV {
- *     float xcoeff;
- *     float ycoeff;
+ *     float {@link #xcoeff};
+ *     float {@link #ycoeff};
  * }</code></pre>
  */
 public class VkViewportWScalingNV extends Struct implements NativeResource {
@@ -72,14 +65,14 @@ public class VkViewportWScalingNV extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code xcoeff} field. */
+    /** {@code xcoeff} and {@code ycoeff} are the viewport&#8217;s W scaling factor for x and y respectively. */
     public float xcoeff() { return nxcoeff(address()); }
-    /** Returns the value of the {@code ycoeff} field. */
+    /** see {@code xcoeff} */
     public float ycoeff() { return nycoeff(address()); }
 
-    /** Sets the specified value to the {@code xcoeff} field. */
+    /** Sets the specified value to the {@link #xcoeff} field. */
     public VkViewportWScalingNV xcoeff(float value) { nxcoeff(address(), value); return this; }
-    /** Sets the specified value to the {@code ycoeff} field. */
+    /** Sets the specified value to the {@link #ycoeff} field. */
     public VkViewportWScalingNV ycoeff(float value) { nycoeff(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -296,14 +289,14 @@ public class VkViewportWScalingNV extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code xcoeff} field. */
+        /** @return the value of the {@link VkViewportWScalingNV#xcoeff} field. */
         public float xcoeff() { return VkViewportWScalingNV.nxcoeff(address()); }
-        /** Returns the value of the {@code ycoeff} field. */
+        /** @return the value of the {@link VkViewportWScalingNV#ycoeff} field. */
         public float ycoeff() { return VkViewportWScalingNV.nycoeff(address()); }
 
-        /** Sets the specified value to the {@code xcoeff} field. */
+        /** Sets the specified value to the {@link VkViewportWScalingNV#xcoeff} field. */
         public VkViewportWScalingNV.Buffer xcoeff(float value) { VkViewportWScalingNV.nxcoeff(address(), value); return this; }
-        /** Sets the specified value to the {@code ycoeff} field. */
+        /** Sets the specified value to the {@link VkViewportWScalingNV#ycoeff} field. */
         public VkViewportWScalingNV.Buffer ycoeff(float value) { VkViewportWScalingNV.nycoeff(address(), value); return this; }
 
     }

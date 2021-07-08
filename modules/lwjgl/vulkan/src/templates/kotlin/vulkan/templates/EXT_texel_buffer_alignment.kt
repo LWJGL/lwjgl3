@@ -13,6 +13,7 @@ val EXT_texel_buffer_alignment = "EXTTexelBufferAlignment".nativeClassVK("EXT_te
         """
         This extension adds more expressive alignment requirements for uniform and storage texel buffers. Some implementations have single texel alignment requirements that can't be expressed via ##VkPhysicalDeviceLimits{@code ::minTexelBufferOffsetAlignment}.
 
+        <h5>VK_EXT_texel_buffer_alignment</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_EXT_texel_buffer_alignment}</dd>
@@ -36,7 +37,10 @@ val EXT_texel_buffer_alignment = "EXTTexelBufferAlignment".nativeClassVK("EXT_te
             <dd><ul>
                 <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_texel_buffer_alignment:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-06-06</dd>
 

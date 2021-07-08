@@ -23,27 +23,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_FORMAT_PROPERTIES_2}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkDrmFormatModifierPropertiesListEXT}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
  * <h5>See Also</h5>
  * 
  * <p>{@link VkFormatProperties}, {@link VK11#vkGetPhysicalDeviceFormatProperties2 GetPhysicalDeviceFormatProperties2}, {@link KHRGetPhysicalDeviceProperties2#vkGetPhysicalDeviceFormatProperties2KHR GetPhysicalDeviceFormatProperties2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code formatProperties} &ndash; a {@link VkFormatProperties} structure describing features supported by the requested format.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkFormatProperties2 {
- *     VkStructureType sType;
- *     void * pNext;
- *     {@link VkFormatProperties VkFormatProperties} formatProperties;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     {@link VkFormatProperties VkFormatProperties} {@link #formatProperties};
  * }</code></pre>
  */
 public class VkFormatProperties2 extends Struct implements NativeResource {
@@ -88,18 +81,18 @@ public class VkFormatProperties2 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns a {@link VkFormatProperties} view of the {@code formatProperties} field. */
+    /** a {@link VkFormatProperties} structure describing features supported by the requested format. */
     public VkFormatProperties formatProperties() { return nformatProperties(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkFormatProperties2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkFormatProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,18 +311,18 @@ public class VkFormatProperties2 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkFormatProperties2#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkFormatProperties2.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkFormatProperties2#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkFormatProperties2.npNext(address()); }
-        /** Returns a {@link VkFormatProperties} view of the {@code formatProperties} field. */
+        /** @return a {@link VkFormatProperties} view of the {@link VkFormatProperties2#formatProperties} field. */
         public VkFormatProperties formatProperties() { return VkFormatProperties2.nformatProperties(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkFormatProperties2#sType} field. */
         public VkFormatProperties2.Buffer sType(@NativeType("VkStructureType") int value) { VkFormatProperties2.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkFormatProperties2#pNext} field. */
         public VkFormatProperties2.Buffer pNext(@NativeType("void *") long value) { VkFormatProperties2.npNext(address(), value); return this; }
 
     }

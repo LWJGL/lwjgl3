@@ -71,13 +71,13 @@ public class XrVector4f extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** Returns the value of the {@code z} field. */
+    /** @return the value of the {@code z} field. */
     public float z() { return nz(address()); }
-    /** Returns the value of the {@code w} field. */
+    /** @return the value of the {@code w} field. */
     public float w() { return nw(address()); }
 
     /** Sets the specified value to the {@code x} field. */
@@ -315,13 +315,13 @@ public class XrVector4f extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return XrVector4f.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return XrVector4f.ny(address()); }
-        /** Returns the value of the {@code z} field. */
+        /** @return the value of the {@code z} field. */
         public float z() { return XrVector4f.nz(address()); }
-        /** Returns the value of the {@code w} field. */
+        /** @return the value of the {@code w} field. */
         public float w() { return XrVector4f.nw(address()); }
 
         /** Sets the specified value to the {@code x} field. */

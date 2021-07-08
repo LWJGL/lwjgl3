@@ -13,10 +13,6 @@ import static org.lwjgl.system.JNI.*;
 /** Native bindings to libc, the Standard C Library. */
 public class LibC {
 
-    protected LibC() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code LibSystem.getLibrary()}. */
     public static final class Functions {
 
@@ -26,6 +22,10 @@ public class LibC {
         public static final long
             getpid = apiGetFunctionAddress(LibSystem.getLibrary(), "getpid");
 
+    }
+
+    protected LibC() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ getpid ] ---

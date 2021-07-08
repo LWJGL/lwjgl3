@@ -34,6 +34,8 @@ import org.lwjgl.system.*;
  */
 public class EXTTextureView {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameters of GetTexParameterfv and GetTexParameteriv. */
     public static final int
         GL_TEXTURE_VIEW_MIN_LEVEL_EXT  = 0x82DB,
@@ -41,8 +43,6 @@ public class EXTTextureView {
         GL_TEXTURE_VIEW_MIN_LAYER_EXT  = 0x82DD,
         GL_TEXTURE_VIEW_NUM_LAYERS_EXT = 0x82DE,
         GL_TEXTURE_IMMUTABLE_LEVELS    = 0x82DF;
-
-    static { GLES.initialize(); }
 
     protected EXTTextureView() {
         throw new UnsupportedOperationException();

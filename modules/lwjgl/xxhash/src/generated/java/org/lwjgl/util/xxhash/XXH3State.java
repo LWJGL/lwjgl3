@@ -109,50 +109,50 @@ public class XXH3State extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link LongBuffer} view of the {@code acc} field. */
+    /** @return a {@link LongBuffer} view of the {@code acc} field. */
     @NativeType("XXH32_hash_t[8]")
     public LongBuffer acc() { return nacc(address()); }
-    /** Returns the value at the specified index of the {@code acc} field. */
+    /** @return the value at the specified index of the {@code acc} field. */
     @NativeType("XXH32_hash_t")
     public long acc(int index) { return nacc(address(), index); }
-    /** Returns a {@link ByteBuffer} view of the {@code customSecret} field. */
+    /** @return a {@link ByteBuffer} view of the {@code customSecret} field. */
     @NativeType("unsigned char[XXH_SECRET_DEFAULT_SIZE]")
     public ByteBuffer customSecret() { return ncustomSecret(address()); }
-    /** Returns the value at the specified index of the {@code customSecret} field. */
+    /** @return the value at the specified index of the {@code customSecret} field. */
     @NativeType("unsigned char")
     public byte customSecret(int index) { return ncustomSecret(address(), index); }
-    /** Returns a {@link ByteBuffer} view of the {@code buffer} field. */
+    /** @return a {@link ByteBuffer} view of the {@code buffer} field. */
     @NativeType("unsigned char[256]")
     public ByteBuffer buffer() { return nbuffer(address()); }
-    /** Returns the value at the specified index of the {@code buffer} field. */
+    /** @return the value at the specified index of the {@code buffer} field. */
     @NativeType("unsigned char")
     public byte buffer(int index) { return nbuffer(address(), index); }
-    /** Returns the value of the {@code bufferedSize} field. */
+    /** @return the value of the {@code bufferedSize} field. */
     @NativeType("XXH32_hash_t")
     public int bufferedSize() { return nbufferedSize(address()); }
-    /** Returns the value of the {@code reserved32} field. */
+    /** @return the value of the {@code reserved32} field. */
     @NativeType("XXH32_hash_t")
     public int reserved32() { return nreserved32(address()); }
-    /** Returns the value of the {@code nbStripesSoFar} field. */
+    /** @return the value of the {@code nbStripesSoFar} field. */
     @NativeType("size_t")
     public long nbStripesSoFar() { return nnbStripesSoFar(address()); }
-    /** Returns the value of the {@code totalLen} field. */
+    /** @return the value of the {@code totalLen} field. */
     @NativeType("XXH32_hash_t")
     public long totalLen() { return ntotalLen(address()); }
-    /** Returns the value of the {@code nbStripesPerBlock} field. */
+    /** @return the value of the {@code nbStripesPerBlock} field. */
     @NativeType("size_t")
     public long nbStripesPerBlock() { return nnbStripesPerBlock(address()); }
-    /** Returns the value of the {@code secretLimit} field. */
+    /** @return the value of the {@code secretLimit} field. */
     @NativeType("size_t")
     public long secretLimit() { return nsecretLimit(address()); }
-    /** Returns the value of the {@code seed} field. */
+    /** @return the value of the {@code seed} field. */
     @NativeType("XXH32_hash_t")
     public long seed() { return nseed(address()); }
-    /** Returns the value of the {@code reserved64} field. */
+    /** @return the value of the {@code reserved64} field. */
     @NativeType("XXH32_hash_t")
     public long reserved64() { return nreserved64(address()); }
     /**
-     * Returns a {@link ByteBuffer} view of the data pointed to by the {@code extSecret} field.
+     * @return a {@link ByteBuffer} view of the data pointed to by the {@code extSecret} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
@@ -377,50 +377,50 @@ public class XXH3State extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link LongBuffer} view of the {@code acc} field. */
+        /** @return a {@link LongBuffer} view of the {@code acc} field. */
         @NativeType("XXH32_hash_t[8]")
         public LongBuffer acc() { return XXH3State.nacc(address()); }
-        /** Returns the value at the specified index of the {@code acc} field. */
+        /** @return the value at the specified index of the {@code acc} field. */
         @NativeType("XXH32_hash_t")
         public long acc(int index) { return XXH3State.nacc(address(), index); }
-        /** Returns a {@link ByteBuffer} view of the {@code customSecret} field. */
+        /** @return a {@link ByteBuffer} view of the {@code customSecret} field. */
         @NativeType("unsigned char[XXH_SECRET_DEFAULT_SIZE]")
         public ByteBuffer customSecret() { return XXH3State.ncustomSecret(address()); }
-        /** Returns the value at the specified index of the {@code customSecret} field. */
+        /** @return the value at the specified index of the {@code customSecret} field. */
         @NativeType("unsigned char")
         public byte customSecret(int index) { return XXH3State.ncustomSecret(address(), index); }
-        /** Returns a {@link ByteBuffer} view of the {@code buffer} field. */
+        /** @return a {@link ByteBuffer} view of the {@code buffer} field. */
         @NativeType("unsigned char[256]")
         public ByteBuffer buffer() { return XXH3State.nbuffer(address()); }
-        /** Returns the value at the specified index of the {@code buffer} field. */
+        /** @return the value at the specified index of the {@code buffer} field. */
         @NativeType("unsigned char")
         public byte buffer(int index) { return XXH3State.nbuffer(address(), index); }
-        /** Returns the value of the {@code bufferedSize} field. */
+        /** @return the value of the {@code bufferedSize} field. */
         @NativeType("XXH32_hash_t")
         public int bufferedSize() { return XXH3State.nbufferedSize(address()); }
-        /** Returns the value of the {@code reserved32} field. */
+        /** @return the value of the {@code reserved32} field. */
         @NativeType("XXH32_hash_t")
         public int reserved32() { return XXH3State.nreserved32(address()); }
-        /** Returns the value of the {@code nbStripesSoFar} field. */
+        /** @return the value of the {@code nbStripesSoFar} field. */
         @NativeType("size_t")
         public long nbStripesSoFar() { return XXH3State.nnbStripesSoFar(address()); }
-        /** Returns the value of the {@code totalLen} field. */
+        /** @return the value of the {@code totalLen} field. */
         @NativeType("XXH32_hash_t")
         public long totalLen() { return XXH3State.ntotalLen(address()); }
-        /** Returns the value of the {@code nbStripesPerBlock} field. */
+        /** @return the value of the {@code nbStripesPerBlock} field. */
         @NativeType("size_t")
         public long nbStripesPerBlock() { return XXH3State.nnbStripesPerBlock(address()); }
-        /** Returns the value of the {@code secretLimit} field. */
+        /** @return the value of the {@code secretLimit} field. */
         @NativeType("size_t")
         public long secretLimit() { return XXH3State.nsecretLimit(address()); }
-        /** Returns the value of the {@code seed} field. */
+        /** @return the value of the {@code seed} field. */
         @NativeType("XXH32_hash_t")
         public long seed() { return XXH3State.nseed(address()); }
-        /** Returns the value of the {@code reserved64} field. */
+        /** @return the value of the {@code reserved64} field. */
         @NativeType("XXH32_hash_t")
         public long reserved64() { return XXH3State.nreserved64(address()); }
         /**
-         * Returns a {@link ByteBuffer} view of the data pointed to by the {@code extSecret} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@code extSecret} field.
          *
          * @param capacity the number of elements in the returned buffer
          */

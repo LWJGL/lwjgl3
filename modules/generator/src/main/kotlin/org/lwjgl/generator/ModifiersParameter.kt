@@ -365,15 +365,3 @@ class PointerArray(
         }
     }
 }
-
-/** Marks a callback parameter as the "user data" parameter. */
-class UserData(
-    override val reference: String = ""
-) : ParameterModifier, ReferenceModifier {
-    override val isSpecial = false
-    override fun validate(param: Parameter) {
-        require(param.nativeType is PointerType<*> && param.nativeType.elementType is OpaqueType) {
-            "The UserData modifier can only be applied to opaque pointer parameters."
-        }
-    }
-}

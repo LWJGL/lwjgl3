@@ -18,27 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Statistics for a database in the environment.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code ms_psize} &ndash; Size of a database page. This is currently the same for all databases.</li>
- * <li>{@code ms_depth} &ndash; Depth (height) of the B-tree.</li>
- * <li>{@code ms_branch_pages} &ndash; Number of internal (non-leaf) pages.</li>
- * <li>{@code ms_leaf_pages} &ndash; Number of leaf pages.</li>
- * <li>{@code ms_overflow_pages} &ndash; Number of overflow pages.</li>
- * <li>{@code ms_entries} &ndash; Number of data items.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct MDB_stat {
- *     unsigned int ms_psize;
- *     unsigned int ms_depth;
- *     size_t ms_branch_pages;
- *     size_t ms_leaf_pages;
- *     size_t ms_overflow_pages;
- *     size_t ms_entries;
+ *     unsigned int {@link #ms_psize};
+ *     unsigned int {@link #ms_depth};
+ *     size_t {@link #ms_branch_pages};
+ *     size_t {@link #ms_leaf_pages};
+ *     size_t {@link #ms_overflow_pages};
+ *     size_t {@link #ms_entries};
  * }</code></pre>
  */
 @NativeType("struct MDB_stat")
@@ -93,22 +82,22 @@ public class MDBStat extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code ms_psize} field. */
+    /** Size of a database page. This is currently the same for all databases. */
     @NativeType("unsigned int")
     public int ms_psize() { return nms_psize(address()); }
-    /** Returns the value of the {@code ms_depth} field. */
+    /** Depth (height) of the B-tree. */
     @NativeType("unsigned int")
     public int ms_depth() { return nms_depth(address()); }
-    /** Returns the value of the {@code ms_branch_pages} field. */
+    /** Number of internal (non-leaf) pages. */
     @NativeType("size_t")
     public long ms_branch_pages() { return nms_branch_pages(address()); }
-    /** Returns the value of the {@code ms_leaf_pages} field. */
+    /** Number of leaf pages. */
     @NativeType("size_t")
     public long ms_leaf_pages() { return nms_leaf_pages(address()); }
-    /** Returns the value of the {@code ms_overflow_pages} field. */
+    /** Number of overflow pages. */
     @NativeType("size_t")
     public long ms_overflow_pages() { return nms_overflow_pages(address()); }
-    /** Returns the value of the {@code ms_entries} field. */
+    /** Number of data items. */
     @NativeType("size_t")
     public long ms_entries() { return nms_entries(address()); }
 
@@ -306,22 +295,22 @@ public class MDBStat extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code ms_psize} field. */
+        /** @return the value of the {@link MDBStat#ms_psize} field. */
         @NativeType("unsigned int")
         public int ms_psize() { return MDBStat.nms_psize(address()); }
-        /** Returns the value of the {@code ms_depth} field. */
+        /** @return the value of the {@link MDBStat#ms_depth} field. */
         @NativeType("unsigned int")
         public int ms_depth() { return MDBStat.nms_depth(address()); }
-        /** Returns the value of the {@code ms_branch_pages} field. */
+        /** @return the value of the {@link MDBStat#ms_branch_pages} field. */
         @NativeType("size_t")
         public long ms_branch_pages() { return MDBStat.nms_branch_pages(address()); }
-        /** Returns the value of the {@code ms_leaf_pages} field. */
+        /** @return the value of the {@link MDBStat#ms_leaf_pages} field. */
         @NativeType("size_t")
         public long ms_leaf_pages() { return MDBStat.nms_leaf_pages(address()); }
-        /** Returns the value of the {@code ms_overflow_pages} field. */
+        /** @return the value of the {@link MDBStat#ms_overflow_pages} field. */
         @NativeType("size_t")
         public long ms_overflow_pages() { return MDBStat.nms_overflow_pages(address()); }
-        /** Returns the value of the {@code ms_entries} field. */
+        /** @return the value of the {@link MDBStat#ms_entries} field. */
         @NativeType("size_t")
         public long ms_entries() { return MDBStat.nms_entries(address()); }
 

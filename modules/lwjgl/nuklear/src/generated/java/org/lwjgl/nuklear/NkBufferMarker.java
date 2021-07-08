@@ -62,10 +62,10 @@ public class NkBufferMarker extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code active} field. */
+    /** @return the value of the {@code active} field. */
     @NativeType("nk_bool")
     public boolean active() { return nactive(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("nk_size")
     public long offset() { return noffset(address()); }
 
@@ -143,10 +143,10 @@ public class NkBufferMarker extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code active} field. */
+        /** @return the value of the {@code active} field. */
         @NativeType("nk_bool")
         public boolean active() { return NkBufferMarker.nactive(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("nk_size")
         public long offset() { return NkBufferMarker.noffset(address()); }
 

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * uint8_t * (*) (
+ * uint8_t * (*{@link #invoke}) (
  *     void *Opaque,
  *     uintptr_t Size,
  *     unsigned int Alignment,
@@ -54,7 +54,7 @@ public abstract class LLVMMemoryManagerAllocateDataSectionCallback extends Callb
     }
 
     protected LLVMMemoryManagerAllocateDataSectionCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     LLVMMemoryManagerAllocateDataSectionCallback(long functionPointer) {

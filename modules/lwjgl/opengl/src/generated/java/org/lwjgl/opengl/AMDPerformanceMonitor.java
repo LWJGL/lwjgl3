@@ -26,6 +26,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class AMDPerformanceMonitor {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pame} parameter of GetPerfMonitorCounterInfoAMD. */
     public static final int
         GL_COUNTER_TYPE_AMD  = 0x8BC0,
@@ -41,8 +43,6 @@ public class AMDPerformanceMonitor {
         GL_PERFMON_RESULT_AVAILABLE_AMD = 0x8BC4,
         GL_PERFMON_RESULT_SIZE_AMD      = 0x8BC5,
         GL_PERFMON_RESULT_AMD           = 0x8BC6;
-
-    static { GL.initialize(); }
 
     protected AMDPerformanceMonitor() {
         throw new UnsupportedOperationException();

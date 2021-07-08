@@ -44,29 +44,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link NVRayTracing#vkBindAccelerationStructureMemoryNV BindAccelerationStructureMemoryNV}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code accelerationStructure} &ndash; the acceleration structure to be attached to memory.</li>
- * <li>{@code memory} &ndash; a {@code VkDeviceMemory} object describing the device memory to attach.</li>
- * <li>{@code memoryOffset} &ndash; the start offset of the region of memory that is to be bound to the acceleration structure. The number of bytes returned in the {@link VkMemoryRequirements}{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified acceleration structure.</li>
- * <li>{@code deviceIndexCount} &ndash; the number of elements in {@code pDeviceIndices}.</li>
- * <li>{@code pDeviceIndices} &ndash; a pointer to an array of device indices.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBindAccelerationStructureMemoryInfoNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkAccelerationStructureNV accelerationStructure;
- *     VkDeviceMemory memory;
- *     VkDeviceSize memoryOffset;
- *     uint32_t deviceIndexCount;
- *     uint32_t const * pDeviceIndices;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkAccelerationStructureNV {@link #accelerationStructure};
+ *     VkDeviceMemory {@link #memory};
+ *     VkDeviceSize {@link #memoryOffset};
+ *     uint32_t {@link #deviceIndexCount};
+ *     uint32_t const * {@link #pDeviceIndices};
  * }</code></pre>
  */
 public class VkBindAccelerationStructureMemoryInfoNV extends Struct implements NativeResource {
@@ -123,40 +111,40 @@ public class VkBindAccelerationStructureMemoryInfoNV extends Struct implements N
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code accelerationStructure} field. */
+    /** the acceleration structure to be attached to memory. */
     @NativeType("VkAccelerationStructureNV")
     public long accelerationStructure() { return naccelerationStructure(address()); }
-    /** Returns the value of the {@code memory} field. */
+    /** a {@code VkDeviceMemory} object describing the device memory to attach. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** Returns the value of the {@code memoryOffset} field. */
+    /** the start offset of the region of memory that is to be bound to the acceleration structure. The number of bytes returned in the {@link VkMemoryRequirements}{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified acceleration structure. */
     @NativeType("VkDeviceSize")
     public long memoryOffset() { return nmemoryOffset(address()); }
-    /** Returns the value of the {@code deviceIndexCount} field. */
+    /** the number of elements in {@code pDeviceIndices}. */
     @NativeType("uint32_t")
     public int deviceIndexCount() { return ndeviceIndexCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDeviceIndices} field. */
+    /** a pointer to an array of device indices. */
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pDeviceIndices() { return npDeviceIndices(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkBindAccelerationStructureMemoryInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkBindAccelerationStructureMemoryInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code accelerationStructure} field. */
+    /** Sets the specified value to the {@link #accelerationStructure} field. */
     public VkBindAccelerationStructureMemoryInfoNV accelerationStructure(@NativeType("VkAccelerationStructureNV") long value) { naccelerationStructure(address(), value); return this; }
-    /** Sets the specified value to the {@code memory} field. */
+    /** Sets the specified value to the {@link #memory} field. */
     public VkBindAccelerationStructureMemoryInfoNV memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
-    /** Sets the specified value to the {@code memoryOffset} field. */
+    /** Sets the specified value to the {@link #memoryOffset} field. */
     public VkBindAccelerationStructureMemoryInfoNV memoryOffset(@NativeType("VkDeviceSize") long value) { nmemoryOffset(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pDeviceIndices} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pDeviceIndices} field. */
     public VkBindAccelerationStructureMemoryInfoNV pDeviceIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npDeviceIndices(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -424,40 +412,40 @@ public class VkBindAccelerationStructureMemoryInfoNV extends Struct implements N
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkBindAccelerationStructureMemoryInfoNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBindAccelerationStructureMemoryInfoNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkBindAccelerationStructureMemoryInfoNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBindAccelerationStructureMemoryInfoNV.npNext(address()); }
-        /** Returns the value of the {@code accelerationStructure} field. */
+        /** @return the value of the {@link VkBindAccelerationStructureMemoryInfoNV#accelerationStructure} field. */
         @NativeType("VkAccelerationStructureNV")
         public long accelerationStructure() { return VkBindAccelerationStructureMemoryInfoNV.naccelerationStructure(address()); }
-        /** Returns the value of the {@code memory} field. */
+        /** @return the value of the {@link VkBindAccelerationStructureMemoryInfoNV#memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkBindAccelerationStructureMemoryInfoNV.nmemory(address()); }
-        /** Returns the value of the {@code memoryOffset} field. */
+        /** @return the value of the {@link VkBindAccelerationStructureMemoryInfoNV#memoryOffset} field. */
         @NativeType("VkDeviceSize")
         public long memoryOffset() { return VkBindAccelerationStructureMemoryInfoNV.nmemoryOffset(address()); }
-        /** Returns the value of the {@code deviceIndexCount} field. */
+        /** @return the value of the {@link VkBindAccelerationStructureMemoryInfoNV#deviceIndexCount} field. */
         @NativeType("uint32_t")
         public int deviceIndexCount() { return VkBindAccelerationStructureMemoryInfoNV.ndeviceIndexCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDeviceIndices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkBindAccelerationStructureMemoryInfoNV#pDeviceIndices} field. */
         @Nullable
         @NativeType("uint32_t const *")
         public IntBuffer pDeviceIndices() { return VkBindAccelerationStructureMemoryInfoNV.npDeviceIndices(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkBindAccelerationStructureMemoryInfoNV#sType} field. */
         public VkBindAccelerationStructureMemoryInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkBindAccelerationStructureMemoryInfoNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkBindAccelerationStructureMemoryInfoNV#pNext} field. */
         public VkBindAccelerationStructureMemoryInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkBindAccelerationStructureMemoryInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code accelerationStructure} field. */
+        /** Sets the specified value to the {@link VkBindAccelerationStructureMemoryInfoNV#accelerationStructure} field. */
         public VkBindAccelerationStructureMemoryInfoNV.Buffer accelerationStructure(@NativeType("VkAccelerationStructureNV") long value) { VkBindAccelerationStructureMemoryInfoNV.naccelerationStructure(address(), value); return this; }
-        /** Sets the specified value to the {@code memory} field. */
+        /** Sets the specified value to the {@link VkBindAccelerationStructureMemoryInfoNV#memory} field. */
         public VkBindAccelerationStructureMemoryInfoNV.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkBindAccelerationStructureMemoryInfoNV.nmemory(address(), value); return this; }
-        /** Sets the specified value to the {@code memoryOffset} field. */
+        /** Sets the specified value to the {@link VkBindAccelerationStructureMemoryInfoNV#memoryOffset} field. */
         public VkBindAccelerationStructureMemoryInfoNV.Buffer memoryOffset(@NativeType("VkDeviceSize") long value) { VkBindAccelerationStructureMemoryInfoNV.nmemoryOffset(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pDeviceIndices} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkBindAccelerationStructureMemoryInfoNV#pDeviceIndices} field. */
         public VkBindAccelerationStructureMemoryInfoNV.Buffer pDeviceIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkBindAccelerationStructureMemoryInfoNV.npDeviceIndices(address(), value); return this; }
 
     }

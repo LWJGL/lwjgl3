@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWwindow *window,
  *     unsigned int codepoint
  * )</code></pre>
@@ -54,7 +54,7 @@ public abstract class GLFWCharCallback extends Callback implements GLFWCharCallb
     }
 
     protected GLFWCharCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWCharCallback(long functionPointer) {

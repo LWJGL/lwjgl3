@@ -28,21 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVXMultiviewPerViewAttributes#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code perViewPositionAllComponents} &ndash; {@link VK10#VK_TRUE TRUE} if the implementation supports per-view position values that differ in components other than the X component.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 perViewPositionAllComponents;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #perViewPositionAllComponents};
  * }</code></pre>
  */
 public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Struct implements NativeResource {
@@ -87,19 +79,19 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code perViewPositionAllComponents} field. */
+    /** {@link VK10#VK_TRUE TRUE} if the implementation supports per-view position values that differ in components other than the X component. */
     @NativeType("VkBool32")
     public boolean perViewPositionAllComponents() { return nperViewPositionAllComponents(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,19 +310,19 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.npNext(address()); }
-        /** Returns the value of the {@code perViewPositionAllComponents} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX#perViewPositionAllComponents} field. */
         @NativeType("VkBool32")
         public boolean perViewPositionAllComponents() { return VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.nperViewPositionAllComponents(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX#sType} field. */
         public VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX#pNext} field. */
         public VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.npNext(address(), value); return this; }
 
     }

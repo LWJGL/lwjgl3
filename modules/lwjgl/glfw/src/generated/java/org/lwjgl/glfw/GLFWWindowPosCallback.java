@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWwindow *window,
  *     int xpos,
  *     int ypos
@@ -55,7 +55,7 @@ public abstract class GLFWWindowPosCallback extends Callback implements GLFWWind
     }
 
     protected GLFWWindowPosCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWWindowPosCallback(long functionPointer) {

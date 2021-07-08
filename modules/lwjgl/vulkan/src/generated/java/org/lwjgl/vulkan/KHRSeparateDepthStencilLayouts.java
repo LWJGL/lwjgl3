@@ -12,6 +12,8 @@ package org.lwjgl.vulkan;
  * 
  * <p>All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
  * 
+ * <h5>VK_KHR_separate_depth_stencil_layouts</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_separate_depth_stencil_layouts}</dd>
@@ -35,7 +37,12 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_separate_depth_stencil_layouts:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
  * </ul></dd>
- * <dt><b>Last Modified Data</b></dt>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
+ * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-06-25</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>

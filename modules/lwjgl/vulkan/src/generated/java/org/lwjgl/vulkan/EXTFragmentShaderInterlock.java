@@ -12,6 +12,8 @@ package org.lwjgl.vulkan;
  * 
  * <p>This extension can be useful for algorithms that need to access per-pixel data structures via shader loads and stores. Algorithms using this extension can access per-pixel data structures in critical sections without other invocations accessing the same per-pixel data. Additionally, the ordering guarantees are useful for cases where the API ordering of fragments is meaningful. For example, applications may be able to execute programmable blending operations in the fragment shader, where the destination buffer is read via image loads and the final value is written via image stores.</p>
  * 
+ * <h5>VK_EXT_fragment_shader_interlock</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_fragment_shader_interlock}</dd>
@@ -30,12 +32,17 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_fragment_shader_interlock:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
  * </ul></dd>
- * <dt><b>Last Modified Data</b></dt>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
+ * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-05-02</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
- * <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_fragment_shader_interlock.html">{@code SPV_EXT_fragment_shader_interlock}</a> SPIR-V extension.</li>
- * <li>This extension requires the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_shader_interlock.txt">{@code GL_ARB_fragment_shader_interlock}</a>, extensions for GLSL source languages.</li>
+ * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_fragment_shader_interlock.html">{@code SPV_EXT_fragment_shader_interlock}</a></li>
+ * <li>This extension provides API support for <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_shader_interlock.txt">{@code GL_ARB_fragment_shader_interlock}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

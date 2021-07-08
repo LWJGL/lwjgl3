@@ -11,13 +11,13 @@
 
     <!-- *********************************** -->
     <property name="findbugs" value="3.0.2"/>
-    <property name="testng" value="7.0.0"/>
+    <property name="testng" value="7.3.0"/>
     <property name="jcommander" value="1.78"/>
     <property name="joml" value="1.10.0"/>
-    <property name="kotlinc-version" value="1.4.10"/>
-    <property name="kotlinc-build" value="1.4.10-release-411"/>
-    <property name="jmh-core" value="1.22"/>
-    <property name="jmh-generator-annprocess" value="1.22"/>
+    <property name="kotlinc-version" value="1.4.31"/>
+    <property name="kotlinc-build" value="1.4.31-release-344"/>
+    <property name="jmh-core" value="1.27"/>
+    <property name="jmh-generator-annprocess" value="1.27"/>
     <property name="jopt-simple" value="5.0.4"/>
     <property name="commons-math3" value="3.6.1"/>
     <property name="openjfx" value="11.0.2"/>

@@ -24,19 +24,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code maxTimelineSemaphoreValueDifference} &ndash; indicates the maximum difference allowed by the implementation between the current value of a timeline semaphore and any pending signal or wait operations.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceTimelineSemaphoreProperties {
  *     VkStructureType sType;
  *     void * pNext;
- *     uint64_t maxTimelineSemaphoreValueDifference;
+ *     uint64_t {@link #maxTimelineSemaphoreValueDifference};
  * }</code></pre>
  */
 public class VkPhysicalDeviceTimelineSemaphoreProperties extends Struct implements NativeResource {
@@ -81,13 +75,13 @@ public class VkPhysicalDeviceTimelineSemaphoreProperties extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code maxTimelineSemaphoreValueDifference} field. */
+    /** indicates the maximum difference allowed by the implementation between the current value of a timeline semaphore and any pending signal or wait operations. */
     @NativeType("uint64_t")
     public long maxTimelineSemaphoreValueDifference() { return nmaxTimelineSemaphoreValueDifference(address()); }
 
@@ -312,13 +306,13 @@ public class VkPhysicalDeviceTimelineSemaphoreProperties extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceTimelineSemaphoreProperties.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceTimelineSemaphoreProperties.npNext(address()); }
-        /** Returns the value of the {@code maxTimelineSemaphoreValueDifference} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTimelineSemaphoreProperties#maxTimelineSemaphoreValueDifference} field. */
         @NativeType("uint64_t")
         public long maxTimelineSemaphoreValueDifference() { return VkPhysicalDeviceTimelineSemaphoreProperties.nmaxTimelineSemaphoreValueDifference(address()); }
 

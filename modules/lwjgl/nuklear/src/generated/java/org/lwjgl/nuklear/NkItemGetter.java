@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * float (*) (
+ * float (*{@link #invoke}) (
  *     void *userdata,
  *     int selected,
  *     char const **item
@@ -51,7 +51,7 @@ public abstract class NkItemGetter extends Callback implements NkItemGetterI {
     }
 
     protected NkItemGetter() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkItemGetter(long functionPointer) {

@@ -607,7 +607,7 @@ public class VK11 extends VK10 {
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES  = 1000063000;
 
     /**
-     * VkSubgroupFeatureFlagBits - Enum describing what subgroup operations are supported
+     * VkSubgroupFeatureFlagBits - Enum describing what group operations are supported with subgroup scope
      * 
      * <h5>Description</h5>
      * 
@@ -643,8 +643,8 @@ public class VK11 extends VK10 {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT PEER_MEMORY_FEATURE_COPY_SRC_BIT} specifies that the memory <b>can</b> be accessed as the source of a {@link VK10#vkCmdCopyBuffer CmdCopyBuffer}, {@link VK10#vkCmdCopyImage CmdCopyImage}, {@link VK10#vkCmdCopyBufferToImage CmdCopyBufferToImage}, or {@link VK10#vkCmdCopyImageToBuffer CmdCopyImageToBuffer} command.</li>
-     * <li>{@link #VK_PEER_MEMORY_FEATURE_COPY_DST_BIT PEER_MEMORY_FEATURE_COPY_DST_BIT} specifies that the memory <b>can</b> be accessed as the destination of a {@link VK10#vkCmdCopyBuffer CmdCopyBuffer}, {@link VK10#vkCmdCopyImage CmdCopyImage}, {@link VK10#vkCmdCopyBufferToImage CmdCopyBufferToImage}, or {@link VK10#vkCmdCopyImageToBuffer CmdCopyImageToBuffer} command.</li>
+     * <li>{@link #VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT PEER_MEMORY_FEATURE_COPY_SRC_BIT} specifies that the memory <b>can</b> be accessed as the source of any {@code vkCmdCopy*} command.</li>
+     * <li>{@link #VK_PEER_MEMORY_FEATURE_COPY_DST_BIT PEER_MEMORY_FEATURE_COPY_DST_BIT} specifies that the memory <b>can</b> be accessed as the destination of any {@code vkCmdCopy*} command.</li>
      * <li>{@link #VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT PEER_MEMORY_FEATURE_GENERIC_SRC_BIT} specifies that the memory <b>can</b> be read as any memory access type.</li>
      * <li>{@link #VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT PEER_MEMORY_FEATURE_GENERIC_DST_BIT} specifies that the memory <b>can</b> be written as any memory access type. Shader atomics are considered to be writes.</li>
      * </ul>
@@ -1012,7 +1012,8 @@ public class VK11 extends VK10 {
      * <li>{@link #VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT} specifies a POSIX file descriptor handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the POSIX system calls {@code dup}, {@code dup2}, {@code close}, and the non-standard system call {@code dup3}. Additionally, it <b>must</b> be transportable over a socket using an {@code SCM_RIGHTS} control message. It owns a reference to the underlying synchronization primitive represented by its Vulkan semaphore object.</li>
      * <li>{@link #VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT} specifies an NT handle that has only limited valid usage outside of Vulkan and other compatible APIs. It <b>must</b> be compatible with the functions {@code DuplicateHandle}, {@code CloseHandle}, {@code CompareObjectHandles}, {@code GetHandleInformation}, and {@code SetHandleInformation}. It owns a reference to the underlying synchronization primitive represented by its Vulkan semaphore object.</li>
      * <li>{@link #VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT} specifies a global share handle that has only limited valid usage outside of Vulkan and other compatible APIs. It is not compatible with any native APIs. It does not own a reference to the underlying synchronization primitive represented its Vulkan semaphore object, and will therefore become invalid when all Vulkan semaphore objects associated with it are destroyed.</li>
-     * <li>{@link #VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT} specifies an NT handle returned by {@code ID3D12Device}::{@code CreateSharedHandle} referring to a Direct3D 12 fence. It owns a reference to the underlying synchronization primitive associated with the Direct3D fence.</li>
+     * <li>{@link #VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT} specifies an NT handle returned by {@code ID3D12Device}::{@code CreateSharedHandle} referring to a Direct3D 12 fence, or {@code ID3D11Device5}::{@code CreateFence} by a Direct3D 11 fence. It owns a reference to the underlying synchronization primitive associated with the Direct3D fence.</li>
+     * <li>{@link #VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE_BIT} is an alias of {@link #VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT} with the same meaning. It is provided for convenience and code clarity when interacting with D3D11 fences.</li>
      * <li>{@link #VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT} specifies a POSIX file descriptor handle to a Linux Sync File or Android Fence object. It can be used with any native API accepting a valid sync file or fence as input. It owns a reference to the underlying synchronization primitive associated with the file descriptor. Implementations which support importing this handle type <b>must</b> accept any type of sync or fence FD supported by the native system they are running on.</li>
      * </ul>
      * 
@@ -1045,6 +1046,7 @@ public class VK11 extends VK10 {
         VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT     = 0x2,
         VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT = 0x4,
         VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT      = 0x8,
+        VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE_BIT      = 0x8,
         VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT          = 0x10;
 
     /**
@@ -1066,13 +1068,7 @@ public class VK11 extends VK10 {
         VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT = 0x2;
 
     /** The API version number for Vulkan 1.1. */
-    public static final int VK_API_VERSION_1_1 = VK10.VK_MAKE_VERSION(1, 1, 0);
-
-    /** API Constants */
-    public static final int
-        VK_LUID_SIZE             = 8,
-        VK_QUEUE_FAMILY_EXTERNAL = (~0-1),
-        VK_MAX_DEVICE_GROUP_SIZE = 32;
+    public static final int VK_API_VERSION_1_1 = VK_MAKE_VERSION(1, 1, 0);
 
     protected VK11() {
         throw new UnsupportedOperationException();
@@ -1100,6 +1096,13 @@ public class VK11 extends VK10 {
      * VkResult vkEnumerateInstanceVersion(
      *     uint32_t*                                   pApiVersion);</code></pre>
      * 
+     * <h5>Description</h5>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>The intended behaviour of {@link #vkEnumerateInstanceVersion EnumerateInstanceVersion} is that an implementation <b>should</b> not need to perform memory allocations and <b>should</b> unconditionally return {@link VK10#VK_SUCCESS SUCCESS}. The loader, and any enabled layers, <b>may</b> return {@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY} in the case of a failed memory allocation.</p>
+     * </div>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -1112,6 +1115,10 @@ public class VK11 extends VK10 {
      * <dt>On success, this command returns</dt>
      * <dd><ul>
      * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
+     * </ul></dd>
+     * <dt>On failure, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * </ul></dd>
      * </dl>
      *
@@ -1239,6 +1246,13 @@ public class VK11 extends VK10 {
      * <h5>Description</h5>
      * 
      * <p>On some implementations, it <b>may</b> be more efficient to batch memory bindings into a single command.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>If any {@link VkBindImageMemoryInfo}::image was created with {@link #VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT} then all planes of {@link VkBindImageMemoryInfo}::image <b>must</b> be bound individually in separate {@code pBindInfos}</li>
+     * <li>{@code pBindInfos} <b>must</b> not refer to the same image subresource more than once</li>
+     * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -1371,8 +1385,8 @@ public class VK11 extends VK10 {
      * <ul>
      * <li>{@code deviceMask} <b>must</b> be a valid device mask value</li>
      * <li>{@code deviceMask} <b>must</b> not be zero</li>
-     * <li>{@code deviceMask} <b>must</b> not include any set bits that were not in the {@link VkDeviceGroupCommandBufferBeginInfo}{@code ::deviceMask} value when the command buffer began recording.</li>
-     * <li>If {@code vkCmdSetDeviceMask} is called inside a render pass instance, {@code deviceMask} <b>must</b> not include any set bits that were not in the {@link VkDeviceGroupRenderPassBeginInfo}{@code ::deviceMask} value when the render pass instance began recording.</li>
+     * <li>{@code deviceMask} <b>must</b> not include any set bits that were not in the {@link VkDeviceGroupCommandBufferBeginInfo}{@code ::deviceMask} value when the command buffer began recording</li>
+     * <li>If {@code vkCmdSetDeviceMask} is called inside a render pass instance, {@code deviceMask} <b>must</b> not include any set bits that were not in the {@link VkDeviceGroupRenderPassBeginInfo}{@code ::deviceMask} value when the render pass instance began recording</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1446,30 +1460,39 @@ public class VK11 extends VK10 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>If a {@code VkImageView} is sampled with {@link VK10#VK_FILTER_LINEAR FILTER_LINEAR} as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT}</li>
+     * <li>If a {@code VkSampler} created with {@code magFilter} or {@code minFilter} equal to {@link VK10#VK_FILTER_LINEAR FILTER_LINEAR} and {@code compareEnable} equal to {@link VK10#VK_FALSE FALSE} is used to sample a {@code VkImageView} as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT}</li>
      * <li>If a {@code VkImageView} is accessed using atomic operations as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT}</li>
      * <li>If a {@code VkImageView} is sampled with {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} as a result of this command, then the image view&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link EXTFilterCubic#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT}</li>
      * <li>Any {@code VkImageView} being sampled with {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} as a result of this command <b>must</b> have a {@code VkImageViewType} and format that supports cubic filtering, as specified by {@link VkFilterCubicImageViewImageFormatPropertiesEXT}{@code ::filterCubic} returned by {@code vkGetPhysicalDeviceImageFormatProperties2}</li>
      * <li>Any {@code VkImageView} being sampled with {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} with a reduction mode of either {@link VK12#VK_SAMPLER_REDUCTION_MODE_MIN SAMPLER_REDUCTION_MODE_MIN} or {@link VK12#VK_SAMPLER_REDUCTION_MODE_MAX SAMPLER_REDUCTION_MODE_MAX} as a result of this command <b>must</b> have a {@code VkImageViewType} and format that supports cubic filtering together with minmax filtering, as specified by {@link VkFilterCubicImageViewImageFormatPropertiesEXT}{@code ::filterCubicMinmax} returned by {@code vkGetPhysicalDeviceImageFormatProperties2}</li>
-     * <li>Any {@code VkImage} created with a {@link VkImageCreateInfo}{@code ::flags} containing {@link NVCornerSampledImage#VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV IMAGE_CREATE_CORNER_SAMPLED_BIT_NV} sampled as a result of this command <b>must</b> only be sampled using a {@code VkSamplerAddressMode} of {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE}.</li>
+     * <li>Any {@code VkImage} created with a {@link VkImageCreateInfo}{@code ::flags} containing {@link NVCornerSampledImage#VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV IMAGE_CREATE_CORNER_SAMPLED_BIT_NV} sampled as a result of this command <b>must</b> only be sampled using a {@code VkSamplerAddressMode} of {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE}</li>
      * <li>For each set <em>n</em> that is statically used by the {@code VkPipeline} bound to the pipeline bind point used by this command, a descriptor set <b>must</b> have been bound to <em>n</em> at the same pipeline bind point, with a {@code VkPipelineLayout} that is compatible for set <em>n</em>, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a></li>
      * <li>For each push constant that is statically used by the {@code VkPipeline} bound to the pipeline bind point used by this command, a push constant value <b>must</b> have been set for the same pipeline bind point, with a {@code VkPipelineLayout} that is compatible for push constants, with the {@code VkPipelineLayout} used to create the current {@code VkPipeline}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#descriptorsets-compatibility">Pipeline Layout Compatibility</a></li>
      * <li>Descriptors in each bound descriptor set, specified via {@code vkCmdBindDescriptorSets}, <b>must</b> be valid if they are statically used by the {@code VkPipeline} bound to the pipeline bind point used by this command</li>
      * <li>A valid pipeline <b>must</b> be bound to the pipeline bind point used by this command</li>
-     * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command requires any dynamic state, that state <b>must</b> have been set for {@code commandBuffer}</li>
+     * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command requires any dynamic state, that state <b>must</b> have been set for {@code commandBuffer}, and done so after any previously bound pipeline with the corresponding state not specified as dynamic</li>
+     * <li>There <b>must</b> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the {@code VkPipeline} object bound to the pipeline bind point used by this command, since that pipeline was bound</li>
      * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}, {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE IMAGE_VIEW_TYPE_CUBE}, {@link VK10#VK_IMAGE_VIEW_TYPE_1D_ARRAY IMAGE_VIEW_TYPE_1D_ARRAY}, {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY} or {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE_ARRAY IMAGE_VIEW_TYPE_CUBE_ARRAY}, in any shader stage</li>
      * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
      * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions that includes a LOD bias or any offset values, in any shader stage</li>
      * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess">robust buffer access</a> feature is not enabled, and if the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a uniform buffer, it <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
      * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess">robust buffer access</a> feature is not enabled, and if the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a storage buffer, it <b>must</b> not access values outside of the range of the buffer as specified in the descriptor set bound to the same pipeline bind point</li>
      * <li>If {@code commandBuffer} is an unprotected command buffer, any resource accessed by the {@code VkPipeline} object bound to the pipeline bind point used by this command <b>must</b> not be a protected resource</li>
+     * <li>If a {@code VkImageView} is accessed using {@code OpImageWrite} as a result of this command, then the {@code Type} of the {@code Texel} operand of that instruction <b>must</b> have at least as many components as the image view&#8217;s format.</li>
+     * <li>If a {@code VkBufferView} is accessed using {@code OpImageWrite} as a result of this command, then the {@code Type} of the {@code Texel} operand of that instruction <b>must</b> have at least as many components as the buffer view&#8217;s format.</li>
+     * <li>If a {@code VkImageView} with a {@code VkFormat} that has a 64-bit channel width is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 64.</li>
+     * <li>If a {@code VkImageView} with a {@code VkFormat} that has a channel width less than 64-bit is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 32.</li>
+     * <li>If a {@code VkBufferView} with a {@code VkFormat} that has a 64-bit channel width is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 64.</li>
+     * <li>If a {@code VkBufferView} with a {@code VkFormat} that has a channel width less than 64-bit is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 32.</li>
+     * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-sparseImageInt64Atomics">{@code sparseImageInt64Atomics}</a> feature is not enabled, {@code VkImage} objects created with the {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT} flag <b>must</b> not be accessed by atomic instructions through an {@code OpTypeImage} with a {@code SampledType} with a {@code Width} of 64 by this command.</li>
+     * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-sparseImageInt64Atomics">{@code sparseImageInt64Atomics}</a> feature is not enabled, {@code VkBuffer} objects created with the {@link VK10#VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT BUFFER_CREATE_SPARSE_RESIDENCY_BIT} flag <b>must</b> not be accessed by atomic instructions through an {@code OpTypeImage} with a {@code SampledType} with a {@code Width} of 64 by this command.</li>
      * <li>{@code baseGroupX} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[0]</li>
      * <li>{@code baseGroupX} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[1]</li>
      * <li>{@code baseGroupZ} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[2]</li>
      * <li>{@code groupCountX} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[0] minus {@code baseGroupX}</li>
      * <li>{@code groupCountY} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[1] minus {@code baseGroupY}</li>
      * <li>{@code groupCountZ} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[2] minus {@code baseGroupZ}</li>
-     * <li>If any of {@code baseGroupX}, {@code baseGroupY}, or {@code baseGroupZ} are not zero, then the bound compute pipeline <b>must</b> have been created with the {@link #VK_PIPELINE_CREATE_DISPATCH_BASE PIPELINE_CREATE_DISPATCH_BASE} flag.</li>
+     * <li>If any of {@code baseGroupX}, {@code baseGroupY}, or {@code baseGroupZ} are not zero, then the bound compute pipeline <b>must</b> have been created with the {@link #VK_PIPELINE_CREATE_DISPATCH_BASE PIPELINE_CREATE_DISPATCH_BASE} flag</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -2150,7 +2173,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@code vkGetPhysicalDeviceSparseImageFormatProperties2} behaves identically to {@link VK10#vkGetPhysicalDeviceSparseImageFormatProperties GetPhysicalDeviceSparseImageFormatProperties}, with the ability to return extended information by adding extension structures to the {@code pNext} chain of its {@code pProperties} parameter.</p>
+     * <p>{@code vkGetPhysicalDeviceSparseImageFormatProperties2} behaves identically to {@link VK10#vkGetPhysicalDeviceSparseImageFormatProperties GetPhysicalDeviceSparseImageFormatProperties}, with the ability to return extended information by adding extending structures to the {@code pNext} chain of its {@code pProperties} parameter.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -2336,7 +2359,7 @@ public class VK11 extends VK10 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-sampler-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion feature</a> <b>must</b> be enabled</li>
+     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-samplerYcbcrConversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion feature</a> <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -2712,7 +2735,7 @@ public class VK11 extends VK10 {
      * @param device                   the logical device that updates the descriptor sets.
      * @param descriptorSet            the descriptor set to update
      * @param descriptorUpdateTemplate a {@code VkDescriptorUpdateTemplate} object specifying the update mapping between {@code pData} and the descriptor set to update.
-     * @param pData                    a pointer to memory containing one or more {@link VkDescriptorImageInfo}, {@link VkDescriptorBufferInfo}, or {@code VkBufferView} structures used to write the descriptors.
+     * @param pData                    a pointer to memory containing one or more {@link VkDescriptorImageInfo}, {@link VkDescriptorBufferInfo}, or {@code VkBufferView} structures or {@code VkAccelerationStructureKHR} or {@code VkAccelerationStructureNV} handles used to write the descriptors.
      */
     public static void vkUpdateDescriptorSetWithTemplate(VkDevice device, @NativeType("VkDescriptorSet") long descriptorSet, @NativeType("VkDescriptorUpdateTemplate") long descriptorUpdateTemplate, @NativeType("void const *") long pData) {
         long __functionAddress = device.getCapabilities().vkUpdateDescriptorSetWithTemplate;

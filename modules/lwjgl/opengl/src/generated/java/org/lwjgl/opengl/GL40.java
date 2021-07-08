@@ -36,6 +36,8 @@ import org.lwjgl.system.*;
  */
 public class GL40 extends GL33 {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv,
      * MapBufferRange, FlushMappedBufferRange, GetBufferParameteriv, and CopyBufferSubData.
@@ -187,8 +189,6 @@ public class GL40 extends GL33 {
     public static final int
         GL_MAX_TRANSFORM_FEEDBACK_BUFFERS = 0x8E70,
         GL_MAX_VERTEX_STREAMS             = 0x8E71;
-
-    static { GL.initialize(); }
 
     protected GL40() {
         throw new UnsupportedOperationException();

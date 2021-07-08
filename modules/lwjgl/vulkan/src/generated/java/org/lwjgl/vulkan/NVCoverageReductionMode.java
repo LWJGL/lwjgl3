@@ -16,16 +16,18 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * When using a framebuffer with mixed samples, a per-fragment coverage reduction operation is performed which generates a color sample mask from the coverage mask. This extension defines the following modes to control how this reduction is performed.
+ * When using a framebuffer with mixed samples, a per-fragment coverage reduction operation is performed which generates color sample coverage from the pixel coverage. This extension defines the following modes to control how this reduction is performed.
  * 
  * <ul>
- * <li>Merge: When there are more raster samples than color samples, there is an implementation dependent association of each raster sample to a color sample. In the merge mode, the reduced color sample mask is computed such that the bit for each color sample is 1 if any of the associated bits in the fragment’s coverage is on, and 0 otherwise. This is the default mode.</li>
- * <li>Truncate: When there are more raster samples (N) than color samples(M), there is one to one association of the first M raster samples to the M color samples and the coverage bits for the other raster samples are ignored.</li>
+ * <li>Merge: When there are more samples in the pixel coverage than color samples, there is an implementation dependent association of each pixel coverage sample to a color sample. In the merge mode, the color sample coverage is computed such that only if any associated sample in the pixel coverage is covered, the color sample is covered. This is the default mode.</li>
+ * <li>Truncate: When there are more raster samples (N) than color samples(M), there is one to one association of the first M raster samples to the M color samples; other raster samples are ignored.</li>
  * </ul>
  * 
  * <p>When the number of raster samples is equal to the color samples, there is a one to one mapping between them in either of the above modes.</p>
  * 
  * <p>The new command {@link #vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV GetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV} can be used to query the various raster, color, depth/stencil sample count and reduction mode combinations that are supported by the implementation. This extension would allow an implementation to support the behavior of both {@code VK_NV_framebuffer_mixed_samples} and {@code VK_AMD_mixed_attachment_samples} extensions simultaneously.</p>
+ * 
+ * <h5>VK_NV_coverage_reduction_mode</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -45,6 +47,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>Kedarnath Thangudu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_coverage_reduction_mode:%20&amp;body=@kthangudu%20">kthangudu</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-01-29</dd>
  * <dt><b>Contributors</b></dt>
@@ -84,8 +91,8 @@ public class NVCoverageReductionMode {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_COVERAGE_REDUCTION_MODE_MERGE_NV COVERAGE_REDUCTION_MODE_MERGE_NV}: In this mode, there is an implementation-dependent association of each raster sample to a color sample. The reduced color sample mask is computed such that the bit for each color sample is 1 if any of the associated bits in the fragment&#8217;s coverage is on, and 0 otherwise.</li>
-     * <li>{@link #VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV COVERAGE_REDUCTION_MODE_TRUNCATE_NV}: In this mode, only the first <code>M</code> raster samples are associated with the color samples such that raster sample <code>i</code> maps to color sample <code>i</code>, where <code>M</code> is the number of color samples.</li>
+     * <li>{@link #VK_COVERAGE_REDUCTION_MODE_MERGE_NV COVERAGE_REDUCTION_MODE_MERGE_NV} specifies that each color sample will be associated with an implementation-dependent subset of samples in the pixel coverage. If any of those associated samples are covered, the color sample is covered.</li>
+     * <li>{@link #VK_COVERAGE_REDUCTION_MODE_TRUNCATE_NV COVERAGE_REDUCTION_MODE_TRUNCATE_NV} specifies that for color samples present in the color attachments, a color sample is covered if the pixel coverage sample with the same <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-multisampling-coverage-mask">sample index</a> <code>i</code> is covered; other pixel coverage samples are discarded.</li>
      * </ul>
      * 
      * <h5>See Also</h5>

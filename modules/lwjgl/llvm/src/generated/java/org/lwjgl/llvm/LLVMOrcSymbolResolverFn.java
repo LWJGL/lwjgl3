@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * uint64_t (*) (
+ * uint64_t (*{@link #invoke}) (
  *     char const *Name,
  *     void *LookupCtx
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class LLVMOrcSymbolResolverFn extends Callback implements LLVMOr
     }
 
     protected LLVMOrcSymbolResolverFn() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     LLVMOrcSymbolResolverFn(long functionPointer) {

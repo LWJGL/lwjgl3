@@ -14,6 +14,7 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
         """
         An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export Windows handles from Vulkan memory objects and to import Vulkan memory objects from Windows handles exported from other Vulkan memory objects or from similar resources in other APIs.
 
+        <h5>VK_KHR_external_memory_win32</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_external_memory_win32}</dd>
@@ -37,7 +38,10 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
             <dd><ul>
                 <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_external_memory_win32:%20&amp;body=@cubanismo%20">cubanismo</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2016-10-21</dd>
 
@@ -80,7 +84,7 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
         Get a Windows HANDLE for a memory object.
 
         <h5>C Specification</h5>
-        To export a Windows handle representing the underlying resources of a Vulkan device memory object, call:
+        To export a Windows handle representing the payload of a Vulkan device memory object, call:
 
         <pre><code>
 ￿VkResult vkGetMemoryWin32HandleKHR(
@@ -89,7 +93,11 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
 ￿    HANDLE*                                     pHandle);</code></pre>
 
         <h5>Description</h5>
-        For handle types defined as NT handles, the handles returned by {@code vkGetMemoryWin32HandleKHR} are owned by the application. To avoid leaking resources, the application <b>must</b> release ownership of them using the {@code CloseHandle} system call when they are no longer needed.
+        For handle types defined as NT handles, the handles returned by {@code vkGetMemoryWin32HandleKHR} are owned by the application and hold a reference to their payload. To avoid leaking resources, the application <b>must</b> release ownership of them using the {@code CloseHandle} system call when they are no longer needed.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Non-NT handle types do not add a reference to their associated payload. If the original object owning the payload is destroyed, all resources and handles sharing that payload will become invalid.
+        </div>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -118,7 +126,7 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
 
         VkDevice("device", "the logical device that created the device memory being exported."),
         VkMemoryGetWin32HandleInfoKHR.const.p("pGetWin32HandleInfo", "a pointer to a ##VkMemoryGetWin32HandleInfoKHR structure containing parameters of the export operation."),
-        Check(1)..HANDLE.p("pHandle", "will return the Windows handle representing the underlying resources of the device memory object.")
+        Check(1)..HANDLE.p("pHandle", "will return the Windows handle representing the payload of the device memory object.")
     )
 
     VkResult(
@@ -138,8 +146,8 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code handle} <b>must</b> be an external memory handle created outside of the Vulkan API.</li>
-            <li>{@code handleType} <b>must</b> not be one of the handle types defined as opaque.</li>
+            <li>{@code handle} <b>must</b> be an external memory handle created outside of the Vulkan API</li>
+            <li>{@code handleType} <b>must</b> not be one of the handle types defined as opaque</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -158,6 +166,7 @@ val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_exte
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
                 <li>#ERROR_INVALID_EXTERNAL_HANDLE</li>
             </ul></dd>
         </dl>

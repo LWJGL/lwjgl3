@@ -63,10 +63,10 @@ public class CUIPCEventHandle extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code reserved} field. */
+    /** @return a {@link ByteBuffer} view of the {@code reserved} field. */
     @NativeType("char[CU_IPC_HANDLE_SIZE]")
     public ByteBuffer reserved() { return nreserved(address()); }
-    /** Returns the value at the specified index of the {@code reserved} field. */
+    /** @return the value at the specified index of the {@code reserved} field. */
     @NativeType("char")
     public byte reserved(int index) { return nreserved(address(), index); }
 
@@ -285,10 +285,10 @@ public class CUIPCEventHandle extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code reserved} field. */
+        /** @return a {@link ByteBuffer} view of the {@code reserved} field. */
         @NativeType("char[CU_IPC_HANDLE_SIZE]")
         public ByteBuffer reserved() { return CUIPCEventHandle.nreserved(address()); }
-        /** Returns the value at the specified index of the {@code reserved} field. */
+        /** @return the value at the specified index of the {@code reserved} field. */
         @NativeType("char")
         public byte reserved(int index) { return CUIPCEventHandle.nreserved(address(), index); }
 

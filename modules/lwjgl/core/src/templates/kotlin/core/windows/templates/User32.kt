@@ -2076,7 +2076,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         """,
 
         int("vKey", "the virtual-key code. You can use left- and right-distinguishing constants to specify certain keys."),
-        
+
         returnDoc =
         """
         if the function succeeds, the return value specifies whether the key was pressed since the last call to {@code GetAsyncKeyState}, and whether the key

@@ -36,6 +36,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL31C extends GL30C {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D. */
     public static final int
         GL_R8_SNORM     = 0x8F94,
@@ -163,8 +165,6 @@ public class GL31C extends GL30C {
 
     /** Returned by GetActiveUniformsiv and GetUniformBlockIndex. */
     public static final int GL_INVALID_INDEX = 0xFFFFFFFF;
-
-    static { GL.initialize(); }
 
     protected GL31C() {
         throw new UnsupportedOperationException();

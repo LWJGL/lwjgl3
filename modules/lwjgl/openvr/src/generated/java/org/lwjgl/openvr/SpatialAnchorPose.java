@@ -60,7 +60,7 @@ public class SpatialAnchorPose extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link HmdMatrix34} view of the {@code mAnchorToAbsoluteTracking} field. */
+    /** @return a {@link HmdMatrix34} view of the {@code mAnchorToAbsoluteTracking} field. */
     @NativeType("HmdMatrix34_t")
     public HmdMatrix34 mAnchorToAbsoluteTracking() { return nmAnchorToAbsoluteTracking(address()); }
 
@@ -248,7 +248,7 @@ public class SpatialAnchorPose extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link HmdMatrix34} view of the {@code mAnchorToAbsoluteTracking} field. */
+        /** @return a {@link HmdMatrix34} view of the {@code mAnchorToAbsoluteTracking} field. */
         @NativeType("HmdMatrix34_t")
         public HmdMatrix34 mAnchorToAbsoluteTracking() { return SpatialAnchorPose.nmAnchorToAbsoluteTracking(address()); }
 

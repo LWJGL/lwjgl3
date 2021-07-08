@@ -32,6 +32,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTShaderPixelLocalStorage2 {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetInteger64v, or GetFloatv. */
     public static final int
         GL_MAX_SHADER_COMBINED_LOCAL_STORAGE_FAST_SIZE_EXT = 0x9650,
@@ -39,8 +41,6 @@ public class EXTShaderPixelLocalStorage2 {
 
     /** Returned by CheckFramebufferStatus. */
     public static final int GL_FRAMEBUFFER_INCOMPLETE_INSUFFICIENT_SHADER_COMBINED_LOCAL_STORAGE_EXT = 0x9652;
-
-    static { GLES.initialize(); }
 
     protected EXTShaderPixelLocalStorage2() {
         throw new UnsupportedOperationException();

@@ -24,27 +24,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTPciBusInfo#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code pciDomain} &ndash; the PCI bus domain.</li>
- * <li>{@code pciBus} &ndash; the PCI bus identifier.</li>
- * <li>{@code pciDevice} &ndash; the PCI device identifier.</li>
- * <li>{@code pciFunction} &ndash; the PCI device function identifier.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDevicePCIBusInfoPropertiesEXT {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint32_t pciDomain;
- *     uint32_t pciBus;
- *     uint32_t pciDevice;
- *     uint32_t pciFunction;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint32_t {@link #pciDomain};
+ *     uint32_t {@link #pciBus};
+ *     uint32_t {@link #pciDevice};
+ *     uint32_t {@link #pciFunction};
  * }</code></pre>
  */
 public class VkPhysicalDevicePCIBusInfoPropertiesEXT extends Struct implements NativeResource {
@@ -98,28 +87,28 @@ public class VkPhysicalDevicePCIBusInfoPropertiesEXT extends Struct implements N
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code pciDomain} field. */
+    /** the PCI bus domain. */
     @NativeType("uint32_t")
     public int pciDomain() { return npciDomain(address()); }
-    /** Returns the value of the {@code pciBus} field. */
+    /** the PCI bus identifier. */
     @NativeType("uint32_t")
     public int pciBus() { return npciBus(address()); }
-    /** Returns the value of the {@code pciDevice} field. */
+    /** the PCI device identifier. */
     @NativeType("uint32_t")
     public int pciDevice() { return npciDevice(address()); }
-    /** Returns the value of the {@code pciFunction} field. */
+    /** the PCI device function identifier. */
     @NativeType("uint32_t")
     public int pciFunction() { return npciFunction(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePCIBusInfoPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePCIBusInfoPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -344,28 +333,28 @@ public class VkPhysicalDevicePCIBusInfoPropertiesEXT extends Struct implements N
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDevicePCIBusInfoPropertiesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDevicePCIBusInfoPropertiesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npNext(address()); }
-        /** Returns the value of the {@code pciDomain} field. */
+        /** @return the value of the {@link VkPhysicalDevicePCIBusInfoPropertiesEXT#pciDomain} field. */
         @NativeType("uint32_t")
         public int pciDomain() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npciDomain(address()); }
-        /** Returns the value of the {@code pciBus} field. */
+        /** @return the value of the {@link VkPhysicalDevicePCIBusInfoPropertiesEXT#pciBus} field. */
         @NativeType("uint32_t")
         public int pciBus() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npciBus(address()); }
-        /** Returns the value of the {@code pciDevice} field. */
+        /** @return the value of the {@link VkPhysicalDevicePCIBusInfoPropertiesEXT#pciDevice} field. */
         @NativeType("uint32_t")
         public int pciDevice() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npciDevice(address()); }
-        /** Returns the value of the {@code pciFunction} field. */
+        /** @return the value of the {@link VkPhysicalDevicePCIBusInfoPropertiesEXT#pciFunction} field. */
         @NativeType("uint32_t")
         public int pciFunction() { return VkPhysicalDevicePCIBusInfoPropertiesEXT.npciFunction(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePCIBusInfoPropertiesEXT#sType} field. */
         public VkPhysicalDevicePCIBusInfoPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePCIBusInfoPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePCIBusInfoPropertiesEXT#pNext} field. */
         public VkPhysicalDevicePCIBusInfoPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePCIBusInfoPropertiesEXT.npNext(address(), value); return this; }
 
     }

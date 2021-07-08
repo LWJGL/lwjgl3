@@ -21,19 +21,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>It is illegal to create this structure on stack and pass it to any bgfx API.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code data} &ndash; pointer to data</li>
- * <li>{@code size} &ndash; data size</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct bgfx_memory_t {
- *     uint8_t * data;
- *     uint32_t size;
+ *     uint8_t * {@link #data};
+ *     uint32_t {@link #size};
  * }</code></pre>
  */
 @NativeType("struct bgfx_memory_t")
@@ -76,14 +69,14 @@ public class BGFXMemory extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
+    /** pointer to data */
     @NativeType("uint8_t *")
     public ByteBuffer data() { return ndata(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** data size */
     @NativeType("uint32_t")
     public int size() { return nsize(address()); }
 
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code data} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@link #data} field. */
     public BGFXMemory data(@NativeType("uint8_t *") ByteBuffer value) { ndata(address(), value); return this; }
 
     /**
@@ -310,14 +303,14 @@ public class BGFXMemory extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link BGFXMemory#data} field. */
         @NativeType("uint8_t *")
         public ByteBuffer data() { return BGFXMemory.ndata(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link BGFXMemory#size} field. */
         @NativeType("uint32_t")
         public int size() { return BGFXMemory.nsize(address()); }
 
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code data} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@link BGFXMemory#data} field. */
         public BGFXMemory.Buffer data(@NativeType("uint8_t *") ByteBuffer value) { BGFXMemory.ndata(address(), value); return this; }
 
     }

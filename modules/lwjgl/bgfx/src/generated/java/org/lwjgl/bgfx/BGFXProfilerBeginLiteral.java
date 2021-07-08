@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     bgfx_callback_interface_t *_this,
  *     char const *_name,
  *     uint32_t _abgr,
@@ -53,7 +53,7 @@ public abstract class BGFXProfilerBeginLiteral extends Callback implements BGFXP
     }
 
     protected BGFXProfilerBeginLiteral() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     BGFXProfilerBeginLiteral(long functionPointer) {

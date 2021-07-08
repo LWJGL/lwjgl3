@@ -28,21 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code maxVariableDescriptorCount} &ndash; indicates the maximum number of descriptors supported in the highest numbered binding of the layout, if that binding is variable-sized. If the highest numbered binding of the layout has a descriptor type of {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} then {@code maxVariableDescriptorCount} indicates the maximum byte size supported for the binding, if that binding is variable-sized.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDescriptorSetVariableDescriptorCountLayoutSupport {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint32_t maxVariableDescriptorCount;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint32_t {@link #maxVariableDescriptorCount};
  * }</code></pre>
  */
 public class VkDescriptorSetVariableDescriptorCountLayoutSupport extends Struct implements NativeResource {
@@ -87,19 +79,19 @@ public class VkDescriptorSetVariableDescriptorCountLayoutSupport extends Struct 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code maxVariableDescriptorCount} field. */
+    /** indicates the maximum number of descriptors supported in the highest numbered binding of the layout, if that binding is variable-sized. If the highest numbered binding of the layout has a descriptor type of {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} then {@code maxVariableDescriptorCount} indicates the maximum byte size supported for the binding, if that binding is variable-sized. */
     @NativeType("uint32_t")
     public int maxVariableDescriptorCount() { return nmaxVariableDescriptorCount(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkDescriptorSetVariableDescriptorCountLayoutSupport sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkDescriptorSetVariableDescriptorCountLayoutSupport pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,19 +310,19 @@ public class VkDescriptorSetVariableDescriptorCountLayoutSupport extends Struct 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkDescriptorSetVariableDescriptorCountLayoutSupport#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDescriptorSetVariableDescriptorCountLayoutSupport.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkDescriptorSetVariableDescriptorCountLayoutSupport#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkDescriptorSetVariableDescriptorCountLayoutSupport.npNext(address()); }
-        /** Returns the value of the {@code maxVariableDescriptorCount} field. */
+        /** @return the value of the {@link VkDescriptorSetVariableDescriptorCountLayoutSupport#maxVariableDescriptorCount} field. */
         @NativeType("uint32_t")
         public int maxVariableDescriptorCount() { return VkDescriptorSetVariableDescriptorCountLayoutSupport.nmaxVariableDescriptorCount(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkDescriptorSetVariableDescriptorCountLayoutSupport#sType} field. */
         public VkDescriptorSetVariableDescriptorCountLayoutSupport.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorSetVariableDescriptorCountLayoutSupport.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkDescriptorSetVariableDescriptorCountLayoutSupport#pNext} field. */
         public VkDescriptorSetVariableDescriptorCountLayoutSupport.Buffer pNext(@NativeType("void *") long value) { VkDescriptorSetVariableDescriptorCountLayoutSupport.npNext(address(), value); return this; }
 
     }

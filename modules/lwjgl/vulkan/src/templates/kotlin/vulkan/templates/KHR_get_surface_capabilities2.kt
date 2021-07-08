@@ -13,6 +13,7 @@ val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("
         """
         This extension provides new entry points to query device surface capabilities in a way that can be easily extended by other extensions, without introducing any further entry points. This extension can be considered the {@link KHRSurface VK_KHR_surface} equivalent of the {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} extension.
 
+        <h5>VK_KHR_get_surface_capabilities2</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_get_surface_capabilities2}</dd>
@@ -36,7 +37,10 @@ val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("
             <dd><ul>
                 <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_get_surface_capabilities2:%20&amp;body=@cubanismo%20">cubanismo</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-02-27</dd>
 
@@ -91,7 +95,7 @@ val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If a ##VkSurfaceCapabilitiesFullScreenExclusiveEXT structure is included in the {@code pNext} chain of {@code pSurfaceCapabilities}, a ##VkSurfaceFullScreenExclusiveWin32InfoEXT structure <b>must</b> be included in the {@code pNext} chain of {@code pSurfaceInfo}.</li>
+            <li>If a ##VkSurfaceCapabilitiesFullScreenExclusiveEXT structure is included in the {@code pNext} chain of {@code pSurfaceCapabilities}, a ##VkSurfaceFullScreenExclusiveWin32InfoEXT structure <b>must</b> be included in the {@code pNext} chain of {@code pSurfaceInfo}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -147,7 +151,7 @@ val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code pSurfaceInfo}-&gt;surface must be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism.</li>
+            <li>{@code pSurfaceInfo}&#8594;surface <b>must</b> be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

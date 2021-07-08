@@ -77,16 +77,16 @@ public class SpvcMslShaderInput extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code location} field. */
+    /** @return the value of the {@code location} field. */
     @NativeType("unsigned")
     public int location() { return nlocation(address()); }
-    /** Returns the value of the {@code format} field. */
+    /** @return the value of the {@code format} field. */
     @NativeType("spvc_msl_vertex_format")
     public int format() { return nformat(address()); }
-    /** Returns the value of the {@code builtin} field. */
+    /** @return the value of the {@code builtin} field. */
     @NativeType("SpvBuiltIn")
     public int builtin() { return nbuiltin(address()); }
-    /** Returns the value of the {@code vecsize} field. */
+    /** @return the value of the {@code vecsize} field. */
     @NativeType("unsigned")
     public int vecsize() { return nvecsize(address()); }
 
@@ -325,16 +325,16 @@ public class SpvcMslShaderInput extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code location} field. */
+        /** @return the value of the {@code location} field. */
         @NativeType("unsigned")
         public int location() { return SpvcMslShaderInput.nlocation(address()); }
-        /** Returns the value of the {@code format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("spvc_msl_vertex_format")
         public int format() { return SpvcMslShaderInput.nformat(address()); }
-        /** Returns the value of the {@code builtin} field. */
+        /** @return the value of the {@code builtin} field. */
         @NativeType("SpvBuiltIn")
         public int builtin() { return SpvcMslShaderInput.nbuiltin(address()); }
-        /** Returns the value of the {@code vecsize} field. */
+        /** @return the value of the {@code vecsize} field. */
         @NativeType("unsigned")
         public int vecsize() { return SpvcMslShaderInput.nvecsize(address()); }
 

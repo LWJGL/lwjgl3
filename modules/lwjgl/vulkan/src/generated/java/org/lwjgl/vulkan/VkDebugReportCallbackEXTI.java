@@ -6,8 +6,11 @@
 package org.lwjgl.vulkan;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Application-defined debug report callback function.
@@ -41,25 +44,30 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("PFN_vkDebugReportCallbackEXT")
-public interface VkDebugReportCallbackEXTI extends CallbackI.I {
+public interface VkDebugReportCallbackEXTI extends CallbackI {
 
-    String SIGNATURE = Callback.__stdcall("(iilpippp)i");
+    FFICIF CIF = apiCreateCIF(
+        apiStdcall(),
+        ffi_type_uint32,
+        ffi_type_uint32, ffi_type_uint32, ffi_type_uint64, ffi_type_pointer, ffi_type_sint32, ffi_type_pointer, ffi_type_pointer, ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default int callback(long args) {
-        return invoke(
-            dcbArgInt(args),
-            dcbArgInt(args),
-            dcbArgLongLong(args),
-            dcbArgPointer(args),
-            dcbArgInt(args),
-            dcbArgPointer(args),
-            dcbArgPointer(args),
-            dcbArgPointer(args)
+    default void callback(long ret, long args) {
+        int __result = invoke(
+            memGetInt(memGetAddress(args)),
+            memGetInt(memGetAddress(args + POINTER_SIZE)),
+            memGetLong(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 3 * POINTER_SIZE)),
+            memGetInt(memGetAddress(args + 4 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 5 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 6 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 7 * POINTER_SIZE))
         );
+        apiClosureRet(ret, __result);
     }
 
     /**

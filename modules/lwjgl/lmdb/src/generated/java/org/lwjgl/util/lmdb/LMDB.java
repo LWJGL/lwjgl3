@@ -128,6 +128,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class LMDB {
 
+    static { LibLMDB.initialize(); }
+
     /**
      * Environment flags.
      * 
@@ -323,8 +325,6 @@ public class LMDB {
         MDB_BAD_VALSIZE      = -30781,
         MDB_BAD_DBI          = -30780,
         MDB_LAST_ERRCODE     = MDB_BAD_DBI;
-
-    static { LibLMDB.initialize(); }
 
     protected LMDB() {
         throw new UnsupportedOperationException();

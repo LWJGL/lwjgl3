@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     bgfx_callback_interface_t *_this,
  *     char const *_filePath,
  *     uint16_t _line,
@@ -56,7 +56,7 @@ public abstract class BGFXFatalCallback extends Callback implements BGFXFatalCal
     }
 
     protected BGFXFatalCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     BGFXFatalCallback(long functionPointer) {

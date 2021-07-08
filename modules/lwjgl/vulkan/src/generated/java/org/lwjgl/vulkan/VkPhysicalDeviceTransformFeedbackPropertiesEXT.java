@@ -28,39 +28,22 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTTransformFeedback#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code maxTransformFeedbackStreams} &ndash; the maximum number of vertex streams that can be output from geometry shaders declared with the {@code GeometryStreams} capability. If the implementation does not support {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT}{@code ::geometryStreams} then {@code maxTransformFeedbackStreams} <b>must</b> be set to 1.</li>
- * <li>{@code maxTransformFeedbackBuffers} &ndash; the maximum number of transform feedback buffers that can be bound for capturing shader outputs from the last vertex processing stage.</li>
- * <li>{@code maxTransformFeedbackBufferSize} &ndash; the maximum size that can be specified when binding a buffer for transform feedback in {@link EXTTransformFeedback#vkCmdBindTransformFeedbackBuffersEXT CmdBindTransformFeedbackBuffersEXT}.</li>
- * <li>{@code maxTransformFeedbackStreamDataSize} &ndash; the maximum amount of data in bytes for each vertex that captured to one or more transform feedback buffers associated with a specific vertex stream.</li>
- * <li>{@code maxTransformFeedbackBufferDataSize} &ndash; the maximum amount of data in bytes for each vertex that can be captured to a specific transform feedback buffer.</li>
- * <li>{@code maxTransformFeedbackBufferDataStride} &ndash; the maximum stride between each capture of vertex data to the buffer.</li>
- * <li>{@code transformFeedbackQueries} &ndash; true if the implementation supports the {@link EXTTransformFeedback#VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} query type. {@code transformFeedbackQueries} is false if queries of this type <b>cannot</b> be created.</li>
- * <li>{@code transformFeedbackStreamsLinesTriangles} &ndash; true if the implementation supports the geometry shader {@code OpExecutionMode} of {@code OutputLineStrip} and {@code OutputTriangleStrip} in addition to {@code OutputPoints} when more than one vertex stream is output. If {@code transformFeedbackStreamsLinesTriangles} is false the implementation only supports an {@code OpExecutionMode} of {@code OutputPoints} when more than one vertex stream is output from the geometry shader.</li>
- * <li>{@code transformFeedbackRasterizationStreamSelect} &ndash; true if the implementation supports the {@code GeometryStreams} SPIR-V capability and the application can use {@link VkPipelineRasterizationStateStreamCreateInfoEXT} to modify which vertex stream output is used for rasterization. Otherwise vertex stream 0 <b>must</b> always be used for rasterization.</li>
- * <li>{@code transformFeedbackDraw} &ndash; true if the implementation supports the {@link EXTTransformFeedback#vkCmdDrawIndirectByteCountEXT CmdDrawIndirectByteCountEXT} function otherwise the function <b>must</b> not be called.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceTransformFeedbackPropertiesEXT {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint32_t maxTransformFeedbackStreams;
- *     uint32_t maxTransformFeedbackBuffers;
- *     VkDeviceSize maxTransformFeedbackBufferSize;
- *     uint32_t maxTransformFeedbackStreamDataSize;
- *     uint32_t maxTransformFeedbackBufferDataSize;
- *     uint32_t maxTransformFeedbackBufferDataStride;
- *     VkBool32 transformFeedbackQueries;
- *     VkBool32 transformFeedbackStreamsLinesTriangles;
- *     VkBool32 transformFeedbackRasterizationStreamSelect;
- *     VkBool32 transformFeedbackDraw;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint32_t {@link #maxTransformFeedbackStreams};
+ *     uint32_t {@link #maxTransformFeedbackBuffers};
+ *     VkDeviceSize {@link #maxTransformFeedbackBufferSize};
+ *     uint32_t {@link #maxTransformFeedbackStreamDataSize};
+ *     uint32_t {@link #maxTransformFeedbackBufferDataSize};
+ *     uint32_t {@link #maxTransformFeedbackBufferDataStride};
+ *     VkBool32 {@link #transformFeedbackQueries};
+ *     VkBool32 {@link #transformFeedbackStreamsLinesTriangles};
+ *     VkBool32 {@link #transformFeedbackRasterizationStreamSelect};
+ *     VkBool32 {@link #transformFeedbackDraw};
  * }</code></pre>
  */
 public class VkPhysicalDeviceTransformFeedbackPropertiesEXT extends Struct implements NativeResource {
@@ -132,46 +115,46 @@ public class VkPhysicalDeviceTransformFeedbackPropertiesEXT extends Struct imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code maxTransformFeedbackStreams} field. */
+    /** the maximum number of vertex streams that can be output from geometry shaders declared with the {@code GeometryStreams} capability. If the implementation does not support {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT}{@code ::geometryStreams} then {@code maxTransformFeedbackStreams} <b>must</b> be set to 1. */
     @NativeType("uint32_t")
     public int maxTransformFeedbackStreams() { return nmaxTransformFeedbackStreams(address()); }
-    /** Returns the value of the {@code maxTransformFeedbackBuffers} field. */
+    /** the maximum number of transform feedback buffers that can be bound for capturing shader outputs from the last vertex processing stage. */
     @NativeType("uint32_t")
     public int maxTransformFeedbackBuffers() { return nmaxTransformFeedbackBuffers(address()); }
-    /** Returns the value of the {@code maxTransformFeedbackBufferSize} field. */
+    /** the maximum size that can be specified when binding a buffer for transform feedback in {@link EXTTransformFeedback#vkCmdBindTransformFeedbackBuffersEXT CmdBindTransformFeedbackBuffersEXT}. */
     @NativeType("VkDeviceSize")
     public long maxTransformFeedbackBufferSize() { return nmaxTransformFeedbackBufferSize(address()); }
-    /** Returns the value of the {@code maxTransformFeedbackStreamDataSize} field. */
+    /** the maximum amount of data in bytes for each vertex that captured to one or more transform feedback buffers associated with a specific vertex stream. */
     @NativeType("uint32_t")
     public int maxTransformFeedbackStreamDataSize() { return nmaxTransformFeedbackStreamDataSize(address()); }
-    /** Returns the value of the {@code maxTransformFeedbackBufferDataSize} field. */
+    /** the maximum amount of data in bytes for each vertex that can be captured to a specific transform feedback buffer. */
     @NativeType("uint32_t")
     public int maxTransformFeedbackBufferDataSize() { return nmaxTransformFeedbackBufferDataSize(address()); }
-    /** Returns the value of the {@code maxTransformFeedbackBufferDataStride} field. */
+    /** the maximum stride between each capture of vertex data to the buffer. */
     @NativeType("uint32_t")
     public int maxTransformFeedbackBufferDataStride() { return nmaxTransformFeedbackBufferDataStride(address()); }
-    /** Returns the value of the {@code transformFeedbackQueries} field. */
+    /** true if the implementation supports the {@link EXTTransformFeedback#VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} query type. {@code transformFeedbackQueries} is false if queries of this type <b>cannot</b> be created. */
     @NativeType("VkBool32")
     public boolean transformFeedbackQueries() { return ntransformFeedbackQueries(address()) != 0; }
-    /** Returns the value of the {@code transformFeedbackStreamsLinesTriangles} field. */
+    /** true if the implementation supports the geometry shader {@code OpExecutionMode} of {@code OutputLineStrip} and {@code OutputTriangleStrip} in addition to {@code OutputPoints} when more than one vertex stream is output. If {@code transformFeedbackStreamsLinesTriangles} is false the implementation only supports an {@code OpExecutionMode} of {@code OutputPoints} when more than one vertex stream is output from the geometry shader. */
     @NativeType("VkBool32")
     public boolean transformFeedbackStreamsLinesTriangles() { return ntransformFeedbackStreamsLinesTriangles(address()) != 0; }
-    /** Returns the value of the {@code transformFeedbackRasterizationStreamSelect} field. */
+    /** true if the implementation supports the {@code GeometryStreams} SPIR-V capability and the application can use {@link VkPipelineRasterizationStateStreamCreateInfoEXT} to modify which vertex stream output is used for rasterization. Otherwise vertex stream 0 <b>must</b> always be used for rasterization. */
     @NativeType("VkBool32")
     public boolean transformFeedbackRasterizationStreamSelect() { return ntransformFeedbackRasterizationStreamSelect(address()) != 0; }
-    /** Returns the value of the {@code transformFeedbackDraw} field. */
+    /** true if the implementation supports the {@link EXTTransformFeedback#vkCmdDrawIndirectByteCountEXT CmdDrawIndirectByteCountEXT} function otherwise the function <b>must</b> not be called. */
     @NativeType("VkBool32")
     public boolean transformFeedbackDraw() { return ntransformFeedbackDraw(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceTransformFeedbackPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceTransformFeedbackPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -408,46 +391,46 @@ public class VkPhysicalDeviceTransformFeedbackPropertiesEXT extends Struct imple
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceTransformFeedbackPropertiesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceTransformFeedbackPropertiesEXT.npNext(address()); }
-        /** Returns the value of the {@code maxTransformFeedbackStreams} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#maxTransformFeedbackStreams} field. */
         @NativeType("uint32_t")
         public int maxTransformFeedbackStreams() { return VkPhysicalDeviceTransformFeedbackPropertiesEXT.nmaxTransformFeedbackStreams(address()); }
-        /** Returns the value of the {@code maxTransformFeedbackBuffers} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#maxTransformFeedbackBuffers} field. */
         @NativeType("uint32_t")
         public int maxTransformFeedbackBuffers() { return VkPhysicalDeviceTransformFeedbackPropertiesEXT.nmaxTransformFeedbackBuffers(address()); }
-        /** Returns the value of the {@code maxTransformFeedbackBufferSize} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#maxTransformFeedbackBufferSize} field. */
         @NativeType("VkDeviceSize")
         public long maxTransformFeedbackBufferSize() { return VkPhysicalDeviceTransformFeedbackPropertiesEXT.nmaxTransformFeedbackBufferSize(address()); }
-        /** Returns the value of the {@code maxTransformFeedbackStreamDataSize} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#maxTransformFeedbackStreamDataSize} field. */
         @NativeType("uint32_t")
         public int maxTransformFeedbackStreamDataSize() { return VkPhysicalDeviceTransformFeedbackPropertiesEXT.nmaxTransformFeedbackStreamDataSize(address()); }
-        /** Returns the value of the {@code maxTransformFeedbackBufferDataSize} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#maxTransformFeedbackBufferDataSize} field. */
         @NativeType("uint32_t")
         public int maxTransformFeedbackBufferDataSize() { return VkPhysicalDeviceTransformFeedbackPropertiesEXT.nmaxTransformFeedbackBufferDataSize(address()); }
-        /** Returns the value of the {@code maxTransformFeedbackBufferDataStride} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#maxTransformFeedbackBufferDataStride} field. */
         @NativeType("uint32_t")
         public int maxTransformFeedbackBufferDataStride() { return VkPhysicalDeviceTransformFeedbackPropertiesEXT.nmaxTransformFeedbackBufferDataStride(address()); }
-        /** Returns the value of the {@code transformFeedbackQueries} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#transformFeedbackQueries} field. */
         @NativeType("VkBool32")
         public boolean transformFeedbackQueries() { return VkPhysicalDeviceTransformFeedbackPropertiesEXT.ntransformFeedbackQueries(address()) != 0; }
-        /** Returns the value of the {@code transformFeedbackStreamsLinesTriangles} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#transformFeedbackStreamsLinesTriangles} field. */
         @NativeType("VkBool32")
         public boolean transformFeedbackStreamsLinesTriangles() { return VkPhysicalDeviceTransformFeedbackPropertiesEXT.ntransformFeedbackStreamsLinesTriangles(address()) != 0; }
-        /** Returns the value of the {@code transformFeedbackRasterizationStreamSelect} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#transformFeedbackRasterizationStreamSelect} field. */
         @NativeType("VkBool32")
         public boolean transformFeedbackRasterizationStreamSelect() { return VkPhysicalDeviceTransformFeedbackPropertiesEXT.ntransformFeedbackRasterizationStreamSelect(address()) != 0; }
-        /** Returns the value of the {@code transformFeedbackDraw} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#transformFeedbackDraw} field. */
         @NativeType("VkBool32")
         public boolean transformFeedbackDraw() { return VkPhysicalDeviceTransformFeedbackPropertiesEXT.ntransformFeedbackDraw(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#sType} field. */
         public VkPhysicalDeviceTransformFeedbackPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceTransformFeedbackPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#pNext} field. */
         public VkPhysicalDeviceTransformFeedbackPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceTransformFeedbackPropertiesEXT.npNext(address(), value); return this; }
 
     }

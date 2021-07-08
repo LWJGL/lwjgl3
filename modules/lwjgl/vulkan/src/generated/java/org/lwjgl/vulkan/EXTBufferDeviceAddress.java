@@ -15,6 +15,8 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>It also allows buffer device addresses to be provided by a trace replay tool, so that it matches the address used when the trace was captured.</p>
  * 
+ * <h5>VK_EXT_buffer_device_address</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_buffer_device_address}</dd>
@@ -42,10 +44,19 @@ import static org.lwjgl.system.JNI.*;
  * <dd><ul>
  * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_buffer_device_address:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-01-06</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
+ * <dt><b>Interactions and External Dependencies</b></dt>
+ * <dd><ul>
+ * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_physical_storage_buffer.html">{@code SPV_EXT_physical_storage_buffer}</a></li>
+ * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Jeff Bolz, NVIDIA</li>
@@ -89,7 +100,7 @@ public class EXTBufferDeviceAddress {
     public static final int VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT = 0x10;
 
     /** Extends {@code VkResult}. */
-    public static final int VK_ERROR_INVALID_DEVICE_ADDRESS_EXT = -1000244000;
+    public static final int VK_ERROR_INVALID_DEVICE_ADDRESS_EXT = -1000257000;
 
     protected EXTBufferDeviceAddress() {
         throw new UnsupportedOperationException();

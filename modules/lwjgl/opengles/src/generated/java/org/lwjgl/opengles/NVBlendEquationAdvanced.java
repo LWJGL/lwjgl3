@@ -58,6 +58,8 @@ import org.lwjgl.system.*;
  */
 public class NVBlendEquationAdvanced {
 
+    static { GLES.initialize(); }
+
     /**
      * The BLEND_ADVANCED_COHERENT_NV enable is provided if and only if the NV_blend_equation_advanced_coherent extension is supported. On implementations
      * supporting only NV_blend_equation_advanced, this enable is considered not to exist. Accepted by the {@code pname} parameter of BlendParameteriNV,
@@ -119,8 +121,6 @@ public class NVBlendEquationAdvanced {
         GL_RED_NV                = 0x1903,
         GL_GREEN_NV              = 0x1904,
         GL_BLUE_NV               = 0x1905;
-
-    static { GLES.initialize(); }
 
     protected NVBlendEquationAdvanced() {
         throw new UnsupportedOperationException();

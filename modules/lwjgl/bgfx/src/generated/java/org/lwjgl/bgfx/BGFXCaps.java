@@ -19,35 +19,20 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TEXTURE_FORMAT_COUNT;
 /**
  * Renderer capabilities.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code rendererType} &ndash; renderer backend type. One of:<br><table><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_NOOP RENDERER_TYPE_NOOP}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D9 RENDERER_TYPE_DIRECT3D9}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D11 RENDERER_TYPE_DIRECT3D11}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D12 RENDERER_TYPE_DIRECT3D12}</td></tr><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_GNM RENDERER_TYPE_GNM}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_METAL RENDERER_TYPE_METAL}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_NVN RENDERER_TYPE_NVN}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_OPENGLES RENDERER_TYPE_OPENGLES}</td></tr><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_OPENGL RENDERER_TYPE_OPENGL}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_VULKAN RENDERER_TYPE_VULKAN}</td></tr></table></li>
- * <li>{@code supported} &ndash; supported functionality. One or more of:<br><table><tr><td>{@link BGFX#BGFX_CAPS_ALPHA_TO_COVERAGE CAPS_ALPHA_TO_COVERAGE}</td><td>{@link BGFX#BGFX_CAPS_BLEND_INDEPENDENT CAPS_BLEND_INDEPENDENT}</td><td>{@link BGFX#BGFX_CAPS_COMPUTE CAPS_COMPUTE}</td><td>{@link BGFX#BGFX_CAPS_CONSERVATIVE_RASTER CAPS_CONSERVATIVE_RASTER}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_DRAW_INDIRECT CAPS_DRAW_INDIRECT}</td><td>{@link BGFX#BGFX_CAPS_FRAGMENT_DEPTH CAPS_FRAGMENT_DEPTH}</td><td>{@link BGFX#BGFX_CAPS_FRAGMENT_ORDERING CAPS_FRAGMENT_ORDERING}</td><td>{@link BGFX#BGFX_CAPS_FRAMEBUFFER_RW CAPS_FRAMEBUFFER_RW}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_GRAPHICS_DEBUGGER CAPS_GRAPHICS_DEBUGGER}</td><td>{@link BGFX#BGFX_CAPS_RESERVED CAPS_RESERVED}</td><td>{@link BGFX#BGFX_CAPS_HDR10 CAPS_HDR10}</td><td>{@link BGFX#BGFX_CAPS_HIDPI CAPS_HIDPI}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_INDEX32 CAPS_INDEX32}</td><td>{@link BGFX#BGFX_CAPS_INSTANCING CAPS_INSTANCING}</td><td>{@link BGFX#BGFX_CAPS_OCCLUSION_QUERY CAPS_OCCLUSION_QUERY}</td><td>{@link BGFX#BGFX_CAPS_RENDERER_MULTITHREADED CAPS_RENDERER_MULTITHREADED}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_SWAP_CHAIN CAPS_SWAP_CHAIN}</td><td>{@link BGFX#BGFX_CAPS_TEXTURE_2D_ARRAY CAPS_TEXTURE_2D_ARRAY}</td><td>{@link BGFX#BGFX_CAPS_TEXTURE_3D CAPS_TEXTURE_3D}</td><td>{@link BGFX#BGFX_CAPS_TEXTURE_BLIT CAPS_TEXTURE_BLIT}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_TEXTURE_COMPARE_RESERVED CAPS_TEXTURE_COMPARE_RESERVED}</td><td>{@link BGFX#BGFX_CAPS_TEXTURE_COMPARE_LEQUAL CAPS_TEXTURE_COMPARE_LEQUAL}</td><td>{@link BGFX#BGFX_CAPS_TEXTURE_COMPARE_ALL CAPS_TEXTURE_COMPARE_ALL}</td><td>{@link BGFX#BGFX_CAPS_TEXTURE_CUBE_ARRAY CAPS_TEXTURE_CUBE_ARRAY}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_TEXTURE_DIRECT_ACCESS CAPS_TEXTURE_DIRECT_ACCESS}</td><td>{@link BGFX#BGFX_CAPS_TEXTURE_READ_BACK CAPS_TEXTURE_READ_BACK}</td><td>{@link BGFX#BGFX_CAPS_VERTEX_ATTRIB_HALF CAPS_VERTEX_ATTRIB_HALF}</td><td>{@link BGFX#BGFX_CAPS_VERTEX_ATTRIB_UINT10 CAPS_VERTEX_ATTRIB_UINT10}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_VERTEX_ID CAPS_VERTEX_ID}</td></tr></table></li>
- * <li>{@code vendorId} &ndash; selected GPU vendor PCI id. One of:<br><table><tr><td>{@link BGFX#BGFX_PCI_ID_NONE PCI_ID_NONE}</td><td>{@link BGFX#BGFX_PCI_ID_SOFTWARE_RASTERIZER PCI_ID_SOFTWARE_RASTERIZER}</td><td>{@link BGFX#BGFX_PCI_ID_AMD PCI_ID_AMD}</td><td>{@link BGFX#BGFX_PCI_ID_INTEL PCI_ID_INTEL}</td><td>{@link BGFX#BGFX_PCI_ID_NVIDIA PCI_ID_NVIDIA}</td></tr></table></li>
- * <li>{@code deviceId} &ndash; selected GPU device id</li>
- * <li>{@code homogeneousDepth} &ndash; true when NDC depth is in [-1, 1] range, otherwise its [0, 1]</li>
- * <li>{@code originBottomLeft} &ndash; true when NDC origin is at bottom left</li>
- * <li>{@code numGPUs} &ndash; number of enumerated GPUs</li>
- * <li>{@code gpu[4]} &ndash; enumerated GPUs</li>
- * <li>{@code limits} &ndash; renderer runtime limits</li>
- * <li>{@code formats[BGFX_TEXTURE_FORMAT_COUNT]} &ndash; supported texture formats</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct bgfx_caps_t {
- *     bgfx_renderer_type_t rendererType;
- *     uint64_t supported;
- *     uint16_t vendorId;
- *     uint16_t deviceId;
- *     bool homogeneousDepth;
- *     bool originBottomLeft;
- *     uint8_t numGPUs;
- *     {@link BGFXCapsGPU bgfx_caps_gpu_t} gpu[4];
- *     {@link BGFXCapsLimits bgfx_caps_limits_t} limits;
- *     uint16_t formats[BGFX_TEXTURE_FORMAT_COUNT];
+ *     bgfx_renderer_type_t {@link #rendererType};
+ *     uint64_t {@link #supported};
+ *     uint16_t {@link #vendorId};
+ *     uint16_t {@link #deviceId};
+ *     bool {@link #homogeneousDepth};
+ *     bool {@link #originBottomLeft};
+ *     uint8_t {@link #numGPUs};
+ *     {@link BGFXCapsGPU bgfx_caps_gpu_t} {@link #gpu}[4];
+ *     {@link BGFXCapsLimits bgfx_caps_limits_t} {@link #limits};
+ *     uint16_t {@link #formats}[BGFX_TEXTURE_FORMAT_COUNT];
  * }</code></pre>
  */
 @NativeType("struct bgfx_caps_t")
@@ -114,40 +99,40 @@ public class BGFXCaps extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code rendererType} field. */
+    /** renderer backend type. One of:<br><table><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_NOOP RENDERER_TYPE_NOOP}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D9 RENDERER_TYPE_DIRECT3D9}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D11 RENDERER_TYPE_DIRECT3D11}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_DIRECT3D12 RENDERER_TYPE_DIRECT3D12}</td></tr><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_GNM RENDERER_TYPE_GNM}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_METAL RENDERER_TYPE_METAL}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_NVN RENDERER_TYPE_NVN}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_OPENGLES RENDERER_TYPE_OPENGLES}</td></tr><tr><td>{@link BGFX#BGFX_RENDERER_TYPE_OPENGL RENDERER_TYPE_OPENGL}</td><td>{@link BGFX#BGFX_RENDERER_TYPE_VULKAN RENDERER_TYPE_VULKAN}</td></tr></table> */
     @NativeType("bgfx_renderer_type_t")
     public int rendererType() { return nrendererType(address()); }
-    /** Returns the value of the {@code supported} field. */
+    /** supported functionality. One or more of:<br><table><tr><td>{@link BGFX#BGFX_CAPS_ALPHA_TO_COVERAGE CAPS_ALPHA_TO_COVERAGE}</td><td>{@link BGFX#BGFX_CAPS_BLEND_INDEPENDENT CAPS_BLEND_INDEPENDENT}</td><td>{@link BGFX#BGFX_CAPS_COMPUTE CAPS_COMPUTE}</td><td>{@link BGFX#BGFX_CAPS_CONSERVATIVE_RASTER CAPS_CONSERVATIVE_RASTER}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_DRAW_INDIRECT CAPS_DRAW_INDIRECT}</td><td>{@link BGFX#BGFX_CAPS_FRAGMENT_DEPTH CAPS_FRAGMENT_DEPTH}</td><td>{@link BGFX#BGFX_CAPS_FRAGMENT_ORDERING CAPS_FRAGMENT_ORDERING}</td><td>{@link BGFX#BGFX_CAPS_GRAPHICS_DEBUGGER CAPS_GRAPHICS_DEBUGGER}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_HDR10 CAPS_HDR10}</td><td>{@link BGFX#BGFX_CAPS_HIDPI CAPS_HIDPI}</td><td>{@link BGFX#BGFX_CAPS_IMAGE_RW CAPS_IMAGE_RW}</td><td>{@link BGFX#BGFX_CAPS_INDEX32 CAPS_INDEX32}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_INSTANCING CAPS_INSTANCING}</td><td>{@link BGFX#BGFX_CAPS_OCCLUSION_QUERY CAPS_OCCLUSION_QUERY}</td><td>{@link BGFX#BGFX_CAPS_RENDERER_MULTITHREADED CAPS_RENDERER_MULTITHREADED}</td><td>{@link BGFX#BGFX_CAPS_SWAP_CHAIN CAPS_SWAP_CHAIN}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_TEXTURE_2D_ARRAY CAPS_TEXTURE_2D_ARRAY}</td><td>{@link BGFX#BGFX_CAPS_TEXTURE_3D CAPS_TEXTURE_3D}</td><td>{@link BGFX#BGFX_CAPS_TEXTURE_BLIT CAPS_TEXTURE_BLIT}</td><td>{@link BGFX#BGFX_CAPS_TEXTURE_COMPARE_RESERVED CAPS_TEXTURE_COMPARE_RESERVED}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_TEXTURE_COMPARE_LEQUAL CAPS_TEXTURE_COMPARE_LEQUAL}</td><td>{@link BGFX#BGFX_CAPS_TEXTURE_COMPARE_ALL CAPS_TEXTURE_COMPARE_ALL}</td><td>{@link BGFX#BGFX_CAPS_TEXTURE_CUBE_ARRAY CAPS_TEXTURE_CUBE_ARRAY}</td><td>{@link BGFX#BGFX_CAPS_TEXTURE_DIRECT_ACCESS CAPS_TEXTURE_DIRECT_ACCESS}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_TEXTURE_READ_BACK CAPS_TEXTURE_READ_BACK}</td><td>{@link BGFX#BGFX_CAPS_VERTEX_ATTRIB_HALF CAPS_VERTEX_ATTRIB_HALF}</td><td>{@link BGFX#BGFX_CAPS_VERTEX_ATTRIB_UINT10 CAPS_VERTEX_ATTRIB_UINT10}</td><td>{@link BGFX#BGFX_CAPS_VERTEX_ID CAPS_VERTEX_ID}</td></tr><tr><td>{@link BGFX#BGFX_CAPS_VIEWPORT_LAYER_ARRAY CAPS_VIEWPORT_LAYER_ARRAY}</td></tr></table> */
     @NativeType("uint64_t")
     public long supported() { return nsupported(address()); }
-    /** Returns the value of the {@code vendorId} field. */
+    /** selected GPU vendor PCI id. One of:<br><table><tr><td>{@link BGFX#BGFX_PCI_ID_NONE PCI_ID_NONE}</td><td>{@link BGFX#BGFX_PCI_ID_SOFTWARE_RASTERIZER PCI_ID_SOFTWARE_RASTERIZER}</td><td>{@link BGFX#BGFX_PCI_ID_AMD PCI_ID_AMD}</td><td>{@link BGFX#BGFX_PCI_ID_INTEL PCI_ID_INTEL}</td><td>{@link BGFX#BGFX_PCI_ID_NVIDIA PCI_ID_NVIDIA}</td></tr></table> */
     @NativeType("uint16_t")
     public short vendorId() { return nvendorId(address()); }
-    /** Returns the value of the {@code deviceId} field. */
+    /** selected GPU device id */
     @NativeType("uint16_t")
     public short deviceId() { return ndeviceId(address()); }
-    /** Returns the value of the {@code homogeneousDepth} field. */
+    /** true when NDC depth is in [-1, 1] range, otherwise its [0, 1] */
     @NativeType("bool")
     public boolean homogeneousDepth() { return nhomogeneousDepth(address()); }
-    /** Returns the value of the {@code originBottomLeft} field. */
+    /** true when NDC origin is at bottom left */
     @NativeType("bool")
     public boolean originBottomLeft() { return noriginBottomLeft(address()); }
-    /** Returns the value of the {@code numGPUs} field. */
+    /** number of enumerated GPUs */
     @NativeType("uint8_t")
     public byte numGPUs() { return nnumGPUs(address()); }
-    /** Returns a {@link BGFXCapsGPU}.Buffer view of the {@code gpu} field. */
+    /** enumerated GPUs */
     @NativeType("bgfx_caps_gpu_t[4]")
     public BGFXCapsGPU.Buffer gpu() { return ngpu(address()); }
-    /** Returns a {@link BGFXCapsGPU} view of the struct at the specified index of the {@code gpu} field. */
+    /** enumerated GPUs */
     @NativeType("bgfx_caps_gpu_t")
     public BGFXCapsGPU gpu(int index) { return ngpu(address(), index); }
-    /** Returns a {@link BGFXCapsLimits} view of the {@code limits} field. */
+    /** renderer runtime limits */
     @NativeType("bgfx_caps_limits_t")
     public BGFXCapsLimits limits() { return nlimits(address()); }
-    /** Returns a {@link ShortBuffer} view of the {@code formats} field. */
+    /** supported texture formats */
     @NativeType("uint16_t[BGFX_TEXTURE_FORMAT_COUNT]")
     public ShortBuffer formats() { return nformats(address()); }
-    /** Returns the value at the specified index of the {@code formats} field. */
+    /** supported texture formats */
     @NativeType("uint16_t")
     public short formats(int index) { return nformats(address(), index); }
 

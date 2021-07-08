@@ -67,13 +67,13 @@ public class XrSystemGraphicsProperties extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code maxSwapchainImageHeight} field. */
+    /** @return the value of the {@code maxSwapchainImageHeight} field. */
     @NativeType("uint32_t")
     public int maxSwapchainImageHeight() { return nmaxSwapchainImageHeight(address()); }
-    /** Returns the value of the {@code maxSwapchainImageWidth} field. */
+    /** @return the value of the {@code maxSwapchainImageWidth} field. */
     @NativeType("uint32_t")
     public int maxSwapchainImageWidth() { return nmaxSwapchainImageWidth(address()); }
-    /** Returns the value of the {@code maxLayerCount} field. */
+    /** @return the value of the {@code maxLayerCount} field. */
     @NativeType("uint32_t")
     public int maxLayerCount() { return nmaxLayerCount(address()); }
 
@@ -304,13 +304,13 @@ public class XrSystemGraphicsProperties extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code maxSwapchainImageHeight} field. */
+        /** @return the value of the {@code maxSwapchainImageHeight} field. */
         @NativeType("uint32_t")
         public int maxSwapchainImageHeight() { return XrSystemGraphicsProperties.nmaxSwapchainImageHeight(address()); }
-        /** Returns the value of the {@code maxSwapchainImageWidth} field. */
+        /** @return the value of the {@code maxSwapchainImageWidth} field. */
         @NativeType("uint32_t")
         public int maxSwapchainImageWidth() { return XrSystemGraphicsProperties.nmaxSwapchainImageWidth(address()); }
-        /** Returns the value of the {@code maxLayerCount} field. */
+        /** @return the value of the {@code maxLayerCount} field. */
         @NativeType("uint32_t")
         public int maxLayerCount() { return XrSystemGraphicsProperties.nmaxLayerCount(address()); }
 

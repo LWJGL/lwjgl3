@@ -22,6 +22,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class TinyEXR {
 
+    static { Library.loadSystem(System::load, System::loadLibrary, TinyEXR.class, "org.lwjgl.tinyexr", Platform.mapLibraryNameBundled("lwjgl_tinyexr")); }
+
     /** Error codes. */
     public static final int
         TINYEXR_SUCCESS                    = 0,
@@ -75,8 +77,6 @@ public class TinyEXR {
         TINYEXR_TILE_ROUND_DOWN = 0,
         TINYEXR_TILE_ROUND_UP   = 1;
 
-    static { Library.loadSystem(System::load, System::loadLibrary, TinyEXR.class, "org.lwjgl.tinyexr", Platform.mapLibraryNameBundled("lwjgl_tinyexr")); }
-
     protected TinyEXR() {
         throw new UnsupportedOperationException();
     }
@@ -125,9 +125,9 @@ public class TinyEXR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(filename, true);
+            stack.nUTF8(filename, true);
             long filenameEncoded = stack.getPointerAddress();
-            stack.nASCII(layer_name, true);
+            stack.nUTF8(layer_name, true);
             long layer_nameEncoded = stack.getPointerAddress();
             return nLoadEXRWithLayer(memAddress(out_rgba), memAddress(width), memAddress(height), filenameEncoded, layer_nameEncoded, memAddress(err));
         } finally {
@@ -176,12 +176,25 @@ public class TinyEXR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(filename, true);
+            stack.nUTF8(filename, true);
             long filenameEncoded = stack.getPointerAddress();
             return nEXRLayers(filenameEncoded, memAddress(layer_names), memAddress(num_layers), memAddress(err));
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ EXRNumLevels ] ---
+
+    /** Unsafe version of: {@link #EXRNumLevels} */
+    public static native int nEXRNumLevels(long exr_image);
+
+    /** Returns the number of resolution levels of the image (including the base). */
+    public static int EXRNumLevels(@NativeType("EXRImage const *") EXRImage exr_image) {
+        if (CHECKS) {
+            EXRImage.validate(exr_image.address());
+        }
+        return nEXRNumLevels(exr_image.address());
     }
 
     // --- [ InitEXRHeader ] ---
@@ -192,6 +205,31 @@ public class TinyEXR {
     /** Initialize {@link EXRHeader} struct. */
     public static void InitEXRHeader(@NativeType("EXRHeader *") EXRHeader exr_header) {
         nInitEXRHeader(exr_header.address());
+    }
+
+    // --- [ EXRSetNameAttr ] ---
+
+    /** Unsafe version of: {@link #EXRSetNameAttr} */
+    public static native void nEXRSetNameAttr(long exr_header, long name);
+
+    /** Sets name attribute of {@link EXRHeader} struct (it makes a copy). */
+    public static void EXRSetNameAttr(@NativeType("EXRHeader *") EXRHeader exr_header, @NativeType("char const *") ByteBuffer name) {
+        if (CHECKS) {
+            checkNT1(name);
+        }
+        nEXRSetNameAttr(exr_header.address(), memAddress(name));
+    }
+
+    /** Sets name attribute of {@link EXRHeader} struct (it makes a copy). */
+    public static void EXRSetNameAttr(@NativeType("EXRHeader *") EXRHeader exr_header, @NativeType("char const *") CharSequence name) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(name, true);
+            long nameEncoded = stack.getPointerAddress();
+            nEXRSetNameAttr(exr_header.address(), nameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ InitEXRImage ] ---
@@ -209,7 +247,7 @@ public class TinyEXR {
     /** Unsafe version of: {@link #FreeEXRHeader} */
     public static native int nFreeEXRHeader(long exr_header);
 
-    /** Free's internal data of {@link EXRHeader} struct */
+    /** Frees internal data of {@link EXRHeader} struct */
     public static int FreeEXRHeader(@NativeType("EXRHeader *") EXRHeader exr_header) {
         return nFreeEXRHeader(exr_header.address());
     }
@@ -219,7 +257,7 @@ public class TinyEXR {
     /** Unsafe version of: {@link #FreeEXRImage} */
     public static native int nFreeEXRImage(long exr_image);
 
-    /** Free's internal data of {@link EXRImage} struct */
+    /** Frees internal data of {@link EXRImage} struct */
     public static int FreeEXRImage(@NativeType("EXRImage *") EXRImage exr_image) {
         return nFreeEXRImage(exr_image.address());
     }
@@ -229,7 +267,7 @@ public class TinyEXR {
     /** Unsafe version of: {@link #FreeEXRErrorMessage} */
     public static native void nFreeEXRErrorMessage(long msg);
 
-    /** Free's error message */
+    /** Frees error message */
     public static void FreeEXRErrorMessage(@NativeType("char const *") ByteBuffer msg) {
         nFreeEXRErrorMessage(memAddress(msg));
     }
@@ -251,7 +289,7 @@ public class TinyEXR {
     public static int ParseEXRVersionFromFile(@NativeType("EXRVersion *") EXRVersion version, @NativeType("char const *") CharSequence filename) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(filename, true);
+            stack.nUTF8(filename, true);
             long filenameEncoded = stack.getPointerAddress();
             return nParseEXRVersionFromFile(version.address(), filenameEncoded);
         } finally {
@@ -298,7 +336,7 @@ public class TinyEXR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(filename, true);
+            stack.nUTF8(filename, true);
             long filenameEncoded = stack.getPointerAddress();
             return nParseEXRHeaderFromFile(header.address(), version.address(), filenameEncoded, memAddress(err));
         } finally {
@@ -356,7 +394,7 @@ public class TinyEXR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(filename, true);
+            stack.nUTF8(filename, true);
             long filenameEncoded = stack.getPointerAddress();
             return nParseEXRMultipartHeaderFromFile(memAddress(headers), memAddress(num_headers), version.address(), filenameEncoded, memAddress(err));
         } finally {
@@ -422,7 +460,7 @@ public class TinyEXR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(filename, true);
+            stack.nUTF8(filename, true);
             long filenameEncoded = stack.getPointerAddress();
             return nLoadEXRImageFromFile(image.address(), header.address(), filenameEncoded, memAddress(err));
         } finally {
@@ -491,7 +529,7 @@ public class TinyEXR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(filename, true);
+            stack.nUTF8(filename, true);
             long filenameEncoded = stack.getPointerAddress();
             return nLoadEXRMultipartImageFromFile(images.address(), memAddress(headers), images.remaining(), filenameEncoded, memAddress(err));
         } finally {
@@ -558,7 +596,7 @@ public class TinyEXR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(filename, true);
+            stack.nUTF8(filename, true);
             long filenameEncoded = stack.getPointerAddress();
             return nSaveEXRImageToFile(image.address(), exr_header.address(), filenameEncoded, memAddress(err));
         } finally {
@@ -589,6 +627,80 @@ public class TinyEXR {
             EXRHeader.validate(exr_header.address());
         }
         return nSaveEXRImageToMemory(image.address(), exr_header.address(), memAddress(memory), memAddress(err));
+    }
+
+    // --- [ SaveEXRMultipartImageToFile ] ---
+
+    /** Unsafe version of: {@link #SaveEXRMultipartImageToFile} */
+    public static native int nSaveEXRMultipartImageToFile(long images, long exr_headers, int num_parts, long filename, long err);
+
+    /**
+     * Saves multi-channel, multi-frame OpenEXR image to a file.
+     * 
+     * <p>Image is compressed using {@code EXRImage.compression} value. File global attributes (eg. {@code display_window}) must be set in the first header.</p>
+     *
+     * @return negative value and may set error string in {@code err} when there's an error.
+     *         
+     *         <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
+     */
+    public static int SaveEXRMultipartImageToFile(@NativeType("EXRImage const *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer exr_headers, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            check(exr_headers, images.remaining());
+            checkNT1(filename);
+            check(err, 1);
+            EXRImage.validate(images.address(), images.remaining());
+        }
+        return nSaveEXRMultipartImageToFile(images.address(), memAddress(exr_headers), images.remaining(), memAddress(filename), memAddress(err));
+    }
+
+    /**
+     * Saves multi-channel, multi-frame OpenEXR image to a file.
+     * 
+     * <p>Image is compressed using {@code EXRImage.compression} value. File global attributes (eg. {@code display_window}) must be set in the first header.</p>
+     *
+     * @return negative value and may set error string in {@code err} when there's an error.
+     *         
+     *         <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
+     */
+    public static int SaveEXRMultipartImageToFile(@NativeType("EXRImage const *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer exr_headers, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            check(exr_headers, images.remaining());
+            check(err, 1);
+            EXRImage.validate(images.address(), images.remaining());
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(filename, true);
+            long filenameEncoded = stack.getPointerAddress();
+            return nSaveEXRMultipartImageToFile(images.address(), memAddress(exr_headers), images.remaining(), filenameEncoded, memAddress(err));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ SaveEXRMultipartImageToMemory ] ---
+
+    /** Unsafe version of: {@link #SaveEXRMultipartImageToMemory} */
+    public static native long nSaveEXRMultipartImageToMemory(long images, long exr_headers, int num_parts, long memory, long err);
+
+    /**
+     * Saves multi-channel, multi-frame OpenEXR image to a memory.
+     * 
+     * <p>Image is compressed using {@code EXRImage.compression} value. File global attributes (eg. {@code display_window}) must be set in the first header.</p>
+     *
+     * @return the number of bytes if success. Return zero and will set error string in {@code err} when there's an error.
+     *         
+     *         <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
+     */
+    @NativeType("size_t")
+    public static long SaveEXRMultipartImageToMemory(@NativeType("EXRImage const *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer exr_headers, @NativeType("unsigned char **") PointerBuffer memory, @NativeType("char const **") PointerBuffer err) {
+        if (CHECKS) {
+            check(exr_headers, images.remaining());
+            check(memory, 1);
+            check(err, 1);
+            EXRImage.validate(images.address(), images.remaining());
+        }
+        return nSaveEXRMultipartImageToMemory(images.address(), memAddress(exr_headers), images.remaining(), memAddress(memory), memAddress(err));
     }
 
     // --- [ LoadDeepEXR ] ---
@@ -628,7 +740,7 @@ public class TinyEXR {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(filename, true);
+            stack.nUTF8(filename, true);
             long filenameEncoded = stack.getPointerAddress();
             return nLoadDeepEXR(out_image.address(), filenameEncoded, memAddress(err));
         } finally {

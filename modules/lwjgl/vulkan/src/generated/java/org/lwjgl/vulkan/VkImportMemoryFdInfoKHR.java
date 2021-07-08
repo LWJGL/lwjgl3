@@ -20,19 +20,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Importing memory from a file descriptor transfers ownership of the file descriptor from the application to the Vulkan implementation. The application <b>must</b> not perform any operations on the file descriptor after a successful import.</p>
+ * <p>Importing memory from a file descriptor transfers ownership of the file descriptor from the application to the Vulkan implementation. The application <b>must</b> not perform any operations on the file descriptor after a successful import. The imported memory object holds a reference to its payload.</p>
  * 
- * <p>Applications <b>can</b> import the same underlying memory into multiple instances of Vulkan, into the same instance from which it was exported, and multiple times into a given Vulkan instance. In all cases, each import operation <b>must</b> create a distinct {@code VkDeviceMemory} object.</p>
+ * <p>Applications <b>can</b> import the same payload into multiple instances of Vulkan, into the same instance from which it was exported, and multiple times into a given Vulkan instance. In all cases, each import operation <b>must</b> create a distinct {@code VkDeviceMemory} object.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@code handleType} is not 0, it <b>must</b> be supported for import, as reported by {@link VkExternalImageFormatProperties} or {@link VkExternalBufferProperties}.</li>
- * <li>The memory from which {@code fd} was exported <b>must</b> have been created on the same underlying physical device as {@code device}.</li>
- * <li>If {@code handleType} is not 0, it <b>must</b> be defined as a POSIX file descriptor handle.</li>
- * <li>If {@code handleType} is not 0, {@code fd} <b>must</b> be a valid handle of the type specified by {@code handleType}.</li>
- * <li>The memory represented by {@code fd} <b>must</b> have been created from a physical device and driver that is compatible with {@code device} and {@code handleType}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#external-memory-handle-types-compatibility">External memory handle types compatibility</a>.</li>
- * <li>{@code fd} <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#external-memory-handle-types-compatibility">external memory handle types compatibility</a>.</li>
+ * <li>If {@code handleType} is not 0, it <b>must</b> be supported for import, as reported by {@link VkExternalImageFormatProperties} or {@link VkExternalBufferProperties}</li>
+ * <li>The memory from which {@code fd} was exported <b>must</b> have been created on the same underlying physical device as {@code device}</li>
+ * <li>If {@code handleType} is not 0, it <b>must</b> be {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT}.</li>
+ * <li>If {@code handleType} is not 0, {@code fd} <b>must</b> be a valid POSIX file descriptor handle.</li>
+ * <li>The memory represented by {@code fd} <b>must</b> have been created from a physical device and driver that is compatible with {@code device} and {@code handleType}, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#external-memory-handle-types-compatibility">External memory handle types compatibility</a></li>
+ * <li>{@code fd} <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#external-memory-handle-types-compatibility">external memory handle types compatibility</a></li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -42,23 +42,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code handleType} is not 0, {@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code handleType} &ndash; specifies the handle type of {@code fd}.</li>
- * <li>{@code fd} &ndash; the external handle to import.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImportMemoryFdInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkExternalMemoryHandleTypeFlagBits handleType;
- *     int fd;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkExternalMemoryHandleTypeFlagBits {@link #handleType};
+ *     int {@link #fd};
  * }</code></pre>
  */
 public class VkImportMemoryFdInfoKHR extends Struct implements NativeResource {
@@ -106,25 +97,25 @@ public class VkImportMemoryFdInfoKHR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code handleType} field. */
+    /** specifies the handle type of {@code fd}. */
     @NativeType("VkExternalMemoryHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
-    /** Returns the value of the {@code fd} field. */
+    /** the external handle to import. */
     public int fd() { return nfd(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkImportMemoryFdInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkImportMemoryFdInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code handleType} field. */
+    /** Sets the specified value to the {@link #handleType} field. */
     public VkImportMemoryFdInfoKHR handleType(@NativeType("VkExternalMemoryHandleTypeFlagBits") int value) { nhandleType(address(), value); return this; }
-    /** Sets the specified value to the {@code fd} field. */
+    /** Sets the specified value to the {@link #fd} field. */
     public VkImportMemoryFdInfoKHR fd(int value) { nfd(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -353,25 +344,25 @@ public class VkImportMemoryFdInfoKHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkImportMemoryFdInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImportMemoryFdInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkImportMemoryFdInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImportMemoryFdInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code handleType} field. */
+        /** @return the value of the {@link VkImportMemoryFdInfoKHR#handleType} field. */
         @NativeType("VkExternalMemoryHandleTypeFlagBits")
         public int handleType() { return VkImportMemoryFdInfoKHR.nhandleType(address()); }
-        /** Returns the value of the {@code fd} field. */
+        /** @return the value of the {@link VkImportMemoryFdInfoKHR#fd} field. */
         public int fd() { return VkImportMemoryFdInfoKHR.nfd(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkImportMemoryFdInfoKHR#sType} field. */
         public VkImportMemoryFdInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImportMemoryFdInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkImportMemoryFdInfoKHR#pNext} field. */
         public VkImportMemoryFdInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkImportMemoryFdInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code handleType} field. */
+        /** Sets the specified value to the {@link VkImportMemoryFdInfoKHR#handleType} field. */
         public VkImportMemoryFdInfoKHR.Buffer handleType(@NativeType("VkExternalMemoryHandleTypeFlagBits") int value) { VkImportMemoryFdInfoKHR.nhandleType(address(), value); return this; }
-        /** Sets the specified value to the {@code fd} field. */
+        /** Sets the specified value to the {@link VkImportMemoryFdInfoKHR#fd} field. */
         public VkImportMemoryFdInfoKHR.Buffer fd(int value) { VkImportMemoryFdInfoKHR.nfd(address(), value); return this; }
 
     }

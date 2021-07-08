@@ -62,10 +62,10 @@ public class VREventScreenshot extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code handle} field. */
+    /** @return the value of the {@code handle} field. */
     @NativeType("uint32_t")
     public int handle() { return nhandle(address()); }
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("uint32_t")
     public int type() { return ntype(address()); }
 
@@ -143,10 +143,10 @@ public class VREventScreenshot extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code handle} field. */
+        /** @return the value of the {@code handle} field. */
         @NativeType("uint32_t")
         public int handle() { return VREventScreenshot.nhandle(address()); }
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("uint32_t")
         public int type() { return VREventScreenshot.ntype(address()); }
 

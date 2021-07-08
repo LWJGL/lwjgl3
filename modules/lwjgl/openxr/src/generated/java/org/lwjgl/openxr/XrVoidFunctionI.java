@@ -6,18 +6,26 @@
 package org.lwjgl.openxr;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
+
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*; //NB for some reason this import has to be added manually
 
 @FunctionalInterface
 @NativeType("PFN_xrVoidFunction")
-public interface XrVoidFunctionI extends CallbackI.V {
+public interface XrVoidFunctionI extends CallbackI {
 
-    String SIGNATURE = Callback.__stdcall("()v");
+    FFICIF CIF = apiCreateCIF(
+        apiStdcall(),
+        ffi_type_void//,
+        
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default void callback(long args) {
+    default void callback(long ret, long args) {
         invoke();
     }
 

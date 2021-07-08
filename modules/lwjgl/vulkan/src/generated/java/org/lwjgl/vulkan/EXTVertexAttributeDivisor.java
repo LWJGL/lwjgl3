@@ -42,6 +42,8 @@ package org.lwjgl.vulkan;
  *     };
  *     //...</code></pre>
  * 
+ * <h5>VK_EXT_vertex_attribute_divisor</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_vertex_attribute_divisor}</dd>
@@ -60,6 +62,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Vikram Kushwaha <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_vertex_attribute_divisor:%20&amp;body=@vkushwaha%20">vkushwaha</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-08-03</dd>
  * <dt><b>IP Status</b></dt>

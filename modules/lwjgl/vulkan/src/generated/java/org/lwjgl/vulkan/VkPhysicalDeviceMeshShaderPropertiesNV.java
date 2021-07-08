@@ -29,45 +29,25 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVMeshShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code maxDrawMeshTasksCount} &ndash; the maximum number of local workgroups that <b>can</b> be launched by a single draw mesh tasks command. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#drawing-mesh-shading">Programmable Mesh Shading</a>.</li>
- * <li>{@code maxTaskWorkGroupInvocations} &ndash; the maximum total number of task shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit.</li>
- * <li>{@code maxTaskWorkGroupSize[3]} &ndash; the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit.</li>
- * <li>{@code maxTaskTotalMemorySize} &ndash; the maximum number of bytes that the task shader can use in total for shared and output memory combined.</li>
- * <li>{@code maxTaskOutputCount} &ndash; the maximum number of output tasks a single task shader workgroup can emit.</li>
- * <li>{@code maxMeshWorkGroupInvocations} &ndash; the maximum total number of mesh shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit.</li>
- * <li>{@code maxMeshWorkGroupSize[3]} &ndash; the maximum size of a local mesh workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit.</li>
- * <li>{@code maxMeshTotalMemorySize} &ndash; the maximum number of bytes that the mesh shader can use in total for shared and output memory combined.</li>
- * <li>{@code maxMeshOutputVertices} &ndash; the maximum number of vertices a mesh shader output can store.</li>
- * <li>{@code maxMeshOutputPrimitives} &ndash; the maximum number of primitives a mesh shader output can store.</li>
- * <li>{@code maxMeshMultiviewViewCount} &ndash; the maximum number of multi-view views a mesh shader can use.</li>
- * <li>{@code meshOutputPerVertexGranularity} &ndash; the granularity with which mesh vertex outputs are allocated. The value can be used to compute the memory size used by the mesh shader, which must be less than or equal to {@code maxMeshTotalMemorySize}.</li>
- * <li>{@code meshOutputPerPrimitiveGranularity} &ndash; the granularity with which mesh outputs qualified as per-primitive are allocated. The value can be used to compute the memory size used by the mesh shader, which must be less than or equal to {@code maxMeshTotalMemorySize}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceMeshShaderPropertiesNV {
- *     VkStructureType sType;
- *     void * pNext;
- *     uint32_t maxDrawMeshTasksCount;
- *     uint32_t maxTaskWorkGroupInvocations;
- *     uint32_t maxTaskWorkGroupSize[3];
- *     uint32_t maxTaskTotalMemorySize;
- *     uint32_t maxTaskOutputCount;
- *     uint32_t maxMeshWorkGroupInvocations;
- *     uint32_t maxMeshWorkGroupSize[3];
- *     uint32_t maxMeshTotalMemorySize;
- *     uint32_t maxMeshOutputVertices;
- *     uint32_t maxMeshOutputPrimitives;
- *     uint32_t maxMeshMultiviewViewCount;
- *     uint32_t meshOutputPerVertexGranularity;
- *     uint32_t meshOutputPerPrimitiveGranularity;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     uint32_t {@link #maxDrawMeshTasksCount};
+ *     uint32_t {@link #maxTaskWorkGroupInvocations};
+ *     uint32_t {@link #maxTaskWorkGroupSize}[3];
+ *     uint32_t {@link #maxTaskTotalMemorySize};
+ *     uint32_t {@link #maxTaskOutputCount};
+ *     uint32_t {@link #maxMeshWorkGroupInvocations};
+ *     uint32_t {@link #maxMeshWorkGroupSize}[3];
+ *     uint32_t {@link #maxMeshTotalMemorySize};
+ *     uint32_t {@link #maxMeshOutputVertices};
+ *     uint32_t {@link #maxMeshOutputPrimitives};
+ *     uint32_t {@link #maxMeshMultiviewViewCount};
+ *     uint32_t {@link #meshOutputPerVertexGranularity};
+ *     uint32_t {@link #meshOutputPerPrimitiveGranularity};
  * }</code></pre>
  */
 public class VkPhysicalDeviceMeshShaderPropertiesNV extends Struct implements NativeResource {
@@ -148,61 +128,61 @@ public class VkPhysicalDeviceMeshShaderPropertiesNV extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code maxDrawMeshTasksCount} field. */
+    /** the maximum number of local workgroups that <b>can</b> be launched by a single draw mesh tasks command. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#drawing-mesh-shading">Programmable Mesh Shading</a>. */
     @NativeType("uint32_t")
     public int maxDrawMeshTasksCount() { return nmaxDrawMeshTasksCount(address()); }
-    /** Returns the value of the {@code maxTaskWorkGroupInvocations} field. */
+    /** the maximum total number of task shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit. */
     @NativeType("uint32_t")
     public int maxTaskWorkGroupInvocations() { return nmaxTaskWorkGroupInvocations(address()); }
-    /** Returns a {@link IntBuffer} view of the {@code maxTaskWorkGroupSize} field. */
+    /** the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. */
     @NativeType("uint32_t[3]")
     public IntBuffer maxTaskWorkGroupSize() { return nmaxTaskWorkGroupSize(address()); }
-    /** Returns the value at the specified index of the {@code maxTaskWorkGroupSize} field. */
+    /** the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. */
     @NativeType("uint32_t")
     public int maxTaskWorkGroupSize(int index) { return nmaxTaskWorkGroupSize(address(), index); }
-    /** Returns the value of the {@code maxTaskTotalMemorySize} field. */
+    /** the maximum number of bytes that the task shader can use in total for shared and output memory combined. */
     @NativeType("uint32_t")
     public int maxTaskTotalMemorySize() { return nmaxTaskTotalMemorySize(address()); }
-    /** Returns the value of the {@code maxTaskOutputCount} field. */
+    /** the maximum number of output tasks a single task shader workgroup can emit. */
     @NativeType("uint32_t")
     public int maxTaskOutputCount() { return nmaxTaskOutputCount(address()); }
-    /** Returns the value of the {@code maxMeshWorkGroupInvocations} field. */
+    /** the maximum total number of mesh shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit. */
     @NativeType("uint32_t")
     public int maxMeshWorkGroupInvocations() { return nmaxMeshWorkGroupInvocations(address()); }
-    /** Returns a {@link IntBuffer} view of the {@code maxMeshWorkGroupSize} field. */
+    /** the maximum size of a local mesh workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. */
     @NativeType("uint32_t[3]")
     public IntBuffer maxMeshWorkGroupSize() { return nmaxMeshWorkGroupSize(address()); }
-    /** Returns the value at the specified index of the {@code maxMeshWorkGroupSize} field. */
+    /** the maximum size of a local mesh workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. */
     @NativeType("uint32_t")
     public int maxMeshWorkGroupSize(int index) { return nmaxMeshWorkGroupSize(address(), index); }
-    /** Returns the value of the {@code maxMeshTotalMemorySize} field. */
+    /** the maximum number of bytes that the mesh shader can use in total for shared and output memory combined. */
     @NativeType("uint32_t")
     public int maxMeshTotalMemorySize() { return nmaxMeshTotalMemorySize(address()); }
-    /** Returns the value of the {@code maxMeshOutputVertices} field. */
+    /** the maximum number of vertices a mesh shader output can store. */
     @NativeType("uint32_t")
     public int maxMeshOutputVertices() { return nmaxMeshOutputVertices(address()); }
-    /** Returns the value of the {@code maxMeshOutputPrimitives} field. */
+    /** the maximum number of primitives a mesh shader output can store. */
     @NativeType("uint32_t")
     public int maxMeshOutputPrimitives() { return nmaxMeshOutputPrimitives(address()); }
-    /** Returns the value of the {@code maxMeshMultiviewViewCount} field. */
+    /** the maximum number of multi-view views a mesh shader can use. */
     @NativeType("uint32_t")
     public int maxMeshMultiviewViewCount() { return nmaxMeshMultiviewViewCount(address()); }
-    /** Returns the value of the {@code meshOutputPerVertexGranularity} field. */
+    /** the granularity with which mesh vertex outputs are allocated. The value can be used to compute the memory size used by the mesh shader, which must be less than or equal to {@code maxMeshTotalMemorySize}. */
     @NativeType("uint32_t")
     public int meshOutputPerVertexGranularity() { return nmeshOutputPerVertexGranularity(address()); }
-    /** Returns the value of the {@code meshOutputPerPrimitiveGranularity} field. */
+    /** the granularity with which mesh outputs qualified as per-primitive are allocated. The value can be used to compute the memory size used by the mesh shader, which must be less than or equal to {@code maxMeshTotalMemorySize}. */
     @NativeType("uint32_t")
     public int meshOutputPerPrimitiveGranularity() { return nmeshOutputPerPrimitiveGranularity(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMeshShaderPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMeshShaderPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -453,61 +433,61 @@ public class VkPhysicalDeviceMeshShaderPropertiesNV extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMeshShaderPropertiesNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMeshShaderPropertiesNV.npNext(address()); }
-        /** Returns the value of the {@code maxDrawMeshTasksCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#maxDrawMeshTasksCount} field. */
         @NativeType("uint32_t")
         public int maxDrawMeshTasksCount() { return VkPhysicalDeviceMeshShaderPropertiesNV.nmaxDrawMeshTasksCount(address()); }
-        /** Returns the value of the {@code maxTaskWorkGroupInvocations} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#maxTaskWorkGroupInvocations} field. */
         @NativeType("uint32_t")
         public int maxTaskWorkGroupInvocations() { return VkPhysicalDeviceMeshShaderPropertiesNV.nmaxTaskWorkGroupInvocations(address()); }
-        /** Returns a {@link IntBuffer} view of the {@code maxTaskWorkGroupSize} field. */
+        /** @return a {@link IntBuffer} view of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#maxTaskWorkGroupSize} field. */
         @NativeType("uint32_t[3]")
         public IntBuffer maxTaskWorkGroupSize() { return VkPhysicalDeviceMeshShaderPropertiesNV.nmaxTaskWorkGroupSize(address()); }
-        /** Returns the value at the specified index of the {@code maxTaskWorkGroupSize} field. */
+        /** @return the value at the specified index of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#maxTaskWorkGroupSize} field. */
         @NativeType("uint32_t")
         public int maxTaskWorkGroupSize(int index) { return VkPhysicalDeviceMeshShaderPropertiesNV.nmaxTaskWorkGroupSize(address(), index); }
-        /** Returns the value of the {@code maxTaskTotalMemorySize} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#maxTaskTotalMemorySize} field. */
         @NativeType("uint32_t")
         public int maxTaskTotalMemorySize() { return VkPhysicalDeviceMeshShaderPropertiesNV.nmaxTaskTotalMemorySize(address()); }
-        /** Returns the value of the {@code maxTaskOutputCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#maxTaskOutputCount} field. */
         @NativeType("uint32_t")
         public int maxTaskOutputCount() { return VkPhysicalDeviceMeshShaderPropertiesNV.nmaxTaskOutputCount(address()); }
-        /** Returns the value of the {@code maxMeshWorkGroupInvocations} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#maxMeshWorkGroupInvocations} field. */
         @NativeType("uint32_t")
         public int maxMeshWorkGroupInvocations() { return VkPhysicalDeviceMeshShaderPropertiesNV.nmaxMeshWorkGroupInvocations(address()); }
-        /** Returns a {@link IntBuffer} view of the {@code maxMeshWorkGroupSize} field. */
+        /** @return a {@link IntBuffer} view of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#maxMeshWorkGroupSize} field. */
         @NativeType("uint32_t[3]")
         public IntBuffer maxMeshWorkGroupSize() { return VkPhysicalDeviceMeshShaderPropertiesNV.nmaxMeshWorkGroupSize(address()); }
-        /** Returns the value at the specified index of the {@code maxMeshWorkGroupSize} field. */
+        /** @return the value at the specified index of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#maxMeshWorkGroupSize} field. */
         @NativeType("uint32_t")
         public int maxMeshWorkGroupSize(int index) { return VkPhysicalDeviceMeshShaderPropertiesNV.nmaxMeshWorkGroupSize(address(), index); }
-        /** Returns the value of the {@code maxMeshTotalMemorySize} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#maxMeshTotalMemorySize} field. */
         @NativeType("uint32_t")
         public int maxMeshTotalMemorySize() { return VkPhysicalDeviceMeshShaderPropertiesNV.nmaxMeshTotalMemorySize(address()); }
-        /** Returns the value of the {@code maxMeshOutputVertices} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#maxMeshOutputVertices} field. */
         @NativeType("uint32_t")
         public int maxMeshOutputVertices() { return VkPhysicalDeviceMeshShaderPropertiesNV.nmaxMeshOutputVertices(address()); }
-        /** Returns the value of the {@code maxMeshOutputPrimitives} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#maxMeshOutputPrimitives} field. */
         @NativeType("uint32_t")
         public int maxMeshOutputPrimitives() { return VkPhysicalDeviceMeshShaderPropertiesNV.nmaxMeshOutputPrimitives(address()); }
-        /** Returns the value of the {@code maxMeshMultiviewViewCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#maxMeshMultiviewViewCount} field. */
         @NativeType("uint32_t")
         public int maxMeshMultiviewViewCount() { return VkPhysicalDeviceMeshShaderPropertiesNV.nmaxMeshMultiviewViewCount(address()); }
-        /** Returns the value of the {@code meshOutputPerVertexGranularity} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#meshOutputPerVertexGranularity} field. */
         @NativeType("uint32_t")
         public int meshOutputPerVertexGranularity() { return VkPhysicalDeviceMeshShaderPropertiesNV.nmeshOutputPerVertexGranularity(address()); }
-        /** Returns the value of the {@code meshOutputPerPrimitiveGranularity} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMeshShaderPropertiesNV#meshOutputPerPrimitiveGranularity} field. */
         @NativeType("uint32_t")
         public int meshOutputPerPrimitiveGranularity() { return VkPhysicalDeviceMeshShaderPropertiesNV.nmeshOutputPerPrimitiveGranularity(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderPropertiesNV#sType} field. */
         public VkPhysicalDeviceMeshShaderPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMeshShaderPropertiesNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderPropertiesNV#pNext} field. */
         public VkPhysicalDeviceMeshShaderPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMeshShaderPropertiesNV.npNext(address(), value); return this; }
 
     }

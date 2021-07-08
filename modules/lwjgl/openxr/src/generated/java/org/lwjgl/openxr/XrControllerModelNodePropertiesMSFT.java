@@ -74,22 +74,22 @@ public class XrControllerModelNodePropertiesMSFT extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code parentNodeName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code parentNodeName} field. */
     @NativeType("char[XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT]")
     public ByteBuffer parentNodeName() { return nparentNodeName(address()); }
-    /** Decodes the null-terminated string stored in the {@code parentNodeName} field. */
+    /** @return the null-terminated string stored in the {@code parentNodeName} field. */
     @NativeType("char[XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT]")
     public String parentNodeNameString() { return nparentNodeNameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code nodeName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code nodeName} field. */
     @NativeType("char[XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT]")
     public ByteBuffer nodeName() { return nnodeName(address()); }
-    /** Decodes the null-terminated string stored in the {@code nodeName} field. */
+    /** @return the null-terminated string stored in the {@code nodeName} field. */
     @NativeType("char[XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT]")
     public String nodeNameString() { return nnodeNameString(address()); }
 
@@ -344,22 +344,22 @@ public class XrControllerModelNodePropertiesMSFT extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrControllerModelNodePropertiesMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrControllerModelNodePropertiesMSFT.nnext(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code parentNodeName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code parentNodeName} field. */
         @NativeType("char[XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT]")
         public ByteBuffer parentNodeName() { return XrControllerModelNodePropertiesMSFT.nparentNodeName(address()); }
-        /** Decodes the null-terminated string stored in the {@code parentNodeName} field. */
+        /** @return the null-terminated string stored in the {@code parentNodeName} field. */
         @NativeType("char[XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT]")
         public String parentNodeNameString() { return XrControllerModelNodePropertiesMSFT.nparentNodeNameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code nodeName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code nodeName} field. */
         @NativeType("char[XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT]")
         public ByteBuffer nodeName() { return XrControllerModelNodePropertiesMSFT.nnodeName(address()); }
-        /** Decodes the null-terminated string stored in the {@code nodeName} field. */
+        /** @return the null-terminated string stored in the {@code nodeName} field. */
         @NativeType("char[XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT]")
         public String nodeNameString() { return XrControllerModelNodePropertiesMSFT.nnodeNameString(address()); }
 

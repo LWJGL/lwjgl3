@@ -16,19 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code bActive} &ndash; whether or not this action is currently available to be bound in the active action set</li>
- * <li>{@code activeOrigin} &ndash; the origin that caused this action's current state</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct InputSkeletalActionData_t {
- *     bool bActive;
- *     VRInputValueHandle_t activeOrigin;
+ *     bool {@link #bActive};
+ *     VRInputValueHandle_t {@link #activeOrigin};
  * }</code></pre>
  */
 @NativeType("struct InputSkeletalActionData_t")
@@ -71,10 +64,10 @@ public class InputSkeletalActionData extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code bActive} field. */
+    /** whether or not this action is currently available to be bound in the active action set */
     @NativeType("bool")
     public boolean bActive() { return nbActive(address()); }
-    /** Returns the value of the {@code activeOrigin} field. */
+    /** the origin that caused this action's current state */
     @NativeType("VRInputValueHandle_t")
     public long activeOrigin() { return nactiveOrigin(address()); }
 
@@ -264,10 +257,10 @@ public class InputSkeletalActionData extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code bActive} field. */
+        /** @return the value of the {@link InputSkeletalActionData#bActive} field. */
         @NativeType("bool")
         public boolean bActive() { return InputSkeletalActionData.nbActive(address()); }
-        /** Returns the value of the {@code activeOrigin} field. */
+        /** @return the value of the {@link InputSkeletalActionData#activeOrigin} field. */
         @NativeType("VRInputValueHandle_t")
         public long activeOrigin() { return InputSkeletalActionData.nactiveOrigin(address()); }
 

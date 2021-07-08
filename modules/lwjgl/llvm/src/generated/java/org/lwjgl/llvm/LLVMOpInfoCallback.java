@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * int (*) (
+ * int (*{@link #invoke}) (
  *     void *DisInfo,
  *     uint64_t PC,
  *     uint64_t Offset,
@@ -54,7 +54,7 @@ public abstract class LLVMOpInfoCallback extends Callback implements LLVMOpInfoC
     }
 
     protected LLVMOpInfoCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     LLVMOpInfoCallback(long functionPointer) {

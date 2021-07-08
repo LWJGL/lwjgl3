@@ -63,9 +63,9 @@ public class XrPosef extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link XrQuaternionf} view of the {@code orientation} field. */
+    /** @return a {@link XrQuaternionf} view of the {@code orientation} field. */
     public XrQuaternionf orientation() { return norientation(address()); }
-    /** Returns a {@link XrVector3f} view of the {@code position} field. */
+    /** @return a {@link XrVector3f} view of the {@code position} field. */
     public XrVector3f position$() { return nposition$(address()); }
 
     /** Copies the specified {@link XrQuaternionf} to the {@code orientation} field. */
@@ -291,9 +291,9 @@ public class XrPosef extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link XrQuaternionf} view of the {@code orientation} field. */
+        /** @return a {@link XrQuaternionf} view of the {@code orientation} field. */
         public XrQuaternionf orientation() { return XrPosef.norientation(address()); }
-        /** Returns a {@link XrVector3f} view of the {@code position} field. */
+        /** @return a {@link XrVector3f} view of the {@code position} field. */
         public XrVector3f position$() { return XrPosef.nposition$(address()); }
 
         /** Copies the specified {@link XrQuaternionf} to the {@code orientation} field. */

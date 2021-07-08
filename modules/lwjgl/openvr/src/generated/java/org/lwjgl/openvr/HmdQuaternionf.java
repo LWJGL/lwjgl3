@@ -72,13 +72,13 @@ public class HmdQuaternionf extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code w} field. */
+    /** @return the value of the {@code w} field. */
     public float w() { return nw(address()); }
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** Returns the value of the {@code z} field. */
+    /** @return the value of the {@code z} field. */
     public float z() { return nz(address()); }
 
     /** Sets the specified value to the {@code w} field. */
@@ -316,13 +316,13 @@ public class HmdQuaternionf extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code w} field. */
+        /** @return the value of the {@code w} field. */
         public float w() { return HmdQuaternionf.nw(address()); }
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return HmdQuaternionf.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return HmdQuaternionf.ny(address()); }
-        /** Returns the value of the {@code z} field. */
+        /** @return the value of the {@code z} field. */
         public float z() { return HmdQuaternionf.nz(address()); }
 
         /** Sets the specified value to the {@code w} field. */

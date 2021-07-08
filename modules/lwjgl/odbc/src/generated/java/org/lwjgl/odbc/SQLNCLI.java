@@ -5,8 +5,6 @@
  */
 package org.lwjgl.odbc;
 
-import org.lwjgl.system.*;
-
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -586,8 +584,6 @@ public final class SQLNCLI {
         SQL_FILESTREAM_OPEN_FLAG_SEQUENTIAL_SCAN  = 0x8,
         SQL_FILESTREAM_OPEN_FLAG_RANDOM_ACCESS    = 0x10;
 
-    private SQLNCLI() {
-        throw new UnsupportedOperationException();
-    }
+    private SQLNCLI() {}
 
 }

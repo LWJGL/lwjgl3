@@ -64,13 +64,13 @@ class NkConfigStackUserFontElement extends Struct {
     public int sizeof() { return SIZEOF; }
 
     /**
-     * Returns a {@link PointerBuffer} view of the data pointed to by the {@code pValues} field.
+     * @return a {@link PointerBuffer} view of the data pointed to by the {@code pValues} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
     @NativeType("struct nk_user_font **")
     public PointerBuffer pValues(int capacity) { return npValues(address(), capacity); }
-    /** Returns a {@link NkUserFont} view of the struct pointed to by the {@code old_value} field. */
+    /** @return a {@link NkUserFont} view of the struct pointed to by the {@code old_value} field. */
     @NativeType("struct nk_user_font *")
     public NkUserFont old_value() { return nold_value(address()); }
 
@@ -149,13 +149,13 @@ class NkConfigStackUserFontElement extends Struct {
         }
 
         /**
-         * Returns a {@link PointerBuffer} view of the data pointed to by the {@code pValues} field.
+         * @return a {@link PointerBuffer} view of the data pointed to by the {@code pValues} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("struct nk_user_font **")
         public PointerBuffer pValues(int capacity) { return NkConfigStackUserFontElement.npValues(address(), capacity); }
-        /** Returns a {@link NkUserFont} view of the struct pointed to by the {@code old_value} field. */
+        /** @return a {@link NkUserFont} view of the struct pointed to by the {@code old_value} field. */
         @NativeType("struct nk_user_font *")
         public NkUserFont old_value() { return NkConfigStackUserFontElement.nold_value(address()); }
 

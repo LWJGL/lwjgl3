@@ -16,6 +16,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.vulkan.VK10.*;
+
 /**
  * See {@link VkPhysicalDeviceIDProperties}.
  * 

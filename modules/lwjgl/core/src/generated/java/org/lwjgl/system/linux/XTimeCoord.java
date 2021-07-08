@@ -14,21 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code time} &ndash; the time, in milliseconds</li>
- * <li>{@code x} &ndash; the x coordinate of the pointer relative to the origin of the specified window</li>
- * <li>{@code y} &ndash; the y coordinate of the pointer relative to the origin of the specified window</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XTimeCoord {
- *     Time time;
- *     short x;
- *     short y;
+ *     Time {@link #time};
+ *     short {@link #x};
+ *     short {@link #y};
  * }</code></pre>
  */
 public class XTimeCoord extends Struct {
@@ -73,12 +65,12 @@ public class XTimeCoord extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code time} field. */
+    /** the time, in milliseconds */
     @NativeType("Time")
     public long time() { return ntime(address()); }
-    /** Returns the value of the {@code x} field. */
+    /** the x coordinate of the pointer relative to the origin of the specified window */
     public short x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** the y coordinate of the pointer relative to the origin of the specified window */
     public short y() { return ny(address()); }
 
     // -----------------------------------
@@ -157,12 +149,12 @@ public class XTimeCoord extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code time} field. */
+        /** @return the value of the {@link XTimeCoord#time} field. */
         @NativeType("Time")
         public long time() { return XTimeCoord.ntime(address()); }
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link XTimeCoord#x} field. */
         public short x() { return XTimeCoord.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@link XTimeCoord#y} field. */
         public short y() { return XTimeCoord.ny(address()); }
 
     }

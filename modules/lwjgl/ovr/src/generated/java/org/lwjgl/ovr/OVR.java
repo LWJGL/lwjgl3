@@ -20,6 +20,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Native bindings to libOVR, using the <a target="_blank" href="https://developer.oculus.com/">Oculus SDK</a> C API. */
 public class OVR {
 
+    static { LibOVR.initialize(); }
+
     /** Boolean values */
     public static final int
         ovrFalse = 0,
@@ -852,8 +854,6 @@ public class OVR {
         ovrDebugHudStereo_Quad                = 1,
         ovrDebugHudStereo_QuadWithCrosshair   = 2,
         ovrDebugHudStereo_CrosshairAtInfinity = 3;
-
-    static { LibOVR.initialize(); }
 
     protected OVR() {
         throw new UnsupportedOperationException();

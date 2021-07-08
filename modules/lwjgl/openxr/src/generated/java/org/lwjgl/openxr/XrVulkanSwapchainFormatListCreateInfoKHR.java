@@ -74,16 +74,16 @@ public class XrVulkanSwapchainFormatListCreateInfoKHR extends Struct implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code viewFormatCount} field. */
+    /** @return the value of the {@code viewFormatCount} field. */
     @NativeType("uint32_t")
     public int viewFormatCount() { return nviewFormatCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code viewFormats} field. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code viewFormats} field. */
     @Nullable
     @NativeType("VkFormat const *")
     public IntBuffer viewFormats() { return nviewFormats(address()); }
@@ -342,16 +342,16 @@ public class XrVulkanSwapchainFormatListCreateInfoKHR extends Struct implements 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrVulkanSwapchainFormatListCreateInfoKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrVulkanSwapchainFormatListCreateInfoKHR.nnext(address()); }
-        /** Returns the value of the {@code viewFormatCount} field. */
+        /** @return the value of the {@code viewFormatCount} field. */
         @NativeType("uint32_t")
         public int viewFormatCount() { return XrVulkanSwapchainFormatListCreateInfoKHR.nviewFormatCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code viewFormats} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code viewFormats} field. */
         @Nullable
         @NativeType("VkFormat const *")
         public IntBuffer viewFormats() { return XrVulkanSwapchainFormatListCreateInfoKHR.nviewFormats(address()); }

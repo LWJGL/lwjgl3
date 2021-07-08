@@ -72,16 +72,16 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code countActionSets} field. */
+    /** @return the value of the {@code countActionSets} field. */
     @NativeType("uint32_t")
     public int countActionSets() { return ncountActionSets(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code actionSets} field. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code actionSets} field. */
     @NativeType("XrActionSet const *")
     public PointerBuffer actionSets() { return nactionSets(address()); }
 
@@ -337,16 +337,16 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSessionActionSetsAttachInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSessionActionSetsAttachInfo.nnext(address()); }
-        /** Returns the value of the {@code countActionSets} field. */
+        /** @return the value of the {@code countActionSets} field. */
         @NativeType("uint32_t")
         public int countActionSets() { return XrSessionActionSetsAttachInfo.ncountActionSets(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code actionSets} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code actionSets} field. */
         @NativeType("XrActionSet const *")
         public PointerBuffer actionSets() { return XrSessionActionSetsAttachInfo.nactionSets(address()); }
 

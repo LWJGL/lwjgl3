@@ -41,6 +41,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVTransformFeedback {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv,
      * BindBufferRangeNV, BindBufferOffsetNV and BindBufferBaseNV.
@@ -102,8 +104,6 @@ public class NVTransformFeedback {
         GL_GENERIC_ATTRIB_NV       = 0x8C7D,
         GL_SECONDARY_COLOR_NV      = 0x852D,
         GL_LAYER_NV                = 0x8DAA;
-
-    static { GL.initialize(); }
 
     protected NVTransformFeedback() {
         throw new UnsupportedOperationException();

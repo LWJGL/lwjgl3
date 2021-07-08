@@ -224,8 +224,9 @@ public final class ALC {
      *
      * <p>This method calls {@link #setCapabilities} with the new instance before returning.</p>
      *
-     * @param device the {@code ALCdevice} for which to create the capabilities instance
-     * @param bufferFactory a function that allocates a {@link PointerBuffer} given a size. If {@code null}, LWJGL will allocate a GC-managed buffer internally.
+     * @param device        the {@code ALCdevice} for which to create the capabilities instance
+     * @param bufferFactory a function that allocates a {@link PointerBuffer} given a size. The buffer must be filled with zeroes. If {@code null}, LWJGL will
+     *                      allocate a GC-managed buffer internally.
      *
      * @return the {@code ALCCapabilities} instance
      */

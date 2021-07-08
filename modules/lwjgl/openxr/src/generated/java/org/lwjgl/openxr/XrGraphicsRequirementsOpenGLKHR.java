@@ -71,16 +71,16 @@ public class XrGraphicsRequirementsOpenGLKHR extends Struct implements NativeRes
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code minApiVersionSupported} field. */
+    /** @return the value of the {@code minApiVersionSupported} field. */
     @NativeType("XrVersion")
     public long minApiVersionSupported() { return nminApiVersionSupported(address()); }
-    /** Returns the value of the {@code maxApiVersionSupported} field. */
+    /** @return the value of the {@code maxApiVersionSupported} field. */
     @NativeType("XrVersion")
     public long maxApiVersionSupported() { return nmaxApiVersionSupported(address()); }
 
@@ -319,16 +319,16 @@ public class XrGraphicsRequirementsOpenGLKHR extends Struct implements NativeRes
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGraphicsRequirementsOpenGLKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrGraphicsRequirementsOpenGLKHR.nnext(address()); }
-        /** Returns the value of the {@code minApiVersionSupported} field. */
+        /** @return the value of the {@code minApiVersionSupported} field. */
         @NativeType("XrVersion")
         public long minApiVersionSupported() { return XrGraphicsRequirementsOpenGLKHR.nminApiVersionSupported(address()); }
-        /** Returns the value of the {@code maxApiVersionSupported} field. */
+        /** @return the value of the {@code maxApiVersionSupported} field. */
         @NativeType("XrVersion")
         public long maxApiVersionSupported() { return XrGraphicsRequirementsOpenGLKHR.nmaxApiVersionSupported(address()); }
 

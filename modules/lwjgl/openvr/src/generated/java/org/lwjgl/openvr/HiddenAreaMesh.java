@@ -69,11 +69,11 @@ public class HiddenAreaMesh extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link HmdVector2.Buffer} view of the struct array pointed to by the {@code pVertexData} field. */
+    /** @return a {@link HmdVector2.Buffer} view of the struct array pointed to by the {@code pVertexData} field. */
     @Nullable
     @NativeType("HmdVector2_t *")
     public HmdVector2.Buffer pVertexData() { return npVertexData(address()); }
-    /** Returns the value of the {@code unTriangleCount} field. */
+    /** @return the value of the {@code unTriangleCount} field. */
     @NativeType("uint32_t")
     public int unTriangleCount() { return nunTriangleCount(address()); }
 
@@ -263,11 +263,11 @@ public class HiddenAreaMesh extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link HmdVector2.Buffer} view of the struct array pointed to by the {@code pVertexData} field. */
+        /** @return a {@link HmdVector2.Buffer} view of the struct array pointed to by the {@code pVertexData} field. */
         @Nullable
         @NativeType("HmdVector2_t *")
         public HmdVector2.Buffer pVertexData() { return HiddenAreaMesh.npVertexData(address()); }
-        /** Returns the value of the {@code unTriangleCount} field. */
+        /** @return the value of the {@code unTriangleCount} field. */
         @NativeType("uint32_t")
         public int unTriangleCount() { return HiddenAreaMesh.nunTriangleCount(address()); }
 

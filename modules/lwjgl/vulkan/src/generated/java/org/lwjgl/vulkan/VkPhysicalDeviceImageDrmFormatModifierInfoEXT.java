@@ -26,9 +26,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@code sharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, then {@code pQueueFamilyIndices} <b>must</b> be a valid pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values.</li>
- * <li>If {@code sharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, then {@code queueFamilyIndexCount} <b>must</b> be greater than 1.</li>
- * <li>If {@code sharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, each element of {@code pQueueFamilyIndices} <b>must</b> be unique and <b>must</b> be less than the {@code pQueueFamilyPropertyCount} returned by {@link VK11#vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2} for the {@code physicalDevice} that was used to create {@code device}.</li>
+ * <li>If {@code sharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, then {@code pQueueFamilyIndices} <b>must</b> be a valid pointer to an array of {@code queueFamilyIndexCount} {@code uint32_t} values</li>
+ * <li>If {@code sharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, then {@code queueFamilyIndexCount} <b>must</b> be greater than 1</li>
+ * <li>If {@code sharingMode} is {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, each element of {@code pQueueFamilyIndices} <b>must</b> be unique and <b>must</b> be less than the {@code pQueueFamilyPropertyCount} returned by {@link VK11#vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2} for the {@code physicalDevice} that was used to create {@code device}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -38,27 +38,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sharingMode} <b>must</b> be a valid {@code VkSharingMode} value</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code drmFormatModifier} &ndash; the image&#8217;s <em>Linux DRM format modifier</em>, corresponding to {@link VkImageDrmFormatModifierExplicitCreateInfoEXT}{@code ::modifier} or to {@link VkImageDrmFormatModifierListCreateInfoEXT}{@code ::pModifiers}.</li>
- * <li>{@code sharingMode} &ndash; specifies how the image will be accessed by multiple queue families.</li>
- * <li>{@code queueFamilyIndexCount} &ndash; the number of entries in the {@code pQueueFamilyIndices} array.</li>
- * <li>{@code pQueueFamilyIndices} &ndash; a list of queue families that will access the image (ignored if {@code sharingMode} is not {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}).</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceImageDrmFormatModifierInfoEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint64_t drmFormatModifier;
- *     VkSharingMode sharingMode;
- *     uint32_t queueFamilyIndexCount;
- *     uint32_t const * pQueueFamilyIndices;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint64_t {@link #drmFormatModifier};
+ *     VkSharingMode {@link #sharingMode};
+ *     uint32_t {@link #queueFamilyIndexCount};
+ *     uint32_t const * {@link #pQueueFamilyIndices};
  * }</code></pre>
  */
 public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implements NativeResource {
@@ -112,35 +101,35 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code drmFormatModifier} field. */
+    /** the image&#8217;s <em>Linux DRM format modifier</em>, corresponding to {@link VkImageDrmFormatModifierExplicitCreateInfoEXT}{@code ::modifier} or to {@link VkImageDrmFormatModifierListCreateInfoEXT}{@code ::pModifiers}. */
     @NativeType("uint64_t")
     public long drmFormatModifier() { return ndrmFormatModifier(address()); }
-    /** Returns the value of the {@code sharingMode} field. */
+    /** specifies how the image will be accessed by multiple queue families. */
     @NativeType("VkSharingMode")
     public int sharingMode() { return nsharingMode(address()); }
-    /** Returns the value of the {@code queueFamilyIndexCount} field. */
+    /** the number of entries in the {@code pQueueFamilyIndices} array. */
     @NativeType("uint32_t")
     public int queueFamilyIndexCount() { return nqueueFamilyIndexCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pQueueFamilyIndices} field. */
+    /** a list of queue families that will access the image (ignored if {@code sharingMode} is not {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}). */
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pQueueFamilyIndices() { return npQueueFamilyIndices(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceImageDrmFormatModifierInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceImageDrmFormatModifierInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code drmFormatModifier} field. */
+    /** Sets the specified value to the {@link #drmFormatModifier} field. */
     public VkPhysicalDeviceImageDrmFormatModifierInfoEXT drmFormatModifier(@NativeType("uint64_t") long value) { ndrmFormatModifier(address(), value); return this; }
-    /** Sets the specified value to the {@code sharingMode} field. */
+    /** Sets the specified value to the {@link #sharingMode} field. */
     public VkPhysicalDeviceImageDrmFormatModifierInfoEXT sharingMode(@NativeType("VkSharingMode") int value) { nsharingMode(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pQueueFamilyIndices} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pQueueFamilyIndices} field. */
     public VkPhysicalDeviceImageDrmFormatModifierInfoEXT pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npQueueFamilyIndices(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -402,35 +391,35 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceImageDrmFormatModifierInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPhysicalDeviceImageDrmFormatModifierInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code drmFormatModifier} field. */
+        /** @return the value of the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#drmFormatModifier} field. */
         @NativeType("uint64_t")
         public long drmFormatModifier() { return VkPhysicalDeviceImageDrmFormatModifierInfoEXT.ndrmFormatModifier(address()); }
-        /** Returns the value of the {@code sharingMode} field. */
+        /** @return the value of the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#sharingMode} field. */
         @NativeType("VkSharingMode")
         public int sharingMode() { return VkPhysicalDeviceImageDrmFormatModifierInfoEXT.nsharingMode(address()); }
-        /** Returns the value of the {@code queueFamilyIndexCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#queueFamilyIndexCount} field. */
         @NativeType("uint32_t")
         public int queueFamilyIndexCount() { return VkPhysicalDeviceImageDrmFormatModifierInfoEXT.nqueueFamilyIndexCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pQueueFamilyIndices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#pQueueFamilyIndices} field. */
         @Nullable
         @NativeType("uint32_t const *")
         public IntBuffer pQueueFamilyIndices() { return VkPhysicalDeviceImageDrmFormatModifierInfoEXT.npQueueFamilyIndices(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#sType} field. */
         public VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceImageDrmFormatModifierInfoEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#pNext} field. */
         public VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceImageDrmFormatModifierInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code drmFormatModifier} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#drmFormatModifier} field. */
         public VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer drmFormatModifier(@NativeType("uint64_t") long value) { VkPhysicalDeviceImageDrmFormatModifierInfoEXT.ndrmFormatModifier(address(), value); return this; }
-        /** Sets the specified value to the {@code sharingMode} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#sharingMode} field. */
         public VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer sharingMode(@NativeType("VkSharingMode") int value) { VkPhysicalDeviceImageDrmFormatModifierInfoEXT.nsharingMode(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pQueueFamilyIndices} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#pQueueFamilyIndices} field. */
         public VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkPhysicalDeviceImageDrmFormatModifierInfoEXT.npQueueFamilyIndices(address(), value); return this; }
 
     }

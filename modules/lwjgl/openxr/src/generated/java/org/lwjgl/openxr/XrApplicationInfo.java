@@ -78,25 +78,25 @@ public class XrApplicationInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code applicationName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code applicationName} field. */
     @NativeType("char[XR_MAX_APPLICATION_NAME_SIZE]")
     public ByteBuffer applicationName() { return napplicationName(address()); }
-    /** Decodes the null-terminated string stored in the {@code applicationName} field. */
+    /** @return the null-terminated string stored in the {@code applicationName} field. */
     @NativeType("char[XR_MAX_APPLICATION_NAME_SIZE]")
     public String applicationNameString() { return napplicationNameString(address()); }
-    /** Returns the value of the {@code applicationVersion} field. */
+    /** @return the value of the {@code applicationVersion} field. */
     @NativeType("uint32_t")
     public int applicationVersion() { return napplicationVersion(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code engineName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code engineName} field. */
     @NativeType("char[XR_MAX_ENGINE_NAME_SIZE]")
     public ByteBuffer engineName() { return nengineName(address()); }
-    /** Decodes the null-terminated string stored in the {@code engineName} field. */
+    /** @return the null-terminated string stored in the {@code engineName} field. */
     @NativeType("char[XR_MAX_ENGINE_NAME_SIZE]")
     public String engineNameString() { return nengineNameString(address()); }
-    /** Returns the value of the {@code engineVersion} field. */
+    /** @return the value of the {@code engineVersion} field. */
     @NativeType("uint32_t")
     public int engineVersion() { return nengineVersion(address()); }
-    /** Returns the value of the {@code apiVersion} field. */
+    /** @return the value of the {@code apiVersion} field. */
     @NativeType("XrVersion")
     public long apiVersion() { return napiVersion(address()); }
 
@@ -359,25 +359,25 @@ public class XrApplicationInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code applicationName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code applicationName} field. */
         @NativeType("char[XR_MAX_APPLICATION_NAME_SIZE]")
         public ByteBuffer applicationName() { return XrApplicationInfo.napplicationName(address()); }
-        /** Decodes the null-terminated string stored in the {@code applicationName} field. */
+        /** @return the null-terminated string stored in the {@code applicationName} field. */
         @NativeType("char[XR_MAX_APPLICATION_NAME_SIZE]")
         public String applicationNameString() { return XrApplicationInfo.napplicationNameString(address()); }
-        /** Returns the value of the {@code applicationVersion} field. */
+        /** @return the value of the {@code applicationVersion} field. */
         @NativeType("uint32_t")
         public int applicationVersion() { return XrApplicationInfo.napplicationVersion(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code engineName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code engineName} field. */
         @NativeType("char[XR_MAX_ENGINE_NAME_SIZE]")
         public ByteBuffer engineName() { return XrApplicationInfo.nengineName(address()); }
-        /** Decodes the null-terminated string stored in the {@code engineName} field. */
+        /** @return the null-terminated string stored in the {@code engineName} field. */
         @NativeType("char[XR_MAX_ENGINE_NAME_SIZE]")
         public String engineNameString() { return XrApplicationInfo.nengineNameString(address()); }
-        /** Returns the value of the {@code engineVersion} field. */
+        /** @return the value of the {@code engineVersion} field. */
         @NativeType("uint32_t")
         public int engineVersion() { return XrApplicationInfo.nengineVersion(address()); }
-        /** Returns the value of the {@code apiVersion} field. */
+        /** @return the value of the {@code apiVersion} field. */
         @NativeType("XrVersion")
         public long apiVersion() { return XrApplicationInfo.napiVersion(address()); }
 

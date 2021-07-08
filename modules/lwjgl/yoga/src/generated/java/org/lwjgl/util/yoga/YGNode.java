@@ -150,71 +150,71 @@ public class YGNode extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code context} field. */
+    /** @return the value of the {@code context} field. */
     @NativeType("void *")
     public long context() { return ncontext(address()); }
-    /** Returns the value of the {@code hasNewLayout} field. */
+    /** @return the value of the {@code hasNewLayout} field. */
     @NativeType("bool")
     public boolean hasNewLayout() { return nhasNewLayout(address()); }
-    /** Returns the value of the {@code isReferenceBaseline} field. */
+    /** @return the value of the {@code isReferenceBaseline} field. */
     @NativeType("bool")
     public boolean isReferenceBaseline() { return nisReferenceBaseline(address()); }
-    /** Returns the value of the {@code isDirty} field. */
+    /** @return the value of the {@code isDirty} field. */
     @NativeType("bool")
     public boolean isDirty() { return nisDirty(address()); }
-    /** Returns the value of the {@code nodeType} field. */
+    /** @return the value of the {@code nodeType} field. */
     @NativeType("YGNodeType")
     public int nodeType() { return nnodeType(address()); }
-    /** Returns the value of the {@code measureUsesContext} field. */
+    /** @return the value of the {@code measureUsesContext} field. */
     @NativeType("bool")
     public boolean measureUsesContext() { return nmeasureUsesContext(address()); }
-    /** Returns the value of the {@code baselineUsesContext} field. */
+    /** @return the value of the {@code baselineUsesContext} field. */
     @NativeType("bool")
     public boolean baselineUsesContext() { return nbaselineUsesContext(address()); }
-    /** Returns the value of the {@code printUsesContext} field. */
+    /** @return the value of the {@code printUsesContext} field. */
     @NativeType("bool")
     public boolean printUsesContext() { return nprintUsesContext(address()); }
-    /** Returns the value of the {@code useWebDefaults} field. */
+    /** @return the value of the {@code useWebDefaults} field. */
     @NativeType("bool")
     public boolean useWebDefaults() { return nuseWebDefaults(address()); }
-    /** Returns the value of the {@code measure.noContext} field. */
+    /** @return the value of the {@code measure.noContext} field. */
     @Nullable
     public YGMeasureFunc measure_noContext() { return nmeasure_noContext(address()); }
-    /** Returns the value of the {@code measure.withContext} field. */
+    /** @return the value of the {@code measure.withContext} field. */
     @NativeType("MeasureWithContextFn")
     public long measure_withContext() { return nmeasure_withContext(address()); }
-    /** Returns the value of the {@code baseline.noContext} field. */
+    /** @return the value of the {@code baseline.noContext} field. */
     @Nullable
     public YGBaselineFunc baseline_noContext() { return nbaseline_noContext(address()); }
-    /** Returns the value of the {@code baseline.withContext} field. */
+    /** @return the value of the {@code baseline.withContext} field. */
     @NativeType("BaselineWithContextFn")
     public long baseline_withContext() { return nbaseline_withContext(address()); }
-    /** Returns the value of the {@code print.noContext} field. */
+    /** @return the value of the {@code print.noContext} field. */
     @Nullable
     public YGPrintFunc print_noContext() { return nprint_noContext(address()); }
-    /** Returns the value of the {@code print.withContext} field. */
+    /** @return the value of the {@code print.withContext} field. */
     @NativeType("PrintWithContextFn")
     public long print_withContext() { return nprint_withContext(address()); }
-    /** Returns the value of the {@code dirtied} field. */
+    /** @return the value of the {@code dirtied} field. */
     @Nullable
     public YGDirtiedFunc dirtied() { return ndirtied(address()); }
-    /** Returns a {@link YGStyle} view of the {@code style} field. */
+    /** @return a {@link YGStyle} view of the {@code style} field. */
     public YGStyle style() { return nstyle(address()); }
-    /** Returns a {@link YGLayout} view of the {@code layout} field. */
+    /** @return a {@link YGLayout} view of the {@code layout} field. */
     public YGLayout layout() { return nlayout(address()); }
-    /** Returns the value of the {@code lineIndex} field. */
+    /** @return the value of the {@code lineIndex} field. */
     @NativeType("uint32_t")
     public int lineIndex() { return nlineIndex(address()); }
-    /** Returns the value of the {@code owner} field. */
+    /** @return the value of the {@code owner} field. */
     @NativeType("YGNodeRef")
     public long owner() { return nowner(address()); }
-    /** Returns the value of the {@code config} field. */
+    /** @return the value of the {@code config} field. */
     @NativeType("YGConfigRef")
     public long config() { return nconfig(address()); }
-    /** Returns a {@link YGValue}.Buffer view of the {@code resolvedDimensions} field. */
+    /** @return a {@link YGValue}.Buffer view of the {@code resolvedDimensions} field. */
     @NativeType("YGValue[2]")
     public YGValue.Buffer resolvedDimensions() { return nresolvedDimensions(address()); }
-    /** Returns a {@link YGValue} view of the struct at the specified index of the {@code resolvedDimensions} field. */
+    /** @return a {@link YGValue} view of the struct at the specified index of the {@code resolvedDimensions} field. */
     public YGValue resolvedDimensions(int index) { return nresolvedDimensions(address(), index); }
 
     /** Sets the specified value to the {@code context} field. */
@@ -235,17 +235,17 @@ public class YGNode extends Struct implements NativeResource {
     public YGNode printUsesContext(@NativeType("bool") boolean value) { nprintUsesContext(address(), value); return this; }
     /** Sets the specified value to the {@code useWebDefaults} field. */
     public YGNode useWebDefaults(@NativeType("bool") boolean value) { nuseWebDefaults(address(), value); return this; }
-    /** Sets the specified value to the {@code measure.noContext} field. */
+    /** Sets the specified value to the {@code noContext} field. */
     public YGNode measure_noContext(@Nullable @NativeType("YGMeasureFunc") YGMeasureFuncI value) { nmeasure_noContext(address(), value); return this; }
-    /** Sets the specified value to the {@code measure.withContext} field. */
+    /** Sets the specified value to the {@code withContext} field. */
     public YGNode measure_withContext(@NativeType("MeasureWithContextFn") long value) { nmeasure_withContext(address(), value); return this; }
-    /** Sets the specified value to the {@code baseline.noContext} field. */
+    /** Sets the specified value to the {@code noContext} field. */
     public YGNode baseline_noContext(@Nullable @NativeType("YGBaselineFunc") YGBaselineFuncI value) { nbaseline_noContext(address(), value); return this; }
-    /** Sets the specified value to the {@code baseline.withContext} field. */
+    /** Sets the specified value to the {@code withContext} field. */
     public YGNode baseline_withContext(@NativeType("BaselineWithContextFn") long value) { nbaseline_withContext(address(), value); return this; }
-    /** Sets the specified value to the {@code print.noContext} field. */
+    /** Sets the specified value to the {@code noContext} field. */
     public YGNode print_noContext(@Nullable @NativeType("YGPrintFunc") YGPrintFuncI value) { nprint_noContext(address(), value); return this; }
-    /** Sets the specified value to the {@code print.withContext} field. */
+    /** Sets the specified value to the {@code withContext} field. */
     public YGNode print_withContext(@NativeType("PrintWithContextFn") long value) { nprint_withContext(address(), value); return this; }
     /** Sets the specified value to the {@code dirtied} field. */
     public YGNode dirtied(@Nullable @NativeType("YGDirtiedFunc") YGDirtiedFuncI value) { ndirtied(address(), value); return this; }
@@ -566,71 +566,71 @@ public class YGNode extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code context} field. */
+        /** @return the value of the {@code context} field. */
         @NativeType("void *")
         public long context() { return YGNode.ncontext(address()); }
-        /** Returns the value of the {@code hasNewLayout} field. */
+        /** @return the value of the {@code hasNewLayout} field. */
         @NativeType("bool")
         public boolean hasNewLayout() { return YGNode.nhasNewLayout(address()); }
-        /** Returns the value of the {@code isReferenceBaseline} field. */
+        /** @return the value of the {@code isReferenceBaseline} field. */
         @NativeType("bool")
         public boolean isReferenceBaseline() { return YGNode.nisReferenceBaseline(address()); }
-        /** Returns the value of the {@code isDirty} field. */
+        /** @return the value of the {@code isDirty} field. */
         @NativeType("bool")
         public boolean isDirty() { return YGNode.nisDirty(address()); }
-        /** Returns the value of the {@code nodeType} field. */
+        /** @return the value of the {@code nodeType} field. */
         @NativeType("YGNodeType")
         public int nodeType() { return YGNode.nnodeType(address()); }
-        /** Returns the value of the {@code measureUsesContext} field. */
+        /** @return the value of the {@code measureUsesContext} field. */
         @NativeType("bool")
         public boolean measureUsesContext() { return YGNode.nmeasureUsesContext(address()); }
-        /** Returns the value of the {@code baselineUsesContext} field. */
+        /** @return the value of the {@code baselineUsesContext} field. */
         @NativeType("bool")
         public boolean baselineUsesContext() { return YGNode.nbaselineUsesContext(address()); }
-        /** Returns the value of the {@code printUsesContext} field. */
+        /** @return the value of the {@code printUsesContext} field. */
         @NativeType("bool")
         public boolean printUsesContext() { return YGNode.nprintUsesContext(address()); }
-        /** Returns the value of the {@code useWebDefaults} field. */
+        /** @return the value of the {@code useWebDefaults} field. */
         @NativeType("bool")
         public boolean useWebDefaults() { return YGNode.nuseWebDefaults(address()); }
-        /** Returns the value of the {@code measure.noContext} field. */
+        /** @return the value of the {@code measure.noContext} field. */
         @Nullable
         public YGMeasureFunc measure_noContext() { return YGNode.nmeasure_noContext(address()); }
-        /** Returns the value of the {@code measure.withContext} field. */
+        /** @return the value of the {@code measure.withContext} field. */
         @NativeType("MeasureWithContextFn")
         public long measure_withContext() { return YGNode.nmeasure_withContext(address()); }
-        /** Returns the value of the {@code baseline.noContext} field. */
+        /** @return the value of the {@code baseline.noContext} field. */
         @Nullable
         public YGBaselineFunc baseline_noContext() { return YGNode.nbaseline_noContext(address()); }
-        /** Returns the value of the {@code baseline.withContext} field. */
+        /** @return the value of the {@code baseline.withContext} field. */
         @NativeType("BaselineWithContextFn")
         public long baseline_withContext() { return YGNode.nbaseline_withContext(address()); }
-        /** Returns the value of the {@code print.noContext} field. */
+        /** @return the value of the {@code print.noContext} field. */
         @Nullable
         public YGPrintFunc print_noContext() { return YGNode.nprint_noContext(address()); }
-        /** Returns the value of the {@code print.withContext} field. */
+        /** @return the value of the {@code print.withContext} field. */
         @NativeType("PrintWithContextFn")
         public long print_withContext() { return YGNode.nprint_withContext(address()); }
-        /** Returns the value of the {@code dirtied} field. */
+        /** @return the value of the {@code dirtied} field. */
         @Nullable
         public YGDirtiedFunc dirtied() { return YGNode.ndirtied(address()); }
-        /** Returns a {@link YGStyle} view of the {@code style} field. */
+        /** @return a {@link YGStyle} view of the {@code style} field. */
         public YGStyle style() { return YGNode.nstyle(address()); }
-        /** Returns a {@link YGLayout} view of the {@code layout} field. */
+        /** @return a {@link YGLayout} view of the {@code layout} field. */
         public YGLayout layout() { return YGNode.nlayout(address()); }
-        /** Returns the value of the {@code lineIndex} field. */
+        /** @return the value of the {@code lineIndex} field. */
         @NativeType("uint32_t")
         public int lineIndex() { return YGNode.nlineIndex(address()); }
-        /** Returns the value of the {@code owner} field. */
+        /** @return the value of the {@code owner} field. */
         @NativeType("YGNodeRef")
         public long owner() { return YGNode.nowner(address()); }
-        /** Returns the value of the {@code config} field. */
+        /** @return the value of the {@code config} field. */
         @NativeType("YGConfigRef")
         public long config() { return YGNode.nconfig(address()); }
-        /** Returns a {@link YGValue}.Buffer view of the {@code resolvedDimensions} field. */
+        /** @return a {@link YGValue}.Buffer view of the {@code resolvedDimensions} field. */
         @NativeType("YGValue[2]")
         public YGValue.Buffer resolvedDimensions() { return YGNode.nresolvedDimensions(address()); }
-        /** Returns a {@link YGValue} view of the struct at the specified index of the {@code resolvedDimensions} field. */
+        /** @return a {@link YGValue} view of the struct at the specified index of the {@code resolvedDimensions} field. */
         public YGValue resolvedDimensions(int index) { return YGNode.nresolvedDimensions(address(), index); }
 
         /** Sets the specified value to the {@code context} field. */
@@ -651,17 +651,17 @@ public class YGNode extends Struct implements NativeResource {
         public YGNode.Buffer printUsesContext(@NativeType("bool") boolean value) { YGNode.nprintUsesContext(address(), value); return this; }
         /** Sets the specified value to the {@code useWebDefaults} field. */
         public YGNode.Buffer useWebDefaults(@NativeType("bool") boolean value) { YGNode.nuseWebDefaults(address(), value); return this; }
-        /** Sets the specified value to the {@code measure.noContext} field. */
+        /** Sets the specified value to the {@code noContext} field. */
         public YGNode.Buffer measure_noContext(@Nullable @NativeType("YGMeasureFunc") YGMeasureFuncI value) { YGNode.nmeasure_noContext(address(), value); return this; }
-        /** Sets the specified value to the {@code measure.withContext} field. */
+        /** Sets the specified value to the {@code withContext} field. */
         public YGNode.Buffer measure_withContext(@NativeType("MeasureWithContextFn") long value) { YGNode.nmeasure_withContext(address(), value); return this; }
-        /** Sets the specified value to the {@code baseline.noContext} field. */
+        /** Sets the specified value to the {@code noContext} field. */
         public YGNode.Buffer baseline_noContext(@Nullable @NativeType("YGBaselineFunc") YGBaselineFuncI value) { YGNode.nbaseline_noContext(address(), value); return this; }
-        /** Sets the specified value to the {@code baseline.withContext} field. */
+        /** Sets the specified value to the {@code withContext} field. */
         public YGNode.Buffer baseline_withContext(@NativeType("BaselineWithContextFn") long value) { YGNode.nbaseline_withContext(address(), value); return this; }
-        /** Sets the specified value to the {@code print.noContext} field. */
+        /** Sets the specified value to the {@code noContext} field. */
         public YGNode.Buffer print_noContext(@Nullable @NativeType("YGPrintFunc") YGPrintFuncI value) { YGNode.nprint_noContext(address(), value); return this; }
-        /** Sets the specified value to the {@code print.withContext} field. */
+        /** Sets the specified value to the {@code withContext} field. */
         public YGNode.Buffer print_withContext(@NativeType("PrintWithContextFn") long value) { YGNode.nprint_withContext(address(), value); return this; }
         /** Sets the specified value to the {@code dirtied} field. */
         public YGNode.Buffer dirtied(@Nullable @NativeType("YGDirtiedFunc") YGDirtiedFuncI value) { YGNode.ndirtied(address(), value); return this; }

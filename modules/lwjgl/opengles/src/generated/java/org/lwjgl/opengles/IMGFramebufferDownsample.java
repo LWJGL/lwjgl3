@@ -20,6 +20,8 @@ import org.lwjgl.system.*;
  */
 public class IMGFramebufferDownsample {
 
+    static { GLES.initialize(); }
+
     /** Returned by CheckFramebufferStatus. */
     public static final int GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_AND_DOWNSAMPLE_IMG = 0x913C;
 
@@ -31,8 +33,6 @@ public class IMGFramebufferDownsample {
 
     /** Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv. */
     public static final int GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_SCALE_IMG = 0x913F;
-
-    static { GLES.initialize(); }
 
     protected IMGFramebufferDownsample() {
         throw new UnsupportedOperationException();

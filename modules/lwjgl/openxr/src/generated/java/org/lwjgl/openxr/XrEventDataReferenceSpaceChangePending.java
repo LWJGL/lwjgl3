@@ -84,25 +84,25 @@ public class XrEventDataReferenceSpaceChangePending extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code session} field. */
+    /** @return the value of the {@code session} field. */
     @NativeType("XrSession")
     public long session() { return nsession(address()); }
-    /** Returns the value of the {@code referenceSpaceType} field. */
+    /** @return the value of the {@code referenceSpaceType} field. */
     @NativeType("XrReferenceSpaceType")
     public int referenceSpaceType() { return nreferenceSpaceType(address()); }
-    /** Returns the value of the {@code changeTime} field. */
+    /** @return the value of the {@code changeTime} field. */
     @NativeType("XrTime")
     public long changeTime() { return nchangeTime(address()); }
-    /** Returns the value of the {@code poseValid} field. */
+    /** @return the value of the {@code poseValid} field. */
     @NativeType("XrBool32")
     public boolean poseValid() { return nposeValid(address()) != 0; }
-    /** Returns a {@link XrPosef} view of the {@code poseInPreviousSpace} field. */
+    /** @return a {@link XrPosef} view of the {@code poseInPreviousSpace} field. */
     public XrPosef poseInPreviousSpace() { return nposeInPreviousSpace(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -387,25 +387,25 @@ public class XrEventDataReferenceSpaceChangePending extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataReferenceSpaceChangePending.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataReferenceSpaceChangePending.nnext(address()); }
-        /** Returns the value of the {@code session} field. */
+        /** @return the value of the {@code session} field. */
         @NativeType("XrSession")
         public long session() { return XrEventDataReferenceSpaceChangePending.nsession(address()); }
-        /** Returns the value of the {@code referenceSpaceType} field. */
+        /** @return the value of the {@code referenceSpaceType} field. */
         @NativeType("XrReferenceSpaceType")
         public int referenceSpaceType() { return XrEventDataReferenceSpaceChangePending.nreferenceSpaceType(address()); }
-        /** Returns the value of the {@code changeTime} field. */
+        /** @return the value of the {@code changeTime} field. */
         @NativeType("XrTime")
         public long changeTime() { return XrEventDataReferenceSpaceChangePending.nchangeTime(address()); }
-        /** Returns the value of the {@code poseValid} field. */
+        /** @return the value of the {@code poseValid} field. */
         @NativeType("XrBool32")
         public boolean poseValid() { return XrEventDataReferenceSpaceChangePending.nposeValid(address()) != 0; }
-        /** Returns a {@link XrPosef} view of the {@code poseInPreviousSpace} field. */
+        /** @return a {@link XrPosef} view of the {@code poseInPreviousSpace} field. */
         public XrPosef poseInPreviousSpace() { return XrEventDataReferenceSpaceChangePending.nposeInPreviousSpace(address()); }
 
         /** Sets the specified value to the {@code type} field. */

@@ -40,31 +40,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the image has a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a> and its tiling is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR} , then the {@code aspectMask} member of {@link VkImageSubresource} <b>must</b> be {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT}, {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT}, or (for 3-plane formats only) {@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT}. Querying each of these image subresource layouts will return a different {@code offset} and {@code size} representing the region of memory used for that plane. If the image is <em>disjoint</em>, then the {@code offset} is relative to the base address of the plane. If the image is <em>non-disjoint</em>, then the {@code offset} is relative to the base address of the image.</p>
  * 
- * <p>If the image's tiling is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then the {@code aspectMask} member of {@link VkImageSubresource} <b>must</b> be one of {@code VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT}, where the maximum allowed plane index {@code i} is defined by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkDrmFormatModifierPropertiesEXT">{@code drmFormatModifierPlaneCount}</a> associated with the image's <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkImageCreateInfo">{@code format}</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#glossary-drm-format-modifier">modifier</a>. The memory range used by the subresource is described by {@code offset} and {@code size}. If the image is <em>disjoint</em>, then the {@code offset} is relative to the base address of the <em>memory plane</em>. If the image is <em>non-disjoint</em>, then the {@code offset} is relative to the base address of the image. If the image is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#glossary-linear-resource">non-linear</a>, then {@code rowPitch}, {@code arrayPitch}, and {@code depthPitch} have an implementation-dependent meaning.</p>
+ * <p>If the image's tiling is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then the {@code aspectMask} member of {@link VkImageSubresource} <b>must</b> be one of {@code VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT}, where the maximum allowed plane index {@code i} is defined by the {@link VkDrmFormatModifierPropertiesEXT}{@code ::drmFormatModifierPlaneCount} associated with the image's {@link VkImageCreateInfo}{@code ::format} and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#glossary-drm-format-modifier">modifier</a>. The memory range used by the subresource is described by {@code offset} and {@code size}. If the image is <em>disjoint</em>, then the {@code offset} is relative to the base address of the <em>memory plane</em>. If the image is <em>non-disjoint</em>, then the {@code offset} is relative to the base address of the image. If the image is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#glossary-linear-resource">non-linear</a>, then {@code rowPitch}, {@code arrayPitch}, and {@code depthPitch} have an implementation-dependent meaning.</p>
  * 
  * <h5>See Also</h5>
  * 
  * <p>{@link VkImageDrmFormatModifierExplicitCreateInfoEXT}, {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code offset} &ndash; the byte offset from the start of the image or the plane where the image subresource begins.</li>
- * <li>{@code size} &ndash; the size in bytes of the image subresource. {@code size} includes any extra memory that is required based on {@code rowPitch}.</li>
- * <li>{@code rowPitch} &ndash; describes the number of bytes between each row of texels in an image.</li>
- * <li>{@code arrayPitch} &ndash; describes the number of bytes between each array layer of an image.</li>
- * <li>{@code depthPitch} &ndash; describes the number of bytes between each slice of 3D image.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSubresourceLayout {
- *     VkDeviceSize offset;
- *     VkDeviceSize size;
- *     VkDeviceSize rowPitch;
- *     VkDeviceSize arrayPitch;
- *     VkDeviceSize depthPitch;
+ *     VkDeviceSize {@link #offset};
+ *     VkDeviceSize {@link #size};
+ *     VkDeviceSize {@link #rowPitch};
+ *     VkDeviceSize {@link #arrayPitch};
+ *     VkDeviceSize {@link #depthPitch};
  * }</code></pre>
  */
 public class VkSubresourceLayout extends Struct implements NativeResource {
@@ -115,19 +105,19 @@ public class VkSubresourceLayout extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code offset} field. */
+    /** the byte offset from the start of the image or the plane where the image subresource begins. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** the size in bytes of the image subresource. {@code size} includes any extra memory that is required based on {@code rowPitch}. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** Returns the value of the {@code rowPitch} field. */
+    /** describes the number of bytes between each row of texels in an image. */
     @NativeType("VkDeviceSize")
     public long rowPitch() { return nrowPitch(address()); }
-    /** Returns the value of the {@code arrayPitch} field. */
+    /** describes the number of bytes between each array layer of an image. */
     @NativeType("VkDeviceSize")
     public long arrayPitch() { return narrayPitch(address()); }
-    /** Returns the value of the {@code depthPitch} field. */
+    /** describes the number of bytes between each slice of 3D image. */
     @NativeType("VkDeviceSize")
     public long depthPitch() { return ndepthPitch(address()); }
 
@@ -323,19 +313,19 @@ public class VkSubresourceLayout extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@link VkSubresourceLayout#offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkSubresourceLayout.noffset(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link VkSubresourceLayout#size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkSubresourceLayout.nsize(address()); }
-        /** Returns the value of the {@code rowPitch} field. */
+        /** @return the value of the {@link VkSubresourceLayout#rowPitch} field. */
         @NativeType("VkDeviceSize")
         public long rowPitch() { return VkSubresourceLayout.nrowPitch(address()); }
-        /** Returns the value of the {@code arrayPitch} field. */
+        /** @return the value of the {@link VkSubresourceLayout#arrayPitch} field. */
         @NativeType("VkDeviceSize")
         public long arrayPitch() { return VkSubresourceLayout.narrayPitch(address()); }
-        /** Returns the value of the {@code depthPitch} field. */
+        /** @return the value of the {@link VkSubresourceLayout#depthPitch} field. */
         @NativeType("VkDeviceSize")
         public long depthPitch() { return VkSubresourceLayout.ndepthPitch(address()); }
 

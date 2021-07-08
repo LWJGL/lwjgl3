@@ -29,14 +29,14 @@ import org.lwjgl.system.*;
  */
 public class NVConditionalRender {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code mode} parameter of BeginConditionalRenderNV. */
     public static final int
         GL_QUERY_WAIT_NV              = 0x8E13,
         GL_QUERY_NO_WAIT_NV           = 0x8E14,
         GL_QUERY_BY_REGION_WAIT_NV    = 0x8E15,
         GL_QUERY_BY_REGION_NO_WAIT_NV = 0x8E16;
-
-    static { GLES.initialize(); }
 
     protected NVConditionalRender() {
         throw new UnsupportedOperationException();

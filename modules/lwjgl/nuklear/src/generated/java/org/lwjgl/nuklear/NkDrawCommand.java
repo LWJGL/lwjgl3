@@ -70,16 +70,16 @@ public class NkDrawCommand extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code elem_count} field. */
+    /** @return the value of the {@code elem_count} field. */
     @NativeType("unsigned int")
     public int elem_count() { return nelem_count(address()); }
-    /** Returns a {@link NkRect} view of the {@code clip_rect} field. */
+    /** @return a {@link NkRect} view of the {@code clip_rect} field. */
     @NativeType("struct nk_rect")
     public NkRect clip_rect() { return nclip_rect(address()); }
-    /** Returns a {@link NkHandle} view of the {@code texture} field. */
+    /** @return a {@link NkHandle} view of the {@code texture} field. */
     @NativeType("nk_handle")
     public NkHandle texture() { return ntexture(address()); }
-    /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+    /** @return a {@link NkHandle} view of the {@code userdata} field. */
     @NativeType("nk_handle")
     public NkHandle userdata() { return nuserdata(address()); }
 
@@ -161,16 +161,16 @@ public class NkDrawCommand extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code elem_count} field. */
+        /** @return the value of the {@code elem_count} field. */
         @NativeType("unsigned int")
         public int elem_count() { return NkDrawCommand.nelem_count(address()); }
-        /** Returns a {@link NkRect} view of the {@code clip_rect} field. */
+        /** @return a {@link NkRect} view of the {@code clip_rect} field. */
         @NativeType("struct nk_rect")
         public NkRect clip_rect() { return NkDrawCommand.nclip_rect(address()); }
-        /** Returns a {@link NkHandle} view of the {@code texture} field. */
+        /** @return a {@link NkHandle} view of the {@code texture} field. */
         @NativeType("nk_handle")
         public NkHandle texture() { return NkDrawCommand.ntexture(address()); }
-        /** Returns a {@link NkHandle} view of the {@code userdata} field. */
+        /** @return a {@link NkHandle} view of the {@code userdata} field. */
         @NativeType("nk_handle")
         public NkHandle userdata() { return NkDrawCommand.nuserdata(address()); }
 

@@ -15,6 +15,8 @@ import org.lwjgl.system.*;
  */
 public class NVCopyBuffer {
 
+    static { GLES.initialize(); }
+
     /**
      * Accepted by the target parameters of BindBuffer, BufferData, BufferSubData, MapBufferOES, UnmapBufferOES, GetBufferPointervOES, GetBufferParameteriv and
      * CopyBufferSubDataNV.
@@ -22,8 +24,6 @@ public class NVCopyBuffer {
     public static final int
         GL_COPY_READ_BUFFER_NV  = 0x8F36,
         GL_COPY_WRITE_BUFFER_NV = 0x8F37;
-
-    static { GLES.initialize(); }
 
     protected NVCopyBuffer() {
         throw new UnsupportedOperationException();

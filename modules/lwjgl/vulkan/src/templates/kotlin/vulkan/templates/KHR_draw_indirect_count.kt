@@ -11,11 +11,14 @@ import vulkan.*
 val KHR_draw_indirect_count = "KHRDrawIndirectCount".nativeClassVK("KHR_draw_indirect_count", type = "device", postfix = KHR) {
     documentation =
         """
-        This extension is based off the {@link AMDDrawIndirectCount VK_AMD_draw_indirect_count} extension. This extension allows an application to source the number of draw calls for indirect draw calls from a buffer. This enables applications to generate arbitrary amounts of draw commands and execute them without host intervention.
+        This extension is based off the {@link AMDDrawIndirectCount VK_AMD_draw_indirect_count} extension. This extension allows an application to source the number of draw calls for indirect draw calls from a buffer.
+
+        Applications might want to do culling on the GPU via a compute shader prior to the draw. This enables the application to generate arbitrary amounts of draw commands and execute them without host intervention.
 
         <h5>Promotion to Vulkan 1.2</h5>
         All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the entry points #CmdDrawIndirectCount() and #CmdDrawIndexedIndirectCount() are optional. The original type, enum and command names are still available as aliases of the core functionality.
 
+        <h5>VK_KHR_draw_indirect_count</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_draw_indirect_count}</dd>
@@ -43,7 +46,10 @@ val KHR_draw_indirect_count = "KHRDrawIndirectCount".nativeClassVK("KHR_draw_ind
             <dd><ul>
                 <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_draw_indirect_count:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-08-25</dd>
 

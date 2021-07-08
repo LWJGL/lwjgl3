@@ -19,22 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Holds all the state of a controller at one moment in time.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code unPacketNum} &ndash; If packet num matches that on your prior call, then the controller state hasn't been changed since your last call and there is no need to process it.</li>
- * <li>{@code ulButtonPressed} &ndash; bit flags for each of the buttons. Use {@code ButtonMaskFromId} to turn an ID into a mask</li>
- * <li>{@code rAxis[5]} &ndash; axis data for the controller's analog inputs</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VRControllerState_t {
- *     uint32_t unPacketNum;
- *     uint64_t ulButtonPressed;
+ *     uint32_t {@link #unPacketNum};
+ *     uint64_t {@link #ulButtonPressed};
  *     uint64_t ulButtonTouched;
- *     {@link VRControllerAxis VRControllerAxis_t} rAxis[5];
+ *     {@link VRControllerAxis VRControllerAxis_t} {@link #rAxis}[5];
  * }</code></pre>
  */
 @NativeType("struct VRControllerState_t")
@@ -83,35 +75,35 @@ public class VRControllerState extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code unPacketNum} field. */
+    /** If packet num matches that on your prior call, then the controller state hasn't been changed since your last call and there is no need to process it. */
     @NativeType("uint32_t")
     public int unPacketNum() { return nunPacketNum(address()); }
-    /** Returns the value of the {@code ulButtonPressed} field. */
+    /** bit flags for each of the buttons. Use {@code ButtonMaskFromId} to turn an ID into a mask */
     @NativeType("uint64_t")
     public long ulButtonPressed() { return nulButtonPressed(address()); }
-    /** Returns the value of the {@code ulButtonTouched} field. */
+    /** @return the value of the {@code ulButtonTouched} field. */
     @NativeType("uint64_t")
     public long ulButtonTouched() { return nulButtonTouched(address()); }
-    /** Returns a {@link VRControllerAxis}.Buffer view of the {@code rAxis} field. */
+    /** axis data for the controller's analog inputs */
     @NativeType("VRControllerAxis_t[5]")
     public VRControllerAxis.Buffer rAxis() { return nrAxis(address()); }
-    /** Returns a {@link VRControllerAxis} view of the struct at the specified index of the {@code rAxis} field. */
+    /** axis data for the controller's analog inputs */
     @NativeType("VRControllerAxis_t")
     public VRControllerAxis rAxis(int index) { return nrAxis(address(), index); }
 
-    /** Sets the specified value to the {@code unPacketNum} field. */
+    /** Sets the specified value to the {@link #unPacketNum} field. */
     public VRControllerState unPacketNum(@NativeType("uint32_t") int value) { nunPacketNum(address(), value); return this; }
-    /** Sets the specified value to the {@code ulButtonPressed} field. */
+    /** Sets the specified value to the {@link #ulButtonPressed} field. */
     public VRControllerState ulButtonPressed(@NativeType("uint64_t") long value) { nulButtonPressed(address(), value); return this; }
     /** Sets the specified value to the {@code ulButtonTouched} field. */
     public VRControllerState ulButtonTouched(@NativeType("uint64_t") long value) { nulButtonTouched(address(), value); return this; }
-    /** Copies the specified {@link VRControllerAxis.Buffer} to the {@code rAxis} field. */
+    /** Copies the specified {@link VRControllerAxis.Buffer} to the {@link #rAxis} field. */
     public VRControllerState rAxis(@NativeType("VRControllerAxis_t[5]") VRControllerAxis.Buffer value) { nrAxis(address(), value); return this; }
-    /** Copies the specified {@link VRControllerAxis} at the specified index of the {@code rAxis} field. */
+    /** Copies the specified {@link VRControllerAxis} at the specified index of the {@link #rAxis} field. */
     public VRControllerState rAxis(int index, @NativeType("VRControllerAxis_t") VRControllerAxis value) { nrAxis(address(), index, value); return this; }
-    /** Passes the {@code rAxis} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #rAxis} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VRControllerState rAxis(java.util.function.Consumer<VRControllerAxis.Buffer> consumer) { consumer.accept(rAxis()); return this; }
-    /** Passes the element at {@code index} of the {@code rAxis} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the element at {@code index} of the {@link #rAxis} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VRControllerState rAxis(int index, java.util.function.Consumer<VRControllerAxis> consumer) { consumer.accept(rAxis(index)); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -351,35 +343,35 @@ public class VRControllerState extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code unPacketNum} field. */
+        /** @return the value of the {@link VRControllerState#unPacketNum} field. */
         @NativeType("uint32_t")
         public int unPacketNum() { return VRControllerState.nunPacketNum(address()); }
-        /** Returns the value of the {@code ulButtonPressed} field. */
+        /** @return the value of the {@link VRControllerState#ulButtonPressed} field. */
         @NativeType("uint64_t")
         public long ulButtonPressed() { return VRControllerState.nulButtonPressed(address()); }
-        /** Returns the value of the {@code ulButtonTouched} field. */
+        /** @return the value of the {@code ulButtonTouched} field. */
         @NativeType("uint64_t")
         public long ulButtonTouched() { return VRControllerState.nulButtonTouched(address()); }
-        /** Returns a {@link VRControllerAxis}.Buffer view of the {@code rAxis} field. */
+        /** @return a {@link VRControllerAxis}.Buffer view of the {@link VRControllerState#rAxis} field. */
         @NativeType("VRControllerAxis_t[5]")
         public VRControllerAxis.Buffer rAxis() { return VRControllerState.nrAxis(address()); }
-        /** Returns a {@link VRControllerAxis} view of the struct at the specified index of the {@code rAxis} field. */
+        /** @return a {@link VRControllerAxis} view of the struct at the specified index of the {@link VRControllerState#rAxis} field. */
         @NativeType("VRControllerAxis_t")
         public VRControllerAxis rAxis(int index) { return VRControllerState.nrAxis(address(), index); }
 
-        /** Sets the specified value to the {@code unPacketNum} field. */
+        /** Sets the specified value to the {@link VRControllerState#unPacketNum} field. */
         public VRControllerState.Buffer unPacketNum(@NativeType("uint32_t") int value) { VRControllerState.nunPacketNum(address(), value); return this; }
-        /** Sets the specified value to the {@code ulButtonPressed} field. */
+        /** Sets the specified value to the {@link VRControllerState#ulButtonPressed} field. */
         public VRControllerState.Buffer ulButtonPressed(@NativeType("uint64_t") long value) { VRControllerState.nulButtonPressed(address(), value); return this; }
         /** Sets the specified value to the {@code ulButtonTouched} field. */
         public VRControllerState.Buffer ulButtonTouched(@NativeType("uint64_t") long value) { VRControllerState.nulButtonTouched(address(), value); return this; }
-        /** Copies the specified {@link VRControllerAxis.Buffer} to the {@code rAxis} field. */
+        /** Copies the specified {@link VRControllerAxis.Buffer} to the {@link VRControllerState#rAxis} field. */
         public VRControllerState.Buffer rAxis(@NativeType("VRControllerAxis_t[5]") VRControllerAxis.Buffer value) { VRControllerState.nrAxis(address(), value); return this; }
-        /** Copies the specified {@link VRControllerAxis} at the specified index of the {@code rAxis} field. */
+        /** Copies the specified {@link VRControllerAxis} at the specified index of the {@link VRControllerState#rAxis} field. */
         public VRControllerState.Buffer rAxis(int index, @NativeType("VRControllerAxis_t") VRControllerAxis value) { VRControllerState.nrAxis(address(), index, value); return this; }
-        /** Passes the {@code rAxis} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VRControllerState#rAxis} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VRControllerState.Buffer rAxis(java.util.function.Consumer<VRControllerAxis.Buffer> consumer) { consumer.accept(rAxis()); return this; }
-        /** Passes the element at {@code index} of the {@code rAxis} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the element at {@code index} of the {@link VRControllerState#rAxis} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VRControllerState.Buffer rAxis(int index, java.util.function.Consumer<VRControllerAxis> consumer) { consumer.accept(rAxis(index)); return this; }
 
     }

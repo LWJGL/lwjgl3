@@ -75,19 +75,19 @@ public class XrControllerModelPropertiesMSFT extends Struct implements NativeRes
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code nodeCapacityInput} field. */
+    /** @return the value of the {@code nodeCapacityInput} field. */
     @NativeType("uint32_t")
     public int nodeCapacityInput() { return nnodeCapacityInput(address()); }
-    /** Returns the value of the {@code nodeCountOutput} field. */
+    /** @return the value of the {@code nodeCountOutput} field. */
     @NativeType("uint32_t")
     public int nodeCountOutput() { return nnodeCountOutput(address()); }
-    /** Returns a {@link XrControllerModelNodePropertiesMSFT.Buffer} view of the struct array pointed to by the {@code nodeProperties} field. */
+    /** @return a {@link XrControllerModelNodePropertiesMSFT.Buffer} view of the struct array pointed to by the {@code nodeProperties} field. */
     @Nullable
     @NativeType("XrControllerModelNodePropertiesMSFT *")
     public XrControllerModelNodePropertiesMSFT.Buffer nodeProperties() { return nnodeProperties(address()); }
@@ -335,19 +335,19 @@ public class XrControllerModelPropertiesMSFT extends Struct implements NativeRes
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrControllerModelPropertiesMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrControllerModelPropertiesMSFT.nnext(address()); }
-        /** Returns the value of the {@code nodeCapacityInput} field. */
+        /** @return the value of the {@code nodeCapacityInput} field. */
         @NativeType("uint32_t")
         public int nodeCapacityInput() { return XrControllerModelPropertiesMSFT.nnodeCapacityInput(address()); }
-        /** Returns the value of the {@code nodeCountOutput} field. */
+        /** @return the value of the {@code nodeCountOutput} field. */
         @NativeType("uint32_t")
         public int nodeCountOutput() { return XrControllerModelPropertiesMSFT.nnodeCountOutput(address()); }
-        /** Returns a {@link XrControllerModelNodePropertiesMSFT.Buffer} view of the struct array pointed to by the {@code nodeProperties} field. */
+        /** @return a {@link XrControllerModelNodePropertiesMSFT.Buffer} view of the struct array pointed to by the {@code nodeProperties} field. */
         @Nullable
         @NativeType("XrControllerModelNodePropertiesMSFT *")
         public XrControllerModelNodePropertiesMSFT.Buffer nodeProperties() { return XrControllerModelPropertiesMSFT.nnodeProperties(address()); }

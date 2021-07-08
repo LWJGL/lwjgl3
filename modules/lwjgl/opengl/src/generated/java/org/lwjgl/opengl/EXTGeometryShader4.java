@@ -29,6 +29,8 @@ import org.lwjgl.system.*;
  */
 public class EXTGeometryShader4 {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code type} parameter of CreateShader and returned by the {@code params} parameter of GetShaderiv. */
     public static final int GL_GEOMETRY_SHADER_EXT = 0x8DD9;
 
@@ -70,8 +72,6 @@ public class EXTGeometryShader4 {
      * GetBooleanv.
      */
     public static final int GL_PROGRAM_POINT_SIZE_EXT = 0x8642;
-
-    static { GL.initialize(); }
 
     protected EXTGeometryShader4() {
         throw new UnsupportedOperationException();

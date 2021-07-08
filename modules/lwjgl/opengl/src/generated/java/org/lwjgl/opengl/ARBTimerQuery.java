@@ -28,6 +28,8 @@ import org.lwjgl.system.*;
  */
 public class ARBTimerQuery {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv. */
     public static final int GL_TIME_ELAPSED = 0x88BF;
 
@@ -36,8 +38,6 @@ public class ARBTimerQuery {
      * GetInteger64v, GetFloatv, and GetDoublev.
      */
     public static final int GL_TIMESTAMP = 0x8E28;
-
-    static { GL.initialize(); }
 
     protected ARBTimerQuery() {
         throw new UnsupportedOperationException();

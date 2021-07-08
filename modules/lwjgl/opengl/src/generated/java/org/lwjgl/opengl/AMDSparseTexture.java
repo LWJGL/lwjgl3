@@ -24,6 +24,8 @@ import org.lwjgl.system.*;
  */
 public class AMDSparseTexture {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code flags} parameter to TexStorageSparseAMD and TextureStorageSparseAMD. */
     public static final int GL_TEXTURE_STORAGE_SPARSE_BIT_AMD = 0x1;
 
@@ -44,8 +46,6 @@ public class AMDSparseTexture {
 
     /** Accepted by the {@code pname} parameter of TexParameter{if}{v} and GetTexParameter{if}v. */
     public static final int GL_MIN_LOD_WARNING_AMD = 0x919C;
-
-    static { GL.initialize(); }
 
     protected AMDSparseTexture() {
         throw new UnsupportedOperationException();

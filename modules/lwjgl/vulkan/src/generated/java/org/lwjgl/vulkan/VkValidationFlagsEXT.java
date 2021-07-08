@@ -27,23 +27,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code disabledValidationCheckCount} <b>must</b> be greater than 0</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code disabledValidationCheckCount} &ndash; the number of checks to disable.</li>
- * <li>{@code pDisabledValidationChecks} &ndash; a pointer to an array of {@code VkValidationCheckEXT} values specifying the validation checks to be disabled.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkValidationFlagsEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t disabledValidationCheckCount;
- *     VkValidationCheckEXT const * pDisabledValidationChecks;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #disabledValidationCheckCount};
+ *     VkValidationCheckEXT const * {@link #pDisabledValidationChecks};
  * }</code></pre>
  */
 public class VkValidationFlagsEXT extends Struct implements NativeResource {
@@ -91,24 +82,24 @@ public class VkValidationFlagsEXT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code disabledValidationCheckCount} field. */
+    /** the number of checks to disable. */
     @NativeType("uint32_t")
     public int disabledValidationCheckCount() { return ndisabledValidationCheckCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDisabledValidationChecks} field. */
+    /** a pointer to an array of {@code VkValidationCheckEXT} values specifying the validation checks to be disabled. */
     @NativeType("VkValidationCheckEXT const *")
     public IntBuffer pDisabledValidationChecks() { return npDisabledValidationChecks(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkValidationFlagsEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkValidationFlagsEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pDisabledValidationChecks} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pDisabledValidationChecks} field. */
     public VkValidationFlagsEXT pDisabledValidationChecks(@NativeType("VkValidationCheckEXT const *") IntBuffer value) { npDisabledValidationChecks(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -356,24 +347,24 @@ public class VkValidationFlagsEXT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkValidationFlagsEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkValidationFlagsEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkValidationFlagsEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkValidationFlagsEXT.npNext(address()); }
-        /** Returns the value of the {@code disabledValidationCheckCount} field. */
+        /** @return the value of the {@link VkValidationFlagsEXT#disabledValidationCheckCount} field. */
         @NativeType("uint32_t")
         public int disabledValidationCheckCount() { return VkValidationFlagsEXT.ndisabledValidationCheckCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pDisabledValidationChecks} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkValidationFlagsEXT#pDisabledValidationChecks} field. */
         @NativeType("VkValidationCheckEXT const *")
         public IntBuffer pDisabledValidationChecks() { return VkValidationFlagsEXT.npDisabledValidationChecks(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkValidationFlagsEXT#sType} field. */
         public VkValidationFlagsEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkValidationFlagsEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkValidationFlagsEXT#pNext} field. */
         public VkValidationFlagsEXT.Buffer pNext(@NativeType("void const *") long value) { VkValidationFlagsEXT.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pDisabledValidationChecks} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkValidationFlagsEXT#pDisabledValidationChecks} field. */
         public VkValidationFlagsEXT.Buffer pDisabledValidationChecks(@NativeType("VkValidationCheckEXT const *") IntBuffer value) { VkValidationFlagsEXT.npDisabledValidationChecks(address(), value); return this; }
 
     }

@@ -41,12 +41,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class QCOMFramebufferFoveated {
 
+    static { GLES.initialize(); }
+
     /** Allowed in the config input in FramebufferFoveationConfigQCOM. */
     public static final int
         GL_FOVEATION_ENABLE_BIT_QCOM            = 0x1,
         GL_FOVEATION_SCALED_BIN_METHOD_BIT_QCOM = 0x2;
-
-    static { GLES.initialize(); }
 
     protected QCOMFramebufferFoveated() {
         throw new UnsupportedOperationException();

@@ -52,6 +52,8 @@ import org.lwjgl.system.libc.LibCStdlib;
  */
 public class STBVorbis {
 
+    static { LibSTB.initialize(); }
+
     /**
      * Error code.
      * 
@@ -103,8 +105,6 @@ public class STBVorbis {
         VORBIS_cant_find_last_page              = 36,
         VORBIS_seek_failed                      = 37,
         VORBIS_ogg_skeleton_not_supported       = 38;
-
-    static { LibSTB.initialize(); }
 
     protected STBVorbis() {
         throw new UnsupportedOperationException();

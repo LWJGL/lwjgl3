@@ -79,20 +79,20 @@ public class NkChart extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code slot} field. */
+    /** @return the value of the {@code slot} field. */
     public int slot() { return nslot(address()); }
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** Returns the value of the {@code w} field. */
+    /** @return the value of the {@code w} field. */
     public float w() { return nw(address()); }
-    /** Returns the value of the {@code h} field. */
+    /** @return the value of the {@code h} field. */
     public float h() { return nh(address()); }
-    /** Returns a {@link NkChartSlot}.Buffer view of the {@code slots} field. */
+    /** @return a {@link NkChartSlot}.Buffer view of the {@code slots} field. */
     @NativeType("struct nk_chart_slot[4]")
     public NkChartSlot.Buffer slots() { return nslots(address()); }
-    /** Returns a {@link NkChartSlot} view of the struct at the specified index of the {@code slots} field. */
+    /** @return a {@link NkChartSlot} view of the struct at the specified index of the {@code slots} field. */
     @NativeType("struct nk_chart_slot")
     public NkChartSlot slots(int index) { return nslots(address(), index); }
 
@@ -182,20 +182,20 @@ public class NkChart extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code slot} field. */
+        /** @return the value of the {@code slot} field. */
         public int slot() { return NkChart.nslot(address()); }
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return NkChart.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return NkChart.ny(address()); }
-        /** Returns the value of the {@code w} field. */
+        /** @return the value of the {@code w} field. */
         public float w() { return NkChart.nw(address()); }
-        /** Returns the value of the {@code h} field. */
+        /** @return the value of the {@code h} field. */
         public float h() { return NkChart.nh(address()); }
-        /** Returns a {@link NkChartSlot}.Buffer view of the {@code slots} field. */
+        /** @return a {@link NkChartSlot}.Buffer view of the {@code slots} field. */
         @NativeType("struct nk_chart_slot[4]")
         public NkChartSlot.Buffer slots() { return NkChart.nslots(address()); }
-        /** Returns a {@link NkChartSlot} view of the struct at the specified index of the {@code slots} field. */
+        /** @return a {@link NkChartSlot} view of the struct at the specified index of the {@code slots} field. */
         @NativeType("struct nk_chart_slot")
         public NkChartSlot slots(int index) { return NkChart.nslots(address(), index); }
 

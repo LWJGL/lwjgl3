@@ -19,6 +19,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Bindings to the {@code DriftFX} class. */
 public class DriftFX {
 
+    static { LibDriftFX.initialize(); }
+
     /**
      * {@code PresentationHint}
      * 
@@ -50,8 +52,6 @@ public class DriftFX {
         DRIFTFX_BOTTOM_LEFT   = 0x8,
         DRIFTFX_BOTTOM_CENTER = 0x9,
         DRIFTFX_BOTTOM_RIGHT  = 0xA;
-
-    static { LibDriftFX.initialize(); }
 
     protected DriftFX() {
         throw new UnsupportedOperationException();

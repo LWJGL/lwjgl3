@@ -75,22 +75,22 @@ public class MeshoptMeshlet extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link IntBuffer} view of the {@code vertices} field. */
+    /** @return a {@link IntBuffer} view of the {@code vertices} field. */
     @NativeType("unsigned int[64]")
     public IntBuffer vertices() { return nvertices(address()); }
-    /** Returns the value at the specified index of the {@code vertices} field. */
+    /** @return the value at the specified index of the {@code vertices} field. */
     @NativeType("unsigned int")
     public int vertices(int index) { return nvertices(address(), index); }
-    /** Returns a {@link ByteBuffer} view of the {@code indices} field. */
+    /** @return a {@link ByteBuffer} view of the {@code indices} field. */
     @NativeType("unsigned char[126][3]")
     public ByteBuffer indices() { return nindices(address()); }
-    /** Returns the value at the specified index of the {@code indices} field. */
+    /** @return the value at the specified index of the {@code indices} field. */
     @NativeType("unsigned char")
     public byte indices(int index) { return nindices(address(), index); }
-    /** Returns the value of the {@code triangle_count} field. */
+    /** @return the value of the {@code triangle_count} field. */
     @NativeType("unsigned char")
     public byte triangle_count() { return ntriangle_count(address()); }
-    /** Returns the value of the {@code vertex_count} field. */
+    /** @return the value of the {@code vertex_count} field. */
     @NativeType("unsigned char")
     public byte vertex_count() { return nvertex_count(address()); }
 
@@ -292,22 +292,22 @@ public class MeshoptMeshlet extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link IntBuffer} view of the {@code vertices} field. */
+        /** @return a {@link IntBuffer} view of the {@code vertices} field. */
         @NativeType("unsigned int[64]")
         public IntBuffer vertices() { return MeshoptMeshlet.nvertices(address()); }
-        /** Returns the value at the specified index of the {@code vertices} field. */
+        /** @return the value at the specified index of the {@code vertices} field. */
         @NativeType("unsigned int")
         public int vertices(int index) { return MeshoptMeshlet.nvertices(address(), index); }
-        /** Returns a {@link ByteBuffer} view of the {@code indices} field. */
+        /** @return a {@link ByteBuffer} view of the {@code indices} field. */
         @NativeType("unsigned char[126][3]")
         public ByteBuffer indices() { return MeshoptMeshlet.nindices(address()); }
-        /** Returns the value at the specified index of the {@code indices} field. */
+        /** @return the value at the specified index of the {@code indices} field. */
         @NativeType("unsigned char")
         public byte indices(int index) { return MeshoptMeshlet.nindices(address(), index); }
-        /** Returns the value of the {@code triangle_count} field. */
+        /** @return the value of the {@code triangle_count} field. */
         @NativeType("unsigned char")
         public byte triangle_count() { return MeshoptMeshlet.ntriangle_count(address()); }
-        /** Returns the value of the {@code vertex_count} field. */
+        /** @return the value of the {@code vertex_count} field. */
         @NativeType("unsigned char")
         public byte vertex_count() { return MeshoptMeshlet.nvertex_count(address()); }
 

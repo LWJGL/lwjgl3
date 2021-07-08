@@ -17,30 +17,20 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code serial} &ndash; # of last request processed by server</li>
- * <li>{@code send_event} &ndash; true if this came from an {@link X11#XSendEvent} request</li>
- * <li>{@code display} &ndash; {@code Display} the event was read from</li>
- * <li>{@code window} &ndash; window it reported relative to</li>
- * <li>{@code count} &ndash; if non-zero, at least this many more</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XExposeEvent {
  *     int type;
- *     unsigned long serial;
- *     Bool send_event;
- *     Display * display;
- *     Window window;
+ *     unsigned long {@link #serial};
+ *     Bool {@link #send_event};
+ *     Display * {@link #display};
+ *     Window {@link #window};
  *     int x;
  *     int y;
  *     int width;
  *     int height;
- *     int count;
+ *     int {@link #count};
  * }</code></pre>
  */
 public class XExposeEvent extends Struct implements NativeResource {
@@ -106,40 +96,40 @@ public class XExposeEvent extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code serial} field. */
+    /** # of last request processed by server */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** Returns the value of the {@code send_event} field. */
+    /** true if this came from an {@link X11#XSendEvent} request */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** Returns the value of the {@code display} field. */
+    /** {@code Display} the event was read from */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** Returns the value of the {@code window} field. */
+    /** window it reported relative to */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     public int y() { return ny(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** @return the value of the {@code width} field. */
     public int width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** @return the value of the {@code height} field. */
     public int height() { return nheight(address()); }
-    /** Returns the value of the {@code count} field. */
+    /** if non-zero, at least this many more */
     public int count() { return ncount(address()); }
 
     /** Sets the specified value to the {@code type} field. */
     public XExposeEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code serial} field. */
+    /** Sets the specified value to the {@link #serial} field. */
     public XExposeEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@code send_event} field. */
+    /** Sets the specified value to the {@link #send_event} field. */
     public XExposeEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code display} field. */
+    /** Sets the specified value to the {@link #display} field. */
     public XExposeEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@code window} field. */
+    /** Sets the specified value to the {@link #window} field. */
     public XExposeEvent window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
     /** Sets the specified value to the {@code x} field. */
     public XExposeEvent x(int value) { nx(address(), value); return this; }
@@ -149,7 +139,7 @@ public class XExposeEvent extends Struct implements NativeResource {
     public XExposeEvent width(int value) { nwidth(address(), value); return this; }
     /** Sets the specified value to the {@code height} field. */
     public XExposeEvent height(int value) { nheight(address(), value); return this; }
-    /** Sets the specified value to the {@code count} field. */
+    /** Sets the specified value to the {@link #count} field. */
     public XExposeEvent count(int value) { ncount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -435,40 +425,40 @@ public class XExposeEvent extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XExposeEvent.ntype(address()); }
-        /** Returns the value of the {@code serial} field. */
+        /** @return the value of the {@link XExposeEvent#serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XExposeEvent.nserial(address()); }
-        /** Returns the value of the {@code send_event} field. */
+        /** @return the value of the {@link XExposeEvent#send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XExposeEvent.nsend_event(address()) != 0; }
-        /** Returns the value of the {@code display} field. */
+        /** @return the value of the {@link XExposeEvent#display} field. */
         @NativeType("Display *")
         public long display() { return XExposeEvent.ndisplay(address()); }
-        /** Returns the value of the {@code window} field. */
+        /** @return the value of the {@link XExposeEvent#window} field. */
         @NativeType("Window")
         public long window() { return XExposeEvent.nwindow(address()); }
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         public int x() { return XExposeEvent.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         public int y() { return XExposeEvent.ny(address()); }
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@code width} field. */
         public int width() { return XExposeEvent.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@code height} field. */
         public int height() { return XExposeEvent.nheight(address()); }
-        /** Returns the value of the {@code count} field. */
+        /** @return the value of the {@link XExposeEvent#count} field. */
         public int count() { return XExposeEvent.ncount(address()); }
 
         /** Sets the specified value to the {@code type} field. */
         public XExposeEvent.Buffer type(int value) { XExposeEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code serial} field. */
+        /** Sets the specified value to the {@link XExposeEvent#serial} field. */
         public XExposeEvent.Buffer serial(@NativeType("unsigned long") long value) { XExposeEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@code send_event} field. */
+        /** Sets the specified value to the {@link XExposeEvent#send_event} field. */
         public XExposeEvent.Buffer send_event(@NativeType("Bool") boolean value) { XExposeEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code display} field. */
+        /** Sets the specified value to the {@link XExposeEvent#display} field. */
         public XExposeEvent.Buffer display(@NativeType("Display *") long value) { XExposeEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@code window} field. */
+        /** Sets the specified value to the {@link XExposeEvent#window} field. */
         public XExposeEvent.Buffer window(@NativeType("Window") long value) { XExposeEvent.nwindow(address(), value); return this; }
         /** Sets the specified value to the {@code x} field. */
         public XExposeEvent.Buffer x(int value) { XExposeEvent.nx(address(), value); return this; }
@@ -478,7 +468,7 @@ public class XExposeEvent extends Struct implements NativeResource {
         public XExposeEvent.Buffer width(int value) { XExposeEvent.nwidth(address(), value); return this; }
         /** Sets the specified value to the {@code height} field. */
         public XExposeEvent.Buffer height(int value) { XExposeEvent.nheight(address(), value); return this; }
-        /** Sets the specified value to the {@code count} field. */
+        /** Sets the specified value to the {@link XExposeEvent#count} field. */
         public XExposeEvent.Buffer count(int value) { XExposeEvent.ncount(address(), value); return this; }
 
     }

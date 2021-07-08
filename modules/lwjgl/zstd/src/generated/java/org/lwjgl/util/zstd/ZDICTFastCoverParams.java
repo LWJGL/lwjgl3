@@ -18,34 +18,17 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * {@code k} and {@code d} are the only required parameters. For others, value 0 means default.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code k} &ndash; segment size : constraint: {@code 0 < k} : Reasonable range {@code [16, 2048+]}</li>
- * <li>{@code d} &ndash; {@code dmer} size : constraint: {@code 0 < d <= k} : Reasonable range {@code [6, 16]}</li>
- * <li>{@code f} &ndash; log of size of frequency array : constraint: {@code 0 < f <= 31} : 1 means default(20)</li>
- * <li>{@code steps} &ndash; Number of steps : Only used for optimization : 0 means default (40) : Higher means more parameters checked</li>
- * <li>{@code nbThreads} &ndash; 
- * number of threads : constraint: {@code 0 < nbThreads} : 1 means single-threaded : Only used for optimization : Ignored if {@code ZSTD_MULTITHREAD} is
- * not defined.</li>
- * <li>{@code splitPoint} &ndash; 
- * percentage of samples used for training: Only used for optimization: the first {@code nbSamples * splitPoint} samples will be used to training, the
- * last {@code nbSamples * (1 - splitPoint)} samples will be used for testing, 0 means default (0.75), 1.0 when all samples are used for both training and
- * testing.</li>
- * <li>{@code accel} &ndash; acceleration level: constraint: {@code 0 < accel <= 10}, higher means faster and less accurate, 0 means default(1)</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct ZDICT_fastCover_params_t {
- *     unsigned k;
- *     unsigned d;
- *     unsigned f;
- *     unsigned steps;
- *     unsigned nbThreads;
- *     double splitPoint;
- *     unsigned accel;
+ *     unsigned {@link #k};
+ *     unsigned {@link #d};
+ *     unsigned {@link #f};
+ *     unsigned {@link #steps};
+ *     unsigned {@link #nbThreads};
+ *     double {@link #splitPoint};
+ *     unsigned {@link #accel};
  *     {@link ZDICTParams ZDICT_params_t} zParams;
  * }</code></pre>
  */
@@ -107,43 +90,50 @@ public class ZDICTFastCoverParams extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code k} field. */
+    /** segment size : constraint: {@code 0 < k} : Reasonable range {@code [16, 2048+]} */
     @NativeType("unsigned")
     public int k() { return nk(address()); }
-    /** Returns the value of the {@code d} field. */
+    /** {@code dmer} size : constraint: {@code 0 < d <= k} : Reasonable range {@code [6, 16]} */
     @NativeType("unsigned")
     public int d() { return nd(address()); }
-    /** Returns the value of the {@code f} field. */
+    /** log of size of frequency array : constraint: {@code 0 < f <= 31} : 1 means default(20) */
     @NativeType("unsigned")
     public int f() { return nf(address()); }
-    /** Returns the value of the {@code steps} field. */
+    /** Number of steps : Only used for optimization : 0 means default (40) : Higher means more parameters checked */
     @NativeType("unsigned")
     public int steps() { return nsteps(address()); }
-    /** Returns the value of the {@code nbThreads} field. */
+    /**
+     * number of threads : constraint: {@code 0 < nbThreads} : 1 means single-threaded : Only used for optimization : Ignored if {@code ZSTD_MULTITHREAD} is
+     * not defined.
+     */
     @NativeType("unsigned")
     public int nbThreads() { return nnbThreads(address()); }
-    /** Returns the value of the {@code splitPoint} field. */
+    /**
+     * percentage of samples used for training: Only used for optimization: the first {@code nbSamples * splitPoint} samples will be used to training, the
+     * last {@code nbSamples * (1 - splitPoint)} samples will be used for testing, 0 means default (0.75), 1.0 when all samples are used for both training and
+     * testing.
+     */
     public double splitPoint() { return nsplitPoint(address()); }
-    /** Returns the value of the {@code accel} field. */
+    /** acceleration level: constraint: {@code 0 < accel <= 10}, higher means faster and less accurate, 0 means default(1) */
     @NativeType("unsigned")
     public int accel() { return naccel(address()); }
-    /** Returns a {@link ZDICTParams} view of the {@code zParams} field. */
+    /** @return a {@link ZDICTParams} view of the {@code zParams} field. */
     @NativeType("ZDICT_params_t")
     public ZDICTParams zParams() { return nzParams(address()); }
 
-    /** Sets the specified value to the {@code k} field. */
+    /** Sets the specified value to the {@link #k} field. */
     public ZDICTFastCoverParams k(@NativeType("unsigned") int value) { nk(address(), value); return this; }
-    /** Sets the specified value to the {@code d} field. */
+    /** Sets the specified value to the {@link #d} field. */
     public ZDICTFastCoverParams d(@NativeType("unsigned") int value) { nd(address(), value); return this; }
-    /** Sets the specified value to the {@code f} field. */
+    /** Sets the specified value to the {@link #f} field. */
     public ZDICTFastCoverParams f(@NativeType("unsigned") int value) { nf(address(), value); return this; }
-    /** Sets the specified value to the {@code steps} field. */
+    /** Sets the specified value to the {@link #steps} field. */
     public ZDICTFastCoverParams steps(@NativeType("unsigned") int value) { nsteps(address(), value); return this; }
-    /** Sets the specified value to the {@code nbThreads} field. */
+    /** Sets the specified value to the {@link #nbThreads} field. */
     public ZDICTFastCoverParams nbThreads(@NativeType("unsigned") int value) { nnbThreads(address(), value); return this; }
-    /** Sets the specified value to the {@code splitPoint} field. */
+    /** Sets the specified value to the {@link #splitPoint} field. */
     public ZDICTFastCoverParams splitPoint(double value) { nsplitPoint(address(), value); return this; }
-    /** Sets the specified value to the {@code accel} field. */
+    /** Sets the specified value to the {@link #accel} field. */
     public ZDICTFastCoverParams accel(@NativeType("unsigned") int value) { naccel(address(), value); return this; }
     /** Copies the specified {@link ZDICTParams} to the {@code zParams} field. */
     public ZDICTFastCoverParams zParams(@NativeType("ZDICT_params_t") ZDICTParams value) { nzParams(address(), value); return this; }
@@ -400,43 +390,43 @@ public class ZDICTFastCoverParams extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code k} field. */
+        /** @return the value of the {@link ZDICTFastCoverParams#k} field. */
         @NativeType("unsigned")
         public int k() { return ZDICTFastCoverParams.nk(address()); }
-        /** Returns the value of the {@code d} field. */
+        /** @return the value of the {@link ZDICTFastCoverParams#d} field. */
         @NativeType("unsigned")
         public int d() { return ZDICTFastCoverParams.nd(address()); }
-        /** Returns the value of the {@code f} field. */
+        /** @return the value of the {@link ZDICTFastCoverParams#f} field. */
         @NativeType("unsigned")
         public int f() { return ZDICTFastCoverParams.nf(address()); }
-        /** Returns the value of the {@code steps} field. */
+        /** @return the value of the {@link ZDICTFastCoverParams#steps} field. */
         @NativeType("unsigned")
         public int steps() { return ZDICTFastCoverParams.nsteps(address()); }
-        /** Returns the value of the {@code nbThreads} field. */
+        /** @return the value of the {@link ZDICTFastCoverParams#nbThreads} field. */
         @NativeType("unsigned")
         public int nbThreads() { return ZDICTFastCoverParams.nnbThreads(address()); }
-        /** Returns the value of the {@code splitPoint} field. */
+        /** @return the value of the {@link ZDICTFastCoverParams#splitPoint} field. */
         public double splitPoint() { return ZDICTFastCoverParams.nsplitPoint(address()); }
-        /** Returns the value of the {@code accel} field. */
+        /** @return the value of the {@link ZDICTFastCoverParams#accel} field. */
         @NativeType("unsigned")
         public int accel() { return ZDICTFastCoverParams.naccel(address()); }
-        /** Returns a {@link ZDICTParams} view of the {@code zParams} field. */
+        /** @return a {@link ZDICTParams} view of the {@code zParams} field. */
         @NativeType("ZDICT_params_t")
         public ZDICTParams zParams() { return ZDICTFastCoverParams.nzParams(address()); }
 
-        /** Sets the specified value to the {@code k} field. */
+        /** Sets the specified value to the {@link ZDICTFastCoverParams#k} field. */
         public ZDICTFastCoverParams.Buffer k(@NativeType("unsigned") int value) { ZDICTFastCoverParams.nk(address(), value); return this; }
-        /** Sets the specified value to the {@code d} field. */
+        /** Sets the specified value to the {@link ZDICTFastCoverParams#d} field. */
         public ZDICTFastCoverParams.Buffer d(@NativeType("unsigned") int value) { ZDICTFastCoverParams.nd(address(), value); return this; }
-        /** Sets the specified value to the {@code f} field. */
+        /** Sets the specified value to the {@link ZDICTFastCoverParams#f} field. */
         public ZDICTFastCoverParams.Buffer f(@NativeType("unsigned") int value) { ZDICTFastCoverParams.nf(address(), value); return this; }
-        /** Sets the specified value to the {@code steps} field. */
+        /** Sets the specified value to the {@link ZDICTFastCoverParams#steps} field. */
         public ZDICTFastCoverParams.Buffer steps(@NativeType("unsigned") int value) { ZDICTFastCoverParams.nsteps(address(), value); return this; }
-        /** Sets the specified value to the {@code nbThreads} field. */
+        /** Sets the specified value to the {@link ZDICTFastCoverParams#nbThreads} field. */
         public ZDICTFastCoverParams.Buffer nbThreads(@NativeType("unsigned") int value) { ZDICTFastCoverParams.nnbThreads(address(), value); return this; }
-        /** Sets the specified value to the {@code splitPoint} field. */
+        /** Sets the specified value to the {@link ZDICTFastCoverParams#splitPoint} field. */
         public ZDICTFastCoverParams.Buffer splitPoint(double value) { ZDICTFastCoverParams.nsplitPoint(address(), value); return this; }
-        /** Sets the specified value to the {@code accel} field. */
+        /** Sets the specified value to the {@link ZDICTFastCoverParams#accel} field. */
         public ZDICTFastCoverParams.Buffer accel(@NativeType("unsigned") int value) { ZDICTFastCoverParams.naccel(address(), value); return this; }
         /** Copies the specified {@link ZDICTParams} to the {@code zParams} field. */
         public ZDICTFastCoverParams.Buffer zParams(@NativeType("ZDICT_params_t") ZDICTParams value) { ZDICTFastCoverParams.nzParams(address(), value); return this; }

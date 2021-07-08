@@ -24,27 +24,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code storageBuffer16BitAccess} &ndash; specifies whether objects in the {@code StorageBuffer} or {@code PhysicalStorageBuffer} storage class with the {@code Block} decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StorageBuffer16BitAccess} capability.</li>
- * <li>{@code uniformAndStorageBuffer16BitAccess} &ndash; specifies whether objects in the {@code Uniform} storage class with the {@code Block} decoration and in the {@code StorageBuffer} or {@code PhysicalStorageBuffer} storage class with the same decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code UniformAndStorageBuffer16BitAccess} capability.</li>
- * <li>{@code storagePushConstant16} &ndash; specifies whether objects in the {@code PushConstant} storage class <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StoragePushConstant16} capability.</li>
- * <li>{@code storageInputOutput16} &ndash; specifies whether objects in the {@code Input} and {@code Output} storage classes <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StorageInputOutput16} capability.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDevice16BitStorageFeatures {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 storageBuffer16BitAccess;
- *     VkBool32 uniformAndStorageBuffer16BitAccess;
- *     VkBool32 storagePushConstant16;
- *     VkBool32 storageInputOutput16;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #storageBuffer16BitAccess};
+ *     VkBool32 {@link #uniformAndStorageBuffer16BitAccess};
+ *     VkBool32 {@link #storagePushConstant16};
+ *     VkBool32 {@link #storageInputOutput16};
  * }</code></pre>
  */
 public class VkPhysicalDevice16BitStorageFeatures extends Struct implements NativeResource {
@@ -98,36 +87,36 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code storageBuffer16BitAccess} field. */
+    /** specifies whether objects in the {@code StorageBuffer}, {@code ShaderRecordBufferKHR}, or {@code PhysicalStorageBuffer} storage class with the {@code Block} decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StorageBuffer16BitAccess} capability. */
     @NativeType("VkBool32")
     public boolean storageBuffer16BitAccess() { return nstorageBuffer16BitAccess(address()) != 0; }
-    /** Returns the value of the {@code uniformAndStorageBuffer16BitAccess} field. */
+    /** specifies whether objects in the {@code Uniform} storage class with the {@code Block} decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code UniformAndStorageBuffer16BitAccess} capability. */
     @NativeType("VkBool32")
     public boolean uniformAndStorageBuffer16BitAccess() { return nuniformAndStorageBuffer16BitAccess(address()) != 0; }
-    /** Returns the value of the {@code storagePushConstant16} field. */
+    /** specifies whether objects in the {@code PushConstant} storage class <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StoragePushConstant16} capability. */
     @NativeType("VkBool32")
     public boolean storagePushConstant16() { return nstoragePushConstant16(address()) != 0; }
-    /** Returns the value of the {@code storageInputOutput16} field. */
+    /** specifies whether objects in the {@code Input} and {@code Output} storage classes <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StorageInputOutput16} capability. */
     @NativeType("VkBool32")
     public boolean storageInputOutput16() { return nstorageInputOutput16(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevice16BitStorageFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevice16BitStorageFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code storageBuffer16BitAccess} field. */
+    /** Sets the specified value to the {@link #storageBuffer16BitAccess} field. */
     public VkPhysicalDevice16BitStorageFeatures storageBuffer16BitAccess(@NativeType("VkBool32") boolean value) { nstorageBuffer16BitAccess(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code uniformAndStorageBuffer16BitAccess} field. */
+    /** Sets the specified value to the {@link #uniformAndStorageBuffer16BitAccess} field. */
     public VkPhysicalDevice16BitStorageFeatures uniformAndStorageBuffer16BitAccess(@NativeType("VkBool32") boolean value) { nuniformAndStorageBuffer16BitAccess(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code storagePushConstant16} field. */
+    /** Sets the specified value to the {@link #storagePushConstant16} field. */
     public VkPhysicalDevice16BitStorageFeatures storagePushConstant16(@NativeType("VkBool32") boolean value) { nstoragePushConstant16(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code storageInputOutput16} field. */
+    /** Sets the specified value to the {@link #storageInputOutput16} field. */
     public VkPhysicalDevice16BitStorageFeatures storageInputOutput16(@NativeType("VkBool32") boolean value) { nstorageInputOutput16(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -368,36 +357,36 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDevice16BitStorageFeatures#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevice16BitStorageFeatures.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDevice16BitStorageFeatures#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevice16BitStorageFeatures.npNext(address()); }
-        /** Returns the value of the {@code storageBuffer16BitAccess} field. */
+        /** @return the value of the {@link VkPhysicalDevice16BitStorageFeatures#storageBuffer16BitAccess} field. */
         @NativeType("VkBool32")
         public boolean storageBuffer16BitAccess() { return VkPhysicalDevice16BitStorageFeatures.nstorageBuffer16BitAccess(address()) != 0; }
-        /** Returns the value of the {@code uniformAndStorageBuffer16BitAccess} field. */
+        /** @return the value of the {@link VkPhysicalDevice16BitStorageFeatures#uniformAndStorageBuffer16BitAccess} field. */
         @NativeType("VkBool32")
         public boolean uniformAndStorageBuffer16BitAccess() { return VkPhysicalDevice16BitStorageFeatures.nuniformAndStorageBuffer16BitAccess(address()) != 0; }
-        /** Returns the value of the {@code storagePushConstant16} field. */
+        /** @return the value of the {@link VkPhysicalDevice16BitStorageFeatures#storagePushConstant16} field. */
         @NativeType("VkBool32")
         public boolean storagePushConstant16() { return VkPhysicalDevice16BitStorageFeatures.nstoragePushConstant16(address()) != 0; }
-        /** Returns the value of the {@code storageInputOutput16} field. */
+        /** @return the value of the {@link VkPhysicalDevice16BitStorageFeatures#storageInputOutput16} field. */
         @NativeType("VkBool32")
         public boolean storageInputOutput16() { return VkPhysicalDevice16BitStorageFeatures.nstorageInputOutput16(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevice16BitStorageFeatures#sType} field. */
         public VkPhysicalDevice16BitStorageFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevice16BitStorageFeatures.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevice16BitStorageFeatures#pNext} field. */
         public VkPhysicalDevice16BitStorageFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevice16BitStorageFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code storageBuffer16BitAccess} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevice16BitStorageFeatures#storageBuffer16BitAccess} field. */
         public VkPhysicalDevice16BitStorageFeatures.Buffer storageBuffer16BitAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDevice16BitStorageFeatures.nstorageBuffer16BitAccess(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code uniformAndStorageBuffer16BitAccess} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevice16BitStorageFeatures#uniformAndStorageBuffer16BitAccess} field. */
         public VkPhysicalDevice16BitStorageFeatures.Buffer uniformAndStorageBuffer16BitAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDevice16BitStorageFeatures.nuniformAndStorageBuffer16BitAccess(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code storagePushConstant16} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevice16BitStorageFeatures#storagePushConstant16} field. */
         public VkPhysicalDevice16BitStorageFeatures.Buffer storagePushConstant16(@NativeType("VkBool32") boolean value) { VkPhysicalDevice16BitStorageFeatures.nstoragePushConstant16(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code storageInputOutput16} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevice16BitStorageFeatures#storageInputOutput16} field. */
         public VkPhysicalDevice16BitStorageFeatures.Buffer storageInputOutput16(@NativeType("VkBool32") boolean value) { VkPhysicalDevice16BitStorageFeatures.nstorageInputOutput16(address(), value ? 1 : 0); return this; }
 
     }

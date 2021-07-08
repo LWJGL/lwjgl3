@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the {@code attachment} member of any element of {@code pInputAttachments}, {@code pColorAttachments}, {@code pResolveAttachments} or {@code pDepthStencilAttachment}, or the attachment indexed by any element of {@code pPreserveAttachments} in any given element of {@code pSubpasses} is bound to a range of a {@code VkDeviceMemory} object that overlaps with any other attachment in any subpass (including the same subpass), the {@link VkAttachmentDescription2} structures describing them <b>must</b> include {@link VK10#VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} in {@code flags}</li>
  * <li>If the {@code attachment} member of any element of {@code pInputAttachments}, {@code pColorAttachments}, {@code pResolveAttachments} or {@code pDepthStencilAttachment}, or any element of {@code pPreserveAttachments} in any given element of {@code pSubpasses} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, it <b>must</b> be less than {@code attachmentCount}</li>
  * <li>For any member of {@code pAttachments} with a {@code loadOp} equal to {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}, the first use of that attachment <b>must</b> not specify a {@code layout} equal to {@link VK10#VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL}, {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL}, or {@link VK11#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL}</li>
- * <li>For any member of {@code pAttachments} with a {@code stencilLoadOp} equal to {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}, the first use of that attachment <b>must</b> not specify a {@code layout} equal to {@link VK10#VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL}, {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL}, or {@link VK11#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL}.</li>
+ * <li>For any member of {@code pAttachments} with a {@code stencilLoadOp} equal to {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}, the first use of that attachment <b>must</b> not specify a {@code layout} equal to {@link VK10#VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL}, {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL}, or {@link VK11#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL}</li>
  * <li>For any element of {@code pDependencies}, if the {@code srcSubpass} is not {@link VK10#VK_SUBPASS_EXTERNAL SUBPASS_EXTERNAL}, all stage flags included in the {@code srcStageMask} member of that dependency <b>must</b> be a pipeline stage supported by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-stages-types">pipeline</a> identified by the {@code pipelineBindPoint} member of the source subpass</li>
  * <li>For any element of {@code pDependencies}, if the {@code dstSubpass} is not {@link VK10#VK_SUBPASS_EXTERNAL SUBPASS_EXTERNAL}, all stage flags included in the {@code dstStageMask} member of that dependency <b>must</b> be a pipeline stage supported by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-stages-types">pipeline</a> identified by the {@code pipelineBindPoint} member of the destination subpass</li>
  * <li>The set of bits included in any element of {@code pCorrelatedViewMasks} <b>must</b> not overlap with the set of bits included in any other element of {@code pCorrelatedViewMasks}</li>
@@ -42,10 +42,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@link VkSubpassDescription2}{@code ::viewMask} member of all elements of {@code pSubpasses} <b>must</b> either all be 0, or all not be 0</li>
  * <li>If the {@link VkSubpassDescription2}{@code ::viewMask} member of all elements of {@code pSubpasses} is 0, the {@code dependencyFlags} member of any element of {@code pDependencies} <b>must</b> not include {@link VK11#VK_DEPENDENCY_VIEW_LOCAL_BIT DEPENDENCY_VIEW_LOCAL_BIT}</li>
  * <li>For any element of {@code pDependencies} where its {@code srcSubpass} member equals its {@code dstSubpass} member, if the {@code viewMask} member of the corresponding element of {@code pSubpasses} includes more than one bit, its {@code dependencyFlags} member <b>must</b> include {@link VK11#VK_DEPENDENCY_VIEW_LOCAL_BIT DEPENDENCY_VIEW_LOCAL_BIT}</li>
- * <li>The {@code viewMask} member <b>must</b> not have a bit set at an index greater than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxFramebufferLayers}</li>
  * <li>If the {@code attachment} member of any element of the {@code pInputAttachments} member of any element of {@code pSubpasses} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, the {@code aspectMask} member of that element of {@code pInputAttachments} <b>must</b> only include aspects that are present in images of the format specified by the element of {@code pAttachments} specified by {@code attachment}</li>
  * <li>The {@code srcSubpass} member of each element of {@code pDependencies} <b>must</b> be less than {@code subpassCount}</li>
  * <li>The {@code dstSubpass} member of each element of {@code pDependencies} <b>must</b> be less than {@code subpassCount}</li>
+ * <li>If any element of {@code pAttachments} is used as a fragment shading rate attachment in any subpass, it <b>must</b> not be used as any other attachment in the render pass</li>
+ * <li>If {@code flags} includes {@link QCOMRenderPassTransform#VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM}, an element of {@code pSubpasses} includes an instance of {@link VkFragmentShadingRateAttachmentInfoKHR} in its {@code pNext} chain, and the {@code pFragmentShadingRateAttachment} member of that structure is not equal to {@code NULL}, the {@code attachment} member of {@code pFragmentShadingRateAttachment} <b>must</b> be {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}</li>
+ * <li>If any element of {@code pAttachments} is used as a fragment shading rate attachment in any subpass, it <b>must</b> have an image format whose <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#potential-format-features">potential format features</a> contain {@link KHRFragmentShadingRate#VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -53,7 +55,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2 STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkRenderPassFragmentDensityMapCreateInfoEXT}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>{@code flags} <b>must</b> be a valid combination of {@code VkRenderPassCreateFlagBits} values</li>
  * <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a valid pointer to an array of {@code attachmentCount} valid {@link VkAttachmentDescription2} structures</li>
  * <li>{@code pSubpasses} <b>must</b> be a valid pointer to an array of {@code subpassCount} valid {@link VkSubpassDescription2} structures</li>
  * <li>If {@code dependencyCount} is not 0, {@code pDependencies} <b>must</b> be a valid pointer to an array of {@code dependencyCount} valid {@link VkSubpassDependency2} structures</li>
@@ -65,37 +68,21 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkAttachmentDescription2}, {@link VkSubpassDependency2}, {@link VkSubpassDescription2}, {@link VK12#vkCreateRenderPass2 CreateRenderPass2}, {@link KHRCreateRenderpass2#vkCreateRenderPass2KHR CreateRenderPass2KHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code attachmentCount} &ndash; the number of attachments used by this render pass.</li>
- * <li>{@code pAttachments} &ndash; a pointer to an array of {@code attachmentCount} {@link VkAttachmentDescription2} structures describing the attachments used by the render pass.</li>
- * <li>{@code subpassCount} &ndash; the number of subpasses to create.</li>
- * <li>{@code pSubpasses} &ndash; a pointer to an array of {@code subpassCount} {@link VkSubpassDescription2} structures describing each subpass.</li>
- * <li>{@code dependencyCount} &ndash; the number of dependencies between pairs of subpasses.</li>
- * <li>{@code pDependencies} &ndash; a pointer to an array of {@code dependencyCount} {@link VkSubpassDependency} structures describing dependencies between pairs of subpasses.</li>
- * <li>{@code correlatedViewMaskCount} &ndash; the number of correlation masks.</li>
- * <li>{@code pCorrelatedViewMasks} &ndash; a pointer to an array of view masks indicating sets of views that <b>may</b> be more efficient to render concurrently.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkRenderPassCreateInfo2 {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkRenderPassCreateFlags flags;
- *     uint32_t attachmentCount;
- *     {@link VkAttachmentDescription2 VkAttachmentDescription2} const * pAttachments;
- *     uint32_t subpassCount;
- *     {@link VkSubpassDescription2 VkSubpassDescription2} const * pSubpasses;
- *     uint32_t dependencyCount;
- *     {@link VkSubpassDependency2 VkSubpassDependency2} const * pDependencies;
- *     uint32_t correlatedViewMaskCount;
- *     uint32_t const * pCorrelatedViewMasks;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkRenderPassCreateFlags {@link #flags};
+ *     uint32_t {@link #attachmentCount};
+ *     {@link VkAttachmentDescription2 VkAttachmentDescription2} const * {@link #pAttachments};
+ *     uint32_t {@link #subpassCount};
+ *     {@link VkSubpassDescription2 VkSubpassDescription2} const * {@link #pSubpasses};
+ *     uint32_t {@link #dependencyCount};
+ *     {@link VkSubpassDependency2 VkSubpassDependency2} const * {@link #pDependencies};
+ *     uint32_t {@link #correlatedViewMaskCount};
+ *     uint32_t const * {@link #pCorrelatedViewMasks};
  * }</code></pre>
  */
 public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
@@ -164,56 +151,56 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkRenderPassCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code attachmentCount} field. */
+    /** the number of attachments used by this render pass. */
     @NativeType("uint32_t")
     public int attachmentCount() { return nattachmentCount(address()); }
-    /** Returns a {@link VkAttachmentDescription2.Buffer} view of the struct array pointed to by the {@code pAttachments} field. */
+    /** a pointer to an array of {@code attachmentCount} {@link VkAttachmentDescription2} structures describing the attachments used by the render pass. */
     @Nullable
     @NativeType("VkAttachmentDescription2 const *")
     public VkAttachmentDescription2.Buffer pAttachments() { return npAttachments(address()); }
-    /** Returns the value of the {@code subpassCount} field. */
+    /** the number of subpasses to create. */
     @NativeType("uint32_t")
     public int subpassCount() { return nsubpassCount(address()); }
-    /** Returns a {@link VkSubpassDescription2.Buffer} view of the struct array pointed to by the {@code pSubpasses} field. */
+    /** a pointer to an array of {@code subpassCount} {@link VkSubpassDescription2} structures describing each subpass. */
     @NativeType("VkSubpassDescription2 const *")
     public VkSubpassDescription2.Buffer pSubpasses() { return npSubpasses(address()); }
-    /** Returns the value of the {@code dependencyCount} field. */
+    /** the number of dependencies between pairs of subpasses. */
     @NativeType("uint32_t")
     public int dependencyCount() { return ndependencyCount(address()); }
-    /** Returns a {@link VkSubpassDependency2.Buffer} view of the struct array pointed to by the {@code pDependencies} field. */
+    /** a pointer to an array of {@code dependencyCount} {@link VkSubpassDependency2} structures describing dependencies between pairs of subpasses. */
     @Nullable
     @NativeType("VkSubpassDependency2 const *")
     public VkSubpassDependency2.Buffer pDependencies() { return npDependencies(address()); }
-    /** Returns the value of the {@code correlatedViewMaskCount} field. */
+    /** the number of correlation masks. */
     @NativeType("uint32_t")
     public int correlatedViewMaskCount() { return ncorrelatedViewMaskCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pCorrelatedViewMasks} field. */
+    /** a pointer to an array of view masks indicating sets of views that <b>may</b> be more efficient to render concurrently. */
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pCorrelatedViewMasks() { return npCorrelatedViewMasks(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassCreateInfo2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassCreateInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkRenderPassCreateInfo2 flags(@NativeType("VkRenderPassCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified {@link VkAttachmentDescription2.Buffer} to the {@code pAttachments} field. */
+    /** Sets the address of the specified {@link VkAttachmentDescription2.Buffer} to the {@link #pAttachments} field. */
     public VkRenderPassCreateInfo2 pAttachments(@Nullable @NativeType("VkAttachmentDescription2 const *") VkAttachmentDescription2.Buffer value) { npAttachments(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSubpassDescription2.Buffer} to the {@code pSubpasses} field. */
+    /** Sets the address of the specified {@link VkSubpassDescription2.Buffer} to the {@link #pSubpasses} field. */
     public VkRenderPassCreateInfo2 pSubpasses(@NativeType("VkSubpassDescription2 const *") VkSubpassDescription2.Buffer value) { npSubpasses(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSubpassDependency2.Buffer} to the {@code pDependencies} field. */
+    /** Sets the address of the specified {@link VkSubpassDependency2.Buffer} to the {@link #pDependencies} field. */
     public VkRenderPassCreateInfo2 pDependencies(@Nullable @NativeType("VkSubpassDependency2 const *") VkSubpassDependency2.Buffer value) { npDependencies(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@code pCorrelatedViewMasks} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pCorrelatedViewMasks} field. */
     public VkRenderPassCreateInfo2 pCorrelatedViewMasks(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npCorrelatedViewMasks(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -509,56 +496,56 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkRenderPassCreateInfo2#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderPassCreateInfo2.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkRenderPassCreateInfo2#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRenderPassCreateInfo2.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkRenderPassCreateInfo2#flags} field. */
         @NativeType("VkRenderPassCreateFlags")
         public int flags() { return VkRenderPassCreateInfo2.nflags(address()); }
-        /** Returns the value of the {@code attachmentCount} field. */
+        /** @return the value of the {@link VkRenderPassCreateInfo2#attachmentCount} field. */
         @NativeType("uint32_t")
         public int attachmentCount() { return VkRenderPassCreateInfo2.nattachmentCount(address()); }
-        /** Returns a {@link VkAttachmentDescription2.Buffer} view of the struct array pointed to by the {@code pAttachments} field. */
+        /** @return a {@link VkAttachmentDescription2.Buffer} view of the struct array pointed to by the {@link VkRenderPassCreateInfo2#pAttachments} field. */
         @Nullable
         @NativeType("VkAttachmentDescription2 const *")
         public VkAttachmentDescription2.Buffer pAttachments() { return VkRenderPassCreateInfo2.npAttachments(address()); }
-        /** Returns the value of the {@code subpassCount} field. */
+        /** @return the value of the {@link VkRenderPassCreateInfo2#subpassCount} field. */
         @NativeType("uint32_t")
         public int subpassCount() { return VkRenderPassCreateInfo2.nsubpassCount(address()); }
-        /** Returns a {@link VkSubpassDescription2.Buffer} view of the struct array pointed to by the {@code pSubpasses} field. */
+        /** @return a {@link VkSubpassDescription2.Buffer} view of the struct array pointed to by the {@link VkRenderPassCreateInfo2#pSubpasses} field. */
         @NativeType("VkSubpassDescription2 const *")
         public VkSubpassDescription2.Buffer pSubpasses() { return VkRenderPassCreateInfo2.npSubpasses(address()); }
-        /** Returns the value of the {@code dependencyCount} field. */
+        /** @return the value of the {@link VkRenderPassCreateInfo2#dependencyCount} field. */
         @NativeType("uint32_t")
         public int dependencyCount() { return VkRenderPassCreateInfo2.ndependencyCount(address()); }
-        /** Returns a {@link VkSubpassDependency2.Buffer} view of the struct array pointed to by the {@code pDependencies} field. */
+        /** @return a {@link VkSubpassDependency2.Buffer} view of the struct array pointed to by the {@link VkRenderPassCreateInfo2#pDependencies} field. */
         @Nullable
         @NativeType("VkSubpassDependency2 const *")
         public VkSubpassDependency2.Buffer pDependencies() { return VkRenderPassCreateInfo2.npDependencies(address()); }
-        /** Returns the value of the {@code correlatedViewMaskCount} field. */
+        /** @return the value of the {@link VkRenderPassCreateInfo2#correlatedViewMaskCount} field. */
         @NativeType("uint32_t")
         public int correlatedViewMaskCount() { return VkRenderPassCreateInfo2.ncorrelatedViewMaskCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code pCorrelatedViewMasks} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkRenderPassCreateInfo2#pCorrelatedViewMasks} field. */
         @Nullable
         @NativeType("uint32_t const *")
         public IntBuffer pCorrelatedViewMasks() { return VkRenderPassCreateInfo2.npCorrelatedViewMasks(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkRenderPassCreateInfo2#sType} field. */
         public VkRenderPassCreateInfo2.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassCreateInfo2.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkRenderPassCreateInfo2#pNext} field. */
         public VkRenderPassCreateInfo2.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassCreateInfo2.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkRenderPassCreateInfo2#flags} field. */
         public VkRenderPassCreateInfo2.Buffer flags(@NativeType("VkRenderPassCreateFlags") int value) { VkRenderPassCreateInfo2.nflags(address(), value); return this; }
-        /** Sets the address of the specified {@link VkAttachmentDescription2.Buffer} to the {@code pAttachments} field. */
+        /** Sets the address of the specified {@link VkAttachmentDescription2.Buffer} to the {@link VkRenderPassCreateInfo2#pAttachments} field. */
         public VkRenderPassCreateInfo2.Buffer pAttachments(@Nullable @NativeType("VkAttachmentDescription2 const *") VkAttachmentDescription2.Buffer value) { VkRenderPassCreateInfo2.npAttachments(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSubpassDescription2.Buffer} to the {@code pSubpasses} field. */
+        /** Sets the address of the specified {@link VkSubpassDescription2.Buffer} to the {@link VkRenderPassCreateInfo2#pSubpasses} field. */
         public VkRenderPassCreateInfo2.Buffer pSubpasses(@NativeType("VkSubpassDescription2 const *") VkSubpassDescription2.Buffer value) { VkRenderPassCreateInfo2.npSubpasses(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSubpassDependency2.Buffer} to the {@code pDependencies} field. */
+        /** Sets the address of the specified {@link VkSubpassDependency2.Buffer} to the {@link VkRenderPassCreateInfo2#pDependencies} field. */
         public VkRenderPassCreateInfo2.Buffer pDependencies(@Nullable @NativeType("VkSubpassDependency2 const *") VkSubpassDependency2.Buffer value) { VkRenderPassCreateInfo2.npDependencies(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@code pCorrelatedViewMasks} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkRenderPassCreateInfo2#pCorrelatedViewMasks} field. */
         public VkRenderPassCreateInfo2.Buffer pCorrelatedViewMasks(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkRenderPassCreateInfo2.npCorrelatedViewMasks(address(), value); return this; }
 
     }

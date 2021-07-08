@@ -79,25 +79,25 @@ public class NkTextUndoState extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkTextUndoRecord}.Buffer view of the {@code undo_rec} field. */
+    /** @return a {@link NkTextUndoRecord}.Buffer view of the {@code undo_rec} field. */
     @NativeType("struct nk_text_undo_record[99]")
     public NkTextUndoRecord.Buffer undo_rec() { return nundo_rec(address()); }
-    /** Returns a {@link NkTextUndoRecord} view of the struct at the specified index of the {@code undo_rec} field. */
+    /** @return a {@link NkTextUndoRecord} view of the struct at the specified index of the {@code undo_rec} field. */
     @NativeType("struct nk_text_undo_record")
     public NkTextUndoRecord undo_rec(int index) { return nundo_rec(address(), index); }
-    /** Returns a {@link IntBuffer} view of the {@code undo_char} field. */
+    /** @return a {@link IntBuffer} view of the {@code undo_char} field. */
     @NativeType("nk_rune[999]")
     public IntBuffer undo_char() { return nundo_char(address()); }
-    /** Returns the value at the specified index of the {@code undo_char} field. */
+    /** @return the value at the specified index of the {@code undo_char} field. */
     @NativeType("nk_rune")
     public int undo_char(int index) { return nundo_char(address(), index); }
-    /** Returns the value of the {@code undo_point} field. */
+    /** @return the value of the {@code undo_point} field. */
     public short undo_point() { return nundo_point(address()); }
-    /** Returns the value of the {@code redo_point} field. */
+    /** @return the value of the {@code redo_point} field. */
     public short redo_point() { return nredo_point(address()); }
-    /** Returns the value of the {@code undo_char_point} field. */
+    /** @return the value of the {@code undo_char_point} field. */
     public short undo_char_point() { return nundo_char_point(address()); }
-    /** Returns the value of the {@code redo_char_point} field. */
+    /** @return the value of the {@code redo_char_point} field. */
     public short redo_char_point() { return nredo_char_point(address()); }
 
     // -----------------------------------
@@ -190,25 +190,25 @@ public class NkTextUndoState extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkTextUndoRecord}.Buffer view of the {@code undo_rec} field. */
+        /** @return a {@link NkTextUndoRecord}.Buffer view of the {@code undo_rec} field. */
         @NativeType("struct nk_text_undo_record[99]")
         public NkTextUndoRecord.Buffer undo_rec() { return NkTextUndoState.nundo_rec(address()); }
-        /** Returns a {@link NkTextUndoRecord} view of the struct at the specified index of the {@code undo_rec} field. */
+        /** @return a {@link NkTextUndoRecord} view of the struct at the specified index of the {@code undo_rec} field. */
         @NativeType("struct nk_text_undo_record")
         public NkTextUndoRecord undo_rec(int index) { return NkTextUndoState.nundo_rec(address(), index); }
-        /** Returns a {@link IntBuffer} view of the {@code undo_char} field. */
+        /** @return a {@link IntBuffer} view of the {@code undo_char} field. */
         @NativeType("nk_rune[999]")
         public IntBuffer undo_char() { return NkTextUndoState.nundo_char(address()); }
-        /** Returns the value at the specified index of the {@code undo_char} field. */
+        /** @return the value at the specified index of the {@code undo_char} field. */
         @NativeType("nk_rune")
         public int undo_char(int index) { return NkTextUndoState.nundo_char(address(), index); }
-        /** Returns the value of the {@code undo_point} field. */
+        /** @return the value of the {@code undo_point} field. */
         public short undo_point() { return NkTextUndoState.nundo_point(address()); }
-        /** Returns the value of the {@code redo_point} field. */
+        /** @return the value of the {@code redo_point} field. */
         public short redo_point() { return NkTextUndoState.nredo_point(address()); }
-        /** Returns the value of the {@code undo_char_point} field. */
+        /** @return the value of the {@code undo_char_point} field. */
         public short undo_char_point() { return NkTextUndoState.nundo_char_point(address()); }
-        /** Returns the value of the {@code redo_char_point} field. */
+        /** @return the value of the {@code redo_char_point} field. */
         public short redo_char_point() { return NkTextUndoState.nredo_char_point(address()); }
 
     }

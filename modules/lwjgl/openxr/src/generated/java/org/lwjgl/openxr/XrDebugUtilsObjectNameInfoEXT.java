@@ -76,23 +76,23 @@ public class XrDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code objectType} field. */
+    /** @return the value of the {@code objectType} field. */
     @NativeType("XrObjectType")
     public int objectType() { return nobjectType(address()); }
-    /** Returns the value of the {@code objectHandle} field. */
+    /** @return the value of the {@code objectHandle} field. */
     @NativeType("uint64_t")
     public long objectHandle() { return nobjectHandle(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code objectName} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code objectName} field. */
     @Nullable
     @NativeType("char const *")
     public ByteBuffer objectName() { return nobjectName(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code objectName} field. */
+    /** @return the null-terminated string pointed to by the {@code objectName} field. */
     @Nullable
     @NativeType("char const *")
     public String objectNameString() { return nobjectNameString(address()); }
@@ -345,23 +345,23 @@ public class XrDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrDebugUtilsObjectNameInfoEXT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrDebugUtilsObjectNameInfoEXT.nnext(address()); }
-        /** Returns the value of the {@code objectType} field. */
+        /** @return the value of the {@code objectType} field. */
         @NativeType("XrObjectType")
         public int objectType() { return XrDebugUtilsObjectNameInfoEXT.nobjectType(address()); }
-        /** Returns the value of the {@code objectHandle} field. */
+        /** @return the value of the {@code objectHandle} field. */
         @NativeType("uint64_t")
         public long objectHandle() { return XrDebugUtilsObjectNameInfoEXT.nobjectHandle(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code objectName} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code objectName} field. */
         @Nullable
         @NativeType("char const *")
         public ByteBuffer objectName() { return XrDebugUtilsObjectNameInfoEXT.nobjectName(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code objectName} field. */
+        /** @return the null-terminated string pointed to by the {@code objectName} field. */
         @Nullable
         @NativeType("char const *")
         public String objectNameString() { return XrDebugUtilsObjectNameInfoEXT.nobjectNameString(address()); }

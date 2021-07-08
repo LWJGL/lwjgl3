@@ -64,13 +64,13 @@ public class SpvcEntryPoint extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code execution_model} field. */
+    /** @return the value of the {@code execution_model} field. */
     @NativeType("SpvExecutionModel")
     public int execution_model() { return nexecution_model(address()); }
-    /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
     @NativeType("char const *")
     public ByteBuffer name() { return nname(address()); }
-    /** Decodes the null-terminated string pointed to by the {@code name} field. */
+    /** @return the null-terminated string pointed to by the {@code name} field. */
     @NativeType("char const *")
     public String nameString() { return nnameString(address()); }
 
@@ -319,13 +319,13 @@ public class SpvcEntryPoint extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code execution_model} field. */
+        /** @return the value of the {@code execution_model} field. */
         @NativeType("SpvExecutionModel")
         public int execution_model() { return SpvcEntryPoint.nexecution_model(address()); }
-        /** Returns a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
         @NativeType("char const *")
         public ByteBuffer name() { return SpvcEntryPoint.nname(address()); }
-        /** Decodes the null-terminated string pointed to by the {@code name} field. */
+        /** @return the null-terminated string pointed to by the {@code name} field. */
         @NativeType("char const *")
         public String nameString() { return SpvcEntryPoint.nnameString(address()); }
 

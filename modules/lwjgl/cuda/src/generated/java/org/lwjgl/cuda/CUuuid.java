@@ -61,10 +61,10 @@ public class CUuuid extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code bytes} field. */
+    /** @return a {@link ByteBuffer} view of the {@code bytes} field. */
     @NativeType("char[16]")
     public ByteBuffer bytes() { return nbytes(address()); }
-    /** Decodes the null-terminated string stored in the {@code bytes} field. */
+    /** @return the null-terminated string stored in the {@code bytes} field. */
     @NativeType("char[16]")
     public String bytesString() { return nbytesString(address()); }
 
@@ -254,10 +254,10 @@ public class CUuuid extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code bytes} field. */
+        /** @return a {@link ByteBuffer} view of the {@code bytes} field. */
         @NativeType("char[16]")
         public ByteBuffer bytes() { return CUuuid.nbytes(address()); }
-        /** Decodes the null-terminated string stored in the {@code bytes} field. */
+        /** @return the null-terminated string stored in the {@code bytes} field. */
         @NativeType("char[16]")
         public String bytesString() { return CUuuid.nbytesString(address()); }
 

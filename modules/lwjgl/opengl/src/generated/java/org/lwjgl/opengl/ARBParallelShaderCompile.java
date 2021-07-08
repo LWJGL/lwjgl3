@@ -18,13 +18,13 @@ import org.lwjgl.system.*;
  */
 public class ARBParallelShaderCompile {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_MAX_SHADER_COMPILER_THREADS_ARB = 0x91B0;
 
     /** Accepted as part of the {@code pname} parameter to GetShaderiv() and accepted as part of the {@code pname} parameter to GetProgramiv(). */
     public static final int GL_COMPLETION_STATUS_ARB = 0x91B1;
-
-    static { GL.initialize(); }
 
     protected ARBParallelShaderCompile() {
         throw new UnsupportedOperationException();

@@ -43,25 +43,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkGraphicsPipelineCreateInfo}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code topology} &ndash; a {@code VkPrimitiveTopology} defining the primitive topology, as described below.</li>
- * <li>{@code primitiveRestartEnable} &ndash; controls whether a special vertex index value is treated as restarting the assembly of primitives. This enable only applies to indexed draws ({@link VK10#vkCmdDrawIndexed CmdDrawIndexed} and {@link VK10#vkCmdDrawIndexedIndirect CmdDrawIndexedIndirect}), and the special index value is either 0xFFFFFFFF when the {@code indexType} parameter of {@code vkCmdBindIndexBuffer} is equal to {@link VK10#VK_INDEX_TYPE_UINT32 INDEX_TYPE_UINT32}, 0xFF when {@code indexType} is equal to {@link EXTIndexTypeUint8#VK_INDEX_TYPE_UINT8_EXT INDEX_TYPE_UINT8_EXT}, or 0xFFFF when {@code indexType} is equal to {@link VK10#VK_INDEX_TYPE_UINT16 INDEX_TYPE_UINT16}. Primitive restart is not allowed for “list” topologies.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineInputAssemblyStateCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineInputAssemblyStateCreateFlags flags;
- *     VkPrimitiveTopology topology;
- *     VkBool32 primitiveRestartEnable;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineInputAssemblyStateCreateFlags {@link #flags};
+ *     VkPrimitiveTopology {@link #topology};
+ *     VkBool32 {@link #primitiveRestartEnable};
  * }</code></pre>
  */
 public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements NativeResource {
@@ -112,31 +102,31 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkPipelineInputAssemblyStateCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code topology} field. */
+    /** a {@code VkPrimitiveTopology} defining the primitive topology, as described below. */
     @NativeType("VkPrimitiveTopology")
     public int topology() { return ntopology(address()); }
-    /** Returns the value of the {@code primitiveRestartEnable} field. */
+    /** controls whether a special vertex index value is treated as restarting the assembly of primitives. This enable only applies to indexed draws ({@link VK10#vkCmdDrawIndexed CmdDrawIndexed} and {@link VK10#vkCmdDrawIndexedIndirect CmdDrawIndexedIndirect}), and the special index value is either 0xFFFFFFFF when the {@code indexType} parameter of {@code vkCmdBindIndexBuffer} is equal to {@link VK10#VK_INDEX_TYPE_UINT32 INDEX_TYPE_UINT32}, 0xFF when {@code indexType} is equal to {@link EXTIndexTypeUint8#VK_INDEX_TYPE_UINT8_EXT INDEX_TYPE_UINT8_EXT}, or 0xFFFF when {@code indexType} is equal to {@link VK10#VK_INDEX_TYPE_UINT16 INDEX_TYPE_UINT16}. Primitive restart is not allowed for “list” topologies. */
     @NativeType("VkBool32")
     public boolean primitiveRestartEnable() { return nprimitiveRestartEnable(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineInputAssemblyStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineInputAssemblyStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineInputAssemblyStateCreateInfo flags(@NativeType("VkPipelineInputAssemblyStateCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code topology} field. */
+    /** Sets the specified value to the {@link #topology} field. */
     public VkPipelineInputAssemblyStateCreateInfo topology(@NativeType("VkPrimitiveTopology") int value) { ntopology(address(), value); return this; }
-    /** Sets the specified value to the {@code primitiveRestartEnable} field. */
+    /** Sets the specified value to the {@link #primitiveRestartEnable} field. */
     public VkPipelineInputAssemblyStateCreateInfo primitiveRestartEnable(@NativeType("VkBool32") boolean value) { nprimitiveRestartEnable(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -371,31 +361,31 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineInputAssemblyStateCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineInputAssemblyStateCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineInputAssemblyStateCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineInputAssemblyStateCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkPipelineInputAssemblyStateCreateInfo#flags} field. */
         @NativeType("VkPipelineInputAssemblyStateCreateFlags")
         public int flags() { return VkPipelineInputAssemblyStateCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code topology} field. */
+        /** @return the value of the {@link VkPipelineInputAssemblyStateCreateInfo#topology} field. */
         @NativeType("VkPrimitiveTopology")
         public int topology() { return VkPipelineInputAssemblyStateCreateInfo.ntopology(address()); }
-        /** Returns the value of the {@code primitiveRestartEnable} field. */
+        /** @return the value of the {@link VkPipelineInputAssemblyStateCreateInfo#primitiveRestartEnable} field. */
         @NativeType("VkBool32")
         public boolean primitiveRestartEnable() { return VkPipelineInputAssemblyStateCreateInfo.nprimitiveRestartEnable(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineInputAssemblyStateCreateInfo#sType} field. */
         public VkPipelineInputAssemblyStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineInputAssemblyStateCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineInputAssemblyStateCreateInfo#pNext} field. */
         public VkPipelineInputAssemblyStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineInputAssemblyStateCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkPipelineInputAssemblyStateCreateInfo#flags} field. */
         public VkPipelineInputAssemblyStateCreateInfo.Buffer flags(@NativeType("VkPipelineInputAssemblyStateCreateFlags") int value) { VkPipelineInputAssemblyStateCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code topology} field. */
+        /** Sets the specified value to the {@link VkPipelineInputAssemblyStateCreateInfo#topology} field. */
         public VkPipelineInputAssemblyStateCreateInfo.Buffer topology(@NativeType("VkPrimitiveTopology") int value) { VkPipelineInputAssemblyStateCreateInfo.ntopology(address(), value); return this; }
-        /** Sets the specified value to the {@code primitiveRestartEnable} field. */
+        /** Sets the specified value to the {@link VkPipelineInputAssemblyStateCreateInfo#primitiveRestartEnable} field. */
         public VkPipelineInputAssemblyStateCreateInfo.Buffer primitiveRestartEnable(@NativeType("VkBool32") boolean value) { VkPipelineInputAssemblyStateCreateInfo.nprimitiveRestartEnable(address(), value ? 1 : 0); return this; }
 
     }

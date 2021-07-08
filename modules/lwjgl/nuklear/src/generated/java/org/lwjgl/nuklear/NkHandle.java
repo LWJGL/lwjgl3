@@ -64,10 +64,10 @@ public class NkHandle extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code ptr} field. */
+    /** @return the value of the {@code ptr} field. */
     @NativeType("void *")
     public long ptr() { return nptr(address()); }
-    /** Returns the value of the {@code id} field. */
+    /** @return the value of the {@code id} field. */
     public int id() { return nid(address()); }
 
     /** Sets the specified value to the {@code ptr} field. */
@@ -278,10 +278,10 @@ public class NkHandle extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code ptr} field. */
+        /** @return the value of the {@code ptr} field. */
         @NativeType("void *")
         public long ptr() { return NkHandle.nptr(address()); }
-        /** Returns the value of the {@code id} field. */
+        /** @return the value of the {@code id} field. */
         public int id() { return NkHandle.nid(address()); }
 
         /** Sets the specified value to the {@code ptr} field. */

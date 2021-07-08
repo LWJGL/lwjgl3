@@ -6,21 +6,19 @@
 package org.lwjgl.vulkan;
 
 /**
- * <h5>Short Description</h5>
+ * This extension enables an implementation to control the subgroup size by allowing a varying subgroup size and also specifying a required subgroup size.
  * 
- * <p>Enables an implementation to control the subgroup size by allowing a varying subgroup size and also specifying a required subgroup size.</p>
- * 
- * <h5>Description</h5>
- * 
- * <p>This extension extends the subgroup support in Vulkan 1.1 to allow an implementation to expose a varying subgroup size. Previously Vulkan exposed a single subgroup size per physical device, with the expectation that implementations will behave as if all subgroups have the same size. Some implementations <b>may</b> dispatch shaders with a varying subgroup size for different subgroups. As a result they could implicitly split a large subgroup into smaller subgroups or represent a small subgroup as a larger subgroup, some of whose invocations were inactive on launch.</p>
+ * <p>It extends the subgroup support in Vulkan 1.1 to allow an implementation to expose a varying subgroup size. Previously Vulkan exposed a single subgroup size per physical device, with the expectation that implementations will behave as if all subgroups have the same size. Some implementations <b>may</b> dispatch shaders with a varying subgroup size for different subgroups. As a result they could implicitly split a large subgroup into smaller subgroups or represent a small subgroup as a larger subgroup, some of whose invocations were inactive on launch.</p>
  * 
  * <p>To aid developers in understanding the performance characteristics of their programs, this extension exposes a minimum and maximum subgroup size that a physical device supports and a pipeline create flag to enable that pipeline to vary its subgroup size. If enabled, any {@code SubgroupSize} decorated variables in the SPIR-V shader modules provided to pipeline creation <b>may</b> vary between the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-min-subgroup-size">minimum</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-max-subgroup-size">maximum</a> subgroup sizes.</p>
  * 
  * <p>An implementation is also optionally allowed to support specifying a required subgroup size for a given pipeline stage. Implementations advertise which <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-required-subgroup-size-stages"> stages support a required subgroup size</a>, and any pipeline of a supported stage can be passed a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} structure to set the subgroup size for that shader stage of the pipeline. For compute shaders, this requires the developer to query the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-max-subgroups-per-workgroup"> {@code maxComputeWorkgroupSubgroups}</a> and ensure that:</p>
  * 
- * <p><code>s = {WorkGroupSize.x * WorkGroupSize.y * WorkgroupSize.z &le; SubgroupSize * maxComputeWorkgroupSubgroups }</code></p>
+ * <p><code>s = { WorkGroupSize.x &times; WorkGroupSize.y &times; WorkgroupSize.z &le; SubgroupSize &times; maxComputeWorkgroupSubgroups }</code></p>
  * 
  * <p>Developers can also specify a new pipeline shader stage create flag that requires the implementation to have fully populated subgroups within local workgroups. This requires the workgroup size in the X dimension to be a multiple of the subgroup size.</p>
+ * 
+ * <h5>VK_EXT_subgroup_size_control</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -39,6 +37,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Neil Henning <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_subgroup_size_control:%20&amp;body=@sheredom%20">sheredom</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-03-05</dd>
  * <dt><b>Contributors</b></dt>

@@ -30,13 +30,13 @@ import org.lwjgl.system.*;
  */
 public class ARBDirectStateAccess {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetTextureParameter{if}v and GetTextureParameterI{i ui}v. */
     public static final int GL_TEXTURE_TARGET = 0x1006;
 
     /** Accepted by the {@code pname} parameter of GetQueryObjectiv. */
     public static final int GL_QUERY_TARGET = 0x82EA;
-
-    static { GL.initialize(); }
 
     protected ARBDirectStateAccess() {
         throw new UnsupportedOperationException();

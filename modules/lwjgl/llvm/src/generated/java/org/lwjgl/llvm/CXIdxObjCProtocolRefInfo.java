@@ -65,12 +65,12 @@ public class CXIdxObjCProtocolRefInfo extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code protocol} field. */
+    /** @return a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code protocol} field. */
     @NativeType("CXIdxEntityInfo const *")
     public CXIdxEntityInfo protocol() { return nprotocol(address()); }
-    /** Returns a {@link CXCursor} view of the {@code cursor} field. */
+    /** @return a {@link CXCursor} view of the {@code cursor} field. */
     public CXCursor cursor() { return ncursor(address()); }
-    /** Returns a {@link CXIdxLoc} view of the {@code loc} field. */
+    /** @return a {@link CXIdxLoc} view of the {@code loc} field. */
     public CXIdxLoc loc() { return nloc(address()); }
 
     // -----------------------------------
@@ -149,12 +149,12 @@ public class CXIdxObjCProtocolRefInfo extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code protocol} field. */
+        /** @return a {@link CXIdxEntityInfo} view of the struct pointed to by the {@code protocol} field. */
         @NativeType("CXIdxEntityInfo const *")
         public CXIdxEntityInfo protocol() { return CXIdxObjCProtocolRefInfo.nprotocol(address()); }
-        /** Returns a {@link CXCursor} view of the {@code cursor} field. */
+        /** @return a {@link CXCursor} view of the {@code cursor} field. */
         public CXCursor cursor() { return CXIdxObjCProtocolRefInfo.ncursor(address()); }
-        /** Returns a {@link CXIdxLoc} view of the {@code loc} field. */
+        /** @return a {@link CXIdxLoc} view of the {@code loc} field. */
         public CXIdxLoc loc() { return CXIdxObjCProtocolRefInfo.nloc(address()); }
 
     }

@@ -23,6 +23,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Each element of the {@code pAttachments} array is a {@link VkPipelineColorBlendAttachmentState} structure specifying per-target blending state for each individual color attachment. If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-independentBlend">independent blending</a> feature is not enabled on the device, all {@link VkPipelineColorBlendAttachmentState} elements in the {@code pAttachments} array <b>must</b> be identical.</p>
  * 
+ * <p>The value of {@code attachmentCount} <b>must</b> be greater than the index of all color attachments that are not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} in {@link VkSubpassDescription}{@code ::pColorAttachments} or {@link VkSubpassDescription2}{@code ::pColorAttachments} for the subpass in which this pipeline is used.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
@@ -36,6 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a valid pointer to an array of {@code attachmentCount} valid {@link VkPipelineColorBlendAttachmentState} structures</li>
  * </ul>
@@ -44,31 +47,18 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkGraphicsPipelineCreateInfo}, {@link VkPipelineColorBlendAttachmentState}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code logicOpEnable} &ndash; controls whether to apply <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-logicop">Logical Operations</a>.</li>
- * <li>{@code logicOp} &ndash; selects which logical operation to apply.</li>
- * <li>{@code attachmentCount} &ndash; the number of {@link VkPipelineColorBlendAttachmentState} elements in {@code pAttachments}. This value <b>must</b> equal the {@code colorAttachmentCount} for the subpass in which this pipeline is used.</li>
- * <li>{@code pAttachments} &ndash; a pointer to an array of per target attachment states.</li>
- * <li>{@code blendConstants[4]} &ndash; a pointer to an array of four values used as the R, G, B, and A components of the blend constant that are used in blending, depending on the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-blendfactors">blend factor</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineColorBlendStateCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineColorBlendStateCreateFlags flags;
- *     VkBool32 logicOpEnable;
- *     VkLogicOp logicOp;
- *     uint32_t attachmentCount;
- *     {@link VkPipelineColorBlendAttachmentState VkPipelineColorBlendAttachmentState} const * pAttachments;
- *     float blendConstants[4];
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineColorBlendStateCreateFlags {@link #flags};
+ *     VkBool32 {@link #logicOpEnable};
+ *     VkLogicOp {@link #logicOp};
+ *     uint32_t {@link #attachmentCount};
+ *     {@link VkPipelineColorBlendAttachmentState VkPipelineColorBlendAttachmentState} const * {@link #pAttachments};
+ *     float {@link #blendConstants}[4];
  * }</code></pre>
  */
 public class VkPipelineColorBlendStateCreateInfo extends Struct implements NativeResource {
@@ -128,49 +118,49 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** reserved for future use. */
     @NativeType("VkPipelineColorBlendStateCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code logicOpEnable} field. */
+    /** controls whether to apply <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-logicop">Logical Operations</a>. */
     @NativeType("VkBool32")
     public boolean logicOpEnable() { return nlogicOpEnable(address()) != 0; }
-    /** Returns the value of the {@code logicOp} field. */
+    /** selects which logical operation to apply. */
     @NativeType("VkLogicOp")
     public int logicOp() { return nlogicOp(address()); }
-    /** Returns the value of the {@code attachmentCount} field. */
+    /** the number of {@link VkPipelineColorBlendAttachmentState} elements in {@code pAttachments}. */
     @NativeType("uint32_t")
     public int attachmentCount() { return nattachmentCount(address()); }
-    /** Returns a {@link VkPipelineColorBlendAttachmentState.Buffer} view of the struct array pointed to by the {@code pAttachments} field. */
+    /** a pointer to an array of per target attachment states. */
     @Nullable
     @NativeType("VkPipelineColorBlendAttachmentState const *")
     public VkPipelineColorBlendAttachmentState.Buffer pAttachments() { return npAttachments(address()); }
-    /** Returns a {@link FloatBuffer} view of the {@code blendConstants} field. */
+    /** a pointer to an array of four values used as the R, G, B, and A components of the blend constant that are used in blending, depending on the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-blendfactors">blend factor</a>. */
     @NativeType("float[4]")
     public FloatBuffer blendConstants() { return nblendConstants(address()); }
-    /** Returns the value at the specified index of the {@code blendConstants} field. */
+    /** a pointer to an array of four values used as the R, G, B, and A components of the blend constant that are used in blending, depending on the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-blendfactors">blend factor</a>. */
     public float blendConstants(int index) { return nblendConstants(address(), index); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineColorBlendStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineColorBlendStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineColorBlendStateCreateInfo flags(@NativeType("VkPipelineColorBlendStateCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code logicOpEnable} field. */
+    /** Sets the specified value to the {@link #logicOpEnable} field. */
     public VkPipelineColorBlendStateCreateInfo logicOpEnable(@NativeType("VkBool32") boolean value) { nlogicOpEnable(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code logicOp} field. */
+    /** Sets the specified value to the {@link #logicOp} field. */
     public VkPipelineColorBlendStateCreateInfo logicOp(@NativeType("VkLogicOp") int value) { nlogicOp(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPipelineColorBlendAttachmentState.Buffer} to the {@code pAttachments} field. */
+    /** Sets the address of the specified {@link VkPipelineColorBlendAttachmentState.Buffer} to the {@link #pAttachments} field. */
     public VkPipelineColorBlendStateCreateInfo pAttachments(@Nullable @NativeType("VkPipelineColorBlendAttachmentState const *") VkPipelineColorBlendAttachmentState.Buffer value) { npAttachments(address(), value); return this; }
-    /** Copies the specified {@link FloatBuffer} to the {@code blendConstants} field. */
+    /** Copies the specified {@link FloatBuffer} to the {@link #blendConstants} field. */
     public VkPipelineColorBlendStateCreateInfo blendConstants(@NativeType("float[4]") FloatBuffer value) { nblendConstants(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code blendConstants} field. */
+    /** Sets the specified value at the specified index of the {@link #blendConstants} field. */
     public VkPipelineColorBlendStateCreateInfo blendConstants(int index, float value) { nblendConstants(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -455,49 +445,49 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineColorBlendStateCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineColorBlendStateCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineColorBlendStateCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineColorBlendStateCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkPipelineColorBlendStateCreateInfo#flags} field. */
         @NativeType("VkPipelineColorBlendStateCreateFlags")
         public int flags() { return VkPipelineColorBlendStateCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code logicOpEnable} field. */
+        /** @return the value of the {@link VkPipelineColorBlendStateCreateInfo#logicOpEnable} field. */
         @NativeType("VkBool32")
         public boolean logicOpEnable() { return VkPipelineColorBlendStateCreateInfo.nlogicOpEnable(address()) != 0; }
-        /** Returns the value of the {@code logicOp} field. */
+        /** @return the value of the {@link VkPipelineColorBlendStateCreateInfo#logicOp} field. */
         @NativeType("VkLogicOp")
         public int logicOp() { return VkPipelineColorBlendStateCreateInfo.nlogicOp(address()); }
-        /** Returns the value of the {@code attachmentCount} field. */
+        /** @return the value of the {@link VkPipelineColorBlendStateCreateInfo#attachmentCount} field. */
         @NativeType("uint32_t")
         public int attachmentCount() { return VkPipelineColorBlendStateCreateInfo.nattachmentCount(address()); }
-        /** Returns a {@link VkPipelineColorBlendAttachmentState.Buffer} view of the struct array pointed to by the {@code pAttachments} field. */
+        /** @return a {@link VkPipelineColorBlendAttachmentState.Buffer} view of the struct array pointed to by the {@link VkPipelineColorBlendStateCreateInfo#pAttachments} field. */
         @Nullable
         @NativeType("VkPipelineColorBlendAttachmentState const *")
         public VkPipelineColorBlendAttachmentState.Buffer pAttachments() { return VkPipelineColorBlendStateCreateInfo.npAttachments(address()); }
-        /** Returns a {@link FloatBuffer} view of the {@code blendConstants} field. */
+        /** @return a {@link FloatBuffer} view of the {@link VkPipelineColorBlendStateCreateInfo#blendConstants} field. */
         @NativeType("float[4]")
         public FloatBuffer blendConstants() { return VkPipelineColorBlendStateCreateInfo.nblendConstants(address()); }
-        /** Returns the value at the specified index of the {@code blendConstants} field. */
+        /** @return the value at the specified index of the {@link VkPipelineColorBlendStateCreateInfo#blendConstants} field. */
         public float blendConstants(int index) { return VkPipelineColorBlendStateCreateInfo.nblendConstants(address(), index); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendStateCreateInfo#sType} field. */
         public VkPipelineColorBlendStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineColorBlendStateCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendStateCreateInfo#pNext} field. */
         public VkPipelineColorBlendStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineColorBlendStateCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendStateCreateInfo#flags} field. */
         public VkPipelineColorBlendStateCreateInfo.Buffer flags(@NativeType("VkPipelineColorBlendStateCreateFlags") int value) { VkPipelineColorBlendStateCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code logicOpEnable} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendStateCreateInfo#logicOpEnable} field. */
         public VkPipelineColorBlendStateCreateInfo.Buffer logicOpEnable(@NativeType("VkBool32") boolean value) { VkPipelineColorBlendStateCreateInfo.nlogicOpEnable(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code logicOp} field. */
+        /** Sets the specified value to the {@link VkPipelineColorBlendStateCreateInfo#logicOp} field. */
         public VkPipelineColorBlendStateCreateInfo.Buffer logicOp(@NativeType("VkLogicOp") int value) { VkPipelineColorBlendStateCreateInfo.nlogicOp(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPipelineColorBlendAttachmentState.Buffer} to the {@code pAttachments} field. */
+        /** Sets the address of the specified {@link VkPipelineColorBlendAttachmentState.Buffer} to the {@link VkPipelineColorBlendStateCreateInfo#pAttachments} field. */
         public VkPipelineColorBlendStateCreateInfo.Buffer pAttachments(@Nullable @NativeType("VkPipelineColorBlendAttachmentState const *") VkPipelineColorBlendAttachmentState.Buffer value) { VkPipelineColorBlendStateCreateInfo.npAttachments(address(), value); return this; }
-        /** Copies the specified {@link FloatBuffer} to the {@code blendConstants} field. */
+        /** Copies the specified {@link FloatBuffer} to the {@link VkPipelineColorBlendStateCreateInfo#blendConstants} field. */
         public VkPipelineColorBlendStateCreateInfo.Buffer blendConstants(@NativeType("float[4]") FloatBuffer value) { VkPipelineColorBlendStateCreateInfo.nblendConstants(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code blendConstants} field. */
+        /** Sets the specified value at the specified index of the {@link VkPipelineColorBlendStateCreateInfo#blendConstants} field. */
         public VkPipelineColorBlendStateCreateInfo.Buffer blendConstants(int index, float value) { VkPipelineColorBlendStateCreateInfo.nblendConstants(address(), index, value); return this; }
 
     }

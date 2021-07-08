@@ -32,6 +32,8 @@ import org.lwjgl.system.*;
  */
 public class EXTTextureArray {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code target} parameter of TexParameteri, TexParameteriv, TexParameterf, TexParameterfv, GenerateMipmapEXT, and BindTexture. */
     public static final int
         GL_TEXTURE_1D_ARRAY_EXT = 0x8C18,
@@ -74,8 +76,6 @@ public class EXTTextureArray {
         GL_SAMPLER_2D_ARRAY_EXT        = 0x8DC1,
         GL_SAMPLER_1D_ARRAY_SHADOW_EXT = 0x8DC3,
         GL_SAMPLER_2D_ARRAY_SHADOW_EXT = 0x8DC4;
-
-    static { GL.initialize(); }
 
     protected EXTTextureArray() {
         throw new UnsupportedOperationException();

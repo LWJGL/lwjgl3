@@ -23,17 +23,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@code fatal} and {@code trace_vargs} callbacks can be called from any thread. Other callbacks are called from the render thread.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code vtbl} &ndash; the callback virtual table</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct bgfx_callback_interface_t {
- *     {@link BGFXCallbackVtbl bgfx_callback_vtbl_t} const * vtbl;
+ *     {@link BGFXCallbackVtbl bgfx_callback_vtbl_t} const * {@link #vtbl};
  * }</code></pre>
  */
 @NativeType("struct bgfx_callback_interface_t")
@@ -73,11 +67,11 @@ public class BGFXCallbackInterface extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link BGFXCallbackVtbl} view of the struct pointed to by the {@code vtbl} field. */
+    /** the callback virtual table */
     @NativeType("bgfx_callback_vtbl_t const *")
     public BGFXCallbackVtbl vtbl() { return nvtbl(address()); }
 
-    /** Sets the address of the specified {@link BGFXCallbackVtbl} to the {@code vtbl} field. */
+    /** Sets the address of the specified {@link BGFXCallbackVtbl} to the {@link #vtbl} field. */
     public BGFXCallbackInterface vtbl(@NativeType("bgfx_callback_vtbl_t const *") BGFXCallbackVtbl value) { nvtbl(address(), value); return this; }
 
     /**

@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     YGNodeRef node
  * )</code></pre>
  */
@@ -47,7 +47,7 @@ public abstract class YGDirtiedFunc extends Callback implements YGDirtiedFuncI {
     }
 
     protected YGDirtiedFunc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     YGDirtiedFunc(long functionPointer) {

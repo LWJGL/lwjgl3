@@ -16,27 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * View stats.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code name[256]} &ndash; view name</li>
- * <li>{@code view} &ndash; view id</li>
- * <li>{@code cpuTimeBegin} &ndash; CPU (submit) begin time</li>
- * <li>{@code cpuTimeEnd} &ndash; CPU (submit) end time</li>
- * <li>{@code gpuTimeBegin} &ndash; GPU begin time</li>
- * <li>{@code gpuTimeEnd} &ndash; GPU end time</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct bgfx_view_stats_t {
- *     char name[256];
- *     bgfx_view_id_t view;
- *     int64_t cpuTimeBegin;
- *     int64_t cpuTimeEnd;
- *     int64_t gpuTimeBegin;
- *     int64_t gpuTimeEnd;
+ *     char {@link #name}[256];
+ *     bgfx_view_id_t {@link #view};
+ *     int64_t {@link #cpuTimeBegin};
+ *     int64_t {@link #cpuTimeEnd};
+ *     int64_t {@link #gpuTimeBegin};
+ *     int64_t {@link #gpuTimeEnd};
  * }</code></pre>
  */
 @NativeType("struct bgfx_view_stats_t")
@@ -91,25 +80,25 @@ public class BGFXViewStats extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+    /** view name */
     @NativeType("char[256]")
     public ByteBuffer name() { return nname(address()); }
-    /** Decodes the null-terminated string stored in the {@code name} field. */
+    /** view name */
     @NativeType("char[256]")
     public String nameString() { return nnameString(address()); }
-    /** Returns the value of the {@code view} field. */
+    /** view id */
     @NativeType("bgfx_view_id_t")
     public short view() { return nview(address()); }
-    /** Returns the value of the {@code cpuTimeBegin} field. */
+    /** CPU (submit) begin time */
     @NativeType("int64_t")
     public long cpuTimeBegin() { return ncpuTimeBegin(address()); }
-    /** Returns the value of the {@code cpuTimeEnd} field. */
+    /** CPU (submit) end time */
     @NativeType("int64_t")
     public long cpuTimeEnd() { return ncpuTimeEnd(address()); }
-    /** Returns the value of the {@code gpuTimeBegin} field. */
+    /** GPU begin time */
     @NativeType("int64_t")
     public long gpuTimeBegin() { return ngpuTimeBegin(address()); }
-    /** Returns the value of the {@code gpuTimeEnd} field. */
+    /** GPU end time */
     @NativeType("int64_t")
     public long gpuTimeEnd() { return ngpuTimeEnd(address()); }
 
@@ -197,25 +186,25 @@ public class BGFXViewStats extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+        /** @return a {@link ByteBuffer} view of the {@link BGFXViewStats#name} field. */
         @NativeType("char[256]")
         public ByteBuffer name() { return BGFXViewStats.nname(address()); }
-        /** Decodes the null-terminated string stored in the {@code name} field. */
+        /** @return the null-terminated string stored in the {@link BGFXViewStats#name} field. */
         @NativeType("char[256]")
         public String nameString() { return BGFXViewStats.nnameString(address()); }
-        /** Returns the value of the {@code view} field. */
+        /** @return the value of the {@link BGFXViewStats#view} field. */
         @NativeType("bgfx_view_id_t")
         public short view() { return BGFXViewStats.nview(address()); }
-        /** Returns the value of the {@code cpuTimeBegin} field. */
+        /** @return the value of the {@link BGFXViewStats#cpuTimeBegin} field. */
         @NativeType("int64_t")
         public long cpuTimeBegin() { return BGFXViewStats.ncpuTimeBegin(address()); }
-        /** Returns the value of the {@code cpuTimeEnd} field. */
+        /** @return the value of the {@link BGFXViewStats#cpuTimeEnd} field. */
         @NativeType("int64_t")
         public long cpuTimeEnd() { return BGFXViewStats.ncpuTimeEnd(address()); }
-        /** Returns the value of the {@code gpuTimeBegin} field. */
+        /** @return the value of the {@link BGFXViewStats#gpuTimeBegin} field. */
         @NativeType("int64_t")
         public long gpuTimeBegin() { return BGFXViewStats.ngpuTimeBegin(address()); }
-        /** Returns the value of the {@code gpuTimeEnd} field. */
+        /** @return the value of the {@link BGFXViewStats#gpuTimeEnd} field. */
         @NativeType("int64_t")
         public long gpuTimeEnd() { return BGFXViewStats.ngpuTimeEnd(address()); }
 

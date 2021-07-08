@@ -34,7 +34,7 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
             """
             This class contains native methods that can be used to call dynamically loaded functions. It is used internally by the LWJGL bindings, but can also
             be used to call other dynamically loaded functions. Not all possible signatures are available, only those needed by the LWJGL bindings. To call a
-            function that does not have a matching JNI method, {@link org.lwjgl.system.dyncall.DynCall DynCall} can used.
+            function that does not have a matching JNI method, {@link org.lwjgl.system.libffi.LibFFI LibFFI} can used.
 
             All JNI methods in this class take an extra parameter, called {@code $FUNCTION_ADDRESS}. This must be a valid pointer to a native function with a
             matching signature. Due to overloading, method names are partially mangled:

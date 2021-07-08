@@ -19,21 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * External memory buffer descriptor.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code offset} &ndash; Offset into the memory object where the buffer's base is</li>
- * <li>{@code size} &ndash; Size of the buffer</li>
- * <li>{@code flags} &ndash; Flags reserved for future use. Must be zero.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUDA_EXTERNAL_MEMORY_BUFFER_DESC {
- *     unsigned long long offset;
- *     unsigned long long size;
- *     unsigned int flags;
+ *     unsigned long long {@link #offset};
+ *     unsigned long long {@link #size};
+ *     unsigned int {@link #flags};
  *     unsigned int reserved[16];
  * }</code></pre>
  */
@@ -82,27 +74,27 @@ public class CUDA_EXTERNAL_MEMORY_BUFFER_DESC extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code offset} field. */
+    /** Offset into the memory object where the buffer's base is */
     @NativeType("unsigned long long")
     public long offset() { return noffset(address()); }
-    /** Returns the value of the {@code size} field. */
+    /** Size of the buffer */
     @NativeType("unsigned long long")
     public long size() { return nsize(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** Flags reserved for future use. Must be zero. */
     @NativeType("unsigned int")
     public int flags() { return nflags(address()); }
-    /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
+    /** @return a {@link IntBuffer} view of the {@code reserved} field. */
     @NativeType("unsigned int[16]")
     public IntBuffer reserved() { return nreserved(address()); }
-    /** Returns the value at the specified index of the {@code reserved} field. */
+    /** @return the value at the specified index of the {@code reserved} field. */
     @NativeType("unsigned int")
     public int reserved(int index) { return nreserved(address(), index); }
 
-    /** Sets the specified value to the {@code offset} field. */
+    /** Sets the specified value to the {@link #offset} field. */
     public CUDA_EXTERNAL_MEMORY_BUFFER_DESC offset(@NativeType("unsigned long long") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@code size} field. */
+    /** Sets the specified value to the {@link #size} field. */
     public CUDA_EXTERNAL_MEMORY_BUFFER_DESC size(@NativeType("unsigned long long") long value) { nsize(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public CUDA_EXTERNAL_MEMORY_BUFFER_DESC flags(@NativeType("unsigned int") int value) { nflags(address(), value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
     public CUDA_EXTERNAL_MEMORY_BUFFER_DESC reserved(@NativeType("unsigned int[16]") IntBuffer value) { nreserved(address(), value); return this; }
@@ -346,27 +338,27 @@ public class CUDA_EXTERNAL_MEMORY_BUFFER_DESC extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@link CUDA_EXTERNAL_MEMORY_BUFFER_DESC#offset} field. */
         @NativeType("unsigned long long")
         public long offset() { return CUDA_EXTERNAL_MEMORY_BUFFER_DESC.noffset(address()); }
-        /** Returns the value of the {@code size} field. */
+        /** @return the value of the {@link CUDA_EXTERNAL_MEMORY_BUFFER_DESC#size} field. */
         @NativeType("unsigned long long")
         public long size() { return CUDA_EXTERNAL_MEMORY_BUFFER_DESC.nsize(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link CUDA_EXTERNAL_MEMORY_BUFFER_DESC#flags} field. */
         @NativeType("unsigned int")
         public int flags() { return CUDA_EXTERNAL_MEMORY_BUFFER_DESC.nflags(address()); }
-        /** Returns a {@link IntBuffer} view of the {@code reserved} field. */
+        /** @return a {@link IntBuffer} view of the {@code reserved} field. */
         @NativeType("unsigned int[16]")
         public IntBuffer reserved() { return CUDA_EXTERNAL_MEMORY_BUFFER_DESC.nreserved(address()); }
-        /** Returns the value at the specified index of the {@code reserved} field. */
+        /** @return the value at the specified index of the {@code reserved} field. */
         @NativeType("unsigned int")
         public int reserved(int index) { return CUDA_EXTERNAL_MEMORY_BUFFER_DESC.nreserved(address(), index); }
 
-        /** Sets the specified value to the {@code offset} field. */
+        /** Sets the specified value to the {@link CUDA_EXTERNAL_MEMORY_BUFFER_DESC#offset} field. */
         public CUDA_EXTERNAL_MEMORY_BUFFER_DESC.Buffer offset(@NativeType("unsigned long long") long value) { CUDA_EXTERNAL_MEMORY_BUFFER_DESC.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@code size} field. */
+        /** Sets the specified value to the {@link CUDA_EXTERNAL_MEMORY_BUFFER_DESC#size} field. */
         public CUDA_EXTERNAL_MEMORY_BUFFER_DESC.Buffer size(@NativeType("unsigned long long") long value) { CUDA_EXTERNAL_MEMORY_BUFFER_DESC.nsize(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link CUDA_EXTERNAL_MEMORY_BUFFER_DESC#flags} field. */
         public CUDA_EXTERNAL_MEMORY_BUFFER_DESC.Buffer flags(@NativeType("unsigned int") int value) { CUDA_EXTERNAL_MEMORY_BUFFER_DESC.nflags(address(), value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
         public CUDA_EXTERNAL_MEMORY_BUFFER_DESC.Buffer reserved(@NativeType("unsigned int[16]") IntBuffer value) { CUDA_EXTERNAL_MEMORY_BUFFER_DESC.nreserved(address(), value); return this; }

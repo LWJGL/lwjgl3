@@ -31,27 +31,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkAttachmentSampleLocationsEXT}, {@link VkSubpassSampleLocationsEXT}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code attachmentInitialSampleLocationsCount} &ndash; the number of elements in the {@code pAttachmentInitialSampleLocations} array.</li>
- * <li>{@code pAttachmentInitialSampleLocations} &ndash; a pointer to an array of {@code attachmentInitialSampleLocationsCount} {@link VkAttachmentSampleLocationsEXT} structures specifying the attachment indices and their corresponding sample location state. Each element of {@code pAttachmentInitialSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition a depth/stencil attachment from the initial layout of the attachment to the image layout specified for the attachment in the first subpass using it.</li>
- * <li>{@code postSubpassSampleLocationsCount} &ndash; the number of elements in the {@code pPostSubpassSampleLocations} array.</li>
- * <li>{@code pPostSubpassSampleLocations} &ndash; a pointer to an array of {@code postSubpassSampleLocationsCount} {@link VkSubpassSampleLocationsEXT} structures specifying the subpass indices and their corresponding sample location state. Each element of {@code pPostSubpassSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition the depth/stencil attachment used by the specified subpass to the image layout specified in a dependent subpass or to the final layout of the attachment in case the specified subpass is the last subpass using that attachment. In addition, if {@link VkPhysicalDeviceSampleLocationsPropertiesEXT}{@code ::variableSampleLocations} is {@link VK10#VK_FALSE FALSE}, each element of {@code pPostSubpassSampleLocations} <b>must</b> specify the sample location state that matches the sample locations used by all pipelines that will be bound to a command buffer during the specified subpass. If {@code variableSampleLocations} is {@link VK10#VK_TRUE TRUE}, the sample locations used for rasterization do not depend on {@code pPostSubpassSampleLocations}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkRenderPassSampleLocationsBeginInfoEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t attachmentInitialSampleLocationsCount;
- *     {@link VkAttachmentSampleLocationsEXT VkAttachmentSampleLocationsEXT} const * pAttachmentInitialSampleLocations;
- *     uint32_t postSubpassSampleLocationsCount;
- *     {@link VkSubpassSampleLocationsEXT VkSubpassSampleLocationsEXT} const * pPostSubpassSampleLocations;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #attachmentInitialSampleLocationsCount};
+ *     {@link VkAttachmentSampleLocationsEXT VkAttachmentSampleLocationsEXT} const * {@link #pAttachmentInitialSampleLocations};
+ *     uint32_t {@link #postSubpassSampleLocationsCount};
+ *     {@link VkSubpassSampleLocationsEXT VkSubpassSampleLocationsEXT} const * {@link #pPostSubpassSampleLocations};
  * }</code></pre>
  */
 public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct implements NativeResource {
@@ -105,34 +94,34 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct implements N
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code attachmentInitialSampleLocationsCount} field. */
+    /** the number of elements in the {@code pAttachmentInitialSampleLocations} array. */
     @NativeType("uint32_t")
     public int attachmentInitialSampleLocationsCount() { return nattachmentInitialSampleLocationsCount(address()); }
-    /** Returns a {@link VkAttachmentSampleLocationsEXT.Buffer} view of the struct array pointed to by the {@code pAttachmentInitialSampleLocations} field. */
+    /** a pointer to an array of {@code attachmentInitialSampleLocationsCount} {@link VkAttachmentSampleLocationsEXT} structures specifying the attachment indices and their corresponding sample location state. Each element of {@code pAttachmentInitialSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition a depth/stencil attachment from the initial layout of the attachment to the image layout specified for the attachment in the first subpass using it. */
     @Nullable
     @NativeType("VkAttachmentSampleLocationsEXT const *")
     public VkAttachmentSampleLocationsEXT.Buffer pAttachmentInitialSampleLocations() { return npAttachmentInitialSampleLocations(address()); }
-    /** Returns the value of the {@code postSubpassSampleLocationsCount} field. */
+    /** the number of elements in the {@code pPostSubpassSampleLocations} array. */
     @NativeType("uint32_t")
     public int postSubpassSampleLocationsCount() { return npostSubpassSampleLocationsCount(address()); }
-    /** Returns a {@link VkSubpassSampleLocationsEXT.Buffer} view of the struct array pointed to by the {@code pPostSubpassSampleLocations} field. */
+    /** a pointer to an array of {@code postSubpassSampleLocationsCount} {@link VkSubpassSampleLocationsEXT} structures specifying the subpass indices and their corresponding sample location state. Each element of {@code pPostSubpassSampleLocations} <b>can</b> specify the sample location state to use in the automatic layout transition performed to transition the depth/stencil attachment used by the specified subpass to the image layout specified in a dependent subpass or to the final layout of the attachment in case the specified subpass is the last subpass using that attachment. In addition, if {@link VkPhysicalDeviceSampleLocationsPropertiesEXT}{@code ::variableSampleLocations} is {@link VK10#VK_FALSE FALSE}, each element of {@code pPostSubpassSampleLocations} <b>must</b> specify the sample location state that matches the sample locations used by all pipelines that will be bound to a command buffer during the specified subpass. If {@code variableSampleLocations} is {@link VK10#VK_TRUE TRUE}, the sample locations used for rasterization do not depend on {@code pPostSubpassSampleLocations}. */
     @Nullable
     @NativeType("VkSubpassSampleLocationsEXT const *")
     public VkSubpassSampleLocationsEXT.Buffer pPostSubpassSampleLocations() { return npPostSubpassSampleLocations(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassSampleLocationsBeginInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassSampleLocationsBeginInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkAttachmentSampleLocationsEXT.Buffer} to the {@code pAttachmentInitialSampleLocations} field. */
+    /** Sets the address of the specified {@link VkAttachmentSampleLocationsEXT.Buffer} to the {@link #pAttachmentInitialSampleLocations} field. */
     public VkRenderPassSampleLocationsBeginInfoEXT pAttachmentInitialSampleLocations(@Nullable @NativeType("VkAttachmentSampleLocationsEXT const *") VkAttachmentSampleLocationsEXT.Buffer value) { npAttachmentInitialSampleLocations(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSubpassSampleLocationsEXT.Buffer} to the {@code pPostSubpassSampleLocations} field. */
+    /** Sets the address of the specified {@link VkSubpassSampleLocationsEXT.Buffer} to the {@link #pPostSubpassSampleLocations} field. */
     public VkRenderPassSampleLocationsBeginInfoEXT pPostSubpassSampleLocations(@Nullable @NativeType("VkSubpassSampleLocationsEXT const *") VkSubpassSampleLocationsEXT.Buffer value) { npPostSubpassSampleLocations(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -401,34 +390,34 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct implements N
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkRenderPassSampleLocationsBeginInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderPassSampleLocationsBeginInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkRenderPassSampleLocationsBeginInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRenderPassSampleLocationsBeginInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code attachmentInitialSampleLocationsCount} field. */
+        /** @return the value of the {@link VkRenderPassSampleLocationsBeginInfoEXT#attachmentInitialSampleLocationsCount} field. */
         @NativeType("uint32_t")
         public int attachmentInitialSampleLocationsCount() { return VkRenderPassSampleLocationsBeginInfoEXT.nattachmentInitialSampleLocationsCount(address()); }
-        /** Returns a {@link VkAttachmentSampleLocationsEXT.Buffer} view of the struct array pointed to by the {@code pAttachmentInitialSampleLocations} field. */
+        /** @return a {@link VkAttachmentSampleLocationsEXT.Buffer} view of the struct array pointed to by the {@link VkRenderPassSampleLocationsBeginInfoEXT#pAttachmentInitialSampleLocations} field. */
         @Nullable
         @NativeType("VkAttachmentSampleLocationsEXT const *")
         public VkAttachmentSampleLocationsEXT.Buffer pAttachmentInitialSampleLocations() { return VkRenderPassSampleLocationsBeginInfoEXT.npAttachmentInitialSampleLocations(address()); }
-        /** Returns the value of the {@code postSubpassSampleLocationsCount} field. */
+        /** @return the value of the {@link VkRenderPassSampleLocationsBeginInfoEXT#postSubpassSampleLocationsCount} field. */
         @NativeType("uint32_t")
         public int postSubpassSampleLocationsCount() { return VkRenderPassSampleLocationsBeginInfoEXT.npostSubpassSampleLocationsCount(address()); }
-        /** Returns a {@link VkSubpassSampleLocationsEXT.Buffer} view of the struct array pointed to by the {@code pPostSubpassSampleLocations} field. */
+        /** @return a {@link VkSubpassSampleLocationsEXT.Buffer} view of the struct array pointed to by the {@link VkRenderPassSampleLocationsBeginInfoEXT#pPostSubpassSampleLocations} field. */
         @Nullable
         @NativeType("VkSubpassSampleLocationsEXT const *")
         public VkSubpassSampleLocationsEXT.Buffer pPostSubpassSampleLocations() { return VkRenderPassSampleLocationsBeginInfoEXT.npPostSubpassSampleLocations(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkRenderPassSampleLocationsBeginInfoEXT#sType} field. */
         public VkRenderPassSampleLocationsBeginInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassSampleLocationsBeginInfoEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkRenderPassSampleLocationsBeginInfoEXT#pNext} field. */
         public VkRenderPassSampleLocationsBeginInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassSampleLocationsBeginInfoEXT.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkAttachmentSampleLocationsEXT.Buffer} to the {@code pAttachmentInitialSampleLocations} field. */
+        /** Sets the address of the specified {@link VkAttachmentSampleLocationsEXT.Buffer} to the {@link VkRenderPassSampleLocationsBeginInfoEXT#pAttachmentInitialSampleLocations} field. */
         public VkRenderPassSampleLocationsBeginInfoEXT.Buffer pAttachmentInitialSampleLocations(@Nullable @NativeType("VkAttachmentSampleLocationsEXT const *") VkAttachmentSampleLocationsEXT.Buffer value) { VkRenderPassSampleLocationsBeginInfoEXT.npAttachmentInitialSampleLocations(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSubpassSampleLocationsEXT.Buffer} to the {@code pPostSubpassSampleLocations} field. */
+        /** Sets the address of the specified {@link VkSubpassSampleLocationsEXT.Buffer} to the {@link VkRenderPassSampleLocationsBeginInfoEXT#pPostSubpassSampleLocations} field. */
         public VkRenderPassSampleLocationsBeginInfoEXT.Buffer pPostSubpassSampleLocations(@Nullable @NativeType("VkSubpassSampleLocationsEXT const *") VkSubpassSampleLocationsEXT.Buffer value) { VkRenderPassSampleLocationsBeginInfoEXT.npPostSubpassSampleLocations(address(), value); return this; }
 
     }

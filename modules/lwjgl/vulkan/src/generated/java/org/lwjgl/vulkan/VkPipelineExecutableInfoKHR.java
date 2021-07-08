@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code executableIndex} <b>must</b> be less than the number of executables associated with {@code pipeline} as returned in the {@code pExecutableCount} parameter of {@code vkGetPipelineExecutablePropertiesKHR}.</li>
+ * <li>{@code executableIndex} <b>must</b> be less than the number of executables associated with {@code pipeline} as returned in the {@code pExecutableCount} parameter of {@code vkGetPipelineExecutablePropertiesKHR}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -36,23 +36,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link KHRPipelineExecutableProperties#vkGetPipelineExecutableInternalRepresentationsKHR GetPipelineExecutableInternalRepresentationsKHR}, {@link KHRPipelineExecutableProperties#vkGetPipelineExecutableStatisticsKHR GetPipelineExecutableStatisticsKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code pipeline} &ndash; the pipeline to query.</li>
- * <li>{@code executableIndex} &ndash; the index of the executable to query in the array of executable properties returned by {@link KHRPipelineExecutableProperties#vkGetPipelineExecutablePropertiesKHR GetPipelineExecutablePropertiesKHR}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineExecutableInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipeline pipeline;
- *     uint32_t executableIndex;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipeline {@link #pipeline};
+ *     uint32_t {@link #executableIndex};
  * }</code></pre>
  */
 public class VkPipelineExecutableInfoKHR extends Struct implements NativeResource {
@@ -100,26 +91,26 @@ public class VkPipelineExecutableInfoKHR extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code pipeline} field. */
+    /** the pipeline to query. */
     @NativeType("VkPipeline")
     public long pipeline() { return npipeline(address()); }
-    /** Returns the value of the {@code executableIndex} field. */
+    /** the index of the executable to query in the array of executable properties returned by {@link KHRPipelineExecutableProperties#vkGetPipelineExecutablePropertiesKHR GetPipelineExecutablePropertiesKHR}. */
     @NativeType("uint32_t")
     public int executableIndex() { return nexecutableIndex(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineExecutableInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineExecutableInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code pipeline} field. */
+    /** Sets the specified value to the {@link #pipeline} field. */
     public VkPipelineExecutableInfoKHR pipeline(@NativeType("VkPipeline") long value) { npipeline(address(), value); return this; }
-    /** Sets the specified value to the {@code executableIndex} field. */
+    /** Sets the specified value to the {@link #executableIndex} field. */
     public VkPipelineExecutableInfoKHR executableIndex(@NativeType("uint32_t") int value) { nexecutableIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -348,26 +339,26 @@ public class VkPipelineExecutableInfoKHR extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineExecutableInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineExecutableInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineExecutableInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineExecutableInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code pipeline} field. */
+        /** @return the value of the {@link VkPipelineExecutableInfoKHR#pipeline} field. */
         @NativeType("VkPipeline")
         public long pipeline() { return VkPipelineExecutableInfoKHR.npipeline(address()); }
-        /** Returns the value of the {@code executableIndex} field. */
+        /** @return the value of the {@link VkPipelineExecutableInfoKHR#executableIndex} field. */
         @NativeType("uint32_t")
         public int executableIndex() { return VkPipelineExecutableInfoKHR.nexecutableIndex(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineExecutableInfoKHR#sType} field. */
         public VkPipelineExecutableInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineExecutableInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineExecutableInfoKHR#pNext} field. */
         public VkPipelineExecutableInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkPipelineExecutableInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code pipeline} field. */
+        /** Sets the specified value to the {@link VkPipelineExecutableInfoKHR#pipeline} field. */
         public VkPipelineExecutableInfoKHR.Buffer pipeline(@NativeType("VkPipeline") long value) { VkPipelineExecutableInfoKHR.npipeline(address(), value); return this; }
-        /** Sets the specified value to the {@code executableIndex} field. */
+        /** Sets the specified value to the {@link VkPipelineExecutableInfoKHR#executableIndex} field. */
         public VkPipelineExecutableInfoKHR.Buffer executableIndex(@NativeType("uint32_t") int value) { VkPipelineExecutableInfoKHR.nexecutableIndex(address(), value); return this; }
 
     }

@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     int jid,
  *     int event
  * )</code></pre>
@@ -54,7 +54,7 @@ public abstract class GLFWJoystickCallback extends Callback implements GLFWJoyst
     }
 
     protected GLFWJoystickCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWJoystickCallback(long functionPointer) {

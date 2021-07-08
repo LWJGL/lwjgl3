@@ -16,13 +16,13 @@ import org.lwjgl.system.*;
  */
 public class KHRParallelShaderCompile {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_MAX_SHADER_COMPILER_THREADS_KHR = 0x91B0;
 
     /** Accepted as part of the {@code pname} parameter to {@link GLES20#glGetShaderiv GetShaderiv} and accepted as part of the {@code pname} parameter to {@link GLES20#glGetProgramiv GetProgramiv}. */
     public static final int GL_COMPLETION_STATUS_KHR = 0x91B1;
-
-    static { GLES.initialize(); }
 
     protected KHRParallelShaderCompile() {
         throw new UnsupportedOperationException();

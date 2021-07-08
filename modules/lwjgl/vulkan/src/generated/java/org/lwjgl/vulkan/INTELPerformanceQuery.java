@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Such a library is available at : https://github.com/intel/metrics-discovery</p>
  * 
- * <p>Performance analysis tools such as GPA (https://software.intel.com/en-us/gpa) make use of this extension and the metrics-discovery library to present the data in a human readable way.</p>
+ * <p>Performance analysis tools such as <a target="_blank" href="https://software.intel.com/content/www/us/en/develop/tools/graphics-performance-analyzers.html">Graphics Performance Analyzers</a> make use of this extension and the metrics-discovery library to present the data in a human readable way.</p>
  * 
  * <h5>Example Code</h5>
  * 
@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * // A previously created device
  * VkDevice device;
  * 
- * // A queue from from device
+ * // A queue derived from the device
  * VkQueue queue;
  * 
  * VkInitializePerformanceApiInfoINTEL performanceApiInfoIntel = {
@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *   device,
  *   &amp;performanceApiInfoIntel);
  * 
- * VkQueryPoolCreateInfoINTEL queryPoolIntel = {
+ * VkQueryPoolPerformanceQueryCreateInfoINTEL queryPoolIntel = {
  *   VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL,
  *   NULL,
  *   VK_QUERY_POOL_SAMPLING_MODE_MANUAL_INTEL,
@@ -154,6 +154,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * // The data can then be passed back to metrics-discovery from which
  * // human readable values can be queried.</code></pre>
  * 
+ * <h5>VK_INTEL_performance_query</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_INTEL_performance_query}</dd>
@@ -162,15 +164,24 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>211</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
+ * </ul></dd>
+ * <dt><b>Special Use</b></dt>
+ * <dd><ul>
+ * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Lionel Landwerlin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_INTEL_performance_query:%20&amp;body=@llandwerlin%20">llandwerlin</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-05-16</dd>
  * <dt><b>IP Status</b></dt>
@@ -185,7 +196,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class INTELPerformanceQuery {
 
     /** The extension specification version. */
-    public static final int VK_INTEL_PERFORMANCE_QUERY_SPEC_VERSION = 1;
+    public static final int VK_INTEL_PERFORMANCE_QUERY_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_INTEL_PERFORMANCE_QUERY_EXTENSION_NAME = "VK_INTEL_performance_query";
@@ -196,6 +207,7 @@ public class INTELPerformanceQuery {
      * <h5>Enum values:</h5>
      * 
      * <ul>
+     * <li>{@link #VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL}</li>
@@ -205,12 +217,13 @@ public class INTELPerformanceQuery {
      * </ul>
      */
     public static final int
-        VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL                 = 1000210000,
-        VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL        = 1000210001,
-        VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL                = 1000210002,
-        VK_STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL         = 1000210003,
-        VK_STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL              = 1000210004,
-        VK_STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL = 1000210005;
+        VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL = 1000210000,
+        VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL                   = 1000210000,
+        VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL          = 1000210001,
+        VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL                  = 1000210002,
+        VK_STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL           = 1000210003,
+        VK_STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL                = 1000210004,
+        VK_STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL   = 1000210005;
 
     /** Extends {@code VkQueryType}. */
     public static final int VK_QUERY_TYPE_PERFORMANCE_QUERY_INTEL = 1000210000;
@@ -238,7 +251,7 @@ public class INTELPerformanceQuery {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkQueryPoolCreateInfoINTEL}</p>
+     * <p>{@link VkQueryPoolPerformanceQueryCreateInfoINTEL}</p>
      */
     public static final int VK_QUERY_POOL_SAMPLING_MODE_MANUAL_INTEL = 0;
 
@@ -426,6 +439,7 @@ public class INTELPerformanceQuery {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -494,6 +508,7 @@ public class INTELPerformanceQuery {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -553,7 +568,7 @@ public class INTELPerformanceQuery {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code pOverrideInfo} <b>must</b> not be used with a {@code VkPerformanceOverrideTypeINTEL} that is not reported available by {@code vkGetPerformanceParameterINTEL}.</li>
+     * <li>{@code pOverrideInfo} <b>must</b> not be used with a {@code VkPerformanceOverrideTypeINTEL} that is not reported available by {@code vkGetPerformanceParameterINTEL}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -568,6 +583,7 @@ public class INTELPerformanceQuery {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -683,15 +699,21 @@ public class INTELPerformanceQuery {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code configuration} <b>must</b> not be released before all command buffers submitted while the configuration was set are in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">pending state</a>.</li>
+     * <li>{@code configuration} <b>must</b> not be released before all command buffers submitted while the configuration was set are in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">pending state</a></li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-     * <li>{@code configuration} <b>must</b> be a valid {@code VkPerformanceConfigurationINTEL} handle</li>
-     * <li>{@code configuration} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+     * <li>If {@code configuration} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code configuration} <b>must</b> be a valid {@code VkPerformanceConfigurationINTEL} handle</li>
+     * <li>If {@code configuration} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+     * </ul>
+     * 
+     * <h5>Host Synchronization</h5>
+     * 
+     * <ul>
+     * <li>Host access to {@code configuration} <b>must</b> be externally synchronized</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>

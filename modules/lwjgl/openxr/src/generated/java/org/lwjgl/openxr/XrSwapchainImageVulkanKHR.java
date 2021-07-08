@@ -69,13 +69,13 @@ public class XrSwapchainImageVulkanKHR extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code image} field. */
+    /** @return the value of the {@code image} field. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
 
@@ -306,13 +306,13 @@ public class XrSwapchainImageVulkanKHR extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSwapchainImageVulkanKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSwapchainImageVulkanKHR.nnext(address()); }
-        /** Returns the value of the {@code image} field. */
+        /** @return the value of the {@code image} field. */
         @NativeType("VkImage")
         public long image() { return XrSwapchainImageVulkanKHR.nimage(address()); }
 

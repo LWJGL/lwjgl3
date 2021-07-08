@@ -35,13 +35,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTDiscardFramebuffer {
 
+    static { GLES.initialize(); }
+
     /** Accepted in the {@code attachments} parameter of DiscardFramebufferEXT when the default framebuffer is bound to {@code target}. */
     public static final int
         GL_COLOR_EXT   = 0x1800,
         GL_DEPTH_EXT   = 0x1801,
         GL_STENCIL_EXT = 0x1802;
-
-    static { GLES.initialize(); }
 
     protected EXTDiscardFramebuffer() {
         throw new UnsupportedOperationException();

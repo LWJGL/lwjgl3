@@ -16,6 +16,8 @@ import org.lwjgl.system.*;
  */
 public class EXTStencilTwoSide {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
      * GetDoublev.
@@ -24,8 +26,6 @@ public class EXTStencilTwoSide {
 
     /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_ACTIVE_STENCIL_FACE_EXT = 0x8911;
-
-    static { GL.initialize(); }
 
     protected EXTStencilTwoSide() {
         throw new UnsupportedOperationException();

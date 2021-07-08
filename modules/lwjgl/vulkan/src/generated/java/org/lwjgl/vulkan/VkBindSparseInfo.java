@@ -26,8 +26,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the {@code pNext} chain of this structure includes a {@link VkTimelineSemaphoreSubmitInfo} structure and any element of {@code pWaitSemaphores} was created with a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_TIMELINE SEMAPHORE_TYPE_TIMELINE} then its {@code waitSemaphoreValueCount} member <b>must</b> equal {@code waitSemaphoreCount}</li>
  * <li>If the {@code pNext} chain of this structure includes a {@link VkTimelineSemaphoreSubmitInfo} structure and any element of {@code pSignalSemaphores} was created with a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_TIMELINE SEMAPHORE_TYPE_TIMELINE} then its {@code signalSemaphoreValueCount} member <b>must</b> equal {@code signalSemaphoreCount}</li>
  * <li>For each element of {@code pSignalSemaphores} created with a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_TIMELINE SEMAPHORE_TYPE_TIMELINE} the corresponding element of {@link VkTimelineSemaphoreSubmitInfo}::pSignalSemaphoreValues <b>must</b> have a value greater than the current value of the semaphore when the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operation</a> is executed</li>
- * <li>For each element of {@code pWaitSemaphores} created with a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_TIMELINE SEMAPHORE_TYPE_TIMELINE} the corresponding element of {@link VkTimelineSemaphoreSubmitInfo}::pWaitSemaphoreValues <b>must</b> have a value which does not differ from the current value of the semaphore or from the value of any outstanding semaphore wait or signal operation on that semaphore by more than <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxTimelineSemaphoreValueDifference">{@code maxTimelineSemaphoreValueDifference}</a>.</li>
- * <li>For each element of {@code pSignalSemaphores} created with a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_TIMELINE SEMAPHORE_TYPE_TIMELINE} the corresponding element of {@link VkTimelineSemaphoreSubmitInfo}::pSignalSemaphoreValues <b>must</b> have a value which does not differ from the current value of the semaphore or from the value of any outstanding semaphore wait or signal operation on that semaphore by more than <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxTimelineSemaphoreValueDifference">{@code maxTimelineSemaphoreValueDifference}</a>.</li>
+ * <li>For each element of {@code pWaitSemaphores} created with a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_TIMELINE SEMAPHORE_TYPE_TIMELINE} the corresponding element of {@link VkTimelineSemaphoreSubmitInfo}::pWaitSemaphoreValues <b>must</b> have a value which does not differ from the current value of the semaphore or from the value of any outstanding semaphore wait or signal operation on that semaphore by more than <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxTimelineSemaphoreValueDifference">{@code maxTimelineSemaphoreValueDifference}</a></li>
+ * <li>For each element of {@code pSignalSemaphores} created with a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_TIMELINE SEMAPHORE_TYPE_TIMELINE} the corresponding element of {@link VkTimelineSemaphoreSubmitInfo}::pSignalSemaphoreValues <b>must</b> have a value which does not differ from the current value of the semaphore or from the value of any outstanding semaphore wait or signal operation on that semaphore by more than <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxTimelineSemaphoreValueDifference">{@code maxTimelineSemaphoreValueDifference}</a></li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_BIND_SPARSE_INFO STRUCTURE_TYPE_BIND_SPARSE_INFO}</li>
  * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupBindSparseInfo} or {@link VkTimelineSemaphoreSubmitInfo}</li>
- * <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphores} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
  * <li>If {@code bufferBindCount} is not 0, {@code pBufferBinds} <b>must</b> be a valid pointer to an array of {@code bufferBindCount} valid {@link VkSparseBufferMemoryBindInfo} structures</li>
  * <li>If {@code imageOpaqueBindCount} is not 0, {@code pImageOpaqueBinds} <b>must</b> be a valid pointer to an array of {@code imageOpaqueBindCount} valid {@link VkSparseImageOpaqueMemoryBindInfo} structures</li>
@@ -48,39 +48,22 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkSparseBufferMemoryBindInfo}, {@link VkSparseImageMemoryBindInfo}, {@link VkSparseImageOpaqueMemoryBindInfo}, {@link VK10#vkQueueBindSparse QueueBindSparse}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code waitSemaphoreCount} &ndash; the number of semaphores upon which to wait before executing the sparse binding operations for the batch.</li>
- * <li>{@code pWaitSemaphores} &ndash; a pointer to an array of semaphores upon which to wait on before the sparse binding operations for this batch begin execution. If semaphores to wait on are provided, they define a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-waiting">semaphore wait operation</a>.</li>
- * <li>{@code bufferBindCount} &ndash; the number of sparse buffer bindings to perform in the batch.</li>
- * <li>{@code pBufferBinds} &ndash; a pointer to an array of {@link VkSparseBufferMemoryBindInfo} structures.</li>
- * <li>{@code imageOpaqueBindCount} &ndash; the number of opaque sparse image bindings to perform.</li>
- * <li>{@code pImageOpaqueBinds} &ndash; a pointer to an array of {@link VkSparseImageOpaqueMemoryBindInfo} structures, indicating opaque sparse image bindings to perform.</li>
- * <li>{@code imageBindCount} &ndash; the number of sparse image bindings to perform.</li>
- * <li>{@code pImageBinds} &ndash; a pointer to an array of {@link VkSparseImageMemoryBindInfo} structures, indicating sparse image bindings to perform.</li>
- * <li>{@code signalSemaphoreCount} &ndash; the number of semaphores to be signaled once the sparse binding operations specified by the structure have completed execution.</li>
- * <li>{@code pSignalSemaphores} &ndash; a pointer to an array of semaphores which will be signaled when the sparse binding operations for this batch have completed execution. If semaphores to be signaled are provided, they define a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operation</a>.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBindSparseInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t waitSemaphoreCount;
- *     VkSemaphore const * pWaitSemaphores;
- *     uint32_t bufferBindCount;
- *     {@link VkSparseBufferMemoryBindInfo VkSparseBufferMemoryBindInfo} const * pBufferBinds;
- *     uint32_t imageOpaqueBindCount;
- *     {@link VkSparseImageOpaqueMemoryBindInfo VkSparseImageOpaqueMemoryBindInfo} const * pImageOpaqueBinds;
- *     uint32_t imageBindCount;
- *     {@link VkSparseImageMemoryBindInfo VkSparseImageMemoryBindInfo} const * pImageBinds;
- *     uint32_t signalSemaphoreCount;
- *     VkSemaphore const * pSignalSemaphores;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #waitSemaphoreCount};
+ *     VkSemaphore const * {@link #pWaitSemaphores};
+ *     uint32_t {@link #bufferBindCount};
+ *     {@link VkSparseBufferMemoryBindInfo VkSparseBufferMemoryBindInfo} const * {@link #pBufferBinds};
+ *     uint32_t {@link #imageOpaqueBindCount};
+ *     {@link VkSparseImageOpaqueMemoryBindInfo VkSparseImageOpaqueMemoryBindInfo} const * {@link #pImageOpaqueBinds};
+ *     uint32_t {@link #imageBindCount};
+ *     {@link VkSparseImageMemoryBindInfo VkSparseImageMemoryBindInfo} const * {@link #pImageBinds};
+ *     uint32_t {@link #signalSemaphoreCount};
+ *     VkSemaphore const * {@link #pSignalSemaphores};
  * }</code></pre>
  */
 public class VkBindSparseInfo extends Struct implements NativeResource {
@@ -152,61 +135,61 @@ public class VkBindSparseInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code waitSemaphoreCount} field. */
+    /** the number of semaphores upon which to wait before executing the sparse binding operations for the batch. */
     @NativeType("uint32_t")
     public int waitSemaphoreCount() { return nwaitSemaphoreCount(address()); }
-    /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pWaitSemaphores} field. */
+    /** a pointer to an array of semaphores upon which to wait on before the sparse binding operations for this batch begin execution. If semaphores to wait on are provided, they define a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-waiting">semaphore wait operation</a>. */
     @Nullable
     @NativeType("VkSemaphore const *")
     public LongBuffer pWaitSemaphores() { return npWaitSemaphores(address()); }
-    /** Returns the value of the {@code bufferBindCount} field. */
+    /** the number of sparse buffer bindings to perform in the batch. */
     @NativeType("uint32_t")
     public int bufferBindCount() { return nbufferBindCount(address()); }
-    /** Returns a {@link VkSparseBufferMemoryBindInfo.Buffer} view of the struct array pointed to by the {@code pBufferBinds} field. */
+    /** a pointer to an array of {@link VkSparseBufferMemoryBindInfo} structures. */
     @Nullable
     @NativeType("VkSparseBufferMemoryBindInfo const *")
     public VkSparseBufferMemoryBindInfo.Buffer pBufferBinds() { return npBufferBinds(address()); }
-    /** Returns the value of the {@code imageOpaqueBindCount} field. */
+    /** the number of opaque sparse image bindings to perform. */
     @NativeType("uint32_t")
     public int imageOpaqueBindCount() { return nimageOpaqueBindCount(address()); }
-    /** Returns a {@link VkSparseImageOpaqueMemoryBindInfo.Buffer} view of the struct array pointed to by the {@code pImageOpaqueBinds} field. */
+    /** a pointer to an array of {@link VkSparseImageOpaqueMemoryBindInfo} structures, indicating opaque sparse image bindings to perform. */
     @Nullable
     @NativeType("VkSparseImageOpaqueMemoryBindInfo const *")
     public VkSparseImageOpaqueMemoryBindInfo.Buffer pImageOpaqueBinds() { return npImageOpaqueBinds(address()); }
-    /** Returns the value of the {@code imageBindCount} field. */
+    /** the number of sparse image bindings to perform. */
     @NativeType("uint32_t")
     public int imageBindCount() { return nimageBindCount(address()); }
-    /** Returns a {@link VkSparseImageMemoryBindInfo.Buffer} view of the struct array pointed to by the {@code pImageBinds} field. */
+    /** a pointer to an array of {@link VkSparseImageMemoryBindInfo} structures, indicating sparse image bindings to perform. */
     @Nullable
     @NativeType("VkSparseImageMemoryBindInfo const *")
     public VkSparseImageMemoryBindInfo.Buffer pImageBinds() { return npImageBinds(address()); }
-    /** Returns the value of the {@code signalSemaphoreCount} field. */
+    /** the number of semaphores to be signaled once the sparse binding operations specified by the structure have completed execution. */
     @NativeType("uint32_t")
     public int signalSemaphoreCount() { return nsignalSemaphoreCount(address()); }
-    /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pSignalSemaphores} field. */
+    /** a pointer to an array of semaphores which will be signaled when the sparse binding operations for this batch have completed execution. If semaphores to be signaled are provided, they define a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operation</a>. */
     @Nullable
     @NativeType("VkSemaphore const *")
     public LongBuffer pSignalSemaphores() { return npSignalSemaphores(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkBindSparseInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkBindSparseInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@code pWaitSemaphores} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@link #pWaitSemaphores} field. */
     public VkBindSparseInfo pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { npWaitSemaphores(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSparseBufferMemoryBindInfo.Buffer} to the {@code pBufferBinds} field. */
+    /** Sets the address of the specified {@link VkSparseBufferMemoryBindInfo.Buffer} to the {@link #pBufferBinds} field. */
     public VkBindSparseInfo pBufferBinds(@Nullable @NativeType("VkSparseBufferMemoryBindInfo const *") VkSparseBufferMemoryBindInfo.Buffer value) { npBufferBinds(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSparseImageOpaqueMemoryBindInfo.Buffer} to the {@code pImageOpaqueBinds} field. */
+    /** Sets the address of the specified {@link VkSparseImageOpaqueMemoryBindInfo.Buffer} to the {@link #pImageOpaqueBinds} field. */
     public VkBindSparseInfo pImageOpaqueBinds(@Nullable @NativeType("VkSparseImageOpaqueMemoryBindInfo const *") VkSparseImageOpaqueMemoryBindInfo.Buffer value) { npImageOpaqueBinds(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSparseImageMemoryBindInfo.Buffer} to the {@code pImageBinds} field. */
+    /** Sets the address of the specified {@link VkSparseImageMemoryBindInfo.Buffer} to the {@link #pImageBinds} field. */
     public VkBindSparseInfo pImageBinds(@Nullable @NativeType("VkSparseImageMemoryBindInfo const *") VkSparseImageMemoryBindInfo.Buffer value) { npImageBinds(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@code pSignalSemaphores} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@link #pSignalSemaphores} field. */
     public VkBindSparseInfo pSignalSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { npSignalSemaphores(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -517,61 +500,61 @@ public class VkBindSparseInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkBindSparseInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBindSparseInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkBindSparseInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBindSparseInfo.npNext(address()); }
-        /** Returns the value of the {@code waitSemaphoreCount} field. */
+        /** @return the value of the {@link VkBindSparseInfo#waitSemaphoreCount} field. */
         @NativeType("uint32_t")
         public int waitSemaphoreCount() { return VkBindSparseInfo.nwaitSemaphoreCount(address()); }
-        /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pWaitSemaphores} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkBindSparseInfo#pWaitSemaphores} field. */
         @Nullable
         @NativeType("VkSemaphore const *")
         public LongBuffer pWaitSemaphores() { return VkBindSparseInfo.npWaitSemaphores(address()); }
-        /** Returns the value of the {@code bufferBindCount} field. */
+        /** @return the value of the {@link VkBindSparseInfo#bufferBindCount} field. */
         @NativeType("uint32_t")
         public int bufferBindCount() { return VkBindSparseInfo.nbufferBindCount(address()); }
-        /** Returns a {@link VkSparseBufferMemoryBindInfo.Buffer} view of the struct array pointed to by the {@code pBufferBinds} field. */
+        /** @return a {@link VkSparseBufferMemoryBindInfo.Buffer} view of the struct array pointed to by the {@link VkBindSparseInfo#pBufferBinds} field. */
         @Nullable
         @NativeType("VkSparseBufferMemoryBindInfo const *")
         public VkSparseBufferMemoryBindInfo.Buffer pBufferBinds() { return VkBindSparseInfo.npBufferBinds(address()); }
-        /** Returns the value of the {@code imageOpaqueBindCount} field. */
+        /** @return the value of the {@link VkBindSparseInfo#imageOpaqueBindCount} field. */
         @NativeType("uint32_t")
         public int imageOpaqueBindCount() { return VkBindSparseInfo.nimageOpaqueBindCount(address()); }
-        /** Returns a {@link VkSparseImageOpaqueMemoryBindInfo.Buffer} view of the struct array pointed to by the {@code pImageOpaqueBinds} field. */
+        /** @return a {@link VkSparseImageOpaqueMemoryBindInfo.Buffer} view of the struct array pointed to by the {@link VkBindSparseInfo#pImageOpaqueBinds} field. */
         @Nullable
         @NativeType("VkSparseImageOpaqueMemoryBindInfo const *")
         public VkSparseImageOpaqueMemoryBindInfo.Buffer pImageOpaqueBinds() { return VkBindSparseInfo.npImageOpaqueBinds(address()); }
-        /** Returns the value of the {@code imageBindCount} field. */
+        /** @return the value of the {@link VkBindSparseInfo#imageBindCount} field. */
         @NativeType("uint32_t")
         public int imageBindCount() { return VkBindSparseInfo.nimageBindCount(address()); }
-        /** Returns a {@link VkSparseImageMemoryBindInfo.Buffer} view of the struct array pointed to by the {@code pImageBinds} field. */
+        /** @return a {@link VkSparseImageMemoryBindInfo.Buffer} view of the struct array pointed to by the {@link VkBindSparseInfo#pImageBinds} field. */
         @Nullable
         @NativeType("VkSparseImageMemoryBindInfo const *")
         public VkSparseImageMemoryBindInfo.Buffer pImageBinds() { return VkBindSparseInfo.npImageBinds(address()); }
-        /** Returns the value of the {@code signalSemaphoreCount} field. */
+        /** @return the value of the {@link VkBindSparseInfo#signalSemaphoreCount} field. */
         @NativeType("uint32_t")
         public int signalSemaphoreCount() { return VkBindSparseInfo.nsignalSemaphoreCount(address()); }
-        /** Returns a {@link LongBuffer} view of the data pointed to by the {@code pSignalSemaphores} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkBindSparseInfo#pSignalSemaphores} field. */
         @Nullable
         @NativeType("VkSemaphore const *")
         public LongBuffer pSignalSemaphores() { return VkBindSparseInfo.npSignalSemaphores(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkBindSparseInfo#sType} field. */
         public VkBindSparseInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindSparseInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkBindSparseInfo#pNext} field. */
         public VkBindSparseInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindSparseInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@code pWaitSemaphores} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@link VkBindSparseInfo#pWaitSemaphores} field. */
         public VkBindSparseInfo.Buffer pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { VkBindSparseInfo.npWaitSemaphores(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSparseBufferMemoryBindInfo.Buffer} to the {@code pBufferBinds} field. */
+        /** Sets the address of the specified {@link VkSparseBufferMemoryBindInfo.Buffer} to the {@link VkBindSparseInfo#pBufferBinds} field. */
         public VkBindSparseInfo.Buffer pBufferBinds(@Nullable @NativeType("VkSparseBufferMemoryBindInfo const *") VkSparseBufferMemoryBindInfo.Buffer value) { VkBindSparseInfo.npBufferBinds(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSparseImageOpaqueMemoryBindInfo.Buffer} to the {@code pImageOpaqueBinds} field. */
+        /** Sets the address of the specified {@link VkSparseImageOpaqueMemoryBindInfo.Buffer} to the {@link VkBindSparseInfo#pImageOpaqueBinds} field. */
         public VkBindSparseInfo.Buffer pImageOpaqueBinds(@Nullable @NativeType("VkSparseImageOpaqueMemoryBindInfo const *") VkSparseImageOpaqueMemoryBindInfo.Buffer value) { VkBindSparseInfo.npImageOpaqueBinds(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSparseImageMemoryBindInfo.Buffer} to the {@code pImageBinds} field. */
+        /** Sets the address of the specified {@link VkSparseImageMemoryBindInfo.Buffer} to the {@link VkBindSparseInfo#pImageBinds} field. */
         public VkBindSparseInfo.Buffer pImageBinds(@Nullable @NativeType("VkSparseImageMemoryBindInfo const *") VkSparseImageMemoryBindInfo.Buffer value) { VkBindSparseInfo.npImageBinds(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@code pSignalSemaphores} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@link VkBindSparseInfo#pSignalSemaphores} field. */
         public VkBindSparseInfo.Buffer pSignalSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { VkBindSparseInfo.npSignalSemaphores(address(), value); return this; }
 
     }

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void *cbopaque,
  *     char const *s
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class MallocMessageCallback extends Callback implements MallocMe
     }
 
     protected MallocMessageCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     MallocMessageCallback(long functionPointer) {

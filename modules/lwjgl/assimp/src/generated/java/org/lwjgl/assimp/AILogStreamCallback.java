@@ -15,9 +15,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     char const *message,
- *     void *user
+ *     char *user
  * )</code></pre>
  */
 public abstract class AILogStreamCallback extends Callback implements AILogStreamCallbackI {
@@ -48,7 +48,7 @@ public abstract class AILogStreamCallback extends Callback implements AILogStrea
     }
 
     protected AILogStreamCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     AILogStreamCallback(long functionPointer) {

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * int (*) (
+ * int (*{@link #invoke}) (
  *     CXClientData client_data,
  *     void *reserved
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class IndexerAbortQuery extends Callback implements IndexerAbort
     }
 
     protected IndexerAbortQuery() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     IndexerAbortQuery(long functionPointer) {

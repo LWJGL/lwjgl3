@@ -72,16 +72,16 @@ public class NkColor extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code r} field. */
+    /** @return the value of the {@code r} field. */
     @NativeType("nk_byte")
     public byte r() { return nr(address()); }
-    /** Returns the value of the {@code g} field. */
+    /** @return the value of the {@code g} field. */
     @NativeType("nk_byte")
     public byte g() { return ng(address()); }
-    /** Returns the value of the {@code b} field. */
+    /** @return the value of the {@code b} field. */
     @NativeType("nk_byte")
     public byte b() { return nb(address()); }
-    /** Returns the value of the {@code a} field. */
+    /** @return the value of the {@code a} field. */
     @NativeType("nk_byte")
     public byte a() { return na(address()); }
 
@@ -320,16 +320,16 @@ public class NkColor extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code r} field. */
+        /** @return the value of the {@code r} field. */
         @NativeType("nk_byte")
         public byte r() { return NkColor.nr(address()); }
-        /** Returns the value of the {@code g} field. */
+        /** @return the value of the {@code g} field. */
         @NativeType("nk_byte")
         public byte g() { return NkColor.ng(address()); }
-        /** Returns the value of the {@code b} field. */
+        /** @return the value of the {@code b} field. */
         @NativeType("nk_byte")
         public byte b() { return NkColor.nb(address()); }
-        /** Returns the value of the {@code a} field. */
+        /** @return the value of the {@code a} field. */
         @NativeType("nk_byte")
         public byte a() { return NkColor.na(address()); }
 

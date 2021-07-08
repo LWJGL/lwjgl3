@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWwindow *window,
  *     int focused
  * )</code></pre>
@@ -54,7 +54,7 @@ public abstract class GLFWWindowFocusCallback extends Callback implements GLFWWi
     }
 
     protected GLFWWindowFocusCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWWindowFocusCallback(long functionPointer) {

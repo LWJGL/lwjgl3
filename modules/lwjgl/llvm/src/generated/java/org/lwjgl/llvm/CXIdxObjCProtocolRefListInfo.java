@@ -62,10 +62,10 @@ public class CXIdxObjCProtocolRefListInfo extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code protocols} field. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code protocols} field. */
     @NativeType("CXIdxObjCProtocolRefInfo const * const *")
     public PointerBuffer protocols() { return nprotocols(address()); }
-    /** Returns the value of the {@code numProtocols} field. */
+    /** @return the value of the {@code numProtocols} field. */
     @NativeType("unsigned")
     public int numProtocols() { return nnumProtocols(address()); }
 
@@ -143,10 +143,10 @@ public class CXIdxObjCProtocolRefListInfo extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code protocols} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code protocols} field. */
         @NativeType("CXIdxObjCProtocolRefInfo const * const *")
         public PointerBuffer protocols() { return CXIdxObjCProtocolRefListInfo.nprotocols(address()); }
-        /** Returns the value of the {@code numProtocols} field. */
+        /** @return the value of the {@code numProtocols} field. */
         @NativeType("unsigned")
         public int numProtocols() { return CXIdxObjCProtocolRefListInfo.nnumProtocols(address()); }
 

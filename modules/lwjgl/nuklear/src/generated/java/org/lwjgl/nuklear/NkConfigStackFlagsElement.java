@@ -63,13 +63,13 @@ class NkConfigStackFlagsElement extends Struct {
     public int sizeof() { return SIZEOF; }
 
     /**
-     * Returns a {@link IntBuffer} view of the data pointed to by the {@code pValues} field.
+     * @return a {@link IntBuffer} view of the data pointed to by the {@code pValues} field.
      *
      * @param capacity the number of elements in the returned buffer
      */
     @NativeType("nk_flags *")
     public IntBuffer pValues(int capacity) { return npValues(address(), capacity); }
-    /** Returns the value of the {@code old_value} field. */
+    /** @return the value of the {@code old_value} field. */
     @NativeType("nk_flags")
     public int old_value() { return nold_value(address()); }
 
@@ -148,13 +148,13 @@ class NkConfigStackFlagsElement extends Struct {
         }
 
         /**
-         * Returns a {@link IntBuffer} view of the data pointed to by the {@code pValues} field.
+         * @return a {@link IntBuffer} view of the data pointed to by the {@code pValues} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("nk_flags *")
         public IntBuffer pValues(int capacity) { return NkConfigStackFlagsElement.npValues(address(), capacity); }
-        /** Returns the value of the {@code old_value} field. */
+        /** @return the value of the {@code old_value} field. */
         @NativeType("nk_flags")
         public int old_value() { return NkConfigStackFlagsElement.nold_value(address()); }
 

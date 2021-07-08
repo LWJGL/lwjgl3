@@ -115,46 +115,46 @@ public class SpvcMslConstexprSampler extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code coord} field. */
+    /** @return the value of the {@code coord} field. */
     @NativeType("spvc_msl_sampler_coord")
     public int coord() { return ncoord(address()); }
-    /** Returns the value of the {@code min_filter} field. */
+    /** @return the value of the {@code min_filter} field. */
     @NativeType("spvc_msl_sampler_filter")
     public int min_filter() { return nmin_filter(address()); }
-    /** Returns the value of the {@code mag_filter} field. */
+    /** @return the value of the {@code mag_filter} field. */
     @NativeType("spvc_msl_sampler_filter")
     public int mag_filter() { return nmag_filter(address()); }
-    /** Returns the value of the {@code mip_filter} field. */
+    /** @return the value of the {@code mip_filter} field. */
     @NativeType("spvc_msl_sampler_mip_filter")
     public int mip_filter() { return nmip_filter(address()); }
-    /** Returns the value of the {@code s_address} field. */
+    /** @return the value of the {@code s_address} field. */
     @NativeType("spvc_msl_sampler_address")
     public int s_address() { return ns_address(address()); }
-    /** Returns the value of the {@code t_address} field. */
+    /** @return the value of the {@code t_address} field. */
     @NativeType("spvc_msl_sampler_address")
     public int t_address() { return nt_address(address()); }
-    /** Returns the value of the {@code r_address} field. */
+    /** @return the value of the {@code r_address} field. */
     @NativeType("spvc_msl_sampler_address")
     public int r_address() { return nr_address(address()); }
-    /** Returns the value of the {@code compare_func} field. */
+    /** @return the value of the {@code compare_func} field. */
     @NativeType("spvc_msl_sampler_compare_func")
     public int compare_func() { return ncompare_func(address()); }
-    /** Returns the value of the {@code border_color} field. */
+    /** @return the value of the {@code border_color} field. */
     @NativeType("spvc_msl_sampler_border_color")
     public int border_color() { return nborder_color(address()); }
-    /** Returns the value of the {@code lod_clamp_min} field. */
+    /** @return the value of the {@code lod_clamp_min} field. */
     public float lod_clamp_min() { return nlod_clamp_min(address()); }
-    /** Returns the value of the {@code lod_clamp_max} field. */
+    /** @return the value of the {@code lod_clamp_max} field. */
     public float lod_clamp_max() { return nlod_clamp_max(address()); }
-    /** Returns the value of the {@code max_anisotropy} field. */
+    /** @return the value of the {@code max_anisotropy} field. */
     public int max_anisotropy() { return nmax_anisotropy(address()); }
-    /** Returns the value of the {@code compare_enable} field. */
+    /** @return the value of the {@code compare_enable} field. */
     @NativeType("spvc_bool")
     public boolean compare_enable() { return ncompare_enable(address()); }
-    /** Returns the value of the {@code lod_clamp_enable} field. */
+    /** @return the value of the {@code lod_clamp_enable} field. */
     @NativeType("spvc_bool")
     public boolean lod_clamp_enable() { return nlod_clamp_enable(address()); }
-    /** Returns the value of the {@code anisotropy_enable} field. */
+    /** @return the value of the {@code anisotropy_enable} field. */
     @NativeType("spvc_bool")
     public boolean anisotropy_enable() { return nanisotropy_enable(address()); }
 
@@ -481,46 +481,46 @@ public class SpvcMslConstexprSampler extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code coord} field. */
+        /** @return the value of the {@code coord} field. */
         @NativeType("spvc_msl_sampler_coord")
         public int coord() { return SpvcMslConstexprSampler.ncoord(address()); }
-        /** Returns the value of the {@code min_filter} field. */
+        /** @return the value of the {@code min_filter} field. */
         @NativeType("spvc_msl_sampler_filter")
         public int min_filter() { return SpvcMslConstexprSampler.nmin_filter(address()); }
-        /** Returns the value of the {@code mag_filter} field. */
+        /** @return the value of the {@code mag_filter} field. */
         @NativeType("spvc_msl_sampler_filter")
         public int mag_filter() { return SpvcMslConstexprSampler.nmag_filter(address()); }
-        /** Returns the value of the {@code mip_filter} field. */
+        /** @return the value of the {@code mip_filter} field. */
         @NativeType("spvc_msl_sampler_mip_filter")
         public int mip_filter() { return SpvcMslConstexprSampler.nmip_filter(address()); }
-        /** Returns the value of the {@code s_address} field. */
+        /** @return the value of the {@code s_address} field. */
         @NativeType("spvc_msl_sampler_address")
         public int s_address() { return SpvcMslConstexprSampler.ns_address(address()); }
-        /** Returns the value of the {@code t_address} field. */
+        /** @return the value of the {@code t_address} field. */
         @NativeType("spvc_msl_sampler_address")
         public int t_address() { return SpvcMslConstexprSampler.nt_address(address()); }
-        /** Returns the value of the {@code r_address} field. */
+        /** @return the value of the {@code r_address} field. */
         @NativeType("spvc_msl_sampler_address")
         public int r_address() { return SpvcMslConstexprSampler.nr_address(address()); }
-        /** Returns the value of the {@code compare_func} field. */
+        /** @return the value of the {@code compare_func} field. */
         @NativeType("spvc_msl_sampler_compare_func")
         public int compare_func() { return SpvcMslConstexprSampler.ncompare_func(address()); }
-        /** Returns the value of the {@code border_color} field. */
+        /** @return the value of the {@code border_color} field. */
         @NativeType("spvc_msl_sampler_border_color")
         public int border_color() { return SpvcMslConstexprSampler.nborder_color(address()); }
-        /** Returns the value of the {@code lod_clamp_min} field. */
+        /** @return the value of the {@code lod_clamp_min} field. */
         public float lod_clamp_min() { return SpvcMslConstexprSampler.nlod_clamp_min(address()); }
-        /** Returns the value of the {@code lod_clamp_max} field. */
+        /** @return the value of the {@code lod_clamp_max} field. */
         public float lod_clamp_max() { return SpvcMslConstexprSampler.nlod_clamp_max(address()); }
-        /** Returns the value of the {@code max_anisotropy} field. */
+        /** @return the value of the {@code max_anisotropy} field. */
         public int max_anisotropy() { return SpvcMslConstexprSampler.nmax_anisotropy(address()); }
-        /** Returns the value of the {@code compare_enable} field. */
+        /** @return the value of the {@code compare_enable} field. */
         @NativeType("spvc_bool")
         public boolean compare_enable() { return SpvcMslConstexprSampler.ncompare_enable(address()); }
-        /** Returns the value of the {@code lod_clamp_enable} field. */
+        /** @return the value of the {@code lod_clamp_enable} field. */
         @NativeType("spvc_bool")
         public boolean lod_clamp_enable() { return SpvcMslConstexprSampler.nlod_clamp_enable(address()); }
-        /** Returns the value of the {@code anisotropy_enable} field. */
+        /** @return the value of the {@code anisotropy_enable} field. */
         @NativeType("spvc_bool")
         public boolean anisotropy_enable() { return SpvcMslConstexprSampler.nanisotropy_enable(address()); }
 

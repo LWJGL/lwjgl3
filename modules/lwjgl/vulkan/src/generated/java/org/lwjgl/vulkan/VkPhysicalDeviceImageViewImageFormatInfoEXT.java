@@ -25,21 +25,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code imageViewType} <b>must</b> be a valid {@code VkImageViewType} value</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code imageViewType} &ndash; a {@code VkImageViewType} value specifying the type of the image view.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceImageViewImageFormatInfoEXT {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkImageViewType imageViewType;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkImageViewType {@link #imageViewType};
  * }</code></pre>
  */
 public class VkPhysicalDeviceImageViewImageFormatInfoEXT extends Struct implements NativeResource {
@@ -84,21 +76,21 @@ public class VkPhysicalDeviceImageViewImageFormatInfoEXT extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code imageViewType} field. */
+    /** a {@code VkImageViewType} value specifying the type of the image view. */
     @NativeType("VkImageViewType")
     public int imageViewType() { return nimageViewType(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceImageViewImageFormatInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceImageViewImageFormatInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code imageViewType} field. */
+    /** Sets the specified value to the {@link #imageViewType} field. */
     public VkPhysicalDeviceImageViewImageFormatInfoEXT imageViewType(@NativeType("VkImageViewType") int value) { nimageViewType(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,21 +313,21 @@ public class VkPhysicalDeviceImageViewImageFormatInfoEXT extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceImageViewImageFormatInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceImageViewImageFormatInfoEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceImageViewImageFormatInfoEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceImageViewImageFormatInfoEXT.npNext(address()); }
-        /** Returns the value of the {@code imageViewType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceImageViewImageFormatInfoEXT#imageViewType} field. */
         @NativeType("VkImageViewType")
         public int imageViewType() { return VkPhysicalDeviceImageViewImageFormatInfoEXT.nimageViewType(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceImageViewImageFormatInfoEXT#sType} field. */
         public VkPhysicalDeviceImageViewImageFormatInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceImageViewImageFormatInfoEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceImageViewImageFormatInfoEXT#pNext} field. */
         public VkPhysicalDeviceImageViewImageFormatInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceImageViewImageFormatInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code imageViewType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceImageViewImageFormatInfoEXT#imageViewType} field. */
         public VkPhysicalDeviceImageViewImageFormatInfoEXT.Buffer imageViewType(@NativeType("VkImageViewType") int value) { VkPhysicalDeviceImageViewImageFormatInfoEXT.nimageViewType(address(), value); return this; }
 
     }

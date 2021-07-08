@@ -33,33 +33,27 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code offset} <b>must</b> be less than the size of {@code buffer}</li>
  * <li>If {@code range} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code range} <b>must</b> be greater than 0</li>
  * <li>If {@code range} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code range} <b>must</b> be less than or equal to the size of {@code buffer} minus {@code offset}</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-nullDescriptor">nullDescriptor</a> feature is not enabled, {@code buffer} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
+ * <li>If {@code buffer} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code offset} <b>must</b> be zero and {@code range} <b>must</b> be {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
+ * <li>If {@code buffer} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
  * </ul>
  * 
  * <h5>See Also</h5>
  * 
  * <p>{@link VkWriteDescriptorSet}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code buffer} &ndash; the buffer resource.</li>
- * <li>{@code offset} &ndash; the offset in bytes from the start of {@code buffer}. Access to buffer memory via this descriptor uses addressing that is relative to this starting offset.</li>
- * <li>{@code range} &ndash; the size in bytes that is used for this descriptor update, or {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} to use the range from {@code offset} to the end of the buffer.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDescriptorBufferInfo {
- *     VkBuffer buffer;
- *     VkDeviceSize offset;
- *     VkDeviceSize range;
+ *     VkBuffer {@link #buffer};
+ *     VkDeviceSize {@link #offset};
+ *     VkDeviceSize {@link #range};
  * }</code></pre>
  */
 public class VkDescriptorBufferInfo extends Struct implements NativeResource {
@@ -104,21 +98,21 @@ public class VkDescriptorBufferInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code buffer} field. */
+    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or the buffer resource. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
-    /** Returns the value of the {@code offset} field. */
+    /** the offset in bytes from the start of {@code buffer}. Access to buffer memory via this descriptor uses addressing that is relative to this starting offset. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** Returns the value of the {@code range} field. */
+    /** the size in bytes that is used for this descriptor update, or {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} to use the range from {@code offset} to the end of the buffer. */
     @NativeType("VkDeviceSize")
     public long range() { return nrange(address()); }
 
-    /** Sets the specified value to the {@code buffer} field. */
+    /** Sets the specified value to the {@link #buffer} field. */
     public VkDescriptorBufferInfo buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@code offset} field. */
+    /** Sets the specified value to the {@link #offset} field. */
     public VkDescriptorBufferInfo offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@code range} field. */
+    /** Sets the specified value to the {@link #range} field. */
     public VkDescriptorBufferInfo range(@NativeType("VkDeviceSize") long value) { nrange(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -341,21 +335,21 @@ public class VkDescriptorBufferInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code buffer} field. */
+        /** @return the value of the {@link VkDescriptorBufferInfo#buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkDescriptorBufferInfo.nbuffer(address()); }
-        /** Returns the value of the {@code offset} field. */
+        /** @return the value of the {@link VkDescriptorBufferInfo#offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkDescriptorBufferInfo.noffset(address()); }
-        /** Returns the value of the {@code range} field. */
+        /** @return the value of the {@link VkDescriptorBufferInfo#range} field. */
         @NativeType("VkDeviceSize")
         public long range() { return VkDescriptorBufferInfo.nrange(address()); }
 
-        /** Sets the specified value to the {@code buffer} field. */
+        /** Sets the specified value to the {@link VkDescriptorBufferInfo#buffer} field. */
         public VkDescriptorBufferInfo.Buffer buffer(@NativeType("VkBuffer") long value) { VkDescriptorBufferInfo.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@code offset} field. */
+        /** Sets the specified value to the {@link VkDescriptorBufferInfo#offset} field. */
         public VkDescriptorBufferInfo.Buffer offset(@NativeType("VkDeviceSize") long value) { VkDescriptorBufferInfo.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@code range} field. */
+        /** Sets the specified value to the {@link VkDescriptorBufferInfo#range} field. */
         public VkDescriptorBufferInfo.Buffer range(@NativeType("VkDeviceSize") long value) { VkDescriptorBufferInfo.nrange(address(), value); return this; }
 
     }

@@ -49,6 +49,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class AMDDebugOutput {
 
+    static { GL.initialize(); }
+
     /** Tokens accepted by GetIntegerv. */
     public static final int
         GL_MAX_DEBUG_MESSAGE_LENGTH_AMD  = 0x9143,
@@ -71,8 +73,6 @@ public class AMDDebugOutput {
         GL_DEBUG_CATEGORY_SHADER_COMPILER_AMD    = 0x914E,
         GL_DEBUG_CATEGORY_APPLICATION_AMD        = 0x914F,
         GL_DEBUG_CATEGORY_OTHER_AMD              = 0x9150;
-
-    static { GL.initialize(); }
 
     protected AMDDebugOutput() {
         throw new UnsupportedOperationException();

@@ -51,6 +51,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTRobustness {
 
+    static { GLES.initialize(); }
+
     /** Returned by GetGraphicsResetStatusEXT. */
     public static final int
         GL_GUILTY_CONTEXT_RESET_EXT   = 0x8253,
@@ -66,8 +68,6 @@ public class EXTRobustness {
     public static final int
         GL_LOSE_CONTEXT_ON_RESET_EXT = 0x8252,
         GL_NO_RESET_NOTIFICATION_EXT = 0x8261;
-
-    static { GLES.initialize(); }
 
     protected EXTRobustness() {
         throw new UnsupportedOperationException();

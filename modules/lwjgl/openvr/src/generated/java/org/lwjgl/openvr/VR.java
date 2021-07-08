@@ -24,6 +24,33 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class VR {
 
+    private static final SharedLibrary OPENVR = Library.loadNative(VR.class, "org.lwjgl.openvr", Configuration.OPENVR_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("openvr_api")), true);
+
+    /** Contains the function pointers loaded from the openvr {@link SharedLibrary}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            InitInternal                       = apiGetFunctionAddress(OPENVR, "VR_InitInternal"),
+            ShutdownInternal                   = apiGetFunctionAddress(OPENVR, "VR_ShutdownInternal"),
+            IsHmdPresent                       = apiGetFunctionAddress(OPENVR, "VR_IsHmdPresent"),
+            GetGenericInterface                = apiGetFunctionAddress(OPENVR, "VR_GetGenericInterface"),
+            IsRuntimeInstalled                 = apiGetFunctionAddress(OPENVR, "VR_IsRuntimeInstalled"),
+            RuntimePath                        = apiGetFunctionAddress(OPENVR, "VR_RuntimePath"),
+            IsInterfaceVersionValid            = apiGetFunctionAddress(OPENVR, "VR_IsInterfaceVersionValid"),
+            GetInitToken                       = apiGetFunctionAddress(OPENVR, "VR_GetInitToken"),
+            GetVRInitErrorAsSymbol             = apiGetFunctionAddress(OPENVR, "VR_GetVRInitErrorAsSymbol"),
+            GetVRInitErrorAsEnglishDescription = apiGetFunctionAddress(OPENVR, "VR_GetVRInitErrorAsEnglishDescription");
+
+    }
+
+    /** Returns the openvr {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return OPENVR;
+    }
+
     /** OpenVR version. */
     public static final int
         k_nSteamVRVersionMajor = 1,
@@ -3243,33 +3270,6 @@ public class VR {
 
     protected VR() {
         throw new UnsupportedOperationException();
-    }
-
-    private static final SharedLibrary OPENVR = Library.loadNative(VR.class, "org.lwjgl.openvr", Configuration.OPENVR_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("openvr_api")), true);
-
-    /** Contains the function pointers loaded from the openvr {@link SharedLibrary}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            InitInternal                       = apiGetFunctionAddress(OPENVR, "VR_InitInternal"),
-            ShutdownInternal                   = apiGetFunctionAddress(OPENVR, "VR_ShutdownInternal"),
-            IsHmdPresent                       = apiGetFunctionAddress(OPENVR, "VR_IsHmdPresent"),
-            GetGenericInterface                = apiGetFunctionAddress(OPENVR, "VR_GetGenericInterface"),
-            IsRuntimeInstalled                 = apiGetFunctionAddress(OPENVR, "VR_IsRuntimeInstalled"),
-            RuntimePath                        = apiGetFunctionAddress(OPENVR, "VR_RuntimePath"),
-            IsInterfaceVersionValid            = apiGetFunctionAddress(OPENVR, "VR_IsInterfaceVersionValid"),
-            GetInitToken                       = apiGetFunctionAddress(OPENVR, "VR_GetInitToken"),
-            GetVRInitErrorAsSymbol             = apiGetFunctionAddress(OPENVR, "VR_GetVRInitErrorAsSymbol"),
-            GetVRInitErrorAsEnglishDescription = apiGetFunctionAddress(OPENVR, "VR_GetVRInitErrorAsEnglishDescription");
-
-    }
-
-    /** Returns the openvr {@link SharedLibrary}. */
-    public static SharedLibrary getLibrary() {
-        return OPENVR;
     }
 
     // --- [ VR_InitInternal ] ---

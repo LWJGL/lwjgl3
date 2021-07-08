@@ -26,19 +26,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VkClearAttachment}, {@link VkClearColorValue}, {@link VkClearDepthStencilValue}, {@link VkRenderPassBeginInfo}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code color} &ndash; specifies the color image clear values to use when clearing a color image or attachment.</li>
- * <li>{@code depthStencil} &ndash; specifies the depth and stencil clear values to use when clearing a depth/stencil image or attachment.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * union VkClearValue {
- *     {@link VkClearColorValue VkClearColorValue} color;
- *     {@link VkClearDepthStencilValue VkClearDepthStencilValue} depthStencil;
+ *     {@link VkClearColorValue VkClearColorValue} {@link #color};
+ *     {@link VkClearDepthStencilValue VkClearDepthStencilValue} {@link #depthStencil};
  * }</code></pre>
  */
 public class VkClearValue extends Struct implements NativeResource {
@@ -80,18 +73,18 @@ public class VkClearValue extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link VkClearColorValue} view of the {@code color} field. */
+    /** specifies the color image clear values to use when clearing a color image or attachment. */
     public VkClearColorValue color() { return ncolor(address()); }
-    /** Returns a {@link VkClearDepthStencilValue} view of the {@code depthStencil} field. */
+    /** specifies the depth and stencil clear values to use when clearing a depth/stencil image or attachment. */
     public VkClearDepthStencilValue depthStencil() { return ndepthStencil(address()); }
 
-    /** Copies the specified {@link VkClearColorValue} to the {@code color} field. */
+    /** Copies the specified {@link VkClearColorValue} to the {@link #color} field. */
     public VkClearValue color(VkClearColorValue value) { ncolor(address(), value); return this; }
-    /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #color} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkClearValue color(java.util.function.Consumer<VkClearColorValue> consumer) { consumer.accept(color()); return this; }
-    /** Copies the specified {@link VkClearDepthStencilValue} to the {@code depthStencil} field. */
+    /** Copies the specified {@link VkClearDepthStencilValue} to the {@link #depthStencil} field. */
     public VkClearValue depthStencil(VkClearDepthStencilValue value) { ndepthStencil(address(), value); return this; }
-    /** Passes the {@code depthStencil} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #depthStencil} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkClearValue depthStencil(java.util.function.Consumer<VkClearDepthStencilValue> consumer) { consumer.accept(depthStencil()); return this; }
 
     /**
@@ -297,18 +290,18 @@ public class VkClearValue extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link VkClearColorValue} view of the {@code color} field. */
+        /** @return a {@link VkClearColorValue} view of the {@link VkClearValue#color} field. */
         public VkClearColorValue color() { return VkClearValue.ncolor(address()); }
-        /** Returns a {@link VkClearDepthStencilValue} view of the {@code depthStencil} field. */
+        /** @return a {@link VkClearDepthStencilValue} view of the {@link VkClearValue#depthStencil} field. */
         public VkClearDepthStencilValue depthStencil() { return VkClearValue.ndepthStencil(address()); }
 
-        /** Copies the specified {@link VkClearColorValue} to the {@code color} field. */
+        /** Copies the specified {@link VkClearColorValue} to the {@link VkClearValue#color} field. */
         public VkClearValue.Buffer color(VkClearColorValue value) { VkClearValue.ncolor(address(), value); return this; }
-        /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkClearValue#color} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkClearValue.Buffer color(java.util.function.Consumer<VkClearColorValue> consumer) { consumer.accept(color()); return this; }
-        /** Copies the specified {@link VkClearDepthStencilValue} to the {@code depthStencil} field. */
+        /** Copies the specified {@link VkClearDepthStencilValue} to the {@link VkClearValue#depthStencil} field. */
         public VkClearValue.Buffer depthStencil(VkClearDepthStencilValue value) { VkClearValue.ndepthStencil(address(), value); return this; }
-        /** Passes the {@code depthStencil} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link VkClearValue#depthStencil} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkClearValue.Buffer depthStencil(java.util.function.Consumer<VkClearDepthStencilValue> consumer) { consumer.accept(depthStencil()); return this; }
 
     }

@@ -68,13 +68,13 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code session} field. */
+    /** @return the value of the {@code session} field. */
     @NativeType("XrSession")
     public long session() { return nsession(address()); }
 
@@ -326,13 +326,13 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataInteractionProfileChanged.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataInteractionProfileChanged.nnext(address()); }
-        /** Returns the value of the {@code session} field. */
+        /** @return the value of the {@code session} field. */
         @NativeType("XrSession")
         public long session() { return XrEventDataInteractionProfileChanged.nsession(address()); }
 

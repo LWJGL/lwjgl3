@@ -11,12 +11,12 @@ import vulkan.*
 val KHR_shader_float_controls = "KHRShaderFloatControls".nativeClassVK("KHR_shader_float_controls", type = "device", postfix = KHR) {
     documentation =
         """
-        <h5>Description</h5>
         The {@code VK_KHR_shader_float_controls} extension enables efficient use of floating-point computations through the ability to query and override the implementation's default behavior for rounding modes, denormals, signed zero, and infinity.
 
         <h5>Promotion to Vulkan 1.2</h5>
         All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
 
+        <h5>VK_KHR_shader_float_controls</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_KHR_shader_float_controls}</dd>
@@ -45,22 +45,21 @@ val KHR_shader_float_controls = "KHRShaderFloatControls".nativeClassVK("KHR_shad
             <dd><ul>
                 <li>Alexander Galazin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_float_controls:%20&amp;body=@alegal-arm%20">alegal-arm</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-09-11</dd>
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
                 <li>Promoted to Vulkan 1.2 Core</li>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_float_controls.html">{@code SPV_KHR_float_controls}</a></li>
             </ul></dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
-
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_float_controls.html">{@code SPV_KHR_float_controls}</a></li>
-            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>

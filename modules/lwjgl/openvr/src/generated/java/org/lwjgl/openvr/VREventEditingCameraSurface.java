@@ -62,10 +62,10 @@ public class VREventEditingCameraSurface extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code overlayHandle} field. */
+    /** @return the value of the {@code overlayHandle} field. */
     @NativeType("uint64_t")
     public long overlayHandle() { return noverlayHandle(address()); }
-    /** Returns the value of the {@code nVisualMode} field. */
+    /** @return the value of the {@code nVisualMode} field. */
     @NativeType("uint32_t")
     public int nVisualMode() { return nnVisualMode(address()); }
 
@@ -143,10 +143,10 @@ public class VREventEditingCameraSurface extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code overlayHandle} field. */
+        /** @return the value of the {@code overlayHandle} field. */
         @NativeType("uint64_t")
         public long overlayHandle() { return VREventEditingCameraSurface.noverlayHandle(address()); }
-        /** Returns the value of the {@code nVisualMode} field. */
+        /** @return the value of the {@code nVisualMode} field. */
         @NativeType("uint32_t")
         public int nVisualMode() { return VREventEditingCameraSurface.nnVisualMode(address()); }
 

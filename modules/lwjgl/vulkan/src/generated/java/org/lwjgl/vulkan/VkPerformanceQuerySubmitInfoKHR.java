@@ -34,21 +34,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_QUERY_SUBMIT_INFO_KHR STRUCTURE_TYPE_PERFORMANCE_QUERY_SUBMIT_INFO_KHR}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code counterPassIndex} &ndash; specifies which counter pass index is active.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPerformanceQuerySubmitInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     uint32_t counterPassIndex;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     uint32_t {@link #counterPassIndex};
  * }</code></pre>
  */
 public class VkPerformanceQuerySubmitInfoKHR extends Struct implements NativeResource {
@@ -93,21 +85,21 @@ public class VkPerformanceQuerySubmitInfoKHR extends Struct implements NativeRes
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code counterPassIndex} field. */
+    /** specifies which counter pass index is active. */
     @NativeType("uint32_t")
     public int counterPassIndex() { return ncounterPassIndex(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPerformanceQuerySubmitInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPerformanceQuerySubmitInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code counterPassIndex} field. */
+    /** Sets the specified value to the {@link #counterPassIndex} field. */
     public VkPerformanceQuerySubmitInfoKHR counterPassIndex(@NativeType("uint32_t") int value) { ncounterPassIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -330,21 +322,21 @@ public class VkPerformanceQuerySubmitInfoKHR extends Struct implements NativeRes
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPerformanceQuerySubmitInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPerformanceQuerySubmitInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPerformanceQuerySubmitInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPerformanceQuerySubmitInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code counterPassIndex} field. */
+        /** @return the value of the {@link VkPerformanceQuerySubmitInfoKHR#counterPassIndex} field. */
         @NativeType("uint32_t")
         public int counterPassIndex() { return VkPerformanceQuerySubmitInfoKHR.ncounterPassIndex(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPerformanceQuerySubmitInfoKHR#sType} field. */
         public VkPerformanceQuerySubmitInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPerformanceQuerySubmitInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPerformanceQuerySubmitInfoKHR#pNext} field. */
         public VkPerformanceQuerySubmitInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkPerformanceQuerySubmitInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code counterPassIndex} field. */
+        /** Sets the specified value to the {@link VkPerformanceQuerySubmitInfoKHR#counterPassIndex} field. */
         public VkPerformanceQuerySubmitInfoKHR.Buffer counterPassIndex(@NativeType("uint32_t") int value) { VkPerformanceQuerySubmitInfoKHR.ncounterPassIndex(address(), value); return this; }
 
     }

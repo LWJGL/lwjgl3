@@ -29,7 +29,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>Note that using a {@code maxLod} of zero would cause <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-texel-filtering">magnification</a> to always be performed, and the {@code magFilter} to always be used. This is valid, just not an exact match for OpenGL behavior. Clamping the maximum LOD to 0.25 allows the <code>λ</code> value to be non-zero and minification to be performed, while still always rounding down to the base level. If the {@code minFilter} and {@code magFilter} are equal, then using a {@code maxLod} of zero also works.</p>
  * </div>
  * 
- * <p>The maximum number of sampler objects which <b>can</b> be simultaneously created on a device is implementation-dependent and specified by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxSamplerAllocationCount">maxSamplerAllocationCount</a> member of the {@link VkPhysicalDeviceLimits} structure. If {@code maxSamplerAllocationCount} is exceeded, {@code vkCreateSampler} will return {@link VK10#VK_ERROR_TOO_MANY_OBJECTS ERROR_TOO_MANY_OBJECTS}.</p>
+ * <p>The maximum number of sampler objects which <b>can</b> be simultaneously created on a device is implementation-dependent and specified by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxSamplerAllocationCount">maxSamplerAllocationCount</a> member of the {@link VkPhysicalDeviceLimits} structure.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>For historical reasons, if {@code maxSamplerAllocationCount} is exceeded, some implementations may return {@link VK10#VK_ERROR_TOO_MANY_OBJECTS ERROR_TOO_MANY_OBJECTS}. Exceeding this limit will result in undefined behavior, and an application should not rely on the use of the returned error code in order to identify when the limit is reached.</p>
+ * </div>
  * 
  * <p>Since {@code VkSampler} is a non-dispatchable handle type, implementations <b>may</b> return the same handle for sampler state vectors that are identical. In such cases, all such objects would only count once against the {@code maxSamplerAllocationCount} limit.</p>
  * 
@@ -40,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code maxLod} <b>must</b> be greater than or equal to {@code minLod}</li>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-samplerAnisotropy">anisotropic sampling</a> feature is not enabled, {@code anisotropyEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>If {@code anisotropyEnable} is {@link VK10#VK_TRUE TRUE}, {@code maxAnisotropy} <b>must</b> be between {@code 1.0} and {@link VkPhysicalDeviceLimits}{@code ::maxSamplerAnisotropy}, inclusive</li>
- * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled and {@link VK11#VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT} is not set for the format, {@code minFilter} and {@code magFilter} <b>must</b> be equal to the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion&#8217;s {@code chromaFilter}</li>
+ * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled and the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#potential-format-features">potential format features</a> of the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion do not support {@link VK11#VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT}, {@code minFilter} and {@code magFilter} <b>must</b> be equal to the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion&#8217;s {@code chromaFilter}</li>
  * <li>If {@code unnormalizedCoordinates} is {@link VK10#VK_TRUE TRUE}, {@code minFilter} and {@code magFilter} <b>must</b> be equal</li>
  * <li>If {@code unnormalizedCoordinates} is {@link VK10#VK_TRUE TRUE}, {@code mipmapMode} <b>must</b> be {@link VK10#VK_SAMPLER_MIPMAP_MODE_NEAREST SAMPLER_MIPMAP_MODE_NEAREST}</li>
  * <li>If {@code unnormalizedCoordinates} is {@link VK10#VK_TRUE TRUE}, {@code minLod} and {@code maxLod} <b>must</b> be zero</li>
@@ -50,25 +55,29 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If any of {@code addressModeU}, {@code addressModeV} or {@code addressModeW} are {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER}, {@code borderColor} <b>must</b> be a valid {@code VkBorderColor} value</li>
  * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled, {@code addressModeU}, {@code addressModeV}, and {@code addressModeW} <b>must</b> be {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE}, {@code anisotropyEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}, and {@code unnormalizedCoordinates} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>The sampler reduction mode <b>must</b> be set to {@link VK12#VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE} if <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> is enabled</li>
- * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-samplerMirrorClampToEdge">samplerMirrorClampToEdge</a> is not enabled, and if the {@link KHRSamplerMirrorClampToEdge VK_KHR_sampler_mirror_clamp_to_edge} extension is not enabled, {@code addressModeU}, {@code addressModeV} and {@code addressModeW} <b>must</b> not be {@link VK12#VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE}</li>
+ * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-samplerMirrorClampToEdge">samplerMirrorClampToEdge</a> is not enabled, and if the {@code VK_KHR_sampler_mirror_clamp_to_edge.html[VK_KHR_sampler_mirror_clamp_to_edge]} extension is not enabled, {@code addressModeU}, {@code addressModeV} and {@code addressModeW} <b>must</b> not be {@link VK12#VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE}</li>
  * <li>If {@code compareEnable} is {@link VK10#VK_TRUE TRUE}, {@code compareOp} <b>must</b> be a valid {@code VkCompareOp} value</li>
  * <li>If either {@code magFilter} or {@code minFilter} is {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT}, {@code anisotropyEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>If {@code compareEnable} is {@link VK10#VK_TRUE TRUE}, the {@code reductionMode} member of {@link VkSamplerReductionModeCreateInfo} <b>must</b> be {@link VK12#VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE}</li>
- * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code minFilter} and {@code magFilter} <b>must</b> be equal.</li>
- * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code mipmapMode} <b>must</b> be {@link VK10#VK_SAMPLER_MIPMAP_MODE_NEAREST SAMPLER_MIPMAP_MODE_NEAREST}.</li>
- * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code minLod} and {@code maxLod} <b>must</b> be zero.</li>
- * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code addressModeU} and {@code addressModeV} <b>must</b> each be either {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE} or {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER}.</li>
- * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code anisotropyEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}.</li>
- * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code compareEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}.</li>
- * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code unnormalizedCoordinates} <b>must</b> be {@link VK10#VK_FALSE FALSE}.</li>
+ * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code minFilter} and {@code magFilter} <b>must</b> be equal</li>
+ * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code mipmapMode} <b>must</b> be {@link VK10#VK_SAMPLER_MIPMAP_MODE_NEAREST SAMPLER_MIPMAP_MODE_NEAREST}</li>
+ * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code minLod} and {@code maxLod} <b>must</b> be zero</li>
+ * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code addressModeU} and {@code addressModeV} <b>must</b> each be either {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE} or {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER}</li>
+ * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code anisotropyEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code compareEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If {@code flags} includes {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT}, then {@code unnormalizedCoordinates} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If {@code borderColor} is one of {@link EXTCustomBorderColor#VK_BORDER_COLOR_FLOAT_CUSTOM_EXT BORDER_COLOR_FLOAT_CUSTOM_EXT} or {@link EXTCustomBorderColor#VK_BORDER_COLOR_INT_CUSTOM_EXT BORDER_COLOR_INT_CUSTOM_EXT}, then a {@link VkSamplerCustomBorderColorCreateInfoEXT} <b>must</b> be present in the {@code pNext} chain</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-customBorderColors">{@code customBorderColors}</a> feature is not enabled, {@code borderColor} <b>must</b> not be {@link EXTCustomBorderColor#VK_BORDER_COLOR_FLOAT_CUSTOM_EXT BORDER_COLOR_FLOAT_CUSTOM_EXT} or {@link EXTCustomBorderColor#VK_BORDER_COLOR_INT_CUSTOM_EXT BORDER_COLOR_INT_CUSTOM_EXT}</li>
+ * <li>If {@code borderColor} is one of {@link EXTCustomBorderColor#VK_BORDER_COLOR_FLOAT_CUSTOM_EXT BORDER_COLOR_FLOAT_CUSTOM_EXT} or {@link EXTCustomBorderColor#VK_BORDER_COLOR_INT_CUSTOM_EXT BORDER_COLOR_INT_CUSTOM_EXT}, and {@link VkSamplerCustomBorderColorCreateInfoEXT}{@code ::format} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, {@link VkSamplerCustomBorderColorCreateInfoEXT}{@code ::customBorderColor} <b>must</b> be within the range of values representable in {@code format}.</li>
+ * <li>The maximum number of samplers with custom border colors which <b>can</b> be simultaneously created on a device is implementation-dependent and specified by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxCustomBorderColorSamplers">maxCustomBorderColorSamplers</a> member of the {@link VkPhysicalDeviceCustomBorderColorPropertiesEXT} structure</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO STRUCTURE_TYPE_SAMPLER_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkSamplerReductionModeCreateInfo} or {@link VkSamplerYcbcrConversionInfo}</li>
- * <li>Each {@code sType} member in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkSamplerCustomBorderColorCreateInfoEXT}, {@link VkSamplerReductionModeCreateInfo}, or {@link VkSamplerYcbcrConversionInfo}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkSamplerCreateFlagBits} values</li>
  * <li>{@code magFilter} <b>must</b> be a valid {@code VkFilter} value</li>
  * <li>{@code minFilter} <b>must</b> be a valid {@code VkFilter} value</li>
@@ -82,69 +91,28 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK10#vkCreateSampler CreateSampler}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkSamplerCreateFlagBits} describing additional parameters of the sampler.</li>
- * <li>{@code magFilter} &ndash; a {@code VkFilter} value specifying the magnification filter to apply to lookups.</li>
- * <li>{@code minFilter} &ndash; a {@code VkFilter} value specifying the minification filter to apply to lookups.</li>
- * <li>{@code mipmapMode} &ndash; a {@code VkSamplerMipmapMode} value specifying the mipmap filter to apply to lookups.</li>
- * <li>{@code addressModeU} &ndash; a {@code VkSamplerAddressMode} value specifying the addressing mode for outside [0..1] range for U coordinate.</li>
- * <li>{@code addressModeV} &ndash; a {@code VkSamplerAddressMode} value specifying the addressing mode for outside [0..1] range for V coordinate.</li>
- * <li>{@code addressModeW} &ndash; a {@code VkSamplerAddressMode} value specifying the addressing mode for outside [0..1] range for W coordinate.</li>
- * <li>{@code mipLodBias} &ndash; the bias to be added to mipmap LOD (level-of-detail) calculation and bias provided by image sampling functions in SPIR-V, as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-level-of-detail-operation">Level-of-Detail Operation</a> section.</li>
- * <li>{@code anisotropyEnable} &ndash; {@link VK10#VK_TRUE TRUE} to enable anisotropic filtering, as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-texel-anisotropic-filtering">Texel Anisotropic Filtering</a> section, or {@link VK10#VK_FALSE FALSE} otherwise.</li>
- * <li>{@code maxAnisotropy} &ndash; the anisotropy value clamp used by the sampler when {@code anisotropyEnable} is {@link VK10#VK_TRUE TRUE}. If {@code anisotropyEnable} is {@link VK10#VK_FALSE FALSE}, {@code maxAnisotropy} is ignored.</li>
- * <li>{@code compareEnable} &ndash; {@link VK10#VK_TRUE TRUE} to enable comparison against a reference value during lookups, or {@link VK10#VK_FALSE FALSE} otherwise.
- * 
- * <ul>
- * <li>Note: Some implementations will default to shader state if this member does not match.</li>
- * </ul></li>
- * <li>{@code compareOp} &ndash; a {@code VkCompareOp} value specifying the comparison function to apply to fetched data before filtering as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-depth-compare-operation">Depth Compare Operation</a> section.</li>
- * <li>{@code minLod} &ndash; {@code minLod} and {@code maxLod} are the values used to clamp the computed LOD value, as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-level-of-detail-operation">Level-of-Detail Operation</a> section.</li>
- * <li>{@code maxLod} &ndash; see {@code minLod}</li>
- * <li>{@code borderColor} &ndash; a {@code VkBorderColor} value specifying the predefined border color to use.</li>
- * <li>{@code unnormalizedCoordinates} &ndash; controls whether to use unnormalized or normalized texel coordinates to address texels of the image. When set to {@link VK10#VK_TRUE TRUE}, the range of the image coordinates used to lookup the texel is in the range of zero to the image dimensions for x, y and z. When set to {@link VK10#VK_FALSE FALSE} the range of image coordinates is zero to one.
- * 
- * <p>When {@code unnormalizedCoordinates} is {@link VK10#VK_TRUE TRUE}, images the sampler is used with in the shader have the following requirements:</p>
- * 
- * <ul>
- * <li>The {@code viewType} <b>must</b> be either {@link VK10#VK_IMAGE_VIEW_TYPE_1D IMAGE_VIEW_TYPE_1D} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D}.</li>
- * <li>The image view <b>must</b> have a single layer and a single mip level.</li>
- * </ul>
- * 
- * <p>When {@code unnormalizedCoordinates} is {@link VK10#VK_TRUE TRUE}, image built-in functions in the shader that use the sampler have the following requirements:</p>
- * 
- * <ul>
- * <li>The functions <b>must</b> not use projection.</li>
- * <li>The functions <b>must</b> not use offsets.</li>
- * </ul></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSamplerCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkSamplerCreateFlags flags;
- *     VkFilter magFilter;
- *     VkFilter minFilter;
- *     VkSamplerMipmapMode mipmapMode;
- *     VkSamplerAddressMode addressModeU;
- *     VkSamplerAddressMode addressModeV;
- *     VkSamplerAddressMode addressModeW;
- *     float mipLodBias;
- *     VkBool32 anisotropyEnable;
- *     float maxAnisotropy;
- *     VkBool32 compareEnable;
- *     VkCompareOp compareOp;
- *     float minLod;
- *     float maxLod;
- *     VkBorderColor borderColor;
- *     VkBool32 unnormalizedCoordinates;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkSamplerCreateFlags {@link #flags};
+ *     VkFilter {@link #magFilter};
+ *     VkFilter {@link #minFilter};
+ *     VkSamplerMipmapMode {@link #mipmapMode};
+ *     VkSamplerAddressMode {@link #addressModeU};
+ *     VkSamplerAddressMode {@link #addressModeV};
+ *     VkSamplerAddressMode {@link #addressModeW};
+ *     float {@link #mipLodBias};
+ *     VkBool32 {@link #anisotropyEnable};
+ *     float {@link #maxAnisotropy};
+ *     VkBool32 {@link #compareEnable};
+ *     VkCompareOp {@link #compareOp};
+ *     float {@link #minLod};
+ *     float {@link #maxLod};
+ *     VkBorderColor {@link #borderColor};
+ *     VkBool32 {@link #unnormalizedCoordinates};
  * }</code></pre>
  */
 public class VkSamplerCreateInfo extends Struct implements NativeResource {
@@ -234,92 +202,114 @@ public class VkSamplerCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkSamplerCreateFlagBits} describing additional parameters of the sampler. */
     @NativeType("VkSamplerCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code magFilter} field. */
+    /** a {@code VkFilter} value specifying the magnification filter to apply to lookups. */
     @NativeType("VkFilter")
     public int magFilter() { return nmagFilter(address()); }
-    /** Returns the value of the {@code minFilter} field. */
+    /** a {@code VkFilter} value specifying the minification filter to apply to lookups. */
     @NativeType("VkFilter")
     public int minFilter() { return nminFilter(address()); }
-    /** Returns the value of the {@code mipmapMode} field. */
+    /** a {@code VkSamplerMipmapMode} value specifying the mipmap filter to apply to lookups. */
     @NativeType("VkSamplerMipmapMode")
     public int mipmapMode() { return nmipmapMode(address()); }
-    /** Returns the value of the {@code addressModeU} field. */
+    /** a {@code VkSamplerAddressMode} value specifying the addressing mode for outside [0..1] range for U coordinate. */
     @NativeType("VkSamplerAddressMode")
     public int addressModeU() { return naddressModeU(address()); }
-    /** Returns the value of the {@code addressModeV} field. */
+    /** a {@code VkSamplerAddressMode} value specifying the addressing mode for outside [0..1] range for V coordinate. */
     @NativeType("VkSamplerAddressMode")
     public int addressModeV() { return naddressModeV(address()); }
-    /** Returns the value of the {@code addressModeW} field. */
+    /** a {@code VkSamplerAddressMode} value specifying the addressing mode for outside [0..1] range for W coordinate. */
     @NativeType("VkSamplerAddressMode")
     public int addressModeW() { return naddressModeW(address()); }
-    /** Returns the value of the {@code mipLodBias} field. */
+    /** the bias to be added to mipmap LOD (level-of-detail) calculation and bias provided by image sampling functions in SPIR-V, as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-level-of-detail-operation">Level-of-Detail Operation</a> section. */
     public float mipLodBias() { return nmipLodBias(address()); }
-    /** Returns the value of the {@code anisotropyEnable} field. */
+    /** {@link VK10#VK_TRUE TRUE} to enable anisotropic filtering, as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-texel-anisotropic-filtering">Texel Anisotropic Filtering</a> section, or {@link VK10#VK_FALSE FALSE} otherwise. */
     @NativeType("VkBool32")
     public boolean anisotropyEnable() { return nanisotropyEnable(address()) != 0; }
-    /** Returns the value of the {@code maxAnisotropy} field. */
+    /** the anisotropy value clamp used by the sampler when {@code anisotropyEnable} is {@link VK10#VK_TRUE TRUE}. If {@code anisotropyEnable} is {@link VK10#VK_FALSE FALSE}, {@code maxAnisotropy} is ignored. */
     public float maxAnisotropy() { return nmaxAnisotropy(address()); }
-    /** Returns the value of the {@code compareEnable} field. */
+    /**
+     * {@link VK10#VK_TRUE TRUE} to enable comparison against a reference value during lookups, or {@link VK10#VK_FALSE FALSE} otherwise.
+     * 
+     * <ul>
+     * <li>Note: Some implementations will default to shader state if this member does not match.</li>
+     * </ul>
+     */
     @NativeType("VkBool32")
     public boolean compareEnable() { return ncompareEnable(address()) != 0; }
-    /** Returns the value of the {@code compareOp} field. */
+    /** a {@code VkCompareOp} value specifying the comparison function to apply to fetched data before filtering as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-depth-compare-operation">Depth Compare Operation</a> section. */
     @NativeType("VkCompareOp")
     public int compareOp() { return ncompareOp(address()); }
-    /** Returns the value of the {@code minLod} field. */
+    /** used to clamp the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-level-of-detail-operation">minimum of the computed LOD value</a>. */
     public float minLod() { return nminLod(address()); }
-    /** Returns the value of the {@code maxLod} field. */
+    /** used to clamp the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-level-of-detail-operation">maximum of the computed LOD value</a>. To avoid clamping the maximum value, set {@code maxLod} to the constant {@link VK10#VK_LOD_CLAMP_NONE LOD_CLAMP_NONE}. */
     public float maxLod() { return nmaxLod(address()); }
-    /** Returns the value of the {@code borderColor} field. */
+    /** a {@code VkBorderColor} value specifying the predefined border color to use. */
     @NativeType("VkBorderColor")
     public int borderColor() { return nborderColor(address()); }
-    /** Returns the value of the {@code unnormalizedCoordinates} field. */
+    /**
+     * controls whether to use unnormalized or normalized texel coordinates to address texels of the image. When set to {@link VK10#VK_TRUE TRUE}, the range of the image coordinates used to lookup the texel is in the range of zero to the image dimensions for x, y and z. When set to {@link VK10#VK_FALSE FALSE} the range of image coordinates is zero to one.
+     * 
+     * <p>When {@code unnormalizedCoordinates} is {@link VK10#VK_TRUE TRUE}, images the sampler is used with in the shader have the following requirements:</p>
+     * 
+     * <ul>
+     * <li>The {@code viewType} <b>must</b> be either {@link VK10#VK_IMAGE_VIEW_TYPE_1D IMAGE_VIEW_TYPE_1D} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D}.</li>
+     * <li>The image view <b>must</b> have a single layer and a single mip level.</li>
+     * </ul>
+     * 
+     * <p>When {@code unnormalizedCoordinates} is {@link VK10#VK_TRUE TRUE}, image built-in functions in the shader that use the sampler have the following requirements:</p>
+     * 
+     * <ul>
+     * <li>The functions <b>must</b> not use projection.</li>
+     * <li>The functions <b>must</b> not use offsets.</li>
+     * </ul>
+     */
     @NativeType("VkBool32")
     public boolean unnormalizedCoordinates() { return nunnormalizedCoordinates(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkSamplerCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkSamplerCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkSamplerCreateInfo flags(@NativeType("VkSamplerCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code magFilter} field. */
+    /** Sets the specified value to the {@link #magFilter} field. */
     public VkSamplerCreateInfo magFilter(@NativeType("VkFilter") int value) { nmagFilter(address(), value); return this; }
-    /** Sets the specified value to the {@code minFilter} field. */
+    /** Sets the specified value to the {@link #minFilter} field. */
     public VkSamplerCreateInfo minFilter(@NativeType("VkFilter") int value) { nminFilter(address(), value); return this; }
-    /** Sets the specified value to the {@code mipmapMode} field. */
+    /** Sets the specified value to the {@link #mipmapMode} field. */
     public VkSamplerCreateInfo mipmapMode(@NativeType("VkSamplerMipmapMode") int value) { nmipmapMode(address(), value); return this; }
-    /** Sets the specified value to the {@code addressModeU} field. */
+    /** Sets the specified value to the {@link #addressModeU} field. */
     public VkSamplerCreateInfo addressModeU(@NativeType("VkSamplerAddressMode") int value) { naddressModeU(address(), value); return this; }
-    /** Sets the specified value to the {@code addressModeV} field. */
+    /** Sets the specified value to the {@link #addressModeV} field. */
     public VkSamplerCreateInfo addressModeV(@NativeType("VkSamplerAddressMode") int value) { naddressModeV(address(), value); return this; }
-    /** Sets the specified value to the {@code addressModeW} field. */
+    /** Sets the specified value to the {@link #addressModeW} field. */
     public VkSamplerCreateInfo addressModeW(@NativeType("VkSamplerAddressMode") int value) { naddressModeW(address(), value); return this; }
-    /** Sets the specified value to the {@code mipLodBias} field. */
+    /** Sets the specified value to the {@link #mipLodBias} field. */
     public VkSamplerCreateInfo mipLodBias(float value) { nmipLodBias(address(), value); return this; }
-    /** Sets the specified value to the {@code anisotropyEnable} field. */
+    /** Sets the specified value to the {@link #anisotropyEnable} field. */
     public VkSamplerCreateInfo anisotropyEnable(@NativeType("VkBool32") boolean value) { nanisotropyEnable(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code maxAnisotropy} field. */
+    /** Sets the specified value to the {@link #maxAnisotropy} field. */
     public VkSamplerCreateInfo maxAnisotropy(float value) { nmaxAnisotropy(address(), value); return this; }
-    /** Sets the specified value to the {@code compareEnable} field. */
+    /** Sets the specified value to the {@link #compareEnable} field. */
     public VkSamplerCreateInfo compareEnable(@NativeType("VkBool32") boolean value) { ncompareEnable(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code compareOp} field. */
+    /** Sets the specified value to the {@link #compareOp} field. */
     public VkSamplerCreateInfo compareOp(@NativeType("VkCompareOp") int value) { ncompareOp(address(), value); return this; }
-    /** Sets the specified value to the {@code minLod} field. */
+    /** Sets the specified value to the {@link #minLod} field. */
     public VkSamplerCreateInfo minLod(float value) { nminLod(address(), value); return this; }
-    /** Sets the specified value to the {@code maxLod} field. */
+    /** Sets the specified value to the {@link #maxLod} field. */
     public VkSamplerCreateInfo maxLod(float value) { nmaxLod(address(), value); return this; }
-    /** Sets the specified value to the {@code borderColor} field. */
+    /** Sets the specified value to the {@link #borderColor} field. */
     public VkSamplerCreateInfo borderColor(@NativeType("VkBorderColor") int value) { nborderColor(address(), value); return this; }
-    /** Sets the specified value to the {@code unnormalizedCoordinates} field. */
+    /** Sets the specified value to the {@link #unnormalizedCoordinates} field. */
     public VkSamplerCreateInfo unnormalizedCoordinates(@NativeType("VkBool32") boolean value) { nunnormalizedCoordinates(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -632,92 +622,92 @@ public class VkSamplerCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSamplerCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSamplerCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#flags} field. */
         @NativeType("VkSamplerCreateFlags")
         public int flags() { return VkSamplerCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code magFilter} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#magFilter} field. */
         @NativeType("VkFilter")
         public int magFilter() { return VkSamplerCreateInfo.nmagFilter(address()); }
-        /** Returns the value of the {@code minFilter} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#minFilter} field. */
         @NativeType("VkFilter")
         public int minFilter() { return VkSamplerCreateInfo.nminFilter(address()); }
-        /** Returns the value of the {@code mipmapMode} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#mipmapMode} field. */
         @NativeType("VkSamplerMipmapMode")
         public int mipmapMode() { return VkSamplerCreateInfo.nmipmapMode(address()); }
-        /** Returns the value of the {@code addressModeU} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#addressModeU} field. */
         @NativeType("VkSamplerAddressMode")
         public int addressModeU() { return VkSamplerCreateInfo.naddressModeU(address()); }
-        /** Returns the value of the {@code addressModeV} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#addressModeV} field. */
         @NativeType("VkSamplerAddressMode")
         public int addressModeV() { return VkSamplerCreateInfo.naddressModeV(address()); }
-        /** Returns the value of the {@code addressModeW} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#addressModeW} field. */
         @NativeType("VkSamplerAddressMode")
         public int addressModeW() { return VkSamplerCreateInfo.naddressModeW(address()); }
-        /** Returns the value of the {@code mipLodBias} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#mipLodBias} field. */
         public float mipLodBias() { return VkSamplerCreateInfo.nmipLodBias(address()); }
-        /** Returns the value of the {@code anisotropyEnable} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#anisotropyEnable} field. */
         @NativeType("VkBool32")
         public boolean anisotropyEnable() { return VkSamplerCreateInfo.nanisotropyEnable(address()) != 0; }
-        /** Returns the value of the {@code maxAnisotropy} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#maxAnisotropy} field. */
         public float maxAnisotropy() { return VkSamplerCreateInfo.nmaxAnisotropy(address()); }
-        /** Returns the value of the {@code compareEnable} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#compareEnable} field. */
         @NativeType("VkBool32")
         public boolean compareEnable() { return VkSamplerCreateInfo.ncompareEnable(address()) != 0; }
-        /** Returns the value of the {@code compareOp} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#compareOp} field. */
         @NativeType("VkCompareOp")
         public int compareOp() { return VkSamplerCreateInfo.ncompareOp(address()); }
-        /** Returns the value of the {@code minLod} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#minLod} field. */
         public float minLod() { return VkSamplerCreateInfo.nminLod(address()); }
-        /** Returns the value of the {@code maxLod} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#maxLod} field. */
         public float maxLod() { return VkSamplerCreateInfo.nmaxLod(address()); }
-        /** Returns the value of the {@code borderColor} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#borderColor} field. */
         @NativeType("VkBorderColor")
         public int borderColor() { return VkSamplerCreateInfo.nborderColor(address()); }
-        /** Returns the value of the {@code unnormalizedCoordinates} field. */
+        /** @return the value of the {@link VkSamplerCreateInfo#unnormalizedCoordinates} field. */
         @NativeType("VkBool32")
         public boolean unnormalizedCoordinates() { return VkSamplerCreateInfo.nunnormalizedCoordinates(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#sType} field. */
         public VkSamplerCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#pNext} field. */
         public VkSamplerCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkSamplerCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#flags} field. */
         public VkSamplerCreateInfo.Buffer flags(@NativeType("VkSamplerCreateFlags") int value) { VkSamplerCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code magFilter} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#magFilter} field. */
         public VkSamplerCreateInfo.Buffer magFilter(@NativeType("VkFilter") int value) { VkSamplerCreateInfo.nmagFilter(address(), value); return this; }
-        /** Sets the specified value to the {@code minFilter} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#minFilter} field. */
         public VkSamplerCreateInfo.Buffer minFilter(@NativeType("VkFilter") int value) { VkSamplerCreateInfo.nminFilter(address(), value); return this; }
-        /** Sets the specified value to the {@code mipmapMode} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#mipmapMode} field. */
         public VkSamplerCreateInfo.Buffer mipmapMode(@NativeType("VkSamplerMipmapMode") int value) { VkSamplerCreateInfo.nmipmapMode(address(), value); return this; }
-        /** Sets the specified value to the {@code addressModeU} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#addressModeU} field. */
         public VkSamplerCreateInfo.Buffer addressModeU(@NativeType("VkSamplerAddressMode") int value) { VkSamplerCreateInfo.naddressModeU(address(), value); return this; }
-        /** Sets the specified value to the {@code addressModeV} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#addressModeV} field. */
         public VkSamplerCreateInfo.Buffer addressModeV(@NativeType("VkSamplerAddressMode") int value) { VkSamplerCreateInfo.naddressModeV(address(), value); return this; }
-        /** Sets the specified value to the {@code addressModeW} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#addressModeW} field. */
         public VkSamplerCreateInfo.Buffer addressModeW(@NativeType("VkSamplerAddressMode") int value) { VkSamplerCreateInfo.naddressModeW(address(), value); return this; }
-        /** Sets the specified value to the {@code mipLodBias} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#mipLodBias} field. */
         public VkSamplerCreateInfo.Buffer mipLodBias(float value) { VkSamplerCreateInfo.nmipLodBias(address(), value); return this; }
-        /** Sets the specified value to the {@code anisotropyEnable} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#anisotropyEnable} field. */
         public VkSamplerCreateInfo.Buffer anisotropyEnable(@NativeType("VkBool32") boolean value) { VkSamplerCreateInfo.nanisotropyEnable(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code maxAnisotropy} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#maxAnisotropy} field. */
         public VkSamplerCreateInfo.Buffer maxAnisotropy(float value) { VkSamplerCreateInfo.nmaxAnisotropy(address(), value); return this; }
-        /** Sets the specified value to the {@code compareEnable} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#compareEnable} field. */
         public VkSamplerCreateInfo.Buffer compareEnable(@NativeType("VkBool32") boolean value) { VkSamplerCreateInfo.ncompareEnable(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code compareOp} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#compareOp} field. */
         public VkSamplerCreateInfo.Buffer compareOp(@NativeType("VkCompareOp") int value) { VkSamplerCreateInfo.ncompareOp(address(), value); return this; }
-        /** Sets the specified value to the {@code minLod} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#minLod} field. */
         public VkSamplerCreateInfo.Buffer minLod(float value) { VkSamplerCreateInfo.nminLod(address(), value); return this; }
-        /** Sets the specified value to the {@code maxLod} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#maxLod} field. */
         public VkSamplerCreateInfo.Buffer maxLod(float value) { VkSamplerCreateInfo.nmaxLod(address(), value); return this; }
-        /** Sets the specified value to the {@code borderColor} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#borderColor} field. */
         public VkSamplerCreateInfo.Buffer borderColor(@NativeType("VkBorderColor") int value) { VkSamplerCreateInfo.nborderColor(address(), value); return this; }
-        /** Sets the specified value to the {@code unnormalizedCoordinates} field. */
+        /** Sets the specified value to the {@link VkSamplerCreateInfo#unnormalizedCoordinates} field. */
         public VkSamplerCreateInfo.Buffer unnormalizedCoordinates(@NativeType("VkBool32") boolean value) { VkSamplerCreateInfo.nunnormalizedCoordinates(address(), value ? 1 : 0); return this; }
 
     }

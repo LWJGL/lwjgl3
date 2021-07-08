@@ -63,10 +63,10 @@ public class DBDATETIME extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code dtdays} field. */
+    /** @return the value of the {@code dtdays} field. */
     @NativeType("LONG")
     public int dtdays() { return ndtdays(address()); }
-    /** Returns the value of the {@code dttime} field. */
+    /** @return the value of the {@code dttime} field. */
     @NativeType("ULONG")
     public int dttime() { return ndttime(address()); }
 
@@ -289,10 +289,10 @@ public class DBDATETIME extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code dtdays} field. */
+        /** @return the value of the {@code dtdays} field. */
         @NativeType("LONG")
         public int dtdays() { return DBDATETIME.ndtdays(address()); }
-        /** Returns the value of the {@code dttime} field. */
+        /** @return the value of the {@code dttime} field. */
         @NativeType("ULONG")
         public int dttime() { return DBDATETIME.ndttime(address()); }
 

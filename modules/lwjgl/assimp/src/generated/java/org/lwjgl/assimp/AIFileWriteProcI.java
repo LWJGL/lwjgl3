@@ -6,14 +6,17 @@
 package org.lwjgl.assimp;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
-import static org.lwjgl.system.dyncall.DynCallback.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * <h3>Type</h3>
  * 
  * <pre><code>
- * size_t (*) (
+ * size_t (*{@link #invoke}) (
  *     struct aiFile *pFile,
  *     char const *pBuffer,
  *     size_t memB,
@@ -22,30 +25,37 @@ import static org.lwjgl.system.dyncall.DynCallback.*;
  */
 @FunctionalInterface
 @NativeType("aiFileWriteProc")
-public interface AIFileWriteProcI extends CallbackI.P {
+public interface AIFileWriteProcI extends CallbackI {
 
-    String SIGNATURE = "(pppp)p";
+    FFICIF CIF = apiCreateCIF(
+        FFI_DEFAULT_ABI,
+        ffi_type_pointer,
+        ffi_type_pointer, ffi_type_pointer, ffi_type_pointer, ffi_type_pointer
+    );
 
     @Override
-    default String getSignature() { return SIGNATURE; }
+    default FFICIF getCallInterface() { return CIF; }
 
     @Override
-    default long callback(long args) {
-        return invoke(
-            dcbArgPointer(args),
-            dcbArgPointer(args),
-            dcbArgPointer(args),
-            dcbArgPointer(args)
+    default void callback(long ret, long args) {
+        long __result = invoke(
+            memGetAddress(memGetAddress(args)),
+            memGetAddress(memGetAddress(args + POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 2 * POINTER_SIZE)),
+            memGetAddress(memGetAddress(args + 3 * POINTER_SIZE))
         );
+        apiClosureRetP(ret, __result);
     }
 
     /**
      * File write procedure.
      *
-     * @param pFile   File pointer to write to
-     * @param pBuffer The buffer to be written
-     * @param memB    Size of the individual element to be written
-     * @param count   Number of elements to be written
+     * @param pFile   file pointer to write to
+     * @param pBuffer the buffer to be written
+     * @param memB    size of the individual element to be written
+     * @param count   number of elements to be written
+     *
+     * @return the number of elements written
      */
     @NativeType("size_t") long invoke(@NativeType("struct aiFile *") long pFile, @NativeType("char const *") long pBuffer, @NativeType("size_t") long memB, @NativeType("size_t") long count);
 

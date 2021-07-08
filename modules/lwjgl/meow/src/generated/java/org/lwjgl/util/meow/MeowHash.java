@@ -69,19 +69,19 @@ public class MeowHash extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link MeowU128} view of the {@code u128} field. */
+    /** @return a {@link MeowU128} view of the {@code u128} field. */
     @NativeType("meow_u128")
     public MeowU128 u128() { return nu128(address()); }
-    /** Returns a {@link LongBuffer} view of the {@code u64} field. */
+    /** @return a {@link LongBuffer} view of the {@code u64} field. */
     @NativeType("meow_u64[2]")
     public LongBuffer u64() { return nu64(address()); }
-    /** Returns the value at the specified index of the {@code u64} field. */
+    /** @return the value at the specified index of the {@code u64} field. */
     @NativeType("meow_u64")
     public long u64(int index) { return nu64(address(), index); }
-    /** Returns a {@link IntBuffer} view of the {@code u32} field. */
+    /** @return a {@link IntBuffer} view of the {@code u32} field. */
     @NativeType("meow_u32[4]")
     public IntBuffer u32() { return nu32(address()); }
-    /** Returns the value at the specified index of the {@code u32} field. */
+    /** @return the value at the specified index of the {@code u32} field. */
     @NativeType("meow_u32")
     public int u32(int index) { return nu32(address(), index); }
 
@@ -281,19 +281,19 @@ public class MeowHash extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link MeowU128} view of the {@code u128} field. */
+        /** @return a {@link MeowU128} view of the {@code u128} field. */
         @NativeType("meow_u128")
         public MeowU128 u128() { return MeowHash.nu128(address()); }
-        /** Returns a {@link LongBuffer} view of the {@code u64} field. */
+        /** @return a {@link LongBuffer} view of the {@code u64} field. */
         @NativeType("meow_u64[2]")
         public LongBuffer u64() { return MeowHash.nu64(address()); }
-        /** Returns the value at the specified index of the {@code u64} field. */
+        /** @return the value at the specified index of the {@code u64} field. */
         @NativeType("meow_u64")
         public long u64(int index) { return MeowHash.nu64(address(), index); }
-        /** Returns a {@link IntBuffer} view of the {@code u32} field. */
+        /** @return a {@link IntBuffer} view of the {@code u32} field. */
         @NativeType("meow_u32[4]")
         public IntBuffer u32() { return MeowHash.nu32(address()); }
-        /** Returns the value at the specified index of the {@code u32} field. */
+        /** @return the value at the specified index of the {@code u32} field. */
         @NativeType("meow_u32")
         public int u32(int index) { return MeowHash.nu32(address(), index); }
 

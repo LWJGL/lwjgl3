@@ -14,17 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code unVRMessageOverlayResponse} &ndash; one of:<br><table><tr><td>{@link VR#VRMessageOverlayResponse_ButtonPress_0}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_ButtonPress_1}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_ButtonPress_2}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_ButtonPress_3}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_CouldntFindSystemOverlay}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_CouldntFindOrCreateClientOverlay}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_ApplicationQuit}</td></tr></table></li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VREvent_MessageOverlay_t {
- *     uint32_t unVRMessageOverlayResponse;
+ *     uint32_t {@link #unVRMessageOverlayResponse};
  * }</code></pre>
  */
 @NativeType("struct VREvent_MessageOverlay_t")
@@ -64,7 +58,7 @@ public class VREventMessageOverlay extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code unVRMessageOverlayResponse} field. */
+    /** one of:<br><table><tr><td>{@link VR#VRMessageOverlayResponse_ButtonPress_0}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_ButtonPress_1}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_ButtonPress_2}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_ButtonPress_3}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_CouldntFindSystemOverlay}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_CouldntFindOrCreateClientOverlay}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_ApplicationQuit}</td></tr></table> */
     @NativeType("uint32_t")
     public int unVRMessageOverlayResponse() { return nunVRMessageOverlayResponse(address()); }
 
@@ -140,7 +134,7 @@ public class VREventMessageOverlay extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code unVRMessageOverlayResponse} field. */
+        /** @return the value of the {@link VREventMessageOverlay#unVRMessageOverlayResponse} field. */
         @NativeType("uint32_t")
         public int unVRMessageOverlayResponse() { return VREventMessageOverlay.nunVRMessageOverlayResponse(address()); }
 

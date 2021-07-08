@@ -83,24 +83,24 @@ public class XrHandMeshMSFT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code isActive} field. */
+    /** @return the value of the {@code isActive} field. */
     @NativeType("XrBool32")
     public boolean isActive() { return nisActive(address()) != 0; }
-    /** Returns the value of the {@code indexBufferChanged} field. */
+    /** @return the value of the {@code indexBufferChanged} field. */
     @NativeType("XrBool32")
     public boolean indexBufferChanged() { return nindexBufferChanged(address()) != 0; }
-    /** Returns the value of the {@code vertexBufferChanged} field. */
+    /** @return the value of the {@code vertexBufferChanged} field. */
     @NativeType("XrBool32")
     public boolean vertexBufferChanged() { return nvertexBufferChanged(address()) != 0; }
-    /** Returns a {@link XrHandMeshIndexBufferMSFT} view of the {@code indexBuffer} field. */
+    /** @return a {@link XrHandMeshIndexBufferMSFT} view of the {@code indexBuffer} field. */
     public XrHandMeshIndexBufferMSFT indexBuffer() { return nindexBuffer(address()); }
-    /** Returns a {@link XrHandMeshVertexBufferMSFT} view of the {@code vertexBuffer} field. */
+    /** @return a {@link XrHandMeshVertexBufferMSFT} view of the {@code vertexBuffer} field. */
     public XrHandMeshVertexBufferMSFT vertexBuffer() { return nvertexBuffer(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -388,24 +388,24 @@ public class XrHandMeshMSFT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHandMeshMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrHandMeshMSFT.nnext(address()); }
-        /** Returns the value of the {@code isActive} field. */
+        /** @return the value of the {@code isActive} field. */
         @NativeType("XrBool32")
         public boolean isActive() { return XrHandMeshMSFT.nisActive(address()) != 0; }
-        /** Returns the value of the {@code indexBufferChanged} field. */
+        /** @return the value of the {@code indexBufferChanged} field. */
         @NativeType("XrBool32")
         public boolean indexBufferChanged() { return XrHandMeshMSFT.nindexBufferChanged(address()) != 0; }
-        /** Returns the value of the {@code vertexBufferChanged} field. */
+        /** @return the value of the {@code vertexBufferChanged} field. */
         @NativeType("XrBool32")
         public boolean vertexBufferChanged() { return XrHandMeshMSFT.nvertexBufferChanged(address()) != 0; }
-        /** Returns a {@link XrHandMeshIndexBufferMSFT} view of the {@code indexBuffer} field. */
+        /** @return a {@link XrHandMeshIndexBufferMSFT} view of the {@code indexBuffer} field. */
         public XrHandMeshIndexBufferMSFT indexBuffer() { return XrHandMeshMSFT.nindexBuffer(address()); }
-        /** Returns a {@link XrHandMeshVertexBufferMSFT} view of the {@code vertexBuffer} field. */
+        /** @return a {@link XrHandMeshVertexBufferMSFT} view of the {@code vertexBuffer} field. */
         public XrHandMeshVertexBufferMSFT vertexBuffer() { return XrHandMeshMSFT.nvertexBuffer(address()); }
 
         /** Sets the specified value to the {@code type} field. */

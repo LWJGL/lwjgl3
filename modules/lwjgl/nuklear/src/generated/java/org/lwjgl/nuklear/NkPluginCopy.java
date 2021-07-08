@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     nk_handle handle,
  *     char const *text,
  *     int len
@@ -51,7 +51,7 @@ public abstract class NkPluginCopy extends Callback implements NkPluginCopyI {
     }
 
     protected NkPluginCopy() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     NkPluginCopy(long functionPointer) {

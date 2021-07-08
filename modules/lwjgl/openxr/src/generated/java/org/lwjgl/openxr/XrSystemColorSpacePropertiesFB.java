@@ -67,13 +67,13 @@ public class XrSystemColorSpacePropertiesFB extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code colorSpace} field. */
+    /** @return the value of the {@code colorSpace} field. */
     @NativeType("XrColorSpaceFB")
     public int colorSpace() { return ncolorSpace(address()); }
 
@@ -304,13 +304,13 @@ public class XrSystemColorSpacePropertiesFB extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemColorSpacePropertiesFB.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemColorSpacePropertiesFB.nnext(address()); }
-        /** Returns the value of the {@code colorSpace} field. */
+        /** @return the value of the {@code colorSpace} field. */
         @NativeType("XrColorSpaceFB")
         public int colorSpace() { return XrSystemColorSpacePropertiesFB.ncolorSpace(address()); }
 

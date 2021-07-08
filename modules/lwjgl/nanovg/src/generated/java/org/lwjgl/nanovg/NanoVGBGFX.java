@@ -19,10 +19,6 @@ import static org.lwjgl.nanovg.NanoVG.*;
 /** Implementation of the NanoVG API using bgfx. */
 public class NanoVGBGFX {
 
-    protected NanoVGBGFX() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from bgfx. */
     public static final class Functions {
 
@@ -51,6 +47,10 @@ public class NanoVGBGFX {
             nvgInternalParams,
             nvgDeleteInternal
         );
+    }
+
+    protected NanoVGBGFX() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ nvgCreate ] ---

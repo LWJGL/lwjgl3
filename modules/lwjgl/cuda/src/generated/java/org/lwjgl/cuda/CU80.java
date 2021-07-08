@@ -21,6 +21,26 @@ import static org.lwjgl.cuda.CUDA.*;
 /** Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>. */
 public class CU80 extends CU70 {
 
+    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            MemPrefetchAsync      = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuMemPrefetchAsync")),
+            MemAdvise             = apiGetFunctionAddress(CU.getLibrary(), "cuMemAdvise"),
+            MemRangeGetAttribute  = apiGetFunctionAddress(CU.getLibrary(), "cuMemRangeGetAttribute"),
+            MemRangeGetAttributes = apiGetFunctionAddress(CU.getLibrary(), "cuMemRangeGetAttributes"),
+            StreamWaitValue32     = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamWaitValue32")),
+            StreamWaitValue64     = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamWaitValue64")),
+            StreamWriteValue32    = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamWriteValue32")),
+            StreamWriteValue64    = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamWriteValue64")),
+            StreamBatchMemOp      = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamBatchMemOp")),
+            DeviceGetP2PAttribute = apiGetFunctionAddress(CU.getLibrary(), "cuDeviceGetP2PAttribute");
+
+    }
+
     /** Device that represents the CPU. */
     public static final int CU_DEVICE_CPU = -1;
 
@@ -162,26 +182,6 @@ public class CU80 extends CU70 {
 
     protected CU80() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            MemPrefetchAsync      = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuMemPrefetchAsync")),
-            MemAdvise             = apiGetFunctionAddress(CU.getLibrary(), "cuMemAdvise"),
-            MemRangeGetAttribute  = apiGetFunctionAddress(CU.getLibrary(), "cuMemRangeGetAttribute"),
-            MemRangeGetAttributes = apiGetFunctionAddress(CU.getLibrary(), "cuMemRangeGetAttributes"),
-            StreamWaitValue32     = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamWaitValue32")),
-            StreamWaitValue64     = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamWaitValue64")),
-            StreamWriteValue32    = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamWriteValue32")),
-            StreamWriteValue64    = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamWriteValue64")),
-            StreamBatchMemOp      = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_PTSZ("cuStreamBatchMemOp")),
-            DeviceGetP2PAttribute = apiGetFunctionAddress(CU.getLibrary(), "cuDeviceGetP2PAttribute");
-
     }
 
     // --- [ cuMemPrefetchAsync ] ---

@@ -24,6 +24,7 @@ val NV_shader_image_footprint = "NVShaderImageFootprint".nativeClassVK("NV_shade
         <h5>Examples</h5>
         TBD
 
+        <h5>VK_NV_shader_image_footprint</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_shader_image_footprint}</dd>
@@ -47,12 +48,21 @@ val NV_shader_image_footprint = "NVShaderImageFootprint".nativeClassVK("NV_shade
             <dd><ul>
                 <li>Pat Brown <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_shader_image_footprint:%20&amp;body=@nvpbrown%20">nvpbrown</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2018-09-13</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_shader_image_footprint.html">{@code SPV_NV_shader_image_footprint}</a></li>
+                <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/nv/GLSL_NV_shader_texture_footprint.txt">{@code GL_NV_shader_texture_footprint}</a></li>
+            </ul></dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>

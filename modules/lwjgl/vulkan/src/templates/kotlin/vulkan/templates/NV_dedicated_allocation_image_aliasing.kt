@@ -13,6 +13,7 @@ val NV_dedicated_allocation_image_aliasing = "NVDedicatedAllocationImageAliasing
         """
         This extension allows applications to alias images on dedicated allocations, subject to specific restrictions: the extent and the number of layers in the image being aliased must be smaller than or equal to those of the original image for which the allocation was created, and every other image parameter must match.
 
+        <h5>VK_NV_dedicated_allocation_image_aliasing</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_dedicated_allocation_image_aliasing}</dd>
@@ -36,7 +37,10 @@ val NV_dedicated_allocation_image_aliasing = "NVDedicatedAllocationImageAliasing
             <dd><ul>
                 <li>Nuno Subtil <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_dedicated_allocation_image_aliasing:%20&amp;body=@nsubtil%20">nsubtil</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-01-04</dd>
 

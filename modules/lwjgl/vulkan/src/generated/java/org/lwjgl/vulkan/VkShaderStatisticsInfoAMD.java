@@ -27,29 +27,17 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>{@link VkShaderResourceUsageAMD}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code shaderStageMask} &ndash; are the combination of logical shader stages contained within this shader.</li>
- * <li>{@code resourceUsage} &ndash; a {@link VkShaderResourceUsageAMD} structure describing internal physical device resources used by this shader.</li>
- * <li>{@code numPhysicalVgprs} &ndash; the maximum number of vector instruction general-purpose registers (VGPRs) available to the physical device.</li>
- * <li>{@code numPhysicalSgprs} &ndash; the maximum number of scalar instruction general-purpose registers (SGPRs) available to the physical device.</li>
- * <li>{@code numAvailableVgprs} &ndash; the maximum limit of VGPRs made available to the shader compiler.</li>
- * <li>{@code numAvailableSgprs} &ndash; the maximum limit of SGPRs made available to the shader compiler.</li>
- * <li>{@code computeWorkGroupSize[3]} &ndash; the local workgroup size of this shader in { X, Y, Z } dimensions.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkShaderStatisticsInfoAMD {
- *     VkShaderStageFlags shaderStageMask;
- *     {@link VkShaderResourceUsageAMD VkShaderResourceUsageAMD} resourceUsage;
- *     uint32_t numPhysicalVgprs;
- *     uint32_t numPhysicalSgprs;
- *     uint32_t numAvailableVgprs;
- *     uint32_t numAvailableSgprs;
- *     uint32_t computeWorkGroupSize[3];
+ *     VkShaderStageFlags {@link #shaderStageMask};
+ *     {@link VkShaderResourceUsageAMD VkShaderResourceUsageAMD} {@link #resourceUsage};
+ *     uint32_t {@link #numPhysicalVgprs};
+ *     uint32_t {@link #numPhysicalSgprs};
+ *     uint32_t {@link #numAvailableVgprs};
+ *     uint32_t {@link #numAvailableSgprs};
+ *     uint32_t {@link #computeWorkGroupSize}[3];
  * }</code></pre>
  */
 public class VkShaderStatisticsInfoAMD extends Struct {
@@ -106,27 +94,27 @@ public class VkShaderStatisticsInfoAMD extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code shaderStageMask} field. */
+    /** are the combination of logical shader stages contained within this shader. */
     @NativeType("VkShaderStageFlags")
     public int shaderStageMask() { return nshaderStageMask(address()); }
-    /** Returns a {@link VkShaderResourceUsageAMD} view of the {@code resourceUsage} field. */
+    /** a {@link VkShaderResourceUsageAMD} structure describing internal physical device resources used by this shader. */
     public VkShaderResourceUsageAMD resourceUsage() { return nresourceUsage(address()); }
-    /** Returns the value of the {@code numPhysicalVgprs} field. */
+    /** the maximum number of vector instruction general-purpose registers (VGPRs) available to the physical device. */
     @NativeType("uint32_t")
     public int numPhysicalVgprs() { return nnumPhysicalVgprs(address()); }
-    /** Returns the value of the {@code numPhysicalSgprs} field. */
+    /** the maximum number of scalar instruction general-purpose registers (SGPRs) available to the physical device. */
     @NativeType("uint32_t")
     public int numPhysicalSgprs() { return nnumPhysicalSgprs(address()); }
-    /** Returns the value of the {@code numAvailableVgprs} field. */
+    /** the maximum limit of VGPRs made available to the shader compiler. */
     @NativeType("uint32_t")
     public int numAvailableVgprs() { return nnumAvailableVgprs(address()); }
-    /** Returns the value of the {@code numAvailableSgprs} field. */
+    /** the maximum limit of SGPRs made available to the shader compiler. */
     @NativeType("uint32_t")
     public int numAvailableSgprs() { return nnumAvailableSgprs(address()); }
-    /** Returns a {@link IntBuffer} view of the {@code computeWorkGroupSize} field. */
+    /** the local workgroup size of this shader in { X, Y, Z } dimensions. */
     @NativeType("uint32_t[3]")
     public IntBuffer computeWorkGroupSize() { return ncomputeWorkGroupSize(address()); }
-    /** Returns the value at the specified index of the {@code computeWorkGroupSize} field. */
+    /** the local workgroup size of this shader in { X, Y, Z } dimensions. */
     @NativeType("uint32_t")
     public int computeWorkGroupSize(int index) { return ncomputeWorkGroupSize(address(), index); }
 
@@ -218,27 +206,27 @@ public class VkShaderStatisticsInfoAMD extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code shaderStageMask} field. */
+        /** @return the value of the {@link VkShaderStatisticsInfoAMD#shaderStageMask} field. */
         @NativeType("VkShaderStageFlags")
         public int shaderStageMask() { return VkShaderStatisticsInfoAMD.nshaderStageMask(address()); }
-        /** Returns a {@link VkShaderResourceUsageAMD} view of the {@code resourceUsage} field. */
+        /** @return a {@link VkShaderResourceUsageAMD} view of the {@link VkShaderStatisticsInfoAMD#resourceUsage} field. */
         public VkShaderResourceUsageAMD resourceUsage() { return VkShaderStatisticsInfoAMD.nresourceUsage(address()); }
-        /** Returns the value of the {@code numPhysicalVgprs} field. */
+        /** @return the value of the {@link VkShaderStatisticsInfoAMD#numPhysicalVgprs} field. */
         @NativeType("uint32_t")
         public int numPhysicalVgprs() { return VkShaderStatisticsInfoAMD.nnumPhysicalVgprs(address()); }
-        /** Returns the value of the {@code numPhysicalSgprs} field. */
+        /** @return the value of the {@link VkShaderStatisticsInfoAMD#numPhysicalSgprs} field. */
         @NativeType("uint32_t")
         public int numPhysicalSgprs() { return VkShaderStatisticsInfoAMD.nnumPhysicalSgprs(address()); }
-        /** Returns the value of the {@code numAvailableVgprs} field. */
+        /** @return the value of the {@link VkShaderStatisticsInfoAMD#numAvailableVgprs} field. */
         @NativeType("uint32_t")
         public int numAvailableVgprs() { return VkShaderStatisticsInfoAMD.nnumAvailableVgprs(address()); }
-        /** Returns the value of the {@code numAvailableSgprs} field. */
+        /** @return the value of the {@link VkShaderStatisticsInfoAMD#numAvailableSgprs} field. */
         @NativeType("uint32_t")
         public int numAvailableSgprs() { return VkShaderStatisticsInfoAMD.nnumAvailableSgprs(address()); }
-        /** Returns a {@link IntBuffer} view of the {@code computeWorkGroupSize} field. */
+        /** @return a {@link IntBuffer} view of the {@link VkShaderStatisticsInfoAMD#computeWorkGroupSize} field. */
         @NativeType("uint32_t[3]")
         public IntBuffer computeWorkGroupSize() { return VkShaderStatisticsInfoAMD.ncomputeWorkGroupSize(address()); }
-        /** Returns the value at the specified index of the {@code computeWorkGroupSize} field. */
+        /** @return the value at the specified index of the {@link VkShaderStatisticsInfoAMD#computeWorkGroupSize} field. */
         @NativeType("uint32_t")
         public int computeWorkGroupSize(int index) { return VkShaderStatisticsInfoAMD.ncomputeWorkGroupSize(address(), index); }
 

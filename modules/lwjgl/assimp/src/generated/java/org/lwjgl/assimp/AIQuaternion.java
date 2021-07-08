@@ -18,23 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Represents a quaternion in a 4D vector.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code w} &ndash; The w component</li>
- * <li>{@code x} &ndash; The x component</li>
- * <li>{@code y} &ndash; The y component</li>
- * <li>{@code z} &ndash; The z component</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct aiQuaternion {
- *     float w;
- *     float x;
- *     float y;
- *     float z;
+ *     float {@link #w};
+ *     float {@link #x};
+ *     float {@link #y};
+ *     float {@link #z};
  * }</code></pre>
  */
 @NativeType("struct aiQuaternion")
@@ -83,22 +74,22 @@ public class AIQuaternion extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code w} field. */
+    /** The w component */
     public float w() { return nw(address()); }
-    /** Returns the value of the {@code x} field. */
+    /** The x component */
     public float x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** The y component */
     public float y() { return ny(address()); }
-    /** Returns the value of the {@code z} field. */
+    /** The z component */
     public float z() { return nz(address()); }
 
-    /** Sets the specified value to the {@code w} field. */
+    /** Sets the specified value to the {@link #w} field. */
     public AIQuaternion w(float value) { nw(address(), value); return this; }
-    /** Sets the specified value to the {@code x} field. */
+    /** Sets the specified value to the {@link #x} field. */
     public AIQuaternion x(float value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@code y} field. */
+    /** Sets the specified value to the {@link #y} field. */
     public AIQuaternion y(float value) { ny(address(), value); return this; }
-    /** Sets the specified value to the {@code z} field. */
+    /** Sets the specified value to the {@link #z} field. */
     public AIQuaternion z(float value) { nz(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,22 +318,22 @@ public class AIQuaternion extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code w} field. */
+        /** @return the value of the {@link AIQuaternion#w} field. */
         public float w() { return AIQuaternion.nw(address()); }
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@link AIQuaternion#x} field. */
         public float x() { return AIQuaternion.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@link AIQuaternion#y} field. */
         public float y() { return AIQuaternion.ny(address()); }
-        /** Returns the value of the {@code z} field. */
+        /** @return the value of the {@link AIQuaternion#z} field. */
         public float z() { return AIQuaternion.nz(address()); }
 
-        /** Sets the specified value to the {@code w} field. */
+        /** Sets the specified value to the {@link AIQuaternion#w} field. */
         public AIQuaternion.Buffer w(float value) { AIQuaternion.nw(address(), value); return this; }
-        /** Sets the specified value to the {@code x} field. */
+        /** Sets the specified value to the {@link AIQuaternion#x} field. */
         public AIQuaternion.Buffer x(float value) { AIQuaternion.nx(address(), value); return this; }
-        /** Sets the specified value to the {@code y} field. */
+        /** Sets the specified value to the {@link AIQuaternion#y} field. */
         public AIQuaternion.Buffer y(float value) { AIQuaternion.ny(address(), value); return this; }
-        /** Sets the specified value to the {@code z} field. */
+        /** Sets the specified value to the {@link AIQuaternion#z} field. */
         public AIQuaternion.Buffer z(float value) { AIQuaternion.nz(address(), value); return this; }
 
     }

@@ -60,24 +60,6 @@ import static org.lwjgl.util.opus.Opus.*;
  */
 public class OpusMultistream {
 
-    /**
-     * Multistream CTLs
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #OPUS_MULTISTREAM_GET_ENCODER_STATE_REQUEST MULTISTREAM_GET_ENCODER_STATE_REQUEST}</li>
-     * <li>{@link #OPUS_MULTISTREAM_GET_DECODER_STATE_REQUEST MULTISTREAM_GET_DECODER_STATE_REQUEST}</li>
-     * </ul>
-     */
-    public static final int
-        OPUS_MULTISTREAM_GET_ENCODER_STATE_REQUEST = 5120,
-        OPUS_MULTISTREAM_GET_DECODER_STATE_REQUEST = 5122;
-
-    protected OpusMultistream() {
-        throw new UnsupportedOperationException();
-    }
-
     /** Contains the function pointers loaded from {@code Opus.getLibrary()}. */
     public static final class Functions {
 
@@ -103,6 +85,24 @@ public class OpusMultistream {
             multistream_decoder_ctl               = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_decoder_ctl"),
             multistream_decoder_destroy           = apiGetFunctionAddress(Opus.getLibrary(), "opus_multistream_decoder_destroy");
 
+    }
+
+    /**
+     * Multistream CTLs
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #OPUS_MULTISTREAM_GET_ENCODER_STATE_REQUEST MULTISTREAM_GET_ENCODER_STATE_REQUEST}</li>
+     * <li>{@link #OPUS_MULTISTREAM_GET_DECODER_STATE_REQUEST MULTISTREAM_GET_DECODER_STATE_REQUEST}</li>
+     * </ul>
+     */
+    public static final int
+        OPUS_MULTISTREAM_GET_ENCODER_STATE_REQUEST = 5120,
+        OPUS_MULTISTREAM_GET_DECODER_STATE_REQUEST = 5122;
+
+    protected OpusMultistream() {
+        throw new UnsupportedOperationException();
     }
 
     // --- [ opus_multistream_encoder_get_size ] ---
@@ -541,7 +541,7 @@ public class OpusMultistream {
      * @param request CTL request
      */
     public static int opus_multistream_encoder_ctl(@NativeType("OpusMSEncoder *") long st, int request) {
-        return new CTLRequest(request).apply(st, Functions.multistream_encoder_ctl);
+        return new CTLRequestV(request).apply(st, Functions.multistream_encoder_ctl);
     }
 
     /**
@@ -561,7 +561,7 @@ public class OpusMultistream {
      * @param request CTL request
      */
     public static int opus_multistream_decoder_ctl(@NativeType("OpusMSDecoder *") long st, int request) {
-        return new CTLRequest(request).apply(st, Functions.multistream_decoder_ctl);
+        return new CTLRequestV(request).apply(st, Functions.multistream_decoder_ctl);
     }
 
     /**

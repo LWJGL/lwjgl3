@@ -76,22 +76,22 @@ public class XrSpatialGraphNodeSpaceCreateInfoMSFT extends Struct implements Nat
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code nodeType} field. */
+    /** @return the value of the {@code nodeType} field. */
     @NativeType("XrSpatialGraphNodeTypeMSFT")
     public int nodeType() { return nnodeType(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code nodeId} field. */
+    /** @return a {@link ByteBuffer} view of the {@code nodeId} field. */
     @NativeType("uint8_t[16]")
     public ByteBuffer nodeId() { return nnodeId(address()); }
-    /** Returns the value at the specified index of the {@code nodeId} field. */
+    /** @return the value at the specified index of the {@code nodeId} field. */
     @NativeType("uint8_t")
     public byte nodeId(int index) { return nnodeId(address(), index); }
-    /** Returns a {@link XrPosef} view of the {@code pose} field. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -352,22 +352,22 @@ public class XrSpatialGraphNodeSpaceCreateInfoMSFT extends Struct implements Nat
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialGraphNodeSpaceCreateInfoMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpatialGraphNodeSpaceCreateInfoMSFT.nnext(address()); }
-        /** Returns the value of the {@code nodeType} field. */
+        /** @return the value of the {@code nodeType} field. */
         @NativeType("XrSpatialGraphNodeTypeMSFT")
         public int nodeType() { return XrSpatialGraphNodeSpaceCreateInfoMSFT.nnodeType(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code nodeId} field. */
+        /** @return a {@link ByteBuffer} view of the {@code nodeId} field. */
         @NativeType("uint8_t[16]")
         public ByteBuffer nodeId() { return XrSpatialGraphNodeSpaceCreateInfoMSFT.nnodeId(address()); }
-        /** Returns the value at the specified index of the {@code nodeId} field. */
+        /** @return the value at the specified index of the {@code nodeId} field. */
         @NativeType("uint8_t")
         public byte nodeId(int index) { return XrSpatialGraphNodeSpaceCreateInfoMSFT.nnodeId(address(), index); }
-        /** Returns a {@link XrPosef} view of the {@code pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrSpatialGraphNodeSpaceCreateInfoMSFT.npose(address()); }
 
         /** Sets the specified value to the {@code type} field. */

@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * enum CXChildVisitResult (*) (
+ * enum CXChildVisitResult (*{@link #invoke}) (
  *     CXCursor cursor,
  *     CXCursor parent,
  *     CXClientData client_data
  * )</code></pre>
  */
 public abstract class CXCursorVisitor extends Callback implements CXCursorVisitorI {
-
-    public static final long DELEGATE = getDelegate();
-
-    private static native long getDelegate();
 
     /**
      * Creates a {@code CXCursorVisitor} instance from the specified function pointer.
@@ -55,7 +51,7 @@ public abstract class CXCursorVisitor extends Callback implements CXCursorVisito
     }
 
     protected CXCursorVisitor() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CXCursorVisitor(long functionPointer) {
@@ -72,8 +68,8 @@ public abstract class CXCursorVisitor extends Callback implements CXCursorVisito
         }
 
         @Override
-        public int invoke(CXCursor cursor, CXCursor parent) {
-            return delegate.invoke(cursor, parent);
+        public int invoke(CXCursor cursor, CXCursor parent, long client_data) {
+            return delegate.invoke(cursor, parent, client_data);
         }
 
     }

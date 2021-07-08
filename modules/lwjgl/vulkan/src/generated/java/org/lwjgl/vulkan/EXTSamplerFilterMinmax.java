@@ -14,9 +14,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>All functionality in this extension is included in core Vulkan 1.2, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
  * 
- * <h5>Examples</h5>
- * 
- * <p>None.</p>
+ * <h5>VK_EXT_sampler_filter_minmax</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -40,6 +38,11 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_sampler_filter_minmax:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-05-19</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>

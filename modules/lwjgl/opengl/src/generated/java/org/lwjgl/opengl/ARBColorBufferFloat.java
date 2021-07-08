@@ -31,6 +31,8 @@ import org.lwjgl.system.*;
  */
 public class ARBColorBufferFloat {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_RGBA_FLOAT_MODE_ARB = 0x8820;
 
@@ -42,8 +44,6 @@ public class ARBColorBufferFloat {
 
     /** Accepted by the {@code clamp} parameter of ClampColorARB. */
     public static final int GL_FIXED_ONLY_ARB = 0x891D;
-
-    static { GL.initialize(); }
 
     protected ARBColorBufferFloat() {
         throw new UnsupportedOperationException();

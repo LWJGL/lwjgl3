@@ -28,19 +28,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code shaderDrawParameters} &ndash; specifies whether shader draw parameters are supported.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderDrawParametersFeatures {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 shaderDrawParameters;
+ *     VkBool32 {@link #shaderDrawParameters};
  * }</code></pre>
  */
 public class VkPhysicalDeviceShaderDrawParametersFeatures extends Struct implements NativeResource {
@@ -85,13 +79,13 @@ public class VkPhysicalDeviceShaderDrawParametersFeatures extends Struct impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code shaderDrawParameters} field. */
+    /** specifies whether shader draw parameters are supported. */
     @NativeType("VkBool32")
     public boolean shaderDrawParameters() { return nshaderDrawParameters(address()) != 0; }
 
@@ -99,7 +93,7 @@ public class VkPhysicalDeviceShaderDrawParametersFeatures extends Struct impleme
     public VkPhysicalDeviceShaderDrawParametersFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderDrawParametersFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderDrawParameters} field. */
+    /** Sets the specified value to the {@link #shaderDrawParameters} field. */
     public VkPhysicalDeviceShaderDrawParametersFeatures shaderDrawParameters(@NativeType("VkBool32") boolean value) { nshaderDrawParameters(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,13 +316,13 @@ public class VkPhysicalDeviceShaderDrawParametersFeatures extends Struct impleme
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderDrawParametersFeatures.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderDrawParametersFeatures.npNext(address()); }
-        /** Returns the value of the {@code shaderDrawParameters} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderDrawParametersFeatures#shaderDrawParameters} field. */
         @NativeType("VkBool32")
         public boolean shaderDrawParameters() { return VkPhysicalDeviceShaderDrawParametersFeatures.nshaderDrawParameters(address()) != 0; }
 
@@ -336,7 +330,7 @@ public class VkPhysicalDeviceShaderDrawParametersFeatures extends Struct impleme
         public VkPhysicalDeviceShaderDrawParametersFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderDrawParametersFeatures.nsType(address(), value); return this; }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderDrawParametersFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderDrawParametersFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderDrawParameters} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderDrawParametersFeatures#shaderDrawParameters} field. */
         public VkPhysicalDeviceShaderDrawParametersFeatures.Buffer shaderDrawParameters(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderDrawParametersFeatures.nshaderDrawParameters(address(), value ? 1 : 0); return this; }
 
     }

@@ -18,27 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Backbuffer resolution and reset parameters.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code format} &ndash; backbuffer format</li>
- * <li>{@code width} &ndash; backbuffer width</li>
- * <li>{@code height} &ndash; backbuffer height</li>
- * <li>{@code reset} &ndash; reset parameters</li>
- * <li>{@code numBackBuffers} &ndash; number of back buffers</li>
- * <li>{@code maxFrameLatency} &ndash; maximum frame latency</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct bgfx_resolution_t {
- *     bgfx_texture_format_t format;
- *     uint32_t width;
- *     uint32_t height;
- *     uint32_t reset;
- *     uint8_t numBackBuffers;
- *     uint8_t maxFrameLatency;
+ *     bgfx_texture_format_t {@link #format};
+ *     uint32_t {@link #width};
+ *     uint32_t {@link #height};
+ *     uint32_t {@link #reset};
+ *     uint8_t {@link #numBackBuffers};
+ *     uint8_t {@link #maxFrameLatency};
  * }</code></pre>
  */
 @NativeType("struct bgfx_resolution_t")
@@ -93,36 +82,36 @@ public class BGFXResolution extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code format} field. */
+    /** backbuffer format */
     @NativeType("bgfx_texture_format_t")
     public int format() { return nformat(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** backbuffer width */
     @NativeType("uint32_t")
     public int width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** backbuffer height */
     @NativeType("uint32_t")
     public int height() { return nheight(address()); }
-    /** Returns the value of the {@code reset} field. */
+    /** reset parameters */
     @NativeType("uint32_t")
     public int reset() { return nreset(address()); }
-    /** Returns the value of the {@code numBackBuffers} field. */
+    /** number of back buffers */
     @NativeType("uint8_t")
     public byte numBackBuffers() { return nnumBackBuffers(address()); }
-    /** Returns the value of the {@code maxFrameLatency} field. */
+    /** maximum frame latency */
     @NativeType("uint8_t")
     public byte maxFrameLatency() { return nmaxFrameLatency(address()); }
 
-    /** Sets the specified value to the {@code format} field. */
+    /** Sets the specified value to the {@link #format} field. */
     public BGFXResolution format(@NativeType("bgfx_texture_format_t") int value) { nformat(address(), value); return this; }
-    /** Sets the specified value to the {@code width} field. */
+    /** Sets the specified value to the {@link #width} field. */
     public BGFXResolution width(@NativeType("uint32_t") int value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@code height} field. */
+    /** Sets the specified value to the {@link #height} field. */
     public BGFXResolution height(@NativeType("uint32_t") int value) { nheight(address(), value); return this; }
-    /** Sets the specified value to the {@code reset} field. */
+    /** Sets the specified value to the {@link #reset} field. */
     public BGFXResolution reset(@NativeType("uint32_t") int value) { nreset(address(), value); return this; }
-    /** Sets the specified value to the {@code numBackBuffers} field. */
+    /** Sets the specified value to the {@link #numBackBuffers} field. */
     public BGFXResolution numBackBuffers(@NativeType("uint8_t") byte value) { nnumBackBuffers(address(), value); return this; }
-    /** Sets the specified value to the {@code maxFrameLatency} field. */
+    /** Sets the specified value to the {@link #maxFrameLatency} field. */
     public BGFXResolution maxFrameLatency(@NativeType("uint8_t") byte value) { nmaxFrameLatency(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */

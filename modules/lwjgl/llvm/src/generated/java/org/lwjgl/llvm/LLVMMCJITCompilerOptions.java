@@ -77,19 +77,19 @@ public class LLVMMCJITCompilerOptions extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code OptLevel} field. */
+    /** @return the value of the {@code OptLevel} field. */
     @NativeType("unsigned int")
     public int OptLevel() { return nOptLevel(address()); }
-    /** Returns the value of the {@code CodeModel} field. */
+    /** @return the value of the {@code CodeModel} field. */
     @NativeType("LLVMCodeModel")
     public int CodeModel() { return nCodeModel(address()); }
-    /** Returns the value of the {@code NoFramePointerElim} field. */
+    /** @return the value of the {@code NoFramePointerElim} field. */
     @NativeType("LLVMBool")
     public boolean NoFramePointerElim() { return nNoFramePointerElim(address()) != 0; }
-    /** Returns the value of the {@code EnableFastISel} field. */
+    /** @return the value of the {@code EnableFastISel} field. */
     @NativeType("LLVMBool")
     public boolean EnableFastISel() { return nEnableFastISel(address()) != 0; }
-    /** Returns the value of the {@code MCJMM} field. */
+    /** @return the value of the {@code MCJMM} field. */
     @NativeType("LLVMMCJITMemoryManagerRef")
     public long MCJMM() { return nMCJMM(address()); }
 
@@ -357,19 +357,19 @@ public class LLVMMCJITCompilerOptions extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code OptLevel} field. */
+        /** @return the value of the {@code OptLevel} field. */
         @NativeType("unsigned int")
         public int OptLevel() { return LLVMMCJITCompilerOptions.nOptLevel(address()); }
-        /** Returns the value of the {@code CodeModel} field. */
+        /** @return the value of the {@code CodeModel} field. */
         @NativeType("LLVMCodeModel")
         public int CodeModel() { return LLVMMCJITCompilerOptions.nCodeModel(address()); }
-        /** Returns the value of the {@code NoFramePointerElim} field. */
+        /** @return the value of the {@code NoFramePointerElim} field. */
         @NativeType("LLVMBool")
         public boolean NoFramePointerElim() { return LLVMMCJITCompilerOptions.nNoFramePointerElim(address()) != 0; }
-        /** Returns the value of the {@code EnableFastISel} field. */
+        /** @return the value of the {@code EnableFastISel} field. */
         @NativeType("LLVMBool")
         public boolean EnableFastISel() { return LLVMMCJITCompilerOptions.nEnableFastISel(address()) != 0; }
-        /** Returns the value of the {@code MCJMM} field. */
+        /** @return the value of the {@code MCJMM} field. */
         @NativeType("LLVMMCJITMemoryManagerRef")
         public long MCJMM() { return LLVMMCJITCompilerOptions.nMCJMM(address()); }
 

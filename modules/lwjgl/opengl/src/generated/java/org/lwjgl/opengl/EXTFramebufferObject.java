@@ -60,6 +60,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTFramebufferObject {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code target} parameter of BindFramebufferEXT, CheckFramebufferStatusEXT, FramebufferTexture{1D|2D|3D}EXT, FramebufferRenderbufferEXT,
      * and GetFramebufferAttachmentParameterivEXT.
@@ -140,8 +142,6 @@ public class EXTFramebufferObject {
 
     /** Returned by GetError(). */
     public static final int GL_INVALID_FRAMEBUFFER_OPERATION_EXT = 0x506;
-
-    static { GL.initialize(); }
 
     protected EXTFramebufferObject() {
         throw new UnsupportedOperationException();

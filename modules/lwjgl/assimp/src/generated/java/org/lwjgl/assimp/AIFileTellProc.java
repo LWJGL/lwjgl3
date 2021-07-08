@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * size_t (*) (
+ * size_t (*{@link #invoke}) (
  *     struct aiFile *pFile
  * )</code></pre>
  */
@@ -47,7 +47,7 @@ public abstract class AIFileTellProc extends Callback implements AIFileTellProcI
     }
 
     protected AIFileTellProc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     AIFileTellProc(long functionPointer) {

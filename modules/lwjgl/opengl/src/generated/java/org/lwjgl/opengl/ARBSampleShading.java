@@ -28,6 +28,8 @@ import org.lwjgl.system.*;
  */
 public class ARBSampleShading {
 
+    static { GL.initialize(); }
+
     /**
      * Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
      * GetDoublev.
@@ -36,8 +38,6 @@ public class ARBSampleShading {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int GL_MIN_SAMPLE_SHADING_VALUE_ARB = 0x8C37;
-
-    static { GL.initialize(); }
 
     protected ARBSampleShading() {
         throw new UnsupportedOperationException();

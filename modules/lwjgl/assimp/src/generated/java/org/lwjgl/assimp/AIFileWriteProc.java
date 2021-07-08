@@ -15,7 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * size_t (*) (
+ * size_t (*{@link #invoke}) (
  *     struct aiFile *pFile,
  *     char const *pBuffer,
  *     size_t memB,
@@ -50,7 +50,7 @@ public abstract class AIFileWriteProc extends Callback implements AIFileWritePro
     }
 
     protected AIFileWriteProc() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     AIFileWriteProc(long functionPointer) {

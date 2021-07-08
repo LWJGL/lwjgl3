@@ -16,21 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Used for simulated mouse wheel scroll.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code xdelta} &ndash; movement in fraction of the pad traversed since last delta, 1.0 for a full swipe</li>
- * <li>{@code viewportscale} &ndash; for scrolling on an overlay with laser mouse, this is the overlay's vertical size relative to the overlay height. Range: {@code [0,1]}</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VREvent_Scroll_t {
- *     float xdelta;
+ *     float {@link #xdelta};
  *     float ydelta;
  *     uint32_t unused;
- *     float viewportscale;
+ *     float {@link #viewportscale};
  * }</code></pre>
  */
 @NativeType("struct VREvent_Scroll_t")
@@ -79,14 +72,14 @@ public class VREventScroll extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code xdelta} field. */
+    /** movement in fraction of the pad traversed since last delta, 1.0 for a full swipe */
     public float xdelta() { return nxdelta(address()); }
-    /** Returns the value of the {@code ydelta} field. */
+    /** @return the value of the {@code ydelta} field. */
     public float ydelta() { return nydelta(address()); }
-    /** Returns the value of the {@code unused} field. */
+    /** @return the value of the {@code unused} field. */
     @NativeType("uint32_t")
     public int unused() { return nunused(address()); }
-    /** Returns the value of the {@code viewportscale} field. */
+    /** for scrolling on an overlay with laser mouse, this is the overlay's vertical size relative to the overlay height. Range: {@code [0,1]} */
     public float viewportscale() { return nviewportscale(address()); }
 
     // -----------------------------------
@@ -167,14 +160,14 @@ public class VREventScroll extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code xdelta} field. */
+        /** @return the value of the {@link VREventScroll#xdelta} field. */
         public float xdelta() { return VREventScroll.nxdelta(address()); }
-        /** Returns the value of the {@code ydelta} field. */
+        /** @return the value of the {@code ydelta} field. */
         public float ydelta() { return VREventScroll.nydelta(address()); }
-        /** Returns the value of the {@code unused} field. */
+        /** @return the value of the {@code unused} field. */
         @NativeType("uint32_t")
         public int unused() { return VREventScroll.nunused(address()); }
-        /** Returns the value of the {@code viewportscale} field. */
+        /** @return the value of the {@link VREventScroll#viewportscale} field. */
         public float viewportscale() { return VREventScroll.nviewportscale(address()); }
 
     }

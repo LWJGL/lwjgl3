@@ -14,21 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code width} &ndash; Width of the image.</li>
- * <li>{@code height} &ndash; Height of the image.</li>
- * <li>{@code shapes} &ndash; lLinked list of shapes in the image</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct NSVGimage {
- *     float width;
- *     float height;
- *     {@link NSVGShape NSVGshape} * shapes;
+ *     float {@link #width};
+ *     float {@link #height};
+ *     {@link NSVGShape NSVGshape} * {@link #shapes};
  * }</code></pre>
  */
 @NativeType("struct NSVGimage")
@@ -74,11 +66,11 @@ public class NSVGImage extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code width} field. */
+    /** Width of the image. */
     public float width() { return nwidth(address()); }
-    /** Returns the value of the {@code height} field. */
+    /** Height of the image. */
     public float height() { return nheight(address()); }
-    /** Returns a {@link NSVGShape} view of the struct pointed to by the {@code shapes} field. */
+    /** lLinked list of shapes in the image */
     @NativeType("NSVGshape *")
     public NSVGShape shapes() { return nshapes(address()); }
 
@@ -158,11 +150,11 @@ public class NSVGImage extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@link NSVGImage#width} field. */
         public float width() { return NSVGImage.nwidth(address()); }
-        /** Returns the value of the {@code height} field. */
+        /** @return the value of the {@link NSVGImage#height} field. */
         public float height() { return NSVGImage.nheight(address()); }
-        /** Returns a {@link NSVGShape} view of the struct pointed to by the {@code shapes} field. */
+        /** @return a {@link NSVGShape} view of the struct pointed to by the {@link NSVGImage#shapes} field. */
         @NativeType("NSVGshape *")
         public NSVGShape shapes() { return NSVGImage.nshapes(address()); }
 

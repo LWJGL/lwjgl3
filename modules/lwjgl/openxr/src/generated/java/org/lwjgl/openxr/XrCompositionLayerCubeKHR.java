@@ -88,28 +88,28 @@ public class XrCompositionLayerCubeKHR extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code layerFlags} field. */
+    /** @return the value of the {@code layerFlags} field. */
     @NativeType("XrCompositionLayerFlags")
     public long layerFlags() { return nlayerFlags(address()); }
-    /** Returns the value of the {@code space} field. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** Returns the value of the {@code eyeVisibility} field. */
+    /** @return the value of the {@code eyeVisibility} field. */
     @NativeType("XrEyeVisibility")
     public int eyeVisibility() { return neyeVisibility(address()); }
-    /** Returns the value of the {@code swapchain} field. */
+    /** @return the value of the {@code swapchain} field. */
     @NativeType("XrSwapchain")
     public long swapchain() { return nswapchain(address()); }
-    /** Returns the value of the {@code imageArrayIndex} field. */
+    /** @return the value of the {@code imageArrayIndex} field. */
     @NativeType("uint32_t")
     public int imageArrayIndex() { return nimageArrayIndex(address()); }
-    /** Returns a {@link XrQuaternionf} view of the {@code orientation} field. */
+    /** @return a {@link XrQuaternionf} view of the {@code orientation} field. */
     public XrQuaternionf orientation() { return norientation(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -403,28 +403,28 @@ public class XrCompositionLayerCubeKHR extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerCubeKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerCubeKHR.nnext(address()); }
-        /** Returns the value of the {@code layerFlags} field. */
+        /** @return the value of the {@code layerFlags} field. */
         @NativeType("XrCompositionLayerFlags")
         public long layerFlags() { return XrCompositionLayerCubeKHR.nlayerFlags(address()); }
-        /** Returns the value of the {@code space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrCompositionLayerCubeKHR.nspace(address()); }
-        /** Returns the value of the {@code eyeVisibility} field. */
+        /** @return the value of the {@code eyeVisibility} field. */
         @NativeType("XrEyeVisibility")
         public int eyeVisibility() { return XrCompositionLayerCubeKHR.neyeVisibility(address()); }
-        /** Returns the value of the {@code swapchain} field. */
+        /** @return the value of the {@code swapchain} field. */
         @NativeType("XrSwapchain")
         public long swapchain() { return XrCompositionLayerCubeKHR.nswapchain(address()); }
-        /** Returns the value of the {@code imageArrayIndex} field. */
+        /** @return the value of the {@code imageArrayIndex} field. */
         @NativeType("uint32_t")
         public int imageArrayIndex() { return XrCompositionLayerCubeKHR.nimageArrayIndex(address()); }
-        /** Returns a {@link XrQuaternionf} view of the {@code orientation} field. */
+        /** @return a {@link XrQuaternionf} view of the {@code orientation} field. */
         public XrQuaternionf orientation() { return XrCompositionLayerCubeKHR.norientation(address()); }
 
         /** Sets the specified value to the {@code type} field. */

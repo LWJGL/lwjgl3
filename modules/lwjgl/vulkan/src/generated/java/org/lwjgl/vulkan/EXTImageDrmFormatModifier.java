@@ -11,9 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * <h5>Summary</h5>
- * 
- * <p>This extension provides the ability to use <em>DRM format modifiers</em> with images, enabling Vulkan to better integrate with the Linux ecosystem of graphics, video, and display APIs.</p>
+ * This extension provides the ability to use <em>DRM format modifiers</em> with images, enabling Vulkan to better integrate with the Linux ecosystem of graphics, video, and display APIs.
  * 
  * <p>Its functionality closely overlaps with {@code EGL_EXT_image_dma_buf_import_modifiers}<sup><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn2">2</a></sup> and {@code EGL_MESA_image_dma_buf_export}<sup><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn3">3</a></sup>. Unlike the EGL extensions, this extension does not require the use of a specific handle type (such as a dma_buf) for external memory and provides more explicit control of image creation.</p>
  * 
@@ -59,7 +57,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>The application creates the image by chaining {@link VkImageDrmFormatModifierListCreateInfoEXT} and {@link VkExternalMemoryImageCreateInfo} onto {@link VkImageCreateInfo}. The protocol and APIs by which the application will share the image with external consumers will likely determine the value of {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes}. The implementation chooses for the image an optimal <em>modifier</em> from {@link VkImageDrmFormatModifierListCreateInfoEXT}{@code ::pDrmFormatModifiers}. The application then queries the implementation-chosen <em>modifier</em> with {@link #vkGetImageDrmFormatModifierPropertiesEXT GetImageDrmFormatModifierPropertiesEXT}, and queries the memory layout of each plane with {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout}.</p>
  * 
- * <p>The application then allocates the image's memory with {@link VkMemoryAllocateInfo}, adding chained extension structures for external memory; binds it to the image; and exports the memory, for example, with {@link KHRExternalMemoryFd#vkGetMemoryFdKHR GetMemoryFdKHR}.</p>
+ * <p>The application then allocates the image's memory with {@link VkMemoryAllocateInfo}, adding chained extending structures for external memory; binds it to the image; and exports the memory, for example, with {@link KHRExternalMemoryFd#vkGetMemoryFdKHR GetMemoryFdKHR}.</p>
  * 
  * <p>Finally, the application sends the image's creation parameters, its <em>modifier</em>, its per-plane memory layout, and the exported memory handle to the external consumers. The details of how the application transmits this information to external consumers is outside the scope of this specification.</p>
  * </li>
@@ -76,6 +74,8 @@ import static org.lwjgl.system.JNI.*;
  * <p>The Linux kernel modesetting API (KMS), when configuring the display's framebuffer with {@code struct drm_mode_fb_cmd2}<sup><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn4">4</a></sup>, allows one to specify the frambuffer's <em>modifier</em> as well as a per-plane memory handle, offset, and row pitch.</p>
  * 
  * <p>GBM, a graphics buffer manager for Linux, allows creation of a {@code gbm_bo} (that is, a graphics <em>buffer object</em>) by importing data similar to that in {@code EGL_EXT_image_dma_buf_import_modifiers}<sup><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn1">1</a></sup>; and symmetrically allows exporting the same data from the {@code gbm_bo}. See the references to <em>modifier</em> and <em>plane</em> in {@code gbm.h}<sup><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn5">5</a></sup>.</p>
+ * 
+ * <h5>VK_EXT_image_drm_format_modifier</h5>
  * 
  * <dl>
  * <dt><b>Name String</b></dt>
@@ -98,6 +98,11 @@ import static org.lwjgl.system.JNI.*;
  * <dd><ul>
  * <li>Chad Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_image_drm_format_modifier:%20&amp;body=@chadversary%20">chadversary</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-08-29</dd>
  * <dt><b>IP Status</b></dt>
@@ -133,7 +138,6 @@ public class EXTImageDrmFormatModifier {
      * 
      * <ul>
      * <li>{@link #VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT}</li>
@@ -142,7 +146,6 @@ public class EXTImageDrmFormatModifier {
      */
     public static final int
         VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT            = 1000158000,
-        VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT                 = 1000158001,
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT = 1000158002,
         VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT     = 1000158003,
         VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT = 1000158004,
@@ -200,7 +203,7 @@ public class EXTImageDrmFormatModifier {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code image} <b>must</b> have been created with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkImageCreateInfo">{@code tiling}</a> equal to {@link #VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}.</li>
+     * <li>{@code image} <b>must</b> have been created with VkImageCreateInfo.html[{@code tiling}] equal to {@link #VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -218,6 +221,10 @@ public class EXTImageDrmFormatModifier {
      * <dt>On success, this command returns</dt>
      * <dd><ul>
      * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
+     * </ul></dd>
+     * <dt>On failure, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * </ul></dd>
      * </dl>
      * 

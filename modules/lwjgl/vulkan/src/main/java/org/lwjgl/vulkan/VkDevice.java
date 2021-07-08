@@ -6,10 +6,12 @@ package org.lwjgl.vulkan;
 
 import org.lwjgl.system.*;
 
+import static java.lang.Math.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.vulkan.VK10.*;
 
 /** Wraps a Vulkan device dispatchable handle. */
 public class VkDevice extends DispatchableHandleDevice {
@@ -17,7 +19,7 @@ public class VkDevice extends DispatchableHandleDevice {
     private final VkPhysicalDevice physicalDevice;
 
     /**
-     * Creates a {@link VkDevice} instance for the specified native handle.
+     * Creates a {@code VkDevice} instance for the specified native handle.
      *
      * <p>The Vulkan version supported by the {@code VkDevice} will be determined by querying the {@link VkPhysicalDeviceProperties} of the specified physical
      * device.</p>
@@ -31,7 +33,7 @@ public class VkDevice extends DispatchableHandleDevice {
     }
 
     /**
-     * Creates a {@link VkDevice} instance for the specified native handle.
+     * Creates a {@code VkDevice} instance for the specified native handle.
      *
      * <p>If {@code apiVersion} is 0, the Vulkan version supported by the {@code VkDevice} will be determined by querying the {@link VkPhysicalDeviceProperties}
      * of the specified physical device. Otherwise, the specified {@code apiVersion} will be used.</p>
@@ -55,25 +57,15 @@ public class VkDevice extends DispatchableHandleDevice {
         long GetDeviceProcAddr;
         try (MemoryStack stack = stackPush()) {
             if (apiVersion == 0) {
-                long GetPhysicalDeviceProperties = callPPP(
-                    physicalDevice.getInstance().address(),
-                    memAddress(stack.ASCII("vkGetPhysicalDeviceProperties")),
-                    VK.getGlobalCommands().vkGetInstanceProcAddr
-                );
-
                 VkPhysicalDeviceProperties props = VkPhysicalDeviceProperties.callocStack(stack);
-                callPPV(physicalDevice.address(), props.address(), GetPhysicalDeviceProperties);
-                apiVersion = props.apiVersion();
-                if (apiVersion == 0) { // vkGetPhysicalDeviceProperties failed?
-                    apiVersion = physicalDevice.getInstance().getCapabilities().apiVersion;
-                }
+                vkGetPhysicalDeviceProperties(physicalDevice, props);
+                apiVersion = min(
+                    props.apiVersion(),
+                    physicalDevice.getInstance().getCapabilities().apiVersion
+                ) & 0xFFFFF_000; // mask the patch version
             }
 
-            GetDeviceProcAddr = callPPP(
-                physicalDevice.getInstance().address(),
-                memAddress(stack.ASCII("vkGetDeviceProcAddr")),
-                VK.getGlobalCommands().vkGetInstanceProcAddr
-            );
+            GetDeviceProcAddr = vkGetInstanceProcAddr(physicalDevice.getInstance(), "vkGetDeviceProcAddr");
         }
 
         return new VKCapabilitiesDevice(functionName -> {
@@ -82,7 +74,7 @@ public class VkDevice extends DispatchableHandleDevice {
                 apiLog("Failed to locate address for VK device function " + memASCII(functionName));
             }
             return address;
-        }, physicalDevice.getCapabilities(), VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()));
+        }, physicalDevice.getCapabilities(), apiVersion, VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()));
     }
 
 }

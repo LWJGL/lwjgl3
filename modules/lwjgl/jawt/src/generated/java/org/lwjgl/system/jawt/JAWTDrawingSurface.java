@@ -18,23 +18,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>All operations on a JAWT_DrawingSurface MUST be performed from the same thread as the call to {@code GetDrawingSurface}.</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code env} &ndash; 
- * Cached reference to the Java environment of the calling thread.
- * 
- * <p>If Lock(), Unlock(), GetDrawingSurfaceInfo() or FreeDrawingSurfaceInfo() are called from a different thread, this data member should be set before
- * calling those functions.</p></li>
- * <li>{@code target} &ndash; Cached reference to the target object.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct JAWT_DrawingSurface {
- *     JNIEnv * env;
- *     jobject target;
+ *     JNIEnv * {@link #env};
+ *     jobject {@link #target};
  *     void * Lock;
  *     void * GetDrawingSurfaceInfo;
  *     void * FreeDrawingSurfaceInfo;
@@ -93,22 +82,27 @@ public class JAWTDrawingSurface extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code env} field. */
+    /**
+     * Cached reference to the Java environment of the calling thread.
+     * 
+     * <p>If Lock(), Unlock(), GetDrawingSurfaceInfo() or FreeDrawingSurfaceInfo() are called from a different thread, this data member should be set before
+     * calling those functions.</p>
+     */
     @NativeType("JNIEnv *")
     public long env() { return nenv(address()); }
-    /** Returns the value of the {@code target} field. */
+    /** Cached reference to the target object. */
     @NativeType("jobject")
     public long target() { return ntarget(address()); }
-    /** Returns the value of the {@code Lock} field. */
+    /** @return the value of the {@code Lock} field. */
     @NativeType("void *")
     public long Lock() { return nLock(address()); }
-    /** Returns the value of the {@code GetDrawingSurfaceInfo} field. */
+    /** @return the value of the {@code GetDrawingSurfaceInfo} field. */
     @NativeType("void *")
     public long GetDrawingSurfaceInfo() { return nGetDrawingSurfaceInfo(address()); }
-    /** Returns the value of the {@code FreeDrawingSurfaceInfo} field. */
+    /** @return the value of the {@code FreeDrawingSurfaceInfo} field. */
     @NativeType("void *")
     public long FreeDrawingSurfaceInfo() { return nFreeDrawingSurfaceInfo(address()); }
-    /** Returns the value of the {@code Unlock} field. */
+    /** @return the value of the {@code Unlock} field. */
     @NativeType("void *")
     public long Unlock() { return nUnlock(address()); }
 
@@ -194,22 +188,22 @@ public class JAWTDrawingSurface extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code env} field. */
+        /** @return the value of the {@link JAWTDrawingSurface#env} field. */
         @NativeType("JNIEnv *")
         public long env() { return JAWTDrawingSurface.nenv(address()); }
-        /** Returns the value of the {@code target} field. */
+        /** @return the value of the {@link JAWTDrawingSurface#target} field. */
         @NativeType("jobject")
         public long target() { return JAWTDrawingSurface.ntarget(address()); }
-        /** Returns the value of the {@code Lock} field. */
+        /** @return the value of the {@code Lock} field. */
         @NativeType("void *")
         public long Lock() { return JAWTDrawingSurface.nLock(address()); }
-        /** Returns the value of the {@code GetDrawingSurfaceInfo} field. */
+        /** @return the value of the {@code GetDrawingSurfaceInfo} field. */
         @NativeType("void *")
         public long GetDrawingSurfaceInfo() { return JAWTDrawingSurface.nGetDrawingSurfaceInfo(address()); }
-        /** Returns the value of the {@code FreeDrawingSurfaceInfo} field. */
+        /** @return the value of the {@code FreeDrawingSurfaceInfo} field. */
         @NativeType("void *")
         public long FreeDrawingSurfaceInfo() { return JAWTDrawingSurface.nFreeDrawingSurfaceInfo(address()); }
-        /** Returns the value of the {@code Unlock} field. */
+        /** @return the value of the {@code Unlock} field. */
         @NativeType("void *")
         public long Unlock() { return JAWTDrawingSurface.nUnlock(address()); }
 

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void *user,
  *     int n
  * )</code></pre>
@@ -50,7 +50,7 @@ public abstract class STBISkipCallback extends Callback implements STBISkipCallb
     }
 
     protected STBISkipCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     STBISkipCallback(long functionPointer) {

@@ -16,6 +16,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export POSIX file descriptor handles from Vulkan memory objects and to import Vulkan memory objects from POSIX file descriptor handles exported from other Vulkan memory objects or from similar resources in other APIs.
  * 
+ * <h5>VK_KHR_external_memory_fd</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_external_memory_fd}</dd>
@@ -34,6 +36,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_external_memory_fd:%20&amp;body=@cubanismo%20">cubanismo</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2016-10-21</dd>
  * <dt><b>IP Status</b></dt>
@@ -89,7 +96,7 @@ public class KHRExternalMemoryFd {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To export a POSIX file descriptor representing the underlying resources of a Vulkan device memory object, call:</p>
+     * <p>To export a POSIX file descriptor referencing the payload of a Vulkan device memory object, call:</p>
      * 
      * <pre><code>
      * VkResult vkGetMemoryFdKHR(
@@ -99,7 +106,7 @@ public class KHRExternalMemoryFd {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Each call to {@code vkGetMemoryFdKHR} <b>must</b> create a new file descriptor and transfer ownership of it to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor using the {@code close} system call when it is no longer needed, or by importing a Vulkan memory object from it. Where supported by the operating system, the implementation <b>must</b> set the file descriptor to be closed automatically when an {@code execve} system call is made.</p>
+     * <p>Each call to {@code vkGetMemoryFdKHR} <b>must</b> create a new file descriptor holding a reference to the memory object's payload and transfer ownership of the file descriptor to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor using the {@code close} system call when it is no longer needed, or by importing a Vulkan memory object from it. Where supported by the operating system, the implementation <b>must</b> set the file descriptor to be closed automatically when an {@code execve} system call is made.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -129,7 +136,7 @@ public class KHRExternalMemoryFd {
      *
      * @param device     the logical device that created the device memory being exported.
      * @param pGetFdInfo a pointer to a {@link VkMemoryGetFdInfoKHR} structure containing parameters of the export operation.
-     * @param pFd        will return a file descriptor representing the underlying resources of the device memory object.
+     * @param pFd        will return a file descriptor referencing the payload of the device memory object.
      */
     @NativeType("VkResult")
     public static int vkGetMemoryFdKHR(VkDevice device, @NativeType("VkMemoryGetFdInfoKHR const *") VkMemoryGetFdInfoKHR pGetFdInfo, @NativeType("int *") IntBuffer pFd) {
@@ -167,8 +174,8 @@ public class KHRExternalMemoryFd {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code fd} <b>must</b> be an external memory handle created outside of the Vulkan API.</li>
-     * <li>{@code handleType} <b>must</b> not be {@link KHRExternalMemoryCapabilities#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR}.</li>
+     * <li>{@code fd} <b>must</b> be an external memory handle created outside of the Vulkan API</li>
+     * <li>{@code handleType} <b>must</b> not be {@link KHRExternalMemoryCapabilities#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -188,6 +195,7 @@ public class KHRExternalMemoryFd {
      * </ul></dd>
      * <dt>On failure, this command returns</dt>
      * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * <li>{@link VK11#VK_ERROR_INVALID_EXTERNAL_HANDLE ERROR_INVALID_EXTERNAL_HANDLE}</li>
      * </ul></dd>
      * </dl>

@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWwindow *window,
  *     int iconified
  * )</code></pre>
@@ -54,7 +54,7 @@ public abstract class GLFWWindowIconifyCallback extends Callback implements GLFW
     }
 
     protected GLFWWindowIconifyCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWWindowIconifyCallback(long functionPointer) {

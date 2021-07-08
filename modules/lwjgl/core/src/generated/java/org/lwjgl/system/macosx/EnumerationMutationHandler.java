@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     id id
  * )</code></pre>
  */
@@ -49,7 +49,7 @@ public abstract class EnumerationMutationHandler extends Callback implements Enu
     }
 
     protected EnumerationMutationHandler() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     EnumerationMutationHandler(long functionPointer) {

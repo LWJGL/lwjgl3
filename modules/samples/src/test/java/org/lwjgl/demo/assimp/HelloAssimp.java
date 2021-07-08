@@ -20,7 +20,7 @@ public final class HelloAssimp {
         System.out.println("aiGetVersionMajor() = " + aiGetVersionMajor());
         System.out.println("aiGetVersionMinor() = " + aiGetVersionMinor());
         System.out.println("aiGetVersionRevision() = " + aiGetVersionRevision());
-        System.out.println("aiGetVersionRevision() = " + aiGetCompileFlags());
+        System.out.println("aiGetCompileFlags() = " + aiGetCompileFlags());
 
         long c = aiGetImportFormatCount();
         System.out.println("\nImport formats:");

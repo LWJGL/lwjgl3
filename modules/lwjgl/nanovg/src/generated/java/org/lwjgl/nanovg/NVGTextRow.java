@@ -18,27 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * A text row.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code start} &ndash; pointer to the input text where the row starts</li>
- * <li>{@code end} &ndash; pointer to the input text where the row ends (one past the last character</li>
- * <li>{@code next} &ndash; pointer to the beginning of the next row</li>
- * <li>{@code width} &ndash; logical width of the row</li>
- * <li>{@code minx} &ndash; actual left bound of the row. Logical width and bounds can differ because of kerning and some parts over extending.</li>
- * <li>{@code maxx} &ndash; actual right bound of the row. Logical width and bounds can differ because of kerning and some parts over extending.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct NVGtextRow {
- *     char * start;
- *     char * end;
- *     char * next;
- *     float width;
- *     float minx;
- *     float maxx;
+ *     char * {@link #start};
+ *     char * {@link #end};
+ *     char * {@link #next};
+ *     float {@link #width};
+ *     float {@link #minx};
+ *     float {@link #maxx};
  * }</code></pre>
  */
 @NativeType("struct NVGtextRow")
@@ -93,20 +82,20 @@ public class NVGTextRow extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code start} field. */
+    /** pointer to the input text where the row starts */
     @NativeType("char *")
     public long start() { return nstart(address()); }
-    /** Returns the value of the {@code end} field. */
+    /** pointer to the input text where the row ends (one past the last character */
     @NativeType("char *")
     public long end() { return nend(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** pointer to the beginning of the next row */
     @NativeType("char *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code width} field. */
+    /** logical width of the row */
     public float width() { return nwidth(address()); }
-    /** Returns the value of the {@code minx} field. */
+    /** actual left bound of the row. Logical width and bounds can differ because of kerning and some parts over extending. */
     public float minx() { return nminx(address()); }
-    /** Returns the value of the {@code maxx} field. */
+    /** actual right bound of the row. Logical width and bounds can differ because of kerning and some parts over extending. */
     public float maxx() { return nmaxx(address()); }
 
     // -----------------------------------
@@ -303,20 +292,20 @@ public class NVGTextRow extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code start} field. */
+        /** @return the value of the {@link NVGTextRow#start} field. */
         @NativeType("char *")
         public long start() { return NVGTextRow.nstart(address()); }
-        /** Returns the value of the {@code end} field. */
+        /** @return the value of the {@link NVGTextRow#end} field. */
         @NativeType("char *")
         public long end() { return NVGTextRow.nend(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@link NVGTextRow#next} field. */
         @NativeType("char *")
         public long next() { return NVGTextRow.nnext(address()); }
-        /** Returns the value of the {@code width} field. */
+        /** @return the value of the {@link NVGTextRow#width} field. */
         public float width() { return NVGTextRow.nwidth(address()); }
-        /** Returns the value of the {@code minx} field. */
+        /** @return the value of the {@link NVGTextRow#minx} field. */
         public float minx() { return NVGTextRow.nminx(address()); }
-        /** Returns the value of the {@code maxx} field. */
+        /** @return the value of the {@link NVGTextRow#maxx} field. */
         public float maxx() { return NVGTextRow.nmaxx(address()); }
 
     }

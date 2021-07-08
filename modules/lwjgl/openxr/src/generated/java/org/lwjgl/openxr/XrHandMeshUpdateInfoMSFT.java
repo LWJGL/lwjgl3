@@ -71,16 +71,16 @@ public class XrHandMeshUpdateInfoMSFT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code time} field. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
-    /** Returns the value of the {@code handPoseType} field. */
+    /** @return the value of the {@code handPoseType} field. */
     @NativeType("XrHandPoseTypeMSFT")
     public int handPoseType() { return nhandPoseType(address()); }
 
@@ -319,16 +319,16 @@ public class XrHandMeshUpdateInfoMSFT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHandMeshUpdateInfoMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrHandMeshUpdateInfoMSFT.nnext(address()); }
-        /** Returns the value of the {@code time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrHandMeshUpdateInfoMSFT.ntime(address()); }
-        /** Returns the value of the {@code handPoseType} field. */
+        /** @return the value of the {@code handPoseType} field. */
         @NativeType("XrHandPoseTypeMSFT")
         public int handPoseType() { return XrHandMeshUpdateInfoMSFT.nhandPoseType(address()); }
 

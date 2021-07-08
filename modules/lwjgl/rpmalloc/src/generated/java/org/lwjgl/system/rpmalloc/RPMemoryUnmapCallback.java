@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     void *address,
  *     size_t size,
  *     size_t offset,
@@ -52,7 +52,7 @@ public abstract class RPMemoryUnmapCallback extends Callback implements RPMemory
     }
 
     protected RPMemoryUnmapCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     RPMemoryUnmapCallback(long functionPointer) {

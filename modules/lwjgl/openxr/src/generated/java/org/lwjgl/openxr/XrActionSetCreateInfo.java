@@ -78,25 +78,25 @@ public class XrActionSetCreateInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code actionSetName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code actionSetName} field. */
     @NativeType("char[XR_MAX_ACTION_SET_NAME_SIZE]")
     public ByteBuffer actionSetName() { return nactionSetName(address()); }
-    /** Decodes the null-terminated string stored in the {@code actionSetName} field. */
+    /** @return the null-terminated string stored in the {@code actionSetName} field. */
     @NativeType("char[XR_MAX_ACTION_SET_NAME_SIZE]")
     public String actionSetNameString() { return nactionSetNameString(address()); }
-    /** Returns a {@link ByteBuffer} view of the {@code localizedActionSetName} field. */
+    /** @return a {@link ByteBuffer} view of the {@code localizedActionSetName} field. */
     @NativeType("char[XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE]")
     public ByteBuffer localizedActionSetName() { return nlocalizedActionSetName(address()); }
-    /** Decodes the null-terminated string stored in the {@code localizedActionSetName} field. */
+    /** @return the null-terminated string stored in the {@code localizedActionSetName} field. */
     @NativeType("char[XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE]")
     public String localizedActionSetNameString() { return nlocalizedActionSetNameString(address()); }
-    /** Returns the value of the {@code priority} field. */
+    /** @return the value of the {@code priority} field. */
     @NativeType("uint32_t")
     public int priority() { return npriority(address()); }
 
@@ -359,25 +359,25 @@ public class XrActionSetCreateInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActionSetCreateInfo.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrActionSetCreateInfo.nnext(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code actionSetName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code actionSetName} field. */
         @NativeType("char[XR_MAX_ACTION_SET_NAME_SIZE]")
         public ByteBuffer actionSetName() { return XrActionSetCreateInfo.nactionSetName(address()); }
-        /** Decodes the null-terminated string stored in the {@code actionSetName} field. */
+        /** @return the null-terminated string stored in the {@code actionSetName} field. */
         @NativeType("char[XR_MAX_ACTION_SET_NAME_SIZE]")
         public String actionSetNameString() { return XrActionSetCreateInfo.nactionSetNameString(address()); }
-        /** Returns a {@link ByteBuffer} view of the {@code localizedActionSetName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code localizedActionSetName} field. */
         @NativeType("char[XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE]")
         public ByteBuffer localizedActionSetName() { return XrActionSetCreateInfo.nlocalizedActionSetName(address()); }
-        /** Decodes the null-terminated string stored in the {@code localizedActionSetName} field. */
+        /** @return the null-terminated string stored in the {@code localizedActionSetName} field. */
         @NativeType("char[XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE]")
         public String localizedActionSetNameString() { return XrActionSetCreateInfo.nlocalizedActionSetNameString(address()); }
-        /** Returns the value of the {@code priority} field. */
+        /** @return the value of the {@code priority} field. */
         @NativeType("uint32_t")
         public int priority() { return XrActionSetCreateInfo.npriority(address()); }
 

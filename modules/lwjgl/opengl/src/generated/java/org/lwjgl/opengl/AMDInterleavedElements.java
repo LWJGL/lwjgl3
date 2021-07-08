@@ -29,13 +29,13 @@ import org.lwjgl.system.*;
  */
 public class AMDInterleavedElements {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code pname} parameter of VertexAttribParameteriAMD and GetVertexAttrib{iv|dv|fv|Iiv|Iuiv|Ldv}. */
     public static final int GL_VERTEX_ELEMENT_SWIZZLE_AMD = 0x91A4;
 
     /** Selected by the {@code pname} parameter of ProgramParameteri and GetProgramiv. */
     public static final int GL_VERTEX_ID_SWIZZLE_AMD = 0x91A5;
-
-    static { GL.initialize(); }
 
     protected AMDInterleavedElements() {
         throw new UnsupportedOperationException();

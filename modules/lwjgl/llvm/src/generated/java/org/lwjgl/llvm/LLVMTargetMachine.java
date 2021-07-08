@@ -21,6 +21,40 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMTargetMachine {
 
+    /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
+    public static final class Functions {
+
+        private Functions() {}
+
+        /** Function address. */
+        public static final long
+            GetFirstTarget                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetFirstTarget"),
+            GetNextTarget                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetNextTarget"),
+            GetTargetFromName               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetFromName"),
+            GetTargetFromTriple             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetFromTriple"),
+            GetTargetName                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetName"),
+            GetTargetDescription            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetDescription"),
+            TargetHasJIT                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetHasJIT"),
+            TargetHasTargetMachine          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetHasTargetMachine"),
+            TargetHasAsmBackend             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetHasAsmBackend"),
+            CreateTargetMachine             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateTargetMachine"),
+            DisposeTargetMachine            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeTargetMachine"),
+            GetTargetMachineTarget          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineTarget"),
+            GetTargetMachineTriple          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineTriple"),
+            GetTargetMachineCPU             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineCPU"),
+            GetTargetMachineFeatureString   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineFeatureString"),
+            CreateTargetDataLayout          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateTargetDataLayout"),
+            SetTargetMachineAsmVerbosity    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetTargetMachineAsmVerbosity"),
+            TargetMachineEmitToFile         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetMachineEmitToFile"),
+            TargetMachineEmitToMemoryBuffer = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetMachineEmitToMemoryBuffer"),
+            GetDefaultTargetTriple          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetDefaultTargetTriple"),
+            NormalizeTargetTriple           = LLVMCore.getLibrary().getFunctionAddress("LLVMNormalizeTargetTriple"),
+            GetHostCPUName                  = LLVMCore.getLibrary().getFunctionAddress("LLVMGetHostCPUName"),
+            GetHostCPUFeatures              = LLVMCore.getLibrary().getFunctionAddress("LLVMGetHostCPUFeatures"),
+            AddAnalysisPasses               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddAnalysisPasses");
+
+    }
+
     /**
      * {@code LLVMCodeGenOptLevel}
      * 
@@ -103,40 +137,6 @@ public class LLVMTargetMachine {
 
     protected LLVMTargetMachine() {
         throw new UnsupportedOperationException();
-    }
-
-    /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
-    public static final class Functions {
-
-        private Functions() {}
-
-        /** Function address. */
-        public static final long
-            GetFirstTarget                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetFirstTarget"),
-            GetNextTarget                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetNextTarget"),
-            GetTargetFromName               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetFromName"),
-            GetTargetFromTriple             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetFromTriple"),
-            GetTargetName                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetName"),
-            GetTargetDescription            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetDescription"),
-            TargetHasJIT                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetHasJIT"),
-            TargetHasTargetMachine          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetHasTargetMachine"),
-            TargetHasAsmBackend             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetHasAsmBackend"),
-            CreateTargetMachine             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateTargetMachine"),
-            DisposeTargetMachine            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeTargetMachine"),
-            GetTargetMachineTarget          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineTarget"),
-            GetTargetMachineTriple          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineTriple"),
-            GetTargetMachineCPU             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineCPU"),
-            GetTargetMachineFeatureString   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetTargetMachineFeatureString"),
-            CreateTargetDataLayout          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateTargetDataLayout"),
-            SetTargetMachineAsmVerbosity    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetTargetMachineAsmVerbosity"),
-            TargetMachineEmitToFile         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetMachineEmitToFile"),
-            TargetMachineEmitToMemoryBuffer = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetMachineEmitToMemoryBuffer"),
-            GetDefaultTargetTriple          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetDefaultTargetTriple"),
-            NormalizeTargetTriple           = LLVMCore.getLibrary().getFunctionAddress("LLVMNormalizeTargetTriple"),
-            GetHostCPUName                  = LLVMCore.getLibrary().getFunctionAddress("LLVMGetHostCPUName"),
-            GetHostCPUFeatures              = LLVMCore.getLibrary().getFunctionAddress("LLVMGetHostCPUFeatures"),
-            AddAnalysisPasses               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddAnalysisPasses");
-
     }
 
     // --- [ LLVMGetFirstTarget ] ---

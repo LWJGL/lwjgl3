@@ -17,45 +17,34 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sizecache} &ndash; Current number of bytes available in thread size class caches for small and medium sizes (&lt;32KiB)</li>
- * <li>{@code spancache} &ndash; Current number of bytes available in thread span caches for small and medium sizes (&lt;32KiB)</li>
- * <li>{@code thread_to_global} &ndash; Total number of bytes transitioned from thread cache to global cache (only if {@code ENABLE_STATISTICS=1})</li>
- * <li>{@code global_to_thread} &ndash; Total number of bytes transitioned from global cache to thread cache (only if {@code ENABLE_STATISTICS=1})</li>
- * <li>{@code span_use[64]} &ndash; Per span count statistics (only if {@code ENABLE_STATISTICS=1})</li>
- * <li>{@code size_use[128]} &ndash; Per size class statistics (only if {@code ENABLE_STATISTICS=1})</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct rpmalloc_thread_statistics_t {
- *     size_t sizecache;
- *     size_t spancache;
- *     size_t thread_to_global;
- *     size_t global_to_thread;
+ *     size_t {@link #sizecache};
+ *     size_t {@link #spancache};
+ *     size_t {@link #thread_to_global};
+ *     size_t {@link #global_to_thread};
  *     struct {
- *         size_t current;
- *         size_t peak;
- *         size_t to_global;
- *         size_t from_global;
- *         size_t to_cache;
- *         size_t from_cache;
- *         size_t to_reserved;
- *         size_t from_reserved;
- *         size_t map_calls;
+ *         size_t {@link span_use#current current};
+ *         size_t {@link span_use#peak peak};
+ *         size_t {@link span_use#to_global to_global};
+ *         size_t {@link span_use#from_global from_global};
+ *         size_t {@link span_use#to_cache to_cache};
+ *         size_t {@link span_use#from_cache from_cache};
+ *         size_t {@link span_use#to_reserved to_reserved};
+ *         size_t {@link span_use#from_reserved from_reserved};
+ *         size_t {@link span_use#map_calls map_calls};
  *     } {@link span_use span_use}[64];
  *     struct {
- *         size_t alloc_current;
- *         size_t alloc_peak;
- *         size_t alloc_total;
- *         size_t free_total;
- *         size_t spans_to_cache;
- *         size_t spans_from_cache;
- *         size_t spans_from_reserved;
- *         size_t map_calls;
+ *         size_t {@link size_use#alloc_current alloc_current};
+ *         size_t {@link size_use#alloc_peak alloc_peak};
+ *         size_t {@link size_use#alloc_total alloc_total};
+ *         size_t {@link size_use#free_total free_total};
+ *         size_t {@link size_use#spans_to_cache spans_to_cache};
+ *         size_t {@link size_use#spans_from_cache spans_from_cache};
+ *         size_t {@link size_use#spans_from_reserved spans_from_reserved};
+ *         size_t {@link size_use#map_calls map_calls};
  *     } {@link size_use size_use}[128];
  * }</code></pre>
  */
@@ -111,28 +100,28 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sizecache} field. */
+    /** Current number of bytes available in thread size class caches for small and medium sizes (&lt;32KiB) */
     @NativeType("size_t")
     public long sizecache() { return nsizecache(address()); }
-    /** Returns the value of the {@code spancache} field. */
+    /** Current number of bytes available in thread span caches for small and medium sizes (&lt;32KiB) */
     @NativeType("size_t")
     public long spancache() { return nspancache(address()); }
-    /** Returns the value of the {@code thread_to_global} field. */
+    /** Total number of bytes transitioned from thread cache to global cache (only if {@code ENABLE_STATISTICS=1}) */
     @NativeType("size_t")
     public long thread_to_global() { return nthread_to_global(address()); }
-    /** Returns the value of the {@code global_to_thread} field. */
+    /** Total number of bytes transitioned from global cache to thread cache (only if {@code ENABLE_STATISTICS=1}) */
     @NativeType("size_t")
     public long global_to_thread() { return nglobal_to_thread(address()); }
-    /** Returns a {@link span_use}.Buffer view of the {@code span_use} field. */
+    /** Per span count statistics (only if {@code ENABLE_STATISTICS=1}) */
     @NativeType("*[64]")
     public span_use.Buffer span_use() { return nspan_use(address()); }
-    /** Returns a {@link span_use} view of the struct at the specified index of the {@code span_use} field. */
+    /** Per span count statistics (only if {@code ENABLE_STATISTICS=1}) */
     @NativeType("*")
     public span_use span_use(int index) { return nspan_use(address(), index); }
-    /** Returns a {@link size_use}.Buffer view of the {@code size_use} field. */
+    /** Per size class statistics (only if {@code ENABLE_STATISTICS=1}) */
     @NativeType("*[128]")
     public size_use.Buffer size_use() { return nsize_use(address()); }
-    /** Returns a {@link size_use} view of the struct at the specified index of the {@code size_use} field. */
+    /** Per size class statistics (only if {@code ENABLE_STATISTICS=1}) */
     @NativeType("*")
     public size_use size_use(int index) { return nsize_use(address(), index); }
 
@@ -338,61 +327,47 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sizecache} field. */
+        /** @return the value of the {@link RPmallocThreadStatistics#sizecache} field. */
         @NativeType("size_t")
         public long sizecache() { return RPmallocThreadStatistics.nsizecache(address()); }
-        /** Returns the value of the {@code spancache} field. */
+        /** @return the value of the {@link RPmallocThreadStatistics#spancache} field. */
         @NativeType("size_t")
         public long spancache() { return RPmallocThreadStatistics.nspancache(address()); }
-        /** Returns the value of the {@code thread_to_global} field. */
+        /** @return the value of the {@link RPmallocThreadStatistics#thread_to_global} field. */
         @NativeType("size_t")
         public long thread_to_global() { return RPmallocThreadStatistics.nthread_to_global(address()); }
-        /** Returns the value of the {@code global_to_thread} field. */
+        /** @return the value of the {@link RPmallocThreadStatistics#global_to_thread} field. */
         @NativeType("size_t")
         public long global_to_thread() { return RPmallocThreadStatistics.nglobal_to_thread(address()); }
-        /** Returns a {@link span_use}.Buffer view of the {@code span_use} field. */
+        /** @return a {@link span_use}.Buffer view of the {@link RPmallocThreadStatistics#span_use} field. */
         @NativeType("*[64]")
         public span_use.Buffer span_use() { return RPmallocThreadStatistics.nspan_use(address()); }
-        /** Returns a {@link span_use} view of the struct at the specified index of the {@code span_use} field. */
+        /** @return a {@link span_use} view of the struct at the specified index of the {@link RPmallocThreadStatistics#span_use} field. */
         @NativeType("*")
         public span_use span_use(int index) { return RPmallocThreadStatistics.nspan_use(address(), index); }
-        /** Returns a {@link size_use}.Buffer view of the {@code size_use} field. */
+        /** @return a {@link size_use}.Buffer view of the {@link RPmallocThreadStatistics#size_use} field. */
         @NativeType("*[128]")
         public size_use.Buffer size_use() { return RPmallocThreadStatistics.nsize_use(address()); }
-        /** Returns a {@link size_use} view of the struct at the specified index of the {@code size_use} field. */
+        /** @return a {@link size_use} view of the struct at the specified index of the {@link RPmallocThreadStatistics#size_use} field. */
         @NativeType("*")
         public size_use size_use(int index) { return RPmallocThreadStatistics.nsize_use(address(), index); }
 
     }
 
     /**
-     * <h3>Member documentation</h3>
-     * 
-     * <ul>
-     * <li>{@code current} &ndash; Currently used number of spans</li>
-     * <li>{@code peak} &ndash; High water mark of spans used</li>
-     * <li>{@code to_global} &ndash; Number of spans transitioned to global cache</li>
-     * <li>{@code from_global} &ndash; Number of spans transitioned from global cache</li>
-     * <li>{@code to_cache} &ndash; Number of spans transitioned to thread cache</li>
-     * <li>{@code from_cache} &ndash; Number of spans transitioned from thread cache</li>
-     * <li>{@code to_reserved} &ndash; Number of spans transitioned to reserved state</li>
-     * <li>{@code from_reserved} &ndash; Number of spans transitioned from reserved state</li>
-     * <li>{@code map_calls} &ndash; Number of raw memory map calls (not hitting the reserve spans but resulting in actual OS mmap calls)</li>
-     * </ul>
-     * 
      * <h3>Layout</h3>
      * 
      * <pre><code>
      * struct {
-     *     size_t current;
-     *     size_t peak;
-     *     size_t to_global;
-     *     size_t from_global;
-     *     size_t to_cache;
-     *     size_t from_cache;
-     *     size_t to_reserved;
-     *     size_t from_reserved;
-     *     size_t map_calls;
+     *     size_t {@link #current};
+     *     size_t {@link #peak};
+     *     size_t {@link #to_global};
+     *     size_t {@link #from_global};
+     *     size_t {@link #to_cache};
+     *     size_t {@link #from_cache};
+     *     size_t {@link #to_reserved};
+     *     size_t {@link #from_reserved};
+     *     size_t {@link #map_calls};
      * }</code></pre>
      */
     @NativeType("struct")
@@ -456,31 +431,31 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
         @Override
         public int sizeof() { return SIZEOF; }
     
-        /** Returns the value of the {@code current} field. */
+        /** Currently used number of spans */
         @NativeType("size_t")
         public long current() { return ncurrent(address()); }
-        /** Returns the value of the {@code peak} field. */
+        /** High water mark of spans used */
         @NativeType("size_t")
         public long peak() { return npeak(address()); }
-        /** Returns the value of the {@code to_global} field. */
+        /** Number of spans transitioned to global cache */
         @NativeType("size_t")
         public long to_global() { return nto_global(address()); }
-        /** Returns the value of the {@code from_global} field. */
+        /** Number of spans transitioned from global cache */
         @NativeType("size_t")
         public long from_global() { return nfrom_global(address()); }
-        /** Returns the value of the {@code to_cache} field. */
+        /** Number of spans transitioned to thread cache */
         @NativeType("size_t")
         public long to_cache() { return nto_cache(address()); }
-        /** Returns the value of the {@code from_cache} field. */
+        /** Number of spans transitioned from thread cache */
         @NativeType("size_t")
         public long from_cache() { return nfrom_cache(address()); }
-        /** Returns the value of the {@code to_reserved} field. */
+        /** Number of spans transitioned to reserved state */
         @NativeType("size_t")
         public long to_reserved() { return nto_reserved(address()); }
-        /** Returns the value of the {@code from_reserved} field. */
+        /** Number of spans transitioned from reserved state */
         @NativeType("size_t")
         public long from_reserved() { return nfrom_reserved(address()); }
-        /** Returns the value of the {@code map_calls} field. */
+        /** Number of raw memory map calls (not hitting the reserve spans but resulting in actual OS mmap calls) */
         @NativeType("size_t")
         public long map_calls() { return nmap_calls(address()); }
     
@@ -572,31 +547,31 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
                 return ELEMENT_FACTORY;
             }
     
-            /** Returns the value of the {@code current} field. */
+            /** @return the value of the {@link span_use#current} field. */
             @NativeType("size_t")
             public long current() { return span_use.ncurrent(address()); }
-            /** Returns the value of the {@code peak} field. */
+            /** @return the value of the {@link span_use#peak} field. */
             @NativeType("size_t")
             public long peak() { return span_use.npeak(address()); }
-            /** Returns the value of the {@code to_global} field. */
+            /** @return the value of the {@link span_use#to_global} field. */
             @NativeType("size_t")
             public long to_global() { return span_use.nto_global(address()); }
-            /** Returns the value of the {@code from_global} field. */
+            /** @return the value of the {@link span_use#from_global} field. */
             @NativeType("size_t")
             public long from_global() { return span_use.nfrom_global(address()); }
-            /** Returns the value of the {@code to_cache} field. */
+            /** @return the value of the {@link span_use#to_cache} field. */
             @NativeType("size_t")
             public long to_cache() { return span_use.nto_cache(address()); }
-            /** Returns the value of the {@code from_cache} field. */
+            /** @return the value of the {@link span_use#from_cache} field. */
             @NativeType("size_t")
             public long from_cache() { return span_use.nfrom_cache(address()); }
-            /** Returns the value of the {@code to_reserved} field. */
+            /** @return the value of the {@link span_use#to_reserved} field. */
             @NativeType("size_t")
             public long to_reserved() { return span_use.nto_reserved(address()); }
-            /** Returns the value of the {@code from_reserved} field. */
+            /** @return the value of the {@link span_use#from_reserved} field. */
             @NativeType("size_t")
             public long from_reserved() { return span_use.nfrom_reserved(address()); }
-            /** Returns the value of the {@code map_calls} field. */
+            /** @return the value of the {@link span_use#map_calls} field. */
             @NativeType("size_t")
             public long map_calls() { return span_use.nmap_calls(address()); }
     
@@ -605,31 +580,18 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
     }
 
     /**
-     * <h3>Member documentation</h3>
-     * 
-     * <ul>
-     * <li>{@code alloc_current} &ndash; Current number of allocations</li>
-     * <li>{@code alloc_peak} &ndash; Peak number of allocations</li>
-     * <li>{@code alloc_total} &ndash; Total number of allocations</li>
-     * <li>{@code free_total} &ndash; Total number of frees</li>
-     * <li>{@code spans_to_cache} &ndash; Number of spans transitioned to cache</li>
-     * <li>{@code spans_from_cache} &ndash; Number of spans transitioned from cache</li>
-     * <li>{@code spans_from_reserved} &ndash; Number of spans transitioned from reserved state</li>
-     * <li>{@code map_calls} &ndash; Number of raw memory map calls (not hitting the reserve spans but resulting in actual OS mmap calls)</li>
-     * </ul>
-     * 
      * <h3>Layout</h3>
      * 
      * <pre><code>
      * struct {
-     *     size_t alloc_current;
-     *     size_t alloc_peak;
-     *     size_t alloc_total;
-     *     size_t free_total;
-     *     size_t spans_to_cache;
-     *     size_t spans_from_cache;
-     *     size_t spans_from_reserved;
-     *     size_t map_calls;
+     *     size_t {@link #alloc_current};
+     *     size_t {@link #alloc_peak};
+     *     size_t {@link #alloc_total};
+     *     size_t {@link #free_total};
+     *     size_t {@link #spans_to_cache};
+     *     size_t {@link #spans_from_cache};
+     *     size_t {@link #spans_from_reserved};
+     *     size_t {@link #map_calls};
      * }</code></pre>
      */
     @NativeType("struct")
@@ -690,28 +652,28 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
         @Override
         public int sizeof() { return SIZEOF; }
     
-        /** Returns the value of the {@code alloc_current} field. */
+        /** Current number of allocations */
         @NativeType("size_t")
         public long alloc_current() { return nalloc_current(address()); }
-        /** Returns the value of the {@code alloc_peak} field. */
+        /** Peak number of allocations */
         @NativeType("size_t")
         public long alloc_peak() { return nalloc_peak(address()); }
-        /** Returns the value of the {@code alloc_total} field. */
+        /** Total number of allocations */
         @NativeType("size_t")
         public long alloc_total() { return nalloc_total(address()); }
-        /** Returns the value of the {@code free_total} field. */
+        /** Total number of frees */
         @NativeType("size_t")
         public long free_total() { return nfree_total(address()); }
-        /** Returns the value of the {@code spans_to_cache} field. */
+        /** Number of spans transitioned to cache */
         @NativeType("size_t")
         public long spans_to_cache() { return nspans_to_cache(address()); }
-        /** Returns the value of the {@code spans_from_cache} field. */
+        /** Number of spans transitioned from cache */
         @NativeType("size_t")
         public long spans_from_cache() { return nspans_from_cache(address()); }
-        /** Returns the value of the {@code spans_from_reserved} field. */
+        /** Number of spans transitioned from reserved state */
         @NativeType("size_t")
         public long spans_from_reserved() { return nspans_from_reserved(address()); }
-        /** Returns the value of the {@code map_calls} field. */
+        /** Number of raw memory map calls (not hitting the reserve spans but resulting in actual OS mmap calls) */
         @NativeType("size_t")
         public long map_calls() { return nmap_calls(address()); }
     
@@ -801,28 +763,28 @@ public class RPmallocThreadStatistics extends Struct implements NativeResource {
                 return ELEMENT_FACTORY;
             }
     
-            /** Returns the value of the {@code alloc_current} field. */
+            /** @return the value of the {@link size_use#alloc_current} field. */
             @NativeType("size_t")
             public long alloc_current() { return size_use.nalloc_current(address()); }
-            /** Returns the value of the {@code alloc_peak} field. */
+            /** @return the value of the {@link size_use#alloc_peak} field. */
             @NativeType("size_t")
             public long alloc_peak() { return size_use.nalloc_peak(address()); }
-            /** Returns the value of the {@code alloc_total} field. */
+            /** @return the value of the {@link size_use#alloc_total} field. */
             @NativeType("size_t")
             public long alloc_total() { return size_use.nalloc_total(address()); }
-            /** Returns the value of the {@code free_total} field. */
+            /** @return the value of the {@link size_use#free_total} field. */
             @NativeType("size_t")
             public long free_total() { return size_use.nfree_total(address()); }
-            /** Returns the value of the {@code spans_to_cache} field. */
+            /** @return the value of the {@link size_use#spans_to_cache} field. */
             @NativeType("size_t")
             public long spans_to_cache() { return size_use.nspans_to_cache(address()); }
-            /** Returns the value of the {@code spans_from_cache} field. */
+            /** @return the value of the {@link size_use#spans_from_cache} field. */
             @NativeType("size_t")
             public long spans_from_cache() { return size_use.nspans_from_cache(address()); }
-            /** Returns the value of the {@code spans_from_reserved} field. */
+            /** @return the value of the {@link size_use#spans_from_reserved} field. */
             @NativeType("size_t")
             public long spans_from_reserved() { return size_use.nspans_from_reserved(address()); }
-            /** Returns the value of the {@code map_calls} field. */
+            /** @return the value of the {@link size_use#map_calls} field. */
             @NativeType("size_t")
             public long map_calls() { return size_use.nmap_calls(address()); }
     

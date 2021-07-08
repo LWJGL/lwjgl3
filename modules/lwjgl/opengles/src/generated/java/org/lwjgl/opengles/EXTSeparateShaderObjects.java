@@ -58,6 +58,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTSeparateShaderObjects {
 
+    static { GLES.initialize(); }
+
     /** Accepted by {@code stages} parameter to UseProgramStagesEXT. */
     public static final int
         GL_VERTEX_SHADER_BIT_EXT   = 0x1,
@@ -72,8 +74,6 @@ public class EXTSeparateShaderObjects {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv. */
     public static final int GL_PROGRAM_PIPELINE_BINDING_EXT = 0x825A;
-
-    static { GLES.initialize(); }
 
     protected EXTSeparateShaderObjects() {
         throw new UnsupportedOperationException();

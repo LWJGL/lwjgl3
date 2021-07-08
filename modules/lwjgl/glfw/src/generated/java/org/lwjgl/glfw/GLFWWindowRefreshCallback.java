@@ -19,7 +19,7 @@ import static org.lwjgl.glfw.GLFW.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void (*) (
+ * void (*{@link #invoke}) (
  *     GLFWwindow *window
  * )</code></pre>
  *
@@ -53,7 +53,7 @@ public abstract class GLFWWindowRefreshCallback extends Callback implements GLFW
     }
 
     protected GLFWWindowRefreshCallback() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     GLFWWindowRefreshCallback(long functionPointer) {

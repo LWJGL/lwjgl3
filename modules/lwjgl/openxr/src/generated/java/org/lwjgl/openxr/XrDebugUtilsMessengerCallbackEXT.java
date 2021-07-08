@@ -39,7 +39,7 @@ public abstract class XrDebugUtilsMessengerCallbackEXT extends Callback implemen
     }
 
     protected XrDebugUtilsMessengerCallbackEXT() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     XrDebugUtilsMessengerCallbackEXT(long functionPointer) {

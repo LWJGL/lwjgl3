@@ -64,10 +64,10 @@ public class NkStyleItemData extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkImage} view of the {@code image} field. */
+    /** @return a {@link NkImage} view of the {@code image} field. */
     @NativeType("struct nk_image")
     public NkImage image() { return nimage(address()); }
-    /** Returns a {@link NkColor} view of the {@code color} field. */
+    /** @return a {@link NkColor} view of the {@code color} field. */
     @NativeType("struct nk_color")
     public NkColor color() { return ncolor(address()); }
 
@@ -283,10 +283,10 @@ public class NkStyleItemData extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkImage} view of the {@code image} field. */
+        /** @return a {@link NkImage} view of the {@code image} field. */
         @NativeType("struct nk_image")
         public NkImage image() { return NkStyleItemData.nimage(address()); }
-        /** Returns a {@link NkColor} view of the {@code color} field. */
+        /** @return a {@link NkColor} view of the {@code color} field. */
         @NativeType("struct nk_color")
         public NkColor color() { return NkStyleItemData.ncolor(address()); }
 

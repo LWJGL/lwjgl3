@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * size_t (*) (
+ * size_t (*{@link #invoke}) (
  *     int blockSize
  * )</code></pre>
  */
@@ -49,7 +49,7 @@ public abstract class CUoccupancyB2DSize extends Callback implements CUoccupancy
     }
 
     protected CUoccupancyB2DSize() {
-        super(SIGNATURE);
+        super(CIF);
     }
 
     CUoccupancyB2DSize(long functionPointer) {

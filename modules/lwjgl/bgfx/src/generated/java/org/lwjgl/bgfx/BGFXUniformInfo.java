@@ -19,21 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Uniform info.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code name[256]} &ndash; uniform name</li>
- * <li>{@code type} &ndash; uniform type</li>
- * <li>{@code num} &ndash; number of elements in array</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct bgfx_uniform_info_t {
- *     char name[256];
- *     bgfx_uniform_type_t type;
- *     uint16_t num;
+ *     char {@link #name}[256];
+ *     bgfx_uniform_type_t {@link #type};
+ *     uint16_t {@link #num};
  * }</code></pre>
  */
 @NativeType("struct bgfx_uniform_info_t")
@@ -79,24 +71,24 @@ public class BGFXUniformInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+    /** uniform name */
     @NativeType("char[256]")
     public ByteBuffer name() { return nname(address()); }
-    /** Decodes the null-terminated string stored in the {@code name} field. */
+    /** uniform name */
     @NativeType("char[256]")
     public String nameString() { return nnameString(address()); }
-    /** Returns the value of the {@code type} field. */
+    /** uniform type */
     @NativeType("bgfx_uniform_type_t")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code num} field. */
+    /** number of elements in array */
     @NativeType("uint16_t")
     public short num() { return nnum(address()); }
 
-    /** Copies the specified encoded string to the {@code name} field. */
+    /** Copies the specified encoded string to the {@link #name} field. */
     public BGFXUniformInfo name(@NativeType("char[256]") ByteBuffer value) { nname(address(), value); return this; }
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public BGFXUniformInfo type(@NativeType("bgfx_uniform_type_t") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@code num} field. */
+    /** Sets the specified value to the {@link #num} field. */
     public BGFXUniformInfo num(@NativeType("uint16_t") short value) { nnum(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,24 +319,24 @@ public class BGFXUniformInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link ByteBuffer} view of the {@code name} field. */
+        /** @return a {@link ByteBuffer} view of the {@link BGFXUniformInfo#name} field. */
         @NativeType("char[256]")
         public ByteBuffer name() { return BGFXUniformInfo.nname(address()); }
-        /** Decodes the null-terminated string stored in the {@code name} field. */
+        /** @return the null-terminated string stored in the {@link BGFXUniformInfo#name} field. */
         @NativeType("char[256]")
         public String nameString() { return BGFXUniformInfo.nnameString(address()); }
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@link BGFXUniformInfo#type} field. */
         @NativeType("bgfx_uniform_type_t")
         public int type() { return BGFXUniformInfo.ntype(address()); }
-        /** Returns the value of the {@code num} field. */
+        /** @return the value of the {@link BGFXUniformInfo#num} field. */
         @NativeType("uint16_t")
         public short num() { return BGFXUniformInfo.nnum(address()); }
 
-        /** Copies the specified encoded string to the {@code name} field. */
+        /** Copies the specified encoded string to the {@link BGFXUniformInfo#name} field. */
         public BGFXUniformInfo.Buffer name(@NativeType("char[256]") ByteBuffer value) { BGFXUniformInfo.nname(address(), value); return this; }
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link BGFXUniformInfo#type} field. */
         public BGFXUniformInfo.Buffer type(@NativeType("bgfx_uniform_type_t") int value) { BGFXUniformInfo.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@code num} field. */
+        /** Sets the specified value to the {@link BGFXUniformInfo#num} field. */
         public BGFXUniformInfo.Buffer num(@NativeType("uint16_t") short value) { BGFXUniformInfo.nnum(address(), value); return this; }
 
     }

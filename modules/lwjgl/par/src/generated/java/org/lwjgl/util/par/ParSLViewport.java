@@ -74,13 +74,13 @@ public class ParSLViewport extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code left} field. */
+    /** @return the value of the {@code left} field. */
     public float left() { return nleft(address()); }
-    /** Returns the value of the {@code top} field. */
+    /** @return the value of the {@code top} field. */
     public float top() { return ntop(address()); }
-    /** Returns the value of the {@code right} field. */
+    /** @return the value of the {@code right} field. */
     public float right() { return nright(address()); }
-    /** Returns the value of the {@code bottom} field. */
+    /** @return the value of the {@code bottom} field. */
     public float bottom() { return nbottom(address()); }
 
     /** Sets the specified value to the {@code left} field. */
@@ -318,13 +318,13 @@ public class ParSLViewport extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code left} field. */
+        /** @return the value of the {@code left} field. */
         public float left() { return ParSLViewport.nleft(address()); }
-        /** Returns the value of the {@code top} field. */
+        /** @return the value of the {@code top} field. */
         public float top() { return ParSLViewport.ntop(address()); }
-        /** Returns the value of the {@code right} field. */
+        /** @return the value of the {@code right} field. */
         public float right() { return ParSLViewport.nright(address()); }
-        /** Returns the value of the {@code bottom} field. */
+        /** @return the value of the {@code bottom} field. */
         public float bottom() { return ParSLViewport.nbottom(address()); }
 
         /** Sets the specified value to the {@code left} field. */

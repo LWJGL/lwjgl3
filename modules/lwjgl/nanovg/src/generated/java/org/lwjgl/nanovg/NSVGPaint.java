@@ -70,13 +70,13 @@ public class NSVGPaint extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("char")
     public byte type() { return ntype(address()); }
-    /** Returns the value of the {@code color} field. */
+    /** @return the value of the {@code color} field. */
     @NativeType("unsigned int")
     public int color() { return ncolor(address()); }
-    /** Returns a {@link NSVGGradient} view of the struct pointed to by the {@code gradient} field. */
+    /** @return a {@link NSVGGradient} view of the struct pointed to by the {@code gradient} field. */
     @NativeType("NSVGgradient *")
     public NSVGGradient gradient() { return ngradient(address()); }
 
@@ -156,13 +156,13 @@ public class NSVGPaint extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("char")
         public byte type() { return NSVGPaint.ntype(address()); }
-        /** Returns the value of the {@code color} field. */
+        /** @return the value of the {@code color} field. */
         @NativeType("unsigned int")
         public int color() { return NSVGPaint.ncolor(address()); }
-        /** Returns a {@link NSVGGradient} view of the struct pointed to by the {@code gradient} field. */
+        /** @return a {@link NSVGGradient} view of the struct pointed to by the {@code gradient} field. */
         @NativeType("NSVGgradient *")
         public NSVGGradient gradient() { return NSVGPaint.ngradient(address()); }
 

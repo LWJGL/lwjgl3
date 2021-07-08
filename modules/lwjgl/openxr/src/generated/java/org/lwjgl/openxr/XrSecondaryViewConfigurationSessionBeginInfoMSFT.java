@@ -72,16 +72,16 @@ public class XrSecondaryViewConfigurationSessionBeginInfoMSFT extends Struct imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code viewConfigurationCount} field. */
+    /** @return the value of the {@code viewConfigurationCount} field. */
     @NativeType("uint32_t")
     public int viewConfigurationCount() { return nviewConfigurationCount(address()); }
-    /** Returns a {@link IntBuffer} view of the data pointed to by the {@code enabledViewConfigurationTypes} field. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code enabledViewConfigurationTypes} field. */
     @NativeType("XrViewConfigurationType const *")
     public IntBuffer enabledViewConfigurationTypes() { return nenabledViewConfigurationTypes(address()); }
 
@@ -337,16 +337,16 @@ public class XrSecondaryViewConfigurationSessionBeginInfoMSFT extends Struct imp
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSecondaryViewConfigurationSessionBeginInfoMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSecondaryViewConfigurationSessionBeginInfoMSFT.nnext(address()); }
-        /** Returns the value of the {@code viewConfigurationCount} field. */
+        /** @return the value of the {@code viewConfigurationCount} field. */
         @NativeType("uint32_t")
         public int viewConfigurationCount() { return XrSecondaryViewConfigurationSessionBeginInfoMSFT.nviewConfigurationCount(address()); }
-        /** Returns a {@link IntBuffer} view of the data pointed to by the {@code enabledViewConfigurationTypes} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code enabledViewConfigurationTypes} field. */
         @NativeType("XrViewConfigurationType const *")
         public IntBuffer enabledViewConfigurationTypes() { return XrSecondaryViewConfigurationSessionBeginInfoMSFT.nenabledViewConfigurationTypes(address()); }
 

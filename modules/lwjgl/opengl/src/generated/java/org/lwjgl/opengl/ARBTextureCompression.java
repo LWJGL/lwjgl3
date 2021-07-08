@@ -39,6 +39,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ARBTextureCompression {
 
+    static { GL.initialize(); }
+
     /** Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, and CopyTexImage2D. */
     public static final int
         GL_COMPRESSED_ALPHA_ARB           = 0x84E9,
@@ -60,8 +62,6 @@ public class ARBTextureCompression {
     public static final int
         GL_NUM_COMPRESSED_TEXTURE_FORMATS_ARB = 0x86A2,
         GL_COMPRESSED_TEXTURE_FORMATS_ARB     = 0x86A3;
-
-    static { GL.initialize(); }
 
     protected ARBTextureCompression() {
         throw new UnsupportedOperationException();

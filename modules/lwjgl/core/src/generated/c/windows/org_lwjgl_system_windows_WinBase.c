@@ -27,6 +27,16 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_windows_WinBase_nGetModuleHandle(J
     return __result;
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_WinBase_nGetModuleFileName(JNIEnv *__env, jclass clazz, jlong hModuleAddress, jlong lpFilenameAddress, jint nSize) {
+    HMODULE hModule = (HMODULE)(intptr_t)hModuleAddress;
+    LPTSTR lpFilename = (LPTSTR)(intptr_t)lpFilenameAddress;
+    jint __result;
+    UNUSED_PARAMS(__env, clazz)
+    __result = (jint)GetModuleFileName(hModule, lpFilename, (DWORD)nSize);
+    saveLastError();
+    return __result;
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_windows_WinBase_nLoadLibrary(JNIEnv *__env, jclass clazz, jlong nameAddress) {
     LPCTSTR name = (LPCTSTR)(intptr_t)nameAddress;
     jlong __result;

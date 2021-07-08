@@ -17,6 +17,8 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>All functionality in this extension is included in core Vulkan 1.2, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
  * 
+ * <h5>VK_EXT_host_query_reset</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_host_query_reset}</dd>
@@ -39,6 +41,11 @@ import static org.lwjgl.system.JNI.*;
  * <dd><ul>
  * <li>Bas Nieuwenhuizen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_host_query_reset:%20&amp;body=@BNieuwenhuizen%20">BNieuwenhuizen</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2019-03-06</dd>
  * <dt><b>IP Status</b></dt>

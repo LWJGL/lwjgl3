@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If this structure is not present, {@code representativeFragmentTestEnable} is considered to be {@link VK10#VK_FALSE FALSE}, and the representative fragment test is disabled.</p>
  * 
- * <p>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-early-mode">early fragment tests</a> are not enabled in the active fragment shader, the representative fragment shader test has no effect, even if enabled.</p>
+ * <p>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-fragment-earlytest">early fragment tests</a> are not enabled in the active fragment shader, the representative fragment shader test has no effect, even if enabled.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -30,21 +30,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link NVRepresentativeFragmentTest#VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code representativeFragmentTestEnable} &ndash; controls whether the representative fragment test is enabled.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineRepresentativeFragmentTestStateCreateInfoNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkBool32 representativeFragmentTestEnable;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkBool32 {@link #representativeFragmentTestEnable};
  * }</code></pre>
  */
 public class VkPipelineRepresentativeFragmentTestStateCreateInfoNV extends Struct implements NativeResource {
@@ -89,21 +81,21 @@ public class VkPipelineRepresentativeFragmentTestStateCreateInfoNV extends Struc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code representativeFragmentTestEnable} field. */
+    /** controls whether the representative fragment test is enabled. */
     @NativeType("VkBool32")
     public boolean representativeFragmentTestEnable() { return nrepresentativeFragmentTestEnable(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineRepresentativeFragmentTestStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineRepresentativeFragmentTestStateCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code representativeFragmentTestEnable} field. */
+    /** Sets the specified value to the {@link #representativeFragmentTestEnable} field. */
     public VkPipelineRepresentativeFragmentTestStateCreateInfoNV representativeFragmentTestEnable(@NativeType("VkBool32") boolean value) { nrepresentativeFragmentTestEnable(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -326,21 +318,21 @@ public class VkPipelineRepresentativeFragmentTestStateCreateInfoNV extends Struc
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineRepresentativeFragmentTestStateCreateInfoNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineRepresentativeFragmentTestStateCreateInfoNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineRepresentativeFragmentTestStateCreateInfoNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineRepresentativeFragmentTestStateCreateInfoNV.npNext(address()); }
-        /** Returns the value of the {@code representativeFragmentTestEnable} field. */
+        /** @return the value of the {@link VkPipelineRepresentativeFragmentTestStateCreateInfoNV#representativeFragmentTestEnable} field. */
         @NativeType("VkBool32")
         public boolean representativeFragmentTestEnable() { return VkPipelineRepresentativeFragmentTestStateCreateInfoNV.nrepresentativeFragmentTestEnable(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineRepresentativeFragmentTestStateCreateInfoNV#sType} field. */
         public VkPipelineRepresentativeFragmentTestStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineRepresentativeFragmentTestStateCreateInfoNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineRepresentativeFragmentTestStateCreateInfoNV#pNext} field. */
         public VkPipelineRepresentativeFragmentTestStateCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRepresentativeFragmentTestStateCreateInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code representativeFragmentTestEnable} field. */
+        /** Sets the specified value to the {@link VkPipelineRepresentativeFragmentTestStateCreateInfoNV#representativeFragmentTestEnable} field. */
         public VkPipelineRepresentativeFragmentTestStateCreateInfoNV.Buffer representativeFragmentTestEnable(@NativeType("VkBool32") boolean value) { VkPipelineRepresentativeFragmentTestStateCreateInfoNV.nrepresentativeFragmentTestEnable(address(), value ? 1 : 0); return this; }
 
     }

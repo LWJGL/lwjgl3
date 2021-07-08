@@ -86,25 +86,25 @@ public class XrGraphicsBindingOpenGLXlibKHR extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code xDisplay} field. */
+    /** @return the value of the {@code xDisplay} field. */
     @NativeType("Display *")
     public long xDisplay() { return nxDisplay(address()); }
-    /** Returns the value of the {@code visualid} field. */
+    /** @return the value of the {@code visualid} field. */
     @NativeType("uint32_t")
     public int visualid() { return nvisualid(address()); }
-    /** Returns the value of the {@code glxFBConfig} field. */
+    /** @return the value of the {@code glxFBConfig} field. */
     @NativeType("GLXFBConfig")
     public long glxFBConfig() { return nglxFBConfig(address()); }
-    /** Returns the value of the {@code glxDrawable} field. */
+    /** @return the value of the {@code glxDrawable} field. */
     @NativeType("GLXDrawable")
     public long glxDrawable() { return nglxDrawable(address()); }
-    /** Returns the value of the {@code glxContext} field. */
+    /** @return the value of the {@code glxContext} field. */
     @NativeType("GLXContext")
     public long glxContext() { return nglxContext(address()); }
 
@@ -391,25 +391,25 @@ public class XrGraphicsBindingOpenGLXlibKHR extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGraphicsBindingOpenGLXlibKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrGraphicsBindingOpenGLXlibKHR.nnext(address()); }
-        /** Returns the value of the {@code xDisplay} field. */
+        /** @return the value of the {@code xDisplay} field. */
         @NativeType("Display *")
         public long xDisplay() { return XrGraphicsBindingOpenGLXlibKHR.nxDisplay(address()); }
-        /** Returns the value of the {@code visualid} field. */
+        /** @return the value of the {@code visualid} field. */
         @NativeType("uint32_t")
         public int visualid() { return XrGraphicsBindingOpenGLXlibKHR.nvisualid(address()); }
-        /** Returns the value of the {@code glxFBConfig} field. */
+        /** @return the value of the {@code glxFBConfig} field. */
         @NativeType("GLXFBConfig")
         public long glxFBConfig() { return XrGraphicsBindingOpenGLXlibKHR.nglxFBConfig(address()); }
-        /** Returns the value of the {@code glxDrawable} field. */
+        /** @return the value of the {@code glxDrawable} field. */
         @NativeType("GLXDrawable")
         public long glxDrawable() { return XrGraphicsBindingOpenGLXlibKHR.nglxDrawable(address()); }
-        /** Returns the value of the {@code glxContext} field. */
+        /** @return the value of the {@code glxContext} field. */
         @NativeType("GLXContext")
         public long glxContext() { return XrGraphicsBindingOpenGLXlibKHR.nglxContext(address()); }
 

@@ -22,6 +22,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>The new struct {@link VkShaderModuleValidationCacheCreateInfoEXT} can be included in the {@code pNext} chain at {@link VK10#vkCreateShaderModule CreateShaderModule} time. It contains a {@code VkValidationCacheEXT} to use when validating the {@code VkShaderModule}.</p>
  * 
+ * <h5>VK_EXT_validation_cache</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_EXT_validation_cache}</dd>
@@ -39,6 +41,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>Cort Stratton <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_validation_cache:%20&amp;body=@cdwfs%20">cdwfs</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-08-29</dd>
  * <dt><b>IP Status</b></dt>

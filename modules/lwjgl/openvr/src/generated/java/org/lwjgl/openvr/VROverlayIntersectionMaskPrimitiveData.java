@@ -64,10 +64,10 @@ public class VROverlayIntersectionMaskPrimitiveData extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link IntersectionMaskRectangle} view of the {@code m_Rectangle} field. */
+    /** @return a {@link IntersectionMaskRectangle} view of the {@code m_Rectangle} field. */
     @NativeType("IntersectionMaskRectangle_t")
     public IntersectionMaskRectangle m_Rectangle() { return nm_Rectangle(address()); }
-    /** Returns a {@link IntersectionMaskCircle} view of the {@code m_Circle} field. */
+    /** @return a {@link IntersectionMaskCircle} view of the {@code m_Circle} field. */
     @NativeType("IntersectionMaskCircle_t")
     public IntersectionMaskCircle m_Circle() { return nm_Circle(address()); }
 
@@ -283,10 +283,10 @@ public class VROverlayIntersectionMaskPrimitiveData extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link IntersectionMaskRectangle} view of the {@code m_Rectangle} field. */
+        /** @return a {@link IntersectionMaskRectangle} view of the {@code m_Rectangle} field. */
         @NativeType("IntersectionMaskRectangle_t")
         public IntersectionMaskRectangle m_Rectangle() { return VROverlayIntersectionMaskPrimitiveData.nm_Rectangle(address()); }
-        /** Returns a {@link IntersectionMaskCircle} view of the {@code m_Circle} field. */
+        /** @return a {@link IntersectionMaskCircle} view of the {@code m_Circle} field. */
         @NativeType("IntersectionMaskCircle_t")
         public IntersectionMaskCircle m_Circle() { return VROverlayIntersectionMaskPrimitiveData.nm_Circle(address()); }
 

@@ -18,35 +18,15 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying sparse image memory requirements.
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code formatProperties} &ndash; {@code formatProperties.aspectMask} is the set of aspects of the image that this sparse memory requirement applies to. This will usually have a single aspect specified. However, depth/stencil images <b>may</b> have depth and stencil data interleaved in the same sparse block, in which case both {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} and {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT} would be present.
- * 
- * <p>{@code formatProperties.imageGranularity} describes the dimensions of a single bindable sparse image block in texel units. For aspect {@link VK10#VK_IMAGE_ASPECT_METADATA_BIT IMAGE_ASPECT_METADATA_BIT}, all dimensions will be zero. All metadata is located in the mip tail region.</p>
- * 
- * <p>{@code formatProperties.flags} is a bitmask of {@code VkSparseImageFormatFlagBits}:</p>
- * 
- * <ul>
- * <li>If {@link VK10#VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT} is set the image uses a single mip tail region for all array layers.</li>
- * <li>If {@link VK10#VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT} is set the dimensions of mip levels <b>must</b> be integer multiples of the corresponding dimensions of the sparse image block for levels not located in the mip tail.</li>
- * <li>If {@link VK10#VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT} is set the image uses non-standard sparse image block dimensions. The {@code formatProperties.imageGranularity} values do not match the standard sparse image block dimension corresponding to the image&#8217;s format.</li>
- * </ul></li>
- * <li>{@code imageMipTailFirstLod} &ndash; the first mip level at which image subresources are included in the mip tail region.</li>
- * <li>{@code imageMipTailSize} &ndash; the memory size (in bytes) of the mip tail region. If {@code formatProperties.flags} contains {@link VK10#VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT}, this is the size of the whole mip tail, otherwise this is the size of the mip tail of a single array layer. This value is guaranteed to be a multiple of the sparse block size in bytes.</li>
- * <li>{@code imageMipTailOffset} &ndash; the opaque memory offset used with {@link VkSparseImageOpaqueMemoryBindInfo} to bind the mip tail region(s).</li>
- * <li>{@code imageMipTailStride} &ndash; the offset stride between each array-layer&#8217;s mip tail, if {@code formatProperties.flags} does not contain {@link VK10#VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT} (otherwise the value is undefined).</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSparseImageMemoryRequirements {
- *     {@link VkSparseImageFormatProperties VkSparseImageFormatProperties} formatProperties;
- *     uint32_t imageMipTailFirstLod;
- *     VkDeviceSize imageMipTailSize;
- *     VkDeviceSize imageMipTailOffset;
- *     VkDeviceSize imageMipTailStride;
+ *     {@link VkSparseImageFormatProperties VkSparseImageFormatProperties} {@link #formatProperties};
+ *     uint32_t {@link #imageMipTailFirstLod};
+ *     VkDeviceSize {@link #imageMipTailSize};
+ *     VkDeviceSize {@link #imageMipTailOffset};
+ *     VkDeviceSize {@link #imageMipTailStride};
  * }</code></pre>
  */
 public class VkSparseImageMemoryRequirements extends Struct implements NativeResource {
@@ -97,18 +77,30 @@ public class VkSparseImageMemoryRequirements extends Struct implements NativeRes
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link VkSparseImageFormatProperties} view of the {@code formatProperties} field. */
+    /**
+     * {@code formatProperties.aspectMask} is the set of aspects of the image that this sparse memory requirement applies to. This will usually have a single aspect specified. However, depth/stencil images <b>may</b> have depth and stencil data interleaved in the same sparse block, in which case both {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} and {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT} would be present.
+     * 
+     * <p>{@code formatProperties.imageGranularity} describes the dimensions of a single bindable sparse image block in texel units. For aspect {@link VK10#VK_IMAGE_ASPECT_METADATA_BIT IMAGE_ASPECT_METADATA_BIT}, all dimensions will be zero. All metadata is located in the mip tail region.</p>
+     * 
+     * <p>{@code formatProperties.flags} is a bitmask of {@code VkSparseImageFormatFlagBits}:</p>
+     * 
+     * <ul>
+     * <li>If {@link VK10#VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT} is set the image uses a single mip tail region for all array layers.</li>
+     * <li>If {@link VK10#VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT} is set the dimensions of mip levels <b>must</b> be integer multiples of the corresponding dimensions of the sparse image block for levels not located in the mip tail.</li>
+     * <li>If {@link VK10#VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT} is set the image uses non-standard sparse image block dimensions. The {@code formatProperties.imageGranularity} values do not match the standard sparse image block dimension corresponding to the image&#8217;s format.</li>
+     * </ul>
+     */
     public VkSparseImageFormatProperties formatProperties() { return nformatProperties(address()); }
-    /** Returns the value of the {@code imageMipTailFirstLod} field. */
+    /** the first mip level at which image subresources are included in the mip tail region. */
     @NativeType("uint32_t")
     public int imageMipTailFirstLod() { return nimageMipTailFirstLod(address()); }
-    /** Returns the value of the {@code imageMipTailSize} field. */
+    /** the memory size (in bytes) of the mip tail region. If {@code formatProperties.flags} contains {@link VK10#VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT}, this is the size of the whole mip tail, otherwise this is the size of the mip tail of a single array layer. This value is guaranteed to be a multiple of the sparse block size in bytes. */
     @NativeType("VkDeviceSize")
     public long imageMipTailSize() { return nimageMipTailSize(address()); }
-    /** Returns the value of the {@code imageMipTailOffset} field. */
+    /** the opaque memory offset used with {@link VkSparseImageOpaqueMemoryBindInfo} to bind the mip tail region(s). */
     @NativeType("VkDeviceSize")
     public long imageMipTailOffset() { return nimageMipTailOffset(address()); }
-    /** Returns the value of the {@code imageMipTailStride} field. */
+    /** the offset stride between each array-layer&#8217;s mip tail, if {@code formatProperties.flags} does not contain {@link VK10#VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT} (otherwise the value is undefined). */
     @NativeType("VkDeviceSize")
     public long imageMipTailStride() { return nimageMipTailStride(address()); }
 
@@ -304,18 +296,18 @@ public class VkSparseImageMemoryRequirements extends Struct implements NativeRes
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link VkSparseImageFormatProperties} view of the {@code formatProperties} field. */
+        /** @return a {@link VkSparseImageFormatProperties} view of the {@link VkSparseImageMemoryRequirements#formatProperties} field. */
         public VkSparseImageFormatProperties formatProperties() { return VkSparseImageMemoryRequirements.nformatProperties(address()); }
-        /** Returns the value of the {@code imageMipTailFirstLod} field. */
+        /** @return the value of the {@link VkSparseImageMemoryRequirements#imageMipTailFirstLod} field. */
         @NativeType("uint32_t")
         public int imageMipTailFirstLod() { return VkSparseImageMemoryRequirements.nimageMipTailFirstLod(address()); }
-        /** Returns the value of the {@code imageMipTailSize} field. */
+        /** @return the value of the {@link VkSparseImageMemoryRequirements#imageMipTailSize} field. */
         @NativeType("VkDeviceSize")
         public long imageMipTailSize() { return VkSparseImageMemoryRequirements.nimageMipTailSize(address()); }
-        /** Returns the value of the {@code imageMipTailOffset} field. */
+        /** @return the value of the {@link VkSparseImageMemoryRequirements#imageMipTailOffset} field. */
         @NativeType("VkDeviceSize")
         public long imageMipTailOffset() { return VkSparseImageMemoryRequirements.nimageMipTailOffset(address()); }
-        /** Returns the value of the {@code imageMipTailStride} field. */
+        /** @return the value of the {@link VkSparseImageMemoryRequirements#imageMipTailStride} field. */
         @NativeType("VkDeviceSize")
         public long imageMipTailStride() { return VkSparseImageMemoryRequirements.nimageMipTailStride(address()); }
 

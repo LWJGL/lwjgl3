@@ -80,22 +80,22 @@ public class XrSecondaryViewConfigurationLayerInfoMSFT extends Struct implements
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code viewConfigurationType} field. */
+    /** @return the value of the {@code viewConfigurationType} field. */
     @NativeType("XrViewConfigurationType")
     public int viewConfigurationType() { return nviewConfigurationType(address()); }
-    /** Returns the value of the {@code environmentBlendMode} field. */
+    /** @return the value of the {@code environmentBlendMode} field. */
     @NativeType("XrEnvironmentBlendMode")
     public int environmentBlendMode() { return nenvironmentBlendMode(address()); }
-    /** Returns the value of the {@code layerCount} field. */
+    /** @return the value of the {@code layerCount} field. */
     @NativeType("uint32_t")
     public int layerCount() { return nlayerCount(address()); }
-    /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code layers} field. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code layers} field. */
     @NativeType("XrCompositionLayerBaseHeader const * const *")
     public PointerBuffer layers() { return nlayers(address()); }
 
@@ -367,22 +367,22 @@ public class XrSecondaryViewConfigurationLayerInfoMSFT extends Struct implements
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSecondaryViewConfigurationLayerInfoMSFT.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSecondaryViewConfigurationLayerInfoMSFT.nnext(address()); }
-        /** Returns the value of the {@code viewConfigurationType} field. */
+        /** @return the value of the {@code viewConfigurationType} field. */
         @NativeType("XrViewConfigurationType")
         public int viewConfigurationType() { return XrSecondaryViewConfigurationLayerInfoMSFT.nviewConfigurationType(address()); }
-        /** Returns the value of the {@code environmentBlendMode} field. */
+        /** @return the value of the {@code environmentBlendMode} field. */
         @NativeType("XrEnvironmentBlendMode")
         public int environmentBlendMode() { return XrSecondaryViewConfigurationLayerInfoMSFT.nenvironmentBlendMode(address()); }
-        /** Returns the value of the {@code layerCount} field. */
+        /** @return the value of the {@code layerCount} field. */
         @NativeType("uint32_t")
         public int layerCount() { return XrSecondaryViewConfigurationLayerInfoMSFT.nlayerCount(address()); }
-        /** Returns a {@link PointerBuffer} view of the data pointed to by the {@code layers} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code layers} field. */
         @NativeType("XrCompositionLayerBaseHeader const * const *")
         public PointerBuffer layers() { return XrSecondaryViewConfigurationLayerInfoMSFT.nlayers(address()); }
 

@@ -71,15 +71,15 @@ public class XrViewConfigurationViewFovEPIC extends Struct implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns a {@link XrFovf} view of the {@code recommendedFov} field. */
+    /** @return a {@link XrFovf} view of the {@code recommendedFov} field. */
     public XrFovf recommendedFov() { return nrecommendedFov(address()); }
-    /** Returns a {@link XrFovf} view of the {@code maxMutableFov} field. */
+    /** @return a {@link XrFovf} view of the {@code maxMutableFov} field. */
     public XrFovf maxMutableFov() { return nmaxMutableFov(address()); }
 
     /** Sets the specified value to the {@code type} field. */
@@ -321,15 +321,15 @@ public class XrViewConfigurationViewFovEPIC extends Struct implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrViewConfigurationViewFovEPIC.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrViewConfigurationViewFovEPIC.nnext(address()); }
-        /** Returns a {@link XrFovf} view of the {@code recommendedFov} field. */
+        /** @return a {@link XrFovf} view of the {@code recommendedFov} field. */
         public XrFovf recommendedFov() { return XrViewConfigurationViewFovEPIC.nrecommendedFov(address()); }
-        /** Returns a {@link XrFovf} view of the {@code maxMutableFov} field. */
+        /** @return a {@link XrFovf} view of the {@code maxMutableFov} field. */
         public XrFovf maxMutableFov() { return XrViewConfigurationViewFovEPIC.nmaxMutableFov(address()); }
 
         /** Sets the specified value to the {@code type} field. */

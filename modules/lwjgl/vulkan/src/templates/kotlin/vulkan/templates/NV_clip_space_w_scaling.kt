@@ -100,6 +100,7 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
 ￿    Color = texture(tex, P * 0.5 + 0.5);
 ￿}</code></pre>
 
+        <h5>VK_NV_clip_space_w_scaling</h5>
         <dl>
             <dt><b>Name String</b></dt>
             <dd>{@code VK_NV_clip_space_w_scaling}</dd>
@@ -122,7 +123,10 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
             <dd><ul>
                 <li>Eric Werness <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_clip_space_w_scaling:%20&amp;body=@ewerness-nv%20">ewerness-nv</a></li>
             </ul></dd>
+        </dl>
 
+        <h5>Other Extension Metadata</h5>
+        <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2017-02-15</dd>
 
@@ -178,8 +182,6 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The bound graphics pipeline <b>must</b> have been created with the #DYNAMIC_STATE_VIEWPORT_W_SCALING_NV dynamic state enabled</li>
-            <li>{@code firstViewport} <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxViewports}</li>
             <li>The sum of {@code firstViewport} and {@code viewportCount} <b>must</b> be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive</li>
         </ul>
 

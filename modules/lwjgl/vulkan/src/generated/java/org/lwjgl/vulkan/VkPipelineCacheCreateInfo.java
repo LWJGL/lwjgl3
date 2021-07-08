@@ -24,6 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>If {@code initialDataSize} is not 0, it <b>must</b> be equal to the size of {@code pInitialData}, as returned by {@code vkGetPipelineCacheData} when {@code pInitialData} was originally retrieved</li>
  * <li>If {@code initialDataSize} is not 0, {@code pInitialData} <b>must</b> have been retrieved from a previous call to {@code vkGetPipelineCacheData}</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-pipelineCreationCacheControl">{@code pipelineCreationCacheControl}</a> feature is not enabled, {@code flags} <b>must</b> not include {@link EXTPipelineCreationCacheControl#VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -31,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
+ * <li>{@code flags} <b>must</b> be a valid combination of {@code VkPipelineCacheCreateFlagBits} values</li>
  * <li>If {@code initialDataSize} is not 0, {@code pInitialData} <b>must</b> be a valid pointer to an array of {@code initialDataSize} bytes</li>
  * </ul>
  * 
@@ -39,25 +40,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link VK10#vkCreatePipelineCache CreatePipelineCache}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code flags} &ndash; reserved for future use.</li>
- * <li>{@code initialDataSize} &ndash; the number of bytes in {@code pInitialData}. If {@code initialDataSize} is zero, the pipeline cache will initially be empty.</li>
- * <li>{@code pInitialData} &ndash; a pointer to previously retrieved pipeline cache data. If the pipeline cache data is incompatible (as defined below) with the device, the pipeline cache will be initially empty. If {@code initialDataSize} is zero, {@code pInitialData} is ignored.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineCacheCreateInfo {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineCacheCreateFlags flags;
- *     size_t initialDataSize;
- *     void const * pInitialData;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineCacheCreateFlags {@link #flags};
+ *     size_t {@link #initialDataSize};
+ *     void const * {@link #pInitialData};
  * }</code></pre>
  */
 public class VkPipelineCacheCreateInfo extends Struct implements NativeResource {
@@ -108,30 +99,30 @@ public class VkPipelineCacheCreateInfo extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkPipelineCacheCreateFlagBits} specifying the behavior of the pipeline cache. */
     @NativeType("VkPipelineCacheCreateFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code initialDataSize} field. */
+    /** the number of bytes in {@code pInitialData}. If {@code initialDataSize} is zero, the pipeline cache will initially be empty. */
     @NativeType("size_t")
     public long initialDataSize() { return ninitialDataSize(address()); }
-    /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code pInitialData} field. */
+    /** a pointer to previously retrieved pipeline cache data. If the pipeline cache data is incompatible (as defined below) with the device, the pipeline cache will be initially empty. If {@code initialDataSize} is zero, {@code pInitialData} is ignored. */
     @Nullable
     @NativeType("void const *")
     public ByteBuffer pInitialData() { return npInitialData(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineCacheCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineCacheCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineCacheCreateInfo flags(@NativeType("VkPipelineCacheCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@code pInitialData} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pInitialData} field. */
     public VkPipelineCacheCreateInfo pInitialData(@Nullable @NativeType("void const *") ByteBuffer value) { npInitialData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -387,30 +378,30 @@ public class VkPipelineCacheCreateInfo extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineCacheCreateInfo#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineCacheCreateInfo.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineCacheCreateInfo#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineCacheCreateInfo.npNext(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkPipelineCacheCreateInfo#flags} field. */
         @NativeType("VkPipelineCacheCreateFlags")
         public int flags() { return VkPipelineCacheCreateInfo.nflags(address()); }
-        /** Returns the value of the {@code initialDataSize} field. */
+        /** @return the value of the {@link VkPipelineCacheCreateInfo#initialDataSize} field. */
         @NativeType("size_t")
         public long initialDataSize() { return VkPipelineCacheCreateInfo.ninitialDataSize(address()); }
-        /** Returns a {@link ByteBuffer} view of the data pointed to by the {@code pInitialData} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkPipelineCacheCreateInfo#pInitialData} field. */
         @Nullable
         @NativeType("void const *")
         public ByteBuffer pInitialData() { return VkPipelineCacheCreateInfo.npInitialData(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineCacheCreateInfo#sType} field. */
         public VkPipelineCacheCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineCacheCreateInfo.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineCacheCreateInfo#pNext} field. */
         public VkPipelineCacheCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineCacheCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkPipelineCacheCreateInfo#flags} field. */
         public VkPipelineCacheCreateInfo.Buffer flags(@NativeType("VkPipelineCacheCreateFlags") int value) { VkPipelineCacheCreateInfo.nflags(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@code pInitialData} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@link VkPipelineCacheCreateInfo#pInitialData} field. */
         public VkPipelineCacheCreateInfo.Buffer pInitialData(@Nullable @NativeType("void const *") ByteBuffer value) { VkPipelineCacheCreateInfo.npInitialData(address(), value); return this; }
 
     }

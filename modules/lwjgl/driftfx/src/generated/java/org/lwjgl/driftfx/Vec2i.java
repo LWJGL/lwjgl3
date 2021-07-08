@@ -64,9 +64,9 @@ public class Vec2i extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code x} field. */
+    /** @return the value of the {@code x} field. */
     public int x() { return nx(address()); }
-    /** Returns the value of the {@code y} field. */
+    /** @return the value of the {@code y} field. */
     public int y() { return ny(address()); }
 
     /** Sets the specified value to the {@code x} field. */
@@ -288,9 +288,9 @@ public class Vec2i extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code x} field. */
+        /** @return the value of the {@code x} field. */
         public int x() { return Vec2i.nx(address()); }
-        /** Returns the value of the {@code y} field. */
+        /** @return the value of the {@code y} field. */
         public int y() { return Vec2i.ny(address()); }
 
         /** Sets the specified value to the {@code x} field. */

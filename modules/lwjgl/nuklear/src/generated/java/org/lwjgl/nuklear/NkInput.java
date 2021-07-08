@@ -64,10 +64,10 @@ public class NkInput extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns a {@link NkKeyboard} view of the {@code keyboard} field. */
+    /** @return a {@link NkKeyboard} view of the {@code keyboard} field. */
     @NativeType("struct nk_keyboard")
     public NkKeyboard keyboard() { return nkeyboard(address()); }
-    /** Returns a {@link NkMouse} view of the {@code mouse} field. */
+    /** @return a {@link NkMouse} view of the {@code mouse} field. */
     @NativeType("struct nk_mouse")
     public NkMouse mouse() { return nmouse(address()); }
 
@@ -257,10 +257,10 @@ public class NkInput extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** Returns a {@link NkKeyboard} view of the {@code keyboard} field. */
+        /** @return a {@link NkKeyboard} view of the {@code keyboard} field. */
         @NativeType("struct nk_keyboard")
         public NkKeyboard keyboard() { return NkInput.nkeyboard(address()); }
-        /** Returns a {@link NkMouse} view of the {@code mouse} field. */
+        /** @return a {@link NkMouse} view of the {@code mouse} field. */
         @NativeType("struct nk_mouse")
         public NkMouse mouse() { return NkInput.nmouse(address()); }
 

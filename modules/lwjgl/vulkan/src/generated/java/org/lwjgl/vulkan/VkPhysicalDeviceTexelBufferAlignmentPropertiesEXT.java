@@ -32,27 +32,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTTexelBufferAlignment#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT}</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code storageTexelBufferOffsetAlignmentBytes} &ndash; a byte alignment that is sufficient for a storage texel buffer of any format.</li>
- * <li>{@code storageTexelBufferOffsetSingleTexelAlignment} &ndash; indicates whether single texel alignment is sufficient for a storage texel buffer of any format.</li>
- * <li>{@code uniformTexelBufferOffsetAlignmentBytes} &ndash; a byte alignment that is sufficient for a uniform texel buffer of any format.</li>
- * <li>{@code uniformTexelBufferOffsetSingleTexelAlignment} &ndash; indicates whether single texel alignment is sufficient for a uniform texel buffer of any format.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkDeviceSize storageTexelBufferOffsetAlignmentBytes;
- *     VkBool32 storageTexelBufferOffsetSingleTexelAlignment;
- *     VkDeviceSize uniformTexelBufferOffsetAlignmentBytes;
- *     VkBool32 uniformTexelBufferOffsetSingleTexelAlignment;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkDeviceSize {@link #storageTexelBufferOffsetAlignmentBytes};
+ *     VkBool32 {@link #storageTexelBufferOffsetSingleTexelAlignment};
+ *     VkDeviceSize {@link #uniformTexelBufferOffsetAlignmentBytes};
+ *     VkBool32 {@link #uniformTexelBufferOffsetSingleTexelAlignment};
  * }</code></pre>
  */
 public class VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT extends Struct implements NativeResource {
@@ -106,28 +95,28 @@ public class VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT extends Struct im
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code storageTexelBufferOffsetAlignmentBytes} field. */
+    /** a byte alignment that is sufficient for a storage texel buffer of any format. */
     @NativeType("VkDeviceSize")
     public long storageTexelBufferOffsetAlignmentBytes() { return nstorageTexelBufferOffsetAlignmentBytes(address()); }
-    /** Returns the value of the {@code storageTexelBufferOffsetSingleTexelAlignment} field. */
+    /** indicates whether single texel alignment is sufficient for a storage texel buffer of any format. */
     @NativeType("VkBool32")
     public boolean storageTexelBufferOffsetSingleTexelAlignment() { return nstorageTexelBufferOffsetSingleTexelAlignment(address()) != 0; }
-    /** Returns the value of the {@code uniformTexelBufferOffsetAlignmentBytes} field. */
+    /** a byte alignment that is sufficient for a uniform texel buffer of any format. */
     @NativeType("VkDeviceSize")
     public long uniformTexelBufferOffsetAlignmentBytes() { return nuniformTexelBufferOffsetAlignmentBytes(address()); }
-    /** Returns the value of the {@code uniformTexelBufferOffsetSingleTexelAlignment} field. */
+    /** indicates whether single texel alignment is sufficient for a uniform texel buffer of any format. */
     @NativeType("VkBool32")
     public boolean uniformTexelBufferOffsetSingleTexelAlignment() { return nuniformTexelBufferOffsetSingleTexelAlignment(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -352,28 +341,28 @@ public class VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT extends Struct im
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.npNext(address()); }
-        /** Returns the value of the {@code storageTexelBufferOffsetAlignmentBytes} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT#storageTexelBufferOffsetAlignmentBytes} field. */
         @NativeType("VkDeviceSize")
         public long storageTexelBufferOffsetAlignmentBytes() { return VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.nstorageTexelBufferOffsetAlignmentBytes(address()); }
-        /** Returns the value of the {@code storageTexelBufferOffsetSingleTexelAlignment} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT#storageTexelBufferOffsetSingleTexelAlignment} field. */
         @NativeType("VkBool32")
         public boolean storageTexelBufferOffsetSingleTexelAlignment() { return VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.nstorageTexelBufferOffsetSingleTexelAlignment(address()) != 0; }
-        /** Returns the value of the {@code uniformTexelBufferOffsetAlignmentBytes} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT#uniformTexelBufferOffsetAlignmentBytes} field. */
         @NativeType("VkDeviceSize")
         public long uniformTexelBufferOffsetAlignmentBytes() { return VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.nuniformTexelBufferOffsetAlignmentBytes(address()); }
-        /** Returns the value of the {@code uniformTexelBufferOffsetSingleTexelAlignment} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT#uniformTexelBufferOffsetSingleTexelAlignment} field. */
         @NativeType("VkBool32")
         public boolean uniformTexelBufferOffsetSingleTexelAlignment() { return VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.nuniformTexelBufferOffsetSingleTexelAlignment(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT#sType} field. */
         public VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT#pNext} field. */
         public VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.npNext(address(), value); return this; }
 
     }

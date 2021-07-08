@@ -36,6 +36,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL42C extends GL41C {
 
+    static { GL.initialize(); }
+
     /** Renamed tokens. */
     public static final int
         GL_COPY_READ_BUFFER_BINDING  = GL31.GL_COPY_READ_BUFFER,
@@ -207,8 +209,6 @@ public class GL42C extends GL41C {
 
     /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_MIN_MAP_BUFFER_ALIGNMENT = 0x90BC;
-
-    static { GL.initialize(); }
 
     protected GL42C() {
         throw new UnsupportedOperationException();

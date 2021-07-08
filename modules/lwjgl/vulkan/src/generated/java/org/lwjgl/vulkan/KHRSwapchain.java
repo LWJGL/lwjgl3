@@ -25,6 +25,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>The example code for the {@link KHRSurface VK_KHR_surface} and {@code VK_KHR_swapchain} extensions was removed from the appendix after revision 1.0.29. This WSI example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c).</p>
  * </div>
  * 
+ * <h5>VK_KHR_swapchain</h5>
+ * 
  * <dl>
  * <dt><b>Name String</b></dt>
  * <dd>{@code VK_KHR_swapchain}</dd>
@@ -44,6 +46,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_swapchain:%20&amp;body=@cubanismo%20">cubanismo</a></li>
  * <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_swapchain:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
  * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2017-10-06</dd>
  * <dt><b>IP Status</b></dt>
@@ -219,6 +226,8 @@ public class KHRSwapchain {
      * <p>In particular, it will fail if the {@code imageExtent} member of {@code pCreateInfo} does not match the extents of the monitor. Other reasons for failure may include the app not being set as high-dpi aware, or if the physical device and monitor are not compatible in this mode.</p>
      * </div>
      * 
+     * <p>When the {@code VkSurfaceKHR} in {@link VkSwapchainCreateInfoKHR} is a display surface, then the {@code VkDisplayModeKHR} in display surface's {@link VkDisplaySurfaceCreateInfoKHR} is associated with a particular {@code VkDisplayKHR}. Swapchain creation <b>may</b> fail if that {@code VkDisplayKHR} is not acquired by the application. In this scenario {@link VK10#VK_ERROR_INITIALIZATION_FAILED ERROR_INITIALIZATION_FAILED} is returned.</p>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -231,8 +240,8 @@ public class KHRSwapchain {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
-     * <li>Host access to {@code pCreateInfo.surface} <b>must</b> be externally synchronized</li>
-     * <li>Host access to {@code pCreateInfo.oldSwapchain} <b>must</b> be externally synchronized</li>
+     * <li>Host access to {@code pCreateInfo}&#8594;surface <b>must</b> be externally synchronized</li>
+     * <li>Host access to {@code pCreateInfo}&#8594;oldSwapchain <b>must</b> be externally synchronized</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -542,21 +551,26 @@ public class KHRSwapchain {
      * <ul>
      * <li>Each element of {@code pSwapchains} member of {@code pPresentInfo} <b>must</b> be a swapchain that is created for a surface for which presentation is supported from {@code queue} as determined using a call to {@code vkGetPhysicalDeviceSurfaceSupportKHR}</li>
      * <li>If more than one member of {@code pSwapchains} was created from a display surface, all display surfaces referenced that refer to the same display <b>must</b> use the same display mode</li>
-     * <li>When a semaphore wait operation referring to a binary semaphore defined by the elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} executes on {@code queue}, there <b>must</b> be no other queues waiting on the same semaphore.</li>
-     * <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> be semaphores that are signaled, or have <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operations</a> previously submitted for execution.</li>
-     * <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> be created with a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}.</li>
-     * <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> reference a semaphore signal operation that has been submitted for execution and any semaphore signal operations on which it depends (if any) <b>must</b> have also been submitted for execution.</li>
+     * <li>When a semaphore wait operation referring to a binary semaphore defined by the elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} executes on {@code queue}, there <b>must</b> be no other queues waiting on the same semaphore</li>
+     * <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> be semaphores that are signaled, or have <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operations</a> previously submitted for execution</li>
+     * <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> be created with a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}</li>
+     * <li>All elements of the {@code pWaitSemaphores} member of {@code pPresentInfo} <b>must</b> reference a semaphore signal operation that has been submitted for execution and any semaphore signal operations on which it depends (if any) <b>must</b> have also been submitted for execution</li>
      * </ul>
      * 
      * <p>Any writes to memory backing the images referenced by the {@code pImageIndices} and {@code pSwapchains} members of {@code pPresentInfo}, that are available before {@link #vkQueuePresentKHR QueuePresentKHR} is executed, are automatically made visible to the read access performed by the presentation engine. This automatic visibility operation for an image happens-after the semaphore signal operation, and happens-before the presentation engine accesses the image.</p>
      * 
      * <p>Queueing an image for presentation defines a set of <em>queue operations</em>, including waiting on the semaphores and submitting a presentation request to the presentation engine. However, the scope of this set of queue operations does not include the actual processing of the image by the presentation engine.</p>
      * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>The origin of the native orientation of the surface coordinate system is not specified in the Vulkan specification; it depends on the platform. For most platforms the origin is by default upper-left, meaning the pixel of the presented {@code VkImage} at coordinates <code>(0,0)</code> would appear at the upper left pixel of the platform surface (assuming {@link KHRSurface#VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR SURFACE_TRANSFORM_IDENTITY_BIT_KHR}, and the display standing the right way up).</p>
+     * </div>
+     * 
      * <p>If {@code vkQueuePresentKHR} fails to enqueue the corresponding set of queue operations, it <b>may</b> return {@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY} or {@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}. If it does, the implementation <b>must</b> ensure that the state and contents of any resources or synchronization primitives referenced is unaffected by the call or its failure.</p>
      * 
      * <p>If {@code vkQueuePresentKHR} fails in such a way that the implementation is unable to make that guarantee, the implementation <b>must</b> return {@link VK10#VK_ERROR_DEVICE_LOST ERROR_DEVICE_LOST}.</p>
      * 
-     * <p>However, if the presentation request is rejected by the presentation engine with an error {@link #VK_ERROR_OUT_OF_DATE_KHR ERROR_OUT_OF_DATE_KHR} or {@link KHRSurface#VK_ERROR_SURFACE_LOST_KHR ERROR_SURFACE_LOST_KHR}, the set of queue operations are still considered to be enqueued and thus any semaphore wait operation specified in {@link VkPresentInfoKHR} will execute when the corresponding queue operation is complete.</p>
+     * <p>However, if the presentation request is rejected by the presentation engine with an error {@link #VK_ERROR_OUT_OF_DATE_KHR ERROR_OUT_OF_DATE_KHR}, {@link EXTFullScreenExclusive#VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT}, or {@link KHRSurface#VK_ERROR_SURFACE_LOST_KHR ERROR_SURFACE_LOST_KHR}, the set of queue operations are still considered to be enqueued and thus any semaphore wait operation specified in {@link VkPresentInfoKHR} will execute when the corresponding queue operation is complete.</p>
      * 
      * <p>If any {@code swapchain} member of {@code pPresentInfo} was created with {@link EXTFullScreenExclusive#VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT}, {@link EXTFullScreenExclusive#VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT} will be returned if that swapchain does not have exclusive full-screen access, possibly for implementation-specific reasons outside of the application's control.</p>
      * 
@@ -571,8 +585,8 @@ public class KHRSwapchain {
      * 
      * <ul>
      * <li>Host access to {@code queue} <b>must</b> be externally synchronized</li>
-     * <li>Host access to {@code pPresentInfo.pWaitSemaphores}[] <b>must</b> be externally synchronized</li>
-     * <li>Host access to {@code pPresentInfo.pSwapchains}[] <b>must</b> be externally synchronized</li>
+     * <li>Host access to {@code pPresentInfo}&#8594;pWaitSemaphores[] <b>must</b> be externally synchronized</li>
+     * <li>Host access to {@code pPresentInfo}&#8594;pSwapchains[] <b>must</b> be externally synchronized</li>
      * </ul>
      * 
      * <h5>Command Properties</h5>

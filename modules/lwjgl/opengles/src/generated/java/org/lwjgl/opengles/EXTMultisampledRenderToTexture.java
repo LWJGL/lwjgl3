@@ -31,6 +31,8 @@ import org.lwjgl.system.*;
  */
 public class EXTMultisampledRenderToTexture {
 
+    static { GLES.initialize(); }
+
     /** Accepted by the {@code pname} parameter of GetRenderbufferParameteriv. */
     public static final int GL_RENDERBUFFER_SAMPLES_EXT = 0x8CAB;
 
@@ -42,8 +44,6 @@ public class EXTMultisampledRenderToTexture {
 
     /** Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv. */
     public static final int GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_SAMPLES_EXT = 0x8D6C;
-
-    static { GLES.initialize(); }
 
     protected EXTMultisampledRenderToTexture() {
         throw new UnsupportedOperationException();

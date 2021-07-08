@@ -35,12 +35,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphore-handletypes-fd">Handle Types Supported by VkImportSemaphoreFdInfoKHR</a> table.</li>
- * <li>{@code fd} <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#external-semaphore-handle-types-compatibility">external semaphore handle types compatibility</a>.</li>
- * <li>If {@code handleType} is {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT}, the {@link VkSemaphoreCreateInfo}{@code ::flags} field <b>must</b> match that of the semaphore from which {@code fd} was exported.</li>
- * <li>If {@code handleType} is {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT}, the {@link VkSemaphoreTypeCreateInfo}{@code ::semaphoreType} field <b>must</b> match that of the semaphore from which {@code fd} was exported.</li>
- * <li>If {@code flags} contains {@link VK11#VK_SEMAPHORE_IMPORT_TEMPORARY_BIT SEMAPHORE_IMPORT_TEMPORARY_BIT}, the {@link VkSemaphoreTypeCreateInfo}{@code ::semaphoreType} field of the semaphore from which {@code fd} was exported <b>must</b> not be {@link VK12#VK_SEMAPHORE_TYPE_TIMELINE SEMAPHORE_TYPE_TIMELINE}.</li>
+ * <li>{@code handleType} <b>must</b> be a value included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphore-handletypes-fd">Handle Types Supported by {@link VkImportSemaphoreFdInfoKHR}</a> table</li>
+ * <li>{@code fd} <b>must</b> obey any requirements listed for {@code handleType} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#external-semaphore-handle-types-compatibility">external semaphore handle types compatibility</a></li>
+ * <li>If {@code handleType} is {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT}, the {@link VkSemaphoreCreateInfo}{@code ::flags} field <b>must</b> match that of the semaphore from which {@code fd} was exported</li>
+ * <li>If {@code handleType} is {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT}, the {@link VkSemaphoreTypeCreateInfo}{@code ::semaphoreType} field <b>must</b> match that of the semaphore from which {@code fd} was exported</li>
+ * <li>If {@code flags} contains {@link VK11#VK_SEMAPHORE_IMPORT_TEMPORARY_BIT SEMAPHORE_IMPORT_TEMPORARY_BIT}, the {@link VkSemaphoreTypeCreateInfo}{@code ::semaphoreType} field of the semaphore from which {@code fd} was exported <b>must</b> not be {@link VK12#VK_SEMAPHORE_TYPE_TIMELINE SEMAPHORE_TYPE_TIMELINE}</li>
  * </ul>
+ * 
+ * <p>If {@code handleType} is {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT}, the special value {@code -1} for {@code fd} is treated like a valid sync file descriptor referring to an object that has already signaled. The import operation will succeed and the {@code VkSemaphore} will have a temporarily imported payload as if a valid file descriptor had been provided.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>This special behavior for importing an invalid sync file descriptor allows easier interoperability with other system APIs which use the convention that an invalid sync file descriptor represents work that has already completed and does not need to be waited for. It is consistent with the option for implementations to return a {@code -1} file descriptor when exporting a {@link VK11#VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT} from a {@code VkSemaphore} which is signaled.</p>
+ * </div>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -62,27 +69,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@link KHRExternalSemaphoreFd#vkImportSemaphoreFdKHR ImportSemaphoreFdKHR}</p>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code semaphore} &ndash; the semaphore into which the payload will be imported.</li>
- * <li>{@code flags} &ndash; a bitmask of {@code VkSemaphoreImportFlagBits} specifying additional parameters for the semaphore payload import operation.</li>
- * <li>{@code handleType} &ndash; specifies the type of {@code fd}.</li>
- * <li>{@code fd} &ndash; the external handle to import.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkImportSemaphoreFdInfoKHR {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkSemaphore semaphore;
- *     VkSemaphoreImportFlags flags;
- *     VkExternalSemaphoreHandleTypeFlagBits handleType;
- *     int fd;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkSemaphore {@link #semaphore};
+ *     VkSemaphoreImportFlags {@link #flags};
+ *     VkExternalSemaphoreHandleTypeFlagBits {@link #handleType};
+ *     int {@link #fd};
  * }</code></pre>
  */
 public class VkImportSemaphoreFdInfoKHR extends Struct implements NativeResource {
@@ -136,35 +132,35 @@ public class VkImportSemaphoreFdInfoKHR extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code semaphore} field. */
+    /** the semaphore into which the payload will be imported. */
     @NativeType("VkSemaphore")
     public long semaphore() { return nsemaphore(address()); }
-    /** Returns the value of the {@code flags} field. */
+    /** a bitmask of {@code VkSemaphoreImportFlagBits} specifying additional parameters for the semaphore payload import operation. */
     @NativeType("VkSemaphoreImportFlags")
     public int flags() { return nflags(address()); }
-    /** Returns the value of the {@code handleType} field. */
+    /** specifies the type of {@code fd}. */
     @NativeType("VkExternalSemaphoreHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
-    /** Returns the value of the {@code fd} field. */
+    /** the external handle to import. */
     public int fd() { return nfd(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkImportSemaphoreFdInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkImportSemaphoreFdInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code semaphore} field. */
+    /** Sets the specified value to the {@link #semaphore} field. */
     public VkImportSemaphoreFdInfoKHR semaphore(@NativeType("VkSemaphore") long value) { nsemaphore(address(), value); return this; }
-    /** Sets the specified value to the {@code flags} field. */
+    /** Sets the specified value to the {@link #flags} field. */
     public VkImportSemaphoreFdInfoKHR flags(@NativeType("VkSemaphoreImportFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@code handleType} field. */
+    /** Sets the specified value to the {@link #handleType} field. */
     public VkImportSemaphoreFdInfoKHR handleType(@NativeType("VkExternalSemaphoreHandleTypeFlagBits") int value) { nhandleType(address(), value); return this; }
-    /** Sets the specified value to the {@code fd} field. */
+    /** Sets the specified value to the {@link #fd} field. */
     public VkImportSemaphoreFdInfoKHR fd(int value) { nfd(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -405,35 +401,35 @@ public class VkImportSemaphoreFdInfoKHR extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkImportSemaphoreFdInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImportSemaphoreFdInfoKHR.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkImportSemaphoreFdInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImportSemaphoreFdInfoKHR.npNext(address()); }
-        /** Returns the value of the {@code semaphore} field. */
+        /** @return the value of the {@link VkImportSemaphoreFdInfoKHR#semaphore} field. */
         @NativeType("VkSemaphore")
         public long semaphore() { return VkImportSemaphoreFdInfoKHR.nsemaphore(address()); }
-        /** Returns the value of the {@code flags} field. */
+        /** @return the value of the {@link VkImportSemaphoreFdInfoKHR#flags} field. */
         @NativeType("VkSemaphoreImportFlags")
         public int flags() { return VkImportSemaphoreFdInfoKHR.nflags(address()); }
-        /** Returns the value of the {@code handleType} field. */
+        /** @return the value of the {@link VkImportSemaphoreFdInfoKHR#handleType} field. */
         @NativeType("VkExternalSemaphoreHandleTypeFlagBits")
         public int handleType() { return VkImportSemaphoreFdInfoKHR.nhandleType(address()); }
-        /** Returns the value of the {@code fd} field. */
+        /** @return the value of the {@link VkImportSemaphoreFdInfoKHR#fd} field. */
         public int fd() { return VkImportSemaphoreFdInfoKHR.nfd(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkImportSemaphoreFdInfoKHR#sType} field. */
         public VkImportSemaphoreFdInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImportSemaphoreFdInfoKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkImportSemaphoreFdInfoKHR#pNext} field. */
         public VkImportSemaphoreFdInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkImportSemaphoreFdInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code semaphore} field. */
+        /** Sets the specified value to the {@link VkImportSemaphoreFdInfoKHR#semaphore} field. */
         public VkImportSemaphoreFdInfoKHR.Buffer semaphore(@NativeType("VkSemaphore") long value) { VkImportSemaphoreFdInfoKHR.nsemaphore(address(), value); return this; }
-        /** Sets the specified value to the {@code flags} field. */
+        /** Sets the specified value to the {@link VkImportSemaphoreFdInfoKHR#flags} field. */
         public VkImportSemaphoreFdInfoKHR.Buffer flags(@NativeType("VkSemaphoreImportFlags") int value) { VkImportSemaphoreFdInfoKHR.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@code handleType} field. */
+        /** Sets the specified value to the {@link VkImportSemaphoreFdInfoKHR#handleType} field. */
         public VkImportSemaphoreFdInfoKHR.Buffer handleType(@NativeType("VkExternalSemaphoreHandleTypeFlagBits") int value) { VkImportSemaphoreFdInfoKHR.nhandleType(address(), value); return this; }
-        /** Sets the specified value to the {@code fd} field. */
+        /** Sets the specified value to the {@link VkImportSemaphoreFdInfoKHR#fd} field. */
         public VkImportSemaphoreFdInfoKHR.Buffer fd(int value) { VkImportSemaphoreFdInfoKHR.nfd(address(), value); return this; }
 
     }

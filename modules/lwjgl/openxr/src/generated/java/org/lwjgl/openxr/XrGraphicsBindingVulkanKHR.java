@@ -86,25 +86,25 @@ public class XrGraphicsBindingVulkanKHR extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code type} field. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** Returns the value of the {@code next} field. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Returns the value of the {@code instance} field. */
+    /** @return the value of the {@code instance} field. */
     @NativeType("VkInstance")
     public long instance() { return ninstance(address()); }
-    /** Returns the value of the {@code physicalDevice} field. */
+    /** @return the value of the {@code physicalDevice} field. */
     @NativeType("VkPhysicalDevice")
     public long physicalDevice() { return nphysicalDevice(address()); }
-    /** Returns the value of the {@code device} field. */
+    /** @return the value of the {@code device} field. */
     @NativeType("VkDevice")
     public long device() { return ndevice(address()); }
-    /** Returns the value of the {@code queueFamilyIndex} field. */
+    /** @return the value of the {@code queueFamilyIndex} field. */
     @NativeType("uint32_t")
     public int queueFamilyIndex() { return nqueueFamilyIndex(address()); }
-    /** Returns the value of the {@code queueIndex} field. */
+    /** @return the value of the {@code queueIndex} field. */
     @NativeType("uint32_t")
     public int queueIndex() { return nqueueIndex(address()); }
 
@@ -390,25 +390,25 @@ public class XrGraphicsBindingVulkanKHR extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGraphicsBindingVulkanKHR.ntype(address()); }
-        /** Returns the value of the {@code next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrGraphicsBindingVulkanKHR.nnext(address()); }
-        /** Returns the value of the {@code instance} field. */
+        /** @return the value of the {@code instance} field. */
         @NativeType("VkInstance")
         public long instance() { return XrGraphicsBindingVulkanKHR.ninstance(address()); }
-        /** Returns the value of the {@code physicalDevice} field. */
+        /** @return the value of the {@code physicalDevice} field. */
         @NativeType("VkPhysicalDevice")
         public long physicalDevice() { return XrGraphicsBindingVulkanKHR.nphysicalDevice(address()); }
-        /** Returns the value of the {@code device} field. */
+        /** @return the value of the {@code device} field. */
         @NativeType("VkDevice")
         public long device() { return XrGraphicsBindingVulkanKHR.ndevice(address()); }
-        /** Returns the value of the {@code queueFamilyIndex} field. */
+        /** @return the value of the {@code queueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int queueFamilyIndex() { return XrGraphicsBindingVulkanKHR.nqueueFamilyIndex(address()); }
-        /** Returns the value of the {@code queueIndex} field. */
+        /** @return the value of the {@code queueIndex} field. */
         @NativeType("uint32_t")
         public int queueIndex() { return XrGraphicsBindingVulkanKHR.nqueueIndex(address()); }
 

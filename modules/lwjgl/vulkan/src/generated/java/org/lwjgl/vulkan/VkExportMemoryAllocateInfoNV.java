@@ -25,21 +25,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBitsNV} values</li>
  * </ul>
  * 
- * <h3>Member documentation</h3>
- * 
- * <ul>
- * <li>{@code sType} &ndash; the type of this structure.</li>
- * <li>{@code pNext} &ndash; {@code NULL} or a pointer to an extension-specific structure.</li>
- * <li>{@code handleTypes} &ndash; a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} specifying one or more memory handle types that <b>may</b> be exported. Multiple handle types <b>may</b> be requested for the same allocation as long as they are compatible, as reported by {@link NVExternalMemoryCapabilities#vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV}.</li>
- * </ul>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkExportMemoryAllocateInfoNV {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkExternalMemoryHandleTypeFlagsNV handleTypes;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkExternalMemoryHandleTypeFlagsNV {@link #handleTypes};
  * }</code></pre>
  */
 public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResource {
@@ -84,21 +76,21 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Returns the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** Returns the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** Returns the value of the {@code handleTypes} field. */
+    /** a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} specifying one or more memory handle types that <b>may</b> be exported. Multiple handle types <b>may</b> be requested for the same allocation as long as they are compatible, as reported by {@link NVExternalMemoryCapabilities#vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV}. */
     @NativeType("VkExternalMemoryHandleTypeFlagsNV")
     public int handleTypes() { return nhandleTypes(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkExportMemoryAllocateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkExportMemoryAllocateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code handleTypes} field. */
+    /** Sets the specified value to the {@link #handleTypes} field. */
     public VkExportMemoryAllocateInfoNV handleTypes(@NativeType("VkExternalMemoryHandleTypeFlagsNV") int value) { nhandleTypes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,21 +313,21 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** Returns the value of the {@code sType} field. */
+        /** @return the value of the {@link VkExportMemoryAllocateInfoNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkExportMemoryAllocateInfoNV.nsType(address()); }
-        /** Returns the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkExportMemoryAllocateInfoNV#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkExportMemoryAllocateInfoNV.npNext(address()); }
-        /** Returns the value of the {@code handleTypes} field. */
+        /** @return the value of the {@link VkExportMemoryAllocateInfoNV#handleTypes} field. */
         @NativeType("VkExternalMemoryHandleTypeFlagsNV")
         public int handleTypes() { return VkExportMemoryAllocateInfoNV.nhandleTypes(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkExportMemoryAllocateInfoNV#sType} field. */
         public VkExportMemoryAllocateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkExportMemoryAllocateInfoNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkExportMemoryAllocateInfoNV#pNext} field. */
         public VkExportMemoryAllocateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkExportMemoryAllocateInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code handleTypes} field. */
+        /** Sets the specified value to the {@link VkExportMemoryAllocateInfoNV#handleTypes} field. */
         public VkExportMemoryAllocateInfoNV.Buffer handleTypes(@NativeType("VkExternalMemoryHandleTypeFlagsNV") int value) { VkExportMemoryAllocateInfoNV.nhandleTypes(address(), value); return this; }
 
     }
