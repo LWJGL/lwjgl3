@@ -75,7 +75,7 @@ public class JEmalloc {
     public static final int JEMALLOC_VERSION_MINOR = 2;
 
     /** The bugfix version. */
-    public static final int JEMALLOC_VERSION_BUGFIX = 0;
+    public static final int JEMALLOC_VERSION_BUGFIX = 1;
 
     /** The revision number. */
     public static final int JEMALLOC_VERSION_NREV = 0;
