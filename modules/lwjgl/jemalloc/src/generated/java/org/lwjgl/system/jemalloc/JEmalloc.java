@@ -878,5 +878,4 @@ public class JEmalloc {
     public static int MALLOCX_ARENA(int a) {
         return (a + 1) << 20;
     }
-
 }
