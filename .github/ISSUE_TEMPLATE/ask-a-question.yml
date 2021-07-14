@@ -1,0 +1,20 @@
+name: Question
+description: Ask a question about LWJGL.
+labels: ["Type: Question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ask anything about developing LWJGL applications or the development of LWJGL itself!
+
+        However, questions regarding native API usage (e.g. how do I do X in OpenGL?) are out of scope. Try the Forum/Slack/Discord links, you'll find plenty of people willing to help.
+
+        Finally, try searching the existing issues first, your question may have been answered already.
+  - type: textarea
+    id: questions
+    attributes:
+      label: Question
+      description: Describe your question in detail and include example code if applicable.
+      placeholder: Please type your question(s) here.
+    validations:
+      required: true

@@ -1,0 +1,49 @@
+name: New Binding
+description: Request a new LWJGL binding to a native library
+labels: ["Type: Enhancement"]
+body:
+  - type: input
+    id: library-name
+    attributes:
+      label: Library
+      description: Please type the name of the native library.
+    validations:
+      required: true
+  - type: input
+    id: library-url
+    attributes:
+      label: Project page
+      description: Please type the URL to the native library's project page.
+    validations:
+      required: true
+  - type: input
+    id: library-repo
+    attributes:
+      label: Source repository
+      description: Please type the URL to the native library's source repository.
+  - type: dropdown
+    id: supported-platforms
+    attributes:
+      label: Platforms
+      description: Please select the platforms supported by the native library.
+      multiple: true
+      options:
+        - Linux x64
+        - Linux arm64
+        - Linux arm32
+        - macOS x64
+        - macOS arm64
+        - Windows x64
+        - Windows x86
+        - Windows arm64
+    validations:
+      required: true
+  - type: textarea
+    id: binding-request
+    attributes:
+      label: Description
+      description: |
+        Please describe why you need the native library and how you're going to use it. Do you need it on all platforms? Do you need the entire project or only a subset of it?
+      placeholder: Please type the new binding request here.
+    validations:
+      required: true
