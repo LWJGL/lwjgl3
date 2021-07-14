@@ -1,0 +1,13 @@
+name: New Feature
+description: Request a new LWJGL feature
+labels: ["Type: Enhancement"]
+body:
+  - type: textarea
+    id: feature-request
+    attributes:
+      label: Description
+      description: |
+        Please describe the new feature in detail. What would you like to add to or change about LWJGL?
+      placeholder: Please type the new feature request here.
+    validations:
+      required: true

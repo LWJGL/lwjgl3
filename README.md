@@ -35,7 +35,7 @@ Contact:
 - [Forum](http://forum.lwjgl.org)
 - [Slack](https://lwjgl.slack.com/) (click [this](http://slack.lwjgl.org/) to join)
 - [Discord](https://discord.gg/6CywMCs)
-- [Twitter](https://twitter.com/LWJGL)
+- [![Twitter Follow](https://img.shields.io/twitter/follow/LWJGL?style=social)](https://twitter.com/LWJGL)
 
 If you'd like to contribute, see [doc/README](https://github.com/LWJGL/lwjgl3/tree/master/doc)
 for a quick overview of the project structure, installation instructions and

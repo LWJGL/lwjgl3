@@ -1,0 +1,76 @@
+name: Bug Report
+description: Report an LWJGL bug
+labels: ["Type: Bug"]
+body:
+  - type: dropdown
+    id: lwjgl-version
+    attributes:
+      label: Version
+      description: Please select the LWJGL version(s) on which the bug is reproducible.
+      multiple: true
+      options:
+        - 3.3.0 (nightly)
+        - 3.2.3
+        - 3.2.2
+        - 3.2.1
+        - 3.2.0
+        - 3.1.6
+        - 3.1.5
+        - 3.1.4
+        - 3.1.3
+        - 3.1.2
+        - 3.1.1
+        - 3.1.0
+        - 3.0.0
+    validations:
+      required: true
+  - type: dropdown
+    id: lwjgl-platform
+    attributes:
+      label: Platform
+      description: Please select the platform(s) on which the bug is reproducible.
+      multiple: true
+      options:
+        - Linux x64
+        - Linux arm64
+        - Linux arm32
+        - macOS x64
+        - macOS arm64
+        - Windows x64
+        - Windows x86
+        - Windows arm64
+    validations:
+      required: true
+  - type: input
+    id: java-version
+    attributes:
+      label: JDK
+      description: Please type the name and version of the Java Runtime(s) on which the bug is reproducible.
+      placeholder: e.g. Zulu OpenJDK 16.0.2
+    validations:
+      required: true
+  - type: input
+    id: lwjgl-module
+    attributes:
+      label: Module
+      description: Please type the LWJGL module(s) that the bug relates to.
+      placeholder: e.g. LWJGL core, OpenGL, Vulkan
+    validations:
+      required: true
+  - type: textarea
+    id: bug-report
+    attributes:
+      label: Bug description
+      description: |
+        Please describe the issue with as much detail as possible and clear steps to reproduce. If a stacktrace or crash log is available, please attach it below. It would be extremely helpful if you could attach a [Minimal, Complete, and Verifiable](https://stackoverflow.com/help/mcve) example.
+
+        Note that it's quite common for bugs to be caused by the native library which LWJGL provides bindings for. So please make sure that your issue is not already reported in the repository of the corresponding library.
+      placeholder: Please type the bug description here.
+    validations:
+      required: true
+  - type: textarea
+    id: bug-logs
+    attributes:
+      label: Stacktrace or crash log output
+      description: Please copy and paste any relevant output that may help with troubleshooting.
+      render: shell
