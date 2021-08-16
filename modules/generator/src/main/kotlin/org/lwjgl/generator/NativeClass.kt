@@ -144,12 +144,12 @@ private fun SimpleBinding.generateFunctionSetup(writer: PrintWriter, nativeClass
 /** Creates a simple APIBinding that stores the shared library and function pointers inside the binding class. The shared library is never unloaded. */
 fun simpleBinding(
     module: Module,
-    libraryName: String = module.name.toLowerCase(),
+    libraryName: String = module.name.lowercase(),
     libraryExpression: String = "\"$libraryName\"",
     bundledWithLWJGL: Boolean = false
-) = object : SimpleBinding(module, libraryName.toUpperCase()) {
+) = object : SimpleBinding(module, libraryName.uppercase()) {
     override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
-        val libraryReference = libraryName.toUpperCase()
+        val libraryReference = libraryName.uppercase()
 
         println("\n${t}private static final SharedLibrary $libraryReference = Library.loadNative(${nativeClass.className}.class, \"${module.java}\", $libraryExpression${if (bundledWithLWJGL) ", true" else ""});")
         generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from the $libraryName {@link SharedLibrary}. */")
@@ -198,7 +198,7 @@ class NativeClass internal constructor(
 
     // same as above + array overloads
     private val genFunctions: MutableList<Func> by lazy(LazyThreadSafetyMode.NONE) {
-        ArrayList<Func>(_functions.values)
+        ArrayList(_functions.values)
     }
 
     private val customMethods = ArrayList<String>()
@@ -872,7 +872,7 @@ fun String.nativeClass(
     templateName: String = this,
     nativeSubPath: String = "",
     prefix: String = "",
-    prefixMethod: String = prefix.toLowerCase(),
+    prefixMethod: String = prefix.lowercase(),
     prefixConstant: String = if (prefix.isEmpty() || prefix.endsWith('_')) prefix else "${prefix}_",
     prefixTemplate: String = prefix,
     postfix: String = "",

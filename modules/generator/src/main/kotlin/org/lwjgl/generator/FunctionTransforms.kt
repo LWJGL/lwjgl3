@@ -450,7 +450,7 @@ internal class PointerArrayLengthsTransform(
     private fun PrintWriter.setupStackImpl(param: Parameter) {
         val pointerArray = arrayParam.get<PointerArray>()
 
-        val lengthType = (param.nativeType.mapping as PointerMapping).box[0].toLowerCase()
+        val lengthType = (param.nativeType.mapping as PointerMapping).box[0].lowercaseChar()
         println((if (multi) arrayParam.name else pointerArray.singleName).let {
             "$t$t${t}long ${arrayParam.name}$POINTER_POSTFIX = org.lwjgl.system.APIUtil.apiArray$lengthType(stack,${if (pointerArray.elementType is CharSequenceType) " MemoryUtil::mem${pointerArray.elementType.charMapping.charset}," else ""} $it);"
         })

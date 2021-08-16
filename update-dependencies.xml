@@ -10,14 +10,14 @@
     <import file="${config}/build-definitions.xml" id="defs"/>
 
     <!-- *********************************** -->
-    <property name="findbugs" value="3.0.2"/>
-    <property name="testng" value="7.3.0"/>
+    <property name="jsr305" value="3.0.2"/>
+    <property name="testng" value="7.4.0"/>
     <property name="jcommander" value="1.78"/>
-    <property name="joml" value="1.10.0"/>
-    <property name="kotlinc-version" value="1.4.31"/>
-    <property name="kotlinc-build" value="1.4.31-release-344"/>
-    <property name="jmh-core" value="1.27"/>
-    <property name="jmh-generator-annprocess" value="1.27"/>
+    <property name="joml" value="1.10.1"/>
+    <property name="kotlinc-version" value="1.5.21"/>
+    <property name="kotlinc-build" value="1.5.21-release-314"/>
+    <property name="jmh-core" value="1.33"/>
+    <property name="jmh-generator-annprocess" value="1.33"/>
     <property name="jopt-simple" value="5.0.4"/>
     <property name="commons-math3" value="3.6.1"/>
     <property name="openjfx" value="11.0.2"/>
@@ -76,7 +76,7 @@
 
     <!-- Downloads the Java dependencies. -->
     <target name="-lib-download" unless="lib-uptodate">
-        <update-mvn name="findbugs" group="com/google/code/findbugs" artifact="jsr305" version="${findbugs}"/>
+        <update-mvn name="jsr305" group="com/google/code/findbugs" artifact="jsr305" version="${jsr305}"/>
         <update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" sources="false"/>
         <update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}"/>
         <update-mvn name="JOML" group="org/joml" artifact="joml" version="${joml}"/>

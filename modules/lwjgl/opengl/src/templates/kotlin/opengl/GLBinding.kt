@@ -352,7 +352,7 @@ val GLBinding = Generator.register(object : APIBinding(
 fun String.nativeClassGL(
     templateName: String,
     prefix: String = "GL",
-    prefixMethod: String = prefix.toLowerCase(),
+    prefixMethod: String = prefix.lowercase(),
     postfix: String = "",
     init: NativeClass.() -> Unit
 ) = nativeClass(

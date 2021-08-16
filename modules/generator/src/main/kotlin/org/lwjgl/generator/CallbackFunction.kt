@@ -248,7 +248,7 @@ ${access.modifier}interface ${className}I extends CallbackI {
             }
             .let { if (returns is StructType) it + "${returns.javaMethodType}.create(ret)" else it }
             .joinToString(",\n$t$t$t", prefix = "\n$t$t$t", postfix = "\n$t$t")
-        });""");
+        });""")
         if (returns.mapping !== TypeMapping.VOID && returns !is StructType) {
             print("\n$t${t}apiClosureRet${if (returns.isPointer) "P" else if (returns.mapping === PrimitiveMapping.LONG) "L" else ""}(ret, $RESULT);")
         }

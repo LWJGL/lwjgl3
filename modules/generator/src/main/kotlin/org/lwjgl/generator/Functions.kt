@@ -1187,6 +1187,7 @@ class Func(
         }
 
         // Apply any CharSequenceTransforms. These can be combined with any of the other transformations.
+        @Suppress("ReplaceSizeCheckWithIsNotEmpty")
         if (parameters.count {
             if (!it.isInput || it.nativeType !is CharSequenceType)
                 false
@@ -1324,7 +1325,7 @@ class Func(
             if (singleValueParams.any()) {
                 // Generate a SingleValue alternative for each type
                 for (autoType in multiTypes) {
-                    val primitiveType = autoType.box.toLowerCase()
+                    val primitiveType = autoType.box.lowercase()
 
                     // Generate type1, type2, type4 versions
                     // TODO: Make customizable? New modifier?
@@ -1415,6 +1416,7 @@ class Func(
         }
 
         // Apply any SingleValue transformations.
+        @Suppress("ReplaceSizeCheckWithIsNotEmpty")
         if (parameters.count {
             if (!it.has<SingleValue>() || it.has<MultiType>()) {
                 false
@@ -1440,7 +1442,7 @@ class Func(
                             is PointerType<*>     -> "long"
                             else                  -> pointerType.elementType.javaMethodType
                         },
-                        pointerType.mapping.box.toLowerCase(),
+                        pointerType.mapping.box.lowercase(),
                         singleValue.newName
                     )
                 }
@@ -1613,8 +1615,7 @@ class Func(
         val code = transforms
             .asSequence()
             .filter { it.value is CodeFunctionTransform<*> }
-            .fold(if (has<Code>()) get() else Code.NO_CODE) { code, entry ->
-                val (qtype, transform) = entry
+            .fold(if (has<Code>()) get() else Code.NO_CODE) { code, (qtype, transform) ->
                 @Suppress("UNCHECKED_CAST")
                 (transform as CodeFunctionTransform<QualifiedType>).generate(qtype, code)
             }

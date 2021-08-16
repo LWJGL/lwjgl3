@@ -134,7 +134,7 @@ fun String.nativeClassEGL(
     templateName: String,
     nativeSubPath: String = "",
     prefix: String = "EGL",
-    prefixMethod: String = prefix.toLowerCase(),
+    prefixMethod: String = prefix.lowercase(),
     postfix: String = "",
     init: (NativeClass.() -> Unit)? = null
 ) = nativeClass(

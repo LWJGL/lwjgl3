@@ -260,7 +260,7 @@ fun String.nativeClassGLES(
     templateName: String,
     nativeSubPath: String = "",
     prefix: String = "GL",
-    prefixMethod: String = prefix.toLowerCase(),
+    prefixMethod: String = prefix.lowercase(),
     postfix: String = "",
     init: NativeClass.() -> Unit
 ) = nativeClass(

@@ -59,7 +59,7 @@ open class StructMember(
     }
 
     internal val offsetField
-        get() = name.toUpperCase()
+        get() = name.uppercase()
 
     internal fun offsetField(parentField: String): String {
         return if (parentField.isEmpty())

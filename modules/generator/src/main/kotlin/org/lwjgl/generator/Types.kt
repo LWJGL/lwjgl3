@@ -351,7 +351,7 @@ open class PointerMapping private constructor(
         DATA_BOOLEAN -> "boolean"
         DATA_CLONG   -> "long"
         DATA_POINTER -> "long"
-        else         -> box.toLowerCase()
+        else         -> box.lowercase()
     }
 
     internal val mallocType get() = when (box) {
@@ -438,4 +438,3 @@ internal val NativeType.isPointerSize
 
 internal val NativeType.isArray
     get() = this is PointerType<*> && this.mapping.supportsArrayOverload
-

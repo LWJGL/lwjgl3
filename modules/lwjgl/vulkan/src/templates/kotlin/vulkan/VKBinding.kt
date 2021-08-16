@@ -370,7 +370,7 @@ fun String.nativeClassVK(
     templateName: String,
     type: String,
     prefix: String = "VK",
-    prefixMethod: String = prefix.toLowerCase(),
+    prefixMethod: String = prefix.lowercase(),
     postfix: String = "",
     init: (NativeClass.() -> Unit)? = null
 ): NativeClass {

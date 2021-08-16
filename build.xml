@@ -148,6 +148,7 @@
             <compilerarg line="-jvm-target 1.8"/>
             <compilerarg value="-Xno-call-assertions"/>
             <compilerarg value="-Xno-param-assertions"/>
+            <compilerarg value="-Xlambdas=indy"/>
             <compilerarg value="-Xreport-perf"/>
             <compilerarg value="-progressive"/>
 
@@ -209,6 +210,7 @@
             <compilerarg line="-jvm-target 1.8"/>
             <compilerarg value="-Xno-call-assertions"/>
             <compilerarg value="-Xno-param-assertions"/>
+            <compilerarg value="-Xlambdas=indy"/>
             <compilerarg value="-Xreport-perf"/>
             <compilerarg value="-progressive"/>
 
