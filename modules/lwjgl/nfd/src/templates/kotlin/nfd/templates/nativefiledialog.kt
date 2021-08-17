@@ -9,8 +9,7 @@ import nfd.*
 
 val nativefiledialog = "NativeFileDialog".nativeClass(Module.NFD, prefix = "NFD_", prefixMethod = "NFD_") {
     nativeImport("lwjgl_malloc.h")
-    nativeImport("nfd_common.h")
-    nativeImport("nfd.h")
+    nativeImport("include/nfd.h")
 
     documentation =
         """
@@ -144,7 +143,7 @@ val nativefiledialog = "NativeFileDialog".nativeClass(Module.NFD, prefix = "NFD_
         nfdpathset_t.p("pathSet", "the path set")
     )
 
-    NativeName("NFDi_Free")..void(
+    void(
         "Free",
         "Frees memory allocated by NativeFileDialog.",
 

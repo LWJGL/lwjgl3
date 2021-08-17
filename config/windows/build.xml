@@ -296,7 +296,8 @@ EXPORTS
             <beforeCompile>
                 <compile>
                     <arg value="/I${src.main}"/>
-                    <arg value="/I${src.main}\include"/>
+                    <arg value="/DUNICODE"/>
+                    <arg value="/D_UNICODE"/>
                     <fileset dir="." includes="${src.main}/nfd_common.c"/>
                     <fileset dir="." includes="${src.main}/nfd_win.cpp"/>
                 </compile>

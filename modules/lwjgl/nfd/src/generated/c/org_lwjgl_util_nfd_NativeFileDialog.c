@@ -5,8 +5,7 @@
  */
 #include "common_tools.h"
 #include "lwjgl_malloc.h"
-#include "nfd_common.h"
-#include "nfd.h"
+#include "include/nfd.h"
 
 EXTERN_C_ENTER
 
@@ -67,7 +66,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1PathSet_1F
 JNIEXPORT void JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1Free(JNIEnv *__env, jclass clazz, jlong outPathAddress) {
     void *outPath = (void *)(intptr_t)outPathAddress;
     UNUSED_PARAMS(__env, clazz)
-    NFDi_Free(outPath);
+    NFD_Free(outPath);
 }
 
 EXTERN_C_EXIT
