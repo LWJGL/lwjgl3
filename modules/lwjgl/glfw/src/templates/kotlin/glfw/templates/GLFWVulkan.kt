@@ -55,7 +55,7 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         Additional extensions may be required by future versions of GLFW. You should check if any extensions you wish to enable are already in the returned
         array, as it is an error to specify an extension more than once in the {@code VkInstanceCreateInfo} struct.
         
-        macOS: This function currently supports either the {@code VK_MVK_macos_surface} extension from MoltenVK or {@code VK_EXT_metal_surface} extension.
+        macOS: GLFW currently supports both the {@code VK_MVK_macos_surface} and the newer {@code VK_EXT_metal_surface} extensions.
 
         The returned array is allocated and freed by GLFW. You should not free it yourself. It is guaranteed to be valid only until the library is terminated.
 
@@ -114,6 +114,9 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         available and #GetRequiredInstanceExtensions() to check what instance extensions are required.
 
         Possible errors include #NOT_INITIALIZED, #API_UNAVAILABLE and #PLATFORM_ERROR.
+        
+        macOS: This function currently always returns #TRUE, as the {@code VK_MVK_macos_surface} and {@code VK_EXT_metal_surface} extensions do not provide a
+        {@code vkGetPhysicalDevice*PresentationSupport} type function.
 
         This function may be called from any thread. For synchronization details of Vulkan objects, see the Vulkan specification.
         """,
@@ -148,6 +151,12 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
 
         If an error occurs before the creation call is made, GLFW returns the Vulkan error code most appropriate for the error. Appropriate use of
         #VulkanSupported() and #GetRequiredInstanceExtensions() should eliminate almost all occurrences of these errors.
+        
+        macOS: This function currently only supports the {@code VK_MVK_macos_surface} extension from MoltenVK.
+ 
+        macOS: This function creates and sets a {@code CAMetalLayer} instance for the window content view, which is required for MoltenVK to function.
+
+        x11: GLFW by default attempts to use the {@code VK_KHR_xcb_surface} extension, if available. You can make it prefer the {@code VK_KHR_xlib_surface} extension by setting the #X11_XCB_VULKAN_SURFACE init hint.
 
         This function may be called from any thread. For synchronization details of Vulkan objects, see the Vulkan specification.
         """,

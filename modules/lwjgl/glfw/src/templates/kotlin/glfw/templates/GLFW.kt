@@ -17,19 +17,31 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """
 
     IntConstant(
-        "The major version number of the GLFW library. This is incremented when the API is changed in non-compatible ways.",
+        """
+        The major version number of the GLFW header.
+        
+        This is incremented when the API is changed in non-compatible ways.
+        """,
 
         "VERSION_MAJOR".."3"
     )
 
     IntConstant(
-        "The minor version number of the GLFW library. This is incremented when features are added to the API but it remains backward-compatible.",
+        """
+        The minor version number of the GLFW header.
+        
+        This is incremented when features are added to the API but it remains backward-compatible.
+        """,
 
         "VERSION_MINOR".."4"
     )
 
     IntConstant(
-        "The revision number of the GLFW library. This is incremented when a bug fix release is made that does not contain any API changes.",
+        """
+        The revision number of the GLFW header.
+        
+        This is incremented when a bug fix release is made that does not contain any API changes.
+        """,
 
         "VERSION_REVISION".."0"
     )
@@ -676,6 +688,14 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     )
 
     IntConstant(
+        """
+        X11 specific init hint.
+        """,
+
+        "X11_XCB_VULKAN_SURFACE"..0x00052001
+    )
+
+    IntConstant(
         "Don't care value.",
 
         "DONT_CARE".."-1"
@@ -1008,7 +1028,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        int("hint", "the init hint to set", "#JOYSTICK_HAT_BUTTONS #ANGLE_PLATFORM_TYPE #COCOA_CHDIR_RESOURCES #COCOA_MENUBAR"),
+        int("hint", "the init hint to set", "#JOYSTICK_HAT_BUTTONS #ANGLE_PLATFORM_TYPE #COCOA_CHDIR_RESOURCES #COCOA_MENUBAR #X11_XCB_VULKAN_SURFACE"),
         int("value", "the new value of the init hint"),
 
         since = "version 3.3"
@@ -1296,8 +1316,10 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     GLFWvidmode.const.p(
         "GetVideoModes",
         """
-        Returns an array of all video modes supported by the specified monitor. The returned array is sorted in ascending order, first by color bit depth (the
-        sum of all channel depths) and then by resolution area (the product of width and height).
+        Returns an array of all video modes supported by the specified monitor.
+        
+        The returned array is sorted in ascending order, first by color bit depth (the sum of all channel depths), then by resolution area (the product of
+        width and height), then resolution width and finally by refresh rate.
 
         The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified monitor is disconnected, this
         function is called again for that monitor or the library is terminated.

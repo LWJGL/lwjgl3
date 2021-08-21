@@ -41,6 +41,12 @@ val GLFWNativeWin32 = "GLFWNativeWin32".nativeClass(Module.GLFW, nativeSubPath =
         "GetWin32Window",
         """
         Returns the {@code HWND} of the specified window.
+        
+        The {@code HDC} associated with the window can be queried with the
+        ${url("https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdc", "GetDC")} function.
+        ${code("""
+        HDC dc = GetDC(glfwGetWin32Window(window));""")}
+        This DC is private and does not need to be released.
 
         Note: This function may be called from any thread. Access is not synchronized.
         """,

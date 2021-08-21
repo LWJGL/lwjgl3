@@ -158,13 +158,25 @@ public class GLFW {
         return GLFW;
     }
 
-    /** The major version number of the GLFW library. This is incremented when the API is changed in non-compatible ways. */
+    /**
+     * The major version number of the GLFW header.
+     * 
+     * <p>This is incremented when the API is changed in non-compatible ways.</p>
+     */
     public static final int GLFW_VERSION_MAJOR = 3;
 
-    /** The minor version number of the GLFW library. This is incremented when features are added to the API but it remains backward-compatible. */
+    /**
+     * The minor version number of the GLFW header.
+     * 
+     * <p>This is incremented when features are added to the API but it remains backward-compatible.</p>
+     */
     public static final int GLFW_VERSION_MINOR = 4;
 
-    /** The revision number of the GLFW library. This is incremented when a bug fix release is made that does not contain any API changes. */
+    /**
+     * The revision number of the GLFW header.
+     * 
+     * <p>This is incremented when a bug fix release is made that does not contain any API changes.</p>
+     */
     public static final int GLFW_VERSION_REVISION = 0;
 
     /** Boolean values. */
@@ -751,6 +763,9 @@ public class GLFW {
      */
     public static final int GLFW_COCOA_MENUBAR = 0x51002;
 
+    /** X11 specific init hint. */
+    public static final int GLFW_X11_XCB_VULKAN_SURFACE = 0x52001;
+
     /** Don't care value. */
     public static final int GLFW_DONT_CARE = -1;
 
@@ -1041,7 +1056,7 @@ public class GLFW {
      * <li>This function must only be called from the main thread.</li>
      * </ul></div>
      *
-     * @param hint  the init hint to set. One of:<br><table><tr><td>{@link #GLFW_JOYSTICK_HAT_BUTTONS JOYSTICK_HAT_BUTTONS}</td><td>{@link #GLFW_ANGLE_PLATFORM_TYPE ANGLE_PLATFORM_TYPE}</td><td>{@link #GLFW_COCOA_CHDIR_RESOURCES COCOA_CHDIR_RESOURCES}</td><td>{@link #GLFW_COCOA_MENUBAR COCOA_MENUBAR}</td></tr></table>
+     * @param hint  the init hint to set. One of:<br><table><tr><td>{@link #GLFW_JOYSTICK_HAT_BUTTONS JOYSTICK_HAT_BUTTONS}</td><td>{@link #GLFW_ANGLE_PLATFORM_TYPE ANGLE_PLATFORM_TYPE}</td><td>{@link #GLFW_COCOA_CHDIR_RESOURCES COCOA_CHDIR_RESOURCES}</td><td>{@link #GLFW_COCOA_MENUBAR COCOA_MENUBAR}</td></tr><tr><td>{@link #GLFW_X11_XCB_VULKAN_SURFACE X11_XCB_VULKAN_SURFACE}</td></tr></table>
      * @param value the new value of the init hint
      *
      * @since version 3.3
@@ -1530,8 +1545,10 @@ public class GLFW {
     }
 
     /**
-     * Returns an array of all video modes supported by the specified monitor. The returned array is sorted in ascending order, first by color bit depth (the
-     * sum of all channel depths) and then by resolution area (the product of width and height).
+     * Returns an array of all video modes supported by the specified monitor.
+     * 
+     * <p>The returned array is sorted in ascending order, first by color bit depth (the sum of all channel depths), then by resolution area (the product of
+     * width and height), then resolution width and finally by refresh rate.</p>
      * 
      * <p>The returned array is allocated and freed by GLFW. You should not free it yourself. It is valid until the specified monitor is disconnected, this
      * function is called again for that monitor or the library is terminated.</p>
