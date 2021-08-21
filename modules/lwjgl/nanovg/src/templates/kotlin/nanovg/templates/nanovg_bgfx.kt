@@ -80,6 +80,17 @@ val nanovg_bgfx = "NanoVGBGFX".dependsOn(Module.BGFX)?.nativeClass(Module.NANOVG
         Input..NVGLUframebufferBGFX.p("_framebuffer", "")
     )
 
+    void(
+        "CreateBgfxTexture",
+        "",
+
+        NVGcontext.p("_ctx", ""),
+        TextureHandle("_id", ""),
+        int("_width", ""),
+        int("_height", ""),
+        int("flags", "")
+    )
+
     // BGFX/NanoVG integration
     // 1. Make the bgfx back-end use LWJGL's allocation functions, which are also internally used by NanoVG.
     // 2. Pass NanoVG's internal functions to the bgfx back-end.

@@ -58,6 +58,7 @@ public final class JNI {
     public static native int invokeI(boolean param0, long __functionAddress);
     public static native int invokeI(int param0, int param1, long __functionAddress);
     public static native int invokeI(int param0, short param1, long __functionAddress);
+    public static native int invokeI(int param0, boolean param1, long __functionAddress);
     public static native int invokeI(int param0, int param1, int param2, long __functionAddress);
     public static native int invokePI(long param0, long __functionAddress);
     public static native int invokePI(int param0, long param1, long __functionAddress);
@@ -317,6 +318,7 @@ public final class JNI {
     public static native void invokePV(long param0, byte param1, short param2, int param3, int param4, long __functionAddress);
     public static native void invokePV(long param0, byte param1, short param2, short param3, int param4, long __functionAddress);
     public static native void invokePV(long param0, int param1, int param2, int param3, int param4, long __functionAddress);
+    public static native void invokePV(long param0, short param1, int param2, int param3, int param4, long __functionAddress);
     public static native void invokePV(long param0, short param1, short param2, int param3, byte param4, long __functionAddress);
     public static native void invokePV(int param0, int param1, int param2, int param3, int param4, long param5, long __functionAddress);
     public static native void invokePV(long param0, byte param1, short param2, byte param3, int param4, int param5, long __functionAddress);
@@ -396,8 +398,8 @@ public final class JNI {
     public static native boolean invokePPPZ(long param0, long param1, long param2, long __functionAddress);
     public static native boolean invokePJPZ(long param0, long param1, long param2, int param3, long __functionAddress);
     public static native boolean invokePPPZ(long param0, long param1, long param2, int param3, long __functionAddress);
-    public static native boolean invokePPPZ(long param0, long param1, int param2, long param3, int param4, long __functionAddress);
     public static native boolean invokePPPZ(long param0, long param1, long param2, boolean param3, int param4, long __functionAddress);
+    public static native boolean invokePPPZ(long param0, long param1, int param2, long param3, int param4, boolean param5, long __functionAddress);
     public static native boolean invokePPPPZ(long param0, long param1, long param2, long param3, long __functionAddress);
     public static native boolean invokePPPPZ(long param0, long param1, long param2, byte param3, long param4, long __functionAddress);
     public static native boolean invokePPPPPZ(long param0, long param1, long param2, long param3, long param4, int param5, long __functionAddress);

@@ -34,6 +34,7 @@ public class NanoVGBGFX {
             luBindFramebuffer      = apiGetFunctionAddress(BGFX.getLibrary(), "nvgluBindFramebuffer"),
             luDeleteFramebuffer    = apiGetFunctionAddress(BGFX.getLibrary(), "nvgluDeleteFramebuffer"),
             luSetViewFramebuffer   = apiGetFunctionAddress(BGFX.getLibrary(), "nvgluSetViewFramebuffer"),
+            CreateBgfxTexture      = apiGetFunctionAddress(BGFX.getLibrary(), "nvgCreateBgfxTexture"),
             org_lwjgl_nanovg_setup = apiGetFunctionAddress(BGFX.getLibrary(), "org_lwjgl_nanovg_setup");
 
     }
@@ -148,6 +149,16 @@ public class NanoVGBGFX {
 
     public static void nvgluSetViewFramebuffer(@NativeType("bgfx_view_id_t") int _view_id, @NativeType("NVGLUframebuffer *") NVGLUFramebufferBGFX _framebuffer) {
         nnvgluSetViewFramebuffer((short)_view_id, _framebuffer.address());
+    }
+
+    // --- [ nvgCreateBgfxTexture ] ---
+
+    public static void nvgCreateBgfxTexture(@NativeType("NVGcontext *") long _ctx, @NativeType("bgfx_texture_handle_t") short _id, int _width, int _height, int flags) {
+        long __functionAddress = Functions.CreateBgfxTexture;
+        if (CHECKS) {
+            check(_ctx);
+        }
+        invokePV(_ctx, _id, _width, _height, flags, __functionAddress);
     }
 
     // --- [ org_lwjgl_nanovg_setup ] ---
