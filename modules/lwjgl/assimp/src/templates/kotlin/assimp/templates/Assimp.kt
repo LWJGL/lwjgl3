@@ -908,6 +908,18 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
+        Specify if to try load Quake 3 shader files.
+        
+        This also controls  original surface name handling: when disabled it will be used unchanged.
+
+        Property type: bool. Default value: true.
+        """,
+
+        "AI_CONFIG_IMPORT_MD3_LOAD_SHADERS".."IMPORT_MD3_LOAD_SHADERS"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Specify the Quake 3 shader file to be used for a particular MD3 file. This can also be a search path.
 
         By default Assimp's behaviour is as follows: If a MD3 file {@code any_path/models/any_q3_subdir/model_name/file_name.md3} is loaded, the library tries
@@ -1144,6 +1156,23 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         """,
 
         "AI_CONFIG_EXPORT_POINT_CLOUDS".."EXPORT_POINT_CLOUDS"
+    ).noPrefix()
+
+    StringConstant(
+        """
+        Specifies the blob name, assimp uses for exporting.
+
+        Some formats require auxiliary files to be written, that need to be linked back into the original file. For example, OBJ files export materials to a
+        separate MTL file and use the {@code mtllib} keyword to reference this file.
+
+        When exporting blobs using {@code \#ExportToBlob}, assimp does not know the name of the blob file and thus outputs {@code mtllib ${"$"}blobfile.mtl}, which
+        might not be desired, since the MTL file might be called differently. 
+
+        This property can be used to give the exporter a hint on how to use the magic {@code ${"$"}blobfile} keyword. If the exporter detects the keyword and is
+        provided with a name for the blob, it instead uses this name.
+        """,
+
+        "AI_CONFIG_EXPORT_BLOB_NAME".."EXPORT_BLOB_NAME"
     ).noPrefix()
 
     StringConstant(
@@ -2670,7 +2699,7 @@ aiAttachLogStream(&c);""")}
 
         "TextureMapping_UV".enum(
             """
-            The mapping coordinates are taken from an UV channel. The #_AI_MATKEY_UVWSRC_BASE key specifies from which UV channel the texture coordinates are
+            The mapping coordinates are taken from an UV channel. The #_AI_MATKEY_UVWSRC_BASE property specifies from which UV channel the texture coordinates are
             to be taken from (remember, meshes can have more than one UV channel).
             """,
             0x0
@@ -2702,8 +2731,8 @@ aiAttachLogStream(&c);""")}
             """,
             "0"
         ),
-        "TextureType_DIFFUSE".enum("The texture is combined with the result of the diffuse lighting equation."),
-        "TextureType_SPECULAR".enum("The texture is combined with the result of the specular lighting equation."),
+        "TextureType_DIFFUSE".enum("The texture is combined with the result of the diffuse lighting equation OR PBR Specular/Glossiness."),
+        "TextureType_SPECULAR".enum("The texture is combined with the result of the specular lighting equation OR PBR Specular/Glossiness."),
         "TextureType_AMBIENT".enum("The texture is combined with the result of the ambient lighting equation."),
         "TextureType_EMISSIVE".enum("The texture is added to the result of the lighting calculation. It isn't influenced by incoming light."),
         "TextureType_HEIGHT".enum("The texture is a height map. By convention, higher gray-scale values stand for higher elevations from the base height."),
@@ -2741,18 +2770,45 @@ aiAttachLogStream(&c);""")}
         "TextureType_METALNESS".enum("PBR material."),
         "TextureType_DIFFUSE_ROUGHNESS".enum("PBR material."),
         "TextureType_AMBIENT_OCCLUSION".enum("PBR material."),
-
+        "TextureType_SHEEN".enum(
+            """
+            Generally used to simulate textiles that are covered in a layer of microfibers eg velvet.
+            
+            ${url("https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_sheen", "KHR_materials_sheen")})
+            """,
+            "19"
+        ),
+        "TextureType_CLEARCOAT".enum(
+            """
+            Simulates a layer of 'polish' or 'laquer' layered on top of a PBR substrate.
+            
+            ${url("https://autodesk.github.io/standard-surface/\\#closures/coating", "coating")},
+            ${url("https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_clearcoat", "KHR_materials_clearcoat")}
+            """,
+            "20"
+        ),
+        "TextureType_TRANSMISSION".enum(
+            """
+            Simulates transmission through the surface.
+ 
+            May include further information such as wall thickness.
+            """,
+            "21"
+        ),
         "TextureType_UNKNOWN".enum(
             """
             Unknown texture. A texture reference that does not match any of the definitions above is considered to be 'unknown'. It is still imported, but is
             excluded from any further post-processing.
-            """
+            """,
+            "18"
         )
     ).javaDocLinks
 
     EnumConstant(
         """
-        Defines all shading models supported by the library.
+        Defines all shading models supported by the library. ({@code aiShadingMode})
+        
+        Property: #AI_MATKEY_SHADING_MODEL
 
         The list of shading modes has been taken from Blender. See Blender documentation for more information. The API does not distinguish between "specular"
         and "diffuse" shaders (thus the specular term for diffuse shading models like Oren-Nayar remains undefined).
@@ -2775,8 +2831,23 @@ aiAttachLogStream(&c);""")}
             0x7
         ),
         "ShadingMode_CookTorrance".enum("CookTorrance-Shading per pixel. Special shader for metallic surfaces.", 0x8),
-        "ShadingMode_NoShading".enum("No shading at all. Constant light influence of 1.0.", 0x9),
-        "ShadingMode_Fresnel".enum("Fresnel shading", 0xa)
+        "ShadingMode_NoShading".enum("No shading at all. Constant light influence of 1.0. Also known as \"Unlit\".", 0x9),
+        "ShadingMode_Unlit".enum("", "aiShadingMode_NoShading"),
+        "ShadingMode_Fresnel".enum("Fresnel shading", 0xa),
+        "ShadingMode_PBR_BRDF".enum(
+            """
+            Physically-Based Rendering (PBR) shading using Bidirectional scattering/reflectance distribution function (BSDF/BRDF)
+
+            There are multiple methods under this banner, and model files may provide data for more than one PBR-BRDF method. Applications should use the set
+            of provided properties to determine which of their preferred PBR rendering methods are likely to be available eg:
+            ${ul(
+                "If #AI_MATKEY_METALLIC_FACTOR is set, then a Metallic/Roughness is available",
+                "If #AI_MATKEY_GLOSSINESS_FACTOR is set, then a Specular/Glossiness is available"
+            )}
+            Note that some PBR methods allow layering of techniques.
+            """,
+            0xb
+        )
     )
 
     EnumConstant(
@@ -2857,6 +2928,23 @@ aiAttachLogStream(&c);""")}
         "AI_MATKEY_SHADER_PRIMITIVE".."?sh.ps",
         "AI_MATKEY_SHADER_COMPUTE".."?sh.cs",
 
+        "AI_MATKEY_USE_COLOR_MAP".."\$mat.useColorMap",
+        "AI_MATKEY_BASE_COLOR".."\$clr.base",
+        "AI_MATKEY_USE_METALLIC_MAP".."\$mat.useMetallicMap",
+        "AI_MATKEY_METALLIC_FACTOR".."\$mat.metallicFactor",
+        "AI_MATKEY_USE_ROUGHNESS_MAP".."\$mat.useRoughnessMap",
+        "AI_MATKEY_ROUGHNESS_FACTOR".."\$mat.roughnessFactor",
+        "AI_MATKEY_SPECULAR_FACTOR".."\$mat.specularFactor",
+        "AI_MATKEY_GLOSSINESS_FACTOR".."\$mat.glossinessFactor",
+        "AI_MATKEY_SHEEN_COLOR_FACTOR".."\$clr.sheen.factor",
+        "AI_MATKEY_SHEEN_ROUGHNESS_FACTOR".."\$mat.sheen.roughnessFactor",
+        "AI_MATKEY_CLEARCOAT_FACTOR".."\$mat.clearcoat.factor",
+        "AI_MATKEY_CLEARCOAT_ROUGHNESS_FACTOR".."\$mat.clearcoat.roughnessFactor",
+        "AI_MATKEY_TRANSMISSION_FACTOR".."\$mat.transmission.factor",
+        "AI_MATKEY_USE_EMISSIVE_MAP".."\$mat.useEmissiveMap",
+        "AI_MATKEY_EMISSIVE_INTENSITY".."\$mat.emissiveIntensity",
+        "AI_MATKEY_USE_AO_MAP".."\$mat.useAOMap",
+
         "_AI_MATKEY_TEXTURE_BASE".."\$tex.file",
         "_AI_MATKEY_UVWSRC_BASE".."\$tex.uvwsrc",
         "_AI_MATKEY_TEXOP_BASE".."\$tex.op",
@@ -2872,22 +2960,8 @@ aiAttachLogStream(&c);""")}
     StringConstant(
         "PBR Material keys",
 
-        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_FACTOR".."\$mat.gltf.pbrMetallicRoughness.baseColorFactor",
-        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLIC_FACTOR".."\$mat.gltf.pbrMetallicRoughness.metallicFactor",
-        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_ROUGHNESS_FACTOR".."\$mat.gltf.pbrMetallicRoughness.roughnessFactor",
         "AI_MATKEY_GLTF_ALPHAMODE".."\$mat.gltf.alphaMode",
         "AI_MATKEY_GLTF_ALPHACUTOFF".."\$mat.gltf.alphaCutoff",
-        "AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS".."\$mat.gltf.pbrSpecularGlossiness",
-        "AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_GLOSSINESS_FACTOR".."\$mat.gltf.pbrMetallicRoughness.glossinessFactor",
-        "AI_MATKEY_GLTF_UNLIT".."\$mat.gltf.unlit",
-        "AI_MATKEY_GLTF_MATERIAL_SHEEN".."\$mat.gltf.materialSheen",
-        "AI_MATKEY_GLTF_MATERIAL_SHEEN_COLOR_FACTOR".."\$mat.gltf.materialSheen.sheenColorFactor",
-        "AI_MATKEY_GLTF_MATERIAL_SHEEN_ROUGHNESS_FACTOR".."\$mat.gltf.materialSheen.sheenRoughnessFactor",
-        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT".."\$mat.gltf.materialClearcoat",
-        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_FACTOR".."\$mat.gltf.materialClearcoat.clearcoatFactor",
-        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_ROUGHNESS_FACTOR".."\$mat.gltf.materialClearcoat.clearcoatRoughnessFactor",
-        "AI_MATKEY_GLTF_MATERIAL_TRANSMISSION".."\$mat.gltf.materialTransmission",
-        "AI_MATKEY_GLTF_MATERIAL_TRANSMISSION_FACTOR".."\$mat.gltf.materialTransmission.transmissionFactor",
 
         "_AI_MATKEY_GLTF_TEXTURE_TEXCOORD_BASE".."\$tex.file.texCoord",
         "_AI_MATKEY_GLTF_MAPPINGNAME_BASE".."\$tex.mappingname",
@@ -2900,14 +2974,7 @@ aiAttachLogStream(&c);""")}
 
     IntConstant(
         "",
-        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_TEXTURE".."aiTextureType_DIFFUSE",
-        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN",
-        "AI_MATKEY_GLTF_MATERIAL_SHEEN_COLOR_TEXTURE".."aiTextureType_UNKNOWN",
-        "AI_MATKEY_GLTF_MATERIAL_SHEEN_ROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN",
-        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_TEXTURE".."aiTextureType_UNKNOWN",
-        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_ROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN",
-        "AI_MATKEY_GLTF_MATERIAL_CLEARCOAT_NORMAL_TEXTURE".."aiTextureType_UNKNOWN",
-        "AI_MATKEY_GLTF_MATERIAL_TRANSMISSION_TEXTURE".."aiTextureType_UNKNOWN"
+        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN"
     ).noPrefix()
 
     charASCII.const.p(
@@ -3121,6 +3188,19 @@ aiAttachLogStream(&c);""")}
             The "Triangulate"-Step is provided for your convenience, it splits all polygons in triangles (which are much easier to handle).
             """,
             0x8
+        ),
+        "PrimitiveType_NGONEncodingFlag".enum(
+            """
+            A flag to determine whether this triangles only mesh is NGON encoded.
+
+            NGON encoding is a special encoding that tells whether 2 or more consecutive triangles should be considered as a triangle fan. This is identified
+            by looking at the first vertex index. 2 consecutive triangles with the same 1st vertex index are part of the same NGON.
+     
+            At the moment, only quads (concave or convex) are supported, meaning that polygons are 'seen' as triangles, as usual after a triangulation pass.
+     
+            To get an NGON encoded mesh, please use the #Process_Triangulate post process.
+            """,
+            0x10
         )
     )
 
@@ -3310,9 +3390,12 @@ aiAttachLogStream(&c);""")}
             """
             Removes the node graph and pre-transforms all vertices with the local transformation matrices of their nodes.
 
-            The output scene still contains nodes, however there is only a root node with children, each one referencing only one mesh, and each mesh
-            referencing one material. For rendering, you can simply render all meshes in order - you don't need to pay attention to local transformations and
-            the node hierarchy. Animations are removed during this step.
+            If the resulting scene can be reduced to a single mesh, with a single material, no lights, and no cameras, then the output scene will contain only
+            a root node (with no children) that references the single mesh. Otherwise, the output scene will be reduced to a root node with a single level of
+            child nodes, each one referencing one mesh, and each mesh referencing one material. 
+    
+            In either case, for rendering, you can simply render all meshes in order - you don't need to pay attention to local transformations and the node
+            hierarchy. Animations are removed during this step.
 
             This step is intended for applications without a scenegraph. The step CAN cause some problems: if e.g. a mesh of the asset contains normals and
             another, using the same material index, does not, they will be brought together, but the first meshes's part of the normal list is zeroed. However,

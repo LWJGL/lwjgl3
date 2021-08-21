@@ -116,13 +116,13 @@ public class AICamera extends Struct implements NativeResource {
     public AIVector3D mUp() { return nmUp(address()); }
     /**
      * 'LookAt' - vector of the camera coordinate system relative to the coordinate space defined by the corresponding node. This is the viewing direction of
-     * the user. The default value is 0|0|1. The vector may be normalized, but it needn't.
+     * the user. The default value is {@code 0|0|1}. The vector may be normalized, but it needn't.
      */
     @NativeType("struct aiVector3D")
     public AIVector3D mLookAt() { return nmLookAt(address()); }
     /**
-     * Half horizontal field of view angle, in radians. The field of view angle is the angle between the center line of the screen and the left or right
-     * border. The default value is 1/4PI.
+     * Horizontal field of view angle, in radians. The field of view angle is the angle between the center line of the screen and the left or right border.
+     * The default value is {@code 1/4PI}.
      */
     public float mHorizontalFOV() { return nmHorizontalFOV(address()); }
     /**

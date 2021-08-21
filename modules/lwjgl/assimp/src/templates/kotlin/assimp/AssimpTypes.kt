@@ -388,7 +388,7 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         """
     ).links("PrimitiveType_\\w+", LinkMode.BITFIELD)
     AutoSize(
-        "mVertices", "mNormals", "mTangents", "mBitangents"
+        "mVertices", "mNormals", "mTangents", "mBitangents", "mTextureCoordsNames"
     )..AutoSizeIndirect(
         "mColors", "mTextureCoords"
     )..unsigned_int(
@@ -457,6 +457,7 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         is {@code mNumVertices} in size.
         """
     )["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
+    aiString("mTextureCoordsNames", "Vertex stream names.")["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"];
     unsigned_int(
         "mNumUVComponents",
         """
@@ -898,14 +899,14 @@ val aiCamera = struct(Module.ASSIMP, "AICamera", nativeName = "struct aiCamera")
         "mLookAt",
         """
         'LookAt' - vector of the camera coordinate system relative to the coordinate space defined by the corresponding node. This is the viewing direction of
-        the user. The default value is 0|0|1. The vector may be normalized, but it needn't.
+        the user. The default value is {@code 0|0|1}. The vector may be normalized, but it needn't.
         """
     )
     float(
         "mHorizontalFOV",
         """
-        Half horizontal field of view angle, in radians. The field of view angle is the angle between the center line of the screen and the left or right
-        border. The default value is 1/4PI.
+        Horizontal field of view angle, in radians. The field of view angle is the angle between the center line of the screen and the left or right border.
+        The default value is {@code 1/4PI}.
         """
     )
     float(
@@ -1261,6 +1262,9 @@ val aiExportDataBlob = struct(Module.ASSIMP, "AIExportDataBlob", nativeName = "s
         files.
 
         If used, blob names usually contain the file extension that should be used when writing the data to disc.
+        
+        The blob names generated can be influenced by setting the #AI_CONFIG_EXPORT_BLOB_NAME export property to the name that is used for the master blob. All
+        other names are typically derived from the base name, by the file format exporter.
         """
     )
 

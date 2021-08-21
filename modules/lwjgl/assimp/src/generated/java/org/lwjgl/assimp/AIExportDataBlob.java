@@ -92,6 +92,9 @@ public class AIExportDataBlob extends Struct implements NativeResource {
      * files.
      * 
      * <p>If used, blob names usually contain the file extension that should be used when writing the data to disc.</p>
+     * 
+     * <p>The blob names generated can be influenced by setting the {@link Assimp#AI_CONFIG_EXPORT_BLOB_NAME} export property to the name that is used for the master blob. All
+     * other names are typically derived from the base name, by the file format exporter.</p>
      */
     @NativeType("struct aiString")
     public AIString name() { return nname(address()); }
