@@ -385,6 +385,7 @@ public final class JNI {
     public static native boolean invokeZ(long __functionAddress);
     public static native boolean invokeZ(int param0, long __functionAddress);
     public static native boolean invokePZ(long param0, long __functionAddress);
+    public static native boolean invokePZ(byte param0, long param1, long __functionAddress);
     public static native boolean invokePZ(long param0, int param1, long __functionAddress);
     public static native boolean invokePZ(long param0, int param1, int param2, long __functionAddress);
     public static native boolean invokePZ(long param0, int param1, int param2, int param3, long __functionAddress);

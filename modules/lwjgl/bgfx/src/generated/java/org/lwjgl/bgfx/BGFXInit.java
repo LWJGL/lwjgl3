@@ -25,6 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     bgfx_renderer_type_t {@link #type};
  *     uint16_t {@link #vendorId};
  *     uint16_t {@link #deviceId};
+ *     uint64_t {@link #capabilities};
  *     bool {@link #debug};
  *     bool {@link #profile};
  *     {@link BGFXPlatformData bgfx_platform_data_t} {@link #platformData};
@@ -48,6 +49,7 @@ public class BGFXInit extends Struct implements NativeResource {
         TYPE,
         VENDORID,
         DEVICEID,
+        CAPABILITIES,
         DEBUG,
         PROFILE,
         PLATFORMDATA,
@@ -61,6 +63,7 @@ public class BGFXInit extends Struct implements NativeResource {
             __member(4),
             __member(2),
             __member(2),
+            __member(8),
             __member(1),
             __member(1),
             __member(BGFXPlatformData.SIZEOF, BGFXPlatformData.ALIGNOF),
@@ -76,13 +79,14 @@ public class BGFXInit extends Struct implements NativeResource {
         TYPE = layout.offsetof(0);
         VENDORID = layout.offsetof(1);
         DEVICEID = layout.offsetof(2);
-        DEBUG = layout.offsetof(3);
-        PROFILE = layout.offsetof(4);
-        PLATFORMDATA = layout.offsetof(5);
-        RESOLUTION = layout.offsetof(6);
-        LIMITS = layout.offsetof(7);
-        CALLBACK = layout.offsetof(8);
-        ALLOCATOR = layout.offsetof(9);
+        CAPABILITIES = layout.offsetof(3);
+        DEBUG = layout.offsetof(4);
+        PROFILE = layout.offsetof(5);
+        PLATFORMDATA = layout.offsetof(6);
+        RESOLUTION = layout.offsetof(7);
+        LIMITS = layout.offsetof(8);
+        CALLBACK = layout.offsetof(9);
+        ALLOCATOR = layout.offsetof(10);
     }
 
     /**
@@ -107,6 +111,9 @@ public class BGFXInit extends Struct implements NativeResource {
     /** device id. If set to 0 it will select first device, or device with matching id. */
     @NativeType("uint16_t")
     public short deviceId() { return ndeviceId(address()); }
+    /** capabilities initialization mask (default: {@code UINT64_MAX}) */
+    @NativeType("uint64_t")
+    public long capabilities() { return ncapabilities(address()); }
     /** enable device for debugging */
     @NativeType("bool")
     public boolean debug() { return ndebug(address()); }
@@ -137,6 +144,8 @@ public class BGFXInit extends Struct implements NativeResource {
     public BGFXInit vendorId(@NativeType("uint16_t") short value) { nvendorId(address(), value); return this; }
     /** Sets the specified value to the {@link #deviceId} field. */
     public BGFXInit deviceId(@NativeType("uint16_t") short value) { ndeviceId(address(), value); return this; }
+    /** Sets the specified value to the {@link #capabilities} field. */
+    public BGFXInit capabilities(@NativeType("uint64_t") long value) { ncapabilities(address(), value); return this; }
     /** Sets the specified value to the {@link #debug} field. */
     public BGFXInit debug(@NativeType("bool") boolean value) { ndebug(address(), value); return this; }
     /** Sets the specified value to the {@link #profile} field. */
@@ -163,6 +172,7 @@ public class BGFXInit extends Struct implements NativeResource {
         int type,
         short vendorId,
         short deviceId,
+        long capabilities,
         boolean debug,
         boolean profile,
         BGFXPlatformData platformData,
@@ -174,6 +184,7 @@ public class BGFXInit extends Struct implements NativeResource {
         type(type);
         vendorId(vendorId);
         deviceId(deviceId);
+        capabilities(capabilities);
         debug(debug);
         profile(profile);
         platformData(platformData);
@@ -264,6 +275,8 @@ public class BGFXInit extends Struct implements NativeResource {
     public static short nvendorId(long struct) { return UNSAFE.getShort(null, struct + BGFXInit.VENDORID); }
     /** Unsafe version of {@link #deviceId}. */
     public static short ndeviceId(long struct) { return UNSAFE.getShort(null, struct + BGFXInit.DEVICEID); }
+    /** Unsafe version of {@link #capabilities}. */
+    public static long ncapabilities(long struct) { return UNSAFE.getLong(null, struct + BGFXInit.CAPABILITIES); }
     /** Unsafe version of {@link #debug}. */
     public static boolean ndebug(long struct) { return UNSAFE.getByte(null, struct + BGFXInit.DEBUG) != 0; }
     /** Unsafe version of {@link #profile}. */
@@ -285,6 +298,8 @@ public class BGFXInit extends Struct implements NativeResource {
     public static void nvendorId(long struct, short value) { UNSAFE.putShort(null, struct + BGFXInit.VENDORID, value); }
     /** Unsafe version of {@link #deviceId(short) deviceId}. */
     public static void ndeviceId(long struct, short value) { UNSAFE.putShort(null, struct + BGFXInit.DEVICEID, value); }
+    /** Unsafe version of {@link #capabilities(long) capabilities}. */
+    public static void ncapabilities(long struct, long value) { UNSAFE.putLong(null, struct + BGFXInit.CAPABILITIES, value); }
     /** Unsafe version of {@link #debug(boolean) debug}. */
     public static void ndebug(long struct, boolean value) { UNSAFE.putByte(null, struct + BGFXInit.DEBUG, value ? (byte)1 : (byte)0); }
     /** Unsafe version of {@link #profile(boolean) profile}. */

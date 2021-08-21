@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."112"
+        "API_VERSION".."115"
     )
 
     ShortConstant(
@@ -818,7 +818,9 @@ RGBA16S
         "Start a vertex layout.",
 
         bgfx_vertex_layout_t.p("_this", "the vertex layout"),
-        bgfx_renderer_type_t("_renderer", "the renderer type", RendererType)
+        bgfx_renderer_type_t("_renderer", "the renderer backend type", RendererType),
+
+        returnDoc = "itself"
     )
 
     bgfx_vertex_layout_t.p(
@@ -846,7 +848,9 @@ RGBA16S
             packaging rule for {@code vertexPack}, {@code vertexUnpack}, and {@code vertexConvert} for #ATTRIB_TYPE_UINT8 and #ATTRIB_TYPE_INT16. Unpacking
             code must be implemented inside vertex shader.
             """
-        )
+        ),
+
+        returnDoc = "itself"
     )
 
     void(
@@ -866,7 +870,9 @@ RGBA16S
         "Returns true if {@code _this} contains attribute.",
 
         bgfx_vertex_layout_t.const.p("_this", "the vertex layout"),
-        bgfx_attrib_t("_attr", "the attribute to query", Attrib)
+        bgfx_attrib_t("_attr", "the attribute to query", Attrib),
+
+        returnDoc = "{@code true} if {@code VertexLayout} contains attribute"
     )
 
     bgfx_vertex_layout_t.p(
@@ -874,7 +880,9 @@ RGBA16S
         "Skips {@code _num} bytes in vertex stream.",
 
         bgfx_vertex_layout_t.p("_this", "the vertex layout"),
-        MapToInt..uint8_t("_num", "the number of bytes to skip")
+        MapToInt..uint8_t("_num", "the number of bytes to skip"),
+
+        returnDoc = "itself"
     )
 
     void(
@@ -1320,7 +1328,8 @@ RGBA16S
         "get_avail_transient_index_buffer",
         "Returns number of requested or maximum available indices.",
 
-        uint32_t("_num", "number of required indices")
+        uint32_t("_num", "number of required indices"),
+        bool("_index32", "set to {@code true} if input indices will be 32-bit")
     )
 
     uint32_t(
@@ -1341,11 +1350,7 @@ RGBA16S
 
     void(
         "alloc_transient_index_buffer",
-        """
-        Allocates transient index buffer.
-
-        Only 16-bit index buffer is supported.
-        """,
+        "Allocates transient index buffer.",
 
         bgfx_transient_index_buffer_t.p(
             "_tib",
@@ -1369,11 +1374,7 @@ RGBA16S
 
     bool(
         "alloc_transient_buffers",
-        """
-        Checks for required space and allocates transient vertex and index buffers. If both space requirements are satisfied function returns true.
-
-        Only 16-bit index buffer is supported.
-        """,
+        "Checks for required space and allocates transient vertex and index buffers. If both space requirements are satisfied function returns true.",
 
         bgfx_transient_vertex_buffer_t.p(
             "_tvb",
@@ -1385,7 +1386,8 @@ RGBA16S
             "_tib",
             "##BGFXTransientIndexBuffer structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls"
         ),
-        uint32_t("_numIndices", "number of indices to allocate")
+        uint32_t("_numIndices", "number of indices to allocate"),
+        bool("_index32", "set to {@code true} if input indices will be 32-bit")
     )
 
     void(
@@ -1418,7 +1420,9 @@ RGBA16S
         "create_shader",
         "Creates shader from memory buffer.",
 
-        bgfx_memory_t.const.p("_mem", "")
+        bgfx_memory_t.const.p("_mem", ""),
+
+        returnDoc = "shader handle"
     )
 
     uint16_t(
@@ -1489,7 +1493,19 @@ RGBA16S
         bool("_cubeMap", "indicates that texture contains cubemap"),
         MapToInt..uint16_t("_numLayers", "number of layers in texture array"),
         bgfx_texture_format_t("_format", "texture format", TextureFormat),
-        uint64_t("_flags", "texture flags", TextureFlags, LinkMode.BITFIELD)
+        uint64_t("_flags", "texture flags", TextureFlags, LinkMode.BITFIELD),
+
+        returnDoc = "true if texture can be successfully created"
+    )
+
+    bool(
+        "is_frame_buffer_valid",
+        "Validate frame buffer parameters.",
+
+        MapToInt..uint8_t("_num", "number of attachments"),
+        bgfx_attachment_t.const.p("_attachment", "attachment texture info"),
+
+        returnDoc = "true if frame buffer can be successfully created"
     )
 
     void(
@@ -1776,7 +1792,7 @@ RGBA16S
         "create_frame_buffer_from_attachment",
         "Create MRT frame buffer from texture handles with specific layer and mip level.",
 
-        AutoSize("_attachment")..uint8_t("_num", "number of texture attachments"),
+        AutoSize("_attachment")..uint8_t("_num", "number of attachments"),
         bgfx_attachment_t.const.p("_attachment", "attachment texture info"),
         bool("_destroyTextures", "if true, textures will be destroyed when frame buffer is destroyed"),
 
