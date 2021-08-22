@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -224,6 +223,8 @@ public class VkFramebufferCreateInfo extends Struct implements NativeResource {
     public VkFramebufferCreateInfo flags(@NativeType("VkFramebufferCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #renderPass} field. */
     public VkFramebufferCreateInfo renderPass(@NativeType("VkRenderPass") long value) { nrenderPass(address(), value); return this; }
+    /** Sets the specified value to the {@link #attachmentCount} field. */
+    public VkFramebufferCreateInfo attachmentCount(@NativeType("uint32_t") int value) { nattachmentCount(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@link #pAttachments} field. */
     public VkFramebufferCreateInfo pAttachments(@Nullable @NativeType("VkImageView const *") LongBuffer value) { npAttachments(address(), value); return this; }
     /** Sets the specified value to the {@link #width} field. */
@@ -239,6 +240,7 @@ public class VkFramebufferCreateInfo extends Struct implements NativeResource {
         long pNext,
         int flags,
         long renderPass,
+        int attachmentCount,
         @Nullable LongBuffer pAttachments,
         int width,
         int height,
@@ -248,6 +250,7 @@ public class VkFramebufferCreateInfo extends Struct implements NativeResource {
         pNext(pNext);
         flags(flags);
         renderPass(renderPass);
+        attachmentCount(attachmentCount);
         pAttachments(pAttachments);
         width(width);
         height(height);
@@ -441,36 +444,13 @@ public class VkFramebufferCreateInfo extends Struct implements NativeResource {
     /** Sets the specified value to the {@code attachmentCount} field of the specified {@code struct}. */
     public static void nattachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferCreateInfo.ATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pAttachments(LongBuffer) pAttachments}. */
-    public static void npAttachments(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkFramebufferCreateInfo.PATTACHMENTS, memAddressSafe(value)); nattachmentCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npAttachments(long struct, @Nullable LongBuffer value) { memPutAddress(struct + VkFramebufferCreateInfo.PATTACHMENTS, memAddressSafe(value)); if (value != null) { nattachmentCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #width(int) width}. */
     public static void nwidth(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferCreateInfo.WIDTH, value); }
     /** Unsafe version of {@link #height(int) height}. */
     public static void nheight(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferCreateInfo.HEIGHT, value); }
     /** Unsafe version of {@link #layers(int) layers}. */
     public static void nlayers(long struct, int value) { UNSAFE.putInt(null, struct + VkFramebufferCreateInfo.LAYERS, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        if (nattachmentCount(struct) != 0) {
-            check(memGetAddress(struct + VkFramebufferCreateInfo.PATTACHMENTS));
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
-    }
 
     // -----------------------------------
 
@@ -547,6 +527,8 @@ public class VkFramebufferCreateInfo extends Struct implements NativeResource {
         public VkFramebufferCreateInfo.Buffer flags(@NativeType("VkFramebufferCreateFlags") int value) { VkFramebufferCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkFramebufferCreateInfo#renderPass} field. */
         public VkFramebufferCreateInfo.Buffer renderPass(@NativeType("VkRenderPass") long value) { VkFramebufferCreateInfo.nrenderPass(address(), value); return this; }
+        /** Sets the specified value to the {@link VkFramebufferCreateInfo#attachmentCount} field. */
+        public VkFramebufferCreateInfo.Buffer attachmentCount(@NativeType("uint32_t") int value) { VkFramebufferCreateInfo.nattachmentCount(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@link VkFramebufferCreateInfo#pAttachments} field. */
         public VkFramebufferCreateInfo.Buffer pAttachments(@Nullable @NativeType("VkImageView const *") LongBuffer value) { VkFramebufferCreateInfo.npAttachments(address(), value); return this; }
         /** Sets the specified value to the {@link VkFramebufferCreateInfo#width} field. */

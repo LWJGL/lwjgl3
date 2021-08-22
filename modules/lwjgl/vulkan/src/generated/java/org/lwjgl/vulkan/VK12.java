@@ -982,7 +982,6 @@ public class VK12 extends VK11 {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdBeginRenderPass2;
         if (CHECKS) {
             check(__functionAddress);
-            VkRenderPassBeginInfo.validate(pRenderPassBegin);
         }
         callPPPV(commandBuffer.address(), pRenderPassBegin, pSubpassBeginInfo, __functionAddress);
     }

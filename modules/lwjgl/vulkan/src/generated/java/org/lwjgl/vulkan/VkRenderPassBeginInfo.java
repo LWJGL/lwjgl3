@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -177,6 +176,8 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
     public VkRenderPassBeginInfo renderArea(VkRect2D value) { nrenderArea(address(), value); return this; }
     /** Passes the {@link #renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkRenderPassBeginInfo renderArea(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(renderArea()); return this; }
+    /** Sets the specified value to the {@link #clearValueCount} field. */
+    public VkRenderPassBeginInfo clearValueCount(@NativeType("uint32_t") int value) { nclearValueCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkClearValue.Buffer} to the {@link #pClearValues} field. */
     public VkRenderPassBeginInfo pClearValues(@Nullable @NativeType("VkClearValue const *") VkClearValue.Buffer value) { npClearValues(address(), value); return this; }
 
@@ -187,6 +188,7 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
         long renderPass,
         long framebuffer,
         VkRect2D renderArea,
+        int clearValueCount,
         @Nullable VkClearValue.Buffer pClearValues
     ) {
         sType(sType);
@@ -194,6 +196,7 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
         renderPass(renderPass);
         framebuffer(framebuffer);
         renderArea(renderArea);
+        clearValueCount(clearValueCount);
         pClearValues(pClearValues);
 
         return this;
@@ -382,30 +385,7 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
     /** Sets the specified value to the {@code clearValueCount} field of the specified {@code struct}. */
     public static void nclearValueCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassBeginInfo.CLEARVALUECOUNT, value); }
     /** Unsafe version of {@link #pClearValues(VkClearValue.Buffer) pClearValues}. */
-    public static void npClearValues(long struct, @Nullable VkClearValue.Buffer value) { memPutAddress(struct + VkRenderPassBeginInfo.PCLEARVALUES, memAddressSafe(value)); nclearValueCount(struct, value == null ? 0 : value.remaining()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        if (nclearValueCount(struct) != 0) {
-            check(memGetAddress(struct + VkRenderPassBeginInfo.PCLEARVALUES));
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
-    }
+    public static void npClearValues(long struct, @Nullable VkClearValue.Buffer value) { memPutAddress(struct + VkRenderPassBeginInfo.PCLEARVALUES, memAddressSafe(value)); if (value != null) { nclearValueCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -479,6 +459,8 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
         public VkRenderPassBeginInfo.Buffer renderArea(VkRect2D value) { VkRenderPassBeginInfo.nrenderArea(address(), value); return this; }
         /** Passes the {@link VkRenderPassBeginInfo#renderArea} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkRenderPassBeginInfo.Buffer renderArea(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(renderArea()); return this; }
+        /** Sets the specified value to the {@link VkRenderPassBeginInfo#clearValueCount} field. */
+        public VkRenderPassBeginInfo.Buffer clearValueCount(@NativeType("uint32_t") int value) { VkRenderPassBeginInfo.nclearValueCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkClearValue.Buffer} to the {@link VkRenderPassBeginInfo#pClearValues} field. */
         public VkRenderPassBeginInfo.Buffer pClearValues(@Nullable @NativeType("VkClearValue const *") VkClearValue.Buffer value) { VkRenderPassBeginInfo.npClearValues(address(), value); return this; }
 

@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -164,6 +163,8 @@ public class VkBufferCreateInfo extends Struct implements NativeResource {
     public VkBufferCreateInfo usage(@NativeType("VkBufferUsageFlags") int value) { nusage(address(), value); return this; }
     /** Sets the specified value to the {@link #sharingMode} field. */
     public VkBufferCreateInfo sharingMode(@NativeType("VkSharingMode") int value) { nsharingMode(address(), value); return this; }
+    /** Sets the specified value to the {@link #queueFamilyIndexCount} field. */
+    public VkBufferCreateInfo queueFamilyIndexCount(@NativeType("uint32_t") int value) { nqueueFamilyIndexCount(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pQueueFamilyIndices} field. */
     public VkBufferCreateInfo pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npQueueFamilyIndices(address(), value); return this; }
 
@@ -175,6 +176,7 @@ public class VkBufferCreateInfo extends Struct implements NativeResource {
         long size,
         int usage,
         int sharingMode,
+        int queueFamilyIndexCount,
         @Nullable IntBuffer pQueueFamilyIndices
     ) {
         sType(sType);
@@ -183,6 +185,7 @@ public class VkBufferCreateInfo extends Struct implements NativeResource {
         size(size);
         usage(usage);
         sharingMode(sharingMode);
+        queueFamilyIndexCount(queueFamilyIndexCount);
         pQueueFamilyIndices(pQueueFamilyIndices);
 
         return this;
@@ -375,30 +378,7 @@ public class VkBufferCreateInfo extends Struct implements NativeResource {
     /** Sets the specified value to the {@code queueFamilyIndexCount} field of the specified {@code struct}. */
     public static void nqueueFamilyIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferCreateInfo.QUEUEFAMILYINDEXCOUNT, value); }
     /** Unsafe version of {@link #pQueueFamilyIndices(IntBuffer) pQueueFamilyIndices}. */
-    public static void npQueueFamilyIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkBufferCreateInfo.PQUEUEFAMILYINDICES, memAddressSafe(value)); nqueueFamilyIndexCount(struct, value == null ? 0 : value.remaining()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        if (nqueueFamilyIndexCount(struct) != 0) {
-            check(memGetAddress(struct + VkBufferCreateInfo.PQUEUEFAMILYINDICES));
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
-    }
+    public static void npQueueFamilyIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkBufferCreateInfo.PQUEUEFAMILYINDICES, memAddressSafe(value)); if (value != null) { nqueueFamilyIndexCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -476,6 +456,8 @@ public class VkBufferCreateInfo extends Struct implements NativeResource {
         public VkBufferCreateInfo.Buffer usage(@NativeType("VkBufferUsageFlags") int value) { VkBufferCreateInfo.nusage(address(), value); return this; }
         /** Sets the specified value to the {@link VkBufferCreateInfo#sharingMode} field. */
         public VkBufferCreateInfo.Buffer sharingMode(@NativeType("VkSharingMode") int value) { VkBufferCreateInfo.nsharingMode(address(), value); return this; }
+        /** Sets the specified value to the {@link VkBufferCreateInfo#queueFamilyIndexCount} field. */
+        public VkBufferCreateInfo.Buffer queueFamilyIndexCount(@NativeType("uint32_t") int value) { VkBufferCreateInfo.nqueueFamilyIndexCount(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkBufferCreateInfo#pQueueFamilyIndices} field. */
         public VkBufferCreateInfo.Buffer pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkBufferCreateInfo.npQueueFamilyIndices(address(), value); return this; }
 

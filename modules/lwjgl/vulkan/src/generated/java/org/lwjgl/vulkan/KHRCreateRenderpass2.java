@@ -148,7 +148,6 @@ public class KHRCreateRenderpass2 {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdBeginRenderPass2KHR;
         if (CHECKS) {
             check(__functionAddress);
-            VkRenderPassBeginInfo.validate(pRenderPassBegin);
         }
         callPPPV(commandBuffer.address(), pRenderPassBegin, pSubpassBeginInfo, __functionAddress);
     }

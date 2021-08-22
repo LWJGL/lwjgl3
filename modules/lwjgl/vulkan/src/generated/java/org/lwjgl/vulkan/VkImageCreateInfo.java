@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -387,6 +386,8 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
     public VkImageCreateInfo usage(@NativeType("VkImageUsageFlags") int value) { nusage(address(), value); return this; }
     /** Sets the specified value to the {@link #sharingMode} field. */
     public VkImageCreateInfo sharingMode(@NativeType("VkSharingMode") int value) { nsharingMode(address(), value); return this; }
+    /** Sets the specified value to the {@link #queueFamilyIndexCount} field. */
+    public VkImageCreateInfo queueFamilyIndexCount(@NativeType("uint32_t") int value) { nqueueFamilyIndexCount(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pQueueFamilyIndices} field. */
     public VkImageCreateInfo pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npQueueFamilyIndices(address(), value); return this; }
     /** Sets the specified value to the {@link #initialLayout} field. */
@@ -406,6 +407,7 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
         int tiling,
         int usage,
         int sharingMode,
+        int queueFamilyIndexCount,
         @Nullable IntBuffer pQueueFamilyIndices,
         int initialLayout
     ) {
@@ -421,6 +423,7 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
         tiling(tiling);
         usage(usage);
         sharingMode(sharingMode);
+        queueFamilyIndexCount(queueFamilyIndexCount);
         pQueueFamilyIndices(pQueueFamilyIndices);
         initialLayout(initialLayout);
 
@@ -640,32 +643,9 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
     /** Sets the specified value to the {@code queueFamilyIndexCount} field of the specified {@code struct}. */
     public static void nqueueFamilyIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.QUEUEFAMILYINDEXCOUNT, value); }
     /** Unsafe version of {@link #pQueueFamilyIndices(IntBuffer) pQueueFamilyIndices}. */
-    public static void npQueueFamilyIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkImageCreateInfo.PQUEUEFAMILYINDICES, memAddressSafe(value)); nqueueFamilyIndexCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npQueueFamilyIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkImageCreateInfo.PQUEUEFAMILYINDICES, memAddressSafe(value)); if (value != null) { nqueueFamilyIndexCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #initialLayout(int) initialLayout}. */
     public static void ninitialLayout(long struct, int value) { UNSAFE.putInt(null, struct + VkImageCreateInfo.INITIALLAYOUT, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        if (nqueueFamilyIndexCount(struct) != 0) {
-            check(memGetAddress(struct + VkImageCreateInfo.PQUEUEFAMILYINDICES));
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
-    }
 
     // -----------------------------------
 
@@ -777,6 +757,8 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
         public VkImageCreateInfo.Buffer usage(@NativeType("VkImageUsageFlags") int value) { VkImageCreateInfo.nusage(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageCreateInfo#sharingMode} field. */
         public VkImageCreateInfo.Buffer sharingMode(@NativeType("VkSharingMode") int value) { VkImageCreateInfo.nsharingMode(address(), value); return this; }
+        /** Sets the specified value to the {@link VkImageCreateInfo#queueFamilyIndexCount} field. */
+        public VkImageCreateInfo.Buffer queueFamilyIndexCount(@NativeType("uint32_t") int value) { VkImageCreateInfo.nqueueFamilyIndexCount(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkImageCreateInfo#pQueueFamilyIndices} field. */
         public VkImageCreateInfo.Buffer pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkImageCreateInfo.npQueueFamilyIndices(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageCreateInfo#initialLayout} field. */

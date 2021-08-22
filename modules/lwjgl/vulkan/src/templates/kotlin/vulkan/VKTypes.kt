@@ -2292,7 +2292,7 @@ val VkBufferCreateInfo = struct(Module.VULKAN, "VkBufferCreateInfo") {
     VkBufferUsageFlags("usage", "a bitmask of {@code VkBufferUsageFlagBits} specifying allowed usages of the buffer.")
     VkSharingMode("sharingMode", "a {@code VkSharingMode} value specifying the sharing mode of the buffer when it will be accessed by multiple queue families.")
     AutoSize("pQueueFamilyIndices", optional = true)..uint32_t("queueFamilyIndexCount", "the number of entries in the {@code pQueueFamilyIndices} array.")
-    uint32_t.const.p("pQueueFamilyIndices", "a list of queue families that will access this buffer (ignored if {@code sharingMode} is not #SHARING_MODE_CONCURRENT).")
+    nullable..uint32_t.const.p("pQueueFamilyIndices", "a list of queue families that will access this buffer (ignored if {@code sharingMode} is not #SHARING_MODE_CONCURRENT).")
 }
 
 val VkBufferViewCreateInfo = struct(Module.VULKAN, "VkBufferViewCreateInfo") {
@@ -2549,7 +2549,7 @@ val VkImageCreateInfo = struct(Module.VULKAN, "VkImageCreateInfo") {
     VkImageUsageFlags("usage", "a bitmask of {@code VkImageUsageFlagBits} describing the intended usage of the image.")
     VkSharingMode("sharingMode", "a {@code VkSharingMode} value specifying the sharing mode of the image when it will be accessed by multiple queue families.")
     AutoSize("pQueueFamilyIndices", optional = true)..uint32_t("queueFamilyIndexCount", "the number of entries in the {@code pQueueFamilyIndices} array.")
-    uint32_t.const.p("pQueueFamilyIndices", "a list of queue families that will access this image (ignored if {@code sharingMode} is not #SHARING_MODE_CONCURRENT).")
+    nullable..uint32_t.const.p("pQueueFamilyIndices", "a list of queue families that will access this image (ignored if {@code sharingMode} is not #SHARING_MODE_CONCURRENT).")
     VkImageLayout("initialLayout", "a {@code VkImageLayout} value specifying the initial {@code VkImageLayout} of all image subresources of the image. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#resources-image-layouts\">Image Layouts</a>.")
 }
 
@@ -4496,7 +4496,7 @@ val VkFramebufferCreateInfo = struct(Module.VULKAN, "VkFramebufferCreateInfo") {
     VkFramebufferCreateFlags("flags", "a bitmask of {@code VkFramebufferCreateFlagBits}")
     VkRenderPass("renderPass", "a render pass defining what render passes the framebuffer will be compatible with. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#renderpass-compatibility\">Render Pass Compatibility</a> for details.")
     AutoSize("pAttachments", optional = true)..uint32_t("attachmentCount", "the number of attachments.")
-    VkImageView.const.p("pAttachments", "a pointer to an array of {@code VkImageView} handles, each of which will be used as the corresponding attachment in a render pass instance. If {@code flags} includes #FRAMEBUFFER_CREATE_IMAGELESS_BIT, this parameter is ignored.")
+    nullable..VkImageView.const.p("pAttachments", "a pointer to an array of {@code VkImageView} handles, each of which will be used as the corresponding attachment in a render pass instance. If {@code flags} includes #FRAMEBUFFER_CREATE_IMAGELESS_BIT, this parameter is ignored.")
     uint32_t("width", "{@code width}, {@code height} and {@code layers} define the dimensions of the framebuffer. If the render pass uses multiview, then {@code layers} <b>must</b> be one and each attachment requires a number of layers that is greater than the maximum bit index set in the view mask in the subpasses in which it is used.")
     uint32_t("height", "see {@code width}")
     uint32_t("layers", "see {@code width}")
@@ -5210,7 +5210,7 @@ val VkRenderPassBeginInfo = struct(Module.VULKAN, "VkRenderPassBeginInfo") {
     VkFramebuffer("framebuffer", "the framebuffer containing the attachments that are used with the render pass.")
     VkRect2D("renderArea", "the render area that is affected by the render pass instance, and is described in more detail below.")
     AutoSize("pClearValues", optional = true)..uint32_t("clearValueCount", "the number of elements in {@code pClearValues}.")
-    VkClearValue.const.p("pClearValues", "a pointer to an array of {@code clearValueCount} ##VkClearValue structures that contains clear values for each attachment, if the attachment uses a {@code loadOp} value of #ATTACHMENT_LOAD_OP_CLEAR or if the attachment has a depth/stencil format and uses a {@code stencilLoadOp} value of #ATTACHMENT_LOAD_OP_CLEAR. The array is indexed by attachment number. Only elements corresponding to cleared attachments are used. Other elements of {@code pClearValues} are ignored.")
+    nullable..VkClearValue.const.p("pClearValues", "a pointer to an array of {@code clearValueCount} ##VkClearValue structures that contains clear values for each attachment, if the attachment uses a {@code loadOp} value of #ATTACHMENT_LOAD_OP_CLEAR or if the attachment has a depth/stencil format and uses a {@code stencilLoadOp} value of #ATTACHMENT_LOAD_OP_CLEAR. The array is indexed by attachment number. Only elements corresponding to cleared attachments are used. Other elements of {@code pClearValues} are ignored.")
 }
 
 val VkPhysicalDeviceSubgroupProperties = struct(Module.VULKAN, "VkPhysicalDeviceSubgroupProperties", mutable = false) {

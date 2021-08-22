@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -250,6 +249,8 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
     public VkSwapchainCreateInfoKHR imageUsage(@NativeType("VkImageUsageFlags") int value) { nimageUsage(address(), value); return this; }
     /** Sets the specified value to the {@link #imageSharingMode} field. */
     public VkSwapchainCreateInfoKHR imageSharingMode(@NativeType("VkSharingMode") int value) { nimageSharingMode(address(), value); return this; }
+    /** Sets the specified value to the {@link #queueFamilyIndexCount} field. */
+    public VkSwapchainCreateInfoKHR queueFamilyIndexCount(@NativeType("uint32_t") int value) { nqueueFamilyIndexCount(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pQueueFamilyIndices} field. */
     public VkSwapchainCreateInfoKHR pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npQueueFamilyIndices(address(), value); return this; }
     /** Sets the specified value to the {@link #preTransform} field. */
@@ -276,6 +277,7 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
         int imageArrayLayers,
         int imageUsage,
         int imageSharingMode,
+        int queueFamilyIndexCount,
         @Nullable IntBuffer pQueueFamilyIndices,
         int preTransform,
         int compositeAlpha,
@@ -294,6 +296,7 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
         imageArrayLayers(imageArrayLayers);
         imageUsage(imageUsage);
         imageSharingMode(imageSharingMode);
+        queueFamilyIndexCount(queueFamilyIndexCount);
         pQueueFamilyIndices(pQueueFamilyIndices);
         preTransform(preTransform);
         compositeAlpha(compositeAlpha);
@@ -521,7 +524,7 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
     /** Sets the specified value to the {@code queueFamilyIndexCount} field of the specified {@code struct}. */
     public static void nqueueFamilyIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainCreateInfoKHR.QUEUEFAMILYINDEXCOUNT, value); }
     /** Unsafe version of {@link #pQueueFamilyIndices(IntBuffer) pQueueFamilyIndices}. */
-    public static void npQueueFamilyIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkSwapchainCreateInfoKHR.PQUEUEFAMILYINDICES, memAddressSafe(value)); nqueueFamilyIndexCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npQueueFamilyIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkSwapchainCreateInfoKHR.PQUEUEFAMILYINDICES, memAddressSafe(value)); if (value != null) { nqueueFamilyIndexCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #preTransform(int) preTransform}. */
     public static void npreTransform(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainCreateInfoKHR.PRETRANSFORM, value); }
     /** Unsafe version of {@link #compositeAlpha(int) compositeAlpha}. */
@@ -532,29 +535,6 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
     public static void nclipped(long struct, int value) { UNSAFE.putInt(null, struct + VkSwapchainCreateInfoKHR.CLIPPED, value); }
     /** Unsafe version of {@link #oldSwapchain(long) oldSwapchain}. */
     public static void noldSwapchain(long struct, long value) { UNSAFE.putLong(null, struct + VkSwapchainCreateInfoKHR.OLDSWAPCHAIN, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        if (nqueueFamilyIndexCount(struct) != 0) {
-            check(memGetAddress(struct + VkSwapchainCreateInfoKHR.PQUEUEFAMILYINDICES));
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
-    }
 
     // -----------------------------------
 
@@ -673,6 +653,8 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
         public VkSwapchainCreateInfoKHR.Buffer imageUsage(@NativeType("VkImageUsageFlags") int value) { VkSwapchainCreateInfoKHR.nimageUsage(address(), value); return this; }
         /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#imageSharingMode} field. */
         public VkSwapchainCreateInfoKHR.Buffer imageSharingMode(@NativeType("VkSharingMode") int value) { VkSwapchainCreateInfoKHR.nimageSharingMode(address(), value); return this; }
+        /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#queueFamilyIndexCount} field. */
+        public VkSwapchainCreateInfoKHR.Buffer queueFamilyIndexCount(@NativeType("uint32_t") int value) { VkSwapchainCreateInfoKHR.nqueueFamilyIndexCount(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkSwapchainCreateInfoKHR#pQueueFamilyIndices} field. */
         public VkSwapchainCreateInfoKHR.Buffer pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkSwapchainCreateInfoKHR.npQueueFamilyIndices(address(), value); return this; }
         /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#preTransform} field. */

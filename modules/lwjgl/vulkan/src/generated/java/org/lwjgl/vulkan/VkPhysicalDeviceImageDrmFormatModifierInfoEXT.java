@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -129,6 +128,8 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
     public VkPhysicalDeviceImageDrmFormatModifierInfoEXT drmFormatModifier(@NativeType("uint64_t") long value) { ndrmFormatModifier(address(), value); return this; }
     /** Sets the specified value to the {@link #sharingMode} field. */
     public VkPhysicalDeviceImageDrmFormatModifierInfoEXT sharingMode(@NativeType("VkSharingMode") int value) { nsharingMode(address(), value); return this; }
+    /** Sets the specified value to the {@link #queueFamilyIndexCount} field. */
+    public VkPhysicalDeviceImageDrmFormatModifierInfoEXT queueFamilyIndexCount(@NativeType("uint32_t") int value) { nqueueFamilyIndexCount(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pQueueFamilyIndices} field. */
     public VkPhysicalDeviceImageDrmFormatModifierInfoEXT pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npQueueFamilyIndices(address(), value); return this; }
 
@@ -138,12 +139,14 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
         long pNext,
         long drmFormatModifier,
         int sharingMode,
+        int queueFamilyIndexCount,
         @Nullable IntBuffer pQueueFamilyIndices
     ) {
         sType(sType);
         pNext(pNext);
         drmFormatModifier(drmFormatModifier);
         sharingMode(sharingMode);
+        queueFamilyIndexCount(queueFamilyIndexCount);
         pQueueFamilyIndices(pQueueFamilyIndices);
 
         return this;
@@ -328,30 +331,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
     /** Sets the specified value to the {@code queueFamilyIndexCount} field of the specified {@code struct}. */
     public static void nqueueFamilyIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceImageDrmFormatModifierInfoEXT.QUEUEFAMILYINDEXCOUNT, value); }
     /** Unsafe version of {@link #pQueueFamilyIndices(IntBuffer) pQueueFamilyIndices}. */
-    public static void npQueueFamilyIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkPhysicalDeviceImageDrmFormatModifierInfoEXT.PQUEUEFAMILYINDICES, memAddressSafe(value)); nqueueFamilyIndexCount(struct, value == null ? 0 : value.remaining()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        if (nqueueFamilyIndexCount(struct) != 0) {
-            check(memGetAddress(struct + VkPhysicalDeviceImageDrmFormatModifierInfoEXT.PQUEUEFAMILYINDICES));
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
-    }
+    public static void npQueueFamilyIndices(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkPhysicalDeviceImageDrmFormatModifierInfoEXT.PQUEUEFAMILYINDICES, memAddressSafe(value)); if (value != null) { nqueueFamilyIndexCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -419,6 +399,8 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
         public VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer drmFormatModifier(@NativeType("uint64_t") long value) { VkPhysicalDeviceImageDrmFormatModifierInfoEXT.ndrmFormatModifier(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#sharingMode} field. */
         public VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer sharingMode(@NativeType("VkSharingMode") int value) { VkPhysicalDeviceImageDrmFormatModifierInfoEXT.nsharingMode(address(), value); return this; }
+        /** Sets the specified value to the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#queueFamilyIndexCount} field. */
+        public VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer queueFamilyIndexCount(@NativeType("uint32_t") int value) { VkPhysicalDeviceImageDrmFormatModifierInfoEXT.nqueueFamilyIndexCount(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#pQueueFamilyIndices} field. */
         public VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer pQueueFamilyIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkPhysicalDeviceImageDrmFormatModifierInfoEXT.npQueueFamilyIndices(address(), value); return this; }
 

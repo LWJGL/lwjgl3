@@ -7124,7 +7124,6 @@ public class VK10 {
     public static int nvkCreateBuffer(VkDevice device, long pCreateInfo, long pAllocator, long pBuffer) {
         long __functionAddress = device.getCapabilities().vkCreateBuffer;
         if (CHECKS) {
-            VkBufferCreateInfo.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pBuffer, __functionAddress);
@@ -7380,7 +7379,6 @@ public class VK10 {
     public static int nvkCreateImage(VkDevice device, long pCreateInfo, long pAllocator, long pImage) {
         long __functionAddress = device.getCapabilities().vkCreateImage;
         if (CHECKS) {
-            VkImageCreateInfo.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pImage, __functionAddress);
@@ -9269,7 +9267,6 @@ public class VK10 {
     public static int nvkCreateFramebuffer(VkDevice device, long pCreateInfo, long pAllocator, long pFramebuffer) {
         long __functionAddress = device.getCapabilities().vkCreateFramebuffer;
         if (CHECKS) {
-            VkFramebufferCreateInfo.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pFramebuffer, __functionAddress);
@@ -15026,9 +15023,6 @@ public class VK10 {
     /** Unsafe version of: {@link #vkCmdBeginRenderPass CmdBeginRenderPass} */
     public static void nvkCmdBeginRenderPass(VkCommandBuffer commandBuffer, long pRenderPassBegin, int contents) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdBeginRenderPass;
-        if (CHECKS) {
-            VkRenderPassBeginInfo.validate(pRenderPassBegin);
-        }
         callPPV(commandBuffer.address(), pRenderPassBegin, contents, __functionAddress);
     }
 
@@ -15665,7 +15659,6 @@ public class VK10 {
         long __functionAddress = device.getCapabilities().vkCreateBuffer;
         if (CHECKS) {
             check(pBuffer, 1);
-            VkBufferCreateInfo.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pBuffer, __functionAddress);
@@ -15688,7 +15681,6 @@ public class VK10 {
         long __functionAddress = device.getCapabilities().vkCreateImage;
         if (CHECKS) {
             check(pImage, 1);
-            VkImageCreateInfo.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pImage, __functionAddress);
@@ -15831,7 +15823,6 @@ public class VK10 {
         long __functionAddress = device.getCapabilities().vkCreateFramebuffer;
         if (CHECKS) {
             check(pFramebuffer, 1);
-            VkFramebufferCreateInfo.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pFramebuffer, __functionAddress);
