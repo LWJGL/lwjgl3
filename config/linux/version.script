@@ -4,7 +4,6 @@ LWJGL {
         *org_lwjgl_*;
         *org_eclipse_fx_drift_*;
         JNI_On*;
-        __wrap_memcpy;
 
     # Hide everything else
     local: *;

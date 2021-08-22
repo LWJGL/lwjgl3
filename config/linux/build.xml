@@ -95,7 +95,6 @@
             <local name="lib-uptodate"/>
             <uptodate property="lib-uptodate" targetfile="${lib.arch}/lib${name}.so">
                 <srcfiles file="config/${platform}/build.xml"/>
-                <srcfiles file="${bin.native}/wrap_memcpy.o" if:set="build.arch.x64"/>
                 <srcfiles dir="${dest}" includes="**"/>
             </uptodate>
             <local name="lib-dependencies-uptodate"/>
@@ -131,8 +130,6 @@
 
                 <arg line="-Wl,--no-undefined"/>
                 <arg line="-Wl,--version-script,${version.script}"/>
-                <arg line="-Wl,--wrap,memcpy" if:set="build.arch.x64"/>
-                <fileset dir="${bin.native}" includes="wrap_memcpy.o" if:set="build.arch.x64"/>
                 <fileset dir="${dest}" includes="*.o"/>
                 <link/>
             </apply>
@@ -159,10 +156,6 @@
             <arg value="gcc --version | grep ^gcc | sed 's/^.* //g;s/.[0-9]//2'"/>
         </exec>
         <echo message="Building with GCC v${gcc.version} (command: ${gcc.prefix}gcc${gcc.suffix})"/>
-
-        <compile dest="${bin.native}" lto="" if:set="build.arch.x64">
-            <fileset dir="." includes="${module.lwjgl}/core/src/main/c/${platform}/wrap_memcpy.c"/>
-        </compile>
 
         <parallel threadsPerProcessor="2">
 
