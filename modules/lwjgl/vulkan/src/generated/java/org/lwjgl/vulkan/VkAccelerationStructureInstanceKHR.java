@@ -20,17 +20,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The C language spec does not define the ordering of bit-fields, but in practice, this struct produces the correct layout with existing compilers. The intended bit pattern is for the following:</p>
+ * <p>The C language specification does not define the ordering of bit-fields, but in practice, this struct produces the correct layout with existing compilers. The intended bit pattern is for the following:</p>
  * 
  * <ul>
- * <li>{@code instanceCustomIndex} and {@code mask} occupy the same memory as if a single {@code int32_t} was specified in their place
+ * <li>{@code instanceCustomIndex} and {@code mask} occupy the same memory as if a single {@code uint32_t} was specified in their place
  * 
  * <ul>
  * <li>{@code instanceCustomIndex} occupies the 24 least significant bits of that memory</li>
  * <li>{@code mask} occupies the 8 most significant bits of that memory</li>
  * </ul>
  * </li>
- * <li>{@code instanceShaderBindingTableRecordOffset} and {@code flags} occupy the same memory as if a single {@code int32_t} was specified in their place
+ * <li>{@code instanceShaderBindingTableRecordOffset} and {@code flags} occupy the same memory as if a single {@code uint32_t} was specified in their place
  * 
  * <ul>
  * <li>{@code instanceShaderBindingTableRecordOffset} occupies the 24 least significant bits of that memory</li>
@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkTransformMatrixKHR}</p>
+ * <p>{@link VkAccelerationStructureMotionInstanceDataNV}, {@link VkTransformMatrixKHR}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -326,12 +326,12 @@ public class VkAccelerationStructureInstanceKHR extends Struct implements Native
     public static VkTransformMatrixKHR ntransform(long struct) { return VkTransformMatrixKHR.create(struct + VkAccelerationStructureInstanceKHR.TRANSFORM); }
     public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureInstanceKHR.BITFIELD0); }
     /** Unsafe version of {@link #instanceCustomIndex}. */
-    public static int ninstanceCustomIndex(long struct) { return nbitfield0(struct) & 0x00_FF_FFFF; }
+    public static int ninstanceCustomIndex(long struct) { return nbitfield0(struct) & 0x00_FF_FF_FF; }
     /** Unsafe version of {@link #mask}. */
     public static int nmask(long struct) { return nbitfield0(struct) >>> 24; }
     public static int nbitfield1(long struct) { return UNSAFE.getInt(null, struct + VkAccelerationStructureInstanceKHR.BITFIELD1); }
     /** Unsafe version of {@link #instanceShaderBindingTableRecordOffset}. */
-    public static int ninstanceShaderBindingTableRecordOffset(long struct) { return nbitfield1(struct) & 0x00_FF_FFFF; }
+    public static int ninstanceShaderBindingTableRecordOffset(long struct) { return nbitfield1(struct) & 0x00_FF_FF_FF; }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return nbitfield1(struct) >>> 24; }
     /** Unsafe version of {@link #accelerationStructureReference}. */
@@ -341,14 +341,14 @@ public class VkAccelerationStructureInstanceKHR extends Struct implements Native
     public static void ntransform(long struct, VkTransformMatrixKHR value) { memCopy(value.address(), struct + VkAccelerationStructureInstanceKHR.TRANSFORM, VkTransformMatrixKHR.SIZEOF); }
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureInstanceKHR.BITFIELD0, value); }
     /** Unsafe version of {@link #instanceCustomIndex(int) instanceCustomIndex}. */
-    public static void ninstanceCustomIndex(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_00_0000) | (value & 0x00_FF_FFFF)); }
+    public static void ninstanceCustomIndex(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_00_00_00) | (value & 0x00_FF_FF_FF)); }
     /** Unsafe version of {@link #mask(int) mask}. */
-    public static void nmask(long struct, int value) { nbitfield0(struct, (value << 24) | (nbitfield0(struct) & 0x00_FF_FFFF)); }
+    public static void nmask(long struct, int value) { nbitfield0(struct, (value << 24) | (nbitfield0(struct) & 0x00_FF_FF_FF)); }
     public static void nbitfield1(long struct, int value) { UNSAFE.putInt(null, struct + VkAccelerationStructureInstanceKHR.BITFIELD1, value); }
     /** Unsafe version of {@link #instanceShaderBindingTableRecordOffset(int) instanceShaderBindingTableRecordOffset}. */
-    public static void ninstanceShaderBindingTableRecordOffset(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xFF_00_0000) | (value & 0x00_FF_FFFF)); }
+    public static void ninstanceShaderBindingTableRecordOffset(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xFF_00_00_00) | (value & 0x00_FF_FF_FF)); }
     /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { nbitfield1(struct, (value << 24) | (nbitfield1(struct) & 0x00_FF_FFFF)); }
+    public static void nflags(long struct, int value) { nbitfield1(struct, (value << 24) | (nbitfield1(struct) & 0x00_FF_FF_FF)); }
     /** Unsafe version of {@link #accelerationStructureReference(long) accelerationStructureReference}. */
     public static void naccelerationStructureReference(long struct, long value) { UNSAFE.putLong(null, struct + VkAccelerationStructureInstanceKHR.ACCELERATIONSTRUCTUREREFERENCE, value); }
 

@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension allows multisample rendering with a raster and depth/stencil sample count that is larger than the color sample count. Rasterization and the results of the depth and stencil tests together determine the portion of a pixel that is "{@code covered}". It can be useful to evaluate coverage at a higher frequency than color samples are stored. This coverage is then "{@code reduced}" to a collection of covered color samples, each having an opacity value corresponding to the fraction of the color sample covered. The opacity can optionally be blended into individual color samples.
+ * This extension allows multisample rendering with a raster and depth/stencil sample count that is larger than the color sample count. Rasterization and the results of the depth and stencil tests together determine the portion of a pixel that is “{@code covered}”. It can be useful to evaluate coverage at a higher frequency than color samples are stored. This coverage is then “{@code reduced}” to a collection of covered color samples, each having an opacity value corresponding to the fraction of the color sample covered. The opacity can optionally be blended into individual color samples.
  * 
  * <p>Rendering with fewer color samples than depth/stencil samples greatly reduces the amount of memory and bandwidth consumed by the color buffer. However, converting the coverage values into opacity introduces artifacts where triangles share edges and <b>may</b> not be suitable for normal triangle mesh rendering.</p>
  * 

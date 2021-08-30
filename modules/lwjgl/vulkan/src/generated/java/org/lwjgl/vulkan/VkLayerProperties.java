@@ -20,6 +20,10 @@ import static org.lwjgl.vulkan.VK10.*;
 /**
  * Structure specifying layer properties.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VK10#vkEnumerateDeviceLayerProperties EnumerateDeviceLayerProperties}, {@link VK10#vkEnumerateInstanceLayerProperties EnumerateInstanceLayerProperties}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

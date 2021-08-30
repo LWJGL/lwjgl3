@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * structure to specify Hdr metadata.
+ * Specify Hdr metadata.
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -119,19 +119,19 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the reference monitor&#8217;s red primary in chromaticity coordinates */
+    /** the reference monitor’s red primary in chromaticity coordinates */
     public VkXYColorEXT displayPrimaryRed() { return ndisplayPrimaryRed(address()); }
-    /** the reference monitor&#8217;s green primary in chromaticity coordinates */
+    /** the reference monitor’s green primary in chromaticity coordinates */
     public VkXYColorEXT displayPrimaryGreen() { return ndisplayPrimaryGreen(address()); }
-    /** the reference monitor&#8217;s blue primary in chromaticity coordinates */
+    /** the reference monitor’s blue primary in chromaticity coordinates */
     public VkXYColorEXT displayPrimaryBlue() { return ndisplayPrimaryBlue(address()); }
-    /** the reference monitor&#8217;s white-point in chromaticity coordinates */
+    /** the reference monitor’s white-point in chromaticity coordinates */
     public VkXYColorEXT whitePoint() { return nwhitePoint(address()); }
     /** the maximum luminance of the reference monitor in nits */
     public float maxLuminance() { return nmaxLuminance(address()); }
     /** the minimum luminance of the reference monitor in nits */
     public float minLuminance() { return nminLuminance(address()); }
-    /** content&#8217;s maximum luminance in nits */
+    /** content’s maximum luminance in nits */
     public float maxContentLightLevel() { return nmaxContentLightLevel(address()); }
     /** the maximum frame average light level in nits */
     public float maxFrameAverageLightLevel() { return nmaxFrameAverageLightLevel(address()); }

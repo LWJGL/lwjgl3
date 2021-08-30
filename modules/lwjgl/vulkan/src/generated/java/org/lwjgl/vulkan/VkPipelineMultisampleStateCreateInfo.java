@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-sampleRateShading">sample rate shading</a> feature is not enabled, {@code sampleShadingEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-alphaToOne">alpha to one</a> feature is not enabled, {@code alphaToOneEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>{@code minSampleShading} <b>must</b> be in the range <code>[0,1]</code></li>
- * <li>If the {@code VK_NV_framebuffer_mixed_samples.html[VK_NV_framebuffer_mixed_samples]} extension is enabled, and if the subpass has any color attachments and {@code rasterizationSamples} is greater than the number of color samples, then {@code sampleShadingEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If the {@link NVFramebufferMixedSamples VK_NV_framebuffer_mixed_samples} extension is enabled, and if the subpass has any color attachments and {@code rasterizationSamples} is greater than the number of color samples, then {@code sampleShadingEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -132,7 +132,7 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
     /** reserved for future use. */
     @NativeType("VkPipelineMultisampleStateCreateFlags")
     public int flags() { return nflags(address()); }
-    /** a {@code VkSampleCountFlagBits} specifying the number of samples used in rasterization. */
+    /** a {@code VkSampleCountFlagBits} value specifying the number of samples used in rasterization. */
     @NativeType("VkSampleCountFlagBits")
     public int rasterizationSamples() { return nrasterizationSamples(address()); }
     /** <b>can</b> be used to enable <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-sampleshading">Sample Shading</a>. */
@@ -143,15 +143,15 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
     /**
      * @param capacity the number of elements in the returned buffer
      *
-     * @return an array of {@code VkSampleMask} values used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-samplemask">sample mask test</a>.
+     * @return a pointer to an array of {@code VkSampleMask} values used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-samplemask">sample mask test</a>.
      */
     @Nullable
     @NativeType("VkSampleMask const *")
     public IntBuffer pSampleMask(int capacity) { return npSampleMask(address(), capacity); }
-    /** controls whether a temporary coverage value is generated based on the alpha component of the fragment&#8217;s first color output as specified in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-covg">Multisample Coverage</a> section. */
+    /** controls whether a temporary coverage value is generated based on the alpha component of the fragment’s first color output as specified in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-covg">Multisample Coverage</a> section. */
     @NativeType("VkBool32")
     public boolean alphaToCoverageEnable() { return nalphaToCoverageEnable(address()) != 0; }
-    /** controls whether the alpha component of the fragment&#8217;s first color output is replaced with one as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-covg">Multisample Coverage</a>. */
+    /** controls whether the alpha component of the fragment’s first color output is replaced with one as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-covg">Multisample Coverage</a>. */
     @NativeType("VkBool32")
     public boolean alphaToOneEnable() { return nalphaToOneEnable(address()) != 0; }
 

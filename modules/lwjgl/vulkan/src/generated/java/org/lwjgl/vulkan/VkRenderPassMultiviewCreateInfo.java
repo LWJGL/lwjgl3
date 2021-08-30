@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing multiview info for all subpasses.
+ * Structure containing multiview information for all subpasses.
  * 
  * <h5>Description</h5>
  * 
@@ -139,7 +139,7 @@ public class VkRenderPassMultiviewCreateInfo extends Struct implements NativeRes
     /** zero or the number of dependencies in the render pass. */
     @NativeType("uint32_t")
     public int dependencyCount() { return ndependencyCount(address()); }
-    /** a pointer to an array of {@code dependencyCount} view offsets, one for each dependency. If {@code dependencyCount} is zero, each dependency&#8217;s view offset is treated as zero. Each view offset controls which views in the source subpass the views in the destination subpass depend on. */
+    /** a pointer to an array of {@code dependencyCount} view offsets, one for each dependency. If {@code dependencyCount} is zero, each dependency’s view offset is treated as zero. Each view offset controls which views in the source subpass the views in the destination subpass depend on. */
     @Nullable
     @NativeType("int32_t const *")
     public IntBuffer pViewOffsets() { return npViewOffsets(address()); }

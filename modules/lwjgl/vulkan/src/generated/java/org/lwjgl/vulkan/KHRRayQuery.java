@@ -84,7 +84,7 @@ package org.lwjgl.vulkan;
  * <li>Henrik Rydgard, Embark</li>
  * <li>Juan Cañada, Epic Games</li>
  * <li>Patrick Kelly, Epic Games</li>
- * <li>Yuriy O&#8217;Donnell, Epic Games</li>
+ * <li>Yuriy O’Donnell, Epic Games</li>
  * <li>Michael Doggett, Facebook/Oculus</li>
  * <li>Andrew Garrard, Imagination</li>
  * <li>Don Scorgie, Imagination</li>

@@ -20,9 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-scope-quad">Quad</a> chapter for more information.</p>
+ * <p>See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-scope-quad">Quad shader scope</a> for more information.</p>
  * 
- * <p>If the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} <b>can</b> also be included in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable features.</p>
+ * <p>If the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -34,8 +34,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceComputeShaderDerivativesFeaturesNV {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #computeDerivativeGroupQuads};
  *     VkBool32 {@link #computeDerivativeGroupLinear};
  * }</code></pre>
@@ -85,10 +85,10 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends Struct i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** indicates that the implementation supports the {@code ComputeDerivativeGroupQuadsNV} SPIR-V capability. */
@@ -98,9 +98,9 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends Struct i
     @NativeType("VkBool32")
     public boolean computeDerivativeGroupLinear() { return ncomputeDerivativeGroupLinear(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceComputeShaderDerivativesFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceComputeShaderDerivativesFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #computeDerivativeGroupQuads} field. */
     public VkPhysicalDeviceComputeShaderDerivativesFeaturesNV computeDerivativeGroupQuads(@NativeType("VkBool32") boolean value) { ncomputeDerivativeGroupQuads(address(), value ? 1 : 0); return this; }
@@ -333,10 +333,10 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends Struct i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV#computeDerivativeGroupQuads} field. */
@@ -346,9 +346,9 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends Struct i
         @NativeType("VkBool32")
         public boolean computeDerivativeGroupLinear() { return VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.ncomputeDerivativeGroupLinear(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV#sType} field. */
         public VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV#pNext} field. */
         public VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV#computeDerivativeGroupQuads} field. */
         public VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer computeDerivativeGroupQuads(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.ncomputeDerivativeGroupQuads(address(), value ? 1 : 0); return this; }

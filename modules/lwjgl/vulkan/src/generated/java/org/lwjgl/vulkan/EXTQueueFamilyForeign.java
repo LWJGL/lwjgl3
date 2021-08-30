@@ -63,7 +63,7 @@ public final class EXTQueueFamilyForeign {
     public static final String VK_EXT_QUEUE_FAMILY_FOREIGN_EXTENSION_NAME = "VK_EXT_queue_family_foreign";
 
     /** VK_QUEUE_FAMILY_FOREIGN_EXT */
-    public static final int VK_QUEUE_FAMILY_FOREIGN_EXT = (~0-2);
+    public static final int VK_QUEUE_FAMILY_FOREIGN_EXT = (~2);
 
     private EXTQueueFamilyForeign() {}
 

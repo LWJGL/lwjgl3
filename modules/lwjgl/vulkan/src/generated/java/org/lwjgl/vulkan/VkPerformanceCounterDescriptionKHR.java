@@ -36,7 +36,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * <pre><code>
  * struct VkPerformanceCounterDescriptionKHR {
  *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
+ *     void * {@link #pNext};
  *     VkPerformanceCounterDescriptionFlagsKHR {@link #flags};
  *     char {@link #name}[VK_MAX_DESCRIPTION_SIZE];
  *     char {@link #category}[VK_MAX_DESCRIPTION_SIZE];
@@ -98,7 +98,7 @@ public class VkPerformanceCounterDescriptionKHR extends Struct implements Native
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** a bitmask of {@code VkPerformanceCounterDescriptionFlagBitsKHR} indicating the usage behavior for the counter. */
     @NativeType("VkPerformanceCounterDescriptionFlagsKHR")
@@ -125,7 +125,7 @@ public class VkPerformanceCounterDescriptionKHR extends Struct implements Native
     /** Sets the specified value to the {@link #sType} field. */
     public VkPerformanceCounterDescriptionKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@link #pNext} field. */
-    public VkPerformanceCounterDescriptionKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    public VkPerformanceCounterDescriptionKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPerformanceCounterDescriptionKHR set(
@@ -359,7 +359,7 @@ public class VkPerformanceCounterDescriptionKHR extends Struct implements Native
         @NativeType("VkStructureType")
         public int sType() { return VkPerformanceCounterDescriptionKHR.nsType(address()); }
         /** @return the value of the {@link VkPerformanceCounterDescriptionKHR#pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkPerformanceCounterDescriptionKHR.npNext(address()); }
         /** @return the value of the {@link VkPerformanceCounterDescriptionKHR#flags} field. */
         @NativeType("VkPerformanceCounterDescriptionFlagsKHR")
@@ -386,7 +386,7 @@ public class VkPerformanceCounterDescriptionKHR extends Struct implements Native
         /** Sets the specified value to the {@link VkPerformanceCounterDescriptionKHR#sType} field. */
         public VkPerformanceCounterDescriptionKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPerformanceCounterDescriptionKHR.nsType(address(), value); return this; }
         /** Sets the specified value to the {@link VkPerformanceCounterDescriptionKHR#pNext} field. */
-        public VkPerformanceCounterDescriptionKHR.Buffer pNext(@NativeType("void const *") long value) { VkPerformanceCounterDescriptionKHR.npNext(address(), value); return this; }
+        public VkPerformanceCounterDescriptionKHR.Buffer pNext(@NativeType("void *") long value) { VkPerformanceCounterDescriptionKHR.npNext(address(), value); return this; }
 
     }
 

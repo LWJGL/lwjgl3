@@ -144,7 +144,7 @@ public class VkImportSemaphoreFdInfoKHR extends Struct implements NativeResource
     /** a bitmask of {@code VkSemaphoreImportFlagBits} specifying additional parameters for the semaphore payload import operation. */
     @NativeType("VkSemaphoreImportFlags")
     public int flags() { return nflags(address()); }
-    /** specifies the type of {@code fd}. */
+    /** a {@code VkExternalSemaphoreHandleTypeFlagBits} value specifying the type of {@code fd}. */
     @NativeType("VkExternalSemaphoreHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
     /** the external handle to import. */

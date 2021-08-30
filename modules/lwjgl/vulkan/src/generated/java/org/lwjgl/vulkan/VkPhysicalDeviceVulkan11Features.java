@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceVulkan11Features} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceVulkan11Features} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the features.</p>
+ * <p>If the {@link VkPhysicalDeviceVulkan11Features} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceVulkan11Features} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceVulkan11Features {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #storageBuffer16BitAccess};
  *     VkBool32 {@link #uniformAndStorageBuffer16BitAccess};
  *     VkBool32 {@link #storagePushConstant16};
@@ -123,10 +123,10 @@ public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** specifies whether objects in the {@code StorageBuffer}, {@code ShaderRecordBufferKHR}, or {@code PhysicalStorageBuffer} storage class with the {@code Block} decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StorageBuffer16BitAccess} capability. */
@@ -162,13 +162,13 @@ public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeRe
     /** specifies whether the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>. If {@code samplerYcbcrConversion} is {@link VK10#VK_FALSE FALSE}, sampler Y′C<sub>B</sub>C<sub>R</sub> conversion is not supported, and samplers using sampler Y′C<sub>B</sub>C<sub>R</sub> conversion <b>must</b> not be used. */
     @NativeType("VkBool32")
     public boolean samplerYcbcrConversion() { return nsamplerYcbcrConversion(address()) != 0; }
-    /** specifies whether shader draw parameters are supported. */
+    /** specifies whether the implementation supports the SPIR-V {@code DrawParameters} capability. When this feature is not enabled, shader modules <b>must</b> not declare the {@code SPV_KHR_shader_draw_parameters} extension or the {@code DrawParameters} capability. */
     @NativeType("VkBool32")
     public boolean shaderDrawParameters() { return nshaderDrawParameters(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceVulkan11Features sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceVulkan11Features pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #storageBuffer16BitAccess} field. */
     public VkPhysicalDeviceVulkan11Features storageBuffer16BitAccess(@NativeType("VkBool32") boolean value) { nstorageBuffer16BitAccess(address(), value ? 1 : 0); return this; }
@@ -481,10 +481,10 @@ public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceVulkan11Features.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceVulkan11Features.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceVulkan11Features#storageBuffer16BitAccess} field. */
@@ -524,9 +524,9 @@ public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeRe
         @NativeType("VkBool32")
         public boolean shaderDrawParameters() { return VkPhysicalDeviceVulkan11Features.nshaderDrawParameters(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#sType} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVulkan11Features.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#pNext} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVulkan11Features.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#storageBuffer16BitAccess} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer storageBuffer16BitAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan11Features.nstorageBuffer16BitAccess(address(), value ? 1 : 0); return this; }

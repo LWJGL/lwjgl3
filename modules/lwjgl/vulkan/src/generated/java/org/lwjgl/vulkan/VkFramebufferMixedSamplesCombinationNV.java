@@ -101,7 +101,7 @@ public class VkFramebufferMixedSamplesCombinationNV extends Struct implements Na
     /** a {@code VkCoverageReductionModeNV} value specifying the coverage reduction mode. */
     @NativeType("VkCoverageReductionModeNV")
     public int coverageReductionMode() { return ncoverageReductionMode(address()); }
-    /** specifies the number of rasterization samples in the supported combination. */
+    /** a {@code VkSampleCountFlagBits} specifying the number of rasterization samples in the supported combination. */
     @NativeType("VkSampleCountFlagBits")
     public int rasterizationSamples() { return nrasterizationSamples(address()); }
     /** specifies the number of samples in the depth stencil attachment in the supported combination. A value of 0 indicates the combination does not have a depth stencil attachment. */

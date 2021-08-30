@@ -26,7 +26,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code queueFamilyIndex} <b>must</b> be one of the queue family indices specified when {@code device} was created, via the {@link VkDeviceQueueCreateInfo} structure</li>
- * <li>{@code queueIndex} <b>must</b> be less than the number of queues created for the specified queue family index and {@code VkDeviceQueueCreateFlags} member {@code flags} equal to this {@code flags} value when {@code device} was created, via the {@code queueCount} member of the {@link VkDeviceQueueCreateInfo} structure</li>
+ * <li>{@code flags} <b>must</b> be equal to {@link VkDeviceQueueCreateInfo}{@code ::flags} for a {@link VkDeviceQueueCreateInfo} structure for the queue family indicated by {@code queueFamilyIndex} when {@code device} was created</li>
+ * <li>{@code queueIndex} <b>must</b> be less than {@link VkDeviceQueueCreateInfo}{@code ::queueCount} for the corresponding queue family and flags indicated by {@code queueFamilyIndex} and {@code flags} when {@code device} was created</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

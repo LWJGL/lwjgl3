@@ -158,6 +158,12 @@ public class EXTFullScreenExclusive {
      * 
      * <p>{@code vkGetPhysicalDeviceSurfacePresentModes2EXT} behaves similarly to {@link KHRSurface#vkGetPhysicalDeviceSurfacePresentModesKHR GetPhysicalDeviceSurfacePresentModesKHR}, with the ability to specify extended inputs via chained input structures.</p>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>{@code pSurfaceInfo→surface} <b>must</b> be supported by {@code physicalDevice}, as reported by {@link KHRSurface#vkGetPhysicalDeviceSurfaceSupportKHR GetPhysicalDeviceSurfaceSupportKHR} or an equivalent platform-specific mechanism</li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -330,6 +336,12 @@ public class EXTFullScreenExclusive {
      * <h5>Description</h5>
      * 
      * <p>{@code vkGetDeviceGroupSurfacePresentModes2EXT} behaves similarly to {@link KHRSwapchain#vkGetDeviceGroupSurfacePresentModesKHR GetDeviceGroupSurfacePresentModesKHR}, with the ability to specify extended inputs via chained input structures.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>{@code pSurfaceInfo→surface} <b>must</b> be supported by all physical devices associated with {@code device}, as reported by {@link KHRSurface#vkGetPhysicalDeviceSurfaceSupportKHR GetPhysicalDeviceSurfaceSupportKHR} or an equivalent platform-specific mechanism</li>
+     * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

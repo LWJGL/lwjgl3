@@ -41,16 +41,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkSurfaceCapabilities2EXT {
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
- *     uint32_t minImageCount;
- *     uint32_t maxImageCount;
- *     {@link VkExtent2D VkExtent2D} currentExtent;
- *     {@link VkExtent2D VkExtent2D} minImageExtent;
- *     {@link VkExtent2D VkExtent2D} maxImageExtent;
- *     uint32_t maxImageArrayLayers;
- *     VkSurfaceTransformFlagsKHR supportedTransforms;
- *     VkSurfaceTransformFlagBitsKHR currentTransform;
- *     VkCompositeAlphaFlagsKHR supportedCompositeAlpha;
- *     VkImageUsageFlags supportedUsageFlags;
+ *     uint32_t {@link #minImageCount};
+ *     uint32_t {@link #maxImageCount};
+ *     {@link VkExtent2D VkExtent2D} {@link #currentExtent};
+ *     {@link VkExtent2D VkExtent2D} {@link #minImageExtent};
+ *     {@link VkExtent2D VkExtent2D} {@link #maxImageExtent};
+ *     uint32_t {@link #maxImageArrayLayers};
+ *     VkSurfaceTransformFlagsKHR {@link #supportedTransforms};
+ *     VkSurfaceTransformFlagBitsKHR {@link #currentTransform};
+ *     VkCompositeAlphaFlagsKHR {@link #supportedCompositeAlpha};
+ *     VkImageUsageFlags {@link #supportedUsageFlags};
  *     VkSurfaceCounterFlagsEXT {@link #supportedSurfaceCounters};
  * }</code></pre>
  */
@@ -132,31 +132,31 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code minImageCount} field. */
+    /** the minimum number of images the specified device supports for a swapchain created for the surface, and will be at least one. */
     @NativeType("uint32_t")
     public int minImageCount() { return nminImageCount(address()); }
-    /** @return the value of the {@code maxImageCount} field. */
+    /** the maximum number of images the specified device supports for a swapchain created for the surface, and will be either 0, or greater than or equal to {@code minImageCount}. A value of 0 means that there is no limit on the number of images, though there <b>may</b> be limits related to the total amount of memory used by presentable images. */
     @NativeType("uint32_t")
     public int maxImageCount() { return nmaxImageCount(address()); }
-    /** @return a {@link VkExtent2D} view of the {@code currentExtent} field. */
+    /** the current width and height of the surface, or the special value <code>(0xFFFFFFFF, 0xFFFFFFFF)</code> indicating that the surface size will be determined by the extent of a swapchain targeting the surface. */
     public VkExtent2D currentExtent() { return ncurrentExtent(address()); }
-    /** @return a {@link VkExtent2D} view of the {@code minImageExtent} field. */
+    /** contains the smallest valid swapchain extent for the surface on the specified device. The {@code width} and {@code height} of the extent will each be less than or equal to the corresponding {@code width} and {@code height} of {@code currentExtent}, unless {@code currentExtent} has the special value described above. */
     public VkExtent2D minImageExtent() { return nminImageExtent(address()); }
-    /** @return a {@link VkExtent2D} view of the {@code maxImageExtent} field. */
+    /** contains the largest valid swapchain extent for the surface on the specified device. The {@code width} and {@code height} of the extent will each be greater than or equal to the corresponding {@code width} and {@code height} of {@code minImageExtent}. The {@code width} and {@code height} of the extent will each be greater than or equal to the corresponding {@code width} and {@code height} of {@code currentExtent}, unless {@code currentExtent} has the special value described above. */
     public VkExtent2D maxImageExtent() { return nmaxImageExtent(address()); }
-    /** @return the value of the {@code maxImageArrayLayers} field. */
+    /** the maximum number of layers presentable images <b>can</b> have for a swapchain created for this device and surface, and will be at least one. */
     @NativeType("uint32_t")
     public int maxImageArrayLayers() { return nmaxImageArrayLayers(address()); }
-    /** @return the value of the {@code supportedTransforms} field. */
+    /** a bitmask of {@code VkSurfaceTransformFlagBitsKHR} indicating the presentation transforms supported for the surface on the specified device. At least one bit will be set. */
     @NativeType("VkSurfaceTransformFlagsKHR")
     public int supportedTransforms() { return nsupportedTransforms(address()); }
-    /** @return the value of the {@code currentTransform} field. */
+    /** {@code VkSurfaceTransformFlagBitsKHR} value indicating the surface’s current transform relative to the presentation engine’s natural orientation. */
     @NativeType("VkSurfaceTransformFlagBitsKHR")
     public int currentTransform() { return ncurrentTransform(address()); }
-    /** @return the value of the {@code supportedCompositeAlpha} field. */
+    /** a bitmask of {@code VkCompositeAlphaFlagBitsKHR}, representing the alpha compositing modes supported by the presentation engine for the surface on the specified device, and at least one bit will be set. Opaque composition <b>can</b> be achieved in any alpha compositing mode by either using an image format that has no alpha component, or by ensuring that all pixels in the presentable images have an alpha value of 1.0. */
     @NativeType("VkCompositeAlphaFlagsKHR")
     public int supportedCompositeAlpha() { return nsupportedCompositeAlpha(address()); }
-    /** @return the value of the {@code supportedUsageFlags} field. */
+    /** a bitmask of {@code VkImageUsageFlagBits} representing the ways the application <b>can</b> use the presentable images of a swapchain created with {@code VkPresentModeKHR} set to {@link KHRSurface#VK_PRESENT_MODE_IMMEDIATE_KHR PRESENT_MODE_IMMEDIATE_KHR}, {@link KHRSurface#VK_PRESENT_MODE_MAILBOX_KHR PRESENT_MODE_MAILBOX_KHR}, {@link KHRSurface#VK_PRESENT_MODE_FIFO_KHR PRESENT_MODE_FIFO_KHR} or {@link KHRSurface#VK_PRESENT_MODE_FIFO_RELAXED_KHR PRESENT_MODE_FIFO_RELAXED_KHR} for the surface on the specified device. {@link VK10#VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT IMAGE_USAGE_COLOR_ATTACHMENT_BIT} <b>must</b> be included in the set. Implementations <b>may</b> support additional usages. */
     @NativeType("VkImageUsageFlags")
     public int supportedUsageFlags() { return nsupportedUsageFlags(address()); }
     /** a bitmask of {@code VkSurfaceCounterFlagBitsEXT} indicating the supported surface counter types. */
@@ -410,31 +410,31 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
         /** @return the value of the {@link VkSurfaceCapabilities2EXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkSurfaceCapabilities2EXT.npNext(address()); }
-        /** @return the value of the {@code minImageCount} field. */
+        /** @return the value of the {@link VkSurfaceCapabilities2EXT#minImageCount} field. */
         @NativeType("uint32_t")
         public int minImageCount() { return VkSurfaceCapabilities2EXT.nminImageCount(address()); }
-        /** @return the value of the {@code maxImageCount} field. */
+        /** @return the value of the {@link VkSurfaceCapabilities2EXT#maxImageCount} field. */
         @NativeType("uint32_t")
         public int maxImageCount() { return VkSurfaceCapabilities2EXT.nmaxImageCount(address()); }
-        /** @return a {@link VkExtent2D} view of the {@code currentExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@link VkSurfaceCapabilities2EXT#currentExtent} field. */
         public VkExtent2D currentExtent() { return VkSurfaceCapabilities2EXT.ncurrentExtent(address()); }
-        /** @return a {@link VkExtent2D} view of the {@code minImageExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@link VkSurfaceCapabilities2EXT#minImageExtent} field. */
         public VkExtent2D minImageExtent() { return VkSurfaceCapabilities2EXT.nminImageExtent(address()); }
-        /** @return a {@link VkExtent2D} view of the {@code maxImageExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@link VkSurfaceCapabilities2EXT#maxImageExtent} field. */
         public VkExtent2D maxImageExtent() { return VkSurfaceCapabilities2EXT.nmaxImageExtent(address()); }
-        /** @return the value of the {@code maxImageArrayLayers} field. */
+        /** @return the value of the {@link VkSurfaceCapabilities2EXT#maxImageArrayLayers} field. */
         @NativeType("uint32_t")
         public int maxImageArrayLayers() { return VkSurfaceCapabilities2EXT.nmaxImageArrayLayers(address()); }
-        /** @return the value of the {@code supportedTransforms} field. */
+        /** @return the value of the {@link VkSurfaceCapabilities2EXT#supportedTransforms} field. */
         @NativeType("VkSurfaceTransformFlagsKHR")
         public int supportedTransforms() { return VkSurfaceCapabilities2EXT.nsupportedTransforms(address()); }
-        /** @return the value of the {@code currentTransform} field. */
+        /** @return the value of the {@link VkSurfaceCapabilities2EXT#currentTransform} field. */
         @NativeType("VkSurfaceTransformFlagBitsKHR")
         public int currentTransform() { return VkSurfaceCapabilities2EXT.ncurrentTransform(address()); }
-        /** @return the value of the {@code supportedCompositeAlpha} field. */
+        /** @return the value of the {@link VkSurfaceCapabilities2EXT#supportedCompositeAlpha} field. */
         @NativeType("VkCompositeAlphaFlagsKHR")
         public int supportedCompositeAlpha() { return VkSurfaceCapabilities2EXT.nsupportedCompositeAlpha(address()); }
-        /** @return the value of the {@code supportedUsageFlags} field. */
+        /** @return the value of the {@link VkSurfaceCapabilities2EXT#supportedUsageFlags} field. */
         @NativeType("VkImageUsageFlags")
         public int supportedUsageFlags() { return VkSurfaceCapabilities2EXT.nsupportedUsageFlags(address()); }
         /** @return the value of the {@link VkSurfaceCapabilities2EXT#supportedSurfaceCounters} field. */

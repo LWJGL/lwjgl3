@@ -101,7 +101,7 @@ public class VkPipelineLibraryCreateInfoKHR extends Struct implements NativeReso
     /** the number of pipeline libraries in {@code pLibraries}. */
     @NativeType("uint32_t")
     public int libraryCount() { return nlibraryCount(address()); }
-    /** an array of pipeline libraries to use when creating a pipeline. */
+    /** a pointer to an array of {@code VkPipeline} structures specifying pipeline libraries to use when creating a pipeline. */
     @Nullable
     @NativeType("VkPipeline const *")
     public LongBuffer pLibraries() { return npLibraries(address()); }

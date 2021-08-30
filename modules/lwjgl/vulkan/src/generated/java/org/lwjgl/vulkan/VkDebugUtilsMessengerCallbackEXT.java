@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>The callback <b>must</b> not make calls to any Vulkan commands.</li>
+ * <li>The callback <b>must</b> not make calls to any Vulkan commands</li>
  * </ul>
  * 
  * <h5>See Also</h5>

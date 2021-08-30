@@ -15,7 +15,7 @@ package org.lwjgl.vulkan;
  * <li>{@link #VK_BORDER_COLOR_INT_CUSTOM_EXT BORDER_COLOR_INT_CUSTOM_EXT}</li>
  * </ul>
  * 
- * <p>When {@link #VK_BORDER_COLOR_FLOAT_CUSTOM_EXT BORDER_COLOR_FLOAT_CUSTOM_EXT} or {@link #VK_BORDER_COLOR_INT_CUSTOM_EXT BORDER_COLOR_INT_CUSTOM_EXT} is used, applications must provide a {@link VkSamplerCustomBorderColorCreateInfoEXT} in the pNext chain for {@link VkSamplerCreateInfo}.</p>
+ * <p>When {@link #VK_BORDER_COLOR_FLOAT_CUSTOM_EXT BORDER_COLOR_FLOAT_CUSTOM_EXT} or {@link #VK_BORDER_COLOR_INT_CUSTOM_EXT BORDER_COLOR_INT_CUSTOM_EXT} is used, applications must provide a {@link VkSamplerCustomBorderColorCreateInfoEXT} in the {@code pNext} chain for {@link VkSamplerCreateInfo}.</p>
  * 
  * <h5>VK_EXT_custom_border_color</h5>
  * 
@@ -31,6 +31,11 @@ package org.lwjgl.vulkan;
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
+ * </ul></dd>
+ * <dt><b>Special Uses</b></dt>
+ * <dd><ul>
+ * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>
+ * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">D3D support</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

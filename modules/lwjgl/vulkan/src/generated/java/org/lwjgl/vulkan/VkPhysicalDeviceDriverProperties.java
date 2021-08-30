@@ -22,6 +22,10 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <h5>Description</h5>
  * 
+ * <p>If the {@link VkPhysicalDeviceDriverProperties} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
+ * 
+ * <p>These are properties of the driver corresponding to a physical device.</p>
+ * 
  * <p>{@code driverID} <b>must</b> be immutable for a given driver across instances, processes, driver versions, and system reboots.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>

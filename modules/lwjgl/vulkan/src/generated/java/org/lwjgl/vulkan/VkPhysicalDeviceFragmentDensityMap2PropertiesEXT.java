@@ -18,20 +18,22 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing additional fragment density map properties that can be supported by an implementation.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTFragmentDensityMap2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT}</li>
  * </ul>
  * 
- * <p>If the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits and properties.</p>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceFragmentDensityMap2PropertiesEXT {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #subsampledLoads};
  *     VkBool32 {@link #subsampledCoarseReconstructionEarlyAccess};
  *     uint32_t {@link #maxSubsampledArrayLayers};
@@ -89,10 +91,10 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** specifies if performing image data read with load operations on subsampled attachments will be resampled to the fragment density of the render pass */
@@ -108,9 +110,9 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
     @NativeType("uint32_t")
     public int maxDescriptorSetSubsampledSamplers() { return nmaxDescriptorSetSubsampledSamplers(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceFragmentDensityMap2PropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceFragmentDensityMap2PropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -335,10 +337,10 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#subsampledLoads} field. */
@@ -354,9 +356,9 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
         @NativeType("uint32_t")
         public int maxDescriptorSetSubsampledSamplers() { return VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.nmaxDescriptorSetSubsampledSamplers(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#sType} field. */
         public VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#pNext} field. */
         public VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.npNext(address(), value); return this; }
 
     }

@@ -178,7 +178,7 @@ public class KHRGetDisplayProperties2 {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To query the properties of a device's display planes, call:</p>
+     * <p>To query the properties of a device’s display planes, call:</p>
      * 
      * <pre><code>
      * VkResult vkGetPhysicalDeviceDisplayPlaneProperties2KHR(
@@ -250,7 +250,7 @@ public class KHRGetDisplayProperties2 {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To query the properties of a device's built-in display modes, call:</p>
+     * <p>To query the properties of a device’s built-in display modes, call:</p>
      * 
      * <pre><code>
      * VkResult vkGetDisplayModeProperties2KHR(

@@ -13,7 +13,7 @@ package org.lwjgl.vulkan;
  * <ul>
  * <li>Allow the application to specify which aspect of an input attachment might be read for a given subpass.</li>
  * <li>Allow implementations to express the clipping behavior of points.</li>
- * <li>Allow creating images with usage flags that may not be supported for the base image&#8217;s format, but are supported for image views of the image that have a different but compatible format.</li>
+ * <li>Allow creating images with usage flags that may not be supported for the base image’s format, but are supported for image views of the image that have a different but compatible format.</li>
  * <li>Allow creating uncompressed image views of compressed images.</li>
  * <li>Allow the application to select between an upper-left and lower-left origin for the tessellation domain space.</li>
  * <li>Adds two new image layouts for depth stencil images to allow either the depth or stencil aspect to be read-only while the other aspect is writable.</li>
@@ -58,7 +58,7 @@ package org.lwjgl.vulkan;
  *         ...
  *         .pNext = &amp;specifyAspects,
  *         ...
- *     }
+ *     };
  * 
  *     vkCreateRenderPass(...);</code></pre>
  * 

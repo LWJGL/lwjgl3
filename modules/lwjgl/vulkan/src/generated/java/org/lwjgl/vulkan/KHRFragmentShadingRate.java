@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>This functionality can be used to focus shading efforts where higher levels of detail are needed in some parts of a scene compared to others. This can be particularly useful in high resolution rendering, or for XR contexts.</p>
  * 
- * <p>This extension also adds support for the {@code SPV_KHR_fragment_shading_rate} extension which enables setting the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-primitive"> primitive fragment shading rate</a>, and allows querying the final shading rate from a fragment shader.</p>
+ * <p>This extension also adds support for the {@code SPV_KHR_fragment_shading_rate} extension which enables setting the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-primitive">primitive fragment shading rate</a>, and allows querying the final shading rate from a fragment shader.</p>
  * 
  * <h5>VK_KHR_fragment_shading_rate</h5>
  * 
@@ -88,7 +88,7 @@ public class KHRFragmentShadingRate {
     public static final String VK_KHR_FRAGMENT_SHADING_RATE_EXTENSION_NAME = "VK_KHR_fragment_shading_rate";
 
     /** Extends {@code VkImageLayout}. */
-    public static final int VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR = 1000226003;
+    public static final int VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR = 1000164003;
 
     /** Extends {@code VkDynamicState}. */
     public static final int VK_DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR = 1000226000;
@@ -135,7 +135,7 @@ public class KHRFragmentShadingRate {
      * <li>{@link #VK_FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_KHR FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_KHR} specifies a combiner operation of <code>combine(A<sub>xy</sub>,B<sub>xy</sub>) = B<sub>xy</sub></code>.</li>
      * <li>{@link #VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MIN_KHR FRAGMENT_SHADING_RATE_COMBINER_OP_MIN_KHR} specifies a combiner operation of <code>combine(A<sub>xy</sub>,B<sub>xy</sub>) = min(A<sub>xy</sub>,B<sub>xy</sub>)</code>.</li>
      * <li>{@link #VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MAX_KHR FRAGMENT_SHADING_RATE_COMBINER_OP_MAX_KHR} specifies a combiner operation of <code>combine(A<sub>xy</sub>,B<sub>xy</sub>) = max(A<sub>xy</sub>,B<sub>xy</sub>)</code>.</li>
-     * <li>{@link #VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_KHR FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_KHR} combiner operation of <code>combine(A<sub>xy</sub>,B<sub>xy</sub>) = A<sub>xy</sub>*B<sub>xy</sub></code>.</li>
+     * <li>{@link #VK_FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_KHR FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_KHR} specifies a combiner operation of <code>combine(A<sub>xy</sub>,B<sub>xy</sub>) = A<sub>xy</sub>*B<sub>xy</sub></code>.</li>
      * </ul>
      * 
      * <p>where <code>combine(A<sub>xy</sub>,B<sub>xy</sub>)</code> is the combine operation, and <code>A<sub>xy</sub></code> and <code>B<sub>xy</sub></code> are the inputs to the operation.</p>
@@ -221,7 +221,14 @@ public class KHRFragmentShadingRate {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>Including the {1,1} fragment size is done for completeness; it has no actual effect on the support of rendering without setting the fragment size. All sample counts are supported for this rate.</p>
+     * <p>Including the {1,1} fragment size is done for completeness; it has no actual effect on the support of rendering without setting the fragment size. All sample counts and render pass transforms are supported for this rate.</p>
+     * </div>
+     * 
+     * <p>The returned set of fragment shading rates <b>must</b> be returned in the native (rotated) coordinate system. For rasterization using render pass {@code transform} not equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR SURFACE_TRANSFORM_IDENTITY_BIT_KHR}, the application <b>must</b> transform the returned fragment shading rates into the current (unrotated) coordinate system to get the supported rates for that transform.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>For example, consider an implementation returning support for 4x2, but not 2x4 in the set of supported fragment shading rates. This means that for transforms {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR SURFACE_TRANSFORM_ROTATE_90_BIT_KHR} and {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR SURFACE_TRANSFORM_ROTATE_270_BIT_KHR}, 2x4 is a supported rate, but 4x2 is an unsupported rate.</p>
      * </div>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -290,18 +297,18 @@ public class KHRFragmentShadingRate {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a> is not enabled, {@code pFragmentSize}-&gt;{@code width} <b>must</b> be 1</li>
-     * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a> is not enabled, {@code pFragmentSize}-&gt;{@code height} <b>must</b> be 1</li>
+     * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a> is not enabled, {@code pFragmentSize→width} <b>must</b> be 1</li>
+     * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a> is not enabled, {@code pFragmentSize→height} <b>must</b> be 1</li>
      * <li>One of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-primitiveFragmentShadingRate">{@code primitiveFragmentShadingRate}</a>, or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> <b>must</b> be enabled</li>
      * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#feature-primitiveFragmentShadingRate">{@code primitiveFragmentShadingRate} feature</a> is not enabled, {@code combinerOps}[0] <b>must</b> be {@link #VK_FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR}</li>
      * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#feature-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate} feature</a> is not enabled, {@code combinerOps}[1] <b>must</b> be {@link #VK_FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR}</li>
      * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-fragmentShadingRateNonTrivialCombinerOps">{@code fragmentSizeNonTrivialCombinerOps}</a> limit is not supported, elements of {@code combinerOps} <b>must</b> be either {@link #VK_FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR} or {@link #VK_FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_KHR FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_KHR}</li>
-     * <li>{@code pFragmentSize}-&gt;{@code width} <b>must</b> be greater than or equal to 1</li>
-     * <li>{@code pFragmentSize}-&gt;{@code height} <b>must</b> be greater than or equal to 1</li>
-     * <li>{@code pFragmentSize}-&gt;{@code width} <b>must</b> be a power-of-two value</li>
-     * <li>{@code pFragmentSize}-&gt;{@code height} <b>must</b> be a power-of-two value</li>
-     * <li>{@code pFragmentSize}-&gt;{@code width} <b>must</b> be less than or equal to 4</li>
-     * <li>{@code pFragmentSize}-&gt;{@code height} <b>must</b> be less than or equal to 4</li>
+     * <li>{@code pFragmentSize→width} <b>must</b> be greater than or equal to 1</li>
+     * <li>{@code pFragmentSize→height} <b>must</b> be greater than or equal to 1</li>
+     * <li>{@code pFragmentSize→width} <b>must</b> be a power-of-two value</li>
+     * <li>{@code pFragmentSize→height} <b>must</b> be a power-of-two value</li>
+     * <li>{@code pFragmentSize→width} <b>must</b> be less than or equal to 4</li>
+     * <li>{@code pFragmentSize→height} <b>must</b> be less than or equal to 4</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -324,8 +331,8 @@ public class KHRFragmentShadingRate {
      * <h5>Command Properties</h5>
      * 
      * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td><td></td></tr></tbody>
+     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
+     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
      * </table>
      * 
      * <h5>See Also</h5>
@@ -333,7 +340,7 @@ public class KHRFragmentShadingRate {
      * <p>{@link VkExtent2D}</p>
      *
      * @param commandBuffer the command buffer into which the command will be recorded.
-     * @param pFragmentSize specifies the pipeline fragment shading rate for subsequent draw commands.
+     * @param pFragmentSize specifies the pipeline fragment shading rate for subsequent drawing commands.
      * @param combinerOps   specifies a {@code VkFragmentShadingRateCombinerOpKHR} determining how the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-pipeline">pipeline</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-primitive">primitive</a>, and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-attachment">attachment shading rates</a> are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-combining">combined</a> for fragments generated by subsequent drawing commands.
      */
     public static void vkCmdSetFragmentShadingRateKHR(VkCommandBuffer commandBuffer, @NativeType("VkExtent2D const *") VkExtent2D pFragmentSize, @NativeType("VkFragmentShadingRateCombinerOpKHR const *") IntBuffer combinerOps) {

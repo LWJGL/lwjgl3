@@ -123,7 +123,7 @@ public class VkDeviceGroupPresentInfoKHR extends Struct implements NativeResourc
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pDeviceMasks() { return npDeviceMasks(address()); }
-    /** the device group present mode that will be used for this present. */
+    /** a {@code VkDeviceGroupPresentModeFlagBitsKHR} value specifying the device group present mode that will be used for this present. */
     @NativeType("VkDeviceGroupPresentModeFlagBitsKHR")
     public int mode() { return nmode(address()); }
 

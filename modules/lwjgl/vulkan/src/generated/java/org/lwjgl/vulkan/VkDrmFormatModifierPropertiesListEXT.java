@@ -98,7 +98,7 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
     /** an inout parameter related to the number of modifiers compatible with the {@code format}, as described below. */
     @NativeType("uint32_t")
     public int drmFormatModifierCount() { return ndrmFormatModifierCount(address()); }
-    /** either {@code NULL} or an array of {@link VkDrmFormatModifierPropertiesEXT} structures. */
+    /** either {@code NULL} or a pointer to an array of {@link VkDrmFormatModifierPropertiesEXT} structures. */
     @Nullable
     @NativeType("VkDrmFormatModifierPropertiesEXT *")
     public VkDrmFormatModifierPropertiesEXT.Buffer pDrmFormatModifierProperties() { return npDrmFormatModifierProperties(address()); }

@@ -20,7 +20,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>85</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -56,7 +56,7 @@ package org.lwjgl.vulkan;
 public final class KHRIncrementalPresent {
 
     /** The extension specification version. */
-    public static final int VK_KHR_INCREMENTAL_PRESENT_SPEC_VERSION = 1;
+    public static final int VK_KHR_INCREMENTAL_PRESENT_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_KHR_INCREMENTAL_PRESENT_EXTENSION_NAME = "VK_KHR_incremental_present";

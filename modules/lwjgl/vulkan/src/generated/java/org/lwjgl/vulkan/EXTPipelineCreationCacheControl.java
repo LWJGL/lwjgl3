@@ -17,12 +17,12 @@ package org.lwjgl.vulkan;
  * <ul>
  * <li>OS/kernel calls to be made by the ICD</li>
  * <li>Internal memory allocation not tracked by the {@code pAllocator} passed to {@code vkCreate*Pipelines}</li>
- * <li>Internal thread synchronization or yielding of the current thread&#8217;s core</li>
+ * <li>Internal thread synchronization or yielding of the current thread’s core</li>
  * <li>Extremely long (multi-millisecond+), blocking, compilation times</li>
  * <li>Arbitrary call stacks depths and stack memory usage</li>
  * </ul>
  * 
- * <p>The job or task based game engines that are being developed to take advantage of explicit graphics APIs like Vulkan may behave exceptionally poorly if any of the above scenarios occur. However, most game engines are already built to "stream" in assets dynamically as the user plays the game. By adding control by way of {@code VkPipelineCreateFlags}, we can require an ICD to report back a failure in critical execution paths rather than forcing an unexpected wait.</p>
+ * <p>The job or task based game engines that are being developed to take advantage of explicit graphics APIs like Vulkan may behave exceptionally poorly if any of the above scenarios occur. However, most game engines are already built to “{@code stream}” in assets dynamically as the user plays the game. By adding control by way of {@code VkPipelineCreateFlags}, we can require an ICD to report back a failure in critical execution paths rather than forcing an unexpected wait.</p>
  * 
  * <p>Applications can prevent unexpected compilation by setting {@link #VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT} on stext:Vk*PipelineCreateInfo{@code ::flags}. When set, an ICD must not attempt pipeline or shader compilation to create the pipeline object. The ICD will return the result {@link #VK_PIPELINE_COMPILE_REQUIRED_EXT PIPELINE_COMPILE_REQUIRED_EXT}. An ICD may still return a valid {@code VkPipeline} object by either re-using existing pre-compiled objects such as those from a pipeline cache, or derivative pipelines.</p>
  * 

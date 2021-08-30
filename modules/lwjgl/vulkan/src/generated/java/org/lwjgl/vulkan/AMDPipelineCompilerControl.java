@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension introduces {@link VkPipelineCompilerControlCreateInfoAMD} structure that can be chained to a pipeline's create info to specify additional flags that affect pipeline compilation.
+ * This extension introduces {@link VkPipelineCompilerControlCreateInfoAMD} structure that can be chained to a pipeline’s creation information to specify additional flags that affect pipeline compilation.
  * 
  * <h5>Examples</h5>
  * 

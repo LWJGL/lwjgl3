@@ -106,7 +106,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the image&#8217;s <em>Linux DRM format modifier</em>, corresponding to {@link VkImageDrmFormatModifierExplicitCreateInfoEXT}{@code ::modifier} or to {@link VkImageDrmFormatModifierListCreateInfoEXT}{@code ::pModifiers}. */
+    /** the image’s <em>Linux DRM format modifier</em>, corresponding to {@link VkImageDrmFormatModifierExplicitCreateInfoEXT}{@code ::modifier} or to {@link VkImageDrmFormatModifierListCreateInfoEXT}{@code ::pModifiers}. */
     @NativeType("uint64_t")
     public long drmFormatModifier() { return ndrmFormatModifier(address()); }
     /** specifies how the image will be accessed by multiple queue families. */
@@ -115,7 +115,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
     /** the number of entries in the {@code pQueueFamilyIndices} array. */
     @NativeType("uint32_t")
     public int queueFamilyIndexCount() { return nqueueFamilyIndexCount(address()); }
-    /** a list of queue families that will access the image (ignored if {@code sharingMode} is not {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}). */
+    /** a pointer to an array of queue families that will access the image. It is ignored if {@code sharingMode} is not {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}. */
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pQueueFamilyIndices() { return npQueueFamilyIndices(address()); }

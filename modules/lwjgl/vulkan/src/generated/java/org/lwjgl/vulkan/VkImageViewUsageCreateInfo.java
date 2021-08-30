@@ -87,7 +87,7 @@ public class VkImageViewUsageCreateInfo extends Struct implements NativeResource
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask describing the allowed usages of the image view. See {@code VkImageUsageFlagBits} for a description of the supported bits. */
+    /** a bitmask of {@code VkImageUsageFlagBits} specifying allowed usages of the image view. */
     @NativeType("VkImageUsageFlags")
     public int usage() { return nusage(address()); }
 

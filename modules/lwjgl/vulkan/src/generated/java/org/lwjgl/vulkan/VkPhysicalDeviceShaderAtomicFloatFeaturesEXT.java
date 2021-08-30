@@ -20,20 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <ul>
- * <li>{@code shaderBufferFloat32Atomics} indicates whether shaders <b>can</b> perform 32-bit floating-point load, store and exchange atomic operations on storage buffers.</li>
- * <li>{@code shaderBufferFloat32AtomicAdd} indicates whether shaders <b>can</b> perform 32-bit floating-point add atomic operations on storage buffers.</li>
- * <li>{@code shaderBufferFloat64Atomics} indicates whether shaders <b>can</b> perform 64-bit floating-point load, store and exchange atomic operations on storage buffers.</li>
- * <li>{@code shaderBufferFloat64AtomicAdd} indicates whether shaders <b>can</b> perform 64-bit floating-point add atomic operations on storage buffers.</li>
- * <li>{@code shaderSharedFloat32Atomics} indicates whether shaders <b>can</b> perform 32-bit floating-point load, store and exchange atomic operations on shared memory.</li>
- * <li>{@code shaderSharedFloat32AtomicAdd} indicates whether shaders <b>can</b> perform 32-bit floating-point add atomic operations on shared memory.</li>
- * <li>{@code shaderSharedFloat64Atomics} indicates whether shaders <b>can</b> perform 64-bit floating-point load, store and exchange atomic operations on shared memory.</li>
- * <li>{@code shaderSharedFloat64AtomicAdd} indicates whether shaders <b>can</b> perform 64-bit floating-point add atomic operations on shared memory.</li>
- * <li>{@code shaderImageFloat32Atomics} indicates whether shaders <b>can</b> perform 32-bit floating-point load, store and exchange atomic image operations.</li>
- * <li>{@code shaderImageFloat32AtomicAdd} indicates whether shaders <b>can</b> perform 32-bit floating-point add atomic image operations.</li>
- * <li>{@code sparseImageFloat32Atomics} indicates whether 32-bit floating-point load, store and exchange atomic operations <b>can</b> be used on sparse images.</li>
- * <li>{@code sparseImageFloat32AtomicAdd} indicates whether 32-bit floating-point add atomic operations <b>can</b> be used on sparse images.</li>
- * </ul>
+ * <p>If the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -47,18 +34,18 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkPhysicalDeviceShaderAtomicFloatFeaturesEXT {
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
- *     VkBool32 shaderBufferFloat32Atomics;
- *     VkBool32 shaderBufferFloat32AtomicAdd;
- *     VkBool32 shaderBufferFloat64Atomics;
- *     VkBool32 shaderBufferFloat64AtomicAdd;
- *     VkBool32 shaderSharedFloat32Atomics;
- *     VkBool32 shaderSharedFloat32AtomicAdd;
- *     VkBool32 shaderSharedFloat64Atomics;
- *     VkBool32 shaderSharedFloat64AtomicAdd;
- *     VkBool32 shaderImageFloat32Atomics;
- *     VkBool32 shaderImageFloat32AtomicAdd;
- *     VkBool32 sparseImageFloat32Atomics;
- *     VkBool32 sparseImageFloat32AtomicAdd;
+ *     VkBool32 {@link #shaderBufferFloat32Atomics};
+ *     VkBool32 {@link #shaderBufferFloat32AtomicAdd};
+ *     VkBool32 {@link #shaderBufferFloat64Atomics};
+ *     VkBool32 {@link #shaderBufferFloat64AtomicAdd};
+ *     VkBool32 {@link #shaderSharedFloat32Atomics};
+ *     VkBool32 {@link #shaderSharedFloat32AtomicAdd};
+ *     VkBool32 {@link #shaderSharedFloat64Atomics};
+ *     VkBool32 {@link #shaderSharedFloat64AtomicAdd};
+ *     VkBool32 {@link #shaderImageFloat32Atomics};
+ *     VkBool32 {@link #shaderImageFloat32AtomicAdd};
+ *     VkBool32 {@link #sparseImageFloat32Atomics};
+ *     VkBool32 {@link #sparseImageFloat32AtomicAdd};
  * }</code></pre>
  */
 public class VkPhysicalDeviceShaderAtomicFloatFeaturesEXT extends Struct implements NativeResource {
@@ -142,40 +129,40 @@ public class VkPhysicalDeviceShaderAtomicFloatFeaturesEXT extends Struct impleme
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code shaderBufferFloat32Atomics} field. */
+    /** indicates whether shaders <b>can</b> perform 32-bit floating-point load, store and exchange atomic operations on storage buffers. */
     @NativeType("VkBool32")
     public boolean shaderBufferFloat32Atomics() { return nshaderBufferFloat32Atomics(address()) != 0; }
-    /** @return the value of the {@code shaderBufferFloat32AtomicAdd} field. */
+    /** indicates whether shaders <b>can</b> perform 32-bit floating-point add atomic operations on storage buffers. */
     @NativeType("VkBool32")
     public boolean shaderBufferFloat32AtomicAdd() { return nshaderBufferFloat32AtomicAdd(address()) != 0; }
-    /** @return the value of the {@code shaderBufferFloat64Atomics} field. */
+    /** indicates whether shaders <b>can</b> perform 64-bit floating-point load, store and exchange atomic operations on storage buffers. */
     @NativeType("VkBool32")
     public boolean shaderBufferFloat64Atomics() { return nshaderBufferFloat64Atomics(address()) != 0; }
-    /** @return the value of the {@code shaderBufferFloat64AtomicAdd} field. */
+    /** indicates whether shaders <b>can</b> perform 64-bit floating-point add atomic operations on storage buffers. */
     @NativeType("VkBool32")
     public boolean shaderBufferFloat64AtomicAdd() { return nshaderBufferFloat64AtomicAdd(address()) != 0; }
-    /** @return the value of the {@code shaderSharedFloat32Atomics} field. */
+    /** indicates whether shaders <b>can</b> perform 32-bit floating-point load, store and exchange atomic operations on shared memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedFloat32Atomics() { return nshaderSharedFloat32Atomics(address()) != 0; }
-    /** @return the value of the {@code shaderSharedFloat32AtomicAdd} field. */
+    /** indicates whether shaders <b>can</b> perform 32-bit floating-point add atomic operations on shared memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedFloat32AtomicAdd() { return nshaderSharedFloat32AtomicAdd(address()) != 0; }
-    /** @return the value of the {@code shaderSharedFloat64Atomics} field. */
+    /** indicates whether shaders <b>can</b> perform 64-bit floating-point load, store and exchange atomic operations on shared memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedFloat64Atomics() { return nshaderSharedFloat64Atomics(address()) != 0; }
-    /** @return the value of the {@code shaderSharedFloat64AtomicAdd} field. */
+    /** indicates whether shaders <b>can</b> perform 64-bit floating-point add atomic operations on shared memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedFloat64AtomicAdd() { return nshaderSharedFloat64AtomicAdd(address()) != 0; }
-    /** @return the value of the {@code shaderImageFloat32Atomics} field. */
+    /** indicates whether shaders <b>can</b> perform 32-bit floating-point load, store and exchange atomic image operations. */
     @NativeType("VkBool32")
     public boolean shaderImageFloat32Atomics() { return nshaderImageFloat32Atomics(address()) != 0; }
-    /** @return the value of the {@code shaderImageFloat32AtomicAdd} field. */
+    /** indicates whether shaders <b>can</b> perform 32-bit floating-point add atomic image operations. */
     @NativeType("VkBool32")
     public boolean shaderImageFloat32AtomicAdd() { return nshaderImageFloat32AtomicAdd(address()) != 0; }
-    /** @return the value of the {@code sparseImageFloat32Atomics} field. */
+    /** indicates whether 32-bit floating-point load, store and exchange atomic operations <b>can</b> be used on sparse images. */
     @NativeType("VkBool32")
     public boolean sparseImageFloat32Atomics() { return nsparseImageFloat32Atomics(address()) != 0; }
-    /** @return the value of the {@code sparseImageFloat32AtomicAdd} field. */
+    /** indicates whether 32-bit floating-point add atomic operations <b>can</b> be used on sparse images. */
     @NativeType("VkBool32")
     public boolean sparseImageFloat32AtomicAdd() { return nsparseImageFloat32AtomicAdd(address()) != 0; }
 
@@ -183,29 +170,29 @@ public class VkPhysicalDeviceShaderAtomicFloatFeaturesEXT extends Struct impleme
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code shaderBufferFloat32Atomics} field. */
+    /** Sets the specified value to the {@link #shaderBufferFloat32Atomics} field. */
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT shaderBufferFloat32Atomics(@NativeType("VkBool32") boolean value) { nshaderBufferFloat32Atomics(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderBufferFloat32AtomicAdd} field. */
+    /** Sets the specified value to the {@link #shaderBufferFloat32AtomicAdd} field. */
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT shaderBufferFloat32AtomicAdd(@NativeType("VkBool32") boolean value) { nshaderBufferFloat32AtomicAdd(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderBufferFloat64Atomics} field. */
+    /** Sets the specified value to the {@link #shaderBufferFloat64Atomics} field. */
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT shaderBufferFloat64Atomics(@NativeType("VkBool32") boolean value) { nshaderBufferFloat64Atomics(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderBufferFloat64AtomicAdd} field. */
+    /** Sets the specified value to the {@link #shaderBufferFloat64AtomicAdd} field. */
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT shaderBufferFloat64AtomicAdd(@NativeType("VkBool32") boolean value) { nshaderBufferFloat64AtomicAdd(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderSharedFloat32Atomics} field. */
+    /** Sets the specified value to the {@link #shaderSharedFloat32Atomics} field. */
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT shaderSharedFloat32Atomics(@NativeType("VkBool32") boolean value) { nshaderSharedFloat32Atomics(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderSharedFloat32AtomicAdd} field. */
+    /** Sets the specified value to the {@link #shaderSharedFloat32AtomicAdd} field. */
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT shaderSharedFloat32AtomicAdd(@NativeType("VkBool32") boolean value) { nshaderSharedFloat32AtomicAdd(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderSharedFloat64Atomics} field. */
+    /** Sets the specified value to the {@link #shaderSharedFloat64Atomics} field. */
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT shaderSharedFloat64Atomics(@NativeType("VkBool32") boolean value) { nshaderSharedFloat64Atomics(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderSharedFloat64AtomicAdd} field. */
+    /** Sets the specified value to the {@link #shaderSharedFloat64AtomicAdd} field. */
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT shaderSharedFloat64AtomicAdd(@NativeType("VkBool32") boolean value) { nshaderSharedFloat64AtomicAdd(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderImageFloat32Atomics} field. */
+    /** Sets the specified value to the {@link #shaderImageFloat32Atomics} field. */
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT shaderImageFloat32Atomics(@NativeType("VkBool32") boolean value) { nshaderImageFloat32Atomics(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code shaderImageFloat32AtomicAdd} field. */
+    /** Sets the specified value to the {@link #shaderImageFloat32AtomicAdd} field. */
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT shaderImageFloat32AtomicAdd(@NativeType("VkBool32") boolean value) { nshaderImageFloat32AtomicAdd(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code sparseImageFloat32Atomics} field. */
+    /** Sets the specified value to the {@link #sparseImageFloat32Atomics} field. */
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT sparseImageFloat32Atomics(@NativeType("VkBool32") boolean value) { nsparseImageFloat32Atomics(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code sparseImageFloat32AtomicAdd} field. */
+    /** Sets the specified value to the {@link #sparseImageFloat32AtomicAdd} field. */
     public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT sparseImageFloat32AtomicAdd(@NativeType("VkBool32") boolean value) { nsparseImageFloat32AtomicAdd(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -500,40 +487,40 @@ public class VkPhysicalDeviceShaderAtomicFloatFeaturesEXT extends Struct impleme
         /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@code shaderBufferFloat32Atomics} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderBufferFloat32Atomics} field. */
         @NativeType("VkBool32")
         public boolean shaderBufferFloat32Atomics() { return VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderBufferFloat32Atomics(address()) != 0; }
-        /** @return the value of the {@code shaderBufferFloat32AtomicAdd} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderBufferFloat32AtomicAdd} field. */
         @NativeType("VkBool32")
         public boolean shaderBufferFloat32AtomicAdd() { return VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderBufferFloat32AtomicAdd(address()) != 0; }
-        /** @return the value of the {@code shaderBufferFloat64Atomics} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderBufferFloat64Atomics} field. */
         @NativeType("VkBool32")
         public boolean shaderBufferFloat64Atomics() { return VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderBufferFloat64Atomics(address()) != 0; }
-        /** @return the value of the {@code shaderBufferFloat64AtomicAdd} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderBufferFloat64AtomicAdd} field. */
         @NativeType("VkBool32")
         public boolean shaderBufferFloat64AtomicAdd() { return VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderBufferFloat64AtomicAdd(address()) != 0; }
-        /** @return the value of the {@code shaderSharedFloat32Atomics} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderSharedFloat32Atomics} field. */
         @NativeType("VkBool32")
         public boolean shaderSharedFloat32Atomics() { return VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderSharedFloat32Atomics(address()) != 0; }
-        /** @return the value of the {@code shaderSharedFloat32AtomicAdd} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderSharedFloat32AtomicAdd} field. */
         @NativeType("VkBool32")
         public boolean shaderSharedFloat32AtomicAdd() { return VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderSharedFloat32AtomicAdd(address()) != 0; }
-        /** @return the value of the {@code shaderSharedFloat64Atomics} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderSharedFloat64Atomics} field. */
         @NativeType("VkBool32")
         public boolean shaderSharedFloat64Atomics() { return VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderSharedFloat64Atomics(address()) != 0; }
-        /** @return the value of the {@code shaderSharedFloat64AtomicAdd} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderSharedFloat64AtomicAdd} field. */
         @NativeType("VkBool32")
         public boolean shaderSharedFloat64AtomicAdd() { return VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderSharedFloat64AtomicAdd(address()) != 0; }
-        /** @return the value of the {@code shaderImageFloat32Atomics} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderImageFloat32Atomics} field. */
         @NativeType("VkBool32")
         public boolean shaderImageFloat32Atomics() { return VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderImageFloat32Atomics(address()) != 0; }
-        /** @return the value of the {@code shaderImageFloat32AtomicAdd} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderImageFloat32AtomicAdd} field. */
         @NativeType("VkBool32")
         public boolean shaderImageFloat32AtomicAdd() { return VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderImageFloat32AtomicAdd(address()) != 0; }
-        /** @return the value of the {@code sparseImageFloat32Atomics} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#sparseImageFloat32Atomics} field. */
         @NativeType("VkBool32")
         public boolean sparseImageFloat32Atomics() { return VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nsparseImageFloat32Atomics(address()) != 0; }
-        /** @return the value of the {@code sparseImageFloat32AtomicAdd} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#sparseImageFloat32AtomicAdd} field. */
         @NativeType("VkBool32")
         public boolean sparseImageFloat32AtomicAdd() { return VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nsparseImageFloat32AtomicAdd(address()) != 0; }
 
@@ -541,29 +528,29 @@ public class VkPhysicalDeviceShaderAtomicFloatFeaturesEXT extends Struct impleme
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code shaderBufferFloat32Atomics} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderBufferFloat32Atomics} field. */
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer shaderBufferFloat32Atomics(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderBufferFloat32Atomics(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderBufferFloat32AtomicAdd} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderBufferFloat32AtomicAdd} field. */
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer shaderBufferFloat32AtomicAdd(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderBufferFloat32AtomicAdd(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderBufferFloat64Atomics} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderBufferFloat64Atomics} field. */
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer shaderBufferFloat64Atomics(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderBufferFloat64Atomics(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderBufferFloat64AtomicAdd} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderBufferFloat64AtomicAdd} field. */
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer shaderBufferFloat64AtomicAdd(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderBufferFloat64AtomicAdd(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderSharedFloat32Atomics} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderSharedFloat32Atomics} field. */
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer shaderSharedFloat32Atomics(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderSharedFloat32Atomics(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderSharedFloat32AtomicAdd} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderSharedFloat32AtomicAdd} field. */
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer shaderSharedFloat32AtomicAdd(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderSharedFloat32AtomicAdd(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderSharedFloat64Atomics} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderSharedFloat64Atomics} field. */
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer shaderSharedFloat64Atomics(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderSharedFloat64Atomics(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderSharedFloat64AtomicAdd} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderSharedFloat64AtomicAdd} field. */
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer shaderSharedFloat64AtomicAdd(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderSharedFloat64AtomicAdd(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderImageFloat32Atomics} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderImageFloat32Atomics} field. */
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer shaderImageFloat32Atomics(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderImageFloat32Atomics(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code shaderImageFloat32AtomicAdd} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#shaderImageFloat32AtomicAdd} field. */
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer shaderImageFloat32AtomicAdd(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nshaderImageFloat32AtomicAdd(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code sparseImageFloat32Atomics} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#sparseImageFloat32Atomics} field. */
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer sparseImageFloat32Atomics(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nsparseImageFloat32Atomics(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code sparseImageFloat32AtomicAdd} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT#sparseImageFloat32AtomicAdd} field. */
         public VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.Buffer sparseImageFloat32AtomicAdd(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.nsparseImageFloat32AtomicAdd(address(), value ? 1 : 0); return this; }
 
     }

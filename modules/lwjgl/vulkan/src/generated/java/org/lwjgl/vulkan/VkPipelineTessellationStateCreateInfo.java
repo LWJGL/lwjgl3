@@ -101,7 +101,7 @@ public class VkPipelineTessellationStateCreateInfo extends Struct implements Nat
     /** reserved for future use. */
     @NativeType("VkPipelineTessellationStateCreateFlags")
     public int flags() { return nflags(address()); }
-    /** number of control points per patch. */
+    /** the number of control points per patch. */
     @NativeType("uint32_t")
     public int patchControlPoints() { return npatchControlPoints(address()); }
 

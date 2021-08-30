@@ -113,14 +113,14 @@ public class VkGraphicsShaderGroupCreateInfoNV extends Struct implements NativeR
     /** the number of entries in the {@code pStages} array. */
     @NativeType("uint32_t")
     public int stageCount() { return nstageCount(address()); }
-    /** an array of size {@code stageCount} structures of type {@link VkPipelineShaderStageCreateInfo} describing the set of the shader stages to be included in this shader group. */
+    /** a pointer to an array {@link VkPipelineShaderStageCreateInfo} structures specifying the set of the shader stages to be included in this shader group. */
     @NativeType("VkPipelineShaderStageCreateInfo const *")
     public VkPipelineShaderStageCreateInfo.Buffer pStages() { return npStages(address()); }
-    /** a pointer to an instance of the {@link VkPipelineVertexInputStateCreateInfo} structure. */
+    /** a pointer to a {@link VkPipelineVertexInputStateCreateInfo} structure. */
     @Nullable
     @NativeType("VkPipelineVertexInputStateCreateInfo const *")
     public VkPipelineVertexInputStateCreateInfo pVertexInputState() { return npVertexInputState(address()); }
-    /** a pointer to an instance of the {@link VkPipelineTessellationStateCreateInfo} structure, and is ignored if the shader group does not include a tessellation control shader stage and tessellation evaluation shader stage. */
+    /** a pointer to a {@link VkPipelineTessellationStateCreateInfo} structure, and is ignored if the shader group does not include a tessellation control shader stage and tessellation evaluation shader stage. */
     @Nullable
     @NativeType("VkPipelineTessellationStateCreateInfo const *")
     public VkPipelineTessellationStateCreateInfo pTessellationState() { return npTessellationState(address()); }

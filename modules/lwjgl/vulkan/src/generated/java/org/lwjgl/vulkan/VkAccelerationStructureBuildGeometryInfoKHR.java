@@ -24,6 +24,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The index of each element of the {@code pGeometries} or {@code ppGeometries} members of {@link VkAccelerationStructureBuildGeometryInfoKHR} is used as the <em>geometry index</em> during ray traversal. The geometry index is available in ray shaders via the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#interfaces-builtin-variables-raygeometryindex">{@code RayGeometryIndexKHR} built-in</a>, and is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shader-binding-table-hit-shader-indexing">used to determine hit and intersection shaders executed during traversal</a>. The geometry index is available to ray queries via the {@code OpRayQueryGetIntersectionGeometryIndexKHR} instruction.</p>
  * 
+ * <p>Setting {@link NVRayTracingMotionBlur#VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV} in {@code flags} indicates that this build is a motion top level acceleration structure. A motion top level uses instances of format {@link VkAccelerationStructureMotionInstanceNV} if {@link VkAccelerationStructureGeometryInstancesDataKHR}{@code ::arrayOfPointers} is {@link VK10#VK_FALSE FALSE}.</p>
+ * 
+ * <p>If {@link VkAccelerationStructureGeometryInstancesDataKHR}{@code ::arrayOfPointers} is {@link VK10#VK_TRUE TRUE}, the pointer for any given element of the array of instance pointers consists of 4 bits of {@code VkAccelerationStructureMotionInstanceTypeNV} in the low 4 bits of the pointer identifying the type of structure at the pointer. The device address accessed is the value in the array with the low 4 bits set to zero. The structure at the pointer is one of {@link VkAccelerationStructureInstanceKHR}, {@link VkAccelerationStructureMatrixMotionInstanceNV} or {@link VkAccelerationStructureSRTMotionInstanceNV}, depending on the type value encoded in the low 4 bits.</p>
+ * 
+ * <p>A top level acceleration structure with either motion instances or vertex motion in its instances <b>must</b> set {@link NVRayTracingMotionBlur#VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV} in {@code flags}.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
@@ -37,6 +43,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code type} is {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR} and the {@code geometryType} member of either {@code pGeometries} or {@code ppGeometries} is {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_AABBS_KHR GEOMETRY_TYPE_AABBS_KHR}, the total number of AABBs in all geometries <b>must</b> be less than or equal to {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR}{@code ::maxPrimitiveCount}</li>
  * <li>If {@code type} is {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR} and the {@code geometryType} member of either {@code pGeometries} or {@code ppGeometries} is {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_TRIANGLES_KHR GEOMETRY_TYPE_TRIANGLES_KHR}, the total number of triangles in all geometries <b>must</b> be less than or equal to {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR}{@code ::maxPrimitiveCount}</li>
  * <li>If {@code flags} has the {@link KHRAccelerationStructure#VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR} bit set, then it <b>must</b> not have the {@link KHRAccelerationStructure#VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR} bit set</li>
+ * <li>If {@code dstAccelerationStructure} was created with {@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV} set in {@link VkAccelerationStructureCreateInfoKHR}{@code ::flags}, {@link NVRayTracingMotionBlur#VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV} <b>must</b> be set in {@code flags}</li>
+ * <li>If {@link NVRayTracingMotionBlur#VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV} is set in {@code flags}, {@code dstAccelerationStructure} <b>must</b> have been created with {@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV} set in {@link VkAccelerationStructureCreateInfoKHR}{@code ::flags}</li>
+ * <li>If {@link NVRayTracingMotionBlur#VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV} is set in {@code flags}, {@code type} <b>must</b> not be {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -153,10 +162,10 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct implemen
     /** a {@code VkBuildAccelerationStructureModeKHR} value specifying the type of operation to perform. */
     @NativeType("VkBuildAccelerationStructureModeKHR")
     public int mode() { return nmode(address()); }
-    /** points to an existing acceleration structure that is to be used to update the {@code dst} acceleration structure when {@code mode} is {@link KHRAccelerationStructure#VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR}. */
+    /** a pointer to an existing acceleration structure that is to be used to update the {@code dst} acceleration structure when {@code mode} is {@link KHRAccelerationStructure#VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR}. */
     @NativeType("VkAccelerationStructureKHR")
     public long srcAccelerationStructure() { return nsrcAccelerationStructure(address()); }
-    /** points to the target acceleration structure for the build. */
+    /** a pointer to the target acceleration structure for the build. */
     @NativeType("VkAccelerationStructureKHR")
     public long dstAccelerationStructure() { return ndstAccelerationStructure(address()); }
     /** specifies the number of geometries that will be built into {@code dstAccelerationStructure}. */

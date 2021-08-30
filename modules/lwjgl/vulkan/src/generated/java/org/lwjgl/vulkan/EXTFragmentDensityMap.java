@@ -8,7 +8,7 @@ package org.lwjgl.vulkan;
 /**
  * This extension allows an application to specify areas of the render target where the fragment shader may be invoked fewer times. These fragments are broadcasted out to multiple pixels to cover the render target.
  * 
- * <p>The primary use of this extension is to reduce workloads in areas where lower quality may not be perceived such as the distorted edges of a lens or the periphery of a user's gaze.</p>
+ * <p>The primary use of this extension is to reduce workloads in areas where lower quality may not be perceived such as the distorted edges of a lens or the periphery of a user’s gaze.</p>
  * 
  * <h5>VK_EXT_fragment_density_map</h5>
  * 

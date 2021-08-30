@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing display mode properties.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkDisplayModeParametersKHR}, {@link VkDisplayModeProperties2KHR}, {@link KHRDisplay#vkGetDisplayModePropertiesKHR GetDisplayModePropertiesKHR}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

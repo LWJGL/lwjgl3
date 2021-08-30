@@ -84,7 +84,7 @@ public class VkCopyCommandTransformInfoQCOM extends Struct implements NativeReso
     /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to an extension-specific structure. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** a {@code VkSurfaceTransformFlagBitsKHR} value describing the transform to be applied. */

@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether the feature is supported. {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the features.</p>
+ * <p>If the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceAccelerationStructureFeaturesKHR {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #accelerationStructure};
  *     VkBool32 {@link #accelerationStructureCaptureReplay};
  *     VkBool32 {@link #accelerationStructureIndirectBuild};
@@ -95,10 +95,10 @@ public class VkPhysicalDeviceAccelerationStructureFeaturesKHR extends Struct imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** indicates whether the implementation supports the acceleration structure functionality. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#acceleration-structure">Acceleration Structures</a>. */
@@ -117,9 +117,9 @@ public class VkPhysicalDeviceAccelerationStructureFeaturesKHR extends Struct imp
     @NativeType("VkBool32")
     public boolean descriptorBindingAccelerationStructureUpdateAfterBind() { return ndescriptorBindingAccelerationStructureUpdateAfterBind(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceAccelerationStructureFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceAccelerationStructureFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #accelerationStructure} field. */
     public VkPhysicalDeviceAccelerationStructureFeaturesKHR accelerationStructure(@NativeType("VkBool32") boolean value) { naccelerationStructure(address(), value ? 1 : 0); return this; }
@@ -376,10 +376,10 @@ public class VkPhysicalDeviceAccelerationStructureFeaturesKHR extends Struct imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceAccelerationStructureFeaturesKHR.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceAccelerationStructureFeaturesKHR.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#accelerationStructure} field. */
@@ -398,9 +398,9 @@ public class VkPhysicalDeviceAccelerationStructureFeaturesKHR extends Struct imp
         @NativeType("VkBool32")
         public boolean descriptorBindingAccelerationStructureUpdateAfterBind() { return VkPhysicalDeviceAccelerationStructureFeaturesKHR.ndescriptorBindingAccelerationStructureUpdateAfterBind(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#sType} field. */
         public VkPhysicalDeviceAccelerationStructureFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceAccelerationStructureFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#pNext} field. */
         public VkPhysicalDeviceAccelerationStructureFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceAccelerationStructureFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR#accelerationStructure} field. */
         public VkPhysicalDeviceAccelerationStructureFeaturesKHR.Buffer accelerationStructure(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceAccelerationStructureFeaturesKHR.naccelerationStructure(address(), value ? 1 : 0); return this; }

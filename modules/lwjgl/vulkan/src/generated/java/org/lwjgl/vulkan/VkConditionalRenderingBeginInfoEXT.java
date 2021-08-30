@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying conditional rendering begin info.
+ * Structure specifying conditional rendering begin information.
  * 
  * <h5>Description</h5>
  * 

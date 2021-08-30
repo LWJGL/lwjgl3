@@ -98,10 +98,10 @@ public class VkDebugMarkerMarkerInfoEXT extends Struct implements NativeResource
     /** a pointer to a null-terminated UTF-8 string containing the name of the marker. */
     @NativeType("char const *")
     public String pMarkerNameString() { return npMarkerNameString(address()); }
-    /** an optional: RGBA color value that can be associated with the marker. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored. */
+    /** an <b>optional</b> RGBA color value that can be associated with the marker. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored. */
     @NativeType("float[4]")
     public FloatBuffer color() { return ncolor(address()); }
-    /** an optional: RGBA color value that can be associated with the marker. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored. */
+    /** an <b>optional</b> RGBA color value that can be associated with the marker. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are set to 0.0 then it is ignored. */
     public float color(int index) { return ncolor(address(), index); }
 
     /** Sets the specified value to the {@link #sType} field. */

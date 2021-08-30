@@ -8,7 +8,7 @@ package org.lwjgl.vulkan;
 /**
  * This extension adds Vulkan support for the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_workgroup_memory_explicit_layout.html">{@code SPV_KHR_workgroup_memory_explicit_layout}</a> SPIR-V extension, which allows shaders to explicitly define the layout of {@code Workgroup} storage class memory and create aliases between variables from that storage class in a compute shader.
  * 
- * <p>The aliasing feature allows different "views" on the same data, so the shader can bulk copy data from another storage class using one type (e.g. an array of large vectors), and then use the data with a more specific type. It also enables reducing the amount of workgroup memory consumed by allowing the shader to alias data whose lifetimes don't overlap.</p>
+ * <p>The aliasing feature allows different “{@code views}” on the same data, so the shader can bulk copy data from another storage class using one type (e.g. an array of large vectors), and then use the data with a more specific type. It also enables reducing the amount of workgroup memory consumed by allowing the shader to alias data whose lifetimes do not overlap.</p>
  * 
  * <p>The explicit layout support and some form of aliasing is also required for layering OpenCL on top of Vulkan.</p>
  * 

@@ -80,7 +80,7 @@ public class VkImageSubresource extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkImageAspectFlags} selecting the image <em>aspect</em>. */
+    /** a {@code VkImageAspectFlags} value selecting the image <em>aspect</em>. */
     @NativeType("VkImageAspectFlags")
     public int aspectMask() { return naspectMask(address()); }
     /** selects the mipmap level. */

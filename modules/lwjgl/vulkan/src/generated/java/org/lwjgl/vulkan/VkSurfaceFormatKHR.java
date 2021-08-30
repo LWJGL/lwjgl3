@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing a supported swapchain format-color space pair.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkSurfaceFormat2KHR}, {@link KHRSurface#vkGetPhysicalDeviceSurfaceFormatsKHR GetPhysicalDeviceSurfaceFormatsKHR}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

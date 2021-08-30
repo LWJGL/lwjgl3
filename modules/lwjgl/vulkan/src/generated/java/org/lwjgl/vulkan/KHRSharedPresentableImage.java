@@ -97,11 +97,11 @@ public class KHRSharedPresentableImage {
     // --- [ vkGetSwapchainStatusKHR ] ---
 
     /**
-     * Get a swapchain's status.
+     * Get a swapchain’s status.
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>In order to query a swapchain's status when rendering to a shared presentable image, call:</p>
+     * <p>In order to query a swapchain’s status when rendering to a shared presentable image, call:</p>
      * 
      * <pre><code>
      * VkResult vkGetSwapchainStatusKHR(

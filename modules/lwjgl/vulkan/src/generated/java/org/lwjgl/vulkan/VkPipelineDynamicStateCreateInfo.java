@@ -109,7 +109,7 @@ public class VkPipelineDynamicStateCreateInfo extends Struct implements NativeRe
     /** the number of elements in the {@code pDynamicStates} array. */
     @NativeType("uint32_t")
     public int dynamicStateCount() { return ndynamicStateCount(address()); }
-    /** a pointer to an array of {@code VkDynamicState} values specifying which pieces of pipeline state will use the values from dynamic state commands rather than from pipeline state creation info. */
+    /** a pointer to an array of {@code VkDynamicState} values specifying which pieces of pipeline state will use the values from dynamic state commands rather than from pipeline state creation information. */
     @Nullable
     @NativeType("VkDynamicState const *")
     public IntBuffer pDynamicStates() { return npDynamicStates(address()); }

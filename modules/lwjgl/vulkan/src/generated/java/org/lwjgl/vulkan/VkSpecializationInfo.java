@@ -17,17 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying specialization info.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@code pMapEntries} is a pointer to a {@link VkSpecializationMapEntry} structure.</p>
+ * Structure specifying specialization information.
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
  * <li>The {@code offset} member of each element of {@code pMapEntries} <b>must</b> be less than {@code dataSize}</li>
  * <li>The {@code size} member of each element of {@code pMapEntries} <b>must</b> be less than or equal to {@code dataSize} minus {@code offset}</li>
+ * <li>The {@code constantID} value of each element of {@code pMapEntries} <b>must</b> be unique within {@code pMapEntries}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

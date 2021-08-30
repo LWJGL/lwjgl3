@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying external image format properties.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkImageFormatProperties}, {@link NVExternalMemoryCapabilities#vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

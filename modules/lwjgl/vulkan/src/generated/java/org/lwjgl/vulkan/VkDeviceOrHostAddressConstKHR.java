@@ -19,6 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Union specifying a const device or host address.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkAccelerationStructureGeometryAabbsDataKHR}, {@link VkAccelerationStructureGeometryInstancesDataKHR}, {@link VkAccelerationStructureGeometryMotionTrianglesDataNV}, {@link VkAccelerationStructureGeometryTrianglesDataKHR}, {@link VkCopyMemoryToAccelerationStructureInfoKHR}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

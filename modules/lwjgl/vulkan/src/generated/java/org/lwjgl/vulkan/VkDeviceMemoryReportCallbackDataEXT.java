@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>This structure should only be considered valid during the lifetime of the triggered callback.</p>
  * 
- * <p>For {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT} and {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT} events, {@code objectHandle} usually will not yet exist when the application or tool receives the callback. {@code objectHandle} will only exist when the create or allocate call that triggered the event returns, and if the allocation or import ends up failing {@code objectHandle} won't ever exist.</p>
+ * <p>For {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT} and {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT} events, {@code objectHandle} usually will not yet exist when the application or tool receives the callback. {@code objectHandle} will only exist when the create or allocate call that triggered the event returns, and if the allocation or import ends up failing {@code objectHandle} will not ever exist.</p>
  * </div>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkDeviceMemoryReportCallbackDataEXT {
  *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
+ *     void * {@link #pNext};
  *     VkDeviceMemoryReportFlagsEXT {@link #flags};
  *     VkDeviceMemoryReportEventTypeEXT {@link #type};
  *     uint64_t {@link #memoryObjectId};
@@ -121,7 +121,7 @@ public class VkDeviceMemoryReportCallbackDataEXT extends Struct implements Nativ
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** 0 and reserved for future use. */
     @NativeType("VkDeviceMemoryReportFlagsEXT")
@@ -148,7 +148,7 @@ public class VkDeviceMemoryReportCallbackDataEXT extends Struct implements Nativ
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceMemoryReportCallbackDataEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the specified value to the {@link #pNext} field. */
-    public VkDeviceMemoryReportCallbackDataEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    public VkDeviceMemoryReportCallbackDataEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkDeviceMemoryReportCallbackDataEXT set(
@@ -382,7 +382,7 @@ public class VkDeviceMemoryReportCallbackDataEXT extends Struct implements Nativ
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceMemoryReportCallbackDataEXT.nsType(address()); }
         /** @return the value of the {@link VkDeviceMemoryReportCallbackDataEXT#pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkDeviceMemoryReportCallbackDataEXT.npNext(address()); }
         /** @return the value of the {@link VkDeviceMemoryReportCallbackDataEXT#flags} field. */
         @NativeType("VkDeviceMemoryReportFlagsEXT")
@@ -409,7 +409,7 @@ public class VkDeviceMemoryReportCallbackDataEXT extends Struct implements Nativ
         /** Sets the specified value to the {@link VkDeviceMemoryReportCallbackDataEXT#sType} field. */
         public VkDeviceMemoryReportCallbackDataEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceMemoryReportCallbackDataEXT.nsType(address(), value); return this; }
         /** Sets the specified value to the {@link VkDeviceMemoryReportCallbackDataEXT#pNext} field. */
-        public VkDeviceMemoryReportCallbackDataEXT.Buffer pNext(@NativeType("void const *") long value) { VkDeviceMemoryReportCallbackDataEXT.npNext(address(), value); return this; }
+        public VkDeviceMemoryReportCallbackDataEXT.Buffer pNext(@NativeType("void *") long value) { VkDeviceMemoryReportCallbackDataEXT.npNext(address(), value); return this; }
 
     }
 

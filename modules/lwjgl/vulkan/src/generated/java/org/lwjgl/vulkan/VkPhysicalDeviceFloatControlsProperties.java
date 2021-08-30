@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceFloatControlsProperties} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
+ * <p>If the {@link VkPhysicalDeviceFloatControlsProperties} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceFloatControlsProperties {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkShaderFloatControlsIndependence {@link #denormBehaviorIndependence};
  *     VkShaderFloatControlsIndependence {@link #roundingModeIndependence};
  *     VkBool32 {@link #shaderSignedZeroInfNanPreserveFloat16};
@@ -143,10 +143,10 @@ public class VkPhysicalDeviceFloatControlsProperties extends Struct implements N
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** a {@code VkShaderFloatControlsIndependence} value indicating whether, and how, denorm behavior can be set independently for different bit widths. */
@@ -201,9 +201,9 @@ public class VkPhysicalDeviceFloatControlsProperties extends Struct implements N
     @NativeType("VkBool32")
     public boolean shaderRoundingModeRTZFloat64() { return nshaderRoundingModeRTZFloat64(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceFloatControlsProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceFloatControlsProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -454,10 +454,10 @@ public class VkPhysicalDeviceFloatControlsProperties extends Struct implements N
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFloatControlsProperties#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceFloatControlsProperties.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceFloatControlsProperties#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceFloatControlsProperties.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceFloatControlsProperties#denormBehaviorIndependence} field. */
@@ -512,9 +512,9 @@ public class VkPhysicalDeviceFloatControlsProperties extends Struct implements N
         @NativeType("VkBool32")
         public boolean shaderRoundingModeRTZFloat64() { return VkPhysicalDeviceFloatControlsProperties.nshaderRoundingModeRTZFloat64(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFloatControlsProperties#sType} field. */
         public VkPhysicalDeviceFloatControlsProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFloatControlsProperties.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceFloatControlsProperties#pNext} field. */
         public VkPhysicalDeviceFloatControlsProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFloatControlsProperties.npNext(address(), value); return this; }
 
     }

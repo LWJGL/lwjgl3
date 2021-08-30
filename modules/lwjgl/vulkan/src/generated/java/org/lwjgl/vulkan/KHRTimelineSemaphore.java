@@ -71,7 +71,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Jeff Bolz, NVIDIA</li>
- * <li>Yuriy O&#8217;Donnell, Epic Games</li>
+ * <li>Yuriy O’Donnell, Epic Games</li>
  * <li>Jason Ekstrand, Intel</li>
  * <li>Jesse Hall, Google</li>
  * <li>James Jones, NVIDIA</li>
@@ -173,7 +173,7 @@ public class KHRTimelineSemaphore {
     /**
      * See {@link VK12#vkWaitSemaphores WaitSemaphores}.
      *
-     * @param device    the logical device that owns the semaphore.
+     * @param device    the logical device that owns the semaphores.
      * @param pWaitInfo a pointer to a {@link VkSemaphoreWaitInfo} structure containing information about the wait condition.
      * @param timeout   the timeout period in units of nanoseconds. {@code timeout} is adjusted to the closest value allowed by the implementation-dependent timeout accuracy, which <b>may</b> be substantially longer than one nanosecond, and <b>may</b> be longer than the requested period.
      */

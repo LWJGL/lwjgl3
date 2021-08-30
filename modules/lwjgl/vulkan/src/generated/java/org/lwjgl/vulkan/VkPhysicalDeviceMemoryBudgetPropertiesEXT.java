@@ -92,16 +92,16 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@code VkDeviceSize} values in which memory budgets are returned, with one element for each memory heap. A heap&#8217;s budget is a rough estimate of how much memory the process <b>can</b> allocate from that heap before allocations <b>may</b> fail or cause performance degradation. The budget includes any currently allocated device memory. */
+    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@code VkDeviceSize} values in which memory budgets are returned, with one element for each memory heap. A heap’s budget is a rough estimate of how much memory the process <b>can</b> allocate from that heap before allocations <b>may</b> fail or cause performance degradation. The budget includes any currently allocated device memory. */
     @NativeType("VkDeviceSize[VK_MAX_MEMORY_HEAPS]")
     public LongBuffer heapBudget() { return nheapBudget(address()); }
-    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@code VkDeviceSize} values in which memory budgets are returned, with one element for each memory heap. A heap&#8217;s budget is a rough estimate of how much memory the process <b>can</b> allocate from that heap before allocations <b>may</b> fail or cause performance degradation. The budget includes any currently allocated device memory. */
+    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@code VkDeviceSize} values in which memory budgets are returned, with one element for each memory heap. A heap’s budget is a rough estimate of how much memory the process <b>can</b> allocate from that heap before allocations <b>may</b> fail or cause performance degradation. The budget includes any currently allocated device memory. */
     @NativeType("VkDeviceSize")
     public long heapBudget(int index) { return nheapBudget(address(), index); }
-    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@code VkDeviceSize} values in which memory usages are returned, with one element for each memory heap. A heap&#8217;s usage is an estimate of how much memory the process is currently using in that heap. */
+    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@code VkDeviceSize} values in which memory usages are returned, with one element for each memory heap. A heap’s usage is an estimate of how much memory the process is currently using in that heap. */
     @NativeType("VkDeviceSize[VK_MAX_MEMORY_HEAPS]")
     public LongBuffer heapUsage() { return nheapUsage(address()); }
-    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@code VkDeviceSize} values in which memory usages are returned, with one element for each memory heap. A heap&#8217;s usage is an estimate of how much memory the process is currently using in that heap. */
+    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@code VkDeviceSize} values in which memory usages are returned, with one element for each memory heap. A heap’s usage is an estimate of how much memory the process is currently using in that heap. */
     @NativeType("VkDeviceSize")
     public long heapUsage(int index) { return nheapUsage(address(), index); }
 

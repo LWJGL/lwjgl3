@@ -108,7 +108,7 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
     /** specifies whether the destination color of the blend operation is treated as premultiplied. */
     @NativeType("VkBool32")
     public boolean dstPremultiplied() { return ndstPremultiplied(address()) != 0; }
-    /** a {@code VkBlendOverlapEXT} value specifying how the source and destination sample&#8217;s coverage is correlated. */
+    /** a {@code VkBlendOverlapEXT} value specifying how the source and destination sample’s coverage is correlated. */
     @NativeType("VkBlendOverlapEXT")
     public int blendOverlap() { return nblendOverlap(address()); }
 

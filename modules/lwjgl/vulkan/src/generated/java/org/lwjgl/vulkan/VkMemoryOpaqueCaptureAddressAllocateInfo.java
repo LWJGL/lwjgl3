@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>In most cases, it is expected that a non-zero {@code opaqueAddress} is an address retrieved from {@link VK12#vkGetDeviceMemoryOpaqueCaptureAddress GetDeviceMemoryOpaqueCaptureAddress} on an identically created memory allocation. If this is not the case, it likely that {@link VK12#VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS} errors will occur.</p>
+ * <p>In most cases, it is expected that a non-zero {@code opaqueAddress} is an address retrieved from {@link VK12#vkGetDeviceMemoryOpaqueCaptureAddress GetDeviceMemoryOpaqueCaptureAddress} on an identically created memory allocation. If this is not the case, it is likely that {@link VK12#VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS} errors will occur.</p>
  * 
  * <p>This is, however, not a strict requirement because trace capture/replay tools may need to adjust memory allocation parameters for imported memory.</p>
  * </div>

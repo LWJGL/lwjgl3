@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension provides a new physical device query which allows retrieving information about the driver implementation, allowing applications to determine which physical device corresponds to which particular vendor's driver, and which conformance test suite version the driver implementation is compliant with.
+ * This extension provides a new physical device query which allows retrieving information about the driver implementation, allowing applications to determine which physical device corresponds to which particular vendor’s driver, and which conformance test suite version the driver implementation is compliant with.
  * 
  * <h5>Promotion to Vulkan 1.2</h5>
  * 

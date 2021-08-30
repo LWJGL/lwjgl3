@@ -18,12 +18,11 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying the type of a newly created semaphore.
  * 
- * <h5>Valid Usage (Implicit)</h5>
+ * <h5>Description</h5>
  * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO}</li>
- * <li>{@code semaphoreType} <b>must</b> be a valid {@code VkSemaphoreType} value</li>
- * </ul>
+ * <p>To create a semaphore of a specific type, add a {@link VkSemaphoreTypeCreateInfo} structure to the {@link VkSemaphoreCreateInfo}{@code ::pNext} chain.</p>
+ * 
+ * <p>If no {@link VkSemaphoreTypeCreateInfo} structure is included in the {@code pNext} chain of {@link VkSemaphoreCreateInfo}, then the created semaphore will have a default {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -32,7 +31,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code semaphoreType} is {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}, {@code initialValue} <b>must</b> be zero</li>
  * </ul>
  * 
- * <p>If no {@link VkSemaphoreTypeCreateInfo} structure is included in the {@code pNext} chain of {@link VkSemaphoreCreateInfo}, then the created semaphore will have a default {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}.</p>
+ * <h5>Valid Usage (Implicit)</h5>
+ * 
+ * <ul>
+ * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO}</li>
+ * <li>{@code semaphoreType} <b>must</b> be a valid {@code VkSemaphoreType} value</li>
+ * </ul>
  * 
  * <h3>Layout</h3>
  * 

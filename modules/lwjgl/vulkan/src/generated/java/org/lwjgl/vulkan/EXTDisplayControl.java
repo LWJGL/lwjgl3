@@ -190,7 +190,7 @@ public class EXTDisplayControl {
      *
      * @param device            a logical device associated with {@code display}.
      * @param display           the display whose power state is modified.
-     * @param pDisplayPowerInfo a {@link VkDisplayPowerInfoEXT} structure specifying the new power state of {@code display}.
+     * @param pDisplayPowerInfo a pointer to a {@link VkDisplayPowerInfoEXT} structure specifying the new power state of {@code display}.
      */
     @NativeType("VkResult")
     public static int vkDisplayPowerControlEXT(VkDevice device, @NativeType("VkDisplayKHR") long display, @NativeType("VkDisplayPowerInfoEXT const *") VkDisplayPowerInfoEXT pDisplayPowerInfo) {
@@ -393,7 +393,7 @@ public class EXTDisplayControl {
      *
      * @param device        the {@code VkDevice} associated with {@code swapchain}.
      * @param swapchain     the swapchain from which to query the counter value.
-     * @param counter       the counter to query.
+     * @param counter       a {@code VkSurfaceCounterFlagBitsEXT} value specifying the counter to query.
      * @param pCounterValue will return the current value of the counter.
      */
     @NativeType("VkResult")

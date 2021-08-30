@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If {@code size} is not zero, all addresses between {@code deviceAddress} and <code>deviceAddress + size - 1</code> <b>must</b> be in the buffer device address range of the same buffer</li>
- * <li>If {@code size} is not zero, {@code stride} <b>must</b> be less than the size of the buffer from which {@code deviceAddress} was queried</li>
+ * <li>If {@code size} is not zero, {@code stride} <b>must</b> be less than or equal to the size of the buffer from which {@code deviceAddress} was queried</li>
  * </ul>
  * 
  * <h5>See Also</h5>

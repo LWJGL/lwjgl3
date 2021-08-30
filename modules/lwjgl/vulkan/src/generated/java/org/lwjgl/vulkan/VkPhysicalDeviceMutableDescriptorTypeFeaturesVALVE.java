@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing whether the mutable descriptor type is supported.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -28,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #mutableDescriptorType};
  * }</code></pre>
  */
@@ -75,10 +79,10 @@ public class VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE extends Struct i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /**
@@ -106,9 +110,9 @@ public class VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE extends Struct i
     @NativeType("VkBool32")
     public boolean mutableDescriptorType() { return nmutableDescriptorType(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #mutableDescriptorType} field. */
     public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE mutableDescriptorType(@NativeType("VkBool32") boolean value) { nmutableDescriptorType(address(), value ? 1 : 0); return this; }
@@ -333,19 +337,19 @@ public class VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE extends Struct i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE#mutableDescriptorType} field. */
         @NativeType("VkBool32")
         public boolean mutableDescriptorType() { return VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.nmutableDescriptorType(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE#sType} field. */
         public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE#pNext} field. */
         public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE#mutableDescriptorType} field. */
         public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.Buffer mutableDescriptorType(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.nmutableDescriptorType(address(), value ? 1 : 0); return this; }

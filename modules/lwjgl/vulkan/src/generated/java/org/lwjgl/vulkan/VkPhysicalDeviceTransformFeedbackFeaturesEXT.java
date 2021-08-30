@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT} <b>can</b> also be included in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable features.</p>
+ * <p>If the {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceTransformFeedbackFeaturesEXT {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #transformFeedback};
  *     VkBool32 {@link #geometryStreams};
  * }</code></pre>
@@ -83,10 +83,10 @@ public class VkPhysicalDeviceTransformFeedbackFeaturesEXT extends Struct impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** indicates whether the implementation supports transform feedback and shader modules <b>can</b> declare the {@code TransformFeedback} capability. */
@@ -96,9 +96,9 @@ public class VkPhysicalDeviceTransformFeedbackFeaturesEXT extends Struct impleme
     @NativeType("VkBool32")
     public boolean geometryStreams() { return ngeometryStreams(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceTransformFeedbackFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceTransformFeedbackFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #transformFeedback} field. */
     public VkPhysicalDeviceTransformFeedbackFeaturesEXT transformFeedback(@NativeType("VkBool32") boolean value) { ntransformFeedback(address(), value ? 1 : 0); return this; }
@@ -331,10 +331,10 @@ public class VkPhysicalDeviceTransformFeedbackFeaturesEXT extends Struct impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceTransformFeedbackFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceTransformFeedbackFeaturesEXT.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT#transformFeedback} field. */
@@ -344,9 +344,9 @@ public class VkPhysicalDeviceTransformFeedbackFeaturesEXT extends Struct impleme
         @NativeType("VkBool32")
         public boolean geometryStreams() { return VkPhysicalDeviceTransformFeedbackFeaturesEXT.ngeometryStreams(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT#sType} field. */
         public VkPhysicalDeviceTransformFeedbackFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceTransformFeedbackFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceTransformFeedbackFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceTransformFeedbackFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT#transformFeedback} field. */
         public VkPhysicalDeviceTransformFeedbackFeaturesEXT.Buffer transformFeedback(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceTransformFeedbackFeaturesEXT.ntransformFeedback(address(), value ? 1 : 0); return this; }

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying sparse image opaque memory bind info.
+ * Structure specifying sparse image opaque memory bind information.
  * 
  * <h5>Valid Usage</h5>
  * 

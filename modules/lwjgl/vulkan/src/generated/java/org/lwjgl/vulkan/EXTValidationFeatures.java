@@ -23,7 +23,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>248</dd>
  * <dt><b>Revision</b></dt>
- * <dd>4</dd>
+ * <dd>5</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -59,7 +59,7 @@ package org.lwjgl.vulkan;
 public final class EXTValidationFeatures {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VALIDATION_FEATURES_SPEC_VERSION = 4;
+    public static final int VK_EXT_VALIDATION_FEATURES_SPEC_VERSION = 5;
 
     /** The extension name. */
     public static final String VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME = "VK_EXT_validation_features";
@@ -104,6 +104,7 @@ public final class EXTValidationFeatures {
      * <li>{@link #VK_VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT} specifies that object lifetime validation is disabled. This feature is enabled by default.</li>
      * <li>{@link #VK_VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT} specifies that core validation checks are disabled. This feature is enabled by default. If this feature is disabled, the shader validation and GPU-assisted validation features are also disabled.</li>
      * <li>{@link #VK_VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT} specifies that protection against duplicate non-dispatchable object handles is disabled. This feature is enabled by default.</li>
+     * <li>{@link #VK_VALIDATION_FEATURE_DISABLE_SHADER_VALIDATION_CACHE_EXT VALIDATION_FEATURE_DISABLE_SHADER_VALIDATION_CACHE_EXT} specifies that there will be no caching of shader validation results and every shader will be validated on every application execution. Shader validation caching is enabled by default.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -111,13 +112,14 @@ public final class EXTValidationFeatures {
      * <p>{@link VkValidationFeaturesEXT}</p>
      */
     public static final int
-        VK_VALIDATION_FEATURE_DISABLE_ALL_EXT              = 0,
-        VK_VALIDATION_FEATURE_DISABLE_SHADERS_EXT          = 1,
-        VK_VALIDATION_FEATURE_DISABLE_THREAD_SAFETY_EXT    = 2,
-        VK_VALIDATION_FEATURE_DISABLE_API_PARAMETERS_EXT   = 3,
-        VK_VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT = 4,
-        VK_VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT      = 5,
-        VK_VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT   = 6;
+        VK_VALIDATION_FEATURE_DISABLE_ALL_EXT                     = 0,
+        VK_VALIDATION_FEATURE_DISABLE_SHADERS_EXT                 = 1,
+        VK_VALIDATION_FEATURE_DISABLE_THREAD_SAFETY_EXT           = 2,
+        VK_VALIDATION_FEATURE_DISABLE_API_PARAMETERS_EXT          = 3,
+        VK_VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT        = 4,
+        VK_VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT             = 5,
+        VK_VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT          = 6,
+        VK_VALIDATION_FEATURE_DISABLE_SHADER_VALIDATION_CACHE_EXT = 7;
 
     private EXTValidationFeatures() {}
 

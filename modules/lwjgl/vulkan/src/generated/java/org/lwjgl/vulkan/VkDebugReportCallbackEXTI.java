@@ -76,7 +76,7 @@ public interface VkDebugReportCallbackEXTI extends CallbackI {
      * @param flags        specifies the {@code VkDebugReportFlagBitsEXT} that triggered this callback.
      * @param objectType   a {@code VkDebugReportObjectTypeEXT} value specifying the type of object being used or created at the time the event was triggered.
      * @param object       the object where the issue was detected. If {@code objectType} is {@link EXTDebugReport#VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT}, {@code object} is undefined.
-     * @param location     a component (layer, driver, loader) defined value specifying the <em>location</em> of the trigger. This is an optional: value.
+     * @param location     a component (layer, driver, loader) defined value specifying the <em>location</em> of the trigger. This is an <b>optional</b> value.
      * @param messageCode  a layer-defined value indicating what test triggered this callback.
      * @param pLayerPrefix a null-terminated string that is an abbreviation of the name of the component making the callback. {@code pLayerPrefix} is only valid for the duration of the callback.
      * @param pMessage     a null-terminated string detailing the trigger conditions. {@code pMessage} is only valid for the duration of the callback.

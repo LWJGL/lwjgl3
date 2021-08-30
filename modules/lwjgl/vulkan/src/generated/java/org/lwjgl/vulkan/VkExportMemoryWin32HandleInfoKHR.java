@@ -23,28 +23,37 @@ import org.lwjgl.system.windows.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@link VkExportMemoryAllocateInfo} is not present in the same {@code pNext} chain, this structure is ignored.</p>
+ * <p>If {@link VkExportMemoryAllocateInfo} is not included in the same {@code pNext} chain, this structure is ignored.</p>
  * 
- * <p>If {@link VkExportMemoryAllocateInfo} is present in the {@code pNext} chain of {@link VkMemoryAllocateInfo} with a Windows {@code handleType}, but either {@link VkExportMemoryWin32HandleInfoKHR} is not present in the {@code pNext} chain, or if it is but {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for "{@code Synchronization Object Security and Access Rights}"<sup>1</sup>. Further, if the structure is not present, the access rights used depend on the handle type.</p>
+ * <p>If {@link VkExportMemoryAllocateInfo} is included in the {@code pNext} chain of {@link VkMemoryAllocateInfo} with a Windows {@code handleType}, but either {@link VkExportMemoryWin32HandleInfoKHR} is not included in the {@code pNext} chain, or if it is but {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for “{@code Synchronization Object Security and Access Rights}”<sup>1</sup>. Further, if the structure is not present, the access rights used depend on the handle type.</p>
  * 
  * <p>For handles of the following types:</p>
  * 
- * <p>{@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT} {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT}</p>
+ * <ul>
+ * <li>{@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT}</li>
+ * <li>{@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT}</li>
+ * </ul>
  * 
  * <p>The implementation <b>must</b> ensure the access rights allow read and write access to the memory.</p>
  * 
  * <p>For handles of the following types:</p>
  * 
- * <p>{@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT} {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT}</p>
+ * <ul>
+ * <li>{@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT}</li>
+ * <li>{@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT}</li>
+ * </ul>
  * 
  * <p>The access rights <b>must</b> be:</p>
  * 
- * <p>{@code GENERIC_ALL}</p>
+ * <ul>
+ * <li>{@code GENERIC_ALL}
  * 
  * <dl>
  * <dt>1</dt>
  * <dd><a target="_blank" href="https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights">https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights</a></dd>
  * </dl>
+ * </li>
+ * </ul>
  * 
  * <h5>Valid Usage</h5>
  * 

@@ -16,6 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Resource usage information about a particular shader within a pipeline.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkShaderStatisticsInfoAMD}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

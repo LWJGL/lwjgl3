@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying sparse image memory requirements.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkSparseImageFormatProperties}, {@link VkSparseImageMemoryRequirements2}, {@link VK10#vkGetImageSparseMemoryRequirements GetImageSparseMemoryRequirements}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -77,19 +81,7 @@ public class VkSparseImageMemoryRequirements extends Struct implements NativeRes
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * {@code formatProperties.aspectMask} is the set of aspects of the image that this sparse memory requirement applies to. This will usually have a single aspect specified. However, depth/stencil images <b>may</b> have depth and stencil data interleaved in the same sparse block, in which case both {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} and {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT} would be present.
-     * 
-     * <p>{@code formatProperties.imageGranularity} describes the dimensions of a single bindable sparse image block in texel units. For aspect {@link VK10#VK_IMAGE_ASPECT_METADATA_BIT IMAGE_ASPECT_METADATA_BIT}, all dimensions will be zero. All metadata is located in the mip tail region.</p>
-     * 
-     * <p>{@code formatProperties.flags} is a bitmask of {@code VkSparseImageFormatFlagBits}:</p>
-     * 
-     * <ul>
-     * <li>If {@link VK10#VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT} is set the image uses a single mip tail region for all array layers.</li>
-     * <li>If {@link VK10#VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT} is set the dimensions of mip levels <b>must</b> be integer multiples of the corresponding dimensions of the sparse image block for levels not located in the mip tail.</li>
-     * <li>If {@link VK10#VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT} is set the image uses non-standard sparse image block dimensions. The {@code formatProperties.imageGranularity} values do not match the standard sparse image block dimension corresponding to the image&#8217;s format.</li>
-     * </ul>
-     */
+    /** a {@link VkSparseImageFormatProperties} structure specifying properties of the image format. */
     public VkSparseImageFormatProperties formatProperties() { return nformatProperties(address()); }
     /** the first mip level at which image subresources are included in the mip tail region. */
     @NativeType("uint32_t")
@@ -100,7 +92,7 @@ public class VkSparseImageMemoryRequirements extends Struct implements NativeRes
     /** the opaque memory offset used with {@link VkSparseImageOpaqueMemoryBindInfo} to bind the mip tail region(s). */
     @NativeType("VkDeviceSize")
     public long imageMipTailOffset() { return nimageMipTailOffset(address()); }
-    /** the offset stride between each array-layer&#8217;s mip tail, if {@code formatProperties.flags} does not contain {@link VK10#VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT} (otherwise the value is undefined). */
+    /** the offset stride between each array-layer’s mip tail, if {@code formatProperties.flags} does not contain {@link VK10#VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT} (otherwise the value is undefined). */
     @NativeType("VkDeviceSize")
     public long imageMipTailStride() { return nimageMipTailStride(address()); }
 

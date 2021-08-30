@@ -24,9 +24,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is enabled, and {@code format} is a depth/stencil format, {@code initialLayout} and {@code finalLayout} <b>can</b> be set to a layout that only specifies the layout of the depth aspect.</p>
  * 
- * <p>If {@code format} is a depth/stencil format, and {@code initialLayout} only specifies the initial layout of the depth aspect of the attachment, the initial layout of the stencil aspect is specified by the {@code stencilInitialLayout} member of a {@link VkAttachmentDescriptionStencilLayout} structure included in the {@code pNext} chain. Otherwise, {@code initialLayout} describes the initial layout for all relevant image aspects.</p>
+ * <p>If the {@code pNext} chain includes a {@link VkAttachmentDescriptionStencilLayout} structure, then the {@code stencilInitialLayout} and {@code stencilFinalLayout} members specify the initial and final layouts of the stencil aspect of a depth/stencil format, and {@code initialLayout} and {@code finalLayout} only apply to the depth aspect. For depth-only formats, the {@link VkAttachmentDescriptionStencilLayout} structure is ignored. For stencil-only formats, the initial and final layouts of the stencil aspect are taken from the {@link VkAttachmentDescriptionStencilLayout} structure if present, or {@code initialLayout} and {@code finalLayout} if not present.</p>
  * 
- * <p>If {@code format} is a depth/stencil format, and {@code finalLayout} only specifies the final layout of the depth aspect of the attachment, the final layout of the stencil aspect is specified by the {@code stencilFinalLayout} member of a {@link VkAttachmentDescriptionStencilLayout} structure included in the {@code pNext} chain. Otherwise, {@code finalLayout} describes the final layout for all relevant image aspects.</p>
+ * <p>If {@code format} is a depth/stencil format, and either {@code initialLayout} or {@code finalLayout} does not specify a layout for the stencil aspect, then the application <b>must</b> specify the initial and final layouts of the stencil aspect by including a {@link VkAttachmentDescriptionStencilLayout} structure in the {@code pNext} chain.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -164,7 +164,7 @@ public class VkAttachmentDescription2 extends Struct implements NativeResource {
     /** a {@code VkFormat} value specifying the format of the image that will be used for the attachment. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** the number of samples of the image as defined in {@code VkSampleCountFlagBits}. */
+    /** a {@code VkSampleCountFlagBits} value specifying the number of samples of the image. */
     @NativeType("VkSampleCountFlagBits")
     public int samples() { return nsamples(address()); }
     /** a {@code VkAttachmentLoadOp} value specifying how the contents of color and depth components of the attachment are treated at the beginning of the subpass where it is first used. */

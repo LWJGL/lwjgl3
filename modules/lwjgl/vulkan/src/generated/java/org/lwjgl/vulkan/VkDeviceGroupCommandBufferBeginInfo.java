@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The initial device mask also acts as an upper bound on the set of devices that <b>can</b> ever be in the device mask in the command buffer.</p>
  * 
- * <p>If this structure is not present, the initial value of a command buffer's device mask is set to include all physical devices in the logical device when the command buffer begins recording.</p>
+ * <p>If this structure is not present, the initial value of a command buffer’s device mask is set to include all physical devices in the logical device when the command buffer begins recording.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -94,7 +94,7 @@ public class VkDeviceGroupCommandBufferBeginInfo extends Struct implements Nativ
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the initial value of the command buffer&#8217;s device mask. */
+    /** the initial value of the command buffer’s device mask. */
     @NativeType("uint32_t")
     public int deviceMask() { return ndeviceMask(address()); }
 

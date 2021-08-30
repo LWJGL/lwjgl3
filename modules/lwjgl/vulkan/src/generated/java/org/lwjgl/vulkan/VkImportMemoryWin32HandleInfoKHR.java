@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.system.windows.*;
 
 /**
- * import Win32 memory created on the same physical device.
+ * Import Win32 memory created on the same physical device.
  * 
  * <h5>Description</h5>
  * 
@@ -118,16 +118,16 @@ public class VkImportMemoryWin32HandleInfoKHR extends Struct implements NativeRe
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies the type of {@code handle} or {@code name}. */
+    /** a {@code VkExternalMemoryHandleTypeFlagBits} value specifying the type of {@code handle} or {@code name}. */
     @NativeType("VkExternalMemoryHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
-    /** the external handle to import, or {@code NULL}. */
+    /** {@code NULL} or the external handle to import. */
     @NativeType("HANDLE")
     public long handle() { return nhandle(address()); }
-    /** a null-terminated UTF-16 string naming the payload to import, or {@code NULL}. */
+    /** {@code NULL} or a null-terminated UTF-16 string naming the payload to import. */
     @NativeType("LPCWSTR")
     public ByteBuffer name() { return nname(address()); }
-    /** a null-terminated UTF-16 string naming the payload to import, or {@code NULL}. */
+    /** {@code NULL} or a null-terminated UTF-16 string naming the payload to import. */
     @NativeType("LPCWSTR")
     public String nameString() { return nnameString(address()); }
 

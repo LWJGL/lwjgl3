@@ -141,7 +141,7 @@ public class VkImportFenceFdInfoKHR extends Struct implements NativeResource {
     /** a bitmask of {@code VkFenceImportFlagBits} specifying additional parameters for the fence payload import operation. */
     @NativeType("VkFenceImportFlags")
     public int flags() { return nflags(address()); }
-    /** specifies the type of {@code fd}. */
+    /** a {@code VkExternalFenceHandleTypeFlagBits} value specifying the type of {@code fd}. */
     @NativeType("VkExternalFenceHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
     /** the external handle to import. */

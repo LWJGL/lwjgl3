@@ -115,7 +115,7 @@ public class VkDeviceQueueCreateInfo extends Struct implements NativeResource {
     /** a bitmask indicating behavior of the queue. */
     @NativeType("VkDeviceQueueCreateFlags")
     public int flags() { return nflags(address()); }
-    /** an unsigned integer indicating the index of the queue family to create on this device. This index corresponds to the index of an element of the {@code pQueueFamilyProperties} array that was returned by {@code vkGetPhysicalDeviceQueueFamilyProperties}. */
+    /** an unsigned integer indicating the index of the queue family in which to create the queue on this device. This index corresponds to the index of an element of the {@code pQueueFamilyProperties} array that was returned by {@code vkGetPhysicalDeviceQueueFamilyProperties}. */
     @NativeType("uint32_t")
     public int queueFamilyIndex() { return nqueueFamilyIndex(address()); }
     /** an unsigned integer specifying the number of queues to create in the queue family indicated by {@code queueFamilyIndex}. */

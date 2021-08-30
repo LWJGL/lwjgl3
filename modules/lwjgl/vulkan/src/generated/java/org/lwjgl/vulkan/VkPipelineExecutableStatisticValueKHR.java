@@ -16,6 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * A union describing a pipeline executable statistic.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkPipelineExecutableStatisticKHR}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

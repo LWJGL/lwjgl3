@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * The earliest time image should be presented.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkPresentTimesInfoGOOGLE}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

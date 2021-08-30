@@ -11,9 +11,9 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /**
- * This extension is based off the {@link AMDDrawIndirectCount VK_AMD_draw_indirect_count} extension. This extension allows an application to source the number of draw calls for indirect draw calls from a buffer.
+ * This extension is based off the {@link AMDDrawIndirectCount VK_AMD_draw_indirect_count} extension. This extension allows an application to source the number of draws for indirect draw calls from a buffer.
  * 
- * <p>Applications might want to do culling on the GPU via a compute shader prior to the draw. This enables the application to generate arbitrary amounts of draw commands and execute them without host intervention.</p>
+ * <p>Applications might want to do culling on the GPU via a compute shader prior to drawing. This enables the application to generate an arbitrary number of drawing commands and execute them without host intervention.</p>
  * 
  * <h5>Promotion to Vulkan 1.2</h5>
  * 

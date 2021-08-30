@@ -30,14 +30,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     // Get features with a hypothetical future extension.
  *     VkHypotheticalExtensionFeaturesKHR hypotheticalFeatures =
  *     {
- *         VK_STRUCTURE_TYPE_HYPOTHETICAL_FEATURES_KHR,                            // sType
- *         NULL,                                                                   // pNext
+ *         VK_STRUCTURE_TYPE_HYPOTHETICAL_FEATURES_KHR,                // sType
+ *         NULL,                                                       // pNext
  *     };
  * 
  *     VkPhysicalDeviceFeatures2KHR features =
  *     {
- *         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR,                       // sType
- *         &amp;hypotheticalFeatures,                                                  // pNext
+ *         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR,           // sType
+ *         &amp;hypotheticalFeatures,                                      // pNext
  *     };
  * 
  *     // After this call, features and hypotheticalFeatures have been filled out.
@@ -48,14 +48,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     // Enable some features:
  *     VkHypotheticalExtensionFeaturesKHR enabledHypotheticalFeatures =
  *     {
- *         VK_STRUCTURE_TYPE_HYPOTHETICAL_FEATURES_KHR,                            // sType
- *         NULL,                                                                   // pNext
+ *         VK_STRUCTURE_TYPE_HYPOTHETICAL_FEATURES_KHR,                // sType
+ *         NULL,                                                       // pNext
  *     };
  * 
  *     VkPhysicalDeviceFeatures2KHR enabledFeatures =
  *     {
- *         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR,                       // sType
- *         &amp;enabledHypotheticalFeatures,                                           // pNext
+ *         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR,           // sType
+ *         &amp;enabledHypotheticalFeatures,                               // pNext
  *     };
  * 
  *     enabledFeatures.features.xyz = VK_TRUE;
@@ -63,11 +63,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  *     VkDeviceCreateInfo deviceCreateInfo =
  *     {
- *         VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,                                   // sType
- *         &amp;enabledFeatures,                                                       // pNext
+ *         VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,                       // sType
+ *         &amp;enabledFeatures,                                           // pNext
  *         ...
- *         NULL,                                                                   // pEnabledFeatures
- *     }
+ *         NULL,                                                       // pEnabledFeatures
+ *     };
  * 
  *     VkDevice device;
  *     vkCreateDevice(physicalDevice, &amp;deviceCreateInfo, NULL, &amp;device);</code></pre>
@@ -311,7 +311,7 @@ public class KHRGetPhysicalDeviceProperties2 {
     /**
      * See {@link VK11#vkGetPhysicalDeviceSparseImageFormatProperties2 GetPhysicalDeviceSparseImageFormatProperties2}.
      *
-     * @param physicalDevice the physical device from which to query the sparse image capabilities.
+     * @param physicalDevice the physical device from which to query the sparse image format properties.
      * @param pFormatInfo    a pointer to a {@link VkPhysicalDeviceSparseImageFormatInfo2} structure containing input parameters to the command.
      * @param pPropertyCount a pointer to an integer related to the number of sparse format properties available or queried, as described below.
      * @param pProperties    either {@code NULL} or a pointer to an array of {@link VkSparseImageFormatProperties2} structures.

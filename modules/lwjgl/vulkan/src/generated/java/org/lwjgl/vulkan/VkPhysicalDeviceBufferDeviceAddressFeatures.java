@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>See {@link VK12#vkGetBufferDeviceAddress GetBufferDeviceAddress} for more information.</p>
  * 
- * <p>If the {@link VkPhysicalDeviceBufferDeviceAddressFeatures} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether the feature is supported. {@link VkPhysicalDeviceBufferDeviceAddressFeatures} <b>can</b> also be included in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable features.</p>
+ * <p>If the {@link VkPhysicalDeviceBufferDeviceAddressFeatures} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceBufferDeviceAddressFeatures} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -39,8 +39,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceBufferDeviceAddressFeatures {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #bufferDeviceAddress};
  *     VkBool32 {@link #bufferDeviceAddressCaptureReplay};
  *     VkBool32 {@link #bufferDeviceAddressMultiDevice};
@@ -94,10 +94,10 @@ public class VkPhysicalDeviceBufferDeviceAddressFeatures extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** indicates that the implementation supports accessing buffer memory in shaders as storage buffers via an address queried from {@link VK12#vkGetBufferDeviceAddress GetBufferDeviceAddress}. */
@@ -110,9 +110,9 @@ public class VkPhysicalDeviceBufferDeviceAddressFeatures extends Struct implemen
     @NativeType("VkBool32")
     public boolean bufferDeviceAddressMultiDevice() { return nbufferDeviceAddressMultiDevice(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceBufferDeviceAddressFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceBufferDeviceAddressFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #bufferDeviceAddress} field. */
     public VkPhysicalDeviceBufferDeviceAddressFeatures bufferDeviceAddress(@NativeType("VkBool32") boolean value) { nbufferDeviceAddress(address(), value ? 1 : 0); return this; }
@@ -353,10 +353,10 @@ public class VkPhysicalDeviceBufferDeviceAddressFeatures extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceBufferDeviceAddressFeatures#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceBufferDeviceAddressFeatures.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceBufferDeviceAddressFeatures#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceBufferDeviceAddressFeatures.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceBufferDeviceAddressFeatures#bufferDeviceAddress} field. */
@@ -369,9 +369,9 @@ public class VkPhysicalDeviceBufferDeviceAddressFeatures extends Struct implemen
         @NativeType("VkBool32")
         public boolean bufferDeviceAddressMultiDevice() { return VkPhysicalDeviceBufferDeviceAddressFeatures.nbufferDeviceAddressMultiDevice(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceBufferDeviceAddressFeatures#sType} field. */
         public VkPhysicalDeviceBufferDeviceAddressFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceBufferDeviceAddressFeatures.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceBufferDeviceAddressFeatures#pNext} field. */
         public VkPhysicalDeviceBufferDeviceAddressFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceBufferDeviceAddressFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceBufferDeviceAddressFeatures#bufferDeviceAddress} field. */
         public VkPhysicalDeviceBufferDeviceAddressFeatures.Buffer bufferDeviceAddress(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceBufferDeviceAddressFeatures.nbufferDeviceAddress(address(), value ? 1 : 0); return this; }

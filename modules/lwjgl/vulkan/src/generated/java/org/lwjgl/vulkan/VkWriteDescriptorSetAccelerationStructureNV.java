@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying acceleration structure descriptor info.
+ * Structure specifying acceleration structure descriptor information.
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -98,7 +98,7 @@ public class VkWriteDescriptorSetAccelerationStructureNV extends Struct implemen
     /** the number of elements in {@code pAccelerationStructures}. */
     @NativeType("uint32_t")
     public int accelerationStructureCount() { return naccelerationStructureCount(address()); }
-    /** are the acceleration structures to update. */
+    /** a pointer to an array of {@code VkAccelerationStructureNV} structures specifying the acceleration structures to update. */
     @Nullable
     @NativeType("VkAccelerationStructureNV const *")
     public LongBuffer pAccelerationStructures() { return npAccelerationStructures(address()); }

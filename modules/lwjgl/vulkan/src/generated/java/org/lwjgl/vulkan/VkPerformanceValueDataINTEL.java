@@ -31,11 +31,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * union VkPerformanceValueDataINTEL {
- *     uint32_t value32;
- *     uint64_t value64;
- *     float valueFloat;
- *     VkBool32 valueBool;
- *     char const * valueString;
+ *     uint32_t {@link #value32};
+ *     uint64_t {@link #value64};
+ *     float {@link #valueFloat};
+ *     VkBool32 {@link #valueBool};
+ *     char const * {@link #valueString};
  * }</code></pre>
  */
 public class VkPerformanceValueDataINTEL extends Struct implements NativeResource {
@@ -86,33 +86,33 @@ public class VkPerformanceValueDataINTEL extends Struct implements NativeResourc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code value32} field. */
+    /** represents 32-bit integer data. */
     @NativeType("uint32_t")
     public int value32() { return nvalue32(address()); }
-    /** @return the value of the {@code value64} field. */
+    /** represents 64-bit integer data. */
     @NativeType("uint64_t")
     public long value64() { return nvalue64(address()); }
-    /** @return the value of the {@code valueFloat} field. */
+    /** represents floating-point data. */
     public float valueFloat() { return nvalueFloat(address()); }
-    /** @return the value of the {@code valueBool} field. */
+    /** represents {@code Bool32} data. */
     @NativeType("VkBool32")
     public boolean valueBool() { return nvalueBool(address()) != 0; }
-    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code valueString} field. */
+    /** represents a pointer to a null-terminated UTF-8 string. */
     @NativeType("char const *")
     public ByteBuffer valueString() { return nvalueString(address()); }
-    /** @return the null-terminated string pointed to by the {@code valueString} field. */
+    /** represents a pointer to a null-terminated UTF-8 string. */
     @NativeType("char const *")
     public String valueStringString() { return nvalueStringString(address()); }
 
-    /** Sets the specified value to the {@code value32} field. */
+    /** Sets the specified value to the {@link #value32} field. */
     public VkPerformanceValueDataINTEL value32(@NativeType("uint32_t") int value) { nvalue32(address(), value); return this; }
-    /** Sets the specified value to the {@code value64} field. */
+    /** Sets the specified value to the {@link #value64} field. */
     public VkPerformanceValueDataINTEL value64(@NativeType("uint64_t") long value) { nvalue64(address(), value); return this; }
-    /** Sets the specified value to the {@code valueFloat} field. */
+    /** Sets the specified value to the {@link #valueFloat} field. */
     public VkPerformanceValueDataINTEL valueFloat(float value) { nvalueFloat(address(), value); return this; }
-    /** Sets the specified value to the {@code valueBool} field. */
+    /** Sets the specified value to the {@link #valueBool} field. */
     public VkPerformanceValueDataINTEL valueBool(@NativeType("VkBool32") boolean value) { nvalueBool(address(), value ? 1 : 0); return this; }
-    /** Sets the address of the specified encoded string to the {@code valueString} field. */
+    /** Sets the address of the specified encoded string to the {@link #valueString} field. */
     public VkPerformanceValueDataINTEL valueString(@NativeType("char const *") ByteBuffer value) { nvalueString(address(), value); return this; }
 
     /**
@@ -335,33 +335,33 @@ public class VkPerformanceValueDataINTEL extends Struct implements NativeResourc
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code value32} field. */
+        /** @return the value of the {@link VkPerformanceValueDataINTEL#value32} field. */
         @NativeType("uint32_t")
         public int value32() { return VkPerformanceValueDataINTEL.nvalue32(address()); }
-        /** @return the value of the {@code value64} field. */
+        /** @return the value of the {@link VkPerformanceValueDataINTEL#value64} field. */
         @NativeType("uint64_t")
         public long value64() { return VkPerformanceValueDataINTEL.nvalue64(address()); }
-        /** @return the value of the {@code valueFloat} field. */
+        /** @return the value of the {@link VkPerformanceValueDataINTEL#valueFloat} field. */
         public float valueFloat() { return VkPerformanceValueDataINTEL.nvalueFloat(address()); }
-        /** @return the value of the {@code valueBool} field. */
+        /** @return the value of the {@link VkPerformanceValueDataINTEL#valueBool} field. */
         @NativeType("VkBool32")
         public boolean valueBool() { return VkPerformanceValueDataINTEL.nvalueBool(address()) != 0; }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code valueString} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkPerformanceValueDataINTEL#valueString} field. */
         @NativeType("char const *")
         public ByteBuffer valueString() { return VkPerformanceValueDataINTEL.nvalueString(address()); }
-        /** @return the null-terminated string pointed to by the {@code valueString} field. */
+        /** @return the null-terminated string pointed to by the {@link VkPerformanceValueDataINTEL#valueString} field. */
         @NativeType("char const *")
         public String valueStringString() { return VkPerformanceValueDataINTEL.nvalueStringString(address()); }
 
-        /** Sets the specified value to the {@code value32} field. */
+        /** Sets the specified value to the {@link VkPerformanceValueDataINTEL#value32} field. */
         public VkPerformanceValueDataINTEL.Buffer value32(@NativeType("uint32_t") int value) { VkPerformanceValueDataINTEL.nvalue32(address(), value); return this; }
-        /** Sets the specified value to the {@code value64} field. */
+        /** Sets the specified value to the {@link VkPerformanceValueDataINTEL#value64} field. */
         public VkPerformanceValueDataINTEL.Buffer value64(@NativeType("uint64_t") long value) { VkPerformanceValueDataINTEL.nvalue64(address(), value); return this; }
-        /** Sets the specified value to the {@code valueFloat} field. */
+        /** Sets the specified value to the {@link VkPerformanceValueDataINTEL#valueFloat} field. */
         public VkPerformanceValueDataINTEL.Buffer valueFloat(float value) { VkPerformanceValueDataINTEL.nvalueFloat(address(), value); return this; }
-        /** Sets the specified value to the {@code valueBool} field. */
+        /** Sets the specified value to the {@link VkPerformanceValueDataINTEL#valueBool} field. */
         public VkPerformanceValueDataINTEL.Buffer valueBool(@NativeType("VkBool32") boolean value) { VkPerformanceValueDataINTEL.nvalueBool(address(), value ? 1 : 0); return this; }
-        /** Sets the address of the specified encoded string to the {@code valueString} field. */
+        /** Sets the address of the specified encoded string to the {@link VkPerformanceValueDataINTEL#valueString} field. */
         public VkPerformanceValueDataINTEL.Buffer valueString(@NativeType("char const *") ByteBuffer value) { VkPerformanceValueDataINTEL.nvalueString(address(), value); return this; }
 
     }

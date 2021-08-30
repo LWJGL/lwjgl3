@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a draw indexed indirect command.
+ * Structure specifying a indexed indirect drawing command.
  * 
  * <h5>Description</h5>
  * 

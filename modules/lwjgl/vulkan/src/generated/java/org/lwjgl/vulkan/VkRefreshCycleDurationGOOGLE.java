@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure containing the RC duration of a display.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link GOOGLEDisplayTiming#vkGetRefreshCycleDurationGOOGLE GetRefreshCycleDurationGOOGLE}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

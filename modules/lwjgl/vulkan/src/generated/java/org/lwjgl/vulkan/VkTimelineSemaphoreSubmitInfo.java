@@ -102,14 +102,14 @@ public class VkTimelineSemaphoreSubmitInfo extends Struct implements NativeResou
     /** the number of semaphore wait values specified in {@code pWaitSemaphoreValues}. */
     @NativeType("uint32_t")
     public int waitSemaphoreValueCount() { return nwaitSemaphoreValueCount(address()); }
-    /** an array of length {@code waitSemaphoreValueCount} containing values for the corresponding semaphores in {@link VkSubmitInfo}{@code ::pWaitSemaphores} to wait for. */
+    /** a pointer to an array of {@code waitSemaphoreValueCount} values for the corresponding semaphores in {@link VkSubmitInfo}{@code ::pWaitSemaphores} to wait for. */
     @Nullable
     @NativeType("uint64_t const *")
     public LongBuffer pWaitSemaphoreValues() { return npWaitSemaphoreValues(address()); }
     /** the number of semaphore signal values specified in {@code pSignalSemaphoreValues}. */
     @NativeType("uint32_t")
     public int signalSemaphoreValueCount() { return nsignalSemaphoreValueCount(address()); }
-    /** an array of length {@code signalSemaphoreValueCount} containing values for the corresponding semaphores in {@link VkSubmitInfo}{@code ::pSignalSemaphores} to set when signaled. */
+    /** a pointer to an array {@code signalSemaphoreValueCount} values for the corresponding semaphores in {@link VkSubmitInfo}{@code ::pSignalSemaphores} to set when signaled. */
     @Nullable
     @NativeType("uint64_t const *")
     public LongBuffer pSignalSemaphoreValues() { return npSignalSemaphoreValues(address()); }

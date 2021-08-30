@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying a three-dimensional extent.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkBufferImageCopy}, {@link VkBufferImageCopy2KHR}, {@link VkImageCopy}, {@link VkImageCopy2KHR}, {@link VkImageCreateInfo}, {@link VkImageFormatProperties}, {@link VkImageResolve}, {@link VkImageResolve2KHR}, {@link VkQueueFamilyProperties}, {@link VkSparseImageFormatProperties}, {@link VkSparseImageMemoryBind}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

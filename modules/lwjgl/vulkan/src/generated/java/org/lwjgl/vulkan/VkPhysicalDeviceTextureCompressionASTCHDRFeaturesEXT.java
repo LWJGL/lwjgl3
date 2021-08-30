@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT} <b>can</b> also be included in the {@code pNext} chain of {@link VK10#vkCreateDevice CreateDevice} to enable features.</p>
+ * <p>If the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #textureCompressionASTC_HDR};
  * }</code></pre>
  */
@@ -79,10 +79,10 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT extends Struct
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /**
@@ -110,9 +110,9 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT extends Struct
     @NativeType("VkBool32")
     public boolean textureCompressionASTC_HDR() { return ntextureCompressionASTC_HDR(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #textureCompressionASTC_HDR} field. */
     public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT textureCompressionASTC_HDR(@NativeType("VkBool32") boolean value) { ntextureCompressionASTC_HDR(address(), value ? 1 : 0); return this; }
@@ -337,19 +337,19 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT extends Struct
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT#textureCompressionASTC_HDR} field. */
         @NativeType("VkBool32")
         public boolean textureCompressionASTC_HDR() { return VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.ntextureCompressionASTC_HDR(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT#sType} field. */
         public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT#textureCompressionASTC_HDR} field. */
         public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.Buffer textureCompressionASTC_HDR(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.ntextureCompressionASTC_HDR(address(), value ? 1 : 0); return this; }

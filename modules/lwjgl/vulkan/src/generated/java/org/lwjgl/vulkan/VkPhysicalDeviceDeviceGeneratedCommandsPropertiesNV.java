@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing push descriptor limits that can be supported by an implementation.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -137,7 +141,7 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV extends Struct 
     /** @return the value of the {@code minSequencesIndexBufferOffsetAlignment} field. */
     @NativeType("uint32_t")
     public int minSequencesIndexBufferOffsetAlignment() { return nminSequencesIndexBufferOffsetAlignment(address()); }
-    /** the minimum alignment for memory addresses used in {@link VkIndirectCommandsStreamNV} and as preprocess buffer in {@link VkGeneratedCommandsInfoNV}. */
+    /** the minimum alignment for memory addresses used in {@link VkIndirectCommandsStreamNV}, and as preprocess buffer in {@link VkGeneratedCommandsInfoNV}. */
     @NativeType("uint32_t")
     public int minIndirectCommandsBufferOffsetAlignment() { return nminIndirectCommandsBufferOffsetAlignment(address()); }
 

@@ -158,7 +158,7 @@ public class KHRPipelineExecutableProperties {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>When a pipeline is created, its state and shaders are compiled into zero or more device-specific executables, which are used when executing commands against that pipeline. To query the properties of these executables, call:</p>
+     * <p>When a pipeline is created, its state and shaders are compiled into zero or more device-specific executables, which are used when executing commands against that pipeline. To query the properties of these pipeline executables, call:</p>
      * 
      * <pre><code>
      * VkResult vkGetPipelineExecutablePropertiesKHR(
@@ -169,7 +169,7 @@ public class KHRPipelineExecutableProperties {
      * 
      * <h5>Description</h5>
      * 
-     * <p>If {@code pProperties} is {@code NULL}, then the number of executables associated with the pipeline is returned in {@code pExecutableCount}. Otherwise, {@code pExecutableCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If {@code pExecutableCount} is less than the number of executables associated with the pipeline, at most {@code pExecutableCount} structures will be written and {@code vkGetPipelineExecutablePropertiesKHR} will return {@link VK10#VK_INCOMPLETE INCOMPLETE}.</p>
+     * <p>If {@code pProperties} is {@code NULL}, then the number of pipeline executables associated with the pipeline is returned in {@code pExecutableCount}. Otherwise, {@code pExecutableCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If {@code pExecutableCount} is less than the number of pipeline executables associated with the pipeline, at most {@code pExecutableCount} structures will be written, and {@link VK10#VK_INCOMPLETE INCOMPLETE} will be returned instead of {@link VK10#VK_SUCCESS SUCCESS}, to indicate that not all the available properties were returned.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -251,7 +251,7 @@ public class KHRPipelineExecutableProperties {
      * 
      * <h5>Description</h5>
      * 
-     * <p>If {@code pStatistics} is {@code NULL}, then the number of statistics associated with the pipeline executable is returned in {@code pStatisticCount}. Otherwise, {@code pStatisticCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pStatistics} array, and on return the variable is overwritten with the number of structures actually written to {@code pStatistics}. If {@code pStatisticCount} is less than the number of statistics associated with the pipeline executable, at most {@code pStatisticCount} structures will be written and {@code vkGetPipelineExecutableStatisticsKHR} will return {@link VK10#VK_INCOMPLETE INCOMPLETE}.</p>
+     * <p>If {@code pStatistics} is {@code NULL}, then the number of statistics associated with the pipeline executable is returned in {@code pStatisticCount}. Otherwise, {@code pStatisticCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pStatistics} array, and on return the variable is overwritten with the number of structures actually written to {@code pStatistics}. If {@code pStatisticCount} is less than the number of statistics associated with the pipeline executable, at most {@code pStatisticCount} structures will be written, and {@link VK10#VK_INCOMPLETE INCOMPLETE} will be returned instead of {@link VK10#VK_SUCCESS SUCCESS}, to indicate that not all the available statistics were returned.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -323,7 +323,7 @@ public class KHRPipelineExecutableProperties {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>Each pipeline executable <b>may</b> have one or more text or binary internal representations associated with it which are generated as part of the compile process. These <b>may</b> include the final shader assembly, a binary form of the compiled shader, or the shader compiler's internal representation at any number of intermediate compile steps. To query the internal representations associated with a pipeline executable, call:</p>
+     * <p>Each pipeline executable <b>may</b> have one or more text or binary internal representations associated with it which are generated as part of the compile process. These <b>may</b> include the final shader assembly, a binary form of the compiled shader, or the shader compiler’s internal representation at any number of intermediate compile steps. To query the internal representations associated with a pipeline executable, call:</p>
      * 
      * <pre><code>
      * VkResult vkGetPipelineExecutableInternalRepresentationsKHR(
@@ -334,9 +334,9 @@ public class KHRPipelineExecutableProperties {
      * 
      * <h5>Description</h5>
      * 
-     * <p>If {@code pInternalRepresentations} is {@code NULL}, then the number of internal representations associated with the pipeline executable is returned in {@code pInternalRepresentationCount}. Otherwise, {@code pInternalRepresentationCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pInternalRepresentations} array, and on return the variable is overwritten with the number of structures actually written to {@code pInternalRepresentations}. If {@code pInternalRepresentationCount} is less than the number of internal representations associated with the pipeline executable, at most {@code pInternalRepresentationCount} structures will be written and {@code vkGetPipelineExecutableInternalRepresentationsKHR} will return {@link VK10#VK_INCOMPLETE INCOMPLETE}.</p>
+     * <p>If {@code pInternalRepresentations} is {@code NULL}, then the number of internal representations associated with the pipeline executable is returned in {@code pInternalRepresentationCount}. Otherwise, {@code pInternalRepresentationCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pInternalRepresentations} array, and on return the variable is overwritten with the number of structures actually written to {@code pInternalRepresentations}. If {@code pInternalRepresentationCount} is less than the number of internal representations associated with the pipeline executable, at most {@code pInternalRepresentationCount} structures will be written, and {@link VK10#VK_INCOMPLETE INCOMPLETE} will be returned instead of {@link VK10#VK_SUCCESS SUCCESS}, to indicate that not all the available representations were returned.</p>
      * 
-     * <p>While the details of the internal representations remain implementation dependent, the implementation <b>should</b> order the internal representations in the order in which they occur in the compile pipeline with the final shader assembly (if any) last.</p>
+     * <p>While the details of the internal representations remain implementation-dependent, the implementation <b>should</b> order the internal representations in the order in which they occur in the compiled pipeline with the final shader assembly (if any) last.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

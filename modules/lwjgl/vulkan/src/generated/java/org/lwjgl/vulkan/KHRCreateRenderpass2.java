@@ -63,13 +63,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h5>Other Extension Metadata</h5>
  * 
  * <dl>
- * <dt>Last Modified Date</dt>
+ * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-02-07</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>Promoted to Vulkan 1.2 Core</li>
  * </ul></dd>
- * <dt>Contributors</dt>
+ * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Tobias Hector</li>
  * <li>Jeff Bolz</li>

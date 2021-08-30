@@ -120,7 +120,7 @@ public class VkPhysicalDeviceSparseImageFormatInfo2 extends Struct implements Na
     /** the dimensionality of image. */
     @NativeType("VkImageType")
     public int type() { return ntype(address()); }
-    /** the number of samples per texel as defined in {@code VkSampleCountFlagBits}. */
+    /** a {@code VkSampleCountFlagBits} value specifying the number of samples per texel. */
     @NativeType("VkSampleCountFlagBits")
     public int samples() { return nsamples(address()); }
     /** a bitmask describing the intended usage of the image. */

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying descriptor buffer info.
+ * Structure specifying descriptor buffer information.
  * 
  * <h5>Description</h5>
  * 

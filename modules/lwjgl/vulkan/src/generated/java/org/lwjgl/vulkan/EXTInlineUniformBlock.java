@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension introduces the ability to back uniform blocks directly with descriptor sets by storing inline uniform data within descriptor pool storage. Compared to push constants this new construct allows uniform data to be reused across multiple disjoint sets of draw or dispatch commands and <b>may</b> enable uniform data to be accessed with less indirections compared to uniforms backed by buffer memory.
+ * This extension introduces the ability to back uniform blocks directly with descriptor sets by storing inline uniform data within descriptor pool storage. Compared to push constants this new construct allows uniform data to be reused across multiple disjoint sets of drawing or dispatching commands and <b>may</b> enable uniform data to be accessed with fewer indirections compared to uniforms backed by buffer memory.
  * 
  * <h5>VK_EXT_inline_uniform_block</h5>
  * 

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * return structure for queue family checkpoint info query.
+ * return structure for queue family checkpoint information query.
  * 
  * <h5>Description</h5>
  * 

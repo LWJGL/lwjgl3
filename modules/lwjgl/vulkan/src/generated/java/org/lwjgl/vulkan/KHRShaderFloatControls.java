@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * The {@code VK_KHR_shader_float_controls} extension enables efficient use of floating-point computations through the ability to query and override the implementation's default behavior for rounding modes, denormals, signed zero, and infinity.
+ * The {@code VK_KHR_shader_float_controls} extension enables efficient use of floating-point computations through the ability to query and override the implementation’s default behavior for rounding modes, denormals, signed zero, and infinity.
  * 
  * <h5>Promotion to Vulkan 1.2</h5>
  * 

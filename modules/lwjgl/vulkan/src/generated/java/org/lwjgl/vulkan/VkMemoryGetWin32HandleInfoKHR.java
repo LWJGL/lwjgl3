@@ -107,7 +107,7 @@ public class VkMemoryGetWin32HandleInfoKHR extends Struct implements NativeResou
     /** the memory object from which the handle will be exported. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** the type of handle requested. */
+    /** a {@code VkExternalMemoryHandleTypeFlagBits} value specifying the type of handle requested. */
     @NativeType("VkExternalMemoryHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
 

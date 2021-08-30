@@ -22,6 +22,10 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <h5>Description</h5>
  * 
+ * <p>If the {@link VkPhysicalDeviceVulkan12Properties} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
+ * 
+ * <p>These properties correspond to Vulkan 1.2 functionality.</p>
+ * 
  * <p>The members of {@link VkPhysicalDeviceVulkan12Properties} <b>must</b> have the same values as the corresponding members of {@link VkPhysicalDeviceDriverProperties}, {@link VkPhysicalDeviceFloatControlsProperties}, {@link VkPhysicalDeviceDescriptorIndexingProperties}, {@link VkPhysicalDeviceDepthStencilResolveProperties}, {@link VkPhysicalDeviceSamplerFilterMinmaxProperties}, and {@link VkPhysicalDeviceTimelineSemaphoreProperties}.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -38,8 +42,8 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceVulkan12Properties {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkDriverId {@link #driverID};
  *     char {@link #driverName}[VK_MAX_DRIVER_NAME_SIZE];
  *     char {@link #driverInfo}[VK_MAX_DRIVER_INFO_SIZE];
@@ -289,10 +293,10 @@ public class VkPhysicalDeviceVulkan12Properties extends Struct implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** a unique identifier for the driver of the physical device. */
@@ -457,9 +461,9 @@ public class VkPhysicalDeviceVulkan12Properties extends Struct implements Native
     @NativeType("VkSampleCountFlags")
     public int framebufferIntegerColorSampleCounts() { return nframebufferIntegerColorSampleCounts(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceVulkan12Properties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceVulkan12Properties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -784,10 +788,10 @@ public class VkPhysicalDeviceVulkan12Properties extends Struct implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceVulkan12Properties.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceVulkan12Properties.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceVulkan12Properties#driverID} field. */
@@ -952,9 +956,9 @@ public class VkPhysicalDeviceVulkan12Properties extends Struct implements Native
         @NativeType("VkSampleCountFlags")
         public int framebufferIntegerColorSampleCounts() { return VkPhysicalDeviceVulkan12Properties.nframebufferIntegerColorSampleCounts(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan12Properties#sType} field. */
         public VkPhysicalDeviceVulkan12Properties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVulkan12Properties.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan12Properties#pNext} field. */
         public VkPhysicalDeviceVulkan12Properties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVulkan12Properties.npNext(address(), value); return this; }
 
     }

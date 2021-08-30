@@ -149,16 +149,16 @@ public class VkImportSemaphoreWin32HandleInfoKHR extends Struct implements Nativ
     /** a bitmask of {@code VkSemaphoreImportFlagBits} specifying additional parameters for the semaphore payload import operation. */
     @NativeType("VkSemaphoreImportFlags")
     public int flags() { return nflags(address()); }
-    /** specifies the type of {@code handle}. */
+    /** a {@code VkExternalSemaphoreHandleTypeFlagBits} value specifying the type of {@code handle}. */
     @NativeType("VkExternalSemaphoreHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
-    /** the external handle to import, or {@code NULL}. */
+    /** {@code NULL} or the external handle to import. */
     @NativeType("HANDLE")
     public long handle() { return nhandle(address()); }
-    /** a null-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}. */
+    /** {@code NULL} or a null-terminated UTF-16 string naming the underlying synchronization primitive to import. */
     @NativeType("LPCWSTR")
     public ByteBuffer name() { return nname(address()); }
-    /** a null-terminated UTF-16 string naming the underlying synchronization primitive to import, or {@code NULL}. */
+    /** {@code NULL} or a null-terminated UTF-16 string naming the underlying synchronization primitive to import. */
     @NativeType("LPCWSTR")
     public String nameString() { return nnameString(address()); }
 

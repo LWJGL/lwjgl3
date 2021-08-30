@@ -21,9 +21,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The {@code i}<sup>th</sup> member of {@code pPlaneLayouts} describes the layout of the image's {@code i}<sup>th</sup> <em>memory plane</em> (that is, {@code VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT}). In each element of {@code pPlaneLayouts}, the implementation <b>must</b> ignore {@code size}. The implementation calculates the size of each plane, which the application <b>can</b> query with {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout}.</p>
+ * <p>The {@code i}<sup>th</sup> member of {@code pPlaneLayouts} describes the layout of the image’s {@code i}<sup>th</sup> <em>memory plane</em> (that is, {@code VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT}). In each element of {@code pPlaneLayouts}, the implementation <b>must</b> ignore {@code size}. The implementation calculates the size of each plane, which the application <b>can</b> query with {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout}.</p>
  * 
- * <p>When creating an image with {@link VkImageDrmFormatModifierExplicitCreateInfoEXT}, it is the application's responsibility to satisfy all valid usage requirements. However, the implementation <b>must</b> validate that the provided {@code pPlaneLayouts}, when combined with the provided {@code drmFormatModifier} and other creation parameters in {@link VkImageCreateInfo} and its {@code pNext} chain, produce a valid image. (This validation is necessarily implementation-dependent and outside the scope of Vulkan, and therefore not described by valid usage requirements). If this validation fails, then {@link VK10#vkCreateImage CreateImage} returns {@link EXTImageDrmFormatModifier#VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT}.</p>
+ * <p>When creating an image with {@link VkImageDrmFormatModifierExplicitCreateInfoEXT}, it is the application’s responsibility to satisfy all valid usage requirements. However, the implementation <b>must</b> validate that the provided {@code pPlaneLayouts}, when combined with the provided {@code drmFormatModifier} and other creation parameters in {@link VkImageCreateInfo} and its {@code pNext} chain, produce a valid image. (This validation is necessarily implementation-dependent and outside the scope of Vulkan, and therefore not described by valid usage requirements). If this validation fails, then {@link VK10#vkCreateImage CreateImage} returns {@link EXTImageDrmFormatModifier#VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code drmFormatModifierPlaneCount} <b>must</b> be equal to the {@link VkDrmFormatModifierPropertiesEXT}{@code ::drmFormatModifierPlaneCount} associated with {@link VkImageCreateInfo}{@code ::format} and {@code drmFormatModifier}, as found by querying {@link VkDrmFormatModifierPropertiesListEXT}</li>
  * <li>For each element of {@code pPlaneLayouts}, {@code size} <b>must</b> be 0</li>
  * <li>For each element of {@code pPlaneLayouts}, {@code arrayPitch} <b>must</b> be 0 if {@link VkImageCreateInfo}{@code ::arrayLayers} is 1</li>
- * <li>For each element of {@code pPlaneLayouts}, {@code depthPitch} <b>must</b> be 0 if {@link VkImageCreateInfo}{@code ::extent}.depth is 1</li>
+ * <li>For each element of {@code pPlaneLayouts}, {@code depthPitch} <b>must</b> be 0 if {@link VkImageCreateInfo}{@code ::extent.depth} is 1</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -117,7 +117,7 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct implem
     /** the number of <em>memory planes</em> in the image (as reported by {@link VkDrmFormatModifierPropertiesEXT}) as well as the length of the {@code pPlaneLayouts} array. */
     @NativeType("uint32_t")
     public int drmFormatModifierPlaneCount() { return ndrmFormatModifierPlaneCount(address()); }
-    /** a pointer to an array of {@link VkSubresourceLayout} structures describing the image&#8217;s <em>memory planes</em>. */
+    /** a pointer to an array of {@link VkSubresourceLayout} structures describing the image’s <em>memory planes</em>. */
     @Nullable
     @NativeType("VkSubresourceLayout const *")
     public VkSubresourceLayout.Buffer pPlaneLayouts() { return npPlaneLayouts(address()); }

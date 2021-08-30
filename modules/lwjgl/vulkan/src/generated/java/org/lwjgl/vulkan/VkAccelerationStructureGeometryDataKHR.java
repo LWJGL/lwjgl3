@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Union specifying acceleration structure geometry data.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkAccelerationStructureGeometryAabbsDataKHR}, {@link VkAccelerationStructureGeometryInstancesDataKHR}, {@link VkAccelerationStructureGeometryKHR}, {@link VkAccelerationStructureGeometryTrianglesDataKHR}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

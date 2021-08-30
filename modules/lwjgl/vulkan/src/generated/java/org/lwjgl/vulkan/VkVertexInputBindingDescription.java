@@ -23,6 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code binding} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputBindings}</li>
  * <li>{@code stride} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputBindingStride}</li>
+ * <li>If the {@link KHRPortabilitySubset VK_KHR_portability_subset} extension is enabled, {@code stride} <b>must</b> be a multiple of, and at least as large as, {@link VkPhysicalDevicePortabilitySubsetPropertiesKHR}{@code ::minVertexInputBindingStrideAlignment}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -89,7 +90,7 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
     /** the binding number that this structure describes. */
     @NativeType("uint32_t")
     public int binding() { return nbinding(address()); }
-    /** the distance in bytes between two consecutive elements within the buffer. */
+    /** the byte stride between consecutive elements within the buffer. */
     @NativeType("uint32_t")
     public int stride() { return nstride(address()); }
     /** a {@code VkVertexInputRate} value specifying whether vertex attribute addressing is a function of the vertex index or of the instance index. */

@@ -78,7 +78,7 @@ public class VkPresentRegionKHR extends Struct implements NativeResource {
     /** the number of rectangles in {@code pRectangles}, or zero if the entire image has changed and should be presented. */
     @NativeType("uint32_t")
     public int rectangleCount() { return nrectangleCount(address()); }
-    /** either {@code NULL} or a pointer to an array of {@link VkRectLayerKHR} structures. The {@link VkRectLayerKHR} structure is the framebuffer coordinates, plus layer, of a portion of a presentable image that has changed and <b>must</b> be presented. If non-{@code NULL}, each entry in {@code pRectangles} is a rectangle of the given image that has changed since the last image was presented to the given swapchain. */
+    /** either {@code NULL} or a pointer to an array of {@link VkRectLayerKHR} structures. The {@link VkRectLayerKHR} structure is the framebuffer coordinates, plus layer, of a portion of a presentable image that has changed and <b>must</b> be presented. If non-{@code NULL}, each entry in {@code pRectangles} is a rectangle of the given image that has changed since the last image was presented to the given swapchain. The rectangles <b>must</b> be specified relative to {@link VkSurfaceCapabilitiesKHR}{@code ::currentTransform}, regardless of the swapchain’s {@code preTransform}. The presentation engine will apply the {@code preTransform} transformation to the rectangles, along with any further transformation it applies to the image content. */
     @Nullable
     @NativeType("VkRectLayerKHR const *")
     public VkRectLayerKHR.Buffer pRectangles() { return npRectangles(address()); }

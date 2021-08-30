@@ -22,7 +22,9 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@code pData} is {@code NULL}, then the size, in bytes, of the internal representation data is returned in {@code dataSize}. Otherwise, {@code dataSize} must be the size of the buffer, in bytes, pointed to by {@code pData} and on return {@code dataSize} is overwritten with the number of bytes of data actually written to {@code pData} including any trailing null character. If {@code dataSize} is less than the size, in bytes, of the internal representation data, at most {@code dataSize} bytes of data will be written to {@code pData} and {@code vkGetPipelineExecutableInternalRepresentationsKHR} will return {@link VK10#VK_INCOMPLETE INCOMPLETE}. If {@code isText} is {@link VK10#VK_TRUE TRUE} and {@code pData} is not {@code NULL} and {@code dataSize} is not zero, the last byte written to {@code pData} will be a null character.</p>
+ * <p>If {@code pData} is {@code NULL}, then the size, in bytes, of the internal representation data is returned in {@code dataSize}. Otherwise, {@code dataSize} must be the size of the buffer, in bytes, pointed to by {@code pData} and on return {@code dataSize} is overwritten with the number of bytes of data actually written to {@code pData} including any trailing null character. If {@code dataSize} is less than the size, in bytes, of the internal representation’s data, at most {@code dataSize} bytes of data will be written to {@code pData}, and {@link VK10#VK_INCOMPLETE INCOMPLETE} will be returned instead of {@link VK10#VK_SUCCESS SUCCESS}, to indicate that not all the available representation was returned.</p>
+ * 
+ * <p>If {@code isText} is {@link VK10#VK_TRUE TRUE} and {@code pData} is not {@code NULL} and {@code dataSize} is not zero, the last byte written to {@code pData} will be a null character.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -123,10 +125,10 @@ public class VkPipelineExecutableInternalRepresentationKHR extends Struct implem
     /** specifies whether the returned data is text or opaque data. If {@code isText} is {@link VK10#VK_TRUE TRUE} then the data returned in {@code pData} is text and is guaranteed to be a null-terminated UTF-8 string. */
     @NativeType("VkBool32")
     public boolean isText() { return nisText(address()) != 0; }
-    /** an integer related to the size, in bytes, of the internal representation data, as described below. */
+    /** an integer related to the size, in bytes, of the internal representation’s data, as described below. */
     @NativeType("size_t")
     public long dataSize() { return ndataSize(address()); }
-    /** either {@code NULL} or a pointer to an block of data into which the implementation will write the textual form of the internal representation. */
+    /** either {@code NULL} or a pointer to a block of data into which the implementation will write the internal representation. */
     @Nullable
     @NativeType("void *")
     public ByteBuffer pData() { return npData(address()); }

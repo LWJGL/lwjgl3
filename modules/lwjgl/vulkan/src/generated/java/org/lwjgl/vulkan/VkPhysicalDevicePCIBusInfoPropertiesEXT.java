@@ -18,6 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure containing PCI bus information of a physical device.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkPhysicalDevicePCIBusInfoPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
+ * 
+ * <p>These are properties of the PCI bus information of a physical device.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

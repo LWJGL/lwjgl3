@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-footprint">Texel Footprint Evaluation</a> for more information.</p>
  * 
- * <p>If the {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} <b>can</b> also be included in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable features.</p>
+ * <p>If the {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -34,8 +34,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderImageFootprintFeaturesNV {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #imageFootprint};
  * }</code></pre>
  */
@@ -81,19 +81,19 @@ public class VkPhysicalDeviceShaderImageFootprintFeaturesNV extends Struct imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** specifies whether the implementation supports the {@code ImageFootprintNV} SPIR-V capability. */
     @NativeType("VkBool32")
     public boolean imageFootprint() { return nimageFootprint(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderImageFootprintFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderImageFootprintFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #imageFootprint} field. */
     public VkPhysicalDeviceShaderImageFootprintFeaturesNV imageFootprint(@NativeType("VkBool32") boolean value) { nimageFootprint(address(), value ? 1 : 0); return this; }
@@ -318,19 +318,19 @@ public class VkPhysicalDeviceShaderImageFootprintFeaturesNV extends Struct imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderImageFootprintFeaturesNV.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderImageFootprintFeaturesNV.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV#imageFootprint} field. */
         @NativeType("VkBool32")
         public boolean imageFootprint() { return VkPhysicalDeviceShaderImageFootprintFeaturesNV.nimageFootprint(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV#sType} field. */
         public VkPhysicalDeviceShaderImageFootprintFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderImageFootprintFeaturesNV.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV#pNext} field. */
         public VkPhysicalDeviceShaderImageFootprintFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderImageFootprintFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV#imageFootprint} field. */
         public VkPhysicalDeviceShaderImageFootprintFeaturesNV.Buffer imageFootprint(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderImageFootprintFeaturesNV.nimageFootprint(address(), value ? 1 : 0); return this; }

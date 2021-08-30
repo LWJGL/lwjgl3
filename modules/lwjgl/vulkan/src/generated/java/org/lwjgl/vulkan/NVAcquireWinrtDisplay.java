@@ -14,9 +14,9 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * This extension allows an application to take exclusive control of a display on Windows 10 provided that the display is not already controlled by a compositor. Examples of compositors include the Windows desktop compositor, other applications using this Vulkan extension, and applications that <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaymanager.tryacquiretarget">"{@code Acquire}"</a> a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">"{@code DisplayTarget}"</a> using a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/">"{@code WinRT}"</a> command such as <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaymanager.tryacquiretarget">"{@code winrt::Windows::Devices::Display::Core::DisplayManager.TryAcquireTarget()}"</a>.
+ * This extension allows an application to take exclusive control of a display on Windows 10 provided that the display is not already controlled by a compositor. Examples of compositors include the Windows desktop compositor, other applications using this Vulkan extension, and applications that <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaymanager.tryacquiretarget">“{@code Acquire}”</a> a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">“{@code DisplayTarget}”</a> using a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/">“{@code WinRT}”</a> command such as <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaymanager.tryacquiretarget">“{@code winrt::Windows::Devices::Display::Core::DisplayManager.TryAcquireTarget()}”</a>.
  * 
- * <p>When control is acquired the application has exclusive access to the display until control is released or the application terminates. An application's attempt to acquire is denied if a different application has already acquired the display.</p>
+ * <p>When control is acquired the application has exclusive access to the display until control is released or the application terminates. An application’s attempt to acquire is denied if a different application has already acquired the display.</p>
  * 
  * <h5>VK_NV_acquire_winrt_display</h5>
  * 
@@ -85,7 +85,7 @@ public class NVAcquireWinrtDisplay {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>The Vulkan instance acquires control of a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">"{@code winrt::Windows::Devices::Display::Core::DisplayTarget}"</a> by performing an operation equivalent to <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaymanager.tryacquiretarget">"{@code winrt::Windows::Devices::Display::Core::DisplayManager.TryAcquireTarget()}"</a> on the "{@code DisplayTarget}".</p>
+     * <p>The Vulkan instance acquires control of a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">“{@code winrt::Windows::Devices::Display::Core::DisplayTarget}”</a> by performing an operation equivalent to <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaymanager.tryacquiretarget">“{@code winrt::Windows::Devices::Display::Core::DisplayManager.TryAcquireTarget()}”</a> on the “{@code DisplayTarget}”.</p>
      * </div>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -95,7 +95,7 @@ public class NVAcquireWinrtDisplay {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>One example of when a display has already been acquired by another entity is when the Windows desktop compositor (DWM) is in control of the display. Beginning with Windows 10 version 2004 it is possible to cause DWM to release a display by using the "{@code Advanced display settings}" sub-page of the "{@code Display settings}" control panel. {@link #vkAcquireWinrtDisplayNV AcquireWinrtDisplayNV} does not itself cause DWM to release a display; this action must be performed outside of Vulkan.</p>
+     * <p>One example of when a display has already been acquired by another entity is when the Windows desktop compositor (DWM) is in control of the display. Beginning with Windows 10 version 2004 it is possible to cause DWM to release a display by using the “{@code Advanced display settings}” sub-page of the “{@code Display settings}” control panel. {@link #vkAcquireWinrtDisplayNV AcquireWinrtDisplayNV} does not itself cause DWM to release a display; this action must be performed outside of Vulkan.</p>
      * </div>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -151,7 +151,7 @@ public class NVAcquireWinrtDisplay {
      * 
      * <p>When acquiring displays on Windows 10, an application may also wish to enumerate and identify them using a native handle rather than a {@code VkDisplayKHR} handle.</p>
      * 
-     * <p>To determine the {@code VkDisplayKHR} handle corresponding to a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">"{@code winrt::Windows::Devices::Display::Core::DisplayTarget}"</a>, call:</p>
+     * <p>To determine the {@code VkDisplayKHR} handle corresponding to a <a target="_blank" href="https://docs.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaytarget">“{@code winrt::Windows::Devices::Display::Core::DisplayTarget}”</a>, call:</p>
      * 
      * <pre><code>
      * VkResult vkGetWinrtDisplayNV(

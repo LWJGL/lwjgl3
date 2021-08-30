@@ -84,7 +84,7 @@ public class EXTHdrMetadata {
     }
 
     /**
-     * function to set Hdr metadata.
+     * Set Hdr metadata.
      * 
      * <h5>C Specification</h5>
      * 

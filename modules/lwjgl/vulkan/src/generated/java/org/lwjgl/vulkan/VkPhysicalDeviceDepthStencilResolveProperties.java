@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing depth/stencil resolve properties that can be supported by an implementation.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkPhysicalDeviceDepthStencilResolveProperties} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -28,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceDepthStencilResolveProperties {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkResolveModeFlags {@link #supportedDepthResolveModes};
  *     VkResolveModeFlags {@link #supportedStencilResolveModes};
  *     VkBool32 {@link #independentResolveNone};
@@ -87,10 +91,10 @@ public class VkPhysicalDeviceDepthStencilResolveProperties extends Struct implem
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** a bitmask of {@code VkResolveModeFlagBits} indicating the set of supported depth resolve modes. {@link VK12#VK_RESOLVE_MODE_SAMPLE_ZERO_BIT RESOLVE_MODE_SAMPLE_ZERO_BIT} <b>must</b> be included in the set but implementations <b>may</b> support additional modes. */
@@ -106,9 +110,9 @@ public class VkPhysicalDeviceDepthStencilResolveProperties extends Struct implem
     @NativeType("VkBool32")
     public boolean independentResolve() { return nindependentResolve(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceDepthStencilResolveProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceDepthStencilResolveProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -333,10 +337,10 @@ public class VkPhysicalDeviceDepthStencilResolveProperties extends Struct implem
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDepthStencilResolveProperties#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDepthStencilResolveProperties.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDepthStencilResolveProperties#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDepthStencilResolveProperties.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceDepthStencilResolveProperties#supportedDepthResolveModes} field. */
@@ -352,9 +356,9 @@ public class VkPhysicalDeviceDepthStencilResolveProperties extends Struct implem
         @NativeType("VkBool32")
         public boolean independentResolve() { return VkPhysicalDeviceDepthStencilResolveProperties.nindependentResolve(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDepthStencilResolveProperties#sType} field. */
         public VkPhysicalDeviceDepthStencilResolveProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDepthStencilResolveProperties.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDepthStencilResolveProperties#pNext} field. */
         public VkPhysicalDeviceDepthStencilResolveProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDepthStencilResolveProperties.npNext(address(), value); return this; }
 
     }

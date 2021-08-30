@@ -107,10 +107,10 @@ public class VkQueryPoolPerformanceCreateInfoKHR extends Struct implements Nativ
     /** the queue family index to create this performance query pool for. */
     @NativeType("uint32_t")
     public int queueFamilyIndex() { return nqueueFamilyIndex(address()); }
-    /** size of the {@code pCounterIndices} array. */
+    /** the length of the {@code pCounterIndices} array. */
     @NativeType("uint32_t")
     public int counterIndexCount() { return ncounterIndexCount(address()); }
-    /** the array of indices into the {@link KHRPerformanceQuery#vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR EnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR}{@code ::pCounters} to enable in this performance query pool. */
+    /** a pointer to an array of indices into the {@link KHRPerformanceQuery#vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR EnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR}{@code ::pCounters} to enable in this performance query pool. */
     @NativeType("uint32_t const *")
     public IntBuffer pCounterIndices() { return npCounterIndices(address()); }
 

@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying sparse image format properties.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkExtent3D}, {@link VkSparseImageFormatProperties2}, {@link VkSparseImageMemoryRequirements}, {@link VK10#vkGetPhysicalDeviceSparseImageFormatProperties GetPhysicalDeviceSparseImageFormatProperties}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether the feature is supported. {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL} <b>can</b> also be included in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable features.</p>
+ * <p>If the {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #shaderIntegerFunctions2};
  * }</code></pre>
  */
@@ -79,19 +79,19 @@ public class VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL extends Struct
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** indicates that the implementation supports the {@code IntegerFunctions2INTEL} SPIR-V capability. */
     @NativeType("VkBool32")
     public boolean shaderIntegerFunctions2() { return nshaderIntegerFunctions2(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderIntegerFunctions2} field. */
     public VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL shaderIntegerFunctions2(@NativeType("VkBool32") boolean value) { nshaderIntegerFunctions2(address(), value ? 1 : 0); return this; }
@@ -316,19 +316,19 @@ public class VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL extends Struct
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL#shaderIntegerFunctions2} field. */
         @NativeType("VkBool32")
         public boolean shaderIntegerFunctions2() { return VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.nshaderIntegerFunctions2(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL#sType} field. */
         public VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL#pNext} field. */
         public VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL#shaderIntegerFunctions2} field. */
         public VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.Buffer shaderIntegerFunctions2(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.nshaderIntegerFunctions2(address(), value ? 1 : 0); return this; }

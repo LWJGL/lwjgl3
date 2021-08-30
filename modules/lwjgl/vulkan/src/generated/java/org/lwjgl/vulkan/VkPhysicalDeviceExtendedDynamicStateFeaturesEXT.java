@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether the feature is supported. {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable features.</p>
+ * <p>If the {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceExtendedDynamicStateFeaturesEXT {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #extendedDynamicState};
  * }</code></pre>
  */
@@ -79,10 +79,10 @@ public class VkPhysicalDeviceExtendedDynamicStateFeaturesEXT extends Struct impl
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /**
@@ -106,9 +106,9 @@ public class VkPhysicalDeviceExtendedDynamicStateFeaturesEXT extends Struct impl
     @NativeType("VkBool32")
     public boolean extendedDynamicState() { return nextendedDynamicState(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceExtendedDynamicStateFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceExtendedDynamicStateFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #extendedDynamicState} field. */
     public VkPhysicalDeviceExtendedDynamicStateFeaturesEXT extendedDynamicState(@NativeType("VkBool32") boolean value) { nextendedDynamicState(address(), value ? 1 : 0); return this; }
@@ -333,19 +333,19 @@ public class VkPhysicalDeviceExtendedDynamicStateFeaturesEXT extends Struct impl
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT#extendedDynamicState} field. */
         @NativeType("VkBool32")
         public boolean extendedDynamicState() { return VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.nextendedDynamicState(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT#sType} field. */
         public VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT#extendedDynamicState} field. */
         public VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.Buffer extendedDynamicState(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.nextendedDynamicState(address(), value ? 1 : 0); return this; }

@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying subpass begin info.
+ * Structure specifying subpass begin information.
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

@@ -21,6 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
+ * <li>The source memory pointed to by {@code src} <b>must</b> contain data previously serialized using {@link KHRAccelerationStructure#vkCmdCopyAccelerationStructureToMemoryKHR CmdCopyAccelerationStructureToMemoryKHR}, potentially modified to relocate acceleration structure references as described in that command</li>
  * <li>{@code mode} <b>must</b> be {@link KHRAccelerationStructure#VK_COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR}</li>
  * <li>The data in {@code src} <b>must</b> have a format compatible with the destination physical device as returned by {@link KHRAccelerationStructure#vkGetDeviceAccelerationStructureCompatibilityKHR GetDeviceAccelerationStructureCompatibilityKHR}</li>
  * <li>{@code dst} <b>must</b> have been created with a {@code size} greater than or equal to that used to serialize the data in {@code src}</li>

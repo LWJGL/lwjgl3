@@ -16,7 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * structure to specify X,Y chromaticity coordinates.
+ * Specify X,Y chromaticity coordinates.
+ * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkHdrMetadataEXT}</p>
  * 
  * <h3>Layout</h3>
  * 

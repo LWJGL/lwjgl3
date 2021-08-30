@@ -88,13 +88,13 @@ public class VkCheckpointDataNV extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates which pipeline stage the checkpoint marker data refers to. */
+    /** a {@code VkPipelineStageFlagBits} value specifying which pipeline stage the checkpoint marker data refers to. */
     @NativeType("VkPipelineStageFlagBits")
     public int stage() { return nstage(address()); }
     /** contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to. */

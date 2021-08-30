@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with a value indicating whether the feature is supported. {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the feature.</p>
+ * <p>If the {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceDeviceMemoryReportFeaturesEXT {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #deviceMemoryReport};
  * }</code></pre>
  */
@@ -79,19 +79,19 @@ public class VkPhysicalDeviceDeviceMemoryReportFeaturesEXT extends Struct implem
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** indicates whether the implementation supports the ability to register device memory report callbacks. */
     @NativeType("VkBool32")
     public boolean deviceMemoryReport() { return ndeviceMemoryReport(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceDeviceMemoryReportFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceDeviceMemoryReportFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #deviceMemoryReport} field. */
     public VkPhysicalDeviceDeviceMemoryReportFeaturesEXT deviceMemoryReport(@NativeType("VkBool32") boolean value) { ndeviceMemoryReport(address(), value ? 1 : 0); return this; }
@@ -316,19 +316,19 @@ public class VkPhysicalDeviceDeviceMemoryReportFeaturesEXT extends Struct implem
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT#deviceMemoryReport} field. */
         @NativeType("VkBool32")
         public boolean deviceMemoryReport() { return VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.ndeviceMemoryReport(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT#sType} field. */
         public VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT#deviceMemoryReport} field. */
         public VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.Buffer deviceMemoryReport(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.ndeviceMemoryReport(address(), value ? 1 : 0); return this; }

@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>For each {@code VkDebugReportCallbackEXT} that is created the {@link VkDebugReportCallbackCreateInfoEXT}{@code ::flags} determine when that {@link VkDebugReportCallbackCreateInfoEXT}{@code ::pfnCallback} is called. When an event happens, the implementation will do a bitwise AND of the event's {@code VkDebugReportFlagBitsEXT} flags to each {@code VkDebugReportCallbackEXT} object's flags. For each non-zero result the corresponding callback will be called. The callback will come directly from the component that detected the event, unless some other layer intercepts the calls for its own purposes (filter them in a different way, log to a system error log, etc.).</p>
+ * <p>For each {@code VkDebugReportCallbackEXT} that is created the {@link VkDebugReportCallbackCreateInfoEXT}{@code ::flags} determine when that {@link VkDebugReportCallbackCreateInfoEXT}{@code ::pfnCallback} is called. When an event happens, the implementation will do a bitwise AND of the event’s {@code VkDebugReportFlagBitsEXT} flags to each {@code VkDebugReportCallbackEXT} object’s flags. For each non-zero result the corresponding callback will be called. The callback will come directly from the component that detected the event, unless some other layer intercepts the calls for its own purposes (filter them in a different way, log to a system error log, etc.).</p>
  * 
  * <p>An application <b>may</b> receive multiple callbacks if multiple {@code VkDebugReportCallbackEXT} objects were created. A callback will always be executed in the same thread as the originating Vulkan call.</p>
  * 

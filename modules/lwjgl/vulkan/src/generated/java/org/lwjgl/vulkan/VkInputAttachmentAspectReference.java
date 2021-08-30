@@ -18,6 +18,15 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying a subpass/input attachment pair and an aspect mask that <b>can</b> be read.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>This structure specifies an aspect mask for a specific input attachment of a specific subpass in the render pass.</p>
+ * 
+ * <p>{@code subpass} and {@code inputAttachmentIndex} index into the render pass as:</p>
+ * 
+ * <pre><code>
+ * pCreateInfo-&gt;pSubpasses[subpass].pInputAttachments[inputAttachmentIndex]</code></pre>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

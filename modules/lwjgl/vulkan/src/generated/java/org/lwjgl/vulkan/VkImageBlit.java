@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>For each element of the {@code pRegions} array, a blit operation is performed the specified source and destination regions.</p>
+ * <p>For each element of the {@code pRegions} array, a blit operation is performed for the specified source and destination regions.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

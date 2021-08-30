@@ -20,7 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
+ * <p>If the {@link VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
+ * 
+ * <p>These properties are related to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-primsrast-fragment-shading-rate">fragment shading rates</a>.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -86,7 +88,7 @@ public class VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV extends Struct
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the maximum number of fragment shader invocations per fragment supported in pipeline, primitive, and attachment fragment shading rates. */
+    /** a {@code VkSampleCountFlagBits} value indicating the maximum number of fragment shader invocations per fragment supported in pipeline, primitive, and attachment fragment shading rates. */
     @NativeType("VkSampleCountFlagBits")
     public int maxFragmentShadingRateInvocationCount() { return nmaxFragmentShadingRateInvocationCount(address()); }
 

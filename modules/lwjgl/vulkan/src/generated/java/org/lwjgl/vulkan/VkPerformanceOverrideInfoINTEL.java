@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Performance override info.
+ * Performance override information.
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

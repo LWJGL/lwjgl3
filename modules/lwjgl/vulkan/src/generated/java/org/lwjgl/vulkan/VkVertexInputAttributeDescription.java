@@ -25,6 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code binding} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputBindings}</li>
  * <li>{@code offset} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputAttributeOffset}</li>
  * <li>{@code format} <b>must</b> be allowed as a vertex buffer format, as specified by the {@link VK10#VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT FORMAT_FEATURE_VERTEX_BUFFER_BIT} flag in {@link VkFormatProperties}{@code ::bufferFeatures} returned by {@code vkGetPhysicalDeviceFormatProperties}</li>
+ * <li>If the {@link KHRPortabilitySubset VK_KHR_portability_subset} extension is enabled, and {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR}{@code ::vertexAttributeAccessBeyondStride} is {@link VK10#VK_FALSE FALSE}, the sum of {@code offset} plus the size of the vertex attribute data described by {@code format} <b>must</b> not be greater than {@code stride} in the {@link VkVertexInputBindingDescription} referenced in {@code binding}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -92,7 +93,7 @@ public class VkVertexInputAttributeDescription extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the shader binding location number for this attribute. */
+    /** the shader input location number for this attribute. */
     @NativeType("uint32_t")
     public int location() { return nlocation(address()); }
     /** the binding number which this attribute takes its data from. */

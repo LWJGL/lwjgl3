@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying a three-dimensional offset.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkBufferImageCopy}, {@link VkBufferImageCopy2KHR}, {@link VkImageBlit}, {@link VkImageBlit2KHR}, {@link VkImageCopy}, {@link VkImageCopy2KHR}, {@link VkImageResolve}, {@link VkImageResolve2KHR}, {@link VkSparseImageMemoryBind}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

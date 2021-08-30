@@ -16,14 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying acceleration structure descriptor info.
+ * Structure specifying acceleration structure descriptor information.
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
  * <li>{@code accelerationStructureCount} <b>must</b> be equal to {@code descriptorCount} in the extended structure</li>
  * <li>Each acceleration structure in {@code pAccelerationStructures} <b>must</b> have been created with a {@code type} of {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR} or {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-nullDescriptor">nullDescriptor</a> feature is not enabled, each member of {@code pAccelerationStructures} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-nullDescriptor">nullDescriptor</a> feature is not enabled, each element of {@code pAccelerationStructures} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -98,7 +98,7 @@ public class VkWriteDescriptorSetAccelerationStructureKHR extends Struct impleme
     /** the number of elements in {@code pAccelerationStructures}. */
     @NativeType("uint32_t")
     public int accelerationStructureCount() { return naccelerationStructureCount(address()); }
-    /** are the acceleration structures to update. */
+    /** a pointer to an array of {@code VkAccelerationStructureKHR} structures specifying the acceleration structures to update. */
     @Nullable
     @NativeType("VkAccelerationStructureKHR const *")
     public LongBuffer pAccelerationStructures() { return npAccelerationStructures(address()); }

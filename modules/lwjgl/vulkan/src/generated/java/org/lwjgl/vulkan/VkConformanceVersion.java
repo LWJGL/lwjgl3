@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure containing the conformance test suite version the implementation is compliant with.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkPhysicalDeviceDriverProperties}, {@link VkPhysicalDeviceVulkan12Properties}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

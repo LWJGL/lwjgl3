@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, {@code depthResolveMode} and {@code stencilResolveMode} <b>must</b> not both be {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}</li>
  * <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, {@code pDepthStencilAttachment} <b>must</b> not have a sample count of {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT}</li>
  * <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, {@code pDepthStencilResolveAttachment} <b>must</b> have a sample count of {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT}</li>
- * <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} then it <b>must</b> have a format whose features contain {@link VK10#VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
+ * <li>If {@code pDepthStencilResolveAttachment} is not {@code NULL} and does not have the value {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} then it <b>must</b> have an image format whose <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#potential-format-features">potential format features</a> contain {@link VK10#VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
  * <li>If the {@code VkFormat} of {@code pDepthStencilResolveAttachment} has a depth component, then the {@code VkFormat} of {@code pDepthStencilAttachment} <b>must</b> have a depth component with the same number of bits and numerical type</li>
  * <li>If the {@code VkFormat} of {@code pDepthStencilResolveAttachment} has a stencil component, then the {@code VkFormat} of {@code pDepthStencilAttachment} <b>must</b> have a stencil component with the same number of bits and numerical type</li>
  * <li>The value of {@code depthResolveMode} <b>must</b> be one of the bits set in {@link VkPhysicalDeviceDepthStencilResolveProperties}{@code ::supportedDepthResolveModes} or {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}</li>
@@ -112,13 +112,13 @@ public class VkSubpassDescriptionDepthStencilResolve extends Struct implements N
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkResolveModeFlagBits} describing the depth resolve mode. */
+    /** a {@code VkResolveModeFlagBits} value describing the depth resolve mode. */
     @NativeType("VkResolveModeFlagBits")
     public int depthResolveMode() { return ndepthResolveMode(address()); }
-    /** a bitmask of {@code VkResolveModeFlagBits} describing the stencil resolve mode. */
+    /** a {@code VkResolveModeFlagBits} value describing the stencil resolve mode. */
     @NativeType("VkResolveModeFlagBits")
     public int stencilResolveMode() { return nstencilResolveMode(address()); }
-    /** an optional {@link VkAttachmentReference} structure defining the depth/stencil resolve attachment for this subpass and its layout. */
+    /** {@code NULL} or a pointer to a {@link VkAttachmentReference2} structure defining the depth/stencil resolve attachment for this subpass and its layout. */
     @Nullable
     @NativeType("VkAttachmentReference2 const *")
     public VkAttachmentReference2 pDepthStencilResolveAttachment() { return npDepthStencilResolveAttachment(address()); }

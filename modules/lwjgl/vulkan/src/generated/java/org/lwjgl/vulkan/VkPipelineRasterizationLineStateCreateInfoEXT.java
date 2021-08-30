@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying parameters of a newly created pipeline line rasterization state.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If {@code stippledLineEnable} is {@link VK10#VK_FALSE FALSE}, the values of {@code lineStippleFactor} and {@code lineStipplePattern} are ignored.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

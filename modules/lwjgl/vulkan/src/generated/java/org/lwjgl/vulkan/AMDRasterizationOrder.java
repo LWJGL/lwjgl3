@@ -16,7 +16,7 @@ package org.lwjgl.vulkan;
  * <li>blending, logic op, and color write</li>
  * </ul>
  * 
- * <p>This extension enables applications to opt into a relaxed, implementation defined primitive rasterization order that may allow better parallel processing of primitives and thus enabling higher primitive throughput. It is applicable in cases where the primitive rasterization order is known to not affect the output of the rendering or any differences caused by a different rasterization order are not a concern from the point of view of the application's purpose.</p>
+ * <p>This extension enables applications to opt into a relaxed, implementation defined primitive rasterization order that may allow better parallel processing of primitives and thus enabling higher primitive throughput. It is applicable in cases where the primitive rasterization order is known to not affect the output of the rendering or any differences caused by a different rasterization order are not a concern from the point of view of the application’s purpose.</p>
  * 
  * <p>A few examples of cases when using the relaxed primitive rasterization order would not have an effect on the final rendering:</p>
  * 

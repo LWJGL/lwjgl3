@@ -13,7 +13,7 @@ import static org.lwjgl.system.JNI.*;
 /**
  * This extension provides versions of {@link VK10#vkBindBufferMemory BindBufferMemory} and {@link VK10#vkBindImageMemory BindImageMemory} that allow multiple bindings to be performed at once, and are extensible.
  * 
- * <p>This extension also introduces {@link #VK_IMAGE_CREATE_ALIAS_BIT_KHR IMAGE_CREATE_ALIAS_BIT_KHR}, which allows "{@code identical}" images that alias the same memory to interpret the contents consistently, even across image layout changes.</p>
+ * <p>This extension also introduces {@link #VK_IMAGE_CREATE_ALIAS_BIT_KHR IMAGE_CREATE_ALIAS_BIT_KHR}, which allows “{@code identical}” images that alias the same memory to interpret the contents consistently, even across image layout changes.</p>
  * 
  * <h5>Promotion to Vulkan 1.1</h5>
  * 

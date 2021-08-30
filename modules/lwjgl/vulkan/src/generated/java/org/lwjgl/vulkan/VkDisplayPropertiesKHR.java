@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing an available display device.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkDisplayProperties2KHR}, {@link VkExtent2D}, {@link KHRDisplay#vkGetPhysicalDeviceDisplayPropertiesKHR GetPhysicalDeviceDisplayPropertiesKHR}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -88,10 +92,10 @@ public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
     /** a handle that is used to refer to the display described here. This handle will be valid for the lifetime of the Vulkan instance. */
     @NativeType("VkDisplayKHR")
     public long display() { return ndisplay(address()); }
-    /** a pointer to a null-terminated UTF-8 string containing the name of the display. Generally, this will be the name provided by the display&#8217;s EDID. It <b>can</b> be {@code NULL} if no suitable name is available. If not {@code NULL}, the memory it points to <b>must</b> remain accessible as long as {@code display} is valid. */
+    /** {@code NULL} or a pointer to a null-terminated UTF-8 string containing the name of the display. Generally, this will be the name provided by the display’s EDID. If {@code NULL}, no suitable name is available. If not {@code NULL}, the string pointed to <b>must</b> remain accessible and unmodified as long as {@code display} is valid. */
     @NativeType("char const *")
     public ByteBuffer displayName() { return ndisplayName(address()); }
-    /** a pointer to a null-terminated UTF-8 string containing the name of the display. Generally, this will be the name provided by the display&#8217;s EDID. It <b>can</b> be {@code NULL} if no suitable name is available. If not {@code NULL}, the memory it points to <b>must</b> remain accessible as long as {@code display} is valid. */
+    /** {@code NULL} or a pointer to a null-terminated UTF-8 string containing the name of the display. Generally, this will be the name provided by the display’s EDID. If {@code NULL}, no suitable name is available. If not {@code NULL}, the string pointed to <b>must</b> remain accessible and unmodified as long as {@code display} is valid. */
     @NativeType("char const *")
     public String displayNameString() { return ndisplayNameString(address()); }
     /** describes the physical width and height of the visible portion of the display, in millimeters. */

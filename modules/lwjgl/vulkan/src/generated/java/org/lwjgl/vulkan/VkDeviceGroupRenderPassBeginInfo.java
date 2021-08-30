@@ -25,14 +25,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If {@code deviceRenderAreaCount} is not zero, then the elements of {@code pDeviceRenderAreas} override the value of {@link VkRenderPassBeginInfo}{@code ::renderArea}, and provide a render area specific to each physical device. These render areas serve the same purpose as {@link VkRenderPassBeginInfo}{@code ::renderArea}, including controlling the region of attachments that are cleared by {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR} and that are resolved into resolve attachments.</p>
  * 
- * <p>If this structure is not present, the render pass instance's device mask is the value of {@link VkDeviceGroupCommandBufferBeginInfo}{@code ::deviceMask}. If this structure is not present or if {@code deviceRenderAreaCount} is zero, {@link VkRenderPassBeginInfo}{@code ::renderArea} is used for all physical devices.</p>
+ * <p>If this structure is not present, the render pass instance’s device mask is the value of {@link VkDeviceGroupCommandBufferBeginInfo}{@code ::deviceMask}. If this structure is not present or if {@code deviceRenderAreaCount} is zero, {@link VkRenderPassBeginInfo}{@code ::renderArea} is used for all physical devices.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
  * <li>{@code deviceMask} <b>must</b> be a valid device mask value</li>
  * <li>{@code deviceMask} <b>must</b> not be zero</li>
- * <li>{@code deviceMask} <b>must</b> be a subset of the command buffer&#8217;s initial device mask</li>
+ * <li>{@code deviceMask} <b>must</b> be a subset of the command buffer’s initial device mask</li>
  * <li>{@code deviceRenderAreaCount} <b>must</b> either be zero or equal to the number of physical devices in the logical device</li>
  * </ul>
  * 

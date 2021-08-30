@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing additional 4444 formats supported by an implementation.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkPhysicalDevice4444FormatsFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDevice4444FormatsFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -28,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDevice4444FormatsFeaturesEXT {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #formatA4R4G4B4};
  *     VkBool32 {@link #formatA4B4G4R4};
  * }</code></pre>
@@ -79,10 +83,10 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /**
@@ -108,9 +112,9 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
     @NativeType("VkBool32")
     public boolean formatA4B4G4R4() { return nformatA4B4G4R4(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevice4444FormatsFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevice4444FormatsFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #formatA4R4G4B4} field. */
     public VkPhysicalDevice4444FormatsFeaturesEXT formatA4R4G4B4(@NativeType("VkBool32") boolean value) { nformatA4R4G4B4(address(), value ? 1 : 0); return this; }
@@ -343,10 +347,10 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDevice4444FormatsFeaturesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevice4444FormatsFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDevice4444FormatsFeaturesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevice4444FormatsFeaturesEXT.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDevice4444FormatsFeaturesEXT#formatA4R4G4B4} field. */
@@ -356,9 +360,9 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
         @NativeType("VkBool32")
         public boolean formatA4B4G4R4() { return VkPhysicalDevice4444FormatsFeaturesEXT.nformatA4B4G4R4(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevice4444FormatsFeaturesEXT#sType} field. */
         public VkPhysicalDevice4444FormatsFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevice4444FormatsFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevice4444FormatsFeaturesEXT#pNext} field. */
         public VkPhysicalDevice4444FormatsFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevice4444FormatsFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDevice4444FormatsFeaturesEXT#formatA4R4G4B4} field. */
         public VkPhysicalDevice4444FormatsFeaturesEXT.Buffer formatA4R4G4B4(@NativeType("VkBool32") boolean value) { VkPhysicalDevice4444FormatsFeaturesEXT.nformatA4R4G4B4(address(), value ? 1 : 0); return this; }

@@ -23,7 +23,11 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The members of {@link VkPhysicalDeviceVulkan11Properties} <b>must</b> have the same values as the corresponding members of {@link VkPhysicalDeviceIDProperties}, {@link VkPhysicalDeviceSubgroupProperties}, {@link VkPhysicalDevicePointClippingProperties}, {@link VkPhysicalDeviceMultiviewProperties}, {@link VkPhysicalDeviceProtectedMemoryProperties}, and {@link VkPhysicalDeviceMaintenance3Properties}.</p>
+ * <p>If the {@link VkPhysicalDeviceVulkan11Properties} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
+ * 
+ * <p>These properties correspond to Vulkan 1.1 functionality.</p>
+ * 
+ * <p>The members of {@link VkPhysicalDeviceVulkan11Properties} have the same values as the corresponding members of {@link VkPhysicalDeviceIDProperties}, {@link VkPhysicalDeviceSubgroupProperties}, {@link VkPhysicalDevicePointClippingProperties}, {@link VkPhysicalDeviceMultiviewProperties}, {@link VkPhysicalDeviceProtectedMemoryProperties}, and {@link VkPhysicalDeviceMaintenance3Properties}.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -35,8 +39,8 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceVulkan11Properties {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     uint8_t {@link #deviceUUID}[VK_UUID_SIZE];
  *     uint8_t {@link #driverUUID}[VK_UUID_SIZE];
  *     uint8_t {@link #deviceLUID}[VK_LUID_SIZE];
@@ -138,10 +142,10 @@ public class VkPhysicalDeviceVulkan11Properties extends Struct implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the device. */
@@ -168,13 +172,13 @@ public class VkPhysicalDeviceVulkan11Properties extends Struct implements Native
     /** a boolean value that will be {@link VK10#VK_TRUE TRUE} if {@code deviceLUID} contains a valid LUID and {@code deviceNodeMask} contains a valid node mask, and {@link VK10#VK_FALSE FALSE} if they do not. */
     @NativeType("VkBool32")
     public boolean deviceLUIDValid() { return ndeviceLUIDValid(address()) != 0; }
-    /** the default number of invocations in each subgroup. {@code subgroupSize} is at least 1 if any of the physical device&#8217;s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. {@code subgroupSize} is a power-of-two. */
+    /** the default number of invocations in each subgroup. {@code subgroupSize} is at least 1 if any of the physical device’s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. {@code subgroupSize} is a power-of-two. */
     @NativeType("uint32_t")
     public int subgroupSize() { return nsubgroupSize(address()); }
-    /** a bitfield of {@code VkShaderStageFlagBits} describing the shader stages that <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-group-operations">group operations</a> with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-scope-subgroup">subgroup scope</a> are supported in. {@code subgroupSupportedStages} will have the {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT} bit set if any of the physical device&#8217;s queues support {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. */
+    /** a bitfield of {@code VkShaderStageFlagBits} describing the shader stages that <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-group-operations">group operations</a> with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-scope-subgroup">subgroup scope</a> are supported in. {@code subgroupSupportedStages} will have the {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT} bit set if any of the physical device’s queues support {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. */
     @NativeType("VkShaderStageFlags")
     public int subgroupSupportedStages() { return nsubgroupSupportedStages(address()); }
-    /** a bitmask of {@code VkSubgroupFeatureFlagBits} specifying the sets of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-group-operations">group operations</a> with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-scope-subgroup">subgroup scope</a> supported on this device. {@code subgroupSupportedOperations} will have the {@link VK11#VK_SUBGROUP_FEATURE_BASIC_BIT SUBGROUP_FEATURE_BASIC_BIT} bit set if any of the physical device&#8217;s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. */
+    /** a bitmask of {@code VkSubgroupFeatureFlagBits} specifying the sets of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-group-operations">group operations</a> with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-scope-subgroup">subgroup scope</a> supported on this device. {@code subgroupSupportedOperations} will have the {@link VK11#VK_SUBGROUP_FEATURE_BASIC_BIT SUBGROUP_FEATURE_BASIC_BIT} bit set if any of the physical device’s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. */
     @NativeType("VkSubgroupFeatureFlags")
     public int subgroupSupportedOperations() { return nsubgroupSupportedOperations(address()); }
     /** a boolean specifying whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-quad-operations">quad group operations</a> are available in all stages, or are restricted to fragment and compute stages. */
@@ -199,9 +203,9 @@ public class VkPhysicalDeviceVulkan11Properties extends Struct implements Native
     @NativeType("VkDeviceSize")
     public long maxMemoryAllocationSize() { return nmaxMemoryAllocationSize(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceVulkan11Properties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceVulkan11Properties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -460,10 +464,10 @@ public class VkPhysicalDeviceVulkan11Properties extends Struct implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Properties#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceVulkan11Properties.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceVulkan11Properties#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceVulkan11Properties.npNext(address()); }
         /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceVulkan11Properties#deviceUUID} field. */
@@ -521,9 +525,9 @@ public class VkPhysicalDeviceVulkan11Properties extends Struct implements Native
         @NativeType("VkDeviceSize")
         public long maxMemoryAllocationSize() { return VkPhysicalDeviceVulkan11Properties.nmaxMemoryAllocationSize(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Properties#sType} field. */
         public VkPhysicalDeviceVulkan11Properties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVulkan11Properties.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Properties#pNext} field. */
         public VkPhysicalDeviceVulkan11Properties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVulkan11Properties.npNext(address(), value); return this; }
 
     }

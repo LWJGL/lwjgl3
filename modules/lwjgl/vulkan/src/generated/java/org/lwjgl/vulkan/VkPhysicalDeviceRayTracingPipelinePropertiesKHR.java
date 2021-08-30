@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceRayTracingPipelinePropertiesKHR} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceProperties2}, it is filled with the implementation-dependent limits.</p>
+ * <p>If the {@link VkPhysicalDeviceRayTracingPipelinePropertiesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
  * 
  * <p>Limits specified by this structure <b>must</b> match those specified with the same name in {@link VkPhysicalDeviceRayTracingPropertiesNV}.</p>
  * 
@@ -115,7 +115,7 @@ public class VkPhysicalDeviceRayTracingPipelinePropertiesKHR extends Struct impl
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** size in bytes of the shader header. */
+    /** the size in bytes of the shader header. */
     @NativeType("uint32_t")
     public int shaderGroupHandleSize() { return nshaderGroupHandleSize(address()); }
     /** the maximum number of levels of ray recursion allowed in a trace command. */
@@ -124,7 +124,7 @@ public class VkPhysicalDeviceRayTracingPipelinePropertiesKHR extends Struct impl
     /** the maximum stride in bytes allowed between shader groups in the shader binding table. */
     @NativeType("uint32_t")
     public int maxShaderGroupStride() { return nmaxShaderGroupStride(address()); }
-    /** the required: alignment in bytes for the base of the shader binding table. */
+    /** the <b>required</b> alignment in bytes for the base of the shader binding table. */
     @NativeType("uint32_t")
     public int shaderGroupBaseAlignment() { return nshaderGroupBaseAlignment(address()); }
     /** the number of bytes for the information required to do capture and replay for shader group handles. */
@@ -133,7 +133,7 @@ public class VkPhysicalDeviceRayTracingPipelinePropertiesKHR extends Struct impl
     /** the maximum number of ray generation shader invocations which <b>may</b> be produced by a single {@link KHRRayTracingPipeline#vkCmdTraceRaysIndirectKHR CmdTraceRaysIndirectKHR} or {@link KHRRayTracingPipeline#vkCmdTraceRaysKHR CmdTraceRaysKHR} command. */
     @NativeType("uint32_t")
     public int maxRayDispatchInvocationCount() { return nmaxRayDispatchInvocationCount(address()); }
-    /** the required: alignment in bytes for each shader binding table entry. */
+    /** the <b>required</b> alignment in bytes for each shader binding table entry. */
     @NativeType("uint32_t")
     public int shaderGroupHandleAlignment() { return nshaderGroupHandleAlignment(address()); }
     /** the maximum size in bytes for a ray attribute structure */

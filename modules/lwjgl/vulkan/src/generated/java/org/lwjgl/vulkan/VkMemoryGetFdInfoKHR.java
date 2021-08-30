@@ -24,14 +24,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>The size of the exported file <b>may</b> be larger than the size requested by {@link VkMemoryAllocateInfo}::allocationSize. If {@code handleType} is {@link EXTExternalMemoryDmaBuf#VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT}, then the application <b>can</b> query the file's actual size with link:man:lseek(2)[lseek(2)].</p>
+ * <p>The size of the exported file <b>may</b> be larger than the size requested by {@link VkMemoryAllocateInfo}{@code ::allocationSize}. If {@code handleType} is {@link EXTExternalMemoryDmaBuf#VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT}, then the application <b>can</b> query the file’s actual size with <a target="_blank" href="man:lseek(2)">lseek(2)</a>.</p>
  * </div>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
  * <li>{@code handleType} <b>must</b> have been included in {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} when {@code memory} was created</li>
- * <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle</li>
+ * <li>{@code handleType} <b>must</b> be {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT} or {@link EXTExternalMemoryDmaBuf#VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -111,7 +111,7 @@ public class VkMemoryGetFdInfoKHR extends Struct implements NativeResource {
     /** the memory object from which the handle will be exported. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** the type of handle requested. */
+    /** a {@code VkExternalMemoryHandleTypeFlagBits} value specifying the type of handle requested. */
     @NativeType("VkExternalMemoryHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
 

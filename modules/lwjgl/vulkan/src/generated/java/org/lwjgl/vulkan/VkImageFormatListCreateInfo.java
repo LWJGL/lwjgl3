@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@code viewFormatCount} is zero, {@code pViewFormats} is ignored and the image is created as if the {@link VkImageFormatListCreateInfo} structure were not included in the {@code pNext} list of {@link VkImageCreateInfo}.</p>
+ * <p>If {@code viewFormatCount} is zero, {@code pViewFormats} is ignored and the image is created as if the {@link VkImageFormatListCreateInfo} structure were not included in the {@code pNext} chain of {@link VkImageCreateInfo}.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -94,7 +94,7 @@ public class VkImageFormatListCreateInfo extends Struct implements NativeResourc
     /** the number of entries in the {@code pViewFormats} array. */
     @NativeType("uint32_t")
     public int viewFormatCount() { return nviewFormatCount(address()); }
-    /** an array which lists of all formats which <b>can</b> be used when creating views of this image. */
+    /** a pointer to an array of {@code VkFormat} values specifying all formats which <b>can</b> be used when creating views of this image. */
     @Nullable
     @NativeType("VkFormat const *")
     public IntBuffer pViewFormats() { return npViewFormats(address()); }

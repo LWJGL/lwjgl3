@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code executableIndex} <b>must</b> be less than the number of executables associated with {@code pipeline} as returned in the {@code pExecutableCount} parameter of {@code vkGetPipelineExecutablePropertiesKHR}</li>
+ * <li>{@code executableIndex} <b>must</b> be less than the number of pipeline executables associated with {@code pipeline} as returned in the {@code pExecutableCount} parameter of {@code vkGetPipelineExecutablePropertiesKHR}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -100,7 +100,7 @@ public class VkPipelineExecutableInfoKHR extends Struct implements NativeResourc
     /** the pipeline to query. */
     @NativeType("VkPipeline")
     public long pipeline() { return npipeline(address()); }
-    /** the index of the executable to query in the array of executable properties returned by {@link KHRPipelineExecutableProperties#vkGetPipelineExecutablePropertiesKHR GetPipelineExecutablePropertiesKHR}. */
+    /** the index of the pipeline executable to query in the array of executable properties returned by {@link KHRPipelineExecutableProperties#vkGetPipelineExecutablePropertiesKHR GetPipelineExecutablePropertiesKHR}. */
     @NativeType("uint32_t")
     public int executableIndex() { return nexecutableIndex(address()); }
 

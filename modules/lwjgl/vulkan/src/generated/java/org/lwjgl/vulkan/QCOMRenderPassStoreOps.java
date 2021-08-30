@@ -54,10 +54,10 @@ package org.lwjgl.vulkan;
 public final class QCOMRenderPassStoreOps {
 
     /** The extension specification version. */
-    public static final int VK_QCOM_render_pass_store_ops_SPEC_VERSION = 2;
+    public static final int VK_QCOM_RENDER_PASS_STORE_OPS_SPEC_VERSION = 2;
 
     /** The extension name. */
-    public static final String VK_QCOM_render_pass_store_ops_EXTENSION_NAME = "VK_QCOM_render_pass_store_ops";
+    public static final String VK_QCOM_RENDER_PASS_STORE_OPS_EXTENSION_NAME = "VK_QCOM_render_pass_store_ops";
 
     /** Extends {@code VkAttachmentStoreOp}. */
     public static final int VK_ATTACHMENT_STORE_OP_NONE_QCOM = 1000301000;

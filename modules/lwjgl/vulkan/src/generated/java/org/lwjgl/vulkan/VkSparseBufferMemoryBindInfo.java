@@ -88,7 +88,7 @@ public class VkSparseBufferMemoryBindInfo extends Struct implements NativeResour
     /** the number of {@link VkSparseMemoryBind} structures in the {@code pBinds} array. */
     @NativeType("uint32_t")
     public int bindCount() { return nbindCount(address()); }
-    /** a pointer to array of {@link VkSparseMemoryBind} structures. */
+    /** a pointer to an array of {@link VkSparseMemoryBind} structures. */
     @NativeType("VkSparseMemoryBind const *")
     public VkSparseMemoryBind.Buffer pBinds() { return npBinds(address()); }
 

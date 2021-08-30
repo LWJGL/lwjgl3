@@ -25,12 +25,12 @@ package org.lwjgl.vulkan;
  * <p>When using GLSL source-based shader languages, the following shader functions from GL_ARB_shader_group_vote can map to these SPIR-V instructions:</p>
  * 
  * <ul>
- * <li>{@code anyInvocationARB}() &#8594; {@code OpSubgroupAnyKHR},</li>
- * <li>{@code allInvocationsARB}() &#8594; {@code OpSubgroupAllKHR}, and</li>
- * <li>{@code allInvocationsEqualARB}() &#8594; {@code OpSubgroupAllEqualKHR}.</li>
+ * <li>{@code anyInvocationARB}() → {@code OpSubgroupAnyKHR},</li>
+ * <li>{@code allInvocationsARB}() → {@code OpSubgroupAllKHR}, and</li>
+ * <li>{@code allInvocationsEqualARB}() → {@code OpSubgroupAllEqualKHR}.</li>
  * </ul>
  * 
- * <p>The subgroup across which the boolean conditions are evaluated is implementation-dependent, and this extension provides no guarantee over how individual shader invocations are assigned to subgroups. In particular, a subgroup has no necessary relationship with the compute shader <em>local workgroup</em> -- any pair of shader invocations in a compute local workgroup may execute in different subgroups as used by these instructions.</p>
+ * <p>The subgroup across which the boolean conditions are evaluated is implementation-dependent, and this extension provides no guarantee over how individual shader invocations are assigned to subgroups. In particular, a subgroup has no necessary relationship with the compute shader <em>local workgroup</em> — any pair of shader invocations in a compute local workgroup may execute in different subgroups as used by these instructions.</p>
  * 
  * <p>Compute shaders operate on an explicitly specified group of threads (a local workgroup), but many implementations will also group non-compute shader invocations and execute them concurrently. When executing code like</p>
  * 
@@ -56,7 +56,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Deprecated by Vulkan 1.1</h5>
  * 
- * <p>All functionality in this extension is superseded by the core Vulkan 1.1 <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkPhysicalDeviceSubgroupProperties"> subgroup operations</a>.</p>
+ * <p>All functionality in this extension is superseded by the core Vulkan 1.1 <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkPhysicalDeviceSubgroupProperties">subgroup operations</a>.</p>
  * 
  * <h5>VK_EXT_shader_subgroup_vote</h5>
  * 

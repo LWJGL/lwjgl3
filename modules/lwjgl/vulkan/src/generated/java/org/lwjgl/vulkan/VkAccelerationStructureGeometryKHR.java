@@ -18,14 +18,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying geometries to be built into an acceleration structure.
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code geometryType} is {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_AABBS_KHR GEOMETRY_TYPE_AABBS_KHR}, the {@code aabbs} member of {@code geometry} <b>must</b> be a valid {@link VkAccelerationStructureGeometryAabbsDataKHR} structure</li>
- * <li>If {@code geometryType} is {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_TRIANGLES_KHR GEOMETRY_TYPE_TRIANGLES_KHR}, the {@code triangles} member of {@code geometry} <b>must</b> be a valid {@link VkAccelerationStructureGeometryTrianglesDataKHR} structure</li>
- * <li>If {@code geometryType} is {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_INSTANCES_KHR GEOMETRY_TYPE_INSTANCES_KHR}, the {@code instances} member of {@code geometry} <b>must</b> be a valid {@link VkAccelerationStructureGeometryInstancesDataKHR} structure</li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

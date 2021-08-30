@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying a two-dimensional subregion.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkBindImageMemoryDeviceGroupInfo}, {@link VkClearRect}, {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM}, {@link VkDeviceGroupRenderPassBeginInfo}, {@link VkDisplayPresentInfoKHR}, {@link VkExtent2D}, {@link VkOffset2D}, {@link VkPipelineDiscardRectangleStateCreateInfoEXT}, {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV}, {@link VkPipelineViewportStateCreateInfo}, {@link VkRenderPassBeginInfo}, {@link EXTDiscardRectangles#vkCmdSetDiscardRectangleEXT CmdSetDiscardRectangleEXT}, {@link NVScissorExclusive#vkCmdSetExclusiveScissorNV CmdSetExclusiveScissorNV}, {@link VK10#vkCmdSetScissor CmdSetScissor}, {@link EXTExtendedDynamicState#vkCmdSetScissorWithCountEXT CmdSetScissorWithCountEXT}, {@link KHRSwapchain#vkGetPhysicalDevicePresentRectanglesKHR GetPhysicalDevicePresentRectanglesKHR}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

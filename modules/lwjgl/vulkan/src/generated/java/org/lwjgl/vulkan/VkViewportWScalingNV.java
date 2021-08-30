@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying a viewport.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkPipelineViewportWScalingStateCreateInfoNV}, {@link NVClipSpaceWScaling#vkCmdSetViewportWScalingNV CmdSetViewportWScalingNV}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -65,7 +69,7 @@ public class VkViewportWScalingNV extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** {@code xcoeff} and {@code ycoeff} are the viewport&#8217;s W scaling factor for x and y respectively. */
+    /** {@code xcoeff} and {@code ycoeff} are the viewport’s W scaling factor for x and y respectively. */
     public float xcoeff() { return nxcoeff(address()); }
     /** see {@code xcoeff} */
     public float ycoeff() { return nycoeff(address()); }

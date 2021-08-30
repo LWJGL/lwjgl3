@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the parameters of an indirect trace ray command.
+ * Structure specifying the parameters of an indirect ray tracing command.
  * 
  * <h5>Description</h5>
  * 

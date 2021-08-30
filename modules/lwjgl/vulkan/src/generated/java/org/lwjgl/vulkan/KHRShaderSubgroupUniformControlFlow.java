@@ -1,0 +1,66 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
+ */
+package org.lwjgl.vulkan;
+
+/**
+ * This extension allows the use of the {@code SPV_KHR_subgroup_uniform_control_flow} SPIR-V extension in shader modules. {@code SPV_KHR_subgroup_uniform_control_flow} provides stronger guarantees that diverged subgroups will reconverge.
+ * 
+ * <p>Developers should utilize this extension if they use subgroup operations to reduce the work performed by a uniform subgroup. This extension will guarantee that uniform subgroup will reconverge in the same manner as invocation groups (see “{@code Uniform Control Flow}” in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#spirv-spec">Khronos SPIR-V Specification</a>).</p>
+ * 
+ * <h5>VK_KHR_shader_subgroup_uniform_control_flow</h5>
+ * 
+ * <dl>
+ * <dt><b>Name String</b></dt>
+ * <dd>{@code VK_KHR_shader_subgroup_uniform_control_flow}</dd>
+ * <dt><b>Extension Type</b></dt>
+ * <dd>Device extension</dd>
+ * <dt><b>Registered Extension Number</b></dt>
+ * <dd>324</dd>
+ * <dt><b>Revision</b></dt>
+ * <dd>1</dd>
+ * <dt><b>Extension and Version Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Requires Vulkan 1.1</li>
+ * </ul></dd>
+ * <dt><b>Contact</b></dt>
+ * <dd><ul>
+ * <li>Alan Baker <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_subgroup_uniform_control_flow:%20&amp;body=@alan-baker%20">alan-baker</a></li>
+ * </ul></dd>
+ * </dl>
+ * 
+ * <h5>Other Extension Metadata</h5>
+ * 
+ * <dl>
+ * <dt><b>Last Modified Date</b></dt>
+ * <dd>2020-08-27</dd>
+ * <dt><b>IP Status</b></dt>
+ * <dd>No known IP claims.</dd>
+ * <dt><b>Interactions and External Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Requires SPIR-V 1.3.</li>
+ * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_subgroup_uniform_control_flow.html">{@code SPV_KHR_subgroup_uniform_control_flow}</a></li>
+ * </ul></dd>
+ * <dt><b>Contributors</b></dt>
+ * <dd><ul>
+ * <li>Alan Baker, Google</li>
+ * <li>Jeff Bolz, NVIDIA</li>
+ * </ul></dd>
+ * </dl>
+ */
+public final class KHRShaderSubgroupUniformControlFlow {
+
+    /** The extension specification version. */
+    public static final int VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_SPEC_VERSION = 1;
+
+    /** The extension name. */
+    public static final String VK_KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_EXTENSION_NAME = "VK_KHR_shader_subgroup_uniform_control_flow";
+
+    /** Extends {@code VkStructureType}. */
+    public static final int VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR = 1000323000;
+
+    private KHRShaderSubgroupUniformControlFlow() {}
+
+}

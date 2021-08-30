@@ -155,7 +155,7 @@ public class VkDisplaySurfaceCreateInfoKHR extends Struct implements NativeResou
     /** a {@code VkDisplayPlaneAlphaFlagBitsKHR} value specifying the type of alpha blending to use. */
     @NativeType("VkDisplayPlaneAlphaFlagBitsKHR")
     public int alphaMode() { return nalphaMode(address()); }
-    /** The size of the presentable images to use with the surface. */
+    /** the size of the presentable images to use with the surface. */
     public VkExtent2D imageExtent() { return nimageExtent(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */

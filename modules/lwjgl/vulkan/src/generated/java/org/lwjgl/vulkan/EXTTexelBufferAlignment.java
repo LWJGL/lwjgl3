@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension adds more expressive alignment requirements for uniform and storage texel buffers. Some implementations have single texel alignment requirements that can't be expressed via {@link VkPhysicalDeviceLimits}{@code ::minTexelBufferOffsetAlignment}.
+ * This extension adds more expressive alignment requirements for uniform and storage texel buffers. Some implementations have single texel alignment requirements that cannot be expressed via {@link VkPhysicalDeviceLimits}{@code ::minTexelBufferOffsetAlignment}.
  * 
  * <h5>VK_EXT_texel_buffer_alignment</h5>
  * 

@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying application info.
+ * Structure specifying application information.
  * 
  * <h5>Description</h5>
  * 
@@ -49,13 +49,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>Providing a {@code NULL} {@link VkInstanceCreateInfo}{@code ::pApplicationInfo} or providing an {@code apiVersion} of 0 is equivalent to providing an {@code apiVersion} of {@code VK_MAKE_VERSION(1,0,0)}.</p>
+ * <p>Providing a {@code NULL} {@link VkInstanceCreateInfo}{@code ::pApplicationInfo} or providing an {@code apiVersion} of 0 is equivalent to providing an {@code apiVersion} of {@code VK_MAKE_API_VERSION(0,1,0,0)}.</p>
  * </div>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@code apiVersion} is not 0, then it <b>must</b> be greater or equal to {@link VK10#VK_API_VERSION_1_0 API_VERSION_1_0}</li>
+ * <li>If {@code apiVersion} is not 0, then it <b>must</b> be greater than or equal to {@link VK10#VK_API_VERSION_1_0 API_VERSION_1_0}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

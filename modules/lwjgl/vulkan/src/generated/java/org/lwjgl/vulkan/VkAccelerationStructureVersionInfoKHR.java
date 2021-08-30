@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code pVersionData} <b>must</b> be a valid pointer to an array of {@code 2}*{@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values</li>
+ * <li>{@code pVersionData} <b>must</b> be a valid pointer to an array of 2 &times; {@code VK_UUID_SIZE} {@code uint8_t} values</li>
  * </ul>
  * 
  * <h5>See Also</h5>

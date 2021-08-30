@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code groupCount} <b>must</b> be at least 1 and as maximum {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV}{@code ::maxGraphicsShaderGroupCount}</li>
  * <li>The sum of {@code groupCount} including those groups added from referenced {@code pPipelines} <b>must</b> also be as maximum {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV}{@code ::maxGraphicsShaderGroupCount}</li>
- * <li>The state of the first element of {@code pGroups} <b>must</b> match its equivalent within the parent&#8217;s {@link VkGraphicsPipelineCreateInfo}</li>
+ * <li>The state of the first element of {@code pGroups} <b>must</b> match its equivalent within the parent’s {@link VkGraphicsPipelineCreateInfo}</li>
  * <li>Each element of {@code pGroups} <b>must</b> in combination with the rest of the pipeline state yield a valid state configuration</li>
  * <li>All elements of {@code pGroups} <b>must</b> use the same shader stage combinations unless any mesh shader stage is used, then either combination of task and mesh or just mesh shader is valid</li>
  * <li>Mesh and regular primitive shading stages cannot be mixed across {@code pGroups}</li>
@@ -123,13 +123,13 @@ public class VkGraphicsPipelineShaderGroupsCreateInfoNV extends Struct implement
     /** the number of elements in the {@code pGroups} array. */
     @NativeType("uint32_t")
     public int groupCount() { return ngroupCount(address()); }
-    /** an array of {@link VkGraphicsShaderGroupCreateInfoNV} values specifying which state of the original {@link VkGraphicsPipelineCreateInfo} each shader group overrides. */
+    /** a pointer to an array of {@link VkGraphicsShaderGroupCreateInfoNV} structures specifying which state of the original {@link VkGraphicsPipelineCreateInfo} each shader group overrides. */
     @NativeType("VkGraphicsShaderGroupCreateInfoNV const *")
     public VkGraphicsShaderGroupCreateInfoNV.Buffer pGroups() { return npGroups(address()); }
     /** the number of elements in the {@code pPipelines} array. */
     @NativeType("uint32_t")
     public int pipelineCount() { return npipelineCount(address()); }
-    /** an array of graphics {@code VkPipeline}, which are referenced within the created pipeline, including all their shader groups. */
+    /** a pointer to an array of graphics {@code VkPipeline} structures which are referenced within the created pipeline, including all their shader groups. */
     @Nullable
     @NativeType("VkPipeline const *")
     public LongBuffer pPipelines() { return npPipelines(address()); }

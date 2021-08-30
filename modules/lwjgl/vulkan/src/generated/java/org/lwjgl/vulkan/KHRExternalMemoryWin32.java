@@ -214,9 +214,9 @@ public class KHRExternalMemoryWin32 {
      * <p>{@link VkMemoryWin32HandlePropertiesKHR}</p>
      *
      * @param device                       the logical device that will be importing {@code handle}.
-     * @param handleType                   the type of the handle {@code handle}.
+     * @param handleType                   a {@code VkExternalMemoryHandleTypeFlagBits} value specifying the type of the handle {@code handle}.
      * @param handle                       the handle which will be imported.
-     * @param pMemoryWin32HandleProperties will return properties of {@code handle}.
+     * @param pMemoryWin32HandleProperties a pointer to a {@link VkMemoryWin32HandlePropertiesKHR} structure in which properties of {@code handle} are returned.
      */
     @NativeType("VkResult")
     public static int vkGetMemoryWin32HandlePropertiesKHR(VkDevice device, @NativeType("VkExternalMemoryHandleTypeFlagBits") int handleType, @NativeType("HANDLE") long handle, @NativeType("VkMemoryWin32HandlePropertiesKHR *") VkMemoryWin32HandlePropertiesKHR pMemoryWin32HandleProperties) {

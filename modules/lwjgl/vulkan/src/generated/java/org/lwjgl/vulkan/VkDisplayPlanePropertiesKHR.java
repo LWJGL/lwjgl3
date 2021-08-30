@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing display plane properties.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkDisplayPlaneProperties2KHR}, {@link KHRDisplay#vkGetPhysicalDeviceDisplayPlanePropertiesKHR GetPhysicalDeviceDisplayPlanePropertiesKHR}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

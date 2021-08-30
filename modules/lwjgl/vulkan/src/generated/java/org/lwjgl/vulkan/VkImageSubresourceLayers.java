@@ -96,7 +96,7 @@ public class VkImageSubresourceLayers extends Struct implements NativeResource {
     /** a combination of {@code VkImageAspectFlagBits}, selecting the color, depth and/or stencil aspects to be copied. */
     @NativeType("VkImageAspectFlags")
     public int aspectMask() { return naspectMask(address()); }
-    /** the mipmap level to copy from. */
+    /** the mipmap level to copy */
     @NativeType("uint32_t")
     public int mipLevel() { return nmipLevel(address()); }
     /** {@code baseArrayLayer} and {@code layerCount} are the starting layer and number of layers to copy. */

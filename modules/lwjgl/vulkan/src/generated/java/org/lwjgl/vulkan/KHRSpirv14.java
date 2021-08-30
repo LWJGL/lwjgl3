@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension allows the use of SPIR-V 1.4 shader modules. SPIR-V 1.4's new features primarily make it an easier target for compilers from high-level languages, rather than exposing new hardware functionality.
+ * This extension allows the use of SPIR-V 1.4 shader modules. SPIR-V 1.4’s new features primarily make it an easier target for compilers from high-level languages, rather than exposing new hardware functionality.
  * 
  * <p>SPIR-V 1.4 incorporates features that are also available separately as extensions. SPIR-V 1.4 shader modules do not need to enable those extensions with the {@code OpExtension} opcode, since they are integral parts of SPIR-V 1.4.</p>
  * 

@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The fragment density map is read at an implementation-dependent time with the following constraints determined by the attachment's image view {@code flags}:</p>
+ * <p>The fragment density map is read at an implementation-dependent time with the following constraints determined by the attachment’s image view {@code flags}:</p>
  * 
  * <ul>
  * <li>{@link EXTFragmentDensityMap#VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT} specifies that the fragment density map will be read by the device during {@link EXTFragmentDensityMap#VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT}</li>

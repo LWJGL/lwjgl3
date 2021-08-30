@@ -26,6 +26,10 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  *     VkInternalAllocationType                    allocationType,
  *     VkSystemAllocationScope                     allocationScope);</code></pre>
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>This is a purely informational callback.</p>
+ * 
  * <h5>See Also</h5>
  * 
  * <p>{@link VkAllocationCallbacks}</p>

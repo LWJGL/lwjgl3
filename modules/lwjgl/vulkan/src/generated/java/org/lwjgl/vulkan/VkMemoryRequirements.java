@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying memory requirements.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkMemoryRequirements2}, {@link VK10#vkGetBufferMemoryRequirements GetBufferMemoryRequirements}, {@link VK10#vkGetImageMemoryRequirements GetImageMemoryRequirements}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -69,10 +73,10 @@ public class VkMemoryRequirements extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the size, in bytes, of the memory allocation required: for the resource. */
+    /** the size, in bytes, of the memory allocation <b>required</b> for the resource. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** the alignment, in bytes, of the offset within the allocation required: for the resource. */
+    /** the alignment, in bytes, of the offset within the allocation <b>required</b> for the resource. */
     @NativeType("VkDeviceSize")
     public long alignment() { return nalignment(address()); }
     /** a bitmask and contains one bit set for every supported memory type for the resource. Bit {@code i} is set if and only if the memory type {@code i} in the {@link VkPhysicalDeviceMemoryProperties} structure for the physical device is supported for the resource. */

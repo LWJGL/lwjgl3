@@ -20,27 +20,22 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>When the implementation sets {@code requiresDedicatedAllocation} to {@link VK10#VK_TRUE TRUE}, it <b>must</b> also set {@code prefersDedicatedAllocation} to {@link VK10#VK_TRUE TRUE}.</p>
+ * <p>To determine the dedicated allocation requirements of a buffer or image resource, add a {@link VkMemoryDedicatedRequirements} structure to the {@code pNext} chain of the {@link VkMemoryRequirements2} structure passed as the {@code pMemoryRequirements} parameter of {@link VK11#vkGetBufferMemoryRequirements2 GetBufferMemoryRequirements2} or {@link VK11#vkGetImageMemoryRequirements2 GetImageMemoryRequirements2}, respectively.</p>
  * 
- * <p>If the {@link VkMemoryDedicatedRequirements} structure is included in the {@code pNext} chain of the {@link VkMemoryRequirements2} structure passed as the {@code pMemoryRequirements} parameter of a {@code vkGetBufferMemoryRequirements2} call, {@code requiresDedicatedAllocation} <b>may</b> be {@link VK10#VK_TRUE TRUE} under one of the following conditions:</p>
- * 
- * <ul>
- * <li>The {@code pNext} chain of {@link VkBufferCreateInfo} for the call to {@code vkCreateBuffer} used to create the buffer being queried included a {@link VkExternalMemoryBufferCreateInfo} structure, and any of the handle types specified in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes} requires dedicated allocation, as reported by {@link VK11#vkGetPhysicalDeviceExternalBufferProperties GetPhysicalDeviceExternalBufferProperties} in {@link VkExternalBufferProperties}{@code ::externalMemoryProperties}.externalMemoryFeatures, the {@code requiresDedicatedAllocation} field will be set to {@link VK10#VK_TRUE TRUE}.</li>
- * </ul>
- * 
- * <p>In all other cases, {@code requiresDedicatedAllocation} <b>must</b> be set to {@link VK10#VK_FALSE FALSE} by the implementation whenever a {@link VkMemoryDedicatedRequirements} structure is included in the {@code pNext} chain of the {@link VkMemoryRequirements2} structure passed to a call to {@code vkGetBufferMemoryRequirements2}.</p>
- * 
- * <p>If the {@link VkMemoryDedicatedRequirements} structure is included in the {@code pNext} chain of the {@link VkMemoryRequirements2} structure passed as the {@code pMemoryRequirements} parameter of a {@code vkGetBufferMemoryRequirements2} call and {@link VK10#VK_BUFFER_CREATE_SPARSE_BINDING_BIT BUFFER_CREATE_SPARSE_BINDING_BIT} was set in {@link VkBufferCreateInfo}{@code ::flags} when {@code buffer} was created then the implementation <b>must</b> set both {@code prefersDedicatedAllocation} and {@code requiresDedicatedAllocation} to {@link VK10#VK_FALSE FALSE}.</p>
- * 
- * <p>If the {@link VkMemoryDedicatedRequirements} structure is included in the {@code pNext} chain of the {@link VkMemoryRequirements2} structure passed as the {@code pMemoryRequirements} parameter of a {@code vkGetImageMemoryRequirements2} call, {@code requiresDedicatedAllocation} <b>may</b> be {@link VK10#VK_TRUE TRUE} under one of the following conditions:</p>
+ * <p>Constraints on the values returned for buffer resources are:</p>
  * 
  * <ul>
- * <li>The {@code pNext} chain of {@link VkImageCreateInfo} for the call to {@code vkCreateImage} used to create the image being queried included a {@link VkExternalMemoryImageCreateInfo} structure, and any of the handle types specified in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} requires dedicated allocation, as reported by {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} in {@link VkExternalImageFormatProperties}{@code ::externalMemoryProperties}.externalMemoryFeatures, the {@code requiresDedicatedAllocation} field will be set to {@link VK10#VK_TRUE TRUE}.</li>
+ * <li>{@code requiresDedicatedAllocation} <b>may</b> be {@link VK10#VK_TRUE TRUE} if the {@code pNext} chain of {@link VkBufferCreateInfo} for the call to {@code vkCreateBuffer} used to create the buffer being queried included a {@link VkExternalMemoryBufferCreateInfo} structure, and any of the handle types specified in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes} requires dedicated allocation, as reported by {@link VK11#vkGetPhysicalDeviceExternalBufferProperties GetPhysicalDeviceExternalBufferProperties} in {@link VkExternalBufferProperties}{@code ::externalMemoryProperties.externalMemoryFeatures}. Otherwise, {@code requiresDedicatedAllocation} will be {@link VK10#VK_FALSE FALSE}.</li>
+ * <li>When the implementation sets {@code requiresDedicatedAllocation} to {@link VK10#VK_TRUE TRUE}, it <b>must</b> also set {@code prefersDedicatedAllocation} to {@link VK10#VK_TRUE TRUE}.</li>
+ * <li>If {@link VK10#VK_BUFFER_CREATE_SPARSE_BINDING_BIT BUFFER_CREATE_SPARSE_BINDING_BIT} was set in {@link VkBufferCreateInfo}{@code ::flags} when {@code buffer} was created, then both {@code prefersDedicatedAllocation} and {@code requiresDedicatedAllocation} will be {@link VK10#VK_FALSE FALSE}.</li>
  * </ul>
  * 
- * <p>In all other cases, {@code requiresDedicatedAllocation} <b>must</b> be set to {@link VK10#VK_FALSE FALSE} by the implementation whenever a {@link VkMemoryDedicatedRequirements} structure is included in the {@code pNext} chain of the {@link VkMemoryRequirements2} structure passed to a call to {@code vkGetImageMemoryRequirements2}.</p>
+ * <p>Constraints on the values returned for image resources are:</p>
  * 
- * <p>If the {@link VkMemoryDedicatedRequirements} structure is included in the {@code pNext} chain of the {@link VkMemoryRequirements2} structure passed as the {@code pMemoryRequirements} parameter of a {@code vkGetImageMemoryRequirements2} call and {@link VK10#VK_IMAGE_CREATE_SPARSE_BINDING_BIT IMAGE_CREATE_SPARSE_BINDING_BIT} was set in {@link VkImageCreateInfo}{@code ::flags} when {@code image} was created then the implementation <b>must</b> set both {@code prefersDedicatedAllocation} and {@code requiresDedicatedAllocation} to {@link VK10#VK_FALSE FALSE}.</p>
+ * <ul>
+ * <li>{@code requiresDedicatedAllocation} <b>may</b> be {@link VK10#VK_TRUE TRUE} if the {@code pNext} chain of {@link VkImageCreateInfo} for the call to {@link VK10#vkCreateImage CreateImage} used to create the image being queried included a {@link VkExternalMemoryImageCreateInfo} structure, and any of the handle types specified in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} requires dedicated allocation, as reported by {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} in {@link VkExternalImageFormatProperties}{@code ::externalMemoryProperties.externalMemoryFeatures}. Otherwise, {@code requiresDedicatedAllocation} will be {@link VK10#VK_FALSE FALSE}.</li>
+ * <li>If {@link VK10#VK_IMAGE_CREATE_SPARSE_BINDING_BIT IMAGE_CREATE_SPARSE_BINDING_BIT} was set in {@link VkImageCreateInfo}{@code ::flags} when {@code image} was created, then both {@code prefersDedicatedAllocation} and {@code requiresDedicatedAllocation} will be {@link VK10#VK_FALSE FALSE}.</li>
+ * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

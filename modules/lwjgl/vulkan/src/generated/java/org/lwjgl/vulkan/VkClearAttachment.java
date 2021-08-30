@@ -18,14 +18,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying a clear attachment.
  * 
- * <h5>Description</h5>
- * 
- * <p>No memory barriers are needed between {@code vkCmdClearAttachments} and preceding or subsequent draw or attachment clear commands in the same subpass.</p>
- * 
- * <p>The {@code vkCmdClearAttachments} command is not affected by the bound pipeline state.</p>
- * 
- * <p>Attachments <b>can</b> also be cleared at the beginning of a render pass instance by setting {@code loadOp} (or {@code stencilLoadOp}) of {@link VkAttachmentDescription} to {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}, as described for {@link VK10#vkCreateRenderPass CreateRenderPass}.</p>
- * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
@@ -100,7 +92,7 @@ public class VkClearAttachment extends Struct implements NativeResource {
     /** a mask selecting the color, depth and/or stencil aspects of the attachment to be cleared. */
     @NativeType("VkImageAspectFlags")
     public int aspectMask() { return naspectMask(address()); }
-    /** only meaningful if {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} is set in {@code aspectMask}, in which case it is an index to the {@code pColorAttachments} array in the {@link VkSubpassDescription} structure of the current subpass which selects the color attachment to clear. */
+    /** only meaningful if {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} is set in {@code aspectMask}, in which case it is an index into the currently bound color attachments. */
     @NativeType("uint32_t")
     public int colorAttachment() { return ncolorAttachment(address()); }
     /** the color or depth/stencil value to clear the attachment to, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#clears-values">Clear Values</a> below. */

@@ -16,6 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Structure specifying a memory heap.
  * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link VkPhysicalDeviceMemoryProperties}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

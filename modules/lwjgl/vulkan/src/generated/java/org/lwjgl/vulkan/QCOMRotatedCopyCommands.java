@@ -20,7 +20,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>334</dd>
  * <dt><b>Revision</b></dt>
- * <dd>0</dd>
+ * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -36,13 +36,13 @@ package org.lwjgl.vulkan;
  * <h5>Other Extension Metadata</h5>
  * 
  * <dl>
- * <dt>Last Modified Date</dt>
+ * <dt><b>Last Modified Date</b></dt>
  * <dd>2020-09-18</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>None</li>
  * </ul></dd>
- * <dt>Contributors</dt>
+ * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Jeff Leger, Qualcomm Technologies, Inc.</li>
  * </ul></dd>
@@ -51,7 +51,7 @@ package org.lwjgl.vulkan;
 public final class QCOMRotatedCopyCommands {
 
     /** The extension specification version. */
-    public static final int VK_QCOM_ROTATED_COPY_COMMANDS_SPEC_VERSION = 0;
+    public static final int VK_QCOM_ROTATED_COPY_COMMANDS_SPEC_VERSION = 1;
 
     /** The extension name. */
     public static final String VK_QCOM_ROTATED_COPY_COMMANDS_EXTENSION_NAME = "VK_QCOM_rotated_copy_commands";

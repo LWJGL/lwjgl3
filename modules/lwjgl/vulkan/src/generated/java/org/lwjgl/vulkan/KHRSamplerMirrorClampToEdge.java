@@ -8,7 +8,7 @@ package org.lwjgl.vulkan;
 /**
  * {@code VK_KHR_sampler_mirror_clamp_to_edge} extends the set of sampler address modes to include an additional mode ({@link #VK_SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE}) that effectively uses a texture map twice as large as the original image in which the additional half of the new image is a mirror image of the original image.
  * 
- * <p>This new mode relaxes the need to generate images whose opposite edges match by using the original image to generate a matching "{@code mirror image}". This mode allows the texture to be mirrored only once in the negative s, t, and r directions.</p>
+ * <p>This new mode relaxes the need to generate images whose opposite edges match by using the original image to generate a matching “{@code mirror image}”. This mode allows the texture to be mirrored only once in the negative s, t, and r directions.</p>
  * 
  * <h5>Promotion to Vulkan 1.2</h5>
  * 

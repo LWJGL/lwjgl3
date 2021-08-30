@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@link VkPhysicalDeviceMultiviewFeatures} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceFeatures2}, it is filled with values indicating whether each feature is supported. {@link VkPhysicalDeviceMultiviewFeatures} <b>can</b> also be included in the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the features.</p>
+ * <p>If the {@link VkPhysicalDeviceMultiviewFeatures} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceMultiviewFeatures} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -39,8 +39,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceMultiviewFeatures {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #multiview};
  *     VkBool32 {@link #multiviewGeometryShader};
  *     VkBool32 {@link #multiviewTessellationShader};
@@ -94,10 +94,10 @@ public class VkPhysicalDeviceMultiviewFeatures extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** specifies whether the implementation supports multiview rendering within a render pass. If this feature is not enabled, the view mask of each subpass <b>must</b> always be zero. */
@@ -110,9 +110,9 @@ public class VkPhysicalDeviceMultiviewFeatures extends Struct implements NativeR
     @NativeType("VkBool32")
     public boolean multiviewTessellationShader() { return nmultiviewTessellationShader(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMultiviewFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMultiviewFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #multiview} field. */
     public VkPhysicalDeviceMultiviewFeatures multiview(@NativeType("VkBool32") boolean value) { nmultiview(address(), value ? 1 : 0); return this; }
@@ -353,10 +353,10 @@ public class VkPhysicalDeviceMultiviewFeatures extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMultiviewFeatures#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMultiviewFeatures.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMultiviewFeatures#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMultiviewFeatures.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceMultiviewFeatures#multiview} field. */
@@ -369,9 +369,9 @@ public class VkPhysicalDeviceMultiviewFeatures extends Struct implements NativeR
         @NativeType("VkBool32")
         public boolean multiviewTessellationShader() { return VkPhysicalDeviceMultiviewFeatures.nmultiviewTessellationShader(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewFeatures#sType} field. */
         public VkPhysicalDeviceMultiviewFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMultiviewFeatures.nsType(address(), value); return this; }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewFeatures#pNext} field. */
         public VkPhysicalDeviceMultiviewFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMultiviewFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewFeatures#multiview} field. */
         public VkPhysicalDeviceMultiviewFeatures.Buffer multiview(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMultiviewFeatures.nmultiview(address(), value ? 1 : 0); return this; }

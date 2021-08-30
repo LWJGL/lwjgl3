@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Properties of an image's Linux DRM format modifier.
+ * Properties of an image’s Linux DRM format modifier.
  * 
  * <h5>Description</h5>
  * 
@@ -90,7 +90,7 @@ public class VkImageDrmFormatModifierPropertiesEXT extends Struct implements Nat
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** returns the image&#8217;s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#glossary-drm-format-modifier">Linux DRM format modifier</a>. */
+    /** returns the image’s <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#glossary-drm-format-modifier">Linux DRM format modifier</a>. */
     @NativeType("uint64_t")
     public long drmFormatModifier() { return ndrmFormatModifier(address()); }
 

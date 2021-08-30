@@ -21,6 +21,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
+ * <p>To specify which aspects of an input attachment <b>can</b> be read, add a {@link VkRenderPassInputAttachmentAspectCreateInfo} structure to the {@code pNext} chain of the {@link VkRenderPassCreateInfo} structure:</p>
+ * 
  * <p>An application <b>can</b> access any aspect of an input attachment that does not have a specified aspect mask in the {@code pAspectReferences} array. Otherwise, an application <b>must</b> not access aspect(s) of an input attachment other than those in its specified aspect mask.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>

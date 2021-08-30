@@ -95,7 +95,7 @@ public final class KHRExternalMemory {
     public static final int VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR = -1000072003;
 
     /** VK_QUEUE_FAMILY_EXTERNAL_KHR */
-    public static final int VK_QUEUE_FAMILY_EXTERNAL_KHR = (~0-1);
+    public static final int VK_QUEUE_FAMILY_EXTERNAL_KHR = (~1);
 
     private KHRExternalMemory() {}
 
