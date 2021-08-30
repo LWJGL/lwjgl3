@@ -158,7 +158,8 @@ abstract class GeneratorTarget(
             throw IllegalStateException("The source file for template ${module.packageKotlin}.$className does not exist ($it).")
     }.lastModified
 
-    val packageName get() = module.packageName
+    var subpackage: String? = null
+    val packageName get() = if (subpackage == null) module.packageName else "${module.packageName}.$subpackage"
 
     var access = Access.PUBLIC
         set(access) {
