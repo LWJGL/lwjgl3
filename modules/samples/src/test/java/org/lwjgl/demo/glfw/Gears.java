@@ -21,6 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** The Gears demo implemented using GLFW. */
 public class Gears {
 
+    private GLFWAllocator allocator;
     private Callback debugProc;
 
     private long window;
@@ -59,6 +60,13 @@ public class Gears {
     }
 
     private void init() {
+        allocator = GLFWAllocator.calloc()
+            .allocate((size, user) -> nmemAllocChecked(size))
+            .reallocate((block, size, user) -> nmemReallocChecked(block, size))
+            .deallocate((block, user) -> nmemFree(block));
+
+        glfwInitAllocator(allocator);
+
         GLFWErrorCallback.createPrint().set();
         if (!glfwInit()) {
             throw new IllegalStateException("Unable to initialize glfw");
@@ -225,6 +233,11 @@ public class Gears {
 
         glfwTerminate();
         Objects.requireNonNull(glfwSetErrorCallback(null)).free();
+
+        allocator.deallocate().free();
+        allocator.reallocate().free();
+        allocator.allocate().free();
+        allocator.free();
     }
 
 }

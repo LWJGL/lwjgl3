@@ -39,6 +39,7 @@ public class GLFW {
             Init                          = apiGetFunctionAddress(GLFW, "glfwInit"),
             Terminate                     = apiGetFunctionAddress(GLFW, "glfwTerminate"),
             InitHint                      = apiGetFunctionAddress(GLFW, "glfwInitHint"),
+            InitAllocator                 = apiGetFunctionAddress(GLFW, "glfwInitAllocator"),
             GetVersion                    = apiGetFunctionAddress(GLFW, "glfwGetVersion"),
             GetVersionString              = apiGetFunctionAddress(GLFW, "glfwGetVersionString"),
             GetError                      = apiGetFunctionAddress(GLFW, "glfwGetError"),
@@ -1064,6 +1065,41 @@ public class GLFW {
     public static void glfwInitHint(int hint, int value) {
         long __functionAddress = Functions.InitHint;
         invokeV(hint, value, __functionAddress);
+    }
+
+    // --- [ glfwInitAllocator ] ---
+
+    /** Unsafe version of: {@link #glfwInitAllocator InitAllocator} */
+    public static void nglfwInitAllocator(long allocator) {
+        long __functionAddress = Functions.InitAllocator;
+        if (CHECKS) {
+            if (allocator != NULL) { GLFWAllocator.validate(allocator); }
+        }
+        invokePV(allocator, __functionAddress);
+    }
+
+    /**
+     * Sets the init allocator to the desired value.
+     * 
+     * <p>To use the default allocator, call this function with a {@code NULL} argument.</p>
+     * 
+     * <p>If you specify an allocator struct, every member must be a valid function pointer. If any member is {@code NULL}, this function emits {@link #GLFW_INVALID_VALUE INVALID_VALUE} and the
+     * init allocator is unchanged.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <ul>
+     * <li>Possible errors include {@link #GLFW_INVALID_VALUE INVALID_VALUE}.</li>
+     * <li>The specified allocator is copied before this function returns.</li>
+     * <li>This function must only be called from the main thread.</li>
+     * </ul></div>
+     *
+     * @param allocator the allocator to use at the next initialization, or {@code NULL} to use the default one
+     *
+     * @since version 3.4
+     */
+    public static void glfwInitAllocator(@Nullable @NativeType("GLFWallocator const *") GLFWAllocator allocator) {
+        nglfwInitAllocator(memAddressSafe(allocator));
     }
 
     // --- [ glfwGetVersion ] ---

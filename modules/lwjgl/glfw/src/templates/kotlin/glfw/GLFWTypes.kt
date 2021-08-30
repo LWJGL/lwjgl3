@@ -63,6 +63,122 @@ val GLFWgamepadstate = struct(Module.GLFW, "GLFWGamepadState", nativeName = "GLF
 
 // callback functions
 
+val GLFWallocatefun = Module.GLFW.callback {
+    void.p(
+        "GLFWAllocateCallback",
+        "Will be called for memory allocation requests.",
+
+        size_t("size", "the minimum size, in bytes, of the memory block"),
+        opaque_p("user", "the user-defined pointer from the allocator"),
+
+        returnDoc = "the address of the newly allocated memory block, or #NULL if an error occurred",
+        nativeType = "GLFWallocatefun"
+    ) {
+        documentation =
+            """
+            The function pointer type for memory allocation callbacks.
+
+            This is the function pointer type for memory allocation callbacks. A memory allocation callback function has the following signature:
+            ${codeBlock("""
+void* function_name(size_t size, void* user)""")}
+
+            This function must return either a memory block at least {@code size} bytes long, or #NULL if allocation failed. Note that not all parts of GLFW
+            handle allocation failures gracefully yet.
+    
+            This function may be called during #Init() but before the library is flagged as initialized, as well as during #Terminate() after the library is no
+            longer flagged as initialized.
+    
+            Any memory allocated by this function will be deallocated during library termination or earlier.
+    
+            The size will always be greater than zero. Allocations of size zero are filtered out before reaching the custom allocator.
+        
+            ${note(ul(
+                "The returned memory block must be valid at least until it is deallocated.",
+                "This function should not call any GLFW function.",
+                "This function may be called from any thread that calls GLFW functions."
+            ))}
+            """
+        since = "version 3.4"
+    }
+}
+
+
+val GLFWreallocatefun = Module.GLFW.callback {
+    void.p(
+        "GLFWReallocateCallback",
+        "Will be called for memory reallocation requests.",
+
+        Unsafe..void.p("block", "the address of the memory block to reallocate"),
+        size_t("size", "the new minimum size, in bytes, of the memory block"),
+        opaque_p("user", "the user-defined pointer from the allocator"),
+
+        returnDoc = "the address of the newly allocated or resized memory block, or #NULL if an error occurred",
+        nativeType = "GLFWreallocatefun"
+    ) {
+        documentation =
+            """
+            The function pointer type for memory reallocation callbacks.
+
+            This is the function pointer type for memory reallocation callbacks. A memory reallocation callback function has the following signature:
+            ${codeBlock("""
+void* function_name(void* block, size_t size, void* user)            """)}
+
+            This function must return a memory block at least {@code size} bytes long, or #NULL if allocation failed. Note that not all parts of GLFW handle
+            allocation failures gracefully yet.
+
+            This function may be called during #Init() but before the library is flagged as initialized, as well as during #Terminate() after the library is no
+            longer flagged as initialized.
+
+            Any memory allocated by this function will be deallocated during library termination or earlier.
+
+            The block address will never be #NULL and the size will always be greater than zero. Reallocations of a block to size zero are converted into
+            deallocations. Reallocations of #NULL to a non-zero size are converted into regular allocations.
+        
+            ${note(ul(
+                "The returned memory block must be valid at least until it is deallocated.",
+                "This function should not call any GLFW function.",
+                "This function may be called from any thread that calls GLFW functions."
+            ))}
+            """
+        since = "version 3.4"
+    }
+}
+
+val GLFWdeallocatefun = Module.GLFW.callback {
+    void(
+        "GLFWDeallocateCallback",
+        "Will be called for memory deallocation requests.",
+
+        Unsafe..void.p("block", "the address of the memory block to deallocate"),
+        opaque_p("user", "the user-defined pointer from the allocator"),
+
+        nativeType = "GLFWdeallocatefun"
+    ) {
+        documentation = 
+            """
+            The function pointer type for memory deallocation callbacks.
+            
+            This is the function pointer type for memory deallocation callbacks. A memory deallocation callback function has the following signature:
+            ${codeBlock("""
+void function_name(void* block, void* user)""")}
+
+            This function may deallocate the specified memory block. This memory block will have been allocated with the same allocator.
+ 
+            This function may be called during #Init() but before the library is flagged as initialized, as well as during #Terminate() after the library is no
+            longer flagged as initialized.
+ 
+            The block address will never be #NULL. Deallocations of #NULL are filtered out before reaching the custom allocator.
+ 
+            ${note(ul(
+                "The specified memory block will not be accessed by GLFW after this function is called.",
+                "This function should not call any GLFW function.",
+                "This function may be called from any thread that calls GLFW functions."
+            ))}
+            """
+        since = "version 3.4"
+    }
+}
+
 val GLFWerrorfun = Module.GLFW.callback {
     void(
         "GLFWErrorCallback",
@@ -151,6 +267,16 @@ val GLFWerrorfun = Module.GLFW.callback {
     }
 """
     }
+}
+
+val GLFWallocator = struct(Module.GLFW, "GLFWAllocator", nativeName = "GLFWallocator") {
+    documentation = "A custom memory allocator that can be set with #InitAllocator()."
+    since = "version 3.4"
+
+    GLFWallocatefun("allocate", "the memory allocation callback")
+    GLFWreallocatefun("reallocate", "the memory reallocation callback")
+    GLFWdeallocatefun("deallocate", "the memory deallocation callback")
+    nullable..opaque_p("user", "a user-defined pointer that will be passed to the callbacks")
 }
 
 val GLFWmonitorfun = Module.GLFW.callback {

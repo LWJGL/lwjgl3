@@ -1035,6 +1035,28 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     )
 
     void(
+        "InitAllocator",
+        """
+        Sets the init allocator to the desired value.
+
+        To use the default allocator, call this function with a #NULL argument.
+
+        If you specify an allocator struct, every member must be a valid function pointer. If any member is #NULL, this function emits #INVALID_VALUE and the
+        init allocator is unchanged.
+        
+        ${note(ul(
+            "Possible errors include #INVALID_VALUE.",
+            "The specified allocator is copied before this function returns.",
+            "This function must only be called from the main thread."
+        ))}
+        """,
+
+        nullable..GLFWallocator.const.p("allocator", "the allocator to use at the next initialization, or #NULL to use the default one"),
+        since = "version 3.4"
+    )
+
+
+    void(
         "GetVersion",
         """
         Retrieves the major, minor and revision numbers of the GLFW library. It is intended for when you are using GLFW as a shared library and want to ensure
