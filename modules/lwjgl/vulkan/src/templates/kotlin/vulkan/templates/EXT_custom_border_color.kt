@@ -20,7 +20,7 @@ val EXT_custom_border_color = "EXTCustomBorderColor".nativeClassVK("EXT_custom_b
             <li>#BORDER_COLOR_INT_CUSTOM_EXT</li>
         </ul>
 
-        When #BORDER_COLOR_FLOAT_CUSTOM_EXT or #BORDER_COLOR_INT_CUSTOM_EXT is used, applications must provide a ##VkSamplerCustomBorderColorCreateInfoEXT in the pNext chain for ##VkSamplerCreateInfo.
+        When #BORDER_COLOR_FLOAT_CUSTOM_EXT or #BORDER_COLOR_INT_CUSTOM_EXT is used, applications must provide a ##VkSamplerCustomBorderColorCreateInfoEXT in the {@code pNext} chain for ##VkSamplerCreateInfo.
 
         <h5>VK_EXT_custom_border_color</h5>
         <dl>
@@ -39,6 +39,12 @@ val EXT_custom_border_color = "EXTCustomBorderColor".nativeClassVK("EXT_custom_b
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
+            </ul></dd>
+
+            <dt><b>Special Uses</b></dt>
+            <dd><ul>
+                <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>
+                <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">D3D support</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

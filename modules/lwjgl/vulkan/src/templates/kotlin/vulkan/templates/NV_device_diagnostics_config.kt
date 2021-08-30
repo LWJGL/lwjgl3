@@ -11,7 +11,7 @@ import vulkan.*
 val NV_device_diagnostics_config = "NVDeviceDiagnosticsConfig".nativeClassVK("NV_device_diagnostics_config", type = "device", postfix = NV) {
     documentation =
         """
-        Applications using Nvidia Nsight<sup>(TM)</sup> Aftermath SDK for Vulkan to integrate device crash dumps into their error reporting mechanisms, <b>may</b> use this extension to configure options related to device crash dump creation.
+        Applications using Nvidia Nsight™ Aftermath SDK for Vulkan to integrate device crash dumps into their error reporting mechanisms, <b>may</b> use this extension to configure options related to device crash dump creation.
 
         <h5>VK_NV_device_diagnostics_config</h5>
         <dl>

@@ -145,6 +145,11 @@ val EXT_full_screen_exclusive = "EXTFullScreenExclusive".nativeClassVK("EXT_full
         <h5>Description</h5>
         {@code vkGetPhysicalDeviceSurfacePresentModes2EXT} behaves similarly to #GetPhysicalDeviceSurfacePresentModesKHR(), with the ability to specify extended inputs via chained input structures.
 
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code pSurfaceInfo→surface} <b>must</b> be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
+        </ul>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
@@ -276,6 +281,11 @@ val EXT_full_screen_exclusive = "EXTFullScreenExclusive".nativeClassVK("EXT_full
 
         <h5>Description</h5>
         {@code vkGetDeviceGroupSurfacePresentModes2EXT} behaves similarly to #GetDeviceGroupSurfacePresentModesKHR(), with the ability to specify extended inputs via chained input structures.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code pSurfaceInfo→surface} <b>must</b> be supported by all physical devices associated with {@code device}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

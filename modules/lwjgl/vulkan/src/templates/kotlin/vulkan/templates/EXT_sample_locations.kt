@@ -132,8 +132,8 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td><td></td></tr></tbody>
+            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
+            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
         </table>
 
         <h5>See Also</h5>
@@ -150,9 +150,7 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
         Report sample count specific multisampling capabilities of a physical device.
 
         <h5>C Specification</h5>
-        In addition to the minimum capabilities described for (<a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits">Limits</a>) above, implementations <b>may</b> support additional multisampling capabilities specific to a particular sample count.
-
-        To query additional sample count specific multisampling capabilities, call:
+        To query additional multisampling capabilities which <b>may</b> be supported for a specific sample count, beyond the minimum capabilities described for <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits">Limits</a> above, call:
 
         <pre><code>
 ￿void vkGetPhysicalDeviceMultisamplePropertiesEXT(
@@ -172,7 +170,7 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
         """,
 
         VkPhysicalDevice("physicalDevice", "the physical device from which to query the additional multisampling capabilities."),
-        VkSampleCountFlagBits("samples", "the sample count to query the capabilities for."),
-        VkMultisamplePropertiesEXT.p("pMultisampleProperties", "a pointer to a ##VkMultisamplePropertiesEXT structure in which information about the additional multisampling capabilities specific to the sample count is returned.")
+        VkSampleCountFlagBits("samples", "a {@code VkSampleCountFlagBits} value specifying the sample count to query capabilities for."),
+        VkMultisamplePropertiesEXT.p("pMultisampleProperties", "a pointer to a ##VkMultisamplePropertiesEXT structure in which information about additional multisampling capabilities specific to the sample count is returned.")
     )
 }

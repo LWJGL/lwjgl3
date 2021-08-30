@@ -28,8 +28,8 @@ val NV_fragment_shader_barycentric = "NVFragmentShaderBarycentric".nativeClassVK
         When using GLSL source-based shader languages, the following variables from {@code GL_NV_fragment_shader_barycentric} maps to these SPIR-V built-in decorations:
 
         <ul>
-            <li>{@code in vec3 gl_BaryCoordNV;} &#8594; {@code BaryCoordNV}</li>
-            <li>{@code in vec3 gl_BaryCoordNoPerspNV;} &#8594; {@code BaryCoordNoPerspNV}</li>
+            <li>{@code in vec3 gl_BaryCoordNV;} → {@code BaryCoordNV}</li>
+            <li>{@code in vec3 gl_BaryCoordNoPerspNV;} → {@code BaryCoordNoPerspNV}</li>
         </ul>
 
         GLSL variables declared using the {@code __pervertexNV} GLSL qualifier are expected to be decorated with {@code PerVertexNV} in SPIR-V.

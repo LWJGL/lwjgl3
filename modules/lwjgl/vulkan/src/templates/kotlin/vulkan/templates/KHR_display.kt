@@ -15,7 +15,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 
         <h5>Examples</h5>
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The example code for the {@code VK_KHR_display} and {@link KHRDisplaySwapchain VK_KHR_display_swapchain} extensions was removed from the appendix after revision 1.0.43. The display enumeration example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c).
+        The example code for the {@code VK_KHR_display} and {@link KHRDisplaySwapchain VK_KHR_display_swapchain} extensions was removed from the appendix after revision 1.0.43. The display enumeration example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c">https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c</a>).
         </div>
 
         <h5>VK_KHR_display</h5>
@@ -97,8 +97,8 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <ul>
             <li>#DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR specifies that the source image will be treated as opaque.</li>
             <li>#DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR specifies that a global alpha value <b>must</b> be specified that will be applied to all pixels in the source image.</li>
-            <li>#DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR specifies that the alpha value will be determined by the alpha channel of the source image&#8217;s pixels. If the source format contains no alpha values, no blending will be applied. The source alpha values are not premultiplied into the source image&#8217;s other color channels.</li>
-            <li>#DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR is equivalent to #DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR, except the source alpha values are assumed to be premultiplied into the source image&#8217;s other color channels.</li>
+            <li>#DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR specifies that the alpha value will be determined by the alpha channel of the source image’s pixels. If the source format contains no alpha values, no blending will be applied. The source alpha values are not premultiplied into the source image’s other color channels.</li>
+            <li>#DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR is equivalent to #DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR, except the source alpha values are assumed to be premultiplied into the source image’s other color channels.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -126,7 +126,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 ￿    VkDisplayPropertiesKHR*                     pProperties);</code></pre>
 
         <h5>Description</h5>
-        If {@code pProperties} is {@code NULL}, then the number of display devices available for {@code physicalDevice} is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of display devices for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of display devices available for {@code physicalDevice}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
+        If {@code pProperties} is {@code NULL}, then the number of display devices available for {@code physicalDevice} is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of display devices for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available properties were returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -223,7 +223,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 ￿    VkDisplayKHR*                               pDisplays);</code></pre>
 
         <h5>Description</h5>
-        If {@code pDisplays} is {@code NULL}, then the number of displays usable with the specified {@code planeIndex} for {@code physicalDevice} is returned in {@code pDisplayCount}. Otherwise, {@code pDisplayCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pDisplays} array, and on return the variable is overwritten with the number of handles actually written to {@code pDisplays}. If the value of {@code pDisplayCount} is less than the number of display planes for {@code physicalDevice}, at most {@code pDisplayCount} handles will be written. If {@code pDisplayCount} is smaller than the number of displays usable with the specified {@code planeIndex} for {@code physicalDevice}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
+        If {@code pDisplays} is {@code NULL}, then the number of displays usable with the specified {@code planeIndex} for {@code physicalDevice} is returned in {@code pDisplayCount}. Otherwise, {@code pDisplayCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pDisplays} array, and on return the variable is overwritten with the number of handles actually written to {@code pDisplays}. If the value of {@code pDisplayCount} is less than the number of usable display-plane pairs for {@code physicalDevice}, at most {@code pDisplayCount} handles will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available pairs were returned.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -275,7 +275,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 ￿    VkDisplayModePropertiesKHR*                 pProperties);</code></pre>
 
         <h5>Description</h5>
-        If {@code pProperties} is {@code NULL}, then the number of display modes available on the specified {@code display} for {@code physicalDevice} is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of display modes for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written. If {@code pPropertyCount} is smaller than the number of display modes available on the specified {@code display} for {@code physicalDevice}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
+        If {@code pProperties} is {@code NULL}, then the number of display modes available on the specified {@code display} for {@code physicalDevice} is returned in {@code pPropertyCount}. Otherwise, {@code pPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pProperties}. If the value of {@code pPropertyCount} is less than the number of display modes for {@code physicalDevice}, at most {@code pPropertyCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available display modes were returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -363,9 +363,9 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 
         VkPhysicalDevice("physicalDevice", "the physical device associated with {@code display}."),
         VkDisplayKHR("display", "the display to create an additional mode for."),
-        VkDisplayModeCreateInfoKHR.const.p("pCreateInfo", "a ##VkDisplayModeCreateInfoKHR structure describing the new mode to create."),
+        VkDisplayModeCreateInfoKHR.const.p("pCreateInfo", "a pointer to a ##VkDisplayModeCreateInfoKHR structure describing the new mode to create."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the display mode object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
-        Check(1)..VkDisplayModeKHR.p("pMode", "returns the handle of the mode created.")
+        Check(1)..VkDisplayModeKHR.p("pMode", "a pointer to a {@code VkDisplayModeKHR} handle in which the mode created is returned.")
     )
 
     VkResult(
@@ -374,7 +374,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         Query capabilities of a mode and plane combination.
 
         <h5>C Specification</h5>
-        Applications that wish to present directly to a display <b>must</b> select which layer, or "{@code plane}" of the display they wish to target, and a mode to use with the display. Each display supports at least one plane. The capabilities of a given mode and plane combination are determined by calling:
+        Applications that wish to present directly to a display <b>must</b> select which layer, or “{@code plane}” of the display they wish to target, and a mode to use with the display. Each display supports at least one plane. The capabilities of a given mode and plane combination are determined by calling:
 
         <pre><code>
 ￿VkResult vkGetDisplayPlaneCapabilitiesKHR(
@@ -413,7 +413,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         ##VkDisplayPlaneCapabilitiesKHR
         """,
 
-        VkPhysicalDevice("physicalDevice", "the physical device associated with {@code display}"),
+        VkPhysicalDevice("physicalDevice", "the physical device associated with the display specified by {@code mode}"),
         VkDisplayModeKHR("mode", "the display mode the application intends to program when using the specified plane. Note this parameter also implicitly specifies a display."),
         uint32_t("planeIndex", "the plane which the application intends to use with the display, and is less than the number of display planes supported by the device."),
         VkDisplayPlaneCapabilitiesKHR.p("pCapabilities", "a pointer to a ##VkDisplayPlaneCapabilitiesKHR structure in which the capabilities are returned.")
@@ -425,7 +425,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         Create a {@code VkSurfaceKHR} structure representing a display plane and mode.
 
         <h5>C Specification</h5>
-        A complete display configuration includes a mode, one or more display planes and any parameters describing their behavior, and parameters describing some aspects of the images associated with those planes. Display surfaces describe the configuration of a single plane within a complete display configuration. To create a {@code VkSurfaceKHR} structure for a display surface, call:
+        A complete display configuration includes a mode, one or more display planes and any parameters describing their behavior, and parameters describing some aspects of the images associated with those planes. Display surfaces describe the configuration of a single plane within a complete display configuration. To create a {@code VkSurfaceKHR} object for a display plane, call:
 
         <pre><code>
 ￿VkResult vkCreateDisplayPlaneSurfaceKHR(

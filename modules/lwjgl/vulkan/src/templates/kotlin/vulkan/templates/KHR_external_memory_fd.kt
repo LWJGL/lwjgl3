@@ -90,7 +90,7 @@ val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_m
 ￿    int*                                        pFd);</code></pre>
 
         <h5>Description</h5>
-        Each call to {@code vkGetMemoryFdKHR} <b>must</b> create a new file descriptor holding a reference to the memory object's payload and transfer ownership of the file descriptor to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor using the {@code close} system call when it is no longer needed, or by importing a Vulkan memory object from it. Where supported by the operating system, the implementation <b>must</b> set the file descriptor to be closed automatically when an {@code execve} system call is made.
+        Each call to {@code vkGetMemoryFdKHR} <b>must</b> create a new file descriptor holding a reference to the memory object’s payload and transfer ownership of the file descriptor to the application. To avoid leaking resources, the application <b>must</b> release ownership of the file descriptor using the {@code close} system call when it is no longer needed, or by importing a Vulkan memory object from it. Where supported by the operating system, the implementation <b>must</b> set the file descriptor to be closed automatically when an {@code execve} system call is made.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -169,7 +169,7 @@ val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_m
         """,
 
         VkDevice("device", "the logical device that will be importing {@code fd}."),
-        VkExternalMemoryHandleTypeFlagBits("handleType", "the type of the handle {@code fd}."),
+        VkExternalMemoryHandleTypeFlagBits("handleType", "a {@code VkExternalMemoryHandleTypeFlagBits} value specifying the type of the handle {@code fd}."),
         int("fd", "the handle which will be imported."),
         VkMemoryFdPropertiesKHR.p("pMemoryFdProperties", "a pointer to a ##VkMemoryFdPropertiesKHR structure in which the properties of the handle {@code fd} are returned.")
     )

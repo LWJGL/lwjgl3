@@ -11,11 +11,11 @@ import vulkan.*
 val EXT_robustness2 = "EXTRobustness2".nativeClassVK("EXT_robustness2", type = "device", postfix = EXT) {
     documentation =
         """
-        This extension adds stricter requirements for how out of bounds reads and writes are handled. Most accesses <b>must</b> be tightly bounds-checked, out of bounds writes <b>must</b> be discarded, out of bound reads <b>must</b> return zero. Rather than allowing multiple possible <code>(0,0,0,x)</code> vectors, the out of bounds values are treated as zero, and then missing components are inserted based on the format as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#textures-conversion-to-rgba"> Conversion to RGBA</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#fxvertex-input-extraction">vertex input attribute extraction</a>.
+        This extension adds stricter requirements for how out of bounds reads and writes are handled. Most accesses <b>must</b> be tightly bounds-checked, out of bounds writes <b>must</b> be discarded, out of bound reads <b>must</b> return zero. Rather than allowing multiple possible <code>(0,0,0,x)</code> vectors, the out of bounds values are treated as zero, and then missing components are inserted based on the format as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#textures-conversion-to-rgba">Conversion to RGBA</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#fxvertex-input-extraction">vertex input attribute extraction</a>.
 
         These additional requirements <b>may</b> be expensive on some implementations, and should only be enabled when truly necessary.
 
-        This extension also adds support for "null descriptors", where #NULL_HANDLE <b>can</b> be used instead of a valid handle. Accesses to null descriptors have well-defined behavior, and don't rely on robustness.
+        This extension also adds support for “{@code null descriptors}”, where #NULL_HANDLE <b>can</b> be used instead of a valid handle. Accesses to null descriptors have well-defined behavior, and do not rely on robustness.
 
         <h5>Examples</h5>
         None.

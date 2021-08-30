@@ -15,7 +15,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         <h5>Examples</h5>
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The example code for the {@link KHRSurface VK_KHR_surface} and {@code VK_KHR_swapchain} extensions was removed from the appendix after revision 1.0.29. This WSI example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c).
+        The example code for the {@link KHRSurface VK_KHR_surface} and {@code VK_KHR_swapchain} extensions was removed from the appendix after revision 1.0.29. This WSI example code was ported to the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c">https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c</a>).
         </div>
 
         <h5>VK_KHR_swapchain</h5>
@@ -185,7 +185,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         In particular, it will fail if the {@code imageExtent} member of {@code pCreateInfo} does not match the extents of the monitor. Other reasons for failure may include the app not being set as high-dpi aware, or if the physical device and monitor are not compatible in this mode.
         </div>
 
-        When the {@code VkSurfaceKHR} in ##VkSwapchainCreateInfoKHR is a display surface, then the {@code VkDisplayModeKHR} in display surface's ##VkDisplaySurfaceCreateInfoKHR is associated with a particular {@code VkDisplayKHR}. Swapchain creation <b>may</b> fail if that {@code VkDisplayKHR} is not acquired by the application. In this scenario #ERROR_INITIALIZATION_FAILED is returned.
+        When the {@code VkSurfaceKHR} in ##VkSwapchainCreateInfoKHR is a display surface, then the {@code VkDisplayModeKHR} in display surface’s ##VkDisplaySurfaceCreateInfoKHR is associated with a particular {@code VkDisplayKHR}. Swapchain creation <b>may</b> fail if that {@code VkDisplayKHR} is not acquired by the application. In this scenario #ERROR_INITIALIZATION_FAILED is returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -197,8 +197,8 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         <h5>Host Synchronization</h5>
         <ul>
-            <li>Host access to {@code pCreateInfo}&#8594;surface <b>must</b> be externally synchronized</li>
-            <li>Host access to {@code pCreateInfo}&#8594;oldSwapchain <b>must</b> be externally synchronized</li>
+            <li>Host access to {@code pCreateInfo→surface} <b>must</b> be externally synchronized</li>
+            <li>Host access to {@code pCreateInfo→oldSwapchain} <b>must</b> be externally synchronized</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -295,7 +295,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 ￿    VkImage*                                    pSwapchainImages);</code></pre>
 
         <h5>Description</h5>
-        If {@code pSwapchainImages} is {@code NULL}, then the number of presentable images for {@code swapchain} is returned in {@code pSwapchainImageCount}. Otherwise, {@code pSwapchainImageCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSwapchainImages} array, and on return the variable is overwritten with the number of structures actually written to {@code pSwapchainImages}. If the value of {@code pSwapchainImageCount} is less than the number of presentable images for {@code swapchain}, at most {@code pSwapchainImageCount} structures will be written. If {@code pSwapchainImageCount} is smaller than the number of presentable images for {@code swapchain}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
+        If {@code pSwapchainImages} is {@code NULL}, then the number of presentable images for {@code swapchain} is returned in {@code pSwapchainImageCount}. Otherwise, {@code pSwapchainImageCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pSwapchainImages} array, and on return the variable is overwritten with the number of structures actually written to {@code pSwapchainImages}. If the value of {@code pSwapchainImageCount} is less than the number of presentable images for {@code swapchain}, at most {@code pSwapchainImageCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available presentable images were returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -447,7 +447,9 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         However, if the presentation request is rejected by the presentation engine with an error #ERROR_OUT_OF_DATE_KHR, #ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT, or #ERROR_SURFACE_LOST_KHR, the set of queue operations are still considered to be enqueued and thus any semaphore wait operation specified in ##VkPresentInfoKHR will execute when the corresponding queue operation is complete.
 
-        If any {@code swapchain} member of {@code pPresentInfo} was created with #FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT, #ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT will be returned if that swapchain does not have exclusive full-screen access, possibly for implementation-specific reasons outside of the application's control.
+        Calls to {@code vkQueuePresentKHR} <b>may</b> block, but <b>must</b> return in finite time.
+
+        If any {@code swapchain} member of {@code pPresentInfo} was created with #FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT, #ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT will be returned if that swapchain does not have exclusive full-screen access, possibly for implementation-specific reasons outside of the application’s control.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -458,14 +460,14 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         <h5>Host Synchronization</h5>
         <ul>
             <li>Host access to {@code queue} <b>must</b> be externally synchronized</li>
-            <li>Host access to {@code pPresentInfo}&#8594;pWaitSemaphores[] <b>must</b> be externally synchronized</li>
-            <li>Host access to {@code pPresentInfo}&#8594;pSwapchains[] <b>must</b> be externally synchronized</li>
+            <li>Host access to {@code pPresentInfo→pWaitSemaphores}[] <b>must</b> be externally synchronized</li>
+            <li>Host access to {@code pPresentInfo→pSwapchains}[] <b>must</b> be externally synchronized</li>
         </ul>
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-pipeline-stages-types">Pipeline Type</a></th></tr></thead>
-            <tbody><tr><td>-</td><td>-</td><td>Any</td><td>-</td></tr></tbody>
+            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
+            <tbody><tr><td>-</td><td>-</td><td>Any</td></tr></tbody>
         </table>
 
         <h5>Return Codes</h5>
@@ -491,7 +493,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         ##VkPresentInfoKHR
         """,
 
-        VkQueue("queue", "a queue that is capable of presentation to the target surface&#8217;s platform on the same device as the image&#8217;s swapchain."),
+        VkQueue("queue", "a queue that is capable of presentation to the target surface’s platform on the same device as the image’s swapchain."),
         VkPresentInfoKHR.const.p("pPresentInfo", "a pointer to a ##VkPresentInfoKHR structure specifying parameters of the presentation.")
     )
 
@@ -535,7 +537,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         """,
 
         VkDevice("device", "the logical device."),
-        VkDeviceGroupPresentCapabilitiesKHR.p("pDeviceGroupPresentCapabilities", "a pointer to a ##VkDeviceGroupPresentCapabilitiesKHR structure in which the device&#8217;s capabilities are returned.")
+        VkDeviceGroupPresentCapabilitiesKHR.p("pDeviceGroupPresentCapabilities", "a pointer to a ##VkDeviceGroupPresentCapabilitiesKHR structure in which the device’s capabilities are returned.")
     )
 
     DependsOn("Vulkan11")..VkResult(
@@ -556,6 +558,11 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
         <h5>Description</h5>
         The modes returned by this command are not invariant, and <b>may</b> change in response to the surface being moved, resized, or occluded. These modes <b>must</b> be a subset of the modes returned by #GetDeviceGroupPresentCapabilitiesKHR().
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code surface} <b>must</b> be supported by all physical devices associated with {@code device}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -609,11 +616,16 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 ￿    VkRect2D*                                   pRects);</code></pre>
 
         <h5>Description</h5>
-        If {@code pRects} is {@code NULL}, then the number of rectangles used when presenting the given {@code surface} is returned in {@code pRectCount}. Otherwise, {@code pRectCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pRects} array, and on return the variable is overwritten with the number of structures actually written to {@code pRects}. If the value of {@code pRectCount} is less than the number of rectangles, at most {@code pRectCount} structures will be written. If {@code pRectCount} is smaller than the number of rectangles used for the given {@code surface}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
+        If {@code pRects} is {@code NULL}, then the number of rectangles used when presenting the given {@code surface} is returned in {@code pRectCount}. Otherwise, {@code pRectCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pRects} array, and on return the variable is overwritten with the number of structures actually written to {@code pRects}. If the value of {@code pRectCount} is less than the number of rectangles, at most {@code pRectCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available rectangles were returned.
 
         The values returned by this command are not invariant, and <b>may</b> change in response to the surface being moved, resized, or occluded.
 
         The rectangles returned by this command <b>must</b> not overlap.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code surface} <b>must</b> be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

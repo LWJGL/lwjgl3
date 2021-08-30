@@ -13,7 +13,7 @@ val EXT_tooling_info = "EXTToolingInfo".nativeClassVK("EXT_tooling_info", type =
         """
         When an error occurs during application development, a common question is "What tools are actually running right now?" This extension adds the ability to query that information directly from the Vulkan implementation.
 
-        Outdated versions of one tool might not play nicely with another, or perhaps a tool is not actually running when it should have been. Trying to figure that out can cause headaches as it is necessary to consult each known tool to figure out what is going on -- in some cases the tool might not even be known.
+        Outdated versions of one tool might not play nicely with another, or perhaps a tool is not actually running when it should have been. Trying to figure that out can cause headaches as it is necessary to consult each known tool to figure out what is going on — in some cases the tool might not even be known.
 
         Typically, the expectation is that developers will simply print out this information for visual inspection when an issue occurs, however a small amount of semantic information about what the tool is doing is provided to help identify it programmatically. For example, if the advertised limits or features of an implementation are unexpected, is there a tool active which modifies these limits? Or if an application is providing debug markers, but the implementation is not actually doing anything with that information, this can quickly point that out.
 
@@ -114,7 +114,7 @@ val EXT_tooling_info = "EXTToolingInfo".nativeClassVK("EXT_tooling_info", type =
         <ul>
             <li>#TOOL_PURPOSE_VALIDATION_BIT_EXT specifies that the tool provides validation of API usage.</li>
             <li>#TOOL_PURPOSE_PROFILING_BIT_EXT specifies that the tool provides profiling of API usage.</li>
-            <li>#TOOL_PURPOSE_TRACING_BIT_EXT specifies that the tool is capturing data about the application&#8217;s API usage, including anything from simple logging to capturing data for later replay.</li>
+            <li>#TOOL_PURPOSE_TRACING_BIT_EXT specifies that the tool is capturing data about the application’s API usage, including anything from simple logging to capturing data for later replay.</li>
             <li>#TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT specifies that the tool provides additional API features/extensions on top of the underlying implementation.</li>
             <li>#TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT specifies that the tool modifies the API features/limits/extensions presented to the application.</li>
             <li>#TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT specifies that the tool reports additional information to the application via callbacks specified by #CreateDebugReportCallbackEXT() or #CreateDebugUtilsMessengerEXT()</li>

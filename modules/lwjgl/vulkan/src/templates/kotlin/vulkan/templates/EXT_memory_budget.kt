@@ -17,7 +17,7 @@ val EXT_memory_budget = "EXTMemoryBudget".nativeClassVK("EXT_memory_budget", typ
 
         The ##VkPhysicalDeviceMemoryBudgetPropertiesEXT{@code ::heapUsage} will display the <b>current process</b> estimated heap usage.
 
-        With this information, the idea is for an application at some interval (once per frame, per few seconds, etc) to query {@code heapBudget} and {@code heapUsage}. From here the application can notice if it is over budget and decide how it wants to handle the memory situation (free it, move to host memory, changing mipmap levels, etc). This extension is designed to be used in concert with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VK_EXT_memory_priority">VK_EXT_memory_priority</a> to help with this part of memory management.
+        With this information, the idea is for an application at some interval (once per frame, per few seconds, etc) to query {@code heapBudget} and {@code heapUsage}. From here the application can notice if it is over budget and decide how it wants to handle the memory situation (free it, move to host memory, changing mipmap levels, etc). This extension is designed to be used in concert with {@link EXTMemoryPriority VK_EXT_memory_priority} to help with this part of memory management.
 
         <h5>VK_EXT_memory_budget</h5>
         <dl>

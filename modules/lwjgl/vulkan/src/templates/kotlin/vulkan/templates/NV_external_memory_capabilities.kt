@@ -144,7 +144,7 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
 ￿    VkExternalImageFormatPropertiesNV*          pExternalImageFormatProperties);</code></pre>
 
         <h5>Description</h5>
-        If {@code externalHandleType} is 0, {@code pExternalImageFormatProperties}-&gt;imageFormatProperties will return the same values as a call to #GetPhysicalDeviceImageFormatProperties(), and the other members of {@code pExternalImageFormatProperties} will all be 0. Otherwise, they are filled in as described for ##VkExternalImageFormatPropertiesNV.
+        If {@code externalHandleType} is 0, {@code pExternalImageFormatProperties→imageFormatProperties} will return the same values as a call to #GetPhysicalDeviceImageFormatProperties(), and the other members of {@code pExternalImageFormatProperties} will all be 0. Otherwise, they are filled in as described for ##VkExternalImageFormatPropertiesNV.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

@@ -11,7 +11,7 @@ import vulkan.*
 val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "device", postfix = AMD) {
     documentation =
         """
-        This extension adds a way to query certain information about a compiled shader which is part of a pipeline. This information may include shader disassembly, shader binary and various statistics about a shader's resource usage.
+        This extension adds a way to query certain information about a compiled shader which is part of a pipeline. This information may include shader disassembly, shader binary and various statistics about a shader’s resource usage.
 
         While this extension provides a mechanism for extracting this information, the details regarding the contents or format of this information are not specified by this extension and may be provided by the vendor externally.
 
@@ -130,7 +130,7 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
 
     EnumConstant(
         """
-        VkShaderInfoTypeAMD - Enum specifying which type of shader info to query
+        VkShaderInfoTypeAMD - Enum specifying which type of shader information to query
 
         <h5>Description</h5>
         <ul>
@@ -166,9 +166,7 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
 ￿    void*                                       pInfo);</code></pre>
 
         <h5>Description</h5>
-        If {@code pInfo} is {@code NULL}, then the maximum size of the information that <b>can</b> be retrieved about the shader, in bytes, is returned in {@code pInfoSize}. Otherwise, {@code pInfoSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pInfo}, and on return the variable is overwritten with the amount of data actually written to {@code pInfo}.
-
-        If {@code pInfoSize} is less than the maximum size that <b>can</b> be retrieved by the pipeline cache, then at most {@code pInfoSize} bytes will be written to {@code pInfo}, and {@code vkGetShaderInfoAMD} will return #INCOMPLETE.
+        If {@code pInfo} is {@code NULL}, then the maximum size of the information that <b>can</b> be retrieved about the shader, in bytes, is returned in {@code pInfoSize}. Otherwise, {@code pInfoSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pInfo}, and on return the variable is overwritten with the amount of data actually written to {@code pInfo}. If {@code pInfoSize} is less than the maximum size that <b>can</b> be retrieved by the pipeline cache, then at most {@code pInfoSize} bytes will be written to {@code pInfo}, and #INCOMPLETE will be returned, instead of #SUCCESS, to indicate that not all required of the pipeline cache was returned.
 
         Not all information is available for every shader and implementations may not support all kinds of information for any shader. When a certain type of information is unavailable, the function returns #ERROR_FEATURE_NOT_PRESENT.
 
@@ -209,7 +207,7 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
 
         VkDevice("device", "the device that created {@code pipeline}."),
         VkPipeline("pipeline", "the target of the query."),
-        VkShaderStageFlagBits("shaderStage", "identifies the particular shader within the pipeline about which information is being queried."),
+        VkShaderStageFlagBits("shaderStage", "a {@code VkShaderStageFlagBits} specifying the particular shader within the pipeline about which information is being queried."),
         VkShaderInfoTypeAMD("infoType", "describes what kind of information is being queried."),
         AutoSize("pInfo")..Check(1)..size_t.p("pInfoSize", "a pointer to a value related to the amount of data the query returns, as described below."),
         nullable..void.p("pInfo", "either {@code NULL} or a pointer to a buffer.")

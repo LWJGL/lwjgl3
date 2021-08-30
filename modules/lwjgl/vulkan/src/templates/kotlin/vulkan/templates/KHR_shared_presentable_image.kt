@@ -102,10 +102,10 @@ val KHR_shared_presentable_image = "KHRSharedPresentableImage".nativeClassVK("KH
     VkResult(
         "GetSwapchainStatusKHR",
         """
-        Get a swapchain's status.
+        Get a swapchain’s status.
 
         <h5>C Specification</h5>
-        In order to query a swapchain's status when rendering to a shared presentable image, call:
+        In order to query a swapchain’s status when rendering to a shared presentable image, call:
 
         <pre><code>
 ￿VkResult vkGetSwapchainStatusKHR(

@@ -11,7 +11,7 @@ import vulkan.*
 val NV_corner_sampled_image = "NVCornerSampledImage".nativeClassVK("NV_corner_sampled_image", type = "device", postfix = NV) {
     documentation =
         """
-        This extension adds support for a new image organization, which this extension refers to as "{@code corner-sampled}" images. A corner-sampled image differs from a conventional image in the following ways:
+        This extension adds support for a new image organization, which this extension refers to as “{@code corner-sampled}” images. A corner-sampled image differs from a conventional image in the following ways:
 
         <ul>
             <li>Texels are centered on integer coordinates. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#textures-unnormalized-to-integer">Unnormalized Texel Coordinate Operations</a></li>

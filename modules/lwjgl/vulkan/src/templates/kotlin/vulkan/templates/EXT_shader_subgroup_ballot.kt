@@ -42,20 +42,20 @@ val EXT_shader_subgroup_ballot = "EXTShaderSubgroupBallot".nativeClassVK("EXT_sh
         When using GLSL source-based shader languages, the following variables and shader functions from GL_ARB_shader_ballot can map to these SPIR-V built-in decorations and instructions:
 
         <ul>
-            <li>{@code in uint64_t gl_SubGroupEqMaskARB;} &#8594; {@code SubgroupEqMaskKHR},</li>
-            <li>{@code in uint64_t gl_SubGroupGeMaskARB;} &#8594; {@code SubgroupGeMaskKHR},</li>
-            <li>{@code in uint64_t gl_SubGroupGtMaskARB;} &#8594; {@code SubgroupGtMaskKHR},</li>
-            <li>{@code in uint64_t gl_SubGroupLeMaskARB;} &#8594; {@code SubgroupLeMaskKHR},</li>
-            <li>{@code in uint64_t gl_SubGroupLtMaskARB;} &#8594; {@code SubgroupLtMaskKHR},</li>
-            <li>{@code in uint gl_SubGroupInvocationARB;} &#8594; {@code SubgroupLocalInvocationId},</li>
-            <li>{@code uniform uint gl_SubGroupSizeARB;} &#8594; {@code SubgroupSize},</li>
-            <li>{@code ballotARB}() &#8594; {@code OpSubgroupBallotKHR},</li>
-            <li>{@code readFirstInvocationARB}() &#8594; {@code OpSubgroupFirstInvocationKHR}, and</li>
-            <li>{@code readInvocationARB}() &#8594; {@code OpSubgroupReadInvocationKHR}.</li>
+            <li>{@code in uint64_t gl_SubGroupEqMaskARB;} → {@code SubgroupEqMaskKHR},</li>
+            <li>{@code in uint64_t gl_SubGroupGeMaskARB;} → {@code SubgroupGeMaskKHR},</li>
+            <li>{@code in uint64_t gl_SubGroupGtMaskARB;} → {@code SubgroupGtMaskKHR},</li>
+            <li>{@code in uint64_t gl_SubGroupLeMaskARB;} → {@code SubgroupLeMaskKHR},</li>
+            <li>{@code in uint64_t gl_SubGroupLtMaskARB;} → {@code SubgroupLtMaskKHR},</li>
+            <li>{@code in uint gl_SubGroupInvocationARB;} → {@code SubgroupLocalInvocationId},</li>
+            <li>{@code uniform uint gl_SubGroupSizeARB;} → {@code SubgroupSize},</li>
+            <li>{@code ballotARB}() → {@code OpSubgroupBallotKHR},</li>
+            <li>{@code readFirstInvocationARB}() → {@code OpSubgroupFirstInvocationKHR}, and</li>
+            <li>{@code readInvocationARB}() → {@code OpSubgroupReadInvocationKHR}.</li>
         </ul>
 
         <h5>Deprecated by Vulkan 1.2</h5>
-        Most of the functionality in this extension is superseded by the core Vulkan 1.1 <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkPhysicalDeviceSubgroupProperties"> subgroup operations</a>. However, Vulkan 1.1 required the {@code OpGroupNonUniformBroadcast} "Id" to be constant. This restriction was removed in Vulkan 1.2 with the addition of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-subgroupBroadcastDynamicId">subgroupBroadcastDynamicId</a> feature.
+        Most of the functionality in this extension is superseded by the core Vulkan 1.1 <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkPhysicalDeviceSubgroupProperties">subgroup operations</a>. However, Vulkan 1.1 required the {@code OpGroupNonUniformBroadcast} “{@code Id}” to be constant. This restriction was removed in Vulkan 1.2 with the addition of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-subgroupBroadcastDynamicId">subgroupBroadcastDynamicId</a> feature.
 
         <h5>VK_EXT_shader_subgroup_ballot</h5>
         <dl>

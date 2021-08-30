@@ -11,15 +11,15 @@ import vulkan.*
 val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_timing", type = "device", postfix = GOOGLE) {
     documentation =
         """
-        This device extension allows an application that uses the {@link KHRSwapchain VK_KHR_swapchain} extension to obtain information about the presentation engine's display, to obtain timing information about each present, and to schedule a present to happen no earlier than a desired time. An application can use this to minimize various visual anomalies (e.g. stuttering).
+        This device extension allows an application that uses the {@link KHRSwapchain VK_KHR_swapchain} extension to obtain information about the presentation engine’s display, to obtain timing information about each present, and to schedule a present to happen no earlier than a desired time. An application can use this to minimize various visual anomalies (e.g. stuttering).
 
-        Traditional game and real-time animation applications need to correctly position their geometry for when the presentable image will be presented to the user. To accomplish this, applications need various timing information about the presentation engine's display. They need to know when presentable images were actually presented, and when they could have been presented. Applications also need to tell the presentation engine to display an image no sooner than a given time. This allows the application to avoid stuttering, so the animation looks smooth to the user.
+        Traditional game and real-time animation applications need to correctly position their geometry for when the presentable image will be presented to the user. To accomplish this, applications need various timing information about the presentation engine’s display. They need to know when presentable images were actually presented, and when they could have been presented. Applications also need to tell the presentation engine to display an image no sooner than a given time. This allows the application to avoid stuttering, so the animation looks smooth to the user.
 
         This extension treats variable-refresh-rate (VRR) displays as if they are fixed-refresh-rate (FRR) displays.
 
         <h5>Examples</h5>
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The example code for the this extension (like the {@link KHRSurface VK_KHR_surface} and {@code VK_GOOGLE_display_timing} extensions) is contained in the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c ).
+        The example code for the this extension (like the {@link KHRSurface VK_KHR_surface} and {@code VK_GOOGLE_display_timing} extensions) is contained in the cube demo that is shipped with the official Khronos SDK, and is being kept up-to-date in that location (see: <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c">https://github.com/KhronosGroup/Vulkan-Tools/blob/master/cube/cube.c</a> ).
         </div>
 
         <h5>VK_GOOGLE_display_timing</h5>
@@ -85,10 +85,10 @@ val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_
     VkResult(
         "GetRefreshCycleDurationGOOGLE",
         """
-        Obtain the RC duration of the PE's display.
+        Obtain the RC duration of the PE’s display.
 
         <h5>C Specification</h5>
-        To query the duration of a refresh cycle (RC) for the presentation engine's display, call:
+        To query the duration of a refresh cycle (RC) for the presentation engine’s display, call:
 
         <pre><code>
 ￿VkResult vkGetRefreshCycleDurationGOOGLE(
@@ -151,7 +151,7 @@ val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_
 ￿    VkPastPresentationTimingGOOGLE*             pPresentationTimings);</code></pre>
 
         <h5>Description</h5>
-        If {@code pPresentationTimings} is {@code NULL}, then the number of newly-available timing records for the given {@code swapchain} is returned in {@code pPresentationTimingCount}. Otherwise, {@code pPresentationTimingCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pPresentationTimings} array, and on return the variable is overwritten with the number of structures actually written to {@code pPresentationTimings}. If the value of {@code pPresentationTimingCount} is less than the number of newly-available timing records, at most {@code pPresentationTimingCount} structures will be written. If {@code pPresentationTimingCount} is smaller than the number of newly-available timing records for the given {@code swapchain}, #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the available values were returned.
+        If {@code pPresentationTimings} is {@code NULL}, then the number of newly-available timing records for the given {@code swapchain} is returned in {@code pPresentationTimingCount}. Otherwise, {@code pPresentationTimingCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pPresentationTimings} array, and on return the variable is overwritten with the number of structures actually written to {@code pPresentationTimings}. If the value of {@code pPresentationTimingCount} is less than the number of newly-available timing records, at most {@code pPresentationTimingCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available timing records were returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

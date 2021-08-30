@@ -62,7 +62,7 @@ val EXT_shader_image_atomic_int64 = "EXTShaderImageAtomicInt64".nativeClassVK("E
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_EXT_shader_image_atomic_int64.html">{@code SPV_EXT_shader_image_int64}</a> SPIR-V extension.</li>
+                <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_shader_image_int64.html">{@code SPV_EXT_shader_image_int64}</a> SPIR-V extension.</li>
                 <li>This extension requires the <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_shader_image_int64.txt">{@code GLSL_EXT_shader_image_int64}</a> extension for GLSL source languages.</li>
             </ul></dd>
         </dl>

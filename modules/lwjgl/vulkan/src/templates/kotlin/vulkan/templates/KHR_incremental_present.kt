@@ -27,7 +27,7 @@ val KHR_incremental_present = "KHRIncrementalPresent".nativeClassVK("KHR_increme
             <dd>85</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -67,7 +67,7 @@ val KHR_incremental_present = "KHRIncrementalPresent".nativeClassVK("KHR_increme
     IntConstant(
         "The extension specification version.",
 
-        "KHR_INCREMENTAL_PRESENT_SPEC_VERSION".."1"
+        "KHR_INCREMENTAL_PRESENT_SPEC_VERSION".."2"
     )
 
     StringConstant(

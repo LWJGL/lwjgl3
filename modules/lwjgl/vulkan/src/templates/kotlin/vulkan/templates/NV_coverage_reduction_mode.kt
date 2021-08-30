@@ -14,7 +14,7 @@ val NV_coverage_reduction_mode = "NVCoverageReductionMode".nativeClassVK("NV_cov
         When using a framebuffer with mixed samples, a per-fragment coverage reduction operation is performed which generates color sample coverage from the pixel coverage. This extension defines the following modes to control how this reduction is performed.
 
         <ul>
-            <li>Merge: When there are more samples in the pixel coverage than color samples, there is an implementation dependent association of each pixel coverage sample to a color sample. In the merge mode, the color sample coverage is computed such that only if any associated sample in the pixel coverage is covered, the color sample is covered. This is the default mode.</li>
+            <li>Merge: When there are more samples in the pixel coverage than color samples, there is an implementation-dependent association of each pixel coverage sample to a color sample. In the merge mode, the color sample coverage is computed such that only if any associated sample in the pixel coverage is covered, the color sample is covered. This is the default mode.</li>
             <li>Truncate: When there are more raster samples (N) than color samples(M), there is one to one association of the first M raster samples to the M color samples; other raster samples are ignored.</li>
         </ul>
 
@@ -114,7 +114,7 @@ val NV_coverage_reduction_mode = "NVCoverageReductionMode".nativeClassVK("NV_cov
 ￿    VkFramebufferMixedSamplesCombinationNV*     pCombinations);</code></pre>
 
         <h5>Description</h5>
-        If {@code pCombinations} is {@code NULL}, then the number of supported combinations for the given {@code physicalDevice} is returned in {@code pCombinationCount}. Otherwise, {@code pCombinationCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pCombinations} array, and on return the variable is overwritten with the number of values actually written to {@code pCombinations}. If the value of {@code pCombinationCount} is less than the number of combinations supported for the given {@code physicalDevice}, at most {@code pCombinationCount} values will be written {@code pCombinations} and #INCOMPLETE will be returned instead of #SUCCESS to indicate that not all the supported values were returned.
+        If {@code pCombinations} is {@code NULL}, then the number of supported combinations for the given {@code physicalDevice} is returned in {@code pCombinationCount}. Otherwise, {@code pCombinationCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pCombinations} array, and on return the variable is overwritten with the number of values actually written to {@code pCombinations}. If the value of {@code pCombinationCount} is less than the number of combinations supported for the given {@code physicalDevice}, at most {@code pCombinationCount} values will be written to {@code pCombinations}, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the supported values were returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

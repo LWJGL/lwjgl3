@@ -11,9 +11,9 @@ import vulkan.*
 val KHR_draw_indirect_count = "KHRDrawIndirectCount".nativeClassVK("KHR_draw_indirect_count", type = "device", postfix = KHR) {
     documentation =
         """
-        This extension is based off the {@link AMDDrawIndirectCount VK_AMD_draw_indirect_count} extension. This extension allows an application to source the number of draw calls for indirect draw calls from a buffer.
+        This extension is based off the {@link AMDDrawIndirectCount VK_AMD_draw_indirect_count} extension. This extension allows an application to source the number of draws for indirect draw calls from a buffer.
 
-        Applications might want to do culling on the GPU via a compute shader prior to the draw. This enables the application to generate arbitrary amounts of draw commands and execute them without host intervention.
+        Applications might want to do culling on the GPU via a compute shader prior to drawing. This enables the application to generate an arbitrary number of drawing commands and execute them without host intervention.
 
         <h5>Promotion to Vulkan 1.2</h5>
         All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the entry points #CmdDrawIndirectCount() and #CmdDrawIndexedIndirectCount() are optional. The original type, enum and command names are still available as aliases of the core functionality.

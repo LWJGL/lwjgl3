@@ -210,7 +210,7 @@ val KHR_performance_query = "KHRPerformanceQuery".nativeClassVK("KHR_performance
 ￿  sizeof(VkPerformanceCounterResultKHR),
 ￿  NULL);
 ￿
-￿// recordedCounters is filled with our counters, we'll look at one for posterity
+￿// recordedCounters is filled with our counters, we will look at one for posterity
 ￿switch (counters[0].storage) {
 ￿  case VK_PERFORMANCE_COUNTER_STORAGE_INT32:
 ￿    // use recordCounters[0].int32 to get at the counter result!
@@ -443,7 +443,7 @@ val KHR_performance_query = "KHRPerformanceQuery".nativeClassVK("KHR_performance
 ￿    VkPerformanceCounterDescriptionKHR*         pCounterDescriptions);</code></pre>
 
         <h5>Description</h5>
-        If {@code pCounters} is {@code NULL} and {@code pCounterDescriptions} is {@code NULL}, then the number of counters available is returned in {@code pCounterCount}. Otherwise, {@code pCounterCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pCounters}, {@code pCounterDescriptions}, or both arrays and on return the variable is overwritten with the number of structures actually written out. If {@code pCounterCount} is less than the number of counters available, at most {@code pCounterCount} structures will be written and #INCOMPLETE will be returned instead of #SUCCESS.
+        If {@code pCounters} is {@code NULL} and {@code pCounterDescriptions} is {@code NULL}, then the number of counters available is returned in {@code pCounterCount}. Otherwise, {@code pCounterCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pCounters}, {@code pCounterDescriptions}, or both arrays and on return the variable is overwritten with the number of structures actually written out. If {@code pCounterCount} is less than the number of counters available, at most {@code pCounterCount} structures will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available counters were returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

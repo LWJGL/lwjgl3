@@ -63,13 +63,13 @@ val QCOM_render_pass_store_ops = "QCOMRenderPassStoreOps".nativeClassVK("QCOM_re
     IntConstant(
         "The extension specification version.",
 
-        "QCOM_render_pass_store_ops_SPEC_VERSION".."2"
+        "QCOM_RENDER_PASS_STORE_OPS_SPEC_VERSION".."2"
     )
 
     StringConstant(
         "The extension name.",
 
-        "QCOM_render_pass_store_ops_EXTENSION_NAME".."VK_QCOM_render_pass_store_ops"
+        "QCOM_RENDER_PASS_STORE_OPS_EXTENSION_NAME".."VK_QCOM_render_pass_store_ops"
     )
 
     EnumConstant(

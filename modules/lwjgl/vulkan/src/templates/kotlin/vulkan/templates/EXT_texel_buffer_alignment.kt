@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_texel_buffer_alignment = "EXTTexelBufferAlignment".nativeClassVK("EXT_texel_buffer_alignment", type = "device", postfix = EXT) {
     documentation =
         """
-        This extension adds more expressive alignment requirements for uniform and storage texel buffers. Some implementations have single texel alignment requirements that can't be expressed via ##VkPhysicalDeviceLimits{@code ::minTexelBufferOffsetAlignment}.
+        This extension adds more expressive alignment requirements for uniform and storage texel buffers. Some implementations have single texel alignment requirements that cannot be expressed via ##VkPhysicalDeviceLimits{@code ::minTexelBufferOffsetAlignment}.
 
         <h5>VK_EXT_texel_buffer_alignment</h5>
         <dl>

@@ -117,7 +117,7 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
         Applications <b>can</b> track and manage the total host memory size of a validation cache object using the {@code pAllocator}. Applications <b>can</b> limit the amount of data retrieved from a validation cache object in {@code vkGetValidationCacheDataEXT}. Implementations <b>should</b> not internally limit the total number of entries added to a validation cache object or the total host memory consumed.
         </div>
 
-        Once created, a validation cache <b>can</b> be passed to the {@code vkCreateShaderModule} command by adding this object to the ##VkShaderModuleCreateInfo structure's {@code pNext} chain. If a ##VkShaderModuleValidationCacheCreateInfoEXT object is included in the ##VkShaderModuleCreateInfo{@code ::pNext} chain, and its {@code validationCache} field is not #NULL_HANDLE, the implementation will query it for possible reuse opportunities and update it with new content. The use of the validation cache object in these commands is internally synchronized, and the same validation cache object <b>can</b> be used in multiple threads simultaneously.
+        Once created, a validation cache <b>can</b> be passed to the {@code vkCreateShaderModule} command by adding this object to the ##VkShaderModuleCreateInfo structure’s {@code pNext} chain. If a ##VkShaderModuleValidationCacheCreateInfoEXT object is included in the ##VkShaderModuleCreateInfo{@code ::pNext} chain, and its {@code validationCache} field is not #NULL_HANDLE, the implementation will query it for possible reuse opportunities and update it with new content. The use of the validation cache object in these commands is internally synchronized, and the same validation cache object <b>can</b> be used in multiple threads simultaneously.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         Implementations <b>should</b> make every effort to limit any critical sections to the actual accesses to the cache, which is expected to be significantly shorter than the duration of the {@code vkCreateShaderModule} command.
@@ -213,7 +213,7 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
 
         <h5>Description</h5>
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The details of the merge operation are implementation dependent, but implementations <b>should</b> merge the contents of the specified validation caches and prune duplicate entries.
+        The details of the merge operation are implementation-dependent, but implementations <b>should</b> merge the contents of the specified validation caches and prune duplicate entries.
         </div>
 
         <h5>Valid Usage</h5>
@@ -273,9 +273,9 @@ val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_ca
 ￿    void*                                       pData);</code></pre>
 
         <h5>Description</h5>
-        If {@code pData} is {@code NULL}, then the maximum size of the data that <b>can</b> be retrieved from the validation cache, in bytes, is returned in {@code pDataSize}. Otherwise, {@code pDataSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pData}, and on return the variable is overwritten with the amount of data actually written to {@code pData}.
+        If {@code pData} is {@code NULL}, then the maximum size of the data that <b>can</b> be retrieved from the validation cache, in bytes, is returned in {@code pDataSize}. Otherwise, {@code pDataSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pData}, and on return the variable is overwritten with the amount of data actually written to {@code pData}. If {@code pDataSize} is less than the maximum size that <b>can</b> be retrieved by the validation cache, at most {@code pDataSize} bytes will be written to {@code pData}, and {@code vkGetValidationCacheDataEXT} will return #INCOMPLETE instead of #SUCCESS, to indicate that not all of the validation cache was returned.
 
-        If {@code pDataSize} is less than the maximum size that <b>can</b> be retrieved by the validation cache, at most {@code pDataSize} bytes will be written to {@code pData}, and {@code vkGetValidationCacheDataEXT} will return #INCOMPLETE. Any data written to {@code pData} is valid and <b>can</b> be provided as the {@code pInitialData} member of the ##VkValidationCacheCreateInfoEXT structure passed to {@code vkCreateValidationCacheEXT}.
+        Any data written to {@code pData} is valid and <b>can</b> be provided as the {@code pInitialData} member of the ##VkValidationCacheCreateInfoEXT structure passed to {@code vkCreateValidationCacheEXT}.
 
         Two calls to {@code vkGetValidationCacheDataEXT} with the same parameters <b>must</b> retrieve the same data unless a command that modifies the contents of the cache is called between them.
 

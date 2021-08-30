@@ -11,12 +11,12 @@ import vulkan.*
 val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type = "instance", postfix = EXT) {
     documentation =
         """
-        Due to the nature of the Vulkan interface, there is very little error information available to the developer and application. By enabling optional validation layers and using the {@code VK_EXT_debug_report} extension, developers <b>can</b> obtain much more detailed feedback on the application's use of Vulkan. This extension defines a way for layers and the implementation to call back to the application for events of interest to the application.
+        Due to the nature of the Vulkan interface, there is very little error information available to the developer and application. By enabling optional validation layers and using the {@code VK_EXT_debug_report} extension, developers <b>can</b> obtain much more detailed feedback on the application’s use of Vulkan. This extension defines a way for layers and the implementation to call back to the application for events of interest to the application.
 
         <h5>Examples</h5>
         {@code VK_EXT_debug_report} allows an application to register multiple callbacks with the validation layers. Some callbacks may log the information to a file, others may cause a debug break point or other application defined behavior. An application <b>can</b> register callbacks even when no validation layers are enabled, but they will only be called for loader and, if implemented, driver events.
 
-        To capture events that occur while creating or destroying an instance an application <b>can</b> link a ##VkDebugReportCallbackCreateInfoEXT structure to the {@code pNext} element of the ##VkInstanceCreateInfo structure given to #CreateInstance(). This callback is only valid for the duration of the #CreateInstance() and the #DestroyInstance() call. Use #CreateDebugReportCallbackEXT() to create persistent callback objects.
+        To capture events that occur while creating or destroying an instance an application <b>can</b> link a ##VkDebugReportCallbackCreateInfoEXT structure to the {@code pNext} element of the ##VkInstanceCreateInfo structure given to #CreateInstance().
 
         Example uses: Create three callback objects. One will log errors and warnings to the debug console using Windows {@code OutputDebugString}. The second will cause the debugger to break at that callback when an error happens and the third will log warnings to stdout.
 
@@ -73,7 +73,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
             <dd>12</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>9</dd>
+            <dd>10</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -117,7 +117,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
     IntConstant(
         "The extension specification version.",
 
-        "EXT_DEBUG_REPORT_SPEC_VERSION".."9"
+        "EXT_DEBUG_REPORT_SPEC_VERSION".."10"
     )
 
     StringConstant(
@@ -270,7 +270,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         Create a debug report callback object.
 
         <h5>C Specification</h5>
-        Debug report callbacks give more detailed feedback on the application's use of Vulkan when events of interest occur.
+        Debug report callbacks give more detailed feedback on the application’s use of Vulkan when events of interest occur.
 
         To register a debug report callback, an application uses #CreateDebugReportCallbackEXT().
 
@@ -374,7 +374,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
 ￿    const char*                                 pMessage);</code></pre>
 
         <h5>Description</h5>
-        The call will propagate through the layers and generate callback(s) as indicated by the message's flags. The parameters are passed on to the callback in addition to the {@code pUserData} value that was defined at the time the callback was registered.
+        The call will propagate through the layers and generate callback(s) as indicated by the message’s flags. The parameters are passed on to the callback in addition to the {@code pUserData} value that was defined at the time the callback was registered.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -393,7 +393,7 @@ val EXT_debug_report = "EXTDebugReport".nativeClassVK("EXT_debug_report", type =
         </ul>
         """,
 
-        VkInstance("instance", "the debug stream&#8217;s {@code VkInstance}."),
+        VkInstance("instance", "the debug stream’s {@code VkInstance}."),
         VkDebugReportFlagsEXT("flags", "specifies the {@code VkDebugReportFlagBitsEXT} classification of this event/message."),
         VkDebugReportObjectTypeEXT("objectType", "a {@code VkDebugReportObjectTypeEXT} specifying the type of object being used or created at the time the event was triggered."),
         uint64_t("object", "the object where the issue was detected. {@code object} <b>can</b> be #NULL_HANDLE if there is no object associated with the event."),

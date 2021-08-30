@@ -108,6 +108,6 @@ val KHR_external_memory = "KHRExternalMemory".nativeClassVK("KHR_external_memory
     EnumConstant(
         "VK_QUEUE_FAMILY_EXTERNAL_KHR",
 
-        "QUEUE_FAMILY_EXTERNAL_KHR".."(~0-1)"
+        "QUEUE_FAMILY_EXTERNAL_KHR".."(~1)"
     )
 }

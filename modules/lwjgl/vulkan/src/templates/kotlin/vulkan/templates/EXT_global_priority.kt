@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_global_priority = "EXTGlobalPriority".nativeClassVK("EXT_global_priority", type = "device", postfix = EXT) {
     documentation =
         """
-        In Vulkan, users can specify device-scope queue priorities. In some cases it may be useful to extend this concept to a system-wide scope. This extension provides a mechanism for caller's to set their system-wide priority. The default queue priority is #QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT.
+        In Vulkan, users can specify device-scope queue priorities. In some cases it may be useful to extend this concept to a system-wide scope. This extension provides a mechanism for callers to set their system-wide priority. The default queue priority is #QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT.
 
         The driver implementation will attempt to skew hardware resource allocation in favour of the higher-priority task. Therefore, higher-priority work may retain similar latency and throughput characteristics even if the system is congested with lower priority work.
 
@@ -103,7 +103,7 @@ val EXT_global_priority = "EXTGlobalPriority".nativeClassVK("EXT_global_priority
         </ul>
 
         <h5>See Also</h5>
-        ##VkDeviceQueueGlobalPriorityCreateInfoEXT
+        ##VkDeviceQueueGlobalPriorityCreateInfoEXT, ##VkQueueFamilyGlobalPriorityPropertiesEXT
         """,
 
         "QUEUE_GLOBAL_PRIORITY_LOW_EXT".."128",

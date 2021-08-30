@@ -23,14 +23,14 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿    // Get features with a hypothetical future extension.
 ￿    VkHypotheticalExtensionFeaturesKHR hypotheticalFeatures =
 ￿    {
-￿        VK_STRUCTURE_TYPE_HYPOTHETICAL_FEATURES_KHR,                            // sType
-￿        NULL,                                                                   // pNext
+￿        VK_STRUCTURE_TYPE_HYPOTHETICAL_FEATURES_KHR,                // sType
+￿        NULL,                                                       // pNext
 ￿    };
 ￿
 ￿    VkPhysicalDeviceFeatures2KHR features =
 ￿    {
-￿        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR,                       // sType
-￿        &amp;hypotheticalFeatures,                                                  // pNext
+￿        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR,           // sType
+￿        &amp;hypotheticalFeatures,                                      // pNext
 ￿    };
 ￿
 ￿    // After this call, features and hypotheticalFeatures have been filled out.
@@ -41,14 +41,14 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿    // Enable some features:
 ￿    VkHypotheticalExtensionFeaturesKHR enabledHypotheticalFeatures =
 ￿    {
-￿        VK_STRUCTURE_TYPE_HYPOTHETICAL_FEATURES_KHR,                            // sType
-￿        NULL,                                                                   // pNext
+￿        VK_STRUCTURE_TYPE_HYPOTHETICAL_FEATURES_KHR,                // sType
+￿        NULL,                                                       // pNext
 ￿    };
 ￿
 ￿    VkPhysicalDeviceFeatures2KHR enabledFeatures =
 ￿    {
-￿        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR,                       // sType
-￿        &amp;enabledHypotheticalFeatures,                                           // pNext
+￿        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR,           // sType
+￿        &amp;enabledHypotheticalFeatures,                               // pNext
 ￿    };
 ￿
 ￿    enabledFeatures.features.xyz = VK_TRUE;
@@ -56,11 +56,11 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
 ￿
 ￿    VkDeviceCreateInfo deviceCreateInfo =
 ￿    {
-￿        VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,                                   // sType
-￿        &amp;enabledFeatures,                                                       // pNext
+￿        VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,                       // sType
+￿        &amp;enabledFeatures,                                           // pNext
 ￿        ...
-￿        NULL,                                                                   // pEnabledFeatures
-￿    }
+￿        NULL,                                                       // pEnabledFeatures
+￿    };
 ￿
 ￿    VkDevice device;
 ￿    vkCreateDevice(physicalDevice, &amp;deviceCreateInfo, NULL, &amp;device);</code></pre>
@@ -197,7 +197,7 @@ val KHR_get_physical_device_properties2 = "KHRGetPhysicalDeviceProperties2".nati
         "GetPhysicalDeviceSparseImageFormatProperties2KHR",
         "See #GetPhysicalDeviceSparseImageFormatProperties2().",
 
-        VkPhysicalDevice("physicalDevice", "the physical device from which to query the sparse image capabilities."),
+        VkPhysicalDevice("physicalDevice", "the physical device from which to query the sparse image format properties."),
         VkPhysicalDeviceSparseImageFormatInfo2.const.p("pFormatInfo", "a pointer to a ##VkPhysicalDeviceSparseImageFormatInfo2 structure containing input parameters to the command."),
         AutoSize("pProperties")..Check(1)..uint32_t.p("pPropertyCount", "a pointer to an integer related to the number of sparse format properties available or queried, as described below."),
         nullable..VkSparseImageFormatProperties2.p("pProperties", "either {@code NULL} or a pointer to an array of ##VkSparseImageFormatProperties2 structures.")

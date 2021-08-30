@@ -29,7 +29,7 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
             <dd>248</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>4</dd>
+            <dd>5</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -70,7 +70,7 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VALIDATION_FEATURES_SPEC_VERSION".."4"
+        "EXT_VALIDATION_FEATURES_SPEC_VERSION".."5"
     )
 
     StringConstant(
@@ -122,6 +122,7 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
             <li>#VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT specifies that object lifetime validation is disabled. This feature is enabled by default.</li>
             <li>#VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT specifies that core validation checks are disabled. This feature is enabled by default. If this feature is disabled, the shader validation and GPU-assisted validation features are also disabled.</li>
             <li>#VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT specifies that protection against duplicate non-dispatchable object handles is disabled. This feature is enabled by default.</li>
+            <li>#VALIDATION_FEATURE_DISABLE_SHADER_VALIDATION_CACHE_EXT specifies that there will be no caching of shader validation results and every shader will be validated on every application execution. Shader validation caching is enabled by default.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -134,6 +135,7 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
         "VALIDATION_FEATURE_DISABLE_API_PARAMETERS_EXT".."3",
         "VALIDATION_FEATURE_DISABLE_OBJECT_LIFETIMES_EXT".."4",
         "VALIDATION_FEATURE_DISABLE_CORE_CHECKS_EXT".."5",
-        "VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT".."6"
+        "VALIDATION_FEATURE_DISABLE_UNIQUE_HANDLES_EXT".."6",
+        "VALIDATION_FEATURE_DISABLE_SHADER_VALIDATION_CACHE_EXT".."7"
     )
 }

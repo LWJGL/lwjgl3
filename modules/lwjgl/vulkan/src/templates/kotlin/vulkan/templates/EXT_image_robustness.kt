@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_image_robustness = "EXTImageRobustness".nativeClassVK("EXT_image_robustness", type = "device", postfix = EXT) {
     documentation =
         """
-        This extension adds stricter requirements for how out of bounds reads from images are handled. Rather than returning undefined values, most out of bounds reads return R, G, and B values of zero and alpha values of either zero or one. Components not present in the image format may be set to zero or to values based on the format as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#textures-conversion-to-rgba"> Conversion to RGBA</a>.
+        This extension adds stricter requirements for how out of bounds reads from images are handled. Rather than returning undefined values, most out of bounds reads return R, G, and B values of zero and alpha values of either zero or one. Components not present in the image format may be set to zero or to values based on the format as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#textures-conversion-to-rgba">Conversion to RGBA</a>.
 
         <h5>Examples</h5>
         None.

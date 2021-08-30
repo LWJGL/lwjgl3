@@ -74,7 +74,7 @@ val KHR_timeline_semaphore = "KHRTimelineSemaphore".nativeClassVK("KHR_timeline_
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jeff Bolz, NVIDIA</li>
-                <li>Yuriy O&#8217;Donnell, Epic Games</li>
+                <li>Yuriy O’Donnell, Epic Games</li>
                 <li>Jason Ekstrand, Intel</li>
                 <li>Jesse Hall, Google</li>
                 <li>James Jones, NVIDIA</li>
@@ -134,7 +134,7 @@ val KHR_timeline_semaphore = "KHRTimelineSemaphore".nativeClassVK("KHR_timeline_
         "WaitSemaphoresKHR",
         "See #WaitSemaphores().",
 
-        VkDevice("device", "the logical device that owns the semaphore."),
+        VkDevice("device", "the logical device that owns the semaphores."),
         VkSemaphoreWaitInfo.const.p("pWaitInfo", "a pointer to a ##VkSemaphoreWaitInfo structure containing information about the wait condition."),
         uint64_t("timeout", "the timeout period in units of nanoseconds. {@code timeout} is adjusted to the closest value allowed by the implementation-dependent timeout accuracy, which <b>may</b> be substantially longer than one nanosecond, and <b>may</b> be longer than the requested period.")
     )

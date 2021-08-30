@@ -13,7 +13,7 @@ val EXT_texture_compression_astc_hdr = "EXTTextureCompressionAstcHdr".nativeClas
         """
         This extension adds support for textures compressed using the Adaptive Scalable Texture Compression (ASTC) High Dynamic Range (HDR) profile.
 
-        When this extension is enabled, the HDR profile is supported for all ASTC formats listed in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#appendix-compressedtex-astc"> ASTC Compressed Image Formats</a>.
+        When this extension is enabled, the HDR profile is supported for all ASTC formats listed in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#appendix-compressedtex-astc">ASTC Compressed Image Formats</a>.
 
         <h5>VK_EXT_texture_compression_astc_hdr</h5>
         <dl>

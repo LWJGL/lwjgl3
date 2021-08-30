@@ -77,7 +77,7 @@ val EXT_hdr_metadata = "EXTHdrMetadata".nativeClassVK("EXT_hdr_metadata", type =
     void(
         "SetHdrMetadataEXT",
         """
-        function to set Hdr metadata.
+        Set Hdr metadata.
 
         <h5>C Specification</h5>
         <pre><code>

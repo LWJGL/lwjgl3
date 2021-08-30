@@ -13,7 +13,7 @@ val KHR_shader_clock = "KHRShaderClock".nativeClassVK("KHR_shader_clock", type =
         """
         This extension advertises the SPIR-V {@code ShaderClockKHR} capability for Vulkan, which allows a shader to query a real-time or monotonically incrementing counter at the subgroup level or across the device level. The two valid SPIR-V scopes for {@code OpReadClockKHR} are {@code Subgroup} and {@code Device}.
 
-        When using GLSL source-based shading languages, the {@code clockRealtime}*{@code EXT}() timing functions map to the {@code OpReadClockKHR} instruction with a scope of {@code Device}, and the {@code clock}*{@code ARB}() timing functions map to the {@code OpReadClockKHR} instruction with a scope of {@code Subgroup}.
+        When using GLSL source-based shading languages, the {@code clockRealtime*EXT}() timing functions map to the {@code OpReadClockKHR} instruction with a scope of {@code Device}, and the {@code clock*ARB}() timing functions map to the {@code OpReadClockKHR} instruction with a scope of {@code Subgroup}.
 
         <h5>VK_KHR_shader_clock</h5>
         <dl>

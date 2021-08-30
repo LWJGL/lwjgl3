@@ -11,7 +11,7 @@ import vulkan.*
 val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KHR_deferred_host_operations", type = "device", postfix = KHR) {
     documentation =
         """
-        The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VK_KHR_deferred_host_operations">VK_KHR_deferred_host_operations</a> extension defines the infrastructure and usage patterns for deferrable commands, but does not specify any commands as deferrable. This is left to additional dependent extensions. Commands <b>must</b> not be deferred unless the deferral is specifically allowed by another extension which depends on <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VK_KHR_deferred_host_operations">VK_KHR_deferred_host_operations</a>.
+        The {@link KHRDeferredHostOperations VK_KHR_deferred_host_operations} extension defines the infrastructure and usage patterns for deferrable commands, but does not specify any commands as deferrable. This is left to additional dependent extensions. Commands <b>must</b> not be deferred unless the deferral is specifically allowed by another extension which depends on {@link KHRDeferredHostOperations VK_KHR_deferred_host_operations}.
 
         <h5>Code Examples</h5>
         The following examples will illustrate the concept of deferrable operations using a hypothetical example. The command {@code vkDoSomethingExpensiveEXT} denotes a deferrable command. The structure stext:VkExpensiveOperationArgsEXT represents the arguments which it would normally accept.
@@ -40,6 +40,43 @@ val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KH
 ￿        vkDestroyDeferredOperationKHR(device, hOp, pCallbacks);
 ￿    }
 ￿);</code></pre>
+
+        The following example illustrates extracting concurrency from a single deferred operation:
+
+        <pre><code>
+￿// create a deferred operation
+￿VkDeferredOperationKHR hOp;
+￿VkResult result = vkCreateDeferredOperationKHR(device, pCallbacks, &amp;hOp);
+￿assert(result == VK_SUCCESS);
+￿
+￿result = vkDoSomethingExpensive(device, hOp, ...);
+￿assert( result == VK_OPERATION_DEFERRED_KHR );
+￿
+￿// Query the maximum amount of concurrency and clamp to the desired maximum
+￿uint32_t numLaunches = std::min(vkGetDeferredOperationMaxConcurrencyKHR(device, hOp), maxThreads);
+￿
+￿std::vector&lt;std::future&lt;void&gt; &gt; joins;
+￿
+￿for (uint32_t i = 0; i &lt; numLaunches; i++) {
+￿  joins.emplace_back(std::async::launch(
+￿    [ hOp ] ( )
+￿    {
+￿        vkDeferredOperationJoinKHR(device, hOp);
+￿                // in a job system, a return of VK_THREAD_IDLE_KHR should queue another
+￿                // job, but it is not functionally required
+￿    }
+￿  );
+￿}
+￿
+￿for (auto &amp;f : joins) {
+￿  f.get();
+￿}
+￿
+￿result = vkGetDeferredOperationResultKHR(device, hOp);
+￿
+￿// deferred operation is now complete.  'result' indicates success or failure
+￿
+￿vkDestroyDeferredOperationKHR(device, hOp, pCallbacks);</code></pre>
 
         The following example shows a subroutine which guarantees completion of a deferred operation, in the presence of multiple worker threads, and returns the result of the operation.
 
@@ -124,7 +161,7 @@ val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KH
                 <li>Daniel Koch, NVIDIA</li>
                 <li>Slawek Grajewski, Intel</li>
                 <li>Tobias Hector, AMD</li>
-                <li>Yuriy O&#8217;Donnell, Epic</li>
+                <li>Yuriy O’Donnell, Epic</li>
                 <li>Eric Werness, NVIDIA</li>
                 <li>Baldur Karlsson, Valve</li>
                 <li>Jesse Barker, Unity</li>

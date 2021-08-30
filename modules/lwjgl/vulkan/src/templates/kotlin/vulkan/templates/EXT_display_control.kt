@@ -173,7 +173,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
 
         VkDevice("device", "a logical device associated with {@code display}."),
         VkDisplayKHR("display", "the display whose power state is modified."),
-        VkDisplayPowerInfoEXT.const.p("pDisplayPowerInfo", "a ##VkDisplayPowerInfoEXT structure specifying the new power state of {@code display}.")
+        VkDisplayPowerInfoEXT.const.p("pDisplayPowerInfo", "a pointer to a ##VkDisplayPowerInfoEXT structure specifying the new power state of {@code display}.")
     )
 
     VkResult(
@@ -322,7 +322,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
 
         VkDevice("device", "the {@code VkDevice} associated with {@code swapchain}."),
         VkSwapchainKHR("swapchain", "the swapchain from which to query the counter value."),
-        VkSurfaceCounterFlagBitsEXT("counter", "the counter to query."),
+        VkSurfaceCounterFlagBitsEXT("counter", "a {@code VkSurfaceCounterFlagBitsEXT} value specifying the counter to query."),
         Check(1)..uint64_t.p("pCounterValue", "will return the current value of the counter.")
     )
 }

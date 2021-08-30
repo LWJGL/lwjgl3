@@ -111,6 +111,11 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
         <h5>Description</h5>
         {@code vkGetPhysicalDeviceSurfaceCapabilities2EXT} behaves similarly to #GetPhysicalDeviceSurfaceCapabilitiesKHR(), with the ability to return extended information by adding extending structures to the {@code pNext} chain of its {@code pSurfaceCapabilities} parameter.
 
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code surface} <b>must</b> be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
+        </ul>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>

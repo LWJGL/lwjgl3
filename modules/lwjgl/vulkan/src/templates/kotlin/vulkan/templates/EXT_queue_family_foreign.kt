@@ -80,6 +80,6 @@ val EXT_queue_family_foreign = "EXTQueueFamilyForeign".nativeClassVK("EXT_queue_
     EnumConstant(
         "VK_QUEUE_FAMILY_FOREIGN_EXT",
 
-        "QUEUE_FAMILY_FOREIGN_EXT".."(~0-2)"
+        "QUEUE_FAMILY_FOREIGN_EXT".."(~2)"
     )
 }

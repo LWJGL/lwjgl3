@@ -131,7 +131,7 @@ val KHR_get_display_properties2 = "KHRGetDisplayProperties2".nativeClassVK("KHR_
         Query information about the available display planes.
 
         <h5>C Specification</h5>
-        To query the properties of a device's display planes, call:
+        To query the properties of a device’s display planes, call:
 
         <pre><code>
 ￿VkResult vkGetPhysicalDeviceDisplayPlaneProperties2KHR(
@@ -179,7 +179,7 @@ val KHR_get_display_properties2 = "KHRGetDisplayProperties2".nativeClassVK("KHR_
         Query information about the available display modes.
 
         <h5>C Specification</h5>
-        To query the properties of a device's built-in display modes, call:
+        To query the properties of a device’s built-in display modes, call:
 
         <pre><code>
 ￿VkResult vkGetDisplayModeProperties2KHR(

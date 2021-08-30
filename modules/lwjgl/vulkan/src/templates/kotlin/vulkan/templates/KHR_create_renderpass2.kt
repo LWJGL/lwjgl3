@@ -61,7 +61,7 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
 
         <h5>Other Extension Metadata</h5>
         <dl>
-            <dt>Last Modified Date</dt>
+            <dt><b>Last Modified Date</b></dt>
             <dd>2018-02-07</dd>
 
             <dt><b>Interactions and External Dependencies</b></dt>
@@ -69,7 +69,7 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
                 <li>Promoted to Vulkan 1.2 Core</li>
             </ul></dd>
 
-            <dt>Contributors</dt>
+            <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Tobias Hector</li>
                 <li>Jeff Bolz</li>

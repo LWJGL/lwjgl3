@@ -30,12 +30,12 @@ val EXT_shader_subgroup_vote = "EXTShaderSubgroupVote".nativeClassVK("EXT_shader
         When using GLSL source-based shader languages, the following shader functions from GL_ARB_shader_group_vote can map to these SPIR-V instructions:
 
         <ul>
-            <li>{@code anyInvocationARB}() &#8594; {@code OpSubgroupAnyKHR},</li>
-            <li>{@code allInvocationsARB}() &#8594; {@code OpSubgroupAllKHR}, and</li>
-            <li>{@code allInvocationsEqualARB}() &#8594; {@code OpSubgroupAllEqualKHR}.</li>
+            <li>{@code anyInvocationARB}() → {@code OpSubgroupAnyKHR},</li>
+            <li>{@code allInvocationsARB}() → {@code OpSubgroupAllKHR}, and</li>
+            <li>{@code allInvocationsEqualARB}() → {@code OpSubgroupAllEqualKHR}.</li>
         </ul>
 
-        The subgroup across which the boolean conditions are evaluated is implementation-dependent, and this extension provides no guarantee over how individual shader invocations are assigned to subgroups. In particular, a subgroup has no necessary relationship with the compute shader <em>local workgroup</em> -- any pair of shader invocations in a compute local workgroup may execute in different subgroups as used by these instructions.
+        The subgroup across which the boolean conditions are evaluated is implementation-dependent, and this extension provides no guarantee over how individual shader invocations are assigned to subgroups. In particular, a subgroup has no necessary relationship with the compute shader <em>local workgroup</em> — any pair of shader invocations in a compute local workgroup may execute in different subgroups as used by these instructions.
 
         Compute shaders operate on an explicitly specified group of threads (a local workgroup), but many implementations will also group non-compute shader invocations and execute them concurrently. When executing code like
 
@@ -60,7 +60,7 @@ val EXT_shader_subgroup_vote = "EXTShaderSubgroupVote".nativeClassVK("EXT_shader
         The built-in function {@code allInvocationsARB}() will return the same value for all invocations in the group, so the group will either execute {@code do_fast_path}() or {@code do_general_path}(), but never both. For example, shader code might want to evaluate a complex function iteratively by starting with an approximation of the result and then refining the approximation. Some input values may require a small number of iterations to generate an accurate result ({@code do_fast_path}) while others require a larger number ({@code do_general_path}). In another example, shader code might want to evaluate a complex function ({@code do_general_path}) that can be greatly simplified when assuming a specific value for one of its inputs ({@code do_fast_path}).
 
         <h5>Deprecated by Vulkan 1.1</h5>
-        All functionality in this extension is superseded by the core Vulkan 1.1 <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkPhysicalDeviceSubgroupProperties"> subgroup operations</a>.
+        All functionality in this extension is superseded by the core Vulkan 1.1 <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkPhysicalDeviceSubgroupProperties">subgroup operations</a>.
 
         <h5>VK_EXT_shader_subgroup_vote</h5>
         <dl>

@@ -45,7 +45,7 @@ fun templateCustomization() {
 
         IntConstant(
             "The Vulkan registry version used to generate the LWJGL bindings.",
-            "HEADER_VERSION".."172"
+            "HEADER_VERSION".."189"
         )
 
         LongConstant(
@@ -355,26 +355,7 @@ fun templateCustomization() {
         MultiType(PointerMapping.DATA_LONG)..this["GetAccelerationStructureHandleNV"].getParam("pData")
     }
 
-    val VkAccelerationStructureInstanceKHR = VkAccelerationStructureInstanceKHR.definition
-
-    VkAccelerationStructureInstanceKHR["instanceCustomIndex"]
-        .getter("nbitfield0(struct) & 0x00_FF_FFFF")
-        .setter("nbitfield0(struct, (nbitfield0(struct) & 0xFF_00_0000) | (value & 0x00_FF_FFFF))")
-    VkAccelerationStructureInstanceKHR["mask"]
-        .getter("nbitfield0(struct) >>> 24")
-        .setter("nbitfield0(struct, (value << 24) | (nbitfield0(struct) & 0x00_FF_FFFF))")
-
-    VkAccelerationStructureInstanceKHR["instanceShaderBindingTableRecordOffset"]
-        .getter("nbitfield1(struct) & 0x00_FF_FFFF")
-        .setter("nbitfield1(struct, (nbitfield1(struct) & 0xFF_00_0000) | (value & 0x00_FF_FFFF))")
-    VkAccelerationStructureInstanceKHR["flags"]
-        .getter("nbitfield1(struct) >>> 24")
-        .setter("nbitfield1(struct, (value << 24) | (nbitfield1(struct) & 0x00_FF_FFFF))")
-
-    val VkAccelerationStructureInstanceNV = VkAccelerationStructureInstanceNV.definition
-
-    VkAccelerationStructureInstanceNV["instanceCustomIndex"].copyAccessors(VkAccelerationStructureInstanceKHR["instanceCustomIndex"])
-    VkAccelerationStructureInstanceNV["mask"].copyAccessors(VkAccelerationStructureInstanceKHR["mask"])
-    VkAccelerationStructureInstanceNV["instanceShaderBindingTableRecordOffset"].copyAccessors(VkAccelerationStructureInstanceKHR["instanceShaderBindingTableRecordOffset"])
-    VkAccelerationStructureInstanceNV["flags"].copyAccessors(VkAccelerationStructureInstanceKHR["flags"])
+    VkQueueFamilyGlobalPriorityPropertiesEXT.definition.apply {
+        javaImport("static org.lwjgl.vulkan.EXTGlobalPriorityQuery.*")
+    }
 }

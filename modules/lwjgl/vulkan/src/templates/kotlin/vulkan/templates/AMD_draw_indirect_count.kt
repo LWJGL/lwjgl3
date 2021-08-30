@@ -11,7 +11,7 @@ import vulkan.*
 val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_indirect_count", type = "device", postfix = AMD) {
     documentation =
         """
-        This extension allows an application to source the number of draw calls for indirect draw calls from a buffer. This enables applications to generate arbitrary amounts of draw commands and execute them without host intervention.
+        This extension allows an application to source the number of draws for indirect drawing commands from a buffer. This enables applications to generate an arbitrary number of drawing commands and execute them without host intervention.
 
         <h5>Promotion to {@code VK_KHR_draw_indirect_count}</h5>
         All functionality in this extension is included in {@link KHRDrawIndirectCount VK_KHR_draw_indirect_count}, with the suffix changed to KHR. The original type, enum and command names are still available as aliases of the core functionality.
@@ -58,7 +58,7 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
-                <li>Promoted to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VK_KHR_draw_indirect_count">VK_KHR_draw_indirect_count</a></li>
+                <li>Promoted to {@link KHRDrawIndirectCount VK_KHR_draw_indirect_count}</li>
             </ul></dd>
 
             <dt><b>IP Status</b></dt>
