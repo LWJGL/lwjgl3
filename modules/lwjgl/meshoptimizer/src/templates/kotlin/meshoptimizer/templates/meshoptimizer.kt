@@ -722,14 +722,14 @@ nmeshopt_setAllocator(
         original vertex buffer. If the original vertex data isn't required, creating a compact vertex buffer using #optimizeVertexFetch() is recommended.
 
         {@code destination} must contain enough space for the <b>source</b> index buffer (since optimization is iterative, this means {@code index_count}
-        elements - <b>not</b> target_index_count!). {@code vertex_positions} should have float3 position in the first 12 bytes of each vertex - similar to
-        {@code glVertexPointer}.
+        elements - <b>not</b> {@code target_index_count}!). {@code vertex_positions} should have {@code float3} position in the first 12 bytes of each vertex -
+        similar to {@code glVertexPointer}.
         """,
 
         unsigned_int.p("destination", ""),
         unsigned_int.const.p("indices", ""),
         AutoSize("destination", "indices")..size_t("index_count", ""),
-        Check("vertex_count * vertex_positions_stride")..float.const.p("vertex_positions", ""),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions", ""),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", ""),
         size_t("target_index_count", ""),
@@ -752,7 +752,7 @@ nmeshopt_setAllocator(
         Check("target_index_count")..unsigned_int.p("destination", ""), // could use AutoSize, but an explicit param is more clear and similar to #simplify()
         unsigned_int.const.p("indices", ""),
         AutoSize("indices")..size_t("index_count", ""),
-        Check("vertex_count * vertex_positions_stride")..float.const.p("vertex_positions", ""),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions", ""),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", ""),
         size_t("target_index_count", "")
@@ -772,7 +772,7 @@ nmeshopt_setAllocator(
         """,
 
         Check("target_vertex_count")..unsigned_int.p("destination", ""),
-        Check("vertex_count * vertex_positions_stride")..float.const.p("vertex_positions", ""),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions", ""),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", ""),
         size_t("target_vertex_count", "")
@@ -857,7 +857,7 @@ nmeshopt_setAllocator(
 
         unsigned_int.const.p("indices", ""),
         AutoSize("indices")..size_t("index_count", ""),
-        Check("vertex_count * vertex_positions_stride")..float.const.p("vertex_positions", ""),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions", ""),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", "")
     )
@@ -931,7 +931,7 @@ nmeshopt_setAllocator(
 
         unsigned_int.const.p("indices", ""),
         AutoSize("indices")..size_t("index_count", ""),
-        Check("vertex_count * vertex_positions_stride")..float.const.p("vertex_positions", ""),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions", ""),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", "")
     )
@@ -941,7 +941,7 @@ nmeshopt_setAllocator(
         "",
 
         meshopt_Meshlet.const.p("meshlet", ""),
-        Check("vertex_count * vertex_positions_stride")..float.const.p("vertex_positions", ""),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions", ""),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", "")
     )
@@ -957,7 +957,7 @@ nmeshopt_setAllocator(
         """,
 
         unsigned_int.p("destination", ""),
-        Check("vertex_count * vertex_positions_stride")..float.const.p("vertex_positions", ""),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions", ""),
         UseVariable..AutoSize("destination")..size_t("vertex_count", ""),
         size_t("vertex_positions_stride", "")
     )
@@ -976,7 +976,7 @@ nmeshopt_setAllocator(
         unsigned_int.p("destination", ""),
         unsigned_int.const.p("indices", ""),
         AutoSize("destination", "indices")..size_t("index_count", ""),
-        Check("vertex_count * vertex_positions_stride")..float.const.p("vertex_positions", ""),
+        Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p("vertex_positions", ""),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", "")
     )
