@@ -34,7 +34,7 @@ internal class Documentation(
                 else*/
                 "${it[0].let { f ->
                     if (it.length < 2 || !it[1].isUpperCase())
-                        f.toLowerCase()
+                        f.lowercase()
                     else
                         f
                 }}${it.substring(1, if (it.endsWith('.') && it.indexOf('.') == it.lastIndex) it.lastIndex else it.length)}"

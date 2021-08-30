@@ -359,7 +359,7 @@ private fun CXCursor.parseStructMembers(
                             )
                         )
                     }
-                    else                 -> members.add(structMember(type.lwjgl, name, doc, indent))
+                    else                 -> members.add(structMember(type.lwjgl, name, doc, indent, clang_getFieldDeclBitWidth(fieldDecl)))
                 }
                 Unit
             }
@@ -370,13 +370,13 @@ private fun CXCursor.parseStructMembers(
     return "${attributes.joinToString("\n", postfix = if (attributes.isEmpty()) "" else "\n$indent") { "// $it" }}${members.joinToString("\n$indent")}"
 }
 
-private fun structMember(type: String, name: String, doc: Documentation, indent: String): String {
+private fun structMember(type: String, name: String, doc: Documentation, indent: String, bitWidth: Int = -1): String {
     val memberDoc = doc.doc.let { memberDoc ->
         if (memberDoc.isEmpty()) {
             ""
         } else {
             memberDoc.toString().trim().let {
-                "${it[0].toLowerCase()}${it.substring(1, if (it.endsWith('.') && it.indexOf('.') == it.lastIndex) it.lastIndex else it.length)}"
+                "${it[0].lowercaseChar()}${it.substring(1, if (it.endsWith('.') && it.indexOf('.') == it.lastIndex) it.lastIndex else it.length)}"
             }
         }
     }
@@ -399,9 +399,9 @@ private fun structMember(type: String, name: String, doc: Documentation, indent:
             else
                 elementType.length - it
         } + 2 + name.length + 4 + memberDoc.length + 2 + arrayDimensions.length < 160)
-        "$elementType(\"$name\", \"$memberDoc\")$arrayDimensions"
+        "$elementType(\"$name\", \"$memberDoc\"${if (bitWidth == -1) "" else ", bits = $bitWidth"})$arrayDimensions"
     else {
-        "$elementType(\n$indent$t\"$name\",\n$indent$t${memberDoc.formatDocumentation("$indent$t")}\n$indent)$arrayDimensions"
+        "$elementType(\n$indent$t\"$name\",\n$indent$t${memberDoc.formatDocumentation("$indent$t")}${if (bitWidth == -1) "" else ",\n${indent}bits = $bitWidth"}\n$indent)$arrayDimensions"
     }
 }
 
