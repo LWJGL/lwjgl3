@@ -258,6 +258,35 @@ class Struct(
     // Bitfield struct member
     operator fun PrimitiveType.invoke(name: String, documentation: String, bits: Int) = add(StructMember(this, name, documentation, bits))
 
+    private fun Int.toHexMask() = Integer.toHexString(this)
+        .uppercase()
+        .padStart(8, '0')
+        .let {
+            "0x${it.substring(0, 2)}_${it.substring(2, 4)}_${it.substring(4, 6)}_${it.substring(6, 8)}"
+        }
+    fun StructMember.bitfield(bitfield: Int, bitmask: Int): StructMember {
+        if (bits != bitmask.countOneBits()) {
+            this.error("The number of bits set in the specified bitmask (${bitmask.countOneBits()}) does not match the struct member bits ($bits)")
+        }
+
+        val mask = bitmask.toHexMask()
+        val maskInv = bitmask.inv().toHexMask()
+
+        val shift = bitmask.countTrailingZeroBits()
+        if (shift == 0) {
+            this.getter("nbitfield$bitfield(struct) & $mask")
+            this.setter("nbitfield$bitfield(struct, (nbitfield$bitfield(struct) & $maskInv) | (value & $mask))")
+        } else if (bits + shift == Int.SIZE_BITS) {
+            this.getter("nbitfield$bitfield(struct) >>> $shift")
+            this.setter("nbitfield$bitfield(struct, (value << $shift) | (nbitfield$bitfield(struct) & $maskInv))")
+        } else {
+            this.getter("(nbitfield$bitfield(struct) & $mask) >>> $shift")
+            this.setter("nbitfield$bitfield(struct, ((value << $shift) & $mask) | (nbitfield$bitfield(struct) & $maskInv))")
+        }
+
+        return this
+    }
+
     // Converts a plain member to an array member
     operator fun StructMember.get(size: Int, validSize: Int = size) = this[size.toString(), validSize.toString()]
     operator fun StructMember.get(size: String, validSize: String = size): StructMemberArray {
@@ -669,40 +698,53 @@ $indentation}"""
     }
 
     private fun generateBitfields() {
-        var index = 0
-        var i = 0
-        while (i < members.size) {
-            val ref = members[i]
+        var bitfieldIndex = 0
+        var m = 0
+        while (m < members.size) {
+            val ref = members[m]
             if (ref.bits == -1) {
-                i++
+                m++
                 continue
             }
 
             // skip custom bitfields (e.g. Yoga's <Bitfield.h>)
-            if (0 < i && members[i - 1].virtual) {
-                var bitsLeft = (members[i - 1].nativeType.mapping as PrimitiveMapping).bytes * 8
-                while (0 < bitsLeft && i < members.size && members[i].bits != -1) {
-                    bitsLeft -= members[i++].bits
+            if (0 < m && members[m - 1].virtual) {
+                var bitsLeft = (members[m - 1].nativeType.mapping as PrimitiveMapping).bytes * 8
+                while (0 < bitsLeft && m < members.size && members[m].bits != -1) {
+                    bitsLeft -= members[m++].bits
                 }
                 continue
             }
 
             val typeMapping = (ref.nativeType as PrimitiveType).mapping
 
-            var bitsLeft = typeMapping.bytes * 8 - ref.bits
+            val bitsTotal = typeMapping.bytes * 8
+            var bitsConsumed = 0
 
-            var n = i + 1
-            while (0 < bitsLeft && n < members.size) {
-                val member = members[n]
-                if (member.bits == -1 || (member.nativeType as PrimitiveType).mapping !== typeMapping || bitsLeft < member.bits) {
+            var i = m
+            while (bitsConsumed < bitsTotal && i < members.size) {
+                val member = members[i]
+                if (member.bits == -1 || (member.nativeType as PrimitiveType).mapping !== typeMapping || (bitsTotal - bitsConsumed) < member.bits) {
                     break
                 }
-                n++
-                bitsLeft -= member.bits
+
+                if (member.getter == null) {
+                    member.bitfield(bitfieldIndex, (-1 ushr (bitsTotal - member.bits)) shl bitsConsumed)
+                } else {
+                    val getter = member.getter
+                    member.bitfield(bitfieldIndex, (-1 ushr (bitsTotal - member.bits)) shl bitsConsumed)
+                    val newGetter = member.getter
+                    if (getter != newGetter) {
+                        throw IllegalStateException("$getter - $newGetter")
+                    }
+                }
+
+                bitsConsumed += member.bits
+                i++
             }
 
-            members.add(i, StructMember(ref.nativeType, "bitfield${index++}", "", -1).virtual())
-            i = n + 1
+            members.add(m, StructMember(ref.nativeType, "bitfield${bitfieldIndex++}", "", -1).virtual())
+            m = i + 1
         }
     }
 
