@@ -539,6 +539,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "Renderer backend type. ({@code bgfx_renderer_type_t})",
 
         "RENDERER_TYPE_NOOP".enum("No rendering."),
+        "RENDERER_TYPE_AGC".enum("AGC"),
         "RENDERER_TYPE_DIRECT3D9".enum("Direct3D 9.0"),
         "RENDERER_TYPE_DIRECT3D11".enum("Direct3D 11.0"),
         "RENDERER_TYPE_DIRECT3D12".enum("Direct3D 12.0"),
