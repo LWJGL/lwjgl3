@@ -332,6 +332,7 @@
                 <arg value="-lglib-2.0"/>
                 <arg value="-lgobject-2.0"/>
                 <arg value="-lgtk-3"/>
+                <arg value="-lgdk-3"/>
             </link>
         </build>
 

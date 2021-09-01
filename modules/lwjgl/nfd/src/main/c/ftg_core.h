@@ -546,7 +546,7 @@ FTG_STATIC_ASSERT(sizeof(int64_t)==8);
 #  define FTG__HAVE_EXPLICIT_BZERO
 #elif defined(__APPLE__)
 #  include <AvailabilityMacros.h>
-#  ifdef MAC_OS_X_VERSION_10_13
+#  if MAC_OS_X_VERSION_10_13 <= MAC_OS_X_VERSION_MIN_REQUIRED
 #    define FTG__HAVE_MEMSET_S
 #  endif
 #endif
