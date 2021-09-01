@@ -46,6 +46,7 @@ public class Shaderc {
             compile_options_set_warnings_as_errors                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_warnings_as_errors"),
             compile_options_set_limit                                   = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_limit"),
             compile_options_set_auto_bind_uniforms                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_auto_bind_uniforms"),
+            compile_options_set_auto_combined_image_sampler             = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_auto_combined_image_sampler"),
             compile_options_set_hlsl_io_mapping                         = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_io_mapping"),
             compile_options_set_hlsl_offsets                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_offsets"),
             compile_options_set_binding_base                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_binding_base"),
@@ -308,7 +309,7 @@ public class Shaderc {
      * <ul>
      * <li>{@link #shaderc_profile_none profile_none} - Used if and only if GLSL version did not specify profiles.</li>
      * <li>{@link #shaderc_profile_core profile_core}</li>
-     * <li>{@link #shaderc_profile_compatibility profile_compatibility}</li>
+     * <li>{@link #shaderc_profile_compatibility profile_compatibility} - Disabled. This generates an error.</li>
      * <li>{@link #shaderc_profile_es profile_es}</li>
      * </ul>
      */
@@ -830,6 +831,17 @@ public class Shaderc {
             check(options);
         }
         invokePV(options, auto_bind, __functionAddress);
+    }
+
+    // --- [ shaderc_compile_options_set_auto_combined_image_sampler ] ---
+
+    /** Sets whether the compiler should automatically remove sampler variables and convert image variables to combined image-sampler variables. */
+    public static void shaderc_compile_options_set_auto_combined_image_sampler(@NativeType("shaderc_compile_options_t") long options, @NativeType("bool") boolean upgrade) {
+        long __functionAddress = Functions.compile_options_set_auto_combined_image_sampler;
+        if (CHECKS) {
+            check(options);
+        }
+        invokePV(options, upgrade, __functionAddress);
     }
 
     // --- [ shaderc_compile_options_set_hlsl_io_mapping ] ---

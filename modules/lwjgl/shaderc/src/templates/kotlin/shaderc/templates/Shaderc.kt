@@ -166,7 +166,7 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
 
         "profile_none".enum("Used if and only if GLSL version did not specify profiles.", "0"),
         "profile_core".enum,
-        "profile_compatibility".enum,
+        "profile_compatibility".enum("Disabled. This generates an error."),
         "profile_es".enum
     )
 
@@ -494,6 +494,14 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
 
         shaderc_compile_options_t("options", ""),
         bool("auto_bind", "")
+    )
+
+    void(
+        "compile_options_set_auto_combined_image_sampler",
+        "Sets whether the compiler should automatically remove sampler variables and convert image variables to combined image-sampler variables.",
+
+        shaderc_compile_options_t("options", ""),
+        bool("upgrade", "")
     )
 
     void(
