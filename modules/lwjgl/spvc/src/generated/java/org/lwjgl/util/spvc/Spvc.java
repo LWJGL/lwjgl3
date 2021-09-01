@@ -75,6 +75,8 @@ public class Spvc {
             compiler_require_extension                            = apiGetFunctionAddress(SPVC, "spvc_compiler_require_extension"),
             compiler_flatten_buffer_block                         = apiGetFunctionAddress(SPVC, "spvc_compiler_flatten_buffer_block"),
             compiler_variable_is_depth_or_compare                 = apiGetFunctionAddress(SPVC, "spvc_compiler_variable_is_depth_or_compare"),
+            compiler_mask_stage_output_by_location                = apiGetFunctionAddress(SPVC, "spvc_compiler_mask_stage_output_by_location"),
+            compiler_mask_stage_output_by_builtin                 = apiGetFunctionAddress(SPVC, "spvc_compiler_mask_stage_output_by_builtin"),
             compiler_hlsl_set_root_constants_layout               = apiGetFunctionAddress(SPVC, "spvc_compiler_hlsl_set_root_constants_layout"),
             compiler_hlsl_add_vertex_attribute_remap              = apiGetFunctionAddress(SPVC, "spvc_compiler_hlsl_add_vertex_attribute_remap"),
             compiler_hlsl_remap_num_workgroups_builtin            = apiGetFunctionAddress(SPVC, "spvc_compiler_hlsl_remap_num_workgroups_builtin"),
@@ -111,6 +113,7 @@ public class Spvc {
             compiler_create_shader_resources                      = apiGetFunctionAddress(SPVC, "spvc_compiler_create_shader_resources"),
             compiler_create_shader_resources_for_active_variables = apiGetFunctionAddress(SPVC, "spvc_compiler_create_shader_resources_for_active_variables"),
             resources_get_resource_list_for_type                  = apiGetFunctionAddress(SPVC, "spvc_resources_get_resource_list_for_type"),
+            resources_get_builtin_resource_list_for_type          = apiGetFunctionAddress(SPVC, "spvc_resources_get_builtin_resource_list_for_type"),
             compiler_set_decoration                               = apiGetFunctionAddress(SPVC, "spvc_compiler_set_decoration"),
             compiler_set_decoration_string                        = apiGetFunctionAddress(SPVC, "spvc_compiler_set_decoration_string"),
             compiler_set_name                                     = apiGetFunctionAddress(SPVC, "spvc_compiler_set_name"),
@@ -138,6 +141,8 @@ public class Spvc {
             compiler_get_execution_mode_argument                  = apiGetFunctionAddress(SPVC, "spvc_compiler_get_execution_mode_argument"),
             compiler_get_execution_mode_argument_by_index         = apiGetFunctionAddress(SPVC, "spvc_compiler_get_execution_mode_argument_by_index"),
             compiler_get_execution_model                          = apiGetFunctionAddress(SPVC, "spvc_compiler_get_execution_model"),
+            compiler_update_active_builtins                       = apiGetFunctionAddress(SPVC, "spvc_compiler_update_active_builtins"),
+            compiler_has_active_builtin                           = apiGetFunctionAddress(SPVC, "spvc_compiler_has_active_builtin"),
             compiler_get_type_handle                              = apiGetFunctionAddress(SPVC, "spvc_compiler_get_type_handle"),
             type_get_base_type_id                                 = apiGetFunctionAddress(SPVC, "spvc_type_get_base_type_id"),
             type_get_basetype                                     = apiGetFunctionAddress(SPVC, "spvc_type_get_basetype"),
@@ -199,7 +204,7 @@ public class Spvc {
 
     public static final int SPVC_C_API_VERSION_MAJOR = 0;
 
-    public static final int SPVC_C_API_VERSION_MINOR = 45;
+    public static final int SPVC_C_API_VERSION_MINOR = 48;
 
     public static final int SPVC_C_API_VERSION_PATCH = 0;
 
@@ -337,6 +342,22 @@ public class Spvc {
         SPVC_RESOURCE_TYPE_SEPARATE_SAMPLERS      = 11,
         SPVC_RESOURCE_TYPE_ACCELERATION_STRUCTURE = 12,
         SPVC_RESOURCE_TYPE_RAY_QUERY              = 13;
+
+    /**
+     * {@code spvc_builtin_resource_type}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #SPVC_BUILTIN_RESOURCE_TYPE_UNKNOWN BUILTIN_RESOURCE_TYPE_UNKNOWN}</li>
+     * <li>{@link #SPVC_BUILTIN_RESOURCE_TYPE_STAGE_INPUT BUILTIN_RESOURCE_TYPE_STAGE_INPUT}</li>
+     * <li>{@link #SPVC_BUILTIN_RESOURCE_TYPE_STAGE_OUTPUT BUILTIN_RESOURCE_TYPE_STAGE_OUTPUT}</li>
+     * </ul>
+     */
+    public static final int
+        SPVC_BUILTIN_RESOURCE_TYPE_UNKNOWN      = 0,
+        SPVC_BUILTIN_RESOURCE_TYPE_STAGE_INPUT  = 1,
+        SPVC_BUILTIN_RESOURCE_TYPE_STAGE_OUTPUT = 2;
 
     /**
      * Maps to spirv_cross::SPIRType::BaseType.
@@ -810,6 +831,7 @@ public class Spvc {
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_FIXED_SUBGROUP_SIZE COMPILER_OPTION_MSL_FIXED_SUBGROUP_SIZE}</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_FORCE_SAMPLE_RATE_SHADING COMPILER_OPTION_MSL_FORCE_SAMPLE_RATE_SHADING}</li>
      * <li>{@link #SPVC_COMPILER_OPTION_MSL_IOS_SUPPORT_BASE_VERTEX_INSTANCE COMPILER_OPTION_MSL_IOS_SUPPORT_BASE_VERTEX_INSTANCE}</li>
+     * <li>{@link #SPVC_COMPILER_OPTION_GLSL_OVR_MULTIVIEW_VIEW_COUNT COMPILER_OPTION_GLSL_OVR_MULTIVIEW_VIEW_COUNT}</li>
      * </ul>
      */
     public static final int
@@ -891,7 +913,8 @@ public class Spvc {
         SPVC_COMPILER_OPTION_MSL_EMULATE_SUBGROUPS                          = 73 | SPVC_COMPILER_OPTION_MSL_BIT,
         SPVC_COMPILER_OPTION_MSL_FIXED_SUBGROUP_SIZE                        = 74 | SPVC_COMPILER_OPTION_MSL_BIT,
         SPVC_COMPILER_OPTION_MSL_FORCE_SAMPLE_RATE_SHADING                  = 75 | SPVC_COMPILER_OPTION_MSL_BIT,
-        SPVC_COMPILER_OPTION_MSL_IOS_SUPPORT_BASE_VERTEX_INSTANCE           = 76 | SPVC_COMPILER_OPTION_MSL_BIT;
+        SPVC_COMPILER_OPTION_MSL_IOS_SUPPORT_BASE_VERTEX_INSTANCE           = 76 | SPVC_COMPILER_OPTION_MSL_BIT,
+        SPVC_COMPILER_OPTION_GLSL_OVR_MULTIVIEW_VIEW_COUNT                  = 77 | SPVC_COMPILER_OPTION_GLSL_BIT;
 
     protected Spvc() {
         throw new UnsupportedOperationException();
@@ -940,7 +963,7 @@ public class Spvc {
     }
 
     /** Initializes the vertex attribute struct. */
-    public static void spvc_msl_vertex_attribute_init(@NativeType("SpvcMslVertexAttribute *") SpvcMslVertexAttribute attr) {
+    public static void spvc_msl_vertex_attribute_init(@NativeType("spvc_msl_vertex_attribute *") SpvcMslVertexAttribute attr) {
         nspvc_msl_vertex_attribute_init(attr.address());
     }
 
@@ -988,7 +1011,7 @@ public class Spvc {
     }
 
     /** Initializes the {@code constexpr} sampler struct. The defaults are non-zero. */
-    public static void spvc_msl_constexpr_sampler_init(@NativeType("SpvcMslConstexprSampler *") SpvcMslConstexprSampler sampler) {
+    public static void spvc_msl_constexpr_sampler_init(@NativeType("spvc_msl_constexpr_sampler *") SpvcMslConstexprSampler sampler) {
         nspvc_msl_constexpr_sampler_init(sampler.address());
     }
 
@@ -1001,7 +1024,7 @@ public class Spvc {
     }
 
     /** Initializes the {@code constexpr} sampler struct. The defaults are non-zero. */
-    public static void spvc_msl_sampler_ycbcr_conversion_init(@NativeType("SpvcMslSamplerYcbcrConversion *") SpvcMslSamplerYcbcrConversion conv) {
+    public static void spvc_msl_sampler_ycbcr_conversion_init(@NativeType("spvc_msl_sampler_ycbcr_conversion *") SpvcMslSamplerYcbcrConversion conv) {
         nspvc_msl_sampler_ycbcr_conversion_init(conv.address());
     }
 
@@ -1326,6 +1349,28 @@ public class Spvc {
         return invokePZ(compiler, id, __functionAddress);
     }
 
+    // --- [ spvc_compiler_mask_stage_output_by_location ] ---
+
+    @NativeType("spvc_result")
+    public static int spvc_compiler_mask_stage_output_by_location(@NativeType("spvc_compiler") long compiler, @NativeType("unsigned") int location, @NativeType("unsigned") int component) {
+        long __functionAddress = Functions.compiler_mask_stage_output_by_location;
+        if (CHECKS) {
+            check(compiler);
+        }
+        return invokePI(compiler, location, component, __functionAddress);
+    }
+
+    // --- [ spvc_compiler_mask_stage_output_by_builtin ] ---
+
+    @NativeType("spvc_result")
+    public static int spvc_compiler_mask_stage_output_by_builtin(@NativeType("spvc_compiler") long compiler, @NativeType("SpvBuiltIn") int builtin) {
+        long __functionAddress = Functions.compiler_mask_stage_output_by_builtin;
+        if (CHECKS) {
+            check(compiler);
+        }
+        return invokePI(compiler, builtin, __functionAddress);
+    }
+
     // --- [ spvc_compiler_hlsl_set_root_constants_layout ] ---
 
     /** Unsafe version of: {@link #spvc_compiler_hlsl_set_root_constants_layout compiler_hlsl_set_root_constants_layout} */
@@ -1339,7 +1384,7 @@ public class Spvc {
 
     /** HLSL specifics. Maps to C++ API. */
     @NativeType("spvc_result")
-    public static int spvc_compiler_hlsl_set_root_constants_layout(@NativeType("spvc_compiler") long compiler, @NativeType("SpvcHlslRootConstants const *") SpvcHlslRootConstants constant_info, @NativeType("size_t") long count) {
+    public static int spvc_compiler_hlsl_set_root_constants_layout(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_hlsl_root_constants const *") SpvcHlslRootConstants constant_info, @NativeType("size_t") long count) {
         return nspvc_compiler_hlsl_set_root_constants_layout(compiler, constant_info.address(), count);
     }
 
@@ -1355,7 +1400,7 @@ public class Spvc {
     }
 
     @NativeType("spvc_result")
-    public static int spvc_compiler_hlsl_add_vertex_attribute_remap(@NativeType("spvc_compiler") long compiler, @NativeType("SpvcHlslVertexAttributeRemap const *") SpvcHlslVertexAttributeRemap remap, @NativeType("size_t") long remaps) {
+    public static int spvc_compiler_hlsl_add_vertex_attribute_remap(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_hlsl_vertex_attribute_remap const *") SpvcHlslVertexAttributeRemap remap, @NativeType("size_t") long remaps) {
         return nspvc_compiler_hlsl_add_vertex_attribute_remap(compiler, remap.address(), remaps);
     }
 
@@ -1485,7 +1530,7 @@ public class Spvc {
     }
 
     @NativeType("spvc_result")
-    public static int spvc_compiler_msl_add_vertex_attribute(@NativeType("spvc_compiler") long compiler, @NativeType("SpvcMslVertexAttribute const *") SpvcMslVertexAttribute attrs) {
+    public static int spvc_compiler_msl_add_vertex_attribute(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_msl_vertex_attribute const *") SpvcMslVertexAttribute attrs) {
         return nspvc_compiler_msl_add_vertex_attribute(compiler, attrs.address());
     }
 
@@ -1586,7 +1631,7 @@ public class Spvc {
     }
 
     @NativeType("spvc_result")
-    public static int spvc_compiler_msl_remap_constexpr_sampler(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_variable_id") int id, @NativeType("SpvcMslConstexprSampler const *") SpvcMslConstexprSampler sampler) {
+    public static int spvc_compiler_msl_remap_constexpr_sampler(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_variable_id") int id, @NativeType("spvc_msl_constexpr_sampler const *") SpvcMslConstexprSampler sampler) {
         return nspvc_compiler_msl_remap_constexpr_sampler(compiler, id, sampler.address());
     }
 
@@ -1601,7 +1646,7 @@ public class Spvc {
     }
 
     @NativeType("spvc_result")
-    public static int spvc_compiler_msl_remap_constexpr_sampler_by_binding(@NativeType("spvc_compiler") long compiler, @NativeType("unsigned int") int desc_set, @NativeType("unsigned int") int binding, @NativeType("SpvcMslConstexprSampler const *") SpvcMslConstexprSampler sampler) {
+    public static int spvc_compiler_msl_remap_constexpr_sampler_by_binding(@NativeType("spvc_compiler") long compiler, @NativeType("unsigned int") int desc_set, @NativeType("unsigned int") int binding, @NativeType("spvc_msl_constexpr_sampler const *") SpvcMslConstexprSampler sampler) {
         return nspvc_compiler_msl_remap_constexpr_sampler_by_binding(compiler, desc_set, binding, sampler.address());
     }
 
@@ -1616,7 +1661,7 @@ public class Spvc {
     }
 
     @NativeType("spvc_result")
-    public static int spvc_compiler_msl_remap_constexpr_sampler_ycbcr(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_variable_id") int id, @NativeType("SpvcMslConstexprSampler const *") SpvcMslConstexprSampler sampler, @NativeType("SpvcMslSamplerYcbcrConversion const *") SpvcMslSamplerYcbcrConversion conv) {
+    public static int spvc_compiler_msl_remap_constexpr_sampler_ycbcr(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_variable_id") int id, @NativeType("spvc_msl_constexpr_sampler const *") SpvcMslConstexprSampler sampler, @NativeType("spvc_msl_sampler_ycbcr_conversion const *") SpvcMslSamplerYcbcrConversion conv) {
         return nspvc_compiler_msl_remap_constexpr_sampler_ycbcr(compiler, id, sampler.address(), conv.address());
     }
 
@@ -1631,7 +1676,7 @@ public class Spvc {
     }
 
     @NativeType("spvc_result")
-    public static int spvc_compiler_msl_remap_constexpr_sampler_by_binding_ycbcr(@NativeType("spvc_compiler") long compiler, @NativeType("unsigned int") int desc_set, @NativeType("unsigned int") int binding, @NativeType("SpvcMslConstexprSampler const *") SpvcMslConstexprSampler sampler, @NativeType("SpvcMslSamplerYcbcrConversion const *") SpvcMslSamplerYcbcrConversion conv) {
+    public static int spvc_compiler_msl_remap_constexpr_sampler_by_binding_ycbcr(@NativeType("spvc_compiler") long compiler, @NativeType("unsigned int") int desc_set, @NativeType("unsigned int") int binding, @NativeType("spvc_msl_constexpr_sampler const *") SpvcMslConstexprSampler sampler, @NativeType("spvc_msl_sampler_ycbcr_conversion const *") SpvcMslSamplerYcbcrConversion conv) {
         return nspvc_compiler_msl_remap_constexpr_sampler_by_binding_ycbcr(compiler, desc_set, binding, sampler.address(), conv.address());
     }
 
@@ -1817,12 +1862,31 @@ public class Spvc {
     }
 
     @NativeType("spvc_result")
-    public static int spvc_resources_get_resource_list_for_type(@NativeType("spvc_resources") long resources, @NativeType("spvc_resource_type") int type, @NativeType("SpvcReflectedResource const **") PointerBuffer resource_list, @NativeType("size_t *") PointerBuffer resource_size) {
+    public static int spvc_resources_get_resource_list_for_type(@NativeType("spvc_resources") long resources, @NativeType("spvc_resource_type") int type, @NativeType("spvc_reflected_resource const **") PointerBuffer resource_list, @NativeType("size_t *") PointerBuffer resource_size) {
         if (CHECKS) {
             check(resource_list, 1);
             check(resource_size, 1);
         }
         return nspvc_resources_get_resource_list_for_type(resources, type, memAddress(resource_list), memAddress(resource_size));
+    }
+
+    // --- [ spvc_resources_get_builtin_resource_list_for_type ] ---
+
+    public static int nspvc_resources_get_builtin_resource_list_for_type(long resources, int type, long resource_list, long resource_size) {
+        long __functionAddress = Functions.resources_get_builtin_resource_list_for_type;
+        if (CHECKS) {
+            check(resources);
+        }
+        return invokePPPI(resources, type, resource_list, resource_size, __functionAddress);
+    }
+
+    @NativeType("spvc_result")
+    public static int spvc_resources_get_builtin_resource_list_for_type(@NativeType("spvc_resources") long resources, @NativeType("spvc_builtin_resource_type") int type, @NativeType("spvc_reflected_builtin_resource const **") PointerBuffer resource_list, @NativeType("size_t *") PointerBuffer resource_size) {
+        if (CHECKS) {
+            check(resource_list, 1);
+            check(resource_size, 1);
+        }
+        return nspvc_resources_get_builtin_resource_list_for_type(resources, type, memAddress(resource_list), memAddress(resource_size));
     }
 
     // --- [ spvc_compiler_set_decoration ] ---
@@ -2103,7 +2167,7 @@ public class Spvc {
 
     /** Entry points. Maps to C++ API. */
     @NativeType("spvc_result")
-    public static int spvc_compiler_get_entry_points(@NativeType("spvc_compiler") long compiler, @NativeType("SpvcEntryPoint const **") PointerBuffer entry_points, @NativeType("size_t *") PointerBuffer num_entry_points) {
+    public static int spvc_compiler_get_entry_points(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_entry_point const **") PointerBuffer entry_points, @NativeType("size_t *") PointerBuffer num_entry_points) {
         if (CHECKS) {
             check(entry_points, 1);
             check(num_entry_points, 1);
@@ -2288,6 +2352,27 @@ public class Spvc {
             check(compiler);
         }
         return invokePI(compiler, __functionAddress);
+    }
+
+    // --- [ spvc_compiler_update_active_builtins ] ---
+
+    public static void spvc_compiler_update_active_builtins(@NativeType("spvc_compiler") long compiler) {
+        long __functionAddress = Functions.compiler_update_active_builtins;
+        if (CHECKS) {
+            check(compiler);
+        }
+        invokePV(compiler, __functionAddress);
+    }
+
+    // --- [ spvc_compiler_has_active_builtin ] ---
+
+    @NativeType("spvc_bool")
+    public static boolean spvc_compiler_has_active_builtin(@NativeType("spvc_compiler") long compiler, @NativeType("SpvBuiltIn") int builtin, @NativeType("SpvStorageClass") int storage) {
+        long __functionAddress = Functions.compiler_has_active_builtin;
+        if (CHECKS) {
+            check(compiler);
+        }
+        return invokePZ(compiler, builtin, storage, __functionAddress);
     }
 
     // --- [ spvc_compiler_get_type_handle ] ---
@@ -2676,7 +2761,7 @@ public class Spvc {
     }
 
     @NativeType("spvc_result")
-    public static int spvc_compiler_get_combined_image_samplers(@NativeType("spvc_compiler") long compiler, @NativeType("SpvcCombinedImageSampler const **") PointerBuffer samplers, @NativeType("size_t *") PointerBuffer num_samplers) {
+    public static int spvc_compiler_get_combined_image_samplers(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_combined_image_sampler const **") PointerBuffer samplers, @NativeType("size_t *") PointerBuffer num_samplers) {
         if (CHECKS) {
             check(samplers, 1);
             check(num_samplers, 1);
@@ -2697,7 +2782,7 @@ public class Spvc {
 
     /** Constants Maps to C++ API. */
     @NativeType("spvc_result")
-    public static int spvc_compiler_get_specialization_constants(@NativeType("spvc_compiler") long compiler, @NativeType("SpvcSpecializationConstant const **") PointerBuffer constants, @NativeType("size_t *") PointerBuffer num_constants) {
+    public static int spvc_compiler_get_specialization_constants(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_specialization_constant const **") PointerBuffer constants, @NativeType("size_t *") PointerBuffer num_constants) {
         if (CHECKS) {
             check(constants, 1);
             check(num_constants, 1);
@@ -2727,7 +2812,7 @@ public class Spvc {
     }
 
     @NativeType("spvc_constant_id")
-    public static int spvc_compiler_get_work_group_size_specialization_constants(@NativeType("spvc_compiler") long compiler, @NativeType("SpvcSpecializationConstant *") SpvcSpecializationConstant x, @NativeType("SpvcSpecializationConstant *") SpvcSpecializationConstant y, @NativeType("SpvcSpecializationConstant *") SpvcSpecializationConstant z) {
+    public static int spvc_compiler_get_work_group_size_specialization_constants(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_specialization_constant *") SpvcSpecializationConstant x, @NativeType("spvc_specialization_constant *") SpvcSpecializationConstant y, @NativeType("spvc_specialization_constant *") SpvcSpecializationConstant z) {
         return nspvc_compiler_get_work_group_size_specialization_constants(compiler, x.address(), y.address(), z.address());
     }
 
@@ -2744,7 +2829,7 @@ public class Spvc {
 
     /** Buffer ranges Maps to C++ API. */
     @NativeType("spvc_result")
-    public static int spvc_compiler_get_active_buffer_ranges(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_variable_id") int id, @NativeType("SpvcBufferRange const **") PointerBuffer ranges, @NativeType("size_t *") PointerBuffer num_ranges) {
+    public static int spvc_compiler_get_active_buffer_ranges(@NativeType("spvc_compiler") long compiler, @NativeType("spvc_variable_id") int id, @NativeType("spvc_buffer_range const **") PointerBuffer ranges, @NativeType("size_t *") PointerBuffer num_ranges) {
         if (CHECKS) {
             check(ranges, 1);
             check(num_ranges, 1);

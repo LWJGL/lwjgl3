@@ -19,11 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct SpvcSpecializationConstant {
+ * struct spvc_specialization_constant {
  *     spvc_constant_id {@link #id};
  *     unsigned int {@link #constant_id};
  * }</code></pre>
  */
+@NativeType("struct spvc_specialization_constant")
 public class SpvcSpecializationConstant extends Struct implements NativeResource {
 
     /** The struct size in bytes. */

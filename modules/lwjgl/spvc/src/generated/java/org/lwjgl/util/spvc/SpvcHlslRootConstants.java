@@ -23,13 +23,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct SpvcHlslRootConstants {
+ * struct spvc_hlsl_root_constants {
  *     unsigned int start;
  *     unsigned int end;
  *     unsigned int binding;
  *     unsigned int space;
  * }</code></pre>
  */
+@NativeType("struct spvc_hlsl_root_constants")
 public class SpvcHlslRootConstants extends Struct implements NativeResource {
 
     /** The struct size in bytes. */

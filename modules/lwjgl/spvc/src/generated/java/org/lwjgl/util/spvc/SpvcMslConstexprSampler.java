@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct SpvcMslConstexprSampler {
+ * struct spvc_msl_constexpr_sampler {
  *     spvc_msl_sampler_coord coord;
  *     spvc_msl_sampler_filter min_filter;
  *     spvc_msl_sampler_filter mag_filter;
@@ -37,6 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     spvc_bool anisotropy_enable;
  * }</code></pre>
  */
+@NativeType("struct spvc_msl_constexpr_sampler")
 public class SpvcMslConstexprSampler extends Struct implements NativeResource {
 
     /** The struct size in bytes. */

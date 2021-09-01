@@ -19,12 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct SpvcCombinedImageSampler {
+ * struct spvc_combined_image_sampler {
  *     spvc_variable_id {@link #combined_id};
  *     spvc_variable_id {@link #image_id};
  *     spvc_variable_id {@link #sampler_id};
  * }</code></pre>
  */
+@NativeType("struct spvc_combined_image_sampler")
 public class SpvcCombinedImageSampler extends Struct implements NativeResource {
 
     /** The struct size in bytes. */

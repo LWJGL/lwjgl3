@@ -36,6 +36,7 @@ val spvc_variable_id = typedef(SpvId, "spvc_variable_id")
 
 val spvc_backend = "spvc_backend".enumType
 val spvc_basetype = "spvc_basetype".enumType
+val spvc_builtin_resource_type = "spvc_builtin_resource_type".enumType
 val spvc_capture_mode = "spvc_capture_mode".enumType
 val spvc_compiler_option = "spvc_compiler_option".enumType
 val spvc_hlsl_binding_flags = "spvc_hlsl_binding_flags".enumType
@@ -54,7 +55,7 @@ val spvc_msl_vertex_format = "spvc_msl_vertex_format".enumType
 val spvc_resource_type = "spvc_resource_type".enumType
 val spvc_result = "spvc_result".enumType
 
-val spvc_reflected_resource = struct(Module.SPVC, "SpvcReflectedResource") {
+val spvc_reflected_resource = struct(Module.SPVC, "SpvcReflectedResource", nativeName = "spvc_reflected_resource") {
     spvc_variable_id("id", "Resources are identified with their SPIR-V ID. This is the ID of the OpVariable.")
     spvc_type_id(
         "base_type_id",
@@ -86,29 +87,61 @@ val spvc_reflected_resource = struct(Module.SPVC, "SpvcReflectedResource") {
     )
 }
 
-val spvc_entry_point = struct(Module.SPVC, "SpvcEntryPoint") {
+val spvc_reflected_builtin_resource = struct(Module.SPVC, "SpvcReflectedBuiltinResource", nativeName = "spvc_reflected_builtin_resource") {
+    SpvBuiltIn(
+        "builtin",
+        """
+        This is mostly here to support reflection of builtins such as {@code Position/PointSize/CullDistance/ClipDistance}.
+        
+	    This needs to be different from {@code Resource} since we can collect builtins from blocks. A builtin present here does not necessarily mean it's
+        considered an active builtin, since variable ID "activeness" is only tracked on {@code OpVariable} level, not {@code Block} members. For that,
+        #compiler_update_active_builtins() -&gt; #compiler_has_active_builtin() can be used to further refine the reflection.
+        """
+    )
+    spvc_type_id(
+        "value_type_id",
+        """
+        This is the actual value type of the builtin.
+        
+        Typically {@code float4}, {@code float}, {@code array<float, N>} for the {@code gl_PerVertex} builtins. If the builtin is a control point, the control
+        point array type will be stripped away here as appropriate.
+        """
+    )
+    spvc_reflected_resource(
+        "resource",
+        """
+        This refers to the base resource which contains the builtin.
+        
+        If resource is a {@code Block}, it can hold multiple builtins, or it might not be a block. For advanced reflection scenarios, all information in
+        builtin/{@code value_type_id} can be deduced, it's just more convenient this way.
+        """
+    )
+}
+
+
+val spvc_entry_point = struct(Module.SPVC, "SpvcEntryPoint", nativeName = "spvc_entry_point") {
     SpvExecutionModel("execution_model", "")
     charUTF8.const.p("name", "")
 }
 
-val spvc_combined_image_sampler = struct(Module.SPVC, "SpvcCombinedImageSampler") {
+val spvc_combined_image_sampler = struct(Module.SPVC, "SpvcCombinedImageSampler", nativeName = "spvc_combined_image_sampler") {
     spvc_variable_id("combined_id", "the ID of the {@code sampler2D} variable")
     spvc_variable_id("image_id", "the ID of the {@code texture2D} variable")
     spvc_variable_id("sampler_id", "the ID of the {@code sampler} variable")
 }
 
-val spvc_specialization_constant = struct(Module.SPVC, "SpvcSpecializationConstant") {
+val spvc_specialization_constant = struct(Module.SPVC, "SpvcSpecializationConstant", nativeName = "spvc_specialization_constant") {
     spvc_constant_id("id", "the ID of the specialization constant")
     unsigned_int("constant_id", "the constant ID of the constant, used in Vulkan during pipeline creation")
 }
 
-val spvc_buffer_range = struct(Module.SPVC, "SpvcBufferRange") {
+val spvc_buffer_range = struct(Module.SPVC, "SpvcBufferRange", nativeName = "spvc_buffer_range") {
     unsigned_int("index", "")
     size_t("offset", "")
     size_t("range", "")
 }
 
-val spvc_hlsl_root_constants = struct(Module.SPVC, "SpvcHlslRootConstants") {
+val spvc_hlsl_root_constants = struct(Module.SPVC, "SpvcHlslRootConstants", nativeName = "spvc_hlsl_root_constants") {
     documentation =
         """
         Specifying a root constant (d3d12) or push constant range (vulkan).
@@ -122,14 +155,14 @@ val spvc_hlsl_root_constants = struct(Module.SPVC, "SpvcHlslRootConstants") {
     unsigned_int("space", "")
 }
 
-val spvc_hlsl_vertex_attribute_remap = struct(Module.SPVC, "SpvcHlslVertexAttributeRemap") {
+val spvc_hlsl_vertex_attribute_remap = struct(Module.SPVC, "SpvcHlslVertexAttributeRemap", nativeName = "spvc_hlsl_vertex_attribute_remap") {
     documentation = "Interface which remaps vertex inputs to a fixed semantic name to make linking easier."
 
     unsigned_int("location", "")
     charUTF8.const.p("semantic", "")
 }
 
-val spvc_msl_vertex_attribute = struct(Module.SPVC, "SpvcMslVertexAttribute") {
+val spvc_msl_vertex_attribute = struct(Module.SPVC, "SpvcMslVertexAttribute", nativeName = "spvc_msl_vertex_attribute") {
     documentation =
         """
         Defines MSL characteristics of a vertex attribute at a particular location.
@@ -181,7 +214,7 @@ val spvc_msl_resource_binding = struct(Module.SPVC, "SpvcMslResourceBinding", na
     unsigned_int("msl_sampler", "")
 }
 
-val spvc_msl_constexpr_sampler = struct(Module.SPVC, "SpvcMslConstexprSampler") {
+val spvc_msl_constexpr_sampler = struct(Module.SPVC, "SpvcMslConstexprSampler", nativeName = "spvc_msl_constexpr_sampler") {
     spvc_msl_sampler_coord("coord", "")
     spvc_msl_sampler_filter("min_filter", "")
     spvc_msl_sampler_filter("mag_filter", "")
@@ -199,7 +232,7 @@ val spvc_msl_constexpr_sampler = struct(Module.SPVC, "SpvcMslConstexprSampler") 
     spvc_bool("anisotropy_enable", "")
 }
 
-val spvc_msl_sampler_ycbcr_conversion = struct(Module.SPVC, "SpvcMslSamplerYcbcrConversion") {
+val spvc_msl_sampler_ycbcr_conversion = struct(Module.SPVC, "SpvcMslSamplerYcbcrConversion", nativeName = "spvc_msl_sampler_ycbcr_conversion") {
     documentation = "Maps to the sampler Y'CbCr conversion-related portions of {@code MSLConstexprSampler}."
 
     unsigned_int("planes", "")

@@ -19,12 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct SpvcBufferRange {
+ * struct spvc_buffer_range {
  *     unsigned int index;
  *     size_t offset;
  *     size_t range;
  * }</code></pre>
  */
+@NativeType("struct spvc_buffer_range")
 public class SpvcBufferRange extends Struct implements NativeResource {
 
     /** The struct size in bytes. */

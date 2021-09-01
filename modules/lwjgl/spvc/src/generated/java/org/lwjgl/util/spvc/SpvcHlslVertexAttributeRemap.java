@@ -22,11 +22,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct SpvcHlslVertexAttributeRemap {
+ * struct spvc_hlsl_vertex_attribute_remap {
  *     unsigned int location;
  *     char const * semantic;
  * }</code></pre>
  */
+@NativeType("struct spvc_hlsl_vertex_attribute_remap")
 public class SpvcHlslVertexAttributeRemap extends Struct implements NativeResource {
 
     /** The struct size in bytes. */

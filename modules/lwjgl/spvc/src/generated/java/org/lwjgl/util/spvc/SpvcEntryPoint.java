@@ -20,11 +20,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct SpvcEntryPoint {
+ * struct spvc_entry_point {
  *     SpvExecutionModel execution_model;
  *     char const * name;
  * }</code></pre>
  */
+@NativeType("struct spvc_entry_point")
 public class SpvcEntryPoint extends Struct implements NativeResource {
 
     /** The struct size in bytes. */

@@ -20,13 +20,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct SpvcReflectedResource {
+ * struct spvc_reflected_resource {
  *     spvc_variable_id {@link #id};
  *     spvc_type_id {@link #base_type_id};
  *     spvc_type_id {@link #type_id};
  *     char const * {@link #name};
  * }</code></pre>
  */
+@NativeType("struct spvc_reflected_resource")
 public class SpvcReflectedResource extends Struct implements NativeResource {
 
     /** The struct size in bytes. */

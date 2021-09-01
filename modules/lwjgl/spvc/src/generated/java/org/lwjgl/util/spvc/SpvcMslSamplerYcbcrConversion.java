@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct SpvcMslSamplerYcbcrConversion {
+ * struct spvc_msl_sampler_ycbcr_conversion {
  *     unsigned int planes;
  *     spvc_msl_format_resolution resolution;
  *     spvc_msl_sampler_filter chroma_filter;
@@ -34,6 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int bpc;
  * }</code></pre>
  */
+@NativeType("struct spvc_msl_sampler_ycbcr_conversion")
 public class SpvcMslSamplerYcbcrConversion extends Struct implements NativeResource {
 
     /** The struct size in bytes. */

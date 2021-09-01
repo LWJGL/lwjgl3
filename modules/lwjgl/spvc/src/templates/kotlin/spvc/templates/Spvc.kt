@@ -33,7 +33,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         """
 
     IntConstant("", "C_API_VERSION_MAJOR".."0")
-    IntConstant("", "C_API_VERSION_MINOR".."45")
+    IntConstant("", "C_API_VERSION_MINOR".."48")
     IntConstant("", "C_API_VERSION_PATCH".."0")
 
     IntConstant("", "COMPILER_OPTION_COMMON_BIT"..0x1000000)
@@ -136,6 +136,14 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "RESOURCE_TYPE_SEPARATE_SAMPLERS".enum,
         "RESOURCE_TYPE_ACCELERATION_STRUCTURE".enum,
         "RESOURCE_TYPE_RAY_QUERY".enum
+    )
+
+    EnumConstant(
+        "{@code spvc_builtin_resource_type}",
+
+        "BUILTIN_RESOURCE_TYPE_UNKNOWN".enum("", "0"),
+        "BUILTIN_RESOURCE_TYPE_STAGE_INPUT".enum,
+        "BUILTIN_RESOURCE_TYPE_STAGE_OUTPUT".enum
     )
 
     EnumConstant(
@@ -488,6 +496,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "COMPILER_OPTION_MSL_FIXED_SUBGROUP_SIZE".enum("", "74 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_FORCE_SAMPLE_RATE_SHADING".enum("", "75 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_IOS_SUPPORT_BASE_VERTEX_INSTANCE".enum("", "76 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_GLSL_OVR_MULTIVIEW_VIEW_COUNT".enum("", "77 | SPVC_COMPILER_OPTION_GLSL_BIT")
     )
 
     void(
@@ -707,6 +716,23 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
 
         spvc_compiler("compiler", ""),
         spvc_variable_id("id", "")
+    )
+
+    spvc_result(
+        "compiler_mask_stage_output_by_location",
+        "",
+
+        spvc_compiler("compiler", ""),
+        unsigned("location", ""),
+        unsigned("component", "")
+    )
+
+    spvc_result(
+        "compiler_mask_stage_output_by_builtin",
+        "",
+
+        spvc_compiler("compiler", ""),
+        SpvBuiltIn("builtin", "")
     )
 
     spvc_result(
@@ -1011,6 +1037,16 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         Check(1)..size_t.p("resource_size", "")
     )
 
+    spvc_result(
+        "resources_get_builtin_resource_list_for_type",
+        "",
+
+        spvc_resources("resources", ""),
+        spvc_builtin_resource_type("type", ""),
+        Check(1)..spvc_reflected_builtin_resource.const.p.p("resource_list", ""),
+        Check(1)..size_t.p("resource_size", "")
+    )
+
     void(
         "compiler_set_decoration",
         "Decorations. Maps to C++ API.",
@@ -1260,6 +1296,22 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "",
 
         spvc_compiler("compiler", "")
+    )
+
+    void(
+        "compiler_update_active_builtins",
+        "",
+
+        spvc_compiler("compiler", "")
+    )
+
+    spvc_bool(
+        "compiler_has_active_builtin",
+        "",
+
+        spvc_compiler("compiler", ""),
+        SpvBuiltIn("builtin", ""),
+        SpvStorageClass("storage", "")
     )
 
     spvc_type(

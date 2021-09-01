@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct SpvcMslVertexAttribute {
+ * struct spvc_msl_vertex_attribute {
  *     unsigned int location;
  *     unsigned int {@link #msl_buffer};
  *     unsigned int {@link #msl_offset};
@@ -33,6 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SpvBuiltIn builtin;
  * }</code></pre>
  */
+@NativeType("struct spvc_msl_vertex_attribute")
 public class SpvcMslVertexAttribute extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
