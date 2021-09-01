@@ -849,6 +849,7 @@
                 <pathelement path="${module.classpath}"/>
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${lib}/java/jcommander.jar"/>
+                <pathelement path="${lib}/java/jquery.jar"/>
                 <pathelement path="${lib}/native"/>
             </classpath>
 
