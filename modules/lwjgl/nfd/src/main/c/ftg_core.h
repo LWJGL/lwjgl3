@@ -541,14 +541,10 @@ FTG_STATIC_ASSERT(sizeof(int64_t)==8);
 #  define FTG_DIRSLASH_STR "/"
 #endif
 
-// LWJGL: check macOS version first
 #if defined(__linux__)
 #  define FTG__HAVE_EXPLICIT_BZERO
-#elif defined(__APPLE__)
-#  include <AvailabilityMacros.h>
-#  if MAC_OS_X_VERSION_10_13 <= MAC_OS_X_VERSION_MIN_REQUIRED
-#    define FTG__HAVE_MEMSET_S
-#  endif
+//#elif defined(__APPLE__)
+//#  define FTG__HAVE_MEMSET_S
 #endif
 
 /*
