@@ -4,7 +4,7 @@
  */
 package org.lwjgl;
 
-import static org.lwjgl.system.APIUtil.*;
+import java.util.*;
 
 /** This class can be used to query the LWJGL version. */
 public final class Version {
@@ -22,7 +22,7 @@ public final class Version {
         String.valueOf(VERSION_MAJOR) +
         '.' + VERSION_MINOR +
         '.' + VERSION_REVISION + BUILD_TYPE.postfix +
-        ' ' + apiGetManifestValue("Implementation-Version").orElse("SNAPSHOT");
+        ' ' + Optional.ofNullable(Version.class.getPackage().getImplementationVersion()).orElse("SNAPSHOT");
 
     private Version() {
     }
