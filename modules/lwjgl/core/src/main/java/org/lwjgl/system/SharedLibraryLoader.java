@@ -104,25 +104,25 @@ final class SharedLibraryLoader {
 
         String version = Version.getVersion().replace(' ', '-');
 
-        Path tempDirectory;
         Path root, file;
 
         // Temp directory with username in path
-        tempDirectory = Paths.get(Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl" + System.getProperty("user.name")), version, filename);
-        file = (root = Paths.get(System.getProperty("java.io.tmpdir"))).resolve(tempDirectory);
+        file = (root = Paths.get(System.getProperty("java.io.tmpdir")))
+            .resolve(Paths.get(Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl" + System.getProperty("user.name")), version, filename));
         if (canWrite(root, file, resource)) {
             return file;
         }
 
+        Path lwjgl_version_filename = Paths.get("." + Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl"), version, filename);
+
         // Working directory
-        tempDirectory = Paths.get(Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl"), version, filename);
-        file = (root = Paths.get("").toAbsolutePath()).resolve(tempDirectory);
+        file = (root = Paths.get("").toAbsolutePath()).resolve(lwjgl_version_filename);
         if (canWrite(root, file, resource)) {
             return file;
         }
 
         // User home
-        file = (root = Paths.get(System.getProperty("user.home"))).resolve(tempDirectory);
+        file = (root = Paths.get(System.getProperty("user.home"))).resolve(lwjgl_version_filename);
         if (canWrite(root, file, resource)) {
             return file;
         }
@@ -131,7 +131,7 @@ final class SharedLibraryLoader {
             // C:\Windows\Temp
             String env = System.getenv("SystemRoot");
             if (env != null) {
-                file = (root = Paths.get(env, "Temp")).resolve(tempDirectory);
+                file = (root = Paths.get(env, "Temp")).resolve(lwjgl_version_filename);
                 if (canWrite(root, file, resource)) {
                     return file;
                 }
@@ -140,7 +140,7 @@ final class SharedLibraryLoader {
             // C:\Temp
             env = System.getenv("SystemDrive");
             if (env != null) {
-                file = (root = Paths.get(env + "/")).resolve(Paths.get("Temp").resolve(tempDirectory));
+                file = (root = Paths.get(env + "/")).resolve(Paths.get("Temp").resolve(lwjgl_version_filename));
                 if (canWrite(root, file, resource)) {
                     return file;
                 }
