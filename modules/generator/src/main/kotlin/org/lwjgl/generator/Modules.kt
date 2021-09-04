@@ -711,7 +711,7 @@ enum class Module(
         "xxhash",
         "org.lwjgl.util.xxhash",
         """
-        Contains bindings to ${url("https://github.com/Cyan4973/xxHash", "xxHash")}, an extremely fash non-cryptographic hash algorithm.
+        Contains bindings to ${url("https://github.com/Cyan4973/xxHash", "xxHash")}, an extremely fast non-cryptographic hash algorithm.
 
         xxHash successfully completes the ${url("https://github.com/aappleby/smhasher", "SMHasher")} test suite which evaluates collision, dispersion and
         randomness qualities of hash functions.

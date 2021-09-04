@@ -30,10 +30,10 @@ public interface CallbackI extends Pointer {
      *
      * @param ret  a pointer to the memory used for the function's return value.
      *
-     *             <p>If the function is declared as returning {@code v}oid, then this value is garbage and should not be used.</p>
+     *             <p>If the function is declared as returning {@code void}, then this value is garbage and should not be used.</p>
      *
      *             <p>Otherwise, the callback must fill the object to which this points, following the same special promotion behavior as
-     *             {@link LibFFI#ffi_call}.  That is, in most cases, {@code ret} points to an object of exactly the size of the type specified when {@code CIF}
+     *             {@link LibFFI#ffi_call}. That is, in most cases, {@code ret} points to an object of exactly the size of the type specified when {@code CIF}
      *             was constructed.  However, integral types narrower than the system register size are widened. In these cases your program may assume that
      *             {@code ret} points to an {@code ffi_arg} object.</p>
      * @param args a vector of pointers to memory holding the arguments to the function
