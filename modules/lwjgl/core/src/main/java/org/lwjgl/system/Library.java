@@ -120,7 +120,7 @@ public final class Library {
                     apiLog("\tUsing SharedLibraryLoader...");
                 }
                 // Extract from classpath and try org.lwjgl.librarypath
-                try (FileChannel ignored = SharedLibraryLoader.load(name, libName, libURL)) {
+                try (FileChannel ignored = SharedLibraryLoader.load(name, libName, libURL, load)) {
                     if (loadSystemFromLibraryPath(load, context, module, libName, bundledWithLWJGL)) {
                         return;
                     }
@@ -262,7 +262,7 @@ public final class Library {
                     apiLog("\tUsing SharedLibraryLoader...");
                 }
                 // Extract from classpath and try org.lwjgl.librarypath
-                try (FileChannel ignored = SharedLibraryLoader.load(name, libName, libURL)) {
+                try (FileChannel ignored = SharedLibraryLoader.load(name, libName, libURL, null)) {
                     lib = loadNativeFromLibraryPath(context, module, libName, bundledWithLWJGL);
                     if (lib != null) {
                         return lib;

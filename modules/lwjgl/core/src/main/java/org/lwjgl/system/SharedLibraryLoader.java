@@ -12,7 +12,9 @@ import java.io.*;
 import java.net.*;
 import java.nio.channels.*;
 import java.nio.file.*;
+import java.util.*;
 import java.util.concurrent.locks.*;
+import java.util.function.*;
 import java.util.stream.*;
 import java.util.zip.*;
 
@@ -38,6 +40,10 @@ final class SharedLibraryLoader {
     @Nullable
     private static Path extractPath;
 
+    private static HashSet<Path> extractPaths = new HashSet<>(4);
+
+    private static boolean checkedJDK8195129;
+
     private SharedLibraryLoader() {
     }
 
@@ -47,24 +53,36 @@ final class SharedLibraryLoader {
      * @param name     the resource name
      * @param filename the resource filename
      * @param resource the classpath {@link URL} were the resource can be found
+     * @param load     should call {@code System::load} in the context of the appropriate ClassLoader
      *
      * @return a {@link FileChannel} that has locked the resource file
      */
-    static FileChannel load(String name, String filename, URL resource) {
+    static FileChannel load(String name, String filename, URL resource, @Nullable Consumer<String> load) {
         try {
             Path extractedFile;
 
             EXTRACT_PATH_LOCK.lock();
             try {
                 if (extractPath != null) {
-                    // Reuse the lwjgl shared library location
+                    // This path is already tested and safe to use
                     extractedFile = extractPath.resolve(filename);
                 } else {
-                    extractedFile = getExtractPath(filename, resource);
-                    // Do not store unless the test for JDK-8195129 has passed
-                    if (Platform.get() != Platform.WINDOWS || workaroundJDK8195129(extractedFile)) {
-                        initExtractPath(extractPath = extractedFile.getParent());
+                    extractedFile = getExtractPath(filename, resource, load);
+
+                    Path parent = extractedFile.getParent();
+                    // Do not store unless the test for JDK-8195129 has passed.
+                    // This means that in the worst case org.lwjgl.librarypath
+                    // will contain multiple directories. (Windows only)
+                    // -----------------
+                    // Example scenario:
+                    // -----------------
+                    // * load lwjgl.dll - already extracted and in classpath (SLL not used)
+                    // * load library with loadNative - extracted to a directory with unicode characters
+                    // * then another with loadSystem - this will hit LoadLibraryA in the JVM, need an ANSI-safe directory.
+                    if (Platform.get() != Platform.WINDOWS || checkedJDK8195129) {
+                        extractPath = parent;
                     }
+                    initExtractPath(parent);
                 }
             } finally {
                 EXTRACT_PATH_LOCK.unlock();
@@ -77,6 +95,11 @@ final class SharedLibraryLoader {
     }
 
     private static void initExtractPath(Path extractPath) {
+        if (extractPaths.contains(extractPath)) {
+            return;
+        }
+        extractPaths.add(extractPath);
+
         String newLibPath = extractPath.toAbsolutePath().toString();
 
         // Prepend the path in which the libraries were extracted to org.lwjgl.librarypath
@@ -96,20 +119,24 @@ final class SharedLibraryLoader {
      *
      * @return the extracted library
      */
-    private static Path getExtractPath(String filename, URL resource) {
+    private static Path getExtractPath(String filename, URL resource, @Nullable Consumer<String> load) {
+        Path root, file;
+
         String override = Configuration.SHARED_LIBRARY_EXTRACT_PATH.get();
         if (override != null) {
-            return Paths.get(override, filename);
+            file = (root = Paths.get(override)).resolve(filename);
+            if (canWrite(root, file, resource, load)) {
+                return file;
+            }
+            apiLog(String.format("\tThe path %s is not accessible. Trying other paths.", override));
         }
 
         String version = Version.getVersion().replace(' ', '-');
 
-        Path root, file;
-
         // Temp directory with username in path
         file = (root = Paths.get(System.getProperty("java.io.tmpdir")))
             .resolve(Paths.get(Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl" + System.getProperty("user.name")), version, filename));
-        if (canWrite(root, file, resource)) {
+        if (canWrite(root, file, resource, load)) {
             return file;
         }
 
@@ -117,13 +144,13 @@ final class SharedLibraryLoader {
 
         // Working directory
         file = (root = Paths.get("").toAbsolutePath()).resolve(lwjgl_version_filename);
-        if (canWrite(root, file, resource)) {
+        if (canWrite(root, file, resource, load)) {
             return file;
         }
 
         // User home
         file = (root = Paths.get(System.getProperty("user.home"))).resolve(lwjgl_version_filename);
-        if (canWrite(root, file, resource)) {
+        if (canWrite(root, file, resource, load)) {
             return file;
         }
 
@@ -132,7 +159,7 @@ final class SharedLibraryLoader {
             String env = System.getenv("SystemRoot");
             if (env != null) {
                 file = (root = Paths.get(env, "Temp")).resolve(lwjgl_version_filename);
-                if (canWrite(root, file, resource)) {
+                if (canWrite(root, file, resource, load)) {
                     return file;
                 }
             }
@@ -141,7 +168,7 @@ final class SharedLibraryLoader {
             env = System.getenv("SystemDrive");
             if (env != null) {
                 file = (root = Paths.get(env + "/")).resolve(Paths.get("Temp").resolve(lwjgl_version_filename));
-                if (canWrite(root, file, resource)) {
+                if (canWrite(root, file, resource, load)) {
                     return file;
                 }
             }
@@ -152,7 +179,7 @@ final class SharedLibraryLoader {
             file = Files.createTempDirectory("lwjgl");
             root = file.getParent();
             file = file.resolve(filename);
-            if (canWrite(root, file, resource)) {
+            if (canWrite(root, file, resource, load)) {
                 return file;
             }
         } catch (IOException ignored) {
@@ -187,10 +214,10 @@ final class SharedLibraryLoader {
         }
 
         // If file doesn't exist or the CRC doesn't match, extract it to the temp dir.
-        apiLog(String.format("    Extracting: %s", resource.getPath()));
+        apiLog(String.format("\tExtracting: %s", resource.getPath()));
         //noinspection FieldAccessNotGuarded (already inside the lock)
         if (extractPath == null) {
-            apiLog(String.format("            to: %s", file));
+            apiLog(String.format("\t        to: %s", file));
         }
 
         Files.createDirectories(file.getParent());
@@ -212,13 +239,11 @@ final class SharedLibraryLoader {
         try {
             FileChannel fc = FileChannel.open(file);
 
-            //noinspection resource
             if (fc.tryLock(0L, Long.MAX_VALUE, true) == null) {
                 if (Configuration.DEBUG_LOADER.get(false)) {
                     apiLog("\tFile is locked by another process, waiting...");
                 }
 
-                //noinspection resource
                 fc.lock(0L, Long.MAX_VALUE, true); // this will block until the file is locked
             }
 
@@ -254,7 +279,7 @@ final class SharedLibraryLoader {
      *
      * @return true if the file is writable
      */
-    private static boolean canWrite(Path root, Path file, URL resource) {
+    private static boolean canWrite(Path root, Path file, URL resource, @Nullable Consumer<String> load) {
         Path testFile;
         if (Files.exists(file)) {
             if (!Files.isWritable(file)) {
@@ -276,13 +301,8 @@ final class SharedLibraryLoader {
             Files.write(testFile, new byte[0]);
             Files.delete(testFile);
 
-            if (workaroundJDK8195129(file)) {
-                // We have full access, the JVM has locked the file, but System.load can still fail if
-                // the path contains unicode characters, due to JDK-8195129. Test for this here and
-                // return false if it fails to try other paths.
-                try (FileChannel ignored = extract(file, resource)) {
-                    System.load(file.toAbsolutePath().toString());
-                }
+            if (load != null && Platform.get() == Platform.WINDOWS) {
+                workaroundJDK8195129(file, resource, load);
             }
 
             return true;
@@ -314,8 +334,26 @@ final class SharedLibraryLoader {
         }
     }
 
-    private static boolean workaroundJDK8195129(Path file) {
-        return Platform.get() == Platform.WINDOWS && file.toString().endsWith(".dll");
+    private static void workaroundJDK8195129(Path file, URL resource, @Nonnull Consumer<String> load) throws Throwable {
+        String filepath = file.toAbsolutePath().toString();
+        if (filepath.endsWith(".dll")) {
+            boolean mustCheck = false;
+            for (int i = 0; i < filepath.length(); i++) {
+                if (0x80 <= filepath.charAt(i)) {
+                    mustCheck = true;
+                }
+            }
+            if (mustCheck) {
+                // We have full access, the JVM has locked the file, but System.load can still fail if
+                // the path contains unicode characters, due to JDK-8195129. Test for this here and
+                // try other paths if it fails.
+                try (FileChannel ignored = extract(file, resource)) {
+                    load.accept(file.toAbsolutePath().toString());
+                }
+            }
+            checkedJDK8195129 = true;
+        }
     }
+
 
 }

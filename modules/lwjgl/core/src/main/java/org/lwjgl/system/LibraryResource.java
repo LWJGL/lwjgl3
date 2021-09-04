@@ -106,7 +106,7 @@ public final class LibraryResource {
                     apiLog("\tUsing SharedLibraryLoader...");
                 }
                 // Extract from classpath and try org.lwjgl.librarypath
-                try (FileChannel ignored = SharedLibraryLoader.load(name, name, resourceURL)) {
+                try (FileChannel ignored = SharedLibraryLoader.load(name, name, resourceURL, null)) {
                     path = loadFromLibraryPath(module, name, bundledWithLWJGL);
                     if (path != null) {
                         return path;
