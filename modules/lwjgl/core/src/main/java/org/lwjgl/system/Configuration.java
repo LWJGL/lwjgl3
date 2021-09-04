@@ -84,9 +84,9 @@ public class Configuration<T> {
      *
      * <ul>
      * <li>{@code System.getProperty("java.io.tmpdir")}/extractDir/version/</li>
+     * <li>&lt;working directory&gt;/.extractDir/version/</li>
      * <li>{@code System.getProperty("user.home")}/.extractDir/version/</li>
-     * <li>.extractDir/version/</li>
-     * <li>{@code Files.createTempFile("lwjgl", "")}</li>
+     * <li>{@code Files.createTempDirectory("lwjgl", "")}</li>
      * </ul>
      *
      * where:

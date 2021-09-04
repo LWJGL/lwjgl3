@@ -114,15 +114,15 @@ final class SharedLibraryLoader {
             return file;
         }
 
-        // User home
+        // Working directory
         tempDirectory = Paths.get(Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl"), version, filename);
-        file = (root = Paths.get(System.getProperty("user.home"))).resolve(tempDirectory);
+        file = (root = Paths.get("").toAbsolutePath()).resolve(tempDirectory);
         if (canWrite(root, file, resource)) {
             return file;
         }
 
-        // Working directory
-        file = (root = Paths.get("").toAbsolutePath()).resolve(tempDirectory);
+        // User home
+        file = (root = Paths.get(System.getProperty("user.home"))).resolve(tempDirectory);
         if (canWrite(root, file, resource)) {
             return file;
         }
