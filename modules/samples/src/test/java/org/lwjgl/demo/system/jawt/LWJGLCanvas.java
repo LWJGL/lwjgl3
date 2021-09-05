@@ -23,6 +23,7 @@ import static org.lwjgl.opengl.GLX13.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.jawt.JAWTFunctions.*;
+import static org.lwjgl.system.linux.X11.*;
 
 /**
  * A Canvas component that uses OpenGL for rendering.
@@ -256,15 +257,27 @@ public class LWJGLCanvas extends Canvas {
         long display  = dsi_x11.display();
         long drawable = dsi_x11.drawable();
 
-        PointerBuffer configs = Objects.requireNonNull(glXChooseFBConfig(display, 0, (IntBuffer)null));
+        PointerBuffer configs = Objects.requireNonNull(glXGetFBConfigs(display, 0));
 
         long config = NULL;
         for (int i = 0; i < configs.remaining(); i++) {
-            XVisualInfo vi = Objects.requireNonNull(glXGetVisualFromFBConfig(display, configs.get(i)));
-            if (vi.visualid() == dsi_x11.visualID()) {
-                config = configs.get(i);
-                break;
+            XVisualInfo vi = glXGetVisualFromFBConfig(display, configs.get(i));
+            if (vi == null) {
+                continue;
             }
+            try {
+                if (vi.visualid() == dsi_x11.visualID()) {
+                    config = configs.get(i);
+                    break;
+                }
+            } finally {
+                nXFree(vi.address());
+            }
+        }
+        XFree(configs);
+
+        if (config == NULL) {
+            throw new IllegalStateException("Failed to find a compatible GLXFBConfig");
         }
 
         context = glXCreateNewContext(display, config, GLX_RGBA_TYPE, NULL, true);
