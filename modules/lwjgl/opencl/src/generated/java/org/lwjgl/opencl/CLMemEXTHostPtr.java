@@ -176,22 +176,29 @@ public class CLMemEXTHostPtr extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code CLMemEXTHostPtr} instance allocated on the thread-local {@link MemoryStack}. */
-    public static CLMemEXTHostPtr mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code CLMemEXTHostPtr} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static CLMemEXTHostPtr callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static CLMemEXTHostPtr mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static CLMemEXTHostPtr callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static CLMemEXTHostPtr mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static CLMemEXTHostPtr callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static CLMemEXTHostPtr.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static CLMemEXTHostPtr.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static CLMemEXTHostPtr.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static CLMemEXTHostPtr.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code CLMemEXTHostPtr} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static CLMemEXTHostPtr mallocStack(MemoryStack stack) {
+    public static CLMemEXTHostPtr malloc(MemoryStack stack) {
         return wrap(CLMemEXTHostPtr.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -200,45 +207,27 @@ public class CLMemEXTHostPtr extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static CLMemEXTHostPtr callocStack(MemoryStack stack) {
+    public static CLMemEXTHostPtr calloc(MemoryStack stack) {
         return wrap(CLMemEXTHostPtr.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link CLMemEXTHostPtr.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static CLMemEXTHostPtr.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link CLMemEXTHostPtr.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static CLMemEXTHostPtr.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link CLMemEXTHostPtr.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static CLMemEXTHostPtr.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static CLMemEXTHostPtr.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link CLMemEXTHostPtr.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static CLMemEXTHostPtr.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static CLMemEXTHostPtr.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

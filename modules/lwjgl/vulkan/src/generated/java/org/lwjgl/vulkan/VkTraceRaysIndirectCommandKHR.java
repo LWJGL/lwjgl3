@@ -197,24 +197,13 @@ public class VkTraceRaysIndirectCommandKHR extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkTraceRaysIndirectCommandKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkTraceRaysIndirectCommandKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkTraceRaysIndirectCommandKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkTraceRaysIndirectCommandKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkTraceRaysIndirectCommandKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkTraceRaysIndirectCommandKHR mallocStack(MemoryStack stack) {
+    public static VkTraceRaysIndirectCommandKHR malloc(MemoryStack stack) {
         return wrap(VkTraceRaysIndirectCommandKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -223,45 +212,27 @@ public class VkTraceRaysIndirectCommandKHR extends Struct implements NativeResou
      *
      * @param stack the stack from which to allocate
      */
-    public static VkTraceRaysIndirectCommandKHR callocStack(MemoryStack stack) {
+    public static VkTraceRaysIndirectCommandKHR calloc(MemoryStack stack) {
         return wrap(VkTraceRaysIndirectCommandKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkTraceRaysIndirectCommandKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkTraceRaysIndirectCommandKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkTraceRaysIndirectCommandKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkTraceRaysIndirectCommandKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkTraceRaysIndirectCommandKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkTraceRaysIndirectCommandKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkTraceRaysIndirectCommandKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkTraceRaysIndirectCommandKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkTraceRaysIndirectCommandKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkTraceRaysIndirectCommandKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

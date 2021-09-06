@@ -184,24 +184,13 @@ public class VkMutableDescriptorTypeListVALVE extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkMutableDescriptorTypeListVALVE} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkMutableDescriptorTypeListVALVE mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkMutableDescriptorTypeListVALVE} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkMutableDescriptorTypeListVALVE callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkMutableDescriptorTypeListVALVE} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkMutableDescriptorTypeListVALVE mallocStack(MemoryStack stack) {
+    public static VkMutableDescriptorTypeListVALVE malloc(MemoryStack stack) {
         return wrap(VkMutableDescriptorTypeListVALVE.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -210,45 +199,27 @@ public class VkMutableDescriptorTypeListVALVE extends Struct implements NativeRe
      *
      * @param stack the stack from which to allocate
      */
-    public static VkMutableDescriptorTypeListVALVE callocStack(MemoryStack stack) {
+    public static VkMutableDescriptorTypeListVALVE calloc(MemoryStack stack) {
         return wrap(VkMutableDescriptorTypeListVALVE.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkMutableDescriptorTypeListVALVE.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkMutableDescriptorTypeListVALVE.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkMutableDescriptorTypeListVALVE.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkMutableDescriptorTypeListVALVE.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkMutableDescriptorTypeListVALVE.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkMutableDescriptorTypeListVALVE.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkMutableDescriptorTypeListVALVE.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkMutableDescriptorTypeListVALVE.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkMutableDescriptorTypeListVALVE.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkMutableDescriptorTypeListVALVE.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

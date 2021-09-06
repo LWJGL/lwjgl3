@@ -164,24 +164,13 @@ public class VmaAllocatorInfo extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VmaAllocatorInfo} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VmaAllocatorInfo mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VmaAllocatorInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VmaAllocatorInfo callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VmaAllocatorInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VmaAllocatorInfo mallocStack(MemoryStack stack) {
+    public static VmaAllocatorInfo malloc(MemoryStack stack) {
         return wrap(VmaAllocatorInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -190,45 +179,27 @@ public class VmaAllocatorInfo extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static VmaAllocatorInfo callocStack(MemoryStack stack) {
+    public static VmaAllocatorInfo calloc(MemoryStack stack) {
         return wrap(VmaAllocatorInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VmaAllocatorInfo.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VmaAllocatorInfo.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VmaAllocatorInfo.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VmaAllocatorInfo.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VmaAllocatorInfo.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VmaAllocatorInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VmaAllocatorInfo.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VmaAllocatorInfo.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VmaAllocatorInfo.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VmaAllocatorInfo.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

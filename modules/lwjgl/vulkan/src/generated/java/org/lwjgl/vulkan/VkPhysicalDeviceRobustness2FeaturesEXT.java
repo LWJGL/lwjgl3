@@ -222,24 +222,13 @@ public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct implements Na
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceRobustness2FeaturesEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceRobustness2FeaturesEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceRobustness2FeaturesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceRobustness2FeaturesEXT callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceRobustness2FeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceRobustness2FeaturesEXT mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceRobustness2FeaturesEXT malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceRobustness2FeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -248,45 +237,27 @@ public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct implements Na
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceRobustness2FeaturesEXT callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceRobustness2FeaturesEXT calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceRobustness2FeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceRobustness2FeaturesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceRobustness2FeaturesEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceRobustness2FeaturesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceRobustness2FeaturesEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceRobustness2FeaturesEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceRobustness2FeaturesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceRobustness2FeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceRobustness2FeaturesEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceRobustness2FeaturesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceRobustness2FeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

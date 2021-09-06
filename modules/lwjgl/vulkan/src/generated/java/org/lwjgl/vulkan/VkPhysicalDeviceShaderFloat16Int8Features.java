@@ -205,24 +205,13 @@ public class VkPhysicalDeviceShaderFloat16Int8Features extends Struct implements
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceShaderFloat16Int8Features} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceShaderFloat16Int8Features mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceShaderFloat16Int8Features} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceShaderFloat16Int8Features callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceShaderFloat16Int8Features} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceShaderFloat16Int8Features mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceShaderFloat16Int8Features malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceShaderFloat16Int8Features.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -231,45 +220,27 @@ public class VkPhysicalDeviceShaderFloat16Int8Features extends Struct implements
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceShaderFloat16Int8Features callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceShaderFloat16Int8Features calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceShaderFloat16Int8Features.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceShaderFloat16Int8Features.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceShaderFloat16Int8Features.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceShaderFloat16Int8Features.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceShaderFloat16Int8Features.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceShaderFloat16Int8Features.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceShaderFloat16Int8Features.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceShaderFloat16Int8Features.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceShaderFloat16Int8Features.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceShaderFloat16Int8Features.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceShaderFloat16Int8Features.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -203,22 +203,29 @@ public class VkPerformanceStreamMarkerInfoINTEL extends Struct implements Native
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPerformanceStreamMarkerInfoINTEL} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPerformanceStreamMarkerInfoINTEL mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPerformanceStreamMarkerInfoINTEL} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPerformanceStreamMarkerInfoINTEL callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPerformanceStreamMarkerInfoINTEL mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPerformanceStreamMarkerInfoINTEL callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPerformanceStreamMarkerInfoINTEL mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPerformanceStreamMarkerInfoINTEL callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPerformanceStreamMarkerInfoINTEL.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPerformanceStreamMarkerInfoINTEL.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPerformanceStreamMarkerInfoINTEL.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPerformanceStreamMarkerInfoINTEL.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPerformanceStreamMarkerInfoINTEL} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPerformanceStreamMarkerInfoINTEL mallocStack(MemoryStack stack) {
+    public static VkPerformanceStreamMarkerInfoINTEL malloc(MemoryStack stack) {
         return wrap(VkPerformanceStreamMarkerInfoINTEL.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -227,45 +234,27 @@ public class VkPerformanceStreamMarkerInfoINTEL extends Struct implements Native
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPerformanceStreamMarkerInfoINTEL callocStack(MemoryStack stack) {
+    public static VkPerformanceStreamMarkerInfoINTEL calloc(MemoryStack stack) {
         return wrap(VkPerformanceStreamMarkerInfoINTEL.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPerformanceStreamMarkerInfoINTEL.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPerformanceStreamMarkerInfoINTEL.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPerformanceStreamMarkerInfoINTEL.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPerformanceStreamMarkerInfoINTEL.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPerformanceStreamMarkerInfoINTEL.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPerformanceStreamMarkerInfoINTEL.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPerformanceStreamMarkerInfoINTEL.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPerformanceStreamMarkerInfoINTEL.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPerformanceStreamMarkerInfoINTEL.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPerformanceStreamMarkerInfoINTEL.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

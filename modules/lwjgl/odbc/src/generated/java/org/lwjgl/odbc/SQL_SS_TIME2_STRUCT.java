@@ -195,22 +195,29 @@ public class SQL_SS_TIME2_STRUCT extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code SQL_SS_TIME2_STRUCT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static SQL_SS_TIME2_STRUCT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code SQL_SS_TIME2_STRUCT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static SQL_SS_TIME2_STRUCT callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static SQL_SS_TIME2_STRUCT mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static SQL_SS_TIME2_STRUCT callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static SQL_SS_TIME2_STRUCT mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static SQL_SS_TIME2_STRUCT callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static SQL_SS_TIME2_STRUCT.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static SQL_SS_TIME2_STRUCT.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static SQL_SS_TIME2_STRUCT.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static SQL_SS_TIME2_STRUCT.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code SQL_SS_TIME2_STRUCT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static SQL_SS_TIME2_STRUCT mallocStack(MemoryStack stack) {
+    public static SQL_SS_TIME2_STRUCT malloc(MemoryStack stack) {
         return wrap(SQL_SS_TIME2_STRUCT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -219,45 +226,27 @@ public class SQL_SS_TIME2_STRUCT extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static SQL_SS_TIME2_STRUCT callocStack(MemoryStack stack) {
+    public static SQL_SS_TIME2_STRUCT calloc(MemoryStack stack) {
         return wrap(SQL_SS_TIME2_STRUCT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link SQL_SS_TIME2_STRUCT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static SQL_SS_TIME2_STRUCT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link SQL_SS_TIME2_STRUCT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static SQL_SS_TIME2_STRUCT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link SQL_SS_TIME2_STRUCT.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static SQL_SS_TIME2_STRUCT.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static SQL_SS_TIME2_STRUCT.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link SQL_SS_TIME2_STRUCT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static SQL_SS_TIME2_STRUCT.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static SQL_SS_TIME2_STRUCT.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

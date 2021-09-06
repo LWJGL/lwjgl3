@@ -573,22 +573,29 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
 
     // -----------------------------------
 
-    /** Returns a new {@code VkGraphicsPipelineCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkGraphicsPipelineCreateInfo mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkGraphicsPipelineCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkGraphicsPipelineCreateInfo callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkGraphicsPipelineCreateInfo mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkGraphicsPipelineCreateInfo callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkGraphicsPipelineCreateInfo mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkGraphicsPipelineCreateInfo callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkGraphicsPipelineCreateInfo.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkGraphicsPipelineCreateInfo.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkGraphicsPipelineCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkGraphicsPipelineCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkGraphicsPipelineCreateInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkGraphicsPipelineCreateInfo mallocStack(MemoryStack stack) {
+    public static VkGraphicsPipelineCreateInfo malloc(MemoryStack stack) {
         return wrap(VkGraphicsPipelineCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -597,45 +604,27 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
      *
      * @param stack the stack from which to allocate
      */
-    public static VkGraphicsPipelineCreateInfo callocStack(MemoryStack stack) {
+    public static VkGraphicsPipelineCreateInfo calloc(MemoryStack stack) {
         return wrap(VkGraphicsPipelineCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkGraphicsPipelineCreateInfo.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkGraphicsPipelineCreateInfo.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkGraphicsPipelineCreateInfo.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkGraphicsPipelineCreateInfo.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkGraphicsPipelineCreateInfo.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkGraphicsPipelineCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkGraphicsPipelineCreateInfo.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkGraphicsPipelineCreateInfo.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkGraphicsPipelineCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkGraphicsPipelineCreateInfo.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

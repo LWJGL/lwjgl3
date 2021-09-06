@@ -194,24 +194,13 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV extends Struct im
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -220,45 +209,27 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV extends Struct im
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

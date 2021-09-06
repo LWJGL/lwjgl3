@@ -206,24 +206,13 @@ public class VkAccelerationStructureMotionInstanceNV extends Struct implements N
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkAccelerationStructureMotionInstanceNV} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkAccelerationStructureMotionInstanceNV mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkAccelerationStructureMotionInstanceNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkAccelerationStructureMotionInstanceNV callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkAccelerationStructureMotionInstanceNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkAccelerationStructureMotionInstanceNV mallocStack(MemoryStack stack) {
+    public static VkAccelerationStructureMotionInstanceNV malloc(MemoryStack stack) {
         return wrap(VkAccelerationStructureMotionInstanceNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -232,45 +221,27 @@ public class VkAccelerationStructureMotionInstanceNV extends Struct implements N
      *
      * @param stack the stack from which to allocate
      */
-    public static VkAccelerationStructureMotionInstanceNV callocStack(MemoryStack stack) {
+    public static VkAccelerationStructureMotionInstanceNV calloc(MemoryStack stack) {
         return wrap(VkAccelerationStructureMotionInstanceNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkAccelerationStructureMotionInstanceNV.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkAccelerationStructureMotionInstanceNV.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkAccelerationStructureMotionInstanceNV.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkAccelerationStructureMotionInstanceNV.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkAccelerationStructureMotionInstanceNV.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkAccelerationStructureMotionInstanceNV.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkAccelerationStructureMotionInstanceNV.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkAccelerationStructureMotionInstanceNV.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkAccelerationStructureMotionInstanceNV.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkAccelerationStructureMotionInstanceNV.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

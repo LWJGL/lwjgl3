@@ -205,24 +205,13 @@ public class VkPhysicalDeviceShaderClockFeaturesKHR extends Struct implements Na
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceShaderClockFeaturesKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceShaderClockFeaturesKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceShaderClockFeaturesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceShaderClockFeaturesKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceShaderClockFeaturesKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceShaderClockFeaturesKHR mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceShaderClockFeaturesKHR malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceShaderClockFeaturesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -231,45 +220,27 @@ public class VkPhysicalDeviceShaderClockFeaturesKHR extends Struct implements Na
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceShaderClockFeaturesKHR callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceShaderClockFeaturesKHR calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceShaderClockFeaturesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceShaderClockFeaturesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceShaderClockFeaturesKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceShaderClockFeaturesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceShaderClockFeaturesKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceShaderClockFeaturesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceShaderClockFeaturesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceShaderClockFeaturesKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceShaderClockFeaturesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceShaderClockFeaturesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceShaderClockFeaturesKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -154,24 +154,13 @@ public class VkSemaphoreSignalInfoKHR extends VkSemaphoreSignalInfo {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkSemaphoreSignalInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkSemaphoreSignalInfoKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkSemaphoreSignalInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkSemaphoreSignalInfoKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkSemaphoreSignalInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkSemaphoreSignalInfoKHR mallocStack(MemoryStack stack) {
+    public static VkSemaphoreSignalInfoKHR malloc(MemoryStack stack) {
         return wrap(VkSemaphoreSignalInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -180,45 +169,27 @@ public class VkSemaphoreSignalInfoKHR extends VkSemaphoreSignalInfo {
      *
      * @param stack the stack from which to allocate
      */
-    public static VkSemaphoreSignalInfoKHR callocStack(MemoryStack stack) {
+    public static VkSemaphoreSignalInfoKHR calloc(MemoryStack stack) {
         return wrap(VkSemaphoreSignalInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkSemaphoreSignalInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkSemaphoreSignalInfoKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkSemaphoreSignalInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkSemaphoreSignalInfoKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkSemaphoreSignalInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkSemaphoreSignalInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkSemaphoreSignalInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkSemaphoreSignalInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkSemaphoreSignalInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkSemaphoreSignalInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -168,22 +168,29 @@ public class VkDescriptorUpdateTemplateEntryKHR extends VkDescriptorUpdateTempla
 
     // -----------------------------------
 
-    /** Returns a new {@code VkDescriptorUpdateTemplateEntryKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkDescriptorUpdateTemplateEntryKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkDescriptorUpdateTemplateEntryKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkDescriptorUpdateTemplateEntryKHR callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkDescriptorUpdateTemplateEntryKHR mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkDescriptorUpdateTemplateEntryKHR callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkDescriptorUpdateTemplateEntryKHR mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkDescriptorUpdateTemplateEntryKHR callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkDescriptorUpdateTemplateEntryKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkDescriptorUpdateTemplateEntryKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkDescriptorUpdateTemplateEntryKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkDescriptorUpdateTemplateEntryKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkDescriptorUpdateTemplateEntryKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkDescriptorUpdateTemplateEntryKHR mallocStack(MemoryStack stack) {
+    public static VkDescriptorUpdateTemplateEntryKHR malloc(MemoryStack stack) {
         return wrap(VkDescriptorUpdateTemplateEntryKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -192,45 +199,27 @@ public class VkDescriptorUpdateTemplateEntryKHR extends VkDescriptorUpdateTempla
      *
      * @param stack the stack from which to allocate
      */
-    public static VkDescriptorUpdateTemplateEntryKHR callocStack(MemoryStack stack) {
+    public static VkDescriptorUpdateTemplateEntryKHR calloc(MemoryStack stack) {
         return wrap(VkDescriptorUpdateTemplateEntryKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkDescriptorUpdateTemplateEntryKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDescriptorUpdateTemplateEntryKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkDescriptorUpdateTemplateEntryKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDescriptorUpdateTemplateEntryKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkDescriptorUpdateTemplateEntryKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkDescriptorUpdateTemplateEntryKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkDescriptorUpdateTemplateEntryKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkDescriptorUpdateTemplateEntryKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkDescriptorUpdateTemplateEntryKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkDescriptorUpdateTemplateEntryKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

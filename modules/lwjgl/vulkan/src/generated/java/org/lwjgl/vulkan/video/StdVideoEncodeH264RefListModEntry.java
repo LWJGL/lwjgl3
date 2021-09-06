@@ -182,24 +182,13 @@ public class StdVideoEncodeH264RefListModEntry extends Struct implements NativeR
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code StdVideoEncodeH264RefListModEntry} instance allocated on the thread-local {@link MemoryStack}. */
-    public static StdVideoEncodeH264RefListModEntry mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code StdVideoEncodeH264RefListModEntry} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static StdVideoEncodeH264RefListModEntry callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code StdVideoEncodeH264RefListModEntry} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static StdVideoEncodeH264RefListModEntry mallocStack(MemoryStack stack) {
+    public static StdVideoEncodeH264RefListModEntry malloc(MemoryStack stack) {
         return wrap(StdVideoEncodeH264RefListModEntry.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -208,45 +197,27 @@ public class StdVideoEncodeH264RefListModEntry extends Struct implements NativeR
      *
      * @param stack the stack from which to allocate
      */
-    public static StdVideoEncodeH264RefListModEntry callocStack(MemoryStack stack) {
+    public static StdVideoEncodeH264RefListModEntry calloc(MemoryStack stack) {
         return wrap(StdVideoEncodeH264RefListModEntry.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link StdVideoEncodeH264RefListModEntry.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static StdVideoEncodeH264RefListModEntry.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link StdVideoEncodeH264RefListModEntry.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static StdVideoEncodeH264RefListModEntry.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link StdVideoEncodeH264RefListModEntry.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static StdVideoEncodeH264RefListModEntry.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static StdVideoEncodeH264RefListModEntry.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link StdVideoEncodeH264RefListModEntry.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static StdVideoEncodeH264RefListModEntry.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static StdVideoEncodeH264RefListModEntry.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

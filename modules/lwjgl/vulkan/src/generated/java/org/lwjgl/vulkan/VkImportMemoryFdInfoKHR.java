@@ -220,22 +220,29 @@ public class VkImportMemoryFdInfoKHR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code VkImportMemoryFdInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkImportMemoryFdInfoKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkImportMemoryFdInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkImportMemoryFdInfoKHR callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkImportMemoryFdInfoKHR mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkImportMemoryFdInfoKHR callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkImportMemoryFdInfoKHR mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkImportMemoryFdInfoKHR callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkImportMemoryFdInfoKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkImportMemoryFdInfoKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkImportMemoryFdInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkImportMemoryFdInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkImportMemoryFdInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkImportMemoryFdInfoKHR mallocStack(MemoryStack stack) {
+    public static VkImportMemoryFdInfoKHR malloc(MemoryStack stack) {
         return wrap(VkImportMemoryFdInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -244,45 +251,27 @@ public class VkImportMemoryFdInfoKHR extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static VkImportMemoryFdInfoKHR callocStack(MemoryStack stack) {
+    public static VkImportMemoryFdInfoKHR calloc(MemoryStack stack) {
         return wrap(VkImportMemoryFdInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkImportMemoryFdInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkImportMemoryFdInfoKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkImportMemoryFdInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkImportMemoryFdInfoKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkImportMemoryFdInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkImportMemoryFdInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkImportMemoryFdInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkImportMemoryFdInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkImportMemoryFdInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkImportMemoryFdInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

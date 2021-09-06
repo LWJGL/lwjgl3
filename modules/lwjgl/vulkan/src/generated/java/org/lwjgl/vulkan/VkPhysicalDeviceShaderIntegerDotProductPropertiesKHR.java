@@ -520,24 +520,13 @@ public class VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR extends Struct
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -546,45 +535,27 @@ public class VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR extends Struct
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

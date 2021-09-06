@@ -204,22 +204,29 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
 
     // -----------------------------------
 
-    /** Returns a new {@code VkVertexInputBindingDescription} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkVertexInputBindingDescription mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkVertexInputBindingDescription} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkVertexInputBindingDescription callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkVertexInputBindingDescription mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkVertexInputBindingDescription callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkVertexInputBindingDescription mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkVertexInputBindingDescription callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkVertexInputBindingDescription.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkVertexInputBindingDescription.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkVertexInputBindingDescription.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkVertexInputBindingDescription.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkVertexInputBindingDescription} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkVertexInputBindingDescription mallocStack(MemoryStack stack) {
+    public static VkVertexInputBindingDescription malloc(MemoryStack stack) {
         return wrap(VkVertexInputBindingDescription.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -228,45 +235,27 @@ public class VkVertexInputBindingDescription extends Struct implements NativeRes
      *
      * @param stack the stack from which to allocate
      */
-    public static VkVertexInputBindingDescription callocStack(MemoryStack stack) {
+    public static VkVertexInputBindingDescription calloc(MemoryStack stack) {
         return wrap(VkVertexInputBindingDescription.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkVertexInputBindingDescription.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkVertexInputBindingDescription.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkVertexInputBindingDescription.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkVertexInputBindingDescription.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkVertexInputBindingDescription.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkVertexInputBindingDescription.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkVertexInputBindingDescription.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkVertexInputBindingDescription.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkVertexInputBindingDescription.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkVertexInputBindingDescription.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

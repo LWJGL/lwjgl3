@@ -218,24 +218,13 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceSamplerFilterMinmaxProperties} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceSamplerFilterMinmaxProperties mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceSamplerFilterMinmaxProperties} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceSamplerFilterMinmaxProperties callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceSamplerFilterMinmaxProperties} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceSamplerFilterMinmaxProperties mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceSamplerFilterMinmaxProperties malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceSamplerFilterMinmaxProperties.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -244,45 +233,27 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceSamplerFilterMinmaxProperties callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceSamplerFilterMinmaxProperties calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceSamplerFilterMinmaxProperties.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -228,24 +228,13 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfo extends Struct implemen
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkDescriptorSetLayoutBindingFlagsCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkDescriptorSetLayoutBindingFlagsCreateInfo mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkDescriptorSetLayoutBindingFlagsCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkDescriptorSetLayoutBindingFlagsCreateInfo callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkDescriptorSetLayoutBindingFlagsCreateInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkDescriptorSetLayoutBindingFlagsCreateInfo mallocStack(MemoryStack stack) {
+    public static VkDescriptorSetLayoutBindingFlagsCreateInfo malloc(MemoryStack stack) {
         return wrap(VkDescriptorSetLayoutBindingFlagsCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -254,45 +243,27 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfo extends Struct implemen
      *
      * @param stack the stack from which to allocate
      */
-    public static VkDescriptorSetLayoutBindingFlagsCreateInfo callocStack(MemoryStack stack) {
+    public static VkDescriptorSetLayoutBindingFlagsCreateInfo calloc(MemoryStack stack) {
         return wrap(VkDescriptorSetLayoutBindingFlagsCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -200,24 +200,13 @@ public class VkCheckpointData2NV extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkCheckpointData2NV} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkCheckpointData2NV mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkCheckpointData2NV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkCheckpointData2NV callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkCheckpointData2NV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkCheckpointData2NV mallocStack(MemoryStack stack) {
+    public static VkCheckpointData2NV malloc(MemoryStack stack) {
         return wrap(VkCheckpointData2NV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -226,45 +215,27 @@ public class VkCheckpointData2NV extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static VkCheckpointData2NV callocStack(MemoryStack stack) {
+    public static VkCheckpointData2NV calloc(MemoryStack stack) {
         return wrap(VkCheckpointData2NV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkCheckpointData2NV.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkCheckpointData2NV.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkCheckpointData2NV.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkCheckpointData2NV.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkCheckpointData2NV.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkCheckpointData2NV.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkCheckpointData2NV.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkCheckpointData2NV.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkCheckpointData2NV.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkCheckpointData2NV.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

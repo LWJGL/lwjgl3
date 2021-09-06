@@ -204,24 +204,13 @@ public class VkFramebufferAttachmentsCreateInfo extends Struct implements Native
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkFramebufferAttachmentsCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkFramebufferAttachmentsCreateInfo mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkFramebufferAttachmentsCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkFramebufferAttachmentsCreateInfo callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkFramebufferAttachmentsCreateInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkFramebufferAttachmentsCreateInfo mallocStack(MemoryStack stack) {
+    public static VkFramebufferAttachmentsCreateInfo malloc(MemoryStack stack) {
         return wrap(VkFramebufferAttachmentsCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -230,45 +219,27 @@ public class VkFramebufferAttachmentsCreateInfo extends Struct implements Native
      *
      * @param stack the stack from which to allocate
      */
-    public static VkFramebufferAttachmentsCreateInfo callocStack(MemoryStack stack) {
+    public static VkFramebufferAttachmentsCreateInfo calloc(MemoryStack stack) {
         return wrap(VkFramebufferAttachmentsCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkFramebufferAttachmentsCreateInfo.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkFramebufferAttachmentsCreateInfo.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkFramebufferAttachmentsCreateInfo.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkFramebufferAttachmentsCreateInfo.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkFramebufferAttachmentsCreateInfo.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkFramebufferAttachmentsCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkFramebufferAttachmentsCreateInfo.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkFramebufferAttachmentsCreateInfo.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkFramebufferAttachmentsCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkFramebufferAttachmentsCreateInfo.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

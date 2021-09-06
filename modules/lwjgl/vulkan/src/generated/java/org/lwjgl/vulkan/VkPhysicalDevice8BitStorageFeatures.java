@@ -216,24 +216,13 @@ public class VkPhysicalDevice8BitStorageFeatures extends Struct implements Nativ
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDevice8BitStorageFeatures} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDevice8BitStorageFeatures mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDevice8BitStorageFeatures} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDevice8BitStorageFeatures callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDevice8BitStorageFeatures} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDevice8BitStorageFeatures mallocStack(MemoryStack stack) {
+    public static VkPhysicalDevice8BitStorageFeatures malloc(MemoryStack stack) {
         return wrap(VkPhysicalDevice8BitStorageFeatures.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -242,45 +231,27 @@ public class VkPhysicalDevice8BitStorageFeatures extends Struct implements Nativ
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDevice8BitStorageFeatures callocStack(MemoryStack stack) {
+    public static VkPhysicalDevice8BitStorageFeatures calloc(MemoryStack stack) {
         return wrap(VkPhysicalDevice8BitStorageFeatures.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDevice8BitStorageFeatures.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDevice8BitStorageFeatures.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDevice8BitStorageFeatures.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDevice8BitStorageFeatures.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDevice8BitStorageFeatures.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDevice8BitStorageFeatures.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDevice8BitStorageFeatures.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDevice8BitStorageFeatures.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDevice8BitStorageFeatures.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDevice8BitStorageFeatures.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

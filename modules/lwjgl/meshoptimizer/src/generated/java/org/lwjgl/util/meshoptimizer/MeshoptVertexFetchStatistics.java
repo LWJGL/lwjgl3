@@ -143,24 +143,13 @@ public class MeshoptVertexFetchStatistics extends Struct implements NativeResour
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code MeshoptVertexFetchStatistics} instance allocated on the thread-local {@link MemoryStack}. */
-    public static MeshoptVertexFetchStatistics mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code MeshoptVertexFetchStatistics} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static MeshoptVertexFetchStatistics callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code MeshoptVertexFetchStatistics} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static MeshoptVertexFetchStatistics mallocStack(MemoryStack stack) {
+    public static MeshoptVertexFetchStatistics malloc(MemoryStack stack) {
         return wrap(MeshoptVertexFetchStatistics.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -169,45 +158,27 @@ public class MeshoptVertexFetchStatistics extends Struct implements NativeResour
      *
      * @param stack the stack from which to allocate
      */
-    public static MeshoptVertexFetchStatistics callocStack(MemoryStack stack) {
+    public static MeshoptVertexFetchStatistics calloc(MemoryStack stack) {
         return wrap(MeshoptVertexFetchStatistics.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link MeshoptVertexFetchStatistics.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static MeshoptVertexFetchStatistics.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link MeshoptVertexFetchStatistics.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static MeshoptVertexFetchStatistics.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link MeshoptVertexFetchStatistics.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static MeshoptVertexFetchStatistics.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static MeshoptVertexFetchStatistics.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link MeshoptVertexFetchStatistics.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static MeshoptVertexFetchStatistics.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static MeshoptVertexFetchStatistics.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

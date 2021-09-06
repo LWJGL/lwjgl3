@@ -184,24 +184,13 @@ public class StdVideoDecodeH264ReferenceInfoFlags extends Struct implements Nati
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code StdVideoDecodeH264ReferenceInfoFlags} instance allocated on the thread-local {@link MemoryStack}. */
-    public static StdVideoDecodeH264ReferenceInfoFlags mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code StdVideoDecodeH264ReferenceInfoFlags} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static StdVideoDecodeH264ReferenceInfoFlags callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code StdVideoDecodeH264ReferenceInfoFlags} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static StdVideoDecodeH264ReferenceInfoFlags mallocStack(MemoryStack stack) {
+    public static StdVideoDecodeH264ReferenceInfoFlags malloc(MemoryStack stack) {
         return wrap(StdVideoDecodeH264ReferenceInfoFlags.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -210,45 +199,27 @@ public class StdVideoDecodeH264ReferenceInfoFlags extends Struct implements Nati
      *
      * @param stack the stack from which to allocate
      */
-    public static StdVideoDecodeH264ReferenceInfoFlags callocStack(MemoryStack stack) {
+    public static StdVideoDecodeH264ReferenceInfoFlags calloc(MemoryStack stack) {
         return wrap(StdVideoDecodeH264ReferenceInfoFlags.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link StdVideoDecodeH264ReferenceInfoFlags.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static StdVideoDecodeH264ReferenceInfoFlags.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link StdVideoDecodeH264ReferenceInfoFlags.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static StdVideoDecodeH264ReferenceInfoFlags.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link StdVideoDecodeH264ReferenceInfoFlags.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static StdVideoDecodeH264ReferenceInfoFlags.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static StdVideoDecodeH264ReferenceInfoFlags.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link StdVideoDecodeH264ReferenceInfoFlags.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static StdVideoDecodeH264ReferenceInfoFlags.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static StdVideoDecodeH264ReferenceInfoFlags.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

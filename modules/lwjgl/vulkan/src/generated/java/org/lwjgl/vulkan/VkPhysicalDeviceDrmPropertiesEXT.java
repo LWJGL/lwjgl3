@@ -227,24 +227,13 @@ public class VkPhysicalDeviceDrmPropertiesEXT extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceDrmPropertiesEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceDrmPropertiesEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceDrmPropertiesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceDrmPropertiesEXT callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceDrmPropertiesEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceDrmPropertiesEXT mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceDrmPropertiesEXT malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceDrmPropertiesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -253,45 +242,27 @@ public class VkPhysicalDeviceDrmPropertiesEXT extends Struct implements NativeRe
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceDrmPropertiesEXT callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceDrmPropertiesEXT calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceDrmPropertiesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDrmPropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDrmPropertiesEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDrmPropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDrmPropertiesEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceDrmPropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceDrmPropertiesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceDrmPropertiesEXT.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceDrmPropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceDrmPropertiesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceDrmPropertiesEXT.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

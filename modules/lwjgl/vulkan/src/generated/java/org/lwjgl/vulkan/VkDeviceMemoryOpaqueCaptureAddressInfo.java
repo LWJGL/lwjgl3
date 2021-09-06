@@ -202,24 +202,13 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfo extends Struct implements Na
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkDeviceMemoryOpaqueCaptureAddressInfo} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkDeviceMemoryOpaqueCaptureAddressInfo mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkDeviceMemoryOpaqueCaptureAddressInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkDeviceMemoryOpaqueCaptureAddressInfo callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkDeviceMemoryOpaqueCaptureAddressInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkDeviceMemoryOpaqueCaptureAddressInfo mallocStack(MemoryStack stack) {
+    public static VkDeviceMemoryOpaqueCaptureAddressInfo malloc(MemoryStack stack) {
         return wrap(VkDeviceMemoryOpaqueCaptureAddressInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -228,45 +217,27 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfo extends Struct implements Na
      *
      * @param stack the stack from which to allocate
      */
-    public static VkDeviceMemoryOpaqueCaptureAddressInfo callocStack(MemoryStack stack) {
+    public static VkDeviceMemoryOpaqueCaptureAddressInfo calloc(MemoryStack stack) {
         return wrap(VkDeviceMemoryOpaqueCaptureAddressInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

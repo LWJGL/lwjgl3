@@ -264,24 +264,13 @@ public class VkRayTracingShaderGroupCreateInfoKHR extends Struct implements Nati
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkRayTracingShaderGroupCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkRayTracingShaderGroupCreateInfoKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkRayTracingShaderGroupCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkRayTracingShaderGroupCreateInfoKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkRayTracingShaderGroupCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkRayTracingShaderGroupCreateInfoKHR mallocStack(MemoryStack stack) {
+    public static VkRayTracingShaderGroupCreateInfoKHR malloc(MemoryStack stack) {
         return wrap(VkRayTracingShaderGroupCreateInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -290,45 +279,27 @@ public class VkRayTracingShaderGroupCreateInfoKHR extends Struct implements Nati
      *
      * @param stack the stack from which to allocate
      */
-    public static VkRayTracingShaderGroupCreateInfoKHR callocStack(MemoryStack stack) {
+    public static VkRayTracingShaderGroupCreateInfoKHR calloc(MemoryStack stack) {
         return wrap(VkRayTracingShaderGroupCreateInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkRayTracingShaderGroupCreateInfoKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkRayTracingShaderGroupCreateInfoKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkRayTracingShaderGroupCreateInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkRayTracingShaderGroupCreateInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkRayTracingShaderGroupCreateInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkRayTracingShaderGroupCreateInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkRayTracingShaderGroupCreateInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

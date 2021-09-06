@@ -148,24 +148,13 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkBufferOpaqueCaptureAddressCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkBufferOpaqueCaptureAddressCreateInfoKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkBufferOpaqueCaptureAddressCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkBufferOpaqueCaptureAddressCreateInfoKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkBufferOpaqueCaptureAddressCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkBufferOpaqueCaptureAddressCreateInfoKHR mallocStack(MemoryStack stack) {
+    public static VkBufferOpaqueCaptureAddressCreateInfoKHR malloc(MemoryStack stack) {
         return wrap(VkBufferOpaqueCaptureAddressCreateInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -174,45 +163,27 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
      *
      * @param stack the stack from which to allocate
      */
-    public static VkBufferOpaqueCaptureAddressCreateInfoKHR callocStack(MemoryStack stack) {
+    public static VkBufferOpaqueCaptureAddressCreateInfoKHR calloc(MemoryStack stack) {
         return wrap(VkBufferOpaqueCaptureAddressCreateInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

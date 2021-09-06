@@ -215,22 +215,22 @@ public class RPMallocConfig extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code RPMallocConfig} instance allocated on the thread-local {@link MemoryStack}. */
-    public static RPMallocConfig mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code RPMallocConfig} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static RPMallocConfig callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static RPMallocConfig mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static RPMallocConfig callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static RPMallocConfig mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static RPMallocConfig callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code RPMallocConfig} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static RPMallocConfig mallocStack(MemoryStack stack) {
+    public static RPMallocConfig malloc(MemoryStack stack) {
         return wrap(RPMallocConfig.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -239,7 +239,7 @@ public class RPMallocConfig extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static RPMallocConfig callocStack(MemoryStack stack) {
+    public static RPMallocConfig calloc(MemoryStack stack) {
         return wrap(RPMallocConfig.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 

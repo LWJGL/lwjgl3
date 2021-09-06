@@ -195,24 +195,13 @@ public class VkVideoFormatPropertiesKHR extends Struct implements NativeResource
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkVideoFormatPropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkVideoFormatPropertiesKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkVideoFormatPropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkVideoFormatPropertiesKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkVideoFormatPropertiesKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkVideoFormatPropertiesKHR mallocStack(MemoryStack stack) {
+    public static VkVideoFormatPropertiesKHR malloc(MemoryStack stack) {
         return wrap(VkVideoFormatPropertiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -221,45 +210,27 @@ public class VkVideoFormatPropertiesKHR extends Struct implements NativeResource
      *
      * @param stack the stack from which to allocate
      */
-    public static VkVideoFormatPropertiesKHR callocStack(MemoryStack stack) {
+    public static VkVideoFormatPropertiesKHR calloc(MemoryStack stack) {
         return wrap(VkVideoFormatPropertiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkVideoFormatPropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkVideoFormatPropertiesKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkVideoFormatPropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkVideoFormatPropertiesKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkVideoFormatPropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkVideoFormatPropertiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkVideoFormatPropertiesKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkVideoFormatPropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkVideoFormatPropertiesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkVideoFormatPropertiesKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

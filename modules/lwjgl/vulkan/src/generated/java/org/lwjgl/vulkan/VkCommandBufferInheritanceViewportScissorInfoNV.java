@@ -268,24 +268,13 @@ public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct impl
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkCommandBufferInheritanceViewportScissorInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkCommandBufferInheritanceViewportScissorInfoNV mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkCommandBufferInheritanceViewportScissorInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkCommandBufferInheritanceViewportScissorInfoNV callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkCommandBufferInheritanceViewportScissorInfoNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkCommandBufferInheritanceViewportScissorInfoNV mallocStack(MemoryStack stack) {
+    public static VkCommandBufferInheritanceViewportScissorInfoNV malloc(MemoryStack stack) {
         return wrap(VkCommandBufferInheritanceViewportScissorInfoNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -294,45 +283,27 @@ public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct impl
      *
      * @param stack the stack from which to allocate
      */
-    public static VkCommandBufferInheritanceViewportScissorInfoNV callocStack(MemoryStack stack) {
+    public static VkCommandBufferInheritanceViewportScissorInfoNV calloc(MemoryStack stack) {
         return wrap(VkCommandBufferInheritanceViewportScissorInfoNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkCommandBufferInheritanceViewportScissorInfoNV.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkCommandBufferInheritanceViewportScissorInfoNV.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkCommandBufferInheritanceViewportScissorInfoNV.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkCommandBufferInheritanceViewportScissorInfoNV.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkCommandBufferInheritanceViewportScissorInfoNV.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkCommandBufferInheritanceViewportScissorInfoNV.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkCommandBufferInheritanceViewportScissorInfoNV.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkCommandBufferInheritanceViewportScissorInfoNV.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkCommandBufferInheritanceViewportScissorInfoNV.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkCommandBufferInheritanceViewportScissorInfoNV.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

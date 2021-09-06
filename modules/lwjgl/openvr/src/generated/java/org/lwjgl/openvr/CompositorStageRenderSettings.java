@@ -191,24 +191,13 @@ public class CompositorStageRenderSettings extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code CompositorStageRenderSettings} instance allocated on the thread-local {@link MemoryStack}. */
-    public static CompositorStageRenderSettings mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code CompositorStageRenderSettings} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static CompositorStageRenderSettings callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code CompositorStageRenderSettings} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static CompositorStageRenderSettings mallocStack(MemoryStack stack) {
+    public static CompositorStageRenderSettings malloc(MemoryStack stack) {
         return wrap(CompositorStageRenderSettings.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -217,45 +206,27 @@ public class CompositorStageRenderSettings extends Struct implements NativeResou
      *
      * @param stack the stack from which to allocate
      */
-    public static CompositorStageRenderSettings callocStack(MemoryStack stack) {
+    public static CompositorStageRenderSettings calloc(MemoryStack stack) {
         return wrap(CompositorStageRenderSettings.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link CompositorStageRenderSettings.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static CompositorStageRenderSettings.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link CompositorStageRenderSettings.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static CompositorStageRenderSettings.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link CompositorStageRenderSettings.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static CompositorStageRenderSettings.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static CompositorStageRenderSettings.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link CompositorStageRenderSettings.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static CompositorStageRenderSettings.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static CompositorStageRenderSettings.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

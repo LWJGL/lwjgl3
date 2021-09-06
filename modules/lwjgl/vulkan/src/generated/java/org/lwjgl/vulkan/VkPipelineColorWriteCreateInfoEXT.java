@@ -220,24 +220,13 @@ public class VkPipelineColorWriteCreateInfoEXT extends Struct implements NativeR
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPipelineColorWriteCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPipelineColorWriteCreateInfoEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPipelineColorWriteCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPipelineColorWriteCreateInfoEXT callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPipelineColorWriteCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPipelineColorWriteCreateInfoEXT mallocStack(MemoryStack stack) {
+    public static VkPipelineColorWriteCreateInfoEXT malloc(MemoryStack stack) {
         return wrap(VkPipelineColorWriteCreateInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -246,45 +235,27 @@ public class VkPipelineColorWriteCreateInfoEXT extends Struct implements NativeR
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPipelineColorWriteCreateInfoEXT callocStack(MemoryStack stack) {
+    public static VkPipelineColorWriteCreateInfoEXT calloc(MemoryStack stack) {
         return wrap(VkPipelineColorWriteCreateInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPipelineColorWriteCreateInfoEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPipelineColorWriteCreateInfoEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPipelineColorWriteCreateInfoEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPipelineColorWriteCreateInfoEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPipelineColorWriteCreateInfoEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPipelineColorWriteCreateInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPipelineColorWriteCreateInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPipelineColorWriteCreateInfoEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPipelineColorWriteCreateInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPipelineColorWriteCreateInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

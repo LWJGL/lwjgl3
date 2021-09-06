@@ -183,24 +183,13 @@ public class SpvcCombinedImageSampler extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code SpvcCombinedImageSampler} instance allocated on the thread-local {@link MemoryStack}. */
-    public static SpvcCombinedImageSampler mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code SpvcCombinedImageSampler} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static SpvcCombinedImageSampler callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code SpvcCombinedImageSampler} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static SpvcCombinedImageSampler mallocStack(MemoryStack stack) {
+    public static SpvcCombinedImageSampler malloc(MemoryStack stack) {
         return wrap(SpvcCombinedImageSampler.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -209,45 +198,27 @@ public class SpvcCombinedImageSampler extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static SpvcCombinedImageSampler callocStack(MemoryStack stack) {
+    public static SpvcCombinedImageSampler calloc(MemoryStack stack) {
         return wrap(SpvcCombinedImageSampler.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link SpvcCombinedImageSampler.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static SpvcCombinedImageSampler.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link SpvcCombinedImageSampler.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static SpvcCombinedImageSampler.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link SpvcCombinedImageSampler.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static SpvcCombinedImageSampler.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static SpvcCombinedImageSampler.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link SpvcCombinedImageSampler.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static SpvcCombinedImageSampler.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static SpvcCombinedImageSampler.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

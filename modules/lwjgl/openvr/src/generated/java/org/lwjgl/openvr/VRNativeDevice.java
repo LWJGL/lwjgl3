@@ -173,24 +173,13 @@ public class VRNativeDevice extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VRNativeDevice} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VRNativeDevice mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VRNativeDevice} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VRNativeDevice callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VRNativeDevice} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VRNativeDevice mallocStack(MemoryStack stack) {
+    public static VRNativeDevice malloc(MemoryStack stack) {
         return wrap(VRNativeDevice.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -199,45 +188,27 @@ public class VRNativeDevice extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static VRNativeDevice callocStack(MemoryStack stack) {
+    public static VRNativeDevice calloc(MemoryStack stack) {
         return wrap(VRNativeDevice.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VRNativeDevice.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VRNativeDevice.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VRNativeDevice.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VRNativeDevice.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VRNativeDevice.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VRNativeDevice.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VRNativeDevice.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VRNativeDevice.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VRNativeDevice.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VRNativeDevice.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

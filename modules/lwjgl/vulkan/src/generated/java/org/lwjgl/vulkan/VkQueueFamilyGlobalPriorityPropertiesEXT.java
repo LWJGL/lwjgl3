@@ -222,24 +222,13 @@ public class VkQueueFamilyGlobalPriorityPropertiesEXT extends Struct implements 
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkQueueFamilyGlobalPriorityPropertiesEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkQueueFamilyGlobalPriorityPropertiesEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkQueueFamilyGlobalPriorityPropertiesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkQueueFamilyGlobalPriorityPropertiesEXT callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkQueueFamilyGlobalPriorityPropertiesEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkQueueFamilyGlobalPriorityPropertiesEXT mallocStack(MemoryStack stack) {
+    public static VkQueueFamilyGlobalPriorityPropertiesEXT malloc(MemoryStack stack) {
         return wrap(VkQueueFamilyGlobalPriorityPropertiesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -248,45 +237,27 @@ public class VkQueueFamilyGlobalPriorityPropertiesEXT extends Struct implements 
      *
      * @param stack the stack from which to allocate
      */
-    public static VkQueueFamilyGlobalPriorityPropertiesEXT callocStack(MemoryStack stack) {
+    public static VkQueueFamilyGlobalPriorityPropertiesEXT calloc(MemoryStack stack) {
         return wrap(VkQueueFamilyGlobalPriorityPropertiesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

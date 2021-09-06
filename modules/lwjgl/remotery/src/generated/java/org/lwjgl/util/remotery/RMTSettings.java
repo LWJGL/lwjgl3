@@ -268,22 +268,22 @@ public class RMTSettings extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code RMTSettings} instance allocated on the thread-local {@link MemoryStack}. */
-    public static RMTSettings mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code RMTSettings} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static RMTSettings callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static RMTSettings mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static RMTSettings callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static RMTSettings mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static RMTSettings callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code RMTSettings} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static RMTSettings mallocStack(MemoryStack stack) {
+    public static RMTSettings malloc(MemoryStack stack) {
         return wrap(RMTSettings.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -292,7 +292,7 @@ public class RMTSettings extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static RMTSettings callocStack(MemoryStack stack) {
+    public static RMTSettings calloc(MemoryStack stack) {
         return wrap(RMTSettings.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 

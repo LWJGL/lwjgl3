@@ -238,24 +238,13 @@ public class VkGraphicsShaderGroupCreateInfoNV extends Struct implements NativeR
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkGraphicsShaderGroupCreateInfoNV} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkGraphicsShaderGroupCreateInfoNV mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkGraphicsShaderGroupCreateInfoNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkGraphicsShaderGroupCreateInfoNV callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkGraphicsShaderGroupCreateInfoNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkGraphicsShaderGroupCreateInfoNV mallocStack(MemoryStack stack) {
+    public static VkGraphicsShaderGroupCreateInfoNV malloc(MemoryStack stack) {
         return wrap(VkGraphicsShaderGroupCreateInfoNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -264,45 +253,27 @@ public class VkGraphicsShaderGroupCreateInfoNV extends Struct implements NativeR
      *
      * @param stack the stack from which to allocate
      */
-    public static VkGraphicsShaderGroupCreateInfoNV callocStack(MemoryStack stack) {
+    public static VkGraphicsShaderGroupCreateInfoNV calloc(MemoryStack stack) {
         return wrap(VkGraphicsShaderGroupCreateInfoNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkGraphicsShaderGroupCreateInfoNV.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkGraphicsShaderGroupCreateInfoNV.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkGraphicsShaderGroupCreateInfoNV.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkGraphicsShaderGroupCreateInfoNV.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkGraphicsShaderGroupCreateInfoNV.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkGraphicsShaderGroupCreateInfoNV.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkGraphicsShaderGroupCreateInfoNV.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkGraphicsShaderGroupCreateInfoNV.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkGraphicsShaderGroupCreateInfoNV.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkGraphicsShaderGroupCreateInfoNV.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

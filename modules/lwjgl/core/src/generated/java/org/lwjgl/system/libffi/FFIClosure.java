@@ -153,24 +153,13 @@ public class FFIClosure extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code FFIClosure} instance allocated on the thread-local {@link MemoryStack}. */
-    public static FFIClosure mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code FFIClosure} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static FFIClosure callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code FFIClosure} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static FFIClosure mallocStack(MemoryStack stack) {
+    public static FFIClosure malloc(MemoryStack stack) {
         return wrap(FFIClosure.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -179,45 +168,27 @@ public class FFIClosure extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static FFIClosure callocStack(MemoryStack stack) {
+    public static FFIClosure calloc(MemoryStack stack) {
         return wrap(FFIClosure.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link FFIClosure.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static FFIClosure.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link FFIClosure.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static FFIClosure.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link FFIClosure.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static FFIClosure.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static FFIClosure.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link FFIClosure.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static FFIClosure.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static FFIClosure.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

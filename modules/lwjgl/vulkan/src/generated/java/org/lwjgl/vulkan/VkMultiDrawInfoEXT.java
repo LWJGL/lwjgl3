@@ -181,24 +181,13 @@ public class VkMultiDrawInfoEXT extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkMultiDrawInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkMultiDrawInfoEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkMultiDrawInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkMultiDrawInfoEXT callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkMultiDrawInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkMultiDrawInfoEXT mallocStack(MemoryStack stack) {
+    public static VkMultiDrawInfoEXT malloc(MemoryStack stack) {
         return wrap(VkMultiDrawInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -207,45 +196,27 @@ public class VkMultiDrawInfoEXT extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static VkMultiDrawInfoEXT callocStack(MemoryStack stack) {
+    public static VkMultiDrawInfoEXT calloc(MemoryStack stack) {
         return wrap(VkMultiDrawInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkMultiDrawInfoEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkMultiDrawInfoEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkMultiDrawInfoEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkMultiDrawInfoEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkMultiDrawInfoEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkMultiDrawInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkMultiDrawInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkMultiDrawInfoEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkMultiDrawInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkMultiDrawInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

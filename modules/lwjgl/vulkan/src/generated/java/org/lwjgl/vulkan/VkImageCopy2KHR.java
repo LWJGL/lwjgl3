@@ -252,24 +252,13 @@ public class VkImageCopy2KHR extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkImageCopy2KHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkImageCopy2KHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkImageCopy2KHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkImageCopy2KHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkImageCopy2KHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkImageCopy2KHR mallocStack(MemoryStack stack) {
+    public static VkImageCopy2KHR malloc(MemoryStack stack) {
         return wrap(VkImageCopy2KHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -278,45 +267,27 @@ public class VkImageCopy2KHR extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static VkImageCopy2KHR callocStack(MemoryStack stack) {
+    public static VkImageCopy2KHR calloc(MemoryStack stack) {
         return wrap(VkImageCopy2KHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkImageCopy2KHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkImageCopy2KHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkImageCopy2KHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkImageCopy2KHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkImageCopy2KHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkImageCopy2KHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkImageCopy2KHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkImageCopy2KHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkImageCopy2KHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkImageCopy2KHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

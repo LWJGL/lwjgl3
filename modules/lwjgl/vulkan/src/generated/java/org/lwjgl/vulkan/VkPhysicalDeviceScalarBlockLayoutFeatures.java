@@ -194,24 +194,13 @@ public class VkPhysicalDeviceScalarBlockLayoutFeatures extends Struct implements
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceScalarBlockLayoutFeatures} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceScalarBlockLayoutFeatures mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceScalarBlockLayoutFeatures} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceScalarBlockLayoutFeatures callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceScalarBlockLayoutFeatures} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceScalarBlockLayoutFeatures mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceScalarBlockLayoutFeatures malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceScalarBlockLayoutFeatures.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -220,45 +209,27 @@ public class VkPhysicalDeviceScalarBlockLayoutFeatures extends Struct implements
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceScalarBlockLayoutFeatures callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceScalarBlockLayoutFeatures calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceScalarBlockLayoutFeatures.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceScalarBlockLayoutFeatures.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceScalarBlockLayoutFeatures.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceScalarBlockLayoutFeatures.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceScalarBlockLayoutFeatures.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceScalarBlockLayoutFeatures.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceScalarBlockLayoutFeatures.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceScalarBlockLayoutFeatures.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceScalarBlockLayoutFeatures.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceScalarBlockLayoutFeatures.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceScalarBlockLayoutFeatures.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

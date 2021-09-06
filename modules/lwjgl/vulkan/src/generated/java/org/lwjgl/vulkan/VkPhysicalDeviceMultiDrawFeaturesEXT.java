@@ -194,24 +194,13 @@ public class VkPhysicalDeviceMultiDrawFeaturesEXT extends Struct implements Nati
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceMultiDrawFeaturesEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceMultiDrawFeaturesEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceMultiDrawFeaturesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceMultiDrawFeaturesEXT callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceMultiDrawFeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceMultiDrawFeaturesEXT mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceMultiDrawFeaturesEXT malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceMultiDrawFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -220,45 +209,27 @@ public class VkPhysicalDeviceMultiDrawFeaturesEXT extends Struct implements Nati
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceMultiDrawFeaturesEXT callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceMultiDrawFeaturesEXT calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceMultiDrawFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

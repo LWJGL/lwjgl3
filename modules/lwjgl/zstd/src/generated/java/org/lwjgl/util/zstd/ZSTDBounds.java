@@ -151,22 +151,29 @@ public class ZSTDBounds extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code ZSTDBounds} instance allocated on the thread-local {@link MemoryStack}. */
-    public static ZSTDBounds mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code ZSTDBounds} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static ZSTDBounds callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static ZSTDBounds mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static ZSTDBounds callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static ZSTDBounds mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static ZSTDBounds callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static ZSTDBounds.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static ZSTDBounds.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static ZSTDBounds.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static ZSTDBounds.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code ZSTDBounds} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static ZSTDBounds mallocStack(MemoryStack stack) {
+    public static ZSTDBounds malloc(MemoryStack stack) {
         return wrap(ZSTDBounds.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -175,45 +182,27 @@ public class ZSTDBounds extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static ZSTDBounds callocStack(MemoryStack stack) {
+    public static ZSTDBounds calloc(MemoryStack stack) {
         return wrap(ZSTDBounds.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link ZSTDBounds.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static ZSTDBounds.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link ZSTDBounds.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static ZSTDBounds.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link ZSTDBounds.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static ZSTDBounds.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static ZSTDBounds.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link ZSTDBounds.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static ZSTDBounds.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static ZSTDBounds.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

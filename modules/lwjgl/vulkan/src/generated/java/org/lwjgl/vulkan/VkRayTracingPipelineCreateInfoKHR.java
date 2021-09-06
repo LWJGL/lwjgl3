@@ -373,24 +373,13 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct implements NativeR
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkRayTracingPipelineCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkRayTracingPipelineCreateInfoKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkRayTracingPipelineCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkRayTracingPipelineCreateInfoKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkRayTracingPipelineCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkRayTracingPipelineCreateInfoKHR mallocStack(MemoryStack stack) {
+    public static VkRayTracingPipelineCreateInfoKHR malloc(MemoryStack stack) {
         return wrap(VkRayTracingPipelineCreateInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -399,45 +388,27 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct implements NativeR
      *
      * @param stack the stack from which to allocate
      */
-    public static VkRayTracingPipelineCreateInfoKHR callocStack(MemoryStack stack) {
+    public static VkRayTracingPipelineCreateInfoKHR calloc(MemoryStack stack) {
         return wrap(VkRayTracingPipelineCreateInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkRayTracingPipelineCreateInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkRayTracingPipelineCreateInfoKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkRayTracingPipelineCreateInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkRayTracingPipelineCreateInfoKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkRayTracingPipelineCreateInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkRayTracingPipelineCreateInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkRayTracingPipelineCreateInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkRayTracingPipelineCreateInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkRayTracingPipelineCreateInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkRayTracingPipelineCreateInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

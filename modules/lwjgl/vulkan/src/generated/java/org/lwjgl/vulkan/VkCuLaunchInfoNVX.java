@@ -296,24 +296,13 @@ public class VkCuLaunchInfoNVX extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkCuLaunchInfoNVX} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkCuLaunchInfoNVX mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkCuLaunchInfoNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkCuLaunchInfoNVX callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkCuLaunchInfoNVX} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkCuLaunchInfoNVX mallocStack(MemoryStack stack) {
+    public static VkCuLaunchInfoNVX malloc(MemoryStack stack) {
         return wrap(VkCuLaunchInfoNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -322,45 +311,27 @@ public class VkCuLaunchInfoNVX extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static VkCuLaunchInfoNVX callocStack(MemoryStack stack) {
+    public static VkCuLaunchInfoNVX calloc(MemoryStack stack) {
         return wrap(VkCuLaunchInfoNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkCuLaunchInfoNVX.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkCuLaunchInfoNVX.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkCuLaunchInfoNVX.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkCuLaunchInfoNVX.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkCuLaunchInfoNVX.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkCuLaunchInfoNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkCuLaunchInfoNVX.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkCuLaunchInfoNVX.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkCuLaunchInfoNVX.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkCuLaunchInfoNVX.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -199,24 +199,13 @@ public class GLFWAllocator extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code GLFWAllocator} instance allocated on the thread-local {@link MemoryStack}. */
-    public static GLFWAllocator mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code GLFWAllocator} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static GLFWAllocator callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code GLFWAllocator} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static GLFWAllocator mallocStack(MemoryStack stack) {
+    public static GLFWAllocator malloc(MemoryStack stack) {
         return wrap(GLFWAllocator.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -225,45 +214,27 @@ public class GLFWAllocator extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static GLFWAllocator callocStack(MemoryStack stack) {
+    public static GLFWAllocator calloc(MemoryStack stack) {
         return wrap(GLFWAllocator.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link GLFWAllocator.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static GLFWAllocator.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link GLFWAllocator.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static GLFWAllocator.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link GLFWAllocator.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static GLFWAllocator.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static GLFWAllocator.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link GLFWAllocator.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static GLFWAllocator.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static GLFWAllocator.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

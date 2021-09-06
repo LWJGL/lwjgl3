@@ -194,24 +194,13 @@ public class VkPhysicalDeviceFragmentDensityMap2FeaturesEXT extends Struct imple
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceFragmentDensityMap2FeaturesEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceFragmentDensityMap2FeaturesEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceFragmentDensityMap2FeaturesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceFragmentDensityMap2FeaturesEXT callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceFragmentDensityMap2FeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceFragmentDensityMap2FeaturesEXT mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceFragmentDensityMap2FeaturesEXT malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -220,45 +209,27 @@ public class VkPhysicalDeviceFragmentDensityMap2FeaturesEXT extends Struct imple
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceFragmentDensityMap2FeaturesEXT callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceFragmentDensityMap2FeaturesEXT calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

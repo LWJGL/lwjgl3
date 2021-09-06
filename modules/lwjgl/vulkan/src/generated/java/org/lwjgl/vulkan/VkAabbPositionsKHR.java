@@ -219,24 +219,13 @@ public class VkAabbPositionsKHR extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkAabbPositionsKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkAabbPositionsKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkAabbPositionsKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkAabbPositionsKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkAabbPositionsKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkAabbPositionsKHR mallocStack(MemoryStack stack) {
+    public static VkAabbPositionsKHR malloc(MemoryStack stack) {
         return wrap(VkAabbPositionsKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -245,45 +234,27 @@ public class VkAabbPositionsKHR extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static VkAabbPositionsKHR callocStack(MemoryStack stack) {
+    public static VkAabbPositionsKHR calloc(MemoryStack stack) {
         return wrap(VkAabbPositionsKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkAabbPositionsKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkAabbPositionsKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkAabbPositionsKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkAabbPositionsKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkAabbPositionsKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkAabbPositionsKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkAabbPositionsKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkAabbPositionsKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkAabbPositionsKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkAabbPositionsKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -246,24 +246,13 @@ public class StdVideoH265ScalingLists extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code StdVideoH265ScalingLists} instance allocated on the thread-local {@link MemoryStack}. */
-    public static StdVideoH265ScalingLists mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code StdVideoH265ScalingLists} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static StdVideoH265ScalingLists callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code StdVideoH265ScalingLists} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static StdVideoH265ScalingLists mallocStack(MemoryStack stack) {
+    public static StdVideoH265ScalingLists malloc(MemoryStack stack) {
         return wrap(StdVideoH265ScalingLists.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -272,45 +261,27 @@ public class StdVideoH265ScalingLists extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static StdVideoH265ScalingLists callocStack(MemoryStack stack) {
+    public static StdVideoH265ScalingLists calloc(MemoryStack stack) {
         return wrap(StdVideoH265ScalingLists.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link StdVideoH265ScalingLists.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static StdVideoH265ScalingLists.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link StdVideoH265ScalingLists.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static StdVideoH265ScalingLists.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link StdVideoH265ScalingLists.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static StdVideoH265ScalingLists.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static StdVideoH265ScalingLists.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link StdVideoH265ScalingLists.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static StdVideoH265ScalingLists.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static StdVideoH265ScalingLists.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -257,24 +257,13 @@ public class SpvcMslSamplerYcbcrConversion extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code SpvcMslSamplerYcbcrConversion} instance allocated on the thread-local {@link MemoryStack}. */
-    public static SpvcMslSamplerYcbcrConversion mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code SpvcMslSamplerYcbcrConversion} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static SpvcMslSamplerYcbcrConversion callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code SpvcMslSamplerYcbcrConversion} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static SpvcMslSamplerYcbcrConversion mallocStack(MemoryStack stack) {
+    public static SpvcMslSamplerYcbcrConversion malloc(MemoryStack stack) {
         return wrap(SpvcMslSamplerYcbcrConversion.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -283,45 +272,27 @@ public class SpvcMslSamplerYcbcrConversion extends Struct implements NativeResou
      *
      * @param stack the stack from which to allocate
      */
-    public static SpvcMslSamplerYcbcrConversion callocStack(MemoryStack stack) {
+    public static SpvcMslSamplerYcbcrConversion calloc(MemoryStack stack) {
         return wrap(SpvcMslSamplerYcbcrConversion.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link SpvcMslSamplerYcbcrConversion.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static SpvcMslSamplerYcbcrConversion.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link SpvcMslSamplerYcbcrConversion.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static SpvcMslSamplerYcbcrConversion.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link SpvcMslSamplerYcbcrConversion.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static SpvcMslSamplerYcbcrConversion.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static SpvcMslSamplerYcbcrConversion.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link SpvcMslSamplerYcbcrConversion.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static SpvcMslSamplerYcbcrConversion.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static SpvcMslSamplerYcbcrConversion.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

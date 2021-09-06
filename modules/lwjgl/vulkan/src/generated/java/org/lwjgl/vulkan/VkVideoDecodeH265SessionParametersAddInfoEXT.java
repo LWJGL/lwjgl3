@@ -235,24 +235,13 @@ public class VkVideoDecodeH265SessionParametersAddInfoEXT extends Struct impleme
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkVideoDecodeH265SessionParametersAddInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkVideoDecodeH265SessionParametersAddInfoEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkVideoDecodeH265SessionParametersAddInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkVideoDecodeH265SessionParametersAddInfoEXT callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkVideoDecodeH265SessionParametersAddInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkVideoDecodeH265SessionParametersAddInfoEXT mallocStack(MemoryStack stack) {
+    public static VkVideoDecodeH265SessionParametersAddInfoEXT malloc(MemoryStack stack) {
         return wrap(VkVideoDecodeH265SessionParametersAddInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -261,45 +250,27 @@ public class VkVideoDecodeH265SessionParametersAddInfoEXT extends Struct impleme
      *
      * @param stack the stack from which to allocate
      */
-    public static VkVideoDecodeH265SessionParametersAddInfoEXT callocStack(MemoryStack stack) {
+    public static VkVideoDecodeH265SessionParametersAddInfoEXT calloc(MemoryStack stack) {
         return wrap(VkVideoDecodeH265SessionParametersAddInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkVideoDecodeH265SessionParametersAddInfoEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkVideoDecodeH265SessionParametersAddInfoEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkVideoDecodeH265SessionParametersAddInfoEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkVideoDecodeH265SessionParametersAddInfoEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkVideoDecodeH265SessionParametersAddInfoEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkVideoDecodeH265SessionParametersAddInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkVideoDecodeH265SessionParametersAddInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkVideoDecodeH265SessionParametersAddInfoEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkVideoDecodeH265SessionParametersAddInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkVideoDecodeH265SessionParametersAddInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

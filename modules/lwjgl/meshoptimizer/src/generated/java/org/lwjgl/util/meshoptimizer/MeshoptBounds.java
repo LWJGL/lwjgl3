@@ -187,24 +187,13 @@ public class MeshoptBounds extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code MeshoptBounds} instance allocated on the thread-local {@link MemoryStack}. */
-    public static MeshoptBounds mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code MeshoptBounds} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static MeshoptBounds callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code MeshoptBounds} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static MeshoptBounds mallocStack(MemoryStack stack) {
+    public static MeshoptBounds malloc(MemoryStack stack) {
         return wrap(MeshoptBounds.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -213,45 +202,27 @@ public class MeshoptBounds extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static MeshoptBounds callocStack(MemoryStack stack) {
+    public static MeshoptBounds calloc(MemoryStack stack) {
         return wrap(MeshoptBounds.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link MeshoptBounds.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static MeshoptBounds.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link MeshoptBounds.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static MeshoptBounds.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link MeshoptBounds.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static MeshoptBounds.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static MeshoptBounds.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link MeshoptBounds.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static MeshoptBounds.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static MeshoptBounds.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

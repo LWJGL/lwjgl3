@@ -222,24 +222,13 @@ public class VkVideoEncodeH264EmitPictureParametersEXT extends Struct implements
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkVideoEncodeH264EmitPictureParametersEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkVideoEncodeH264EmitPictureParametersEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkVideoEncodeH264EmitPictureParametersEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkVideoEncodeH264EmitPictureParametersEXT callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkVideoEncodeH264EmitPictureParametersEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkVideoEncodeH264EmitPictureParametersEXT mallocStack(MemoryStack stack) {
+    public static VkVideoEncodeH264EmitPictureParametersEXT malloc(MemoryStack stack) {
         return wrap(VkVideoEncodeH264EmitPictureParametersEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -248,45 +237,27 @@ public class VkVideoEncodeH264EmitPictureParametersEXT extends Struct implements
      *
      * @param stack the stack from which to allocate
      */
-    public static VkVideoEncodeH264EmitPictureParametersEXT callocStack(MemoryStack stack) {
+    public static VkVideoEncodeH264EmitPictureParametersEXT calloc(MemoryStack stack) {
         return wrap(VkVideoEncodeH264EmitPictureParametersEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkVideoEncodeH264EmitPictureParametersEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkVideoEncodeH264EmitPictureParametersEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkVideoEncodeH264EmitPictureParametersEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkVideoEncodeH264EmitPictureParametersEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkVideoEncodeH264EmitPictureParametersEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkVideoEncodeH264EmitPictureParametersEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkVideoEncodeH264EmitPictureParametersEXT.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkVideoEncodeH264EmitPictureParametersEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkVideoEncodeH264EmitPictureParametersEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkVideoEncodeH264EmitPictureParametersEXT.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

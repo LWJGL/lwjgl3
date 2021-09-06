@@ -190,24 +190,13 @@ public class VkPhysicalDeviceSubpassShadingPropertiesHUAWEI extends Struct imple
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceSubpassShadingPropertiesHUAWEI} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceSubpassShadingPropertiesHUAWEI mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceSubpassShadingPropertiesHUAWEI} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceSubpassShadingPropertiesHUAWEI callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceSubpassShadingPropertiesHUAWEI} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceSubpassShadingPropertiesHUAWEI mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceSubpassShadingPropertiesHUAWEI malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -216,45 +205,27 @@ public class VkPhysicalDeviceSubpassShadingPropertiesHUAWEI extends Struct imple
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceSubpassShadingPropertiesHUAWEI callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceSubpassShadingPropertiesHUAWEI calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

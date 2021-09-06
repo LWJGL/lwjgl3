@@ -166,22 +166,29 @@ public class VkDeviceGroupSubmitInfoKHR extends VkDeviceGroupSubmitInfo {
 
     // -----------------------------------
 
-    /** Returns a new {@code VkDeviceGroupSubmitInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkDeviceGroupSubmitInfoKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkDeviceGroupSubmitInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkDeviceGroupSubmitInfoKHR callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkDeviceGroupSubmitInfoKHR mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkDeviceGroupSubmitInfoKHR callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkDeviceGroupSubmitInfoKHR mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkDeviceGroupSubmitInfoKHR callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkDeviceGroupSubmitInfoKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkDeviceGroupSubmitInfoKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkDeviceGroupSubmitInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkDeviceGroupSubmitInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkDeviceGroupSubmitInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkDeviceGroupSubmitInfoKHR mallocStack(MemoryStack stack) {
+    public static VkDeviceGroupSubmitInfoKHR malloc(MemoryStack stack) {
         return wrap(VkDeviceGroupSubmitInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -190,45 +197,27 @@ public class VkDeviceGroupSubmitInfoKHR extends VkDeviceGroupSubmitInfo {
      *
      * @param stack the stack from which to allocate
      */
-    public static VkDeviceGroupSubmitInfoKHR callocStack(MemoryStack stack) {
+    public static VkDeviceGroupSubmitInfoKHR calloc(MemoryStack stack) {
         return wrap(VkDeviceGroupSubmitInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkDeviceGroupSubmitInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDeviceGroupSubmitInfoKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkDeviceGroupSubmitInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDeviceGroupSubmitInfoKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkDeviceGroupSubmitInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkDeviceGroupSubmitInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkDeviceGroupSubmitInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkDeviceGroupSubmitInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkDeviceGroupSubmitInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkDeviceGroupSubmitInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -188,22 +188,29 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
 
     // -----------------------------------
 
-    /** Returns a new {@code VkTextureLODGatherFormatPropertiesAMD} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkTextureLODGatherFormatPropertiesAMD mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkTextureLODGatherFormatPropertiesAMD} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkTextureLODGatherFormatPropertiesAMD callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkTextureLODGatherFormatPropertiesAMD mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkTextureLODGatherFormatPropertiesAMD callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkTextureLODGatherFormatPropertiesAMD mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkTextureLODGatherFormatPropertiesAMD callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkTextureLODGatherFormatPropertiesAMD.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkTextureLODGatherFormatPropertiesAMD.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkTextureLODGatherFormatPropertiesAMD.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkTextureLODGatherFormatPropertiesAMD.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkTextureLODGatherFormatPropertiesAMD} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkTextureLODGatherFormatPropertiesAMD mallocStack(MemoryStack stack) {
+    public static VkTextureLODGatherFormatPropertiesAMD malloc(MemoryStack stack) {
         return wrap(VkTextureLODGatherFormatPropertiesAMD.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -212,45 +219,27 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
      *
      * @param stack the stack from which to allocate
      */
-    public static VkTextureLODGatherFormatPropertiesAMD callocStack(MemoryStack stack) {
+    public static VkTextureLODGatherFormatPropertiesAMD calloc(MemoryStack stack) {
         return wrap(VkTextureLODGatherFormatPropertiesAMD.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkTextureLODGatherFormatPropertiesAMD.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkTextureLODGatherFormatPropertiesAMD.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkTextureLODGatherFormatPropertiesAMD.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkTextureLODGatherFormatPropertiesAMD.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkTextureLODGatherFormatPropertiesAMD.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkTextureLODGatherFormatPropertiesAMD.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkTextureLODGatherFormatPropertiesAMD.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkTextureLODGatherFormatPropertiesAMD.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkTextureLODGatherFormatPropertiesAMD.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkTextureLODGatherFormatPropertiesAMD.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

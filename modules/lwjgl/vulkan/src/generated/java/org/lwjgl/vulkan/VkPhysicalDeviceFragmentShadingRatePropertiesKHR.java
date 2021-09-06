@@ -310,24 +310,13 @@ public class VkPhysicalDeviceFragmentShadingRatePropertiesKHR extends Struct imp
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceFragmentShadingRatePropertiesKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceFragmentShadingRatePropertiesKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceFragmentShadingRatePropertiesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceFragmentShadingRatePropertiesKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceFragmentShadingRatePropertiesKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceFragmentShadingRatePropertiesKHR mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceFragmentShadingRatePropertiesKHR malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceFragmentShadingRatePropertiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -336,45 +325,27 @@ public class VkPhysicalDeviceFragmentShadingRatePropertiesKHR extends Struct imp
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceFragmentShadingRatePropertiesKHR callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceFragmentShadingRatePropertiesKHR calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceFragmentShadingRatePropertiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceFragmentShadingRatePropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceFragmentShadingRatePropertiesKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceFragmentShadingRatePropertiesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceFragmentShadingRatePropertiesKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceFragmentShadingRatePropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceFragmentShadingRatePropertiesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceFragmentShadingRatePropertiesKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceFragmentShadingRatePropertiesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceFragmentShadingRatePropertiesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceFragmentShadingRatePropertiesKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

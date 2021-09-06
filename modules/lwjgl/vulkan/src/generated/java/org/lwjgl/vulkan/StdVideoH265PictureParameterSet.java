@@ -523,24 +523,13 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code StdVideoH265PictureParameterSet} instance allocated on the thread-local {@link MemoryStack}. */
-    public static StdVideoH265PictureParameterSet mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code StdVideoH265PictureParameterSet} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static StdVideoH265PictureParameterSet callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code StdVideoH265PictureParameterSet} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static StdVideoH265PictureParameterSet mallocStack(MemoryStack stack) {
+    public static StdVideoH265PictureParameterSet malloc(MemoryStack stack) {
         return wrap(StdVideoH265PictureParameterSet.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -549,45 +538,27 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
      *
      * @param stack the stack from which to allocate
      */
-    public static StdVideoH265PictureParameterSet callocStack(MemoryStack stack) {
+    public static StdVideoH265PictureParameterSet calloc(MemoryStack stack) {
         return wrap(StdVideoH265PictureParameterSet.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link StdVideoH265PictureParameterSet.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static StdVideoH265PictureParameterSet.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link StdVideoH265PictureParameterSet.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static StdVideoH265PictureParameterSet.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link StdVideoH265PictureParameterSet.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static StdVideoH265PictureParameterSet.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static StdVideoH265PictureParameterSet.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link StdVideoH265PictureParameterSet.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static StdVideoH265PictureParameterSet.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static StdVideoH265PictureParameterSet.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

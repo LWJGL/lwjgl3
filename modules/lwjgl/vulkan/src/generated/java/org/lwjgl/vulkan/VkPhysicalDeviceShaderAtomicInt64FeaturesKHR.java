@@ -156,22 +156,29 @@ public class VkPhysicalDeviceShaderAtomicInt64FeaturesKHR extends VkPhysicalDevi
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPhysicalDeviceShaderAtomicInt64FeaturesKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceShaderAtomicInt64FeaturesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPhysicalDeviceShaderAtomicInt64FeaturesKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -180,45 +187,27 @@ public class VkPhysicalDeviceShaderAtomicInt64FeaturesKHR extends VkPhysicalDevi
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

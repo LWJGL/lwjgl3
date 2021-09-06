@@ -263,22 +263,29 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPhysicalDeviceMemoryProperties} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceMemoryProperties mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceMemoryProperties} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceMemoryProperties callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceMemoryProperties mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceMemoryProperties callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceMemoryProperties mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceMemoryProperties callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceMemoryProperties.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceMemoryProperties.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceMemoryProperties.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceMemoryProperties.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPhysicalDeviceMemoryProperties} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceMemoryProperties mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceMemoryProperties malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceMemoryProperties.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -287,45 +294,27 @@ public class VkPhysicalDeviceMemoryProperties extends Struct implements NativeRe
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceMemoryProperties callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceMemoryProperties calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceMemoryProperties.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceMemoryProperties.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceMemoryProperties.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceMemoryProperties.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceMemoryProperties.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceMemoryProperties.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceMemoryProperties.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceMemoryProperties.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceMemoryProperties.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceMemoryProperties.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceMemoryProperties.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

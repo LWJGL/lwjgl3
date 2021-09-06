@@ -205,24 +205,13 @@ public class VkPhysicalDevicePerformanceQueryFeaturesKHR extends Struct implemen
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDevicePerformanceQueryFeaturesKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDevicePerformanceQueryFeaturesKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDevicePerformanceQueryFeaturesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDevicePerformanceQueryFeaturesKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDevicePerformanceQueryFeaturesKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDevicePerformanceQueryFeaturesKHR mallocStack(MemoryStack stack) {
+    public static VkPhysicalDevicePerformanceQueryFeaturesKHR malloc(MemoryStack stack) {
         return wrap(VkPhysicalDevicePerformanceQueryFeaturesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -231,45 +220,27 @@ public class VkPhysicalDevicePerformanceQueryFeaturesKHR extends Struct implemen
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDevicePerformanceQueryFeaturesKHR callocStack(MemoryStack stack) {
+    public static VkPhysicalDevicePerformanceQueryFeaturesKHR calloc(MemoryStack stack) {
         return wrap(VkPhysicalDevicePerformanceQueryFeaturesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

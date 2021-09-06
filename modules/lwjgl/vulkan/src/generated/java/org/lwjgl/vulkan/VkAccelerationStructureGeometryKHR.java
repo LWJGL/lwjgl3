@@ -223,24 +223,13 @@ public class VkAccelerationStructureGeometryKHR extends Struct implements Native
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkAccelerationStructureGeometryKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkAccelerationStructureGeometryKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkAccelerationStructureGeometryKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkAccelerationStructureGeometryKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkAccelerationStructureGeometryKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkAccelerationStructureGeometryKHR mallocStack(MemoryStack stack) {
+    public static VkAccelerationStructureGeometryKHR malloc(MemoryStack stack) {
         return wrap(VkAccelerationStructureGeometryKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -249,45 +238,27 @@ public class VkAccelerationStructureGeometryKHR extends Struct implements Native
      *
      * @param stack the stack from which to allocate
      */
-    public static VkAccelerationStructureGeometryKHR callocStack(MemoryStack stack) {
+    public static VkAccelerationStructureGeometryKHR calloc(MemoryStack stack) {
         return wrap(VkAccelerationStructureGeometryKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkAccelerationStructureGeometryKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkAccelerationStructureGeometryKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkAccelerationStructureGeometryKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkAccelerationStructureGeometryKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkAccelerationStructureGeometryKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkAccelerationStructureGeometryKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkAccelerationStructureGeometryKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkAccelerationStructureGeometryKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkAccelerationStructureGeometryKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkAccelerationStructureGeometryKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -226,24 +226,13 @@ public class VkFragmentShadingRateAttachmentInfoKHR extends Struct implements Na
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkFragmentShadingRateAttachmentInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkFragmentShadingRateAttachmentInfoKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkFragmentShadingRateAttachmentInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkFragmentShadingRateAttachmentInfoKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkFragmentShadingRateAttachmentInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkFragmentShadingRateAttachmentInfoKHR mallocStack(MemoryStack stack) {
+    public static VkFragmentShadingRateAttachmentInfoKHR malloc(MemoryStack stack) {
         return wrap(VkFragmentShadingRateAttachmentInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -252,45 +241,27 @@ public class VkFragmentShadingRateAttachmentInfoKHR extends Struct implements Na
      *
      * @param stack the stack from which to allocate
      */
-    public static VkFragmentShadingRateAttachmentInfoKHR callocStack(MemoryStack stack) {
+    public static VkFragmentShadingRateAttachmentInfoKHR calloc(MemoryStack stack) {
         return wrap(VkFragmentShadingRateAttachmentInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkFragmentShadingRateAttachmentInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkFragmentShadingRateAttachmentInfoKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkFragmentShadingRateAttachmentInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkFragmentShadingRateAttachmentInfoKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkFragmentShadingRateAttachmentInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkFragmentShadingRateAttachmentInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkFragmentShadingRateAttachmentInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkFragmentShadingRateAttachmentInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkFragmentShadingRateAttachmentInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkFragmentShadingRateAttachmentInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

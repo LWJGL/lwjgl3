@@ -194,24 +194,13 @@ public class VkPhysicalDeviceInvocationMaskFeaturesHUAWEI extends Struct impleme
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceInvocationMaskFeaturesHUAWEI} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceInvocationMaskFeaturesHUAWEI mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceInvocationMaskFeaturesHUAWEI} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceInvocationMaskFeaturesHUAWEI callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceInvocationMaskFeaturesHUAWEI} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceInvocationMaskFeaturesHUAWEI mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceInvocationMaskFeaturesHUAWEI malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -220,45 +209,27 @@ public class VkPhysicalDeviceInvocationMaskFeaturesHUAWEI extends Struct impleme
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceInvocationMaskFeaturesHUAWEI callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceInvocationMaskFeaturesHUAWEI calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

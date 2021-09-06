@@ -216,24 +216,13 @@ public class VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV extends Struct i
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -242,45 +231,27 @@ public class VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV extends Struct i
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

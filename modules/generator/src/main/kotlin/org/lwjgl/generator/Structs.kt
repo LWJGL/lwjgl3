@@ -5,6 +5,7 @@
 package org.lwjgl.generator
 
 import java.io.*
+import java.nio.file.*
 
 private const val STRUCT = "struct"
 
@@ -169,6 +170,11 @@ class Struct(
 
         private const val BUFFER_CAPACITY_PARAM = "capacity"
         private val BUFFER_CAPACITY = Parameter(int, BUFFER_CAPACITY_PARAM, "the number of elements in the returned buffer")
+
+        // Do not generate deprecated stack allocation methods for structs introduced after 3.2.3.
+        private val STRUCTS_323 = Files
+            .readAllLines(Paths.get("modules/generator/src/main/resources/structs3.2.3.txt"))
+            .toHashSet()
     }
 
     val nativeType get() = StructType(this)
@@ -1107,25 +1113,38 @@ $indentation}"""
         }
 
         if (mallocable) {
-            print("""
+            if (STRUCTS_323.contains("$packageName.$className")) {
+                print("""
     // -----------------------------------
 
-    /** Returns a new {@code $className} instance allocated on the thread-local {@link MemoryStack}. */
-    public static $className mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code $className} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static $className callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static $className mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static $className callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static $className mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static $className callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */""")
+                if (generateBuffer) {
+                    print("""
+    @Deprecated public static $className.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static $className.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static $className.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static $className.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }""")
+                }
+            }
+            print("""
 
     /**
      * Returns a new {@code $className} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static $className mallocStack(MemoryStack stack) {
+    public static $className malloc(MemoryStack stack) {
         return wrap($className.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -1134,47 +1153,29 @@ $indentation}"""
      *
      * @param stack the stack from which to allocate
      */
-    public static $className callocStack(MemoryStack stack) {
+    public static $className calloc(MemoryStack stack) {
         return wrap($className.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 """)
             if (generateBuffer) {
                 print("""
     /**
-     * Returns a new {@link $className.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param $BUFFER_CAPACITY_PARAM the buffer capacity
-     */
-    public static $className.Buffer mallocStack(int $BUFFER_CAPACITY_PARAM) {
-        return mallocStack($BUFFER_CAPACITY_PARAM, stackGet());
-    }
-
-    /**
-     * Returns a new {@link $className.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param $BUFFER_CAPACITY_PARAM the buffer capacity
-     */
-    public static $className.Buffer callocStack(int $BUFFER_CAPACITY_PARAM) {
-        return callocStack($BUFFER_CAPACITY_PARAM, stackGet());
-    }
-
-    /**
      * Returns a new {@link $className.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
-    public static $className.Buffer mallocStack(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
+    public static $className.Buffer malloc(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM * SIZEOF), $BUFFER_CAPACITY_PARAM);
     }
 
     /**
      * Returns a new {@link $className.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
-    public static $className.Buffer callocStack(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
+    public static $className.Buffer calloc(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
     }
 """)

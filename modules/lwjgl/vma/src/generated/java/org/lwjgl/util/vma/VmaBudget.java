@@ -181,24 +181,13 @@ public class VmaBudget extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VmaBudget} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VmaBudget mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VmaBudget} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VmaBudget callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VmaBudget} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VmaBudget mallocStack(MemoryStack stack) {
+    public static VmaBudget malloc(MemoryStack stack) {
         return wrap(VmaBudget.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -207,45 +196,27 @@ public class VmaBudget extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static VmaBudget callocStack(MemoryStack stack) {
+    public static VmaBudget calloc(MemoryStack stack) {
         return wrap(VmaBudget.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VmaBudget.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VmaBudget.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VmaBudget.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VmaBudget.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VmaBudget.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VmaBudget.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VmaBudget.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VmaBudget.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VmaBudget.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VmaBudget.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

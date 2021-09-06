@@ -243,22 +243,22 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code BGFXCallbackVtbl} instance allocated on the thread-local {@link MemoryStack}. */
-    public static BGFXCallbackVtbl mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code BGFXCallbackVtbl} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static BGFXCallbackVtbl callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXCallbackVtbl mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXCallbackVtbl callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXCallbackVtbl mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXCallbackVtbl callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code BGFXCallbackVtbl} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static BGFXCallbackVtbl mallocStack(MemoryStack stack) {
+    public static BGFXCallbackVtbl malloc(MemoryStack stack) {
         return wrap(BGFXCallbackVtbl.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -267,7 +267,7 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static BGFXCallbackVtbl callocStack(MemoryStack stack) {
+    public static BGFXCallbackVtbl calloc(MemoryStack stack) {
         return wrap(BGFXCallbackVtbl.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 

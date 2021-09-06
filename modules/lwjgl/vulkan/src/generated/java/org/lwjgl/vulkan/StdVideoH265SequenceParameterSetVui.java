@@ -404,24 +404,13 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code StdVideoH265SequenceParameterSetVui} instance allocated on the thread-local {@link MemoryStack}. */
-    public static StdVideoH265SequenceParameterSetVui mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code StdVideoH265SequenceParameterSetVui} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static StdVideoH265SequenceParameterSetVui callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code StdVideoH265SequenceParameterSetVui} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static StdVideoH265SequenceParameterSetVui mallocStack(MemoryStack stack) {
+    public static StdVideoH265SequenceParameterSetVui malloc(MemoryStack stack) {
         return wrap(StdVideoH265SequenceParameterSetVui.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -430,45 +419,27 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
      *
      * @param stack the stack from which to allocate
      */
-    public static StdVideoH265SequenceParameterSetVui callocStack(MemoryStack stack) {
+    public static StdVideoH265SequenceParameterSetVui calloc(MemoryStack stack) {
         return wrap(StdVideoH265SequenceParameterSetVui.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link StdVideoH265SequenceParameterSetVui.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static StdVideoH265SequenceParameterSetVui.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link StdVideoH265SequenceParameterSetVui.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static StdVideoH265SequenceParameterSetVui.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link StdVideoH265SequenceParameterSetVui.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static StdVideoH265SequenceParameterSetVui.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static StdVideoH265SequenceParameterSetVui.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link StdVideoH265SequenceParameterSetVui.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static StdVideoH265SequenceParameterSetVui.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static StdVideoH265SequenceParameterSetVui.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

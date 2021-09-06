@@ -268,22 +268,29 @@ public class NkConvertConfig extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code NkConvertConfig} instance allocated on the thread-local {@link MemoryStack}. */
-    public static NkConvertConfig mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code NkConvertConfig} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static NkConvertConfig callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static NkConvertConfig mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static NkConvertConfig callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static NkConvertConfig mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static NkConvertConfig callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static NkConvertConfig.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static NkConvertConfig.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static NkConvertConfig.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static NkConvertConfig.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code NkConvertConfig} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static NkConvertConfig mallocStack(MemoryStack stack) {
+    public static NkConvertConfig malloc(MemoryStack stack) {
         return wrap(NkConvertConfig.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -292,45 +299,27 @@ public class NkConvertConfig extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static NkConvertConfig callocStack(MemoryStack stack) {
+    public static NkConvertConfig calloc(MemoryStack stack) {
         return wrap(NkConvertConfig.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link NkConvertConfig.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static NkConvertConfig.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link NkConvertConfig.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static NkConvertConfig.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link NkConvertConfig.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static NkConvertConfig.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static NkConvertConfig.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link NkConvertConfig.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static NkConvertConfig.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static NkConvertConfig.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

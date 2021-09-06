@@ -209,24 +209,13 @@ public class VkAcquireProfilingLockInfoKHR extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkAcquireProfilingLockInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkAcquireProfilingLockInfoKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkAcquireProfilingLockInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkAcquireProfilingLockInfoKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkAcquireProfilingLockInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkAcquireProfilingLockInfoKHR mallocStack(MemoryStack stack) {
+    public static VkAcquireProfilingLockInfoKHR malloc(MemoryStack stack) {
         return wrap(VkAcquireProfilingLockInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -235,45 +224,27 @@ public class VkAcquireProfilingLockInfoKHR extends Struct implements NativeResou
      *
      * @param stack the stack from which to allocate
      */
-    public static VkAcquireProfilingLockInfoKHR callocStack(MemoryStack stack) {
+    public static VkAcquireProfilingLockInfoKHR calloc(MemoryStack stack) {
         return wrap(VkAcquireProfilingLockInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkAcquireProfilingLockInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkAcquireProfilingLockInfoKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkAcquireProfilingLockInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkAcquireProfilingLockInfoKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkAcquireProfilingLockInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkAcquireProfilingLockInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkAcquireProfilingLockInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkAcquireProfilingLockInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkAcquireProfilingLockInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkAcquireProfilingLockInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

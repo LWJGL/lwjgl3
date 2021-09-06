@@ -200,24 +200,13 @@ public class VkPerformanceQuerySubmitInfoKHR extends Struct implements NativeRes
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPerformanceQuerySubmitInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPerformanceQuerySubmitInfoKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPerformanceQuerySubmitInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPerformanceQuerySubmitInfoKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPerformanceQuerySubmitInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPerformanceQuerySubmitInfoKHR mallocStack(MemoryStack stack) {
+    public static VkPerformanceQuerySubmitInfoKHR malloc(MemoryStack stack) {
         return wrap(VkPerformanceQuerySubmitInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -226,45 +215,27 @@ public class VkPerformanceQuerySubmitInfoKHR extends Struct implements NativeRes
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPerformanceQuerySubmitInfoKHR callocStack(MemoryStack stack) {
+    public static VkPerformanceQuerySubmitInfoKHR calloc(MemoryStack stack) {
         return wrap(VkPerformanceQuerySubmitInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPerformanceQuerySubmitInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPerformanceQuerySubmitInfoKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPerformanceQuerySubmitInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPerformanceQuerySubmitInfoKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPerformanceQuerySubmitInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPerformanceQuerySubmitInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPerformanceQuerySubmitInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPerformanceQuerySubmitInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPerformanceQuerySubmitInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPerformanceQuerySubmitInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

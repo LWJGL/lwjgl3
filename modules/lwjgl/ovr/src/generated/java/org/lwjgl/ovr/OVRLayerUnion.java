@@ -235,22 +235,29 @@ public class OVRLayerUnion extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code OVRLayerUnion} instance allocated on the thread-local {@link MemoryStack}. */
-    public static OVRLayerUnion mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code OVRLayerUnion} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static OVRLayerUnion callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static OVRLayerUnion mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static OVRLayerUnion callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static OVRLayerUnion mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static OVRLayerUnion callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static OVRLayerUnion.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static OVRLayerUnion.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static OVRLayerUnion.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static OVRLayerUnion.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code OVRLayerUnion} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static OVRLayerUnion mallocStack(MemoryStack stack) {
+    public static OVRLayerUnion malloc(MemoryStack stack) {
         return wrap(OVRLayerUnion.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -259,45 +266,27 @@ public class OVRLayerUnion extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static OVRLayerUnion callocStack(MemoryStack stack) {
+    public static OVRLayerUnion calloc(MemoryStack stack) {
         return wrap(OVRLayerUnion.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link OVRLayerUnion.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static OVRLayerUnion.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link OVRLayerUnion.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static OVRLayerUnion.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link OVRLayerUnion.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static OVRLayerUnion.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static OVRLayerUnion.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link OVRLayerUnion.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static OVRLayerUnion.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static OVRLayerUnion.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

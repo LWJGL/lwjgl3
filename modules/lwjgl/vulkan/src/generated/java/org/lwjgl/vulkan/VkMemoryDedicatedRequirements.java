@@ -214,22 +214,29 @@ public class VkMemoryDedicatedRequirements extends Struct implements NativeResou
 
     // -----------------------------------
 
-    /** Returns a new {@code VkMemoryDedicatedRequirements} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkMemoryDedicatedRequirements mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkMemoryDedicatedRequirements} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkMemoryDedicatedRequirements callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkMemoryDedicatedRequirements mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkMemoryDedicatedRequirements callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkMemoryDedicatedRequirements mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkMemoryDedicatedRequirements callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkMemoryDedicatedRequirements.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkMemoryDedicatedRequirements.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkMemoryDedicatedRequirements.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkMemoryDedicatedRequirements.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkMemoryDedicatedRequirements} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkMemoryDedicatedRequirements mallocStack(MemoryStack stack) {
+    public static VkMemoryDedicatedRequirements malloc(MemoryStack stack) {
         return wrap(VkMemoryDedicatedRequirements.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -238,45 +245,27 @@ public class VkMemoryDedicatedRequirements extends Struct implements NativeResou
      *
      * @param stack the stack from which to allocate
      */
-    public static VkMemoryDedicatedRequirements callocStack(MemoryStack stack) {
+    public static VkMemoryDedicatedRequirements calloc(MemoryStack stack) {
         return wrap(VkMemoryDedicatedRequirements.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkMemoryDedicatedRequirements.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkMemoryDedicatedRequirements.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkMemoryDedicatedRequirements.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkMemoryDedicatedRequirements.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkMemoryDedicatedRequirements.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkMemoryDedicatedRequirements.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkMemoryDedicatedRequirements.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkMemoryDedicatedRequirements.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkMemoryDedicatedRequirements.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkMemoryDedicatedRequirements.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

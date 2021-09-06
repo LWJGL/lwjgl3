@@ -165,22 +165,22 @@ public class BGFXPlatformData extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code BGFXPlatformData} instance allocated on the thread-local {@link MemoryStack}. */
-    public static BGFXPlatformData mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code BGFXPlatformData} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static BGFXPlatformData callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXPlatformData mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXPlatformData callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXPlatformData mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXPlatformData callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code BGFXPlatformData} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static BGFXPlatformData mallocStack(MemoryStack stack) {
+    public static BGFXPlatformData malloc(MemoryStack stack) {
         return wrap(BGFXPlatformData.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -189,7 +189,7 @@ public class BGFXPlatformData extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static BGFXPlatformData callocStack(MemoryStack stack) {
+    public static BGFXPlatformData calloc(MemoryStack stack) {
         return wrap(BGFXPlatformData.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 

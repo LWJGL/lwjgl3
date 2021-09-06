@@ -152,22 +152,29 @@ public class VkRenderPassInputAttachmentAspectCreateInfoKHR extends VkRenderPass
 
     // -----------------------------------
 
-    /** Returns a new {@code VkRenderPassInputAttachmentAspectCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkRenderPassInputAttachmentAspectCreateInfoKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkRenderPassInputAttachmentAspectCreateInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkRenderPassInputAttachmentAspectCreateInfoKHR callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkRenderPassInputAttachmentAspectCreateInfoKHR mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkRenderPassInputAttachmentAspectCreateInfoKHR callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkRenderPassInputAttachmentAspectCreateInfoKHR mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkRenderPassInputAttachmentAspectCreateInfoKHR callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkRenderPassInputAttachmentAspectCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkRenderPassInputAttachmentAspectCreateInfoKHR mallocStack(MemoryStack stack) {
+    public static VkRenderPassInputAttachmentAspectCreateInfoKHR malloc(MemoryStack stack) {
         return wrap(VkRenderPassInputAttachmentAspectCreateInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -176,45 +183,27 @@ public class VkRenderPassInputAttachmentAspectCreateInfoKHR extends VkRenderPass
      *
      * @param stack the stack from which to allocate
      */
-    public static VkRenderPassInputAttachmentAspectCreateInfoKHR callocStack(MemoryStack stack) {
+    public static VkRenderPassInputAttachmentAspectCreateInfoKHR calloc(MemoryStack stack) {
         return wrap(VkRenderPassInputAttachmentAspectCreateInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkRenderPassInputAttachmentAspectCreateInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

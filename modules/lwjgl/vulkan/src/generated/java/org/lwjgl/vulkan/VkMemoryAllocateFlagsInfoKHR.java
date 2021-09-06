@@ -156,22 +156,29 @@ public class VkMemoryAllocateFlagsInfoKHR extends VkMemoryAllocateFlagsInfo {
 
     // -----------------------------------
 
-    /** Returns a new {@code VkMemoryAllocateFlagsInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkMemoryAllocateFlagsInfoKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkMemoryAllocateFlagsInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkMemoryAllocateFlagsInfoKHR callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkMemoryAllocateFlagsInfoKHR mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkMemoryAllocateFlagsInfoKHR callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkMemoryAllocateFlagsInfoKHR mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkMemoryAllocateFlagsInfoKHR callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkMemoryAllocateFlagsInfoKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkMemoryAllocateFlagsInfoKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkMemoryAllocateFlagsInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkMemoryAllocateFlagsInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkMemoryAllocateFlagsInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkMemoryAllocateFlagsInfoKHR mallocStack(MemoryStack stack) {
+    public static VkMemoryAllocateFlagsInfoKHR malloc(MemoryStack stack) {
         return wrap(VkMemoryAllocateFlagsInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -180,45 +187,27 @@ public class VkMemoryAllocateFlagsInfoKHR extends VkMemoryAllocateFlagsInfo {
      *
      * @param stack the stack from which to allocate
      */
-    public static VkMemoryAllocateFlagsInfoKHR callocStack(MemoryStack stack) {
+    public static VkMemoryAllocateFlagsInfoKHR calloc(MemoryStack stack) {
         return wrap(VkMemoryAllocateFlagsInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkMemoryAllocateFlagsInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkMemoryAllocateFlagsInfoKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkMemoryAllocateFlagsInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkMemoryAllocateFlagsInfoKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkMemoryAllocateFlagsInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkMemoryAllocateFlagsInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkMemoryAllocateFlagsInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkMemoryAllocateFlagsInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkMemoryAllocateFlagsInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkMemoryAllocateFlagsInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

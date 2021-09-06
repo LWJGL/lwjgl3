@@ -196,24 +196,13 @@ public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkVideoDecodeH265CapabilitiesEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkVideoDecodeH265CapabilitiesEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkVideoDecodeH265CapabilitiesEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkVideoDecodeH265CapabilitiesEXT callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkVideoDecodeH265CapabilitiesEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkVideoDecodeH265CapabilitiesEXT mallocStack(MemoryStack stack) {
+    public static VkVideoDecodeH265CapabilitiesEXT malloc(MemoryStack stack) {
         return wrap(VkVideoDecodeH265CapabilitiesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -222,45 +211,27 @@ public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeRe
      *
      * @param stack the stack from which to allocate
      */
-    public static VkVideoDecodeH265CapabilitiesEXT callocStack(MemoryStack stack) {
+    public static VkVideoDecodeH265CapabilitiesEXT calloc(MemoryStack stack) {
         return wrap(VkVideoDecodeH265CapabilitiesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkVideoDecodeH265CapabilitiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkVideoDecodeH265CapabilitiesEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkVideoDecodeH265CapabilitiesEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkVideoDecodeH265CapabilitiesEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkVideoDecodeH265CapabilitiesEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkVideoDecodeH265CapabilitiesEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkVideoDecodeH265CapabilitiesEXT.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkVideoDecodeH265CapabilitiesEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkVideoDecodeH265CapabilitiesEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkVideoDecodeH265CapabilitiesEXT.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

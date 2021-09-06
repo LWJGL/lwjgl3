@@ -235,24 +235,13 @@ public class SpvcHLSLResourceBinding extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code SpvcHLSLResourceBinding} instance allocated on the thread-local {@link MemoryStack}. */
-    public static SpvcHLSLResourceBinding mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code SpvcHLSLResourceBinding} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static SpvcHLSLResourceBinding callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code SpvcHLSLResourceBinding} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static SpvcHLSLResourceBinding mallocStack(MemoryStack stack) {
+    public static SpvcHLSLResourceBinding malloc(MemoryStack stack) {
         return wrap(SpvcHLSLResourceBinding.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -261,45 +250,27 @@ public class SpvcHLSLResourceBinding extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static SpvcHLSLResourceBinding callocStack(MemoryStack stack) {
+    public static SpvcHLSLResourceBinding calloc(MemoryStack stack) {
         return wrap(SpvcHLSLResourceBinding.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link SpvcHLSLResourceBinding.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static SpvcHLSLResourceBinding.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link SpvcHLSLResourceBinding.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static SpvcHLSLResourceBinding.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link SpvcHLSLResourceBinding.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static SpvcHLSLResourceBinding.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static SpvcHLSLResourceBinding.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link SpvcHLSLResourceBinding.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static SpvcHLSLResourceBinding.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static SpvcHLSLResourceBinding.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

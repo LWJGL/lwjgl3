@@ -248,24 +248,13 @@ public class VkCopyBufferInfo2KHR extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkCopyBufferInfo2KHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkCopyBufferInfo2KHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkCopyBufferInfo2KHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkCopyBufferInfo2KHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkCopyBufferInfo2KHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkCopyBufferInfo2KHR mallocStack(MemoryStack stack) {
+    public static VkCopyBufferInfo2KHR malloc(MemoryStack stack) {
         return wrap(VkCopyBufferInfo2KHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -274,45 +263,27 @@ public class VkCopyBufferInfo2KHR extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static VkCopyBufferInfo2KHR callocStack(MemoryStack stack) {
+    public static VkCopyBufferInfo2KHR calloc(MemoryStack stack) {
         return wrap(VkCopyBufferInfo2KHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkCopyBufferInfo2KHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkCopyBufferInfo2KHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkCopyBufferInfo2KHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkCopyBufferInfo2KHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkCopyBufferInfo2KHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkCopyBufferInfo2KHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkCopyBufferInfo2KHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkCopyBufferInfo2KHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkCopyBufferInfo2KHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkCopyBufferInfo2KHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

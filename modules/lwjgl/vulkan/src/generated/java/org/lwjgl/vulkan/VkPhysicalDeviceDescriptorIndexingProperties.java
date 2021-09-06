@@ -344,24 +344,13 @@ public class VkPhysicalDeviceDescriptorIndexingProperties extends Struct impleme
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceDescriptorIndexingProperties} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceDescriptorIndexingProperties mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceDescriptorIndexingProperties} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceDescriptorIndexingProperties callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceDescriptorIndexingProperties} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceDescriptorIndexingProperties mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceDescriptorIndexingProperties malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceDescriptorIndexingProperties.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -370,45 +359,27 @@ public class VkPhysicalDeviceDescriptorIndexingProperties extends Struct impleme
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceDescriptorIndexingProperties callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceDescriptorIndexingProperties calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceDescriptorIndexingProperties.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDescriptorIndexingProperties.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDescriptorIndexingProperties.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDescriptorIndexingProperties.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDescriptorIndexingProperties.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceDescriptorIndexingProperties.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceDescriptorIndexingProperties.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceDescriptorIndexingProperties.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceDescriptorIndexingProperties.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceDescriptorIndexingProperties.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceDescriptorIndexingProperties.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

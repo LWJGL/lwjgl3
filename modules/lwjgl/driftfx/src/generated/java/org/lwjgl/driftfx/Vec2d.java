@@ -170,24 +170,13 @@ public class Vec2d extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code Vec2d} instance allocated on the thread-local {@link MemoryStack}. */
-    public static Vec2d mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code Vec2d} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static Vec2d callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code Vec2d} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static Vec2d mallocStack(MemoryStack stack) {
+    public static Vec2d malloc(MemoryStack stack) {
         return wrap(Vec2d.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -196,45 +185,27 @@ public class Vec2d extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static Vec2d callocStack(MemoryStack stack) {
+    public static Vec2d calloc(MemoryStack stack) {
         return wrap(Vec2d.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link Vec2d.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static Vec2d.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link Vec2d.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static Vec2d.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link Vec2d.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static Vec2d.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static Vec2d.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link Vec2d.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static Vec2d.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static Vec2d.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

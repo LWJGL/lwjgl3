@@ -236,24 +236,13 @@ public class VkSubpassDescriptionDepthStencilResolve extends Struct implements N
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkSubpassDescriptionDepthStencilResolve} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkSubpassDescriptionDepthStencilResolve mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkSubpassDescriptionDepthStencilResolve} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkSubpassDescriptionDepthStencilResolve callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkSubpassDescriptionDepthStencilResolve} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkSubpassDescriptionDepthStencilResolve mallocStack(MemoryStack stack) {
+    public static VkSubpassDescriptionDepthStencilResolve malloc(MemoryStack stack) {
         return wrap(VkSubpassDescriptionDepthStencilResolve.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -262,45 +251,27 @@ public class VkSubpassDescriptionDepthStencilResolve extends Struct implements N
      *
      * @param stack the stack from which to allocate
      */
-    public static VkSubpassDescriptionDepthStencilResolve callocStack(MemoryStack stack) {
+    public static VkSubpassDescriptionDepthStencilResolve calloc(MemoryStack stack) {
         return wrap(VkSubpassDescriptionDepthStencilResolve.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkSubpassDescriptionDepthStencilResolve.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkSubpassDescriptionDepthStencilResolve.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkSubpassDescriptionDepthStencilResolve.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkSubpassDescriptionDepthStencilResolve.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkSubpassDescriptionDepthStencilResolve.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkSubpassDescriptionDepthStencilResolve.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkSubpassDescriptionDepthStencilResolve.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkSubpassDescriptionDepthStencilResolve.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkSubpassDescriptionDepthStencilResolve.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkSubpassDescriptionDepthStencilResolve.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

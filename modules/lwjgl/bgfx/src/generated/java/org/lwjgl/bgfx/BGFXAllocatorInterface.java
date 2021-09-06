@@ -113,22 +113,22 @@ public class BGFXAllocatorInterface extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code BGFXAllocatorInterface} instance allocated on the thread-local {@link MemoryStack}. */
-    public static BGFXAllocatorInterface mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code BGFXAllocatorInterface} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static BGFXAllocatorInterface callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXAllocatorInterface mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXAllocatorInterface callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXAllocatorInterface mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXAllocatorInterface callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code BGFXAllocatorInterface} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static BGFXAllocatorInterface mallocStack(MemoryStack stack) {
+    public static BGFXAllocatorInterface malloc(MemoryStack stack) {
         return wrap(BGFXAllocatorInterface.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -137,7 +137,7 @@ public class BGFXAllocatorInterface extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static BGFXAllocatorInterface callocStack(MemoryStack stack) {
+    public static BGFXAllocatorInterface calloc(MemoryStack stack) {
         return wrap(BGFXAllocatorInterface.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 

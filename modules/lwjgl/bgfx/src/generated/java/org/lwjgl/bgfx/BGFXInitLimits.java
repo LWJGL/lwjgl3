@@ -154,22 +154,22 @@ public class BGFXInitLimits extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code BGFXInitLimits} instance allocated on the thread-local {@link MemoryStack}. */
-    public static BGFXInitLimits mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code BGFXInitLimits} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static BGFXInitLimits callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXInitLimits mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXInitLimits callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXInitLimits mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXInitLimits callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code BGFXInitLimits} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static BGFXInitLimits mallocStack(MemoryStack stack) {
+    public static BGFXInitLimits malloc(MemoryStack stack) {
         return wrap(BGFXInitLimits.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -178,7 +178,7 @@ public class BGFXInitLimits extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static BGFXInitLimits callocStack(MemoryStack stack) {
+    public static BGFXInitLimits calloc(MemoryStack stack) {
         return wrap(BGFXInitLimits.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 

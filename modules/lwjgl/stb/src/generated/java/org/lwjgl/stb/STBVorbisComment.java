@@ -153,24 +153,13 @@ public class STBVorbisComment extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code STBVorbisComment} instance allocated on the thread-local {@link MemoryStack}. */
-    public static STBVorbisComment mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code STBVorbisComment} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static STBVorbisComment callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code STBVorbisComment} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static STBVorbisComment mallocStack(MemoryStack stack) {
+    public static STBVorbisComment malloc(MemoryStack stack) {
         return wrap(STBVorbisComment.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -179,45 +168,27 @@ public class STBVorbisComment extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static STBVorbisComment callocStack(MemoryStack stack) {
+    public static STBVorbisComment calloc(MemoryStack stack) {
         return wrap(STBVorbisComment.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link STBVorbisComment.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static STBVorbisComment.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link STBVorbisComment.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static STBVorbisComment.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link STBVorbisComment.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static STBVorbisComment.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static STBVorbisComment.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link STBVorbisComment.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static STBVorbisComment.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static STBVorbisComment.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

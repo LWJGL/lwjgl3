@@ -315,24 +315,13 @@ public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceVulkan11Features} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceVulkan11Features mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceVulkan11Features} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceVulkan11Features callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceVulkan11Features} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceVulkan11Features mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceVulkan11Features malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceVulkan11Features.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -341,45 +330,27 @@ public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeRe
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceVulkan11Features callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceVulkan11Features calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceVulkan11Features.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceVulkan11Features.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceVulkan11Features.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceVulkan11Features.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceVulkan11Features.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceVulkan11Features.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceVulkan11Features.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceVulkan11Features.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceVulkan11Features.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceVulkan11Features.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceVulkan11Features.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -176,22 +176,22 @@ public class BGFXResolution extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code BGFXResolution} instance allocated on the thread-local {@link MemoryStack}. */
-    public static BGFXResolution mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code BGFXResolution} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static BGFXResolution callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXResolution mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXResolution callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXResolution mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXResolution callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code BGFXResolution} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static BGFXResolution mallocStack(MemoryStack stack) {
+    public static BGFXResolution malloc(MemoryStack stack) {
         return wrap(BGFXResolution.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -200,7 +200,7 @@ public class BGFXResolution extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static BGFXResolution callocStack(MemoryStack stack) {
+    public static BGFXResolution calloc(MemoryStack stack) {
         return wrap(BGFXResolution.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 

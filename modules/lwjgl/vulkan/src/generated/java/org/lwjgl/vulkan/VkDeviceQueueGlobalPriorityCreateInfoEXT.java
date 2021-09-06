@@ -197,22 +197,29 @@ public class VkDeviceQueueGlobalPriorityCreateInfoEXT extends Struct implements 
 
     // -----------------------------------
 
-    /** Returns a new {@code VkDeviceQueueGlobalPriorityCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkDeviceQueueGlobalPriorityCreateInfoEXT mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkDeviceQueueGlobalPriorityCreateInfoEXT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkDeviceQueueGlobalPriorityCreateInfoEXT callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkDeviceQueueGlobalPriorityCreateInfoEXT mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkDeviceQueueGlobalPriorityCreateInfoEXT callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkDeviceQueueGlobalPriorityCreateInfoEXT mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkDeviceQueueGlobalPriorityCreateInfoEXT callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkDeviceQueueGlobalPriorityCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkDeviceQueueGlobalPriorityCreateInfoEXT mallocStack(MemoryStack stack) {
+    public static VkDeviceQueueGlobalPriorityCreateInfoEXT malloc(MemoryStack stack) {
         return wrap(VkDeviceQueueGlobalPriorityCreateInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -221,45 +228,27 @@ public class VkDeviceQueueGlobalPriorityCreateInfoEXT extends Struct implements 
      *
      * @param stack the stack from which to allocate
      */
-    public static VkDeviceQueueGlobalPriorityCreateInfoEXT callocStack(MemoryStack stack) {
+    public static VkDeviceQueueGlobalPriorityCreateInfoEXT calloc(MemoryStack stack) {
         return wrap(VkDeviceQueueGlobalPriorityCreateInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

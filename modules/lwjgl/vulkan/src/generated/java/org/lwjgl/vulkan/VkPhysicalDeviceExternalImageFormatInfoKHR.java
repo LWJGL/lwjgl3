@@ -150,22 +150,29 @@ public class VkPhysicalDeviceExternalImageFormatInfoKHR extends VkPhysicalDevice
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPhysicalDeviceExternalImageFormatInfoKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceExternalImageFormatInfoKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceExternalImageFormatInfoKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceExternalImageFormatInfoKHR callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceExternalImageFormatInfoKHR mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceExternalImageFormatInfoKHR callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceExternalImageFormatInfoKHR mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceExternalImageFormatInfoKHR callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPhysicalDeviceExternalImageFormatInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceExternalImageFormatInfoKHR mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceExternalImageFormatInfoKHR malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceExternalImageFormatInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -174,45 +181,27 @@ public class VkPhysicalDeviceExternalImageFormatInfoKHR extends VkPhysicalDevice
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceExternalImageFormatInfoKHR callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceExternalImageFormatInfoKHR calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceExternalImageFormatInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceExternalImageFormatInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -176,22 +176,22 @@ public class OVRInitParams extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code OVRInitParams} instance allocated on the thread-local {@link MemoryStack}. */
-    public static OVRInitParams mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code OVRInitParams} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static OVRInitParams callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static OVRInitParams mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static OVRInitParams callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static OVRInitParams mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static OVRInitParams callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code OVRInitParams} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static OVRInitParams mallocStack(MemoryStack stack) {
+    public static OVRInitParams malloc(MemoryStack stack) {
         return wrap(OVRInitParams.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -200,7 +200,7 @@ public class OVRInitParams extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static OVRInitParams callocStack(MemoryStack stack) {
+    public static OVRInitParams calloc(MemoryStack stack) {
         return wrap(OVRInitParams.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 

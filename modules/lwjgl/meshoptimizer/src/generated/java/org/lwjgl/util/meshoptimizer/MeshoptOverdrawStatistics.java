@@ -150,24 +150,13 @@ public class MeshoptOverdrawStatistics extends Struct implements NativeResource 
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code MeshoptOverdrawStatistics} instance allocated on the thread-local {@link MemoryStack}. */
-    public static MeshoptOverdrawStatistics mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code MeshoptOverdrawStatistics} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static MeshoptOverdrawStatistics callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code MeshoptOverdrawStatistics} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static MeshoptOverdrawStatistics mallocStack(MemoryStack stack) {
+    public static MeshoptOverdrawStatistics malloc(MemoryStack stack) {
         return wrap(MeshoptOverdrawStatistics.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -176,45 +165,27 @@ public class MeshoptOverdrawStatistics extends Struct implements NativeResource 
      *
      * @param stack the stack from which to allocate
      */
-    public static MeshoptOverdrawStatistics callocStack(MemoryStack stack) {
+    public static MeshoptOverdrawStatistics calloc(MemoryStack stack) {
         return wrap(MeshoptOverdrawStatistics.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link MeshoptOverdrawStatistics.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static MeshoptOverdrawStatistics.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link MeshoptOverdrawStatistics.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static MeshoptOverdrawStatistics.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link MeshoptOverdrawStatistics.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static MeshoptOverdrawStatistics.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static MeshoptOverdrawStatistics.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link MeshoptOverdrawStatistics.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static MeshoptOverdrawStatistics.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static MeshoptOverdrawStatistics.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

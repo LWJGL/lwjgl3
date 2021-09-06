@@ -211,24 +211,13 @@ public class VkDescriptorSetVariableDescriptorCountAllocateInfo extends Struct i
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkDescriptorSetVariableDescriptorCountAllocateInfo} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkDescriptorSetVariableDescriptorCountAllocateInfo mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkDescriptorSetVariableDescriptorCountAllocateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkDescriptorSetVariableDescriptorCountAllocateInfo callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkDescriptorSetVariableDescriptorCountAllocateInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkDescriptorSetVariableDescriptorCountAllocateInfo mallocStack(MemoryStack stack) {
+    public static VkDescriptorSetVariableDescriptorCountAllocateInfo malloc(MemoryStack stack) {
         return wrap(VkDescriptorSetVariableDescriptorCountAllocateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -237,45 +226,27 @@ public class VkDescriptorSetVariableDescriptorCountAllocateInfo extends Struct i
      *
      * @param stack the stack from which to allocate
      */
-    public static VkDescriptorSetVariableDescriptorCountAllocateInfo callocStack(MemoryStack stack) {
+    public static VkDescriptorSetVariableDescriptorCountAllocateInfo calloc(MemoryStack stack) {
         return wrap(VkDescriptorSetVariableDescriptorCountAllocateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkDescriptorSetVariableDescriptorCountAllocateInfo.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDescriptorSetVariableDescriptorCountAllocateInfo.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkDescriptorSetVariableDescriptorCountAllocateInfo.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkDescriptorSetVariableDescriptorCountAllocateInfo.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkDescriptorSetVariableDescriptorCountAllocateInfo.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkDescriptorSetVariableDescriptorCountAllocateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkDescriptorSetVariableDescriptorCountAllocateInfo.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkDescriptorSetVariableDescriptorCountAllocateInfo.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkDescriptorSetVariableDescriptorCountAllocateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkDescriptorSetVariableDescriptorCountAllocateInfo.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

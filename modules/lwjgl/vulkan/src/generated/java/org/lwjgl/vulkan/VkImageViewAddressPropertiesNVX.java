@@ -198,24 +198,13 @@ public class VkImageViewAddressPropertiesNVX extends Struct implements NativeRes
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkImageViewAddressPropertiesNVX} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkImageViewAddressPropertiesNVX mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkImageViewAddressPropertiesNVX} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkImageViewAddressPropertiesNVX callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkImageViewAddressPropertiesNVX} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkImageViewAddressPropertiesNVX mallocStack(MemoryStack stack) {
+    public static VkImageViewAddressPropertiesNVX malloc(MemoryStack stack) {
         return wrap(VkImageViewAddressPropertiesNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -224,45 +213,27 @@ public class VkImageViewAddressPropertiesNVX extends Struct implements NativeRes
      *
      * @param stack the stack from which to allocate
      */
-    public static VkImageViewAddressPropertiesNVX callocStack(MemoryStack stack) {
+    public static VkImageViewAddressPropertiesNVX calloc(MemoryStack stack) {
         return wrap(VkImageViewAddressPropertiesNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkImageViewAddressPropertiesNVX.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkImageViewAddressPropertiesNVX.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkImageViewAddressPropertiesNVX.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkImageViewAddressPropertiesNVX.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkImageViewAddressPropertiesNVX.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkImageViewAddressPropertiesNVX.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkImageViewAddressPropertiesNVX.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkImageViewAddressPropertiesNVX.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkImageViewAddressPropertiesNVX.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkImageViewAddressPropertiesNVX.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

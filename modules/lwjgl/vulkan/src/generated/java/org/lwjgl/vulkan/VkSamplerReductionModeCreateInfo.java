@@ -197,24 +197,13 @@ public class VkSamplerReductionModeCreateInfo extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkSamplerReductionModeCreateInfo} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkSamplerReductionModeCreateInfo mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkSamplerReductionModeCreateInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkSamplerReductionModeCreateInfo callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkSamplerReductionModeCreateInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkSamplerReductionModeCreateInfo mallocStack(MemoryStack stack) {
+    public static VkSamplerReductionModeCreateInfo malloc(MemoryStack stack) {
         return wrap(VkSamplerReductionModeCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -223,45 +212,27 @@ public class VkSamplerReductionModeCreateInfo extends Struct implements NativeRe
      *
      * @param stack the stack from which to allocate
      */
-    public static VkSamplerReductionModeCreateInfo callocStack(MemoryStack stack) {
+    public static VkSamplerReductionModeCreateInfo calloc(MemoryStack stack) {
         return wrap(VkSamplerReductionModeCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkSamplerReductionModeCreateInfo.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkSamplerReductionModeCreateInfo.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkSamplerReductionModeCreateInfo.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkSamplerReductionModeCreateInfo.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkSamplerReductionModeCreateInfo.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkSamplerReductionModeCreateInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkSamplerReductionModeCreateInfo.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkSamplerReductionModeCreateInfo.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkSamplerReductionModeCreateInfo.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkSamplerReductionModeCreateInfo.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

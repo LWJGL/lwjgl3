@@ -209,22 +209,29 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends Struct i
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPhysicalDeviceComputeShaderDerivativesFeaturesNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -233,45 +240,27 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends Struct i
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

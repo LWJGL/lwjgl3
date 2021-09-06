@@ -174,22 +174,29 @@ public class ParSLPosition extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code ParSLPosition} instance allocated on the thread-local {@link MemoryStack}. */
-    public static ParSLPosition mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code ParSLPosition} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static ParSLPosition callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static ParSLPosition mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static ParSLPosition callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static ParSLPosition mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static ParSLPosition callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static ParSLPosition.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static ParSLPosition.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static ParSLPosition.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static ParSLPosition.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code ParSLPosition} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static ParSLPosition mallocStack(MemoryStack stack) {
+    public static ParSLPosition malloc(MemoryStack stack) {
         return wrap(ParSLPosition.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -198,45 +205,27 @@ public class ParSLPosition extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static ParSLPosition callocStack(MemoryStack stack) {
+    public static ParSLPosition calloc(MemoryStack stack) {
         return wrap(ParSLPosition.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link ParSLPosition.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static ParSLPosition.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link ParSLPosition.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static ParSLPosition.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link ParSLPosition.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static ParSLPosition.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static ParSLPosition.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link ParSLPosition.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static ParSLPosition.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static ParSLPosition.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

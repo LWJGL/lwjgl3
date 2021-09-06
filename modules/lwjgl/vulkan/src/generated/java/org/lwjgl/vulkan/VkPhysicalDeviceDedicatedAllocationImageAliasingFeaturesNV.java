@@ -196,22 +196,29 @@ public class VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV extends 
 
     // -----------------------------------
 
-    /** Returns a new {@code VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -220,45 +227,27 @@ public class VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV extends 
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

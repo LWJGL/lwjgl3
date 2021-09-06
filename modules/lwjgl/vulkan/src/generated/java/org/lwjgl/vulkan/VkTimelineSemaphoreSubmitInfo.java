@@ -231,24 +231,13 @@ public class VkTimelineSemaphoreSubmitInfo extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkTimelineSemaphoreSubmitInfo} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkTimelineSemaphoreSubmitInfo mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkTimelineSemaphoreSubmitInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkTimelineSemaphoreSubmitInfo callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkTimelineSemaphoreSubmitInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkTimelineSemaphoreSubmitInfo mallocStack(MemoryStack stack) {
+    public static VkTimelineSemaphoreSubmitInfo malloc(MemoryStack stack) {
         return wrap(VkTimelineSemaphoreSubmitInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -257,45 +246,27 @@ public class VkTimelineSemaphoreSubmitInfo extends Struct implements NativeResou
      *
      * @param stack the stack from which to allocate
      */
-    public static VkTimelineSemaphoreSubmitInfo callocStack(MemoryStack stack) {
+    public static VkTimelineSemaphoreSubmitInfo calloc(MemoryStack stack) {
         return wrap(VkTimelineSemaphoreSubmitInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkTimelineSemaphoreSubmitInfo.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkTimelineSemaphoreSubmitInfo.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkTimelineSemaphoreSubmitInfo.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkTimelineSemaphoreSubmitInfo.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkTimelineSemaphoreSubmitInfo.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkTimelineSemaphoreSubmitInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkTimelineSemaphoreSubmitInfo.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkTimelineSemaphoreSubmitInfo.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkTimelineSemaphoreSubmitInfo.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkTimelineSemaphoreSubmitInfo.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

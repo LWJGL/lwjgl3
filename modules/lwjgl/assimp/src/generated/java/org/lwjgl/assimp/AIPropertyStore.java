@@ -156,22 +156,29 @@ public class AIPropertyStore extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code AIPropertyStore} instance allocated on the thread-local {@link MemoryStack}. */
-    public static AIPropertyStore mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code AIPropertyStore} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static AIPropertyStore callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static AIPropertyStore mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static AIPropertyStore callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static AIPropertyStore mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static AIPropertyStore callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static AIPropertyStore.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static AIPropertyStore.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static AIPropertyStore.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static AIPropertyStore.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code AIPropertyStore} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static AIPropertyStore mallocStack(MemoryStack stack) {
+    public static AIPropertyStore malloc(MemoryStack stack) {
         return wrap(AIPropertyStore.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -180,45 +187,27 @@ public class AIPropertyStore extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static AIPropertyStore callocStack(MemoryStack stack) {
+    public static AIPropertyStore calloc(MemoryStack stack) {
         return wrap(AIPropertyStore.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link AIPropertyStore.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static AIPropertyStore.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link AIPropertyStore.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static AIPropertyStore.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link AIPropertyStore.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static AIPropertyStore.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static AIPropertyStore.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link AIPropertyStore.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static AIPropertyStore.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static AIPropertyStore.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

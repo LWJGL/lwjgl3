@@ -218,22 +218,22 @@ public class OVRHmdDesc extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code OVRHmdDesc} instance allocated on the thread-local {@link MemoryStack}. */
-    public static OVRHmdDesc mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code OVRHmdDesc} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static OVRHmdDesc callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static OVRHmdDesc mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static OVRHmdDesc callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static OVRHmdDesc mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static OVRHmdDesc callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code OVRHmdDesc} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static OVRHmdDesc mallocStack(MemoryStack stack) {
+    public static OVRHmdDesc malloc(MemoryStack stack) {
         return wrap(OVRHmdDesc.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -242,7 +242,7 @@ public class OVRHmdDesc extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static OVRHmdDesc callocStack(MemoryStack stack) {
+    public static OVRHmdDesc calloc(MemoryStack stack) {
         return wrap(OVRHmdDesc.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 

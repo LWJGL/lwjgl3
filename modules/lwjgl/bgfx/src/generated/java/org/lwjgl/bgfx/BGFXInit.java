@@ -239,22 +239,22 @@ public class BGFXInit extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code BGFXInit} instance allocated on the thread-local {@link MemoryStack}. */
-    public static BGFXInit mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code BGFXInit} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static BGFXInit callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXInit mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXInit callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXInit mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static BGFXInit callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
 
     /**
      * Returns a new {@code BGFXInit} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static BGFXInit mallocStack(MemoryStack stack) {
+    public static BGFXInit malloc(MemoryStack stack) {
         return wrap(BGFXInit.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -263,7 +263,7 @@ public class BGFXInit extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static BGFXInit callocStack(MemoryStack stack) {
+    public static BGFXInit calloc(MemoryStack stack) {
         return wrap(BGFXInit.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 

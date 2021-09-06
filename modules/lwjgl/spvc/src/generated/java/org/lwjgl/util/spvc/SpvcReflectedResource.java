@@ -220,24 +220,13 @@ public class SpvcReflectedResource extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code SpvcReflectedResource} instance allocated on the thread-local {@link MemoryStack}. */
-    public static SpvcReflectedResource mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code SpvcReflectedResource} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static SpvcReflectedResource callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code SpvcReflectedResource} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static SpvcReflectedResource mallocStack(MemoryStack stack) {
+    public static SpvcReflectedResource malloc(MemoryStack stack) {
         return wrap(SpvcReflectedResource.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -246,45 +235,27 @@ public class SpvcReflectedResource extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static SpvcReflectedResource callocStack(MemoryStack stack) {
+    public static SpvcReflectedResource calloc(MemoryStack stack) {
         return wrap(SpvcReflectedResource.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link SpvcReflectedResource.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static SpvcReflectedResource.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link SpvcReflectedResource.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static SpvcReflectedResource.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link SpvcReflectedResource.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static SpvcReflectedResource.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static SpvcReflectedResource.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link SpvcReflectedResource.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static SpvcReflectedResource.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static SpvcReflectedResource.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

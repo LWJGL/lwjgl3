@@ -194,24 +194,13 @@ public class VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR extends Struct
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR mallocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR malloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -220,45 +209,27 @@ public class VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR extends Struct
      *
      * @param stack the stack from which to allocate
      */
-    public static VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR callocStack(MemoryStack stack) {
+    public static VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR calloc(MemoryStack stack) {
         return wrap(VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -147,24 +147,13 @@ public class VmaDefragmentationPassInfo extends Struct implements NativeResource
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VmaDefragmentationPassInfo} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VmaDefragmentationPassInfo mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VmaDefragmentationPassInfo} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VmaDefragmentationPassInfo callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VmaDefragmentationPassInfo} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VmaDefragmentationPassInfo mallocStack(MemoryStack stack) {
+    public static VmaDefragmentationPassInfo malloc(MemoryStack stack) {
         return wrap(VmaDefragmentationPassInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -173,45 +162,27 @@ public class VmaDefragmentationPassInfo extends Struct implements NativeResource
      *
      * @param stack the stack from which to allocate
      */
-    public static VmaDefragmentationPassInfo callocStack(MemoryStack stack) {
+    public static VmaDefragmentationPassInfo calloc(MemoryStack stack) {
         return wrap(VmaDefragmentationPassInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VmaDefragmentationPassInfo.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VmaDefragmentationPassInfo.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VmaDefragmentationPassInfo.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VmaDefragmentationPassInfo.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VmaDefragmentationPassInfo.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VmaDefragmentationPassInfo.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VmaDefragmentationPassInfo.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VmaDefragmentationPassInfo.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VmaDefragmentationPassInfo.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VmaDefragmentationPassInfo.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

@@ -189,24 +189,13 @@ public class EXRBox2i extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code EXRBox2i} instance allocated on the thread-local {@link MemoryStack}. */
-    public static EXRBox2i mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code EXRBox2i} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static EXRBox2i callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code EXRBox2i} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static EXRBox2i mallocStack(MemoryStack stack) {
+    public static EXRBox2i malloc(MemoryStack stack) {
         return wrap(EXRBox2i.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -215,45 +204,27 @@ public class EXRBox2i extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static EXRBox2i callocStack(MemoryStack stack) {
+    public static EXRBox2i calloc(MemoryStack stack) {
         return wrap(EXRBox2i.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link EXRBox2i.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static EXRBox2i.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link EXRBox2i.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static EXRBox2i.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link EXRBox2i.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static EXRBox2i.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static EXRBox2i.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link EXRBox2i.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static EXRBox2i.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static EXRBox2i.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

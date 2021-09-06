@@ -208,22 +208,29 @@ public class EGLClientPixmapHI extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code EGLClientPixmapHI} instance allocated on the thread-local {@link MemoryStack}. */
-    public static EGLClientPixmapHI mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code EGLClientPixmapHI} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static EGLClientPixmapHI callocStack() {
-        return callocStack(stackGet());
-    }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static EGLClientPixmapHI mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static EGLClientPixmapHI callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static EGLClientPixmapHI mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static EGLClientPixmapHI callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static EGLClientPixmapHI.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static EGLClientPixmapHI.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static EGLClientPixmapHI.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static EGLClientPixmapHI.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
 
     /**
      * Returns a new {@code EGLClientPixmapHI} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static EGLClientPixmapHI mallocStack(MemoryStack stack) {
+    public static EGLClientPixmapHI malloc(MemoryStack stack) {
         return wrap(EGLClientPixmapHI.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -232,45 +239,27 @@ public class EGLClientPixmapHI extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static EGLClientPixmapHI callocStack(MemoryStack stack) {
+    public static EGLClientPixmapHI calloc(MemoryStack stack) {
         return wrap(EGLClientPixmapHI.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link EGLClientPixmapHI.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static EGLClientPixmapHI.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link EGLClientPixmapHI.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static EGLClientPixmapHI.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link EGLClientPixmapHI.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static EGLClientPixmapHI.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static EGLClientPixmapHI.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link EGLClientPixmapHI.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static EGLClientPixmapHI.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static EGLClientPixmapHI.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 

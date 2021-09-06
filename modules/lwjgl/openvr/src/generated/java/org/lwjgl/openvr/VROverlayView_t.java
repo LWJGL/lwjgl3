@@ -150,24 +150,13 @@ public class VROverlayView_t extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    // -----------------------------------
-
-    /** Returns a new {@code VROverlayView_t} instance allocated on the thread-local {@link MemoryStack}. */
-    public static VROverlayView_t mallocStack() {
-        return mallocStack(stackGet());
-    }
-
-    /** Returns a new {@code VROverlayView_t} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
-    public static VROverlayView_t callocStack() {
-        return callocStack(stackGet());
-    }
 
     /**
      * Returns a new {@code VROverlayView_t} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static VROverlayView_t mallocStack(MemoryStack stack) {
+    public static VROverlayView_t malloc(MemoryStack stack) {
         return wrap(VROverlayView_t.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
@@ -176,45 +165,27 @@ public class VROverlayView_t extends Struct implements NativeResource {
      *
      * @param stack the stack from which to allocate
      */
-    public static VROverlayView_t callocStack(MemoryStack stack) {
+    public static VROverlayView_t calloc(MemoryStack stack) {
         return wrap(VROverlayView_t.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VROverlayView_t.Buffer} instance allocated on the thread-local {@link MemoryStack}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VROverlayView_t.Buffer mallocStack(int capacity) {
-        return mallocStack(capacity, stackGet());
-    }
-
-    /**
-     * Returns a new {@link VROverlayView_t.Buffer} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VROverlayView_t.Buffer callocStack(int capacity) {
-        return callocStack(capacity, stackGet());
     }
 
     /**
      * Returns a new {@link VROverlayView_t.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VROverlayView_t.Buffer mallocStack(int capacity, MemoryStack stack) {
+    public static VROverlayView_t.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
      * Returns a new {@link VROverlayView_t.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
-     * @param stack the stack from which to allocate
+     * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static VROverlayView_t.Buffer callocStack(int capacity, MemoryStack stack) {
+    public static VROverlayView_t.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
