@@ -37,7 +37,7 @@ class Demo {
 
     void layout(NkContext ctx, int x, int y) {
         try (MemoryStack stack = stackPush()) {
-            NkRect rect = NkRect.mallocStack(stack);
+            NkRect rect = NkRect.malloc(stack);
 
             if (nk_begin(
                 ctx,
@@ -64,7 +64,7 @@ class Demo {
                 nk_layout_row_dynamic(ctx, 20, 1);
                 nk_label(ctx, "background:", NK_TEXT_LEFT);
                 nk_layout_row_dynamic(ctx, 25, 1);
-                if (nk_combo_begin_color(ctx, nk_rgb_cf(background, NkColor.mallocStack(stack)), NkVec2.mallocStack(stack).set(nk_widget_width(ctx), 400))) {
+                if (nk_combo_begin_color(ctx, nk_rgb_cf(background, NkColor.malloc(stack)), NkVec2.malloc(stack).set(nk_widget_width(ctx), 400))) {
                     nk_layout_row_dynamic(ctx, 120, 1);
                     nk_color_picker(ctx, background, NK_RGBA);
                     nk_layout_row_dynamic(ctx, 25, 1);

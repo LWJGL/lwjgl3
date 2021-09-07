@@ -160,7 +160,7 @@ public class GLFWDemo {
 
             ByteBuffer bitmap = memAlloc(BITMAP_W * BITMAP_H);
 
-            STBTTPackContext pc = STBTTPackContext.mallocStack(stack);
+            STBTTPackContext pc = STBTTPackContext.malloc(stack);
             stbtt_PackBegin(pc, bitmap, BITMAP_W, BITMAP_H, 0, 1, NULL);
             stbtt_PackSetOversampling(pc, 4, 4);
             stbtt_PackFontRange(pc, ttf, 0, FONT_HEIGHT, 32, cdata);
@@ -218,7 +218,7 @@ public class GLFWDemo {
                     FloatBuffer x = stack.floats(0.0f);
                     FloatBuffer y = stack.floats(0.0f);
 
-                    STBTTAlignedQuad q       = STBTTAlignedQuad.mallocStack(stack);
+                    STBTTAlignedQuad q       = STBTTAlignedQuad.malloc(stack);
                     IntBuffer        advance = stack.mallocInt(1);
 
                     stbtt_GetPackedQuad(cdata, BITMAP_W, BITMAP_H, codepoint - 32, x, y, q, false);
@@ -375,7 +375,7 @@ public class GLFWDemo {
     private NkContext setupWindow(long win) {
         glfwSetScrollCallback(win, (window, xoffset, yoffset) -> {
             try (MemoryStack stack = stackPush()) {
-                NkVec2 scroll = NkVec2.mallocStack(stack)
+                NkVec2 scroll = NkVec2.malloc(stack)
                     .x((float)xoffset)
                     .y((float)yoffset);
                 nk_input_scroll(ctx, scroll);
@@ -571,7 +571,7 @@ public class GLFWDemo {
             ByteBuffer elements = Objects.requireNonNull(glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY, max_element_buffer, null));
             try (MemoryStack stack = stackPush()) {
                 // fill convert configuration
-                NkConvertConfig config = NkConvertConfig.callocStack(stack)
+                NkConvertConfig config = NkConvertConfig.calloc(stack)
                     .vertex_layout(VERTEX_LAYOUT)
                     .vertex_size(20)
                     .vertex_alignment(4)
@@ -584,8 +584,8 @@ public class GLFWDemo {
                     .line_AA(AA);
 
                 // setup buffers to load vertices and elements
-                NkBuffer vbuf = NkBuffer.mallocStack(stack);
-                NkBuffer ebuf = NkBuffer.mallocStack(stack);
+                NkBuffer vbuf = NkBuffer.malloc(stack);
+                NkBuffer ebuf = NkBuffer.malloc(stack);
 
                 nk_buffer_init_fixed(vbuf, vertices/*, max_vertex_buffer*/);
                 nk_buffer_init_fixed(ebuf, elements/*, max_element_buffer*/);

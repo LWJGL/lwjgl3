@@ -79,7 +79,7 @@ public class VkInstance extends DispatchableHandleInstance {
                 }
 
                 try (MemoryStack frame1 = frame0.push()) {
-                    VkExtensionProperties.Buffer deviceExtensions = VkExtensionProperties.mallocStack(ip.get(0), frame1);
+                    VkExtensionProperties.Buffer deviceExtensions = VkExtensionProperties.malloc(ip.get(0), frame1);
                     err = callPPPPI(physicalDevices.get(i), NULL, memAddress(ip), deviceExtensions.address(), EnumerateDeviceExtensionProperties);
                     if (err != VK_SUCCESS) {
                         continue;

@@ -48,14 +48,14 @@ public class InlineTest {
         // of the available MaxInlineLevel budget. Graal does a much better job, without workarounds.
 
         try (MemoryStack frame = stack.push()) {
-            STBTTAlignedQuad.Buffer q = STBTTAlignedQuad.mallocStack(10, frame);
+            STBTTAlignedQuad.Buffer q = STBTTAlignedQuad.malloc(10, frame);
             for (STBTTAlignedQuad el : q) {
                 consume(el);
             }
         }
 
         /*try (MemoryStack frame = stack.push()) {
-            STBTTAlignedQuad.Buffer q = STBTTAlignedQuad.mallocStack(10, frame);
+            STBTTAlignedQuad.Buffer q = STBTTAlignedQuad.malloc(10, frame);
             for (int i = 0; i < q.remaining(); i++) {
                 consume(q.get(i));
             }
@@ -63,14 +63,14 @@ public class InlineTest {
 
         /*try (MemoryStack frame = stack.push()) {
             STBTTAlignedQuad
-                .mallocStack(10, frame)
+                .malloc(10, frame)
                 .forEach(InlineTest::consume);
         }*/
 
         // This is tough for Hotspot, but Graal eliminates all allocations.
         /*try (MemoryStack frame = stack.push()) {
             STBTTAlignedQuad
-                .mallocStack(10, frame)
+                .malloc(10, frame)
                 .stream()
                 .forEach(InlineTest::consume);
         }*/

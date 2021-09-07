@@ -37,7 +37,7 @@ internal class Header(
         }
 
     internal fun shouldParse(cursor: CXCursor, options: Options) = stackPush().use { stack ->
-        val location = clang_getCursorLocation(cursor, CXSourceLocation.mallocStack(stack))
+        val location = clang_getCursorLocation(cursor, CXSourceLocation.malloc(stack))
 
         if (options.mainFileOnly || (includePaths.isEmpty() && options.ignoreSystemHeaders)) {
             clang_Location_isFromMainFile(location)
@@ -141,9 +141,9 @@ internal class ExtractionContext(val header: Header, val options: Options, error
             val start = stack.mallocInt(1)
             val end = stack.mallocInt(1)
 
-            val loc = CXSourceLocation.mallocStack(stack)
+            val loc = CXSourceLocation.malloc(stack)
 
-            clang_getCursorExtent(cursor, CXSourceRange.mallocStack(stack)).let { range ->
+            clang_getCursorExtent(cursor, CXSourceRange.malloc(stack)).let { range ->
                 clang_getSpellingLocation(clang_getRangeStart(range, loc), null, null, null, start)
                 clang_getSpellingLocation(clang_getRangeEnd(range, loc), null, null, null, end)
             }
@@ -241,7 +241,7 @@ internal fun parse(
                     }
                     CXCursor_TypedefDecl     -> {
                         val name = cursor.spelling
-                        val underlyingType = clang_getTypedefDeclUnderlyingType(cursor, CXType.mallocStack(frame))
+                        val underlyingType = clang_getTypedefDeclUnderlyingType(cursor, CXType.malloc(frame))
                         when (underlyingType.kind()) {
                             CXType_Elaborated -> {
                                 CXCursorVisitor.create { child, _, _ ->
@@ -262,14 +262,14 @@ internal fun parse(
                                             }
                                         }
                                         CXCursor_TypeRef   -> {
-                                            when (clang_getCursorType(child, CXType.mallocStack(frame)).kind()) {
+                                            when (clang_getCursorType(child, CXType.malloc(frame)).kind()) {
                                                 CXType_Enum   -> {
                                                     if (options.parseConstants) {
-                                                        enumTypedef(clang_getCursorReferenced(child, CXCursor.mallocStack(frame)), name)
+                                                        enumTypedef(clang_getCursorReferenced(child, CXCursor.malloc(frame)), name)
                                                     }
                                                 }
                                                 CXType_Record -> {
-                                                    val record = clang_getCursorReferenced(child, CXCursor.mallocStack(frame))
+                                                    val record = clang_getCursorReferenced(child, CXCursor.malloc(frame))
                                                     if (structDeclarations.containsKey(record.spelling)) {
                                                         if (options.parseStructs) {
                                                             structTypedef(record, name)
@@ -291,7 +291,7 @@ internal fun parse(
                                 }.use { clang_visitChildren(cursor, it, NULL) }
                             }
                             CXType_Pointer    -> {
-                                val pointee = clang_getPointeeType(underlyingType, CXType.mallocStack(frame))
+                                val pointee = clang_getPointeeType(underlyingType, CXType.malloc(frame))
                                 when (pointee.kind()) {
                                     CXType_Void,
                                     CXType_Elaborated,
@@ -347,7 +347,7 @@ internal fun parse(
                 Unit
             }
             CXChildVisit_Continue
-        }.use { clang_visitChildren(clang_getTranslationUnitCursor(context.tu, CXCursor.mallocStack(stack)), it, NULL) }
+        }.use { clang_visitChildren(clang_getTranslationUnitCursor(context.tu, CXCursor.malloc(stack)), it, NULL) }
     }
 
     if (handles.isNotEmpty()) {

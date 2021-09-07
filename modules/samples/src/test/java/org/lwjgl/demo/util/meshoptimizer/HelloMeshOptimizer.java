@@ -80,7 +80,7 @@ public class HelloMeshOptimizer {
                 mesh.triangles(mesh.ntriangles() * 3),
                 mesh.npoints(),
                 16, 0, 0,
-                MeshoptVertexCacheStatistics.mallocStack(stack)
+                MeshoptVertexCacheStatistics.malloc(stack)
             );
             System.out.println("ACMR: " + stats.acmr());
             System.out.println("ATVR: " + stats.atvr());

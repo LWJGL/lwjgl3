@@ -111,7 +111,7 @@ public final class ExampleBGFX extends Demo {
             contentScaleX = sx.get(0);
             contentScaleY = sy.get(0);
 
-            BGFXInit init = BGFXInit.mallocStack(stack);
+            BGFXInit init = BGFXInit.malloc(stack);
             bgfx_init_ctor(init);
             init
                 .callback(BGFXCallbackInterface.calloc()

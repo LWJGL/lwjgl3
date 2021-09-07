@@ -488,7 +488,7 @@ public final class GL {
         long  hwnd      = NULL;
         long  hglrc     = NULL;
         try (MemoryStack stack = stackPush()) {
-            WNDCLASSEX wc = WNDCLASSEX.callocStack(stack)
+            WNDCLASSEX wc = WNDCLASSEX.calloc(stack)
                 .cbSize(WNDCLASSEX.SIZEOF)
                 .style(CS_HREDRAW | CS_VREDRAW)
                 .hInstance(WindowsLibrary.HINSTANCE)
@@ -513,7 +513,7 @@ public final class GL {
 
             hdc = check(GetDC(hwnd));
 
-            PIXELFORMATDESCRIPTOR pfd = PIXELFORMATDESCRIPTOR.callocStack(stack)
+            PIXELFORMATDESCRIPTOR pfd = PIXELFORMATDESCRIPTOR.calloc(stack)
                 .nSize((short)PIXELFORMATDESCRIPTOR.SIZEOF)
                 .nVersion((short)1)
                 .dwFlags(PFD_SUPPORT_OPENGL); // we don't care about anything else

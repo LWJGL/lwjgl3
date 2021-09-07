@@ -11,7 +11,7 @@ import org.lwjgl.system.MemoryStack.*
 import org.lwjgl.system.MemoryUtil.*
 import java.io.*
 
-internal val MemoryStack.str: CXString get() = CXString.mallocStack(this)
+internal val MemoryStack.str: CXString get() = CXString.malloc(this)
 internal val CXString.str: String
     get() = try {
         clang_getCString(this)!!
@@ -22,14 +22,14 @@ internal val CXString.str: String
 internal val CXCursor.spelling: String
     get() {
         return stackPush().use { stack ->
-            clang_getCursorSpelling(this, CXString.mallocStack(stack)).str
+            clang_getCursorSpelling(this, CXString.malloc(stack)).str
         }
     }
 
 internal val CXType.spelling: String
     get() {
         return stackPush().use { stack ->
-            clang_getTypeSpelling(this, CXString.mallocStack(stack)).str
+            clang_getTypeSpelling(this, CXString.malloc(stack)).str
         }
     }
 
@@ -37,7 +37,7 @@ internal fun dump(root: CXCursor, stream: PrintStream = System.out) {
     stackPush().use { stack ->
         val pp = stack.mallocPointer(1)
 
-        val location = clang_getCursorLocation(root, CXSourceLocation.mallocStack(stack))
+        val location = clang_getCursorLocation(root, CXSourceLocation.malloc(stack))
         clang_getFileLocation(location, pp, null, null, null)
 
         val tu = clang_Cursor_getTranslationUnit(root)
@@ -69,9 +69,9 @@ internal fun CXCursor.text(source: String): String {
         val start = stack.mallocInt(1)
         val end = stack.mallocInt(1)
 
-        val loc = CXSourceLocation.mallocStack(stack)
+        val loc = CXSourceLocation.malloc(stack)
 
-        val range = clang_getCursorExtent(this, CXSourceRange.mallocStack(stack))
+        val range = clang_getCursorExtent(this, CXSourceRange.malloc(stack))
         clang_getSpellingLocation(clang_getRangeStart(range, loc), null, null, null, start)
         clang_getSpellingLocation(clang_getRangeEnd(range, loc), null, null, null, end)
 

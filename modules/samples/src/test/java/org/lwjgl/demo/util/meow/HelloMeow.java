@@ -34,8 +34,8 @@ public final class HelloMeow {
         }
 
         try (MemoryStack stack = stackPush()) {
-            MeowHash ref  = MeowHash.mallocStack(stack);
-            MeowHash hash = MeowHash.mallocStack(stack);
+            MeowHash ref  = MeowHash.malloc(stack);
+            MeowHash hash = MeowHash.malloc(stack);
 
             // BATCH
 
@@ -60,7 +60,7 @@ public final class HelloMeow {
             long at    = memAddress(buffer);
             int  count = buffer.remaining();
 
-            MeowHashState state = MeowHashState.mallocStack(stack);
+            MeowHashState state = MeowHashState.malloc(stack);
             MeowHashBegin(state);
             while (0 < count) {
                 int amount = rand.nextInt(0, Integer.MAX_VALUE) % (8192 + 1);

@@ -506,7 +506,7 @@ public final class APIUtil {
 
     private static FFIType prep(FFIType type) {
         try (MemoryStack stack = stackPush()) {
-            FFICIF cif = FFICIF.callocStack(stack);
+            FFICIF cif = FFICIF.calloc(stack);
             if (ffi_prep_cif(cif, FFI_DEFAULT_ABI, type, null) != FFI_OK) {
                 throw new IllegalStateException("Failed to prepare LibFFI type.");
             }

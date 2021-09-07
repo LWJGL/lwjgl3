@@ -107,7 +107,7 @@ public class YogaNodeTest {
     @Test
     public void testCopyStyle() {
         try (MemoryStack stack = stackPush()) {
-            YGValue v = YGValue.mallocStack(stack);
+            YGValue v = YGValue.malloc(stack);
 
             YogaNode node0 = createNode();
             assertTrue(YogaConstants.isUndefined(node0.getMaxHeight(v)));
@@ -196,7 +196,7 @@ public class YogaNodeTest {
         YogaNode node = createNode();
 
         try (MemoryStack stack = stackPush()) {
-            YGValue v = YGValue.mallocStack(stack);
+            YGValue v = YGValue.malloc(stack);
 
             for (YogaEdge edge : YogaEdge.values()) {
                 assertEquals(YogaUnit.UNDEFINED, node.getMargin(edge, v).unit());
@@ -279,7 +279,7 @@ public class YogaNodeTest {
         YogaNode clonedNode = root2.getChildAt(0);
         assertNotSame(child0, clonedNode);
         try (MemoryStack stack = stackPush()) {
-            YGValue v = YGValue.mallocStack(stack);
+            YGValue v = YGValue.malloc(stack);
 
             assertEquals(child0.getWidth(v).value(), clonedNode.getWidth(v).value());
             assertEquals(50f, clonedNode.getWidth(v).value(), 0.01f);

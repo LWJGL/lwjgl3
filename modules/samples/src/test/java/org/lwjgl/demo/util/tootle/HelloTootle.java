@@ -978,7 +978,7 @@ public final class HelloTootle {
         // buffer cache (AIFileIO's OpenProc/CloseProc may be called multiple times per file)
         Map<String, ByteBuffer> dataMap = new HashMap<>();
 
-        AIFileIO fileIO = AIFileIO.mallocStack(stack)
+        AIFileIO fileIO = AIFileIO.malloc(stack)
             .OpenProc((pFileIO, fileName, openMode) -> {
                 String path = memUTF8(fileName);
 
@@ -995,7 +995,7 @@ public final class HelloTootle {
                 }
 
                 ByteBuffer data = buffer;
-                return AIFile.mallocStack(stack)
+                return AIFile.malloc(stack)
                     .ReadProc((pFile, pBuffer, size, count) -> {
                         long max = min(data.remaining() / size, count);
                         memCopy(memAddress(data), pBuffer, max * size);
@@ -1031,7 +1031,7 @@ public final class HelloTootle {
             })
             .UserData(NULL);
 
-        AILogStream logStream = AILogStream.mallocStack(stack);
+        AILogStream logStream = AILogStream.malloc(stack);
         aiGetPredefinedLogStream(aiDefaultLogStream_STDERR, (CharSequence)null, logStream);
         aiAttachLogStream(logStream);
 

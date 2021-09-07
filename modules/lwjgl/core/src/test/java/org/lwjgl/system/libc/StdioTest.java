@@ -34,7 +34,7 @@ public class StdioTest {
 
         try (MemoryStack stack = stackPush()) {
             // Prepare the call interface
-            FFICIF cif = FFICIF.mallocStack(stack);
+            FFICIF cif = FFICIF.malloc(stack);
 
             int status = ffi_prep_cif_var(
                 cif, FFI_DEFAULT_ABI, 2, ffi_type_sint,
@@ -87,7 +87,7 @@ public class StdioTest {
 
         try (MemoryStack stack = stackPush()) {
             // Prepare the call interface
-            FFICIF cif = FFICIF.mallocStack(stack);
+            FFICIF cif = FFICIF.malloc(stack);
 
             int status = ffi_prep_cif_var(
                 cif, FFI_DEFAULT_ABI, 3, ffi_type_sint,

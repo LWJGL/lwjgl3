@@ -57,7 +57,7 @@ public final class HelloBGFX {
         });
 
         try (MemoryStack stack = stackPush()) {
-            BGFXInit init = BGFXInit.mallocStack(stack);
+            BGFXInit init = BGFXInit.malloc(stack);
             bgfx_init_ctor(init);
             init
                 .resolution(it -> it

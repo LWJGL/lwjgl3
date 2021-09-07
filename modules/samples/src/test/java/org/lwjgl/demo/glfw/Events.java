@@ -179,7 +179,7 @@ public final class Events {
 
             ByteBuffer pixels = Objects.requireNonNull(stbi_load_from_memory(png, w, h, comp, 0));
             try {
-                GLFWImage img = GLFWImage.mallocStack(s)
+                GLFWImage img = GLFWImage.malloc(s)
                     .width(w.get(0))
                     .height(h.get(0))
                     .pixels(pixels);
@@ -200,7 +200,7 @@ public final class Events {
                 throw new RuntimeException(e);
             }
 
-            GLFWImage.Buffer icons = GLFWImage.mallocStack(2, s);
+            GLFWImage.Buffer icons = GLFWImage.malloc(2, s);
 
             ByteBuffer pixels16 = Objects.requireNonNull(stbi_load_from_memory(icon16, w, h, comp, 4));
             icons

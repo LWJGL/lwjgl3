@@ -65,7 +65,7 @@ public final class HelloBullet {
                         command = b3InitRequestVisualShapeInformation(sm, bodyUniqueId);
                         statusHandle = b3SubmitClientCommandAndWaitStatus(sm, command);
                         if (b3GetStatusType(statusHandle) == CMD_VISUAL_SHAPE_INFO_COMPLETED) {
-                            B3VisualShapeInformation vi = B3VisualShapeInformation.mallocStack(stack);
+                            B3VisualShapeInformation vi = B3VisualShapeInformation.malloc(stack);
                             b3GetVisualShapeInformation(sm, vi);
                         }
                     }
@@ -105,7 +105,7 @@ public final class HelloBullet {
                 int imuLinkIndex = -1;
                 for (int i = 0; i < numJoints; i++) {
                     try (MemoryStack stack = stackPush()) {
-                        B3JointInfo jointInfo = B3JointInfo.mallocStack(stack);
+                        B3JointInfo jointInfo = B3JointInfo.malloc(stack);
 
                         b3GetJointInfo(sm, bodyIndex, i, jointInfo);
 
@@ -193,7 +193,7 @@ public final class HelloBullet {
 
                 if (sensorJointIndexLeft >= 0) {
                     try (MemoryStack stack = stackPush()) {
-                        B3JointSensorState sensorState = B3JointSensorState.mallocStack(stack);
+                        B3JointSensorState sensorState = B3JointSensorState.malloc(stack);
                         b3GetJointState(sm, state, sensorJointIndexLeft, sensorState);
 
                         System.out.format("Sensor for joint [%d] = %f,%f,%f\n", sensorJointIndexLeft,
@@ -205,7 +205,7 @@ public final class HelloBullet {
 
                 if (sensorJointIndexRight >= 0) {
                     try (MemoryStack stack = stackPush()) {
-                        B3JointSensorState sensorState = B3JointSensorState.mallocStack(stack);
+                        B3JointSensorState sensorState = B3JointSensorState.malloc(stack);
                         b3GetJointState(sm, state, sensorJointIndexRight, sensorState);
 
                         System.out.format("Sensor for joint [%d] = %f,%f,%f\n", sensorJointIndexRight,

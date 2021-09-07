@@ -61,7 +61,7 @@ public final class XXHashDemo {
 
             // Using stack allocation
             try (MemoryStack stack = stackPush()) {
-                state = XXH64State.mallocStack(stack);
+                state = XXH64State.malloc(stack);
                 hash64 = streamingHash(buffer, resource, state, SEED);
                 System.out.format("streaming 64-bit hash: 0x%X (%s, stack)\n", hash64, resource);
             }

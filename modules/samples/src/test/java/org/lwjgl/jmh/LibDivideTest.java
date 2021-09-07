@@ -74,7 +74,7 @@ public class LibDivideTest {
     public int s32_1_do() {
         int sum = 0;
         try (MemoryStack stack = stackPush()) {
-            LibDivideS32 magic = LibDivideS32.mallocStack(stack);
+            LibDivideS32 magic = LibDivideS32.malloc(stack);
             libdivide_s32_gen(denom, magic);
             for (int n : numers32) {
                 sum += libdivide_s32_do(n, magic);
@@ -87,7 +87,7 @@ public class LibDivideTest {
     public int s32_2_branchfree() {
         int sum = 0;
         try (MemoryStack stack = stackPush()) {
-            LibDivideS32BranchFree magic = LibDivideS32BranchFree.mallocStack(stack);
+            LibDivideS32BranchFree magic = LibDivideS32BranchFree.malloc(stack);
             libdivide_s32_branchfree_gen(denom, magic);
             for (int n : numers32) {
                 sum += libdivide_s32_branchfree_do(n, magic);
@@ -109,7 +109,7 @@ public class LibDivideTest {
     public int u32_1_do() {
         int sum = 0;
         try (MemoryStack stack = stackPush()) {
-            LibDivideU32 magic = LibDivideU32.mallocStack(stack);
+            LibDivideU32 magic = LibDivideU32.malloc(stack);
             libdivide_u32_gen(denom, magic);
             for (int n : numers32) {
                 sum += libdivide_u32_do(n, magic);
@@ -122,7 +122,7 @@ public class LibDivideTest {
     public int u32_2_branchfree() {
         int sum = 0;
         try (MemoryStack stack = stackPush()) {
-            LibDivideU32BranchFree magic = LibDivideU32BranchFree.mallocStack(stack);
+            LibDivideU32BranchFree magic = LibDivideU32BranchFree.malloc(stack);
             libdivide_u32_branchfree_gen(denom, magic);
             for (int n : numers32) {
                 sum += libdivide_u32_branchfree_do(n, magic);
@@ -148,7 +148,7 @@ public class LibDivideTest {
     public long s64_1_do() {
         long sum = 0;
         try (MemoryStack stack = stackPush()) {
-            LibDivideS64 magic = LibDivideS64.mallocStack(stack);
+            LibDivideS64 magic = LibDivideS64.malloc(stack);
             libdivide_s64_gen(denom, magic);
             for (long n : numers64) {
                 sum += libdivide_s64_do(n, magic);
@@ -161,7 +161,7 @@ public class LibDivideTest {
     public long s64_2_branchfree() {
         long sum = 0;
         try (MemoryStack stack = stackPush()) {
-            LibDivideS64BranchFree magic = LibDivideS64BranchFree.mallocStack(stack);
+            LibDivideS64BranchFree magic = LibDivideS64BranchFree.malloc(stack);
             libdivide_s64_branchfree_gen(denom, magic);
             for (long n : numers64) {
                 sum += libdivide_s64_branchfree_do(n, magic);
@@ -183,7 +183,7 @@ public class LibDivideTest {
     public long u64_1_do() {
         long sum = 0;
         try (MemoryStack stack = stackPush()) {
-            LibDivideU64 magic = LibDivideU64.mallocStack(stack);
+            LibDivideU64 magic = LibDivideU64.malloc(stack);
             libdivide_u64_gen(denom, magic);
             for (long n : numers64) {
                 sum += libdivide_u64_do(n, magic);
@@ -196,7 +196,7 @@ public class LibDivideTest {
     public long u64_2_branchfree() {
         long sum = 0;
         try (MemoryStack stack = stackPush()) {
-            LibDivideU64BranchFree magic = LibDivideU64BranchFree.mallocStack(stack);
+            LibDivideU64BranchFree magic = LibDivideU64BranchFree.malloc(stack);
             libdivide_u64_branchfree_gen(denom, magic);
             for (long n : numers64) {
                 sum += libdivide_u64_branchfree_do(n, magic);

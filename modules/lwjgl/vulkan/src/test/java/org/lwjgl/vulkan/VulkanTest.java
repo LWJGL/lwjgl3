@@ -8,7 +8,6 @@ import org.lwjgl.system.*;
 import org.testng.annotations.*;
 
 import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.vulkan.VkAccelerationStructureInstanceKHR.*;
 import static org.testng.Assert.*;
 
 @Test
@@ -16,10 +15,10 @@ public class VulkanTest {
 
     public void testParse() {
         try (MemoryStack stack = stackPush()) {
-            VkAccelerationStructureInstanceKHR struct = callocStack(stack);
+            VkAccelerationStructureInstanceKHR struct = VkAccelerationStructureInstanceKHR.calloc(stack);
 
             // first bitfield
-            assertEquals(nbitfield0(struct.address()), 0);
+            assertEquals(VkAccelerationStructureInstanceKHR.nbitfield0(struct.address()), 0);
 
             assertEquals(struct.instanceCustomIndex(), 0);
             assertEquals(struct.mask(), 0);
@@ -33,7 +32,7 @@ public class VulkanTest {
             assertEquals(struct.mask(), 0xFF);
 
             // second bitfield
-            assertEquals(nbitfield1(struct.address()), 0);
+            assertEquals(VkAccelerationStructureInstanceKHR.nbitfield1(struct.address()), 0);
 
             assertEquals(struct.instanceShaderBindingTableRecordOffset(), 0);
             assertEquals(struct.flags(), 0);

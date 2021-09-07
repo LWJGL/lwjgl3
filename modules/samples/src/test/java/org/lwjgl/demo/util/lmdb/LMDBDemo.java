@@ -58,11 +58,11 @@ public final class LMDBDemo {
 
     private static void put(long env, int dbi, int key, String value) {
         transaction(env, (stack, txn) -> {
-            MDBVal kv = MDBVal.callocStack(stack)
+            MDBVal kv = MDBVal.calloc(stack)
                 .mv_data(stack.malloc(4).putInt(0, key));
 
             // value is encoded to the MDBVal struct
-            MDBVal dv = MDBVal.callocStack(stack)
+            MDBVal dv = MDBVal.calloc(stack)
                 .mv_data(stack.UTF8(value, false));
 
             // the encoded text is copied to the database
@@ -74,11 +74,11 @@ public final class LMDBDemo {
 
     private static void putZeroCopy(long env, int dbi, int key, String value) {
         transaction(env, (stack, txn) -> {
-            MDBVal kv = MDBVal.callocStack(stack)
+            MDBVal kv = MDBVal.calloc(stack)
                 .mv_data(stack.malloc(4).putInt(0, key));
 
             // request enough bytes for the UTF8 encoded value
-            MDBVal dv = MDBVal.callocStack(stack)
+            MDBVal dv = MDBVal.calloc(stack)
                 .mv_size(memLengthUTF8(value, false));
 
             // no copy, LMDB updates dv.mv_data with a pointer to the database
@@ -92,10 +92,10 @@ public final class LMDBDemo {
 
     private static String get(long env, int dbi, int key) {
         return transaction(env, (stack, txn) -> {
-            MDBVal kv = MDBVal.callocStack(stack)
+            MDBVal kv = MDBVal.calloc(stack)
                 .mv_data(stack.malloc(4).putInt(0, key));
 
-            MDBVal dv = MDBVal.callocStack(stack);
+            MDBVal dv = MDBVal.calloc(stack);
 
             E(mdb_get(txn, dbi, kv, dv));
             return memUTF8(Objects.requireNonNull(dv.mv_data()));

@@ -184,7 +184,7 @@ internal fun CXCursor.parseEnum(context: ExtractionContext, name: String, typede
         val constantName = enumConstantDecl.spelling
 
         val doc = stackPush().use { stack ->
-            clang_Cursor_getParsedComment(enumConstantDecl, CXComment.mallocStack(stack)).parse()
+            clang_Cursor_getParsedComment(enumConstantDecl, CXComment.malloc(stack)).parse()
         }
 
         val size = constants.size
@@ -214,7 +214,7 @@ internal fun CXCursor.parseEnum(context: ExtractionContext, name: String, typede
     }.use { clang_visitChildren(this, it, NULL) }
 
     stackPush().use { stack ->
-        val doc = clang_Cursor_getParsedComment(this, CXComment.mallocStack(stack))
+        val doc = clang_Cursor_getParsedComment(this, CXComment.malloc(stack))
             .parse()
 
         return Enum(name, typedef, doc, constants)
@@ -241,13 +241,13 @@ internal class Struct(
 
 internal fun CXCursor.parseStruct(context: ExtractionContext, name: String, typedef: Boolean, handles: ArrayList<String>) =
     stackPush().use { frame  ->
-        val structType = clang_getCursorType(this, CXType.mallocStack(frame))
+        val structType = clang_getCursorType(this, CXType.malloc(frame))
         parseStructMembers(context, structType, name, handles, t).let { members ->
             if (members.isEmpty()) {
                 null
             } else {
                 stackPush().use { stack ->
-                    val doc = clang_Cursor_getParsedComment(this, CXComment.mallocStack(stack))
+                    val doc = clang_Cursor_getParsedComment(this, CXComment.malloc(stack))
                         .parse()
                         .doc
                         .formatDocumentation("${t}documentation = ", "$t$t", "\n$t$t")
@@ -273,9 +273,9 @@ private fun CXCursor.parseStructMembers(
         } else {
             stackPush().push().use { stack ->
                 val name = fieldDecl.spelling
-                val doc = clang_Cursor_getParsedComment(fieldDecl, CXComment.mallocStack(stack)).parse()
+                val doc = clang_Cursor_getParsedComment(fieldDecl, CXComment.malloc(stack)).parse()
 
-                val type = clang_getCursorType(fieldDecl, CXType.mallocStack(stack))
+                val type = clang_getCursorType(fieldDecl, CXType.malloc(stack))
                 when (type.kind()) {
                     CXType_Elaborated    -> members.add(structMember(
                         if (fieldDecl.hasChild { c ->
@@ -292,7 +292,7 @@ private fun CXCursor.parseStructMembers(
                         }, name, doc, indent
                     ))
                     CXType_Record        -> {
-                        val (recordType, recordName) = clang_getCursorType(fieldDecl, CXType.mallocStack(stack))
+                        val (recordType, recordName) = clang_getCursorType(fieldDecl, CXType.malloc(stack))
                             .spelling
                             .split(' ')
 
@@ -315,7 +315,7 @@ private fun CXCursor.parseStructMembers(
                             handles.add(
                                 parseSimpleType(
                                     fieldDecl.spelling,
-                                    clang_getCursorType(fieldDecl, CXType.mallocStack(stack)).spelling,
+                                    clang_getCursorType(fieldDecl, CXType.malloc(stack)).spelling,
                                     "handle"
                                 )
                             )
@@ -333,15 +333,15 @@ private fun CXCursor.parseStructMembers(
                             ) {
                                 "${members.removeAt(members.lastIndex)}.p"
                             } else {
-                                val pointee = clang_getPointeeType(type, CXType.mallocStack(stack))
+                                val pointee = clang_getPointeeType(type, CXType.malloc(stack))
                                 if (pointee.kind() == CXType_FunctionProto) {
                                     fieldDecl.anonymousFunctionProto(
                                         stack, pointee, indent, context.header.module, name,
                                         "Instances of this interface may be set to the {@code $name} field of the ##${if (structName.isNotEmpty()) structName else "FIXME"} struct."
                                     )
-                                } else if (clang_equalTypes(structType, clang_getCanonicalType(pointee, CXType.mallocStack(stack)))) {
+                                } else if (clang_equalTypes(structType, clang_getCanonicalType(pointee, CXType.malloc(stack)))) {
                                     // recursive struct definition
-                                    "${if (clang_getCursorKind(clang_getTypeDeclaration(structType, CXCursor.mallocStack(stack))) == CXCursor_UnionDecl)
+                                    "${if (clang_getCursorKind(clang_getTypeDeclaration(structType, CXCursor.malloc(stack))) == CXCursor_UnionDecl)
                                         "union" else "struct"}(Module.${context.header.module}, \"$structName\").p"
                                 } else {
                                     type.lwjgl
@@ -352,7 +352,7 @@ private fun CXCursor.parseStructMembers(
                     CXType_ConstantArray -> {
                         members.add(
                             structMember(
-                                clang_getElementType(type, CXType.mallocStack(stack)).lwjgl.arrayDimension(clang_getArraySize(type)),
+                                clang_getElementType(type, CXType.malloc(stack)).lwjgl.arrayDimension(clang_getArraySize(type)),
                                 name,
                                 doc,
                                 indent
@@ -416,18 +416,18 @@ private fun CXCursor.anonymousFunctionProto(
     val args = ArrayList<CXCursor>(clang_getNumArgTypes(proto))
     CXCursorVisitor.create { cursor, _, _ ->
         if (clang_getCursorKind(cursor) == CXCursor_ParmDecl) {
-            val cp = CXCursor.mallocStack(stack)
+            val cp = CXCursor.malloc(stack)
             memCopy(cursor, cp)
             args.add(cp)
         }
         CXChildVisit_Continue
     }.use { clang_visitChildren(this, it, NULL) }
 
-    val doc = clang_Cursor_getParsedComment(this, CXComment.mallocStack(stack)).parse()
+    val doc = clang_Cursor_getParsedComment(this, CXComment.malloc(stack)).parse()
     val docIndent = "$indent$t$t"
 
     return """Module.$module.callback {
-$indent    ${clang_getResultType(proto, CXType.mallocStack(stack)).lwjgl}(
+$indent    ${clang_getResultType(proto, CXType.malloc(stack)).lwjgl}(
 $indent        /*FIXME:*/"$name",
 $indent        ${doc.format(docIndent)}${getFunctionArguments(module, proto, name, doc, docIndent, args)}${doc.formatReturnDoc()}
 $indent    ) {
@@ -440,17 +440,17 @@ internal fun CXCursor.parseCallback(header: Header, type: CXType, name: String):
     val args = ArrayList<CXCursor>(clang_getNumArgTypes(type))
     CXCursorVisitor.create { cursor, _, _ ->
         if (clang_getCursorKind(cursor) == CXCursor_ParmDecl) {
-            val cp = CXCursor.mallocStack(stack)
+            val cp = CXCursor.malloc(stack)
             memCopy(cursor, cp)
             args.add(cp)
         }
         CXChildVisit_Continue
     }.use { clang_visitChildren(this, it, NULL) }
 
-    val doc = clang_Cursor_getParsedComment(this, CXComment.mallocStack(stack)).parse()
+    val doc = clang_Cursor_getParsedComment(this, CXComment.malloc(stack)).parse()
 
     """val $name = Module.${header.module}.callback {
-    ${clang_getResultType(type, CXType.mallocStack(stack)).lwjgl}(
+    ${clang_getResultType(type, CXType.malloc(stack)).lwjgl}(
         "$name",
         ${doc.format("$t$t")}${getFunctionArguments(header.module, type, name, doc, "$t$t", args)},
 
@@ -468,20 +468,20 @@ internal fun CXCursor.parseFunction(header: Header): String = stackPush().use { 
     } else {
         nativeName
     }
-    val type = clang_getCursorType(this, CXType.mallocStack(stack))
+    val type = clang_getCursorType(this, CXType.malloc(stack))
     val args = ArrayList<CXCursor>()
     CXCursorVisitor.create { cursor, _, _ ->
         if (clang_getCursorKind(cursor) == CXCursor_ParmDecl) {
-            val cp = CXCursor.mallocStack(stack)
+            val cp = CXCursor.malloc(stack)
             memCopy(cursor, cp)
             args.add(cp)
         }
         CXChildVisit_Continue
     }.use { clang_visitChildren(this, it, NULL) }
 
-    val doc = clang_Cursor_getParsedComment(this, CXComment.mallocStack(stack)).parse()
+    val doc = clang_Cursor_getParsedComment(this, CXComment.malloc(stack)).parse()
 
-    """    ${clang_getResultType(type, CXType.mallocStack(stack)).lwjgl}(
+    """    ${clang_getResultType(type, CXType.malloc(stack)).lwjgl}(
         "$name",
         ${doc.format("$t$t")}${getFunctionArguments(header.module, type, name, doc, "$t$t", args)}${doc.formatReturnDoc()}${
     if (header.prefixMethod.isNotEmpty() && nativeName == name) ",\n\n$t${t}noPrefix = true" else ""}
@@ -500,7 +500,7 @@ private fun getFunctionArguments(
 else
     args.indices.joinToString(",\n$indent", prefix = ",\n\n$indent") { i ->
         stackPush().use { frame ->
-            val argType = clang_getArgType(functionType, i, CXType.mallocStack(frame))
+            val argType = clang_getArgType(functionType, i, CXType.malloc(frame))
             val argSpelling = args[i].spelling
             val argName = argSpelling.let {
                 if (it.isNotEmpty()) "\"$it\"" else "/*FIXME:*/\"\""
@@ -525,7 +525,7 @@ else
                     "Check(${clang_getArraySize(argType)})..${argType.lwjgl}"
                 }
                 CXType_Pointer       -> {
-                    val pointee = clang_getPointeeType(argType, CXType.mallocStack(frame))
+                    val pointee = clang_getPointeeType(argType, CXType.malloc(frame))
                     if (pointee.kind() == CXType_FunctionProto) {
                         args[i].anonymousFunctionProto(
                             frame, pointee, indent, module, functionName,
@@ -560,7 +560,7 @@ internal fun CXCursor.parseMacro(
     stackPush().use { stack ->
         val tokens = stack.mallocPointer(1).let { pp ->
             val numTokens = stack.mallocInt(1)
-            clang_tokenize(context.tu, clang_getCursorExtent(this, CXSourceRange.mallocStack(stack)), pp, numTokens)
+            clang_tokenize(context.tu, clang_getCursorExtent(this, CXSourceRange.malloc(stack)), pp, numTokens)
             CXToken.create(pp[0], numTokens[0])
         }
 
@@ -642,7 +642,7 @@ private val CXType.lwjgl: String
                 .replace("unsigned ", "unsigned_")
                 .replace("signed ", "")
                 .replace("long ", "long_")
-            CXType_Pointer         -> "${clang_getPointeeType(this, CXType.mallocStack(stack)).lwjgl}.p"
+            CXType_Pointer         -> "${clang_getPointeeType(this, CXType.malloc(stack)).lwjgl}.p"
             //CXType_BlockPointer ->
             CXType_Record          -> {
                 this.spelling.let {
@@ -659,14 +659,14 @@ private val CXType.lwjgl: String
             //CXType_FunctionNoProto ->
             //CXType_FunctionProto ->
             // TODO: curand.h - typedef unsigned int curandDirectionVectors32_t[32];
-            CXType_ConstantArray   -> clang_getElementType(this, CXType.mallocStack(stack)).lwjgl.arrayDimension(clang_getArraySize(this))
+            CXType_ConstantArray   -> clang_getElementType(this, CXType.malloc(stack)).lwjgl.arrayDimension(clang_getArraySize(this))
             //CXType_Vector ->
-            CXType_IncompleteArray -> "${clang_getElementType(this, CXType.mallocStack(stack)).lwjgl}.p"
+            CXType_IncompleteArray -> "${clang_getElementType(this, CXType.malloc(stack)).lwjgl}.p"
             //CXType_VariableArray ->
             //CXType_DependentSizedArray ->
             //CXType_MemberPointer ->
             CXType_Elaborated      -> {
-                clang_Type_getNamedType(this, CXType.mallocStack(stack)).lwjgl
+                clang_Type_getNamedType(this, CXType.malloc(stack)).lwjgl
             }
             else                   -> {
                 println(this.spelling)

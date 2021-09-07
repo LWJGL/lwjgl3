@@ -67,7 +67,7 @@ private fun CXComment.parseChildren(doc: Documentation, builder: StringBuilder, 
     for (i in 0 until clang_Comment_getNumChildren(this)) {
         stackPush().use { frame ->
             context.pushFirst(i)
-            clang_Comment_getChild(this, i, CXComment.mallocStack(frame)).parse(doc, builder, context)
+            clang_Comment_getChild(this, i, CXComment.malloc(frame)).parse(doc, builder, context)
             context.popFirst()
         }
     }
@@ -239,7 +239,7 @@ private fun CXComment.parse(doc: Documentation, builder: StringBuilder, context:
                                 val saBuilder = StringBuilder()
                                 doc.see.add(saBuilder)
                                 context.pushFirst(i)
-                                clang_Comment_getChild(this, i, CXComment.mallocStack(frame)).parse(doc, saBuilder, context)
+                                clang_Comment_getChild(this, i, CXComment.malloc(frame)).parse(doc, saBuilder, context)
                                 context.popFirst()
                             }
                         }

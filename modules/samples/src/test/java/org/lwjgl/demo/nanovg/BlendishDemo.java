@@ -241,9 +241,9 @@ class OUIState {
                         // called for every frame that the button is pressed.
                         // get the delta between the click point and the current
                         // mouse position
-                        UIVec2 pos = uiGetCursorStartDelta(UIVec2.mallocStack(stack));
+                        UIVec2 pos = uiGetCursorStartDelta(UIVec2.malloc(stack));
                         // get the items layouted rectangle
-                        UIRect rc = uiGetRect(item, UIRect.mallocStack(stack));
+                        UIRect rc = uiGetRect(item, UIRect.malloc(stack));
                         // calculate our new offset and clamp
                         float value = sliderstart + (pos.x() / (float)rc.w());
                         // assign the new value
@@ -316,7 +316,7 @@ class OUIState {
             switch (event) {
                 case UI_SCROLL:
                     try (MemoryStack stack = stackPush()) {
-                        UIVec2 pos = uiGetScroll(UIVec2.mallocStack(stack));
+                        UIVec2 pos = uiGetScroll(UIVec2.malloc(stack));
                         System.out.printf("scroll! %d %d\n", pos.x(), pos.y());
                     }
                     break;
@@ -383,7 +383,7 @@ class OUIState {
         /*nvgBeginPath(vg);
         nvgRect(vg,rect.x()+0.5f,rect.y()+0.5f,rect.w()-1,rect.h()-1);
         try (MemoryStack stack = stackPush()) {
-            nvgStrokeColor(vg, nvgRGBf(1, 0, 0, NVGColor.mallocStack(stack)));
+            nvgStrokeColor(vg, nvgRGBf(1, 0, 0, NVGColor.malloc(stack)));
         }
         nvgStrokeWidth(vg,1);
         nvgStroke(vg);*/
@@ -439,7 +439,7 @@ class OUIState {
         UIData head = UIData.createSafe(uiGetHandle(item));
 
         try (MemoryStack stack = stackPush()) {
-            UIRect rect = uiGetRect(item, UIRect.mallocStack(stack));
+            UIRect rect = uiGetRect(item, UIRect.malloc(stack));
             if (uiGetState(item) == UI_FROZEN) {
                 nvgGlobalAlpha(vg, BND_DISABLED_ALPHA);
             }
@@ -514,7 +514,7 @@ class OUIState {
                             nvgSave(vg);
 
                             NVGColor ci = data.color();
-                            NVGColor co = NVGColor.mallocStack(stack);
+                            NVGColor co = NVGColor.malloc(stack);
                             nvgStrokeColor(vg, nvgRGBAf(ci.r(), ci.g(), ci.b(), 0.9f, co));
                             if (state != BND_DEFAULT) {
                                 nvgFillColor(vg, nvgRGBAf(ci.r(), ci.g(), ci.b(), 0.5f, co));
@@ -745,7 +745,7 @@ class OUIState {
         int s = 70;
 
         try (MemoryStack stack = stackPush()) {
-            NVGColor c = nvgRGBf(0.392f, 0.392f, 0.392f, NVGColor.mallocStack(stack));
+            NVGColor c = nvgRGBf(0.392f, 0.392f, 0.392f, NVGColor.malloc(stack));
 
             bndNodeBackground(vg, x + w, y - 50, 100, 200, BND_DEFAULT, BND_ICONID(0, 25), "Default", c);
             bndNodeBackground(vg, x + w + 120, y - 50, 100, 200, BND_HOVER, BND_ICONID(1, 25), "Hover", c);
@@ -759,7 +759,7 @@ class OUIState {
         }
 
         try (MemoryStack stack = stackPush()) {
-            NVGColor c = nvgRGBf(0.5f, 0.5f, 0.5f, NVGColor.mallocStack(stack));
+            NVGColor c = nvgRGBf(0.5f, 0.5f, 0.5f, NVGColor.malloc(stack));
 
             bndNodePort(vg, x, y, BND_DEFAULT, c);
             bndNodePort(vg, x + w, y, BND_DEFAULT, c);
@@ -978,7 +978,7 @@ class OUIState {
 
     private static int demorect(int parent, ByteBuffer label, float hue, int box, int layout, int w, int h, int m1, int m2, int m3, int m4) {
         try (MemoryStack stack = stackPush()) {
-            int item = colorrect(label, nvgHSL(hue, 1.0f, 0.8f, NVGColor.mallocStack(stack)));
+            int item = colorrect(label, nvgHSL(hue, 1.0f, 0.8f, NVGColor.malloc(stack)));
             uiSetLayout(item, layout);
             uiSetBox(item, box);
             uiSetMargins(item, m1, m2, m3, m4);
@@ -1255,7 +1255,7 @@ class OUIState {
 
         if (choice.get(0) == opt_blendish_demo) {
             try (MemoryStack stack = stackPush()) {
-                UIVec2 cursor = uiGetCursor(UIVec2.mallocStack(stack));
+                UIVec2 cursor = uiGetCursor(UIVec2.malloc(stack));
                 cursor.x(cursor.x() - round(w / 2));
                 cursor.y(cursor.y() - round(h / 2));
                 if (abs(cursor.x()) > (w / 3)) {

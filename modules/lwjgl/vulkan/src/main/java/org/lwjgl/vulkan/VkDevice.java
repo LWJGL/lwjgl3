@@ -57,7 +57,7 @@ public class VkDevice extends DispatchableHandleDevice {
         long GetDeviceProcAddr;
         try (MemoryStack stack = stackPush()) {
             if (apiVersion == 0) {
-                VkPhysicalDeviceProperties props = VkPhysicalDeviceProperties.callocStack(stack);
+                VkPhysicalDeviceProperties props = VkPhysicalDeviceProperties.calloc(stack);
                 vkGetPhysicalDeviceProperties(physicalDevice, props);
                 apiVersion = min(
                     props.apiVersion(),

@@ -20,7 +20,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.vulkan.EXTDebugReport.*;
 import static org.lwjgl.vulkan.KHRSurface.*;
 import static org.lwjgl.vulkan.KHRSwapchain.*;
-import static org.lwjgl.vulkan.NVRayTracing.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /*
@@ -363,7 +362,7 @@ public final class HelloVulkan {
                 check(vkEnumerateInstanceLayerProperties(ip, null));
 
                 if (ip.get(0) > 0) {
-                    VkLayerProperties.Buffer availableLayers = VkLayerProperties.mallocStack(ip.get(0), stack);
+                    VkLayerProperties.Buffer availableLayers = VkLayerProperties.malloc(ip.get(0), stack);
                     check(vkEnumerateInstanceLayerProperties(ip, availableLayers));
 
                     // VulkanSDK 1.1.106+
@@ -409,7 +408,7 @@ public final class HelloVulkan {
             check(vkEnumerateInstanceExtensionProperties((String)null, ip, null));
 
             if (ip.get(0) != 0) {
-                VkExtensionProperties.Buffer instance_extensions = VkExtensionProperties.mallocStack(ip.get(0), stack);
+                VkExtensionProperties.Buffer instance_extensions = VkExtensionProperties.malloc(ip.get(0), stack);
                 check(vkEnumerateInstanceExtensionProperties((String)null, ip, instance_extensions));
 
                 for (int i = 0; i < ip.get(0); i++) {
@@ -424,7 +423,7 @@ public final class HelloVulkan {
 
             ByteBuffer APP_SHORT_NAME = stack.UTF8("tri");
 
-            VkApplicationInfo app = VkApplicationInfo.mallocStack(stack)
+            VkApplicationInfo app = VkApplicationInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_APPLICATION_INFO)
                 .pNext(NULL)
                 .pApplicationName(APP_SHORT_NAME)
@@ -434,7 +433,7 @@ public final class HelloVulkan {
                 .apiVersion(VK.getInstanceVersionSupported());
 
             extension_names.flip();
-            VkInstanceCreateInfo inst_info = VkInstanceCreateInfo.mallocStack(stack)
+            VkInstanceCreateInfo inst_info = VkInstanceCreateInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO)
                 .pNext(NULL)
                 .flags(0)
@@ -445,7 +444,7 @@ public final class HelloVulkan {
 
             VkDebugReportCallbackCreateInfoEXT dbgCreateInfo;
             if (VALIDATE) {
-                dbgCreateInfo = VkDebugReportCallbackCreateInfoEXT.mallocStack(stack)
+                dbgCreateInfo = VkDebugReportCallbackCreateInfoEXT.malloc(stack)
                     .sType(VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT)
                     .pNext(NULL)
                     .flags(VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT)
@@ -484,7 +483,7 @@ public final class HelloVulkan {
             check(vkEnumerateDeviceExtensionProperties(gpu, (String)null, ip, null));
 
             if (ip.get(0) > 0) {
-                VkExtensionProperties.Buffer device_extensions = VkExtensionProperties.mallocStack(ip.get(0), stack);
+                VkExtensionProperties.Buffer device_extensions = VkExtensionProperties.malloc(ip.get(0), stack);
                 check(vkEnumerateDeviceExtensionProperties(gpu, (String)null, ip, device_extensions));
 
                 for (int i = 0; i < ip.get(0); i++) {
@@ -565,20 +564,20 @@ public final class HelloVulkan {
 
     private void demo_init_device() {
         try (MemoryStack stack = stackPush()) {
-            VkDeviceQueueCreateInfo.Buffer queue = VkDeviceQueueCreateInfo.mallocStack(1, stack)
+            VkDeviceQueueCreateInfo.Buffer queue = VkDeviceQueueCreateInfo.malloc(1, stack)
                 .sType(VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO)
                 .pNext(NULL)
                 .flags(0)
                 .queueFamilyIndex(graphics_queue_node_index)
                 .pQueuePriorities(stack.floats(0.0f));
 
-            VkPhysicalDeviceFeatures features = VkPhysicalDeviceFeatures.callocStack(stack);
+            VkPhysicalDeviceFeatures features = VkPhysicalDeviceFeatures.calloc(stack);
             if (gpu_features.shaderClipDistance()) {
                 features.shaderClipDistance(true);
             }
 
             extension_names.flip();
-            VkDeviceCreateInfo device = VkDeviceCreateInfo.mallocStack(stack)
+            VkDeviceCreateInfo device = VkDeviceCreateInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO)
                 .pNext(NULL)
                 .flags(0)
@@ -660,7 +659,7 @@ public final class HelloVulkan {
             // Get the list of VkFormat's that are supported:
             check(vkGetPhysicalDeviceSurfaceFormatsKHR(gpu, surface, ip, null));
 
-            VkSurfaceFormatKHR.Buffer surfFormats = VkSurfaceFormatKHR.mallocStack(ip.get(0), stack);
+            VkSurfaceFormatKHR.Buffer surfFormats = VkSurfaceFormatKHR.malloc(ip.get(0), stack);
             check(vkGetPhysicalDeviceSurfaceFormatsKHR(gpu, surface, ip, surfFormats));
 
             // If the format list includes just one entry of VK_FORMAT_UNDEFINED,
@@ -688,7 +687,7 @@ public final class HelloVulkan {
     private void demo_set_image_layout(long image, int aspectMask, int old_image_layout, int new_image_layout, int srcAccessMask) {
         try (MemoryStack stack = stackPush()) {
             if (setup_cmd == null) {
-                VkCommandBufferAllocateInfo cmd = VkCommandBufferAllocateInfo.mallocStack(stack)
+                VkCommandBufferAllocateInfo cmd = VkCommandBufferAllocateInfo.malloc(stack)
                     .sType(VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO)
                     .pNext(NULL)
                     .commandPool(cmd_pool)
@@ -698,7 +697,7 @@ public final class HelloVulkan {
                 check(vkAllocateCommandBuffers(device, cmd, pp));
                 setup_cmd = new VkCommandBuffer(pp.get(0), device);
 
-                VkCommandBufferBeginInfo cmd_buf_info = VkCommandBufferBeginInfo.mallocStack(stack)
+                VkCommandBufferBeginInfo cmd_buf_info = VkCommandBufferBeginInfo.malloc(stack)
                     .sType(VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO)
                     .pNext(NULL)
                     .flags(0)
@@ -706,7 +705,7 @@ public final class HelloVulkan {
                 check(vkBeginCommandBuffer(setup_cmd, cmd_buf_info));
             }
 
-            VkImageMemoryBarrier.Buffer image_memory_barrier = VkImageMemoryBarrier.mallocStack(1, stack)
+            VkImageMemoryBarrier.Buffer image_memory_barrier = VkImageMemoryBarrier.malloc(1, stack)
                 .sType(VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER)
                 .pNext(NULL)
                 .srcAccessMask(srcAccessMask)
@@ -756,7 +755,7 @@ public final class HelloVulkan {
 
         try (MemoryStack stack = stackPush()) {
             // Check the surface capabilities and formats
-            VkSurfaceCapabilitiesKHR surfCapabilities = VkSurfaceCapabilitiesKHR.mallocStack(stack);
+            VkSurfaceCapabilitiesKHR surfCapabilities = VkSurfaceCapabilitiesKHR.malloc(stack);
             check(vkGetPhysicalDeviceSurfaceCapabilitiesKHR(gpu, surface, surfCapabilities));
 
             check(vkGetPhysicalDeviceSurfacePresentModesKHR(gpu, surface, ip, null));
@@ -764,7 +763,7 @@ public final class HelloVulkan {
             IntBuffer presentModes = stack.mallocInt(ip.get(0));
             check(vkGetPhysicalDeviceSurfacePresentModesKHR(gpu, surface, ip, presentModes));
 
-            VkExtent2D swapchainExtent = VkExtent2D.mallocStack(stack);
+            VkExtent2D swapchainExtent = VkExtent2D.malloc(stack);
             // width and height are either both 0xFFFFFFFF, or both not 0xFFFFFFFF.
             if (surfCapabilities.currentExtent().width() == 0xFFFFFFFF) {
                 // If the surface size is undefined, the size is set to the size
@@ -812,7 +811,7 @@ public final class HelloVulkan {
                 preTransform = surfCapabilities.currentTransform();
             }
 
-            VkSwapchainCreateInfoKHR swapchain = VkSwapchainCreateInfoKHR.callocStack(stack)
+            VkSwapchainCreateInfoKHR swapchain = VkSwapchainCreateInfoKHR.calloc(stack)
                 .sType(VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR)
                 .surface(surface)
                 .minImageCount(desiredNumOfSwapchainImages)
@@ -851,7 +850,7 @@ public final class HelloVulkan {
                 buffers[i] = new SwapchainBuffers();
                 buffers[i].image = swapchainImages.get(i);
 
-                VkImageViewCreateInfo color_attachment_view = VkImageViewCreateInfo.mallocStack(stack)
+                VkImageViewCreateInfo color_attachment_view = VkImageViewCreateInfo.malloc(stack)
                     .sType(VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO)
                     .pNext(NULL)
                     .flags(0)
@@ -906,7 +905,7 @@ public final class HelloVulkan {
         depth.format = VK_FORMAT_D16_UNORM;
 
         try (MemoryStack stack = stackPush()) {
-            VkImageCreateInfo image = VkImageCreateInfo.callocStack(stack)
+            VkImageCreateInfo image = VkImageCreateInfo.calloc(stack)
                 .sType(VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO)
                 .pNext(NULL)
                 .imageType(VK_IMAGE_TYPE_2D)
@@ -926,11 +925,11 @@ public final class HelloVulkan {
             depth.image = lp.get(0);
 
             /* get memory requirements for this object */
-            VkMemoryRequirements mem_reqs = VkMemoryRequirements.mallocStack(stack);
+            VkMemoryRequirements mem_reqs = VkMemoryRequirements.malloc(stack);
             vkGetImageMemoryRequirements(device, depth.image, mem_reqs);
 
             /* select memory size and type */
-            VkMemoryAllocateInfo mem_alloc = VkMemoryAllocateInfo.mallocStack(stack)
+            VkMemoryAllocateInfo mem_alloc = VkMemoryAllocateInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO)
                 .pNext(NULL)
                 .allocationSize(mem_reqs.size())
@@ -953,7 +952,7 @@ public final class HelloVulkan {
                 0);
 
             /* create image view */
-            VkImageViewCreateInfo view = VkImageViewCreateInfo.callocStack(stack)
+            VkImageViewCreateInfo view = VkImageViewCreateInfo.calloc(stack)
                 .sType(VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO)
                 .pNext(NULL)
                 .flags(0)
@@ -999,7 +998,7 @@ public final class HelloVulkan {
         tex_obj.tex_height = tex_height;
 
         try (MemoryStack stack = stackPush()) {
-            VkImageCreateInfo image_create_info = VkImageCreateInfo.callocStack(stack)
+            VkImageCreateInfo image_create_info = VkImageCreateInfo.calloc(stack)
                 .sType(VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO)
                 .pNext(NULL)
                 .imageType(VK_IMAGE_TYPE_2D)
@@ -1019,9 +1018,9 @@ public final class HelloVulkan {
             check(vkCreateImage(device, image_create_info, null, lp));
             tex_obj.image = lp.get(0);
 
-            VkMemoryRequirements mem_reqs = VkMemoryRequirements.mallocStack(stack);
+            VkMemoryRequirements mem_reqs = VkMemoryRequirements.malloc(stack);
             vkGetImageMemoryRequirements(device, tex_obj.image, mem_reqs);
-            VkMemoryAllocateInfo mem_alloc = VkMemoryAllocateInfo.mallocStack(stack)
+            VkMemoryAllocateInfo mem_alloc = VkMemoryAllocateInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO)
                 .pNext(NULL)
                 .allocationSize(mem_reqs.size())
@@ -1037,12 +1036,12 @@ public final class HelloVulkan {
             check(vkBindImageMemory(device, tex_obj.image, tex_obj.mem, 0));
 
             if ((required_props & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) != 0) {
-                VkImageSubresource subres = VkImageSubresource.mallocStack(stack)
+                VkImageSubresource subres = VkImageSubresource.malloc(stack)
                     .aspectMask(VK_IMAGE_ASPECT_COLOR_BIT)
                     .mipLevel(0)
                     .arrayLayer(0);
 
-                VkSubresourceLayout layout = VkSubresourceLayout.mallocStack(stack);
+                VkSubresourceLayout layout = VkSubresourceLayout.malloc(stack);
                 vkGetImageSubresourceLayout(device, tex_obj.image, subres, layout);
 
                 check(vkMapMemory(device, tex_obj.mem, 0, mem_alloc.allocationSize(), 0, pp));
@@ -1078,7 +1077,7 @@ public final class HelloVulkan {
         check(vkEndCommandBuffer(setup_cmd));
 
         try (MemoryStack stack = stackPush()) {
-            VkSubmitInfo submit_info = VkSubmitInfo.callocStack(stack)
+            VkSubmitInfo submit_info = VkSubmitInfo.calloc(stack)
                 .sType(VK_STRUCTURE_TYPE_SUBMIT_INFO)
                 .pCommandBuffers(pp.put(0, setup_cmd));
 
@@ -1097,7 +1096,7 @@ public final class HelloVulkan {
         int[][] tex_colors = {{0xffff0000, 0xff00ff00}};
 
         try (MemoryStack stack = stackPush()) {
-            VkFormatProperties props = VkFormatProperties.mallocStack(stack);
+            VkFormatProperties props = VkFormatProperties.malloc(stack);
             vkGetPhysicalDeviceFormatProperties(gpu, tex_format, props);
 
             for (int i = 0; i < DEMO_TEXTURE_COUNT; i++) {
@@ -1134,7 +1133,7 @@ public final class HelloVulkan {
                         VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
                         0);
 
-                    VkImageCopy.Buffer copy_region = VkImageCopy.mallocStack(1, stack)
+                    VkImageCopy.Buffer copy_region = VkImageCopy.malloc(1, stack)
                         .srcSubresource(it -> it
                             .aspectMask(VK_IMAGE_ASPECT_COLOR_BIT)
                             .mipLevel(0)
@@ -1178,7 +1177,7 @@ public final class HelloVulkan {
                     throw new IllegalStateException("No support for B8G8R8A8_UNORM as texture image format");
                 }
 
-                VkSamplerCreateInfo sampler = VkSamplerCreateInfo.callocStack(stack)
+                VkSamplerCreateInfo sampler = VkSamplerCreateInfo.calloc(stack)
                     .sType(VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO)
                     .pNext(NULL)
                     .magFilter(VK_FILTER_NEAREST)
@@ -1200,7 +1199,7 @@ public final class HelloVulkan {
                 check(vkCreateSampler(device, sampler, null, lp));
                 textures[i].sampler = lp.get(0);
 
-                VkImageViewCreateInfo view = VkImageViewCreateInfo.mallocStack(stack)
+                VkImageViewCreateInfo view = VkImageViewCreateInfo.malloc(stack)
                     .sType(VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO)
                     .pNext(NULL)
                     .image(VK_NULL_HANDLE)
@@ -1245,7 +1244,7 @@ public final class HelloVulkan {
         };
 
         try (MemoryStack stack = stackPush()) {
-            VkBufferCreateInfo buf_info = VkBufferCreateInfo.callocStack(stack)
+            VkBufferCreateInfo buf_info = VkBufferCreateInfo.calloc(stack)
                 .sType(VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO)
                 .size(/*sizeof(vb)*/ vb.length * vb[0].length * 4)
                 .usage(VK_BUFFER_USAGE_VERTEX_BUFFER_BIT)
@@ -1254,10 +1253,10 @@ public final class HelloVulkan {
             check(vkCreateBuffer(device, buf_info, null, lp));
             vertices.buf = lp.get(0);
 
-            VkMemoryRequirements mem_reqs = VkMemoryRequirements.mallocStack(stack);
+            VkMemoryRequirements mem_reqs = VkMemoryRequirements.malloc(stack);
             vkGetBufferMemoryRequirements(device, vertices.buf, mem_reqs);
 
-            VkMemoryAllocateInfo mem_alloc = VkMemoryAllocateInfo.callocStack(stack)
+            VkMemoryAllocateInfo mem_alloc = VkMemoryAllocateInfo.calloc(stack)
                 .sType(VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO)
                 .allocationSize(mem_reqs.size());
             boolean pass = memory_type_from_properties(mem_reqs.memoryTypeBits(), VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, mem_alloc);
@@ -1305,12 +1304,12 @@ public final class HelloVulkan {
 
     private void demo_prepare_descriptor_layout() {
         try (MemoryStack stack = stackPush()) {
-            VkDescriptorSetLayoutCreateInfo descriptor_layout = VkDescriptorSetLayoutCreateInfo.mallocStack(stack)
+            VkDescriptorSetLayoutCreateInfo descriptor_layout = VkDescriptorSetLayoutCreateInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO)
                 .pNext(NULL)
                 .flags(0)
                 .pBindings(
-                    VkDescriptorSetLayoutBinding.callocStack(1, stack)
+                    VkDescriptorSetLayoutBinding.calloc(1, stack)
                         .binding(0)
                         .descriptorType(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER)
                         .descriptorCount(DEMO_TEXTURE_COUNT)
@@ -1321,7 +1320,7 @@ public final class HelloVulkan {
             check(vkCreateDescriptorSetLayout(device, descriptor_layout, null, layouts));
             desc_layout = layouts.get(0);
 
-            VkPipelineLayoutCreateInfo pPipelineLayoutCreateInfo = VkPipelineLayoutCreateInfo.callocStack(stack)
+            VkPipelineLayoutCreateInfo pPipelineLayoutCreateInfo = VkPipelineLayoutCreateInfo.calloc(stack)
                 .sType(VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO)
                 .pNext(NULL)
                 .pSetLayouts(layouts);
@@ -1333,7 +1332,7 @@ public final class HelloVulkan {
 
     private void demo_prepare_render_pass() {
         try (MemoryStack stack = stackPush()) {
-            VkAttachmentDescription.Buffer attachments = VkAttachmentDescription.mallocStack(2, stack);
+            VkAttachmentDescription.Buffer attachments = VkAttachmentDescription.malloc(2, stack);
             attachments.get(0)
                 .flags(0)
                 .format(format)
@@ -1355,21 +1354,21 @@ public final class HelloVulkan {
                 .initialLayout(VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL)
                 .finalLayout(VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
 
-            VkSubpassDescription.Buffer subpass = VkSubpassDescription.callocStack(1, stack)
+            VkSubpassDescription.Buffer subpass = VkSubpassDescription.calloc(1, stack)
                 .pipelineBindPoint(VK_PIPELINE_BIND_POINT_GRAPHICS)
                 .colorAttachmentCount(1)
                 .pColorAttachments(
-                    VkAttachmentReference.mallocStack(1, stack)
+                    VkAttachmentReference.malloc(1, stack)
                         .attachment(0)
                         .layout(VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL)
                 )
                 .pDepthStencilAttachment(
-                    VkAttachmentReference.mallocStack(stack)
+                    VkAttachmentReference.malloc(stack)
                         .attachment(1)
                         .layout(VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL)
                 );
 
-            VkRenderPassCreateInfo rp_info = VkRenderPassCreateInfo.callocStack(stack)
+            VkRenderPassCreateInfo rp_info = VkRenderPassCreateInfo.calloc(stack)
                 .sType(VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO)
                 .pAttachments(attachments)
                 .pSubpasses(subpass);
@@ -1384,7 +1383,7 @@ public final class HelloVulkan {
             ByteBuffer pCode = memAlloc(code.length).put(code);
             pCode.flip();
 
-            VkShaderModuleCreateInfo moduleCreateInfo = VkShaderModuleCreateInfo.mallocStack(stack)
+            VkShaderModuleCreateInfo moduleCreateInfo = VkShaderModuleCreateInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO)
                 .pNext(NULL)
                 .flags(0)
@@ -1404,12 +1403,12 @@ public final class HelloVulkan {
         long pipelineCache;
 
         try (MemoryStack stack = stackPush()) {
-            VkGraphicsPipelineCreateInfo.Buffer pipeline = VkGraphicsPipelineCreateInfo.callocStack(1, stack);
+            VkGraphicsPipelineCreateInfo.Buffer pipeline = VkGraphicsPipelineCreateInfo.calloc(1, stack);
 
             // Two stages: vs and fs
             ByteBuffer main = stack.UTF8("main");
 
-            VkPipelineShaderStageCreateInfo.Buffer shaderStages = VkPipelineShaderStageCreateInfo.callocStack(2, stack);
+            VkPipelineShaderStageCreateInfo.Buffer shaderStages = VkPipelineShaderStageCreateInfo.calloc(2, stack);
             shaderStages.get(0)
                 .sType(VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO)
                 .stage(VK_SHADER_STAGE_VERTEX_BIT)
@@ -1421,7 +1420,7 @@ public final class HelloVulkan {
                 .module(frag_shader_module = demo_prepare_shader_module(fragShaderCode))
                 .pName(main);
 
-            VkPipelineDepthStencilStateCreateInfo ds = VkPipelineDepthStencilStateCreateInfo.callocStack(stack)
+            VkPipelineDepthStencilStateCreateInfo ds = VkPipelineDepthStencilStateCreateInfo.calloc(stack)
                 .sType(VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO)
                 .depthTestEnable(true)
                 .depthWriteEnable(true)
@@ -1439,16 +1438,16 @@ public final class HelloVulkan {
                 .pStages(shaderStages)
                 .pVertexInputState(vertices.vi)
                 .pInputAssemblyState(
-                    VkPipelineInputAssemblyStateCreateInfo.callocStack(stack)
+                    VkPipelineInputAssemblyStateCreateInfo.calloc(stack)
                         .sType(VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO)
                         .topology(VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST))
                 .pViewportState(
-                    VkPipelineViewportStateCreateInfo.callocStack(stack)
+                    VkPipelineViewportStateCreateInfo.calloc(stack)
                         .sType(VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO)
                         .viewportCount(1)
                         .scissorCount(1))
                 .pRasterizationState(
-                    VkPipelineRasterizationStateCreateInfo.callocStack(stack)
+                    VkPipelineRasterizationStateCreateInfo.calloc(stack)
                         .sType(VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO)
                         .polygonMode(VK_POLYGON_MODE_FILL)
                         .cullMode(VK_CULL_MODE_BACK_BIT)
@@ -1458,21 +1457,21 @@ public final class HelloVulkan {
                         .depthBiasEnable(false)
                         .lineWidth(1.0f))
                 .pMultisampleState(
-                    VkPipelineMultisampleStateCreateInfo.callocStack(stack)
+                    VkPipelineMultisampleStateCreateInfo.calloc(stack)
                         .sType(VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO)
                         .pSampleMask(null)
                         .rasterizationSamples(VK_SAMPLE_COUNT_1_BIT))
                 .pDepthStencilState(ds)
                 .pColorBlendState(
-                    VkPipelineColorBlendStateCreateInfo.callocStack(stack)
+                    VkPipelineColorBlendStateCreateInfo.calloc(stack)
                         .sType(VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO)
                         .pAttachments(
-                            VkPipelineColorBlendAttachmentState.callocStack(1, stack)
+                            VkPipelineColorBlendAttachmentState.calloc(1, stack)
                                 .colorWriteMask(0xf)
                                 .blendEnable(false)
                         ))
                 .pDynamicState(
-                    VkPipelineDynamicStateCreateInfo.callocStack(stack)
+                    VkPipelineDynamicStateCreateInfo.calloc(stack)
                         .sType(VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO)
                         .pDynamicStates(stack.ints(
                             VK_DYNAMIC_STATE_VIEWPORT,
@@ -1481,7 +1480,7 @@ public final class HelloVulkan {
                 .layout(pipeline_layout)
                 .renderPass(render_pass);
 
-            VkPipelineCacheCreateInfo pipelineCacheCI = VkPipelineCacheCreateInfo.callocStack(stack)
+            VkPipelineCacheCreateInfo pipelineCacheCI = VkPipelineCacheCreateInfo.calloc(stack)
                 .sType(VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO);
 
             check(vkCreatePipelineCache(device, pipelineCacheCI, null, lp));
@@ -1499,12 +1498,12 @@ public final class HelloVulkan {
 
     private void demo_prepare_descriptor_pool() {
         try (MemoryStack stack = stackPush()) {
-            VkDescriptorPoolCreateInfo descriptor_pool = VkDescriptorPoolCreateInfo.callocStack(stack)
+            VkDescriptorPoolCreateInfo descriptor_pool = VkDescriptorPoolCreateInfo.calloc(stack)
                 .sType(VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO)
                 .pNext(NULL)
                 .maxSets(1)
                 .pPoolSizes(
-                    VkDescriptorPoolSize.mallocStack(1, stack)
+                    VkDescriptorPoolSize.malloc(1, stack)
                         .type(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER)
                         .descriptorCount(DEMO_TEXTURE_COUNT)
                 );
@@ -1517,7 +1516,7 @@ public final class HelloVulkan {
     private void demo_prepare_descriptor_set() {
         try (MemoryStack stack = stackPush()) {
             LongBuffer layouts = stack.longs(desc_layout);
-            VkDescriptorSetAllocateInfo alloc_info = VkDescriptorSetAllocateInfo.mallocStack(stack)
+            VkDescriptorSetAllocateInfo alloc_info = VkDescriptorSetAllocateInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO)
                 .pNext(NULL)
                 .descriptorPool(desc_pool)
@@ -1526,7 +1525,7 @@ public final class HelloVulkan {
             check(vkAllocateDescriptorSets(device, alloc_info, lp));
             desc_set = lp.get(0);
 
-            VkDescriptorImageInfo.Buffer tex_descs = VkDescriptorImageInfo.callocStack(DEMO_TEXTURE_COUNT, stack);
+            VkDescriptorImageInfo.Buffer tex_descs = VkDescriptorImageInfo.calloc(DEMO_TEXTURE_COUNT, stack);
             for (int i = 0; i < DEMO_TEXTURE_COUNT; i++) {
                 tex_descs.get(i)
                     .sampler(textures[i].sampler)
@@ -1534,7 +1533,7 @@ public final class HelloVulkan {
                     .imageLayout(VK_IMAGE_LAYOUT_GENERAL);
             }
 
-            VkWriteDescriptorSet.Buffer write = VkWriteDescriptorSet.callocStack(1, stack)
+            VkWriteDescriptorSet.Buffer write = VkWriteDescriptorSet.calloc(1, stack)
                 .sType(VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET)
                 .dstSet(desc_set)
                 .descriptorType(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER)
@@ -1549,7 +1548,7 @@ public final class HelloVulkan {
         try (MemoryStack stack = stackPush()) {
             LongBuffer attachments = stack.longs(0, depth.view);
 
-            VkFramebufferCreateInfo fb_info = VkFramebufferCreateInfo.mallocStack(stack)
+            VkFramebufferCreateInfo fb_info = VkFramebufferCreateInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO)
                 .pNext(NULL)
                 .flags(0)
@@ -1571,7 +1570,7 @@ public final class HelloVulkan {
 
     private void demo_prepare() {
         try (MemoryStack stack = stackPush()) {
-            VkCommandPoolCreateInfo cmd_pool_info = VkCommandPoolCreateInfo.mallocStack(stack)
+            VkCommandPoolCreateInfo cmd_pool_info = VkCommandPoolCreateInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO)
                 .pNext(NULL)
                 .flags(VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT)
@@ -1581,7 +1580,7 @@ public final class HelloVulkan {
 
             cmd_pool = lp.get(0);
 
-            VkCommandBufferAllocateInfo cmd = VkCommandBufferAllocateInfo.mallocStack(stack)
+            VkCommandBufferAllocateInfo cmd = VkCommandBufferAllocateInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO)
                 .pNext(NULL)
                 .commandPool(cmd_pool)
@@ -1609,7 +1608,7 @@ public final class HelloVulkan {
 
     private void demo_draw_build_cmd() {
         try (MemoryStack stack = stackPush()) {
-            VkCommandBufferBeginInfo cmd_buf_info = VkCommandBufferBeginInfo.mallocStack(stack)
+            VkCommandBufferBeginInfo cmd_buf_info = VkCommandBufferBeginInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO)
                 .pNext(NULL)
                 .flags(0)
@@ -1617,7 +1616,7 @@ public final class HelloVulkan {
 
             check(vkBeginCommandBuffer(draw_cmd, cmd_buf_info));
 
-            VkClearValue.Buffer clear_values = VkClearValue.mallocStack(2, stack);
+            VkClearValue.Buffer clear_values = VkClearValue.malloc(2, stack);
             clear_values.get(0).color()
                 .float32(0, 0.2f)
                 .float32(1, 0.2f)
@@ -1627,7 +1626,7 @@ public final class HelloVulkan {
                 .depth(depthStencil)
                 .stencil(0);
 
-            VkRenderPassBeginInfo rp_begin = VkRenderPassBeginInfo.mallocStack(stack)
+            VkRenderPassBeginInfo rp_begin = VkRenderPassBeginInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO)
                 .pNext(NULL)
                 .renderPass(render_pass)
@@ -1643,7 +1642,7 @@ public final class HelloVulkan {
 
             // We can use LAYOUT_UNDEFINED as a wildcard here because we don't care what
             // happens to the previous contents of the image
-            VkImageMemoryBarrier.Buffer image_memory_barrier = VkImageMemoryBarrier.mallocStack(1, stack)
+            VkImageMemoryBarrier.Buffer image_memory_barrier = VkImageMemoryBarrier.malloc(1, stack)
                 .sType(VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER)
                 .pNext(NULL)
                 .srcAccessMask(0)
@@ -1668,14 +1667,14 @@ public final class HelloVulkan {
             lp.put(0, desc_set);
             vkCmdBindDescriptorSets(draw_cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline_layout, 0, lp, null);
 
-            VkViewport.Buffer viewport = VkViewport.callocStack(1, stack)
+            VkViewport.Buffer viewport = VkViewport.calloc(1, stack)
                 .height(height)
                 .width(width)
                 .minDepth(0.0f)
                 .maxDepth(1.0f);
             vkCmdSetViewport(draw_cmd, 0, viewport);
 
-            VkRect2D.Buffer scissor = VkRect2D.callocStack(1, stack)
+            VkRect2D.Buffer scissor = VkRect2D.calloc(1, stack)
                 .extent(it -> it
                     .width(width)
                     .height(height))
@@ -1691,7 +1690,7 @@ public final class HelloVulkan {
             vkCmdDraw(draw_cmd, 3, 1, 0, 0);
             vkCmdEndRenderPass(draw_cmd);
 
-            VkImageMemoryBarrier.Buffer prePresentBarrier = VkImageMemoryBarrier.mallocStack(1, stack)
+            VkImageMemoryBarrier.Buffer prePresentBarrier = VkImageMemoryBarrier.malloc(1, stack)
                 .sType(VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER)
                 .pNext(NULL)
                 .srcAccessMask(VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT)
@@ -1716,7 +1715,7 @@ public final class HelloVulkan {
 
     private void demo_draw() {
         try (MemoryStack stack = stackPush()) {
-            VkSemaphoreCreateInfo semaphoreCreateInfo = VkSemaphoreCreateInfo.mallocStack(stack)
+            VkSemaphoreCreateInfo semaphoreCreateInfo = VkSemaphoreCreateInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO)
                 .pNext(NULL)
                 .flags(0);
@@ -1757,7 +1756,7 @@ public final class HelloVulkan {
 
             demo_draw_build_cmd();
             LongBuffer lp2 = stack.mallocLong(1);
-            VkSubmitInfo submit_info = VkSubmitInfo.mallocStack(stack)
+            VkSubmitInfo submit_info = VkSubmitInfo.malloc(stack)
                 .sType(VK_STRUCTURE_TYPE_SUBMIT_INFO)
                 .pNext(NULL)
                 .waitSemaphoreCount(1)
@@ -1768,7 +1767,7 @@ public final class HelloVulkan {
 
             check(vkQueueSubmit(queue, submit_info, VK_NULL_HANDLE));
 
-            VkPresentInfoKHR present = VkPresentInfoKHR.callocStack(stack)
+            VkPresentInfoKHR present = VkPresentInfoKHR.calloc(stack)
                 .sType(VK_STRUCTURE_TYPE_PRESENT_INFO_KHR)
                 .pNext(NULL)
                 .pWaitSemaphores(lp2)

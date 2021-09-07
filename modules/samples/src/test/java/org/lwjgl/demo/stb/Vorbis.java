@@ -382,7 +382,7 @@ public final class Vorbis implements AutoCloseable {
                     throw new RuntimeException("Failed to open Ogg Vorbis file. Error: " + error.get(0));
                 }
 
-                STBVorbisInfo info = STBVorbisInfo.mallocStack(stack);
+                STBVorbisInfo info = STBVorbisInfo.malloc(stack);
                 print(info);
                 this.channels = info.channels();
                 this.sampleRate = info.sample_rate();

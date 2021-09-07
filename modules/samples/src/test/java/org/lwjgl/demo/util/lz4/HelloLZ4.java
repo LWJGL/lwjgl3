@@ -198,8 +198,8 @@ public class HelloLZ4 {
 
             cctx = pp.get(0);
             for (int i = 0; i < iterations; i++) {
-                size = (int)checkLZ4F(LZ4F_compressBegin(cctx, compressed, LZ4FPreferences.callocStack(stack)
-                    .frameInfo(LZ4FFrameInfo.callocStack(stack)
+                size = (int)checkLZ4F(LZ4F_compressBegin(cctx, compressed, LZ4FPreferences.calloc(stack)
+                    .frameInfo(LZ4FFrameInfo.calloc(stack)
                         .blockChecksumFlag(LZ4F_blockChecksumEnabled)
                         .contentChecksumFlag(LZ4F_contentChecksumEnabled)
                         .contentSize(uncompressed.remaining())

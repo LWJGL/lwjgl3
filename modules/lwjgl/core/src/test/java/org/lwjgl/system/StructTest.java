@@ -167,8 +167,8 @@ public class StructTest {
         JNINativeMethod.calloc().free();
 
         try (MemoryStack stack = stackPush()) {
-            JNINativeMethod.mallocStack(stack);
-            JNINativeMethod.callocStack(stack);
+            JNINativeMethod.malloc(stack);
+            JNINativeMethod.calloc(stack);
         }
 
         expectThrows(IllegalArgumentException.class, () -> new JNINativeMethod(BufferUtils.createByteBuffer(4)));
@@ -180,8 +180,8 @@ public class StructTest {
         JNINativeMethod.calloc(10).free();
 
         try (MemoryStack stack = stackPush()) {
-            JNINativeMethod.mallocStack(10, stack);
-            JNINativeMethod.callocStack(10, stack);
+            JNINativeMethod.malloc(10, stack);
+            JNINativeMethod.calloc(10, stack);
         }
 
         assertEquals(new JNINativeMethod.Buffer(BufferUtils.createByteBuffer(4)).capacity(), 0);
@@ -189,7 +189,7 @@ public class StructTest {
 
     public void testBufferApply() {
         try (MemoryStack stack = stackPush()) {
-            JNINativeMethod.Buffer buffer = JNINativeMethod.callocStack(7, stack);
+            JNINativeMethod.Buffer buffer = JNINativeMethod.calloc(7, stack);
 
             for (int i = 0; i < buffer.limit(); i++) {
                 int index = i;
@@ -227,7 +227,7 @@ public class StructTest {
 
     public void testValidation() {
         try (MemoryStack stack = stackPush()) {
-            JNINativeMethod s = JNINativeMethod.callocStack(stack);
+            JNINativeMethod s = JNINativeMethod.calloc(stack);
 
             assertTrue(s.isNull(JNINativeMethod.NAME));
             expectThrows(NullPointerException.class, s::name);

@@ -68,7 +68,7 @@ public class RPMallocTest {
             rpmalloc_initialize();
 
             // get default configuration
-            RPMallocConfig config = RPMallocConfig.mallocStack(stack);
+            RPMallocConfig config = RPMallocConfig.malloc(stack);
             config.set(rpmalloc_config());
 
             rpmalloc_finalize();

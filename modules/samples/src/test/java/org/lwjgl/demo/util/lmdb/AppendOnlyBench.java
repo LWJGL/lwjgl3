@@ -70,11 +70,11 @@ public final class AppendOnlyBench {
 
             long t = System.nanoTime();
             transaction(env, (stack, txn) -> {
-                MDBVal     kv = MDBVal.callocStack(stack);
+                MDBVal     kv = MDBVal.calloc(stack);
                 ByteBuffer kd = stack.malloc(4);
                 kv.mv_data(kd);
 
-                MDBVal     dv = MDBVal.callocStack(stack);
+                MDBVal     dv = MDBVal.calloc(stack);
                 ByteBuffer dd = stack.malloc(4);
                 dv.mv_data(dd);
 
@@ -125,11 +125,11 @@ public final class AppendOnlyBench {
 
             long t = System.nanoTime();
             transaction(env, (stack, txn) -> {
-                MDBVal     kv = MDBVal.callocStack(stack);
+                MDBVal     kv = MDBVal.calloc(stack);
                 ByteBuffer kd = stack.malloc(4);
                 kv.mv_data(kd);
 
-                MDBVal dv = MDBVal.callocStack(stack);
+                MDBVal dv = MDBVal.calloc(stack);
                 dv.mv_size(4);
 
                 PointerBuffer pp = stack.mallocPointer(1);

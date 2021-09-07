@@ -316,14 +316,14 @@ public class ParTest {
 
     public static void testStreamlines() {
         try (MemoryStack stack = stackPush()) {
-            ParSLConfig config = ParSLConfig.callocStack(stack)
+            ParSLConfig config = ParSLConfig.calloc(stack)
                 .thickness(3.0f);
 
             long ctx = parsl_create_context(config);
 
             ParSLMesh mesh = Objects.requireNonNull(
-                parsl_mesh_from_lines(ctx, ParSLSpineList.callocStack(stack)
-                    .vertices(ParSLPosition.mallocStack(3, stack)
+                parsl_mesh_from_lines(ctx, ParSLSpineList.calloc(stack)
+                    .vertices(ParSLPosition.malloc(3, stack)
                         .apply(0, it -> it.x(0.0f).y(0.0f))
                         .apply(1, it -> it.x(2.0f).y(1.0f))
                         .apply(2, it -> it.x(4.0f).y(0.0f)))
