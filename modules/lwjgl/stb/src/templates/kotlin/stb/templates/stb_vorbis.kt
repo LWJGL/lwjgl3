@@ -171,6 +171,10 @@ val _stb_vorbis = "STBVorbis".nativeClass(Module.STB, prefixMethod = "stb_vorbis
         The number of channels returned are stored in *channels (which can be #NULL -- it is always the same as the number of channels reported by #get_info()).
         {@code *output} will contain an array of {@code float*} buffers, one per channel. In other words, {@code (*output)[0][0]} contains the first sample
         from the first channel, and {@code (*output)[1][0]} contains the first sample from the second channel.
+        
+        {@code *output} points into stb_vorbis's internal output buffer storage; these buffers are owned by stb_vorbis and application code should not free
+        them or modify their contents. They are transient and will be overwritten once you ask for more data to get decoded, so be sure to grab any data you
+        need before then.
         """,
 
         DECODER,

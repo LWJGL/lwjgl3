@@ -1182,6 +1182,15 @@ public class STBTruetype {
         nstbtt_FreeShape(info.address(), vertices.address());
     }
 
+    // --- [ stbtt_FindSVGDoc ] ---
+
+    public static native long nstbtt_FindSVGDoc(long info, int gl);
+
+    @NativeType("unsigned char *")
+    public static long stbtt_FindSVGDoc(@NativeType("stbtt_fontinfo const *") STBTTFontinfo info, int gl) {
+        return nstbtt_FindSVGDoc(info.address(), gl);
+    }
+
     // --- [ stbtt_GetCodepointSVG ] ---
 
     /** Unsafe version of: {@link #stbtt_GetCodepointSVG GetCodepointSVG} */

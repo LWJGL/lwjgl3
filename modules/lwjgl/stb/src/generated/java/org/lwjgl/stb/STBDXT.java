@@ -23,7 +23,7 @@ public class STBDXT {
 
     public static final int STB_DXT_NORMAL = 0x0;
 
-    /** Use dithering. Dubious win, never use for normal maps and the like! */
+    /** Use dithering. Was always dubious, now deprecated. Does nothing! */
     public static final int STB_DXT_DITHER = 0x1;
 
     /** High quality mode, does two refinement steps instead of 1. ~30-40% slower. */

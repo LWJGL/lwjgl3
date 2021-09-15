@@ -92,8 +92,8 @@ stbi_ldr_to_hdr_gamma(2.2f);""")}
 stbi_is_hdr(char *filename);""")}
 
         <h3>iPhone PNG support</h3>
-        By default we convert iphone-formatted PNGs back to RGB, even though they are internally encoded differently. You can disable this conversion by
-        calling #convert_iphone_png_to_rgb()(0), in which case you will always just get the native iphone "format" through (which is BGR stored in RGB).
+        We optionally support converting iPhone-formatted PNGs (which store premultiplied BGRA) back to RGB, even though they're internally encoded
+        differently. To enable this conversion, call #convert_iphone_png_to_rgb()(1).
 
         Call #set_unpremultiply_on_load()(1) as well to force a divide per pixel to remove any premultiplied alpha *only* if the image file explicitly says
         there's premultiplied data (currently only happens in iPhone images, and only if iPhone convert-to-rgb processing is on).
@@ -133,6 +133,24 @@ N=\#channels_in_file     components
         function #failure_reason() can be queried for an extremely brief, end-user unfriendly explanation of why the load failed.
 
         Paletted PNG, BMP, GIF, and PIC images are automatically depalettized.
+        
+        To query the width, height and component count of an image without having to decode the full file, you can use the {@code stbi_info} family of
+        functions:
+        ${codeBlock("""
+int x,y,n,ok;
+ok = stbi_info(filename, &x, &y, &n);
+// returns ok=1 and sets x, y, n if image is a supported format,
+// 0 otherwise.""")}
+
+        Note that stb_image pervasively uses {@code ints} in its public API for sizes, including sizes of memory buffers. This is now part of the API and thus
+        hard to change without causing breakage. As a result, the various image loaders all have certain limits on image size; these differ somewhat by format
+        but generally boil down to either just under 2GB or just under 1GB. When the decoded image would be larger than this, stb_image decoding will fail.
+
+        Additionally, stb_image will reject image files that have any of their dimensions set to a larger value than the configurable
+        {@code STBI_MAX_DIMENSIONS}, which defaults to {@code 2**24 = 16777216} pixels. Due to the above memory limit, the only way to have an image with such
+        dimensions load correctly is for it to have a rather extreme aspect ratio. Either way, the assumption here is that such larger images are likely to be
+        malformed or malicious. If you do need to load an image with individual dimensions larger than that, and it still fits in the overall size limit, you
+        can {@code \#define STBI_MAX_DIMENSIONS} on your own to be something larger.
         """,
 
         charUTF8.const.p("filename", "the file name"),
@@ -402,6 +420,20 @@ N=\#channels_in_file     components
         "Flips the image vertically, so the first pixel in the output array is the bottom left.",
 
         intb("flag_true_if_should_flip", "the flip vertically on load flag")
+    )
+
+    void(
+        "set_unpremultiply_on_load_thread",
+        "As #set_unpremultiply_on_load(), but only applies to images loaded on the thread that calls the function.",
+
+        intb("flag_true_if_should_unpremultiply", "")
+    )
+
+    void(
+        "convert_iphone_png_to_rgb_thread",
+        "As #convert_iphone_png_to_rgb(), but only applies to images loaded on the thread that calls the function.",
+
+        intb("flag_true_if_should_convert", "")
     )
 
     void(

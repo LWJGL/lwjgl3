@@ -757,6 +757,14 @@ int main(int arg, char **argv)
         Check(1)..stbtt_vertex.p("vertices", "the array of ##STBTTVertex structs to free")
     )
 
+    "unsigned char".opaque.p(
+        "FindSVGDoc",
+        "",
+
+        stbtt_fontinfo.const.p("info", ""),
+        int("gl", "")
+    )
+
     int(
         "GetCodepointSVG",
         "Fills {@code svg} with the character's SVG data.",

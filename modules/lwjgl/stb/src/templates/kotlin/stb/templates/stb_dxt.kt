@@ -21,7 +21,7 @@ val stb_dxt = "STBDXT".nativeClass(Module.STB, prefix = "STB", prefixMethod = "s
         """
 
     IntConstant("", "DXT_NORMAL"..0)
-    IntConstant("Use dithering. Dubious win, never use for normal maps and the like!", "DXT_DITHER"..1)
+    IntConstant("Use dithering. Was always dubious, now deprecated. Does nothing!", "DXT_DITHER"..1)
     IntConstant("High quality mode, does two refinement steps instead of 1. ~30-40% slower.", "DXT_HIGHQUAL"..2)
 
     void(

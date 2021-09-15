@@ -272,6 +272,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1FreeShape(JNIEnv *
     stbtt_FreeShape(info, vertices);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1FindSVGDoc(JNIEnv *__env, jclass clazz, jlong infoAddress, jint gl) {
+    stbtt_fontinfo const *info = (stbtt_fontinfo const *)(intptr_t)infoAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(intptr_t)stbtt_FindSVGDoc(info, gl);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_stb_STBTruetype_nstbtt_1GetCodepointSVG(JNIEnv *__env, jclass clazz, jlong infoAddress, jint unicode_codepoint, jlong svgAddress) {
     stbtt_fontinfo const *info = (stbtt_fontinfo const *)(intptr_t)infoAddress;
     char const **svg = (char const **)(intptr_t)svgAddress;

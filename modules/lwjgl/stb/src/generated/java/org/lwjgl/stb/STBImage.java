@@ -97,8 +97,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>iPhone PNG support</h3>
  * 
- * <p>By default we convert iphone-formatted PNGs back to RGB, even though they are internally encoded differently. You can disable this conversion by
- * calling {@link #stbi_convert_iphone_png_to_rgb convert_iphone_png_to_rgb}(0), in which case you will always just get the native iphone "format" through (which is BGR stored in RGB).</p>
+ * <p>We optionally support converting iPhone-formatted PNGs (which store premultiplied BGRA) back to RGB, even though they're internally encoded
+ * differently. To enable this conversion, call {@link #stbi_convert_iphone_png_to_rgb convert_iphone_png_to_rgb}(1).</p>
  * 
  * <p>Call {@link #stbi_set_unpremultiply_on_load set_unpremultiply_on_load}(1) as well to force a divide per pixel to remove any premultiplied alpha *only* if the image file explicitly says
  * there's premultiplied data (currently only happens in iPhone images, and only if iPhone convert-to-rgb processing is on).</p>
@@ -160,6 +160,25 @@ public class STBImage {
      * function {@link #stbi_failure_reason failure_reason} can be queried for an extremely brief, end-user unfriendly explanation of why the load failed.</p>
      * 
      * <p>Paletted PNG, BMP, GIF, and PIC images are automatically depalettized.</p>
+     * 
+     * <p>To query the width, height and component count of an image without having to decode the full file, you can use the {@code stbi_info} family of
+     * functions:</p>
+     * 
+     * <pre><code>
+     * int x,y,n,ok;
+     * ok = stbi_info(filename, &amp;x, &amp;y, &amp;n);
+     * // returns ok=1 and sets x, y, n if image is a supported format,
+     * // 0 otherwise.</code></pre>
+     * 
+     * <p>Note that stb_image pervasively uses {@code ints} in its public API for sizes, including sizes of memory buffers. This is now part of the API and thus
+     * hard to change without causing breakage. As a result, the various image loaders all have certain limits on image size; these differ somewhat by format
+     * but generally boil down to either just under 2GB or just under 1GB. When the decoded image would be larger than this, stb_image decoding will fail.</p>
+     * 
+     * <p>Additionally, stb_image will reject image files that have any of their dimensions set to a larger value than the configurable
+     * {@code STBI_MAX_DIMENSIONS}, which defaults to {@code 2**24 = 16777216} pixels. Due to the above memory limit, the only way to have an image with such
+     * dimensions load correctly is for it to have a rather extreme aspect ratio. Either way, the assumption here is that such larger images are likely to be
+     * malformed or malicious. If you do need to load an image with individual dimensions larger than that, and it still fits in the overall size limit, you
+     * can {@code #define STBI_MAX_DIMENSIONS} on your own to be something larger.</p>
      *
      * @param filename         the file name
      * @param x                outputs the image width in pixels
@@ -204,6 +223,25 @@ public class STBImage {
      * function {@link #stbi_failure_reason failure_reason} can be queried for an extremely brief, end-user unfriendly explanation of why the load failed.</p>
      * 
      * <p>Paletted PNG, BMP, GIF, and PIC images are automatically depalettized.</p>
+     * 
+     * <p>To query the width, height and component count of an image without having to decode the full file, you can use the {@code stbi_info} family of
+     * functions:</p>
+     * 
+     * <pre><code>
+     * int x,y,n,ok;
+     * ok = stbi_info(filename, &amp;x, &amp;y, &amp;n);
+     * // returns ok=1 and sets x, y, n if image is a supported format,
+     * // 0 otherwise.</code></pre>
+     * 
+     * <p>Note that stb_image pervasively uses {@code ints} in its public API for sizes, including sizes of memory buffers. This is now part of the API and thus
+     * hard to change without causing breakage. As a result, the various image loaders all have certain limits on image size; these differ somewhat by format
+     * but generally boil down to either just under 2GB or just under 1GB. When the decoded image would be larger than this, stb_image decoding will fail.</p>
+     * 
+     * <p>Additionally, stb_image will reject image files that have any of their dimensions set to a larger value than the configurable
+     * {@code STBI_MAX_DIMENSIONS}, which defaults to {@code 2**24 = 16777216} pixels. Due to the above memory limit, the only way to have an image with such
+     * dimensions load correctly is for it to have a rather extreme aspect ratio. Either way, the assumption here is that such larger images are likely to be
+     * malformed or malicious. If you do need to load an image with individual dimensions larger than that, and it still fits in the overall size limit, you
+     * can {@code #define STBI_MAX_DIMENSIONS} on your own to be something larger.</p>
      *
      * @param filename         the file name
      * @param x                outputs the image width in pixels
@@ -931,6 +969,26 @@ public class STBImage {
      */
     public static void stbi_set_flip_vertically_on_load(@NativeType("int") boolean flag_true_if_should_flip) {
         nstbi_set_flip_vertically_on_load(flag_true_if_should_flip ? 1 : 0);
+    }
+
+    // --- [ stbi_set_unpremultiply_on_load_thread ] ---
+
+    /** Unsafe version of: {@link #stbi_set_unpremultiply_on_load_thread set_unpremultiply_on_load_thread} */
+    public static native void nstbi_set_unpremultiply_on_load_thread(int flag_true_if_should_unpremultiply);
+
+    /** As {@link #stbi_set_unpremultiply_on_load set_unpremultiply_on_load}, but only applies to images loaded on the thread that calls the function. */
+    public static void stbi_set_unpremultiply_on_load_thread(@NativeType("int") boolean flag_true_if_should_unpremultiply) {
+        nstbi_set_unpremultiply_on_load_thread(flag_true_if_should_unpremultiply ? 1 : 0);
+    }
+
+    // --- [ stbi_convert_iphone_png_to_rgb_thread ] ---
+
+    /** Unsafe version of: {@link #stbi_convert_iphone_png_to_rgb_thread convert_iphone_png_to_rgb_thread} */
+    public static native void nstbi_convert_iphone_png_to_rgb_thread(int flag_true_if_should_convert);
+
+    /** As {@link #stbi_convert_iphone_png_to_rgb convert_iphone_png_to_rgb}, but only applies to images loaded on the thread that calls the function. */
+    public static void stbi_convert_iphone_png_to_rgb_thread(@NativeType("int") boolean flag_true_if_should_convert) {
+        nstbi_convert_iphone_png_to_rgb_thread(flag_true_if_should_convert ? 1 : 0);
     }
 
     // --- [ stbi_set_flip_vertically_on_load_thread ] ---

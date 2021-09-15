@@ -228,6 +228,16 @@ JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBImage_nstbi_1set_1flip_1vertically_
     stbi_set_flip_vertically_on_load(flag_true_if_should_flip);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBImage_nstbi_1set_1unpremultiply_1on_1load_1thread(JNIEnv *__env, jclass clazz, jint flag_true_if_should_unpremultiply) {
+    UNUSED_PARAMS(__env, clazz)
+    stbi_set_unpremultiply_on_load_thread(flag_true_if_should_unpremultiply);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBImage_nstbi_1convert_1iphone_1png_1to_1rgb_1thread(JNIEnv *__env, jclass clazz, jint flag_true_if_should_convert) {
+    UNUSED_PARAMS(__env, clazz)
+    stbi_convert_iphone_png_to_rgb_thread(flag_true_if_should_convert);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBImage_stbi_1set_1flip_1vertically_1on_1load_1thread(JNIEnv *__env, jclass clazz, jint flag_true_if_should_flip) {
     UNUSED_PARAMS(__env, clazz)
     stbi_set_flip_vertically_on_load_thread(flag_true_if_should_flip);

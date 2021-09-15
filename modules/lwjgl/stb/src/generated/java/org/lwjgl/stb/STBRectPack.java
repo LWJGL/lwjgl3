@@ -19,6 +19,9 @@ public class STBRectPack {
 
     static { LibSTB.initialize(); }
 
+    /** Mostly for internal use, but this is the maximum supported coordinate value. */
+    public static final int STBRP__MAXVAL = 0x7FFFFFFF;
+
     /**
      * Packing heuristics
      * 

@@ -44,8 +44,8 @@ public class STBRPNode extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
-            __member(2),
-            __member(2),
+            __member(4),
+            __member(4),
             __member(POINTER_SIZE)
         );
 
@@ -72,10 +72,10 @@ public class STBRPNode extends Struct implements NativeResource {
 
     /** @return the value of the {@code x} field. */
     @NativeType("stbrp_coord")
-    public short x() { return nx(address()); }
+    public int x() { return nx(address()); }
     /** @return the value of the {@code y} field. */
     @NativeType("stbrp_coord")
-    public short y() { return ny(address()); }
+    public int y() { return ny(address()); }
     /** @return a {@link STBRPNode} view of the struct pointed to by the {@code next} field. */
     @Nullable
     @NativeType("stbrp_node *")
@@ -214,9 +214,9 @@ public class STBRPNode extends Struct implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #x}. */
-    public static short nx(long struct) { return UNSAFE.getShort(null, struct + STBRPNode.X); }
+    public static int nx(long struct) { return UNSAFE.getInt(null, struct + STBRPNode.X); }
     /** Unsafe version of {@link #y}. */
-    public static short ny(long struct) { return UNSAFE.getShort(null, struct + STBRPNode.Y); }
+    public static int ny(long struct) { return UNSAFE.getInt(null, struct + STBRPNode.Y); }
     /** Unsafe version of {@link #next}. */
     @Nullable public static STBRPNode nnext(long struct) { return STBRPNode.createSafe(memGetAddress(struct + STBRPNode.NEXT)); }
 
@@ -260,10 +260,10 @@ public class STBRPNode extends Struct implements NativeResource {
 
         /** @return the value of the {@code x} field. */
         @NativeType("stbrp_coord")
-        public short x() { return STBRPNode.nx(address()); }
+        public int x() { return STBRPNode.nx(address()); }
         /** @return the value of the {@code y} field. */
         @NativeType("stbrp_coord")
-        public short y() { return STBRPNode.ny(address()); }
+        public int y() { return STBRPNode.ny(address()); }
         /** @return a {@link STBRPNode} view of the struct pointed to by the {@code next} field. */
         @Nullable
         @NativeType("stbrp_node *")

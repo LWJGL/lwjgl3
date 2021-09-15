@@ -134,7 +134,7 @@ val stbi_zlib_compress = Module.STB.callback {
 
 // stb_rect_pack.h
 
-val stbrp_coord = typedef(unsigned_short, "stbrp_coord") // int is also supported if STBRP_LARGE_RECTS is defined
+val stbrp_coord = typedef(int, "stbrp_coord")
 
 val stbrp_rect = struct(Module.STB, "STBRPRect", nativeName = "stbrp_rect") {
     documentation = "A packed rectangle."

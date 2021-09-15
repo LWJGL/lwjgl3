@@ -23,6 +23,12 @@ val stb_rect_pack = "STBRectPack".nativeClass(Module.STB, prefix = "STBRP", pref
         stb_truetype (which is primarily what this is meant to replace).
         """
 
+    IntConstant(
+        "Mostly for internal use, but this is the maximum supported coordinate value.",
+
+        "_MAXVAL"..0x7fffffff
+    )
+
     EnumConstant(
         "Packing heuristics",
 

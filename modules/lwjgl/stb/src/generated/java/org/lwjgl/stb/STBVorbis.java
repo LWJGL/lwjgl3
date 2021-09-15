@@ -271,6 +271,10 @@ public class STBVorbis {
      * <p>The number of channels returned are stored in *channels (which can be {@code NULL} -- it is always the same as the number of channels reported by {@link #stb_vorbis_get_info get_info}).
      * {@code *output} will contain an array of {@code float*} buffers, one per channel. In other words, {@code (*output)[0][0]} contains the first sample
      * from the first channel, and {@code (*output)[1][0]} contains the first sample from the second channel.</p>
+     * 
+     * <p>{@code *output} points into stb_vorbis's internal output buffer storage; these buffers are owned by stb_vorbis and application code should not free
+     * them or modify their contents. They are transient and will be overwritten once you ask for more data to get decoded, so be sure to grab any data you
+     * need before then.</p>
      *
      * @param f         an ogg vorbis file decoder
      * @param datablock the data block containing the audio sample data
