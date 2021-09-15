@@ -26,6 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     rmtU16 {@link #port};
  *     rmtBool {@link #reuse_open_port};
  *     rmtBool {@link #limit_connections_to_localhost};
+ *     rmtBool {@link #enableThreadSampler};
  *     rmtU32 {@link #msSleepBetweenServerUpdates};
  *     rmtU32 {@link #messageQueueSizeInBytes};
  *     rmtU32 {@link #maxNbMessagesPerUpdate};
@@ -35,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * {@link #mm_context};
  *     {@link RMTInputHandlerI rmtInputHandlerPtr} {@link #input_handler};
  *     void * {@link #input_handler_context};
- *     rmtPStr logFilename;
+ *     rmtPStr logPath;
  * }</code></pre>
  */
 @NativeType("struct rmtSettings")
@@ -52,6 +53,7 @@ public class RMTSettings extends Struct implements NativeResource {
         PORT,
         REUSE_OPEN_PORT,
         LIMIT_CONNECTIONS_TO_LOCALHOST,
+        ENABLETHREADSAMPLER,
         MSSLEEPBETWEENSERVERUPDATES,
         MESSAGEQUEUESIZEINBYTES,
         MAXNBMESSAGESPERUPDATE,
@@ -61,11 +63,12 @@ public class RMTSettings extends Struct implements NativeResource {
         MM_CONTEXT,
         INPUT_HANDLER,
         INPUT_HANDLER_CONTEXT,
-        LOGFILENAME;
+        LOGPATH;
 
     static {
         Layout layout = __struct(
             __member(2),
+            __member(4),
             __member(4),
             __member(4),
             __member(4),
@@ -86,16 +89,17 @@ public class RMTSettings extends Struct implements NativeResource {
         PORT = layout.offsetof(0);
         REUSE_OPEN_PORT = layout.offsetof(1);
         LIMIT_CONNECTIONS_TO_LOCALHOST = layout.offsetof(2);
-        MSSLEEPBETWEENSERVERUPDATES = layout.offsetof(3);
-        MESSAGEQUEUESIZEINBYTES = layout.offsetof(4);
-        MAXNBMESSAGESPERUPDATE = layout.offsetof(5);
-        _MALLOC = layout.offsetof(6);
-        REALLOC = layout.offsetof(7);
-        _FREE = layout.offsetof(8);
-        MM_CONTEXT = layout.offsetof(9);
-        INPUT_HANDLER = layout.offsetof(10);
-        INPUT_HANDLER_CONTEXT = layout.offsetof(11);
-        LOGFILENAME = layout.offsetof(12);
+        ENABLETHREADSAMPLER = layout.offsetof(3);
+        MSSLEEPBETWEENSERVERUPDATES = layout.offsetof(4);
+        MESSAGEQUEUESIZEINBYTES = layout.offsetof(5);
+        MAXNBMESSAGESPERUPDATE = layout.offsetof(6);
+        _MALLOC = layout.offsetof(7);
+        REALLOC = layout.offsetof(8);
+        _FREE = layout.offsetof(9);
+        MM_CONTEXT = layout.offsetof(10);
+        INPUT_HANDLER = layout.offsetof(11);
+        INPUT_HANDLER_CONTEXT = layout.offsetof(12);
+        LOGPATH = layout.offsetof(13);
     }
 
     /**
@@ -119,7 +123,7 @@ public class RMTSettings extends Struct implements NativeResource {
      * restarting. If you find restarts fail repeatedly with bind attempts, set this to true to forcibly reuse the open port.
      */
     @NativeType("rmtBool")
-    public int reuse_open_port() { return nreuse_open_port(address()); }
+    public boolean reuse_open_port() { return nreuse_open_port(address()) != 0; }
     /**
      * Only allow connections on localhost?
      * 
@@ -127,7 +131,16 @@ public class RMTSettings extends Struct implements NativeResource {
      * limit connections to localhost.</p>
      */
     @NativeType("rmtBool")
-    public int limit_connections_to_localhost() { return nlimit_connections_to_localhost(address()); }
+    public boolean limit_connections_to_localhost() { return nlimit_connections_to_localhost(address()) != 0; }
+    /**
+     * Whether to enable runtime thread sampling that discovers which processors a thread is running on.
+     * 
+     * <p>This will suspend and resume threads from outside repeatdly and inject code into each thread that automatically instruments the processor.</p>
+     * 
+     * <p>Default: Enabled</p>
+     */
+    @NativeType("rmtBool")
+    public boolean enableThreadSampler() { return nenableThreadSampler(address()) != 0; }
     /** how long to sleep between server updates, hopefully trying to give a little CPU back to other threads */
     @NativeType("rmtU32")
     public int msSleepBetweenServerUpdates() { return nmsSleepBetweenServerUpdates(address()); }
@@ -158,19 +171,21 @@ public class RMTSettings extends Struct implements NativeResource {
     /** context pointer that gets sent to Remotery console callback function */
     @NativeType("void *")
     public long input_handler_context() { return ninput_handler_context(address()); }
-    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code logFilename} field. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code logPath} field. */
     @NativeType("rmtPStr")
-    public ByteBuffer logFilename() { return nlogFilename(address()); }
-    /** @return the null-terminated string pointed to by the {@code logFilename} field. */
+    public ByteBuffer logPath() { return nlogPath(address()); }
+    /** @return the null-terminated string pointed to by the {@code logPath} field. */
     @NativeType("rmtPStr")
-    public String logFilenameString() { return nlogFilenameString(address()); }
+    public String logPathString() { return nlogPathString(address()); }
 
     /** Sets the specified value to the {@link #port} field. */
     public RMTSettings port(@NativeType("rmtU16") short value) { nport(address(), value); return this; }
     /** Sets the specified value to the {@link #reuse_open_port} field. */
-    public RMTSettings reuse_open_port(@NativeType("rmtBool") int value) { nreuse_open_port(address(), value); return this; }
+    public RMTSettings reuse_open_port(@NativeType("rmtBool") boolean value) { nreuse_open_port(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@link #limit_connections_to_localhost} field. */
-    public RMTSettings limit_connections_to_localhost(@NativeType("rmtBool") int value) { nlimit_connections_to_localhost(address(), value); return this; }
+    public RMTSettings limit_connections_to_localhost(@NativeType("rmtBool") boolean value) { nlimit_connections_to_localhost(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@link #enableThreadSampler} field. */
+    public RMTSettings enableThreadSampler(@NativeType("rmtBool") boolean value) { nenableThreadSampler(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@link #msSleepBetweenServerUpdates} field. */
     public RMTSettings msSleepBetweenServerUpdates(@NativeType("rmtU32") int value) { nmsSleepBetweenServerUpdates(address(), value); return this; }
     /** Sets the specified value to the {@link #messageQueueSizeInBytes} field. */
@@ -189,14 +204,15 @@ public class RMTSettings extends Struct implements NativeResource {
     public RMTSettings input_handler(@NativeType("rmtInputHandlerPtr") RMTInputHandlerI value) { ninput_handler(address(), value); return this; }
     /** Sets the specified value to the {@link #input_handler_context} field. */
     public RMTSettings input_handler_context(@NativeType("void *") long value) { ninput_handler_context(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@code logFilename} field. */
-    public RMTSettings logFilename(@NativeType("rmtPStr") ByteBuffer value) { nlogFilename(address(), value); return this; }
+    /** Sets the address of the specified encoded string to the {@code logPath} field. */
+    public RMTSettings logPath(@NativeType("rmtPStr") ByteBuffer value) { nlogPath(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public RMTSettings set(
         short port,
-        int reuse_open_port,
-        int limit_connections_to_localhost,
+        boolean reuse_open_port,
+        boolean limit_connections_to_localhost,
+        boolean enableThreadSampler,
         int msSleepBetweenServerUpdates,
         int messageQueueSizeInBytes,
         int maxNbMessagesPerUpdate,
@@ -206,11 +222,12 @@ public class RMTSettings extends Struct implements NativeResource {
         long mm_context,
         RMTInputHandlerI input_handler,
         long input_handler_context,
-        ByteBuffer logFilename
+        ByteBuffer logPath
     ) {
         port(port);
         reuse_open_port(reuse_open_port);
         limit_connections_to_localhost(limit_connections_to_localhost);
+        enableThreadSampler(enableThreadSampler);
         msSleepBetweenServerUpdates(msSleepBetweenServerUpdates);
         messageQueueSizeInBytes(messageQueueSizeInBytes);
         maxNbMessagesPerUpdate(maxNbMessagesPerUpdate);
@@ -220,7 +237,7 @@ public class RMTSettings extends Struct implements NativeResource {
         mm_context(mm_context);
         input_handler(input_handler);
         input_handler_context(input_handler_context);
-        logFilename(logFilename);
+        logPath(logPath);
 
         return this;
     }
@@ -304,6 +321,8 @@ public class RMTSettings extends Struct implements NativeResource {
     public static int nreuse_open_port(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.REUSE_OPEN_PORT); }
     /** Unsafe version of {@link #limit_connections_to_localhost}. */
     public static int nlimit_connections_to_localhost(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.LIMIT_CONNECTIONS_TO_LOCALHOST); }
+    /** Unsafe version of {@link #enableThreadSampler}. */
+    public static int nenableThreadSampler(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.ENABLETHREADSAMPLER); }
     /** Unsafe version of {@link #msSleepBetweenServerUpdates}. */
     public static int nmsSleepBetweenServerUpdates(long struct) { return UNSAFE.getInt(null, struct + RMTSettings.MSSLEEPBETWEENSERVERUPDATES); }
     /** Unsafe version of {@link #messageQueueSizeInBytes}. */
@@ -322,17 +341,19 @@ public class RMTSettings extends Struct implements NativeResource {
     public static RMTInputHandler ninput_handler(long struct) { return RMTInputHandler.create(memGetAddress(struct + RMTSettings.INPUT_HANDLER)); }
     /** Unsafe version of {@link #input_handler_context}. */
     public static long ninput_handler_context(long struct) { return memGetAddress(struct + RMTSettings.INPUT_HANDLER_CONTEXT); }
-    /** Unsafe version of {@link #logFilename}. */
-    public static ByteBuffer nlogFilename(long struct) { return memByteBufferNT1(memGetAddress(struct + RMTSettings.LOGFILENAME)); }
-    /** Unsafe version of {@link #logFilenameString}. */
-    public static String nlogFilenameString(long struct) { return memASCII(memGetAddress(struct + RMTSettings.LOGFILENAME)); }
+    /** Unsafe version of {@link #logPath}. */
+    public static ByteBuffer nlogPath(long struct) { return memByteBufferNT1(memGetAddress(struct + RMTSettings.LOGPATH)); }
+    /** Unsafe version of {@link #logPathString}. */
+    public static String nlogPathString(long struct) { return memASCII(memGetAddress(struct + RMTSettings.LOGPATH)); }
 
     /** Unsafe version of {@link #port(short) port}. */
     public static void nport(long struct, short value) { UNSAFE.putShort(null, struct + RMTSettings.PORT, value); }
-    /** Unsafe version of {@link #reuse_open_port(int) reuse_open_port}. */
+    /** Unsafe version of {@link #reuse_open_port(boolean) reuse_open_port}. */
     public static void nreuse_open_port(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.REUSE_OPEN_PORT, value); }
-    /** Unsafe version of {@link #limit_connections_to_localhost(int) limit_connections_to_localhost}. */
+    /** Unsafe version of {@link #limit_connections_to_localhost(boolean) limit_connections_to_localhost}. */
     public static void nlimit_connections_to_localhost(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.LIMIT_CONNECTIONS_TO_LOCALHOST, value); }
+    /** Unsafe version of {@link #enableThreadSampler(boolean) enableThreadSampler}. */
+    public static void nenableThreadSampler(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.ENABLETHREADSAMPLER, value); }
     /** Unsafe version of {@link #msSleepBetweenServerUpdates(int) msSleepBetweenServerUpdates}. */
     public static void nmsSleepBetweenServerUpdates(long struct, int value) { UNSAFE.putInt(null, struct + RMTSettings.MSSLEEPBETWEENSERVERUPDATES, value); }
     /** Unsafe version of {@link #messageQueueSizeInBytes(int) messageQueueSizeInBytes}. */
@@ -351,10 +372,10 @@ public class RMTSettings extends Struct implements NativeResource {
     public static void ninput_handler(long struct, RMTInputHandlerI value) { memPutAddress(struct + RMTSettings.INPUT_HANDLER, value.address()); }
     /** Unsafe version of {@link #input_handler_context(long) input_handler_context}. */
     public static void ninput_handler_context(long struct, long value) { memPutAddress(struct + RMTSettings.INPUT_HANDLER_CONTEXT, check(value)); }
-    /** Unsafe version of {@link #logFilename(ByteBuffer) logFilename}. */
-    public static void nlogFilename(long struct, ByteBuffer value) {
+    /** Unsafe version of {@link #logPath(ByteBuffer) logPath}. */
+    public static void nlogPath(long struct, ByteBuffer value) {
         if (CHECKS) { checkNT1(value); }
-        memPutAddress(struct + RMTSettings.LOGFILENAME, memAddress(value));
+        memPutAddress(struct + RMTSettings.LOGPATH, memAddress(value));
     }
 
     /**
@@ -369,7 +390,7 @@ public class RMTSettings extends Struct implements NativeResource {
         check(memGetAddress(struct + RMTSettings.MM_CONTEXT));
         check(memGetAddress(struct + RMTSettings.INPUT_HANDLER));
         check(memGetAddress(struct + RMTSettings.INPUT_HANDLER_CONTEXT));
-        check(memGetAddress(struct + RMTSettings.LOGFILENAME));
+        check(memGetAddress(struct + RMTSettings.LOGPATH));
     }
 
     /**

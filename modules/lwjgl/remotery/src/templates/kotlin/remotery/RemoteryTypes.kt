@@ -24,7 +24,7 @@ ENABLE_WARNINGS()""")
 }
 
 // Boolean
-val rmtBool = typedef(unsigned_int, "rmtBool")
+val rmtBool = PrimitiveType("rmtBool", PrimitiveMapping.BOOLEAN4)
 
 // Unsigned integer types
 val rmtU8 = typedef(uint8_t, "rmtU8")
@@ -112,6 +112,16 @@ val rmtSettings = struct(Module.REMOTERY, "RMTSettings", nativeName = "rmtSettin
         limit connections to localhost.
         """
     )
+    rmtBool(
+        "enableThreadSampler",
+        """
+        Whether to enable runtime thread sampling that discovers which processors a thread is running on.
+        
+        This will suspend and resume threads from outside repeatdly and inject code into each thread that automatically instruments the processor.
+        
+        Default: Enabled 
+        """
+    )
     rmtU32("msSleepBetweenServerUpdates", "how long to sleep between server updates, hopefully trying to give a little CPU back to other threads")
     rmtU32("messageQueueSizeInBytes", "size of the internal message queues Remotery uses. Will be rounded to page granularity of 64k.")
     rmtU32(
@@ -130,7 +140,7 @@ val rmtSettings = struct(Module.REMOTERY, "RMTSettings", nativeName = "rmtSettin
     rmtInputHandlerPtr("input_handler", "callback pointer for receiving input from the Remotery console")
     opaque_p("input_handler_context", "context pointer that gets sent to Remotery console callback function")
 
-    rmtPStr("logFilename", "")
+    rmtPStr("logPath", "")
 }
 
 val id = "id".handle

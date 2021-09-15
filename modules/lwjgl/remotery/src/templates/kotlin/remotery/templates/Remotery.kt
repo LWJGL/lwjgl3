@@ -32,12 +32,14 @@ val _Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_") {
 
         "ERROR_NONE".enum,
         "ERROR_RECURSIVE_SAMPLE".enum("Not an error but an internal message to calling code"),
+        "ERROR_UNKNOWN".enum("An error with a message yet to be defined, only for internal error handling"),
 
         // System errors
         "ERROR_MALLOC_FAIL".enum("Malloc call within remotery failed"),
         "ERROR_TLS_ALLOC_FAIL".enum("Attempt to allocate thread local storage failed"),
         "ERROR_VIRTUAL_MEMORY_BUFFER_FAIL".enum("Failed to create a virtual memory mirror buffer"),
         "ERROR_CREATE_THREAD_FAIL".enum("Failed to create a thread for the server"),
+        "ERROR_OPEN_THREAD_HANDLE_FAIL".enum("Failed to open a thread handle, given a thread id"),
 
         // Network TCP/IP socket errors
         "ERROR_SOCKET_INIT_NETWORK_FAIL".enum("Network initialisation failure (e.g. on Win32, WSAStartup fails)"),
@@ -95,8 +97,16 @@ val _Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_") {
         "{@code rmtSampleFlags}",
 
         "RMTSF_None".enum("Default behaviour", "0"),
-        "RMTSF_Aggregate".enum("Search parent for same-named samples and merge timing instead of adding a new sample"),
-        "RMTSF_Recursive".enum("Merge sample with parent if it's the same sample")
+        "RMTSF_Aggregate".enum("Search parent for same-named samples and merge timing instead of adding a new sample", "1"),
+        "RMTSF_Recursive".enum("Merge sample with parent if it's the same sample", "2"),
+        "RMTSF_Root".enum(
+            """
+            Set this flag on any of your root samples so that Remotery will assert if it ends up <b>not</b> being the root sample.
+    
+            This will quickly allow you to detect {@code Begin}/{@code End} mismatches causing a sample tree imbalance.
+            """,
+            "4"
+        )
     ).noPrefix().javaDocLinks
 
     rmtSettings.p("Settings", "", void())
