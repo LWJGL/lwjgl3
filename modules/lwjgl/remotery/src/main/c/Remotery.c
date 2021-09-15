@@ -1605,8 +1605,6 @@ errno_t strcpy_s(char* dest, r_size_t dmax, const char* src)
     return RCNEGATE(ESNOSPC);
 }
 
-#if !(defined(RMT_PLATFORM_LINUX) && RMT_USE_POSIX_THREADNAMES)
-
 /* very simple integer to hex */
 static const char* hex_encoding_table = "0123456789ABCDEF";
 
@@ -1663,8 +1661,6 @@ static const char* itoa_s(rmtS32 value)
 
     return temp_dest + pos + 1;
 }
-
-#endif
 
 /*
 ------------------------------------------------------------------------------------------------------------------------
