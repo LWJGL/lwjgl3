@@ -50,7 +50,12 @@ This script is included in /config/build-definitions.xml.
     <condition property="binding.openvr" value="false" else="true"><isset property="build.arch.arm"/></condition>
     <property name="binding.opus" value="true"/>
     <property name="binding.par" value="true"/>
-    <property name="binding.remotery" value="true"/>
+    <condition property="binding.remotery" value="false" else="true">
+        <and>
+            <isset property="platform.windows"/>
+            <isset property="build.arch.arm"/>
+        </and>
+    </condition>
     <property name="binding.rpmalloc" value="true"/>
     <property name="binding.shaderc" value="true"/>
     <property name="binding.spvc" value="true"/>
