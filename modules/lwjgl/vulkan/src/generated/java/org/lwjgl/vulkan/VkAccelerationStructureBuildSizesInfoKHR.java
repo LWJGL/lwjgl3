@@ -106,6 +106,8 @@ public class VkAccelerationStructureBuildSizesInfoKHR extends Struct implements 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureBuildSizesInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR} value to the {@link #sType} field. */
+    public VkAccelerationStructureBuildSizesInfoKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureBuildSizesInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #accelerationStructureSize} field. */
@@ -336,6 +338,8 @@ public class VkAccelerationStructureBuildSizesInfoKHR extends Struct implements 
 
         /** Sets the specified value to the {@link VkAccelerationStructureBuildSizesInfoKHR#sType} field. */
         public VkAccelerationStructureBuildSizesInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureBuildSizesInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR} value to the {@link VkAccelerationStructureBuildSizesInfoKHR#sType} field. */
+        public VkAccelerationStructureBuildSizesInfoKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR); }
         /** Sets the specified value to the {@link VkAccelerationStructureBuildSizesInfoKHR#pNext} field. */
         public VkAccelerationStructureBuildSizesInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureBuildSizesInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkAccelerationStructureBuildSizesInfoKHR#accelerationStructureSize} field. */

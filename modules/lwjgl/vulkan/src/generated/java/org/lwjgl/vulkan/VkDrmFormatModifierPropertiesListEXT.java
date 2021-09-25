@@ -105,6 +105,8 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDrmFormatModifierPropertiesListEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT} value to the {@link #sType} field. */
+    public VkDrmFormatModifierPropertiesListEXT sType$Default() { return sType(EXTImageDrmFormatModifier.VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDrmFormatModifierPropertiesListEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -331,6 +333,8 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct implements Nati
 
         /** Sets the specified value to the {@link VkDrmFormatModifierPropertiesListEXT#sType} field. */
         public VkDrmFormatModifierPropertiesListEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDrmFormatModifierPropertiesListEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT} value to the {@link VkDrmFormatModifierPropertiesListEXT#sType} field. */
+        public VkDrmFormatModifierPropertiesListEXT.Buffer sType$Default() { return sType(EXTImageDrmFormatModifier.VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT); }
         /** Sets the specified value to the {@link VkDrmFormatModifierPropertiesListEXT#pNext} field. */
         public VkDrmFormatModifierPropertiesListEXT.Buffer pNext(@NativeType("void *") long value) { VkDrmFormatModifierPropertiesListEXT.npNext(address(), value); return this; }
 

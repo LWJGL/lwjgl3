@@ -152,6 +152,8 @@ public class VkCooperativeMatrixPropertiesNV extends Struct implements NativeRes
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCooperativeMatrixPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVCooperativeMatrix#VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV} value to the {@link #sType} field. */
+    public VkCooperativeMatrixPropertiesNV sType$Default() { return sType(NVCooperativeMatrix.VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCooperativeMatrixPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #MSize} field. */
@@ -455,6 +457,8 @@ public class VkCooperativeMatrixPropertiesNV extends Struct implements NativeRes
 
         /** Sets the specified value to the {@link VkCooperativeMatrixPropertiesNV#sType} field. */
         public VkCooperativeMatrixPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkCooperativeMatrixPropertiesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVCooperativeMatrix#VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV} value to the {@link VkCooperativeMatrixPropertiesNV#sType} field. */
+        public VkCooperativeMatrixPropertiesNV.Buffer sType$Default() { return sType(NVCooperativeMatrix.VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV); }
         /** Sets the specified value to the {@link VkCooperativeMatrixPropertiesNV#pNext} field. */
         public VkCooperativeMatrixPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkCooperativeMatrixPropertiesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkCooperativeMatrixPropertiesNV#MSize} field. */

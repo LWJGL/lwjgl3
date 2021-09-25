@@ -91,6 +91,8 @@ public class VkPhysicalDeviceDiagnosticsConfigFeaturesNV extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceDiagnosticsConfigFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVDeviceDiagnosticsConfig#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceDiagnosticsConfigFeaturesNV sType$Default() { return sType(NVDeviceDiagnosticsConfig.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceDiagnosticsConfigFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #diagnosticsConfig} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceDiagnosticsConfigFeaturesNV extends Struct implemen
 
         /** Sets the specified value to the {@link VkPhysicalDeviceDiagnosticsConfigFeaturesNV#sType} field. */
         public VkPhysicalDeviceDiagnosticsConfigFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDiagnosticsConfigFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVDeviceDiagnosticsConfig#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV} value to the {@link VkPhysicalDeviceDiagnosticsConfigFeaturesNV#sType} field. */
+        public VkPhysicalDeviceDiagnosticsConfigFeaturesNV.Buffer sType$Default() { return sType(NVDeviceDiagnosticsConfig.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceDiagnosticsConfigFeaturesNV#pNext} field. */
         public VkPhysicalDeviceDiagnosticsConfigFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDiagnosticsConfigFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceDiagnosticsConfigFeaturesNV#diagnosticsConfig} field. */

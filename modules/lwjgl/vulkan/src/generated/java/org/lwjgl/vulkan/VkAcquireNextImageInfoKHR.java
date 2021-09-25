@@ -154,6 +154,8 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAcquireNextImageInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR} value to the {@link #sType} field. */
+    public VkAcquireNextImageInfoKHR sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAcquireNextImageInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #swapchain} field. */
@@ -424,6 +426,8 @@ public class VkAcquireNextImageInfoKHR extends Struct implements NativeResource 
 
         /** Sets the specified value to the {@link VkAcquireNextImageInfoKHR#sType} field. */
         public VkAcquireNextImageInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAcquireNextImageInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR} value to the {@link VkAcquireNextImageInfoKHR#sType} field. */
+        public VkAcquireNextImageInfoKHR.Buffer sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR); }
         /** Sets the specified value to the {@link VkAcquireNextImageInfoKHR#pNext} field. */
         public VkAcquireNextImageInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAcquireNextImageInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkAcquireNextImageInfoKHR#swapchain} field. */

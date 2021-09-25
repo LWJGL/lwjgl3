@@ -168,6 +168,8 @@ public class VkCopyDescriptorSet extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCopyDescriptorSet sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET STRUCTURE_TYPE_COPY_DESCRIPTOR_SET} value to the {@link #sType} field. */
+    public VkCopyDescriptorSet sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCopyDescriptorSet pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #srcSet} field. */
@@ -460,6 +462,8 @@ public class VkCopyDescriptorSet extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkCopyDescriptorSet#sType} field. */
         public VkCopyDescriptorSet.Buffer sType(@NativeType("VkStructureType") int value) { VkCopyDescriptorSet.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET STRUCTURE_TYPE_COPY_DESCRIPTOR_SET} value to the {@link VkCopyDescriptorSet#sType} field. */
+        public VkCopyDescriptorSet.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET); }
         /** Sets the specified value to the {@link VkCopyDescriptorSet#pNext} field. */
         public VkCopyDescriptorSet.Buffer pNext(@NativeType("void const *") long value) { VkCopyDescriptorSet.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkCopyDescriptorSet#srcSet} field. */

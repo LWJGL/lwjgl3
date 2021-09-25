@@ -117,6 +117,8 @@ public class VkFragmentShadingRateAttachmentInfoKHR extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkFragmentShadingRateAttachmentInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR} value to the {@link #sType} field. */
+    public VkFragmentShadingRateAttachmentInfoKHR sType$Default() { return sType(KHRFragmentShadingRate.VK_STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkFragmentShadingRateAttachmentInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentReference2} to the {@link #pFragmentShadingRateAttachment} field. */
@@ -338,6 +340,8 @@ public class VkFragmentShadingRateAttachmentInfoKHR extends Struct implements Na
 
         /** Sets the specified value to the {@link VkFragmentShadingRateAttachmentInfoKHR#sType} field. */
         public VkFragmentShadingRateAttachmentInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkFragmentShadingRateAttachmentInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR} value to the {@link VkFragmentShadingRateAttachmentInfoKHR#sType} field. */
+        public VkFragmentShadingRateAttachmentInfoKHR.Buffer sType$Default() { return sType(KHRFragmentShadingRate.VK_STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR); }
         /** Sets the specified value to the {@link VkFragmentShadingRateAttachmentInfoKHR#pNext} field. */
         public VkFragmentShadingRateAttachmentInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkFragmentShadingRateAttachmentInfoKHR.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentReference2} to the {@link VkFragmentShadingRateAttachmentInfoKHR#pFragmentShadingRateAttachment} field. */

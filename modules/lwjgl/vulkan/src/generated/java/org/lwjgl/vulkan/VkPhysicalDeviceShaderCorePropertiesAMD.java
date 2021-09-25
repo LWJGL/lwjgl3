@@ -182,6 +182,8 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct implements N
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderCorePropertiesAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link AMDShaderCoreProperties#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderCorePropertiesAMD sType$Default() { return sType(AMDShaderCoreProperties.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderCorePropertiesAMD pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -467,6 +469,8 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct implements N
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderCorePropertiesAMD#sType} field. */
         public VkPhysicalDeviceShaderCorePropertiesAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderCorePropertiesAMD.nsType(address(), value); return this; }
+        /** Sets the {@link AMDShaderCoreProperties#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD} value to the {@link VkPhysicalDeviceShaderCorePropertiesAMD#sType} field. */
+        public VkPhysicalDeviceShaderCorePropertiesAMD.Buffer sType$Default() { return sType(AMDShaderCoreProperties.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderCorePropertiesAMD#pNext} field. */
         public VkPhysicalDeviceShaderCorePropertiesAMD.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderCorePropertiesAMD.npNext(address(), value); return this; }
 

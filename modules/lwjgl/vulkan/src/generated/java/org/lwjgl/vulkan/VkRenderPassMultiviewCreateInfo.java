@@ -153,6 +153,8 @@ public class VkRenderPassMultiviewCreateInfo extends Struct implements NativeRes
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassMultiviewCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO} value to the {@link #sType} field. */
+    public VkRenderPassMultiviewCreateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassMultiviewCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pViewMasks} field. */
@@ -454,6 +456,8 @@ public class VkRenderPassMultiviewCreateInfo extends Struct implements NativeRes
 
         /** Sets the specified value to the {@link VkRenderPassMultiviewCreateInfo#sType} field. */
         public VkRenderPassMultiviewCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassMultiviewCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO} value to the {@link VkRenderPassMultiviewCreateInfo#sType} field. */
+        public VkRenderPassMultiviewCreateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO); }
         /** Sets the specified value to the {@link VkRenderPassMultiviewCreateInfo#pNext} field. */
         public VkRenderPassMultiviewCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassMultiviewCreateInfo.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkRenderPassMultiviewCreateInfo#pViewMasks} field. */

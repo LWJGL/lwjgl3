@@ -118,6 +118,8 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineViewportShadingRateImageStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVShadingRateImage#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkPipelineViewportShadingRateImageStateCreateInfoNV sType$Default() { return sType(NVShadingRateImage.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineViewportShadingRateImageStateCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shadingRateImageEnable} field. */
@@ -367,6 +369,8 @@ public class VkPipelineViewportShadingRateImageStateCreateInfoNV extends Struct 
 
         /** Sets the specified value to the {@link VkPipelineViewportShadingRateImageStateCreateInfoNV#sType} field. */
         public VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineViewportShadingRateImageStateCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVShadingRateImage#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV} value to the {@link VkPipelineViewportShadingRateImageStateCreateInfoNV#sType} field. */
+        public VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer sType$Default() { return sType(NVShadingRateImage.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkPipelineViewportShadingRateImageStateCreateInfoNV#pNext} field. */
         public VkPipelineViewportShadingRateImageStateCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkPipelineViewportShadingRateImageStateCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineViewportShadingRateImageStateCreateInfoNV#shadingRateImageEnable} field. */

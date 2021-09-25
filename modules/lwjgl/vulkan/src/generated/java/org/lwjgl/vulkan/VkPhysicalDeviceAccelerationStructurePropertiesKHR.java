@@ -142,6 +142,8 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceAccelerationStructurePropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceAccelerationStructurePropertiesKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceAccelerationStructurePropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -379,6 +381,8 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
 
         /** Sets the specified value to the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#sType} field. */
         public VkPhysicalDeviceAccelerationStructurePropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceAccelerationStructurePropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR} value to the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#sType} field. */
+        public VkPhysicalDeviceAccelerationStructurePropertiesKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#pNext} field. */
         public VkPhysicalDeviceAccelerationStructurePropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceAccelerationStructurePropertiesKHR.npNext(address(), value); return this; }
 

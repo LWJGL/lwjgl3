@@ -162,6 +162,8 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct implements Nat
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineDepthStencilStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkPipelineDepthStencilStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineDepthStencilStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -487,6 +489,8 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct implements Nat
 
         /** Sets the specified value to the {@link VkPipelineDepthStencilStateCreateInfo#sType} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineDepthStencilStateCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO} value to the {@link VkPipelineDepthStencilStateCreateInfo#sType} field. */
+        public VkPipelineDepthStencilStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineDepthStencilStateCreateInfo#pNext} field. */
         public VkPipelineDepthStencilStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineDepthStencilStateCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineDepthStencilStateCreateInfo#flags} field. */

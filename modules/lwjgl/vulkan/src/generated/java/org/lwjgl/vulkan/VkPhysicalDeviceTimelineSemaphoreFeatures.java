@@ -91,6 +91,8 @@ public class VkPhysicalDeviceTimelineSemaphoreFeatures extends Struct implements
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceTimelineSemaphoreFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceTimelineSemaphoreFeatures sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceTimelineSemaphoreFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #timelineSemaphore} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceTimelineSemaphoreFeatures extends Struct implements
 
         /** Sets the specified value to the {@link VkPhysicalDeviceTimelineSemaphoreFeatures#sType} field. */
         public VkPhysicalDeviceTimelineSemaphoreFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceTimelineSemaphoreFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES} value to the {@link VkPhysicalDeviceTimelineSemaphoreFeatures#sType} field. */
+        public VkPhysicalDeviceTimelineSemaphoreFeatures.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceTimelineSemaphoreFeatures#pNext} field. */
         public VkPhysicalDeviceTimelineSemaphoreFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceTimelineSemaphoreFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceTimelineSemaphoreFeatures#timelineSemaphore} field. */

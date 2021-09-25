@@ -42,6 +42,8 @@ public class VkPhysicalDeviceExternalSemaphoreInfoKHR extends VkPhysicalDeviceEx
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPhysicalDeviceExternalSemaphoreInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO} value to the {@code sType} field. */
+    public VkPhysicalDeviceExternalSemaphoreInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPhysicalDeviceExternalSemaphoreInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -246,6 +248,8 @@ public class VkPhysicalDeviceExternalSemaphoreInfoKHR extends VkPhysicalDeviceEx
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPhysicalDeviceExternalSemaphoreInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExternalSemaphoreInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO} value to the {@code sType} field. */
+        public VkPhysicalDeviceExternalSemaphoreInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPhysicalDeviceExternalSemaphoreInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceExternalSemaphoreInfoKHR.npNext(address(), value); return this; }

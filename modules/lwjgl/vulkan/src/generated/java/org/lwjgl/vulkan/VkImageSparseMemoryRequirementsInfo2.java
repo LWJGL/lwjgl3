@@ -93,6 +93,8 @@ public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements Nati
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImageSparseMemoryRequirementsInfo2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2 STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2} value to the {@link #sType} field. */
+    public VkImageSparseMemoryRequirementsInfo2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageSparseMemoryRequirementsInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #image} field. */
@@ -319,6 +321,8 @@ public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements Nati
 
         /** Sets the specified value to the {@link VkImageSparseMemoryRequirementsInfo2#sType} field. */
         public VkImageSparseMemoryRequirementsInfo2.Buffer sType(@NativeType("VkStructureType") int value) { VkImageSparseMemoryRequirementsInfo2.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2 STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2} value to the {@link VkImageSparseMemoryRequirementsInfo2#sType} field. */
+        public VkImageSparseMemoryRequirementsInfo2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2); }
         /** Sets the specified value to the {@link VkImageSparseMemoryRequirementsInfo2#pNext} field. */
         public VkImageSparseMemoryRequirementsInfo2.Buffer pNext(@NativeType("void const *") long value) { VkImageSparseMemoryRequirementsInfo2.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageSparseMemoryRequirementsInfo2#image} field. */

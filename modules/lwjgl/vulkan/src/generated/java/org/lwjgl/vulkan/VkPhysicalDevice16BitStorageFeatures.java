@@ -112,6 +112,8 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevice16BitStorageFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDevice16BitStorageFeatures sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevice16BitStorageFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #storageBuffer16BitAccess} field. */
@@ -371,6 +373,8 @@ public class VkPhysicalDevice16BitStorageFeatures extends Struct implements Nati
 
         /** Sets the specified value to the {@link VkPhysicalDevice16BitStorageFeatures#sType} field. */
         public VkPhysicalDevice16BitStorageFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevice16BitStorageFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES} value to the {@link VkPhysicalDevice16BitStorageFeatures#sType} field. */
+        public VkPhysicalDevice16BitStorageFeatures.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDevice16BitStorageFeatures#pNext} field. */
         public VkPhysicalDevice16BitStorageFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevice16BitStorageFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDevice16BitStorageFeatures#storageBuffer16BitAccess} field. */

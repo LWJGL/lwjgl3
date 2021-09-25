@@ -91,6 +91,8 @@ public class VkPhysicalDeviceShaderDrawParametersFeatures extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderDrawParametersFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderDrawParametersFeatures sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderDrawParametersFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderDrawParameters} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceShaderDrawParametersFeatures extends Struct impleme
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderDrawParametersFeatures#sType} field. */
         public VkPhysicalDeviceShaderDrawParametersFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderDrawParametersFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES} value to the {@link VkPhysicalDeviceShaderDrawParametersFeatures#sType} field. */
+        public VkPhysicalDeviceShaderDrawParametersFeatures.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderDrawParametersFeatures#pNext} field. */
         public VkPhysicalDeviceShaderDrawParametersFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderDrawParametersFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderDrawParametersFeatures#shaderDrawParameters} field. */

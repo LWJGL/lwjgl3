@@ -93,6 +93,8 @@ public class VkImageViewUsageCreateInfo extends Struct implements NativeResource
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImageViewUsageCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkImageViewUsageCreateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageViewUsageCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #usage} field. */
@@ -319,6 +321,8 @@ public class VkImageViewUsageCreateInfo extends Struct implements NativeResource
 
         /** Sets the specified value to the {@link VkImageViewUsageCreateInfo#sType} field. */
         public VkImageViewUsageCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkImageViewUsageCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO} value to the {@link VkImageViewUsageCreateInfo#sType} field. */
+        public VkImageViewUsageCreateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkImageViewUsageCreateInfo#pNext} field. */
         public VkImageViewUsageCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkImageViewUsageCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageViewUsageCreateInfo#usage} field. */

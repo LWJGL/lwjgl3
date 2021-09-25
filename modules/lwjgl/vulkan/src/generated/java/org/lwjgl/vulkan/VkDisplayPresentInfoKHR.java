@@ -115,6 +115,8 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDisplayPresentInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRDisplaySwapchain#VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR} value to the {@link #sType} field. */
+    public VkDisplayPresentInfoKHR sType$Default() { return sType(KHRDisplaySwapchain.VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDisplayPresentInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Copies the specified {@link VkRect2D} to the {@link #srcRect} field. */
@@ -365,6 +367,8 @@ public class VkDisplayPresentInfoKHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkDisplayPresentInfoKHR#sType} field. */
         public VkDisplayPresentInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplayPresentInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRDisplaySwapchain#VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR} value to the {@link VkDisplayPresentInfoKHR#sType} field. */
+        public VkDisplayPresentInfoKHR.Buffer sType$Default() { return sType(KHRDisplaySwapchain.VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR); }
         /** Sets the specified value to the {@link VkDisplayPresentInfoKHR#pNext} field. */
         public VkDisplayPresentInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDisplayPresentInfoKHR.npNext(address(), value); return this; }
         /** Copies the specified {@link VkRect2D} to the {@link VkDisplayPresentInfoKHR#srcRect} field. */

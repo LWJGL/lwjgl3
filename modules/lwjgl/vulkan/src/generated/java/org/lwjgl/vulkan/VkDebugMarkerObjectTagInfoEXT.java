@@ -136,6 +136,8 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResou
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDebugMarkerObjectTagInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDebugMarker#VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT} value to the {@link #sType} field. */
+    public VkDebugMarkerObjectTagInfoEXT sType$Default() { return sType(EXTDebugMarker.VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDebugMarkerObjectTagInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #objectType} field. */
@@ -423,6 +425,8 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResou
 
         /** Sets the specified value to the {@link VkDebugMarkerObjectTagInfoEXT#sType} field. */
         public VkDebugMarkerObjectTagInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDebugMarkerObjectTagInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDebugMarker#VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT} value to the {@link VkDebugMarkerObjectTagInfoEXT#sType} field. */
+        public VkDebugMarkerObjectTagInfoEXT.Buffer sType$Default() { return sType(EXTDebugMarker.VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT); }
         /** Sets the specified value to the {@link VkDebugMarkerObjectTagInfoEXT#pNext} field. */
         public VkDebugMarkerObjectTagInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDebugMarkerObjectTagInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDebugMarkerObjectTagInfoEXT#objectType} field. */

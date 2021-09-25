@@ -195,6 +195,8 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassCreateInfo2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2 STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2} value to the {@link #sType} field. */
+    public VkRenderPassCreateInfo2 sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassCreateInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -511,6 +513,8 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkRenderPassCreateInfo2#sType} field. */
         public VkRenderPassCreateInfo2.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassCreateInfo2.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2 STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2} value to the {@link VkRenderPassCreateInfo2#sType} field. */
+        public VkRenderPassCreateInfo2.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2); }
         /** Sets the specified value to the {@link VkRenderPassCreateInfo2#pNext} field. */
         public VkRenderPassCreateInfo2.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassCreateInfo2.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkRenderPassCreateInfo2#flags} field. */

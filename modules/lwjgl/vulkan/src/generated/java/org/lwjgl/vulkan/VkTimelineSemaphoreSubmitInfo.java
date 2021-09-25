@@ -116,6 +116,8 @@ public class VkTimelineSemaphoreSubmitInfo extends Struct implements NativeResou
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkTimelineSemaphoreSubmitInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO} value to the {@link #sType} field. */
+    public VkTimelineSemaphoreSubmitInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkTimelineSemaphoreSubmitInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #waitSemaphoreValueCount} field. */
@@ -359,6 +361,8 @@ public class VkTimelineSemaphoreSubmitInfo extends Struct implements NativeResou
 
         /** Sets the specified value to the {@link VkTimelineSemaphoreSubmitInfo#sType} field. */
         public VkTimelineSemaphoreSubmitInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkTimelineSemaphoreSubmitInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO} value to the {@link VkTimelineSemaphoreSubmitInfo#sType} field. */
+        public VkTimelineSemaphoreSubmitInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO); }
         /** Sets the specified value to the {@link VkTimelineSemaphoreSubmitInfo#pNext} field. */
         public VkTimelineSemaphoreSubmitInfo.Buffer pNext(@NativeType("void const *") long value) { VkTimelineSemaphoreSubmitInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkTimelineSemaphoreSubmitInfo#waitSemaphoreValueCount} field. */

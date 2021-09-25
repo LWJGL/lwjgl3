@@ -125,6 +125,8 @@ public class VkSubpassDescriptionDepthStencilResolve extends Struct implements N
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSubpassDescriptionDepthStencilResolve sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE} value to the {@link #sType} field. */
+    public VkSubpassDescriptionDepthStencilResolve sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubpassDescriptionDepthStencilResolve pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #depthResolveMode} field. */
@@ -356,6 +358,8 @@ public class VkSubpassDescriptionDepthStencilResolve extends Struct implements N
 
         /** Sets the specified value to the {@link VkSubpassDescriptionDepthStencilResolve#sType} field. */
         public VkSubpassDescriptionDepthStencilResolve.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassDescriptionDepthStencilResolve.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE} value to the {@link VkSubpassDescriptionDepthStencilResolve#sType} field. */
+        public VkSubpassDescriptionDepthStencilResolve.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE); }
         /** Sets the specified value to the {@link VkSubpassDescriptionDepthStencilResolve#pNext} field. */
         public VkSubpassDescriptionDepthStencilResolve.Buffer pNext(@NativeType("void const *") long value) { VkSubpassDescriptionDepthStencilResolve.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkSubpassDescriptionDepthStencilResolve#depthResolveMode} field. */

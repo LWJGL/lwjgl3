@@ -121,6 +121,8 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfo extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDescriptorSetLayoutBindingFlagsCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO} value to the {@link #sType} field. */
+    public VkDescriptorSetLayoutBindingFlagsCreateInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDescriptorSetLayoutBindingFlagsCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #bindingCount} field. */
@@ -341,6 +343,8 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfo extends Struct implemen
 
         /** Sets the specified value to the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#sType} field. */
         public VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorSetLayoutBindingFlagsCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO} value to the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#sType} field. */
+        public VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO); }
         /** Sets the specified value to the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#pNext} field. */
         public VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorSetLayoutBindingFlagsCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#bindingCount} field. */

@@ -91,6 +91,8 @@ public class VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV extends Struct
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVRepresentativeFragmentTest#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV sType$Default() { return sType(NVRepresentativeFragmentTest.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #representativeFragmentTest} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV extends Struct
 
         /** Sets the specified value to the {@link VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV#sType} field. */
         public VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVRepresentativeFragmentTest#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV} value to the {@link VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV#sType} field. */
+        public VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.Buffer sType$Default() { return sType(NVRepresentativeFragmentTest.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV#pNext} field. */
         public VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV#representativeFragmentTest} field. */

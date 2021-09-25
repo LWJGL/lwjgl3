@@ -113,6 +113,8 @@ public class VkMemoryDedicatedRequirements extends Struct implements NativeResou
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryDedicatedRequirements sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS} value to the {@link #sType} field. */
+    public VkMemoryDedicatedRequirements sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryDedicatedRequirements pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -338,6 +340,8 @@ public class VkMemoryDedicatedRequirements extends Struct implements NativeResou
 
         /** Sets the specified value to the {@link VkMemoryDedicatedRequirements#sType} field. */
         public VkMemoryDedicatedRequirements.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryDedicatedRequirements.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS} value to the {@link VkMemoryDedicatedRequirements#sType} field. */
+        public VkMemoryDedicatedRequirements.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS); }
         /** Sets the specified value to the {@link VkMemoryDedicatedRequirements#pNext} field. */
         public VkMemoryDedicatedRequirements.Buffer pNext(@NativeType("void *") long value) { VkMemoryDedicatedRequirements.npNext(address(), value); return this; }
 

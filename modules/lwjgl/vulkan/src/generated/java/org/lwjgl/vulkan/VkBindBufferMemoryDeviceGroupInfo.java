@@ -114,6 +114,8 @@ public class VkBindBufferMemoryDeviceGroupInfo extends Struct implements NativeR
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBindBufferMemoryDeviceGroupInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO} value to the {@link #sType} field. */
+    public VkBindBufferMemoryDeviceGroupInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBindBufferMemoryDeviceGroupInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pDeviceIndices} field. */
@@ -371,6 +373,8 @@ public class VkBindBufferMemoryDeviceGroupInfo extends Struct implements NativeR
 
         /** Sets the specified value to the {@link VkBindBufferMemoryDeviceGroupInfo#sType} field. */
         public VkBindBufferMemoryDeviceGroupInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindBufferMemoryDeviceGroupInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO} value to the {@link VkBindBufferMemoryDeviceGroupInfo#sType} field. */
+        public VkBindBufferMemoryDeviceGroupInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO); }
         /** Sets the specified value to the {@link VkBindBufferMemoryDeviceGroupInfo#pNext} field. */
         public VkBindBufferMemoryDeviceGroupInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindBufferMemoryDeviceGroupInfo.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkBindBufferMemoryDeviceGroupInfo#pDeviceIndices} field. */

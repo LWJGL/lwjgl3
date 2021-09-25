@@ -87,6 +87,8 @@ public class VkDevicePrivateDataCreateInfoEXT extends Struct implements NativeRe
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDevicePrivateDataCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTPrivateData#VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkDevicePrivateDataCreateInfoEXT sType$Default() { return sType(EXTPrivateData.VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDevicePrivateDataCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #privateDataSlotRequestCount} field. */
@@ -295,6 +297,8 @@ public class VkDevicePrivateDataCreateInfoEXT extends Struct implements NativeRe
 
         /** Sets the specified value to the {@link VkDevicePrivateDataCreateInfoEXT#sType} field. */
         public VkDevicePrivateDataCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDevicePrivateDataCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTPrivateData#VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT} value to the {@link VkDevicePrivateDataCreateInfoEXT#sType} field. */
+        public VkDevicePrivateDataCreateInfoEXT.Buffer sType$Default() { return sType(EXTPrivateData.VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkDevicePrivateDataCreateInfoEXT#pNext} field. */
         public VkDevicePrivateDataCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDevicePrivateDataCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDevicePrivateDataCreateInfoEXT#privateDataSlotRequestCount} field. */

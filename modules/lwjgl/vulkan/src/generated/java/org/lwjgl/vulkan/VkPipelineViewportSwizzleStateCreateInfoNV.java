@@ -115,6 +115,8 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineViewportSwizzleStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVViewportSwizzle#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkPipelineViewportSwizzleStateCreateInfoNV sType$Default() { return sType(NVViewportSwizzle.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineViewportSwizzleStateCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -380,6 +382,8 @@ public class VkPipelineViewportSwizzleStateCreateInfoNV extends Struct implement
 
         /** Sets the specified value to the {@link VkPipelineViewportSwizzleStateCreateInfoNV#sType} field. */
         public VkPipelineViewportSwizzleStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineViewportSwizzleStateCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVViewportSwizzle#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV} value to the {@link VkPipelineViewportSwizzleStateCreateInfoNV#sType} field. */
+        public VkPipelineViewportSwizzleStateCreateInfoNV.Buffer sType$Default() { return sType(NVViewportSwizzle.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkPipelineViewportSwizzleStateCreateInfoNV#pNext} field. */
         public VkPipelineViewportSwizzleStateCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkPipelineViewportSwizzleStateCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineViewportSwizzleStateCreateInfoNV#flags} field. */

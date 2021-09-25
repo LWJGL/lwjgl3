@@ -98,6 +98,8 @@ public class VkPhysicalDeviceMeshShaderFeaturesNV extends Struct implements Nati
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMeshShaderFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVMeshShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceMeshShaderFeaturesNV sType$Default() { return sType(NVMeshShader.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMeshShaderFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #taskShader} field. */
@@ -335,6 +337,8 @@ public class VkPhysicalDeviceMeshShaderFeaturesNV extends Struct implements Nati
 
         /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesNV#sType} field. */
         public VkPhysicalDeviceMeshShaderFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMeshShaderFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVMeshShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV} value to the {@link VkPhysicalDeviceMeshShaderFeaturesNV#sType} field. */
+        public VkPhysicalDeviceMeshShaderFeaturesNV.Buffer sType$Default() { return sType(NVMeshShader.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesNV#pNext} field. */
         public VkPhysicalDeviceMeshShaderFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMeshShaderFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesNV#taskShader} field. */

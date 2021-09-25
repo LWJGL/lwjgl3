@@ -94,6 +94,8 @@ public class VkAttachmentReferenceStencilLayout extends Struct implements Native
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAttachmentReferenceStencilLayout sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT} value to the {@link #sType} field. */
+    public VkAttachmentReferenceStencilLayout sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAttachmentReferenceStencilLayout pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #stencilLayout} field. */
@@ -302,6 +304,8 @@ public class VkAttachmentReferenceStencilLayout extends Struct implements Native
 
         /** Sets the specified value to the {@link VkAttachmentReferenceStencilLayout#sType} field. */
         public VkAttachmentReferenceStencilLayout.Buffer sType(@NativeType("VkStructureType") int value) { VkAttachmentReferenceStencilLayout.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT} value to the {@link VkAttachmentReferenceStencilLayout#sType} field. */
+        public VkAttachmentReferenceStencilLayout.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT); }
         /** Sets the specified value to the {@link VkAttachmentReferenceStencilLayout#pNext} field. */
         public VkAttachmentReferenceStencilLayout.Buffer pNext(@NativeType("void *") long value) { VkAttachmentReferenceStencilLayout.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkAttachmentReferenceStencilLayout#stencilLayout} field. */

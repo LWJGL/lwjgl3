@@ -116,6 +116,8 @@ public class VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT extends Struct im
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTTexelBufferAlignment#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT sType$Default() { return sType(EXTTexelBufferAlignment.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -351,6 +353,8 @@ public class VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT extends Struct im
 
         /** Sets the specified value to the {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT#sType} field. */
         public VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTTexelBufferAlignment#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT#sType} field. */
+        public VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.Buffer sType$Default() { return sType(EXTTexelBufferAlignment.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT#pNext} field. */
         public VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.npNext(address(), value); return this; }
 

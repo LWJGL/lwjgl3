@@ -179,6 +179,8 @@ public class VkBindSparseInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBindSparseInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_BIND_SPARSE_INFO STRUCTURE_TYPE_BIND_SPARSE_INFO} value to the {@link #sType} field. */
+    public VkBindSparseInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BIND_SPARSE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBindSparseInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@link #pWaitSemaphores} field. */
@@ -533,6 +535,8 @@ public class VkBindSparseInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkBindSparseInfo#sType} field. */
         public VkBindSparseInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindSparseInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_BIND_SPARSE_INFO STRUCTURE_TYPE_BIND_SPARSE_INFO} value to the {@link VkBindSparseInfo#sType} field. */
+        public VkBindSparseInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BIND_SPARSE_INFO); }
         /** Sets the specified value to the {@link VkBindSparseInfo#pNext} field. */
         public VkBindSparseInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindSparseInfo.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@link VkBindSparseInfo#pWaitSemaphores} field. */

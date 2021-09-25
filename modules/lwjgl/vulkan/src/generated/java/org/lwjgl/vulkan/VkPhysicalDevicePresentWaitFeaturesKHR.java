@@ -91,6 +91,8 @@ public class VkPhysicalDevicePresentWaitFeaturesKHR extends Struct implements Na
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDevicePresentWaitFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRPresentWait#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR} value to the {@code sType} field. */
+    public VkPhysicalDevicePresentWaitFeaturesKHR sType$Default() { return sType(KHRPresentWait.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDevicePresentWaitFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #presentWait} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDevicePresentWaitFeaturesKHR extends Struct implements Na
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDevicePresentWaitFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePresentWaitFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRPresentWait#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR} value to the {@code sType} field. */
+        public VkPhysicalDevicePresentWaitFeaturesKHR.Buffer sType$Default() { return sType(KHRPresentWait.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDevicePresentWaitFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePresentWaitFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDevicePresentWaitFeaturesKHR#presentWait} field. */

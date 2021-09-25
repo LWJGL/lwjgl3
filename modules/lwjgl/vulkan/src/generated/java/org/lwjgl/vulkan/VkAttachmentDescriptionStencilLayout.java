@@ -104,6 +104,8 @@ public class VkAttachmentDescriptionStencilLayout extends Struct implements Nati
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAttachmentDescriptionStencilLayout sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT} value to the {@link #sType} field. */
+    public VkAttachmentDescriptionStencilLayout sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAttachmentDescriptionStencilLayout pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #stencilInitialLayout} field. */
@@ -323,6 +325,8 @@ public class VkAttachmentDescriptionStencilLayout extends Struct implements Nati
 
         /** Sets the specified value to the {@link VkAttachmentDescriptionStencilLayout#sType} field. */
         public VkAttachmentDescriptionStencilLayout.Buffer sType(@NativeType("VkStructureType") int value) { VkAttachmentDescriptionStencilLayout.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT} value to the {@link VkAttachmentDescriptionStencilLayout#sType} field. */
+        public VkAttachmentDescriptionStencilLayout.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT); }
         /** Sets the specified value to the {@link VkAttachmentDescriptionStencilLayout#pNext} field. */
         public VkAttachmentDescriptionStencilLayout.Buffer pNext(@NativeType("void *") long value) { VkAttachmentDescriptionStencilLayout.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkAttachmentDescriptionStencilLayout#stencilInitialLayout} field. */

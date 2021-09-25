@@ -105,6 +105,8 @@ public class VkWriteDescriptorSetAccelerationStructureKHR extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkWriteDescriptorSetAccelerationStructureKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR} value to the {@link #sType} field. */
+    public VkWriteDescriptorSetAccelerationStructureKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkWriteDescriptorSetAccelerationStructureKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #accelerationStructureCount} field. */
@@ -325,6 +327,8 @@ public class VkWriteDescriptorSetAccelerationStructureKHR extends Struct impleme
 
         /** Sets the specified value to the {@link VkWriteDescriptorSetAccelerationStructureKHR#sType} field. */
         public VkWriteDescriptorSetAccelerationStructureKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkWriteDescriptorSetAccelerationStructureKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR} value to the {@link VkWriteDescriptorSetAccelerationStructureKHR#sType} field. */
+        public VkWriteDescriptorSetAccelerationStructureKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR); }
         /** Sets the specified value to the {@link VkWriteDescriptorSetAccelerationStructureKHR#pNext} field. */
         public VkWriteDescriptorSetAccelerationStructureKHR.Buffer pNext(@NativeType("void const *") long value) { VkWriteDescriptorSetAccelerationStructureKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkWriteDescriptorSetAccelerationStructureKHR#accelerationStructureCount} field. */

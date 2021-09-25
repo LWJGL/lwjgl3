@@ -125,6 +125,8 @@ public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceSampleLocationsPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTSampleLocations#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceSampleLocationsPropertiesEXT sType$Default() { return sType(EXTSampleLocations.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceSampleLocationsPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -370,6 +372,8 @@ public class VkPhysicalDeviceSampleLocationsPropertiesEXT extends Struct impleme
 
         /** Sets the specified value to the {@link VkPhysicalDeviceSampleLocationsPropertiesEXT#sType} field. */
         public VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSampleLocationsPropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTSampleLocations#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceSampleLocationsPropertiesEXT#sType} field. */
+        public VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer sType$Default() { return sType(EXTSampleLocations.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceSampleLocationsPropertiesEXT#pNext} field. */
         public VkPhysicalDeviceSampleLocationsPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSampleLocationsPropertiesEXT.npNext(address(), value); return this; }
 

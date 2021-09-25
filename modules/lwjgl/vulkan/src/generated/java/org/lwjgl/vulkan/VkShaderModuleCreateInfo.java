@@ -125,6 +125,8 @@ public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkShaderModuleCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkShaderModuleCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkShaderModuleCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -390,6 +392,8 @@ public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkShaderModuleCreateInfo#sType} field. */
         public VkShaderModuleCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkShaderModuleCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO} value to the {@link VkShaderModuleCreateInfo#sType} field. */
+        public VkShaderModuleCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkShaderModuleCreateInfo#pNext} field. */
         public VkShaderModuleCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkShaderModuleCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkShaderModuleCreateInfo#flags} field. */

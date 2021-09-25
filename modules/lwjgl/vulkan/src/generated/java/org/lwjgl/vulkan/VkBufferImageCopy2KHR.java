@@ -138,6 +138,8 @@ public class VkBufferImageCopy2KHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBufferImageCopy2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRCopyCommands2#VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR} value to the {@link #sType} field. */
+    public VkBufferImageCopy2KHR sType$Default() { return sType(KHRCopyCommands2.VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferImageCopy2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #bufferOffset} field. */
@@ -404,6 +406,8 @@ public class VkBufferImageCopy2KHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkBufferImageCopy2KHR#sType} field. */
         public VkBufferImageCopy2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferImageCopy2KHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRCopyCommands2#VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR} value to the {@link VkBufferImageCopy2KHR#sType} field. */
+        public VkBufferImageCopy2KHR.Buffer sType$Default() { return sType(KHRCopyCommands2.VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR); }
         /** Sets the specified value to the {@link VkBufferImageCopy2KHR#pNext} field. */
         public VkBufferImageCopy2KHR.Buffer pNext(@NativeType("void const *") long value) { VkBufferImageCopy2KHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkBufferImageCopy2KHR#bufferOffset} field. */

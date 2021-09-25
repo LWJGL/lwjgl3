@@ -95,6 +95,8 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineRasterizationDepthClipStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDepthClipEnable#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkPipelineRasterizationDepthClipStateCreateInfoEXT sType$Default() { return sType(EXTDepthClipEnable.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineRasterizationDepthClipStateCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -332,6 +334,8 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
 
         /** Sets the specified value to the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#sType} field. */
         public VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineRasterizationDepthClipStateCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDepthClipEnable#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT} value to the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#sType} field. */
+        public VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer sType$Default() { return sType(EXTDepthClipEnable.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#pNext} field. */
         public VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRasterizationDepthClipStateCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#flags} field. */

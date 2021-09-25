@@ -91,6 +91,8 @@ public class VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR extends
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRShaderSubgroupUniformControlFlow#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR} value to the {@code sType} field. */
+    public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR sType$Default() { return sType(KHRShaderSubgroupUniformControlFlow.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderSubgroupUniformControlFlow} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR extends
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRShaderSubgroupUniformControlFlow#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR} value to the {@code sType} field. */
+        public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.Buffer sType$Default() { return sType(KHRShaderSubgroupUniformControlFlow.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR#shaderSubgroupUniformControlFlow} field. */

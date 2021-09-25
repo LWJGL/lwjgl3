@@ -91,6 +91,8 @@ public class VkPhysicalDeviceIndexTypeUint8FeaturesEXT extends Struct implements
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceIndexTypeUint8FeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTIndexTypeUint8#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceIndexTypeUint8FeaturesEXT sType$Default() { return sType(EXTIndexTypeUint8.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceIndexTypeUint8FeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #indexTypeUint8} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceIndexTypeUint8FeaturesEXT extends Struct implements
 
         /** Sets the specified value to the {@link VkPhysicalDeviceIndexTypeUint8FeaturesEXT#sType} field. */
         public VkPhysicalDeviceIndexTypeUint8FeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceIndexTypeUint8FeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTIndexTypeUint8#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT} value to the {@link VkPhysicalDeviceIndexTypeUint8FeaturesEXT#sType} field. */
+        public VkPhysicalDeviceIndexTypeUint8FeaturesEXT.Buffer sType$Default() { return sType(EXTIndexTypeUint8.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceIndexTypeUint8FeaturesEXT#pNext} field. */
         public VkPhysicalDeviceIndexTypeUint8FeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceIndexTypeUint8FeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceIndexTypeUint8FeaturesEXT#indexTypeUint8} field. */

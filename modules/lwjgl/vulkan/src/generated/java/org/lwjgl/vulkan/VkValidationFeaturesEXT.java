@@ -120,6 +120,8 @@ public class VkValidationFeaturesEXT extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkValidationFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTValidationFeatures#VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT STRUCTURE_TYPE_VALIDATION_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkValidationFeaturesEXT sType$Default() { return sType(EXTValidationFeatures.VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkValidationFeaturesEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pEnabledValidationFeatures} field. */
@@ -399,6 +401,8 @@ public class VkValidationFeaturesEXT extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkValidationFeaturesEXT#sType} field. */
         public VkValidationFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkValidationFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTValidationFeatures#VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT STRUCTURE_TYPE_VALIDATION_FEATURES_EXT} value to the {@link VkValidationFeaturesEXT#sType} field. */
+        public VkValidationFeaturesEXT.Buffer sType$Default() { return sType(EXTValidationFeatures.VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkValidationFeaturesEXT#pNext} field. */
         public VkValidationFeaturesEXT.Buffer pNext(@NativeType("void const *") long value) { VkValidationFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkValidationFeaturesEXT#pEnabledValidationFeatures} field. */

@@ -105,6 +105,8 @@ public class VkPhysicalDevice8BitStorageFeatures extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevice8BitStorageFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDevice8BitStorageFeatures sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevice8BitStorageFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #storageBuffer8BitAccess} field. */
@@ -335,6 +337,8 @@ public class VkPhysicalDevice8BitStorageFeatures extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkPhysicalDevice8BitStorageFeatures#sType} field. */
         public VkPhysicalDevice8BitStorageFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevice8BitStorageFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES} value to the {@link VkPhysicalDevice8BitStorageFeatures#sType} field. */
+        public VkPhysicalDevice8BitStorageFeatures.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDevice8BitStorageFeatures#pNext} field. */
         public VkPhysicalDevice8BitStorageFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevice8BitStorageFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDevice8BitStorageFeatures#storageBuffer8BitAccess} field. */

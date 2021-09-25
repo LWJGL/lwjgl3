@@ -91,6 +91,8 @@ public class VkPhysicalDeviceHostQueryResetFeatures extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceHostQueryResetFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceHostQueryResetFeatures sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceHostQueryResetFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #hostQueryReset} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceHostQueryResetFeatures extends Struct implements Na
 
         /** Sets the specified value to the {@link VkPhysicalDeviceHostQueryResetFeatures#sType} field. */
         public VkPhysicalDeviceHostQueryResetFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceHostQueryResetFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES} value to the {@link VkPhysicalDeviceHostQueryResetFeatures#sType} field. */
+        public VkPhysicalDeviceHostQueryResetFeatures.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceHostQueryResetFeatures#pNext} field. */
         public VkPhysicalDeviceHostQueryResetFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceHostQueryResetFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceHostQueryResetFeatures#hostQueryReset} field. */

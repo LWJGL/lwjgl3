@@ -101,6 +101,8 @@ public class VkVideoGetMemoryPropertiesKHR extends Struct implements NativeResou
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoGetMemoryPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR} value to the {@link #sType} field. */
+    public VkVideoGetMemoryPropertiesKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoGetMemoryPropertiesKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #memoryBindIndex} field. */
@@ -341,6 +343,8 @@ public class VkVideoGetMemoryPropertiesKHR extends Struct implements NativeResou
 
         /** Sets the specified value to the {@link VkVideoGetMemoryPropertiesKHR#sType} field. */
         public VkVideoGetMemoryPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoGetMemoryPropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR} value to the {@link VkVideoGetMemoryPropertiesKHR#sType} field. */
+        public VkVideoGetMemoryPropertiesKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkVideoGetMemoryPropertiesKHR#pNext} field. */
         public VkVideoGetMemoryPropertiesKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoGetMemoryPropertiesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoGetMemoryPropertiesKHR#memoryBindIndex} field. */

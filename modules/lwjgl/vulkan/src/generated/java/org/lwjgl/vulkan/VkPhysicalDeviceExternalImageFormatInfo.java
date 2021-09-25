@@ -94,6 +94,8 @@ public class VkPhysicalDeviceExternalImageFormatInfo extends Struct implements N
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceExternalImageFormatInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO} value to the {@link #sType} field. */
+    public VkPhysicalDeviceExternalImageFormatInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceExternalImageFormatInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #handleType} field. */
@@ -320,6 +322,8 @@ public class VkPhysicalDeviceExternalImageFormatInfo extends Struct implements N
 
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalImageFormatInfo#sType} field. */
         public VkPhysicalDeviceExternalImageFormatInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExternalImageFormatInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO} value to the {@link VkPhysicalDeviceExternalImageFormatInfo#sType} field. */
+        public VkPhysicalDeviceExternalImageFormatInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO); }
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalImageFormatInfo#pNext} field. */
         public VkPhysicalDeviceExternalImageFormatInfo.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceExternalImageFormatInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalImageFormatInfo#handleType} field. */

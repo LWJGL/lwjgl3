@@ -124,6 +124,8 @@ public class VkPerformanceCounterDescriptionKHR extends Struct implements Native
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPerformanceCounterDescriptionKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR} value to the {@link #sType} field. */
+    public VkPerformanceCounterDescriptionKHR sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPerformanceCounterDescriptionKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -356,6 +358,8 @@ public class VkPerformanceCounterDescriptionKHR extends Struct implements Native
 
         /** Sets the specified value to the {@link VkPerformanceCounterDescriptionKHR#sType} field. */
         public VkPerformanceCounterDescriptionKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPerformanceCounterDescriptionKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR} value to the {@link VkPerformanceCounterDescriptionKHR#sType} field. */
+        public VkPerformanceCounterDescriptionKHR.Buffer sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR); }
         /** Sets the specified value to the {@link VkPerformanceCounterDescriptionKHR#pNext} field. */
         public VkPerformanceCounterDescriptionKHR.Buffer pNext(@NativeType("void *") long value) { VkPerformanceCounterDescriptionKHR.npNext(address(), value); return this; }
 

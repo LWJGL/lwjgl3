@@ -124,6 +124,8 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImageDrmFormatModifierExplicitCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkImageDrmFormatModifierExplicitCreateInfoEXT sType$Default() { return sType(EXTImageDrmFormatModifier.VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageDrmFormatModifierExplicitCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #drmFormatModifier} field. */
@@ -392,6 +394,8 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct implem
 
         /** Sets the specified value to the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#sType} field. */
         public VkImageDrmFormatModifierExplicitCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageDrmFormatModifierExplicitCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT} value to the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#sType} field. */
+        public VkImageDrmFormatModifierExplicitCreateInfoEXT.Buffer sType$Default() { return sType(EXTImageDrmFormatModifier.VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#pNext} field. */
         public VkImageDrmFormatModifierExplicitCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkImageDrmFormatModifierExplicitCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#drmFormatModifier} field. */

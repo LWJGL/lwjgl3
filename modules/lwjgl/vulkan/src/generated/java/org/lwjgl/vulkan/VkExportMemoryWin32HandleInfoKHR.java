@@ -149,6 +149,8 @@ public class VkExportMemoryWin32HandleInfoKHR extends Struct implements NativeRe
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkExportMemoryWin32HandleInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR} value to the {@link #sType} field. */
+    public VkExportMemoryWin32HandleInfoKHR sType$Default() { return sType(KHRExternalMemoryWin32.VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkExportMemoryWin32HandleInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link SECURITY_ATTRIBUTES} to the {@link #pAttributes} field. */
@@ -431,6 +433,8 @@ public class VkExportMemoryWin32HandleInfoKHR extends Struct implements NativeRe
 
         /** Sets the specified value to the {@link VkExportMemoryWin32HandleInfoKHR#sType} field. */
         public VkExportMemoryWin32HandleInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkExportMemoryWin32HandleInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR} value to the {@link VkExportMemoryWin32HandleInfoKHR#sType} field. */
+        public VkExportMemoryWin32HandleInfoKHR.Buffer sType$Default() { return sType(KHRExternalMemoryWin32.VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR); }
         /** Sets the specified value to the {@link VkExportMemoryWin32HandleInfoKHR#pNext} field. */
         public VkExportMemoryWin32HandleInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkExportMemoryWin32HandleInfoKHR.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link SECURITY_ATTRIBUTES} to the {@link VkExportMemoryWin32HandleInfoKHR#pAttributes} field. */

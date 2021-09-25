@@ -106,6 +106,8 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceSurfaceInfo2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRGetSurfaceCapabilities2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceSurfaceInfo2KHR sType$Default() { return sType(KHRGetSurfaceCapabilities2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceSurfaceInfo2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #surface} field. */
@@ -332,6 +334,8 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
 
         /** Sets the specified value to the {@link VkPhysicalDeviceSurfaceInfo2KHR#sType} field. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSurfaceInfo2KHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRGetSurfaceCapabilities2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR} value to the {@link VkPhysicalDeviceSurfaceInfo2KHR#sType} field. */
+        public VkPhysicalDeviceSurfaceInfo2KHR.Buffer sType$Default() { return sType(KHRGetSurfaceCapabilities2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceSurfaceInfo2KHR#pNext} field. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceSurfaceInfo2KHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceSurfaceInfo2KHR#surface} field. */

@@ -115,6 +115,8 @@ public class VkFenceGetWin32HandleInfoKHR extends Struct implements NativeResour
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkFenceGetWin32HandleInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRExternalFenceWin32#VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR} value to the {@link #sType} field. */
+    public VkFenceGetWin32HandleInfoKHR sType$Default() { return sType(KHRExternalFenceWin32.VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkFenceGetWin32HandleInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #fence} field. */
@@ -352,6 +354,8 @@ public class VkFenceGetWin32HandleInfoKHR extends Struct implements NativeResour
 
         /** Sets the specified value to the {@link VkFenceGetWin32HandleInfoKHR#sType} field. */
         public VkFenceGetWin32HandleInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkFenceGetWin32HandleInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRExternalFenceWin32#VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR} value to the {@link VkFenceGetWin32HandleInfoKHR#sType} field. */
+        public VkFenceGetWin32HandleInfoKHR.Buffer sType$Default() { return sType(KHRExternalFenceWin32.VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR); }
         /** Sets the specified value to the {@link VkFenceGetWin32HandleInfoKHR#pNext} field. */
         public VkFenceGetWin32HandleInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkFenceGetWin32HandleInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkFenceGetWin32HandleInfoKHR#fence} field. */

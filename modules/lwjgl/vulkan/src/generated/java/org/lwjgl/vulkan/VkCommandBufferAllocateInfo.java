@@ -108,6 +108,8 @@ public class VkCommandBufferAllocateInfo extends Struct implements NativeResourc
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCommandBufferAllocateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO} value to the {@link #sType} field. */
+    public VkCommandBufferAllocateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCommandBufferAllocateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #commandPool} field. */
@@ -356,6 +358,8 @@ public class VkCommandBufferAllocateInfo extends Struct implements NativeResourc
 
         /** Sets the specified value to the {@link VkCommandBufferAllocateInfo#sType} field. */
         public VkCommandBufferAllocateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandBufferAllocateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO} value to the {@link VkCommandBufferAllocateInfo#sType} field. */
+        public VkCommandBufferAllocateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO); }
         /** Sets the specified value to the {@link VkCommandBufferAllocateInfo#pNext} field. */
         public VkCommandBufferAllocateInfo.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferAllocateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkCommandBufferAllocateInfo#commandPool} field. */

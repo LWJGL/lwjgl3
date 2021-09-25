@@ -91,6 +91,8 @@ public class VkPhysicalDeviceExternalMemoryRDMAFeaturesNV extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceExternalMemoryRDMAFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVExternalMemoryRdma#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceExternalMemoryRDMAFeaturesNV sType$Default() { return sType(NVExternalMemoryRdma.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceExternalMemoryRDMAFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #externalMemoryRDMA} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceExternalMemoryRDMAFeaturesNV extends Struct impleme
 
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalMemoryRDMAFeaturesNV#sType} field. */
         public VkPhysicalDeviceExternalMemoryRDMAFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExternalMemoryRDMAFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVExternalMemoryRdma#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV} value to the {@link VkPhysicalDeviceExternalMemoryRDMAFeaturesNV#sType} field. */
+        public VkPhysicalDeviceExternalMemoryRDMAFeaturesNV.Buffer sType$Default() { return sType(NVExternalMemoryRdma.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalMemoryRDMAFeaturesNV#pNext} field. */
         public VkPhysicalDeviceExternalMemoryRDMAFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceExternalMemoryRDMAFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalMemoryRDMAFeaturesNV#externalMemoryRDMA} field. */

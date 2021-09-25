@@ -99,6 +99,8 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceVideoFormatInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceVideoFormatInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceVideoFormatInfoKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -306,6 +308,8 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
 
         /** Sets the specified value to the {@link VkPhysicalDeviceVideoFormatInfoKHR#sType} field. */
         public VkPhysicalDeviceVideoFormatInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVideoFormatInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR} value to the {@link VkPhysicalDeviceVideoFormatInfoKHR#sType} field. */
+        public VkPhysicalDeviceVideoFormatInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceVideoFormatInfoKHR#pNext} field. */
         public VkPhysicalDeviceVideoFormatInfoKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVideoFormatInfoKHR.npNext(address(), value); return this; }
 

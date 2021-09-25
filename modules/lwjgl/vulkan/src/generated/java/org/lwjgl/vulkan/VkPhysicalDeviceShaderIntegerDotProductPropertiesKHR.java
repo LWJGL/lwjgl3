@@ -301,6 +301,8 @@ public class VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR extends Struct
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRShaderIntegerDotProduct#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR sType$Default() { return sType(KHRShaderIntegerDotProduct.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #integerDotProduct8BitUnsignedAccelerated} field. */
@@ -828,6 +830,8 @@ public class VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR extends Struct
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR#sType} field. */
         public VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRShaderIntegerDotProduct#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR} value to the {@link VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR#sType} field. */
+        public VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.Buffer sType$Default() { return sType(KHRShaderIntegerDotProduct.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR#pNext} field. */
         public VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR#integerDotProduct8BitUnsignedAccelerated} field. */

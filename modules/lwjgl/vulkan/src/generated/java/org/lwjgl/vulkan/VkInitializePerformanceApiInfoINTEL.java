@@ -92,6 +92,8 @@ public class VkInitializePerformanceApiInfoINTEL extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkInitializePerformanceApiInfoINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL} value to the {@link #sType} field. */
+    public VkInitializePerformanceApiInfoINTEL sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkInitializePerformanceApiInfoINTEL pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #pUserData} field. */
@@ -318,6 +320,8 @@ public class VkInitializePerformanceApiInfoINTEL extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkInitializePerformanceApiInfoINTEL#sType} field. */
         public VkInitializePerformanceApiInfoINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkInitializePerformanceApiInfoINTEL.nsType(address(), value); return this; }
+        /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL} value to the {@link VkInitializePerformanceApiInfoINTEL#sType} field. */
+        public VkInitializePerformanceApiInfoINTEL.Buffer sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL); }
         /** Sets the specified value to the {@link VkInitializePerformanceApiInfoINTEL#pNext} field. */
         public VkInitializePerformanceApiInfoINTEL.Buffer pNext(@NativeType("void const *") long value) { VkInitializePerformanceApiInfoINTEL.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkInitializePerformanceApiInfoINTEL#pUserData} field. */

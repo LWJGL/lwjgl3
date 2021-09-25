@@ -97,6 +97,8 @@ public class VkValidationFlagsEXT extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkValidationFlagsEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTValidationFlags#VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT STRUCTURE_TYPE_VALIDATION_FLAGS_EXT} value to the {@link #sType} field. */
+    public VkValidationFlagsEXT sType$Default() { return sType(EXTValidationFlags.VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkValidationFlagsEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pDisabledValidationChecks} field. */
@@ -351,6 +353,8 @@ public class VkValidationFlagsEXT extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkValidationFlagsEXT#sType} field. */
         public VkValidationFlagsEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkValidationFlagsEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTValidationFlags#VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT STRUCTURE_TYPE_VALIDATION_FLAGS_EXT} value to the {@link VkValidationFlagsEXT#sType} field. */
+        public VkValidationFlagsEXT.Buffer sType$Default() { return sType(EXTValidationFlags.VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT); }
         /** Sets the specified value to the {@link VkValidationFlagsEXT#pNext} field. */
         public VkValidationFlagsEXT.Buffer pNext(@NativeType("void const *") long value) { VkValidationFlagsEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkValidationFlagsEXT#pDisabledValidationChecks} field. */

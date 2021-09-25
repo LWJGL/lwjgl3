@@ -91,6 +91,8 @@ public class VkPhysicalDeviceCooperativeMatrixPropertiesNV extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceCooperativeMatrixPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceCooperativeMatrixPropertiesNV sType$Default() { return sType(NVCooperativeMatrix.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceCooperativeMatrixPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -311,6 +313,8 @@ public class VkPhysicalDeviceCooperativeMatrixPropertiesNV extends Struct implem
 
         /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV#sType} field. */
         public VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCooperativeMatrixPropertiesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV} value to the {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV#sType} field. */
+        public VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer sType$Default() { return sType(NVCooperativeMatrix.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrixPropertiesNV#pNext} field. */
         public VkPhysicalDeviceCooperativeMatrixPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCooperativeMatrixPropertiesNV.npNext(address(), value); return this; }
 

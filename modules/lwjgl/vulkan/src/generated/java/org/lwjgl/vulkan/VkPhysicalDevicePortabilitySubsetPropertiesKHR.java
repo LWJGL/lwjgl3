@@ -91,6 +91,8 @@ public class VkPhysicalDevicePortabilitySubsetPropertiesKHR extends Struct imple
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePortabilitySubsetPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRPortabilitySubset#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDevicePortabilitySubsetPropertiesKHR sType$Default() { return sType(KHRPortabilitySubset.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePortabilitySubsetPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #minVertexInputBindingStrideAlignment} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDevicePortabilitySubsetPropertiesKHR extends Struct imple
 
         /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetPropertiesKHR#sType} field. */
         public VkPhysicalDevicePortabilitySubsetPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePortabilitySubsetPropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRPortabilitySubset#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR} value to the {@link VkPhysicalDevicePortabilitySubsetPropertiesKHR#sType} field. */
+        public VkPhysicalDevicePortabilitySubsetPropertiesKHR.Buffer sType$Default() { return sType(KHRPortabilitySubset.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetPropertiesKHR#pNext} field. */
         public VkPhysicalDevicePortabilitySubsetPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePortabilitySubsetPropertiesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetPropertiesKHR#minVertexInputBindingStrideAlignment} field. */

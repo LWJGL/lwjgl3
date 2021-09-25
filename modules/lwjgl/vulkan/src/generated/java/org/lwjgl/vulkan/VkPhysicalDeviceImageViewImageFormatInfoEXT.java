@@ -88,6 +88,8 @@ public class VkPhysicalDeviceImageViewImageFormatInfoEXT extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceImageViewImageFormatInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTFilterCubic#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceImageViewImageFormatInfoEXT sType$Default() { return sType(EXTFilterCubic.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceImageViewImageFormatInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #imageViewType} field. */
@@ -314,6 +316,8 @@ public class VkPhysicalDeviceImageViewImageFormatInfoEXT extends Struct implemen
 
         /** Sets the specified value to the {@link VkPhysicalDeviceImageViewImageFormatInfoEXT#sType} field. */
         public VkPhysicalDeviceImageViewImageFormatInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceImageViewImageFormatInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTFilterCubic#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT} value to the {@link VkPhysicalDeviceImageViewImageFormatInfoEXT#sType} field. */
+        public VkPhysicalDeviceImageViewImageFormatInfoEXT.Buffer sType$Default() { return sType(EXTFilterCubic.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceImageViewImageFormatInfoEXT#pNext} field. */
         public VkPhysicalDeviceImageViewImageFormatInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceImageViewImageFormatInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceImageViewImageFormatInfoEXT#imageViewType} field. */

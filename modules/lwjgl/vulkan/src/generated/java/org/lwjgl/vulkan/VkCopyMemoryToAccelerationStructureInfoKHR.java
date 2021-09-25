@@ -116,6 +116,8 @@ public class VkCopyMemoryToAccelerationStructureInfoKHR extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCopyMemoryToAccelerationStructureInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR} value to the {@link #sType} field. */
+    public VkCopyMemoryToAccelerationStructureInfoKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCopyMemoryToAccelerationStructureInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #src} field. */
@@ -347,6 +349,8 @@ public class VkCopyMemoryToAccelerationStructureInfoKHR extends Struct implement
 
         /** Sets the specified value to the {@link VkCopyMemoryToAccelerationStructureInfoKHR#sType} field. */
         public VkCopyMemoryToAccelerationStructureInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkCopyMemoryToAccelerationStructureInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR} value to the {@link VkCopyMemoryToAccelerationStructureInfoKHR#sType} field. */
+        public VkCopyMemoryToAccelerationStructureInfoKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR); }
         /** Sets the specified value to the {@link VkCopyMemoryToAccelerationStructureInfoKHR#pNext} field. */
         public VkCopyMemoryToAccelerationStructureInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkCopyMemoryToAccelerationStructureInfoKHR.npNext(address(), value); return this; }
         /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkCopyMemoryToAccelerationStructureInfoKHR#src} field. */

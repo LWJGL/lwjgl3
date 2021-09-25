@@ -42,6 +42,8 @@ public class VkPhysicalDeviceTimelineSemaphorePropertiesKHR extends VkPhysicalDe
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPhysicalDeviceTimelineSemaphorePropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES} value to the {@code sType} field. */
+    public VkPhysicalDeviceTimelineSemaphorePropertiesKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPhysicalDeviceTimelineSemaphorePropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -223,6 +225,8 @@ public class VkPhysicalDeviceTimelineSemaphorePropertiesKHR extends VkPhysicalDe
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPhysicalDeviceTimelineSemaphorePropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceTimelineSemaphorePropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES} value to the {@code sType} field. */
+        public VkPhysicalDeviceTimelineSemaphorePropertiesKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPhysicalDeviceTimelineSemaphorePropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceTimelineSemaphorePropertiesKHR.npNext(address(), value); return this; }

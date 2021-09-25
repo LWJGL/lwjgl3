@@ -100,6 +100,8 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShadingRateImageFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVShadingRateImage#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShadingRateImageFeaturesNV sType$Default() { return sType(NVShadingRateImage.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShadingRateImageFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shadingRateImage} field. */
@@ -337,6 +339,8 @@ public class VkPhysicalDeviceShadingRateImageFeaturesNV extends Struct implement
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShadingRateImageFeaturesNV#sType} field. */
         public VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShadingRateImageFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVShadingRateImage#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV} value to the {@link VkPhysicalDeviceShadingRateImageFeaturesNV#sType} field. */
+        public VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer sType$Default() { return sType(NVShadingRateImage.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShadingRateImageFeaturesNV#pNext} field. */
         public VkPhysicalDeviceShadingRateImageFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShadingRateImageFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShadingRateImageFeaturesNV#shadingRateImage} field. */

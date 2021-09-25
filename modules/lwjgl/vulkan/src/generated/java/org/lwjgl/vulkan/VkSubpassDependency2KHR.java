@@ -49,6 +49,8 @@ public class VkSubpassDependency2KHR extends VkSubpassDependency2 {
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkSubpassDependency2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2 STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2} value to the {@code sType} field. */
+    public VkSubpassDependency2KHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkSubpassDependency2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -288,6 +290,8 @@ public class VkSubpassDependency2KHR extends VkSubpassDependency2 {
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkSubpassDependency2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassDependency2KHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2 STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2} value to the {@code sType} field. */
+        public VkSubpassDependency2KHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkSubpassDependency2KHR.Buffer pNext(@NativeType("void const *") long value) { VkSubpassDependency2KHR.npNext(address(), value); return this; }

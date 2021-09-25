@@ -112,6 +112,8 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceFragmentDensityMap2PropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTFragmentDensityMap2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceFragmentDensityMap2PropertiesEXT sType$Default() { return sType(EXTFragmentDensityMap2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceFragmentDensityMap2PropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -329,6 +331,8 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
 
         /** Sets the specified value to the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#sType} field. */
         public VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTFragmentDensityMap2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#sType} field. */
+        public VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.Buffer sType$Default() { return sType(EXTFragmentDensityMap2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#pNext} field. */
         public VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.npNext(address(), value); return this; }
 

@@ -124,6 +124,8 @@ public class VkImageResolve2KHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImageResolve2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRCopyCommands2#VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR} value to the {@link #sType} field. */
+    public VkImageResolve2KHR sType$Default() { return sType(KHRCopyCommands2.VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageResolve2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Copies the specified {@link VkImageSubresourceLayers} to the {@link #srcSubresource} field. */
@@ -381,6 +383,8 @@ public class VkImageResolve2KHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkImageResolve2KHR#sType} field. */
         public VkImageResolve2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImageResolve2KHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRCopyCommands2#VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR} value to the {@link VkImageResolve2KHR#sType} field. */
+        public VkImageResolve2KHR.Buffer sType$Default() { return sType(KHRCopyCommands2.VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR); }
         /** Sets the specified value to the {@link VkImageResolve2KHR#pNext} field. */
         public VkImageResolve2KHR.Buffer pNext(@NativeType("void const *") long value) { VkImageResolve2KHR.npNext(address(), value); return this; }
         /** Copies the specified {@link VkImageSubresourceLayers} to the {@link VkImageResolve2KHR#srcSubresource} field. */

@@ -117,6 +117,8 @@ public class VkPipelineColorWriteCreateInfoEXT extends Struct implements NativeR
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineColorWriteCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTColorWriteEnable#VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkPipelineColorWriteCreateInfoEXT sType$Default() { return sType(EXTColorWriteEnable.VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineColorWriteCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pColorWriteEnables} field. */
@@ -356,6 +358,8 @@ public class VkPipelineColorWriteCreateInfoEXT extends Struct implements NativeR
 
         /** Sets the specified value to the {@link VkPipelineColorWriteCreateInfoEXT#sType} field. */
         public VkPipelineColorWriteCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineColorWriteCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTColorWriteEnable#VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT} value to the {@link VkPipelineColorWriteCreateInfoEXT#sType} field. */
+        public VkPipelineColorWriteCreateInfoEXT.Buffer sType$Default() { return sType(EXTColorWriteEnable.VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkPipelineColorWriteCreateInfoEXT#pNext} field. */
         public VkPipelineColorWriteCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineColorWriteCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkPipelineColorWriteCreateInfoEXT#pColorWriteEnables} field. */

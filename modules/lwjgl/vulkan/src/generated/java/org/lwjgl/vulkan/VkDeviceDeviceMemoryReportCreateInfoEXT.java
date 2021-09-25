@@ -120,6 +120,8 @@ public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct implements N
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceDeviceMemoryReportCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkDeviceDeviceMemoryReportCreateInfoEXT sType$Default() { return sType(EXTDeviceMemoryReport.VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceDeviceMemoryReportCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -372,6 +374,8 @@ public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct implements N
 
         /** Sets the specified value to the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#sType} field. */
         public VkDeviceDeviceMemoryReportCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceDeviceMemoryReportCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT} value to the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#sType} field. */
+        public VkDeviceDeviceMemoryReportCreateInfoEXT.Buffer sType$Default() { return sType(EXTDeviceMemoryReport.VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#pNext} field. */
         public VkDeviceDeviceMemoryReportCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDeviceDeviceMemoryReportCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#flags} field. */

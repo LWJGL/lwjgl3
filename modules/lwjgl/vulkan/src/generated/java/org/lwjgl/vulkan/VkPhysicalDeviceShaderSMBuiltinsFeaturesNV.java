@@ -91,6 +91,8 @@ public class VkPhysicalDeviceShaderSMBuiltinsFeaturesNV extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderSMBuiltinsFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVShaderSmBuiltins#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderSMBuiltinsFeaturesNV sType$Default() { return sType(NVShaderSmBuiltins.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderSMBuiltinsFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderSMBuiltins} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceShaderSMBuiltinsFeaturesNV extends Struct implement
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderSMBuiltinsFeaturesNV#sType} field. */
         public VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVShaderSmBuiltins#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV} value to the {@link VkPhysicalDeviceShaderSMBuiltinsFeaturesNV#sType} field. */
+        public VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.Buffer sType$Default() { return sType(NVShaderSmBuiltins.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderSMBuiltinsFeaturesNV#pNext} field. */
         public VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderSMBuiltinsFeaturesNV#shaderSMBuiltins} field. */

@@ -98,6 +98,8 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeRes
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryPriorityAllocateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTMemoryPriority#VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkMemoryPriorityAllocateInfoEXT sType$Default() { return sType(EXTMemoryPriority.VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryPriorityAllocateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #priority} field. */
@@ -323,6 +325,8 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeRes
 
         /** Sets the specified value to the {@link VkMemoryPriorityAllocateInfoEXT#sType} field. */
         public VkMemoryPriorityAllocateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryPriorityAllocateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTMemoryPriority#VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT} value to the {@link VkMemoryPriorityAllocateInfoEXT#sType} field. */
+        public VkMemoryPriorityAllocateInfoEXT.Buffer sType$Default() { return sType(EXTMemoryPriority.VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkMemoryPriorityAllocateInfoEXT#pNext} field. */
         public VkMemoryPriorityAllocateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkMemoryPriorityAllocateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkMemoryPriorityAllocateInfoEXT#priority} field. */

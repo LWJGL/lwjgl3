@@ -87,6 +87,8 @@ public class VkPhysicalDeviceSubpassShadingFeaturesHUAWEI extends Struct impleme
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI} value to the {@code sType} field. */
+    public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI sType$Default() { return sType(HUAWEISubpassShading.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code subpassShading} field. */
@@ -295,6 +297,8 @@ public class VkPhysicalDeviceSubpassShadingFeaturesHUAWEI extends Struct impleme
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.nsType(address(), value); return this; }
+        /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI} value to the {@code sType} field. */
+        public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.Buffer sType$Default() { return sType(HUAWEISubpassShading.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code subpassShading} field. */

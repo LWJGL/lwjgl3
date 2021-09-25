@@ -154,6 +154,8 @@ public class VkPhysicalDeviceTransformFeedbackPropertiesEXT extends Struct imple
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceTransformFeedbackPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTTransformFeedback#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceTransformFeedbackPropertiesEXT sType$Default() { return sType(EXTTransformFeedback.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceTransformFeedbackPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -419,6 +421,8 @@ public class VkPhysicalDeviceTransformFeedbackPropertiesEXT extends Struct imple
 
         /** Sets the specified value to the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#sType} field. */
         public VkPhysicalDeviceTransformFeedbackPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceTransformFeedbackPropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTTransformFeedback#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#sType} field. */
+        public VkPhysicalDeviceTransformFeedbackPropertiesEXT.Buffer sType$Default() { return sType(EXTTransformFeedback.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT#pNext} field. */
         public VkPhysicalDeviceTransformFeedbackPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceTransformFeedbackPropertiesEXT.npNext(address(), value); return this; }
 

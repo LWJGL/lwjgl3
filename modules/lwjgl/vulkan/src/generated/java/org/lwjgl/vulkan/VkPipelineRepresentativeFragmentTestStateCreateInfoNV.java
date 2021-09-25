@@ -93,6 +93,8 @@ public class VkPipelineRepresentativeFragmentTestStateCreateInfoNV extends Struc
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineRepresentativeFragmentTestStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVRepresentativeFragmentTest#VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkPipelineRepresentativeFragmentTestStateCreateInfoNV sType$Default() { return sType(NVRepresentativeFragmentTest.VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineRepresentativeFragmentTestStateCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #representativeFragmentTestEnable} field. */
@@ -319,6 +321,8 @@ public class VkPipelineRepresentativeFragmentTestStateCreateInfoNV extends Struc
 
         /** Sets the specified value to the {@link VkPipelineRepresentativeFragmentTestStateCreateInfoNV#sType} field. */
         public VkPipelineRepresentativeFragmentTestStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineRepresentativeFragmentTestStateCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVRepresentativeFragmentTest#VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV} value to the {@link VkPipelineRepresentativeFragmentTestStateCreateInfoNV#sType} field. */
+        public VkPipelineRepresentativeFragmentTestStateCreateInfoNV.Buffer sType$Default() { return sType(NVRepresentativeFragmentTest.VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkPipelineRepresentativeFragmentTestStateCreateInfoNV#pNext} field. */
         public VkPipelineRepresentativeFragmentTestStateCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRepresentativeFragmentTestStateCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineRepresentativeFragmentTestStateCreateInfoNV#representativeFragmentTestEnable} field. */

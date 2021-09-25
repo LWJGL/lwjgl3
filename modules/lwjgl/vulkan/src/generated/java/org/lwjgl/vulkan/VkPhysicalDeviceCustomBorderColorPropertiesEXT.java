@@ -91,6 +91,8 @@ public class VkPhysicalDeviceCustomBorderColorPropertiesEXT extends Struct imple
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceCustomBorderColorPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTCustomBorderColor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT} value to the {@code sType} field. */
+    public VkPhysicalDeviceCustomBorderColorPropertiesEXT sType$Default() { return sType(EXTCustomBorderColor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceCustomBorderColorPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -293,6 +295,8 @@ public class VkPhysicalDeviceCustomBorderColorPropertiesEXT extends Struct imple
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceCustomBorderColorPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCustomBorderColorPropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTCustomBorderColor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT} value to the {@code sType} field. */
+        public VkPhysicalDeviceCustomBorderColorPropertiesEXT.Buffer sType$Default() { return sType(EXTCustomBorderColor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceCustomBorderColorPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCustomBorderColorPropertiesEXT.npNext(address(), value); return this; }
 

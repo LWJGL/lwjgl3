@@ -94,6 +94,8 @@ public class VkSwapchainCounterCreateInfoEXT extends Struct implements NativeRes
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSwapchainCounterCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDisplayControl#VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkSwapchainCounterCreateInfoEXT sType$Default() { return sType(EXTDisplayControl.VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSwapchainCounterCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #surfaceCounters} field. */
@@ -320,6 +322,8 @@ public class VkSwapchainCounterCreateInfoEXT extends Struct implements NativeRes
 
         /** Sets the specified value to the {@link VkSwapchainCounterCreateInfoEXT#sType} field. */
         public VkSwapchainCounterCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSwapchainCounterCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDisplayControl#VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT} value to the {@link VkSwapchainCounterCreateInfoEXT#sType} field. */
+        public VkSwapchainCounterCreateInfoEXT.Buffer sType$Default() { return sType(EXTDisplayControl.VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkSwapchainCounterCreateInfoEXT#pNext} field. */
         public VkSwapchainCounterCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSwapchainCounterCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkSwapchainCounterCreateInfoEXT#surfaceCounters} field. */

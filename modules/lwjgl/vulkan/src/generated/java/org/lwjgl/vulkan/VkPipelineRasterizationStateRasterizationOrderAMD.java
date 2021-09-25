@@ -90,6 +90,8 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineRasterizationStateRasterizationOrderAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link AMDRasterizationOrder#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD} value to the {@link #sType} field. */
+    public VkPipelineRasterizationStateRasterizationOrderAMD sType$Default() { return sType(AMDRasterizationOrder.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineRasterizationStateRasterizationOrderAMD pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #rasterizationOrder} field. */
@@ -316,6 +318,8 @@ public class VkPipelineRasterizationStateRasterizationOrderAMD extends Struct im
 
         /** Sets the specified value to the {@link VkPipelineRasterizationStateRasterizationOrderAMD#sType} field. */
         public VkPipelineRasterizationStateRasterizationOrderAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineRasterizationStateRasterizationOrderAMD.nsType(address(), value); return this; }
+        /** Sets the {@link AMDRasterizationOrder#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD} value to the {@link VkPipelineRasterizationStateRasterizationOrderAMD#sType} field. */
+        public VkPipelineRasterizationStateRasterizationOrderAMD.Buffer sType$Default() { return sType(AMDRasterizationOrder.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD); }
         /** Sets the specified value to the {@link VkPipelineRasterizationStateRasterizationOrderAMD#pNext} field. */
         public VkPipelineRasterizationStateRasterizationOrderAMD.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRasterizationStateRasterizationOrderAMD.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineRasterizationStateRasterizationOrderAMD#rasterizationOrder} field. */

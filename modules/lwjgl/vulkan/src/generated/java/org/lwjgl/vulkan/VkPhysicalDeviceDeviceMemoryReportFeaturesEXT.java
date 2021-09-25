@@ -91,6 +91,8 @@ public class VkPhysicalDeviceDeviceMemoryReportFeaturesEXT extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceDeviceMemoryReportFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceDeviceMemoryReportFeaturesEXT sType$Default() { return sType(EXTDeviceMemoryReport.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceDeviceMemoryReportFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #deviceMemoryReport} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceDeviceMemoryReportFeaturesEXT extends Struct implem
 
         /** Sets the specified value to the {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT#sType} field. */
         public VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT} value to the {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.Buffer sType$Default() { return sType(EXTDeviceMemoryReport.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT#deviceMemoryReport} field. */

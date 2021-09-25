@@ -120,6 +120,8 @@ public class VkVideoDecodeH265SessionParametersAddInfoEXT extends Struct impleme
 
     /** Sets the specified value to the {@code sType} field. */
     public VkVideoDecodeH265SessionParametersAddInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTVideoDecodeH265#VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT} value to the {@code sType} field. */
+    public VkVideoDecodeH265SessionParametersAddInfoEXT sType$Default() { return sType(EXTVideoDecodeH265.VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkVideoDecodeH265SessionParametersAddInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code spsStdCount} field. */
@@ -363,6 +365,8 @@ public class VkVideoDecodeH265SessionParametersAddInfoEXT extends Struct impleme
 
         /** Sets the specified value to the {@code sType} field. */
         public VkVideoDecodeH265SessionParametersAddInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH265SessionParametersAddInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTVideoDecodeH265#VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT} value to the {@code sType} field. */
+        public VkVideoDecodeH265SessionParametersAddInfoEXT.Buffer sType$Default() { return sType(EXTVideoDecodeH265.VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkVideoDecodeH265SessionParametersAddInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeH265SessionParametersAddInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code spsStdCount} field. */

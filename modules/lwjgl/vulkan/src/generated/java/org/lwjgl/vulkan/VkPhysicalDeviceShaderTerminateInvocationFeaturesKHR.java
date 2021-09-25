@@ -91,6 +91,8 @@ public class VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR extends Struct
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRShaderTerminateInvocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR sType$Default() { return sType(KHRShaderTerminateInvocation.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderTerminateInvocation} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR extends Struct
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR#sType} field. */
         public VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRShaderTerminateInvocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR} value to the {@link VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR#sType} field. */
+        public VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer sType$Default() { return sType(KHRShaderTerminateInvocation.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR#pNext} field. */
         public VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR#shaderTerminateInvocation} field. */

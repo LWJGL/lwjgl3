@@ -155,6 +155,8 @@ public class VkSubmitInfo2KHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSubmitInfo2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_SUBMIT_INFO_2_KHR STRUCTURE_TYPE_SUBMIT_INFO_2_KHR} value to the {@link #sType} field. */
+    public VkSubmitInfo2KHR sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_SUBMIT_INFO_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubmitInfo2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -452,6 +454,8 @@ public class VkSubmitInfo2KHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkSubmitInfo2KHR#sType} field. */
         public VkSubmitInfo2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSubmitInfo2KHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_SUBMIT_INFO_2_KHR STRUCTURE_TYPE_SUBMIT_INFO_2_KHR} value to the {@link VkSubmitInfo2KHR#sType} field. */
+        public VkSubmitInfo2KHR.Buffer sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_SUBMIT_INFO_2_KHR); }
         /** Sets the specified value to the {@link VkSubmitInfo2KHR#pNext} field. */
         public VkSubmitInfo2KHR.Buffer pNext(@NativeType("void const *") long value) { VkSubmitInfo2KHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkSubmitInfo2KHR#flags} field. */

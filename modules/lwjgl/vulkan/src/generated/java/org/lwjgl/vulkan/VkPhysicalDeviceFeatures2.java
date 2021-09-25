@@ -94,6 +94,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct implements NativeResource 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceFeatures2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2} value to the {@link #sType} field. */
+    public VkPhysicalDeviceFeatures2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceFeatures2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Copies the specified {@link VkPhysicalDeviceFeatures} to the {@link #features} field. */
@@ -321,6 +323,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct implements NativeResource 
 
         /** Sets the specified value to the {@link VkPhysicalDeviceFeatures2#sType} field. */
         public VkPhysicalDeviceFeatures2.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFeatures2.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2} value to the {@link VkPhysicalDeviceFeatures2#sType} field. */
+        public VkPhysicalDeviceFeatures2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2); }
         /** Sets the specified value to the {@link VkPhysicalDeviceFeatures2#pNext} field. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFeatures2.npNext(address(), value); return this; }
         /** Copies the specified {@link VkPhysicalDeviceFeatures} to the {@link VkPhysicalDeviceFeatures2#features} field. */

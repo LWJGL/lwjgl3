@@ -106,6 +106,8 @@ public class VkSamplerCustomBorderColorCreateInfoEXT extends Struct implements N
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSamplerCustomBorderColorCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTCustomBorderColor#VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkSamplerCustomBorderColorCreateInfoEXT sType$Default() { return sType(EXTCustomBorderColor.VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSamplerCustomBorderColorCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Copies the specified {@link VkClearColorValue} to the {@link #customBorderColor} field. */
@@ -326,6 +328,8 @@ public class VkSamplerCustomBorderColorCreateInfoEXT extends Struct implements N
 
         /** Sets the specified value to the {@link VkSamplerCustomBorderColorCreateInfoEXT#sType} field. */
         public VkSamplerCustomBorderColorCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerCustomBorderColorCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTCustomBorderColor#VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT} value to the {@link VkSamplerCustomBorderColorCreateInfoEXT#sType} field. */
+        public VkSamplerCustomBorderColorCreateInfoEXT.Buffer sType$Default() { return sType(EXTCustomBorderColor.VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkSamplerCustomBorderColorCreateInfoEXT#pNext} field. */
         public VkSamplerCustomBorderColorCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSamplerCustomBorderColorCreateInfoEXT.npNext(address(), value); return this; }
         /** Copies the specified {@link VkClearColorValue} to the {@link VkSamplerCustomBorderColorCreateInfoEXT#customBorderColor} field. */

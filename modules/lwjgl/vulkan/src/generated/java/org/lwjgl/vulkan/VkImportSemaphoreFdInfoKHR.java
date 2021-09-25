@@ -152,6 +152,8 @@ public class VkImportSemaphoreFdInfoKHR extends Struct implements NativeResource
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImportSemaphoreFdInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRExternalSemaphoreFd#VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR} value to the {@link #sType} field. */
+    public VkImportSemaphoreFdInfoKHR sType$Default() { return sType(KHRExternalSemaphoreFd.VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImportSemaphoreFdInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #semaphore} field. */
@@ -410,6 +412,8 @@ public class VkImportSemaphoreFdInfoKHR extends Struct implements NativeResource
 
         /** Sets the specified value to the {@link VkImportSemaphoreFdInfoKHR#sType} field. */
         public VkImportSemaphoreFdInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImportSemaphoreFdInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRExternalSemaphoreFd#VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR} value to the {@link VkImportSemaphoreFdInfoKHR#sType} field. */
+        public VkImportSemaphoreFdInfoKHR.Buffer sType$Default() { return sType(KHRExternalSemaphoreFd.VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR); }
         /** Sets the specified value to the {@link VkImportSemaphoreFdInfoKHR#pNext} field. */
         public VkImportSemaphoreFdInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkImportSemaphoreFdInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImportSemaphoreFdInfoKHR#semaphore} field. */

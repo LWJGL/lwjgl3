@@ -110,6 +110,8 @@ public class VkAccelerationStructureGeometryKHR extends Struct implements Native
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureGeometryKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR} value to the {@link #sType} field. */
+    public VkAccelerationStructureGeometryKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureGeometryKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #geometryType} field. */
@@ -341,6 +343,8 @@ public class VkAccelerationStructureGeometryKHR extends Struct implements Native
 
         /** Sets the specified value to the {@link VkAccelerationStructureGeometryKHR#sType} field. */
         public VkAccelerationStructureGeometryKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureGeometryKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR} value to the {@link VkAccelerationStructureGeometryKHR#sType} field. */
+        public VkAccelerationStructureGeometryKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR); }
         /** Sets the specified value to the {@link VkAccelerationStructureGeometryKHR#pNext} field. */
         public VkAccelerationStructureGeometryKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureGeometryKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkAccelerationStructureGeometryKHR#geometryType} field. */

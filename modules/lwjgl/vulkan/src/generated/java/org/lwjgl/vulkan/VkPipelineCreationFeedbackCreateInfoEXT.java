@@ -129,6 +129,8 @@ public class VkPipelineCreationFeedbackCreateInfoEXT extends Struct implements N
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineCreationFeedbackCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTPipelineCreationFeedback#VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkPipelineCreationFeedbackCreateInfoEXT sType$Default() { return sType(EXTPipelineCreationFeedback.VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineCreationFeedbackCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkPipelineCreationFeedbackEXT} to the {@link #pPipelineCreationFeedback} field. */
@@ -395,6 +397,8 @@ public class VkPipelineCreationFeedbackCreateInfoEXT extends Struct implements N
 
         /** Sets the specified value to the {@link VkPipelineCreationFeedbackCreateInfoEXT#sType} field. */
         public VkPipelineCreationFeedbackCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineCreationFeedbackCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTPipelineCreationFeedback#VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT} value to the {@link VkPipelineCreationFeedbackCreateInfoEXT#sType} field. */
+        public VkPipelineCreationFeedbackCreateInfoEXT.Buffer sType$Default() { return sType(EXTPipelineCreationFeedback.VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkPipelineCreationFeedbackCreateInfoEXT#pNext} field. */
         public VkPipelineCreationFeedbackCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineCreationFeedbackCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkPipelineCreationFeedbackEXT} to the {@link VkPipelineCreationFeedbackCreateInfoEXT#pPipelineCreationFeedback} field. */

@@ -91,6 +91,8 @@ public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends St
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRZeroInitializeWorkgroupMemory#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR sType$Default() { return sType(KHRZeroInitializeWorkgroupMemory.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderZeroInitializeWorkgroupMemory} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends St
 
         /** Sets the specified value to the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR#sType} field. */
         public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRZeroInitializeWorkgroupMemory#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR} value to the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR#sType} field. */
+        public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.Buffer sType$Default() { return sType(KHRZeroInitializeWorkgroupMemory.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR#pNext} field. */
         public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR#shaderZeroInitializeWorkgroupMemory} field. */

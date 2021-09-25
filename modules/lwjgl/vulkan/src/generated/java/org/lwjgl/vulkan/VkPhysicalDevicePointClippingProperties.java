@@ -91,6 +91,8 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePointClippingProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES} value to the {@link #sType} field. */
+    public VkPhysicalDevicePointClippingProperties sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePointClippingProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -311,6 +313,8 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
 
         /** Sets the specified value to the {@link VkPhysicalDevicePointClippingProperties#sType} field. */
         public VkPhysicalDevicePointClippingProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePointClippingProperties.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES} value to the {@link VkPhysicalDevicePointClippingProperties#sType} field. */
+        public VkPhysicalDevicePointClippingProperties.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES); }
         /** Sets the specified value to the {@link VkPhysicalDevicePointClippingProperties#pNext} field. */
         public VkPhysicalDevicePointClippingProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePointClippingProperties.npNext(address(), value); return this; }
 

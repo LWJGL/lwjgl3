@@ -91,6 +91,8 @@ public class VkPhysicalDeviceSubpassShadingPropertiesHUAWEI extends Struct imple
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceSubpassShadingPropertiesHUAWEI sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI} value to the {@link #sType} field. */
+    public VkPhysicalDeviceSubpassShadingPropertiesHUAWEI sType$Default() { return sType(HUAWEISubpassShading.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceSubpassShadingPropertiesHUAWEI pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -293,6 +295,8 @@ public class VkPhysicalDeviceSubpassShadingPropertiesHUAWEI extends Struct imple
 
         /** Sets the specified value to the {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI#sType} field. */
         public VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.nsType(address(), value); return this; }
+        /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI} value to the {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI#sType} field. */
+        public VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer sType$Default() { return sType(HUAWEISubpassShading.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI); }
         /** Sets the specified value to the {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI#pNext} field. */
         public VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.npNext(address(), value); return this; }
 

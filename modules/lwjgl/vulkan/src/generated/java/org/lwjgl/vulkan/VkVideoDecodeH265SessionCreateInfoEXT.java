@@ -101,6 +101,8 @@ public class VkVideoDecodeH265SessionCreateInfoEXT extends Struct implements Nat
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoDecodeH265SessionCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTVideoDecodeH265#VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_CREATE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkVideoDecodeH265SessionCreateInfoEXT sType$Default() { return sType(EXTVideoDecodeH265.VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoDecodeH265SessionCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -341,6 +343,8 @@ public class VkVideoDecodeH265SessionCreateInfoEXT extends Struct implements Nat
 
         /** Sets the specified value to the {@link VkVideoDecodeH265SessionCreateInfoEXT#sType} field. */
         public VkVideoDecodeH265SessionCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH265SessionCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTVideoDecodeH265#VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_CREATE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_CREATE_INFO_EXT} value to the {@link VkVideoDecodeH265SessionCreateInfoEXT#sType} field. */
+        public VkVideoDecodeH265SessionCreateInfoEXT.Buffer sType$Default() { return sType(EXTVideoDecodeH265.VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkVideoDecodeH265SessionCreateInfoEXT#pNext} field. */
         public VkVideoDecodeH265SessionCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeH265SessionCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoDecodeH265SessionCreateInfoEXT#flags} field. */

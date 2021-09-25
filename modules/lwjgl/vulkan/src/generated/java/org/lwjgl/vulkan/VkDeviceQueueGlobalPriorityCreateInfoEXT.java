@@ -92,6 +92,8 @@ public class VkDeviceQueueGlobalPriorityCreateInfoEXT extends Struct implements 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceQueueGlobalPriorityCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTGlobalPriority#VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkDeviceQueueGlobalPriorityCreateInfoEXT sType$Default() { return sType(EXTGlobalPriority.VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceQueueGlobalPriorityCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #globalPriority} field. */
@@ -318,6 +320,8 @@ public class VkDeviceQueueGlobalPriorityCreateInfoEXT extends Struct implements 
 
         /** Sets the specified value to the {@link VkDeviceQueueGlobalPriorityCreateInfoEXT#sType} field. */
         public VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceQueueGlobalPriorityCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTGlobalPriority#VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT} value to the {@link VkDeviceQueueGlobalPriorityCreateInfoEXT#sType} field. */
+        public VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer sType$Default() { return sType(EXTGlobalPriority.VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkDeviceQueueGlobalPriorityCreateInfoEXT#pNext} field. */
         public VkDeviceQueueGlobalPriorityCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDeviceQueueGlobalPriorityCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDeviceQueueGlobalPriorityCreateInfoEXT#globalPriority} field. */

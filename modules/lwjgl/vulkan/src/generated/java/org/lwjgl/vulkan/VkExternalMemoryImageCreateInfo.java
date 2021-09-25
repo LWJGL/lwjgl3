@@ -88,6 +88,8 @@ public class VkExternalMemoryImageCreateInfo extends Struct implements NativeRes
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkExternalMemoryImageCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkExternalMemoryImageCreateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkExternalMemoryImageCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #handleTypes} field. */
@@ -314,6 +316,8 @@ public class VkExternalMemoryImageCreateInfo extends Struct implements NativeRes
 
         /** Sets the specified value to the {@link VkExternalMemoryImageCreateInfo#sType} field. */
         public VkExternalMemoryImageCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalMemoryImageCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO} value to the {@link VkExternalMemoryImageCreateInfo#sType} field. */
+        public VkExternalMemoryImageCreateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkExternalMemoryImageCreateInfo#pNext} field. */
         public VkExternalMemoryImageCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkExternalMemoryImageCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkExternalMemoryImageCreateInfo#handleTypes} field. */

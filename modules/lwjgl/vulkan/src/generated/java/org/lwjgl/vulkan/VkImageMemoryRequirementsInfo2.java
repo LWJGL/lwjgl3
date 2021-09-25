@@ -103,6 +103,8 @@ public class VkImageMemoryRequirementsInfo2 extends Struct implements NativeReso
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImageMemoryRequirementsInfo2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2 STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2} value to the {@link #sType} field. */
+    public VkImageMemoryRequirementsInfo2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageMemoryRequirementsInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #image} field. */
@@ -329,6 +331,8 @@ public class VkImageMemoryRequirementsInfo2 extends Struct implements NativeReso
 
         /** Sets the specified value to the {@link VkImageMemoryRequirementsInfo2#sType} field. */
         public VkImageMemoryRequirementsInfo2.Buffer sType(@NativeType("VkStructureType") int value) { VkImageMemoryRequirementsInfo2.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2 STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2} value to the {@link VkImageMemoryRequirementsInfo2#sType} field. */
+        public VkImageMemoryRequirementsInfo2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2); }
         /** Sets the specified value to the {@link VkImageMemoryRequirementsInfo2#pNext} field. */
         public VkImageMemoryRequirementsInfo2.Buffer pNext(@NativeType("void const *") long value) { VkImageMemoryRequirementsInfo2.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageMemoryRequirementsInfo2#image} field. */

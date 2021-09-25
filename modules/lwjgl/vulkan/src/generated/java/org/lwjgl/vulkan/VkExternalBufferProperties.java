@@ -91,6 +91,8 @@ public class VkExternalBufferProperties extends Struct implements NativeResource
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkExternalBufferProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES} value to the {@link #sType} field. */
+    public VkExternalBufferProperties sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkExternalBufferProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -310,6 +312,8 @@ public class VkExternalBufferProperties extends Struct implements NativeResource
 
         /** Sets the specified value to the {@link VkExternalBufferProperties#sType} field. */
         public VkExternalBufferProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalBufferProperties.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES} value to the {@link VkExternalBufferProperties#sType} field. */
+        public VkExternalBufferProperties.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES); }
         /** Sets the specified value to the {@link VkExternalBufferProperties#pNext} field. */
         public VkExternalBufferProperties.Buffer pNext(@NativeType("void *") long value) { VkExternalBufferProperties.npNext(address(), value); return this; }
 

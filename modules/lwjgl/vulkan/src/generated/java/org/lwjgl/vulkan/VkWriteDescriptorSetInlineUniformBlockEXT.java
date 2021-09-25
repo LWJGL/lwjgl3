@@ -103,6 +103,8 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends Struct implements
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkWriteDescriptorSetInlineUniformBlockEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT} value to the {@link #sType} field. */
+    public VkWriteDescriptorSetInlineUniformBlockEXT sType$Default() { return sType(EXTInlineUniformBlock.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkWriteDescriptorSetInlineUniformBlockEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link ByteBuffer} to the {@link #pData} field. */
@@ -357,6 +359,8 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends Struct implements
 
         /** Sets the specified value to the {@link VkWriteDescriptorSetInlineUniformBlockEXT#sType} field. */
         public VkWriteDescriptorSetInlineUniformBlockEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkWriteDescriptorSetInlineUniformBlockEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT} value to the {@link VkWriteDescriptorSetInlineUniformBlockEXT#sType} field. */
+        public VkWriteDescriptorSetInlineUniformBlockEXT.Buffer sType$Default() { return sType(EXTInlineUniformBlock.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT); }
         /** Sets the specified value to the {@link VkWriteDescriptorSetInlineUniformBlockEXT#pNext} field. */
         public VkWriteDescriptorSetInlineUniformBlockEXT.Buffer pNext(@NativeType("void const *") long value) { VkWriteDescriptorSetInlineUniformBlockEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link ByteBuffer} to the {@link VkWriteDescriptorSetInlineUniformBlockEXT#pData} field. */

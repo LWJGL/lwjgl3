@@ -141,6 +141,8 @@ public class VkBufferViewCreateInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBufferViewCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO} value to the {@link #sType} field. */
+    public VkBufferViewCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferViewCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -411,6 +413,8 @@ public class VkBufferViewCreateInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkBufferViewCreateInfo#sType} field. */
         public VkBufferViewCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferViewCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO} value to the {@link VkBufferViewCreateInfo#sType} field. */
+        public VkBufferViewCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO); }
         /** Sets the specified value to the {@link VkBufferViewCreateInfo#pNext} field. */
         public VkBufferViewCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkBufferViewCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkBufferViewCreateInfo#flags} field. */

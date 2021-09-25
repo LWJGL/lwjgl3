@@ -224,6 +224,8 @@ public class VkPhysicalDeviceDescriptorIndexingFeatures extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceDescriptorIndexingFeatures sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceDescriptorIndexingFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderInputAttachmentArrayDynamicIndexing} field. */
@@ -641,6 +643,8 @@ public class VkPhysicalDeviceDescriptorIndexingFeatures extends Struct implement
 
         /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#sType} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDescriptorIndexingFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES} value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#sType} field. */
+        public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#pNext} field. */
         public VkPhysicalDeviceDescriptorIndexingFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDescriptorIndexingFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorIndexingFeatures#shaderInputAttachmentArrayDynamicIndexing} field. */

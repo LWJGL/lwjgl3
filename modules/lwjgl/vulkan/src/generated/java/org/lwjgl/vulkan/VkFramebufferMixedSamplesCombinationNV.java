@@ -113,6 +113,8 @@ public class VkFramebufferMixedSamplesCombinationNV extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkFramebufferMixedSamplesCombinationNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVCoverageReductionMode#VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV} value to the {@link #sType} field. */
+    public VkFramebufferMixedSamplesCombinationNV sType$Default() { return sType(NVCoverageReductionMode.VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkFramebufferMixedSamplesCombinationNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -348,6 +350,8 @@ public class VkFramebufferMixedSamplesCombinationNV extends Struct implements Na
 
         /** Sets the specified value to the {@link VkFramebufferMixedSamplesCombinationNV#sType} field. */
         public VkFramebufferMixedSamplesCombinationNV.Buffer sType(@NativeType("VkStructureType") int value) { VkFramebufferMixedSamplesCombinationNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVCoverageReductionMode#VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV} value to the {@link VkFramebufferMixedSamplesCombinationNV#sType} field. */
+        public VkFramebufferMixedSamplesCombinationNV.Buffer sType$Default() { return sType(NVCoverageReductionMode.VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV); }
         /** Sets the specified value to the {@link VkFramebufferMixedSamplesCombinationNV#pNext} field. */
         public VkFramebufferMixedSamplesCombinationNV.Buffer pNext(@NativeType("void *") long value) { VkFramebufferMixedSamplesCombinationNV.npNext(address(), value); return this; }
 

@@ -146,6 +146,8 @@ public class VkCommandBufferInheritanceInfo extends Struct implements NativeReso
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCommandBufferInheritanceInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO} value to the {@link #sType} field. */
+    public VkCommandBufferInheritanceInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCommandBufferInheritanceInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #renderPass} field. */
@@ -427,6 +429,8 @@ public class VkCommandBufferInheritanceInfo extends Struct implements NativeReso
 
         /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#sType} field. */
         public VkCommandBufferInheritanceInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandBufferInheritanceInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO} value to the {@link VkCommandBufferInheritanceInfo#sType} field. */
+        public VkCommandBufferInheritanceInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO); }
         /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#pNext} field. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferInheritanceInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#renderPass} field. */

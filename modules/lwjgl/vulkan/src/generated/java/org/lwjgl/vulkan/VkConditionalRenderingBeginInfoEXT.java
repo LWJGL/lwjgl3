@@ -121,6 +121,8 @@ public class VkConditionalRenderingBeginInfoEXT extends Struct implements Native
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkConditionalRenderingBeginInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT} value to the {@link #sType} field. */
+    public VkConditionalRenderingBeginInfoEXT sType$Default() { return sType(EXTConditionalRendering.VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkConditionalRenderingBeginInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #buffer} field. */
@@ -369,6 +371,8 @@ public class VkConditionalRenderingBeginInfoEXT extends Struct implements Native
 
         /** Sets the specified value to the {@link VkConditionalRenderingBeginInfoEXT#sType} field. */
         public VkConditionalRenderingBeginInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkConditionalRenderingBeginInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT} value to the {@link VkConditionalRenderingBeginInfoEXT#sType} field. */
+        public VkConditionalRenderingBeginInfoEXT.Buffer sType$Default() { return sType(EXTConditionalRendering.VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT); }
         /** Sets the specified value to the {@link VkConditionalRenderingBeginInfoEXT#pNext} field. */
         public VkConditionalRenderingBeginInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkConditionalRenderingBeginInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkConditionalRenderingBeginInfoEXT#buffer} field. */

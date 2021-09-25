@@ -102,6 +102,8 @@ public class VkAcquireProfilingLockInfoKHR extends Struct implements NativeResou
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAcquireProfilingLockInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR} value to the {@link #sType} field. */
+    public VkAcquireProfilingLockInfoKHR sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAcquireProfilingLockInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -321,6 +323,8 @@ public class VkAcquireProfilingLockInfoKHR extends Struct implements NativeResou
 
         /** Sets the specified value to the {@link VkAcquireProfilingLockInfoKHR#sType} field. */
         public VkAcquireProfilingLockInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAcquireProfilingLockInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR} value to the {@link VkAcquireProfilingLockInfoKHR#sType} field. */
+        public VkAcquireProfilingLockInfoKHR.Buffer sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR); }
         /** Sets the specified value to the {@link VkAcquireProfilingLockInfoKHR#pNext} field. */
         public VkAcquireProfilingLockInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAcquireProfilingLockInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkAcquireProfilingLockInfoKHR#flags} field. */

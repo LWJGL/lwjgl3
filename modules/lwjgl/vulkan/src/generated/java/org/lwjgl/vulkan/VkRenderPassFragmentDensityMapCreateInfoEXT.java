@@ -115,6 +115,8 @@ public class VkRenderPassFragmentDensityMapCreateInfoEXT extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassFragmentDensityMapCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkRenderPassFragmentDensityMapCreateInfoEXT sType$Default() { return sType(EXTFragmentDensityMap.VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassFragmentDensityMapCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Copies the specified {@link VkAttachmentReference} to the {@link #fragmentDensityMapAttachment} field. */
@@ -342,6 +344,8 @@ public class VkRenderPassFragmentDensityMapCreateInfoEXT extends Struct implemen
 
         /** Sets the specified value to the {@link VkRenderPassFragmentDensityMapCreateInfoEXT#sType} field. */
         public VkRenderPassFragmentDensityMapCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassFragmentDensityMapCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT} value to the {@link VkRenderPassFragmentDensityMapCreateInfoEXT#sType} field. */
+        public VkRenderPassFragmentDensityMapCreateInfoEXT.Buffer sType$Default() { return sType(EXTFragmentDensityMap.VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkRenderPassFragmentDensityMapCreateInfoEXT#pNext} field. */
         public VkRenderPassFragmentDensityMapCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassFragmentDensityMapCreateInfoEXT.npNext(address(), value); return this; }
         /** Copies the specified {@link VkAttachmentReference} to the {@link VkRenderPassFragmentDensityMapCreateInfoEXT#fragmentDensityMapAttachment} field. */

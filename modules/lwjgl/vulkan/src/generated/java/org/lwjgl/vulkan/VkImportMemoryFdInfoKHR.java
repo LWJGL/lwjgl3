@@ -111,6 +111,8 @@ public class VkImportMemoryFdInfoKHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImportMemoryFdInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRExternalMemoryFd#VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR} value to the {@link #sType} field. */
+    public VkImportMemoryFdInfoKHR sType$Default() { return sType(KHRExternalMemoryFd.VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImportMemoryFdInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #handleType} field. */
@@ -347,6 +349,8 @@ public class VkImportMemoryFdInfoKHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkImportMemoryFdInfoKHR#sType} field. */
         public VkImportMemoryFdInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImportMemoryFdInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRExternalMemoryFd#VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR} value to the {@link VkImportMemoryFdInfoKHR#sType} field. */
+        public VkImportMemoryFdInfoKHR.Buffer sType$Default() { return sType(KHRExternalMemoryFd.VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR); }
         /** Sets the specified value to the {@link VkImportMemoryFdInfoKHR#pNext} field. */
         public VkImportMemoryFdInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkImportMemoryFdInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImportMemoryFdInfoKHR#handleType} field. */

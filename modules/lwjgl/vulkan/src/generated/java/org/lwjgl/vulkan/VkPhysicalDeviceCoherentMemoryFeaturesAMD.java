@@ -91,6 +91,8 @@ public class VkPhysicalDeviceCoherentMemoryFeaturesAMD extends Struct implements
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceCoherentMemoryFeaturesAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link AMDDeviceCoherentMemory#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD} value to the {@link #sType} field. */
+    public VkPhysicalDeviceCoherentMemoryFeaturesAMD sType$Default() { return sType(AMDDeviceCoherentMemory.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceCoherentMemoryFeaturesAMD pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #deviceCoherentMemory} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceCoherentMemoryFeaturesAMD extends Struct implements
 
         /** Sets the specified value to the {@link VkPhysicalDeviceCoherentMemoryFeaturesAMD#sType} field. */
         public VkPhysicalDeviceCoherentMemoryFeaturesAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCoherentMemoryFeaturesAMD.nsType(address(), value); return this; }
+        /** Sets the {@link AMDDeviceCoherentMemory#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD} value to the {@link VkPhysicalDeviceCoherentMemoryFeaturesAMD#sType} field. */
+        public VkPhysicalDeviceCoherentMemoryFeaturesAMD.Buffer sType$Default() { return sType(AMDDeviceCoherentMemory.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD); }
         /** Sets the specified value to the {@link VkPhysicalDeviceCoherentMemoryFeaturesAMD#pNext} field. */
         public VkPhysicalDeviceCoherentMemoryFeaturesAMD.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCoherentMemoryFeaturesAMD.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceCoherentMemoryFeaturesAMD#deviceCoherentMemory} field. */

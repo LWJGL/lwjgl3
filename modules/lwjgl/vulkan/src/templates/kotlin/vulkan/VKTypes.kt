@@ -547,7 +547,7 @@ val VkBufferMemoryBarrier = struct(Module.VULKAN, "VkBufferMemoryBarrier") {
         #CmdPipelineBarrier(), #CmdWaitEvents()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkAccessFlags("srcAccessMask", "a bitmask of {@code VkAccessFlagBits} specifying a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-access-masks\">source access mask</a>.")
     VkAccessFlags("dstAccessMask", "a bitmask of {@code VkAccessFlagBits} specifying a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-access-masks\">destination access mask</a>.")
@@ -749,7 +749,7 @@ val VkImageMemoryBarrier = struct(Module.VULKAN, "VkImageMemoryBarrier") {
         ##VkImageSubresourceRange, #CmdPipelineBarrier(), #CmdWaitEvents()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkAccessFlags("srcAccessMask", "a bitmask of {@code VkAccessFlagBits} specifying a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-access-masks\">source access mask</a>.")
     VkAccessFlags("dstAccessMask", "a bitmask of {@code VkAccessFlagBits} specifying a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-access-masks\">destination access mask</a>.")
@@ -783,7 +783,7 @@ val VkMemoryBarrier = struct(Module.VULKAN, "VkMemoryBarrier") {
         #CmdPipelineBarrier(), #CmdWaitEvents()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_MEMORY_BARRIER")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkAccessFlags("srcAccessMask", "a bitmask of {@code VkAccessFlagBits} specifying a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-access-masks\">source access mask</a>.")
     VkAccessFlags("dstAccessMask", "a bitmask of {@code VkAccessFlagBits} specifying a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-access-masks\">destination access mask</a>.")
@@ -895,7 +895,7 @@ val VkApplicationInfo = struct(Module.VULKAN, "VkApplicationInfo") {
         ##VkInstanceCreateInfo
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_APPLICATION_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     nullable..charUTF8.const.p("pApplicationName", "{@code NULL} or is a pointer to a null-terminated UTF-8 string containing the name of the application.")
     uint32_t("applicationVersion", "an unsigned integer variable containing the developer-supplied version number of the application.")
@@ -998,7 +998,7 @@ val VkInstanceCreateInfo = struct(Module.VULKAN, "VkInstanceCreateInfo") {
         ##VkApplicationInfo, #CreateInstance()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_INSTANCE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkInstanceCreateFlags("flags", "reserved for future use.")
     nullable..VkApplicationInfo.const.p("pApplicationInfo", "{@code NULL} or a pointer to a ##VkApplicationInfo structure. If not {@code NULL}, this information helps implementations recognize behavior inherent to classes of applications. ##VkApplicationInfo is defined in detail below.")
@@ -1657,7 +1657,7 @@ val VkDeviceQueueCreateInfo = struct(Module.VULKAN, "VkDeviceQueueCreateInfo") {
         ##VkDeviceCreateInfo
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDeviceQueueCreateFlags("flags", "a bitmask indicating behavior of the queue.")
     uint32_t("queueFamilyIndex", "an unsigned integer indicating the index of the queue family in which to create the queue on this device. This index corresponds to the index of an element of the {@code pQueueFamilyProperties} array that was returned by {@code vkGetPhysicalDeviceQueueFamilyProperties}.")
@@ -1715,7 +1715,7 @@ val VkDeviceCreateInfo = struct(Module.VULKAN, "VkDeviceCreateInfo") {
         ##VkDeviceQueueCreateInfo, ##VkPhysicalDeviceFeatures, #CreateDevice()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DEVICE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDeviceCreateFlags("flags", "reserved for future use.")
     AutoSize("pQueueCreateInfos")..uint32_t("queueCreateInfoCount", "the unsigned integer size of the {@code pQueueCreateInfos} array. Refer to the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#devsandqueues-queue-creation\">Queue Creation</a> section below for further details.")
@@ -1800,7 +1800,7 @@ val VkSubmitInfo = struct(Module.VULKAN, "VkSubmitInfo") {
         #QueueSubmit()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SUBMIT_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pWaitSemaphores", "pWaitDstStageMask", optional = true)..uint32_t("waitSemaphoreCount", "the number of semaphores upon which to wait before executing the command buffers for the batch.")
     VkSemaphore.const.p("pWaitSemaphores", "a pointer to an array of {@code VkSemaphore} handles upon which to wait before the command buffers for this batch begin execution. If semaphores to wait on are provided, they define a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-semaphores-waiting\">semaphore wait operation</a>.")
@@ -1837,7 +1837,7 @@ val VkMappedMemoryRange = struct(Module.VULKAN, "VkMappedMemoryRange") {
         #FlushMappedMemoryRanges(), #InvalidateMappedMemoryRanges()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_MAPPED_MEMORY_RANGE")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDeviceMemory("memory", "the memory object to which this range belongs.")
     VkDeviceSize("offset", "the zero-based byte offset from the beginning of the memory object.")
@@ -1911,7 +1911,7 @@ val VkMemoryAllocateInfo = struct(Module.VULKAN, "VkMemoryAllocateInfo") {
         #AllocateMemory()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDeviceSize("allocationSize", "the size of the allocation in bytes.")
     uint32_t("memoryTypeIndex", "an index identifying a memory type from the {@code memoryTypes} array of the ##VkPhysicalDeviceMemoryProperties structure.")
@@ -2147,7 +2147,7 @@ val VkBindSparseInfo = struct(Module.VULKAN, "VkBindSparseInfo") {
         ##VkSparseBufferMemoryBindInfo, ##VkSparseImageMemoryBindInfo, ##VkSparseImageOpaqueMemoryBindInfo, #QueueBindSparse()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_BIND_SPARSE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pWaitSemaphores", optional = true)..uint32_t("waitSemaphoreCount", "the number of semaphores upon which to wait before executing the sparse binding operations for the batch.")
     VkSemaphore.const.p("pWaitSemaphores", "a pointer to an array of semaphores upon which to wait on before the sparse binding operations for this batch begin execution. If semaphores to wait on are provided, they define a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-semaphores-waiting\">semaphore wait operation</a>.")
@@ -2208,7 +2208,7 @@ val VkFenceCreateInfo = struct(Module.VULKAN, "VkFenceCreateInfo") {
         #CreateFence()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_FENCE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkFenceCreateFlags("flags", "a bitmask of {@code VkFenceCreateFlagBits} specifying the initial state and behavior of the fence.")
 }
@@ -2230,7 +2230,7 @@ val VkSemaphoreCreateInfo = struct(Module.VULKAN, "VkSemaphoreCreateInfo") {
         #CreateSemaphore()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSemaphoreCreateFlags("flags", "reserved for future use.")
 }
@@ -2251,7 +2251,7 @@ val VkEventCreateInfo = struct(Module.VULKAN, "VkEventCreateInfo") {
         #CreateEvent()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_EVENT_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkEventCreateFlags("flags", "a bitmask of {@code VkEventCreateFlagBits} defining additional creation parameters.")
 }
@@ -2285,7 +2285,7 @@ val VkQueryPoolCreateInfo = struct(Module.VULKAN, "VkQueryPoolCreateInfo") {
         #CreateQueryPool()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkQueryPoolCreateFlags("flags", "reserved for future use.")
     VkQueryType("queryType", "a {@code VkQueryType} value specifying the type of queries managed by the pool.")
@@ -2334,7 +2334,7 @@ val VkBufferCreateInfo = struct(Module.VULKAN, "VkBufferCreateInfo") {
         #CreateBuffer()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_BUFFER_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBufferCreateFlags("flags", "a bitmask of {@code VkBufferCreateFlagBits} specifying additional parameters of the buffer.")
     VkDeviceSize("size", "the size in bytes of the buffer to be created.")
@@ -2379,7 +2379,7 @@ val VkBufferViewCreateInfo = struct(Module.VULKAN, "VkBufferViewCreateInfo") {
         #CreateBufferView()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBufferViewCreateFlags("flags", "reserved for future use.")
     VkBuffer("buffer", "a {@code VkBuffer} on which the view will be created.")
@@ -2590,7 +2590,7 @@ val VkImageCreateInfo = struct(Module.VULKAN, "VkImageCreateInfo") {
         ##VkExtent3D, #CreateImage()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_IMAGE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageCreateFlags("flags", "a bitmask of {@code VkImageCreateFlagBits} describing additional parameters of the image.")
     VkImageType("imageType", "a {@code VkImageType} value specifying the basic dimensionality of the image. Layers in array textures do not count as a dimension for the purposes of the image type.")
@@ -2794,7 +2794,7 @@ val VkImageViewCreateInfo = struct(Module.VULKAN, "VkImageViewCreateInfo") {
         ##VkComponentMapping, ##VkImageSubresourceRange, #CreateImageView()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageViewCreateFlags("flags", "a bitmask of {@code VkImageViewCreateFlagBits} describing additional parameters of the image view.")
     VkImage("image", "a {@code VkImage} on which the view will be created.")
@@ -2836,7 +2836,7 @@ val VkShaderModuleCreateInfo = struct(Module.VULKAN, "VkShaderModuleCreateInfo")
         #CreateShaderModule()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkShaderModuleCreateFlags("flags", "reserved for future use.")
     size_t("codeSize", "the size, in bytes, of the code pointed to by {@code pCode}.")
@@ -2867,7 +2867,7 @@ val VkPipelineCacheCreateInfo = struct(Module.VULKAN, "VkPipelineCacheCreateInfo
         #CreatePipelineCache()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineCacheCreateFlags("flags", "a bitmask of {@code VkPipelineCacheCreateFlagBits} specifying the behavior of the pipeline cache.")
     AutoSize("pInitialData", optional = true)..size_t("initialDataSize", "the number of bytes in {@code pInitialData}. If {@code initialDataSize} is zero, the pipeline cache will initially be empty.")
@@ -2979,7 +2979,7 @@ val VkPipelineShaderStageCreateInfo = struct(Module.VULKAN, "VkPipelineShaderSta
         ##VkComputePipelineCreateInfo, ##VkGraphicsPipelineCreateInfo, ##VkGraphicsShaderGroupCreateInfoNV, ##VkRayTracingPipelineCreateInfoKHR, ##VkRayTracingPipelineCreateInfoNV, ##VkSpecializationInfo
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineShaderStageCreateFlags("flags", "a bitmask of {@code VkPipelineShaderStageCreateFlagBits} specifying how the pipeline shader stage will be generated.")
     VkShaderStageFlagBits("stage", "a {@code VkShaderStageFlagBits} value specifying a single pipeline stage.")
@@ -3034,7 +3034,7 @@ val VkComputePipelineCreateInfo = struct(Module.VULKAN, "VkComputePipelineCreate
         ##VkPipelineShaderStageCreateInfo, #CreateComputePipelines()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineCreateFlags("flags", "a bitmask of {@code VkPipelineCreateFlagBits} specifying how the pipeline will be generated.")
     VkPipelineShaderStageCreateInfo("stage", "a ##VkPipelineShaderStageCreateInfo structure describing the compute shader.")
@@ -3126,7 +3126,7 @@ val VkPipelineVertexInputStateCreateInfo = struct(Module.VULKAN, "VkPipelineVert
         ##VkGraphicsPipelineCreateInfo, ##VkGraphicsShaderGroupCreateInfoNV, ##VkVertexInputAttributeDescription, ##VkVertexInputBindingDescription
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineVertexInputStateCreateFlags("flags", "reserved for future use.")
     AutoSize("pVertexBindingDescriptions", optional = true)..uint32_t("vertexBindingDescriptionCount", "the number of vertex binding descriptions provided in {@code pVertexBindingDescriptions}.")
@@ -3164,7 +3164,7 @@ val VkPipelineInputAssemblyStateCreateInfo = struct(Module.VULKAN, "VkPipelineIn
         ##VkGraphicsPipelineCreateInfo
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineInputAssemblyStateCreateFlags("flags", "reserved for future use.")
     VkPrimitiveTopology("topology", "a {@code VkPrimitiveTopology} defining the primitive topology, as described below.")
@@ -3193,7 +3193,7 @@ val VkPipelineTessellationStateCreateInfo = struct(Module.VULKAN, "VkPipelineTes
         ##VkGraphicsPipelineCreateInfo, ##VkGraphicsShaderGroupCreateInfoNV
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineTessellationStateCreateFlags("flags", "reserved for future use.")
     uint32_t("patchControlPoints", "the number of control points per patch.")
@@ -3294,7 +3294,7 @@ val VkPipelineViewportStateCreateInfo = struct(Module.VULKAN, "VkPipelineViewpor
         ##VkGraphicsPipelineCreateInfo, ##VkRect2D, ##VkViewport
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineViewportStateCreateFlags("flags", "reserved for future use.")
     AutoSize("pViewports", optional = true)..uint32_t("viewportCount", "the number of viewports used by the pipeline.")
@@ -3334,7 +3334,7 @@ val VkPipelineRasterizationStateCreateInfo = struct(Module.VULKAN, "VkPipelineRa
         ##VkGraphicsPipelineCreateInfo
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineRasterizationStateCreateFlags("flags", "reserved for future use.")
     VkBool32("depthClampEnable", "controls whether to clamp the fragment’s depth values as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#fragops-depth\">Depth Test</a>. If the pipeline is not created with ##VkPipelineRasterizationDepthClipStateCreateInfoEXT present then enabling depth clamp will also disable clipping primitives to the z planes of the frustrum as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#vertexpostproc-clipping\">Primitive Clipping</a>. Otherwise depth clipping is controlled by the state set in ##VkPipelineRasterizationDepthClipStateCreateInfoEXT.")
@@ -3381,7 +3381,7 @@ val VkPipelineMultisampleStateCreateInfo = struct(Module.VULKAN, "VkPipelineMult
         ##VkGraphicsPipelineCreateInfo
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineMultisampleStateCreateFlags("flags", "reserved for future use.")
     VkSampleCountFlagBits("rasterizationSamples", "a {@code VkSampleCountFlagBits} value specifying the number of samples used in rasterization.")
@@ -3443,7 +3443,7 @@ val VkPipelineDepthStencilStateCreateInfo = struct(Module.VULKAN, "VkPipelineDep
         ##VkGraphicsPipelineCreateInfo, ##VkStencilOpState
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineDepthStencilStateCreateFlags("flags", "reserved for future use.")
     VkBool32("depthTestEnable", "controls whether <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#fragops-depth\">depth testing</a> is enabled.")
@@ -3532,7 +3532,7 @@ val VkPipelineColorBlendStateCreateInfo = struct(Module.VULKAN, "VkPipelineColor
         ##VkGraphicsPipelineCreateInfo, ##VkPipelineColorBlendAttachmentState
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineColorBlendStateCreateFlags("flags", "reserved for future use.")
     VkBool32("logicOpEnable", "controls whether to apply <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#framebuffer-logicop\">Logical Operations</a>.")
@@ -3564,7 +3564,7 @@ val VkPipelineDynamicStateCreateInfo = struct(Module.VULKAN, "VkPipelineDynamicS
         ##VkGraphicsPipelineCreateInfo, ##VkRayTracingPipelineCreateInfoKHR
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineDynamicStateCreateFlags("flags", "reserved for future use.")
     AutoSize("pDynamicStates", optional = true)..uint32_t("dynamicStateCount", "the number of elements in the {@code pDynamicStates} array.")
@@ -3779,7 +3779,7 @@ val VkGraphicsPipelineCreateInfo = struct(Module.VULKAN, "VkGraphicsPipelineCrea
         ##VkPipelineColorBlendStateCreateInfo, ##VkPipelineDepthStencilStateCreateInfo, ##VkPipelineDynamicStateCreateInfo, ##VkPipelineInputAssemblyStateCreateInfo, ##VkPipelineMultisampleStateCreateInfo, ##VkPipelineRasterizationStateCreateInfo, ##VkPipelineShaderStageCreateInfo, ##VkPipelineTessellationStateCreateInfo, ##VkPipelineVertexInputStateCreateInfo, ##VkPipelineViewportStateCreateInfo, #CreateGraphicsPipelines()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineCreateFlags("flags", "a bitmask of {@code VkPipelineCreateFlagBits} specifying how the pipeline will be generated.")
     AutoSize("pStages")..uint32_t("stageCount", "the number of entries in the {@code pStages} array.")
@@ -3893,7 +3893,7 @@ val VkPipelineLayoutCreateInfo = struct(Module.VULKAN, "VkPipelineLayoutCreateIn
         ##VkPushConstantRange, #CreatePipelineLayout()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineLayoutCreateFlags("flags", "reserved for future use.")
     AutoSize("pSetLayouts", optional = true)..uint32_t("setLayoutCount", "the number of descriptor sets included in the pipeline layout.")
@@ -3980,7 +3980,7 @@ val VkSamplerCreateInfo = struct(Module.VULKAN, "VkSamplerCreateInfo") {
         #CreateSampler()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SAMPLER_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSamplerCreateFlags("flags", "a bitmask of {@code VkSamplerCreateFlagBits} describing additional parameters of the sampler.")
     VkFilter("magFilter", "a {@code VkFilter} value specifying the magnification filter to apply to lookups.")
@@ -4064,7 +4064,7 @@ val VkCopyDescriptorSet = struct(Module.VULKAN, "VkCopyDescriptorSet") {
         #UpdateDescriptorSets()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_COPY_DESCRIPTOR_SET")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDescriptorSet("srcSet", "{@code srcSet}, {@code srcBinding}, and {@code srcArrayElement} are the source set, binding, and array element, respectively. If the descriptor binding identified by {@code srcSet} and {@code srcBinding} has a descriptor type of #DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT then {@code srcArrayElement} specifies the starting byte offset within the binding to copy from.")
     uint32_t("srcBinding", "see {@code srcSet}")
@@ -4215,7 +4215,7 @@ val VkDescriptorPoolCreateInfo = struct(Module.VULKAN, "VkDescriptorPoolCreateIn
         ##VkDescriptorPoolSize, #CreateDescriptorPool()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDescriptorPoolCreateFlags("flags", "a bitmask of {@code VkDescriptorPoolCreateFlagBits} specifying certain supported operations on the pool.")
     uint32_t("maxSets", "the maximum number of descriptor sets that <b>can</b> be allocated from the pool.")
@@ -4250,7 +4250,7 @@ val VkDescriptorSetAllocateInfo = struct(Module.VULKAN, "VkDescriptorSetAllocate
         #AllocateDescriptorSets()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDescriptorPool("descriptorPool", "the pool which the sets will be allocated from.")
     AutoSize("pSetLayouts")..uint32_t("descriptorSetCount", "determines the number of descriptor sets to be allocated from the pool.")
@@ -4334,7 +4334,7 @@ val VkDescriptorSetLayoutCreateInfo = struct(Module.VULKAN, "VkDescriptorSetLayo
         ##VkDescriptorSetLayoutBinding, #CreateDescriptorSetLayout(), #GetDescriptorSetLayoutSupport(), #GetDescriptorSetLayoutSupportKHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDescriptorSetLayoutCreateFlags("flags", "a bitmask of {@code VkDescriptorSetLayoutCreateFlagBits} specifying options for descriptor set layout creation.")
     AutoSize("pBindings", optional = true)..uint32_t("bindingCount", "the number of elements in {@code pBindings}.")
@@ -4418,7 +4418,7 @@ val VkWriteDescriptorSet = struct(Module.VULKAN, "VkWriteDescriptorSet") {
         ##VkDescriptorBufferInfo, ##VkDescriptorImageInfo, #CmdPushDescriptorSetKHR(), #UpdateDescriptorSets()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDescriptorSet("dstSet", "the destination descriptor set to update.")
     uint32_t("dstBinding", "the descriptor binding within that set.")
@@ -4642,7 +4642,7 @@ val VkFramebufferCreateInfo = struct(Module.VULKAN, "VkFramebufferCreateInfo") {
         #CreateFramebuffer()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkFramebufferCreateFlags("flags", "a bitmask of {@code VkFramebufferCreateFlagBits}")
     VkRenderPass("renderPass", "a render pass defining what render passes the framebuffer will be compatible with. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#renderpass-compatibility\">Render Pass Compatibility</a> for details.")
@@ -4866,7 +4866,7 @@ val VkRenderPassCreateInfo = struct(Module.VULKAN, "VkRenderPassCreateInfo") {
         ##VkAttachmentDescription, ##VkSubpassDependency, ##VkSubpassDescription, #CreateRenderPass()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkRenderPassCreateFlags("flags", "a bitmask of {@code VkRenderPassCreateFlagBits}")
     AutoSize("pAttachments", optional = true)..uint32_t("attachmentCount", "the number of attachments used by this render pass.")
@@ -4898,7 +4898,7 @@ val VkCommandPoolCreateInfo = struct(Module.VULKAN, "VkCommandPoolCreateInfo") {
         #CreateCommandPool()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkCommandPoolCreateFlags("flags", "a bitmask of {@code VkCommandPoolCreateFlagBits} indicating usage behavior for the pool and command buffers allocated from it.")
     uint32_t("queueFamilyIndex", "designates a queue family as described in section <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#devsandqueues-queueprops\">Queue Family Properties</a>. All command buffers allocated from this command pool <b>must</b> be submitted on queues from the same queue family.")
@@ -4921,7 +4921,7 @@ val VkCommandBufferAllocateInfo = struct(Module.VULKAN, "VkCommandBufferAllocate
         #AllocateCommandBuffers()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkCommandPool("commandPool", "the command pool from which the command buffers are allocated.")
     VkCommandBufferLevel("level", "a {@code VkCommandBufferLevel} value specifying the command buffer level.")
@@ -4954,7 +4954,7 @@ val VkCommandBufferInheritanceInfo = struct(Module.VULKAN, "VkCommandBufferInher
         ##VkCommandBufferBeginInfo
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkRenderPass("renderPass", "a {@code VkRenderPass} object defining which render passes the {@code VkCommandBuffer} will be <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#renderpass-compatibility\">compatible</a> with and <b>can</b> be executed within. If the {@code VkCommandBuffer} will not be executed within a render pass instance, {@code renderPass} is ignored.")
     uint32_t("subpass", "the index of the subpass within the render pass instance that the {@code VkCommandBuffer} will be executed within. If the {@code VkCommandBuffer} will not be executed within a render pass instance, {@code subpass} is ignored.")
@@ -4992,7 +4992,7 @@ val VkCommandBufferBeginInfo = struct(Module.VULKAN, "VkCommandBufferBeginInfo")
         ##VkCommandBufferInheritanceInfo, #BeginCommandBuffer()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkCommandBufferUsageFlags("flags", "a bitmask of {@code VkCommandBufferUsageFlagBits} specifying usage behavior for the command buffer.")
     nullable..VkCommandBufferInheritanceInfo.const.p("pInheritanceInfo", "a pointer to a ##VkCommandBufferInheritanceInfo structure, used if {@code commandBuffer} is a secondary command buffer. If this is a primary command buffer, then this value is ignored.")
@@ -5351,7 +5351,7 @@ val VkRenderPassBeginInfo = struct(Module.VULKAN, "VkRenderPassBeginInfo") {
         ##VkClearValue, ##VkRect2D, #CmdBeginRenderPass(), #CmdBeginRenderPass2(), #CmdBeginRenderPass2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkRenderPass("renderPass", "the render pass to begin an instance of.")
     VkFramebuffer("framebuffer", "the framebuffer containing the attachments that are used with the render pass.")
@@ -5376,7 +5376,7 @@ val VkPhysicalDeviceSubgroupProperties = struct(Module.VULKAN, "VkPhysicalDevice
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint32_t("subgroupSize", "the default number of invocations in each subgroup. {@code subgroupSize} is at least 1 if any of the physical device’s queues support #QUEUE_GRAPHICS_BIT or #QUEUE_COMPUTE_BIT. {@code subgroupSize} is a power-of-two.")
     VkShaderStageFlags("supportedStages", "a bitfield of {@code VkShaderStageFlagBits} describing the shader stages that <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#shaders-group-operations\">group operations</a> with <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#shaders-scope-subgroup\">subgroup scope</a> are supported in. {@code supportedStages} will have the #SHADER_STAGE_COMPUTE_BIT bit set if any of the physical device’s queues support #QUEUE_COMPUTE_BIT.")
@@ -5422,7 +5422,7 @@ val VkBindBufferMemoryInfo = struct(Module.VULKAN, "VkBindBufferMemoryInfo") {
         #BindBufferMemory2(), #BindBufferMemory2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBuffer("buffer", "the buffer to be attached to memory.")
     VkDeviceMemory("memory", "a {@code VkDeviceMemory} object describing the device memory to attach.")
@@ -5476,7 +5476,7 @@ val VkBindImageMemoryInfo = struct(Module.VULKAN, "VkBindImageMemoryInfo") {
         #BindImageMemory2(), #BindImageMemory2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImage("image", "the image to be attached to memory.")
     VkDeviceMemory("memory", "a {@code VkDeviceMemory} object describing the device memory to attach.")
@@ -5497,7 +5497,7 @@ val VkPhysicalDevice16BitStorageFeatures = struct(Module.VULKAN, "VkPhysicalDevi
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("storageBuffer16BitAccess", "specifies whether objects in the {@code StorageBuffer}, {@code ShaderRecordBufferKHR}, or {@code PhysicalStorageBuffer} storage class with the {@code Block} decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StorageBuffer16BitAccess} capability.")
     VkBool32("uniformAndStorageBuffer16BitAccess", "specifies whether objects in the {@code Uniform} storage class with the {@code Block} decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code UniformAndStorageBuffer16BitAccess} capability.")
@@ -5534,7 +5534,7 @@ val VkMemoryDedicatedRequirements = struct(Module.VULKAN, "VkMemoryDedicatedRequ
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkBool32("prefersDedicatedAllocation", "specifies that the implementation would prefer a dedicated allocation for this resource. The application is still free to suballocate the resource but it <b>may</b> get better performance if a dedicated allocation is used.")
     VkBool32("requiresDedicatedAllocation", "specifies that a dedicated allocation is required for this resource.")
@@ -5568,7 +5568,7 @@ val VkMemoryDedicatedAllocateInfo = struct(Module.VULKAN, "VkMemoryDedicatedAllo
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImage("image", "#NULL_HANDLE or a handle of an image which this memory will be bound to.")
     VkBuffer("buffer", "#NULL_HANDLE or a handle of a buffer which this memory will be bound to.")
@@ -5601,7 +5601,7 @@ val VkMemoryAllocateFlagsInfo = struct(Module.VULKAN, "VkMemoryAllocateFlagsInfo
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkMemoryAllocateFlags("flags", "a bitmask of {@code VkMemoryAllocateFlagBits} controlling the allocation.")
     uint32_t("deviceMask", "a mask of physical devices in the logical device, indicating that memory <b>must</b> be allocated on each device in the mask, if #MEMORY_ALLOCATE_DEVICE_MASK_BIT is set in {@code flags}.")
@@ -5637,7 +5637,7 @@ val VkDeviceGroupRenderPassBeginInfo = struct(Module.VULKAN, "VkDeviceGroupRende
         ##VkRect2D
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint32_t("deviceMask", "the device mask for the render pass instance.")
     AutoSize("pDeviceRenderAreas", optional = true)..uint32_t("deviceRenderAreaCount", "the number of elements in the {@code pDeviceRenderAreas} array.")
@@ -5666,7 +5666,7 @@ val VkDeviceGroupCommandBufferBeginInfo = struct(Module.VULKAN, "VkDeviceGroupCo
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint32_t("deviceMask", "the initial value of the command buffer’s device mask.")
 }
@@ -5697,7 +5697,7 @@ val VkDeviceGroupSubmitInfo = struct(Module.VULKAN, "VkDeviceGroupSubmitInfo") {
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pWaitSemaphoreDeviceIndices", optional = true)..uint32_t("waitSemaphoreCount", "the number of elements in the {@code pWaitSemaphoreDeviceIndices} array.")
     uint32_t.const.p("pWaitSemaphoreDeviceIndices", "a pointer to an array of {@code waitSemaphoreCount} device indices indicating which physical device executes the semaphore wait operation in the corresponding element of ##VkSubmitInfo{@code ::pWaitSemaphores}.")
@@ -5729,7 +5729,7 @@ val VkDeviceGroupBindSparseInfo = struct(Module.VULKAN, "VkDeviceGroupBindSparse
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint32_t("resourceDeviceIndex", "a device index indicating which instance of the resource is bound.")
     uint32_t("memoryDeviceIndex", "a device index indicating which instance of the memory the resource instance is bound to.")
@@ -5762,7 +5762,7 @@ val VkBindBufferMemoryDeviceGroupInfo = struct(Module.VULKAN, "VkBindBufferMemor
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pDeviceIndices", optional = true)..uint32_t("deviceIndexCount", "the number of elements in {@code pDeviceIndices}.")
     uint32_t.const.p("pDeviceIndices", "a pointer to an array of device indices.")
@@ -5808,7 +5808,7 @@ val VkBindImageMemoryDeviceGroupInfo = struct(Module.VULKAN, "VkBindImageMemoryD
         ##VkRect2D
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pDeviceIndices", optional = true)..uint32_t("deviceIndexCount", "the number of elements in {@code pDeviceIndices}.")
     uint32_t.const.p("pDeviceIndices", "a pointer to an array of device indices.")
@@ -5832,7 +5832,7 @@ val VkPhysicalDeviceGroupProperties = struct(Module.VULKAN, "VkPhysicalDeviceGro
         #EnumeratePhysicalDeviceGroups(), #EnumeratePhysicalDeviceGroupsKHR()
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint32_t("physicalDeviceCount", "the number of physical devices in the group.")
     VkPhysicalDevice("physicalDevices", "an array of #MAX_DEVICE_GROUP_SIZE {@code VkPhysicalDevice} handles representing all physical devices in the group. The first {@code physicalDeviceCount} elements of the array will be valid.")["VK_MAX_DEVICE_GROUP_SIZE"]
@@ -5863,7 +5863,7 @@ val VkDeviceGroupDeviceCreateInfo = struct(Module.VULKAN, "VkDeviceGroupDeviceCr
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pPhysicalDevices", optional = true)..uint32_t("physicalDeviceCount", "the number of elements in the {@code pPhysicalDevices} array.")
     VkPhysicalDevice.const.p("pPhysicalDevices", "a pointer to an array of physical device handles belonging to the same device group.")
@@ -5885,7 +5885,7 @@ val VkBufferMemoryRequirementsInfo2 = struct(Module.VULKAN, "VkBufferMemoryRequi
         #GetBufferMemoryRequirements2(), #GetBufferMemoryRequirements2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBuffer("buffer", "the buffer to query.")
 }
@@ -5915,7 +5915,7 @@ val VkImageMemoryRequirementsInfo2 = struct(Module.VULKAN, "VkImageMemoryRequire
         #GetImageMemoryRequirements2(), #GetImageMemoryRequirements2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImage("image", "the image to query.")
 }
@@ -5936,7 +5936,7 @@ val VkImageSparseMemoryRequirementsInfo2 = struct(Module.VULKAN, "VkImageSparseM
         #GetImageSparseMemoryRequirements2(), #GetImageSparseMemoryRequirements2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImage("image", "the image to query.")
 }
@@ -5957,7 +5957,7 @@ val VkMemoryRequirements2 = struct(Module.VULKAN, "VkMemoryRequirements2", mutab
         ##VkMemoryRequirements, ##VkVideoGetMemoryPropertiesKHR, #GetBufferMemoryRequirements2(), #GetBufferMemoryRequirements2KHR(), #GetGeneratedCommandsMemoryRequirementsNV(), #GetImageMemoryRequirements2(), #GetImageMemoryRequirements2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkMemoryRequirements("memoryRequirements", "a ##VkMemoryRequirements structure describing the memory requirements of the resource.")
 }
@@ -5977,7 +5977,7 @@ val VkSparseImageMemoryRequirements2 = struct(Module.VULKAN, "VkSparseImageMemor
         ##VkSparseImageMemoryRequirements, #GetImageSparseMemoryRequirements2(), #GetImageSparseMemoryRequirements2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkSparseImageMemoryRequirements("memoryRequirements", "a ##VkSparseImageMemoryRequirements structure describing the memory requirements of the sparse image.")
 }
@@ -5999,7 +5999,7 @@ val VkPhysicalDeviceFeatures2 = struct(Module.VULKAN, "VkPhysicalDeviceFeatures2
         ##VkPhysicalDeviceFeatures, #GetPhysicalDeviceFeatures2(), #GetPhysicalDeviceFeatures2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPhysicalDeviceFeatures("features", "a ##VkPhysicalDeviceFeatures structure describing the fine-grained features of the Vulkan 1.0 API.")
 }
@@ -6023,7 +6023,7 @@ val VkPhysicalDeviceProperties2 = struct(Module.VULKAN, "VkPhysicalDevicePropert
         ##VkPhysicalDeviceProperties, #GetPhysicalDeviceProperties2(), #GetPhysicalDeviceProperties2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkPhysicalDeviceProperties("properties", "a ##VkPhysicalDeviceProperties structure describing properties of the physical device. This structure is written with the same values as if it were written by #GetPhysicalDeviceProperties().")
 }
@@ -6044,7 +6044,7 @@ val VkFormatProperties2 = struct(Module.VULKAN, "VkFormatProperties2", mutable =
         ##VkFormatProperties, #GetPhysicalDeviceFormatProperties2(), #GetPhysicalDeviceFormatProperties2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_FORMAT_PROPERTIES_2")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkFormatProperties("formatProperties", "a ##VkFormatProperties structure describing features supported by the requested format.")
 }
@@ -6072,7 +6072,7 @@ val VkImageFormatProperties2 = struct(Module.VULKAN, "VkImageFormatProperties2",
         ##VkImageFormatProperties, #GetPhysicalDeviceImageFormatProperties2(), #GetPhysicalDeviceImageFormatProperties2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of ##VkImageFormatProperties2 is used to allow the specification of additional capabilities to be returned from {@code vkGetPhysicalDeviceImageFormatProperties2}.").mutable()
     VkImageFormatProperties("imageFormatProperties", "a ##VkImageFormatProperties structure in which capabilities are returned.")
 }
@@ -6108,7 +6108,7 @@ val VkPhysicalDeviceImageFormatInfo2 = struct(Module.VULKAN, "VkPhysicalDeviceIm
         #GetPhysicalDeviceImageFormatProperties2(), #GetPhysicalDeviceImageFormatProperties2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2 is used to provide additional image parameters to {@code vkGetPhysicalDeviceImageFormatProperties2}.")
     VkFormat("format", "a {@code VkFormat} value indicating the image format, corresponding to ##VkImageCreateInfo{@code ::format}.")
     VkImageType("type", "a {@code VkImageType} value indicating the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}.")
@@ -6133,7 +6133,7 @@ val VkQueueFamilyProperties2 = struct(Module.VULKAN, "VkQueueFamilyProperties2",
         ##VkQueueFamilyProperties, #GetPhysicalDeviceQueueFamilyProperties2(), #GetPhysicalDeviceQueueFamilyProperties2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkQueueFamilyProperties("queueFamilyProperties", "a ##VkQueueFamilyProperties structure which is populated with the same values as in #GetPhysicalDeviceQueueFamilyProperties().")
 }
@@ -6154,7 +6154,7 @@ val VkPhysicalDeviceMemoryProperties2 = struct(Module.VULKAN, "VkPhysicalDeviceM
         ##VkPhysicalDeviceMemoryProperties, #GetPhysicalDeviceMemoryProperties2(), #GetPhysicalDeviceMemoryProperties2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkPhysicalDeviceMemoryProperties("memoryProperties", "a ##VkPhysicalDeviceMemoryProperties structure which is populated with the same values as in #GetPhysicalDeviceMemoryProperties().")
 }
@@ -6174,7 +6174,7 @@ val VkSparseImageFormatProperties2 = struct(Module.VULKAN, "VkSparseImageFormatP
         ##VkSparseImageFormatProperties, #GetPhysicalDeviceSparseImageFormatProperties2(), #GetPhysicalDeviceSparseImageFormatProperties2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkSparseImageFormatProperties("properties", "a ##VkSparseImageFormatProperties structure which is populated with the same values as in #GetPhysicalDeviceSparseImageFormatProperties().")
 }
@@ -6205,7 +6205,7 @@ val VkPhysicalDeviceSparseImageFormatInfo2 = struct(Module.VULKAN, "VkPhysicalDe
         #GetPhysicalDeviceSparseImageFormatProperties2(), #GetPhysicalDeviceSparseImageFormatProperties2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkFormat("format", "the image format.")
     VkImageType("type", "the dimensionality of image.")
@@ -6228,7 +6228,7 @@ val VkPhysicalDevicePointClippingProperties = struct(Module.VULKAN, "VkPhysicalD
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkPointClippingBehavior("pointClippingBehavior", "a {@code VkPointClippingBehavior} value specifying the point clipping behavior supported by the implementation.")
 }
@@ -6288,7 +6288,7 @@ val VkRenderPassInputAttachmentAspectCreateInfo = struct(Module.VULKAN, "VkRende
         ##VkInputAttachmentAspectReference
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pAspectReferences")..uint32_t("aspectReferenceCount", "the number of elements in the {@code pAspectReferences} array.")
     VkInputAttachmentAspectReference.const.p("pAspectReferences", "a pointer to an array of {@code aspectReferenceCount} ##VkInputAttachmentAspectReference structures containing a mask describing which aspect(s) <b>can</b> be accessed for a given input attachment within a given subpass.")
@@ -6310,7 +6310,7 @@ val VkImageViewUsageCreateInfo = struct(Module.VULKAN, "VkImageViewUsageCreateIn
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageUsageFlags("usage", "a bitmask of {@code VkImageUsageFlagBits} specifying allowed usages of the image view.")
 }
@@ -6330,7 +6330,7 @@ val VkPipelineTessellationDomainOriginStateCreateInfo = struct(Module.VULKAN, "V
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkTessellationDomainOrigin("domainOrigin", "a {@code VkTessellationDomainOrigin} value controlling the origin of the tessellation domain space.")
 }
@@ -6371,7 +6371,7 @@ val VkRenderPassMultiviewCreateInfo = struct(Module.VULKAN, "VkRenderPassMultivi
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pViewMasks", optional = true)..uint32_t("subpassCount", "zero or the number of subpasses in the render pass.")
     uint32_t.const.p("pViewMasks", "a pointer to an array of {@code subpassCount} view masks, where each mask is a bitfield of view indices describing which views rendering is broadcast to in each subpass, when multiview is enabled. If {@code subpassCount} is zero, each view mask is treated as zero.")
@@ -6401,7 +6401,7 @@ val VkPhysicalDeviceMultiviewFeatures = struct(Module.VULKAN, "VkPhysicalDeviceM
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("multiview", "specifies whether the implementation supports multiview rendering within a render pass. If this feature is not enabled, the view mask of each subpass <b>must</b> always be zero.")
     VkBool32("multiviewGeometryShader", "specifies whether the implementation supports multiview rendering within a render pass, with <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#geometry\">geometry shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include a geometry shader.")
@@ -6422,7 +6422,7 @@ val VkPhysicalDeviceMultiviewProperties = struct(Module.VULKAN, "VkPhysicalDevic
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint32_t("maxMultiviewViewCount", "one greater than the maximum view index that <b>can</b> be used in a subpass.")
     uint32_t("maxMultiviewInstanceIndex", "the maximum valid value of instance index allowed to be generated by a drawing command recorded within a subpass of a multiview render pass instance.")
@@ -6432,7 +6432,7 @@ val _VkPhysicalDeviceVariablePointersFeatures = struct(Module.VULKAN, "VkPhysica
 val VkPhysicalDeviceVariablePointerFeatures = struct(Module.VULKAN, "VkPhysicalDeviceVariablePointerFeatures", alias = _VkPhysicalDeviceVariablePointersFeatures) {
     documentation = "See ##VkPhysicalDeviceVariablePointersFeatures."
 
-    VkStructureType("sType", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES")..VkStructureType("sType", "")
     nullable..opaque_p("pNext", "")
     VkBool32("variablePointersStorageBuffer", "")
     VkBool32("variablePointers", "")
@@ -6457,7 +6457,7 @@ val VkPhysicalDeviceVariablePointersFeatures = struct(Module.VULKAN, "VkPhysical
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("variablePointersStorageBuffer", "specifies whether the implementation supports the SPIR-V {@code VariablePointersStorageBuffer} capability. When this feature is not enabled, shader modules <b>must</b> not declare the {@code SPV_KHR_variable_pointers} extension or the {@code VariablePointersStorageBuffer} capability.")
     VkBool32("variablePointers", "specifies whether the implementation supports the SPIR-V {@code VariablePointers} capability. When this feature is not enabled, shader modules <b>must</b> not declare the {@code VariablePointers} capability.")
@@ -6477,7 +6477,7 @@ val VkPhysicalDeviceProtectedMemoryFeatures = struct(Module.VULKAN, "VkPhysicalD
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("protectedMemory", "specifies whether protected memory is supported.")
 }
@@ -6496,7 +6496,7 @@ val VkPhysicalDeviceProtectedMemoryProperties = struct(Module.VULKAN, "VkPhysica
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkBool32("protectedNoFault", "specifies the behavior of the implementation when <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#memory-protected-access-rules\">protected memory access rules</a> are broken. If {@code protectedNoFault} is #TRUE, breaking those rules will not result in process termination or device loss.")
 }
@@ -6527,7 +6527,7 @@ val VkDeviceQueueInfo2 = struct(Module.VULKAN, "VkDeviceQueueInfo2") {
         #GetDeviceQueue2()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of ##VkDeviceQueueInfo2 is used to provide additional image parameters to {@code vkGetDeviceQueue2}.")
     VkDeviceQueueCreateFlags("flags", "a {@code VkDeviceQueueCreateFlags} value indicating the flags used to create the device queue.")
     uint32_t("queueFamilyIndex", "the index of the queue family to which the queue belongs.")
@@ -6550,7 +6550,7 @@ val VkProtectedSubmitInfo = struct(Module.VULKAN, "VkProtectedSubmitInfo") {
         </ul>
         """
 
-    VkStructureType("sType", "")
+    Expression("#STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO")..VkStructureType("sType", "")
     nullable..opaque_const_p("pNext", "")
     VkBool32("protectedSubmit", "specifies whether the batch is protected. If {@code protectedSubmit} is #TRUE, the batch is protected. If {@code protectedSubmit} is #FALSE, the batch is unprotected. If the ##VkSubmitInfo{@code ::pNext} chain does not include this structure, the batch is unprotected.")
 }
@@ -6605,7 +6605,7 @@ val VkSamplerYcbcrConversionCreateInfo = struct(Module.VULKAN, "VkSamplerYcbcrCo
         ##VkComponentMapping, #CreateSamplerYcbcrConversion(), #CreateSamplerYcbcrConversionKHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkFormat("format", "the format of the image from which color information will be retrieved.")
     VkSamplerYcbcrModelConversion("ycbcrModel", "describes the color matrix for conversion between color models.")
@@ -6629,7 +6629,7 @@ val VkSamplerYcbcrConversionInfo = struct(Module.VULKAN, "VkSamplerYcbcrConversi
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSamplerYcbcrConversion("conversion", "a {@code VkSamplerYcbcrConversion} handle created with #CreateSamplerYcbcrConversion().")
 }
@@ -6652,7 +6652,7 @@ val VkBindImagePlaneMemoryInfo = struct(Module.VULKAN, "VkBindImagePlaneMemoryIn
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageAspectFlagBits("planeAspect", "a {@code VkImageAspectFlagBits} value specifying the aspect of the disjoint image plane to bind.")
 }
@@ -6675,7 +6675,7 @@ val VkImagePlaneMemoryRequirementsInfo = struct(Module.VULKAN, "VkImagePlaneMemo
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageAspectFlagBits("planeAspect", "a {@code VkImageAspectFlagBits} value specifying the aspect corresponding to the image plane to query.")
 }
@@ -6694,7 +6694,7 @@ val VkPhysicalDeviceSamplerYcbcrConversionFeatures = struct(Module.VULKAN, "VkPh
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("samplerYcbcrConversion", "specifies whether the implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#samplers-YCbCr-conversion\">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>. If {@code samplerYcbcrConversion} is #FALSE, sampler Y′C<sub>B</sub>C<sub>R</sub> conversion is not supported, and samplers using sampler Y′C<sub>B</sub>C<sub>R</sub> conversion <b>must</b> not be used.")
 }
@@ -6710,7 +6710,7 @@ val VkSamplerYcbcrConversionImageFormatProperties = struct(Module.VULKAN, "VkSam
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint32_t("combinedImageSamplerDescriptorCount", "the number of combined image sampler descriptors that the implementation uses to access the format.")
 }
@@ -6779,7 +6779,7 @@ val VkDescriptorUpdateTemplateCreateInfo = struct(Module.VULKAN, "VkDescriptorUp
         ##VkDescriptorUpdateTemplateEntry, #CreateDescriptorUpdateTemplate(), #CreateDescriptorUpdateTemplateKHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDescriptorUpdateTemplateCreateFlags("flags", "reserved for future use.")
     AutoSize("pDescriptorUpdateEntries")..uint32_t("descriptorUpdateEntryCount", "the number of elements in the {@code pDescriptorUpdateEntries} array.")
@@ -6825,7 +6825,7 @@ val VkPhysicalDeviceExternalImageFormatInfo = struct(Module.VULKAN, "VkPhysicalD
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkExternalMemoryHandleTypeFlagBits("handleType", "a {@code VkExternalMemoryHandleTypeFlagBits} value specifying the memory handle type that will be used with the memory associated with the image.")
 }
@@ -6844,7 +6844,7 @@ val VkExternalImageFormatProperties = struct(Module.VULKAN, "VkExternalImageForm
         ##VkExternalMemoryProperties
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkExternalMemoryProperties("externalMemoryProperties", "a ##VkExternalMemoryProperties structure specifying various capabilities of the external handle type when used with the specified image creation parameters.")
 }
@@ -6868,7 +6868,7 @@ val VkPhysicalDeviceExternalBufferInfo = struct(Module.VULKAN, "VkPhysicalDevice
         #GetPhysicalDeviceExternalBufferProperties(), #GetPhysicalDeviceExternalBufferPropertiesKHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBufferCreateFlags("flags", "a bitmask of {@code VkBufferCreateFlagBits} describing additional parameters of the buffer, corresponding to ##VkBufferCreateInfo{@code ::flags}.")
     VkBufferUsageFlags("usage", "a bitmask of {@code VkBufferUsageFlagBits} describing the intended usage of the buffer, corresponding to ##VkBufferCreateInfo{@code ::usage}.")
@@ -6890,7 +6890,7 @@ val VkExternalBufferProperties = struct(Module.VULKAN, "VkExternalBufferProperti
         ##VkExternalMemoryProperties, #GetPhysicalDeviceExternalBufferProperties(), #GetPhysicalDeviceExternalBufferPropertiesKHR()
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkExternalMemoryProperties("externalMemoryProperties", "a ##VkExternalMemoryProperties structure specifying various capabilities of the external handle type when used with the specified buffer creation parameters.")
 }
@@ -6945,7 +6945,7 @@ val VkPhysicalDeviceIDProperties = struct(Module.VULKAN, "VkPhysicalDeviceIDProp
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint8_t("deviceUUID", "an array of #UUID_SIZE {@code uint8_t} values representing a universally unique identifier for the device.")["VK_UUID_SIZE"]
     uint8_t("driverUUID", "an array of #UUID_SIZE {@code uint8_t} values representing a universally unique identifier for the driver build in use by the device.")["VK_UUID_SIZE"]
@@ -6966,7 +6966,7 @@ val VkExternalMemoryImageCreateInfo = struct(Module.VULKAN, "VkExternalMemoryIma
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkExternalMemoryHandleTypeFlags("handleTypes", "zero, or a bitmask of {@code VkExternalMemoryHandleTypeFlagBits} specifying one or more external memory handle types.")
 }
@@ -6983,7 +6983,7 @@ val VkExternalMemoryBufferCreateInfo = struct(Module.VULKAN, "VkExternalMemoryBu
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkExternalMemoryHandleTypeFlags("handleTypes", "zero, or a bitmask of {@code VkExternalMemoryHandleTypeFlagBits} specifying one or more external memory handle types.")
 }
@@ -7005,7 +7005,7 @@ val VkExportMemoryAllocateInfo = struct(Module.VULKAN, "VkExportMemoryAllocateIn
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkExternalMemoryHandleTypeFlags("handleTypes", "a bitmask of {@code VkExternalMemoryHandleTypeFlagBits} specifying one or more memory handle types the application <b>can</b> export from the resulting allocation. The application <b>can</b> request multiple handle types for the same allocation.")
 }
@@ -7031,7 +7031,7 @@ val VkPhysicalDeviceExternalFenceInfo = struct(Module.VULKAN, "VkPhysicalDeviceE
         #GetPhysicalDeviceExternalFenceProperties(), #GetPhysicalDeviceExternalFencePropertiesKHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkExternalFenceHandleTypeFlagBits("handleType", "a {@code VkExternalFenceHandleTypeFlagBits} value specifying an external fence handle type for which capabilities will be returned.")
 }
@@ -7054,7 +7054,7 @@ val VkExternalFenceProperties = struct(Module.VULKAN, "VkExternalFenceProperties
         #GetPhysicalDeviceExternalFenceProperties(), #GetPhysicalDeviceExternalFencePropertiesKHR()
         """
 
-    VkStructureType("sType", "").mutable()
+    Expression("#STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES")..VkStructureType("sType", "").mutable()
     nullable..opaque_p("pNext", "").mutable()
     VkExternalFenceHandleTypeFlags("exportFromImportedHandleTypes", "a bitmask of {@code VkExternalFenceHandleTypeFlagBits} indicating which types of imported handle {@code handleType} <b>can</b> be exported from.")
     VkExternalFenceHandleTypeFlags("compatibleHandleTypes", "a bitmask of {@code VkExternalFenceHandleTypeFlagBits} specifying handle types which <b>can</b> be specified at the same time as {@code handleType} when creating a fence.")
@@ -7078,7 +7078,7 @@ val VkExportFenceCreateInfo = struct(Module.VULKAN, "VkExportFenceCreateInfo") {
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkExternalFenceHandleTypeFlags("handleTypes", "a bitmask of {@code VkExternalFenceHandleTypeFlagBits} specifying one or more fence handle types the application <b>can</b> export from the resulting fence. The application <b>can</b> request multiple handle types for the same fence.")
 }
@@ -7100,7 +7100,7 @@ val VkExportSemaphoreCreateInfo = struct(Module.VULKAN, "VkExportSemaphoreCreate
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkExternalSemaphoreHandleTypeFlags("handleTypes", "a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBits} specifying one or more semaphore handle types the application <b>can</b> export from the resulting semaphore. The application <b>can</b> request multiple handle types for the same semaphore.")
 }
@@ -7122,7 +7122,7 @@ val VkPhysicalDeviceExternalSemaphoreInfo = struct(Module.VULKAN, "VkPhysicalDev
         #GetPhysicalDeviceExternalSemaphoreProperties(), #GetPhysicalDeviceExternalSemaphorePropertiesKHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkExternalSemaphoreHandleTypeFlagBits("handleType", "a {@code VkExternalSemaphoreHandleTypeFlagBits} value specifying the external semaphore handle type for which capabilities will be returned.")
 }
@@ -7145,7 +7145,7 @@ val VkExternalSemaphoreProperties = struct(Module.VULKAN, "VkExternalSemaphorePr
         #GetPhysicalDeviceExternalSemaphoreProperties(), #GetPhysicalDeviceExternalSemaphorePropertiesKHR()
         """
 
-    VkStructureType("sType", "the type of this structure").mutable()
+    Expression("#STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES")..VkStructureType("sType", "the type of this structure").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkExternalSemaphoreHandleTypeFlags("exportFromImportedHandleTypes", "a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBits} specifying which types of imported handle {@code handleType} <b>can</b> be exported from.")
     VkExternalSemaphoreHandleTypeFlags("compatibleHandleTypes", "a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBits} specifying handle types which <b>can</b> be specified at the same time as {@code handleType} when creating a semaphore.")
@@ -7166,7 +7166,7 @@ val VkPhysicalDeviceMaintenance3Properties = struct(Module.VULKAN, "VkPhysicalDe
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint32_t("maxPerSetDescriptors", "a maximum number of descriptors (summed over all descriptor types) in a single descriptor set that is guaranteed to satisfy any implementation-dependent constraints on the size of a descriptor set itself. Applications <b>can</b> query whether a descriptor set that goes beyond this limit is supported using #GetDescriptorSetLayoutSupport().")
     VkDeviceSize("maxMemoryAllocationSize", "the maximum size of a memory allocation that <b>can</b> be created, even if there is more space available in the heap.")
@@ -7191,7 +7191,7 @@ val VkDescriptorSetLayoutSupport = struct(Module.VULKAN, "VkDescriptorSetLayoutS
         #GetDescriptorSetLayoutSupport(), #GetDescriptorSetLayoutSupportKHR()
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkBool32("supported", "specifies whether the descriptor set layout <b>can</b> be created.")
 }
@@ -7200,7 +7200,7 @@ val _VkPhysicalDeviceShaderDrawParametersFeatures = struct(Module.VULKAN, "VkPhy
 val VkPhysicalDeviceShaderDrawParameterFeatures = struct(Module.VULKAN, "VkPhysicalDeviceShaderDrawParameterFeatures", alias = _VkPhysicalDeviceShaderDrawParametersFeatures) {
     documentation = "See ##VkPhysicalDeviceShaderDrawParametersFeatures."
 
-    VkStructureType("sType", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES")..VkStructureType("sType", "")
     nullable..opaque_p("pNext", "")
     VkBool32("shaderDrawParameters", "")
 }
@@ -7219,7 +7219,7 @@ val VkPhysicalDeviceShaderDrawParametersFeatures = struct(Module.VULKAN, "VkPhys
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("shaderDrawParameters", "specifies whether the implementation supports the SPIR-V {@code DrawParameters} capability. When this feature is not enabled, shader modules <b>must</b> not declare the {@code SPV_KHR_shader_draw_parameters} extension or the {@code DrawParameters} capability.")
 }
@@ -7238,7 +7238,7 @@ val VkPhysicalDeviceVulkan11Features = struct(Module.VULKAN, "VkPhysicalDeviceVu
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("storageBuffer16BitAccess", "specifies whether objects in the {@code StorageBuffer}, {@code ShaderRecordBufferKHR}, or {@code PhysicalStorageBuffer} storage class with the {@code Block} decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code StorageBuffer16BitAccess} capability.")
     VkBool32("uniformAndStorageBuffer16BitAccess", "specifies whether objects in the {@code Uniform} storage class with the {@code Block} decoration <b>can</b> have 16-bit integer and 16-bit floating-point members. If this feature is not enabled, 16-bit integer or 16-bit floating-point members <b>must</b> not be used in such objects. This also specifies whether shader modules <b>can</b> declare the {@code UniformAndStorageBuffer16BitAccess} capability.")
@@ -7273,7 +7273,7 @@ val VkPhysicalDeviceVulkan11Properties = struct(Module.VULKAN, "VkPhysicalDevice
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint8_t("deviceUUID", "an array of #UUID_SIZE {@code uint8_t} values representing a universally unique identifier for the device.")["VK_UUID_SIZE"]
     uint8_t("driverUUID", "an array of #UUID_SIZE {@code uint8_t} values representing a universally unique identifier for the driver build in use by the device.")["VK_UUID_SIZE"]
@@ -7306,7 +7306,7 @@ val VkPhysicalDeviceVulkan12Features = struct(Module.VULKAN, "VkPhysicalDeviceVu
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("samplerMirrorClampToEdge", "indicates whether the implementation supports the #SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE sampler address mode. If this feature is not enabled, the #SAMPLER_ADDRESS_MODE_MIRROR_CLAMP_TO_EDGE sampler address mode <b>must</b> not be used.")
     VkBool32("drawIndirectCount", "indicates whether the implementation supports the #CmdDrawIndirectCount() and #CmdDrawIndexedIndirectCount() functions. If this feature is not enabled, these functions <b>must</b> not be used.")
@@ -7394,7 +7394,7 @@ val VkPhysicalDeviceVulkan12Properties = struct(Module.VULKAN, "VkPhysicalDevice
         ##VkConformanceVersion
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkDriverId("driverID", "a unique identifier for the driver of the physical device.")
     charUTF8("driverName", "an array of #MAX_DRIVER_NAME_SIZE {@code char} containing a null-terminated UTF-8 string which is the name of the driver.")["VK_MAX_DRIVER_NAME_SIZE"]
@@ -7465,7 +7465,7 @@ val VkImageFormatListCreateInfo = struct(Module.VULKAN, "VkImageFormatListCreate
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pViewFormats", optional = true)..uint32_t("viewFormatCount", "the number of entries in the {@code pViewFormats} array.")
     VkFormat.const.p("pViewFormats", "a pointer to an array of {@code VkFormat} values specifying all formats which <b>can</b> be used when creating views of this image.")
@@ -7524,7 +7524,7 @@ val VkAttachmentDescription2 = struct(Module.VULKAN, "VkAttachmentDescription2")
         ##VkRenderPassCreateInfo2
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkAttachmentDescriptionFlags("flags", "a bitmask of {@code VkAttachmentDescriptionFlagBits} specifying additional properties of the attachment.")
     VkFormat("format", "a {@code VkFormat} value specifying the format of the image that will be used for the attachment.")
@@ -7573,7 +7573,7 @@ val VkAttachmentReference2 = struct(Module.VULKAN, "VkAttachmentReference2") {
         ##VkFragmentShadingRateAttachmentInfoKHR, ##VkSubpassDescription2, ##VkSubpassDescriptionDepthStencilResolve
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint32_t("attachment", "either an integer value identifying an attachment at the corresponding index in ##VkRenderPassCreateInfo2{@code ::pAttachments}, or #ATTACHMENT_UNUSED to signify that this attachment is not used.")
     VkImageLayout("layout", "a {@code VkImageLayout} value specifying the layout the attachment uses during the subpass.")
@@ -7638,7 +7638,7 @@ val VkSubpassDescription2 = struct(Module.VULKAN, "VkSubpassDescription2") {
         ##VkAttachmentReference2, ##VkRenderPassCreateInfo2
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSubpassDescriptionFlags("flags", "a bitmask of {@code VkSubpassDescriptionFlagBits} specifying usage of the subpass.")
     VkPipelineBindPoint("pipelineBindPoint", "a {@code VkPipelineBindPoint} value specifying the pipeline type supported for this subpass.")
@@ -7705,7 +7705,7 @@ val VkSubpassDependency2 = struct(Module.VULKAN, "VkSubpassDependency2") {
         ##VkRenderPassCreateInfo2
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint32_t("srcSubpass", "the subpass index of the first subpass in the dependency, or #SUBPASS_EXTERNAL.")
     uint32_t("dstSubpass", "the subpass index of the second subpass in the dependency, or #SUBPASS_EXTERNAL.")
@@ -7773,7 +7773,7 @@ val VkRenderPassCreateInfo2 = struct(Module.VULKAN, "VkRenderPassCreateInfo2") {
         ##VkAttachmentDescription2, ##VkSubpassDependency2, ##VkSubpassDescription2, #CreateRenderPass2(), #CreateRenderPass2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkRenderPassCreateFlags("flags", "reserved for future use.")
     AutoSize("pAttachments", optional = true)..uint32_t("attachmentCount", "the number of attachments used by this render pass.")
@@ -7802,7 +7802,7 @@ val VkSubpassBeginInfo = struct(Module.VULKAN, "VkSubpassBeginInfo") {
         #CmdBeginRenderPass2(), #CmdBeginRenderPass2KHR(), #CmdNextSubpass2(), #CmdNextSubpass2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SUBPASS_BEGIN_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSubpassContents("contents", "a {@code VkSubpassContents} value specifying how the commands in the next subpass will be provided.")
 }
@@ -7822,7 +7822,7 @@ val VkSubpassEndInfo = struct(Module.VULKAN, "VkSubpassEndInfo") {
         #CmdEndRenderPass2(), #CmdEndRenderPass2KHR(), #CmdNextSubpass2(), #CmdNextSubpass2KHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SUBPASS_END_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
 }
 
@@ -7840,7 +7840,7 @@ val VkPhysicalDevice8BitStorageFeatures = struct(Module.VULKAN, "VkPhysicalDevic
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("storageBuffer8BitAccess", "indicates whether objects in the {@code StorageBuffer}, {@code ShaderRecordBufferKHR}, or {@code PhysicalStorageBuffer} storage class with the {@code Block} decoration <b>can</b> have 8-bit integer members. If this feature is not enabled, 8-bit integer members <b>must</b> not be used in such objects. This also indicates whether shader modules <b>can</b> declare the {@code StorageBuffer8BitAccess} capability.")
     VkBool32("uniformAndStorageBuffer8BitAccess", "indicates whether objects in the {@code Uniform} storage class with the {@code Block} decoration <b>can</b> have 8-bit integer members. If this feature is not enabled, 8-bit integer members <b>must</b> not be used in such objects. This also indicates whether shader modules <b>can</b> declare the {@code UniformAndStorageBuffer8BitAccess} capability.")
@@ -7869,7 +7869,7 @@ val VkPhysicalDeviceDriverProperties = struct(Module.VULKAN, "VkPhysicalDeviceDr
         ##VkConformanceVersion
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkDriverId("driverID", "a unique identifier for the driver of the physical device.")
     charUTF8("driverName", "an array of #MAX_DRIVER_NAME_SIZE {@code char} containing a null-terminated UTF-8 string which is the name of the driver.")["VK_MAX_DRIVER_NAME_SIZE"]
@@ -7891,7 +7891,7 @@ val VkPhysicalDeviceShaderAtomicInt64Features = struct(Module.VULKAN, "VkPhysica
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("shaderBufferInt64Atomics", "indicates whether shaders <b>can</b> perform 64-bit unsigned and signed integer atomic operations on buffers.")
     VkBool32("shaderSharedInt64Atomics", "indicates whether shaders <b>can</b> perform 64-bit unsigned and signed integer atomic operations on shared memory.")
@@ -7911,7 +7911,7 @@ val VkPhysicalDeviceShaderFloat16Int8Features = struct(Module.VULKAN, "VkPhysica
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("shaderFloat16", "indicates whether 16-bit floats (halfs) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Float16} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Float16} SPIR-V capability: Declaring and using 16-bit floats in the {@code Private}, {@code Workgroup} (for non-Block variables), and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled.")
     VkBool32("shaderInt8", "indicates whether 8-bit integers (signed and unsigned) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Int8} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Int8} SPIR-V capability: Declaring and using 8-bit integers in the {@code Private}, {@code Workgroup} (for non-Block variables), and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled.")
@@ -7931,7 +7931,7 @@ val VkPhysicalDeviceFloatControlsProperties = struct(Module.VULKAN, "VkPhysicalD
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkShaderFloatControlsIndependence("denormBehaviorIndependence", "a {@code VkShaderFloatControlsIndependence} value indicating whether, and how, denorm behavior can be set independently for different bit widths.")
     VkShaderFloatControlsIndependence("roundingModeIndependence", "a {@code VkShaderFloatControlsIndependence} value indicating whether, and how, rounding modes can be set independently for different bit widths.")
@@ -7987,7 +7987,7 @@ val VkDescriptorSetLayoutBindingFlagsCreateInfo = struct(Module.VULKAN, "VkDescr
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pBindingFlags", optional = true)..uint32_t("bindingCount", "zero or the number of elements in {@code pBindingFlags}.")
     nullable..VkDescriptorBindingFlags.const.p("pBindingFlags", "a pointer to an array of {@code VkDescriptorBindingFlags} bitfields, one for each descriptor set layout binding.")
@@ -8007,7 +8007,7 @@ val VkPhysicalDeviceDescriptorIndexingFeatures = struct(Module.VULKAN, "VkPhysic
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("shaderInputAttachmentArrayDynamicIndexing", "indicates whether arrays of input attachments <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_INPUT_ATTACHMENT <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code InputAttachmentArrayDynamicIndexing} capability.")
     VkBool32("shaderUniformTexelBufferArrayDynamicIndexing", "indicates whether arrays of uniform texel buffers <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of #DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code UniformTexelBufferArrayDynamicIndexing} capability.")
@@ -8045,7 +8045,7 @@ val VkPhysicalDeviceDescriptorIndexingProperties = struct(Module.VULKAN, "VkPhys
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint32_t("maxUpdateAfterBindDescriptorsInAllPools", "the maximum number of descriptors (summed over all descriptor types) that <b>can</b> be created across all pools that are created with the #DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT bit set. Pool creation <b>may</b> fail when this limit is exceeded, or when the space this limit represents is unable to satisfy a pool creation due to fragmentation.")
     VkBool32("shaderUniformBufferArrayNonUniformIndexingNative", "a boolean value indicating whether uniform buffer descriptors natively support nonuniform indexing. If this is #FALSE, then a single dynamic instance of an instruction that nonuniformly indexes an array of uniform buffers <b>may</b> execute multiple times in order to access all the descriptors.")
@@ -8093,7 +8093,7 @@ val VkDescriptorSetVariableDescriptorCountAllocateInfo = struct(Module.VULKAN, "
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pDescriptorCounts", optional = true)..uint32_t("descriptorSetCount", "zero or the number of elements in {@code pDescriptorCounts}.")
     uint32_t.const.p("pDescriptorCounts", "a pointer to an array of descriptor counts, with each member specifying the number of descriptors in a variable descriptor count binding in the corresponding descriptor set being allocated.")
@@ -8113,7 +8113,7 @@ val VkDescriptorSetVariableDescriptorCountLayoutSupport = struct(Module.VULKAN, 
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint32_t("maxVariableDescriptorCount", "indicates the maximum number of descriptors supported in the highest numbered binding of the layout, if that binding is variable-sized. If the highest numbered binding of the layout has a descriptor type of #DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT then {@code maxVariableDescriptorCount} indicates the maximum byte size supported for the binding, if that binding is variable-sized.")
 }
@@ -8150,7 +8150,7 @@ val VkSubpassDescriptionDepthStencilResolve = struct(Module.VULKAN, "VkSubpassDe
         ##VkAttachmentReference2
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkResolveModeFlagBits("depthResolveMode", "a {@code VkResolveModeFlagBits} value describing the depth resolve mode.")
     VkResolveModeFlagBits("stencilResolveMode", "a {@code VkResolveModeFlagBits} value describing the stencil resolve mode.")
@@ -8171,7 +8171,7 @@ val VkPhysicalDeviceDepthStencilResolveProperties = struct(Module.VULKAN, "VkPhy
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkResolveModeFlags("supportedDepthResolveModes", "a bitmask of {@code VkResolveModeFlagBits} indicating the set of supported depth resolve modes. #RESOLVE_MODE_SAMPLE_ZERO_BIT <b>must</b> be included in the set but implementations <b>may</b> support additional modes.")
     VkResolveModeFlags("supportedStencilResolveModes", "a bitmask of {@code VkResolveModeFlagBits} indicating the set of supported stencil resolve modes. #RESOLVE_MODE_SAMPLE_ZERO_BIT <b>must</b> be included in the set but implementations <b>may</b> support additional modes. #RESOLVE_MODE_AVERAGE_BIT <b>must</b> not be included in the set.")
@@ -8193,7 +8193,7 @@ val VkPhysicalDeviceScalarBlockLayoutFeatures = struct(Module.VULKAN, "VkPhysica
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("scalarBlockLayout", "indicates that the implementation supports the layout of resource blocks in shaders using <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#interfaces-alignment-requirements\">scalar alignment</a>.")
 }
@@ -8223,7 +8223,7 @@ val VkImageStencilUsageCreateInfo = struct(Module.VULKAN, "VkImageStencilUsageCr
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageUsageFlags("stencilUsage", "a bitmask of {@code VkImageUsageFlagBits} describing the intended usage of the stencil aspect of the image.")
 }
@@ -8245,7 +8245,7 @@ val VkSamplerReductionModeCreateInfo = struct(Module.VULKAN, "VkSamplerReduction
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSamplerReductionMode("reductionMode", "a {@code VkSamplerReductionMode} value controlling how texture filtering combines texel values.")
 }
@@ -8285,7 +8285,7 @@ val VkPhysicalDeviceSamplerFilterMinmaxProperties = struct(Module.VULKAN, "VkPhy
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkBool32("filterMinmaxSingleComponentFormats", "a boolean value indicating whether a minimum set of required formats support min/max filtering.")
     VkBool32("filterMinmaxImageComponentMapping", "a boolean value indicating whether the implementation supports non-identity component mapping of the image when doing min/max filtering.")
@@ -8305,7 +8305,7 @@ val VkPhysicalDeviceVulkanMemoryModelFeatures = struct(Module.VULKAN, "VkPhysica
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("vulkanMemoryModel", "indicates whether the Vulkan Memory Model is supported, as defined in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#memory-model\">Vulkan Memory Model</a>. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModel} capability.")
     VkBool32("vulkanMemoryModelDeviceScope", "indicates whether the Vulkan Memory Model can use {@code Device} scope synchronization. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModelDeviceScope} capability.")
@@ -8326,7 +8326,7 @@ val VkPhysicalDeviceImagelessFramebufferFeatures = struct(Module.VULKAN, "VkPhys
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("imagelessFramebuffer", "indicates that the implementation supports specifying the image view for attachments at render pass begin time via ##VkRenderPassAttachmentBeginInfo.")
 }
@@ -8353,7 +8353,7 @@ val VkFramebufferAttachmentImageInfo = struct(Module.VULKAN, "VkFramebufferAttac
         ##VkFramebufferAttachmentsCreateInfo
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageCreateFlags("flags", "a bitmask of {@code VkImageCreateFlagBits}, matching the value of ##VkImageCreateInfo{@code ::flags} used to create an image that will be used with this framebuffer.")
     VkImageUsageFlags("usage", "a bitmask of {@code VkImageUsageFlagBits}, matching the value of ##VkImageCreateInfo{@code ::usage} used to create an image used with this framebuffer.")
@@ -8379,7 +8379,7 @@ val VkFramebufferAttachmentsCreateInfo = struct(Module.VULKAN, "VkFramebufferAtt
         ##VkFramebufferAttachmentImageInfo
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pAttachmentImageInfos", optional = true)..uint32_t("attachmentImageInfoCount", "the number of attachments being described.")
     VkFramebufferAttachmentImageInfo.const.p("pAttachmentImageInfos", "a pointer to an array of ##VkFramebufferAttachmentImageInfo instances, each of which describes a number of parameters of the corresponding attachment in a render pass instance.")
@@ -8404,7 +8404,7 @@ val VkRenderPassAttachmentBeginInfo = struct(Module.VULKAN, "VkRenderPassAttachm
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pAttachments", optional = true)..uint32_t("attachmentCount", "the number of attachments.")
     VkImageView.const.p("pAttachments", "a pointer to an array of {@code VkImageView} handles, each of which will be used as the corresponding attachment in the render pass instance.")
@@ -8424,7 +8424,7 @@ val VkPhysicalDeviceUniformBufferStandardLayoutFeatures = struct(Module.VULKAN, 
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("uniformBufferStandardLayout", "indicates that the implementation supports the same layouts for uniform buffers as for storage and other kinds of buffers. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#interfaces-resources-standard-layout\">Standard Buffer Layout</a>.")
 }
@@ -8443,7 +8443,7 @@ val VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures = struct(Module.VULKAN, 
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("shaderSubgroupExtendedTypes", "a boolean that specifies whether subgroup operations can use 8-bit integer, 16-bit integer, 64-bit integer, 16-bit floating-point, and vectors of these types in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#shaders-group-operations\">group operations</a> with <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#shaders-scope-subgroup\">subgroup scope</a>, if the implementation supports the types.")
 }
@@ -8462,7 +8462,7 @@ val VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures = struct(Module.VULKAN, 
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("separateDepthStencilLayouts", "indicates whether the implementation supports a ##VkImageMemoryBarrier for a depth/stencil image with only one of #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT set, and whether #IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL, #IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL, #IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL, or #IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL can be used.")
 }
@@ -8484,7 +8484,7 @@ val VkAttachmentReferenceStencilLayout = struct(Module.VULKAN, "VkAttachmentRefe
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageLayout("stencilLayout", "a {@code VkImageLayout} value specifying the layout the stencil aspect of the attachment uses during the subpass.")
 }
@@ -8509,7 +8509,7 @@ val VkAttachmentDescriptionStencilLayout = struct(Module.VULKAN, "VkAttachmentDe
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageLayout("stencilInitialLayout", "the layout the stencil aspect of the attachment image subresource will be in when a render pass instance begins.")
     VkImageLayout("stencilFinalLayout", "the layout the stencil aspect of the attachment image subresource will be transitioned to when a render pass instance ends.")
@@ -8529,7 +8529,7 @@ val VkPhysicalDeviceHostQueryResetFeatures = struct(Module.VULKAN, "VkPhysicalDe
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("hostQueryReset", "indicates that the implementation supports resetting queries from the host with #ResetQueryPool().")
 }
@@ -8548,7 +8548,7 @@ val VkPhysicalDeviceTimelineSemaphoreFeatures = struct(Module.VULKAN, "VkPhysica
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("timelineSemaphore", "indicates whether semaphores created with a {@code VkSemaphoreType} of #SEMAPHORE_TYPE_TIMELINE are supported.")
 }
@@ -8567,7 +8567,7 @@ val VkPhysicalDeviceTimelineSemaphoreProperties = struct(Module.VULKAN, "VkPhysi
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.").mutable()
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint64_t("maxTimelineSemaphoreValueDifference", "indicates the maximum difference allowed by the implementation between the current value of a timeline semaphore and any pending signal or wait operations.")
 }
@@ -8595,7 +8595,7 @@ val VkSemaphoreTypeCreateInfo = struct(Module.VULKAN, "VkSemaphoreTypeCreateInfo
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSemaphoreType("semaphoreType", "a {@code VkSemaphoreType} value specifying the type of the semaphore.")
     uint64_t("initialValue", "the initial payload value if {@code semaphoreType} is #SEMAPHORE_TYPE_TIMELINE.")
@@ -8617,7 +8617,7 @@ val VkTimelineSemaphoreSubmitInfo = struct(Module.VULKAN, "VkTimelineSemaphoreSu
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pWaitSemaphoreValues", optional = true)..uint32_t("waitSemaphoreValueCount", "the number of semaphore wait values specified in {@code pWaitSemaphoreValues}.")
     nullable..uint64_t.const.p("pWaitSemaphoreValues", "a pointer to an array of {@code waitSemaphoreValueCount} values for the corresponding semaphores in ##VkSubmitInfo{@code ::pWaitSemaphores} to wait for.")
@@ -8649,7 +8649,7 @@ val VkSemaphoreWaitInfo = struct(Module.VULKAN, "VkSemaphoreWaitInfo") {
         #WaitSemaphores(), #WaitSemaphoresKHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSemaphoreWaitFlags("flags", "a bitmask of {@code VkSemaphoreWaitFlagBits} specifying additional parameters for the semaphore wait operation.")
     AutoSize("pSemaphores", "pValues")..uint32_t("semaphoreCount", "the number of semaphores to wait on.")
@@ -8681,7 +8681,7 @@ val VkSemaphoreSignalInfo = struct(Module.VULKAN, "VkSemaphoreSignalInfo") {
         #SignalSemaphore(), #SignalSemaphoreKHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSemaphore("semaphore", "the handle of the semaphore to signal.")
     uint64_t("value", "the value to signal.")
@@ -8707,7 +8707,7 @@ val VkPhysicalDeviceBufferDeviceAddressFeatures = struct(Module.VULKAN, "VkPhysi
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("bufferDeviceAddress", "indicates that the implementation supports accessing buffer memory in shaders as storage buffers via an address queried from #GetBufferDeviceAddress().")
     VkBool32("bufferDeviceAddressCaptureReplay", "indicates that the implementation supports saving and reusing buffer and device addresses, e.g. for trace capture and replay.")
@@ -8736,7 +8736,7 @@ val VkBufferDeviceAddressInfo = struct(Module.VULKAN, "VkBufferDeviceAddressInfo
         #GetBufferDeviceAddress(), #GetBufferDeviceAddressEXT(), #GetBufferDeviceAddressKHR(), #GetBufferOpaqueCaptureAddress(), #GetBufferOpaqueCaptureAddressKHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBuffer("buffer", "specifies the buffer whose address is being queried.")
 }
@@ -8767,7 +8767,7 @@ val VkBufferOpaqueCaptureAddressCreateInfo = struct(Module.VULKAN, "VkBufferOpaq
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint64_t("opaqueCaptureAddress", "the opaque capture address requested for the buffer.")
 }
@@ -8796,7 +8796,7 @@ val VkMemoryOpaqueCaptureAddressAllocateInfo = struct(Module.VULKAN, "VkMemoryOp
         </ul>
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint64_t("opaqueCaptureAddress", "the opaque capture address requested for the memory allocation.")
 }
@@ -8822,7 +8822,7 @@ val VkDeviceMemoryOpaqueCaptureAddressInfo = struct(Module.VULKAN, "VkDeviceMemo
         #GetDeviceMemoryOpaqueCaptureAddress(), #GetDeviceMemoryOpaqueCaptureAddressKHR()
         """
 
-    VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDeviceMemory("memory", "specifies the memory whose address is being queried.")
 }

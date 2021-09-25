@@ -88,6 +88,8 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkExportMemoryAllocateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVExternalMemory#VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV} value to the {@link #sType} field. */
+    public VkExportMemoryAllocateInfoNV sType$Default() { return sType(NVExternalMemory.VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkExportMemoryAllocateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #handleTypes} field. */
@@ -314,6 +316,8 @@ public class VkExportMemoryAllocateInfoNV extends Struct implements NativeResour
 
         /** Sets the specified value to the {@link VkExportMemoryAllocateInfoNV#sType} field. */
         public VkExportMemoryAllocateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkExportMemoryAllocateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVExternalMemory#VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV} value to the {@link VkExportMemoryAllocateInfoNV#sType} field. */
+        public VkExportMemoryAllocateInfoNV.Buffer sType$Default() { return sType(NVExternalMemory.VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV); }
         /** Sets the specified value to the {@link VkExportMemoryAllocateInfoNV#pNext} field. */
         public VkExportMemoryAllocateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkExportMemoryAllocateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkExportMemoryAllocateInfoNV#handleTypes} field. */

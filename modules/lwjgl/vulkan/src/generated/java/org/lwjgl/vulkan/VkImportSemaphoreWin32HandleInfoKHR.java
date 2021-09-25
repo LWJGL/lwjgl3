@@ -164,6 +164,8 @@ public class VkImportSemaphoreWin32HandleInfoKHR extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImportSemaphoreWin32HandleInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRExternalSemaphoreWin32#VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR} value to the {@link #sType} field. */
+    public VkImportSemaphoreWin32HandleInfoKHR sType$Default() { return sType(KHRExternalSemaphoreWin32.VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImportSemaphoreWin32HandleInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #semaphore} field. */
@@ -464,6 +466,8 @@ public class VkImportSemaphoreWin32HandleInfoKHR extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkImportSemaphoreWin32HandleInfoKHR#sType} field. */
         public VkImportSemaphoreWin32HandleInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImportSemaphoreWin32HandleInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRExternalSemaphoreWin32#VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR} value to the {@link VkImportSemaphoreWin32HandleInfoKHR#sType} field. */
+        public VkImportSemaphoreWin32HandleInfoKHR.Buffer sType$Default() { return sType(KHRExternalSemaphoreWin32.VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR); }
         /** Sets the specified value to the {@link VkImportSemaphoreWin32HandleInfoKHR#pNext} field. */
         public VkImportSemaphoreWin32HandleInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkImportSemaphoreWin32HandleInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImportSemaphoreWin32HandleInfoKHR#semaphore} field. */

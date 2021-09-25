@@ -98,6 +98,8 @@ public class VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT extends Struct im
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTShaderImageAtomicInt64#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT sType$Default() { return sType(EXTShaderImageAtomicInt64.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderImageInt64Atomics} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT extends Struct im
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT#sType} field. */
         public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTShaderImageAtomicInt64#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT} value to the {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT#sType} field. */
+        public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.Buffer sType$Default() { return sType(EXTShaderImageAtomicInt64.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT#pNext} field. */
         public VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT#shaderImageInt64Atomics} field. */

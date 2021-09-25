@@ -98,6 +98,8 @@ public class VkPhysicalDeviceShaderClockFeaturesKHR extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderClockFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRShaderClock#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderClockFeaturesKHR sType$Default() { return sType(KHRShaderClock.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderClockFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderSubgroupClock} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceShaderClockFeaturesKHR extends Struct implements Na
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderClockFeaturesKHR#sType} field. */
         public VkPhysicalDeviceShaderClockFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderClockFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRShaderClock#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR} value to the {@link VkPhysicalDeviceShaderClockFeaturesKHR#sType} field. */
+        public VkPhysicalDeviceShaderClockFeaturesKHR.Buffer sType$Default() { return sType(KHRShaderClock.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderClockFeaturesKHR#pNext} field. */
         public VkPhysicalDeviceShaderClockFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderClockFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderClockFeaturesKHR#shaderSubgroupClock} field. */

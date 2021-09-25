@@ -91,6 +91,8 @@ public class VkPhysicalDeviceImageRobustnessFeaturesEXT extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceImageRobustnessFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTImageRobustness#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceImageRobustnessFeaturesEXT sType$Default() { return sType(EXTImageRobustness.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceImageRobustnessFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #robustImageAccess} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceImageRobustnessFeaturesEXT extends Struct implement
 
         /** Sets the specified value to the {@link VkPhysicalDeviceImageRobustnessFeaturesEXT#sType} field. */
         public VkPhysicalDeviceImageRobustnessFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceImageRobustnessFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTImageRobustness#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT} value to the {@link VkPhysicalDeviceImageRobustnessFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceImageRobustnessFeaturesEXT.Buffer sType$Default() { return sType(EXTImageRobustness.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceImageRobustnessFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceImageRobustnessFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceImageRobustnessFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceImageRobustnessFeaturesEXT#robustImageAccess} field. */

@@ -119,6 +119,8 @@ public class VkImageViewHandleInfoNVX extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImageViewHandleInfoNVX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVXImageViewHandle#VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX} value to the {@link #sType} field. */
+    public VkImageViewHandleInfoNVX sType$Default() { return sType(NVXImageViewHandle.VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageViewHandleInfoNVX pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #imageView} field. */
@@ -367,6 +369,8 @@ public class VkImageViewHandleInfoNVX extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkImageViewHandleInfoNVX#sType} field. */
         public VkImageViewHandleInfoNVX.Buffer sType(@NativeType("VkStructureType") int value) { VkImageViewHandleInfoNVX.nsType(address(), value); return this; }
+        /** Sets the {@link NVXImageViewHandle#VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX} value to the {@link VkImageViewHandleInfoNVX#sType} field. */
+        public VkImageViewHandleInfoNVX.Buffer sType$Default() { return sType(NVXImageViewHandle.VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX); }
         /** Sets the specified value to the {@link VkImageViewHandleInfoNVX#pNext} field. */
         public VkImageViewHandleInfoNVX.Buffer pNext(@NativeType("void const *") long value) { VkImageViewHandleInfoNVX.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageViewHandleInfoNVX#imageView} field. */

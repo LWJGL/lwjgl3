@@ -46,6 +46,8 @@ public class VkSemaphoreWaitInfoKHR extends VkSemaphoreWaitInfo {
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkSemaphoreWaitInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO} value to the {@code sType} field. */
+    public VkSemaphoreWaitInfoKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkSemaphoreWaitInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -247,6 +249,8 @@ public class VkSemaphoreWaitInfoKHR extends VkSemaphoreWaitInfo {
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkSemaphoreWaitInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSemaphoreWaitInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO} value to the {@code sType} field. */
+        public VkSemaphoreWaitInfoKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkSemaphoreWaitInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkSemaphoreWaitInfoKHR.npNext(address(), value); return this; }

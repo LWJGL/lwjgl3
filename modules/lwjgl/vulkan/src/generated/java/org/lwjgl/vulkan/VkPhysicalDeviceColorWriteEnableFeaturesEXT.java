@@ -91,6 +91,8 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceColorWriteEnableFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTColorWriteEnable#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceColorWriteEnableFeaturesEXT sType$Default() { return sType(EXTColorWriteEnable.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceColorWriteEnableFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #colorWriteEnable} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
 
         /** Sets the specified value to the {@link VkPhysicalDeviceColorWriteEnableFeaturesEXT#sType} field. */
         public VkPhysicalDeviceColorWriteEnableFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceColorWriteEnableFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTColorWriteEnable#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT} value to the {@link VkPhysicalDeviceColorWriteEnableFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceColorWriteEnableFeaturesEXT.Buffer sType$Default() { return sType(EXTColorWriteEnable.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceColorWriteEnableFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceColorWriteEnableFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceColorWriteEnableFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceColorWriteEnableFeaturesEXT#colorWriteEnable} field. */

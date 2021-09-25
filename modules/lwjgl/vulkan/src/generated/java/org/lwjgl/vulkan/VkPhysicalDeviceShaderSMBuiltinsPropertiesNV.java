@@ -98,6 +98,8 @@ public class VkPhysicalDeviceShaderSMBuiltinsPropertiesNV extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderSMBuiltinsPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVShaderSmBuiltins#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderSMBuiltinsPropertiesNV sType$Default() { return sType(NVShaderSmBuiltins.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderSMBuiltinsPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -323,6 +325,8 @@ public class VkPhysicalDeviceShaderSMBuiltinsPropertiesNV extends Struct impleme
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderSMBuiltinsPropertiesNV#sType} field. */
         public VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVShaderSmBuiltins#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV} value to the {@link VkPhysicalDeviceShaderSMBuiltinsPropertiesNV#sType} field. */
+        public VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.Buffer sType$Default() { return sType(NVShaderSmBuiltins.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderSMBuiltinsPropertiesNV#pNext} field. */
         public VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.npNext(address(), value); return this; }
 

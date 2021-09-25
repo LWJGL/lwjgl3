@@ -91,6 +91,8 @@ public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceDiscardRectanglePropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDiscardRectangles#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceDiscardRectanglePropertiesEXT sType$Default() { return sType(EXTDiscardRectangles.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceDiscardRectanglePropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -311,6 +313,8 @@ public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct implem
 
         /** Sets the specified value to the {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT#sType} field. */
         public VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDiscardRectanglePropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDiscardRectangles#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT#sType} field. */
+        public VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer sType$Default() { return sType(EXTDiscardRectangles.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT#pNext} field. */
         public VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDiscardRectanglePropertiesEXT.npNext(address(), value); return this; }
 

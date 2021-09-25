@@ -142,6 +142,8 @@ public class VkPhysicalDeviceRayTracingPipelinePropertiesKHR extends Struct impl
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceRayTracingPipelinePropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceRayTracingPipelinePropertiesKHR sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceRayTracingPipelinePropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -379,6 +381,8 @@ public class VkPhysicalDeviceRayTracingPipelinePropertiesKHR extends Struct impl
 
         /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPipelinePropertiesKHR#sType} field. */
         public VkPhysicalDeviceRayTracingPipelinePropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRayTracingPipelinePropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR} value to the {@link VkPhysicalDeviceRayTracingPipelinePropertiesKHR#sType} field. */
+        public VkPhysicalDeviceRayTracingPipelinePropertiesKHR.Buffer sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPipelinePropertiesKHR#pNext} field. */
         public VkPhysicalDeviceRayTracingPipelinePropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRayTracingPipelinePropertiesKHR.npNext(address(), value); return this; }
 

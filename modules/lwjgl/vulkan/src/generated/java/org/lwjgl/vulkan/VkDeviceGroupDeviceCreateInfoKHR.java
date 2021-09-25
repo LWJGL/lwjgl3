@@ -44,6 +44,8 @@ public class VkDeviceGroupDeviceCreateInfoKHR extends VkDeviceGroupDeviceCreateI
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkDeviceGroupDeviceCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO} value to the {@code sType} field. */
+    public VkDeviceGroupDeviceCreateInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkDeviceGroupDeviceCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -248,6 +250,8 @@ public class VkDeviceGroupDeviceCreateInfoKHR extends VkDeviceGroupDeviceCreateI
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkDeviceGroupDeviceCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupDeviceCreateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO} value to the {@code sType} field. */
+        public VkDeviceGroupDeviceCreateInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkDeviceGroupDeviceCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupDeviceCreateInfoKHR.npNext(address(), value); return this; }

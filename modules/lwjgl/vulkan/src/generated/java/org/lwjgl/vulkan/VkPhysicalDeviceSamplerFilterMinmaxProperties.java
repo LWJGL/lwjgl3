@@ -119,6 +119,8 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceSamplerFilterMinmaxProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceSamplerFilterMinmaxProperties sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceSamplerFilterMinmaxProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -326,6 +328,8 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
 
         /** Sets the specified value to the {@link VkPhysicalDeviceSamplerFilterMinmaxProperties#sType} field. */
         public VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSamplerFilterMinmaxProperties.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES} value to the {@link VkPhysicalDeviceSamplerFilterMinmaxProperties#sType} field. */
+        public VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceSamplerFilterMinmaxProperties#pNext} field. */
         public VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSamplerFilterMinmaxProperties.npNext(address(), value); return this; }
 

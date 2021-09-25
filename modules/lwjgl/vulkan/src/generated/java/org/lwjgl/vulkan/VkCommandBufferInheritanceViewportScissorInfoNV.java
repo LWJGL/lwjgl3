@@ -157,6 +157,8 @@ public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct impl
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCommandBufferInheritanceViewportScissorInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVInheritedViewportScissor#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV} value to the {@link #sType} field. */
+    public VkCommandBufferInheritanceViewportScissorInfoNV sType$Default() { return sType(NVInheritedViewportScissor.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCommandBufferInheritanceViewportScissorInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #viewportScissor2D} field. */
@@ -408,6 +410,8 @@ public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct impl
 
         /** Sets the specified value to the {@link VkCommandBufferInheritanceViewportScissorInfoNV#sType} field. */
         public VkCommandBufferInheritanceViewportScissorInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandBufferInheritanceViewportScissorInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVInheritedViewportScissor#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV} value to the {@link VkCommandBufferInheritanceViewportScissorInfoNV#sType} field. */
+        public VkCommandBufferInheritanceViewportScissorInfoNV.Buffer sType$Default() { return sType(NVInheritedViewportScissor.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV); }
         /** Sets the specified value to the {@link VkCommandBufferInheritanceViewportScissorInfoNV#pNext} field. */
         public VkCommandBufferInheritanceViewportScissorInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferInheritanceViewportScissorInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkCommandBufferInheritanceViewportScissorInfoNV#viewportScissor2D} field. */

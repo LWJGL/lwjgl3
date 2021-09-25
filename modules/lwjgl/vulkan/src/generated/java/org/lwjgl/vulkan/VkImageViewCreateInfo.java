@@ -239,6 +239,8 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImageViewCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO} value to the {@link #sType} field. */
+    public VkImageViewCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageViewCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -522,6 +524,8 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkImageViewCreateInfo#sType} field. */
         public VkImageViewCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkImageViewCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO} value to the {@link VkImageViewCreateInfo#sType} field. */
+        public VkImageViewCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO); }
         /** Sets the specified value to the {@link VkImageViewCreateInfo#pNext} field. */
         public VkImageViewCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkImageViewCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageViewCreateInfo#flags} field. */

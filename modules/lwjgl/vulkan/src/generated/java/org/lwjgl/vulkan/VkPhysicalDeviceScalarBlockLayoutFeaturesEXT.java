@@ -42,6 +42,8 @@ public class VkPhysicalDeviceScalarBlockLayoutFeaturesEXT extends VkPhysicalDevi
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPhysicalDeviceScalarBlockLayoutFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES} value to the {@code sType} field. */
+    public VkPhysicalDeviceScalarBlockLayoutFeaturesEXT sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPhysicalDeviceScalarBlockLayoutFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -246,6 +248,8 @@ public class VkPhysicalDeviceScalarBlockLayoutFeaturesEXT extends VkPhysicalDevi
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPhysicalDeviceScalarBlockLayoutFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceScalarBlockLayoutFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES} value to the {@code sType} field. */
+        public VkPhysicalDeviceScalarBlockLayoutFeaturesEXT.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPhysicalDeviceScalarBlockLayoutFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceScalarBlockLayoutFeaturesEXT.npNext(address(), value); return this; }

@@ -101,6 +101,8 @@ public class VkFramebufferAttachmentsCreateInfo extends Struct implements Native
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkFramebufferAttachmentsCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO} value to the {@link #sType} field. */
+    public VkFramebufferAttachmentsCreateInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkFramebufferAttachmentsCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkFramebufferAttachmentImageInfo.Buffer} to the {@link #pAttachmentImageInfos} field. */
@@ -343,6 +345,8 @@ public class VkFramebufferAttachmentsCreateInfo extends Struct implements Native
 
         /** Sets the specified value to the {@link VkFramebufferAttachmentsCreateInfo#sType} field. */
         public VkFramebufferAttachmentsCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkFramebufferAttachmentsCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO} value to the {@link VkFramebufferAttachmentsCreateInfo#sType} field. */
+        public VkFramebufferAttachmentsCreateInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO); }
         /** Sets the specified value to the {@link VkFramebufferAttachmentsCreateInfo#pNext} field. */
         public VkFramebufferAttachmentsCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkFramebufferAttachmentsCreateInfo.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkFramebufferAttachmentImageInfo.Buffer} to the {@link VkFramebufferAttachmentsCreateInfo#pAttachmentImageInfos} field. */

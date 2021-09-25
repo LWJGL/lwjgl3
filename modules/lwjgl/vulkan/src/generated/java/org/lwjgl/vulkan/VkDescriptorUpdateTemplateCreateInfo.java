@@ -157,6 +157,8 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDescriptorUpdateTemplateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkDescriptorUpdateTemplateCreateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDescriptorUpdateTemplateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -477,6 +479,8 @@ public class VkDescriptorUpdateTemplateCreateInfo extends Struct implements Nati
 
         /** Sets the specified value to the {@link VkDescriptorUpdateTemplateCreateInfo#sType} field. */
         public VkDescriptorUpdateTemplateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorUpdateTemplateCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO} value to the {@link VkDescriptorUpdateTemplateCreateInfo#sType} field. */
+        public VkDescriptorUpdateTemplateCreateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkDescriptorUpdateTemplateCreateInfo#pNext} field. */
         public VkDescriptorUpdateTemplateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorUpdateTemplateCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDescriptorUpdateTemplateCreateInfo#flags} field. */

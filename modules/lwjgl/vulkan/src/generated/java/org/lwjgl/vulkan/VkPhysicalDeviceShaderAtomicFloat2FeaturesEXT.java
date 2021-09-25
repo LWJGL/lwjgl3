@@ -168,6 +168,8 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTShaderAtomicFloat2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT sType$Default() { return sType(EXTShaderAtomicFloat2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderBufferFloat16Atomics} field. */
@@ -497,6 +499,8 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT#sType} field. */
         public VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTShaderAtomicFloat2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT} value to the {@link VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT#sType} field. */
+        public VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.Buffer sType$Default() { return sType(EXTShaderAtomicFloat2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT#pNext} field. */
         public VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT#shaderBufferFloat16Atomics} field. */

@@ -98,6 +98,8 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineSampleLocationsStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTSampleLocations#VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkPipelineSampleLocationsStateCreateInfoEXT sType$Default() { return sType(EXTSampleLocations.VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineSampleLocationsStateCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #sampleLocationsEnable} field. */
@@ -357,6 +359,8 @@ public class VkPipelineSampleLocationsStateCreateInfoEXT extends Struct implemen
 
         /** Sets the specified value to the {@link VkPipelineSampleLocationsStateCreateInfoEXT#sType} field. */
         public VkPipelineSampleLocationsStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineSampleLocationsStateCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTSampleLocations#VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT} value to the {@link VkPipelineSampleLocationsStateCreateInfoEXT#sType} field. */
+        public VkPipelineSampleLocationsStateCreateInfoEXT.Buffer sType$Default() { return sType(EXTSampleLocations.VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkPipelineSampleLocationsStateCreateInfoEXT#pNext} field. */
         public VkPipelineSampleLocationsStateCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineSampleLocationsStateCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineSampleLocationsStateCreateInfoEXT#sampleLocationsEnable} field. */

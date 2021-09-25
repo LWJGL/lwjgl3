@@ -91,6 +91,8 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceCornerSampledImageFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVCornerSampledImage#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceCornerSampledImageFeaturesNV sType$Default() { return sType(NVCornerSampledImage.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceCornerSampledImageFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #cornerSampledImage} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct impleme
 
         /** Sets the specified value to the {@link VkPhysicalDeviceCornerSampledImageFeaturesNV#sType} field. */
         public VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCornerSampledImageFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVCornerSampledImage#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV} value to the {@link VkPhysicalDeviceCornerSampledImageFeaturesNV#sType} field. */
+        public VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer sType$Default() { return sType(NVCornerSampledImage.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceCornerSampledImageFeaturesNV#pNext} field. */
         public VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCornerSampledImageFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceCornerSampledImageFeaturesNV#cornerSampledImage} field. */

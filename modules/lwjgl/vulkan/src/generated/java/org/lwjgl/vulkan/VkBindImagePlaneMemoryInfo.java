@@ -95,6 +95,8 @@ public class VkBindImagePlaneMemoryInfo extends Struct implements NativeResource
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBindImagePlaneMemoryInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO} value to the {@link #sType} field. */
+    public VkBindImagePlaneMemoryInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBindImagePlaneMemoryInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #planeAspect} field. */
@@ -321,6 +323,8 @@ public class VkBindImagePlaneMemoryInfo extends Struct implements NativeResource
 
         /** Sets the specified value to the {@link VkBindImagePlaneMemoryInfo#sType} field. */
         public VkBindImagePlaneMemoryInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindImagePlaneMemoryInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO} value to the {@link VkBindImagePlaneMemoryInfo#sType} field. */
+        public VkBindImagePlaneMemoryInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO); }
         /** Sets the specified value to the {@link VkBindImagePlaneMemoryInfo#pNext} field. */
         public VkBindImagePlaneMemoryInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindImagePlaneMemoryInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkBindImagePlaneMemoryInfo#planeAspect} field. */

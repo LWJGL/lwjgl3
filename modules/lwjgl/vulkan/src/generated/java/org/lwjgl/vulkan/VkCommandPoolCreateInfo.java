@@ -106,6 +106,8 @@ public class VkCommandPoolCreateInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCommandPoolCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO} value to the {@link #sType} field. */
+    public VkCommandPoolCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCommandPoolCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -343,6 +345,8 @@ public class VkCommandPoolCreateInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkCommandPoolCreateInfo#sType} field. */
         public VkCommandPoolCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandPoolCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO} value to the {@link VkCommandPoolCreateInfo#sType} field. */
+        public VkCommandPoolCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO); }
         /** Sets the specified value to the {@link VkCommandPoolCreateInfo#pNext} field. */
         public VkCommandPoolCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkCommandPoolCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkCommandPoolCreateInfo#flags} field. */

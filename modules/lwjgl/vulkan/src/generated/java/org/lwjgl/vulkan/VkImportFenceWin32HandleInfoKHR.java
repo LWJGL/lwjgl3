@@ -160,6 +160,8 @@ public class VkImportFenceWin32HandleInfoKHR extends Struct implements NativeRes
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImportFenceWin32HandleInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRExternalFenceWin32#VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR} value to the {@link #sType} field. */
+    public VkImportFenceWin32HandleInfoKHR sType$Default() { return sType(KHRExternalFenceWin32.VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImportFenceWin32HandleInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #fence} field. */
@@ -460,6 +462,8 @@ public class VkImportFenceWin32HandleInfoKHR extends Struct implements NativeRes
 
         /** Sets the specified value to the {@link VkImportFenceWin32HandleInfoKHR#sType} field. */
         public VkImportFenceWin32HandleInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImportFenceWin32HandleInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRExternalFenceWin32#VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR} value to the {@link VkImportFenceWin32HandleInfoKHR#sType} field. */
+        public VkImportFenceWin32HandleInfoKHR.Buffer sType$Default() { return sType(KHRExternalFenceWin32.VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR); }
         /** Sets the specified value to the {@link VkImportFenceWin32HandleInfoKHR#pNext} field. */
         public VkImportFenceWin32HandleInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkImportFenceWin32HandleInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImportFenceWin32HandleInfoKHR#fence} field. */

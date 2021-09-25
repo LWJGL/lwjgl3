@@ -98,6 +98,8 @@ public class VkPhysicalDeviceFragmentShadingRateKHR extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceFragmentShadingRateKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceFragmentShadingRateKHR sType$Default() { return sType(KHRFragmentShadingRate.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceFragmentShadingRateKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -304,6 +306,8 @@ public class VkPhysicalDeviceFragmentShadingRateKHR extends Struct implements Na
 
         /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateKHR#sType} field. */
         public VkPhysicalDeviceFragmentShadingRateKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFragmentShadingRateKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR} value to the {@link VkPhysicalDeviceFragmentShadingRateKHR#sType} field. */
+        public VkPhysicalDeviceFragmentShadingRateKHR.Buffer sType$Default() { return sType(KHRFragmentShadingRate.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateKHR#pNext} field. */
         public VkPhysicalDeviceFragmentShadingRateKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFragmentShadingRateKHR.npNext(address(), value); return this; }
 

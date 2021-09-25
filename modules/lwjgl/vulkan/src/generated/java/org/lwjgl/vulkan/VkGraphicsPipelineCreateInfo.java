@@ -408,6 +408,8 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkGraphicsPipelineCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkGraphicsPipelineCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkGraphicsPipelineCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -851,6 +853,8 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
 
         /** Sets the specified value to the {@link VkGraphicsPipelineCreateInfo#sType} field. */
         public VkGraphicsPipelineCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkGraphicsPipelineCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO} value to the {@link VkGraphicsPipelineCreateInfo#sType} field. */
+        public VkGraphicsPipelineCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkGraphicsPipelineCreateInfo#pNext} field. */
         public VkGraphicsPipelineCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkGraphicsPipelineCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkGraphicsPipelineCreateInfo#flags} field. */

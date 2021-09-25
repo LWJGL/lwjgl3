@@ -170,6 +170,8 @@ public class VkIndirectCommandsLayoutCreateInfoNV extends Struct implements Nati
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkIndirectCommandsLayoutCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkIndirectCommandsLayoutCreateInfoNV sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkIndirectCommandsLayoutCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -450,6 +452,8 @@ public class VkIndirectCommandsLayoutCreateInfoNV extends Struct implements Nati
 
         /** Sets the specified value to the {@link VkIndirectCommandsLayoutCreateInfoNV#sType} field. */
         public VkIndirectCommandsLayoutCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkIndirectCommandsLayoutCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV} value to the {@link VkIndirectCommandsLayoutCreateInfoNV#sType} field. */
+        public VkIndirectCommandsLayoutCreateInfoNV.Buffer sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkIndirectCommandsLayoutCreateInfoNV#pNext} field. */
         public VkIndirectCommandsLayoutCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkIndirectCommandsLayoutCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkIndirectCommandsLayoutCreateInfoNV#flags} field. */

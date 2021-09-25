@@ -103,6 +103,8 @@ public class VkPhysicalDeviceSubgroupSizeControlFeaturesEXT extends Struct imple
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTSubgroupSizeControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT sType$Default() { return sType(EXTSubgroupSizeControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #subgroupSizeControl} field. */
@@ -340,6 +342,8 @@ public class VkPhysicalDeviceSubgroupSizeControlFeaturesEXT extends Struct imple
 
         /** Sets the specified value to the {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT#sType} field. */
         public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTSubgroupSizeControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT} value to the {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.Buffer sType$Default() { return sType(EXTSubgroupSizeControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT#subgroupSizeControl} field. */

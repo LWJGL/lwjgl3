@@ -43,6 +43,8 @@ public class VkPhysicalDeviceVariablePointersFeaturesKHR extends VkPhysicalDevic
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPhysicalDeviceVariablePointersFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES} value to the {@code sType} field. */
+    public VkPhysicalDeviceVariablePointersFeaturesKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPhysicalDeviceVariablePointersFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -252,6 +254,8 @@ public class VkPhysicalDeviceVariablePointersFeaturesKHR extends VkPhysicalDevic
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPhysicalDeviceVariablePointersFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVariablePointersFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES} value to the {@code sType} field. */
+        public VkPhysicalDeviceVariablePointersFeaturesKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPhysicalDeviceVariablePointersFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVariablePointersFeaturesKHR.npNext(address(), value); return this; }

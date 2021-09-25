@@ -136,6 +136,8 @@ public class VkBindAccelerationStructureMemoryInfoNV extends Struct implements N
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBindAccelerationStructureMemoryInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV} value to the {@link #sType} field. */
+    public VkBindAccelerationStructureMemoryInfoNV sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBindAccelerationStructureMemoryInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #accelerationStructure} field. */
@@ -426,6 +428,8 @@ public class VkBindAccelerationStructureMemoryInfoNV extends Struct implements N
 
         /** Sets the specified value to the {@link VkBindAccelerationStructureMemoryInfoNV#sType} field. */
         public VkBindAccelerationStructureMemoryInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkBindAccelerationStructureMemoryInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV} value to the {@link VkBindAccelerationStructureMemoryInfoNV#sType} field. */
+        public VkBindAccelerationStructureMemoryInfoNV.Buffer sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV); }
         /** Sets the specified value to the {@link VkBindAccelerationStructureMemoryInfoNV#pNext} field. */
         public VkBindAccelerationStructureMemoryInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkBindAccelerationStructureMemoryInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkBindAccelerationStructureMemoryInfoNV#accelerationStructure} field. */

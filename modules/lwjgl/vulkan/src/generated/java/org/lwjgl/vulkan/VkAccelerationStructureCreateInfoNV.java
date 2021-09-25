@@ -105,6 +105,8 @@ public class VkAccelerationStructureCreateInfoNV extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkAccelerationStructureCreateInfoNV sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #compactedSize} field. */
@@ -364,6 +366,8 @@ public class VkAccelerationStructureCreateInfoNV extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoNV#sType} field. */
         public VkAccelerationStructureCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV} value to the {@link VkAccelerationStructureCreateInfoNV#sType} field. */
+        public VkAccelerationStructureCreateInfoNV.Buffer sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoNV#pNext} field. */
         public VkAccelerationStructureCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoNV#compactedSize} field. */

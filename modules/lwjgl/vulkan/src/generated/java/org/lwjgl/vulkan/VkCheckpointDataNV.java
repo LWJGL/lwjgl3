@@ -103,6 +103,8 @@ public class VkCheckpointDataNV extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCheckpointDataNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVDeviceDiagnosticCheckpoints#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV STRUCTURE_TYPE_CHECKPOINT_DATA_NV} value to the {@link #sType} field. */
+    public VkCheckpointDataNV sType$Default() { return sType(NVDeviceDiagnosticCheckpoints.VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCheckpointDataNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -328,6 +330,8 @@ public class VkCheckpointDataNV extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkCheckpointDataNV#sType} field. */
         public VkCheckpointDataNV.Buffer sType(@NativeType("VkStructureType") int value) { VkCheckpointDataNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVDeviceDiagnosticCheckpoints#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV STRUCTURE_TYPE_CHECKPOINT_DATA_NV} value to the {@link VkCheckpointDataNV#sType} field. */
+        public VkCheckpointDataNV.Buffer sType$Default() { return sType(NVDeviceDiagnosticCheckpoints.VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV); }
         /** Sets the specified value to the {@link VkCheckpointDataNV#pNext} field. */
         public VkCheckpointDataNV.Buffer pNext(@NativeType("void *") long value) { VkCheckpointDataNV.npNext(address(), value); return this; }
 

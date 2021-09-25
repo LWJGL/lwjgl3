@@ -117,6 +117,8 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct implements N
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassSampleLocationsBeginInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTSampleLocations#VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT} value to the {@link #sType} field. */
+    public VkRenderPassSampleLocationsBeginInfoEXT sType$Default() { return sType(EXTSampleLocations.VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassSampleLocationsBeginInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentSampleLocationsEXT.Buffer} to the {@link #pAttachmentInitialSampleLocations} field. */
@@ -402,6 +404,8 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct implements N
 
         /** Sets the specified value to the {@link VkRenderPassSampleLocationsBeginInfoEXT#sType} field. */
         public VkRenderPassSampleLocationsBeginInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassSampleLocationsBeginInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTSampleLocations#VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT} value to the {@link VkRenderPassSampleLocationsBeginInfoEXT#sType} field. */
+        public VkRenderPassSampleLocationsBeginInfoEXT.Buffer sType$Default() { return sType(EXTSampleLocations.VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT); }
         /** Sets the specified value to the {@link VkRenderPassSampleLocationsBeginInfoEXT#pNext} field. */
         public VkRenderPassSampleLocationsBeginInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassSampleLocationsBeginInfoEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentSampleLocationsEXT.Buffer} to the {@link VkRenderPassSampleLocationsBeginInfoEXT#pAttachmentInitialSampleLocations} field. */

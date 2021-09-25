@@ -147,6 +147,8 @@ public class VkWin32KeyedMutexAcquireReleaseInfoKHR extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkWin32KeyedMutexAcquireReleaseInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRWin32KeyedMutex#VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR} value to the {@link #sType} field. */
+    public VkWin32KeyedMutexAcquireReleaseInfoKHR sType$Default() { return sType(KHRWin32KeyedMutex.VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkWin32KeyedMutexAcquireReleaseInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #acquireCount} field. */
@@ -473,6 +475,8 @@ public class VkWin32KeyedMutexAcquireReleaseInfoKHR extends Struct implements Na
 
         /** Sets the specified value to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#sType} field. */
         public VkWin32KeyedMutexAcquireReleaseInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkWin32KeyedMutexAcquireReleaseInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRWin32KeyedMutex#VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR} value to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#sType} field. */
+        public VkWin32KeyedMutexAcquireReleaseInfoKHR.Buffer sType$Default() { return sType(KHRWin32KeyedMutex.VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR); }
         /** Sets the specified value to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#pNext} field. */
         public VkWin32KeyedMutexAcquireReleaseInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkWin32KeyedMutexAcquireReleaseInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#acquireCount} field. */

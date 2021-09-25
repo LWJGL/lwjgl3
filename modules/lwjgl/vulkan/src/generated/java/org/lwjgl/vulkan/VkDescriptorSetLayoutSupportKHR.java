@@ -42,6 +42,8 @@ public class VkDescriptorSetLayoutSupportKHR extends VkDescriptorSetLayoutSuppor
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkDescriptorSetLayoutSupportKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT} value to the {@code sType} field. */
+    public VkDescriptorSetLayoutSupportKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkDescriptorSetLayoutSupportKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -241,6 +243,8 @@ public class VkDescriptorSetLayoutSupportKHR extends VkDescriptorSetLayoutSuppor
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkDescriptorSetLayoutSupportKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorSetLayoutSupportKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT} value to the {@code sType} field. */
+        public VkDescriptorSetLayoutSupportKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkDescriptorSetLayoutSupportKHR.Buffer pNext(@NativeType("void *") long value) { VkDescriptorSetLayoutSupportKHR.npNext(address(), value); return this; }

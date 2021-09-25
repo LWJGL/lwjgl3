@@ -42,6 +42,8 @@ public class VkImageMemoryRequirementsInfo2KHR extends VkImageMemoryRequirements
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkImageMemoryRequirementsInfo2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2 STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2} value to the {@code sType} field. */
+    public VkImageMemoryRequirementsInfo2KHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkImageMemoryRequirementsInfo2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -246,6 +248,8 @@ public class VkImageMemoryRequirementsInfo2KHR extends VkImageMemoryRequirements
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkImageMemoryRequirementsInfo2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImageMemoryRequirementsInfo2KHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2 STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2} value to the {@code sType} field. */
+        public VkImageMemoryRequirementsInfo2KHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkImageMemoryRequirementsInfo2KHR.Buffer pNext(@NativeType("void const *") long value) { VkImageMemoryRequirementsInfo2KHR.npNext(address(), value); return this; }

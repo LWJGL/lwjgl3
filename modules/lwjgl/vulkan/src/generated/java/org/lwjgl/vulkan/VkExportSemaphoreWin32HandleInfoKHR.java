@@ -140,6 +140,8 @@ public class VkExportSemaphoreWin32HandleInfoKHR extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkExportSemaphoreWin32HandleInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRExternalSemaphoreWin32#VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR} value to the {@link #sType} field. */
+    public VkExportSemaphoreWin32HandleInfoKHR sType$Default() { return sType(KHRExternalSemaphoreWin32.VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkExportSemaphoreWin32HandleInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link SECURITY_ATTRIBUTES} to the {@link #pAttributes} field. */
@@ -422,6 +424,8 @@ public class VkExportSemaphoreWin32HandleInfoKHR extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkExportSemaphoreWin32HandleInfoKHR#sType} field. */
         public VkExportSemaphoreWin32HandleInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkExportSemaphoreWin32HandleInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRExternalSemaphoreWin32#VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR} value to the {@link VkExportSemaphoreWin32HandleInfoKHR#sType} field. */
+        public VkExportSemaphoreWin32HandleInfoKHR.Buffer sType$Default() { return sType(KHRExternalSemaphoreWin32.VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR); }
         /** Sets the specified value to the {@link VkExportSemaphoreWin32HandleInfoKHR#pNext} field. */
         public VkExportSemaphoreWin32HandleInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkExportSemaphoreWin32HandleInfoKHR.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link SECURITY_ATTRIBUTES} to the {@link VkExportSemaphoreWin32HandleInfoKHR#pAttributes} field. */

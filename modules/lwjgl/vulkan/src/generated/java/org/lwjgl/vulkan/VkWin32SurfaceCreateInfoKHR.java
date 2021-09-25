@@ -117,6 +117,8 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkWin32SurfaceCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRWin32Surface#VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    public VkWin32SurfaceCreateInfoKHR sType$Default() { return sType(KHRWin32Surface.VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkWin32SurfaceCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -387,6 +389,8 @@ public class VkWin32SurfaceCreateInfoKHR extends Struct implements NativeResourc
 
         /** Sets the specified value to the {@link VkWin32SurfaceCreateInfoKHR#sType} field. */
         public VkWin32SurfaceCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkWin32SurfaceCreateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRWin32Surface#VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR} value to the {@link VkWin32SurfaceCreateInfoKHR#sType} field. */
+        public VkWin32SurfaceCreateInfoKHR.Buffer sType$Default() { return sType(KHRWin32Surface.VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkWin32SurfaceCreateInfoKHR#pNext} field. */
         public VkWin32SurfaceCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkWin32SurfaceCreateInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkWin32SurfaceCreateInfoKHR#flags} field. */

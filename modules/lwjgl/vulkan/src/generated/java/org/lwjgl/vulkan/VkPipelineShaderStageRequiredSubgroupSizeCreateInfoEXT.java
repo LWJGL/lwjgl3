@@ -91,6 +91,8 @@ public class VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT extends Stru
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTSubgroupSizeControl#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT} value to the {@code sType} field. */
+    public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT sType$Default() { return sType(EXTSubgroupSizeControl.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -311,6 +313,8 @@ public class VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT extends Stru
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTSubgroupSizeControl#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT} value to the {@code sType} field. */
+        public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.Buffer sType$Default() { return sType(EXTSubgroupSizeControl.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.npNext(address(), value); return this; }
 

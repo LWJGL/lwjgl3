@@ -114,6 +114,8 @@ public class VkPipelineFragmentShadingRateEnumStateCreateInfoNV extends Struct i
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineFragmentShadingRateEnumStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVFragmentShadingRateEnums#VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkPipelineFragmentShadingRateEnumStateCreateInfoNV sType$Default() { return sType(NVFragmentShadingRateEnums.VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineFragmentShadingRateEnumStateCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shadingRateType} field. */
@@ -360,6 +362,8 @@ public class VkPipelineFragmentShadingRateEnumStateCreateInfoNV extends Struct i
 
         /** Sets the specified value to the {@link VkPipelineFragmentShadingRateEnumStateCreateInfoNV#sType} field. */
         public VkPipelineFragmentShadingRateEnumStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineFragmentShadingRateEnumStateCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVFragmentShadingRateEnums#VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV} value to the {@link VkPipelineFragmentShadingRateEnumStateCreateInfoNV#sType} field. */
+        public VkPipelineFragmentShadingRateEnumStateCreateInfoNV.Buffer sType$Default() { return sType(NVFragmentShadingRateEnums.VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkPipelineFragmentShadingRateEnumStateCreateInfoNV#pNext} field. */
         public VkPipelineFragmentShadingRateEnumStateCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkPipelineFragmentShadingRateEnumStateCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineFragmentShadingRateEnumStateCreateInfoNV#shadingRateType} field. */

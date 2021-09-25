@@ -129,6 +129,8 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkQueryPoolCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO} value to the {@link #sType} field. */
+    public VkQueryPoolCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueryPoolCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -388,6 +390,8 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkQueryPoolCreateInfo#sType} field. */
         public VkQueryPoolCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkQueryPoolCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO} value to the {@link VkQueryPoolCreateInfo#sType} field. */
+        public VkQueryPoolCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO); }
         /** Sets the specified value to the {@link VkQueryPoolCreateInfo#pNext} field. */
         public VkQueryPoolCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkQueryPoolCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkQueryPoolCreateInfo#flags} field. */

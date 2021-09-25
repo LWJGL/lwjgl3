@@ -154,6 +154,8 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryAllocateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO} value to the {@link #sType} field. */
+    public VkMemoryAllocateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryAllocateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #allocationSize} field. */
@@ -391,6 +393,8 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkMemoryAllocateInfo#sType} field. */
         public VkMemoryAllocateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryAllocateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO} value to the {@link VkMemoryAllocateInfo#sType} field. */
+        public VkMemoryAllocateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO); }
         /** Sets the specified value to the {@link VkMemoryAllocateInfo#pNext} field. */
         public VkMemoryAllocateInfo.Buffer pNext(@NativeType("void const *") long value) { VkMemoryAllocateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkMemoryAllocateInfo#allocationSize} field. */

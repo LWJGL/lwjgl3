@@ -45,6 +45,8 @@ public class VkDeviceGroupRenderPassBeginInfoKHR extends VkDeviceGroupRenderPass
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkDeviceGroupRenderPassBeginInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO} value to the {@code sType} field. */
+    public VkDeviceGroupRenderPassBeginInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkDeviceGroupRenderPassBeginInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -254,6 +256,8 @@ public class VkDeviceGroupRenderPassBeginInfoKHR extends VkDeviceGroupRenderPass
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkDeviceGroupRenderPassBeginInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupRenderPassBeginInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO} value to the {@code sType} field. */
+        public VkDeviceGroupRenderPassBeginInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkDeviceGroupRenderPassBeginInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupRenderPassBeginInfoKHR.npNext(address(), value); return this; }

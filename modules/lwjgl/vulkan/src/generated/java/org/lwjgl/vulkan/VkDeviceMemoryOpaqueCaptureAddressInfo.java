@@ -99,6 +99,8 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfo extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceMemoryOpaqueCaptureAddressInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO} value to the {@link #sType} field. */
+    public VkDeviceMemoryOpaqueCaptureAddressInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceMemoryOpaqueCaptureAddressInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #memory} field. */
@@ -307,6 +309,8 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfo extends Struct implements Na
 
         /** Sets the specified value to the {@link VkDeviceMemoryOpaqueCaptureAddressInfo#sType} field. */
         public VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceMemoryOpaqueCaptureAddressInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO} value to the {@link VkDeviceMemoryOpaqueCaptureAddressInfo#sType} field. */
+        public VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO); }
         /** Sets the specified value to the {@link VkDeviceMemoryOpaqueCaptureAddressInfo#pNext} field. */
         public VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceMemoryOpaqueCaptureAddressInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDeviceMemoryOpaqueCaptureAddressInfo#memory} field. */

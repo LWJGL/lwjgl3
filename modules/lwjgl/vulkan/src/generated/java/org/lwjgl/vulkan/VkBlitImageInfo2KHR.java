@@ -193,6 +193,8 @@ public class VkBlitImageInfo2KHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBlitImageInfo2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRCopyCommands2#VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR} value to the {@link #sType} field. */
+    public VkBlitImageInfo2KHR sType$Default() { return sType(KHRCopyCommands2.VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBlitImageInfo2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #srcImage} field. */
@@ -484,6 +486,8 @@ public class VkBlitImageInfo2KHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkBlitImageInfo2KHR#sType} field. */
         public VkBlitImageInfo2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBlitImageInfo2KHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRCopyCommands2#VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR} value to the {@link VkBlitImageInfo2KHR#sType} field. */
+        public VkBlitImageInfo2KHR.Buffer sType$Default() { return sType(KHRCopyCommands2.VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR); }
         /** Sets the specified value to the {@link VkBlitImageInfo2KHR#pNext} field. */
         public VkBlitImageInfo2KHR.Buffer pNext(@NativeType("void const *") long value) { VkBlitImageInfo2KHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkBlitImageInfo2KHR#srcImage} field. */

@@ -104,6 +104,8 @@ public class VkBufferOpaqueCaptureAddressCreateInfo extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBufferOpaqueCaptureAddressCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO} value to the {@link #sType} field. */
+    public VkBufferOpaqueCaptureAddressCreateInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferOpaqueCaptureAddressCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #opaqueCaptureAddress} field. */
@@ -312,6 +314,8 @@ public class VkBufferOpaqueCaptureAddressCreateInfo extends Struct implements Na
 
         /** Sets the specified value to the {@link VkBufferOpaqueCaptureAddressCreateInfo#sType} field. */
         public VkBufferOpaqueCaptureAddressCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferOpaqueCaptureAddressCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO} value to the {@link VkBufferOpaqueCaptureAddressCreateInfo#sType} field. */
+        public VkBufferOpaqueCaptureAddressCreateInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO); }
         /** Sets the specified value to the {@link VkBufferOpaqueCaptureAddressCreateInfo#pNext} field. */
         public VkBufferOpaqueCaptureAddressCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkBufferOpaqueCaptureAddressCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkBufferOpaqueCaptureAddressCreateInfo#opaqueCaptureAddress} field. */

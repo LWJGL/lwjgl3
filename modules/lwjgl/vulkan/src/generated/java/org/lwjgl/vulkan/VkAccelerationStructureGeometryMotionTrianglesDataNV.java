@@ -96,6 +96,8 @@ public class VkAccelerationStructureGeometryMotionTrianglesDataNV extends Struct
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureGeometryMotionTrianglesDataNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVRayTracingMotionBlur#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV} value to the {@link #sType} field. */
+    public VkAccelerationStructureGeometryMotionTrianglesDataNV sType$Default() { return sType(NVRayTracingMotionBlur.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureGeometryMotionTrianglesDataNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #vertexData} field. */
@@ -305,6 +307,8 @@ public class VkAccelerationStructureGeometryMotionTrianglesDataNV extends Struct
 
         /** Sets the specified value to the {@link VkAccelerationStructureGeometryMotionTrianglesDataNV#sType} field. */
         public VkAccelerationStructureGeometryMotionTrianglesDataNV.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureGeometryMotionTrianglesDataNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVRayTracingMotionBlur#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV} value to the {@link VkAccelerationStructureGeometryMotionTrianglesDataNV#sType} field. */
+        public VkAccelerationStructureGeometryMotionTrianglesDataNV.Buffer sType$Default() { return sType(NVRayTracingMotionBlur.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV); }
         /** Sets the specified value to the {@link VkAccelerationStructureGeometryMotionTrianglesDataNV#pNext} field. */
         public VkAccelerationStructureGeometryMotionTrianglesDataNV.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureGeometryMotionTrianglesDataNV.npNext(address(), value); return this; }
         /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkAccelerationStructureGeometryMotionTrianglesDataNV#vertexData} field. */

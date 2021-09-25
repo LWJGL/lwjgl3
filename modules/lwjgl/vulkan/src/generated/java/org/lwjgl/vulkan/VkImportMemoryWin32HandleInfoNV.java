@@ -109,6 +109,8 @@ public class VkImportMemoryWin32HandleInfoNV extends Struct implements NativeRes
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImportMemoryWin32HandleInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVExternalMemoryWin32#VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV} value to the {@link #sType} field. */
+    public VkImportMemoryWin32HandleInfoNV sType$Default() { return sType(NVExternalMemoryWin32.VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImportMemoryWin32HandleInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #handleType} field. */
@@ -367,6 +369,8 @@ public class VkImportMemoryWin32HandleInfoNV extends Struct implements NativeRes
 
         /** Sets the specified value to the {@link VkImportMemoryWin32HandleInfoNV#sType} field. */
         public VkImportMemoryWin32HandleInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkImportMemoryWin32HandleInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVExternalMemoryWin32#VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV} value to the {@link VkImportMemoryWin32HandleInfoNV#sType} field. */
+        public VkImportMemoryWin32HandleInfoNV.Buffer sType$Default() { return sType(NVExternalMemoryWin32.VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV); }
         /** Sets the specified value to the {@link VkImportMemoryWin32HandleInfoNV#pNext} field. */
         public VkImportMemoryWin32HandleInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkImportMemoryWin32HandleInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImportMemoryWin32HandleInfoNV#handleType} field. */

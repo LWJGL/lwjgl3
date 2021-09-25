@@ -107,6 +107,8 @@ public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct impl
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceFragmentDensityMapPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceFragmentDensityMapPropertiesEXT sType$Default() { return sType(EXTFragmentDensityMap.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceFragmentDensityMapPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -335,6 +337,8 @@ public class VkPhysicalDeviceFragmentDensityMapPropertiesEXT extends Struct impl
 
         /** Sets the specified value to the {@link VkPhysicalDeviceFragmentDensityMapPropertiesEXT#sType} field. */
         public VkPhysicalDeviceFragmentDensityMapPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFragmentDensityMapPropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceFragmentDensityMapPropertiesEXT#sType} field. */
+        public VkPhysicalDeviceFragmentDensityMapPropertiesEXT.Buffer sType$Default() { return sType(EXTFragmentDensityMap.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceFragmentDensityMapPropertiesEXT#pNext} field. */
         public VkPhysicalDeviceFragmentDensityMapPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFragmentDensityMapPropertiesEXT.npNext(address(), value); return this; }
 

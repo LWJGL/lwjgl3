@@ -114,6 +114,8 @@ public class VkPresentIdKHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPresentIdKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRPresentId#VK_STRUCTURE_TYPE_PRESENT_ID_KHR STRUCTURE_TYPE_PRESENT_ID_KHR} value to the {@link #sType} field. */
+    public VkPresentIdKHR sType$Default() { return sType(KHRPresentId.VK_STRUCTURE_TYPE_PRESENT_ID_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPresentIdKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #swapchainCount} field. */
@@ -334,6 +336,8 @@ public class VkPresentIdKHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkPresentIdKHR#sType} field. */
         public VkPresentIdKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPresentIdKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRPresentId#VK_STRUCTURE_TYPE_PRESENT_ID_KHR STRUCTURE_TYPE_PRESENT_ID_KHR} value to the {@link VkPresentIdKHR#sType} field. */
+        public VkPresentIdKHR.Buffer sType$Default() { return sType(KHRPresentId.VK_STRUCTURE_TYPE_PRESENT_ID_KHR); }
         /** Sets the specified value to the {@link VkPresentIdKHR#pNext} field. */
         public VkPresentIdKHR.Buffer pNext(@NativeType("void const *") long value) { VkPresentIdKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPresentIdKHR#swapchainCount} field. */

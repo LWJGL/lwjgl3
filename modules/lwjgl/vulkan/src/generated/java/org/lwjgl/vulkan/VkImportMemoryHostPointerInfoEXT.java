@@ -115,6 +115,8 @@ public class VkImportMemoryHostPointerInfoEXT extends Struct implements NativeRe
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImportMemoryHostPointerInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT} value to the {@link #sType} field. */
+    public VkImportMemoryHostPointerInfoEXT sType$Default() { return sType(EXTExternalMemoryHost.VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImportMemoryHostPointerInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #handleType} field. */
@@ -352,6 +354,8 @@ public class VkImportMemoryHostPointerInfoEXT extends Struct implements NativeRe
 
         /** Sets the specified value to the {@link VkImportMemoryHostPointerInfoEXT#sType} field. */
         public VkImportMemoryHostPointerInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImportMemoryHostPointerInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT} value to the {@link VkImportMemoryHostPointerInfoEXT#sType} field. */
+        public VkImportMemoryHostPointerInfoEXT.Buffer sType$Default() { return sType(EXTExternalMemoryHost.VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT); }
         /** Sets the specified value to the {@link VkImportMemoryHostPointerInfoEXT#pNext} field. */
         public VkImportMemoryHostPointerInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkImportMemoryHostPointerInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImportMemoryHostPointerInfoEXT#handleType} field. */

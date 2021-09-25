@@ -91,6 +91,8 @@ public class VkPhysicalDevicePerformanceQueryPropertiesKHR extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePerformanceQueryPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDevicePerformanceQueryPropertiesKHR sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePerformanceQueryPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -293,6 +295,8 @@ public class VkPhysicalDevicePerformanceQueryPropertiesKHR extends Struct implem
 
         /** Sets the specified value to the {@link VkPhysicalDevicePerformanceQueryPropertiesKHR#sType} field. */
         public VkPhysicalDevicePerformanceQueryPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePerformanceQueryPropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR} value to the {@link VkPhysicalDevicePerformanceQueryPropertiesKHR#sType} field. */
+        public VkPhysicalDevicePerformanceQueryPropertiesKHR.Buffer sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDevicePerformanceQueryPropertiesKHR#pNext} field. */
         public VkPhysicalDevicePerformanceQueryPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePerformanceQueryPropertiesKHR.npNext(address(), value); return this; }
 

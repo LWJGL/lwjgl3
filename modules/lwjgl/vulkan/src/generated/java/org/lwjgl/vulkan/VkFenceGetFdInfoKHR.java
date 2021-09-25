@@ -114,6 +114,8 @@ public class VkFenceGetFdInfoKHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkFenceGetFdInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRExternalFenceFd#VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR} value to the {@link #sType} field. */
+    public VkFenceGetFdInfoKHR sType$Default() { return sType(KHRExternalFenceFd.VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkFenceGetFdInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #fence} field. */
@@ -351,6 +353,8 @@ public class VkFenceGetFdInfoKHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkFenceGetFdInfoKHR#sType} field. */
         public VkFenceGetFdInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkFenceGetFdInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRExternalFenceFd#VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR} value to the {@link VkFenceGetFdInfoKHR#sType} field. */
+        public VkFenceGetFdInfoKHR.Buffer sType$Default() { return sType(KHRExternalFenceFd.VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR); }
         /** Sets the specified value to the {@link VkFenceGetFdInfoKHR#pNext} field. */
         public VkFenceGetFdInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkFenceGetFdInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkFenceGetFdInfoKHR#fence} field. */

@@ -107,6 +107,8 @@ public class VkPerformanceOverrideInfoINTEL extends Struct implements NativeReso
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPerformanceOverrideInfoINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL} value to the {@code sType} field. */
+    public VkPerformanceOverrideInfoINTEL sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPerformanceOverrideInfoINTEL pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #type} field. */
@@ -355,6 +357,8 @@ public class VkPerformanceOverrideInfoINTEL extends Struct implements NativeReso
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPerformanceOverrideInfoINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkPerformanceOverrideInfoINTEL.nsType(address(), value); return this; }
+        /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL} value to the {@code sType} field. */
+        public VkPerformanceOverrideInfoINTEL.Buffer sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPerformanceOverrideInfoINTEL.Buffer pNext(@NativeType("void const *") long value) { VkPerformanceOverrideInfoINTEL.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPerformanceOverrideInfoINTEL#type} field. */

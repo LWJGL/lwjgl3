@@ -87,6 +87,8 @@ public class VkDisplayNativeHdrSurfaceCapabilitiesAMD extends Struct implements 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDisplayNativeHdrSurfaceCapabilitiesAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link AMDDisplayNativeHdr#VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD} value to the {@link #sType} field. */
+    public VkDisplayNativeHdrSurfaceCapabilitiesAMD sType$Default() { return sType(AMDDisplayNativeHdr.VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDisplayNativeHdrSurfaceCapabilitiesAMD pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -307,6 +309,8 @@ public class VkDisplayNativeHdrSurfaceCapabilitiesAMD extends Struct implements 
 
         /** Sets the specified value to the {@link VkDisplayNativeHdrSurfaceCapabilitiesAMD#sType} field. */
         public VkDisplayNativeHdrSurfaceCapabilitiesAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplayNativeHdrSurfaceCapabilitiesAMD.nsType(address(), value); return this; }
+        /** Sets the {@link AMDDisplayNativeHdr#VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD} value to the {@link VkDisplayNativeHdrSurfaceCapabilitiesAMD#sType} field. */
+        public VkDisplayNativeHdrSurfaceCapabilitiesAMD.Buffer sType$Default() { return sType(AMDDisplayNativeHdr.VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD); }
         /** Sets the specified value to the {@link VkDisplayNativeHdrSurfaceCapabilitiesAMD#pNext} field. */
         public VkDisplayNativeHdrSurfaceCapabilitiesAMD.Buffer pNext(@NativeType("void *") long value) { VkDisplayNativeHdrSurfaceCapabilitiesAMD.npNext(address(), value); return this; }
 

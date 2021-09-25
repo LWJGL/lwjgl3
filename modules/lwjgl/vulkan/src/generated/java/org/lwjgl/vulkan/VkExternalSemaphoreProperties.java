@@ -110,6 +110,8 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkExternalSemaphoreProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES} value to the {@link #sType} field. */
+    public VkExternalSemaphoreProperties sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkExternalSemaphoreProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -340,6 +342,8 @@ public class VkExternalSemaphoreProperties extends Struct implements NativeResou
 
         /** Sets the specified value to the {@link VkExternalSemaphoreProperties#sType} field. */
         public VkExternalSemaphoreProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalSemaphoreProperties.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES} value to the {@link VkExternalSemaphoreProperties#sType} field. */
+        public VkExternalSemaphoreProperties.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES); }
         /** Sets the specified value to the {@link VkExternalSemaphoreProperties#pNext} field. */
         public VkExternalSemaphoreProperties.Buffer pNext(@NativeType("void *") long value) { VkExternalSemaphoreProperties.npNext(address(), value); return this; }
 

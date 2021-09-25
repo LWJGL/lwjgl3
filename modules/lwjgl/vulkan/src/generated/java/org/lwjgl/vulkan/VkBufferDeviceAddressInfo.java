@@ -100,6 +100,8 @@ public class VkBufferDeviceAddressInfo extends Struct implements NativeResource 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBufferDeviceAddressInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO} value to the {@link #sType} field. */
+    public VkBufferDeviceAddressInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferDeviceAddressInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #buffer} field. */
@@ -308,6 +310,8 @@ public class VkBufferDeviceAddressInfo extends Struct implements NativeResource 
 
         /** Sets the specified value to the {@link VkBufferDeviceAddressInfo#sType} field. */
         public VkBufferDeviceAddressInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferDeviceAddressInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO} value to the {@link VkBufferDeviceAddressInfo#sType} field. */
+        public VkBufferDeviceAddressInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO); }
         /** Sets the specified value to the {@link VkBufferDeviceAddressInfo#pNext} field. */
         public VkBufferDeviceAddressInfo.Buffer pNext(@NativeType("void const *") long value) { VkBufferDeviceAddressInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkBufferDeviceAddressInfo#buffer} field. */

@@ -134,6 +134,8 @@ public class VkPhysicalDeviceToolPropertiesEXT extends Struct implements NativeR
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceToolPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTToolingInfo#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceToolPropertiesEXT sType$Default() { return sType(EXTToolingInfo.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceToolPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -376,6 +378,8 @@ public class VkPhysicalDeviceToolPropertiesEXT extends Struct implements NativeR
 
         /** Sets the specified value to the {@link VkPhysicalDeviceToolPropertiesEXT#sType} field. */
         public VkPhysicalDeviceToolPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceToolPropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTToolingInfo#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceToolPropertiesEXT#sType} field. */
+        public VkPhysicalDeviceToolPropertiesEXT.Buffer sType$Default() { return sType(EXTToolingInfo.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceToolPropertiesEXT#pNext} field. */
         public VkPhysicalDeviceToolPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceToolPropertiesEXT.npNext(address(), value); return this; }
 

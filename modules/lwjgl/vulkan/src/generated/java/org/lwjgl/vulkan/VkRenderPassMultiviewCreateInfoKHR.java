@@ -48,6 +48,8 @@ public class VkRenderPassMultiviewCreateInfoKHR extends VkRenderPassMultiviewCre
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkRenderPassMultiviewCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO} value to the {@code sType} field. */
+    public VkRenderPassMultiviewCreateInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkRenderPassMultiviewCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -262,6 +264,8 @@ public class VkRenderPassMultiviewCreateInfoKHR extends VkRenderPassMultiviewCre
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkRenderPassMultiviewCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassMultiviewCreateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO} value to the {@code sType} field. */
+        public VkRenderPassMultiviewCreateInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkRenderPassMultiviewCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassMultiviewCreateInfoKHR.npNext(address(), value); return this; }

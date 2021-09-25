@@ -98,6 +98,8 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceInlineUniformBlockFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceInlineUniformBlockFeaturesEXT sType$Default() { return sType(EXTInlineUniformBlock.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceInlineUniformBlockFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #inlineUniformBlock} field. */
@@ -335,6 +337,8 @@ public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends Struct implem
 
         /** Sets the specified value to the {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT#sType} field. */
         public VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceInlineUniformBlockFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT} value to the {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer sType$Default() { return sType(EXTInlineUniformBlock.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceInlineUniformBlockFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceInlineUniformBlockFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceInlineUniformBlockFeaturesEXT#inlineUniformBlock} field. */

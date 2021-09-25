@@ -127,6 +127,8 @@ public class VkGraphicsShaderGroupCreateInfoNV extends Struct implements NativeR
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkGraphicsShaderGroupCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkGraphicsShaderGroupCreateInfoNV sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkGraphicsShaderGroupCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link #pStages} field. */
@@ -394,6 +396,8 @@ public class VkGraphicsShaderGroupCreateInfoNV extends Struct implements NativeR
 
         /** Sets the specified value to the {@link VkGraphicsShaderGroupCreateInfoNV#sType} field. */
         public VkGraphicsShaderGroupCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkGraphicsShaderGroupCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV} value to the {@link VkGraphicsShaderGroupCreateInfoNV#sType} field. */
+        public VkGraphicsShaderGroupCreateInfoNV.Buffer sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkGraphicsShaderGroupCreateInfoNV#pNext} field. */
         public VkGraphicsShaderGroupCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkGraphicsShaderGroupCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link VkGraphicsShaderGroupCreateInfoNV#pStages} field. */

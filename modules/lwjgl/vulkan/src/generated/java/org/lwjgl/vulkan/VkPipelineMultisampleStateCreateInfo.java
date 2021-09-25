@@ -157,6 +157,8 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineMultisampleStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkPipelineMultisampleStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineMultisampleStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -453,6 +455,8 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
 
         /** Sets the specified value to the {@link VkPipelineMultisampleStateCreateInfo#sType} field. */
         public VkPipelineMultisampleStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineMultisampleStateCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO} value to the {@link VkPipelineMultisampleStateCreateInfo#sType} field. */
+        public VkPipelineMultisampleStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineMultisampleStateCreateInfo#pNext} field. */
         public VkPipelineMultisampleStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineMultisampleStateCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineMultisampleStateCreateInfo#flags} field. */

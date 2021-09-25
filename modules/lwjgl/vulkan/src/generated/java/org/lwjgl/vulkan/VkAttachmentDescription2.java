@@ -188,6 +188,8 @@ public class VkAttachmentDescription2 extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAttachmentDescription2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2 STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2} value to the {@link #sType} field. */
+    public VkAttachmentDescription2 sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAttachmentDescription2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -484,6 +486,8 @@ public class VkAttachmentDescription2 extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkAttachmentDescription2#sType} field. */
         public VkAttachmentDescription2.Buffer sType(@NativeType("VkStructureType") int value) { VkAttachmentDescription2.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2 STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2} value to the {@link VkAttachmentDescription2#sType} field. */
+        public VkAttachmentDescription2.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2); }
         /** Sets the specified value to the {@link VkAttachmentDescription2#pNext} field. */
         public VkAttachmentDescription2.Buffer pNext(@NativeType("void const *") long value) { VkAttachmentDescription2.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkAttachmentDescription2#flags} field. */

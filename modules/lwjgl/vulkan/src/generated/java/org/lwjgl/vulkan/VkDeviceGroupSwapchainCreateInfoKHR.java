@@ -93,6 +93,8 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceGroupSwapchainCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    public VkDeviceGroupSwapchainCreateInfoKHR sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceGroupSwapchainCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #modes} field. */
@@ -319,6 +321,8 @@ public class VkDeviceGroupSwapchainCreateInfoKHR extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkDeviceGroupSwapchainCreateInfoKHR#sType} field. */
         public VkDeviceGroupSwapchainCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupSwapchainCreateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR} value to the {@link VkDeviceGroupSwapchainCreateInfoKHR#sType} field. */
+        public VkDeviceGroupSwapchainCreateInfoKHR.Buffer sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkDeviceGroupSwapchainCreateInfoKHR#pNext} field. */
         public VkDeviceGroupSwapchainCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupSwapchainCreateInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDeviceGroupSwapchainCreateInfoKHR#modes} field. */

@@ -91,6 +91,8 @@ public class VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL extends Struct
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link INTELShaderIntegerFunctions2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL sType$Default() { return sType(INTELShaderIntegerFunctions2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderIntegerFunctions2} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL extends Struct
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL#sType} field. */
         public VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.nsType(address(), value); return this; }
+        /** Sets the {@link INTELShaderIntegerFunctions2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL} value to the {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL#sType} field. */
+        public VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.Buffer sType$Default() { return sType(INTELShaderIntegerFunctions2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL#pNext} field. */
         public VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL#shaderIntegerFunctions2} field. */

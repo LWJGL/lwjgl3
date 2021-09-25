@@ -91,6 +91,8 @@ public class VkPhysicalDevicePushDescriptorPropertiesKHR extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePushDescriptorPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRPushDescriptor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDevicePushDescriptorPropertiesKHR sType$Default() { return sType(KHRPushDescriptor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePushDescriptorPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -311,6 +313,8 @@ public class VkPhysicalDevicePushDescriptorPropertiesKHR extends Struct implemen
 
         /** Sets the specified value to the {@link VkPhysicalDevicePushDescriptorPropertiesKHR#sType} field. */
         public VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePushDescriptorPropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRPushDescriptor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR} value to the {@link VkPhysicalDevicePushDescriptorPropertiesKHR#sType} field. */
+        public VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer sType$Default() { return sType(KHRPushDescriptor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDevicePushDescriptorPropertiesKHR#pNext} field. */
         public VkPhysicalDevicePushDescriptorPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePushDescriptorPropertiesKHR.npNext(address(), value); return this; }
 

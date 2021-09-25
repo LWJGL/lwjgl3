@@ -43,6 +43,8 @@ public class VkMemoryDedicatedRequirementsKHR extends VkMemoryDedicatedRequireme
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkMemoryDedicatedRequirementsKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS} value to the {@code sType} field. */
+    public VkMemoryDedicatedRequirementsKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkMemoryDedicatedRequirementsKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -242,6 +244,8 @@ public class VkMemoryDedicatedRequirementsKHR extends VkMemoryDedicatedRequireme
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkMemoryDedicatedRequirementsKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryDedicatedRequirementsKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS} value to the {@code sType} field. */
+        public VkMemoryDedicatedRequirementsKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkMemoryDedicatedRequirementsKHR.Buffer pNext(@NativeType("void *") long value) { VkMemoryDedicatedRequirementsKHR.npNext(address(), value); return this; }

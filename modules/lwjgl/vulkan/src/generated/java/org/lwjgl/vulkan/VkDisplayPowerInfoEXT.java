@@ -93,6 +93,8 @@ public class VkDisplayPowerInfoEXT extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDisplayPowerInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDisplayControl#VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT} value to the {@link #sType} field. */
+    public VkDisplayPowerInfoEXT sType$Default() { return sType(EXTDisplayControl.VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDisplayPowerInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #powerState} field. */
@@ -319,6 +321,8 @@ public class VkDisplayPowerInfoEXT extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkDisplayPowerInfoEXT#sType} field. */
         public VkDisplayPowerInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplayPowerInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDisplayControl#VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT} value to the {@link VkDisplayPowerInfoEXT#sType} field. */
+        public VkDisplayPowerInfoEXT.Buffer sType$Default() { return sType(EXTDisplayControl.VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT); }
         /** Sets the specified value to the {@link VkDisplayPowerInfoEXT#pNext} field. */
         public VkDisplayPowerInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDisplayPowerInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDisplayPowerInfoEXT#powerState} field. */

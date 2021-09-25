@@ -91,6 +91,8 @@ public class VkPhysicalDeviceSamplerYcbcrConversionFeatures extends Struct imple
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceSamplerYcbcrConversionFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceSamplerYcbcrConversionFeatures sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceSamplerYcbcrConversionFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #samplerYcbcrConversion} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceSamplerYcbcrConversionFeatures extends Struct imple
 
         /** Sets the specified value to the {@link VkPhysicalDeviceSamplerYcbcrConversionFeatures#sType} field. */
         public VkPhysicalDeviceSamplerYcbcrConversionFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSamplerYcbcrConversionFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES} value to the {@link VkPhysicalDeviceSamplerYcbcrConversionFeatures#sType} field. */
+        public VkPhysicalDeviceSamplerYcbcrConversionFeatures.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceSamplerYcbcrConversionFeatures#pNext} field. */
         public VkPhysicalDeviceSamplerYcbcrConversionFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSamplerYcbcrConversionFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceSamplerYcbcrConversionFeatures#samplerYcbcrConversion} field. */

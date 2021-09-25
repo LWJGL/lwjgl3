@@ -111,6 +111,8 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceGroupDeviceCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkDeviceGroupDeviceCreateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceGroupDeviceCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@link #pPhysicalDevices} field. */
@@ -368,6 +370,8 @@ public class VkDeviceGroupDeviceCreateInfo extends Struct implements NativeResou
 
         /** Sets the specified value to the {@link VkDeviceGroupDeviceCreateInfo#sType} field. */
         public VkDeviceGroupDeviceCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupDeviceCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO} value to the {@link VkDeviceGroupDeviceCreateInfo#sType} field. */
+        public VkDeviceGroupDeviceCreateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkDeviceGroupDeviceCreateInfo#pNext} field. */
         public VkDeviceGroupDeviceCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupDeviceCreateInfo.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@link VkDeviceGroupDeviceCreateInfo#pPhysicalDevices} field. */

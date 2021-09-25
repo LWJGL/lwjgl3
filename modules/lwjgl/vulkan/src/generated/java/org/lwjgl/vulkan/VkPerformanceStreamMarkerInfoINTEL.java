@@ -98,6 +98,8 @@ public class VkPerformanceStreamMarkerInfoINTEL extends Struct implements Native
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPerformanceStreamMarkerInfoINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL} value to the {@link #sType} field. */
+    public VkPerformanceStreamMarkerInfoINTEL sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPerformanceStreamMarkerInfoINTEL pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #marker} field. */
@@ -324,6 +326,8 @@ public class VkPerformanceStreamMarkerInfoINTEL extends Struct implements Native
 
         /** Sets the specified value to the {@link VkPerformanceStreamMarkerInfoINTEL#sType} field. */
         public VkPerformanceStreamMarkerInfoINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkPerformanceStreamMarkerInfoINTEL.nsType(address(), value); return this; }
+        /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL} value to the {@link VkPerformanceStreamMarkerInfoINTEL#sType} field. */
+        public VkPerformanceStreamMarkerInfoINTEL.Buffer sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL); }
         /** Sets the specified value to the {@link VkPerformanceStreamMarkerInfoINTEL#pNext} field. */
         public VkPerformanceStreamMarkerInfoINTEL.Buffer pNext(@NativeType("void const *") long value) { VkPerformanceStreamMarkerInfoINTEL.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPerformanceStreamMarkerInfoINTEL#marker} field. */

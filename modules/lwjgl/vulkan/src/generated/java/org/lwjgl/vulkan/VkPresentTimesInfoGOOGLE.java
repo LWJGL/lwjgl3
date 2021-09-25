@@ -107,6 +107,8 @@ public class VkPresentTimesInfoGOOGLE extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPresentTimesInfoGOOGLE sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link GOOGLEDisplayTiming#VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE} value to the {@link #sType} field. */
+    public VkPresentTimesInfoGOOGLE sType$Default() { return sType(GOOGLEDisplayTiming.VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPresentTimesInfoGOOGLE pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #swapchainCount} field. */
@@ -345,6 +347,8 @@ public class VkPresentTimesInfoGOOGLE extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkPresentTimesInfoGOOGLE#sType} field. */
         public VkPresentTimesInfoGOOGLE.Buffer sType(@NativeType("VkStructureType") int value) { VkPresentTimesInfoGOOGLE.nsType(address(), value); return this; }
+        /** Sets the {@link GOOGLEDisplayTiming#VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE} value to the {@link VkPresentTimesInfoGOOGLE#sType} field. */
+        public VkPresentTimesInfoGOOGLE.Buffer sType$Default() { return sType(GOOGLEDisplayTiming.VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE); }
         /** Sets the specified value to the {@link VkPresentTimesInfoGOOGLE#pNext} field. */
         public VkPresentTimesInfoGOOGLE.Buffer pNext(@NativeType("void const *") long value) { VkPresentTimesInfoGOOGLE.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPresentTimesInfoGOOGLE#swapchainCount} field. */

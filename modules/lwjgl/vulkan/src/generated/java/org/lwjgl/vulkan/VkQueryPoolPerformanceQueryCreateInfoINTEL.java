@@ -88,6 +88,8 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkQueryPoolPerformanceQueryCreateInfoINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL} value to the {@link #sType} field. */
+    public VkQueryPoolPerformanceQueryCreateInfoINTEL sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueryPoolPerformanceQueryCreateInfoINTEL pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #performanceCountersSampling} field. */
@@ -296,6 +298,8 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
 
         /** Sets the specified value to the {@link VkQueryPoolPerformanceQueryCreateInfoINTEL#sType} field. */
         public VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkQueryPoolPerformanceQueryCreateInfoINTEL.nsType(address(), value); return this; }
+        /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL} value to the {@link VkQueryPoolPerformanceQueryCreateInfoINTEL#sType} field. */
+        public VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL); }
         /** Sets the specified value to the {@link VkQueryPoolPerformanceQueryCreateInfoINTEL#pNext} field. */
         public VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer pNext(@NativeType("void const *") long value) { VkQueryPoolPerformanceQueryCreateInfoINTEL.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkQueryPoolPerformanceQueryCreateInfoINTEL#performanceCountersSampling} field. */

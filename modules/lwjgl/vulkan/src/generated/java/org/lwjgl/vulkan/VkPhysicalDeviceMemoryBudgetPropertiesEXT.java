@@ -107,6 +107,8 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMemoryBudgetPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTMemoryBudget#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceMemoryBudgetPropertiesEXT sType$Default() { return sType(EXTMemoryBudget.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMemoryBudgetPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -346,6 +348,8 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
 
         /** Sets the specified value to the {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#sType} field. */
         public VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMemoryBudgetPropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTMemoryBudget#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#sType} field. */
+        public VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer sType$Default() { return sType(EXTMemoryBudget.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#pNext} field. */
         public VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMemoryBudgetPropertiesEXT.npNext(address(), value); return this; }
 

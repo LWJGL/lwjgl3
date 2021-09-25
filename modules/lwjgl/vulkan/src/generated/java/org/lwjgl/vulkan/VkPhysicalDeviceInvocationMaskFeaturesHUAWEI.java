@@ -91,6 +91,8 @@ public class VkPhysicalDeviceInvocationMaskFeaturesHUAWEI extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceInvocationMaskFeaturesHUAWEI sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link HUAWEIInvocationMask#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI} value to the {@link #sType} field. */
+    public VkPhysicalDeviceInvocationMaskFeaturesHUAWEI sType$Default() { return sType(HUAWEIInvocationMask.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceInvocationMaskFeaturesHUAWEI pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #invocationMask} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceInvocationMaskFeaturesHUAWEI extends Struct impleme
 
         /** Sets the specified value to the {@link VkPhysicalDeviceInvocationMaskFeaturesHUAWEI#sType} field. */
         public VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.nsType(address(), value); return this; }
+        /** Sets the {@link HUAWEIInvocationMask#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI} value to the {@link VkPhysicalDeviceInvocationMaskFeaturesHUAWEI#sType} field. */
+        public VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.Buffer sType$Default() { return sType(HUAWEIInvocationMask.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI); }
         /** Sets the specified value to the {@link VkPhysicalDeviceInvocationMaskFeaturesHUAWEI#pNext} field. */
         public VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceInvocationMaskFeaturesHUAWEI#invocationMask} field. */

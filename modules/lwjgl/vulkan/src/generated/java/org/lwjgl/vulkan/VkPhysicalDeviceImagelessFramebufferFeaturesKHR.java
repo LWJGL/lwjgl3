@@ -42,6 +42,8 @@ public class VkPhysicalDeviceImagelessFramebufferFeaturesKHR extends VkPhysicalD
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPhysicalDeviceImagelessFramebufferFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES} value to the {@code sType} field. */
+    public VkPhysicalDeviceImagelessFramebufferFeaturesKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPhysicalDeviceImagelessFramebufferFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -246,6 +248,8 @@ public class VkPhysicalDeviceImagelessFramebufferFeaturesKHR extends VkPhysicalD
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPhysicalDeviceImagelessFramebufferFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceImagelessFramebufferFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES} value to the {@code sType} field. */
+        public VkPhysicalDeviceImagelessFramebufferFeaturesKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPhysicalDeviceImagelessFramebufferFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceImagelessFramebufferFeaturesKHR.npNext(address(), value); return this; }

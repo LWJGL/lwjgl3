@@ -92,6 +92,8 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineTessellationDomainOriginStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkPipelineTessellationDomainOriginStateCreateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineTessellationDomainOriginStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #domainOrigin} field. */
@@ -318,6 +320,8 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct im
 
         /** Sets the specified value to the {@link VkPipelineTessellationDomainOriginStateCreateInfo#sType} field. */
         public VkPipelineTessellationDomainOriginStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineTessellationDomainOriginStateCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO} value to the {@link VkPipelineTessellationDomainOriginStateCreateInfo#sType} field. */
+        public VkPipelineTessellationDomainOriginStateCreateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineTessellationDomainOriginStateCreateInfo#pNext} field. */
         public VkPipelineTessellationDomainOriginStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineTessellationDomainOriginStateCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineTessellationDomainOriginStateCreateInfo#domainOrigin} field. */

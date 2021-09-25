@@ -103,6 +103,8 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoDecodeH264CapabilitiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT} value to the {@link #sType} field. */
+    public VkVideoDecodeH264CapabilitiesEXT sType$Default() { return sType(EXTVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoDecodeH264CapabilitiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -313,6 +315,8 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
 
         /** Sets the specified value to the {@link VkVideoDecodeH264CapabilitiesEXT#sType} field. */
         public VkVideoDecodeH264CapabilitiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH264CapabilitiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT} value to the {@link VkVideoDecodeH264CapabilitiesEXT#sType} field. */
+        public VkVideoDecodeH264CapabilitiesEXT.Buffer sType$Default() { return sType(EXTVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT); }
         /** Sets the specified value to the {@link VkVideoDecodeH264CapabilitiesEXT#pNext} field. */
         public VkVideoDecodeH264CapabilitiesEXT.Buffer pNext(@NativeType("void *") long value) { VkVideoDecodeH264CapabilitiesEXT.npNext(address(), value); return this; }
 

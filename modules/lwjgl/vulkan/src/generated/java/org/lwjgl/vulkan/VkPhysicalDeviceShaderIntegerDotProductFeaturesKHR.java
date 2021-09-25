@@ -91,6 +91,8 @@ public class VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR extends Struct i
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRShaderIntegerDotProduct#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR} value to the {@code sType} field. */
+    public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR sType$Default() { return sType(KHRShaderIntegerDotProduct.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderIntegerDotProduct} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR extends Struct i
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRShaderIntegerDotProduct#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR} value to the {@code sType} field. */
+        public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.Buffer sType$Default() { return sType(KHRShaderIntegerDotProduct.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR#shaderIntegerDotProduct} field. */

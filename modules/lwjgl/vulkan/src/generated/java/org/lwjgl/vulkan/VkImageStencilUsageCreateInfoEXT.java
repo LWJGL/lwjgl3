@@ -42,6 +42,8 @@ public class VkImageStencilUsageCreateInfoEXT extends VkImageStencilUsageCreateI
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkImageStencilUsageCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO} value to the {@code sType} field. */
+    public VkImageStencilUsageCreateInfoEXT sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkImageStencilUsageCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -246,6 +248,8 @@ public class VkImageStencilUsageCreateInfoEXT extends VkImageStencilUsageCreateI
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkImageStencilUsageCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageStencilUsageCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO} value to the {@code sType} field. */
+        public VkImageStencilUsageCreateInfoEXT.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkImageStencilUsageCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkImageStencilUsageCreateInfoEXT.npNext(address(), value); return this; }

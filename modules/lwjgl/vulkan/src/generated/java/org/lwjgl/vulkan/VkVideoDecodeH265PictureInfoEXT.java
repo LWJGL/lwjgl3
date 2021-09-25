@@ -107,6 +107,8 @@ public class VkVideoDecodeH265PictureInfoEXT extends Struct implements NativeRes
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoDecodeH265PictureInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTVideoDecodeH265#VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT} value to the {@link #sType} field. */
+    public VkVideoDecodeH265PictureInfoEXT sType$Default() { return sType(EXTVideoDecodeH265.VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoDecodeH265PictureInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoDecodeH265PictureInfo} to the {@link #pStdPictureInfo} field. */
@@ -355,6 +357,8 @@ public class VkVideoDecodeH265PictureInfoEXT extends Struct implements NativeRes
 
         /** Sets the specified value to the {@link VkVideoDecodeH265PictureInfoEXT#sType} field. */
         public VkVideoDecodeH265PictureInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH265PictureInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTVideoDecodeH265#VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT} value to the {@link VkVideoDecodeH265PictureInfoEXT#sType} field. */
+        public VkVideoDecodeH265PictureInfoEXT.Buffer sType$Default() { return sType(EXTVideoDecodeH265.VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT); }
         /** Sets the specified value to the {@link VkVideoDecodeH265PictureInfoEXT#pNext} field. */
         public VkVideoDecodeH265PictureInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeH265PictureInfoEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoDecodeH265PictureInfo} to the {@link VkVideoDecodeH265PictureInfoEXT#pStdPictureInfo} field. */

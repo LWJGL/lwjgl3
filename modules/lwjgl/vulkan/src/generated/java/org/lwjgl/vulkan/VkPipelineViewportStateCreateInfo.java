@@ -140,6 +140,8 @@ public class VkPipelineViewportStateCreateInfo extends Struct implements NativeR
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineViewportStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkPipelineViewportStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineViewportStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -412,6 +414,8 @@ public class VkPipelineViewportStateCreateInfo extends Struct implements NativeR
 
         /** Sets the specified value to the {@link VkPipelineViewportStateCreateInfo#sType} field. */
         public VkPipelineViewportStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineViewportStateCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO} value to the {@link VkPipelineViewportStateCreateInfo#sType} field. */
+        public VkPipelineViewportStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineViewportStateCreateInfo#pNext} field. */
         public VkPipelineViewportStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineViewportStateCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineViewportStateCreateInfo#flags} field. */

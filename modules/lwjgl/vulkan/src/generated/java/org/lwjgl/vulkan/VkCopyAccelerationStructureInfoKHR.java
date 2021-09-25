@@ -120,6 +120,8 @@ public class VkCopyAccelerationStructureInfoKHR extends Struct implements Native
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCopyAccelerationStructureInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR} value to the {@link #sType} field. */
+    public VkCopyAccelerationStructureInfoKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCopyAccelerationStructureInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #src} field. */
@@ -350,6 +352,8 @@ public class VkCopyAccelerationStructureInfoKHR extends Struct implements Native
 
         /** Sets the specified value to the {@link VkCopyAccelerationStructureInfoKHR#sType} field. */
         public VkCopyAccelerationStructureInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkCopyAccelerationStructureInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR} value to the {@link VkCopyAccelerationStructureInfoKHR#sType} field. */
+        public VkCopyAccelerationStructureInfoKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR); }
         /** Sets the specified value to the {@link VkCopyAccelerationStructureInfoKHR#pNext} field. */
         public VkCopyAccelerationStructureInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkCopyAccelerationStructureInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkCopyAccelerationStructureInfoKHR#src} field. */

@@ -91,6 +91,8 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSurfaceFormat2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRGetSurfaceCapabilities2#VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR} value to the {@link #sType} field. */
+    public VkSurfaceFormat2KHR sType$Default() { return sType(KHRGetSurfaceCapabilities2.VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSurfaceFormat2KHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -310,6 +312,8 @@ public class VkSurfaceFormat2KHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkSurfaceFormat2KHR#sType} field. */
         public VkSurfaceFormat2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfaceFormat2KHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRGetSurfaceCapabilities2#VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR} value to the {@link VkSurfaceFormat2KHR#sType} field. */
+        public VkSurfaceFormat2KHR.Buffer sType$Default() { return sType(KHRGetSurfaceCapabilities2.VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR); }
         /** Sets the specified value to the {@link VkSurfaceFormat2KHR#pNext} field. */
         public VkSurfaceFormat2KHR.Buffer pNext(@NativeType("void *") long value) { VkSurfaceFormat2KHR.npNext(address(), value); return this; }
 

@@ -138,6 +138,8 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkHdrMetadataEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTHdrMetadata#VK_STRUCTURE_TYPE_HDR_METADATA_EXT STRUCTURE_TYPE_HDR_METADATA_EXT} value to the {@link #sType} field. */
+    public VkHdrMetadataEXT sType$Default() { return sType(EXTHdrMetadata.VK_STRUCTURE_TYPE_HDR_METADATA_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkHdrMetadataEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Copies the specified {@link VkXYColorEXT} to the {@link #displayPrimaryRed} field. */
@@ -441,6 +443,8 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkHdrMetadataEXT#sType} field. */
         public VkHdrMetadataEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkHdrMetadataEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTHdrMetadata#VK_STRUCTURE_TYPE_HDR_METADATA_EXT STRUCTURE_TYPE_HDR_METADATA_EXT} value to the {@link VkHdrMetadataEXT#sType} field. */
+        public VkHdrMetadataEXT.Buffer sType$Default() { return sType(EXTHdrMetadata.VK_STRUCTURE_TYPE_HDR_METADATA_EXT); }
         /** Sets the specified value to the {@link VkHdrMetadataEXT#pNext} field. */
         public VkHdrMetadataEXT.Buffer pNext(@NativeType("void const *") long value) { VkHdrMetadataEXT.npNext(address(), value); return this; }
         /** Copies the specified {@link VkXYColorEXT} to the {@link VkHdrMetadataEXT#displayPrimaryRed} field. */

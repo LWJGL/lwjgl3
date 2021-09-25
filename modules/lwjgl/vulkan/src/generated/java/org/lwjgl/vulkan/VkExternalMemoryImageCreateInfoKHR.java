@@ -42,6 +42,8 @@ public class VkExternalMemoryImageCreateInfoKHR extends VkExternalMemoryImageCre
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkExternalMemoryImageCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO} value to the {@code sType} field. */
+    public VkExternalMemoryImageCreateInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkExternalMemoryImageCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -246,6 +248,8 @@ public class VkExternalMemoryImageCreateInfoKHR extends VkExternalMemoryImageCre
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkExternalMemoryImageCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalMemoryImageCreateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO} value to the {@code sType} field. */
+        public VkExternalMemoryImageCreateInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkExternalMemoryImageCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkExternalMemoryImageCreateInfoKHR.npNext(address(), value); return this; }

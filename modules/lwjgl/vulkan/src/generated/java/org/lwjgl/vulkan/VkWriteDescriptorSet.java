@@ -219,6 +219,8 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkWriteDescriptorSet sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET} value to the {@link #sType} field. */
+    public VkWriteDescriptorSet sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkWriteDescriptorSet pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #dstSet} field. */
@@ -525,6 +527,8 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkWriteDescriptorSet#sType} field. */
         public VkWriteDescriptorSet.Buffer sType(@NativeType("VkStructureType") int value) { VkWriteDescriptorSet.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET} value to the {@link VkWriteDescriptorSet#sType} field. */
+        public VkWriteDescriptorSet.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET); }
         /** Sets the specified value to the {@link VkWriteDescriptorSet#pNext} field. */
         public VkWriteDescriptorSet.Buffer pNext(@NativeType("void const *") long value) { VkWriteDescriptorSet.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkWriteDescriptorSet#dstSet} field. */

@@ -96,6 +96,8 @@ public class VkImageDrmFormatModifierPropertiesEXT extends Struct implements Nat
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImageDrmFormatModifierPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkImageDrmFormatModifierPropertiesEXT sType$Default() { return sType(EXTImageDrmFormatModifier.VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageDrmFormatModifierPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -316,6 +318,8 @@ public class VkImageDrmFormatModifierPropertiesEXT extends Struct implements Nat
 
         /** Sets the specified value to the {@link VkImageDrmFormatModifierPropertiesEXT#sType} field. */
         public VkImageDrmFormatModifierPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageDrmFormatModifierPropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT} value to the {@link VkImageDrmFormatModifierPropertiesEXT#sType} field. */
+        public VkImageDrmFormatModifierPropertiesEXT.Buffer sType$Default() { return sType(EXTImageDrmFormatModifier.VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkImageDrmFormatModifierPropertiesEXT#pNext} field. */
         public VkImageDrmFormatModifierPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkImageDrmFormatModifierPropertiesEXT.npNext(address(), value); return this; }
 

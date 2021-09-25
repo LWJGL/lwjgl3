@@ -108,6 +108,8 @@ public class VkSemaphoreTypeCreateInfo extends Struct implements NativeResource 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSemaphoreTypeCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkSemaphoreTypeCreateInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSemaphoreTypeCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #semaphoreType} field. */
@@ -327,6 +329,8 @@ public class VkSemaphoreTypeCreateInfo extends Struct implements NativeResource 
 
         /** Sets the specified value to the {@link VkSemaphoreTypeCreateInfo#sType} field. */
         public VkSemaphoreTypeCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSemaphoreTypeCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO} value to the {@link VkSemaphoreTypeCreateInfo#sType} field. */
+        public VkSemaphoreTypeCreateInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkSemaphoreTypeCreateInfo#pNext} field. */
         public VkSemaphoreTypeCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkSemaphoreTypeCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkSemaphoreTypeCreateInfo#semaphoreType} field. */

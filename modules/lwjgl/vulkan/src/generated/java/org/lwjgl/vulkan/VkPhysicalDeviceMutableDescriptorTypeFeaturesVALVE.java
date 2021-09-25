@@ -112,6 +112,8 @@ public class VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE extends Struct i
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VALVEMutableDescriptorType#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE} value to the {@link #sType} field. */
+    public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE sType$Default() { return sType(VALVEMutableDescriptorType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #mutableDescriptorType} field. */
@@ -320,6 +322,8 @@ public class VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE extends Struct i
 
         /** Sets the specified value to the {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE#sType} field. */
         public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.nsType(address(), value); return this; }
+        /** Sets the {@link VALVEMutableDescriptorType#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE} value to the {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE#sType} field. */
+        public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.Buffer sType$Default() { return sType(VALVEMutableDescriptorType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE); }
         /** Sets the specified value to the {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE#pNext} field. */
         public VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE#mutableDescriptorType} field. */

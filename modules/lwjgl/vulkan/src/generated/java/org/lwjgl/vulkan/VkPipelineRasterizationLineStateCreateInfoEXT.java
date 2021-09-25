@@ -125,6 +125,8 @@ public class VkPipelineRasterizationLineStateCreateInfoEXT extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineRasterizationLineStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTLineRasterization#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkPipelineRasterizationLineStateCreateInfoEXT sType$Default() { return sType(EXTLineRasterization.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineRasterizationLineStateCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #lineRasterizationMode} field. */
@@ -384,6 +386,8 @@ public class VkPipelineRasterizationLineStateCreateInfoEXT extends Struct implem
 
         /** Sets the specified value to the {@link VkPipelineRasterizationLineStateCreateInfoEXT#sType} field. */
         public VkPipelineRasterizationLineStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineRasterizationLineStateCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTLineRasterization#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT} value to the {@link VkPipelineRasterizationLineStateCreateInfoEXT#sType} field. */
+        public VkPipelineRasterizationLineStateCreateInfoEXT.Buffer sType$Default() { return sType(EXTLineRasterization.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkPipelineRasterizationLineStateCreateInfoEXT#pNext} field. */
         public VkPipelineRasterizationLineStateCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRasterizationLineStateCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineRasterizationLineStateCreateInfoEXT#lineRasterizationMode} field. */

@@ -93,6 +93,8 @@ public class VkPhysicalDeviceShaderImageFootprintFeaturesNV extends Struct imple
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderImageFootprintFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVShaderImageFootprint#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderImageFootprintFeaturesNV sType$Default() { return sType(NVShaderImageFootprint.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderImageFootprintFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #imageFootprint} field. */
@@ -319,6 +321,8 @@ public class VkPhysicalDeviceShaderImageFootprintFeaturesNV extends Struct imple
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV#sType} field. */
         public VkPhysicalDeviceShaderImageFootprintFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderImageFootprintFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVShaderImageFootprint#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV} value to the {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV#sType} field. */
+        public VkPhysicalDeviceShaderImageFootprintFeaturesNV.Buffer sType$Default() { return sType(NVShaderImageFootprint.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV#pNext} field. */
         public VkPhysicalDeviceShaderImageFootprintFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderImageFootprintFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV#imageFootprint} field. */

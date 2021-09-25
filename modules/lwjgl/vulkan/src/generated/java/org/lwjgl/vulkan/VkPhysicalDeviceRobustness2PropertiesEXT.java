@@ -98,6 +98,8 @@ public class VkPhysicalDeviceRobustness2PropertiesEXT extends Struct implements 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceRobustness2PropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTRobustness2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceRobustness2PropertiesEXT sType$Default() { return sType(EXTRobustness2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceRobustness2PropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -305,6 +307,8 @@ public class VkPhysicalDeviceRobustness2PropertiesEXT extends Struct implements 
 
         /** Sets the specified value to the {@link VkPhysicalDeviceRobustness2PropertiesEXT#sType} field. */
         public VkPhysicalDeviceRobustness2PropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRobustness2PropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTRobustness2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceRobustness2PropertiesEXT#sType} field. */
+        public VkPhysicalDeviceRobustness2PropertiesEXT.Buffer sType$Default() { return sType(EXTRobustness2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceRobustness2PropertiesEXT#pNext} field. */
         public VkPhysicalDeviceRobustness2PropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRobustness2PropertiesEXT.npNext(address(), value); return this; }
 

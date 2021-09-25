@@ -99,6 +99,8 @@ public class VkCalibratedTimestampInfoEXT extends Struct implements NativeResour
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCalibratedTimestampInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTCalibratedTimestamps#VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT} value to the {@link #sType} field. */
+    public VkCalibratedTimestampInfoEXT sType$Default() { return sType(EXTCalibratedTimestamps.VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCalibratedTimestampInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #timeDomain} field. */
@@ -325,6 +327,8 @@ public class VkCalibratedTimestampInfoEXT extends Struct implements NativeResour
 
         /** Sets the specified value to the {@link VkCalibratedTimestampInfoEXT#sType} field. */
         public VkCalibratedTimestampInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkCalibratedTimestampInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTCalibratedTimestamps#VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT} value to the {@link VkCalibratedTimestampInfoEXT#sType} field. */
+        public VkCalibratedTimestampInfoEXT.Buffer sType$Default() { return sType(EXTCalibratedTimestamps.VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT); }
         /** Sets the specified value to the {@link VkCalibratedTimestampInfoEXT#pNext} field. */
         public VkCalibratedTimestampInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkCalibratedTimestampInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkCalibratedTimestampInfoEXT#timeDomain} field. */

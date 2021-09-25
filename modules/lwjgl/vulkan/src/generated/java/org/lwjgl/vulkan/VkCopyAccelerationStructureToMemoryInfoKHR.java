@@ -115,6 +115,8 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCopyAccelerationStructureToMemoryInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR} value to the {@link #sType} field. */
+    public VkCopyAccelerationStructureToMemoryInfoKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCopyAccelerationStructureToMemoryInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #src} field. */
@@ -346,6 +348,8 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
 
         /** Sets the specified value to the {@link VkCopyAccelerationStructureToMemoryInfoKHR#sType} field. */
         public VkCopyAccelerationStructureToMemoryInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkCopyAccelerationStructureToMemoryInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR} value to the {@link VkCopyAccelerationStructureToMemoryInfoKHR#sType} field. */
+        public VkCopyAccelerationStructureToMemoryInfoKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR); }
         /** Sets the specified value to the {@link VkCopyAccelerationStructureToMemoryInfoKHR#pNext} field. */
         public VkCopyAccelerationStructureToMemoryInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkCopyAccelerationStructureToMemoryInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkCopyAccelerationStructureToMemoryInfoKHR#src} field. */

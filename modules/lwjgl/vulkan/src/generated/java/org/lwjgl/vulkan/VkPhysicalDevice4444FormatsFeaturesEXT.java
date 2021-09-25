@@ -114,6 +114,8 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevice4444FormatsFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXT4444Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDevice4444FormatsFeaturesEXT sType$Default() { return sType(EXT4444Formats.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevice4444FormatsFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #formatA4R4G4B4} field. */
@@ -333,6 +335,8 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
 
         /** Sets the specified value to the {@link VkPhysicalDevice4444FormatsFeaturesEXT#sType} field. */
         public VkPhysicalDevice4444FormatsFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevice4444FormatsFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXT4444Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT} value to the {@link VkPhysicalDevice4444FormatsFeaturesEXT#sType} field. */
+        public VkPhysicalDevice4444FormatsFeaturesEXT.Buffer sType$Default() { return sType(EXT4444Formats.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDevice4444FormatsFeaturesEXT#pNext} field. */
         public VkPhysicalDevice4444FormatsFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevice4444FormatsFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDevice4444FormatsFeaturesEXT#formatA4R4G4B4} field. */

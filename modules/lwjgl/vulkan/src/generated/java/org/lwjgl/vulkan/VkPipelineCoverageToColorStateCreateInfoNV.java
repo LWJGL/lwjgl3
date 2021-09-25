@@ -116,6 +116,8 @@ public class VkPipelineCoverageToColorStateCreateInfoNV extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineCoverageToColorStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVFragmentCoverageToColor#VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkPipelineCoverageToColorStateCreateInfoNV sType$Default() { return sType(NVFragmentCoverageToColor.VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineCoverageToColorStateCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -364,6 +366,8 @@ public class VkPipelineCoverageToColorStateCreateInfoNV extends Struct implement
 
         /** Sets the specified value to the {@link VkPipelineCoverageToColorStateCreateInfoNV#sType} field. */
         public VkPipelineCoverageToColorStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineCoverageToColorStateCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVFragmentCoverageToColor#VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV} value to the {@link VkPipelineCoverageToColorStateCreateInfoNV#sType} field. */
+        public VkPipelineCoverageToColorStateCreateInfoNV.Buffer sType$Default() { return sType(NVFragmentCoverageToColor.VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkPipelineCoverageToColorStateCreateInfoNV#pNext} field. */
         public VkPipelineCoverageToColorStateCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkPipelineCoverageToColorStateCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineCoverageToColorStateCreateInfoNV#flags} field. */

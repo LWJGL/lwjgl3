@@ -189,6 +189,8 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct implements Nati
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDebugUtilsMessengerCallbackDataEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT} value to the {@link #sType} field. */
+    public VkDebugUtilsMessengerCallbackDataEXT sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDebugUtilsMessengerCallbackDataEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -559,6 +561,8 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct implements Nati
 
         /** Sets the specified value to the {@link VkDebugUtilsMessengerCallbackDataEXT#sType} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDebugUtilsMessengerCallbackDataEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT} value to the {@link VkDebugUtilsMessengerCallbackDataEXT#sType} field. */
+        public VkDebugUtilsMessengerCallbackDataEXT.Buffer sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT); }
         /** Sets the specified value to the {@link VkDebugUtilsMessengerCallbackDataEXT#pNext} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer pNext(@NativeType("void const *") long value) { VkDebugUtilsMessengerCallbackDataEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDebugUtilsMessengerCallbackDataEXT#flags} field. */

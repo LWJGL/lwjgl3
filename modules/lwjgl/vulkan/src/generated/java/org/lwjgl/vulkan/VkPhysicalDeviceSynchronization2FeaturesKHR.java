@@ -91,6 +91,8 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceSynchronization2FeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceSynchronization2FeaturesKHR sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceSynchronization2FeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #synchronization2} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends Struct implemen
 
         /** Sets the specified value to the {@link VkPhysicalDeviceSynchronization2FeaturesKHR#sType} field. */
         public VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSynchronization2FeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR} value to the {@link VkPhysicalDeviceSynchronization2FeaturesKHR#sType} field. */
+        public VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceSynchronization2FeaturesKHR#pNext} field. */
         public VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSynchronization2FeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceSynchronization2FeaturesKHR#synchronization2} field. */

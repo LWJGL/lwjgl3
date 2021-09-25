@@ -113,6 +113,8 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBindImageMemorySwapchainInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR} value to the {@link #sType} field. */
+    public VkBindImageMemorySwapchainInfoKHR sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBindImageMemorySwapchainInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #swapchain} field. */
@@ -350,6 +352,8 @@ public class VkBindImageMemorySwapchainInfoKHR extends Struct implements NativeR
 
         /** Sets the specified value to the {@link VkBindImageMemorySwapchainInfoKHR#sType} field. */
         public VkBindImageMemorySwapchainInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBindImageMemorySwapchainInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR} value to the {@link VkBindImageMemorySwapchainInfoKHR#sType} field. */
+        public VkBindImageMemorySwapchainInfoKHR.Buffer sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR); }
         /** Sets the specified value to the {@link VkBindImageMemorySwapchainInfoKHR#pNext} field. */
         public VkBindImageMemorySwapchainInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkBindImageMemorySwapchainInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkBindImageMemorySwapchainInfoKHR#swapchain} field. */

@@ -93,6 +93,8 @@ public class VkPrivateDataSlotCreateInfoEXT extends Struct implements NativeReso
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPrivateDataSlotCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTPrivateData#VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkPrivateDataSlotCreateInfoEXT sType$Default() { return sType(EXTPrivateData.VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPrivateDataSlotCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -301,6 +303,8 @@ public class VkPrivateDataSlotCreateInfoEXT extends Struct implements NativeReso
 
         /** Sets the specified value to the {@link VkPrivateDataSlotCreateInfoEXT#sType} field. */
         public VkPrivateDataSlotCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPrivateDataSlotCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTPrivateData#VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT} value to the {@link VkPrivateDataSlotCreateInfoEXT#sType} field. */
+        public VkPrivateDataSlotCreateInfoEXT.Buffer sType$Default() { return sType(EXTPrivateData.VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkPrivateDataSlotCreateInfoEXT#pNext} field. */
         public VkPrivateDataSlotCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPrivateDataSlotCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPrivateDataSlotCreateInfoEXT#flags} field. */

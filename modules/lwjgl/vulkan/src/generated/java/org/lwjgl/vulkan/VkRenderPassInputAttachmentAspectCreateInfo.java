@@ -107,6 +107,8 @@ public class VkRenderPassInputAttachmentAspectCreateInfo extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassInputAttachmentAspectCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO} value to the {@link #sType} field. */
+    public VkRenderPassInputAttachmentAspectCreateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassInputAttachmentAspectCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkInputAttachmentAspectReference.Buffer} to the {@link #pAspectReferences} field. */
@@ -361,6 +363,8 @@ public class VkRenderPassInputAttachmentAspectCreateInfo extends Struct implemen
 
         /** Sets the specified value to the {@link VkRenderPassInputAttachmentAspectCreateInfo#sType} field. */
         public VkRenderPassInputAttachmentAspectCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassInputAttachmentAspectCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO} value to the {@link VkRenderPassInputAttachmentAspectCreateInfo#sType} field. */
+        public VkRenderPassInputAttachmentAspectCreateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO); }
         /** Sets the specified value to the {@link VkRenderPassInputAttachmentAspectCreateInfo#pNext} field. */
         public VkRenderPassInputAttachmentAspectCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassInputAttachmentAspectCreateInfo.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkInputAttachmentAspectReference.Buffer} to the {@link VkRenderPassInputAttachmentAspectCreateInfo#pAspectReferences} field. */

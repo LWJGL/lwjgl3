@@ -116,6 +116,8 @@ public class VkDebugReportCallbackCreateInfoEXT extends Struct implements Native
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDebugReportCallbackCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDebugReport#VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkDebugReportCallbackCreateInfoEXT sType$Default() { return sType(EXTDebugReport.VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDebugReportCallbackCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -385,6 +387,8 @@ public class VkDebugReportCallbackCreateInfoEXT extends Struct implements Native
 
         /** Sets the specified value to the {@link VkDebugReportCallbackCreateInfoEXT#sType} field. */
         public VkDebugReportCallbackCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDebugReportCallbackCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDebugReport#VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT} value to the {@link VkDebugReportCallbackCreateInfoEXT#sType} field. */
+        public VkDebugReportCallbackCreateInfoEXT.Buffer sType$Default() { return sType(EXTDebugReport.VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkDebugReportCallbackCreateInfoEXT#pNext} field. */
         public VkDebugReportCallbackCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDebugReportCallbackCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDebugReportCallbackCreateInfoEXT#flags} field. */

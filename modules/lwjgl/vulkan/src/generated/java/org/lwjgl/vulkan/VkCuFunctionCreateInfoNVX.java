@@ -90,6 +90,8 @@ public class VkCuFunctionCreateInfoNVX extends Struct implements NativeResource 
 
     /** Sets the specified value to the {@code sType} field. */
     public VkCuFunctionCreateInfoNVX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVXBinaryImport#VK_STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX} value to the {@code sType} field. */
+    public VkCuFunctionCreateInfoNVX sType$Default() { return sType(NVXBinaryImport.VK_STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkCuFunctionCreateInfoNVX pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@code module} field. */
@@ -338,6 +340,8 @@ public class VkCuFunctionCreateInfoNVX extends Struct implements NativeResource 
 
         /** Sets the specified value to the {@code sType} field. */
         public VkCuFunctionCreateInfoNVX.Buffer sType(@NativeType("VkStructureType") int value) { VkCuFunctionCreateInfoNVX.nsType(address(), value); return this; }
+        /** Sets the {@link NVXBinaryImport#VK_STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX} value to the {@code sType} field. */
+        public VkCuFunctionCreateInfoNVX.Buffer sType$Default() { return sType(NVXBinaryImport.VK_STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkCuFunctionCreateInfoNVX.Buffer pNext(@NativeType("void const *") long value) { VkCuFunctionCreateInfoNVX.npNext(address(), value); return this; }
         /** Sets the specified value to the {@code module} field. */

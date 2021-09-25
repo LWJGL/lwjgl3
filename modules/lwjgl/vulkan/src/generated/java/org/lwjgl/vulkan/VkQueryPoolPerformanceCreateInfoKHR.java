@@ -116,6 +116,8 @@ public class VkQueryPoolPerformanceCreateInfoKHR extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkQueryPoolPerformanceCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    public VkQueryPoolPerformanceCreateInfoKHR sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueryPoolPerformanceCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #queueFamilyIndex} field. */
@@ -363,6 +365,8 @@ public class VkQueryPoolPerformanceCreateInfoKHR extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkQueryPoolPerformanceCreateInfoKHR#sType} field. */
         public VkQueryPoolPerformanceCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkQueryPoolPerformanceCreateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR} value to the {@link VkQueryPoolPerformanceCreateInfoKHR#sType} field. */
+        public VkQueryPoolPerformanceCreateInfoKHR.Buffer sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkQueryPoolPerformanceCreateInfoKHR#pNext} field. */
         public VkQueryPoolPerformanceCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkQueryPoolPerformanceCreateInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkQueryPoolPerformanceCreateInfoKHR#queueFamilyIndex} field. */

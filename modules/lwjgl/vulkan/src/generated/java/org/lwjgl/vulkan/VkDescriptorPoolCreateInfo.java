@@ -147,6 +147,8 @@ public class VkDescriptorPoolCreateInfo extends Struct implements NativeResource
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDescriptorPoolCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO} value to the {@link #sType} field. */
+    public VkDescriptorPoolCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDescriptorPoolCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -423,6 +425,8 @@ public class VkDescriptorPoolCreateInfo extends Struct implements NativeResource
 
         /** Sets the specified value to the {@link VkDescriptorPoolCreateInfo#sType} field. */
         public VkDescriptorPoolCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorPoolCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO} value to the {@link VkDescriptorPoolCreateInfo#sType} field. */
+        public VkDescriptorPoolCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO); }
         /** Sets the specified value to the {@link VkDescriptorPoolCreateInfo#pNext} field. */
         public VkDescriptorPoolCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorPoolCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDescriptorPoolCreateInfo#flags} field. */

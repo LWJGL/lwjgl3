@@ -125,6 +125,8 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceRayTracingPipelineFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceRayTracingPipelineFeaturesKHR sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceRayTracingPipelineFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #rayTracingPipeline} field. */
@@ -377,6 +379,8 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
 
         /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#sType} field. */
         public VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRayTracingPipelineFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR} value to the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#sType} field. */
+        public VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#pNext} field. */
         public VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRayTracingPipelineFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#rayTracingPipeline} field. */

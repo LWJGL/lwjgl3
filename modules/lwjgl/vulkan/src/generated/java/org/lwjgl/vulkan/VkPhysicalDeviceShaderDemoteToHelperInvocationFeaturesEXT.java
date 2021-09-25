@@ -91,6 +91,8 @@ public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends S
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTShaderDemoteToHelperInvocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT sType$Default() { return sType(EXTShaderDemoteToHelperInvocation.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderDemoteToHelperInvocation} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends S
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT#sType} field. */
         public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTShaderDemoteToHelperInvocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT} value to the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.Buffer sType$Default() { return sType(EXTShaderDemoteToHelperInvocation.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT#shaderDemoteToHelperInvocation} field. */

@@ -111,6 +111,8 @@ public class VkVideoEncodeH264EmitPictureParametersEXT extends Struct implements
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoEncodeH264EmitPictureParametersEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT} value to the {@link #sType} field. */
+    public VkVideoEncodeH264EmitPictureParametersEXT sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeH264EmitPictureParametersEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #spsId} field. */
@@ -369,6 +371,8 @@ public class VkVideoEncodeH264EmitPictureParametersEXT extends Struct implements
 
         /** Sets the specified value to the {@link VkVideoEncodeH264EmitPictureParametersEXT#sType} field. */
         public VkVideoEncodeH264EmitPictureParametersEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH264EmitPictureParametersEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT} value to the {@link VkVideoEncodeH264EmitPictureParametersEXT#sType} field. */
+        public VkVideoEncodeH264EmitPictureParametersEXT.Buffer sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT); }
         /** Sets the specified value to the {@link VkVideoEncodeH264EmitPictureParametersEXT#pNext} field. */
         public VkVideoEncodeH264EmitPictureParametersEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH264EmitPictureParametersEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeH264EmitPictureParametersEXT#spsId} field. */

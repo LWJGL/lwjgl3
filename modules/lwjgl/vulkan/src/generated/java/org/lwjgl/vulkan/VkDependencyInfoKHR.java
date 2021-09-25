@@ -148,6 +148,8 @@ public class VkDependencyInfoKHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDependencyInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_DEPENDENCY_INFO_KHR STRUCTURE_TYPE_DEPENDENCY_INFO_KHR} value to the {@link #sType} field. */
+    public VkDependencyInfoKHR sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_DEPENDENCY_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDependencyInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #dependencyFlags} field. */
@@ -442,6 +444,8 @@ public class VkDependencyInfoKHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkDependencyInfoKHR#sType} field. */
         public VkDependencyInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDependencyInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_DEPENDENCY_INFO_KHR STRUCTURE_TYPE_DEPENDENCY_INFO_KHR} value to the {@link VkDependencyInfoKHR#sType} field. */
+        public VkDependencyInfoKHR.Buffer sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_DEPENDENCY_INFO_KHR); }
         /** Sets the specified value to the {@link VkDependencyInfoKHR#pNext} field. */
         public VkDependencyInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDependencyInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDependencyInfoKHR#dependencyFlags} field. */

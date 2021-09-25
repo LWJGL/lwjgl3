@@ -165,6 +165,8 @@ public class VkAccelerationStructureCreateInfoKHR extends Struct implements Nati
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    public VkAccelerationStructureCreateInfoKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #createFlags} field. */
@@ -428,6 +430,8 @@ public class VkAccelerationStructureCreateInfoKHR extends Struct implements Nati
 
         /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#sType} field. */
         public VkAccelerationStructureCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureCreateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR} value to the {@link VkAccelerationStructureCreateInfoKHR#sType} field. */
+        public VkAccelerationStructureCreateInfoKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#pNext} field. */
         public VkAccelerationStructureCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureCreateInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#createFlags} field. */

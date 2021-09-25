@@ -93,6 +93,8 @@ public class VkEventCreateInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkEventCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_EVENT_CREATE_INFO STRUCTURE_TYPE_EVENT_CREATE_INFO} value to the {@link #sType} field. */
+    public VkEventCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_EVENT_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkEventCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -319,6 +321,8 @@ public class VkEventCreateInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkEventCreateInfo#sType} field. */
         public VkEventCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkEventCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_EVENT_CREATE_INFO STRUCTURE_TYPE_EVENT_CREATE_INFO} value to the {@link VkEventCreateInfo#sType} field. */
+        public VkEventCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_EVENT_CREATE_INFO); }
         /** Sets the specified value to the {@link VkEventCreateInfo#pNext} field. */
         public VkEventCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkEventCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkEventCreateInfo#flags} field. */

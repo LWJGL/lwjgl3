@@ -105,6 +105,8 @@ public class VkPhysicalDeviceVulkanMemoryModelFeatures extends Struct implements
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceVulkanMemoryModelFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceVulkanMemoryModelFeatures sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceVulkanMemoryModelFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #vulkanMemoryModel} field. */
@@ -335,6 +337,8 @@ public class VkPhysicalDeviceVulkanMemoryModelFeatures extends Struct implements
 
         /** Sets the specified value to the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#sType} field. */
         public VkPhysicalDeviceVulkanMemoryModelFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVulkanMemoryModelFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES} value to the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#sType} field. */
+        public VkPhysicalDeviceVulkanMemoryModelFeatures.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#pNext} field. */
         public VkPhysicalDeviceVulkanMemoryModelFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVulkanMemoryModelFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceVulkanMemoryModelFeatures#vulkanMemoryModel} field. */

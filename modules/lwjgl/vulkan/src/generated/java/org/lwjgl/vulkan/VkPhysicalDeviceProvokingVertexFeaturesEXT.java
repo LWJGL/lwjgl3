@@ -100,6 +100,8 @@ public class VkPhysicalDeviceProvokingVertexFeaturesEXT extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceProvokingVertexFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTProvokingVertex#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceProvokingVertexFeaturesEXT sType$Default() { return sType(EXTProvokingVertex.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceProvokingVertexFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #provokingVertexLast} field. */
@@ -319,6 +321,8 @@ public class VkPhysicalDeviceProvokingVertexFeaturesEXT extends Struct implement
 
         /** Sets the specified value to the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT#sType} field. */
         public VkPhysicalDeviceProvokingVertexFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceProvokingVertexFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTProvokingVertex#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT} value to the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceProvokingVertexFeaturesEXT.Buffer sType$Default() { return sType(EXTProvokingVertex.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceProvokingVertexFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceProvokingVertexFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT#provokingVertexLast} field. */

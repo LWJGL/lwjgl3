@@ -87,6 +87,8 @@ public class VkSamplerYcbcrConversionImageFormatProperties extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSamplerYcbcrConversionImageFormatProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES} value to the {@link #sType} field. */
+    public VkSamplerYcbcrConversionImageFormatProperties sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSamplerYcbcrConversionImageFormatProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -307,6 +309,8 @@ public class VkSamplerYcbcrConversionImageFormatProperties extends Struct implem
 
         /** Sets the specified value to the {@link VkSamplerYcbcrConversionImageFormatProperties#sType} field. */
         public VkSamplerYcbcrConversionImageFormatProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerYcbcrConversionImageFormatProperties.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES} value to the {@link VkSamplerYcbcrConversionImageFormatProperties#sType} field. */
+        public VkSamplerYcbcrConversionImageFormatProperties.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES); }
         /** Sets the specified value to the {@link VkSamplerYcbcrConversionImageFormatProperties#pNext} field. */
         public VkSamplerYcbcrConversionImageFormatProperties.Buffer pNext(@NativeType("void *") long value) { VkSamplerYcbcrConversionImageFormatProperties.npNext(address(), value); return this; }
 

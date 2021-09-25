@@ -130,6 +130,8 @@ public class VkBindBufferMemoryInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBindBufferMemoryInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO} value to the {@link #sType} field. */
+    public VkBindBufferMemoryInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBindBufferMemoryInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #buffer} field. */
@@ -378,6 +380,8 @@ public class VkBindBufferMemoryInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkBindBufferMemoryInfo#sType} field. */
         public VkBindBufferMemoryInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindBufferMemoryInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO} value to the {@link VkBindBufferMemoryInfo#sType} field. */
+        public VkBindBufferMemoryInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO); }
         /** Sets the specified value to the {@link VkBindBufferMemoryInfo#pNext} field. */
         public VkBindBufferMemoryInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindBufferMemoryInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkBindBufferMemoryInfo#buffer} field. */

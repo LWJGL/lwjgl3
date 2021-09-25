@@ -168,6 +168,8 @@ public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeRe
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceVulkan11Features sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceVulkan11Features sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceVulkan11Features pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #storageBuffer16BitAccess} field. */
@@ -497,6 +499,8 @@ public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeRe
 
         /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#sType} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVulkan11Features.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES} value to the {@link VkPhysicalDeviceVulkan11Features#sType} field. */
+        public VkPhysicalDeviceVulkan11Features.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#pNext} field. */
         public VkPhysicalDeviceVulkan11Features.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVulkan11Features.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceVulkan11Features#storageBuffer16BitAccess} field. */

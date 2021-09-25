@@ -91,6 +91,8 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVXMultiviewPerViewAttributes#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX} value to the {@link #sType} field. */
+    public VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX sType$Default() { return sType(NVXMultiviewPerViewAttributes.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -311,6 +313,8 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
 
         /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX#sType} field. */
         public VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.nsType(address(), value); return this; }
+        /** Sets the {@link NVXMultiviewPerViewAttributes#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX} value to the {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX#sType} field. */
+        public VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer sType$Default() { return sType(NVXMultiviewPerViewAttributes.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX); }
         /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX#pNext} field. */
         public VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.npNext(address(), value); return this; }
 

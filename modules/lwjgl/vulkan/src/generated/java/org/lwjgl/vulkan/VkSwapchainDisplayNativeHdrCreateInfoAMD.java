@@ -97,6 +97,8 @@ public class VkSwapchainDisplayNativeHdrCreateInfoAMD extends Struct implements 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSwapchainDisplayNativeHdrCreateInfoAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link AMDDisplayNativeHdr#VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD} value to the {@link #sType} field. */
+    public VkSwapchainDisplayNativeHdrCreateInfoAMD sType$Default() { return sType(AMDDisplayNativeHdr.VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSwapchainDisplayNativeHdrCreateInfoAMD pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #localDimmingEnable} field. */
@@ -323,6 +325,8 @@ public class VkSwapchainDisplayNativeHdrCreateInfoAMD extends Struct implements 
 
         /** Sets the specified value to the {@link VkSwapchainDisplayNativeHdrCreateInfoAMD#sType} field. */
         public VkSwapchainDisplayNativeHdrCreateInfoAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkSwapchainDisplayNativeHdrCreateInfoAMD.nsType(address(), value); return this; }
+        /** Sets the {@link AMDDisplayNativeHdr#VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD} value to the {@link VkSwapchainDisplayNativeHdrCreateInfoAMD#sType} field. */
+        public VkSwapchainDisplayNativeHdrCreateInfoAMD.Buffer sType$Default() { return sType(AMDDisplayNativeHdr.VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD); }
         /** Sets the specified value to the {@link VkSwapchainDisplayNativeHdrCreateInfoAMD#pNext} field. */
         public VkSwapchainDisplayNativeHdrCreateInfoAMD.Buffer pNext(@NativeType("void const *") long value) { VkSwapchainDisplayNativeHdrCreateInfoAMD.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkSwapchainDisplayNativeHdrCreateInfoAMD#localDimmingEnable} field. */

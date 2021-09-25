@@ -108,6 +108,8 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSurfaceFullScreenExclusiveWin32InfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTFullScreenExclusive#VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT} value to the {@link #sType} field. */
+    public VkSurfaceFullScreenExclusiveWin32InfoEXT sType$Default() { return sType(EXTFullScreenExclusive.VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSurfaceFullScreenExclusiveWin32InfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #hmonitor} field. */
@@ -355,6 +357,8 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements 
 
         /** Sets the specified value to the {@link VkSurfaceFullScreenExclusiveWin32InfoEXT#sType} field. */
         public VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfaceFullScreenExclusiveWin32InfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTFullScreenExclusive#VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT} value to the {@link VkSurfaceFullScreenExclusiveWin32InfoEXT#sType} field. */
+        public VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer sType$Default() { return sType(EXTFullScreenExclusive.VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT); }
         /** Sets the specified value to the {@link VkSurfaceFullScreenExclusiveWin32InfoEXT#pNext} field. */
         public VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSurfaceFullScreenExclusiveWin32InfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkSurfaceFullScreenExclusiveWin32InfoEXT#hmonitor} field. */

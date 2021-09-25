@@ -91,6 +91,8 @@ public class VkPhysicalDeviceDepthClipEnableFeaturesEXT extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceDepthClipEnableFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDepthClipEnable#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceDepthClipEnableFeaturesEXT sType$Default() { return sType(EXTDepthClipEnable.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceDepthClipEnableFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #depthClipEnable} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceDepthClipEnableFeaturesEXT extends Struct implement
 
         /** Sets the specified value to the {@link VkPhysicalDeviceDepthClipEnableFeaturesEXT#sType} field. */
         public VkPhysicalDeviceDepthClipEnableFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDepthClipEnableFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDepthClipEnable#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT} value to the {@link VkPhysicalDeviceDepthClipEnableFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceDepthClipEnableFeaturesEXT.Buffer sType$Default() { return sType(EXTDepthClipEnable.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceDepthClipEnableFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceDepthClipEnableFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDepthClipEnableFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceDepthClipEnableFeaturesEXT#depthClipEnable} field. */

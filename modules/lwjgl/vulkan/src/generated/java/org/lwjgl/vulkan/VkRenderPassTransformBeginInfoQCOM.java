@@ -94,6 +94,8 @@ public class VkRenderPassTransformBeginInfoQCOM extends Struct implements Native
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRenderPassTransformBeginInfoQCOM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link QCOMRenderPassTransform#VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM} value to the {@link #sType} field. */
+    public VkRenderPassTransformBeginInfoQCOM sType$Default() { return sType(QCOMRenderPassTransform.VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassTransformBeginInfoQCOM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #transform} field. */
@@ -302,6 +304,8 @@ public class VkRenderPassTransformBeginInfoQCOM extends Struct implements Native
 
         /** Sets the specified value to the {@link VkRenderPassTransformBeginInfoQCOM#sType} field. */
         public VkRenderPassTransformBeginInfoQCOM.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassTransformBeginInfoQCOM.nsType(address(), value); return this; }
+        /** Sets the {@link QCOMRenderPassTransform#VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM} value to the {@link VkRenderPassTransformBeginInfoQCOM#sType} field. */
+        public VkRenderPassTransformBeginInfoQCOM.Buffer sType$Default() { return sType(QCOMRenderPassTransform.VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM); }
         /** Sets the specified value to the {@link VkRenderPassTransformBeginInfoQCOM#pNext} field. */
         public VkRenderPassTransformBeginInfoQCOM.Buffer pNext(@NativeType("void *") long value) { VkRenderPassTransformBeginInfoQCOM.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkRenderPassTransformBeginInfoQCOM#transform} field. */

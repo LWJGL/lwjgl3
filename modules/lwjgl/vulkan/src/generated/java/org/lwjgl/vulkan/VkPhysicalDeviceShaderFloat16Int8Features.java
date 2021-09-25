@@ -98,6 +98,8 @@ public class VkPhysicalDeviceShaderFloat16Int8Features extends Struct implements
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderFloat16Int8Features sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderFloat16Int8Features sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderFloat16Int8Features pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderFloat16} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceShaderFloat16Int8Features extends Struct implements
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderFloat16Int8Features#sType} field. */
         public VkPhysicalDeviceShaderFloat16Int8Features.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderFloat16Int8Features.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES} value to the {@link VkPhysicalDeviceShaderFloat16Int8Features#sType} field. */
+        public VkPhysicalDeviceShaderFloat16Int8Features.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderFloat16Int8Features#pNext} field. */
         public VkPhysicalDeviceShaderFloat16Int8Features.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderFloat16Int8Features.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderFloat16Int8Features#shaderFloat16} field. */

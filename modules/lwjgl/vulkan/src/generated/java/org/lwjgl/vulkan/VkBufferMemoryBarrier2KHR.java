@@ -276,6 +276,8 @@ public class VkBufferMemoryBarrier2KHR extends Struct implements NativeResource 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBufferMemoryBarrier2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR} value to the {@link #sType} field. */
+    public VkBufferMemoryBarrier2KHR sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferMemoryBarrier2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #srcStageMask} field. */
@@ -572,6 +574,8 @@ public class VkBufferMemoryBarrier2KHR extends Struct implements NativeResource 
 
         /** Sets the specified value to the {@link VkBufferMemoryBarrier2KHR#sType} field. */
         public VkBufferMemoryBarrier2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferMemoryBarrier2KHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR} value to the {@link VkBufferMemoryBarrier2KHR#sType} field. */
+        public VkBufferMemoryBarrier2KHR.Buffer sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR); }
         /** Sets the specified value to the {@link VkBufferMemoryBarrier2KHR#pNext} field. */
         public VkBufferMemoryBarrier2KHR.Buffer pNext(@NativeType("void const *") long value) { VkBufferMemoryBarrier2KHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkBufferMemoryBarrier2KHR#srcStageMask} field. */

@@ -99,6 +99,8 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImageViewASTCDecodeModeEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTAstcDecodeMode#VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT} value to the {@link #sType} field. */
+    public VkImageViewASTCDecodeModeEXT sType$Default() { return sType(EXTAstcDecodeMode.VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageViewASTCDecodeModeEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #decodeMode} field. */
@@ -325,6 +327,8 @@ public class VkImageViewASTCDecodeModeEXT extends Struct implements NativeResour
 
         /** Sets the specified value to the {@link VkImageViewASTCDecodeModeEXT#sType} field. */
         public VkImageViewASTCDecodeModeEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageViewASTCDecodeModeEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTAstcDecodeMode#VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT} value to the {@link VkImageViewASTCDecodeModeEXT#sType} field. */
+        public VkImageViewASTCDecodeModeEXT.Buffer sType$Default() { return sType(EXTAstcDecodeMode.VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT); }
         /** Sets the specified value to the {@link VkImageViewASTCDecodeModeEXT#pNext} field. */
         public VkImageViewASTCDecodeModeEXT.Buffer pNext(@NativeType("void const *") long value) { VkImageViewASTCDecodeModeEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageViewASTCDecodeModeEXT#decodeMode} field. */

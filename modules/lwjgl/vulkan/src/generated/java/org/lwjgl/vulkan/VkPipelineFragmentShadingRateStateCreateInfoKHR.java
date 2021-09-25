@@ -108,6 +108,8 @@ public class VkPipelineFragmentShadingRateStateCreateInfoKHR extends Struct impl
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineFragmentShadingRateStateCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    public VkPipelineFragmentShadingRateStateCreateInfoKHR sType$Default() { return sType(KHRFragmentShadingRate.VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineFragmentShadingRateStateCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Copies the specified {@link VkExtent2D} to the {@link #fragmentSize} field. */
@@ -344,6 +346,8 @@ public class VkPipelineFragmentShadingRateStateCreateInfoKHR extends Struct impl
 
         /** Sets the specified value to the {@link VkPipelineFragmentShadingRateStateCreateInfoKHR#sType} field. */
         public VkPipelineFragmentShadingRateStateCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineFragmentShadingRateStateCreateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR} value to the {@link VkPipelineFragmentShadingRateStateCreateInfoKHR#sType} field. */
+        public VkPipelineFragmentShadingRateStateCreateInfoKHR.Buffer sType$Default() { return sType(KHRFragmentShadingRate.VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkPipelineFragmentShadingRateStateCreateInfoKHR#pNext} field. */
         public VkPipelineFragmentShadingRateStateCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkPipelineFragmentShadingRateStateCreateInfoKHR.npNext(address(), value); return this; }
         /** Copies the specified {@link VkExtent2D} to the {@link VkPipelineFragmentShadingRateStateCreateInfoKHR#fragmentSize} field. */

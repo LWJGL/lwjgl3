@@ -91,6 +91,8 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkQueueFamilyCheckpointPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVDeviceDiagnosticCheckpoints#VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV} value to the {@link #sType} field. */
+    public VkQueueFamilyCheckpointPropertiesNV sType$Default() { return sType(NVDeviceDiagnosticCheckpoints.VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueueFamilyCheckpointPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -311,6 +313,8 @@ public class VkQueueFamilyCheckpointPropertiesNV extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkQueueFamilyCheckpointPropertiesNV#sType} field. */
         public VkQueueFamilyCheckpointPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkQueueFamilyCheckpointPropertiesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVDeviceDiagnosticCheckpoints#VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV} value to the {@link VkQueueFamilyCheckpointPropertiesNV#sType} field. */
+        public VkQueueFamilyCheckpointPropertiesNV.Buffer sType$Default() { return sType(NVDeviceDiagnosticCheckpoints.VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV); }
         /** Sets the specified value to the {@link VkQueueFamilyCheckpointPropertiesNV#pNext} field. */
         public VkQueueFamilyCheckpointPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyCheckpointPropertiesNV.npNext(address(), value); return this; }
 

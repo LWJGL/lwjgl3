@@ -107,6 +107,8 @@ public class VkPipelineTessellationStateCreateInfo extends Struct implements Nat
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineTessellationStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkPipelineTessellationStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineTessellationStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -344,6 +346,8 @@ public class VkPipelineTessellationStateCreateInfo extends Struct implements Nat
 
         /** Sets the specified value to the {@link VkPipelineTessellationStateCreateInfo#sType} field. */
         public VkPipelineTessellationStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineTessellationStateCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO} value to the {@link VkPipelineTessellationStateCreateInfo#sType} field. */
+        public VkPipelineTessellationStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineTessellationStateCreateInfo#pNext} field. */
         public VkPipelineTessellationStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineTessellationStateCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineTessellationStateCreateInfo#flags} field. */

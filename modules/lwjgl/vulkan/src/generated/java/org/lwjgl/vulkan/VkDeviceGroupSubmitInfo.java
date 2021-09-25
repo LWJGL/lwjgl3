@@ -143,6 +143,8 @@ public class VkDeviceGroupSubmitInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceGroupSubmitInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO} value to the {@link #sType} field. */
+    public VkDeviceGroupSubmitInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceGroupSubmitInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pWaitSemaphoreDeviceIndices} field. */
@@ -444,6 +446,8 @@ public class VkDeviceGroupSubmitInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkDeviceGroupSubmitInfo#sType} field. */
         public VkDeviceGroupSubmitInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupSubmitInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO} value to the {@link VkDeviceGroupSubmitInfo#sType} field. */
+        public VkDeviceGroupSubmitInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO); }
         /** Sets the specified value to the {@link VkDeviceGroupSubmitInfo#pNext} field. */
         public VkDeviceGroupSubmitInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupSubmitInfo.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkDeviceGroupSubmitInfo#pWaitSemaphoreDeviceIndices} field. */

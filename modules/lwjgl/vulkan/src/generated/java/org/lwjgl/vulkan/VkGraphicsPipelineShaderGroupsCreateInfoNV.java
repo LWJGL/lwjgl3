@@ -136,6 +136,8 @@ public class VkGraphicsPipelineShaderGroupsCreateInfoNV extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkGraphicsPipelineShaderGroupsCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkGraphicsPipelineShaderGroupsCreateInfoNV sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkGraphicsPipelineShaderGroupsCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkGraphicsShaderGroupCreateInfoNV.Buffer} to the {@link #pGroups} field. */
@@ -397,6 +399,8 @@ public class VkGraphicsPipelineShaderGroupsCreateInfoNV extends Struct implement
 
         /** Sets the specified value to the {@link VkGraphicsPipelineShaderGroupsCreateInfoNV#sType} field. */
         public VkGraphicsPipelineShaderGroupsCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkGraphicsPipelineShaderGroupsCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV} value to the {@link VkGraphicsPipelineShaderGroupsCreateInfoNV#sType} field. */
+        public VkGraphicsPipelineShaderGroupsCreateInfoNV.Buffer sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkGraphicsPipelineShaderGroupsCreateInfoNV#pNext} field. */
         public VkGraphicsPipelineShaderGroupsCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkGraphicsPipelineShaderGroupsCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkGraphicsShaderGroupCreateInfoNV.Buffer} to the {@link VkGraphicsPipelineShaderGroupsCreateInfoNV#pGroups} field. */

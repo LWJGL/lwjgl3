@@ -100,6 +100,8 @@ public class VkFilterCubicImageViewImageFormatPropertiesEXT extends Struct imple
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkFilterCubicImageViewImageFormatPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTFilterCubic#VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkFilterCubicImageViewImageFormatPropertiesEXT sType$Default() { return sType(EXTFilterCubic.VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkFilterCubicImageViewImageFormatPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -325,6 +327,8 @@ public class VkFilterCubicImageViewImageFormatPropertiesEXT extends Struct imple
 
         /** Sets the specified value to the {@link VkFilterCubicImageViewImageFormatPropertiesEXT#sType} field. */
         public VkFilterCubicImageViewImageFormatPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkFilterCubicImageViewImageFormatPropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTFilterCubic#VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT} value to the {@link VkFilterCubicImageViewImageFormatPropertiesEXT#sType} field. */
+        public VkFilterCubicImageViewImageFormatPropertiesEXT.Buffer sType$Default() { return sType(EXTFilterCubic.VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkFilterCubicImageViewImageFormatPropertiesEXT#pNext} field. */
         public VkFilterCubicImageViewImageFormatPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkFilterCubicImageViewImageFormatPropertiesEXT.npNext(address(), value); return this; }
 

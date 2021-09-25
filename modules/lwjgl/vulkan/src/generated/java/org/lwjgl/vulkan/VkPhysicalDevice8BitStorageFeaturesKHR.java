@@ -44,6 +44,8 @@ public class VkPhysicalDevice8BitStorageFeaturesKHR extends VkPhysicalDevice8Bit
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPhysicalDevice8BitStorageFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES} value to the {@code sType} field. */
+    public VkPhysicalDevice8BitStorageFeaturesKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPhysicalDevice8BitStorageFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -258,6 +260,8 @@ public class VkPhysicalDevice8BitStorageFeaturesKHR extends VkPhysicalDevice8Bit
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPhysicalDevice8BitStorageFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevice8BitStorageFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES} value to the {@code sType} field. */
+        public VkPhysicalDevice8BitStorageFeaturesKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPhysicalDevice8BitStorageFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevice8BitStorageFeaturesKHR.npNext(address(), value); return this; }

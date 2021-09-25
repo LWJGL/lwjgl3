@@ -91,6 +91,8 @@ public class VkPhysicalDeviceRayQueryFeaturesKHR extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceRayQueryFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRRayQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceRayQueryFeaturesKHR sType$Default() { return sType(KHRRayQuery.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceRayQueryFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #rayQuery} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceRayQueryFeaturesKHR extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkPhysicalDeviceRayQueryFeaturesKHR#sType} field. */
         public VkPhysicalDeviceRayQueryFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRayQueryFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRRayQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR} value to the {@link VkPhysicalDeviceRayQueryFeaturesKHR#sType} field. */
+        public VkPhysicalDeviceRayQueryFeaturesKHR.Buffer sType$Default() { return sType(KHRRayQuery.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceRayQueryFeaturesKHR#pNext} field. */
         public VkPhysicalDeviceRayQueryFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRayQueryFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceRayQueryFeaturesKHR#rayQuery} field. */

@@ -118,6 +118,8 @@ public class VkMappedMemoryRange extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMappedMemoryRange sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE STRUCTURE_TYPE_MAPPED_MEMORY_RANGE} value to the {@link #sType} field. */
+    public VkMappedMemoryRange sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMappedMemoryRange pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #memory} field. */
@@ -366,6 +368,8 @@ public class VkMappedMemoryRange extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkMappedMemoryRange#sType} field. */
         public VkMappedMemoryRange.Buffer sType(@NativeType("VkStructureType") int value) { VkMappedMemoryRange.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE STRUCTURE_TYPE_MAPPED_MEMORY_RANGE} value to the {@link VkMappedMemoryRange#sType} field. */
+        public VkMappedMemoryRange.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE); }
         /** Sets the specified value to the {@link VkMappedMemoryRange#pNext} field. */
         public VkMappedMemoryRange.Buffer pNext(@NativeType("void const *") long value) { VkMappedMemoryRange.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkMappedMemoryRange#memory} field. */

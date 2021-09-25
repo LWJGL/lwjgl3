@@ -133,6 +133,8 @@ public class VkImportMemoryWin32HandleInfoKHR extends Struct implements NativeRe
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImportMemoryWin32HandleInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR} value to the {@link #sType} field. */
+    public VkImportMemoryWin32HandleInfoKHR sType$Default() { return sType(KHRExternalMemoryWin32.VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImportMemoryWin32HandleInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #handleType} field. */
@@ -411,6 +413,8 @@ public class VkImportMemoryWin32HandleInfoKHR extends Struct implements NativeRe
 
         /** Sets the specified value to the {@link VkImportMemoryWin32HandleInfoKHR#sType} field. */
         public VkImportMemoryWin32HandleInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImportMemoryWin32HandleInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR} value to the {@link VkImportMemoryWin32HandleInfoKHR#sType} field. */
+        public VkImportMemoryWin32HandleInfoKHR.Buffer sType$Default() { return sType(KHRExternalMemoryWin32.VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR); }
         /** Sets the specified value to the {@link VkImportMemoryWin32HandleInfoKHR#pNext} field. */
         public VkImportMemoryWin32HandleInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkImportMemoryWin32HandleInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImportMemoryWin32HandleInfoKHR#handleType} field. */

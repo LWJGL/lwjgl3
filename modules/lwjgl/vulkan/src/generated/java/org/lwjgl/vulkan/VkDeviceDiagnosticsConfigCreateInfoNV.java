@@ -88,6 +88,8 @@ public class VkDeviceDiagnosticsConfigCreateInfoNV extends Struct implements Nat
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceDiagnosticsConfigCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVDeviceDiagnosticsConfig#VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkDeviceDiagnosticsConfigCreateInfoNV sType$Default() { return sType(NVDeviceDiagnosticsConfig.VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceDiagnosticsConfigCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -296,6 +298,8 @@ public class VkDeviceDiagnosticsConfigCreateInfoNV extends Struct implements Nat
 
         /** Sets the specified value to the {@link VkDeviceDiagnosticsConfigCreateInfoNV#sType} field. */
         public VkDeviceDiagnosticsConfigCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceDiagnosticsConfigCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVDeviceDiagnosticsConfig#VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV} value to the {@link VkDeviceDiagnosticsConfigCreateInfoNV#sType} field. */
+        public VkDeviceDiagnosticsConfigCreateInfoNV.Buffer sType$Default() { return sType(NVDeviceDiagnosticsConfig.VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkDeviceDiagnosticsConfigCreateInfoNV#pNext} field. */
         public VkDeviceDiagnosticsConfigCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkDeviceDiagnosticsConfigCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDeviceDiagnosticsConfigCreateInfoNV#flags} field. */

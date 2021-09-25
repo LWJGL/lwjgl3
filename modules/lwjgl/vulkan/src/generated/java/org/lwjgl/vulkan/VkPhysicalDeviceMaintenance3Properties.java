@@ -98,6 +98,8 @@ public class VkPhysicalDeviceMaintenance3Properties extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMaintenance3Properties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceMaintenance3Properties sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMaintenance3Properties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -323,6 +325,8 @@ public class VkPhysicalDeviceMaintenance3Properties extends Struct implements Na
 
         /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance3Properties#sType} field. */
         public VkPhysicalDeviceMaintenance3Properties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMaintenance3Properties.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES} value to the {@link VkPhysicalDeviceMaintenance3Properties#sType} field. */
+        public VkPhysicalDeviceMaintenance3Properties.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance3Properties#pNext} field. */
         public VkPhysicalDeviceMaintenance3Properties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMaintenance3Properties.npNext(address(), value); return this; }
 

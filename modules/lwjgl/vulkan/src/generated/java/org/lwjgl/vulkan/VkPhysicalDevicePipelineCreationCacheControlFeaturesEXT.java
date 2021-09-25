@@ -109,6 +109,8 @@ public class VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT extends Str
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTPipelineCreationCacheControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT sType$Default() { return sType(EXTPipelineCreationCacheControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #pipelineCreationCacheControl} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT extends Str
 
         /** Sets the specified value to the {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT#sType} field. */
         public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTPipelineCreationCacheControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT} value to the {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT#sType} field. */
+        public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.Buffer sType$Default() { return sType(EXTPipelineCreationCacheControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT#pNext} field. */
         public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT#pipelineCreationCacheControl} field. */

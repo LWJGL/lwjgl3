@@ -109,6 +109,8 @@ public class VkDedicatedAllocationMemoryAllocateInfoNV extends Struct implements
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDedicatedAllocationMemoryAllocateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVDedicatedAllocation#VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV} value to the {@link #sType} field. */
+    public VkDedicatedAllocationMemoryAllocateInfoNV sType$Default() { return sType(NVDedicatedAllocation.VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDedicatedAllocationMemoryAllocateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #image} field. */
@@ -346,6 +348,8 @@ public class VkDedicatedAllocationMemoryAllocateInfoNV extends Struct implements
 
         /** Sets the specified value to the {@link VkDedicatedAllocationMemoryAllocateInfoNV#sType} field. */
         public VkDedicatedAllocationMemoryAllocateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkDedicatedAllocationMemoryAllocateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVDedicatedAllocation#VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV} value to the {@link VkDedicatedAllocationMemoryAllocateInfoNV#sType} field. */
+        public VkDedicatedAllocationMemoryAllocateInfoNV.Buffer sType$Default() { return sType(NVDedicatedAllocation.VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV); }
         /** Sets the specified value to the {@link VkDedicatedAllocationMemoryAllocateInfoNV#pNext} field. */
         public VkDedicatedAllocationMemoryAllocateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkDedicatedAllocationMemoryAllocateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDedicatedAllocationMemoryAllocateInfoNV#image} field. */

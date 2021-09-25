@@ -100,6 +100,8 @@ public class VkDedicatedAllocationImageCreateInfoNV extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDedicatedAllocationImageCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVDedicatedAllocation#VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkDedicatedAllocationImageCreateInfoNV sType$Default() { return sType(NVDedicatedAllocation.VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDedicatedAllocationImageCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #dedicatedAllocation} field. */
@@ -326,6 +328,8 @@ public class VkDedicatedAllocationImageCreateInfoNV extends Struct implements Na
 
         /** Sets the specified value to the {@link VkDedicatedAllocationImageCreateInfoNV#sType} field. */
         public VkDedicatedAllocationImageCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkDedicatedAllocationImageCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVDedicatedAllocation#VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV} value to the {@link VkDedicatedAllocationImageCreateInfoNV#sType} field. */
+        public VkDedicatedAllocationImageCreateInfoNV.Buffer sType$Default() { return sType(NVDedicatedAllocation.VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkDedicatedAllocationImageCreateInfoNV#pNext} field. */
         public VkDedicatedAllocationImageCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkDedicatedAllocationImageCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDedicatedAllocationImageCreateInfoNV#dedicatedAllocation} field. */

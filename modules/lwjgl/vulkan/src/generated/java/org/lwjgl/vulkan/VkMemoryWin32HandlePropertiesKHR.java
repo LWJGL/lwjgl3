@@ -92,6 +92,8 @@ public class VkMemoryWin32HandlePropertiesKHR extends Struct implements NativeRe
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryWin32HandlePropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR} value to the {@link #sType} field. */
+    public VkMemoryWin32HandlePropertiesKHR sType$Default() { return sType(KHRExternalMemoryWin32.VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryWin32HandlePropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -312,6 +314,8 @@ public class VkMemoryWin32HandlePropertiesKHR extends Struct implements NativeRe
 
         /** Sets the specified value to the {@link VkMemoryWin32HandlePropertiesKHR#sType} field. */
         public VkMemoryWin32HandlePropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryWin32HandlePropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR} value to the {@link VkMemoryWin32HandlePropertiesKHR#sType} field. */
+        public VkMemoryWin32HandlePropertiesKHR.Buffer sType$Default() { return sType(KHRExternalMemoryWin32.VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkMemoryWin32HandlePropertiesKHR#pNext} field. */
         public VkMemoryWin32HandlePropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkMemoryWin32HandlePropertiesKHR.npNext(address(), value); return this; }
 

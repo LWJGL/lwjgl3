@@ -91,6 +91,8 @@ public class VkPhysicalDeviceImagelessFramebufferFeatures extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceImagelessFramebufferFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceImagelessFramebufferFeatures sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceImagelessFramebufferFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #imagelessFramebuffer} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceImagelessFramebufferFeatures extends Struct impleme
 
         /** Sets the specified value to the {@link VkPhysicalDeviceImagelessFramebufferFeatures#sType} field. */
         public VkPhysicalDeviceImagelessFramebufferFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceImagelessFramebufferFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES} value to the {@link VkPhysicalDeviceImagelessFramebufferFeatures#sType} field. */
+        public VkPhysicalDeviceImagelessFramebufferFeatures.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceImagelessFramebufferFeatures#pNext} field. */
         public VkPhysicalDeviceImagelessFramebufferFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceImagelessFramebufferFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceImagelessFramebufferFeatures#imagelessFramebuffer} field. */

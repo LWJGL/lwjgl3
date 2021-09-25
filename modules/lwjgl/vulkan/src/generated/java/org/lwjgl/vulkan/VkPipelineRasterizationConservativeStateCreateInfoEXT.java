@@ -108,6 +108,8 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineRasterizationConservativeStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTConservativeRasterization#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkPipelineRasterizationConservativeStateCreateInfoEXT sType$Default() { return sType(EXTConservativeRasterization.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineRasterizationConservativeStateCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -355,6 +357,8 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
 
         /** Sets the specified value to the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#sType} field. */
         public VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineRasterizationConservativeStateCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTConservativeRasterization#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT} value to the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#sType} field. */
+        public VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer sType$Default() { return sType(EXTConservativeRasterization.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#pNext} field. */
         public VkPipelineRasterizationConservativeStateCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRasterizationConservativeStateCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineRasterizationConservativeStateCreateInfoEXT#flags} field. */

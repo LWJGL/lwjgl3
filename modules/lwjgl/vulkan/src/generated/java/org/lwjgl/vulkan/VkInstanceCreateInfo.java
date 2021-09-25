@@ -147,6 +147,8 @@ public class VkInstanceCreateInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkInstanceCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO STRUCTURE_TYPE_INSTANCE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkInstanceCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkInstanceCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -449,6 +451,8 @@ public class VkInstanceCreateInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkInstanceCreateInfo#sType} field. */
         public VkInstanceCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkInstanceCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO STRUCTURE_TYPE_INSTANCE_CREATE_INFO} value to the {@link VkInstanceCreateInfo#sType} field. */
+        public VkInstanceCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkInstanceCreateInfo#pNext} field. */
         public VkInstanceCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkInstanceCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkInstanceCreateInfo#flags} field. */

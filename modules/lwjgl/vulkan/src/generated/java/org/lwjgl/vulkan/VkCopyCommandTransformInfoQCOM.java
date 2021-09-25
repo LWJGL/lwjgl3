@@ -93,6 +93,8 @@ public class VkCopyCommandTransformInfoQCOM extends Struct implements NativeReso
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCopyCommandTransformInfoQCOM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link QCOMRotatedCopyCommands#VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM} value to the {@link #sType} field. */
+    public VkCopyCommandTransformInfoQCOM sType$Default() { return sType(QCOMRotatedCopyCommands.VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCopyCommandTransformInfoQCOM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #transform} field. */
@@ -301,6 +303,8 @@ public class VkCopyCommandTransformInfoQCOM extends Struct implements NativeReso
 
         /** Sets the specified value to the {@link VkCopyCommandTransformInfoQCOM#sType} field. */
         public VkCopyCommandTransformInfoQCOM.Buffer sType(@NativeType("VkStructureType") int value) { VkCopyCommandTransformInfoQCOM.nsType(address(), value); return this; }
+        /** Sets the {@link QCOMRotatedCopyCommands#VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM} value to the {@link VkCopyCommandTransformInfoQCOM#sType} field. */
+        public VkCopyCommandTransformInfoQCOM.Buffer sType$Default() { return sType(QCOMRotatedCopyCommands.VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM); }
         /** Sets the specified value to the {@link VkCopyCommandTransformInfoQCOM#pNext} field. */
         public VkCopyCommandTransformInfoQCOM.Buffer pNext(@NativeType("void const *") long value) { VkCopyCommandTransformInfoQCOM.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkCopyCommandTransformInfoQCOM#transform} field. */

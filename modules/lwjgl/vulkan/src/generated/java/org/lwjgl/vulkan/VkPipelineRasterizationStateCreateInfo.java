@@ -176,6 +176,8 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineRasterizationStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkPipelineRasterizationStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineRasterizationStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -508,6 +510,8 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
 
         /** Sets the specified value to the {@link VkPipelineRasterizationStateCreateInfo#sType} field. */
         public VkPipelineRasterizationStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineRasterizationStateCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO} value to the {@link VkPipelineRasterizationStateCreateInfo#sType} field. */
+        public VkPipelineRasterizationStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineRasterizationStateCreateInfo#pNext} field. */
         public VkPipelineRasterizationStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRasterizationStateCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineRasterizationStateCreateInfo#flags} field. */

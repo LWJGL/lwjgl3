@@ -112,6 +112,8 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT extends Struct
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTTextureCompressionAstcHdr#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT sType$Default() { return sType(EXTTextureCompressionAstcHdr.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #textureCompressionASTC_HDR} field. */
@@ -338,6 +340,8 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT extends Struct
 
         /** Sets the specified value to the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT#sType} field. */
         public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTTextureCompressionAstcHdr#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT} value to the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.Buffer sType$Default() { return sType(EXTTextureCompressionAstcHdr.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT#textureCompressionASTC_HDR} field. */

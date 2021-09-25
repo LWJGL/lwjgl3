@@ -112,6 +112,8 @@ public class VkMemoryDedicatedAllocateInfo extends Struct implements NativeResou
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryDedicatedAllocateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO} value to the {@link #sType} field. */
+    public VkMemoryDedicatedAllocateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryDedicatedAllocateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #image} field. */
@@ -349,6 +351,8 @@ public class VkMemoryDedicatedAllocateInfo extends Struct implements NativeResou
 
         /** Sets the specified value to the {@link VkMemoryDedicatedAllocateInfo#sType} field. */
         public VkMemoryDedicatedAllocateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryDedicatedAllocateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO} value to the {@link VkMemoryDedicatedAllocateInfo#sType} field. */
+        public VkMemoryDedicatedAllocateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO); }
         /** Sets the specified value to the {@link VkMemoryDedicatedAllocateInfo#pNext} field. */
         public VkMemoryDedicatedAllocateInfo.Buffer pNext(@NativeType("void const *") long value) { VkMemoryDedicatedAllocateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkMemoryDedicatedAllocateInfo#image} field. */

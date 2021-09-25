@@ -42,6 +42,8 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfoKHR extends VkDeviceMemoryOpa
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkDeviceMemoryOpaqueCaptureAddressInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO} value to the {@code sType} field. */
+    public VkDeviceMemoryOpaqueCaptureAddressInfoKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkDeviceMemoryOpaqueCaptureAddressInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -228,6 +230,8 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfoKHR extends VkDeviceMemoryOpa
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkDeviceMemoryOpaqueCaptureAddressInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceMemoryOpaqueCaptureAddressInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO} value to the {@code sType} field. */
+        public VkDeviceMemoryOpaqueCaptureAddressInfoKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkDeviceMemoryOpaqueCaptureAddressInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDeviceMemoryOpaqueCaptureAddressInfoKHR.npNext(address(), value); return this; }

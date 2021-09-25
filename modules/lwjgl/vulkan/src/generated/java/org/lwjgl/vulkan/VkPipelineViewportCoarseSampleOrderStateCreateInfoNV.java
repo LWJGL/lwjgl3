@@ -124,6 +124,8 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVShadingRateImage#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV sType$Default() { return sType(NVShadingRateImage.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #sampleOrderType} field. */
@@ -395,6 +397,8 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
 
         /** Sets the specified value to the {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV#sType} field. */
         public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVShadingRateImage#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV} value to the {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV#sType} field. */
+        public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.Buffer sType$Default() { return sType(NVShadingRateImage.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV#pNext} field. */
         public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV#sampleOrderType} field. */

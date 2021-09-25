@@ -114,6 +114,8 @@ public class VkPhysicalDeviceSubgroupProperties extends Struct implements Native
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceSubgroupProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceSubgroupProperties sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceSubgroupProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -349,6 +351,8 @@ public class VkPhysicalDeviceSubgroupProperties extends Struct implements Native
 
         /** Sets the specified value to the {@link VkPhysicalDeviceSubgroupProperties#sType} field. */
         public VkPhysicalDeviceSubgroupProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSubgroupProperties.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES} value to the {@link VkPhysicalDeviceSubgroupProperties#sType} field. */
+        public VkPhysicalDeviceSubgroupProperties.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceSubgroupProperties#pNext} field. */
         public VkPhysicalDeviceSubgroupProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSubgroupProperties.npNext(address(), value); return this; }
 

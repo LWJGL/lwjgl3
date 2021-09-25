@@ -91,6 +91,8 @@ public class VkPhysicalDeviceYcbcrImageArraysFeaturesEXT extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceYcbcrImageArraysFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTYcbcrImageArrays#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceYcbcrImageArraysFeaturesEXT sType$Default() { return sType(EXTYcbcrImageArrays.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceYcbcrImageArraysFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #ycbcrImageArrays} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceYcbcrImageArraysFeaturesEXT extends Struct implemen
 
         /** Sets the specified value to the {@link VkPhysicalDeviceYcbcrImageArraysFeaturesEXT#sType} field. */
         public VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTYcbcrImageArrays#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT} value to the {@link VkPhysicalDeviceYcbcrImageArraysFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.Buffer sType$Default() { return sType(EXTYcbcrImageArrays.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceYcbcrImageArraysFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceYcbcrImageArraysFeaturesEXT#ycbcrImageArrays} field. */

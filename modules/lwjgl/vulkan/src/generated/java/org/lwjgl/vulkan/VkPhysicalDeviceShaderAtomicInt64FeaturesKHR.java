@@ -43,6 +43,8 @@ public class VkPhysicalDeviceShaderAtomicInt64FeaturesKHR extends VkPhysicalDevi
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPhysicalDeviceShaderAtomicInt64FeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES} value to the {@code sType} field. */
+    public VkPhysicalDeviceShaderAtomicInt64FeaturesKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPhysicalDeviceShaderAtomicInt64FeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -252,6 +254,8 @@ public class VkPhysicalDeviceShaderAtomicInt64FeaturesKHR extends VkPhysicalDevi
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES} value to the {@code sType} field. */
+        public VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.npNext(address(), value); return this; }

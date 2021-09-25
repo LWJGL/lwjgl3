@@ -113,6 +113,8 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceGroupPresentCapabilitiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR} value to the {@link #sType} field. */
+    public VkDeviceGroupPresentCapabilitiesKHR sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceGroupPresentCapabilitiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -345,6 +347,8 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkDeviceGroupPresentCapabilitiesKHR#sType} field. */
         public VkDeviceGroupPresentCapabilitiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupPresentCapabilitiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR} value to the {@link VkDeviceGroupPresentCapabilitiesKHR#sType} field. */
+        public VkDeviceGroupPresentCapabilitiesKHR.Buffer sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR); }
         /** Sets the specified value to the {@link VkDeviceGroupPresentCapabilitiesKHR#pNext} field. */
         public VkDeviceGroupPresentCapabilitiesKHR.Buffer pNext(@NativeType("void *") long value) { VkDeviceGroupPresentCapabilitiesKHR.npNext(address(), value); return this; }
 

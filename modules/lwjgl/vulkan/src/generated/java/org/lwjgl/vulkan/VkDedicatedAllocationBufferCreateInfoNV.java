@@ -87,6 +87,8 @@ public class VkDedicatedAllocationBufferCreateInfoNV extends Struct implements N
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDedicatedAllocationBufferCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVDedicatedAllocation#VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkDedicatedAllocationBufferCreateInfoNV sType$Default() { return sType(NVDedicatedAllocation.VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDedicatedAllocationBufferCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #dedicatedAllocation} field. */
@@ -313,6 +315,8 @@ public class VkDedicatedAllocationBufferCreateInfoNV extends Struct implements N
 
         /** Sets the specified value to the {@link VkDedicatedAllocationBufferCreateInfoNV#sType} field. */
         public VkDedicatedAllocationBufferCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkDedicatedAllocationBufferCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVDedicatedAllocation#VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV} value to the {@link VkDedicatedAllocationBufferCreateInfoNV#sType} field. */
+        public VkDedicatedAllocationBufferCreateInfoNV.Buffer sType$Default() { return sType(NVDedicatedAllocation.VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkDedicatedAllocationBufferCreateInfoNV#pNext} field. */
         public VkDedicatedAllocationBufferCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkDedicatedAllocationBufferCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDedicatedAllocationBufferCreateInfoNV#dedicatedAllocation} field. */

@@ -98,6 +98,8 @@ public class VkPhysicalDeviceCooperativeMatrixFeaturesNV extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceCooperativeMatrixFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceCooperativeMatrixFeaturesNV sType$Default() { return sType(NVCooperativeMatrix.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceCooperativeMatrixFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #cooperativeMatrix} field. */
@@ -335,6 +337,8 @@ public class VkPhysicalDeviceCooperativeMatrixFeaturesNV extends Struct implemen
 
         /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV#sType} field. */
         public VkPhysicalDeviceCooperativeMatrixFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCooperativeMatrixFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV} value to the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV#sType} field. */
+        public VkPhysicalDeviceCooperativeMatrixFeaturesNV.Buffer sType$Default() { return sType(NVCooperativeMatrix.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV#pNext} field. */
         public VkPhysicalDeviceCooperativeMatrixFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCooperativeMatrixFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV#cooperativeMatrix} field. */

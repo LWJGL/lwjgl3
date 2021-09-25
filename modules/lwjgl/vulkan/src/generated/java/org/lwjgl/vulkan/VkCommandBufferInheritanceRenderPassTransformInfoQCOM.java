@@ -107,6 +107,8 @@ public class VkCommandBufferInheritanceRenderPassTransformInfoQCOM extends Struc
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCommandBufferInheritanceRenderPassTransformInfoQCOM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link QCOMRenderPassTransform#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM} value to the {@link #sType} field. */
+    public VkCommandBufferInheritanceRenderPassTransformInfoQCOM sType$Default() { return sType(QCOMRenderPassTransform.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCommandBufferInheritanceRenderPassTransformInfoQCOM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #transform} field. */
@@ -327,6 +329,8 @@ public class VkCommandBufferInheritanceRenderPassTransformInfoQCOM extends Struc
 
         /** Sets the specified value to the {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM#sType} field. */
         public VkCommandBufferInheritanceRenderPassTransformInfoQCOM.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandBufferInheritanceRenderPassTransformInfoQCOM.nsType(address(), value); return this; }
+        /** Sets the {@link QCOMRenderPassTransform#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM} value to the {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM#sType} field. */
+        public VkCommandBufferInheritanceRenderPassTransformInfoQCOM.Buffer sType$Default() { return sType(QCOMRenderPassTransform.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM); }
         /** Sets the specified value to the {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM#pNext} field. */
         public VkCommandBufferInheritanceRenderPassTransformInfoQCOM.Buffer pNext(@NativeType("void *") long value) { VkCommandBufferInheritanceRenderPassTransformInfoQCOM.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM#transform} field. */

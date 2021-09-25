@@ -108,6 +108,8 @@ public class VkPipelineLibraryCreateInfoKHR extends Struct implements NativeReso
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineLibraryCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRPipelineLibrary#VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    public VkPipelineLibraryCreateInfoKHR sType$Default() { return sType(KHRPipelineLibrary.VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineLibraryCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@link #pLibraries} field. */
@@ -347,6 +349,8 @@ public class VkPipelineLibraryCreateInfoKHR extends Struct implements NativeReso
 
         /** Sets the specified value to the {@link VkPipelineLibraryCreateInfoKHR#sType} field. */
         public VkPipelineLibraryCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineLibraryCreateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRPipelineLibrary#VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR} value to the {@link VkPipelineLibraryCreateInfoKHR#sType} field. */
+        public VkPipelineLibraryCreateInfoKHR.Buffer sType$Default() { return sType(KHRPipelineLibrary.VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkPipelineLibraryCreateInfoKHR#pNext} field. */
         public VkPipelineLibraryCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkPipelineLibraryCreateInfoKHR.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@link VkPipelineLibraryCreateInfoKHR#pLibraries} field. */

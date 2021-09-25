@@ -148,6 +148,8 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineColorBlendStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkPipelineColorBlendStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineColorBlendStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -464,6 +466,8 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkPipelineColorBlendStateCreateInfo#sType} field. */
         public VkPipelineColorBlendStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineColorBlendStateCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO} value to the {@link VkPipelineColorBlendStateCreateInfo#sType} field. */
+        public VkPipelineColorBlendStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineColorBlendStateCreateInfo#pNext} field. */
         public VkPipelineColorBlendStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineColorBlendStateCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineColorBlendStateCreateInfo#flags} field. */

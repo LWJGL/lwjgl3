@@ -88,6 +88,8 @@ public class VkPipelineCompilerControlCreateInfoAMD extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineCompilerControlCreateInfoAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link AMDPipelineCompilerControl#VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD} value to the {@link #sType} field. */
+    public VkPipelineCompilerControlCreateInfoAMD sType$Default() { return sType(AMDPipelineCompilerControl.VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineCompilerControlCreateInfoAMD pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #compilerControlFlags} field. */
@@ -314,6 +316,8 @@ public class VkPipelineCompilerControlCreateInfoAMD extends Struct implements Na
 
         /** Sets the specified value to the {@link VkPipelineCompilerControlCreateInfoAMD#sType} field. */
         public VkPipelineCompilerControlCreateInfoAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineCompilerControlCreateInfoAMD.nsType(address(), value); return this; }
+        /** Sets the {@link AMDPipelineCompilerControl#VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD} value to the {@link VkPipelineCompilerControlCreateInfoAMD#sType} field. */
+        public VkPipelineCompilerControlCreateInfoAMD.Buffer sType$Default() { return sType(AMDPipelineCompilerControl.VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD); }
         /** Sets the specified value to the {@link VkPipelineCompilerControlCreateInfoAMD#pNext} field. */
         public VkPipelineCompilerControlCreateInfoAMD.Buffer pNext(@NativeType("void const *") long value) { VkPipelineCompilerControlCreateInfoAMD.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineCompilerControlCreateInfoAMD#compilerControlFlags} field. */

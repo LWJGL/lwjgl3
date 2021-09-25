@@ -93,6 +93,8 @@ public class VkVideoSessionParametersUpdateInfoKHR extends Struct implements Nat
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoSessionParametersUpdateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR} value to the {@link #sType} field. */
+    public VkVideoSessionParametersUpdateInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoSessionParametersUpdateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #updateSequenceCount} field. */
@@ -301,6 +303,8 @@ public class VkVideoSessionParametersUpdateInfoKHR extends Struct implements Nat
 
         /** Sets the specified value to the {@link VkVideoSessionParametersUpdateInfoKHR#sType} field. */
         public VkVideoSessionParametersUpdateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoSessionParametersUpdateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR} value to the {@link VkVideoSessionParametersUpdateInfoKHR#sType} field. */
+        public VkVideoSessionParametersUpdateInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoSessionParametersUpdateInfoKHR#pNext} field. */
         public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoSessionParametersUpdateInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoSessionParametersUpdateInfoKHR#updateSequenceCount} field. */

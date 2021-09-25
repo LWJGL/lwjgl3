@@ -143,6 +143,8 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBindImageMemoryDeviceGroupInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO} value to the {@link #sType} field. */
+    public VkBindImageMemoryDeviceGroupInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBindImageMemoryDeviceGroupInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pDeviceIndices} field. */
@@ -422,6 +424,8 @@ public class VkBindImageMemoryDeviceGroupInfo extends Struct implements NativeRe
 
         /** Sets the specified value to the {@link VkBindImageMemoryDeviceGroupInfo#sType} field. */
         public VkBindImageMemoryDeviceGroupInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindImageMemoryDeviceGroupInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO} value to the {@link VkBindImageMemoryDeviceGroupInfo#sType} field. */
+        public VkBindImageMemoryDeviceGroupInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO); }
         /** Sets the specified value to the {@link VkBindImageMemoryDeviceGroupInfo#pNext} field. */
         public VkBindImageMemoryDeviceGroupInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindImageMemoryDeviceGroupInfo.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkBindImageMemoryDeviceGroupInfo#pDeviceIndices} field. */

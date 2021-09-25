@@ -91,6 +91,8 @@ public class VkDescriptorSetVariableDescriptorCountLayoutSupport extends Struct 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDescriptorSetVariableDescriptorCountLayoutSupport sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT} value to the {@link #sType} field. */
+    public VkDescriptorSetVariableDescriptorCountLayoutSupport sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDescriptorSetVariableDescriptorCountLayoutSupport pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -293,6 +295,8 @@ public class VkDescriptorSetVariableDescriptorCountLayoutSupport extends Struct 
 
         /** Sets the specified value to the {@link VkDescriptorSetVariableDescriptorCountLayoutSupport#sType} field. */
         public VkDescriptorSetVariableDescriptorCountLayoutSupport.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorSetVariableDescriptorCountLayoutSupport.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT} value to the {@link VkDescriptorSetVariableDescriptorCountLayoutSupport#sType} field. */
+        public VkDescriptorSetVariableDescriptorCountLayoutSupport.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT); }
         /** Sets the specified value to the {@link VkDescriptorSetVariableDescriptorCountLayoutSupport#pNext} field. */
         public VkDescriptorSetVariableDescriptorCountLayoutSupport.Buffer pNext(@NativeType("void *") long value) { VkDescriptorSetVariableDescriptorCountLayoutSupport.npNext(address(), value); return this; }
 

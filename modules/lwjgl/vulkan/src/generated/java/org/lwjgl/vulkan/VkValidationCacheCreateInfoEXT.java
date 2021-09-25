@@ -117,6 +117,8 @@ public class VkValidationCacheCreateInfoEXT extends Struct implements NativeReso
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkValidationCacheCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTValidationCache#VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkValidationCacheCreateInfoEXT sType$Default() { return sType(EXTValidationCache.VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkValidationCacheCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -385,6 +387,8 @@ public class VkValidationCacheCreateInfoEXT extends Struct implements NativeReso
 
         /** Sets the specified value to the {@link VkValidationCacheCreateInfoEXT#sType} field. */
         public VkValidationCacheCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkValidationCacheCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTValidationCache#VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT} value to the {@link VkValidationCacheCreateInfoEXT#sType} field. */
+        public VkValidationCacheCreateInfoEXT.Buffer sType$Default() { return sType(EXTValidationCache.VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkValidationCacheCreateInfoEXT#pNext} field. */
         public VkValidationCacheCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkValidationCacheCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkValidationCacheCreateInfoEXT#flags} field. */

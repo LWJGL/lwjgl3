@@ -44,6 +44,8 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkBindImageMemoryInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO} value to the {@code sType} field. */
+    public VkBindImageMemoryInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkBindImageMemoryInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -258,6 +260,8 @@ public class VkBindImageMemoryInfoKHR extends VkBindImageMemoryInfo {
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkBindImageMemoryInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBindImageMemoryInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO} value to the {@code sType} field. */
+        public VkBindImageMemoryInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkBindImageMemoryInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkBindImageMemoryInfoKHR.npNext(address(), value); return this; }

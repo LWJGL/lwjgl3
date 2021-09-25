@@ -424,7 +424,7 @@ public final class HelloVulkan {
             ByteBuffer APP_SHORT_NAME = stack.UTF8("tri");
 
             VkApplicationInfo app = VkApplicationInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_APPLICATION_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .pApplicationName(APP_SHORT_NAME)
                 .applicationVersion(0)
@@ -434,7 +434,7 @@ public final class HelloVulkan {
 
             extension_names.flip();
             VkInstanceCreateInfo inst_info = VkInstanceCreateInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .flags(0)
                 .pApplicationInfo(app)
@@ -445,7 +445,7 @@ public final class HelloVulkan {
             VkDebugReportCallbackCreateInfoEXT dbgCreateInfo;
             if (VALIDATE) {
                 dbgCreateInfo = VkDebugReportCallbackCreateInfoEXT.malloc(stack)
-                    .sType(VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT)
+                    .sType$Default()
                     .pNext(NULL)
                     .flags(VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT)
                     .pfnCallback(dbgFunc)
@@ -565,7 +565,7 @@ public final class HelloVulkan {
     private void demo_init_device() {
         try (MemoryStack stack = stackPush()) {
             VkDeviceQueueCreateInfo.Buffer queue = VkDeviceQueueCreateInfo.malloc(1, stack)
-                .sType(VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .flags(0)
                 .queueFamilyIndex(graphics_queue_node_index)
@@ -578,7 +578,7 @@ public final class HelloVulkan {
 
             extension_names.flip();
             VkDeviceCreateInfo device = VkDeviceCreateInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .flags(0)
                 .pQueueCreateInfos(queue)
@@ -688,7 +688,7 @@ public final class HelloVulkan {
         try (MemoryStack stack = stackPush()) {
             if (setup_cmd == null) {
                 VkCommandBufferAllocateInfo cmd = VkCommandBufferAllocateInfo.malloc(stack)
-                    .sType(VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO)
+                    .sType$Default()
                     .pNext(NULL)
                     .commandPool(cmd_pool)
                     .level(VK_COMMAND_BUFFER_LEVEL_PRIMARY)
@@ -698,7 +698,7 @@ public final class HelloVulkan {
                 setup_cmd = new VkCommandBuffer(pp.get(0), device);
 
                 VkCommandBufferBeginInfo cmd_buf_info = VkCommandBufferBeginInfo.malloc(stack)
-                    .sType(VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO)
+                    .sType$Default()
                     .pNext(NULL)
                     .flags(0)
                     .pInheritanceInfo(null);
@@ -706,7 +706,7 @@ public final class HelloVulkan {
             }
 
             VkImageMemoryBarrier.Buffer image_memory_barrier = VkImageMemoryBarrier.malloc(1, stack)
-                .sType(VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER)
+                .sType$Default()
                 .pNext(NULL)
                 .srcAccessMask(srcAccessMask)
                 .dstAccessMask(0)
@@ -812,7 +812,7 @@ public final class HelloVulkan {
             }
 
             VkSwapchainCreateInfoKHR swapchain = VkSwapchainCreateInfoKHR.calloc(stack)
-                .sType(VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR)
+                .sType$Default()
                 .surface(surface)
                 .minImageCount(desiredNumOfSwapchainImages)
                 .imageFormat(format)
@@ -851,7 +851,7 @@ public final class HelloVulkan {
                 buffers[i].image = swapchainImages.get(i);
 
                 VkImageViewCreateInfo color_attachment_view = VkImageViewCreateInfo.malloc(stack)
-                    .sType(VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO)
+                    .sType$Default()
                     .pNext(NULL)
                     .flags(0)
                     .image(buffers[i].image)
@@ -906,7 +906,7 @@ public final class HelloVulkan {
 
         try (MemoryStack stack = stackPush()) {
             VkImageCreateInfo image = VkImageCreateInfo.calloc(stack)
-                .sType(VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .imageType(VK_IMAGE_TYPE_2D)
                 .format(depth.format)
@@ -930,7 +930,7 @@ public final class HelloVulkan {
 
             /* select memory size and type */
             VkMemoryAllocateInfo mem_alloc = VkMemoryAllocateInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .allocationSize(mem_reqs.size())
                 .memoryTypeIndex(0);
@@ -953,7 +953,7 @@ public final class HelloVulkan {
 
             /* create image view */
             VkImageViewCreateInfo view = VkImageViewCreateInfo.calloc(stack)
-                .sType(VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .flags(0)
                 .image(depth.image)
@@ -999,7 +999,7 @@ public final class HelloVulkan {
 
         try (MemoryStack stack = stackPush()) {
             VkImageCreateInfo image_create_info = VkImageCreateInfo.calloc(stack)
-                .sType(VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .imageType(VK_IMAGE_TYPE_2D)
                 .format(tex_format)
@@ -1021,7 +1021,7 @@ public final class HelloVulkan {
             VkMemoryRequirements mem_reqs = VkMemoryRequirements.malloc(stack);
             vkGetImageMemoryRequirements(device, tex_obj.image, mem_reqs);
             VkMemoryAllocateInfo mem_alloc = VkMemoryAllocateInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .allocationSize(mem_reqs.size())
                 .memoryTypeIndex(0);
@@ -1078,7 +1078,7 @@ public final class HelloVulkan {
 
         try (MemoryStack stack = stackPush()) {
             VkSubmitInfo submit_info = VkSubmitInfo.calloc(stack)
-                .sType(VK_STRUCTURE_TYPE_SUBMIT_INFO)
+                .sType$Default()
                 .pCommandBuffers(pp.put(0, setup_cmd));
 
             check(vkQueueSubmit(queue, submit_info, VK_NULL_HANDLE));
@@ -1178,7 +1178,7 @@ public final class HelloVulkan {
                 }
 
                 VkSamplerCreateInfo sampler = VkSamplerCreateInfo.calloc(stack)
-                    .sType(VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO)
+                    .sType$Default()
                     .pNext(NULL)
                     .magFilter(VK_FILTER_NEAREST)
                     .minFilter(VK_FILTER_NEAREST)
@@ -1200,7 +1200,7 @@ public final class HelloVulkan {
                 textures[i].sampler = lp.get(0);
 
                 VkImageViewCreateInfo view = VkImageViewCreateInfo.malloc(stack)
-                    .sType(VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO)
+                    .sType$Default()
                     .pNext(NULL)
                     .image(VK_NULL_HANDLE)
                     .viewType(VK_IMAGE_VIEW_TYPE_2D)
@@ -1245,7 +1245,7 @@ public final class HelloVulkan {
 
         try (MemoryStack stack = stackPush()) {
             VkBufferCreateInfo buf_info = VkBufferCreateInfo.calloc(stack)
-                .sType(VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO)
+                .sType$Default()
                 .size(/*sizeof(vb)*/ vb.length * vb[0].length * 4)
                 .usage(VK_BUFFER_USAGE_VERTEX_BUFFER_BIT)
                 .sharingMode(VK_SHARING_MODE_EXCLUSIVE);
@@ -1257,7 +1257,7 @@ public final class HelloVulkan {
             vkGetBufferMemoryRequirements(device, vertices.buf, mem_reqs);
 
             VkMemoryAllocateInfo mem_alloc = VkMemoryAllocateInfo.calloc(stack)
-                .sType(VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO)
+                .sType$Default()
                 .allocationSize(mem_reqs.size());
             boolean pass = memory_type_from_properties(mem_reqs.memoryTypeBits(), VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, mem_alloc);
             assert (pass);
@@ -1279,7 +1279,7 @@ public final class HelloVulkan {
         check(vkBindBufferMemory(device, vertices.buf, vertices.mem, 0));
 
         vertices.vi
-            .sType(VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO)
+            .sType$Default()
             .pNext(NULL)
             .pVertexBindingDescriptions(vertices.vi_bindings)
             .pVertexAttributeDescriptions(vertices.vi_attrs);
@@ -1305,7 +1305,7 @@ public final class HelloVulkan {
     private void demo_prepare_descriptor_layout() {
         try (MemoryStack stack = stackPush()) {
             VkDescriptorSetLayoutCreateInfo descriptor_layout = VkDescriptorSetLayoutCreateInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .flags(0)
                 .pBindings(
@@ -1321,7 +1321,7 @@ public final class HelloVulkan {
             desc_layout = layouts.get(0);
 
             VkPipelineLayoutCreateInfo pPipelineLayoutCreateInfo = VkPipelineLayoutCreateInfo.calloc(stack)
-                .sType(VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .pSetLayouts(layouts);
 
@@ -1369,7 +1369,7 @@ public final class HelloVulkan {
                 );
 
             VkRenderPassCreateInfo rp_info = VkRenderPassCreateInfo.calloc(stack)
-                .sType(VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO)
+                .sType$Default()
                 .pAttachments(attachments)
                 .pSubpasses(subpass);
 
@@ -1384,7 +1384,7 @@ public final class HelloVulkan {
             pCode.flip();
 
             VkShaderModuleCreateInfo moduleCreateInfo = VkShaderModuleCreateInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .flags(0)
                 .pCode(pCode);
@@ -1410,18 +1410,18 @@ public final class HelloVulkan {
 
             VkPipelineShaderStageCreateInfo.Buffer shaderStages = VkPipelineShaderStageCreateInfo.calloc(2, stack);
             shaderStages.get(0)
-                .sType(VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO)
+                .sType$Default()
                 .stage(VK_SHADER_STAGE_VERTEX_BIT)
                 .module(vert_shader_module = demo_prepare_shader_module(vertShaderCode))
                 .pName(main);
             shaderStages.get(1)
-                .sType(VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO)
+                .sType$Default()
                 .stage(VK_SHADER_STAGE_FRAGMENT_BIT)
                 .module(frag_shader_module = demo_prepare_shader_module(fragShaderCode))
                 .pName(main);
 
             VkPipelineDepthStencilStateCreateInfo ds = VkPipelineDepthStencilStateCreateInfo.calloc(stack)
-                .sType(VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO)
+                .sType$Default()
                 .depthTestEnable(true)
                 .depthWriteEnable(true)
                 .depthCompareOp(VK_COMPARE_OP_LESS_OR_EQUAL)
@@ -1434,21 +1434,21 @@ public final class HelloVulkan {
             ds.front(ds.back());
 
             pipeline
-                .sType(VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO)
+                .sType$Default()
                 .pStages(shaderStages)
                 .pVertexInputState(vertices.vi)
                 .pInputAssemblyState(
                     VkPipelineInputAssemblyStateCreateInfo.calloc(stack)
-                        .sType(VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO)
+                        .sType$Default()
                         .topology(VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST))
                 .pViewportState(
                     VkPipelineViewportStateCreateInfo.calloc(stack)
-                        .sType(VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO)
+                        .sType$Default()
                         .viewportCount(1)
                         .scissorCount(1))
                 .pRasterizationState(
                     VkPipelineRasterizationStateCreateInfo.calloc(stack)
-                        .sType(VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO)
+                        .sType$Default()
                         .polygonMode(VK_POLYGON_MODE_FILL)
                         .cullMode(VK_CULL_MODE_BACK_BIT)
                         .frontFace(VK_FRONT_FACE_CLOCKWISE)
@@ -1458,13 +1458,13 @@ public final class HelloVulkan {
                         .lineWidth(1.0f))
                 .pMultisampleState(
                     VkPipelineMultisampleStateCreateInfo.calloc(stack)
-                        .sType(VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO)
+                        .sType$Default()
                         .pSampleMask(null)
                         .rasterizationSamples(VK_SAMPLE_COUNT_1_BIT))
                 .pDepthStencilState(ds)
                 .pColorBlendState(
                     VkPipelineColorBlendStateCreateInfo.calloc(stack)
-                        .sType(VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO)
+                        .sType$Default()
                         .pAttachments(
                             VkPipelineColorBlendAttachmentState.calloc(1, stack)
                                 .colorWriteMask(0xf)
@@ -1472,7 +1472,7 @@ public final class HelloVulkan {
                         ))
                 .pDynamicState(
                     VkPipelineDynamicStateCreateInfo.calloc(stack)
-                        .sType(VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO)
+                        .sType$Default()
                         .pDynamicStates(stack.ints(
                             VK_DYNAMIC_STATE_VIEWPORT,
                             VK_DYNAMIC_STATE_SCISSOR
@@ -1481,7 +1481,7 @@ public final class HelloVulkan {
                 .renderPass(render_pass);
 
             VkPipelineCacheCreateInfo pipelineCacheCI = VkPipelineCacheCreateInfo.calloc(stack)
-                .sType(VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO);
+                .sType$Default();
 
             check(vkCreatePipelineCache(device, pipelineCacheCI, null, lp));
             pipelineCache = lp.get(0);
@@ -1499,7 +1499,7 @@ public final class HelloVulkan {
     private void demo_prepare_descriptor_pool() {
         try (MemoryStack stack = stackPush()) {
             VkDescriptorPoolCreateInfo descriptor_pool = VkDescriptorPoolCreateInfo.calloc(stack)
-                .sType(VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .maxSets(1)
                 .pPoolSizes(
@@ -1517,7 +1517,7 @@ public final class HelloVulkan {
         try (MemoryStack stack = stackPush()) {
             LongBuffer layouts = stack.longs(desc_layout);
             VkDescriptorSetAllocateInfo alloc_info = VkDescriptorSetAllocateInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .descriptorPool(desc_pool)
                 .pSetLayouts(layouts);
@@ -1534,7 +1534,7 @@ public final class HelloVulkan {
             }
 
             VkWriteDescriptorSet.Buffer write = VkWriteDescriptorSet.calloc(1, stack)
-                .sType(VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET)
+                .sType$Default()
                 .dstSet(desc_set)
                 .descriptorType(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER)
                 .descriptorCount(tex_descs.remaining())
@@ -1549,7 +1549,7 @@ public final class HelloVulkan {
             LongBuffer attachments = stack.longs(0, depth.view);
 
             VkFramebufferCreateInfo fb_info = VkFramebufferCreateInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .flags(0)
                 .renderPass(render_pass)
@@ -1571,7 +1571,7 @@ public final class HelloVulkan {
     private void demo_prepare() {
         try (MemoryStack stack = stackPush()) {
             VkCommandPoolCreateInfo cmd_pool_info = VkCommandPoolCreateInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .flags(VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT)
                 .queueFamilyIndex(graphics_queue_node_index);
@@ -1581,7 +1581,7 @@ public final class HelloVulkan {
             cmd_pool = lp.get(0);
 
             VkCommandBufferAllocateInfo cmd = VkCommandBufferAllocateInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .commandPool(cmd_pool)
                 .level(VK_COMMAND_BUFFER_LEVEL_PRIMARY)
@@ -1609,7 +1609,7 @@ public final class HelloVulkan {
     private void demo_draw_build_cmd() {
         try (MemoryStack stack = stackPush()) {
             VkCommandBufferBeginInfo cmd_buf_info = VkCommandBufferBeginInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .flags(0)
                 .pInheritanceInfo(null);
@@ -1627,7 +1627,7 @@ public final class HelloVulkan {
                 .stencil(0);
 
             VkRenderPassBeginInfo rp_begin = VkRenderPassBeginInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .renderPass(render_pass)
                 .framebuffer(framebuffers.get(current_buffer))
@@ -1643,7 +1643,7 @@ public final class HelloVulkan {
             // We can use LAYOUT_UNDEFINED as a wildcard here because we don't care what
             // happens to the previous contents of the image
             VkImageMemoryBarrier.Buffer image_memory_barrier = VkImageMemoryBarrier.malloc(1, stack)
-                .sType(VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER)
+                .sType$Default()
                 .pNext(NULL)
                 .srcAccessMask(0)
                 .dstAccessMask(VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT)
@@ -1691,7 +1691,7 @@ public final class HelloVulkan {
             vkCmdEndRenderPass(draw_cmd);
 
             VkImageMemoryBarrier.Buffer prePresentBarrier = VkImageMemoryBarrier.malloc(1, stack)
-                .sType(VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER)
+                .sType$Default()
                 .pNext(NULL)
                 .srcAccessMask(VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT)
                 .dstAccessMask(VK_ACCESS_MEMORY_READ_BIT)
@@ -1716,7 +1716,7 @@ public final class HelloVulkan {
     private void demo_draw() {
         try (MemoryStack stack = stackPush()) {
             VkSemaphoreCreateInfo semaphoreCreateInfo = VkSemaphoreCreateInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .flags(0);
 
@@ -1757,7 +1757,7 @@ public final class HelloVulkan {
             demo_draw_build_cmd();
             LongBuffer lp2 = stack.mallocLong(1);
             VkSubmitInfo submit_info = VkSubmitInfo.malloc(stack)
-                .sType(VK_STRUCTURE_TYPE_SUBMIT_INFO)
+                .sType$Default()
                 .pNext(NULL)
                 .waitSemaphoreCount(1)
                 .pWaitSemaphores(lp.put(0, imageAcquiredSemaphore))
@@ -1768,7 +1768,7 @@ public final class HelloVulkan {
             check(vkQueueSubmit(queue, submit_info, VK_NULL_HANDLE));
 
             VkPresentInfoKHR present = VkPresentInfoKHR.calloc(stack)
-                .sType(VK_STRUCTURE_TYPE_PRESENT_INFO_KHR)
+                .sType$Default()
                 .pNext(NULL)
                 .pWaitSemaphores(lp2)
                 .swapchainCount(1)

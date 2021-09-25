@@ -91,6 +91,8 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures extends Struct 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #separateDepthStencilLayouts} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures extends Struct 
 
         /** Sets the specified value to the {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures#sType} field. */
         public VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES} value to the {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures#sType} field. */
+        public VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures#pNext} field. */
         public VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures#separateDepthStencilLayouts} field. */

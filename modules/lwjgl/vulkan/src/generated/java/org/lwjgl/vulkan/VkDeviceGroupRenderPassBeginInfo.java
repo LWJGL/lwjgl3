@@ -125,6 +125,8 @@ public class VkDeviceGroupRenderPassBeginInfo extends Struct implements NativeRe
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceGroupRenderPassBeginInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO} value to the {@link #sType} field. */
+    public VkDeviceGroupRenderPassBeginInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceGroupRenderPassBeginInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #deviceMask} field. */
@@ -393,6 +395,8 @@ public class VkDeviceGroupRenderPassBeginInfo extends Struct implements NativeRe
 
         /** Sets the specified value to the {@link VkDeviceGroupRenderPassBeginInfo#sType} field. */
         public VkDeviceGroupRenderPassBeginInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupRenderPassBeginInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO} value to the {@link VkDeviceGroupRenderPassBeginInfo#sType} field. */
+        public VkDeviceGroupRenderPassBeginInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO); }
         /** Sets the specified value to the {@link VkDeviceGroupRenderPassBeginInfo#pNext} field. */
         public VkDeviceGroupRenderPassBeginInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupRenderPassBeginInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDeviceGroupRenderPassBeginInfo#deviceMask} field. */

@@ -91,6 +91,8 @@ public class VkPhysicalDeviceCoverageReductionModeFeaturesNV extends Struct impl
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceCoverageReductionModeFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVCoverageReductionMode#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceCoverageReductionModeFeaturesNV sType$Default() { return sType(NVCoverageReductionMode.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceCoverageReductionModeFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #coverageReductionMode} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceCoverageReductionModeFeaturesNV extends Struct impl
 
         /** Sets the specified value to the {@link VkPhysicalDeviceCoverageReductionModeFeaturesNV#sType} field. */
         public VkPhysicalDeviceCoverageReductionModeFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCoverageReductionModeFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVCoverageReductionMode#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV} value to the {@link VkPhysicalDeviceCoverageReductionModeFeaturesNV#sType} field. */
+        public VkPhysicalDeviceCoverageReductionModeFeaturesNV.Buffer sType$Default() { return sType(NVCoverageReductionMode.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceCoverageReductionModeFeaturesNV#pNext} field. */
         public VkPhysicalDeviceCoverageReductionModeFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCoverageReductionModeFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceCoverageReductionModeFeaturesNV#coverageReductionMode} field. */

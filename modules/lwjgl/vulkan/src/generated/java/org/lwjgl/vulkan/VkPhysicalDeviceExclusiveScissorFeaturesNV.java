@@ -93,6 +93,8 @@ public class VkPhysicalDeviceExclusiveScissorFeaturesNV extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceExclusiveScissorFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVScissorExclusive#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceExclusiveScissorFeaturesNV sType$Default() { return sType(NVScissorExclusive.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceExclusiveScissorFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #exclusiveScissor} field. */
@@ -319,6 +321,8 @@ public class VkPhysicalDeviceExclusiveScissorFeaturesNV extends Struct implement
 
         /** Sets the specified value to the {@link VkPhysicalDeviceExclusiveScissorFeaturesNV#sType} field. */
         public VkPhysicalDeviceExclusiveScissorFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExclusiveScissorFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVScissorExclusive#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV} value to the {@link VkPhysicalDeviceExclusiveScissorFeaturesNV#sType} field. */
+        public VkPhysicalDeviceExclusiveScissorFeaturesNV.Buffer sType$Default() { return sType(NVScissorExclusive.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceExclusiveScissorFeaturesNV#pNext} field. */
         public VkPhysicalDeviceExclusiveScissorFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceExclusiveScissorFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceExclusiveScissorFeaturesNV#exclusiveScissor} field. */

@@ -141,6 +141,8 @@ public class VkRayTracingShaderGroupCreateInfoKHR extends Struct implements Nati
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRayTracingShaderGroupCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    public VkRayTracingShaderGroupCreateInfoKHR sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRayTracingShaderGroupCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #type} field. */
@@ -404,6 +406,8 @@ public class VkRayTracingShaderGroupCreateInfoKHR extends Struct implements Nati
 
         /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoKHR#sType} field. */
         public VkRayTracingShaderGroupCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkRayTracingShaderGroupCreateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR} value to the {@link VkRayTracingShaderGroupCreateInfoKHR#sType} field. */
+        public VkRayTracingShaderGroupCreateInfoKHR.Buffer sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoKHR#pNext} field. */
         public VkRayTracingShaderGroupCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkRayTracingShaderGroupCreateInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoKHR#type} field. */

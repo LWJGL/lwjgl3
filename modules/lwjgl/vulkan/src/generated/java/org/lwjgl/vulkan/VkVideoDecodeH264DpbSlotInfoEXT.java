@@ -91,6 +91,8 @@ public class VkVideoDecodeH264DpbSlotInfoEXT extends Struct implements NativeRes
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoDecodeH264DpbSlotInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_EXT} value to the {@link #sType} field. */
+    public VkVideoDecodeH264DpbSlotInfoEXT sType$Default() { return sType(EXTVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkVideoDecodeH264DpbSlotInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoDecodeH264ReferenceInfo} to the {@link #pStdReferenceInfo} field. */
@@ -320,6 +322,8 @@ public class VkVideoDecodeH264DpbSlotInfoEXT extends Struct implements NativeRes
 
         /** Sets the specified value to the {@link VkVideoDecodeH264DpbSlotInfoEXT#sType} field. */
         public VkVideoDecodeH264DpbSlotInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH264DpbSlotInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_EXT} value to the {@link VkVideoDecodeH264DpbSlotInfoEXT#sType} field. */
+        public VkVideoDecodeH264DpbSlotInfoEXT.Buffer sType$Default() { return sType(EXTVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkVideoDecodeH264DpbSlotInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeH264DpbSlotInfoEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoDecodeH264ReferenceInfo} to the {@link VkVideoDecodeH264DpbSlotInfoEXT#pStdReferenceInfo} field. */

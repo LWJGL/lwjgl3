@@ -87,6 +87,8 @@ public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct implements Nat
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSharedPresentSurfaceCapabilitiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRSharedPresentableImage#VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR} value to the {@link #sType} field. */
+    public VkSharedPresentSurfaceCapabilitiesKHR sType$Default() { return sType(KHRSharedPresentableImage.VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSharedPresentSurfaceCapabilitiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -307,6 +309,8 @@ public class VkSharedPresentSurfaceCapabilitiesKHR extends Struct implements Nat
 
         /** Sets the specified value to the {@link VkSharedPresentSurfaceCapabilitiesKHR#sType} field. */
         public VkSharedPresentSurfaceCapabilitiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSharedPresentSurfaceCapabilitiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRSharedPresentableImage#VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR} value to the {@link VkSharedPresentSurfaceCapabilitiesKHR#sType} field. */
+        public VkSharedPresentSurfaceCapabilitiesKHR.Buffer sType$Default() { return sType(KHRSharedPresentableImage.VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR); }
         /** Sets the specified value to the {@link VkSharedPresentSurfaceCapabilitiesKHR#pNext} field. */
         public VkSharedPresentSurfaceCapabilitiesKHR.Buffer pNext(@NativeType("void *") long value) { VkSharedPresentSurfaceCapabilitiesKHR.npNext(address(), value); return this; }
 

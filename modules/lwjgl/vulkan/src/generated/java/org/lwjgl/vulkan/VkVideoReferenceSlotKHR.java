@@ -102,6 +102,8 @@ public class VkVideoReferenceSlotKHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoReferenceSlotKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR} value to the {@link #sType} field. */
+    public VkVideoReferenceSlotKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoReferenceSlotKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #slotIndex} field. */
@@ -342,6 +344,8 @@ public class VkVideoReferenceSlotKHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkVideoReferenceSlotKHR#sType} field. */
         public VkVideoReferenceSlotKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoReferenceSlotKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR} value to the {@link VkVideoReferenceSlotKHR#sType} field. */
+        public VkVideoReferenceSlotKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR); }
         /** Sets the specified value to the {@link VkVideoReferenceSlotKHR#pNext} field. */
         public VkVideoReferenceSlotKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoReferenceSlotKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoReferenceSlotKHR#slotIndex} field. */

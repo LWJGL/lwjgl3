@@ -108,6 +108,8 @@ public class VkMacOSSurfaceCreateInfoMVK extends Struct implements NativeResourc
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMacOSSurfaceCreateInfoMVK sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link MVKMacosSurface#VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK} value to the {@link #sType} field. */
+    public VkMacOSSurfaceCreateInfoMVK sType$Default() { return sType(MVKMacosSurface.VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMacOSSurfaceCreateInfoMVK pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -366,6 +368,8 @@ public class VkMacOSSurfaceCreateInfoMVK extends Struct implements NativeResourc
 
         /** Sets the specified value to the {@link VkMacOSSurfaceCreateInfoMVK#sType} field. */
         public VkMacOSSurfaceCreateInfoMVK.Buffer sType(@NativeType("VkStructureType") int value) { VkMacOSSurfaceCreateInfoMVK.nsType(address(), value); return this; }
+        /** Sets the {@link MVKMacosSurface#VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK} value to the {@link VkMacOSSurfaceCreateInfoMVK#sType} field. */
+        public VkMacOSSurfaceCreateInfoMVK.Buffer sType$Default() { return sType(MVKMacosSurface.VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK); }
         /** Sets the specified value to the {@link VkMacOSSurfaceCreateInfoMVK#pNext} field. */
         public VkMacOSSurfaceCreateInfoMVK.Buffer pNext(@NativeType("void const *") long value) { VkMacOSSurfaceCreateInfoMVK.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkMacOSSurfaceCreateInfoMVK#flags} field. */

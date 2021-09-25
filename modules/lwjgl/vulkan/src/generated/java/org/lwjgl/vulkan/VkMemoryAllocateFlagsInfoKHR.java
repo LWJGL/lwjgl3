@@ -43,6 +43,8 @@ public class VkMemoryAllocateFlagsInfoKHR extends VkMemoryAllocateFlagsInfo {
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkMemoryAllocateFlagsInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO} value to the {@code sType} field. */
+    public VkMemoryAllocateFlagsInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkMemoryAllocateFlagsInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -252,6 +254,8 @@ public class VkMemoryAllocateFlagsInfoKHR extends VkMemoryAllocateFlagsInfo {
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkMemoryAllocateFlagsInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryAllocateFlagsInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO} value to the {@code sType} field. */
+        public VkMemoryAllocateFlagsInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkMemoryAllocateFlagsInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkMemoryAllocateFlagsInfoKHR.npNext(address(), value); return this; }

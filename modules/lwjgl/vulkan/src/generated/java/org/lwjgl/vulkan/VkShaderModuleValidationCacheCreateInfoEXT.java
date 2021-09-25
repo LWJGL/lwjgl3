@@ -88,6 +88,8 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkShaderModuleValidationCacheCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTValidationCache#VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkShaderModuleValidationCacheCreateInfoEXT sType$Default() { return sType(EXTValidationCache.VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkShaderModuleValidationCacheCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #validationCache} field. */
@@ -314,6 +316,8 @@ public class VkShaderModuleValidationCacheCreateInfoEXT extends Struct implement
 
         /** Sets the specified value to the {@link VkShaderModuleValidationCacheCreateInfoEXT#sType} field. */
         public VkShaderModuleValidationCacheCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkShaderModuleValidationCacheCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTValidationCache#VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT} value to the {@link VkShaderModuleValidationCacheCreateInfoEXT#sType} field. */
+        public VkShaderModuleValidationCacheCreateInfoEXT.Buffer sType$Default() { return sType(EXTValidationCache.VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkShaderModuleValidationCacheCreateInfoEXT#pNext} field. */
         public VkShaderModuleValidationCacheCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkShaderModuleValidationCacheCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkShaderModuleValidationCacheCreateInfoEXT#validationCache} field. */

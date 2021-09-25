@@ -108,6 +108,8 @@ public class VkDescriptorSetVariableDescriptorCountAllocateInfo extends Struct i
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDescriptorSetVariableDescriptorCountAllocateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO} value to the {@link #sType} field. */
+    public VkDescriptorSetVariableDescriptorCountAllocateInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDescriptorSetVariableDescriptorCountAllocateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pDescriptorCounts} field. */
@@ -347,6 +349,8 @@ public class VkDescriptorSetVariableDescriptorCountAllocateInfo extends Struct i
 
         /** Sets the specified value to the {@link VkDescriptorSetVariableDescriptorCountAllocateInfo#sType} field. */
         public VkDescriptorSetVariableDescriptorCountAllocateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorSetVariableDescriptorCountAllocateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO} value to the {@link VkDescriptorSetVariableDescriptorCountAllocateInfo#sType} field. */
+        public VkDescriptorSetVariableDescriptorCountAllocateInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO); }
         /** Sets the specified value to the {@link VkDescriptorSetVariableDescriptorCountAllocateInfo#pNext} field. */
         public VkDescriptorSetVariableDescriptorCountAllocateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorSetVariableDescriptorCountAllocateInfo.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkDescriptorSetVariableDescriptorCountAllocateInfo#pDescriptorCounts} field. */

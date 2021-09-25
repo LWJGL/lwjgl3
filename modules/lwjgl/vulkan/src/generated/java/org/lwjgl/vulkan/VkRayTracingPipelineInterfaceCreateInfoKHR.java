@@ -114,6 +114,8 @@ public class VkRayTracingPipelineInterfaceCreateInfoKHR extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRayTracingPipelineInterfaceCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    public VkRayTracingPipelineInterfaceCreateInfoKHR sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRayTracingPipelineInterfaceCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #maxPipelineRayPayloadSize} field. */
@@ -333,6 +335,8 @@ public class VkRayTracingPipelineInterfaceCreateInfoKHR extends Struct implement
 
         /** Sets the specified value to the {@link VkRayTracingPipelineInterfaceCreateInfoKHR#sType} field. */
         public VkRayTracingPipelineInterfaceCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkRayTracingPipelineInterfaceCreateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR} value to the {@link VkRayTracingPipelineInterfaceCreateInfoKHR#sType} field. */
+        public VkRayTracingPipelineInterfaceCreateInfoKHR.Buffer sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkRayTracingPipelineInterfaceCreateInfoKHR#pNext} field. */
         public VkRayTracingPipelineInterfaceCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkRayTracingPipelineInterfaceCreateInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkRayTracingPipelineInterfaceCreateInfoKHR#maxPipelineRayPayloadSize} field. */

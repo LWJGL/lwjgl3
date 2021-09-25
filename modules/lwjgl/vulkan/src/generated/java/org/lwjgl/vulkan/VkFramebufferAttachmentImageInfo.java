@@ -144,6 +144,8 @@ public class VkFramebufferAttachmentImageInfo extends Struct implements NativeRe
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkFramebufferAttachmentImageInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO} value to the {@link #sType} field. */
+    public VkFramebufferAttachmentImageInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkFramebufferAttachmentImageInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -438,6 +440,8 @@ public class VkFramebufferAttachmentImageInfo extends Struct implements NativeRe
 
         /** Sets the specified value to the {@link VkFramebufferAttachmentImageInfo#sType} field. */
         public VkFramebufferAttachmentImageInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkFramebufferAttachmentImageInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO} value to the {@link VkFramebufferAttachmentImageInfo#sType} field. */
+        public VkFramebufferAttachmentImageInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO); }
         /** Sets the specified value to the {@link VkFramebufferAttachmentImageInfo#pNext} field. */
         public VkFramebufferAttachmentImageInfo.Buffer pNext(@NativeType("void const *") long value) { VkFramebufferAttachmentImageInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkFramebufferAttachmentImageInfo#flags} field. */

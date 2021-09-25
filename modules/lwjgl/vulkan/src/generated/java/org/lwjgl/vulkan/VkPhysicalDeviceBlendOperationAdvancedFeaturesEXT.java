@@ -91,6 +91,8 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTBlendOperationAdvanced#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT sType$Default() { return sType(EXTBlendOperationAdvanced.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #advancedBlendCoherentOperations} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT extends Struct im
 
         /** Sets the specified value to the {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT#sType} field. */
         public VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTBlendOperationAdvanced#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT} value to the {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer sType$Default() { return sType(EXTBlendOperationAdvanced.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT#advancedBlendCoherentOperations} field. */

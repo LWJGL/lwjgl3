@@ -126,6 +126,8 @@ public class VkGeometryAABBNV extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkGeometryAABBNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_GEOMETRY_AABB_NV STRUCTURE_TYPE_GEOMETRY_AABB_NV} value to the {@link #sType} field. */
+    public VkGeometryAABBNV sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_GEOMETRY_AABB_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkGeometryAABBNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #aabbData} field. */
@@ -385,6 +387,8 @@ public class VkGeometryAABBNV extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkGeometryAABBNV#sType} field. */
         public VkGeometryAABBNV.Buffer sType(@NativeType("VkStructureType") int value) { VkGeometryAABBNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_GEOMETRY_AABB_NV STRUCTURE_TYPE_GEOMETRY_AABB_NV} value to the {@link VkGeometryAABBNV#sType} field. */
+        public VkGeometryAABBNV.Buffer sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_GEOMETRY_AABB_NV); }
         /** Sets the specified value to the {@link VkGeometryAABBNV#pNext} field. */
         public VkGeometryAABBNV.Buffer pNext(@NativeType("void const *") long value) { VkGeometryAABBNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkGeometryAABBNV#aabbData} field. */

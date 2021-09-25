@@ -169,6 +169,8 @@ public class VkSubmitInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSubmitInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_SUBMIT_INFO STRUCTURE_TYPE_SUBMIT_INFO} value to the {@link #sType} field. */
+    public VkSubmitInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SUBMIT_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubmitInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #waitSemaphoreCount} field. */
@@ -487,6 +489,8 @@ public class VkSubmitInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkSubmitInfo#sType} field. */
         public VkSubmitInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSubmitInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_SUBMIT_INFO STRUCTURE_TYPE_SUBMIT_INFO} value to the {@link VkSubmitInfo#sType} field. */
+        public VkSubmitInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SUBMIT_INFO); }
         /** Sets the specified value to the {@link VkSubmitInfo#pNext} field. */
         public VkSubmitInfo.Buffer pNext(@NativeType("void const *") long value) { VkSubmitInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkSubmitInfo#waitSemaphoreCount} field. */

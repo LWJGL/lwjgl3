@@ -127,6 +127,8 @@ public class VkPhysicalDeviceDriverProperties extends Struct implements NativeRe
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceDriverProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceDriverProperties sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceDriverProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -353,6 +355,8 @@ public class VkPhysicalDeviceDriverProperties extends Struct implements NativeRe
 
         /** Sets the specified value to the {@link VkPhysicalDeviceDriverProperties#sType} field. */
         public VkPhysicalDeviceDriverProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDriverProperties.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES} value to the {@link VkPhysicalDeviceDriverProperties#sType} field. */
+        public VkPhysicalDeviceDriverProperties.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceDriverProperties#pNext} field. */
         public VkPhysicalDeviceDriverProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDriverProperties.npNext(address(), value); return this; }
 

@@ -107,6 +107,8 @@ public class VkDeviceGroupBindSparseInfo extends Struct implements NativeResourc
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceGroupBindSparseInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO} value to the {@link #sType} field. */
+    public VkDeviceGroupBindSparseInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceGroupBindSparseInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #resourceDeviceIndex} field. */
@@ -344,6 +346,8 @@ public class VkDeviceGroupBindSparseInfo extends Struct implements NativeResourc
 
         /** Sets the specified value to the {@link VkDeviceGroupBindSparseInfo#sType} field. */
         public VkDeviceGroupBindSparseInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupBindSparseInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO} value to the {@link VkDeviceGroupBindSparseInfo#sType} field. */
+        public VkDeviceGroupBindSparseInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO); }
         /** Sets the specified value to the {@link VkDeviceGroupBindSparseInfo#pNext} field. */
         public VkDeviceGroupBindSparseInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupBindSparseInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDeviceGroupBindSparseInfo#resourceDeviceIndex} field. */

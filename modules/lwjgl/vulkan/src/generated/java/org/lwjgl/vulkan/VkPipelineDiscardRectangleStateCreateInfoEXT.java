@@ -127,6 +127,8 @@ public class VkPipelineDiscardRectangleStateCreateInfoEXT extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineDiscardRectangleStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDiscardRectangles#VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkPipelineDiscardRectangleStateCreateInfoEXT sType$Default() { return sType(EXTDiscardRectangles.VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineDiscardRectangleStateCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -387,6 +389,8 @@ public class VkPipelineDiscardRectangleStateCreateInfoEXT extends Struct impleme
 
         /** Sets the specified value to the {@link VkPipelineDiscardRectangleStateCreateInfoEXT#sType} field. */
         public VkPipelineDiscardRectangleStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineDiscardRectangleStateCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDiscardRectangles#VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT} value to the {@link VkPipelineDiscardRectangleStateCreateInfoEXT#sType} field. */
+        public VkPipelineDiscardRectangleStateCreateInfoEXT.Buffer sType$Default() { return sType(EXTDiscardRectangles.VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkPipelineDiscardRectangleStateCreateInfoEXT#pNext} field. */
         public VkPipelineDiscardRectangleStateCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineDiscardRectangleStateCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineDiscardRectangleStateCreateInfoEXT#flags} field. */

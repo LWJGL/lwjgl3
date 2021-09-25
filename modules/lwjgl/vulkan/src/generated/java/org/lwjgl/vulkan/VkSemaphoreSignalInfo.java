@@ -109,6 +109,8 @@ public class VkSemaphoreSignalInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSemaphoreSignalInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO} value to the {@link #sType} field. */
+    public VkSemaphoreSignalInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSemaphoreSignalInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #semaphore} field. */
@@ -328,6 +330,8 @@ public class VkSemaphoreSignalInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkSemaphoreSignalInfo#sType} field. */
         public VkSemaphoreSignalInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSemaphoreSignalInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO} value to the {@link VkSemaphoreSignalInfo#sType} field. */
+        public VkSemaphoreSignalInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO); }
         /** Sets the specified value to the {@link VkSemaphoreSignalInfo#pNext} field. */
         public VkSemaphoreSignalInfo.Buffer pNext(@NativeType("void const *") long value) { VkSemaphoreSignalInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkSemaphoreSignalInfo#semaphore} field. */

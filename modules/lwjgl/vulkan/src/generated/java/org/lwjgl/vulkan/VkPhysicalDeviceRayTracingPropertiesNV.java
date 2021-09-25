@@ -142,6 +142,8 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceRayTracingPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceRayTracingPropertiesNV sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceRayTracingPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -397,6 +399,8 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct implements Na
 
         /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPropertiesNV#sType} field. */
         public VkPhysicalDeviceRayTracingPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRayTracingPropertiesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV} value to the {@link VkPhysicalDeviceRayTracingPropertiesNV#sType} field. */
+        public VkPhysicalDeviceRayTracingPropertiesNV.Buffer sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPropertiesNV#pNext} field. */
         public VkPhysicalDeviceRayTracingPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRayTracingPropertiesNV.npNext(address(), value); return this; }
 

@@ -150,6 +150,8 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineCoverageModulationStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVFramebufferMixedSamples#VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkPipelineCoverageModulationStateCreateInfoNV sType$Default() { return sType(NVFramebufferMixedSamples.VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineCoverageModulationStateCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -421,6 +423,8 @@ public class VkPipelineCoverageModulationStateCreateInfoNV extends Struct implem
 
         /** Sets the specified value to the {@link VkPipelineCoverageModulationStateCreateInfoNV#sType} field. */
         public VkPipelineCoverageModulationStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineCoverageModulationStateCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVFramebufferMixedSamples#VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV} value to the {@link VkPipelineCoverageModulationStateCreateInfoNV#sType} field. */
+        public VkPipelineCoverageModulationStateCreateInfoNV.Buffer sType$Default() { return sType(NVFramebufferMixedSamples.VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkPipelineCoverageModulationStateCreateInfoNV#pNext} field. */
         public VkPipelineCoverageModulationStateCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkPipelineCoverageModulationStateCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineCoverageModulationStateCreateInfoNV#flags} field. */

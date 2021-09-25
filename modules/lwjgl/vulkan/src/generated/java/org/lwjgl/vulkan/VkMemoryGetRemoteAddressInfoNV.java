@@ -107,6 +107,8 @@ public class VkMemoryGetRemoteAddressInfoNV extends Struct implements NativeReso
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryGetRemoteAddressInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVExternalMemoryRdma#VK_STRUCTURE_TYPE_MEMORY_GET_REMOTE_ADDRESS_INFO_NV STRUCTURE_TYPE_MEMORY_GET_REMOTE_ADDRESS_INFO_NV} value to the {@link #sType} field. */
+    public VkMemoryGetRemoteAddressInfoNV sType$Default() { return sType(NVExternalMemoryRdma.VK_STRUCTURE_TYPE_MEMORY_GET_REMOTE_ADDRESS_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryGetRemoteAddressInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #memory} field. */
@@ -326,6 +328,8 @@ public class VkMemoryGetRemoteAddressInfoNV extends Struct implements NativeReso
 
         /** Sets the specified value to the {@link VkMemoryGetRemoteAddressInfoNV#sType} field. */
         public VkMemoryGetRemoteAddressInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryGetRemoteAddressInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVExternalMemoryRdma#VK_STRUCTURE_TYPE_MEMORY_GET_REMOTE_ADDRESS_INFO_NV STRUCTURE_TYPE_MEMORY_GET_REMOTE_ADDRESS_INFO_NV} value to the {@link VkMemoryGetRemoteAddressInfoNV#sType} field. */
+        public VkMemoryGetRemoteAddressInfoNV.Buffer sType$Default() { return sType(NVExternalMemoryRdma.VK_STRUCTURE_TYPE_MEMORY_GET_REMOTE_ADDRESS_INFO_NV); }
         /** Sets the specified value to the {@link VkMemoryGetRemoteAddressInfoNV#pNext} field. */
         public VkMemoryGetRemoteAddressInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkMemoryGetRemoteAddressInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkMemoryGetRemoteAddressInfoNV#memory} field. */

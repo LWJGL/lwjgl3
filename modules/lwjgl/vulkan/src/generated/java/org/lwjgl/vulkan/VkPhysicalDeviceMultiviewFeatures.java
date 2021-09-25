@@ -112,6 +112,8 @@ public class VkPhysicalDeviceMultiviewFeatures extends Struct implements NativeR
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMultiviewFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceMultiviewFeatures sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMultiviewFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #multiview} field. */
@@ -360,6 +362,8 @@ public class VkPhysicalDeviceMultiviewFeatures extends Struct implements NativeR
 
         /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewFeatures#sType} field. */
         public VkPhysicalDeviceMultiviewFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMultiviewFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES} value to the {@link VkPhysicalDeviceMultiviewFeatures#sType} field. */
+        public VkPhysicalDeviceMultiviewFeatures.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewFeatures#pNext} field. */
         public VkPhysicalDeviceMultiviewFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMultiviewFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewFeatures#multiview} field. */

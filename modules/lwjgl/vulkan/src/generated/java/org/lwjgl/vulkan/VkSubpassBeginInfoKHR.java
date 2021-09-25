@@ -42,6 +42,8 @@ public class VkSubpassBeginInfoKHR extends VkSubpassBeginInfo {
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkSubpassBeginInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO STRUCTURE_TYPE_SUBPASS_BEGIN_INFO} value to the {@code sType} field. */
+    public VkSubpassBeginInfoKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkSubpassBeginInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -246,6 +248,8 @@ public class VkSubpassBeginInfoKHR extends VkSubpassBeginInfo {
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkSubpassBeginInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassBeginInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO STRUCTURE_TYPE_SUBPASS_BEGIN_INFO} value to the {@code sType} field. */
+        public VkSubpassBeginInfoKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkSubpassBeginInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkSubpassBeginInfoKHR.npNext(address(), value); return this; }

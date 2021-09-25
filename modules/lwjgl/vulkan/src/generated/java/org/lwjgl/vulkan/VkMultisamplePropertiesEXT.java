@@ -91,6 +91,8 @@ public class VkMultisamplePropertiesEXT extends Struct implements NativeResource
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMultisamplePropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTSampleLocations#VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkMultisamplePropertiesEXT sType$Default() { return sType(EXTSampleLocations.VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMultisamplePropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -310,6 +312,8 @@ public class VkMultisamplePropertiesEXT extends Struct implements NativeResource
 
         /** Sets the specified value to the {@link VkMultisamplePropertiesEXT#sType} field. */
         public VkMultisamplePropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkMultisamplePropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTSampleLocations#VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT} value to the {@link VkMultisamplePropertiesEXT#sType} field. */
+        public VkMultisamplePropertiesEXT.Buffer sType$Default() { return sType(EXTSampleLocations.VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkMultisamplePropertiesEXT#pNext} field. */
         public VkMultisamplePropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkMultisamplePropertiesEXT.npNext(address(), value); return this; }
 

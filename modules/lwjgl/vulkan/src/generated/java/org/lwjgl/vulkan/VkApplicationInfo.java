@@ -172,6 +172,8 @@ public class VkApplicationInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkApplicationInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_APPLICATION_INFO STRUCTURE_TYPE_APPLICATION_INFO} value to the {@link #sType} field. */
+    public VkApplicationInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_APPLICATION_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkApplicationInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified encoded string to the {@link #pApplicationName} field. */
@@ -462,6 +464,8 @@ public class VkApplicationInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkApplicationInfo#sType} field. */
         public VkApplicationInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkApplicationInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_APPLICATION_INFO STRUCTURE_TYPE_APPLICATION_INFO} value to the {@link VkApplicationInfo#sType} field. */
+        public VkApplicationInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_APPLICATION_INFO); }
         /** Sets the specified value to the {@link VkApplicationInfo#pNext} field. */
         public VkApplicationInfo.Buffer pNext(@NativeType("void const *") long value) { VkApplicationInfo.npNext(address(), value); return this; }
         /** Sets the address of the specified encoded string to the {@link VkApplicationInfo#pApplicationName} field. */

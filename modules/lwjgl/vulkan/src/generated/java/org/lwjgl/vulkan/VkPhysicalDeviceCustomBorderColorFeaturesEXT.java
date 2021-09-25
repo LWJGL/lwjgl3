@@ -105,6 +105,8 @@ public class VkPhysicalDeviceCustomBorderColorFeaturesEXT extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceCustomBorderColorFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTCustomBorderColor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceCustomBorderColorFeaturesEXT sType$Default() { return sType(EXTCustomBorderColor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceCustomBorderColorFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #customBorderColors} field. */
@@ -324,6 +326,8 @@ public class VkPhysicalDeviceCustomBorderColorFeaturesEXT extends Struct impleme
 
         /** Sets the specified value to the {@link VkPhysicalDeviceCustomBorderColorFeaturesEXT#sType} field. */
         public VkPhysicalDeviceCustomBorderColorFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCustomBorderColorFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTCustomBorderColor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT} value to the {@link VkPhysicalDeviceCustomBorderColorFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceCustomBorderColorFeaturesEXT.Buffer sType$Default() { return sType(EXTCustomBorderColor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceCustomBorderColorFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceCustomBorderColorFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCustomBorderColorFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceCustomBorderColorFeaturesEXT#customBorderColors} field. */

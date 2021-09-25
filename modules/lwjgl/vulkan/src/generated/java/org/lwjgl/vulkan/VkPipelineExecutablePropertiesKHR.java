@@ -125,6 +125,8 @@ public class VkPipelineExecutablePropertiesKHR extends Struct implements NativeR
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineExecutablePropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR} value to the {@link #sType} field. */
+    public VkPipelineExecutablePropertiesKHR sType$Default() { return sType(KHRPipelineExecutableProperties.VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineExecutablePropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -370,6 +372,8 @@ public class VkPipelineExecutablePropertiesKHR extends Struct implements NativeR
 
         /** Sets the specified value to the {@link VkPipelineExecutablePropertiesKHR#sType} field. */
         public VkPipelineExecutablePropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineExecutablePropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR} value to the {@link VkPipelineExecutablePropertiesKHR#sType} field. */
+        public VkPipelineExecutablePropertiesKHR.Buffer sType$Default() { return sType(KHRPipelineExecutableProperties.VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkPipelineExecutablePropertiesKHR#pNext} field. */
         public VkPipelineExecutablePropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPipelineExecutablePropertiesKHR.npNext(address(), value); return this; }
 

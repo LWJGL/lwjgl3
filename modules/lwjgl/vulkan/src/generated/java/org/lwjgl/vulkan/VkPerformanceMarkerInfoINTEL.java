@@ -92,6 +92,8 @@ public class VkPerformanceMarkerInfoINTEL extends Struct implements NativeResour
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPerformanceMarkerInfoINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL} value to the {@link #sType} field. */
+    public VkPerformanceMarkerInfoINTEL sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPerformanceMarkerInfoINTEL pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #marker} field. */
@@ -318,6 +320,8 @@ public class VkPerformanceMarkerInfoINTEL extends Struct implements NativeResour
 
         /** Sets the specified value to the {@link VkPerformanceMarkerInfoINTEL#sType} field. */
         public VkPerformanceMarkerInfoINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkPerformanceMarkerInfoINTEL.nsType(address(), value); return this; }
+        /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL} value to the {@link VkPerformanceMarkerInfoINTEL#sType} field. */
+        public VkPerformanceMarkerInfoINTEL.Buffer sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL); }
         /** Sets the specified value to the {@link VkPerformanceMarkerInfoINTEL#pNext} field. */
         public VkPerformanceMarkerInfoINTEL.Buffer pNext(@NativeType("void const *") long value) { VkPerformanceMarkerInfoINTEL.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPerformanceMarkerInfoINTEL#marker} field. */

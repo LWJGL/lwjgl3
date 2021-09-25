@@ -105,6 +105,8 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureGeometryAabbsDataKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR} value to the {@link #sType} field. */
+    public VkAccelerationStructureGeometryAabbsDataKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureGeometryAabbsDataKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #data} field. */
@@ -325,6 +327,8 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
 
         /** Sets the specified value to the {@link VkAccelerationStructureGeometryAabbsDataKHR#sType} field. */
         public VkAccelerationStructureGeometryAabbsDataKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureGeometryAabbsDataKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR} value to the {@link VkAccelerationStructureGeometryAabbsDataKHR#sType} field. */
+        public VkAccelerationStructureGeometryAabbsDataKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR); }
         /** Sets the specified value to the {@link VkAccelerationStructureGeometryAabbsDataKHR#pNext} field. */
         public VkAccelerationStructureGeometryAabbsDataKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureGeometryAabbsDataKHR.npNext(address(), value); return this; }
         /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkAccelerationStructureGeometryAabbsDataKHR#data} field. */

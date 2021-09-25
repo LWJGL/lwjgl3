@@ -147,6 +147,8 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV extends Struct 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -389,6 +391,8 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV extends Struct 
 
         /** Sets the specified value to the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV#sType} field. */
         public VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV} value to the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV#sType} field. */
+        public VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.Buffer sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV#pNext} field. */
         public VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.npNext(address(), value); return this; }
 

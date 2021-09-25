@@ -98,6 +98,8 @@ public class VkPhysicalDeviceProvokingVertexPropertiesEXT extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceProvokingVertexPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTProvokingVertex#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceProvokingVertexPropertiesEXT sType$Default() { return sType(EXTProvokingVertex.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceProvokingVertexPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -305,6 +307,8 @@ public class VkPhysicalDeviceProvokingVertexPropertiesEXT extends Struct impleme
 
         /** Sets the specified value to the {@link VkPhysicalDeviceProvokingVertexPropertiesEXT#sType} field. */
         public VkPhysicalDeviceProvokingVertexPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceProvokingVertexPropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTProvokingVertex#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceProvokingVertexPropertiesEXT#sType} field. */
+        public VkPhysicalDeviceProvokingVertexPropertiesEXT.Buffer sType$Default() { return sType(EXTProvokingVertex.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceProvokingVertexPropertiesEXT#pNext} field. */
         public VkPhysicalDeviceProvokingVertexPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceProvokingVertexPropertiesEXT.npNext(address(), value); return this; }
 

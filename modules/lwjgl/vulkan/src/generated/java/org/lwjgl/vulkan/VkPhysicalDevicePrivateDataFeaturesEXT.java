@@ -91,6 +91,8 @@ public class VkPhysicalDevicePrivateDataFeaturesEXT extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePrivateDataFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTPrivateData#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDevicePrivateDataFeaturesEXT sType$Default() { return sType(EXTPrivateData.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePrivateDataFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #privateData} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDevicePrivateDataFeaturesEXT extends Struct implements Na
 
         /** Sets the specified value to the {@link VkPhysicalDevicePrivateDataFeaturesEXT#sType} field. */
         public VkPhysicalDevicePrivateDataFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePrivateDataFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTPrivateData#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT} value to the {@link VkPhysicalDevicePrivateDataFeaturesEXT#sType} field. */
+        public VkPhysicalDevicePrivateDataFeaturesEXT.Buffer sType$Default() { return sType(EXTPrivateData.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDevicePrivateDataFeaturesEXT#pNext} field. */
         public VkPhysicalDevicePrivateDataFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePrivateDataFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDevicePrivateDataFeaturesEXT#privateData} field. */

@@ -48,6 +48,8 @@ public class VkDeviceGroupSubmitInfoKHR extends VkDeviceGroupSubmitInfo {
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkDeviceGroupSubmitInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO} value to the {@code sType} field. */
+    public VkDeviceGroupSubmitInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkDeviceGroupSubmitInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -262,6 +264,8 @@ public class VkDeviceGroupSubmitInfoKHR extends VkDeviceGroupSubmitInfo {
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkDeviceGroupSubmitInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupSubmitInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO} value to the {@code sType} field. */
+        public VkDeviceGroupSubmitInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkDeviceGroupSubmitInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupSubmitInfoKHR.npNext(address(), value); return this; }

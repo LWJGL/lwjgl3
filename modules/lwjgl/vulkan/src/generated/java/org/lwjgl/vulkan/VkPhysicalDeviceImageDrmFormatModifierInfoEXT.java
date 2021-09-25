@@ -122,6 +122,8 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceImageDrmFormatModifierInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceImageDrmFormatModifierInfoEXT sType$Default() { return sType(EXTImageDrmFormatModifier.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceImageDrmFormatModifierInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #drmFormatModifier} field. */
@@ -382,6 +384,8 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
 
         /** Sets the specified value to the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#sType} field. */
         public VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceImageDrmFormatModifierInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT} value to the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#sType} field. */
+        public VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer sType$Default() { return sType(EXTImageDrmFormatModifier.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#pNext} field. */
         public VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceImageDrmFormatModifierInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#drmFormatModifier} field. */

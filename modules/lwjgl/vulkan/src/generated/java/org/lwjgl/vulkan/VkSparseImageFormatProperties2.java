@@ -91,6 +91,8 @@ public class VkSparseImageFormatProperties2 extends Struct implements NativeReso
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSparseImageFormatProperties2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2} value to the {@link #sType} field. */
+    public VkSparseImageFormatProperties2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSparseImageFormatProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -310,6 +312,8 @@ public class VkSparseImageFormatProperties2 extends Struct implements NativeReso
 
         /** Sets the specified value to the {@link VkSparseImageFormatProperties2#sType} field. */
         public VkSparseImageFormatProperties2.Buffer sType(@NativeType("VkStructureType") int value) { VkSparseImageFormatProperties2.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2} value to the {@link VkSparseImageFormatProperties2#sType} field. */
+        public VkSparseImageFormatProperties2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2); }
         /** Sets the specified value to the {@link VkSparseImageFormatProperties2#pNext} field. */
         public VkSparseImageFormatProperties2.Buffer pNext(@NativeType("void *") long value) { VkSparseImageFormatProperties2.npNext(address(), value); return this; }
 

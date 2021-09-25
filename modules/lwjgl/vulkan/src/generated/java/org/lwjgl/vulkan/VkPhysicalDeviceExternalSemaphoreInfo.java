@@ -94,6 +94,8 @@ public class VkPhysicalDeviceExternalSemaphoreInfo extends Struct implements Nat
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceExternalSemaphoreInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO} value to the {@link #sType} field. */
+    public VkPhysicalDeviceExternalSemaphoreInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceExternalSemaphoreInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #handleType} field. */
@@ -320,6 +322,8 @@ public class VkPhysicalDeviceExternalSemaphoreInfo extends Struct implements Nat
 
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalSemaphoreInfo#sType} field. */
         public VkPhysicalDeviceExternalSemaphoreInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExternalSemaphoreInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO} value to the {@link VkPhysicalDeviceExternalSemaphoreInfo#sType} field. */
+        public VkPhysicalDeviceExternalSemaphoreInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO); }
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalSemaphoreInfo#pNext} field. */
         public VkPhysicalDeviceExternalSemaphoreInfo.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceExternalSemaphoreInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalSemaphoreInfo#handleType} field. */

@@ -166,6 +166,8 @@ public class VkPipelineShaderStageCreateInfo extends Struct implements NativeRes
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineShaderStageCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkPipelineShaderStageCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineShaderStageCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -470,6 +472,8 @@ public class VkPipelineShaderStageCreateInfo extends Struct implements NativeRes
 
         /** Sets the specified value to the {@link VkPipelineShaderStageCreateInfo#sType} field. */
         public VkPipelineShaderStageCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineShaderStageCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO} value to the {@link VkPipelineShaderStageCreateInfo#sType} field. */
+        public VkPipelineShaderStageCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineShaderStageCreateInfo#pNext} field. */
         public VkPipelineShaderStageCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineShaderStageCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineShaderStageCreateInfo#flags} field. */

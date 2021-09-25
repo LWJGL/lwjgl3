@@ -42,6 +42,8 @@ public class VkExternalImageFormatPropertiesKHR extends VkExternalImageFormatPro
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkExternalImageFormatPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES} value to the {@code sType} field. */
+    public VkExternalImageFormatPropertiesKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkExternalImageFormatPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -241,6 +243,8 @@ public class VkExternalImageFormatPropertiesKHR extends VkExternalImageFormatPro
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkExternalImageFormatPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalImageFormatPropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES} value to the {@code sType} field. */
+        public VkExternalImageFormatPropertiesKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkExternalImageFormatPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkExternalImageFormatPropertiesKHR.npNext(address(), value); return this; }

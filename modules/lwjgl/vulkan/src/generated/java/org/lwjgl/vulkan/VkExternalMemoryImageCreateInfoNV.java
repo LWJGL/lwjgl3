@@ -88,6 +88,8 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkExternalMemoryImageCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVExternalMemory#VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkExternalMemoryImageCreateInfoNV sType$Default() { return sType(NVExternalMemory.VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkExternalMemoryImageCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #handleTypes} field. */
@@ -314,6 +316,8 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
 
         /** Sets the specified value to the {@link VkExternalMemoryImageCreateInfoNV#sType} field. */
         public VkExternalMemoryImageCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalMemoryImageCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVExternalMemory#VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV} value to the {@link VkExternalMemoryImageCreateInfoNV#sType} field. */
+        public VkExternalMemoryImageCreateInfoNV.Buffer sType$Default() { return sType(NVExternalMemory.VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkExternalMemoryImageCreateInfoNV#pNext} field. */
         public VkExternalMemoryImageCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkExternalMemoryImageCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkExternalMemoryImageCreateInfoNV#handleTypes} field. */

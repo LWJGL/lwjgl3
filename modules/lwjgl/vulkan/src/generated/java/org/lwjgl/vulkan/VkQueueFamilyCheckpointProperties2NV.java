@@ -91,6 +91,8 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkQueueFamilyCheckpointProperties2NV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV} value to the {@link #sType} field. */
+    public VkQueueFamilyCheckpointProperties2NV sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueueFamilyCheckpointProperties2NV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -293,6 +295,8 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
 
         /** Sets the specified value to the {@link VkQueueFamilyCheckpointProperties2NV#sType} field. */
         public VkQueueFamilyCheckpointProperties2NV.Buffer sType(@NativeType("VkStructureType") int value) { VkQueueFamilyCheckpointProperties2NV.nsType(address(), value); return this; }
+        /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV} value to the {@link VkQueueFamilyCheckpointProperties2NV#sType} field. */
+        public VkQueueFamilyCheckpointProperties2NV.Buffer sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV); }
         /** Sets the specified value to the {@link VkQueueFamilyCheckpointProperties2NV#pNext} field. */
         public VkQueueFamilyCheckpointProperties2NV.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyCheckpointProperties2NV.npNext(address(), value); return this; }
 

@@ -105,6 +105,8 @@ public class VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV extends Struct i
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVFragmentShadingRateEnums#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV sType$Default() { return sType(NVFragmentShadingRateEnums.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #fragmentShadingRateEnums} field. */
@@ -335,6 +337,8 @@ public class VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV extends Struct i
 
         /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV#sType} field. */
         public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVFragmentShadingRateEnums#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV} value to the {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV#sType} field. */
+        public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer sType$Default() { return sType(NVFragmentShadingRateEnums.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV#pNext} field. */
         public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV#fragmentShadingRateEnums} field. */

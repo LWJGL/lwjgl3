@@ -100,6 +100,8 @@ public class VkPhysicalDeviceExternalFenceInfo extends Struct implements NativeR
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceExternalFenceInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO} value to the {@link #sType} field. */
+    public VkPhysicalDeviceExternalFenceInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceExternalFenceInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #handleType} field. */
@@ -326,6 +328,8 @@ public class VkPhysicalDeviceExternalFenceInfo extends Struct implements NativeR
 
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalFenceInfo#sType} field. */
         public VkPhysicalDeviceExternalFenceInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExternalFenceInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO} value to the {@link VkPhysicalDeviceExternalFenceInfo#sType} field. */
+        public VkPhysicalDeviceExternalFenceInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO); }
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalFenceInfo#pNext} field. */
         public VkPhysicalDeviceExternalFenceInfo.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceExternalFenceInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalFenceInfo#handleType} field. */

@@ -209,6 +209,8 @@ public class VkGeneratedCommandsInfoNV extends Struct implements NativeResource 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkGeneratedCommandsInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV} value to the {@link #sType} field. */
+    public VkGeneratedCommandsInfoNV sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkGeneratedCommandsInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #pipelineBindPoint} field. */
@@ -566,6 +568,8 @@ public class VkGeneratedCommandsInfoNV extends Struct implements NativeResource 
 
         /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#sType} field. */
         public VkGeneratedCommandsInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkGeneratedCommandsInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV} value to the {@link VkGeneratedCommandsInfoNV#sType} field. */
+        public VkGeneratedCommandsInfoNV.Buffer sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV); }
         /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#pNext} field. */
         public VkGeneratedCommandsInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkGeneratedCommandsInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkGeneratedCommandsInfoNV#pipelineBindPoint} field. */

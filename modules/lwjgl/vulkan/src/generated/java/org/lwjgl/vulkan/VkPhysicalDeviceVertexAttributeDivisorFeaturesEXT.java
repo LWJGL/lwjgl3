@@ -98,6 +98,8 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTVertexAttributeDivisor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT sType$Default() { return sType(EXTVertexAttributeDivisor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #vertexAttributeInstanceRateDivisor} field. */
@@ -335,6 +337,8 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
 
         /** Sets the specified value to the {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#sType} field. */
         public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTVertexAttributeDivisor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT} value to the {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer sType$Default() { return sType(EXTVertexAttributeDivisor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#vertexAttributeInstanceRateDivisor} field. */

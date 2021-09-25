@@ -100,6 +100,8 @@ public class VkDisplayModeCreateInfoKHR extends Struct implements NativeResource
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDisplayModeCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRDisplay#VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    public VkDisplayModeCreateInfoKHR sType$Default() { return sType(KHRDisplay.VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDisplayModeCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -338,6 +340,8 @@ public class VkDisplayModeCreateInfoKHR extends Struct implements NativeResource
 
         /** Sets the specified value to the {@link VkDisplayModeCreateInfoKHR#sType} field. */
         public VkDisplayModeCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplayModeCreateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRDisplay#VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR} value to the {@link VkDisplayModeCreateInfoKHR#sType} field. */
+        public VkDisplayModeCreateInfoKHR.Buffer sType$Default() { return sType(KHRDisplay.VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkDisplayModeCreateInfoKHR#pNext} field. */
         public VkDisplayModeCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDisplayModeCreateInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDisplayModeCreateInfoKHR#flags} field. */

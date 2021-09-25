@@ -152,6 +152,8 @@ public class VkComputePipelineCreateInfo extends Struct implements NativeResourc
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkComputePipelineCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkComputePipelineCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkComputePipelineCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -444,6 +446,8 @@ public class VkComputePipelineCreateInfo extends Struct implements NativeResourc
 
         /** Sets the specified value to the {@link VkComputePipelineCreateInfo#sType} field. */
         public VkComputePipelineCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkComputePipelineCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO} value to the {@link VkComputePipelineCreateInfo#sType} field. */
+        public VkComputePipelineCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkComputePipelineCreateInfo#pNext} field. */
         public VkComputePipelineCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkComputePipelineCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkComputePipelineCreateInfo#flags} field. */

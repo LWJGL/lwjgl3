@@ -42,6 +42,8 @@ public class VkAttachmentReferenceStencilLayoutKHR extends VkAttachmentReference
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkAttachmentReferenceStencilLayoutKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT} value to the {@code sType} field. */
+    public VkAttachmentReferenceStencilLayoutKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkAttachmentReferenceStencilLayoutKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -228,6 +230,8 @@ public class VkAttachmentReferenceStencilLayoutKHR extends VkAttachmentReference
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkAttachmentReferenceStencilLayoutKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAttachmentReferenceStencilLayoutKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT} value to the {@code sType} field. */
+        public VkAttachmentReferenceStencilLayoutKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkAttachmentReferenceStencilLayoutKHR.Buffer pNext(@NativeType("void *") long value) { VkAttachmentReferenceStencilLayoutKHR.npNext(address(), value); return this; }

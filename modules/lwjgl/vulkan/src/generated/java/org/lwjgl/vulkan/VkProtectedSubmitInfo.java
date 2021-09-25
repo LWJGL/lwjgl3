@@ -93,6 +93,8 @@ public class VkProtectedSubmitInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@code sType} field. */
     public VkProtectedSubmitInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO} value to the {@code sType} field. */
+    public VkProtectedSubmitInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkProtectedSubmitInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #protectedSubmit} field. */
@@ -319,6 +321,8 @@ public class VkProtectedSubmitInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@code sType} field. */
         public VkProtectedSubmitInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkProtectedSubmitInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO} value to the {@code sType} field. */
+        public VkProtectedSubmitInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkProtectedSubmitInfo.Buffer pNext(@NativeType("void const *") long value) { VkProtectedSubmitInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkProtectedSubmitInfo#protectedSubmit} field. */

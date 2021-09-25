@@ -200,6 +200,8 @@ public class VkImageMemoryBarrier extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImageMemoryBarrier sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER} value to the {@link #sType} field. */
+    public VkImageMemoryBarrier sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageMemoryBarrier pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #srcAccessMask} field. */
@@ -504,6 +506,8 @@ public class VkImageMemoryBarrier extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkImageMemoryBarrier#sType} field. */
         public VkImageMemoryBarrier.Buffer sType(@NativeType("VkStructureType") int value) { VkImageMemoryBarrier.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER} value to the {@link VkImageMemoryBarrier#sType} field. */
+        public VkImageMemoryBarrier.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER); }
         /** Sets the specified value to the {@link VkImageMemoryBarrier#pNext} field. */
         public VkImageMemoryBarrier.Buffer pNext(@NativeType("void const *") long value) { VkImageMemoryBarrier.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageMemoryBarrier#srcAccessMask} field. */

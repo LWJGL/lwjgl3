@@ -189,6 +189,8 @@ public class VkPhysicalDevicePortabilitySubsetFeaturesKHR extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRPortabilitySubset#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDevicePortabilitySubsetFeaturesKHR sType$Default() { return sType(KHRPortabilitySubset.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePortabilitySubsetFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #constantAlphaColorBlendFactors} field. */
@@ -551,6 +553,8 @@ public class VkPhysicalDevicePortabilitySubsetFeaturesKHR extends Struct impleme
 
         /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#sType} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRPortabilitySubset#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR} value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#sType} field. */
+        public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer sType$Default() { return sType(KHRPortabilitySubset.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#pNext} field. */
         public VkPhysicalDevicePortabilitySubsetFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePortabilitySubsetFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR#constantAlphaColorBlendFactors} field. */

@@ -100,6 +100,8 @@ public class VkDeviceGroupCommandBufferBeginInfo extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceGroupCommandBufferBeginInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO} value to the {@link #sType} field. */
+    public VkDeviceGroupCommandBufferBeginInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceGroupCommandBufferBeginInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #deviceMask} field. */
@@ -326,6 +328,8 @@ public class VkDeviceGroupCommandBufferBeginInfo extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkDeviceGroupCommandBufferBeginInfo#sType} field. */
         public VkDeviceGroupCommandBufferBeginInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupCommandBufferBeginInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO} value to the {@link VkDeviceGroupCommandBufferBeginInfo#sType} field. */
+        public VkDeviceGroupCommandBufferBeginInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO); }
         /** Sets the specified value to the {@link VkDeviceGroupCommandBufferBeginInfo#pNext} field. */
         public VkDeviceGroupCommandBufferBeginInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupCommandBufferBeginInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDeviceGroupCommandBufferBeginInfo#deviceMask} field. */

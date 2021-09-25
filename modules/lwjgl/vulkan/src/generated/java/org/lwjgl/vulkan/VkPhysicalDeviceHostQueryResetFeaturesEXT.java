@@ -42,6 +42,8 @@ public class VkPhysicalDeviceHostQueryResetFeaturesEXT extends VkPhysicalDeviceH
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPhysicalDeviceHostQueryResetFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES} value to the {@code sType} field. */
+    public VkPhysicalDeviceHostQueryResetFeaturesEXT sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPhysicalDeviceHostQueryResetFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -246,6 +248,8 @@ public class VkPhysicalDeviceHostQueryResetFeaturesEXT extends VkPhysicalDeviceH
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPhysicalDeviceHostQueryResetFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceHostQueryResetFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES} value to the {@code sType} field. */
+        public VkPhysicalDeviceHostQueryResetFeaturesEXT.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPhysicalDeviceHostQueryResetFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceHostQueryResetFeaturesEXT.npNext(address(), value); return this; }

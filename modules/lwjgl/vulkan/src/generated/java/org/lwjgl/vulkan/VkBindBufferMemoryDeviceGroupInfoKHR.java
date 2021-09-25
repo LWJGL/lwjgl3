@@ -44,6 +44,8 @@ public class VkBindBufferMemoryDeviceGroupInfoKHR extends VkBindBufferMemoryDevi
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkBindBufferMemoryDeviceGroupInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO} value to the {@code sType} field. */
+    public VkBindBufferMemoryDeviceGroupInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkBindBufferMemoryDeviceGroupInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -248,6 +250,8 @@ public class VkBindBufferMemoryDeviceGroupInfoKHR extends VkBindBufferMemoryDevi
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkBindBufferMemoryDeviceGroupInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBindBufferMemoryDeviceGroupInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO} value to the {@code sType} field. */
+        public VkBindBufferMemoryDeviceGroupInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkBindBufferMemoryDeviceGroupInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkBindBufferMemoryDeviceGroupInfoKHR.npNext(address(), value); return this; }

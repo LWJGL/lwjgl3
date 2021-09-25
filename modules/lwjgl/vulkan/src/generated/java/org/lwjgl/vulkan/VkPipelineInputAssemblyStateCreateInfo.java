@@ -122,6 +122,8 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineInputAssemblyStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkPipelineInputAssemblyStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineInputAssemblyStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -370,6 +372,8 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct implements Na
 
         /** Sets the specified value to the {@link VkPipelineInputAssemblyStateCreateInfo#sType} field. */
         public VkPipelineInputAssemblyStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineInputAssemblyStateCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO} value to the {@link VkPipelineInputAssemblyStateCreateInfo#sType} field. */
+        public VkPipelineInputAssemblyStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineInputAssemblyStateCreateInfo#pNext} field. */
         public VkPipelineInputAssemblyStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineInputAssemblyStateCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineInputAssemblyStateCreateInfo#flags} field. */

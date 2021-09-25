@@ -201,6 +201,8 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct implements NativeRes
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkIndirectCommandsLayoutTokenNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV} value to the {@link #sType} field. */
+    public VkIndirectCommandsLayoutTokenNV sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkIndirectCommandsLayoutTokenNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #tokenType} field. */
@@ -567,6 +569,8 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct implements NativeRes
 
         /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#sType} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer sType(@NativeType("VkStructureType") int value) { VkIndirectCommandsLayoutTokenNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV} value to the {@link VkIndirectCommandsLayoutTokenNV#sType} field. */
+        public VkIndirectCommandsLayoutTokenNV.Buffer sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV); }
         /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#pNext} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer pNext(@NativeType("void const *") long value) { VkIndirectCommandsLayoutTokenNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#tokenType} field. */

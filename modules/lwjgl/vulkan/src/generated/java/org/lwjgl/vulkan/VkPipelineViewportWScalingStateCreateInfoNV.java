@@ -107,6 +107,8 @@ public class VkPipelineViewportWScalingStateCreateInfoNV extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineViewportWScalingStateCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVClipSpaceWScaling#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkPipelineViewportWScalingStateCreateInfoNV sType$Default() { return sType(NVClipSpaceWScaling.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineViewportWScalingStateCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #viewportWScalingEnable} field. */
@@ -356,6 +358,8 @@ public class VkPipelineViewportWScalingStateCreateInfoNV extends Struct implemen
 
         /** Sets the specified value to the {@link VkPipelineViewportWScalingStateCreateInfoNV#sType} field. */
         public VkPipelineViewportWScalingStateCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineViewportWScalingStateCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVClipSpaceWScaling#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV} value to the {@link VkPipelineViewportWScalingStateCreateInfoNV#sType} field. */
+        public VkPipelineViewportWScalingStateCreateInfoNV.Buffer sType$Default() { return sType(NVClipSpaceWScaling.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkPipelineViewportWScalingStateCreateInfoNV#pNext} field. */
         public VkPipelineViewportWScalingStateCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkPipelineViewportWScalingStateCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineViewportWScalingStateCreateInfoNV#viewportWScalingEnable} field. */

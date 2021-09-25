@@ -42,6 +42,8 @@ public class VkMemoryOpaqueCaptureAddressAllocateInfoKHR extends VkMemoryOpaqueC
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkMemoryOpaqueCaptureAddressAllocateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO} value to the {@code sType} field. */
+    public VkMemoryOpaqueCaptureAddressAllocateInfoKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkMemoryOpaqueCaptureAddressAllocateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -228,6 +230,8 @@ public class VkMemoryOpaqueCaptureAddressAllocateInfoKHR extends VkMemoryOpaqueC
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkMemoryOpaqueCaptureAddressAllocateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryOpaqueCaptureAddressAllocateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO} value to the {@code sType} field. */
+        public VkMemoryOpaqueCaptureAddressAllocateInfoKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkMemoryOpaqueCaptureAddressAllocateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkMemoryOpaqueCaptureAddressAllocateInfoKHR.npNext(address(), value); return this; }

@@ -105,6 +105,8 @@ public class VkWriteDescriptorSetAccelerationStructureNV extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkWriteDescriptorSetAccelerationStructureNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV} value to the {@link #sType} field. */
+    public VkWriteDescriptorSetAccelerationStructureNV sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkWriteDescriptorSetAccelerationStructureNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #accelerationStructureCount} field. */
@@ -343,6 +345,8 @@ public class VkWriteDescriptorSetAccelerationStructureNV extends Struct implemen
 
         /** Sets the specified value to the {@link VkWriteDescriptorSetAccelerationStructureNV#sType} field. */
         public VkWriteDescriptorSetAccelerationStructureNV.Buffer sType(@NativeType("VkStructureType") int value) { VkWriteDescriptorSetAccelerationStructureNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV} value to the {@link VkWriteDescriptorSetAccelerationStructureNV#sType} field. */
+        public VkWriteDescriptorSetAccelerationStructureNV.Buffer sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV); }
         /** Sets the specified value to the {@link VkWriteDescriptorSetAccelerationStructureNV#pNext} field. */
         public VkWriteDescriptorSetAccelerationStructureNV.Buffer pNext(@NativeType("void const *") long value) { VkWriteDescriptorSetAccelerationStructureNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkWriteDescriptorSetAccelerationStructureNV#accelerationStructureCount} field. */

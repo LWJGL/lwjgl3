@@ -129,6 +129,8 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSampleLocationsInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTSampleLocations#VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT} value to the {@link #sType} field. */
+    public VkSampleLocationsInfoEXT sType$Default() { return sType(EXTSampleLocations.VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSampleLocationsInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #sampleLocationsPerPixel} field. */
@@ -409,6 +411,8 @@ public class VkSampleLocationsInfoEXT extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkSampleLocationsInfoEXT#sType} field. */
         public VkSampleLocationsInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSampleLocationsInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTSampleLocations#VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT} value to the {@link VkSampleLocationsInfoEXT#sType} field. */
+        public VkSampleLocationsInfoEXT.Buffer sType$Default() { return sType(EXTSampleLocations.VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT); }
         /** Sets the specified value to the {@link VkSampleLocationsInfoEXT#pNext} field. */
         public VkSampleLocationsInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSampleLocationsInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkSampleLocationsInfoEXT#sampleLocationsPerPixel} field. */

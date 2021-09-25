@@ -92,6 +92,8 @@ public class VkQueueFamilyProperties2 extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkQueueFamilyProperties2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2 STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2} value to the {@link #sType} field. */
+    public VkQueueFamilyProperties2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueueFamilyProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -311,6 +313,8 @@ public class VkQueueFamilyProperties2 extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkQueueFamilyProperties2#sType} field. */
         public VkQueueFamilyProperties2.Buffer sType(@NativeType("VkStructureType") int value) { VkQueueFamilyProperties2.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2 STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2} value to the {@link VkQueueFamilyProperties2#sType} field. */
+        public VkQueueFamilyProperties2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2); }
         /** Sets the specified value to the {@link VkQueueFamilyProperties2#pNext} field. */
         public VkQueueFamilyProperties2.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyProperties2.npNext(address(), value); return this; }
 

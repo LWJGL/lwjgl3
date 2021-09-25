@@ -100,6 +100,8 @@ public class VkSubpassShadingPipelineCreateInfoHUAWEI extends Struct implements 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSubpassShadingPipelineCreateInfoHUAWEI sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI} value to the {@link #sType} field. */
+    public VkSubpassShadingPipelineCreateInfoHUAWEI sType$Default() { return sType(HUAWEISubpassShading.VK_STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubpassShadingPipelineCreateInfoHUAWEI pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -307,6 +309,8 @@ public class VkSubpassShadingPipelineCreateInfoHUAWEI extends Struct implements 
 
         /** Sets the specified value to the {@link VkSubpassShadingPipelineCreateInfoHUAWEI#sType} field. */
         public VkSubpassShadingPipelineCreateInfoHUAWEI.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassShadingPipelineCreateInfoHUAWEI.nsType(address(), value); return this; }
+        /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI} value to the {@link VkSubpassShadingPipelineCreateInfoHUAWEI#sType} field. */
+        public VkSubpassShadingPipelineCreateInfoHUAWEI.Buffer sType$Default() { return sType(HUAWEISubpassShading.VK_STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI); }
         /** Sets the specified value to the {@link VkSubpassShadingPipelineCreateInfoHUAWEI#pNext} field. */
         public VkSubpassShadingPipelineCreateInfoHUAWEI.Buffer pNext(@NativeType("void *") long value) { VkSubpassShadingPipelineCreateInfoHUAWEI.npNext(address(), value); return this; }
 

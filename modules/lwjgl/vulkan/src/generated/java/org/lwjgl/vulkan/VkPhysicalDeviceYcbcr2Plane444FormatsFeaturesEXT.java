@@ -100,6 +100,8 @@ public class VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT extends Struct imp
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTYcbcr2plane444Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT sType$Default() { return sType(EXTYcbcr2plane444Formats.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #ycbcr2plane444Formats} field. */
@@ -308,6 +310,8 @@ public class VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT extends Struct imp
 
         /** Sets the specified value to the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT#sType} field. */
         public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTYcbcr2plane444Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT} value to the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.Buffer sType$Default() { return sType(EXTYcbcr2plane444Formats.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT#ycbcr2plane444Formats} field. */

@@ -184,6 +184,8 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureBuildGeometryInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR} value to the {@link #sType} field. */
+    public VkAccelerationStructureBuildGeometryInfoKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureBuildGeometryInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #type} field. */
@@ -483,6 +485,8 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct implemen
 
         /** Sets the specified value to the {@link VkAccelerationStructureBuildGeometryInfoKHR#sType} field. */
         public VkAccelerationStructureBuildGeometryInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureBuildGeometryInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR} value to the {@link VkAccelerationStructureBuildGeometryInfoKHR#sType} field. */
+        public VkAccelerationStructureBuildGeometryInfoKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR); }
         /** Sets the specified value to the {@link VkAccelerationStructureBuildGeometryInfoKHR#pNext} field. */
         public VkAccelerationStructureBuildGeometryInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureBuildGeometryInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkAccelerationStructureBuildGeometryInfoKHR#type} field. */

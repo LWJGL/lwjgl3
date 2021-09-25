@@ -44,6 +44,8 @@ public class VkRenderPassAttachmentBeginInfoKHR extends VkRenderPassAttachmentBe
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkRenderPassAttachmentBeginInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO} value to the {@code sType} field. */
+    public VkRenderPassAttachmentBeginInfoKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkRenderPassAttachmentBeginInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
@@ -248,6 +250,8 @@ public class VkRenderPassAttachmentBeginInfoKHR extends VkRenderPassAttachmentBe
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkRenderPassAttachmentBeginInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassAttachmentBeginInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO} value to the {@code sType} field. */
+        public VkRenderPassAttachmentBeginInfoKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkRenderPassAttachmentBeginInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassAttachmentBeginInfoKHR.npNext(address(), value); return this; }

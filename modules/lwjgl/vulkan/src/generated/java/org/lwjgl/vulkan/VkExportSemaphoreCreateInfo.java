@@ -94,6 +94,8 @@ public class VkExportSemaphoreCreateInfo extends Struct implements NativeResourc
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkExportSemaphoreCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkExportSemaphoreCreateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkExportSemaphoreCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #handleTypes} field. */
@@ -320,6 +322,8 @@ public class VkExportSemaphoreCreateInfo extends Struct implements NativeResourc
 
         /** Sets the specified value to the {@link VkExportSemaphoreCreateInfo#sType} field. */
         public VkExportSemaphoreCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkExportSemaphoreCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO} value to the {@link VkExportSemaphoreCreateInfo#sType} field. */
+        public VkExportSemaphoreCreateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkExportSemaphoreCreateInfo#pNext} field. */
         public VkExportSemaphoreCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkExportSemaphoreCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkExportSemaphoreCreateInfo#handleTypes} field. */

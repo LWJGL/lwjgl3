@@ -87,6 +87,8 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct implements NativeR
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSurfaceProtectedCapabilitiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRSurfaceProtectedCapabilities#VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR} value to the {@link #sType} field. */
+    public VkSurfaceProtectedCapabilitiesKHR sType$Default() { return sType(KHRSurfaceProtectedCapabilities.VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSurfaceProtectedCapabilitiesKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #supportsProtected} field. */
@@ -313,6 +315,8 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct implements NativeR
 
         /** Sets the specified value to the {@link VkSurfaceProtectedCapabilitiesKHR#sType} field. */
         public VkSurfaceProtectedCapabilitiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfaceProtectedCapabilitiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRSurfaceProtectedCapabilities#VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR} value to the {@link VkSurfaceProtectedCapabilitiesKHR#sType} field. */
+        public VkSurfaceProtectedCapabilitiesKHR.Buffer sType$Default() { return sType(KHRSurfaceProtectedCapabilities.VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR); }
         /** Sets the specified value to the {@link VkSurfaceProtectedCapabilitiesKHR#pNext} field. */
         public VkSurfaceProtectedCapabilitiesKHR.Buffer pNext(@NativeType("void const *") long value) { VkSurfaceProtectedCapabilitiesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkSurfaceProtectedCapabilitiesKHR#supportsProtected} field. */

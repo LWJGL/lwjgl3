@@ -105,6 +105,8 @@ public class VkMutableDescriptorTypeCreateInfoVALVE extends Struct implements Na
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMutableDescriptorTypeCreateInfoVALVE sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VALVEMutableDescriptorType#VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE} value to the {@link #sType} field. */
+    public VkMutableDescriptorTypeCreateInfoVALVE sType$Default() { return sType(VALVEMutableDescriptorType.VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMutableDescriptorTypeCreateInfoVALVE pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link VkMutableDescriptorTypeListVALVE.Buffer} to the {@link #pMutableDescriptorTypeLists} field. */
@@ -347,6 +349,8 @@ public class VkMutableDescriptorTypeCreateInfoVALVE extends Struct implements Na
 
         /** Sets the specified value to the {@link VkMutableDescriptorTypeCreateInfoVALVE#sType} field. */
         public VkMutableDescriptorTypeCreateInfoVALVE.Buffer sType(@NativeType("VkStructureType") int value) { VkMutableDescriptorTypeCreateInfoVALVE.nsType(address(), value); return this; }
+        /** Sets the {@link VALVEMutableDescriptorType#VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE} value to the {@link VkMutableDescriptorTypeCreateInfoVALVE#sType} field. */
+        public VkMutableDescriptorTypeCreateInfoVALVE.Buffer sType$Default() { return sType(VALVEMutableDescriptorType.VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE); }
         /** Sets the specified value to the {@link VkMutableDescriptorTypeCreateInfoVALVE#pNext} field. */
         public VkMutableDescriptorTypeCreateInfoVALVE.Buffer pNext(@NativeType("void const *") long value) { VkMutableDescriptorTypeCreateInfoVALVE.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link VkMutableDescriptorTypeListVALVE.Buffer} to the {@link VkMutableDescriptorTypeCreateInfoVALVE#pMutableDescriptorTypeLists} field. */

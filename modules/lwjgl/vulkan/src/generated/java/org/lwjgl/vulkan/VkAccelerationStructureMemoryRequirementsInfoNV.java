@@ -101,6 +101,8 @@ public class VkAccelerationStructureMemoryRequirementsInfoNV extends Struct impl
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureMemoryRequirementsInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV} value to the {@link #sType} field. */
+    public VkAccelerationStructureMemoryRequirementsInfoNV sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureMemoryRequirementsInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #type} field. */
@@ -338,6 +340,8 @@ public class VkAccelerationStructureMemoryRequirementsInfoNV extends Struct impl
 
         /** Sets the specified value to the {@link VkAccelerationStructureMemoryRequirementsInfoNV#sType} field. */
         public VkAccelerationStructureMemoryRequirementsInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureMemoryRequirementsInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV} value to the {@link VkAccelerationStructureMemoryRequirementsInfoNV#sType} field. */
+        public VkAccelerationStructureMemoryRequirementsInfoNV.Buffer sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV); }
         /** Sets the specified value to the {@link VkAccelerationStructureMemoryRequirementsInfoNV#pNext} field. */
         public VkAccelerationStructureMemoryRequirementsInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureMemoryRequirementsInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkAccelerationStructureMemoryRequirementsInfoNV#type} field. */

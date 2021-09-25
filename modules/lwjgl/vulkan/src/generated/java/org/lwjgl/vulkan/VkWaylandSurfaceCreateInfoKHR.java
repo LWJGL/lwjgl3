@@ -117,6 +117,8 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkWaylandSurfaceCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRWaylandSurface#VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    public VkWaylandSurfaceCreateInfoKHR sType$Default() { return sType(KHRWaylandSurface.VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkWaylandSurfaceCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -387,6 +389,8 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
 
         /** Sets the specified value to the {@link VkWaylandSurfaceCreateInfoKHR#sType} field. */
         public VkWaylandSurfaceCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkWaylandSurfaceCreateInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRWaylandSurface#VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR} value to the {@link VkWaylandSurfaceCreateInfoKHR#sType} field. */
+        public VkWaylandSurfaceCreateInfoKHR.Buffer sType$Default() { return sType(KHRWaylandSurface.VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkWaylandSurfaceCreateInfoKHR#pNext} field. */
         public VkWaylandSurfaceCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkWaylandSurfaceCreateInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkWaylandSurfaceCreateInfoKHR#flags} field. */

@@ -95,6 +95,8 @@ public class VkAccelerationStructureMotionInfoNV extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureMotionInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVRayTracingMotionBlur#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MOTION_INFO_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MOTION_INFO_NV} value to the {@link #sType} field. */
+    public VkAccelerationStructureMotionInfoNV sType$Default() { return sType(NVRayTracingMotionBlur.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MOTION_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureMotionInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #maxInstances} field. */
@@ -314,6 +316,8 @@ public class VkAccelerationStructureMotionInfoNV extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkAccelerationStructureMotionInfoNV#sType} field. */
         public VkAccelerationStructureMotionInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureMotionInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVRayTracingMotionBlur#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MOTION_INFO_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MOTION_INFO_NV} value to the {@link VkAccelerationStructureMotionInfoNV#sType} field. */
+        public VkAccelerationStructureMotionInfoNV.Buffer sType$Default() { return sType(NVRayTracingMotionBlur.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MOTION_INFO_NV); }
         /** Sets the specified value to the {@link VkAccelerationStructureMotionInfoNV#pNext} field. */
         public VkAccelerationStructureMotionInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureMotionInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkAccelerationStructureMotionInfoNV#maxInstances} field. */

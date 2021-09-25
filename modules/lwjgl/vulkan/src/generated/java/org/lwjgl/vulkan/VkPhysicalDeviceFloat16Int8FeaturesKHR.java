@@ -43,6 +43,8 @@ public class VkPhysicalDeviceFloat16Int8FeaturesKHR extends VkPhysicalDeviceShad
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkPhysicalDeviceFloat16Int8FeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES} value to the {@code sType} field. */
+    public VkPhysicalDeviceFloat16Int8FeaturesKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkPhysicalDeviceFloat16Int8FeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -252,6 +254,8 @@ public class VkPhysicalDeviceFloat16Int8FeaturesKHR extends VkPhysicalDeviceShad
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkPhysicalDeviceFloat16Int8FeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFloat16Int8FeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES} value to the {@code sType} field. */
+        public VkPhysicalDeviceFloat16Int8FeaturesKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkPhysicalDeviceFloat16Int8FeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFloat16Int8FeaturesKHR.npNext(address(), value); return this; }

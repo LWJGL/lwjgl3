@@ -91,6 +91,8 @@ public class VkPhysicalDeviceMultiDrawFeaturesEXT extends Struct implements Nati
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceMultiDrawFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTMultiDraw#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT} value to the {@code sType} field. */
+    public VkPhysicalDeviceMultiDrawFeaturesEXT sType$Default() { return sType(EXTMultiDraw.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceMultiDrawFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #multiDraw} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceMultiDrawFeaturesEXT extends Struct implements Nati
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMultiDrawFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTMultiDraw#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT} value to the {@code sType} field. */
+        public VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer sType$Default() { return sType(EXTMultiDraw.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMultiDrawFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceMultiDrawFeaturesEXT#multiDraw} field. */

@@ -132,6 +132,8 @@ public class VkRayTracingShaderGroupCreateInfoNV extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkRayTracingShaderGroupCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV} value to the {@link #sType} field. */
+    public VkRayTracingShaderGroupCreateInfoNV sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRayTracingShaderGroupCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #type} field. */
@@ -402,6 +404,8 @@ public class VkRayTracingShaderGroupCreateInfoNV extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoNV#sType} field. */
         public VkRayTracingShaderGroupCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkRayTracingShaderGroupCreateInfoNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV} value to the {@link VkRayTracingShaderGroupCreateInfoNV#sType} field. */
+        public VkRayTracingShaderGroupCreateInfoNV.Buffer sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoNV#pNext} field. */
         public VkRayTracingShaderGroupCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkRayTracingShaderGroupCreateInfoNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoNV#type} field. */

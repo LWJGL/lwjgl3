@@ -112,6 +112,8 @@ public class VkVideoPictureResourceKHR extends Struct implements NativeResource 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoPictureResourceKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR} value to the {@link #sType} field. */
+    public VkVideoPictureResourceKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoPictureResourceKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Copies the specified {@link VkOffset2D} to the {@link #codedOffset} field. */
@@ -355,6 +357,8 @@ public class VkVideoPictureResourceKHR extends Struct implements NativeResource 
 
         /** Sets the specified value to the {@link VkVideoPictureResourceKHR#sType} field. */
         public VkVideoPictureResourceKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoPictureResourceKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR} value to the {@link VkVideoPictureResourceKHR#sType} field. */
+        public VkVideoPictureResourceKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR); }
         /** Sets the specified value to the {@link VkVideoPictureResourceKHR#pNext} field. */
         public VkVideoPictureResourceKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoPictureResourceKHR.npNext(address(), value); return this; }
         /** Copies the specified {@link VkOffset2D} to the {@link VkVideoPictureResourceKHR#codedOffset} field. */

@@ -114,6 +114,8 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineColorBlendAdvancedStateCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTBlendOperationAdvanced#VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkPipelineColorBlendAdvancedStateCreateInfoEXT sType$Default() { return sType(EXTBlendOperationAdvanced.VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineColorBlendAdvancedStateCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #srcPremultiplied} field. */
@@ -362,6 +364,8 @@ public class VkPipelineColorBlendAdvancedStateCreateInfoEXT extends Struct imple
 
         /** Sets the specified value to the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#sType} field. */
         public VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineColorBlendAdvancedStateCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTBlendOperationAdvanced#VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT} value to the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#sType} field. */
+        public VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer sType$Default() { return sType(EXTBlendOperationAdvanced.VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#pNext} field. */
         public VkPipelineColorBlendAdvancedStateCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineColorBlendAdvancedStateCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT#srcPremultiplied} field. */

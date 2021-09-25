@@ -95,6 +95,8 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkImagePlaneMemoryRequirementsInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO} value to the {@link #sType} field. */
+    public VkImagePlaneMemoryRequirementsInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImagePlaneMemoryRequirementsInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #planeAspect} field. */
@@ -321,6 +323,8 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct implements Native
 
         /** Sets the specified value to the {@link VkImagePlaneMemoryRequirementsInfo#sType} field. */
         public VkImagePlaneMemoryRequirementsInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkImagePlaneMemoryRequirementsInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO} value to the {@link VkImagePlaneMemoryRequirementsInfo#sType} field. */
+        public VkImagePlaneMemoryRequirementsInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO); }
         /** Sets the specified value to the {@link VkImagePlaneMemoryRequirementsInfo#pNext} field. */
         public VkImagePlaneMemoryRequirementsInfo.Buffer pNext(@NativeType("void const *") long value) { VkImagePlaneMemoryRequirementsInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkImagePlaneMemoryRequirementsInfo#planeAspect} field. */

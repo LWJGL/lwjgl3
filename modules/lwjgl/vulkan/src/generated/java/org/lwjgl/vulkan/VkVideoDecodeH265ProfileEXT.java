@@ -89,6 +89,8 @@ public class VkVideoDecodeH265ProfileEXT extends Struct implements NativeResourc
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoDecodeH265ProfileEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTVideoDecodeH265#VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT} value to the {@link #sType} field. */
+    public VkVideoDecodeH265ProfileEXT sType$Default() { return sType(EXTVideoDecodeH265.VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoDecodeH265ProfileEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #stdProfileIdc} field. */
@@ -297,6 +299,8 @@ public class VkVideoDecodeH265ProfileEXT extends Struct implements NativeResourc
 
         /** Sets the specified value to the {@link VkVideoDecodeH265ProfileEXT#sType} field. */
         public VkVideoDecodeH265ProfileEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH265ProfileEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTVideoDecodeH265#VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT} value to the {@link VkVideoDecodeH265ProfileEXT#sType} field. */
+        public VkVideoDecodeH265ProfileEXT.Buffer sType$Default() { return sType(EXTVideoDecodeH265.VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT); }
         /** Sets the specified value to the {@link VkVideoDecodeH265ProfileEXT#pNext} field. */
         public VkVideoDecodeH265ProfileEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeH265ProfileEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoDecodeH265ProfileEXT#stdProfileIdc} field. */

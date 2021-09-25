@@ -105,6 +105,8 @@ public class VkAccelerationStructureVersionInfoKHR extends Struct implements Nat
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkAccelerationStructureVersionInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR} value to the {@link #sType} field. */
+    public VkAccelerationStructureVersionInfoKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureVersionInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link ByteBuffer} to the {@link #pVersionData} field. */
@@ -338,6 +340,8 @@ public class VkAccelerationStructureVersionInfoKHR extends Struct implements Nat
 
         /** Sets the specified value to the {@link VkAccelerationStructureVersionInfoKHR#sType} field. */
         public VkAccelerationStructureVersionInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureVersionInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR} value to the {@link VkAccelerationStructureVersionInfoKHR#sType} field. */
+        public VkAccelerationStructureVersionInfoKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR); }
         /** Sets the specified value to the {@link VkAccelerationStructureVersionInfoKHR#pNext} field. */
         public VkAccelerationStructureVersionInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureVersionInfoKHR.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link ByteBuffer} to the {@link VkAccelerationStructureVersionInfoKHR#pVersionData} field. */

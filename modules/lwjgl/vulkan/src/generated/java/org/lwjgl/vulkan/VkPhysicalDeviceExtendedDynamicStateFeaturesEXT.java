@@ -108,6 +108,8 @@ public class VkPhysicalDeviceExtendedDynamicStateFeaturesEXT extends Struct impl
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceExtendedDynamicStateFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTExtendedDynamicState#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceExtendedDynamicStateFeaturesEXT sType$Default() { return sType(EXTExtendedDynamicState.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceExtendedDynamicStateFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #extendedDynamicState} field. */
@@ -316,6 +318,8 @@ public class VkPhysicalDeviceExtendedDynamicStateFeaturesEXT extends Struct impl
 
         /** Sets the specified value to the {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT#sType} field. */
         public VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTExtendedDynamicState#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT} value to the {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.Buffer sType$Default() { return sType(EXTExtendedDynamicState.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT#extendedDynamicState} field. */

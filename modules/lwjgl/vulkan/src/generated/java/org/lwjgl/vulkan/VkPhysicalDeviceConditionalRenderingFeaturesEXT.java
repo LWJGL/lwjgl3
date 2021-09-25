@@ -98,6 +98,8 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct impl
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceConditionalRenderingFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceConditionalRenderingFeaturesEXT sType$Default() { return sType(EXTConditionalRendering.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceConditionalRenderingFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #conditionalRendering} field. */
@@ -335,6 +337,8 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct impl
 
         /** Sets the specified value to the {@link VkPhysicalDeviceConditionalRenderingFeaturesEXT#sType} field. */
         public VkPhysicalDeviceConditionalRenderingFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceConditionalRenderingFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT} value to the {@link VkPhysicalDeviceConditionalRenderingFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceConditionalRenderingFeaturesEXT.Buffer sType$Default() { return sType(EXTConditionalRendering.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceConditionalRenderingFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceConditionalRenderingFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceConditionalRenderingFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceConditionalRenderingFeaturesEXT#conditionalRendering} field. */

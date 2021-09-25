@@ -135,6 +135,8 @@ public class VkDebugUtilsObjectTagInfoEXT extends Struct implements NativeResour
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDebugUtilsObjectTagInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT} value to the {@link #sType} field. */
+    public VkDebugUtilsObjectTagInfoEXT sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDebugUtilsObjectTagInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #objectType} field. */
@@ -422,6 +424,8 @@ public class VkDebugUtilsObjectTagInfoEXT extends Struct implements NativeResour
 
         /** Sets the specified value to the {@link VkDebugUtilsObjectTagInfoEXT#sType} field. */
         public VkDebugUtilsObjectTagInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDebugUtilsObjectTagInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT} value to the {@link VkDebugUtilsObjectTagInfoEXT#sType} field. */
+        public VkDebugUtilsObjectTagInfoEXT.Buffer sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT); }
         /** Sets the specified value to the {@link VkDebugUtilsObjectTagInfoEXT#pNext} field. */
         public VkDebugUtilsObjectTagInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDebugUtilsObjectTagInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDebugUtilsObjectTagInfoEXT#objectType} field. */

@@ -147,6 +147,8 @@ public class VkDeviceMemoryReportCallbackDataEXT extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceMemoryReportCallbackDataEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT} value to the {@link #sType} field. */
+    public VkDeviceMemoryReportCallbackDataEXT sType$Default() { return sType(EXTDeviceMemoryReport.VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceMemoryReportCallbackDataEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -379,6 +381,8 @@ public class VkDeviceMemoryReportCallbackDataEXT extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkDeviceMemoryReportCallbackDataEXT#sType} field. */
         public VkDeviceMemoryReportCallbackDataEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceMemoryReportCallbackDataEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT} value to the {@link VkDeviceMemoryReportCallbackDataEXT#sType} field. */
+        public VkDeviceMemoryReportCallbackDataEXT.Buffer sType$Default() { return sType(EXTDeviceMemoryReport.VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT); }
         /** Sets the specified value to the {@link VkDeviceMemoryReportCallbackDataEXT#pNext} field. */
         public VkDeviceMemoryReportCallbackDataEXT.Buffer pNext(@NativeType("void *") long value) { VkDeviceMemoryReportCallbackDataEXT.npNext(address(), value); return this; }
 

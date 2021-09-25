@@ -44,6 +44,8 @@ public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
     /** Sets the specified value to the {@code sType} field. */
     @Override
     public VkExternalFencePropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES} value to the {@code sType} field. */
+    public VkExternalFencePropertiesKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkExternalFencePropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
@@ -243,6 +245,8 @@ public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
         /** Sets the specified value to the {@code sType} field. */
         @Override
         public VkExternalFencePropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalFencePropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES} value to the {@code sType} field. */
+        public VkExternalFencePropertiesKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkExternalFencePropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkExternalFencePropertiesKHR.npNext(address(), value); return this; }

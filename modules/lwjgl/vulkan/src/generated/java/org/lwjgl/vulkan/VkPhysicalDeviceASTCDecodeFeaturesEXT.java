@@ -91,6 +91,8 @@ public class VkPhysicalDeviceASTCDecodeFeaturesEXT extends Struct implements Nat
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceASTCDecodeFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTAstcDecodeMode#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceASTCDecodeFeaturesEXT sType$Default() { return sType(EXTAstcDecodeMode.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceASTCDecodeFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #decodeModeSharedExponent} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceASTCDecodeFeaturesEXT extends Struct implements Nat
 
         /** Sets the specified value to the {@link VkPhysicalDeviceASTCDecodeFeaturesEXT#sType} field. */
         public VkPhysicalDeviceASTCDecodeFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceASTCDecodeFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTAstcDecodeMode#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT} value to the {@link VkPhysicalDeviceASTCDecodeFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceASTCDecodeFeaturesEXT.Buffer sType$Default() { return sType(EXTAstcDecodeMode.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceASTCDecodeFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceASTCDecodeFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceASTCDecodeFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceASTCDecodeFeaturesEXT#decodeModeSharedExponent} field. */

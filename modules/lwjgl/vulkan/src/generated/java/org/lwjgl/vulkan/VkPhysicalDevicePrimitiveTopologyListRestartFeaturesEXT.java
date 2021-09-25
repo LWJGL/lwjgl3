@@ -98,6 +98,8 @@ public class VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT extends Str
 
     /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTPrimitiveTopologyListRestart#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT} value to the {@code sType} field. */
+    public VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT sType$Default() { return sType(EXTPrimitiveTopologyListRestart.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #primitiveTopologyListRestart} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT extends Str
 
         /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTPrimitiveTopologyListRestart#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT} value to the {@code sType} field. */
+        public VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT.Buffer sType$Default() { return sType(EXTPrimitiveTopologyListRestart.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT#primitiveTopologyListRestart} field. */

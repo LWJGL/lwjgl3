@@ -106,6 +106,8 @@ public class VkDebugUtilsLabelEXT extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDebugUtilsLabelEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT} value to the {@link #sType} field. */
+    public VkDebugUtilsLabelEXT sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDebugUtilsLabelEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified encoded string to the {@link #pLabelName} field. */
@@ -387,6 +389,8 @@ public class VkDebugUtilsLabelEXT extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkDebugUtilsLabelEXT#sType} field. */
         public VkDebugUtilsLabelEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDebugUtilsLabelEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT} value to the {@link VkDebugUtilsLabelEXT#sType} field. */
+        public VkDebugUtilsLabelEXT.Buffer sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT); }
         /** Sets the specified value to the {@link VkDebugUtilsLabelEXT#pNext} field. */
         public VkDebugUtilsLabelEXT.Buffer pNext(@NativeType("void const *") long value) { VkDebugUtilsLabelEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified encoded string to the {@link VkDebugUtilsLabelEXT#pLabelName} field. */

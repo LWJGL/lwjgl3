@@ -125,6 +125,8 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDebugUtilsObjectNameInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT} value to the {@link #sType} field. */
+    public VkDebugUtilsObjectNameInfoEXT sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDebugUtilsObjectNameInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #objectType} field. */
@@ -383,6 +385,8 @@ public class VkDebugUtilsObjectNameInfoEXT extends Struct implements NativeResou
 
         /** Sets the specified value to the {@link VkDebugUtilsObjectNameInfoEXT#sType} field. */
         public VkDebugUtilsObjectNameInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDebugUtilsObjectNameInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT} value to the {@link VkDebugUtilsObjectNameInfoEXT#sType} field. */
+        public VkDebugUtilsObjectNameInfoEXT.Buffer sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT); }
         /** Sets the specified value to the {@link VkDebugUtilsObjectNameInfoEXT#pNext} field. */
         public VkDebugUtilsObjectNameInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDebugUtilsObjectNameInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDebugUtilsObjectNameInfoEXT#objectType} field. */

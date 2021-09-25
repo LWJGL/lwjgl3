@@ -97,6 +97,8 @@ public class VkBufferDeviceAddressCreateInfoEXT extends Struct implements Native
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkBufferDeviceAddressCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTBufferDeviceAddress#VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    public VkBufferDeviceAddressCreateInfoEXT sType$Default() { return sType(EXTBufferDeviceAddress.VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferDeviceAddressCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #deviceAddress} field. */
@@ -323,6 +325,8 @@ public class VkBufferDeviceAddressCreateInfoEXT extends Struct implements Native
 
         /** Sets the specified value to the {@link VkBufferDeviceAddressCreateInfoEXT#sType} field. */
         public VkBufferDeviceAddressCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferDeviceAddressCreateInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTBufferDeviceAddress#VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT} value to the {@link VkBufferDeviceAddressCreateInfoEXT#sType} field. */
+        public VkBufferDeviceAddressCreateInfoEXT.Buffer sType$Default() { return sType(EXTBufferDeviceAddress.VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkBufferDeviceAddressCreateInfoEXT#pNext} field. */
         public VkBufferDeviceAddressCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkBufferDeviceAddressCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkBufferDeviceAddressCreateInfoEXT#deviceAddress} field. */

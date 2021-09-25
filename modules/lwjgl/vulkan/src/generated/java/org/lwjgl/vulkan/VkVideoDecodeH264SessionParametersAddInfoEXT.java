@@ -132,6 +132,8 @@ public class VkVideoDecodeH264SessionParametersAddInfoEXT extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoDecodeH264SessionParametersAddInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT} value to the {@link #sType} field. */
+    public VkVideoDecodeH264SessionParametersAddInfoEXT sType$Default() { return sType(EXTVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoDecodeH264SessionParametersAddInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #spsStdCount} field. */
@@ -375,6 +377,8 @@ public class VkVideoDecodeH264SessionParametersAddInfoEXT extends Struct impleme
 
         /** Sets the specified value to the {@link VkVideoDecodeH264SessionParametersAddInfoEXT#sType} field. */
         public VkVideoDecodeH264SessionParametersAddInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH264SessionParametersAddInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT} value to the {@link VkVideoDecodeH264SessionParametersAddInfoEXT#sType} field. */
+        public VkVideoDecodeH264SessionParametersAddInfoEXT.Buffer sType$Default() { return sType(EXTVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT); }
         /** Sets the specified value to the {@link VkVideoDecodeH264SessionParametersAddInfoEXT#pNext} field. */
         public VkVideoDecodeH264SessionParametersAddInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeH264SessionParametersAddInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoDecodeH264SessionParametersAddInfoEXT#spsStdCount} field. */

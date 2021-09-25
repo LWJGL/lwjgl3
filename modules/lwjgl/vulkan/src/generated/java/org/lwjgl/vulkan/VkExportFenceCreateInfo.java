@@ -94,6 +94,8 @@ public class VkExportFenceCreateInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkExportFenceCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO} value to the {@link #sType} field. */
+    public VkExportFenceCreateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkExportFenceCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #handleTypes} field. */
@@ -320,6 +322,8 @@ public class VkExportFenceCreateInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkExportFenceCreateInfo#sType} field. */
         public VkExportFenceCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkExportFenceCreateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO} value to the {@link VkExportFenceCreateInfo#sType} field. */
+        public VkExportFenceCreateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkExportFenceCreateInfo#pNext} field. */
         public VkExportFenceCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkExportFenceCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkExportFenceCreateInfo#handleTypes} field. */

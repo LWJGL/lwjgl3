@@ -91,6 +91,8 @@ public class VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR extends Str
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR sType$Default() { return sType(KHRPipelineExecutableProperties.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #pipelineExecutableInfo} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR extends Str
 
         /** Sets the specified value to the {@link VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR#sType} field. */
         public VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR} value to the {@link VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR#sType} field. */
+        public VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.Buffer sType$Default() { return sType(KHRPipelineExecutableProperties.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR#pNext} field. */
         public VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR#pipelineExecutableInfo} field. */

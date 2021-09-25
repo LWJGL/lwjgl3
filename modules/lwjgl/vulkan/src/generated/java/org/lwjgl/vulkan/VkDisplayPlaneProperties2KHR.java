@@ -91,6 +91,8 @@ public class VkDisplayPlaneProperties2KHR extends Struct implements NativeResour
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDisplayPlaneProperties2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRGetDisplayProperties2#VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR} value to the {@link #sType} field. */
+    public VkDisplayPlaneProperties2KHR sType$Default() { return sType(KHRGetDisplayProperties2.VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDisplayPlaneProperties2KHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -310,6 +312,8 @@ public class VkDisplayPlaneProperties2KHR extends Struct implements NativeResour
 
         /** Sets the specified value to the {@link VkDisplayPlaneProperties2KHR#sType} field. */
         public VkDisplayPlaneProperties2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplayPlaneProperties2KHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRGetDisplayProperties2#VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR} value to the {@link VkDisplayPlaneProperties2KHR#sType} field. */
+        public VkDisplayPlaneProperties2KHR.Buffer sType$Default() { return sType(KHRGetDisplayProperties2.VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR); }
         /** Sets the specified value to the {@link VkDisplayPlaneProperties2KHR#pNext} field. */
         public VkDisplayPlaneProperties2KHR.Buffer pNext(@NativeType("void *") long value) { VkDisplayPlaneProperties2KHR.npNext(address(), value); return this; }
 

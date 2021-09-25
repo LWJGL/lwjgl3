@@ -120,6 +120,8 @@ public class VkDescriptorSetAllocateInfo extends Struct implements NativeResourc
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkDescriptorSetAllocateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO} value to the {@link #sType} field. */
+    public VkDescriptorSetAllocateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDescriptorSetAllocateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #descriptorPool} field. */
@@ -385,6 +387,8 @@ public class VkDescriptorSetAllocateInfo extends Struct implements NativeResourc
 
         /** Sets the specified value to the {@link VkDescriptorSetAllocateInfo#sType} field. */
         public VkDescriptorSetAllocateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorSetAllocateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO} value to the {@link VkDescriptorSetAllocateInfo#sType} field. */
+        public VkDescriptorSetAllocateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO); }
         /** Sets the specified value to the {@link VkDescriptorSetAllocateInfo#pNext} field. */
         public VkDescriptorSetAllocateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorSetAllocateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkDescriptorSetAllocateInfo#descriptorPool} field. */

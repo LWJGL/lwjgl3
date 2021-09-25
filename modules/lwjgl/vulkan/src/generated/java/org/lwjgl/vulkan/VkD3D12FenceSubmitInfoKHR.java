@@ -128,6 +128,8 @@ public class VkD3D12FenceSubmitInfoKHR extends Struct implements NativeResource 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkD3D12FenceSubmitInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRExternalSemaphoreWin32#VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR} value to the {@link #sType} field. */
+    public VkD3D12FenceSubmitInfoKHR sType$Default() { return sType(KHRExternalSemaphoreWin32.VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkD3D12FenceSubmitInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #waitSemaphoreValuesCount} field. */
@@ -389,6 +391,8 @@ public class VkD3D12FenceSubmitInfoKHR extends Struct implements NativeResource 
 
         /** Sets the specified value to the {@link VkD3D12FenceSubmitInfoKHR#sType} field. */
         public VkD3D12FenceSubmitInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkD3D12FenceSubmitInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRExternalSemaphoreWin32#VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR} value to the {@link VkD3D12FenceSubmitInfoKHR#sType} field. */
+        public VkD3D12FenceSubmitInfoKHR.Buffer sType$Default() { return sType(KHRExternalSemaphoreWin32.VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR); }
         /** Sets the specified value to the {@link VkD3D12FenceSubmitInfoKHR#pNext} field. */
         public VkD3D12FenceSubmitInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkD3D12FenceSubmitInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkD3D12FenceSubmitInfoKHR#waitSemaphoreValuesCount} field. */

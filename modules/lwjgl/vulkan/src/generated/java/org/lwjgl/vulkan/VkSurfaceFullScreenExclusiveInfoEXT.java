@@ -92,6 +92,8 @@ public class VkSurfaceFullScreenExclusiveInfoEXT extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSurfaceFullScreenExclusiveInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTFullScreenExclusive#VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT} value to the {@link #sType} field. */
+    public VkSurfaceFullScreenExclusiveInfoEXT sType$Default() { return sType(EXTFullScreenExclusive.VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSurfaceFullScreenExclusiveInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #fullScreenExclusive} field. */
@@ -318,6 +320,8 @@ public class VkSurfaceFullScreenExclusiveInfoEXT extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkSurfaceFullScreenExclusiveInfoEXT#sType} field. */
         public VkSurfaceFullScreenExclusiveInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfaceFullScreenExclusiveInfoEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTFullScreenExclusive#VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT} value to the {@link VkSurfaceFullScreenExclusiveInfoEXT#sType} field. */
+        public VkSurfaceFullScreenExclusiveInfoEXT.Buffer sType$Default() { return sType(EXTFullScreenExclusive.VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT); }
         /** Sets the specified value to the {@link VkSurfaceFullScreenExclusiveInfoEXT#pNext} field. */
         public VkSurfaceFullScreenExclusiveInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkSurfaceFullScreenExclusiveInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkSurfaceFullScreenExclusiveInfoEXT#fullScreenExclusive} field. */

@@ -119,6 +119,8 @@ public class VkVideoProfileKHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoProfileKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR STRUCTURE_TYPE_VIDEO_PROFILE_KHR} value to the {@link #sType} field. */
+    public VkVideoProfileKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoProfileKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #videoCodecOperation} field. */
@@ -360,6 +362,8 @@ public class VkVideoProfileKHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkVideoProfileKHR#sType} field. */
         public VkVideoProfileKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoProfileKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR STRUCTURE_TYPE_VIDEO_PROFILE_KHR} value to the {@link VkVideoProfileKHR#sType} field. */
+        public VkVideoProfileKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR); }
         /** Sets the specified value to the {@link VkVideoProfileKHR#pNext} field. */
         public VkVideoProfileKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoProfileKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoProfileKHR#videoCodecOperation} field. */

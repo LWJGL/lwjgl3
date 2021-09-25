@@ -91,6 +91,8 @@ public class VkPhysicalDeviceProtectedMemoryFeatures extends Struct implements N
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceProtectedMemoryFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceProtectedMemoryFeatures sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceProtectedMemoryFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #protectedMemory} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceProtectedMemoryFeatures extends Struct implements N
 
         /** Sets the specified value to the {@link VkPhysicalDeviceProtectedMemoryFeatures#sType} field. */
         public VkPhysicalDeviceProtectedMemoryFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceProtectedMemoryFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES} value to the {@link VkPhysicalDeviceProtectedMemoryFeatures#sType} field. */
+        public VkPhysicalDeviceProtectedMemoryFeatures.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceProtectedMemoryFeatures#pNext} field. */
         public VkPhysicalDeviceProtectedMemoryFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceProtectedMemoryFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceProtectedMemoryFeatures#protectedMemory} field. */

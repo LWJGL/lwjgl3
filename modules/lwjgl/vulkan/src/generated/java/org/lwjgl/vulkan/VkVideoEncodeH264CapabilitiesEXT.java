@@ -164,6 +164,8 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoEncodeH264CapabilitiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT} value to the {@link #sType} field. */
+    public VkVideoEncodeH264CapabilitiesEXT sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeH264CapabilitiesEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -484,6 +486,8 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
 
         /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#sType} field. */
         public VkVideoEncodeH264CapabilitiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH264CapabilitiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT} value to the {@link VkVideoEncodeH264CapabilitiesEXT#sType} field. */
+        public VkVideoEncodeH264CapabilitiesEXT.Buffer sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT); }
         /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#pNext} field. */
         public VkVideoEncodeH264CapabilitiesEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH264CapabilitiesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#flags} field. */

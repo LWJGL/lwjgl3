@@ -93,6 +93,8 @@ public class VkPerformanceConfigurationAcquireInfoINTEL extends Struct implement
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPerformanceConfigurationAcquireInfoINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL} value to the {@link #sType} field. */
+    public VkPerformanceConfigurationAcquireInfoINTEL sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPerformanceConfigurationAcquireInfoINTEL pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #type} field. */
@@ -319,6 +321,8 @@ public class VkPerformanceConfigurationAcquireInfoINTEL extends Struct implement
 
         /** Sets the specified value to the {@link VkPerformanceConfigurationAcquireInfoINTEL#sType} field. */
         public VkPerformanceConfigurationAcquireInfoINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkPerformanceConfigurationAcquireInfoINTEL.nsType(address(), value); return this; }
+        /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL} value to the {@link VkPerformanceConfigurationAcquireInfoINTEL#sType} field. */
+        public VkPerformanceConfigurationAcquireInfoINTEL.Buffer sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL); }
         /** Sets the specified value to the {@link VkPerformanceConfigurationAcquireInfoINTEL#pNext} field. */
         public VkPerformanceConfigurationAcquireInfoINTEL.Buffer pNext(@NativeType("void const *") long value) { VkPerformanceConfigurationAcquireInfoINTEL.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPerformanceConfigurationAcquireInfoINTEL#type} field. */

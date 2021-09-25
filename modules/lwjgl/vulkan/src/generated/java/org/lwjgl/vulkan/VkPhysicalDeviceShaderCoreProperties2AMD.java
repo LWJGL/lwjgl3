@@ -98,6 +98,8 @@ public class VkPhysicalDeviceShaderCoreProperties2AMD extends Struct implements 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderCoreProperties2AMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link AMDShaderCoreProperties2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderCoreProperties2AMD sType$Default() { return sType(AMDShaderCoreProperties2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderCoreProperties2AMD pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -323,6 +325,8 @@ public class VkPhysicalDeviceShaderCoreProperties2AMD extends Struct implements 
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderCoreProperties2AMD#sType} field. */
         public VkPhysicalDeviceShaderCoreProperties2AMD.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderCoreProperties2AMD.nsType(address(), value); return this; }
+        /** Sets the {@link AMDShaderCoreProperties2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD} value to the {@link VkPhysicalDeviceShaderCoreProperties2AMD#sType} field. */
+        public VkPhysicalDeviceShaderCoreProperties2AMD.Buffer sType$Default() { return sType(AMDShaderCoreProperties2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderCoreProperties2AMD#pNext} field. */
         public VkPhysicalDeviceShaderCoreProperties2AMD.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderCoreProperties2AMD.npNext(address(), value); return this; }
 

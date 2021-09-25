@@ -102,6 +102,8 @@ public class VkMemoryOpaqueCaptureAddressAllocateInfo extends Struct implements 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryOpaqueCaptureAddressAllocateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO} value to the {@link #sType} field. */
+    public VkMemoryOpaqueCaptureAddressAllocateInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryOpaqueCaptureAddressAllocateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #opaqueCaptureAddress} field. */
@@ -310,6 +312,8 @@ public class VkMemoryOpaqueCaptureAddressAllocateInfo extends Struct implements 
 
         /** Sets the specified value to the {@link VkMemoryOpaqueCaptureAddressAllocateInfo#sType} field. */
         public VkMemoryOpaqueCaptureAddressAllocateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryOpaqueCaptureAddressAllocateInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO} value to the {@link VkMemoryOpaqueCaptureAddressAllocateInfo#sType} field. */
+        public VkMemoryOpaqueCaptureAddressAllocateInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO); }
         /** Sets the specified value to the {@link VkMemoryOpaqueCaptureAddressAllocateInfo#pNext} field. */
         public VkMemoryOpaqueCaptureAddressAllocateInfo.Buffer pNext(@NativeType("void const *") long value) { VkMemoryOpaqueCaptureAddressAllocateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkMemoryOpaqueCaptureAddressAllocateInfo#opaqueCaptureAddress} field. */

@@ -160,6 +160,8 @@ public class VkVideoEncodeH264NaluSliceEXT extends Struct implements NativeResou
 
     /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH264NaluSliceEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT} value to the {@code sType} field. */
+    public VkVideoEncodeH264NaluSliceEXT sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH264NaluSliceEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoEncodeH264SliceHeader} to the {@code pSliceHeaderStd} field. */
@@ -479,6 +481,8 @@ public class VkVideoEncodeH264NaluSliceEXT extends Struct implements NativeResou
 
         /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH264NaluSliceEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH264NaluSliceEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT} value to the {@code sType} field. */
+        public VkVideoEncodeH264NaluSliceEXT.Buffer sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH264NaluSliceEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH264NaluSliceEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoEncodeH264SliceHeader} to the {@code pSliceHeaderStd} field. */

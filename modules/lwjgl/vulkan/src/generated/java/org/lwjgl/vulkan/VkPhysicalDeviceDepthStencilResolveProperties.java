@@ -112,6 +112,8 @@ public class VkPhysicalDeviceDepthStencilResolveProperties extends Struct implem
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceDepthStencilResolveProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceDepthStencilResolveProperties sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceDepthStencilResolveProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -329,6 +331,8 @@ public class VkPhysicalDeviceDepthStencilResolveProperties extends Struct implem
 
         /** Sets the specified value to the {@link VkPhysicalDeviceDepthStencilResolveProperties#sType} field. */
         public VkPhysicalDeviceDepthStencilResolveProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDepthStencilResolveProperties.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES} value to the {@link VkPhysicalDeviceDepthStencilResolveProperties#sType} field. */
+        public VkPhysicalDeviceDepthStencilResolveProperties.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceDepthStencilResolveProperties#pNext} field. */
         public VkPhysicalDeviceDepthStencilResolveProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDepthStencilResolveProperties.npNext(address(), value); return this; }
 

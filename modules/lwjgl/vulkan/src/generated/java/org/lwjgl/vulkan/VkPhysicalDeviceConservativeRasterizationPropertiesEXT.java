@@ -144,6 +144,8 @@ public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Stru
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceConservativeRasterizationPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTConservativeRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceConservativeRasterizationPropertiesEXT sType$Default() { return sType(EXTConservativeRasterization.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceConservativeRasterizationPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -401,6 +403,8 @@ public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Stru
 
         /** Sets the specified value to the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#sType} field. */
         public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTConservativeRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#sType} field. */
+        public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer sType$Default() { return sType(EXTConservativeRasterization.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#pNext} field. */
         public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.npNext(address(), value); return this; }
 

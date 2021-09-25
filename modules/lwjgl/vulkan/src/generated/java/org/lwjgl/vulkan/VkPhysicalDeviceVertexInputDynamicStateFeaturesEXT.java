@@ -97,6 +97,8 @@ public class VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT extends Struct i
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTVertexInputDynamicState#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT} value to the {@link #sType} field. */
+    public VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT sType$Default() { return sType(EXTVertexInputDynamicState.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #vertexInputDynamicState} field. */
@@ -305,6 +307,8 @@ public class VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT extends Struct i
 
         /** Sets the specified value to the {@link VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT#sType} field. */
         public VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTVertexInputDynamicState#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT} value to the {@link VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT#sType} field. */
+        public VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.Buffer sType$Default() { return sType(EXTVertexInputDynamicState.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT); }
         /** Sets the specified value to the {@link VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT#vertexInputDynamicState} field. */

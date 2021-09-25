@@ -104,6 +104,8 @@ public class VkPhysicalDeviceVariablePointersFeatures extends Struct implements 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceVariablePointersFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceVariablePointersFeatures sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceVariablePointersFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #variablePointersStorageBuffer} field. */
@@ -341,6 +343,8 @@ public class VkPhysicalDeviceVariablePointersFeatures extends Struct implements 
 
         /** Sets the specified value to the {@link VkPhysicalDeviceVariablePointersFeatures#sType} field. */
         public VkPhysicalDeviceVariablePointersFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVariablePointersFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES} value to the {@link VkPhysicalDeviceVariablePointersFeatures#sType} field. */
+        public VkPhysicalDeviceVariablePointersFeatures.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceVariablePointersFeatures#pNext} field. */
         public VkPhysicalDeviceVariablePointersFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVariablePointersFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceVariablePointersFeatures#variablePointersStorageBuffer} field. */

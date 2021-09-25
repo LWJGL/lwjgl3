@@ -136,6 +136,8 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSemaphoreSubmitInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR} value to the {@link #sType} field. */
+    public VkSemaphoreSubmitInfoKHR sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSemaphoreSubmitInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #semaphore} field. */
@@ -377,6 +379,8 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#sType} field. */
         public VkSemaphoreSubmitInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSemaphoreSubmitInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR} value to the {@link VkSemaphoreSubmitInfoKHR#sType} field. */
+        public VkSemaphoreSubmitInfoKHR.Buffer sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR); }
         /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#pNext} field. */
         public VkSemaphoreSubmitInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkSemaphoreSubmitInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#semaphore} field. */

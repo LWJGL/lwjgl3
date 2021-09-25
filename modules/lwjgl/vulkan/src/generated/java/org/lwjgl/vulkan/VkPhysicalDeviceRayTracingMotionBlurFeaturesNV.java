@@ -98,6 +98,8 @@ public class VkPhysicalDeviceRayTracingMotionBlurFeaturesNV extends Struct imple
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceRayTracingMotionBlurFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVRayTracingMotionBlur#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceRayTracingMotionBlurFeaturesNV sType$Default() { return sType(NVRayTracingMotionBlur.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceRayTracingMotionBlurFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #rayTracingMotionBlur} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceRayTracingMotionBlurFeaturesNV extends Struct imple
 
         /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingMotionBlurFeaturesNV#sType} field. */
         public VkPhysicalDeviceRayTracingMotionBlurFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRayTracingMotionBlurFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVRayTracingMotionBlur#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV} value to the {@link VkPhysicalDeviceRayTracingMotionBlurFeaturesNV#sType} field. */
+        public VkPhysicalDeviceRayTracingMotionBlurFeaturesNV.Buffer sType$Default() { return sType(NVRayTracingMotionBlur.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingMotionBlurFeaturesNV#pNext} field. */
         public VkPhysicalDeviceRayTracingMotionBlurFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRayTracingMotionBlurFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingMotionBlurFeaturesNV#rayTracingMotionBlur} field. */

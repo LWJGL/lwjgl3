@@ -211,6 +211,8 @@ public class VkPhysicalDeviceFragmentShadingRatePropertiesKHR extends Struct imp
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceFragmentShadingRatePropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDeviceFragmentShadingRatePropertiesKHR sType$Default() { return sType(KHRFragmentShadingRate.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceFragmentShadingRatePropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -490,6 +492,8 @@ public class VkPhysicalDeviceFragmentShadingRatePropertiesKHR extends Struct imp
 
         /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRatePropertiesKHR#sType} field. */
         public VkPhysicalDeviceFragmentShadingRatePropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFragmentShadingRatePropertiesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR} value to the {@link VkPhysicalDeviceFragmentShadingRatePropertiesKHR#sType} field. */
+        public VkPhysicalDeviceFragmentShadingRatePropertiesKHR.Buffer sType$Default() { return sType(KHRFragmentShadingRate.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceFragmentShadingRatePropertiesKHR#pNext} field. */
         public VkPhysicalDeviceFragmentShadingRatePropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFragmentShadingRatePropertiesKHR.npNext(address(), value); return this; }
 

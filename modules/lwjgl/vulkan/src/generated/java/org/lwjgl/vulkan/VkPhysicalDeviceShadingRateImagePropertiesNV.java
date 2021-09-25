@@ -110,6 +110,8 @@ public class VkPhysicalDeviceShadingRateImagePropertiesNV extends Struct impleme
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShadingRateImagePropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVShadingRateImage#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShadingRateImagePropertiesNV sType$Default() { return sType(NVShadingRateImage.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShadingRateImagePropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -339,6 +341,8 @@ public class VkPhysicalDeviceShadingRateImagePropertiesNV extends Struct impleme
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShadingRateImagePropertiesNV#sType} field. */
         public VkPhysicalDeviceShadingRateImagePropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShadingRateImagePropertiesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVShadingRateImage#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV} value to the {@link VkPhysicalDeviceShadingRateImagePropertiesNV#sType} field. */
+        public VkPhysicalDeviceShadingRateImagePropertiesNV.Buffer sType$Default() { return sType(NVShadingRateImage.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShadingRateImagePropertiesNV#pNext} field. */
         public VkPhysicalDeviceShadingRateImagePropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShadingRateImagePropertiesNV.npNext(address(), value); return this; }
 

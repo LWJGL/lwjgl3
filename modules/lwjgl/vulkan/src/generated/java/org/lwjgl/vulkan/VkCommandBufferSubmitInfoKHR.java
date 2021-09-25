@@ -108,6 +108,8 @@ public class VkCommandBufferSubmitInfoKHR extends Struct implements NativeResour
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkCommandBufferSubmitInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR} value to the {@link #sType} field. */
+    public VkCommandBufferSubmitInfoKHR sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCommandBufferSubmitInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #commandBuffer} field. */
@@ -348,6 +350,8 @@ public class VkCommandBufferSubmitInfoKHR extends Struct implements NativeResour
 
         /** Sets the specified value to the {@link VkCommandBufferSubmitInfoKHR#sType} field. */
         public VkCommandBufferSubmitInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandBufferSubmitInfoKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR} value to the {@link VkCommandBufferSubmitInfoKHR#sType} field. */
+        public VkCommandBufferSubmitInfoKHR.Buffer sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR); }
         /** Sets the specified value to the {@link VkCommandBufferSubmitInfoKHR#pNext} field. */
         public VkCommandBufferSubmitInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferSubmitInfoKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkCommandBufferSubmitInfoKHR#commandBuffer} field. */

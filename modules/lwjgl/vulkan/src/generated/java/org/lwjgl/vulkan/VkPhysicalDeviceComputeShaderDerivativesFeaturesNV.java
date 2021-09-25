@@ -100,6 +100,8 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends Struct i
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceComputeShaderDerivativesFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVComputeShaderDerivatives#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV} value to the {@link #sType} field. */
+    public VkPhysicalDeviceComputeShaderDerivativesFeaturesNV sType$Default() { return sType(NVComputeShaderDerivatives.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceComputeShaderDerivativesFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #computeDerivativeGroupQuads} field. */
@@ -337,6 +339,8 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesNV extends Struct i
 
         /** Sets the specified value to the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV#sType} field. */
         public VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVComputeShaderDerivatives#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV} value to the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV#sType} field. */
+        public VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer sType$Default() { return sType(NVComputeShaderDerivatives.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV); }
         /** Sets the specified value to the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV#pNext} field. */
         public VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesNV#computeDerivativeGroupQuads} field. */

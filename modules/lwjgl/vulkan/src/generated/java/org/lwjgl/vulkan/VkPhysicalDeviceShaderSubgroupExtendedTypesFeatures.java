@@ -91,6 +91,8 @@ public class VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures extends Struct 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES} value to the {@link #sType} field. */
+    public VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderSubgroupExtendedTypes} field. */
@@ -299,6 +301,8 @@ public class VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures extends Struct 
 
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures#sType} field. */
         public VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES} value to the {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures#sType} field. */
+        public VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures#pNext} field. */
         public VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures#shaderSubgroupExtendedTypes} field. */

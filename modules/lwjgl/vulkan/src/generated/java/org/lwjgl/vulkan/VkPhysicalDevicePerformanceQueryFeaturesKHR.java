@@ -98,6 +98,8 @@ public class VkPhysicalDevicePerformanceQueryFeaturesKHR extends Struct implemen
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePerformanceQueryFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR} value to the {@link #sType} field. */
+    public VkPhysicalDevicePerformanceQueryFeaturesKHR sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePerformanceQueryFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #performanceCounterQueryPools} field. */
@@ -317,6 +319,8 @@ public class VkPhysicalDevicePerformanceQueryFeaturesKHR extends Struct implemen
 
         /** Sets the specified value to the {@link VkPhysicalDevicePerformanceQueryFeaturesKHR#sType} field. */
         public VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePerformanceQueryFeaturesKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR} value to the {@link VkPhysicalDevicePerformanceQueryFeaturesKHR#sType} field. */
+        public VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDevicePerformanceQueryFeaturesKHR#pNext} field. */
         public VkPhysicalDevicePerformanceQueryFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePerformanceQueryFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDevicePerformanceQueryFeaturesKHR#performanceCounterQueryPools} field. */

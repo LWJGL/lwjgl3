@@ -87,6 +87,8 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkTextureLODGatherFormatPropertiesAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link AMDTextureGatherBiasLod#VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD} value to the {@link #sType} field. */
+    public VkTextureLODGatherFormatPropertiesAMD sType$Default() { return sType(AMDTextureGatherBiasLod.VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkTextureLODGatherFormatPropertiesAMD pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -307,6 +309,8 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
 
         /** Sets the specified value to the {@link VkTextureLODGatherFormatPropertiesAMD#sType} field. */
         public VkTextureLODGatherFormatPropertiesAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkTextureLODGatherFormatPropertiesAMD.nsType(address(), value); return this; }
+        /** Sets the {@link AMDTextureGatherBiasLod#VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD} value to the {@link VkTextureLODGatherFormatPropertiesAMD#sType} field. */
+        public VkTextureLODGatherFormatPropertiesAMD.Buffer sType$Default() { return sType(AMDTextureGatherBiasLod.VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD); }
         /** Sets the specified value to the {@link VkTextureLODGatherFormatPropertiesAMD#pNext} field. */
         public VkTextureLODGatherFormatPropertiesAMD.Buffer pNext(@NativeType("void *") long value) { VkTextureLODGatherFormatPropertiesAMD.npNext(address(), value); return this; }
 

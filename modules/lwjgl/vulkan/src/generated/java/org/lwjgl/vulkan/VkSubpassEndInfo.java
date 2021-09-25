@@ -85,6 +85,8 @@ public class VkSubpassEndInfo extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSubpassEndInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_END_INFO STRUCTURE_TYPE_SUBPASS_END_INFO} value to the {@link #sType} field. */
+    public VkSubpassEndInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_END_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubpassEndInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
 
@@ -282,6 +284,8 @@ public class VkSubpassEndInfo extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkSubpassEndInfo#sType} field. */
         public VkSubpassEndInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassEndInfo.nsType(address(), value); return this; }
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_END_INFO STRUCTURE_TYPE_SUBPASS_END_INFO} value to the {@link VkSubpassEndInfo#sType} field. */
+        public VkSubpassEndInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_END_INFO); }
         /** Sets the specified value to the {@link VkSubpassEndInfo#pNext} field. */
         public VkSubpassEndInfo.Buffer pNext(@NativeType("void const *") long value) { VkSubpassEndInfo.npNext(address(), value); return this; }
 

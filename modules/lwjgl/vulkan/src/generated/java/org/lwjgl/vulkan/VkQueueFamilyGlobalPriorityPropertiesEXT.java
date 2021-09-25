@@ -113,6 +113,8 @@ public class VkQueueFamilyGlobalPriorityPropertiesEXT extends Struct implements 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkQueueFamilyGlobalPriorityPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTGlobalPriorityQuery#VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT} value to the {@link #sType} field. */
+    public VkQueueFamilyGlobalPriorityPropertiesEXT sType$Default() { return sType(EXTGlobalPriorityQuery.VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueueFamilyGlobalPriorityPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #priorityCount} field. */
@@ -348,6 +350,8 @@ public class VkQueueFamilyGlobalPriorityPropertiesEXT extends Struct implements 
 
         /** Sets the specified value to the {@link VkQueueFamilyGlobalPriorityPropertiesEXT#sType} field. */
         public VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkQueueFamilyGlobalPriorityPropertiesEXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTGlobalPriorityQuery#VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT} value to the {@link VkQueueFamilyGlobalPriorityPropertiesEXT#sType} field. */
+        public VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer sType$Default() { return sType(EXTGlobalPriorityQuery.VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link VkQueueFamilyGlobalPriorityPropertiesEXT#pNext} field. */
         public VkQueueFamilyGlobalPriorityPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyGlobalPriorityPropertiesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkQueueFamilyGlobalPriorityPropertiesEXT#priorityCount} field. */

@@ -107,6 +107,8 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPresentRegionsKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link KHRIncrementalPresent#VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR STRUCTURE_TYPE_PRESENT_REGIONS_KHR} value to the {@link #sType} field. */
+    public VkPresentRegionsKHR sType$Default() { return sType(KHRIncrementalPresent.VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPresentRegionsKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #swapchainCount} field. */
@@ -345,6 +347,8 @@ public class VkPresentRegionsKHR extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link VkPresentRegionsKHR#sType} field. */
         public VkPresentRegionsKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPresentRegionsKHR.nsType(address(), value); return this; }
+        /** Sets the {@link KHRIncrementalPresent#VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR STRUCTURE_TYPE_PRESENT_REGIONS_KHR} value to the {@link VkPresentRegionsKHR#sType} field. */
+        public VkPresentRegionsKHR.Buffer sType$Default() { return sType(KHRIncrementalPresent.VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR); }
         /** Sets the specified value to the {@link VkPresentRegionsKHR#pNext} field. */
         public VkPresentRegionsKHR.Buffer pNext(@NativeType("void const *") long value) { VkPresentRegionsKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPresentRegionsKHR#swapchainCount} field. */

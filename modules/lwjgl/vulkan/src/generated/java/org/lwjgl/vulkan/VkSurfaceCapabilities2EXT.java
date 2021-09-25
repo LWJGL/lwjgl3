@@ -165,6 +165,8 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkSurfaceCapabilities2EXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link EXTDisplaySurfaceCounter#VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT} value to the {@link #sType} field. */
+    public VkSurfaceCapabilities2EXT sType$Default() { return sType(EXTDisplaySurfaceCounter.VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSurfaceCapabilities2EXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
@@ -432,6 +434,8 @@ public class VkSurfaceCapabilities2EXT extends Struct implements NativeResource 
 
         /** Sets the specified value to the {@link VkSurfaceCapabilities2EXT#sType} field. */
         public VkSurfaceCapabilities2EXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfaceCapabilities2EXT.nsType(address(), value); return this; }
+        /** Sets the {@link EXTDisplaySurfaceCounter#VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT} value to the {@link VkSurfaceCapabilities2EXT#sType} field. */
+        public VkSurfaceCapabilities2EXT.Buffer sType$Default() { return sType(EXTDisplaySurfaceCounter.VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT); }
         /** Sets the specified value to the {@link VkSurfaceCapabilities2EXT#pNext} field. */
         public VkSurfaceCapabilities2EXT.Buffer pNext(@NativeType("void *") long value) { VkSurfaceCapabilities2EXT.npNext(address(), value); return this; }
 
