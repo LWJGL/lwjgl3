@@ -43,6 +43,18 @@ class Nullable internal constructor(val optional: Boolean) : MemberParamModifier
     }
 }
 
+/** Marks a parameter to be replaced with an expression. */
+class Expression(
+    /** The expression to use instead of the parameter name. */
+    val value: String,
+    /** If true, the parameter will not be removed from the method signature. */
+    val keepParam: Boolean = false,
+    /** If true, the normal method overload (without the applied Expression) will not be generated. */
+    val skipNormal: Boolean = false
+) : MemberParamModifier {
+    override val isSpecial = true
+}
+
 /** Marks a pointer parameter or struct member as nullable. */
 val nullable = Nullable(false)
 /** Marks a pointer parameter as optional. Similar to nullable, but the parameter either doesn't exist or it exists and is not null. */

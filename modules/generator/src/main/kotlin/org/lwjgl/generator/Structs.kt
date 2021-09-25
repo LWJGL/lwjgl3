@@ -1924,6 +1924,25 @@ ${validations.joinToString("\n")}
                         println("${indent}public $returnType $setter(${it.annotate(pointerType)} value) { $n$setter($ADDRESS, value); return this; }")
                     }
                 }
+
+                if (it.has<Expression>()) {
+                    val javadoc: String
+                    val expression = it.get<Expression>().value.let { expression ->
+                        if (expression.startsWith("#")) {
+                            if (expression.endsWith(')')) {
+                                throw NotImplementedError()
+                            }
+                            val token = Generator.tokens[module]!![expression.substring(1)]!!
+                            javadoc = processDocumentation("Sets the $expression value to the \\#member field.")
+                            token
+                        } else {
+                            javadoc = "Sets the default value to the #member field."
+                            expression
+                        }
+                    }
+                    printSetterJavadoc(accessMode, it, indent, javadoc, setter)
+                    println("${indent}public $returnType $setter\$Default() { return $setter(${expression.replace('#', '.')}); }")
+                }
             }
         }
     }

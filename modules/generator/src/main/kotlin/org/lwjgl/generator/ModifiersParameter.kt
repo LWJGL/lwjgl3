@@ -192,18 +192,6 @@ class Terminated(val value: String) : ParameterModifier {
 /** Marks a buffer parameter as null-terminated. */
 val NullTerminated = Terminated("")
 
-/** Marks a parameter to be replaced with an expression. */
-class Expression(
-    /** The expression to use instead of the parameter name. */
-    val value: String,
-    /** If true, the parameter will not be removed from the method signature. */
-    val keepParam: Boolean = false,
-    /** If true, the normal method overload (without the applied Expression) will not be generated. */
-    val skipNormal: Boolean = false
-) : ParameterModifier {
-    override val isSpecial = true
-}
-
 interface AutoTypeToken {
     val name: String
     val mapping: PointerMapping
