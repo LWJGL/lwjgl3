@@ -35,7 +35,7 @@ val NV_dedicated_allocation_image_aliasing = "NVDedicatedAllocationImageAliasing
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Nuno Subtil <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_dedicated_allocation_image_aliasing:%20&amp;body=@nsubtil%20">nsubtil</a></li>
+                <li>Nuno Subtil <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_dedicated_allocation_image_aliasing] @nsubtil%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_dedicated_allocation_image_aliasing extension&gt;&gt;">nsubtil</a></li>
             </ul></dd>
         </dl>
 

@@ -36,7 +36,7 @@ val EXT_acquire_xlib_display = "EXTAcquireXlibDisplay".nativeClassVK("EXT_acquir
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_acquire_xlib_display:%20&amp;body=@cubanismo%20">cubanismo</a></li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_acquire_xlib_display] @cubanismo%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_acquire_xlib_display extension&gt;&gt;">cubanismo</a></li>
             </ul></dd>
         </dl>
 

@@ -45,7 +45,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_IMG_filter_cubic:%20&amp;body=@tobski%20">tobski</a></li>
+ * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_IMG_filter_cubic] @tobski%0A&lt;&lt;Here describe the issue or question you have about the VK_IMG_filter_cubic extension&gt;&gt;">tobski</a></li>
  * </ul></dd>
  * </dl>
  * 

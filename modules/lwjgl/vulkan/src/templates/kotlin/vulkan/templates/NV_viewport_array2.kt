@@ -50,7 +50,7 @@ val NV_viewport_array2 = "NVViewportArray2".nativeClassVK("NV_viewport_array2", 
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_viewport_array2:%20&amp;body=@dgkoch%20">dgkoch</a></li>
+                <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_viewport_array2] @dgkoch%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_viewport_array2 extension&gt;&gt;">dgkoch</a></li>
             </ul></dd>
         </dl>
 
@@ -78,12 +78,24 @@ val NV_viewport_array2 = "NVViewportArray2".nativeClassVK("NV_viewport_array2", 
     IntConstant(
         "The extension specification version.",
 
-        "NV_VIEWPORT_ARRAY2_SPEC_VERSION".."1"
+        "NV_VIEWPORT_ARRAY_2_SPEC_VERSION".."1"
     )
 
     StringConstant(
         "The extension name.",
 
-        "NV_VIEWPORT_ARRAY2_EXTENSION_NAME".."VK_NV_viewport_array2"
+        "NV_VIEWPORT_ARRAY_2_EXTENSION_NAME".."VK_NV_viewport_array2"
+    )
+
+    IntConstant(
+        "The extension specification version.",
+
+        "NV_VIEWPORT_ARRAY2_SPEC_VERSION".."VK_NV_VIEWPORT_ARRAY_2_SPEC_VERSION"
+    )
+
+    StringConstant(
+        "The extension name.",
+
+        "NV_VIEWPORT_ARRAY2_EXTENSION_NAME".expr("VK_NV_VIEWPORT_ARRAY_2_EXTENSION_NAME")
     )
 }

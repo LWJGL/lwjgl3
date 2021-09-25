@@ -259,7 +259,7 @@ val KHR_performance_query = "KHRPerformanceQuery".nativeClassVK("KHR_performance
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Alon Or-bach <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_performance_query:%20&amp;body=@alonorbach%20">alonorbach</a></li>
+                <li>Alon Or-bach <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_performance_query] @alonorbach%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_performance_query extension&gt;&gt;">alonorbach</a></li>
             </ul></dd>
         </dl>
 
@@ -415,9 +415,6 @@ val KHR_performance_query = "KHRPerformanceQuery".nativeClassVK("KHR_performance
             <li>#PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR specifies that recording the counter <b>may</b> have a noticeable performance impact.</li>
             <li>#PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR specifies that concurrently recording the counter while other submitted command buffers are running <b>may</b> impact the accuracy of the recording.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkPerformanceCounterDescriptionFlagsKHR}
         """,
 
         "PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR".enum(0x00000001),

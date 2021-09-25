@@ -37,7 +37,7 @@ val INTEL_shader_integer_functions2 = "INTELShaderIntegerFunctions2".nativeClass
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Ian Romanick <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_INTEL_shader_integer_functions2:%20&amp;body=@ianromanick%20">ianromanick</a></li>
+                <li>Ian Romanick <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_INTEL_shader_integer_functions2] @ianromanick%0A&lt;&lt;Here describe the issue or question you have about the VK_INTEL_shader_integer_functions2 extension&gt;&gt;">ianromanick</a></li>
             </ul></dd>
         </dl>
 

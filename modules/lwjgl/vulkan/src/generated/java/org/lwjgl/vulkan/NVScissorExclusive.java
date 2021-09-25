@@ -31,7 +31,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Pat Brown <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_scissor_exclusive:%20&amp;body=@nvpbrown%20">nvpbrown</a></li>
+ * <li>Pat Brown <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_scissor_exclusive] @nvpbrown%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_scissor_exclusive extension&gt;&gt;">nvpbrown</a></li>
  * </ul></dd>
  * </dl>
  * 

@@ -39,7 +39,7 @@ val NV_cooperative_matrix = "NVCooperativeMatrix".nativeClassVK("NV_cooperative_
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_cooperative_matrix:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
+                <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_cooperative_matrix] @jeffbolznv%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_cooperative_matrix extension&gt;&gt;">jeffbolznv</a></li>
             </ul></dd>
         </dl>
 

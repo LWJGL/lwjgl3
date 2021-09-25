@@ -39,7 +39,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_external_memory_capabilities:%20&amp;body=@cubanismo%20">cubanismo</a></li>
+ * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_external_memory_capabilities] @cubanismo%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_external_memory_capabilities extension&gt;&gt;">cubanismo</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -81,10 +81,6 @@ public class NVExternalMemoryCapabilities {
      * <li>{@link #VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV} specifies a valid NT handle to memory returned by {@code IDXGIResource1::CreateSharedHandle}, or a handle duplicated from such a handle using {@code DuplicateHandle()}.</li>
      * <li>{@link #VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV} specifies a handle to memory returned by {@code IDXGIResource::GetSharedHandle()}.</li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkExternalMemoryHandleTypeFlagsNV}</p>
      */
     public static final int
         VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV     = 0x1,
@@ -105,7 +101,7 @@ public class NVExternalMemoryCapabilities {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkExternalImageFormatPropertiesNV}, {@code VkExternalMemoryFeatureFlagsNV}, {@link #vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV}</p>
+     * <p>{@link VkExternalImageFormatPropertiesNV}, {@link #vkGetPhysicalDeviceExternalImageFormatPropertiesNV GetPhysicalDeviceExternalImageFormatPropertiesNV}</p>
      */
     public static final int
         VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV = 0x1,

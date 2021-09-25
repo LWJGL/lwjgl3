@@ -240,7 +240,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Mark Young <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_debug_utils:%20&amp;body=@marky-lunarg%20">marky-lunarg</a></li>
+                <li>Mark Young <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_debug_utils] @marky-lunarg%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_debug_utils extension&gt;&gt;">marky-lunarg</a></li>
             </ul></dd>
         </dl>
 
@@ -335,7 +335,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         </div>
 
         <h5>See Also</h5>
-        {@code VkDebugUtilsMessageSeverityFlagsEXT}, #SubmitDebugUtilsMessageEXT()
+        #SubmitDebugUtilsMessageEXT()
         """,
 
         "DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT".enum(0x00000001),
@@ -354,9 +354,6 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
             <li>#DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT specifies that something has occurred during validation against the Vulkan specification that may indicate invalid behavior.</li>
             <li>#DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT specifies a potentially non-optimal use of Vulkan, e.g. using #CmdClearColorImage() when setting ##VkAttachmentDescription{@code ::loadOp} to #ATTACHMENT_LOAD_OP_CLEAR would have worked.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkDebugUtilsMessageTypeFlagsEXT}
         """,
 
         "DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT".enum(0x00000001),
@@ -614,6 +611,8 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 
         <h5>Description</h5>
         An application <b>may</b> open a debug label region in one command buffer and close it in another, or otherwise split debug label regions across multiple command buffers or multiple queue submissions. When viewed from the linear series of submissions to a single queue, the calls to #CmdBeginDebugUtilsLabelEXT() and #CmdEndDebugUtilsLabelEXT() <b>must</b> be matched and balanced.
+
+        There <b>can</b> be problems reporting command buffer debug labels during the recording process because command buffers <b>may</b> be recorded out of sequence with the resulting execution order. Since the recording order <b>may</b> be different, a solitary command buffer <b>may</b> have an inconsistent view of the debug label regions by itself. Therefore, if an issue occurs during the recording of a command buffer, and the environment requires returning debug labels, the implementation <b>may</b> return only those labels it is aware of. This is true even if the implementation is aware of only the debug labels within the command buffer being actively recorded.
 
         <h5>Valid Usage</h5>
         <ul>

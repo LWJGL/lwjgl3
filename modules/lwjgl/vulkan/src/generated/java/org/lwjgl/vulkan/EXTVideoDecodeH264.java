@@ -142,18 +142,9 @@ public final class EXTVideoDecodeH264 {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_INTERLEAVED_LINES_BIT_EXT VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_INTERLEAVED_LINES_BIT_EXT} indicates support for or use of a picture layout for interlaced content where all lines belonging to the first field are decoded to the even-numbered lines within the picture resource, and all lines belonging to the second field are decoded to the odd-numbered lines within the picture resource.</li>
-     * <li>{@link #VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_EXT VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_EXT} indicates support for or use of a picture layout for interlaced content where all lines belonging to the first field are grouped together in a single plane, followed by another plane containing all lines belonging to the second field.</li>
-     * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkVideoDecodeH264PictureLayoutFlagsEXT}</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_PROGRESSIVE_EXT VIDEO_DECODE_H264_PICTURE_LAYOUT_PROGRESSIVE_EXT}</li>
+     * <li>{@link #VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_PROGRESSIVE_EXT VIDEO_DECODE_H264_PICTURE_LAYOUT_PROGRESSIVE_EXT} specifies support for progressive content. This flag has the value 0.</li>
+     * <li>{@link #VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_INTERLEAVED_LINES_BIT_EXT VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_INTERLEAVED_LINES_BIT_EXT} specifies support for or use of a picture layout for interlaced content where all lines belonging to the first field are decoded to the even-numbered lines within the picture resource, and all lines belonging to the second field are decoded to the odd-numbered lines within the picture resource.</li>
+     * <li>{@link #VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_EXT VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_EXT} specifies support for or use of a picture layout for interlaced content where all lines belonging to the first field are grouped together in a single plane, followed by another plane containing all lines belonging to the second field.</li>
      * </ul>
      */
     public static final int

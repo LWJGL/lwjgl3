@@ -47,7 +47,7 @@ val AMD_gpu_shader_int16 = "AMDGPUShaderInt16".nativeClassVK("AMD_gpu_shader_int
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Qun Lin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_gpu_shader_int16:%20&amp;body=@linqun%20">linqun</a></li>
+                <li>Qun Lin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_gpu_shader_int16] @linqun%0A&lt;&lt;Here describe the issue or question you have about the VK_AMD_gpu_shader_int16 extension&gt;&gt;">linqun</a></li>
             </ul></dd>
         </dl>
 

@@ -35,7 +35,7 @@ val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Vikram Kushwaha <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_extended_dynamic_state2:%20&amp;body=@vkushwaha-nv%20">vkushwaha-nv</a></li>
+                <li>Vikram Kushwaha <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_extended_dynamic_state2] @vkushwaha-nv%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_extended_dynamic_state2 extension&gt;&gt;">vkushwaha-nv</a></li>
             </ul></dd>
         </dl>
 

@@ -175,7 +175,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Lionel Landwerlin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_INTEL_performance_query:%20&amp;body=@llandwerlin%20">llandwerlin</a></li>
+ * <li>Lionel Landwerlin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_INTEL_performance_query] @llandwerlin%0A&lt;&lt;Here describe the issue or question you have about the VK_INTEL_performance_query extension&gt;&gt;">llandwerlin</a></li>
  * </ul></dd>
  * </dl>
  * 

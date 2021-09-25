@@ -42,7 +42,7 @@ val NV_sample_mask_override_coverage = "NVSampleMaskOverrideCoverage".nativeClas
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_sample_mask_override_coverage:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
+                <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_sample_mask_override_coverage] @pdaniell-nv%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_sample_mask_override_coverage extension&gt;&gt;">pdaniell-nv</a></li>
             </ul></dd>
         </dl>
 

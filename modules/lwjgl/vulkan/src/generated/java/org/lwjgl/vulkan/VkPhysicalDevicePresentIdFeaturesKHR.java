@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDevicePresentIdFeaturesKHR {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #presentId};
  * }</code></pre>
  */
@@ -79,21 +79,21 @@ public class VkPhysicalDevicePresentIdFeaturesKHR extends Struct implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** indicates that the implementation supports specifying present ID values in the {@link VkPresentIdKHR} extension to the {@link VkPresentInfoKHR} struct. */
     @NativeType("VkBool32")
     public boolean presentId() { return npresentId(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePresentIdFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRPresentId#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR} value to the {@code sType} field. */
+    /** Sets the {@link KHRPresentId#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR} value to the {@link #sType} field. */
     public VkPhysicalDevicePresentIdFeaturesKHR sType$Default() { return sType(KHRPresentId.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR); }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDevicePresentIdFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #presentId} field. */
     public VkPhysicalDevicePresentIdFeaturesKHR presentId(@NativeType("VkBool32") boolean value) { npresentId(address(), value ? 1 : 0); return this; }
@@ -289,21 +289,21 @@ public class VkPhysicalDevicePresentIdFeaturesKHR extends Struct implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDevicePresentIdFeaturesKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevicePresentIdFeaturesKHR.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDevicePresentIdFeaturesKHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevicePresentIdFeaturesKHR.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDevicePresentIdFeaturesKHR#presentId} field. */
         @NativeType("VkBool32")
         public boolean presentId() { return VkPhysicalDevicePresentIdFeaturesKHR.npresentId(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePresentIdFeaturesKHR#sType} field. */
         public VkPhysicalDevicePresentIdFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePresentIdFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRPresentId#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR} value to the {@code sType} field. */
+        /** Sets the {@link KHRPresentId#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR} value to the {@link VkPhysicalDevicePresentIdFeaturesKHR#sType} field. */
         public VkPhysicalDevicePresentIdFeaturesKHR.Buffer sType$Default() { return sType(KHRPresentId.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR); }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDevicePresentIdFeaturesKHR#pNext} field. */
         public VkPhysicalDevicePresentIdFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePresentIdFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDevicePresentIdFeaturesKHR#presentId} field. */
         public VkPhysicalDevicePresentIdFeaturesKHR.Buffer presentId(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePresentIdFeaturesKHR.npresentId(address(), value ? 1 : 0); return this; }

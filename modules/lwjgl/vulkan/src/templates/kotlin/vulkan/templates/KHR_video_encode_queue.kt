@@ -150,9 +150,6 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         <ul>
             <li>#VIDEO_ENCODE_RESERVED_0_BIT_KHR The current version of the specification has reserved this value for future use.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkVideoEncodeFlagsKHR}
         """,
 
         "VIDEO_ENCODE_DEFAULT_KHR".."0",
@@ -167,9 +164,6 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         <ul>
             <li>#VIDEO_ENCODE_RESERVED_0_BIT_KHR The current version of the specification has reserved this value for future use.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkVideoEncodeRateControlFlagsKHR}
         """,
 
         "VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR".."0",
@@ -188,7 +182,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeRateControlInfoKHR, {@code VkVideoEncodeRateControlModeFlagsKHR}
+        ##VkVideoEncodeRateControlInfoKHR
         """,
 
         "VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR".."0",

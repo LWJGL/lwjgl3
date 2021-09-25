@@ -25,7 +25,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_index_type_uint8:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
+ * <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_index_type_uint8] @pdaniell-nv%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_index_type_uint8 extension&gt;&gt;">pdaniell-nv</a></li>
  * </ul></dd>
  * </dl>
  * 

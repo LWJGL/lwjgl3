@@ -43,7 +43,7 @@ val KHR_external_memory = "KHRExternalMemory".nativeClassVK("KHR_external_memory
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_external_memory:%20&amp;body=@cubanismo%20">cubanismo</a></li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_external_memory] @cubanismo%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_external_memory extension&gt;&gt;">cubanismo</a></li>
             </ul></dd>
         </dl>
 

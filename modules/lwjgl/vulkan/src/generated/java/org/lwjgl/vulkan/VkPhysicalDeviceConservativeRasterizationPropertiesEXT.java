@@ -138,7 +138,7 @@ public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Stru
     /** {@link VK10#VK_TRUE TRUE} if the implementation supports the SPIR-V builtin fragment shader input variable {@code FullyCoveredEXT} which specifies that conservative rasterization is enabled and the fragment area is fully covered by the generating primitive. */
     @NativeType("VkBool32")
     public boolean fullyCoveredFragmentShaderInputVariable() { return nfullyCoveredFragmentShaderInputVariable(address()) != 0; }
-    /** {@link VK10#VK_TRUE TRUE} if the implementation supports conservative rasterization with the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-fragment-earlytest-postdepthcoverage">{@code PostDepthCoverage}</a> execution mode enabled. When supported the {@code SampleMask} built-in input variable will reflect the coverage after the early per-fragment depth and stencil tests are applied even when conservative rasterization is enabled. Otherwise <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#shaders-fragment-earlytest-postdepthcoverage">{@code PostDepthCoverage}</a> execution mode <b>must</b> not be used when conservative rasterization is enabled. */
+    /** {@link VK10#VK_TRUE TRUE} if the implementation supports conservative rasterization with the {@code PostDepthCoverage} execution mode enabled. Otherwise the {@code PostDepthCoverage} execution mode <b>must</b> not be used when conservative rasterization is enabled. */
     @NativeType("VkBool32")
     public boolean conservativeRasterizationPostDepthCoverage() { return nconservativeRasterizationPostDepthCoverage(address()) != 0; }
 

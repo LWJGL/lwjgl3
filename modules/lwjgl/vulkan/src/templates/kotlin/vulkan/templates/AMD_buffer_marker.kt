@@ -44,7 +44,7 @@ val AMD_buffer_marker = "AMDBufferMarker".nativeClassVK("AMD_buffer_marker", typ
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_buffer_marker:%20&amp;body=@drakos-amd%20">drakos-amd</a></li>
+                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_buffer_marker] @drakos-amd%0A&lt;&lt;Here describe the issue or question you have about the VK_AMD_buffer_marker extension&gt;&gt;">drakos-amd</a></li>
             </ul></dd>
         </dl>
 

@@ -51,7 +51,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Leger <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_QCOM_render_pass_transform:%20&amp;body=@jackohound%20">jackohound</a></li>
+ * <li>Jeff Leger <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_render_pass_transform] @jackohound%0A&lt;&lt;Here describe the issue or question you have about the VK_QCOM_render_pass_transform extension&gt;&gt;">jackohound</a></li>
  * </ul></dd>
  * </dl>
  * 

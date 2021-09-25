@@ -15,7 +15,7 @@ package org.lwjgl.vulkan;
  * <li>Motion instances to move existing instances over time</li>
  * </ul>
  * 
- * <p>The motion represented here is parameterized across a normalized timestep between 0.0 and 1.0. A motion trace using OpTraceRayMotionNV provides a time within that normalized range to be used when intersecting that ray with geometry. The geometry can be provided with motion by a combination of adding a second vertex position for time of 1.0 using {@link VkAccelerationStructureGeometryMotionTrianglesDataNV} and providing multiple transforms in the instance using {@link VkAccelerationStructureMotionInstanceNV}.</p>
+ * <p>The motion represented here is parameterized across a normalized timestep between 0.0 and 1.0. A motion trace using {@code OpTraceRayMotionNV} provides a time within that normalized range to be used when intersecting that ray with geometry. The geometry can be provided with motion by a combination of adding a second vertex position for time of 1.0 using {@link VkAccelerationStructureGeometryMotionTrianglesDataNV} and providing multiple transforms in the instance using {@link VkAccelerationStructureMotionInstanceNV}.</p>
  * 
  * <h5>VK_NV_ray_tracing_motion_blur</h5>
  * 

@@ -1778,8 +1778,8 @@ val VkPhysicalDeviceTransformFeedbackPropertiesEXT = struct(Module.VULKAN, "VkPh
     uint32_t("maxTransformFeedbackStreamDataSize", "the maximum amount of data in bytes for each vertex that captured to one or more transform feedback buffers associated with a specific vertex stream.")
     uint32_t("maxTransformFeedbackBufferDataSize", "the maximum amount of data in bytes for each vertex that can be captured to a specific transform feedback buffer.")
     uint32_t("maxTransformFeedbackBufferDataStride", "the maximum stride between each capture of vertex data to the buffer.")
-    VkBool32("transformFeedbackQueries", "#TRUE if the implementation supports the #QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT query type. {@code transformFeedbackQueries} is false if queries of this type <b>cannot</b> be created.")
-    VkBool32("transformFeedbackStreamsLinesTriangles", "#TRUE if the implementation supports the geometry shader {@code OpExecutionMode} of {@code OutputLineStrip} and {@code OutputTriangleStrip} in addition to {@code OutputPoints} when more than one vertex stream is output. If {@code transformFeedbackStreamsLinesTriangles} is false the implementation only supports an {@code OpExecutionMode} of {@code OutputPoints} when more than one vertex stream is output from the geometry shader.")
+    VkBool32("transformFeedbackQueries", "#TRUE if the implementation supports the #QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT query type. {@code transformFeedbackQueries} is #FALSE if queries of this type <b>cannot</b> be created.")
+    VkBool32("transformFeedbackStreamsLinesTriangles", "#TRUE if the implementation supports the geometry shader {@code OpExecutionMode} of {@code OutputLineStrip} and {@code OutputTriangleStrip} in addition to {@code OutputPoints} when more than one vertex stream is output. If {@code transformFeedbackStreamsLinesTriangles} is #FALSE the implementation only supports an {@code OpExecutionMode} of {@code OutputPoints} when more than one vertex stream is output from the geometry shader.")
     VkBool32("transformFeedbackRasterizationStreamSelect", "#TRUE if the implementation supports the {@code GeometryStreams} SPIR-V capability and the application can use ##VkPipelineRasterizationStateStreamCreateInfoEXT to modify which vertex stream output is used for rasterization. Otherwise vertex stream 0 <b>must</b> always be used for rasterization.")
     VkBool32("transformFeedbackDraw", "#TRUE if the implementation supports the #CmdDrawIndirectByteCountEXT() function otherwise the function <b>must</b> not be called.")
 }
@@ -2142,6 +2142,17 @@ val VkVideoDecodeH264ProfileEXT = struct(Module.VULKAN, "VkVideoDecodeH264Profil
     documentation =
         """
         Structure specifying H.264 decode profile.
+
+        <h5>Description</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        When passing ##VkVideoDecodeH264ProfileEXT to #CreateVideoSessionKHR() in the {@code pNext} chain of ##VkVideoSessionCreateInfoKHR, requests for a {@code pictureLayout} not supported by the implementation will result in failure of the command.
+        </div>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If the ##VkVideoDecodeH264ProfileEXT structure is included in the {@code pNext} chain of the ##VkVideoCapabilitiesKHR structure passed to #GetPhysicalDeviceVideoCapabilitiesKHR(), the value in {@code pictureLayout} is treated as a bitmask of requested picture layouts. It is always valid to use the value #VIDEO_DECODE_H264_PICTURE_LAYOUT_PROGRESSIVE_EXT as the implementation is guaranteed to support decoding of progressive content.</li>
+            <li>If the ##VkVideoDecodeH264ProfileEXT structure is included in the {@code pNext} chain of the ##VkVideoSessionCreateInfoKHR structure passed to #CreateVideoSessionKHR(), the value in {@code pictureLayout} <b>must</b> be exactly one of #VIDEO_DECODE_H264_PICTURE_LAYOUT_PROGRESSIVE_EXT, #VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_INTERLEAVED_LINES_BIT_EXT or #VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_EXT.</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -4083,7 +4094,7 @@ val VkPhysicalDeviceConservativeRasterizationPropertiesEXT = struct(Module.VULKA
     VkBool32("degenerateTrianglesRasterized", "#FALSE if the implementation culls primitives generated from triangles that become zero area after they are quantized to the fixed-point rasterization pixel grid. {@code degenerateTrianglesRasterized} is #TRUE if these primitives are not culled and the provoking vertex attributes and depth value are used for the fragments. The primitive area calculation is done on the primitive generated from the clipped triangle if applicable. Zero area primitives are backfacing and the application <b>can</b> enable backface culling if desired.")
     VkBool32("degenerateLinesRasterized", "#FALSE if the implementation culls lines that become zero length after they are quantized to the fixed-point rasterization pixel grid. {@code degenerateLinesRasterized} is #TRUE if zero length lines are not culled and the provoking vertex attributes and depth value are used for the fragments.")
     VkBool32("fullyCoveredFragmentShaderInputVariable", "#TRUE if the implementation supports the SPIR-V builtin fragment shader input variable {@code FullyCoveredEXT} which specifies that conservative rasterization is enabled and the fragment area is fully covered by the generating primitive.")
-    VkBool32("conservativeRasterizationPostDepthCoverage", "#TRUE if the implementation supports conservative rasterization with the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#shaders-fragment-earlytest-postdepthcoverage\">{@code PostDepthCoverage}</a> execution mode enabled. When supported the {@code SampleMask} built-in input variable will reflect the coverage after the early per-fragment depth and stencil tests are applied even when conservative rasterization is enabled. Otherwise <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#shaders-fragment-earlytest-postdepthcoverage\">{@code PostDepthCoverage}</a> execution mode <b>must</b> not be used when conservative rasterization is enabled.")
+    VkBool32("conservativeRasterizationPostDepthCoverage", "#TRUE if the implementation supports conservative rasterization with the {@code PostDepthCoverage} execution mode enabled. Otherwise the {@code PostDepthCoverage} execution mode <b>must</b> not be used when conservative rasterization is enabled.")
 }
 
 val VkPipelineRasterizationConservativeStateCreateInfoEXT = struct(Module.VULKAN, "VkPipelineRasterizationConservativeStateCreateInfoEXT") {
@@ -5746,7 +5757,7 @@ val VkAccelerationStructureBuildRangeInfoKHR = struct(Module.VULKAN, "VkAccelera
                 <ul>
                     <li>If the geometry uses indices, <code>primitiveCount × 3</code> indices are consumed from ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::indexData}, starting at an offset of {@code primitiveOffset}. The value of {@code firstVertex} is added to the index values before fetching vertices.</li>
                     <li>If the geometry does not use indices, <code>primitiveCount × 3</code> vertices are consumed from ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::vertexData}, starting at an offset of <code>primitiveOffset + ##VkAccelerationStructureGeometryTrianglesDataKHR::vertexStride × firstVertex</code>.</li>
-                    <li>If ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::transformData} is not {@code NULL}, a single ##VkTransformMatrixKHR structure is consumed from ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::transformData}, at an offset of {@code transformOffset}. This transformation matrix is used by all triangles to transform the vertices into the position used.</li>
+                    <li>If ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::transformData} is not {@code NULL}, a single ##VkTransformMatrixKHR structure is consumed from ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::transformData}, at an offset of {@code transformOffset}. This matrix describes a transformation from the space in which the vertices for all triangles in this geometry are described to the space in which the acceleration structure is defined.</li>
                 </ul>
             </li>
             <li>For geometries of type #GEOMETRY_TYPE_AABBS_KHR, {@code primitiveCount} is the number of axis-aligned bounding boxes. {@code primitiveCount} ##VkAabbPositionsKHR structures are consumed from ##VkAccelerationStructureGeometryAabbsDataKHR{@code ::data}, starting at an offset of {@code primitiveOffset}.</li>
@@ -5832,7 +5843,7 @@ val VkAccelerationStructureGeometryTrianglesDataKHR = struct(Module.VULKAN, "VkA
     uint32_t("maxVertex", "the highest index of a vertex that will be addressed by a build command using this structure.")
     VkIndexType("indexType", "the {@code VkIndexType} of each index element.")
     VkDeviceOrHostAddressConstKHR("indexData", "a device or host address to memory containing index data for this geometry.")
-    VkDeviceOrHostAddressConstKHR("transformData", "a device or host address to memory containing an optional reference to a ##VkTransformMatrixKHR structure defining a transformation that should be applied to vertices in this geometry.")
+    VkDeviceOrHostAddressConstKHR("transformData", "a device or host address to memory containing an optional reference to a ##VkTransformMatrixKHR structure that describes a transformation from the space in which the vertices in this geometry are described to the space in which the acceleration structure is defined.")
 }
 
 val VkTransformMatrixKHR = struct(Module.VULKAN, "VkTransformMatrixKHR") {
@@ -6064,7 +6075,7 @@ val VkAccelerationStructureCreateInfoKHR = struct(Module.VULKAN, "VkAcceleration
         Applications <b>should</b> avoid creating acceleration structures with application-provided addresses and implementation-provided addresses in the same process, to reduce the likelihood of #ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR errors.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The expected usage for this is that a trace capture/replay tool will add the #BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT flag to all buffers that use #BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT, and will add #BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT to all buffers used as storage for an acceleration structure where {@code deviceAddress} is not zero. During capture the tool will save the queried opaque device addresses in the trace. During replay, the buffers will be created specifying the original address so any address values stored in the trace data will remain valid.
+        The expected usage for this is that a trace capture/replay tool will add the #BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT flag to all buffers that use #BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT, and will add #BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT to all buffers used as storage for an acceleration structure where {@code deviceAddress} is not zero. This also means that the tool will need to add #MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT to memory allocations to allow the flag to be set where the application may not have otherwise required it. During capture the tool will save the queried opaque device addresses in the trace. During replay, the buffers will be created specifying the original address so any address values stored in the trace data will remain valid.
 
         Implementations are expected to separate such buffers in the GPU address space so normal allocations will avoid using these addresses. Apps/tools should avoid mixing app-provided and implementation-provided addresses for buffers created with #BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT, to avoid address space allocation conflicts.
         </div>
@@ -6390,7 +6401,7 @@ val VkRayTracingShaderGroupCreateInfoKHR = struct(Module.VULKAN, "VkRayTracingSh
     uint32_t("closestHitShader", "the optional index of the closest hit shader from ##VkRayTracingPipelineCreateInfoKHR{@code ::pStages} in the group if the shader group has {@code type} of #RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR or #RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR, and #SHADER_UNUSED_KHR otherwise.")
     uint32_t("anyHitShader", "the optional index of the any-hit shader from ##VkRayTracingPipelineCreateInfoKHR{@code ::pStages} in the group if the shader group has {@code type} of #RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR or #RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR, and #SHADER_UNUSED_KHR otherwise.")
     uint32_t("intersectionShader", "the index of the intersection shader from ##VkRayTracingPipelineCreateInfoKHR{@code ::pStages} in the group if the shader group has {@code type} of #RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR, and #SHADER_UNUSED_KHR otherwise.")
-    nullable..opaque_const_p("pShaderGroupCaptureReplayHandle", "an optional pointer to replay information for this shader group. Ignored if ##VkPhysicalDeviceRayTracingPipelineFeaturesKHR{@code ::rayTracingPipelineShaderGroupHandleCaptureReplay} is #FALSE.")
+    nullable..opaque_const_p("pShaderGroupCaptureReplayHandle", "{@code NULL} or a pointer to replay information for this shader group. Ignored if ##VkPhysicalDeviceRayTracingPipelineFeaturesKHR{@code ::rayTracingPipelineShaderGroupHandleCaptureReplay} is #FALSE.")
 }
 
 val VkPipelineLibraryCreateInfoKHR = struct(Module.VULKAN, "VkPipelineLibraryCreateInfoKHR") {
@@ -6834,15 +6845,15 @@ val VkDrmFormatModifierPropertiesEXT = struct(Module.VULKAN, "VkDrmFormatModifie
 
         The implementation <b>must</b> not return {@code DRM_FORMAT_MOD_INVALID} in {@code drmFormatModifier}.
 
-        An image’s <em>memory planecount</em> (as returned by {@code drmFormatModifierPlaneCount}) is distinct from its <em>format planecount</em> (in the sense of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar</a> Y′C<sub>B</sub>C<sub>R</sub> formats). In {@code VkImageAspectFlags}, each {@code VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT} represents a <em>memory plane</em> and each {@code VK_IMAGE_ASPECT_PLANE_i_BIT} a <em>format plane</em>.
+        An image’s <em>memory planecount</em> (as returned by {@code drmFormatModifierPlaneCount}) is distinct from its <em>format planecount</em> (in the sense of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar</a> Y′C<sub>B</sub>C<sub>R</sub> formats). In {@code VkImageAspectFlags}, each <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>_i_</em>BIT_EXT</code> represents a <em>memory plane</em> and each <code>VK_IMAGE_ASPECT_PLANE<em>_i_</em>BIT</code> a <em>format plane</em>.
 
-        An image’s set of <em>format planes</em> is an ordered partition of the image’s <b>content</b> into separable groups of format channels. The ordered partition is encoded in the name of each {@code VkFormat}. For example, #FORMAT_G8_B8R8_2PLANE_420_UNORM contains two <em>format planes</em>; the first plane contains the green channel and the second plane contains the blue channel and red channel. If the format name does not contain {@code PLANE}, then the format contains a single plane; for example, #FORMAT_R8G8B8A8_UNORM. Some commands, such as #CmdCopyBufferToImage(), do not operate on all format channels in the image, but instead operate only on the <em>format planes</em> explicitly chosen by the application and operate on each <em>format plane</em> independently.
+        An image’s set of <em>format planes</em> is an ordered partition of the image’s <b>content</b> into separable groups of format components. The ordered partition is encoded in the name of each {@code VkFormat}. For example, #FORMAT_G8_B8R8_2PLANE_420_UNORM contains two <em>format planes</em>; the first plane contains the green component and the second plane contains the blue component and red component. If the format name does not contain {@code PLANE}, then the format contains a single plane; for example, #FORMAT_R8G8B8A8_UNORM. Some commands, such as #CmdCopyBufferToImage(), do not operate on all format components in the image, but instead operate only on the <em>format planes</em> explicitly chosen by the application and operate on each <em>format plane</em> independently.
 
         An image’s set of <em>memory planes</em> is an ordered partition of the image’s <b>memory</b> rather than the image’s <b>content</b>. Each <em>memory plane</em> is a contiguous range of memory. The union of an image’s <em>memory planes</em> is not necessarily contiguous.
 
         If an image is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#glossary-linear-resource">linear</a>, then the partition is the same for <em>memory planes</em> and for <em>format planes</em>. Therefore, if the returned {@code drmFormatModifier} is {@code DRM_FORMAT_MOD_LINEAR}, then {@code drmFormatModifierPlaneCount} <b>must</b> equal the <em>format planecount</em>, and {@code drmFormatModifierTilingFeatures} <b>must</b> be identical to the ##VkFormatProperties2{@code ::linearTilingFeatures} returned in the same {@code pNext} chain.
 
-        If an image is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#glossary-linear-resource">non-linear</a>, then the partition of the image’s <b>memory</b> into <em>memory planes</em> is implementation-specific and <b>may</b> be unrelated to the partition of the image’s <b>content</b> into <em>format planes</em>. For example, consider an image whose {@code format} is #FORMAT_G8_B8_R8_3PLANE_420_UNORM, {@code tiling} is #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, whose {@code drmFormatModifier} is not {@code DRM_FORMAT_MOD_LINEAR}, and {@code flags} lacks #IMAGE_CREATE_DISJOINT_BIT. The image has 3 <em>format planes</em>, and commands such #CmdCopyBufferToImage() act on each <em>format plane</em> independently as if the data of each <em>format plane</em> were separable from the data of the other planes. In a straightforward implementation, the implementation <b>may</b> store the image’s content in 3 adjacent <em>memory planes</em> where each <em>memory plane</em> corresponds exactly to a <em>format plane</em>. However, the implementation <b>may</b> also store the image’s content in a single <em>memory plane</em> where all format channels are combined using an implementation-private block-compressed format; or the implementation <b>may</b> store the image’s content in a collection of 7 adjacent <em>memory planes</em> using an implementation-private sharding technique. Because the image is non-linear and non-disjoint, the implementation has much freedom when choosing the image’s placement in memory.
+        If an image is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#glossary-linear-resource">non-linear</a>, then the partition of the image’s <b>memory</b> into <em>memory planes</em> is implementation-specific and <b>may</b> be unrelated to the partition of the image’s <b>content</b> into <em>format planes</em>. For example, consider an image whose {@code format} is #FORMAT_G8_B8_R8_3PLANE_420_UNORM, {@code tiling} is #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, whose {@code drmFormatModifier} is not {@code DRM_FORMAT_MOD_LINEAR}, and {@code flags} lacks #IMAGE_CREATE_DISJOINT_BIT. The image has 3 <em>format planes</em>, and commands such #CmdCopyBufferToImage() act on each <em>format plane</em> independently as if the data of each <em>format plane</em> were separable from the data of the other planes. In a straightforward implementation, the implementation <b>may</b> store the image’s content in 3 adjacent <em>memory planes</em> where each <em>memory plane</em> corresponds exactly to a <em>format plane</em>. However, the implementation <b>may</b> also store the image’s content in a single <em>memory plane</em> where all format components are combined using an implementation-private block-compressed format; or the implementation <b>may</b> store the image’s content in a collection of 7 adjacent <em>memory planes</em> using an implementation-private sharding technique. Because the image is non-linear and non-disjoint, the implementation has much freedom when choosing the image’s placement in memory.
 
         The <em>memory planecount</em> applies to function parameters and structures only when the API specifies an explicit requirement on {@code drmFormatModifierPlaneCount}. In all other cases, the <em>memory planecount</em> is ignored.
 
@@ -6940,7 +6951,7 @@ val VkImageDrmFormatModifierExplicitCreateInfoEXT = struct(Module.VULKAN, "VkIma
         Specify that an image be created with the provided DRM format modifier and explicit memory layout.
 
         <h5>Description</h5>
-        The {@code i}<sup>th</sup> member of {@code pPlaneLayouts} describes the layout of the image’s {@code i}<sup>th</sup> <em>memory plane</em> (that is, {@code VK_IMAGE_ASPECT_MEMORY_PLANE_i_BIT_EXT}). In each element of {@code pPlaneLayouts}, the implementation <b>must</b> ignore {@code size}. The implementation calculates the size of each plane, which the application <b>can</b> query with #GetImageSubresourceLayout().
+        The {@code i}<sup>th</sup> member of {@code pPlaneLayouts} describes the layout of the image’s {@code i}<sup>th</sup> <em>memory plane</em> (that is, <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>_i_</em>BIT_EXT</code>). In each element of {@code pPlaneLayouts}, the implementation <b>must</b> ignore {@code size}. The implementation calculates the size of each plane, which the application <b>can</b> query with #GetImageSubresourceLayout().
 
         When creating an image with ##VkImageDrmFormatModifierExplicitCreateInfoEXT, it is the application’s responsibility to satisfy all valid usage requirements. However, the implementation <b>must</b> validate that the provided {@code pPlaneLayouts}, when combined with the provided {@code drmFormatModifier} and other creation parameters in ##VkImageCreateInfo and its {@code pNext} chain, produce a valid image. (This validation is necessarily implementation-dependent and outside the scope of Vulkan, and therefore not described by valid usage requirements). If this validation fails, then #CreateImage() returns #ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT.
 
@@ -7846,7 +7857,7 @@ val VkPipelineRepresentativeFragmentTestStateCreateInfoNV = struct(Module.VULKAN
         <h5>Description</h5>
         If this structure is not included in the {@code pNext} chain, {@code representativeFragmentTestEnable} is considered to be #FALSE, and the representative fragment test is disabled.
 
-        If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#shaders-fragment-earlytest">early fragment tests</a> are not enabled in the active fragment shader, the representative fragment shader test has no effect, even if enabled.
+        If the active fragment shader specifies the {@code EarlyFragmentTests} execution mode, the representative fragment shader test has no effect, even if enabled.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -9389,7 +9400,7 @@ val VkPhysicalDeviceFragmentShadingRatePropertiesKHR = struct(Module.VULKAN, "Vk
     VkBool32("fragmentShadingRateWithSampleMask", "specifies whether the the implementation supports setting valid bits of ##VkPipelineMultisampleStateCreateInfo{@code ::pSampleMask} to 0 for multi-pixel fragments. If this value is #FALSE, zeroing valid bits in the sample mask will clamp the fragment shading rate to <code>(1,1)</code>.")
     VkBool32("fragmentShadingRateWithShaderSampleMask", "specifies whether the implementation supports reading or writing {@code SampleMask} for multi-pixel fragments. If this value is #FALSE, using that built-in will clamp the fragment shading rate to <code>(1,1)</code>.")
     VkBool32("fragmentShadingRateWithConservativeRasterization", "specifies whether <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#primsrast-conservativeraster\">conservative rasterization</a> is supported for multi-pixel fragments. It <b>must</b> be #FALSE if {@link EXTConservativeRasterization VK_EXT_conservative_rasterization} is not supported. If this value is #FALSE, using <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#primsrast-conservativeraster\">conservative rasterization</a> will clamp the fragment shading rate to <code>(1,1)</code>.")
-    VkBool32("fragmentShadingRateWithFragmentShaderInterlock", "specifies whether <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#shaders-fragment-shader-interlock\">fragment shader interlock</a> is supported for multi-pixel fragments. It <b>must</b> be #FALSE if {@link EXTFragmentShaderInterlock VK_EXT_fragment_shader_interlock} is not supported. If this value is #FALSE, using <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#shaders-fragment-shader-interlock\">fragment shader interlock</a> will clamp the fragment shading rate to <code>(1,1)</code>.")
+    VkBool32("fragmentShadingRateWithFragmentShaderInterlock", "specifies whether <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#fragops-shader-interlock\">fragment shader interlock</a> is supported for multi-pixel fragments. It <b>must</b> be #FALSE if {@link EXTFragmentShaderInterlock VK_EXT_fragment_shader_interlock} is not supported. If this value is #FALSE, using <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#fragops-shader-interlock\">fragment shader interlock</a> will clamp the fragment shading rate to <code>(1,1)</code>.")
     VkBool32("fragmentShadingRateWithCustomSampleLocations", "specifies whether <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#primrast-samplelocations\">custom sample locations</a> are supported for multi-pixel fragments. It <b>must</b> be #FALSE if {@link EXTSampleLocations VK_EXT_sample_locations} is not supported. If this value is #FALSE, using <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#primrast-samplelocations\">custom sample locations</a> will clamp the fragment shading rate to <code>(1,1)</code>.")
     VkBool32("fragmentShadingRateStrictMultiplyCombiner", "specifies whether #FRAGMENT_SHADING_RATE_COMBINER_OP_MUL_KHR accurately performs a multiplication or not. Implementations where this value is #FALSE will instead combine rates with an addition. If {@code fragmentShadingRateNonTrivialCombinerOps} is #FALSE, implementations <b>must</b> report this as #FALSE. If {@code fragmentShadingRateNonTrivialCombinerOps} is #TRUE, implementations <b>should</b> report this as #TRUE.")
 }
@@ -9743,8 +9754,8 @@ val VkPhysicalDevicePresentWaitFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDe
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("presentWait", "indicates that the implementation supports {@code vkWaitForPresentKHR}.")
 }
 
@@ -11054,8 +11065,8 @@ val VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR = struct(Module.VULKAN, "
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("shaderIntegerDotProduct", "specifies whether shader modules <b>can</b> declare the {@code DotProductInputAllKHR}, {@code DotProductInput4x8BitKHR}, {@code DotProductInput4x8BitPackedKHR} and {@code DotProductKHR} capabilities.")
 }
 
@@ -11464,8 +11475,8 @@ val VkPhysicalDevicePresentIdFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDevi
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("presentId", "indicates that the implementation supports specifying present ID values in the ##VkPresentIdKHR extension to the ##VkPresentInfoKHR struct.")
 }
 
@@ -12362,8 +12373,8 @@ val VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR = struct(Module.
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("shaderSubgroupUniformControlFlow", "specifies whether the implementation supports the shader execution mode {@code SubgroupUniformControlFlowKHR}")
 }
 
@@ -13726,8 +13737,8 @@ val VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT = struct(Module.VULK
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("primitiveTopologyListRestart", "indicates that list type primitives, #PRIMITIVE_TOPOLOGY_POINT_LIST, #PRIMITIVE_TOPOLOGY_LINE_LIST, #PRIMITIVE_TOPOLOGY_TRIANGLE_LIST, #PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY and #PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY, <b>can</b> use the primitive restart index value in index buffers.")
     VkBool32("primitiveTopologyPatchListRestart", "indicates that the #PRIMITIVE_TOPOLOGY_PATCH_LIST topology <b>can</b> use the primitive restart index value in index buffers.")
 }
@@ -13959,8 +13970,8 @@ val VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT = struct(Module.VULKAN, "VkPh
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("globalPriorityQuery", "indicates whether the implementation supports the ability to query global queue priorities.")
 }
 
@@ -14006,8 +14017,8 @@ val VkPhysicalDeviceMultiDrawFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDevi
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("multiDraw", "indicates that the implementation supports #CmdDrawMultiEXT() and #CmdDrawMultiIndexedEXT().")
 }
 
@@ -14061,4 +14072,23 @@ val VkMultiDrawIndexedInfoEXT = struct(Module.VULKAN, "VkMultiDrawIndexedInfoEXT
     uint32_t("firstIndex", "the first index to draw.")
     uint32_t("indexCount", "the number of vertices to draw.")
     int32_t("vertexOffset", "the value added to the vertex index before indexing into the vertex buffer for indexed multidraws.")
+}
+
+val VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT") {
+    documentation =
+        """
+        Structure describing whether the implementation supports pageable device-local memory.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("pageableDeviceLocalMemory", "indicates that the implementation supports pageable device-local memory and <b>may</b> transparently move device-local memory allocations to host-local memory to better share device-local memory with other applications.")
 }

@@ -38,7 +38,7 @@ val NV_shader_sm_builtins = "NVShaderSmBuiltins".nativeClassVK("NV_shader_sm_bui
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_shader_sm_builtins:%20&amp;body=@dgkoch%20">dgkoch</a></li>
+                <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_shader_sm_builtins] @dgkoch%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_shader_sm_builtins extension&gt;&gt;">dgkoch</a></li>
             </ul></dd>
         </dl>
 

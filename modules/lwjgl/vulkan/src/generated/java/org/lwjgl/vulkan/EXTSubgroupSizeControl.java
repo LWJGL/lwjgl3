@@ -35,7 +35,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Neil Henning <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_subgroup_size_control:%20&amp;body=@sheredom%20">sheredom</a></li>
+ * <li>Neil Henning <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_subgroup_size_control] @sheredom%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_subgroup_size_control extension&gt;&gt;">sheredom</a></li>
  * </ul></dd>
  * </dl>
  * 

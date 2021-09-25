@@ -36,7 +36,7 @@ val EXT_filter_cubic = "EXTFilterCubic".nativeClassVK("EXT_filter_cubic", type =
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Bill Licea-Kane <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_filter_cubic:%20&amp;body=@wwlk%20">wwlk</a></li>
+                <li>Bill Licea-Kane <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_filter_cubic] @wwlk%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_filter_cubic extension&gt;&gt;">wwlk</a></li>
             </ul></dd>
         </dl>
 

@@ -20,6 +20,20 @@ import org.lwjgl.vulkan.video.*;
 /**
  * Structure specifying H.264 decode profile.
  * 
+ * <h5>Description</h5>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>When passing {@link VkVideoDecodeH264ProfileEXT} to {@link KHRVideoQueue#vkCreateVideoSessionKHR CreateVideoSessionKHR} in the {@code pNext} chain of {@link VkVideoSessionCreateInfoKHR}, requests for a {@code pictureLayout} not supported by the implementation will result in failure of the command.</p>
+ * </div>
+ * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>If the {@link VkVideoDecodeH264ProfileEXT} structure is included in the {@code pNext} chain of the {@link VkVideoCapabilitiesKHR} structure passed to {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR}, the value in {@code pictureLayout} is treated as a bitmask of requested picture layouts. It is always valid to use the value {@link EXTVideoDecodeH264#VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_PROGRESSIVE_EXT VIDEO_DECODE_H264_PICTURE_LAYOUT_PROGRESSIVE_EXT} as the implementation is guaranteed to support decoding of progressive content.</li>
+ * <li>If the {@link VkVideoDecodeH264ProfileEXT} structure is included in the {@code pNext} chain of the {@link VkVideoSessionCreateInfoKHR} structure passed to {@link KHRVideoQueue#vkCreateVideoSessionKHR CreateVideoSessionKHR}, the value in {@code pictureLayout} <b>must</b> be exactly one of {@link EXTVideoDecodeH264#VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_PROGRESSIVE_EXT VIDEO_DECODE_H264_PICTURE_LAYOUT_PROGRESSIVE_EXT}, {@link EXTVideoDecodeH264#VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_INTERLEAVED_LINES_BIT_EXT VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_INTERLEAVED_LINES_BIT_EXT} or {@link EXTVideoDecodeH264#VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_EXT VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_EXT}.</li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

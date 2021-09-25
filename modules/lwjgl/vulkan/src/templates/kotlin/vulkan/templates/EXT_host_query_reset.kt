@@ -43,7 +43,7 @@ val EXT_host_query_reset = "EXTHostQueryReset".nativeClassVK("EXT_host_query_res
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Bas Nieuwenhuizen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_host_query_reset:%20&amp;body=@BNieuwenhuizen%20">BNieuwenhuizen</a></li>
+                <li>Bas Nieuwenhuizen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_host_query_reset] @BNieuwenhuizen%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_host_query_reset extension&gt;&gt;">BNieuwenhuizen</a></li>
             </ul></dd>
         </dl>
 

@@ -42,7 +42,7 @@ val EXT_global_priority = "EXTGlobalPriority".nativeClassVK("EXT_global_priority
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Andres Rodriguez <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_global_priority:%20&amp;body=@lostgoat%20">lostgoat</a></li>
+                <li>Andres Rodriguez <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_global_priority] @lostgoat%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_global_priority extension&gt;&gt;">lostgoat</a></li>
             </ul></dd>
         </dl>
 

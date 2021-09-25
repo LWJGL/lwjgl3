@@ -90,7 +90,7 @@ val KHR_maintenance2 = "KHRMaintenance2".nativeClassVK("KHR_maintenance2", type 
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Michael Worcester <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_maintenance2:%20&amp;body=@michaelworcester%20">michaelworcester</a></li>
+                <li>Michael Worcester <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_maintenance2] @michaelworcester%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_maintenance2 extension&gt;&gt;">michaelworcester</a></li>
             </ul></dd>
         </dl>
 
@@ -121,13 +121,25 @@ val KHR_maintenance2 = "KHRMaintenance2".nativeClassVK("KHR_maintenance2", type 
     IntConstant(
         "The extension specification version.",
 
-        "KHR_MAINTENANCE2_SPEC_VERSION".."1"
+        "KHR_MAINTENANCE_2_SPEC_VERSION".."1"
     )
 
     StringConstant(
         "The extension name.",
 
-        "KHR_MAINTENANCE2_EXTENSION_NAME".."VK_KHR_maintenance2"
+        "KHR_MAINTENANCE_2_EXTENSION_NAME".."VK_KHR_maintenance2"
+    )
+
+    IntConstant(
+        "The extension specification version.",
+
+        "KHR_MAINTENANCE2_SPEC_VERSION".."VK_KHR_MAINTENANCE_2_SPEC_VERSION"
+    )
+
+    StringConstant(
+        "The extension name.",
+
+        "KHR_MAINTENANCE2_EXTENSION_NAME".expr("VK_KHR_MAINTENANCE_2_EXTENSION_NAME")
     )
 
     EnumConstant(

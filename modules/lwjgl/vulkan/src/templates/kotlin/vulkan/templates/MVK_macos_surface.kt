@@ -43,7 +43,7 @@ val MVK_macos_surface = "MVKMacosSurface".nativeClassVK("MVK_macos_surface", typ
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Bill Hollings <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_MVK_macos_surface:%20&amp;body=@billhollings%20">billhollings</a></li>
+                <li>Bill Hollings <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_MVK_macos_surface] @billhollings%0A&lt;&lt;Here describe the issue or question you have about the VK_MVK_macos_surface extension&gt;&gt;">billhollings</a></li>
             </ul></dd>
         </dl>
 

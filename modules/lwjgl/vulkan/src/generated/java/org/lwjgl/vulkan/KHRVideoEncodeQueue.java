@@ -176,10 +176,6 @@ public class KHRVideoEncodeQueue {
      * <li>{@link #VK_VIDEO_ENCODE_RESERVED_0_BIT_KHR VIDEO_ENCODE_RESERVED_0_BIT_KHR} The current version of the specification has reserved this value for future use.</li>
      * </ul>
      * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkVideoEncodeFlagsKHR}</p>
-     * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
@@ -198,10 +194,6 @@ public class KHRVideoEncodeQueue {
      * <ul>
      * <li>{@link #VK_VIDEO_ENCODE_RESERVED_0_BIT_KHR VIDEO_ENCODE_RESERVED_0_BIT_KHR} The current version of the specification has reserved this value for future use.</li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkVideoEncodeRateControlFlagsKHR}</p>
      * 
      * <h5>Enum values:</h5>
      * 
@@ -227,7 +219,7 @@ public class KHRVideoEncodeQueue {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkVideoEncodeRateControlInfoKHR}, {@code VkVideoEncodeRateControlModeFlagsKHR}</p>
+     * <p>{@link VkVideoEncodeRateControlInfoKHR}</p>
      */
     public static final int
         VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR = 0,

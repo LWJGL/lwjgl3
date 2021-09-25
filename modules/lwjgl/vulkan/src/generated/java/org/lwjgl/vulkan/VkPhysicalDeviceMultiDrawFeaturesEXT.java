@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceMultiDrawFeaturesEXT {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #multiDraw};
  * }</code></pre>
  */
@@ -79,21 +79,21 @@ public class VkPhysicalDeviceMultiDrawFeaturesEXT extends Struct implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** indicates that the implementation supports {@link EXTMultiDraw#vkCmdDrawMultiEXT CmdDrawMultiEXT} and {@link EXTMultiDraw#vkCmdDrawMultiIndexedEXT CmdDrawMultiIndexedEXT}. */
     @NativeType("VkBool32")
     public boolean multiDraw() { return nmultiDraw(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMultiDrawFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTMultiDraw#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT} value to the {@code sType} field. */
+    /** Sets the {@link EXTMultiDraw#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT} value to the {@link #sType} field. */
     public VkPhysicalDeviceMultiDrawFeaturesEXT sType$Default() { return sType(EXTMultiDraw.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT); }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMultiDrawFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #multiDraw} field. */
     public VkPhysicalDeviceMultiDrawFeaturesEXT multiDraw(@NativeType("VkBool32") boolean value) { nmultiDraw(address(), value ? 1 : 0); return this; }
@@ -289,21 +289,21 @@ public class VkPhysicalDeviceMultiDrawFeaturesEXT extends Struct implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMultiDrawFeaturesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMultiDrawFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMultiDrawFeaturesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMultiDrawFeaturesEXT.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceMultiDrawFeaturesEXT#multiDraw} field. */
         @NativeType("VkBool32")
         public boolean multiDraw() { return VkPhysicalDeviceMultiDrawFeaturesEXT.nmultiDraw(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMultiDrawFeaturesEXT#sType} field. */
         public VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMultiDrawFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTMultiDraw#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT} value to the {@code sType} field. */
+        /** Sets the {@link EXTMultiDraw#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT} value to the {@link VkPhysicalDeviceMultiDrawFeaturesEXT#sType} field. */
         public VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer sType$Default() { return sType(EXTMultiDraw.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT); }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMultiDrawFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMultiDrawFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceMultiDrawFeaturesEXT#multiDraw} field. */
         public VkPhysicalDeviceMultiDrawFeaturesEXT.Buffer multiDraw(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMultiDrawFeaturesEXT.nmultiDraw(address(), value ? 1 : 0); return this; }

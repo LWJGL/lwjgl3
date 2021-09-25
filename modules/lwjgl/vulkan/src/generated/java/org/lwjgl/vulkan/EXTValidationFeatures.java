@@ -34,7 +34,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Karl Schultz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_validation_features:%20&amp;body=@karl-lunarg%20">karl-lunarg</a></li>
+ * <li>Karl Schultz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_validation_features] @karl-lunarg%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_validation_features extension&gt;&gt;">karl-lunarg</a></li>
  * </ul></dd>
  * </dl>
  * 

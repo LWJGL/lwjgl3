@@ -64,7 +64,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Aaron Hagan <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_shader_fragment_mask:%20&amp;body=@AaronHaganAMD%20">AaronHaganAMD</a></li>
+ * <li>Aaron Hagan <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_shader_fragment_mask] @AaronHaganAMD%0A&lt;&lt;Here describe the issue or question you have about the VK_AMD_shader_fragment_mask extension&gt;&gt;">AaronHaganAMD</a></li>
  * </ul></dd>
  * </dl>
  * 

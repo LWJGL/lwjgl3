@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Dzmitry Malyshau <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_metal_surface:%20&amp;body=@kvark%20">kvark</a></li>
+ * <li>Dzmitry Malyshau <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_metal_surface] @kvark%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_metal_surface extension&gt;&gt;">kvark</a></li>
  * </ul></dd>
  * </dl>
  * 

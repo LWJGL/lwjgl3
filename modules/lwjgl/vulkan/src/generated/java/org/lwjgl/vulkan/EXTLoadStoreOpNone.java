@@ -27,7 +27,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Shahbaz Youssefi <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_load_store_op_none:%20&amp;body=@syoussefi%20">syoussefi</a></li>
+ * <li>Shahbaz Youssefi <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_load_store_op_none] @syoussefi%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_load_store_op_none extension&gt;&gt;">syoussefi</a></li>
  * </ul></dd>
  * </dl>
  * 

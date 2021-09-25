@@ -44,7 +44,7 @@ val KHR_16bit_storage = "KHR16bitStorage".nativeClassVK("KHR_16bit_storage", typ
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_16bit_storage:%20&amp;body=@janharaldfredriksen-arm%20">janharaldfredriksen-arm</a></li>
+                <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_16bit_storage] @janharaldfredriksen-arm%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_16bit_storage extension&gt;&gt;">janharaldfredriksen-arm</a></li>
             </ul></dd>
         </dl>
 

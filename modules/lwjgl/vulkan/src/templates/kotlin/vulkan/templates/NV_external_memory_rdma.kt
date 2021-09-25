@@ -101,7 +101,7 @@ val NV_external_memory_rdma = "NVExternalMemoryRdma".nativeClassVK("NV_external_
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Carsten Rohde <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_external_memory_rdma:%20&amp;body=@crohde%20">crohde</a></li>
+                <li>Carsten Rohde <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_external_memory_rdma] @crohde%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_external_memory_rdma extension&gt;&gt;">crohde</a></li>
             </ul></dd>
         </dl>
 

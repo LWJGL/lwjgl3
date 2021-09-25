@@ -35,7 +35,7 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_push_descriptor:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
+                <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_push_descriptor] @jeffbolznv%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_push_descriptor extension&gt;&gt;">jeffbolznv</a></li>
             </ul></dd>
         </dl>
 

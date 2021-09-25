@@ -30,7 +30,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Joshua Ashton <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_4444_formats:%20&amp;body=@Joshua-Ashton%20">Joshua-Ashton</a></li>
+ * <li>Joshua Ashton <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_4444_formats] @Joshua-Ashton%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_4444_formats extension&gt;&gt;">Joshua-Ashton</a></li>
  * </ul></dd>
  * </dl>
  * 

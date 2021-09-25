@@ -64,7 +64,7 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_synchronization2:%20&amp;body=@tobski%20">tobski</a></li>
+                <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_synchronization2] @tobski%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_synchronization2 extension&gt;&gt;">tobski</a></li>
             </ul></dd>
         </dl>
 
@@ -484,9 +484,6 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
         <ul>
             <li>#SUBMIT_PROTECTED_BIT_KHR specifies that this batch is a protected submission.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkSubmitFlagsKHR}
         """,
 
         "SUBMIT_PROTECTED_BIT_KHR".enum(0x00000001)
@@ -603,7 +600,7 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
             <li>{@code stageMask} <b>must</b> not include #PIPELINE_STAGE_2_HOST_BIT_KHR</li>
             <li>There <b>must</b> be an execution dependency between {@code vkCmdResetEvent2KHR} and the execution of any #CmdWaitEvents() that includes {@code event} in its {@code pEvents} parameter</li>
             <li>There <b>must</b> be an execution dependency between {@code vkCmdResetEvent2KHR} and the execution of any #CmdWaitEvents2KHR() that includes {@code event} in its {@code pEvents} parameter</li>
-            <li>{@code commandBuffer}’s current device mask <b>must</b> include exactly one physical device.</li>
+            <li>{@code commandBuffer}’s current device mask <b>must</b> include exactly one physical device</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

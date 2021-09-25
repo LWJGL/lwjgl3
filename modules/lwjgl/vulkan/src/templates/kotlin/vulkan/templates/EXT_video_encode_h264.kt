@@ -76,7 +76,7 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Ahmed Abdelkhalek <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_video_encode_h264:%20&amp;body=@aabdelkh%20">aabdelkh</a></li>
+                <li>Ahmed Abdelkhalek <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_video_encode_h264] @aabdelkh%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_video_encode_h264 extension&gt;&gt;">aabdelkh</a></li>
             </ul></dd>
         </dl>
 
@@ -153,9 +153,6 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
             <li>#VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT</li>
             <li>#VIDEO_ENCODE_H264_CAPABILITY_EVENLY_DISTRIBUTED_SLICE_SIZE_BIT_EXT</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkVideoEncodeH264CapabilityFlagsEXT}
         """,
 
         "VIDEO_ENCODE_H264_CAPABILITY_CABAC_BIT_EXT".enum(0x00000001),
@@ -183,9 +180,6 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
         </ul>
 
         An implementation <b>must</b> support at least one of #VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT or #VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT.
-
-        <h5>See Also</h5>
-        {@code VkVideoEncodeH264InputModeFlagsEXT}
         """,
 
         "VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT".enum(0x00000001),
@@ -211,9 +205,6 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
         The supported input modes <b>must</b> be coarser or equal to the supported output modes. For example, it is illegal to report slice input is supported but only frame output is supported.
 
         An implementation <b>must</b> report one of the following combinations of input/output modes: <b> Input: Frame, Output: Frame </b> Input: Frame, Output: Frame and Non-VCL <b> Input: Frame, Output: Slice </b> Input: Frame, Output: Slice and Non-VCL <b> Input: Slice, Output: Slice </b> Input: Slice, Output: Slice and Non-VCL <b> Input: Frame and Non-VCL, Output: Frame and Non-VCL </b> Input: Frame and Non-VCL, Output: Slice and Non-VCL ** Input: Slice and Non-VCL, Output: Slice and Non-VCL
-
-        <h5>See Also</h5>
-        {@code VkVideoEncodeH264OutputModeFlagsEXT}
         """,
 
         "VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT".enum(0x00000001),
@@ -230,9 +221,6 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
             <li>#VIDEO_ENCODE_H264_CREATE_DEFAULT_EXT is 0, and specifies no additional creation flags.</li>
             <li>#VIDEO_ENCODE_H264_CREATE_RESERVED_0_BIT_EXT The current version of the specification has reserved this value for future use.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkVideoEncodeH264CreateFlagsEXT}
         """,
 
         "VIDEO_ENCODE_H264_CREATE_DEFAULT_EXT".."0",

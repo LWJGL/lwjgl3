@@ -42,7 +42,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_viewport_array2:%20&amp;body=@dgkoch%20">dgkoch</a></li>
+ * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_viewport_array2] @dgkoch%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_viewport_array2 extension&gt;&gt;">dgkoch</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -68,10 +68,16 @@ package org.lwjgl.vulkan;
 public final class NVViewportArray2 {
 
     /** The extension specification version. */
-    public static final int VK_NV_VIEWPORT_ARRAY2_SPEC_VERSION = 1;
+    public static final int VK_NV_VIEWPORT_ARRAY_2_SPEC_VERSION = 1;
 
     /** The extension name. */
-    public static final String VK_NV_VIEWPORT_ARRAY2_EXTENSION_NAME = "VK_NV_viewport_array2";
+    public static final String VK_NV_VIEWPORT_ARRAY_2_EXTENSION_NAME = "VK_NV_viewport_array2";
+
+    /** The extension specification version. */
+    public static final int VK_NV_VIEWPORT_ARRAY2_SPEC_VERSION = VK_NV_VIEWPORT_ARRAY_2_SPEC_VERSION;
+
+    /** The extension name. */
+    public static final String VK_NV_VIEWPORT_ARRAY2_EXTENSION_NAME = VK_NV_VIEWPORT_ARRAY_2_EXTENSION_NAME;
 
     private NVViewportArray2() {}
 

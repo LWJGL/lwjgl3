@@ -44,7 +44,7 @@ val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type =
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_bind_memory2:%20&amp;body=@tobski%20">tobski</a></li>
+                <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_bind_memory2] @tobski%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_bind_memory2 extension&gt;&gt;">tobski</a></li>
             </ul></dd>
         </dl>
 

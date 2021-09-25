@@ -30,7 +30,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Eric Werness <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NVX_image_view_handle:%20&amp;body=@ewerness%20">ewerness</a></li>
+ * <li>Eric Werness <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NVX_image_view_handle] @ewerness%0A&lt;&lt;Here describe the issue or question you have about the VK_NVX_image_view_handle extension&gt;&gt;">ewerness</a></li>
  * </ul></dd>
  * </dl>
  * 

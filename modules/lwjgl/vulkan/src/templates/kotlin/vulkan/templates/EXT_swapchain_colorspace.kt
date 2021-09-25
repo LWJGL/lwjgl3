@@ -35,7 +35,7 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_swapchain_colorspace:%20&amp;body=@courtney-g%20">courtney-g</a></li>
+                <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_swapchain_colorspace] @courtney-g%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_swapchain_colorspace extension&gt;&gt;">courtney-g</a></li>
             </ul></dd>
         </dl>
 

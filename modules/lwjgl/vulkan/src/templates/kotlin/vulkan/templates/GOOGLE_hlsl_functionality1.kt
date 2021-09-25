@@ -34,7 +34,7 @@ val GOOGLE_hlsl_functionality1 = "GOOGLEHlslFunctionality1".nativeClassVK("GOOGL
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Hai Nguyen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_GOOGLE_hlsl_functionality1:%20&amp;body=@chaoticbob%20">chaoticbob</a></li>
+                <li>Hai Nguyen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_GOOGLE_hlsl_functionality1] @chaoticbob%0A&lt;&lt;Here describe the issue or question you have about the VK_GOOGLE_hlsl_functionality1 extension&gt;&gt;">chaoticbob</a></li>
             </ul></dd>
         </dl>
 
@@ -62,12 +62,24 @@ val GOOGLE_hlsl_functionality1 = "GOOGLEHlslFunctionality1".nativeClassVK("GOOGL
     IntConstant(
         "The extension specification version.",
 
-        "GOOGLE_HLSL_FUNCTIONALITY1_SPEC_VERSION".."1"
+        "GOOGLE_HLSL_FUNCTIONALITY_1_SPEC_VERSION".."1"
     )
 
     StringConstant(
         "The extension name.",
 
-        "GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION_NAME".."VK_GOOGLE_hlsl_functionality1"
+        "GOOGLE_HLSL_FUNCTIONALITY_1_EXTENSION_NAME".."VK_GOOGLE_hlsl_functionality1"
+    )
+
+    IntConstant(
+        "The extension specification version.",
+
+        "GOOGLE_HLSL_FUNCTIONALITY1_SPEC_VERSION".."VK_GOOGLE_HLSL_FUNCTIONALITY_1_SPEC_VERSION"
+    )
+
+    StringConstant(
+        "The extension name.",
+
+        "GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION_NAME".expr("VK_GOOGLE_HLSL_FUNCTIONALITY_1_EXTENSION_NAME")
     )
 }

@@ -49,7 +49,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Gregory Grebe <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_pipeline_creation_cache_control:%20&amp;body=@grgrebe_amd%20">grgrebe_amd</a></li>
+ * <li>Gregory Grebe <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_pipeline_creation_cache_control] @grgrebe_amd%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_pipeline_creation_cache_control extension&gt;&gt;">grgrebe_amd</a></li>
  * </ul></dd>
  * </dl>
  * 

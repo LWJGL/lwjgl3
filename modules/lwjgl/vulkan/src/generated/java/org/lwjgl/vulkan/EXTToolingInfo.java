@@ -64,7 +64,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_tooling_info:%20&amp;body=@tobski%20">tobski</a></li>
+ * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_tooling_info] @tobski%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_tooling_info extension&gt;&gt;">tobski</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -121,10 +121,6 @@ public class EXTToolingInfo {
      * <li>{@link #VK_TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT} specifies that the tool reports additional information to the application via callbacks specified by {@link EXTDebugReport#vkCreateDebugReportCallbackEXT CreateDebugReportCallbackEXT} or {@link EXTDebugUtils#vkCreateDebugUtilsMessengerEXT CreateDebugUtilsMessengerEXT}</li>
      * <li>{@link #VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT} specifies that the tool consumes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-debug-markers">debug markers</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-object-debug-annotation">object debug annotation</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-queue-labels">queue labels</a>, or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-command-buffer-labels">command buffer labels</a></li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkToolPurposeFlagsEXT}</p>
      */
     public static final int
         VK_TOOL_PURPOSE_VALIDATION_BIT_EXT          = 0x1,

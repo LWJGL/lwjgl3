@@ -25,7 +25,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Hai Nguyen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_GOOGLE_hlsl_functionality1:%20&amp;body=@chaoticbob%20">chaoticbob</a></li>
+ * <li>Hai Nguyen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_GOOGLE_hlsl_functionality1] @chaoticbob%0A&lt;&lt;Here describe the issue or question you have about the VK_GOOGLE_hlsl_functionality1 extension&gt;&gt;">chaoticbob</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -50,10 +50,16 @@ package org.lwjgl.vulkan;
 public final class GOOGLEHlslFunctionality1 {
 
     /** The extension specification version. */
-    public static final int VK_GOOGLE_HLSL_FUNCTIONALITY1_SPEC_VERSION = 1;
+    public static final int VK_GOOGLE_HLSL_FUNCTIONALITY_1_SPEC_VERSION = 1;
 
     /** The extension name. */
-    public static final String VK_GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION_NAME = "VK_GOOGLE_hlsl_functionality1";
+    public static final String VK_GOOGLE_HLSL_FUNCTIONALITY_1_EXTENSION_NAME = "VK_GOOGLE_hlsl_functionality1";
+
+    /** The extension specification version. */
+    public static final int VK_GOOGLE_HLSL_FUNCTIONALITY1_SPEC_VERSION = VK_GOOGLE_HLSL_FUNCTIONALITY_1_SPEC_VERSION;
+
+    /** The extension name. */
+    public static final String VK_GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION_NAME = VK_GOOGLE_HLSL_FUNCTIONALITY_1_EXTENSION_NAME;
 
     private GOOGLEHlslFunctionality1() {}
 

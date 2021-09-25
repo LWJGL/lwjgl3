@@ -46,8 +46,8 @@ val VALVE_mutable_descriptor_type = "VALVEMutableDescriptorType".nativeClassVK("
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Joshua Ashton <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_VALVE_mutable_descriptor_type:%20&amp;body=@Joshua-Ashton%20">Joshua-Ashton</a></li>
-                <li>Hans-Kristian Arntzen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_VALVE_mutable_descriptor_type:%20&amp;body=@HansKristian-Work%20">HansKristian-Work</a></li>
+                <li>Joshua Ashton <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_VALVE_mutable_descriptor_type] @Joshua-Ashton%0A&lt;&lt;Here describe the issue or question you have about the VK_VALVE_mutable_descriptor_type extension&gt;&gt;">Joshua-Ashton</a></li>
+                <li>Hans-Kristian Arntzen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_VALVE_mutable_descriptor_type] @HansKristian-Work%0A&lt;&lt;Here describe the issue or question you have about the VK_VALVE_mutable_descriptor_type extension&gt;&gt;">HansKristian-Work</a></li>
             </ul></dd>
         </dl>
 

@@ -241,7 +241,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Mark Young <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_debug_utils:%20&amp;body=@marky-lunarg%20">marky-lunarg</a></li>
+ * <li>Mark Young <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_debug_utils] @marky-lunarg%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_debug_utils extension&gt;&gt;">marky-lunarg</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -337,7 +337,7 @@ public class EXTDebugUtils {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@code VkDebugUtilsMessageSeverityFlagsEXT}, {@link #vkSubmitDebugUtilsMessageEXT SubmitDebugUtilsMessageEXT}</p>
+     * <p>{@link #vkSubmitDebugUtilsMessageEXT SubmitDebugUtilsMessageEXT}</p>
      */
     public static final int
         VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT = 0x1,
@@ -355,10 +355,6 @@ public class EXTDebugUtils {
      * <li>{@link #VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT} specifies that something has occurred during validation against the Vulkan specification that may indicate invalid behavior.</li>
      * <li>{@link #VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT} specifies a potentially non-optimal use of Vulkan, e.g. using {@link VK10#vkCmdClearColorImage CmdClearColorImage} when setting {@link VkAttachmentDescription}{@code ::loadOp} to {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR} would have worked.</li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkDebugUtilsMessageTypeFlagsEXT}</p>
      */
     public static final int
         VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT     = 0x1,
@@ -715,6 +711,8 @@ public class EXTDebugUtils {
      * <h5>Description</h5>
      * 
      * <p>An application <b>may</b> open a debug label region in one command buffer and close it in another, or otherwise split debug label regions across multiple command buffers or multiple queue submissions. When viewed from the linear series of submissions to a single queue, the calls to {@link #vkCmdBeginDebugUtilsLabelEXT CmdBeginDebugUtilsLabelEXT} and {@link #vkCmdEndDebugUtilsLabelEXT CmdEndDebugUtilsLabelEXT} <b>must</b> be matched and balanced.</p>
+     * 
+     * <p>There <b>can</b> be problems reporting command buffer debug labels during the recording process because command buffers <b>may</b> be recorded out of sequence with the resulting execution order. Since the recording order <b>may</b> be different, a solitary command buffer <b>may</b> have an inconsistent view of the debug label regions by itself. Therefore, if an issue occurs during the recording of a command buffer, and the environment requires returning debug labels, the implementation <b>may</b> return only those labels it is aware of. This is true even if the implementation is aware of only the debug labels within the command buffer being actively recorded.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

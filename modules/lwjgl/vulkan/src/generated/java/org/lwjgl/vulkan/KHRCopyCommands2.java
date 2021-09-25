@@ -32,7 +32,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Leger <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_copy_commands2:%20&amp;body=@jackohound%20">jackohound</a></li>
+ * <li>Jeff Leger <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_copy_commands2] @jackohound%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_copy_commands2 extension&gt;&gt;">jackohound</a></li>
  * </ul></dd>
  * </dl>
  * 

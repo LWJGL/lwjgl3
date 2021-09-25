@@ -77,7 +77,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Rex Xu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_texture_gather_bias_lod:%20&amp;body=@amdrexu%20">amdrexu</a></li>
+ * <li>Rex Xu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_texture_gather_bias_lod] @amdrexu%0A&lt;&lt;Here describe the issue or question you have about the VK_AMD_texture_gather_bias_lod extension&gt;&gt;">amdrexu</a></li>
  * </ul></dd>
  * </dl>
  * 

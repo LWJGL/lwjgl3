@@ -37,7 +37,7 @@ val EXT_vertex_input_dynamic_state = "EXTVertexInputDynamicState".nativeClassVK(
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_vertex_input_dynamic_state:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
+                <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_vertex_input_dynamic_state] @pdaniell-nv%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_vertex_input_dynamic_state extension&gt;&gt;">pdaniell-nv</a></li>
             </ul></dd>
         </dl>
 

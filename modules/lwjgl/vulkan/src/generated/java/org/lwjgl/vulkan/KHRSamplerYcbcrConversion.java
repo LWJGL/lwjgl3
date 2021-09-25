@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Andrew Garrard <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_sampler_ycbcr_conversion:%20&amp;body=@fluppeteer%20">fluppeteer</a></li>
+ * <li>Andrew Garrard <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_sampler_ycbcr_conversion] @fluppeteer%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_sampler_ycbcr_conversion extension&gt;&gt;">fluppeteer</a></li>
  * </ul></dd>
  * </dl>
  * 

@@ -157,10 +157,6 @@ public class KHRVideoDecodeQueue {
      * <li>{@link #VK_VIDEO_DECODE_RESERVED_0_BIT_KHR VIDEO_DECODE_RESERVED_0_BIT_KHR} The current version of the specification has reserved this value for future use.</li>
      * </ul>
      * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkVideoDecodeFlagsKHR}</p>
-     * 
      * <h5>Enum values:</h5>
      * 
      * <ul>

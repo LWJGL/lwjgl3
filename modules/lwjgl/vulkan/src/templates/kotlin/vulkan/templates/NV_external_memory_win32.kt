@@ -175,7 +175,7 @@ val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_externa
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_external_memory_win32:%20&amp;body=@cubanismo%20">cubanismo</a></li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_external_memory_win32] @cubanismo%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_external_memory_win32 extension&gt;&gt;">cubanismo</a></li>
             </ul></dd>
         </dl>
 

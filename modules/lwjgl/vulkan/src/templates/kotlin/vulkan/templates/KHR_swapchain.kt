@@ -40,8 +40,8 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_swapchain:%20&amp;body=@cubanismo%20">cubanismo</a></li>
-                <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_swapchain:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_swapchain] @cubanismo%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_swapchain extension&gt;&gt;">cubanismo</a></li>
+                <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_swapchain] @ianelliottus%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_swapchain extension&gt;&gt;">ianelliottus</a></li>
             </ul></dd>
         </dl>
 
@@ -148,7 +148,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         </ul>
 
         <h5>See Also</h5>
-        ##VkDeviceGroupPresentInfoKHR, {@code VkDeviceGroupPresentModeFlagsKHR}
+        ##VkDeviceGroupPresentInfoKHR
         """,
 
         "DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR".enum(0x00000001),

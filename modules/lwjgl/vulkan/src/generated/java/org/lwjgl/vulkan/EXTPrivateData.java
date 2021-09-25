@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Matthew Rusch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_private_data:%20&amp;body=@mattruschnv%20">mattruschnv</a></li>
+ * <li>Matthew Rusch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_private_data] @mattruschnv%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_private_data extension&gt;&gt;">mattruschnv</a></li>
  * </ul></dd>
  * </dl>
  * 

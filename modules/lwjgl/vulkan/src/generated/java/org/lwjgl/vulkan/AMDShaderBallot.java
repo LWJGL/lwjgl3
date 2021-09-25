@@ -29,7 +29,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Dominik Witczak <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_shader_ballot:%20&amp;body=@dominikwitczakamd%20">dominikwitczakamd</a></li>
+ * <li>Dominik Witczak <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_shader_ballot] @dominikwitczakamd%0A&lt;&lt;Here describe the issue or question you have about the VK_AMD_shader_ballot extension&gt;&gt;">dominikwitczakamd</a></li>
  * </ul></dd>
  * </dl>
  * 

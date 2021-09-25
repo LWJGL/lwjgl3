@@ -37,7 +37,7 @@ val EXT_conditional_rendering = "EXTConditionalRendering".nativeClassVK("EXT_con
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Vikram Kushwaha <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_conditional_rendering:%20&amp;body=@vkushwaha%20">vkushwaha</a></li>
+                <li>Vikram Kushwaha <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_conditional_rendering] @vkushwaha%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_conditional_rendering extension&gt;&gt;">vkushwaha</a></li>
             </ul></dd>
         </dl>
 
@@ -107,9 +107,6 @@ val EXT_conditional_rendering = "EXTConditionalRendering".nativeClassVK("EXT_con
         <ul>
             <li>#CONDITIONAL_RENDERING_INVERTED_BIT_EXT specifies the condition used to determine whether to discard rendering commands or not. That is, if the 32-bit predicate read from {@code buffer} memory at {@code offset} is zero, the rendering commands are not discarded, and if non zero, then they are discarded.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkConditionalRenderingFlagsEXT}
         """,
 
         "CONDITIONAL_RENDERING_INVERTED_BIT_EXT".enum(0x00000001)

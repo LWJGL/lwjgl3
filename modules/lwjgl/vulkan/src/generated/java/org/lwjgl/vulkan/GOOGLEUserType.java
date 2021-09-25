@@ -25,7 +25,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Kaye Mason <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_GOOGLE_user_type:%20&amp;body=@chaleur%20">chaleur</a></li>
+ * <li>Kaye Mason <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_GOOGLE_user_type] @chaleur%0A&lt;&lt;Here describe the issue or question you have about the VK_GOOGLE_user_type extension&gt;&gt;">chaleur</a></li>
  * </ul></dd>
  * </dl>
  * 

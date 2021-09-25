@@ -39,7 +39,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_discard_rectangles:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
+                <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_discard_rectangles] @pdaniell-nv%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_discard_rectangles extension&gt;&gt;">pdaniell-nv</a></li>
             </ul></dd>
         </dl>
 

@@ -39,7 +39,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Alexander Galazin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_storage_buffer_storage_class:%20&amp;body=@alegal-arm%20">alegal-arm</a></li>
+ * <li>Alexander Galazin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_storage_buffer_storage_class] @alegal-arm%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_storage_buffer_storage_class extension&gt;&gt;">alegal-arm</a></li>
  * </ul></dd>
  * </dl>
  * 

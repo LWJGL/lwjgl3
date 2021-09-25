@@ -135,7 +135,7 @@ public class VkRayTracingShaderGroupCreateInfoKHR extends Struct implements Nati
     /** the index of the intersection shader from {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pStages} in the group if the shader group has {@code type} of {@link KHRRayTracingPipeline#VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR}, and {@link KHRRayTracingPipeline#VK_SHADER_UNUSED_KHR SHADER_UNUSED_KHR} otherwise. */
     @NativeType("uint32_t")
     public int intersectionShader() { return nintersectionShader(address()); }
-    /** an optional pointer to replay information for this shader group. Ignored if {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR}{@code ::rayTracingPipelineShaderGroupHandleCaptureReplay} is {@link VK10#VK_FALSE FALSE}. */
+    /** {@code NULL} or a pointer to replay information for this shader group. Ignored if {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR}{@code ::rayTracingPipelineShaderGroupHandleCaptureReplay} is {@link VK10#VK_FALSE FALSE}. */
     @NativeType("void const *")
     public long pShaderGroupCaptureReplayHandle() { return npShaderGroupCaptureReplayHandle(address()); }
 

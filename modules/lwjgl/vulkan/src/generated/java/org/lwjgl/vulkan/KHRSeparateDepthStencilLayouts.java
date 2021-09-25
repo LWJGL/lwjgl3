@@ -35,7 +35,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_separate_depth_stencil_layouts:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
+ * <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_separate_depth_stencil_layouts] @pdaniell-nv%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_separate_depth_stencil_layouts extension&gt;&gt;">pdaniell-nv</a></li>
  * </ul></dd>
  * </dl>
  * 

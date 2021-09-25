@@ -37,7 +37,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Tobin Ehlis <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_validation_flags:%20&amp;body=@tobine%20">tobine</a></li>
+ * <li>Tobin Ehlis <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_validation_flags] @tobine%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_validation_flags extension&gt;&gt;">tobine</a></li>
  * </ul></dd>
  * </dl>
  * 

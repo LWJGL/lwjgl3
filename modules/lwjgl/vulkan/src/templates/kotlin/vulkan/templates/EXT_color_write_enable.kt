@@ -13,7 +13,7 @@ val EXT_color_write_enable = "EXTColorWriteEnable".nativeClassVK("EXT_color_writ
         """
         This extension allows for selectively enabling and disabling writes to output color attachments via a pipeline dynamic state.
 
-        The intended use cases for this new state are mostly identical to those of colorWriteMask, such as selectively disabling writes to avoid feedback loops between subpasses or bandwidth savings for unused outputs. By making the state dynamic, one additional benefit is the ability to reduce pipeline counts and pipeline switching via shaders that write a superset of the desired data of which subsets are selected dynamically. The reason for a new state, colorWriteEnable, rather than making colorWriteMask dynamic is that, on many implementations, the more flexible per-channel semantics of the colorWriteMask state cannot be made dynamic in a performant manner.
+        The intended use cases for this new state are mostly identical to those of colorWriteMask, such as selectively disabling writes to avoid feedback loops between subpasses or bandwidth savings for unused outputs. By making the state dynamic, one additional benefit is the ability to reduce pipeline counts and pipeline switching via shaders that write a superset of the desired data of which subsets are selected dynamically. The reason for a new state, colorWriteEnable, rather than making colorWriteMask dynamic is that, on many implementations, the more flexible per-component semantics of the colorWriteMask state cannot be made dynamic in a performant manner.
 
         <h5>VK_EXT_color_write_enable</h5>
         <dl>
@@ -37,7 +37,7 @@ val EXT_color_write_enable = "EXTColorWriteEnable".nativeClassVK("EXT_color_writ
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Sharif Elcott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_color_write_enable:%20&amp;body=@selcott%20">selcott</a></li>
+                <li>Sharif Elcott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_color_write_enable] @selcott%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_color_write_enable extension&gt;&gt;">selcott</a></li>
             </ul></dd>
         </dl>
 

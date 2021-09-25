@@ -28,7 +28,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Aaron Hagan <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_clock:%20&amp;body=@ahagan%20">ahagan</a></li>
+ * <li>Aaron Hagan <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_clock] @ahagan%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_shader_clock extension&gt;&gt;">ahagan</a></li>
  * </ul></dd>
  * </dl>
  * 

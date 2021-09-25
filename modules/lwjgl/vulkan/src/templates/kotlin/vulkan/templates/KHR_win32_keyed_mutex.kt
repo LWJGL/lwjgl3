@@ -35,7 +35,7 @@ val KHR_win32_keyed_mutex = "KHRWin32KeyedMutex".nativeClassVK("KHR_win32_keyed_
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Carsten Rohde <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_win32_keyed_mutex:%20&amp;body=@crohde%20">crohde</a></li>
+                <li>Carsten Rohde <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_win32_keyed_mutex] @crohde%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_win32_keyed_mutex extension&gt;&gt;">crohde</a></li>
             </ul></dd>
         </dl>
 

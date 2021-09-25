@@ -142,7 +142,7 @@ val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KH
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Josh Barczak <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_deferred_host_operations:%20&amp;body=@jbarczak%20">jbarczak</a></li>
+                <li>Josh Barczak <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_deferred_host_operations] @jbarczak%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_deferred_host_operations extension&gt;&gt;">jbarczak</a></li>
             </ul></dd>
         </dl>
 

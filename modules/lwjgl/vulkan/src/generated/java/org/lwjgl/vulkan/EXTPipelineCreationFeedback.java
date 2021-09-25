@@ -29,7 +29,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jean-Francois Roy <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_pipeline_creation_feedback:%20&amp;body=@jfroy%20">jfroy</a></li>
+ * <li>Jean-Francois Roy <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_pipeline_creation_feedback] @jfroy%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_pipeline_creation_feedback extension&gt;&gt;">jfroy</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -93,7 +93,7 @@ public final class EXTPipelineCreationFeedback {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkPipelineCreationFeedbackCreateInfoEXT}, {@link VkPipelineCreationFeedbackEXT}, {@code VkPipelineCreationFeedbackFlagsEXT}</p>
+     * <p>{@link VkPipelineCreationFeedbackCreateInfoEXT}, {@link VkPipelineCreationFeedbackEXT}</p>
      */
     public static final int
         VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT                          = 0x1,

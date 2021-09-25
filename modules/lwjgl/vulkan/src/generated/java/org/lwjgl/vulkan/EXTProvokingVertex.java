@@ -32,7 +32,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_provoking_vertex:%20&amp;body=@jessehall%20">jessehall</a></li>
+ * <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_provoking_vertex] @jessehall%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_provoking_vertex extension&gt;&gt;">jessehall</a></li>
  * </ul></dd>
  * </dl>
  * 

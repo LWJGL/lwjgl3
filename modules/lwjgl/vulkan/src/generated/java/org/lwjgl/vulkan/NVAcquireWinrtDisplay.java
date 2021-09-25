@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Juliano <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_acquire_winrt_display:%20&amp;body=@jjuliano%20">jjuliano</a></li>
+ * <li>Jeff Juliano <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_acquire_winrt_display] @jjuliano%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_acquire_winrt_display extension&gt;&gt;">jjuliano</a></li>
  * </ul></dd>
  * </dl>
  * 

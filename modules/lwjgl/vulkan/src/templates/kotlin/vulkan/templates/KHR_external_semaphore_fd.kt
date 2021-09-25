@@ -35,7 +35,7 @@ val KHR_external_semaphore_fd = "KHRExternalSemaphoreFd".nativeClassVK("KHR_exte
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_external_semaphore_fd:%20&amp;body=@cubanismo%20">cubanismo</a></li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_external_semaphore_fd] @cubanismo%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_external_semaphore_fd extension&gt;&gt;">cubanismo</a></li>
             </ul></dd>
         </dl>
 

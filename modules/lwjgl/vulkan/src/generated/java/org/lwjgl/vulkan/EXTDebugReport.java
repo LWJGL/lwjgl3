@@ -93,7 +93,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_debug_report:%20&amp;body=@courtney-g%20">courtney-g</a></li>
+ * <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_debug_report] @courtney-g%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_debug_report extension&gt;&gt;">courtney-g</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -167,10 +167,6 @@ public class EXTDebugReport {
      * <li>{@link #VK_DEBUG_REPORT_INFORMATION_BIT_EXT DEBUG_REPORT_INFORMATION_BIT_EXT} specifies an informational message such as resource details that may be handy when debugging an application.</li>
      * <li>{@link #VK_DEBUG_REPORT_DEBUG_BIT_EXT DEBUG_REPORT_DEBUG_BIT_EXT} specifies diagnostic information from the implementation and layers.</li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkDebugReportFlagsEXT}</p>
      */
     public static final int
         VK_DEBUG_REPORT_INFORMATION_BIT_EXT         = 0x1,

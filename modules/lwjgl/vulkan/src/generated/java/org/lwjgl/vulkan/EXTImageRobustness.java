@@ -30,7 +30,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Graeme Leese <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_image_robustness:%20&amp;body=@gnl21%20">gnl21</a></li>
+ * <li>Graeme Leese <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_image_robustness] @gnl21%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_image_robustness extension&gt;&gt;">gnl21</a></li>
  * </ul></dd>
  * </dl>
  * 

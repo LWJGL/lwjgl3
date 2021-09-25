@@ -30,7 +30,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Matthaeus G. Chajdas <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_shader_core_properties2:%20&amp;body=@anteru%20">anteru</a></li>
+ * <li>Matthaeus G. Chajdas <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_shader_core_properties2] @anteru%0A&lt;&lt;Here describe the issue or question you have about the VK_AMD_shader_core_properties2 extension&gt;&gt;">anteru</a></li>
  * </ul></dd>
  * </dl>
  * 

@@ -45,7 +45,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_acceleration_structure:%20&amp;body=@dgkoch%20">dgkoch</a></li>
+                <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_acceleration_structure] @dgkoch%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_acceleration_structure extension&gt;&gt;">dgkoch</a></li>
             </ul></dd>
         </dl>
 
@@ -227,9 +227,6 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         #BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR and #BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR <b>may</b> take more time and memory than a normal build, and so <b>should</b> only be used when those features are needed.
         </div>
-
-        <h5>See Also</h5>
-        {@code VkBuildAccelerationStructureFlagsKHR}
         """,
 
         "BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR".enum(0x00000001),
@@ -286,9 +283,6 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>#GEOMETRY_OPAQUE_BIT_KHR indicates that this geometry does not invoke the any-hit shaders even if present in a hit group.</li>
             <li>#GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR indicates that the implementation <b>must</b> only call the any-hit shader a single time for each primitive in this geometry. If this bit is absent an implementation <b>may</b> invoke the any-hit shader more than once for this geometry.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkGeometryFlagsKHR}
         """,
 
         "GEOMETRY_OPAQUE_BIT_KHR".enum(0x00000001),
@@ -328,9 +322,6 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         </ul>
 
         #GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR and #GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR <b>must</b> not be used in the same flag.
-
-        <h5>See Also</h5>
-        {@code VkGeometryInstanceFlagsKHR}
         """,
 
         "GEOMETRY_INSTANCE_TRIANGLE_FACING_CULL_DISABLE_BIT_KHR".enum(0x00000001),
@@ -348,9 +339,6 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         <ul>
             <li>#ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR specifies that the acceleration structure’s address <b>can</b> be saved and reused on a subsequent run.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkAccelerationStructureCreateFlagsKHR}
         """,
 
         "ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR".enum(0x00000001)

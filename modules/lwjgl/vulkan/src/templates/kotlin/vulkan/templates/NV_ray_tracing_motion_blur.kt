@@ -20,7 +20,7 @@ val NV_ray_tracing_motion_blur = "NVRayTracingMotionBlur".nativeClassVK("NV_ray_
             <li>Motion instances to move existing instances over time</li>
         </ul>
 
-        The motion represented here is parameterized across a normalized timestep between 0.0 and 1.0. A motion trace using OpTraceRayMotionNV provides a time within that normalized range to be used when intersecting that ray with geometry. The geometry can be provided with motion by a combination of adding a second vertex position for time of 1.0 using ##VkAccelerationStructureGeometryMotionTrianglesDataNV and providing multiple transforms in the instance using ##VkAccelerationStructureMotionInstanceNV.
+        The motion represented here is parameterized across a normalized timestep between 0.0 and 1.0. A motion trace using {@code OpTraceRayMotionNV} provides a time within that normalized range to be used when intersecting that ray with geometry. The geometry can be provided with motion by a combination of adding a second vertex position for time of 1.0 using ##VkAccelerationStructureGeometryMotionTrianglesDataNV and providing multiple transforms in the instance using ##VkAccelerationStructureMotionInstanceNV.
 
         <h5>VK_NV_ray_tracing_motion_blur</h5>
         <dl>

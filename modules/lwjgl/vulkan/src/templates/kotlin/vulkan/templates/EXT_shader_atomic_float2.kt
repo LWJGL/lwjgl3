@@ -35,7 +35,7 @@ val EXT_shader_atomic_float2 = "EXTShaderAtomicFloat2".nativeClassVK("EXT_shader
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jason Ekstrand <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_shader_atomic_float2:%20&amp;body=@jekstrand%20">jekstrand</a></li>
+                <li>Jason Ekstrand <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_atomic_float2] @jekstrand%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_shader_atomic_float2 extension&gt;&gt;">jekstrand</a></li>
             </ul></dd>
         </dl>
 

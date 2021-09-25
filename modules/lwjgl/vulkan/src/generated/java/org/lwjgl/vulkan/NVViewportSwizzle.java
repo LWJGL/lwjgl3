@@ -8,7 +8,7 @@ package org.lwjgl.vulkan;
 /**
  * This extension provides a new per-viewport swizzle that can modify the position of primitives sent to each viewport. New viewport swizzle state is added for each viewport, and a new position vector is computed for each vertex by selecting from and optionally negating any of the four components of the original position vector.
  * 
- * <p>This new viewport swizzle is useful for a number of algorithms, including single-pass cubemap rendering (broadcasting a primitive to multiple faces and reorienting the vertex position for each face) and voxel rasterization. The per-viewport component remapping and negation provided by the swizzle allows application code to re-orient three-dimensional geometry with a view along any of the <b>X</b>, <b>Y</b>, or <b>Z</b> axes. If a perspective projection and depth buffering is required, <code>1/W</code> buffering should be used, as described in the single-pass cubemap rendering example in the “{@code Issues}” section below.</p>
+ * <p>This new viewport swizzle is useful for a number of algorithms, including single-pass cube map rendering (broadcasting a primitive to multiple faces and reorienting the vertex position for each face) and voxel rasterization. The per-viewport component remapping and negation provided by the swizzle allows application code to re-orient three-dimensional geometry with a view along any of the <b>X</b>, <b>Y</b>, or <b>Z</b> axes. If a perspective projection and depth buffering is required, <code>1/W</code> buffering should be used, as described in the single-pass cube map rendering example in the “{@code Issues}” section below.</p>
  * 
  * <h5>VK_NV_viewport_swizzle</h5>
  * 
@@ -27,7 +27,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_viewport_swizzle:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
+ * <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_viewport_swizzle] @pdaniell-nv%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_viewport_swizzle extension&gt;&gt;">pdaniell-nv</a></li>
  * </ul></dd>
  * </dl>
  * 

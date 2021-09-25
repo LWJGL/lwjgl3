@@ -36,7 +36,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_corner_sampled_image:%20&amp;body=@dgkoch%20">dgkoch</a></li>
+ * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_corner_sampled_image] @dgkoch%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_corner_sampled_image extension&gt;&gt;">dgkoch</a></li>
  * </ul></dd>
  * </dl>
  * 

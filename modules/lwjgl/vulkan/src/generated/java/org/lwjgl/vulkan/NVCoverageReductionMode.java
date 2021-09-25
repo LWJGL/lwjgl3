@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Kedarnath Thangudu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_coverage_reduction_mode:%20&amp;body=@kthangudu%20">kthangudu</a></li>
+ * <li>Kedarnath Thangudu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_coverage_reduction_mode] @kthangudu%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_coverage_reduction_mode extension&gt;&gt;">kthangudu</a></li>
  * </ul></dd>
  * </dl>
  * 

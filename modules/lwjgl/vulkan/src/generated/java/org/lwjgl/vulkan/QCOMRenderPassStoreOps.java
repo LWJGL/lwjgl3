@@ -36,7 +36,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Bill Licea-Kane <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_QCOM_render_pass_store_ops:%20&amp;body=@wwlk%20">wwlk</a></li>
+ * <li>Bill Licea-Kane <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_render_pass_store_ops] @wwlk%0A&lt;&lt;Here describe the issue or question you have about the VK_QCOM_render_pass_store_ops extension&gt;&gt;">wwlk</a></li>
  * </ul></dd>
  * </dl>
  * 

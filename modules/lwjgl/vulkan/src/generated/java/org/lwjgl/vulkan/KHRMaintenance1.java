@@ -51,7 +51,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_maintenance1:%20&amp;body=@pdaniell-nv%20">pdaniell-nv</a></li>
+ * <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_maintenance1] @pdaniell-nv%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_maintenance1 extension&gt;&gt;">pdaniell-nv</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -86,10 +86,16 @@ import static org.lwjgl.system.JNI.*;
 public class KHRMaintenance1 {
 
     /** The extension specification version. */
-    public static final int VK_KHR_MAINTENANCE1_SPEC_VERSION = 2;
+    public static final int VK_KHR_MAINTENANCE_1_SPEC_VERSION = 2;
 
     /** The extension name. */
-    public static final String VK_KHR_MAINTENANCE1_EXTENSION_NAME = "VK_KHR_maintenance1";
+    public static final String VK_KHR_MAINTENANCE_1_EXTENSION_NAME = "VK_KHR_maintenance1";
+
+    /** The extension specification version. */
+    public static final int VK_KHR_MAINTENANCE1_SPEC_VERSION = VK_KHR_MAINTENANCE_1_SPEC_VERSION;
+
+    /** The extension name. */
+    public static final String VK_KHR_MAINTENANCE1_EXTENSION_NAME = VK_KHR_MAINTENANCE_1_EXTENSION_NAME;
 
     /** Extends {@code VkResult}. */
     public static final int VK_ERROR_OUT_OF_POOL_MEMORY_KHR = -1000069000;

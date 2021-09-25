@@ -35,7 +35,7 @@ val KHR_shader_integer_dot_product = "KHRShaderIntegerDotProduct".nativeClassVK(
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Kevin Petit <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_integer_dot_product:%20&amp;body=@kevinpetit%20">kevinpetit</a></li>
+                <li>Kevin Petit <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_integer_dot_product] @kevinpetit%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_shader_integer_dot_product extension&gt;&gt;">kevinpetit</a></li>
             </ul></dd>
 
             <dt><b>Extension Proposal</b></dt>

@@ -104,7 +104,7 @@ public class VkDeviceQueueInfo2 extends Struct implements NativeResource {
     /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of {@link VkDeviceQueueInfo2} is used to provide additional image parameters to {@code vkGetDeviceQueue2}. */
+    /** {@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of {@link VkDeviceQueueInfo2} <b>can</b> be used to provide additional device queue parameters to {@code vkGetDeviceQueue2}. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** a {@code VkDeviceQueueCreateFlags} value indicating the flags used to create the device queue. */

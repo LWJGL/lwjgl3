@@ -46,7 +46,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_shader_viewport_index_layer:%20&amp;body=@dgkoch%20">dgkoch</a></li>
+ * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_viewport_index_layer] @dgkoch%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_shader_viewport_index_layer extension&gt;&gt;">dgkoch</a></li>
  * </ul></dd>
  * </dl>
  * 

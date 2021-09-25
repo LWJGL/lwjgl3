@@ -40,8 +40,8 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_display:%20&amp;body=@cubanismo%20">cubanismo</a></li>
-                <li>Norbert Nopper <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_display:%20&amp;body=@FslNopper%20">FslNopper</a></li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_display] @cubanismo%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_display extension&gt;&gt;">cubanismo</a></li>
+                <li>Norbert Nopper <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_display] @FslNopper%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_display extension&gt;&gt;">FslNopper</a></li>
             </ul></dd>
         </dl>
 
@@ -97,12 +97,12 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         <ul>
             <li>#DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR specifies that the source image will be treated as opaque.</li>
             <li>#DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR specifies that a global alpha value <b>must</b> be specified that will be applied to all pixels in the source image.</li>
-            <li>#DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR specifies that the alpha value will be determined by the alpha channel of the source image’s pixels. If the source format contains no alpha values, no blending will be applied. The source alpha values are not premultiplied into the source image’s other color channels.</li>
-            <li>#DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR is equivalent to #DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR, except the source alpha values are assumed to be premultiplied into the source image’s other color channels.</li>
+            <li>#DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR specifies that the alpha value will be determined by the alpha component of the source image’s pixels. If the source format contains no alpha values, no blending will be applied. The source alpha values are not premultiplied into the source image’s other color components.</li>
+            <li>#DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR is equivalent to #DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR, except the source alpha values are assumed to be premultiplied into the source image’s other color components.</li>
         </ul>
 
         <h5>See Also</h5>
-        {@code VkDisplayPlaneAlphaFlagsKHR}, ##VkDisplaySurfaceCreateInfoKHR
+        ##VkDisplaySurfaceCreateInfoKHR
         """,
 
         "DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR".enum(0x00000001),

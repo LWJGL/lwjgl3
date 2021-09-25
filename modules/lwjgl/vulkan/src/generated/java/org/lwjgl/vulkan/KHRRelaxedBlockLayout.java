@@ -35,7 +35,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>John Kessenich <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_relaxed_block_layout:%20&amp;body=@johnkslang%20">johnkslang</a></li>
+ * <li>John Kessenich <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_relaxed_block_layout] @johnkslang%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_relaxed_block_layout extension&gt;&gt;">johnkslang</a></li>
  * </ul></dd>
  * </dl>
  * 

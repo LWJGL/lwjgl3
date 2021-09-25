@@ -34,7 +34,7 @@ val EXT_shader_stencil_export = "EXTShaderStencilExport".nativeClassVK("EXT_shad
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Dominik Witczak <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_shader_stencil_export:%20&amp;body=@dominikwitczakamd%20">dominikwitczakamd</a></li>
+                <li>Dominik Witczak <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_stencil_export] @dominikwitczakamd%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_shader_stencil_export extension&gt;&gt;">dominikwitczakamd</a></li>
             </ul></dd>
         </dl>
 

@@ -221,13 +221,13 @@ public class VkSamplerCreateInfo extends Struct implements NativeResource {
     /** a {@code VkSamplerMipmapMode} value specifying the mipmap filter to apply to lookups. */
     @NativeType("VkSamplerMipmapMode")
     public int mipmapMode() { return nmipmapMode(address()); }
-    /** a {@code VkSamplerAddressMode} value specifying the addressing mode for outside [0..1] range for U coordinate. */
+    /** a {@code VkSamplerAddressMode} value specifying the addressing mode for U coordinates outside <code>[0,1)</code>. */
     @NativeType("VkSamplerAddressMode")
     public int addressModeU() { return naddressModeU(address()); }
-    /** a {@code VkSamplerAddressMode} value specifying the addressing mode for outside [0..1] range for V coordinate. */
+    /** a {@code VkSamplerAddressMode} value specifying the addressing mode for V coordinates outside <code>[0,1)</code>. */
     @NativeType("VkSamplerAddressMode")
     public int addressModeV() { return naddressModeV(address()); }
-    /** a {@code VkSamplerAddressMode} value specifying the addressing mode for outside [0..1] range for W coordinate. */
+    /** a {@code VkSamplerAddressMode} value specifying the addressing mode for W coordinates outside <code>[0,1)</code>. */
     @NativeType("VkSamplerAddressMode")
     public int addressModeW() { return naddressModeW(address()); }
     /** the bias to be added to mipmap LOD (level-of-detail) calculation and bias provided by image sampling functions in SPIR-V, as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-level-of-detail-operation">Level-of-Detail Operation</a> section. */

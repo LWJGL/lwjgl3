@@ -30,7 +30,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Sandeep Shinde <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_surface_protected_capabilities:%20&amp;body=@sashinde%20">sashinde</a></li>
+ * <li>Sandeep Shinde <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_surface_protected_capabilities] @sashinde%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_surface_protected_capabilities extension&gt;&gt;">sashinde</a></li>
  * </ul></dd>
  * </dl>
  * 

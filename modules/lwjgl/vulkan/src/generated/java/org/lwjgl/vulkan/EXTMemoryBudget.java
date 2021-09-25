@@ -32,7 +32,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_memory_budget:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
+ * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_memory_budget] @jeffbolznv%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_memory_budget extension&gt;&gt;">jeffbolznv</a></li>
  * </ul></dd>
  * </dl>
  * 

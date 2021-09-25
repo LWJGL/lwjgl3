@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_acceleration_structure:%20&amp;body=@dgkoch%20">dgkoch</a></li>
+ * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_acceleration_structure] @dgkoch%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_acceleration_structure extension&gt;&gt;">dgkoch</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -249,10 +249,6 @@ public class KHRAccelerationStructure {
      * 
      * <p>{@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR} and {@link #VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR} <b>may</b> take more time and memory than a normal build, and so <b>should</b> only be used when those features are needed.</p>
      * </div>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkBuildAccelerationStructureFlagsKHR}</p>
      */
     public static final int
         VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR      = 0x1,
@@ -308,10 +304,6 @@ public class KHRAccelerationStructure {
      * <li>{@link #VK_GEOMETRY_OPAQUE_BIT_KHR GEOMETRY_OPAQUE_BIT_KHR} indicates that this geometry does not invoke the any-hit shaders even if present in a hit group.</li>
      * <li>{@link #VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_KHR} indicates that the implementation <b>must</b> only call the any-hit shader a single time for each primitive in this geometry. If this bit is absent an implementation <b>may</b> invoke the any-hit shader more than once for this geometry.</li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkGeometryFlagsKHR}</p>
      */
     public static final int
         VK_GEOMETRY_OPAQUE_BIT_KHR                          = 0x1,
@@ -351,10 +343,6 @@ public class KHRAccelerationStructure {
      * 
      * <p>{@link #VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR} and {@link #VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR} <b>must</b> not be used in the same flag.</p>
      * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkGeometryInstanceFlagsKHR}</p>
-     * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
@@ -376,10 +364,6 @@ public class KHRAccelerationStructure {
      * <ul>
      * <li>{@link #VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR} specifies that the acceleration structure’s address <b>can</b> be saved and reused on a subsequent run.</li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkAccelerationStructureCreateFlagsKHR}</p>
      */
     public static final int VK_ACCELERATION_STRUCTURE_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR = 0x1;
 

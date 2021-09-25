@@ -139,10 +139,10 @@ public class VkPhysicalDeviceTransformFeedbackPropertiesEXT extends Struct imple
     /** the maximum stride between each capture of vertex data to the buffer. */
     @NativeType("uint32_t")
     public int maxTransformFeedbackBufferDataStride() { return nmaxTransformFeedbackBufferDataStride(address()); }
-    /** {@link VK10#VK_TRUE TRUE} if the implementation supports the {@link EXTTransformFeedback#VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} query type. {@code transformFeedbackQueries} is false if queries of this type <b>cannot</b> be created. */
+    /** {@link VK10#VK_TRUE TRUE} if the implementation supports the {@link EXTTransformFeedback#VK_QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT} query type. {@code transformFeedbackQueries} is {@link VK10#VK_FALSE FALSE} if queries of this type <b>cannot</b> be created. */
     @NativeType("VkBool32")
     public boolean transformFeedbackQueries() { return ntransformFeedbackQueries(address()) != 0; }
-    /** {@link VK10#VK_TRUE TRUE} if the implementation supports the geometry shader {@code OpExecutionMode} of {@code OutputLineStrip} and {@code OutputTriangleStrip} in addition to {@code OutputPoints} when more than one vertex stream is output. If {@code transformFeedbackStreamsLinesTriangles} is false the implementation only supports an {@code OpExecutionMode} of {@code OutputPoints} when more than one vertex stream is output from the geometry shader. */
+    /** {@link VK10#VK_TRUE TRUE} if the implementation supports the geometry shader {@code OpExecutionMode} of {@code OutputLineStrip} and {@code OutputTriangleStrip} in addition to {@code OutputPoints} when more than one vertex stream is output. If {@code transformFeedbackStreamsLinesTriangles} is {@link VK10#VK_FALSE FALSE} the implementation only supports an {@code OpExecutionMode} of {@code OutputPoints} when more than one vertex stream is output from the geometry shader. */
     @NativeType("VkBool32")
     public boolean transformFeedbackStreamsLinesTriangles() { return ntransformFeedbackStreamsLinesTriangles(address()) != 0; }
     /** {@link VK10#VK_TRUE TRUE} if the implementation supports the {@code GeometryStreams} SPIR-V capability and the application can use {@link VkPipelineRasterizationStateStreamCreateInfoEXT} to modify which vertex stream output is used for rasterization. Otherwise vertex stream 0 <b>must</b> always be used for rasterization. */

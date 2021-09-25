@@ -39,7 +39,7 @@ val EXT_primitive_topology_list_restart = "EXTPrimitiveTopologyListRestart".nati
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Shahbaz Youssefi <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_primitive_topology_list_restart:%20&amp;body=@syoussefi%20">syoussefi</a></li>
+                <li>Shahbaz Youssefi <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_primitive_topology_list_restart] @syoussefi%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_primitive_topology_list_restart extension&gt;&gt;">syoussefi</a></li>
             </ul></dd>
         </dl>
 

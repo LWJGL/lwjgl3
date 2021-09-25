@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Markus Tavenrath <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_descriptor_update_template:%20&amp;body=@mtavenrath%20">mtavenrath</a></li>
+ * <li>Markus Tavenrath <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_descriptor_update_template] @mtavenrath%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_descriptor_update_template extension&gt;&gt;">mtavenrath</a></li>
  * </ul></dd>
  * </dl>
  * 

@@ -35,7 +35,7 @@ val NV_device_diagnostics_config = "NVDeviceDiagnosticsConfig".nativeClassVK("NV
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Kedarnath Thangudu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_device_diagnostics_config:%20&amp;body=@kthangudu%20">kthangudu</a></li>
+                <li>Kedarnath Thangudu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_device_diagnostics_config] @kthangudu%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_device_diagnostics_config extension&gt;&gt;">kthangudu</a></li>
             </ul></dd>
         </dl>
 
@@ -81,9 +81,6 @@ val NV_device_diagnostics_config = "NVDeviceDiagnosticsConfig".nativeClassVK("NV
             <li>#DEVICE_DIAGNOSTICS_CONFIG_ENABLE_RESOURCE_TRACKING_BIT_NV enables driver side tracking of resources (images, buffers, etc.) used to augment the device fault information.</li>
             <li>#DEVICE_DIAGNOSTICS_CONFIG_ENABLE_AUTOMATIC_CHECKPOINTS_BIT_NV enables automatic insertion of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#device-diagnostic-checkpoints">diagnostic checkpoints</a> for draw calls, dispatches, trace rays, and copies. The CPU call stack at the time of the command will be associated as the marker data for the automatically inserted checkpoints.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkDeviceDiagnosticsConfigFlagsNV}
         """,
 
         "DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_DEBUG_INFO_BIT_NV".enum(0x00000001),

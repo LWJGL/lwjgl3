@@ -40,7 +40,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tony Zlatinski <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_video_queue:%20&amp;body=@tzlatinski%20">tzlatinski</a></li>
+                <li>Tony Zlatinski <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_video_queue] @tzlatinski%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_video_queue extension&gt;&gt;">tzlatinski</a></li>
             </ul></dd>
         </dl>
 
@@ -132,7 +132,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         </ul>
 
         <h5>See Also</h5>
-        {@code VkVideoCodecOperationFlagsKHR}, ##VkVideoProfileKHR
+        ##VkVideoProfileKHR
         """,
 
         "VIDEO_CODEC_OPERATION_INVALID_BIT_KHR".."0"
@@ -149,9 +149,6 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
             <li>#VIDEO_CHROMA_SUBSAMPLING_422_BIT_KHR - the format is 4:2:2 chroma subsampled. The two chroma components are sampled at half the sample rate of luma. The horizontal chroma resolution is halved.</li>
             <li>#VIDEO_CHROMA_SUBSAMPLING_444_BIT_KHR - the format is 4:4:4 chroma sampled. Each of the three YCbCr components have the same sample rate, thus there is no chroma subsampling.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkVideoChromaSubsamplingFlagsKHR}
         """,
 
         "VIDEO_CHROMA_SUBSAMPLING_INVALID_BIT_KHR".."0",
@@ -171,9 +168,6 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
             <li>#VIDEO_COMPONENT_BIT_DEPTH_10_BIT_KHR - the format component bit depth is 10 bits.</li>
             <li>#VIDEO_COMPONENT_BIT_DEPTH_12_BIT_KHR - the format component bit depth is 12 bits.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkVideoComponentBitDepthFlagsKHR}
         """,
 
         "VIDEO_COMPONENT_BIT_DEPTH_INVALID_KHR".."0",
@@ -191,9 +185,6 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
             <li>#VIDEO_CAPABILITY_PROTECTED_CONTENT_BIT_KHR - the decode or encode session supports protected content.</li>
             <li>#VIDEO_CAPABILITY_SEPARATE_REFERENCE_IMAGES_BIT_KHR - the DPB or Reconstructed Video Picture Resources for the video session <b>may</b> be created as a separate {@code VkImage} for each DPB picture. If not supported, the DPB <b>must</b> be created as single multi-layered image where each layer represents one of the DPB Video Picture Resources.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkVideoCapabilityFlagsKHR}
         """,
 
         "VIDEO_CAPABILITY_PROTECTED_CONTENT_BIT_KHR".enum(0x00000001),
@@ -208,9 +199,6 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         <ul>
             <li>#VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR - create the video session for use with protected video content</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkVideoSessionCreateFlagsKHR}
         """,
 
         "VIDEO_SESSION_CREATE_DEFAULT_KHR".."0",
@@ -223,11 +211,9 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
         <h5>Description</h5>
         <ul>
-            <li>#VIDEO_CODING_CONTROL_RESET_BIT_KHR indicates a request for the bound video session context to be reset to init state.</li>
+            <li>#VIDEO_CODING_CONTROL_DEFAULT_KHR indicates a request for the coding control paramaters to be applied to the current state of the bound video session.</li>
+            <li>#VIDEO_CODING_CONTROL_RESET_BIT_KHR indicates a request for the bound video session state to be reset before the coding control parameters are applied. The state after reset is identical to the state immediately after video session creation.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkVideoCodingControlFlagsKHR}
         """,
 
         "VIDEO_CODING_CONTROL_DEFAULT_KHR".."0",
@@ -244,12 +230,8 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
             <li>#VIDEO_CODING_QUALITY_PRESET_POWER_BIT_KHR defines power efficient case.</li>
             <li>#VIDEO_CODING_QUALITY_PRESET_QUALITY_BIT_KHR defines quality focus case.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkVideoCodingQualityPresetFlagsKHR}
         """,
 
-        "VIDEO_CODING_QUALITY_PRESET_DEFAULT_BIT_KHR".."0",
         "VIDEO_CODING_QUALITY_PRESET_NORMAL_BIT_KHR".enum(0x00000001),
         "VIDEO_CODING_QUALITY_PRESET_POWER_BIT_KHR".enum(0x00000002),
         "VIDEO_CODING_QUALITY_PRESET_QUALITY_BIT_KHR".enum(0x00000004)
@@ -592,6 +574,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
+                <li>#ERROR_INITIALIZATION_FAILED</li>
                 <li>#ERROR_OUT_OF_HOST_MEMORY</li>
                 <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
                 <li>#ERROR_TOO_MANY_OBJECTS</li>

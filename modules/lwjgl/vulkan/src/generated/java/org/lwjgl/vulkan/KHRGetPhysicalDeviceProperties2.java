@@ -93,7 +93,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_get_physical_device_properties2:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
+ * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_get_physical_device_properties2] @jeffbolznv%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_get_physical_device_properties2 extension&gt;&gt;">jeffbolznv</a></li>
  * </ul></dd>
  * </dl>
  * 

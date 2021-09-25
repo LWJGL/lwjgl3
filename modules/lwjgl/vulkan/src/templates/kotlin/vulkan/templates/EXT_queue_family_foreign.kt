@@ -41,7 +41,7 @@ val EXT_queue_family_foreign = "EXTQueueFamilyForeign".nativeClassVK("EXT_queue_
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Chad Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_queue_family_foreign:%20&amp;body=@chadversary%20">chadversary</a></li>
+                <li>Chad Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_queue_family_foreign] @chadversary%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_queue_family_foreign extension&gt;&gt;">chadversary</a></li>
             </ul></dd>
         </dl>
 

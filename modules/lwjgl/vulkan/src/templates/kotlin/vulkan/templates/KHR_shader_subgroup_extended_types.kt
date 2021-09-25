@@ -42,7 +42,7 @@ val KHR_shader_subgroup_extended_types = "KHRShaderSubgroupExtendedTypes".native
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Neil Henning <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_subgroup_extended_types:%20&amp;body=@sheredom%20">sheredom</a></li>
+                <li>Neil Henning <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_subgroup_extended_types] @sheredom%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_shader_subgroup_extended_types extension&gt;&gt;">sheredom</a></li>
             </ul></dd>
         </dl>
 

@@ -43,7 +43,7 @@ val KHR_external_fence_capabilities = "KHRExternalFenceCapabilities".nativeClass
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_external_fence_capabilities:%20&amp;body=@critsec%20">critsec</a></li>
+                <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_external_fence_capabilities] @critsec%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_external_fence_capabilities extension&gt;&gt;">critsec</a></li>
             </ul></dd>
         </dl>
 

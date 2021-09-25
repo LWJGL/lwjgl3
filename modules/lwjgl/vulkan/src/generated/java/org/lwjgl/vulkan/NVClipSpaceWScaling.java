@@ -118,7 +118,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Eric Werness <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_clip_space_w_scaling:%20&amp;body=@ewerness-nv%20">ewerness-nv</a></li>
+ * <li>Eric Werness <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_clip_space_w_scaling] @ewerness-nv%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_clip_space_w_scaling extension&gt;&gt;">ewerness-nv</a></li>
  * </ul></dd>
  * </dl>
  * 

@@ -35,7 +35,7 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_display_surface_counter:%20&amp;body=@cubanismo%20">cubanismo</a></li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_display_surface_counter] @cubanismo%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_display_surface_counter extension&gt;&gt;">cubanismo</a></li>
             </ul></dd>
         </dl>
 
@@ -87,7 +87,7 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
         </ul>
 
         <h5>See Also</h5>
-        {@code VkSurfaceCounterFlagsEXT}, #GetSwapchainCounterEXT()
+        #GetSwapchainCounterEXT()
         """,
 
         "SURFACE_COUNTER_VBLANK_BIT_EXT".enum(0x00000001),

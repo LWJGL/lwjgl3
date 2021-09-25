@@ -50,7 +50,7 @@ val KHR_fragment_shading_rate = "KHRFragmentShadingRate".nativeClassVK("KHR_frag
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_fragment_shading_rate:%20&amp;body=@tobski%20">tobski</a></li>
+                <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_fragment_shading_rate] @tobski%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_fragment_shading_rate extension&gt;&gt;">tobski</a></li>
             </ul></dd>
         </dl>
 

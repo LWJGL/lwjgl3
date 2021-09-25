@@ -28,7 +28,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_texture_compression_astc_hdr:%20&amp;body=@janharaldfredriksen-arm%20">janharaldfredriksen-arm</a></li>
+ * <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_texture_compression_astc_hdr] @janharaldfredriksen-arm%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_texture_compression_astc_hdr extension&gt;&gt;">janharaldfredriksen-arm</a></li>
  * </ul></dd>
  * </dl>
  * 

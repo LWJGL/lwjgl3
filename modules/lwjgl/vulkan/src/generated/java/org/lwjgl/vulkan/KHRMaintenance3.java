@@ -46,7 +46,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_maintenance3:%20&amp;body=@jeffbolznv%20">jeffbolznv</a></li>
+ * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_maintenance3] @jeffbolznv%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_maintenance3 extension&gt;&gt;">jeffbolznv</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -68,10 +68,16 @@ import static org.lwjgl.system.JNI.*;
 public class KHRMaintenance3 {
 
     /** The extension specification version. */
-    public static final int VK_KHR_MAINTENANCE3_SPEC_VERSION = 1;
+    public static final int VK_KHR_MAINTENANCE_3_SPEC_VERSION = 1;
 
     /** The extension name. */
-    public static final String VK_KHR_MAINTENANCE3_EXTENSION_NAME = "VK_KHR_maintenance3";
+    public static final String VK_KHR_MAINTENANCE_3_EXTENSION_NAME = "VK_KHR_maintenance3";
+
+    /** The extension specification version. */
+    public static final int VK_KHR_MAINTENANCE3_SPEC_VERSION = VK_KHR_MAINTENANCE_3_SPEC_VERSION;
+
+    /** The extension name. */
+    public static final String VK_KHR_MAINTENANCE3_EXTENSION_NAME = VK_KHR_MAINTENANCE_3_EXTENSION_NAME;
 
     /**
      * Extends {@code VkStructureType}.

@@ -35,7 +35,7 @@ val EXT_ycbcr_2plane_444_formats = "EXTYcbcr2plane444Formats".nativeClassVK("EXT
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tony Zlatinski <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_ycbcr_2plane_444_formats:%20&amp;body=@tzlatinski%20">tzlatinski</a></li>
+                <li>Tony Zlatinski <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_ycbcr_2plane_444_formats] @tzlatinski%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_ycbcr_2plane_444_formats extension&gt;&gt;">tzlatinski</a></li>
             </ul></dd>
         </dl>
 

@@ -25,7 +25,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Martin Dinkov <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_AMD_memory_overallocation_behavior:%20&amp;body=@mdinkov%20">mdinkov</a></li>
+ * <li>Martin Dinkov <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_memory_overallocation_behavior] @mdinkov%0A&lt;&lt;Here describe the issue or question you have about the VK_AMD_memory_overallocation_behavior extension&gt;&gt;">mdinkov</a></li>
  * </ul></dd>
  * </dl>
  * 

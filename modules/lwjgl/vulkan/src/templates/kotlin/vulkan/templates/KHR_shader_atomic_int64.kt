@@ -43,7 +43,7 @@ val KHR_shader_atomic_int64 = "KHRShaderAtomicInt64".nativeClassVK("KHR_shader_a
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Aaron Hagan <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_shader_atomic_int64:%20&amp;body=@ahagan%20">ahagan</a></li>
+                <li>Aaron Hagan <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_atomic_int64] @ahagan%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_shader_atomic_int64 extension&gt;&gt;">ahagan</a></li>
             </ul></dd>
         </dl>
 

@@ -63,7 +63,7 @@ val KHR_ray_query = "KHRRayQuery".nativeClassVK("KHR_ray_query", type = "device"
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_ray_query:%20&amp;body=@dgkoch%20">dgkoch</a></li>
+                <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_ray_query] @dgkoch%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_ray_query extension&gt;&gt;">dgkoch</a></li>
             </ul></dd>
         </dl>
 

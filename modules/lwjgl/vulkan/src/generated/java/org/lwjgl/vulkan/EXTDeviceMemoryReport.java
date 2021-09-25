@@ -30,7 +30,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Yiwei Zhang <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_device_memory_report:%20&amp;body=@zhangyiwei%20">zhangyiwei</a></li>
+ * <li>Yiwei Zhang <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_device_memory_report] @zhangyiwei%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_device_memory_report extension&gt;&gt;">zhangyiwei</a></li>
  * </ul></dd>
  * </dl>
  * 

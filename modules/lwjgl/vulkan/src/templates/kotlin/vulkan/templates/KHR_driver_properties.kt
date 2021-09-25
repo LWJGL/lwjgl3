@@ -43,7 +43,7 @@ val KHR_driver_properties = "KHRDriverProperties".nativeClassVK("KHR_driver_prop
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_driver_properties:%20&amp;body=@drakos-amd%20">drakos-amd</a></li>
+                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_driver_properties] @drakos-amd%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_driver_properties extension&gt;&gt;">drakos-amd</a></li>
             </ul></dd>
         </dl>
 

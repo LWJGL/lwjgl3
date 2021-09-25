@@ -39,7 +39,7 @@ val EXT_headless_surface = "EXTHeadlessSurface".nativeClassVK("EXT_headless_surf
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Lisa Wu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_headless_surface:%20&amp;body=@chengtianww%20">chengtianww</a></li>
+                <li>Lisa Wu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_headless_surface] @chengtianww%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_headless_surface extension&gt;&gt;">chengtianww</a></li>
             </ul></dd>
         </dl>
 

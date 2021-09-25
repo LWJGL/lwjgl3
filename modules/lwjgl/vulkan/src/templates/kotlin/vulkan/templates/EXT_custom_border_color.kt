@@ -49,7 +49,7 @@ val EXT_custom_border_color = "EXTCustomBorderColor".nativeClassVK("EXT_custom_b
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Liam Middlebrook <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_custom_border_color:%20&amp;body=@liam-middlebrook%20">liam-middlebrook</a></li>
+                <li>Liam Middlebrook <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_custom_border_color] @liam-middlebrook%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_custom_border_color extension&gt;&gt;">liam-middlebrook</a></li>
             </ul></dd>
         </dl>
 

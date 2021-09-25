@@ -37,7 +37,7 @@ val EXT_hdr_metadata = "EXTHdrMetadata".nativeClassVK("EXT_hdr_metadata", type =
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_hdr_metadata:%20&amp;body=@courtney-g%20">courtney-g</a></li>
+                <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_hdr_metadata] @courtney-g%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_hdr_metadata extension&gt;&gt;">courtney-g</a></li>
             </ul></dd>
         </dl>
 

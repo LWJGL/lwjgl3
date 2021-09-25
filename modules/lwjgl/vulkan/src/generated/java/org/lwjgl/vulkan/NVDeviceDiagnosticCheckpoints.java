@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Nuno Subtil <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_NV_device_diagnostic_checkpoints:%20&amp;body=@nsubtil%20">nsubtil</a></li>
+ * <li>Nuno Subtil <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_device_diagnostic_checkpoints] @nsubtil%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_device_diagnostic_checkpoints extension&gt;&gt;">nsubtil</a></li>
  * </ul></dd>
  * </dl>
  * 

@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Tony Zlatinski <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_video_queue:%20&amp;body=@tzlatinski%20">tzlatinski</a></li>
+ * <li>Tony Zlatinski <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_video_queue] @tzlatinski%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_video_queue extension&gt;&gt;">tzlatinski</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -150,7 +150,7 @@ public class KHRVideoQueue {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@code VkVideoCodecOperationFlagsKHR}, {@link VkVideoProfileKHR}</p>
+     * <p>{@link VkVideoProfileKHR}</p>
      */
     public static final int VK_VIDEO_CODEC_OPERATION_INVALID_BIT_KHR = 0;
 
@@ -165,10 +165,6 @@ public class KHRVideoQueue {
      * <li>{@link #VK_VIDEO_CHROMA_SUBSAMPLING_422_BIT_KHR VIDEO_CHROMA_SUBSAMPLING_422_BIT_KHR} - the format is 4:2:2 chroma subsampled. The two chroma components are sampled at half the sample rate of luma. The horizontal chroma resolution is halved.</li>
      * <li>{@link #VK_VIDEO_CHROMA_SUBSAMPLING_444_BIT_KHR VIDEO_CHROMA_SUBSAMPLING_444_BIT_KHR} - the format is 4:4:4 chroma sampled. Each of the three YCbCr components have the same sample rate, thus there is no chroma subsampling.</li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkVideoChromaSubsamplingFlagsKHR}</p>
      * 
      * <h5>Enum values:</h5>
      * 
@@ -194,10 +190,6 @@ public class KHRVideoQueue {
      * <li>{@link #VK_VIDEO_COMPONENT_BIT_DEPTH_12_BIT_KHR VIDEO_COMPONENT_BIT_DEPTH_12_BIT_KHR} - the format component bit depth is 12 bits.</li>
      * </ul>
      * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkVideoComponentBitDepthFlagsKHR}</p>
-     * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
@@ -219,10 +211,6 @@ public class KHRVideoQueue {
      * <li>{@link #VK_VIDEO_CAPABILITY_PROTECTED_CONTENT_BIT_KHR VIDEO_CAPABILITY_PROTECTED_CONTENT_BIT_KHR} - the decode or encode session supports protected content.</li>
      * <li>{@link #VK_VIDEO_CAPABILITY_SEPARATE_REFERENCE_IMAGES_BIT_KHR VIDEO_CAPABILITY_SEPARATE_REFERENCE_IMAGES_BIT_KHR} - the DPB or Reconstructed Video Picture Resources for the video session <b>may</b> be created as a separate {@code VkImage} for each DPB picture. If not supported, the DPB <b>must</b> be created as single multi-layered image where each layer represents one of the DPB Video Picture Resources.</li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkVideoCapabilityFlagsKHR}</p>
      */
     public static final int
         VK_VIDEO_CAPABILITY_PROTECTED_CONTENT_BIT_KHR         = 0x1,
@@ -236,10 +224,6 @@ public class KHRVideoQueue {
      * <ul>
      * <li>{@link #VK_VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR} - create the video session for use with protected video content</li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkVideoSessionCreateFlagsKHR}</p>
      * 
      * <h5>Enum values:</h5>
      * 
@@ -257,17 +241,8 @@ public class KHRVideoQueue {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR VIDEO_CODING_CONTROL_RESET_BIT_KHR} indicates a request for the bound video session context to be reset to init state.</li>
-     * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkVideoCodingControlFlagsKHR}</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_VIDEO_CODING_CONTROL_DEFAULT_KHR VIDEO_CODING_CONTROL_DEFAULT_KHR}</li>
+     * <li>{@link #VK_VIDEO_CODING_CONTROL_DEFAULT_KHR VIDEO_CODING_CONTROL_DEFAULT_KHR} indicates a request for the coding control paramaters to be applied to the current state of the bound video session.</li>
+     * <li>{@link #VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR VIDEO_CODING_CONTROL_RESET_BIT_KHR} indicates a request for the bound video session state to be reset before the coding control parameters are applied. The state after reset is identical to the state immediately after video session creation.</li>
      * </ul>
      */
     public static final int
@@ -284,19 +259,8 @@ public class KHRVideoQueue {
      * <li>{@link #VK_VIDEO_CODING_QUALITY_PRESET_POWER_BIT_KHR VIDEO_CODING_QUALITY_PRESET_POWER_BIT_KHR} defines power efficient case.</li>
      * <li>{@link #VK_VIDEO_CODING_QUALITY_PRESET_QUALITY_BIT_KHR VIDEO_CODING_QUALITY_PRESET_QUALITY_BIT_KHR} defines quality focus case.</li>
      * </ul>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@code VkVideoCodingQualityPresetFlagsKHR}</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_VIDEO_CODING_QUALITY_PRESET_DEFAULT_BIT_KHR VIDEO_CODING_QUALITY_PRESET_DEFAULT_BIT_KHR}</li>
-     * </ul>
      */
     public static final int
-        VK_VIDEO_CODING_QUALITY_PRESET_DEFAULT_BIT_KHR = 0,
         VK_VIDEO_CODING_QUALITY_PRESET_NORMAL_BIT_KHR  = 0x1,
         VK_VIDEO_CODING_QUALITY_PRESET_POWER_BIT_KHR   = 0x2,
         VK_VIDEO_CODING_QUALITY_PRESET_QUALITY_BIT_KHR = 0x4;
@@ -771,6 +735,7 @@ public class KHRVideoQueue {
      * </ul></dd>
      * <dt>On failure, this command returns</dt>
      * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_INITIALIZATION_FAILED ERROR_INITIALIZATION_FAILED}</li>
      * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * <li>{@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}</li>
      * <li>{@link VK10#VK_ERROR_TOO_MANY_OBJECTS ERROR_TOO_MANY_OBJECTS}</li>

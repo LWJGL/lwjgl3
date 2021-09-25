@@ -51,7 +51,7 @@ val KHR_timeline_semaphore = "KHRTimelineSemaphore".nativeClassVK("KHR_timeline_
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jason Ekstrand <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_timeline_semaphore:%20&amp;body=@jekstrand%20">jekstrand</a></li>
+                <li>Jason Ekstrand <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_timeline_semaphore] @jekstrand%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_timeline_semaphore extension&gt;&gt;">jekstrand</a></li>
             </ul></dd>
         </dl>
 

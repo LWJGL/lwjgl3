@@ -35,7 +35,7 @@ val EXT_fragment_density_map2 = "EXTFragmentDensityMap2".nativeClassVK("EXT_frag
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Matthew Netsch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_fragment_density_map2:%20&amp;body=@mnetsch%20">mnetsch</a></li>
+                <li>Matthew Netsch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_fragment_density_map2] @mnetsch%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_fragment_density_map2 extension&gt;&gt;">mnetsch</a></li>
             </ul></dd>
         </dl>
 

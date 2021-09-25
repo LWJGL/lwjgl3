@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_GOOGLE_display_timing:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
+ * <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_GOOGLE_display_timing] @ianelliottus%0A&lt;&lt;Here describe the issue or question you have about the VK_GOOGLE_display_timing extension&gt;&gt;">ianelliottus</a></li>
  * </ul></dd>
  * </dl>
  * 

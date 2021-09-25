@@ -47,7 +47,7 @@ val KHR_depth_stencil_resolve = "KHRDepthStencilResolve".nativeClassVK("KHR_dept
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_depth_stencil_resolve:%20&amp;body=@janharald%20">janharald</a></li>
+                <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_depth_stencil_resolve] @janharald%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_depth_stencil_resolve extension&gt;&gt;">janharald</a></li>
             </ul></dd>
         </dl>
 

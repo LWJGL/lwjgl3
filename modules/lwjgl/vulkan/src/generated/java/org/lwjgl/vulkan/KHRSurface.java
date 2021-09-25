@@ -44,8 +44,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_surface:%20&amp;body=@cubanismo%20">cubanismo</a></li>
- * <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_surface:%20&amp;body=@ianelliottus%20">ianelliottus</a></li>
+ * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_surface] @cubanismo%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_surface extension&gt;&gt;">cubanismo</a></li>
+ * <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_surface] @ianelliottus%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_surface extension&gt;&gt;">ianelliottus</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -117,7 +117,7 @@ public class KHRSurface {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM}, {@link VkCopyCommandTransformInfoQCOM}, {@link VkDisplaySurfaceCreateInfoKHR}, {@link VkRenderPassTransformBeginInfoQCOM}, {@link VkSurfaceCapabilities2EXT}, {@link VkSurfaceCapabilitiesKHR}, {@code VkSurfaceTransformFlagsKHR}, {@link VkSwapchainCreateInfoKHR}</p>
+     * <p>{@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM}, {@link VkCopyCommandTransformInfoQCOM}, {@link VkDisplaySurfaceCreateInfoKHR}, {@link VkRenderPassTransformBeginInfoQCOM}, {@link VkSurfaceCapabilities2EXT}, {@link VkSurfaceCapabilitiesKHR}, {@link VkSwapchainCreateInfoKHR}</p>
      */
     public static final int
         VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR                     = 0x1,
@@ -236,7 +236,7 @@ public class KHRSurface {
      * E =  1.055 &times; L<sup>1/2.4</sup> - 0.055 for 0.0030186 &le; L &le; 1
      *     12.92  &times; L for 0 &le; L &lt; 0.0030186</code></pre>
      * 
-     * <p>where <code>L</code> is the linear value of a color channel and <code>E</code> is the encoded value (as stored in the image in memory).</p>
+     * <p>where <code>L</code> is the linear value of a color component and <code>E</code> is the encoded value (as stored in the image in memory).</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
@@ -259,15 +259,15 @@ public class KHRSurface {
      * <p>These values are described as follows:</p>
      * 
      * <ul>
-     * <li>{@link #VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR COMPOSITE_ALPHA_OPAQUE_BIT_KHR}: The alpha channel, if it exists, of the images is ignored in the compositing process. Instead, the image is treated as if it has a constant alpha of 1.0.</li>
-     * <li>{@link #VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR}: The alpha channel, if it exists, of the images is respected in the compositing process. The non-alpha channels of the image are expected to already be multiplied by the alpha channel by the application.</li>
-     * <li>{@link #VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR}: The alpha channel, if it exists, of the images is respected in the compositing process. The non-alpha channels of the image are not expected to already be multiplied by the alpha channel by the application; instead, the compositor will multiply the non-alpha channels of the image by the alpha channel during compositing.</li>
-     * <li>{@link #VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR COMPOSITE_ALPHA_INHERIT_BIT_KHR}: The way in which the presentation engine treats the alpha channel in the images is unknown to the Vulkan API. Instead, the application is responsible for setting the composite alpha blending mode using native window system commands. If the application does not set the blending mode using native window system commands, then a platform-specific default will be used.</li>
+     * <li>{@link #VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR COMPOSITE_ALPHA_OPAQUE_BIT_KHR}: The alpha component, if it exists, of the images is ignored in the compositing process. Instead, the image is treated as if it has a constant alpha of 1.0.</li>
+     * <li>{@link #VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR}: The alpha component, if it exists, of the images is respected in the compositing process. The non-alpha components of the image are expected to already be multiplied by the alpha component by the application.</li>
+     * <li>{@link #VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR}: The alpha component, if it exists, of the images is respected in the compositing process. The non-alpha components of the image are not expected to already be multiplied by the alpha component by the application; instead, the compositor will multiply the non-alpha components of the image by the alpha component during compositing.</li>
+     * <li>{@link #VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR COMPOSITE_ALPHA_INHERIT_BIT_KHR}: The way in which the presentation engine treats the alpha component in the images is unknown to the Vulkan API. Instead, the application is responsible for setting the composite alpha blending mode using native window system commands. If the application does not set the blending mode using native window system commands, then a platform-specific default will be used.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@code VkCompositeAlphaFlagsKHR}, {@link VkSwapchainCreateInfoKHR}</p>
+     * <p>{@link VkSwapchainCreateInfoKHR}</p>
      */
     public static final int
         VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR          = 0x1,

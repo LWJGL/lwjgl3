@@ -138,9 +138,6 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
         <ul>
             <li>#VIDEO_DECODE_RESERVED_0_BIT_KHR The current version of the specification has reserved this value for future use.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkVideoDecodeFlagsKHR}
         """,
 
         "VIDEO_DECODE_DEFAULT_KHR".."0",

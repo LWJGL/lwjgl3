@@ -403,9 +403,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>#SUBGROUP_FEATURE_QUAD_BIT specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformQuad} capability.</li>
             <li>#SUBGROUP_FEATURE_PARTITIONED_BIT_NV specifies the device will accept SPIR-V shader modules containing the {@code GroupNonUniformPartitionedNV} capability.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkSubgroupFeatureFlags}
         """,
 
         "SUBGROUP_FEATURE_BASIC_BIT".enum(0x00000001),
@@ -434,12 +431,9 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         The peer memory features of a memory heap also apply to any accesses that <b>may</b> be performed during <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-image-layout-transitions">image layout transitions</a>.
         </div>
 
-        #PEER_MEMORY_FEATURE_COPY_DST_BIT <b>must</b> be supported for all host local heaps and for at least one device local heap.
+        #PEER_MEMORY_FEATURE_COPY_DST_BIT <b>must</b> be supported for all host local heaps and for at least one device-local memory heap.
 
         If a device does not support a peer memory feature, it is still valid to use a resource that includes both local and peer memory bindings with the corresponding access type as long as only the local bindings are actually accessed. For example, an application doing split-frame rendering would use framebuffer attachments that include both local and peer memory bindings, but would scissor the rendering to only update local memory.
-
-        <h5>See Also</h5>
-        {@code VkPeerMemoryFeatureFlags}
         """,
 
         "PEER_MEMORY_FEATURE_COPY_SRC_BIT".enum(0x00000001),
@@ -458,9 +452,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>#MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT specifies that the memory <b>can</b> be attached to a buffer object created with the #BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT bit set in {@code usage}, and that the memory handle <b>can</b> be used to retrieve an opaque address via #GetDeviceMemoryOpaqueCaptureAddress().</li>
             <li>#MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT specifies that the memory’s address <b>can</b> be saved and reused on a subsequent run (e.g. for trace capture and replay), see ##VkBufferOpaqueCaptureAddressCreateInfo for more detail.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkMemoryAllocateFlags}
         """,
 
         "MEMORY_ALLOCATE_DEVICE_MASK_BIT".enum(0x00000001)
@@ -520,16 +511,16 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         In the {@code VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_*} color models, for the input to the sampler Y′C<sub>B</sub>C<sub>R</sub> range expansion and model conversion:
 
         <ul>
-            <li>the Y (Y′ luma) channel corresponds to the G channel of an RGB image.</li>
-            <li>the CB (C<sub>B</sub> or “U” blue color difference) channel corresponds to the B channel of an RGB image.</li>
-            <li>the CR (C<sub>R</sub> or “V” red color difference) channel corresponds to the R channel of an RGB image.</li>
-            <li>the alpha channel, if present, is not modified by color model conversion.</li>
+            <li>the Y (Y′ luma) component corresponds to the G component of an RGB image.</li>
+            <li>the CB (C<sub>B</sub> or “U” blue color difference) component corresponds to the B component of an RGB image.</li>
+            <li>the CR (C<sub>R</sub> or “V” red color difference) component corresponds to the R component of an RGB image.</li>
+            <li>the alpha component, if present, is not modified by color model conversion.</li>
         </ul>
 
-        These rules reflect the mapping of channels after the channel swizzle operation (controlled by ##VkSamplerYcbcrConversionCreateInfo{@code ::components}).
+        These rules reflect the mapping of components after the component swizzle operation (controlled by ##VkSamplerYcbcrConversionCreateInfo{@code ::components}).
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        For example, an “{@code YUVA}” 32-bit format comprising four 8-bit channels can be implemented as #FORMAT_R8G8B8A8_UNORM with a component mapping:
+        For example, an “{@code YUVA}” 32-bit format comprising four 8-bit components can be implemented as #FORMAT_R8G8B8A8_UNORM with a component mapping:
 
         <ul>
             <li>{@code components.a} = #COMPONENT_SWIZZLE_IDENTITY</li>
@@ -655,7 +646,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         </div>
 
         <h5>See Also</h5>
-        {@code VkExternalMemoryHandleTypeFlags}, ##VkImportMemoryFdInfoKHR, ##VkImportMemoryHostPointerInfoEXT, ##VkImportMemoryWin32HandleInfoKHR, ##VkMemoryGetFdInfoKHR, ##VkMemoryGetRemoteAddressInfoNV, ##VkMemoryGetWin32HandleInfoKHR, ##VkPhysicalDeviceExternalBufferInfo, ##VkPhysicalDeviceExternalImageFormatInfo, #GetMemoryFdPropertiesKHR(), #GetMemoryHostPointerPropertiesEXT(), #GetMemoryWin32HandlePropertiesKHR()
+        ##VkImportMemoryFdInfoKHR, ##VkImportMemoryHostPointerInfoEXT, ##VkImportMemoryWin32HandleInfoKHR, ##VkMemoryGetFdInfoKHR, ##VkMemoryGetRemoteAddressInfoNV, ##VkMemoryGetWin32HandleInfoKHR, ##VkPhysicalDeviceExternalBufferInfo, ##VkPhysicalDeviceExternalImageFormatInfo, #GetMemoryFdPropertiesKHR(), #GetMemoryHostPointerPropertiesEXT(), #GetMemoryWin32HandlePropertiesKHR()
         """,
 
         "EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT".enum(0x00000001),
@@ -687,9 +678,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         </ul>
 
         Implementations <b>must</b> not report #EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT for images or buffers with external handle type #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT, or #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT.
-
-        <h5>See Also</h5>
-        {@code VkExternalMemoryFeatureFlags}
         """,
 
         "EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT".enum(0x00000001),
@@ -723,7 +711,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         </table>
 
         <h5>See Also</h5>
-        {@code VkExternalFenceHandleTypeFlags}, ##VkFenceGetFdInfoKHR, ##VkFenceGetWin32HandleInfoKHR, ##VkImportFenceFdInfoKHR, ##VkImportFenceWin32HandleInfoKHR, ##VkPhysicalDeviceExternalFenceInfo
+        ##VkFenceGetFdInfoKHR, ##VkFenceGetWin32HandleInfoKHR, ##VkImportFenceFdInfoKHR, ##VkImportFenceWin32HandleInfoKHR, ##VkPhysicalDeviceExternalFenceInfo
         """,
 
         "EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT".enum(0x00000001),
@@ -741,9 +729,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>#EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT specifies handles of this type <b>can</b> be exported from Vulkan fence objects.</li>
             <li>#EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT specifies handles of this type <b>can</b> be imported to Vulkan fence objects.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkExternalFenceFeatureFlags}
         """,
 
         "EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT".enum(0x00000001),
@@ -758,9 +743,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <ul>
             <li>#FENCE_IMPORT_TEMPORARY_BIT specifies that the fence payload will be imported only temporarily, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence Payloads</a>, regardless of the permanence of {@code handleType}.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkFenceImportFlags}
         """,
 
         "FENCE_IMPORT_TEMPORARY_BIT".enum(0x00000001)
@@ -776,9 +758,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <ul>
             <li>#SEMAPHORE_IMPORT_TEMPORARY_BIT specifies that the semaphore payload will be imported only temporarily, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-semaphores-importing">Importing Semaphore Payloads</a>, regardless of the permanence of {@code handleType}.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkSemaphoreImportFlags}
         """,
 
         "SEMAPHORE_IMPORT_TEMPORARY_BIT".enum(0x00000001)
@@ -817,7 +796,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         </table>
 
         <h5>See Also</h5>
-        {@code VkExternalSemaphoreHandleTypeFlags}, ##VkImportSemaphoreFdInfoKHR, ##VkImportSemaphoreWin32HandleInfoKHR, ##VkPhysicalDeviceExternalSemaphoreInfo, ##VkSemaphoreGetFdInfoKHR, ##VkSemaphoreGetWin32HandleInfoKHR
+        ##VkImportSemaphoreFdInfoKHR, ##VkImportSemaphoreWin32HandleInfoKHR, ##VkPhysicalDeviceExternalSemaphoreInfo, ##VkSemaphoreGetFdInfoKHR, ##VkSemaphoreGetWin32HandleInfoKHR
         """,
 
         "EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT".enum(0x00000001),
@@ -837,9 +816,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>#EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT specifies that handles of this type <b>can</b> be exported from Vulkan semaphore objects.</li>
             <li>#EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT specifies that handles of this type <b>can</b> be imported as Vulkan semaphore objects.</li>
         </ul>
-
-        <h5>See Also</h5>
-        {@code VkExternalSemaphoreFeatureFlags}
         """,
 
         "EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT".enum(0x00000001),
@@ -1169,10 +1145,10 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>If {@code commandBuffer} is an unprotected command buffer, any resource accessed by the {@code VkPipeline} object bound to the pipeline bind point used by this command <b>must</b> not be a protected resource</li>
             <li>If a {@code VkImageView} is accessed using {@code OpImageWrite} as a result of this command, then the {@code Type} of the {@code Texel} operand of that instruction <b>must</b> have at least as many components as the image view’s format</li>
             <li>If a {@code VkBufferView} is accessed using {@code OpImageWrite} as a result of this command, then the {@code Type} of the {@code Texel} operand of that instruction <b>must</b> have at least as many components as the buffer view’s format</li>
-            <li>If a {@code VkImageView} with a {@code VkFormat} that has a 64-bit channel width is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 64</li>
-            <li>If a {@code VkImageView} with a {@code VkFormat} that has a channel width less than 64-bit is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 32</li>
-            <li>If a {@code VkBufferView} with a {@code VkFormat} that has a 64-bit channel width is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 64</li>
-            <li>If a {@code VkBufferView} with a {@code VkFormat} that has a channel width less than 64-bit is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 32</li>
+            <li>If a {@code VkImageView} with a {@code VkFormat} that has a 64-bit component width is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 64</li>
+            <li>If a {@code VkImageView} with a {@code VkFormat} that has a component width less than 64-bit is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 32</li>
+            <li>If a {@code VkBufferView} with a {@code VkFormat} that has a 64-bit component width is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 64</li>
+            <li>If a {@code VkBufferView} with a {@code VkFormat} that has a component width less than 64-bit is accessed as a result of this command, the {@code SampledType} of the {@code OpTypeImage} operand of that instruction <b>must</b> have a {@code Width} of 32</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-sparseImageInt64Atomics">{@code sparseImageInt64Atomics}</a> feature is not enabled, {@code VkImage} objects created with the #IMAGE_CREATE_SPARSE_RESIDENCY_BIT flag <b>must</b> not be accessed by atomic instructions through an {@code OpTypeImage} with a {@code SampledType} with a {@code Width} of 64 by this command</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-sparseImageInt64Atomics">{@code sparseImageInt64Atomics}</a> feature is not enabled, {@code VkBuffer} objects created with the #BUFFER_CREATE_SPARSE_RESIDENCY_BIT flag <b>must</b> not be accessed by atomic instructions through an {@code OpTypeImage} with a {@code SampledType} with a {@code Width} of 64 by this command</li>
         </ul>

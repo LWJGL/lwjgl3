@@ -38,7 +38,7 @@ val KHR_present_wait = "KHRPresentWait".nativeClassVK("KHR_present_wait", type =
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Keith Packard <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_KHR_present_wait:%20&amp;body=@keithp%20">keithp</a></li>
+                <li>Keith Packard <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_present_wait] @keithp%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_present_wait extension&gt;&gt;">keithp</a></li>
             </ul></dd>
         </dl>
 

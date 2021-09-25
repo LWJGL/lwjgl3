@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Cort Stratton <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?title=VK_EXT_validation_cache:%20&amp;body=@cdwfs%20">cdwfs</a></li>
+ * <li>Cort Stratton <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_validation_cache] @cdwfs%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_validation_cache extension&gt;&gt;">cdwfs</a></li>
  * </ul></dd>
  * </dl>
  * 
