@@ -21,7 +21,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>It usually consists of a number of vertices and a series of primitives/faces referencing the vertices. In addition there might be a series of bones,
  * each of them addressing a number of vertices with a certain weight. Vertex data is presented in channels with each channel containing a single
- * per-vertex information such as a set of texture coords or a normal vector. If a data pointer is non-null, the corresponding data stream is present.</p>
+ * per-vertex information such as a set of texture coordinates or a normal vector. If a data pointer is non-null, the corresponding data stream is
+ * present.</p>
  * 
  * <p>A Mesh uses only a single material which is referenced by a material ID.</p>
  * 
@@ -48,7 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int {@link #mNumAnimMeshes};
  *     {@link AIAnimMesh struct aiAnimMesh} ** {@link #mAnimMeshes};
  *     unsigned int {@link #mMethod};
- *     {@link AIAABB struct aiAABB} mAABB;
+ *     {@link AIAABB struct aiAABB} {@link #mAABB};
  * }</code></pre>
  */
 @NativeType("struct aiMesh")
@@ -220,14 +221,14 @@ public class AIMesh extends Struct implements NativeResource {
     @NativeType("struct aiColor4D *")
     public AIColor4D.Buffer mColors(int index) { return nmColors(address(), index); }
     /**
-     * Vertex texture coords, also known as UV channels. A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_TEXTURECOORDS} per vertex. {@code NULL} if not present. The array
-     * is {@code mNumVertices} in size.
+     * Vertex texture coordinates, also known as UV channels. A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_TEXTURECOORDS} per vertex. {@code NULL} if not present. The
+     * array is {@code mNumVertices} in size.
      */
     @NativeType("struct aiVector3D *[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS]")
     public PointerBuffer mTextureCoords() { return nmTextureCoords(address()); }
     /**
-     * Vertex texture coords, also known as UV channels. A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_TEXTURECOORDS} per vertex. {@code NULL} if not present. The array
-     * is {@code mNumVertices} in size.
+     * Vertex texture coordinates, also known as UV channels. A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_TEXTURECOORDS} per vertex. {@code NULL} if not present. The
+     * array is {@code mNumVertices} in size.
      */
     @Nullable
     @NativeType("struct aiVector3D *")
@@ -242,6 +243,8 @@ public class AIMesh extends Struct implements NativeResource {
      * Specifies the number of components for a given UV channel. Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is
      * 2 for a given channel n, the component {@code p.z} of {@code mTextureCoords[n][p]} is set to 0.0f. If the value is 1 for a given channel, {@code p.y}
      * is set to 0.0f, too.
+     * 
+     * <p>Note: 4D coordinates are not supported.</p>
      */
     @NativeType("unsigned int[Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS]")
     public IntBuffer mNumUVComponents() { return nmNumUVComponents(address()); }
@@ -249,6 +252,8 @@ public class AIMesh extends Struct implements NativeResource {
      * Specifies the number of components for a given UV channel. Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is
      * 2 for a given channel n, the component {@code p.z} of {@code mTextureCoords[n][p]} is set to 0.0f. If the value is 1 for a given channel, {@code p.y}
      * is set to 0.0f, too.
+     * 
+     * <p>Note: 4D coordinates are not supported.</p>
      */
     @NativeType("unsigned int")
     public int mNumUVComponents(int index) { return nmNumUVComponents(address(), index); }
@@ -295,10 +300,10 @@ public class AIMesh extends Struct implements NativeResource {
     @Nullable
     @NativeType("struct aiAnimMesh **")
     public PointerBuffer mAnimMeshes() { return nmAnimMeshes(address()); }
-    /** Method of morphing when {@code animeshes} are specified. One of:<br><table><tr><td>{@link Assimp#aiMorphingMethod_VERTEX_BLEND MorphingMethod_VERTEX_BLEND}</td><td>{@link Assimp#aiMorphingMethod_MORPH_NORMALIZED MorphingMethod_MORPH_NORMALIZED}</td></tr><tr><td>{@link Assimp#aiMorphingMethod_MORPH_RELATIVE MorphingMethod_MORPH_RELATIVE}</td></tr></table> */
+    /** Method of morphing when anim-meshes are specified. One of:<br><table><tr><td>{@link Assimp#aiMorphingMethod_VERTEX_BLEND MorphingMethod_VERTEX_BLEND}</td><td>{@link Assimp#aiMorphingMethod_MORPH_NORMALIZED MorphingMethod_MORPH_NORMALIZED}</td></tr><tr><td>{@link Assimp#aiMorphingMethod_MORPH_RELATIVE MorphingMethod_MORPH_RELATIVE}</td></tr></table> */
     @NativeType("unsigned int")
     public int mMethod() { return nmMethod(address()); }
-    /** @return a {@link AIAABB} view of the {@code mAABB} field. */
+    /** the bounding box */
     @NativeType("struct aiAABB")
     public AIAABB mAABB() { return nmAABB(address()); }
 
@@ -352,9 +357,9 @@ public class AIMesh extends Struct implements NativeResource {
     public AIMesh mAnimMeshes(@Nullable @NativeType("struct aiAnimMesh **") PointerBuffer value) { nmAnimMeshes(address(), value); return this; }
     /** Sets the specified value to the {@link #mMethod} field. */
     public AIMesh mMethod(@NativeType("unsigned int") int value) { nmMethod(address(), value); return this; }
-    /** Copies the specified {@link AIAABB} to the {@code mAABB} field. */
+    /** Copies the specified {@link AIAABB} to the {@link #mAABB} field. */
     public AIMesh mAABB(@NativeType("struct aiAABB") AIAABB value) { nmAABB(address(), value); return this; }
-    /** Passes the {@code mAABB} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #mAABB} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIMesh mAABB(java.util.function.Consumer<AIAABB> consumer) { consumer.accept(mAABB()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -813,7 +818,7 @@ public class AIMesh extends Struct implements NativeResource {
         /** @return the value of the {@link AIMesh#mMethod} field. */
         @NativeType("unsigned int")
         public int mMethod() { return AIMesh.nmMethod(address()); }
-        /** @return a {@link AIAABB} view of the {@code mAABB} field. */
+        /** @return a {@link AIAABB} view of the {@link AIMesh#mAABB} field. */
         @NativeType("struct aiAABB")
         public AIAABB mAABB() { return AIMesh.nmAABB(address()); }
 
@@ -867,9 +872,9 @@ public class AIMesh extends Struct implements NativeResource {
         public AIMesh.Buffer mAnimMeshes(@Nullable @NativeType("struct aiAnimMesh **") PointerBuffer value) { AIMesh.nmAnimMeshes(address(), value); return this; }
         /** Sets the specified value to the {@link AIMesh#mMethod} field. */
         public AIMesh.Buffer mMethod(@NativeType("unsigned int") int value) { AIMesh.nmMethod(address(), value); return this; }
-        /** Copies the specified {@link AIAABB} to the {@code mAABB} field. */
+        /** Copies the specified {@link AIAABB} to the {@link AIMesh#mAABB} field. */
         public AIMesh.Buffer mAABB(@NativeType("struct aiAABB") AIAABB value) { AIMesh.nmAABB(address(), value); return this; }
-        /** Passes the {@code mAABB} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link AIMesh#mAABB} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIMesh.Buffer mAABB(java.util.function.Consumer<AIAABB> consumer) { consumer.accept(mAABB()); return this; }
 
     }

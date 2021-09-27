@@ -375,7 +375,8 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
 
         It usually consists of a number of vertices and a series of primitives/faces referencing the vertices. In addition there might be a series of bones,
         each of them addressing a number of vertices with a certain weight. Vertex data is presented in channels with each channel containing a single
-        per-vertex information such as a set of texture coords or a normal vector. If a data pointer is non-null, the corresponding data stream is present.
+        per-vertex information such as a set of texture coordinates or a normal vector. If a data pointer is non-null, the corresponding data stream is
+        present.
 
         A Mesh uses only a single material which is referenced by a material ID.
         """
@@ -453,8 +454,8 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
     nullable..aiVector3D.p(
         "mTextureCoords",
         """
-        Vertex texture coords, also known as UV channels. A mesh may contain 0 to #AI_MAX_NUMBER_OF_TEXTURECOORDS per vertex. #NULL if not present. The array
-        is {@code mNumVertices} in size.
+        Vertex texture coordinates, also known as UV channels. A mesh may contain 0 to #AI_MAX_NUMBER_OF_TEXTURECOORDS per vertex. #NULL if not present. The
+        array is {@code mNumVertices} in size.
         """
     )["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
     aiString("mTextureCoordsNames", "Vertex stream names.")["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"];
@@ -464,6 +465,8 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         Specifies the number of components for a given UV channel. Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is
         2 for a given channel n, the component {@code p.z} of {@code mTextureCoords[n][p]} is set to 0.0f. If the value is 1 for a given channel, {@code p.y}
         is set to 0.0f, too.
+        
+        Note: 4D coordinates are not supported.
         """
     )["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
     aiFace.p(
@@ -516,8 +519,8 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         (usually positions, normals). Note! Currently only works with Collada loader.
         """
     )
-    unsigned_int("mMethod", "Method of morphing when {@code animeshes} are specified.").links("MorphingMethod_\\w+")
-    aiAABB("mAABB", "")
+    unsigned_int("mMethod", "Method of morphing when anim-meshes are specified.").links("MorphingMethod_\\w+")
+    aiAABB("mAABB", "the bounding box")
 }
 
 val aiUVTransform = struct(Module.ASSIMP, "AIUVTransform", nativeName = "struct aiUVTransform", mutable = false) {
@@ -769,14 +772,14 @@ val aiLight = struct(Module.ASSIMP, "AILight", nativeName = "struct aiLight", mu
 
         Assimp supports multiple sorts of light sources, including directional, point and spot lights. All of them are defined with just a single structure and
         distinguished by their parameters. Note - some file formats (such as 3DS, ASE) export a "target point" - the point a spot light is looking at (it can
-        even be animated). Assimp writes the target point as a subnode of a spotlights's main node, called "&lt;spotName&gt;.Target". However, this is just
+        even be animated). Assimp writes the target point as a sub-node of a spot-lights's main node, called "&lt;spotName&gt;.Target". However, this is just
         additional information then, the transformation tracks of the main node make the spot light already point in the right direction.
         """
 
     aiString(
         "mName",
         """
-        The name of the light source. There must be a node in the scenegraph with the same name. This node specifies the position of the light in the scene
+        The name of the light source. There must be a node in the scene-graph with the same name. This node specifies the position of the light in the scene
         hierarchy and can be animated.
         """
     )

@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Assimp supports multiple sorts of light sources, including directional, point and spot lights. All of them are defined with just a single structure and
  * distinguished by their parameters. Note - some file formats (such as 3DS, ASE) export a "target point" - the point a spot light is looking at (it can
- * even be animated). Assimp writes the target point as a subnode of a spotlights's main node, called "&lt;spotName&gt;.Target". However, this is just
+ * even be animated). Assimp writes the target point as a sub-node of a spot-lights's main node, called "&lt;spotName&gt;.Target". However, this is just
  * additional information then, the transformation tracks of the main node make the spot light already point in the right direction.</p>
  * 
  * <h3>Layout</h3>
@@ -118,7 +118,7 @@ public class AILight extends Struct {
     public int sizeof() { return SIZEOF; }
 
     /**
-     * The name of the light source. There must be a node in the scenegraph with the same name. This node specifies the position of the light in the scene
+     * The name of the light source. There must be a node in the scene-graph with the same name. This node specifies the position of the light in the scene
      * hierarchy and can be animated.
      */
     @NativeType("struct aiString")
