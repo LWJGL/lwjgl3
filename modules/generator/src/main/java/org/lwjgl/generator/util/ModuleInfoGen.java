@@ -337,6 +337,8 @@ public final class ModuleInfoGen implements AutoCloseable {
             options.add("--module-path");
             options.add(modulePath);
         }
+        options.add("--module-version");
+        options.add("3.3-nightly"); // TODO Get version for this run (via main args?)
         options.add("-d");
         options.add(outputPath.toString());
 
