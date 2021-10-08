@@ -837,9 +837,9 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
 
     // -------------------------------------------------
 
-    /** Thread-local version of {@link #malloc}. */
+    /** Thread-local version of {@link #malloc(int) malloc}. */
     public static ByteBuffer stackMalloc(int size) { return stackGet().malloc(size); }
-    /** Thread-local version of {@link #calloc}. */
+    /** Thread-local version of {@link #calloc(int) calloc}. */
     public static ByteBuffer stackCalloc(int size) { return stackGet().calloc(size); }
 
     /** Thread-local version of {@link #bytes(byte)}. */
