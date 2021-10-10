@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_full_screen_exclusive] @cubanismo%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_full_screen_exclusive extension&gt;&gt;">cubanismo</a></li>
+ * <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_full_screen_exclusive]%20@cubanismo%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_full_screen_exclusive%20extension%3E%3E">cubanismo</a></li>
  * </ul></dd>
  * </dl>
  * 

@@ -97,7 +97,7 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jaakko Konttinen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_shader_info] @jaakkoamd%0A&lt;&lt;Here describe the issue or question you have about the VK_AMD_shader_info extension&gt;&gt;">jaakkoamd</a></li>
+                <li>Jaakko Konttinen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_shader_info]%20@jaakkoamd%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_shader_info%20extension%3E%3E">jaakkoamd</a></li>
             </ul></dd>
         </dl>
 

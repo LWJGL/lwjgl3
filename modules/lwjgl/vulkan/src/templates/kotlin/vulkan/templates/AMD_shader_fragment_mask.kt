@@ -72,7 +72,7 @@ val AMD_shader_fragment_mask = "AMDShaderFragmentMask".nativeClassVK("AMD_shader
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Aaron Hagan <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_shader_fragment_mask] @AaronHaganAMD%0A&lt;&lt;Here describe the issue or question you have about the VK_AMD_shader_fragment_mask extension&gt;&gt;">AaronHaganAMD</a></li>
+                <li>Aaron Hagan <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_shader_fragment_mask]%20@AaronHaganAMD%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_shader_fragment_mask%20extension%3E%3E">AaronHaganAMD</a></li>
             </ul></dd>
         </dl>
 

@@ -32,7 +32,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Chad Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_queue_family_foreign] @chadversary%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_queue_family_foreign extension&gt;&gt;">chadversary</a></li>
+ * <li>Chad Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_queue_family_foreign]%20@chadversary%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_queue_family_foreign%20extension%3E%3E">chadversary</a></li>
  * </ul></dd>
  * </dl>
  * 

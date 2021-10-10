@@ -57,7 +57,7 @@ val EXT_pipeline_creation_cache_control = "EXTPipelineCreationCacheControl".nati
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Gregory Grebe <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_pipeline_creation_cache_control] @grgrebe_amd%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_pipeline_creation_cache_control extension&gt;&gt;">grgrebe_amd</a></li>
+                <li>Gregory Grebe <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_pipeline_creation_cache_control]%20@grgrebe_amd%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_pipeline_creation_cache_control%20extension%3E%3E">grgrebe_amd</a></li>
             </ul></dd>
         </dl>
 

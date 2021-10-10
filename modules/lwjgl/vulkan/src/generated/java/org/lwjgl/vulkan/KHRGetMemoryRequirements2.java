@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jason Ekstrand <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_get_memory_requirements2] @jekstrand%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_get_memory_requirements2 extension&gt;&gt;">jekstrand</a></li>
+ * <li>Jason Ekstrand <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_get_memory_requirements2]%20@jekstrand%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_get_memory_requirements2%20extension%3E%3E">jekstrand</a></li>
  * </ul></dd>
  * </dl>
  * 

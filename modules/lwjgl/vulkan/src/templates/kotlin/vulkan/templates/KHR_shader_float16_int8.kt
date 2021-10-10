@@ -45,7 +45,7 @@ val KHR_shader_float16_int8 = "KHRShaderFloat16Int8".nativeClassVK("KHR_shader_f
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Alexander Galazin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_float16_int8] @alegal-arm%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_shader_float16_int8 extension&gt;&gt;">alegal-arm</a></li>
+                <li>Alexander Galazin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_float16_int8]%20@alegal-arm%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_shader_float16_int8%20extension%3E%3E">alegal-arm</a></li>
             </ul></dd>
         </dl>
 

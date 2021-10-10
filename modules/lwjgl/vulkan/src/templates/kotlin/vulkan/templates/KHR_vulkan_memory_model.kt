@@ -46,7 +46,7 @@ val KHR_vulkan_memory_model = "KHRVulkanMemoryModel".nativeClassVK("KHR_vulkan_m
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_vulkan_memory_model] @jeffbolznv%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_vulkan_memory_model extension&gt;&gt;">jeffbolznv</a></li>
+                <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_vulkan_memory_model]%20@jeffbolznv%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_vulkan_memory_model%20extension%3E%3E">jeffbolznv</a></li>
             </ul></dd>
         </dl>
 

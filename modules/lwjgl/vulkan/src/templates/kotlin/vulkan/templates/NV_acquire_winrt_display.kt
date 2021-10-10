@@ -37,7 +37,7 @@ val NV_acquire_winrt_display = "NVAcquireWinrtDisplay".nativeClassVK("NV_acquire
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Juliano <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_acquire_winrt_display] @jjuliano%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_acquire_winrt_display extension&gt;&gt;">jjuliano</a></li>
+                <li>Jeff Juliano <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_acquire_winrt_display]%20@jjuliano%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_acquire_winrt_display%20extension%3E%3E">jjuliano</a></li>
             </ul></dd>
         </dl>
 

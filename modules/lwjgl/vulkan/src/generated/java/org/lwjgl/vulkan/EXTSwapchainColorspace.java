@@ -26,7 +26,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_swapchain_colorspace] @courtney-g%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_swapchain_colorspace extension&gt;&gt;">courtney-g</a></li>
+ * <li>Courtney Goeltzenleuchter <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_swapchain_colorspace]%20@courtney-g%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_swapchain_colorspace%20extension%3E%3E">courtney-g</a></li>
  * </ul></dd>
  * </dl>
  * 

@@ -30,7 +30,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_image_atomic_int64] @tobski%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_shader_image_atomic_int64 extension&gt;&gt;">tobski</a></li>
+ * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_image_atomic_int64]%20@tobski%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_shader_image_atomic_int64%20extension%3E%3E">tobski</a></li>
  * </ul></dd>
  * </dl>
  * 

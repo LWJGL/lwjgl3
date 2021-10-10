@@ -44,7 +44,7 @@ val KHR_relaxed_block_layout = "KHRRelaxedBlockLayout".nativeClassVK("KHR_relaxe
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>John Kessenich <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_relaxed_block_layout] @johnkslang%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_relaxed_block_layout extension&gt;&gt;">johnkslang</a></li>
+                <li>John Kessenich <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_relaxed_block_layout]%20@johnkslang%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_relaxed_block_layout%20extension%3E%3E">johnkslang</a></li>
             </ul></dd>
         </dl>
 

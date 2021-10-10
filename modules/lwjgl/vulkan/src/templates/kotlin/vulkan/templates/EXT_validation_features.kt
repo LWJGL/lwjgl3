@@ -43,7 +43,7 @@ val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validat
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Karl Schultz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_validation_features] @karl-lunarg%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_validation_features extension&gt;&gt;">karl-lunarg</a></li>
+                <li>Karl Schultz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_validation_features]%20@karl-lunarg%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_validation_features%20extension%3E%3E">karl-lunarg</a></li>
             </ul></dd>
         </dl>
 

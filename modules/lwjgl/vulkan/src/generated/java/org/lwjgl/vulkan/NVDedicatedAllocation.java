@@ -104,7 +104,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_dedicated_allocation] @jeffbolznv%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_dedicated_allocation extension&gt;&gt;">jeffbolznv</a></li>
+ * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_dedicated_allocation]%20@jeffbolznv%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_dedicated_allocation%20extension%3E%3E">jeffbolznv</a></li>
  * </ul></dd>
  * </dl>
  * 

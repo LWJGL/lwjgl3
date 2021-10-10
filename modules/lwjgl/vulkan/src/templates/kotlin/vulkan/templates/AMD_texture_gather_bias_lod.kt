@@ -85,7 +85,7 @@ val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_t
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Rex Xu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_texture_gather_bias_lod] @amdrexu%0A&lt;&lt;Here describe the issue or question you have about the VK_AMD_texture_gather_bias_lod extension&gt;&gt;">amdrexu</a></li>
+                <li>Rex Xu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_texture_gather_bias_lod]%20@amdrexu%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_texture_gather_bias_lod%20extension%3E%3E">amdrexu</a></li>
             </ul></dd>
         </dl>
 

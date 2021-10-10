@@ -41,8 +41,8 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_surface] @cubanismo%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_surface extension&gt;&gt;">cubanismo</a></li>
-                <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_surface] @ianelliottus%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_surface extension&gt;&gt;">ianelliottus</a></li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_surface]%20@cubanismo%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_surface%20extension%3E%3E">cubanismo</a></li>
+                <li>Ian Elliott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_surface]%20@ianelliottus%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_surface%20extension%3E%3E">ianelliottus</a></li>
             </ul></dd>
         </dl>
 

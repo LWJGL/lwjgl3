@@ -56,7 +56,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_create_renderpass2] @tobias%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_create_renderpass2 extension&gt;&gt;">tobias</a></li>
+ * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_create_renderpass2]%20@tobias%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_create_renderpass2%20extension%3E%3E">tobias</a></li>
  * </ul></dd>
  * </dl>
  * 

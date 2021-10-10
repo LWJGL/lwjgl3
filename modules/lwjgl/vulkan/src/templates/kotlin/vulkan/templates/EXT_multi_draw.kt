@@ -34,7 +34,7 @@ val EXT_multi_draw = "EXTMultiDraw".nativeClassVK("EXT_multi_draw", type = "devi
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Mike Blumenkrantz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_multi_draw] @zmike%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_multi_draw extension&gt;&gt;">zmike</a></li>
+                <li>Mike Blumenkrantz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_multi_draw]%20@zmike%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_multi_draw%20extension%3E%3E">zmike</a></li>
             </ul></dd>
         </dl>
 

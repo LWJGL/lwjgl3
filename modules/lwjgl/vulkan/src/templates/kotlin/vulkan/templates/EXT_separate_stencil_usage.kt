@@ -42,7 +42,7 @@ val EXT_separate_stencil_usage = "EXTSeparateStencilUsage".nativeClassVK("EXT_se
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_separate_stencil_usage] @drakos-amd%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_separate_stencil_usage extension&gt;&gt;">drakos-amd</a></li>
+                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_separate_stencil_usage]%20@drakos-amd%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_separate_stencil_usage%20extension%3E%3E">drakos-amd</a></li>
             </ul></dd>
         </dl>
 

@@ -44,7 +44,7 @@ val NV_coverage_reduction_mode = "NVCoverageReductionMode".nativeClassVK("NV_cov
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Kedarnath Thangudu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_coverage_reduction_mode] @kthangudu%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_coverage_reduction_mode extension&gt;&gt;">kthangudu</a></li>
+                <li>Kedarnath Thangudu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_coverage_reduction_mode]%20@kthangudu%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_coverage_reduction_mode%20extension%3E%3E">kthangudu</a></li>
             </ul></dd>
         </dl>
 

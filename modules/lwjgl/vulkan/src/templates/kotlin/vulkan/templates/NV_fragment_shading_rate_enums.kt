@@ -35,7 +35,7 @@ val NV_fragment_shading_rate_enums = "NVFragmentShadingRateEnums".nativeClassVK(
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Pat Brown <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_fragment_shading_rate_enums] @nvpbrown%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_fragment_shading_rate_enums extension&gt;&gt;">nvpbrown</a></li>
+                <li>Pat Brown <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_fragment_shading_rate_enums]%20@nvpbrown%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_fragment_shading_rate_enums%20extension%3E%3E">nvpbrown</a></li>
             </ul></dd>
         </dl>
 

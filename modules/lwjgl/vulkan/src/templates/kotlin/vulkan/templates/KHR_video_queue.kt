@@ -40,7 +40,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Tony Zlatinski <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_video_queue] @tzlatinski%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_video_queue extension&gt;&gt;">tzlatinski</a></li>
+                <li>Tony Zlatinski <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_video_queue]%20@tzlatinski%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_video_queue%20extension%3E%3E">tzlatinski</a></li>
             </ul></dd>
         </dl>
 

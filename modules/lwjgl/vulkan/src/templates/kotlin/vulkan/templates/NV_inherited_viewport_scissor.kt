@@ -34,7 +34,7 @@ val NV_inherited_viewport_scissor = "NVInheritedViewportScissor".nativeClassVK("
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>David Zhao Akeley <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_inherited_viewport_scissor] @akeley98%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_inherited_viewport_scissor extension&gt;&gt;">akeley98</a></li>
+                <li>David Zhao Akeley <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_inherited_viewport_scissor]%20@akeley98%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_inherited_viewport_scissor%20extension%3E%3E">akeley98</a></li>
             </ul></dd>
         </dl>
 

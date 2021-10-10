@@ -45,7 +45,7 @@ val AMD_display_native_hdr = "AMDDisplayNativeHdr".nativeClassVK("AMD_display_na
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Matthaeus G. Chajdas <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_display_native_hdr] @anteru%0A&lt;&lt;Here describe the issue or question you have about the VK_AMD_display_native_hdr extension&gt;&gt;">anteru</a></li>
+                <li>Matthaeus G. Chajdas <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_display_native_hdr]%20@anteru%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_display_native_hdr%20extension%3E%3E">anteru</a></li>
             </ul></dd>
         </dl>
 

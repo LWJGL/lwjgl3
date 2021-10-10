@@ -26,7 +26,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Kevin Petit <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_integer_dot_product] @kevinpetit%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_shader_integer_dot_product extension&gt;&gt;">kevinpetit</a></li>
+ * <li>Kevin Petit <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_integer_dot_product]%20@kevinpetit%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_shader_integer_dot_product%20extension%3E%3E">kevinpetit</a></li>
  * </ul></dd>
  * <dt><b>Extension Proposal</b></dt>
  * <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_KHR_shader_integer_dot_product.asciidoc">VK_KHR_shader_integer_dot_product</a></dd>

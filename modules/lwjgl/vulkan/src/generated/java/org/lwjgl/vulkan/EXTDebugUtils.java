@@ -241,7 +241,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Mark Young <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_debug_utils] @marky-lunarg%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_debug_utils extension&gt;&gt;">marky-lunarg</a></li>
+ * <li>Mark Young <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_debug_utils]%20@marky-lunarg%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_debug_utils%20extension%3E%3E">marky-lunarg</a></li>
  * </ul></dd>
  * </dl>
  * 

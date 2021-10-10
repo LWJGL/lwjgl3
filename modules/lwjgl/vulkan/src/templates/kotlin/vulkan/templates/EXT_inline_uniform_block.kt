@@ -36,7 +36,7 @@ val EXT_inline_uniform_block = "EXTInlineUniformBlock".nativeClassVK("EXT_inline
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_inline_uniform_block] @aqnuep%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_inline_uniform_block extension&gt;&gt;">aqnuep</a></li>
+                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_inline_uniform_block]%20@aqnuep%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_inline_uniform_block%20extension%3E%3E">aqnuep</a></li>
             </ul></dd>
         </dl>
 

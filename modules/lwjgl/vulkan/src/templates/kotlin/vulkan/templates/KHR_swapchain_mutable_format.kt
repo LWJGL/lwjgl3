@@ -39,7 +39,7 @@ val KHR_swapchain_mutable_format = "KHRSwapchainMutableFormat".nativeClassVK("KH
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_swapchain_mutable_format] @drakos-arm%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_swapchain_mutable_format extension&gt;&gt;">drakos-arm</a></li>
+                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_swapchain_mutable_format]%20@drakos-arm%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_swapchain_mutable_format%20extension%3E%3E">drakos-arm</a></li>
             </ul></dd>
         </dl>
 

@@ -35,7 +35,7 @@ val EXT_metal_surface = "EXTMetalSurface".nativeClassVK("EXT_metal_surface", typ
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Dzmitry Malyshau <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_metal_surface] @kvark%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_metal_surface extension&gt;&gt;">kvark</a></li>
+                <li>Dzmitry Malyshau <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_metal_surface]%20@kvark%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_metal_surface%20extension%3E%3E">kvark</a></li>
             </ul></dd>
         </dl>
 

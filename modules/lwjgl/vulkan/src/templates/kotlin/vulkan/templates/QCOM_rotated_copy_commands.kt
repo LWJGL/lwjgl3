@@ -38,7 +38,7 @@ val QCOM_rotated_copy_commands = "QCOMRotatedCopyCommands".nativeClassVK("QCOM_r
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jeff Leger <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_rotated_copy_commands] @jackohound%0A&lt;&lt;Here describe the issue or question you have about the VK_QCOM_rotated_copy_commands extension&gt;&gt;">jackohound</a></li>
+                <li>Jeff Leger <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_QCOM_rotated_copy_commands]%20@jackohound%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_QCOM_rotated_copy_commands%20extension%3E%3E">jackohound</a></li>
             </ul></dd>
         </dl>
 

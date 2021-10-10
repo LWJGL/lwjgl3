@@ -30,7 +30,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Caio Marcelo de Oliveira Filho <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_workgroup_memory_explicit_layout] @cmarcelo%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_workgroup_memory_explicit_layout extension&gt;&gt;">cmarcelo</a></li>
+ * <li>Caio Marcelo de Oliveira Filho <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_workgroup_memory_explicit_layout]%20@cmarcelo%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_workgroup_memory_explicit_layout%20extension%3E%3E">cmarcelo</a></li>
  * </ul></dd>
  * </dl>
  * 

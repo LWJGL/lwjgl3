@@ -37,7 +37,7 @@ val EXT_color_write_enable = "EXTColorWriteEnable".nativeClassVK("EXT_color_writ
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Sharif Elcott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_color_write_enable] @selcott%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_color_write_enable extension&gt;&gt;">selcott</a></li>
+                <li>Sharif Elcott <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_color_write_enable]%20@selcott%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_color_write_enable%20extension%3E%3E">selcott</a></li>
             </ul></dd>
         </dl>
 

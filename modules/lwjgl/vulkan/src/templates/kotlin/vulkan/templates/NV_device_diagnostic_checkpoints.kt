@@ -37,7 +37,7 @@ val NV_device_diagnostic_checkpoints = "NVDeviceDiagnosticCheckpoints".nativeCla
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Nuno Subtil <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_device_diagnostic_checkpoints] @nsubtil%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_device_diagnostic_checkpoints extension&gt;&gt;">nsubtil</a></li>
+                <li>Nuno Subtil <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_device_diagnostic_checkpoints]%20@nsubtil%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_device_diagnostic_checkpoints%20extension%3E%3E">nsubtil</a></li>
             </ul></dd>
         </dl>
 

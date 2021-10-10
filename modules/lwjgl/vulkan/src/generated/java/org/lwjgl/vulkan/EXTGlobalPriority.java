@@ -33,7 +33,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Andres Rodriguez <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_global_priority] @lostgoat%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_global_priority extension&gt;&gt;">lostgoat</a></li>
+ * <li>Andres Rodriguez <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_global_priority]%20@lostgoat%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_global_priority%20extension%3E%3E">lostgoat</a></li>
  * </ul></dd>
  * </dl>
  * 

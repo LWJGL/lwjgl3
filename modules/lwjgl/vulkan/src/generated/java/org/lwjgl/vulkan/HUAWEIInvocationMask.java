@@ -65,7 +65,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Yunpeng Zhu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_HUAWEI_invocation_mask] @yunxingzhu%0A&lt;&lt;Here describe the issue or question you have about the VK_HUAWEI_invocation_mask extension&gt;&gt;">yunxingzhu</a></li>
+ * <li>Yunpeng Zhu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_HUAWEI_invocation_mask]%20@yunxingzhu%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_HUAWEI_invocation_mask%20extension%3E%3E">yunxingzhu</a></li>
  * </ul></dd>
  * <dt><b>Extension Proposal</b></dt>
  * <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_HUAWEI_invocation_mask.asciidoc">VK_HUAWEI_invocation_mask</a></dd>

@@ -231,7 +231,7 @@ val HUAWEI_subpass_shading = "HUAWEISubpassShading".nativeClassVK("HUAWEI_subpas
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Hueilong Wang <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_HUAWEI_subpass_shading] @wyvernathuawei%0A&lt;&lt;Here describe the issue or question you have about the VK_HUAWEI_subpass_shading extension&gt;&gt;">wyvernathuawei</a></li>
+                <li>Hueilong Wang <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_HUAWEI_subpass_shading]%20@wyvernathuawei%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_HUAWEI_subpass_shading%20extension%3E%3E">wyvernathuawei</a></li>
             </ul></dd>
         </dl>
 

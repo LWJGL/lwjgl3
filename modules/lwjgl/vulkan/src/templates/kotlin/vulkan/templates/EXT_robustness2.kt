@@ -41,7 +41,7 @@ val EXT_robustness2 = "EXTRobustness2".nativeClassVK("EXT_robustness2", type = "
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Liam Middlebrook <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_robustness2] @liam-middlebrook%0A&lt;&lt;Here describe the issue or question you have about the VK_EXT_robustness2 extension&gt;&gt;">liam-middlebrook</a></li>
+                <li>Liam Middlebrook <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_robustness2]%20@liam-middlebrook%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_robustness2%20extension%3E%3E">liam-middlebrook</a></li>
             </ul></dd>
         </dl>
 

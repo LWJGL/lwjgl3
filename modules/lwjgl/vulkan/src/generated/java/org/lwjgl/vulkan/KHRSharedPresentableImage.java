@@ -33,7 +33,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Alon Or-bach <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shared_presentable_image] @alonorbach%0A&lt;&lt;Here describe the issue or question you have about the VK_KHR_shared_presentable_image extension&gt;&gt;">alonorbach</a></li>
+ * <li>Alon Or-bach <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shared_presentable_image]%20@alonorbach%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_shared_presentable_image%20extension%3E%3E">alonorbach</a></li>
  * </ul></dd>
  * </dl>
  * 

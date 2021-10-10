@@ -43,7 +43,7 @@ val NV_mesh_shader = "NVMeshShader".nativeClassVK("NV_mesh_shader", type = "devi
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Christoph Kubisch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_mesh_shader] @pixeljetstream%0A&lt;&lt;Here describe the issue or question you have about the VK_NV_mesh_shader extension&gt;&gt;">pixeljetstream</a></li>
+                <li>Christoph Kubisch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_mesh_shader]%20@pixeljetstream%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_mesh_shader%20extension%3E%3E">pixeljetstream</a></li>
             </ul></dd>
         </dl>
 

@@ -47,7 +47,7 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_draw_indirect_count] @drakos-amd%0A&lt;&lt;Here describe the issue or question you have about the VK_AMD_draw_indirect_count extension&gt;&gt;">drakos-amd</a></li>
+                <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_draw_indirect_count]%20@drakos-amd%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_draw_indirect_count%20extension%3E%3E">drakos-amd</a></li>
             </ul></dd>
         </dl>
 
