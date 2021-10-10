@@ -932,8 +932,12 @@
     </target>
 
     <target name="-build-version" depends="compile">
-        <local name="stderr"/>
-        <java classname="org.lwjgl.Version" fork="true" failonerror="true" outputproperty="build.version" errorproperty="stderr">
+        <!-- -Dbuild.version is manually specified only when building a release -->
+        <condition property="build.release" value="true" else="false">
+            <isset property="build.version"/>
+        </condition>
+
+        <java classname="org.lwjgl.Version" fork="true" failonerror="true" outputproperty="build.version" errorproperty="build.version.plain" unless:set="build.version">
             <classpath>
                 <pathelement path="${bin.lwjgl}/core"/>
                 <pathelement path="${lib}/native"/>
@@ -1204,12 +1208,14 @@
             <java
                 classpath="bin/classes/generator"
                 classname="org.lwjgl.generator.util.ModuleInfoGen"
+                fork="true"
                 failonerror="true"
                 taskname="module-info-gen :: native :: ${module}"
                 if:set="jdk9"
             >
-                <arg value="${module.name}"/>
-                <arg value="${module}"/>
+                <jvmarg value="-Dmodule.name.source=${module.name}"/>
+                <jvmarg value="-Dmodule.name.release=${module}"/>
+                <jvmarg value="-Dmodule.version=${module.version}"/>
             </java>
 
             <!-- Create native jar files -->
@@ -1392,8 +1398,30 @@
 
     <!-- Set the LWJGL_BUILD_OFFLINE=true environment variable for local builds. -->
     <target name="release" depends="-check-release-jdk,compile,-compile-generator,-build-version">
+        <!--
+        CUSTOM BUILD (LOCAL):
+            * build.version="M.m.r SNAPSHOT"
+            * build.revision=
+            * revision="SNAPSHOT"
+            * module.version="M.m.r-snapshot"
+        SNAPSHOT BUILD (CI): -Dbuild.revision=R
+            * build.version="M.m.r SNAPSHOT"
+            * build.revision="R"
+            * revision="build R"
+            * module.version="M.m.r-snapshot+R"
+        RELEASE BUILD (LOCAL): -Dbuild.version=M.m.r -Dbuild.revision=R
+            * build.version="M.m.r"
+            * build.revision="R"
+            * revision="build R"
+            * module.version="M.m.r+R"
+        -->
         <local name="revision"/>
         <condition property="revision" value="build ${build.revision}" else="SNAPSHOT">
+            <isset property="build.revision"/>
+        </condition>
+
+        <property name="module.version" value="${build.version}+${build.revision}" if:true="${build.release}"/>
+        <condition property="module.version" value="${build.version.plain}-snapshot+${build.revision}" else="${build.version.plain}-snapshot" unless:true="${build.release}">
             <isset property="build.revision"/>
         </condition>
 
@@ -1413,11 +1441,13 @@
         <java
             classpath="bin/classes/generator"
             classname="org.lwjgl.generator.util.ModuleInfoGen"
+            fork="true"
             failonerror="true"
             taskname="module-info-gen :: java"
             if:set="jdk9"
         >
-            <arg value="${module.list}"/>
+            <jvmarg value="-Dmodule.name.list=${module.list}"/>
+            <jvmarg value="-Dmodule.version=${module.version}"/>
         </java>
 
         <parallel threadcount="4" failonany="true">

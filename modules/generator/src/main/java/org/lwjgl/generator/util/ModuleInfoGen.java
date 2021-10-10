@@ -42,12 +42,11 @@ public final class ModuleInfoGen implements AutoCloseable {
     }
 
     public static void main(String[] args) throws IOException {
-        if (args.length == 1) {
-            generateJavaModuleInfoClasses(args[0]);
-        } else if (args.length == 2) {
-            generateNativeModuleInfoClasses(args[0], args[1]);
+        String moduleNameList = System.getProperty("module.name.list");
+        if (moduleNameList != null) {
+            generateJavaModuleInfoClasses(moduleNameList);
         } else {
-            throw new IllegalArgumentException("Usage: ModuleInfoGen <module.list> OR <module source name> <module release name>");
+            generateNativeModuleInfoClasses();
         }
     }
 
@@ -82,7 +81,7 @@ public final class ModuleInfoGen implements AutoCloseable {
             return name;
         }
 
-        private void compile(ModuleInfoGen gen) {
+        private void compile(ModuleInfoGen gen, String moduleVersion) {
             String modulePath = dependencies.stream()
                 .filter(it -> !it.missing)
                 .map(it -> "bin/classes/lwjgl/" + it.name)
@@ -98,6 +97,7 @@ public final class ModuleInfoGen implements AutoCloseable {
 
             gen.compile(
                 name,
+                moduleVersion,
                 info,
                 modulePath,
                 Paths.get("modules", "lwjgl", name, "src", "main", "java"),
@@ -141,8 +141,9 @@ public final class ModuleInfoGen implements AutoCloseable {
             topologicalSort(modules);
 
             // Compile module-info classes
+            String moduleVersion = System.getProperty("module.version");
             for (Module module : modules) {
-                module.compile(gen);
+                module.compile(gen, moduleVersion);
             }
 
             // Move module-info classes to <module>/META-INF/versions/9
@@ -160,21 +161,29 @@ public final class ModuleInfoGen implements AutoCloseable {
         }
     }
 
-    private static void generateNativeModuleInfoClasses(String moduleNameSource, String moduleNameRelease) throws IOException {
+    private static void generateNativeModuleInfoClasses() throws IOException {
+        String moduleNameSource  = System.getProperty("module.name.source");
+        String moduleNameRelease = System.getProperty("module.name.release");
+        if (moduleNameSource == null || moduleNameRelease == null) {
+            throw new IllegalStateException("Module source & release names must be specified.");
+        }
+
         Path root = Paths.get("bin", "RELEASE", moduleNameRelease, "native");
 
-        Module module       = parseModuleInfo(Files.readAllBytes(Paths.get("modules", "lwjgl", moduleNameSource, "src", "main", "resources", "module-info.java")));
-        String moduleNative = module.nameJava + ".natives";
+        Module module = parseModuleInfo(Files.readAllBytes(Paths.get("modules", "lwjgl", moduleNameSource, "src", "main", "resources", "module-info.java")));
+
+        String moduleNative  = module.nameJava + ".natives";
+        String moduleVersion = System.getProperty("module.version");
 
         try (ModuleInfoGen gen = new ModuleInfoGen()) {
             try (Stream<Path> platforms = Files.list(root)) {
                 platforms
-                    .filter(it -> Files.isDirectory(it))
+                    .filter(Files::isDirectory)
                     .forEach(platform -> {
                         try {
                             try (Stream<Path> architectures = Files.list(platform)) {
                                 architectures
-                                    .filter(it -> Files.isDirectory(it))
+                                    .filter(Files::isDirectory)
                                     .forEach(architecture -> {
                                         String nativePackage = platform.getFileName().toString() + '.' + architecture.getFileName() + '.' + module.nameJava;
 
@@ -182,6 +191,7 @@ public final class ModuleInfoGen implements AutoCloseable {
 
                                         gen.compile(
                                             moduleNative,
+                                            moduleVersion,
                                             "module " + moduleNative + " {\n" +
                                             "    requires transitive " + module.nameJava + ";\n" +
                                             "\n" +
@@ -312,6 +322,7 @@ public final class ModuleInfoGen implements AutoCloseable {
 
     private void compile(
         String module,
+        String moduleVersion,
         String moduleInfo,
         String modulePath,
         Path sourcePath,
@@ -336,6 +347,10 @@ public final class ModuleInfoGen implements AutoCloseable {
         if (modulePath != null && !modulePath.isEmpty()) {
             options.add("--module-path");
             options.add(modulePath);
+        }
+        if (moduleVersion != null) {
+            options.add("--module-version");
+            options.add(moduleVersion);
         }
         options.add("-d");
         options.add(outputPath.toString());

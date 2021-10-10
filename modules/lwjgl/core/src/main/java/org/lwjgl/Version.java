@@ -28,7 +28,8 @@ public final class Version {
     }
 
     public static void main(String[] args) {
-        System.out.println(getVersion());
+        System.out.println(version);
+        System.err.println(version.substring(0, version.indexOf(' ')));
     }
 
     /** Returns the LWJGL version. */
