@@ -647,17 +647,24 @@ class NativeClass internal constructor(
     infix fun String.expr(expression: String): Constant<String> = ConstantExpression(this, expression, true)
 
     /** Adds a new enum constant. */
-    val String.enum get() = Constant(this, EnumValue())
-
+    val String.enum get() = Constant(this, EnumIntValue())
     infix fun String.enum(documentation: String) =
-        Constant(this, EnumValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }))
-
-    infix fun String.enum(value: Int) = Constant(this, EnumValue(value = value))
+        Constant(this, EnumIntValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }))
+    infix fun String.enum(value: Int) = Constant(this, EnumIntValue(value = value))
     fun String.enum(documentation: String, value: Int) =
-        Constant(this, EnumValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, value))
-
+        Constant(this, EnumIntValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, value))
     fun String.enum(documentation: String, expression: String) =
-        Constant(this, EnumValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
+        Constant(this, EnumIntValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
+
+    // TODO: this is ugly, try new DSL?
+    val String.enumLong get() = Constant(this, EnumLongValue())
+    infix fun String.enumLong(documentation: String) =
+        Constant(this, EnumLongValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }))
+    infix fun String.enum(value: Long) = Constant(this, EnumLongValue(value = value))
+    fun String.enum(documentation: String, value: Long) =
+        Constant(this, EnumLongValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, value))
+    fun String.enumLong(documentation: String, expression: String) =
+        Constant(this, EnumLongValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
 
     operator fun DataType.invoke(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) =
         if (links.isEmpty() || !links.contains('+'))

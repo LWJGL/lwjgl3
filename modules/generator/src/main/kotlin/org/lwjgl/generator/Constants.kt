@@ -43,17 +43,28 @@ val DoubleConstant = ConstantType(Double::class) { "%sd".format(it) }
 
 val StringConstant = ConstantType(String::class) { if (it.contains(" + \"")) it else "\"$it\"" }
 
-open class EnumValue(
-    val documentation: (() -> String?) = { null },
-    val value: Int? = null
-)
+abstract class EnumValue(val documentation: (() -> String?) = { null })
 
-class EnumValueExpression(
+open class EnumIntValue(
+    documentation: (() -> String?) = { null },
+    val value: Int? = null
+) : EnumValue(documentation)
+class EnumIntValueExpression(
     documentation: () -> String?,
     val expression: String
-) : EnumValue(documentation, null)
+) : EnumIntValue(documentation, null)
+val EnumConstant = ConstantType(EnumIntValue::class) { "0x%X".format(it) }
 
-val EnumConstant = ConstantType(EnumValue::class) { "0x%X".format(it) }
+// TODO: this is ugly, try new DSL?
+open class EnumLongValue(
+    documentation: (() -> String?) = { null },
+    val value: Long? = null
+) : EnumValue(documentation)
+class EnumLongValueExpression(
+    documentation: () -> String?,
+    val expression: String
+) : EnumLongValue(documentation, null)
+val EnumConstantLong = ConstantType(EnumLongValue::class) { "0x%X".format(it) }
 
 open class Constant<out T : Any>(val name: String, val value: T?)
 internal class ConstantExpression<out T : Any>(
@@ -86,55 +97,107 @@ class ConstantBlock<T : Any>(
     else
         "${nativeClass.className}#${nativeClass.prefixConstant}$name"
 
+    private fun generateEnumInt(rootBlock: ArrayList<Constant<Number>>) {
+        var value = 0
+        var formatType = 1 // 0: hex, 1: decimal
+        for (c in constants) {
+            if (c is ConstantExpression) {
+                @Suppress("UNCHECKED_CAST")
+                rootBlock.add(c as ConstantExpression<Int>)
+                continue
+            }
+
+            (c.value as EnumIntValue).let { ev ->
+                rootBlock.add(when {
+                    ev is EnumIntValueExpression -> {
+                        try {
+                            value = Integer.parseInt(ev.expression) + 1 // decimal
+                            formatType = 1 // next values will be decimal
+                        } catch(e: NumberFormatException) {
+                            try {
+                                value = Integer.parseInt(ev.expression, 16) + 1 // hex
+                            } catch(e: Exception) {
+                                // ignore
+                            }
+                            formatType = 0 // next values will be hex
+                        }
+                        ConstantExpression(c.name, ev.expression, false)
+                    }
+                    ev.value != null          -> {
+                        value = ev.value + 1
+                        formatType = 0
+                        Constant(c.name, ev.value)
+                    }
+                    else                      -> {
+                        if (formatType == 1)
+                            ConstantExpression(c.name, (value++).toString(), false)
+                        else
+                            Constant(c.name, value++)
+                    }
+                })
+            }
+        }
+    }
+
+    private fun generateEnumLong(rootBlock: ArrayList<Constant<Number>>) {
+        var value = 0L
+        var formatType = 1 // 0: hex, 1: decimal
+        for (c in constants) {
+            if (c is ConstantExpression) {
+                @Suppress("UNCHECKED_CAST")
+                rootBlock.add(c as ConstantExpression<Long>)
+                continue
+            }
+
+            (c.value as EnumLongValue).let { ev ->
+                rootBlock.add(when {
+                    ev is EnumLongValueExpression -> {
+                        try {
+                            value = java.lang.Long.parseLong(ev.expression) + 1L // decimal
+                            formatType = 1 // next values will be decimal
+                        } catch(e: NumberFormatException) {
+                            try {
+                                value = java.lang.Long.parseLong(ev.expression, 16) + 1L // hex
+                            } catch(e: Exception) {
+                                // ignore
+                            }
+                            formatType = 0 // next values will be hex
+                        }
+                        ConstantExpression(c.name, ev.expression, false)
+                    }
+                    ev.value != null          -> {
+                        value = ev.value + 1L
+                        formatType = 0
+                        Constant(c.name, ev.value)
+                    }
+                    else                      -> {
+                        if (formatType == 1)
+                            ConstantExpression(c.name, (value++).toString(), false)
+                        else
+                            Constant(c.name, value++)
+                    }
+                })
+            }
+        }
+    }
+
     internal fun generate(writer: PrintWriter) {
-        if (constantType === EnumConstant) {
+        if (constantType === EnumConstant || constantType === EnumConstantLong) {
             // Increment/update the current enum value while iterating the enum constants.
             // Constants without documentation are added to the root block.
             // Constants with documentation go to their own block.
 
-            val rootBlock = ArrayList<Constant<Int>>()
+            val rootBlock = ArrayList<Constant<Number>>()
 
-            var value = 0
-            var formatType = 1 // 0: hex, 1: decimal
-            for (c in constants) {
-                if (c is ConstantExpression) {
-                    @Suppress("UNCHECKED_CAST")
-                    rootBlock.add(c as ConstantExpression<Int>)
-                    continue
-                }
-
-                (c.value as EnumValue).let { ev ->
-                    rootBlock.add(when {
-                        ev is EnumValueExpression -> {
-                            try {
-                                value = Integer.parseInt(ev.expression) + 1 // decimal
-                                formatType = 1 // next values will be decimal
-                            } catch(e: NumberFormatException) {
-                                try {
-                                    value = Integer.parseInt(ev.expression, 16) + 1 // hex
-                                } catch(e: Exception) {
-                                    // ignore
-                                }
-                                formatType = 0 // next values will be hex
-                            }
-                            ConstantExpression(c.name, ev.expression, false)
-                        }
-                        ev.value != null          -> {
-                            value = ev.value + 1
-                            formatType = 0
-                            Constant(c.name, ev.value)
-                        }
-                        else                      -> {
-                            if (formatType == 1)
-                                ConstantExpression(c.name, (value++).toString(), false)
-                            else
-                                Constant(c.name, value++)
-                        }
-                    })
-                }
+            val constantTypeRender = if (constantType === EnumConstant) {
+                generateEnumInt(rootBlock)
+                IntConstant
+            } else {
+                generateEnumLong(rootBlock)
+                LongConstant
             }
 
-            ConstantBlock(nativeClass, access, IntConstant, documentation().let { doc ->
+            ConstantBlock(nativeClass, access, constantTypeRender, documentation().let { doc ->
                 constants.asSequence()
                     .mapNotNull {
                         (if (it is ConstantExpression)
@@ -170,8 +233,9 @@ class ConstantBlock<T : Any>(
                 it.noPrefix = noPrefix
                 it.generate(writer)
             }
-        } else
+        } else {
             writer.generateBlock()
+        }
     }
 
     private fun PrintWriter.generateBlock() {
