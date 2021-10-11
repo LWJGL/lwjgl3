@@ -168,11 +168,11 @@ public class NVClipSpaceWScaling {
     }
 
     /**
-     * Set the viewport W scaling on a command buffer.
+     * Set the viewport W scaling dynamically for a command buffer.
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>If the bound pipeline state object was not created with the {@link #VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV DYNAMIC_STATE_VIEWPORT_W_SCALING_NV} dynamic state enabled, viewport <b>W</b> scaling parameters are specified using the {@code pViewportWScalings} member of {@link VkPipelineViewportWScalingStateCreateInfoNV} in the pipeline state object. If the pipeline state object was created with the {@link #VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV DYNAMIC_STATE_VIEWPORT_W_SCALING_NV} dynamic state enabled, the viewport transformation parameters are dynamically set and changed with the command:</p>
+     * <p>To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#pipelines-dynamic-state">dynamically set</a> the viewport <b>W</b> scaling parameters, call:</p>
      * 
      * <pre><code>
      * void vkCmdSetViewportWScalingNV(
@@ -184,6 +184,8 @@ public class NVClipSpaceWScaling {
      * <h5>Description</h5>
      * 
      * <p>The viewport parameters taken from element <code>i</code> of {@code pViewportWScalings} replace the current state for the viewport index <code>firstViewport + i</code>, for <code>i</code> in <code>[0, viewportCount)</code>.</p>
+     * 
+     * <p>This command sets the viewport <b>W</b> scaling for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_VIEWPORT_W_SCALING_NV DYNAMIC_STATE_VIEWPORT_W_SCALING_NV} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineViewportWScalingStateCreateInfoNV}{@code ::pViewportWScalings} values used to create the currently active pipeline.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

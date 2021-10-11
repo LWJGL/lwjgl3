@@ -39,7 +39,7 @@ val KHR_fragment_shading_rate = "KHRFragmentShadingRate".nativeClassVK("KHR_frag
             <dd>227</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -57,7 +57,7 @@ val KHR_fragment_shading_rate = "KHRFragmentShadingRate".nativeClassVK("KHR_frag
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2020-05-06</dd>
+            <dd>2021-09-30</dd>
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
@@ -83,7 +83,7 @@ val KHR_fragment_shading_rate = "KHRFragmentShadingRate".nativeClassVK("KHR_frag
     IntConstant(
         "The extension specification version.",
 
-        "KHR_FRAGMENT_SHADING_RATE_SPEC_VERSION".."1"
+        "KHR_FRAGMENT_SHADING_RATE_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -136,6 +136,12 @@ val KHR_fragment_shading_rate = "KHRFragmentShadingRate".nativeClassVK("KHR_frag
         "Extends {@code VkFormatFeatureFlagBits}.",
 
         "FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR".enum(0x40000000)
+    )
+
+    EnumConstantLong(
+        "Extends {@code VkFormatFeatureFlagBits2KHR}.",
+
+        "FORMAT_FEATURE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR".enum(0x40000000L)
     )
 
     EnumConstant(
@@ -256,16 +262,19 @@ val KHR_fragment_shading_rate = "KHRFragmentShadingRate".nativeClassVK("KHR_frag
     void(
         "CmdSetFragmentShadingRateKHR",
         """
-        Set pipeline fragment shading rate dynamically.
+        Set pipeline fragment shading rate and combiner operation dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        If a pipeline state object is created with #DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR enabled, the pipeline fragment shading rate and combiner operation is set by the command:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the pipeline fragment shading rate and combiner operation, call:
 
         <pre><code>
 ￿void vkCmdSetFragmentShadingRateKHR(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    const VkExtent2D*                           pFragmentSize,
 ￿    const VkFragmentShadingRateCombinerOpKHR    combinerOps[2]);</code></pre>
+
+        <h5>Description</h5>
+        This command sets the pipeline fragment shading rate and combiner operation for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineFragmentShadingRateStateCreateInfoKHR values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

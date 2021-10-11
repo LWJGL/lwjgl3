@@ -20,7 +20,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>219</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -36,7 +36,7 @@ package org.lwjgl.vulkan;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2018-09-25</dd>
+ * <dd>2021-09-30</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_fragment_invocation_density.html">{@code SPV_EXT_fragment_invocation_density}</a></li>
@@ -60,7 +60,7 @@ package org.lwjgl.vulkan;
 public final class EXTFragmentDensityMap {
 
     /** The extension specification version. */
-    public static final int VK_EXT_FRAGMENT_DENSITY_MAP_SPEC_VERSION = 1;
+    public static final int VK_EXT_FRAGMENT_DENSITY_MAP_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_EXT_FRAGMENT_DENSITY_MAP_EXTENSION_NAME = "VK_EXT_fragment_density_map";
@@ -115,6 +115,9 @@ public final class EXTFragmentDensityMap {
     public static final int
         VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT                       = 0x1,
         VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT = 0x2;
+
+    /** Extends {@code VkFormatFeatureFlagBits2KHR}. */
+    public static final long VK_FORMAT_FEATURE_2_FRAGMENT_DENSITY_MAP_BIT_EXT = 0x1000000L;
 
     private EXTFragmentDensityMap() {}
 

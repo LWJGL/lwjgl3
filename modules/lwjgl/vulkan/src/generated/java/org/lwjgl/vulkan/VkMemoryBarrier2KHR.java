@@ -171,10 +171,10 @@ public class VkMemoryBarrier2KHR extends Struct implements NativeResource {
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4)
+            __member(8),
+            __member(8),
+            __member(8),
+            __member(8)
         );
 
         SIZEOF = layout.getSize();
@@ -209,16 +209,16 @@ public class VkMemoryBarrier2KHR extends Struct implements NativeResource {
     public long pNext() { return npNext(address()); }
     /** a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">first synchronization scope</a>. */
     @NativeType("VkPipelineStageFlags2KHR")
-    public int srcStageMask() { return nsrcStageMask(address()); }
+    public long srcStageMask() { return nsrcStageMask(address()); }
     /** a {@code VkAccessFlags2KHR} mask of access flags to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">first access scope</a>. */
     @NativeType("VkAccessFlags2KHR")
-    public int srcAccessMask() { return nsrcAccessMask(address()); }
+    public long srcAccessMask() { return nsrcAccessMask(address()); }
     /** a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">second synchronization scope</a>. */
     @NativeType("VkPipelineStageFlags2KHR")
-    public int dstStageMask() { return ndstStageMask(address()); }
+    public long dstStageMask() { return ndstStageMask(address()); }
     /** a {@code VkAccessFlags2KHR} mask of access flags to be included in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">second access scope</a>. */
     @NativeType("VkAccessFlags2KHR")
-    public int dstAccessMask() { return ndstAccessMask(address()); }
+    public long dstAccessMask() { return ndstAccessMask(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkMemoryBarrier2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -227,22 +227,22 @@ public class VkMemoryBarrier2KHR extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryBarrier2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #srcStageMask} field. */
-    public VkMemoryBarrier2KHR srcStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { nsrcStageMask(address(), value); return this; }
+    public VkMemoryBarrier2KHR srcStageMask(@NativeType("VkPipelineStageFlags2KHR") long value) { nsrcStageMask(address(), value); return this; }
     /** Sets the specified value to the {@link #srcAccessMask} field. */
-    public VkMemoryBarrier2KHR srcAccessMask(@NativeType("VkAccessFlags2KHR") int value) { nsrcAccessMask(address(), value); return this; }
+    public VkMemoryBarrier2KHR srcAccessMask(@NativeType("VkAccessFlags2KHR") long value) { nsrcAccessMask(address(), value); return this; }
     /** Sets the specified value to the {@link #dstStageMask} field. */
-    public VkMemoryBarrier2KHR dstStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { ndstStageMask(address(), value); return this; }
+    public VkMemoryBarrier2KHR dstStageMask(@NativeType("VkPipelineStageFlags2KHR") long value) { ndstStageMask(address(), value); return this; }
     /** Sets the specified value to the {@link #dstAccessMask} field. */
-    public VkMemoryBarrier2KHR dstAccessMask(@NativeType("VkAccessFlags2KHR") int value) { ndstAccessMask(address(), value); return this; }
+    public VkMemoryBarrier2KHR dstAccessMask(@NativeType("VkAccessFlags2KHR") long value) { ndstAccessMask(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkMemoryBarrier2KHR set(
         int sType,
         long pNext,
-        int srcStageMask,
-        int srcAccessMask,
-        int dstStageMask,
-        int dstAccessMask
+        long srcStageMask,
+        long srcAccessMask,
+        long dstStageMask,
+        long dstAccessMask
     ) {
         sType(sType);
         pNext(pNext);
@@ -385,26 +385,26 @@ public class VkMemoryBarrier2KHR extends Struct implements NativeResource {
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkMemoryBarrier2KHR.PNEXT); }
     /** Unsafe version of {@link #srcStageMask}. */
-    public static int nsrcStageMask(long struct) { return UNSAFE.getInt(null, struct + VkMemoryBarrier2KHR.SRCSTAGEMASK); }
+    public static long nsrcStageMask(long struct) { return UNSAFE.getLong(null, struct + VkMemoryBarrier2KHR.SRCSTAGEMASK); }
     /** Unsafe version of {@link #srcAccessMask}. */
-    public static int nsrcAccessMask(long struct) { return UNSAFE.getInt(null, struct + VkMemoryBarrier2KHR.SRCACCESSMASK); }
+    public static long nsrcAccessMask(long struct) { return UNSAFE.getLong(null, struct + VkMemoryBarrier2KHR.SRCACCESSMASK); }
     /** Unsafe version of {@link #dstStageMask}. */
-    public static int ndstStageMask(long struct) { return UNSAFE.getInt(null, struct + VkMemoryBarrier2KHR.DSTSTAGEMASK); }
+    public static long ndstStageMask(long struct) { return UNSAFE.getLong(null, struct + VkMemoryBarrier2KHR.DSTSTAGEMASK); }
     /** Unsafe version of {@link #dstAccessMask}. */
-    public static int ndstAccessMask(long struct) { return UNSAFE.getInt(null, struct + VkMemoryBarrier2KHR.DSTACCESSMASK); }
+    public static long ndstAccessMask(long struct) { return UNSAFE.getLong(null, struct + VkMemoryBarrier2KHR.DSTACCESSMASK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryBarrier2KHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkMemoryBarrier2KHR.PNEXT, value); }
-    /** Unsafe version of {@link #srcStageMask(int) srcStageMask}. */
-    public static void nsrcStageMask(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryBarrier2KHR.SRCSTAGEMASK, value); }
-    /** Unsafe version of {@link #srcAccessMask(int) srcAccessMask}. */
-    public static void nsrcAccessMask(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryBarrier2KHR.SRCACCESSMASK, value); }
-    /** Unsafe version of {@link #dstStageMask(int) dstStageMask}. */
-    public static void ndstStageMask(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryBarrier2KHR.DSTSTAGEMASK, value); }
-    /** Unsafe version of {@link #dstAccessMask(int) dstAccessMask}. */
-    public static void ndstAccessMask(long struct, int value) { UNSAFE.putInt(null, struct + VkMemoryBarrier2KHR.DSTACCESSMASK, value); }
+    /** Unsafe version of {@link #srcStageMask(long) srcStageMask}. */
+    public static void nsrcStageMask(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryBarrier2KHR.SRCSTAGEMASK, value); }
+    /** Unsafe version of {@link #srcAccessMask(long) srcAccessMask}. */
+    public static void nsrcAccessMask(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryBarrier2KHR.SRCACCESSMASK, value); }
+    /** Unsafe version of {@link #dstStageMask(long) dstStageMask}. */
+    public static void ndstStageMask(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryBarrier2KHR.DSTSTAGEMASK, value); }
+    /** Unsafe version of {@link #dstAccessMask(long) dstAccessMask}. */
+    public static void ndstAccessMask(long struct, long value) { UNSAFE.putLong(null, struct + VkMemoryBarrier2KHR.DSTACCESSMASK, value); }
 
     // -----------------------------------
 
@@ -452,16 +452,16 @@ public class VkMemoryBarrier2KHR extends Struct implements NativeResource {
         public long pNext() { return VkMemoryBarrier2KHR.npNext(address()); }
         /** @return the value of the {@link VkMemoryBarrier2KHR#srcStageMask} field. */
         @NativeType("VkPipelineStageFlags2KHR")
-        public int srcStageMask() { return VkMemoryBarrier2KHR.nsrcStageMask(address()); }
+        public long srcStageMask() { return VkMemoryBarrier2KHR.nsrcStageMask(address()); }
         /** @return the value of the {@link VkMemoryBarrier2KHR#srcAccessMask} field. */
         @NativeType("VkAccessFlags2KHR")
-        public int srcAccessMask() { return VkMemoryBarrier2KHR.nsrcAccessMask(address()); }
+        public long srcAccessMask() { return VkMemoryBarrier2KHR.nsrcAccessMask(address()); }
         /** @return the value of the {@link VkMemoryBarrier2KHR#dstStageMask} field. */
         @NativeType("VkPipelineStageFlags2KHR")
-        public int dstStageMask() { return VkMemoryBarrier2KHR.ndstStageMask(address()); }
+        public long dstStageMask() { return VkMemoryBarrier2KHR.ndstStageMask(address()); }
         /** @return the value of the {@link VkMemoryBarrier2KHR#dstAccessMask} field. */
         @NativeType("VkAccessFlags2KHR")
-        public int dstAccessMask() { return VkMemoryBarrier2KHR.ndstAccessMask(address()); }
+        public long dstAccessMask() { return VkMemoryBarrier2KHR.ndstAccessMask(address()); }
 
         /** Sets the specified value to the {@link VkMemoryBarrier2KHR#sType} field. */
         public VkMemoryBarrier2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryBarrier2KHR.nsType(address(), value); return this; }
@@ -470,13 +470,13 @@ public class VkMemoryBarrier2KHR extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkMemoryBarrier2KHR#pNext} field. */
         public VkMemoryBarrier2KHR.Buffer pNext(@NativeType("void const *") long value) { VkMemoryBarrier2KHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkMemoryBarrier2KHR#srcStageMask} field. */
-        public VkMemoryBarrier2KHR.Buffer srcStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { VkMemoryBarrier2KHR.nsrcStageMask(address(), value); return this; }
+        public VkMemoryBarrier2KHR.Buffer srcStageMask(@NativeType("VkPipelineStageFlags2KHR") long value) { VkMemoryBarrier2KHR.nsrcStageMask(address(), value); return this; }
         /** Sets the specified value to the {@link VkMemoryBarrier2KHR#srcAccessMask} field. */
-        public VkMemoryBarrier2KHR.Buffer srcAccessMask(@NativeType("VkAccessFlags2KHR") int value) { VkMemoryBarrier2KHR.nsrcAccessMask(address(), value); return this; }
+        public VkMemoryBarrier2KHR.Buffer srcAccessMask(@NativeType("VkAccessFlags2KHR") long value) { VkMemoryBarrier2KHR.nsrcAccessMask(address(), value); return this; }
         /** Sets the specified value to the {@link VkMemoryBarrier2KHR#dstStageMask} field. */
-        public VkMemoryBarrier2KHR.Buffer dstStageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { VkMemoryBarrier2KHR.ndstStageMask(address(), value); return this; }
+        public VkMemoryBarrier2KHR.Buffer dstStageMask(@NativeType("VkPipelineStageFlags2KHR") long value) { VkMemoryBarrier2KHR.ndstStageMask(address(), value); return this; }
         /** Sets the specified value to the {@link VkMemoryBarrier2KHR#dstAccessMask} field. */
-        public VkMemoryBarrier2KHR.Buffer dstAccessMask(@NativeType("VkAccessFlags2KHR") int value) { VkMemoryBarrier2KHR.ndstAccessMask(address(), value); return this; }
+        public VkMemoryBarrier2KHR.Buffer dstAccessMask(@NativeType("VkAccessFlags2KHR") long value) { VkMemoryBarrier2KHR.ndstAccessMask(address(), value); return this; }
 
     }
 

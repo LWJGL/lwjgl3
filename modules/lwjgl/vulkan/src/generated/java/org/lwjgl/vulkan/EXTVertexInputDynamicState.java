@@ -103,11 +103,11 @@ public class EXTVertexInputDynamicState {
     }
 
     /**
-     * Set the dynamic vertex input state.
+     * Set the vertex input state dynamically for a command buffer.
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>An alternative to specifying the vertex input attribute and vertex input binding descriptions as part of graphics pipeline creation, the pipeline <b>can</b> be created with the {@link #VK_DYNAMIC_STATE_VERTEX_INPUT_EXT DYNAMIC_STATE_VERTEX_INPUT_EXT} dynamic state enabled, and for that state to be set dynamically with:</p>
+     * <p>To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#pipelines-dynamic-state">dynamically set</a> the vertex input attribute and vertex input binding descriptions, call:</p>
      * 
      * <pre><code>
      * void vkCmdSetVertexInputEXT(
@@ -119,7 +119,9 @@ public class EXTVertexInputDynamicState {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This command sets the vertex input attribute and vertex input binding descriptions state for subsequent drawing commands.</p>
+     * <p>This command sets the vertex input attribute and vertex input binding descriptions state for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_VERTEX_INPUT_EXT DYNAMIC_STATE_VERTEX_INPUT_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkGraphicsPipelineCreateInfo}{@code ::pVertexInputState} values used to create the currently active pipeline.</p>
+     * 
+     * <p>If the bound pipeline state object was also created with the {@link EXTExtendedDynamicState#VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT} dynamic state enabled, then {@link EXTExtendedDynamicState#vkCmdBindVertexBuffers2EXT CmdBindVertexBuffers2EXT} can be used instead of {@code vkCmdSetVertexInputEXT} to dynamically set the stride.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

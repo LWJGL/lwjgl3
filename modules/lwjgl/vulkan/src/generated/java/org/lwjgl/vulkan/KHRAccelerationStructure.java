@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>151</dd>
  * <dt><b>Revision</b></dt>
- * <dd>12</dd>
+ * <dd>13</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.1</li>
@@ -56,7 +56,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2020-11-12</dd>
+ * <dd>2021-09-30</dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Samuel Bourasseau, Adobe</li>
@@ -107,7 +107,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class KHRAccelerationStructure {
 
     /** The extension specification version. */
-    public static final int VK_KHR_ACCELERATION_STRUCTURE_SPEC_VERSION = 12;
+    public static final int VK_KHR_ACCELERATION_STRUCTURE_SPEC_VERSION = 13;
 
     /** The extension name. */
     public static final String VK_KHR_ACCELERATION_STRUCTURE_EXTENSION_NAME = "VK_KHR_acceleration_structure";
@@ -211,6 +211,9 @@ public class KHRAccelerationStructure {
     public static final int
         VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR = 0x80000,
         VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR               = 0x100000;
+
+    /** Extends {@code VkFormatFeatureFlagBits2KHR}. */
+    public static final long VK_FORMAT_FEATURE_2_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR = 0x20000000L;
 
     /**
      * VkAccelerationStructureTypeKHR - Type of acceleration structure

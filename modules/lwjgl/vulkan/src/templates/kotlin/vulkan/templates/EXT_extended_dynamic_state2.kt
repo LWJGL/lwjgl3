@@ -87,10 +87,10 @@ val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_
     void(
         "CmdSetPatchControlPointsEXT",
         """
-        Specify the number of control points per patch.
+        Specify the number of control points per patch dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        To dynamically specify the number of control points per patch:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the number of control points per patch, call:
 
         <pre><code>
 ￿void vkCmdSetPatchControlPointsEXT(
@@ -98,7 +98,7 @@ val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_
 ￿    uint32_t                                    patchControlPoints);</code></pre>
 
         <h5>Description</h5>
-        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
+        This command sets the number of control points per patch for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineTessellationStateCreateInfo{@code ::patchControlPoints} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -127,16 +127,16 @@ val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        uint32_t("patchControlPoints", "specifies number of control points per patch.")
+        uint32_t("patchControlPoints", "specifies the number of control points per patch.")
     )
 
     void(
         "CmdSetRasterizerDiscardEnableEXT",
         """
-        Control whether primitives are discarded before the rasterization stage for a command buffer.
+        Control whether primitives are discarded before the rasterization stage dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        To dynamically control whether primitives are discarded before the rasterization stage:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically enable</a> whether primitives are discarded before the rasterization stage, call:
 
         <pre><code>
 ￿void vkCmdSetRasterizerDiscardEnableEXT(
@@ -144,7 +144,7 @@ val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_
 ￿    VkBool32                                    rasterizerDiscardEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
+        This command sets the discard enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::rasterizerDiscardEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -178,10 +178,10 @@ val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_
     void(
         "CmdSetDepthBiasEnableEXT",
         """
-        Controls whether to bias fragment depth values for a command buffer.
+        Control whether to bias fragment depth values dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        To dynamically control whether to bias fragment depth values:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically enable</a> whether to bias fragment depth values, call:
 
         <pre><code>
 ￿void vkCmdSetDepthBiasEnableEXT(
@@ -189,7 +189,7 @@ val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_
 ￿    VkBool32                                    depthBiasEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
+        This command sets the depth bias enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::depthBiasEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -223,10 +223,10 @@ val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_
     void(
         "CmdSetLogicOpEXT",
         """
-        Select which logical operation to apply for blend state.
+        Select which logical operation to apply for blend state dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        To dynamically set the logical operation to apply for blend state:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the logical operation to apply for blend state, call:
 
         <pre><code>
 ￿void vkCmdSetLogicOpEXT(
@@ -234,7 +234,7 @@ val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_
 ￿    VkLogicOp                                   logicOp);</code></pre>
 
         <h5>Description</h5>
-        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_LOGIC_OP_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
+        This command sets the logical operation for blend state for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_LOGIC_OP_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineColorBlendStateCreateInfo{@code ::logicOp} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -269,10 +269,10 @@ val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_
     void(
         "CmdSetPrimitiveRestartEnableEXT",
         """
-        Control whether a special vertex index value is treated as restarting the assembly of primitives.
+        Set primitive assembly restart state dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        To dynamically control whether a special vertex index value is treated as restarting the assembly of primitives:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically control</a> whether a special vertex index value is treated as restarting the assembly of primitives, call:
 
         <pre><code>
 ￿void vkCmdSetPrimitiveRestartEnableEXT(
@@ -280,7 +280,7 @@ val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_
 ￿    VkBool32                                    primitiveRestartEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
+        This command sets the primitive restart enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineInputAssemblyStateCreateInfo{@code ::primitiveRestartEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

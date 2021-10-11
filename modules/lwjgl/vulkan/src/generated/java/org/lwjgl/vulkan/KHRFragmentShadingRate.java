@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>227</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -59,7 +59,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2020-05-06</dd>
+ * <dd>2021-09-30</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_fragment_shading_rate.html">{@code SPV_KHR_fragment_shading_rate}</a>.</li>
@@ -82,7 +82,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class KHRFragmentShadingRate {
 
     /** The extension specification version. */
-    public static final int VK_KHR_FRAGMENT_SHADING_RATE_SPEC_VERSION = 1;
+    public static final int VK_KHR_FRAGMENT_SHADING_RATE_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_KHR_FRAGMENT_SHADING_RATE_EXTENSION_NAME = "VK_KHR_fragment_shading_rate";
@@ -124,6 +124,9 @@ public class KHRFragmentShadingRate {
 
     /** Extends {@code VkFormatFeatureFlagBits}. */
     public static final int VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR = 0x40000000;
+
+    /** Extends {@code VkFormatFeatureFlagBits2KHR}. */
+    public static final long VK_FORMAT_FEATURE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR = 0x40000000L;
 
     /**
      * VkFragmentShadingRateCombinerOpKHR - Control how fragment shading rates are combined
@@ -282,17 +285,21 @@ public class KHRFragmentShadingRate {
     }
 
     /**
-     * Set pipeline fragment shading rate dynamically.
+     * Set pipeline fragment shading rate and combiner operation dynamically for a command buffer.
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>If a pipeline state object is created with {@link #VK_DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR} enabled, the pipeline fragment shading rate and combiner operation is set by the command:</p>
+     * <p>To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#pipelines-dynamic-state">dynamically set</a> the pipeline fragment shading rate and combiner operation, call:</p>
      * 
      * <pre><code>
      * void vkCmdSetFragmentShadingRateKHR(
      *     VkCommandBuffer                             commandBuffer,
      *     const VkExtent2D*                           pFragmentSize,
      *     const VkFragmentShadingRateCombinerOpKHR    combinerOps[2]);</code></pre>
+     * 
+     * <h5>Description</h5>
+     * 
+     * <p>This command sets the pipeline fragment shading rate and combiner operation for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineFragmentShadingRateStateCreateInfoKHR} values used to create the currently active pipeline.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

@@ -101,15 +101,18 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
     void(
         "CmdSetCullModeEXT",
         """
-        Set the cull mode property.
+        Set cull mode dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        If the bound graphics pipeline state was created with the #DYNAMIC_STATE_CULL_MODE_EXT dynamic state enabled then the cull mode is set dynamically by calling:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the cull mode, call:
 
         <pre><code>
 ￿void vkCmdSetCullModeEXT(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkCullModeFlags                             cullMode);</code></pre>
+
+        <h5>Description</h5>
+        This command sets the cull mode for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_CULL_MODE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::cullMode} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -144,15 +147,18 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
     void(
         "CmdSetFrontFaceEXT",
         """
-        Set the front face property.
+        Set front face orientation dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        If the bound graphics pipeline state was created with the #DYNAMIC_STATE_FRONT_FACE_EXT dynamic state enabled then the front face property is set dynamically by calling:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the front face orientation, call:
 
         <pre><code>
 ￿void vkCmdSetFrontFaceEXT(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkFrontFace                                 frontFace);</code></pre>
+
+        <h5>Description</h5>
+        This command sets the front face orientation for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_FRONT_FACE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::frontFace} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -181,23 +187,24 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkFrontFace("frontFace", "specifies the front face property to use for drawing.")
+        VkFrontFace("frontFace", "a {@code VkFrontFace} value specifying the front-facing triangle orientation to be used for culling.")
     )
 
     void(
         "CmdSetPrimitiveTopologyEXT",
         """
-        Set the primitive topology state.
+        Set primitive topology state dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        The primitive topology is specified by the ##VkPipelineInputAssemblyStateCreateInfo{@code ::topology} property of the currently active pipeline, if the pipeline was not created with #DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT enabled.
-
-        Otherwise, the primitive topology is set by calling:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> primitive topology, call:
 
         <pre><code>
 ￿void vkCmdSetPrimitiveTopologyEXT(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkPrimitiveTopology                         primitiveTopology);</code></pre>
+
+        <h5>Description</h5>
+        This command sets the primitive topology for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineInputAssemblyStateCreateInfo{@code ::topology} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -226,22 +233,25 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkPrimitiveTopology("primitiveTopology", "")
+        VkPrimitiveTopology("primitiveTopology", "specifies the primitive topology to use for drawing.")
     )
 
     void(
         "CmdSetViewportWithCountEXT",
         """
-        Set the viewport count and viewports.
+        Set the viewport count and viewports dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        If the bound graphics pipeline state was created with the #DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT dynamic state enabled then the viewport count and viewport transformation parameters are set dynamically by calling:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the viewport count and viewports, call:
 
         <pre><code>
 ￿void vkCmdSetViewportWithCountEXT(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    viewportCount,
 ￿    const VkViewport*                           pViewports);</code></pre>
+
+        <h5>Description</h5>
+        This command sets the viewport count and viewports state for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding ##VkPipelineViewportStateCreateInfo{@code ::viewportCount} and {@code pViewports} values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -284,16 +294,19 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
     void(
         "CmdSetScissorWithCountEXT",
         """
-        Set the scissor count and scissors.
+        Set the scissor count and scissor rectangular bounds dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        If the bound graphics pipeline state was created with the #DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT dynamic state enabled then the scissor count and scissor rectangular bounds are set dynamically by calling:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the scissor count and scissor rectangular bounds, call:
 
         <pre><code>
 ￿void vkCmdSetScissorWithCountEXT(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    uint32_t                                    scissorCount,
 ￿    const VkRect2D*                             pScissors);</code></pre>
+
+        <h5>Description</h5>
+        This command sets the scissor count and scissor rectangular bounds state for subsequence drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding ##VkPipelineViewportStateCreateInfo{@code ::scissorCount} and {@code pScissors} values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -339,7 +352,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
     void(
         "CmdBindVertexBuffers2EXT",
         """
-        Bind vertex buffers to a command buffer.
+        Bind vertex buffers to a command buffer and dynamically set strides.
 
         <h5>C Specification</h5>
         Alternatively, to bind vertex buffers, along with their sizes and strides, to a command buffer for use in subsequent drawing commands, call:
@@ -357,7 +370,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
         <h5>Description</h5>
         The values taken from elements <code>i</code> of {@code pBuffers} and {@code pOffsets} replace the current state for the vertex input binding <code>firstBinding + i</code>, for <code>i</code> in <code>[0, bindingCount)</code>. The vertex input binding is updated to start at the offset indicated by {@code pOffsets}[i] from the start of the buffer {@code pBuffers}[i]. If {@code pSizes} is not {@code NULL} then {@code pSizes}[i] specifies the bound size of the vertex buffer starting from the corresponding elements of {@code pBuffers}[i] plus {@code pOffsets}[i]. All vertex input attributes that use each of these bindings will use these updated addresses in their address calculations for subsequent drawing commands. If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-nullDescriptor">nullDescriptor</a> feature is enabled, elements of {@code pBuffers} <b>can</b> be #NULL_HANDLE, and <b>can</b> be used by the vertex shader. If a vertex input attribute is bound to a vertex input binding that is #NULL_HANDLE, the values taken from memory are considered to be zero, and missing G, B, or A components are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#fxvertex-input-extraction">filled with <code>(0,0,1)</code></a>.
 
-        If the bound pipeline state object was created with the #DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT dynamic state enabled then {@code pStrides}[i] specifies the byte stride between consecutive elements within the corresponding buffer. In this case the ##VkVertexInputBindingDescription{@code ::stride} state from the pipeline state object is ignored.
+        This command also &lt;pipelines-dynamic-state, dynamically sets&gt;&gt; the byte strides between consecutive elements within buffer {@code pBuffers}[i] to the corresponding {@code pStrides}[i] value when the graphics pipeline is created with #DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, strides are specified by the ##VkVertexInputBindingDescription{@code ::stride} values used to create the currently active pipeline.
 
         If the bound pipeline state object was also created with the #DYNAMIC_STATE_VERTEX_INPUT_EXT dynamic state enabled then #CmdSetVertexInputEXT() <b>can</b> be used instead of {@code vkCmdBindVertexBuffers2EXT} to set the stride.
 
@@ -413,10 +426,10 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
     void(
         "CmdSetDepthTestEnableEXT",
         """
-        Set the depth test enable for a command buffer.
+        Set depth test enable dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        To dynamically enable or disable the depth test, call:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically enable or disable</a> the depth test, call:
 
         <pre><code>
 ￿void vkCmdSetDepthTestEnableEXT(
@@ -424,7 +437,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 ￿    VkBool32                                    depthTestEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_TEST_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
+        This command sets the depth test enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_TEST_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthTestEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -458,10 +471,10 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
     void(
         "CmdSetDepthWriteEnableEXT",
         """
-        Set the depth write enable for the command buffer.
+        Set depth write enable dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        To dynamically enable or disable depth writes, call:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the depth write enable, call:
 
         <pre><code>
 ￿void vkCmdSetDepthWriteEnableEXT(
@@ -469,7 +482,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 ￿    VkBool32                                    depthWriteEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_WRITE_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
+        This command sets the depth write enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_WRITE_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthWriteEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -503,10 +516,10 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
     void(
         "CmdSetDepthCompareOpEXT",
         """
-        Set the depth comparison operator for the command buffer.
+        Set depth comparison operator dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        To dynamically set the depth compare operations, call:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the depth compare operator, call:
 
         <pre><code>
 ￿void vkCmdSetDepthCompareOpEXT(
@@ -514,7 +527,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 ￿    VkCompareOp                                 depthCompareOp);</code></pre>
 
         <h5>Description</h5>
-        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
+        This command sets the depth comparison operator for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthCompareOp} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -549,10 +562,10 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
     void(
         "CmdSetDepthBoundsTestEnableEXT",
         """
-        Set the depth bounds test enable for a command buffer.
+        Set depth bounds test enable dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        To dynamically enable or disable the depth bounds test:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically enable or disable</a> the depth bounds test, call:
 
         <pre><code>
 ￿void vkCmdSetDepthBoundsTestEnableEXT(
@@ -560,7 +573,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 ￿    VkBool32                                    depthBoundsTestEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
+        This command sets the depth bounds enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthBoundsTestEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -594,10 +607,10 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
     void(
         "CmdSetStencilTestEnableEXT",
         """
-        Set the stencil test enable for the command buffer.
+        Set stencil test enable dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        To dynamically enable or disable the stencil test, call:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically enable or disable</a> the stencil test, call:
 
         <pre><code>
 ￿void vkCmdSetStencilTestEnableEXT(
@@ -605,7 +618,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 ￿    VkBool32                                    stencilTestEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
+        This command sets the stencil test enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::stencilTestEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -639,10 +652,10 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
     void(
         "CmdSetStencilOpEXT",
         """
-        Set the stencil operation for the command buffer.
+        Set stencil operation dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        To dynamically set the stencil operations, call:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the stencil operation, call:
 
         <pre><code>
 ￿void vkCmdSetStencilOpEXT(
@@ -654,7 +667,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 ￿    VkCompareOp                                 compareOp);</code></pre>
 
         <h5>Description</h5>
-        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_STENCIL_OP_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
+        This command sets the stencil operation for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_STENCIL_OP_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding ##VkPipelineDepthStencilStateCreateInfo{@code ::failOp}, {@code passOp}, {@code depthFailOp}, and {@code compareOp} values used to create the currently active pipeline, for both front and back faces.
 
         <h5>Valid Usage</h5>
         <ul>

@@ -243,10 +243,10 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
     void(
         "CmdSetViewportShadingRatePaletteNV",
         """
-        Set shading rate image palettes on a command buffer.
+        Set shading rate image palettes dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        If a pipeline state object is created with #DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV enabled, the per-viewport shading rate image palettes are set by the command:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the per-viewport shading rate image palettes, call:
 
         <pre><code>
 ￿void vkCmdSetViewportShadingRatePaletteNV(
@@ -254,6 +254,9 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
 ￿    uint32_t                                    firstViewport,
 ￿    uint32_t                                    viewportCount,
 ￿    const VkShadingRatePaletteNV*               pShadingRatePalettes);</code></pre>
+
+        <h5>Description</h5>
+        This command sets the per-viewport shading rate image palettes for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineViewportShadingRateImageStateCreateInfoNV{@code ::pShadingRatePalettes} values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -297,10 +300,10 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
     void(
         "CmdSetCoarseSampleOrderNV",
         """
-        Set sample order for coarse fragments on a command buffer.
+        Set order of coverage samples for coarse fragments dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        If a pipeline state object is created with #DYNAMIC_STATE_VIEWPORT_COARSE_SAMPLE_ORDER_NV enabled, the order of coverage samples in fragments larger than one pixel is set by the command:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the order of coverage samples in fragments larger than one pixel, call:
 
         <pre><code>
 ￿void vkCmdSetCoarseSampleOrderNV(
@@ -311,6 +314,8 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
 
         <h5>Description</h5>
         If {@code sampleOrderType} is #COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV, the coverage sample order used for any combination of fragment area and coverage sample count not enumerated in {@code pCustomSampleOrders} will be identical to that used for #COARSE_SAMPLE_ORDER_TYPE_DEFAULT_NV.
+
+        This command sets the order of coverage samples for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_VIEWPORT_COARSE_SAMPLE_ORDER_NV set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineViewportCoarseSampleOrderStateCreateInfoNV values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

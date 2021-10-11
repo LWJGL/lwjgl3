@@ -85,7 +85,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>159</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -104,7 +104,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2018-08-29</dd>
+ * <dd>2021-09-30</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -123,7 +123,7 @@ import static org.lwjgl.system.JNI.*;
 public class EXTImageDrmFormatModifier {
 
     /** The extension specification version. */
-    public static final int VK_EXT_IMAGE_DRM_FORMAT_MODIFIER_SPEC_VERSION = 1;
+    public static final int VK_EXT_IMAGE_DRM_FORMAT_MODIFIER_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION_NAME = "VK_EXT_image_drm_format_modifier";
@@ -171,6 +171,9 @@ public class EXTImageDrmFormatModifier {
         VK_IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT = 0x100,
         VK_IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT = 0x200,
         VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT = 0x400;
+
+    /** Extends {@code VkStructureType}. */
+    public static final int VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT = 1000158006;
 
     protected EXTImageDrmFormatModifier() {
         throw new UnsupportedOperationException();

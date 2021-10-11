@@ -25,7 +25,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>25</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -43,7 +43,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2021-03-29</dd>
+ * <dd>2021-09-30</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -60,7 +60,7 @@ import static org.lwjgl.system.JNI.*;
 public class KHRVideoDecodeQueue {
 
     /** The extension specification version. */
-    public static final int VK_KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION = 1;
+    public static final int VK_KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_KHR_VIDEO_DECODE_QUEUE_EXTENSION_NAME = "VK_KHR_video_decode_queue";
@@ -72,7 +72,7 @@ public class KHRVideoDecodeQueue {
     public static final int VK_QUEUE_VIDEO_DECODE_BIT_KHR = 0x20;
 
     /** Extends {@code VkPipelineStageFlagBits2KHR}. */
-    public static final int VK_PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR = 0x4000000;
+    public static final long VK_PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR = 0x4000000L;
 
     /**
      * Extends {@code VkAccessFlagBits2KHR}.
@@ -84,9 +84,9 @@ public class KHRVideoDecodeQueue {
      * <li>{@link #VK_ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR}</li>
      * </ul>
      */
-    public static final int
-        VK_ACCESS_2_VIDEO_DECODE_READ_BIT_KHR  = 0x8,
-        VK_ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR = 0x10;
+    public static final long
+        VK_ACCESS_2_VIDEO_DECODE_READ_BIT_KHR  = 0x800000000L,
+        VK_ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR = 0x1000000000L;
 
     /**
      * Extends {@code VkBufferUsageFlagBits}.
@@ -147,6 +147,20 @@ public class KHRVideoDecodeQueue {
         VK_IMAGE_LAYOUT_VIDEO_DECODE_DST_KHR = 1000024000,
         VK_IMAGE_LAYOUT_VIDEO_DECODE_SRC_KHR = 1000024001,
         VK_IMAGE_LAYOUT_VIDEO_DECODE_DPB_KHR = 1000024002;
+
+    /**
+     * Extends {@code VkFormatFeatureFlagBits2KHR}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_FORMAT_FEATURE_2_VIDEO_DECODE_OUTPUT_BIT_KHR FORMAT_FEATURE_2_VIDEO_DECODE_OUTPUT_BIT_KHR}</li>
+     * <li>{@link #VK_FORMAT_FEATURE_2_VIDEO_DECODE_DPB_BIT_KHR FORMAT_FEATURE_2_VIDEO_DECODE_DPB_BIT_KHR}</li>
+     * </ul>
+     */
+    public static final long
+        VK_FORMAT_FEATURE_2_VIDEO_DECODE_OUTPUT_BIT_KHR = 0x2000000L,
+        VK_FORMAT_FEATURE_2_VIDEO_DECODE_DPB_BIT_KHR    = 0x4000000L;
 
     /**
      * VkVideoDecodeFlagBitsKHR - Video Decode Command Flags

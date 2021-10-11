@@ -88,10 +88,10 @@ val NV_scissor_exclusive = "NVScissorExclusive".nativeClassVK("NV_scissor_exclus
     void(
         "CmdSetExclusiveScissorNV",
         """
-        Set the dynamic exclusive scissor rectangles on a command buffer.
+        Set exclusive scissor rectangles dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        The exclusive scissor rectangles <b>can</b> be set dynamically with the command:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the exclusive scissor rectangles, call:
 
         <pre><code>
 ￿void vkCmdSetExclusiveScissorNV(
@@ -103,7 +103,7 @@ val NV_scissor_exclusive = "NVScissorExclusive".nativeClassVK("NV_scissor_exclus
         <h5>Description</h5>
         The scissor rectangles taken from element <code>i</code> of {@code pExclusiveScissors} replace the current state for the scissor index <code>firstExclusiveScissor + i</code>, for <code>i</code> in <code>[0, exclusiveScissorCount)</code>.
 
-        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
+        This command sets the exclusive scissor rectangles for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineViewportExclusiveScissorStateCreateInfoNV{@code ::pExclusiveScissors} values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

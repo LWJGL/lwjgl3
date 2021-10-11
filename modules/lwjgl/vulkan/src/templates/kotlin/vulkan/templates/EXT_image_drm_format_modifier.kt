@@ -86,7 +86,7 @@ val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("E
             <dd>159</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -106,7 +106,7 @@ val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("E
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2018-08-29</dd>
+            <dd>2021-09-30</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -128,7 +128,7 @@ val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("E
     IntConstant(
         "The extension specification version.",
 
-        "EXT_IMAGE_DRM_FORMAT_MODIFIER_SPEC_VERSION".."1"
+        "EXT_IMAGE_DRM_FORMAT_MODIFIER_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -166,6 +166,12 @@ val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("E
         "IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT".enum(0x00000100),
         "IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT".enum(0x00000200),
         "IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT".enum(0x00000400)
+    )
+
+    EnumConstant(
+        "Extends {@code VkStructureType}.",
+
+        "STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT".."1000158006"
     )
 
     VkResult(

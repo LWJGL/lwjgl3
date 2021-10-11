@@ -27,7 +27,7 @@ val EXT_fragment_density_map = "EXTFragmentDensityMap".nativeClassVK("EXT_fragme
             <dd>219</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -44,7 +44,7 @@ val EXT_fragment_density_map = "EXTFragmentDensityMap".nativeClassVK("EXT_fragme
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2018-09-25</dd>
+            <dd>2021-09-30</dd>
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
@@ -71,7 +71,7 @@ val EXT_fragment_density_map = "EXTFragmentDensityMap".nativeClassVK("EXT_fragme
     IntConstant(
         "The extension specification version.",
 
-        "EXT_FRAGMENT_DENSITY_MAP_SPEC_VERSION".."1"
+        "EXT_FRAGMENT_DENSITY_MAP_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -135,5 +135,11 @@ val EXT_fragment_density_map = "EXTFragmentDensityMap".nativeClassVK("EXT_fragme
 
         "SAMPLER_CREATE_SUBSAMPLED_BIT_EXT".enum(0x00000001),
         "SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT".enum(0x00000002)
+    )
+
+    EnumConstantLong(
+        "Extends {@code VkFormatFeatureFlagBits2KHR}.",
+
+        "FORMAT_FEATURE_2_FRAGMENT_DENSITY_MAP_BIT_EXT".enum(0x01000000L)
     )
 }

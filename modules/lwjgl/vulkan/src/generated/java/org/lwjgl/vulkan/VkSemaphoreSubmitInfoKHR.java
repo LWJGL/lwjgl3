@@ -87,7 +87,7 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
             __member(POINTER_SIZE),
             __member(8),
             __member(8),
-            __member(4),
+            __member(8),
             __member(4)
         );
 
@@ -129,7 +129,7 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
     public long value() { return nvalue(address()); }
     /** a {@code VkPipelineStageFlags2KHR} mask of pipeline stages which limit the first synchronization scope of a semaphore signal operation, or second synchronization scope of a semaphore wait operation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-waiting">semaphore wait operation</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operation</a> sections of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization">the synchronization chapter</a>. */
     @NativeType("VkPipelineStageFlags2KHR")
-    public int stageMask() { return nstageMask(address()); }
+    public long stageMask() { return nstageMask(address()); }
     /** the index of the device within a device group that executes the semaphore wait or signal operation. */
     @NativeType("uint32_t")
     public int deviceIndex() { return ndeviceIndex(address()); }
@@ -145,7 +145,7 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #value} field. */
     public VkSemaphoreSubmitInfoKHR value(@NativeType("uint64_t") long value) { nvalue(address(), value); return this; }
     /** Sets the specified value to the {@link #stageMask} field. */
-    public VkSemaphoreSubmitInfoKHR stageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { nstageMask(address(), value); return this; }
+    public VkSemaphoreSubmitInfoKHR stageMask(@NativeType("VkPipelineStageFlags2KHR") long value) { nstageMask(address(), value); return this; }
     /** Sets the specified value to the {@link #deviceIndex} field. */
     public VkSemaphoreSubmitInfoKHR deviceIndex(@NativeType("uint32_t") int value) { ndeviceIndex(address(), value); return this; }
 
@@ -155,7 +155,7 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
         long pNext,
         long semaphore,
         long value,
-        int stageMask,
+        long stageMask,
         int deviceIndex
     ) {
         sType(sType);
@@ -303,7 +303,7 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
     /** Unsafe version of {@link #value}. */
     public static long nvalue(long struct) { return UNSAFE.getLong(null, struct + VkSemaphoreSubmitInfoKHR.VALUE); }
     /** Unsafe version of {@link #stageMask}. */
-    public static int nstageMask(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreSubmitInfoKHR.STAGEMASK); }
+    public static long nstageMask(long struct) { return UNSAFE.getLong(null, struct + VkSemaphoreSubmitInfoKHR.STAGEMASK); }
     /** Unsafe version of {@link #deviceIndex}. */
     public static int ndeviceIndex(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreSubmitInfoKHR.DEVICEINDEX); }
 
@@ -315,8 +315,8 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
     public static void nsemaphore(long struct, long value) { UNSAFE.putLong(null, struct + VkSemaphoreSubmitInfoKHR.SEMAPHORE, value); }
     /** Unsafe version of {@link #value(long) value}. */
     public static void nvalue(long struct, long value) { UNSAFE.putLong(null, struct + VkSemaphoreSubmitInfoKHR.VALUE, value); }
-    /** Unsafe version of {@link #stageMask(int) stageMask}. */
-    public static void nstageMask(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreSubmitInfoKHR.STAGEMASK, value); }
+    /** Unsafe version of {@link #stageMask(long) stageMask}. */
+    public static void nstageMask(long struct, long value) { UNSAFE.putLong(null, struct + VkSemaphoreSubmitInfoKHR.STAGEMASK, value); }
     /** Unsafe version of {@link #deviceIndex(int) deviceIndex}. */
     public static void ndeviceIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreSubmitInfoKHR.DEVICEINDEX, value); }
 
@@ -372,7 +372,7 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
         public long value() { return VkSemaphoreSubmitInfoKHR.nvalue(address()); }
         /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#stageMask} field. */
         @NativeType("VkPipelineStageFlags2KHR")
-        public int stageMask() { return VkSemaphoreSubmitInfoKHR.nstageMask(address()); }
+        public long stageMask() { return VkSemaphoreSubmitInfoKHR.nstageMask(address()); }
         /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#deviceIndex} field. */
         @NativeType("uint32_t")
         public int deviceIndex() { return VkSemaphoreSubmitInfoKHR.ndeviceIndex(address()); }
@@ -388,7 +388,7 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#value} field. */
         public VkSemaphoreSubmitInfoKHR.Buffer value(@NativeType("uint64_t") long value) { VkSemaphoreSubmitInfoKHR.nvalue(address(), value); return this; }
         /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#stageMask} field. */
-        public VkSemaphoreSubmitInfoKHR.Buffer stageMask(@NativeType("VkPipelineStageFlags2KHR") int value) { VkSemaphoreSubmitInfoKHR.nstageMask(address(), value); return this; }
+        public VkSemaphoreSubmitInfoKHR.Buffer stageMask(@NativeType("VkPipelineStageFlags2KHR") long value) { VkSemaphoreSubmitInfoKHR.nstageMask(address(), value); return this; }
         /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#deviceIndex} field. */
         public VkSemaphoreSubmitInfoKHR.Buffer deviceIndex(@NativeType("uint32_t") int value) { VkSemaphoreSubmitInfoKHR.ndeviceIndex(address(), value); return this; }
 

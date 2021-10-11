@@ -125,7 +125,7 @@ public class VkAccelerationStructureSRTMotionInstanceNV extends Struct implement
     /** a 24-bit user-specified index value accessible to ray shaders in the {@code InstanceCustomIndexKHR} built-in. */
     @NativeType("uint32_t")
     public int instanceCustomIndex() { return ninstanceCustomIndex(address()); }
-    /** an 8-bit visibility mask for the geometry. The instance <b>may</b> only be hit if {@code rayMask &amp; instance.mask != 0} */
+    /** an 8-bit visibility mask for the geometry. The instance <b>may</b> only be hit if {@code Cull Mask &amp; instance.mask != 0} */
     @NativeType("uint32_t")
     public int mask() { return nmask(address()); }
     /** a 24-bit offset used in calculating the hit shader binding table index. */

@@ -108,10 +108,10 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
     void(
         "CmdSetDiscardRectangleEXT",
         """
-        Set discard rectangles dynamically.
+        Set discard rectangles dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        The discard rectangles <b>can</b> be set dynamically with the command:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the discard rectangles, call:
 
         <pre><code>
 ￿void vkCmdSetDiscardRectangleEXT(
@@ -123,7 +123,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
         <h5>Description</h5>
         The discard rectangle taken from element <code>i</code> of {@code pDiscardRectangles} replace the current state for the discard rectangle at index <code>firstDiscardRectangle + i</code>, for <code>i</code> in <code>[0, discardRectangleCount)</code>.
 
-        This command sets the state for a given draw when the graphics pipeline is created with #DYNAMIC_STATE_DISCARD_RECTANGLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}.
+        This command sets the discard rectangles for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DISCARD_RECTANGLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDiscardRectangleStateCreateInfoEXT{@code ::pDiscardRectangles} values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

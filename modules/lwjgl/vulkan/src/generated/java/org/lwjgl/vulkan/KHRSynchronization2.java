@@ -143,7 +143,7 @@ public class KHRSynchronization2 {
     public static final int VK_ACCESS_NONE_KHR = 0;
 
     /** Extends {@code VkPipelineStageFlagBits2KHR}. */
-    public static final int VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT = 0x1000000;
+    public static final long VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT = 0x1000000L;
 
     /**
      * Extends {@code VkAccessFlagBits2KHR}.
@@ -156,19 +156,19 @@ public class KHRSynchronization2 {
      * <li>{@link #VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT}</li>
      * </ul>
      */
-    public static final int
-        VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT         = 0x2000000,
-        VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT  = 0x4000000,
-        VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT = 0x8000000;
+    public static final long
+        VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT         = 0x2000000L,
+        VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT  = 0x4000000L,
+        VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT = 0x8000000L;
 
     /** Extends {@code VkPipelineStageFlagBits2KHR}. */
-    public static final int VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT = 0x40000;
+    public static final long VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT = 0x40000L;
 
     /** Extends {@code VkAccessFlagBits2KHR}. */
-    public static final int VK_ACCESS_2_CONDITIONAL_RENDERING_READ_BIT_EXT = 0x100000;
+    public static final long VK_ACCESS_2_CONDITIONAL_RENDERING_READ_BIT_EXT = 0x100000L;
 
     /** Extends {@code VkPipelineStageFlagBits2KHR}. */
-    public static final int VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV = 0x20000;
+    public static final long VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV = 0x20000L;
 
     /**
      * Extends {@code VkAccessFlagBits2KHR}.
@@ -180,24 +180,24 @@ public class KHRSynchronization2 {
      * <li>{@link #VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV}</li>
      * </ul>
      */
-    public static final int
-        VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV  = 0x20000,
-        VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV = 0x40000;
+    public static final long
+        VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV  = 0x20000L,
+        VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV = 0x40000L;
 
     /** Extends {@code VkPipelineStageFlagBits2KHR}. */
-    public static final int VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR = 0x400000;
+    public static final long VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR = 0x400000L;
 
     /** Extends {@code VkAccessFlagBits2KHR}. */
-    public static final int VK_ACCESS_2_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR = 0x800000;
+    public static final long VK_ACCESS_2_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR = 0x800000L;
 
     /** Extends {@code VkPipelineStageFlagBits2KHR}. */
-    public static final int VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV = 0x400000;
+    public static final long VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV = 0x400000L;
 
     /** Extends {@code VkAccessFlagBits2KHR}. */
-    public static final int VK_ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV = 0x800000;
+    public static final long VK_ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV = 0x800000L;
 
     /** Extends {@code VkPipelineStageFlagBits2KHR}. */
-    public static final int VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR = 0x2000000;
+    public static final long VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR = 0x2000000L;
 
     /**
      * Extends {@code VkAccessFlagBits2KHR}.
@@ -209,12 +209,12 @@ public class KHRSynchronization2 {
      * <li>{@link #VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR}</li>
      * </ul>
      */
-    public static final int
-        VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR  = 0x200000,
-        VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR = 0x400000;
+    public static final long
+        VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR  = 0x200000L,
+        VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR = 0x400000L;
 
     /** Extends {@code VkPipelineStageFlagBits2KHR}. */
-    public static final int VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR = 0x200000;
+    public static final long VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR = 0x200000L;
 
     /**
      * Extends {@code VkPipelineStageFlagBits2KHR}.
@@ -226,9 +226,9 @@ public class KHRSynchronization2 {
      * <li>{@link #VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_NV PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_NV}</li>
      * </ul>
      */
-    public static final int
-        VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_NV           = 0x200000,
-        VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_NV = 0x2000000;
+    public static final long
+        VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_NV           = 0x200000L,
+        VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_NV = 0x2000000L;
 
     /**
      * Extends {@code VkAccessFlagBits2KHR}.
@@ -240,18 +240,18 @@ public class KHRSynchronization2 {
      * <li>{@link #VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_NV ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_NV}</li>
      * </ul>
      */
-    public static final int
-        VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_NV  = 0x200000,
-        VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_NV = 0x400000;
+    public static final long
+        VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_NV  = 0x200000L,
+        VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_NV = 0x400000L;
 
     /** Extends {@code VkPipelineStageFlagBits2KHR}. */
-    public static final int VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT = 0x800000;
+    public static final long VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT = 0x800000L;
 
     /** Extends {@code VkAccessFlagBits2KHR}. */
-    public static final int VK_ACCESS_2_FRAGMENT_DENSITY_MAP_READ_BIT_EXT = 0x1000000;
+    public static final long VK_ACCESS_2_FRAGMENT_DENSITY_MAP_READ_BIT_EXT = 0x1000000L;
 
     /** Extends {@code VkAccessFlagBits2KHR}. */
-    public static final int VK_ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT = 0x80000;
+    public static final long VK_ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT = 0x80000L;
 
     /**
      * Extends {@code VkPipelineStageFlagBits2KHR}.
@@ -263,9 +263,9 @@ public class KHRSynchronization2 {
      * <li>{@link #VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV PIPELINE_STAGE_2_MESH_SHADER_BIT_NV}</li>
      * </ul>
      */
-    public static final int
-        VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_NV = 0x80000,
-        VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV = 0x100000;
+    public static final long
+        VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_NV = 0x80000L,
+        VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV = 0x100000L;
 
     /**
      * Extends {@code VkStructureType}.
@@ -388,33 +388,33 @@ public class KHRSynchronization2 {
      * <li>{@link #VK_PIPELINE_STAGE_2_TRANSFER_BIT_KHR PIPELINE_STAGE_2_TRANSFER_BIT_KHR}</li>
      * </ul>
      */
-    public static final int
-        VK_PIPELINE_STAGE_2_NONE_KHR                               = 0,
-        VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT_KHR                    = 0x1,
-        VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR                  = 0x2,
-        VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT_KHR                   = 0x4,
-        VK_PIPELINE_STAGE_2_VERTEX_SHADER_BIT_KHR                  = 0x8,
-        VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT_KHR    = 0x10,
-        VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT_KHR = 0x20,
-        VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT_KHR                = 0x40,
-        VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT_KHR                = 0x80,
-        VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT_KHR           = 0x100,
-        VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT_KHR            = 0x200,
-        VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT_KHR        = 0x400,
-        VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT_KHR                 = 0x800,
-        VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT_KHR                   = 0x1000,
-        VK_PIPELINE_STAGE_2_TRANSFER_BIT_KHR                       = 0x1000,
-        VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT_KHR                 = 0x2000,
-        VK_PIPELINE_STAGE_2_HOST_BIT_KHR                           = 0x4000,
-        VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR                   = 0x8000,
-        VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR                   = 0x10000,
-        VK_PIPELINE_STAGE_2_COPY_BIT_KHR                           = 0x1,
-        VK_PIPELINE_STAGE_2_RESOLVE_BIT_KHR                        = 0x2,
-        VK_PIPELINE_STAGE_2_BLIT_BIT_KHR                           = 0x4,
-        VK_PIPELINE_STAGE_2_CLEAR_BIT_KHR                          = 0x8,
-        VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT_KHR                    = 0x10,
-        VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT_KHR         = 0x20,
-        VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT_KHR      = 0x40;
+    public static final long
+        VK_PIPELINE_STAGE_2_NONE_KHR                               = 0L,
+        VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT_KHR                    = 0x1L,
+        VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT_KHR                  = 0x2L,
+        VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT_KHR                   = 0x4L,
+        VK_PIPELINE_STAGE_2_VERTEX_SHADER_BIT_KHR                  = 0x8L,
+        VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT_KHR    = 0x10L,
+        VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT_KHR = 0x20L,
+        VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT_KHR                = 0x40L,
+        VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT_KHR                = 0x80L,
+        VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT_KHR           = 0x100L,
+        VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT_KHR            = 0x200L,
+        VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT_KHR        = 0x400L,
+        VK_PIPELINE_STAGE_2_COMPUTE_SHADER_BIT_KHR                 = 0x800L,
+        VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT_KHR                   = 0x1000L,
+        VK_PIPELINE_STAGE_2_TRANSFER_BIT_KHR                       = 0x1000L,
+        VK_PIPELINE_STAGE_2_BOTTOM_OF_PIPE_BIT_KHR                 = 0x2000L,
+        VK_PIPELINE_STAGE_2_HOST_BIT_KHR                           = 0x4000L,
+        VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT_KHR                   = 0x8000L,
+        VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT_KHR                   = 0x10000L,
+        VK_PIPELINE_STAGE_2_COPY_BIT_KHR                           = 0x100000000L,
+        VK_PIPELINE_STAGE_2_RESOLVE_BIT_KHR                        = 0x200000000L,
+        VK_PIPELINE_STAGE_2_BLIT_BIT_KHR                           = 0x400000000L,
+        VK_PIPELINE_STAGE_2_CLEAR_BIT_KHR                          = 0x800000000L,
+        VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT_KHR                    = 0x1000000000L,
+        VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT_KHR         = 0x2000000000L,
+        VK_PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS_BIT_KHR      = 0x4000000000L;
 
     /**
      * VkAccessFlagBits2KHR - Access flags for VkAccessFlags2KHR
@@ -479,28 +479,28 @@ public class KHRSynchronization2 {
      * <p>The {@code VkAccessFlags2KHR} bitmask goes beyond the 31 individual bit flags allowable within a C99 enum, which is how {@code VkAccessFlagBits} is defined. The first 31 values are common to both, and are interchangeable.</p>
      * </div>
      */
-    public static final int
-        VK_ACCESS_2_NONE_KHR                               = 0,
-        VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT_KHR          = 0x1,
-        VK_ACCESS_2_INDEX_READ_BIT_KHR                     = 0x2,
-        VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT_KHR          = 0x4,
-        VK_ACCESS_2_UNIFORM_READ_BIT_KHR                   = 0x8,
-        VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT_KHR          = 0x10,
-        VK_ACCESS_2_SHADER_READ_BIT_KHR                    = 0x20,
-        VK_ACCESS_2_SHADER_WRITE_BIT_KHR                   = 0x40,
-        VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT_KHR          = 0x80,
-        VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT_KHR         = 0x100,
-        VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT_KHR  = 0x200,
-        VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT_KHR = 0x400,
-        VK_ACCESS_2_TRANSFER_READ_BIT_KHR                  = 0x800,
-        VK_ACCESS_2_TRANSFER_WRITE_BIT_KHR                 = 0x1000,
-        VK_ACCESS_2_HOST_READ_BIT_KHR                      = 0x2000,
-        VK_ACCESS_2_HOST_WRITE_BIT_KHR                     = 0x4000,
-        VK_ACCESS_2_MEMORY_READ_BIT_KHR                    = 0x8000,
-        VK_ACCESS_2_MEMORY_WRITE_BIT_KHR                   = 0x10000,
-        VK_ACCESS_2_SHADER_SAMPLED_READ_BIT_KHR            = 0x1,
-        VK_ACCESS_2_SHADER_STORAGE_READ_BIT_KHR            = 0x2,
-        VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT_KHR           = 0x4;
+    public static final long
+        VK_ACCESS_2_NONE_KHR                               = 0L,
+        VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT_KHR          = 0x1L,
+        VK_ACCESS_2_INDEX_READ_BIT_KHR                     = 0x2L,
+        VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT_KHR          = 0x4L,
+        VK_ACCESS_2_UNIFORM_READ_BIT_KHR                   = 0x8L,
+        VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT_KHR          = 0x10L,
+        VK_ACCESS_2_SHADER_READ_BIT_KHR                    = 0x20L,
+        VK_ACCESS_2_SHADER_WRITE_BIT_KHR                   = 0x40L,
+        VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT_KHR          = 0x80L,
+        VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT_KHR         = 0x100L,
+        VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT_KHR  = 0x200L,
+        VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT_KHR = 0x400L,
+        VK_ACCESS_2_TRANSFER_READ_BIT_KHR                  = 0x800L,
+        VK_ACCESS_2_TRANSFER_WRITE_BIT_KHR                 = 0x1000L,
+        VK_ACCESS_2_HOST_READ_BIT_KHR                      = 0x2000L,
+        VK_ACCESS_2_HOST_WRITE_BIT_KHR                     = 0x4000L,
+        VK_ACCESS_2_MEMORY_READ_BIT_KHR                    = 0x8000L,
+        VK_ACCESS_2_MEMORY_WRITE_BIT_KHR                   = 0x10000L,
+        VK_ACCESS_2_SHADER_SAMPLED_READ_BIT_KHR            = 0x100000000L,
+        VK_ACCESS_2_SHADER_STORAGE_READ_BIT_KHR            = 0x200000000L,
+        VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT_KHR           = 0x400000000L;
 
     /**
      * VkSubmitFlagBitsKHR - Bitmask specifying behavior of a submission
@@ -685,12 +685,12 @@ public class KHRSynchronization2 {
      * @param event         the event that will be unsignaled.
      * @param stageMask     a {@code VkPipelineStageFlags2KHR} mask of pipeline stages used to determine the first <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">synchronization scope</a>.
      */
-    public static void vkCmdResetEvent2KHR(VkCommandBuffer commandBuffer, @NativeType("VkEvent") long event, @NativeType("VkPipelineStageFlags2KHR") int stageMask) {
+    public static void vkCmdResetEvent2KHR(VkCommandBuffer commandBuffer, @NativeType("VkEvent") long event, @NativeType("VkPipelineStageFlags2KHR") long stageMask) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdResetEvent2KHR;
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJV(commandBuffer.address(), event, stageMask, __functionAddress);
+        callPJJV(commandBuffer.address(), event, stageMask, __functionAddress);
     }
 
     // --- [ vkCmdWaitEvents2KHR ] ---
@@ -989,12 +989,12 @@ public class KHRSynchronization2 {
      * @param queryPool     the query pool that will manage the timestamp.
      * @param query         the query within the query pool that will contain the timestamp.
      */
-    public static void vkCmdWriteTimestamp2KHR(VkCommandBuffer commandBuffer, @NativeType("VkPipelineStageFlags2KHR") int stage, @NativeType("VkQueryPool") long queryPool, @NativeType("uint32_t") int query) {
+    public static void vkCmdWriteTimestamp2KHR(VkCommandBuffer commandBuffer, @NativeType("VkPipelineStageFlags2KHR") long stage, @NativeType("VkQueryPool") long queryPool, @NativeType("uint32_t") int query) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdWriteTimestamp2KHR;
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJV(commandBuffer.address(), stage, queryPool, query, __functionAddress);
+        callPJJV(commandBuffer.address(), stage, queryPool, query, __functionAddress);
     }
 
     // --- [ vkQueueSubmit2KHR ] ---
@@ -1197,12 +1197,12 @@ public class KHRSynchronization2 {
      * @param dstOffset     the byte offset into the buffer where the marker will be written.
      * @param marker        the 32-bit value of the marker.
      */
-    public static void vkCmdWriteBufferMarker2AMD(VkCommandBuffer commandBuffer, @NativeType("VkPipelineStageFlags2KHR") int stage, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("uint32_t") int marker) {
+    public static void vkCmdWriteBufferMarker2AMD(VkCommandBuffer commandBuffer, @NativeType("VkPipelineStageFlags2KHR") long stage, @NativeType("VkBuffer") long dstBuffer, @NativeType("VkDeviceSize") long dstOffset, @NativeType("uint32_t") int marker) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdWriteBufferMarker2AMD;
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJJV(commandBuffer.address(), stage, dstBuffer, dstOffset, marker, __functionAddress);
+        callPJJJV(commandBuffer.address(), stage, dstBuffer, dstOffset, marker, __functionAddress);
     }
 
     // --- [ vkGetQueueCheckpointData2NV ] ---

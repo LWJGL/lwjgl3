@@ -168,6 +168,7 @@ val VkSubmitFlagBitsKHR = "VkSubmitFlagBitsKHR".enumType
 val VkFragmentShadingRateTypeNV = "VkFragmentShadingRateTypeNV".enumType
 val VkFragmentShadingRateNV = "VkFragmentShadingRateNV".enumType
 val VkAccelerationStructureMotionInstanceTypeNV = "VkAccelerationStructureMotionInstanceTypeNV".enumType
+val VkFormatFeatureFlagBits2KHR = "VkFormatFeatureFlagBits2KHR".enumType
 
 // Bitmask types
 val VkCompositeAlphaFlagsKHR = typedef(VkFlags, "VkCompositeAlphaFlagsKHR")
@@ -231,6 +232,7 @@ val VkGeometryFlagsKHR = typedef(VkFlags, "VkGeometryFlagsKHR")
 val VkGeometryInstanceFlagsKHR = typedef(VkFlags, "VkGeometryInstanceFlagsKHR")
 val VkAccelerationStructureCreateFlagsKHR = typedef(VkFlags, "VkAccelerationStructureCreateFlagsKHR")
 val VkPipelineCoverageModulationStateCreateFlagsNV = typedef(VkFlags, "VkPipelineCoverageModulationStateCreateFlagsNV")
+val VkFormatFeatureFlags2KHR = typedef(VkFlags64, "VkFormatFeatureFlags2KHR")
 val VkValidationCacheCreateFlagsEXT = typedef(VkFlags, "VkValidationCacheCreateFlagsEXT")
 val VkDescriptorBindingFlagsEXT = typedef(VkFlags, "VkDescriptorBindingFlagsEXT")
 val VkGeometryFlagsNV = typedef(VkFlags, "VkGeometryFlagsNV")
@@ -254,8 +256,8 @@ val VkVideoEncodeFlagsKHR = typedef(VkFlags, "VkVideoEncodeFlagsKHR")
 val VkVideoEncodeRateControlFlagsKHR = typedef(VkFlags, "VkVideoEncodeRateControlFlagsKHR")
 val VkVideoEncodeRateControlModeFlagsKHR = typedef(VkFlags, "VkVideoEncodeRateControlModeFlagsKHR")
 val VkDeviceDiagnosticsConfigFlagsNV = typedef(VkFlags, "VkDeviceDiagnosticsConfigFlagsNV")
-val VkPipelineStageFlags2KHR = typedef(VkFlags, "VkPipelineStageFlags2KHR")
-val VkAccessFlags2KHR = typedef(VkFlags, "VkAccessFlags2KHR")
+val VkPipelineStageFlags2KHR = typedef(VkFlags64, "VkPipelineStageFlags2KHR")
+val VkAccessFlags2KHR = typedef(VkFlags64, "VkAccessFlags2KHR")
 val VkSubmitFlagsKHR = typedef(VkFlags, "VkSubmitFlagsKHR")
 val VkAccelerationStructureMotionInfoFlagsNV = typedef(VkFlags, "VkAccelerationStructureMotionInfoFlagsNV")
 val VkAccelerationStructureMotionInstanceFlagsNV = typedef(VkFlags, "VkAccelerationStructureMotionInstanceFlagsNV")
@@ -1815,8 +1817,8 @@ val VkPipelineRasterizationStateStreamCreateInfoEXT = struct(Module.VULKAN, "VkP
 val VkCuModuleCreateInfoNVX = struct(Module.VULKAN, "VkCuModuleCreateInfoNVX") {
     Expression("#STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX")..VkStructureType("sType", "")
     nullable..opaque_const_p("pNext", "")
-    size_t("dataSize", "")
-    opaque_const_p("pData", "")
+    AutoSize("pData")..size_t("dataSize", "")
+    void.const.p("pData", "")
 }
 
 val VkCuFunctionCreateInfoNVX = struct(Module.VULKAN, "VkCuFunctionCreateInfoNVX") {
@@ -3138,7 +3140,7 @@ val VkMemoryGetFdInfoKHR = struct(Module.VULKAN, "VkMemoryGetFdInfoKHR") {
         The properties of the file descriptor exported depend on the value of {@code handleType}. See {@code VkExternalMemoryHandleTypeFlagBits} for a description of the properties of the defined external memory handle types.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The size of the exported file <b>may</b> be larger than the size requested by ##VkMemoryAllocateInfo{@code ::allocationSize}. If {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT, then the application <b>can</b> query the file’s actual size with <a target="_blank" href="man:lseek(2)">lseek(2)</a>.
+        The size of the exported file <b>may</b> be larger than the size requested by ##VkMemoryAllocateInfo{@code ::allocationSize}. If {@code handleType} is #EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT, then the application <b>can</b> query the file’s actual size with <a target="_blank" href="https://man7.org/linux/man-pages/man2/lseek.2.html">{@code lseek}</a>.
         </div>
 
         <h5>Valid Usage</h5>
@@ -5908,7 +5910,7 @@ val VkAccelerationStructureGeometryInstancesDataKHR = struct(Module.VULKAN, "VkA
     Expression("#STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_INSTANCES_DATA_KHR")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("arrayOfPointers", "specifies whether {@code data} is used as an array of addresses or just an array.")
-    VkDeviceOrHostAddressConstKHR("data", "either the address of an array of device or host addresses referencing individual ##VkAccelerationStructureInstanceKHR structures or packed motion instance information as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#acceleration-structure-motion-instances\">motion instances</a> if {@code arrayOfPointers} is #TRUE, or the address of an array of ##VkAccelerationStructureInstanceKHR or ##VkAccelerationStructureMotionInstanceNV structures. Addresses and ##VkAccelerationStructureInstanceKHR structures are tightly packed. ##VkAccelerationStructureMotionInstanceNV have a stride of 160 bytes.")
+    VkDeviceOrHostAddressConstKHR("data", "either the address of an array of device or host addresses referencing individual ##VkAccelerationStructureInstanceKHR structures or packed motion instance information as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#acceleration-structure-motion-instances\">motion instances</a> if {@code arrayOfPointers} is #TRUE, or the address of an array of ##VkAccelerationStructureInstanceKHR or ##VkAccelerationStructureMotionInstanceNV structures. Addresses and ##VkAccelerationStructureInstanceKHR structures are tightly packed. ##VkAccelerationStructureMotionInstanceNV structures have a stride of 160 bytes.")
 }
 
 val VkAccelerationStructureGeometryDataKHR = union(Module.VULKAN, "VkAccelerationStructureGeometryDataKHR") {
@@ -6051,7 +6053,7 @@ val VkAccelerationStructureInstanceKHR = struct(Module.VULKAN, "VkAccelerationSt
 
     VkTransformMatrixKHR("transform", "a ##VkTransformMatrixKHR structure describing a transformation to be applied to the acceleration structure.")
     uint32_t("instanceCustomIndex", "a 24-bit user-specified index value accessible to ray shaders in the {@code InstanceCustomIndexKHR} built-in.", bits = 24)
-    uint32_t("mask", "an 8-bit visibility mask for the geometry. The instance <b>may</b> only be hit if {@code rayMask &amp; instance.mask != 0}", bits = 8)
+    uint32_t("mask", "an 8-bit visibility mask for the geometry. The instance <b>may</b> only be hit if {@code Cull Mask &amp; instance.mask != 0}", bits = 8)
     uint32_t("instanceShaderBindingTableRecordOffset", "a 24-bit offset used in calculating the hit shader binding table index.", bits = 24)
     VkGeometryInstanceFlagsKHR("flags", "an 8-bit mask of {@code VkGeometryInstanceFlagBitsKHR} values to apply to this instance.", bits = 8)
     uint64_t("accelerationStructureReference", """either:
@@ -7002,6 +7004,45 @@ val VkImageDrmFormatModifierPropertiesEXT = struct(Module.VULKAN, "VkImageDrmFor
     Expression("#STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint64_t("drmFormatModifier", "returns the image’s <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#glossary-drm-format-modifier\">Linux DRM format modifier</a>.")
+}
+
+val VkDrmFormatModifierProperties2EXT = struct(Module.VULKAN, "VkDrmFormatModifierProperties2EXT", mutable = false) {
+    documentation =
+        """
+        Structure specifying properties of a format when combined with a DRM format modifier.
+
+        <h5>See Also</h5>
+        ##VkDrmFormatModifierPropertiesList2EXT
+        """
+
+    uint64_t("drmFormatModifier", "a <em>Linux DRM format modifier</em>.")
+    uint32_t("drmFormatModifierPlaneCount", "the number of <em>memory planes</em> in any image created with {@code format} and {@code drmFormatModifier}. An image’s <em>memory planecount</em> is distinct from its <em>format planecount</em>, as explained below.")
+    VkFormatFeatureFlags2KHR("drmFormatModifierTilingFeatures", "a bitmask of {@code VkFormatFeatureFlagBits2KHR} that are supported by any image created with {@code format} and {@code drmFormatModifier}.")
+}
+
+val VkDrmFormatModifierPropertiesList2EXT = struct(Module.VULKAN, "VkDrmFormatModifierPropertiesList2EXT", mutable = false) {
+    documentation =
+        """
+        Structure specifying the list of DRM format modifiers supported for a format.
+
+        <h5>Description</h5>
+        If {@code pDrmFormatModifierProperties} is {@code NULL}, the number of modifiers compatible with the queried {@code format} is returned in {@code drmFormatModifierCount}. Otherwise, the application <b>must</b> set {@code drmFormatModifierCount} to the length of the array {@code pDrmFormatModifierProperties}; the function will write at most {@code drmFormatModifierCount} elements to the array, and will return in {@code drmFormatModifierCount} the number of elements written.
+
+        Among the elements in array {@code pDrmFormatModifierProperties}, each returned {@code drmFormatModifier} <b>must</b> be unique.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkDrmFormatModifierProperties2EXT
+        """
+
+    Expression("#STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT")..VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    AutoSize("pDrmFormatModifierProperties", optional = true)..uint32_t("drmFormatModifierCount", "an inout parameter related to the number of modifiers compatible with the {@code format}, as described below.")
+    nullable..VkDrmFormatModifierProperties2EXT.p("pDrmFormatModifierProperties", "either {@code NULL} or a pointer to an array of ##VkDrmFormatModifierProperties2EXT structures.")
 }
 
 val VkValidationCacheCreateInfoEXT = struct(Module.VULKAN, "VkValidationCacheCreateInfoEXT") {
@@ -8579,12 +8620,12 @@ val VkPhysicalDeviceMeshShaderPropertiesNV = struct(Module.VULKAN, "VkPhysicalDe
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint32_t("maxDrawMeshTasksCount", "the maximum number of local workgroups that <b>can</b> be launched by a single draw mesh tasks command. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#drawing-mesh-shading\">Programmable Mesh Shading</a>.")
-    uint32_t("maxTaskWorkGroupInvocations", "the maximum total number of task shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit.")
-    uint32_t("maxTaskWorkGroupSize", "the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit.")[3]
+    uint32_t("maxTaskWorkGroupInvocations", "the maximum total number of task shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit.")
+    uint32_t("maxTaskWorkGroupSize", "the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit.")[3]
     uint32_t("maxTaskTotalMemorySize", "the maximum number of bytes that the task shader can use in total for shared and output memory combined.")
     uint32_t("maxTaskOutputCount", "the maximum number of output tasks a single task shader workgroup can emit.")
-    uint32_t("maxMeshWorkGroupInvocations", "the maximum total number of mesh shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit.")
-    uint32_t("maxMeshWorkGroupSize", "the maximum size of a local mesh workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit.")[3]
+    uint32_t("maxMeshWorkGroupInvocations", "the maximum total number of mesh shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit.")
+    uint32_t("maxMeshWorkGroupSize", "the maximum size of a local mesh workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit.")[3]
     uint32_t("maxMeshTotalMemorySize", "the maximum number of bytes that the mesh shader can use in total for shared and output memory combined.")
     uint32_t("maxMeshOutputVertices", "the maximum number of vertices a mesh shader output can store.")
     uint32_t("maxMeshOutputPrimitives", "the maximum number of primitives a mesh shader output can store.")
@@ -12553,7 +12594,7 @@ val VkAccelerationStructureMatrixMotionInstanceNV = struct(Module.VULKAN, "VkAcc
     VkTransformMatrixKHR("transformT0", "a ##VkTransformMatrixKHR structure describing a transformation to be applied to the acceleration structure at time 0.")
     VkTransformMatrixKHR("transformT1", "a ##VkTransformMatrixKHR structure describing a transformation to be applied to the acceleration structure at time 1.")
     uint32_t("instanceCustomIndex", "a 24-bit user-specified index value accessible to ray shaders in the {@code InstanceCustomIndexKHR} built-in.", bits = 24)
-    uint32_t("mask", "an 8-bit visibility mask for the geometry. The instance <b>may</b> only be hit if {@code rayMask &amp; instance.mask != 0}", bits = 8)
+    uint32_t("mask", "an 8-bit visibility mask for the geometry. The instance <b>may</b> only be hit if {@code Cull Mask &amp; instance.mask != 0}", bits = 8)
     uint32_t("instanceShaderBindingTableRecordOffset", "a 24-bit offset used in calculating the hit shader binding table index.", bits = 24)
     VkGeometryInstanceFlagsKHR("flags", "an 8-bit mask of {@code VkGeometryInstanceFlagBitsKHR} values to apply to this instance.", bits = 8)
     uint64_t("accelerationStructureReference", """either:
@@ -12679,7 +12720,7 @@ val VkAccelerationStructureSRTMotionInstanceNV = struct(Module.VULKAN, "VkAccele
     VkSRTDataNV("transformT0", "a ##VkSRTDataNV structure describing a transformation to be applied to the acceleration structure at time 0.")
     VkSRTDataNV("transformT1", "a ##VkSRTDataNV structure describing a transformation to be applied to the acceleration structure at time 1.")
     uint32_t("instanceCustomIndex", "a 24-bit user-specified index value accessible to ray shaders in the {@code InstanceCustomIndexKHR} built-in.", bits = 24)
-    uint32_t("mask", "an 8-bit visibility mask for the geometry. The instance <b>may</b> only be hit if {@code rayMask &amp; instance.mask != 0}", bits = 8)
+    uint32_t("mask", "an 8-bit visibility mask for the geometry. The instance <b>may</b> only be hit if {@code Cull Mask &amp; instance.mask != 0}", bits = 8)
     uint32_t("instanceShaderBindingTableRecordOffset", "a 24-bit offset used in calculating the hit shader binding table index.", bits = 24)
     VkGeometryInstanceFlagsKHR("flags", "an 8-bit mask of {@code VkGeometryInstanceFlagBitsKHR} values to apply to this instance.", bits = 8)
     uint64_t("accelerationStructureReference", """either:
@@ -13318,13 +13359,13 @@ val VkBlitImageInfo2KHR = struct(Module.VULKAN, "VkBlitImageInfo2KHR") {
             <li>The destination region specified by each element of {@code pRegions} <b>must</b> be a region that is contained within {@code dstImage}</li>
             <li>The union of all destination regions, specified by the elements of {@code pRegions}, <b>must</b> not overlap in memory with any texel that <b>may</b> be sampled during the blit operation</li>
             <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#resources-image-format-features">format features</a> of {@code srcImage} <b>must</b> contain #FORMAT_FEATURE_BLIT_SRC_BIT</li>
-            <li>{@code srcImage} <b>must</b> not use a format listed in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">Formats requiring sampler Y'C<sub>B</sub>C<sub>R</sub> conversion for #IMAGE_ASPECT_COLOR_BIT image views</a></li>
+            <li>{@code srcImage} <b>must</b> not use a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">format that requires a sampler Y’C<sub>B</sub>C<sub>R</sub> conversion</a></li>
             <li>{@code srcImage} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_SRC_BIT usage flag</li>
             <li>If {@code srcImage} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
             <li>{@code srcImageLayout} <b>must</b> specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
             <li>{@code srcImageLayout} <b>must</b> be #IMAGE_LAYOUT_SHARED_PRESENT_KHR, #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL or #IMAGE_LAYOUT_GENERAL</li>
             <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#resources-image-format-features">format features</a> of {@code dstImage} <b>must</b> contain #FORMAT_FEATURE_BLIT_DST_BIT</li>
-            <li>{@code dstImage} <b>must</b> not use a format listed in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">Formats requiring sampler Y'C<sub>B</sub>C<sub>R</sub> conversion for #IMAGE_ASPECT_COLOR_BIT image views</a></li>
+            <li>{@code dstImage} <b>must</b> not use a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">format that requires a sampler Y’C<sub>B</sub>C<sub>R</sub> conversion</a></li>
             <li>{@code dstImage} <b>must</b> have been created with #IMAGE_USAGE_TRANSFER_DST_BIT usage flag</li>
             <li>If {@code dstImage} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
             <li>{@code dstImageLayout} <b>must</b> specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
@@ -13516,6 +13557,25 @@ val VkPhysicalDevice4444FormatsFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDe
             <li>#FORMAT_FEATURE_BLIT_SRC_BIT</li>
             <li>#FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</li>
         </ul>""")
+}
+
+val VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT") {
+    documentation =
+        """
+        Structure describing whether rendering to VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16 formats can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("formatRgba10x6WithoutYCbCrSampler", "indicates that #FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16 <b>can</b> be used with a {@code VkImageView} with {@code subresourceRange.aspectMask} equal to #IMAGE_ASPECT_COLOR_BIT without a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#samplers-YCbCr-conversion\">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> enabled.")
 }
 
 val VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE = struct(Module.VULKAN, "VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE") {
@@ -13741,6 +13801,27 @@ val VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT = struct(Module.VULK
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("primitiveTopologyListRestart", "indicates that list type primitives, #PRIMITIVE_TOPOLOGY_POINT_LIST, #PRIMITIVE_TOPOLOGY_LINE_LIST, #PRIMITIVE_TOPOLOGY_TRIANGLE_LIST, #PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY and #PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY, <b>can</b> use the primitive restart index value in index buffers.")
     VkBool32("primitiveTopologyPatchListRestart", "indicates that the #PRIMITIVE_TOPOLOGY_PATCH_LIST topology <b>can</b> use the primitive restart index value in index buffers.")
+}
+
+val VkFormatProperties3KHR = struct(Module.VULKAN, "VkFormatProperties3KHR", mutable = false) {
+    documentation =
+        """
+        Structure specifying image format properties.
+
+        <h5>Description</h5>
+        The bits reported in {@code linearTilingFeatures}, {@code optimalTilingFeatures} and {@code bufferFeatures} <b>must</b> include the bits reported in the corresponding fields of ##VkFormatProperties2{@code ::formatProperties}.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR")..VkStructureType("sType", "").mutable()
+    nullable..opaque_p("pNext", "").mutable()
+    VkFormatFeatureFlags2KHR("linearTilingFeatures", "a bitmask of {@code VkFormatFeatureFlagBits2KHR} specifying features supported by images created with a {@code tiling} parameter of #IMAGE_TILING_LINEAR.")
+    VkFormatFeatureFlags2KHR("optimalTilingFeatures", "a bitmask of {@code VkFormatFeatureFlagBits2KHR} specifying features supported by images created with a {@code tiling} parameter of #IMAGE_TILING_OPTIMAL.")
+    VkFormatFeatureFlags2KHR("bufferFeatures", "a bitmask of {@code VkFormatFeatureFlagBits2KHR} specifying features supported by buffers.")
 }
 
 val VkSubpassShadingPipelineCreateInfoHUAWEI = struct(Module.VULKAN, "VkSubpassShadingPipelineCreateInfoHUAWEI", mutable = false) {
@@ -14091,4 +14172,104 @@ val VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT = struct(Module.VULKAN,
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("pageableDeviceLocalMemory", "indicates that the implementation supports pageable device-local memory and <b>may</b> transparently move device-local memory allocations to host-local memory to better share device-local memory with other applications.")
+}
+
+val VkPhysicalDeviceMaintenance4FeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceMaintenance4FeaturesKHR") {
+    documentation =
+        """
+        Structure describing whether the implementation supports maintenance4 functionality.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceMaintenance4FeaturesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceMaintenance4FeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR")..VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("maintenance4", """indicates that the implementation supports the following:
+
+        <ul>
+            <li>The application <b>may</b> destroy a {@code VkPipelineLayout} object immediately after using it to create another object.</li>
+            <li>{@code LocalSizeId} <b>can</b> be used as an alternative to {@code LocalSize} to specify the local workgroup size with specialization constants.</li>
+            <li>Images created with identical creation parameters will always have the same alignment requirements.</li>
+            <li>The size memory requirement of a buffer or image is never greater than that of another buffer or image created with a greater or equal size.</li>
+            <li>Push constants do not have to be initialized before they are dynamically accessed.</li>
+            <li>The interface matching rules allow a larger output vector to match with a smaller input vector, with additional values being discarded.</li>
+        </ul>""")
+}
+
+val VkPhysicalDeviceMaintenance4PropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceMaintenance4PropertiesKHR", mutable = false) {
+    documentation =
+        """
+        Structure describing various implementation-defined properties introduced with VK_KHR_maintenance4.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceMaintenance4PropertiesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR")..VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    VkDeviceSize("maxBufferSize", "the maximum size {@code VkBuffer} that <b>can</b> be created.")
+}
+
+val VkDeviceBufferMemoryRequirementsKHR = struct(Module.VULKAN, "VkDeviceBufferMemoryRequirementsKHR") {
+    documentation =
+        """
+        (None).
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid ##VkBufferCreateInfo structure</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkBufferCreateInfo, #GetDeviceBufferMemoryRequirementsKHR()
+        """
+
+    Expression("#STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBufferCreateInfo.const.p("pCreateInfo", "a pointer to a ##VkBufferCreateInfo structure containing parameters affecting creation of the buffer to query.")
+}
+
+val VkDeviceImageMemoryRequirementsKHR = struct(Module.VULKAN, "VkDeviceImageMemoryRequirementsKHR") {
+    documentation =
+        """
+        (None).
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The {@code pCreateInfo}{@code ::pNext} chain <b>must</b> not contain a ##VkImageSwapchainCreateInfoKHR structure</li>
+            <li>If {@code pCreateInfo}{@code ::flags} has #IMAGE_CREATE_DISJOINT_BIT set then {@code planAspect} <b>must</b> not be zero</li>
+            <li>If {@code pCreateInfo}{@code ::flags} has #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT set then {@code planAspect} <b>must</b> not be zero</li>
+            <li>If {@code pCreateInfo}{@code ::flags} has #IMAGE_CREATE_DISJOINT_BIT set and if the {@code pCreateInfo}{@code ::tiling} is #IMAGE_TILING_LINEAR or #IMAGE_TILING_OPTIMAL, then {@code planeAspect} <b>must</b> be a single valid <em>format plane</em> for the image (that is, for a two-plane image {@code planeAspect} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT or #IMAGE_ASPECT_PLANE_1_BIT, and for a three-plane image {@code planeAspect} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT or #IMAGE_ASPECT_PLANE_2_BIT)</li>
+            <li>If {@code pCreateInfo}{@code ::flags} has #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT set and the {@code pCreateInfo}{@code ::tiling} is #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, then {@code planeAspect} <b>must</b> be a single valid <em>memory plane</em> for the image (that is, {@code aspectMask} <b>must</b> specify a plane index that is less than the ##VkDrmFormatModifierPropertiesEXT{@code ::drmFormatModifierPlaneCount} associated with the image’s {@code format} and ##VkImageDrmFormatModifierPropertiesEXT{@code ::drmFormatModifier})</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid ##VkImageCreateInfo structure</li>
+            <li>{@code planeAspect} <b>must</b> be a valid {@code VkImageAspectFlagBits} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkImageCreateInfo, #GetDeviceImageMemoryRequirementsKHR(), #GetDeviceImageSparseMemoryRequirementsKHR()
+        """
+
+    Expression("#STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkImageCreateInfo.const.p("pCreateInfo", "a pointer to a ##VkImageCreateInfo structure containing parameters affecting creation of the image to query.")
+    VkImageAspectFlagBits("planeAspect", "a {@code VkImageAspectFlagBits} value specifying the aspect corresponding to the image plane to query. This parameter is ignored unless {@code pCreateInfo}{@code ::flags} has #IMAGE_CREATE_DISJOINT_BIT or #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT set.")
 }

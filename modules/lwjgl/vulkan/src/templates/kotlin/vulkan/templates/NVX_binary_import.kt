@@ -34,7 +34,7 @@ val NVX_binary_import = "NVXBinaryImport".nativeClassVK("NVX_binary_import", typ
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Eric Werness <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NVX_binary_import]%20@ewerness%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NVX_binary_import%20extension%3E%3E">ewerness</a></li>
+                <li>Eric Werness <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NVX_binary_import]%20@ewerness-nv%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NVX_binary_import%20extension%3E%3E">ewerness-nv</a></li>
                 <li>Liam Middlebrook <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NVX_binary_import]%20@liam-middlebrook%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NVX_binary_import%20extension%3E%3E">liam-middlebrook</a></li>
             </ul></dd>
         </dl>

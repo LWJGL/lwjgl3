@@ -27,7 +27,7 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
             <dd>25</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -46,7 +46,7 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2021-03-29</dd>
+            <dd>2021-09-30</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -66,7 +66,7 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
     IntConstant(
         "The extension specification version.",
 
-        "KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION".."1"
+        "KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -87,17 +87,17 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
         "QUEUE_VIDEO_DECODE_BIT_KHR".enum(0x00000020)
     )
 
-    EnumConstant(
+    EnumConstantLong(
         "Extends {@code VkPipelineStageFlagBits2KHR}.",
 
-        "PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR".enum(0x04000000)
+        "PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR".enum(0x04000000L)
     )
 
-    EnumConstant(
+    EnumConstantLong(
         "Extends {@code VkAccessFlagBits2KHR}.",
 
-        "ACCESS_2_VIDEO_DECODE_READ_BIT_KHR".enum(0x00000008),
-        "ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR".enum(0x00000010)
+        "ACCESS_2_VIDEO_DECODE_READ_BIT_KHR".enum(0x800000000L),
+        "ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR".enum(0x1000000000L)
     )
 
     EnumConstant(
@@ -128,6 +128,13 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
         "IMAGE_LAYOUT_VIDEO_DECODE_DST_KHR".."1000024000",
         "IMAGE_LAYOUT_VIDEO_DECODE_SRC_KHR".."1000024001",
         "IMAGE_LAYOUT_VIDEO_DECODE_DPB_KHR".."1000024002"
+    )
+
+    EnumConstantLong(
+        "Extends {@code VkFormatFeatureFlagBits2KHR}.",
+
+        "FORMAT_FEATURE_2_VIDEO_DECODE_OUTPUT_BIT_KHR".enum(0x02000000L),
+        "FORMAT_FEATURE_2_VIDEO_DECODE_DPB_BIT_KHR".enum(0x04000000L)
     )
 
     EnumConstant(

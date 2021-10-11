@@ -87,10 +87,10 @@ val EXT_vertex_input_dynamic_state = "EXTVertexInputDynamicState".nativeClassVK(
     void(
         "CmdSetVertexInputEXT",
         """
-        Set the dynamic vertex input state.
+        Set the vertex input state dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        An alternative to specifying the vertex input attribute and vertex input binding descriptions as part of graphics pipeline creation, the pipeline <b>can</b> be created with the #DYNAMIC_STATE_VERTEX_INPUT_EXT dynamic state enabled, and for that state to be set dynamically with:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the vertex input attribute and vertex input binding descriptions, call:
 
         <pre><code>
 ￿void vkCmdSetVertexInputEXT(
@@ -101,7 +101,9 @@ val EXT_vertex_input_dynamic_state = "EXTVertexInputDynamicState".nativeClassVK(
 ￿    const VkVertexInputAttributeDescription2EXT* pVertexAttributeDescriptions);</code></pre>
 
         <h5>Description</h5>
-        This command sets the vertex input attribute and vertex input binding descriptions state for subsequent drawing commands.
+        This command sets the vertex input attribute and vertex input binding descriptions state for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_VERTEX_INPUT_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkGraphicsPipelineCreateInfo{@code ::pVertexInputState} values used to create the currently active pipeline.
+
+        If the bound pipeline state object was also created with the #DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT dynamic state enabled, then #CmdBindVertexBuffers2EXT() can be used instead of {@code vkCmdSetVertexInputEXT} to dynamically set the stride.
 
         <h5>Valid Usage</h5>
         <ul>

@@ -110,19 +110,21 @@ public class EXTLineRasterization {
     // --- [ vkCmdSetLineStippleEXT ] ---
 
     /**
-     * Set the dynamic line width state.
+     * Set line stipple dynamically for a command buffer.
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>The line stipple factor and pattern are specified by the {@link VkPipelineRasterizationLineStateCreateInfoEXT}{@code ::lineStippleFactor} and {@link VkPipelineRasterizationLineStateCreateInfoEXT}{@code ::lineStipplePattern} members of the currently active pipeline, if the pipeline was not created with {@link #VK_DYNAMIC_STATE_LINE_STIPPLE_EXT DYNAMIC_STATE_LINE_STIPPLE_EXT} enabled.</p>
-     * 
-     * <p>Otherwise, the line stipple factor and pattern are set by calling {@code vkCmdSetLineStippleEXT}:</p>
+     * <p>To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#pipelines-dynamic-state">dynamically set</a> the line stipple state, call:</p>
      * 
      * <pre><code>
      * void vkCmdSetLineStippleEXT(
      *     VkCommandBuffer                             commandBuffer,
      *     uint32_t                                    lineStippleFactor,
      *     uint16_t                                    lineStipplePattern);</code></pre>
+     * 
+     * <h5>Description</h5>
+     * 
+     * <p>This command sets the line stipple state for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_LINE_STIPPLE_EXT DYNAMIC_STATE_LINE_STIPPLE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineRasterizationLineStateCreateInfoEXT}{@code ::lineStippleFactor} and {@link VkPipelineRasterizationLineStateCreateInfoEXT}{@code ::lineStipplePattern} values used to create the currently active pipeline.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

@@ -33,7 +33,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <dd>151</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>12</dd>
+            <dd>13</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -52,7 +52,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2020-11-12</dd>
+            <dd>2021-09-30</dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
@@ -105,7 +105,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
     IntConstant(
         "The extension specification version.",
 
-        "KHR_ACCELERATION_STRUCTURE_SPEC_VERSION".."12"
+        "KHR_ACCELERATION_STRUCTURE_SPEC_VERSION".."13"
     )
 
     StringConstant(
@@ -189,6 +189,12 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         "BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR".enum(0x00080000),
         "BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR".enum(0x00100000)
+    )
+
+    EnumConstantLong(
+        "Extends {@code VkFormatFeatureFlagBits2KHR}.",
+
+        "FORMAT_FEATURE_2_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR".enum(0x20000000L)
     )
 
     EnumConstant(

@@ -100,11 +100,11 @@ public class EXTColorWriteEnable {
     }
 
     /**
-     * Enable or disable writes to a color attachment.
+     * Enable or disable writes to a color attachment dynamically for a command buffer.
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To dynamically enable or disable color writes, call:</p>
+     * <p>To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#pipelines-dynamic-state">dynamically enable or disable</a> writes to a color attachment, call:</p>
      * 
      * <pre><code>
      * void                                    vkCmdSetColorWriteEnableEXT(
@@ -114,7 +114,7 @@ public class EXTColorWriteEnable {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This command sets the state for a given draw when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}.</p>
+     * <p>This command sets the color write enables for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineColorWriteCreateInfoEXT}{@code ::pColorWriteEnables} values used to create the currently active pipeline.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

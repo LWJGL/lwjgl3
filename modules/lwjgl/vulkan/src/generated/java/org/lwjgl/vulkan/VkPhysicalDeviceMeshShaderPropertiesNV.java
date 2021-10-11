@@ -137,13 +137,13 @@ public class VkPhysicalDeviceMeshShaderPropertiesNV extends Struct implements Na
     /** the maximum number of local workgroups that <b>can</b> be launched by a single draw mesh tasks command. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#drawing-mesh-shading">Programmable Mesh Shading</a>. */
     @NativeType("uint32_t")
     public int maxDrawMeshTasksCount() { return nmaxDrawMeshTasksCount(address()); }
-    /** the maximum total number of task shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit. */
+    /** the maximum total number of task shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit. */
     @NativeType("uint32_t")
     public int maxTaskWorkGroupInvocations() { return nmaxTaskWorkGroupInvocations(address()); }
-    /** the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. */
+    /** the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. */
     @NativeType("uint32_t[3]")
     public IntBuffer maxTaskWorkGroupSize() { return nmaxTaskWorkGroupSize(address()); }
-    /** the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. */
+    /** the maximum size of a local task workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. */
     @NativeType("uint32_t")
     public int maxTaskWorkGroupSize(int index) { return nmaxTaskWorkGroupSize(address(), index); }
     /** the maximum number of bytes that the task shader can use in total for shared and output memory combined. */
@@ -152,13 +152,13 @@ public class VkPhysicalDeviceMeshShaderPropertiesNV extends Struct implements Na
     /** the maximum number of output tasks a single task shader workgroup can emit. */
     @NativeType("uint32_t")
     public int maxTaskOutputCount() { return nmaxTaskOutputCount(address()); }
-    /** the maximum total number of mesh shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit. */
+    /** the maximum total number of mesh shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit. */
     @NativeType("uint32_t")
     public int maxMeshWorkGroupInvocations() { return nmaxMeshWorkGroupInvocations(address()); }
-    /** the maximum size of a local mesh workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. */
+    /** the maximum size of a local mesh workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. */
     @NativeType("uint32_t[3]")
     public IntBuffer maxMeshWorkGroupSize() { return nmaxMeshWorkGroupSize(address()); }
-    /** the maximum size of a local mesh workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. */
+    /** the maximum size of a local mesh workgroup. These three values represent the maximum local workgroup size in the X, Y, and Z dimensions, respectively. The {@code x}, {@code y}, and {@code z} sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode or by the object decorated by the {@code WorkgroupSize} decoration in shader modules, <b>must</b> be less than or equal to the corresponding limit. */
     @NativeType("uint32_t")
     public int maxMeshWorkGroupSize(int index) { return nmaxMeshWorkGroupSize(address(), index); }
     /** the maximum number of bytes that the mesh shader can use in total for shared and output memory combined. */

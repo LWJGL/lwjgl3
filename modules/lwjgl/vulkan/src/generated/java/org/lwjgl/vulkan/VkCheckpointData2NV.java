@@ -60,7 +60,7 @@ public class VkCheckpointData2NV extends Struct implements NativeResource {
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
-            __member(4),
+            __member(8),
             __member(POINTER_SIZE)
         );
 
@@ -94,7 +94,7 @@ public class VkCheckpointData2NV extends Struct implements NativeResource {
     public long pNext() { return npNext(address()); }
     /** indicates a single pipeline stage which the checkpoint marker data refers to. */
     @NativeType("VkPipelineStageFlags2KHR")
-    public int stage() { return nstage(address()); }
+    public long stage() { return nstage(address()); }
     /** contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to. */
     @NativeType("void *")
     public long pCheckpointMarker() { return npCheckpointMarker(address()); }
@@ -248,7 +248,7 @@ public class VkCheckpointData2NV extends Struct implements NativeResource {
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkCheckpointData2NV.PNEXT); }
     /** Unsafe version of {@link #stage}. */
-    public static int nstage(long struct) { return UNSAFE.getInt(null, struct + VkCheckpointData2NV.STAGE); }
+    public static long nstage(long struct) { return UNSAFE.getLong(null, struct + VkCheckpointData2NV.STAGE); }
     /** Unsafe version of {@link #pCheckpointMarker}. */
     public static long npCheckpointMarker(long struct) { return memGetAddress(struct + VkCheckpointData2NV.PCHECKPOINTMARKER); }
 
@@ -303,7 +303,7 @@ public class VkCheckpointData2NV extends Struct implements NativeResource {
         public long pNext() { return VkCheckpointData2NV.npNext(address()); }
         /** @return the value of the {@link VkCheckpointData2NV#stage} field. */
         @NativeType("VkPipelineStageFlags2KHR")
-        public int stage() { return VkCheckpointData2NV.nstage(address()); }
+        public long stage() { return VkCheckpointData2NV.nstage(address()); }
         /** @return the value of the {@link VkCheckpointData2NV#pCheckpointMarker} field. */
         @NativeType("void *")
         public long pCheckpointMarker() { return VkCheckpointData2NV.npCheckpointMarker(address()); }

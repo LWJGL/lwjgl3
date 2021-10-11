@@ -38,6 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code flags} includes {@link VK12#VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT}, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-bufferDeviceAddressCaptureReplay">bufferDeviceAddressCaptureReplay</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-bufferDeviceAddressCaptureReplayEXT">{@link VkPhysicalDeviceBufferDeviceAddressFeaturesEXT}{@code ::bufferDeviceAddressCaptureReplay}</a> feature <b>must</b> be enabled</li>
  * <li>If {@code usage} includes {@link KHRVideoDecodeQueue#VK_BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR}, {@link KHRVideoDecodeQueue#VK_BUFFER_USAGE_VIDEO_DECODE_DST_BIT_KHR BUFFER_USAGE_VIDEO_DECODE_DST_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a valid {@link VkVideoProfilesKHR} structure which includes at least one {@link VkVideoProfileKHR} with a decode codec-operation</li>
  * <li>If {@code usage} includes {@link KHRVideoEncodeQueue#VK_BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR}, {@link KHRVideoEncodeQueue#VK_BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a valid {@link VkVideoProfilesKHR} structure which includes at least one {@link VkVideoProfileKHR} with a encode codec-operation</li>
+ * <li>{@code size} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMaintenance4PropertiesKHR}{@code ::maxBufferSize}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -54,7 +55,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VK10#vkCreateBuffer CreateBuffer}</p>
+ * <p>{@link VkDeviceBufferMemoryRequirementsKHR}, {@link VK10#vkCreateBuffer CreateBuffer}</p>
  * 
  * <h3>Layout</h3>
  * 

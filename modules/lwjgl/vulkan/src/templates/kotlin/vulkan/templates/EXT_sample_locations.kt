@@ -98,17 +98,18 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
     void(
         "CmdSetSampleLocationsEXT",
         """
-        Set the dynamic sample locations state.
+        Set sample locations dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        The custom sample locations used for rasterization when ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsEnable} is #TRUE are specified by the ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsInfo} property of the bound graphics pipeline, if the pipeline was not created with #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT enabled.
-
-        Otherwise, the sample locations used for rasterization are set by calling {@code vkCmdSetSampleLocationsEXT}:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the sample locations used for rasterization, call:
 
         <pre><code>
 ￿void vkCmdSetSampleLocationsEXT(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    const VkSampleLocationsInfoEXT*             pSampleLocationsInfo);</code></pre>
+
+        <h5>Description</h5>
+        This command sets the custom sample locations for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}, and when the ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsEnable} property of the bound graphics pipeline is #TRUE. Otherwise, this state is specified by the ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsInfo} values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

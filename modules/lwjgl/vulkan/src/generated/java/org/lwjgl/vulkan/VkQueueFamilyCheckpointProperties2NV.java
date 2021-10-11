@@ -55,7 +55,7 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
-            __member(4)
+            __member(8)
         );
 
         SIZEOF = layout.getSize();
@@ -87,7 +87,7 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
     public long pNext() { return npNext(address()); }
     /** a mask indicating which pipeline stages the implementation can execute checkpoint markers in. */
     @NativeType("VkPipelineStageFlags2KHR")
-    public int checkpointExecutionStageMask() { return ncheckpointExecutionStageMask(address()); }
+    public long checkpointExecutionStageMask() { return ncheckpointExecutionStageMask(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkQueueFamilyCheckpointProperties2NV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -238,7 +238,7 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkQueueFamilyCheckpointProperties2NV.PNEXT); }
     /** Unsafe version of {@link #checkpointExecutionStageMask}. */
-    public static int ncheckpointExecutionStageMask(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyCheckpointProperties2NV.CHECKPOINTEXECUTIONSTAGEMASK); }
+    public static long ncheckpointExecutionStageMask(long struct) { return UNSAFE.getLong(null, struct + VkQueueFamilyCheckpointProperties2NV.CHECKPOINTEXECUTIONSTAGEMASK); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyCheckpointProperties2NV.STYPE, value); }
@@ -291,7 +291,7 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
         public long pNext() { return VkQueueFamilyCheckpointProperties2NV.npNext(address()); }
         /** @return the value of the {@link VkQueueFamilyCheckpointProperties2NV#checkpointExecutionStageMask} field. */
         @NativeType("VkPipelineStageFlags2KHR")
-        public int checkpointExecutionStageMask() { return VkQueueFamilyCheckpointProperties2NV.ncheckpointExecutionStageMask(address()); }
+        public long checkpointExecutionStageMask() { return VkQueueFamilyCheckpointProperties2NV.ncheckpointExecutionStageMask(address()); }
 
         /** Sets the specified value to the {@link VkQueueFamilyCheckpointProperties2NV#sType} field. */
         public VkQueueFamilyCheckpointProperties2NV.Buffer sType(@NativeType("VkStructureType") int value) { VkQueueFamilyCheckpointProperties2NV.nsType(address(), value); return this; }

@@ -25,7 +25,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>300</dd>
  * <dt><b>Revision</b></dt>
- * <dd>2</dd>
+ * <dd>3</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -43,7 +43,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2021-03-29</dd>
+ * <dd>2021-09-30</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -65,13 +65,13 @@ import static org.lwjgl.system.JNI.*;
 public class KHRVideoEncodeQueue {
 
     /** The extension specification version. */
-    public static final int VK_KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION = 2;
+    public static final int VK_KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String VK_KHR_VIDEO_ENCODE_QUEUE_EXTENSION_NAME = "VK_KHR_video_encode_queue";
 
     /** Extends {@code VkPipelineStageFlagBits2KHR}. */
-    public static final int VK_PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR = 0x8000000;
+    public static final long VK_PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR = 0x8000000L;
 
     /**
      * Extends {@code VkAccessFlagBits2KHR}.
@@ -83,9 +83,9 @@ public class KHRVideoEncodeQueue {
      * <li>{@link #VK_ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR}</li>
      * </ul>
      */
-    public static final int
-        VK_ACCESS_2_VIDEO_ENCODE_READ_BIT_KHR  = 0x20,
-        VK_ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR = 0x40;
+    public static final long
+        VK_ACCESS_2_VIDEO_ENCODE_READ_BIT_KHR  = 0x2000000000L,
+        VK_ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR = 0x4000000000L;
 
     /**
      * Extends {@code VkStructureType}.
@@ -166,6 +166,20 @@ public class KHRVideoEncodeQueue {
 
     /** Extends {@code VkQueryType}. */
     public static final int VK_QUERY_TYPE_VIDEO_ENCODE_BITSTREAM_BUFFER_RANGE_KHR = 1000299000;
+
+    /**
+     * Extends {@code VkFormatFeatureFlagBits2KHR}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_FORMAT_FEATURE_2_VIDEO_ENCODE_INPUT_BIT_KHR FORMAT_FEATURE_2_VIDEO_ENCODE_INPUT_BIT_KHR}</li>
+     * <li>{@link #VK_FORMAT_FEATURE_2_VIDEO_ENCODE_DPB_BIT_KHR FORMAT_FEATURE_2_VIDEO_ENCODE_DPB_BIT_KHR}</li>
+     * </ul>
+     */
+    public static final long
+        VK_FORMAT_FEATURE_2_VIDEO_ENCODE_INPUT_BIT_KHR = 0x8000000L,
+        VK_FORMAT_FEATURE_2_VIDEO_ENCODE_DPB_BIT_KHR   = 0x10000000L;
 
     /**
      * VkVideoEncodeFlagBitsKHR - Video Encode Command Flags

@@ -133,16 +133,23 @@ val NV_fragment_shading_rate_enums = "NVFragmentShadingRateEnums".nativeClassVK(
     void(
         "CmdSetFragmentShadingRateEnumNV",
         """
-        Set pipeline fragment shading rate dynamically using enums.
+        Set pipeline fragment shading rate dynamically for a command buffer using enums.
 
         <h5>C Specification</h5>
-        If a pipeline state object is created with #DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR enabled, the pipeline fragment shading rate and combiner operation <b>may</b> be set by the command:
+        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the pipeline fragment shading rate and combiner operation, call:
 
         <pre><code>
 ￿void vkCmdSetFragmentShadingRateEnumNV(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    VkFragmentShadingRateNV                     shadingRate,
 ￿    const VkFragmentShadingRateCombinerOpKHR    combinerOps[2]);</code></pre>
+
+        <h5>Description</h5>
+        This command sets the pipeline fragment shading rate and combiner operation for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineFragmentShadingRateEnumStateCreateInfoNV values used to create the currently active pipeline.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        This command allows specifying additional shading rates beyond those supported by #CmdSetFragmentShadingRateKHR(). For more information, refer to the {@link NVFragmentShadingRateEnums VK_NV_fragment_shading_rate_enums} appendix.
+        </div>
 
         <h5>Valid Usage</h5>
         <ul>
