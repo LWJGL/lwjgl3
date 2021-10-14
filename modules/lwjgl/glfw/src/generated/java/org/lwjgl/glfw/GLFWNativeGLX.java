@@ -45,6 +45,8 @@ public class GLFWNativeGLX {
      * @param window a GLFW window
      *
      * @return the {@code GLXContext} of the specified window, or {@code NULL} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.0
      */
@@ -67,6 +69,8 @@ public class GLFWNativeGLX {
      * @param window a GLFW window
      *
      * @return the {@code GLXWindow} of the specified window, or {@code None} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.2
      */

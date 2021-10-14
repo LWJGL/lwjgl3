@@ -53,7 +53,9 @@ public class GLFWNativeWin32 {
      *
      * @param monitor the GLFW monitor
      *
-     * @return the UTF-8 encoded adapter device name (for example `\\.\DISPLAY1`) of the specified monitor, or {@code NULL} if an error occurred
+     * @return the UTF-8 encoded adapter device name (for example `\\.\DISPLAY1`) of the specified monitor, or {@code NULL} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.1
      */
@@ -82,7 +84,9 @@ public class GLFWNativeWin32 {
      *
      * @param monitor the GLFW monitor
      *
-     * @return the UTF-8 encoded display device name (for example `\\.\DISPLAY1\Monitor0`) of the specified monitor, or {@code NULL} if an error occurred
+     * @return the UTF-8 encoded display device name (for example `\\.\DISPLAY1\Monitor0`) of the specified monitor, or {@code NULL} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.1
      */
@@ -108,7 +112,9 @@ public class GLFWNativeWin32 {
      *
      * @param window the GLFW window
      *
-     * @return the {@code HWND} of the specified window, or {@code NULL} if an error occurred
+     * @return the {@code HWND} of the specified window, or {@code NULL} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.0
      */

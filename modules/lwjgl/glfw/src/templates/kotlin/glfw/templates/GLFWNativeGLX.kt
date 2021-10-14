@@ -26,7 +26,13 @@ val GLFWNativeGLX = "GLFWNativeGLX".nativeClass(Module.GLFW, nativeSubPath = "li
         """,
 
         GLFWwindow.p("window", "a GLFW window"),
-        returnDoc = "the {@code GLXContext} of the specified window, or #NULL if an error occurred.",
+
+        returnDoc =
+        """
+        the {@code GLXContext} of the specified window, or #NULL if an error occurred.
+        
+        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
+        """,
         since = "version 3.0"
     )
 
@@ -39,7 +45,13 @@ val GLFWNativeGLX = "GLFWNativeGLX".nativeClass(Module.GLFW, nativeSubPath = "li
         """,
 
         GLFWwindow.p("window", "a GLFW window"),
-        returnDoc = "the {@code GLXWindow} of the specified window, or {@code None} if an error occurred.",
+
+        returnDoc =
+        """
+        the {@code GLXWindow} of the specified window, or {@code None} if an error occurred.
+        
+        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
+        """,
         since = "version 3.2"
     )
 

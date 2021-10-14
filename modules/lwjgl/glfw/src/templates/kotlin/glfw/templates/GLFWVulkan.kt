@@ -26,9 +26,9 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         """
         Returns whether the Vulkan loader has been found. This check is performed by #Init().
 
-        The availability of a Vulkan loader does not by itself guarantee that window surface creation or even device creation is possible. Call
-        #GetRequiredInstanceExtensions() to check whether the extensions necessary for Vulkan surface creation are available and
-        #GetPhysicalDevicePresentationSupport() to check whether a queue family of a physical device supports image presentation.
+         The availability of a Vulkan loader and even an ICD does not by itself guarantee that surface creation or even instance creation is possible. Call
+         #GetRequiredInstanceExtensions() to check whether the extensions necessary for Vulkan surface creation are available and
+         #GetPhysicalDevicePresentationSupport() to check whether a queue family of a physical device supports image presentation.
 
         Possible errors include #NOT_INITIALIZED.
 

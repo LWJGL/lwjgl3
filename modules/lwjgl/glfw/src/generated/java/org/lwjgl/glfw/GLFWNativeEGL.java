@@ -45,7 +45,9 @@ public class GLFWNativeEGL {
      * 
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
-     * @return the {@code EGLDisplay} used by GLFW, or {@link EGL10#EGL_NO_DISPLAY} if an error occured
+     * @return the {@code EGLDisplay} used by GLFW, or {@link EGL10#EGL_NO_DISPLAY} if an error occured.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.0
      */
@@ -64,7 +66,9 @@ public class GLFWNativeEGL {
      *
      * @param window a GLFW window
      *
-     * @return the {@code EGLContext} of the specified window, or {@link EGL10#EGL_NO_CONTEXT} if an error occurred
+     * @return the {@code EGLContext} of the specified window, or {@link EGL10#EGL_NO_CONTEXT} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.0
      */
@@ -84,7 +88,9 @@ public class GLFWNativeEGL {
      * 
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
-     * @return the {@code EGLSurface} of the specified window, or {@link EGL10#EGL_NO_SURFACE} if an error occurred
+     * @return the {@code EGLSurface} of the specified window, or {@link EGL10#EGL_NO_SURFACE} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.0
      */

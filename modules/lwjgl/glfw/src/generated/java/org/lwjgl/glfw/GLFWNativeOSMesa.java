@@ -65,7 +65,9 @@ public class GLFWNativeOSMesa {
      * @param format where to store the OSMesa pixel format of the color buffer, or {@code NULL}
      * @param buffer where to store the address of the color buffer, or {@code NULL}
      *
-     * @return {@link GLFW#GLFW_TRUE TRUE} if successful, or {@link GLFW#GLFW_FALSE FALSE} if an error occurred
+     * @return {@link GLFW#GLFW_TRUE TRUE} if successful, or {@link GLFW#GLFW_FALSE FALSE} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.3
      */
@@ -102,7 +104,9 @@ public class GLFWNativeOSMesa {
      * @param bytesPerValue where to store the number of bytes per depth buffer element, or {@code NULL}
      * @param buffer        where to store the address of the depth buffer, or {@code NULL}
      *
-     * @return {@link GLFW#GLFW_TRUE TRUE} if successful, or {@link GLFW#GLFW_FALSE FALSE} if an error occurred
+     * @return {@link GLFW#GLFW_TRUE TRUE} if successful, or {@link GLFW#GLFW_FALSE FALSE} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.3
      */
@@ -125,7 +129,9 @@ public class GLFWNativeOSMesa {
      *
      * @param window the window whose context to retrieve
      *
-     * @return the {@code OSMesaContext} of the specified window, or {@code NULL} if an error occurred
+     * @return the {@code OSMesaContext} of the specified window, or {@code NULL} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.3
      */

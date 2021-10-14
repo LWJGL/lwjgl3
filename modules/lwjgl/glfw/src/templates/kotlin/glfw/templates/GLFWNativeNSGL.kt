@@ -27,7 +27,13 @@ val GLFWNativeNSGL = "GLFWNativeNSGL".nativeClass(Module.GLFW, nativeSubPath = "
         """,
 
         GLFWwindow.p("window", "the GLFW window"),
-        returnDoc = "The {@code NSOpenGLContext} of the specified window, or nil if an error occurred.",
+
+        returnDoc =
+        """
+        the {@code NSOpenGLContext} of the specified window, or nil if an error occurred.
+        
+        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
+        """,
         since = "version 3.0"
     )
 

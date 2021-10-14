@@ -49,7 +49,9 @@ public class GLFWNativeWGL {
      *
      * @param window the GLFW window
      *
-     * @return The {@code HGLRC} of the specified window, or {@code NULL} if an error occurred.
+     * @return the {@code HGLRC} of the specified window, or {@code NULL} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.0
      */

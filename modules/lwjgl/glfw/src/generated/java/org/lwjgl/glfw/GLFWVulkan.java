@@ -54,7 +54,7 @@ public class GLFWVulkan {
     /**
      * Returns whether the Vulkan loader has been found. This check is performed by {@link GLFW#glfwInit Init}.
      * 
-     * <p>The availability of a Vulkan loader does not by itself guarantee that window surface creation or even device creation is possible. Call
+     * <p>The availability of a Vulkan loader and even an ICD does not by itself guarantee that surface creation or even instance creation is possible. Call
      * {@link #glfwGetRequiredInstanceExtensions GetRequiredInstanceExtensions} to check whether the extensions necessary for Vulkan surface creation are available and
      * {@link #glfwGetPhysicalDevicePresentationSupport GetPhysicalDevicePresentationSupport} to check whether a queue family of a physical device supports image presentation.</p>
      * 

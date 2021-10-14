@@ -32,7 +32,13 @@ val GLFWNativeWGL = "GLFWNativeWGL".nativeClass(Module.GLFW, nativeSubPath = "wi
         """,
 
         GLFWwindow.p("window", "the GLFW window"),
-        returnDoc = "The {@code HGLRC} of the specified window, or #NULL if an error occurred.",
+
+        returnDoc =
+        """
+        the {@code HGLRC} of the specified window, or #NULL if an error occurred.
+        
+        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
+        """,
         since = "version 3.0"
     )
 

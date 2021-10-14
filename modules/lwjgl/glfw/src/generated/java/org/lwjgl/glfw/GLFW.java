@@ -44,6 +44,8 @@ public class GLFW {
             GetVersionString              = apiGetFunctionAddress(GLFW, "glfwGetVersionString"),
             GetError                      = apiGetFunctionAddress(GLFW, "glfwGetError"),
             SetErrorCallback              = apiGetFunctionAddress(GLFW, "glfwSetErrorCallback"),
+            GetPlatform                   = apiGetFunctionAddress(GLFW, "glfwGetPlatform"),
+            PlatformSupported             = apiGetFunctionAddress(GLFW, "glfwPlatformSupported"),
             GetMonitors                   = apiGetFunctionAddress(GLFW, "glfwGetMonitors"),
             GetPrimaryMonitor             = apiGetFunctionAddress(GLFW, "glfwGetPrimaryMonitor"),
             GetMonitorPos                 = apiGetFunctionAddress(GLFW, "glfwGetMonitorPos"),
@@ -460,7 +462,7 @@ public class GLFW {
      * <li>{@link #GLFW_API_UNAVAILABLE API_UNAVAILABLE} - 
      * GLFW could not find support for the requested API on the system.
      * 
-     * <p>The installed graphics driver does not support the requested API, or does not support it via the chosen context creation backend. Below are a few
+     * <p>The installed graphics driver does not support the requested API, or does not support it via the chosen context creation API. Below are a few
      * examples:</p>
      * 
      * <p>Some pre-installed Windows graphics drivers do not support OpenGL. AMD only supports OpenGL ES via EGL, while Nvidia and Intel only support it via
@@ -500,7 +502,7 @@ public class GLFW {
      * <li>{@link #GLFW_CURSOR_UNAVAILABLE CURSOR_UNAVAILABLE} - 
      * The specified cursor shape is not available.
      * 
-     * <p>The specified standard cursor shape is not available, either because the current system cursor theme does not provide it or because it is not
+     * <p>The specified standard cursor shape is not available, either because the current platform cursor theme does not provide it or because it is not
      * available on the platform.</p>
      * 
      * <p>Platform or system settings limitation. Pick another standard cursor shape or create a custom cursor.</p>
@@ -523,6 +525,22 @@ public class GLFW {
      * 
      * <p>A function call that emits this error has no effect other than the error and updating any existing out parameters.</p>
      * </li>
+     * <li>{@link #GLFW_PLATFORM_UNAVAILABLE PLATFORM_UNAVAILABLE} - 
+     * Platform unavailable or no matching platform was found.
+     * 
+     * <p>If emitted during initialization, no matching platform was found. If {@link #GLFW_PLATFORM PLATFORM} is set to {@link #GLFW_ANY_PLATFORM ANY_PLATFORM}, GLFW could not detect any of the platforms
+     * supported by this library binary, except for the {@code Null} platform.  If set to a specific platform, it is either not supported by this library
+     * binary or GLFW was not able to detect it.</p>
+     * 
+     * <p>If emitted by a native access function, GLFW was initialized for a different platform than the function is for.</p>
+     * 
+     * <p>Failure to detect any platform usually only happens on non-macOS Unix systems, either when no window system is running or the program was run from
+     * a terminal that does not have the necessary environment variables.  Fall back to a different platform if possible or notify the user that no usable
+     * platform was detected.</p>
+     * 
+     * <p>Failure to detect a specific platform may have the same cause as above or because support for that platform was not compiled in. Call
+     * {@link #glfwPlatformSupported PlatformSupported} to check whether a specific platform is supported by a library binary.</p>
+     * </li>
      * </ul>
      */
     public static final int
@@ -539,7 +557,8 @@ public class GLFW {
         GLFW_NO_WINDOW_CONTEXT     = 0x1000A,
         GLFW_CURSOR_UNAVAILABLE    = 0x1000B,
         GLFW_FEATURE_UNAVAILABLE   = 0x1000C,
-        GLFW_FEATURE_UNIMPLEMENTED = 0x1000D;
+        GLFW_FEATURE_UNIMPLEMENTED = 0x1000D,
+        GLFW_PLATFORM_UNAVAILABLE  = 0x1000E;
 
     /**
      * Window attributes.
@@ -748,6 +767,9 @@ public class GLFW {
      */
     public static final int GLFW_ANGLE_PLATFORM_TYPE = 0x50002;
 
+    /** Platform selection init hint. */
+    public static final int GLFW_PLATFORM = 0x50003;
+
     /**
      * macOS specific init hint.
      * 
@@ -766,6 +788,15 @@ public class GLFW {
 
     /** X11 specific init hint. */
     public static final int GLFW_X11_XCB_VULKAN_SURFACE = 0x52001;
+
+    /** Hint value for {@link #GLFW_PLATFORM PLATFORM} that enables automatic platform selection. */
+    public static final int
+        GLFW_ANY_PLATFORM     = 0x60000,
+        GLFW_PLATFORM_WIN32   = 0x60001,
+        GLFW_PLATFORM_COCOA   = 0x60002,
+        GLFW_PLATFORM_WAYLAND = 0x60003,
+        GLFW_PLATFORM_X11     = 0x60004,
+        GLFW_PLATFORM_NULL    = 0x60005;
 
     /** Don't care value. */
     public static final int GLFW_DONT_CARE = -1;
@@ -986,6 +1017,9 @@ public class GLFW {
      * 
      * <p>Additional calls to this function after successful initialization but before termination will return {@link #GLFW_TRUE TRUE} immediately.</p>
      * 
+     * <p>The {@link #GLFW_PLATFORM PLATFORM} init hint controls which platforms are considered during initialization. This also depends on which platforms the library was compiled to
+     * support.</p>
+     * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
      * <ul>
@@ -1001,6 +1035,8 @@ public class GLFW {
      * </ul></div>
      *
      * @return {@link #GLFW_TRUE TRUE} if successful, or {@link #GLFW_FALSE FALSE} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link #GLFW_PLATFORM_UNAVAILABLE PLATFORM_UNAVAILABLE} and {@link #GLFW_PLATFORM_ERROR PLATFORM_ERROR}.</p>
      *
      * @since version 1.0
      */
@@ -1057,7 +1093,7 @@ public class GLFW {
      * <li>This function must only be called from the main thread.</li>
      * </ul></div>
      *
-     * @param hint  the init hint to set. One of:<br><table><tr><td>{@link #GLFW_JOYSTICK_HAT_BUTTONS JOYSTICK_HAT_BUTTONS}</td><td>{@link #GLFW_ANGLE_PLATFORM_TYPE ANGLE_PLATFORM_TYPE}</td><td>{@link #GLFW_COCOA_CHDIR_RESOURCES COCOA_CHDIR_RESOURCES}</td><td>{@link #GLFW_COCOA_MENUBAR COCOA_MENUBAR}</td></tr><tr><td>{@link #GLFW_X11_XCB_VULKAN_SURFACE X11_XCB_VULKAN_SURFACE}</td></tr></table>
+     * @param hint  the init hint to set. One of:<br><table><tr><td>{@link #GLFW_JOYSTICK_HAT_BUTTONS JOYSTICK_HAT_BUTTONS}</td><td>{@link #GLFW_ANGLE_PLATFORM_TYPE ANGLE_PLATFORM_TYPE}</td><td>{@link #GLFW_COCOA_CHDIR_RESOURCES COCOA_CHDIR_RESOURCES}</td><td>{@link #GLFW_COCOA_MENUBAR COCOA_MENUBAR}</td></tr><tr><td>{@link #GLFW_PLATFORM PLATFORM}</td><td>{@link #GLFW_X11_XCB_VULKAN_SURFACE X11_XCB_VULKAN_SURFACE}</td></tr></table>
      * @param value the new value of the init hint
      *
      * @since version 3.3
@@ -1147,11 +1183,14 @@ public class GLFW {
     }
 
     /**
-     * Returns the compile-time generated version string of the GLFW library binary. It describes the version, platform, compiler and any platform-specific
-     * compile-time options. It should not be confused with the OpenGL or OpenGL ES version string, queried with {@code glGetString}.
+     * Returns the compile-time generated version string of the GLFW library binary. It describes the version, platforms, compiler and any platform or
+     * operating system specific compile-time options. It should not be confused with the OpenGL or OpenGL ES version string, queried with
+     * {@code glGetString}.
      * 
      * <p><b>Do not use the version string</b> to parse the GLFW library version. The {@link #glfwGetVersion GetVersion} function already provides the version of the library binary
      * in numerical format.</p>
+     * 
+     * <p><b>Do not use the version string</b> to parse what platforms are supported. The {@link #glfwPlatformSupported PlatformSupported} function lets you query platform support.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
@@ -1246,6 +1285,52 @@ public class GLFW {
     @NativeType("GLFWerrorfun")
     public static GLFWErrorCallback glfwSetErrorCallback(@Nullable @NativeType("GLFWerrorfun") GLFWErrorCallbackI cbfun) {
         return GLFWErrorCallback.createSafe(nglfwSetErrorCallback(memAddressSafe(cbfun)));
+    }
+
+    // --- [ glfwGetPlatform ] ---
+
+    /**
+     * Returns the currently selected platform.
+     * 
+     * <p>This function returns the platform that was selected during initialization. The returned value will be one of {@link #GLFW_PLATFORM_WIN32 PLATFORM_WIN32}, {@link #GLFW_PLATFORM_COCOA PLATFORM_COCOA},
+     * {@link #GLFW_PLATFORM_WAYLAND PLATFORM_WAYLAND}, {@link #GLFW_PLATFORM_X11 PLATFORM_X11} or {@link #GLFW_PLATFORM_NULL PLATFORM_NULL}.</p>
+     * 
+     * <p>This function may be called from any thread.</p>
+     *
+     * @return the currently selected platform, or zero if an error occurred.
+     *         
+     *         <p>Possible errors include {@link #GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
+     *
+     * @since version 3.4
+     */
+    public static int glfwGetPlatform() {
+        long __functionAddress = Functions.GetPlatform;
+        return invokeI(__functionAddress);
+    }
+
+    // --- [ glfwPlatformSupported ] ---
+
+    /**
+     * Returns whether the library includes support for the specified platform.
+     * 
+     * <p>This function returns whether the library was compiled with support for the specified platform.</p>
+     * 
+     * <p>This function may be called before {@link #glfwInit Init}.</p>
+     * 
+     * <p>This function may be called from any thread.</p>
+     *
+     * @param platform the platform to query. One of:<br><table><tr><td>{@link #GLFW_PLATFORM_WIN32 PLATFORM_WIN32}</td><td>{@link #GLFW_PLATFORM_COCOA PLATFORM_COCOA}</td><td>{@link #GLFW_PLATFORM_WAYLAND PLATFORM_WAYLAND}</td><td>{@link #GLFW_PLATFORM_X11 PLATFORM_X11}</td><td>{@link #GLFW_PLATFORM_NULL PLATFORM_NULL}</td></tr></table>
+     *
+     * @return {@link #GLFW_TRUE TRUE} if the platform is supported, or {@link #GLFW_FALSE FALSE} otherwise.
+     *         
+     *         <p>Possible errors include {@link #GLFW_INVALID_ENUM INVALID_ENUM}.</p>
+     *
+     * @since version 3.4
+     */
+    @NativeType("int")
+    public static boolean glfwPlatformSupported(int platform) {
+        long __functionAddress = Functions.PlatformSupported;
+        return invokeI(platform, __functionAddress) != 0;
     }
 
     // --- [ glfwGetMonitors ] ---
@@ -1352,7 +1437,7 @@ public class GLFW {
      * Retrieves the work area of the monitor.
      * 
      * <p>This function returns the position, in screen coordinates, of the upper-left corner of the work area of the specified monitor along with the work area
-     * size in screen coordinates. The work area is defined as the area of the monitor not occluded by the operating system task bar where present. If no task
+     * size in screen coordinates. The work area is defined as the area of the monitor not occluded by the window system task bar where present. If no task
      * bar exists then the work area is the monitor resolution in screen coordinates.</p>
      * 
      * <p>Any or all of the position and size arguments may be {@code NULL}.  If an error occurs, all non-{@code NULL} position and size arguments will be set to zero.</p>
@@ -1391,7 +1476,7 @@ public class GLFW {
     /**
      * Returns the size, in millimetres, of the display area of the specified monitor.
      * 
-     * <p>Some systems do not provide accurate monitor size information, either because the monitor
+     * <p>Some platforms do not provide accurate monitor size information, either because the monitor
      * <a target="_blank" href="https://en.wikipedia.org/wiki/Extended_display_identification_data">EDID</a> data is incorrect or because the driver does not report it
      * accurately.</p>
      * 
@@ -1401,7 +1486,8 @@ public class GLFW {
      * 
      * <ul>
      * <li>This function must only be called from the main thread.</li>
-     * <li><b>Windows</b>: The OS calculates the returned physical size from the current resolution and system DPI instead of querying the monitor EDID data.</li>
+     * <li><b>Windows</b>: On Windows 8 and earlier the physical size is calculated from the current resolution and system DPI instead of querying the monitor
+     * EDID data.</li>
      * </ul></div>
      *
      * @param monitor  the monitor to query
@@ -2578,8 +2664,8 @@ public class GLFW {
      * it should appear at a reasonable size on other machines regardless of their DPI and scaling settings. This relies on the system DPI and scaling
      * settings being somewhat correct.</p>
      * 
-     * <p>On systems where each monitor can have its own content scale, the window content scale will depend on which monitor the system considers the window to
-     * be on.</p>
+     * <p>On platforms where each monitor can have its own content scale, the window content scale will depend on which monitor the system considers the window
+     * to be on.</p>
      *
      * @param window the window to query
      * @param xscale where to store the x-axis content scale, or {@code NULL}
@@ -4674,7 +4760,7 @@ public class GLFW {
      * Returns the value of the GLFW timer. Unless the timer has been set using {@link #glfwSetTime SetTime}, the timer measures time elapsed since GLFW was initialized.
      * 
      * <p>The resolution of the timer is system dependent, but is usually on the order of a few micro- or nanoseconds. It uses the highest-resolution monotonic
-     * time source on each supported platform.</p>
+     * time source on each operating system.</p>
      * 
      * <p>This function may be called from any thread. Reading and writing of the internal timer offset is not atomic, so it needs to be externally synchronized
      * with calls to {@link #glfwSetTime SetTime}.</p>
@@ -4835,7 +4921,7 @@ public class GLFW {
      * 
      * <ul>
      * <li>This function may be called from any thread.</li>
-     * <li>This function is not called during window creation, leaving the swap interval set to whatever is the default on that platform. This is done because
+     * <li>This function is not called during window creation, leaving the swap interval set to whatever is the default for that API. This is done because
      * some swap interval extensions used by GLFW do not allow the swap interval to be reset to zero once it has been set to a non-zero value.</li>
      * <li>Some GPU drivers do not honor the requested swap interval, either because of a user setting that overrides the application's request or due to bugs
      * in the driver.</li>

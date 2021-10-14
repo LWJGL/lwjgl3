@@ -39,7 +39,9 @@ public class GLFWNativeCocoa {
      *
      * @param monitor the GLFW monitor
      *
-     * @return The {@code CGDirectDisplayID} of the specified monitor, or {@code kCGNullDirectDisplay} if an error occurred.
+     * @return the {@code CGDirectDisplayID} of the specified monitor, or {@code kCGNullDirectDisplay} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.1
      */
@@ -61,7 +63,9 @@ public class GLFWNativeCocoa {
      *
      * @param window the GLFW window
      *
-     * @return The {@code NSWindow} of the specified window, or nil if an error occurred.
+     * @return the {@code NSWindow} of the specified window, or nil if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.0
      */

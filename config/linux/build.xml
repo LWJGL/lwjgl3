@@ -520,7 +520,6 @@
             <update-dependency module="bgfx" artifact="libbgfx.so"/>
             <update-dependency module="jemalloc" artifact="libjemalloc.so"/>
             <update-dependency module="glfw" artifact="libglfw.so"/>
-            <update-dependency module="glfw" artifact="libglfw_wayland.so"/>
             <update-dependency module="openal" artifact="libopenal.so"/>
             <update-dependency module="openvr" artifact="libopenvr_api.so"/>
             <update-dependency module="opus" artifact="libopus.so"/>

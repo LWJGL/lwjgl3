@@ -355,7 +355,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             """
             GLFW could not find support for the requested API on the system.
 
-            The installed graphics driver does not support the requested API, or does not support it via the chosen context creation backend. Below are a few
+            The installed graphics driver does not support the requested API, or does not support it via the chosen context creation API. Below are a few
             examples:
 
             Some pre-installed Windows graphics drivers do not support OpenGL. AMD only supports OpenGL ES via EGL, while Nvidia and Intel only support it via
@@ -410,7 +410,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             """
             The specified cursor shape is not available.
 
-            The specified standard cursor shape is not available, either because the current system cursor theme does not provide it or because it is not
+            The specified standard cursor shape is not available, either because the current platform cursor theme does not provide it or because it is not
             available on the platform.
 
             Platform or system settings limitation. Pick another standard cursor shape or create a custom cursor.
@@ -440,6 +440,25 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             A function call that emits this error has no effect other than the error and updating any existing out parameters.
             """,
             0x0001000D
+        ),
+        "PLATFORM_UNAVAILABLE".enum(
+            """
+            Platform unavailable or no matching platform was found.
+
+            If emitted during initialization, no matching platform was found. If #PLATFORM is set to #ANY_PLATFORM, GLFW could not detect any of the platforms
+            supported by this library binary, except for the {@code Null} platform.  If set to a specific platform, it is either not supported by this library
+            binary or GLFW was not able to detect it.
+
+            If emitted by a native access function, GLFW was initialized for a different platform than the function is for.
+
+            Failure to detect any platform usually only happens on non-macOS Unix systems, either when no window system is running or the program was run from
+            a terminal that does not have the necessary environment variables.  Fall back to a different platform if possible or notify the user that no usable
+            platform was detected.
+
+            Failure to detect a specific platform may have the same cause as above or because support for that platform was not compiled in. Call
+            #PlatformSupported() to check whether a specific platform is supported by a library binary.
+            """,
+            0x0001000E
         )
     )
 
@@ -666,6 +685,12 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     )
 
     IntConstant(
+        "Platform selection init hint.",
+
+        "PLATFORM"..0x00050003
+    )
+
+    IntConstant(
         """
         macOS specific init hint.
         
@@ -693,6 +718,17 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         "X11_XCB_VULKAN_SURFACE"..0x00052001
+    )
+
+    IntConstant(
+        "Hint value for #PLATFORM that enables automatic platform selection.",
+
+        "ANY_PLATFORM"..0x00060000,
+        "PLATFORM_WIN32"..0x00060001,
+        "PLATFORM_COCOA"..0x00060002,
+        "PLATFORM_WAYLAND"..0x00060003,
+        "PLATFORM_X11"..0x00060004,
+        "PLATFORM_NULL"..0x00060005
     )
 
     IntConstant(
@@ -964,6 +1000,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         If this function fails, it calls #Terminate() before returning. If it succeeds, you should call #Terminate() before the application exits.
 
         Additional calls to this function after successful initialization but before termination will return #TRUE immediately.
+        
+        The #PLATFORM init hint controls which platforms are considered during initialization. This also depends on which platforms the library was compiled to
+        support.
 
         ${note(ul(
             "This function must only be called from the main thread.",
@@ -984,7 +1023,12 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        returnDoc = "#TRUE if successful, or #FALSE if an error occurred.",
+        returnDoc =
+        """
+        #TRUE if successful, or #FALSE if an error occurred.
+        
+        Possible errors include #PLATFORM_UNAVAILABLE and #PLATFORM_ERROR.
+        """,
         since = "version 1.0"
     )
 
@@ -1028,7 +1072,11 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ))}
         """,
 
-        int("hint", "the init hint to set", "#JOYSTICK_HAT_BUTTONS #ANGLE_PLATFORM_TYPE #COCOA_CHDIR_RESOURCES #COCOA_MENUBAR #X11_XCB_VULKAN_SURFACE"),
+        int(
+            "hint",
+            "the init hint to set",
+            "#JOYSTICK_HAT_BUTTONS #ANGLE_PLATFORM_TYPE #COCOA_CHDIR_RESOURCES #COCOA_MENUBAR #PLATFORM #X11_XCB_VULKAN_SURFACE"
+        ),
         int("value", "the new value of the init hint"),
 
         since = "version 3.3"
@@ -1079,11 +1127,14 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     Nonnull..charASCII.const.p(
         "GetVersionString",
         """
-        Returns the compile-time generated version string of the GLFW library binary. It describes the version, platform, compiler and any platform-specific
-        compile-time options. It should not be confused with the OpenGL or OpenGL ES version string, queried with {@code glGetString}.
+        Returns the compile-time generated version string of the GLFW library binary. It describes the version, platforms, compiler and any platform or
+        operating system specific compile-time options. It should not be confused with the OpenGL or OpenGL ES version string, queried with
+        {@code glGetString}.
 
         <b>Do not use the version string</b> to parse the GLFW library version. The #GetVersion() function already provides the version of the library binary
         in numerical format.
+        
+        <b>Do not use the version string</b> to parse what platforms are supported. The #PlatformSupported() function lets you query platform support.
 
         ${note(ul(
             "This function always succeeds.",
@@ -1147,6 +1198,51 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 3.0"
     )
 
+    int(
+        "GetPlatform",
+        """
+        Returns the currently selected platform.
+
+        This function returns the platform that was selected during initialization. The returned value will be one of #PLATFORM_WIN32, #PLATFORM_COCOA,
+        #PLATFORM_WAYLAND, #PLATFORM_X11 or #PLATFORM_NULL.
+
+        This function may be called from any thread.
+        """,
+
+        void(),
+
+        returnDoc =
+        """
+        the currently selected platform, or zero if an error occurred.
+        
+        Possible errors include #NOT_INITIALIZED.
+        """,
+        since = "version 3.4"
+    )
+
+    intb(
+        "PlatformSupported",
+        """
+        Returns whether the library includes support for the specified platform.
+
+        This function returns whether the library was compiled with support for the specified platform.
+ 
+        This function may be called before #Init().
+        
+        This function may be called from any thread.
+        """,
+
+        int("platform", "the platform to query", "#PLATFORM_WIN32 #PLATFORM_COCOA #PLATFORM_WAYLAND #PLATFORM_X11 #PLATFORM_NULL"),
+
+        returnDoc =
+        """
+        #TRUE if the platform is supported, or #FALSE otherwise.
+        
+        Possible errors include #INVALID_ENUM.
+        """,
+        since = "version 3.4"
+    )
+
     GLFWmonitor.p.p(
         "GetMonitors",
         """
@@ -1201,7 +1297,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Retrieves the work area of the monitor.
 
         This function returns the position, in screen coordinates, of the upper-left corner of the work area of the specified monitor along with the work area
-        size in screen coordinates. The work area is defined as the area of the monitor not occluded by the operating system task bar where present. If no task
+        size in screen coordinates. The work area is defined as the area of the monitor not occluded by the window system task bar where present. If no task
         bar exists then the work area is the monitor resolution in screen coordinates.
 
         Any or all of the position and size arguments may be #NULL.  If an error occurs, all non-#NULL position and size arguments will be set to zero.
@@ -1223,7 +1319,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """
         Returns the size, in millimetres, of the display area of the specified monitor.
 
-        Some systems do not provide accurate monitor size information, either because the monitor
+        Some platforms do not provide accurate monitor size information, either because the monitor
         ${url("https://en.wikipedia.org/wiki/Extended_display_identification_data", "EDID")} data is incorrect or because the driver does not report it
         accurately.
 
@@ -1232,7 +1328,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ${note(ul(
             "This function must only be called from the main thread.",
             """
-            <b>Windows</b>: The OS calculates the returned physical size from the current resolution and system DPI instead of querying the monitor EDID data.
+            <b>Windows</b>: On Windows 8 and earlier the physical size is calculated from the current resolution and system DPI instead of querying the monitor
+            EDID data.
             """
         ))}
         """,
@@ -1973,8 +2070,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         it should appear at a reasonable size on other machines regardless of their DPI and scaling settings. This relies on the system DPI and scaling
         settings being somewhat correct.
 
-        On systems where each monitor can have its own content scale, the window content scale will depend on which monitor the system considers the window to
-        be on.
+        On platforms where each monitor can have its own content scale, the window content scale will depend on which monitor the system considers the window
+        to be on.
         """,
 
         GLFWwindow.p("window", "the window to query"),
@@ -3417,7 +3514,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         Returns the value of the GLFW timer. Unless the timer has been set using #SetTime(), the timer measures time elapsed since GLFW was initialized.
 
         The resolution of the timer is system dependent, but is usually on the order of a few micro- or nanoseconds. It uses the highest-resolution monotonic
-        time source on each supported platform.
+        time source on each operating system.
 
         This function may be called from any thread. Reading and writing of the internal timer offset is not atomic, so it needs to be externally synchronized
         with calls to #SetTime().
@@ -3548,7 +3645,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         ${note(ul(
             "This function may be called from any thread.",
             """
-            This function is not called during window creation, leaving the swap interval set to whatever is the default on that platform. This is done because
+            This function is not called during window creation, leaving the swap interval set to whatever is the default for that API. This is done because
             some swap interval extensions used by GLFW do not allow the swap interval to be reset to zero once it has been set to a non-zero value.
             """,
             """

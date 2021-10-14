@@ -543,7 +543,7 @@ val GLFWkeyfun = Module.GLFW.callback {
 
         GLFWwindow.p("window", "the window that received the event"),
         int("key", "the keyboard key that was pressed or released"),
-        int("scancode", "the system-specific scancode of the key"),
+        int("scancode", "the platform-specific scancode of the key"),
         int("action", "the key action", "#PRESS #RELEASE #REPEAT"),
         int("mods", "bitfield describing which modifiers keys were held down"),
 

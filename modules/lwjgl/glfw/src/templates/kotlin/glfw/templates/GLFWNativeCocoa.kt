@@ -21,7 +21,12 @@ val GLFWNativeCocoa = "GLFWNativeCocoa".nativeClass(Module.GLFW, nativeSubPath =
 
         GLFWmonitor.p("monitor", "the GLFW monitor"),
 
-        returnDoc = "The {@code CGDirectDisplayID} of the specified monitor, or {@code kCGNullDirectDisplay} if an error occurred.",
+        returnDoc =
+        """
+        the {@code CGDirectDisplayID} of the specified monitor, or {@code kCGNullDirectDisplay} if an error occurred.
+        
+        Possible errors include #NOT_INITIALIZED.
+        """,
         since = "version 3.1"
     )
 
@@ -34,7 +39,13 @@ val GLFWNativeCocoa = "GLFWNativeCocoa".nativeClass(Module.GLFW, nativeSubPath =
         """,
 
         GLFWwindow.p("window", "the GLFW window"),
-        returnDoc = "The {@code NSWindow} of the specified window, or nil if an error occurred.",
+
+        returnDoc =
+        """
+        the {@code NSWindow} of the specified window, or nil if an error occurred.
+        
+        Possible errors include #NOT_INITIALIZED.
+        """,
         since = "version 3.0"
     )
 }

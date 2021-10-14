@@ -18,7 +18,13 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(Module.GLFW, nativeSubPath = "li
 
         Note: This function may be called from any thread. Access is not synchronized.
         """,
-        returnDoc = "The {@code Display} used by GLFW, or #NULL if an error occurred.",
+
+        returnDoc =
+        """
+        the {@code Display} used by GLFW, or #NULL if an error occurred.
+        
+        Possible errors include #NOT_INITIALIZED.
+        """,
         since = "version 3.0"
     )
 
@@ -31,7 +37,13 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(Module.GLFW, nativeSubPath = "li
         """,
 
         GLFWmonitor.p("monitor", "the GLFW monitor"),
-        returnDoc = "The {@code RRCrtc} of the specified monitor, or {@code None} if an error occurred.",
+
+        returnDoc =
+        """
+        the {@code RRCrtc} of the specified monitor, or {@code None} if an error occurred.
+        
+        Possible errors include #NOT_INITIALIZED.
+        """,
         since = "version 3.1"
     )
 
@@ -44,7 +56,13 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(Module.GLFW, nativeSubPath = "li
         """,
 
         GLFWmonitor.p("monitor", "the GLFW monitor"),
-        returnDoc = "The {@code RROutput} of the specified monitor, or {@code None} if an error occurred.",
+
+        returnDoc =
+        """
+        the {@code RROutput} of the specified monitor, or {@code None} if an error occurred.
+        
+        Possible errors include #NOT_INITIALIZED.
+        """,
         since = "version 3.1"
     )
 
@@ -57,7 +75,12 @@ val GLFWNativeX11 = "GLFWNativeX11".nativeClass(Module.GLFW, nativeSubPath = "li
         """,
 
         GLFWwindow.p("window", "a GLFW window"),
-        returnDoc = " The {@code Window} of the specified window, or {@code None} if an error occurred.",
+        returnDoc =
+        """
+        the {@code Window} of the specified window, or {@code None} if an error occurred.
+        
+        Possible errors include #NOT_INITIALIZED.
+        """,
         since = "version 3.0"
     )
 

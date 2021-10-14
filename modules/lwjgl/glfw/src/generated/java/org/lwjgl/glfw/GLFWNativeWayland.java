@@ -39,6 +39,8 @@ public class GLFWNativeWayland {
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
      * @return the {@code struct wl_display*} used by GLFW, or {@code NULL} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.2
      */
@@ -56,6 +58,8 @@ public class GLFWNativeWayland {
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
      * @return the {@code struct wl_output*} of the specified monitor, or {@code NULL} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.2
      */
@@ -76,6 +80,8 @@ public class GLFWNativeWayland {
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
      * @return the main {@code struct wl_surface*} of the specified window, or {@code NULL} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
      *
      * @since version 3.2
      */
