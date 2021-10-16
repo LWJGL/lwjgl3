@@ -279,6 +279,12 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
     public VkSwapchainCreateInfoKHR sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSwapchainCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkSwapchainCounterCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkSwapchainCreateInfoKHR pNext(VkSwapchainCounterCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDeviceGroupSwapchainCreateInfoKHR struct to the {@link #pNext} field. */
+    public VkSwapchainCreateInfoKHR pNext(VkDeviceGroupSwapchainCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkSwapchainDisplayNativeHdrCreateInfoAMD struct to the {@link #pNext} field. */
+    public VkSwapchainCreateInfoKHR pNext(VkSwapchainDisplayNativeHdrCreateInfoAMD value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkSwapchainCreateInfoKHR flags(@NativeType("VkSwapchainCreateFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #surface} field. */
@@ -674,6 +680,12 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
         public VkSwapchainCreateInfoKHR.Buffer sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#pNext} field. */
         public VkSwapchainCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkSwapchainCreateInfoKHR.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkSwapchainCounterCreateInfoEXT struct to the {@link VkSwapchainCreateInfoKHR#pNext} field. */
+        public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainCounterCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDeviceGroupSwapchainCreateInfoKHR struct to the {@link VkSwapchainCreateInfoKHR#pNext} field. */
+        public VkSwapchainCreateInfoKHR.Buffer pNext(VkDeviceGroupSwapchainCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkSwapchainDisplayNativeHdrCreateInfoAMD struct to the {@link VkSwapchainCreateInfoKHR#pNext} field. */
+        public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainDisplayNativeHdrCreateInfoAMD value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#flags} field. */
         public VkSwapchainCreateInfoKHR.Buffer flags(@NativeType("VkSwapchainCreateFlagsKHR") int value) { VkSwapchainCreateInfoKHR.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#surface} field. */

@@ -485,7 +485,7 @@ val VkSwapchainCreateInfoKHR = struct(Module.VULKAN, "VkSwapchainCreateInfoKHR")
         """
 
     Expression("#STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkSwapchainCounterCreateInfoEXT", "VkDeviceGroupSwapchainCreateInfoKHR", "VkSwapchainDisplayNativeHdrCreateInfoAMD")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSwapchainCreateFlagsKHR("flags", "a bitmask of {@code VkSwapchainCreateFlagBitsKHR} indicating parameters of the swapchain creation.")
     VkSurfaceKHR("surface", "the surface onto which the swapchain will present images. If the creation succeeds, the swapchain becomes associated with {@code surface}.")
     uint32_t("minImageCount", "the minimum number of presentable images that the application needs. The implementation will either create the swapchain with at least that many images, or it will fail to create the swapchain.")
@@ -566,7 +566,7 @@ val VkPresentInfoKHR = struct(Module.VULKAN, "VkPresentInfoKHR") {
         """
 
     Expression("#STRUCTURE_TYPE_PRESENT_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkDisplayPresentInfoKHR", "VkPresentRegionsKHR", "VkDeviceGroupPresentInfoKHR", "VkPresentIdKHR", "VkPresentTimesInfoGOOGLE")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pWaitSemaphores", optional = true)..uint32_t("waitSemaphoreCount", "the number of semaphores to wait for before issuing the present request. The number <b>may</b> be zero.")
     VkSemaphore.const.p("pWaitSemaphores", "{@code NULL} or a pointer to an array of {@code VkSemaphore} objects with {@code waitSemaphoreCount} entries, and specifies the semaphores to wait for before issuing the present request.")
     AutoSize("pSwapchains", "pImageIndices", "pResults")..uint32_t("swapchainCount", "the number of swapchains being presented to by this command.")
@@ -1255,7 +1255,7 @@ val VkVideoProfileKHR = struct(Module.VULKAN, "VkVideoProfileKHR") {
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_PROFILE_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkVideoDecodeH264ProfileEXT", "VkVideoDecodeH265ProfileEXT", "VkVideoEncodeH264ProfileEXT")..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkVideoCodecOperationFlagBitsKHR("videoCodecOperation", "a {@code VkVideoCodecOperationFlagBitsKHR} value specifying a video codec operation.")
     VkVideoChromaSubsamplingFlagsKHR("chromaSubsampling", "a bitmask of {@code VkVideoChromaSubsamplingFlagBitsKHR} specifying video chroma subsampling information.")
     VkVideoComponentBitDepthFlagsKHR("lumaBitDepth", "a bitmask of {@code VkVideoComponentBitDepthFlagBitsKHR} specifying video luma bit depth information.")
@@ -1300,7 +1300,7 @@ val VkVideoCapabilitiesKHR = struct(Module.VULKAN, "VkVideoCapabilitiesKHR", mut
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR")..VkStructureType("sType", "the type of this structure.").mutable()
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    PointerSetter("VkVideoDecodeH264CapabilitiesEXT", "VkVideoDecodeH265CapabilitiesEXT", "VkVideoEncodeH264CapabilitiesEXT")..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkVideoCapabilityFlagsKHR("capabilityFlags", "a bitmask of {@code VkVideoCapabilityFlagBitsKHR} specifying capability flags.")
     VkDeviceSize("minBitstreamBufferOffsetAlignment", "the minimum alignment for the input or output bitstream buffer offset.")
     VkDeviceSize("minBitstreamBufferSizeAlignment", "the minimum alignment for the input or output bitstream buffer size")
@@ -1397,7 +1397,7 @@ val VkVideoReferenceSlotKHR = struct(Module.VULKAN, "VkVideoReferenceSlotKHR") {
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkVideoDecodeH264DpbSlotInfoEXT", "VkVideoDecodeH265DpbSlotInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     int8_t("slotIndex", "the unique reference slot index used for the encode or decode operation.")
     VkVideoPictureResourceKHR.const.p("pPictureResource", "a pointer to a ##VkVideoPictureResourceKHR structure describing the picture resource bound to this slot index.")
 }
@@ -1483,7 +1483,7 @@ val VkVideoSessionCreateInfoKHR = struct(Module.VULKAN, "VkVideoSessionCreateInf
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkVideoDecodeH264SessionCreateInfoEXT", "VkVideoDecodeH265SessionCreateInfoEXT", "VkVideoEncodeH264SessionCreateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint32_t("queueFamilyIndex", "the queue family of the created video session.")
     VkVideoSessionCreateFlagsKHR("flags", "a bitmask of {@code VkVideoSessionCreateFlagBitsKHR} specifying creation flags.")
     VkVideoProfileKHR.const.p("pVideoProfile", "a pointer to a ##VkVideoProfileKHR structure.")
@@ -1520,7 +1520,7 @@ val VkVideoSessionParametersCreateInfoKHR = struct(Module.VULKAN, "VkVideoSessio
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkVideoDecodeH264SessionParametersCreateInfoEXT", "VkVideoDecodeH265SessionParametersCreateInfoEXT", "VkVideoEncodeH264SessionParametersCreateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkVideoSessionParametersKHR("videoSessionParametersTemplate", "#NULL_HANDLE or a valid handle to a {@code VkVideoSessionParametersKHR} object. If this parameter represents a valid handle, then the underlying Video Session Parameters object will be used as a template for constructing the new video session parameters object. All of the template object’s current parameters will be inherited by the new object in such a case. Optionally, some of the template’s parameters can be updated or new parameters added to the newly constructed object via the extension-specific parameters.")
     VkVideoSessionKHR("videoSession", "the video session object against which the video session parameters object is going to be created.")
 }
@@ -1542,7 +1542,7 @@ val VkVideoSessionParametersUpdateInfoKHR = struct(Module.VULKAN, "VkVideoSessio
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkVideoDecodeH264SessionParametersAddInfoEXT", "VkVideoDecodeH265SessionParametersAddInfoEXT", "VkVideoEncodeH264SessionParametersAddInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint32_t("updateSequenceCount", "the sequence number of the object update with parameters, starting from 1 and incrementing the value by one with each subsequent update.")
 }
 
@@ -1625,7 +1625,7 @@ val VkVideoCodingControlInfoKHR = struct(Module.VULKAN, "VkVideoCodingControlInf
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkVideoEncodeRateControlInfoKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkVideoCodingControlFlagsKHR("flags", "a bitmask of {@code VkVideoCodingControlFlagsKHR} specifying control flags.")
 }
 
@@ -1652,7 +1652,7 @@ val VkVideoDecodeInfoKHR = struct(Module.VULKAN, "VkVideoDecodeInfoKHR") {
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure. All the codec specific structures related to each frame(picture parameters, quantization matrix, etc.) <b>must</b> be chained here and pass to decode session with the function call #CmdDecodeVideoKHR().")
+    PointerSetter("VkVideoDecodeH264PictureInfoEXT", "VkVideoDecodeH265PictureInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure. All the codec specific structures related to each frame(picture parameters, quantization matrix, etc.) <b>must</b> be chained here and pass to decode session with the function call #CmdDecodeVideoKHR().")
     VkVideoDecodeFlagsKHR("flags", "a bitmask of {@code VkVideoDecodeFlagBitsKHR} specifying decode flags, reserved for future versions of this specification.")
     VkOffset2D("codedOffset", "the coded offset of the decode operations. The purpose of this field is interpreted based on the codec extension. When decoding content in H.264 field mode, the {@code codedOffset} specifies the line or picture field’s offset within the image.")
     VkExtent2D("codedExtent", "the coded size of the decode operations.")
@@ -2289,7 +2289,7 @@ val VkVideoDecodeH264PictureInfoEXT = struct(Module.VULKAN, "VkVideoDecodeH264Pi
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkVideoDecodeH264MvcEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     StdVideoDecodeH264PictureInfo.const.p("pStdPictureInfo", "a pointer to a {@code StdVideoDecodeH264PictureInfo} structure specifying the codec standard specific picture information from the H.264 specification.")
     AutoSize("pSlicesDataOffsets")..uint32_t("slicesCount", "the number of slices in this picture.")
     uint32_t.const.p("pSlicesDataOffsets", "a pointer to an array of {@code slicesCount} offsets indicating the start offset of each slice within the bitstream buffer.")
@@ -4866,7 +4866,7 @@ val VkSurfaceCapabilities2KHR = struct(Module.VULKAN, "VkSurfaceCapabilities2KHR
         """
 
     Expression("#STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR")..VkStructureType("sType", "the type of this structure.").mutable()
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    PointerSetter("VkDisplayNativeHdrSurfaceCapabilitiesAMD", "VkSharedPresentSurfaceCapabilitiesKHR", "VkSurfaceProtectedCapabilitiesKHR", "VkSurfaceCapabilitiesFullScreenExclusiveEXT")..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkSurfaceCapabilitiesKHR("surfaceCapabilities", "a ##VkSurfaceCapabilitiesKHR structure describing the capabilities of the specified surface.")
 }
 
@@ -5838,7 +5838,7 @@ val VkAccelerationStructureGeometryTrianglesDataKHR = struct(Module.VULKAN, "VkA
         """
 
     Expression("#STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkAccelerationStructureGeometryMotionTrianglesDataNV")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkFormat("vertexFormat", "the {@code VkFormat} of each vertex element.")
     VkDeviceOrHostAddressConstKHR("vertexData", "a device or host address to memory containing vertex data for this geometry.")
     VkDeviceSize("vertexStride", "the stride in bytes between each vertex.")
@@ -6115,7 +6115,7 @@ val VkAccelerationStructureCreateInfoKHR = struct(Module.VULKAN, "VkAcceleration
         """
 
     Expression("#STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkAccelerationStructureMotionInfoNV")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkAccelerationStructureCreateFlagsKHR("createFlags", "a bitmask of {@code VkAccelerationStructureCreateFlagBitsKHR} specifying additional creation parameters of the acceleration structure.")
     VkBuffer("buffer", "the buffer on which the acceleration structure will be stored.")
     VkDeviceSize("offset", "an offset in bytes from the base address of the buffer at which the acceleration structure will be stored, and <b>must</b> be a multiple of 256.")
@@ -11638,7 +11638,7 @@ val VkVideoEncodeInfoKHR = struct(Module.VULKAN, "VkVideoEncodeInfoKHR") {
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
-    opaque_const_p("pNext", "a pointer to a structure extending this structure. A codec-specific extension structure <b>must</b> be chained to specify what bitstream unit to generate with this encode operation.")
+    PointerSetter("VkVideoEncodeH264VclFrameInfoEXT", "VkVideoEncodeH264EmitPictureParametersEXT")..opaque_const_p("pNext", "a pointer to a structure extending this structure. A codec-specific extension structure <b>must</b> be chained to specify what bitstream unit to generate with this encode operation.")
     VkVideoEncodeFlagsKHR("flags", "a bitmask of {@code VkVideoEncodeFlagBitsKHR} specifying encode flags, and is reserved for future versions of this specification.")
     uint32_t("qualityLevel", "the coding quality level of the encoding. It is defined by the codec-specific extensions.")
     VkExtent2D("codedExtent", "the coded size of the encode operations.")

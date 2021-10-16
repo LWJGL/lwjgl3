@@ -158,6 +158,40 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
     public VkMemoryAllocateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryAllocateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkDedicatedAllocationMemoryAllocateInfoNV struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkDedicatedAllocationMemoryAllocateInfoNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkExportMemoryAllocateInfoNV struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkExportMemoryAllocateInfoNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkImportMemoryWin32HandleInfoNV struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkImportMemoryWin32HandleInfoNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkExportMemoryWin32HandleInfoNV struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkExportMemoryWin32HandleInfoNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkExportMemoryAllocateInfo struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkExportMemoryAllocateInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkExportMemoryAllocateInfoKHR struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkExportMemoryAllocateInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkImportMemoryWin32HandleInfoKHR struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkImportMemoryWin32HandleInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkExportMemoryWin32HandleInfoKHR struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkExportMemoryWin32HandleInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkImportMemoryFdInfoKHR struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkImportMemoryFdInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkMemoryAllocateFlagsInfo struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkMemoryAllocateFlagsInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkMemoryAllocateFlagsInfoKHR struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkMemoryAllocateFlagsInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkMemoryDedicatedAllocateInfo struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkMemoryDedicatedAllocateInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkMemoryDedicatedAllocateInfoKHR struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkMemoryDedicatedAllocateInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkImportMemoryHostPointerInfoEXT struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkImportMemoryHostPointerInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkMemoryPriorityAllocateInfoEXT struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkMemoryPriorityAllocateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkMemoryOpaqueCaptureAddressAllocateInfo struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkMemoryOpaqueCaptureAddressAllocateInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkMemoryOpaqueCaptureAddressAllocateInfoKHR struct to the {@link #pNext} field. */
+    public VkMemoryAllocateInfo pNext(VkMemoryOpaqueCaptureAddressAllocateInfoKHR value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #allocationSize} field. */
     public VkMemoryAllocateInfo allocationSize(@NativeType("VkDeviceSize") long value) { nallocationSize(address(), value); return this; }
     /** Sets the specified value to the {@link #memoryTypeIndex} field. */
@@ -397,6 +431,40 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
         public VkMemoryAllocateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO); }
         /** Sets the specified value to the {@link VkMemoryAllocateInfo#pNext} field. */
         public VkMemoryAllocateInfo.Buffer pNext(@NativeType("void const *") long value) { VkMemoryAllocateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkDedicatedAllocationMemoryAllocateInfoNV struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkDedicatedAllocationMemoryAllocateInfoNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkExportMemoryAllocateInfoNV struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryAllocateInfoNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkImportMemoryWin32HandleInfoNV struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkImportMemoryWin32HandleInfoNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkExportMemoryWin32HandleInfoNV struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryWin32HandleInfoNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkExportMemoryAllocateInfo struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryAllocateInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkExportMemoryAllocateInfoKHR struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryAllocateInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkImportMemoryWin32HandleInfoKHR struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkImportMemoryWin32HandleInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkExportMemoryWin32HandleInfoKHR struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryWin32HandleInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkImportMemoryFdInfoKHR struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkImportMemoryFdInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkMemoryAllocateFlagsInfo struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryAllocateFlagsInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkMemoryAllocateFlagsInfoKHR struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryAllocateFlagsInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkMemoryDedicatedAllocateInfo struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryDedicatedAllocateInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkMemoryDedicatedAllocateInfoKHR struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryDedicatedAllocateInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkImportMemoryHostPointerInfoEXT struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkImportMemoryHostPointerInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkMemoryPriorityAllocateInfoEXT struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryPriorityAllocateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkMemoryOpaqueCaptureAddressAllocateInfo struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryOpaqueCaptureAddressAllocateInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkMemoryOpaqueCaptureAddressAllocateInfoKHR struct to the {@link VkMemoryAllocateInfo#pNext} field. */
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryOpaqueCaptureAddressAllocateInfoKHR value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkMemoryAllocateInfo#allocationSize} field. */
         public VkMemoryAllocateInfo.Buffer allocationSize(@NativeType("VkDeviceSize") long value) { VkMemoryAllocateInfo.nallocationSize(address(), value); return this; }
         /** Sets the specified value to the {@link VkMemoryAllocateInfo#memoryTypeIndex} field. */

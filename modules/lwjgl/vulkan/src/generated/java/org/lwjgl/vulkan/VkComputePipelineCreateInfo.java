@@ -156,6 +156,8 @@ public class VkComputePipelineCreateInfo extends Struct implements NativeResourc
     public VkComputePipelineCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkComputePipelineCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkSubpassShadingPipelineCreateInfoHUAWEI struct to the {@link #pNext} field. */
+    public VkComputePipelineCreateInfo pNext(VkSubpassShadingPipelineCreateInfoHUAWEI value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkComputePipelineCreateInfo flags(@NativeType("VkPipelineCreateFlags") int value) { nflags(address(), value); return this; }
     /** Copies the specified {@link VkPipelineShaderStageCreateInfo} to the {@link #stage} field. */
@@ -450,6 +452,8 @@ public class VkComputePipelineCreateInfo extends Struct implements NativeResourc
         public VkComputePipelineCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkComputePipelineCreateInfo#pNext} field. */
         public VkComputePipelineCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkComputePipelineCreateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkSubpassShadingPipelineCreateInfoHUAWEI struct to the {@link VkComputePipelineCreateInfo#pNext} field. */
+        public VkComputePipelineCreateInfo.Buffer pNext(VkSubpassShadingPipelineCreateInfoHUAWEI value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkComputePipelineCreateInfo#flags} field. */
         public VkComputePipelineCreateInfo.Buffer flags(@NativeType("VkPipelineCreateFlags") int value) { VkComputePipelineCreateInfo.nflags(address(), value); return this; }
         /** Copies the specified {@link VkPipelineShaderStageCreateInfo} to the {@link VkComputePipelineCreateInfo#stage} field. */

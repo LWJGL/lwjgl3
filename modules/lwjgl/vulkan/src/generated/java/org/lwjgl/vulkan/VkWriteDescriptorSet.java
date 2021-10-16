@@ -223,6 +223,12 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
     public VkWriteDescriptorSet sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkWriteDescriptorSet pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkWriteDescriptorSetInlineUniformBlockEXT struct to the {@link #pNext} field. */
+    public VkWriteDescriptorSet pNext(VkWriteDescriptorSetInlineUniformBlockEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkWriteDescriptorSetAccelerationStructureKHR struct to the {@link #pNext} field. */
+    public VkWriteDescriptorSet pNext(VkWriteDescriptorSetAccelerationStructureKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkWriteDescriptorSetAccelerationStructureNV struct to the {@link #pNext} field. */
+    public VkWriteDescriptorSet pNext(VkWriteDescriptorSetAccelerationStructureNV value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #dstSet} field. */
     public VkWriteDescriptorSet dstSet(@NativeType("VkDescriptorSet") long value) { ndstSet(address(), value); return this; }
     /** Sets the specified value to the {@link #dstBinding} field. */
@@ -531,6 +537,12 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
         public VkWriteDescriptorSet.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET); }
         /** Sets the specified value to the {@link VkWriteDescriptorSet#pNext} field. */
         public VkWriteDescriptorSet.Buffer pNext(@NativeType("void const *") long value) { VkWriteDescriptorSet.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkWriteDescriptorSetInlineUniformBlockEXT struct to the {@link VkWriteDescriptorSet#pNext} field. */
+        public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetInlineUniformBlockEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkWriteDescriptorSetAccelerationStructureKHR struct to the {@link VkWriteDescriptorSet#pNext} field. */
+        public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetAccelerationStructureKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkWriteDescriptorSetAccelerationStructureNV struct to the {@link VkWriteDescriptorSet#pNext} field. */
+        public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetAccelerationStructureNV value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkWriteDescriptorSet#dstSet} field. */
         public VkWriteDescriptorSet.Buffer dstSet(@NativeType("VkDescriptorSet") long value) { VkWriteDescriptorSet.ndstSet(address(), value); return this; }
         /** Sets the specified value to the {@link VkWriteDescriptorSet#dstBinding} field. */

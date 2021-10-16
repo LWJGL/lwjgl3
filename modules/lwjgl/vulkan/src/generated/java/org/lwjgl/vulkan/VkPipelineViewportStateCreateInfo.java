@@ -144,6 +144,16 @@ public class VkPipelineViewportStateCreateInfo extends Struct implements NativeR
     public VkPipelineViewportStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineViewportStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkPipelineViewportWScalingStateCreateInfoNV struct to the {@link #pNext} field. */
+    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportWScalingStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPipelineViewportSwizzleStateCreateInfoNV struct to the {@link #pNext} field. */
+    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportSwizzleStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPipelineViewportExclusiveScissorStateCreateInfoNV struct to the {@link #pNext} field. */
+    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportExclusiveScissorStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPipelineViewportShadingRateImageStateCreateInfoNV struct to the {@link #pNext} field. */
+    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportShadingRateImageStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPipelineViewportCoarseSampleOrderStateCreateInfoNV struct to the {@link #pNext} field. */
+    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineViewportStateCreateInfo flags(@NativeType("VkPipelineViewportStateCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #viewportCount} field. */
@@ -418,6 +428,16 @@ public class VkPipelineViewportStateCreateInfo extends Struct implements NativeR
         public VkPipelineViewportStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineViewportStateCreateInfo#pNext} field. */
         public VkPipelineViewportStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineViewportStateCreateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkPipelineViewportWScalingStateCreateInfoNV struct to the {@link VkPipelineViewportStateCreateInfo#pNext} field. */
+        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportWScalingStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPipelineViewportSwizzleStateCreateInfoNV struct to the {@link VkPipelineViewportStateCreateInfo#pNext} field. */
+        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportSwizzleStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPipelineViewportExclusiveScissorStateCreateInfoNV struct to the {@link VkPipelineViewportStateCreateInfo#pNext} field. */
+        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportExclusiveScissorStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPipelineViewportShadingRateImageStateCreateInfoNV struct to the {@link VkPipelineViewportStateCreateInfo#pNext} field. */
+        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportShadingRateImageStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPipelineViewportCoarseSampleOrderStateCreateInfoNV struct to the {@link VkPipelineViewportStateCreateInfo#pNext} field. */
+        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkPipelineViewportStateCreateInfo#flags} field. */
         public VkPipelineViewportStateCreateInfo.Buffer flags(@NativeType("VkPipelineViewportStateCreateFlags") int value) { VkPipelineViewportStateCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineViewportStateCreateInfo#viewportCount} field. */

@@ -98,6 +98,12 @@ public class VkSemaphoreCreateInfo extends Struct implements NativeResource {
     public VkSemaphoreCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSemaphoreCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkExportSemaphoreCreateInfo struct to the {@link #pNext} field. */
+    public VkSemaphoreCreateInfo pNext(VkExportSemaphoreCreateInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkExportSemaphoreCreateInfoKHR struct to the {@link #pNext} field. */
+    public VkSemaphoreCreateInfo pNext(VkExportSemaphoreCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkExportSemaphoreWin32HandleInfoKHR struct to the {@link #pNext} field. */
+    public VkSemaphoreCreateInfo pNext(VkExportSemaphoreWin32HandleInfoKHR value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkSemaphoreCreateInfo flags(@NativeType("VkSemaphoreCreateFlags") int value) { nflags(address(), value); return this; }
 
@@ -326,6 +332,12 @@ public class VkSemaphoreCreateInfo extends Struct implements NativeResource {
         public VkSemaphoreCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkSemaphoreCreateInfo#pNext} field. */
         public VkSemaphoreCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkSemaphoreCreateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkExportSemaphoreCreateInfo struct to the {@link VkSemaphoreCreateInfo#pNext} field. */
+        public VkSemaphoreCreateInfo.Buffer pNext(VkExportSemaphoreCreateInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkExportSemaphoreCreateInfoKHR struct to the {@link VkSemaphoreCreateInfo#pNext} field. */
+        public VkSemaphoreCreateInfo.Buffer pNext(VkExportSemaphoreCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkExportSemaphoreWin32HandleInfoKHR struct to the {@link VkSemaphoreCreateInfo#pNext} field. */
+        public VkSemaphoreCreateInfo.Buffer pNext(VkExportSemaphoreWin32HandleInfoKHR value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkSemaphoreCreateInfo#flags} field. */
         public VkSemaphoreCreateInfo.Buffer flags(@NativeType("VkSemaphoreCreateFlags") int value) { VkSemaphoreCreateInfo.nflags(address(), value); return this; }
 

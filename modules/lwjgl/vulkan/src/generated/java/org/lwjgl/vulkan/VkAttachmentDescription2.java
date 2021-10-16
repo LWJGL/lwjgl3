@@ -192,6 +192,10 @@ public class VkAttachmentDescription2 extends Struct implements NativeResource {
     public VkAttachmentDescription2 sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAttachmentDescription2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkAttachmentDescriptionStencilLayout struct to the {@link #pNext} field. */
+    public VkAttachmentDescription2 pNext(VkAttachmentDescriptionStencilLayout value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkAttachmentDescriptionStencilLayoutKHR struct to the {@link #pNext} field. */
+    public VkAttachmentDescription2 pNext(VkAttachmentDescriptionStencilLayoutKHR value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkAttachmentDescription2 flags(@NativeType("VkAttachmentDescriptionFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #format} field. */
@@ -490,6 +494,10 @@ public class VkAttachmentDescription2 extends Struct implements NativeResource {
         public VkAttachmentDescription2.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2); }
         /** Sets the specified value to the {@link VkAttachmentDescription2#pNext} field. */
         public VkAttachmentDescription2.Buffer pNext(@NativeType("void const *") long value) { VkAttachmentDescription2.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkAttachmentDescriptionStencilLayout struct to the {@link VkAttachmentDescription2#pNext} field. */
+        public VkAttachmentDescription2.Buffer pNext(VkAttachmentDescriptionStencilLayout value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkAttachmentDescriptionStencilLayoutKHR struct to the {@link VkAttachmentDescription2#pNext} field. */
+        public VkAttachmentDescription2.Buffer pNext(VkAttachmentDescriptionStencilLayoutKHR value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkAttachmentDescription2#flags} field. */
         public VkAttachmentDescription2.Buffer flags(@NativeType("VkAttachmentDescriptionFlags") int value) { VkAttachmentDescription2.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkAttachmentDescription2#format} field. */

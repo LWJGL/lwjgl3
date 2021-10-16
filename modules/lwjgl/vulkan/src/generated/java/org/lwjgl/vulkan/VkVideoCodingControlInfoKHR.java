@@ -98,6 +98,8 @@ public class VkVideoCodingControlInfoKHR extends Struct implements NativeResourc
     public VkVideoCodingControlInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoCodingControlInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkVideoEncodeRateControlInfoKHR struct to the {@link #pNext} field. */
+    public VkVideoCodingControlInfoKHR pNext(VkVideoEncodeRateControlInfoKHR value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkVideoCodingControlInfoKHR flags(@NativeType("VkVideoCodingControlFlagsKHR") int value) { nflags(address(), value); return this; }
 
@@ -308,6 +310,8 @@ public class VkVideoCodingControlInfoKHR extends Struct implements NativeResourc
         public VkVideoCodingControlInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoCodingControlInfoKHR#pNext} field. */
         public VkVideoCodingControlInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoCodingControlInfoKHR.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkVideoEncodeRateControlInfoKHR struct to the {@link VkVideoCodingControlInfoKHR#pNext} field. */
+        public VkVideoCodingControlInfoKHR.Buffer pNext(VkVideoEncodeRateControlInfoKHR value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkVideoCodingControlInfoKHR#flags} field. */
         public VkVideoCodingControlInfoKHR.Buffer flags(@NativeType("VkVideoCodingControlFlagsKHR") int value) { VkVideoCodingControlInfoKHR.nflags(address(), value); return this; }
 

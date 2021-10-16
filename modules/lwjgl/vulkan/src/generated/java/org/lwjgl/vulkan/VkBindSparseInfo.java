@@ -183,6 +183,10 @@ public class VkBindSparseInfo extends Struct implements NativeResource {
     public VkBindSparseInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BIND_SPARSE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBindSparseInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkDeviceGroupBindSparseInfo struct to the {@link #pNext} field. */
+    public VkBindSparseInfo pNext(VkDeviceGroupBindSparseInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDeviceGroupBindSparseInfoKHR struct to the {@link #pNext} field. */
+    public VkBindSparseInfo pNext(VkDeviceGroupBindSparseInfoKHR value) { return pNext(memAddressSafe(value)); }
     /** Sets the address of the specified {@link LongBuffer} to the {@link #pWaitSemaphores} field. */
     public VkBindSparseInfo pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { npWaitSemaphores(address(), value); return this; }
     /** Sets the address of the specified {@link VkSparseBufferMemoryBindInfo.Buffer} to the {@link #pBufferBinds} field. */
@@ -539,6 +543,10 @@ public class VkBindSparseInfo extends Struct implements NativeResource {
         public VkBindSparseInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BIND_SPARSE_INFO); }
         /** Sets the specified value to the {@link VkBindSparseInfo#pNext} field. */
         public VkBindSparseInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindSparseInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkDeviceGroupBindSparseInfo struct to the {@link VkBindSparseInfo#pNext} field. */
+        public VkBindSparseInfo.Buffer pNext(VkDeviceGroupBindSparseInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDeviceGroupBindSparseInfoKHR struct to the {@link VkBindSparseInfo#pNext} field. */
+        public VkBindSparseInfo.Buffer pNext(VkDeviceGroupBindSparseInfoKHR value) { return pNext(memAddressSafe(value)); }
         /** Sets the address of the specified {@link LongBuffer} to the {@link VkBindSparseInfo#pWaitSemaphores} field. */
         public VkBindSparseInfo.Buffer pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { VkBindSparseInfo.npWaitSemaphores(address(), value); return this; }
         /** Sets the address of the specified {@link VkSparseBufferMemoryBindInfo.Buffer} to the {@link VkBindSparseInfo#pBufferBinds} field. */

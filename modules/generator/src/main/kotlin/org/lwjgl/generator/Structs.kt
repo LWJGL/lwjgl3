@@ -1943,6 +1943,13 @@ ${validations.joinToString("\n")}
                     printSetterJavadoc(accessMode, it, indent, javadoc, setter)
                     println("${indent}public $returnType $setter\$Default() { return $setter(${expression.replace('#', '.')}); }")
                 }
+
+                if (it.has<PointerSetter>()) {
+                    it.get<PointerSetter>().types.forEach { structType ->
+                        printSetterJavadoc(accessMode, it, indent, "Sets the address of the specified $structType struct to the #member field.", setter)
+                        println("${indent}public $returnType $setter($structType value) { return $setter(${if (it.isNullable) "memAddressSafe(value)" else "value.address()"}); }")
+                    }
+                }
             }
         }
     }

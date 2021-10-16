@@ -96,6 +96,12 @@ public class VkFormatProperties2 extends Struct implements NativeResource {
     public VkFormatProperties2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkFormatProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkDrmFormatModifierPropertiesListEXT struct to the {@link #pNext} field. */
+    public VkFormatProperties2 pNext(VkDrmFormatModifierPropertiesListEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkFormatProperties3KHR struct to the {@link #pNext} field. */
+    public VkFormatProperties2 pNext(VkFormatProperties3KHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDrmFormatModifierPropertiesList2EXT struct to the {@link #pNext} field. */
+    public VkFormatProperties2 pNext(VkDrmFormatModifierPropertiesList2EXT value) { return pNext(memAddressSafe(value)); }
 
     /** Initializes this struct with the specified values. */
     public VkFormatProperties2 set(
@@ -317,6 +323,12 @@ public class VkFormatProperties2 extends Struct implements NativeResource {
         public VkFormatProperties2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2); }
         /** Sets the specified value to the {@link VkFormatProperties2#pNext} field. */
         public VkFormatProperties2.Buffer pNext(@NativeType("void *") long value) { VkFormatProperties2.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkDrmFormatModifierPropertiesListEXT struct to the {@link VkFormatProperties2#pNext} field. */
+        public VkFormatProperties2.Buffer pNext(VkDrmFormatModifierPropertiesListEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkFormatProperties3KHR struct to the {@link VkFormatProperties2#pNext} field. */
+        public VkFormatProperties2.Buffer pNext(VkFormatProperties3KHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDrmFormatModifierPropertiesList2EXT struct to the {@link VkFormatProperties2#pNext} field. */
+        public VkFormatProperties2.Buffer pNext(VkDrmFormatModifierPropertiesList2EXT value) { return pNext(memAddressSafe(value)); }
 
     }
 

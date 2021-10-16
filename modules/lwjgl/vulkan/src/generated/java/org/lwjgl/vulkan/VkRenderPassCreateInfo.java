@@ -178,6 +178,14 @@ public class VkRenderPassCreateInfo extends Struct implements NativeResource {
     public VkRenderPassCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkRenderPassMultiviewCreateInfo struct to the {@link #pNext} field. */
+    public VkRenderPassCreateInfo pNext(VkRenderPassMultiviewCreateInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkRenderPassMultiviewCreateInfoKHR struct to the {@link #pNext} field. */
+    public VkRenderPassCreateInfo pNext(VkRenderPassMultiviewCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkRenderPassInputAttachmentAspectCreateInfo struct to the {@link #pNext} field. */
+    public VkRenderPassCreateInfo pNext(VkRenderPassInputAttachmentAspectCreateInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkRenderPassInputAttachmentAspectCreateInfoKHR struct to the {@link #pNext} field. */
+    public VkRenderPassCreateInfo pNext(VkRenderPassInputAttachmentAspectCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkRenderPassCreateInfo flags(@NativeType("VkRenderPassCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentDescription.Buffer} to the {@link #pAttachments} field. */
@@ -492,6 +500,14 @@ public class VkRenderPassCreateInfo extends Struct implements NativeResource {
         public VkRenderPassCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO); }
         /** Sets the specified value to the {@link VkRenderPassCreateInfo#pNext} field. */
         public VkRenderPassCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassCreateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkRenderPassMultiviewCreateInfo struct to the {@link VkRenderPassCreateInfo#pNext} field. */
+        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassMultiviewCreateInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkRenderPassMultiviewCreateInfoKHR struct to the {@link VkRenderPassCreateInfo#pNext} field. */
+        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassMultiviewCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkRenderPassInputAttachmentAspectCreateInfo struct to the {@link VkRenderPassCreateInfo#pNext} field. */
+        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassInputAttachmentAspectCreateInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkRenderPassInputAttachmentAspectCreateInfoKHR struct to the {@link VkRenderPassCreateInfo#pNext} field. */
+        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassInputAttachmentAspectCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkRenderPassCreateInfo#flags} field. */
         public VkRenderPassCreateInfo.Buffer flags(@NativeType("VkRenderPassCreateFlags") int value) { VkRenderPassCreateInfo.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentDescription.Buffer} to the {@link VkRenderPassCreateInfo#pAttachments} field. */

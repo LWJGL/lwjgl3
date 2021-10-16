@@ -173,6 +173,14 @@ public class VkSubmitInfo extends Struct implements NativeResource {
     public VkSubmitInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SUBMIT_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubmitInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkD3D12FenceSubmitInfoKHR struct to the {@link #pNext} field. */
+    public VkSubmitInfo pNext(VkD3D12FenceSubmitInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDeviceGroupSubmitInfo struct to the {@link #pNext} field. */
+    public VkSubmitInfo pNext(VkDeviceGroupSubmitInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDeviceGroupSubmitInfoKHR struct to the {@link #pNext} field. */
+    public VkSubmitInfo pNext(VkDeviceGroupSubmitInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkProtectedSubmitInfo struct to the {@link #pNext} field. */
+    public VkSubmitInfo pNext(VkProtectedSubmitInfo value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #waitSemaphoreCount} field. */
     public VkSubmitInfo waitSemaphoreCount(@NativeType("uint32_t") int value) { nwaitSemaphoreCount(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@link #pWaitSemaphores} field. */
@@ -493,6 +501,14 @@ public class VkSubmitInfo extends Struct implements NativeResource {
         public VkSubmitInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SUBMIT_INFO); }
         /** Sets the specified value to the {@link VkSubmitInfo#pNext} field. */
         public VkSubmitInfo.Buffer pNext(@NativeType("void const *") long value) { VkSubmitInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkD3D12FenceSubmitInfoKHR struct to the {@link VkSubmitInfo#pNext} field. */
+        public VkSubmitInfo.Buffer pNext(VkD3D12FenceSubmitInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDeviceGroupSubmitInfo struct to the {@link VkSubmitInfo#pNext} field. */
+        public VkSubmitInfo.Buffer pNext(VkDeviceGroupSubmitInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDeviceGroupSubmitInfoKHR struct to the {@link VkSubmitInfo#pNext} field. */
+        public VkSubmitInfo.Buffer pNext(VkDeviceGroupSubmitInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkProtectedSubmitInfo struct to the {@link VkSubmitInfo#pNext} field. */
+        public VkSubmitInfo.Buffer pNext(VkProtectedSubmitInfo value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkSubmitInfo#waitSemaphoreCount} field. */
         public VkSubmitInfo.Buffer waitSemaphoreCount(@NativeType("uint32_t") int value) { VkSubmitInfo.nwaitSemaphoreCount(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@link VkSubmitInfo#pWaitSemaphores} field. */

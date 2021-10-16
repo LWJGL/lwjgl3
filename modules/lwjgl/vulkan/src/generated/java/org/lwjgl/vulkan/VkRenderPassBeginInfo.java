@@ -173,6 +173,18 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
     public VkRenderPassBeginInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassBeginInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkDeviceGroupRenderPassBeginInfo struct to the {@link #pNext} field. */
+    public VkRenderPassBeginInfo pNext(VkDeviceGroupRenderPassBeginInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDeviceGroupRenderPassBeginInfoKHR struct to the {@link #pNext} field. */
+    public VkRenderPassBeginInfo pNext(VkDeviceGroupRenderPassBeginInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkRenderPassSampleLocationsBeginInfoEXT struct to the {@link #pNext} field. */
+    public VkRenderPassBeginInfo pNext(VkRenderPassSampleLocationsBeginInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkRenderPassAttachmentBeginInfo struct to the {@link #pNext} field. */
+    public VkRenderPassBeginInfo pNext(VkRenderPassAttachmentBeginInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkRenderPassAttachmentBeginInfoKHR struct to the {@link #pNext} field. */
+    public VkRenderPassBeginInfo pNext(VkRenderPassAttachmentBeginInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkRenderPassTransformBeginInfoQCOM struct to the {@link #pNext} field. */
+    public VkRenderPassBeginInfo pNext(VkRenderPassTransformBeginInfoQCOM value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #renderPass} field. */
     public VkRenderPassBeginInfo renderPass(@NativeType("VkRenderPass") long value) { nrenderPass(address(), value); return this; }
     /** Sets the specified value to the {@link #framebuffer} field. */
@@ -447,6 +459,18 @@ public class VkRenderPassBeginInfo extends Struct implements NativeResource {
         public VkRenderPassBeginInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO); }
         /** Sets the specified value to the {@link VkRenderPassBeginInfo#pNext} field. */
         public VkRenderPassBeginInfo.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassBeginInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkDeviceGroupRenderPassBeginInfo struct to the {@link VkRenderPassBeginInfo#pNext} field. */
+        public VkRenderPassBeginInfo.Buffer pNext(VkDeviceGroupRenderPassBeginInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDeviceGroupRenderPassBeginInfoKHR struct to the {@link VkRenderPassBeginInfo#pNext} field. */
+        public VkRenderPassBeginInfo.Buffer pNext(VkDeviceGroupRenderPassBeginInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkRenderPassSampleLocationsBeginInfoEXT struct to the {@link VkRenderPassBeginInfo#pNext} field. */
+        public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassSampleLocationsBeginInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkRenderPassAttachmentBeginInfo struct to the {@link VkRenderPassBeginInfo#pNext} field. */
+        public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassAttachmentBeginInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkRenderPassAttachmentBeginInfoKHR struct to the {@link VkRenderPassBeginInfo#pNext} field. */
+        public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassAttachmentBeginInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkRenderPassTransformBeginInfoQCOM struct to the {@link VkRenderPassBeginInfo#pNext} field. */
+        public VkRenderPassBeginInfo.Buffer pNext(VkRenderPassTransformBeginInfoQCOM value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkRenderPassBeginInfo#renderPass} field. */
         public VkRenderPassBeginInfo.Buffer renderPass(@NativeType("VkRenderPass") long value) { VkRenderPassBeginInfo.nrenderPass(address(), value); return this; }
         /** Sets the specified value to the {@link VkRenderPassBeginInfo#framebuffer} field. */

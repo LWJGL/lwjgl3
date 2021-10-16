@@ -185,6 +185,22 @@ public class VkDeviceCreateInfo extends Struct implements NativeResource {
     public VkDeviceCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkDevicePrivateDataCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkDeviceCreateInfo pNext(VkDevicePrivateDataCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceFeatures2 struct to the {@link #pNext} field. */
+    public VkDeviceCreateInfo pNext(VkPhysicalDeviceFeatures2 value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceFeatures2KHR struct to the {@link #pNext} field. */
+    public VkDeviceCreateInfo pNext(VkPhysicalDeviceFeatures2KHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDeviceGroupDeviceCreateInfo struct to the {@link #pNext} field. */
+    public VkDeviceCreateInfo pNext(VkDeviceGroupDeviceCreateInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDeviceGroupDeviceCreateInfoKHR struct to the {@link #pNext} field. */
+    public VkDeviceCreateInfo pNext(VkDeviceGroupDeviceCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDeviceDeviceMemoryReportCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkDeviceCreateInfo pNext(VkDeviceDeviceMemoryReportCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDeviceMemoryOverallocationCreateInfoAMD struct to the {@link #pNext} field. */
+    public VkDeviceCreateInfo pNext(VkDeviceMemoryOverallocationCreateInfoAMD value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDeviceDiagnosticsConfigCreateInfoNV struct to the {@link #pNext} field. */
+    public VkDeviceCreateInfo pNext(VkDeviceDiagnosticsConfigCreateInfoNV value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkDeviceCreateInfo flags(@NativeType("VkDeviceCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkDeviceQueueCreateInfo.Buffer} to the {@link #pQueueCreateInfos} field. */
@@ -511,6 +527,22 @@ public class VkDeviceCreateInfo extends Struct implements NativeResource {
         public VkDeviceCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkDeviceCreateInfo#pNext} field. */
         public VkDeviceCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceCreateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkDevicePrivateDataCreateInfoEXT struct to the {@link VkDeviceCreateInfo#pNext} field. */
+        public VkDeviceCreateInfo.Buffer pNext(VkDevicePrivateDataCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceFeatures2 struct to the {@link VkDeviceCreateInfo#pNext} field. */
+        public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceFeatures2 value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceFeatures2KHR struct to the {@link VkDeviceCreateInfo#pNext} field. */
+        public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceFeatures2KHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDeviceGroupDeviceCreateInfo struct to the {@link VkDeviceCreateInfo#pNext} field. */
+        public VkDeviceCreateInfo.Buffer pNext(VkDeviceGroupDeviceCreateInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDeviceGroupDeviceCreateInfoKHR struct to the {@link VkDeviceCreateInfo#pNext} field. */
+        public VkDeviceCreateInfo.Buffer pNext(VkDeviceGroupDeviceCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDeviceDeviceMemoryReportCreateInfoEXT struct to the {@link VkDeviceCreateInfo#pNext} field. */
+        public VkDeviceCreateInfo.Buffer pNext(VkDeviceDeviceMemoryReportCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDeviceMemoryOverallocationCreateInfoAMD struct to the {@link VkDeviceCreateInfo#pNext} field. */
+        public VkDeviceCreateInfo.Buffer pNext(VkDeviceMemoryOverallocationCreateInfoAMD value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDeviceDiagnosticsConfigCreateInfoNV struct to the {@link VkDeviceCreateInfo#pNext} field. */
+        public VkDeviceCreateInfo.Buffer pNext(VkDeviceDiagnosticsConfigCreateInfoNV value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkDeviceCreateInfo#flags} field. */
         public VkDeviceCreateInfo.Buffer flags(@NativeType("VkDeviceCreateFlags") int value) { VkDeviceCreateInfo.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkDeviceQueueCreateInfo.Buffer} to the {@link VkDeviceCreateInfo#pQueueCreateInfos} field. */

@@ -96,6 +96,14 @@ public class VkSurfaceCapabilities2KHR extends Struct implements NativeResource 
     public VkSurfaceCapabilities2KHR sType$Default() { return sType(KHRGetSurfaceCapabilities2.VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSurfaceCapabilities2KHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkDisplayNativeHdrSurfaceCapabilitiesAMD struct to the {@link #pNext} field. */
+    public VkSurfaceCapabilities2KHR pNext(VkDisplayNativeHdrSurfaceCapabilitiesAMD value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkSharedPresentSurfaceCapabilitiesKHR struct to the {@link #pNext} field. */
+    public VkSurfaceCapabilities2KHR pNext(VkSharedPresentSurfaceCapabilitiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkSurfaceProtectedCapabilitiesKHR struct to the {@link #pNext} field. */
+    public VkSurfaceCapabilities2KHR pNext(VkSurfaceProtectedCapabilitiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkSurfaceCapabilitiesFullScreenExclusiveEXT struct to the {@link #pNext} field. */
+    public VkSurfaceCapabilities2KHR pNext(VkSurfaceCapabilitiesFullScreenExclusiveEXT value) { return pNext(memAddressSafe(value)); }
 
     /** Initializes this struct with the specified values. */
     public VkSurfaceCapabilities2KHR set(
@@ -317,6 +325,14 @@ public class VkSurfaceCapabilities2KHR extends Struct implements NativeResource 
         public VkSurfaceCapabilities2KHR.Buffer sType$Default() { return sType(KHRGetSurfaceCapabilities2.VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR); }
         /** Sets the specified value to the {@link VkSurfaceCapabilities2KHR#pNext} field. */
         public VkSurfaceCapabilities2KHR.Buffer pNext(@NativeType("void *") long value) { VkSurfaceCapabilities2KHR.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkDisplayNativeHdrSurfaceCapabilitiesAMD struct to the {@link VkSurfaceCapabilities2KHR#pNext} field. */
+        public VkSurfaceCapabilities2KHR.Buffer pNext(VkDisplayNativeHdrSurfaceCapabilitiesAMD value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkSharedPresentSurfaceCapabilitiesKHR struct to the {@link VkSurfaceCapabilities2KHR#pNext} field. */
+        public VkSurfaceCapabilities2KHR.Buffer pNext(VkSharedPresentSurfaceCapabilitiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkSurfaceProtectedCapabilitiesKHR struct to the {@link VkSurfaceCapabilities2KHR#pNext} field. */
+        public VkSurfaceCapabilities2KHR.Buffer pNext(VkSurfaceProtectedCapabilitiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkSurfaceCapabilitiesFullScreenExclusiveEXT struct to the {@link VkSurfaceCapabilities2KHR#pNext} field. */
+        public VkSurfaceCapabilities2KHR.Buffer pNext(VkSurfaceCapabilitiesFullScreenExclusiveEXT value) { return pNext(memAddressSafe(value)); }
 
     }
 

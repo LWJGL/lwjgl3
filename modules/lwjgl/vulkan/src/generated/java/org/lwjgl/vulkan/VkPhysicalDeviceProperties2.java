@@ -100,6 +100,130 @@ public class VkPhysicalDeviceProperties2 extends Struct implements NativeResourc
     public VkPhysicalDeviceProperties2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceMultiDrawPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceMultiDrawPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDevicePushDescriptorPropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDevicePushDescriptorPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceDriverProperties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceDriverProperties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceDriverPropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceDriverPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceIDProperties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceIDProperties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceIDPropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceIDPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceMultiviewProperties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceMultiviewProperties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceMultiviewPropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceMultiviewPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceDiscardRectanglePropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceDiscardRectanglePropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceSubgroupProperties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceSubgroupProperties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDevicePointClippingProperties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDevicePointClippingProperties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDevicePointClippingPropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDevicePointClippingPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceProtectedMemoryProperties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceProtectedMemoryProperties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceSamplerFilterMinmaxProperties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceSamplerFilterMinmaxProperties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceSampleLocationsPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceSampleLocationsPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceInlineUniformBlockPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceInlineUniformBlockPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceMaintenance3Properties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceMaintenance3Properties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceMaintenance3PropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceMaintenance3PropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceMaintenance4PropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceMaintenance4PropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceFloatControlsProperties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceFloatControlsProperties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceFloatControlsPropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceFloatControlsPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceExternalMemoryHostPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceExternalMemoryHostPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceConservativeRasterizationPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceConservativeRasterizationPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceShaderCorePropertiesAMD struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceShaderCorePropertiesAMD value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceShaderCoreProperties2AMD struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceShaderCoreProperties2AMD value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceDescriptorIndexingProperties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceDescriptorIndexingProperties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceDescriptorIndexingPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceDescriptorIndexingPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceTimelineSemaphoreProperties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceTimelineSemaphoreProperties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceTimelineSemaphorePropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceTimelineSemaphorePropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDevicePCIBusInfoPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDevicePCIBusInfoPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceDepthStencilResolveProperties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceDepthStencilResolveProperties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceDepthStencilResolvePropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceDepthStencilResolvePropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceTransformFeedbackPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceTransformFeedbackPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceShadingRateImagePropertiesNV struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceShadingRateImagePropertiesNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceMeshShaderPropertiesNV struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceMeshShaderPropertiesNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceAccelerationStructurePropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceAccelerationStructurePropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceRayTracingPipelinePropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceRayTracingPipelinePropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceRayTracingPropertiesNV struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceRayTracingPropertiesNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceFragmentDensityMapPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceFragmentDensityMapPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceFragmentDensityMap2PropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceFragmentDensityMap2PropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceCooperativeMatrixPropertiesNV struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceCooperativeMatrixPropertiesNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDevicePerformanceQueryPropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDevicePerformanceQueryPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceShaderSMBuiltinsPropertiesNV struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceShaderSMBuiltinsPropertiesNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceSubgroupSizeControlPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceSubgroupSizeControlPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceSubpassShadingPropertiesHUAWEI struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceSubpassShadingPropertiesHUAWEI value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceLineRasterizationPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceLineRasterizationPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceVulkan11Properties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceVulkan11Properties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceVulkan12Properties struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceVulkan12Properties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceCustomBorderColorPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceCustomBorderColorPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceRobustness2PropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceRobustness2PropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDevicePortabilitySubsetPropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDevicePortabilitySubsetPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceFragmentShadingRatePropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceFragmentShadingRatePropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceProvokingVertexPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceProvokingVertexPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkPhysicalDeviceDrmPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceProperties2 pNext(VkPhysicalDeviceDrmPropertiesEXT value) { return pNext(memAddressSafe(value)); }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceProperties2 set(
@@ -321,6 +445,130 @@ public class VkPhysicalDeviceProperties2 extends Struct implements NativeResourc
         public VkPhysicalDeviceProperties2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2); }
         /** Sets the specified value to the {@link VkPhysicalDeviceProperties2#pNext} field. */
         public VkPhysicalDeviceProperties2.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceProperties2.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceMultiDrawPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceMultiDrawPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDevicePushDescriptorPropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDevicePushDescriptorPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceDriverProperties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceDriverProperties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceDriverPropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceDriverPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceIDProperties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceIDProperties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceIDPropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceIDPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceMultiviewProperties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceMultiviewProperties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceMultiviewPropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceMultiviewPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceDiscardRectanglePropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceDiscardRectanglePropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceSubgroupProperties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceSubgroupProperties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDevicePointClippingProperties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDevicePointClippingProperties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDevicePointClippingPropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDevicePointClippingPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceProtectedMemoryProperties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceProtectedMemoryProperties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceSamplerFilterMinmaxProperties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceSamplerFilterMinmaxProperties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceSampleLocationsPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceSampleLocationsPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceInlineUniformBlockPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceInlineUniformBlockPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceMaintenance3Properties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceMaintenance3Properties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceMaintenance3PropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceMaintenance3PropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceMaintenance4PropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceMaintenance4PropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceFloatControlsProperties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceFloatControlsProperties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceFloatControlsPropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceFloatControlsPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceExternalMemoryHostPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceExternalMemoryHostPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceConservativeRasterizationPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceConservativeRasterizationPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceShaderCorePropertiesAMD struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceShaderCorePropertiesAMD value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceShaderCoreProperties2AMD struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceShaderCoreProperties2AMD value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceDescriptorIndexingProperties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceDescriptorIndexingProperties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceDescriptorIndexingPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceDescriptorIndexingPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceTimelineSemaphoreProperties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceTimelineSemaphoreProperties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceTimelineSemaphorePropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceTimelineSemaphorePropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDevicePCIBusInfoPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDevicePCIBusInfoPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceDepthStencilResolveProperties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceDepthStencilResolveProperties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceDepthStencilResolvePropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceDepthStencilResolvePropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceTransformFeedbackPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceTransformFeedbackPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceShadingRateImagePropertiesNV struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceShadingRateImagePropertiesNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceMeshShaderPropertiesNV struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceMeshShaderPropertiesNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceAccelerationStructurePropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceAccelerationStructurePropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceRayTracingPipelinePropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceRayTracingPipelinePropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceRayTracingPropertiesNV struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceRayTracingPropertiesNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceFragmentDensityMapPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceFragmentDensityMapPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceFragmentDensityMap2PropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceFragmentDensityMap2PropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceCooperativeMatrixPropertiesNV struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceCooperativeMatrixPropertiesNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDevicePerformanceQueryPropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDevicePerformanceQueryPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceShaderSMBuiltinsPropertiesNV struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceShaderSMBuiltinsPropertiesNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceSubgroupSizeControlPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceSubgroupSizeControlPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceSubpassShadingPropertiesHUAWEI struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceSubpassShadingPropertiesHUAWEI value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceLineRasterizationPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceLineRasterizationPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceVulkan11Properties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceVulkan11Properties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceVulkan12Properties struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceVulkan12Properties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceCustomBorderColorPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceCustomBorderColorPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceRobustness2PropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceRobustness2PropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDevicePortabilitySubsetPropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDevicePortabilitySubsetPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceFragmentShadingRatePropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceFragmentShadingRatePropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceProvokingVertexPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceProvokingVertexPropertiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkPhysicalDeviceDrmPropertiesEXT struct to the {@link VkPhysicalDeviceProperties2#pNext} field. */
+        public VkPhysicalDeviceProperties2.Buffer pNext(VkPhysicalDeviceDrmPropertiesEXT value) { return pNext(memAddressSafe(value)); }
 
     }
 

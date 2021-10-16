@@ -123,6 +123,12 @@ public class VkVideoProfileKHR extends Struct implements NativeResource {
     public VkVideoProfileKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoProfileKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkVideoDecodeH264ProfileEXT struct to the {@link #pNext} field. */
+    public VkVideoProfileKHR pNext(VkVideoDecodeH264ProfileEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkVideoDecodeH265ProfileEXT struct to the {@link #pNext} field. */
+    public VkVideoProfileKHR pNext(VkVideoDecodeH265ProfileEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkVideoEncodeH264ProfileEXT struct to the {@link #pNext} field. */
+    public VkVideoProfileKHR pNext(VkVideoEncodeH264ProfileEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #videoCodecOperation} field. */
     public VkVideoProfileKHR videoCodecOperation(@NativeType("VkVideoCodecOperationFlagBitsKHR") int value) { nvideoCodecOperation(address(), value); return this; }
     /** Sets the specified value to the {@link #chromaSubsampling} field. */
@@ -366,6 +372,12 @@ public class VkVideoProfileKHR extends Struct implements NativeResource {
         public VkVideoProfileKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR); }
         /** Sets the specified value to the {@link VkVideoProfileKHR#pNext} field. */
         public VkVideoProfileKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoProfileKHR.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkVideoDecodeH264ProfileEXT struct to the {@link VkVideoProfileKHR#pNext} field. */
+        public VkVideoProfileKHR.Buffer pNext(VkVideoDecodeH264ProfileEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkVideoDecodeH265ProfileEXT struct to the {@link VkVideoProfileKHR#pNext} field. */
+        public VkVideoProfileKHR.Buffer pNext(VkVideoDecodeH265ProfileEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkVideoEncodeH264ProfileEXT struct to the {@link VkVideoProfileKHR#pNext} field. */
+        public VkVideoProfileKHR.Buffer pNext(VkVideoEncodeH264ProfileEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkVideoProfileKHR#videoCodecOperation} field. */
         public VkVideoProfileKHR.Buffer videoCodecOperation(@NativeType("VkVideoCodecOperationFlagBitsKHR") int value) { VkVideoProfileKHR.nvideoCodecOperation(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoProfileKHR#chromaSubsampling} field. */

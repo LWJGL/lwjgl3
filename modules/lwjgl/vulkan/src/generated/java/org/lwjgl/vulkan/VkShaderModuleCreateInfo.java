@@ -129,6 +129,8 @@ public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
     public VkShaderModuleCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkShaderModuleCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkShaderModuleValidationCacheCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkShaderModuleCreateInfo pNext(VkShaderModuleValidationCacheCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkShaderModuleCreateInfo flags(@NativeType("VkShaderModuleCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link ByteBuffer} to the {@link #pCode} field. */
@@ -396,6 +398,8 @@ public class VkShaderModuleCreateInfo extends Struct implements NativeResource {
         public VkShaderModuleCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkShaderModuleCreateInfo#pNext} field. */
         public VkShaderModuleCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkShaderModuleCreateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkShaderModuleValidationCacheCreateInfoEXT struct to the {@link VkShaderModuleCreateInfo#pNext} field. */
+        public VkShaderModuleCreateInfo.Buffer pNext(VkShaderModuleValidationCacheCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkShaderModuleCreateInfo#flags} field. */
         public VkShaderModuleCreateInfo.Buffer flags(@NativeType("VkShaderModuleCreateFlags") int value) { VkShaderModuleCreateInfo.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link ByteBuffer} to the {@link VkShaderModuleCreateInfo#pCode} field. */

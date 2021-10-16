@@ -114,6 +114,10 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
     public VkCommandBufferBeginInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCommandBufferBeginInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkDeviceGroupCommandBufferBeginInfo struct to the {@link #pNext} field. */
+    public VkCommandBufferBeginInfo pNext(VkDeviceGroupCommandBufferBeginInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDeviceGroupCommandBufferBeginInfoKHR struct to the {@link #pNext} field. */
+    public VkCommandBufferBeginInfo pNext(VkDeviceGroupCommandBufferBeginInfoKHR value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkCommandBufferBeginInfo flags(@NativeType("VkCommandBufferUsageFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkCommandBufferInheritanceInfo} to the {@link #pInheritanceInfo} field. */
@@ -354,6 +358,10 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
         public VkCommandBufferBeginInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO); }
         /** Sets the specified value to the {@link VkCommandBufferBeginInfo#pNext} field. */
         public VkCommandBufferBeginInfo.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferBeginInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkDeviceGroupCommandBufferBeginInfo struct to the {@link VkCommandBufferBeginInfo#pNext} field. */
+        public VkCommandBufferBeginInfo.Buffer pNext(VkDeviceGroupCommandBufferBeginInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDeviceGroupCommandBufferBeginInfoKHR struct to the {@link VkCommandBufferBeginInfo#pNext} field. */
+        public VkCommandBufferBeginInfo.Buffer pNext(VkDeviceGroupCommandBufferBeginInfoKHR value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkCommandBufferBeginInfo#flags} field. */
         public VkCommandBufferBeginInfo.Buffer flags(@NativeType("VkCommandBufferUsageFlags") int value) { VkCommandBufferBeginInfo.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkCommandBufferInheritanceInfo} to the {@link VkCommandBufferBeginInfo#pInheritanceInfo} field. */

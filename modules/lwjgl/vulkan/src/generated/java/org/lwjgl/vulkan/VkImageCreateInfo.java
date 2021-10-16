@@ -371,6 +371,20 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
     public VkImageCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkDedicatedAllocationImageCreateInfoNV struct to the {@link #pNext} field. */
+    public VkImageCreateInfo pNext(VkDedicatedAllocationImageCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkExternalMemoryImageCreateInfoNV struct to the {@link #pNext} field. */
+    public VkImageCreateInfo pNext(VkExternalMemoryImageCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkExternalMemoryImageCreateInfo struct to the {@link #pNext} field. */
+    public VkImageCreateInfo pNext(VkExternalMemoryImageCreateInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkExternalMemoryImageCreateInfoKHR struct to the {@link #pNext} field. */
+    public VkImageCreateInfo pNext(VkExternalMemoryImageCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkImageSwapchainCreateInfoKHR struct to the {@link #pNext} field. */
+    public VkImageCreateInfo pNext(VkImageSwapchainCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkImageDrmFormatModifierListCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkImageCreateInfo pNext(VkImageDrmFormatModifierListCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkImageDrmFormatModifierExplicitCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkImageCreateInfo pNext(VkImageDrmFormatModifierExplicitCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkImageCreateInfo flags(@NativeType("VkImageCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #imageType} field. */
@@ -733,6 +747,20 @@ public class VkImageCreateInfo extends Struct implements NativeResource {
         public VkImageCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkImageCreateInfo#pNext} field. */
         public VkImageCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkImageCreateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkDedicatedAllocationImageCreateInfoNV struct to the {@link VkImageCreateInfo#pNext} field. */
+        public VkImageCreateInfo.Buffer pNext(VkDedicatedAllocationImageCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkExternalMemoryImageCreateInfoNV struct to the {@link VkImageCreateInfo#pNext} field. */
+        public VkImageCreateInfo.Buffer pNext(VkExternalMemoryImageCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkExternalMemoryImageCreateInfo struct to the {@link VkImageCreateInfo#pNext} field. */
+        public VkImageCreateInfo.Buffer pNext(VkExternalMemoryImageCreateInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkExternalMemoryImageCreateInfoKHR struct to the {@link VkImageCreateInfo#pNext} field. */
+        public VkImageCreateInfo.Buffer pNext(VkExternalMemoryImageCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkImageSwapchainCreateInfoKHR struct to the {@link VkImageCreateInfo#pNext} field. */
+        public VkImageCreateInfo.Buffer pNext(VkImageSwapchainCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkImageDrmFormatModifierListCreateInfoEXT struct to the {@link VkImageCreateInfo#pNext} field. */
+        public VkImageCreateInfo.Buffer pNext(VkImageDrmFormatModifierListCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkImageDrmFormatModifierExplicitCreateInfoEXT struct to the {@link VkImageCreateInfo#pNext} field. */
+        public VkImageCreateInfo.Buffer pNext(VkImageDrmFormatModifierExplicitCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkImageCreateInfo#flags} field. */
         public VkImageCreateInfo.Buffer flags(@NativeType("VkImageCreateFlags") int value) { VkImageCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageCreateInfo#imageType} field. */

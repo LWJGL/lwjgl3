@@ -111,6 +111,8 @@ public class VkVideoDecodeH264PictureInfoEXT extends Struct implements NativeRes
     public VkVideoDecodeH264PictureInfoEXT sType$Default() { return sType(EXTVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoDecodeH264PictureInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkVideoDecodeH264MvcEXT struct to the {@link #pNext} field. */
+    public VkVideoDecodeH264PictureInfoEXT pNext(VkVideoDecodeH264MvcEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the address of the specified {@link StdVideoDecodeH264PictureInfo} to the {@link #pStdPictureInfo} field. */
     public VkVideoDecodeH264PictureInfoEXT pStdPictureInfo(@NativeType("StdVideoDecodeH264PictureInfo const *") StdVideoDecodeH264PictureInfo value) { npStdPictureInfo(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pSlicesDataOffsets} field. */
@@ -361,6 +363,8 @@ public class VkVideoDecodeH264PictureInfoEXT extends Struct implements NativeRes
         public VkVideoDecodeH264PictureInfoEXT.Buffer sType$Default() { return sType(EXTVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT); }
         /** Sets the specified value to the {@link VkVideoDecodeH264PictureInfoEXT#pNext} field. */
         public VkVideoDecodeH264PictureInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeH264PictureInfoEXT.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkVideoDecodeH264MvcEXT struct to the {@link VkVideoDecodeH264PictureInfoEXT#pNext} field. */
+        public VkVideoDecodeH264PictureInfoEXT.Buffer pNext(VkVideoDecodeH264MvcEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the address of the specified {@link StdVideoDecodeH264PictureInfo} to the {@link VkVideoDecodeH264PictureInfoEXT#pStdPictureInfo} field. */
         public VkVideoDecodeH264PictureInfoEXT.Buffer pStdPictureInfo(@NativeType("StdVideoDecodeH264PictureInfo const *") StdVideoDecodeH264PictureInfo value) { VkVideoDecodeH264PictureInfoEXT.npStdPictureInfo(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkVideoDecodeH264PictureInfoEXT#pSlicesDataOffsets} field. */

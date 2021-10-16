@@ -105,6 +105,18 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
     public VkImageFormatProperties2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageFormatProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkExternalImageFormatProperties struct to the {@link #pNext} field. */
+    public VkImageFormatProperties2 pNext(VkExternalImageFormatProperties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkExternalImageFormatPropertiesKHR struct to the {@link #pNext} field. */
+    public VkImageFormatProperties2 pNext(VkExternalImageFormatPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkSamplerYcbcrConversionImageFormatProperties struct to the {@link #pNext} field. */
+    public VkImageFormatProperties2 pNext(VkSamplerYcbcrConversionImageFormatProperties value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkSamplerYcbcrConversionImageFormatPropertiesKHR struct to the {@link #pNext} field. */
+    public VkImageFormatProperties2 pNext(VkSamplerYcbcrConversionImageFormatPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkTextureLODGatherFormatPropertiesAMD struct to the {@link #pNext} field. */
+    public VkImageFormatProperties2 pNext(VkTextureLODGatherFormatPropertiesAMD value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkFilterCubicImageViewImageFormatPropertiesEXT struct to the {@link #pNext} field. */
+    public VkImageFormatProperties2 pNext(VkFilterCubicImageViewImageFormatPropertiesEXT value) { return pNext(memAddressSafe(value)); }
 
     /** Initializes this struct with the specified values. */
     public VkImageFormatProperties2 set(
@@ -326,6 +338,18 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
         public VkImageFormatProperties2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2); }
         /** Sets the specified value to the {@link VkImageFormatProperties2#pNext} field. */
         public VkImageFormatProperties2.Buffer pNext(@NativeType("void *") long value) { VkImageFormatProperties2.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkExternalImageFormatProperties struct to the {@link VkImageFormatProperties2#pNext} field. */
+        public VkImageFormatProperties2.Buffer pNext(VkExternalImageFormatProperties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkExternalImageFormatPropertiesKHR struct to the {@link VkImageFormatProperties2#pNext} field. */
+        public VkImageFormatProperties2.Buffer pNext(VkExternalImageFormatPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkSamplerYcbcrConversionImageFormatProperties struct to the {@link VkImageFormatProperties2#pNext} field. */
+        public VkImageFormatProperties2.Buffer pNext(VkSamplerYcbcrConversionImageFormatProperties value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkSamplerYcbcrConversionImageFormatPropertiesKHR struct to the {@link VkImageFormatProperties2#pNext} field. */
+        public VkImageFormatProperties2.Buffer pNext(VkSamplerYcbcrConversionImageFormatPropertiesKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkTextureLODGatherFormatPropertiesAMD struct to the {@link VkImageFormatProperties2#pNext} field. */
+        public VkImageFormatProperties2.Buffer pNext(VkTextureLODGatherFormatPropertiesAMD value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkFilterCubicImageViewImageFormatPropertiesEXT struct to the {@link VkImageFormatProperties2#pNext} field. */
+        public VkImageFormatProperties2.Buffer pNext(VkFilterCubicImageViewImageFormatPropertiesEXT value) { return pNext(memAddressSafe(value)); }
 
     }
 

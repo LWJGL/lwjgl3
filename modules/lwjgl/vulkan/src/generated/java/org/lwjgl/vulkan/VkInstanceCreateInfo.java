@@ -151,6 +151,14 @@ public class VkInstanceCreateInfo extends Struct implements NativeResource {
     public VkInstanceCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkInstanceCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkDebugReportCallbackCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkInstanceCreateInfo pNext(VkDebugReportCallbackCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkValidationFlagsEXT struct to the {@link #pNext} field. */
+    public VkInstanceCreateInfo pNext(VkValidationFlagsEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkValidationFeaturesEXT struct to the {@link #pNext} field. */
+    public VkInstanceCreateInfo pNext(VkValidationFeaturesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDebugUtilsMessengerCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkInstanceCreateInfo pNext(VkDebugUtilsMessengerCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkInstanceCreateInfo flags(@NativeType("VkInstanceCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkApplicationInfo} to the {@link #pApplicationInfo} field. */
@@ -455,6 +463,14 @@ public class VkInstanceCreateInfo extends Struct implements NativeResource {
         public VkInstanceCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkInstanceCreateInfo#pNext} field. */
         public VkInstanceCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkInstanceCreateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkDebugReportCallbackCreateInfoEXT struct to the {@link VkInstanceCreateInfo#pNext} field. */
+        public VkInstanceCreateInfo.Buffer pNext(VkDebugReportCallbackCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkValidationFlagsEXT struct to the {@link VkInstanceCreateInfo#pNext} field. */
+        public VkInstanceCreateInfo.Buffer pNext(VkValidationFlagsEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkValidationFeaturesEXT struct to the {@link VkInstanceCreateInfo#pNext} field. */
+        public VkInstanceCreateInfo.Buffer pNext(VkValidationFeaturesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDebugUtilsMessengerCreateInfoEXT struct to the {@link VkInstanceCreateInfo#pNext} field. */
+        public VkInstanceCreateInfo.Buffer pNext(VkDebugUtilsMessengerCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkInstanceCreateInfo#flags} field. */
         public VkInstanceCreateInfo.Buffer flags(@NativeType("VkInstanceCreateFlags") int value) { VkInstanceCreateInfo.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkApplicationInfo} to the {@link VkInstanceCreateInfo#pApplicationInfo} field. */

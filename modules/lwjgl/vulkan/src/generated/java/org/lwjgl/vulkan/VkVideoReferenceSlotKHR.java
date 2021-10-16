@@ -106,6 +106,10 @@ public class VkVideoReferenceSlotKHR extends Struct implements NativeResource {
     public VkVideoReferenceSlotKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoReferenceSlotKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkVideoDecodeH264DpbSlotInfoEXT struct to the {@link #pNext} field. */
+    public VkVideoReferenceSlotKHR pNext(VkVideoDecodeH264DpbSlotInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkVideoDecodeH265DpbSlotInfoEXT struct to the {@link #pNext} field. */
+    public VkVideoReferenceSlotKHR pNext(VkVideoDecodeH265DpbSlotInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #slotIndex} field. */
     public VkVideoReferenceSlotKHR slotIndex(@NativeType("int8_t") byte value) { nslotIndex(address(), value); return this; }
     /** Sets the address of the specified {@link VkVideoPictureResourceKHR} to the {@link #pPictureResource} field. */
@@ -348,6 +352,10 @@ public class VkVideoReferenceSlotKHR extends Struct implements NativeResource {
         public VkVideoReferenceSlotKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR); }
         /** Sets the specified value to the {@link VkVideoReferenceSlotKHR#pNext} field. */
         public VkVideoReferenceSlotKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoReferenceSlotKHR.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkVideoDecodeH264DpbSlotInfoEXT struct to the {@link VkVideoReferenceSlotKHR#pNext} field. */
+        public VkVideoReferenceSlotKHR.Buffer pNext(VkVideoDecodeH264DpbSlotInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkVideoDecodeH265DpbSlotInfoEXT struct to the {@link VkVideoReferenceSlotKHR#pNext} field. */
+        public VkVideoReferenceSlotKHR.Buffer pNext(VkVideoDecodeH265DpbSlotInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkVideoReferenceSlotKHR#slotIndex} field. */
         public VkVideoReferenceSlotKHR.Buffer slotIndex(@NativeType("int8_t") byte value) { VkVideoReferenceSlotKHR.nslotIndex(address(), value); return this; }
         /** Sets the address of the specified {@link VkVideoPictureResourceKHR} to the {@link VkVideoReferenceSlotKHR#pPictureResource} field. */

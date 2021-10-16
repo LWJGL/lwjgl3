@@ -217,6 +217,12 @@ public class VkSubpassDescription2 extends Struct implements NativeResource {
     public VkSubpassDescription2 sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubpassDescription2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkSubpassDescriptionDepthStencilResolve struct to the {@link #pNext} field. */
+    public VkSubpassDescription2 pNext(VkSubpassDescriptionDepthStencilResolve value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkSubpassDescriptionDepthStencilResolveKHR struct to the {@link #pNext} field. */
+    public VkSubpassDescription2 pNext(VkSubpassDescriptionDepthStencilResolveKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkFragmentShadingRateAttachmentInfoKHR struct to the {@link #pNext} field. */
+    public VkSubpassDescription2 pNext(VkFragmentShadingRateAttachmentInfoKHR value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkSubpassDescription2 flags(@NativeType("VkSubpassDescriptionFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #pipelineBindPoint} field. */
@@ -563,6 +569,12 @@ public class VkSubpassDescription2 extends Struct implements NativeResource {
         public VkSubpassDescription2.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2); }
         /** Sets the specified value to the {@link VkSubpassDescription2#pNext} field. */
         public VkSubpassDescription2.Buffer pNext(@NativeType("void const *") long value) { VkSubpassDescription2.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkSubpassDescriptionDepthStencilResolve struct to the {@link VkSubpassDescription2#pNext} field. */
+        public VkSubpassDescription2.Buffer pNext(VkSubpassDescriptionDepthStencilResolve value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkSubpassDescriptionDepthStencilResolveKHR struct to the {@link VkSubpassDescription2#pNext} field. */
+        public VkSubpassDescription2.Buffer pNext(VkSubpassDescriptionDepthStencilResolveKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkFragmentShadingRateAttachmentInfoKHR struct to the {@link VkSubpassDescription2#pNext} field. */
+        public VkSubpassDescription2.Buffer pNext(VkFragmentShadingRateAttachmentInfoKHR value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkSubpassDescription2#flags} field. */
         public VkSubpassDescription2.Buffer flags(@NativeType("VkSubpassDescriptionFlags") int value) { VkSubpassDescription2.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkSubpassDescription2#pipelineBindPoint} field. */

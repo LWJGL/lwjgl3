@@ -133,6 +133,10 @@ public class VkDescriptorSetLayoutCreateInfo extends Struct implements NativeRes
     public VkDescriptorSetLayoutCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDescriptorSetLayoutCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkDescriptorSetLayoutBindingFlagsCreateInfo struct to the {@link #pNext} field. */
+    public VkDescriptorSetLayoutCreateInfo pNext(VkDescriptorSetLayoutBindingFlagsCreateInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkDescriptorSetLayoutBindingFlagsCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkDescriptorSetLayoutCreateInfo pNext(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkDescriptorSetLayoutCreateInfo flags(@NativeType("VkDescriptorSetLayoutCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkDescriptorSetLayoutBinding.Buffer} to the {@link #pBindings} field. */
@@ -403,6 +407,10 @@ public class VkDescriptorSetLayoutCreateInfo extends Struct implements NativeRes
         public VkDescriptorSetLayoutCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO); }
         /** Sets the specified value to the {@link VkDescriptorSetLayoutCreateInfo#pNext} field. */
         public VkDescriptorSetLayoutCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorSetLayoutCreateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkDescriptorSetLayoutBindingFlagsCreateInfo struct to the {@link VkDescriptorSetLayoutCreateInfo#pNext} field. */
+        public VkDescriptorSetLayoutCreateInfo.Buffer pNext(VkDescriptorSetLayoutBindingFlagsCreateInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkDescriptorSetLayoutBindingFlagsCreateInfoEXT struct to the {@link VkDescriptorSetLayoutCreateInfo#pNext} field. */
+        public VkDescriptorSetLayoutCreateInfo.Buffer pNext(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkDescriptorSetLayoutCreateInfo#flags} field. */
         public VkDescriptorSetLayoutCreateInfo.Buffer flags(@NativeType("VkDescriptorSetLayoutCreateFlags") int value) { VkDescriptorSetLayoutCreateInfo.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkDescriptorSetLayoutBinding.Buffer} to the {@link VkDescriptorSetLayoutCreateInfo#pBindings} field. */

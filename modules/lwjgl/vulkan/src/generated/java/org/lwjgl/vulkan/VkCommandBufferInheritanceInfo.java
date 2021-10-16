@@ -150,6 +150,12 @@ public class VkCommandBufferInheritanceInfo extends Struct implements NativeReso
     public VkCommandBufferInheritanceInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCommandBufferInheritanceInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkCommandBufferInheritanceConditionalRenderingInfoEXT struct to the {@link #pNext} field. */
+    public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceConditionalRenderingInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkCommandBufferInheritanceRenderPassTransformInfoQCOM struct to the {@link #pNext} field. */
+    public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceRenderPassTransformInfoQCOM value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkCommandBufferInheritanceViewportScissorInfoNV struct to the {@link #pNext} field. */
+    public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceViewportScissorInfoNV value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #renderPass} field. */
     public VkCommandBufferInheritanceInfo renderPass(@NativeType("VkRenderPass") long value) { nrenderPass(address(), value); return this; }
     /** Sets the specified value to the {@link #subpass} field. */
@@ -433,6 +439,12 @@ public class VkCommandBufferInheritanceInfo extends Struct implements NativeReso
         public VkCommandBufferInheritanceInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO); }
         /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#pNext} field. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferInheritanceInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkCommandBufferInheritanceConditionalRenderingInfoEXT struct to the {@link VkCommandBufferInheritanceInfo#pNext} field. */
+        public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceConditionalRenderingInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkCommandBufferInheritanceRenderPassTransformInfoQCOM struct to the {@link VkCommandBufferInheritanceInfo#pNext} field. */
+        public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceRenderPassTransformInfoQCOM value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkCommandBufferInheritanceViewportScissorInfoNV struct to the {@link VkCommandBufferInheritanceInfo#pNext} field. */
+        public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceViewportScissorInfoNV value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#renderPass} field. */
         public VkCommandBufferInheritanceInfo.Buffer renderPass(@NativeType("VkRenderPass") long value) { VkCommandBufferInheritanceInfo.nrenderPass(address(), value); return this; }
         /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#subpass} field. */

@@ -141,6 +141,8 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
     public VkPipelineVertexInputStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineVertexInputStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkPipelineVertexInputDivisorStateCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkPipelineVertexInputStateCreateInfo pNext(VkPipelineVertexInputDivisorStateCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineVertexInputStateCreateInfo flags(@NativeType("VkPipelineVertexInputStateCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkVertexInputBindingDescription.Buffer} to the {@link #pVertexBindingDescriptions} field. */
@@ -433,6 +435,8 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct implements Nati
         public VkPipelineVertexInputStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineVertexInputStateCreateInfo#pNext} field. */
         public VkPipelineVertexInputStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineVertexInputStateCreateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkPipelineVertexInputDivisorStateCreateInfoEXT struct to the {@link VkPipelineVertexInputStateCreateInfo#pNext} field. */
+        public VkPipelineVertexInputStateCreateInfo.Buffer pNext(VkPipelineVertexInputDivisorStateCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkPipelineVertexInputStateCreateInfo#flags} field. */
         public VkPipelineVertexInputStateCreateInfo.Buffer flags(@NativeType("VkPipelineVertexInputStateCreateFlags") int value) { VkPipelineVertexInputStateCreateInfo.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkVertexInputBindingDescription.Buffer} to the {@link VkPipelineVertexInputStateCreateInfo#pVertexBindingDescriptions} field. */

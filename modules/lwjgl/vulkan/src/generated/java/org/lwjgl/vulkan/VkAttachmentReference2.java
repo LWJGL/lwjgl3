@@ -133,6 +133,10 @@ public class VkAttachmentReference2 extends Struct implements NativeResource {
     public VkAttachmentReference2 sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAttachmentReference2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkAttachmentReferenceStencilLayout struct to the {@link #pNext} field. */
+    public VkAttachmentReference2 pNext(VkAttachmentReferenceStencilLayout value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkAttachmentReferenceStencilLayoutKHR struct to the {@link #pNext} field. */
+    public VkAttachmentReference2 pNext(VkAttachmentReferenceStencilLayoutKHR value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #attachment} field. */
     public VkAttachmentReference2 attachment(@NativeType("uint32_t") int value) { nattachment(address(), value); return this; }
     /** Sets the specified value to the {@link #layout} field. */
@@ -365,6 +369,10 @@ public class VkAttachmentReference2 extends Struct implements NativeResource {
         public VkAttachmentReference2.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2); }
         /** Sets the specified value to the {@link VkAttachmentReference2#pNext} field. */
         public VkAttachmentReference2.Buffer pNext(@NativeType("void const *") long value) { VkAttachmentReference2.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkAttachmentReferenceStencilLayout struct to the {@link VkAttachmentReference2#pNext} field. */
+        public VkAttachmentReference2.Buffer pNext(VkAttachmentReferenceStencilLayout value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkAttachmentReferenceStencilLayoutKHR struct to the {@link VkAttachmentReference2#pNext} field. */
+        public VkAttachmentReference2.Buffer pNext(VkAttachmentReferenceStencilLayoutKHR value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkAttachmentReference2#attachment} field. */
         public VkAttachmentReference2.Buffer attachment(@NativeType("uint32_t") int value) { VkAttachmentReference2.nattachment(address(), value); return this; }
         /** Sets the specified value to the {@link VkAttachmentReference2#layout} field. */

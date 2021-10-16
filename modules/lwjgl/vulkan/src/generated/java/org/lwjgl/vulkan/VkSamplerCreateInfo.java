@@ -282,6 +282,12 @@ public class VkSamplerCreateInfo extends Struct implements NativeResource {
     public VkSamplerCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSamplerCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkSamplerReductionModeCreateInfo struct to the {@link #pNext} field. */
+    public VkSamplerCreateInfo pNext(VkSamplerReductionModeCreateInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkSamplerReductionModeCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkSamplerCreateInfo pNext(VkSamplerReductionModeCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkSamplerCustomBorderColorCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkSamplerCreateInfo pNext(VkSamplerCustomBorderColorCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkSamplerCreateInfo flags(@NativeType("VkSamplerCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #magFilter} field. */
@@ -671,6 +677,12 @@ public class VkSamplerCreateInfo extends Struct implements NativeResource {
         public VkSamplerCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO); }
         /** Sets the specified value to the {@link VkSamplerCreateInfo#pNext} field. */
         public VkSamplerCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkSamplerCreateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkSamplerReductionModeCreateInfo struct to the {@link VkSamplerCreateInfo#pNext} field. */
+        public VkSamplerCreateInfo.Buffer pNext(VkSamplerReductionModeCreateInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkSamplerReductionModeCreateInfoEXT struct to the {@link VkSamplerCreateInfo#pNext} field. */
+        public VkSamplerCreateInfo.Buffer pNext(VkSamplerReductionModeCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkSamplerCustomBorderColorCreateInfoEXT struct to the {@link VkSamplerCreateInfo#pNext} field. */
+        public VkSamplerCreateInfo.Buffer pNext(VkSamplerCustomBorderColorCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkSamplerCreateInfo#flags} field. */
         public VkSamplerCreateInfo.Buffer flags(@NativeType("VkSamplerCreateFlags") int value) { VkSamplerCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkSamplerCreateInfo#magFilter} field. */

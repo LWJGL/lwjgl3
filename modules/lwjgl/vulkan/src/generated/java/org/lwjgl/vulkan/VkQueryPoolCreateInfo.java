@@ -133,6 +133,12 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
     public VkQueryPoolCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueryPoolCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkQueryPoolPerformanceCreateInfoKHR struct to the {@link #pNext} field. */
+    public VkQueryPoolCreateInfo pNext(VkQueryPoolPerformanceCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkQueryPoolPerformanceQueryCreateInfoINTEL struct to the {@link #pNext} field. */
+    public VkQueryPoolCreateInfo pNext(VkQueryPoolPerformanceQueryCreateInfoINTEL value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkQueryPoolCreateInfoINTEL struct to the {@link #pNext} field. */
+    public VkQueryPoolCreateInfo pNext(VkQueryPoolCreateInfoINTEL value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkQueryPoolCreateInfo flags(@NativeType("VkQueryPoolCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #queryType} field. */
@@ -394,6 +400,12 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
         public VkQueryPoolCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO); }
         /** Sets the specified value to the {@link VkQueryPoolCreateInfo#pNext} field. */
         public VkQueryPoolCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkQueryPoolCreateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkQueryPoolPerformanceCreateInfoKHR struct to the {@link VkQueryPoolCreateInfo#pNext} field. */
+        public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolPerformanceCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkQueryPoolPerformanceQueryCreateInfoINTEL struct to the {@link VkQueryPoolCreateInfo#pNext} field. */
+        public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolPerformanceQueryCreateInfoINTEL value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkQueryPoolCreateInfoINTEL struct to the {@link VkQueryPoolCreateInfo#pNext} field. */
+        public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolCreateInfoINTEL value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkQueryPoolCreateInfo#flags} field. */
         public VkQueryPoolCreateInfo.Buffer flags(@NativeType("VkQueryPoolCreateFlags") int value) { VkQueryPoolCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkQueryPoolCreateInfo#queryType} field. */

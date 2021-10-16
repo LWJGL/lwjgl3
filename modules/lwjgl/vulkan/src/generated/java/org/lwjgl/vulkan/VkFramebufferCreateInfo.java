@@ -221,6 +221,10 @@ public class VkFramebufferCreateInfo extends Struct implements NativeResource {
     public VkFramebufferCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkFramebufferCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkFramebufferAttachmentsCreateInfo struct to the {@link #pNext} field. */
+    public VkFramebufferCreateInfo pNext(VkFramebufferAttachmentsCreateInfo value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkFramebufferAttachmentsCreateInfoKHR struct to the {@link #pNext} field. */
+    public VkFramebufferCreateInfo pNext(VkFramebufferAttachmentsCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkFramebufferCreateInfo flags(@NativeType("VkFramebufferCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #renderPass} field. */
@@ -516,6 +520,10 @@ public class VkFramebufferCreateInfo extends Struct implements NativeResource {
         public VkFramebufferCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO); }
         /** Sets the specified value to the {@link VkFramebufferCreateInfo#pNext} field. */
         public VkFramebufferCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkFramebufferCreateInfo.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkFramebufferAttachmentsCreateInfo struct to the {@link VkFramebufferCreateInfo#pNext} field. */
+        public VkFramebufferCreateInfo.Buffer pNext(VkFramebufferAttachmentsCreateInfo value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkFramebufferAttachmentsCreateInfoKHR struct to the {@link VkFramebufferCreateInfo#pNext} field. */
+        public VkFramebufferCreateInfo.Buffer pNext(VkFramebufferAttachmentsCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkFramebufferCreateInfo#flags} field. */
         public VkFramebufferCreateInfo.Buffer flags(@NativeType("VkFramebufferCreateFlags") int value) { VkFramebufferCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkFramebufferCreateInfo#renderPass} field. */

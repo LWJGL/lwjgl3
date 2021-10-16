@@ -96,6 +96,8 @@ public class VkPhysicalDeviceMemoryProperties2 extends Struct implements NativeR
     public VkPhysicalDeviceMemoryProperties2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMemoryProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Sets the address of the specified VkPhysicalDeviceMemoryBudgetPropertiesEXT struct to the {@link #pNext} field. */
+    public VkPhysicalDeviceMemoryProperties2 pNext(VkPhysicalDeviceMemoryBudgetPropertiesEXT value) { return pNext(memAddressSafe(value)); }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceMemoryProperties2 set(
@@ -317,6 +319,8 @@ public class VkPhysicalDeviceMemoryProperties2 extends Struct implements NativeR
         public VkPhysicalDeviceMemoryProperties2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2); }
         /** Sets the specified value to the {@link VkPhysicalDeviceMemoryProperties2#pNext} field. */
         public VkPhysicalDeviceMemoryProperties2.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMemoryProperties2.npNext(address(), value); return this; }
+        /** Sets the address of the specified VkPhysicalDeviceMemoryBudgetPropertiesEXT struct to the {@link VkPhysicalDeviceMemoryProperties2#pNext} field. */
+        public VkPhysicalDeviceMemoryProperties2.Buffer pNext(VkPhysicalDeviceMemoryBudgetPropertiesEXT value) { return pNext(memAddressSafe(value)); }
 
     }
 
