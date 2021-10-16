@@ -375,7 +375,7 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeInfoKHR.PNEXT, value); }
+    public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeInfoKHR.PNEXT, check(value)); }
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #qualityLevel(int) qualityLevel}. */
@@ -403,6 +403,7 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
+        check(memGetAddress(struct + VkVideoEncodeInfoKHR.PNEXT));
         long pSetupReferenceSlot = memGetAddress(struct + VkVideoEncodeInfoKHR.PSETUPREFERENCESLOT);
         check(pSetupReferenceSlot);
         VkVideoReferenceSlotKHR.validate(pSetupReferenceSlot);
