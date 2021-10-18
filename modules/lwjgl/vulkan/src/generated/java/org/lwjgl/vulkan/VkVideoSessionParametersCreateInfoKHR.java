@@ -28,12 +28,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264SessionParametersCreateInfoEXT}, {@link VkVideoDecodeH265SessionParametersCreateInfoEXT}, or {@link VkVideoEncodeH264SessionParametersCreateInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264SessionParametersCreateInfoEXT}, {@link VkVideoDecodeH265SessionParametersCreateInfoEXT}, {@link VkVideoEncodeH264SessionParametersCreateInfoEXT}, or {@link VkVideoEncodeH265SessionParametersCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code videoSessionParametersTemplate} <b>must</b> be a valid {@code VkVideoSessionParametersKHR} handle</li>
+ * <li>If {@code videoSessionParametersTemplate} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code videoSessionParametersTemplate} <b>must</b> be a valid {@code VkVideoSessionParametersKHR} handle</li>
  * <li>{@code videoSession} <b>must</b> be a valid {@code VkVideoSessionKHR} handle</li>
- * <li>{@code videoSessionParametersTemplate} <b>must</b> have been created, allocated, or retrieved from {@code videoSession}</li>
- * <li>Both of {@code videoSession}, and {@code videoSessionParametersTemplate} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+ * <li>If {@code videoSessionParametersTemplate} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code videoSession}</li>
+ * <li>Both of {@code videoSession}, and {@code videoSessionParametersTemplate} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -120,6 +120,8 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct implements Nat
     public VkVideoSessionParametersCreateInfoKHR pNext(VkVideoDecodeH265SessionParametersCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the address of the specified VkVideoEncodeH264SessionParametersCreateInfoEXT struct to the {@link #pNext} field. */
     public VkVideoSessionParametersCreateInfoKHR pNext(VkVideoEncodeH264SessionParametersCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkVideoEncodeH265SessionParametersCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkVideoSessionParametersCreateInfoKHR pNext(VkVideoEncodeH265SessionParametersCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #videoSessionParametersTemplate} field. */
     public VkVideoSessionParametersCreateInfoKHR videoSessionParametersTemplate(@NativeType("VkVideoSessionParametersKHR") long value) { nvideoSessionParametersTemplate(address(), value); return this; }
     /** Sets the specified value to the {@link #videoSession} field. */
@@ -347,6 +349,8 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct implements Nat
         public VkVideoSessionParametersCreateInfoKHR.Buffer pNext(VkVideoDecodeH265SessionParametersCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the address of the specified VkVideoEncodeH264SessionParametersCreateInfoEXT struct to the {@link VkVideoSessionParametersCreateInfoKHR#pNext} field. */
         public VkVideoSessionParametersCreateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionParametersCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkVideoEncodeH265SessionParametersCreateInfoEXT struct to the {@link VkVideoSessionParametersCreateInfoKHR#pNext} field. */
+        public VkVideoSessionParametersCreateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionParametersCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkVideoSessionParametersCreateInfoKHR#videoSessionParametersTemplate} field. */
         public VkVideoSessionParametersCreateInfoKHR.Buffer videoSessionParametersTemplate(@NativeType("VkVideoSessionParametersKHR") long value) { VkVideoSessionParametersCreateInfoKHR.nvideoSessionParametersTemplate(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoSessionParametersCreateInfoKHR#videoSession} field. */

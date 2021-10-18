@@ -1051,7 +1051,7 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
     DependsOn("VK_NV_device_diagnostic_checkpoints")..void(
         "GetQueueCheckpointData2NV",
         """
-        retrieve diagnostic checkpoint data.
+        Retrieve diagnostic checkpoint data.
 
         <h5>C Specification</h5>
         If the device encounters an error during execution, the implementation will return a #ERROR_DEVICE_LOST error to the application at some point during host execution. When this happens, the application <b>can</b> call #GetQueueCheckpointData2NV() to retrieve information on the most recent diagnostic checkpoints that were executed by the device.

@@ -700,6 +700,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_astc_decode_mode;
     /** When true, {@link EXTBlendOperationAdvanced} is supported. */
     public final boolean VK_EXT_blend_operation_advanced;
+    /** When true, {@link EXTBorderColorSwizzle} is supported. */
+    public final boolean VK_EXT_border_color_swizzle;
     /** When true, {@link EXTBufferDeviceAddress} is supported. */
     public final boolean VK_EXT_buffer_device_address;
     /** When true, {@link EXTCalibratedTimestamps} is supported. */
@@ -840,6 +842,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_video_decode_h265;
     /** When true, {@link EXTVideoEncodeH264} is supported. */
     public final boolean VK_EXT_video_encode_h264;
+    /** When true, {@link EXTVideoEncodeH265} is supported. */
+    public final boolean VK_EXT_video_encode_h265;
     /** When true, {@link EXTYcbcr2plane444Formats} is supported. */
     public final boolean VK_EXT_ycbcr_2plane_444_formats;
     /** When true, {@link EXTYcbcrImageArrays} is supported. */
@@ -1135,6 +1139,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_4444_formats = ext.contains("VK_EXT_4444_formats");
         VK_EXT_astc_decode_mode = ext.contains("VK_EXT_astc_decode_mode");
         VK_EXT_blend_operation_advanced = ext.contains("VK_EXT_blend_operation_advanced");
+        VK_EXT_border_color_swizzle = ext.contains("VK_EXT_border_color_swizzle");
         VK_EXT_buffer_device_address = check_EXT_buffer_device_address(provider, caps, ext);
         VK_EXT_calibrated_timestamps = check_EXT_calibrated_timestamps(provider, caps, ext);
         VK_EXT_color_write_enable = check_EXT_color_write_enable(provider, caps, ext);
@@ -1206,6 +1211,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_video_decode_h264 = ext.contains("VK_EXT_video_decode_h264");
         VK_EXT_video_decode_h265 = ext.contains("VK_EXT_video_decode_h265");
         VK_EXT_video_encode_h264 = ext.contains("VK_EXT_video_encode_h264");
+        VK_EXT_video_encode_h265 = ext.contains("VK_EXT_video_encode_h265");
         VK_EXT_ycbcr_2plane_444_formats = ext.contains("VK_EXT_ycbcr_2plane_444_formats");
         VK_EXT_ycbcr_image_arrays = ext.contains("VK_EXT_ycbcr_image_arrays");
         VK_GOOGLE_decorate_string = ext.contains("VK_GOOGLE_decorate_string");

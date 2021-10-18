@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * structure describing capabilities of a surface for shared presentation.
+ * Structure describing capabilities of a surface for shared presentation.
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

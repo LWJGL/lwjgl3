@@ -61,4 +61,23 @@ val STD_vulkan_video_codec_h265 = "STDVulkanVideoCodecH265".nativeClassVK("STD_v
         "std_video_h265_level_6_2".enum,
         "std_video_h265_level_invalid".enum("", 0x7FFFFFFF)
     ).noPrefix()
+
+    EnumConstant(
+        "{@code StdVideoH265SliceType}",
+
+        "std_video_h265_slice_type_b".enum("", "0"),
+        "std_video_h265_slice_type_p".enum,
+        "std_video_h265_slice_type_i".enum,
+        "std_video_h265_slice_type_invalid".enum("", 0x7FFFFFFF)
+    ).noPrefix()
+
+    EnumConstant(
+        "{@code StdVideoH265PictureType}",
+
+        "std_video_h265_picture_type_i".enum("", "0"),
+        "std_video_h265_picture_type_p".enum,
+        "std_video_h265_picture_type_b".enum,
+        "std_video_h265_picture_type_idr".enum,
+        "std_video_h265_picture_type_invalid".enum("", 0x7FFFFFFF)
+    ).noPrefix()
 }

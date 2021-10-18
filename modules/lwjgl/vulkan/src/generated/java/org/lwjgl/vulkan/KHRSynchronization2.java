@@ -1221,7 +1221,7 @@ public class KHRSynchronization2 {
     }
 
     /**
-     * retrieve diagnostic checkpoint data.
+     * Retrieve diagnostic checkpoint data.
      * 
      * <h5>C Specification</h5>
      * 

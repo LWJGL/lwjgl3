@@ -154,7 +154,7 @@ public class KHRWin32Surface {
     // --- [ vkGetPhysicalDeviceWin32PresentationSupportKHR ] ---
 
     /**
-     * query queue family support for presentation on a Win32 display.
+     * Query queue family support for presentation on a Win32 display.
      * 
      * <h5>C Specification</h5>
      * 

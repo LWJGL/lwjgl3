@@ -217,7 +217,7 @@ val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_externa
     VkResult(
         "GetMemoryWin32HandleNV",
         """
-        retrieve Win32 handle to a device memory object.
+        Retrieve Win32 handle to a device memory object.
 
         <h5>C Specification</h5>
         To retrieve the handle corresponding to a device memory object created with ##VkExportMemoryAllocateInfoNV{@code ::handleTypes} set to include #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV or #EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV, call:

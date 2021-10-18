@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * use Windows keyex mutex mechanism to synchronize work.
+ * Use Windows keyex mutex mechanism to synchronize work.
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

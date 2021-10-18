@@ -124,7 +124,7 @@ public class NVExternalMemoryCapabilities {
     }
 
     /**
-     * determine image capabilities compatible with external memory handle types.
+     * Determine image capabilities compatible with external memory handle types.
      * 
      * <h5>C Specification</h5>
      * 

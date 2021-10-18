@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.system.windows.*;
 
 /**
- * specify security attributes and access rights for Win32 memory handles.
+ * Specify security attributes and access rights for Win32 memory handles.
  * 
  * <h5>Description</h5>
  * 

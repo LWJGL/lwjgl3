@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264SessionCreateInfoEXT}, {@link VkVideoDecodeH265SessionCreateInfoEXT}, or {@link VkVideoEncodeH264SessionCreateInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264SessionCreateInfoEXT}, {@link VkVideoDecodeH265SessionCreateInfoEXT}, {@link VkVideoEncodeH264SessionCreateInfoEXT}, or {@link VkVideoEncodeH265SessionCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoSessionCreateFlagBitsKHR} values</li>
  * <li>{@code pVideoProfile} <b>must</b> be a valid pointer to a valid {@link VkVideoProfileKHR} structure</li>
@@ -171,6 +171,8 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     public VkVideoSessionCreateInfoKHR pNext(VkVideoDecodeH265SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the address of the specified VkVideoEncodeH264SessionCreateInfoEXT struct to the {@link #pNext} field. */
     public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeH264SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkVideoEncodeH265SessionCreateInfoEXT struct to the {@link #pNext} field. */
+    public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeH265SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #queueFamilyIndex} field. */
     public VkVideoSessionCreateInfoKHR queueFamilyIndex(@NativeType("uint32_t") int value) { nqueueFamilyIndex(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -486,6 +488,8 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoDecodeH265SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the address of the specified VkVideoEncodeH264SessionCreateInfoEXT struct to the {@link VkVideoSessionCreateInfoKHR#pNext} field. */
         public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkVideoEncodeH265SessionCreateInfoEXT struct to the {@link VkVideoSessionCreateInfoKHR#pNext} field. */
+        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#queueFamilyIndex} field. */
         public VkVideoSessionCreateInfoKHR.Buffer queueFamilyIndex(@NativeType("uint32_t") int value) { VkVideoSessionCreateInfoKHR.nqueueFamilyIndex(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#flags} field. */

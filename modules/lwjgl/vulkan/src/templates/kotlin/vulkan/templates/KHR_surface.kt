@@ -99,7 +99,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
     EnumConstant(
         """
-        VkSurfaceTransformFlagBitsKHR - presentation transforms supported on a device
+        VkSurfaceTransformFlagBitsKHR - Presentation transforms supported on a device
 
         <h5>Description</h5>
         <ul>
@@ -131,7 +131,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
     EnumConstant(
         """
-        VkPresentModeKHR - presentation mode supported for a surface
+        VkPresentModeKHR - Presentation mode supported for a surface
 
         <h5>Description</h5>
         <ul>
@@ -174,7 +174,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
     EnumConstant(
         """
-        VkColorSpaceKHR - supported color space of the presentation engine
+        VkColorSpaceKHR - Supported color space of the presentation engine
 
         <h5>Description</h5>
         <ul>
@@ -246,7 +246,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
     EnumConstant(
         """
-        VkCompositeAlphaFlagBitsKHR - alpha compositing modes supported on a device
+        VkCompositeAlphaFlagBitsKHR - Alpha compositing modes supported on a device
 
         <h5>Description</h5>
         These values are described as follows:

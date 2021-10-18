@@ -102,7 +102,7 @@ public class VkVideoEncodeH264EmitPictureParametersEXT extends Struct implements
     /** enables the emitting of the SPS structure with id of {@code spsId}. */
     @NativeType("VkBool32")
     public boolean emitSpsEnable() { return nemitSpsEnable(address()) != 0; }
-    /** the number of entries in the {@code ppsIdEntries}. If this parameter is "0" then no pps entries are going to be emitted in the bitstream. */
+    /** the number of entries in the {@code ppsIdEntries}. If this parameter is 0 then no pps entries are going to be emitted in the bitstream. */
     @NativeType("uint32_t")
     public int ppsIdEntryCount() { return nppsIdEntryCount(address()); }
     /** a pointer to an array of H.264 PPS IDs for the H.264 PPS to insert in the bitstream. The PPS IDs <b>must</b> match one of the IDs of the PPS(s) provided in {@code pPpsStd} of {@link VkVideoEncodeH264SessionParametersCreateInfoEXT} to identify the PPS parameter set to insert in the bitstream. This is retrieved from the {@code VkVideoSessionParametersKHR} object provided in {@link VkVideoBeginCodingInfoKHR}. */

@@ -129,6 +129,8 @@ public class VkVideoProfileKHR extends Struct implements NativeResource {
     public VkVideoProfileKHR pNext(VkVideoDecodeH265ProfileEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the address of the specified VkVideoEncodeH264ProfileEXT struct to the {@link #pNext} field. */
     public VkVideoProfileKHR pNext(VkVideoEncodeH264ProfileEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkVideoEncodeH265ProfileEXT struct to the {@link #pNext} field. */
+    public VkVideoProfileKHR pNext(VkVideoEncodeH265ProfileEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #videoCodecOperation} field. */
     public VkVideoProfileKHR videoCodecOperation(@NativeType("VkVideoCodecOperationFlagBitsKHR") int value) { nvideoCodecOperation(address(), value); return this; }
     /** Sets the specified value to the {@link #chromaSubsampling} field. */
@@ -378,6 +380,8 @@ public class VkVideoProfileKHR extends Struct implements NativeResource {
         public VkVideoProfileKHR.Buffer pNext(VkVideoDecodeH265ProfileEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the address of the specified VkVideoEncodeH264ProfileEXT struct to the {@link VkVideoProfileKHR#pNext} field. */
         public VkVideoProfileKHR.Buffer pNext(VkVideoEncodeH264ProfileEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkVideoEncodeH265ProfileEXT struct to the {@link VkVideoProfileKHR#pNext} field. */
+        public VkVideoProfileKHR.Buffer pNext(VkVideoEncodeH265ProfileEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkVideoProfileKHR#videoCodecOperation} field. */
         public VkVideoProfileKHR.Buffer videoCodecOperation(@NativeType("VkVideoCodecOperationFlagBitsKHR") int value) { VkVideoProfileKHR.nvideoCodecOperation(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoProfileKHR#chromaSubsampling} field. */

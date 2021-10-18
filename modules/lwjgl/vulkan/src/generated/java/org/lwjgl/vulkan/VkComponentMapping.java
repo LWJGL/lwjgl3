@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkImageViewCreateInfo}, {@link VkSamplerYcbcrConversionCreateInfo}</p>
+ * <p>{@link VkImageViewCreateInfo}, {@link VkSamplerBorderColorComponentMappingCreateInfoEXT}, {@link VkSamplerYcbcrConversionCreateInfo}</p>
  * 
  * <h3>Layout</h3>
  * 

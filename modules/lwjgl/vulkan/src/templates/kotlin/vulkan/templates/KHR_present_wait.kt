@@ -98,7 +98,7 @@ val KHR_present_wait = "KHRPresentWait".nativeClassVK("KHR_present_wait", type =
 
         For #PRESENT_MODE_MAILBOX_KHR (or other present mode where images may be replaced in the presentation queue) any wait of this type associated with such an image <b>must</b> be signaled no later than a wait associated with the replacing image would be signaled.
 
-        When the presentation has completed, the presentId associated with the related {@code pSwapChains} entry will be increased in value so that it is at least equal to the value provided in the ##VkPresentIdKHR structure.
+        When the presentation has completed, the presentId associated with the related {@code pSwapchains} entry will be increased in value so that it is at least equal to the value provided in the ##VkPresentIdKHR structure.
 
         There is no requirement for any precise timing relationship between the presentation of the image to the user and the update of the presentId value, but implementations <b>should</b> make this as close as possible to the presentation of the first pixel in the new image to the user.
 

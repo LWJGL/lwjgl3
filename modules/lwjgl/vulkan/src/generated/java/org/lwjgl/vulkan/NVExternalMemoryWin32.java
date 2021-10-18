@@ -229,7 +229,7 @@ public class NVExternalMemoryWin32 {
     }
 
     /**
-     * retrieve Win32 handle to a device memory object.
+     * Retrieve Win32 handle to a device memory object.
      * 
      * <h5>C Specification</h5>
      * 

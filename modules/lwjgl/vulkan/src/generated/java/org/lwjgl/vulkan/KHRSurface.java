@@ -99,7 +99,7 @@ public class KHRSurface {
     public static final int VK_OBJECT_TYPE_SURFACE_KHR = 1000000000;
 
     /**
-     * VkSurfaceTransformFlagBitsKHR - presentation transforms supported on a device
+     * VkSurfaceTransformFlagBitsKHR - Presentation transforms supported on a device
      * 
      * <h5>Description</h5>
      * 
@@ -131,7 +131,7 @@ public class KHRSurface {
         VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR                      = 0x100;
 
     /**
-     * VkPresentModeKHR - presentation mode supported for a surface
+     * VkPresentModeKHR - Presentation mode supported for a surface
      * 
      * <h5>Description</h5>
      * 
@@ -176,7 +176,7 @@ public class KHRSurface {
         VK_PRESENT_MODE_FIFO_RELAXED_KHR = 3;
 
     /**
-     * VkColorSpaceKHR - supported color space of the presentation engine
+     * VkColorSpaceKHR - Supported color space of the presentation engine
      * 
      * <h5>Description</h5>
      * 
@@ -252,7 +252,7 @@ public class KHRSurface {
         VK_COLORSPACE_SRGB_NONLINEAR_KHR  = 0;
 
     /**
-     * VkCompositeAlphaFlagBitsKHR - alpha compositing modes supported on a device
+     * VkCompositeAlphaFlagBitsKHR - Alpha compositing modes supported on a device
      * 
      * <h5>Description</h5>
      * 

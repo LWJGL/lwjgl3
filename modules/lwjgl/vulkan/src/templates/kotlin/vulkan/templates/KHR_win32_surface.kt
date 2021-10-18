@@ -139,7 +139,7 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", typ
     VkBool32(
         "GetPhysicalDeviceWin32PresentationSupportKHR",
         """
-        query queue family support for presentation on a Win32 display.
+        Query queue family support for presentation on a Win32 display.
 
         <h5>C Specification</h5>
         To determine whether a queue family of a physical device supports presentation to the Microsoft Windows desktop, call:

@@ -25,6 +25,8 @@ val StdVideoH264PocType = "StdVideoH264PocType".enumType
 val StdVideoH264ProfileIdc = "StdVideoH264ProfileIdc".enumType
 val StdVideoH264SliceType = "StdVideoH264SliceType".enumType
 val StdVideoH264WeightedBiPredIdc = "StdVideoH264WeightedBiPredIdc".enumType
+val StdVideoH265PictureType = "StdVideoH265PictureType".enumType
+val StdVideoH265SliceType = "StdVideoH265SliceType".enumType
 
 val StdVideoH264SpsVuiFlags = struct(Module.VULKAN, "StdVideoH264SpsVuiFlags") {
     subpackage = "video"
@@ -347,7 +349,7 @@ val StdVideoH265Level = "StdVideoH265Level".enumType
 val StdVideoH265ProfileIdc = "StdVideoH265ProfileIdc".enumType
 
 val StdVideoH265DecPicBufMgr = struct(Module.VULKAN, "StdVideoH265DecPicBufMgr") {
-    documentation = ""
+    subpackage = "video"
 
     uint32_t("max_latency_increase_plus1", "")[7]
     uint8_t("max_dec_pic_buffering_minus1", "")[7]
@@ -355,7 +357,7 @@ val StdVideoH265DecPicBufMgr = struct(Module.VULKAN, "StdVideoH265DecPicBufMgr")
 }
 
 val StdVideoH265SubLayerHrdParameters = struct(Module.VULKAN, "StdVideoH265SubLayerHrdParameters") {
-    documentation = ""
+    subpackage = "video"
 
     uint32_t("bit_rate_value_minus1", "")[32]
     uint32_t("cpb_size_value_minus1", "")[32]
@@ -365,7 +367,7 @@ val StdVideoH265SubLayerHrdParameters = struct(Module.VULKAN, "StdVideoH265SubLa
 }
 
 val StdVideoH265HrdFlags = struct(Module.VULKAN, "StdVideoH265HrdFlags") {
-    documentation = ""
+    subpackage = "video"
 
     uint32_tb("nal_hrd_parameters_present_flag", "", bits = 1)
     uint32_tb("vcl_hrd_parameters_present_flag", "", bits = 1)
@@ -377,7 +379,7 @@ val StdVideoH265HrdFlags = struct(Module.VULKAN, "StdVideoH265HrdFlags") {
 }
 
 val StdVideoH265HrdParameters = struct(Module.VULKAN, "StdVideoH265HrdParameters") {
-    documentation = ""
+    subpackage = "video"
 
     uint8_t("tick_divisor_minus2", "")
     uint8_t("du_cpb_removal_delay_increment_length_minus1", "")
@@ -396,7 +398,7 @@ val StdVideoH265HrdParameters = struct(Module.VULKAN, "StdVideoH265HrdParameters
 }
 
 val StdVideoH265VpsFlags = struct(Module.VULKAN, "StdVideoH265VpsFlags") {
-    documentation = ""
+    subpackage = "video"
 
     uint32_tb("vps_temporal_id_nesting_flag", "", bits = 1)
     uint32_tb("vps_sub_layer_ordering_info_present_flag", "", bits = 1)
@@ -405,7 +407,7 @@ val StdVideoH265VpsFlags = struct(Module.VULKAN, "StdVideoH265VpsFlags") {
 }
 
 val StdVideoH265VideoParameterSet = struct(Module.VULKAN, "StdVideoH265VideoParameterSet") {
-    documentation = ""
+    subpackage = "video"
 
     uint8_t("vps_video_parameter_set_id", "")
     uint8_t("vps_max_sub_layers_minus1", "")
@@ -418,7 +420,7 @@ val StdVideoH265VideoParameterSet = struct(Module.VULKAN, "StdVideoH265VideoPara
 }
 
 val StdVideoH265ScalingLists = struct(Module.VULKAN, "StdVideoH265ScalingLists") {
-    documentation = ""
+    subpackage = "video"
 
     uint8_t("ScalingList4x4", "scalingList[ 0 ][ MatrixID ][ i ] (sizeID = 0)")[6][16]
     uint8_t("ScalingList8x8", "scalingList[ 1 ][ MatrixID ][ i ] (sizeID = 1)")[6][64]
@@ -429,7 +431,7 @@ val StdVideoH265ScalingLists = struct(Module.VULKAN, "StdVideoH265ScalingLists")
 }
 
 val StdVideoH265SpsVuiFlags = struct(Module.VULKAN, "StdVideoH265SpsVuiFlags") {
-    documentation = ""
+    subpackage = "video"
 
     uint32_tb("aspect_ratio_info_present_flag", "", bits = 1)
     uint32_tb("overscan_info_present_flag", "", bits = 1)
@@ -452,7 +454,7 @@ val StdVideoH265SpsVuiFlags = struct(Module.VULKAN, "StdVideoH265SpsVuiFlags") {
 }
 
 val StdVideoH265SequenceParameterSetVui = struct(Module.VULKAN, "StdVideoH265SequenceParameterSetVui") {
-    documentation = ""
+    subpackage = "video"
 
     uint8_t("aspect_ratio_idc", "")
     uint16_t("sar_width", "")
@@ -480,13 +482,13 @@ val StdVideoH265SequenceParameterSetVui = struct(Module.VULKAN, "StdVideoH265Seq
 }
 
 val StdVideoH265PredictorPaletteEntries = struct(Module.VULKAN, "StdVideoH265PredictorPaletteEntries") {
-    documentation = ""
+    subpackage = "video"
 
     uint16_t("PredictorPaletteEntries", "")[3][128]
 }
 
 val StdVideoH265SpsFlags = struct(Module.VULKAN, "StdVideoH265SpsFlags") {
-    documentation = ""
+    subpackage = "video"
 
     uint32_tb("sps_temporal_id_nesting_flag", "", bits = 1)
     uint32_tb("separate_colour_plane_flag", "", bits = 1)
@@ -518,7 +520,7 @@ val StdVideoH265SpsFlags = struct(Module.VULKAN, "StdVideoH265SpsFlags") {
 }
 
 val StdVideoH265SequenceParameterSet = struct(Module.VULKAN, "StdVideoH265SequenceParameterSet") {
-    documentation = ""
+    subpackage = "video"
 
     StdVideoH265ProfileIdc("profile_idc", "")
     StdVideoH265Level("level_idc", "")
@@ -563,7 +565,7 @@ val StdVideoH265SequenceParameterSet = struct(Module.VULKAN, "StdVideoH265Sequen
 }
 
 val StdVideoH265PpsFlags = struct(Module.VULKAN, "StdVideoH265PpsFlags") {
-    documentation = ""
+    subpackage = "video"
 
     uint32_tb("dependent_slice_segments_enabled_flag", "", bits = 1)
     uint32_tb("output_flag_present_flag", "", bits = 1)
@@ -599,7 +601,7 @@ val StdVideoH265PpsFlags = struct(Module.VULKAN, "StdVideoH265PpsFlags") {
 }
 
 val StdVideoH265PictureParameterSet = struct(Module.VULKAN, "StdVideoH265PictureParameterSet") {
-    documentation = ""
+    subpackage = "video"
 
     uint8_t("pps_pic_parameter_set_id", "")
     uint8_t("pps_seq_parameter_set_id", "")
@@ -683,4 +685,115 @@ val StdVideoDecodeH265ReferenceInfo = struct(Module.VULKAN, "StdVideoDecodeH265R
 
     int32_t("PicOrderCntVal", "")
     StdVideoDecodeH265ReferenceInfoFlags("flags", "")
+}
+
+// vulkan_video_code_h265std_encode
+
+val StdVideoEncodeH265SliceHeaderFlags = struct(Module.VULKAN, "StdVideoEncodeH265SliceHeaderFlags") {
+    subpackage = "video"
+
+    uint32_t("first_slice_segment_in_pic_flag", "", bits = 1)
+    uint32_t("no_output_of_prior_pics_flag", "", bits = 1)
+    uint32_t("dependent_slice_segment_flag", "", bits = 1)
+    uint32_t("short_term_ref_pic_set_sps_flag", "", bits = 1)
+    uint32_t("slice_temporal_mvp_enable_flag", "", bits = 1)
+    uint32_t("slice_sao_luma_flag", "", bits = 1)
+    uint32_t("slice_sao_chroma_flag", "", bits = 1)
+    uint32_t("num_ref_idx_active_override_flag", "", bits = 1)
+    uint32_t("mvd_l1_zero_flag", "", bits = 1)
+    uint32_t("cabac_init_flag", "", bits = 1)
+    uint32_t("slice_deblocking_filter_disable_flag", "", bits = 1)
+    uint32_t("collocated_from_l0_flag", "", bits = 1)
+    uint32_t("slice_loop_filter_across_slices_enabled_flag", "", bits = 1)
+    uint32_t("bLastSliceInPic", "", bits = 1)
+    uint16_t("luma_weight_l0_flag", "bit 0 - num_ref_idx_l0_active_minus1")
+    uint16_t("chroma_weight_l0_flag", "bit 0 - num_ref_idx_l0_active_minus1")
+    uint16_t("luma_weight_l1_flag", "bit 0 - num_ref_idx_l1_active_minus1")
+    uint16_t("chroma_weight_l1_flag", "bit 0 - num_ref_idx_l1_active_minus1")
+}
+
+val StdVideoEncodeH265SliceHeader = struct(Module.VULKAN, "StdVideoEncodeH265SliceHeader") {
+    subpackage = "video"
+
+    StdVideoH265SliceType("slice_type", "")
+    uint8_t("slice_pic_parameter_set_id", "")
+    uint8_t("num_short_term_ref_pic_sets", "")
+    uint32_t("slice_segment_address", "")
+    uint8_t("short_term_ref_pic_set_idx", "")
+    uint8_t("num_long_term_sps", "")
+    uint8_t("num_long_term_pics", "")
+    uint8_t("collocated_ref_idx", "")
+    uint8_t("num_ref_idx_l0_active_minus1", "[0, 14]")
+    uint8_t("num_ref_idx_l1_active_minus1", "[0, 14]")
+    uint8_t("luma_log2_weight_denom", "[0, 7]")
+    int8_t("delta_chroma_log2_weight_denom", "")
+    int8_t("delta_luma_weight_l0", "")[15]
+    int8_t("luma_offset_l0", "")[15]
+    int8_t("delta_chroma_weight_l0", "")[15][2]
+    int8_t("delta_chroma_offset_l0", "")[15][2]
+    int8_t("delta_luma_weight_l1", "")[15]
+    int8_t("luma_offset_l1", "")[15]
+    int8_t("delta_chroma_weight_l1", "")[15][2]
+    int8_t("delta_chroma_offset_l1", "")[15][2]
+    uint8_t("MaxNumMergeCand", "")
+    int8_t("slice_qp_delta", "")
+    int8_t("slice_cb_qp_offset", "[-12, 12]")
+    int8_t("slice_cr_qp_offset", "[-12, 12]")
+    int8_t("slice_beta_offset_div2", "[-6, 6]")
+    int8_t("slice_tc_offset_div2", "[-6, 6]")
+    int8_t("slice_act_y_qp_offset", "")
+    int8_t("slice_act_cb_qp_offset", "")
+    int8_t("slice_act_cr_qp_offset", "")
+    StdVideoEncodeH265SliceHeaderFlags("flags", "")
+}
+
+val StdVideoEncodeH265ReferenceModificationFlags = struct(Module.VULKAN, "StdVideoEncodeH265ReferenceModificationFlags") {
+    subpackage = "video"
+
+    uint32_t("ref_pic_list_modification_flag_l0", "", bits = 1)
+    uint32_t("ref_pic_list_modification_flag_l1", "", bits = 1)
+}
+
+val StdVideoEncodeH265ReferenceModifications = struct(Module.VULKAN, "StdVideoEncodeH265ReferenceModifications") {
+    subpackage = "video"
+
+    StdVideoEncodeH265ReferenceModificationFlags("flags", "")
+    uint8_t("referenceList0ModificationsCount", "num_ref_idx_l0_active_minus1")
+    uint8_t.p("pReferenceList0Modifications", "list_entry_l0")
+    uint8_t("referenceList1ModificationsCount", "num_ref_idx_l1_active_minus1")
+    uint8_t.p("pReferenceList1Modifications", "list_entry_l1")
+}
+
+val StdVideoEncodeH265PictureInfoFlags = struct(Module.VULKAN, "StdVideoEncodeH265PictureInfoFlags") {
+    subpackage = "video"
+
+    uint32_t("is_reference_flag", "", bits = 1)
+    uint32_t("IrapPicFlag", "", bits = 1)
+    uint32_t("long_term_flag", "", bits = 1)
+}
+
+val StdVideoEncodeH265PictureInfo = struct(Module.VULKAN, "StdVideoEncodeH265PictureInfo") {
+    subpackage = "video"
+
+    StdVideoH265PictureType("PictureType", "")
+    uint8_t("sps_video_parameter_set_id", "")
+    uint8_t("pps_seq_parameter_set_id", "")
+    int32_t("PicOrderCntVal", "")
+    uint8_t("TemporalId", "")
+    StdVideoEncodeH265PictureInfoFlags("flags", "")
+}
+
+val StdVideoEncodeH265ReferenceInfoFlags = struct(Module.VULKAN, "StdVideoEncodeH265ReferenceInfoFlags") {
+    subpackage = "video"
+
+    uint32_t("is_long_term", "", bits = 1)
+    uint32_t("isUsedFlag", "", bits = 1)
+}
+
+val StdVideoEncodeH265ReferenceInfo = struct(Module.VULKAN, "StdVideoEncodeH265ReferenceInfo") {
+    subpackage = "video"
+
+    int32_t("PicOrderCntVal", "")
+    uint8_t("TemporalId", "")
+    StdVideoEncodeH265ReferenceInfoFlags("flags", "")
 }

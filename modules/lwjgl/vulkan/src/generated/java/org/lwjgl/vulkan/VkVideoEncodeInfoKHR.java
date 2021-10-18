@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeH264EmitPictureParametersEXT} or {@link VkVideoEncodeH264VclFrameInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeH264EmitPictureParametersEXT}, {@link VkVideoEncodeH264VclFrameInfoEXT}, {@link VkVideoEncodeH265EmitPictureParametersEXT}, or {@link VkVideoEncodeH265VclFrameInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeFlagBitsKHR} values</li>
  * <li>{@code dstBitstreamBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
@@ -170,9 +170,13 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified VkVideoEncodeH264VclFrameInfoEXT struct to the {@link #pNext} field. */
-    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH264VclFrameInfoEXT value) { return pNext(value.address()); }
+    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH264VclFrameInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the address of the specified VkVideoEncodeH264EmitPictureParametersEXT struct to the {@link #pNext} field. */
-    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH264EmitPictureParametersEXT value) { return pNext(value.address()); }
+    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH264EmitPictureParametersEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkVideoEncodeH265VclFrameInfoEXT struct to the {@link #pNext} field. */
+    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH265VclFrameInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkVideoEncodeH265EmitPictureParametersEXT struct to the {@link #pNext} field. */
+    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH265EmitPictureParametersEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkVideoEncodeInfoKHR flags(@NativeType("VkVideoEncodeFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #qualityLevel} field. */
@@ -379,7 +383,7 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeInfoKHR.PNEXT, check(value)); }
+    public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #qualityLevel(int) qualityLevel}. */
@@ -407,7 +411,6 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + VkVideoEncodeInfoKHR.PNEXT));
         long pSetupReferenceSlot = memGetAddress(struct + VkVideoEncodeInfoKHR.PSETUPREFERENCESLOT);
         check(pSetupReferenceSlot);
         VkVideoReferenceSlotKHR.validate(pSetupReferenceSlot);
@@ -509,9 +512,13 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#pNext} field. */
         public VkVideoEncodeInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeInfoKHR.npNext(address(), value); return this; }
         /** Sets the address of the specified VkVideoEncodeH264VclFrameInfoEXT struct to the {@link VkVideoEncodeInfoKHR#pNext} field. */
-        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH264VclFrameInfoEXT value) { return pNext(value.address()); }
+        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH264VclFrameInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the address of the specified VkVideoEncodeH264EmitPictureParametersEXT struct to the {@link VkVideoEncodeInfoKHR#pNext} field. */
-        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH264EmitPictureParametersEXT value) { return pNext(value.address()); }
+        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH264EmitPictureParametersEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkVideoEncodeH265VclFrameInfoEXT struct to the {@link VkVideoEncodeInfoKHR#pNext} field. */
+        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH265VclFrameInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkVideoEncodeH265EmitPictureParametersEXT struct to the {@link VkVideoEncodeInfoKHR#pNext} field. */
+        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH265EmitPictureParametersEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#flags} field. */
         public VkVideoEncodeInfoKHR.Buffer flags(@NativeType("VkVideoEncodeFlagsKHR") int value) { VkVideoEncodeInfoKHR.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#qualityLevel} field. */

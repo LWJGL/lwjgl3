@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264CapabilitiesEXT}, {@link VkVideoDecodeH265CapabilitiesEXT}, or {@link VkVideoEncodeH264CapabilitiesEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264CapabilitiesEXT}, {@link VkVideoDecodeH265CapabilitiesEXT}, {@link VkVideoEncodeH264CapabilitiesEXT}, or {@link VkVideoEncodeH265CapabilitiesEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
@@ -149,6 +149,8 @@ public class VkVideoCapabilitiesKHR extends Struct implements NativeResource {
     public VkVideoCapabilitiesKHR pNext(VkVideoDecodeH265CapabilitiesEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the address of the specified VkVideoEncodeH264CapabilitiesEXT struct to the {@link #pNext} field. */
     public VkVideoCapabilitiesKHR pNext(VkVideoEncodeH264CapabilitiesEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkVideoEncodeH265CapabilitiesEXT struct to the {@link #pNext} field. */
+    public VkVideoCapabilitiesKHR pNext(VkVideoEncodeH265CapabilitiesEXT value) { return pNext(memAddressSafe(value)); }
 
     /** Initializes this struct with the specified values. */
     public VkVideoCapabilitiesKHR set(
@@ -391,6 +393,8 @@ public class VkVideoCapabilitiesKHR extends Struct implements NativeResource {
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoDecodeH265CapabilitiesEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the address of the specified VkVideoEncodeH264CapabilitiesEXT struct to the {@link VkVideoCapabilitiesKHR#pNext} field. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeH264CapabilitiesEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkVideoEncodeH265CapabilitiesEXT struct to the {@link VkVideoCapabilitiesKHR#pNext} field. */
+        public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeH265CapabilitiesEXT value) { return pNext(memAddressSafe(value)); }
 
     }
 

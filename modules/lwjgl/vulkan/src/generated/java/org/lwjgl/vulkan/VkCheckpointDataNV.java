@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * return structure for command buffer checkpoint data.
+ * Return structure for command buffer checkpoint data.
  * 
  * <h5>Description</h5>
  * 

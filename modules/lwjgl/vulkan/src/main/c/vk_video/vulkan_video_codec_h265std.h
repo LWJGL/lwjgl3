@@ -53,6 +53,20 @@ typedef enum StdVideoH265Level {
     std_video_h265_level_invalid = 0x7FFFFFFF
 } StdVideoH265Level;
 
+typedef enum StdVideoH265SliceType {
+    std_video_h265_slice_type_b = 0,
+    std_video_h265_slice_type_p = 1,
+    std_video_h265_slice_type_i = 2,
+    std_video_h265_slice_type_invalid = 0x7FFFFFFF
+} StdVideoH265SliceType;
+
+typedef enum StdVideoH265PictureType {
+    std_video_h265_picture_type_i = 0,
+    std_video_h265_picture_type_p = 1,
+    std_video_h265_picture_type_b = 2,
+    std_video_h265_picture_type_idr = 3,
+    std_video_h265_picture_type_invalid = 0x7FFFFFFF
+} StdVideoH265PictureType;
 
 typedef struct StdVideoH265DecPicBufMgr
 {

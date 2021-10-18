@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264SessionParametersAddInfoEXT}, {@link VkVideoDecodeH265SessionParametersAddInfoEXT}, or {@link VkVideoEncodeH264SessionParametersAddInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264SessionParametersAddInfoEXT}, {@link VkVideoDecodeH265SessionParametersAddInfoEXT}, {@link VkVideoEncodeH264SessionParametersAddInfoEXT}, or {@link VkVideoEncodeH265SessionParametersAddInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
@@ -103,6 +103,8 @@ public class VkVideoSessionParametersUpdateInfoKHR extends Struct implements Nat
     public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoDecodeH265SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the address of the specified VkVideoEncodeH264SessionParametersAddInfoEXT struct to the {@link #pNext} field. */
     public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoEncodeH264SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Sets the address of the specified VkVideoEncodeH265SessionParametersAddInfoEXT struct to the {@link #pNext} field. */
+    public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoEncodeH265SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
     /** Sets the specified value to the {@link #updateSequenceCount} field. */
     public VkVideoSessionParametersUpdateInfoKHR updateSequenceCount(@NativeType("uint32_t") int value) { nupdateSequenceCount(address(), value); return this; }
 
@@ -319,6 +321,8 @@ public class VkVideoSessionParametersUpdateInfoKHR extends Struct implements Nat
         public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoDecodeH265SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the address of the specified VkVideoEncodeH264SessionParametersAddInfoEXT struct to the {@link VkVideoSessionParametersUpdateInfoKHR#pNext} field. */
         public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Sets the address of the specified VkVideoEncodeH265SessionParametersAddInfoEXT struct to the {@link VkVideoSessionParametersUpdateInfoKHR#pNext} field. */
+        public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
         /** Sets the specified value to the {@link VkVideoSessionParametersUpdateInfoKHR#updateSequenceCount} field. */
         public VkVideoSessionParametersUpdateInfoKHR.Buffer updateSequenceCount(@NativeType("uint32_t") int value) { VkVideoSessionParametersUpdateInfoKHR.nupdateSequenceCount(address(), value); return this; }
 

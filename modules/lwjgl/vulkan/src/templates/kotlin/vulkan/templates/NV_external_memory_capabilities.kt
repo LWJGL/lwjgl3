@@ -124,7 +124,7 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
     VkResult(
         "GetPhysicalDeviceExternalImageFormatPropertiesNV",
         """
-        determine image capabilities compatible with external memory handle types.
+        Determine image capabilities compatible with external memory handle types.
 
         <h5>C Specification</h5>
         To determine the image capabilities compatible with an external memory handle type, call:

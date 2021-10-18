@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.system.windows.*;
 
 /**
- * import Win32 memory created on the same physical device.
+ * Import Win32 memory created on the same physical device.
  * 
  * <h5>Description</h5>
  * 

@@ -13,6 +13,10 @@ val NVX_binary_import = "NVXBinaryImport".nativeClassVK("NVX_binary_import", typ
         """
         This extension allows applications to import CuBIN binaries and execute them.
 
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        There is currently no specification language written for this extension, so although it appears in the Vulkan headers, its interfaces are not summarized here.
+        </div>
+
         <h5>VK_NVX_binary_import</h5>
         <dl>
             <dt><b>Name String</b></dt>

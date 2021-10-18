@@ -31,34 +31,19 @@ import org.lwjgl.system.windows.*;
  * 
  * <ul>
  * <li>{@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT}</li>
- * <li>{@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT}</li>
  * </ul>
  * 
  * <p>The implementation <b>must</b> ensure the access rights allow read and write access to the memory.</p>
- * 
- * <p>For handles of the following types:</p>
- * 
- * <ul>
- * <li>{@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT}</li>
- * <li>{@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT}</li>
- * </ul>
- * 
- * <p>The access rights <b>must</b> be:</p>
- * 
- * <ul>
- * <li>{@code GENERIC_ALL}
  * 
  * <dl>
  * <dt>1</dt>
  * <dd><a target="_blank" href="https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights">https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights</a></dd>
  * </dl>
- * </li>
- * </ul>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} does not include {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT}, {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT}, {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT}, or {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT}, a {@link VkExportMemoryWin32HandleInfoKHR} structure <b>must</b> not be included in the {@code pNext} chain of {@link VkMemoryAllocateInfo}</li>
+ * <li>If {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} does not include {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT}, a {@link VkExportMemoryWin32HandleInfoKHR} structure <b>must</b> not be included in the {@code pNext} chain of {@link VkMemoryAllocateInfo}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

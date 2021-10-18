@@ -93,6 +93,44 @@ public final class STDVulkanVideoCodecH265 {
         std_video_h265_level_6_2     = 12,
         std_video_h265_level_invalid = 0x7FFFFFFF;
 
+    /**
+     * {@code StdVideoH265SliceType}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #std_video_h265_slice_type_b std_video_h265_slice_type_b}</li>
+     * <li>{@link #std_video_h265_slice_type_p std_video_h265_slice_type_p}</li>
+     * <li>{@link #std_video_h265_slice_type_i std_video_h265_slice_type_i}</li>
+     * <li>{@link #std_video_h265_slice_type_invalid std_video_h265_slice_type_invalid}</li>
+     * </ul>
+     */
+    public static final int
+        std_video_h265_slice_type_b       = 0,
+        std_video_h265_slice_type_p       = 1,
+        std_video_h265_slice_type_i       = 2,
+        std_video_h265_slice_type_invalid = 0x7FFFFFFF;
+
+    /**
+     * {@code StdVideoH265PictureType}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #std_video_h265_picture_type_i std_video_h265_picture_type_i}</li>
+     * <li>{@link #std_video_h265_picture_type_p std_video_h265_picture_type_p}</li>
+     * <li>{@link #std_video_h265_picture_type_b std_video_h265_picture_type_b}</li>
+     * <li>{@link #std_video_h265_picture_type_idr std_video_h265_picture_type_idr}</li>
+     * <li>{@link #std_video_h265_picture_type_invalid std_video_h265_picture_type_invalid}</li>
+     * </ul>
+     */
+    public static final int
+        std_video_h265_picture_type_i       = 0,
+        std_video_h265_picture_type_p       = 1,
+        std_video_h265_picture_type_b       = 2,
+        std_video_h265_picture_type_idr     = 3,
+        std_video_h265_picture_type_invalid = 0x7FFFFFFF;
+
     private STDVulkanVideoCodecH265() {}
 
 }

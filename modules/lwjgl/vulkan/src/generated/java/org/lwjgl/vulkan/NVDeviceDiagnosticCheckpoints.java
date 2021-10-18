@@ -86,7 +86,7 @@ public class NVDeviceDiagnosticCheckpoints {
     // --- [ vkCmdSetCheckpointNV ] ---
 
     /**
-     * insert diagnostic checkpoint in command stream.
+     * Insert diagnostic checkpoint in command stream.
      * 
      * <h5>C Specification</h5>
      * 
@@ -147,7 +147,7 @@ public class NVDeviceDiagnosticCheckpoints {
     }
 
     /**
-     * retrieve diagnostic checkpoint data.
+     * Retrieve diagnostic checkpoint data.
      * 
      * <h5>C Specification</h5>
      * 

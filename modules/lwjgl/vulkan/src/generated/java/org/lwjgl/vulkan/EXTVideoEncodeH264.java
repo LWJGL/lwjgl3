@@ -169,9 +169,9 @@ public final class EXTVideoEncodeH264 {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT} indicates a single command buffer <b>must</b> at least encode an entire frame. Any non-VCL NALUs <b>must</b> be encoded using the same command buffer as the frame if {@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT} indicates a single command buffer <b>must</b> at least encode a single slice. Any non-VCL NALUs <b>must</b> be encoded using the same command buffer as the first slice of the frame if {@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT} indicates a single command buffer <b>may</b> encode a non-VCL NALU by itself.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT} indicates that a single command buffer <b>must</b> at least encode an entire frame. Any non-VCL NALUs <b>must</b> be encoded using the same command buffer as the frame if {@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT} indicates that a single command buffer <b>must</b> at least encode a single slice. Any non-VCL NALUs <b>must</b> be encoded using the same command buffer as the first slice of the frame if {@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT} indicates that a single command buffer <b>may</b> encode a non-VCL NALU by itself.</li>
      * </ul>
      * 
      * <p>An implementation <b>must</b> support at least one of {@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT} or {@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT}.</p>
@@ -187,9 +187,9 @@ public final class EXTVideoEncodeH264 {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT} indicates calls to generate all NALUs of a frame <b>must</b> be included within a single begin/end pair. Any non-VCL NALUs <b>must</b> be encoded within the same begin/end pair if {@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT} indicates each begin/end pair <b>must</b> encode at least one slice. Any non-VCL NALUs <b>must</b> be encoded within the same begin/end pair as the first slice of the frame if {@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT} indicates each begin/end pair <b>may</b> encode only a non-VCL NALU by itself. An implementation <b>must</b> support at least one of {@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT} or {@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT}.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT} indicates that calls to generate all NALUs of a frame <b>must</b> be included within a single begin/end pair. Any non-VCL NALUs <b>must</b> be encoded within the same begin/end pair if {@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT} indicates that each begin/end pair <b>must</b> encode at least one slice. Any non-VCL NALUs <b>must</b> be encoded within the same begin/end pair as the first slice of the frame if {@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT} indicates that each begin/end pair <b>may</b> encode only a non-VCL NALU by itself. An implementation <b>must</b> support at least one of {@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT} or {@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT}.</li>
      * </ul>
      * 
      * <p>A single begin/end pair <b>must</b> not encode more than a single frame.</p>
@@ -198,7 +198,19 @@ public final class EXTVideoEncodeH264 {
      * 
      * <p>The supported input modes <b>must</b> be coarser or equal to the supported output modes. For example, it is illegal to report slice input is supported but only frame output is supported.</p>
      * 
-     * <p>An implementation <b>must</b> report one of the following combinations of input/output modes: <b> Input: Frame, Output: Frame </b> Input: Frame, Output: Frame and Non-VCL <b> Input: Frame, Output: Slice </b> Input: Frame, Output: Slice and Non-VCL <b> Input: Slice, Output: Slice </b> Input: Slice, Output: Slice and Non-VCL <b> Input: Frame and Non-VCL, Output: Frame and Non-VCL </b> Input: Frame and Non-VCL, Output: Slice and Non-VCL ** Input: Slice and Non-VCL, Output: Slice and Non-VCL</p>
+     * <p>An implementation <b>must</b> report one of the following combinations of input/output modes:</p>
+     * 
+     * <ul>
+     * <li>Input: Frame, Output: Frame</li>
+     * <li>Input: Frame, Output: Frame and Non-VCL</li>
+     * <li>Input: Frame, Output: Slice</li>
+     * <li>Input: Frame, Output: Slice and Non-VCL</li>
+     * <li>Input: Slice, Output: Slice</li>
+     * <li>Input: Slice, Output: Slice and Non-VCL</li>
+     * <li>Input: Frame and Non-VCL, Output: Frame and Non-VCL</li>
+     * <li>Input: Frame and Non-VCL, Output: Slice and Non-VCL</li>
+     * <li>Input: Slice and Non-VCL, Output: Slice and Non-VCL</li>
+     * </ul>
      */
     public static final int
         VK_VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT   = 0x1,
