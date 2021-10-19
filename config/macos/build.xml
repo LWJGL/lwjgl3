@@ -5,43 +5,10 @@
 <project name="native-macos" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
     <import file="../build-definitions.xml"/>
 
-    <!-- Ask Xcode for correct path to XCode tools -->
-    <!-- Will fail if XCode Command Line Tools are not installed on 10.7+ (Lion) -->
-    <exec executable="xcode-select" outputproperty="developer_path" errorproperty="xcode-error" failonerror="false" failifexecutionfails="false">
-        <arg value="--print-path"/>
+    <!-- Find the macOS SDK root. -->
+    <exec executable="xcrun" outputproperty="sdkroot" failonerror="true">
+        <arg line="--show-sdk-path --sdk macosx"/>
     </exec>
-    <!-- Default to /Developer if xcode-select fails -->
-    <condition property="developer_path" value="/Developer">
-        <isset property="xcode-error"/>
-    </condition>
-
-    <!-- Choose a MacOSX SDK -->
-    <macrodef name="find-sdkroot">
-        <attribute name="version"/>
-
-        <sequential>
-            <condition property="sdkroot" value="${developer_path}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX@{version}.sdk">
-                <and>
-                    <not><isset property="sdkroot"/></not>
-                    <available file="${developer_path}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX@{version}.sdk" type="dir"/>
-                </and>
-            </condition>
-        </sequential>
-    </macrodef>
-
-    <find-sdkroot version="12.0"/>
-    <find-sdkroot version="11.3"/>
-    <find-sdkroot version="11.2"/>
-    <find-sdkroot version="11.1"/>
-    <find-sdkroot version="11.0"/>
-    <find-sdkroot version="10.15"/>
-    <find-sdkroot version="10.14"/>
-    <find-sdkroot version="10.13"/>
-    <find-sdkroot version="10.12"/>
-    <find-sdkroot version="10.11"/>
-    <find-sdkroot version="10.10"/>
-    <find-sdkroot version="10.9"/>
-    <fail unless="sdkroot" message="Failed to find the macOS SDK."/>
 
     <condition property="macosx-version-min" value="11.0" else="10.9">
         <isset property="build.arch.arm"/>
