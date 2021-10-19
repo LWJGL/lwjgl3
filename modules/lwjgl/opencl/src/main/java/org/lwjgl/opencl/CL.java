@@ -271,6 +271,8 @@ public final class CL {
         APIVersion version = apiParseVersion(getPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_VERSION));
         CL.addCLVersions(version.major, version.minor, supportedExtensions);
 
+        apiFilterExtensions(supportedExtensions, Configuration.OPENCL_EXTENSION_FILTER);
+
         return new CLCapabilities(functionName -> getFunctionProvider().getFunctionAddress(cl_platform_id, functionName), supportedExtensions);
     }
 

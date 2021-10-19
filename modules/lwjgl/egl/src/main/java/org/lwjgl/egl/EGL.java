@@ -166,7 +166,7 @@ public final class EGL {
             throw new IllegalStateException("EGL library has not been loaded.");
         }
 
-        Set<String> ext = new HashSet<>(32);
+        Set<String> supportedExtensions = new HashSet<>(32);
 
         long QueryString = functionProvider.getFunctionAddress("eglQueryString");
 
@@ -181,11 +181,12 @@ public final class EGL {
                 callI(functionProvider.getFunctionAddress("eglGetError")); // clear error
             } else {
                 APIVersion version = apiParseVersion(versionString);
-                addEGLVersions(version.major, version.minor, ext);
+                addEGLVersions(version.major, version.minor, supportedExtensions);
             }
         }
+        apiFilterExtensions(supportedExtensions, Configuration.EGL_EXTENSION_FILTER);
 
-        return new EGLCapabilities(functionProvider, ext);
+        return new EGLCapabilities(functionProvider, supportedExtensions);
     }
 
     /**

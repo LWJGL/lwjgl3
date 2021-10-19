@@ -284,6 +284,7 @@ public final class ALC {
                 }
             }
         }
+        apiFilterExtensions(supportedExtensions, Configuration.OPENAL_EXTENSION_FILTER);
 
         ALCCapabilities caps = new ALCCapabilities(functionProvider, device, supportedExtensions, bufferFactory == null ? BufferUtils::createPointerBuffer : bufferFactory);
         if (device != NULL) {

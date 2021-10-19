@@ -467,6 +467,7 @@ public final class GL {
                 }
             }
         }
+        apiFilterExtensions(supportedExtensions, Configuration.OPENGL_EXTENSION_FILTER);
 
         GLCapabilities caps = new GLCapabilities(functionProvider, supportedExtensions, forwardCompatible, bufferFactory == null
             ? BufferUtils::createPointerBuffer
@@ -597,6 +598,8 @@ public final class GL {
             }
         }
 
+        apiFilterExtensions(supportedExtensions, Configuration.OPENGL_EXTENSION_FILTER);
+
         return new WGLCapabilities(functionProvider, supportedExtensions);
     }
 
@@ -676,6 +679,8 @@ public final class GL {
                 }
             }
         }
+
+        apiFilterExtensions(supportedExtensions, Configuration.OPENGL_EXTENSION_FILTER);
 
         return new GLXCapabilities(functionProvider, supportedExtensions);
     }

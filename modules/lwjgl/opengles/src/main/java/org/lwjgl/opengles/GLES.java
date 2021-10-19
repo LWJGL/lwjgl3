@@ -356,6 +356,7 @@ public final class GLES {
                 supportedExtensions.add(memASCII(callP(GL_EXTENSIONS, i, GetStringi)));
             }
         }
+        apiFilterExtensions(supportedExtensions, Configuration.OPENGLES_EXTENSION_FILTER);
 
         GLESCapabilities caps = new GLESCapabilities(functionProvider, supportedExtensions, bufferFactory == null ? BufferUtils::createPointerBuffer : bufferFactory);
 

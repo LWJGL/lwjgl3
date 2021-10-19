@@ -201,6 +201,7 @@ public final class AL {
         if (alcCaps.ALC_EXT_EFX) {
             supportedExtensions.add("ALC_EXT_EFX");
         }
+        apiFilterExtensions(supportedExtensions, Configuration.OPENAL_EXTENSION_FILTER);
 
         ALCapabilities caps = new ALCapabilities(functionProvider, supportedExtensions, bufferFactory == null ? BufferUtils::createPointerBuffer : bufferFactory);
 
