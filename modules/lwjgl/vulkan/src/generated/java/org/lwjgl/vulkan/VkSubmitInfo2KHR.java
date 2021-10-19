@@ -159,6 +159,12 @@ public class VkSubmitInfo2KHR extends Struct implements NativeResource {
     public VkSubmitInfo2KHR sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_SUBMIT_INFO_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubmitInfo2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkPerformanceQuerySubmitInfoKHR} value to the {@code pNext} chain. */
+    public VkSubmitInfo2KHR pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkWin32KeyedMutexAcquireReleaseInfoKHR} value to the {@code pNext} chain. */
+    public VkSubmitInfo2KHR pNext(VkWin32KeyedMutexAcquireReleaseInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkWin32KeyedMutexAcquireReleaseInfoNV} value to the {@code pNext} chain. */
+    public VkSubmitInfo2KHR pNext(VkWin32KeyedMutexAcquireReleaseInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkSubmitInfo2KHR flags(@NativeType("VkSubmitFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkSemaphoreSubmitInfoKHR.Buffer} to the {@link #pWaitSemaphoreInfos} field. */
@@ -458,6 +464,12 @@ public class VkSubmitInfo2KHR extends Struct implements NativeResource {
         public VkSubmitInfo2KHR.Buffer sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_SUBMIT_INFO_2_KHR); }
         /** Sets the specified value to the {@link VkSubmitInfo2KHR#pNext} field. */
         public VkSubmitInfo2KHR.Buffer pNext(@NativeType("void const *") long value) { VkSubmitInfo2KHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkPerformanceQuerySubmitInfoKHR} value to the {@code pNext} chain. */
+        public VkSubmitInfo2KHR.Buffer pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkWin32KeyedMutexAcquireReleaseInfoKHR} value to the {@code pNext} chain. */
+        public VkSubmitInfo2KHR.Buffer pNext(VkWin32KeyedMutexAcquireReleaseInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkWin32KeyedMutexAcquireReleaseInfoNV} value to the {@code pNext} chain. */
+        public VkSubmitInfo2KHR.Buffer pNext(VkWin32KeyedMutexAcquireReleaseInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkSubmitInfo2KHR#flags} field. */
         public VkSubmitInfo2KHR.Buffer flags(@NativeType("VkSubmitFlagsKHR") int value) { VkSubmitInfo2KHR.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkSemaphoreSubmitInfoKHR.Buffer} to the {@link VkSubmitInfo2KHR#pWaitSemaphoreInfos} field. */

@@ -43,6 +43,7 @@ public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
     @Override
     public VkImageViewUsageCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO} value to the {@code sType} field. */
+    @Override
     public VkImageViewUsageCreateInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -249,6 +250,7 @@ public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
         @Override
         public VkImageViewUsageCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImageViewUsageCreateInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO} value to the {@code sType} field. */
+        @Override
         public VkImageViewUsageCreateInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

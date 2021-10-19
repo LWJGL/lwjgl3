@@ -59,6 +59,7 @@ public class VkPhysicalDeviceFloatControlsPropertiesKHR extends VkPhysicalDevice
     @Override
     public VkPhysicalDeviceFloatControlsPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceFloatControlsPropertiesKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -260,6 +261,7 @@ public class VkPhysicalDeviceFloatControlsPropertiesKHR extends VkPhysicalDevice
         @Override
         public VkPhysicalDeviceFloatControlsPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFloatControlsPropertiesKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceFloatControlsPropertiesKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

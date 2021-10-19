@@ -494,7 +494,7 @@ val VkSwapchainCreateInfoKHR = struct(Module.VULKAN, "VkSwapchainCreateInfoKHR")
         """
 
     Expression("#STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkSwapchainCounterCreateInfoEXT", "VkDeviceGroupSwapchainCreateInfoKHR", "VkSwapchainDisplayNativeHdrCreateInfoAMD")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkDeviceGroupSwapchainCreateInfoKHR", "VkImageFormatListCreateInfo", "VkImageFormatListCreateInfoKHR", "VkSurfaceFullScreenExclusiveInfoEXT", "VkSurfaceFullScreenExclusiveWin32InfoEXT", "VkSwapchainCounterCreateInfoEXT", "VkSwapchainDisplayNativeHdrCreateInfoAMD")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSwapchainCreateFlagsKHR("flags", "a bitmask of {@code VkSwapchainCreateFlagBitsKHR} indicating parameters of the swapchain creation.")
     VkSurfaceKHR("surface", "the surface onto which the swapchain will present images. If the creation succeeds, the swapchain becomes associated with {@code surface}.")
     uint32_t("minImageCount", "the minimum number of presentable images that the application needs. The implementation will either create the swapchain with at least that many images, or it will fail to create the swapchain.")
@@ -575,7 +575,7 @@ val VkPresentInfoKHR = struct(Module.VULKAN, "VkPresentInfoKHR") {
         """
 
     Expression("#STRUCTURE_TYPE_PRESENT_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkDisplayPresentInfoKHR", "VkPresentRegionsKHR", "VkDeviceGroupPresentInfoKHR", "VkPresentIdKHR", "VkPresentTimesInfoGOOGLE")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkDeviceGroupPresentInfoKHR", "VkDisplayPresentInfoKHR", "VkPresentIdKHR", "VkPresentRegionsKHR", "VkPresentTimesInfoGOOGLE")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pWaitSemaphores", optional = true)..uint32_t("waitSemaphoreCount", "the number of semaphores to wait for before issuing the present request. The number <b>may</b> be zero.")
     VkSemaphore.const.p("pWaitSemaphores", "{@code NULL} or a pointer to an array of {@code VkSemaphore} objects with {@code waitSemaphoreCount} entries, and specifies the semaphores to wait for before issuing the present request.")
     AutoSize("pSwapchains", "pImageIndices", "pResults")..uint32_t("swapchainCount", "the number of swapchains being presented to by this command.")
@@ -5110,7 +5110,7 @@ val VkPhysicalDeviceSurfaceInfo2KHR = struct(Module.VULKAN, "VkPhysicalDeviceSur
         """
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkSurfaceFullScreenExclusiveInfoEXT", "VkSurfaceFullScreenExclusiveWin32InfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSurfaceKHR("surface", "the surface that will be associated with the swapchain.")
 }
 
@@ -5131,7 +5131,7 @@ val VkSurfaceCapabilities2KHR = struct(Module.VULKAN, "VkSurfaceCapabilities2KHR
         """
 
     Expression("#STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR")..VkStructureType("sType", "the type of this structure.").mutable()
-    PointerSetter("VkDisplayNativeHdrSurfaceCapabilitiesAMD", "VkSharedPresentSurfaceCapabilitiesKHR", "VkSurfaceProtectedCapabilitiesKHR", "VkSurfaceCapabilitiesFullScreenExclusiveEXT")..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    PointerSetter("VkDisplayNativeHdrSurfaceCapabilitiesAMD", "VkSharedPresentSurfaceCapabilitiesKHR", "VkSurfaceCapabilitiesFullScreenExclusiveEXT", "VkSurfaceProtectedCapabilitiesKHR")..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkSurfaceCapabilitiesKHR("surfaceCapabilities", "a ##VkSurfaceCapabilitiesKHR structure describing the capabilities of the specified surface.")
 }
 
@@ -6804,7 +6804,7 @@ val VkRayTracingPipelineCreateInfoKHR = struct(Module.VULKAN, "VkRayTracingPipel
         """
 
     Expression("#STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkPipelineCreationFeedbackCreateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineCreateFlags("flags", "a bitmask of {@code VkPipelineCreateFlagBits} specifying how the pipeline will be generated.")
     AutoSize("pStages", optional = true)..uint32_t("stageCount", "the number of entries in the {@code pStages} array.")
     VkPipelineShaderStageCreateInfo.const.p("pStages", "a pointer to an array of {@code stageCount} ##VkPipelineShaderStageCreateInfo structures describing the set of the shader stages to be included in the ray tracing pipeline.")
@@ -7773,7 +7773,7 @@ val VkRayTracingPipelineCreateInfoNV = struct(Module.VULKAN, "VkRayTracingPipeli
         """
 
     Expression("#STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_NV")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkPipelineCreationFeedbackCreateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineCreateFlags("flags", "a bitmask of {@code VkPipelineCreateFlagBits} specifying how the pipeline will be generated.")
     AutoSize("pStages")..uint32_t("stageCount", "the number of entries in the {@code pStages} array.")
     VkPipelineShaderStageCreateInfo.const.p("pStages", "a pointer to an array of ##VkPipelineShaderStageCreateInfo structures specifying the set of the shader stages to be included in the ray tracing pipeline.")
@@ -11903,7 +11903,7 @@ val VkVideoEncodeInfoKHR = struct(Module.VULKAN, "VkVideoEncodeInfoKHR") {
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkVideoEncodeH264VclFrameInfoEXT", "VkVideoEncodeH264EmitPictureParametersEXT", "VkVideoEncodeH265VclFrameInfoEXT", "VkVideoEncodeH265EmitPictureParametersEXT")..nullable..opaque_const_p("pNext", "a pointer to a structure extending this structure. A codec-specific extension structure <b>must</b> be chained to specify what bitstream unit to generate with this encode operation.")
+    PointerSetter("VkVideoEncodeH264EmitPictureParametersEXT", "VkVideoEncodeH264VclFrameInfoEXT", "VkVideoEncodeH265EmitPictureParametersEXT", "VkVideoEncodeH265VclFrameInfoEXT")..nullable..opaque_const_p("pNext", "a pointer to a structure extending this structure. A codec-specific extension structure <b>must</b> be chained to specify what bitstream unit to generate with this encode operation.")
     VkVideoEncodeFlagsKHR("flags", "a bitmask of {@code VkVideoEncodeFlagBitsKHR} specifying encode flags, and is reserved for future versions of this specification.")
     uint32_t("qualityLevel", "the coding quality level of the encoding. It is defined by the codec-specific extensions.")
     VkExtent2D("codedExtent", "the coded size of the encode operations.")
@@ -12442,7 +12442,7 @@ val VkImageMemoryBarrier2KHR = struct(Module.VULKAN, "VkImageMemoryBarrier2KHR")
         """
 
     Expression("#STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkSampleLocationsInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineStageFlags2KHR("srcStageMask", "a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-dependencies-scopes\">first synchronization scope</a>.")
     VkAccessFlags2KHR("srcAccessMask", "a {@code VkAccessFlags2KHR} mask of access flags to be included in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-dependencies-access-scopes\">first access scope</a>.")
     VkPipelineStageFlags2KHR("dstStageMask", "a {@code VkPipelineStageFlags2KHR} mask of pipeline stages to be included in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-dependencies-scopes\">second synchronization scope</a>.")
@@ -12594,7 +12594,7 @@ val VkSubmitInfo2KHR = struct(Module.VULKAN, "VkSubmitInfo2KHR") {
         """
 
     Expression("#STRUCTURE_TYPE_SUBMIT_INFO_2_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkPerformanceQuerySubmitInfoKHR", "VkWin32KeyedMutexAcquireReleaseInfoKHR", "VkWin32KeyedMutexAcquireReleaseInfoNV")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSubmitFlagsKHR("flags", "a bitmask of {@code VkSubmitFlagBitsKHR}.")
     AutoSize("pWaitSemaphoreInfos", optional = true)..uint32_t("waitSemaphoreInfoCount", "the number of elements in {@code pWaitSemaphoreInfos}.")
     VkSemaphoreSubmitInfoKHR.const.p("pWaitSemaphoreInfos", "a pointer to an array of ##VkSemaphoreSubmitInfoKHR structures defining <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-semaphores-waiting\">semaphore wait operations</a>.")
@@ -13408,7 +13408,7 @@ val VkBufferImageCopy2KHR = struct(Module.VULKAN, "VkBufferImageCopy2KHR") {
         """
 
     Expression("#STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkCopyCommandTransformInfoQCOM")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDeviceSize("bufferOffset", "the offset in bytes from the start of the buffer object where the image data is copied from or to.")
     uint32_t("bufferRowLength", "{@code bufferRowLength} and {@code bufferImageHeight} specify in texels a subregion of a larger two- or three-dimensional image in buffer memory, and control the addressing calculations. If either of these values is zero, that aspect of the buffer memory is considered to be tightly packed according to the {@code imageExtent}.")
     uint32_t("bufferImageHeight", "see {@code bufferRowLength}")
@@ -13606,7 +13606,7 @@ val VkImageBlit2KHR = struct(Module.VULKAN, "VkImageBlit2KHR") {
         """
 
     Expression("#STRUCTURE_TYPE_IMAGE_BLIT_2_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter("VkCopyCommandTransformInfoQCOM")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageSubresourceLayers("srcSubresource", "the subresource to blit from.")
     VkOffset3D("srcOffsets", "a pointer to an array of two ##VkOffset3D structures specifying the bounds of the source region within {@code srcSubresource}.")[2]
     VkImageSubresourceLayers("dstSubresource", "the subresource to blit into.")

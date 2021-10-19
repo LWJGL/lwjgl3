@@ -169,8 +169,8 @@ public class VkAccelerationStructureCreateInfoKHR extends Struct implements Nati
     public VkAccelerationStructureCreateInfoKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkAccelerationStructureMotionInfoNV struct to the {@link #pNext} field. */
-    public VkAccelerationStructureCreateInfoKHR pNext(VkAccelerationStructureMotionInfoNV value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkAccelerationStructureMotionInfoNV} value to the {@code pNext} chain. */
+    public VkAccelerationStructureCreateInfoKHR pNext(VkAccelerationStructureMotionInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #createFlags} field. */
     public VkAccelerationStructureCreateInfoKHR createFlags(@NativeType("VkAccelerationStructureCreateFlagsKHR") int value) { ncreateFlags(address(), value); return this; }
     /** Sets the specified value to the {@link #buffer} field. */
@@ -436,8 +436,8 @@ public class VkAccelerationStructureCreateInfoKHR extends Struct implements Nati
         public VkAccelerationStructureCreateInfoKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#pNext} field. */
         public VkAccelerationStructureCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkAccelerationStructureMotionInfoNV struct to the {@link VkAccelerationStructureCreateInfoKHR#pNext} field. */
-        public VkAccelerationStructureCreateInfoKHR.Buffer pNext(VkAccelerationStructureMotionInfoNV value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkAccelerationStructureMotionInfoNV} value to the {@code pNext} chain. */
+        public VkAccelerationStructureCreateInfoKHR.Buffer pNext(VkAccelerationStructureMotionInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#createFlags} field. */
         public VkAccelerationStructureCreateInfoKHR.Buffer createFlags(@NativeType("VkAccelerationStructureCreateFlagsKHR") int value) { VkAccelerationStructureCreateInfoKHR.ncreateFlags(address(), value); return this; }
         /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#buffer} field. */

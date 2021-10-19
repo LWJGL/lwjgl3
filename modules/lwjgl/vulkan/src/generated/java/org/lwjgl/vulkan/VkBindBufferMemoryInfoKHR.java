@@ -45,6 +45,7 @@ public class VkBindBufferMemoryInfoKHR extends VkBindBufferMemoryInfo {
     @Override
     public VkBindBufferMemoryInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO} value to the {@code sType} field. */
+    @Override
     public VkBindBufferMemoryInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -261,6 +262,7 @@ public class VkBindBufferMemoryInfoKHR extends VkBindBufferMemoryInfo {
         @Override
         public VkBindBufferMemoryInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBindBufferMemoryInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO} value to the {@code sType} field. */
+        @Override
         public VkBindBufferMemoryInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

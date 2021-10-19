@@ -43,6 +43,7 @@ public class VkDescriptorSetVariableDescriptorCountLayoutSupportEXT extends VkDe
     @Override
     public VkDescriptorSetVariableDescriptorCountLayoutSupportEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT} value to the {@code sType} field. */
+    @Override
     public VkDescriptorSetVariableDescriptorCountLayoutSupportEXT sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -244,6 +245,7 @@ public class VkDescriptorSetVariableDescriptorCountLayoutSupportEXT extends VkDe
         @Override
         public VkDescriptorSetVariableDescriptorCountLayoutSupportEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorSetVariableDescriptorCountLayoutSupportEXT.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT} value to the {@code sType} field. */
+        @Override
         public VkDescriptorSetVariableDescriptorCountLayoutSupportEXT.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

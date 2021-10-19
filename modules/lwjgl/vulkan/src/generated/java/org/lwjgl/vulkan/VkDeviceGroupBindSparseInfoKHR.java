@@ -44,6 +44,7 @@ public class VkDeviceGroupBindSparseInfoKHR extends VkDeviceGroupBindSparseInfo 
     @Override
     public VkDeviceGroupBindSparseInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO} value to the {@code sType} field. */
+    @Override
     public VkDeviceGroupBindSparseInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -255,6 +256,7 @@ public class VkDeviceGroupBindSparseInfoKHR extends VkDeviceGroupBindSparseInfo 
         @Override
         public VkDeviceGroupBindSparseInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupBindSparseInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO} value to the {@code sType} field. */
+        @Override
         public VkDeviceGroupBindSparseInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

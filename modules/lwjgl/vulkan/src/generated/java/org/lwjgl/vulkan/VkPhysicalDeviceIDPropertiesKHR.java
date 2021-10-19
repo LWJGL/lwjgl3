@@ -50,6 +50,7 @@ public class VkPhysicalDeviceIDPropertiesKHR extends VkPhysicalDeviceIDPropertie
     @Override
     public VkPhysicalDeviceIDPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceIDPropertiesKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -251,6 +252,7 @@ public class VkPhysicalDeviceIDPropertiesKHR extends VkPhysicalDeviceIDPropertie
         @Override
         public VkPhysicalDeviceIDPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceIDPropertiesKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceIDPropertiesKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

@@ -45,6 +45,7 @@ public class VkSubpassDescriptionDepthStencilResolveKHR extends VkSubpassDescrip
     @Override
     public VkSubpassDescriptionDepthStencilResolveKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE} value to the {@code sType} field. */
+    @Override
     public VkSubpassDescriptionDepthStencilResolveKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -261,6 +262,7 @@ public class VkSubpassDescriptionDepthStencilResolveKHR extends VkSubpassDescrip
         @Override
         public VkSubpassDescriptionDepthStencilResolveKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassDescriptionDepthStencilResolveKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE} value to the {@code sType} field. */
+        @Override
         public VkSubpassDescriptionDepthStencilResolveKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

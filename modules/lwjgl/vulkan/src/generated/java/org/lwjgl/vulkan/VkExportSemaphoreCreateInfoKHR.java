@@ -43,6 +43,7 @@ public class VkExportSemaphoreCreateInfoKHR extends VkExportSemaphoreCreateInfo 
     @Override
     public VkExportSemaphoreCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO} value to the {@code sType} field. */
+    @Override
     public VkExportSemaphoreCreateInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -249,6 +250,7 @@ public class VkExportSemaphoreCreateInfoKHR extends VkExportSemaphoreCreateInfo 
         @Override
         public VkExportSemaphoreCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkExportSemaphoreCreateInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO} value to the {@code sType} field. */
+        @Override
         public VkExportSemaphoreCreateInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

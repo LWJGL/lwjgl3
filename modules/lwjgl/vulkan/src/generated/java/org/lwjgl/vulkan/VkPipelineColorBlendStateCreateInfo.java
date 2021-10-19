@@ -152,10 +152,10 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
     public VkPipelineColorBlendStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineColorBlendStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkPipelineColorBlendAdvancedStateCreateInfoEXT struct to the {@link #pNext} field. */
-    public VkPipelineColorBlendStateCreateInfo pNext(VkPipelineColorBlendAdvancedStateCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkPipelineColorWriteCreateInfoEXT struct to the {@link #pNext} field. */
-    public VkPipelineColorBlendStateCreateInfo pNext(VkPipelineColorWriteCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkPipelineColorBlendStateCreateInfo pNext(VkPipelineColorBlendAdvancedStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkPipelineColorWriteCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkPipelineColorBlendStateCreateInfo pNext(VkPipelineColorWriteCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineColorBlendStateCreateInfo flags(@NativeType("VkPipelineColorBlendStateCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #logicOpEnable} field. */
@@ -474,10 +474,10 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
         public VkPipelineColorBlendStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineColorBlendStateCreateInfo#pNext} field. */
         public VkPipelineColorBlendStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineColorBlendStateCreateInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkPipelineColorBlendAdvancedStateCreateInfoEXT struct to the {@link VkPipelineColorBlendStateCreateInfo#pNext} field. */
-        public VkPipelineColorBlendStateCreateInfo.Buffer pNext(VkPipelineColorBlendAdvancedStateCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkPipelineColorWriteCreateInfoEXT struct to the {@link VkPipelineColorBlendStateCreateInfo#pNext} field. */
-        public VkPipelineColorBlendStateCreateInfo.Buffer pNext(VkPipelineColorWriteCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkPipelineColorBlendStateCreateInfo.Buffer pNext(VkPipelineColorBlendAdvancedStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkPipelineColorWriteCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkPipelineColorBlendStateCreateInfo.Buffer pNext(VkPipelineColorWriteCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkPipelineColorBlendStateCreateInfo#flags} field. */
         public VkPipelineColorBlendStateCreateInfo.Buffer flags(@NativeType("VkPipelineColorBlendStateCreateFlags") int value) { VkPipelineColorBlendStateCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineColorBlendStateCreateInfo#logicOpEnable} field. */

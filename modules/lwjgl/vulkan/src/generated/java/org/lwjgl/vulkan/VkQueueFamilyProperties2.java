@@ -96,14 +96,14 @@ public class VkQueueFamilyProperties2 extends Struct implements NativeResource {
     public VkQueueFamilyProperties2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueueFamilyProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkQueueFamilyGlobalPriorityPropertiesEXT struct to the {@link #pNext} field. */
-    public VkQueueFamilyProperties2 pNext(VkQueueFamilyGlobalPriorityPropertiesEXT value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkQueueFamilyCheckpointPropertiesNV struct to the {@link #pNext} field. */
-    public VkQueueFamilyProperties2 pNext(VkQueueFamilyCheckpointPropertiesNV value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkQueueFamilyCheckpointProperties2NV struct to the {@link #pNext} field. */
-    public VkQueueFamilyProperties2 pNext(VkQueueFamilyCheckpointProperties2NV value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkVideoQueueFamilyProperties2KHR struct to the {@link #pNext} field. */
-    public VkQueueFamilyProperties2 pNext(VkVideoQueueFamilyProperties2KHR value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkQueueFamilyCheckpointProperties2NV} value to the {@code pNext} chain. */
+    public VkQueueFamilyProperties2 pNext(VkQueueFamilyCheckpointProperties2NV value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkQueueFamilyCheckpointPropertiesNV} value to the {@code pNext} chain. */
+    public VkQueueFamilyProperties2 pNext(VkQueueFamilyCheckpointPropertiesNV value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkQueueFamilyGlobalPriorityPropertiesEXT} value to the {@code pNext} chain. */
+    public VkQueueFamilyProperties2 pNext(VkQueueFamilyGlobalPriorityPropertiesEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkVideoQueueFamilyProperties2KHR} value to the {@code pNext} chain. */
+    public VkQueueFamilyProperties2 pNext(VkVideoQueueFamilyProperties2KHR value) { return this.pNext(value.pNext(this.pNext())); }
 
     /** Initializes this struct with the specified values. */
     public VkQueueFamilyProperties2 set(
@@ -325,14 +325,14 @@ public class VkQueueFamilyProperties2 extends Struct implements NativeResource {
         public VkQueueFamilyProperties2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2); }
         /** Sets the specified value to the {@link VkQueueFamilyProperties2#pNext} field. */
         public VkQueueFamilyProperties2.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyProperties2.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkQueueFamilyGlobalPriorityPropertiesEXT struct to the {@link VkQueueFamilyProperties2#pNext} field. */
-        public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyGlobalPriorityPropertiesEXT value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkQueueFamilyCheckpointPropertiesNV struct to the {@link VkQueueFamilyProperties2#pNext} field. */
-        public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyCheckpointPropertiesNV value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkQueueFamilyCheckpointProperties2NV struct to the {@link VkQueueFamilyProperties2#pNext} field. */
-        public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyCheckpointProperties2NV value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkVideoQueueFamilyProperties2KHR struct to the {@link VkQueueFamilyProperties2#pNext} field. */
-        public VkQueueFamilyProperties2.Buffer pNext(VkVideoQueueFamilyProperties2KHR value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkQueueFamilyCheckpointProperties2NV} value to the {@code pNext} chain. */
+        public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyCheckpointProperties2NV value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkQueueFamilyCheckpointPropertiesNV} value to the {@code pNext} chain. */
+        public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyCheckpointPropertiesNV value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkQueueFamilyGlobalPriorityPropertiesEXT} value to the {@code pNext} chain. */
+        public VkQueueFamilyProperties2.Buffer pNext(VkQueueFamilyGlobalPriorityPropertiesEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkVideoQueueFamilyProperties2KHR} value to the {@code pNext} chain. */
+        public VkQueueFamilyProperties2.Buffer pNext(VkVideoQueueFamilyProperties2KHR value) { return this.pNext(value.pNext(this.pNext())); }
 
     }
 

@@ -44,6 +44,7 @@ public class VkPhysicalDeviceMultiviewPropertiesKHR extends VkPhysicalDeviceMult
     @Override
     public VkPhysicalDeviceMultiviewPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceMultiviewPropertiesKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -245,6 +246,7 @@ public class VkPhysicalDeviceMultiviewPropertiesKHR extends VkPhysicalDeviceMult
         @Override
         public VkPhysicalDeviceMultiviewPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMultiviewPropertiesKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceMultiviewPropertiesKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

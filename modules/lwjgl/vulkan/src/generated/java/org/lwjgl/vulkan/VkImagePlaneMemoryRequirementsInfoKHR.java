@@ -43,6 +43,7 @@ public class VkImagePlaneMemoryRequirementsInfoKHR extends VkImagePlaneMemoryReq
     @Override
     public VkImagePlaneMemoryRequirementsInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO} value to the {@code sType} field. */
+    @Override
     public VkImagePlaneMemoryRequirementsInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -249,6 +250,7 @@ public class VkImagePlaneMemoryRequirementsInfoKHR extends VkImagePlaneMemoryReq
         @Override
         public VkImagePlaneMemoryRequirementsInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImagePlaneMemoryRequirementsInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO} value to the {@code sType} field. */
+        @Override
         public VkImagePlaneMemoryRequirementsInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

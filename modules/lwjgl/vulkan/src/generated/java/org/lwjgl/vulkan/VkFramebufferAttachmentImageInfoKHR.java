@@ -50,6 +50,7 @@ public class VkFramebufferAttachmentImageInfoKHR extends VkFramebufferAttachment
     @Override
     public VkFramebufferAttachmentImageInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO} value to the {@code sType} field. */
+    @Override
     public VkFramebufferAttachmentImageInfoKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -281,6 +282,7 @@ public class VkFramebufferAttachmentImageInfoKHR extends VkFramebufferAttachment
         @Override
         public VkFramebufferAttachmentImageInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkFramebufferAttachmentImageInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO} value to the {@code sType} field. */
+        @Override
         public VkFramebufferAttachmentImageInfoKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

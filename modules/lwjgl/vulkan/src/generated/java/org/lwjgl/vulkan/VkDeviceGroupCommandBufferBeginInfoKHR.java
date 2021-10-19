@@ -43,6 +43,7 @@ public class VkDeviceGroupCommandBufferBeginInfoKHR extends VkDeviceGroupCommand
     @Override
     public VkDeviceGroupCommandBufferBeginInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO} value to the {@code sType} field. */
+    @Override
     public VkDeviceGroupCommandBufferBeginInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -249,6 +250,7 @@ public class VkDeviceGroupCommandBufferBeginInfoKHR extends VkDeviceGroupCommand
         @Override
         public VkDeviceGroupCommandBufferBeginInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupCommandBufferBeginInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO} value to the {@code sType} field. */
+        @Override
         public VkDeviceGroupCommandBufferBeginInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

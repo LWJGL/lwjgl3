@@ -134,6 +134,8 @@ public class VkImageBlit2KHR extends Struct implements NativeResource {
     public VkImageBlit2KHR sType$Default() { return sType(KHRCopyCommands2.VK_STRUCTURE_TYPE_IMAGE_BLIT_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageBlit2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkCopyCommandTransformInfoQCOM} value to the {@code pNext} chain. */
+    public VkImageBlit2KHR pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext())); }
     /** Copies the specified {@link VkImageSubresourceLayers} to the {@link #srcSubresource} field. */
     public VkImageBlit2KHR srcSubresource(VkImageSubresourceLayers value) { nsrcSubresource(address(), value); return this; }
     /** Passes the {@link #srcSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -417,6 +419,8 @@ public class VkImageBlit2KHR extends Struct implements NativeResource {
         public VkImageBlit2KHR.Buffer sType$Default() { return sType(KHRCopyCommands2.VK_STRUCTURE_TYPE_IMAGE_BLIT_2_KHR); }
         /** Sets the specified value to the {@link VkImageBlit2KHR#pNext} field. */
         public VkImageBlit2KHR.Buffer pNext(@NativeType("void const *") long value) { VkImageBlit2KHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkCopyCommandTransformInfoQCOM} value to the {@code pNext} chain. */
+        public VkImageBlit2KHR.Buffer pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext())); }
         /** Copies the specified {@link VkImageSubresourceLayers} to the {@link VkImageBlit2KHR#srcSubresource} field. */
         public VkImageBlit2KHR.Buffer srcSubresource(VkImageSubresourceLayers value) { VkImageBlit2KHR.nsrcSubresource(address(), value); return this; }
         /** Passes the {@link VkImageBlit2KHR#srcSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */

@@ -170,8 +170,8 @@ public class VkPipelineShaderStageCreateInfo extends Struct implements NativeRes
     public VkPipelineShaderStageCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineShaderStageCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT struct to the {@link #pNext} field. */
-    public VkPipelineShaderStageCreateInfo pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkPipelineShaderStageCreateInfo pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineShaderStageCreateInfo flags(@NativeType("VkPipelineShaderStageCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #stage} field. */
@@ -478,8 +478,8 @@ public class VkPipelineShaderStageCreateInfo extends Struct implements NativeRes
         public VkPipelineShaderStageCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineShaderStageCreateInfo#pNext} field. */
         public VkPipelineShaderStageCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineShaderStageCreateInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT struct to the {@link VkPipelineShaderStageCreateInfo#pNext} field. */
-        public VkPipelineShaderStageCreateInfo.Buffer pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkPipelineShaderStageCreateInfo.Buffer pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkPipelineShaderStageCreateInfo#flags} field. */
         public VkPipelineShaderStageCreateInfo.Buffer flags(@NativeType("VkPipelineShaderStageCreateFlags") int value) { VkPipelineShaderStageCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineShaderStageCreateInfo#stage} field. */

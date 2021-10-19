@@ -164,10 +164,10 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
     public VkVideoDecodeInfoKHR sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoDecodeInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkVideoDecodeH264PictureInfoEXT struct to the {@link #pNext} field. */
-    public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH264PictureInfoEXT value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkVideoDecodeH265PictureInfoEXT struct to the {@link #pNext} field. */
-    public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH265PictureInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkVideoDecodeH264PictureInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH264PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkVideoDecodeH265PictureInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH265PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkVideoDecodeInfoKHR flags(@NativeType("VkVideoDecodeFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Copies the specified {@link VkOffset2D} to the {@link #codedOffset} field. */
@@ -503,10 +503,10 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
         public VkVideoDecodeInfoKHR.Buffer sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#pNext} field. */
         public VkVideoDecodeInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkVideoDecodeH264PictureInfoEXT struct to the {@link VkVideoDecodeInfoKHR#pNext} field. */
-        public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH264PictureInfoEXT value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkVideoDecodeH265PictureInfoEXT struct to the {@link VkVideoDecodeInfoKHR#pNext} field. */
-        public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH265PictureInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkVideoDecodeH264PictureInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH264PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkVideoDecodeH265PictureInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH265PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#flags} field. */
         public VkVideoDecodeInfoKHR.Buffer flags(@NativeType("VkVideoDecodeFlagsKHR") int value) { VkVideoDecodeInfoKHR.nflags(address(), value); return this; }
         /** Copies the specified {@link VkOffset2D} to the {@link VkVideoDecodeInfoKHR#codedOffset} field. */

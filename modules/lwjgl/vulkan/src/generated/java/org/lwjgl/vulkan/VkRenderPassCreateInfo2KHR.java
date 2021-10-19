@@ -52,6 +52,7 @@ public class VkRenderPassCreateInfo2KHR extends VkRenderPassCreateInfo2 {
     @Override
     public VkRenderPassCreateInfo2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2 STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2} value to the {@code sType} field. */
+    @Override
     public VkRenderPassCreateInfo2KHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -278,6 +279,7 @@ public class VkRenderPassCreateInfo2KHR extends VkRenderPassCreateInfo2 {
         @Override
         public VkRenderPassCreateInfo2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassCreateInfo2KHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2 STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2} value to the {@code sType} field. */
+        @Override
         public VkRenderPassCreateInfo2KHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

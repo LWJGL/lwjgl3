@@ -43,6 +43,7 @@ public class VkExternalBufferPropertiesKHR extends VkExternalBufferProperties {
     @Override
     public VkExternalBufferPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES} value to the {@code sType} field. */
+    @Override
     public VkExternalBufferPropertiesKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -244,6 +245,7 @@ public class VkExternalBufferPropertiesKHR extends VkExternalBufferProperties {
         @Override
         public VkExternalBufferPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalBufferPropertiesKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES} value to the {@code sType} field. */
+        @Override
         public VkExternalBufferPropertiesKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

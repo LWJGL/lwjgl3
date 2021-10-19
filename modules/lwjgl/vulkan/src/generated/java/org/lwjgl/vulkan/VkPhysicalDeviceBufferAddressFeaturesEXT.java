@@ -45,6 +45,7 @@ public class VkPhysicalDeviceBufferAddressFeaturesEXT extends VkPhysicalDeviceBu
     @Override
     public VkPhysicalDeviceBufferAddressFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link EXTBufferDeviceAddress#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceBufferAddressFeaturesEXT sType$Default() { return sType(EXTBufferDeviceAddress.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -261,6 +262,7 @@ public class VkPhysicalDeviceBufferAddressFeaturesEXT extends VkPhysicalDeviceBu
         @Override
         public VkPhysicalDeviceBufferAddressFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceBufferAddressFeaturesEXT.nsType(address(), value); return this; }
         /** Sets the {@link EXTBufferDeviceAddress#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceBufferAddressFeaturesEXT.Buffer sType$Default() { return sType(EXTBufferDeviceAddress.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

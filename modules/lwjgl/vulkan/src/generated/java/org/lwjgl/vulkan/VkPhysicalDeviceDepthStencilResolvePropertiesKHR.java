@@ -46,6 +46,7 @@ public class VkPhysicalDeviceDepthStencilResolvePropertiesKHR extends VkPhysical
     @Override
     public VkPhysicalDeviceDepthStencilResolvePropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceDepthStencilResolvePropertiesKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -247,6 +248,7 @@ public class VkPhysicalDeviceDepthStencilResolvePropertiesKHR extends VkPhysical
         @Override
         public VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDepthStencilResolvePropertiesKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceDepthStencilResolvePropertiesKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

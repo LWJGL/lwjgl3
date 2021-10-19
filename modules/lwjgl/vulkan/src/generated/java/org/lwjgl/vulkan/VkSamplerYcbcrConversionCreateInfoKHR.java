@@ -50,6 +50,7 @@ public class VkSamplerYcbcrConversionCreateInfoKHR extends VkSamplerYcbcrConvers
     @Override
     public VkSamplerYcbcrConversionCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO} value to the {@code sType} field. */
+    @Override
     public VkSamplerYcbcrConversionCreateInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -67,6 +68,7 @@ public class VkSamplerYcbcrConversionCreateInfoKHR extends VkSamplerYcbcrConvers
     @Override
     public VkSamplerYcbcrConversionCreateInfoKHR components(VkComponentMapping value) { ncomponents(address(), value); return this; }
     /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
+    @Override
     public VkSamplerYcbcrConversionCreateInfoKHR components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
     /** Sets the specified value to the {@code xChromaOffset} field. */
     @Override
@@ -293,6 +295,7 @@ public class VkSamplerYcbcrConversionCreateInfoKHR extends VkSamplerYcbcrConvers
         @Override
         public VkSamplerYcbcrConversionCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerYcbcrConversionCreateInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO} value to the {@code sType} field. */
+        @Override
         public VkSamplerYcbcrConversionCreateInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
@@ -310,6 +313,7 @@ public class VkSamplerYcbcrConversionCreateInfoKHR extends VkSamplerYcbcrConvers
         @Override
         public VkSamplerYcbcrConversionCreateInfoKHR.Buffer components(VkComponentMapping value) { VkSamplerYcbcrConversionCreateInfoKHR.ncomponents(address(), value); return this; }
         /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
+        @Override
         public VkSamplerYcbcrConversionCreateInfoKHR.Buffer components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
         /** Sets the specified value to the {@code xChromaOffset} field. */
         @Override

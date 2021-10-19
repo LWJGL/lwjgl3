@@ -43,6 +43,7 @@ public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
     @Override
     public VkBufferDeviceAddressInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO} value to the {@code sType} field. */
+    @Override
     public VkBufferDeviceAddressInfoKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -231,6 +232,7 @@ public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
         @Override
         public VkBufferDeviceAddressInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferDeviceAddressInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO} value to the {@code sType} field. */
+        @Override
         public VkBufferDeviceAddressInfoKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

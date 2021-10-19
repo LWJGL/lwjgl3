@@ -43,6 +43,7 @@ public class VkQueueFamilyProperties2KHR extends VkQueueFamilyProperties2 {
     @Override
     public VkQueueFamilyProperties2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2 STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2} value to the {@code sType} field. */
+    @Override
     public VkQueueFamilyProperties2KHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -244,6 +245,7 @@ public class VkQueueFamilyProperties2KHR extends VkQueueFamilyProperties2 {
         @Override
         public VkQueueFamilyProperties2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkQueueFamilyProperties2KHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2 STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2} value to the {@code sType} field. */
+        @Override
         public VkQueueFamilyProperties2KHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

@@ -160,18 +160,22 @@ public class VkBufferCreateInfo extends Struct implements NativeResource {
     public VkBufferCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkDedicatedAllocationBufferCreateInfoNV struct to the {@link #pNext} field. */
-    public VkBufferCreateInfo pNext(VkDedicatedAllocationBufferCreateInfoNV value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkExternalMemoryBufferCreateInfo struct to the {@link #pNext} field. */
-    public VkBufferCreateInfo pNext(VkExternalMemoryBufferCreateInfo value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkExternalMemoryBufferCreateInfoKHR struct to the {@link #pNext} field. */
-    public VkBufferCreateInfo pNext(VkExternalMemoryBufferCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkBufferOpaqueCaptureAddressCreateInfo struct to the {@link #pNext} field. */
-    public VkBufferCreateInfo pNext(VkBufferOpaqueCaptureAddressCreateInfo value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkBufferOpaqueCaptureAddressCreateInfoKHR struct to the {@link #pNext} field. */
-    public VkBufferCreateInfo pNext(VkBufferOpaqueCaptureAddressCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkBufferDeviceAddressCreateInfoEXT struct to the {@link #pNext} field. */
-    public VkBufferCreateInfo pNext(VkBufferDeviceAddressCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkBufferDeviceAddressCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkBufferCreateInfo pNext(VkBufferDeviceAddressCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkBufferOpaqueCaptureAddressCreateInfo} value to the {@code pNext} chain. */
+    public VkBufferCreateInfo pNext(VkBufferOpaqueCaptureAddressCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkBufferOpaqueCaptureAddressCreateInfoKHR} value to the {@code pNext} chain. */
+    public VkBufferCreateInfo pNext(VkBufferOpaqueCaptureAddressCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkDedicatedAllocationBufferCreateInfoNV} value to the {@code pNext} chain. */
+    public VkBufferCreateInfo pNext(VkDedicatedAllocationBufferCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkExternalMemoryBufferCreateInfo} value to the {@code pNext} chain. */
+    public VkBufferCreateInfo pNext(VkExternalMemoryBufferCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkExternalMemoryBufferCreateInfoKHR} value to the {@code pNext} chain. */
+    public VkBufferCreateInfo pNext(VkExternalMemoryBufferCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkVideoProfileKHR} value to the {@code pNext} chain. */
+    public VkBufferCreateInfo pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkVideoProfilesKHR} value to the {@code pNext} chain. */
+    public VkBufferCreateInfo pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkBufferCreateInfo flags(@NativeType("VkBufferCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #size} field. */
@@ -456,18 +460,22 @@ public class VkBufferCreateInfo extends Struct implements NativeResource {
         public VkBufferCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO); }
         /** Sets the specified value to the {@link VkBufferCreateInfo#pNext} field. */
         public VkBufferCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkBufferCreateInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkDedicatedAllocationBufferCreateInfoNV struct to the {@link VkBufferCreateInfo#pNext} field. */
-        public VkBufferCreateInfo.Buffer pNext(VkDedicatedAllocationBufferCreateInfoNV value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkExternalMemoryBufferCreateInfo struct to the {@link VkBufferCreateInfo#pNext} field. */
-        public VkBufferCreateInfo.Buffer pNext(VkExternalMemoryBufferCreateInfo value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkExternalMemoryBufferCreateInfoKHR struct to the {@link VkBufferCreateInfo#pNext} field. */
-        public VkBufferCreateInfo.Buffer pNext(VkExternalMemoryBufferCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkBufferOpaqueCaptureAddressCreateInfo struct to the {@link VkBufferCreateInfo#pNext} field. */
-        public VkBufferCreateInfo.Buffer pNext(VkBufferOpaqueCaptureAddressCreateInfo value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkBufferOpaqueCaptureAddressCreateInfoKHR struct to the {@link VkBufferCreateInfo#pNext} field. */
-        public VkBufferCreateInfo.Buffer pNext(VkBufferOpaqueCaptureAddressCreateInfoKHR value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkBufferDeviceAddressCreateInfoEXT struct to the {@link VkBufferCreateInfo#pNext} field. */
-        public VkBufferCreateInfo.Buffer pNext(VkBufferDeviceAddressCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkBufferDeviceAddressCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkBufferCreateInfo.Buffer pNext(VkBufferDeviceAddressCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkBufferOpaqueCaptureAddressCreateInfo} value to the {@code pNext} chain. */
+        public VkBufferCreateInfo.Buffer pNext(VkBufferOpaqueCaptureAddressCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkBufferOpaqueCaptureAddressCreateInfoKHR} value to the {@code pNext} chain. */
+        public VkBufferCreateInfo.Buffer pNext(VkBufferOpaqueCaptureAddressCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkDedicatedAllocationBufferCreateInfoNV} value to the {@code pNext} chain. */
+        public VkBufferCreateInfo.Buffer pNext(VkDedicatedAllocationBufferCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkExternalMemoryBufferCreateInfo} value to the {@code pNext} chain. */
+        public VkBufferCreateInfo.Buffer pNext(VkExternalMemoryBufferCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkExternalMemoryBufferCreateInfoKHR} value to the {@code pNext} chain. */
+        public VkBufferCreateInfo.Buffer pNext(VkExternalMemoryBufferCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkVideoProfileKHR} value to the {@code pNext} chain. */
+        public VkBufferCreateInfo.Buffer pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkVideoProfilesKHR} value to the {@code pNext} chain. */
+        public VkBufferCreateInfo.Buffer pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkBufferCreateInfo#flags} field. */
         public VkBufferCreateInfo.Buffer flags(@NativeType("VkBufferCreateFlags") int value) { VkBufferCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkBufferCreateInfo#size} field. */

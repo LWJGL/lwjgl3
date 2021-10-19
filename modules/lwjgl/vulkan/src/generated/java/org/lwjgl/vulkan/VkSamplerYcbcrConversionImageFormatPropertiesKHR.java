@@ -43,6 +43,7 @@ public class VkSamplerYcbcrConversionImageFormatPropertiesKHR extends VkSamplerY
     @Override
     public VkSamplerYcbcrConversionImageFormatPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES} value to the {@code sType} field. */
+    @Override
     public VkSamplerYcbcrConversionImageFormatPropertiesKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -244,6 +245,7 @@ public class VkSamplerYcbcrConversionImageFormatPropertiesKHR extends VkSamplerY
         @Override
         public VkSamplerYcbcrConversionImageFormatPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerYcbcrConversionImageFormatPropertiesKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES} value to the {@code sType} field. */
+        @Override
         public VkSamplerYcbcrConversionImageFormatPropertiesKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

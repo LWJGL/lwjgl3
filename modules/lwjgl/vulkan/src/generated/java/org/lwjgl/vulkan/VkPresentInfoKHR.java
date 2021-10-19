@@ -157,16 +157,16 @@ public class VkPresentInfoKHR extends Struct implements NativeResource {
     public VkPresentInfoKHR sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_PRESENT_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPresentInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkDisplayPresentInfoKHR struct to the {@link #pNext} field. */
-    public VkPresentInfoKHR pNext(VkDisplayPresentInfoKHR value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkPresentRegionsKHR struct to the {@link #pNext} field. */
-    public VkPresentInfoKHR pNext(VkPresentRegionsKHR value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkDeviceGroupPresentInfoKHR struct to the {@link #pNext} field. */
-    public VkPresentInfoKHR pNext(VkDeviceGroupPresentInfoKHR value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkPresentIdKHR struct to the {@link #pNext} field. */
-    public VkPresentInfoKHR pNext(VkPresentIdKHR value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkPresentTimesInfoGOOGLE struct to the {@link #pNext} field. */
-    public VkPresentInfoKHR pNext(VkPresentTimesInfoGOOGLE value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkDeviceGroupPresentInfoKHR} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkDeviceGroupPresentInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkDisplayPresentInfoKHR} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkDisplayPresentInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkPresentIdKHR} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkPresentIdKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkPresentRegionsKHR} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkPresentRegionsKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkPresentTimesInfoGOOGLE} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkPresentTimesInfoGOOGLE value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the address of the specified {@link LongBuffer} to the {@link #pWaitSemaphores} field. */
     public VkPresentInfoKHR pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { npWaitSemaphores(address(), value); return this; }
     /** Sets the specified value to the {@link #swapchainCount} field. */
@@ -473,16 +473,16 @@ public class VkPresentInfoKHR extends Struct implements NativeResource {
         public VkPresentInfoKHR.Buffer sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_PRESENT_INFO_KHR); }
         /** Sets the specified value to the {@link VkPresentInfoKHR#pNext} field. */
         public VkPresentInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkPresentInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkDisplayPresentInfoKHR struct to the {@link VkPresentInfoKHR#pNext} field. */
-        public VkPresentInfoKHR.Buffer pNext(VkDisplayPresentInfoKHR value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkPresentRegionsKHR struct to the {@link VkPresentInfoKHR#pNext} field. */
-        public VkPresentInfoKHR.Buffer pNext(VkPresentRegionsKHR value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkDeviceGroupPresentInfoKHR struct to the {@link VkPresentInfoKHR#pNext} field. */
-        public VkPresentInfoKHR.Buffer pNext(VkDeviceGroupPresentInfoKHR value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkPresentIdKHR struct to the {@link VkPresentInfoKHR#pNext} field. */
-        public VkPresentInfoKHR.Buffer pNext(VkPresentIdKHR value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkPresentTimesInfoGOOGLE struct to the {@link VkPresentInfoKHR#pNext} field. */
-        public VkPresentInfoKHR.Buffer pNext(VkPresentTimesInfoGOOGLE value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkDeviceGroupPresentInfoKHR} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkDeviceGroupPresentInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkDisplayPresentInfoKHR} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkDisplayPresentInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkPresentIdKHR} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkPresentIdKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkPresentRegionsKHR} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkPresentRegionsKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkPresentTimesInfoGOOGLE} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkPresentTimesInfoGOOGLE value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the address of the specified {@link LongBuffer} to the {@link VkPresentInfoKHR#pWaitSemaphores} field. */
         public VkPresentInfoKHR.Buffer pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { VkPresentInfoKHR.npWaitSemaphores(address(), value); return this; }
         /** Sets the specified value to the {@link VkPresentInfoKHR#swapchainCount} field. */

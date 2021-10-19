@@ -143,16 +143,16 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
     public VkBindImageMemoryInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBindImageMemoryInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkBindImageMemoryDeviceGroupInfo struct to the {@link #pNext} field. */
-    public VkBindImageMemoryInfo pNext(VkBindImageMemoryDeviceGroupInfo value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkBindImageMemoryDeviceGroupInfoKHR struct to the {@link #pNext} field. */
-    public VkBindImageMemoryInfo pNext(VkBindImageMemoryDeviceGroupInfoKHR value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkBindImageMemorySwapchainInfoKHR struct to the {@link #pNext} field. */
-    public VkBindImageMemoryInfo pNext(VkBindImageMemorySwapchainInfoKHR value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkBindImagePlaneMemoryInfo struct to the {@link #pNext} field. */
-    public VkBindImageMemoryInfo pNext(VkBindImagePlaneMemoryInfo value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkBindImagePlaneMemoryInfoKHR struct to the {@link #pNext} field. */
-    public VkBindImageMemoryInfo pNext(VkBindImagePlaneMemoryInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkBindImageMemoryDeviceGroupInfo} value to the {@code pNext} chain. */
+    public VkBindImageMemoryInfo pNext(VkBindImageMemoryDeviceGroupInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkBindImageMemoryDeviceGroupInfoKHR} value to the {@code pNext} chain. */
+    public VkBindImageMemoryInfo pNext(VkBindImageMemoryDeviceGroupInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkBindImageMemorySwapchainInfoKHR} value to the {@code pNext} chain. */
+    public VkBindImageMemoryInfo pNext(VkBindImageMemorySwapchainInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkBindImagePlaneMemoryInfo} value to the {@code pNext} chain. */
+    public VkBindImageMemoryInfo pNext(VkBindImagePlaneMemoryInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkBindImagePlaneMemoryInfoKHR} value to the {@code pNext} chain. */
+    public VkBindImageMemoryInfo pNext(VkBindImagePlaneMemoryInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #image} field. */
     public VkBindImageMemoryInfo image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
     /** Sets the specified value to the {@link #memory} field. */
@@ -403,16 +403,16 @@ public class VkBindImageMemoryInfo extends Struct implements NativeResource {
         public VkBindImageMemoryInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO); }
         /** Sets the specified value to the {@link VkBindImageMemoryInfo#pNext} field. */
         public VkBindImageMemoryInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindImageMemoryInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkBindImageMemoryDeviceGroupInfo struct to the {@link VkBindImageMemoryInfo#pNext} field. */
-        public VkBindImageMemoryInfo.Buffer pNext(VkBindImageMemoryDeviceGroupInfo value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkBindImageMemoryDeviceGroupInfoKHR struct to the {@link VkBindImageMemoryInfo#pNext} field. */
-        public VkBindImageMemoryInfo.Buffer pNext(VkBindImageMemoryDeviceGroupInfoKHR value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkBindImageMemorySwapchainInfoKHR struct to the {@link VkBindImageMemoryInfo#pNext} field. */
-        public VkBindImageMemoryInfo.Buffer pNext(VkBindImageMemorySwapchainInfoKHR value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkBindImagePlaneMemoryInfo struct to the {@link VkBindImageMemoryInfo#pNext} field. */
-        public VkBindImageMemoryInfo.Buffer pNext(VkBindImagePlaneMemoryInfo value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkBindImagePlaneMemoryInfoKHR struct to the {@link VkBindImageMemoryInfo#pNext} field. */
-        public VkBindImageMemoryInfo.Buffer pNext(VkBindImagePlaneMemoryInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkBindImageMemoryDeviceGroupInfo} value to the {@code pNext} chain. */
+        public VkBindImageMemoryInfo.Buffer pNext(VkBindImageMemoryDeviceGroupInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkBindImageMemoryDeviceGroupInfoKHR} value to the {@code pNext} chain. */
+        public VkBindImageMemoryInfo.Buffer pNext(VkBindImageMemoryDeviceGroupInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkBindImageMemorySwapchainInfoKHR} value to the {@code pNext} chain. */
+        public VkBindImageMemoryInfo.Buffer pNext(VkBindImageMemorySwapchainInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkBindImagePlaneMemoryInfo} value to the {@code pNext} chain. */
+        public VkBindImageMemoryInfo.Buffer pNext(VkBindImagePlaneMemoryInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkBindImagePlaneMemoryInfoKHR} value to the {@code pNext} chain. */
+        public VkBindImageMemoryInfo.Buffer pNext(VkBindImagePlaneMemoryInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkBindImageMemoryInfo#image} field. */
         public VkBindImageMemoryInfo.Buffer image(@NativeType("VkImage") long value) { VkBindImageMemoryInfo.nimage(address(), value); return this; }
         /** Sets the specified value to the {@link VkBindImageMemoryInfo#memory} field. */

@@ -43,6 +43,7 @@ public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInf
     @Override
     public VkSamplerYcbcrConversionInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO} value to the {@code sType} field. */
+    @Override
     public VkSamplerYcbcrConversionInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -249,6 +250,7 @@ public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInf
         @Override
         public VkSamplerYcbcrConversionInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerYcbcrConversionInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO} value to the {@code sType} field. */
+        @Override
         public VkSamplerYcbcrConversionInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

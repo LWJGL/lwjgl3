@@ -44,6 +44,7 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfoEXT extends VkDescriptor
     @Override
     public VkDescriptorSetLayoutBindingFlagsCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO} value to the {@code sType} field. */
+    @Override
     public VkDescriptorSetLayoutBindingFlagsCreateInfoEXT sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -255,6 +256,7 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfoEXT extends VkDescriptor
         @Override
         public VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO} value to the {@code sType} field. */
+        @Override
         public VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

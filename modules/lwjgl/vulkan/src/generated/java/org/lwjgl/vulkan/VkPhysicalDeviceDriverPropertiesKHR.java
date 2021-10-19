@@ -48,6 +48,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverP
     @Override
     public VkPhysicalDeviceDriverPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceDriverPropertiesKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -249,6 +250,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverP
         @Override
         public VkPhysicalDeviceDriverPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDriverPropertiesKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceDriverPropertiesKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

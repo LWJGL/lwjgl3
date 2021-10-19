@@ -142,14 +142,22 @@ public class VkPhysicalDeviceImageFormatInfo2 extends Struct implements NativeRe
     public VkPhysicalDeviceImageFormatInfo2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkPhysicalDeviceExternalImageFormatInfo struct to the {@link #pNext} field. */
-    public VkPhysicalDeviceImageFormatInfo2 pNext(VkPhysicalDeviceExternalImageFormatInfo value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkPhysicalDeviceExternalImageFormatInfoKHR struct to the {@link #pNext} field. */
-    public VkPhysicalDeviceImageFormatInfo2 pNext(VkPhysicalDeviceExternalImageFormatInfoKHR value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkPhysicalDeviceImageDrmFormatModifierInfoEXT struct to the {@link #pNext} field. */
-    public VkPhysicalDeviceImageFormatInfo2 pNext(VkPhysicalDeviceImageDrmFormatModifierInfoEXT value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkPhysicalDeviceImageViewImageFormatInfoEXT struct to the {@link #pNext} field. */
-    public VkPhysicalDeviceImageFormatInfo2 pNext(VkPhysicalDeviceImageViewImageFormatInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkImageFormatListCreateInfo} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageFormatListCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkImageStencilUsageCreateInfo} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageStencilUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkImageStencilUsageCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageStencilUsageCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkPhysicalDeviceExternalImageFormatInfo} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkPhysicalDeviceExternalImageFormatInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkPhysicalDeviceExternalImageFormatInfoKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkPhysicalDeviceExternalImageFormatInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkPhysicalDeviceImageDrmFormatModifierInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkPhysicalDeviceImageViewImageFormatInfoEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkPhysicalDeviceImageViewImageFormatInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #format} field. */
     public VkPhysicalDeviceImageFormatInfo2 format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
     /** Sets the specified value to the {@link #type} field. */
@@ -422,14 +430,22 @@ public class VkPhysicalDeviceImageFormatInfo2 extends Struct implements NativeRe
         public VkPhysicalDeviceImageFormatInfo2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2); }
         /** Sets the specified value to the {@link VkPhysicalDeviceImageFormatInfo2#pNext} field. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceImageFormatInfo2.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkPhysicalDeviceExternalImageFormatInfo struct to the {@link VkPhysicalDeviceImageFormatInfo2#pNext} field. */
-        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkPhysicalDeviceExternalImageFormatInfo value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkPhysicalDeviceExternalImageFormatInfoKHR struct to the {@link VkPhysicalDeviceImageFormatInfo2#pNext} field. */
-        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkPhysicalDeviceExternalImageFormatInfoKHR value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkPhysicalDeviceImageDrmFormatModifierInfoEXT struct to the {@link VkPhysicalDeviceImageFormatInfo2#pNext} field. */
-        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkPhysicalDeviceImageDrmFormatModifierInfoEXT value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkPhysicalDeviceImageViewImageFormatInfoEXT struct to the {@link VkPhysicalDeviceImageFormatInfo2#pNext} field. */
-        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkPhysicalDeviceImageViewImageFormatInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkImageFormatListCreateInfo} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageFormatListCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkImageStencilUsageCreateInfo} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageStencilUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkImageStencilUsageCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageStencilUsageCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkPhysicalDeviceExternalImageFormatInfo} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkPhysicalDeviceExternalImageFormatInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkPhysicalDeviceExternalImageFormatInfoKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkPhysicalDeviceExternalImageFormatInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkPhysicalDeviceImageDrmFormatModifierInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkPhysicalDeviceImageViewImageFormatInfoEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkPhysicalDeviceImageViewImageFormatInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkPhysicalDeviceImageFormatInfo2#format} field. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer format(@NativeType("VkFormat") int value) { VkPhysicalDeviceImageFormatInfo2.nformat(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceImageFormatInfo2#type} field. */

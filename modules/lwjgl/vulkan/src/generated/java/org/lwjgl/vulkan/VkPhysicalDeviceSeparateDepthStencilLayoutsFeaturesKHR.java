@@ -43,6 +43,7 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR extends VkPh
     @Override
     public VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -231,6 +232,7 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR extends VkPh
         @Override
         public VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

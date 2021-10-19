@@ -45,6 +45,7 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends VkPhysicalDevi
     @Override
     public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -261,6 +262,7 @@ public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends VkPhysicalDevi
         @Override
         public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

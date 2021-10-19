@@ -45,6 +45,7 @@ public class VkExternalSemaphorePropertiesKHR extends VkExternalSemaphorePropert
     @Override
     public VkExternalSemaphorePropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES} value to the {@code sType} field. */
+    @Override
     public VkExternalSemaphorePropertiesKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -246,6 +247,7 @@ public class VkExternalSemaphorePropertiesKHR extends VkExternalSemaphorePropert
         @Override
         public VkExternalSemaphorePropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalSemaphorePropertiesKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES} value to the {@code sType} field. */
+        @Override
         public VkExternalSemaphorePropertiesKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

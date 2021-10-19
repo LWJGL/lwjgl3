@@ -45,6 +45,7 @@ public class VkAttachmentReference2KHR extends VkAttachmentReference2 {
     @Override
     public VkAttachmentReference2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2 STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2} value to the {@code sType} field. */
+    @Override
     public VkAttachmentReference2KHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -261,6 +262,7 @@ public class VkAttachmentReference2KHR extends VkAttachmentReference2 {
         @Override
         public VkAttachmentReference2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAttachmentReference2KHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2 STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2} value to the {@code sType} field. */
+        @Override
         public VkAttachmentReference2KHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

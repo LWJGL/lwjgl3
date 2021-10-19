@@ -154,8 +154,8 @@ public class VkAccelerationStructureGeometryTrianglesDataKHR extends Struct impl
     public VkAccelerationStructureGeometryTrianglesDataKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureGeometryTrianglesDataKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkAccelerationStructureGeometryMotionTrianglesDataNV struct to the {@link #pNext} field. */
-    public VkAccelerationStructureGeometryTrianglesDataKHR pNext(VkAccelerationStructureGeometryMotionTrianglesDataNV value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkAccelerationStructureGeometryMotionTrianglesDataNV} value to the {@code pNext} chain. */
+    public VkAccelerationStructureGeometryTrianglesDataKHR pNext(VkAccelerationStructureGeometryMotionTrianglesDataNV value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #vertexFormat} field. */
     public VkAccelerationStructureGeometryTrianglesDataKHR vertexFormat(@NativeType("VkFormat") int value) { nvertexFormat(address(), value); return this; }
     /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #vertexData} field. */
@@ -435,8 +435,8 @@ public class VkAccelerationStructureGeometryTrianglesDataKHR extends Struct impl
         public VkAccelerationStructureGeometryTrianglesDataKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR); }
         /** Sets the specified value to the {@link VkAccelerationStructureGeometryTrianglesDataKHR#pNext} field. */
         public VkAccelerationStructureGeometryTrianglesDataKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureGeometryTrianglesDataKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkAccelerationStructureGeometryMotionTrianglesDataNV struct to the {@link VkAccelerationStructureGeometryTrianglesDataKHR#pNext} field. */
-        public VkAccelerationStructureGeometryTrianglesDataKHR.Buffer pNext(VkAccelerationStructureGeometryMotionTrianglesDataNV value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkAccelerationStructureGeometryMotionTrianglesDataNV} value to the {@code pNext} chain. */
+        public VkAccelerationStructureGeometryTrianglesDataKHR.Buffer pNext(VkAccelerationStructureGeometryMotionTrianglesDataNV value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkAccelerationStructureGeometryTrianglesDataKHR#vertexFormat} field. */
         public VkAccelerationStructureGeometryTrianglesDataKHR.Buffer vertexFormat(@NativeType("VkFormat") int value) { VkAccelerationStructureGeometryTrianglesDataKHR.nvertexFormat(address(), value); return this; }
         /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkAccelerationStructureGeometryTrianglesDataKHR#vertexData} field. */

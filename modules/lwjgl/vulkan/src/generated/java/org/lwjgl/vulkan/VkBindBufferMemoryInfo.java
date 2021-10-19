@@ -134,10 +134,10 @@ public class VkBindBufferMemoryInfo extends Struct implements NativeResource {
     public VkBindBufferMemoryInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBindBufferMemoryInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkBindBufferMemoryDeviceGroupInfo struct to the {@link #pNext} field. */
-    public VkBindBufferMemoryInfo pNext(VkBindBufferMemoryDeviceGroupInfo value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkBindBufferMemoryDeviceGroupInfoKHR struct to the {@link #pNext} field. */
-    public VkBindBufferMemoryInfo pNext(VkBindBufferMemoryDeviceGroupInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkBindBufferMemoryDeviceGroupInfo} value to the {@code pNext} chain. */
+    public VkBindBufferMemoryInfo pNext(VkBindBufferMemoryDeviceGroupInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkBindBufferMemoryDeviceGroupInfoKHR} value to the {@code pNext} chain. */
+    public VkBindBufferMemoryInfo pNext(VkBindBufferMemoryDeviceGroupInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #buffer} field. */
     public VkBindBufferMemoryInfo buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
     /** Sets the specified value to the {@link #memory} field. */
@@ -388,10 +388,10 @@ public class VkBindBufferMemoryInfo extends Struct implements NativeResource {
         public VkBindBufferMemoryInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO); }
         /** Sets the specified value to the {@link VkBindBufferMemoryInfo#pNext} field. */
         public VkBindBufferMemoryInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindBufferMemoryInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkBindBufferMemoryDeviceGroupInfo struct to the {@link VkBindBufferMemoryInfo#pNext} field. */
-        public VkBindBufferMemoryInfo.Buffer pNext(VkBindBufferMemoryDeviceGroupInfo value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkBindBufferMemoryDeviceGroupInfoKHR struct to the {@link VkBindBufferMemoryInfo#pNext} field. */
-        public VkBindBufferMemoryInfo.Buffer pNext(VkBindBufferMemoryDeviceGroupInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkBindBufferMemoryDeviceGroupInfo} value to the {@code pNext} chain. */
+        public VkBindBufferMemoryInfo.Buffer pNext(VkBindBufferMemoryDeviceGroupInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkBindBufferMemoryDeviceGroupInfoKHR} value to the {@code pNext} chain. */
+        public VkBindBufferMemoryInfo.Buffer pNext(VkBindBufferMemoryDeviceGroupInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkBindBufferMemoryInfo#buffer} field. */
         public VkBindBufferMemoryInfo.Buffer buffer(@NativeType("VkBuffer") long value) { VkBindBufferMemoryInfo.nbuffer(address(), value); return this; }
         /** Sets the specified value to the {@link VkBindBufferMemoryInfo#memory} field. */

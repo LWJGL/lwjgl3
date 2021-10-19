@@ -44,6 +44,7 @@ public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceM
     @Override
     public VkPhysicalDeviceMaintenance3PropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceMaintenance3PropertiesKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -245,6 +246,7 @@ public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceM
         @Override
         public VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMaintenance3PropertiesKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceMaintenance3PropertiesKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

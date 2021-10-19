@@ -107,10 +107,10 @@ public class VkImageMemoryRequirementsInfo2 extends Struct implements NativeReso
     public VkImageMemoryRequirementsInfo2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageMemoryRequirementsInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkImagePlaneMemoryRequirementsInfo struct to the {@link #pNext} field. */
-    public VkImageMemoryRequirementsInfo2 pNext(VkImagePlaneMemoryRequirementsInfo value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkImagePlaneMemoryRequirementsInfoKHR struct to the {@link #pNext} field. */
-    public VkImageMemoryRequirementsInfo2 pNext(VkImagePlaneMemoryRequirementsInfoKHR value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkImagePlaneMemoryRequirementsInfo} value to the {@code pNext} chain. */
+    public VkImageMemoryRequirementsInfo2 pNext(VkImagePlaneMemoryRequirementsInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkImagePlaneMemoryRequirementsInfoKHR} value to the {@code pNext} chain. */
+    public VkImageMemoryRequirementsInfo2 pNext(VkImagePlaneMemoryRequirementsInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #image} field. */
     public VkImageMemoryRequirementsInfo2 image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
 
@@ -339,10 +339,10 @@ public class VkImageMemoryRequirementsInfo2 extends Struct implements NativeReso
         public VkImageMemoryRequirementsInfo2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2); }
         /** Sets the specified value to the {@link VkImageMemoryRequirementsInfo2#pNext} field. */
         public VkImageMemoryRequirementsInfo2.Buffer pNext(@NativeType("void const *") long value) { VkImageMemoryRequirementsInfo2.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkImagePlaneMemoryRequirementsInfo struct to the {@link VkImageMemoryRequirementsInfo2#pNext} field. */
-        public VkImageMemoryRequirementsInfo2.Buffer pNext(VkImagePlaneMemoryRequirementsInfo value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkImagePlaneMemoryRequirementsInfoKHR struct to the {@link VkImageMemoryRequirementsInfo2#pNext} field. */
-        public VkImageMemoryRequirementsInfo2.Buffer pNext(VkImagePlaneMemoryRequirementsInfoKHR value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkImagePlaneMemoryRequirementsInfo} value to the {@code pNext} chain. */
+        public VkImageMemoryRequirementsInfo2.Buffer pNext(VkImagePlaneMemoryRequirementsInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkImagePlaneMemoryRequirementsInfoKHR} value to the {@code pNext} chain. */
+        public VkImageMemoryRequirementsInfo2.Buffer pNext(VkImagePlaneMemoryRequirementsInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkImageMemoryRequirementsInfo2#image} field. */
         public VkImageMemoryRequirementsInfo2.Buffer image(@NativeType("VkImage") long value) { VkImageMemoryRequirementsInfo2.nimage(address(), value); return this; }
 

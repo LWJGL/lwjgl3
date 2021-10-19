@@ -43,6 +43,7 @@ public class VkPhysicalDeviceFeatures2KHR extends VkPhysicalDeviceFeatures2 {
     @Override
     public VkPhysicalDeviceFeatures2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceFeatures2KHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -51,6 +52,7 @@ public class VkPhysicalDeviceFeatures2KHR extends VkPhysicalDeviceFeatures2 {
     @Override
     public VkPhysicalDeviceFeatures2KHR features(VkPhysicalDeviceFeatures value) { nfeatures(address(), value); return this; }
     /** Passes the {@code features} field to the specified {@link java.util.function.Consumer Consumer}. */
+    @Override
     public VkPhysicalDeviceFeatures2KHR features(java.util.function.Consumer<VkPhysicalDeviceFeatures> consumer) { consumer.accept(features()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -251,6 +253,7 @@ public class VkPhysicalDeviceFeatures2KHR extends VkPhysicalDeviceFeatures2 {
         @Override
         public VkPhysicalDeviceFeatures2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFeatures2KHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceFeatures2KHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
@@ -259,6 +262,7 @@ public class VkPhysicalDeviceFeatures2KHR extends VkPhysicalDeviceFeatures2 {
         @Override
         public VkPhysicalDeviceFeatures2KHR.Buffer features(VkPhysicalDeviceFeatures value) { VkPhysicalDeviceFeatures2KHR.nfeatures(address(), value); return this; }
         /** Passes the {@code features} field to the specified {@link java.util.function.Consumer Consumer}. */
+        @Override
         public VkPhysicalDeviceFeatures2KHR.Buffer features(java.util.function.Consumer<VkPhysicalDeviceFeatures> consumer) { consumer.accept(features()); return this; }
 
     }

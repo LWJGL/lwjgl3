@@ -101,10 +101,10 @@ public class VkDescriptorSetLayoutSupport extends Struct implements NativeResour
     public VkDescriptorSetLayoutSupport sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDescriptorSetLayoutSupport pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkDescriptorSetVariableDescriptorCountLayoutSupport struct to the {@link #pNext} field. */
-    public VkDescriptorSetLayoutSupport pNext(VkDescriptorSetVariableDescriptorCountLayoutSupport value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkDescriptorSetVariableDescriptorCountLayoutSupportEXT struct to the {@link #pNext} field. */
-    public VkDescriptorSetLayoutSupport pNext(VkDescriptorSetVariableDescriptorCountLayoutSupportEXT value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkDescriptorSetVariableDescriptorCountLayoutSupport} value to the {@code pNext} chain. */
+    public VkDescriptorSetLayoutSupport pNext(VkDescriptorSetVariableDescriptorCountLayoutSupport value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkDescriptorSetVariableDescriptorCountLayoutSupportEXT} value to the {@code pNext} chain. */
+    public VkDescriptorSetLayoutSupport pNext(VkDescriptorSetVariableDescriptorCountLayoutSupportEXT value) { return this.pNext(value.pNext(this.pNext())); }
 
     /** Initializes this struct with the specified values. */
     public VkDescriptorSetLayoutSupport set(
@@ -327,10 +327,10 @@ public class VkDescriptorSetLayoutSupport extends Struct implements NativeResour
         public VkDescriptorSetLayoutSupport.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT); }
         /** Sets the specified value to the {@link VkDescriptorSetLayoutSupport#pNext} field. */
         public VkDescriptorSetLayoutSupport.Buffer pNext(@NativeType("void *") long value) { VkDescriptorSetLayoutSupport.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkDescriptorSetVariableDescriptorCountLayoutSupport struct to the {@link VkDescriptorSetLayoutSupport#pNext} field. */
-        public VkDescriptorSetLayoutSupport.Buffer pNext(VkDescriptorSetVariableDescriptorCountLayoutSupport value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkDescriptorSetVariableDescriptorCountLayoutSupportEXT struct to the {@link VkDescriptorSetLayoutSupport#pNext} field. */
-        public VkDescriptorSetLayoutSupport.Buffer pNext(VkDescriptorSetVariableDescriptorCountLayoutSupportEXT value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkDescriptorSetVariableDescriptorCountLayoutSupport} value to the {@code pNext} chain. */
+        public VkDescriptorSetLayoutSupport.Buffer pNext(VkDescriptorSetVariableDescriptorCountLayoutSupport value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkDescriptorSetVariableDescriptorCountLayoutSupportEXT} value to the {@code pNext} chain. */
+        public VkDescriptorSetLayoutSupport.Buffer pNext(VkDescriptorSetVariableDescriptorCountLayoutSupportEXT value) { return this.pNext(value.pNext(this.pNext())); }
 
     }
 

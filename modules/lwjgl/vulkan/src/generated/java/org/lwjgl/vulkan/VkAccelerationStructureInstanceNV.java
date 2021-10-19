@@ -46,6 +46,7 @@ public class VkAccelerationStructureInstanceNV extends VkAccelerationStructureIn
     @Override
     public VkAccelerationStructureInstanceNV transform(VkTransformMatrixKHR value) { ntransform(address(), value); return this; }
     /** Passes the {@code transform} field to the specified {@link java.util.function.Consumer Consumer}. */
+    @Override
     public VkAccelerationStructureInstanceNV transform(java.util.function.Consumer<VkTransformMatrixKHR> consumer) { consumer.accept(transform()); return this; }
     /** Sets the specified value to the {@code instanceCustomIndex} field. */
     @Override
@@ -249,6 +250,7 @@ public class VkAccelerationStructureInstanceNV extends VkAccelerationStructureIn
         @Override
         public VkAccelerationStructureInstanceNV.Buffer transform(VkTransformMatrixKHR value) { VkAccelerationStructureInstanceNV.ntransform(address(), value); return this; }
         /** Passes the {@code transform} field to the specified {@link java.util.function.Consumer Consumer}. */
+        @Override
         public VkAccelerationStructureInstanceNV.Buffer transform(java.util.function.Consumer<VkTransformMatrixKHR> consumer) { consumer.accept(transform()); return this; }
         /** Sets the specified value to the {@code instanceCustomIndex} field. */
         @Override

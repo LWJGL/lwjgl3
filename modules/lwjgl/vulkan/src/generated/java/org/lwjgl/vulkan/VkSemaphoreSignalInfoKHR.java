@@ -44,6 +44,7 @@ public class VkSemaphoreSignalInfoKHR extends VkSemaphoreSignalInfo {
     @Override
     public VkSemaphoreSignalInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO} value to the {@code sType} field. */
+    @Override
     public VkSemaphoreSignalInfoKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -237,6 +238,7 @@ public class VkSemaphoreSignalInfoKHR extends VkSemaphoreSignalInfo {
         @Override
         public VkSemaphoreSignalInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSemaphoreSignalInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO} value to the {@code sType} field. */
+        @Override
         public VkSemaphoreSignalInfoKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

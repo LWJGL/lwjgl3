@@ -43,6 +43,7 @@ public class VkSubpassBeginInfoKHR extends VkSubpassBeginInfo {
     @Override
     public VkSubpassBeginInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO STRUCTURE_TYPE_SUBPASS_BEGIN_INFO} value to the {@code sType} field. */
+    @Override
     public VkSubpassBeginInfoKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -249,6 +250,7 @@ public class VkSubpassBeginInfoKHR extends VkSubpassBeginInfo {
         @Override
         public VkSubpassBeginInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassBeginInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO STRUCTURE_TYPE_SUBPASS_BEGIN_INFO} value to the {@code sType} field. */
+        @Override
         public VkSubpassBeginInfoKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

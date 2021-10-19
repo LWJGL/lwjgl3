@@ -43,6 +43,7 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
     @Override
     public VkBufferOpaqueCaptureAddressCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO} value to the {@code sType} field. */
+    @Override
     public VkBufferOpaqueCaptureAddressCreateInfoKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -231,6 +232,7 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
         @Override
         public VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferOpaqueCaptureAddressCreateInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO} value to the {@code sType} field. */
+        @Override
         public VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

@@ -43,6 +43,7 @@ public class VkFormatProperties2KHR extends VkFormatProperties2 {
     @Override
     public VkFormatProperties2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_FORMAT_PROPERTIES_2} value to the {@code sType} field. */
+    @Override
     public VkFormatProperties2KHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -244,6 +245,7 @@ public class VkFormatProperties2KHR extends VkFormatProperties2 {
         @Override
         public VkFormatProperties2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkFormatProperties2KHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_FORMAT_PROPERTIES_2} value to the {@code sType} field. */
+        @Override
         public VkFormatProperties2KHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

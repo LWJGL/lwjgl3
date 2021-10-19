@@ -43,6 +43,7 @@ public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
     @Override
     public VkExportFenceCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO} value to the {@code sType} field. */
+    @Override
     public VkExportFenceCreateInfoKHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -249,6 +250,7 @@ public class VkExportFenceCreateInfoKHR extends VkExportFenceCreateInfo {
         @Override
         public VkExportFenceCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkExportFenceCreateInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO} value to the {@code sType} field. */
+        @Override
         public VkExportFenceCreateInfoKHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

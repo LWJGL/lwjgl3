@@ -110,6 +110,10 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
     public VkPhysicalDeviceSurfaceInfo2KHR sType$Default() { return sType(KHRGetSurfaceCapabilities2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceSurfaceInfo2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkSurfaceFullScreenExclusiveInfoEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceSurfaceInfo2KHR pNext(VkSurfaceFullScreenExclusiveInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkSurfaceFullScreenExclusiveWin32InfoEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceSurfaceInfo2KHR pNext(VkSurfaceFullScreenExclusiveWin32InfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #surface} field. */
     public VkPhysicalDeviceSurfaceInfo2KHR surface(@NativeType("VkSurfaceKHR") long value) { nsurface(address(), value); return this; }
 
@@ -338,6 +342,10 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct implements NativeRes
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer sType$Default() { return sType(KHRGetSurfaceCapabilities2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceSurfaceInfo2KHR#pNext} field. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceSurfaceInfo2KHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkSurfaceFullScreenExclusiveInfoEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(VkSurfaceFullScreenExclusiveInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkSurfaceFullScreenExclusiveWin32InfoEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(VkSurfaceFullScreenExclusiveWin32InfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkPhysicalDeviceSurfaceInfo2KHR#surface} field. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer surface(@NativeType("VkSurfaceKHR") long value) { VkPhysicalDeviceSurfaceInfo2KHR.nsurface(address(), value); return this; }
 

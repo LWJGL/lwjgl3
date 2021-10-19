@@ -43,6 +43,7 @@ public class VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR extends VkPh
     @Override
     public VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -231,6 +232,7 @@ public class VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR extends VkPh
         @Override
         public VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

@@ -161,14 +161,14 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
     public VkPipelineMultisampleStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineMultisampleStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkPipelineCoverageToColorStateCreateInfoNV struct to the {@link #pNext} field. */
-    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineCoverageToColorStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkPipelineSampleLocationsStateCreateInfoEXT struct to the {@link #pNext} field. */
-    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineSampleLocationsStateCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkPipelineCoverageModulationStateCreateInfoNV struct to the {@link #pNext} field. */
-    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineCoverageModulationStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkPipelineCoverageReductionStateCreateInfoNV struct to the {@link #pNext} field. */
-    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineCoverageReductionStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkPipelineCoverageModulationStateCreateInfoNV} value to the {@code pNext} chain. */
+    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineCoverageModulationStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkPipelineCoverageReductionStateCreateInfoNV} value to the {@code pNext} chain. */
+    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineCoverageReductionStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkPipelineCoverageToColorStateCreateInfoNV} value to the {@code pNext} chain. */
+    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineCoverageToColorStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkPipelineSampleLocationsStateCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineSampleLocationsStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineMultisampleStateCreateInfo flags(@NativeType("VkPipelineMultisampleStateCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #rasterizationSamples} field. */
@@ -467,14 +467,14 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
         public VkPipelineMultisampleStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkPipelineMultisampleStateCreateInfo#pNext} field. */
         public VkPipelineMultisampleStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineMultisampleStateCreateInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkPipelineCoverageToColorStateCreateInfoNV struct to the {@link VkPipelineMultisampleStateCreateInfo#pNext} field. */
-        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineCoverageToColorStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkPipelineSampleLocationsStateCreateInfoEXT struct to the {@link VkPipelineMultisampleStateCreateInfo#pNext} field. */
-        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineSampleLocationsStateCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkPipelineCoverageModulationStateCreateInfoNV struct to the {@link VkPipelineMultisampleStateCreateInfo#pNext} field. */
-        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineCoverageModulationStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkPipelineCoverageReductionStateCreateInfoNV struct to the {@link VkPipelineMultisampleStateCreateInfo#pNext} field. */
-        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineCoverageReductionStateCreateInfoNV value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkPipelineCoverageModulationStateCreateInfoNV} value to the {@code pNext} chain. */
+        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineCoverageModulationStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkPipelineCoverageReductionStateCreateInfoNV} value to the {@code pNext} chain. */
+        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineCoverageReductionStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkPipelineCoverageToColorStateCreateInfoNV} value to the {@code pNext} chain. */
+        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineCoverageToColorStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkPipelineSampleLocationsStateCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineSampleLocationsStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkPipelineMultisampleStateCreateInfo#flags} field. */
         public VkPipelineMultisampleStateCreateInfo.Buffer flags(@NativeType("VkPipelineMultisampleStateCreateFlags") int value) { VkPipelineMultisampleStateCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineMultisampleStateCreateInfo#rasterizationSamples} field. */

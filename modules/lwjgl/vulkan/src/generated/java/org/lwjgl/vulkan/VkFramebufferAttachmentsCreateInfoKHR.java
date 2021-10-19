@@ -45,6 +45,7 @@ public class VkFramebufferAttachmentsCreateInfoKHR extends VkFramebufferAttachme
     @Override
     public VkFramebufferAttachmentsCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO} value to the {@code sType} field. */
+    @Override
     public VkFramebufferAttachmentsCreateInfoKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -251,6 +252,7 @@ public class VkFramebufferAttachmentsCreateInfoKHR extends VkFramebufferAttachme
         @Override
         public VkFramebufferAttachmentsCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkFramebufferAttachmentsCreateInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO} value to the {@code sType} field. */
+        @Override
         public VkFramebufferAttachmentsCreateInfoKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

@@ -1850,6 +1850,7 @@ ${validations.joinToString("\n")}
                     println("${indent}public $returnType $setter(${it.annotate(structType)} value) { $n$setter($ADDRESS, value); return this; }")
                     if (nestedStruct.mutable) {
                         printSetterJavadoc(accessMode, it, indent, "Passes the #member field to the specified {@link java.util.function.Consumer Consumer}.", setter)
+                        if (overrides) println("$indent@Override")
                         println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $setter(java.util.function.Consumer<$structType> consumer) { consumer.accept($setter()); return this; }")
                     }
                 }
@@ -1890,9 +1891,11 @@ ${validations.joinToString("\n")}
                         if (nestedStruct.mutable) {
                             if (it.nativeType !is PointerType<*>) {
                                 printSetterJavadoc(accessMode, it, indent, "Passes the #member field to the specified {@link java.util.function.Consumer Consumer}.", setter)
+                                if (overrides) println("$indent@Override")
                                 println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $setter(java.util.function.Consumer<$structType.Buffer> consumer) { consumer.accept($setter()); return this; }")
                             }
                             printSetterJavadoc(accessMode, it, indent, "Passes the element at {@code index} of the #member field to the specified {@link java.util.function.Consumer Consumer}.", setter)
+                            if (overrides) println("$indent@Override")
                             println("${indent}public $className${if (accessMode === AccessMode.INSTANCE) "" else ".Buffer"} $setter(int index, java.util.function.Consumer<$retType> consumer) { consumer.accept($setter(index)); return this; }")
                         }
                     } else if (it.nativeType is CharType) {
@@ -1941,13 +1944,21 @@ ${validations.joinToString("\n")}
                         }
                     }
                     printSetterJavadoc(accessMode, it, indent, javadoc, setter)
+                    if (overrides) println("$indent@Override")
                     println("${indent}public $returnType $setter\$Default() { return $setter(${expression.replace('#', '.')}); }")
                 }
 
                 if (it.has<PointerSetter>()) {
                     it.get<PointerSetter>().types.forEach { structType ->
-                        printSetterJavadoc(accessMode, it, indent, "Sets the address of the specified $structType struct to the #member field.", setter)
-                        println("${indent}public $returnType $setter($structType value) { return $setter(${if (it.isNullable) "memAddressSafe(value)" else "value.address()"}); }")
+                        if (module == Module.VULKAN && setter == "pNext") {
+                            printSetterJavadoc(accessMode, it, indent, "Prepends the specified {@link $structType} value to the {@code pNext} chain.", setter)
+                            if (overrides) println("$indent@Override")
+                            println("${indent}public $returnType pNext($structType value) { return this.pNext(value.pNext(this.pNext())); }")
+                        } else {
+                            printSetterJavadoc(accessMode, it, indent, "Sets the address of the specified {@link $structType} value to the #member field.", setter)
+                            if (overrides) println("$indent@Override")
+                            println("${indent}public $returnType $setter($structType value) { return $setter(value.address()); }")
+                        }
                     }
                 }
             }

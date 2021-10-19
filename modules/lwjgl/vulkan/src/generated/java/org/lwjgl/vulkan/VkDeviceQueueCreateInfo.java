@@ -131,8 +131,8 @@ public class VkDeviceQueueCreateInfo extends Struct implements NativeResource {
     public VkDeviceQueueCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDeviceQueueCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkDeviceQueueGlobalPriorityCreateInfoEXT struct to the {@link #pNext} field. */
-    public VkDeviceQueueCreateInfo pNext(VkDeviceQueueGlobalPriorityCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkDeviceQueueGlobalPriorityCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkDeviceQueueCreateInfo pNext(VkDeviceQueueGlobalPriorityCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkDeviceQueueCreateInfo flags(@NativeType("VkDeviceQueueCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #queueFamilyIndex} field. */
@@ -411,8 +411,8 @@ public class VkDeviceQueueCreateInfo extends Struct implements NativeResource {
         public VkDeviceQueueCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkDeviceQueueCreateInfo#pNext} field. */
         public VkDeviceQueueCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceQueueCreateInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkDeviceQueueGlobalPriorityCreateInfoEXT struct to the {@link VkDeviceQueueCreateInfo#pNext} field. */
-        public VkDeviceQueueCreateInfo.Buffer pNext(VkDeviceQueueGlobalPriorityCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkDeviceQueueGlobalPriorityCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkDeviceQueueCreateInfo.Buffer pNext(VkDeviceQueueGlobalPriorityCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkDeviceQueueCreateInfo#flags} field. */
         public VkDeviceQueueCreateInfo.Buffer flags(@NativeType("VkDeviceQueueCreateFlags") int value) { VkDeviceQueueCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkDeviceQueueCreateInfo#queueFamilyIndex} field. */

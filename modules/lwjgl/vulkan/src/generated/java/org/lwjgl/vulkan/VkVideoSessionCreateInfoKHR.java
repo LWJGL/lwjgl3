@@ -165,14 +165,14 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     public VkVideoSessionCreateInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoSessionCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkVideoDecodeH264SessionCreateInfoEXT struct to the {@link #pNext} field. */
-    public VkVideoSessionCreateInfoKHR pNext(VkVideoDecodeH264SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkVideoDecodeH265SessionCreateInfoEXT struct to the {@link #pNext} field. */
-    public VkVideoSessionCreateInfoKHR pNext(VkVideoDecodeH265SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkVideoEncodeH264SessionCreateInfoEXT struct to the {@link #pNext} field. */
-    public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeH264SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkVideoEncodeH265SessionCreateInfoEXT struct to the {@link #pNext} field. */
-    public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeH265SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkVideoDecodeH264SessionCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoSessionCreateInfoKHR pNext(VkVideoDecodeH264SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkVideoDecodeH265SessionCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoSessionCreateInfoKHR pNext(VkVideoDecodeH265SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkVideoEncodeH264SessionCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeH264SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkVideoEncodeH265SessionCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeH265SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #queueFamilyIndex} field. */
     public VkVideoSessionCreateInfoKHR queueFamilyIndex(@NativeType("uint32_t") int value) { nqueueFamilyIndex(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -482,14 +482,14 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         public VkVideoSessionCreateInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#pNext} field. */
         public VkVideoSessionCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoSessionCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkVideoDecodeH264SessionCreateInfoEXT struct to the {@link VkVideoSessionCreateInfoKHR#pNext} field. */
-        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoDecodeH264SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkVideoDecodeH265SessionCreateInfoEXT struct to the {@link VkVideoSessionCreateInfoKHR#pNext} field. */
-        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoDecodeH265SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkVideoEncodeH264SessionCreateInfoEXT struct to the {@link VkVideoSessionCreateInfoKHR#pNext} field. */
-        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkVideoEncodeH265SessionCreateInfoEXT struct to the {@link VkVideoSessionCreateInfoKHR#pNext} field. */
-        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionCreateInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkVideoDecodeH264SessionCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoDecodeH264SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkVideoDecodeH265SessionCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoDecodeH265SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkVideoEncodeH264SessionCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkVideoEncodeH265SessionCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#queueFamilyIndex} field. */
         public VkVideoSessionCreateInfoKHR.Buffer queueFamilyIndex(@NativeType("uint32_t") int value) { VkVideoSessionCreateInfoKHR.nqueueFamilyIndex(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#flags} field. */

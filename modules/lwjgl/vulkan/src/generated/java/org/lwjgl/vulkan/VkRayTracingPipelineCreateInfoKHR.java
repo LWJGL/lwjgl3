@@ -238,6 +238,8 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct implements NativeR
     public VkRayTracingPipelineCreateInfoKHR sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRayTracingPipelineCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkPipelineCreationFeedbackCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkRayTracingPipelineCreateInfoKHR pNext(VkPipelineCreationFeedbackCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkRayTracingPipelineCreateInfoKHR flags(@NativeType("VkPipelineCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link #pStages} field. */
@@ -603,6 +605,8 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct implements NativeR
         public VkRayTracingPipelineCreateInfoKHR.Buffer sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoKHR#pNext} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkRayTracingPipelineCreateInfoKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkPipelineCreationFeedbackCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkRayTracingPipelineCreateInfoKHR.Buffer pNext(VkPipelineCreationFeedbackCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoKHR#flags} field. */
         public VkRayTracingPipelineCreateInfoKHR.Buffer flags(@NativeType("VkPipelineCreateFlags") int value) { VkRayTracingPipelineCreateInfoKHR.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link VkRayTracingPipelineCreateInfoKHR#pStages} field. */

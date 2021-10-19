@@ -97,14 +97,14 @@ public class VkVideoSessionParametersUpdateInfoKHR extends Struct implements Nat
     public VkVideoSessionParametersUpdateInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoSessionParametersUpdateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified VkVideoDecodeH264SessionParametersAddInfoEXT struct to the {@link #pNext} field. */
-    public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoDecodeH264SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkVideoDecodeH265SessionParametersAddInfoEXT struct to the {@link #pNext} field. */
-    public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoDecodeH265SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkVideoEncodeH264SessionParametersAddInfoEXT struct to the {@link #pNext} field. */
-    public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoEncodeH264SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
-    /** Sets the address of the specified VkVideoEncodeH265SessionParametersAddInfoEXT struct to the {@link #pNext} field. */
-    public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoEncodeH265SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
+    /** Prepends the specified {@link VkVideoDecodeH264SessionParametersAddInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoDecodeH264SessionParametersAddInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkVideoDecodeH265SessionParametersAddInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoDecodeH265SessionParametersAddInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkVideoEncodeH264SessionParametersAddInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoEncodeH264SessionParametersAddInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    /** Prepends the specified {@link VkVideoEncodeH265SessionParametersAddInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoSessionParametersUpdateInfoKHR pNext(VkVideoEncodeH265SessionParametersAddInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #updateSequenceCount} field. */
     public VkVideoSessionParametersUpdateInfoKHR updateSequenceCount(@NativeType("uint32_t") int value) { nupdateSequenceCount(address(), value); return this; }
 
@@ -315,14 +315,14 @@ public class VkVideoSessionParametersUpdateInfoKHR extends Struct implements Nat
         public VkVideoSessionParametersUpdateInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoSessionParametersUpdateInfoKHR#pNext} field. */
         public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoSessionParametersUpdateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified VkVideoDecodeH264SessionParametersAddInfoEXT struct to the {@link VkVideoSessionParametersUpdateInfoKHR#pNext} field. */
-        public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoDecodeH264SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkVideoDecodeH265SessionParametersAddInfoEXT struct to the {@link VkVideoSessionParametersUpdateInfoKHR#pNext} field. */
-        public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoDecodeH265SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkVideoEncodeH264SessionParametersAddInfoEXT struct to the {@link VkVideoSessionParametersUpdateInfoKHR#pNext} field. */
-        public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
-        /** Sets the address of the specified VkVideoEncodeH265SessionParametersAddInfoEXT struct to the {@link VkVideoSessionParametersUpdateInfoKHR#pNext} field. */
-        public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionParametersAddInfoEXT value) { return pNext(memAddressSafe(value)); }
+        /** Prepends the specified {@link VkVideoDecodeH264SessionParametersAddInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoDecodeH264SessionParametersAddInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkVideoDecodeH265SessionParametersAddInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoDecodeH265SessionParametersAddInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkVideoEncodeH264SessionParametersAddInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionParametersAddInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        /** Prepends the specified {@link VkVideoEncodeH265SessionParametersAddInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoSessionParametersUpdateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionParametersAddInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkVideoSessionParametersUpdateInfoKHR#updateSequenceCount} field. */
         public VkVideoSessionParametersUpdateInfoKHR.Buffer updateSequenceCount(@NativeType("uint32_t") int value) { VkVideoSessionParametersUpdateInfoKHR.nupdateSequenceCount(address(), value); return this; }
 

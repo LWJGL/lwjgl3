@@ -43,6 +43,7 @@ public class VkQueryPoolCreateInfoINTEL extends VkQueryPoolPerformanceQueryCreat
     @Override
     public VkQueryPoolCreateInfoINTEL sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL} value to the {@code sType} field. */
+    @Override
     public VkQueryPoolCreateInfoINTEL sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -249,6 +250,7 @@ public class VkQueryPoolCreateInfoINTEL extends VkQueryPoolPerformanceQueryCreat
         @Override
         public VkQueryPoolCreateInfoINTEL.Buffer sType(@NativeType("VkStructureType") int value) { VkQueryPoolCreateInfoINTEL.nsType(address(), value); return this; }
         /** Sets the {@link INTELPerformanceQuery#VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL} value to the {@code sType} field. */
+        @Override
         public VkQueryPoolCreateInfoINTEL.Buffer sType$Default() { return sType(INTELPerformanceQuery.VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

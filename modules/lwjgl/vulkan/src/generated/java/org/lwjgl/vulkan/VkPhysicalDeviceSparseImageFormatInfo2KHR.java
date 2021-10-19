@@ -47,6 +47,7 @@ public class VkPhysicalDeviceSparseImageFormatInfo2KHR extends VkPhysicalDeviceS
     @Override
     public VkPhysicalDeviceSparseImageFormatInfo2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceSparseImageFormatInfo2KHR sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -273,6 +274,7 @@ public class VkPhysicalDeviceSparseImageFormatInfo2KHR extends VkPhysicalDeviceS
         @Override
         public VkPhysicalDeviceSparseImageFormatInfo2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSparseImageFormatInfo2KHR.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceSparseImageFormatInfo2KHR.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

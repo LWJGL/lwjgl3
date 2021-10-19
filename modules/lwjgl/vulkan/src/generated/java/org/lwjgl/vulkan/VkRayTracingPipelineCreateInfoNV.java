@@ -191,6 +191,8 @@ public class VkRayTracingPipelineCreateInfoNV extends Struct implements NativeRe
     public VkRayTracingPipelineCreateInfoNV sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRayTracingPipelineCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkPipelineCreationFeedbackCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkRayTracingPipelineCreateInfoNV pNext(VkPipelineCreationFeedbackCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkRayTracingPipelineCreateInfoNV flags(@NativeType("VkPipelineCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link #pStages} field. */
@@ -524,6 +526,8 @@ public class VkRayTracingPipelineCreateInfoNV extends Struct implements NativeRe
         public VkRayTracingPipelineCreateInfoNV.Buffer sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoNV#pNext} field. */
         public VkRayTracingPipelineCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkRayTracingPipelineCreateInfoNV.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkPipelineCreationFeedbackCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkRayTracingPipelineCreateInfoNV.Buffer pNext(VkPipelineCreationFeedbackCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
         /** Sets the specified value to the {@link VkRayTracingPipelineCreateInfoNV#flags} field. */
         public VkRayTracingPipelineCreateInfoNV.Buffer flags(@NativeType("VkPipelineCreateFlags") int value) { VkRayTracingPipelineCreateInfoNV.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link VkRayTracingPipelineCreateInfoNV#pStages} field. */

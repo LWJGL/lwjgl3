@@ -46,6 +46,7 @@ public class VkTimelineSemaphoreSubmitInfoKHR extends VkTimelineSemaphoreSubmitI
     @Override
     public VkTimelineSemaphoreSubmitInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO} value to the {@code sType} field. */
+    @Override
     public VkTimelineSemaphoreSubmitInfoKHR sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -249,6 +250,7 @@ public class VkTimelineSemaphoreSubmitInfoKHR extends VkTimelineSemaphoreSubmitI
         @Override
         public VkTimelineSemaphoreSubmitInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkTimelineSemaphoreSubmitInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO} value to the {@code sType} field. */
+        @Override
         public VkTimelineSemaphoreSubmitInfoKHR.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

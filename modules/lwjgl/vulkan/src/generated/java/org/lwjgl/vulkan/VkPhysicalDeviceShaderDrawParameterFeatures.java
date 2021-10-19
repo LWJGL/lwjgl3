@@ -43,6 +43,7 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends VkPhysicalDevic
     @Override
     public VkPhysicalDeviceShaderDrawParameterFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceShaderDrawParameterFeatures sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -249,6 +250,7 @@ public class VkPhysicalDeviceShaderDrawParameterFeatures extends VkPhysicalDevic
         @Override
         public VkPhysicalDeviceShaderDrawParameterFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderDrawParameterFeatures.nsType(address(), value); return this; }
         /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceShaderDrawParameterFeatures.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

@@ -43,6 +43,7 @@ public class VkSamplerReductionModeCreateInfoEXT extends VkSamplerReductionModeC
     @Override
     public VkSamplerReductionModeCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO} value to the {@code sType} field. */
+    @Override
     public VkSamplerReductionModeCreateInfoEXT sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -249,6 +250,7 @@ public class VkSamplerReductionModeCreateInfoEXT extends VkSamplerReductionModeC
         @Override
         public VkSamplerReductionModeCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerReductionModeCreateInfoEXT.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO} value to the {@code sType} field. */
+        @Override
         public VkSamplerReductionModeCreateInfoEXT.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override

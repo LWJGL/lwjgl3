@@ -65,6 +65,7 @@ public class VkPhysicalDeviceDescriptorIndexingPropertiesEXT extends VkPhysicalD
     @Override
     public VkPhysicalDeviceDescriptorIndexingPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES} value to the {@code sType} field. */
+    @Override
     public VkPhysicalDeviceDescriptorIndexingPropertiesEXT sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES); }
     /** Sets the specified value to the {@code pNext} field. */
     @Override
@@ -266,6 +267,7 @@ public class VkPhysicalDeviceDescriptorIndexingPropertiesEXT extends VkPhysicalD
         @Override
         public VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDescriptorIndexingPropertiesEXT.nsType(address(), value); return this; }
         /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES} value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceDescriptorIndexingPropertiesEXT.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES); }
         /** Sets the specified value to the {@code pNext} field. */
         @Override
