@@ -240,7 +240,7 @@
         <touch file="${bin.templates}/touch.txt"/>
     </target>
 
-    <target name="cache-kotlinc" description="Uploads the compiled Kotlin templates to build.lwjgl.org" depends="-build-version">
+    <target name="cache-kotlinc" description="Uploads the compiled Kotlin templates to build.lwjgl.org" depends="init">
         <antcall target="clean-kotlin" unless:set="quick"/>
         <antcall target="compile-templates" unless:set="quick"/>
 
@@ -255,7 +255,6 @@
         <jar destfile="templates.jar" level="9" taskname="Building templates.jar">
             <manifest>
                 <attribute name="Specification-Title" value="LWJGL Kotlin Template Cache"/>
-                <attribute name="Specification-Version" value="${build.version}"/>
                 <attribute name="Specification-Vendor" value="lwjgl.org"/>
                 <attribute name="Implementation-Version" value="${commit}"/>
             </manifest>
