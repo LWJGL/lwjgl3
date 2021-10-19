@@ -1514,39 +1514,7 @@
         <release-module name="egl" title="EGL" if:true="${binding.egl}"/>
 
         <!-- GLFW -->
-        <release-module name="glfw" title="GLFW" if:true="${binding.glfw}">
-            <natives>
-                <get-release platform="linux" arch="x64" file="libglfw.so"/>
-                <get-release platform="linux" arch="x64" file="libglfw.so.git"/>
-                <get-release platform="linux" arch="x64" file="libglfw_wayland.so"/>
-                <get-release platform="linux" arch="x64" file="libglfw_wayland.so.git"/>
-
-                <get-release platform="linux" arch="arm64" file="libglfw.so"/>
-                <get-release platform="linux" arch="arm64" file="libglfw.so.git"/>
-                <get-release platform="linux" arch="arm64" file="libglfw_wayland.so"/>
-                <get-release platform="linux" arch="arm64" file="libglfw_wayland.so.git"/>
-
-                <get-release platform="linux" arch="arm32" file="libglfw.so"/>
-                <get-release platform="linux" arch="arm32" file="libglfw.so.git"/>
-                <get-release platform="linux" arch="arm32" file="libglfw_wayland.so"/>
-                <get-release platform="linux" arch="arm32" file="libglfw_wayland.so.git"/>
-
-                <get-release platform="macos" arch="x64" file="libglfw.dylib"/>
-                <get-release platform="macos" arch="x64" file="libglfw.dylib.git"/>
-
-                <get-release platform="macos" arch="arm64" file="libglfw.dylib"/>
-                <get-release platform="macos" arch="arm64" file="libglfw.dylib.git"/>
-
-                <get-release platform="windows" arch="x64" file="glfw.dll"/>
-                <get-release platform="windows" arch="x64" file="glfw.dll.git"/>
-
-                <get-release platform="windows" arch="x86" file="glfw.dll"/>
-                <get-release platform="windows" arch="x86" file="glfw.dll.git"/>
-
-                <get-release platform="windows" arch="arm64" file="glfw.dll"/>
-                <get-release platform="windows" arch="arm64" file="glfw.dll.git"/>
-            </natives>
-        </release-module>
+        <release-module name="glfw" native-library="glfw" title="GLFW" if:true="${binding.glfw}"/>
 
         <!-- JAWT -->
         <release-module name="jawt" title="JAWT" if:true="${binding.jawt}"/>
