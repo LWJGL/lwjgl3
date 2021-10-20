@@ -171,7 +171,6 @@ improve the chances of a quick and useful response.
 
 |Library|Description|
 |-------|-----------|
-|[Bullet Physics](http://bulletphysics.org/)|Real-time collision detection and multi-physics simulation for VR, games, visual effects, robotics, machine learning etc.|
 |[CUDA](https://developer.nvidia.com/cuda-zone/)|A parallel computing platform and programming model developed by NVIDIA for general computing on GPUs.|
 |[jemalloc](http://jemalloc.net/)|A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support.|
 |[libffi](https://sourceware.org)|A portable, high level programming interface to various calling conventions.|

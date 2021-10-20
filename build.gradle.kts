@@ -92,13 +92,6 @@ enum class Artifacts(
         Platforms.MACOS, Platforms.MACOS_ARM64,
         Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
-    BULLET(
-        "lwjgl-bullet", "LWJGL - Bullet bindings",
-        "Real-time collision detection and multi-physics simulation for VR, games, visual effects, robotics, machine learning etc.",
-        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32,
-        Platforms.MACOS,
-        Platforms.WINDOWS, Platforms.WINDOWS_X86
-    ),
     CUDA(
         "lwjgl-cuda", "LWJGL - CUDA bindings",
         "A parallel computing platform and programming model developed by NVIDIA for general computing on GPUs."

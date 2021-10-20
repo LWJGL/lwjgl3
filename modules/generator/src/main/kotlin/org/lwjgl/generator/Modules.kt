@@ -86,19 +86,6 @@ enum class Module(
         shaderc can be found under {@code nightly/windows/x64/bgfx-tools/}.
         """
     ),
-    BULLET(
-        "bullet",
-        "org.lwjgl.bullet",
-        """
-		Contains bindings to the ${url("http://bulletphysics.org/", "Bullet")} library.
-
-		<h3>UNSTABLE API</h3>
-
-        Until these bindings are sufficiently tested, this API should be considered unstable.
-		""",
-        library = JNILibrary.create("LibBullet"),
-        arrayOverloads = false
-    ),
     CUDA(
         "cuda",
         "org.lwjgl.cuda",

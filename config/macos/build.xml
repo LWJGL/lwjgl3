@@ -164,29 +164,6 @@
             </link>
         </build>
 
-        <!-- BULLET -->
-        <build module="bullet" simple="true" linker="clang++" if:true="${binding.bullet}">
-            <beforeLink>
-                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency module="bullet" artifact="bullet/libBullet3Common.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletCollision.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletDynamics.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletFileLoader.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletInverseDynamics.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletInverseDynamicsUtils.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletRobotics.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletSoftBody.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletWorldImporter.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libLinearMath.a"/>
-                </parallel>
-            </beforeLink>
-            <link>
-                <fileset dir="${lib.native}/org/lwjgl/bullet">
-                    <include name="*.a"/>
-                </fileset>
-            </link>
-        </build>
-
         <!-- DriftFX -->
         <build module="driftfx" lang="c++" if:true="${binding.driftfx}">
             <beforeCompile>

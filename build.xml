@@ -472,7 +472,6 @@
         <parallel threadsPerProcessor="1">
             <compileBinding binding="assimp"/>
             <compileBinding binding="bgfx"/>
-            <compileBinding binding="bullet"/>
             <compileBinding binding="cuda"/>
             <compileBinding binding="driftfx">
                 <compilerarg line='--boot-class-path "${env.JAVA8_HOME}/jre/lib/rt.jar${path.separator}${env.JAVA8_HOME}/jre/lib/ext/jfxrt.jar"' if:set="set-boot-class-path"/>
@@ -792,7 +791,6 @@
             <!-- Demos -->
             <include name="org/lwjgl/demo/assimp/**" if:true="${binding.assimp}"/>
             <include name="org/lwjgl/demo/bgfx/**" if:set="test.bgfx"/>
-            <include name="org/lwjgl/demo/bullet/**" if:true="${binding.bullet}"/>
             <include name="org/lwjgl/demo/cuda/**" if:true="${binding.cuda}"/>
             <include name="org/lwjgl/demo/driftfx/**" if:true="${binding.driftfx}"/>
             <include name="org/lwjgl/demo/egl/**" if:set="test.egl"/>
@@ -1492,9 +1490,6 @@
                 <get-release platform="windows" arch="x86" file="bgfx.dll.git"/>
             </natives>
         </release-module>
-
-        <!-- Bullet -->
-        <release-module name="bullet" native-library="lwjgl_bullet" title="bullet" if:true="${binding.bullet}"/>
 
         <!-- CUDA -->
         <release-module name="cuda" title="CUDA" if:true="${binding.cuda}"/>

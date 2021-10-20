@@ -21,7 +21,6 @@ This script is included in /config/build-definitions.xml.
             <isset property="build.arch.arm"/>
         </and>
     </condition>
-    <property name="binding.bullet" value="false"/>
     <property name="binding.cuda" value="true"/>
     <property name="binding.driftfx" value="true"/>
     <property name="binding.egl" value="true"/>
@@ -95,7 +94,6 @@ This script is included in /config/build-definitions.xml.
         <sequential>
             <parallel threadsPerProcessor="1">
                 <sequential if:true="${binding.assimp}"><local name="module"/><property name="module" value="assimp"/><body/></sequential>
-                <sequential if:true="${binding.bullet}"><local name="module"/><property name="module" value="bullet"/><body/></sequential>
                 <sequential if:true="${binding.bgfx}"><local name="module"/><property name="module" value="bgfx"/><body/></sequential>
                 <sequential if:true="${binding.cuda}"><local name="module"/><property name="module" value="cuda"/><body/></sequential>
                 <sequential if:true="${binding.driftfx}"><local name="module"/><property name="module" value="driftfx"/><body/></sequential>

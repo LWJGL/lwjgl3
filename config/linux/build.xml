@@ -188,39 +188,6 @@
             </link>
         </build>
 
-        <!-- BULLET -->
-        <build module="bullet" simple="true" linker="g++" if:true="${binding.bullet}">
-            <beforeLink>
-                <parallel threadsPerProcessor="2" failonany="true" unless:set="lib-dependencies-uptodate">
-                    <update-dependency module="bullet" artifact="bullet/libBullet3Common.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletCollision.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletDynamics.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletFileLoader.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletInverseDynamics.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletInverseDynamicsUtils.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletRobotics.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletSoftBody.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libBulletWorldImporter.a"/>
-                    <update-dependency module="bullet" artifact="bullet/libLinearMath.a"/>
-                </parallel>
-            </beforeLink>
-            <link>
-                <arg value="-ldl"/>
-                <arg value="-L${lib.native}/org/lwjgl/bullet"/>
-                <!-- Order is important -->
-                <arg value="-lBulletWorldImporter"/>
-                <arg value="-lBulletSoftBody"/>
-                <arg value="-lBulletDynamics"/>
-                <arg value="-lBulletCollision"/>
-                <arg value="-lBulletFileLoader"/>
-                <arg value="-lBulletInverseDynamics"/>
-                <arg value="-lBulletInverseDynamicsUtils"/>
-                <arg value="-lBullet3Common"/>
-                <arg value="-lLinearMath"/>
-                <arg value="-lBulletRobotics"/>
-            </link>
-        </build>
-
         <!-- DriftFX -->
         <build module="driftfx" lang="c++" if:true="${binding.driftfx}">
             <beforeCompile>
