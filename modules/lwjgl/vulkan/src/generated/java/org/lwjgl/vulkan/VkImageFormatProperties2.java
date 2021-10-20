@@ -106,17 +106,17 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageFormatProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkExternalImageFormatProperties} value to the {@code pNext} chain. */
-    public VkImageFormatProperties2 pNext(VkExternalImageFormatProperties value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageFormatProperties2 pNext(VkExternalImageFormatProperties value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExternalImageFormatPropertiesKHR} value to the {@code pNext} chain. */
-    public VkImageFormatProperties2 pNext(VkExternalImageFormatPropertiesKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageFormatProperties2 pNext(VkExternalImageFormatPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkFilterCubicImageViewImageFormatPropertiesEXT} value to the {@code pNext} chain. */
-    public VkImageFormatProperties2 pNext(VkFilterCubicImageViewImageFormatPropertiesEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageFormatProperties2 pNext(VkFilterCubicImageViewImageFormatPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerYcbcrConversionImageFormatProperties} value to the {@code pNext} chain. */
-    public VkImageFormatProperties2 pNext(VkSamplerYcbcrConversionImageFormatProperties value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageFormatProperties2 pNext(VkSamplerYcbcrConversionImageFormatProperties value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerYcbcrConversionImageFormatPropertiesKHR} value to the {@code pNext} chain. */
-    public VkImageFormatProperties2 pNext(VkSamplerYcbcrConversionImageFormatPropertiesKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageFormatProperties2 pNext(VkSamplerYcbcrConversionImageFormatPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTextureLODGatherFormatPropertiesAMD} value to the {@code pNext} chain. */
-    public VkImageFormatProperties2 pNext(VkTextureLODGatherFormatPropertiesAMD value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageFormatProperties2 pNext(VkTextureLODGatherFormatPropertiesAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkImageFormatProperties2 set(
@@ -339,17 +339,17 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkImageFormatProperties2#pNext} field. */
         public VkImageFormatProperties2.Buffer pNext(@NativeType("void *") long value) { VkImageFormatProperties2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkExternalImageFormatProperties} value to the {@code pNext} chain. */
-        public VkImageFormatProperties2.Buffer pNext(VkExternalImageFormatProperties value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageFormatProperties2.Buffer pNext(VkExternalImageFormatProperties value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExternalImageFormatPropertiesKHR} value to the {@code pNext} chain. */
-        public VkImageFormatProperties2.Buffer pNext(VkExternalImageFormatPropertiesKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageFormatProperties2.Buffer pNext(VkExternalImageFormatPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkFilterCubicImageViewImageFormatPropertiesEXT} value to the {@code pNext} chain. */
-        public VkImageFormatProperties2.Buffer pNext(VkFilterCubicImageViewImageFormatPropertiesEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageFormatProperties2.Buffer pNext(VkFilterCubicImageViewImageFormatPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerYcbcrConversionImageFormatProperties} value to the {@code pNext} chain. */
-        public VkImageFormatProperties2.Buffer pNext(VkSamplerYcbcrConversionImageFormatProperties value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageFormatProperties2.Buffer pNext(VkSamplerYcbcrConversionImageFormatProperties value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerYcbcrConversionImageFormatPropertiesKHR} value to the {@code pNext} chain. */
-        public VkImageFormatProperties2.Buffer pNext(VkSamplerYcbcrConversionImageFormatPropertiesKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageFormatProperties2.Buffer pNext(VkSamplerYcbcrConversionImageFormatPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTextureLODGatherFormatPropertiesAMD} value to the {@code pNext} chain. */
-        public VkImageFormatProperties2.Buffer pNext(VkTextureLODGatherFormatPropertiesAMD value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageFormatProperties2.Buffer pNext(VkTextureLODGatherFormatPropertiesAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

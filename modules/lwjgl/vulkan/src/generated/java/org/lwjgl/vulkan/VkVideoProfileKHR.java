@@ -124,13 +124,13 @@ public class VkVideoProfileKHR extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoProfileKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkVideoDecodeH264ProfileEXT} value to the {@code pNext} chain. */
-    public VkVideoProfileKHR pNext(VkVideoDecodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkVideoProfileKHR pNext(VkVideoDecodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeH265ProfileEXT} value to the {@code pNext} chain. */
-    public VkVideoProfileKHR pNext(VkVideoDecodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkVideoProfileKHR pNext(VkVideoDecodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264ProfileEXT} value to the {@code pNext} chain. */
-    public VkVideoProfileKHR pNext(VkVideoEncodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkVideoProfileKHR pNext(VkVideoEncodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265ProfileEXT} value to the {@code pNext} chain. */
-    public VkVideoProfileKHR pNext(VkVideoEncodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkVideoProfileKHR pNext(VkVideoEncodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #videoCodecOperation} field. */
     public VkVideoProfileKHR videoCodecOperation(@NativeType("VkVideoCodecOperationFlagBitsKHR") int value) { nvideoCodecOperation(address(), value); return this; }
     /** Sets the specified value to the {@link #chromaSubsampling} field. */
@@ -375,13 +375,13 @@ public class VkVideoProfileKHR extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkVideoProfileKHR#pNext} field. */
         public VkVideoProfileKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoProfileKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkVideoDecodeH264ProfileEXT} value to the {@code pNext} chain. */
-        public VkVideoProfileKHR.Buffer pNext(VkVideoDecodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkVideoProfileKHR.Buffer pNext(VkVideoDecodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeH265ProfileEXT} value to the {@code pNext} chain. */
-        public VkVideoProfileKHR.Buffer pNext(VkVideoDecodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkVideoProfileKHR.Buffer pNext(VkVideoDecodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264ProfileEXT} value to the {@code pNext} chain. */
-        public VkVideoProfileKHR.Buffer pNext(VkVideoEncodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkVideoProfileKHR.Buffer pNext(VkVideoEncodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265ProfileEXT} value to the {@code pNext} chain. */
-        public VkVideoProfileKHR.Buffer pNext(VkVideoEncodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkVideoProfileKHR.Buffer pNext(VkVideoEncodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkVideoProfileKHR#videoCodecOperation} field. */
         public VkVideoProfileKHR.Buffer videoCodecOperation(@NativeType("VkVideoCodecOperationFlagBitsKHR") int value) { VkVideoProfileKHR.nvideoCodecOperation(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoProfileKHR#chromaSubsampling} field. */

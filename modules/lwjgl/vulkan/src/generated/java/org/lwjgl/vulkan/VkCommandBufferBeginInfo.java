@@ -115,9 +115,9 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkCommandBufferBeginInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDeviceGroupCommandBufferBeginInfo} value to the {@code pNext} chain. */
-    public VkCommandBufferBeginInfo pNext(VkDeviceGroupCommandBufferBeginInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkCommandBufferBeginInfo pNext(VkDeviceGroupCommandBufferBeginInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDeviceGroupCommandBufferBeginInfoKHR} value to the {@code pNext} chain. */
-    public VkCommandBufferBeginInfo pNext(VkDeviceGroupCommandBufferBeginInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkCommandBufferBeginInfo pNext(VkDeviceGroupCommandBufferBeginInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkCommandBufferBeginInfo flags(@NativeType("VkCommandBufferUsageFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkCommandBufferInheritanceInfo} to the {@link #pInheritanceInfo} field. */
@@ -359,9 +359,9 @@ public class VkCommandBufferBeginInfo extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkCommandBufferBeginInfo#pNext} field. */
         public VkCommandBufferBeginInfo.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferBeginInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDeviceGroupCommandBufferBeginInfo} value to the {@code pNext} chain. */
-        public VkCommandBufferBeginInfo.Buffer pNext(VkDeviceGroupCommandBufferBeginInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkCommandBufferBeginInfo.Buffer pNext(VkDeviceGroupCommandBufferBeginInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDeviceGroupCommandBufferBeginInfoKHR} value to the {@code pNext} chain. */
-        public VkCommandBufferBeginInfo.Buffer pNext(VkDeviceGroupCommandBufferBeginInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkCommandBufferBeginInfo.Buffer pNext(VkDeviceGroupCommandBufferBeginInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkCommandBufferBeginInfo#flags} field. */
         public VkCommandBufferBeginInfo.Buffer flags(@NativeType("VkCommandBufferUsageFlags") int value) { VkCommandBufferBeginInfo.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkCommandBufferInheritanceInfo} to the {@link VkCommandBufferBeginInfo#pInheritanceInfo} field. */

@@ -134,13 +134,13 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueryPoolCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkQueryPoolCreateInfoINTEL} value to the {@code pNext} chain. */
-    public VkQueryPoolCreateInfo pNext(VkQueryPoolCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkQueryPoolCreateInfo pNext(VkQueryPoolCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkQueryPoolPerformanceCreateInfoKHR} value to the {@code pNext} chain. */
-    public VkQueryPoolCreateInfo pNext(VkQueryPoolPerformanceCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkQueryPoolCreateInfo pNext(VkQueryPoolPerformanceCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkQueryPoolPerformanceQueryCreateInfoINTEL} value to the {@code pNext} chain. */
-    public VkQueryPoolCreateInfo pNext(VkQueryPoolPerformanceQueryCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkQueryPoolCreateInfo pNext(VkQueryPoolPerformanceQueryCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoProfileKHR} value to the {@code pNext} chain. */
-    public VkQueryPoolCreateInfo pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkQueryPoolCreateInfo pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkQueryPoolCreateInfo flags(@NativeType("VkQueryPoolCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #queryType} field. */
@@ -403,13 +403,13 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkQueryPoolCreateInfo#pNext} field. */
         public VkQueryPoolCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkQueryPoolCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkQueryPoolCreateInfoINTEL} value to the {@code pNext} chain. */
-        public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkQueryPoolPerformanceCreateInfoKHR} value to the {@code pNext} chain. */
-        public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolPerformanceCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolPerformanceCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkQueryPoolPerformanceQueryCreateInfoINTEL} value to the {@code pNext} chain. */
-        public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolPerformanceQueryCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolPerformanceQueryCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoProfileKHR} value to the {@code pNext} chain. */
-        public VkQueryPoolCreateInfo.Buffer pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkQueryPoolCreateInfo.Buffer pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkQueryPoolCreateInfo#flags} field. */
         public VkQueryPoolCreateInfo.Buffer flags(@NativeType("VkQueryPoolCreateFlags") int value) { VkQueryPoolCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkQueryPoolCreateInfo#queryType} field. */

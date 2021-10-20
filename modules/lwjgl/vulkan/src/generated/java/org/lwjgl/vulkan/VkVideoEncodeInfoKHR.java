@@ -170,13 +170,13 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkVideoEncodeH264EmitPictureParametersEXT} value to the {@code pNext} chain. */
-    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH264EmitPictureParametersEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH264EmitPictureParametersEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264VclFrameInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH264VclFrameInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH264VclFrameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265EmitPictureParametersEXT} value to the {@code pNext} chain. */
-    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH265EmitPictureParametersEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH265EmitPictureParametersEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265VclFrameInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH265VclFrameInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkVideoEncodeInfoKHR pNext(VkVideoEncodeH265VclFrameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkVideoEncodeInfoKHR flags(@NativeType("VkVideoEncodeFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #qualityLevel} field. */
@@ -512,13 +512,13 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#pNext} field. */
         public VkVideoEncodeInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeInfoKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkVideoEncodeH264EmitPictureParametersEXT} value to the {@code pNext} chain. */
-        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH264EmitPictureParametersEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH264EmitPictureParametersEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264VclFrameInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH264VclFrameInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH264VclFrameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265EmitPictureParametersEXT} value to the {@code pNext} chain. */
-        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH265EmitPictureParametersEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH265EmitPictureParametersEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265VclFrameInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH265VclFrameInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkVideoEncodeInfoKHR.Buffer pNext(VkVideoEncodeH265VclFrameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#flags} field. */
         public VkVideoEncodeInfoKHR.Buffer flags(@NativeType("VkVideoEncodeFlagsKHR") int value) { VkVideoEncodeInfoKHR.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#qualityLevel} field. */

@@ -1953,7 +1953,7 @@ ${validations.joinToString("\n")}
                         if (module == Module.VULKAN && setter == "pNext") {
                             printSetterJavadoc(accessMode, it, indent, "Prepends the specified {@link $structType} value to the {@code pNext} chain.", setter)
                             if (overrides) println("$indent@Override")
-                            println("${indent}public $returnType pNext($structType value) { return this.pNext(value.pNext(this.pNext())); }")
+                            println("${indent}public $returnType pNext($structType value) { return this.pNext(value.pNext(this.pNext()).address()); }")
                         } else {
                             printSetterJavadoc(accessMode, it, indent, "Sets the address of the specified {@link $structType} value to the #member field.", setter)
                             if (overrides) println("$indent@Override")

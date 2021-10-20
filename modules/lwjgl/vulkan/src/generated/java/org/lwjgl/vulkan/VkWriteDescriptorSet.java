@@ -224,11 +224,11 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkWriteDescriptorSet pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkWriteDescriptorSetAccelerationStructureKHR} value to the {@code pNext} chain. */
-    public VkWriteDescriptorSet pNext(VkWriteDescriptorSetAccelerationStructureKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkWriteDescriptorSet pNext(VkWriteDescriptorSetAccelerationStructureKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkWriteDescriptorSetAccelerationStructureNV} value to the {@code pNext} chain. */
-    public VkWriteDescriptorSet pNext(VkWriteDescriptorSetAccelerationStructureNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkWriteDescriptorSet pNext(VkWriteDescriptorSetAccelerationStructureNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkWriteDescriptorSetInlineUniformBlockEXT} value to the {@code pNext} chain. */
-    public VkWriteDescriptorSet pNext(VkWriteDescriptorSetInlineUniformBlockEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkWriteDescriptorSet pNext(VkWriteDescriptorSetInlineUniformBlockEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #dstSet} field. */
     public VkWriteDescriptorSet dstSet(@NativeType("VkDescriptorSet") long value) { ndstSet(address(), value); return this; }
     /** Sets the specified value to the {@link #dstBinding} field. */
@@ -538,11 +538,11 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkWriteDescriptorSet#pNext} field. */
         public VkWriteDescriptorSet.Buffer pNext(@NativeType("void const *") long value) { VkWriteDescriptorSet.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkWriteDescriptorSetAccelerationStructureKHR} value to the {@code pNext} chain. */
-        public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetAccelerationStructureKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetAccelerationStructureKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkWriteDescriptorSetAccelerationStructureNV} value to the {@code pNext} chain. */
-        public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetAccelerationStructureNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetAccelerationStructureNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkWriteDescriptorSetInlineUniformBlockEXT} value to the {@code pNext} chain. */
-        public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetInlineUniformBlockEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetInlineUniformBlockEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkWriteDescriptorSet#dstSet} field. */
         public VkWriteDescriptorSet.Buffer dstSet(@NativeType("VkDescriptorSet") long value) { VkWriteDescriptorSet.ndstSet(address(), value); return this; }
         /** Sets the specified value to the {@link VkWriteDescriptorSet#dstBinding} field. */

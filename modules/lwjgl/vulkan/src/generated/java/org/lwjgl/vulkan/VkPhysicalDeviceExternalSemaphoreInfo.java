@@ -99,9 +99,9 @@ public class VkPhysicalDeviceExternalSemaphoreInfo extends Struct implements Nat
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceExternalSemaphoreInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkSemaphoreTypeCreateInfo} value to the {@code pNext} chain. */
-    public VkPhysicalDeviceExternalSemaphoreInfo pNext(VkSemaphoreTypeCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPhysicalDeviceExternalSemaphoreInfo pNext(VkSemaphoreTypeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSemaphoreTypeCreateInfoKHR} value to the {@code pNext} chain. */
-    public VkPhysicalDeviceExternalSemaphoreInfo pNext(VkSemaphoreTypeCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPhysicalDeviceExternalSemaphoreInfo pNext(VkSemaphoreTypeCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #handleType} field. */
     public VkPhysicalDeviceExternalSemaphoreInfo handleType(@NativeType("VkExternalSemaphoreHandleTypeFlagBits") int value) { nhandleType(address(), value); return this; }
 
@@ -331,9 +331,9 @@ public class VkPhysicalDeviceExternalSemaphoreInfo extends Struct implements Nat
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalSemaphoreInfo#pNext} field. */
         public VkPhysicalDeviceExternalSemaphoreInfo.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceExternalSemaphoreInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkSemaphoreTypeCreateInfo} value to the {@code pNext} chain. */
-        public VkPhysicalDeviceExternalSemaphoreInfo.Buffer pNext(VkSemaphoreTypeCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPhysicalDeviceExternalSemaphoreInfo.Buffer pNext(VkSemaphoreTypeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSemaphoreTypeCreateInfoKHR} value to the {@code pNext} chain. */
-        public VkPhysicalDeviceExternalSemaphoreInfo.Buffer pNext(VkSemaphoreTypeCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPhysicalDeviceExternalSemaphoreInfo.Buffer pNext(VkSemaphoreTypeCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkPhysicalDeviceExternalSemaphoreInfo#handleType} field. */
         public VkPhysicalDeviceExternalSemaphoreInfo.Buffer handleType(@NativeType("VkExternalSemaphoreHandleTypeFlagBits") int value) { VkPhysicalDeviceExternalSemaphoreInfo.nhandleType(address(), value); return this; }
 

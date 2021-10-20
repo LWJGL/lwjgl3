@@ -162,13 +162,13 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineMultisampleStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPipelineCoverageModulationStateCreateInfoNV} value to the {@code pNext} chain. */
-    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineCoverageModulationStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineCoverageModulationStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineCoverageReductionStateCreateInfoNV} value to the {@code pNext} chain. */
-    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineCoverageReductionStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineCoverageReductionStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineCoverageToColorStateCreateInfoNV} value to the {@code pNext} chain. */
-    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineCoverageToColorStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineCoverageToColorStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineSampleLocationsStateCreateInfoEXT} value to the {@code pNext} chain. */
-    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineSampleLocationsStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineMultisampleStateCreateInfo pNext(VkPipelineSampleLocationsStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineMultisampleStateCreateInfo flags(@NativeType("VkPipelineMultisampleStateCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #rasterizationSamples} field. */
@@ -468,13 +468,13 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
         /** Sets the specified value to the {@link VkPipelineMultisampleStateCreateInfo#pNext} field. */
         public VkPipelineMultisampleStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineMultisampleStateCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPipelineCoverageModulationStateCreateInfoNV} value to the {@code pNext} chain. */
-        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineCoverageModulationStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineCoverageModulationStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineCoverageReductionStateCreateInfoNV} value to the {@code pNext} chain. */
-        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineCoverageReductionStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineCoverageReductionStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineCoverageToColorStateCreateInfoNV} value to the {@code pNext} chain. */
-        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineCoverageToColorStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineCoverageToColorStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineSampleLocationsStateCreateInfoEXT} value to the {@code pNext} chain. */
-        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineSampleLocationsStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineMultisampleStateCreateInfo.Buffer pNext(VkPipelineSampleLocationsStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkPipelineMultisampleStateCreateInfo#flags} field. */
         public VkPipelineMultisampleStateCreateInfo.Buffer flags(@NativeType("VkPipelineMultisampleStateCreateFlags") int value) { VkPipelineMultisampleStateCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineMultisampleStateCreateInfo#rasterizationSamples} field. */

@@ -222,9 +222,9 @@ public class VkFramebufferCreateInfo extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkFramebufferCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkFramebufferAttachmentsCreateInfo} value to the {@code pNext} chain. */
-    public VkFramebufferCreateInfo pNext(VkFramebufferAttachmentsCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkFramebufferCreateInfo pNext(VkFramebufferAttachmentsCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkFramebufferAttachmentsCreateInfoKHR} value to the {@code pNext} chain. */
-    public VkFramebufferCreateInfo pNext(VkFramebufferAttachmentsCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkFramebufferCreateInfo pNext(VkFramebufferAttachmentsCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkFramebufferCreateInfo flags(@NativeType("VkFramebufferCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #renderPass} field. */
@@ -521,9 +521,9 @@ public class VkFramebufferCreateInfo extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkFramebufferCreateInfo#pNext} field. */
         public VkFramebufferCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkFramebufferCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkFramebufferAttachmentsCreateInfo} value to the {@code pNext} chain. */
-        public VkFramebufferCreateInfo.Buffer pNext(VkFramebufferAttachmentsCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkFramebufferCreateInfo.Buffer pNext(VkFramebufferAttachmentsCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkFramebufferAttachmentsCreateInfoKHR} value to the {@code pNext} chain. */
-        public VkFramebufferCreateInfo.Buffer pNext(VkFramebufferAttachmentsCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkFramebufferCreateInfo.Buffer pNext(VkFramebufferAttachmentsCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkFramebufferCreateInfo#flags} field. */
         public VkFramebufferCreateInfo.Buffer flags(@NativeType("VkFramebufferCreateFlags") int value) { VkFramebufferCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkFramebufferCreateInfo#renderPass} field. */

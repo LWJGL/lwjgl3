@@ -97,15 +97,15 @@ public class VkFormatProperties2 extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkFormatProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDrmFormatModifierPropertiesList2EXT} value to the {@code pNext} chain. */
-    public VkFormatProperties2 pNext(VkDrmFormatModifierPropertiesList2EXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkFormatProperties2 pNext(VkDrmFormatModifierPropertiesList2EXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDrmFormatModifierPropertiesListEXT} value to the {@code pNext} chain. */
-    public VkFormatProperties2 pNext(VkDrmFormatModifierPropertiesListEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkFormatProperties2 pNext(VkDrmFormatModifierPropertiesListEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkFormatProperties3KHR} value to the {@code pNext} chain. */
-    public VkFormatProperties2 pNext(VkFormatProperties3KHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkFormatProperties2 pNext(VkFormatProperties3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoProfileKHR} value to the {@code pNext} chain. */
-    public VkFormatProperties2 pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkFormatProperties2 pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoProfilesKHR} value to the {@code pNext} chain. */
-    public VkFormatProperties2 pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkFormatProperties2 pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkFormatProperties2 set(
@@ -328,15 +328,15 @@ public class VkFormatProperties2 extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkFormatProperties2#pNext} field. */
         public VkFormatProperties2.Buffer pNext(@NativeType("void *") long value) { VkFormatProperties2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDrmFormatModifierPropertiesList2EXT} value to the {@code pNext} chain. */
-        public VkFormatProperties2.Buffer pNext(VkDrmFormatModifierPropertiesList2EXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkFormatProperties2.Buffer pNext(VkDrmFormatModifierPropertiesList2EXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDrmFormatModifierPropertiesListEXT} value to the {@code pNext} chain. */
-        public VkFormatProperties2.Buffer pNext(VkDrmFormatModifierPropertiesListEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkFormatProperties2.Buffer pNext(VkDrmFormatModifierPropertiesListEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkFormatProperties3KHR} value to the {@code pNext} chain. */
-        public VkFormatProperties2.Buffer pNext(VkFormatProperties3KHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkFormatProperties2.Buffer pNext(VkFormatProperties3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoProfileKHR} value to the {@code pNext} chain. */
-        public VkFormatProperties2.Buffer pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkFormatProperties2.Buffer pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoProfilesKHR} value to the {@code pNext} chain. */
-        public VkFormatProperties2.Buffer pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkFormatProperties2.Buffer pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

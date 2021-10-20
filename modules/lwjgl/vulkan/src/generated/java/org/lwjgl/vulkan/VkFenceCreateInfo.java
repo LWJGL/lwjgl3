@@ -99,11 +99,11 @@ public class VkFenceCreateInfo extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkFenceCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkExportFenceCreateInfo} value to the {@code pNext} chain. */
-    public VkFenceCreateInfo pNext(VkExportFenceCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkFenceCreateInfo pNext(VkExportFenceCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportFenceCreateInfoKHR} value to the {@code pNext} chain. */
-    public VkFenceCreateInfo pNext(VkExportFenceCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkFenceCreateInfo pNext(VkExportFenceCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportFenceWin32HandleInfoKHR} value to the {@code pNext} chain. */
-    public VkFenceCreateInfo pNext(VkExportFenceWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkFenceCreateInfo pNext(VkExportFenceWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkFenceCreateInfo flags(@NativeType("VkFenceCreateFlags") int value) { nflags(address(), value); return this; }
 
@@ -333,11 +333,11 @@ public class VkFenceCreateInfo extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkFenceCreateInfo#pNext} field. */
         public VkFenceCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkFenceCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkExportFenceCreateInfo} value to the {@code pNext} chain. */
-        public VkFenceCreateInfo.Buffer pNext(VkExportFenceCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkFenceCreateInfo.Buffer pNext(VkExportFenceCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportFenceCreateInfoKHR} value to the {@code pNext} chain. */
-        public VkFenceCreateInfo.Buffer pNext(VkExportFenceCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkFenceCreateInfo.Buffer pNext(VkExportFenceCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportFenceWin32HandleInfoKHR} value to the {@code pNext} chain. */
-        public VkFenceCreateInfo.Buffer pNext(VkExportFenceWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkFenceCreateInfo.Buffer pNext(VkExportFenceWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkFenceCreateInfo#flags} field. */
         public VkFenceCreateInfo.Buffer flags(@NativeType("VkFenceCreateFlags") int value) { VkFenceCreateInfo.nflags(address(), value); return this; }
 

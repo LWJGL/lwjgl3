@@ -97,9 +97,9 @@ public class VkMemoryRequirements2 extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryRequirements2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkMemoryDedicatedRequirements} value to the {@code pNext} chain. */
-    public VkMemoryRequirements2 pNext(VkMemoryDedicatedRequirements value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryRequirements2 pNext(VkMemoryDedicatedRequirements value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryDedicatedRequirementsKHR} value to the {@code pNext} chain. */
-    public VkMemoryRequirements2 pNext(VkMemoryDedicatedRequirementsKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryRequirements2 pNext(VkMemoryDedicatedRequirementsKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkMemoryRequirements2 set(
@@ -322,9 +322,9 @@ public class VkMemoryRequirements2 extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkMemoryRequirements2#pNext} field. */
         public VkMemoryRequirements2.Buffer pNext(@NativeType("void *") long value) { VkMemoryRequirements2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkMemoryDedicatedRequirements} value to the {@code pNext} chain. */
-        public VkMemoryRequirements2.Buffer pNext(VkMemoryDedicatedRequirements value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryRequirements2.Buffer pNext(VkMemoryDedicatedRequirements value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryDedicatedRequirementsKHR} value to the {@code pNext} chain. */
-        public VkMemoryRequirements2.Buffer pNext(VkMemoryDedicatedRequirementsKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryRequirements2.Buffer pNext(VkMemoryDedicatedRequirementsKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

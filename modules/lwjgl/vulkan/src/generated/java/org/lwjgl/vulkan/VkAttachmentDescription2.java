@@ -193,9 +193,9 @@ public class VkAttachmentDescription2 extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAttachmentDescription2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkAttachmentDescriptionStencilLayout} value to the {@code pNext} chain. */
-    public VkAttachmentDescription2 pNext(VkAttachmentDescriptionStencilLayout value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkAttachmentDescription2 pNext(VkAttachmentDescriptionStencilLayout value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkAttachmentDescriptionStencilLayoutKHR} value to the {@code pNext} chain. */
-    public VkAttachmentDescription2 pNext(VkAttachmentDescriptionStencilLayoutKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkAttachmentDescription2 pNext(VkAttachmentDescriptionStencilLayoutKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkAttachmentDescription2 flags(@NativeType("VkAttachmentDescriptionFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #format} field. */
@@ -495,9 +495,9 @@ public class VkAttachmentDescription2 extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkAttachmentDescription2#pNext} field. */
         public VkAttachmentDescription2.Buffer pNext(@NativeType("void const *") long value) { VkAttachmentDescription2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkAttachmentDescriptionStencilLayout} value to the {@code pNext} chain. */
-        public VkAttachmentDescription2.Buffer pNext(VkAttachmentDescriptionStencilLayout value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkAttachmentDescription2.Buffer pNext(VkAttachmentDescriptionStencilLayout value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkAttachmentDescriptionStencilLayoutKHR} value to the {@code pNext} chain. */
-        public VkAttachmentDescription2.Buffer pNext(VkAttachmentDescriptionStencilLayoutKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkAttachmentDescription2.Buffer pNext(VkAttachmentDescriptionStencilLayoutKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkAttachmentDescription2#flags} field. */
         public VkAttachmentDescription2.Buffer flags(@NativeType("VkAttachmentDescriptionFlags") int value) { VkAttachmentDescription2.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkAttachmentDescription2#format} field. */

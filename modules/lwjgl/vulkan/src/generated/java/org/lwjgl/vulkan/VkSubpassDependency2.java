@@ -185,7 +185,7 @@ public class VkSubpassDependency2 extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubpassDependency2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkMemoryBarrier2KHR} value to the {@code pNext} chain. */
-    public VkSubpassDependency2 pNext(VkMemoryBarrier2KHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkSubpassDependency2 pNext(VkMemoryBarrier2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #srcSubpass} field. */
     public VkSubpassDependency2 srcSubpass(@NativeType("uint32_t") int value) { nsrcSubpass(address(), value); return this; }
     /** Sets the specified value to the {@link #dstSubpass} field. */
@@ -474,7 +474,7 @@ public class VkSubpassDependency2 extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkSubpassDependency2#pNext} field. */
         public VkSubpassDependency2.Buffer pNext(@NativeType("void const *") long value) { VkSubpassDependency2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkMemoryBarrier2KHR} value to the {@code pNext} chain. */
-        public VkSubpassDependency2.Buffer pNext(VkMemoryBarrier2KHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkSubpassDependency2.Buffer pNext(VkMemoryBarrier2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkSubpassDependency2#srcSubpass} field. */
         public VkSubpassDependency2.Buffer srcSubpass(@NativeType("uint32_t") int value) { VkSubpassDependency2.nsrcSubpass(address(), value); return this; }
         /** Sets the specified value to the {@link VkSubpassDependency2#dstSubpass} field. */

@@ -97,7 +97,7 @@ public class VkPhysicalDeviceMemoryProperties2 extends Struct implements NativeR
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMemoryProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT} value to the {@code pNext} chain. */
-    public VkPhysicalDeviceMemoryProperties2 pNext(VkPhysicalDeviceMemoryBudgetPropertiesEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPhysicalDeviceMemoryProperties2 pNext(VkPhysicalDeviceMemoryBudgetPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceMemoryProperties2 set(
@@ -320,7 +320,7 @@ public class VkPhysicalDeviceMemoryProperties2 extends Struct implements NativeR
         /** Sets the specified value to the {@link VkPhysicalDeviceMemoryProperties2#pNext} field. */
         public VkPhysicalDeviceMemoryProperties2.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMemoryProperties2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT} value to the {@code pNext} chain. */
-        public VkPhysicalDeviceMemoryProperties2.Buffer pNext(VkPhysicalDeviceMemoryBudgetPropertiesEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPhysicalDeviceMemoryProperties2.Buffer pNext(VkPhysicalDeviceMemoryBudgetPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

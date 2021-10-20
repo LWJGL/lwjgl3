@@ -244,19 +244,19 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageViewCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkImageViewASTCDecodeModeEXT} value to the {@code pNext} chain. */
-    public VkImageViewCreateInfo pNext(VkImageViewASTCDecodeModeEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageViewCreateInfo pNext(VkImageViewASTCDecodeModeEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageViewUsageCreateInfo} value to the {@code pNext} chain. */
-    public VkImageViewCreateInfo pNext(VkImageViewUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageViewCreateInfo pNext(VkImageViewUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageViewUsageCreateInfoKHR} value to the {@code pNext} chain. */
-    public VkImageViewCreateInfo pNext(VkImageViewUsageCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageViewCreateInfo pNext(VkImageViewUsageCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerYcbcrConversionInfo} value to the {@code pNext} chain. */
-    public VkImageViewCreateInfo pNext(VkSamplerYcbcrConversionInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageViewCreateInfo pNext(VkSamplerYcbcrConversionInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerYcbcrConversionInfoKHR} value to the {@code pNext} chain. */
-    public VkImageViewCreateInfo pNext(VkSamplerYcbcrConversionInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageViewCreateInfo pNext(VkSamplerYcbcrConversionInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoProfileKHR} value to the {@code pNext} chain. */
-    public VkImageViewCreateInfo pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageViewCreateInfo pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoProfilesKHR} value to the {@code pNext} chain. */
-    public VkImageViewCreateInfo pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageViewCreateInfo pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkImageViewCreateInfo flags(@NativeType("VkImageViewCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #image} field. */
@@ -543,19 +543,19 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkImageViewCreateInfo#pNext} field. */
         public VkImageViewCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkImageViewCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkImageViewASTCDecodeModeEXT} value to the {@code pNext} chain. */
-        public VkImageViewCreateInfo.Buffer pNext(VkImageViewASTCDecodeModeEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageViewCreateInfo.Buffer pNext(VkImageViewASTCDecodeModeEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageViewUsageCreateInfo} value to the {@code pNext} chain. */
-        public VkImageViewCreateInfo.Buffer pNext(VkImageViewUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageViewCreateInfo.Buffer pNext(VkImageViewUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageViewUsageCreateInfoKHR} value to the {@code pNext} chain. */
-        public VkImageViewCreateInfo.Buffer pNext(VkImageViewUsageCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageViewCreateInfo.Buffer pNext(VkImageViewUsageCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerYcbcrConversionInfo} value to the {@code pNext} chain. */
-        public VkImageViewCreateInfo.Buffer pNext(VkSamplerYcbcrConversionInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageViewCreateInfo.Buffer pNext(VkSamplerYcbcrConversionInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerYcbcrConversionInfoKHR} value to the {@code pNext} chain. */
-        public VkImageViewCreateInfo.Buffer pNext(VkSamplerYcbcrConversionInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageViewCreateInfo.Buffer pNext(VkSamplerYcbcrConversionInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoProfileKHR} value to the {@code pNext} chain. */
-        public VkImageViewCreateInfo.Buffer pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageViewCreateInfo.Buffer pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoProfilesKHR} value to the {@code pNext} chain. */
-        public VkImageViewCreateInfo.Buffer pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageViewCreateInfo.Buffer pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkImageViewCreateInfo#flags} field. */
         public VkImageViewCreateInfo.Buffer flags(@NativeType("VkImageViewCreateFlags") int value) { VkImageViewCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageViewCreateInfo#image} field. */

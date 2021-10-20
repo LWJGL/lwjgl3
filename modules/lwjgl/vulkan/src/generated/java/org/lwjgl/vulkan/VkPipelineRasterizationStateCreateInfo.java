@@ -181,17 +181,17 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineRasterizationStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} value to the {@code pNext} chain. */
-    public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationConservativeStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationConservativeStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT} value to the {@code pNext} chain. */
-    public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationDepthClipStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationDepthClipStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineRasterizationLineStateCreateInfoEXT} value to the {@code pNext} chain. */
-    public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationLineStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationLineStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineRasterizationProvokingVertexStateCreateInfoEXT} value to the {@code pNext} chain. */
-    public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationProvokingVertexStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationProvokingVertexStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineRasterizationStateRasterizationOrderAMD} value to the {@code pNext} chain. */
-    public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationStateRasterizationOrderAMD value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationStateRasterizationOrderAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineRasterizationStateStreamCreateInfoEXT} value to the {@code pNext} chain. */
-    public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationStateStreamCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineRasterizationStateCreateInfo pNext(VkPipelineRasterizationStateStreamCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineRasterizationStateCreateInfo flags(@NativeType("VkPipelineRasterizationStateCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #depthClampEnable} field. */
@@ -527,17 +527,17 @@ public class VkPipelineRasterizationStateCreateInfo extends Struct implements Na
         /** Sets the specified value to the {@link VkPipelineRasterizationStateCreateInfo#pNext} field. */
         public VkPipelineRasterizationStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRasterizationStateCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPipelineRasterizationConservativeStateCreateInfoEXT} value to the {@code pNext} chain. */
-        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationConservativeStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationConservativeStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT} value to the {@code pNext} chain. */
-        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationDepthClipStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationDepthClipStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineRasterizationLineStateCreateInfoEXT} value to the {@code pNext} chain. */
-        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationLineStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationLineStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineRasterizationProvokingVertexStateCreateInfoEXT} value to the {@code pNext} chain. */
-        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationProvokingVertexStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationProvokingVertexStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineRasterizationStateRasterizationOrderAMD} value to the {@code pNext} chain. */
-        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationStateRasterizationOrderAMD value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationStateRasterizationOrderAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineRasterizationStateStreamCreateInfoEXT} value to the {@code pNext} chain. */
-        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationStateStreamCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineRasterizationStateCreateInfo.Buffer pNext(VkPipelineRasterizationStateStreamCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkPipelineRasterizationStateCreateInfo#flags} field. */
         public VkPipelineRasterizationStateCreateInfo.Buffer flags(@NativeType("VkPipelineRasterizationStateCreateFlags") int value) { VkPipelineRasterizationStateCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineRasterizationStateCreateInfo#depthClampEnable} field. */

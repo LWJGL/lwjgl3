@@ -324,7 +324,7 @@ public class VkImageMemoryBarrier2KHR extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageMemoryBarrier2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkSampleLocationsInfoEXT} value to the {@code pNext} chain. */
-    public VkImageMemoryBarrier2KHR pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageMemoryBarrier2KHR pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #srcStageMask} field. */
     public VkImageMemoryBarrier2KHR srcStageMask(@NativeType("VkPipelineStageFlags2KHR") long value) { nsrcStageMask(address(), value); return this; }
     /** Sets the specified value to the {@link #srcAccessMask} field. */
@@ -636,7 +636,7 @@ public class VkImageMemoryBarrier2KHR extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkImageMemoryBarrier2KHR#pNext} field. */
         public VkImageMemoryBarrier2KHR.Buffer pNext(@NativeType("void const *") long value) { VkImageMemoryBarrier2KHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkSampleLocationsInfoEXT} value to the {@code pNext} chain. */
-        public VkImageMemoryBarrier2KHR.Buffer pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageMemoryBarrier2KHR.Buffer pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkImageMemoryBarrier2KHR#srcStageMask} field. */
         public VkImageMemoryBarrier2KHR.Buffer srcStageMask(@NativeType("VkPipelineStageFlags2KHR") long value) { VkImageMemoryBarrier2KHR.nsrcStageMask(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageMemoryBarrier2KHR#srcAccessMask} field. */

@@ -205,7 +205,7 @@ public class VkImageMemoryBarrier extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageMemoryBarrier pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkSampleLocationsInfoEXT} value to the {@code pNext} chain. */
-    public VkImageMemoryBarrier pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkImageMemoryBarrier pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #srcAccessMask} field. */
     public VkImageMemoryBarrier srcAccessMask(@NativeType("VkAccessFlags") int value) { nsrcAccessMask(address(), value); return this; }
     /** Sets the specified value to the {@link #dstAccessMask} field. */
@@ -513,7 +513,7 @@ public class VkImageMemoryBarrier extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkImageMemoryBarrier#pNext} field. */
         public VkImageMemoryBarrier.Buffer pNext(@NativeType("void const *") long value) { VkImageMemoryBarrier.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkSampleLocationsInfoEXT} value to the {@code pNext} chain. */
-        public VkImageMemoryBarrier.Buffer pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkImageMemoryBarrier.Buffer pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkImageMemoryBarrier#srcAccessMask} field. */
         public VkImageMemoryBarrier.Buffer srcAccessMask(@NativeType("VkAccessFlags") int value) { VkImageMemoryBarrier.nsrcAccessMask(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageMemoryBarrier#dstAccessMask} field. */

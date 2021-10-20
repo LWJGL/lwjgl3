@@ -174,23 +174,23 @@ public class VkSubmitInfo extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubmitInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkD3D12FenceSubmitInfoKHR} value to the {@code pNext} chain. */
-    public VkSubmitInfo pNext(VkD3D12FenceSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkSubmitInfo pNext(VkD3D12FenceSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDeviceGroupSubmitInfo} value to the {@code pNext} chain. */
-    public VkSubmitInfo pNext(VkDeviceGroupSubmitInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkSubmitInfo pNext(VkDeviceGroupSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDeviceGroupSubmitInfoKHR} value to the {@code pNext} chain. */
-    public VkSubmitInfo pNext(VkDeviceGroupSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkSubmitInfo pNext(VkDeviceGroupSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPerformanceQuerySubmitInfoKHR} value to the {@code pNext} chain. */
-    public VkSubmitInfo pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkSubmitInfo pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkProtectedSubmitInfo} value to the {@code pNext} chain. */
-    public VkSubmitInfo pNext(VkProtectedSubmitInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkSubmitInfo pNext(VkProtectedSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfo} value to the {@code pNext} chain. */
-    public VkSubmitInfo pNext(VkTimelineSemaphoreSubmitInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkSubmitInfo pNext(VkTimelineSemaphoreSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfoKHR} value to the {@code pNext} chain. */
-    public VkSubmitInfo pNext(VkTimelineSemaphoreSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkSubmitInfo pNext(VkTimelineSemaphoreSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkWin32KeyedMutexAcquireReleaseInfoKHR} value to the {@code pNext} chain. */
-    public VkSubmitInfo pNext(VkWin32KeyedMutexAcquireReleaseInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkSubmitInfo pNext(VkWin32KeyedMutexAcquireReleaseInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkWin32KeyedMutexAcquireReleaseInfoNV} value to the {@code pNext} chain. */
-    public VkSubmitInfo pNext(VkWin32KeyedMutexAcquireReleaseInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkSubmitInfo pNext(VkWin32KeyedMutexAcquireReleaseInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #waitSemaphoreCount} field. */
     public VkSubmitInfo waitSemaphoreCount(@NativeType("uint32_t") int value) { nwaitSemaphoreCount(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@link #pWaitSemaphores} field. */
@@ -512,23 +512,23 @@ public class VkSubmitInfo extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkSubmitInfo#pNext} field. */
         public VkSubmitInfo.Buffer pNext(@NativeType("void const *") long value) { VkSubmitInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkD3D12FenceSubmitInfoKHR} value to the {@code pNext} chain. */
-        public VkSubmitInfo.Buffer pNext(VkD3D12FenceSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkSubmitInfo.Buffer pNext(VkD3D12FenceSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDeviceGroupSubmitInfo} value to the {@code pNext} chain. */
-        public VkSubmitInfo.Buffer pNext(VkDeviceGroupSubmitInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkSubmitInfo.Buffer pNext(VkDeviceGroupSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDeviceGroupSubmitInfoKHR} value to the {@code pNext} chain. */
-        public VkSubmitInfo.Buffer pNext(VkDeviceGroupSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkSubmitInfo.Buffer pNext(VkDeviceGroupSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPerformanceQuerySubmitInfoKHR} value to the {@code pNext} chain. */
-        public VkSubmitInfo.Buffer pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkSubmitInfo.Buffer pNext(VkPerformanceQuerySubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkProtectedSubmitInfo} value to the {@code pNext} chain. */
-        public VkSubmitInfo.Buffer pNext(VkProtectedSubmitInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkSubmitInfo.Buffer pNext(VkProtectedSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfo} value to the {@code pNext} chain. */
-        public VkSubmitInfo.Buffer pNext(VkTimelineSemaphoreSubmitInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkSubmitInfo.Buffer pNext(VkTimelineSemaphoreSubmitInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkTimelineSemaphoreSubmitInfoKHR} value to the {@code pNext} chain. */
-        public VkSubmitInfo.Buffer pNext(VkTimelineSemaphoreSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkSubmitInfo.Buffer pNext(VkTimelineSemaphoreSubmitInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkWin32KeyedMutexAcquireReleaseInfoKHR} value to the {@code pNext} chain. */
-        public VkSubmitInfo.Buffer pNext(VkWin32KeyedMutexAcquireReleaseInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkSubmitInfo.Buffer pNext(VkWin32KeyedMutexAcquireReleaseInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkWin32KeyedMutexAcquireReleaseInfoNV} value to the {@code pNext} chain. */
-        public VkSubmitInfo.Buffer pNext(VkWin32KeyedMutexAcquireReleaseInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkSubmitInfo.Buffer pNext(VkWin32KeyedMutexAcquireReleaseInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkSubmitInfo#waitSemaphoreCount} field. */
         public VkSubmitInfo.Buffer waitSemaphoreCount(@NativeType("uint32_t") int value) { VkSubmitInfo.nwaitSemaphoreCount(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@link VkSubmitInfo#pWaitSemaphores} field. */

@@ -125,9 +125,9 @@ public class VkDescriptorSetAllocateInfo extends Struct implements NativeResourc
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDescriptorSetAllocateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDescriptorSetVariableDescriptorCountAllocateInfo} value to the {@code pNext} chain. */
-    public VkDescriptorSetAllocateInfo pNext(VkDescriptorSetVariableDescriptorCountAllocateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkDescriptorSetAllocateInfo pNext(VkDescriptorSetVariableDescriptorCountAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDescriptorSetVariableDescriptorCountAllocateInfoEXT} value to the {@code pNext} chain. */
-    public VkDescriptorSetAllocateInfo pNext(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkDescriptorSetAllocateInfo pNext(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #descriptorPool} field. */
     public VkDescriptorSetAllocateInfo descriptorPool(@NativeType("VkDescriptorPool") long value) { ndescriptorPool(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@link #pSetLayouts} field. */
@@ -396,9 +396,9 @@ public class VkDescriptorSetAllocateInfo extends Struct implements NativeResourc
         /** Sets the specified value to the {@link VkDescriptorSetAllocateInfo#pNext} field. */
         public VkDescriptorSetAllocateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorSetAllocateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDescriptorSetVariableDescriptorCountAllocateInfo} value to the {@code pNext} chain. */
-        public VkDescriptorSetAllocateInfo.Buffer pNext(VkDescriptorSetVariableDescriptorCountAllocateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkDescriptorSetAllocateInfo.Buffer pNext(VkDescriptorSetVariableDescriptorCountAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDescriptorSetVariableDescriptorCountAllocateInfoEXT} value to the {@code pNext} chain. */
-        public VkDescriptorSetAllocateInfo.Buffer pNext(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkDescriptorSetAllocateInfo.Buffer pNext(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkDescriptorSetAllocateInfo#descriptorPool} field. */
         public VkDescriptorSetAllocateInfo.Buffer descriptorPool(@NativeType("VkDescriptorPool") long value) { VkDescriptorSetAllocateInfo.ndescriptorPool(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@link VkDescriptorSetAllocateInfo#pSetLayouts} field. */

@@ -143,7 +143,7 @@ public class VkBufferImageCopy2KHR extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferImageCopy2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkCopyCommandTransformInfoQCOM} value to the {@code pNext} chain. */
-    public VkBufferImageCopy2KHR pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkBufferImageCopy2KHR pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #bufferOffset} field. */
     public VkBufferImageCopy2KHR bufferOffset(@NativeType("VkDeviceSize") long value) { nbufferOffset(address(), value); return this; }
     /** Sets the specified value to the {@link #bufferRowLength} field. */
@@ -413,7 +413,7 @@ public class VkBufferImageCopy2KHR extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkBufferImageCopy2KHR#pNext} field. */
         public VkBufferImageCopy2KHR.Buffer pNext(@NativeType("void const *") long value) { VkBufferImageCopy2KHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkCopyCommandTransformInfoQCOM} value to the {@code pNext} chain. */
-        public VkBufferImageCopy2KHR.Buffer pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkBufferImageCopy2KHR.Buffer pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkBufferImageCopy2KHR#bufferOffset} field. */
         public VkBufferImageCopy2KHR.Buffer bufferOffset(@NativeType("VkDeviceSize") long value) { VkBufferImageCopy2KHR.nbufferOffset(address(), value); return this; }
         /** Sets the specified value to the {@link VkBufferImageCopy2KHR#bufferRowLength} field. */

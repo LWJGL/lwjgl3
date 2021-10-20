@@ -159,39 +159,39 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkMemoryAllocateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDedicatedAllocationMemoryAllocateInfoNV} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkDedicatedAllocationMemoryAllocateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkDedicatedAllocationMemoryAllocateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportMemoryAllocateInfo} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkExportMemoryAllocateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkExportMemoryAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportMemoryAllocateInfoKHR} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkExportMemoryAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkExportMemoryAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportMemoryAllocateInfoNV} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkExportMemoryAllocateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkExportMemoryAllocateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportMemoryWin32HandleInfoKHR} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkExportMemoryWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkExportMemoryWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportMemoryWin32HandleInfoNV} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkExportMemoryWin32HandleInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkExportMemoryWin32HandleInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImportMemoryFdInfoKHR} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkImportMemoryFdInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkImportMemoryFdInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImportMemoryHostPointerInfoEXT} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkImportMemoryHostPointerInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkImportMemoryHostPointerInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImportMemoryWin32HandleInfoKHR} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkImportMemoryWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkImportMemoryWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImportMemoryWin32HandleInfoNV} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkImportMemoryWin32HandleInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkImportMemoryWin32HandleInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryAllocateFlagsInfo} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkMemoryAllocateFlagsInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkMemoryAllocateFlagsInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryAllocateFlagsInfoKHR} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkMemoryAllocateFlagsInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkMemoryAllocateFlagsInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryDedicatedAllocateInfo} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkMemoryDedicatedAllocateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkMemoryDedicatedAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoKHR} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkMemoryDedicatedAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkMemoryDedicatedAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfo} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkMemoryOpaqueCaptureAddressAllocateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkMemoryOpaqueCaptureAddressAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfoKHR} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkMemoryOpaqueCaptureAddressAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkMemoryOpaqueCaptureAddressAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryPriorityAllocateInfoEXT} value to the {@code pNext} chain. */
-    public VkMemoryAllocateInfo pNext(VkMemoryPriorityAllocateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkMemoryAllocateInfo pNext(VkMemoryPriorityAllocateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #allocationSize} field. */
     public VkMemoryAllocateInfo allocationSize(@NativeType("VkDeviceSize") long value) { nallocationSize(address(), value); return this; }
     /** Sets the specified value to the {@link #memoryTypeIndex} field. */
@@ -432,39 +432,39 @@ public class VkMemoryAllocateInfo extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkMemoryAllocateInfo#pNext} field. */
         public VkMemoryAllocateInfo.Buffer pNext(@NativeType("void const *") long value) { VkMemoryAllocateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDedicatedAllocationMemoryAllocateInfoNV} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkDedicatedAllocationMemoryAllocateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkDedicatedAllocationMemoryAllocateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportMemoryAllocateInfo} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryAllocateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportMemoryAllocateInfoKHR} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportMemoryAllocateInfoNV} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryAllocateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryAllocateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportMemoryWin32HandleInfoKHR} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportMemoryWin32HandleInfoNV} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryWin32HandleInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkExportMemoryWin32HandleInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImportMemoryFdInfoKHR} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkImportMemoryFdInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkImportMemoryFdInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImportMemoryHostPointerInfoEXT} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkImportMemoryHostPointerInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkImportMemoryHostPointerInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImportMemoryWin32HandleInfoKHR} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkImportMemoryWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkImportMemoryWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImportMemoryWin32HandleInfoNV} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkImportMemoryWin32HandleInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkImportMemoryWin32HandleInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryAllocateFlagsInfo} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryAllocateFlagsInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryAllocateFlagsInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryAllocateFlagsInfoKHR} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryAllocateFlagsInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryAllocateFlagsInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryDedicatedAllocateInfo} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryDedicatedAllocateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryDedicatedAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryDedicatedAllocateInfoKHR} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryDedicatedAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryDedicatedAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfo} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryOpaqueCaptureAddressAllocateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryOpaqueCaptureAddressAllocateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryOpaqueCaptureAddressAllocateInfoKHR} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryOpaqueCaptureAddressAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryOpaqueCaptureAddressAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryPriorityAllocateInfoEXT} value to the {@code pNext} chain. */
-        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryPriorityAllocateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkMemoryAllocateInfo.Buffer pNext(VkMemoryPriorityAllocateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkMemoryAllocateInfo#allocationSize} field. */
         public VkMemoryAllocateInfo.Buffer allocationSize(@NativeType("VkDeviceSize") long value) { VkMemoryAllocateInfo.nallocationSize(address(), value); return this; }
         /** Sets the specified value to the {@link VkMemoryAllocateInfo#memoryTypeIndex} field. */

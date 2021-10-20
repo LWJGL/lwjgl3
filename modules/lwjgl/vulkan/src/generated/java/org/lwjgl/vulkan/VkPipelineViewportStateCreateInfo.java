@@ -145,15 +145,15 @@ public class VkPipelineViewportStateCreateInfo extends Struct implements NativeR
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineViewportStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} value to the {@code pNext} chain. */
-    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} value to the {@code pNext} chain. */
-    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportExclusiveScissorStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportExclusiveScissorStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineViewportShadingRateImageStateCreateInfoNV} value to the {@code pNext} chain. */
-    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportShadingRateImageStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportShadingRateImageStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineViewportSwizzleStateCreateInfoNV} value to the {@code pNext} chain. */
-    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportSwizzleStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportSwizzleStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineViewportWScalingStateCreateInfoNV} value to the {@code pNext} chain. */
-    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportWScalingStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportWScalingStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkPipelineViewportStateCreateInfo flags(@NativeType("VkPipelineViewportStateCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #viewportCount} field. */
@@ -429,15 +429,15 @@ public class VkPipelineViewportStateCreateInfo extends Struct implements NativeR
         /** Sets the specified value to the {@link VkPipelineViewportStateCreateInfo#pNext} field. */
         public VkPipelineViewportStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineViewportStateCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} value to the {@code pNext} chain. */
-        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} value to the {@code pNext} chain. */
-        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportExclusiveScissorStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportExclusiveScissorStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineViewportShadingRateImageStateCreateInfoNV} value to the {@code pNext} chain. */
-        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportShadingRateImageStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportShadingRateImageStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineViewportSwizzleStateCreateInfoNV} value to the {@code pNext} chain. */
-        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportSwizzleStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportSwizzleStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineViewportWScalingStateCreateInfoNV} value to the {@code pNext} chain. */
-        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportWScalingStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportWScalingStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkPipelineViewportStateCreateInfo#flags} field. */
         public VkPipelineViewportStateCreateInfo.Buffer flags(@NativeType("VkPipelineViewportStateCreateFlags") int value) { VkPipelineViewportStateCreateInfo.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineViewportStateCreateInfo#viewportCount} field. */

@@ -179,15 +179,15 @@ public class VkRenderPassCreateInfo extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkRenderPassFragmentDensityMapCreateInfoEXT} value to the {@code pNext} chain. */
-    public VkRenderPassCreateInfo pNext(VkRenderPassFragmentDensityMapCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkRenderPassCreateInfo pNext(VkRenderPassFragmentDensityMapCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassInputAttachmentAspectCreateInfo} value to the {@code pNext} chain. */
-    public VkRenderPassCreateInfo pNext(VkRenderPassInputAttachmentAspectCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkRenderPassCreateInfo pNext(VkRenderPassInputAttachmentAspectCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassInputAttachmentAspectCreateInfoKHR} value to the {@code pNext} chain. */
-    public VkRenderPassCreateInfo pNext(VkRenderPassInputAttachmentAspectCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkRenderPassCreateInfo pNext(VkRenderPassInputAttachmentAspectCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassMultiviewCreateInfo} value to the {@code pNext} chain. */
-    public VkRenderPassCreateInfo pNext(VkRenderPassMultiviewCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkRenderPassCreateInfo pNext(VkRenderPassMultiviewCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassMultiviewCreateInfoKHR} value to the {@code pNext} chain. */
-    public VkRenderPassCreateInfo pNext(VkRenderPassMultiviewCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+    public VkRenderPassCreateInfo pNext(VkRenderPassMultiviewCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkRenderPassCreateInfo flags(@NativeType("VkRenderPassCreateFlags") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified {@link VkAttachmentDescription.Buffer} to the {@link #pAttachments} field. */
@@ -503,15 +503,15 @@ public class VkRenderPassCreateInfo extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkRenderPassCreateInfo#pNext} field. */
         public VkRenderPassCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkRenderPassFragmentDensityMapCreateInfoEXT} value to the {@code pNext} chain. */
-        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassFragmentDensityMapCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassFragmentDensityMapCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassInputAttachmentAspectCreateInfo} value to the {@code pNext} chain. */
-        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassInputAttachmentAspectCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassInputAttachmentAspectCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassInputAttachmentAspectCreateInfoKHR} value to the {@code pNext} chain. */
-        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassInputAttachmentAspectCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassInputAttachmentAspectCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassMultiviewCreateInfo} value to the {@code pNext} chain. */
-        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassMultiviewCreateInfo value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassMultiviewCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassMultiviewCreateInfoKHR} value to the {@code pNext} chain. */
-        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassMultiviewCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext())); }
+        public VkRenderPassCreateInfo.Buffer pNext(VkRenderPassMultiviewCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkRenderPassCreateInfo#flags} field. */
         public VkRenderPassCreateInfo.Buffer flags(@NativeType("VkRenderPassCreateFlags") int value) { VkRenderPassCreateInfo.nflags(address(), value); return this; }
         /** Sets the address of the specified {@link VkAttachmentDescription.Buffer} to the {@link VkRenderPassCreateInfo#pAttachments} field. */
