@@ -67,6 +67,14 @@ ENABLE_WARNINGS()""")
     )
 
     par_shapes_mesh.p(
+        "create_parametric_disk",
+        "Creates a disk of radius {@code 1.0} with texture coordinates and normals by squashing a cone flat on the {@code Z=0} plane.",
+
+        int("slices", "the number of slices"),
+        int("stacks", "the number of stacks")
+    )
+
+    par_shapes_mesh.p(
         "create_torus",
         "Creates a donut that sits on the Z=0 plane with the specified inner radius. The outer radius can be controlled with #scale().",
 

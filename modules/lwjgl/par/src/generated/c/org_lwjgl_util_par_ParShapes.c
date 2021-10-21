@@ -33,6 +33,11 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_par_ParShapes_npar_1shapes_1create_1
     return (jlong)(intptr_t)par_shapes_create_cone(slices, stacks);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_par_ParShapes_npar_1shapes_1create_1parametric_1disk(JNIEnv *__env, jclass clazz, jint slices, jint stacks) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(intptr_t)par_shapes_create_parametric_disk(slices, stacks);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_par_ParShapes_npar_1shapes_1create_1torus(JNIEnv *__env, jclass clazz, jint slices, jint stacks, jfloat radius) {
     UNUSED_PARAMS(__env, clazz)
     return (jlong)(intptr_t)par_shapes_create_torus(slices, stacks, radius);

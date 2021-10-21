@@ -68,6 +68,10 @@ par_shapes_mesh* par_shapes_create_cylinder(int slices, int stacks);
 // Again, height and radius are 1.0, but can be changed with par_shapes_scale.
 par_shapes_mesh* par_shapes_create_cone(int slices, int stacks);
 
+// Create a disk of radius 1.0 with texture coordinates and normals by squashing
+// a cone flat on the Z=0 plane.
+par_shapes_mesh* par_shapes_create_parametric_disk(int slices, int stacks);
+
 // Create a donut that sits on the Z=0 plane with the specified inner radius.
 // The outer radius can be controlled with par_shapes_scale.
 par_shapes_mesh* par_shapes_create_torus(int slices, int stacks, float radius);
@@ -351,6 +355,15 @@ par_shapes_mesh* par_shapes_create_cone(int slices, int stacks)
     }
     return par_shapes_create_parametric(par_shapes__cone, slices,
         stacks, 0);
+}
+
+par_shapes_mesh* par_shapes_create_parametric_disk(int slices, int stacks)
+{
+    par_shapes_mesh* m = par_shapes_create_cone(slices, stacks);
+    if (m) {
+        par_shapes_scale(m, 1.0f, 1.0f, 0.0f);
+    }
+    return m;
 }
 
 par_shapes_mesh* par_shapes_create_parametric_sphere(int slices, int stacks)
@@ -811,10 +824,19 @@ void par_shapes_scale(par_shapes_mesh* m, float x, float y, float z)
         *points++ *= z;
     }
     float* n = m->normals;
-    if (n && (x != y || x != z || y != z)) {
-        x = 1.0f / x;
-        y = 1.0f / y;
-        z = 1.0f / z;
+    if (n && !(x == y && y == z)) {
+        bool x_zero = x == 0;
+        bool y_zero = y == 0;
+        bool z_zero = z == 0;
+        if (!x_zero && !y_zero && !z_zero) {
+            x = 1.0f / x;
+            y = 1.0f / y;
+            z = 1.0f / z;
+        } else {
+            x = x_zero && !y_zero && !z_zero;
+            y = y_zero && !x_zero && !z_zero;
+            z = z_zero && !x_zero && !y_zero;
+        }
         for (int i = 0; i < m->npoints; i++, n += 3) {
             n[0] *= x;
             n[1] *= y;

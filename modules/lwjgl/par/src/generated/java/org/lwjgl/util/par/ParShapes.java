@@ -91,6 +91,24 @@ public class ParShapes {
         return ParShapesMesh.createSafe(__result);
     }
 
+    // --- [ par_shapes_create_parametric_disk ] ---
+
+    /** Unsafe version of: {@link #par_shapes_create_parametric_disk create_parametric_disk} */
+    public static native long npar_shapes_create_parametric_disk(int slices, int stacks);
+
+    /**
+     * Creates a disk of radius {@code 1.0} with texture coordinates and normals by squashing a cone flat on the {@code Z=0} plane.
+     *
+     * @param slices the number of slices
+     * @param stacks the number of stacks
+     */
+    @Nullable
+    @NativeType("par_shapes_mesh *")
+    public static ParShapesMesh par_shapes_create_parametric_disk(int slices, int stacks) {
+        long __result = npar_shapes_create_parametric_disk(slices, stacks);
+        return ParShapesMesh.createSafe(__result);
+    }
+
     // --- [ par_shapes_create_torus ] ---
 
     /** Unsafe version of: {@link #par_shapes_create_torus create_torus} */

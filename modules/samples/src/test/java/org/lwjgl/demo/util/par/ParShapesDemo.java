@@ -40,7 +40,7 @@ public final class ParShapesDemo {
 
     private int program;
 
-    private int meshKey = 1;
+    private int meshKey;
 
     private int
         slices       = 32,
@@ -137,6 +137,7 @@ public final class ParShapesDemo {
                     subdivisions++;
                     updateMesh();
                     break;
+                case GLFW_KEY_0:
                 case GLFW_KEY_1:
                 case GLFW_KEY_2:
                 case GLFW_KEY_3:
@@ -199,7 +200,7 @@ public final class ParShapesDemo {
         par_shapes_set_epsilon_welded_normals(0.00001f);
         par_shapes_set_epsilon_degenerate_sphere(0.000001f);
 
-        updateMesh(GLFW_KEY_1);
+        updateMesh(GLFW_KEY_0);
 
         int vshader = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vshader,
@@ -281,17 +282,20 @@ public final class ParShapesDemo {
         }
 
         switch (key) {
-            case GLFW_KEY_1:
+            case GLFW_KEY_0:
                 mesh = par_shapes_create_parametric_sphere(slices, stacks);
                 break;
-            case GLFW_KEY_2:
+            case GLFW_KEY_1:
                 mesh = par_shapes_create_hemisphere(slices, stacks);
                 break;
-            case GLFW_KEY_3:
+            case GLFW_KEY_2:
                 mesh = par_shapes_create_cylinder(slices, stacks);
                 break;
-            case GLFW_KEY_4:
+            case GLFW_KEY_3:
                 mesh = par_shapes_create_cone(slices, stacks);
+                break;
+            case GLFW_KEY_4:
+                mesh = par_shapes_create_parametric_disk(slices, stacks);
                 break;
             case GLFW_KEY_5:
                 mesh = par_shapes_create_torus(slices, stacks, 0.25f);
@@ -378,6 +382,7 @@ public final class ParShapesDemo {
             "Hemisphere",
             "Cylinder",
             "Cone",
+            "Disc",
             "Torus",
             "Trefoil knot",
             "Klein bottle",
@@ -386,13 +391,13 @@ public final class ParShapesDemo {
         };
 
         for (int i = 0; i < meshes.length; i++) {
-            if (i == meshKey - GLFW_KEY_1) {
+            if (i == meshKey - GLFW_KEY_0) {
                 setColor(color, 255, 0, 255, 255);
             } else {
                 setColor(color, 255, 255, 255, 255);
             }
 
-            print(0, i * 10, "(" + (i + 1) + ") " + meshes[i], color, buffer);
+            print(0, i * 10, "(" + i + ") " + meshes[i], color, buffer);
         }
 
         if (mesh != null) {
