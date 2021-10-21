@@ -397,6 +397,17 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCreateBuffer(JNIEnv *__en
     return (jint)vmaCreateBuffer(allocator, pBufferCreateInfo, pAllocationCreateInfo, pBuffer, pAllocation, pAllocationInfo);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCreateBufferWithAlignment(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong pBufferCreateInfoAddress, jlong pAllocationCreateInfoAddress, jlong minAlignment, jlong pBufferAddress, jlong pAllocationAddress, jlong pAllocationInfoAddress) {
+    VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
+    VkBufferCreateInfo const *pBufferCreateInfo = (VkBufferCreateInfo const *)(intptr_t)pBufferCreateInfoAddress;
+    VmaAllocationCreateInfo const *pAllocationCreateInfo = (VmaAllocationCreateInfo const *)(intptr_t)pAllocationCreateInfoAddress;
+    VkBuffer *pBuffer = (VkBuffer *)(intptr_t)pBufferAddress;
+    VmaAllocation *pAllocation = (VmaAllocation *)(intptr_t)pAllocationAddress;
+    VmaAllocationInfo *pAllocationInfo = (VmaAllocationInfo *)(intptr_t)pAllocationInfoAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaCreateBufferWithAlignment(allocator, pBufferCreateInfo, pAllocationCreateInfo, (VkDeviceSize)minAlignment, pBuffer, pAllocation, pAllocationInfo);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaDestroyBuffer(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong buffer, jlong allocationAddress) {
     VmaAllocator allocator = (VmaAllocator)(intptr_t)allocatorAddress;
     VmaAllocation allocation = (VmaAllocation)(intptr_t)allocationAddress;

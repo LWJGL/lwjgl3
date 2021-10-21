@@ -37,6 +37,7 @@ import org.lwjgl.vulkan.*;
  *     {@link VmaRecordSettings VmaRecordSettings} const * {@link #pRecordSettings};
  *     VkInstance {@link #instance};
  *     uint32_t {@link #vulkanApiVersion};
+ *     VkExternalMemoryHandleTypeFlagsKHR const * {@link #pTypeExternalMemoryHandleTypes};
  * }</code></pre>
  */
 public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
@@ -60,7 +61,8 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         PVULKANFUNCTIONS,
         PRECORDSETTINGS,
         INSTANCE,
-        VULKANAPIVERSION;
+        VULKANAPIVERSION,
+        PTYPEEXTERNALMEMORYHANDLETYPES;
 
     static {
         Layout layout = __struct(
@@ -75,7 +77,8 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
-            __member(4)
+            __member(4),
+            __member(POINTER_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -93,6 +96,7 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         PRECORDSETTINGS = layout.offsetof(9);
         INSTANCE = layout.offsetof(10);
         VULKANAPIVERSION = layout.offsetof(11);
+        PTYPEEXTERNALMEMORYHANDLETYPES = layout.offsetof(12);
     }
 
     /**
@@ -197,6 +201,20 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
      */
     @NativeType("uint32_t")
     public int vulkanApiVersion() { return nvulkanApiVersion(address()); }
+    /**
+     * @param capacity the number of elements in the returned buffer
+     *
+     * @return Either null or a pointer to an array of external memory handle types for each Vulkan memory type.
+     *         
+     *         <p>If not {@code NULL}, it must be a pointer to an array of {@code VkPhysicalDeviceMemoryProperties::memoryTypeCount} elements, defining external memory handle
+     *         types of particular Vulkan memory type, to be passed using {@code VkExportMemoryAllocateInfoKHR}.</p>
+     *         
+     *         <p>Any of the elements may be equal to 0, which means not to use {@code VkExportMemoryAllocateInfoKHR} on this memory type. This is also the default in
+     *         case of {@code pTypeExternalMemoryHandleTypes = NULL}.</p>
+     */
+    @Nullable
+    @NativeType("VkExternalMemoryHandleTypeFlagsKHR const *")
+    public IntBuffer pTypeExternalMemoryHandleTypes(int capacity) { return npTypeExternalMemoryHandleTypes(address(), capacity); }
 
     /** Sets the specified value to the {@link #flags} field. */
     public VmaAllocatorCreateInfo flags(@NativeType("VmaAllocatorCreateFlags") int value) { nflags(address(), value); return this; }
@@ -222,6 +240,8 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     public VmaAllocatorCreateInfo instance(VkInstance value) { ninstance(address(), value); return this; }
     /** Sets the specified value to the {@link #vulkanApiVersion} field. */
     public VmaAllocatorCreateInfo vulkanApiVersion(@NativeType("uint32_t") int value) { nvulkanApiVersion(address(), value); return this; }
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pTypeExternalMemoryHandleTypes} field. */
+    public VmaAllocatorCreateInfo pTypeExternalMemoryHandleTypes(@Nullable @NativeType("VkExternalMemoryHandleTypeFlagsKHR const *") IntBuffer value) { npTypeExternalMemoryHandleTypes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaAllocatorCreateInfo set(
@@ -236,7 +256,8 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         VmaVulkanFunctions pVulkanFunctions,
         @Nullable VmaRecordSettings pRecordSettings,
         VkInstance instance,
-        int vulkanApiVersion
+        int vulkanApiVersion,
+        @Nullable IntBuffer pTypeExternalMemoryHandleTypes
     ) {
         flags(flags);
         physicalDevice(physicalDevice);
@@ -250,6 +271,7 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         pRecordSettings(pRecordSettings);
         instance(instance);
         vulkanApiVersion(vulkanApiVersion);
+        pTypeExternalMemoryHandleTypes(pTypeExternalMemoryHandleTypes);
 
         return this;
     }
@@ -351,6 +373,8 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     public static long ninstance(long struct) { return memGetAddress(struct + VmaAllocatorCreateInfo.INSTANCE); }
     /** Unsafe version of {@link #vulkanApiVersion}. */
     public static int nvulkanApiVersion(long struct) { return UNSAFE.getInt(null, struct + VmaAllocatorCreateInfo.VULKANAPIVERSION); }
+    /** Unsafe version of {@link #pTypeExternalMemoryHandleTypes(int) pTypeExternalMemoryHandleTypes}. */
+    @Nullable public static IntBuffer npTypeExternalMemoryHandleTypes(long struct, int capacity) { return memIntBufferSafe(memGetAddress(struct + VmaAllocatorCreateInfo.PTYPEEXTERNALMEMORYHANDLETYPES), capacity); }
 
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocatorCreateInfo.FLAGS, value); }
@@ -376,6 +400,8 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     public static void ninstance(long struct, VkInstance value) { memPutAddress(struct + VmaAllocatorCreateInfo.INSTANCE, value.address()); }
     /** Unsafe version of {@link #vulkanApiVersion(int) vulkanApiVersion}. */
     public static void nvulkanApiVersion(long struct, int value) { UNSAFE.putInt(null, struct + VmaAllocatorCreateInfo.VULKANAPIVERSION, value); }
+    /** Unsafe version of {@link #pTypeExternalMemoryHandleTypes(IntBuffer) pTypeExternalMemoryHandleTypes}. */
+    public static void npTypeExternalMemoryHandleTypes(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VmaAllocatorCreateInfo.PTYPEEXTERNALMEMORYHANDLETYPES, memAddressSafe(value)); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

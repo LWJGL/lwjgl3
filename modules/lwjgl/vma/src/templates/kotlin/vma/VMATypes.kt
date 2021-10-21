@@ -236,6 +236,18 @@ val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBu
         Leaving it initialized to zero is equivalent to {@code VK_API_VERSION_1_0}.
         """
     )
+    nullable..VkExternalMemoryHandleTypeFlagsKHR.const.p(
+        "pTypeExternalMemoryHandleTypes",
+        """
+        Either null or a pointer to an array of external memory handle types for each Vulkan memory type.
+
+        If not #NULL, it must be a pointer to an array of {@code VkPhysicalDeviceMemoryProperties::memoryTypeCount} elements, defining external memory handle
+        types of particular Vulkan memory type, to be passed using {@code VkExportMemoryAllocateInfoKHR}.
+
+        Any of the elements may be equal to 0, which means not to use {@code VkExportMemoryAllocateInfoKHR} on this memory type. This is also the default in
+        case of {@code pTypeExternalMemoryHandleTypes = NULL}.
+        """
+    )
 }
 
 val VmaAllocatorInfo = struct(Module.VMA, "VmaAllocatorInfo", mutable = false) {
@@ -453,6 +465,28 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
 
         It is used only when #ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT flag was used during creation of the {@code VmaAllocator} object. Otherwise, this
         variable is ignored.
+        """
+    )
+    VkDeviceSize(
+        "minAllocationAlignment",
+        """
+        Additional minimum alignment to be used for all allocations created from this pool. Can be 0.
+
+        Leave 0 (default) not to impose any additional alignment. If not 0, it must be a power of two. It can be useful in cases where alignment returned by
+        Vulkan by functions like {@code vkGetBufferMemoryRequirements} is not enough, e.g. when doing interop with OpenGL.
+        """
+    )
+    nullable..opaque_p(
+        "pMemoryAllocateNext",
+        """
+        Additional {@code pNext} chain to be attached to {@code VkMemoryAllocateInfo} used for every allocation made by this pool. Optional.
+
+        Optional, can be null. If not null, it must point to a {@code pNext} chain of structures that can be attached to {@code VkMemoryAllocateInfo}. It can
+        be useful for special needs such as adding {@code VkExportMemoryAllocateInfoKHR}. Structures pointed by this member must remain alive and unchanged for
+        the whole lifetime of the custom pool.
+
+        Please note that some structures, e.g. {@code VkMemoryPriorityAllocateInfoEXT}, {@code VkMemoryDedicatedAllocateInfoKHR}, can be attached automatically
+        by this library when using other, more convenient of its features.
         """
     )
 }

@@ -29,6 +29,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     size_t {@link #maxBlockCount};
  *     uint32_t {@link #frameInUseCount};
  *     float {@link #priority};
+ *     VkDeviceSize {@link #minAllocationAlignment};
+ *     void * {@link #pMemoryAllocateNext};
  * }</code></pre>
  */
 public class VmaPoolCreateInfo extends Struct implements NativeResource {
@@ -47,7 +49,9 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         MINBLOCKCOUNT,
         MAXBLOCKCOUNT,
         FRAMEINUSECOUNT,
-        PRIORITY;
+        PRIORITY,
+        MINALLOCATIONALIGNMENT,
+        PMEMORYALLOCATENEXT;
 
     static {
         Layout layout = __struct(
@@ -57,7 +61,9 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(4),
-            __member(4)
+            __member(4),
+            __member(8),
+            __member(POINTER_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -70,6 +76,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         MAXBLOCKCOUNT = layout.offsetof(4);
         FRAMEINUSECOUNT = layout.offsetof(5);
         PRIORITY = layout.offsetof(6);
+        MINALLOCATIONALIGNMENT = layout.offsetof(7);
+        PMEMORYALLOCATENEXT = layout.offsetof(8);
     }
 
     /**
@@ -134,6 +142,26 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
      * variable is ignored.</p>
      */
     public float priority() { return npriority(address()); }
+    /**
+     * Additional minimum alignment to be used for all allocations created from this pool. Can be 0.
+     * 
+     * <p>Leave 0 (default) not to impose any additional alignment. If not 0, it must be a power of two. It can be useful in cases where alignment returned by
+     * Vulkan by functions like {@code vkGetBufferMemoryRequirements} is not enough, e.g. when doing interop with OpenGL.</p>
+     */
+    @NativeType("VkDeviceSize")
+    public long minAllocationAlignment() { return nminAllocationAlignment(address()); }
+    /**
+     * Additional {@code pNext} chain to be attached to {@code VkMemoryAllocateInfo} used for every allocation made by this pool. Optional.
+     * 
+     * <p>Optional, can be null. If not null, it must point to a {@code pNext} chain of structures that can be attached to {@code VkMemoryAllocateInfo}. It can
+     * be useful for special needs such as adding {@code VkExportMemoryAllocateInfoKHR}. Structures pointed by this member must remain alive and unchanged for
+     * the whole lifetime of the custom pool.</p>
+     * 
+     * <p>Please note that some structures, e.g. {@code VkMemoryPriorityAllocateInfoEXT}, {@code VkMemoryDedicatedAllocateInfoKHR}, can be attached automatically
+     * by this library when using other, more convenient of its features.</p>
+     */
+    @NativeType("void *")
+    public long pMemoryAllocateNext() { return npMemoryAllocateNext(address()); }
 
     /** Sets the specified value to the {@link #memoryTypeIndex} field. */
     public VmaPoolCreateInfo memoryTypeIndex(@NativeType("uint32_t") int value) { nmemoryTypeIndex(address(), value); return this; }
@@ -149,6 +177,10 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
     public VmaPoolCreateInfo frameInUseCount(@NativeType("uint32_t") int value) { nframeInUseCount(address(), value); return this; }
     /** Sets the specified value to the {@link #priority} field. */
     public VmaPoolCreateInfo priority(float value) { npriority(address(), value); return this; }
+    /** Sets the specified value to the {@link #minAllocationAlignment} field. */
+    public VmaPoolCreateInfo minAllocationAlignment(@NativeType("VkDeviceSize") long value) { nminAllocationAlignment(address(), value); return this; }
+    /** Sets the specified value to the {@link #pMemoryAllocateNext} field. */
+    public VmaPoolCreateInfo pMemoryAllocateNext(@NativeType("void *") long value) { npMemoryAllocateNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaPoolCreateInfo set(
@@ -158,7 +190,9 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         long minBlockCount,
         long maxBlockCount,
         int frameInUseCount,
-        float priority
+        float priority,
+        long minAllocationAlignment,
+        long pMemoryAllocateNext
     ) {
         memoryTypeIndex(memoryTypeIndex);
         flags(flags);
@@ -167,6 +201,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         maxBlockCount(maxBlockCount);
         frameInUseCount(frameInUseCount);
         priority(priority);
+        minAllocationAlignment(minAllocationAlignment);
+        pMemoryAllocateNext(pMemoryAllocateNext);
 
         return this;
     }
@@ -329,6 +365,10 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
     public static int nframeInUseCount(long struct) { return UNSAFE.getInt(null, struct + VmaPoolCreateInfo.FRAMEINUSECOUNT); }
     /** Unsafe version of {@link #priority}. */
     public static float npriority(long struct) { return UNSAFE.getFloat(null, struct + VmaPoolCreateInfo.PRIORITY); }
+    /** Unsafe version of {@link #minAllocationAlignment}. */
+    public static long nminAllocationAlignment(long struct) { return UNSAFE.getLong(null, struct + VmaPoolCreateInfo.MINALLOCATIONALIGNMENT); }
+    /** Unsafe version of {@link #pMemoryAllocateNext}. */
+    public static long npMemoryAllocateNext(long struct) { return memGetAddress(struct + VmaPoolCreateInfo.PMEMORYALLOCATENEXT); }
 
     /** Unsafe version of {@link #memoryTypeIndex(int) memoryTypeIndex}. */
     public static void nmemoryTypeIndex(long struct, int value) { UNSAFE.putInt(null, struct + VmaPoolCreateInfo.MEMORYTYPEINDEX, value); }
@@ -344,6 +384,10 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
     public static void nframeInUseCount(long struct, int value) { UNSAFE.putInt(null, struct + VmaPoolCreateInfo.FRAMEINUSECOUNT, value); }
     /** Unsafe version of {@link #priority(float) priority}. */
     public static void npriority(long struct, float value) { UNSAFE.putFloat(null, struct + VmaPoolCreateInfo.PRIORITY, value); }
+    /** Unsafe version of {@link #minAllocationAlignment(long) minAllocationAlignment}. */
+    public static void nminAllocationAlignment(long struct, long value) { UNSAFE.putLong(null, struct + VmaPoolCreateInfo.MINALLOCATIONALIGNMENT, value); }
+    /** Unsafe version of {@link #pMemoryAllocateNext(long) pMemoryAllocateNext}. */
+    public static void npMemoryAllocateNext(long struct, long value) { memPutAddress(struct + VmaPoolCreateInfo.PMEMORYALLOCATENEXT, value); }
 
     // -----------------------------------
 
@@ -403,6 +447,12 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         public int frameInUseCount() { return VmaPoolCreateInfo.nframeInUseCount(address()); }
         /** @return the value of the {@link VmaPoolCreateInfo#priority} field. */
         public float priority() { return VmaPoolCreateInfo.npriority(address()); }
+        /** @return the value of the {@link VmaPoolCreateInfo#minAllocationAlignment} field. */
+        @NativeType("VkDeviceSize")
+        public long minAllocationAlignment() { return VmaPoolCreateInfo.nminAllocationAlignment(address()); }
+        /** @return the value of the {@link VmaPoolCreateInfo#pMemoryAllocateNext} field. */
+        @NativeType("void *")
+        public long pMemoryAllocateNext() { return VmaPoolCreateInfo.npMemoryAllocateNext(address()); }
 
         /** Sets the specified value to the {@link VmaPoolCreateInfo#memoryTypeIndex} field. */
         public VmaPoolCreateInfo.Buffer memoryTypeIndex(@NativeType("uint32_t") int value) { VmaPoolCreateInfo.nmemoryTypeIndex(address(), value); return this; }
@@ -418,6 +468,10 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         public VmaPoolCreateInfo.Buffer frameInUseCount(@NativeType("uint32_t") int value) { VmaPoolCreateInfo.nframeInUseCount(address(), value); return this; }
         /** Sets the specified value to the {@link VmaPoolCreateInfo#priority} field. */
         public VmaPoolCreateInfo.Buffer priority(float value) { VmaPoolCreateInfo.npriority(address(), value); return this; }
+        /** Sets the specified value to the {@link VmaPoolCreateInfo#minAllocationAlignment} field. */
+        public VmaPoolCreateInfo.Buffer minAllocationAlignment(@NativeType("VkDeviceSize") long value) { VmaPoolCreateInfo.nminAllocationAlignment(address(), value); return this; }
+        /** Sets the specified value to the {@link VmaPoolCreateInfo#pMemoryAllocateNext} field. */
+        public VmaPoolCreateInfo.Buffer pMemoryAllocateNext(@NativeType("void *") long value) { VmaPoolCreateInfo.npMemoryAllocateNext(address(), value); return this; }
 
     }
 
