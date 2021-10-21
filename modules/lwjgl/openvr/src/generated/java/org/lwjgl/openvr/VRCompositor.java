@@ -138,7 +138,7 @@ public class VRCompositor {
      * <p>OpenGL dirty state: glBindTexture</p>
      *
      * @param eEye         one of:<br><table><tr><td>{@link VR#EVREye_Eye_Left}</td><td>{@link VR#EVREye_Eye_Right}</td></tr></table>
-     * @param nSubmitFlags one of:<br><table><tr><td>{@link VR#EVRSubmitFlags_Submit_Default}</td><td>{@link VR#EVRSubmitFlags_Submit_LensDistortionAlreadyApplied}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_GlRenderBuffer}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_TextureWithDepth}</td><td>{@link VR#EVRSubmitFlags_Submit_FrameDiscontinuty}</td></tr><tr><td>{@link VR#EVRSubmitFlags_VulkanTextureWithArrayData}</td></tr></table>
+     * @param nSubmitFlags one of:<br><table><tr><td>{@link VR#EVRSubmitFlags_Submit_Default}</td><td>{@link VR#EVRSubmitFlags_Submit_LensDistortionAlreadyApplied}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_GlRenderBuffer}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_TextureWithDepth}</td><td>{@link VR#EVRSubmitFlags_Submit_FrameDiscontinuty}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_VulkanTextureWithArrayData}</td><td>{@link VR#EVRSubmitFlags_Submit_GlArrayTexture}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_Reserved2}</td></tr></table>
      *
      * @return return codes:
      *         
@@ -307,12 +307,12 @@ public class VRCompositor {
     // --- [ VRCompositor_FadeGrid ] ---
 
     /** Fading the Grid in or out in {@code fSeconds}. */
-    public static void VRCompositor_FadeGrid(float fSeconds, @NativeType("bool") boolean bFadeIn) {
+    public static void VRCompositor_FadeGrid(float fSeconds, @NativeType("bool") boolean bFadeGridIn) {
         long __functionAddress = OpenVR.VRCompositor.FadeGrid;
         if (CHECKS) {
             check(__functionAddress);
         }
-        callV(fSeconds, bFadeIn, __functionAddress);
+        callV(fSeconds, bFadeGridIn, __functionAddress);
     }
 
     // --- [ VRCompositor_GetCurrentGridAlpha ] ---
@@ -385,8 +385,8 @@ public class VRCompositor {
     // --- [ VRCompositor_CompositorQuit ] ---
 
     /**
-     * Tells the compositor process to clean up and exit. You do not need to call this function at shutdown. Under normal circumstances the compositor will
-     * manage its own life cycle based on what applications are running.
+     * DEPRECATED: Tells the compositor process to clean up and exit. You do not need to call this function at shutdown. Under normal circumstances the
+     * compositor will manage its own life cycle based on what applications are running.
      */
     public static void VRCompositor_CompositorQuit() {
         long __functionAddress = OpenVR.VRCompositor.CompositorQuit;

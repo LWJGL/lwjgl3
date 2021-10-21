@@ -881,6 +881,23 @@ public class VROverlay {
         return nVROverlay_GetOverlayTransformCursor(ulOverlayHandle, pvHotspot.address());
     }
 
+    // --- [ VROverlay_SetOverlayTransformProjection ] ---
+
+    /** Unsafe version of: {@link #VROverlay_SetOverlayTransformProjection SetOverlayTransformProjection} */
+    public static int nVROverlay_SetOverlayTransformProjection(long ulOverlayHandle, int eTrackingOrigin, long pmatTrackingOriginToOverlayTransform, long pProjection, int eEye) {
+        long __functionAddress = OpenVR.VROverlay.SetOverlayTransformProjection;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return callJPPI(ulOverlayHandle, eTrackingOrigin, pmatTrackingOriginToOverlayTransform, pProjection, eEye, __functionAddress);
+    }
+
+    /** Sets the overlay as a projection overlay. */
+    @NativeType("EVROverlayError")
+    public static int VROverlay_SetOverlayTransformProjection(@NativeType("VROverlayHandle_t") long ulOverlayHandle, @NativeType("ETrackingUniverseOrigin") int eTrackingOrigin, @NativeType("HmdMatrix34_t *") HmdMatrix34 pmatTrackingOriginToOverlayTransform, @NativeType("VROverlayProjection_t *") VROverlayProjection pProjection, @NativeType("EVREye") int eEye) {
+        return nVROverlay_SetOverlayTransformProjection(ulOverlayHandle, eTrackingOrigin, pmatTrackingOriginToOverlayTransform.address(), pProjection.address(), eEye);
+    }
+
     // --- [ VROverlay_ShowOverlay ] ---
 
     /** Shows the VR overlay. For dashboard overlays, only the Dashboard Manager is allowed to call this. */

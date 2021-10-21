@@ -231,7 +231,7 @@ const uint32_t VRCompositor_ThrottleMask = 0xC0;	// Number of frames the composi
         "Fading the Grid in or out in {@code fSeconds}.",
 
         float("fSeconds", ""),
-        bool("bFadeIn", "")
+        bool("bFadeGridIn", "")
     )
 
     float(
@@ -271,8 +271,8 @@ const uint32_t VRCompositor_ThrottleMask = 0xC0;	// Number of frames the composi
     void(
         "CompositorQuit",
         """
-        Tells the compositor process to clean up and exit. You do not need to call this function at shutdown. Under normal circumstances the compositor will
-        manage its own life cycle based on what applications are running.
+        DEPRECATED: Tells the compositor process to clean up and exit. You do not need to call this function at shutdown. Under normal circumstances the
+        compositor will manage its own life cycle based on what applications are running.
         """
     )
 

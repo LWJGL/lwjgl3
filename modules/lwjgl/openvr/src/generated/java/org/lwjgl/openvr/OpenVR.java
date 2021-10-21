@@ -488,6 +488,7 @@ public final class OpenVR {
             SetOverlayTransformOverlayRelative,
             SetOverlayTransformCursor,
             GetOverlayTransformCursor,
+            SetOverlayTransformProjection,
             ShowOverlay,
             HideOverlay,
             IsOverlayVisible,
@@ -528,7 +529,7 @@ public final class OpenVR {
             CloseMessageOverlay;
 
         public IVROverlay(long tableAddress) {
-            PointerBuffer table = memPointerBuffer(tableAddress, 78);
+            PointerBuffer table = memPointerBuffer(tableAddress, 79);
             FindOverlay = table.get(0);
             CreateOverlay = table.get(1);
             DestroyOverlay = table.get(2);
@@ -569,44 +570,45 @@ public final class OpenVR {
             SetOverlayTransformOverlayRelative = table.get(37);
             SetOverlayTransformCursor = table.get(38);
             GetOverlayTransformCursor = table.get(39);
-            ShowOverlay = table.get(40);
-            HideOverlay = table.get(41);
-            IsOverlayVisible = table.get(42);
-            GetTransformForOverlayCoordinates = table.get(43);
-            PollNextOverlayEvent = table.get(44);
-            GetOverlayInputMethod = table.get(45);
-            SetOverlayInputMethod = table.get(46);
-            GetOverlayMouseScale = table.get(47);
-            SetOverlayMouseScale = table.get(48);
-            ComputeOverlayIntersection = table.get(49);
-            IsHoverTargetOverlay = table.get(50);
-            SetOverlayIntersectionMask = table.get(51);
-            TriggerLaserMouseHapticVibration = table.get(52);
-            SetOverlayCursor = table.get(53);
-            SetOverlayCursorPositionOverride = table.get(54);
-            ClearOverlayCursorPositionOverride = table.get(55);
-            SetOverlayTexture = table.get(56);
-            ClearOverlayTexture = table.get(57);
-            SetOverlayRaw = table.get(58);
-            SetOverlayFromFile = table.get(59);
-            GetOverlayTexture = table.get(60);
-            ReleaseNativeOverlayHandle = table.get(61);
-            GetOverlayTextureSize = table.get(62);
-            CreateDashboardOverlay = table.get(63);
-            IsDashboardVisible = table.get(64);
-            IsActiveDashboardOverlay = table.get(65);
-            SetDashboardOverlaySceneProcess = table.get(66);
-            GetDashboardOverlaySceneProcess = table.get(67);
-            ShowDashboard = table.get(68);
-            GetPrimaryDashboardDevice = table.get(69);
-            ShowKeyboard = table.get(70);
-            ShowKeyboardForOverlay = table.get(71);
-            GetKeyboardText = table.get(72);
-            HideKeyboard = table.get(73);
-            SetKeyboardTransformAbsolute = table.get(74);
-            SetKeyboardPositionForOverlay = table.get(75);
-            ShowMessageOverlay = table.get(76);
-            CloseMessageOverlay = table.get(77);
+            SetOverlayTransformProjection = table.get(40);
+            ShowOverlay = table.get(41);
+            HideOverlay = table.get(42);
+            IsOverlayVisible = table.get(43);
+            GetTransformForOverlayCoordinates = table.get(44);
+            PollNextOverlayEvent = table.get(45);
+            GetOverlayInputMethod = table.get(46);
+            SetOverlayInputMethod = table.get(47);
+            GetOverlayMouseScale = table.get(48);
+            SetOverlayMouseScale = table.get(49);
+            ComputeOverlayIntersection = table.get(50);
+            IsHoverTargetOverlay = table.get(51);
+            SetOverlayIntersectionMask = table.get(52);
+            TriggerLaserMouseHapticVibration = table.get(53);
+            SetOverlayCursor = table.get(54);
+            SetOverlayCursorPositionOverride = table.get(55);
+            ClearOverlayCursorPositionOverride = table.get(56);
+            SetOverlayTexture = table.get(57);
+            ClearOverlayTexture = table.get(58);
+            SetOverlayRaw = table.get(59);
+            SetOverlayFromFile = table.get(60);
+            GetOverlayTexture = table.get(61);
+            ReleaseNativeOverlayHandle = table.get(62);
+            GetOverlayTextureSize = table.get(63);
+            CreateDashboardOverlay = table.get(64);
+            IsDashboardVisible = table.get(65);
+            IsActiveDashboardOverlay = table.get(66);
+            SetDashboardOverlaySceneProcess = table.get(67);
+            GetDashboardOverlaySceneProcess = table.get(68);
+            ShowDashboard = table.get(69);
+            GetPrimaryDashboardDevice = table.get(70);
+            ShowKeyboard = table.get(71);
+            ShowKeyboardForOverlay = table.get(72);
+            GetKeyboardText = table.get(73);
+            HideKeyboard = table.get(74);
+            SetKeyboardTransformAbsolute = table.get(75);
+            SetKeyboardPositionForOverlay = table.get(76);
+            ShowMessageOverlay = table.get(77);
+            CloseMessageOverlay = table.get(78);
         }
 
     }

@@ -414,6 +414,17 @@ typedef struct HmdRect2_t
     )
 
     EVROverlayError(
+        "SetOverlayTransformProjection",
+        "Sets the overlay as a projection overlay.",
+
+        VROverlayHandle_t("ulOverlayHandle", ""),
+        ETrackingUniverseOrigin("eTrackingOrigin", ""),
+        HmdMatrix34_t.p("pmatTrackingOriginToOverlayTransform", ""),
+        VROverlayProjection_t.p("pProjection", ""),
+        EVREye("eEye", "")
+    )
+
+    EVROverlayError(
         "ShowOverlay",
         "Shows the VR overlay. For dashboard overlays, only the Dashboard Manager is allowed to call this.",
 

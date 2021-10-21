@@ -22,6 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * struct VREvent_Overlay_t {
  *     uint64_t {@link #overlayHandle};
  *     uint64_t devicePath;
+ *     uint64_t memoryBlockId;
  * }</code></pre>
  */
 @NativeType("struct VREvent_Overlay_t")
@@ -36,10 +37,12 @@ public class VREventOverlay extends Struct {
     /** The struct member offsets. */
     public static final int
         OVERLAYHANDLE,
-        DEVICEPATH;
+        DEVICEPATH,
+        MEMORYBLOCKID;
 
     static {
         Layout layout = __struct(
+            __member(8),
             __member(8),
             __member(8)
         );
@@ -49,6 +52,7 @@ public class VREventOverlay extends Struct {
 
         OVERLAYHANDLE = layout.offsetof(0);
         DEVICEPATH = layout.offsetof(1);
+        MEMORYBLOCKID = layout.offsetof(2);
     }
 
     /**
@@ -70,6 +74,9 @@ public class VREventOverlay extends Struct {
     /** @return the value of the {@code devicePath} field. */
     @NativeType("uint64_t")
     public long devicePath() { return ndevicePath(address()); }
+    /** @return the value of the {@code memoryBlockId} field. */
+    @NativeType("uint64_t")
+    public long memoryBlockId() { return nmemoryBlockId(address()); }
 
     // -----------------------------------
 
@@ -106,6 +113,8 @@ public class VREventOverlay extends Struct {
     public static long noverlayHandle(long struct) { return UNSAFE.getLong(null, struct + VREventOverlay.OVERLAYHANDLE); }
     /** Unsafe version of {@link #devicePath}. */
     public static long ndevicePath(long struct) { return UNSAFE.getLong(null, struct + VREventOverlay.DEVICEPATH); }
+    /** Unsafe version of {@link #memoryBlockId}. */
+    public static long nmemoryBlockId(long struct) { return UNSAFE.getLong(null, struct + VREventOverlay.MEMORYBLOCKID); }
 
     // -----------------------------------
 
@@ -151,6 +160,9 @@ public class VREventOverlay extends Struct {
         /** @return the value of the {@code devicePath} field. */
         @NativeType("uint64_t")
         public long devicePath() { return VREventOverlay.ndevicePath(address()); }
+        /** @return the value of the {@code memoryBlockId} field. */
+        @NativeType("uint64_t")
+        public long memoryBlockId() { return VREventOverlay.nmemoryBlockId(address()); }
 
     }
 

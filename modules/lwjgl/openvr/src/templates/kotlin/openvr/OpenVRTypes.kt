@@ -328,6 +328,7 @@ val VREvent_Overlay_t = struct(Module.OPENVR, "VREventOverlay", nativeName = "VR
 
     uint64_t("overlayHandle", "").links("EVRState_\\w+")
     uint64_t("devicePath", "")
+    uint64_t("memoryBlockId", "")
 }
 
 val VREvent_Status_t = struct(Module.OPENVR, "VREventStatus", nativeName = "VREvent_Status_t", mutable = false) {
@@ -524,6 +525,15 @@ val IntersectionMaskCircle_t = struct(Module.OPENVR, "IntersectionMaskCircle", n
     float("m_flCenterX", "")
     float("m_flCenterY", "")
     float("m_flRadius", "")
+}
+
+val VROverlayProjection_t = struct(Module.OPENVR, "VROverlayProjection", nativeName = "VROverlayProjection_t") {
+    documentation = "Defines the project used in an overlay that is using #SetOverlayTransformProjection()."
+
+    float("fLeft", "tangent of the left side of the frustum")
+    float("fRight", "tangent of the right side of the frustum")
+    float("fTop", "tangent of the top side of the frustum")
+    float("fBottom", "tangent of the bottom side of the frustum")
 }
 
 val VROverlayView_t = struct(Module.OPENVR, "VROverlayView_t", mutable = false) {
