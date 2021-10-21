@@ -138,6 +138,32 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
             documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
         }
     }("memory_unmap", "the memory unmap callback function")
+    nullable..Module.RPMALLOC.callback {
+        void(
+            "RPErrorCallback",
+            "Called when an assert fails, if asserts are enabled. Will use the standard {@code assert()} if this is not set.",
+
+            charASCII.const.p("message", "")
+        ) {
+            documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
+        }
+    }("error_callback", "the error callback function")
+    nullable..Module.RPMALLOC.callback {
+        int(
+            "RPMapFailCallback",
+            """
+            Called when a call to map memory pages fails (out of memory).
+            
+            If this callback is not set or returns zero the library will return a null pointer in the allocation call. If this callback returns non-zero the
+            map call will be retried. The argument passed is the number of bytes that was requested in the map call. Only used if the default system memory map
+            function is used ({@code memory_map} callback is not set).
+            """,
+
+            size_t("size", "")
+        ) {
+            documentation = "Instances of this interface may be set to the ##RPMallocConfig struct."
+        }
+    }("map_fail_callback", "the map fail callback function")
 	size_t(
         "page_size",
         """
