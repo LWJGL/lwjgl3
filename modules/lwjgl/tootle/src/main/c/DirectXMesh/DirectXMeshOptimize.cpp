@@ -1,9 +1,9 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshOptimize.cpp
-//  
+//
 // DirectX Mesh Geometry Library - Mesh optimization
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
@@ -33,7 +33,7 @@ namespace
         }
 
         if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-            return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+            return HRESULT_E_ARITHMETIC_OVERFLOW;
 
         std::unique_ptr<uint32_t[]> tempRemap(new (std::nothrow) uint32_t[nVerts]);
         if (!tempRemap)
@@ -102,7 +102,7 @@ HRESULT DirectX::AttributeSort(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     using intpair_t = std::pair<uint32_t, uint32_t>;
 

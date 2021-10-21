@@ -1,9 +1,9 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshTangentFrame.cpp
-//  
+//
 // DirectX Mesh Geometry Library - Normals, Tangents, and Bi-Tangents Computation
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
@@ -36,12 +36,12 @@ namespace
             return E_INVALIDARG;
 
         if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-            return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+            return HRESULT_E_ARITHMETIC_OVERFLOW;
 
         static constexpr float EPSILON = 0.0001f;
         static const XMVECTORF32 s_flips = { { { 1.f, -1.f, -1.f, 1.f } } };
 
-        ScopedAlignedArrayXMVECTOR temp(static_cast<XMVECTOR*>(_aligned_malloc(sizeof(XMVECTOR) * nVerts * 2, 16)));
+        auto temp = make_AlignedArrayXMVECTOR(uint64_t(nVerts) * 2);
         if (!temp)
             return E_OUTOFMEMORY;
 

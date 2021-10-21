@@ -1,11 +1,11 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshOptimizeTVC.cpp
-//  
+//
 // DirectX Mesh Geometry Library - Mesh optimization
 //
 // Hoppe "Optimization of mesh locality for transparent vertex caching"
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
@@ -53,18 +53,18 @@ namespace
             mMaxSubset = 0;
             mTotalFaces = nFaces;
 
-            for (auto it = subsets.cbegin(); it != subsets.cend(); ++it)
+            for (const auto& it : subsets)
             {
-                if ((uint64_t(it->first) + uint64_t(it->second)) >= UINT32_MAX)
-                    return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+                if ((uint64_t(it.first) + uint64_t(it.second)) >= UINT32_MAX)
+                    return HRESULT_E_ARITHMETIC_OVERFLOW;
 
-                if (it->second > mMaxSubset)
+                if (it.second > mMaxSubset)
                 {
-                    mMaxSubset = it->second;
+                    mMaxSubset = it.second;
                 }
 
-                uint32_t faceOffset = uint32_t(it->first);
-                uint32_t faceMax = uint32_t(it->first + it->second);
+                uint32_t faceOffset = uint32_t(it.first);
+                uint32_t faceMax = uint32_t(it.first + it.second);
 
                 for (uint32_t face = faceOffset; face < faceMax; ++face)
                 {
@@ -174,7 +174,7 @@ namespace
                 return E_POINTER;
 
             if ((uint64_t(faceOffset) + uint64_t(faceCount)) >= UINT32_MAX)
-                return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+                return HRESULT_E_ARITHMETIC_OVERFLOW;
 
             uint32_t faceMax = uint32_t(faceOffset + faceCount);
 
@@ -529,9 +529,9 @@ namespace
 
         memset(faceRemapInverse.get(), 0xff, sizeof(uint32_t) * nFaces);
 
-        for (auto it = subsets.cbegin(); it != subsets.cend(); ++it)
+        for (const auto& it : subsets)
         {
-            hr = status.setSubset(indices, nFaces, it->first, it->second);
+            hr = status.setSubset(indices, nFaces, it.first, it.second);
             if (FAILED(hr))
                 return hr;
 
@@ -550,7 +550,7 @@ namespace
                 for (;;)
                 {
                     assert(face != UNUSED32);
-                    faceRemapInverse[face] = uint32_t(curface + it->first);
+                    faceRemapInverse[face] = uint32_t(curface + it.first);
                     curface += 1;
 
                     // if at end of strip, break out
@@ -615,9 +615,9 @@ namespace
         assert(vertexCache >= restart);
         uint32_t desired = vertexCache - restart;
 
-        for (auto it = subsets.cbegin(); it != subsets.cend(); ++it)
+        for (const auto& it : subsets)
         {
-            hr = status.setSubset(indices, nFaces, it->first, it->second);
+            hr = status.setSubset(indices, nFaces, it.first, it.second);
             if (FAILED(hr))
                 return hr;
 
@@ -691,7 +691,7 @@ namespace
                         assert(curCorner.first != UNUSED32);
                         status.mark(curCorner.first);
 
-                        faceRemapInverse[curCorner.first] = uint32_t(curface + it->first);
+                        faceRemapInverse[curCorner.first] = uint32_t(curface + it.first);
                         curface += 1;
 
                         assert(indices[curCorner.first * 3] != index_t(-1));
@@ -781,7 +781,7 @@ HRESULT DirectX::OptimizeFaces(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     if (vertexCache == OPTFACES_V_STRIPORDER)
     {
@@ -809,7 +809,7 @@ HRESULT DirectX::OptimizeFaces(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     if (vertexCache == OPTFACES_V_STRIPORDER)
     {
@@ -840,7 +840,7 @@ HRESULT DirectX::OptimizeFacesEx(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     if (vertexCache == OPTFACES_V_STRIPORDER)
     {
@@ -869,7 +869,7 @@ HRESULT DirectX::OptimizeFacesEx(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     if (vertexCache == OPTFACES_V_STRIPORDER)
     {

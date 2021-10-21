@@ -1,9 +1,9 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshGSAdjacency.cpp
-//  
+//
 // DirectX Mesh Geometry Library - Geometry Shader adjacency computation
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
@@ -36,11 +36,11 @@ namespace
         if (indices == indicesAdj)
         {
             // Does not support in-place conversion of the index buffer
-            return HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED);
+            return HRESULT_E_NOT_SUPPORTED;
         }
 
         if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-            return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+            return HRESULT_E_ARITHMETIC_OVERFLOW;
 
         size_t inputi = 0;
         size_t outputi = 0;

@@ -3,7 +3,7 @@
 //
 // DirectX Mesh Geometry Library
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
@@ -11,25 +11,37 @@
 
 #pragma once
 
+#include <cstddef>
 #include <cstdint>
 #include <functional>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
+#if defined(WIN32) || defined(_WIN32)
 #if !defined(__d3d11_h__) && !defined(__d3d11_x_h__) && !defined(__d3d12_h__) && !defined(__d3d12_x_h__) && !defined(__XBOX_D3D12_X__)
-#if defined(_XBOX_ONE) && defined(_TITLE)
+#ifdef _GAMING_XBOX_SCARLETT
+#include <d3d12_xs.h>
+#elif defined(_GAMING_XBOX)
+#include <d3d12_x.h>
+#elif defined(_XBOX_ONE) && defined(_TITLE)
 #include <d3d11_x.h>
 #else
 #include <d3d11_1.h>
 #endif
+#endif
+#else // !WIN32
+#include <directx/dxgiformat.h>
+#include <wsl/winadapter.h>
 #endif
 
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 #include <DirectXPackedVector.h>
 
-#define DIRECTX_MESH_VERSION 150
+#define DIRECTX_MESH_VERSION 161
+
 
 namespace DirectX
 {
@@ -80,8 +92,8 @@ namespace DirectX
     {
     public:
         VBReader() noexcept(false);
-        VBReader(VBReader&& moveFrom) noexcept;
-        VBReader& operator= (VBReader&& moveFrom) noexcept;
+        VBReader(VBReader&&) noexcept;
+        VBReader& operator= (VBReader&&) noexcept;
 
         VBReader(VBReader const&) = delete;
         VBReader& operator= (VBReader const&) = delete;
@@ -136,8 +148,8 @@ namespace DirectX
     {
     public:
         VBWriter() noexcept(false);
-        VBWriter(VBWriter&& moveFrom) noexcept;
-        VBWriter& operator= (VBWriter&& moveFrom) noexcept;
+        VBWriter(VBWriter&&) noexcept;
+        VBWriter& operator= (VBWriter&&) noexcept;
 
         VBWriter(VBWriter const&) = delete;
         VBWriter& operator= (VBWriter const&) = delete;
@@ -360,6 +372,15 @@ namespace DirectX
         _Out_writes_opt_(nVerts) uint32_t* vertexRemap,
         _In_ std::function<bool __cdecl(uint32_t v0, uint32_t v1)> weldTest);
         // Welds vertices together based on a test function
+
+    HRESULT __cdecl ConcatenateMesh(
+        _In_ size_t nFaces,
+        _In_ size_t nVerts,
+        _Out_writes_(nFaces) uint32_t* faceDestMap,
+        _Out_writes_(nVerts) uint32_t* vertexDestMap,
+        _Inout_ size_t& totalFaces,
+        _Inout_ size_t& totalVerts) noexcept;
+        // Merge meshes together
 
     //---------------------------------------------------------------------------------
     // Mesh Optimization

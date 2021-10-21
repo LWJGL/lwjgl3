@@ -1,9 +1,9 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshVBWriter.cpp
-//  
+//
 // DirectX Mesh Geometry Library - Vertex Buffer Writer
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
@@ -13,6 +13,10 @@
 
 using namespace DirectX;
 using namespace DirectX::PackedVector;
+
+#ifndef WIN32
+#define _stricmp strcasecmp
+#endif
 
 namespace
 {
@@ -107,9 +111,11 @@ public:
                     mTempSize = mVerts[j];
             }
 
-            mTempBuffer.reset(static_cast<XMVECTOR*>(_aligned_malloc(sizeof(XMVECTOR) * mTempSize, 16)));
-            if (!mTempBuffer)
+            auto temp = make_AlignedArrayXMVECTOR(mTempSize);
+            if (!temp)
                 mTempSize = 0;
+
+            mTempBuffer.swap(temp);
         }
 
         return mTempBuffer.get();
@@ -163,7 +169,7 @@ HRESULT VBWriter::Impl::Initialize(const InputElementDesc* vbDecl, size_t nDecl)
         {
             // Does not currently support instance data layouts
             Release();
-            return HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED);
+            return HRESULT_E_NOT_SUPPORTED;
         }
 
         mInputDesc.push_back(vbDecl[j]);
@@ -257,7 +263,7 @@ HRESULT VBWriter::Impl::Write(const XMVECTOR* buffer, const char* semanticName, 
     }
 
     if (it == range.second)
-        return HRESULT_FROM_WIN32(ERROR_INVALID_NAME);
+        return HRESULT_E_INVALID_NAME;
 
     uint32_t inputSlot = mInputDesc[it->second].InputSlot;
 
@@ -647,26 +653,9 @@ VBWriter::VBWriter() noexcept(false)
 }
 
 
-// Move constructor.
-VBWriter::VBWriter(VBWriter&& moveFrom) noexcept
-    : pImpl(std::move(moveFrom.pImpl))
-{
-}
-
-
-// Move assignment.
-VBWriter& VBWriter::operator= (VBWriter&& moveFrom) noexcept
-{
-    pImpl = std::move(moveFrom.pImpl);
-    return *this;
-}
-
-
-// Public destructor.
-VBWriter::~VBWriter()
-{
-}
-
+VBWriter::VBWriter(VBWriter&&) noexcept = default;
+VBWriter& VBWriter::operator= (VBWriter&&) noexcept = default;
+VBWriter::~VBWriter() = default;
 
 //-------------------------------------------------------------------------------------
 #if defined(__d3d11_h__) || defined(__d3d11_x_h__)

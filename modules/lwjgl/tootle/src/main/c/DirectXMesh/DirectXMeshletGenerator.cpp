@@ -3,7 +3,7 @@
 //  
 // DirectX Mesh Geometry Library - Meshlet Computation
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
@@ -172,12 +172,17 @@ namespace
         _In_reads_(3) const T* tri,
         InlineMeshlet<T>& meshlet)
     {
+        // Cull degenerate triangle and return success
+        // newCount calculation will break if such triangle is passed
+        if (tri[0] == tri[1] || tri[1] == tri[2] || tri[0] == tri[2])
+            return true;
+
         // Are we already full of vertices?
-        if (meshlet.UniqueVertexIndices.size() == maxVerts)
+        if (meshlet.UniqueVertexIndices.size() >= maxVerts)
             return false;
 
         // Are we full, or can we store an additional primitive?
-        if (meshlet.PrimitiveIndices.size() == maxPrims)
+        if (meshlet.PrimitiveIndices.size() >= maxPrims)
             return false;
 
         uint32_t indices[3] = { uint32_t(-1), uint32_t(-1), uint32_t(-1) };
@@ -210,7 +215,8 @@ namespace
         }
 
         // Add the new primitive 
-        meshlet.PrimitiveIndices.emplace_back(MeshletTriangle{ indices[0], indices[1], indices[2] });
+        MeshletTriangle mtri = { indices[0], indices[1], indices[2] };
+        meshlet.PrimitiveIndices.emplace_back(mtri);
 
         return true;
     }
@@ -224,7 +230,7 @@ namespace
         assert(meshlet.UniqueVertexIndices.size() <= maxVerts);
         assert(meshlet.PrimitiveIndices.size() <= maxPrims);
 
-        return meshlet.UniqueVertexIndices.size() == maxVerts || meshlet.PrimitiveIndices.size() == maxPrims;
+        return meshlet.UniqueVertexIndices.size() >= maxVerts || meshlet.PrimitiveIndices.size() >= maxPrims;
     }
 
     //---------------------------------------------------------------------------------

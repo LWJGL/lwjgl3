@@ -1,9 +1,9 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshAdjacency.cpp
-//  
+//
 // DirectX Mesh Geometry Library - Adjacency computation
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
@@ -93,6 +93,7 @@ namespace
 
                 while (iulJ < iulLim)
                 {
+                    _Analysis_assume_(iulJ < nVerts);
                     uint32_t ulJ = index[iulJ];
 
                     if (iulJ + 1 < iulLim)
@@ -644,7 +645,7 @@ HRESULT DirectX::GenerateAdjacencyAndPointReps(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     std::unique_ptr<uint32_t[]> temp;
     if (!pointRep)
@@ -686,7 +687,7 @@ HRESULT DirectX::GenerateAdjacencyAndPointReps(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     std::unique_ptr<uint32_t[]> temp;
     if (!pointRep)
@@ -726,7 +727,7 @@ HRESULT DirectX::ConvertPointRepsToAdjacency(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     std::unique_ptr<uint32_t[]> temp;
     if (!pointRep)
@@ -762,7 +763,7 @@ HRESULT DirectX::ConvertPointRepsToAdjacency(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     std::unique_ptr<uint32_t[]> temp;
     if (!pointRep)

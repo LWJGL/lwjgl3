@@ -1,9 +1,9 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshValidate.cpp
-//  
+//
 // DirectX Mesh Geometry Library - Mesh validation
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
@@ -13,8 +13,25 @@
 
 using namespace DirectX;
 
+#ifndef WIN32
+#include <cstdarg>
+#endif
+
 namespace
 {
+#ifndef WIN32
+    template<size_t sizeOfBuffer>
+    inline int swprintf_s(wchar_t (&buffer)[sizeOfBuffer], const wchar_t* format, ...)
+    {
+        // This is adapter code. It is not a full implementation of swprintf_s!
+        va_list ap;
+        va_start(ap, format);
+        int result = vswprintf(buffer, sizeOfBuffer, format, ap);
+        va_end(ap);
+        return result;
+    }
+#endif
+
     //---------------------------------------------------------------------------------
     // Validates indices and optionally the adjacency information
     //---------------------------------------------------------------------------------
@@ -61,7 +78,7 @@ namespace
 
                     result = false;
 
-                    wchar_t buff[128];
+                    wchar_t buff[128] = {};
                     swprintf_s(buff, L"An invalid index value (%u) was found on face %zu\n", i, face);
                     *msgs += buff;
                 }
@@ -76,7 +93,7 @@ namespace
 
                         result = false;
 
-                        wchar_t buff[128];
+                        wchar_t buff[128] = {};
                         swprintf_s(buff, L"An invalid neighbor index value (%u) was found on face %zu\n", j, face);
                         *msgs += buff;
                     }
@@ -102,7 +119,7 @@ namespace
 
                         result = false;
 
-                        wchar_t buff[128];
+                        wchar_t buff[128] = {};
                         swprintf_s(buff, L"An unused face (%zu) contains 'valid' but ignored vertices (%u,%u,%u)\n", face, i0, i1, i2);
                         *msgs += buff;
                     }
@@ -119,7 +136,7 @@ namespace
 
                                 result = false;
 
-                                wchar_t buff[128];
+                                wchar_t buff[128] = {};
                                 swprintf_s(buff, L"An unused face (%zu) has a neighbor %u\n", face, k);
                                 *msgs += buff;
                             }
@@ -151,7 +168,7 @@ namespace
                     else
                         bad = i0;
 
-                    wchar_t buff[128];
+                    wchar_t buff[128] = {};
                     swprintf_s(buff, L"A point (%u) was found more than once in triangle %zu\n", bad, face);
                     *msgs += buff;
 
@@ -194,7 +211,7 @@ namespace
 
                         result = false;
 
-                        wchar_t buff[256];
+                        wchar_t buff[256] = {};
                         swprintf_s(buff, L"A neighbor triangle (%u) does not reference back to this face (%zu) as expected\n", k, face);
                         *msgs += buff;
                     }
@@ -371,7 +388,7 @@ HRESULT DirectX::Validate(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     if (msgs)
         msgs->clear();
@@ -408,7 +425,7 @@ HRESULT DirectX::Validate(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     if (msgs)
         msgs->clear();

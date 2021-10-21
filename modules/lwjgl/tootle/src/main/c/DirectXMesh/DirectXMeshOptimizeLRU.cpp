@@ -1,12 +1,12 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshOptimizeLRU.cpp
-//  
+//
 // DirectX Mesh Geometry Library - Mesh optimization
 //
 // Forsyth "Linear-Speed Vertex Cache Optimisation"
 // https://tomforsyth1000.github.io/papers/fast_vert_cache_opt.html
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
@@ -78,9 +78,15 @@ namespace
     float s_vertexCacheScores[kMaxVertexCacheSize + 1][kMaxVertexCacheSize];
     float s_vertexValenceScores[kMaxPrecomputedVertexValenceScores];
 
+#ifdef WIN32
     static INIT_ONCE s_initOnce = INIT_ONCE_STATIC_INIT;
 
     BOOL WINAPI ComputeVertexScores(PINIT_ONCE, PVOID, PVOID*) noexcept
+#else
+    std::once_flag s_initOnce;
+
+    void ComputeVertexScores() noexcept
+#endif
     {
         for (uint32_t cacheSize = 0; cacheSize <= kMaxVertexCacheSize; ++cacheSize)
         {
@@ -95,7 +101,9 @@ namespace
             s_vertexValenceScores[valence] = ComputeVertexValenceScore(valence);
         }
 
+#ifdef WIN32
         return TRUE;
+#endif
     }
 
     float FindVertexScore(uint32_t numActiveFaces, uint32_t cachePosition, uint32_t vertexCacheSize) noexcept
@@ -508,9 +516,13 @@ HRESULT DirectX::OptimizeFacesLRU(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
+#ifdef WIN32
     InitOnceExecuteOnce(&s_initOnce, ComputeVertexScores, nullptr, nullptr);
+#else
+    std::call_once(s_initOnce, ComputeVertexScores);
+#endif
 
     return OptimizeFacesImpl<uint16_t>(indices, static_cast<uint32_t>(nFaces * 3), faceRemap, lruCacheSize, 0);
 }
@@ -529,9 +541,13 @@ HRESULT DirectX::OptimizeFacesLRU(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
+#ifdef WIN32
     InitOnceExecuteOnce(&s_initOnce, ComputeVertexScores, nullptr, nullptr);
+#else
+    std::call_once(s_initOnce, ComputeVertexScores);
+#endif
 
     return OptimizeFacesImpl<uint32_t>(indices, static_cast<uint32_t>(nFaces * 3), faceRemap, lruCacheSize, 0);
 }
@@ -553,9 +569,13 @@ HRESULT DirectX::OptimizeFacesLRUEx(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
+#ifdef WIN32
     InitOnceExecuteOnce(&s_initOnce, ComputeVertexScores, nullptr, nullptr);
+#else
+    std::call_once(s_initOnce, ComputeVertexScores);
+#endif
 
     auto subsets = ComputeSubsets(attributes, nFaces);
 
@@ -564,22 +584,22 @@ HRESULT DirectX::OptimizeFacesLRUEx(
 
     memset(faceRemap, 0, sizeof(uint32_t) * nFaces);
 
-    for (auto it = subsets.cbegin(); it != subsets.cend(); ++it)
+    for (const auto& it : subsets)
     {
-        if (it->first >= nFaces)
+        if (it.first >= nFaces)
             return E_UNEXPECTED;
 
-        if ((uint64_t(it->first) + uint64_t(it->second)) >= UINT32_MAX)
-            return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        if ((uint64_t(it.first) + uint64_t(it.second)) >= UINT32_MAX)
+            return HRESULT_E_ARITHMETIC_OVERFLOW;
 
-        uint32_t faceMax = uint32_t(it->first + it->second);
+        uint32_t faceMax = uint32_t(it.first + it.second);
 
         if (faceMax > nFaces)
             return E_UNEXPECTED;
 
         HRESULT hr = OptimizeFacesImpl<uint16_t>(
-            &indices[it->first * 3], static_cast<uint32_t>(it->second * 3),
-            &faceRemap[it->first], lruCacheSize, uint32_t(it->first));
+            &indices[it.first * 3], static_cast<uint32_t>(it.second * 3),
+            &faceRemap[it.first], lruCacheSize, uint32_t(it.first));
         if (FAILED(hr))
             return hr;
     }
@@ -602,9 +622,13 @@ HRESULT DirectX::OptimizeFacesLRUEx(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
+#ifdef WIN32
     InitOnceExecuteOnce(&s_initOnce, ComputeVertexScores, nullptr, nullptr);
+#else
+    std::call_once(s_initOnce, ComputeVertexScores);
+#endif
 
     auto subsets = ComputeSubsets(attributes, nFaces);
 
@@ -613,22 +637,22 @@ HRESULT DirectX::OptimizeFacesLRUEx(
 
     memset(faceRemap, 0, sizeof(uint32_t) * nFaces);
 
-    for (auto it = subsets.cbegin(); it != subsets.cend(); ++it)
+    for (const auto& it : subsets)
     {
-        if (it->first >= nFaces)
+        if (it.first >= nFaces)
             return E_UNEXPECTED;
 
-        if ((uint64_t(it->first) + uint64_t(it->second)) >= UINT32_MAX)
-            return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        if ((uint64_t(it.first) + uint64_t(it.second)) >= UINT32_MAX)
+            return HRESULT_E_ARITHMETIC_OVERFLOW;
 
-        uint32_t faceMax = uint32_t(it->first + it->second);
+        uint32_t faceMax = uint32_t(it.first + it.second);
 
         if (faceMax > nFaces)
             return E_UNEXPECTED;
 
         HRESULT hr = OptimizeFacesImpl<uint32_t>(
-            &indices[it->first * 3], static_cast<uint32_t>(it->second * 3),
-            &faceRemap[it->first], lruCacheSize, uint32_t(it->first));
+            &indices[it.first * 3], static_cast<uint32_t>(it.second * 3),
+            &faceRemap[it.first], lruCacheSize, uint32_t(it.first));
         if (FAILED(hr))
             return hr;
     }

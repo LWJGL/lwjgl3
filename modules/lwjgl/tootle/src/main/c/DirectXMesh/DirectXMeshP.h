@@ -1,9 +1,9 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshP.h
-//  
+//
 // DirectX Mesh Geometry Library
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
@@ -57,9 +57,13 @@
 #pragma clang diagnostic ignored "-Wreserved-id-macro"
 #endif
 
+#if defined(WIN32) || defined(_WIN32)
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+
 #pragma warning(push)
 #pragma warning(disable : 4005)
-#define WIN32_LEAN_AND_MEAN
 #define NOMINMAX
 #define NODRAWTEXT
 #define NOGDI
@@ -69,37 +73,65 @@
 #define NOHELP
 #pragma warning(pop)
 
+#include <Windows.h>
+
 #ifndef _WIN32_WINNT_WIN10
 #define _WIN32_WINNT_WIN10 0x0A00
 #endif
 
-#include <Windows.h>
-
-#if defined(_XBOX_ONE) && defined(_TITLE)
+#ifdef _GAMING_XBOX_SCARLETT
+#pragma warning(push)
+#pragma warning(disable: 5204 5249)
+#include <d3d12_xs.h>
+#pragma warning(pop)
+#elif defined(_GAMING_XBOX)
+#pragma warning(push)
+#pragma warning(disable: 5204)
+#include <d3d12_x.h>
+#pragma warning(pop)
+#elif defined(_XBOX_ONE) && defined(_TITLE)
 #include <d3d12_x.h>
 #include <d3d11_x.h>
 #elif (_WIN32_WINNT >= _WIN32_WINNT_WIN10)
+#ifdef USING_DIRECTX_HEADERS
+#include <directx/dxgiformat.h>
+#include <directx/d3d12.h>
+#else
 #include <d3d12.h>
+#endif
 #include <d3d11_4.h>
 #else
 #include <d3d11_1.h>
 #endif
-
-#define _XM_NO_XMVECTOR_OVERLOADS_
-
-#include <DirectXMath.h>
-
-#include <assert.h>
-#include <malloc.h>
+#else // !WIN32
+#include <wsl/winadapter.h>
+#include <wsl/wrladapter.h>
+#include <directx/d3d12.h>
+#endif
 
 #include <array>
 #include <algorithm>
+#include <cassert>
+#include <cmath>
+#include <cstdlib>
+#include <cstring>
+#include <cwchar>
 #include <map>
+#include <new>
 #include <string>
+#include <tuple>
 #include <unordered_map>
 #include <unordered_set>
 
+#ifndef WIN32
+#include <mutex>
+#endif
+
+#define _XM_NO_XMVECTOR_OVERLOADS_
+
 #include "DirectXMesh.h"
+
+#include <malloc.h>
 
 #include "scoped.h"
 
@@ -107,6 +139,19 @@
 #define XBOX_DXGI_FORMAT_R10G10B10_SNORM_A2_UNORM DXGI_FORMAT(189)
 #endif
 
+// HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW)
+#define HRESULT_E_ARITHMETIC_OVERFLOW static_cast<HRESULT>(0x80070216L)
+
+// HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED)
+#define HRESULT_E_NOT_SUPPORTED static_cast<HRESULT>(0x80070032L)
+
+// HRESULT_FROM_WIN32(ERROR_INVALID_NAME)
+#define HRESULT_E_INVALID_NAME static_cast<HRESULT>(0x8007007BL)
+
+// E_BOUNDS
+#ifndef E_BOUNDS
+#define E_BOUNDS static_cast<HRESULT>(0x8000000BL)
+#endif
 
 namespace DirectX
 {

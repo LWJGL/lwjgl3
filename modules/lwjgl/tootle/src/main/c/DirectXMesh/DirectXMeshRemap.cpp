@@ -1,9 +1,9 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshRemap.cpp
-//  
+//
 // DirectX Mesh Geometry Library - Remap functions for applying face/vertex mappings
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
@@ -285,7 +285,7 @@ namespace
             return E_INVALIDARG;
 
         if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-            return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+            return HRESULT_E_ARITHMETIC_OVERFLOW;
 
         if (nVerts >= index_t(-1))
             return E_INVALIDARG;
@@ -348,7 +348,7 @@ namespace
             return E_INVALIDARG;
 
         if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-            return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+            return HRESULT_E_ARITHMETIC_OVERFLOW;
 
         if (nVerts >= index_t(-1))
             return E_INVALIDARG;
@@ -413,10 +413,10 @@ HRESULT DirectX::ReorderIB(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     if (ibin == ibout)
-        return HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED);
+        return HRESULT_E_NOT_SUPPORTED;
 
     return ReorderFaces<uint16_t>(ibin, nFaces, nullptr, faceRemap, ibout, nullptr);
 }
@@ -431,7 +431,7 @@ HRESULT DirectX::ReorderIB(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     return SwapFaces<uint16_t>(ib, nFaces, nullptr, faceRemap);
 }
@@ -449,10 +449,10 @@ HRESULT DirectX::ReorderIB(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     if (ibin == ibout)
-        return HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED);
+        return HRESULT_E_NOT_SUPPORTED;
 
     return ReorderFaces<uint32_t>(ibin, nFaces, nullptr, faceRemap, ibout, nullptr);
 }
@@ -467,7 +467,7 @@ HRESULT DirectX::ReorderIB(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     return SwapFaces<uint32_t>(ib, nFaces, nullptr, faceRemap);
 }
@@ -489,10 +489,10 @@ HRESULT DirectX::ReorderIBAndAdjacency(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     if ((ibin == ibout) || (adjin == adjout))
-        return HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED);
+        return HRESULT_E_NOT_SUPPORTED;
 
     return ReorderFaces<uint16_t>(ibin, nFaces, adjin, faceRemap, ibout, adjout);
 }
@@ -508,7 +508,7 @@ HRESULT DirectX::ReorderIBAndAdjacency(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     return SwapFaces<uint16_t>(ib, nFaces, adj, faceRemap);
 }
@@ -528,10 +528,10 @@ HRESULT DirectX::ReorderIBAndAdjacency(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     if ((ibin == ibout) || (adjin == adjout))
-        return HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED);
+        return HRESULT_E_NOT_SUPPORTED;
 
     return ReorderFaces<uint32_t>(ibin, nFaces, adjin, faceRemap, ibout, adjout);
 }
@@ -547,7 +547,7 @@ HRESULT DirectX::ReorderIBAndAdjacency(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     return SwapFaces<uint32_t>(ib, nFaces, adj, faceRemap);
 }
@@ -636,10 +636,10 @@ HRESULT DirectX::FinalizeVB(
         return E_INVALIDARG;
 
     if ((uint64_t(nVerts) + uint64_t(nDupVerts)) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     if (vbin == vbout)
-        return HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED);
+        return HRESULT_E_NOT_SUPPORTED;
 
     size_t newVerts = nVerts + nDupVerts;
 
@@ -734,14 +734,14 @@ HRESULT DirectX::FinalizeVBAndPointReps(
         return E_INVALIDARG;
 
     if ((uint64_t(nVerts) + uint64_t(nDupVerts)) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     if (vbin == vbout)
-        return HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED);
+        return HRESULT_E_NOT_SUPPORTED;
 
     size_t newVerts = nVerts + nDupVerts;
 
-    std::unique_ptr<uint32_t[]> vertexRemapInverse;   
+    std::unique_ptr<uint32_t[]> vertexRemapInverse;
     if (vertexRemap)
     {
         vertexRemapInverse.reset(new (std::nothrow) uint32_t[newVerts]);
@@ -890,7 +890,7 @@ HRESULT DirectX::CompactVB(
         return E_INVALIDARG;
 
     if (vbin == vbout)
-        return HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED);
+        return HRESULT_E_NOT_SUPPORTED;
 
     size_t newVerts = nVerts - trailingUnused;
 
@@ -921,4 +921,3 @@ HRESULT DirectX::CompactVB(
 
     return S_OK;
 }
-

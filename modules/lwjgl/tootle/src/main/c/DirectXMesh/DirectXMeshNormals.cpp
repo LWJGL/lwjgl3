@@ -1,9 +1,9 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshNormals.cpp
-//  
+//
 // DirectX Mesh Geometry Library - Normal computation
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=324981
@@ -24,7 +24,7 @@ namespace
         _In_reads_(nVerts) const XMFLOAT3* positions, size_t nVerts,
         bool cw, _Out_writes_(nVerts) XMFLOAT3* normals) noexcept
     {
-        ScopedAlignedArrayXMVECTOR temp(static_cast<XMVECTOR*>(_aligned_malloc(sizeof(XMVECTOR) * nVerts, 16)));
+        auto temp = make_AlignedArrayXMVECTOR(nVerts);
         if (!temp)
             return E_OUTOFMEMORY;
 
@@ -93,7 +93,7 @@ namespace
         _In_reads_(nVerts) const XMFLOAT3* positions, size_t nVerts,
         bool cw, _Out_writes_(nVerts) XMFLOAT3* normals) noexcept
     {
-        ScopedAlignedArrayXMVECTOR temp(static_cast<XMVECTOR*>(_aligned_malloc(sizeof(XMVECTOR) * nVerts, 16)));
+        auto temp = make_AlignedArrayXMVECTOR(nVerts);
         if (!temp)
             return E_OUTOFMEMORY;
 
@@ -183,7 +183,7 @@ namespace
         _In_reads_(nVerts) const XMFLOAT3* positions, size_t nVerts,
         bool cw, _Out_writes_(nVerts) XMFLOAT3* normals) noexcept
     {
-        ScopedAlignedArrayXMVECTOR temp(static_cast<XMVECTOR*>(_aligned_malloc(sizeof(XMVECTOR) * nVerts, 16)));
+        auto temp = make_AlignedArrayXMVECTOR(nVerts);
         if (!temp)
             return E_OUTOFMEMORY;
 
@@ -280,7 +280,7 @@ HRESULT DirectX::ComputeNormals(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     bool cw = (flags & CNORM_WIND_CW) ? true : false;
 
@@ -314,7 +314,7 @@ HRESULT DirectX::ComputeNormals(
         return E_INVALIDARG;
 
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
-        return HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW);
+        return HRESULT_E_ARITHMETIC_OVERFLOW;
 
     bool cw = (flags & CNORM_WIND_CW) ? true : false;
 
