@@ -27,19 +27,100 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     IntConstant(
         "Library version.",
 
-        "VERSION_MAJOR".."2",
+        "VERSION_MAJOR".."5",
         "VERSION_MINOR".."0"
     )
 
     EnumConstant(
         "",
-        
+
+        "16_SHIFT_MASK".enum(0x1F),
         "32_SHIFT_MASK".enum(0x1F),
         "64_SHIFT_MASK".enum(0x3F),
         "ADD_MARKER".enum(0x40),
         "NEGATIVE_DIVISOR".enum(0x80)
     )
 
+    NativeName("libdivide_s16_gen")..internal..libdivide_s16_t("s16_gen_ref", "", int16_t("denom", ""))
+    customMethod("""
+    @NativeType("struct libdivide_s16_t")
+    public static LibDivideS16 libdivide_s16_gen(@NativeType("int16_t") short denom, @NativeType("struct libdivide_s16_t") LibDivideS16 __result) {
+        if (denom == 0) {
+            throw new IllegalArgumentException("divider must be != 0");
+        }
+
+        int magic, more;
+
+        int absD          = denom < 0 ? -denom : denom;
+        int floor_log_2_d = 31 - Integer.numberOfLeadingZeros(absD);
+
+        if ((absD & (absD - 1)) == 0) {
+            magic = 0;
+            more = floor_log_2_d | (denom < 0 ? LIBDIVIDE_NEGATIVE_DIVISOR : 0);
+        } else {
+            int l = 1 << (15 + floor_log_2_d);
+
+            magic = l / absD;
+            int rem = l % absD;
+
+            if (absD - rem < 1 << floor_log_2_d) {
+                more = floor_log_2_d - 1;
+            } else {
+                more = floor_log_2_d | LIBDIVIDE_ADD_MARKER;
+                magic <<= 1;
+            }
+
+            magic++;
+            if (denom < 0) {
+                more |= LIBDIVIDE_NEGATIVE_DIVISOR;
+                magic = -magic;
+            }
+        }
+
+        __result.magic((short)magic);
+        __result.more((byte)more);
+        return __result;
+    }""")
+
+    NativeName("libdivide_u16_gen")..internal..libdivide_u16_t("u16_gen_ref", "", uint16_t("denom", ""))
+    customMethod("""
+    @NativeType("struct libdivide_u16_t")
+    public static LibDivideU16 libdivide_u16_gen(@NativeType("uint16_t") short denom, @NativeType("struct libdivide_u16_t") LibDivideU16 __result) {
+        if (denom == 0) {
+            throw new IllegalArgumentException("divider must be != 0");
+        }
+
+        int d = Short.toUnsignedInt(denom);
+
+        int magic, more;
+
+        int floor_log_2_d = 31 - Integer.numberOfLeadingZeros(d);
+
+        if ((d & (d - 1)) == 0) {
+            magic = 0;
+            more = floor_log_2_d;
+        } else {
+            int l = 1 << (16 + floor_log_2_d);
+
+            magic = Integer.divideUnsigned(l, d);
+            int rem = l - magic * d;
+
+            if (d - rem < 1 << floor_log_2_d) {
+                more = floor_log_2_d;
+            } else {
+                more = floor_log_2_d | LIBDIVIDE_ADD_MARKER;
+                magic <<= 1;
+            }
+
+            magic++;
+        }
+
+        __result.magic((short)magic);
+        __result.more((byte)more);
+        return __result;
+    }""")
+
+    
     NativeName("libdivide_s32_gen")..internal..libdivide_s32_t("s32_gen_ref", "", int32_t("denom", ""))
     customMethod("""
     @NativeType("struct libdivide_s32_t")
@@ -62,14 +143,11 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
             magic = (int)(l / absD);
             int rem = (int)(l % absD);
 
-            if (Integer.compareUnsigned(absD - rem, 1 << floor_log_2_d) < 0) {
+            if (absD - rem < 1 << floor_log_2_d) {
                 more = floor_log_2_d - 1;
             } else {
                 more = floor_log_2_d | LIBDIVIDE_ADD_MARKER;
                 magic <<= 1;
-                if (Integer.compareUnsigned(rem << 1, rem) < 0 || Integer.compareUnsigned(absD, rem << 1) < 0) {
-                    magic++;
-                }
             }
 
             magic++;
@@ -110,9 +188,6 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
             } else {
                 more = floor_log_2_d | LIBDIVIDE_ADD_MARKER;
                 magic <<= 1;
-                if (Integer.compareUnsigned(denom, rem << 1) < 0 || Integer.compareUnsigned(rem << 1, rem) < 0) {
-                    magic++;
-                }
             }
 
             magic++;
@@ -144,14 +219,11 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
             magic = libdivide_128_div_64_to_64(1L << (floor_log_2_d - 1), 0L, absD, __result.address());
             long rem = __result.magic();
 
-            if (Long.compareUnsigned(absD - rem, 1L << floor_log_2_d) < 0) {
+            if (absD - rem < 1L << floor_log_2_d) {
                 more = floor_log_2_d - 1;
             } else {
                 more = floor_log_2_d | LIBDIVIDE_ADD_MARKER;
                 magic <<= 1;
-                if (Long.compareUnsigned(rem << 1, rem) < 0 || Long.compareUnsigned(absD, rem << 1) < 0) {
-                    magic++;
-                }
             }
 
             magic++;
@@ -191,9 +263,6 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
             } else {
                 more = floor_log_2_d | LIBDIVIDE_ADD_MARKER;
                 magic <<= 1;
-                if (Long.compareUnsigned(denom, rem << 1) < 0 || Long.compareUnsigned(rem << 1, rem) < 0) {
-                    magic++;
-                }
             }
 
             magic++;
@@ -203,7 +272,84 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         __result.more((byte)more);
         return __result;
     }""")
-    
+
+    NativeName("libdivide_s16_branchfree_gen")..internal..libdivide_s16_branchfree_t("s16_branchfree_gen_ref", "", int16_t("denom", ""))
+    customMethod("""
+    @NativeType("struct libdivide_s16_branchfree_t")
+    public static LibDivideS16BranchFree libdivide_s16_branchfree_gen(@NativeType("int16_t") short denom, @NativeType("struct libdivide_s16_branchfree_t") LibDivideS16BranchFree __result) {
+        if (denom == 0) {
+            throw new IllegalArgumentException("divider must be != 0");
+        }
+
+        int magic, more;
+
+        int absD          = denom < 0 ? -denom : denom;
+        int floor_log_2_d = 31 - Integer.numberOfLeadingZeros(absD);
+
+        if ((absD & (absD - 1)) == 0) {
+            magic = 0;
+            more = floor_log_2_d | (denom < 0 ? LIBDIVIDE_NEGATIVE_DIVISOR : 0);
+        } else {
+            int l = 1 << (15 + floor_log_2_d);
+
+            magic = l / absD;
+            int rem = l % absD;
+
+            magic = (magic << 1) + 1;
+            if (absD < rem << 1) {
+                magic++;
+            }
+
+            more = floor_log_2_d | LIBDIVIDE_ADD_MARKER;
+            if (denom < 0) {
+                more |= LIBDIVIDE_NEGATIVE_DIVISOR;
+            }
+        }
+
+        __result.magic((short)magic);
+        __result.more((byte)more);
+        return __result;
+    }""")
+
+    NativeName("libdivide_u16_branchfree_gen")..internal..libdivide_u16_branchfree_t("u16_branchfree_gen_ref", "", uint16_t("denom", ""))
+    customMethod("""
+    @NativeType("struct libdivide_u16_branchfree_t")
+    public static LibDivideU16BranchFree libdivide_u16_branchfree_gen(@NativeType("uint16_t") short denom, @NativeType("struct libdivide_u16_branchfree_t") LibDivideU16BranchFree __result) {
+        if (denom == 0) {
+            throw new IllegalArgumentException("divider must be != 0");
+        }
+        if (denom == 1) {
+            throw new IllegalArgumentException("branchfree divider must be != 1");
+        }
+
+        int d = Short.toUnsignedInt(denom);
+
+        int magic, more;
+
+        int floor_log_2_d = 31 - Integer.numberOfLeadingZeros(d);
+
+        if ((d & (d - 1)) == 0) {
+            magic = 0;
+            more = floor_log_2_d - 1;
+        } else {
+            int l = 1 << (16 + floor_log_2_d);
+
+            magic = Integer.divideUnsigned(l, d);
+            int rem = l - magic * d;
+
+            magic = (magic << 1) + 1;
+            if (d < rem << 1) {
+                magic++;
+            }
+
+            more = floor_log_2_d | LIBDIVIDE_ADD_MARKER;
+        }
+
+        __result.magic((short)magic);
+        __result.more((byte)(more & LIBDIVIDE_16_SHIFT_MASK));
+        return __result;
+    }""")
+
     NativeName("libdivide_s32_branchfree_gen")..internal..libdivide_s32_branchfree_t("s32_branchfree_gen_ref", "", int32_t("denom", ""))
     customMethod("""
     @NativeType("struct libdivide_s32_branchfree_t")
@@ -227,7 +373,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
             int rem = (int)(l % absD);
 
             magic = (magic << 1) + 1;
-            if (Integer.compareUnsigned(rem << 1, rem) < 0 || Integer.compareUnsigned(absD, rem << 1) < 0) {
+            if (Integer.compareUnsigned(absD, rem << 1) < 0) {
                 magic++;
             }
 
@@ -299,7 +445,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         } else {
             magic = (libdivide_128_div_64_to_64(1L << (floor_log_2_d - 1), 0L, absD, __result.address()) << 1) + 1;
             long rem = __result.magic();
-            if (Long.compareUnsigned(rem << 1, rem) < 0 || Long.compareUnsigned(absD, rem << 1) < 0) {
+            if (Long.compareUnsigned(absD, rem << 1) < 0) {
                 magic++;
             }
 
@@ -347,6 +493,53 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         __result.magic(magic);
         __result.more((byte)(more & LIBDIVIDE_64_SHIFT_MASK));
         return __result;
+    }""")
+
+    NativeName("libdivide_s16_do")..internal..int16_t("s16_do_ref", "", int16_t("numer", ""), libdivide_s16_t.const.p("denom", ""))
+    customMethod(
+        """
+    public static short libdivide_s16_do(@NativeType("int16_t") short numer, @NativeType("struct libdivide_s16_t const *") LibDivideS16 denom) {
+        byte more  = denom.more();
+        int  shift = more & LIBDIVIDE_16_SHIFT_MASK;
+
+        if (denom.magic() == 0) {
+            int sign = more >> 7;
+            int mask = (1 << shift) - 1;
+            int q    = numer + ((numer >> 15) & mask);
+            q >>= shift;
+            q = (q ^ sign) - sign;
+            return (short)q;
+        } else {
+            int uq = libdivide_mullhi_s16(denom.magic(), numer);
+            if ((more & LIBDIVIDE_ADD_MARKER) != 0) {
+                int sign = more >> 7;
+                uq += (numer ^ sign) - sign;
+            }
+            int q = uq;
+            q >>= shift;
+            q += (q < 0 ? 1 : 0);
+            return (short)q;
+        }
+    }""")
+
+    NativeName("libdivide_u16_do")..internal..uint16_t("u16_do_ref", "", uint16_t("numer", ""), libdivide_u16_t.const.p("denom", ""))
+    customMethod(
+        """
+    public static short libdivide_u16_do(@NativeType("uint16_t") short numer, @NativeType("struct libdivide_u16_t const *") LibDivideU16 denom) {
+        int n = Short.toUnsignedInt(numer);
+
+        byte more = denom.more();
+        if (denom.magic() == 0) {
+            return (short)(n >>> more);
+        } else {
+            int q = libdivide_mullhi_u16(denom.magic(), numer);
+            if ((more & LIBDIVIDE_ADD_MARKER) != 0) {
+                int t = ((n - q) >>> 1) + q;
+                return (short)(t >>> (more & LIBDIVIDE_16_SHIFT_MASK));
+            } else {
+                return (short)(q >>> more);
+            }
+        }
     }""")
 
     NativeName("libdivide_s32_do")..internal..int32_t("s32_do_ref", "", int32_t("numer", ""), libdivide_s32_t.const.p("denom", ""))
@@ -440,6 +633,36 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         }
     }""")
 
+    NativeName("libdivide_s16_branchfree_do")..internal..int16_t("s16_branchfree_do_ref", "", int16_t("numer", ""), libdivide_s16_branchfree_t.const.p("denom", ""))
+    customMethod(
+        """
+    public static short libdivide_s16_branchfree_do(@NativeType("int16_t") short numer, @NativeType("struct libdivide_s16_branchfree_t const *") LibDivideS16BranchFree denom) {
+        byte  more  = denom.more();
+        int   shift = more & LIBDIVIDE_16_SHIFT_MASK;
+        int   sign  = more >> 7;
+        short magic = denom.magic();
+        int   q     = libdivide_mullhi_s16(magic, numer);
+        q += numer;
+
+        int q_sign = q >> 15;
+        q += q_sign & ((1 << shift) - (magic == 0 ? 1 : 0));
+
+        q >>= shift;
+
+        q = (q ^ sign) - sign;
+
+        return (short)q;
+    }""")
+
+    NativeName("libdivide_u16_branchfree_do")..internal..uint16_t("u16_branchfree_do_ref", "", uint16_t("numer", ""), libdivide_u16_branchfree_t.const.p("denom", ""))
+    customMethod(
+        """
+    public static short libdivide_u16_branchfree_do(@NativeType("uint16_t") short numer, @NativeType("struct libdivide_u16_branchfree_t const *") LibDivideU16BranchFree denom) {
+        int q = libdivide_mullhi_u16(denom.magic(), numer);
+        int t = ((Short.toUnsignedInt(numer) - q) >>> 1) + q;
+        return (short)(t >>> denom.more());
+    }""")
+    
     NativeName("libdivide_s32_branchfree_do")..internal..int32_t("s32_branchfree_do_ref", "", int32_t("numer", ""), libdivide_s32_branchfree_t.const.p("denom", ""))
     customMethod(
         """
@@ -499,11 +722,15 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return t >>> denom.more();
     }""")
 
+    int16_t("s16_recover", "", libdivide_s16_t.const.p("denom", ""))
+    uint16_t("u16_recover", "", libdivide_u16_t.const.p("denom", ""))
     int32_t("s32_recover", "", libdivide_s32_t.const.p("denom", ""))
     uint32_t("u32_recover", "", libdivide_u32_t.const.p("denom", ""))
     int64_t("s64_recover", "", libdivide_s64_t.const.p("denom", ""))
     uint64_t("u64_recover", "", libdivide_u64_t.const.p("denom", ""))
 
+    int16_t("s16_branchfree_recover", "", libdivide_s16_branchfree_t.const.p("denom", ""))
+    uint16_t("u16_branchfree_recover", "", libdivide_u16_branchfree_t.const.p("denom", ""))
     int32_t("s32_branchfree_recover", "", libdivide_s32_branchfree_t.const.p("denom", ""))
     uint32_t("u32_branchfree_recover", "", libdivide_u32_branchfree_t.const.p("denom", ""))
     int64_t("s64_branchfree_recover", "", libdivide_s64_branchfree_t.const.p("denom", ""))
@@ -512,7 +739,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     // Helper methods
 
     customMethod("""
-     private static long libdivide_128_div_64_to_64(long u1, long u0, long v, long remainder) {
+    private static long libdivide_128_div_64_to_64(long u1, long u0, long v, long remainder) {
         long b = (1L << 32);
 
         long un64, un10;
@@ -559,6 +786,14 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
 
         memPutLong(remainder, (un21 * b + un0 - q0 * v) >>> s);
         return q1 * b + q0;
+    }
+
+    private static int libdivide_mullhi_s16(short x, short y) {
+        return (x * y) >> 16;
+    }
+
+    private static int libdivide_mullhi_u16(short x, short y) {
+        return ((x & 0xFFFF) * (y & 0xFFFF)) >>> 16;
     }
 
     private static int libdivide_mullhi_s32(int x, int y) {

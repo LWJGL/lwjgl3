@@ -6,6 +6,26 @@ package libdivide
 
 import org.lwjgl.generator.*
 
+val libdivide_u16_t = struct(Module.LIBDIVIDE, "LibDivideU16", nativeName = "struct libdivide_u16_t") {
+    uint16_t("magic", "")
+    uint8_t("more", "")
+}
+
+val libdivide_s16_t = struct(Module.LIBDIVIDE, "LibDivideS16", nativeName = "struct libdivide_s16_t") {
+    int16_t("magic", "")
+    uint8_t("more", "")
+}
+
+val libdivide_u16_branchfree_t = struct(Module.LIBDIVIDE, "LibDivideU16BranchFree", nativeName = "struct libdivide_u16_branchfree_t") {
+    uint16_t("magic", "")
+    uint8_t("more", "")
+}
+
+val libdivide_s16_branchfree_t = struct(Module.LIBDIVIDE, "LibDivideS16BranchFree", nativeName = "struct libdivide_s16_branchfree_t") {
+    int16_t("magic", "")
+    uint8_t("more", "")
+}
+
 val libdivide_u32_t = struct(Module.LIBDIVIDE, "LibDivideU32", nativeName = "struct libdivide_u32_t") {
     uint32_t("magic", "")
     uint8_t("more", "")

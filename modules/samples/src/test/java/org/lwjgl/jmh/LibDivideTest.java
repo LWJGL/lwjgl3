@@ -24,21 +24,34 @@ public class LibDivideTest {
     @Param(value = {"3"})
     private int denom;
 
+    private short[]  numers16;
     private int[]  numers32;
     private long[] numers64;
 
     @Setup
     public void setup() {
+        numers16 = new short[size];
         numers32 = new int[size];
         numers64 = new long[size];
 
         ThreadLocalRandom rand = ThreadLocalRandom.current();
+        for (int i = 0; i < numers16.length; i++) {
+            numers16[i] = (short)rand.nextInt(1 << 16);
+        }
         for (int i = 0; i < numers32.length; i++) {
             numers32[i] = rand.nextInt();
         }
         for (int i = 0; i < numers64.length; i++) {
             numers64[i] = rand.nextLong();
         }
+
+        int ref16 = s16();
+        assertEquals(s16_1_do(), ref16);
+        assertEquals(s16_2_branchfree(), ref16);
+
+        ref16 = u16();
+        assertEquals(u16_1_do(), ref16);
+        assertEquals(u16_2_branchfree(), ref16);
 
         int ref32 = s32();
         assertEquals(s32_1_do(), ref32);
@@ -55,6 +68,80 @@ public class LibDivideTest {
         ref64 = u64();
         assertEquals(u64_1_do(), ref64);
         assertEquals(u64_2_branchfree(), ref64);
+    }
+
+    // ----------------------------------------------------------------
+    // ---------------------------- 16-bit ----------------------------
+    // ----------------------------------------------------------------
+
+    @Benchmark
+    public int s16() {
+        int sum = 0;
+        for (int n : numers16) {
+            sum += (short)(n / denom);
+        }
+        return sum;
+    }
+
+    @Benchmark
+    public int s16_1_do() {
+        int sum = 0;
+        try (MemoryStack stack = stackPush()) {
+            LibDivideS16 magic = LibDivideS16.malloc(stack);
+            libdivide_s16_gen((short)denom, magic);
+            for (short n : numers16) {
+                sum += libdivide_s16_do(n, magic);
+            }
+        }
+        return sum;
+    }
+
+    @Benchmark
+    public int s16_2_branchfree() {
+        int sum = 0;
+        try (MemoryStack stack = stackPush()) {
+            LibDivideS16BranchFree magic = LibDivideS16BranchFree.malloc(stack);
+            libdivide_s16_branchfree_gen((short)denom, magic);
+            for (short n : numers16) {
+                sum += libdivide_s16_branchfree_do(n, magic);
+            }
+        }
+        return sum;
+    }
+
+    @Benchmark
+    public int u16() {
+        int sum = 0;
+        for (short n : numers16) {
+            sum += (short)(Short.toUnsignedInt(n) / Short.toUnsignedInt((short)denom));
+        }
+        return sum;
+    }
+
+    @Benchmark
+    public int u16_1_do() {
+        int sum = 0;
+        try (MemoryStack stack = stackPush()) {
+            LibDivideU16 magic = LibDivideU16.malloc(stack);
+            libdivide_u16_gen((short)denom, magic);
+            for (short n : numers16) {
+                sum += libdivide_u16_do(n, magic);
+            }
+        }
+        return sum;
+    }
+
+    @Benchmark
+    public int u16_2_branchfree() {
+        int sum = 0;
+        try (MemoryStack stack = stackPush()) {
+            LibDivideU16BranchFree magic = LibDivideU16BranchFree.malloc(stack);
+            libdivide_u16_branchfree_gen((short)denom, magic);
+            for (short n : numers16) {
+                sum += libdivide_u16_branchfree_do(n, magic);
+            }
+        }
+        return sum;
     }
 
     // ----------------------------------------------------------------

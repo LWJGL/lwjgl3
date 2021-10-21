@@ -10,7 +10,6 @@ import org.testng.annotations.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 
-import static java.lang.Math.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.testng.Assert.*;
@@ -18,12 +17,22 @@ import static org.testng.Assert.*;
 @Test()
 public class LibDivideTest {
 
-    private static final int RANDOM_NUMERS = 10000;
+    private static final int RANDOM_NUMERS = 1 << 16;
     private static final int RANDOM_DENOMS = 100;
 
     // libdivide.h uses #pragma pack(push, 1) by default, which LWJGL disables.
     // This makes sure it is not reverted by mistake.
     public void testStructLayout() {
+        assertEquals(LibDivideS16.SIZEOF, 4);
+        assertEquals(LibDivideS16BranchFree.SIZEOF, 4);
+        assertEquals(LibDivideU16.SIZEOF, 4);
+        assertEquals(LibDivideU16BranchFree.SIZEOF, 4);
+
+        assertEquals(LibDivideS16.ALIGNOF, 2);
+        assertEquals(LibDivideS16BranchFree.ALIGNOF, 2);
+        assertEquals(LibDivideU16.ALIGNOF, 2);
+        assertEquals(LibDivideU16BranchFree.ALIGNOF, 2);
+
         assertEquals(LibDivideS32.SIZEOF, 8);
         assertEquals(LibDivideS32BranchFree.SIZEOF, 8);
         assertEquals(LibDivideU32.SIZEOF, 8);
@@ -45,11 +54,59 @@ public class LibDivideTest {
         assertEquals(LibDivideU64BranchFree.ALIGNOF, 8);
     }
 
+    public void testS16() {
+        Native16 doNative = (numer, denom) -> (short)(numer / denom);
+
+        test16(
+            LibDivideS16::malloc,
+            LibDivide::libdivide_s16_gen_ref,
+            LibDivide::libdivide_s16_gen,
+            doNative,
+            LibDivide::libdivide_s16_do_ref,
+            LibDivide::libdivide_s16_do,
+            false
+        );
+
+        test16(
+            LibDivideS16BranchFree::malloc,
+            LibDivide::libdivide_s16_branchfree_gen_ref,
+            LibDivide::libdivide_s16_branchfree_gen,
+            doNative,
+            LibDivide::libdivide_s16_branchfree_do_ref,
+            LibDivide::libdivide_s16_branchfree_do,
+            false
+        );
+    }
+
+    public void testU16() {
+        Native16 doNative = (numer, denom) -> (short)(Short.toUnsignedInt(numer) / Short.toUnsignedInt(denom));
+
+        test16(
+            LibDivideU16::malloc,
+            LibDivide::libdivide_u16_gen_ref,
+            LibDivide::libdivide_u16_gen,
+            doNative,
+            LibDivide::libdivide_u16_do_ref,
+            LibDivide::libdivide_u16_do,
+            false
+        );
+
+        test16(
+            LibDivideU16BranchFree::malloc,
+            LibDivide::libdivide_u16_branchfree_gen_ref,
+            LibDivide::libdivide_u16_branchfree_gen,
+            doNative,
+            LibDivide::libdivide_u16_branchfree_do_ref,
+            LibDivide::libdivide_u16_branchfree_do,
+            true
+        );
+    }
+
     public void testS32() {
         Native32 doNative = (numer, denom) -> numer / denom;
 
         test32(
-            LibDivideS32::mallocStack,
+            LibDivideS32::malloc,
             LibDivide::libdivide_s32_gen_ref,
             LibDivide::libdivide_s32_gen,
             doNative,
@@ -59,7 +116,7 @@ public class LibDivideTest {
         );
 
         test32(
-            LibDivideS32BranchFree::mallocStack,
+            LibDivideS32BranchFree::malloc,
             LibDivide::libdivide_s32_branchfree_gen_ref,
             LibDivide::libdivide_s32_branchfree_gen,
             doNative,
@@ -73,7 +130,7 @@ public class LibDivideTest {
         Native32 doNative = Integer::divideUnsigned;
 
         test32(
-            LibDivideU32::mallocStack,
+            LibDivideU32::malloc,
             LibDivide::libdivide_u32_gen_ref,
             LibDivide::libdivide_u32_gen,
             doNative,
@@ -83,7 +140,7 @@ public class LibDivideTest {
         );
 
         test32(
-            LibDivideU32BranchFree::mallocStack,
+            LibDivideU32BranchFree::malloc,
             LibDivide::libdivide_u32_branchfree_gen_ref,
             LibDivide::libdivide_u32_branchfree_gen,
             doNative,
@@ -97,7 +154,7 @@ public class LibDivideTest {
         Native64 doNative = (numer, denom) -> numer / denom;
 
         test64(
-            LibDivideS64::mallocStack,
+            LibDivideS64::malloc,
             LibDivide::libdivide_s64_gen_ref,
             LibDivide::libdivide_s64_gen,
             doNative,
@@ -107,7 +164,7 @@ public class LibDivideTest {
         );
 
         test64(
-            LibDivideS64BranchFree::mallocStack,
+            LibDivideS64BranchFree::malloc,
             LibDivide::libdivide_s64_branchfree_gen_ref,
             LibDivide::libdivide_s64_branchfree_gen,
             doNative,
@@ -121,7 +178,7 @@ public class LibDivideTest {
         Native64 doNative = Long::divideUnsigned;
 
         test64(
-            LibDivideU64::mallocStack,
+            LibDivideU64::malloc,
             LibDivide::libdivide_u64_gen_ref,
             LibDivide::libdivide_u64_gen,
             doNative,
@@ -131,7 +188,7 @@ public class LibDivideTest {
         );
 
         test64(
-            LibDivideU64BranchFree::mallocStack,
+            LibDivideU64BranchFree::malloc,
             LibDivide::libdivide_u64_branchfree_gen_ref,
             LibDivide::libdivide_u64_branchfree_gen,
             doNative,
@@ -139,6 +196,92 @@ public class LibDivideTest {
             LibDivide::libdivide_u64_branchfree_do,
             true
         );
+    }
+
+    private interface Gen16<T extends Struct> {
+        T apply(short denom, T __result);
+    }
+
+    private interface Do16<T extends Struct> {
+        short apply(short numer, T denom);
+    }
+
+    private interface Native16 {
+        short apply(short numer, short denom);
+    }
+
+    private static <T extends Struct> void test16(
+        Function<MemoryStack, T> malloc,
+        Gen16<T> genRef, Gen16<T> gen,
+        Native16 doNative, Do16<T> doRef, Do16<T> doJava,
+        boolean skipOne
+    ) {
+        try (MemoryStack stack = stackPush()) {
+            T magic = malloc.apply(stack);
+
+            for (int d = Short.MIN_VALUE; d <= Short.MAX_VALUE; d++) { // test all
+                if (d == 0 || (skipOne && d == 1)) {
+                    continue;
+                }
+                test16(magic, genRef, gen, (short)d);
+            }
+
+            // Corner cases
+            short[] numers = {0, -1, 1, -2, 2, -3, 3, Short.MIN_VALUE, Short.MAX_VALUE};
+            for (short d : numers) {
+                if (d == 0 || (skipOne && d == 1)) {
+                    continue;
+                }
+                test16(magic, genRef, gen, d);
+                for (short n : numers) {
+                    test16(magic, doNative, doRef, doJava, d, n);
+                }
+            }
+
+            // Random
+            ThreadLocalRandom rand = ThreadLocalRandom.current();
+            for (int i = 0; i < RANDOM_DENOMS; i++) {
+                short d;
+                do {
+                    d = (short)rand.nextInt();
+                } while (skipOne && d == 1);
+
+                test16(magic, genRef, gen, d);
+                for (int j = Short.MIN_VALUE; j <= Short.MAX_VALUE; j++) { // test all
+                    test16(magic, doNative, doRef, doJava, d, (short)j);
+                }
+            }
+        }
+    }
+
+    private static <T extends Struct> void test16(T magic, Gen16<T> genRef, Gen16<T> gen, short d) {
+        genRef.apply(d, magic);
+
+        short m = memGetShort(magic.address());
+        byte  b = memGetByte(magic.address() + 2);
+
+        memPutShort(magic.address(), (short)0);
+        memPutByte(magic.address() + 2, (byte)0);
+
+        gen.apply(d, magic);
+
+        assertEquals(memGetShort(magic.address()), m);
+        assertEquals(memGetByte(magic.address() + 2), b);
+    }
+
+    private static <T extends Struct> void test16(T magic, Native16 doNative, Do16<T> doRef, Do16<T> doJava, short d, short n) {
+        short refNative = doNative.apply(n, d);
+
+        short ref = doRef.apply(n, magic);
+        if (ref != refNative) {
+            throw new IllegalStateException(n + " / " + d + ", expected native [" + refNative + "] but found libdivide [" + ref + "]");
+        }
+
+        short java = doJava.apply(n, magic);
+
+        if (java != ref) {
+            throw new IllegalStateException(n + " / " + d + ", expected libdivide [" + ref + "] but found LWJGL [" + java + "]");
+        }
     }
 
     private interface Gen32<T extends Struct> {
