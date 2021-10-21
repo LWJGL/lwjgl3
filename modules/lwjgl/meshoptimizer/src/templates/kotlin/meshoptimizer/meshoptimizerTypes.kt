@@ -46,10 +46,11 @@ val meshopt_VertexFetchStatistics = struct(Module.MESHOPTIMIZER, "MeshoptVertexF
 val meshopt_Meshlet = struct(Module.MESHOPTIMIZER, "MeshoptMeshlet", nativeName = "struct meshopt_Meshlet", mutable = false) {
     documentation = "Experimental: Meshlet"
 
-    unsigned_int("vertices", "")[64]
-    unsigned_char("indices", "")[126][3]
-    unsigned_char("triangle_count", "")
-    unsigned_char("vertex_count", "")
+    unsigned_int("vertex_offset", "offset within {@code meshlet_vertices} array with meshlet data")
+    unsigned_int("triangle_offset", "offset within {@code meshlet_triangles} array with meshlet data")
+
+    unsigned_int("vertex_count", "number of vertices used in the meshlet; data is stored in consecutive range defined by offset and count")
+    unsigned_int("triangle_count", "number of triangles used in the meshlet; data is stored in consecutive range defined by offset and count")
 }
 
 val meshopt_Bounds = struct(Module.MESHOPTIMIZER, "MeshoptBounds", nativeName = "struct meshopt_Bounds", mutable = false) {

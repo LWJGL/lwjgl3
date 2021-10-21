@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -23,10 +22,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct meshopt_Meshlet {
- *     unsigned int vertices[64];
- *     unsigned char indices[126][3];
- *     unsigned char triangle_count;
- *     unsigned char vertex_count;
+ *     unsigned int {@link #vertex_offset};
+ *     unsigned int {@link #triangle_offset};
+ *     unsigned int {@link #vertex_count};
+ *     unsigned int {@link #triangle_count};
  * }</code></pre>
  */
 @NativeType("struct meshopt_Meshlet")
@@ -40,26 +39,26 @@ public class MeshoptMeshlet extends Struct implements NativeResource {
 
     /** The struct member offsets. */
     public static final int
-        VERTICES,
-        INDICES,
-        TRIANGLE_COUNT,
-        VERTEX_COUNT;
+        VERTEX_OFFSET,
+        TRIANGLE_OFFSET,
+        VERTEX_COUNT,
+        TRIANGLE_COUNT;
 
     static {
         Layout layout = __struct(
-            __array(4, 64),
-            __array(1, 126 * 3),
-            __member(1),
-            __member(1)
+            __member(4),
+            __member(4),
+            __member(4),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        VERTICES = layout.offsetof(0);
-        INDICES = layout.offsetof(1);
-        TRIANGLE_COUNT = layout.offsetof(2);
-        VERTEX_COUNT = layout.offsetof(3);
+        VERTEX_OFFSET = layout.offsetof(0);
+        TRIANGLE_OFFSET = layout.offsetof(1);
+        VERTEX_COUNT = layout.offsetof(2);
+        TRIANGLE_COUNT = layout.offsetof(3);
     }
 
     /**
@@ -75,24 +74,18 @@ public class MeshoptMeshlet extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return a {@link IntBuffer} view of the {@code vertices} field. */
-    @NativeType("unsigned int[64]")
-    public IntBuffer vertices() { return nvertices(address()); }
-    /** @return the value at the specified index of the {@code vertices} field. */
+    /** offset within {@code meshlet_vertices} array with meshlet data */
     @NativeType("unsigned int")
-    public int vertices(int index) { return nvertices(address(), index); }
-    /** @return a {@link ByteBuffer} view of the {@code indices} field. */
-    @NativeType("unsigned char[126][3]")
-    public ByteBuffer indices() { return nindices(address()); }
-    /** @return the value at the specified index of the {@code indices} field. */
-    @NativeType("unsigned char")
-    public byte indices(int index) { return nindices(address(), index); }
-    /** @return the value of the {@code triangle_count} field. */
-    @NativeType("unsigned char")
-    public byte triangle_count() { return ntriangle_count(address()); }
-    /** @return the value of the {@code vertex_count} field. */
-    @NativeType("unsigned char")
-    public byte vertex_count() { return nvertex_count(address()); }
+    public int vertex_offset() { return nvertex_offset(address()); }
+    /** offset within {@code meshlet_triangles} array with meshlet data */
+    @NativeType("unsigned int")
+    public int triangle_offset() { return ntriangle_offset(address()); }
+    /** number of vertices used in the meshlet; data is stored in consecutive range defined by offset and count */
+    @NativeType("unsigned int")
+    public int vertex_count() { return nvertex_count(address()); }
+    /** number of triangles used in the meshlet; data is stored in consecutive range defined by offset and count */
+    @NativeType("unsigned int")
+    public int triangle_count() { return ntriangle_count(address()); }
 
     // -----------------------------------
 
@@ -208,22 +201,14 @@ public class MeshoptMeshlet extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #vertices}. */
-    public static IntBuffer nvertices(long struct) { return memIntBuffer(struct + MeshoptMeshlet.VERTICES, 64); }
-    /** Unsafe version of {@link #vertices(int) vertices}. */
-    public static int nvertices(long struct, int index) {
-        return UNSAFE.getInt(null, struct + MeshoptMeshlet.VERTICES + check(index, 64) * 4);
-    }
-    /** Unsafe version of {@link #indices}. */
-    public static ByteBuffer nindices(long struct) { return memByteBuffer(struct + MeshoptMeshlet.INDICES, 126 * 3); }
-    /** Unsafe version of {@link #indices(int) indices}. */
-    public static byte nindices(long struct, int index) {
-        return UNSAFE.getByte(null, struct + MeshoptMeshlet.INDICES + check(index, 126 * 3) * 1);
-    }
-    /** Unsafe version of {@link #triangle_count}. */
-    public static byte ntriangle_count(long struct) { return UNSAFE.getByte(null, struct + MeshoptMeshlet.TRIANGLE_COUNT); }
+    /** Unsafe version of {@link #vertex_offset}. */
+    public static int nvertex_offset(long struct) { return UNSAFE.getInt(null, struct + MeshoptMeshlet.VERTEX_OFFSET); }
+    /** Unsafe version of {@link #triangle_offset}. */
+    public static int ntriangle_offset(long struct) { return UNSAFE.getInt(null, struct + MeshoptMeshlet.TRIANGLE_OFFSET); }
     /** Unsafe version of {@link #vertex_count}. */
-    public static byte nvertex_count(long struct) { return UNSAFE.getByte(null, struct + MeshoptMeshlet.VERTEX_COUNT); }
+    public static int nvertex_count(long struct) { return UNSAFE.getInt(null, struct + MeshoptMeshlet.VERTEX_COUNT); }
+    /** Unsafe version of {@link #triangle_count}. */
+    public static int ntriangle_count(long struct) { return UNSAFE.getInt(null, struct + MeshoptMeshlet.TRIANGLE_COUNT); }
 
     // -----------------------------------
 
@@ -263,24 +248,18 @@ public class MeshoptMeshlet extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link IntBuffer} view of the {@code vertices} field. */
-        @NativeType("unsigned int[64]")
-        public IntBuffer vertices() { return MeshoptMeshlet.nvertices(address()); }
-        /** @return the value at the specified index of the {@code vertices} field. */
+        /** @return the value of the {@link MeshoptMeshlet#vertex_offset} field. */
         @NativeType("unsigned int")
-        public int vertices(int index) { return MeshoptMeshlet.nvertices(address(), index); }
-        /** @return a {@link ByteBuffer} view of the {@code indices} field. */
-        @NativeType("unsigned char[126][3]")
-        public ByteBuffer indices() { return MeshoptMeshlet.nindices(address()); }
-        /** @return the value at the specified index of the {@code indices} field. */
-        @NativeType("unsigned char")
-        public byte indices(int index) { return MeshoptMeshlet.nindices(address(), index); }
-        /** @return the value of the {@code triangle_count} field. */
-        @NativeType("unsigned char")
-        public byte triangle_count() { return MeshoptMeshlet.ntriangle_count(address()); }
-        /** @return the value of the {@code vertex_count} field. */
-        @NativeType("unsigned char")
-        public byte vertex_count() { return MeshoptMeshlet.nvertex_count(address()); }
+        public int vertex_offset() { return MeshoptMeshlet.nvertex_offset(address()); }
+        /** @return the value of the {@link MeshoptMeshlet#triangle_offset} field. */
+        @NativeType("unsigned int")
+        public int triangle_offset() { return MeshoptMeshlet.ntriangle_offset(address()); }
+        /** @return the value of the {@link MeshoptMeshlet#vertex_count} field. */
+        @NativeType("unsigned int")
+        public int vertex_count() { return MeshoptMeshlet.nvertex_count(address()); }
+        /** @return the value of the {@link MeshoptMeshlet#triangle_count} field. */
+        @NativeType("unsigned int")
+        public int triangle_count() { return MeshoptMeshlet.ntriangle_count(address()); }
 
     }
 
