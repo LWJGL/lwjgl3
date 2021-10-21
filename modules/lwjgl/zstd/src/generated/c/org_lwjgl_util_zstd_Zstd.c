@@ -72,12 +72,17 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1maxCLevel(JNIEnv *__e
     return (jint)ZSTD_maxCLevel();
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1defaultCLevel(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)ZSTD_defaultCLevel();
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1createCCtx(JNIEnv *__env, jclass clazz) {
     UNUSED_PARAMS(__env, clazz)
     return (jlong)(intptr_t)ZSTD_createCCtx();
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1freeCCtx(JNIEnv *__env, jclass clazz, jlong cctxAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1freeCCtx(JNIEnv *__env, jclass clazz, jlong cctxAddress) {
     ZSTD_CCtx *cctx = (ZSTD_CCtx *)(intptr_t)cctxAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jlong)ZSTD_freeCCtx(cctx);
@@ -96,7 +101,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1createDCtx(JNIEnv *_
     return (jlong)(intptr_t)ZSTD_createDCtx();
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1freeDCtx(JNIEnv *__env, jclass clazz, jlong dctxAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1freeDCtx(JNIEnv *__env, jclass clazz, jlong dctxAddress) {
     ZSTD_DCtx *dctx = (ZSTD_DCtx *)(intptr_t)dctxAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jlong)ZSTD_freeDCtx(dctx);
@@ -163,7 +168,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1createCStream(JNIEnv
     return (jlong)(intptr_t)ZSTD_createCStream();
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1freeCStream(JNIEnv *__env, jclass clazz, jlong zcsAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1freeCStream(JNIEnv *__env, jclass clazz, jlong zcsAddress) {
     ZSTD_CStream *zcs = (ZSTD_CStream *)(intptr_t)zcsAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jlong)ZSTD_freeCStream(zcs);
@@ -192,7 +197,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1createDStream(JNIEnv
     return (jlong)(intptr_t)ZSTD_createDStream();
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1freeDStream(JNIEnv *__env, jclass clazz, jlong zdsAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1freeDStream(JNIEnv *__env, jclass clazz, jlong zdsAddress) {
     ZSTD_DStream *zds = (ZSTD_DStream *)(intptr_t)zdsAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jlong)ZSTD_freeDStream(zds);
@@ -240,7 +245,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1createCDict(JNIEnv 
     return (jlong)(intptr_t)ZSTD_createCDict(dictBuffer, (size_t)dictSize, compressionLevel);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1freeCDict(JNIEnv *__env, jclass clazz, jlong CDictAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1freeCDict(JNIEnv *__env, jclass clazz, jlong CDictAddress) {
     ZSTD_CDict *CDict = (ZSTD_CDict *)(intptr_t)CDictAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jlong)ZSTD_freeCDict(CDict);
@@ -261,7 +266,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1createDDict(JNIEnv 
     return (jlong)(intptr_t)ZSTD_createDDict(dictBuffer, (size_t)dictSize);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1freeDDict(JNIEnv *__env, jclass clazz, jlong ddictAddress) {
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_Zstd_ZSTD_1freeDDict(JNIEnv *__env, jclass clazz, jlong ddictAddress) {
     ZSTD_DDict *ddict = (ZSTD_DDict *)(intptr_t)ddictAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jlong)ZSTD_freeDDict(ddict);
@@ -280,6 +285,12 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1getDictID_1fromDict(
     void const *dict = (void const *)(intptr_t)dictAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jint)ZSTD_getDictID_fromDict(dict, (size_t)dictSize);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1getDictID_1fromCDict(JNIEnv *__env, jclass clazz, jlong cdictAddress) {
+    ZSTD_CDict const *cdict = (ZSTD_CDict const *)(intptr_t)cdictAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)ZSTD_getDictID_fromCDict(cdict);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_Zstd_nZSTD_1getDictID_1fromDDict(JNIEnv *__env, jclass clazz, jlong ddictAddress) {

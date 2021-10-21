@@ -111,8 +111,8 @@ public class Zstd {
     /** Version number part. */
     public static final int
         ZSTD_VERSION_MAJOR   = 1,
-        ZSTD_VERSION_MINOR   = 4,
-        ZSTD_VERSION_RELEASE = 9;
+        ZSTD_VERSION_MINOR   = 5,
+        ZSTD_VERSION_RELEASE = 0;
 
     /** Version number. */
     public static final int ZSTD_VERSION_NUMBER = (ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE);
@@ -274,7 +274,8 @@ public class Zstd {
      * <li>{@link #ZSTD_c_jobSize c_jobSize} - 
      * Size of a compression job. This value is enforced only when {@code nbWorkers &ge; 1}. Each compression job is completed in parallel, so this value
      * can indirectly impact the nb of active threads. 0 means default, which is dynamically determined based on compression parameters. Job size must be
-     * a minimum of overlap size, or 1 MB, whichever is largest. The minimum size is automatically and transparently enforced.
+     * a minimum of overlap size, or {@code ZSTDMT_JOBSIZE_MIN} (= 512 KB), whichever is largest. The minimum size is automatically and transparently
+     * enforced.
      * </li>
      * <li>{@link #ZSTD_c_overlapLog c_overlapLog} - 
      * Control the overlap size, as a fraction of window size. The overlap size is an amount of data reloaded from previous job at the beginning of a new
@@ -300,6 +301,9 @@ public class Zstd {
      * <li>{@link #ZSTD_c_experimentalParam10 c_experimentalParam10}</li>
      * <li>{@link #ZSTD_c_experimentalParam11 c_experimentalParam11}</li>
      * <li>{@link #ZSTD_c_experimentalParam12 c_experimentalParam12}</li>
+     * <li>{@link #ZSTD_c_experimentalParam13 c_experimentalParam13}</li>
+     * <li>{@link #ZSTD_c_experimentalParam14 c_experimentalParam14}</li>
+     * <li>{@link #ZSTD_c_experimentalParam15 c_experimentalParam15}</li>
      * </ul>
      */
     public static final int
@@ -333,7 +337,10 @@ public class Zstd {
         ZSTD_c_experimentalParam9         = 1006,
         ZSTD_c_experimentalParam10        = 1007,
         ZSTD_c_experimentalParam11        = 1008,
-        ZSTD_c_experimentalParam12        = 1009;
+        ZSTD_c_experimentalParam12        = 1009,
+        ZSTD_c_experimentalParam13        = 1010,
+        ZSTD_c_experimentalParam14        = 1011,
+        ZSTD_c_experimentalParam15        = 1012;
 
     /**
      * {@code ZSTD_ResetDirective}
@@ -575,6 +582,11 @@ public class Zstd {
     /** Returns the maximum compression level available. */
     public static native int ZSTD_maxCLevel();
 
+    // --- [ ZSTD_defaultCLevel ] ---
+
+    /** Returns the default compression level, specified by {@link #ZSTD_CLEVEL_DEFAULT CLEVEL_DEFAULT} */
+    public static native int ZSTD_defaultCLevel();
+
     // --- [ ZSTD_createCCtx ] ---
 
     /**
@@ -588,17 +600,13 @@ public class Zstd {
 
     // --- [ ZSTD_freeCCtx ] ---
 
-    /** Unsafe version of: {@link #ZSTD_freeCCtx freeCCtx} */
-    public static native long nZSTD_freeCCtx(long cctx);
-
-    /** Frees memory allocated by {@link #ZSTD_createCCtx createCCtx}. */
+    /**
+     * Frees memory allocated by {@link #ZSTD_createCCtx createCCtx}.
+     *
+     * @param cctx accepts {@code NULL} pointer
+     */
     @NativeType("size_t")
-    public static long ZSTD_freeCCtx(@NativeType("ZSTD_CCtx *") long cctx) {
-        if (CHECKS) {
-            check(cctx);
-        }
-        return nZSTD_freeCCtx(cctx);
-    }
+    public static native long ZSTD_freeCCtx(@NativeType("ZSTD_CCtx *") long cctx);
 
     // --- [ ZSTD_compressCCtx ] ---
 
@@ -632,17 +640,13 @@ public class Zstd {
 
     // --- [ ZSTD_freeDCtx ] ---
 
-    /** Unsafe version of: {@link #ZSTD_freeDCtx freeDCtx} */
-    public static native long nZSTD_freeDCtx(long dctx);
-
-    /** Frees memory allocated by {@link #ZSTD_createDCtx createDCtx}. */
+    /**
+     * Frees memory allocated by {@link #ZSTD_createDCtx createDCtx}.
+     *
+     * @param dctx accepts {@code NULL} pointer
+     */
     @NativeType("size_t")
-    public static long ZSTD_freeDCtx(@NativeType("ZSTD_DCtx *") long dctx) {
-        if (CHECKS) {
-            check(dctx);
-        }
-        return nZSTD_freeDCtx(dctx);
-    }
+    public static native long ZSTD_freeDCtx(@NativeType("ZSTD_DCtx *") long dctx);
 
     // --- [ ZSTD_decompressDCtx ] ---
 
@@ -666,7 +670,7 @@ public class Zstd {
     /**
      * All parameters must belong to an interval with lower and upper bounds, otherwise they will either trigger an error or be automatically clamped.
      *
-     * @param cParam   one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td><td>{@link #ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link #ZSTD_c_experimentalParam8 c_experimentalParam8}</td><td>{@link #ZSTD_c_experimentalParam9 c_experimentalParam9}</td><td>{@link #ZSTD_c_experimentalParam10 c_experimentalParam10}</td><td>{@link #ZSTD_c_experimentalParam11 c_experimentalParam11}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam12 c_experimentalParam12}</td></tr></table>
+     * @param cParam   one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td></tr><tr><td>{@link #ZSTD_c_searchLog c_searchLog}</td><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td></tr><tr><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td></tr><tr><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td></tr><tr><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td><td>{@link #ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link #ZSTD_c_experimentalParam8 c_experimentalParam8}</td><td>{@link #ZSTD_c_experimentalParam9 c_experimentalParam9}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam10 c_experimentalParam10}</td><td>{@link #ZSTD_c_experimentalParam11 c_experimentalParam11}</td><td>{@link #ZSTD_c_experimentalParam12 c_experimentalParam12}</td><td>{@link #ZSTD_c_experimentalParam13 c_experimentalParam13}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam14 c_experimentalParam14}</td><td>{@link #ZSTD_c_experimentalParam15 c_experimentalParam15}</td></tr></table>
      * @param __result a structure, {@code ZSTD_bounds}, which contains
      *                 
      *                 <ul>
@@ -694,7 +698,7 @@ public class Zstd {
      * compressionLevel, hashLog, chainLog, searchLog, minMatch, targetLength and strategy. new parameters will be active for next job only (after a
      * {@code flush()}).</p>
      *
-     * @param param one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td><td>{@link #ZSTD_c_searchLog c_searchLog}</td></tr><tr><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td></tr><tr><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td></tr><tr><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link #ZSTD_c_experimentalParam8 c_experimentalParam8}</td><td>{@link #ZSTD_c_experimentalParam9 c_experimentalParam9}</td><td>{@link #ZSTD_c_experimentalParam10 c_experimentalParam10}</td><td>{@link #ZSTD_c_experimentalParam11 c_experimentalParam11}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam12 c_experimentalParam12}</td></tr></table>
+     * @param param one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td></tr><tr><td>{@link #ZSTD_c_searchLog c_searchLog}</td><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td></tr><tr><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td></tr><tr><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td></tr><tr><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td><td>{@link #ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link #ZSTD_c_experimentalParam8 c_experimentalParam8}</td><td>{@link #ZSTD_c_experimentalParam9 c_experimentalParam9}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam10 c_experimentalParam10}</td><td>{@link #ZSTD_c_experimentalParam11 c_experimentalParam11}</td><td>{@link #ZSTD_c_experimentalParam12 c_experimentalParam12}</td><td>{@link #ZSTD_c_experimentalParam13 c_experimentalParam13}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam14 c_experimentalParam14}</td><td>{@link #ZSTD_c_experimentalParam15 c_experimentalParam15}</td></tr></table>
      *
      * @return an error code (which can be tested using {@link #ZSTD_isError isError})
      */
@@ -866,17 +870,13 @@ public class Zstd {
 
     // --- [ ZSTD_freeCStream ] ---
 
-    /** Unsafe version of: {@link #ZSTD_freeCStream freeCStream} */
-    public static native long nZSTD_freeCStream(long zcs);
-
-    /** Frees memory allocated by {@link #ZSTD_createCStream createCStream}. */
+    /**
+     * Frees memory allocated by {@link #ZSTD_createCStream createCStream}.
+     *
+     * @param zcs accepts {@code NULL} pointer
+     */
     @NativeType("size_t")
-    public static long ZSTD_freeCStream(@NativeType("ZSTD_CStream *") long zcs) {
-        if (CHECKS) {
-            check(zcs);
-        }
-        return nZSTD_freeCStream(zcs);
-    }
+    public static native long ZSTD_freeCStream(@NativeType("ZSTD_CStream *") long zcs);
 
     // --- [ ZSTD_compressStream2 ] ---
 
@@ -955,17 +955,13 @@ public class Zstd {
 
     // --- [ ZSTD_freeDStream ] ---
 
-    /** Unsafe version of: {@link #ZSTD_freeDStream freeDStream} */
-    public static native long nZSTD_freeDStream(long zds);
-
-    /** Frees memory allocated by {@link #ZSTD_createDStream createDStream}. */
+    /**
+     * Frees memory allocated by {@link #ZSTD_createDStream createDStream}.
+     *
+     * @param zds accepts {@code NULL} pointer
+     */
     @NativeType("size_t")
-    public static long ZSTD_freeDStream(@NativeType("ZSTD_DStream *") long zds) {
-        if (CHECKS) {
-            check(zds);
-        }
-        return nZSTD_freeDStream(zds);
-    }
+    public static native long ZSTD_freeDStream(@NativeType("ZSTD_DStream *") long zds);
 
     // --- [ ZSTD_decompressStream ] ---
 
@@ -1015,7 +1011,7 @@ public class Zstd {
     /**
      * Compression at an explicit compression level using a Dictionary.
      * 
-     * <p>A dictionary can be any arbitrary data segment (also called a prefix), or a buffer with specified information (see {@code dictBuilder/zdict.h}).</p>
+     * <p>A dictionary can be any arbitrary data segment (also called a prefix), or a buffer with specified information (see {@code zdict.h}).</p>
      * 
      * <p>This function loads the dictionary, resulting in significant startup delay. It's intended for a dictionary used only once.</p>
      * 
@@ -1077,17 +1073,13 @@ public class Zstd {
 
     // --- [ ZSTD_freeCDict ] ---
 
-    /** Unsafe version of: {@link #ZSTD_freeCDict freeCDict} */
-    public static native long nZSTD_freeCDict(long CDict);
-
-    /** Frees memory allocated by {@link #ZSTD_createCDict createCDict}. */
+    /**
+     * Frees memory allocated by {@link #ZSTD_createCDict createCDict}.
+     *
+     * @param CDict accepts {@code NULL} pointer
+     */
     @NativeType("size_t")
-    public static long ZSTD_freeCDict(@NativeType("ZSTD_CDict *") long CDict) {
-        if (CHECKS) {
-            check(CDict);
-        }
-        return nZSTD_freeCDict(CDict);
-    }
+    public static native long ZSTD_freeCDict(@NativeType("ZSTD_CDict *") long CDict);
 
     // --- [ ZSTD_compress_usingCDict ] ---
 
@@ -1125,17 +1117,13 @@ public class Zstd {
 
     // --- [ ZSTD_freeDDict ] ---
 
-    /** Unsafe version of: {@link #ZSTD_freeDDict freeDDict} */
-    public static native long nZSTD_freeDDict(long ddict);
-
-    /** Frees memory allocated with {@link #ZSTD_createDDict createDDict}. */
+    /**
+     * Frees memory allocated with {@link #ZSTD_createDDict createDDict}.
+     *
+     * @param ddict accepts {@code NULL} pointer
+     */
     @NativeType("size_t")
-    public static long ZSTD_freeDDict(@NativeType("ZSTD_DDict *") long ddict) {
-        if (CHECKS) {
-            check(ddict);
-        }
-        return nZSTD_freeDDict(ddict);
-    }
+    public static native long ZSTD_freeDDict(@NativeType("ZSTD_DDict *") long ddict);
 
     // --- [ ZSTD_decompress_usingDDict ] ---
 
@@ -1169,6 +1157,25 @@ public class Zstd {
     @NativeType("unsigned int")
     public static int ZSTD_getDictID_fromDict(@NativeType("void const *") ByteBuffer dict) {
         return nZSTD_getDictID_fromDict(memAddress(dict), dict.remaining());
+    }
+
+    // --- [ ZSTD_getDictID_fromCDict ] ---
+
+    /** Unsafe version of: {@link #ZSTD_getDictID_fromCDict getDictID_fromCDict} */
+    public static native int nZSTD_getDictID_fromCDict(long cdict);
+
+    /**
+     * Provides the {@code dictID} of the dictionary loaded into {@code cdict}.
+     * 
+     * <p>If {@code @return == 0}, the dictionary is not conformant to Zstandard specification, or empty. Non-conformant dictionaries can still be loaded, but as
+     * content-only dictionaries.</p>
+     */
+    @NativeType("unsigned")
+    public static int ZSTD_getDictID_fromCDict(@NativeType("ZSTD_CDict const *") long cdict) {
+        if (CHECKS) {
+            check(cdict);
+        }
+        return nZSTD_getDictID_fromCDict(cdict);
     }
 
     // --- [ ZSTD_getDictID_fromDDict ] ---

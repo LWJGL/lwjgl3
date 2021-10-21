@@ -108,8 +108,8 @@ ENABLE_WARNINGS()""")
         "Version number part.",
 
         "VERSION_MAJOR".."1",
-        "VERSION_MINOR".."4",
-        "VERSION_RELEASE".."9"
+        "VERSION_MINOR".."5",
+        "VERSION_RELEASE".."0"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)")
@@ -292,7 +292,8 @@ ENABLE_WARNINGS()""")
             """
             Size of a compression job. This value is enforced only when {@code nbWorkers &ge; 1}. Each compression job is completed in parallel, so this value
             can indirectly impact the nb of active threads. 0 means default, which is dynamically determined based on compression parameters. Job size must be
-            a minimum of overlap size, or 1 MB, whichever is largest. The minimum size is automatically and transparently enforced.
+            a minimum of overlap size, or {@code ZSTDMT_JOBSIZE_MIN} (= 512 KB), whichever is largest. The minimum size is automatically and transparently
+            enforced.
             """
         ),
         "c_overlapLog".enum(
@@ -322,7 +323,10 @@ ENABLE_WARNINGS()""")
         "c_experimentalParam9".enum,
         "c_experimentalParam10".enum,
         "c_experimentalParam11".enum,
-        "c_experimentalParam12".enum
+        "c_experimentalParam12".enum,
+        "c_experimentalParam13".enum,
+        "c_experimentalParam14".enum,
+        "c_experimentalParam15".enum
     ).javaDocLinks
 
     val resetDirectives = EnumConstant(
@@ -524,6 +528,7 @@ ENABLE_WARNINGS()""")
 
     int("minCLevel", "Returns the minimum compression level available.", void())
     int("maxCLevel", "Returns the maximum compression level available.", void())
+    int("defaultCLevel", "Returns the default compression level, specified by #CLEVEL_DEFAULT", void())
 
     /***************************************
     *  Explicit context
@@ -544,7 +549,7 @@ ENABLE_WARNINGS()""")
         "freeCCtx",
         "Frees memory allocated by #createCCtx().",
 
-        ZSTD_CCtx.p("cctx", "")
+        nullable..ZSTD_CCtx.p("cctx", "accepts #NULL pointer")
     )
 
     size_t(
@@ -579,7 +584,7 @@ ENABLE_WARNINGS()""")
         "freeDCtx",
         "Frees memory allocated by #createDCtx().",
 
-        ZSTD_DCtx.p("dctx", "")
+        nullable..ZSTD_DCtx.p("dctx", "accepts #NULL pointer")
     )
 
     size_t(
@@ -770,7 +775,7 @@ ENABLE_WARNINGS()""")
         "freeCStream",
         "Frees memory allocated by #createCStream().",
 
-        ZSTD_CStream.p("zcs", "")
+        nullable..ZSTD_CStream.p("zcs", "accepts #NULL pointer")
     )
 
     size_t(
@@ -851,7 +856,7 @@ ENABLE_WARNINGS()""")
         "freeDStream",
         "Frees memory allocated by #createDStream().",
 
-        ZSTD_DStream.p("zds", "")
+        nullable..ZSTD_DStream.p("zds", "accepts #NULL pointer")
     )
 
     size_t(
@@ -899,7 +904,7 @@ ENABLE_WARNINGS()""")
         """
         Compression at an explicit compression level using a Dictionary.
 
-        A dictionary can be any arbitrary data segment (also called a prefix), or a buffer with specified information (see {@code dictBuilder/zdict.h}).
+        A dictionary can be any arbitrary data segment (also called a prefix), or a buffer with specified information (see {@code zdict.h}).
 
         This function loads the dictionary, resulting in significant startup delay. It's intended for a dictionary used only once.
 
@@ -967,7 +972,7 @@ ENABLE_WARNINGS()""")
         "freeCDict",
         "Frees memory allocated by #createCDict().",
 
-        ZSTD_CDict.p("CDict", "")
+        nullable..ZSTD_CDict.p("CDict", "accepts #NULL pointer")
     )
 
     size_t(
@@ -1002,7 +1007,7 @@ ENABLE_WARNINGS()""")
         "freeDDict",
         "Frees memory allocated with #createDDict().",
 
-        ZSTD_DDict.p("ddict", "")
+        nullable..ZSTD_DDict.p("ddict", "accepts #NULL pointer")
     )
 
     size_t(
@@ -1029,6 +1034,18 @@ ENABLE_WARNINGS()""")
         AutoSize("dict")..size_t("dictSize", ""),
 
         returnDoc = "if {@code == 0}, the dictionary is not conformant with Zstandard specification. It can still be loaded, but as a content-only dictionary."
+    )
+
+    unsigned(
+        "getDictID_fromCDict",
+        """
+        Provides the {@code dictID} of the dictionary loaded into {@code cdict}.
+        
+        If {@code @return == 0}, the dictionary is not conformant to Zstandard specification, or empty. Non-conformant dictionaries can still be loaded, but as
+        content-only dictionaries. 
+        """,
+
+        ZSTD_CDict.const.p("cdict", "")
     )
 
     unsigned_int(

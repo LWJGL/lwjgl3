@@ -73,7 +73,16 @@ public class ZDICTParams extends Struct implements NativeResource {
     /** write log to {@code stderr}; 0 = none (default); 1 = errors; 2 = progression; 3 = details; 4 = debug; */
     @NativeType("unsigned")
     public int notificationLevel() { return nnotificationLevel(address()); }
-    /** force {@code dictID} value; 0 means auto mode (32-bits random value) */
+    /**
+     * force {@code dictID} value; 0 means auto mode (32-bits random value).
+     * 
+     * <p>NOTE: The zstd format reserves some dictionary IDs for future use. You may use them in private settings, but be warned that they may be used by zstd in
+     * a public dictionary registry in the future. These dictionary IDs are:</p>
+     * 
+     * <pre><code>
+     * - low range  : &lt;= 32767
+     * - high range : &gt;= (2^31)</code></pre>
+     */
     @NativeType("unsigned")
     public int dictID() { return ndictID(address()); }
 

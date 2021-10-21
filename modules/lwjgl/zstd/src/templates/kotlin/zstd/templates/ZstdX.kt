@@ -311,6 +311,43 @@ ENABLE_WARNINGS()""")
     )
     IntConstant(
         """
+        Default is {@code 0 == disabled}. Set to 1 to enable block splitting.
+ 
+        Will attempt to split blocks in order to improve compression ratio at the cost of speed.       
+        """,
+
+        "c_splitBlocks".."ZSTD_c_experimentalParam13"
+    )
+    IntConstant(
+        """
+        Default is #urm_auto. Controlled with {@code ZSTD_useRowMatchFinderMode_e} enum.
+ 
+        By default, in {@code ZSTD_urm_auto}, when finalizing the compression parameters, the library will decide at runtime whether to use the row-based
+        matchfinder based on support for SIMD instructions as well as the {@code windowLog}.
+ 
+        Set to #urm_disableRowMatchFinder to never use row-based matchfinder. Set to #urm_enableRowMatchFinder to force usage of row-based matchfinder.
+        """,
+
+        "c_useRowMatchFinder".."ZSTD_c_experimentalParam14"
+    )
+    IntConstant(
+        """
+        Default is {@code 0 == disabled}. Set to 1 to enable.
+ 
+        Zstd produces different results for prefix compression when the prefix is directly adjacent to the data about to be compressed vs. when it isn't. This
+        is because zstd detects that the two buffers are contiguous and it can use a more efficient match finding algorithm. However, this produces different
+        results than when the two buffers are non-contiguous. This flag forces zstd to always load the prefix in non-contiguous mode, even if it happens to be
+        adjacent to the data, to guarantee determinism.
+ 
+        If you really care about determinism when using a dictionary or prefix, like when doing delta compression, you should select this option. It comes at a
+        speed penalty of about ~2.5% if the dictionary and data happened to be contiguous, and is free if they weren't contiguous. We don't expect that
+        intentionally making the dictionary and data contiguous will be worth the cost to {@code memcpy()} the data.
+        """,
+
+        "c_deterministicRefPrefix".."ZSTD_c_experimentalParam15"
+    )
+    IntConstant(
+        """
         Experimental parameter.
             
         Allows selection between {@code ZSTD_format_e} input compression formats.
@@ -382,6 +419,14 @@ ENABLE_WARNINGS()""")
         ),
         "lcm_huffman".enum("Always attempt Huffman compression. Uncompressed literals will still be emitted if Huffman compression is not profitable."),
         "lcm_uncompressed".enum("Always emit uncompressed literals.")
+    )
+
+    EnumConstant(
+        "{@code ZSTD_useRowMatchFinderMode_e}",
+
+        "urm_auto".enum("Automatically determine whether or not we use row matchfinder.", "0"),
+        "urm_disableRowMatchFinder".enum("Never use row matchfinder."),
+        "urm_enableRowMatchFinder".enum("Always use row matchfinder when applicable.")
     )
 
     unsigned_long_long(
@@ -765,7 +810,7 @@ ENABLE_WARNINGS()""")
         "freeThreadPool",
         "Frees a thread pool.",
 
-        ZSTD_threadPool.p("pool", "")
+        nullable..ZSTD_threadPool.p("pool", "accepts #NULL pointer")
     )
 
     size_t(
@@ -813,18 +858,6 @@ ENABLE_WARNINGS()""")
         void.const.p("dictBuffer", ""),
         AutoSize("dictBuffer")..size_t("dictSize", ""),
         int("compressionLevel", "")
-    )
-
-    unsigned(
-        "getDictID_fromCDict",
-        """
-        Provides the {@code dictID} of the dictionary loaded into {@code cdict}.
-        
-        If {@code @return == 0}, the dictionary is not conformant to Zstandard specification, or empty. Non-conformant dictionaries can still be loaded, but as
-        content-only dictionaries. 
-        """,
-
-        ZSTD_CDict.const.p("cdict", "")
     )
 
     ZSTD_compressionParameters(
@@ -926,7 +959,7 @@ ENABLE_WARNINGS()""")
         "freeCCtxParams",
         "",
 
-        ZSTD_CCtx_params.p("params", "")
+        nullable..ZSTD_CCtx_params.p("params", "accepts #NULL pointer")
     )
 
     size_t(
@@ -1108,20 +1141,6 @@ ENABLE_WARNINGS()""")
     )
 
     size_t(
-        "DCtx_setFormat",
-        """
-        Instructs the decoder context about what kind of data to decode next.
-
-        This instruction is mandatory to decode data without a fully-formed header, such #f_zstd1_magicless for example.
-        """,
-
-        ZSTD_DCtx.p("dctx", ""),
-        ZSTD_format_e("format", "", formats),
-
-        returnDoc = "0, or an error code (which can be tested using #isError())"
-    )
-
-    size_t(
         "decompressStream_simpleArgs",
         """
         Same as #decompressStream(), but using only integral types as arguments.
@@ -1193,32 +1212,11 @@ ENABLE_WARNINGS()""")
     )
 
     size_t(
-        "compressBegin_advanced",
-        "",
-
-        ZSTD_CCtx.p("cctx", ""),
-        void.const.p("dict", ""),
-        AutoSize("dict")..size_t("dictSize", ""),
-        ZSTD_parameters("params", ""),
-        unsigned_long_long("pledgedSrcSize", "")
-    )
-
-    size_t(
         "compressBegin_usingCDict",
         "",
 
         ZSTD_CCtx.p("cctx", ""),
         ZSTD_CDict.const.p("cdict", "")
-    )
-
-    size_t(
-        "compressBegin_usingCDict_advanced",
-        "",
-
-        ZSTD_CCtx.p.const("cctx", ""),
-        ZSTD_CDict.const.p.const("cdict", ""),
-        ZSTD_frameParameters.const("fParams", ""),
-        unsigned_long_long.const("pledgedSrcSize", "if not known, use #CONTENTSIZE_UNKNOWN")
     )
 
     size_t(
