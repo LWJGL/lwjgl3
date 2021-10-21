@@ -692,7 +692,8 @@ nk_style_pop_vec2(ctx);""")}
         "nk_style_item_type",
 
         "STYLE_ITEM_COLOR".enum,
-        "STYLE_ITEM_IMAGE".enum
+        "STYLE_ITEM_IMAGE".enum,
+        "STYLE_ITEM_NINE_SLICE".enum
     )
 
     EnumConstant(
@@ -1215,6 +1216,13 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             ReturnParam..nk_rect("ret", "rectangle to convert from screen space into layout space")
+        )
+
+        void(
+            "spacer",
+            "Spacer is a dummy widget that consumes space as usual but doesn't draw anything.",
+
+            ctx
         )
 
         nk_bool(
@@ -2242,51 +2250,51 @@ nk_style_pop_vec2(ctx);""")}
             nk_uint("offset_y", "")
         )
 
-        nk_bool(
+        int(
             "combo",
             "",
 
             ctx,
             charUTF8.const.p.p("items", ""),
             AutoSize("items")..int("count", ""),
-            nk_bool("selected", ""),
+            int("selected", ""),
             int("item_height", ""),
             nk_vec2("size", "")
         )
 
-        nk_bool(
+        int(
             "combo_separator",
             "",
 
             ctx,
             charUTF8.const.p("items_separated_by_separator", ""),
             int("separator", ""),
-            nk_bool("selected", ""),
+            int("selected", ""),
             int("count", ""),
             int("item_height", ""),
             nk_vec2("size", "")
         )
 
-        nk_bool(
+        int(
             "combo_string",
             "",
 
             ctx,
             charUTF8.const.p("items_separated_by_zeros", ""),
-            nk_bool("selected", ""),
+            int("selected", ""),
             int("count", ""),
             int("item_height", ""),
             nk_vec2("size", "")
         )
 
-        nk_bool(
+        int(
             "combo_callback",
             "",
 
             ctx,
             nk_item_getter("item_getter", ""),
             opaque_p("userdata", ""),
-            nk_bool("selected", ""),
+            int("selected", ""),
             int("count", ""),
             int("item_height", ""),
             nk_vec2("size", "")
@@ -2299,7 +2307,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             charUTF8.const.p.p("items", ""),
             AutoSize("items")..int("count", ""),
-            Check(1)..nk_bool.p("selected", ""),
+            Check(1)..int.p("selected", ""),
             int("item_height", ""),
             nk_vec2("size", "")
         )
@@ -2310,7 +2318,7 @@ nk_style_pop_vec2(ctx);""")}
 
             ctx,
             charUTF8.const.p("items_separated_by_zeros", ""),
-            Check(1)..nk_bool.p("selected", ""),
+            Check(1)..int.p("selected", ""),
             int("count", ""),
             int("item_height", ""),
             nk_vec2("size", "")
@@ -2323,7 +2331,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             charUTF8.const.p("items_separated_by_separator", ""),
             int("separator", ""),
-            Check(1)..nk_bool.p("selected", ""),
+            Check(1)..int.p("selected", ""),
             int("count", ""),
             int("item_height", ""),
             nk_vec2("size", "")
@@ -2336,7 +2344,7 @@ nk_style_pop_vec2(ctx);""")}
             ctx,
             nk_item_getter("item_getter", ""),
             opaque_p("userdata", ""),
-            Check(1)..nk_bool.p("selected", ""),
+            Check(1)..int.p("selected", ""),
             int("count", ""),
             int("item_height", ""),
             nk_vec2("size", "")
@@ -3454,8 +3462,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             opaque_p("ptr", ""),
-            unsigned_short("w", ""),
-            unsigned_short("h", ""),
+            nk_ushort("w", ""),
+            nk_ushort("h", ""),
             nk_rect("sub_region", "")
         )
 
@@ -3464,8 +3472,8 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             int("id", ""),
-            unsigned_short("w", ""),
-            unsigned_short("h", ""),
+            nk_ushort("w", ""),
+            nk_ushort("h", ""),
             nk_rect("sub_region", "")
         )
 
@@ -3474,9 +3482,85 @@ nk_style_pop_vec2(ctx);""")}
             "",
 
             nk_handle("handle", ""),
-            unsigned_short("w", ""),
-            unsigned_short("h", ""),
+            nk_ushort("w", ""),
+            nk_ushort("h", ""),
             nk_rect("sub_region", "")
+        )
+
+        nk_nine_slice(
+            "nine_slice_handle",
+            "",
+
+            nk_handle("handle", ""),
+            nk_ushort("l", ""),
+            nk_ushort("t", ""),
+            nk_ushort("r", ""),
+            nk_ushort("b", "")
+        )
+        nk_nine_slice(
+            "nine_slice_ptr",
+            "",
+
+            opaque_p("ptr", ""),
+            nk_ushort("l", ""),
+            nk_ushort("t", ""),
+            nk_ushort("r", ""),
+            nk_ushort("b", "")
+        )
+        nk_nine_slice(
+            "nine_slice_id",
+            "",
+
+            int("id", ""),
+            nk_ushort("l", ""),
+            nk_ushort("t", ""),
+            nk_ushort("r", ""),
+            nk_ushort("b", "")
+        )
+        intb(
+            "nine_slice_is_sub9slice",
+            "",
+
+            nk_nine_slice.const.p("img", "")
+        )
+        nk_nine_slice(
+            "sub9slice_ptr",
+            "",
+
+            opaque_p("ptr", ""),
+            nk_ushort("w", ""),
+            nk_ushort("h", ""),
+            nk_rect("sub_region", ""),
+            nk_ushort("l", ""),
+            nk_ushort("t", ""),
+            nk_ushort("r", ""),
+            nk_ushort("b", "")
+        )
+        nk_nine_slice(
+            "sub9slice_id",
+            "",
+
+            int("id", ""),
+            nk_ushort("w", ""),
+            nk_ushort("h", ""),
+            nk_rect("sub_region", ""),
+            nk_ushort("l", ""),
+            nk_ushort("t", ""),
+            nk_ushort("r", ""),
+            nk_ushort("b", "")
+        )
+        nk_nine_slice(
+            "sub9slice_handle",
+            "",
+
+            nk_handle("handle", ""),
+            nk_ushort("w", ""),
+            nk_ushort("h", ""),
+            nk_rect("sub_region", ""),
+            nk_ushort("l", ""),
+            nk_ushort("t", ""),
+            nk_ushort("r", ""),
+            nk_ushort("b", "")
         )
 
         nk_hash(
@@ -4394,6 +4478,16 @@ nk_style_pop_vec2(ctx);""")}
         )
 
         void(
+            "draw_nine_slice",
+            "",
+
+            cmd,
+            nk_rect("rect", ""),
+            nk_nine_slice.const.p("slc", ""),
+            nk_color("color", "")
+        )
+
+        void(
             "draw_text",
             "",
 
@@ -4867,6 +4961,13 @@ nk_style_pop_vec2(ctx);""")}
         )
 
         nk_style_item(
+            "style_item_color",
+            "",
+
+            nk_color("color", "")
+        )
+
+        nk_style_item(
             "style_item_image",
             "",
 
@@ -4874,10 +4975,10 @@ nk_style_pop_vec2(ctx);""")}
         )
 
         nk_style_item(
-            "style_item_color",
+            "style_item_nine_slice",
             "",
 
-            nk_color("color", "")
+            nk_nine_slice("slice", "")
         )
 
         nk_style_item(

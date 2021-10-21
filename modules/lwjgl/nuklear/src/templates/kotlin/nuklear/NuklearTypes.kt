@@ -87,9 +87,17 @@ val nk_rect = struct(Module.NUKLEAR, "NkRect", nativeName = "struct nk_rect") {
 
 val nk_image = struct(Module.NUKLEAR, "NkImage", nativeName = "struct nk_image") {
     nk_handle("handle", "")
-    unsigned_short("w", "")
-    unsigned_short("h", "")
-    unsigned_short("region", "")[4]
+    nk_ushort("w", "")
+    nk_ushort("h", "")
+    nk_ushort("region", "")[4]
+}
+
+val nk_nine_slice = struct(Module.NUKLEAR, "NkNineSlice", nativeName = "struct nk_nine_slice") {
+    nk_image("img", "")
+    nk_ushort("l", "")
+    nk_ushort("t", "")
+    nk_ushort("r", "")
+    nk_ushort("b", "")
 }
 
 val nk_cursor = struct(Module.NUKLEAR, "NkCursor", nativeName = "struct nk_cursor") {
@@ -638,8 +646,9 @@ val nk_draw_list = struct(Module.NUKLEAR, "NkDrawList", nativeName = "struct nk_
 // GUI
 
 val nk_style_item_data = union(Module.NUKLEAR, "NkStyleItemData", nativeName = "union nk_style_item_data") {
-    nk_image("image", "")
     nk_color("color", "")
+    nk_image("image", "")
+    nk_nine_slice("slice", "")
 }
 
 val nk_style_item = struct(Module.NUKLEAR, "NkStyleItem", nativeName = "struct nk_style_item") {

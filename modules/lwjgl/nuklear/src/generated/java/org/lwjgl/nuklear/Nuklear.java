@@ -1100,11 +1100,13 @@ public class Nuklear {
      * <ul>
      * <li>{@link #NK_STYLE_ITEM_COLOR STYLE_ITEM_COLOR}</li>
      * <li>{@link #NK_STYLE_ITEM_IMAGE STYLE_ITEM_IMAGE}</li>
+     * <li>{@link #NK_STYLE_ITEM_NINE_SLICE STYLE_ITEM_NINE_SLICE}</li>
      * </ul>
      */
     public static final int
-        NK_STYLE_ITEM_COLOR = 0,
-        NK_STYLE_ITEM_IMAGE = 1;
+        NK_STYLE_ITEM_COLOR      = 0,
+        NK_STYLE_ITEM_IMAGE      = 1,
+        NK_STYLE_ITEM_NINE_SLICE = 2;
 
     /**
      * nk_style_header_align
@@ -2561,6 +2563,20 @@ public class Nuklear {
     public static NkRect nk_layout_space_rect_to_local(@NativeType("struct nk_context *") NkContext ctx, @NativeType("struct nk_rect") NkRect ret) {
         nnk_layout_space_rect_to_local(ctx.address(), ret.address());
         return ret;
+    }
+
+    // --- [ nk_spacer ] ---
+
+    /** Unsafe version of: {@link #nk_spacer spacer} */
+    public static native void nnk_spacer(long ctx);
+
+    /**
+     * Spacer is a dummy widget that consumes space as usual but doesn't draw anything.
+     *
+     * @param ctx the nuklear context
+     */
+    public static void nk_spacer(@NativeType("struct nk_context *") NkContext ctx) {
+        nnk_spacer(ctx.address());
     }
 
     // --- [ nk_group_begin ] ---
@@ -5133,22 +5149,20 @@ public class Nuklear {
     // --- [ nk_combo ] ---
 
     /** Unsafe version of: {@link #nk_combo combo} */
-    public static native boolean nnk_combo(long ctx, long items, int count, boolean selected, int item_height, long size);
+    public static native int nnk_combo(long ctx, long items, int count, int selected, int item_height, long size);
 
     /** @param ctx the nuklear context */
-    @NativeType("nk_bool")
-    public static boolean nk_combo(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const **") PointerBuffer items, @NativeType("nk_bool") boolean selected, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    public static int nk_combo(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const **") PointerBuffer items, int selected, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         return nnk_combo(ctx.address(), memAddress(items), items.remaining(), selected, item_height, size.address());
     }
 
     // --- [ nk_combo_separator ] ---
 
     /** Unsafe version of: {@link #nk_combo_separator combo_separator} */
-    public static native boolean nnk_combo_separator(long ctx, long items_separated_by_separator, int separator, boolean selected, int count, int item_height, long size);
+    public static native int nnk_combo_separator(long ctx, long items_separated_by_separator, int separator, int selected, int count, int item_height, long size);
 
     /** @param ctx the nuklear context */
-    @NativeType("nk_bool")
-    public static boolean nk_combo_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_separator, int separator, @NativeType("nk_bool") boolean selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    public static int nk_combo_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_separator, int separator, int selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             checkNT1(items_separated_by_separator);
         }
@@ -5156,8 +5170,7 @@ public class Nuklear {
     }
 
     /** @param ctx the nuklear context */
-    @NativeType("nk_bool")
-    public static boolean nk_combo_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_separator, int separator, @NativeType("nk_bool") boolean selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    public static int nk_combo_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_separator, int separator, int selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(items_separated_by_separator, true);
@@ -5171,11 +5184,10 @@ public class Nuklear {
     // --- [ nk_combo_string ] ---
 
     /** Unsafe version of: {@link #nk_combo_string combo_string} */
-    public static native boolean nnk_combo_string(long ctx, long items_separated_by_zeros, boolean selected, int count, int item_height, long size);
+    public static native int nnk_combo_string(long ctx, long items_separated_by_zeros, int selected, int count, int item_height, long size);
 
     /** @param ctx the nuklear context */
-    @NativeType("nk_bool")
-    public static boolean nk_combo_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_zeros, @NativeType("nk_bool") boolean selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    public static int nk_combo_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_zeros, int selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             checkNT1(items_separated_by_zeros);
         }
@@ -5183,8 +5195,7 @@ public class Nuklear {
     }
 
     /** @param ctx the nuklear context */
-    @NativeType("nk_bool")
-    public static boolean nk_combo_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_zeros, @NativeType("nk_bool") boolean selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    public static int nk_combo_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_zeros, int selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(items_separated_by_zeros, true);
@@ -5198,11 +5209,10 @@ public class Nuklear {
     // --- [ nk_combo_callback ] ---
 
     /** Unsafe version of: {@link #nk_combo_callback combo_callback} */
-    public static native boolean nnk_combo_callback(long ctx, long item_getter, long userdata, boolean selected, int count, int item_height, long size);
+    public static native int nnk_combo_callback(long ctx, long item_getter, long userdata, int selected, int count, int item_height, long size);
 
     /** @param ctx the nuklear context */
-    @NativeType("nk_bool")
-    public static boolean nk_combo_callback(@NativeType("struct nk_context *") NkContext ctx, @NativeType("nk_item_getter") NkItemGetterI item_getter, @NativeType("void *") long userdata, @NativeType("nk_bool") boolean selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    public static int nk_combo_callback(@NativeType("struct nk_context *") NkContext ctx, @NativeType("nk_item_getter") NkItemGetterI item_getter, @NativeType("void *") long userdata, int selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             check(userdata);
         }
@@ -5215,7 +5225,7 @@ public class Nuklear {
     public static native void nnk_combobox(long ctx, long items, int count, long selected, int item_height, long size);
 
     /** @param ctx the nuklear context */
-    public static void nk_combobox(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const **") PointerBuffer items, @NativeType("nk_bool *") ByteBuffer selected, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    public static void nk_combobox(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const **") PointerBuffer items, @NativeType("int *") IntBuffer selected, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             check(selected, 1);
         }
@@ -5228,7 +5238,7 @@ public class Nuklear {
     public static native void nnk_combobox_string(long ctx, long items_separated_by_zeros, long selected, int count, int item_height, long size);
 
     /** @param ctx the nuklear context */
-    public static void nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_zeros, @NativeType("nk_bool *") ByteBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    public static void nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_zeros, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             checkNT1(items_separated_by_zeros);
             check(selected, 1);
@@ -5237,7 +5247,7 @@ public class Nuklear {
     }
 
     /** @param ctx the nuklear context */
-    public static void nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_zeros, @NativeType("nk_bool *") ByteBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    public static void nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_zeros, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             check(selected, 1);
         }
@@ -5257,7 +5267,7 @@ public class Nuklear {
     public static native void nnk_combobox_separator(long ctx, long items_separated_by_separator, int separator, long selected, int count, int item_height, long size);
 
     /** @param ctx the nuklear context */
-    public static void nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_separator, int separator, @NativeType("nk_bool *") ByteBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    public static void nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_separator, int separator, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             checkNT1(items_separated_by_separator);
             check(selected, 1);
@@ -5266,7 +5276,7 @@ public class Nuklear {
     }
 
     /** @param ctx the nuklear context */
-    public static void nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_separator, int separator, @NativeType("nk_bool *") ByteBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    public static void nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_separator, int separator, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             check(selected, 1);
         }
@@ -5286,7 +5296,7 @@ public class Nuklear {
     public static native void nnk_combobox_callback(long ctx, long item_getter, long userdata, long selected, int count, int item_height, long size);
 
     /** @param ctx the nuklear context */
-    public static void nk_combobox_callback(@NativeType("struct nk_context *") NkContext ctx, @NativeType("nk_item_getter") NkItemGetterI item_getter, @NativeType("void *") long userdata, @NativeType("nk_bool *") ByteBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+    public static void nk_combobox_callback(@NativeType("struct nk_context *") NkContext ctx, @NativeType("nk_item_getter") NkItemGetterI item_getter, @NativeType("void *") long userdata, @NativeType("int *") IntBuffer selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
         if (CHECKS) {
             check(userdata);
             check(selected, 1);
@@ -7666,7 +7676,7 @@ public class Nuklear {
     public static native void nnk_subimage_ptr(long ptr, short w, short h, long sub_region, long __result);
 
     @NativeType("struct nk_image")
-    public static NkImage nk_subimage_ptr(@NativeType("void *") long ptr, @NativeType("unsigned short") short w, @NativeType("unsigned short") short h, @NativeType("struct nk_rect") NkRect sub_region, @NativeType("struct nk_image") NkImage __result) {
+    public static NkImage nk_subimage_ptr(@NativeType("void *") long ptr, @NativeType("nk_ushort") short w, @NativeType("nk_ushort") short h, @NativeType("struct nk_rect") NkRect sub_region, @NativeType("struct nk_image") NkImage __result) {
         if (CHECKS) {
             check(ptr);
         }
@@ -7679,7 +7689,7 @@ public class Nuklear {
     public static native void nnk_subimage_id(int id, short w, short h, long sub_region, long __result);
 
     @NativeType("struct nk_image")
-    public static NkImage nk_subimage_id(int id, @NativeType("unsigned short") short w, @NativeType("unsigned short") short h, @NativeType("struct nk_rect") NkRect sub_region, @NativeType("struct nk_image") NkImage __result) {
+    public static NkImage nk_subimage_id(int id, @NativeType("nk_ushort") short w, @NativeType("nk_ushort") short h, @NativeType("struct nk_rect") NkRect sub_region, @NativeType("struct nk_image") NkImage __result) {
         nnk_subimage_id(id, w, h, sub_region.address(), __result.address());
         return __result;
     }
@@ -7689,8 +7699,83 @@ public class Nuklear {
     public static native void nnk_subimage_handle(long handle, short w, short h, long sub_region, long __result);
 
     @NativeType("struct nk_image")
-    public static NkImage nk_subimage_handle(@NativeType("nk_handle") NkHandle handle, @NativeType("unsigned short") short w, @NativeType("unsigned short") short h, @NativeType("struct nk_rect") NkRect sub_region, @NativeType("struct nk_image") NkImage __result) {
+    public static NkImage nk_subimage_handle(@NativeType("nk_handle") NkHandle handle, @NativeType("nk_ushort") short w, @NativeType("nk_ushort") short h, @NativeType("struct nk_rect") NkRect sub_region, @NativeType("struct nk_image") NkImage __result) {
         nnk_subimage_handle(handle.address(), w, h, sub_region.address(), __result.address());
+        return __result;
+    }
+
+    // --- [ nk_nine_slice_handle ] ---
+
+    public static native void nnk_nine_slice_handle(long handle, short l, short t, short r, short b, long __result);
+
+    @NativeType("struct nk_nine_slice")
+    public static NkNineSlice nk_nine_slice_handle(@NativeType("nk_handle") NkHandle handle, @NativeType("nk_ushort") short l, @NativeType("nk_ushort") short t, @NativeType("nk_ushort") short r, @NativeType("nk_ushort") short b, @NativeType("struct nk_nine_slice") NkNineSlice __result) {
+        nnk_nine_slice_handle(handle.address(), l, t, r, b, __result.address());
+        return __result;
+    }
+
+    // --- [ nk_nine_slice_ptr ] ---
+
+    public static native void nnk_nine_slice_ptr(long ptr, short l, short t, short r, short b, long __result);
+
+    @NativeType("struct nk_nine_slice")
+    public static NkNineSlice nk_nine_slice_ptr(@NativeType("void *") long ptr, @NativeType("nk_ushort") short l, @NativeType("nk_ushort") short t, @NativeType("nk_ushort") short r, @NativeType("nk_ushort") short b, @NativeType("struct nk_nine_slice") NkNineSlice __result) {
+        if (CHECKS) {
+            check(ptr);
+        }
+        nnk_nine_slice_ptr(ptr, l, t, r, b, __result.address());
+        return __result;
+    }
+
+    // --- [ nk_nine_slice_id ] ---
+
+    public static native void nnk_nine_slice_id(int id, short l, short t, short r, short b, long __result);
+
+    @NativeType("struct nk_nine_slice")
+    public static NkNineSlice nk_nine_slice_id(int id, @NativeType("nk_ushort") short l, @NativeType("nk_ushort") short t, @NativeType("nk_ushort") short r, @NativeType("nk_ushort") short b, @NativeType("struct nk_nine_slice") NkNineSlice __result) {
+        nnk_nine_slice_id(id, l, t, r, b, __result.address());
+        return __result;
+    }
+
+    // --- [ nk_nine_slice_is_sub9slice ] ---
+
+    public static native int nnk_nine_slice_is_sub9slice(long img);
+
+    @NativeType("int")
+    public static boolean nk_nine_slice_is_sub9slice(@NativeType("struct nk_nine_slice const *") NkNineSlice img) {
+        return nnk_nine_slice_is_sub9slice(img.address()) != 0;
+    }
+
+    // --- [ nk_sub9slice_ptr ] ---
+
+    public static native void nnk_sub9slice_ptr(long ptr, short w, short h, long sub_region, short l, short t, short r, short b, long __result);
+
+    @NativeType("struct nk_nine_slice")
+    public static NkNineSlice nk_sub9slice_ptr(@NativeType("void *") long ptr, @NativeType("nk_ushort") short w, @NativeType("nk_ushort") short h, @NativeType("struct nk_rect") NkRect sub_region, @NativeType("nk_ushort") short l, @NativeType("nk_ushort") short t, @NativeType("nk_ushort") short r, @NativeType("nk_ushort") short b, @NativeType("struct nk_nine_slice") NkNineSlice __result) {
+        if (CHECKS) {
+            check(ptr);
+        }
+        nnk_sub9slice_ptr(ptr, w, h, sub_region.address(), l, t, r, b, __result.address());
+        return __result;
+    }
+
+    // --- [ nk_sub9slice_id ] ---
+
+    public static native void nnk_sub9slice_id(int id, short w, short h, long sub_region, short l, short t, short r, short b, long __result);
+
+    @NativeType("struct nk_nine_slice")
+    public static NkNineSlice nk_sub9slice_id(int id, @NativeType("nk_ushort") short w, @NativeType("nk_ushort") short h, @NativeType("struct nk_rect") NkRect sub_region, @NativeType("nk_ushort") short l, @NativeType("nk_ushort") short t, @NativeType("nk_ushort") short r, @NativeType("nk_ushort") short b, @NativeType("struct nk_nine_slice") NkNineSlice __result) {
+        nnk_sub9slice_id(id, w, h, sub_region.address(), l, t, r, b, __result.address());
+        return __result;
+    }
+
+    // --- [ nk_sub9slice_handle ] ---
+
+    public static native void nnk_sub9slice_handle(long handle, short w, short h, long sub_region, short l, short t, short r, short b, long __result);
+
+    @NativeType("struct nk_nine_slice")
+    public static NkNineSlice nk_sub9slice_handle(@NativeType("nk_handle") NkHandle handle, @NativeType("nk_ushort") short w, @NativeType("nk_ushort") short h, @NativeType("struct nk_rect") NkRect sub_region, @NativeType("nk_ushort") short l, @NativeType("nk_ushort") short t, @NativeType("nk_ushort") short r, @NativeType("nk_ushort") short b, @NativeType("struct nk_nine_slice") NkNineSlice __result) {
+        nnk_sub9slice_handle(handle.address(), w, h, sub_region.address(), l, t, r, b, __result.address());
         return __result;
     }
 
@@ -8852,6 +8937,14 @@ public class Nuklear {
         nnk_draw_image(b.address(), rect.address(), img.address(), color.address());
     }
 
+    // --- [ nk_draw_nine_slice ] ---
+
+    public static native void nnk_draw_nine_slice(long b, long rect, long slc, long color);
+
+    public static void nk_draw_nine_slice(@NativeType("struct nk_command_buffer *") NkCommandBuffer b, @NativeType("struct nk_rect") NkRect rect, @NativeType("struct nk_nine_slice const *") NkNineSlice slc, @NativeType("struct nk_color") NkColor color) {
+        nnk_draw_nine_slice(b.address(), rect.address(), slc.address(), color.address());
+    }
+
     // --- [ nk_draw_text ] ---
 
     public static native void nnk_draw_text(long b, long rect, long string, int length, long font, long bg, long fg);
@@ -9368,6 +9461,16 @@ public class Nuklear {
         nnk_draw_list_push_userdata(list.address(), userdata.address());
     }
 
+    // --- [ nk_style_item_color ] ---
+
+    public static native void nnk_style_item_color(long color, long __result);
+
+    @NativeType("struct nk_style_item")
+    public static NkStyleItem nk_style_item_color(@NativeType("struct nk_color") NkColor color, @NativeType("struct nk_style_item") NkStyleItem __result) {
+        nnk_style_item_color(color.address(), __result.address());
+        return __result;
+    }
+
     // --- [ nk_style_item_image ] ---
 
     public static native void nnk_style_item_image(long img, long __result);
@@ -9378,13 +9481,13 @@ public class Nuklear {
         return __result;
     }
 
-    // --- [ nk_style_item_color ] ---
+    // --- [ nk_style_item_nine_slice ] ---
 
-    public static native void nnk_style_item_color(long color, long __result);
+    public static native void nnk_style_item_nine_slice(long slice, long __result);
 
     @NativeType("struct nk_style_item")
-    public static NkStyleItem nk_style_item_color(@NativeType("struct nk_color") NkColor color, @NativeType("struct nk_style_item") NkStyleItem __result) {
-        nnk_style_item_color(color.address(), __result.address());
+    public static NkStyleItem nk_style_item_nine_slice(@NativeType("struct nk_nine_slice") NkNineSlice slice, @NativeType("struct nk_style_item") NkStyleItem __result) {
+        nnk_style_item_nine_slice(slice.address(), __result.address());
         return __result;
     }
 
@@ -9748,6 +9851,83 @@ public class Nuklear {
             checkSafe(offset_y, 1);
         }
         nnk_popup_get_scroll(ctx.address(), offset_x, offset_y);
+    }
+
+    /** Array version of: {@link #nnk_combobox} */
+    public static native void nnk_combobox(long ctx, long items, int count, int[] selected, int item_height, long size);
+
+    /** Array version of: {@link #nk_combobox combobox} */
+    public static void nk_combobox(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const **") PointerBuffer items, @NativeType("int *") int[] selected, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+        if (CHECKS) {
+            check(selected, 1);
+        }
+        nnk_combobox(ctx.address(), memAddress(items), items.remaining(), selected, item_height, size.address());
+    }
+
+    /** Array version of: {@link #nnk_combobox_string} */
+    public static native void nnk_combobox_string(long ctx, long items_separated_by_zeros, int[] selected, int count, int item_height, long size);
+
+    /** Array version of: {@link #nk_combobox_string combobox_string} */
+    public static void nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_zeros, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+        if (CHECKS) {
+            checkNT1(items_separated_by_zeros);
+            check(selected, 1);
+        }
+        nnk_combobox_string(ctx.address(), memAddress(items_separated_by_zeros), selected, count, item_height, size.address());
+    }
+
+    /** Array version of: {@link #nk_combobox_string combobox_string} */
+    public static void nk_combobox_string(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_zeros, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+        if (CHECKS) {
+            check(selected, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(items_separated_by_zeros, true);
+            long items_separated_by_zerosEncoded = stack.getPointerAddress();
+            nnk_combobox_string(ctx.address(), items_separated_by_zerosEncoded, selected, count, item_height, size.address());
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    /** Array version of: {@link #nnk_combobox_separator} */
+    public static native void nnk_combobox_separator(long ctx, long items_separated_by_separator, int separator, int[] selected, int count, int item_height, long size);
+
+    /** Array version of: {@link #nk_combobox_separator combobox_separator} */
+    public static void nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer items_separated_by_separator, int separator, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+        if (CHECKS) {
+            checkNT1(items_separated_by_separator);
+            check(selected, 1);
+        }
+        nnk_combobox_separator(ctx.address(), memAddress(items_separated_by_separator), separator, selected, count, item_height, size.address());
+    }
+
+    /** Array version of: {@link #nk_combobox_separator combobox_separator} */
+    public static void nk_combobox_separator(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence items_separated_by_separator, int separator, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+        if (CHECKS) {
+            check(selected, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(items_separated_by_separator, true);
+            long items_separated_by_separatorEncoded = stack.getPointerAddress();
+            nnk_combobox_separator(ctx.address(), items_separated_by_separatorEncoded, separator, selected, count, item_height, size.address());
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    /** Array version of: {@link #nnk_combobox_callback} */
+    public static native void nnk_combobox_callback(long ctx, long item_getter, long userdata, int[] selected, int count, int item_height, long size);
+
+    /** Array version of: {@link #nk_combobox_callback combobox_callback} */
+    public static void nk_combobox_callback(@NativeType("struct nk_context *") NkContext ctx, @NativeType("nk_item_getter") NkItemGetterI item_getter, @NativeType("void *") long userdata, @NativeType("int *") int[] selected, int count, int item_height, @NativeType("struct nk_vec2") NkVec2 size) {
+        if (CHECKS) {
+            check(userdata);
+            check(selected, 1);
+        }
+        nnk_combobox_callback(ctx.address(), item_getter.address(), userdata, selected, count, item_height, size.address());
     }
 
     /** Array version of: {@link #nnk_style_push_float} */

@@ -20,8 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * union nk_style_item_data {
- *     {@link NkImage struct nk_image} image;
  *     {@link NkColor struct nk_color} color;
+ *     {@link NkImage struct nk_image} image;
+ *     {@link NkNineSlice struct nk_nine_slice} slice;
  * }</code></pre>
  */
 @NativeType("union nk_style_item_data")
@@ -35,20 +36,23 @@ public class NkStyleItemData extends Struct implements NativeResource {
 
     /** The struct member offsets. */
     public static final int
+        COLOR,
         IMAGE,
-        COLOR;
+        SLICE;
 
     static {
         Layout layout = __union(
+            __member(NkColor.SIZEOF, NkColor.ALIGNOF),
             __member(NkImage.SIZEOF, NkImage.ALIGNOF),
-            __member(NkColor.SIZEOF, NkColor.ALIGNOF)
+            __member(NkNineSlice.SIZEOF, NkNineSlice.ALIGNOF)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        IMAGE = layout.offsetof(0);
-        COLOR = layout.offsetof(1);
+        COLOR = layout.offsetof(0);
+        IMAGE = layout.offsetof(1);
+        SLICE = layout.offsetof(2);
     }
 
     /**
@@ -64,21 +68,28 @@ public class NkStyleItemData extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return a {@link NkImage} view of the {@code image} field. */
-    @NativeType("struct nk_image")
-    public NkImage image() { return nimage(address()); }
     /** @return a {@link NkColor} view of the {@code color} field. */
     @NativeType("struct nk_color")
     public NkColor color() { return ncolor(address()); }
+    /** @return a {@link NkImage} view of the {@code image} field. */
+    @NativeType("struct nk_image")
+    public NkImage image() { return nimage(address()); }
+    /** @return a {@link NkNineSlice} view of the {@code slice} field. */
+    @NativeType("struct nk_nine_slice")
+    public NkNineSlice slice$() { return nslice$(address()); }
 
-    /** Copies the specified {@link NkImage} to the {@code image} field. */
-    public NkStyleItemData image(@NativeType("struct nk_image") NkImage value) { nimage(address(), value); return this; }
-    /** Passes the {@code image} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkStyleItemData image(java.util.function.Consumer<NkImage> consumer) { consumer.accept(image()); return this; }
     /** Copies the specified {@link NkColor} to the {@code color} field. */
     public NkStyleItemData color(@NativeType("struct nk_color") NkColor value) { ncolor(address(), value); return this; }
     /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkStyleItemData color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(color()); return this; }
+    /** Copies the specified {@link NkImage} to the {@code image} field. */
+    public NkStyleItemData image(@NativeType("struct nk_image") NkImage value) { nimage(address(), value); return this; }
+    /** Passes the {@code image} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleItemData image(java.util.function.Consumer<NkImage> consumer) { consumer.accept(image()); return this; }
+    /** Copies the specified {@link NkNineSlice} to the {@code slice} field. */
+    public NkStyleItemData slice$(@NativeType("struct nk_nine_slice") NkNineSlice value) { nslice$(address(), value); return this; }
+    /** Passes the {@code slice} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkStyleItemData slice$(java.util.function.Consumer<NkNineSlice> consumer) { consumer.accept(slice$()); return this; }
 
     /**
      * Copies the specified struct data to this struct.
@@ -224,15 +235,19 @@ public class NkStyleItemData extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #image}. */
-    public static NkImage nimage(long struct) { return NkImage.create(struct + NkStyleItemData.IMAGE); }
     /** Unsafe version of {@link #color}. */
     public static NkColor ncolor(long struct) { return NkColor.create(struct + NkStyleItemData.COLOR); }
+    /** Unsafe version of {@link #image}. */
+    public static NkImage nimage(long struct) { return NkImage.create(struct + NkStyleItemData.IMAGE); }
+    /** Unsafe version of {@link #slice$}. */
+    public static NkNineSlice nslice$(long struct) { return NkNineSlice.create(struct + NkStyleItemData.SLICE); }
 
-    /** Unsafe version of {@link #image(NkImage) image}. */
-    public static void nimage(long struct, NkImage value) { memCopy(value.address(), struct + NkStyleItemData.IMAGE, NkImage.SIZEOF); }
     /** Unsafe version of {@link #color(NkColor) color}. */
     public static void ncolor(long struct, NkColor value) { memCopy(value.address(), struct + NkStyleItemData.COLOR, NkColor.SIZEOF); }
+    /** Unsafe version of {@link #image(NkImage) image}. */
+    public static void nimage(long struct, NkImage value) { memCopy(value.address(), struct + NkStyleItemData.IMAGE, NkImage.SIZEOF); }
+    /** Unsafe version of {@link #slice$(NkNineSlice) slice$}. */
+    public static void nslice$(long struct, NkNineSlice value) { memCopy(value.address(), struct + NkStyleItemData.SLICE, NkNineSlice.SIZEOF); }
 
     // -----------------------------------
 
@@ -272,21 +287,28 @@ public class NkStyleItemData extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link NkImage} view of the {@code image} field. */
-        @NativeType("struct nk_image")
-        public NkImage image() { return NkStyleItemData.nimage(address()); }
         /** @return a {@link NkColor} view of the {@code color} field. */
         @NativeType("struct nk_color")
         public NkColor color() { return NkStyleItemData.ncolor(address()); }
+        /** @return a {@link NkImage} view of the {@code image} field. */
+        @NativeType("struct nk_image")
+        public NkImage image() { return NkStyleItemData.nimage(address()); }
+        /** @return a {@link NkNineSlice} view of the {@code slice} field. */
+        @NativeType("struct nk_nine_slice")
+        public NkNineSlice slice$() { return NkStyleItemData.nslice$(address()); }
 
-        /** Copies the specified {@link NkImage} to the {@code image} field. */
-        public NkStyleItemData.Buffer image(@NativeType("struct nk_image") NkImage value) { NkStyleItemData.nimage(address(), value); return this; }
-        /** Passes the {@code image} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkStyleItemData.Buffer image(java.util.function.Consumer<NkImage> consumer) { consumer.accept(image()); return this; }
         /** Copies the specified {@link NkColor} to the {@code color} field. */
         public NkStyleItemData.Buffer color(@NativeType("struct nk_color") NkColor value) { NkStyleItemData.ncolor(address(), value); return this; }
         /** Passes the {@code color} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkStyleItemData.Buffer color(java.util.function.Consumer<NkColor> consumer) { consumer.accept(color()); return this; }
+        /** Copies the specified {@link NkImage} to the {@code image} field. */
+        public NkStyleItemData.Buffer image(@NativeType("struct nk_image") NkImage value) { NkStyleItemData.nimage(address(), value); return this; }
+        /** Passes the {@code image} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleItemData.Buffer image(java.util.function.Consumer<NkImage> consumer) { consumer.accept(image()); return this; }
+        /** Copies the specified {@link NkNineSlice} to the {@code slice} field. */
+        public NkStyleItemData.Buffer slice$(@NativeType("struct nk_nine_slice") NkNineSlice value) { NkStyleItemData.nslice$(address(), value); return this; }
+        /** Passes the {@code slice} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkStyleItemData.Buffer slice$(java.util.function.Consumer<NkNineSlice> consumer) { consumer.accept(slice$()); return this; }
 
     }
 
