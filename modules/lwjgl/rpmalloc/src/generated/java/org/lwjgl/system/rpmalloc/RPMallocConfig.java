@@ -31,6 +31,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct rpmalloc_config_t {
  *     void * (*{@link RPMemoryMapCallbackI memory_map}) (size_t size, size_t *offset);
  *     void (*{@link RPMemoryUnmapCallbackI memory_unmap}) (void *address, size_t size, size_t offset, int release);
+ *     void (*{@link RPErrorCallbackI error_callback}) (char const *message);
+ *     int (*{@link RPMapFailCallbackI map_fail_callback}) (size_t size);
  *     size_t {@link #page_size};
  *     size_t {@link #span_size};
  *     size_t {@link #span_map_count};
@@ -51,6 +53,8 @@ public class RPMallocConfig extends Struct implements NativeResource {
     public static final int
         MEMORY_MAP,
         MEMORY_UNMAP,
+        ERROR_CALLBACK,
+        MAP_FAIL_CALLBACK,
         PAGE_SIZE,
         SPAN_SIZE,
         SPAN_MAP_COUNT,
@@ -58,6 +62,8 @@ public class RPMallocConfig extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
+            __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -72,10 +78,12 @@ public class RPMallocConfig extends Struct implements NativeResource {
 
         MEMORY_MAP = layout.offsetof(0);
         MEMORY_UNMAP = layout.offsetof(1);
-        PAGE_SIZE = layout.offsetof(2);
-        SPAN_SIZE = layout.offsetof(3);
-        SPAN_MAP_COUNT = layout.offsetof(4);
-        ENABLE_HUGE_PAGES = layout.offsetof(5);
+        ERROR_CALLBACK = layout.offsetof(2);
+        MAP_FAIL_CALLBACK = layout.offsetof(3);
+        PAGE_SIZE = layout.offsetof(4);
+        SPAN_SIZE = layout.offsetof(5);
+        SPAN_MAP_COUNT = layout.offsetof(6);
+        ENABLE_HUGE_PAGES = layout.offsetof(7);
     }
 
     /**
@@ -99,6 +107,14 @@ public class RPMallocConfig extends Struct implements NativeResource {
     @Nullable
     @NativeType("void (*) (void *, size_t, size_t, int)")
     public RPMemoryUnmapCallback memory_unmap() { return nmemory_unmap(address()); }
+    /** the error callback function */
+    @Nullable
+    @NativeType("void (*) (char const *)")
+    public RPErrorCallback error_callback() { return nerror_callback(address()); }
+    /** the map fail callback function */
+    @Nullable
+    @NativeType("int (*) (size_t)")
+    public RPMapFailCallback map_fail_callback() { return nmap_fail_callback(address()); }
     /**
      * the size of memory pages.
      * 
@@ -144,6 +160,10 @@ public class RPMallocConfig extends Struct implements NativeResource {
     public RPMallocConfig memory_map(@Nullable @NativeType("void * (*) (size_t, size_t *)") RPMemoryMapCallbackI value) { nmemory_map(address(), value); return this; }
     /** Sets the specified value to the {@link #memory_unmap} field. */
     public RPMallocConfig memory_unmap(@Nullable @NativeType("void (*) (void *, size_t, size_t, int)") RPMemoryUnmapCallbackI value) { nmemory_unmap(address(), value); return this; }
+    /** Sets the specified value to the {@link #error_callback} field. */
+    public RPMallocConfig error_callback(@Nullable @NativeType("void (*) (char const *)") RPErrorCallbackI value) { nerror_callback(address(), value); return this; }
+    /** Sets the specified value to the {@link #map_fail_callback} field. */
+    public RPMallocConfig map_fail_callback(@Nullable @NativeType("int (*) (size_t)") RPMapFailCallbackI value) { nmap_fail_callback(address(), value); return this; }
     /** Sets the specified value to the {@link #page_size} field. */
     public RPMallocConfig page_size(@NativeType("size_t") long value) { npage_size(address(), value); return this; }
     /** Sets the specified value to the {@link #span_size} field. */
@@ -157,6 +177,8 @@ public class RPMallocConfig extends Struct implements NativeResource {
     public RPMallocConfig set(
         RPMemoryMapCallbackI memory_map,
         RPMemoryUnmapCallbackI memory_unmap,
+        RPErrorCallbackI error_callback,
+        RPMapFailCallbackI map_fail_callback,
         long page_size,
         long span_size,
         long span_map_count,
@@ -164,6 +186,8 @@ public class RPMallocConfig extends Struct implements NativeResource {
     ) {
         memory_map(memory_map);
         memory_unmap(memory_unmap);
+        error_callback(error_callback);
+        map_fail_callback(map_fail_callback);
         page_size(page_size);
         span_size(span_size);
         span_map_count(span_map_count);
@@ -249,6 +273,10 @@ public class RPMallocConfig extends Struct implements NativeResource {
     @Nullable public static RPMemoryMapCallback nmemory_map(long struct) { return RPMemoryMapCallback.createSafe(memGetAddress(struct + RPMallocConfig.MEMORY_MAP)); }
     /** Unsafe version of {@link #memory_unmap}. */
     @Nullable public static RPMemoryUnmapCallback nmemory_unmap(long struct) { return RPMemoryUnmapCallback.createSafe(memGetAddress(struct + RPMallocConfig.MEMORY_UNMAP)); }
+    /** Unsafe version of {@link #error_callback}. */
+    @Nullable public static RPErrorCallback nerror_callback(long struct) { return RPErrorCallback.createSafe(memGetAddress(struct + RPMallocConfig.ERROR_CALLBACK)); }
+    /** Unsafe version of {@link #map_fail_callback}. */
+    @Nullable public static RPMapFailCallback nmap_fail_callback(long struct) { return RPMapFailCallback.createSafe(memGetAddress(struct + RPMallocConfig.MAP_FAIL_CALLBACK)); }
     /** Unsafe version of {@link #page_size}. */
     public static long npage_size(long struct) { return memGetAddress(struct + RPMallocConfig.PAGE_SIZE); }
     /** Unsafe version of {@link #span_size}. */
@@ -262,6 +290,10 @@ public class RPMallocConfig extends Struct implements NativeResource {
     public static void nmemory_map(long struct, @Nullable RPMemoryMapCallbackI value) { memPutAddress(struct + RPMallocConfig.MEMORY_MAP, memAddressSafe(value)); }
     /** Unsafe version of {@link #memory_unmap(RPMemoryUnmapCallbackI) memory_unmap}. */
     public static void nmemory_unmap(long struct, @Nullable RPMemoryUnmapCallbackI value) { memPutAddress(struct + RPMallocConfig.MEMORY_UNMAP, memAddressSafe(value)); }
+    /** Unsafe version of {@link #error_callback(RPErrorCallbackI) error_callback}. */
+    public static void nerror_callback(long struct, @Nullable RPErrorCallbackI value) { memPutAddress(struct + RPMallocConfig.ERROR_CALLBACK, memAddressSafe(value)); }
+    /** Unsafe version of {@link #map_fail_callback(RPMapFailCallbackI) map_fail_callback}. */
+    public static void nmap_fail_callback(long struct, @Nullable RPMapFailCallbackI value) { memPutAddress(struct + RPMallocConfig.MAP_FAIL_CALLBACK, memAddressSafe(value)); }
     /** Unsafe version of {@link #page_size(long) page_size}. */
     public static void npage_size(long struct, long value) { memPutAddress(struct + RPMallocConfig.PAGE_SIZE, value); }
     /** Unsafe version of {@link #span_size(long) span_size}. */

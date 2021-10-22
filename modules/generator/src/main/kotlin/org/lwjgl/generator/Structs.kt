@@ -1949,15 +1949,16 @@ ${validations.joinToString("\n")}
                 }
 
                 if (it.has<PointerSetter>()) {
-                    it.get<PointerSetter>().types.forEach { structType ->
-                        if (module == Module.VULKAN && setter == "pNext") {
-                            printSetterJavadoc(accessMode, it, indent, "Prepends the specified {@link $structType} value to the {@code pNext} chain.", setter)
+                    val pointerSetter = it.get<PointerSetter>()
+                    pointerSetter.types.forEach { type ->
+                        if (pointerSetter.prepend) {
+                            printSetterJavadoc(accessMode, it, indent, "Prepends the specified {@link $type} value to the {@code $setter} chain.", setter)
                             if (overrides) println("$indent@Override")
-                            println("${indent}public $returnType pNext($structType value) { return this.pNext(value.pNext(this.pNext()).address()); }")
+                            println("${indent}public $returnType $setter($type value) { return this.$setter(value.${pointerSetter.targetSetter ?: setter}(this.$setter()).address()); }")
                         } else {
-                            printSetterJavadoc(accessMode, it, indent, "Sets the address of the specified {@link $structType} value to the #member field.", setter)
+                            printSetterJavadoc(accessMode, it, indent, "Sets the address of the specified {@link $type} value to the #member field.", setter)
                             if (overrides) println("$indent@Override")
-                            println("${indent}public $returnType $setter($structType value) { return $setter(value.address()); }")
+                            println("${indent}public $returnType $setter($type value) { return $setter(value.address()); }")
                         }
                     }
                 }

@@ -750,7 +750,10 @@ val VkImageMemoryBarrier = struct(Module.VULKAN, "VkImageMemoryBarrier") {
         """
 
     Expression("#STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkSampleLocationsInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkSampleLocationsInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkAccessFlags("srcAccessMask", "a bitmask of {@code VkAccessFlagBits} specifying a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-access-masks\">source access mask</a>.")
     VkAccessFlags("dstAccessMask", "a bitmask of {@code VkAccessFlagBits} specifying a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-access-masks\">destination access mask</a>.")
     VkImageLayout("oldLayout", "the old layout in an <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-image-layout-transitions\">image layout transition</a>.")
@@ -999,7 +1002,10 @@ val VkInstanceCreateInfo = struct(Module.VULKAN, "VkInstanceCreateInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_INSTANCE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkDebugReportCallbackCreateInfoEXT", "VkDebugUtilsMessengerCreateInfoEXT", "VkValidationFeaturesEXT", "VkValidationFlagsEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkDebugReportCallbackCreateInfoEXT", "VkDebugUtilsMessengerCreateInfoEXT", "VkValidationFeaturesEXT", "VkValidationFlagsEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkInstanceCreateFlags("flags", "reserved for future use.")
     nullable..VkApplicationInfo.const.p("pApplicationInfo", "{@code NULL} or a pointer to a ##VkApplicationInfo structure. If not {@code NULL}, this information helps implementations recognize behavior inherent to classes of applications. ##VkApplicationInfo is defined in detail below.")
     AutoSize("ppEnabledLayerNames", optional = true)..uint32_t("enabledLayerCount", "the number of global layers to enable.")
@@ -1658,7 +1664,10 @@ val VkDeviceQueueCreateInfo = struct(Module.VULKAN, "VkDeviceQueueCreateInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkDeviceQueueGlobalPriorityCreateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkDeviceQueueGlobalPriorityCreateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDeviceQueueCreateFlags("flags", "a bitmask indicating behavior of the queue.")
     uint32_t("queueFamilyIndex", "an unsigned integer indicating the index of the queue family in which to create the queue on this device. This index corresponds to the index of an element of the {@code pQueueFamilyProperties} array that was returned by {@code vkGetPhysicalDeviceQueueFamilyProperties}.")
     AutoSize("pQueuePriorities")..uint32_t("queueCount", "an unsigned integer specifying the number of queues to create in the queue family indicated by {@code queueFamilyIndex}.")
@@ -1716,7 +1725,10 @@ val VkDeviceCreateInfo = struct(Module.VULKAN, "VkDeviceCreateInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_DEVICE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkDeviceDeviceMemoryReportCreateInfoEXT", "VkDeviceDiagnosticsConfigCreateInfoNV", "VkDeviceGroupDeviceCreateInfo", "VkDeviceGroupDeviceCreateInfoKHR", "VkDeviceMemoryOverallocationCreateInfoAMD", "VkDevicePrivateDataCreateInfoEXT", "VkPhysicalDevice16BitStorageFeatures", "VkPhysicalDevice16BitStorageFeaturesKHR", "VkPhysicalDevice4444FormatsFeaturesEXT", "VkPhysicalDevice8BitStorageFeatures", "VkPhysicalDevice8BitStorageFeaturesKHR", "VkPhysicalDeviceASTCDecodeFeaturesEXT", "VkPhysicalDeviceAccelerationStructureFeaturesKHR", "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT", "VkPhysicalDeviceBorderColorSwizzleFeaturesEXT", "VkPhysicalDeviceBufferAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeatures", "VkPhysicalDeviceBufferDeviceAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeaturesKHR", "VkPhysicalDeviceCoherentMemoryFeaturesAMD", "VkPhysicalDeviceColorWriteEnableFeaturesEXT", "VkPhysicalDeviceComputeShaderDerivativesFeaturesNV", "VkPhysicalDeviceConditionalRenderingFeaturesEXT", "VkPhysicalDeviceCooperativeMatrixFeaturesNV", "VkPhysicalDeviceCornerSampledImageFeaturesNV", "VkPhysicalDeviceCoverageReductionModeFeaturesNV", "VkPhysicalDeviceCustomBorderColorFeaturesEXT", "VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV", "VkPhysicalDeviceDepthClipEnableFeaturesEXT", "VkPhysicalDeviceDescriptorIndexingFeatures", "VkPhysicalDeviceDescriptorIndexingFeaturesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV", "VkPhysicalDeviceDeviceMemoryReportFeaturesEXT", "VkPhysicalDeviceDiagnosticsConfigFeaturesNV", "VkPhysicalDeviceExclusiveScissorFeaturesNV", "VkPhysicalDeviceExtendedDynamicState2FeaturesEXT", "VkPhysicalDeviceExtendedDynamicStateFeaturesEXT", "VkPhysicalDeviceExternalMemoryRDMAFeaturesNV", "VkPhysicalDeviceFeatures2", "VkPhysicalDeviceFeatures2KHR", "VkPhysicalDeviceFloat16Int8FeaturesKHR", "VkPhysicalDeviceFragmentDensityMap2FeaturesEXT", "VkPhysicalDeviceFragmentDensityMapFeaturesEXT", "VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV", "VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT", "VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV", "VkPhysicalDeviceFragmentShadingRateFeaturesKHR", "VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT", "VkPhysicalDeviceHostQueryResetFeatures", "VkPhysicalDeviceHostQueryResetFeaturesEXT", "VkPhysicalDeviceImageRobustnessFeaturesEXT", "VkPhysicalDeviceImagelessFramebufferFeatures", "VkPhysicalDeviceImagelessFramebufferFeaturesKHR", "VkPhysicalDeviceIndexTypeUint8FeaturesEXT", "VkPhysicalDeviceInheritedViewportScissorFeaturesNV", "VkPhysicalDeviceInlineUniformBlockFeaturesEXT", "VkPhysicalDeviceInvocationMaskFeaturesHUAWEI", "VkPhysicalDeviceLineRasterizationFeaturesEXT", "VkPhysicalDeviceMaintenance4FeaturesKHR", "VkPhysicalDeviceMemoryPriorityFeaturesEXT", "VkPhysicalDeviceMeshShaderFeaturesNV", "VkPhysicalDeviceMultiDrawFeaturesEXT", "VkPhysicalDeviceMultiviewFeatures", "VkPhysicalDeviceMultiviewFeaturesKHR", "VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE", "VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT", "VkPhysicalDevicePerformanceQueryFeaturesKHR", "VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT", "VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR", "VkPhysicalDevicePortabilitySubsetFeaturesKHR", "VkPhysicalDevicePresentIdFeaturesKHR", "VkPhysicalDevicePresentWaitFeaturesKHR", "VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT", "VkPhysicalDevicePrivateDataFeaturesEXT", "VkPhysicalDeviceProtectedMemoryFeatures", "VkPhysicalDeviceProvokingVertexFeaturesEXT", "VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT", "VkPhysicalDeviceRayQueryFeaturesKHR", "VkPhysicalDeviceRayTracingMotionBlurFeaturesNV", "VkPhysicalDeviceRayTracingPipelineFeaturesKHR", "VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV", "VkPhysicalDeviceRobustness2FeaturesEXT", "VkPhysicalDeviceSamplerYcbcrConversionFeatures", "VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR", "VkPhysicalDeviceScalarBlockLayoutFeatures", "VkPhysicalDeviceScalarBlockLayoutFeaturesEXT", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR", "VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT", "VkPhysicalDeviceShaderAtomicFloatFeaturesEXT", "VkPhysicalDeviceShaderAtomicInt64Features", "VkPhysicalDeviceShaderAtomicInt64FeaturesKHR", "VkPhysicalDeviceShaderClockFeaturesKHR", "VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT", "VkPhysicalDeviceShaderDrawParameterFeatures", "VkPhysicalDeviceShaderDrawParametersFeatures", "VkPhysicalDeviceShaderFloat16Int8Features", "VkPhysicalDeviceShaderFloat16Int8FeaturesKHR", "VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT", "VkPhysicalDeviceShaderImageFootprintFeaturesNV", "VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR", "VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL", "VkPhysicalDeviceShaderSMBuiltinsFeaturesNV", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR", "VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR", "VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR", "VkPhysicalDeviceShadingRateImageFeaturesNV", "VkPhysicalDeviceSubgroupSizeControlFeaturesEXT", "VkPhysicalDeviceSubpassShadingFeaturesHUAWEI", "VkPhysicalDeviceSynchronization2FeaturesKHR", "VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT", "VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT", "VkPhysicalDeviceTimelineSemaphoreFeatures", "VkPhysicalDeviceTimelineSemaphoreFeaturesKHR", "VkPhysicalDeviceTransformFeedbackFeaturesEXT", "VkPhysicalDeviceUniformBufferStandardLayoutFeatures", "VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR", "VkPhysicalDeviceVariablePointerFeatures", "VkPhysicalDeviceVariablePointerFeaturesKHR", "VkPhysicalDeviceVariablePointersFeatures", "VkPhysicalDeviceVariablePointersFeaturesKHR", "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT", "VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT", "VkPhysicalDeviceVulkan11Features", "VkPhysicalDeviceVulkan12Features", "VkPhysicalDeviceVulkanMemoryModelFeatures", "VkPhysicalDeviceVulkanMemoryModelFeaturesKHR", "VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR", "VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT", "VkPhysicalDeviceYcbcrImageArraysFeaturesEXT", "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkDeviceDeviceMemoryReportCreateInfoEXT", "VkDeviceDiagnosticsConfigCreateInfoNV", "VkDeviceGroupDeviceCreateInfo", "VkDeviceGroupDeviceCreateInfoKHR", "VkDeviceMemoryOverallocationCreateInfoAMD", "VkDevicePrivateDataCreateInfoEXT", "VkPhysicalDevice16BitStorageFeatures", "VkPhysicalDevice16BitStorageFeaturesKHR", "VkPhysicalDevice4444FormatsFeaturesEXT", "VkPhysicalDevice8BitStorageFeatures", "VkPhysicalDevice8BitStorageFeaturesKHR", "VkPhysicalDeviceASTCDecodeFeaturesEXT", "VkPhysicalDeviceAccelerationStructureFeaturesKHR", "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT", "VkPhysicalDeviceBorderColorSwizzleFeaturesEXT", "VkPhysicalDeviceBufferAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeatures", "VkPhysicalDeviceBufferDeviceAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeaturesKHR", "VkPhysicalDeviceCoherentMemoryFeaturesAMD", "VkPhysicalDeviceColorWriteEnableFeaturesEXT", "VkPhysicalDeviceComputeShaderDerivativesFeaturesNV", "VkPhysicalDeviceConditionalRenderingFeaturesEXT", "VkPhysicalDeviceCooperativeMatrixFeaturesNV", "VkPhysicalDeviceCornerSampledImageFeaturesNV", "VkPhysicalDeviceCoverageReductionModeFeaturesNV", "VkPhysicalDeviceCustomBorderColorFeaturesEXT", "VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV", "VkPhysicalDeviceDepthClipEnableFeaturesEXT", "VkPhysicalDeviceDescriptorIndexingFeatures", "VkPhysicalDeviceDescriptorIndexingFeaturesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV", "VkPhysicalDeviceDeviceMemoryReportFeaturesEXT", "VkPhysicalDeviceDiagnosticsConfigFeaturesNV", "VkPhysicalDeviceExclusiveScissorFeaturesNV", "VkPhysicalDeviceExtendedDynamicState2FeaturesEXT", "VkPhysicalDeviceExtendedDynamicStateFeaturesEXT", "VkPhysicalDeviceExternalMemoryRDMAFeaturesNV", "VkPhysicalDeviceFeatures2", "VkPhysicalDeviceFeatures2KHR", "VkPhysicalDeviceFloat16Int8FeaturesKHR", "VkPhysicalDeviceFragmentDensityMap2FeaturesEXT", "VkPhysicalDeviceFragmentDensityMapFeaturesEXT", "VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV", "VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT", "VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV", "VkPhysicalDeviceFragmentShadingRateFeaturesKHR", "VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT", "VkPhysicalDeviceHostQueryResetFeatures", "VkPhysicalDeviceHostQueryResetFeaturesEXT", "VkPhysicalDeviceImageRobustnessFeaturesEXT", "VkPhysicalDeviceImagelessFramebufferFeatures", "VkPhysicalDeviceImagelessFramebufferFeaturesKHR", "VkPhysicalDeviceIndexTypeUint8FeaturesEXT", "VkPhysicalDeviceInheritedViewportScissorFeaturesNV", "VkPhysicalDeviceInlineUniformBlockFeaturesEXT", "VkPhysicalDeviceInvocationMaskFeaturesHUAWEI", "VkPhysicalDeviceLineRasterizationFeaturesEXT", "VkPhysicalDeviceMaintenance4FeaturesKHR", "VkPhysicalDeviceMemoryPriorityFeaturesEXT", "VkPhysicalDeviceMeshShaderFeaturesNV", "VkPhysicalDeviceMultiDrawFeaturesEXT", "VkPhysicalDeviceMultiviewFeatures", "VkPhysicalDeviceMultiviewFeaturesKHR", "VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE", "VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT", "VkPhysicalDevicePerformanceQueryFeaturesKHR", "VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT", "VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR", "VkPhysicalDevicePortabilitySubsetFeaturesKHR", "VkPhysicalDevicePresentIdFeaturesKHR", "VkPhysicalDevicePresentWaitFeaturesKHR", "VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT", "VkPhysicalDevicePrivateDataFeaturesEXT", "VkPhysicalDeviceProtectedMemoryFeatures", "VkPhysicalDeviceProvokingVertexFeaturesEXT", "VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT", "VkPhysicalDeviceRayQueryFeaturesKHR", "VkPhysicalDeviceRayTracingMotionBlurFeaturesNV", "VkPhysicalDeviceRayTracingPipelineFeaturesKHR", "VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV", "VkPhysicalDeviceRobustness2FeaturesEXT", "VkPhysicalDeviceSamplerYcbcrConversionFeatures", "VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR", "VkPhysicalDeviceScalarBlockLayoutFeatures", "VkPhysicalDeviceScalarBlockLayoutFeaturesEXT", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR", "VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT", "VkPhysicalDeviceShaderAtomicFloatFeaturesEXT", "VkPhysicalDeviceShaderAtomicInt64Features", "VkPhysicalDeviceShaderAtomicInt64FeaturesKHR", "VkPhysicalDeviceShaderClockFeaturesKHR", "VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT", "VkPhysicalDeviceShaderDrawParameterFeatures", "VkPhysicalDeviceShaderDrawParametersFeatures", "VkPhysicalDeviceShaderFloat16Int8Features", "VkPhysicalDeviceShaderFloat16Int8FeaturesKHR", "VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT", "VkPhysicalDeviceShaderImageFootprintFeaturesNV", "VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR", "VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL", "VkPhysicalDeviceShaderSMBuiltinsFeaturesNV", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR", "VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR", "VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR", "VkPhysicalDeviceShadingRateImageFeaturesNV", "VkPhysicalDeviceSubgroupSizeControlFeaturesEXT", "VkPhysicalDeviceSubpassShadingFeaturesHUAWEI", "VkPhysicalDeviceSynchronization2FeaturesKHR", "VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT", "VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT", "VkPhysicalDeviceTimelineSemaphoreFeatures", "VkPhysicalDeviceTimelineSemaphoreFeaturesKHR", "VkPhysicalDeviceTransformFeedbackFeaturesEXT", "VkPhysicalDeviceUniformBufferStandardLayoutFeatures", "VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR", "VkPhysicalDeviceVariablePointerFeatures", "VkPhysicalDeviceVariablePointerFeaturesKHR", "VkPhysicalDeviceVariablePointersFeatures", "VkPhysicalDeviceVariablePointersFeaturesKHR", "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT", "VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT", "VkPhysicalDeviceVulkan11Features", "VkPhysicalDeviceVulkan12Features", "VkPhysicalDeviceVulkanMemoryModelFeatures", "VkPhysicalDeviceVulkanMemoryModelFeaturesKHR", "VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR", "VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT", "VkPhysicalDeviceYcbcrImageArraysFeaturesEXT", "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDeviceCreateFlags("flags", "reserved for future use.")
     AutoSize("pQueueCreateInfos")..uint32_t("queueCreateInfoCount", "the unsigned integer size of the {@code pQueueCreateInfos} array. Refer to the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#devsandqueues-queue-creation\">Queue Creation</a> section below for further details.")
     VkDeviceQueueCreateInfo.const.p("pQueueCreateInfos", "a pointer to an array of ##VkDeviceQueueCreateInfo structures describing the queues that are requested to be created along with the logical device. Refer to the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#devsandqueues-queue-creation\">Queue Creation</a> section below for further details.")
@@ -1801,7 +1813,10 @@ val VkSubmitInfo = struct(Module.VULKAN, "VkSubmitInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_SUBMIT_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkD3D12FenceSubmitInfoKHR", "VkDeviceGroupSubmitInfo", "VkDeviceGroupSubmitInfoKHR", "VkPerformanceQuerySubmitInfoKHR", "VkProtectedSubmitInfo", "VkTimelineSemaphoreSubmitInfo", "VkTimelineSemaphoreSubmitInfoKHR", "VkWin32KeyedMutexAcquireReleaseInfoKHR", "VkWin32KeyedMutexAcquireReleaseInfoNV")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkD3D12FenceSubmitInfoKHR", "VkDeviceGroupSubmitInfo", "VkDeviceGroupSubmitInfoKHR", "VkPerformanceQuerySubmitInfoKHR", "VkProtectedSubmitInfo", "VkTimelineSemaphoreSubmitInfo", "VkTimelineSemaphoreSubmitInfoKHR", "VkWin32KeyedMutexAcquireReleaseInfoKHR", "VkWin32KeyedMutexAcquireReleaseInfoNV",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pWaitSemaphores", "pWaitDstStageMask", optional = true)..uint32_t("waitSemaphoreCount", "the number of semaphores upon which to wait before executing the command buffers for the batch.")
     VkSemaphore.const.p("pWaitSemaphores", "a pointer to an array of {@code VkSemaphore} handles upon which to wait before the command buffers for this batch begin execution. If semaphores to wait on are provided, they define a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-semaphores-waiting\">semaphore wait operation</a>.")
     VkPipelineStageFlags.const.p("pWaitDstStageMask", "a pointer to an array of pipeline stages at which each corresponding semaphore wait will occur.")
@@ -1912,7 +1927,10 @@ val VkMemoryAllocateInfo = struct(Module.VULKAN, "VkMemoryAllocateInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkDedicatedAllocationMemoryAllocateInfoNV", "VkExportMemoryAllocateInfo", "VkExportMemoryAllocateInfoKHR", "VkExportMemoryAllocateInfoNV", "VkExportMemoryWin32HandleInfoKHR", "VkExportMemoryWin32HandleInfoNV", "VkImportMemoryFdInfoKHR", "VkImportMemoryHostPointerInfoEXT", "VkImportMemoryWin32HandleInfoKHR", "VkImportMemoryWin32HandleInfoNV", "VkMemoryAllocateFlagsInfo", "VkMemoryAllocateFlagsInfoKHR", "VkMemoryDedicatedAllocateInfo", "VkMemoryDedicatedAllocateInfoKHR", "VkMemoryOpaqueCaptureAddressAllocateInfo", "VkMemoryOpaqueCaptureAddressAllocateInfoKHR", "VkMemoryPriorityAllocateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkDedicatedAllocationMemoryAllocateInfoNV", "VkExportMemoryAllocateInfo", "VkExportMemoryAllocateInfoKHR", "VkExportMemoryAllocateInfoNV", "VkExportMemoryWin32HandleInfoKHR", "VkExportMemoryWin32HandleInfoNV", "VkImportMemoryFdInfoKHR", "VkImportMemoryHostPointerInfoEXT", "VkImportMemoryWin32HandleInfoKHR", "VkImportMemoryWin32HandleInfoNV", "VkMemoryAllocateFlagsInfo", "VkMemoryAllocateFlagsInfoKHR", "VkMemoryDedicatedAllocateInfo", "VkMemoryDedicatedAllocateInfoKHR", "VkMemoryOpaqueCaptureAddressAllocateInfo", "VkMemoryOpaqueCaptureAddressAllocateInfoKHR", "VkMemoryPriorityAllocateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDeviceSize("allocationSize", "the size of the allocation in bytes.")
     uint32_t("memoryTypeIndex", "an index identifying a memory type from the {@code memoryTypes} array of the ##VkPhysicalDeviceMemoryProperties structure.")
 }
@@ -2148,7 +2166,10 @@ val VkBindSparseInfo = struct(Module.VULKAN, "VkBindSparseInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_BIND_SPARSE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkDeviceGroupBindSparseInfo", "VkDeviceGroupBindSparseInfoKHR", "VkTimelineSemaphoreSubmitInfo", "VkTimelineSemaphoreSubmitInfoKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkDeviceGroupBindSparseInfo", "VkDeviceGroupBindSparseInfoKHR", "VkTimelineSemaphoreSubmitInfo", "VkTimelineSemaphoreSubmitInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pWaitSemaphores", optional = true)..uint32_t("waitSemaphoreCount", "the number of semaphores upon which to wait before executing the sparse binding operations for the batch.")
     VkSemaphore.const.p("pWaitSemaphores", "a pointer to an array of semaphores upon which to wait on before the sparse binding operations for this batch begin execution. If semaphores to wait on are provided, they define a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-semaphores-waiting\">semaphore wait operation</a>.")
     AutoSize("pBufferBinds", optional = true)..uint32_t("bufferBindCount", "the number of sparse buffer bindings to perform in the batch.")
@@ -2209,7 +2230,10 @@ val VkFenceCreateInfo = struct(Module.VULKAN, "VkFenceCreateInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_FENCE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkExportFenceCreateInfo", "VkExportFenceCreateInfoKHR", "VkExportFenceWin32HandleInfoKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkExportFenceCreateInfo", "VkExportFenceCreateInfoKHR", "VkExportFenceWin32HandleInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkFenceCreateFlags("flags", "a bitmask of {@code VkFenceCreateFlagBits} specifying the initial state and behavior of the fence.")
 }
 
@@ -2231,7 +2255,10 @@ val VkSemaphoreCreateInfo = struct(Module.VULKAN, "VkSemaphoreCreateInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkExportSemaphoreCreateInfo", "VkExportSemaphoreCreateInfoKHR", "VkExportSemaphoreWin32HandleInfoKHR", "VkSemaphoreTypeCreateInfo", "VkSemaphoreTypeCreateInfoKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkExportSemaphoreCreateInfo", "VkExportSemaphoreCreateInfoKHR", "VkExportSemaphoreWin32HandleInfoKHR", "VkSemaphoreTypeCreateInfo", "VkSemaphoreTypeCreateInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSemaphoreCreateFlags("flags", "reserved for future use.")
 }
 
@@ -2286,7 +2313,10 @@ val VkQueryPoolCreateInfo = struct(Module.VULKAN, "VkQueryPoolCreateInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkQueryPoolCreateInfoINTEL", "VkQueryPoolPerformanceCreateInfoKHR", "VkQueryPoolPerformanceQueryCreateInfoINTEL", "VkVideoProfileKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkQueryPoolCreateInfoINTEL", "VkQueryPoolPerformanceCreateInfoKHR", "VkQueryPoolPerformanceQueryCreateInfoINTEL", "VkVideoProfileKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkQueryPoolCreateFlags("flags", "reserved for future use.")
     VkQueryType("queryType", "a {@code VkQueryType} value specifying the type of queries managed by the pool.")
     uint32_t("queryCount", "the number of queries managed by the pool.")
@@ -2336,7 +2366,10 @@ val VkBufferCreateInfo = struct(Module.VULKAN, "VkBufferCreateInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_BUFFER_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkBufferDeviceAddressCreateInfoEXT", "VkBufferOpaqueCaptureAddressCreateInfo", "VkBufferOpaqueCaptureAddressCreateInfoKHR", "VkDedicatedAllocationBufferCreateInfoNV", "VkExternalMemoryBufferCreateInfo", "VkExternalMemoryBufferCreateInfoKHR", "VkVideoProfileKHR", "VkVideoProfilesKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkBufferDeviceAddressCreateInfoEXT", "VkBufferOpaqueCaptureAddressCreateInfo", "VkBufferOpaqueCaptureAddressCreateInfoKHR", "VkDedicatedAllocationBufferCreateInfoNV", "VkExternalMemoryBufferCreateInfo", "VkExternalMemoryBufferCreateInfoKHR", "VkVideoProfileKHR", "VkVideoProfilesKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBufferCreateFlags("flags", "a bitmask of {@code VkBufferCreateFlagBits} specifying additional parameters of the buffer.")
     VkDeviceSize("size", "the size in bytes of the buffer to be created.")
     VkBufferUsageFlags("usage", "a bitmask of {@code VkBufferUsageFlagBits} specifying allowed usages of the buffer.")
@@ -2592,7 +2625,10 @@ val VkImageCreateInfo = struct(Module.VULKAN, "VkImageCreateInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_IMAGE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkDedicatedAllocationImageCreateInfoNV", "VkExternalMemoryImageCreateInfo", "VkExternalMemoryImageCreateInfoKHR", "VkExternalMemoryImageCreateInfoNV", "VkImageDrmFormatModifierExplicitCreateInfoEXT", "VkImageDrmFormatModifierListCreateInfoEXT", "VkImageFormatListCreateInfo", "VkImageFormatListCreateInfoKHR", "VkImageStencilUsageCreateInfo", "VkImageStencilUsageCreateInfoEXT", "VkImageSwapchainCreateInfoKHR", "VkVideoProfileKHR", "VkVideoProfilesKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkDedicatedAllocationImageCreateInfoNV", "VkExternalMemoryImageCreateInfo", "VkExternalMemoryImageCreateInfoKHR", "VkExternalMemoryImageCreateInfoNV", "VkImageDrmFormatModifierExplicitCreateInfoEXT", "VkImageDrmFormatModifierListCreateInfoEXT", "VkImageFormatListCreateInfo", "VkImageFormatListCreateInfoKHR", "VkImageStencilUsageCreateInfo", "VkImageStencilUsageCreateInfoEXT", "VkImageSwapchainCreateInfoKHR", "VkVideoProfileKHR", "VkVideoProfilesKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageCreateFlags("flags", "a bitmask of {@code VkImageCreateFlagBits} describing additional parameters of the image.")
     VkImageType("imageType", "a {@code VkImageType} value specifying the basic dimensionality of the image. Layers in array textures do not count as a dimension for the purposes of the image type.")
     VkFormat("format", "a {@code VkFormat} describing the format and type of the texel blocks that will be contained in the image.")
@@ -2796,7 +2832,10 @@ val VkImageViewCreateInfo = struct(Module.VULKAN, "VkImageViewCreateInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkImageViewASTCDecodeModeEXT", "VkImageViewUsageCreateInfo", "VkImageViewUsageCreateInfoKHR", "VkSamplerYcbcrConversionInfo", "VkSamplerYcbcrConversionInfoKHR", "VkVideoProfileKHR", "VkVideoProfilesKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkImageViewASTCDecodeModeEXT", "VkImageViewUsageCreateInfo", "VkImageViewUsageCreateInfoKHR", "VkSamplerYcbcrConversionInfo", "VkSamplerYcbcrConversionInfoKHR", "VkVideoProfileKHR", "VkVideoProfilesKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageViewCreateFlags("flags", "a bitmask of {@code VkImageViewCreateFlagBits} describing additional parameters of the image view.")
     VkImage("image", "a {@code VkImage} on which the view will be created.")
     VkImageViewType("viewType", "a {@code VkImageViewType} value specifying the type of the image view.")
@@ -2838,7 +2877,10 @@ val VkShaderModuleCreateInfo = struct(Module.VULKAN, "VkShaderModuleCreateInfo")
         """
 
     Expression("#STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkShaderModuleValidationCacheCreateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkShaderModuleValidationCacheCreateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkShaderModuleCreateFlags("flags", "reserved for future use.")
     size_t("codeSize", "the size, in bytes, of the code pointed to by {@code pCode}.")
     uint32_t.const.p("pCode", "a pointer to code that is used to create the shader module. The type and format of the code is determined from the content of the memory addressed by {@code pCode}.")
@@ -2981,7 +3023,10 @@ val VkPipelineShaderStageCreateInfo = struct(Module.VULKAN, "VkPipelineShaderSta
         """
 
     Expression("#STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineShaderStageCreateFlags("flags", "a bitmask of {@code VkPipelineShaderStageCreateFlagBits} specifying how the pipeline shader stage will be generated.")
     VkShaderStageFlagBits("stage", "a {@code VkShaderStageFlagBits} value specifying a single pipeline stage.")
     VkShaderModule("module", "a {@code VkShaderModule} object containing the shader for this stage.")
@@ -3036,7 +3081,10 @@ val VkComputePipelineCreateInfo = struct(Module.VULKAN, "VkComputePipelineCreate
         """
 
     Expression("#STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkPipelineCompilerControlCreateInfoAMD", "VkPipelineCreationFeedbackCreateInfoEXT", "VkSubpassShadingPipelineCreateInfoHUAWEI")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkPipelineCompilerControlCreateInfoAMD", "VkPipelineCreationFeedbackCreateInfoEXT", "VkSubpassShadingPipelineCreateInfoHUAWEI",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineCreateFlags("flags", "a bitmask of {@code VkPipelineCreateFlagBits} specifying how the pipeline will be generated.")
     VkPipelineShaderStageCreateInfo("stage", "a ##VkPipelineShaderStageCreateInfo structure describing the compute shader.")
     VkPipelineLayout("layout", "the description of binding locations used by both the pipeline and descriptor sets used with the pipeline.")
@@ -3128,7 +3176,10 @@ val VkPipelineVertexInputStateCreateInfo = struct(Module.VULKAN, "VkPipelineVert
         """
 
     Expression("#STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkPipelineVertexInputDivisorStateCreateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkPipelineVertexInputDivisorStateCreateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineVertexInputStateCreateFlags("flags", "reserved for future use.")
     AutoSize("pVertexBindingDescriptions", optional = true)..uint32_t("vertexBindingDescriptionCount", "the number of vertex binding descriptions provided in {@code pVertexBindingDescriptions}.")
     VkVertexInputBindingDescription.const.p("pVertexBindingDescriptions", "a pointer to an array of ##VkVertexInputBindingDescription structures.")
@@ -3195,7 +3246,10 @@ val VkPipelineTessellationStateCreateInfo = struct(Module.VULKAN, "VkPipelineTes
         """
 
     Expression("#STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkPipelineTessellationDomainOriginStateCreateInfo", "VkPipelineTessellationDomainOriginStateCreateInfoKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkPipelineTessellationDomainOriginStateCreateInfo", "VkPipelineTessellationDomainOriginStateCreateInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineTessellationStateCreateFlags("flags", "reserved for future use.")
     uint32_t("patchControlPoints", "the number of control points per patch.")
 }
@@ -3296,7 +3350,10 @@ val VkPipelineViewportStateCreateInfo = struct(Module.VULKAN, "VkPipelineViewpor
         """
 
     Expression("#STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkPipelineViewportCoarseSampleOrderStateCreateInfoNV", "VkPipelineViewportExclusiveScissorStateCreateInfoNV", "VkPipelineViewportShadingRateImageStateCreateInfoNV", "VkPipelineViewportSwizzleStateCreateInfoNV", "VkPipelineViewportWScalingStateCreateInfoNV")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkPipelineViewportCoarseSampleOrderStateCreateInfoNV", "VkPipelineViewportExclusiveScissorStateCreateInfoNV", "VkPipelineViewportShadingRateImageStateCreateInfoNV", "VkPipelineViewportSwizzleStateCreateInfoNV", "VkPipelineViewportWScalingStateCreateInfoNV",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineViewportStateCreateFlags("flags", "reserved for future use.")
     AutoSize("pViewports", optional = true)..uint32_t("viewportCount", "the number of viewports used by the pipeline.")
     nullable..VkViewport.const.p("pViewports", "a pointer to an array of ##VkViewport structures, defining the viewport transforms. If the viewport state is dynamic, this member is ignored.")
@@ -3336,7 +3393,10 @@ val VkPipelineRasterizationStateCreateInfo = struct(Module.VULKAN, "VkPipelineRa
         """
 
     Expression("#STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkPipelineRasterizationConservativeStateCreateInfoEXT", "VkPipelineRasterizationDepthClipStateCreateInfoEXT", "VkPipelineRasterizationLineStateCreateInfoEXT", "VkPipelineRasterizationProvokingVertexStateCreateInfoEXT", "VkPipelineRasterizationStateRasterizationOrderAMD", "VkPipelineRasterizationStateStreamCreateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkPipelineRasterizationConservativeStateCreateInfoEXT", "VkPipelineRasterizationDepthClipStateCreateInfoEXT", "VkPipelineRasterizationLineStateCreateInfoEXT", "VkPipelineRasterizationProvokingVertexStateCreateInfoEXT", "VkPipelineRasterizationStateRasterizationOrderAMD", "VkPipelineRasterizationStateStreamCreateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineRasterizationStateCreateFlags("flags", "reserved for future use.")
     VkBool32("depthClampEnable", "controls whether to clamp the fragment’s depth values as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#fragops-depth\">Depth Test</a>. If the pipeline is not created with ##VkPipelineRasterizationDepthClipStateCreateInfoEXT present then enabling depth clamp will also disable clipping primitives to the z planes of the frustrum as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#vertexpostproc-clipping\">Primitive Clipping</a>. Otherwise depth clipping is controlled by the state set in ##VkPipelineRasterizationDepthClipStateCreateInfoEXT.")
     VkBool32("rasterizerDiscardEnable", "controls whether primitives are discarded immediately before the rasterization stage.")
@@ -3383,7 +3443,10 @@ val VkPipelineMultisampleStateCreateInfo = struct(Module.VULKAN, "VkPipelineMult
         """
 
     Expression("#STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkPipelineCoverageModulationStateCreateInfoNV", "VkPipelineCoverageReductionStateCreateInfoNV", "VkPipelineCoverageToColorStateCreateInfoNV", "VkPipelineSampleLocationsStateCreateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkPipelineCoverageModulationStateCreateInfoNV", "VkPipelineCoverageReductionStateCreateInfoNV", "VkPipelineCoverageToColorStateCreateInfoNV", "VkPipelineSampleLocationsStateCreateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineMultisampleStateCreateFlags("flags", "reserved for future use.")
     VkSampleCountFlagBits("rasterizationSamples", "a {@code VkSampleCountFlagBits} value specifying the number of samples used in rasterization.")
     VkBool32("sampleShadingEnable", "<b>can</b> be used to enable <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#primsrast-sampleshading\">Sample Shading</a>.")
@@ -3534,7 +3597,10 @@ val VkPipelineColorBlendStateCreateInfo = struct(Module.VULKAN, "VkPipelineColor
         """
 
     Expression("#STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkPipelineColorBlendAdvancedStateCreateInfoEXT", "VkPipelineColorWriteCreateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkPipelineColorBlendAdvancedStateCreateInfoEXT", "VkPipelineColorWriteCreateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineColorBlendStateCreateFlags("flags", "reserved for future use.")
     VkBool32("logicOpEnable", "controls whether to apply <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#framebuffer-logicop\">Logical Operations</a>.")
     VkLogicOp("logicOp", "selects which logical operation to apply.")
@@ -3782,7 +3848,10 @@ val VkGraphicsPipelineCreateInfo = struct(Module.VULKAN, "VkGraphicsPipelineCrea
         """
 
     Expression("#STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkGraphicsPipelineShaderGroupsCreateInfoNV", "VkPipelineCompilerControlCreateInfoAMD", "VkPipelineCreationFeedbackCreateInfoEXT", "VkPipelineDiscardRectangleStateCreateInfoEXT", "VkPipelineFragmentShadingRateEnumStateCreateInfoNV", "VkPipelineFragmentShadingRateStateCreateInfoKHR", "VkPipelineRepresentativeFragmentTestStateCreateInfoNV")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkGraphicsPipelineShaderGroupsCreateInfoNV", "VkPipelineCompilerControlCreateInfoAMD", "VkPipelineCreationFeedbackCreateInfoEXT", "VkPipelineDiscardRectangleStateCreateInfoEXT", "VkPipelineFragmentShadingRateEnumStateCreateInfoNV", "VkPipelineFragmentShadingRateStateCreateInfoKHR", "VkPipelineRepresentativeFragmentTestStateCreateInfoNV",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineCreateFlags("flags", "a bitmask of {@code VkPipelineCreateFlagBits} specifying how the pipeline will be generated.")
     AutoSize("pStages")..uint32_t("stageCount", "the number of entries in the {@code pStages} array.")
     VkPipelineShaderStageCreateInfo.const.p("pStages", "a pointer to an array of {@code stageCount} ##VkPipelineShaderStageCreateInfo structures describing the set of the shader stages to be included in the graphics pipeline.")
@@ -3983,7 +4052,10 @@ val VkSamplerCreateInfo = struct(Module.VULKAN, "VkSamplerCreateInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_SAMPLER_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkSamplerBorderColorComponentMappingCreateInfoEXT", "VkSamplerCustomBorderColorCreateInfoEXT", "VkSamplerReductionModeCreateInfo", "VkSamplerReductionModeCreateInfoEXT", "VkSamplerYcbcrConversionInfo", "VkSamplerYcbcrConversionInfoKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkSamplerBorderColorComponentMappingCreateInfoEXT", "VkSamplerCustomBorderColorCreateInfoEXT", "VkSamplerReductionModeCreateInfo", "VkSamplerReductionModeCreateInfoEXT", "VkSamplerYcbcrConversionInfo", "VkSamplerYcbcrConversionInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSamplerCreateFlags("flags", "a bitmask of {@code VkSamplerCreateFlagBits} describing additional parameters of the sampler.")
     VkFilter("magFilter", "a {@code VkFilter} value specifying the magnification filter to apply to lookups.")
     VkFilter("minFilter", "a {@code VkFilter} value specifying the minification filter to apply to lookups.")
@@ -4218,7 +4290,10 @@ val VkDescriptorPoolCreateInfo = struct(Module.VULKAN, "VkDescriptorPoolCreateIn
         """
 
     Expression("#STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkDescriptorPoolInlineUniformBlockCreateInfoEXT", "VkMutableDescriptorTypeCreateInfoVALVE")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkDescriptorPoolInlineUniformBlockCreateInfoEXT", "VkMutableDescriptorTypeCreateInfoVALVE",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDescriptorPoolCreateFlags("flags", "a bitmask of {@code VkDescriptorPoolCreateFlagBits} specifying certain supported operations on the pool.")
     uint32_t("maxSets", "the maximum number of descriptor sets that <b>can</b> be allocated from the pool.")
     AutoSize("pPoolSizes")..uint32_t("poolSizeCount", "the number of elements in {@code pPoolSizes}.")
@@ -4253,7 +4328,10 @@ val VkDescriptorSetAllocateInfo = struct(Module.VULKAN, "VkDescriptorSetAllocate
         """
 
     Expression("#STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkDescriptorSetVariableDescriptorCountAllocateInfo", "VkDescriptorSetVariableDescriptorCountAllocateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkDescriptorSetVariableDescriptorCountAllocateInfo", "VkDescriptorSetVariableDescriptorCountAllocateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDescriptorPool("descriptorPool", "the pool which the sets will be allocated from.")
     AutoSize("pSetLayouts")..uint32_t("descriptorSetCount", "determines the number of descriptor sets to be allocated from the pool.")
     VkDescriptorSetLayout.const.p("pSetLayouts", "a pointer to an array of descriptor set layouts, with each member specifying how the corresponding descriptor set is allocated.")
@@ -4337,7 +4415,10 @@ val VkDescriptorSetLayoutCreateInfo = struct(Module.VULKAN, "VkDescriptorSetLayo
         """
 
     Expression("#STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkDescriptorSetLayoutBindingFlagsCreateInfo", "VkDescriptorSetLayoutBindingFlagsCreateInfoEXT", "VkMutableDescriptorTypeCreateInfoVALVE")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkDescriptorSetLayoutBindingFlagsCreateInfo", "VkDescriptorSetLayoutBindingFlagsCreateInfoEXT", "VkMutableDescriptorTypeCreateInfoVALVE",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDescriptorSetLayoutCreateFlags("flags", "a bitmask of {@code VkDescriptorSetLayoutCreateFlagBits} specifying options for descriptor set layout creation.")
     AutoSize("pBindings", optional = true)..uint32_t("bindingCount", "the number of elements in {@code pBindings}.")
     VkDescriptorSetLayoutBinding.const.p("pBindings", "a pointer to an array of ##VkDescriptorSetLayoutBinding structures.")
@@ -4421,7 +4502,10 @@ val VkWriteDescriptorSet = struct(Module.VULKAN, "VkWriteDescriptorSet") {
         """
 
     Expression("#STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkWriteDescriptorSetAccelerationStructureKHR", "VkWriteDescriptorSetAccelerationStructureNV", "VkWriteDescriptorSetInlineUniformBlockEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkWriteDescriptorSetAccelerationStructureKHR", "VkWriteDescriptorSetAccelerationStructureNV", "VkWriteDescriptorSetInlineUniformBlockEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDescriptorSet("dstSet", "the destination descriptor set to update.")
     uint32_t("dstBinding", "the descriptor binding within that set.")
     uint32_t("dstArrayElement", "the starting element in that array. If the descriptor binding identified by {@code dstSet} and {@code dstBinding} has a descriptor type of #DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT then {@code dstArrayElement} specifies the starting byte offset within the binding.")
@@ -4645,7 +4729,10 @@ val VkFramebufferCreateInfo = struct(Module.VULKAN, "VkFramebufferCreateInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkFramebufferAttachmentsCreateInfo", "VkFramebufferAttachmentsCreateInfoKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkFramebufferAttachmentsCreateInfo", "VkFramebufferAttachmentsCreateInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkFramebufferCreateFlags("flags", "a bitmask of {@code VkFramebufferCreateFlagBits}")
     VkRenderPass("renderPass", "a render pass defining what render passes the framebuffer will be compatible with. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#renderpass-compatibility\">Render Pass Compatibility</a> for details.")
     AutoSize("pAttachments", optional = true)..uint32_t("attachmentCount", "the number of attachments.")
@@ -4869,7 +4956,10 @@ val VkRenderPassCreateInfo = struct(Module.VULKAN, "VkRenderPassCreateInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkRenderPassFragmentDensityMapCreateInfoEXT", "VkRenderPassInputAttachmentAspectCreateInfo", "VkRenderPassInputAttachmentAspectCreateInfoKHR", "VkRenderPassMultiviewCreateInfo", "VkRenderPassMultiviewCreateInfoKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkRenderPassFragmentDensityMapCreateInfoEXT", "VkRenderPassInputAttachmentAspectCreateInfo", "VkRenderPassInputAttachmentAspectCreateInfoKHR", "VkRenderPassMultiviewCreateInfo", "VkRenderPassMultiviewCreateInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkRenderPassCreateFlags("flags", "a bitmask of {@code VkRenderPassCreateFlagBits}")
     AutoSize("pAttachments", optional = true)..uint32_t("attachmentCount", "the number of attachments used by this render pass.")
     VkAttachmentDescription.const.p("pAttachments", "a pointer to an array of {@code attachmentCount} ##VkAttachmentDescription structures describing the attachments used by the render pass.")
@@ -4957,7 +5047,10 @@ val VkCommandBufferInheritanceInfo = struct(Module.VULKAN, "VkCommandBufferInher
         """
 
     Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkCommandBufferInheritanceConditionalRenderingInfoEXT", "VkCommandBufferInheritanceRenderPassTransformInfoQCOM", "VkCommandBufferInheritanceViewportScissorInfoNV")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkCommandBufferInheritanceConditionalRenderingInfoEXT", "VkCommandBufferInheritanceRenderPassTransformInfoQCOM", "VkCommandBufferInheritanceViewportScissorInfoNV",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkRenderPass("renderPass", "a {@code VkRenderPass} object defining which render passes the {@code VkCommandBuffer} will be <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#renderpass-compatibility\">compatible</a> with and <b>can</b> be executed within. If the {@code VkCommandBuffer} will not be executed within a render pass instance, {@code renderPass} is ignored.")
     uint32_t("subpass", "the index of the subpass within the render pass instance that the {@code VkCommandBuffer} will be executed within. If the {@code VkCommandBuffer} will not be executed within a render pass instance, {@code subpass} is ignored.")
     VkFramebuffer("framebuffer", """<b>can</b> refer to the {@code VkFramebuffer} object that the {@code VkCommandBuffer} will be rendering to if it is executed within a render pass instance. It <b>can</b> be #NULL_HANDLE if the framebuffer is not known, or if the {@code VkCommandBuffer} will not be executed within a render pass instance.
@@ -4995,7 +5088,10 @@ val VkCommandBufferBeginInfo = struct(Module.VULKAN, "VkCommandBufferBeginInfo")
         """
 
     Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkDeviceGroupCommandBufferBeginInfo", "VkDeviceGroupCommandBufferBeginInfoKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkDeviceGroupCommandBufferBeginInfo", "VkDeviceGroupCommandBufferBeginInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkCommandBufferUsageFlags("flags", "a bitmask of {@code VkCommandBufferUsageFlagBits} specifying usage behavior for the command buffer.")
     nullable..VkCommandBufferInheritanceInfo.const.p("pInheritanceInfo", "a pointer to a ##VkCommandBufferInheritanceInfo structure, used if {@code commandBuffer} is a secondary command buffer. If this is a primary command buffer, then this value is ignored.")
 }
@@ -5354,7 +5450,10 @@ val VkRenderPassBeginInfo = struct(Module.VULKAN, "VkRenderPassBeginInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkDeviceGroupRenderPassBeginInfo", "VkDeviceGroupRenderPassBeginInfoKHR", "VkRenderPassAttachmentBeginInfo", "VkRenderPassAttachmentBeginInfoKHR", "VkRenderPassSampleLocationsBeginInfoEXT", "VkRenderPassTransformBeginInfoQCOM")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkDeviceGroupRenderPassBeginInfo", "VkDeviceGroupRenderPassBeginInfoKHR", "VkRenderPassAttachmentBeginInfo", "VkRenderPassAttachmentBeginInfoKHR", "VkRenderPassSampleLocationsBeginInfoEXT", "VkRenderPassTransformBeginInfoQCOM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkRenderPass("renderPass", "the render pass to begin an instance of.")
     VkFramebuffer("framebuffer", "the framebuffer containing the attachments that are used with the render pass.")
     VkRect2D("renderArea", "the render area that is affected by the render pass instance, and is described in more detail below.")
@@ -5425,7 +5524,10 @@ val VkBindBufferMemoryInfo = struct(Module.VULKAN, "VkBindBufferMemoryInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkBindBufferMemoryDeviceGroupInfo", "VkBindBufferMemoryDeviceGroupInfoKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkBindBufferMemoryDeviceGroupInfo", "VkBindBufferMemoryDeviceGroupInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBuffer("buffer", "the buffer to be attached to memory.")
     VkDeviceMemory("memory", "a {@code VkDeviceMemory} object describing the device memory to attach.")
     VkDeviceSize("memoryOffset", "the start offset of the region of {@code memory} which is to be bound to the buffer. The number of bytes returned in the ##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified buffer.")
@@ -5479,7 +5581,10 @@ val VkBindImageMemoryInfo = struct(Module.VULKAN, "VkBindImageMemoryInfo") {
         """
 
     Expression("#STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkBindImageMemoryDeviceGroupInfo", "VkBindImageMemoryDeviceGroupInfoKHR", "VkBindImageMemorySwapchainInfoKHR", "VkBindImagePlaneMemoryInfo", "VkBindImagePlaneMemoryInfoKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkBindImageMemoryDeviceGroupInfo", "VkBindImageMemoryDeviceGroupInfoKHR", "VkBindImageMemorySwapchainInfoKHR", "VkBindImagePlaneMemoryInfo", "VkBindImagePlaneMemoryInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImage("image", "the image to be attached to memory.")
     VkDeviceMemory("memory", "a {@code VkDeviceMemory} object describing the device memory to attach.")
     VkDeviceSize("memoryOffset", "the start offset of the region of {@code memory} which is to be bound to the image. The number of bytes returned in the ##VkMemoryRequirements{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified image.")
@@ -5918,7 +6023,10 @@ val VkImageMemoryRequirementsInfo2 = struct(Module.VULKAN, "VkImageMemoryRequire
         """
 
     Expression("#STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkImagePlaneMemoryRequirementsInfo", "VkImagePlaneMemoryRequirementsInfoKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkImagePlaneMemoryRequirementsInfo", "VkImagePlaneMemoryRequirementsInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImage("image", "the image to query.")
 }
 
@@ -5960,7 +6068,10 @@ val VkMemoryRequirements2 = struct(Module.VULKAN, "VkMemoryRequirements2", mutab
         """
 
     Expression("#STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2")..VkStructureType("sType", "the type of this structure.").mutable()
-    PointerSetter("VkMemoryDedicatedRequirements", "VkMemoryDedicatedRequirementsKHR")..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    PointerSetter(
+        "VkMemoryDedicatedRequirements", "VkMemoryDedicatedRequirementsKHR",
+        prepend = true
+    )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkMemoryRequirements("memoryRequirements", "a ##VkMemoryRequirements structure describing the memory requirements of the resource.")
 }
 
@@ -6002,7 +6113,10 @@ val VkPhysicalDeviceFeatures2 = struct(Module.VULKAN, "VkPhysicalDeviceFeatures2
         """
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkPhysicalDevice16BitStorageFeatures", "VkPhysicalDevice16BitStorageFeaturesKHR", "VkPhysicalDevice4444FormatsFeaturesEXT", "VkPhysicalDevice8BitStorageFeatures", "VkPhysicalDevice8BitStorageFeaturesKHR", "VkPhysicalDeviceASTCDecodeFeaturesEXT", "VkPhysicalDeviceAccelerationStructureFeaturesKHR", "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT", "VkPhysicalDeviceBorderColorSwizzleFeaturesEXT", "VkPhysicalDeviceBufferAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeatures", "VkPhysicalDeviceBufferDeviceAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeaturesKHR", "VkPhysicalDeviceCoherentMemoryFeaturesAMD", "VkPhysicalDeviceColorWriteEnableFeaturesEXT", "VkPhysicalDeviceComputeShaderDerivativesFeaturesNV", "VkPhysicalDeviceConditionalRenderingFeaturesEXT", "VkPhysicalDeviceCooperativeMatrixFeaturesNV", "VkPhysicalDeviceCornerSampledImageFeaturesNV", "VkPhysicalDeviceCoverageReductionModeFeaturesNV", "VkPhysicalDeviceCustomBorderColorFeaturesEXT", "VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV", "VkPhysicalDeviceDepthClipEnableFeaturesEXT", "VkPhysicalDeviceDescriptorIndexingFeatures", "VkPhysicalDeviceDescriptorIndexingFeaturesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV", "VkPhysicalDeviceDeviceMemoryReportFeaturesEXT", "VkPhysicalDeviceDiagnosticsConfigFeaturesNV", "VkPhysicalDeviceExclusiveScissorFeaturesNV", "VkPhysicalDeviceExtendedDynamicState2FeaturesEXT", "VkPhysicalDeviceExtendedDynamicStateFeaturesEXT", "VkPhysicalDeviceExternalMemoryRDMAFeaturesNV", "VkPhysicalDeviceFloat16Int8FeaturesKHR", "VkPhysicalDeviceFragmentDensityMap2FeaturesEXT", "VkPhysicalDeviceFragmentDensityMapFeaturesEXT", "VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV", "VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT", "VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV", "VkPhysicalDeviceFragmentShadingRateFeaturesKHR", "VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT", "VkPhysicalDeviceHostQueryResetFeatures", "VkPhysicalDeviceHostQueryResetFeaturesEXT", "VkPhysicalDeviceImageRobustnessFeaturesEXT", "VkPhysicalDeviceImagelessFramebufferFeatures", "VkPhysicalDeviceImagelessFramebufferFeaturesKHR", "VkPhysicalDeviceIndexTypeUint8FeaturesEXT", "VkPhysicalDeviceInheritedViewportScissorFeaturesNV", "VkPhysicalDeviceInlineUniformBlockFeaturesEXT", "VkPhysicalDeviceInvocationMaskFeaturesHUAWEI", "VkPhysicalDeviceLineRasterizationFeaturesEXT", "VkPhysicalDeviceMaintenance4FeaturesKHR", "VkPhysicalDeviceMemoryPriorityFeaturesEXT", "VkPhysicalDeviceMeshShaderFeaturesNV", "VkPhysicalDeviceMultiDrawFeaturesEXT", "VkPhysicalDeviceMultiviewFeatures", "VkPhysicalDeviceMultiviewFeaturesKHR", "VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE", "VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT", "VkPhysicalDevicePerformanceQueryFeaturesKHR", "VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT", "VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR", "VkPhysicalDevicePortabilitySubsetFeaturesKHR", "VkPhysicalDevicePresentIdFeaturesKHR", "VkPhysicalDevicePresentWaitFeaturesKHR", "VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT", "VkPhysicalDevicePrivateDataFeaturesEXT", "VkPhysicalDeviceProtectedMemoryFeatures", "VkPhysicalDeviceProvokingVertexFeaturesEXT", "VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT", "VkPhysicalDeviceRayQueryFeaturesKHR", "VkPhysicalDeviceRayTracingMotionBlurFeaturesNV", "VkPhysicalDeviceRayTracingPipelineFeaturesKHR", "VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV", "VkPhysicalDeviceRobustness2FeaturesEXT", "VkPhysicalDeviceSamplerYcbcrConversionFeatures", "VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR", "VkPhysicalDeviceScalarBlockLayoutFeatures", "VkPhysicalDeviceScalarBlockLayoutFeaturesEXT", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR", "VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT", "VkPhysicalDeviceShaderAtomicFloatFeaturesEXT", "VkPhysicalDeviceShaderAtomicInt64Features", "VkPhysicalDeviceShaderAtomicInt64FeaturesKHR", "VkPhysicalDeviceShaderClockFeaturesKHR", "VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT", "VkPhysicalDeviceShaderDrawParameterFeatures", "VkPhysicalDeviceShaderDrawParametersFeatures", "VkPhysicalDeviceShaderFloat16Int8Features", "VkPhysicalDeviceShaderFloat16Int8FeaturesKHR", "VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT", "VkPhysicalDeviceShaderImageFootprintFeaturesNV", "VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR", "VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL", "VkPhysicalDeviceShaderSMBuiltinsFeaturesNV", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR", "VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR", "VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR", "VkPhysicalDeviceShadingRateImageFeaturesNV", "VkPhysicalDeviceSubgroupSizeControlFeaturesEXT", "VkPhysicalDeviceSubpassShadingFeaturesHUAWEI", "VkPhysicalDeviceSynchronization2FeaturesKHR", "VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT", "VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT", "VkPhysicalDeviceTimelineSemaphoreFeatures", "VkPhysicalDeviceTimelineSemaphoreFeaturesKHR", "VkPhysicalDeviceTransformFeedbackFeaturesEXT", "VkPhysicalDeviceUniformBufferStandardLayoutFeatures", "VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR", "VkPhysicalDeviceVariablePointerFeatures", "VkPhysicalDeviceVariablePointerFeaturesKHR", "VkPhysicalDeviceVariablePointersFeatures", "VkPhysicalDeviceVariablePointersFeaturesKHR", "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT", "VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT", "VkPhysicalDeviceVulkan11Features", "VkPhysicalDeviceVulkan12Features", "VkPhysicalDeviceVulkanMemoryModelFeatures", "VkPhysicalDeviceVulkanMemoryModelFeaturesKHR", "VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR", "VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT", "VkPhysicalDeviceYcbcrImageArraysFeaturesEXT", "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR")..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkPhysicalDevice16BitStorageFeatures", "VkPhysicalDevice16BitStorageFeaturesKHR", "VkPhysicalDevice4444FormatsFeaturesEXT", "VkPhysicalDevice8BitStorageFeatures", "VkPhysicalDevice8BitStorageFeaturesKHR", "VkPhysicalDeviceASTCDecodeFeaturesEXT", "VkPhysicalDeviceAccelerationStructureFeaturesKHR", "VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT", "VkPhysicalDeviceBorderColorSwizzleFeaturesEXT", "VkPhysicalDeviceBufferAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeatures", "VkPhysicalDeviceBufferDeviceAddressFeaturesEXT", "VkPhysicalDeviceBufferDeviceAddressFeaturesKHR", "VkPhysicalDeviceCoherentMemoryFeaturesAMD", "VkPhysicalDeviceColorWriteEnableFeaturesEXT", "VkPhysicalDeviceComputeShaderDerivativesFeaturesNV", "VkPhysicalDeviceConditionalRenderingFeaturesEXT", "VkPhysicalDeviceCooperativeMatrixFeaturesNV", "VkPhysicalDeviceCornerSampledImageFeaturesNV", "VkPhysicalDeviceCoverageReductionModeFeaturesNV", "VkPhysicalDeviceCustomBorderColorFeaturesEXT", "VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV", "VkPhysicalDeviceDepthClipEnableFeaturesEXT", "VkPhysicalDeviceDescriptorIndexingFeatures", "VkPhysicalDeviceDescriptorIndexingFeaturesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV", "VkPhysicalDeviceDeviceMemoryReportFeaturesEXT", "VkPhysicalDeviceDiagnosticsConfigFeaturesNV", "VkPhysicalDeviceExclusiveScissorFeaturesNV", "VkPhysicalDeviceExtendedDynamicState2FeaturesEXT", "VkPhysicalDeviceExtendedDynamicStateFeaturesEXT", "VkPhysicalDeviceExternalMemoryRDMAFeaturesNV", "VkPhysicalDeviceFloat16Int8FeaturesKHR", "VkPhysicalDeviceFragmentDensityMap2FeaturesEXT", "VkPhysicalDeviceFragmentDensityMapFeaturesEXT", "VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV", "VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT", "VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV", "VkPhysicalDeviceFragmentShadingRateFeaturesKHR", "VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT", "VkPhysicalDeviceHostQueryResetFeatures", "VkPhysicalDeviceHostQueryResetFeaturesEXT", "VkPhysicalDeviceImageRobustnessFeaturesEXT", "VkPhysicalDeviceImagelessFramebufferFeatures", "VkPhysicalDeviceImagelessFramebufferFeaturesKHR", "VkPhysicalDeviceIndexTypeUint8FeaturesEXT", "VkPhysicalDeviceInheritedViewportScissorFeaturesNV", "VkPhysicalDeviceInlineUniformBlockFeaturesEXT", "VkPhysicalDeviceInvocationMaskFeaturesHUAWEI", "VkPhysicalDeviceLineRasterizationFeaturesEXT", "VkPhysicalDeviceMaintenance4FeaturesKHR", "VkPhysicalDeviceMemoryPriorityFeaturesEXT", "VkPhysicalDeviceMeshShaderFeaturesNV", "VkPhysicalDeviceMultiDrawFeaturesEXT", "VkPhysicalDeviceMultiviewFeatures", "VkPhysicalDeviceMultiviewFeaturesKHR", "VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE", "VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT", "VkPhysicalDevicePerformanceQueryFeaturesKHR", "VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT", "VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR", "VkPhysicalDevicePortabilitySubsetFeaturesKHR", "VkPhysicalDevicePresentIdFeaturesKHR", "VkPhysicalDevicePresentWaitFeaturesKHR", "VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT", "VkPhysicalDevicePrivateDataFeaturesEXT", "VkPhysicalDeviceProtectedMemoryFeatures", "VkPhysicalDeviceProvokingVertexFeaturesEXT", "VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT", "VkPhysicalDeviceRayQueryFeaturesKHR", "VkPhysicalDeviceRayTracingMotionBlurFeaturesNV", "VkPhysicalDeviceRayTracingPipelineFeaturesKHR", "VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV", "VkPhysicalDeviceRobustness2FeaturesEXT", "VkPhysicalDeviceSamplerYcbcrConversionFeatures", "VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR", "VkPhysicalDeviceScalarBlockLayoutFeatures", "VkPhysicalDeviceScalarBlockLayoutFeaturesEXT", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures", "VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR", "VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT", "VkPhysicalDeviceShaderAtomicFloatFeaturesEXT", "VkPhysicalDeviceShaderAtomicInt64Features", "VkPhysicalDeviceShaderAtomicInt64FeaturesKHR", "VkPhysicalDeviceShaderClockFeaturesKHR", "VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT", "VkPhysicalDeviceShaderDrawParameterFeatures", "VkPhysicalDeviceShaderDrawParametersFeatures", "VkPhysicalDeviceShaderFloat16Int8Features", "VkPhysicalDeviceShaderFloat16Int8FeaturesKHR", "VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT", "VkPhysicalDeviceShaderImageFootprintFeaturesNV", "VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR", "VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL", "VkPhysicalDeviceShaderSMBuiltinsFeaturesNV", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures", "VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR", "VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR", "VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR", "VkPhysicalDeviceShadingRateImageFeaturesNV", "VkPhysicalDeviceSubgroupSizeControlFeaturesEXT", "VkPhysicalDeviceSubpassShadingFeaturesHUAWEI", "VkPhysicalDeviceSynchronization2FeaturesKHR", "VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT", "VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT", "VkPhysicalDeviceTimelineSemaphoreFeatures", "VkPhysicalDeviceTimelineSemaphoreFeaturesKHR", "VkPhysicalDeviceTransformFeedbackFeaturesEXT", "VkPhysicalDeviceUniformBufferStandardLayoutFeatures", "VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR", "VkPhysicalDeviceVariablePointerFeatures", "VkPhysicalDeviceVariablePointerFeaturesKHR", "VkPhysicalDeviceVariablePointersFeatures", "VkPhysicalDeviceVariablePointersFeaturesKHR", "VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT", "VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT", "VkPhysicalDeviceVulkan11Features", "VkPhysicalDeviceVulkan12Features", "VkPhysicalDeviceVulkanMemoryModelFeatures", "VkPhysicalDeviceVulkanMemoryModelFeaturesKHR", "VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR", "VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT", "VkPhysicalDeviceYcbcrImageArraysFeaturesEXT", "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR",
+        prepend = true
+    )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPhysicalDeviceFeatures("features", "a ##VkPhysicalDeviceFeatures structure describing the fine-grained features of the Vulkan 1.0 API.")
 }
 
@@ -6026,7 +6140,10 @@ val VkPhysicalDeviceProperties2 = struct(Module.VULKAN, "VkPhysicalDevicePropert
         """
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2")..VkStructureType("sType", "the type of this structure.").mutable()
-    PointerSetter("VkPhysicalDeviceAccelerationStructurePropertiesKHR", "VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT", "VkPhysicalDeviceConservativeRasterizationPropertiesEXT", "VkPhysicalDeviceCooperativeMatrixPropertiesNV", "VkPhysicalDeviceCustomBorderColorPropertiesEXT", "VkPhysicalDeviceDepthStencilResolveProperties", "VkPhysicalDeviceDepthStencilResolvePropertiesKHR", "VkPhysicalDeviceDescriptorIndexingProperties", "VkPhysicalDeviceDescriptorIndexingPropertiesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV", "VkPhysicalDeviceDiscardRectanglePropertiesEXT", "VkPhysicalDeviceDriverProperties", "VkPhysicalDeviceDriverPropertiesKHR", "VkPhysicalDeviceDrmPropertiesEXT", "VkPhysicalDeviceExternalMemoryHostPropertiesEXT", "VkPhysicalDeviceFloatControlsProperties", "VkPhysicalDeviceFloatControlsPropertiesKHR", "VkPhysicalDeviceFragmentDensityMap2PropertiesEXT", "VkPhysicalDeviceFragmentDensityMapPropertiesEXT", "VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV", "VkPhysicalDeviceFragmentShadingRatePropertiesKHR", "VkPhysicalDeviceIDProperties", "VkPhysicalDeviceIDPropertiesKHR", "VkPhysicalDeviceInlineUniformBlockPropertiesEXT", "VkPhysicalDeviceLineRasterizationPropertiesEXT", "VkPhysicalDeviceMaintenance3Properties", "VkPhysicalDeviceMaintenance3PropertiesKHR", "VkPhysicalDeviceMaintenance4PropertiesKHR", "VkPhysicalDeviceMeshShaderPropertiesNV", "VkPhysicalDeviceMultiDrawPropertiesEXT", "VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX", "VkPhysicalDeviceMultiviewProperties", "VkPhysicalDeviceMultiviewPropertiesKHR", "VkPhysicalDevicePCIBusInfoPropertiesEXT", "VkPhysicalDevicePerformanceQueryPropertiesKHR", "VkPhysicalDevicePointClippingProperties", "VkPhysicalDevicePointClippingPropertiesKHR", "VkPhysicalDevicePortabilitySubsetPropertiesKHR", "VkPhysicalDeviceProtectedMemoryProperties", "VkPhysicalDeviceProvokingVertexPropertiesEXT", "VkPhysicalDevicePushDescriptorPropertiesKHR", "VkPhysicalDeviceRayTracingPipelinePropertiesKHR", "VkPhysicalDeviceRayTracingPropertiesNV", "VkPhysicalDeviceRobustness2PropertiesEXT", "VkPhysicalDeviceSampleLocationsPropertiesEXT", "VkPhysicalDeviceSamplerFilterMinmaxProperties", "VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT", "VkPhysicalDeviceShaderCoreProperties2AMD", "VkPhysicalDeviceShaderCorePropertiesAMD", "VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR", "VkPhysicalDeviceShaderSMBuiltinsPropertiesNV", "VkPhysicalDeviceShadingRateImagePropertiesNV", "VkPhysicalDeviceSubgroupProperties", "VkPhysicalDeviceSubgroupSizeControlPropertiesEXT", "VkPhysicalDeviceSubpassShadingPropertiesHUAWEI", "VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT", "VkPhysicalDeviceTimelineSemaphoreProperties", "VkPhysicalDeviceTimelineSemaphorePropertiesKHR", "VkPhysicalDeviceTransformFeedbackPropertiesEXT", "VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT", "VkPhysicalDeviceVulkan11Properties", "VkPhysicalDeviceVulkan12Properties")..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    PointerSetter(
+        "VkPhysicalDeviceAccelerationStructurePropertiesKHR", "VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT", "VkPhysicalDeviceConservativeRasterizationPropertiesEXT", "VkPhysicalDeviceCooperativeMatrixPropertiesNV", "VkPhysicalDeviceCustomBorderColorPropertiesEXT", "VkPhysicalDeviceDepthStencilResolveProperties", "VkPhysicalDeviceDepthStencilResolvePropertiesKHR", "VkPhysicalDeviceDescriptorIndexingProperties", "VkPhysicalDeviceDescriptorIndexingPropertiesEXT", "VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV", "VkPhysicalDeviceDiscardRectanglePropertiesEXT", "VkPhysicalDeviceDriverProperties", "VkPhysicalDeviceDriverPropertiesKHR", "VkPhysicalDeviceDrmPropertiesEXT", "VkPhysicalDeviceExternalMemoryHostPropertiesEXT", "VkPhysicalDeviceFloatControlsProperties", "VkPhysicalDeviceFloatControlsPropertiesKHR", "VkPhysicalDeviceFragmentDensityMap2PropertiesEXT", "VkPhysicalDeviceFragmentDensityMapPropertiesEXT", "VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV", "VkPhysicalDeviceFragmentShadingRatePropertiesKHR", "VkPhysicalDeviceIDProperties", "VkPhysicalDeviceIDPropertiesKHR", "VkPhysicalDeviceInlineUniformBlockPropertiesEXT", "VkPhysicalDeviceLineRasterizationPropertiesEXT", "VkPhysicalDeviceMaintenance3Properties", "VkPhysicalDeviceMaintenance3PropertiesKHR", "VkPhysicalDeviceMaintenance4PropertiesKHR", "VkPhysicalDeviceMeshShaderPropertiesNV", "VkPhysicalDeviceMultiDrawPropertiesEXT", "VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX", "VkPhysicalDeviceMultiviewProperties", "VkPhysicalDeviceMultiviewPropertiesKHR", "VkPhysicalDevicePCIBusInfoPropertiesEXT", "VkPhysicalDevicePerformanceQueryPropertiesKHR", "VkPhysicalDevicePointClippingProperties", "VkPhysicalDevicePointClippingPropertiesKHR", "VkPhysicalDevicePortabilitySubsetPropertiesKHR", "VkPhysicalDeviceProtectedMemoryProperties", "VkPhysicalDeviceProvokingVertexPropertiesEXT", "VkPhysicalDevicePushDescriptorPropertiesKHR", "VkPhysicalDeviceRayTracingPipelinePropertiesKHR", "VkPhysicalDeviceRayTracingPropertiesNV", "VkPhysicalDeviceRobustness2PropertiesEXT", "VkPhysicalDeviceSampleLocationsPropertiesEXT", "VkPhysicalDeviceSamplerFilterMinmaxProperties", "VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT", "VkPhysicalDeviceShaderCoreProperties2AMD", "VkPhysicalDeviceShaderCorePropertiesAMD", "VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR", "VkPhysicalDeviceShaderSMBuiltinsPropertiesNV", "VkPhysicalDeviceShadingRateImagePropertiesNV", "VkPhysicalDeviceSubgroupProperties", "VkPhysicalDeviceSubgroupSizeControlPropertiesEXT", "VkPhysicalDeviceSubpassShadingPropertiesHUAWEI", "VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT", "VkPhysicalDeviceTimelineSemaphoreProperties", "VkPhysicalDeviceTimelineSemaphorePropertiesKHR", "VkPhysicalDeviceTransformFeedbackPropertiesEXT", "VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT", "VkPhysicalDeviceVulkan11Properties", "VkPhysicalDeviceVulkan12Properties",
+        prepend = true
+    )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkPhysicalDeviceProperties("properties", "a ##VkPhysicalDeviceProperties structure describing properties of the physical device. This structure is written with the same values as if it were written by #GetPhysicalDeviceProperties().")
 }
 
@@ -6047,7 +6164,10 @@ val VkFormatProperties2 = struct(Module.VULKAN, "VkFormatProperties2", mutable =
         """
 
     Expression("#STRUCTURE_TYPE_FORMAT_PROPERTIES_2")..VkStructureType("sType", "the type of this structure.").mutable()
-    PointerSetter("VkDrmFormatModifierPropertiesList2EXT", "VkDrmFormatModifierPropertiesListEXT", "VkFormatProperties3KHR", "VkVideoProfileKHR", "VkVideoProfilesKHR")..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    PointerSetter(
+        "VkDrmFormatModifierPropertiesList2EXT", "VkDrmFormatModifierPropertiesListEXT", "VkFormatProperties3KHR", "VkVideoProfileKHR", "VkVideoProfilesKHR",
+        prepend = true
+    )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkFormatProperties("formatProperties", "a ##VkFormatProperties structure describing features supported by the requested format.")
 }
 
@@ -6075,7 +6195,10 @@ val VkImageFormatProperties2 = struct(Module.VULKAN, "VkImageFormatProperties2",
         """
 
     Expression("#STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2")..VkStructureType("sType", "the type of this structure.").mutable()
-    PointerSetter("VkExternalImageFormatProperties", "VkExternalImageFormatPropertiesKHR", "VkFilterCubicImageViewImageFormatPropertiesEXT", "VkSamplerYcbcrConversionImageFormatProperties", "VkSamplerYcbcrConversionImageFormatPropertiesKHR", "VkTextureLODGatherFormatPropertiesAMD")..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of ##VkImageFormatProperties2 is used to allow the specification of additional capabilities to be returned from {@code vkGetPhysicalDeviceImageFormatProperties2}.").mutable()
+    PointerSetter(
+        "VkExternalImageFormatProperties", "VkExternalImageFormatPropertiesKHR", "VkFilterCubicImageViewImageFormatPropertiesEXT", "VkSamplerYcbcrConversionImageFormatProperties", "VkSamplerYcbcrConversionImageFormatPropertiesKHR", "VkTextureLODGatherFormatPropertiesAMD",
+        prepend = true
+    )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of ##VkImageFormatProperties2 is used to allow the specification of additional capabilities to be returned from {@code vkGetPhysicalDeviceImageFormatProperties2}.").mutable()
     VkImageFormatProperties("imageFormatProperties", "a ##VkImageFormatProperties structure in which capabilities are returned.")
 }
 
@@ -6111,7 +6234,10 @@ val VkPhysicalDeviceImageFormatInfo2 = struct(Module.VULKAN, "VkPhysicalDeviceIm
         """
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkImageFormatListCreateInfo", "VkImageFormatListCreateInfoKHR", "VkImageStencilUsageCreateInfo", "VkImageStencilUsageCreateInfoEXT", "VkPhysicalDeviceExternalImageFormatInfo", "VkPhysicalDeviceExternalImageFormatInfoKHR", "VkPhysicalDeviceImageDrmFormatModifierInfoEXT", "VkPhysicalDeviceImageViewImageFormatInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2 is used to provide additional image parameters to {@code vkGetPhysicalDeviceImageFormatProperties2}.")
+    PointerSetter(
+        "VkImageFormatListCreateInfo", "VkImageFormatListCreateInfoKHR", "VkImageStencilUsageCreateInfo", "VkImageStencilUsageCreateInfoEXT", "VkPhysicalDeviceExternalImageFormatInfo", "VkPhysicalDeviceExternalImageFormatInfoKHR", "VkPhysicalDeviceImageDrmFormatModifierInfoEXT", "VkPhysicalDeviceImageViewImageFormatInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure. The {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2 is used to provide additional image parameters to {@code vkGetPhysicalDeviceImageFormatProperties2}.")
     VkFormat("format", "a {@code VkFormat} value indicating the image format, corresponding to ##VkImageCreateInfo{@code ::format}.")
     VkImageType("type", "a {@code VkImageType} value indicating the image type, corresponding to ##VkImageCreateInfo{@code ::imageType}.")
     VkImageTiling("tiling", "a {@code VkImageTiling} value indicating the image tiling, corresponding to ##VkImageCreateInfo{@code ::tiling}.")
@@ -6136,7 +6262,10 @@ val VkQueueFamilyProperties2 = struct(Module.VULKAN, "VkQueueFamilyProperties2",
         """
 
     Expression("#STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2")..VkStructureType("sType", "the type of this structure.").mutable()
-    PointerSetter("VkQueueFamilyCheckpointProperties2NV", "VkQueueFamilyCheckpointPropertiesNV", "VkQueueFamilyGlobalPriorityPropertiesEXT", "VkVideoQueueFamilyProperties2KHR")..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    PointerSetter(
+        "VkQueueFamilyCheckpointProperties2NV", "VkQueueFamilyCheckpointPropertiesNV", "VkQueueFamilyGlobalPriorityPropertiesEXT", "VkVideoQueueFamilyProperties2KHR",
+        prepend = true
+    )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkQueueFamilyProperties("queueFamilyProperties", "a ##VkQueueFamilyProperties structure which is populated with the same values as in #GetPhysicalDeviceQueueFamilyProperties().")
 }
 
@@ -6157,7 +6286,10 @@ val VkPhysicalDeviceMemoryProperties2 = struct(Module.VULKAN, "VkPhysicalDeviceM
         """
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2")..VkStructureType("sType", "the type of this structure.").mutable()
-    PointerSetter("VkPhysicalDeviceMemoryBudgetPropertiesEXT")..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    PointerSetter(
+        "VkPhysicalDeviceMemoryBudgetPropertiesEXT",
+        prepend = true
+    )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkPhysicalDeviceMemoryProperties("memoryProperties", "a ##VkPhysicalDeviceMemoryProperties structure which is populated with the same values as in #GetPhysicalDeviceMemoryProperties().")
 }
 
@@ -7125,7 +7257,10 @@ val VkPhysicalDeviceExternalSemaphoreInfo = struct(Module.VULKAN, "VkPhysicalDev
         """
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkSemaphoreTypeCreateInfo", "VkSemaphoreTypeCreateInfoKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkSemaphoreTypeCreateInfo", "VkSemaphoreTypeCreateInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkExternalSemaphoreHandleTypeFlagBits("handleType", "a {@code VkExternalSemaphoreHandleTypeFlagBits} value specifying the external semaphore handle type for which capabilities will be returned.")
 }
 
@@ -7194,7 +7329,10 @@ val VkDescriptorSetLayoutSupport = struct(Module.VULKAN, "VkDescriptorSetLayoutS
         """
 
     Expression("#STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT")..VkStructureType("sType", "the type of this structure.").mutable()
-    PointerSetter("VkDescriptorSetVariableDescriptorCountLayoutSupport", "VkDescriptorSetVariableDescriptorCountLayoutSupportEXT")..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    PointerSetter(
+        "VkDescriptorSetVariableDescriptorCountLayoutSupport", "VkDescriptorSetVariableDescriptorCountLayoutSupportEXT",
+        prepend = true
+    )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkBool32("supported", "specifies whether the descriptor set layout <b>can</b> be created.")
 }
 
@@ -7527,7 +7665,10 @@ val VkAttachmentDescription2 = struct(Module.VULKAN, "VkAttachmentDescription2")
         """
 
     Expression("#STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkAttachmentDescriptionStencilLayout", "VkAttachmentDescriptionStencilLayoutKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkAttachmentDescriptionStencilLayout", "VkAttachmentDescriptionStencilLayoutKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkAttachmentDescriptionFlags("flags", "a bitmask of {@code VkAttachmentDescriptionFlagBits} specifying additional properties of the attachment.")
     VkFormat("format", "a {@code VkFormat} value specifying the format of the image that will be used for the attachment.")
     VkSampleCountFlagBits("samples", "a {@code VkSampleCountFlagBits} value specifying the number of samples of the image.")
@@ -7576,7 +7717,10 @@ val VkAttachmentReference2 = struct(Module.VULKAN, "VkAttachmentReference2") {
         """
 
     Expression("#STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkAttachmentReferenceStencilLayout", "VkAttachmentReferenceStencilLayoutKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkAttachmentReferenceStencilLayout", "VkAttachmentReferenceStencilLayoutKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint32_t("attachment", "either an integer value identifying an attachment at the corresponding index in ##VkRenderPassCreateInfo2{@code ::pAttachments}, or #ATTACHMENT_UNUSED to signify that this attachment is not used.")
     VkImageLayout("layout", "a {@code VkImageLayout} value specifying the layout the attachment uses during the subpass.")
     VkImageAspectFlags("aspectMask", "a mask of which aspect(s) <b>can</b> be accessed within the specified subpass as an input attachment.")
@@ -7641,7 +7785,10 @@ val VkSubpassDescription2 = struct(Module.VULKAN, "VkSubpassDescription2") {
         """
 
     Expression("#STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkFragmentShadingRateAttachmentInfoKHR", "VkSubpassDescriptionDepthStencilResolve", "VkSubpassDescriptionDepthStencilResolveKHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkFragmentShadingRateAttachmentInfoKHR", "VkSubpassDescriptionDepthStencilResolve", "VkSubpassDescriptionDepthStencilResolveKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkSubpassDescriptionFlags("flags", "a bitmask of {@code VkSubpassDescriptionFlagBits} specifying usage of the subpass.")
     VkPipelineBindPoint("pipelineBindPoint", "a {@code VkPipelineBindPoint} value specifying the pipeline type supported for this subpass.")
     uint32_t("viewMask", "a bitfield of view indices describing which views rendering is broadcast to in this subpass, when multiview is enabled.")
@@ -7708,7 +7855,10 @@ val VkSubpassDependency2 = struct(Module.VULKAN, "VkSubpassDependency2") {
         """
 
     Expression("#STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkMemoryBarrier2KHR")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkMemoryBarrier2KHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint32_t("srcSubpass", "the subpass index of the first subpass in the dependency, or #SUBPASS_EXTERNAL.")
     uint32_t("dstSubpass", "the subpass index of the second subpass in the dependency, or #SUBPASS_EXTERNAL.")
     VkPipelineStageFlags("srcStageMask", "a bitmask of {@code VkPipelineStageFlagBits} specifying the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#synchronization-pipeline-stages-masks\">source stage mask</a>.")
@@ -7776,7 +7926,10 @@ val VkRenderPassCreateInfo2 = struct(Module.VULKAN, "VkRenderPassCreateInfo2") {
         """
 
     Expression("#STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter("VkRenderPassFragmentDensityMapCreateInfoEXT")..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkRenderPassFragmentDensityMapCreateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkRenderPassCreateFlags("flags", "reserved for future use.")
     AutoSize("pAttachments", optional = true)..uint32_t("attachmentCount", "the number of attachments used by this render pass.")
     VkAttachmentDescription2.const.p("pAttachments", "a pointer to an array of {@code attachmentCount} ##VkAttachmentDescription2 structures describing the attachments used by the render pass.")

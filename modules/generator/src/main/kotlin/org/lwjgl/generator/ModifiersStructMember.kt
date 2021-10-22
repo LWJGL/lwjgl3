@@ -95,7 +95,14 @@ class TerminatedMember(val value: String) : StructMemberModifier {
 val NullTerminatedMember = TerminatedMember("")
 
 /** Assigns pointer wrapper types to an opaque pointer member. A setter for each type will be generated that will write wrapper.address() to the member. */
-class PointerSetter(vararg val types: String): StructMemberModifier {
+class PointerSetter(
+    /** An array of types that implement the Pointer interface */
+    vararg val types: String,
+    /** If true, treat as a Vulkan pNext-style member and prepend the pointer to the current pointer chain. */
+    val prepend: Boolean = false,
+    /** Overrides the target type's setter method. If null, defaults to the same name as the modified member. */
+    val targetSetter: String? = null
+): StructMemberModifier {
     override val isSpecial = true
     override fun validate(member: StructMember) {
         require(member.nativeType is PointerType<*> && member.nativeType.mapping === PointerMapping.OPAQUE_POINTER) {
