@@ -20,7 +20,7 @@ val NV_stream_consumer_gltexture_yuv = "NVStreamConsumerGLTextureYUV".nativeClas
         conversion. This extension adds a new variant of the function to bind GL textures as stream consumers which allows attributes to specify the color
         space.
 
-        Requires ${KHR_stream_consumer_gltexture.core}.
+        Requires ${KHR_stream_consumer_gltexture.link}.
         """
 
     IntConstant(

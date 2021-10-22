@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * conversion. This extension adds a new variant of the function to bind GL textures as stream consumers which allows attributes to specify the color
  * space.</p>
  * 
- * <p>Requires {@link KHRStreamConsumerGLTexture EGL S.t}.</p>
+ * <p>Requires {@link KHRStreamConsumerGLTexture KHR_stream_consumer_gltexture}.</p>
  */
 public class NVStreamConsumerGLTextureYUV {
 

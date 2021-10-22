@@ -29,7 +29,8 @@ val EXT_device_openwf = "EXTDeviceOpenWF".nativeClassEGL("EXT_device_openwf", po
     IntConstant(
         "",
 
-        "OPENWF_DEVICE_ID_EXT"..0x3237
+        "OPENWF_DEVICE_ID_EXT"..0x3237,
+        "OPENWF_DEVICE_EXT"..0x333D
     )
 }
 
