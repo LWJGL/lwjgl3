@@ -728,8 +728,9 @@ class YogaNode {
     }
 
     enum YogaPositionType implements EnumWrapper {
-        ABSOLUTE(YGPositionTypeAbsolute),
-        RELATIVE(YGPositionTypeRelative);
+        STATIC(YGPositionTypeStatic),
+        RELATIVE(YGPositionTypeRelative),
+        ABSOLUTE(YGPositionTypeAbsolute);
 
         final int value;
 

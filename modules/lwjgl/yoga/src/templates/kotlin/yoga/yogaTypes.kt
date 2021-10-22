@@ -232,11 +232,11 @@ val YGLayout = struct(Module.YOGA, "YGLayout", mutable = false) {
     float("border", "")[4]
     float("padding", "")[4]
 
-    uint8_t("bitfield", "").virtual()
-    YGDirection("direction", "", bits = 2).getter("(nbitfield(struct) >>> 3) & 0b11")
-    bool("didUseLegacyFlag", "", bits = 1).getter("((nbitfield(struct) >>> 2) & 0b1) != 0")
-    bool("doesLegacyStretchFlagAffectsLayout", "", bits = 1).getter("((nbitfield(struct) >>> 1) & 0b1) != 0")
-    bool("hadOverflow", "", bits = 1).getter("(nbitfield(struct) & 0b1) != 0")
+    uint8_t("flags", "").virtual()
+    YGDirection("direction", "", bits = 2).getter("nflags(struct) & 0b11")
+    bool("didUseLegacyFlag", "", bits = 1).getter("((nflags(struct) >>> 2) & 0b1) != 0")
+    bool("doesLegacyStretchFlagAffectsLayout", "", bits = 1).getter("((nflags(struct) >>> 3) & 0b1) != 0")
+    bool("hadOverflow", "", bits = 1).getter("((nflags(struct) >>> 4) & 0b1) != 0")
 
     uint32_t("computedFlexBasisGeneration", "")
     YGFloatOptional("computedFlexBasis", "")
@@ -255,17 +255,17 @@ const val YGEdgeCount = 9
 val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
     documentation = "Unstable/private API."
 
-    uint32_t("bitfield", "").virtual()
-    YGDirection("direction", "", bits = 2).getter("(nbitfield(struct) >>> 20) & 0b11")
-    YGFlexDirection("flexDirection", "", bits = 2).getter("(nbitfield(struct) >>> 18) & 0b11")
-    YGJustify("justifyContent", "", bits = 3).getter("(nbitfield(struct) >>> 15) & 0b111")
-    YGAlign("alignContent", "", bits = 3).getter("(nbitfield(struct) >>> 12) & 0b111")
-    YGAlign("alignItems", "", bits = 3).getter("(nbitfield(struct) >>> 9) & 0b111")
-    YGAlign("alignSelf", "", bits = 3).getter("(nbitfield(struct) >>> 6) & 0b111")
-    YGPositionType("positionType", "", bits = 1).getter("(nbitfield(struct) >>> 5) & 0b1")
-    YGWrap("flexWrap", "", bits = 2).getter("(nbitfield(struct) >>> 3) & 0b11")
-    YGOverflow("overflow", "", bits = 2).getter("(nbitfield(struct) >>> 1) & 0b11")
-    YGDisplay("display", "", bits = 1).getter("nbitfield(struct) & 0b1")
+    uint32_t("flags", "").virtual()
+    YGDirection("direction", "", bits = 2).getter("nflags(struct) & 0b11")
+    YGFlexDirection("flexDirection", "", bits = 2).getter("(nflags(struct) >>> 2) & 0b11")
+    YGJustify("justifyContent", "", bits = 3).getter("(nflags(struct) >>> 4) & 0b111")
+    YGAlign("alignContent", "", bits = 3).getter("(nflags(struct) >>> 7) & 0b111")
+    YGAlign("alignItems", "", bits = 3).getter("(nflags(struct) >>> 10) & 0b111")
+    YGAlign("alignSelf", "", bits = 3).getter("(nflags(struct) >>> 13) & 0b111")
+    YGPositionType("positionType", "", bits = 2).getter("(nflags(struct) >>> 16) & 0b11")
+    YGWrap("flexWrap", "", bits = 2).getter("(nflags(struct) >>> 18) & 0b11")
+    YGOverflow("overflow", "", bits = 2).getter("(nflags(struct) >>> 20) & 0b11")
+    YGDisplay("display", "", bits = 1).getter("(nflags(struct) >>> 22) & 0b1")
     YGFloatOptional("flex", "")
     YGFloatOptional("flexGrow", "")
     YGFloatOptional("flexShrink", "")
@@ -281,20 +281,20 @@ val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
     YGFloatOptional("aspectRatio", "")
 }
 
-val YGNode = struct(Module.YOGA, "YGNode", nativeName = "YGNodeLWJGL") {
+val YGNode = struct(Module.YOGA, "YGNode") {
     documentation = "Unstable/private API."
 
     nullable..opaque_p("context", "")
 
-    uint8_t("bitfield", "").virtual()
-    bool("hasNewLayout", "", bits = 1).getter("((nbitfield(struct) >>> 7) & 0b1) != 0")
-    bool("isReferenceBaseline", "", bits = 1).getter("((nbitfield(struct) >>> 6) & 0b1) != 0")
-    bool("isDirty", "", bits = 1).getter("((nbitfield(struct) >>> 5) & 0b1) != 0")
-    YGNodeType("nodeType", "", bits = 1).getter("(nbitfield(struct) >>> 4) & 0b1")
-    bool("measureUsesContext", "", bits = 1).getter("((nbitfield(struct) >>> 3) & 0b1) != 0")
-    bool("baselineUsesContext", "", bits = 1).getter("((nbitfield(struct) >>> 2) & 0b1) != 0")
-    bool("printUsesContext", "", bits = 1).getter("((nbitfield(struct) >>> 1) & 0b1) != 0")
-    bool("useWebDefaults", "", bits = 1).getter("(nbitfield(struct) & 0b1) != 0")
+    uint8_t("flags", "").virtual()
+    bool("hasNewLayout", "", bits = 1).getter("(nflags(struct) & 0b1) != 0")
+    bool("isReferenceBaseline", "", bits = 1).getter("((nflags(struct) >>> 1) & 0b1) != 0")
+    bool("isDirty", "", bits = 1).getter("((nflags(struct) >>> 2) & 0b1) != 0")
+    YGNodeType("nodeType", "", bits = 1).getter("(nflags(struct) >>> 3) & 0b1")
+    bool("measureUsesContext", "", bits = 1).getter("((nflags(struct) >>> 4) & 0b1) != 0")
+    bool("baselineUsesContext", "", bits = 1).getter("((nflags(struct) >>> 5) & 0b1) != 0")
+    bool("printUsesContext", "", bits = 1).getter("((nflags(struct) >>> 6) & 0b1) != 0")
+    bool("useWebDefaults", "", bits = 1).getter("((nflags(struct) >>> 7) & 0b1) != 0")
     padding(1)
 
     union {

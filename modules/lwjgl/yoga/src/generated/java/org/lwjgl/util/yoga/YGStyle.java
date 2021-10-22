@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     YGAlign alignContent : 3;
  *     YGAlign alignItems : 3;
  *     YGAlign alignSelf : 3;
- *     YGPositionType positionType : 1;
+ *     YGPositionType positionType : 2;
  *     YGWrap flexWrap : 2;
  *     YGOverflow overflow : 2;
  *     YGDisplay display : 1;
@@ -55,7 +55,7 @@ public class YGStyle extends Struct {
 
     /** The struct member offsets. */
     public static final int
-        BITFIELD,
+        FLAGS,
         FLEX,
         FLEXGROW,
         FLEXSHRINK,
@@ -89,7 +89,7 @@ public class YGStyle extends Struct {
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        BITFIELD = layout.offsetof(0);
+        FLAGS = layout.offsetof(0);
         FLEX = layout.offsetof(1);
         FLEXGROW = layout.offsetof(2);
         FLEXSHRINK = layout.offsetof(3);
@@ -224,27 +224,27 @@ public class YGStyle extends Struct {
 
     // -----------------------------------
 
-    public static int nbitfield(long struct) { return UNSAFE.getInt(null, struct + YGStyle.BITFIELD); }
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + YGStyle.FLAGS); }
     /** Unsafe version of {@link #direction}. */
-    public static int ndirection(long struct) { return (nbitfield(struct) >>> 20) & 0b11; }
+    public static int ndirection(long struct) { return nflags(struct) & 0b11; }
     /** Unsafe version of {@link #flexDirection}. */
-    public static int nflexDirection(long struct) { return (nbitfield(struct) >>> 18) & 0b11; }
+    public static int nflexDirection(long struct) { return (nflags(struct) >>> 2) & 0b11; }
     /** Unsafe version of {@link #justifyContent}. */
-    public static int njustifyContent(long struct) { return (nbitfield(struct) >>> 15) & 0b111; }
+    public static int njustifyContent(long struct) { return (nflags(struct) >>> 4) & 0b111; }
     /** Unsafe version of {@link #alignContent}. */
-    public static int nalignContent(long struct) { return (nbitfield(struct) >>> 12) & 0b111; }
+    public static int nalignContent(long struct) { return (nflags(struct) >>> 7) & 0b111; }
     /** Unsafe version of {@link #alignItems}. */
-    public static int nalignItems(long struct) { return (nbitfield(struct) >>> 9) & 0b111; }
+    public static int nalignItems(long struct) { return (nflags(struct) >>> 10) & 0b111; }
     /** Unsafe version of {@link #alignSelf}. */
-    public static int nalignSelf(long struct) { return (nbitfield(struct) >>> 6) & 0b111; }
+    public static int nalignSelf(long struct) { return (nflags(struct) >>> 13) & 0b111; }
     /** Unsafe version of {@link #positionType}. */
-    public static int npositionType(long struct) { return (nbitfield(struct) >>> 5) & 0b1; }
+    public static int npositionType(long struct) { return (nflags(struct) >>> 16) & 0b11; }
     /** Unsafe version of {@link #flexWrap}. */
-    public static int nflexWrap(long struct) { return (nbitfield(struct) >>> 3) & 0b11; }
+    public static int nflexWrap(long struct) { return (nflags(struct) >>> 18) & 0b11; }
     /** Unsafe version of {@link #overflow}. */
-    public static int noverflow(long struct) { return (nbitfield(struct) >>> 1) & 0b11; }
+    public static int noverflow(long struct) { return (nflags(struct) >>> 20) & 0b11; }
     /** Unsafe version of {@link #display}. */
-    public static int ndisplay(long struct) { return nbitfield(struct) & 0b1; }
+    public static int ndisplay(long struct) { return (nflags(struct) >>> 22) & 0b1; }
     /** Unsafe version of {@link #flex}. */
     public static YGFloatOptional nflex(long struct) { return YGFloatOptional.create(struct + YGStyle.FLEX); }
     /** Unsafe version of {@link #flexGrow}. */

@@ -283,13 +283,15 @@ public class Yoga {
      * <h5>Enum values:</h5>
      * 
      * <ul>
+     * <li>{@link #YGPositionTypeStatic PositionTypeStatic}</li>
      * <li>{@link #YGPositionTypeRelative PositionTypeRelative}</li>
      * <li>{@link #YGPositionTypeAbsolute PositionTypeAbsolute}</li>
      * </ul>
      */
     public static final int
-        YGPositionTypeRelative = 0,
-        YGPositionTypeAbsolute = 1;
+        YGPositionTypeStatic   = 0,
+        YGPositionTypeRelative = 1,
+        YGPositionTypeAbsolute = 2;
 
     /**
      * YGUnit
@@ -412,6 +414,18 @@ public class Yoga {
             check(child);
         }
         nYGNodeInsertChild(node, child, index);
+    }
+
+    // --- [ YGNodeSwapChild ] ---
+
+    public static native void nYGNodeSwapChild(long node, long child, int index);
+
+    public static void YGNodeSwapChild(@NativeType("YGNodeRef") long node, @NativeType("YGNodeRef") long child, @NativeType("uint32_t") int index) {
+        if (CHECKS) {
+            check(node);
+            check(child);
+        }
+        nYGNodeSwapChild(node, child, index);
     }
 
     // --- [ YGNodeRemoveChild ] ---
@@ -941,7 +955,7 @@ public class Yoga {
     /** Unsafe version of: {@link #YGNodeStyleSetPositionType NodeStyleSetPositionType} */
     public static native void nYGNodeStyleSetPositionType(long node, int positionType);
 
-    /** @param positionType one of:<br><table><tr><td>{@link #YGPositionTypeRelative PositionTypeRelative}</td><td>{@link #YGPositionTypeAbsolute PositionTypeAbsolute}</td></tr></table> */
+    /** @param positionType one of:<br><table><tr><td>{@link #YGPositionTypeStatic PositionTypeStatic}</td><td>{@link #YGPositionTypeRelative PositionTypeRelative}</td><td>{@link #YGPositionTypeAbsolute PositionTypeAbsolute}</td></tr></table> */
     public static void YGNodeStyleSetPositionType(@NativeType("YGNodeRef") long node, @NativeType("YGPositionType") int positionType) {
         if (CHECKS) {
             check(node);
@@ -1978,7 +1992,7 @@ public class Yoga {
 
     // --- [ YGRoundValueToPixelGrid ] ---
 
-    public static native float YGRoundValueToPixelGrid(float value, float pointScaleFactor, @NativeType("bool") boolean forceCeil, @NativeType("bool") boolean forceFloor);
+    public static native float YGRoundValueToPixelGrid(double value, double pointScaleFactor, @NativeType("bool") boolean forceCeil, @NativeType("bool") boolean forceFloor);
 
     // --- [ YGAlignToString ] ---
 
@@ -2129,7 +2143,7 @@ public class Yoga {
     /** Unsafe version of: {@link #YGPositionTypeToString PositionTypeToString} */
     public static native long nYGPositionTypeToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGPositionTypeRelative PositionTypeRelative}</td><td>{@link #YGPositionTypeAbsolute PositionTypeAbsolute}</td></tr></table> */
+    /** @param value one of:<br><table><tr><td>{@link #YGPositionTypeStatic PositionTypeStatic}</td><td>{@link #YGPositionTypeRelative PositionTypeRelative}</td><td>{@link #YGPositionTypeAbsolute PositionTypeAbsolute}</td></tr></table> */
     @NativeType("char const *")
     public static String YGPositionTypeToString(@NativeType("YGPositionType") int value) {
         long __result = nYGPositionTypeToString(value);

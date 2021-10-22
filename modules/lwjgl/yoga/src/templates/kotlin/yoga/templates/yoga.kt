@@ -179,6 +179,7 @@ div {
     EnumConstant(
         "YGPositionType",
 
+        "PositionTypeStatic".enum,
         "PositionTypeRelative".enum,
         "PositionTypeAbsolute".enum
     )
@@ -250,6 +251,15 @@ div {
 
     void(
         "NodeInsertChild",
+        "",
+
+        node,
+        YGNodeRef("child", ""),
+        uint32_t("index", "")
+    )
+
+    void(
+        "NodeSwapChild",
         "",
 
         node,
@@ -1200,8 +1210,8 @@ div {
         "RoundValueToPixelGrid",
         "",
 
-        float("value", ""),
-        float("pointScaleFactor", ""),
+        double("value", ""),
+        double("pointScaleFactor", ""),
         bool("forceCeil", ""),
         bool("forceFloor", "")
     )

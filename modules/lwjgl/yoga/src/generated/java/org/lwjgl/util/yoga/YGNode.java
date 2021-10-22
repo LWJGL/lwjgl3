@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct YGNodeLWJGL {
+ * struct YGNode {
  *     void * context;
  *     bool hasNewLayout : 1;
  *     bool isReferenceBaseline : 1;
@@ -55,7 +55,6 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link YGValue YGValue} resolvedDimensions[2];
  * }</code></pre>
  */
-@NativeType("struct YGNodeLWJGL")
 public class YGNode extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
@@ -67,7 +66,7 @@ public class YGNode extends Struct implements NativeResource {
     /** The struct member offsets. */
     public static final int
         CONTEXT,
-        BITFIELD,
+        FLAGS,
         MEASURE,
             MEASURE_NOCONTEXT,
             MEASURE_WITHCONTEXT,
@@ -117,7 +116,7 @@ public class YGNode extends Struct implements NativeResource {
         ALIGNOF = layout.getAlignment();
 
         CONTEXT = layout.offsetof(0);
-        BITFIELD = layout.offsetof(1);
+        FLAGS = layout.offsetof(1);
         MEASURE = layout.offsetof(3);
             MEASURE_NOCONTEXT = layout.offsetof(4);
             MEASURE_WITHCONTEXT = layout.offsetof(5);
@@ -414,23 +413,23 @@ public class YGNode extends Struct implements NativeResource {
 
     /** Unsafe version of {@link #context}. */
     public static long ncontext(long struct) { return memGetAddress(struct + YGNode.CONTEXT); }
-    public static byte nbitfield(long struct) { return UNSAFE.getByte(null, struct + YGNode.BITFIELD); }
+    public static byte nflags(long struct) { return UNSAFE.getByte(null, struct + YGNode.FLAGS); }
     /** Unsafe version of {@link #hasNewLayout}. */
-    public static boolean nhasNewLayout(long struct) { return ((nbitfield(struct) >>> 7) & 0b1) != 0; }
+    public static boolean nhasNewLayout(long struct) { return (nflags(struct) & 0b1) != 0; }
     /** Unsafe version of {@link #isReferenceBaseline}. */
-    public static boolean nisReferenceBaseline(long struct) { return ((nbitfield(struct) >>> 6) & 0b1) != 0; }
+    public static boolean nisReferenceBaseline(long struct) { return ((nflags(struct) >>> 1) & 0b1) != 0; }
     /** Unsafe version of {@link #isDirty}. */
-    public static boolean nisDirty(long struct) { return ((nbitfield(struct) >>> 5) & 0b1) != 0; }
+    public static boolean nisDirty(long struct) { return ((nflags(struct) >>> 2) & 0b1) != 0; }
     /** Unsafe version of {@link #nodeType}. */
-    public static int nnodeType(long struct) { return (nbitfield(struct) >>> 4) & 0b1; }
+    public static int nnodeType(long struct) { return (nflags(struct) >>> 3) & 0b1; }
     /** Unsafe version of {@link #measureUsesContext}. */
-    public static boolean nmeasureUsesContext(long struct) { return ((nbitfield(struct) >>> 3) & 0b1) != 0; }
+    public static boolean nmeasureUsesContext(long struct) { return ((nflags(struct) >>> 4) & 0b1) != 0; }
     /** Unsafe version of {@link #baselineUsesContext}. */
-    public static boolean nbaselineUsesContext(long struct) { return ((nbitfield(struct) >>> 2) & 0b1) != 0; }
+    public static boolean nbaselineUsesContext(long struct) { return ((nflags(struct) >>> 5) & 0b1) != 0; }
     /** Unsafe version of {@link #printUsesContext}. */
-    public static boolean nprintUsesContext(long struct) { return ((nbitfield(struct) >>> 1) & 0b1) != 0; }
+    public static boolean nprintUsesContext(long struct) { return ((nflags(struct) >>> 6) & 0b1) != 0; }
     /** Unsafe version of {@link #useWebDefaults}. */
-    public static boolean nuseWebDefaults(long struct) { return (nbitfield(struct) & 0b1) != 0; }
+    public static boolean nuseWebDefaults(long struct) { return ((nflags(struct) >>> 7) & 0b1) != 0; }
     /** Unsafe version of {@link #measure_noContext}. */
     @Nullable public static YGMeasureFunc nmeasure_noContext(long struct) { return YGMeasureFunc.createSafe(memGetAddress(struct + YGNode.MEASURE_NOCONTEXT)); }
     /** Unsafe version of {@link #measure_withContext}. */
@@ -465,7 +464,7 @@ public class YGNode extends Struct implements NativeResource {
 
     /** Unsafe version of {@link #context(long) context}. */
     public static void ncontext(long struct, long value) { memPutAddress(struct + YGNode.CONTEXT, value); }
-    public static void nbitfield(long struct, byte value) { UNSAFE.putByte(null, struct + YGNode.BITFIELD, value); }
+    public static void nflags(long struct, byte value) { UNSAFE.putByte(null, struct + YGNode.FLAGS, value); }
     /** Unsafe version of {@link #hasNewLayout(boolean) hasNewLayout}. */
     public static native void nhasNewLayout(long struct, boolean value);
     /** Unsafe version of {@link #isReferenceBaseline(boolean) isReferenceBaseline}. */

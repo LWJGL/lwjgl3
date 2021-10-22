@@ -55,7 +55,7 @@ public class YGLayout extends Struct {
         MARGIN,
         BORDER,
         PADDING,
-        BITFIELD,
+        FLAGS,
         COMPUTEDFLEXBASISGENERATION,
         COMPUTEDFLEXBASIS,
         GENERATIONCOUNT,
@@ -91,7 +91,7 @@ public class YGLayout extends Struct {
         MARGIN = layout.offsetof(2);
         BORDER = layout.offsetof(3);
         PADDING = layout.offsetof(4);
-        BITFIELD = layout.offsetof(5);
+        FLAGS = layout.offsetof(5);
         COMPUTEDFLEXBASISGENERATION = layout.offsetof(6);
         COMPUTEDFLEXBASIS = layout.offsetof(7);
         GENERATIONCOUNT = layout.offsetof(8);
@@ -240,15 +240,15 @@ public class YGLayout extends Struct {
     public static float npadding(long struct, int index) {
         return UNSAFE.getFloat(null, struct + YGLayout.PADDING + check(index, 4) * 4);
     }
-    public static byte nbitfield(long struct) { return UNSAFE.getByte(null, struct + YGLayout.BITFIELD); }
+    public static byte nflags(long struct) { return UNSAFE.getByte(null, struct + YGLayout.FLAGS); }
     /** Unsafe version of {@link #direction}. */
-    public static int ndirection(long struct) { return (nbitfield(struct) >>> 3) & 0b11; }
+    public static int ndirection(long struct) { return nflags(struct) & 0b11; }
     /** Unsafe version of {@link #didUseLegacyFlag}. */
-    public static boolean ndidUseLegacyFlag(long struct) { return ((nbitfield(struct) >>> 2) & 0b1) != 0; }
+    public static boolean ndidUseLegacyFlag(long struct) { return ((nflags(struct) >>> 2) & 0b1) != 0; }
     /** Unsafe version of {@link #doesLegacyStretchFlagAffectsLayout}. */
-    public static boolean ndoesLegacyStretchFlagAffectsLayout(long struct) { return ((nbitfield(struct) >>> 1) & 0b1) != 0; }
+    public static boolean ndoesLegacyStretchFlagAffectsLayout(long struct) { return ((nflags(struct) >>> 3) & 0b1) != 0; }
     /** Unsafe version of {@link #hadOverflow}. */
-    public static boolean nhadOverflow(long struct) { return (nbitfield(struct) & 0b1) != 0; }
+    public static boolean nhadOverflow(long struct) { return ((nflags(struct) >>> 4) & 0b1) != 0; }
     /** Unsafe version of {@link #computedFlexBasisGeneration}. */
     public static int ncomputedFlexBasisGeneration(long struct) { return UNSAFE.getInt(null, struct + YGLayout.COMPUTEDFLEXBASISGENERATION); }
     /** Unsafe version of {@link #computedFlexBasis}. */

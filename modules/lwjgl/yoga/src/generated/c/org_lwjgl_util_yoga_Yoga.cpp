@@ -61,6 +61,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeInsertChild(JNIEnv *
     YGNodeInsertChild(node, child, (uint32_t)index);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeSwapChild(JNIEnv *__env, jclass clazz, jlong nodeAddress, jlong childAddress, jint index) {
+    YGNodeRef node = (YGNodeRef)(intptr_t)nodeAddress;
+    YGNodeRef child = (YGNodeRef)(intptr_t)childAddress;
+    UNUSED_PARAMS(__env, clazz)
+    YGNodeSwapChild(node, child, (uint32_t)index);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeRemoveChild(JNIEnv *__env, jclass clazz, jlong nodeAddress, jlong childAddress) {
     YGNodeRef node = (YGNodeRef)(intptr_t)nodeAddress;
     YGNodeRef child = (YGNodeRef)(intptr_t)childAddress;
@@ -827,7 +834,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigGetContext(JNIEnv
     return (jlong)(intptr_t)YGConfigGetContext(config);
 }
 
-JNIEXPORT jfloat JNICALL Java_org_lwjgl_util_yoga_Yoga_YGRoundValueToPixelGrid(JNIEnv *__env, jclass clazz, jfloat value, jfloat pointScaleFactor, jboolean forceCeil, jboolean forceFloor) {
+JNIEXPORT jfloat JNICALL Java_org_lwjgl_util_yoga_Yoga_YGRoundValueToPixelGrid(JNIEnv *__env, jclass clazz, jdouble value, jdouble pointScaleFactor, jboolean forceCeil, jboolean forceFloor) {
     UNUSED_PARAMS(__env, clazz)
     return (jfloat)YGRoundValueToPixelGrid(value, pointScaleFactor, (bool)forceCeil, (bool)forceFloor);
 }

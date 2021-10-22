@@ -182,7 +182,7 @@ public class YogaNodeStylePropertiesTest {
     public void testPositionTypeDefault() {
         YogaNode node = createNode();
 
-        assertEquals(YogaPositionType.RELATIVE, node.getPositionType());
+        assertEquals(YogaPositionType.STATIC, node.getPositionType());
     }
 
     @Test
