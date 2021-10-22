@@ -10,7 +10,6 @@
     <orderEntry type="library" scope="RUNTIME" name="Ant" level="project" />
     <orderEntry type="module" module-name="templates.assimp" />
     <orderEntry type="module" module-name="templates.bgfx" />
-    <orderEntry type="module" module-name="templates.bullet" />
     <orderEntry type="module" module-name="templates.core" />
     <orderEntry type="module" module-name="templates.cuda" />
     <orderEntry type="module" module-name="templates.driftfx" />

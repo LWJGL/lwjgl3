@@ -14,7 +14,6 @@
       <!-- The generator templates for each binding -->
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.assimp.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.assimp.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.bgfx.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.bgfx.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.bullet.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.bullet.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.core.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.core.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.cuda.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.cuda.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.driftfx.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.driftfx.iml" />
