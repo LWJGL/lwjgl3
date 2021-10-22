@@ -414,6 +414,7 @@ val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {
 }
 
 val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
+    javaImport("org.lwjgl.vulkan.*")
     documentation = "Describes parameter of created {@code VmaPool}."
 
     uint32_t("memoryTypeIndex", "Vulkan memory type index to allocate this pool from")
@@ -476,7 +477,11 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
         Vulkan by functions like {@code vkGetBufferMemoryRequirements} is not enough, e.g. when doing interop with OpenGL.
         """
     )
-    nullable..opaque_p(
+    PointerSetter(
+        *VkMemoryAllocateInfo.definition["pNext"].get<PointerSetter>().types,
+        prepend = true,
+        targetSetter = "pNext"
+    )..nullable..opaque_p(
         "pMemoryAllocateNext",
         """
         Additional {@code pNext} chain to be attached to {@code VkMemoryAllocateInfo} used for every allocation made by this pool. Optional.
