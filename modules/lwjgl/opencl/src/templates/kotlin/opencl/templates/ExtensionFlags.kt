@@ -14,8 +14,10 @@ val ALTERA = "ALTERA"
 val AMD = "AMD"
 val APPLE = "APPLE"
 val ARM = "ARM"
+val IMG = "IMG"
 val INTEL = "INTEL"
 val NV = "NV"
+val POCL = "POCL"
 val QCOM = "QCOM"
 
 val khr_3d_image_writes = EXT_FLAG.nativeClassCL("khr_3d_image_writes", KHR) {
@@ -26,6 +28,16 @@ val khr_3d_image_writes = EXT_FLAG.nativeClassCL("khr_3d_image_writes", KHR) {
         This extension adds support for kernel writes to 3D images.
         """
 }
+
+val khr_async_work_group_copy_fence = EXT_FLAG.nativeClassCL("khr_async_work_group_copy_fence", KHR) {
+    documentation =
+        """
+        When true, the $extensionName extension is supported.
+
+        The extension adds a new built-in function to OpenCL C to establish a memory synchronization ordering of asynchronous copies.
+        """
+}
+
 val khr_byte_addressable_store = EXT_FLAG.nativeClassCL("khr_byte_addressable_store", KHR) {
     documentation =
         """
@@ -43,6 +55,43 @@ val khr_device_enqueue_local_arg_types = EXT_FLAG.nativeClassCL("khr_device_enqu
         This extension allows arguments to blocks passed to enqueue_kernel functions to be declared as a pointer to any type (built-in or user-defined) in
         local memory instead of just {@code local void *}.
         """
+}
+
+val khr_extended_async_copies = EXT_FLAG.nativeClassCL("khr_extended_async_copies", KHR) {
+    documentation =
+        """
+        When true, the $extensionLink extension is supported.
+        
+        This extension augments built-in asynchronous copy functions to OpenCL C to support more patterns:
+        ${ol(
+            "for async copy between 2D source and 2D destination.",
+            "for async copy between 3D source and 3D destination."
+        )}
+        """
+}
+
+val khr_extended_bit_ops = EXT_FLAG.nativeClassCL("khr_extended_bit_ops", KHR) {
+    documentation =
+        """
+        When true, the $extensionLink extension is supported.
+        
+        This extension adds OpenCL C functions for performing extended bit operations. Specifically, the following functions are added:
+        ${ul(
+            "bitfield insert: insert bits from one source operand into another source operand.",
+            "bitfield extract: extract bits from a source operand, with sign- or zero-extension.",
+            "bit reverse: reverse the bits of a source operand."
+        )}
+        """
+}
+
+val khr_external_memory_dma_buf = EXT_FLAG.nativeClassCL("khr_external_memory_dma_buf", KHR) {
+    documentation = "When true, the $extensionLink extension is supported."
+}
+val khr_external_memory_opaque_fd = EXT_FLAG.nativeClassCL("khr_external_memory_opaque_fd", KHR) {
+    documentation = "When true, the $extensionLink extension is supported."
+}
+val khr_external_memory_win32 = EXT_FLAG.nativeClassCL("khr_external_memory_win32", KHR) {
+    documentation = "When true, the $extensionLink extension is supported."
 }
 
 val khr_global_int32_base_atomics = EXT_FLAG.nativeClassCL("khr_global_int32_base_atomics", KHR) {
@@ -136,6 +185,82 @@ val khr_select_fprounding_mode = EXT_FLAG.nativeClassCL("khr_select_fprounding_m
         rounded to fit into the destination type. Round to nearest even is currently the only rounding mode required by the OpenCL specification and is
         therefore the default rounding mode. In addition, only static selection of rounding mode is supported. Dynamically reconfiguring the rounding modes as
         specified by the IEEE 754 spec is not a requirement.
+        """
+}
+
+val khr_srgb_image_writes = EXT_FLAG.nativeClassCL("khr_srgb_image_writes", KHR) {
+    documentation =
+        """
+        When true, the $extensionName extension is supported.
+
+        This extension enables kernels to write to sRGB images using the {@code write_imagef} built-in function. The sRGB image formats that may be written to
+        will be returned by #GetSupportedImageFormats().
+
+        When the image is an sRGB image, the {@code write_imagef} built-in function will perform the linear to sRGB conversion. Only the R, G, and B components
+        are converted from linear to sRGB; the A component is written as-is.
+        """
+}
+
+val khr_subgroup_ballot = EXT_FLAG.nativeClassCL("khr_subgroup_ballot", KHR) {
+    documentation =
+        """
+        When true, the $extensionName extension is supported.
+
+        This extension adds the ability to collect and operate on ballots from work items in the subgroup.
+        """
+}
+
+val khr_subgroup_clustered_reduce = EXT_FLAG.nativeClassCL("khr_subgroup_clustered_reduce", KHR) {
+    documentation =
+        """
+        When true, the $extensionName extension is supported.
+
+        This extension adds support for clustered reductions that operate on a subset of work items in the subgroup.
+        """
+}
+
+val khr_subgroup_extended_types = EXT_FLAG.nativeClassCL("khr_subgroup_extended_types", KHR) {
+    documentation =
+        """
+        When true, the $extensionName extension is supported.
+
+        This extension adds additional supported data types to the existing subgroup broadcast, scan, and reduction functions.
+        """
+}
+
+val khr_subgroup_non_uniform_arithmetic = EXT_FLAG.nativeClassCL("khr_subgroup_non_uniform_arithmetic", KHR) {
+    documentation =
+        """
+        When true, the $extensionName extension is supported.
+
+        This extension adds the ability to use some subgroup functions within non-uniform flow control, including additional scan and reduction operators.
+        """
+}
+
+val khr_subgroup_non_uniform_vote = EXT_FLAG.nativeClassCL("khr_subgroup_non_uniform_vote", KHR) {
+    documentation =
+        """
+        When true, the $extensionName extension is supported.
+
+        This extension adds the ability to elect a single work item from a subgroup to perform a task and to hold votes among work items in a subgroup.
+        """
+}
+
+val khr_subgroup_shuffle_relative = EXT_FLAG.nativeClassCL("khr_subgroup_shuffle_relative", KHR) {
+    documentation =
+        """
+        When true, the $extensionName extension is supported.
+
+        This extension adds specialized ways to exchange data among work items in a subgroup that may perform better on some implementations.
+        """
+}
+
+val khr_subgroup_shuffle = EXT_FLAG.nativeClassCL("khr_subgroup_shuffle", KHR) {
+    documentation =
+        """
+        When true, the $extensionName extension is supported.
+
+        This extension adds additional ways to exchange data among work items in a subgroup.
         """
 }
 
@@ -522,22 +647,19 @@ val amd_vec3 = EXT_FLAG.nativeClassCL("amd_vec3", AMD) {
 
 val APPLE_fp64_basic_ops = EXT_FLAG.nativeClassCL("APPLE_fp64_basic_ops", APPLE)
 
-val arm_core_id = EXT_FLAG.nativeClassCL("arm_core_id", ARM) {
-    documentation =
-        """
-        When true, the ${extensionLink("arm_get_core_id")} extension is supported.
-
-        This extension provides a built-in function ({@code uint arm_get_core_id( void )}) which returns a unique ID for the compute unit that a work-group is
-        running on. This value is uniform for a work-group.
-
-        This value can be used for a core-specific cache or atomic pool where the storage is required to be in global memory and persistent (but not ordered)
-        between work-groups. This does not provide any additional ordering on top of the existing guarantees between workgroups, nor does it provide any
-        guarantee of concurrent execution.
-
-        The IDs for the compute units may not be consecutive and applications must make sure they allocate enough memory to accommodate all the compute units
-        present on the device. A device info query allows the application to know the IDs associated with the compute units on a given device.
-        """
+val arm_import_memory_host = EXT_FLAG.nativeClassCL("cl_arm_import_memory_host", ARM) {
+    documentation = "When true, the $extensionLink extension is supported."
 }
+val arm_import_memory_dma_buf = EXT_FLAG.nativeClassCL("cl_arm_import_memory_dma_buf", ARM) {
+    documentation = "When true, the $extensionLink extension is supported."
+}
+val arm_import_memory_protected = EXT_FLAG.nativeClassCL("cl_arm_import_memory_protected", ARM) {
+    documentation = "When true, the $extensionLink extension is supported."
+}
+val arm_import_memory_android_hardware_buffer = EXT_FLAG.nativeClassCL("cl_arm_import_memory_android_hardware_buffer", ARM) {
+    documentation = "When true, the $extensionLink extension is supported."
+}
+
 val arm_integer_dot_product_int8 = EXT_FLAG.nativeClassCL("arm_integer_dot_product_int8", ARM) {
     documentation = "When true, the ${extensionLink("arm_integer_dot_product", name = "cl_arm_integer_dot_product_int8")} extension is supported."
 }
@@ -549,6 +671,38 @@ val arm_integer_dot_product_accumulate_int16 = EXT_FLAG.nativeClassCL("arm_integ
 }
 val arm_integer_dot_product_accumulate_saturate_int8 = EXT_FLAG.nativeClassCL("arm_integer_dot_product_accumulate_saturate_int8", ARM) {
     documentation = "When true, the ${extensionLink("arm_integer_dot_product", name = "cl_arm_integer_dot_product_accumulate_saturate_int8")} extension is supported."
+}
+
+val arm_non_uniform_work_group_size = EXT_FLAG.nativeClassCL("arm_non_uniform_work_group_size", ARM) {
+    documentation =
+        """
+        When true, the $extensionLink extension is supported.
+        
+        This extension provides a way to enqueue kernels with local work-group sizes that are not integer factors of the global work-group size in OpenCL C 1.x
+        languages.
+
+        Such work-groups are referred to in the OpenCL 2.0 specification as non-uniform work-groups.
+
+        To enable this extension the option {@code -cl-arm-non-uniform-work-group-size} must be provided in the options string when building a program from
+        source using #BuildProgram(). Kernels created from such a program will be able to be enqueued via #EnqueueNDRangeKernel() with a non-uniform local
+        work-group size.
+
+        This feature is enabled by default in OpenCL C 2.0. See section 5.10 of the OpenCL 2.0 API specification. This section also details how kernels that
+        are enqueued with non-uniform work-group sizes are divided into work groups.
+
+        The built in function {@code get_local_size()} for kernels that have been built with this extension will take on the OpenCL 2.0 behaviour. See section
+        6.13.1 of the OpenCL 2.0 C specification for details.
+        """
+}
+
+val arm_thread_limit_hint = EXT_FLAG.nativeClassCL("arm_thread_limit_hint", ARM) {
+    documentation =
+        """
+        When true, the $extensionLink extension is supported.
+        
+        This extension enables an application to provide a hint for the maximum number of threads allowed to run concurrently on a compute unit. This results
+        in a limit in the threads used by a kernel instance on devices that support it, lowering pressure on caches.
+        """
 }
 
 val intel_media_block_io = EXT_FLAG.nativeClassCL("intel_media_block_io", INTEL) {
@@ -671,6 +825,9 @@ val nv_compiler_options = EXT_FLAG.nativeClassCL("nv_compiler_options", NV) {
     Output will be reported in the build log (accessible through the
     callback parameter to clBuildProgram).""")}
         """
+}
+val nv_copy_opts = EXT_FLAG.nativeClassCL("nv_copy_opts", NV) {
+    documentation = "When true, the $extensionLink extension is supported."
 }
 val nv_pragma_unroll = EXT_FLAG.nativeClassCL("nv_pragma_unroll", NV) {
     documentation =

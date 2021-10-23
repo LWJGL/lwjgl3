@@ -37,7 +37,15 @@ val arm_scheduling_controls = "ARMSchedulingControls".nativeClassCL("arm_schedul
 
         "DEVICE_SCHEDULING_KERNEL_BATCHING_ARM".."(1 << 0)",
         "DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_ARM".."(1 << 1)",
-        "DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_MODIFIER_ARM".."(1 << 2)"
+        "DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_MODIFIER_ARM".."(1 << 2)",
+        "DEVICE_SCHEDULING_DEFERRED_FLUSH_ARM".."(1 << 3)",
+        "DEVICE_SCHEDULING_REGISTER_ALLOCATION_ARM".."(1 << 4)"
+    )
+
+    IntConstant(
+        "Accepted value for the {@code param_name} parameter to #GetDeviceInfo().",
+
+        "DEVICE_SUPPORTED_REGISTER_ALLOCATIONS_ARM"..0x41EB
     )
 
     IntConstant(
@@ -50,6 +58,7 @@ val arm_scheduling_controls = "ARMSchedulingControls".nativeClassCL("arm_schedul
     IntConstant(
         "Accepted value for the {@code properties} parameter to #CreateCommandQueueWithProperties()",
 
-        "QUEUE_KERNEL_BATCHING_ARM"..0x41E7
+        "QUEUE_KERNEL_BATCHING_ARM"..0x41E7,
+        "QUEUE_DEFERRED_FLUSH_ARM"..0x41EC
     )
 }

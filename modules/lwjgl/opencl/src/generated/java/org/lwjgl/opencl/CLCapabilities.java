@@ -154,27 +154,44 @@ public class CLCapabilities {
         clLogMessagesToStdoutAPPLE,
         clLogMessagesToStderrAPPLE,
         clGetGLContextInfoAPPLE,
+        clImportMemoryARM,
         clReleaseDeviceEXT,
         clRetainDeviceEXT,
         clCreateSubDevicesEXT,
         clEnqueueMigrateMemObjectEXT,
+        clEnqueueGenerateMipmapIMG,
         clCreateAcceleratorINTEL,
         clRetainAcceleratorINTEL,
         clReleaseAcceleratorINTEL,
         clGetAcceleratorInfoINTEL,
         clCreateBufferWithPropertiesINTEL,
-        clGetKernelSubGroupInfoKHR,
+        clGetSupportedGLTextureFormatsINTEL,
+        clGetSupportedVA_APIMediaSurfaceFormatsINTEL,
         clGetDeviceIDsFromVA_APIMediaAdapterINTEL,
         clCreateFromVA_APIMediaSurfaceINTEL,
         clEnqueueAcquireVA_APIMediaSurfacesINTEL,
         clEnqueueReleaseVA_APIMediaSurfacesINTEL,
+        clCreateCommandQueueWithPropertiesKHR,
         clCreateEventFromEGLSyncKHR,
         clCreateFromEGLImageKHR,
         clEnqueueAcquireEGLObjectsKHR,
         clEnqueueReleaseEGLObjectsKHR,
+        clEnqueueAcquireExternalMemObjectsKHR,
+        clEnqueueReleaseExternalMemObjectsKHR,
         clCreateEventFromGLsyncKHR,
         clGetGLContextInfoKHR,
+        clCreateProgramWithILKHR,
+        clCreateSemaphoreWithPropertiesKHR,
+        clEnqueueWaitSemaphoresKHR,
+        clEnqueueSignalSemaphoresKHR,
+        clGetSemaphoreInfoKHR,
+        clReleaseSemaphoreKHR,
+        clRetainSemaphoreKHR,
+        clGetKernelSubGroupInfoKHR,
+        clGetKernelSuggestedLocalWorkSizeKHR,
         clTerminateContextKHR,
+        clCreateBufferNV,
+        clSetContentSizeBufferPoCL,
         clGetDeviceImageInfoQCOM;
 
     /** When true, {@link CL10} is supported. */
@@ -596,20 +613,12 @@ public class CLCapabilities {
     public final boolean cl_APPLE_gl_sharing;
     /** When true, {@link APPLEQueryKernelNames} is supported. */
     public final boolean cl_APPLE_query_kernel_names;
-    /**
-     * When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_get_core_id.txt">arm_core_id</a> extension is supported.
-     * 
-     * <p>This extension provides a built-in function ({@code uint arm_get_core_id( void )}) which returns a unique ID for the compute unit that a work-group is
-     * running on. This value is uniform for a work-group.</p>
-     * 
-     * <p>This value can be used for a core-specific cache or atomic pool where the storage is required to be in global memory and persistent (but not ordered)
-     * between work-groups. This does not provide any additional ordering on top of the existing guarantees between workgroups, nor does it provide any
-     * guarantee of concurrent execution.</p>
-     * 
-     * <p>The IDs for the compute units may not be consecutive and applications must make sure they allocate enough memory to accommodate all the compute units
-     * present on the device. A device info query allows the application to know the IDs associated with the compute units on a given device.</p>
-     */
+    /** When true, {@link ARMControlledKernelTermination} is supported. */
+    public final boolean cl_arm_controlled_kernel_termination;
+    /** When true, {@link ARMCoreID} is supported. */
     public final boolean cl_arm_core_id;
+    /** When true, {@link ARMImportMemory} is supported. */
+    public final boolean cl_arm_import_memory;
     /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_int16</a> extension is supported. */
     public final boolean cl_arm_integer_dot_product_accumulate_int16;
     /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_int8</a> extension is supported. */
@@ -618,10 +627,46 @@ public class CLCapabilities {
     public final boolean cl_arm_integer_dot_product_accumulate_saturate_int8;
     /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_int8</a> extension is supported. */
     public final boolean cl_arm_integer_dot_product_int8;
+    /** When true, {@link ARMJobSlotSelection} is supported. */
+    public final boolean cl_arm_job_slot_selection;
+    /**
+     * When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_non_uniform_work_group_size.txt">arm_non_uniform_work_group_size</a> extension is supported.
+     * 
+     * <p>This extension provides a way to enqueue kernels with local work-group sizes that are not integer factors of the global work-group size in OpenCL C 1.x
+     * languages.</p>
+     * 
+     * <p>Such work-groups are referred to in the OpenCL 2.0 specification as non-uniform work-groups.</p>
+     * 
+     * <p>To enable this extension the option {@code -cl-arm-non-uniform-work-group-size} must be provided in the options string when building a program from
+     * source using {@link CL10#clBuildProgram BuildProgram}. Kernels created from such a program will be able to be enqueued via {@link CL10#clEnqueueNDRangeKernel EnqueueNDRangeKernel} with a non-uniform local
+     * work-group size.</p>
+     * 
+     * <p>This feature is enabled by default in OpenCL C 2.0. See section 5.10 of the OpenCL 2.0 API specification. This section also details how kernels that
+     * are enqueued with non-uniform work-group sizes are divided into work groups.</p>
+     * 
+     * <p>The built in function {@code get_local_size()} for kernels that have been built with this extension will take on the OpenCL 2.0 behaviour. See section
+     * 6.13.1 of the OpenCL 2.0 C specification for details.</p>
+     */
+    public final boolean cl_arm_non_uniform_work_group_size;
     /** When true, {@link ARMPrintf} is supported. */
     public final boolean cl_arm_printf;
     /** When true, {@link ARMSchedulingControls} is supported. */
     public final boolean cl_arm_scheduling_controls;
+    /**
+     * When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_thread_limit_hint.txt">arm_thread_limit_hint</a> extension is supported.
+     * 
+     * <p>This extension enables an application to provide a hint for the maximum number of threads allowed to run concurrently on a compute unit. This results
+     * in a limit in the threads used by a kernel instance on devices that support it, lowering pressure on caches.</p>
+     */
+    public final boolean cl_arm_thread_limit_hint;
+    /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_android_hardware_buffer.txt">cl_arm_import_memory_android_hardware_buffer</a> extension is supported. */
+    public final boolean cl_cl_arm_import_memory_android_hardware_buffer;
+    /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_dma_buf.txt">cl_arm_import_memory_dma_buf</a> extension is supported. */
+    public final boolean cl_cl_arm_import_memory_dma_buf;
+    /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_host.txt">cl_arm_import_memory_host</a> extension is supported. */
+    public final boolean cl_cl_arm_import_memory_host;
+    /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_protected.txt">cl_arm_import_memory_protected</a> extension is supported. */
+    public final boolean cl_cl_arm_import_memory_protected;
     /** When true, {@link EXTAtomicCounters32} is supported. */
     public final boolean cl_ext_atomic_counters_32;
     /** When true, {@link EXTAtomicCounters64} is supported. */
@@ -632,10 +677,20 @@ public class CLCapabilities {
     public final boolean cl_ext_device_fission;
     /** When true, {@link EXTMigrateMemobject} is supported. */
     public final boolean cl_ext_migrate_memobject;
+    /** When true, {@link IMGCachedAllocations} is supported. */
+    public final boolean cl_img_cached_allocations;
+    /** When true, {@link IMGGenerateMipmap} is supported. */
+    public final boolean cl_img_generate_mipmap;
+    /** When true, {@link IMGMemProperties} is supported. */
+    public final boolean cl_img_mem_properties;
+    /** When true, {@link IMGYUVImage} is supported. */
+    public final boolean cl_img_yuv_image;
     /** When true, {@link INTELAccelerator} is supported. */
     public final boolean cl_intel_accelerator;
     /** When true, {@link INTELAdvancedMotionEstimation} is supported. */
     public final boolean cl_intel_advanced_motion_estimation;
+    /** When true, {@link INTELCommandQueueFamilies} is supported. */
+    public final boolean cl_intel_command_queue_families;
     /** When true, {@link INTELCreateBufferWithProperties} is supported. */
     public final boolean cl_intel_create_buffer_with_properties;
     /** When true, {@link INTELDevicePartitionByNames} is supported. */
@@ -672,6 +727,8 @@ public class CLCapabilities {
     public final boolean cl_intel_printf;
     /** When true, {@link INTELRequiredSubgroupSize} is supported. */
     public final boolean cl_intel_required_subgroup_size;
+    /** When true, {@link INTELSharingFormatQuery} is supported. */
+    public final boolean cl_intel_sharing_format_query;
     /** When true, {@link INTELSimultaneousSharing} is supported. */
     public final boolean cl_intel_simultaneous_sharing;
     /**
@@ -747,11 +804,19 @@ public class CLCapabilities {
      */
     public final boolean cl_khr_3d_image_writes;
     /**
+     * When true, the <strong>khr_async_work_group_copy_fence</strong> extension is supported.
+     * 
+     * <p>The extension adds a new built-in function to OpenCL C to establish a memory synchronization ordering of asynchronous copies.</p>
+     */
+    public final boolean cl_khr_async_work_group_copy_fence;
+    /**
      * When true, the <strong>khr_byte_addressable_store</strong> extension is supported.
      * 
      * <p>This extension eliminates the restriction of not allowing writes to a pointer (or array elements) of types less than 32-bit wide in kernel program.</p>
      */
     public final boolean cl_khr_byte_addressable_store;
+    /** When true, {@link KHRCreateCommandQueue} is supported. */
+    public final boolean cl_khr_create_command_queue;
     /** When true, {@link KHRDepthImages} is supported. */
     public final boolean cl_khr_depth_images;
     /**
@@ -761,10 +826,47 @@ public class CLCapabilities {
      * local memory instead of just {@code local void *}.</p>
      */
     public final boolean cl_khr_device_enqueue_local_arg_types;
+    /** When true, {@link KHRDeviceUUID} is supported. */
+    public final boolean cl_khr_device_uuid;
     /** When true, {@link KHREGLEvent} is supported. */
     public final boolean cl_khr_egl_event;
     /** When true, {@link KHREGLImage} is supported. */
     public final boolean cl_khr_egl_image;
+    /**
+     * When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_extended_async_copies.txt">khr_extended_async_copies</a> extension is supported.
+     * 
+     * <p>This extension augments built-in asynchronous copy functions to OpenCL C to support more patterns:</p>
+     * 
+     * <ol>
+     * <li>for async copy between 2D source and 2D destination.</li>
+     * <li>for async copy between 3D source and 3D destination.</li>
+     * </ol>
+     */
+    public final boolean cl_khr_extended_async_copies;
+    /**
+     * When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_extended_bit_ops.txt">khr_extended_bit_ops</a> extension is supported.
+     * 
+     * <p>This extension adds OpenCL C functions for performing extended bit operations. Specifically, the following functions are added:</p>
+     * 
+     * <ul>
+     * <li>bitfield insert: insert bits from one source operand into another source operand.</li>
+     * <li>bitfield extract: extract bits from a source operand, with sign- or zero-extension.</li>
+     * <li>bit reverse: reverse the bits of a source operand.</li>
+     * </ul>
+     */
+    public final boolean cl_khr_extended_bit_ops;
+    /** When true, {@link KHRExtendedVersioning} is supported. */
+    public final boolean cl_khr_extended_versioning;
+    /** When true, {@link KHRExternalMemory} is supported. */
+    public final boolean cl_khr_external_memory;
+    /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_external_memory_dma_buf.txt">khr_external_memory_dma_buf</a> extension is supported. */
+    public final boolean cl_khr_external_memory_dma_buf;
+    /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_external_memory_opaque_fd.txt">khr_external_memory_opaque_fd</a> extension is supported. */
+    public final boolean cl_khr_external_memory_opaque_fd;
+    /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_external_memory_win32.txt">khr_external_memory_win32</a> extension is supported. */
+    public final boolean cl_khr_external_memory_win32;
+    /** When true, {@link KHRExternalSemaphore} is supported. */
+    public final boolean cl_khr_external_semaphore;
     /** When true, {@link KHRFP16} is supported. */
     public final boolean cl_khr_fp16;
     /** When true, {@link KHRFP64} is supported. */
@@ -791,6 +893,8 @@ public class CLCapabilities {
     public final boolean cl_khr_global_int32_extended_atomics;
     /** When true, {@link KHRICD} is supported. */
     public final boolean cl_khr_icd;
+    /** When true, {@link KHRILProgram} is supported. */
+    public final boolean cl_khr_il_program;
     /** When true, {@link KHRImage2DFromBuffer} is supported. */
     public final boolean cl_khr_image2d_from_buffer;
     /** When true, {@link KHRInitializeMemory} is supported. */
@@ -807,6 +911,8 @@ public class CLCapabilities {
      * <p>This extension adds extended atomic operations on 64-bit integers in both global and local memory.</p>
      */
     public final boolean cl_khr_int64_extended_atomics;
+    /** When true, {@link KHRIntegerDotProduct} is supported. */
+    public final boolean cl_khr_integer_dot_product;
     /**
      * When true, the <strong>khr_local_int32_base_atomics</strong> extension is supported.
      * 
@@ -827,6 +933,8 @@ public class CLCapabilities {
      * <p>This extension adds built-in functions that can be used to write a mip-mapped image in an OpenCL C program.</p>
      */
     public final boolean cl_khr_mipmap_image_writes;
+    /** When true, {@link KHRPCIBusInfo} is supported. */
+    public final boolean cl_khr_pci_bus_info;
     /** When true, {@link KHRPriorityHints} is supported. */
     public final boolean cl_khr_priority_hints;
     /**
@@ -862,10 +970,68 @@ public class CLCapabilities {
      * specified by the IEEE 754 spec is not a requirement.</p>
      */
     public final boolean cl_khr_select_fprounding_mode;
+    /** When true, {@link KHRSemaphore} is supported. */
+    public final boolean cl_khr_semaphore;
     /** When true, {@link KHRSPIR} is supported. */
     public final boolean cl_khr_spir;
+    /**
+     * When true, the <strong>khr_srgb_image_writes</strong> extension is supported.
+     * 
+     * <p>This extension enables kernels to write to sRGB images using the {@code write_imagef} built-in function. The sRGB image formats that may be written to
+     * will be returned by {@link CL10#clGetSupportedImageFormats GetSupportedImageFormats}.</p>
+     * 
+     * <p>When the image is an sRGB image, the {@code write_imagef} built-in function will perform the linear to sRGB conversion. Only the R, G, and B components
+     * are converted from linear to sRGB; the A component is written as-is.</p>
+     */
+    public final boolean cl_khr_srgb_image_writes;
+    /**
+     * When true, the <strong>khr_subgroup_ballot</strong> extension is supported.
+     * 
+     * <p>This extension adds the ability to collect and operate on ballots from work items in the subgroup.</p>
+     */
+    public final boolean cl_khr_subgroup_ballot;
+    /**
+     * When true, the <strong>khr_subgroup_clustered_reduce</strong> extension is supported.
+     * 
+     * <p>This extension adds support for clustered reductions that operate on a subset of work items in the subgroup.</p>
+     */
+    public final boolean cl_khr_subgroup_clustered_reduce;
+    /**
+     * When true, the <strong>khr_subgroup_extended_types</strong> extension is supported.
+     * 
+     * <p>This extension adds additional supported data types to the existing subgroup broadcast, scan, and reduction functions.</p>
+     */
+    public final boolean cl_khr_subgroup_extended_types;
     /** When true, {@link KHRSubgroupNamedBarrier} is supported. */
     public final boolean cl_khr_subgroup_named_barrier;
+    /**
+     * When true, the <strong>khr_subgroup_non_uniform_arithmetic</strong> extension is supported.
+     * 
+     * <p>This extension adds the ability to use some subgroup functions within non-uniform flow control, including additional scan and reduction operators.</p>
+     */
+    public final boolean cl_khr_subgroup_non_uniform_arithmetic;
+    /**
+     * When true, the <strong>khr_subgroup_non_uniform_vote</strong> extension is supported.
+     * 
+     * <p>This extension adds the ability to elect a single work item from a subgroup to perform a task and to hold votes among work items in a subgroup.</p>
+     */
+    public final boolean cl_khr_subgroup_non_uniform_vote;
+    /**
+     * When true, the <strong>khr_subgroup_shuffle</strong> extension is supported.
+     * 
+     * <p>This extension adds additional ways to exchange data among work items in a subgroup.</p>
+     */
+    public final boolean cl_khr_subgroup_shuffle;
+    /**
+     * When true, the <strong>khr_subgroup_shuffle_relative</strong> extension is supported.
+     * 
+     * <p>This extension adds specialized ways to exchange data among work items in a subgroup that may perform better on some implementations.</p>
+     */
+    public final boolean cl_khr_subgroup_shuffle_relative;
+    /** When true, {@link KHRSubgroups} is supported. */
+    public final boolean cl_khr_subgroups;
+    /** When true, {@link KHRSuggestedLocalWorkSize} is supported. */
+    public final boolean cl_khr_suggested_local_work_size;
     /** When true, {@link KHRTerminateContext} is supported. */
     public final boolean cl_khr_terminate_context;
     /** When true, {@link KHRThrottleHints} is supported. */
@@ -904,6 +1070,10 @@ public class CLCapabilities {
      *     callback parameter to clBuildProgram).</code></pre>
      */
     public final boolean cl_nv_compiler_options;
+    /** When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/nv/cl_nv_copy_opts.txt">nv_copy_opts</a> extension is supported. */
+    public final boolean cl_nv_copy_opts;
+    /** When true, {@link NVCreateBuffer} is supported. */
+    public final boolean cl_nv_create_buffer;
     /** When true, {@link NVDeviceAttributeQuery} is supported. */
     public final boolean cl_nv_device_attribute_query;
     /**
@@ -935,6 +1105,8 @@ public class CLCapabilities {
      * <p>A complete unroll specification has no effect if the trip count of the loop is not compile-time computable.</p>
      */
     public final boolean cl_nv_pragma_unroll;
+    /** When true, {@link pocl_content_size} is supported. */
+    public final boolean cl_pocl_content_size;
     /** When true, {@link QCOMEXTHostPtr} is supported. */
     public final boolean cl_qcom_ext_host_ptr;
     /** When true, {@link QCOMEXTHostPtrIOCoherent} is supported. */
@@ -1074,27 +1246,44 @@ public class CLCapabilities {
             provider.getFunctionAddress("clLogMessagesToStdoutAPPLE"),
             provider.getFunctionAddress("clLogMessagesToStderrAPPLE"),
             provider.getFunctionAddress("clGetGLContextInfoAPPLE"),
+            provider.getFunctionAddress("clImportMemoryARM"),
             provider.getFunctionAddress("clReleaseDeviceEXT"),
             provider.getFunctionAddress("clRetainDeviceEXT"),
             provider.getFunctionAddress("clCreateSubDevicesEXT"),
             provider.getFunctionAddress("clEnqueueMigrateMemObjectEXT"),
+            provider.getFunctionAddress("clEnqueueGenerateMipmapIMG"),
             provider.getFunctionAddress("clCreateAcceleratorINTEL"),
             provider.getFunctionAddress("clRetainAcceleratorINTEL"),
             provider.getFunctionAddress("clReleaseAcceleratorINTEL"),
             provider.getFunctionAddress("clGetAcceleratorInfoINTEL"),
             provider.getFunctionAddress("clCreateBufferWithPropertiesINTEL"),
-            provider.getFunctionAddress("clGetKernelSubGroupInfoKHR"),
+            provider.getFunctionAddress("clGetSupportedGLTextureFormatsINTEL"),
+            provider.getFunctionAddress("clGetSupportedVA_APIMediaSurfaceFormatsINTEL"),
             provider.getFunctionAddress("clGetDeviceIDsFromVA_APIMediaAdapterINTEL"),
             provider.getFunctionAddress("clCreateFromVA_APIMediaSurfaceINTEL"),
             provider.getFunctionAddress("clEnqueueAcquireVA_APIMediaSurfacesINTEL"),
             provider.getFunctionAddress("clEnqueueReleaseVA_APIMediaSurfacesINTEL"),
+            provider.getFunctionAddress("clCreateCommandQueueWithPropertiesKHR"),
             provider.getFunctionAddress("clCreateEventFromEGLSyncKHR"),
             provider.getFunctionAddress("clCreateFromEGLImageKHR"),
             provider.getFunctionAddress("clEnqueueAcquireEGLObjectsKHR"),
             provider.getFunctionAddress("clEnqueueReleaseEGLObjectsKHR"),
+            provider.getFunctionAddress("clEnqueueAcquireExternalMemObjectsKHR"),
+            provider.getFunctionAddress("clEnqueueReleaseExternalMemObjectsKHR"),
             provider.getFunctionAddress("clCreateEventFromGLsyncKHR"),
             provider.getFunctionAddress("clGetGLContextInfoKHR"),
+            provider.getFunctionAddress("clCreateProgramWithILKHR"),
+            provider.getFunctionAddress("clCreateSemaphoreWithPropertiesKHR"),
+            provider.getFunctionAddress("clEnqueueWaitSemaphoresKHR"),
+            provider.getFunctionAddress("clEnqueueSignalSemaphoresKHR"),
+            provider.getFunctionAddress("clGetSemaphoreInfoKHR"),
+            provider.getFunctionAddress("clReleaseSemaphoreKHR"),
+            provider.getFunctionAddress("clRetainSemaphoreKHR"),
+            provider.getFunctionAddress("clGetKernelSubGroupInfoKHR"),
+            provider.getFunctionAddress("clGetKernelSuggestedLocalWorkSizeKHR"),
             provider.getFunctionAddress("clTerminateContextKHR"),
+            provider.getFunctionAddress("clCreateBufferNV"),
+            provider.getFunctionAddress("clSetContentSizeBufferPoCL"),
             provider.getFunctionAddress("clGetDeviceImageInfoQCOM")
         );
     }
@@ -1233,27 +1422,44 @@ public class CLCapabilities {
             caps.clLogMessagesToStdoutAPPLE,
             caps.clLogMessagesToStderrAPPLE,
             caps.clGetGLContextInfoAPPLE,
+            caps.clImportMemoryARM,
             caps.clReleaseDeviceEXT,
             caps.clRetainDeviceEXT,
             caps.clCreateSubDevicesEXT,
             caps.clEnqueueMigrateMemObjectEXT,
+            caps.clEnqueueGenerateMipmapIMG,
             caps.clCreateAcceleratorINTEL,
             caps.clRetainAcceleratorINTEL,
             caps.clReleaseAcceleratorINTEL,
             caps.clGetAcceleratorInfoINTEL,
             caps.clCreateBufferWithPropertiesINTEL,
-            caps.clGetKernelSubGroupInfoKHR,
+            caps.clGetSupportedGLTextureFormatsINTEL,
+            caps.clGetSupportedVA_APIMediaSurfaceFormatsINTEL,
             caps.clGetDeviceIDsFromVA_APIMediaAdapterINTEL,
             caps.clCreateFromVA_APIMediaSurfaceINTEL,
             caps.clEnqueueAcquireVA_APIMediaSurfacesINTEL,
             caps.clEnqueueReleaseVA_APIMediaSurfacesINTEL,
+            caps.clCreateCommandQueueWithPropertiesKHR,
             caps.clCreateEventFromEGLSyncKHR,
             caps.clCreateFromEGLImageKHR,
             caps.clEnqueueAcquireEGLObjectsKHR,
             caps.clEnqueueReleaseEGLObjectsKHR,
+            caps.clEnqueueAcquireExternalMemObjectsKHR,
+            caps.clEnqueueReleaseExternalMemObjectsKHR,
             caps.clCreateEventFromGLsyncKHR,
             caps.clGetGLContextInfoKHR,
+            caps.clCreateProgramWithILKHR,
+            caps.clCreateSemaphoreWithPropertiesKHR,
+            caps.clEnqueueWaitSemaphoresKHR,
+            caps.clEnqueueSignalSemaphoresKHR,
+            caps.clGetSemaphoreInfoKHR,
+            caps.clReleaseSemaphoreKHR,
+            caps.clRetainSemaphoreKHR,
+            caps.clGetKernelSubGroupInfoKHR,
+            caps.clGetKernelSuggestedLocalWorkSizeKHR,
             caps.clTerminateContextKHR,
+            caps.clCreateBufferNV,
+            caps.clSetContentSizeBufferPoCL,
             caps.clGetDeviceImageInfoQCOM
         );
     }
@@ -1391,28 +1597,45 @@ public class CLCapabilities {
         clLogMessagesToStdoutAPPLE = functions[129];
         clLogMessagesToStderrAPPLE = functions[130];
         clGetGLContextInfoAPPLE = functions[131];
-        clReleaseDeviceEXT = functions[132];
-        clRetainDeviceEXT = functions[133];
-        clCreateSubDevicesEXT = functions[134];
-        clEnqueueMigrateMemObjectEXT = functions[135];
-        clCreateAcceleratorINTEL = functions[136];
-        clRetainAcceleratorINTEL = functions[137];
-        clReleaseAcceleratorINTEL = functions[138];
-        clGetAcceleratorInfoINTEL = functions[139];
-        clCreateBufferWithPropertiesINTEL = functions[140];
-        clGetKernelSubGroupInfoKHR = functions[141];
-        clGetDeviceIDsFromVA_APIMediaAdapterINTEL = functions[142];
-        clCreateFromVA_APIMediaSurfaceINTEL = functions[143];
-        clEnqueueAcquireVA_APIMediaSurfacesINTEL = functions[144];
-        clEnqueueReleaseVA_APIMediaSurfacesINTEL = functions[145];
-        clCreateEventFromEGLSyncKHR = functions[146];
-        clCreateFromEGLImageKHR = functions[147];
-        clEnqueueAcquireEGLObjectsKHR = functions[148];
-        clEnqueueReleaseEGLObjectsKHR = functions[149];
-        clCreateEventFromGLsyncKHR = functions[150];
-        clGetGLContextInfoKHR = functions[151];
-        clTerminateContextKHR = functions[152];
-        clGetDeviceImageInfoQCOM = functions[153];
+        clImportMemoryARM = functions[132];
+        clReleaseDeviceEXT = functions[133];
+        clRetainDeviceEXT = functions[134];
+        clCreateSubDevicesEXT = functions[135];
+        clEnqueueMigrateMemObjectEXT = functions[136];
+        clEnqueueGenerateMipmapIMG = functions[137];
+        clCreateAcceleratorINTEL = functions[138];
+        clRetainAcceleratorINTEL = functions[139];
+        clReleaseAcceleratorINTEL = functions[140];
+        clGetAcceleratorInfoINTEL = functions[141];
+        clCreateBufferWithPropertiesINTEL = functions[142];
+        clGetSupportedGLTextureFormatsINTEL = functions[143];
+        clGetSupportedVA_APIMediaSurfaceFormatsINTEL = functions[144];
+        clGetDeviceIDsFromVA_APIMediaAdapterINTEL = functions[145];
+        clCreateFromVA_APIMediaSurfaceINTEL = functions[146];
+        clEnqueueAcquireVA_APIMediaSurfacesINTEL = functions[147];
+        clEnqueueReleaseVA_APIMediaSurfacesINTEL = functions[148];
+        clCreateCommandQueueWithPropertiesKHR = functions[149];
+        clCreateEventFromEGLSyncKHR = functions[150];
+        clCreateFromEGLImageKHR = functions[151];
+        clEnqueueAcquireEGLObjectsKHR = functions[152];
+        clEnqueueReleaseEGLObjectsKHR = functions[153];
+        clEnqueueAcquireExternalMemObjectsKHR = functions[154];
+        clEnqueueReleaseExternalMemObjectsKHR = functions[155];
+        clCreateEventFromGLsyncKHR = functions[156];
+        clGetGLContextInfoKHR = functions[157];
+        clCreateProgramWithILKHR = functions[158];
+        clCreateSemaphoreWithPropertiesKHR = functions[159];
+        clEnqueueWaitSemaphoresKHR = functions[160];
+        clEnqueueSignalSemaphoresKHR = functions[161];
+        clGetSemaphoreInfoKHR = functions[162];
+        clReleaseSemaphoreKHR = functions[163];
+        clRetainSemaphoreKHR = functions[164];
+        clGetKernelSubGroupInfoKHR = functions[165];
+        clGetKernelSuggestedLocalWorkSizeKHR = functions[166];
+        clTerminateContextKHR = functions[167];
+        clCreateBufferNV = functions[168];
+        clSetContentSizeBufferPoCL = functions[169];
+        clGetDeviceImageInfoQCOM = functions[170];
 
         OpenCL10 = check_CL10(ext);
         OpenCL10GL = check_CL10GL(ext);
@@ -1450,20 +1673,34 @@ public class CLCapabilities {
         cl_APPLE_fp64_basic_ops = ext.contains("cl_APPLE_fp64_basic_ops");
         cl_APPLE_gl_sharing = check_APPLE_gl_sharing(ext);
         cl_APPLE_query_kernel_names = ext.contains("cl_APPLE_query_kernel_names");
+        cl_arm_controlled_kernel_termination = ext.contains("cl_arm_controlled_kernel_termination");
         cl_arm_core_id = ext.contains("cl_arm_core_id");
+        cl_arm_import_memory = check_arm_import_memory(ext);
         cl_arm_integer_dot_product_accumulate_int16 = ext.contains("cl_arm_integer_dot_product_accumulate_int16");
         cl_arm_integer_dot_product_accumulate_int8 = ext.contains("cl_arm_integer_dot_product_accumulate_int8");
         cl_arm_integer_dot_product_accumulate_saturate_int8 = ext.contains("cl_arm_integer_dot_product_accumulate_saturate_int8");
         cl_arm_integer_dot_product_int8 = ext.contains("cl_arm_integer_dot_product_int8");
+        cl_arm_job_slot_selection = ext.contains("cl_arm_job_slot_selection");
+        cl_arm_non_uniform_work_group_size = ext.contains("cl_arm_non_uniform_work_group_size");
         cl_arm_printf = ext.contains("cl_arm_printf");
         cl_arm_scheduling_controls = ext.contains("cl_arm_scheduling_controls");
+        cl_arm_thread_limit_hint = ext.contains("cl_arm_thread_limit_hint");
+        cl_cl_arm_import_memory_android_hardware_buffer = ext.contains("cl_cl_arm_import_memory_android_hardware_buffer");
+        cl_cl_arm_import_memory_dma_buf = ext.contains("cl_cl_arm_import_memory_dma_buf");
+        cl_cl_arm_import_memory_host = ext.contains("cl_cl_arm_import_memory_host");
+        cl_cl_arm_import_memory_protected = ext.contains("cl_cl_arm_import_memory_protected");
         cl_ext_atomic_counters_32 = ext.contains("cl_ext_atomic_counters_32");
         cl_ext_atomic_counters_64 = ext.contains("cl_ext_atomic_counters_64");
         cl_ext_cxx_for_opencl = ext.contains("cl_ext_cxx_for_opencl");
         cl_ext_device_fission = check_ext_device_fission(ext);
         cl_ext_migrate_memobject = check_ext_migrate_memobject(ext);
+        cl_img_cached_allocations = ext.contains("cl_img_cached_allocations");
+        cl_img_generate_mipmap = check_img_generate_mipmap(ext);
+        cl_img_mem_properties = ext.contains("cl_img_mem_properties");
+        cl_img_yuv_image = ext.contains("cl_img_yuv_image");
         cl_intel_accelerator = check_intel_accelerator(ext);
         cl_intel_advanced_motion_estimation = ext.contains("cl_intel_advanced_motion_estimation");
+        cl_intel_command_queue_families = ext.contains("cl_intel_command_queue_families");
         cl_intel_create_buffer_with_properties = check_intel_create_buffer_with_properties(ext);
         cl_intel_device_partition_by_names = ext.contains("cl_intel_device_partition_by_names");
         cl_intel_device_side_avc_motion_estimation = ext.contains("cl_intel_device_side_avc_motion_estimation");
@@ -1477,22 +1714,34 @@ public class CLCapabilities {
         cl_intel_planar_yuv = ext.contains("cl_intel_planar_yuv");
         cl_intel_printf = ext.contains("cl_intel_printf");
         cl_intel_required_subgroup_size = ext.contains("cl_intel_required_subgroup_size");
+        cl_intel_sharing_format_query = check_intel_sharing_format_query(ext);
         cl_intel_simultaneous_sharing = ext.contains("cl_intel_simultaneous_sharing");
         cl_intel_spirv_device_side_avc_motion_estimation = ext.contains("cl_intel_spirv_device_side_avc_motion_estimation");
         cl_intel_spirv_media_block_io = ext.contains("cl_intel_spirv_media_block_io");
         cl_intel_spirv_subgroups = ext.contains("cl_intel_spirv_subgroups");
-        cl_intel_subgroups = check_intel_subgroups(ext);
+        cl_intel_subgroups = ext.contains("cl_intel_subgroups");
         cl_intel_subgroups_char = ext.contains("cl_intel_subgroups_char");
         cl_intel_subgroups_long = ext.contains("cl_intel_subgroups_long");
         cl_intel_subgroups_short = ext.contains("cl_intel_subgroups_short");
         cl_intel_thread_local_exec = ext.contains("cl_intel_thread_local_exec");
         cl_intel_va_api_media_sharing = check_intel_va_api_media_sharing(ext);
         cl_khr_3d_image_writes = ext.contains("cl_khr_3d_image_writes");
+        cl_khr_async_work_group_copy_fence = ext.contains("cl_khr_async_work_group_copy_fence");
         cl_khr_byte_addressable_store = ext.contains("cl_khr_byte_addressable_store");
+        cl_khr_create_command_queue = check_khr_create_command_queue(ext);
         cl_khr_depth_images = ext.contains("cl_khr_depth_images");
         cl_khr_device_enqueue_local_arg_types = ext.contains("cl_khr_device_enqueue_local_arg_types");
+        cl_khr_device_uuid = ext.contains("cl_khr_device_uuid");
         cl_khr_egl_event = check_khr_egl_event(ext);
         cl_khr_egl_image = check_khr_egl_image(ext);
+        cl_khr_extended_async_copies = ext.contains("cl_khr_extended_async_copies");
+        cl_khr_extended_bit_ops = ext.contains("cl_khr_extended_bit_ops");
+        cl_khr_extended_versioning = check_khr_extended_versioning(ext);
+        cl_khr_external_memory = check_khr_external_memory(ext);
+        cl_khr_external_memory_dma_buf = ext.contains("cl_khr_external_memory_dma_buf");
+        cl_khr_external_memory_opaque_fd = ext.contains("cl_khr_external_memory_opaque_fd");
+        cl_khr_external_memory_win32 = ext.contains("cl_khr_external_memory_win32");
+        cl_khr_external_semaphore = ext.contains("cl_khr_external_semaphore");
         cl_khr_fp16 = ext.contains("cl_khr_fp16");
         cl_khr_fp64 = ext.contains("cl_khr_fp64");
         cl_khr_gl_depth_images = ext.contains("cl_khr_gl_depth_images");
@@ -1502,23 +1751,40 @@ public class CLCapabilities {
         cl_khr_global_int32_base_atomics = ext.contains("cl_khr_global_int32_base_atomics");
         cl_khr_global_int32_extended_atomics = ext.contains("cl_khr_global_int32_extended_atomics");
         cl_khr_icd = ext.contains("cl_khr_icd");
+        cl_khr_il_program = check_khr_il_program(ext);
         cl_khr_image2d_from_buffer = ext.contains("cl_khr_image2d_from_buffer");
         cl_khr_initialize_memory = ext.contains("cl_khr_initialize_memory");
         cl_khr_int64_base_atomics = ext.contains("cl_khr_int64_base_atomics");
         cl_khr_int64_extended_atomics = ext.contains("cl_khr_int64_extended_atomics");
+        cl_khr_integer_dot_product = ext.contains("cl_khr_integer_dot_product");
         cl_khr_local_int32_base_atomics = ext.contains("cl_khr_local_int32_base_atomics");
         cl_khr_local_int32_extended_atomics = ext.contains("cl_khr_local_int32_extended_atomics");
         cl_khr_mipmap_image = ext.contains("cl_khr_mipmap_image");
         cl_khr_mipmap_image_writes = ext.contains("cl_khr_mipmap_image_writes");
+        cl_khr_pci_bus_info = ext.contains("cl_khr_pci_bus_info");
         cl_khr_priority_hints = ext.contains("cl_khr_priority_hints");
         cl_khr_select_fprounding_mode = ext.contains("cl_khr_select_fprounding_mode");
+        cl_khr_semaphore = check_khr_semaphore(ext);
         cl_khr_spir = ext.contains("cl_khr_spir");
+        cl_khr_srgb_image_writes = ext.contains("cl_khr_srgb_image_writes");
+        cl_khr_subgroup_ballot = ext.contains("cl_khr_subgroup_ballot");
+        cl_khr_subgroup_clustered_reduce = ext.contains("cl_khr_subgroup_clustered_reduce");
+        cl_khr_subgroup_extended_types = ext.contains("cl_khr_subgroup_extended_types");
         cl_khr_subgroup_named_barrier = ext.contains("cl_khr_subgroup_named_barrier");
+        cl_khr_subgroup_non_uniform_arithmetic = ext.contains("cl_khr_subgroup_non_uniform_arithmetic");
+        cl_khr_subgroup_non_uniform_vote = ext.contains("cl_khr_subgroup_non_uniform_vote");
+        cl_khr_subgroup_shuffle = ext.contains("cl_khr_subgroup_shuffle");
+        cl_khr_subgroup_shuffle_relative = ext.contains("cl_khr_subgroup_shuffle_relative");
+        cl_khr_subgroups = check_khr_subgroups(ext);
+        cl_khr_suggested_local_work_size = check_khr_suggested_local_work_size(ext);
         cl_khr_terminate_context = check_khr_terminate_context(ext);
         cl_khr_throttle_hints = ext.contains("cl_khr_throttle_hints");
         cl_nv_compiler_options = ext.contains("cl_nv_compiler_options");
+        cl_nv_copy_opts = ext.contains("cl_nv_copy_opts");
+        cl_nv_create_buffer = check_nv_create_buffer(ext);
         cl_nv_device_attribute_query = ext.contains("cl_nv_device_attribute_query");
         cl_nv_pragma_unroll = ext.contains("cl_nv_pragma_unroll");
+        cl_pocl_content_size = check_pocl_content_size(ext);
         cl_qcom_ext_host_ptr = check_qcom_ext_host_ptr(ext);
         cl_qcom_ext_host_ptr_iocoherent = ext.contains("cl_qcom_ext_host_ptr_iocoherent");
     }
@@ -1637,6 +1903,12 @@ public class CLCapabilities {
         ));
     }
 
+    private boolean check_arm_import_memory(Set<String> ext) {
+        return ext.contains("cl_arm_import_memory") && checkExtension("cl_arm_import_memory", checkFunctions(
+            clImportMemoryARM
+        ));
+    }
+
     private boolean check_ext_device_fission(Set<String> ext) {
         return ext.contains("cl_ext_device_fission") && checkExtension("cl_ext_device_fission", checkFunctions(
             clReleaseDeviceEXT, clRetainDeviceEXT, clCreateSubDevicesEXT
@@ -1646,6 +1918,12 @@ public class CLCapabilities {
     private boolean check_ext_migrate_memobject(Set<String> ext) {
         return ext.contains("cl_ext_migrate_memobject") && checkExtension("cl_ext_migrate_memobject", checkFunctions(
             clEnqueueMigrateMemObjectEXT
+        ));
+    }
+
+    private boolean check_img_generate_mipmap(Set<String> ext) {
+        return ext.contains("cl_img_generate_mipmap") && checkExtension("cl_img_generate_mipmap", checkFunctions(
+            clEnqueueGenerateMipmapIMG
         ));
     }
 
@@ -1661,9 +1939,9 @@ public class CLCapabilities {
         ));
     }
 
-    private boolean check_intel_subgroups(Set<String> ext) {
-        return ext.contains("cl_intel_subgroups") && checkExtension("cl_intel_subgroups", checkFunctions(
-            clGetKernelSubGroupInfoKHR
+    private boolean check_intel_sharing_format_query(Set<String> ext) {
+        return ext.contains("cl_intel_sharing_format_query") && checkExtension("cl_intel_sharing_format_query", checkFunctions(
+            clGetSupportedGLTextureFormatsINTEL, clGetSupportedVA_APIMediaSurfaceFormatsINTEL
         ));
     }
 
@@ -1671,6 +1949,12 @@ public class CLCapabilities {
         return ext.contains("cl_intel_va_api_media_sharing") && checkExtension("cl_intel_va_api_media_sharing", checkFunctions(
             clGetDeviceIDsFromVA_APIMediaAdapterINTEL, clCreateFromVA_APIMediaSurfaceINTEL, clEnqueueAcquireVA_APIMediaSurfacesINTEL, 
             clEnqueueReleaseVA_APIMediaSurfacesINTEL
+        ));
+    }
+
+    private boolean check_khr_create_command_queue(Set<String> ext) {
+        return ext.contains("cl_khr_create_command_queue") && checkExtension("cl_khr_create_command_queue", checkFunctions(
+            clCreateCommandQueueWithPropertiesKHR
         ));
     }
 
@@ -1686,6 +1970,18 @@ public class CLCapabilities {
         ));
     }
 
+    private boolean check_khr_extended_versioning(Set<String> ext) {
+        return ext.contains("cl_khr_extended_versioning") && checkExtension("cl_khr_extended_versioning", checkFunctions(
+            
+        ));
+    }
+
+    private boolean check_khr_external_memory(Set<String> ext) {
+        return ext.contains("cl_khr_external_memory") && checkExtension("cl_khr_external_memory", checkFunctions(
+            clEnqueueAcquireExternalMemObjectsKHR, clEnqueueReleaseExternalMemObjectsKHR
+        ));
+    }
+
     private boolean check_khr_gl_event(Set<String> ext) {
         return ext.contains("cl_khr_gl_event") && checkExtension("cl_khr_gl_event", checkFunctions(
             clCreateEventFromGLsyncKHR
@@ -1698,9 +1994,46 @@ public class CLCapabilities {
         ));
     }
 
+    private boolean check_khr_il_program(Set<String> ext) {
+        return ext.contains("cl_khr_il_program") && checkExtension("cl_khr_il_program", checkFunctions(
+            clCreateProgramWithILKHR
+        ));
+    }
+
+    private boolean check_khr_semaphore(Set<String> ext) {
+        return ext.contains("cl_khr_semaphore") && checkExtension("cl_khr_semaphore", checkFunctions(
+            clCreateSemaphoreWithPropertiesKHR, clEnqueueWaitSemaphoresKHR, clEnqueueSignalSemaphoresKHR, clGetSemaphoreInfoKHR, clReleaseSemaphoreKHR, 
+            clRetainSemaphoreKHR
+        ));
+    }
+
+    private boolean check_khr_subgroups(Set<String> ext) {
+        return ext.contains("cl_khr_subgroups") && checkExtension("cl_khr_subgroups", checkFunctions(
+            clGetKernelSubGroupInfoKHR
+        ));
+    }
+
+    private boolean check_khr_suggested_local_work_size(Set<String> ext) {
+        return ext.contains("cl_khr_suggested_local_work_size") && checkExtension("cl_khr_suggested_local_work_size", checkFunctions(
+            clGetKernelSuggestedLocalWorkSizeKHR
+        ));
+    }
+
     private boolean check_khr_terminate_context(Set<String> ext) {
         return ext.contains("cl_khr_terminate_context") && checkExtension("cl_khr_terminate_context", checkFunctions(
             clTerminateContextKHR
+        ));
+    }
+
+    private boolean check_nv_create_buffer(Set<String> ext) {
+        return ext.contains("cl_nv_create_buffer") && checkExtension("cl_nv_create_buffer", checkFunctions(
+            clCreateBufferNV
+        ));
+    }
+
+    private boolean check_pocl_content_size(Set<String> ext) {
+        return ext.contains("cl_pocl_content_size") && checkExtension("cl_pocl_content_size", checkFunctions(
+            clSetContentSizeBufferPoCL
         ));
     }
 

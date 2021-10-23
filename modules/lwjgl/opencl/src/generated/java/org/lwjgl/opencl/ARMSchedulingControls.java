@@ -31,7 +31,12 @@ public final class ARMSchedulingControls {
     public static final int
         CL_DEVICE_SCHEDULING_KERNEL_BATCHING_ARM               = (1 << 0),
         CL_DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_ARM          = (1 << 1),
-        CL_DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_MODIFIER_ARM = (1 << 2);
+        CL_DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_MODIFIER_ARM = (1 << 2),
+        CL_DEVICE_SCHEDULING_DEFERRED_FLUSH_ARM                = (1 << 3),
+        CL_DEVICE_SCHEDULING_REGISTER_ALLOCATION_ARM           = (1 << 4);
+
+    /** Accepted value for the {@code param_name} parameter to {@link CL10#clGetDeviceInfo GetDeviceInfo}. */
+    public static final int CL_DEVICE_SUPPORTED_REGISTER_ALLOCATIONS_ARM = 0x41EB;
 
     /** Accepted value for the {@code param_name} parameter to {@link CL20#clSetKernelExecInfo SetKernelExecInfo}. */
     public static final int
@@ -39,7 +44,9 @@ public final class ARMSchedulingControls {
         CL_KERNEL_EXEC_INFO_WORKGROUP_BATCH_SIZE_MODIFIER_ARM = 0x41E6;
 
     /** Accepted value for the {@code properties} parameter to {@link CL20#clCreateCommandQueueWithProperties CreateCommandQueueWithProperties} */
-    public static final int CL_QUEUE_KERNEL_BATCHING_ARM = 0x41E7;
+    public static final int
+        CL_QUEUE_KERNEL_BATCHING_ARM = 0x41E7,
+        CL_QUEUE_DEFERRED_FLUSH_ARM  = 0x41EC;
 
     private ARMSchedulingControls() {}
 

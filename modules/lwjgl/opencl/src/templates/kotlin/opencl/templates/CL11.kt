@@ -205,15 +205,15 @@ val CL11 = "CL11".nativeClassCL("CL11") {
         """
     )
 
-    val BufferRectBufferOffset = Check(3)..size_t.const.p(
-        "buffer_offset",
+    val BufferRectBufferOrigin = Check(3)..size_t.const.p(
+        "buffer_origin",
         """
         the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
         should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
         """
     )
-    val BufferRectHostOffset = Check(3)..size_t.const.p(
-        "host_offset",
+    val BufferRectHostOrigin = Check(3)..size_t.const.p(
+        "host_origin",
         """
         the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
         should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
@@ -297,8 +297,8 @@ val CL11 = "CL11".nativeClassCL("CL11") {
             the buffer that {@code ptr} points to can be used by the application.
             """
         ),
-        BufferRectBufferOffset,
-        BufferRectHostOffset,
+        BufferRectBufferOrigin,
+        BufferRectHostOrigin,
         BufferRectRegion,
         BufferRectBufferRowPitch,
         BufferRectBufferSlicePitch,
@@ -382,8 +382,8 @@ val CL11 = "CL11".nativeClassCL("CL11") {
             completed, the memory pointed to by {@code ptr} can then be reused by the application.
             """
         ),
-        BufferRectBufferOffset,
-        BufferRectHostOffset,
+        BufferRectBufferOrigin,
+        BufferRectHostOrigin,
         BufferRectRegion,
         BufferRectBufferRowPitch,
         BufferRectBufferSlicePitch,

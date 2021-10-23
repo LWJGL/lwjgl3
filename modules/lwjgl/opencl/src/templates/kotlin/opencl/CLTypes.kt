@@ -242,6 +242,57 @@ fun config() {
             radius from the current source pixel block location (optionally offset by the predicted motion vector)
             """
         )
+    }.definition.hasUsageInput()
+
+    val CL_QUEUE_FAMILY_MAX_NAME_SIZE_INTEL = 64
+    struct(Module.OPENCL, "CLQueueFamilyPropertiesINTEL", nativeName = "cl_queue_family_properties_intel", mutable = false) {
+        cl_command_queue_properties("properties", "")
+        cl_command_queue_capabilities_intel("capabilities", "")
+        cl_uint("count", "")
+        charASCII("name", "")[CL_QUEUE_FAMILY_MAX_NAME_SIZE_INTEL]
+    }.definition.hasUsageOutput()
+
+    struct(Module.OPENCL, "CLDevicePCIBusInfoKHR", nativeName = "cl_device_pci_bus_info_khr", mutable = false) {
+        cl_uint("pci_domain", "")
+        cl_uint("pci_bus", "")
+        cl_uint("pci_device", "")
+        cl_uint("pci_function", "")
+    }.definition.hasUsageOutput()
+
+    struct(Module.OPENCL, "CLDeviceIntegerDotProductAccelerationPropertiesKHR", nativeName = "cl_device_integer_dot_product_acceleration_properties_khr", mutable = false) {
+        documentation =
+            """
+            Describes the exact dot product operations that are accelerated on the device.
+            
+            A dot product operation is deemed accelerated if its implementation provides a performance advantage over application-provided code composed from
+            elementary instructions and/or other dot product instructions, either because the implementation uses optimized machine code sequences whose
+            generation from application-provided code cannot be guaranteed or because it uses hardware features that cannot otherwise be targeted from
+            application-provided code.
+            """
+
+        cl_bool("signed_accelerated", "is #TRUE when signed dot product operations are accelerated, #FALSE otherwise")
+        cl_bool("unsigned_accelerated", "is #TRUE when unsigned dot product operations are accelerated, #FALSE otherwise")
+        cl_bool("mixed_signedness_accelerated", "is #TRUE when mixed signedness dot product operations are accelerated, #FALSE otherwise")
+        cl_bool(
+            "accumulating_saturating_signed_accelerated",
+            "is #TRUE when accumulating saturating signed dot product operations are accelerated, #FALSE otherwise"
+        )
+        cl_bool(
+            "accumulating_saturating_unsigned_accelerated",
+            "is #TRUE when accumulating saturating unsigned dot product operations are accelerated, #FALSE otherwise"
+        )
+        cl_bool(
+            "accumulating_saturating_mixed_signedness_accelerated",
+            "is #TRUE when accumulating saturating mixed signedness dot product operations are accelerated, #FALSE otherwise"
+        )
+    }.definition.hasUsageOutput()
+
+    val CL_NAME_VERSION_MAX_NAME_SIZE_KHR = 64
+    struct(Module.OPENCL, "CLNameVersionKHR", nativeName = "cl_name_version_khr", mutable = false) {
+        documentation = "Describes a combination of a name alongside a version number."
+
+        cl_version_khr("version", "")
+        charASCII("name", "")[CL_NAME_VERSION_MAX_NAME_SIZE_KHR]
     }.definition.hasUsageOutput()
 }
 
@@ -395,6 +446,10 @@ val cl_egl_image_properties_khr = typedef(intptr_t, "cl_egl_image_properties_khr
 
 val cl_queue_properties_APPLE = typedef(intptr_t, "cl_queue_properties_APPLE")
 
+// ARM
+
+val cl_import_properties_arm = typedef(intptr_t, "cl_import_properties_arm")
+
 // EXT
 
 val cl_report_live_objects_altera_callback = Module.OPENCL.callback {
@@ -424,6 +479,10 @@ val cl_mem_ext_host_ptr = struct(Module.OPENCL, "CLMemEXTHostPtr", nativeName = 
     cl_uint("host_cache_policy", "host cache policy for this external memory allocation")
 }.p
 
+// IMG
+
+val cl_mipmap_filter_mode_img = typedef(cl_uint, "cl_mipmap_filter_mode_img")
+
 // INTEL
 
 val cl_accelerator_intel = "cl_accelerator_intel".handle
@@ -435,3 +494,22 @@ val cl_mem_properties_intel = typedef(cl_bitfield, "cl_mem_properties_intel")
 val cl_va_api_device_source_intel = typedef(cl_uint, "cl_va_api_device_source_intel")
 val cl_va_api_device_set_intel = typedef(cl_uint, "cl_va_api_device_set_intel")
 val VASurfaceID = typedef(unsigned_int, "VASurfaceID")
+val VAImageFormat = "VAImageFormat".handle // struct
+val cl_command_queue_capabilities_intel = typedef(cl_bitfield, "cl_command_queue_capabilities_intel")
+
+// KHR
+
+val cl_queue_properties_khr = typedef(cl_properties, "cl_queue_properties_khr")
+
+val cl_semaphore_khr = "cl_semaphore_khr".handle
+
+val cl_semaphore_properties_khr = typedef(cl_properties, "cl_semaphore_properties_khr")
+val cl_semaphore_info_khr = typedef(cl_uint, "cl_semaphore_info_khr")
+val cl_semaphore_type_khr = typedef(cl_uint, "cl_semaphore_type_khr")
+val cl_semaphore_payload_khr = typedef(cl_ulong, "cl_semaphore_payload_khr")
+
+val cl_version_khr = typedef(cl_uint, "cl_version_khr")
+
+// NV
+
+val cl_mem_flags_NV = typedef(cl_bitfield, "cl_mem_flags_NV")

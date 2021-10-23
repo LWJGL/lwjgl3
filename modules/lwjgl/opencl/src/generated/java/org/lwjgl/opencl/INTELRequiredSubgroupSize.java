@@ -21,7 +21,7 @@ public final class INTELRequiredSubgroupSize {
     /** Accepted as the {@code param_name} parameter of {@link CL10#clGetKernelWorkGroupInfo GetKernelWorkGroupInfo}. */
     public static final int CL_KERNEL_SPILL_MEM_SIZE_INTEL = 0x4109;
 
-    /** Accepted as the {@code param_name} parameter of {@link CL21#clGetKernelSubGroupInfo GetKernelSubGroupInfo} and/or {@link INTELSubgroups#clGetKernelSubGroupInfoKHR GetKernelSubGroupInfoKHR}. */
+    /** Accepted as the {@code param_name} parameter of {@link CL21#clGetKernelSubGroupInfo GetKernelSubGroupInfo} and/or {@link KHRSubgroups#clGetKernelSubGroupInfoKHR GetKernelSubGroupInfoKHR}. */
     public static final int CL_KERNEL_COMPILE_SUB_GROUP_SIZE_INTEL = 0x410A;
 
     private INTELRequiredSubgroupSize() {}

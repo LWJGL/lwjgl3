@@ -197,14 +197,14 @@ public class CL11 extends CL10 {
      *
      * @param num_events_in_wait_list the number of events in {@code event_wait_list}
      */
-    public static int nclEnqueueReadBufferRect(long command_queue, long buffer, int blocking_read, long buffer_offset, long host_offset, long region, long buffer_row_pitch, long buffer_slice_pitch, long host_row_pitch, long host_slice_pitch, long ptr, int num_events_in_wait_list, long event_wait_list, long event) {
+    public static int nclEnqueueReadBufferRect(long command_queue, long buffer, int blocking_read, long buffer_origin, long host_origin, long region, long buffer_row_pitch, long buffer_slice_pitch, long host_row_pitch, long host_slice_pitch, long ptr, int num_events_in_wait_list, long event_wait_list, long event) {
         long __functionAddress = CL.getICD().clEnqueueReadBufferRect;
         if (CHECKS) {
             check(__functionAddress);
             check(command_queue);
             check(buffer);
         }
-        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_read, buffer_offset, host_offset, region, buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, num_events_in_wait_list, event_wait_list, event, __functionAddress);
+        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_read, buffer_origin, host_origin, region, buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -232,9 +232,9 @@ public class CL11 extends CL10 {
      *                           returns. The contents of the buffer that {@code ptr} points to cannot be used until the read command has completed. The {@code event} argument
      *                           returns an event object which can be used to query the execution status of the read command. When the read command has completed, the contents of
      *                           the buffer that {@code ptr} points to can be used by the application.</p>
-     * @param buffer_offset      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
+     * @param buffer_origin      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
-     * @param host_offset        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
+     * @param host_origin        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
      * @param region             the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
      *                           given by {@code region[2]} should be 1. The values in region cannot be 0.
@@ -284,14 +284,14 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") ByteBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") ByteBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         if (CHECKS) {
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return nclEnqueueReadBufferRect(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
+        return nclEnqueueReadBufferRect(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
     }
 
     /**
@@ -319,9 +319,9 @@ public class CL11 extends CL10 {
      *                           returns. The contents of the buffer that {@code ptr} points to cannot be used until the read command has completed. The {@code event} argument
      *                           returns an event object which can be used to query the execution status of the read command. When the read command has completed, the contents of
      *                           the buffer that {@code ptr} points to can be used by the application.</p>
-     * @param buffer_offset      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
+     * @param buffer_origin      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
-     * @param host_offset        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
+     * @param host_origin        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
      * @param region             the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
      *                           given by {@code region[2]} should be 1. The values in region cannot be 0.
@@ -371,14 +371,14 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") ShortBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") ShortBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         if (CHECKS) {
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return nclEnqueueReadBufferRect(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
+        return nclEnqueueReadBufferRect(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
     }
 
     /**
@@ -406,9 +406,9 @@ public class CL11 extends CL10 {
      *                           returns. The contents of the buffer that {@code ptr} points to cannot be used until the read command has completed. The {@code event} argument
      *                           returns an event object which can be used to query the execution status of the read command. When the read command has completed, the contents of
      *                           the buffer that {@code ptr} points to can be used by the application.</p>
-     * @param buffer_offset      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
+     * @param buffer_origin      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
-     * @param host_offset        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
+     * @param host_origin        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
      * @param region             the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
      *                           given by {@code region[2]} should be 1. The values in region cannot be 0.
@@ -458,14 +458,14 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") IntBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") IntBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         if (CHECKS) {
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return nclEnqueueReadBufferRect(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
+        return nclEnqueueReadBufferRect(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
     }
 
     /**
@@ -493,9 +493,9 @@ public class CL11 extends CL10 {
      *                           returns. The contents of the buffer that {@code ptr} points to cannot be used until the read command has completed. The {@code event} argument
      *                           returns an event object which can be used to query the execution status of the read command. When the read command has completed, the contents of
      *                           the buffer that {@code ptr} points to can be used by the application.</p>
-     * @param buffer_offset      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
+     * @param buffer_origin      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
-     * @param host_offset        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
+     * @param host_origin        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
      * @param region             the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
      *                           given by {@code region[2]} should be 1. The values in region cannot be 0.
@@ -545,14 +545,14 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") FloatBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") FloatBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         if (CHECKS) {
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return nclEnqueueReadBufferRect(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
+        return nclEnqueueReadBufferRect(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
     }
 
     /**
@@ -580,9 +580,9 @@ public class CL11 extends CL10 {
      *                           returns. The contents of the buffer that {@code ptr} points to cannot be used until the read command has completed. The {@code event} argument
      *                           returns an event object which can be used to query the execution status of the read command. When the read command has completed, the contents of
      *                           the buffer that {@code ptr} points to can be used by the application.</p>
-     * @param buffer_offset      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
+     * @param buffer_origin      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
-     * @param host_offset        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
+     * @param host_origin        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
      * @param region             the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
      *                           given by {@code region[2]} should be 1. The values in region cannot be 0.
@@ -632,14 +632,14 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") DoubleBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") DoubleBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         if (CHECKS) {
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return nclEnqueueReadBufferRect(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
+        return nclEnqueueReadBufferRect(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
     }
 
     // --- [ clEnqueueWriteBufferRect ] ---
@@ -649,14 +649,14 @@ public class CL11 extends CL10 {
      *
      * @param num_events_in_wait_list the number of events in {@code event_wait_list}
      */
-    public static int nclEnqueueWriteBufferRect(long command_queue, long buffer, int blocking_write, long buffer_offset, long host_offset, long region, long buffer_row_pitch, long buffer_slice_pitch, long host_row_pitch, long host_slice_pitch, long ptr, int num_events_in_wait_list, long event_wait_list, long event) {
+    public static int nclEnqueueWriteBufferRect(long command_queue, long buffer, int blocking_write, long buffer_origin, long host_origin, long region, long buffer_row_pitch, long buffer_slice_pitch, long host_row_pitch, long host_slice_pitch, long ptr, int num_events_in_wait_list, long event_wait_list, long event) {
         long __functionAddress = CL.getICD().clEnqueueWriteBufferRect;
         if (CHECKS) {
             check(__functionAddress);
             check(command_queue);
             check(buffer);
         }
-        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_write, buffer_offset, host_offset, region, buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, num_events_in_wait_list, event_wait_list, event, __functionAddress);
+        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_write, buffer_origin, host_origin, region, buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
     /**
@@ -684,9 +684,9 @@ public class CL11 extends CL10 {
      *                           the implementation can return immediately. The memory pointed to by {@code ptr} cannot be reused by the application after the call returns. The
      *                           {@code event} argument returns an event object which can be used to query the execution status of the write command. When the write command has
      *                           completed, the memory pointed to by {@code ptr} can then be reused by the application.</p>
-     * @param buffer_offset      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
+     * @param buffer_origin      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
-     * @param host_offset        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
+     * @param host_origin        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
      * @param region             the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
      *                           given by {@code region[2]} should be 1. The values in region cannot be 0.
@@ -736,14 +736,14 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") ByteBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") ByteBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         if (CHECKS) {
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return nclEnqueueWriteBufferRect(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
+        return nclEnqueueWriteBufferRect(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
     }
 
     /**
@@ -771,9 +771,9 @@ public class CL11 extends CL10 {
      *                           the implementation can return immediately. The memory pointed to by {@code ptr} cannot be reused by the application after the call returns. The
      *                           {@code event} argument returns an event object which can be used to query the execution status of the write command. When the write command has
      *                           completed, the memory pointed to by {@code ptr} can then be reused by the application.</p>
-     * @param buffer_offset      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
+     * @param buffer_origin      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
-     * @param host_offset        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
+     * @param host_origin        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
      * @param region             the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
      *                           given by {@code region[2]} should be 1. The values in region cannot be 0.
@@ -823,14 +823,14 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") ShortBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") ShortBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         if (CHECKS) {
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return nclEnqueueWriteBufferRect(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
+        return nclEnqueueWriteBufferRect(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
     }
 
     /**
@@ -858,9 +858,9 @@ public class CL11 extends CL10 {
      *                           the implementation can return immediately. The memory pointed to by {@code ptr} cannot be reused by the application after the call returns. The
      *                           {@code event} argument returns an event object which can be used to query the execution status of the write command. When the write command has
      *                           completed, the memory pointed to by {@code ptr} can then be reused by the application.</p>
-     * @param buffer_offset      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
+     * @param buffer_origin      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
-     * @param host_offset        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
+     * @param host_origin        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
      * @param region             the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
      *                           given by {@code region[2]} should be 1. The values in region cannot be 0.
@@ -910,14 +910,14 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") IntBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") IntBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         if (CHECKS) {
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return nclEnqueueWriteBufferRect(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
+        return nclEnqueueWriteBufferRect(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
     }
 
     /**
@@ -945,9 +945,9 @@ public class CL11 extends CL10 {
      *                           the implementation can return immediately. The memory pointed to by {@code ptr} cannot be reused by the application after the call returns. The
      *                           {@code event} argument returns an event object which can be used to query the execution status of the write command. When the write command has
      *                           completed, the memory pointed to by {@code ptr} can then be reused by the application.</p>
-     * @param buffer_offset      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
+     * @param buffer_origin      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
-     * @param host_offset        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
+     * @param host_origin        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
      * @param region             the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
      *                           given by {@code region[2]} should be 1. The values in region cannot be 0.
@@ -997,14 +997,14 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") FloatBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") FloatBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         if (CHECKS) {
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return nclEnqueueWriteBufferRect(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
+        return nclEnqueueWriteBufferRect(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
     }
 
     /**
@@ -1032,9 +1032,9 @@ public class CL11 extends CL10 {
      *                           the implementation can return immediately. The memory pointed to by {@code ptr} cannot be reused by the application after the call returns. The
      *                           {@code event} argument returns an event object which can be used to query the execution status of the write command. When the write command has
      *                           completed, the memory pointed to by {@code ptr} can then be reused by the application.</p>
-     * @param buffer_offset      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
+     * @param buffer_origin      the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]}.
-     * @param host_offset        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
+     * @param host_origin        the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
      *                           should be 0. The offset in bytes is computed as {@code host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]}.
      * @param region             the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
      *                           given by {@code region[2]} should be 1. The values in region cannot be 0.
@@ -1084,14 +1084,14 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") DoubleBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") DoubleBuffer ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         if (CHECKS) {
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return nclEnqueueWriteBufferRect(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
+        return nclEnqueueWriteBufferRect(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, memAddress(ptr), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
     }
 
     // --- [ clEnqueueCopyBufferRect ] ---
@@ -1374,19 +1374,19 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") short[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") short[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadBufferRect;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
             check(__functionAddress);
             check(command_queue);
             check(buffer);
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
+        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
     }
 
     /**
@@ -1395,19 +1395,19 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") int[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") int[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadBufferRect;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
             check(__functionAddress);
             check(command_queue);
             check(buffer);
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
+        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
     }
 
     /**
@@ -1416,19 +1416,19 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") float[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") float[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadBufferRect;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
             check(__functionAddress);
             check(command_queue);
             check(buffer);
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
+        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
     }
 
     /**
@@ -1437,19 +1437,19 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") double[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueReadBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_read, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void *") double[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueReadBufferRect;
 		if (!blocking_read) { throw new IllegalArgumentException("Non blocking reads cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
             check(__functionAddress);
             check(command_queue);
             check(buffer);
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
+        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_read ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
     }
 
     /**
@@ -1458,19 +1458,19 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") short[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") short[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteBufferRect;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
             check(__functionAddress);
             check(command_queue);
             check(buffer);
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
+        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
     }
 
     /**
@@ -1479,19 +1479,19 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") int[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") int[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteBufferRect;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
             check(__functionAddress);
             check(command_queue);
             check(buffer);
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
+        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
     }
 
     /**
@@ -1500,19 +1500,19 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") float[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") float[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteBufferRect;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
             check(__functionAddress);
             check(command_queue);
             check(buffer);
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
+        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
     }
 
     /**
@@ -1521,19 +1521,19 @@ public class CL11 extends CL10 {
      * @see <a target="_blank" href="https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">Reference Page</a>
      */
     @NativeType("cl_int")
-    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_offset, @NativeType("size_t const *") PointerBuffer host_offset, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") double[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
+    public static int clEnqueueWriteBufferRect(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("cl_bool") boolean blocking_write, @NativeType("size_t const *") PointerBuffer buffer_origin, @NativeType("size_t const *") PointerBuffer host_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long buffer_row_pitch, @NativeType("size_t") long buffer_slice_pitch, @NativeType("size_t") long host_row_pitch, @NativeType("size_t") long host_slice_pitch, @NativeType("void const *") double[] ptr, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         long __functionAddress = CL.getICD().clEnqueueWriteBufferRect;
 		if (!blocking_write) { throw new IllegalArgumentException("Non blocking writes cannot be used when the ptr parameter is a Java array."); }
         if (CHECKS) {
             check(__functionAddress);
             check(command_queue);
             check(buffer);
-            check(buffer_offset, 3);
-            check(host_offset, 3);
+            check(buffer_origin, 3);
+            check(host_origin, 3);
             check(region, 3);
             checkSafe(event, 1);
         }
-        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_offset), memAddress(host_offset), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
+        return callPPPPPPPPPPPPI(command_queue, buffer, blocking_write ? 1 : 0, memAddress(buffer_origin), memAddress(host_origin), memAddress(region), buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
     }
 
     /**
