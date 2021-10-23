@@ -69,7 +69,7 @@
 
             <local name="lib-uptodate"/>
             <uptodate property="lib-uptodate" targetfile="${lib.arch}/${name}.dll">
-                <srcfiles file="config/${platform}/build.xml"/>
+                <!--<srcfiles file="config/${platform}/build.xml"/>-->
                 <srcfiles dir="${bin.native}/@{module}" includes="**"/>
             </uptodate>
             <local name="lib-dependencies-uptodate"/>
@@ -344,7 +344,7 @@ EXPORTS
             <beforeCompile>
                 <compile>
                     <arg value="/I${src.main}"/>
-                    <fileset dir="." includes="${src.main}/*.cc"/>
+                    <fileset dir="." includes="${src.main}/*"/>
                 </compile>
             </beforeCompile>
         </build>
