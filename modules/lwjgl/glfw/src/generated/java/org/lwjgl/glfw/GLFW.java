@@ -897,8 +897,8 @@ public class GLFW {
      * undefined behavior.
      * </li>
      * <li>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API} - 
-     * {@code WindowHint}: Specifies which context creation API to use to create the context. Possible values are {@link #GLFW_NATIVE_CONTEXT_API NATIVE_CONTEXT_API} and {@link #GLFW_EGL_CONTEXT_API EGL_CONTEXT_API}.
-     * This is a hard constraint. If no client API is requested, this hint is ignored.
+     * {@code WindowHint}: Specifies which context creation API to use to create the context. Possible values are {@link #GLFW_NATIVE_CONTEXT_API NATIVE_CONTEXT_API}, {@link #GLFW_EGL_CONTEXT_API EGL_CONTEXT_API}
+     * and {@link #GLFW_OSMESA_CONTEXT_API OSMESA_CONTEXT_API}. This is a hard constraint. If no client API is requested, this hint is ignored.
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 

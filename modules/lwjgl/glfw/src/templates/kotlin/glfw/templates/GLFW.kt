@@ -869,8 +869,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         ),
         "CONTEXT_CREATION_API".enum(
             """
-            {@code WindowHint}: Specifies which context creation API to use to create the context. Possible values are #NATIVE_CONTEXT_API and #EGL_CONTEXT_API.
-            This is a hard constraint. If no client API is requested, this hint is ignored.
+            {@code WindowHint}: Specifies which context creation API to use to create the context. Possible values are #NATIVE_CONTEXT_API, #EGL_CONTEXT_API
+            and #OSMESA_CONTEXT_API. This is a hard constraint. If no client API is requested, this hint is ignored.
 
             ${note(ul(
                 "<b>macOS</b>: The EGL API is not available on this platform and requests to use it will fail.",
