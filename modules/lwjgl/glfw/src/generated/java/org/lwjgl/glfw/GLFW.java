@@ -1043,6 +1043,7 @@ public class GLFW {
     @NativeType("int")
     public static boolean glfwInit() {
         long __functionAddress = Functions.Init;
+        EventLoop.check();
         return invokeI(__functionAddress) != 0;
     }
 
@@ -2103,7 +2104,6 @@ public class GLFW {
      */
     @NativeType("GLFWwindow *")
     public static long glfwCreateWindow(int width, int height, @NativeType("char const *") ByteBuffer title, @NativeType("GLFWmonitor *") long monitor, @NativeType("GLFWwindow *") long share) {
-        EventLoop.OffScreen.check();
         if (CHECKS) {
             checkNT1(title);
         }
@@ -2190,7 +2190,6 @@ public class GLFW {
      */
     @NativeType("GLFWwindow *")
     public static long glfwCreateWindow(int width, int height, @NativeType("char const *") CharSequence title, @NativeType("GLFWmonitor *") long monitor, @NativeType("GLFWwindow *") long share) {
-        EventLoop.OffScreen.check();
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(title, true);
@@ -2826,7 +2825,6 @@ public class GLFW {
      */
     public static void glfwShowWindow(@NativeType("GLFWwindow *") long window) {
         long __functionAddress = Functions.ShowWindow;
-        EventLoop.OnScreen.check();
         if (CHECKS) {
             check(window);
         }
@@ -3396,7 +3394,6 @@ public class GLFW {
      */
     public static void glfwPollEvents() {
         long __functionAddress = Functions.PollEvents;
-        EventLoop.OnScreen.check();
         invokeV(__functionAddress);
     }
 
@@ -3431,7 +3428,6 @@ public class GLFW {
      */
     public static void glfwWaitEvents() {
         long __functionAddress = Functions.WaitEvents;
-        EventLoop.OnScreen.check();
         invokeV(__functionAddress);
     }
 
@@ -3469,7 +3465,6 @@ public class GLFW {
      */
     public static void glfwWaitEventsTimeout(double timeout) {
         long __functionAddress = Functions.WaitEventsTimeout;
-        EventLoop.OnScreen.check();
         invokeV(timeout, __functionAddress);
     }
 

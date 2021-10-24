@@ -303,6 +303,10 @@
                     <arg value="-I${src.main.rel}"/>
                     <fileset dir="." includes="${src.main}/*.cc"/>
                 </compile>
+                <compile>
+                    <arg value="-I${src.main.rel}"/>
+                    <fileset dir="." includes="${src.main}/miniz.c"/>
+                </compile>
             </beforeCompile>
         </build>
 

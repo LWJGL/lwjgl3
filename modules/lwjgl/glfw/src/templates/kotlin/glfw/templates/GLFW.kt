@@ -991,7 +991,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "ANGLE_PLATFORM_TYPE_METAL"..0x00037008
     )
 
-    intb(
+    Code(
+        javaInit = statement("$t${t}EventLoop.check();")
+    )..intb(
         "Init",
         """
         Initializes the GLFW library. Before most GLFW functions can be used, GLFW must be initialized, and before an application terminates GLFW should be
@@ -1674,9 +1676,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 3.3"
     )
 
-    Code(
-        javaInit = statement("$t${t}EventLoop.OffScreen.check();")
-    )..GLFWwindow.p(
+    GLFWwindow.p(
         "CreateWindow",
         """
         Creates a window and its associated OpenGL or OpenGL ES context. Most of the options controlling how the window and its context should be created are
@@ -2177,9 +2177,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 3.2"
     )
 
-    Code(
-        javaInit = statement("$t${t}EventLoop.OnScreen.check();")
-    )..void(
+    void(
         "ShowWindow",
         """
         Makes the specified window visible if it was previously hidden. If the window is already visible or is in full screen mode, this function does nothing.
@@ -2548,9 +2546,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 3.3"
     )
 
-    Code(
-        javaInit = statement("$t${t}EventLoop.OnScreen.check();")
-    )..void(
+    void(
         "PollEvents",
         """
         Processes all pending events.
@@ -2575,9 +2571,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 1.0"
     )
 
-    Code(
-        javaInit = statement("$t${t}EventLoop.OnScreen.check();")
-    )..void(
+    void(
         "WaitEvents",
         """
         Waits until events are queued and processes them.
@@ -2605,9 +2599,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 2.5"
     )
 
-    Code(
-        javaInit = statement("$t${t}EventLoop.OnScreen.check();")
-    )..void(
+    void(
         "WaitEventsTimeout",
         """
         Waits with timeout until events are queued and processes them.
