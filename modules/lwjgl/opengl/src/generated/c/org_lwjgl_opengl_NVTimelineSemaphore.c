@@ -13,21 +13,21 @@ typedef void (APIENTRY *glGetSemaphoreParameterivNVPROC) (jint, jint, intptr_t);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVTimelineSemaphore_nglCreateSemaphoresNV__IJ(JNIEnv *__env, jclass clazz, jint n, jlong semaphoresAddress) {
-    glCreateSemaphoresNVPROC glCreateSemaphoresNV = (glCreateSemaphoresNVPROC)tlsGetFunction(2148);
+    glCreateSemaphoresNVPROC glCreateSemaphoresNV = (glCreateSemaphoresNVPROC)tlsGetFunction(2150);
     intptr_t semaphores = (intptr_t)semaphoresAddress;
     UNUSED_PARAM(clazz)
     glCreateSemaphoresNV(n, semaphores);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVTimelineSemaphore_nglSemaphoreParameterivNV__IIJ(JNIEnv *__env, jclass clazz, jint semaphore, jint pname, jlong paramsAddress) {
-    glSemaphoreParameterivNVPROC glSemaphoreParameterivNV = (glSemaphoreParameterivNVPROC)tlsGetFunction(2149);
+    glSemaphoreParameterivNVPROC glSemaphoreParameterivNV = (glSemaphoreParameterivNVPROC)tlsGetFunction(2151);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glSemaphoreParameterivNV(semaphore, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVTimelineSemaphore_nglGetSemaphoreParameterivNV__IIJ(JNIEnv *__env, jclass clazz, jint semaphore, jint pname, jlong paramsAddress) {
-    glGetSemaphoreParameterivNVPROC glGetSemaphoreParameterivNV = (glGetSemaphoreParameterivNVPROC)tlsGetFunction(2150);
+    glGetSemaphoreParameterivNVPROC glGetSemaphoreParameterivNV = (glGetSemaphoreParameterivNVPROC)tlsGetFunction(2152);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetSemaphoreParameterivNV(semaphore, pname, params);

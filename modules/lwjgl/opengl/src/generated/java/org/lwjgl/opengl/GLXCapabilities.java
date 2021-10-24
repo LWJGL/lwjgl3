@@ -207,6 +207,13 @@ public final class GLXCapabilities {
     public final boolean GLX_EXT_fbconfig_packed_float;
     /** When true, {@link GLXEXTFramebufferSRGB} is supported. */
     public final boolean GLX_EXT_framebuffer_sRGB;
+    /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_get_drawable_type.txt">GLX_EXT_get_drawable_type</a> extension is supported.
+     * 
+     * <p>This extension adds {@link GLX13#GLX_DRAWABLE_TYPE DRAWABLE_TYPE} to the set of drawable attributes that are sent in a {@code GLXGetDrawableAttributes} request, and that can be
+     * queried with {@link GLX13#glXQueryDrawable QueryDrawable}. While this is primarily a convenience for the client library implementation, it may also be useful for applications.</p>
+     */
+    public final boolean GLX_EXT_get_drawable_type;
     /** When true, {@link GLXEXTImportContext} is supported. */
     public final boolean GLX_EXT_import_context;
     /**
@@ -289,6 +296,7 @@ public final class GLXCapabilities {
         GLX_EXT_create_context_es_profile = ext.contains("GLX_EXT_create_context_es_profile");
         GLX_EXT_fbconfig_packed_float = ext.contains("GLX_EXT_fbconfig_packed_float");
         GLX_EXT_framebuffer_sRGB = ext.contains("GLX_EXT_framebuffer_sRGB");
+        GLX_EXT_get_drawable_type = ext.contains("GLX_EXT_get_drawable_type");
         GLX_EXT_import_context = check_GLX_EXT_import_context(provider, caps, ext);
         GLX_EXT_no_config_context = ext.contains("GLX_EXT_no_config_context");
         GLX_EXT_stereo_tree = ext.contains("GLX_EXT_stereo_tree");

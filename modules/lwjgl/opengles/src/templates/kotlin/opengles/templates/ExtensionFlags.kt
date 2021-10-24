@@ -19,6 +19,7 @@ val DMP = "DMP"
 val FJ = "FJ"
 val IMG = "IMG"
 val INTEL = "INTEL"
+val MESA = "MESA"
 val NV = "NV"
 val NVX = "NVX"
 val OES = "OES"
@@ -537,6 +538,19 @@ val KHR_texture_compression_astc_sliced_3d = EXT_FLAG.nativeClassGLES("KHR_textu
         profile in the same way as the HDR profile allows slice-based 3D textures.
 
         Requires ${KHR_texture_compression_astc_ldr.link}.
+        """
+}
+
+val MESA_tile_raster_order = EXT_FLAG.nativeClassGLES("MESA_tile_raster_order", postfix = MESA) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension extends the sampling-from-the-framebuffer behavior provided by {@code GL_NV_texture_barrier} to allow setting the rasterization order of
+        the scene, so that overlapping blits can be implemented. This can be used for scrolling or window movement within in 2D scenes, without first copying
+        to a temporary.
+    
+        Requires ${NV_texture_barrier.link}.
         """
 }
 

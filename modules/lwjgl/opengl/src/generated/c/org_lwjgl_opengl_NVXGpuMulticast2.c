@@ -16,7 +16,7 @@ typedef void (APIENTRY *glMulticastViewportPositionWScaleNVXPROC) (jint, jint, j
 EXTERN_C_ENTER
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_NVXGpuMulticast2_nglAsyncCopyImageSubDataNVX__IJJIIIIIIIIIIIIIIIIIIJJ(JNIEnv *__env, jclass clazz, jint waitSemaphoreCount, jlong waitSemaphoreArrayAddress, jlong waitValueArrayAddress, jint srcGpu, jint dstGpuMask, jint srcName, jint srcTarget, jint srcLevel, jint srcX, jint srcY, jint srcZ, jint dstName, jint dstTarget, jint dstLevel, jint dstX, jint dstY, jint dstZ, jint srcWidth, jint srcHeight, jint srcDepth, jint signalSemaphoreCount, jlong signalSemaphoreArrayAddress, jlong signalValueArrayAddress) {
-    glAsyncCopyImageSubDataNVXPROC glAsyncCopyImageSubDataNVX = (glAsyncCopyImageSubDataNVXPROC)tlsGetFunction(2206);
+    glAsyncCopyImageSubDataNVXPROC glAsyncCopyImageSubDataNVX = (glAsyncCopyImageSubDataNVXPROC)tlsGetFunction(2208);
     intptr_t waitSemaphoreArray = (intptr_t)waitSemaphoreArrayAddress;
     intptr_t waitValueArray = (intptr_t)waitValueArrayAddress;
     intptr_t signalSemaphoreArray = (intptr_t)signalSemaphoreArrayAddress;
@@ -26,7 +26,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_NVXGpuMulticast2_nglAsyncCopyImageS
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_NVXGpuMulticast2_nglAsyncCopyBufferSubDataNVX__IJJIIIIJJJIJJ(JNIEnv *__env, jclass clazz, jint waitSemaphoreCount, jlong waitSemaphoreArrayAddress, jlong fenceValueArrayAddress, jint readGpu, jint writeGpuMask, jint readBuffer, jint writeBuffer, jlong readOffset, jlong writeOffset, jlong size, jint signalSemaphoreCount, jlong signalSemaphoreArrayAddress, jlong signalValueArrayAddress) {
-    glAsyncCopyBufferSubDataNVXPROC glAsyncCopyBufferSubDataNVX = (glAsyncCopyBufferSubDataNVXPROC)tlsGetFunction(2207);
+    glAsyncCopyBufferSubDataNVXPROC glAsyncCopyBufferSubDataNVX = (glAsyncCopyBufferSubDataNVXPROC)tlsGetFunction(2209);
     intptr_t waitSemaphoreArray = (intptr_t)waitSemaphoreArrayAddress;
     intptr_t fenceValueArray = (intptr_t)fenceValueArrayAddress;
     intptr_t signalSemaphoreArray = (intptr_t)signalSemaphoreArrayAddress;
@@ -36,27 +36,27 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_NVXGpuMulticast2_nglAsyncCopyBuffe
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXGpuMulticast2_glUploadGpuMaskNVX(JNIEnv *__env, jclass clazz, jint mask) {
-    glUploadGpuMaskNVXPROC glUploadGpuMaskNVX = (glUploadGpuMaskNVXPROC)tlsGetFunction(2208);
+    glUploadGpuMaskNVXPROC glUploadGpuMaskNVX = (glUploadGpuMaskNVXPROC)tlsGetFunction(2210);
     UNUSED_PARAM(clazz)
     glUploadGpuMaskNVX(mask);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXGpuMulticast2_nglMulticastViewportArrayvNVX__IIIJ(JNIEnv *__env, jclass clazz, jint gpu, jint first, jint count, jlong vAddress) {
-    glMulticastViewportArrayvNVXPROC glMulticastViewportArrayvNVX = (glMulticastViewportArrayvNVXPROC)tlsGetFunction(2209);
+    glMulticastViewportArrayvNVXPROC glMulticastViewportArrayvNVX = (glMulticastViewportArrayvNVXPROC)tlsGetFunction(2211);
     intptr_t v = (intptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMulticastViewportArrayvNVX(gpu, first, count, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXGpuMulticast2_nglMulticastScissorArrayvNVX__IIIJ(JNIEnv *__env, jclass clazz, jint gpu, jint first, jint count, jlong vAddress) {
-    glMulticastScissorArrayvNVXPROC glMulticastScissorArrayvNVX = (glMulticastScissorArrayvNVXPROC)tlsGetFunction(2210);
+    glMulticastScissorArrayvNVXPROC glMulticastScissorArrayvNVX = (glMulticastScissorArrayvNVXPROC)tlsGetFunction(2212);
     intptr_t v = (intptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMulticastScissorArrayvNVX(gpu, first, count, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXGpuMulticast2_glMulticastViewportPositionWScaleNVX(JNIEnv *__env, jclass clazz, jint gpu, jint index, jfloat xcoeff, jfloat ycoeff) {
-    glMulticastViewportPositionWScaleNVXPROC glMulticastViewportPositionWScaleNVX = (glMulticastViewportPositionWScaleNVXPROC)tlsGetFunction(2211);
+    glMulticastViewportPositionWScaleNVXPROC glMulticastViewportPositionWScaleNVX = (glMulticastViewportPositionWScaleNVXPROC)tlsGetFunction(2213);
     UNUSED_PARAM(clazz)
     glMulticastViewportPositionWScaleNVX(gpu, index, xcoeff, ycoeff);
 }

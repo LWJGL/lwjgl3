@@ -20,6 +20,8 @@ val GREMEDY = "GREMEDY"
 
 val INTEL = "INTEL"
 
+val MESA = "MESA"
+
 val NV = "NV"
 val NVX = "NVX"
 
@@ -750,6 +752,18 @@ val ARB_vertex_type_10f_11f_11f_rev = EXT_FLAG.nativeClassGL("ARB_vertex_type_10
         """
 }
 
+val EXT_EGL_sync = EXT_FLAG.nativeClassGL("EXT_EGL_sync", postfix = EXT) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+        
+        This extension extends {@code EGL_KHR_fence_sync} with client API support for OpenGL (compatibility or core profiles) as an EXT extension.
+
+        The {@code "GL_EXT_EGL_sync"} string indicates that a fence sync object can be created in association with a fence command placed in the command stream
+        of a bound OpenGL context.
+    """
+}
+
 val EXT_multiview_timer_query = EXT_FLAG.nativeClassGL("EXT_multiview_timer_query", postfix = EXT) {
     documentation =
         """
@@ -1209,6 +1223,19 @@ val KHR_texture_compression_astc_sliced_3d = EXT_FLAG.nativeClassGL("KHR_texture
         """
 }
 
+val MESA_tile_raster_order = EXT_FLAG.nativeClassGL("MESA_tile_raster_order", postfix = MESA) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension extends the sampling-from-the-framebuffer behavior provided by {@code GL_ARB_texture_barrier} to allow setting the rasterization order
+        of the scene, so that overlapping blits can be implemented. This can be used for scrolling or window movement within in 2D scenes, without first
+        copying to a temporary.
+    
+        Requires ${ARB_texture_barrier.link} or ${NV_texture_barrier.link}.
+        """
+}
+
 val NV_blend_square = EXT_FLAG.nativeClassGL("NV_blend_square", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
 val NV_compute_shader_derivatives = EXT_FLAG.nativeClassGL("NV_compute_shader_derivatives", postfix = NV) {
     documentation =
@@ -1512,6 +1539,16 @@ val OVR_multiview2 = "OVRMultiview2".nativeClassGL("OVR_multiview2", postfix = O
 }
 
 // Platform-specific
+
+val GLX_EXT_get_drawable_type = EXT_FLAG.nativeClassGLX("GLX_EXT_get_drawable_type", EXT) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension adds #DRAWABLE_TYPE to the set of drawable attributes that are sent in a {@code GLXGetDrawableAttributes} request, and that can be
+        queried with #QueryDrawable(). While this is primarily a convenience for the client library implementation, it may also be useful for applications.
+        """
+}
 
 val GLX_EXT_no_config_context = EXT_FLAG.nativeClassGLX("GLX_EXT_no_config_context", postfix = EXT) {
     documentation =

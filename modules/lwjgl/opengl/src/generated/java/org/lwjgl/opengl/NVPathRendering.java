@@ -785,18 +785,19 @@ public class NVPathRendering {
     // --- [ glPathGlyphIndexRangeNV ] ---
 
     /** Unsafe version of: {@link #glPathGlyphIndexRangeNV PathGlyphIndexRangeNV} */
-    public static native int nglPathGlyphIndexRangeNV(int fontTarget, long fontName, int fontStyle, int pathParameterTemplate, float emScale, int baseAndCount);
+    public static native int nglPathGlyphIndexRangeNV(int fontTarget, long fontName, int fontStyle, int pathParameterTemplate, float emScale, long baseAndCount);
 
     /**
      * @param fontTarget one of:<br><table><tr><td>{@link #GL_STANDARD_FONT_NAME_NV STANDARD_FONT_NAME_NV}</td><td>{@link #GL_SYSTEM_FONT_NAME_NV SYSTEM_FONT_NAME_NV}</td><td>{@link #GL_FILE_NAME_NV FILE_NAME_NV}</td></tr></table>
      * @param fontStyle  one or more of:<br><table><tr><td>{@link #GL_BOLD_BIT_NV BOLD_BIT_NV}</td><td>{@link #GL_ITALIC_BIT_NV ITALIC_BIT_NV}</td></tr></table>
      */
     @NativeType("GLenum")
-    public static int glPathGlyphIndexRangeNV(@NativeType("GLenum") int fontTarget, @NativeType("void const *") ByteBuffer fontName, @NativeType("GLbitfield") int fontStyle, @NativeType("GLuint") int pathParameterTemplate, @NativeType("GLfloat") float emScale, @NativeType("GLuint") int baseAndCount) {
+    public static int glPathGlyphIndexRangeNV(@NativeType("GLenum") int fontTarget, @NativeType("void const *") ByteBuffer fontName, @NativeType("GLbitfield") int fontStyle, @NativeType("GLuint") int pathParameterTemplate, @NativeType("GLfloat") float emScale, @NativeType("GLuint *") IntBuffer baseAndCount) {
         if (CHECKS) {
             checkNT1(fontName);
+            check(baseAndCount, 2);
         }
-        return nglPathGlyphIndexRangeNV(fontTarget, memAddress(fontName), fontStyle, pathParameterTemplate, emScale, baseAndCount);
+        return nglPathGlyphIndexRangeNV(fontTarget, memAddress(fontName), fontStyle, pathParameterTemplate, emScale, memAddress(baseAndCount));
     }
 
     // --- [ glProgramPathFragmentInputGenNV ] ---
@@ -1389,6 +1390,18 @@ public class NVPathRendering {
             check(transformValues, numPaths * transformTypeToElements(transformType));
         }
         callPPV(numPaths, pathNameType, memAddress(paths), pathBase, reference, mask, coverMode, transformType, transformValues, __functionAddress);
+    }
+
+    /** Array version of: {@link #glPathGlyphIndexRangeNV PathGlyphIndexRangeNV} */
+    @NativeType("GLenum")
+    public static int glPathGlyphIndexRangeNV(@NativeType("GLenum") int fontTarget, @NativeType("void const *") ByteBuffer fontName, @NativeType("GLbitfield") int fontStyle, @NativeType("GLuint") int pathParameterTemplate, @NativeType("GLfloat") float emScale, @NativeType("GLuint *") int[] baseAndCount) {
+        long __functionAddress = GL.getICD().glPathGlyphIndexRangeNV;
+        if (CHECKS) {
+            check(__functionAddress);
+            checkNT1(fontName);
+            check(baseAndCount, 2);
+        }
+        return callPPI(fontTarget, memAddress(fontName), fontStyle, pathParameterTemplate, emScale, baseAndCount, __functionAddress);
     }
 
     /** Array version of: {@link #glProgramPathFragmentInputGenNV ProgramPathFragmentInputGenNV} */

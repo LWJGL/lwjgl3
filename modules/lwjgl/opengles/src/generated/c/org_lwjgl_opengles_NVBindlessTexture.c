@@ -23,81 +23,81 @@ typedef jboolean (APIENTRY *glIsImageHandleResidentNVPROC) (jlong);
 EXTERN_C_ENTER
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_glGetTextureHandleNV(JNIEnv *__env, jclass clazz, jint texture) {
-    glGetTextureHandleNVPROC glGetTextureHandleNV = (glGetTextureHandleNVPROC)tlsGetFunction(593);
+    glGetTextureHandleNVPROC glGetTextureHandleNV = (glGetTextureHandleNVPROC)tlsGetFunction(595);
     UNUSED_PARAM(clazz)
     return (jlong)glGetTextureHandleNV(texture);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_glGetTextureSamplerHandleNV(JNIEnv *__env, jclass clazz, jint texture, jint sampler) {
-    glGetTextureSamplerHandleNVPROC glGetTextureSamplerHandleNV = (glGetTextureSamplerHandleNVPROC)tlsGetFunction(594);
+    glGetTextureSamplerHandleNVPROC glGetTextureSamplerHandleNV = (glGetTextureSamplerHandleNVPROC)tlsGetFunction(596);
     UNUSED_PARAM(clazz)
     return (jlong)glGetTextureSamplerHandleNV(texture, sampler);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_glMakeTextureHandleResidentNV(JNIEnv *__env, jclass clazz, jlong handle) {
-    glMakeTextureHandleResidentNVPROC glMakeTextureHandleResidentNV = (glMakeTextureHandleResidentNVPROC)tlsGetFunction(595);
+    glMakeTextureHandleResidentNVPROC glMakeTextureHandleResidentNV = (glMakeTextureHandleResidentNVPROC)tlsGetFunction(597);
     UNUSED_PARAM(clazz)
     glMakeTextureHandleResidentNV(handle);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_glMakeTextureHandleNonResidentNV(JNIEnv *__env, jclass clazz, jlong handle) {
-    glMakeTextureHandleNonResidentNVPROC glMakeTextureHandleNonResidentNV = (glMakeTextureHandleNonResidentNVPROC)tlsGetFunction(596);
+    glMakeTextureHandleNonResidentNVPROC glMakeTextureHandleNonResidentNV = (glMakeTextureHandleNonResidentNVPROC)tlsGetFunction(598);
     UNUSED_PARAM(clazz)
     glMakeTextureHandleNonResidentNV(handle);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_glGetImageHandleNV(JNIEnv *__env, jclass clazz, jint texture, jint level, jboolean layered, jint layer, jint format) {
-    glGetImageHandleNVPROC glGetImageHandleNV = (glGetImageHandleNVPROC)tlsGetFunction(597);
+    glGetImageHandleNVPROC glGetImageHandleNV = (glGetImageHandleNVPROC)tlsGetFunction(599);
     UNUSED_PARAM(clazz)
     return (jlong)glGetImageHandleNV(texture, level, layered, layer, format);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_glMakeImageHandleResidentNV(JNIEnv *__env, jclass clazz, jlong handle, jint access) {
-    glMakeImageHandleResidentNVPROC glMakeImageHandleResidentNV = (glMakeImageHandleResidentNVPROC)tlsGetFunction(598);
+    glMakeImageHandleResidentNVPROC glMakeImageHandleResidentNV = (glMakeImageHandleResidentNVPROC)tlsGetFunction(600);
     UNUSED_PARAM(clazz)
     glMakeImageHandleResidentNV(handle, access);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_glMakeImageHandleNonResidentNV(JNIEnv *__env, jclass clazz, jlong handle) {
-    glMakeImageHandleNonResidentNVPROC glMakeImageHandleNonResidentNV = (glMakeImageHandleNonResidentNVPROC)tlsGetFunction(599);
+    glMakeImageHandleNonResidentNVPROC glMakeImageHandleNonResidentNV = (glMakeImageHandleNonResidentNVPROC)tlsGetFunction(601);
     UNUSED_PARAM(clazz)
     glMakeImageHandleNonResidentNV(handle);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_glUniformHandleui64NV(JNIEnv *__env, jclass clazz, jint location, jlong value) {
-    glUniformHandleui64NVPROC glUniformHandleui64NV = (glUniformHandleui64NVPROC)tlsGetFunction(600);
+    glUniformHandleui64NVPROC glUniformHandleui64NV = (glUniformHandleui64NVPROC)tlsGetFunction(602);
     UNUSED_PARAM(clazz)
     glUniformHandleui64NV(location, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_nglUniformHandleui64vNV__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valuesAddress) {
-    glUniformHandleui64vNVPROC glUniformHandleui64vNV = (glUniformHandleui64vNVPROC)tlsGetFunction(601);
+    glUniformHandleui64vNVPROC glUniformHandleui64vNV = (glUniformHandleui64vNVPROC)tlsGetFunction(603);
     intptr_t values = (intptr_t)valuesAddress;
     UNUSED_PARAM(clazz)
     glUniformHandleui64vNV(location, count, values);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_glProgramUniformHandleui64NV(JNIEnv *__env, jclass clazz, jint program, jint location, jlong value) {
-    glProgramUniformHandleui64NVPROC glProgramUniformHandleui64NV = (glProgramUniformHandleui64NVPROC)tlsGetFunction(602);
+    glProgramUniformHandleui64NVPROC glProgramUniformHandleui64NV = (glProgramUniformHandleui64NVPROC)tlsGetFunction(604);
     UNUSED_PARAM(clazz)
     glProgramUniformHandleui64NV(program, location, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_nglProgramUniformHandleui64vNV__IIIJ(JNIEnv *__env, jclass clazz, jint program, jint location, jint count, jlong valuesAddress) {
-    glProgramUniformHandleui64vNVPROC glProgramUniformHandleui64vNV = (glProgramUniformHandleui64vNVPROC)tlsGetFunction(603);
+    glProgramUniformHandleui64vNVPROC glProgramUniformHandleui64vNV = (glProgramUniformHandleui64vNVPROC)tlsGetFunction(605);
     intptr_t values = (intptr_t)valuesAddress;
     UNUSED_PARAM(clazz)
     glProgramUniformHandleui64vNV(program, location, count, values);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_glIsTextureHandleResidentNV(JNIEnv *__env, jclass clazz, jlong handle) {
-    glIsTextureHandleResidentNVPROC glIsTextureHandleResidentNV = (glIsTextureHandleResidentNVPROC)tlsGetFunction(604);
+    glIsTextureHandleResidentNVPROC glIsTextureHandleResidentNV = (glIsTextureHandleResidentNVPROC)tlsGetFunction(606);
     UNUSED_PARAM(clazz)
     return (jboolean)glIsTextureHandleResidentNV(handle);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_glIsImageHandleResidentNV(JNIEnv *__env, jclass clazz, jlong handle) {
-    glIsImageHandleResidentNVPROC glIsImageHandleResidentNV = (glIsImageHandleResidentNVPROC)tlsGetFunction(605);
+    glIsImageHandleResidentNVPROC glIsImageHandleResidentNV = (glIsImageHandleResidentNVPROC)tlsGetFunction(607);
     UNUSED_PARAM(clazz)
     return (jboolean)glIsImageHandleResidentNV(handle);
 }

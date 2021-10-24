@@ -837,7 +837,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
         PathGlyphsNV["fontStyle"],
         GLuint("pathParameterTemplate", ""),
         GLfloat("emScale", ""),
-        GLuint("baseAndCount", "")
+        Check(2)..GLuint.p("baseAndCount", "")
     )
 
     IgnoreMissing..void(

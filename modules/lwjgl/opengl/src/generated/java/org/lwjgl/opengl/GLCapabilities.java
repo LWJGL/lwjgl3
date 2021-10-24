@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Defines the capabilities of an OpenGL context. */
 public final class GLCapabilities {
 
-    static final int ADDRESS_BUFFER_SIZE = 2218;
+    static final int ADDRESS_BUFFER_SIZE = 2220;
 
     // GL11
     public final long
@@ -2295,6 +2295,11 @@ public final class GLCapabilities {
     public final long
         glMaxShaderCompilerThreadsKHR;
 
+    // MESA_framebuffer_flip_y
+    public final long
+        glFramebufferParameteriMESA,
+        glGetFramebufferParameterivMESA;
+
     // NV_alpha_to_coverage_dither_control
     public final long
         glAlphaToCoverageDitherControlNV;
@@ -3964,6 +3969,15 @@ public final class GLCapabilities {
     public final boolean GL_EXT_draw_instanced;
     /** When true, {@link EXTEGLImageStorage} is supported. */
     public final boolean GL_EXT_EGL_image_storage;
+    /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_EGL_sync.txt">EXT_EGL_sync</a> extension is supported.
+     * 
+     * <p>This extension extends {@code EGL_KHR_fence_sync} with client API support for OpenGL (compatibility or core profiles) as an EXT extension.</p>
+     * 
+     * <p>The {@code "GL_EXT_EGL_sync"} string indicates that a fence sync object can be created in association with a fence command placed in the command stream
+     * of a bound OpenGL context.</p>
+     */
+    public final boolean GL_EXT_EGL_sync;
     /** When true, {@link EXTExternalBuffer} is supported. */
     public final boolean GL_EXT_external_buffer;
     /** When true, {@link EXTFramebufferBlit} is supported. */
@@ -4181,6 +4195,8 @@ public final class GLCapabilities {
     public final boolean GL_EXT_texture_sRGB_decode;
     /** When true, {@link EXTTextureSRGBR8} is supported. */
     public final boolean GL_EXT_texture_sRGB_R8;
+    /** When true, {@link EXTTextureSRGBRG8} is supported. */
+    public final boolean GL_EXT_texture_sRGB_RG8;
     /** When true, {@link EXTTextureSwizzle} is supported. */
     public final boolean GL_EXT_texture_swizzle;
     /** When true, {@link EXTTimerQuery} is supported. */
@@ -4322,6 +4338,22 @@ public final class GLCapabilities {
      * <p>Requires {@link KHRTextureCompressionASTCLDR KHR_texture_compression_astc_ldr}.</p>
      */
     public final boolean GL_KHR_texture_compression_astc_sliced_3d;
+    /** When true, {@link MESAFramebufferFlipX} is supported. */
+    public final boolean GL_MESA_framebuffer_flip_x;
+    /** When true, {@link MESAFramebufferFlipY} is supported. */
+    public final boolean GL_MESA_framebuffer_flip_y;
+    /** When true, {@link MESAFramebufferSwapXY} is supported. */
+    public final boolean GL_MESA_framebuffer_swap_xy;
+    /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/MESA/MESA_tile_raster_order.txt">MESA_tile_raster_order</a> extension is supported.
+     * 
+     * <p>This extension extends the sampling-from-the-framebuffer behavior provided by {@code GL_ARB_texture_barrier} to allow setting the rasterization order
+     * of the scene, so that overlapping blits can be implemented. This can be used for scrolling or window movement within in 2D scenes, without first
+     * copying to a temporary.</p>
+     * 
+     * <p>Requires {@link ARBTextureBarrier ARB_texture_barrier} or {@link NVTextureBarrier NV_texture_barrier}.</p>
+     */
+    public final boolean GL_MESA_tile_raster_order;
     /** When true, {@link NVAlphaToCoverageDitherControl} is supported. */
     public final boolean GL_NV_alpha_to_coverage_dither_control;
     /** When true, {@link NVBindlessMultiDrawIndirect} is supported. */
@@ -4514,6 +4546,8 @@ public final class GLCapabilities {
     public final boolean GL_NV_point_sprite;
     /** When true, {@link NVPrimitiveRestart} is supported. */
     public final boolean GL_NV_primitive_restart;
+    /** When true, {@link NVPrimitiveShadingRate} is supported. */
+    public final boolean GL_NV_primitive_shading_rate;
     /** When true, {@link NVQueryResource} is supported. */
     public final boolean GL_NV_query_resource;
     /** When true, {@link NVQueryResourceTag} is supported. */
@@ -4997,6 +5031,7 @@ public final class GLCapabilities {
         GL_EXT_draw_buffers2 = check_EXT_draw_buffers2(provider, caps, ext);
         GL_EXT_draw_instanced = check_EXT_draw_instanced(provider, caps, ext);
         GL_EXT_EGL_image_storage = check_EXT_EGL_image_storage(provider, caps, ext);
+        GL_EXT_EGL_sync = ext.contains("GL_EXT_EGL_sync");
         GL_EXT_external_buffer = check_EXT_external_buffer(provider, caps, ext);
         GL_EXT_framebuffer_blit = check_EXT_framebuffer_blit(provider, caps, ext);
         GL_EXT_framebuffer_multisample = check_EXT_framebuffer_multisample(provider, caps, ext);
@@ -5051,6 +5086,7 @@ public final class GLCapabilities {
         GL_EXT_texture_sRGB = ext.contains("GL_EXT_texture_sRGB");
         GL_EXT_texture_sRGB_decode = ext.contains("GL_EXT_texture_sRGB_decode");
         GL_EXT_texture_sRGB_R8 = ext.contains("GL_EXT_texture_sRGB_R8");
+        GL_EXT_texture_sRGB_RG8 = ext.contains("GL_EXT_texture_sRGB_RG8");
         GL_EXT_texture_swizzle = ext.contains("GL_EXT_texture_swizzle");
         GL_EXT_timer_query = check_EXT_timer_query(provider, caps, ext);
         GL_EXT_transform_feedback = check_EXT_transform_feedback(provider, caps, ext);
@@ -5080,6 +5116,10 @@ public final class GLCapabilities {
         GL_KHR_texture_compression_astc_hdr = ext.contains("GL_KHR_texture_compression_astc_hdr");
         GL_KHR_texture_compression_astc_ldr = ext.contains("GL_KHR_texture_compression_astc_ldr");
         GL_KHR_texture_compression_astc_sliced_3d = ext.contains("GL_KHR_texture_compression_astc_sliced_3d");
+        GL_MESA_framebuffer_flip_x = ext.contains("GL_MESA_framebuffer_flip_x");
+        GL_MESA_framebuffer_flip_y = check_MESA_framebuffer_flip_y(provider, caps, ext);
+        GL_MESA_framebuffer_swap_xy = ext.contains("GL_MESA_framebuffer_swap_xy");
+        GL_MESA_tile_raster_order = ext.contains("GL_MESA_tile_raster_order");
         GL_NV_alpha_to_coverage_dither_control = check_NV_alpha_to_coverage_dither_control(provider, caps, ext);
         GL_NV_bindless_multi_draw_indirect = check_NV_bindless_multi_draw_indirect(provider, caps, ext);
         GL_NV_bindless_multi_draw_indirect_count = check_NV_bindless_multi_draw_indirect_count(provider, caps, ext);
@@ -5135,6 +5175,7 @@ public final class GLCapabilities {
         GL_NV_pixel_data_range = check_NV_pixel_data_range(provider, caps, ext);
         GL_NV_point_sprite = check_NV_point_sprite(provider, caps, ext);
         GL_NV_primitive_restart = check_NV_primitive_restart(provider, caps, ext);
+        GL_NV_primitive_shading_rate = ext.contains("GL_NV_primitive_shading_rate");
         GL_NV_query_resource = check_NV_query_resource(provider, caps, ext);
         GL_NV_query_resource_tag = check_NV_query_resource_tag(provider, caps, ext);
         GL_NV_representative_fragment_test = ext.contains("GL_NV_representative_fragment_test");
@@ -7082,323 +7123,325 @@ public final class GLCapabilities {
         glGetPerfQueryInfoINTEL = caps.get(1898);
         glBlendBarrierKHR = caps.get(1899);
         glMaxShaderCompilerThreadsKHR = caps.get(1900);
-        glAlphaToCoverageDitherControlNV = caps.get(1901);
-        glMultiDrawArraysIndirectBindlessNV = caps.get(1902);
-        glMultiDrawElementsIndirectBindlessNV = caps.get(1903);
-        glMultiDrawArraysIndirectBindlessCountNV = caps.get(1904);
-        glMultiDrawElementsIndirectBindlessCountNV = caps.get(1905);
-        glGetTextureHandleNV = caps.get(1906);
-        glGetTextureSamplerHandleNV = caps.get(1907);
-        glMakeTextureHandleResidentNV = caps.get(1908);
-        glMakeTextureHandleNonResidentNV = caps.get(1909);
-        glGetImageHandleNV = caps.get(1910);
-        glMakeImageHandleResidentNV = caps.get(1911);
-        glMakeImageHandleNonResidentNV = caps.get(1912);
-        glUniformHandleui64NV = caps.get(1913);
-        glUniformHandleui64vNV = caps.get(1914);
-        glProgramUniformHandleui64NV = caps.get(1915);
-        glProgramUniformHandleui64vNV = caps.get(1916);
-        glIsTextureHandleResidentNV = caps.get(1917);
-        glIsImageHandleResidentNV = caps.get(1918);
-        glBlendParameteriNV = caps.get(1919);
-        glBlendBarrierNV = caps.get(1920);
-        glViewportPositionWScaleNV = caps.get(1921);
-        glCreateStatesNV = caps.get(1922);
-        glDeleteStatesNV = caps.get(1923);
-        glIsStateNV = caps.get(1924);
-        glStateCaptureNV = caps.get(1925);
-        glGetCommandHeaderNV = caps.get(1926);
-        glGetStageIndexNV = caps.get(1927);
-        glDrawCommandsNV = caps.get(1928);
-        glDrawCommandsAddressNV = caps.get(1929);
-        glDrawCommandsStatesNV = caps.get(1930);
-        glDrawCommandsStatesAddressNV = caps.get(1931);
-        glCreateCommandListsNV = caps.get(1932);
-        glDeleteCommandListsNV = caps.get(1933);
-        glIsCommandListNV = caps.get(1934);
-        glListDrawCommandsStatesClientNV = caps.get(1935);
-        glCommandListSegmentsNV = caps.get(1936);
-        glCompileCommandListNV = caps.get(1937);
-        glCallCommandListNV = caps.get(1938);
-        glBeginConditionalRenderNV = caps.get(1939);
-        glEndConditionalRenderNV = caps.get(1940);
-        glSubpixelPrecisionBiasNV = caps.get(1941);
-        glConservativeRasterParameterfNV = caps.get(1942);
-        glConservativeRasterParameteriNV = caps.get(1943);
-        glCopyImageSubDataNV = caps.get(1944);
-        glDepthRangedNV = caps.get(1945);
-        glClearDepthdNV = caps.get(1946);
-        glDepthBoundsdNV = caps.get(1947);
-        glDrawTextureNV = caps.get(1948);
-        glDrawVkImageNV = caps.get(1949);
-        glGetVkProcAddrNV = caps.get(1950);
-        glWaitVkSemaphoreNV = caps.get(1951);
-        glSignalVkSemaphoreNV = caps.get(1952);
-        glSignalVkFenceNV = caps.get(1953);
-        glGetMultisamplefvNV = caps.get(1954);
-        glSampleMaskIndexedNV = caps.get(1955);
-        glTexRenderbufferNV = caps.get(1956);
-        glDeleteFencesNV = caps.get(1957);
-        glGenFencesNV = caps.get(1958);
-        glIsFenceNV = caps.get(1959);
-        glTestFenceNV = caps.get(1960);
-        glGetFenceivNV = caps.get(1961);
-        glFinishFenceNV = caps.get(1962);
-        glSetFenceNV = caps.get(1963);
-        glFragmentCoverageColorNV = caps.get(1964);
-        glCoverageModulationTableNV = caps.get(1965);
-        glGetCoverageModulationTableNV = caps.get(1966);
-        glCoverageModulationNV = caps.get(1967);
-        glRenderbufferStorageMultisampleCoverageNV = caps.get(1968);
-        glRenderGpuMaskNV = caps.get(1969);
-        glMulticastBufferSubDataNV = caps.get(1970);
-        glMulticastCopyBufferSubDataNV = caps.get(1971);
-        glMulticastCopyImageSubDataNV = caps.get(1972);
-        glMulticastBlitFramebufferNV = caps.get(1973);
-        glMulticastFramebufferSampleLocationsfvNV = caps.get(1974);
-        glMulticastBarrierNV = caps.get(1975);
-        glMulticastWaitSyncNV = caps.get(1976);
-        glMulticastGetQueryObjectivNV = caps.get(1977);
-        glMulticastGetQueryObjectuivNV = caps.get(1978);
-        glMulticastGetQueryObjecti64vNV = caps.get(1979);
-        glMulticastGetQueryObjectui64vNV = caps.get(1980);
-        glVertex2hNV = caps.get(1981);
-        glVertex2hvNV = caps.get(1982);
-        glVertex3hNV = caps.get(1983);
-        glVertex3hvNV = caps.get(1984);
-        glVertex4hNV = caps.get(1985);
-        glVertex4hvNV = caps.get(1986);
-        glNormal3hNV = caps.get(1987);
-        glNormal3hvNV = caps.get(1988);
-        glColor3hNV = caps.get(1989);
-        glColor3hvNV = caps.get(1990);
-        glColor4hNV = caps.get(1991);
-        glColor4hvNV = caps.get(1992);
-        glTexCoord1hNV = caps.get(1993);
-        glTexCoord1hvNV = caps.get(1994);
-        glTexCoord2hNV = caps.get(1995);
-        glTexCoord2hvNV = caps.get(1996);
-        glTexCoord3hNV = caps.get(1997);
-        glTexCoord3hvNV = caps.get(1998);
-        glTexCoord4hNV = caps.get(1999);
-        glTexCoord4hvNV = caps.get(2000);
-        glMultiTexCoord1hNV = caps.get(2001);
-        glMultiTexCoord1hvNV = caps.get(2002);
-        glMultiTexCoord2hNV = caps.get(2003);
-        glMultiTexCoord2hvNV = caps.get(2004);
-        glMultiTexCoord3hNV = caps.get(2005);
-        glMultiTexCoord3hvNV = caps.get(2006);
-        glMultiTexCoord4hNV = caps.get(2007);
-        glMultiTexCoord4hvNV = caps.get(2008);
-        glFogCoordhNV = caps.get(2009);
-        glFogCoordhvNV = caps.get(2010);
-        glSecondaryColor3hNV = caps.get(2011);
-        glSecondaryColor3hvNV = caps.get(2012);
-        glVertexWeighthNV = caps.get(2013);
-        glVertexWeighthvNV = caps.get(2014);
-        glVertexAttrib1hNV = caps.get(2015);
-        glVertexAttrib1hvNV = caps.get(2016);
-        glVertexAttrib2hNV = caps.get(2017);
-        glVertexAttrib2hvNV = caps.get(2018);
-        glVertexAttrib3hNV = caps.get(2019);
-        glVertexAttrib3hvNV = caps.get(2020);
-        glVertexAttrib4hNV = caps.get(2021);
-        glVertexAttrib4hvNV = caps.get(2022);
-        glVertexAttribs1hvNV = caps.get(2023);
-        glVertexAttribs2hvNV = caps.get(2024);
-        glVertexAttribs3hvNV = caps.get(2025);
-        glVertexAttribs4hvNV = caps.get(2026);
-        glGetInternalformatSampleivNV = caps.get(2027);
-        glGetMemoryObjectDetachedResourcesuivNV = caps.get(2028);
-        glResetMemoryObjectParameterNV = caps.get(2029);
-        glTexAttachMemoryNV = caps.get(2030);
-        glBufferAttachMemoryNV = caps.get(2031);
-        glTextureAttachMemoryNV = caps.get(2032);
-        glNamedBufferAttachMemoryNV = caps.get(2033);
-        glBufferPageCommitmentMemNV = caps.get(2034);
-        glNamedBufferPageCommitmentMemNV = caps.get(2035);
-        glTexPageCommitmentMemNV = caps.get(2036);
-        glTexturePageCommitmentMemNV = caps.get(2037);
-        glDrawMeshTasksNV = caps.get(2038);
-        glDrawMeshTasksIndirectNV = caps.get(2039);
-        glMultiDrawMeshTasksIndirectNV = caps.get(2040);
-        glMultiDrawMeshTasksIndirectCountNV = caps.get(2041);
-        glPathCommandsNV = caps.get(2042);
-        glPathCoordsNV = caps.get(2043);
-        glPathSubCommandsNV = caps.get(2044);
-        glPathSubCoordsNV = caps.get(2045);
-        glPathStringNV = caps.get(2046);
-        glPathGlyphsNV = caps.get(2047);
-        glPathGlyphRangeNV = caps.get(2048);
-        glPathGlyphIndexArrayNV = caps.get(2049);
-        glPathMemoryGlyphIndexArrayNV = caps.get(2050);
-        glCopyPathNV = caps.get(2051);
-        glWeightPathsNV = caps.get(2052);
-        glInterpolatePathsNV = caps.get(2053);
-        glTransformPathNV = caps.get(2054);
-        glPathParameterivNV = caps.get(2055);
-        glPathParameteriNV = caps.get(2056);
-        glPathParameterfvNV = caps.get(2057);
-        glPathParameterfNV = caps.get(2058);
-        glPathDashArrayNV = caps.get(2059);
-        glGenPathsNV = caps.get(2060);
-        glDeletePathsNV = caps.get(2061);
-        glIsPathNV = caps.get(2062);
-        glPathStencilFuncNV = caps.get(2063);
-        glPathStencilDepthOffsetNV = caps.get(2064);
-        glStencilFillPathNV = caps.get(2065);
-        glStencilStrokePathNV = caps.get(2066);
-        glStencilFillPathInstancedNV = caps.get(2067);
-        glStencilStrokePathInstancedNV = caps.get(2068);
-        glPathCoverDepthFuncNV = caps.get(2069);
-        glPathColorGenNV = caps.get(2070);
-        glPathTexGenNV = caps.get(2071);
-        glPathFogGenNV = caps.get(2072);
-        glCoverFillPathNV = caps.get(2073);
-        glCoverStrokePathNV = caps.get(2074);
-        glCoverFillPathInstancedNV = caps.get(2075);
-        glCoverStrokePathInstancedNV = caps.get(2076);
-        glStencilThenCoverFillPathNV = caps.get(2077);
-        glStencilThenCoverStrokePathNV = caps.get(2078);
-        glStencilThenCoverFillPathInstancedNV = caps.get(2079);
-        glStencilThenCoverStrokePathInstancedNV = caps.get(2080);
-        glPathGlyphIndexRangeNV = caps.get(2081);
-        glProgramPathFragmentInputGenNV = caps.get(2082);
-        glGetPathParameterivNV = caps.get(2083);
-        glGetPathParameterfvNV = caps.get(2084);
-        glGetPathCommandsNV = caps.get(2085);
-        glGetPathCoordsNV = caps.get(2086);
-        glGetPathDashArrayNV = caps.get(2087);
-        glGetPathMetricsNV = caps.get(2088);
-        glGetPathMetricRangeNV = caps.get(2089);
-        glGetPathSpacingNV = caps.get(2090);
-        glGetPathColorGenivNV = caps.get(2091);
-        glGetPathColorGenfvNV = caps.get(2092);
-        glGetPathTexGenivNV = caps.get(2093);
-        glGetPathTexGenfvNV = caps.get(2094);
-        glIsPointInFillPathNV = caps.get(2095);
-        glIsPointInStrokePathNV = caps.get(2096);
-        glGetPathLengthNV = caps.get(2097);
-        glPointAlongPathNV = caps.get(2098);
-        glMatrixLoad3x2fNV = caps.get(2099);
-        glMatrixLoad3x3fNV = caps.get(2100);
-        glMatrixLoadTranspose3x3fNV = caps.get(2101);
-        glMatrixMult3x2fNV = caps.get(2102);
-        glMatrixMult3x3fNV = caps.get(2103);
-        glMatrixMultTranspose3x3fNV = caps.get(2104);
-        glGetProgramResourcefvNV = caps.get(2105);
-        glPixelDataRangeNV = caps.get(2106);
-        glFlushPixelDataRangeNV = caps.get(2107);
-        glPointParameteriNV = caps.get(2108);
-        glPointParameterivNV = caps.get(2109);
-        glPrimitiveRestartNV = caps.get(2110);
-        glPrimitiveRestartIndexNV = caps.get(2111);
-        glQueryResourceNV = caps.get(2112);
-        glGenQueryResourceTagNV = caps.get(2113);
-        glDeleteQueryResourceTagNV = caps.get(2114);
-        glQueryResourceTagNV = caps.get(2115);
-        glFramebufferSampleLocationsfvNV = caps.get(2116);
-        glNamedFramebufferSampleLocationsfvNV = caps.get(2117);
-        glResolveDepthValuesNV = caps.get(2118);
-        glScissorExclusiveArrayvNV = caps.get(2119);
-        glScissorExclusiveNV = caps.get(2120);
-        glMakeBufferResidentNV = caps.get(2121);
-        glMakeBufferNonResidentNV = caps.get(2122);
-        glIsBufferResidentNV = caps.get(2123);
-        glMakeNamedBufferResidentNV = caps.get(2124);
-        glMakeNamedBufferNonResidentNV = caps.get(2125);
-        glIsNamedBufferResidentNV = caps.get(2126);
-        glGetBufferParameterui64vNV = caps.get(2127);
-        glGetNamedBufferParameterui64vNV = caps.get(2128);
-        glGetIntegerui64vNV = caps.get(2129);
-        glUniformui64NV = caps.get(2130);
-        glUniformui64vNV = caps.get(2131);
-        glProgramUniformui64NV = caps.get(2132);
-        glProgramUniformui64vNV = caps.get(2133);
-        glBindShadingRateImageNV = caps.get(2134);
-        glShadingRateImagePaletteNV = caps.get(2135);
-        glGetShadingRateImagePaletteNV = caps.get(2136);
-        glShadingRateImageBarrierNV = caps.get(2137);
-        glShadingRateSampleOrderNV = caps.get(2138);
-        glShadingRateSampleOrderCustomNV = caps.get(2139);
-        glGetShadingRateSampleLocationivNV = caps.get(2140);
-        glTextureBarrierNV = caps.get(2141);
-        glTexImage2DMultisampleCoverageNV = caps.get(2142);
-        glTexImage3DMultisampleCoverageNV = caps.get(2143);
-        glTextureImage2DMultisampleNV = caps.get(2144);
-        glTextureImage3DMultisampleNV = caps.get(2145);
-        glTextureImage2DMultisampleCoverageNV = caps.get(2146);
-        glTextureImage3DMultisampleCoverageNV = caps.get(2147);
-        glCreateSemaphoresNV = caps.get(2148);
-        glSemaphoreParameterivNV = caps.get(2149);
-        glGetSemaphoreParameterivNV = caps.get(2150);
-        glBeginTransformFeedbackNV = caps.get(2151);
-        glEndTransformFeedbackNV = caps.get(2152);
-        glTransformFeedbackAttribsNV = caps.get(2153);
-        glBindBufferRangeNV = caps.get(2154);
-        glBindBufferOffsetNV = caps.get(2155);
-        glBindBufferBaseNV = caps.get(2156);
-        glTransformFeedbackVaryingsNV = caps.get(2157);
-        glActiveVaryingNV = caps.get(2158);
-        glGetVaryingLocationNV = caps.get(2159);
-        glGetActiveVaryingNV = caps.get(2160);
-        glGetTransformFeedbackVaryingNV = caps.get(2161);
-        glTransformFeedbackStreamAttribsNV = caps.get(2162);
-        glBindTransformFeedbackNV = caps.get(2163);
-        glDeleteTransformFeedbacksNV = caps.get(2164);
-        glGenTransformFeedbacksNV = caps.get(2165);
-        glIsTransformFeedbackNV = caps.get(2166);
-        glPauseTransformFeedbackNV = caps.get(2167);
-        glResumeTransformFeedbackNV = caps.get(2168);
-        glDrawTransformFeedbackNV = caps.get(2169);
-        glVertexArrayRangeNV = caps.get(2170);
-        glFlushVertexArrayRangeNV = caps.get(2171);
-        glVertexAttribL1i64NV = caps.get(2172);
-        glVertexAttribL2i64NV = caps.get(2173);
-        glVertexAttribL3i64NV = caps.get(2174);
-        glVertexAttribL4i64NV = caps.get(2175);
-        glVertexAttribL1i64vNV = caps.get(2176);
-        glVertexAttribL2i64vNV = caps.get(2177);
-        glVertexAttribL3i64vNV = caps.get(2178);
-        glVertexAttribL4i64vNV = caps.get(2179);
-        glVertexAttribL1ui64NV = caps.get(2180);
-        glVertexAttribL2ui64NV = caps.get(2181);
-        glVertexAttribL3ui64NV = caps.get(2182);
-        glVertexAttribL4ui64NV = caps.get(2183);
-        glVertexAttribL1ui64vNV = caps.get(2184);
-        glVertexAttribL2ui64vNV = caps.get(2185);
-        glVertexAttribL3ui64vNV = caps.get(2186);
-        glVertexAttribL4ui64vNV = caps.get(2187);
-        glGetVertexAttribLi64vNV = caps.get(2188);
-        glGetVertexAttribLui64vNV = caps.get(2189);
-        glVertexAttribLFormatNV = caps.get(2190);
-        glBufferAddressRangeNV = caps.get(2191);
-        glVertexFormatNV = caps.get(2192);
-        glNormalFormatNV = caps.get(2193);
-        glColorFormatNV = caps.get(2194);
-        glIndexFormatNV = caps.get(2195);
-        glTexCoordFormatNV = caps.get(2196);
-        glEdgeFlagFormatNV = caps.get(2197);
-        glSecondaryColorFormatNV = caps.get(2198);
-        glFogCoordFormatNV = caps.get(2199);
-        glVertexAttribFormatNV = caps.get(2200);
-        glVertexAttribIFormatNV = caps.get(2201);
-        glGetIntegerui64i_vNV = caps.get(2202);
-        glViewportSwizzleNV = caps.get(2203);
-        glBeginConditionalRenderNVX = caps.get(2204);
-        glEndConditionalRenderNVX = caps.get(2205);
-        glAsyncCopyImageSubDataNVX = caps.get(2206);
-        glAsyncCopyBufferSubDataNVX = caps.get(2207);
-        glUploadGpuMaskNVX = caps.get(2208);
-        glMulticastViewportArrayvNVX = caps.get(2209);
-        glMulticastScissorArrayvNVX = caps.get(2210);
-        glMulticastViewportPositionWScaleNVX = caps.get(2211);
-        glCreateProgressFenceNVX = caps.get(2212);
-        glSignalSemaphoreui64NVX = caps.get(2213);
-        glWaitSemaphoreui64NVX = caps.get(2214);
-        glClientWaitSemaphoreui64NVX = caps.get(2215);
-        glFramebufferTextureMultiviewOVR = caps.get(2216);
-        glNamedFramebufferTextureMultiviewOVR = caps.get(2217);
+        glFramebufferParameteriMESA = caps.get(1901);
+        glGetFramebufferParameterivMESA = caps.get(1902);
+        glAlphaToCoverageDitherControlNV = caps.get(1903);
+        glMultiDrawArraysIndirectBindlessNV = caps.get(1904);
+        glMultiDrawElementsIndirectBindlessNV = caps.get(1905);
+        glMultiDrawArraysIndirectBindlessCountNV = caps.get(1906);
+        glMultiDrawElementsIndirectBindlessCountNV = caps.get(1907);
+        glGetTextureHandleNV = caps.get(1908);
+        glGetTextureSamplerHandleNV = caps.get(1909);
+        glMakeTextureHandleResidentNV = caps.get(1910);
+        glMakeTextureHandleNonResidentNV = caps.get(1911);
+        glGetImageHandleNV = caps.get(1912);
+        glMakeImageHandleResidentNV = caps.get(1913);
+        glMakeImageHandleNonResidentNV = caps.get(1914);
+        glUniformHandleui64NV = caps.get(1915);
+        glUniformHandleui64vNV = caps.get(1916);
+        glProgramUniformHandleui64NV = caps.get(1917);
+        glProgramUniformHandleui64vNV = caps.get(1918);
+        glIsTextureHandleResidentNV = caps.get(1919);
+        glIsImageHandleResidentNV = caps.get(1920);
+        glBlendParameteriNV = caps.get(1921);
+        glBlendBarrierNV = caps.get(1922);
+        glViewportPositionWScaleNV = caps.get(1923);
+        glCreateStatesNV = caps.get(1924);
+        glDeleteStatesNV = caps.get(1925);
+        glIsStateNV = caps.get(1926);
+        glStateCaptureNV = caps.get(1927);
+        glGetCommandHeaderNV = caps.get(1928);
+        glGetStageIndexNV = caps.get(1929);
+        glDrawCommandsNV = caps.get(1930);
+        glDrawCommandsAddressNV = caps.get(1931);
+        glDrawCommandsStatesNV = caps.get(1932);
+        glDrawCommandsStatesAddressNV = caps.get(1933);
+        glCreateCommandListsNV = caps.get(1934);
+        glDeleteCommandListsNV = caps.get(1935);
+        glIsCommandListNV = caps.get(1936);
+        glListDrawCommandsStatesClientNV = caps.get(1937);
+        glCommandListSegmentsNV = caps.get(1938);
+        glCompileCommandListNV = caps.get(1939);
+        glCallCommandListNV = caps.get(1940);
+        glBeginConditionalRenderNV = caps.get(1941);
+        glEndConditionalRenderNV = caps.get(1942);
+        glSubpixelPrecisionBiasNV = caps.get(1943);
+        glConservativeRasterParameterfNV = caps.get(1944);
+        glConservativeRasterParameteriNV = caps.get(1945);
+        glCopyImageSubDataNV = caps.get(1946);
+        glDepthRangedNV = caps.get(1947);
+        glClearDepthdNV = caps.get(1948);
+        glDepthBoundsdNV = caps.get(1949);
+        glDrawTextureNV = caps.get(1950);
+        glDrawVkImageNV = caps.get(1951);
+        glGetVkProcAddrNV = caps.get(1952);
+        glWaitVkSemaphoreNV = caps.get(1953);
+        glSignalVkSemaphoreNV = caps.get(1954);
+        glSignalVkFenceNV = caps.get(1955);
+        glGetMultisamplefvNV = caps.get(1956);
+        glSampleMaskIndexedNV = caps.get(1957);
+        glTexRenderbufferNV = caps.get(1958);
+        glDeleteFencesNV = caps.get(1959);
+        glGenFencesNV = caps.get(1960);
+        glIsFenceNV = caps.get(1961);
+        glTestFenceNV = caps.get(1962);
+        glGetFenceivNV = caps.get(1963);
+        glFinishFenceNV = caps.get(1964);
+        glSetFenceNV = caps.get(1965);
+        glFragmentCoverageColorNV = caps.get(1966);
+        glCoverageModulationTableNV = caps.get(1967);
+        glGetCoverageModulationTableNV = caps.get(1968);
+        glCoverageModulationNV = caps.get(1969);
+        glRenderbufferStorageMultisampleCoverageNV = caps.get(1970);
+        glRenderGpuMaskNV = caps.get(1971);
+        glMulticastBufferSubDataNV = caps.get(1972);
+        glMulticastCopyBufferSubDataNV = caps.get(1973);
+        glMulticastCopyImageSubDataNV = caps.get(1974);
+        glMulticastBlitFramebufferNV = caps.get(1975);
+        glMulticastFramebufferSampleLocationsfvNV = caps.get(1976);
+        glMulticastBarrierNV = caps.get(1977);
+        glMulticastWaitSyncNV = caps.get(1978);
+        glMulticastGetQueryObjectivNV = caps.get(1979);
+        glMulticastGetQueryObjectuivNV = caps.get(1980);
+        glMulticastGetQueryObjecti64vNV = caps.get(1981);
+        glMulticastGetQueryObjectui64vNV = caps.get(1982);
+        glVertex2hNV = caps.get(1983);
+        glVertex2hvNV = caps.get(1984);
+        glVertex3hNV = caps.get(1985);
+        glVertex3hvNV = caps.get(1986);
+        glVertex4hNV = caps.get(1987);
+        glVertex4hvNV = caps.get(1988);
+        glNormal3hNV = caps.get(1989);
+        glNormal3hvNV = caps.get(1990);
+        glColor3hNV = caps.get(1991);
+        glColor3hvNV = caps.get(1992);
+        glColor4hNV = caps.get(1993);
+        glColor4hvNV = caps.get(1994);
+        glTexCoord1hNV = caps.get(1995);
+        glTexCoord1hvNV = caps.get(1996);
+        glTexCoord2hNV = caps.get(1997);
+        glTexCoord2hvNV = caps.get(1998);
+        glTexCoord3hNV = caps.get(1999);
+        glTexCoord3hvNV = caps.get(2000);
+        glTexCoord4hNV = caps.get(2001);
+        glTexCoord4hvNV = caps.get(2002);
+        glMultiTexCoord1hNV = caps.get(2003);
+        glMultiTexCoord1hvNV = caps.get(2004);
+        glMultiTexCoord2hNV = caps.get(2005);
+        glMultiTexCoord2hvNV = caps.get(2006);
+        glMultiTexCoord3hNV = caps.get(2007);
+        glMultiTexCoord3hvNV = caps.get(2008);
+        glMultiTexCoord4hNV = caps.get(2009);
+        glMultiTexCoord4hvNV = caps.get(2010);
+        glFogCoordhNV = caps.get(2011);
+        glFogCoordhvNV = caps.get(2012);
+        glSecondaryColor3hNV = caps.get(2013);
+        glSecondaryColor3hvNV = caps.get(2014);
+        glVertexWeighthNV = caps.get(2015);
+        glVertexWeighthvNV = caps.get(2016);
+        glVertexAttrib1hNV = caps.get(2017);
+        glVertexAttrib1hvNV = caps.get(2018);
+        glVertexAttrib2hNV = caps.get(2019);
+        glVertexAttrib2hvNV = caps.get(2020);
+        glVertexAttrib3hNV = caps.get(2021);
+        glVertexAttrib3hvNV = caps.get(2022);
+        glVertexAttrib4hNV = caps.get(2023);
+        glVertexAttrib4hvNV = caps.get(2024);
+        glVertexAttribs1hvNV = caps.get(2025);
+        glVertexAttribs2hvNV = caps.get(2026);
+        glVertexAttribs3hvNV = caps.get(2027);
+        glVertexAttribs4hvNV = caps.get(2028);
+        glGetInternalformatSampleivNV = caps.get(2029);
+        glGetMemoryObjectDetachedResourcesuivNV = caps.get(2030);
+        glResetMemoryObjectParameterNV = caps.get(2031);
+        glTexAttachMemoryNV = caps.get(2032);
+        glBufferAttachMemoryNV = caps.get(2033);
+        glTextureAttachMemoryNV = caps.get(2034);
+        glNamedBufferAttachMemoryNV = caps.get(2035);
+        glBufferPageCommitmentMemNV = caps.get(2036);
+        glNamedBufferPageCommitmentMemNV = caps.get(2037);
+        glTexPageCommitmentMemNV = caps.get(2038);
+        glTexturePageCommitmentMemNV = caps.get(2039);
+        glDrawMeshTasksNV = caps.get(2040);
+        glDrawMeshTasksIndirectNV = caps.get(2041);
+        glMultiDrawMeshTasksIndirectNV = caps.get(2042);
+        glMultiDrawMeshTasksIndirectCountNV = caps.get(2043);
+        glPathCommandsNV = caps.get(2044);
+        glPathCoordsNV = caps.get(2045);
+        glPathSubCommandsNV = caps.get(2046);
+        glPathSubCoordsNV = caps.get(2047);
+        glPathStringNV = caps.get(2048);
+        glPathGlyphsNV = caps.get(2049);
+        glPathGlyphRangeNV = caps.get(2050);
+        glPathGlyphIndexArrayNV = caps.get(2051);
+        glPathMemoryGlyphIndexArrayNV = caps.get(2052);
+        glCopyPathNV = caps.get(2053);
+        glWeightPathsNV = caps.get(2054);
+        glInterpolatePathsNV = caps.get(2055);
+        glTransformPathNV = caps.get(2056);
+        glPathParameterivNV = caps.get(2057);
+        glPathParameteriNV = caps.get(2058);
+        glPathParameterfvNV = caps.get(2059);
+        glPathParameterfNV = caps.get(2060);
+        glPathDashArrayNV = caps.get(2061);
+        glGenPathsNV = caps.get(2062);
+        glDeletePathsNV = caps.get(2063);
+        glIsPathNV = caps.get(2064);
+        glPathStencilFuncNV = caps.get(2065);
+        glPathStencilDepthOffsetNV = caps.get(2066);
+        glStencilFillPathNV = caps.get(2067);
+        glStencilStrokePathNV = caps.get(2068);
+        glStencilFillPathInstancedNV = caps.get(2069);
+        glStencilStrokePathInstancedNV = caps.get(2070);
+        glPathCoverDepthFuncNV = caps.get(2071);
+        glPathColorGenNV = caps.get(2072);
+        glPathTexGenNV = caps.get(2073);
+        glPathFogGenNV = caps.get(2074);
+        glCoverFillPathNV = caps.get(2075);
+        glCoverStrokePathNV = caps.get(2076);
+        glCoverFillPathInstancedNV = caps.get(2077);
+        glCoverStrokePathInstancedNV = caps.get(2078);
+        glStencilThenCoverFillPathNV = caps.get(2079);
+        glStencilThenCoverStrokePathNV = caps.get(2080);
+        glStencilThenCoverFillPathInstancedNV = caps.get(2081);
+        glStencilThenCoverStrokePathInstancedNV = caps.get(2082);
+        glPathGlyphIndexRangeNV = caps.get(2083);
+        glProgramPathFragmentInputGenNV = caps.get(2084);
+        glGetPathParameterivNV = caps.get(2085);
+        glGetPathParameterfvNV = caps.get(2086);
+        glGetPathCommandsNV = caps.get(2087);
+        glGetPathCoordsNV = caps.get(2088);
+        glGetPathDashArrayNV = caps.get(2089);
+        glGetPathMetricsNV = caps.get(2090);
+        glGetPathMetricRangeNV = caps.get(2091);
+        glGetPathSpacingNV = caps.get(2092);
+        glGetPathColorGenivNV = caps.get(2093);
+        glGetPathColorGenfvNV = caps.get(2094);
+        glGetPathTexGenivNV = caps.get(2095);
+        glGetPathTexGenfvNV = caps.get(2096);
+        glIsPointInFillPathNV = caps.get(2097);
+        glIsPointInStrokePathNV = caps.get(2098);
+        glGetPathLengthNV = caps.get(2099);
+        glPointAlongPathNV = caps.get(2100);
+        glMatrixLoad3x2fNV = caps.get(2101);
+        glMatrixLoad3x3fNV = caps.get(2102);
+        glMatrixLoadTranspose3x3fNV = caps.get(2103);
+        glMatrixMult3x2fNV = caps.get(2104);
+        glMatrixMult3x3fNV = caps.get(2105);
+        glMatrixMultTranspose3x3fNV = caps.get(2106);
+        glGetProgramResourcefvNV = caps.get(2107);
+        glPixelDataRangeNV = caps.get(2108);
+        glFlushPixelDataRangeNV = caps.get(2109);
+        glPointParameteriNV = caps.get(2110);
+        glPointParameterivNV = caps.get(2111);
+        glPrimitiveRestartNV = caps.get(2112);
+        glPrimitiveRestartIndexNV = caps.get(2113);
+        glQueryResourceNV = caps.get(2114);
+        glGenQueryResourceTagNV = caps.get(2115);
+        glDeleteQueryResourceTagNV = caps.get(2116);
+        glQueryResourceTagNV = caps.get(2117);
+        glFramebufferSampleLocationsfvNV = caps.get(2118);
+        glNamedFramebufferSampleLocationsfvNV = caps.get(2119);
+        glResolveDepthValuesNV = caps.get(2120);
+        glScissorExclusiveArrayvNV = caps.get(2121);
+        glScissorExclusiveNV = caps.get(2122);
+        glMakeBufferResidentNV = caps.get(2123);
+        glMakeBufferNonResidentNV = caps.get(2124);
+        glIsBufferResidentNV = caps.get(2125);
+        glMakeNamedBufferResidentNV = caps.get(2126);
+        glMakeNamedBufferNonResidentNV = caps.get(2127);
+        glIsNamedBufferResidentNV = caps.get(2128);
+        glGetBufferParameterui64vNV = caps.get(2129);
+        glGetNamedBufferParameterui64vNV = caps.get(2130);
+        glGetIntegerui64vNV = caps.get(2131);
+        glUniformui64NV = caps.get(2132);
+        glUniformui64vNV = caps.get(2133);
+        glProgramUniformui64NV = caps.get(2134);
+        glProgramUniformui64vNV = caps.get(2135);
+        glBindShadingRateImageNV = caps.get(2136);
+        glShadingRateImagePaletteNV = caps.get(2137);
+        glGetShadingRateImagePaletteNV = caps.get(2138);
+        glShadingRateImageBarrierNV = caps.get(2139);
+        glShadingRateSampleOrderNV = caps.get(2140);
+        glShadingRateSampleOrderCustomNV = caps.get(2141);
+        glGetShadingRateSampleLocationivNV = caps.get(2142);
+        glTextureBarrierNV = caps.get(2143);
+        glTexImage2DMultisampleCoverageNV = caps.get(2144);
+        glTexImage3DMultisampleCoverageNV = caps.get(2145);
+        glTextureImage2DMultisampleNV = caps.get(2146);
+        glTextureImage3DMultisampleNV = caps.get(2147);
+        glTextureImage2DMultisampleCoverageNV = caps.get(2148);
+        glTextureImage3DMultisampleCoverageNV = caps.get(2149);
+        glCreateSemaphoresNV = caps.get(2150);
+        glSemaphoreParameterivNV = caps.get(2151);
+        glGetSemaphoreParameterivNV = caps.get(2152);
+        glBeginTransformFeedbackNV = caps.get(2153);
+        glEndTransformFeedbackNV = caps.get(2154);
+        glTransformFeedbackAttribsNV = caps.get(2155);
+        glBindBufferRangeNV = caps.get(2156);
+        glBindBufferOffsetNV = caps.get(2157);
+        glBindBufferBaseNV = caps.get(2158);
+        glTransformFeedbackVaryingsNV = caps.get(2159);
+        glActiveVaryingNV = caps.get(2160);
+        glGetVaryingLocationNV = caps.get(2161);
+        glGetActiveVaryingNV = caps.get(2162);
+        glGetTransformFeedbackVaryingNV = caps.get(2163);
+        glTransformFeedbackStreamAttribsNV = caps.get(2164);
+        glBindTransformFeedbackNV = caps.get(2165);
+        glDeleteTransformFeedbacksNV = caps.get(2166);
+        glGenTransformFeedbacksNV = caps.get(2167);
+        glIsTransformFeedbackNV = caps.get(2168);
+        glPauseTransformFeedbackNV = caps.get(2169);
+        glResumeTransformFeedbackNV = caps.get(2170);
+        glDrawTransformFeedbackNV = caps.get(2171);
+        glVertexArrayRangeNV = caps.get(2172);
+        glFlushVertexArrayRangeNV = caps.get(2173);
+        glVertexAttribL1i64NV = caps.get(2174);
+        glVertexAttribL2i64NV = caps.get(2175);
+        glVertexAttribL3i64NV = caps.get(2176);
+        glVertexAttribL4i64NV = caps.get(2177);
+        glVertexAttribL1i64vNV = caps.get(2178);
+        glVertexAttribL2i64vNV = caps.get(2179);
+        glVertexAttribL3i64vNV = caps.get(2180);
+        glVertexAttribL4i64vNV = caps.get(2181);
+        glVertexAttribL1ui64NV = caps.get(2182);
+        glVertexAttribL2ui64NV = caps.get(2183);
+        glVertexAttribL3ui64NV = caps.get(2184);
+        glVertexAttribL4ui64NV = caps.get(2185);
+        glVertexAttribL1ui64vNV = caps.get(2186);
+        glVertexAttribL2ui64vNV = caps.get(2187);
+        glVertexAttribL3ui64vNV = caps.get(2188);
+        glVertexAttribL4ui64vNV = caps.get(2189);
+        glGetVertexAttribLi64vNV = caps.get(2190);
+        glGetVertexAttribLui64vNV = caps.get(2191);
+        glVertexAttribLFormatNV = caps.get(2192);
+        glBufferAddressRangeNV = caps.get(2193);
+        glVertexFormatNV = caps.get(2194);
+        glNormalFormatNV = caps.get(2195);
+        glColorFormatNV = caps.get(2196);
+        glIndexFormatNV = caps.get(2197);
+        glTexCoordFormatNV = caps.get(2198);
+        glEdgeFlagFormatNV = caps.get(2199);
+        glSecondaryColorFormatNV = caps.get(2200);
+        glFogCoordFormatNV = caps.get(2201);
+        glVertexAttribFormatNV = caps.get(2202);
+        glVertexAttribIFormatNV = caps.get(2203);
+        glGetIntegerui64i_vNV = caps.get(2204);
+        glViewportSwizzleNV = caps.get(2205);
+        glBeginConditionalRenderNVX = caps.get(2206);
+        glEndConditionalRenderNVX = caps.get(2207);
+        glAsyncCopyImageSubDataNVX = caps.get(2208);
+        glAsyncCopyBufferSubDataNVX = caps.get(2209);
+        glUploadGpuMaskNVX = caps.get(2210);
+        glMulticastViewportArrayvNVX = caps.get(2211);
+        glMulticastScissorArrayvNVX = caps.get(2212);
+        glMulticastViewportPositionWScaleNVX = caps.get(2213);
+        glCreateProgressFenceNVX = caps.get(2214);
+        glSignalSemaphoreui64NVX = caps.get(2215);
+        glWaitSemaphoreui64NVX = caps.get(2216);
+        glClientWaitSemaphoreui64NVX = caps.get(2217);
+        glFramebufferTextureMultiviewOVR = caps.get(2218);
+        glNamedFramebufferTextureMultiviewOVR = caps.get(2219);
 
         addresses = ThreadLocalUtil.setupAddressBuffer(caps);
     }
@@ -9983,13 +10026,25 @@ public final class GLCapabilities {
         )) || reportMissing("GL", "GL_KHR_robustness");
     }
 
+    private static boolean check_MESA_framebuffer_flip_y(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("GL_MESA_framebuffer_flip_y")) {
+            return false;
+        }
+
+        return (checkFunctions(provider, caps, new int[] {
+            1901, 1902
+        },
+            "glFramebufferParameteriMESA", "glGetFramebufferParameterivMESA"
+        )) || reportMissing("GL", "GL_MESA_framebuffer_flip_y");
+    }
+
     private static boolean check_NV_alpha_to_coverage_dither_control(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
         if (!ext.contains("GL_NV_alpha_to_coverage_dither_control")) {
             return false;
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1901
+            1903
         },
             "glAlphaToCoverageDitherControlNV"
         )) || reportMissing("GL", "GL_NV_alpha_to_coverage_dither_control");
@@ -10001,7 +10056,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1902, 1903
+            1904, 1905
         },
             "glMultiDrawArraysIndirectBindlessNV", "glMultiDrawElementsIndirectBindlessNV"
         )) || reportMissing("GL", "GL_NV_bindless_multi_draw_indirect");
@@ -10013,7 +10068,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1904, 1905
+            1906, 1907
         },
             "glMultiDrawArraysIndirectBindlessCountNV", "glMultiDrawElementsIndirectBindlessCountNV"
         )) || reportMissing("GL", "GL_NV_bindless_multi_draw_indirect_count");
@@ -10025,7 +10080,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1906, 1907, 1908, 1909, 1910, 1911, 1912, 1913, 1914, 1915, 1916, 1917, 1918
+            1908, 1909, 1910, 1911, 1912, 1913, 1914, 1915, 1916, 1917, 1918, 1919, 1920
         },
             "glGetTextureHandleNV", "glGetTextureSamplerHandleNV", "glMakeTextureHandleResidentNV", "glMakeTextureHandleNonResidentNV", "glGetImageHandleNV", 
             "glMakeImageHandleResidentNV", "glMakeImageHandleNonResidentNV", "glUniformHandleui64NV", "glUniformHandleui64vNV", "glProgramUniformHandleui64NV", 
@@ -10039,7 +10094,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1919, 1920
+            1921, 1922
         },
             "glBlendParameteriNV", "glBlendBarrierNV"
         )) || reportMissing("GL", "GL_NV_blend_equation_advanced");
@@ -10051,7 +10106,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1921
+            1923
         },
             "glViewportPositionWScaleNV"
         )) || reportMissing("GL", "GL_NV_clip_space_w_scaling");
@@ -10063,7 +10118,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1922, 1923, 1924, 1925, 1926, 1927, 1928, 1929, 1930, 1931, 1932, 1933, 1934, 1935, 1936, 1937, 1938
+            1924, 1925, 1926, 1927, 1928, 1929, 1930, 1931, 1932, 1933, 1934, 1935, 1936, 1937, 1938, 1939, 1940
         },
             "glCreateStatesNV", "glDeleteStatesNV", "glIsStateNV", "glStateCaptureNV", "glGetCommandHeaderNV", "glGetStageIndexNV", "glDrawCommandsNV", 
             "glDrawCommandsAddressNV", "glDrawCommandsStatesNV", "glDrawCommandsStatesAddressNV", "glCreateCommandListsNV", "glDeleteCommandListsNV", 
@@ -10077,7 +10132,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1939, 1940
+            1941, 1942
         },
             "glBeginConditionalRenderNV", "glEndConditionalRenderNV"
         )) || reportMissing("GL", "GL_NV_conditional_render");
@@ -10089,7 +10144,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1941
+            1943
         },
             "glSubpixelPrecisionBiasNV"
         )) || reportMissing("GL", "GL_NV_conservative_raster");
@@ -10101,7 +10156,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1942
+            1944
         },
             "glConservativeRasterParameterfNV"
         )) || reportMissing("GL", "GL_NV_conservative_raster_dilate");
@@ -10113,7 +10168,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1943
+            1945
         },
             "glConservativeRasterParameteriNV"
         )) || reportMissing("GL", "GL_NV_conservative_raster_pre_snap_triangles");
@@ -10125,7 +10180,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1944
+            1946
         },
             "glCopyImageSubDataNV"
         )) || reportMissing("GL", "GL_NV_copy_image");
@@ -10137,7 +10192,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1945, 1946, 1947
+            1947, 1948, 1949
         },
             "glDepthRangedNV", "glClearDepthdNV", "glDepthBoundsdNV"
         )) || reportMissing("GL", "GL_NV_depth_buffer_float");
@@ -10149,7 +10204,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1948
+            1950
         },
             "glDrawTextureNV"
         )) || reportMissing("GL", "GL_NV_draw_texture");
@@ -10161,7 +10216,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1949, 1950, 1951, 1952, 1953
+            1951, 1952, 1953, 1954, 1955
         },
             "glDrawVkImageNV", "glGetVkProcAddrNV", "glWaitVkSemaphoreNV", "glSignalVkSemaphoreNV", "glSignalVkFenceNV"
         )) || reportMissing("GL", "GL_NV_draw_vulkan_image");
@@ -10173,7 +10228,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1954, 1955, 1956
+            1956, 1957, 1958
         },
             "glGetMultisamplefvNV", "glSampleMaskIndexedNV", "glTexRenderbufferNV"
         )) || reportMissing("GL", "GL_NV_explicit_multisample");
@@ -10185,7 +10240,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1957, 1958, 1959, 1960, 1961, 1962, 1963
+            1959, 1960, 1961, 1962, 1963, 1964, 1965
         },
             "glDeleteFencesNV", "glGenFencesNV", "glIsFenceNV", "glTestFenceNV", "glGetFenceivNV", "glFinishFenceNV", "glSetFenceNV"
         )) || reportMissing("GL", "GL_NV_fence");
@@ -10197,7 +10252,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1964
+            1966
         },
             "glFragmentCoverageColorNV"
         )) || reportMissing("GL", "GL_NV_fragment_coverage_to_color");
@@ -10209,7 +10264,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1817, 1965, 1966, 1967
+            1817, 1967, 1968, 1969
         },
             "glRasterSamplesEXT", "glCoverageModulationTableNV", "glGetCoverageModulationTableNV", "glCoverageModulationNV"
         )) || reportMissing("GL", "GL_NV_framebuffer_mixed_samples");
@@ -10221,7 +10276,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1968
+            1970
         },
             "glRenderbufferStorageMultisampleCoverageNV"
         )) || reportMissing("GL", "GL_NV_framebuffer_multisample_coverage");
@@ -10233,7 +10288,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980
+            1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982
         },
             "glRenderGpuMaskNV", "glMulticastBufferSubDataNV", "glMulticastCopyBufferSubDataNV", "glMulticastCopyImageSubDataNV", 
             "glMulticastBlitFramebufferNV", "glMulticastFramebufferSampleLocationsfvNV", "glMulticastBarrierNV", "glMulticastWaitSyncNV", 
@@ -10273,9 +10328,9 @@ public final class GLCapabilities {
         int flag6 = ext.contains("GL_NV_vertex_program") ? 0 : Integer.MIN_VALUE;
 
         return (checkFunctions(provider, caps, new int[] {
-            1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 
-            2005, 2006, 2007, 2008, flag0 + 2009, flag0 + 2010, flag2 + 2011, flag2 + 2012, flag4 + 2013, flag4 + 2014, flag6 + 2015, flag6 + 2016, 
-            flag6 + 2017, flag6 + 2018, flag6 + 2019, flag6 + 2020, flag6 + 2021, flag6 + 2022, flag6 + 2023, flag6 + 2024, flag6 + 2025, flag6 + 2026
+            1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 
+            2007, 2008, 2009, 2010, flag0 + 2011, flag0 + 2012, flag2 + 2013, flag2 + 2014, flag4 + 2015, flag4 + 2016, flag6 + 2017, flag6 + 2018, 
+            flag6 + 2019, flag6 + 2020, flag6 + 2021, flag6 + 2022, flag6 + 2023, flag6 + 2024, flag6 + 2025, flag6 + 2026, flag6 + 2027, flag6 + 2028
         },
             "glVertex2hNV", "glVertex2hvNV", "glVertex3hNV", "glVertex3hvNV", "glVertex4hNV", "glVertex4hvNV", "glNormal3hNV", "glNormal3hvNV", "glColor3hNV", 
             "glColor3hvNV", "glColor4hNV", "glColor4hvNV", "glTexCoord1hNV", "glTexCoord1hvNV", "glTexCoord2hNV", "glTexCoord2hvNV", "glTexCoord3hNV", 
@@ -10293,7 +10348,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2027
+            2029
         },
             "glGetInternalformatSampleivNV"
         )) || reportMissing("GL", "GL_NV_internalformat_sample_query");
@@ -10307,7 +10362,7 @@ public final class GLCapabilities {
         int flag0 = hasDSA(ext) ? 0 : Integer.MIN_VALUE;
 
         return (checkFunctions(provider, caps, new int[] {
-            2028, 2029, 2030, 2031, flag0 + 2032, flag0 + 2033
+            2030, 2031, 2032, 2033, flag0 + 2034, flag0 + 2035
         },
             "glGetMemoryObjectDetachedResourcesuivNV", "glResetMemoryObjectParameterNV", "glTexAttachMemoryNV", "glBufferAttachMemoryNV", 
             "glTextureAttachMemoryNV", "glNamedBufferAttachMemoryNV"
@@ -10320,7 +10375,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2034, 2035, 2036, 2037
+            2036, 2037, 2038, 2039
         },
             "glBufferPageCommitmentMemNV", "glNamedBufferPageCommitmentMemNV", "glTexPageCommitmentMemNV", "glTexturePageCommitmentMemNV"
         )) || reportMissing("GL", "GL_NV_memory_object_sparse");
@@ -10332,7 +10387,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2038, 2039, 2040, 2041
+            2040, 2041, 2042, 2043
         },
             "glDrawMeshTasksNV", "glDrawMeshTasksIndirectNV", "glMultiDrawMeshTasksIndirectNV", "glMultiDrawMeshTasksIndirectCountNV"
         )) || reportMissing("GL", "GL_NV_mesh_shader");
@@ -10344,8 +10399,8 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2042, 2043, 2044, 2045, 2046, 2047, 2048, 2051, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060, 2061, 2062, 2063, 2064, 2065, 2066, 2067, 2068, 
-            2069, 2073, 2074, 2075, 2076, 2083, 2084, 2085, 2086, 2087, 2088, 2089, 2090, 2095, 2096, 2097, 2098
+            2044, 2045, 2046, 2047, 2048, 2049, 2050, 2053, 2055, 2056, 2057, 2058, 2059, 2060, 2061, 2062, 2063, 2064, 2065, 2066, 2067, 2068, 2069, 2070, 
+            2071, 2075, 2076, 2077, 2078, 2085, 2086, 2087, 2088, 2089, 2090, 2091, 2092, 2097, 2098, 2099, 2100
         },
             "glPathCommandsNV", "glPathCoordsNV", "glPathSubCommandsNV", "glPathSubCoordsNV", "glPathStringNV", "glPathGlyphsNV", "glPathGlyphRangeNV", 
             "glCopyPathNV", "glInterpolatePathsNV", "glTransformPathNV", "glPathParameterivNV", "glPathParameteriNV", "glPathParameterfvNV", 
@@ -10363,7 +10418,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2106, 2107
+            2108, 2109
         },
             "glPixelDataRangeNV", "glFlushPixelDataRangeNV"
         )) || reportMissing("GL", "GL_NV_pixel_data_range");
@@ -10375,7 +10430,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2108, 2109
+            2110, 2111
         },
             "glPointParameteriNV", "glPointParameterivNV"
         )) || reportMissing("GL", "GL_NV_point_sprite");
@@ -10387,7 +10442,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2110, 2111
+            2112, 2113
         },
             "glPrimitiveRestartNV", "glPrimitiveRestartIndexNV"
         )) || reportMissing("GL", "GL_NV_primitive_restart");
@@ -10399,7 +10454,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2112
+            2114
         },
             "glQueryResourceNV"
         )) || reportMissing("GL", "GL_NV_query_resource");
@@ -10411,7 +10466,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2113, 2114, 2115
+            2115, 2116, 2117
         },
             "glGenQueryResourceTagNV", "glDeleteQueryResourceTagNV", "glQueryResourceTagNV"
         )) || reportMissing("GL", "GL_NV_query_resource_tag");
@@ -10423,7 +10478,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2116, 2117, 2118
+            2118, 2119, 2120
         },
             "glFramebufferSampleLocationsfvNV", "glNamedFramebufferSampleLocationsfvNV", "glResolveDepthValuesNV"
         )) || reportMissing("GL", "GL_NV_sample_locations");
@@ -10435,7 +10490,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2119, 2120
+            2121, 2122
         },
             "glScissorExclusiveArrayvNV", "glScissorExclusiveNV"
         )) || reportMissing("GL", "GL_NV_scissor_exclusive");
@@ -10447,7 +10502,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2121, 2122, 2123, 2124, 2125, 2126, 2127, 2128, 2129, 2130, 2131, 1075, 2132, 2133
+            2123, 2124, 2125, 2126, 2127, 2128, 2129, 2130, 2131, 2132, 2133, 1075, 2134, 2135
         },
             "glMakeBufferResidentNV", "glMakeBufferNonResidentNV", "glIsBufferResidentNV", "glMakeNamedBufferResidentNV", "glMakeNamedBufferNonResidentNV", 
             "glIsNamedBufferResidentNV", "glGetBufferParameterui64vNV", "glGetNamedBufferParameterui64vNV", "glGetIntegerui64vNV", "glUniformui64NV", 
@@ -10461,7 +10516,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2134, 2135, 2136, 2137, 2138, 2139, 2140
+            2136, 2137, 2138, 2139, 2140, 2141, 2142
         },
             "glBindShadingRateImageNV", "glShadingRateImagePaletteNV", "glGetShadingRateImagePaletteNV", "glShadingRateImageBarrierNV", 
             "glShadingRateSampleOrderNV", "glShadingRateSampleOrderCustomNV", "glGetShadingRateSampleLocationivNV"
@@ -10474,7 +10529,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2141
+            2143
         },
             "glTextureBarrierNV"
         )) || reportMissing("GL", "GL_NV_texture_barrier");
@@ -10486,7 +10541,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2142, 2143, 2144, 2145, 2146, 2147
+            2144, 2145, 2146, 2147, 2148, 2149
         },
             "glTexImage2DMultisampleCoverageNV", "glTexImage3DMultisampleCoverageNV", "glTextureImage2DMultisampleNV", "glTextureImage3DMultisampleNV", 
             "glTextureImage2DMultisampleCoverageNV", "glTextureImage3DMultisampleCoverageNV"
@@ -10499,7 +10554,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2148, 2149, 2150
+            2150, 2151, 2152
         },
             "glCreateSemaphoresNV", "glSemaphoreParameterivNV", "glGetSemaphoreParameterivNV"
         )) || reportMissing("GL", "GL_NV_timeline_semaphore");
@@ -10511,7 +10566,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2151, 2152, 2153, 2154, 2155, 2156, 2157, 2158, 2159, 2160, 2161, 2162
+            2153, 2154, 2155, 2156, 2157, 2158, 2159, 2160, 2161, 2162, 2163, 2164
         },
             "glBeginTransformFeedbackNV", "glEndTransformFeedbackNV", "glTransformFeedbackAttribsNV", "glBindBufferRangeNV", "glBindBufferOffsetNV", 
             "glBindBufferBaseNV", "glTransformFeedbackVaryingsNV", "glActiveVaryingNV", "glGetVaryingLocationNV", "glGetActiveVaryingNV", 
@@ -10525,7 +10580,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2163, 2164, 2165, 2166, 2167, 2168, 2169
+            2165, 2166, 2167, 2168, 2169, 2170, 2171
         },
             "glBindTransformFeedbackNV", "glDeleteTransformFeedbacksNV", "glGenTransformFeedbacksNV", "glIsTransformFeedbackNV", "glPauseTransformFeedbackNV", 
             "glResumeTransformFeedbackNV", "glDrawTransformFeedbackNV"
@@ -10538,7 +10593,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2170, 2171
+            2172, 2173
         },
             "glVertexArrayRangeNV", "glFlushVertexArrayRangeNV"
         )) || reportMissing("GL", "GL_NV_vertex_array_range");
@@ -10552,7 +10607,7 @@ public final class GLCapabilities {
         int flag0 = ext.contains("GL_NV_vertex_buffer_unified_memory") ? 0 : Integer.MIN_VALUE;
 
         return (checkFunctions(provider, caps, new int[] {
-            2172, 2173, 2174, 2175, 2176, 2177, 2178, 2179, 2180, 2181, 2182, 2183, 2184, 2185, 2186, 2187, 2188, 2189, flag0 + 2190
+            2174, 2175, 2176, 2177, 2178, 2179, 2180, 2181, 2182, 2183, 2184, 2185, 2186, 2187, 2188, 2189, 2190, 2191, flag0 + 2192
         },
             "glVertexAttribL1i64NV", "glVertexAttribL2i64NV", "glVertexAttribL3i64NV", "glVertexAttribL4i64NV", "glVertexAttribL1i64vNV", 
             "glVertexAttribL2i64vNV", "glVertexAttribL3i64vNV", "glVertexAttribL4i64vNV", "glVertexAttribL1ui64NV", "glVertexAttribL2ui64NV", 
@@ -10567,7 +10622,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2191, 2192, 2193, 2194, 2195, 2196, 2197, 2198, 2199, 2200, 2201, 2202
+            2193, 2194, 2195, 2196, 2197, 2198, 2199, 2200, 2201, 2202, 2203, 2204
         },
             "glBufferAddressRangeNV", "glVertexFormatNV", "glNormalFormatNV", "glColorFormatNV", "glIndexFormatNV", "glTexCoordFormatNV", "glEdgeFlagFormatNV", 
             "glSecondaryColorFormatNV", "glFogCoordFormatNV", "glVertexAttribFormatNV", "glVertexAttribIFormatNV", "glGetIntegerui64i_vNV"
@@ -10580,7 +10635,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2203
+            2205
         },
             "glViewportSwizzleNV"
         )) || reportMissing("GL", "GL_NV_viewport_swizzle");
@@ -10592,7 +10647,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2204, 2205
+            2206, 2207
         },
             "glBeginConditionalRenderNVX", "glEndConditionalRenderNVX"
         )) || reportMissing("GL", "GL_NVX_conditional_render");
@@ -10604,7 +10659,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2206, 2207, 2208, 2209, 2210, 2211
+            2208, 2209, 2210, 2211, 2212, 2213
         },
             "glAsyncCopyImageSubDataNVX", "glAsyncCopyBufferSubDataNVX", "glUploadGpuMaskNVX", "glMulticastViewportArrayvNVX", "glMulticastScissorArrayvNVX", 
             "glMulticastViewportPositionWScaleNVX"
@@ -10617,7 +10672,7 @@ public final class GLCapabilities {
         }
 
         return (checkFunctions(provider, caps, new int[] {
-            2212, 2213, 2214, 2215
+            2214, 2215, 2216, 2217
         },
             "glCreateProgressFenceNVX", "glSignalSemaphoreui64NVX", "glWaitSemaphoreui64NVX", "glClientWaitSemaphoreui64NVX"
         )) || reportMissing("GL", "GL_NVX_progress_fence");
@@ -10631,7 +10686,7 @@ public final class GLCapabilities {
         int flag0 = hasDSA(ext) ? 0 : Integer.MIN_VALUE;
 
         return (checkFunctions(provider, caps, new int[] {
-            2216, flag0 + 2217
+            2218, flag0 + 2219
         },
             "glFramebufferTextureMultiviewOVR", "glNamedFramebufferTextureMultiviewOVR"
         )) || reportMissing("GL", "GL_OVR_multiview");
