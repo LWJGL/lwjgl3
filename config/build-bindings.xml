@@ -63,8 +63,8 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.tinyexr" value="true"/>
     <property name="binding.tinyfd" value="true"/>
     <condition property="binding.tootle" value="false" else="true"><isset property="build.arch.arm"/></condition>
-    <property name="binding.vma" value="true"/>
     <property name="binding.vulkan" value="true"/>
+    <condition property="binding.vma" value="true" else="false"><istrue value="${binding.vulkan}"/></condition>
     <property name="binding.xxhash" value="true"/>
     <property name="binding.yoga" value="true"/>
     <property name="binding.zstd" value="true"/>

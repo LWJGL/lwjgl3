@@ -231,6 +231,7 @@
             <src path="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/VKBase.kt" if:set="vulkan_types"/>
             <src path="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/VKTypes.kt" if:set="vulkan_types"/>
             <src path="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/ExtensionTypes.kt" if:set="vulkan_types"/>
+            <src path="${module.lwjgl}/vulkan/src/templates/kotlin/vulkan/VkVideoTypes.kt" if:set="vulkan_types"/>
         </kotlinc>
         <touch file="${bin.templates}/touch.txt" unless:set="templates-uptodate"/>
     </target>
