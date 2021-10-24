@@ -614,6 +614,7 @@ public class GLFWDemo {
                 offset += cmd.elem_count() * 2;
             }
             nk_clear(ctx);
+            nk_buffer_clear(cmds);
         }
 
         // default OpenGL state
