@@ -202,13 +202,6 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         </javac>
     </presetdef>
 
-    <condition property="driftfx11">
-        <and>
-            <istrue value="${binding.driftfx}"/>
-            <isset property="jdk11"/>
-        </and>
-    </condition>
-
     <macrodef name="quiet">
         <element name="body" implicit="yes"/>
         <sequential>

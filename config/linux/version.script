@@ -2,7 +2,6 @@ LWJGL {
     # Expose symbols required by the JVM
     global:
         *org_lwjgl_*;
-        *org_eclipse_fx_drift_*;
         JNI_On*;
 
     # Hide everything else

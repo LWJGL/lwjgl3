@@ -22,7 +22,6 @@ This script is included in /config/build-definitions.xml.
         </and>
     </condition>
     <property name="binding.cuda" value="true"/>
-    <property name="binding.driftfx" value="true"/>
     <property name="binding.egl" value="true"/>
     <property name="binding.glfw" value="true"/>
     <property name="binding.jawt" value="true"/>
@@ -96,7 +95,6 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.assimp}"><local name="module"/><property name="module" value="assimp"/><body/></sequential>
                 <sequential if:true="${binding.bgfx}"><local name="module"/><property name="module" value="bgfx"/><body/></sequential>
                 <sequential if:true="${binding.cuda}"><local name="module"/><property name="module" value="cuda"/><body/></sequential>
-                <sequential if:true="${binding.driftfx}"><local name="module"/><property name="module" value="driftfx"/><body/></sequential>
                 <sequential if:true="${binding.egl}"><local name="module"/><property name="module" value="egl"/><body/></sequential>
                 <sequential if:true="${binding.glfw}"><local name="module"/><property name="module" value="glfw"/><body/></sequential>
                 <sequential if:true="${binding.jawt}"><local name="module"/><property name="module" value="jawt"/><body/></sequential>

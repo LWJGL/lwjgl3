@@ -176,38 +176,6 @@ EXPORTS
             </link>
         </build>
 
-        <!-- DriftFX -->
-        <build module="driftfx" if:true="${binding.driftfx}">
-            <beforeCompile>
-                <compile flags="/DGLEW_STATIC /DBUILDING_DLL">
-                    <arg value="/I${src.main}\include"/>
-                    <arg value="/I${src.main}\src"/>
-                    <arg value="/I${src.main}\lib\glew\include"/>
-                    <arg value="/I${src.main}\lib\utils\include"/>
-                    <fileset dir="." includes="${src.main}/lib/glew/src/*"/>
-                    <fileset dir="." includes="${src.main}/lib/utils/src/*"/>
-                    <fileset dir=".">
-                        <include name="${src.main}/src/**/*.cpp"/>
-                        <exclude name="${src.main}/src/gl/cgl/*"/>
-                        <exclude name="${src.main}/src/gl/glx/*"/>
-                        <exclude name="${src.main}/src/prism/es2/**"/>
-                    </fileset>
-                </compile>
-            </beforeCompile>
-            <compileargs>
-                <arg value="/I${src.main}\include"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated}/*"/>
-            </source>
-            <linkargs>
-                <arg value="D3d9.lib"/>
-                <arg value="Gdi32.lib"/>
-                <arg value="Opengl32.lib"/>
-                <arg value="User32.lib"/>
-            </linkargs>
-        </build>
-
         <!-- LIBDIVIDE -->
         <build_simple module="libdivide"/>
 

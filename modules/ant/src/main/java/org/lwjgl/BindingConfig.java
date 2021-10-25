@@ -81,10 +81,7 @@ public class BindingConfig extends Task {
         LWJGL.setProperty("module.classpath", join(File.pathSeparator, classes));
         LWJGL.setProperty("module.templatepath", join(File.pathSeparator, templates));
         LWJGL.setProperty("module.sourcepath", join(File.pathSeparator, sources));
-        LWJGL.setProperty("module.javadocsourcepath", sources
-            .stream()
-            .filter(it -> !it.contains("driftfx/src/main/java"))
-            .collect(Collectors.joining(File.pathSeparator)));
+        LWJGL.setProperty("module.javadocsourcepath", String.join(File.pathSeparator, sources));
     }
 
 }
