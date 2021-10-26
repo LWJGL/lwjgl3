@@ -396,7 +396,6 @@
             </classpath>
 
             <jvmarg line="${generator.bindings}"/>
-            <jvmarg line="-Dfile.encoding=UTF8 -Dline.separator=&#10;"/>
 
             <arg value="${module.lwjgl}"/>
         </java>
