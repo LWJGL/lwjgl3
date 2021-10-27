@@ -98,13 +98,13 @@ public class OVRTextureSwapChainDesc extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** must be:<br><table><tr><td>{@link OVR#ovrTexture_2D Texture_2D}</td></tr></table> */
+    /** one of:<br><table><tr><td>{@link OVR#ovrTexture_2D Texture_2D}</td><td>{@link OVR#ovrTexture_Cube Texture_Cube}</td></tr></table> */
     @NativeType("ovrTextureType")
     public int Type() { return nType(address()); }
     /** one of:<br><table><tr><td>{@link OVR#OVR_FORMAT_UNKNOWN}</td><td>{@link OVR#OVR_FORMAT_B5G6R5_UNORM}</td><td>{@link OVR#OVR_FORMAT_B5G5R5A1_UNORM}</td></tr><tr><td>{@link OVR#OVR_FORMAT_B4G4R4A4_UNORM}</td><td>{@link OVR#OVR_FORMAT_R8G8B8A8_UNORM}</td><td>{@link OVR#OVR_FORMAT_R8G8B8A8_UNORM_SRGB}</td></tr><tr><td>{@link OVR#OVR_FORMAT_B8G8R8A8_UNORM}</td><td>{@link OVR#OVR_FORMAT_B8G8R8_UNORM}</td><td>{@link OVR#OVR_FORMAT_B8G8R8A8_UNORM_SRGB}</td></tr><tr><td>{@link OVR#OVR_FORMAT_B8G8R8X8_UNORM}</td><td>{@link OVR#OVR_FORMAT_B8G8R8X8_UNORM_SRGB}</td><td>{@link OVR#OVR_FORMAT_R16G16B16A16_FLOAT}</td></tr><tr><td>{@link OVR#OVR_FORMAT_R11G11B10_FLOAT}</td><td>{@link OVR#OVR_FORMAT_D16_UNORM}</td><td>{@link OVR#OVR_FORMAT_D24_UNORM_S8_UINT}</td></tr><tr><td>{@link OVR#OVR_FORMAT_D32_FLOAT}</td><td>{@link OVR#OVR_FORMAT_D32_FLOAT_S8X24_UINT}</td><td>{@link OVR#OVR_FORMAT_BC1_UNORM}</td></tr><tr><td>{@link OVR#OVR_FORMAT_BC1_UNORM_SRGB}</td><td>{@link OVR#OVR_FORMAT_BC2_UNORM}</td><td>{@link OVR#OVR_FORMAT_BC2_UNORM_SRGB}</td></tr><tr><td>{@link OVR#OVR_FORMAT_BC3_UNORM}</td><td>{@link OVR#OVR_FORMAT_BC3_UNORM_SRGB}</td><td>{@link OVR#OVR_FORMAT_BC6H_UF16}</td></tr><tr><td>{@link OVR#OVR_FORMAT_BC6H_SF16}</td><td>{@link OVR#OVR_FORMAT_BC7_UNORM}</td><td>{@link OVR#OVR_FORMAT_BC7_UNORM_SRGB}</td></tr></table> */
     @NativeType("ovrTextureFormat")
     public int Format() { return nFormat(address()); }
-    /** must be 6 for {@link OVR#ovrTexture_Cube Texture_Cube}, 1 for other types */
+    /** must be 6 for {@link OVR#ovrTexture_Cube Texture_Cube}, size of texture array otherwise */
     public int ArraySize() { return nArraySize(address()); }
     /** @return the value of the {@code Width} field. */
     public int Width() { return nWidth(address()); }

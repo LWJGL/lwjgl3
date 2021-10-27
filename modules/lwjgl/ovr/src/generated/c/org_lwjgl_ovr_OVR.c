@@ -44,6 +44,19 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_ovr_OVR_novr_1IdentifyClient(JNIEnv *__env
     return (jint)ovr_IdentifyClient(identity);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_ovr_OVR_novr_1GetHmdColorDesc(JNIEnv *__env, jclass clazz, jlong sessionAddress, jlong __result) {
+    ovrSession session = (ovrSession)(intptr_t)sessionAddress;
+    UNUSED_PARAMS(__env, clazz)
+    *((ovrHmdColorDesc*)(intptr_t)__result) = ovr_GetHmdColorDesc(session);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_ovr_OVR_novr_1SetClientColorDesc(JNIEnv *__env, jclass clazz, jlong sessionAddress, jlong colorDescAddress) {
+    ovrSession session = (ovrSession)(intptr_t)sessionAddress;
+    ovrHmdColorDesc const *colorDesc = (ovrHmdColorDesc const *)(intptr_t)colorDescAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)ovr_SetClientColorDesc(session, colorDesc);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_ovr_OVR_novr_1GetHmdDesc(JNIEnv *__env, jclass clazz, jlong sessionAddress, jlong __result) {
     ovrSession session = (ovrSession)(intptr_t)sessionAddress;
     UNUSED_PARAMS(__env, clazz)

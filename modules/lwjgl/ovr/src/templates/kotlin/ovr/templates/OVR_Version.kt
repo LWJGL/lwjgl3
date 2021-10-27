@@ -14,9 +14,8 @@ val OVR_Version = "OVRVersion".nativeClass(Module.OVR, prefix = "OVR") {
 
         "PRODUCT_VERSION".."1",
         "MAJOR_VERSION".."1",
-        "MINOR_VERSION".."43",
-        "PATCH_VERSION".."0",
-        "BUILD_NUMBER".."0"
+        "MINOR_VERSION".."64",
+        "PATCH_VERSION".."0"
     )
 
     IntConstant(
@@ -41,14 +40,8 @@ val OVR_Version = "OVRVersion".nativeClass(Module.OVR, prefix = "OVR") {
     )
 
     StringConstant(
-        "\"Major.Minor.Patch.Build\"",
+        "\"Major.Minor.Patch\"",
 
         "VERSION_STRING" expr "Integer.toString(OVR_MAJOR_VERSION) + '.' + OVR_MINOR_VERSION + '.' + OVR_PATCH_VERSION"
-    )
-
-    StringConstant(
-        "\"Major.Minor.Patch.Build\"",
-
-        "DETAILED_VERSION_STRING" expr "Integer.toString(OVR_MAJOR_VERSION) + '.' + OVR_MINOR_VERSION + '.' + OVR_PATCH_VERSION + '.' + OVR_BUILD_NUMBER"
     )
 }

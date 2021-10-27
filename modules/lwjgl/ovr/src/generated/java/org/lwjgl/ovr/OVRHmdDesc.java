@@ -128,7 +128,7 @@ public class OVRHmdDesc extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** this HMD's type. One of:<br><table><tr><td>{@link OVR#ovrHmd_None Hmd_None}</td><td>{@link OVR#ovrHmd_DK1 Hmd_DK1}</td><td>{@link OVR#ovrHmd_DKHD Hmd_DKHD}</td><td>{@link OVR#ovrHmd_DK2 Hmd_DK2}</td><td>{@link OVR#ovrHmd_CB Hmd_CB}</td><td>{@link OVR#ovrHmd_Other Hmd_Other}</td><td>{@link OVR#ovrHmd_E3_2015 Hmd_E3_2015}</td><td>{@link OVR#ovrHmd_ES06 Hmd_ES06}</td><td>{@link OVR#ovrHmd_ES09 Hmd_ES09}</td><td>{@link OVR#ovrHmd_ES11 Hmd_ES11}</td></tr><tr><td>{@link OVR#ovrHmd_CV1 Hmd_CV1}</td><td>{@link OVR#ovrHmd_RiftS Hmd_RiftS}</td></tr></table> */
+    /** this HMD's type. One of:<br><table><tr><td>{@link OVR#ovrHmd_None Hmd_None}</td><td>{@link OVR#ovrHmd_DK2 Hmd_DK2}</td><td>{@link OVR#ovrHmd_CB Hmd_CB}</td><td>{@link OVR#ovrHmd_Other Hmd_Other}</td><td>{@link OVR#ovrHmd_E3_2015 Hmd_E3_2015}</td><td>{@link OVR#ovrHmd_ES06 Hmd_ES06}</td><td>{@link OVR#ovrHmd_ES09 Hmd_ES09}</td><td>{@link OVR#ovrHmd_ES11 Hmd_ES11}</td><td>{@link OVR#ovrHmd_CV1 Hmd_CV1}</td><td>{@link OVR#ovrHmd_RiftS Hmd_RiftS}</td></tr><tr><td>{@link OVR#ovrHmd_Quest Hmd_Quest}</td><td>{@link OVR#ovrHmd_Quest2 Hmd_Quest2}</td></tr></table> */
     @NativeType("ovrHmdType")
     public int Type() { return nType(address()); }
     /** name string describing the product: "Oculus Rift DK1", etc. */

@@ -64,8 +64,10 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(Module.OVR, prefixMethod = "OVR_"
         "Error_AccessDenied".enum("The caller doesn't have permissions for the requested action.", "-1025"),
 
         /* Audio error range, reserved for Audio errors. */
-        "Error_AudioDeviceNotFound".enum("Failure to find the specified audio device.", "-2001"),
+        "Error_AudioDeviceNotFound".enum("Failure to find neither audio input or output device.", "-2001"),
         "Error_AudioComError".enum("Generic COM error.", "-2002"),
+        "Error_AudioInputDeviceNotFound".enum("Failure to find the specified audio input device.", "-2003"),
+        "Error_AudioOutputDeviceNotFound".enum("Failure to find the specified audio output device.", "-2004"),
 
         /* Initialization errors. */
         "Error_Initialize".enum("Generic initialization error.", "-3000"),

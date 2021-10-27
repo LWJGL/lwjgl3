@@ -63,8 +63,10 @@ public class OVRErrorCode {
      * <li>{@link #ovrError_ExternalCameraNotCalibrated Error_ExternalCameraNotCalibrated} - The external camera property has not been sent to OVRServer when the user tries to open the camera.</li>
      * <li>{@link #ovrError_ExternalCameraNameWrongSize Error_ExternalCameraNameWrongSize} - The external camera name is larger than {@link OVR#OVR_EXTERNAL_CAMERA_NAME_SIZE}-1</li>
      * <li>{@link #ovrError_AccessDenied Error_AccessDenied} - The caller doesn't have permissions for the requested action.</li>
-     * <li>{@link #ovrError_AudioDeviceNotFound Error_AudioDeviceNotFound} - Failure to find the specified audio device.</li>
+     * <li>{@link #ovrError_AudioDeviceNotFound Error_AudioDeviceNotFound} - Failure to find neither audio input or output device.</li>
      * <li>{@link #ovrError_AudioComError Error_AudioComError} - Generic COM error.</li>
+     * <li>{@link #ovrError_AudioInputDeviceNotFound Error_AudioInputDeviceNotFound} - Failure to find the specified audio input device.</li>
+     * <li>{@link #ovrError_AudioOutputDeviceNotFound Error_AudioOutputDeviceNotFound} - Failure to find the specified audio output device.</li>
      * <li>{@link #ovrError_Initialize Error_Initialize} - Generic initialization error.</li>
      * <li>{@link #ovrError_LibLoad Error_LibLoad} - Couldn't load LibOVRRT.</li>
      * <li>{@link #ovrError_LibVersion Error_LibVersion} - LibOVRRT version incompatibility.</li>
@@ -137,6 +139,8 @@ public class OVRErrorCode {
         ovrError_AccessDenied                      = -1025,
         ovrError_AudioDeviceNotFound               = -2001,
         ovrError_AudioComError                     = -2002,
+        ovrError_AudioInputDeviceNotFound          = -2003,
+        ovrError_AudioOutputDeviceNotFound         = -2004,
         ovrError_Initialize                        = -3000,
         ovrError_LibLoad                           = -3001,
         ovrError_LibVersion                        = -3002,

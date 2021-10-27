@@ -27,10 +27,11 @@ val ovrResult = IntegerType("ovrResult", PrimitiveMapping.INT)
 
 val ovrSession = "ovrSession".handle
 
-val ovrHmdType = "ovrHmdType".enumType
+val ovrColorSpace = "ovrColorSpace".enumType
 val ovrEyeType = "ovrEyeType".enumType
-val ovrLayerType = "ovrLayerType".enumType
 val ovrExtensions = "ovrExtensions".enumType
+val ovrHmdType = "ovrHmdType".enumType
+val ovrLayerType = "ovrLayerType".enumType
 
 val ovrProcessId = typedef(int32_t, "ovrProcessId")
 
@@ -197,6 +198,17 @@ val ovrVector3f = struct(Module.OVR, "OVRVector3f", nativeName = "ovrVector3f") 
     float("y", "the vector y component")
     float("z", "the vector z component")
     float("w", "the vector w component")
+}
+
+val ovrVector4s = struct(Module.OVR, "OVRVector4s", nativeName = "ovrVector4s") {
+    documentation = "A 4D vector with {@code int16_t} components."
+
+    alignas(4)
+
+    int16_t("x", "the vector x component")
+    int16_t("y", "the vector y component")
+    int16_t("z", "the vector z component")
+    int16_t("w", "the vector w component")
 }*/
 
 val ovrMatrix4f = struct(Module.OVR, "OVRMatrix4f", nativeName = "ovrMatrix4f") {
@@ -252,6 +264,20 @@ val ovrExtensionProperties = struct(Module.OVR, "OVRExtensionProperties", native
     int("extensionId", "One of enum {@code ovrExtensions} or a dynamic value.")
     charASCII("extensionName", "")["OVR_MAX_EXTENSION_NAME_SIZE"]
     uint32_t("extensionVersion", "OpenXR-like version. Version compatibility is identified by the extension documentation.")
+}
+
+val ovrHmdColorDesc = struct(Module.OVR, "ovrHmdColorDesc", nativeName = "ovrHmdColorDesc", mutable = false) {
+    alignas("POINTER_SIZE")
+
+    ovrColorSpace(
+        "ColorSpace",
+        """
+        Approximate color space the HMD display can output.
+            
+        Use ColorPrimaries for more precise color space definition including white point (e.g. DN75)
+        """
+    )
+    padding(4)
 }
 
 val ovrGraphicsLuid = struct(Module.OVR, "OVRGraphicsLuid", nativeName = "ovrGraphicsLuid", mutable = false) {
@@ -411,9 +437,9 @@ val ovrTextureFormat = "ovrTextureFormat".enumType
 val ovrTextureSwapChainDesc = struct(Module.OVR, "OVRTextureSwapChainDesc", nativeName = "ovrTextureSwapChainDesc") {
     documentation = "Description used to create a texture swap chain."
 
-    ovrTextureType("Type", "").links("#Texture_2D")
+    ovrTextureType("Type", "").links("#Texture_2D #Texture_Cube")
     ovrTextureFormat("Format", "").links("OVR_FORMAT_\\w+")
-    int("ArraySize", "must be 6 for #Texture_Cube, 1 for other types")
+    int("ArraySize", "must be 6 for #Texture_Cube, size of texture array otherwise")
     int("Width", "")
     int("Height", "")
     int("MipLevels", "")

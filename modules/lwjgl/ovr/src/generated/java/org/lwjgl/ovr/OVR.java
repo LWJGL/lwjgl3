@@ -85,8 +85,6 @@ public class OVR {
      * 
      * <ul>
      * <li>{@link #ovrHmd_None Hmd_None}</li>
-     * <li>{@link #ovrHmd_DK1 Hmd_DK1}</li>
-     * <li>{@link #ovrHmd_DKHD Hmd_DKHD}</li>
      * <li>{@link #ovrHmd_DK2 Hmd_DK2}</li>
      * <li>{@link #ovrHmd_CB Hmd_CB}</li>
      * <li>{@link #ovrHmd_Other Hmd_Other}</li>
@@ -96,12 +94,12 @@ public class OVR {
      * <li>{@link #ovrHmd_ES11 Hmd_ES11}</li>
      * <li>{@link #ovrHmd_CV1 Hmd_CV1}</li>
      * <li>{@link #ovrHmd_RiftS Hmd_RiftS}</li>
+     * <li>{@link #ovrHmd_Quest Hmd_Quest}</li>
+     * <li>{@link #ovrHmd_Quest2 Hmd_Quest2}</li>
      * </ul>
      */
     public static final int
         ovrHmd_None    = 0,
-        ovrHmd_DK1     = 3,
-        ovrHmd_DKHD    = 4,
         ovrHmd_DK2     = 6,
         ovrHmd_CB      = 8,
         ovrHmd_Other   = 9,
@@ -110,7 +108,9 @@ public class OVR {
         ovrHmd_ES09    = 12,
         ovrHmd_ES11    = 13,
         ovrHmd_CV1     = 14,
-        ovrHmd_RiftS   = 15;
+        ovrHmd_RiftS   = 15,
+        ovrHmd_Quest   = 19,
+        ovrHmd_Quest2  = 20;
 
     /**
      * HMD capability bits reported by device. ({@code ovrHmdCaps})
@@ -200,6 +200,90 @@ public class OVR {
         ovrTrackingOrigin_FloorLevel = 1;
 
     /**
+     * Color space types for HMDs.
+     * 
+     * <p>Until {@link #ovr_SetClientColorDesc SetClientColorDesc} is called, for backwards compatibility, a new session will start with {@link #ovrColorSpace_Unknown ColorSpace_Unknown} which will default to
+     * {@link #ovrColorSpace_Rift_CV1 ColorSpace_Rift_CV1}. This assumes the app visuals were authored to be viewed in a Rift CV1 HMD. Therefore it does the following:</p>
+     * 
+     * <ul>
+     * <li>For Rift CV1, assumes submitted images are authored for CV1 color space, and keeps them as is.</li>
+     * <li>For Rift S and Quest (via Oculus Link), converts images to reproduce CV1's color space.</li>
+     * </ul>
+     * 
+     * <p>This API only handles color-space remapping. Unless specified, all color spaces use D65 white point. This API will not affect brightness, contrast or
+     * gamma curves. Some of these aspects such as gamma, is handled by the texture format being used. From the GPU samplers' point-of-view, each texture will
+     * continue to be treated as linear luminance including the sRGB format which is converted to linear by the texture sampler.</p>
+     * 
+     * <p>It is recommended that content is authored for the Rift CV1 color space as it has a wider color gamut than the Rift S. If content is authored to a
+     * narrow color space such as "Rec. 709" or "Rift S", this can lead to content looking "dull", "washed out" or "desaturated" when viewed in a
+     * wider-color-space-capable device such as Rift CV1 and Quest. This is because the colors stored in the submitted images will no longer be able to hit
+     * the deeper saturated chromaticity values.</p>
+     * 
+     * <p>Using {@link #ovrColorSpace_Unmanaged ColorSpace_Unmanaged} will force the runtime to skip color correction on to the provided content. This is not recommended unless the app
+     * developer is sure about what they're doing. {@code ovrColorSpace_Unmanaged} is mostly useful for research & experimentation, but not for software
+     * distribution. This is because unless the client is applying the necessary corrections for each HMD type, the results seen in the HMD will be uncalibrated. This is especially true for future HMDs where the color space is not yet known or defined, leading to colors that might look too dull or saturated.</p>
+     * 
+     * <p>Requested rectilinear-mirror outputs are composited without any color space adjustment. However, if client requests a post-distortion (i.e.
+     * non-rectilinear) mirror output, it will be provided with the same color adjustment that was applied for the HMD output. Therefore, post-distortion
+     * mirror output are not guaranteed to have acceptable color-space accuracy for desktop viewing.</p>
+     * 
+     * <p>Color Space Details with Chromaticity Primaries in CIE 1931 xy:</p>
+     * 
+     * <pre><code>
+     * Color Space: Rift CV1 between P3 &amp; Adobe RGB using D75 white point
+     * Red  : (0.666, 0.334)
+     * Green: (0.238, 0.714)
+     * Blue : (0.139, 0.053)
+     * White: (0.298, 0.318)
+     * 
+     * Color Space: Quest similar to Rift CV1 using D75 white point
+     * Red  : (0.661, 0.338)
+     * Green: (0.228, 0.718)
+     * Blue : (0.142, 0.042)
+     * White: (0.298, 0.318)
+     * 
+     * Color Space: Rift S similar to Rec 709 using D75
+     * Red  : (0.640, 0.330)
+     * Green: (0.292, 0.586)
+     * Blue : (0.156, 0.058)
+     * White: (0.298, 0.318)
+     * 
+     * Color Space: P3, similar to DCI-P3, but using D65 white point instead.
+     * Red  : (0.680, 0.320)
+     * Green: (0.265, 0.690)
+     * Blue : (0.150, 0.060)
+     * White: (0.313, 0.329)            </code></pre>
+     * 
+     * <p>Note: Due to LCD limitations, the Rift S display will not be able to meaningfully differentiate brightness levels below 13 out of 255 for 8-bit sRGB or
+     * 0.0015 out of 1.0 max for linear-RGB shader output values. To that end, it is recommended that reliance on a dark and narrow gamut is avoided, and the
+     * content is instead spread across a larger brightness range when possible.</p>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #ovrColorSpace_Unknown ColorSpace_Unknown} - Default value until client sets calls {@link #ovr_SetClientColorDesc SetClientColorDesc}</li>
+     * <li>{@link #ovrColorSpace_Unmanaged ColorSpace_Unmanaged} - See notes above. No correction, i.e. color space of active HMD</li>
+     * <li>{@link #ovrColorSpace_Rift_CV1 ColorSpace_Rift_CV1} - See notes above. Unique color space.</li>
+     * <li>{@link #ovrColorSpace_Rift_S ColorSpace_Rift_S} - See notes above. Unique color space.</li>
+     * <li>{@link #ovrColorSpace_Quest ColorSpace_Quest} - See notes above. Unique color space.</li>
+     * <li>{@link #ovrColorSpace_Rec_2020 ColorSpace_Rec_2020} - Standard Rec. 2020 chromaticities</li>
+     * <li>{@link #ovrColorSpace_Rec_709 ColorSpace_Rec_709} - Standard Rec. 709 chromaticities, similar to sRGB</li>
+     * <li>{@link #ovrColorSpace_P3 ColorSpace_P3} - See notes above</li>
+     * <li>{@link #ovrColorSpace_Adobe_RGB ColorSpace_Adobe_RGB} - Standard AdobeRGB chromaticities</li>
+     * </ul>
+     */
+    public static final int
+        ovrColorSpace_Unknown   = 0,
+        ovrColorSpace_Unmanaged = 1,
+        ovrColorSpace_Rift_CV1  = 2,
+        ovrColorSpace_Rift_S    = 3,
+        ovrColorSpace_Quest     = 4,
+        ovrColorSpace_Rec_2020  = 5,
+        ovrColorSpace_Rec_709   = 6,
+        ovrColorSpace_P3        = 7,
+        ovrColorSpace_Adobe_RGB = 8;
+
+    /**
      * Bit flags describing the current status of sensor tracking. ({@code ovrStatusBits}
      * 
      * <h5>Enum values:</h5>
@@ -255,7 +339,7 @@ public class OVR {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #ovrTexture_2D Texture_2D} - 2D textures</li>
+     * <li>{@link #ovrTexture_2D Texture_2D} - 2D textures or texture arrays.</li>
      * <li>{@link #ovrTexture_2D_External Texture_2D_External} - Application-provided 2D texture. Not supported on PC.</li>
      * <li>{@link #ovrTexture_Cube Texture_Cube} - Cube maps. {@link OVRTextureSwapChainDesc}{@code ::ArraySize} must be 6 for this type.</li>
      * </ul>
@@ -298,7 +382,7 @@ public class OVR {
      * <li>{@link #OVR_FORMAT_R8G8B8A8_UNORM OVR_FORMAT_R8G8B8A8_UNORM}</li>
      * <li>{@link #OVR_FORMAT_R8G8B8A8_UNORM_SRGB OVR_FORMAT_R8G8B8A8_UNORM_SRGB}</li>
      * <li>{@link #OVR_FORMAT_B8G8R8A8_UNORM OVR_FORMAT_B8G8R8A8_UNORM}</li>
-     * <li>{@link #OVR_FORMAT_B8G8R8_UNORM OVR_FORMAT_B8G8R8_UNORM}</li>
+     * <li>{@link #OVR_FORMAT_B8G8R8_UNORM OVR_FORMAT_B8G8R8_UNORM} - Not currently supported.</li>
      * <li>{@link #OVR_FORMAT_B8G8R8A8_UNORM_SRGB OVR_FORMAT_B8G8R8A8_UNORM_SRGB} - Not supported for OpenGL applications.</li>
      * <li>{@link #OVR_FORMAT_B8G8R8X8_UNORM OVR_FORMAT_B8G8R8X8_UNORM} - Not supported for OpenGL applications.</li>
      * <li>{@link #OVR_FORMAT_B8G8R8X8_UNORM_SRGB OVR_FORMAT_B8G8R8X8_UNORM_SRGB} - Not supported for OpenGL applications.</li>
@@ -795,6 +879,7 @@ public class OVR {
      * <li>{@link #ovrPerfHud_CompRenderTiming PerfHud_CompRenderTiming} - Shows render timing info for OVR compositor</li>
      * <li>{@link #ovrPerfHud_AwsStats PerfHud_AwsStats} - Shows Async Spacewarp-specific info</li>
      * <li>{@link #ovrPerfHud_VersionInfo PerfHud_VersionInfo} - Shows SDK &amp; HMD version Info</li>
+     * <li>{@link #ovrPerfHud_LinkPerf PerfHud_LinkPerf} - Shows Oculus Link performance.</li>
      * </ul>
      */
     public static final int
@@ -803,8 +888,9 @@ public class OVR {
         ovrPerfHud_LatencyTiming    = 2,
         ovrPerfHud_AppRenderTiming  = 3,
         ovrPerfHud_CompRenderTiming = 4,
-        ovrPerfHud_AwsStats         = 0x6,
-        ovrPerfHud_VersionInfo      = 0x5;
+        ovrPerfHud_AwsStats         = 6,
+        ovrPerfHud_VersionInfo      = 5,
+        ovrPerfHud_LinkPerf         = 7;
 
     /**
      * Layer HUD enables the HMD user to see information about a layer.
@@ -1076,6 +1162,51 @@ public class OVR {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ ovr_GetHmdColorDesc ] ---
+
+    /** Unsafe version of: {@link #ovr_GetHmdColorDesc GetHmdColorDesc} */
+    public static native void novr_GetHmdColorDesc(long session, long __result);
+
+    /**
+     * Returns native color space information about the current HMD.
+     * 
+     * <p>{@link #ovr_Initialize Initialize} must be called prior to calling this function, otherwise call will fail.</p>
+     *
+     * @param session  specifies an {@code ovrSession} previously returned by {@link #ovr_Create Create} or {@code NULL}
+     * @param __result an {@code ovrHmdColorDesc}
+     */
+    public static ovrHmdColorDesc ovr_GetHmdColorDesc(@NativeType("ovrSession") long session, ovrHmdColorDesc __result) {
+        novr_GetHmdColorDesc(session, __result.address());
+        return __result;
+    }
+
+    // --- [ ovr_SetClientColorDesc ] ---
+
+    /** Unsafe version of: {@link #ovr_SetClientColorDesc SetClientColorDesc} */
+    public static native int novr_SetClientColorDesc(long session, long colorDesc);
+
+    /**
+     * Sets the color space actively being used by the client app.
+     * 
+     * <p>This value does not have to follow the color space provided in {@link #ovr_GetHmdColorDesc GetHmdColorDesc}. It should reflect the color space the final rendered frame the
+     * client has submitted to the SDK. If this function is never called, the session will keep using the default color space deemed appropriate by the
+     * runtime. See remarks in {@code ovrColorSpace} enum for more info on default behavior.</p>
+     * 
+     * <p>{@link #ovr_Initialize Initialize} must be called prior to calling this function, otherwise call will fail.</p>
+     *
+     * @param session   an {@code ovrSession} previously returned by {@link #ovr_Create Create} or {@code NULL}
+     * @param colorDesc the color description to use for the current HMD
+     *
+     * @return an {@code ovrResult} indicating success or failure
+     */
+    @NativeType("ovrResult")
+    public static int ovr_SetClientColorDesc(@NativeType("ovrSession") long session, @NativeType("ovrHmdColorDesc const *") ovrHmdColorDesc colorDesc) {
+        if (CHECKS) {
+            check(session);
+        }
+        return novr_SetClientColorDesc(session, colorDesc.address());
     }
 
     // --- [ ovr_GetHmdDesc ] ---
@@ -2216,9 +2347,8 @@ public class OVR {
      * 
      * <ul>
      * <li>Layers are drawn in the order they are specified in the array, regardless of the layer type.</li>
-     * <li>Layers are not remembered between successive calls to {@link #ovr_SubmitFrame SubmitFrame}. A layer must be specified in every call to {@code ovr_SubmitFrame} or it
-     * won't be displayed.</li>
-     * <li>If a {@code layerPtrList} entry that was specified in a previous call to {@link #ovr_SubmitFrame SubmitFrame} is passed as {@code NULL} or is of type {@link #ovrLayerType_Disabled LayerType_Disabled}, that
+     * <li>Layers are not remembered between successive calls to {@link #ovr_EndFrame EndFrame}. A layer must be specified in every call to {@link #ovr_EndFrame EndFrame} or it won't be displayed.</li>
+     * <li>If a {@code layerPtrList} entry that was specified in a previous call to {@link #ovr_EndFrame EndFrame} is passed as {@code NULL} or is of type {@link #ovrLayerType_Disabled LayerType_Disabled}, that
      * layer is no longer displayed.</li>
      * <li>A {@code layerPtrList} entry can be of any layer type and multiple entries of the same layer type are allowed. No {@code layerPtrList} entry may be
      * duplicated (i.e. the same pointer as an earlier entry).</li>
