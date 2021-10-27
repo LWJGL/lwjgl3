@@ -1105,7 +1105,6 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         since = "version 3.4"
     )
 
-
     void(
         "GetVersion",
         """

@@ -31,6 +31,7 @@ public class GLFWVulkan {
 
         /** Function address. */
         public static final long
+            InitVulkanLoader                     = apiGetFunctionAddress(GLFW.getLibrary(), "glfwInitVulkanLoader"),
             VulkanSupported                      = apiGetFunctionAddress(GLFW.getLibrary(), "glfwVulkanSupported"),
             GetRequiredInstanceExtensions        = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetRequiredInstanceExtensions"),
             GetInstanceProcAddress               = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetInstanceProcAddress"),
@@ -47,6 +48,38 @@ public class GLFWVulkan {
 
     protected GLFWVulkan() {
         throw new UnsupportedOperationException();
+    }
+
+    // --- [ glfwInitVulkanLoader ] ---
+
+    /**
+     * Sets the desired Vulkan {@code vkGetInstanceProcAddr} function.
+     * 
+     * <p>This function sets the {@code vkGetInstanceProcAddr} function that GLFW will use for all Vulkan related entry point queries.</p>
+     * 
+     * <p>This feature is mostly useful on macOS, if your copy of the Vulkan loader is in a location where GLFW cannot find it through dynamic loading, or if you
+     * are still using the static library version of the loader.</p>
+     * 
+     * <p>If set to {@code NULL}, GLFW will try to load the Vulkan loader dynamically by its standard name and get this function from there. This is the default
+     * behavior.</p>
+     * 
+     * <p>The standard name of the loader is {@code vulkan-1.dll} on Windows, {@code libvulkan.so.1} on Linux and other Unix-like systems and
+     * {@code libvulkan.1.dylib} on macOS. If your code is also loading it via these names then you probably don't need to use this function.</p>
+     * 
+     * <p>The function address you set is never reset by GLFW, but it only takes effect during initialization. Once GLFW has been initialized, any updates will
+     * be ignored until the library is terminated and initialized again.</p>
+     * 
+     * <p>This function may be called before {@link GLFW#glfwInit Init}.</p>
+     * 
+     * <p>This function must only be called from the main thread.</p>
+     *
+     * @param loader the address of the function to use, or {@code NULL}
+     *
+     * @since version 3.4
+     */
+    public static void glfwInitVulkanLoader(@NativeType("PFN_vkGetInstanceProcAddr") long loader) {
+        long __functionAddress = Functions.InitVulkanLoader;
+        invokePV(loader, __functionAddress);
     }
 
     // --- [ glfwVulkanSupported ] ---

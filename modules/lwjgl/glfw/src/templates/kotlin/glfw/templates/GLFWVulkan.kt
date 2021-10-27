@@ -21,6 +21,35 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         }
     }""")
 
+    void(
+        "InitVulkanLoader",
+        """
+        Sets the desired Vulkan {@code vkGetInstanceProcAddr} function.
+ 
+        This function sets the {@code vkGetInstanceProcAddr} function that GLFW will use for all Vulkan related entry point queries.
+ 
+        This feature is mostly useful on macOS, if your copy of the Vulkan loader is in a location where GLFW cannot find it through dynamic loading, or if you
+        are still using the static library version of the loader.
+ 
+        If set to #NULL, GLFW will try to load the Vulkan loader dynamically by its standard name and get this function from there. This is the default
+        behavior.
+ 
+        The standard name of the loader is {@code vulkan-1.dll} on Windows, {@code libvulkan.so.1} on Linux and other Unix-like systems and
+        {@code libvulkan.1.dylib} on macOS. If your code is also loading it via these names then you probably don't need to use this function.
+ 
+        The function address you set is never reset by GLFW, but it only takes effect during initialization. Once GLFW has been initialized, any updates will
+        be ignored until the library is terminated and initialized again.
+        
+        This function may be called before #Init().
+        
+        This function must only be called from the main thread.
+        """,
+
+        nullable.."PFN_vkGetInstanceProcAddr".handle("loader", "the address of the function to use, or #NULL"),
+
+        since = "version 3.4"
+    )
+
     intb(
         "VulkanSupported",
         """
