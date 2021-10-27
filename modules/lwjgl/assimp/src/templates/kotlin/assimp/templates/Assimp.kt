@@ -2941,6 +2941,9 @@ aiAttachLogStream(&c);""")}
         "AI_MATKEY_CLEARCOAT_FACTOR".."\$mat.clearcoat.factor",
         "AI_MATKEY_CLEARCOAT_ROUGHNESS_FACTOR".."\$mat.clearcoat.roughnessFactor",
         "AI_MATKEY_TRANSMISSION_FACTOR".."\$mat.transmission.factor",
+        "AI_MATKEY_VOLUME_THICKNESS_FACTOR".."\$mat.volume.thicknessFactor",
+        "AI_MATKEY_VOLUME_ATTENUATION_DISTANCE".."\$mat.volume.attenuationDistance",
+        "AI_MATKEY_VOLUME_ATTENUATION_COLOR".."\$mat.volume.attenuationColor",
         "AI_MATKEY_USE_EMISSIVE_MAP".."\$mat.useEmissiveMap",
         "AI_MATKEY_EMISSIVE_INTENSITY".."\$mat.emissiveIntensity",
         "AI_MATKEY_USE_AO_MAP".."\$mat.useAOMap",
@@ -3590,7 +3593,7 @@ aiAttachLogStream(&c);""")}
             applications won't support UV transformations, so you will probably want to specify this step.
 
             ${note("""
-            UV transformations are usually implemented in real-time apps by transforming texture coordinates at vertex shader stage with a 3x3 (homogenous)
+            UV transformations are usually implemented in real-time apps by transforming texture coordinates at vertex shader stage with a 3x3 (homogeneous)
             transformation matrix.""")}
             """,
             0x80000
