@@ -19,10 +19,17 @@ val ClangIndex = "ClangIndex".nativeClass(
         "",
 
         "CINDEX_VERSION_MAJOR".."0",
-        "CINDEX_VERSION_MINOR".."50"
+        "CINDEX_VERSION_MINOR".."62",
+        "CINDEX_VERSION".."CINDEX_VERSION_MAJOR*10000 + CINDEX_VERSION_MINOR"
     ).noPrefix()
 
-        EnumConstant(
+    StringConstant(
+        "",
+
+        "CINDEX_VERSION_STRING".."0.62"
+    ).noPrefix()
+
+    EnumConstant(
         """
         Error codes returned by libclang routines. ({@code enum CXErrorCode})
 
@@ -72,7 +79,8 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_ExceptionSpecificationKind_ComputedNoexcept".enum("The cursor has exception specification computed noexcept."),
         "Cursor_ExceptionSpecificationKind_Unevaluated".enum("The exception specification has not yet been evaluated."),
         "Cursor_ExceptionSpecificationKind_Uninstantiated".enum("The exception specification has not yet been instantiated."),
-        "Cursor_ExceptionSpecificationKind_Unparsed".enum("The exception specification has not been parsed yet.")
+        "Cursor_ExceptionSpecificationKind_Unparsed".enum("The exception specification has not been parsed yet."),
+        "Cursor_ExceptionSpecificationKind_NoThrow".enum("The cursor has a {@code __declspec(nothrow)} exception specification.")
     )
 
     EnumConstant(
@@ -298,7 +306,17 @@ val ClangIndex = "ClangIndex".nativeClass(
             "0x800"
         ),
         "TranslationUnit_IncludeAttributedTypes".enum("Used to indicate that attributed types should be included in CXType.", "0x1000"),
-        "TranslationUnit_VisitImplicitAttributes".enum("Used to indicate that implicit attributes should be visited.", "0x2000")
+        "TranslationUnit_VisitImplicitAttributes".enum("Used to indicate that implicit attributes should be visited.", "0x2000"),
+        "TranslationUnit_IgnoreNonErrorsFromIncludedFiles".enum(
+            """
+            Used to indicate that non-errors from included files should be ignored.
+
+            If set, #getDiagnosticSetFromTU() will not report e.g. warnings from included files anymore. This speeds up {@code clang_getDiagnosticSetFromTU()}
+            for the case where these warnings are not of interest, as for an IDE for example, which typically shows only the diagnostics in the main file.
+            """,
+            "0x4000"
+        ),
+        "TranslationUnit_RetainExcludedConditionalBlocks".enum("Tells the preprocessor not to skip excluded conditional blocks.", "0x8000")
     )
 
     EnumConstant(
@@ -662,10 +680,13 @@ val ClangIndex = "ClangIndex".nativeClass(
         ),
         "Cursor_ObjCBoolLiteralExpr".enum("Objective-c Boolean Literal."),
         "Cursor_ObjCSelfExpr".enum("Represents the \"self\" expression in an Objective-C method."),
-        "Cursor_OMPArraySectionExpr".enum("OpenMP 4.0 [2.4, Array Section]."),
+        "Cursor_OMPArraySectionExpr".enum("OpenMP 5.0 [2.1.5, Array Section]."),
         "Cursor_ObjCAvailabilityCheckExpr".enum("Represents an {@code @available (...)} check."),
         "Cursor_FixedPointLiteral".enum("Fixed point literal"),
-        "Cursor_LastExpr".enum("Fixed point literal", "CXCursor_FixedPointLiteral"),
+        "Cursor_OMPArrayShapingExpr".enum("OpenMP 5.0 [2.1.4, Array Shaping]."),
+        "Cursor_OMPIteratorExpr".enum("OpenMP 5.0 [2.1.6 Iterators]"),
+        "Cursor_CXXAddrspaceCastExpr".enum("OpenCL's {@code addrspace_cast<>} expression."),
+        "Cursor_LastExpr".enum("", "CXCursor_CXXAddrspaceCastExpr"),
         "Cursor_FirstStmt".enum("Statements", "200"),
         "Cursor_UnexposedStmt".enum(
             """
@@ -778,7 +799,21 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_OMPTargetTeamsDistributeParallelForDirective".enum("OpenMP target teams distribute parallel for directive."),
         "Cursor_OMPTargetTeamsDistributeParallelForSimdDirective".enum("OpenMP target teams distribute parallel for simd directive."),
         "Cursor_OMPTargetTeamsDistributeSimdDirective".enum("OpenMP target teams distribute simd directive."),
-        "Cursor_LastStmt".enum("OpenMP target teams distribute simd directive.", "CXCursor_OMPTargetTeamsDistributeSimdDirective"),
+        "Cursor_BuiltinBitCastExpr".enum("C++2a std::bit_cast expression."),
+        "Cursor_OMPMasterTaskLoopDirective".enum("OpenMP master taskloop directive."),
+        "Cursor_OMPParallelMasterTaskLoopDirective".enum("OpenMP parallel master taskloop directive."),
+        "Cursor_OMPMasterTaskLoopSimdDirective".enum("OpenMP master taskloop simd directive."),
+        "Cursor_OMPParallelMasterTaskLoopSimdDirective".enum("OpenMP parallel master taskloop simd directive."),
+        "Cursor_OMPParallelMasterDirective".enum("OpenMP parallel master directive."),
+        "Cursor_OMPDepobjDirective".enum("OpenMP depobj directive."),
+        "Cursor_OMPScanDirective".enum("OpenMP scan directive."),
+        "Cursor_OMPTileDirective".enum("OpenMP tile directive."),
+        "Cursor_OMPCanonicalLoop".enum("OpenMP canonical loop."),
+        "Cursor_OMPInteropDirective".enum("OpenMP interop directive."),
+        "Cursor_OMPDispatchDirective".enum("OpenMP dispatch directive."),
+        "Cursor_OMPMaskedDirective".enum("OpenMP masked directive."),
+        "Cursor_OMPUnrollDirective".enum("OpenMP unroll directive."),
+        "Cursor_LastStmt".enum("", "CXCursor_OMPUnrollDirective"),
         "Cursor_TranslationUnit".enum(
             """
             Cursor that represents the translation unit itself.
@@ -789,70 +824,61 @@ val ClangIndex = "ClangIndex".nativeClass(
         ),
         "Cursor_FirstAttr".enum("Attributes", "400"),
         "Cursor_UnexposedAttr".enum("An attribute whose specific kind is not exposed via this interface.", "400"),
-        "Cursor_IBActionAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_IBOutletAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_IBOutletCollectionAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_CXXFinalAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_CXXOverrideAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_AnnotateAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_AsmLabelAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_PackedAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_PureAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_ConstAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_NoDuplicateAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_CUDAConstantAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_CUDADeviceAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_CUDAGlobalAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_CUDAHostAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_CUDASharedAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_VisibilityAttr".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_DLLExport".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_DLLImport".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_NSReturnsRetained".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_NSReturnsNotRetained".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_NSReturnsAutoreleased".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_NSConsumesSelf".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_NSConsumed".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_ObjCException".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_ObjCNSObject".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_ObjCIndependentClass".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_ObjCPreciseLifetime".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_ObjCReturnsInnerPointer".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_ObjCRequiresSuper".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_ObjCRootClass".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_ObjCSubclassingRestricted".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_ObjCExplicitProtocolImpl".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_ObjCDesignatedInitializer".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_ObjCRuntimeVisible".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_ObjCBoxable".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_FlagEnum".enum("An attribute whose specific kind is not exposed via this interface."),
-        "Cursor_LastAttr".enum("An attribute whose specific kind is not exposed via this interface.", "CXCursor_FlagEnum"),
+        "Cursor_IBActionAttr".enum(""),
+        "Cursor_IBOutletAttr".enum(""),
+        "Cursor_IBOutletCollectionAttr".enum(""),
+        "Cursor_CXXFinalAttr".enum(""),
+        "Cursor_CXXOverrideAttr".enum(""),
+        "Cursor_AnnotateAttr".enum(""),
+        "Cursor_AsmLabelAttr".enum(""),
+        "Cursor_PackedAttr".enum(""),
+        "Cursor_PureAttr".enum(""),
+        "Cursor_ConstAttr".enum(""),
+        "Cursor_NoDuplicateAttr".enum(""),
+        "Cursor_CUDAConstantAttr".enum(""),
+        "Cursor_CUDADeviceAttr".enum(""),
+        "Cursor_CUDAGlobalAttr".enum(""),
+        "Cursor_CUDAHostAttr".enum(""),
+        "Cursor_CUDASharedAttr".enum(""),
+        "Cursor_VisibilityAttr".enum(""),
+        "Cursor_DLLExport".enum(""),
+        "Cursor_DLLImport".enum(""),
+        "Cursor_NSReturnsRetained".enum(""),
+        "Cursor_NSReturnsNotRetained".enum(""),
+        "Cursor_NSReturnsAutoreleased".enum(""),
+        "Cursor_NSConsumesSelf".enum(""),
+        "Cursor_NSConsumed".enum(""),
+        "Cursor_ObjCException".enum(""),
+        "Cursor_ObjCNSObject".enum(""),
+        "Cursor_ObjCIndependentClass".enum(""),
+        "Cursor_ObjCPreciseLifetime".enum(""),
+        "Cursor_ObjCReturnsInnerPointer".enum(""),
+        "Cursor_ObjCRequiresSuper".enum(""),
+        "Cursor_ObjCRootClass".enum(""),
+        "Cursor_ObjCSubclassingRestricted".enum(""),
+        "Cursor_ObjCExplicitProtocolImpl".enum(""),
+        "Cursor_ObjCDesignatedInitializer".enum(""),
+        "Cursor_ObjCRuntimeVisible".enum(""),
+        "Cursor_ObjCBoxable".enum(""),
+        "Cursor_FlagEnum".enum(""),
+        "Cursor_ConvergentAttr".enum(""),
+        "Cursor_WarnUnusedAttr".enum(""),
+        "Cursor_WarnUnusedResultAttr".enum(""),
+        "Cursor_AlignedAttr".enum(""),
+        "Cursor_LastAttr".enum("", "CXCursor_AlignedAttr"),
         "Cursor_PreprocessingDirective".enum("Preprocessing", "500"),
-        "Cursor_MacroDefinition".enum("Preprocessing"),
-        "Cursor_MacroExpansion".enum("Preprocessing"),
-        "Cursor_MacroInstantiation".enum("Preprocessing", "CXCursor_MacroExpansion"),
-        "Cursor_InclusionDirective".enum("Preprocessing", "503"),
-        "Cursor_FirstPreprocessing".enum("Preprocessing", "CXCursor_PreprocessingDirective"),
-        "Cursor_LastPreprocessing".enum("Preprocessing", "CXCursor_InclusionDirective"),
-        "Cursor_ModuleImportDecl".enum(
-            """
-            Extra Declarations
-
-            A module import declaration.
-            """,
-            "600"
-        ),
-        "Cursor_TypeAliasTemplateDecl".enum(
-            """
-            Extra Declarations
-
-            A module import declaration.
-            """
-        ),
+        "Cursor_MacroDefinition".enum(""),
+        "Cursor_MacroExpansion".enum(""),
+        "Cursor_MacroInstantiation".enum("", "CXCursor_MacroExpansion"),
+        "Cursor_InclusionDirective".enum("", "503"),
+        "Cursor_FirstPreprocessing".enum("", "CXCursor_PreprocessingDirective"),
+        "Cursor_LastPreprocessing".enum("", "CXCursor_InclusionDirective"),
+        "Cursor_ModuleImportDecl".enum("A module import declaration.", "600"),
+        "Cursor_TypeAliasTemplateDecl".enum(""),
         "Cursor_StaticAssert".enum("A static_assert or _Static_assert node"),
         "Cursor_FriendDecl".enum("a friend declaration."),
-        "Cursor_FirstExtraDecl".enum("a friend declaration.", "CXCursor_ModuleImportDecl"),
-        "Cursor_LastExtraDecl".enum("a friend declaration.", "CXCursor_FriendDecl"),
+        "Cursor_FirstExtraDecl".enum("", "CXCursor_ModuleImportDecl"),
+        "Cursor_LastExtraDecl".enum("", "CXCursor_FriendDecl"),
         "Cursor_OverloadCandidate".enum("A code completion overload candidate.", "700")
     )
 
@@ -915,64 +941,65 @@ val ClangIndex = "ClangIndex".nativeClass(
 
         "Type_Invalid".enum("Represents an invalid type (e.g., where no type is available).", "0"),
         "Type_Unexposed".enum("A type whose specific kind is not exposed via this interface."),
-        "Type_Void".enum("Builtin types"),
-        "Type_Bool".enum("Builtin types"),
-        "Type_Char_U".enum("Builtin types"),
-        "Type_UChar".enum("Builtin types"),
-        "Type_Char16".enum("Builtin types"),
-        "Type_Char32".enum("Builtin types"),
-        "Type_UShort".enum("Builtin types"),
-        "Type_UInt".enum("Builtin types"),
-        "Type_ULong".enum("Builtin types"),
-        "Type_ULongLong".enum("Builtin types"),
-        "Type_UInt128".enum("Builtin types"),
-        "Type_Char_S".enum("Builtin types"),
-        "Type_SChar".enum("Builtin types"),
-        "Type_WChar".enum("Builtin types"),
-        "Type_Short".enum("Builtin types"),
-        "Type_Int".enum("Builtin types"),
-        "Type_Long".enum("Builtin types"),
-        "Type_LongLong".enum("Builtin types"),
-        "Type_Int128".enum("Builtin types"),
-        "Type_Float".enum("Builtin types"),
-        "Type_Double".enum("Builtin types"),
-        "Type_LongDouble".enum("Builtin types"),
-        "Type_NullPtr".enum("Builtin types"),
-        "Type_Overload".enum("Builtin types"),
-        "Type_Dependent".enum("Builtin types"),
-        "Type_ObjCId".enum("Builtin types"),
-        "Type_ObjCClass".enum("Builtin types"),
-        "Type_ObjCSel".enum("Builtin types"),
-        "Type_Float128".enum("Builtin types"),
-        "Type_Half".enum("Builtin types"),
-        "Type_Float16".enum("Builtin types"),
-        "Type_ShortAccum".enum("Builtin types"),
-        "Type_Accum".enum("Builtin types"),
-        "Type_LongAccum".enum("Builtin types"),
-        "Type_UShortAccum".enum("Builtin types"),
-        "Type_UAccum".enum("Builtin types"),
-        "Type_ULongAccum".enum("Builtin types"),
-        "Type_FirstBuiltin".enum("Builtin types", "CXType_Void"),
-        "Type_LastBuiltin".enum("Builtin types", "CXType_ULongAccum"),
-        "Type_Complex".enum("Builtin types", "100"),
-        "Type_Pointer".enum("Builtin types"),
-        "Type_BlockPointer".enum("Builtin types"),
-        "Type_LValueReference".enum("Builtin types"),
-        "Type_RValueReference".enum("Builtin types"),
-        "Type_Record".enum("Builtin types"),
-        "Type_Enum".enum("Builtin types"),
-        "Type_Typedef".enum("Builtin types"),
-        "Type_ObjCInterface".enum("Builtin types"),
-        "Type_ObjCObjectPointer".enum("Builtin types"),
-        "Type_FunctionNoProto".enum("Builtin types"),
-        "Type_FunctionProto".enum("Builtin types"),
-        "Type_ConstantArray".enum("Builtin types"),
-        "Type_Vector".enum("Builtin types"),
-        "Type_IncompleteArray".enum("Builtin types"),
-        "Type_VariableArray".enum("Builtin types"),
-        "Type_DependentSizedArray".enum("Builtin types"),
-        "Type_MemberPointer".enum("Builtin types"),
-        "Type_Auto".enum("Builtin types"),
+        "Type_Void".enum(""),
+        "Type_Bool".enum(""),
+        "Type_Char_U".enum(""),
+        "Type_UChar".enum(""),
+        "Type_Char16".enum(""),
+        "Type_Char32".enum(""),
+        "Type_UShort".enum(""),
+        "Type_UInt".enum(""),
+        "Type_ULong".enum(""),
+        "Type_ULongLong".enum(""),
+        "Type_UInt128".enum(""),
+        "Type_Char_S".enum(""),
+        "Type_SChar".enum(""),
+        "Type_WChar".enum(""),
+        "Type_Short".enum(""),
+        "Type_Int".enum(""),
+        "Type_Long".enum(""),
+        "Type_LongLong".enum(""),
+        "Type_Int128".enum(""),
+        "Type_Float".enum(""),
+        "Type_Double".enum(""),
+        "Type_LongDouble".enum(""),
+        "Type_NullPtr".enum(""),
+        "Type_Overload".enum(""),
+        "Type_Dependent".enum(""),
+        "Type_ObjCId".enum(""),
+        "Type_ObjCClass".enum(""),
+        "Type_ObjCSel".enum(""),
+        "Type_Float128".enum(""),
+        "Type_Half".enum(""),
+        "Type_Float16".enum(""),
+        "Type_ShortAccum".enum(""),
+        "Type_Accum".enum(""),
+        "Type_LongAccum".enum(""),
+        "Type_UShortAccum".enum(""),
+        "Type_UAccum".enum(""),
+        "Type_ULongAccum".enum(""),
+        "Type_BFloat16".enum(""),
+        "Type_FirstBuiltin".enum("", "CXType_Void"),
+        "Type_LastBuiltin".enum("", "CXType_BFloat16"),
+        "Type_Complex".enum("", "100"),
+        "Type_Pointer".enum(""),
+        "Type_BlockPointer".enum(""),
+        "Type_LValueReference".enum(""),
+        "Type_RValueReference".enum(""),
+        "Type_Record".enum(""),
+        "Type_Enum".enum(""),
+        "Type_Typedef".enum(""),
+        "Type_ObjCInterface".enum(""),
+        "Type_ObjCObjectPointer".enum(""),
+        "Type_FunctionNoProto".enum(""),
+        "Type_FunctionProto".enum(""),
+        "Type_ConstantArray".enum(""),
+        "Type_Vector".enum(""),
+        "Type_IncompleteArray".enum(""),
+        "Type_VariableArray".enum(""),
+        "Type_DependentSizedArray".enum(""),
+        "Type_MemberPointer".enum(""),
+        "Type_Auto".enum(""),
         "Type_Elaborated".enum(
             """
             Represents a type that was referred to using an elaborated type keyword.
@@ -981,62 +1008,65 @@ val ClangIndex = "ClangIndex".nativeClass(
             """
         ),
         "Type_Pipe".enum("OpenCL PipeType."),
-        "Type_OCLImage1dRO".enum("OpenCL builtin types."),
-        "Type_OCLImage1dArrayRO".enum("OpenCL builtin types."),
-        "Type_OCLImage1dBufferRO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dRO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dArrayRO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dDepthRO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dArrayDepthRO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dMSAARO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dArrayMSAARO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dMSAADepthRO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dArrayMSAADepthRO".enum("OpenCL builtin types."),
-        "Type_OCLImage3dRO".enum("OpenCL builtin types."),
-        "Type_OCLImage1dWO".enum("OpenCL builtin types."),
-        "Type_OCLImage1dArrayWO".enum("OpenCL builtin types."),
-        "Type_OCLImage1dBufferWO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dWO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dArrayWO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dDepthWO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dArrayDepthWO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dMSAAWO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dArrayMSAAWO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dMSAADepthWO".enum("OpenCL builtin types."),
-        "Type_OCLImage2dArrayMSAADepthWO".enum("OpenCL builtin types."),
-        "Type_OCLImage3dWO".enum("OpenCL builtin types."),
-        "Type_OCLImage1dRW".enum("OpenCL builtin types."),
-        "Type_OCLImage1dArrayRW".enum("OpenCL builtin types."),
-        "Type_OCLImage1dBufferRW".enum("OpenCL builtin types."),
-        "Type_OCLImage2dRW".enum("OpenCL builtin types."),
-        "Type_OCLImage2dArrayRW".enum("OpenCL builtin types."),
-        "Type_OCLImage2dDepthRW".enum("OpenCL builtin types."),
-        "Type_OCLImage2dArrayDepthRW".enum("OpenCL builtin types."),
-        "Type_OCLImage2dMSAARW".enum("OpenCL builtin types."),
-        "Type_OCLImage2dArrayMSAARW".enum("OpenCL builtin types."),
-        "Type_OCLImage2dMSAADepthRW".enum("OpenCL builtin types."),
-        "Type_OCLImage2dArrayMSAADepthRW".enum("OpenCL builtin types."),
-        "Type_OCLImage3dRW".enum("OpenCL builtin types."),
-        "Type_OCLSampler".enum("OpenCL builtin types."),
-        "Type_OCLEvent".enum("OpenCL builtin types."),
-        "Type_OCLQueue".enum("OpenCL builtin types."),
-        "Type_OCLReserveID".enum("OpenCL builtin types."),
+        "Type_OCLImage1dRO".enum(""),
+        "Type_OCLImage1dArrayRO".enum(""),
+        "Type_OCLImage1dBufferRO".enum(""),
+        "Type_OCLImage2dRO".enum(""),
+        "Type_OCLImage2dArrayRO".enum(""),
+        "Type_OCLImage2dDepthRO".enum(""),
+        "Type_OCLImage2dArrayDepthRO".enum(""),
+        "Type_OCLImage2dMSAARO".enum(""),
+        "Type_OCLImage2dArrayMSAARO".enum(""),
+        "Type_OCLImage2dMSAADepthRO".enum(""),
+        "Type_OCLImage2dArrayMSAADepthRO".enum(""),
+        "Type_OCLImage3dRO".enum(""),
+        "Type_OCLImage1dWO".enum(""),
+        "Type_OCLImage1dArrayWO".enum(""),
+        "Type_OCLImage1dBufferWO".enum(""),
+        "Type_OCLImage2dWO".enum(""),
+        "Type_OCLImage2dArrayWO".enum(""),
+        "Type_OCLImage2dDepthWO".enum(""),
+        "Type_OCLImage2dArrayDepthWO".enum(""),
+        "Type_OCLImage2dMSAAWO".enum(""),
+        "Type_OCLImage2dArrayMSAAWO".enum(""),
+        "Type_OCLImage2dMSAADepthWO".enum(""),
+        "Type_OCLImage2dArrayMSAADepthWO".enum(""),
+        "Type_OCLImage3dWO".enum(""),
+        "Type_OCLImage1dRW".enum(""),
+        "Type_OCLImage1dArrayRW".enum(""),
+        "Type_OCLImage1dBufferRW".enum(""),
+        "Type_OCLImage2dRW".enum(""),
+        "Type_OCLImage2dArrayRW".enum(""),
+        "Type_OCLImage2dDepthRW".enum(""),
+        "Type_OCLImage2dArrayDepthRW".enum(""),
+        "Type_OCLImage2dMSAARW".enum(""),
+        "Type_OCLImage2dArrayMSAARW".enum(""),
+        "Type_OCLImage2dMSAADepthRW".enum(""),
+        "Type_OCLImage2dArrayMSAADepthRW".enum(""),
+        "Type_OCLImage3dRW".enum(""),
+        "Type_OCLSampler".enum(""),
+        "Type_OCLEvent".enum(""),
+        "Type_OCLQueue".enum(""),
+        "Type_OCLReserveID".enum(""),
         "Type_ObjCObject".enum,
         "Type_ObjCTypeParam".enum,
         "Type_Attributed".enum,
-        "Type_OCLIntelSubgroupAVCMcePayload".enum("OpenCL builtin types."),
-        "Type_OCLIntelSubgroupAVCImePayload".enum("OpenCL builtin types."),
-        "Type_OCLIntelSubgroupAVCRefPayload".enum("OpenCL builtin types."),
-        "Type_OCLIntelSubgroupAVCSicPayload".enum("OpenCL builtin types."),
-        "Type_OCLIntelSubgroupAVCMceResult".enum("OpenCL builtin types."),
-        "Type_OCLIntelSubgroupAVCImeResult".enum("OpenCL builtin types."),
-        "Type_OCLIntelSubgroupAVCRefResult".enum("OpenCL builtin types."),
-        "Type_OCLIntelSubgroupAVCSicResult".enum("OpenCL builtin types."),
-        "Type_OCLIntelSubgroupAVCImeResultSingleRefStreamout".enum("OpenCL builtin types."),
-        "Type_OCLIntelSubgroupAVCImeResultDualRefStreamout".enum("OpenCL builtin types."),
-        "Type_OCLIntelSubgroupAVCImeSingleRefStreamin".enum("OpenCL builtin types."),
+        "Type_OCLIntelSubgroupAVCMcePayload".enum(""),
+        "Type_OCLIntelSubgroupAVCImePayload".enum(""),
+        "Type_OCLIntelSubgroupAVCRefPayload".enum(""),
+        "Type_OCLIntelSubgroupAVCSicPayload".enum(""),
+        "Type_OCLIntelSubgroupAVCMceResult".enum(""),
+        "Type_OCLIntelSubgroupAVCImeResult".enum(""),
+        "Type_OCLIntelSubgroupAVCRefResult".enum(""),
+        "Type_OCLIntelSubgroupAVCSicResult".enum(""),
+        "Type_OCLIntelSubgroupAVCImeResultSingleRefStreamout".enum(""),
+        "Type_OCLIntelSubgroupAVCImeResultDualRefStreamout".enum(""),
+        "Type_OCLIntelSubgroupAVCImeSingleRefStreamin".enum(""),
 
-        "Type_OCLIntelSubgroupAVCImeDualRefStreamin".enum("OpenCL builtin types.")
+        "Type_OCLIntelSubgroupAVCImeDualRefStreamin".enum(""),
+
+        "Type_ExtVector".enum(""),
+        "Type_Atomic".enum("")
     )
 
     EnumConstant(
@@ -1058,13 +1088,15 @@ val ClangIndex = "ClangIndex".nativeClass(
         "CallingConv_IntelOclBicc".enum,
         "CallingConv_Win64".enum,
         "CallingConv_X86_64Win64".enum("Alias for compatibility with older versions of API.", "CXCallingConv_Win64"),
-        "CallingConv_X86_64SysV".enum("Alias for compatibility with older versions of API.", "11"),
-        "CallingConv_X86VectorCall".enum("Alias for compatibility with older versions of API."),
-        "CallingConv_Swift".enum("Alias for compatibility with older versions of API."),
-        "CallingConv_PreserveMost".enum("Alias for compatibility with older versions of API."),
-        "CallingConv_PreserveAll".enum("Alias for compatibility with older versions of API."),
-        "CallingConv_Invalid".enum("Alias for compatibility with older versions of API.", "100"),
-        "CallingConv_Unexposed".enum("Alias for compatibility with older versions of API.", "200")
+        "CallingConv_X86_64SysV".enum("", "11"),
+        "CallingConv_X86VectorCall".enum(""),
+        "CallingConv_Swift".enum(""),
+        "CallingConv_PreserveMost".enum(""),
+        "CallingConv_PreserveAll".enum(""),
+        "CallingConv_AArch64VectorCall".enum(""),
+        "CallingConv_SwiftAsync".enum(""),
+        "CallingConv_Invalid".enum("", "100"),
+        "CallingConv_Unexposed".enum("", "200")
     )
 
     EnumConstant(
@@ -1097,7 +1129,13 @@ val ClangIndex = "ClangIndex".nativeClass(
             nullability of the type even though it has been considered.
             """
         ),
-        "TypeNullability_Invalid".enum("Nullability is not applicable to this type.")
+        "TypeNullability_Invalid".enum("Nullability is not applicable to this type."),
+        "TypeNullability_NullableResult".enum(
+            """
+            Generally behaves like {@code Nullable}, except when used in a block parameter that was imported into a swift async method. There, swift will
+            assume that the parameter can get null even if no error occured. {@code _Nullable} parameters are assumed to only get null on error.
+            """
+        )
     )
 
     EnumConstant(
@@ -1112,7 +1150,8 @@ val ClangIndex = "ClangIndex".nativeClass(
         "TypeLayoutError_Incomplete".enum("The type is an incomplete Type.", "-2"),
         "TypeLayoutError_Dependent".enum("The type is a dependent Type.", "-3"),
         "TypeLayoutError_NotConstantSize".enum("The type is not a constant size type.", "-4"),
-        "TypeLayoutError_InvalidFieldName".enum("The Field name is not valid for this record.", "-5")
+        "TypeLayoutError_InvalidFieldName".enum("The Field name is not valid for this record.", "-5"),
+        "TypeLayoutError_Undeduced".enum("The type is undeduced.", "-6")
     )
 
     EnumConstant(
@@ -2826,6 +2865,39 @@ val ClangIndex = "ClangIndex".nativeClass(
         CXPlatformAvailability.p("availability", "")
     )
 
+    IgnoreMissing..CXCursor(
+        "Cursor_getVarDeclInitializer",
+        "If cursor refers to a variable declaration and it has initializer returns cursor referring to the initializer otherwise return null cursor.",
+
+        CXCursor("cursor", ""),
+
+        since = "12"
+    )
+
+    IgnoreMissing..int(
+        "Cursor_hasVarDeclGlobalStorage",
+        """
+        If cursor refers to a variable declaration that has global storage returns 1. If cursor refers to a variable declaration that doesn't have global
+        storage returns 0. Otherwise returns -1.
+        """,
+
+        CXCursor("cursor", ""),
+
+        since = "12"
+    )
+
+    IgnoreMissing..int(
+        "Cursor_hasVarDeclExternalStorage",
+        """
+        If cursor refers to a variable declaration that has external storage returns 1. If cursor refers to a variable declaration that doesn't have external
+        storage returns 0. Otherwise returns -1.
+        """,
+
+        CXCursor("cursor", ""),
+
+        since = "12"
+    )
+
     CXLanguageKind(
         "getCursorLanguage",
         "Determine the \"language\" of the entity referred to by a given cursor.",
@@ -3460,7 +3532,7 @@ void foo <float , 2147483649, true>();""")}
     IgnoreMissing..unsigned(
         "Type_getNumObjCTypeArgs",
         """
-        Retreive the number of type arguments associated with an ObjC object.
+        Retrieve the number of type arguments associated with an ObjC object.
 
         If the type is not an ObjC object, 0 is returned.
         """,
@@ -3654,6 +3726,19 @@ void foo <float , 2147483649, true>();""")}
         CXType("T", "")
     )
 
+    IgnoreMissing..CXType(
+        "Type_getValueType",
+        """
+        Gets the type contained by this atomic type.
+        
+        If a non-atomic type is passed in, an invalid type is returned.
+        """,
+
+        CXType("CT", ""),
+
+        since = "11"
+    )
+
     long_long(
         "Cursor_getOffsetOfField",
         """
@@ -3669,9 +3754,27 @@ void foo <float , 2147483649, true>();""")}
 
     unsignedb(
         "Cursor_isAnonymous",
-        "Determine whether the given cursor represents an anonymous record declaration.",
+        "Determine whether the given cursor represents an anonymous tag or namespace.",
 
         CXCursor("C", "")
+    )
+
+    IgnoreMissing..unsignedb(
+        "Cursor_isAnonymousRecordDecl",
+        "Determine whether the given cursor represents an anonymous record declaration.",
+
+        CXCursor("C", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..unsignedb(
+        "Cursor_isInlineNamespace",
+        "Determine whether the given cursor represents an inline namespace declaration.",
+
+        CXCursor("C", ""),
+
+        since = "9"
     )
 
     int(
@@ -4863,6 +4966,8 @@ void foo <float , 2147483649, true>();""")}
         """
         If cursor is a statement declaration tries to evaluate the statement and if its variable, tries to evaluate its initializer, into its corresponding
         type.
+        
+        If it's an expression, tries to evaluate the expression.
         """,
 
         CXCursor("C", "")

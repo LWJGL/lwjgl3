@@ -50,8 +50,16 @@ public class LLVMDebugInfo {
             DILocationGetLine                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDILocationGetLine"),
             DILocationGetColumn                        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDILocationGetColumn"),
             DILocationGetScope                         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDILocationGetScope"),
+            DILocationGetInlinedAt                     = LLVMCore.getLibrary().getFunctionAddress("LLVMDILocationGetInlinedAt"),
+            DIScopeGetFile                             = LLVMCore.getLibrary().getFunctionAddress("LLVMDIScopeGetFile"),
+            DIFileGetDirectory                         = LLVMCore.getLibrary().getFunctionAddress("LLVMDIFileGetDirectory"),
+            DIFileGetFilename                          = LLVMCore.getLibrary().getFunctionAddress("LLVMDIFileGetFilename"),
+            DIFileGetSource                            = LLVMCore.getLibrary().getFunctionAddress("LLVMDIFileGetSource"),
             DIBuilderGetOrCreateTypeArray              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderGetOrCreateTypeArray"),
             DIBuilderCreateSubroutineType              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateSubroutineType"),
+            DIBuilderCreateMacro                       = LLVMCore.getLibrary().getFunctionAddress("LLVMDIBuilderCreateMacro"),
+            DIBuilderCreateTempMacroFile               = LLVMCore.getLibrary().getFunctionAddress("LLVMDIBuilderCreateTempMacroFile"),
+            DIBuilderCreateEnumerator                  = LLVMCore.getLibrary().getFunctionAddress("LLVMDIBuilderCreateEnumerator"),
             DIBuilderCreateEnumerationType             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateEnumerationType"),
             DIBuilderCreateUnionType                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateUnionType"),
             DIBuilderCreateArrayType                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateArrayType"),
@@ -87,6 +95,11 @@ public class LLVMDebugInfo {
             DIBuilderCreateExpression                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateExpression"),
             DIBuilderCreateConstantValueExpression     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateConstantValueExpression"),
             DIBuilderCreateGlobalVariableExpression    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateGlobalVariableExpression"),
+            DIGlobalVariableExpressionGetVariable      = LLVMCore.getLibrary().getFunctionAddress("LLVMDIGlobalVariableExpressionGetVariable"),
+            DIGlobalVariableExpressionGetExpression    = LLVMCore.getLibrary().getFunctionAddress("LLVMDIGlobalVariableExpressionGetExpression"),
+            DIVariableGetFile                          = LLVMCore.getLibrary().getFunctionAddress("LLVMDIVariableGetFile"),
+            DIVariableGetScope                         = LLVMCore.getLibrary().getFunctionAddress("LLVMDIVariableGetScope"),
+            DIVariableGetLine                          = LLVMCore.getLibrary().getFunctionAddress("LLVMDIVariableGetLine"),
             TemporaryMDNode                            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTemporaryMDNode"),
             DisposeTemporaryMDNode                     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeTemporaryMDNode"),
             MetadataReplaceAllUsesWith                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMMetadataReplaceAllUsesWith"),
@@ -99,6 +112,9 @@ public class LLVMDebugInfo {
             DIBuilderCreateParameterVariable           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateParameterVariable"),
             GetSubprogram                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetSubprogram"),
             SetSubprogram                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMSetSubprogram"),
+            DISubprogramGetLine                        = LLVMCore.getLibrary().getFunctionAddress("LLVMDISubprogramGetLine"),
+            InstructionGetDebugLoc                     = LLVMCore.getLibrary().getFunctionAddress("LLVMInstructionGetDebugLoc"),
+            InstructionSetDebugLoc                     = LLVMCore.getLibrary().getFunctionAddress("LLVMInstructionSetDebugLoc"),
             GetMetadataKind                            = LLVMCore.getLibrary().getFunctionAddress("LLVMGetMetadataKind");
 
     }
@@ -117,7 +133,7 @@ public class LLVMDebugInfo {
      * <li>{@link #LLVMDIFlagPublic DIFlagPublic}</li>
      * <li>{@link #LLVMDIFlagFwdDecl DIFlagFwdDecl}</li>
      * <li>{@link #LLVMDIFlagAppleBlock DIFlagAppleBlock}</li>
-     * <li>{@link #LLVMDIFlagBlockByrefStruct DIFlagBlockByrefStruct}</li>
+     * <li>{@link #LLVMDIFlagReservedBit4 DIFlagReservedBit4}</li>
      * <li>{@link #LLVMDIFlagVirtual DIFlagVirtual}</li>
      * <li>{@link #LLVMDIFlagArtificial DIFlagArtificial}</li>
      * <li>{@link #LLVMDIFlagExplicit DIFlagExplicit}</li>
@@ -135,13 +151,12 @@ public class LLVMDebugInfo {
      * <li>{@link #LLVMDIFlagIntroducedVirtual DIFlagIntroducedVirtual}</li>
      * <li>{@link #LLVMDIFlagBitField DIFlagBitField}</li>
      * <li>{@link #LLVMDIFlagNoReturn DIFlagNoReturn}</li>
-     * <li>{@link #LLVMDIFlagMainSubprogram DIFlagMainSubprogram}</li>
      * <li>{@link #LLVMDIFlagTypePassByValue DIFlagTypePassByValue}</li>
      * <li>{@link #LLVMDIFlagTypePassByReference DIFlagTypePassByReference}</li>
      * <li>{@link #LLVMDIFlagEnumClass DIFlagEnumClass}</li>
      * <li>{@link #LLVMDIFlagFixedEnum DIFlagFixedEnum}</li>
      * <li>{@link #LLVMDIFlagThunk DIFlagThunk}</li>
-     * <li>{@link #LLVMDIFlagTrivial DIFlagTrivial}</li>
+     * <li>{@link #LLVMDIFlagNonTrivial DIFlagNonTrivial}</li>
      * <li>{@link #LLVMDIFlagBigEndian DIFlagBigEndian}</li>
      * <li>{@link #LLVMDIFlagLittleEndian DIFlagLittleEndian}</li>
      * <li>{@link #LLVMDIFlagIndirectVirtualBase DIFlagIndirectVirtualBase}</li>
@@ -156,7 +171,7 @@ public class LLVMDebugInfo {
         LLVMDIFlagPublic              = 3,
         LLVMDIFlagFwdDecl             = 1 << 2,
         LLVMDIFlagAppleBlock          = 1 << 3,
-        LLVMDIFlagBlockByrefStruct    = 1 << 4,
+        LLVMDIFlagReservedBit4        = 1 << 4,
         LLVMDIFlagVirtual             = 1 << 5,
         LLVMDIFlagArtificial          = 1 << 6,
         LLVMDIFlagExplicit            = 1 << 7,
@@ -174,13 +189,12 @@ public class LLVMDebugInfo {
         LLVMDIFlagIntroducedVirtual   = 1 << 18,
         LLVMDIFlagBitField            = 1 << 19,
         LLVMDIFlagNoReturn            = 1 << 20,
-        LLVMDIFlagMainSubprogram      = 1 << 21,
         LLVMDIFlagTypePassByValue     = 1 << 22,
         LLVMDIFlagTypePassByReference = 1 << 23,
         LLVMDIFlagEnumClass           = 1 << 24,
         LLVMDIFlagFixedEnum           = LLVMDIFlagEnumClass,
         LLVMDIFlagThunk               = 1 << 25,
-        LLVMDIFlagTrivial             = 1 << 26,
+        LLVMDIFlagNonTrivial          = 1 << 26,
         LLVMDIFlagBigEndian           = 1 << 27,
         LLVMDIFlagLittleEndian        = 1 << 28,
         LLVMDIFlagIndirectVirtualBase = (1 << 2) | (1 << 5),
@@ -334,6 +348,10 @@ public class LLVMDebugInfo {
      * <li>{@link #LLVMDIImportedEntityMetadataKind DIImportedEntityMetadataKind}</li>
      * <li>{@link #LLVMDIMacroMetadataKind DIMacroMetadataKind}</li>
      * <li>{@link #LLVMDIMacroFileMetadataKind DIMacroFileMetadataKind}</li>
+     * <li>{@link #LLVMDICommonBlockMetadataKind DICommonBlockMetadataKind}</li>
+     * <li>{@link #LLVMDIStringTypeMetadataKind DIStringTypeMetadataKind}</li>
+     * <li>{@link #LLVMDIGenericSubrangeMetadataKind DIGenericSubrangeMetadataKind}</li>
+     * <li>{@link #LLVMDIArgListMetadataKind DIArgListMetadataKind}</li>
      * </ul>
      */
     public static final int
@@ -367,7 +385,35 @@ public class LLVMDebugInfo {
         LLVMDIObjCPropertyMetadataKind               = 27,
         LLVMDIImportedEntityMetadataKind             = 28,
         LLVMDIMacroMetadataKind                      = 29,
-        LLVMDIMacroFileMetadataKind                  = 30;
+        LLVMDIMacroFileMetadataKind                  = 30,
+        LLVMDICommonBlockMetadataKind                = 31,
+        LLVMDIStringTypeMetadataKind                 = 32,
+        LLVMDIGenericSubrangeMetadataKind            = 33,
+        LLVMDIArgListMetadataKind                    = 34;
+
+    /**
+     * Describes the kind of macro declaration used for {@code LLVMDIBuilderCreateMacro}. ({@code LLVMDWARFMacinfoRecordType})
+     * 
+     * <p>See {@code llvm::dwarf::MacinfoRecordType}.</p>
+     * 
+     * <p>Note: Values are from {@code DW_MACINFO_*} constants in the DWARF specification.</p>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #LLVMDWARFMacinfoRecordTypeDefine DWARFMacinfoRecordTypeDefine}</li>
+     * <li>{@link #LLVMDWARFMacinfoRecordTypeMacro DWARFMacinfoRecordTypeMacro}</li>
+     * <li>{@link #LLVMDWARFMacinfoRecordTypeStartFile DWARFMacinfoRecordTypeStartFile}</li>
+     * <li>{@link #LLVMDWARFMacinfoRecordTypeEndFile DWARFMacinfoRecordTypeEndFile}</li>
+     * <li>{@link #LLVMDWARFMacinfoRecordTypeVendorExt DWARFMacinfoRecordTypeVendorExt}</li>
+     * </ul>
+     */
+    public static final int
+        LLVMDWARFMacinfoRecordTypeDefine    = 0x01,
+        LLVMDWARFMacinfoRecordTypeMacro     = 0x02,
+        LLVMDWARFMacinfoRecordTypeStartFile = 0x03,
+        LLVMDWARFMacinfoRecordTypeEndFile   = 0x04,
+        LLVMDWARFMacinfoRecordTypeVendorExt = 0xff;
 
     protected LLVMDebugInfo() {
         throw new UnsupportedOperationException();
@@ -472,14 +518,16 @@ public class LLVMDebugInfo {
      * @param ProducerLen  the length of the C string passed to {@code Producer}
      * @param FlagsLen     the length of the C string passed to {@code Flags}
      * @param SplitNameLen the length of the C string passed to {@code SplitName}
+     * @param SysRootLen   the length of the C string passed to {@code SysRoot}
+     * @param SDKLen       the length of the C string passed to {@code SDK}
      */
-    public static long nLLVMDIBuilderCreateCompileUnit(long Builder, int Lang, long FileRef, long Producer, long ProducerLen, int isOptimized, long Flags, long FlagsLen, int RuntimeVer, long SplitName, long SplitNameLen, int Kind, int DWOId, int SplitDebugInlining, int DebugInfoForProfiling) {
+    public static long nLLVMDIBuilderCreateCompileUnit(long Builder, int Lang, long FileRef, long Producer, long ProducerLen, int isOptimized, long Flags, long FlagsLen, int RuntimeVer, long SplitName, long SplitNameLen, int Kind, int DWOId, int SplitDebugInlining, int DebugInfoForProfiling, long SysRoot, long SysRootLen, long SDK, long SDKLen) {
         long __functionAddress = Functions.DIBuilderCreateCompileUnit;
         if (CHECKS) {
             check(Builder);
             check(FileRef);
         }
-        return invokePPPPPPPPP(Builder, Lang, FileRef, Producer, ProducerLen, isOptimized, Flags, FlagsLen, RuntimeVer, SplitName, SplitNameLen, Kind, DWOId, SplitDebugInlining, DebugInfoForProfiling, __functionAddress);
+        return invokePPPPPPPPPPPPP(Builder, Lang, FileRef, Producer, ProducerLen, isOptimized, Flags, FlagsLen, RuntimeVer, SplitName, SplitNameLen, Kind, DWOId, SplitDebugInlining, DebugInfoForProfiling, SysRoot, SysRootLen, SDK, SDKLen, __functionAddress);
     }
 
     /**
@@ -497,10 +545,12 @@ public class LLVMDebugInfo {
      * @param DWOId                 the DWOId if this is a split skeleton compile unit
      * @param SplitDebugInlining    whether to emit inline debug info
      * @param DebugInfoForProfiling whether to emit extra debug info for profile collection
+     * @param SysRoot               the Clang system root (value of {@code -isysroot})
+     * @param SDK                   the SDK. On Darwin, the last component of the {@code sysroot}.
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateCompileUnit(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMDWARFSourceLanguage") int Lang, @NativeType("LLVMMetadataRef") long FileRef, @NativeType("char const *") ByteBuffer Producer, @NativeType("LLVMBool") boolean isOptimized, @NativeType("char const *") ByteBuffer Flags, @NativeType("unsigned int") int RuntimeVer, @NativeType("char const *") ByteBuffer SplitName, @NativeType("LLVMDWARFEmissionKind") int Kind, @NativeType("unsigned int") int DWOId, @NativeType("LLVMBool") boolean SplitDebugInlining, @NativeType("LLVMBool") boolean DebugInfoForProfiling) {
-        return nLLVMDIBuilderCreateCompileUnit(Builder, Lang, FileRef, memAddress(Producer), Producer.remaining(), isOptimized ? 1 : 0, memAddress(Flags), Flags.remaining(), RuntimeVer, memAddress(SplitName), SplitName.remaining(), Kind, DWOId, SplitDebugInlining ? 1 : 0, DebugInfoForProfiling ? 1 : 0);
+    public static long LLVMDIBuilderCreateCompileUnit(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMDWARFSourceLanguage") int Lang, @NativeType("LLVMMetadataRef") long FileRef, @NativeType("char const *") ByteBuffer Producer, @NativeType("LLVMBool") boolean isOptimized, @NativeType("char const *") ByteBuffer Flags, @NativeType("unsigned int") int RuntimeVer, @NativeType("char const *") ByteBuffer SplitName, @NativeType("LLVMDWARFEmissionKind") int Kind, @NativeType("unsigned int") int DWOId, @NativeType("LLVMBool") boolean SplitDebugInlining, @NativeType("LLVMBool") boolean DebugInfoForProfiling, @NativeType("char const *") ByteBuffer SysRoot, @NativeType("char const *") ByteBuffer SDK) {
+        return nLLVMDIBuilderCreateCompileUnit(Builder, Lang, FileRef, memAddress(Producer), Producer.remaining(), isOptimized ? 1 : 0, memAddress(Flags), Flags.remaining(), RuntimeVer, memAddress(SplitName), SplitName.remaining(), Kind, DWOId, SplitDebugInlining ? 1 : 0, DebugInfoForProfiling ? 1 : 0, memAddress(SysRoot), SysRoot.remaining(), memAddress(SDK), SDK.remaining());
     }
 
     /**
@@ -518,9 +568,11 @@ public class LLVMDebugInfo {
      * @param DWOId                 the DWOId if this is a split skeleton compile unit
      * @param SplitDebugInlining    whether to emit inline debug info
      * @param DebugInfoForProfiling whether to emit extra debug info for profile collection
+     * @param SysRoot               the Clang system root (value of {@code -isysroot})
+     * @param SDK                   the SDK. On Darwin, the last component of the {@code sysroot}.
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateCompileUnit(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMDWARFSourceLanguage") int Lang, @NativeType("LLVMMetadataRef") long FileRef, @NativeType("char const *") CharSequence Producer, @NativeType("LLVMBool") boolean isOptimized, @NativeType("char const *") CharSequence Flags, @NativeType("unsigned int") int RuntimeVer, @NativeType("char const *") CharSequence SplitName, @NativeType("LLVMDWARFEmissionKind") int Kind, @NativeType("unsigned int") int DWOId, @NativeType("LLVMBool") boolean SplitDebugInlining, @NativeType("LLVMBool") boolean DebugInfoForProfiling) {
+    public static long LLVMDIBuilderCreateCompileUnit(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMDWARFSourceLanguage") int Lang, @NativeType("LLVMMetadataRef") long FileRef, @NativeType("char const *") CharSequence Producer, @NativeType("LLVMBool") boolean isOptimized, @NativeType("char const *") CharSequence Flags, @NativeType("unsigned int") int RuntimeVer, @NativeType("char const *") CharSequence SplitName, @NativeType("LLVMDWARFEmissionKind") int Kind, @NativeType("unsigned int") int DWOId, @NativeType("LLVMBool") boolean SplitDebugInlining, @NativeType("LLVMBool") boolean DebugInfoForProfiling, @NativeType("char const *") CharSequence SysRoot, @NativeType("char const *") CharSequence SDK) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             int ProducerEncodedLength = stack.nUTF8(Producer, false);
@@ -529,7 +581,11 @@ public class LLVMDebugInfo {
             long FlagsEncoded = stack.getPointerAddress();
             int SplitNameEncodedLength = stack.nUTF8(SplitName, false);
             long SplitNameEncoded = stack.getPointerAddress();
-            return nLLVMDIBuilderCreateCompileUnit(Builder, Lang, FileRef, ProducerEncoded, ProducerEncodedLength, isOptimized ? 1 : 0, FlagsEncoded, FlagsEncodedLength, RuntimeVer, SplitNameEncoded, SplitNameEncodedLength, Kind, DWOId, SplitDebugInlining ? 1 : 0, DebugInfoForProfiling ? 1 : 0);
+            int SysRootEncodedLength = stack.nUTF8(SysRoot, false);
+            long SysRootEncoded = stack.getPointerAddress();
+            int SDKEncodedLength = stack.nUTF8(SDK, false);
+            long SDKEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateCompileUnit(Builder, Lang, FileRef, ProducerEncoded, ProducerEncodedLength, isOptimized ? 1 : 0, FlagsEncoded, FlagsEncodedLength, RuntimeVer, SplitNameEncoded, SplitNameEncodedLength, Kind, DWOId, SplitDebugInlining ? 1 : 0, DebugInfoForProfiling ? 1 : 0, SysRootEncoded, SysRootEncodedLength, SDKEncoded, SDKEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -592,15 +648,15 @@ public class LLVMDebugInfo {
      * @param NameLen         the length of the C string passed to {@code Name}
      * @param ConfigMacrosLen the length of the C string passed to {@code ConfigMacros}
      * @param IncludePathLen  the length of the C string passed to {@code IncludePath}
-     * @param ISysRootLen     the length of the C string passed to {@code ISysRoot}
+     * @param APINotesFileLen he length of the C string passed to {@code APINotestFile}
      */
-    public static long nLLVMDIBuilderCreateModule(long Builder, long ParentScope, long Name, long NameLen, long ConfigMacros, long ConfigMacrosLen, long IncludePath, long IncludePathLen, long ISysRoot, long ISysRootLen) {
+    public static long nLLVMDIBuilderCreateModule(long Builder, long ParentScope, long Name, long NameLen, long ConfigMacros, long ConfigMacrosLen, long IncludePath, long IncludePathLen, long APINotesFile, long APINotesFileLen) {
         long __functionAddress = Functions.DIBuilderCreateModule;
         if (CHECKS) {
             check(Builder);
             check(ParentScope);
         }
-        return invokePPPPPPPPPPP(Builder, ParentScope, Name, NameLen, ConfigMacros, ConfigMacrosLen, IncludePath, IncludePathLen, ISysRoot, ISysRootLen, __functionAddress);
+        return invokePPPPPPPPPPP(Builder, ParentScope, Name, NameLen, ConfigMacros, ConfigMacrosLen, IncludePath, IncludePathLen, APINotesFile, APINotesFileLen, __functionAddress);
     }
 
     /**
@@ -611,11 +667,11 @@ public class LLVMDebugInfo {
      * @param Name         module name
      * @param ConfigMacros a space-separated shell-quoted list of {@code -D} macro definitions as they would appear on a command line
      * @param IncludePath  the path to the module map file
-     * @param ISysRoot     the Clang system root (value of {@code -isysroot})
+     * @param APINotesFile the path to an API notes file for the module
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateModule(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long ParentScope, @NativeType("char const *") ByteBuffer Name, @NativeType("char const *") ByteBuffer ConfigMacros, @NativeType("char const *") ByteBuffer IncludePath, @NativeType("char const *") ByteBuffer ISysRoot) {
-        return nLLVMDIBuilderCreateModule(Builder, ParentScope, memAddress(Name), Name.remaining(), memAddress(ConfigMacros), ConfigMacros.remaining(), memAddress(IncludePath), IncludePath.remaining(), memAddress(ISysRoot), ISysRoot.remaining());
+    public static long LLVMDIBuilderCreateModule(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long ParentScope, @NativeType("char const *") ByteBuffer Name, @NativeType("char const *") ByteBuffer ConfigMacros, @NativeType("char const *") ByteBuffer IncludePath, @NativeType("char const *") ByteBuffer APINotesFile) {
+        return nLLVMDIBuilderCreateModule(Builder, ParentScope, memAddress(Name), Name.remaining(), memAddress(ConfigMacros), ConfigMacros.remaining(), memAddress(IncludePath), IncludePath.remaining(), memAddress(APINotesFile), APINotesFile.remaining());
     }
 
     /**
@@ -626,10 +682,10 @@ public class LLVMDebugInfo {
      * @param Name         module name
      * @param ConfigMacros a space-separated shell-quoted list of {@code -D} macro definitions as they would appear on a command line
      * @param IncludePath  the path to the module map file
-     * @param ISysRoot     the Clang system root (value of {@code -isysroot})
+     * @param APINotesFile the path to an API notes file for the module
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateModule(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long ParentScope, @NativeType("char const *") CharSequence Name, @NativeType("char const *") CharSequence ConfigMacros, @NativeType("char const *") CharSequence IncludePath, @NativeType("char const *") CharSequence ISysRoot) {
+    public static long LLVMDIBuilderCreateModule(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long ParentScope, @NativeType("char const *") CharSequence Name, @NativeType("char const *") CharSequence ConfigMacros, @NativeType("char const *") CharSequence IncludePath, @NativeType("char const *") CharSequence APINotesFile) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             int NameEncodedLength = stack.nUTF8(Name, false);
@@ -638,9 +694,9 @@ public class LLVMDebugInfo {
             long ConfigMacrosEncoded = stack.getPointerAddress();
             int IncludePathEncodedLength = stack.nUTF8(IncludePath, false);
             long IncludePathEncoded = stack.getPointerAddress();
-            int ISysRootEncodedLength = stack.nUTF8(ISysRoot, false);
-            long ISysRootEncoded = stack.getPointerAddress();
-            return nLLVMDIBuilderCreateModule(Builder, ParentScope, NameEncoded, NameEncodedLength, ConfigMacrosEncoded, ConfigMacrosEncodedLength, IncludePathEncoded, IncludePathEncodedLength, ISysRootEncoded, ISysRootEncodedLength);
+            int APINotesFileEncodedLength = stack.nUTF8(APINotesFile, false);
+            long APINotesFileEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateModule(Builder, ParentScope, NameEncoded, NameEncodedLength, ConfigMacrosEncoded, ConfigMacrosEncodedLength, IncludePathEncoded, IncludePathEncodedLength, APINotesFileEncoded, APINotesFileEncodedLength);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1004,6 +1060,162 @@ public class LLVMDebugInfo {
         return invokePP(Location, __functionAddress);
     }
 
+    // --- [ LLVMDILocationGetInlinedAt ] ---
+
+    /**
+     * Get the "inline at" location associated with this debug location.
+     * 
+     * <p>See {@code DILocation::getInlinedAt()}.</p>
+     *
+     * @param Location the debug location
+     *
+     * @since 9
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDILocationGetInlinedAt(@NativeType("LLVMMetadataRef") long Location) {
+        long __functionAddress = Functions.DILocationGetInlinedAt;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Location);
+        }
+        return invokePP(Location, __functionAddress);
+    }
+
+    // --- [ LLVMDIScopeGetFile ] ---
+
+    /**
+     * Get the metadata of the file associated with a given scope.
+     * 
+     * <p>See {@code DIScope::getFile()}.</p>
+     *
+     * @param Scope the scope object
+     *
+     * @since 9
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIScopeGetFile(@NativeType("LLVMMetadataRef") long Scope) {
+        long __functionAddress = Functions.DIScopeGetFile;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Scope);
+        }
+        return invokePP(Scope, __functionAddress);
+    }
+
+    // --- [ LLVMDIFileGetDirectory ] ---
+
+    /**
+     * Unsafe version of: {@link #LLVMDIFileGetDirectory DIFileGetDirectory}
+     *
+     * @param Len the length of the returned string
+     */
+    public static long nLLVMDIFileGetDirectory(long File, long Len) {
+        long __functionAddress = Functions.DIFileGetDirectory;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(File);
+        }
+        return invokePPP(File, Len, __functionAddress);
+    }
+
+    /**
+     * Get the directory of a given file.
+     * 
+     * <p>See {@code DIFile::getDirectory()}</p>
+     *
+     * @param File the file object
+     *
+     * @since 9
+     */
+    @Nullable
+    @NativeType("char const *")
+    public static String LLVMDIFileGetDirectory(@NativeType("LLVMMetadataRef") long File) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            IntBuffer Len = stack.callocInt(1);
+            long __result = nLLVMDIFileGetDirectory(File, memAddress(Len));
+            return memUTF8Safe(__result, Len.get(0));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMDIFileGetFilename ] ---
+
+    /**
+     * Unsafe version of: {@link #LLVMDIFileGetFilename DIFileGetFilename}
+     *
+     * @param Len the length of the returned string
+     */
+    public static long nLLVMDIFileGetFilename(long File, long Len) {
+        long __functionAddress = Functions.DIFileGetFilename;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(File);
+        }
+        return invokePPP(File, Len, __functionAddress);
+    }
+
+    /**
+     * Get the name of a given file.
+     * 
+     * <p>See {@code DIFile::getFilename()}.</p>
+     *
+     * @param File the file object
+     *
+     * @since 9
+     */
+    @Nullable
+    @NativeType("char const *")
+    public static String LLVMDIFileGetFilename(@NativeType("LLVMMetadataRef") long File) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            IntBuffer Len = stack.callocInt(1);
+            long __result = nLLVMDIFileGetFilename(File, memAddress(Len));
+            return memUTF8Safe(__result, Len.get(0));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMDIFileGetSource ] ---
+
+    /**
+     * Unsafe version of: {@link #LLVMDIFileGetSource DIFileGetSource}
+     *
+     * @param Len the length of the returned string
+     */
+    public static long nLLVMDIFileGetSource(long File, long Len) {
+        long __functionAddress = Functions.DIFileGetSource;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(File);
+        }
+        return invokePPP(File, Len, __functionAddress);
+    }
+
+    /**
+     * Get the source of a given file.
+     * 
+     * <p>See {@code DIFile::getSource()}.</p>
+     *
+     * @param File the file object
+     *
+     * @since 9
+     */
+    @Nullable
+    @NativeType("char const *")
+    public static String LLVMDIFileGetSource(@NativeType("LLVMMetadataRef") long File) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            IntBuffer Len = stack.callocInt(1);
+            long __result = nLLVMDIFileGetSource(File, memAddress(Len));
+            return memUTF8Safe(__result, Len.get(0));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ LLVMDIBuilderGetOrCreateTypeArray ] ---
 
     /**
@@ -1057,6 +1269,123 @@ public class LLVMDebugInfo {
     @NativeType("LLVMMetadataRef")
     public static long LLVMDIBuilderCreateSubroutineType(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long File, @NativeType("LLVMMetadataRef *") PointerBuffer ParameterTypes, @NativeType("LLVMDIFlags") int Flags) {
         return nLLVMDIBuilderCreateSubroutineType(Builder, File, memAddress(ParameterTypes), ParameterTypes.remaining(), Flags);
+    }
+
+    // --- [ LLVMDIBuilderCreateMacro ] ---
+
+    /**
+     * Unsafe version of: {@link #LLVMDIBuilderCreateMacro DIBuilderCreateMacro}
+     *
+     * @param NameLen  macro name length
+     * @param ValueLen macro value length
+     */
+    public static long nLLVMDIBuilderCreateMacro(long Builder, long ParentMacroFile, int Line, int RecordType, long Name, long NameLen, long Value, long ValueLen) {
+        long __functionAddress = Functions.DIBuilderCreateMacro;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+        }
+        return invokePPPPPPP(Builder, ParentMacroFile, Line, RecordType, Name, NameLen, Value, ValueLen, __functionAddress);
+    }
+
+    /**
+     * Create debugging information entry for a macro.
+     *
+     * @param Builder         the {@code DIBuilder}
+     * @param ParentMacroFile macro parent (could be {@code NULL}).
+     * @param Line            source line number where the macro is defined
+     * @param RecordType      {@code DW_MACINFO_define} or {@code DW_MACINFO_undef}
+     * @param Name            macro name
+     * @param Value           macro value
+     *
+     * @since 10
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateMacro(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long ParentMacroFile, @NativeType("unsigned") int Line, @NativeType("LLVMDWARFMacinfoRecordType") int RecordType, @NativeType("char const *") ByteBuffer Name, @NativeType("char const *") ByteBuffer Value) {
+        return nLLVMDIBuilderCreateMacro(Builder, ParentMacroFile, Line, RecordType, memAddress(Name), Name.remaining(), memAddress(Value), Value.remaining());
+    }
+
+    /**
+     * Create debugging information entry for a macro.
+     *
+     * @param Builder         the {@code DIBuilder}
+     * @param ParentMacroFile macro parent (could be {@code NULL}).
+     * @param Line            source line number where the macro is defined
+     * @param RecordType      {@code DW_MACINFO_define} or {@code DW_MACINFO_undef}
+     * @param Name            macro name
+     * @param Value           macro value
+     *
+     * @since 10
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateMacro(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long ParentMacroFile, @NativeType("unsigned") int Line, @NativeType("LLVMDWARFMacinfoRecordType") int RecordType, @NativeType("char const *") CharSequence Name, @NativeType("char const *") CharSequence Value) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            int ValueEncodedLength = stack.nUTF8(Value, false);
+            long ValueEncoded = stack.getPointerAddress();
+            return nLLVMDIBuilderCreateMacro(Builder, ParentMacroFile, Line, RecordType, NameEncoded, NameEncodedLength, ValueEncoded, ValueEncodedLength);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMDIBuilderCreateTempMacroFile ] ---
+
+    /**
+     * Create debugging information temporary entry for a macro file.
+     * 
+     * <p>List of macro node direct children will be calculated by {@code DIBuilder}, using the {@code ParentMacroFile} relationship.</p>
+     *
+     * @param Builder         the DIBuilder
+     * @param ParentMacroFile macro parent (could be {@code NULL})
+     * @param Line            source line number where the macro file is included
+     * @param File            file descriptor containing the name of the macro file
+     *
+     * @since 10
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateTempMacroFile(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long ParentMacroFile, @NativeType("unsigned") int Line, @NativeType("LLVMMetadataRef") long File) {
+        long __functionAddress = Functions.DIBuilderCreateTempMacroFile;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+            check(ParentMacroFile);
+            check(File);
+        }
+        return invokePPPP(Builder, ParentMacroFile, Line, File, __functionAddress);
+    }
+
+    // --- [ LLVMDIBuilderCreateEnumerator ] ---
+
+    /**
+     * Unsafe version of: {@link #LLVMDIBuilderCreateEnumerator DIBuilderCreateEnumerator}
+     *
+     * @param NameLen length of enumerator name
+     */
+    public static long nLLVMDIBuilderCreateEnumerator(long Builder, long Name, long NameLen, long Value, int IsUnsigned) {
+        long __functionAddress = Functions.DIBuilderCreateEnumerator;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+        }
+        return invokePPPJP(Builder, Name, NameLen, Value, IsUnsigned, __functionAddress);
+    }
+
+    /**
+     * Create debugging information entry for an enumerator.
+     *
+     * @param Builder    the DIBuilder
+     * @param Name       enumerator name
+     * @param Value      enumerator value
+     * @param IsUnsigned true if the value is unsigned
+     *
+     * @since 10
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateEnumerator(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("char const *") ByteBuffer Name, @NativeType("int64_t") long Value, @NativeType("LLVMBool") boolean IsUnsigned) {
+        return nLLVMDIBuilderCreateEnumerator(Builder, memAddress(Name), Name.remaining(), Value, IsUnsigned ? 1 : 0);
     }
 
     // --- [ LLVMDIBuilderCreateEnumerationType ] ---
@@ -1818,7 +2147,7 @@ public class LLVMDebugInfo {
     // --- [ LLVMDIBuilderCreateTypedef ] ---
 
     /** Unsafe version of: {@link #LLVMDIBuilderCreateTypedef DIBuilderCreateTypedef} */
-    public static long nLLVMDIBuilderCreateTypedef(long Builder, long Type, long Name, long NameLen, long File, int LineNo, long Scope) {
+    public static long nLLVMDIBuilderCreateTypedef(long Builder, long Type, long Name, long NameLen, long File, int LineNo, long Scope, int AlignInBits) {
         long __functionAddress = Functions.DIBuilderCreateTypedef;
         if (CHECKS) {
             check(Builder);
@@ -1826,7 +2155,7 @@ public class LLVMDebugInfo {
             check(File);
             check(Scope);
         }
-        return invokePPPPPPP(Builder, Type, Name, NameLen, File, LineNo, Scope, __functionAddress);
+        return invokePPPPPPP(Builder, Type, Name, NameLen, File, LineNo, Scope, AlignInBits, __functionAddress);
     }
 
     /**
@@ -1840,8 +2169,8 @@ public class LLVMDebugInfo {
      * @param Scope   the surrounding context for the typedef
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateTypedef(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Type, @NativeType("char const *") ByteBuffer Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNo, @NativeType("LLVMMetadataRef") long Scope) {
-        return nLLVMDIBuilderCreateTypedef(Builder, Type, memAddress(Name), Name.remaining(), File, LineNo, Scope);
+    public static long LLVMDIBuilderCreateTypedef(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Type, @NativeType("char const *") ByteBuffer Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNo, @NativeType("LLVMMetadataRef") long Scope, @NativeType("uint32_t") int AlignInBits) {
+        return nLLVMDIBuilderCreateTypedef(Builder, Type, memAddress(Name), Name.remaining(), File, LineNo, Scope, AlignInBits);
     }
 
     /**
@@ -1855,12 +2184,12 @@ public class LLVMDebugInfo {
      * @param Scope   the surrounding context for the typedef
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateTypedef(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Type, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNo, @NativeType("LLVMMetadataRef") long Scope) {
+    public static long LLVMDIBuilderCreateTypedef(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Type, @NativeType("char const *") CharSequence Name, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int LineNo, @NativeType("LLVMMetadataRef") long Scope, @NativeType("uint32_t") int AlignInBits) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             int NameEncodedLength = stack.nUTF8(Name, false);
             long NameEncoded = stack.getPointerAddress();
-            return nLLVMDIBuilderCreateTypedef(Builder, Type, NameEncoded, NameEncodedLength, File, LineNo, Scope);
+            return nLLVMDIBuilderCreateTypedef(Builder, Type, NameEncoded, NameEncodedLength, File, LineNo, Scope, AlignInBits);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2445,6 +2774,111 @@ public class LLVMDebugInfo {
         }
     }
 
+    // --- [ LLVMDIGlobalVariableExpressionGetVariable ] ---
+
+    /**
+     * Retrieves the {@code DIVariable} associated with this global variable expression.
+     * 
+     * <p>See {@code llvm::DIGlobalVariableExpression::getVariable()}.</p>
+     *
+     * @param GVE the global variable expression
+     *
+     * @since 9
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIGlobalVariableExpressionGetVariable(@NativeType("LLVMMetadataRef") long GVE) {
+        long __functionAddress = Functions.DIGlobalVariableExpressionGetVariable;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(GVE);
+        }
+        return invokePP(GVE, __functionAddress);
+    }
+
+    // --- [ LLVMDIGlobalVariableExpressionGetExpression ] ---
+
+    /**
+     * Retrieves the {@code DIExpression} associated with this global variable expression.
+     * 
+     * <p>See {@code llvm::DIGlobalVariableExpression::getExpression()}.</p>
+     *
+     * @param GVE the global variable expression
+     *
+     * @since 9
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIGlobalVariableExpressionGetExpression(@NativeType("LLVMMetadataRef") long GVE) {
+        long __functionAddress = Functions.DIGlobalVariableExpressionGetExpression;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(GVE);
+        }
+        return invokePP(GVE, __functionAddress);
+    }
+
+    // --- [ LLVMDIVariableGetFile ] ---
+
+    /**
+     * Get the metadata of the file associated with a given variable.
+     * 
+     * <p>See {@code DIVariable::getFile()},</p>
+     *
+     * @param Var the variable object
+     *
+     * @since 9
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIVariableGetFile(@NativeType("LLVMMetadataRef") long Var) {
+        long __functionAddress = Functions.DIVariableGetFile;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Var);
+        }
+        return invokePP(Var, __functionAddress);
+    }
+
+    // --- [ LLVMDIVariableGetScope ] ---
+
+    /**
+     * Get the metadata of the scope associated with a given variable.
+     * 
+     * <p>See {@code DIVariable::getScope()},</p>
+     *
+     * @param Var the variable object
+     *
+     * @since 9
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIVariableGetScope(@NativeType("LLVMMetadataRef") long Var) {
+        long __functionAddress = Functions.DIVariableGetScope;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Var);
+        }
+        return invokePP(Var, __functionAddress);
+    }
+
+    // --- [ LLVMDIVariableGetLine ] ---
+
+    /**
+     * Get the source line where this {@code DIVariable} is declared.
+     * 
+     * <p>See {@code DIVariable::getLine()}.</p>
+     *
+     * @param Var the {@code DIVariable}
+     *
+     * @since 9
+     */
+    @NativeType("unsigned")
+    public static int LLVMDIVariableGetLine(@NativeType("LLVMMetadataRef") long Var) {
+        long __functionAddress = Functions.DIVariableGetLine;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Var);
+        }
+        return invokePI(Var, __functionAddress);
+    }
+
     // --- [ LLVMTemporaryMDNode ] ---
 
     /**
@@ -2821,6 +3255,66 @@ public class LLVMDebugInfo {
             check(SP);
         }
         invokePPV(Func, SP, __functionAddress);
+    }
+
+    // --- [ LLVMDISubprogramGetLine ] ---
+
+    /**
+     * Get the line associated with a given subprogram.
+     * 
+     * <p>See {@code DISubprogram::getLine()}.</p>
+     *
+     * @param Subprogram the subprogram object
+     *
+     * @since 9
+     */
+    @NativeType("unsigned")
+    public static int LLVMDISubprogramGetLine(@NativeType("LLVMMetadataRef") long Subprogram) {
+        long __functionAddress = Functions.DISubprogramGetLine;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Subprogram);
+        }
+        return invokePI(Subprogram, __functionAddress);
+    }
+
+    // --- [ LLVMInstructionGetDebugLoc ] ---
+
+    /**
+     * Get the debug location for the given instruction.
+     * 
+     * <p>See {@code llvm::Instruction::getDebugLoc()}</p>
+     *
+     * @since 9
+     */
+    @NativeType("unsigned")
+    public static int LLVMInstructionGetDebugLoc(@NativeType("LLVMValueRef") long Inst) {
+        long __functionAddress = Functions.InstructionGetDebugLoc;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Inst);
+        }
+        return invokePI(Inst, __functionAddress);
+    }
+
+    // --- [ LLVMInstructionSetDebugLoc ] ---
+
+    /**
+     * Set the debug location for the given instruction.
+     * 
+     * <p>To clear the location metadata of the given instruction, pass {@code NULL} to {@code Loc}.</p>
+     * 
+     * <p>See {@code llvm::Instruction::setDebugLoc()}</p>
+     *
+     * @since 9
+     */
+    public static void LLVMInstructionSetDebugLoc(@NativeType("LLVMValueRef") long Inst, @NativeType("LLVMMetadataRef") long Loc) {
+        long __functionAddress = Functions.InstructionSetDebugLoc;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Inst);
+        }
+        invokePPV(Inst, Loc, __functionAddress);
     }
 
     // --- [ LLVMGetMetadataKind ] ---

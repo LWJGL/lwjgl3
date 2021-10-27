@@ -41,16 +41,16 @@ public class LLVMComdat {
      * <li>{@link #LLVMAnyComdatSelectionKind AnyComdatSelectionKind} - The linker may choose any COMDAT.</li>
      * <li>{@link #LLVMExactMatchComdatSelectionKind ExactMatchComdatSelectionKind} - The data referenced by the COMDAT must be the same.</li>
      * <li>{@link #LLVMLargestComdatSelectionKind LargestComdatSelectionKind} - The linker will choose the largest COMDAT.</li>
-     * <li>{@link #LLVMNoDuplicatesComdatSelectionKind NoDuplicatesComdatSelectionKind} - No other Module may specify this COMDAT.</li>
+     * <li>{@link #LLVMNoDeduplicateComdatSelectionKind NoDeduplicateComdatSelectionKind} - No deduplication is performed.</li>
      * <li>{@link #LLVMSameSizeComdatSelectionKind SameSizeComdatSelectionKind} - The data referenced by the COMDAT must be the same size.</li>
      * </ul>
      */
     public static final int
-        LLVMAnyComdatSelectionKind          = 0,
-        LLVMExactMatchComdatSelectionKind   = 1,
-        LLVMLargestComdatSelectionKind      = 2,
-        LLVMNoDuplicatesComdatSelectionKind = 3,
-        LLVMSameSizeComdatSelectionKind     = 4;
+        LLVMAnyComdatSelectionKind           = 0,
+        LLVMExactMatchComdatSelectionKind    = 1,
+        LLVMLargestComdatSelectionKind       = 2,
+        LLVMNoDeduplicateComdatSelectionKind = 3,
+        LLVMSameSizeComdatSelectionKind      = 4;
 
     protected LLVMComdat() {
         throw new UnsupportedOperationException();

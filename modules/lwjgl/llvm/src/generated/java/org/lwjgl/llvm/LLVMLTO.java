@@ -53,6 +53,7 @@ public class LLVMLTO {
             module_get_symbol_name                                           = apiGetFunctionAddress(LTO, "lto_module_get_symbol_name"),
             module_get_symbol_attribute                                      = apiGetFunctionAddress(LTO, "lto_module_get_symbol_attribute"),
             module_get_linkeropts                                            = apiGetFunctionAddress(LTO, "lto_module_get_linkeropts"),
+            module_get_macho_cputype                                         = LTO.getFunctionAddress("lto_module_get_macho_cputype"),
             codegen_set_diagnostic_handler                                   = apiGetFunctionAddress(LTO, "lto_codegen_set_diagnostic_handler"),
             codegen_create                                                   = apiGetFunctionAddress(LTO, "lto_codegen_create"),
             codegen_create_in_local_context                                  = apiGetFunctionAddress(LTO, "lto_codegen_create_in_local_context"),
@@ -71,10 +72,17 @@ public class LLVMLTO {
             codegen_optimize                                                 = apiGetFunctionAddress(LTO, "lto_codegen_optimize"),
             codegen_compile_optimized                                        = apiGetFunctionAddress(LTO, "lto_codegen_compile_optimized"),
             api_version                                                      = apiGetFunctionAddress(LTO, "lto_api_version"),
+            set_debug_options                                                = LTO.getFunctionAddress("lto_set_debug_options"),
             codegen_debug_options                                            = apiGetFunctionAddress(LTO, "lto_codegen_debug_options"),
+            codegen_debug_options_array                                      = LTO.getFunctionAddress("lto_codegen_debug_options_array"),
             initialize_disassembler                                          = apiGetFunctionAddress(LTO, "lto_initialize_disassembler"),
             codegen_set_should_internalize                                   = apiGetFunctionAddress(LTO, "lto_codegen_set_should_internalize"),
             codegen_set_should_embed_uselists                                = apiGetFunctionAddress(LTO, "lto_codegen_set_should_embed_uselists"),
+            input_create                                                     = LTO.getFunctionAddress("lto_input_create"),
+            input_dispose                                                    = LTO.getFunctionAddress("lto_input_dispose"),
+            input_get_num_dependent_libraries                                = LTO.getFunctionAddress("lto_input_get_num_dependent_libraries"),
+            input_get_dependent_library                                      = LTO.getFunctionAddress("lto_input_get_dependent_library"),
+            runtime_lib_symbols_list                                         = LTO.getFunctionAddress("lto_runtime_lib_symbols_list"),
             thinlto_create_codegen                                           = apiGetFunctionAddress(LTO, "thinlto_create_codegen"),
             thinlto_codegen_dispose                                          = apiGetFunctionAddress(LTO, "thinlto_codegen_dispose"),
             thinlto_codegen_add_module                                       = apiGetFunctionAddress(LTO, "thinlto_codegen_add_module"),
@@ -108,7 +116,7 @@ public class LLVMLTO {
         return LTO;
     }
 
-    public static final int LTOAPI_VERSION = 23;
+    public static final int LTOAPI_VERSION = 28;
 
     /**
      * {@code lto_symbol_attributes}
@@ -716,6 +724,38 @@ public class LLVMLTO {
         return memUTF8Safe(__result);
     }
 
+    // --- [ lto_module_get_macho_cputype ] ---
+
+    /** Unsafe version of: {@link #lto_module_get_macho_cputype module_get_macho_cputype} */
+    public static boolean nlto_module_get_macho_cputype(long mod, long out_cputype, long out_cpusubtype) {
+        long __functionAddress = Functions.module_get_macho_cputype;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(mod);
+        }
+        return invokePPPZ(mod, out_cputype, out_cpusubtype, __functionAddress);
+    }
+
+    /**
+     * If targeting mach-o on darwin, this function gets the CPU type and subtype that will end up being encoded in the mach-o header. These are the values
+     * that can be found in {@code mach/machine.h}.
+     *
+     * @param out_cputype    must be non-{@code NULL}
+     * @param out_cpusubtype must be non-{@code NULL}
+     *
+     * @return true on error (check {@link #lto_get_error_message get_error_message} for details).
+     *
+     * @since 11, {@code LTO_API_VERSION=27}
+     */
+    @NativeType("lto_bool_t")
+    public static boolean lto_module_get_macho_cputype(@NativeType("lto_module_t") long mod, @NativeType("unsigned int *") IntBuffer out_cputype, @NativeType("unsigned int *") IntBuffer out_cpusubtype) {
+        if (CHECKS) {
+            check(out_cputype, 1);
+            check(out_cpusubtype, 1);
+        }
+        return nlto_module_get_macho_cputype(mod, memAddress(out_cputype), memAddress(out_cpusubtype));
+    }
+
     // --- [ lto_codegen_set_diagnostic_handler ] ---
 
     /** Unsafe version of: {@link #lto_codegen_set_diagnostic_handler codegen_set_diagnostic_handler} */
@@ -1093,6 +1133,29 @@ public class LLVMLTO {
         return invokeI(__functionAddress);
     }
 
+    // --- [ lto_set_debug_options ] ---
+
+    /** Unsafe version of: {@link #lto_set_debug_options set_debug_options} */
+    public static void nlto_set_debug_options(long options, int number) {
+        long __functionAddress = Functions.set_debug_options;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        invokePV(options, number, __functionAddress);
+    }
+
+    /**
+     * Parses options immediately, making them available as early as possible.
+     * 
+     * <p>For example during executing {@code codegen::InitTargetOptionsFromCodeGenFlags}. Since parsing shud only happen once, only one of
+     * {@link #lto_codegen_debug_options codegen_debug_options} or {@code lto_set_debug_options} should be called.</p>
+     *
+     * @since 13, {@code LTO_API_VERSION=28}
+     */
+    public static void lto_set_debug_options(@NativeType("char const * const *") PointerBuffer options) {
+        nlto_set_debug_options(memAddress(options), options.remaining());
+    }
+
     // --- [ lto_codegen_debug_options ] ---
 
     /** Unsafe version of: {@link #lto_codegen_debug_options codegen_debug_options} */
@@ -1104,7 +1167,14 @@ public class LLVMLTO {
         invokePPV(cg, options, __functionAddress);
     }
 
-    /** Sets options to help debug codegen bugs. */
+    /**
+     * Sets options to help debug codegen bugs.
+     * 
+     * <p>Since parsing should only happen once, only one of {@code lto_codegen_debug_options} or {@link #lto_set_debug_options set_debug_options} should be called.</p>
+     * 
+     * <p>This function takes one or more options separated by spaces. Warning: passing file paths through this function may confuse the argument parser if the
+     * paths contain spaces.</p>
+     */
     public static void lto_codegen_debug_options(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") ByteBuffer options) {
         if (CHECKS) {
             checkNT1(options);
@@ -1112,7 +1182,14 @@ public class LLVMLTO {
         nlto_codegen_debug_options(cg, memAddress(options));
     }
 
-    /** Sets options to help debug codegen bugs. */
+    /**
+     * Sets options to help debug codegen bugs.
+     * 
+     * <p>Since parsing should only happen once, only one of {@code lto_codegen_debug_options} or {@link #lto_set_debug_options set_debug_options} should be called.</p>
+     * 
+     * <p>This function takes one or more options separated by spaces. Warning: passing file paths through this function may confuse the argument parser if the
+     * paths contain spaces.</p>
+     */
     public static void lto_codegen_debug_options(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") CharSequence options) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -1122,6 +1199,27 @@ public class LLVMLTO {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ lto_codegen_debug_options_array ] ---
+
+    /** Unsafe version of: {@link #lto_codegen_debug_options_array codegen_debug_options_array} */
+    public static void nlto_codegen_debug_options_array(long cg, long options, int number) {
+        long __functionAddress = Functions.codegen_debug_options_array;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(cg);
+        }
+        invokePPV(cg, options, number, __functionAddress);
+    }
+
+    /**
+     * Same as {@link #lto_codegen_debug_options codegen_debug_options}, but takes every option separately through an array.
+     *
+     * @since 10, prior to {@code LTO_API_VERSION=26}
+     */
+    public static void lto_codegen_debug_options_array(@NativeType("lto_code_gen_t") long cg, @NativeType("char const * const *") PointerBuffer options) {
+        nlto_codegen_debug_options_array(cg, memAddress(options), options.remaining());
     }
 
     // --- [ lto_initialize_disassembler ] ---
@@ -1156,6 +1254,143 @@ public class LLVMLTO {
             check(cg);
         }
         invokePV(cg, ShouldEmbedUselists, __functionAddress);
+    }
+
+    // --- [ lto_input_create ] ---
+
+    /** Unsafe version of: {@link #lto_input_create input_create} */
+    public static long nlto_input_create(long buffer, long buffer_size, long path) {
+        long __functionAddress = Functions.input_create;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return invokePPPP(buffer, buffer_size, path, __functionAddress);
+    }
+
+    /**
+     * Creates an LTO input file from a buffer.
+     * 
+     * <p>The path argument is used for diagnotics as this function otherwise does not know which file the given buffer is associated with.</p>
+     *
+     * @since 10, {@code LTO_API_VERSION=24}
+     */
+    @NativeType("lto_input_t")
+    public static long lto_input_create(@NativeType("void const *") ByteBuffer buffer, @NativeType("char const *") ByteBuffer path) {
+        if (CHECKS) {
+            checkNT1(path);
+        }
+        return nlto_input_create(memAddress(buffer), buffer.remaining(), memAddress(path));
+    }
+
+    /**
+     * Creates an LTO input file from a buffer.
+     * 
+     * <p>The path argument is used for diagnotics as this function otherwise does not know which file the given buffer is associated with.</p>
+     *
+     * @since 10, {@code LTO_API_VERSION=24}
+     */
+    @NativeType("lto_input_t")
+    public static long lto_input_create(@NativeType("void const *") ByteBuffer buffer, @NativeType("char const *") CharSequence path) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(path, true);
+            long pathEncoded = stack.getPointerAddress();
+            return nlto_input_create(memAddress(buffer), buffer.remaining(), pathEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ lto_input_dispose ] ---
+
+    /**
+     * Frees all memory internally allocated by the LTO input file. Upon return the {@code lto_module_t} is no longer valid.
+     *
+     * @since 10, {@code LTO_API_VERSION=24}
+     */
+    public static void lto_input_dispose(@NativeType("lto_input_t") long input) {
+        long __functionAddress = Functions.input_dispose;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(input);
+        }
+        invokePV(input, __functionAddress);
+    }
+
+    // --- [ lto_input_get_num_dependent_libraries ] ---
+
+    /**
+     * Returns the number of dependent library specifiers for the given LTO input file.
+     *
+     * @since 10, {@code LTO_API_VERSION=24}
+     */
+    @NativeType("unsigned")
+    public static int lto_input_get_num_dependent_libraries(@NativeType("lto_input_t") long input) {
+        long __functionAddress = Functions.input_get_num_dependent_libraries;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(input);
+        }
+        return invokePI(input, __functionAddress);
+    }
+
+    // --- [ lto_input_get_dependent_library ] ---
+
+    /** Unsafe version of: {@link #lto_input_get_dependent_library input_get_dependent_library} */
+    public static long nlto_input_get_dependent_library(long input, long index, long size) {
+        long __functionAddress = Functions.input_get_dependent_library;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(input);
+        }
+        return invokePPPP(input, index, size, __functionAddress);
+    }
+
+    /**
+     * Returns the {@code ith} dependent library specifier for the given LTO input file. The returned string is not null-terminated.
+     *
+     * @since 10, {@code LTO_API_VERSION=24}
+     */
+    @Nullable
+    @NativeType("char const *")
+    public static String lto_input_get_dependent_library(@NativeType("lto_input_t") long input, @NativeType("size_t") long index) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            PointerBuffer size = stack.callocPointer(1);
+            long __result = nlto_input_get_dependent_library(input, index, memAddress(size));
+            return memUTF8Safe(__result, (int)size.get(0));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ lto_runtime_lib_symbols_list ] ---
+
+    /** Unsafe version of: {@link #lto_runtime_lib_symbols_list runtime_lib_symbols_list} */
+    public static long nlto_runtime_lib_symbols_list(long size) {
+        long __functionAddress = Functions.runtime_lib_symbols_list;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return invokePP(size, __functionAddress);
+    }
+
+    /**
+     * Returns the list of {@code libcall} symbols that can be generated by LTO that might not be visible from the symbol table of bitcode files.
+     *
+     * @since 10, {@code LTO_API_VERSION=25}
+     */
+    @Nullable
+    @NativeType("char const * const *")
+    public static PointerBuffer lto_runtime_lib_symbols_list() {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        PointerBuffer size = stack.callocPointer(1);
+        try {
+            long __result = nlto_runtime_lib_symbols_list(memAddress(size));
+            return memPointerBufferSafe(__result, (int)size.get(0));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ thinlto_create_codegen ] ---

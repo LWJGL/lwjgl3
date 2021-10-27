@@ -107,7 +107,8 @@ val ClangDocumentation = "ClangDocumentation".nativeClass(
         "CommentInlineCommandRenderKind_Normal".enum("Command argument should be rendered in a normal font.", "0"),
         "CommentInlineCommandRenderKind_Bold".enum("Command argument should be rendered in a bold font."),
         "CommentInlineCommandRenderKind_Monospaced".enum("Command argument should be rendered in a monospaced font."),
-        "CommentInlineCommandRenderKind_Emphasized".enum("Command argument should be rendered emphasized (typically italic font).")
+        "CommentInlineCommandRenderKind_Emphasized".enum("Command argument should be rendered emphasized (typically italic font)."),
+        "CommentInlineCommandRenderKind_Anchor".enum("Command argument should not be rendered (since it only defines an anchor).")
     )
 
     EnumConstant(

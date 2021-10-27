@@ -61,4 +61,13 @@ val LLVMError = "LLVMError".nativeClass(
 
         void()
     )
+
+    IgnoreMissing..LLVMErrorRef(
+        "CreateStringError",
+        "Create a {@code StringError}.",
+
+        charUTF8.const.p("ErrMsg", ""),
+
+        since = "12"
+    )
 }

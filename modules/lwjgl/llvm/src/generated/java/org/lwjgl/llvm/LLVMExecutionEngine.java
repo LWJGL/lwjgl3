@@ -57,6 +57,7 @@ public class LLVMExecutionEngine {
             GetPointerToGlobal              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetPointerToGlobal"),
             GetGlobalValueAddress           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetGlobalValueAddress"),
             GetFunctionAddress              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetFunctionAddress"),
+            ExecutionEngineGetErrMsg        = LLVMCore.getLibrary().getFunctionAddress("LLVMExecutionEngineGetErrMsg"),
             CreateSimpleMCJITMemoryManager  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateSimpleMCJITMemoryManager"),
             DisposeMCJITMemoryManager       = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeMCJITMemoryManager"),
             CreateGDBRegistrationListener   = LLVMCore.getLibrary().getFunctionAddress("LLVMCreateGDBRegistrationListener"),
@@ -533,6 +534,32 @@ public class LLVMExecutionEngine {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ LLVMExecutionEngineGetErrMsg ] ---
+
+    /** Unsafe version of: {@link #LLVMExecutionEngineGetErrMsg ExecutionEngineGetErrMsg} */
+    public static int nLLVMExecutionEngineGetErrMsg(long EE, long OutError) {
+        long __functionAddress = Functions.ExecutionEngineGetErrMsg;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(EE);
+        }
+        return invokePPI(EE, OutError, __functionAddress);
+    }
+
+    /**
+     * Returns true on error, false on success. If true is returned then the error message is copied to {@code OutStr} and cleared in the
+     * {@code ExecutionEngine} instance.
+     *
+     * @since 11
+     */
+    @NativeType("LLVMBool")
+    public static boolean LLVMExecutionEngineGetErrMsg(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("char **") PointerBuffer OutError) {
+        if (CHECKS) {
+            check(OutError, 1);
+        }
+        return nLLVMExecutionEngineGetErrMsg(EE, memAddress(OutError)) != 0;
     }
 
     // --- [ LLVMCreateSimpleMCJITMemoryManager ] ---

@@ -285,6 +285,19 @@ LLVMCreateMCJITCompilerForModule(&jit, mod, 0, 0, &error);""")}
         charUTF8.const.p("Name", "")
     )
 
+    IgnoreMissing..LLVMBool(
+        "ExecutionEngineGetErrMsg",
+        """
+        Returns true on error, false on success. If true is returned then the error message is copied to {@code OutStr} and cleared in the
+        {@code ExecutionEngine} instance.
+        """,
+
+        LLVMExecutionEngineRef("EE", ""),
+        Check(1)..charUTF8.p.p("OutError", ""),
+
+        since = "11"
+    )
+
     LLVMMCJITMemoryManagerRef(
         "CreateSimpleMCJITMemoryManager",
         """

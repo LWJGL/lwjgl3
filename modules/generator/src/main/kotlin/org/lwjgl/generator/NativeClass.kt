@@ -476,7 +476,7 @@ class NativeClass internal constructor(
                                 else
                                     it.get<AutoSize>().reference != param.name // dependent auto-size
                             }
-                        } || (module.arrayOverloads && func.hasArrayOverloads)
+                        } || (module.arrayOverloads && func.hasArrayOverloads) || (func.has<IgnoreMissing>() && binding?.apiCapabilities != APICapabilities.JNI_CAPABILITIES)
                     })
                     staticImports.add("org.lwjgl.system.Checks.*")
             }

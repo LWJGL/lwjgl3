@@ -151,13 +151,15 @@ public class ClangDocumentation {
      * <li>{@link #CXCommentInlineCommandRenderKind_Bold CommentInlineCommandRenderKind_Bold} - Command argument should be rendered in a bold font.</li>
      * <li>{@link #CXCommentInlineCommandRenderKind_Monospaced CommentInlineCommandRenderKind_Monospaced} - Command argument should be rendered in a monospaced font.</li>
      * <li>{@link #CXCommentInlineCommandRenderKind_Emphasized CommentInlineCommandRenderKind_Emphasized} - Command argument should be rendered emphasized (typically italic font).</li>
+     * <li>{@link #CXCommentInlineCommandRenderKind_Anchor CommentInlineCommandRenderKind_Anchor} - Command argument should not be rendered (since it only defines an anchor).</li>
      * </ul>
      */
     public static final int
         CXCommentInlineCommandRenderKind_Normal     = 0,
         CXCommentInlineCommandRenderKind_Bold       = 1,
         CXCommentInlineCommandRenderKind_Monospaced = 2,
-        CXCommentInlineCommandRenderKind_Emphasized = 3;
+        CXCommentInlineCommandRenderKind_Emphasized = 3,
+        CXCommentInlineCommandRenderKind_Anchor     = 4;
 
     /**
      * Describes parameter passing direction for \param or \arg command.

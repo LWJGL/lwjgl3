@@ -251,7 +251,7 @@ public class ClangBuildSystem {
     }
 
     /**
-     * Sets the umbrealla header name that the module.map describes.
+     * Sets the umbrella header name that the module.map describes.
      *
      * @return 0 for success, non-zero to indicate an error
      */
@@ -264,7 +264,7 @@ public class ClangBuildSystem {
     }
 
     /**
-     * Sets the umbrealla header name that the module.map describes.
+     * Sets the umbrella header name that the module.map describes.
      *
      * @return 0 for success, non-zero to indicate an error
      */

@@ -27,6 +27,7 @@ val CXIdxClientEntity = "CXIdxClientEntity".handle
 val CXIdxClientContainer = "CXIdxClientContainer".handle
 val CXIdxClientASTFile = "CXIdxClientASTFile".handle
 val CXIndexAction = "CXIndexAction".handle
+val CXRewriter = "CXRewriter".handle
 
 val time_t = IntegerType("time_t", PrimitiveMapping.LONG, unsigned = true) // TODO:
 

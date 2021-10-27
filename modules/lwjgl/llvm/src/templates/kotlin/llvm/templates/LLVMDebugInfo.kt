@@ -28,7 +28,7 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DIFlagPublic".enum,
         "DIFlagFwdDecl".enum("", "1 << 2"),
         "DIFlagAppleBlock".enum("", "1 << 3"),
-        "DIFlagBlockByrefStruct".enum("", "1 << 4"),
+        "DIFlagReservedBit4".enum("", "1 << 4"),
         "DIFlagVirtual".enum("", "1 << 5"),
         "DIFlagArtificial".enum("", "1 << 6"),
         "DIFlagExplicit".enum("", "1 << 7"),
@@ -46,13 +46,12 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DIFlagIntroducedVirtual".enum("", "1 << 18"),
         "DIFlagBitField".enum("", "1 << 19"),
         "DIFlagNoReturn".enum("", "1 << 20"),
-        "DIFlagMainSubprogram".enum("", "1 << 21"),
         "DIFlagTypePassByValue".enum("", "1 << 22"),
         "DIFlagTypePassByReference".enum("", "1 << 23"),
         "DIFlagEnumClass".enum("", "1 << 24"),
         "DIFlagFixedEnum".enum("", "LLVMDIFlagEnumClass"),
         "DIFlagThunk".enum("", "1 << 25"),
-        "DIFlagTrivial".enum("", "1 << 26"),
+        "DIFlagNonTrivial".enum("", "1 << 26"),
         "DIFlagBigEndian".enum("", "1 << 27"),
         "DIFlagLittleEndian".enum("", "1 << 28"),
         "DIFlagIndirectVirtualBase".enum("", "(1 << 2) | (1 << 5)"),
@@ -154,7 +153,27 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DIObjCPropertyMetadataKind".enum,
         "DIImportedEntityMetadataKind".enum,
         "DIMacroMetadataKind".enum,
-        "DIMacroFileMetadataKind".enum
+        "DIMacroFileMetadataKind".enum,
+        "DICommonBlockMetadataKind".enum,
+        "DIStringTypeMetadataKind".enum,
+        "DIGenericSubrangeMetadataKind".enum,
+        "DIArgListMetadataKind".enum
+    )
+
+    EnumConstant(
+        """
+        Describes the kind of macro declaration used for {@code LLVMDIBuilderCreateMacro}. ({@code LLVMDWARFMacinfoRecordType})
+        
+        See {@code llvm::dwarf::MacinfoRecordType}.
+        
+        Note: Values are from {@code DW_MACINFO_*} constants in the DWARF specification.
+        """,
+
+        "DWARFMacinfoRecordTypeDefine".enum("", "0x01"),
+        "DWARFMacinfoRecordTypeMacro".enum("", "0x02"),
+        "DWARFMacinfoRecordTypeStartFile".enum("", "0x03"),
+        "DWARFMacinfoRecordTypeEndFile".enum("", "0x04"),
+        "DWARFMacinfoRecordTypeVendorExt".enum("", "0xff")
     )
 
     unsigned_int(
@@ -240,7 +259,11 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         LLVMDWARFEmissionKind("Kind", "the kind of debug information to generate"),
         unsigned_int("DWOId", "the DWOId if this is a split skeleton compile unit"),
         LLVMBool("SplitDebugInlining", "whether to emit inline debug info"),
-        LLVMBool("DebugInfoForProfiling", "whether to emit extra debug info for profile collection")
+        LLVMBool("DebugInfoForProfiling", "whether to emit extra debug info for profile collection"),
+        charUTF8.const.p("SysRoot", "the Clang system root (value of {@code -isysroot})"),
+        AutoSize("SysRoot")..size_t("SysRootLen", "the length of the C string passed to {@code SysRoot}"),
+        charUTF8.const.p("SDK", "the SDK. On Darwin, the last component of the {@code sysroot}."),
+        AutoSize("SDK")..size_t("SDKLen", "the length of the C string passed to {@code SDK}")
     )
 
     LLVMMetadataRef(
@@ -266,8 +289,8 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         AutoSize("ConfigMacros")..size_t("ConfigMacrosLen", "the length of the C string passed to {@code ConfigMacros}"),
         charUTF8.const.p("IncludePath", "the path to the module map file"),
         AutoSize("IncludePath")..size_t("IncludePathLen", "the length of the C string passed to {@code IncludePath}"),
-        charUTF8.const.p("ISysRoot", "the Clang system root (value of {@code -isysroot})"),
-        AutoSize("ISysRoot")..size_t("ISysRootLen", "the length of the C string passed to {@code ISysRoot}")
+        charUTF8.const.p("APINotesFile", "the path to an API notes file for the module"),
+        AutoSize("APINotesFile")..size_t("APINotesFileLen", "he length of the C string passed to {@code APINotestFile}")
     )
 
     LLVMMetadataRef(
@@ -404,6 +427,74 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         LLVMMetadataRef("Location", "the debug location")
     )
 
+    IgnoreMissing..LLVMMetadataRef(
+        "DILocationGetInlinedAt",
+        """
+        Get the "inline at" location associated with this debug location.
+
+        See {@code DILocation::getInlinedAt()}.
+        """,
+
+        LLVMMetadataRef("Location", "the debug location"),
+
+        since = "9"
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "DIScopeGetFile",
+        """
+        Get the metadata of the file associated with a given scope.
+
+        See {@code DIScope::getFile()}.
+        """,
+
+        LLVMMetadataRef("Scope", "the scope object"),
+
+        since = "9"
+    )
+
+    IgnoreMissing..charUTF8.const.p(
+        "DIFileGetDirectory",
+        """
+        Get the directory of a given file.
+        
+        See {@code DIFile::getDirectory()}
+        """,
+
+        LLVMMetadataRef("File", "the file object"),
+        AutoSizeResult..Check(1)..unsigned.p("Len", "the length of the returned string"),
+
+        since = "9"
+    )
+
+    IgnoreMissing..charUTF8.const.p(
+        "DIFileGetFilename",
+        """
+        Get the name of a given file.
+        
+        See {@code DIFile::getFilename()}.
+        """,
+
+        LLVMMetadataRef("File", "the file object"),
+        AutoSizeResult..Check(1)..unsigned.p("Len", "the length of the returned string"),
+
+        since = "9"
+    )
+
+    IgnoreMissing..charUTF8.const.p(
+        "DIFileGetSource",
+        """
+        Get the source of a given file.
+        
+        See {@code DIFile::getSource()}.
+        """,
+
+        LLVMMetadataRef("File", "the file object"),
+        AutoSizeResult..Check(1)..unsigned.p("Len", "the length of the returned string"),
+
+        since = "9"
+    )
+
     LLVMMetadataRef(
         "DIBuilderGetOrCreateTypeArray",
         "Create a type array.",
@@ -422,6 +513,51 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         LLVMMetadataRef.p("ParameterTypes", "an array of subroutine parameter types. This includes return type at 0th index."),
         AutoSize("ParameterTypes")..unsigned_int("NumParameterTypes", "the number of parameter types in {@code ParameterTypes}"),
         LLVMDIFlags("Flags", "e.g.: {@code LLVMDIFlagLValueReference}. These flags are used to emit dwarf attributes.")
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "DIBuilderCreateMacro",
+        "Create debugging information entry for a macro.",
+
+        LLVMDIBuilderRef("Builder", "the {@code DIBuilder}"),
+        nullable..LLVMMetadataRef("ParentMacroFile", "macro parent (could be #NULL)."),
+        unsigned("Line", "source line number where the macro is defined"),
+        LLVMDWARFMacinfoRecordType("RecordType", "{@code DW_MACINFO_define} or {@code DW_MACINFO_undef}"),
+        charUTF8.const.p("Name", "macro name"),
+        AutoSize("Name")..size_t("NameLen", "macro name length"),
+        charUTF8.const.p("Value", "macro value"),
+        AutoSize("Value")..size_t("ValueLen", "macro value length"),
+
+        since = "10"
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "DIBuilderCreateTempMacroFile",
+        """
+        Create debugging information temporary entry for a macro file.
+        
+        List of macro node direct children will be calculated by {@code DIBuilder}, using the {@code ParentMacroFile} relationship.
+        """,
+
+        LLVMDIBuilderRef("Builder", "the DIBuilder"),
+        LLVMMetadataRef("ParentMacroFile", "macro parent (could be #NULL)"),
+        unsigned("Line", "source line number where the macro file is included"),
+        LLVMMetadataRef("File", "file descriptor containing the name of the macro file"),
+
+        since = "10"
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "DIBuilderCreateEnumerator",
+        "Create debugging information entry for an enumerator.",
+
+        LLVMDIBuilderRef("Builder", "the DIBuilder"),
+        char.const.p("Name", "enumerator name"),
+        AutoSize("Name")..size_t("NameLen", "length of enumerator name"),
+        int64_t("Value", "enumerator value"),
+        LLVMBool("IsUnsigned", "true if the value is unsigned"),
+
+        since = "10"
     )
 
     LLVMMetadataRef(
@@ -663,7 +799,8 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         AutoSize("Name")..size_t("NameLen", ""),
         LLVMMetadataRef("File", "file where this type is defined"),
         unsigned_int("LineNo", "line number"),
-        LLVMMetadataRef("Scope", "the surrounding context for the typedef")
+        LLVMMetadataRef("Scope", "the surrounding context for the typedef"),
+        uint32_t("AlignInBits", "")
     )
 
     LLVMMetadataRef(
@@ -863,6 +1000,71 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         uint32_t("AlignInBits", "variable alignment(or 0 if no alignment attr was specified)")
     )
 
+    IgnoreMissing..LLVMMetadataRef(
+        "DIGlobalVariableExpressionGetVariable",
+        """
+        Retrieves the {@code DIVariable} associated with this global variable expression.
+        
+        See {@code llvm::DIGlobalVariableExpression::getVariable()}.
+        """,
+
+        LLVMMetadataRef("GVE", "the global variable expression"),
+
+        since = "9"
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "DIGlobalVariableExpressionGetExpression",
+        """
+        Retrieves the {@code DIExpression} associated with this global variable expression.
+
+        See {@code llvm::DIGlobalVariableExpression::getExpression()}.
+        """,
+
+        LLVMMetadataRef("GVE", "the global variable expression"),
+
+        since = "9"
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "DIVariableGetFile",
+        """
+        Get the metadata of the file associated with a given variable.
+
+        See {@code DIVariable::getFile()},
+        """,
+
+        LLVMMetadataRef("Var", "the variable object"),
+
+        since = "9"
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "DIVariableGetScope",
+        """
+        Get the metadata of the scope associated with a given variable.
+
+        See {@code DIVariable::getScope()},
+        """,
+
+        LLVMMetadataRef("Var", "the variable object"),
+
+        since = "9"
+    )
+
+    IgnoreMissing..unsigned(
+        "DIVariableGetLine",
+        """
+        Get the source line where this {@code DIVariable} is declared.
+        
+        See {@code DIVariable::getLine()}.
+        """,
+
+        LLVMMetadataRef("Var", "the {@code DIVariable}"),
+
+        since = "9"
+    )
+
     LLVMMetadataRef(
         "TemporaryMDNode",
         """
@@ -1011,6 +1213,48 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
 
         LLVMValueRef("Func", ""),
         LLVMMetadataRef("SP", "")
+    )
+
+    IgnoreMissing..unsigned(
+        "DISubprogramGetLine",
+        """
+        Get the line associated with a given subprogram.
+        
+        See {@code DISubprogram::getLine()}.
+        """,
+
+        LLVMMetadataRef("Subprogram", "the subprogram object"),
+
+        since = "9"
+    )
+
+    IgnoreMissing..unsigned(
+        "InstructionGetDebugLoc",
+        """
+        Get the debug location for the given instruction.
+     
+        See {@code llvm::Instruction::getDebugLoc()}
+        """,
+
+        LLVMValueRef("Inst", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..void(
+        "InstructionSetDebugLoc",
+        """
+        Set the debug location for the given instruction.
+     
+        To clear the location metadata of the given instruction, pass #NULL to {@code Loc}.
+     
+        See {@code llvm::Instruction::setDebugLoc()}        
+        """,
+
+        LLVMValueRef("Inst", ""),
+        nullable..LLVMMetadataRef("Loc", ""),
+
+        since = "9"
     )
 
     IgnoreMissing..LLVMMetadataKind(

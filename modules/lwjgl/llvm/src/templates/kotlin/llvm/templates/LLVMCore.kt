@@ -16,71 +16,73 @@ val LLVMCore = "LLVMCore".nativeClass(
     EnumConstant(
         "{@code LLVMOpcode}",
 
-        "Ret".enum("Terminator Instructions", "1"),
-        "Br".enum("Terminator Instructions"),
-        "Switch".enum("Terminator Instructions"),
-        "IndirectBr".enum("Terminator Instructions"),
-        "Invoke".enum("Terminator Instructions"),
-        "Unreachable".enum("removed 6 due to API changes", "7"),
-        "FNeg".enum("Standard Unary Operators", "66"),
-        "Add".enum("Standard Binary Operators", "8"),
-        "FAdd".enum("Standard Binary Operators"),
-        "Sub".enum("Standard Binary Operators"),
-        "FSub".enum("Standard Binary Operators"),
-        "Mul".enum("Standard Binary Operators"),
-        "FMul".enum("Standard Binary Operators"),
-        "UDiv".enum("Standard Binary Operators"),
-        "SDiv".enum("Standard Binary Operators"),
-        "FDiv".enum("Standard Binary Operators"),
-        "URem".enum("Standard Binary Operators"),
-        "SRem".enum("Standard Binary Operators"),
-        "FRem".enum("Standard Binary Operators"),
-        "Shl".enum("Logical Operators"),
-        "LShr".enum("Logical Operators"),
-        "AShr".enum("Logical Operators"),
-        "And".enum("Logical Operators"),
-        "Or".enum("Logical Operators"),
-        "Xor".enum("Logical Operators"),
-        "Alloca".enum("Memory Operators"),
-        "Load".enum("Memory Operators"),
-        "Store".enum("Memory Operators"),
-        "GetElementPtr".enum("Memory Operators"),
-        "Trunc".enum("Cast Operators"),
-        "ZExt".enum("Cast Operators"),
-        "SExt".enum("Cast Operators"),
-        "FPToUI".enum("Cast Operators"),
-        "FPToSI".enum("Cast Operators"),
-        "UIToFP".enum("Cast Operators"),
-        "SIToFP".enum("Cast Operators"),
-        "FPTrunc".enum("Cast Operators"),
-        "FPExt".enum("Cast Operators"),
-        "PtrToInt".enum("Cast Operators"),
-        "IntToPtr".enum("Cast Operators"),
-        "BitCast".enum("Cast Operators"),
-        "AddrSpaceCast".enum("Cast Operators", "60"),
-        "ICmp".enum("Other Operators", "42"),
-        "FCmp".enum("Other Operators"),
-        "PHI".enum("Other Operators"),
-        "Call".enum("Other Operators"),
-        "Select".enum("Other Operators"),
-        "UserOp1".enum("Other Operators"),
-        "UserOp2".enum("Other Operators"),
-        "VAArg".enum("Other Operators"),
-        "ExtractElement".enum("Other Operators"),
-        "InsertElement".enum("Other Operators"),
-        "ShuffleVector".enum("Other Operators"),
-        "ExtractValue".enum("Other Operators"),
-        "InsertValue".enum("Other Operators"),
-        "Fence".enum("Atomic operators"),
-        "AtomicCmpXchg".enum("Atomic operators"),
-        "AtomicRMW".enum("Atomic operators"),
-        "Resume".enum("Exception Handling Operators"),
-        "LandingPad".enum("Exception Handling Operators"),
-        "CleanupRet".enum("Exception Handling Operators", "61"),
-        "CatchRet".enum("Exception Handling Operators"),
-        "CatchPad".enum("Exception Handling Operators"),
-        "CleanupPad".enum("Exception Handling Operators"),
-        "CatchSwitch".enum("Exception Handling Operators")
+        "Ret".enum("", "1"),
+        "Br".enum(""),
+        "Switch".enum(""),
+        "IndirectBr".enum(""),
+        "Invoke".enum(""),
+        "Unreachable".enum("", "7"),
+        "CallBr".enum("", "67"),
+        "FNeg".enum("", "66"),
+        "Add".enum("", "8"),
+        "FAdd".enum(""),
+        "Sub".enum(""),
+        "FSub".enum(""),
+        "Mul".enum(""),
+        "FMul".enum(""),
+        "UDiv".enum(""),
+        "SDiv".enum(""),
+        "FDiv".enum(""),
+        "URem".enum(""),
+        "SRem".enum(""),
+        "FRem".enum(""),
+        "Shl".enum(""),
+        "LShr".enum(""),
+        "AShr".enum(""),
+        "And".enum(""),
+        "Or".enum(""),
+        "Xor".enum(""),
+        "Alloca".enum(""),
+        "Load".enum(""),
+        "Store".enum(""),
+        "GetElementPtr".enum(""),
+        "Trunc".enum(""),
+        "ZExt".enum(""),
+        "SExt".enum(""),
+        "FPToUI".enum(""),
+        "FPToSI".enum(""),
+        "UIToFP".enum(""),
+        "SIToFP".enum(""),
+        "FPTrunc".enum(""),
+        "FPExt".enum(""),
+        "PtrToInt".enum(""),
+        "IntToPtr".enum(""),
+        "BitCast".enum(""),
+        "AddrSpaceCast".enum("", "60"),
+        "ICmp".enum("", "42"),
+        "FCmp".enum(""),
+        "PHI".enum(""),
+        "Call".enum(""),
+        "Select".enum(""),
+        "UserOp1".enum(""),
+        "UserOp2".enum(""),
+        "VAArg".enum(""),
+        "ExtractElement".enum(""),
+        "InsertElement".enum(""),
+        "ShuffleVector".enum(""),
+        "ExtractValue".enum(""),
+        "InsertValue".enum(""),
+        "Freeze".enum("", "68"),
+        "Fence".enum("", "55"),
+        "AtomicCmpXchg".enum(""),
+        "AtomicRMW".enum(""),
+        "Resume".enum(""),
+        "LandingPad".enum(""),
+        "CleanupRet".enum("", "61"),
+        "CatchRet".enum(""),
+        "CatchPad".enum(""),
+        "CleanupPad".enum(""),
+        "CatchSwitch".enum("")
     )
 
     EnumConstant(
@@ -99,10 +101,13 @@ val LLVMCore = "LLVMCore".nativeClass(
         "StructTypeKind".enum("Structures"),
         "ArrayTypeKind".enum("Arrays"),
         "PointerTypeKind".enum("Pointers"),
-        "VectorTypeKind".enum("SIMD 'packed' format, or other vector type"),
+        "VectorTypeKind".enum("Fixed width SIMD vector type"),
         "MetadataTypeKind".enum("Metadata"),
         "X86_MMXTypeKind".enum("X86 MMX"),
-        "TokenTypeKind".enum("Tokens")
+        "TokenTypeKind".enum("Tokens"),
+        "ScalableVectorTypeKind".enum("Scalable SIMD vector type"),
+        "BFloatTypeKind".enum("16 bit brain floating point type"),
+        "X86_AMXTypeKind".enum("X86 AMX")
     )
 
     EnumConstant(
@@ -225,7 +230,8 @@ val LLVMCore = "LLVMCore".nativeClass(
         "ConstantTokenNoneValueKind".enum,
         "MetadataAsValueValueKind".enum,
         "InlineAsmValueKind".enum,
-        "InstructionValueKind".enum
+        "InstructionValueKind".enum,
+        "PoisonValueValueKind".enum
     )
 
     EnumConstant(
@@ -312,9 +318,11 @@ val LLVMCore = "LLVMCore".nativeClass(
         "AtomicRMWBinOpOr".enum("OR a value and return the old one"),
         "AtomicRMWBinOpXor".enum("Xor a value and return the old one"),
         "AtomicRMWBinOpMax".enum("Sets the value if it's greater than the original using a signed comparison and return the old one"),
-        "AtomicRMWBinOpMin".enum("Sets the value if it's Smaller than the original using a signed comparison and return the old one"),
+        "AtomicRMWBinOpMin".enum("Sets the value if it's smaller than the original using a signed comparison and return the old one"),
         "AtomicRMWBinOpUMax".enum("Sets the value if it's greater than the original using an unsigned comparison and return the old one"),
-        "AtomicRMWBinOpUMin".enum("Sets the value if it's greater than the original using an unsigned comparison  and return the old one")
+        "AtomicRMWBinOpUMin".enum("Sets the value if it's greater than the original using an unsigned comparison and return the old one"),
+        "AtomicRMWBinOpFAdd".enum("Add a floating point value and return the old one"),
+        "AtomicRMWBinOpFSub".enum("Subtract a floating point value and return the old one")
     )
 
     EnumConstant(
@@ -559,6 +567,26 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMAttributeRef("A", "")
     )
 
+    IgnoreMissing..LLVMAttributeRef(
+        "CreateTypeAttribute",
+        "Create a type attribute.",
+
+        LLVMContextRef("C", ""),
+        unsigned("KindID", ""),
+        LLVMTypeRef("type_ref", ""),
+
+        since = "12"
+    )
+
+    IgnoreMissing..LLVMTypeRef(
+        "GetTypeAttributeValue",
+        "Get the type attribute's value.",
+
+        LLVMAttributeRef("A", ""),
+
+        since = "12"
+    )
+
     LLVMAttributeRef(
         "CreateStringAttribute",
         "Create a string attribute.",
@@ -598,6 +626,25 @@ val LLVMCore = "LLVMCore".nativeClass(
         "",
 
         LLVMAttributeRef("A", "")
+    )
+
+    IgnoreMissing..LLVMBool(
+        "IsTypeAttribute",
+        "",
+
+        LLVMAttributeRef("A", ""),
+
+        since = "12"
+    )
+
+    IgnoreMissing..LLVMTypeRef(
+        "GetTypeByName2",
+        "Obtain a Type from a context by its registered name.",
+
+        LLVMContextRef("C", ""),
+        charUTF8.const.p("Name", ""),
+
+        since = "12"
     )
 
     LLVMModuleRef(
@@ -848,7 +895,8 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSize("Constraints")..size_t("ConstraintsSize", ""),
         LLVMBool("HasSideEffects", ""),
         LLVMBool("IsAlignStack", ""),
-        LLVMInlineAsmDialect("Dialect", "")
+        LLVMInlineAsmDialect("Dialect", ""),
+        LLVMBool("CanThrow", "")
     )
 
     LLVMContextRef(
@@ -860,7 +908,7 @@ val LLVMCore = "LLVMCore".nativeClass(
 
     LLVMTypeRef(
         "GetTypeByName",
-        "Obtain a Type from a module by its registered name.",
+        "Deprecated: Use #GetTypeByName2() instead.",
 
         LLVMModuleRef("M", ""),
         charUTF8.const.p("Name", "")
@@ -1182,6 +1230,15 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMContextRef("C", "")
     )
 
+    IgnoreMissing..LLVMTypeRef(
+        "BFloatTypeInContext",
+        "Obtain a 16-bit brain floating point type from a context.",
+
+        LLVMContextRef("C", ""),
+
+        since = "11"
+    )
+
     LLVMTypeRef(
         "FloatTypeInContext",
         "Obtain a 32-bit floating point type from a context.",
@@ -1217,15 +1274,14 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMContextRef("C", "")
     )
 
-    LLVMTypeRef(
-        "HalfType",
-        """
-        Obtain a floating point type from the global context.
+    LLVMTypeRef("HalfType", "", void())
+    IgnoreMissing..LLVMTypeRef(
+        "BFloatType",
+        "",
 
-        These map to the functions in this group of the same name.
-        """,
+        void(),
 
-        void()
+        since = "11"
     )
     LLVMTypeRef("FloatType", "", void())
     LLVMTypeRef("DoubleType", "", void())
@@ -1467,12 +1523,30 @@ val LLVMCore = "LLVMCore".nativeClass(
         unsigned_int("ElementCount", "")
     )
 
+    IgnoreMissing..LLVMTypeRef(
+        "ScalableVectorType",
+        """
+        Create a vector type that contains a defined type and has a scalable number of elements.
+ 
+        The created type will exist in the context thats its element type exists in.
+ 
+        See {@code llvm::ScalableVectorType::get()}.
+        """,
+
+        LLVMTypeRef("ElementType", ""),
+        unsigned("ElementCount", ""),
+
+        since = "12"
+    )
+
     unsigned_int(
         "GetVectorSize",
         """
-        Obtain the number of elements in a vector type.
+        Obtain the (possibly scalable) number of elements in a vector type.
 
-        This only works on types that represent vectors.
+        This only works on types that represent vectors (fixed or scalable).
+
+        See {@code llvm::VectorType::getNumElements()}.
         """,
 
         LLVMTypeRef("VectorTy", "")
@@ -1500,6 +1574,15 @@ val LLVMCore = "LLVMCore".nativeClass(
     )
 
     IgnoreMissing..LLVMTypeRef(
+        "X86AMXTypeInContext",
+        "Create a X86 AMX type in a context.",
+
+        LLVMContextRef("C", ""),
+
+        since = "12"
+    )
+
+    IgnoreMissing..LLVMTypeRef(
         "TokenTypeInContext",
         "Create a token type in a context.",
 
@@ -1521,6 +1604,14 @@ val LLVMCore = "LLVMCore".nativeClass(
     )
     LLVMTypeRef("LabelType", "", void())
     LLVMTypeRef("X86MMXType", "", void())
+    IgnoreMissing..LLVMTypeRef(
+        "X86AMXType",
+        "",
+
+        void(),
+
+        since = "12"
+    )
 
     LLVMTypeRef(
         "TypeOf",
@@ -1587,6 +1678,15 @@ val LLVMCore = "LLVMCore".nativeClass(
         "Determine whether a value instance is undefined.",
 
         LLVMValueRef("Val", "")
+    )
+
+    IgnoreMissing..LLVMBool(
+        "IsPoison",
+        "Determine whether a value instance is poisonous.",
+
+        LLVMValueRef("Val", ""),
+
+        since = "12"
     )
 
     val postLLVM5 = setOf(
@@ -1801,6 +1901,15 @@ val LLVMCore = "LLVMCore".nativeClass(
         "Obtain a constant value referring to an undefined value of a type.",
 
         LLVMTypeRef("Ty", "")
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "GetPoison",
+        "Obtain a constant value referring to a poison value of a type.",
+
+        LLVMTypeRef("Ty", ""),
+
+        since = "12"
     )
 
     LLVMBool(
@@ -2982,6 +3091,16 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("PersonalityFn", "")
     )
 
+    IgnoreMissing..void(
+        "LookupIntrinsicID",
+        "Obtain the intrinsic ID number which matches the given function name.",
+
+        charUTF8.const.p("Name", ""),
+        AutoSize("Name")..size_t("NameLen", ""),
+
+        since = "9"
+    )
+
     unsigned_int(
         "GetIntrinsicID",
         "Obtain the ID number from a function instance.",
@@ -3033,11 +3152,7 @@ val LLVMCore = "LLVMCore".nativeClass(
 
     IgnoreMissing..charUTF8.const.p(
         "IntrinsicCopyOverloadedName",
-        """
-        Copies the name of an overloaded intrinsic identified by a given list of parameter types.
-
-        Unlike #IntrinsicGetName(), the caller is responsible for freeing the returned string.
-        """,
+        "Deprecated: Use #IntrinsicCopyOverloadedName2() instead.",
 
         unsigned("ID", ""),
         LLVMTypeRef.p("ParamTypes", ""),
@@ -3045,6 +3160,25 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSizeResult..Check(1)..size_t.p("NameLength", ""),
 
         since = "8.0"
+    )
+
+    IgnoreMissing..charUTF8.const.p(
+        "IntrinsicCopyOverloadedName2",
+        """
+        Copies the name of an overloaded intrinsic identified by a given list of parameter types.
+
+        Unlike #IntrinsicGetName(), the caller is responsible for freeing the returned string.
+        
+        This version also supports unnamed types.
+        """,
+
+        LLVMModuleRef("Mod", ""),
+        unsigned("ID", ""),
+        LLVMTypeRef.p("ParamTypes", ""),
+        AutoSize("ParamTypes")..size_t("ParamCount", ""),
+        AutoSizeResult..Check(1)..size_t.p("NameLength", ""),
+
+        since = "13"
     )
 
     IgnoreMissing..LLVMBool(
@@ -3258,16 +3392,183 @@ val LLVMCore = "LLVMCore".nativeClass(
         unsigned_int("Align", "")
     )
 
+    IgnoreMissing..LLVMValueRef(
+        "AddGlobalIFunc",
+        """
+        Add a global indirect function to a module under a specified name.
+        
+        See {@code llvm::GlobalIFunc::create()}
+        """,
+
+        LLVMModuleRef("M", ""),
+        charUTF8.const.p("Name", ""),
+        AutoSize("Name")..size_t("NameLen", ""),
+        LLVMTypeRef("Ty", ""),
+        unsigned("AddrSpace", ""),
+        LLVMValueRef("Resolver", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "GetNamedGlobalIFunc",
+        """
+        Obtain a {@code GlobalIFunc} value from a {@code Module} by its name.
+        
+        The returned value corresponds to a {@code llvm::GlobalIFunc} value.
+        
+        See {@code llvm::Module::getNamedIFunc()}
+        """,
+
+        LLVMModuleRef("M", ""),
+        charUTF8.const.p("Name", ""),
+        AutoSize("Name")..size_t("NameLen", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "GetFirstGlobalIFunc",
+        """
+        Obtain an iterator to the first {@code GlobalIFunc} in a {@code Module}.
+        
+        See {@code llvm::Module::ifunc_begin()}
+        """,
+
+        LLVMModuleRef("M", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "GetLastGlobalIFunc",
+        """
+        Obtain an iterator to the last {@code GlobalIFunc} in a {@code Module}.
+        
+        See {@code llvm::Module::ifunc_end()}.
+        """,
+
+        LLVMModuleRef("M", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "GetNextGlobalIFunc",
+        """
+        Advance a {@code GlobalIFunc} iterator to the next {@code GlobalIFunc}.
+     
+        Returns #NULL if the iterator was already at the end and there are no more global aliases.
+        """,
+
+        LLVMValueRef("IFunc", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "GetPreviousGlobalIFunc",
+        """
+        Decrement a {@code GlobalIFunc} iterator to the previous {@code GlobalIFunc}.
+     
+        Returns #NULL if the iterator was already at the beginning and there are no previous global aliases.
+        """,
+
+        LLVMValueRef("IFunc", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "GetGlobalIFuncResolver",
+        """
+        Retrieves the resolver function associated with this indirect function, or #NULL if it doesn't not exist.
+
+        See {@code llvm::GlobalIFunc::getResolver()}
+        """,
+
+        LLVMValueRef("IFunc", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..void(
+        "SetGlobalIFuncResolver",
+        """
+        Sets the resolver function associated with this indirect function.
+        
+        See {@code llvm::GlobalIFunc::setResolver()}
+        """,
+
+        LLVMValueRef("IFunc", ""),
+        LLVMValueRef("Resolver", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..void(
+        "EraseGlobalIFunc",
+        """
+        Remove a global indirect function from its parent module and delete it.
+        
+        See {@code llvm::GlobalIFunc::eraseFromParent()}
+        """,
+
+        LLVMValueRef("IFunc", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..void(
+        "RemoveGlobalIFunc",
+        """
+        Remove a global indirect function from its parent module.
+        
+        This unlinks the global indirect function from its containing module but keeps it alive.
+        
+        See {@code llvm::GlobalIFunc::removeFromParent()}
+        """,
+
+        LLVMValueRef("IFunc", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "MDStringInContext2",
+        """
+        Create an {@code MDString} value from a given string value.
+
+        The {@code MDString} value does not take ownership of the given string, it remains the responsibility of the caller to free it.
+
+        See {@code llvm::MDString::get()}
+        """,
+
+        LLVMContextRef("C", ""),
+        charUTF8.const.p("Str", ""),
+        AutoSize("Str")..size_t("SLen", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "MDNodeInContext2",
+        """
+        Create an {@code MDNode} value with the given array of operands.
+
+        See {@code llvm::MDNode::get()}
+        """,
+
+        LLVMContextRef("C", ""),
+        LLVMMetadataRef.p("MDs", ""),
+        AutoSize("MDs")..size_t("Count", ""),
+
+        since = "9"
+    )
+
     LLVMValueRef(
         "MDStringInContext",
-        """
-        Obtain a {@code MDString} value from a context.
-
-        The returned instance corresponds to the {@code llvm::MDString} class.
-
-        The instance is specified by string data of a specified length. The string content is copied, so the backing memory can be freed after this function
-        returns.
-        """,
+        "Deprecated: Use #MDStringInContext2() instead.",
 
         LLVMContextRef("C", ""),
         charUTF8.const.p("Str", ""),
@@ -3276,7 +3577,7 @@ val LLVMCore = "LLVMCore".nativeClass(
 
     LLVMValueRef(
         "MDString",
-        "Obtain a {@code MDString} value from the global context.",
+        "Deprecated: Use #MDStringInContext2() instead.",
 
         charUTF8.const.p("Str", ""),
         AutoSize("Str")..unsigned_int("SLen", "")
@@ -3284,11 +3585,7 @@ val LLVMCore = "LLVMCore".nativeClass(
 
     LLVMValueRef(
         "MDNodeInContext",
-        """
-        Obtain a {@code MDNode} value from a context.
-
-        The returned value corresponds to the {@code llvm::MDNode} class.
-        """,
+        "Deprecated: Use #MDNodeInContext2() instead.",
 
         LLVMContextRef("C", ""),
         LLVMValueRef.p("Vals", ""),
@@ -3297,7 +3594,7 @@ val LLVMCore = "LLVMCore".nativeClass(
 
     LLVMValueRef(
         "MDNode",
-        "Obtain a {@code MDNode} value from the global context.",
+        "Deprecated: Use #MDNodeInContext2() instead.",
 
         LLVMValueRef.p("Vals", ""),
         AutoSize("Vals")..unsigned_int("Count", "")
@@ -3459,6 +3756,36 @@ val LLVMCore = "LLVMCore".nativeClass(
         "Obtain the basic block that corresponds to the entry point of a function.",
 
         LLVMValueRef("Fn", "")
+    )
+
+    IgnoreMissing..void(
+        "InsertExistingBasicBlockAfterInsertBlock",
+        """
+        Insert the given basic block after the insertion point of the given builder.
+     
+        The insertion point must be valid.
+     
+        See {@code llvm::Function::BasicBlockListType::insertAfter()}.        
+        """,
+
+        LLVMBuilderRef("Builder", ""),
+        LLVMBasicBlockRef("BB", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..void(
+        "AppendExistingBasicBlock",
+        """
+        Append the given basic block to the basic block list of the given function.
+     
+        See {@code llvm::Function::BasicBlockListType::push_back()}
+        """,
+
+        LLVMValueRef("Fn", ""),
+        LLVMBasicBlockRef("BB", ""),
+
+        since = "9"
     )
 
     IgnoreMissing..LLVMBasicBlockRef(
@@ -4117,9 +4444,82 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMBuilderRef("Builder", "")
     )
 
+    IgnoreMissing..LLVMMetadataRef(
+        "GetCurrentDebugLocation2",
+        """
+        Get location information used by debugging information.
+        
+        See {@code llvm::IRBuilder::getCurrentDebugLocation()}.
+        """,
+
+        LLVMBuilderRef("Builder", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..void(
+        "SetCurrentDebugLocation2",
+        """
+        Set location information used by debugging information.
+
+        To clear the location metadata of the given instruction, pass #NULL to {@code Loc}.
+
+        See {@code llvm::IRBuilder::SetCurrentDebugLocation()}.
+        """,
+
+        LLVMBuilderRef("Builder", ""),
+        nullable..LLVMMetadataRef("Loc", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..void(
+        "SetInstDebugLocation",
+        """
+        Attempts to set the debug location for the given instruction using the current debug location for the given builder. If the builder has no current
+        debug location, this function is a no-op.
+
+        See {@code llvm::IRBuilder::SetInstDebugLocation()}.
+        """,
+
+        LLVMBuilderRef("Builder", ""),
+        LLVMValueRef("Inst", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..LLVMMetadataRef(
+        "BuilderGetDefaultFPMathTag",
+        """
+        Get the default floating-point math metadata for a given builder.
+        
+        See {@code llvm::IRBuilder::getDefaultFPMathTag()}
+        """,
+
+        LLVMBuilderRef("Builder", ""),
+
+        since = "9"
+    )
+
+    IgnoreMissing..void(
+        "BuilderSetDefaultFPMathTag",
+        """
+        Set the default floating-point math metadata for the given builder.
+
+        To clear the metadata, pass #NULL to {@code FPMathTag}.
+
+        See {@code llvm::IRBuilder::setDefaultFPMathTag()}.
+        """,
+
+        LLVMBuilderRef("Builder", ""),
+        nullable..LLVMMetadataRef("FPMathTag", ""),
+
+        since = "9"
+    )
+
     void(
         "SetCurrentDebugLocation",
-        "Metadata",
+        "Deprecated: Passing the #NULL location will crash. Use #SetCurrentDebugLocation2() instead.",
 
         LLVMBuilderRef("Builder", ""),
         LLVMValueRef("L", "")
@@ -4127,17 +4527,9 @@ val LLVMCore = "LLVMCore".nativeClass(
 
     LLVMValueRef(
         "GetCurrentDebugLocation",
-        "",
+        "Deprecated: Returning the #NULL location will crash. Use #GetCurrentDebugLocation2() instead.",
 
         LLVMBuilderRef("Builder", "")
-    )
-
-    void(
-        "SetInstDebugLocation",
-        "",
-
-        LLVMBuilderRef("Builder", ""),
-        LLVMValueRef("Inst", "")
     )
 
     LLVMValueRef(
@@ -4971,6 +5363,25 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMBool("IsVolatile", "")
     )
 
+    IgnoreMissing..LLVMBool(
+        "GetWeak",
+        "",
+
+        LLVMValueRef("CmpXchgInst", ""),
+
+        since = "10"
+    )
+
+    IgnoreMissing..void(
+        "SetWeak",
+        "",
+
+        LLVMValueRef("CmpXchgInst", ""),
+        LLVMBool("IsWeak", ""),
+
+        since = "10"
+    )
+
     LLVMAtomicOrdering(
         "GetOrdering",
         "",
@@ -4978,12 +5389,31 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("MemoryAccessInst", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "SetOrdering",
         "",
 
         LLVMValueRef("MemoryAccessInst", ""),
         LLVMAtomicOrdering("Ordering", "")
+    )
+
+    IgnoreMissing..LLVMAtomicRMWBinOp(
+        "GetAtomicRMWBinOp",
+        "",
+
+        LLVMValueRef("AtomicRMWInst", ""),
+
+        since = "10"
+    )
+
+    IgnoreMissing..void(
+        "SetAtomicRMWBinOp",
+        "",
+
+        LLVMValueRef("AtomicRMWInst", ""),
+        LLVMAtomicRMWBinOp("BinOp", ""),
+
+        since = "10"
     )
 
     LLVMValueRef(
@@ -5330,6 +5760,17 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", "")
     )
 
+    IgnoreMissing..LLVMValueRef(
+        "BuildFreeze",
+        "",
+
+        LLVMBuilderRef("Builder", ""),
+        LLVMValueRef("Val", ""),
+        charUTF8.const.p("Name", ""),
+
+        since = "10"
+    )
+
     LLVMValueRef(
         "BuildIsNull",
         "",
@@ -5391,6 +5832,35 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMAtomicOrdering("SuccessOrdering", ""),
         LLVMAtomicOrdering("FailureOrdering", ""),
         LLVMBool("SingleThread", "")
+    )
+
+    IgnoreMissing..unsigned(
+        "GetNumMaskElements",
+        "Get the number of elements in the mask of a {@code ShuffleVector} instruction.",
+
+        LLVMValueRef("ShuffleVectorInst", ""),
+
+        since = "11"
+    )
+
+    IgnoreMissing..int(
+        "GetUndefMaskElem",
+        "Returns a constant that specifies that the result of a {@code ShuffleVectorInst} is undefined.",
+
+        void(),
+
+        since = "11"
+    )
+
+    IgnoreMissing..int(
+        "GetMaskValue",
+        "Get the mask value at position {@code Elt} in the mask of a {@code ShuffleVector} instruction.",
+
+        LLVMValueRef("ShuffleVectorInst", ""),
+        unsigned("Elt", ""),
+
+        returnDoc = "the result of #GetUndefMaskElem() if the mask value is {@code undef} at that position.",
+        since = "11"
     )
 
     LLVMBool(

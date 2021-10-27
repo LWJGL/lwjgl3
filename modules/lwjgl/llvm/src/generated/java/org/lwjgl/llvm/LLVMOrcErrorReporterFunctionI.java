@@ -13,23 +13,23 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
- * Instances of this interface may be passed to the {@link LLVMORC#LLVMOrcCreateLazyCompileCallback OrcCreateLazyCompileCallback} method.
+ * Instances of this interface may be passed to the {@link LLVMOrc#LLVMOrcExecutionSessionSetErrorReporter OrcExecutionSessionSetErrorReporter} method.
  * 
  * <h3>Type</h3>
  * 
  * <pre><code>
- * uint64_t (*{@link #invoke}) (
- *     LLVMOrcJITStackRef JITStack,
- *     void *CallbackCtx
+ * void (*{@link #invoke}) (
+ *     void *Ctx,
+ *     LLVMErrorRef Err
  * )</code></pre>
  */
 @FunctionalInterface
-@NativeType("uint64_t (*) (LLVMOrcJITStackRef, void *)")
-public interface LLVMOrcLazyCompileCallbackFnI extends CallbackI {
+@NativeType("LLVMOrcErrorReporterFunction")
+public interface LLVMOrcErrorReporterFunctionI extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
         FFI_DEFAULT_ABI,
-        ffi_type_uint64,
+        ffi_type_void,
         ffi_type_pointer, ffi_type_pointer
     );
 
@@ -38,13 +38,13 @@ public interface LLVMOrcLazyCompileCallbackFnI extends CallbackI {
 
     @Override
     default void callback(long ret, long args) {
-        long __result = invoke(
+        invoke(
             memGetAddress(memGetAddress(args)),
             memGetAddress(memGetAddress(args + POINTER_SIZE))
         );
-        apiClosureRetL(ret, __result);
     }
 
-    @NativeType("uint64_t") long invoke(@NativeType("LLVMOrcJITStackRef") long JITStack, @NativeType("void *") long CallbackCtx);
+    /** Error reporter function. */
+    void invoke(@NativeType("void *") long Ctx, @NativeType("LLVMErrorRef") long Err);
 
 }

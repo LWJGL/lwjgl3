@@ -14,6 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class LLVMError {
@@ -29,7 +30,8 @@ public class LLVMError {
             ConsumeError         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMConsumeError"),
             GetErrorMessage      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetErrorMessage"),
             DisposeErrorMessage  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeErrorMessage"),
-            GetStringErrorTypeId = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetStringErrorTypeId");
+            GetStringErrorTypeId = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetStringErrorTypeId"),
+            CreateStringError    = LLVMCore.getLibrary().getFunctionAddress("LLVMCreateStringError");
 
     }
 
@@ -111,6 +113,47 @@ public class LLVMError {
     public static long LLVMGetStringErrorTypeId() {
         long __functionAddress = Functions.GetStringErrorTypeId;
         return invokeP(__functionAddress);
+    }
+
+    // --- [ LLVMCreateStringError ] ---
+
+    /** Unsafe version of: {@link #LLVMCreateStringError CreateStringError} */
+    public static long nLLVMCreateStringError(long ErrMsg) {
+        long __functionAddress = Functions.CreateStringError;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return invokePP(ErrMsg, __functionAddress);
+    }
+
+    /**
+     * Create a {@code StringError}.
+     *
+     * @since 12
+     */
+    @NativeType("LLVMErrorRef")
+    public static long LLVMCreateStringError(@NativeType("char const *") ByteBuffer ErrMsg) {
+        if (CHECKS) {
+            checkNT1(ErrMsg);
+        }
+        return nLLVMCreateStringError(memAddress(ErrMsg));
+    }
+
+    /**
+     * Create a {@code StringError}.
+     *
+     * @since 12
+     */
+    @NativeType("LLVMErrorRef")
+    public static long LLVMCreateStringError(@NativeType("char const *") CharSequence ErrMsg) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(ErrMsg, true);
+            long ErrMsgEncoded = stack.getPointerAddress();
+            return nLLVMCreateStringError(ErrMsgEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
 }

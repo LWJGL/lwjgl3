@@ -21,7 +21,7 @@ val LLVMComdat = "LLVMComdat".nativeClass(
         "AnyComdatSelectionKind".enum("The linker may choose any COMDAT.", "0"),
         "ExactMatchComdatSelectionKind".enum("The data referenced by the COMDAT must be the same."),
         "LargestComdatSelectionKind".enum("The linker will choose the largest COMDAT."),
-        "NoDuplicatesComdatSelectionKind".enum("No other Module may specify this COMDAT."),
+        "NoDeduplicateComdatSelectionKind".enum("No deduplication is performed."),
         "SameSizeComdatSelectionKind".enum("The data referenced by the COMDAT must be the same size.")
     )
 

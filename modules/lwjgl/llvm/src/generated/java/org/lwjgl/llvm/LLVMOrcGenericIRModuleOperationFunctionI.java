@@ -13,23 +13,23 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
- * Instances of this interface may be passed to the {@link LLVMORC#LLVMOrcAddEagerlyCompiledIR OrcAddEagerlyCompiledIR}, {@link LLVMORC#LLVMOrcAddLazilyCompiledIR OrcAddLazilyCompiledIR} and {@link LLVMORC#LLVMOrcAddObjectFile OrcAddObjectFile} methods.
+ * Instances of this interface may be passed to the {@link LLVMOrc#LLVMOrcThreadSafeModuleWithModuleDo OrcThreadSafeModuleWithModuleDo} method.
  * 
  * <h3>Type</h3>
  * 
  * <pre><code>
- * uint64_t (*{@link #invoke}) (
- *     char const *Name,
- *     void *LookupCtx
+ * LLVMErrorRef (*{@link #invoke}) (
+ *     void *Ctx,
+ *     LLVMModuleRef M
  * )</code></pre>
  */
 @FunctionalInterface
-@NativeType("uint64_t (*) (char const *, void *)")
-public interface LLVMOrcSymbolResolverFnI extends CallbackI {
+@NativeType("LLVMOrcGenericIRModuleOperationFunction")
+public interface LLVMOrcGenericIRModuleOperationFunctionI extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
         FFI_DEFAULT_ABI,
-        ffi_type_uint64,
+        ffi_type_pointer,
         ffi_type_pointer, ffi_type_pointer
     );
 
@@ -42,9 +42,10 @@ public interface LLVMOrcSymbolResolverFnI extends CallbackI {
             memGetAddress(memGetAddress(args)),
             memGetAddress(memGetAddress(args + POINTER_SIZE))
         );
-        apiClosureRetL(ret, __result);
+        apiClosureRetP(ret, __result);
     }
 
-    @NativeType("uint64_t") long invoke(@NativeType("char const *") long Name, @NativeType("void *") long LookupCtx);
+    /** A function for inspecting/mutating IR modules, suitable for use with {@link LLVMOrc#LLVMOrcThreadSafeModuleWithModuleDo OrcThreadSafeModuleWithModuleDo}. */
+    @NativeType("LLVMErrorRef") long invoke(@NativeType("void *") long Ctx, @NativeType("LLVMModuleRef") long M);
 
 }

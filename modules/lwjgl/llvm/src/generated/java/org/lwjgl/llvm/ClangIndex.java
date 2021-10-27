@@ -131,6 +131,9 @@ public class ClangIndex {
             getCursorAvailability                   = apiGetFunctionAddress(CLANG, "clang_getCursorAvailability"),
             getCursorPlatformAvailability           = apiGetFunctionAddress(CLANG, "clang_getCursorPlatformAvailability"),
             disposeCXPlatformAvailability           = apiGetFunctionAddress(CLANG, "clang_disposeCXPlatformAvailability"),
+            Cursor_getVarDeclInitializer            = CLANG.getFunctionAddress("clang_Cursor_getVarDeclInitializer"),
+            Cursor_hasVarDeclGlobalStorage          = CLANG.getFunctionAddress("clang_Cursor_hasVarDeclGlobalStorage"),
+            Cursor_hasVarDeclExternalStorage        = CLANG.getFunctionAddress("clang_Cursor_hasVarDeclExternalStorage"),
             getCursorLanguage                       = apiGetFunctionAddress(CLANG, "clang_getCursorLanguage"),
             getCursorTLSKind                        = CLANG.getFunctionAddress("clang_getCursorTLSKind"),
             Cursor_getTranslationUnit               = apiGetFunctionAddress(CLANG, "clang_Cursor_getTranslationUnit"),
@@ -201,8 +204,11 @@ public class ClangIndex {
             Type_getSizeOf                          = apiGetFunctionAddress(CLANG, "clang_Type_getSizeOf"),
             Type_getOffsetOf                        = apiGetFunctionAddress(CLANG, "clang_Type_getOffsetOf"),
             Type_getModifiedType                    = CLANG.getFunctionAddress("clang_Type_getModifiedType"),
+            Type_getValueType                       = CLANG.getFunctionAddress("clang_Type_getValueType"),
             Cursor_getOffsetOfField                 = apiGetFunctionAddress(CLANG, "clang_Cursor_getOffsetOfField"),
             Cursor_isAnonymous                      = apiGetFunctionAddress(CLANG, "clang_Cursor_isAnonymous"),
+            Cursor_isAnonymousRecordDecl            = CLANG.getFunctionAddress("clang_Cursor_isAnonymousRecordDecl"),
+            Cursor_isInlineNamespace                = CLANG.getFunctionAddress("clang_Cursor_isInlineNamespace"),
             Type_getNumTemplateArguments            = apiGetFunctionAddress(CLANG, "clang_Type_getNumTemplateArguments"),
             Type_getTemplateArgumentAsType          = apiGetFunctionAddress(CLANG, "clang_Type_getTemplateArgumentAsType"),
             Type_getCXXRefQualifier                 = apiGetFunctionAddress(CLANG, "clang_Type_getCXXRefQualifier"),
@@ -357,7 +363,10 @@ public class ClangIndex {
 
     public static final int
         CINDEX_VERSION_MAJOR = 0,
-        CINDEX_VERSION_MINOR = 50;
+        CINDEX_VERSION_MINOR = 62,
+        CINDEX_VERSION       = CINDEX_VERSION_MAJOR*10000 + CINDEX_VERSION_MINOR;
+
+    public static final String CINDEX_VERSION_STRING = "0.62";
 
     /**
      * Error codes returned by libclang routines. ({@code enum CXErrorCode})
@@ -424,6 +433,7 @@ public class ClangIndex {
      * <li>{@link #CXCursor_ExceptionSpecificationKind_Unevaluated Cursor_ExceptionSpecificationKind_Unevaluated} - The exception specification has not yet been evaluated.</li>
      * <li>{@link #CXCursor_ExceptionSpecificationKind_Uninstantiated Cursor_ExceptionSpecificationKind_Uninstantiated} - The exception specification has not yet been instantiated.</li>
      * <li>{@link #CXCursor_ExceptionSpecificationKind_Unparsed Cursor_ExceptionSpecificationKind_Unparsed} - The exception specification has not been parsed yet.</li>
+     * <li>{@link #CXCursor_ExceptionSpecificationKind_NoThrow Cursor_ExceptionSpecificationKind_NoThrow} - The cursor has a {@code __declspec(nothrow)} exception specification.</li>
      * </ul>
      */
     public static final int
@@ -435,7 +445,8 @@ public class ClangIndex {
         CXCursor_ExceptionSpecificationKind_ComputedNoexcept = 5,
         CXCursor_ExceptionSpecificationKind_Unevaluated      = 6,
         CXCursor_ExceptionSpecificationKind_Uninstantiated   = 7,
-        CXCursor_ExceptionSpecificationKind_Unparsed         = 8;
+        CXCursor_ExceptionSpecificationKind_Unparsed         = 8,
+        CXCursor_ExceptionSpecificationKind_NoThrow          = 9;
 
     /**
      * {@code CXGlobalOptFlags}
@@ -633,6 +644,13 @@ public class ClangIndex {
      * </li>
      * <li>{@link #CXTranslationUnit_IncludeAttributedTypes TranslationUnit_IncludeAttributedTypes} - Used to indicate that attributed types should be included in CXType.</li>
      * <li>{@link #CXTranslationUnit_VisitImplicitAttributes TranslationUnit_VisitImplicitAttributes} - Used to indicate that implicit attributes should be visited.</li>
+     * <li>{@link #CXTranslationUnit_IgnoreNonErrorsFromIncludedFiles TranslationUnit_IgnoreNonErrorsFromIncludedFiles} - 
+     * Used to indicate that non-errors from included files should be ignored.
+     * 
+     * <p>If set, {@link #clang_getDiagnosticSetFromTU getDiagnosticSetFromTU} will not report e.g. warnings from included files anymore. This speeds up {@code clang_getDiagnosticSetFromTU()}
+     * for the case where these warnings are not of interest, as for an IDE for example, which typically shows only the diagnostics in the main file.</p>
+     * </li>
+     * <li>{@link #CXTranslationUnit_RetainExcludedConditionalBlocks TranslationUnit_RetainExcludedConditionalBlocks} - Tells the preprocessor not to skip excluded conditional blocks.</li>
      * </ul>
      */
     public static final int
@@ -650,7 +668,9 @@ public class ClangIndex {
         CXTranslationUnit_SingleFileParse                      = 0x400,
         CXTranslationUnit_LimitSkipFunctionBodiesToPreamble    = 0x800,
         CXTranslationUnit_IncludeAttributedTypes               = 0x1000,
-        CXTranslationUnit_VisitImplicitAttributes              = 0x2000;
+        CXTranslationUnit_VisitImplicitAttributes              = 0x2000,
+        CXTranslationUnit_IgnoreNonErrorsFromIncludedFiles     = 0x4000,
+        CXTranslationUnit_RetainExcludedConditionalBlocks      = 0x8000;
 
     /**
      * Flags that control how translation units are saved. ({@code enum CXSaveTranslationUnit_Flags})
@@ -1005,10 +1025,13 @@ public class ClangIndex {
      * </li>
      * <li>{@link #CXCursor_ObjCBoolLiteralExpr Cursor_ObjCBoolLiteralExpr} - Objective-c Boolean Literal.</li>
      * <li>{@link #CXCursor_ObjCSelfExpr Cursor_ObjCSelfExpr} - Represents the "self" expression in an Objective-C method.</li>
-     * <li>{@link #CXCursor_OMPArraySectionExpr Cursor_OMPArraySectionExpr} - OpenMP 4.0 [2.4, Array Section].</li>
+     * <li>{@link #CXCursor_OMPArraySectionExpr Cursor_OMPArraySectionExpr} - OpenMP 5.0 [2.1.5, Array Section].</li>
      * <li>{@link #CXCursor_ObjCAvailabilityCheckExpr Cursor_ObjCAvailabilityCheckExpr} - Represents an {@code @available (...)} check.</li>
      * <li>{@link #CXCursor_FixedPointLiteral Cursor_FixedPointLiteral} - Fixed point literal</li>
-     * <li>{@link #CXCursor_LastExpr Cursor_LastExpr} - Fixed point literal</li>
+     * <li>{@link #CXCursor_OMPArrayShapingExpr Cursor_OMPArrayShapingExpr} - OpenMP 5.0 [2.1.4, Array Shaping].</li>
+     * <li>{@link #CXCursor_OMPIteratorExpr Cursor_OMPIteratorExpr} - OpenMP 5.0 [2.1.6 Iterators]</li>
+     * <li>{@link #CXCursor_CXXAddrspaceCastExpr Cursor_CXXAddrspaceCastExpr} - OpenCL's {@code addrspace_cast<>} expression.</li>
+     * <li>{@link #CXCursor_LastExpr Cursor_LastExpr}</li>
      * <li>{@link #CXCursor_FirstStmt Cursor_FirstStmt} - Statements</li>
      * <li>{@link #CXCursor_UnexposedStmt Cursor_UnexposedStmt} - 
      * A statement whose specific kind is not exposed via this interface.
@@ -1112,7 +1135,21 @@ public class ClangIndex {
      * <li>{@link #CXCursor_OMPTargetTeamsDistributeParallelForDirective Cursor_OMPTargetTeamsDistributeParallelForDirective} - OpenMP target teams distribute parallel for directive.</li>
      * <li>{@link #CXCursor_OMPTargetTeamsDistributeParallelForSimdDirective Cursor_OMPTargetTeamsDistributeParallelForSimdDirective} - OpenMP target teams distribute parallel for simd directive.</li>
      * <li>{@link #CXCursor_OMPTargetTeamsDistributeSimdDirective Cursor_OMPTargetTeamsDistributeSimdDirective} - OpenMP target teams distribute simd directive.</li>
-     * <li>{@link #CXCursor_LastStmt Cursor_LastStmt} - OpenMP target teams distribute simd directive.</li>
+     * <li>{@link #CXCursor_BuiltinBitCastExpr Cursor_BuiltinBitCastExpr} - C++2a std::bit_cast expression.</li>
+     * <li>{@link #CXCursor_OMPMasterTaskLoopDirective Cursor_OMPMasterTaskLoopDirective} - OpenMP master taskloop directive.</li>
+     * <li>{@link #CXCursor_OMPParallelMasterTaskLoopDirective Cursor_OMPParallelMasterTaskLoopDirective} - OpenMP parallel master taskloop directive.</li>
+     * <li>{@link #CXCursor_OMPMasterTaskLoopSimdDirective Cursor_OMPMasterTaskLoopSimdDirective} - OpenMP master taskloop simd directive.</li>
+     * <li>{@link #CXCursor_OMPParallelMasterTaskLoopSimdDirective Cursor_OMPParallelMasterTaskLoopSimdDirective} - OpenMP parallel master taskloop simd directive.</li>
+     * <li>{@link #CXCursor_OMPParallelMasterDirective Cursor_OMPParallelMasterDirective} - OpenMP parallel master directive.</li>
+     * <li>{@link #CXCursor_OMPDepobjDirective Cursor_OMPDepobjDirective} - OpenMP depobj directive.</li>
+     * <li>{@link #CXCursor_OMPScanDirective Cursor_OMPScanDirective} - OpenMP scan directive.</li>
+     * <li>{@link #CXCursor_OMPTileDirective Cursor_OMPTileDirective} - OpenMP tile directive.</li>
+     * <li>{@link #CXCursor_OMPCanonicalLoop Cursor_OMPCanonicalLoop} - OpenMP canonical loop.</li>
+     * <li>{@link #CXCursor_OMPInteropDirective Cursor_OMPInteropDirective} - OpenMP interop directive.</li>
+     * <li>{@link #CXCursor_OMPDispatchDirective Cursor_OMPDispatchDirective} - OpenMP dispatch directive.</li>
+     * <li>{@link #CXCursor_OMPMaskedDirective Cursor_OMPMaskedDirective} - OpenMP masked directive.</li>
+     * <li>{@link #CXCursor_OMPUnrollDirective Cursor_OMPUnrollDirective} - OpenMP unroll directive.</li>
+     * <li>{@link #CXCursor_LastStmt Cursor_LastStmt}</li>
      * <li>{@link #CXCursor_TranslationUnit Cursor_TranslationUnit} - 
      * Cursor that represents the translation unit itself.
      * 
@@ -1120,65 +1157,61 @@ public class ClangIndex {
      * </li>
      * <li>{@link #CXCursor_FirstAttr Cursor_FirstAttr} - Attributes</li>
      * <li>{@link #CXCursor_UnexposedAttr Cursor_UnexposedAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_IBActionAttr Cursor_IBActionAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_IBOutletAttr Cursor_IBOutletAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_IBOutletCollectionAttr Cursor_IBOutletCollectionAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_CXXFinalAttr Cursor_CXXFinalAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_CXXOverrideAttr Cursor_CXXOverrideAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_AnnotateAttr Cursor_AnnotateAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_AsmLabelAttr Cursor_AsmLabelAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_PackedAttr Cursor_PackedAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_PureAttr Cursor_PureAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_ConstAttr Cursor_ConstAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_NoDuplicateAttr Cursor_NoDuplicateAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_CUDAConstantAttr Cursor_CUDAConstantAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_CUDADeviceAttr Cursor_CUDADeviceAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_CUDAGlobalAttr Cursor_CUDAGlobalAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_CUDAHostAttr Cursor_CUDAHostAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_CUDASharedAttr Cursor_CUDASharedAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_VisibilityAttr Cursor_VisibilityAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_DLLExport Cursor_DLLExport} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_DLLImport Cursor_DLLImport} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_NSReturnsRetained Cursor_NSReturnsRetained} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_NSReturnsNotRetained Cursor_NSReturnsNotRetained} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_NSReturnsAutoreleased Cursor_NSReturnsAutoreleased} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_NSConsumesSelf Cursor_NSConsumesSelf} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_NSConsumed Cursor_NSConsumed} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_ObjCException Cursor_ObjCException} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_ObjCNSObject Cursor_ObjCNSObject} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_ObjCIndependentClass Cursor_ObjCIndependentClass} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_ObjCPreciseLifetime Cursor_ObjCPreciseLifetime} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_ObjCReturnsInnerPointer Cursor_ObjCReturnsInnerPointer} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_ObjCRequiresSuper Cursor_ObjCRequiresSuper} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_ObjCRootClass Cursor_ObjCRootClass} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_ObjCSubclassingRestricted Cursor_ObjCSubclassingRestricted} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_ObjCExplicitProtocolImpl Cursor_ObjCExplicitProtocolImpl} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_ObjCDesignatedInitializer Cursor_ObjCDesignatedInitializer} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_ObjCRuntimeVisible Cursor_ObjCRuntimeVisible} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_ObjCBoxable Cursor_ObjCBoxable} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_FlagEnum Cursor_FlagEnum} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_LastAttr Cursor_LastAttr} - An attribute whose specific kind is not exposed via this interface.</li>
+     * <li>{@link #CXCursor_IBActionAttr Cursor_IBActionAttr}</li>
+     * <li>{@link #CXCursor_IBOutletAttr Cursor_IBOutletAttr}</li>
+     * <li>{@link #CXCursor_IBOutletCollectionAttr Cursor_IBOutletCollectionAttr}</li>
+     * <li>{@link #CXCursor_CXXFinalAttr Cursor_CXXFinalAttr}</li>
+     * <li>{@link #CXCursor_CXXOverrideAttr Cursor_CXXOverrideAttr}</li>
+     * <li>{@link #CXCursor_AnnotateAttr Cursor_AnnotateAttr}</li>
+     * <li>{@link #CXCursor_AsmLabelAttr Cursor_AsmLabelAttr}</li>
+     * <li>{@link #CXCursor_PackedAttr Cursor_PackedAttr}</li>
+     * <li>{@link #CXCursor_PureAttr Cursor_PureAttr}</li>
+     * <li>{@link #CXCursor_ConstAttr Cursor_ConstAttr}</li>
+     * <li>{@link #CXCursor_NoDuplicateAttr Cursor_NoDuplicateAttr}</li>
+     * <li>{@link #CXCursor_CUDAConstantAttr Cursor_CUDAConstantAttr}</li>
+     * <li>{@link #CXCursor_CUDADeviceAttr Cursor_CUDADeviceAttr}</li>
+     * <li>{@link #CXCursor_CUDAGlobalAttr Cursor_CUDAGlobalAttr}</li>
+     * <li>{@link #CXCursor_CUDAHostAttr Cursor_CUDAHostAttr}</li>
+     * <li>{@link #CXCursor_CUDASharedAttr Cursor_CUDASharedAttr}</li>
+     * <li>{@link #CXCursor_VisibilityAttr Cursor_VisibilityAttr}</li>
+     * <li>{@link #CXCursor_DLLExport Cursor_DLLExport}</li>
+     * <li>{@link #CXCursor_DLLImport Cursor_DLLImport}</li>
+     * <li>{@link #CXCursor_NSReturnsRetained Cursor_NSReturnsRetained}</li>
+     * <li>{@link #CXCursor_NSReturnsNotRetained Cursor_NSReturnsNotRetained}</li>
+     * <li>{@link #CXCursor_NSReturnsAutoreleased Cursor_NSReturnsAutoreleased}</li>
+     * <li>{@link #CXCursor_NSConsumesSelf Cursor_NSConsumesSelf}</li>
+     * <li>{@link #CXCursor_NSConsumed Cursor_NSConsumed}</li>
+     * <li>{@link #CXCursor_ObjCException Cursor_ObjCException}</li>
+     * <li>{@link #CXCursor_ObjCNSObject Cursor_ObjCNSObject}</li>
+     * <li>{@link #CXCursor_ObjCIndependentClass Cursor_ObjCIndependentClass}</li>
+     * <li>{@link #CXCursor_ObjCPreciseLifetime Cursor_ObjCPreciseLifetime}</li>
+     * <li>{@link #CXCursor_ObjCReturnsInnerPointer Cursor_ObjCReturnsInnerPointer}</li>
+     * <li>{@link #CXCursor_ObjCRequiresSuper Cursor_ObjCRequiresSuper}</li>
+     * <li>{@link #CXCursor_ObjCRootClass Cursor_ObjCRootClass}</li>
+     * <li>{@link #CXCursor_ObjCSubclassingRestricted Cursor_ObjCSubclassingRestricted}</li>
+     * <li>{@link #CXCursor_ObjCExplicitProtocolImpl Cursor_ObjCExplicitProtocolImpl}</li>
+     * <li>{@link #CXCursor_ObjCDesignatedInitializer Cursor_ObjCDesignatedInitializer}</li>
+     * <li>{@link #CXCursor_ObjCRuntimeVisible Cursor_ObjCRuntimeVisible}</li>
+     * <li>{@link #CXCursor_ObjCBoxable Cursor_ObjCBoxable}</li>
+     * <li>{@link #CXCursor_FlagEnum Cursor_FlagEnum}</li>
+     * <li>{@link #CXCursor_ConvergentAttr Cursor_ConvergentAttr}</li>
+     * <li>{@link #CXCursor_WarnUnusedAttr Cursor_WarnUnusedAttr}</li>
+     * <li>{@link #CXCursor_WarnUnusedResultAttr Cursor_WarnUnusedResultAttr}</li>
+     * <li>{@link #CXCursor_AlignedAttr Cursor_AlignedAttr}</li>
+     * <li>{@link #CXCursor_LastAttr Cursor_LastAttr}</li>
      * <li>{@link #CXCursor_PreprocessingDirective Cursor_PreprocessingDirective} - Preprocessing</li>
-     * <li>{@link #CXCursor_MacroDefinition Cursor_MacroDefinition} - Preprocessing</li>
-     * <li>{@link #CXCursor_MacroExpansion Cursor_MacroExpansion} - Preprocessing</li>
-     * <li>{@link #CXCursor_MacroInstantiation Cursor_MacroInstantiation} - Preprocessing</li>
-     * <li>{@link #CXCursor_InclusionDirective Cursor_InclusionDirective} - Preprocessing</li>
-     * <li>{@link #CXCursor_FirstPreprocessing Cursor_FirstPreprocessing} - Preprocessing</li>
-     * <li>{@link #CXCursor_LastPreprocessing Cursor_LastPreprocessing} - Preprocessing</li>
-     * <li>{@link #CXCursor_ModuleImportDecl Cursor_ModuleImportDecl} - 
-     * Extra Declarations
-     * 
-     * <p>A module import declaration.</p>
-     * </li>
-     * <li>{@link #CXCursor_TypeAliasTemplateDecl Cursor_TypeAliasTemplateDecl} - 
-     * Extra Declarations
-     * 
-     * <p>A module import declaration.</p>
-     * </li>
+     * <li>{@link #CXCursor_MacroDefinition Cursor_MacroDefinition}</li>
+     * <li>{@link #CXCursor_MacroExpansion Cursor_MacroExpansion}</li>
+     * <li>{@link #CXCursor_MacroInstantiation Cursor_MacroInstantiation}</li>
+     * <li>{@link #CXCursor_InclusionDirective Cursor_InclusionDirective}</li>
+     * <li>{@link #CXCursor_FirstPreprocessing Cursor_FirstPreprocessing}</li>
+     * <li>{@link #CXCursor_LastPreprocessing Cursor_LastPreprocessing}</li>
+     * <li>{@link #CXCursor_ModuleImportDecl Cursor_ModuleImportDecl} - A module import declaration.</li>
+     * <li>{@link #CXCursor_TypeAliasTemplateDecl Cursor_TypeAliasTemplateDecl}</li>
      * <li>{@link #CXCursor_StaticAssert Cursor_StaticAssert} - A static_assert or _Static_assert node</li>
      * <li>{@link #CXCursor_FriendDecl Cursor_FriendDecl} - a friend declaration.</li>
-     * <li>{@link #CXCursor_FirstExtraDecl Cursor_FirstExtraDecl} - a friend declaration.</li>
-     * <li>{@link #CXCursor_LastExtraDecl Cursor_LastExtraDecl} - a friend declaration.</li>
+     * <li>{@link #CXCursor_FirstExtraDecl Cursor_FirstExtraDecl}</li>
+     * <li>{@link #CXCursor_LastExtraDecl Cursor_LastExtraDecl}</li>
      * <li>{@link #CXCursor_OverloadCandidate Cursor_OverloadCandidate} - A code completion overload candidate.</li>
      * </ul>
      */
@@ -1294,7 +1327,10 @@ public class ClangIndex {
         CXCursor_OMPArraySectionExpr                              = 147,
         CXCursor_ObjCAvailabilityCheckExpr                        = 148,
         CXCursor_FixedPointLiteral                                = 149,
-        CXCursor_LastExpr                                         = CXCursor_FixedPointLiteral,
+        CXCursor_OMPArrayShapingExpr                              = 150,
+        CXCursor_OMPIteratorExpr                                  = 151,
+        CXCursor_CXXAddrspaceCastExpr                             = 152,
+        CXCursor_LastExpr                                         = CXCursor_CXXAddrspaceCastExpr,
         CXCursor_FirstStmt                                        = 200,
         CXCursor_UnexposedStmt                                    = 200,
         CXCursor_LabelStmt                                        = 201,
@@ -1377,7 +1413,21 @@ public class ClangIndex {
         CXCursor_OMPTargetTeamsDistributeParallelForDirective     = 277,
         CXCursor_OMPTargetTeamsDistributeParallelForSimdDirective = 278,
         CXCursor_OMPTargetTeamsDistributeSimdDirective            = 279,
-        CXCursor_LastStmt                                         = CXCursor_OMPTargetTeamsDistributeSimdDirective,
+        CXCursor_BuiltinBitCastExpr                               = 280,
+        CXCursor_OMPMasterTaskLoopDirective                       = 281,
+        CXCursor_OMPParallelMasterTaskLoopDirective               = 282,
+        CXCursor_OMPMasterTaskLoopSimdDirective                   = 283,
+        CXCursor_OMPParallelMasterTaskLoopSimdDirective           = 284,
+        CXCursor_OMPParallelMasterDirective                       = 285,
+        CXCursor_OMPDepobjDirective                               = 286,
+        CXCursor_OMPScanDirective                                 = 287,
+        CXCursor_OMPTileDirective                                 = 288,
+        CXCursor_OMPCanonicalLoop                                 = 289,
+        CXCursor_OMPInteropDirective                              = 290,
+        CXCursor_OMPDispatchDirective                             = 291,
+        CXCursor_OMPMaskedDirective                               = 292,
+        CXCursor_OMPUnrollDirective                               = 293,
+        CXCursor_LastStmt                                         = CXCursor_OMPUnrollDirective,
         CXCursor_TranslationUnit                                  = 300,
         CXCursor_FirstAttr                                        = 400,
         CXCursor_UnexposedAttr                                    = 400,
@@ -1418,7 +1468,11 @@ public class ClangIndex {
         CXCursor_ObjCRuntimeVisible                               = 435,
         CXCursor_ObjCBoxable                                      = 436,
         CXCursor_FlagEnum                                         = 437,
-        CXCursor_LastAttr                                         = CXCursor_FlagEnum,
+        CXCursor_ConvergentAttr                                   = 438,
+        CXCursor_WarnUnusedAttr                                   = 439,
+        CXCursor_WarnUnusedResultAttr                             = 440,
+        CXCursor_AlignedAttr                                      = 441,
+        CXCursor_LastAttr                                         = CXCursor_AlignedAttr,
         CXCursor_PreprocessingDirective                           = 500,
         CXCursor_MacroDefinition                                  = 501,
         CXCursor_MacroExpansion                                   = 502,
@@ -1522,125 +1576,128 @@ public class ClangIndex {
      * <ul>
      * <li>{@link #CXType_Invalid Type_Invalid} - Represents an invalid type (e.g., where no type is available).</li>
      * <li>{@link #CXType_Unexposed Type_Unexposed} - A type whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXType_Void Type_Void} - Builtin types</li>
-     * <li>{@link #CXType_Bool Type_Bool} - Builtin types</li>
-     * <li>{@link #CXType_Char_U Type_Char_U} - Builtin types</li>
-     * <li>{@link #CXType_UChar Type_UChar} - Builtin types</li>
-     * <li>{@link #CXType_Char16 Type_Char16} - Builtin types</li>
-     * <li>{@link #CXType_Char32 Type_Char32} - Builtin types</li>
-     * <li>{@link #CXType_UShort Type_UShort} - Builtin types</li>
-     * <li>{@link #CXType_UInt Type_UInt} - Builtin types</li>
-     * <li>{@link #CXType_ULong Type_ULong} - Builtin types</li>
-     * <li>{@link #CXType_ULongLong Type_ULongLong} - Builtin types</li>
-     * <li>{@link #CXType_UInt128 Type_UInt128} - Builtin types</li>
-     * <li>{@link #CXType_Char_S Type_Char_S} - Builtin types</li>
-     * <li>{@link #CXType_SChar Type_SChar} - Builtin types</li>
-     * <li>{@link #CXType_WChar Type_WChar} - Builtin types</li>
-     * <li>{@link #CXType_Short Type_Short} - Builtin types</li>
-     * <li>{@link #CXType_Int Type_Int} - Builtin types</li>
-     * <li>{@link #CXType_Long Type_Long} - Builtin types</li>
-     * <li>{@link #CXType_LongLong Type_LongLong} - Builtin types</li>
-     * <li>{@link #CXType_Int128 Type_Int128} - Builtin types</li>
-     * <li>{@link #CXType_Float Type_Float} - Builtin types</li>
-     * <li>{@link #CXType_Double Type_Double} - Builtin types</li>
-     * <li>{@link #CXType_LongDouble Type_LongDouble} - Builtin types</li>
-     * <li>{@link #CXType_NullPtr Type_NullPtr} - Builtin types</li>
-     * <li>{@link #CXType_Overload Type_Overload} - Builtin types</li>
-     * <li>{@link #CXType_Dependent Type_Dependent} - Builtin types</li>
-     * <li>{@link #CXType_ObjCId Type_ObjCId} - Builtin types</li>
-     * <li>{@link #CXType_ObjCClass Type_ObjCClass} - Builtin types</li>
-     * <li>{@link #CXType_ObjCSel Type_ObjCSel} - Builtin types</li>
-     * <li>{@link #CXType_Float128 Type_Float128} - Builtin types</li>
-     * <li>{@link #CXType_Half Type_Half} - Builtin types</li>
-     * <li>{@link #CXType_Float16 Type_Float16} - Builtin types</li>
-     * <li>{@link #CXType_ShortAccum Type_ShortAccum} - Builtin types</li>
-     * <li>{@link #CXType_Accum Type_Accum} - Builtin types</li>
-     * <li>{@link #CXType_LongAccum Type_LongAccum} - Builtin types</li>
-     * <li>{@link #CXType_UShortAccum Type_UShortAccum} - Builtin types</li>
-     * <li>{@link #CXType_UAccum Type_UAccum} - Builtin types</li>
-     * <li>{@link #CXType_ULongAccum Type_ULongAccum} - Builtin types</li>
-     * <li>{@link #CXType_FirstBuiltin Type_FirstBuiltin} - Builtin types</li>
-     * <li>{@link #CXType_LastBuiltin Type_LastBuiltin} - Builtin types</li>
-     * <li>{@link #CXType_Complex Type_Complex} - Builtin types</li>
-     * <li>{@link #CXType_Pointer Type_Pointer} - Builtin types</li>
-     * <li>{@link #CXType_BlockPointer Type_BlockPointer} - Builtin types</li>
-     * <li>{@link #CXType_LValueReference Type_LValueReference} - Builtin types</li>
-     * <li>{@link #CXType_RValueReference Type_RValueReference} - Builtin types</li>
-     * <li>{@link #CXType_Record Type_Record} - Builtin types</li>
-     * <li>{@link #CXType_Enum Type_Enum} - Builtin types</li>
-     * <li>{@link #CXType_Typedef Type_Typedef} - Builtin types</li>
-     * <li>{@link #CXType_ObjCInterface Type_ObjCInterface} - Builtin types</li>
-     * <li>{@link #CXType_ObjCObjectPointer Type_ObjCObjectPointer} - Builtin types</li>
-     * <li>{@link #CXType_FunctionNoProto Type_FunctionNoProto} - Builtin types</li>
-     * <li>{@link #CXType_FunctionProto Type_FunctionProto} - Builtin types</li>
-     * <li>{@link #CXType_ConstantArray Type_ConstantArray} - Builtin types</li>
-     * <li>{@link #CXType_Vector Type_Vector} - Builtin types</li>
-     * <li>{@link #CXType_IncompleteArray Type_IncompleteArray} - Builtin types</li>
-     * <li>{@link #CXType_VariableArray Type_VariableArray} - Builtin types</li>
-     * <li>{@link #CXType_DependentSizedArray Type_DependentSizedArray} - Builtin types</li>
-     * <li>{@link #CXType_MemberPointer Type_MemberPointer} - Builtin types</li>
-     * <li>{@link #CXType_Auto Type_Auto} - Builtin types</li>
+     * <li>{@link #CXType_Void Type_Void}</li>
+     * <li>{@link #CXType_Bool Type_Bool}</li>
+     * <li>{@link #CXType_Char_U Type_Char_U}</li>
+     * <li>{@link #CXType_UChar Type_UChar}</li>
+     * <li>{@link #CXType_Char16 Type_Char16}</li>
+     * <li>{@link #CXType_Char32 Type_Char32}</li>
+     * <li>{@link #CXType_UShort Type_UShort}</li>
+     * <li>{@link #CXType_UInt Type_UInt}</li>
+     * <li>{@link #CXType_ULong Type_ULong}</li>
+     * <li>{@link #CXType_ULongLong Type_ULongLong}</li>
+     * <li>{@link #CXType_UInt128 Type_UInt128}</li>
+     * <li>{@link #CXType_Char_S Type_Char_S}</li>
+     * <li>{@link #CXType_SChar Type_SChar}</li>
+     * <li>{@link #CXType_WChar Type_WChar}</li>
+     * <li>{@link #CXType_Short Type_Short}</li>
+     * <li>{@link #CXType_Int Type_Int}</li>
+     * <li>{@link #CXType_Long Type_Long}</li>
+     * <li>{@link #CXType_LongLong Type_LongLong}</li>
+     * <li>{@link #CXType_Int128 Type_Int128}</li>
+     * <li>{@link #CXType_Float Type_Float}</li>
+     * <li>{@link #CXType_Double Type_Double}</li>
+     * <li>{@link #CXType_LongDouble Type_LongDouble}</li>
+     * <li>{@link #CXType_NullPtr Type_NullPtr}</li>
+     * <li>{@link #CXType_Overload Type_Overload}</li>
+     * <li>{@link #CXType_Dependent Type_Dependent}</li>
+     * <li>{@link #CXType_ObjCId Type_ObjCId}</li>
+     * <li>{@link #CXType_ObjCClass Type_ObjCClass}</li>
+     * <li>{@link #CXType_ObjCSel Type_ObjCSel}</li>
+     * <li>{@link #CXType_Float128 Type_Float128}</li>
+     * <li>{@link #CXType_Half Type_Half}</li>
+     * <li>{@link #CXType_Float16 Type_Float16}</li>
+     * <li>{@link #CXType_ShortAccum Type_ShortAccum}</li>
+     * <li>{@link #CXType_Accum Type_Accum}</li>
+     * <li>{@link #CXType_LongAccum Type_LongAccum}</li>
+     * <li>{@link #CXType_UShortAccum Type_UShortAccum}</li>
+     * <li>{@link #CXType_UAccum Type_UAccum}</li>
+     * <li>{@link #CXType_ULongAccum Type_ULongAccum}</li>
+     * <li>{@link #CXType_BFloat16 Type_BFloat16}</li>
+     * <li>{@link #CXType_FirstBuiltin Type_FirstBuiltin}</li>
+     * <li>{@link #CXType_LastBuiltin Type_LastBuiltin}</li>
+     * <li>{@link #CXType_Complex Type_Complex}</li>
+     * <li>{@link #CXType_Pointer Type_Pointer}</li>
+     * <li>{@link #CXType_BlockPointer Type_BlockPointer}</li>
+     * <li>{@link #CXType_LValueReference Type_LValueReference}</li>
+     * <li>{@link #CXType_RValueReference Type_RValueReference}</li>
+     * <li>{@link #CXType_Record Type_Record}</li>
+     * <li>{@link #CXType_Enum Type_Enum}</li>
+     * <li>{@link #CXType_Typedef Type_Typedef}</li>
+     * <li>{@link #CXType_ObjCInterface Type_ObjCInterface}</li>
+     * <li>{@link #CXType_ObjCObjectPointer Type_ObjCObjectPointer}</li>
+     * <li>{@link #CXType_FunctionNoProto Type_FunctionNoProto}</li>
+     * <li>{@link #CXType_FunctionProto Type_FunctionProto}</li>
+     * <li>{@link #CXType_ConstantArray Type_ConstantArray}</li>
+     * <li>{@link #CXType_Vector Type_Vector}</li>
+     * <li>{@link #CXType_IncompleteArray Type_IncompleteArray}</li>
+     * <li>{@link #CXType_VariableArray Type_VariableArray}</li>
+     * <li>{@link #CXType_DependentSizedArray Type_DependentSizedArray}</li>
+     * <li>{@link #CXType_MemberPointer Type_MemberPointer}</li>
+     * <li>{@link #CXType_Auto Type_Auto}</li>
      * <li>{@link #CXType_Elaborated Type_Elaborated} - 
      * Represents a type that was referred to using an elaborated type keyword.
      * 
      * <p>E.g., struct S, or via a qualified name, e.g., N::M::type, or both.</p>
      * </li>
      * <li>{@link #CXType_Pipe Type_Pipe} - OpenCL PipeType.</li>
-     * <li>{@link #CXType_OCLImage1dRO Type_OCLImage1dRO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage1dArrayRO Type_OCLImage1dArrayRO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage1dBufferRO Type_OCLImage1dBufferRO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dRO Type_OCLImage2dRO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dArrayRO Type_OCLImage2dArrayRO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dDepthRO Type_OCLImage2dDepthRO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dArrayDepthRO Type_OCLImage2dArrayDepthRO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dMSAARO Type_OCLImage2dMSAARO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dArrayMSAARO Type_OCLImage2dArrayMSAARO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dMSAADepthRO Type_OCLImage2dMSAADepthRO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dArrayMSAADepthRO Type_OCLImage2dArrayMSAADepthRO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage3dRO Type_OCLImage3dRO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage1dWO Type_OCLImage1dWO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage1dArrayWO Type_OCLImage1dArrayWO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage1dBufferWO Type_OCLImage1dBufferWO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dWO Type_OCLImage2dWO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dArrayWO Type_OCLImage2dArrayWO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dDepthWO Type_OCLImage2dDepthWO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dArrayDepthWO Type_OCLImage2dArrayDepthWO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dMSAAWO Type_OCLImage2dMSAAWO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dArrayMSAAWO Type_OCLImage2dArrayMSAAWO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dMSAADepthWO Type_OCLImage2dMSAADepthWO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dArrayMSAADepthWO Type_OCLImage2dArrayMSAADepthWO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage3dWO Type_OCLImage3dWO} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage1dRW Type_OCLImage1dRW} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage1dArrayRW Type_OCLImage1dArrayRW} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage1dBufferRW Type_OCLImage1dBufferRW} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dRW Type_OCLImage2dRW} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dArrayRW Type_OCLImage2dArrayRW} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dDepthRW Type_OCLImage2dDepthRW} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dArrayDepthRW Type_OCLImage2dArrayDepthRW} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dMSAARW Type_OCLImage2dMSAARW} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dArrayMSAARW Type_OCLImage2dArrayMSAARW} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dMSAADepthRW Type_OCLImage2dMSAADepthRW} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage2dArrayMSAADepthRW Type_OCLImage2dArrayMSAADepthRW} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLImage3dRW Type_OCLImage3dRW} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLSampler Type_OCLSampler} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLEvent Type_OCLEvent} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLQueue Type_OCLQueue} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLReserveID Type_OCLReserveID} - OpenCL builtin types.</li>
+     * <li>{@link #CXType_OCLImage1dRO Type_OCLImage1dRO}</li>
+     * <li>{@link #CXType_OCLImage1dArrayRO Type_OCLImage1dArrayRO}</li>
+     * <li>{@link #CXType_OCLImage1dBufferRO Type_OCLImage1dBufferRO}</li>
+     * <li>{@link #CXType_OCLImage2dRO Type_OCLImage2dRO}</li>
+     * <li>{@link #CXType_OCLImage2dArrayRO Type_OCLImage2dArrayRO}</li>
+     * <li>{@link #CXType_OCLImage2dDepthRO Type_OCLImage2dDepthRO}</li>
+     * <li>{@link #CXType_OCLImage2dArrayDepthRO Type_OCLImage2dArrayDepthRO}</li>
+     * <li>{@link #CXType_OCLImage2dMSAARO Type_OCLImage2dMSAARO}</li>
+     * <li>{@link #CXType_OCLImage2dArrayMSAARO Type_OCLImage2dArrayMSAARO}</li>
+     * <li>{@link #CXType_OCLImage2dMSAADepthRO Type_OCLImage2dMSAADepthRO}</li>
+     * <li>{@link #CXType_OCLImage2dArrayMSAADepthRO Type_OCLImage2dArrayMSAADepthRO}</li>
+     * <li>{@link #CXType_OCLImage3dRO Type_OCLImage3dRO}</li>
+     * <li>{@link #CXType_OCLImage1dWO Type_OCLImage1dWO}</li>
+     * <li>{@link #CXType_OCLImage1dArrayWO Type_OCLImage1dArrayWO}</li>
+     * <li>{@link #CXType_OCLImage1dBufferWO Type_OCLImage1dBufferWO}</li>
+     * <li>{@link #CXType_OCLImage2dWO Type_OCLImage2dWO}</li>
+     * <li>{@link #CXType_OCLImage2dArrayWO Type_OCLImage2dArrayWO}</li>
+     * <li>{@link #CXType_OCLImage2dDepthWO Type_OCLImage2dDepthWO}</li>
+     * <li>{@link #CXType_OCLImage2dArrayDepthWO Type_OCLImage2dArrayDepthWO}</li>
+     * <li>{@link #CXType_OCLImage2dMSAAWO Type_OCLImage2dMSAAWO}</li>
+     * <li>{@link #CXType_OCLImage2dArrayMSAAWO Type_OCLImage2dArrayMSAAWO}</li>
+     * <li>{@link #CXType_OCLImage2dMSAADepthWO Type_OCLImage2dMSAADepthWO}</li>
+     * <li>{@link #CXType_OCLImage2dArrayMSAADepthWO Type_OCLImage2dArrayMSAADepthWO}</li>
+     * <li>{@link #CXType_OCLImage3dWO Type_OCLImage3dWO}</li>
+     * <li>{@link #CXType_OCLImage1dRW Type_OCLImage1dRW}</li>
+     * <li>{@link #CXType_OCLImage1dArrayRW Type_OCLImage1dArrayRW}</li>
+     * <li>{@link #CXType_OCLImage1dBufferRW Type_OCLImage1dBufferRW}</li>
+     * <li>{@link #CXType_OCLImage2dRW Type_OCLImage2dRW}</li>
+     * <li>{@link #CXType_OCLImage2dArrayRW Type_OCLImage2dArrayRW}</li>
+     * <li>{@link #CXType_OCLImage2dDepthRW Type_OCLImage2dDepthRW}</li>
+     * <li>{@link #CXType_OCLImage2dArrayDepthRW Type_OCLImage2dArrayDepthRW}</li>
+     * <li>{@link #CXType_OCLImage2dMSAARW Type_OCLImage2dMSAARW}</li>
+     * <li>{@link #CXType_OCLImage2dArrayMSAARW Type_OCLImage2dArrayMSAARW}</li>
+     * <li>{@link #CXType_OCLImage2dMSAADepthRW Type_OCLImage2dMSAADepthRW}</li>
+     * <li>{@link #CXType_OCLImage2dArrayMSAADepthRW Type_OCLImage2dArrayMSAADepthRW}</li>
+     * <li>{@link #CXType_OCLImage3dRW Type_OCLImage3dRW}</li>
+     * <li>{@link #CXType_OCLSampler Type_OCLSampler}</li>
+     * <li>{@link #CXType_OCLEvent Type_OCLEvent}</li>
+     * <li>{@link #CXType_OCLQueue Type_OCLQueue}</li>
+     * <li>{@link #CXType_OCLReserveID Type_OCLReserveID}</li>
      * <li>{@link #CXType_ObjCObject Type_ObjCObject}</li>
      * <li>{@link #CXType_ObjCTypeParam Type_ObjCTypeParam}</li>
      * <li>{@link #CXType_Attributed Type_Attributed}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCMcePayload Type_OCLIntelSubgroupAVCMcePayload} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImePayload Type_OCLIntelSubgroupAVCImePayload} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCRefPayload Type_OCLIntelSubgroupAVCRefPayload} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCSicPayload Type_OCLIntelSubgroupAVCSicPayload} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCMceResult Type_OCLIntelSubgroupAVCMceResult} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeResult Type_OCLIntelSubgroupAVCImeResult} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCRefResult Type_OCLIntelSubgroupAVCRefResult} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCSicResult Type_OCLIntelSubgroupAVCSicResult} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeResultSingleRefStreamout Type_OCLIntelSubgroupAVCImeResultSingleRefStreamout} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeResultDualRefStreamout Type_OCLIntelSubgroupAVCImeResultDualRefStreamout} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeSingleRefStreamin Type_OCLIntelSubgroupAVCImeSingleRefStreamin} - OpenCL builtin types.</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeDualRefStreamin Type_OCLIntelSubgroupAVCImeDualRefStreamin} - OpenCL builtin types.</li>
+     * <li>{@link #CXType_OCLIntelSubgroupAVCMcePayload Type_OCLIntelSubgroupAVCMcePayload}</li>
+     * <li>{@link #CXType_OCLIntelSubgroupAVCImePayload Type_OCLIntelSubgroupAVCImePayload}</li>
+     * <li>{@link #CXType_OCLIntelSubgroupAVCRefPayload Type_OCLIntelSubgroupAVCRefPayload}</li>
+     * <li>{@link #CXType_OCLIntelSubgroupAVCSicPayload Type_OCLIntelSubgroupAVCSicPayload}</li>
+     * <li>{@link #CXType_OCLIntelSubgroupAVCMceResult Type_OCLIntelSubgroupAVCMceResult}</li>
+     * <li>{@link #CXType_OCLIntelSubgroupAVCImeResult Type_OCLIntelSubgroupAVCImeResult}</li>
+     * <li>{@link #CXType_OCLIntelSubgroupAVCRefResult Type_OCLIntelSubgroupAVCRefResult}</li>
+     * <li>{@link #CXType_OCLIntelSubgroupAVCSicResult Type_OCLIntelSubgroupAVCSicResult}</li>
+     * <li>{@link #CXType_OCLIntelSubgroupAVCImeResultSingleRefStreamout Type_OCLIntelSubgroupAVCImeResultSingleRefStreamout}</li>
+     * <li>{@link #CXType_OCLIntelSubgroupAVCImeResultDualRefStreamout Type_OCLIntelSubgroupAVCImeResultDualRefStreamout}</li>
+     * <li>{@link #CXType_OCLIntelSubgroupAVCImeSingleRefStreamin Type_OCLIntelSubgroupAVCImeSingleRefStreamin}</li>
+     * <li>{@link #CXType_OCLIntelSubgroupAVCImeDualRefStreamin Type_OCLIntelSubgroupAVCImeDualRefStreamin}</li>
+     * <li>{@link #CXType_ExtVector Type_ExtVector}</li>
+     * <li>{@link #CXType_Atomic Type_Atomic}</li>
      * </ul>
      */
     public static final int
@@ -1683,8 +1740,9 @@ public class ClangIndex {
         CXType_UShortAccum                                    = 36,
         CXType_UAccum                                         = 37,
         CXType_ULongAccum                                     = 38,
+        CXType_BFloat16                                       = 39,
         CXType_FirstBuiltin                                   = CXType_Void,
-        CXType_LastBuiltin                                    = CXType_ULongAccum,
+        CXType_LastBuiltin                                    = CXType_BFloat16,
         CXType_Complex                                        = 100,
         CXType_Pointer                                        = 101,
         CXType_BlockPointer                                   = 102,
@@ -1760,7 +1818,9 @@ public class ClangIndex {
         CXType_OCLIntelSubgroupAVCImeResultSingleRefStreamout = 172,
         CXType_OCLIntelSubgroupAVCImeResultDualRefStreamout   = 173,
         CXType_OCLIntelSubgroupAVCImeSingleRefStreamin        = 174,
-        CXType_OCLIntelSubgroupAVCImeDualRefStreamin          = 175;
+        CXType_OCLIntelSubgroupAVCImeDualRefStreamin          = 175,
+        CXType_ExtVector                                      = 176,
+        CXType_Atomic                                         = 177;
 
     /**
      * Describes the calling convention of a function type
@@ -1782,35 +1842,39 @@ public class ClangIndex {
      * <li>{@link #CXCallingConv_IntelOclBicc CallingConv_IntelOclBicc}</li>
      * <li>{@link #CXCallingConv_Win64 CallingConv_Win64}</li>
      * <li>{@link #CXCallingConv_X86_64Win64 CallingConv_X86_64Win64} - Alias for compatibility with older versions of API.</li>
-     * <li>{@link #CXCallingConv_X86_64SysV CallingConv_X86_64SysV} - Alias for compatibility with older versions of API.</li>
-     * <li>{@link #CXCallingConv_X86VectorCall CallingConv_X86VectorCall} - Alias for compatibility with older versions of API.</li>
-     * <li>{@link #CXCallingConv_Swift CallingConv_Swift} - Alias for compatibility with older versions of API.</li>
-     * <li>{@link #CXCallingConv_PreserveMost CallingConv_PreserveMost} - Alias for compatibility with older versions of API.</li>
-     * <li>{@link #CXCallingConv_PreserveAll CallingConv_PreserveAll} - Alias for compatibility with older versions of API.</li>
-     * <li>{@link #CXCallingConv_Invalid CallingConv_Invalid} - Alias for compatibility with older versions of API.</li>
-     * <li>{@link #CXCallingConv_Unexposed CallingConv_Unexposed} - Alias for compatibility with older versions of API.</li>
+     * <li>{@link #CXCallingConv_X86_64SysV CallingConv_X86_64SysV}</li>
+     * <li>{@link #CXCallingConv_X86VectorCall CallingConv_X86VectorCall}</li>
+     * <li>{@link #CXCallingConv_Swift CallingConv_Swift}</li>
+     * <li>{@link #CXCallingConv_PreserveMost CallingConv_PreserveMost}</li>
+     * <li>{@link #CXCallingConv_PreserveAll CallingConv_PreserveAll}</li>
+     * <li>{@link #CXCallingConv_AArch64VectorCall CallingConv_AArch64VectorCall}</li>
+     * <li>{@link #CXCallingConv_SwiftAsync CallingConv_SwiftAsync}</li>
+     * <li>{@link #CXCallingConv_Invalid CallingConv_Invalid}</li>
+     * <li>{@link #CXCallingConv_Unexposed CallingConv_Unexposed}</li>
      * </ul>
      */
     public static final int
-        CXCallingConv_Default       = 0,
-        CXCallingConv_C             = 1,
-        CXCallingConv_X86StdCall    = 2,
-        CXCallingConv_X86FastCall   = 3,
-        CXCallingConv_X86ThisCall   = 4,
-        CXCallingConv_X86Pascal     = 5,
-        CXCallingConv_AAPCS         = 6,
-        CXCallingConv_AAPCS_VFP     = 7,
-        CXCallingConv_X86RegCall    = 8,
-        CXCallingConv_IntelOclBicc  = 9,
-        CXCallingConv_Win64         = 10,
-        CXCallingConv_X86_64Win64   = CXCallingConv_Win64,
-        CXCallingConv_X86_64SysV    = 11,
-        CXCallingConv_X86VectorCall = 12,
-        CXCallingConv_Swift         = 13,
-        CXCallingConv_PreserveMost  = 14,
-        CXCallingConv_PreserveAll   = 15,
-        CXCallingConv_Invalid       = 100,
-        CXCallingConv_Unexposed     = 200;
+        CXCallingConv_Default           = 0,
+        CXCallingConv_C                 = 1,
+        CXCallingConv_X86StdCall        = 2,
+        CXCallingConv_X86FastCall       = 3,
+        CXCallingConv_X86ThisCall       = 4,
+        CXCallingConv_X86Pascal         = 5,
+        CXCallingConv_AAPCS             = 6,
+        CXCallingConv_AAPCS_VFP         = 7,
+        CXCallingConv_X86RegCall        = 8,
+        CXCallingConv_IntelOclBicc      = 9,
+        CXCallingConv_Win64             = 10,
+        CXCallingConv_X86_64Win64       = CXCallingConv_Win64,
+        CXCallingConv_X86_64SysV        = 11,
+        CXCallingConv_X86VectorCall     = 12,
+        CXCallingConv_Swift             = 13,
+        CXCallingConv_PreserveMost      = 14,
+        CXCallingConv_PreserveAll       = 15,
+        CXCallingConv_AArch64VectorCall = 16,
+        CXCallingConv_SwiftAsync        = 17,
+        CXCallingConv_Invalid           = 100,
+        CXCallingConv_Unexposed         = 200;
 
     /**
      * Describes the kind of a template argument. ({@code enum CXTemplateArgumentKind})
@@ -1857,13 +1921,18 @@ public class ClangIndex {
      * nullability of the type even though it has been considered.
      * </li>
      * <li>{@link #CXTypeNullability_Invalid TypeNullability_Invalid} - Nullability is not applicable to this type.</li>
+     * <li>{@link #CXTypeNullability_NullableResult TypeNullability_NullableResult} - 
+     * Generally behaves like {@code Nullable}, except when used in a block parameter that was imported into a swift async method. There, swift will
+     * assume that the parameter can get null even if no error occured. {@code _Nullable} parameters are assumed to only get null on error.
+     * </li>
      * </ul>
      */
     public static final int
-        CXTypeNullability_NonNull     = 0,
-        CXTypeNullability_Nullable    = 1,
-        CXTypeNullability_Unspecified = 2,
-        CXTypeNullability_Invalid     = 3;
+        CXTypeNullability_NonNull        = 0,
+        CXTypeNullability_Nullable       = 1,
+        CXTypeNullability_Unspecified    = 2,
+        CXTypeNullability_Invalid        = 3,
+        CXTypeNullability_NullableResult = 4;
 
     /**
      * List the possible error codes for {@code clang_Type_getSizeOf}, {@code clang_Type_getAlignOf}, {@code clang_Type_getOffsetOf} and {@code
@@ -1879,6 +1948,7 @@ public class ClangIndex {
      * <li>{@link #CXTypeLayoutError_Dependent TypeLayoutError_Dependent} - The type is a dependent Type.</li>
      * <li>{@link #CXTypeLayoutError_NotConstantSize TypeLayoutError_NotConstantSize} - The type is not a constant size type.</li>
      * <li>{@link #CXTypeLayoutError_InvalidFieldName TypeLayoutError_InvalidFieldName} - The Field name is not valid for this record.</li>
+     * <li>{@link #CXTypeLayoutError_Undeduced TypeLayoutError_Undeduced} - The type is undeduced.</li>
      * </ul>
      */
     public static final int
@@ -1886,7 +1956,8 @@ public class ClangIndex {
         CXTypeLayoutError_Incomplete       = -2,
         CXTypeLayoutError_Dependent        = -3,
         CXTypeLayoutError_NotConstantSize  = -4,
-        CXTypeLayoutError_InvalidFieldName = -5;
+        CXTypeLayoutError_InvalidFieldName = -5,
+        CXTypeLayoutError_Undeduced        = -6;
 
     /**
      * {@code enum CXRefQualifierKind}
@@ -4886,6 +4957,78 @@ public class ClangIndex {
         nclang_disposeCXPlatformAvailability(availability.address());
     }
 
+    // --- [ clang_Cursor_getVarDeclInitializer ] ---
+
+    /** Unsafe version of: {@link #clang_Cursor_getVarDeclInitializer Cursor_getVarDeclInitializer} */
+    public static native void nclang_Cursor_getVarDeclInitializer(long cursor, long __functionAddress, long __result);
+
+    /** Unsafe version of: {@link #clang_Cursor_getVarDeclInitializer Cursor_getVarDeclInitializer} */
+    public static void nclang_Cursor_getVarDeclInitializer(long cursor, long __result) {
+        long __functionAddress = Functions.Cursor_getVarDeclInitializer;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        nclang_Cursor_getVarDeclInitializer(cursor, __functionAddress, __result);
+    }
+
+    /**
+     * If cursor refers to a variable declaration and it has initializer returns cursor referring to the initializer otherwise return null cursor.
+     *
+     * @since 12
+     */
+    public static CXCursor clang_Cursor_getVarDeclInitializer(CXCursor cursor, CXCursor __result) {
+        nclang_Cursor_getVarDeclInitializer(cursor.address(), __result.address());
+        return __result;
+    }
+
+    // --- [ clang_Cursor_hasVarDeclGlobalStorage ] ---
+
+    /** Unsafe version of: {@link #clang_Cursor_hasVarDeclGlobalStorage Cursor_hasVarDeclGlobalStorage} */
+    public static native int nclang_Cursor_hasVarDeclGlobalStorage(long cursor, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_Cursor_hasVarDeclGlobalStorage Cursor_hasVarDeclGlobalStorage} */
+    public static int nclang_Cursor_hasVarDeclGlobalStorage(long cursor) {
+        long __functionAddress = Functions.Cursor_hasVarDeclGlobalStorage;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_Cursor_hasVarDeclGlobalStorage(cursor, __functionAddress);
+    }
+
+    /**
+     * If cursor refers to a variable declaration that has global storage returns 1. If cursor refers to a variable declaration that doesn't have global
+     * storage returns 0. Otherwise returns -1.
+     *
+     * @since 12
+     */
+    public static int clang_Cursor_hasVarDeclGlobalStorage(CXCursor cursor) {
+        return nclang_Cursor_hasVarDeclGlobalStorage(cursor.address());
+    }
+
+    // --- [ clang_Cursor_hasVarDeclExternalStorage ] ---
+
+    /** Unsafe version of: {@link #clang_Cursor_hasVarDeclExternalStorage Cursor_hasVarDeclExternalStorage} */
+    public static native int nclang_Cursor_hasVarDeclExternalStorage(long cursor, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_Cursor_hasVarDeclExternalStorage Cursor_hasVarDeclExternalStorage} */
+    public static int nclang_Cursor_hasVarDeclExternalStorage(long cursor) {
+        long __functionAddress = Functions.Cursor_hasVarDeclExternalStorage;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_Cursor_hasVarDeclExternalStorage(cursor, __functionAddress);
+    }
+
+    /**
+     * If cursor refers to a variable declaration that has external storage returns 1. If cursor refers to a variable declaration that doesn't have external
+     * storage returns 0. Otherwise returns -1.
+     *
+     * @since 12
+     */
+    public static int clang_Cursor_hasVarDeclExternalStorage(CXCursor cursor) {
+        return nclang_Cursor_hasVarDeclExternalStorage(cursor.address());
+    }
+
     // --- [ clang_getCursorLanguage ] ---
 
     /** Unsafe version of: {@link #clang_getCursorLanguage getCursorLanguage} */
@@ -6045,7 +6188,7 @@ public class ClangIndex {
     }
 
     /**
-     * Retreive the number of type arguments associated with an ObjC object.
+     * Retrieve the number of type arguments associated with an ObjC object.
      * 
      * <p>If the type is not an ObjC object, 0 is returned.</p>
      */
@@ -6439,6 +6582,32 @@ public class ClangIndex {
         return __result;
     }
 
+    // --- [ clang_Type_getValueType ] ---
+
+    /** Unsafe version of: {@link #clang_Type_getValueType Type_getValueType} */
+    public static native void nclang_Type_getValueType(long CT, long __functionAddress, long __result);
+
+    /** Unsafe version of: {@link #clang_Type_getValueType Type_getValueType} */
+    public static void nclang_Type_getValueType(long CT, long __result) {
+        long __functionAddress = Functions.Type_getValueType;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        nclang_Type_getValueType(CT, __functionAddress, __result);
+    }
+
+    /**
+     * Gets the type contained by this atomic type.
+     * 
+     * <p>If a non-atomic type is passed in, an invalid type is returned.</p>
+     *
+     * @since 11
+     */
+    public static CXType clang_Type_getValueType(CXType CT, CXType __result) {
+        nclang_Type_getValueType(CT.address(), __result.address());
+        return __result;
+    }
+
     // --- [ clang_Cursor_getOffsetOfField ] ---
 
     /** Unsafe version of: {@link #clang_Cursor_getOffsetOfField Cursor_getOffsetOfField} */
@@ -6473,10 +6642,58 @@ public class ClangIndex {
         return nclang_Cursor_isAnonymous(C, __functionAddress);
     }
 
-    /** Determine whether the given cursor represents an anonymous record declaration. */
+    /** Determine whether the given cursor represents an anonymous tag or namespace. */
     @NativeType("unsigned")
     public static boolean clang_Cursor_isAnonymous(CXCursor C) {
         return nclang_Cursor_isAnonymous(C.address()) != 0;
+    }
+
+    // --- [ clang_Cursor_isAnonymousRecordDecl ] ---
+
+    /** Unsafe version of: {@link #clang_Cursor_isAnonymousRecordDecl Cursor_isAnonymousRecordDecl} */
+    public static native int nclang_Cursor_isAnonymousRecordDecl(long C, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_Cursor_isAnonymousRecordDecl Cursor_isAnonymousRecordDecl} */
+    public static int nclang_Cursor_isAnonymousRecordDecl(long C) {
+        long __functionAddress = Functions.Cursor_isAnonymousRecordDecl;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_Cursor_isAnonymousRecordDecl(C, __functionAddress);
+    }
+
+    /**
+     * Determine whether the given cursor represents an anonymous record declaration.
+     *
+     * @since 9
+     */
+    @NativeType("unsigned")
+    public static boolean clang_Cursor_isAnonymousRecordDecl(CXCursor C) {
+        return nclang_Cursor_isAnonymousRecordDecl(C.address()) != 0;
+    }
+
+    // --- [ clang_Cursor_isInlineNamespace ] ---
+
+    /** Unsafe version of: {@link #clang_Cursor_isInlineNamespace Cursor_isInlineNamespace} */
+    public static native int nclang_Cursor_isInlineNamespace(long C, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_Cursor_isInlineNamespace Cursor_isInlineNamespace} */
+    public static int nclang_Cursor_isInlineNamespace(long C) {
+        long __functionAddress = Functions.Cursor_isInlineNamespace;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_Cursor_isInlineNamespace(C, __functionAddress);
+    }
+
+    /**
+     * Determine whether the given cursor represents an inline namespace declaration.
+     *
+     * @since 9
+     */
+    @NativeType("unsigned")
+    public static boolean clang_Cursor_isInlineNamespace(CXCursor C) {
+        return nclang_Cursor_isInlineNamespace(C.address()) != 0;
     }
 
     // --- [ clang_Type_getNumTemplateArguments ] ---
@@ -8872,6 +9089,8 @@ public class ClangIndex {
     /**
      * If cursor is a statement declaration tries to evaluate the statement and if its variable, tries to evaluate its initializer, into its corresponding
      * type.
+     * 
+     * <p>If it's an expression, tries to evaluate the expression.</p>
      */
     @NativeType("CXEvalResult")
     public static long clang_Cursor_Evaluate(CXCursor C) {

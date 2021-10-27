@@ -29,12 +29,16 @@ val LLVMModuleProviderRef = "LLVMModuleProviderRef".handle
 val LLVMModuleRef = "LLVMModuleRef".handle
 val LLVMNamedMDNodeRef = "LLVMNamedMDNodeRef".handle
 val LLVMObjectFileRef = "LLVMObjectFileRef".handle
-val LLVMOptRemarkParserRef = "LLVMOptRemarkParserRef".handle
-val LLVMOrcJITStackRef = "LLVMOrcJITStackRef".handle
 val LLVMPassManagerRef = "LLVMPassManagerRef".handle
+val LLVMPassBuilderOptionsRef = "LLVMPassBuilderOptionsRef".handle
 val LLVMPassManagerBuilderRef = "LLVMPassManagerBuilderRef".handle
 val LLVMPassRegistryRef = "LLVMPassRegistryRef".handle
 val LLVMRelocationIteratorRef = "LLVMRelocationIteratorRef".handle
+val LLVMRemarkArgRef = "LLVMRemarkArgRef".handle
+val LLVMRemarkDebugLocRef = "LLVMRemarkDebugLocRef".handle
+val LLVMRemarkEntryRef = "LLVMRemarkEntryRef".handle
+val LLVMRemarkParserRef = "LLVMRemarkParserRef".handle
+val LLVMRemarkStringRef = "LLVMRemarkStringRef".handle
 val LLVMSectionIteratorRef = "LLVMSectionIteratorRef".handle
 val LLVMSymbolIteratorRef = "LLVMSymbolIteratorRef".handle
 val LLVMTargetDataRef = "LLVMTargetDataRef".handle
@@ -45,19 +49,18 @@ val LLVMTypeRef = "LLVMTypeRef".handle
 val LLVMUseRef = "LLVMUseRef".handle
 val LLVMValueRef = "LLVMValueRef".handle
 
+val lto_input_t = "lto_input_t".handle
+
 val LLVMAttributeIndex = typedef(unsigned_int, "LLVMAttributeIndex")
 val LLVMBool = typedef(intb, "LLVMBool")
 val LLVMDWARFTypeEncoding = typedef(unsigned_int, "LLVMDWARFTypeEncoding")
 val LLVMMetadataKind = typedef(unsigned_int, "LLVMMetadataKind")
 val LLVMModuleFlagEntry = "LLVMModuleFlagEntry".opaque
-val LLVMOrcModuleHandle = typedef(uint64_t, "LLVMOrcModuleHandle")
-val LLVMOrcTargetAddress = typedef(uint64_t, "LLVMOrcTargetAddress")
 val LLVMValueMetadataEntry = "LLVMValueMetadataEntry".opaque
 
 val LLVMAtomicOrdering = "LLVMAtomicOrdering".enumType
 val LLVMAtomicRMWBinOp = "LLVMAtomicRMWBinOp".enumType
 val LLVMByteOrdering = "enum LLVMByteOrdering".enumType
-val LLVMCallConv = "LLVMCallConv".enumType
 val LLVMCodeGenFileType = "LLVMCodeGenFileType".enumType
 val LLVMCodeGenOptLevel = "LLVMCodeGenOptLevel".enumType
 val LLVMCodeModel = "LLVMCodeModel".enumType
@@ -66,16 +69,16 @@ val LLVMDIFlags = "LLVMDIFlags".enumType
 val LLVMDLLStorageClass = "LLVMDLLStorageClass".enumType
 val LLVMDiagnosticSeverity = "LLVMDiagnosticSeverity".enumType
 val LLVMDWARFEmissionKind = "LLVMDWARFEmissionKind".enumType
+val LLVMDWARFMacinfoRecordType = "LLVMDWARFMacinfoRecordType".enumType
 val LLVMDWARFSourceLanguage = "LLVMDWARFSourceLanguage".enumType
 val LLVMInlineAsmDialect = "LLVMInlineAsmDialect".enumType
 val LLVMIntPredicate = "LLVMIntPredicate".enumType
-val LLVMLandingPadClauseTy = "LLVMLandingPadClauseTy".enumType
 val LLVMLinkage = "LLVMLinkage".enumType
-val LLVMLinkerMode = "LLVMLinkerMode".enumType
 val LLVMModuleFlagBehavior = "LLVMModuleFlagBehavior".enumType
 val LLVMOpcode = "LLVMOpcode".enumType
 val LLVMRealPredicate = "LLVMRealPredicate".enumType
 val LLVMRelocMode = "LLVMRelocMode".enumType
+val LLVMRemarkType = "enum LLVMRemarkType".enumType
 val LLVMThreadLocalMode = "LLVMThreadLocalMode".enumType
 val LLVMTypeKind = "LLVMTypeKind".enumType
 val LLVMUnnamedAddr = "LLVMUnnamedAddr".enumType
@@ -261,67 +264,35 @@ val LLVMOpInfo1 = struct(Module.LLVM, "LLVMOpInfo1", nativeName = "struct LLVMOp
     uint64_t("VariantKind", "")
 }
 
-val LLVMOptRemarkStringRef = struct(Module.LLVM, "LLVMOptRemarkStringRef", mutable = false) {
-    documentation = "String containing a buffer and a length. The buffer is not guaranteed to be zero-terminated."
-
-    charUTF8.const.p("Str", "")
-    AutoSize("Str")..uint32_t("Len", "")
-}
-
-val LLVMOptRemarkDebugLoc = struct(Module.LLVM, "LLVMOptRemarkDebugLoc", mutable = false) {
-    documentation = "DebugLoc containing File, Line and Column."
-
-    LLVMOptRemarkStringRef("SourceFile", "file:")
-    uint32_t("SourceLineNumber", "line:")
-    uint32_t("SourceColumnNumber", "column:")
-}
-
-val LLVMOptRemarkArg = struct(Module.LLVM, "LLVMOptRemarkArg", mutable = false) {
-    documentation =
-        """
-        Element of the "Args" list. The key might give more information about what are the semantics of the value, e.g. "Callee" will tell you that the value
-        is a symbol that names a function.
-        """
-
-    LLVMOptRemarkStringRef("Key", "e.g. \"Callee\"")
-    LLVMOptRemarkStringRef("Value", "e.g. \"malloc\"")
-    LLVMOptRemarkDebugLoc("DebugLoc", "\"DebugLoc\": Optional")
-}
-
-val LLVMOptRemarkEntry = struct(Module.LLVM, "LLVMOptRemarkEntry", mutable = false) {
-    documentation = "One remark entry."
-
-    LLVMOptRemarkStringRef("RemarkType", "e.g. !Missed, !Passed")
-    LLVMOptRemarkStringRef("PassName", "\"Pass\": Required")
-    LLVMOptRemarkStringRef("RemarkName", "\"Name\": Required")
-    LLVMOptRemarkStringRef("FunctionName", "\"Function\": Required")
-    LLVMOptRemarkDebugLoc("DebugLoc", "\"DebugLoc\": Optional")
-    uint32_t("Hotness", "\"Hotness\": Optional")
-    AutoSize("Args")..uint32_t("NumArgs", "")
-    LLVMOptRemarkArg.p("Args", "\"Args\": Optional. It is an array of {@code NumArgs} elements.")
-}
-
-val LLVMOrcSymbolResolverFn = Module.LLVM.callback {
-    uint64_t(
-        "LLVMOrcSymbolResolverFn",
+val LLVMMustPreserve = Module.LLVM.callback {
+    LLVMBool(
+        "LLVMMustPreserve",
         "",
 
-        charUTF8.const.p("Name", ""),
-        opaque_p("LookupCtx", "")
+        LLVMValueRef("Val", ""),
+        opaque_p("Context", "")
     ) {
-        documentation =
-        "Instances of this interface may be passed to the #OrcAddEagerlyCompiledIR(), #OrcAddLazilyCompiledIR() and #OrcAddObjectFile() methods."
+        documentation = "Instances of this interface may be passed to the #AddInternalizePassWithMustPreservePredicate() method."
     }
 }
 
-val LLVMOrcLazyCompileCallbackFn = Module.LLVM.callback {
-    uint64_t(
-        "LLVMOrcLazyCompileCallbackFn",
-        "",
+val LLVMOrcLLJITBuilderObjectLinkingLayerCreatorFunction = Module.LLVM.callback {
+    LLVMOrcObjectLayerRef(
+        "LLVMOrcLLJITBuilderObjectLinkingLayerCreatorFunction",
+        """
+        A function for constructing an ObjectLinkingLayer instance to be used by an LLJIT instance.
+         
+        Clients can call #OrcLLJITBuilderSetObjectLinkingLayerCreator() to set the creator function to use when constructing an {@code LLJIT} instance. This
+        can be used to override the default linking layer implementation that would otherwise be chosen by {@code LLJITBuilder}.
+         
+        Object linking layers returned by this function will become owned by the {@code LLJIT} instance. The client is not responsible for managing their
+        lifetimes after the function returns.
+        """,
 
-        LLVMOrcJITStackRef("JITStack", ""),
-        opaque_p("CallbackCtx", "")
+        opaque_p("Ctx", ""),
+        LLVMOrcExecutionSessionRef("ES", ""),
+        charUTF8.const.p("Triple", "")
     ) {
-        documentation = "Instances of this interface may be passed to the #OrcCreateLazyCompileCallback() method."
+        documentation = "Instances of this interface may be passed to the #OrcLLJITBuilderSetObjectLinkingLayerCreator() method."
     }
 }

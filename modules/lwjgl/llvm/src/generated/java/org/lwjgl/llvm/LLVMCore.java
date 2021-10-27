@@ -52,11 +52,15 @@ public class LLVMCore {
             CreateEnumAttribute                        = apiGetFunctionAddress(LLVM, "LLVMCreateEnumAttribute"),
             GetEnumAttributeKind                       = apiGetFunctionAddress(LLVM, "LLVMGetEnumAttributeKind"),
             GetEnumAttributeValue                      = apiGetFunctionAddress(LLVM, "LLVMGetEnumAttributeValue"),
+            CreateTypeAttribute                        = LLVM.getFunctionAddress("LLVMCreateTypeAttribute"),
+            GetTypeAttributeValue                      = LLVM.getFunctionAddress("LLVMGetTypeAttributeValue"),
             CreateStringAttribute                      = apiGetFunctionAddress(LLVM, "LLVMCreateStringAttribute"),
             GetStringAttributeKind                     = apiGetFunctionAddress(LLVM, "LLVMGetStringAttributeKind"),
             GetStringAttributeValue                    = apiGetFunctionAddress(LLVM, "LLVMGetStringAttributeValue"),
             IsEnumAttribute                            = apiGetFunctionAddress(LLVM, "LLVMIsEnumAttribute"),
             IsStringAttribute                          = apiGetFunctionAddress(LLVM, "LLVMIsStringAttribute"),
+            IsTypeAttribute                            = LLVM.getFunctionAddress("LLVMIsTypeAttribute"),
+            GetTypeByName2                             = LLVM.getFunctionAddress("LLVMGetTypeByName2"),
             ModuleCreateWithName                       = apiGetFunctionAddress(LLVM, "LLVMModuleCreateWithName"),
             ModuleCreateWithNameInContext              = apiGetFunctionAddress(LLVM, "LLVMModuleCreateWithNameInContext"),
             CloneModule                                = apiGetFunctionAddress(LLVM, "LLVMCloneModule"),
@@ -128,12 +132,14 @@ public class LLVMCore {
             IntType                                    = apiGetFunctionAddress(LLVM, "LLVMIntType"),
             GetIntTypeWidth                            = apiGetFunctionAddress(LLVM, "LLVMGetIntTypeWidth"),
             HalfTypeInContext                          = apiGetFunctionAddress(LLVM, "LLVMHalfTypeInContext"),
+            BFloatTypeInContext                        = LLVM.getFunctionAddress("LLVMBFloatTypeInContext"),
             FloatTypeInContext                         = apiGetFunctionAddress(LLVM, "LLVMFloatTypeInContext"),
             DoubleTypeInContext                        = apiGetFunctionAddress(LLVM, "LLVMDoubleTypeInContext"),
             X86FP80TypeInContext                       = apiGetFunctionAddress(LLVM, "LLVMX86FP80TypeInContext"),
             FP128TypeInContext                         = apiGetFunctionAddress(LLVM, "LLVMFP128TypeInContext"),
             PPCFP128TypeInContext                      = apiGetFunctionAddress(LLVM, "LLVMPPCFP128TypeInContext"),
             HalfType                                   = apiGetFunctionAddress(LLVM, "LLVMHalfType"),
+            BFloatType                                 = LLVM.getFunctionAddress("LLVMBFloatType"),
             FloatType                                  = apiGetFunctionAddress(LLVM, "LLVMFloatType"),
             DoubleType                                 = apiGetFunctionAddress(LLVM, "LLVMDoubleType"),
             X86FP80Type                                = apiGetFunctionAddress(LLVM, "LLVMX86FP80Type"),
@@ -163,15 +169,18 @@ public class LLVMCore {
             PointerType                                = apiGetFunctionAddress(LLVM, "LLVMPointerType"),
             GetPointerAddressSpace                     = apiGetFunctionAddress(LLVM, "LLVMGetPointerAddressSpace"),
             VectorType                                 = apiGetFunctionAddress(LLVM, "LLVMVectorType"),
+            ScalableVectorType                         = LLVM.getFunctionAddress("LLVMScalableVectorType"),
             GetVectorSize                              = apiGetFunctionAddress(LLVM, "LLVMGetVectorSize"),
             VoidTypeInContext                          = apiGetFunctionAddress(LLVM, "LLVMVoidTypeInContext"),
             LabelTypeInContext                         = apiGetFunctionAddress(LLVM, "LLVMLabelTypeInContext"),
             X86MMXTypeInContext                        = apiGetFunctionAddress(LLVM, "LLVMX86MMXTypeInContext"),
+            X86AMXTypeInContext                        = LLVM.getFunctionAddress("LLVMX86AMXTypeInContext"),
             TokenTypeInContext                         = LLVM.getFunctionAddress("LLVMTokenTypeInContext"),
             MetadataTypeInContext                      = LLVM.getFunctionAddress("LLVMMetadataTypeInContext"),
             VoidType                                   = apiGetFunctionAddress(LLVM, "LLVMVoidType"),
             LabelType                                  = apiGetFunctionAddress(LLVM, "LLVMLabelType"),
             X86MMXType                                 = apiGetFunctionAddress(LLVM, "LLVMX86MMXType"),
+            X86AMXType                                 = LLVM.getFunctionAddress("LLVMX86AMXType"),
             TypeOf                                     = apiGetFunctionAddress(LLVM, "LLVMTypeOf"),
             GetValueKind                               = apiGetFunctionAddress(LLVM, "LLVMGetValueKind"),
             GetValueName2                              = LLVM.getFunctionAddress("LLVMGetValueName2"),
@@ -181,6 +190,7 @@ public class LLVMCore {
             ReplaceAllUsesWith                         = apiGetFunctionAddress(LLVM, "LLVMReplaceAllUsesWith"),
             IsConstant                                 = apiGetFunctionAddress(LLVM, "LLVMIsConstant"),
             IsUndef                                    = apiGetFunctionAddress(LLVM, "LLVMIsUndef"),
+            IsPoison                                   = LLVM.getFunctionAddress("LLVMIsPoison"),
             IsAArgument                                = apiGetFunctionAddress(LLVM, "LLVMIsAArgument"),
             IsABasicBlock                              = apiGetFunctionAddress(LLVM, "LLVMIsABasicBlock"),
             IsAInlineAsm                               = apiGetFunctionAddress(LLVM, "LLVMIsAInlineAsm"),
@@ -276,6 +286,7 @@ public class LLVMCore {
             ConstNull                                  = apiGetFunctionAddress(LLVM, "LLVMConstNull"),
             ConstAllOnes                               = apiGetFunctionAddress(LLVM, "LLVMConstAllOnes"),
             GetUndef                                   = apiGetFunctionAddress(LLVM, "LLVMGetUndef"),
+            GetPoison                                  = LLVM.getFunctionAddress("LLVMGetPoison"),
             IsNull                                     = apiGetFunctionAddress(LLVM, "LLVMIsNull"),
             ConstPointerNull                           = apiGetFunctionAddress(LLVM, "LLVMConstPointerNull"),
             ConstInt                                   = apiGetFunctionAddress(LLVM, "LLVMConstInt"),
@@ -419,11 +430,13 @@ public class LLVMCore {
             HasPersonalityFn                           = apiGetFunctionAddress(LLVM, "LLVMHasPersonalityFn"),
             GetPersonalityFn                           = apiGetFunctionAddress(LLVM, "LLVMGetPersonalityFn"),
             SetPersonalityFn                           = apiGetFunctionAddress(LLVM, "LLVMSetPersonalityFn"),
+            LookupIntrinsicID                          = LLVM.getFunctionAddress("LLVMLookupIntrinsicID"),
             GetIntrinsicID                             = apiGetFunctionAddress(LLVM, "LLVMGetIntrinsicID"),
             GetIntrinsicDeclaration                    = LLVM.getFunctionAddress("LLVMGetIntrinsicDeclaration"),
             IntrinsicGetType                           = LLVM.getFunctionAddress("LLVMIntrinsicGetType"),
             IntrinsicGetName                           = LLVM.getFunctionAddress("LLVMIntrinsicGetName"),
             IntrinsicCopyOverloadedName                = LLVM.getFunctionAddress("LLVMIntrinsicCopyOverloadedName"),
+            IntrinsicCopyOverloadedName2               = LLVM.getFunctionAddress("LLVMIntrinsicCopyOverloadedName2"),
             IntrinsicIsOverloaded                      = LLVM.getFunctionAddress("LLVMIntrinsicIsOverloaded"),
             GetFunctionCallConv                        = apiGetFunctionAddress(LLVM, "LLVMGetFunctionCallConv"),
             SetFunctionCallConv                        = apiGetFunctionAddress(LLVM, "LLVMSetFunctionCallConv"),
@@ -446,6 +459,18 @@ public class LLVMCore {
             GetNextParam                               = apiGetFunctionAddress(LLVM, "LLVMGetNextParam"),
             GetPreviousParam                           = apiGetFunctionAddress(LLVM, "LLVMGetPreviousParam"),
             SetParamAlignment                          = apiGetFunctionAddress(LLVM, "LLVMSetParamAlignment"),
+            AddGlobalIFunc                             = LLVM.getFunctionAddress("LLVMAddGlobalIFunc"),
+            GetNamedGlobalIFunc                        = LLVM.getFunctionAddress("LLVMGetNamedGlobalIFunc"),
+            GetFirstGlobalIFunc                        = LLVM.getFunctionAddress("LLVMGetFirstGlobalIFunc"),
+            GetLastGlobalIFunc                         = LLVM.getFunctionAddress("LLVMGetLastGlobalIFunc"),
+            GetNextGlobalIFunc                         = LLVM.getFunctionAddress("LLVMGetNextGlobalIFunc"),
+            GetPreviousGlobalIFunc                     = LLVM.getFunctionAddress("LLVMGetPreviousGlobalIFunc"),
+            GetGlobalIFuncResolver                     = LLVM.getFunctionAddress("LLVMGetGlobalIFuncResolver"),
+            SetGlobalIFuncResolver                     = LLVM.getFunctionAddress("LLVMSetGlobalIFuncResolver"),
+            EraseGlobalIFunc                           = LLVM.getFunctionAddress("LLVMEraseGlobalIFunc"),
+            RemoveGlobalIFunc                          = LLVM.getFunctionAddress("LLVMRemoveGlobalIFunc"),
+            MDStringInContext2                         = LLVM.getFunctionAddress("LLVMMDStringInContext2"),
+            MDNodeInContext2                           = LLVM.getFunctionAddress("LLVMMDNodeInContext2"),
             MDStringInContext                          = apiGetFunctionAddress(LLVM, "LLVMMDStringInContext"),
             MDString                                   = apiGetFunctionAddress(LLVM, "LLVMMDString"),
             MDNodeInContext                            = apiGetFunctionAddress(LLVM, "LLVMMDNodeInContext"),
@@ -468,6 +493,8 @@ public class LLVMCore {
             GetNextBasicBlock                          = apiGetFunctionAddress(LLVM, "LLVMGetNextBasicBlock"),
             GetPreviousBasicBlock                      = apiGetFunctionAddress(LLVM, "LLVMGetPreviousBasicBlock"),
             GetEntryBasicBlock                         = apiGetFunctionAddress(LLVM, "LLVMGetEntryBasicBlock"),
+            InsertExistingBasicBlockAfterInsertBlock   = LLVM.getFunctionAddress("LLVMInsertExistingBasicBlockAfterInsertBlock"),
+            AppendExistingBasicBlock                   = LLVM.getFunctionAddress("LLVMAppendExistingBasicBlock"),
             CreateBasicBlockInContext                  = LLVM.getFunctionAddress("LLVMCreateBasicBlockInContext"),
             AppendBasicBlockInContext                  = apiGetFunctionAddress(LLVM, "LLVMAppendBasicBlockInContext"),
             AppendBasicBlock                           = apiGetFunctionAddress(LLVM, "LLVMAppendBasicBlock"),
@@ -538,9 +565,13 @@ public class LLVMCore {
             InsertIntoBuilder                          = apiGetFunctionAddress(LLVM, "LLVMInsertIntoBuilder"),
             InsertIntoBuilderWithName                  = apiGetFunctionAddress(LLVM, "LLVMInsertIntoBuilderWithName"),
             DisposeBuilder                             = apiGetFunctionAddress(LLVM, "LLVMDisposeBuilder"),
+            GetCurrentDebugLocation2                   = LLVM.getFunctionAddress("LLVMGetCurrentDebugLocation2"),
+            SetCurrentDebugLocation2                   = LLVM.getFunctionAddress("LLVMSetCurrentDebugLocation2"),
+            SetInstDebugLocation                       = LLVM.getFunctionAddress("LLVMSetInstDebugLocation"),
+            BuilderGetDefaultFPMathTag                 = LLVM.getFunctionAddress("LLVMBuilderGetDefaultFPMathTag"),
+            BuilderSetDefaultFPMathTag                 = LLVM.getFunctionAddress("LLVMBuilderSetDefaultFPMathTag"),
             SetCurrentDebugLocation                    = apiGetFunctionAddress(LLVM, "LLVMSetCurrentDebugLocation"),
             GetCurrentDebugLocation                    = apiGetFunctionAddress(LLVM, "LLVMGetCurrentDebugLocation"),
-            SetInstDebugLocation                       = apiGetFunctionAddress(LLVM, "LLVMSetInstDebugLocation"),
             BuildRetVoid                               = apiGetFunctionAddress(LLVM, "LLVMBuildRetVoid"),
             BuildRet                                   = apiGetFunctionAddress(LLVM, "LLVMBuildRet"),
             BuildAggregateRet                          = apiGetFunctionAddress(LLVM, "LLVMBuildAggregateRet"),
@@ -625,8 +656,12 @@ public class LLVMCore {
             BuildGlobalStringPtr                       = apiGetFunctionAddress(LLVM, "LLVMBuildGlobalStringPtr"),
             GetVolatile                                = apiGetFunctionAddress(LLVM, "LLVMGetVolatile"),
             SetVolatile                                = apiGetFunctionAddress(LLVM, "LLVMSetVolatile"),
+            GetWeak                                    = LLVM.getFunctionAddress("LLVMGetWeak"),
+            SetWeak                                    = LLVM.getFunctionAddress("LLVMSetWeak"),
             GetOrdering                                = apiGetFunctionAddress(LLVM, "LLVMGetOrdering"),
-            SetOrdering                                = apiGetFunctionAddress(LLVM, "LLVMSetOrdering"),
+            SetOrdering                                = LLVM.getFunctionAddress("LLVMSetOrdering"),
+            GetAtomicRMWBinOp                          = LLVM.getFunctionAddress("LLVMGetAtomicRMWBinOp"),
+            SetAtomicRMWBinOp                          = LLVM.getFunctionAddress("LLVMSetAtomicRMWBinOp"),
             BuildTrunc                                 = apiGetFunctionAddress(LLVM, "LLVMBuildTrunc"),
             BuildZExt                                  = apiGetFunctionAddress(LLVM, "LLVMBuildZExt"),
             BuildSExt                                  = apiGetFunctionAddress(LLVM, "LLVMBuildSExt"),
@@ -660,12 +695,16 @@ public class LLVMCore {
             BuildShuffleVector                         = apiGetFunctionAddress(LLVM, "LLVMBuildShuffleVector"),
             BuildExtractValue                          = apiGetFunctionAddress(LLVM, "LLVMBuildExtractValue"),
             BuildInsertValue                           = apiGetFunctionAddress(LLVM, "LLVMBuildInsertValue"),
+            BuildFreeze                                = LLVM.getFunctionAddress("LLVMBuildFreeze"),
             BuildIsNull                                = apiGetFunctionAddress(LLVM, "LLVMBuildIsNull"),
             BuildIsNotNull                             = apiGetFunctionAddress(LLVM, "LLVMBuildIsNotNull"),
             BuildPtrDiff                               = apiGetFunctionAddress(LLVM, "LLVMBuildPtrDiff"),
             BuildFence                                 = apiGetFunctionAddress(LLVM, "LLVMBuildFence"),
             BuildAtomicRMW                             = apiGetFunctionAddress(LLVM, "LLVMBuildAtomicRMW"),
             BuildAtomicCmpXchg                         = apiGetFunctionAddress(LLVM, "LLVMBuildAtomicCmpXchg"),
+            GetNumMaskElements                         = LLVM.getFunctionAddress("LLVMGetNumMaskElements"),
+            GetUndefMaskElem                           = LLVM.getFunctionAddress("LLVMGetUndefMaskElem"),
+            GetMaskValue                               = LLVM.getFunctionAddress("LLVMGetMaskValue"),
             IsAtomicSingleThread                       = apiGetFunctionAddress(LLVM, "LLVMIsAtomicSingleThread"),
             SetAtomicSingleThread                      = apiGetFunctionAddress(LLVM, "LLVMSetAtomicSingleThread"),
             GetCmpXchgSuccessOrdering                  = apiGetFunctionAddress(LLVM, "LLVMGetCmpXchgSuccessOrdering"),
@@ -707,71 +746,73 @@ public class LLVMCore {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #LLVMRet Ret} - Terminator Instructions</li>
-     * <li>{@link #LLVMBr Br} - Terminator Instructions</li>
-     * <li>{@link #LLVMSwitch Switch} - Terminator Instructions</li>
-     * <li>{@link #LLVMIndirectBr IndirectBr} - Terminator Instructions</li>
-     * <li>{@link #LLVMInvoke Invoke} - Terminator Instructions</li>
-     * <li>{@link #LLVMUnreachable Unreachable} - removed 6 due to API changes</li>
-     * <li>{@link #LLVMFNeg FNeg} - Standard Unary Operators</li>
-     * <li>{@link #LLVMAdd Add} - Standard Binary Operators</li>
-     * <li>{@link #LLVMFAdd FAdd} - Standard Binary Operators</li>
-     * <li>{@link #LLVMSub Sub} - Standard Binary Operators</li>
-     * <li>{@link #LLVMFSub FSub} - Standard Binary Operators</li>
-     * <li>{@link #LLVMMul Mul} - Standard Binary Operators</li>
-     * <li>{@link #LLVMFMul FMul} - Standard Binary Operators</li>
-     * <li>{@link #LLVMUDiv UDiv} - Standard Binary Operators</li>
-     * <li>{@link #LLVMSDiv SDiv} - Standard Binary Operators</li>
-     * <li>{@link #LLVMFDiv FDiv} - Standard Binary Operators</li>
-     * <li>{@link #LLVMURem URem} - Standard Binary Operators</li>
-     * <li>{@link #LLVMSRem SRem} - Standard Binary Operators</li>
-     * <li>{@link #LLVMFRem FRem} - Standard Binary Operators</li>
-     * <li>{@link #LLVMShl Shl} - Logical Operators</li>
-     * <li>{@link #LLVMLShr LShr} - Logical Operators</li>
-     * <li>{@link #LLVMAShr AShr} - Logical Operators</li>
-     * <li>{@link #LLVMAnd And} - Logical Operators</li>
-     * <li>{@link #LLVMOr Or} - Logical Operators</li>
-     * <li>{@link #LLVMXor Xor} - Logical Operators</li>
-     * <li>{@link #LLVMAlloca Alloca} - Memory Operators</li>
-     * <li>{@link #LLVMLoad Load} - Memory Operators</li>
-     * <li>{@link #LLVMStore Store} - Memory Operators</li>
-     * <li>{@link #LLVMGetElementPtr GetElementPtr} - Memory Operators</li>
-     * <li>{@link #LLVMTrunc Trunc} - Cast Operators</li>
-     * <li>{@link #LLVMZExt ZExt} - Cast Operators</li>
-     * <li>{@link #LLVMSExt SExt} - Cast Operators</li>
-     * <li>{@link #LLVMFPToUI FPToUI} - Cast Operators</li>
-     * <li>{@link #LLVMFPToSI FPToSI} - Cast Operators</li>
-     * <li>{@link #LLVMUIToFP UIToFP} - Cast Operators</li>
-     * <li>{@link #LLVMSIToFP SIToFP} - Cast Operators</li>
-     * <li>{@link #LLVMFPTrunc FPTrunc} - Cast Operators</li>
-     * <li>{@link #LLVMFPExt FPExt} - Cast Operators</li>
-     * <li>{@link #LLVMPtrToInt PtrToInt} - Cast Operators</li>
-     * <li>{@link #LLVMIntToPtr IntToPtr} - Cast Operators</li>
-     * <li>{@link #LLVMBitCast BitCast} - Cast Operators</li>
-     * <li>{@link #LLVMAddrSpaceCast AddrSpaceCast} - Cast Operators</li>
-     * <li>{@link #LLVMICmp ICmp} - Other Operators</li>
-     * <li>{@link #LLVMFCmp FCmp} - Other Operators</li>
-     * <li>{@link #LLVMPHI PHI} - Other Operators</li>
-     * <li>{@link #LLVMCall Call} - Other Operators</li>
-     * <li>{@link #LLVMSelect Select} - Other Operators</li>
-     * <li>{@link #LLVMUserOp1 UserOp1} - Other Operators</li>
-     * <li>{@link #LLVMUserOp2 UserOp2} - Other Operators</li>
-     * <li>{@link #LLVMVAArg VAArg} - Other Operators</li>
-     * <li>{@link #LLVMExtractElement ExtractElement} - Other Operators</li>
-     * <li>{@link #LLVMInsertElement InsertElement} - Other Operators</li>
-     * <li>{@link #LLVMShuffleVector ShuffleVector} - Other Operators</li>
-     * <li>{@link #LLVMExtractValue ExtractValue} - Other Operators</li>
-     * <li>{@link #LLVMInsertValue InsertValue} - Other Operators</li>
-     * <li>{@link #LLVMFence Fence} - Atomic operators</li>
-     * <li>{@link #LLVMAtomicCmpXchg AtomicCmpXchg} - Atomic operators</li>
-     * <li>{@link #LLVMAtomicRMW AtomicRMW} - Atomic operators</li>
-     * <li>{@link #LLVMResume Resume} - Exception Handling Operators</li>
-     * <li>{@link #LLVMLandingPad LandingPad} - Exception Handling Operators</li>
-     * <li>{@link #LLVMCleanupRet CleanupRet} - Exception Handling Operators</li>
-     * <li>{@link #LLVMCatchRet CatchRet} - Exception Handling Operators</li>
-     * <li>{@link #LLVMCatchPad CatchPad} - Exception Handling Operators</li>
-     * <li>{@link #LLVMCleanupPad CleanupPad} - Exception Handling Operators</li>
-     * <li>{@link #LLVMCatchSwitch CatchSwitch} - Exception Handling Operators</li>
+     * <li>{@link #LLVMRet Ret}</li>
+     * <li>{@link #LLVMBr Br}</li>
+     * <li>{@link #LLVMSwitch Switch}</li>
+     * <li>{@link #LLVMIndirectBr IndirectBr}</li>
+     * <li>{@link #LLVMInvoke Invoke}</li>
+     * <li>{@link #LLVMUnreachable Unreachable}</li>
+     * <li>{@link #LLVMCallBr CallBr}</li>
+     * <li>{@link #LLVMFNeg FNeg}</li>
+     * <li>{@link #LLVMAdd Add}</li>
+     * <li>{@link #LLVMFAdd FAdd}</li>
+     * <li>{@link #LLVMSub Sub}</li>
+     * <li>{@link #LLVMFSub FSub}</li>
+     * <li>{@link #LLVMMul Mul}</li>
+     * <li>{@link #LLVMFMul FMul}</li>
+     * <li>{@link #LLVMUDiv UDiv}</li>
+     * <li>{@link #LLVMSDiv SDiv}</li>
+     * <li>{@link #LLVMFDiv FDiv}</li>
+     * <li>{@link #LLVMURem URem}</li>
+     * <li>{@link #LLVMSRem SRem}</li>
+     * <li>{@link #LLVMFRem FRem}</li>
+     * <li>{@link #LLVMShl Shl}</li>
+     * <li>{@link #LLVMLShr LShr}</li>
+     * <li>{@link #LLVMAShr AShr}</li>
+     * <li>{@link #LLVMAnd And}</li>
+     * <li>{@link #LLVMOr Or}</li>
+     * <li>{@link #LLVMXor Xor}</li>
+     * <li>{@link #LLVMAlloca Alloca}</li>
+     * <li>{@link #LLVMLoad Load}</li>
+     * <li>{@link #LLVMStore Store}</li>
+     * <li>{@link #LLVMGetElementPtr GetElementPtr}</li>
+     * <li>{@link #LLVMTrunc Trunc}</li>
+     * <li>{@link #LLVMZExt ZExt}</li>
+     * <li>{@link #LLVMSExt SExt}</li>
+     * <li>{@link #LLVMFPToUI FPToUI}</li>
+     * <li>{@link #LLVMFPToSI FPToSI}</li>
+     * <li>{@link #LLVMUIToFP UIToFP}</li>
+     * <li>{@link #LLVMSIToFP SIToFP}</li>
+     * <li>{@link #LLVMFPTrunc FPTrunc}</li>
+     * <li>{@link #LLVMFPExt FPExt}</li>
+     * <li>{@link #LLVMPtrToInt PtrToInt}</li>
+     * <li>{@link #LLVMIntToPtr IntToPtr}</li>
+     * <li>{@link #LLVMBitCast BitCast}</li>
+     * <li>{@link #LLVMAddrSpaceCast AddrSpaceCast}</li>
+     * <li>{@link #LLVMICmp ICmp}</li>
+     * <li>{@link #LLVMFCmp FCmp}</li>
+     * <li>{@link #LLVMPHI PHI}</li>
+     * <li>{@link #LLVMCall Call}</li>
+     * <li>{@link #LLVMSelect Select}</li>
+     * <li>{@link #LLVMUserOp1 UserOp1}</li>
+     * <li>{@link #LLVMUserOp2 UserOp2}</li>
+     * <li>{@link #LLVMVAArg VAArg}</li>
+     * <li>{@link #LLVMExtractElement ExtractElement}</li>
+     * <li>{@link #LLVMInsertElement InsertElement}</li>
+     * <li>{@link #LLVMShuffleVector ShuffleVector}</li>
+     * <li>{@link #LLVMExtractValue ExtractValue}</li>
+     * <li>{@link #LLVMInsertValue InsertValue}</li>
+     * <li>{@link #LLVMFreeze Freeze}</li>
+     * <li>{@link #LLVMFence Fence}</li>
+     * <li>{@link #LLVMAtomicCmpXchg AtomicCmpXchg}</li>
+     * <li>{@link #LLVMAtomicRMW AtomicRMW}</li>
+     * <li>{@link #LLVMResume Resume}</li>
+     * <li>{@link #LLVMLandingPad LandingPad}</li>
+     * <li>{@link #LLVMCleanupRet CleanupRet}</li>
+     * <li>{@link #LLVMCatchRet CatchRet}</li>
+     * <li>{@link #LLVMCatchPad CatchPad}</li>
+     * <li>{@link #LLVMCleanupPad CleanupPad}</li>
+     * <li>{@link #LLVMCatchSwitch CatchSwitch}</li>
      * </ul>
      */
     public static final int
@@ -781,6 +822,7 @@ public class LLVMCore {
         LLVMIndirectBr     = 4,
         LLVMInvoke         = 5,
         LLVMUnreachable    = 7,
+        LLVMCallBr         = 67,
         LLVMFNeg           = 66,
         LLVMAdd            = 8,
         LLVMFAdd           = 9,
@@ -830,6 +872,7 @@ public class LLVMCore {
         LLVMShuffleVector  = 52,
         LLVMExtractValue   = 53,
         LLVMInsertValue    = 54,
+        LLVMFreeze         = 68,
         LLVMFence          = 55,
         LLVMAtomicCmpXchg  = 56,
         LLVMAtomicRMW      = 57,
@@ -860,30 +903,36 @@ public class LLVMCore {
      * <li>{@link #LLVMStructTypeKind StructTypeKind} - Structures</li>
      * <li>{@link #LLVMArrayTypeKind ArrayTypeKind} - Arrays</li>
      * <li>{@link #LLVMPointerTypeKind PointerTypeKind} - Pointers</li>
-     * <li>{@link #LLVMVectorTypeKind VectorTypeKind} - SIMD 'packed' format, or other vector type</li>
+     * <li>{@link #LLVMVectorTypeKind VectorTypeKind} - Fixed width SIMD vector type</li>
      * <li>{@link #LLVMMetadataTypeKind MetadataTypeKind} - Metadata</li>
      * <li>{@link #LLVMX86_MMXTypeKind X86_MMXTypeKind} - X86 MMX</li>
      * <li>{@link #LLVMTokenTypeKind TokenTypeKind} - Tokens</li>
+     * <li>{@link #LLVMScalableVectorTypeKind ScalableVectorTypeKind} - Scalable SIMD vector type</li>
+     * <li>{@link #LLVMBFloatTypeKind BFloatTypeKind} - 16 bit brain floating point type</li>
+     * <li>{@link #LLVMX86_AMXTypeKind X86_AMXTypeKind} - X86 AMX</li>
      * </ul>
      */
     public static final int
-        LLVMVoidTypeKind      = 0,
-        LLVMHalfTypeKind      = 1,
-        LLVMFloatTypeKind     = 2,
-        LLVMDoubleTypeKind    = 3,
-        LLVMX86_FP80TypeKind  = 4,
-        LLVMFP128TypeKind     = 5,
-        LLVMPPC_FP128TypeKind = 6,
-        LLVMLabelTypeKind     = 7,
-        LLVMIntegerTypeKind   = 8,
-        LLVMFunctionTypeKind  = 9,
-        LLVMStructTypeKind    = 10,
-        LLVMArrayTypeKind     = 11,
-        LLVMPointerTypeKind   = 12,
-        LLVMVectorTypeKind    = 13,
-        LLVMMetadataTypeKind  = 14,
-        LLVMX86_MMXTypeKind   = 15,
-        LLVMTokenTypeKind     = 16;
+        LLVMVoidTypeKind           = 0,
+        LLVMHalfTypeKind           = 1,
+        LLVMFloatTypeKind          = 2,
+        LLVMDoubleTypeKind         = 3,
+        LLVMX86_FP80TypeKind       = 4,
+        LLVMFP128TypeKind          = 5,
+        LLVMPPC_FP128TypeKind      = 6,
+        LLVMLabelTypeKind          = 7,
+        LLVMIntegerTypeKind        = 8,
+        LLVMFunctionTypeKind       = 9,
+        LLVMStructTypeKind         = 10,
+        LLVMArrayTypeKind          = 11,
+        LLVMPointerTypeKind        = 12,
+        LLVMVectorTypeKind         = 13,
+        LLVMMetadataTypeKind       = 14,
+        LLVMX86_MMXTypeKind        = 15,
+        LLVMTokenTypeKind          = 16,
+        LLVMScalableVectorTypeKind = 17,
+        LLVMBFloatTypeKind         = 18,
+        LLVMX86_AMXTypeKind        = 19;
 
     /**
      * {@code LLVMLinkage}
@@ -1102,6 +1151,7 @@ public class LLVMCore {
      * <li>{@link #LLVMMetadataAsValueValueKind MetadataAsValueValueKind}</li>
      * <li>{@link #LLVMInlineAsmValueKind InlineAsmValueKind}</li>
      * <li>{@link #LLVMInstructionValueKind InstructionValueKind}</li>
+     * <li>{@link #LLVMPoisonValueValueKind PoisonValueValueKind}</li>
      * </ul>
      */
     public static final int
@@ -1129,7 +1179,8 @@ public class LLVMCore {
         LLVMConstantTokenNoneValueKind     = 21,
         LLVMMetadataAsValueValueKind       = 22,
         LLVMInlineAsmValueKind             = 23,
-        LLVMInstructionValueKind           = 24;
+        LLVMInstructionValueKind           = 24,
+        LLVMPoisonValueValueKind           = 25;
 
     /**
      * {@code LLVMIntPredicate}
@@ -1278,9 +1329,11 @@ public class LLVMCore {
      * <li>{@link #LLVMAtomicRMWBinOpOr AtomicRMWBinOpOr} - OR a value and return the old one</li>
      * <li>{@link #LLVMAtomicRMWBinOpXor AtomicRMWBinOpXor} - Xor a value and return the old one</li>
      * <li>{@link #LLVMAtomicRMWBinOpMax AtomicRMWBinOpMax} - Sets the value if it's greater than the original using a signed comparison and return the old one</li>
-     * <li>{@link #LLVMAtomicRMWBinOpMin AtomicRMWBinOpMin} - Sets the value if it's Smaller than the original using a signed comparison and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpMin AtomicRMWBinOpMin} - Sets the value if it's smaller than the original using a signed comparison and return the old one</li>
      * <li>{@link #LLVMAtomicRMWBinOpUMax AtomicRMWBinOpUMax} - Sets the value if it's greater than the original using an unsigned comparison and return the old one</li>
-     * <li>{@link #LLVMAtomicRMWBinOpUMin AtomicRMWBinOpUMin} - Sets the value if it's greater than the original using an unsigned comparison  and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpUMin AtomicRMWBinOpUMin} - Sets the value if it's greater than the original using an unsigned comparison and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpFAdd AtomicRMWBinOpFAdd} - Add a floating point value and return the old one</li>
+     * <li>{@link #LLVMAtomicRMWBinOpFSub AtomicRMWBinOpFSub} - Subtract a floating point value and return the old one</li>
      * </ul>
      */
     public static final int
@@ -1294,7 +1347,9 @@ public class LLVMCore {
         LLVMAtomicRMWBinOpMax  = 7,
         LLVMAtomicRMWBinOpMin  = 8,
         LLVMAtomicRMWBinOpUMax = 9,
-        LLVMAtomicRMWBinOpUMin = 10;
+        LLVMAtomicRMWBinOpUMin = 10,
+        LLVMAtomicRMWBinOpFAdd = 11,
+        LLVMAtomicRMWBinOpFSub = 12;
 
     /**
      * {@code LLVMDiagnosticSeverity}
@@ -1741,6 +1796,41 @@ public class LLVMCore {
         return invokePJ(A, __functionAddress);
     }
 
+    // --- [ LLVMCreateTypeAttribute ] ---
+
+    /**
+     * Create a type attribute.
+     *
+     * @since 12
+     */
+    @NativeType("LLVMAttributeRef")
+    public static long LLVMCreateTypeAttribute(@NativeType("LLVMContextRef") long C, @NativeType("unsigned") int KindID, @NativeType("LLVMTypeRef") long type_ref) {
+        long __functionAddress = Functions.CreateTypeAttribute;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(C);
+            check(type_ref);
+        }
+        return invokePPP(C, KindID, type_ref, __functionAddress);
+    }
+
+    // --- [ LLVMGetTypeAttributeValue ] ---
+
+    /**
+     * Get the type attribute's value.
+     *
+     * @since 12
+     */
+    @NativeType("LLVMTypeRef")
+    public static long LLVMGetTypeAttributeValue(@NativeType("LLVMAttributeRef") long A) {
+        long __functionAddress = Functions.GetTypeAttributeValue;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(A);
+        }
+        return invokePP(A, __functionAddress);
+    }
+
     // --- [ LLVMCreateStringAttribute ] ---
 
     /** Unsafe version of: {@link #LLVMCreateStringAttribute CreateStringAttribute} */
@@ -1841,6 +1931,61 @@ public class LLVMCore {
             check(A);
         }
         return invokePI(A, __functionAddress) != 0;
+    }
+
+    // --- [ LLVMIsTypeAttribute ] ---
+
+    /** @since 12 */
+    @NativeType("LLVMBool")
+    public static boolean LLVMIsTypeAttribute(@NativeType("LLVMAttributeRef") long A) {
+        long __functionAddress = Functions.IsTypeAttribute;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(A);
+        }
+        return invokePI(A, __functionAddress) != 0;
+    }
+
+    // --- [ LLVMGetTypeByName2 ] ---
+
+    /** Unsafe version of: {@link #LLVMGetTypeByName2 GetTypeByName2} */
+    public static long nLLVMGetTypeByName2(long C, long Name) {
+        long __functionAddress = Functions.GetTypeByName2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(C);
+        }
+        return invokePPP(C, Name, __functionAddress);
+    }
+
+    /**
+     * Obtain a Type from a context by its registered name.
+     *
+     * @since 12
+     */
+    @NativeType("LLVMTypeRef")
+    public static long LLVMGetTypeByName2(@NativeType("LLVMContextRef") long C, @NativeType("char const *") ByteBuffer Name) {
+        if (CHECKS) {
+            checkNT1(Name);
+        }
+        return nLLVMGetTypeByName2(C, memAddress(Name));
+    }
+
+    /**
+     * Obtain a Type from a context by its registered name.
+     *
+     * @since 12
+     */
+    @NativeType("LLVMTypeRef")
+    public static long LLVMGetTypeByName2(@NativeType("LLVMContextRef") long C, @NativeType("char const *") CharSequence Name) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetTypeByName2(C, NameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ LLVMModuleCreateWithName ] ---
@@ -2534,19 +2679,19 @@ public class LLVMCore {
     // --- [ LLVMGetInlineAsm ] ---
 
     /** Unsafe version of: {@link #LLVMGetInlineAsm GetInlineAsm} */
-    public static long nLLVMGetInlineAsm(long Ty, long AsmString, long AsmStringSize, long Constraints, long ConstraintsSize, int HasSideEffects, int IsAlignStack, int Dialect) {
+    public static long nLLVMGetInlineAsm(long Ty, long AsmString, long AsmStringSize, long Constraints, long ConstraintsSize, int HasSideEffects, int IsAlignStack, int Dialect, int CanThrow) {
         long __functionAddress = Functions.GetInlineAsm;
         if (CHECKS) {
             check(__functionAddress);
             check(Ty);
         }
-        return invokePPPPPP(Ty, AsmString, AsmStringSize, Constraints, ConstraintsSize, HasSideEffects, IsAlignStack, Dialect, __functionAddress);
+        return invokePPPPPP(Ty, AsmString, AsmStringSize, Constraints, ConstraintsSize, HasSideEffects, IsAlignStack, Dialect, CanThrow, __functionAddress);
     }
 
     /** Create the specified uniqued inline asm string. */
     @NativeType("LLVMValueRef")
-    public static long LLVMGetInlineAsm(@NativeType("LLVMTypeRef") long Ty, @NativeType("char *") ByteBuffer AsmString, @NativeType("char *") ByteBuffer Constraints, @NativeType("LLVMBool") boolean HasSideEffects, @NativeType("LLVMBool") boolean IsAlignStack, @NativeType("LLVMInlineAsmDialect") int Dialect) {
-        return nLLVMGetInlineAsm(Ty, memAddress(AsmString), AsmString.remaining(), memAddress(Constraints), Constraints.remaining(), HasSideEffects ? 1 : 0, IsAlignStack ? 1 : 0, Dialect);
+    public static long LLVMGetInlineAsm(@NativeType("LLVMTypeRef") long Ty, @NativeType("char *") ByteBuffer AsmString, @NativeType("char *") ByteBuffer Constraints, @NativeType("LLVMBool") boolean HasSideEffects, @NativeType("LLVMBool") boolean IsAlignStack, @NativeType("LLVMInlineAsmDialect") int Dialect, @NativeType("LLVMBool") boolean CanThrow) {
+        return nLLVMGetInlineAsm(Ty, memAddress(AsmString), AsmString.remaining(), memAddress(Constraints), Constraints.remaining(), HasSideEffects ? 1 : 0, IsAlignStack ? 1 : 0, Dialect, CanThrow ? 1 : 0);
     }
 
     // --- [ LLVMGetModuleContext ] ---
@@ -2572,7 +2717,7 @@ public class LLVMCore {
         return invokePPP(M, Name, __functionAddress);
     }
 
-    /** Obtain a Type from a module by its registered name. */
+    /** Deprecated: Use {@link #LLVMGetTypeByName2 GetTypeByName2} instead. */
     @NativeType("LLVMTypeRef")
     public static long LLVMGetTypeByName(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") ByteBuffer Name) {
         if (CHECKS) {
@@ -2581,7 +2726,7 @@ public class LLVMCore {
         return nLLVMGetTypeByName(M, memAddress(Name));
     }
 
-    /** Obtain a Type from a module by its registered name. */
+    /** Deprecated: Use {@link #LLVMGetTypeByName2 GetTypeByName2} instead. */
     @NativeType("LLVMTypeRef")
     public static long LLVMGetTypeByName(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -3333,6 +3478,23 @@ public class LLVMCore {
         return invokePP(C, __functionAddress);
     }
 
+    // --- [ LLVMBFloatTypeInContext ] ---
+
+    /**
+     * Obtain a 16-bit brain floating point type from a context.
+     *
+     * @since 11
+     */
+    @NativeType("LLVMTypeRef")
+    public static long LLVMBFloatTypeInContext(@NativeType("LLVMContextRef") long C) {
+        long __functionAddress = Functions.BFloatTypeInContext;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(C);
+        }
+        return invokePP(C, __functionAddress);
+    }
+
     // --- [ LLVMFloatTypeInContext ] ---
 
     /** Obtain a 32-bit floating point type from a context. */
@@ -3395,14 +3557,21 @@ public class LLVMCore {
 
     // --- [ LLVMHalfType ] ---
 
-    /**
-     * Obtain a floating point type from the global context.
-     * 
-     * <p>These map to the functions in this group of the same name.</p>
-     */
     @NativeType("LLVMTypeRef")
     public static long LLVMHalfType() {
         long __functionAddress = Functions.HalfType;
+        return invokeP(__functionAddress);
+    }
+
+    // --- [ LLVMBFloatType ] ---
+
+    /** @since 11 */
+    @NativeType("LLVMTypeRef")
+    public static long LLVMBFloatType() {
+        long __functionAddress = Functions.BFloatType;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokeP(__functionAddress);
     }
 
@@ -3847,12 +4016,35 @@ public class LLVMCore {
         return invokePP(ElementType, ElementCount, __functionAddress);
     }
 
+    // --- [ LLVMScalableVectorType ] ---
+
+    /**
+     * Create a vector type that contains a defined type and has a scalable number of elements.
+     * 
+     * <p>The created type will exist in the context thats its element type exists in.</p>
+     * 
+     * <p>See {@code llvm::ScalableVectorType::get()}.</p>
+     *
+     * @since 12
+     */
+    @NativeType("LLVMTypeRef")
+    public static long LLVMScalableVectorType(@NativeType("LLVMTypeRef") long ElementType, @NativeType("unsigned") int ElementCount) {
+        long __functionAddress = Functions.ScalableVectorType;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(ElementType);
+        }
+        return invokePP(ElementType, ElementCount, __functionAddress);
+    }
+
     // --- [ LLVMGetVectorSize ] ---
 
     /**
-     * Obtain the number of elements in a vector type.
+     * Obtain the (possibly scalable) number of elements in a vector type.
      * 
-     * <p>This only works on types that represent vectors.</p>
+     * <p>This only works on types that represent vectors (fixed or scalable).</p>
+     * 
+     * <p>See {@code llvm::VectorType::getNumElements()}.</p>
      */
     @NativeType("unsigned int")
     public static int LLVMGetVectorSize(@NativeType("LLVMTypeRef") long VectorTy) {
@@ -3894,6 +4086,23 @@ public class LLVMCore {
     public static long LLVMX86MMXTypeInContext(@NativeType("LLVMContextRef") long C) {
         long __functionAddress = Functions.X86MMXTypeInContext;
         if (CHECKS) {
+            check(C);
+        }
+        return invokePP(C, __functionAddress);
+    }
+
+    // --- [ LLVMX86AMXTypeInContext ] ---
+
+    /**
+     * Create a X86 AMX type in a context.
+     *
+     * @since 12
+     */
+    @NativeType("LLVMTypeRef")
+    public static long LLVMX86AMXTypeInContext(@NativeType("LLVMContextRef") long C) {
+        long __functionAddress = Functions.X86AMXTypeInContext;
+        if (CHECKS) {
+            check(__functionAddress);
             check(C);
         }
         return invokePP(C, __functionAddress);
@@ -3947,6 +4156,18 @@ public class LLVMCore {
     @NativeType("LLVMTypeRef")
     public static long LLVMX86MMXType() {
         long __functionAddress = Functions.X86MMXType;
+        return invokeP(__functionAddress);
+    }
+
+    // --- [ LLVMX86AMXType ] ---
+
+    /** @since 12 */
+    @NativeType("LLVMTypeRef")
+    public static long LLVMX86AMXType() {
+        long __functionAddress = Functions.X86AMXType;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
         return invokeP(__functionAddress);
     }
 
@@ -4088,6 +4309,23 @@ public class LLVMCore {
     public static boolean LLVMIsUndef(@NativeType("LLVMValueRef") long Val) {
         long __functionAddress = Functions.IsUndef;
         if (CHECKS) {
+            check(Val);
+        }
+        return invokePI(Val, __functionAddress) != 0;
+    }
+
+    // --- [ LLVMIsPoison ] ---
+
+    /**
+     * Determine whether a value instance is poisonous.
+     *
+     * @since 12
+     */
+    @NativeType("LLVMBool")
+    public static boolean LLVMIsPoison(@NativeType("LLVMValueRef") long Val) {
+        long __functionAddress = Functions.IsPoison;
+        if (CHECKS) {
+            check(__functionAddress);
             check(Val);
         }
         return invokePI(Val, __functionAddress) != 0;
@@ -5190,6 +5428,23 @@ public class LLVMCore {
     public static long LLVMGetUndef(@NativeType("LLVMTypeRef") long Ty) {
         long __functionAddress = Functions.GetUndef;
         if (CHECKS) {
+            check(Ty);
+        }
+        return invokePP(Ty, __functionAddress);
+    }
+
+    // --- [ LLVMGetPoison ] ---
+
+    /**
+     * Obtain a constant value referring to a poison value of a type.
+     *
+     * @since 12
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetPoison(@NativeType("LLVMTypeRef") long Ty) {
+        long __functionAddress = Functions.GetPoison;
+        if (CHECKS) {
+            check(__functionAddress);
             check(Ty);
         }
         return invokePP(Ty, __functionAddress);
@@ -7266,6 +7521,42 @@ public class LLVMCore {
         invokePPV(Fn, PersonalityFn, __functionAddress);
     }
 
+    // --- [ LLVMLookupIntrinsicID ] ---
+
+    /** Unsafe version of: {@link #LLVMLookupIntrinsicID LookupIntrinsicID} */
+    public static void nLLVMLookupIntrinsicID(long Name, long NameLen) {
+        long __functionAddress = Functions.LookupIntrinsicID;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        invokePPV(Name, NameLen, __functionAddress);
+    }
+
+    /**
+     * Obtain the intrinsic ID number which matches the given function name.
+     *
+     * @since 9
+     */
+    public static void LLVMLookupIntrinsicID(@NativeType("char const *") ByteBuffer Name) {
+        nLLVMLookupIntrinsicID(memAddress(Name), Name.remaining());
+    }
+
+    /**
+     * Obtain the intrinsic ID number which matches the given function name.
+     *
+     * @since 9
+     */
+    public static void LLVMLookupIntrinsicID(@NativeType("char const *") CharSequence Name) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            nLLVMLookupIntrinsicID(NameEncoded, NameEncodedLength);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ LLVMGetIntrinsicID ] ---
 
     /** Obtain the ID number from a function instance. */
@@ -7367,9 +7658,7 @@ public class LLVMCore {
     }
 
     /**
-     * Copies the name of an overloaded intrinsic identified by a given list of parameter types.
-     * 
-     * <p>Unlike {@link #LLVMIntrinsicGetName IntrinsicGetName}, the caller is responsible for freeing the returned string.</p>
+     * Deprecated: Use {@link #LLVMIntrinsicCopyOverloadedName2 IntrinsicCopyOverloadedName2} instead.
      *
      * @since 8.0
      */
@@ -7380,6 +7669,40 @@ public class LLVMCore {
         try {
             PointerBuffer NameLength = stack.callocPointer(1);
             long __result = nLLVMIntrinsicCopyOverloadedName(ID, memAddress(ParamTypes), ParamTypes.remaining(), memAddress(NameLength));
+            return memUTF8Safe(__result, (int)NameLength.get(0));
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMIntrinsicCopyOverloadedName2 ] ---
+
+    /** Unsafe version of: {@link #LLVMIntrinsicCopyOverloadedName2 IntrinsicCopyOverloadedName2} */
+    public static long nLLVMIntrinsicCopyOverloadedName2(long Mod, int ID, long ParamTypes, long ParamCount, long NameLength) {
+        long __functionAddress = Functions.IntrinsicCopyOverloadedName2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Mod);
+        }
+        return invokePPPPP(Mod, ID, ParamTypes, ParamCount, NameLength, __functionAddress);
+    }
+
+    /**
+     * Copies the name of an overloaded intrinsic identified by a given list of parameter types.
+     * 
+     * <p>Unlike {@link #LLVMIntrinsicGetName IntrinsicGetName}, the caller is responsible for freeing the returned string.</p>
+     * 
+     * <p>This version also supports unnamed types.</p>
+     *
+     * @since 13
+     */
+    @Nullable
+    @NativeType("char const *")
+    public static String LLVMIntrinsicCopyOverloadedName2(@NativeType("LLVMModuleRef") long Mod, @NativeType("unsigned") int ID, @NativeType("LLVMTypeRef *") PointerBuffer ParamTypes) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            PointerBuffer NameLength = stack.callocPointer(1);
+            long __result = nLLVMIntrinsicCopyOverloadedName2(Mod, ID, memAddress(ParamTypes), ParamTypes.remaining(), memAddress(NameLength));
             return memUTF8Safe(__result, (int)NameLength.get(0));
         } finally {
             stack.setPointer(stackPointer);
@@ -7774,6 +8097,321 @@ public class LLVMCore {
         invokePV(Arg, Align, __functionAddress);
     }
 
+    // --- [ LLVMAddGlobalIFunc ] ---
+
+    /** Unsafe version of: {@link #LLVMAddGlobalIFunc AddGlobalIFunc} */
+    public static long nLLVMAddGlobalIFunc(long M, long Name, long NameLen, long Ty, int AddrSpace, long Resolver) {
+        long __functionAddress = Functions.AddGlobalIFunc;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(M);
+            check(Ty);
+            check(Resolver);
+        }
+        return invokePPPPPP(M, Name, NameLen, Ty, AddrSpace, Resolver, __functionAddress);
+    }
+
+    /**
+     * Add a global indirect function to a module under a specified name.
+     * 
+     * <p>See {@code llvm::GlobalIFunc::create()}</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMAddGlobalIFunc(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") ByteBuffer Name, @NativeType("LLVMTypeRef") long Ty, @NativeType("unsigned") int AddrSpace, @NativeType("LLVMValueRef") long Resolver) {
+        return nLLVMAddGlobalIFunc(M, memAddress(Name), Name.remaining(), Ty, AddrSpace, Resolver);
+    }
+
+    /**
+     * Add a global indirect function to a module under a specified name.
+     * 
+     * <p>See {@code llvm::GlobalIFunc::create()}</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMAddGlobalIFunc(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name, @NativeType("LLVMTypeRef") long Ty, @NativeType("unsigned") int AddrSpace, @NativeType("LLVMValueRef") long Resolver) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMAddGlobalIFunc(M, NameEncoded, NameEncodedLength, Ty, AddrSpace, Resolver);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMGetNamedGlobalIFunc ] ---
+
+    /** Unsafe version of: {@link #LLVMGetNamedGlobalIFunc GetNamedGlobalIFunc} */
+    public static long nLLVMGetNamedGlobalIFunc(long M, long Name, long NameLen) {
+        long __functionAddress = Functions.GetNamedGlobalIFunc;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(M);
+        }
+        return invokePPPP(M, Name, NameLen, __functionAddress);
+    }
+
+    /**
+     * Obtain a {@code GlobalIFunc} value from a {@code Module} by its name.
+     * 
+     * <p>The returned value corresponds to a {@code llvm::GlobalIFunc} value.</p>
+     * 
+     * <p>See {@code llvm::Module::getNamedIFunc()}</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetNamedGlobalIFunc(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") ByteBuffer Name) {
+        return nLLVMGetNamedGlobalIFunc(M, memAddress(Name), Name.remaining());
+    }
+
+    /**
+     * Obtain a {@code GlobalIFunc} value from a {@code Module} by its name.
+     * 
+     * <p>The returned value corresponds to a {@code llvm::GlobalIFunc} value.</p>
+     * 
+     * <p>See {@code llvm::Module::getNamedIFunc()}</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetNamedGlobalIFunc(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            int NameEncodedLength = stack.nUTF8(Name, false);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMGetNamedGlobalIFunc(M, NameEncoded, NameEncodedLength);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMGetFirstGlobalIFunc ] ---
+
+    /**
+     * Obtain an iterator to the first {@code GlobalIFunc} in a {@code Module}.
+     * 
+     * <p>See {@code llvm::Module::ifunc_begin()}</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetFirstGlobalIFunc(@NativeType("LLVMModuleRef") long M) {
+        long __functionAddress = Functions.GetFirstGlobalIFunc;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(M);
+        }
+        return invokePP(M, __functionAddress);
+    }
+
+    // --- [ LLVMGetLastGlobalIFunc ] ---
+
+    /**
+     * Obtain an iterator to the last {@code GlobalIFunc} in a {@code Module}.
+     * 
+     * <p>See {@code llvm::Module::ifunc_end()}.</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetLastGlobalIFunc(@NativeType("LLVMModuleRef") long M) {
+        long __functionAddress = Functions.GetLastGlobalIFunc;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(M);
+        }
+        return invokePP(M, __functionAddress);
+    }
+
+    // --- [ LLVMGetNextGlobalIFunc ] ---
+
+    /**
+     * Advance a {@code GlobalIFunc} iterator to the next {@code GlobalIFunc}.
+     * 
+     * <p>Returns {@code NULL} if the iterator was already at the end and there are no more global aliases.</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetNextGlobalIFunc(@NativeType("LLVMValueRef") long IFunc) {
+        long __functionAddress = Functions.GetNextGlobalIFunc;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(IFunc);
+        }
+        return invokePP(IFunc, __functionAddress);
+    }
+
+    // --- [ LLVMGetPreviousGlobalIFunc ] ---
+
+    /**
+     * Decrement a {@code GlobalIFunc} iterator to the previous {@code GlobalIFunc}.
+     * 
+     * <p>Returns {@code NULL} if the iterator was already at the beginning and there are no previous global aliases.</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetPreviousGlobalIFunc(@NativeType("LLVMValueRef") long IFunc) {
+        long __functionAddress = Functions.GetPreviousGlobalIFunc;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(IFunc);
+        }
+        return invokePP(IFunc, __functionAddress);
+    }
+
+    // --- [ LLVMGetGlobalIFuncResolver ] ---
+
+    /**
+     * Retrieves the resolver function associated with this indirect function, or {@code NULL} if it doesn't not exist.
+     * 
+     * <p>See {@code llvm::GlobalIFunc::getResolver()}</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMValueRef")
+    public static long LLVMGetGlobalIFuncResolver(@NativeType("LLVMValueRef") long IFunc) {
+        long __functionAddress = Functions.GetGlobalIFuncResolver;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(IFunc);
+        }
+        return invokePP(IFunc, __functionAddress);
+    }
+
+    // --- [ LLVMSetGlobalIFuncResolver ] ---
+
+    /**
+     * Sets the resolver function associated with this indirect function.
+     * 
+     * <p>See {@code llvm::GlobalIFunc::setResolver()}</p>
+     *
+     * @since 9
+     */
+    public static void LLVMSetGlobalIFuncResolver(@NativeType("LLVMValueRef") long IFunc, @NativeType("LLVMValueRef") long Resolver) {
+        long __functionAddress = Functions.SetGlobalIFuncResolver;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(IFunc);
+            check(Resolver);
+        }
+        invokePPV(IFunc, Resolver, __functionAddress);
+    }
+
+    // --- [ LLVMEraseGlobalIFunc ] ---
+
+    /**
+     * Remove a global indirect function from its parent module and delete it.
+     * 
+     * <p>See {@code llvm::GlobalIFunc::eraseFromParent()}</p>
+     *
+     * @since 9
+     */
+    public static void LLVMEraseGlobalIFunc(@NativeType("LLVMValueRef") long IFunc) {
+        long __functionAddress = Functions.EraseGlobalIFunc;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(IFunc);
+        }
+        invokePV(IFunc, __functionAddress);
+    }
+
+    // --- [ LLVMRemoveGlobalIFunc ] ---
+
+    /**
+     * Remove a global indirect function from its parent module.
+     * 
+     * <p>This unlinks the global indirect function from its containing module but keeps it alive.</p>
+     * 
+     * <p>See {@code llvm::GlobalIFunc::removeFromParent()}</p>
+     *
+     * @since 9
+     */
+    public static void LLVMRemoveGlobalIFunc(@NativeType("LLVMValueRef") long IFunc) {
+        long __functionAddress = Functions.RemoveGlobalIFunc;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(IFunc);
+        }
+        invokePV(IFunc, __functionAddress);
+    }
+
+    // --- [ LLVMMDStringInContext2 ] ---
+
+    /** Unsafe version of: {@link #LLVMMDStringInContext2 MDStringInContext2} */
+    public static long nLLVMMDStringInContext2(long C, long Str, long SLen) {
+        long __functionAddress = Functions.MDStringInContext2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(C);
+        }
+        return invokePPPP(C, Str, SLen, __functionAddress);
+    }
+
+    /**
+     * Create an {@code MDString} value from a given string value.
+     * 
+     * <p>The {@code MDString} value does not take ownership of the given string, it remains the responsibility of the caller to free it.</p>
+     * 
+     * <p>See {@code llvm::MDString::get()}</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMMDStringInContext2(@NativeType("LLVMContextRef") long C, @NativeType("char const *") ByteBuffer Str) {
+        return nLLVMMDStringInContext2(C, memAddress(Str), Str.remaining());
+    }
+
+    /**
+     * Create an {@code MDString} value from a given string value.
+     * 
+     * <p>The {@code MDString} value does not take ownership of the given string, it remains the responsibility of the caller to free it.</p>
+     * 
+     * <p>See {@code llvm::MDString::get()}</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMMDStringInContext2(@NativeType("LLVMContextRef") long C, @NativeType("char const *") CharSequence Str) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            int StrEncodedLength = stack.nUTF8(Str, false);
+            long StrEncoded = stack.getPointerAddress();
+            return nLLVMMDStringInContext2(C, StrEncoded, StrEncodedLength);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ LLVMMDNodeInContext2 ] ---
+
+    /** Unsafe version of: {@link #LLVMMDNodeInContext2 MDNodeInContext2} */
+    public static long nLLVMMDNodeInContext2(long C, long MDs, long Count) {
+        long __functionAddress = Functions.MDNodeInContext2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(C);
+        }
+        return invokePPPP(C, MDs, Count, __functionAddress);
+    }
+
+    /**
+     * Create an {@code MDNode} value with the given array of operands.
+     * 
+     * <p>See {@code llvm::MDNode::get()}</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMMDNodeInContext2(@NativeType("LLVMContextRef") long C, @NativeType("LLVMMetadataRef *") PointerBuffer MDs) {
+        return nLLVMMDNodeInContext2(C, memAddress(MDs), MDs.remaining());
+    }
+
     // --- [ LLVMMDStringInContext ] ---
 
     /** Unsafe version of: {@link #LLVMMDStringInContext MDStringInContext} */
@@ -7785,27 +8423,13 @@ public class LLVMCore {
         return invokePPP(C, Str, SLen, __functionAddress);
     }
 
-    /**
-     * Obtain a {@code MDString} value from a context.
-     * 
-     * <p>The returned instance corresponds to the {@code llvm::MDString} class.</p>
-     * 
-     * <p>The instance is specified by string data of a specified length. The string content is copied, so the backing memory can be freed after this function
-     * returns.</p>
-     */
+    /** Deprecated: Use {@link #LLVMMDStringInContext2 MDStringInContext2} instead. */
     @NativeType("LLVMValueRef")
     public static long LLVMMDStringInContext(@NativeType("LLVMContextRef") long C, @NativeType("char const *") ByteBuffer Str) {
         return nLLVMMDStringInContext(C, memAddress(Str), Str.remaining());
     }
 
-    /**
-     * Obtain a {@code MDString} value from a context.
-     * 
-     * <p>The returned instance corresponds to the {@code llvm::MDString} class.</p>
-     * 
-     * <p>The instance is specified by string data of a specified length. The string content is copied, so the backing memory can be freed after this function
-     * returns.</p>
-     */
+    /** Deprecated: Use {@link #LLVMMDStringInContext2 MDStringInContext2} instead. */
     @NativeType("LLVMValueRef")
     public static long LLVMMDStringInContext(@NativeType("LLVMContextRef") long C, @NativeType("char const *") CharSequence Str) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -7826,13 +8450,13 @@ public class LLVMCore {
         return invokePP(Str, SLen, __functionAddress);
     }
 
-    /** Obtain a {@code MDString} value from the global context. */
+    /** Deprecated: Use {@link #LLVMMDStringInContext2 MDStringInContext2} instead. */
     @NativeType("LLVMValueRef")
     public static long LLVMMDString(@NativeType("char const *") ByteBuffer Str) {
         return nLLVMMDString(memAddress(Str), Str.remaining());
     }
 
-    /** Obtain a {@code MDString} value from the global context. */
+    /** Deprecated: Use {@link #LLVMMDStringInContext2 MDStringInContext2} instead. */
     @NativeType("LLVMValueRef")
     public static long LLVMMDString(@NativeType("char const *") CharSequence Str) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -7856,11 +8480,7 @@ public class LLVMCore {
         return invokePPP(C, Vals, Count, __functionAddress);
     }
 
-    /**
-     * Obtain a {@code MDNode} value from a context.
-     * 
-     * <p>The returned value corresponds to the {@code llvm::MDNode} class.</p>
-     */
+    /** Deprecated: Use {@link #LLVMMDNodeInContext2 MDNodeInContext2} instead. */
     @NativeType("LLVMValueRef")
     public static long LLVMMDNodeInContext(@NativeType("LLVMContextRef") long C, @NativeType("LLVMValueRef *") PointerBuffer Vals) {
         return nLLVMMDNodeInContext(C, memAddress(Vals), Vals.remaining());
@@ -7874,7 +8494,7 @@ public class LLVMCore {
         return invokePP(Vals, Count, __functionAddress);
     }
 
-    /** Obtain a {@code MDNode} value from the global context. */
+    /** Deprecated: Use {@link #LLVMMDNodeInContext2 MDNodeInContext2} instead. */
     @NativeType("LLVMValueRef")
     public static long LLVMMDNode(@NativeType("LLVMValueRef *") PointerBuffer Vals) {
         return nLLVMMDNode(memAddress(Vals), Vals.remaining());
@@ -8175,6 +8795,46 @@ public class LLVMCore {
             check(Fn);
         }
         return invokePP(Fn, __functionAddress);
+    }
+
+    // --- [ LLVMInsertExistingBasicBlockAfterInsertBlock ] ---
+
+    /**
+     * Insert the given basic block after the insertion point of the given builder.
+     * 
+     * <p>The insertion point must be valid.</p>
+     * 
+     * <p>See {@code llvm::Function::BasicBlockListType::insertAfter()}.</p>
+     *
+     * @since 9
+     */
+    public static void LLVMInsertExistingBasicBlockAfterInsertBlock(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMBasicBlockRef") long BB) {
+        long __functionAddress = Functions.InsertExistingBasicBlockAfterInsertBlock;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+            check(BB);
+        }
+        invokePPV(Builder, BB, __functionAddress);
+    }
+
+    // --- [ LLVMAppendExistingBasicBlock ] ---
+
+    /**
+     * Append the given basic block to the basic block list of the given function.
+     * 
+     * <p>See {@code llvm::Function::BasicBlockListType::push_back()}</p>
+     *
+     * @since 9
+     */
+    public static void LLVMAppendExistingBasicBlock(@NativeType("LLVMValueRef") long Fn, @NativeType("LLVMBasicBlockRef") long BB) {
+        long __functionAddress = Functions.AppendExistingBasicBlock;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Fn);
+            check(BB);
+        }
+        invokePPV(Fn, BB, __functionAddress);
     }
 
     // --- [ LLVMCreateBasicBlockInContext ] ---
@@ -9307,9 +9967,107 @@ public class LLVMCore {
         invokePV(Builder, __functionAddress);
     }
 
+    // --- [ LLVMGetCurrentDebugLocation2 ] ---
+
+    /**
+     * Get location information used by debugging information.
+     * 
+     * <p>See {@code llvm::IRBuilder::getCurrentDebugLocation()}.</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMGetCurrentDebugLocation2(@NativeType("LLVMBuilderRef") long Builder) {
+        long __functionAddress = Functions.GetCurrentDebugLocation2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+        }
+        return invokePP(Builder, __functionAddress);
+    }
+
+    // --- [ LLVMSetCurrentDebugLocation2 ] ---
+
+    /**
+     * Set location information used by debugging information.
+     * 
+     * <p>To clear the location metadata of the given instruction, pass {@code NULL} to {@code Loc}.</p>
+     * 
+     * <p>See {@code llvm::IRBuilder::SetCurrentDebugLocation()}.</p>
+     *
+     * @since 9
+     */
+    public static void LLVMSetCurrentDebugLocation2(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Loc) {
+        long __functionAddress = Functions.SetCurrentDebugLocation2;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+        }
+        invokePPV(Builder, Loc, __functionAddress);
+    }
+
+    // --- [ LLVMSetInstDebugLocation ] ---
+
+    /**
+     * Attempts to set the debug location for the given instruction using the current debug location for the given builder. If the builder has no current
+     * debug location, this function is a no-op.
+     * 
+     * <p>See {@code llvm::IRBuilder::SetInstDebugLocation()}.</p>
+     *
+     * @since 9
+     */
+    public static void LLVMSetInstDebugLocation(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Inst) {
+        long __functionAddress = Functions.SetInstDebugLocation;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+            check(Inst);
+        }
+        invokePPV(Builder, Inst, __functionAddress);
+    }
+
+    // --- [ LLVMBuilderGetDefaultFPMathTag ] ---
+
+    /**
+     * Get the default floating-point math metadata for a given builder.
+     * 
+     * <p>See {@code llvm::IRBuilder::getDefaultFPMathTag()}</p>
+     *
+     * @since 9
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMBuilderGetDefaultFPMathTag(@NativeType("LLVMBuilderRef") long Builder) {
+        long __functionAddress = Functions.BuilderGetDefaultFPMathTag;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+        }
+        return invokePP(Builder, __functionAddress);
+    }
+
+    // --- [ LLVMBuilderSetDefaultFPMathTag ] ---
+
+    /**
+     * Set the default floating-point math metadata for the given builder.
+     * 
+     * <p>To clear the metadata, pass {@code NULL} to {@code FPMathTag}.</p>
+     * 
+     * <p>See {@code llvm::IRBuilder::setDefaultFPMathTag()}.</p>
+     *
+     * @since 9
+     */
+    public static void LLVMBuilderSetDefaultFPMathTag(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long FPMathTag) {
+        long __functionAddress = Functions.BuilderSetDefaultFPMathTag;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+        }
+        invokePPV(Builder, FPMathTag, __functionAddress);
+    }
+
     // --- [ LLVMSetCurrentDebugLocation ] ---
 
-    /** Metadata */
+    /** Deprecated: Passing the {@code NULL} location will crash. Use {@link #LLVMSetCurrentDebugLocation2 SetCurrentDebugLocation2} instead. */
     public static void LLVMSetCurrentDebugLocation(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long L) {
         long __functionAddress = Functions.SetCurrentDebugLocation;
         if (CHECKS) {
@@ -9321,6 +10079,7 @@ public class LLVMCore {
 
     // --- [ LLVMGetCurrentDebugLocation ] ---
 
+    /** Deprecated: Returning the {@code NULL} location will crash. Use {@link #LLVMGetCurrentDebugLocation2 GetCurrentDebugLocation2} instead. */
     @NativeType("LLVMValueRef")
     public static long LLVMGetCurrentDebugLocation(@NativeType("LLVMBuilderRef") long Builder) {
         long __functionAddress = Functions.GetCurrentDebugLocation;
@@ -9328,17 +10087,6 @@ public class LLVMCore {
             check(Builder);
         }
         return invokePP(Builder, __functionAddress);
-    }
-
-    // --- [ LLVMSetInstDebugLocation ] ---
-
-    public static void LLVMSetInstDebugLocation(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Inst) {
-        long __functionAddress = Functions.SetInstDebugLocation;
-        if (CHECKS) {
-            check(Builder);
-            check(Inst);
-        }
-        invokePPV(Builder, Inst, __functionAddress);
     }
 
     // --- [ LLVMBuildRetVoid ] ---
@@ -11474,6 +12222,31 @@ public class LLVMCore {
         invokePV(MemoryAccessInst, IsVolatile ? 1 : 0, __functionAddress);
     }
 
+    // --- [ LLVMGetWeak ] ---
+
+    /** @since 10 */
+    @NativeType("LLVMBool")
+    public static boolean LLVMGetWeak(@NativeType("LLVMValueRef") long CmpXchgInst) {
+        long __functionAddress = Functions.GetWeak;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(CmpXchgInst);
+        }
+        return invokePI(CmpXchgInst, __functionAddress) != 0;
+    }
+
+    // --- [ LLVMSetWeak ] ---
+
+    /** @since 10 */
+    public static void LLVMSetWeak(@NativeType("LLVMValueRef") long CmpXchgInst, @NativeType("LLVMBool") boolean IsWeak) {
+        long __functionAddress = Functions.SetWeak;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(CmpXchgInst);
+        }
+        invokePV(CmpXchgInst, IsWeak ? 1 : 0, __functionAddress);
+    }
+
     // --- [ LLVMGetOrdering ] ---
 
     @NativeType("LLVMAtomicOrdering")
@@ -11490,9 +12263,35 @@ public class LLVMCore {
     public static void LLVMSetOrdering(@NativeType("LLVMValueRef") long MemoryAccessInst, @NativeType("LLVMAtomicOrdering") int Ordering) {
         long __functionAddress = Functions.SetOrdering;
         if (CHECKS) {
+            check(__functionAddress);
             check(MemoryAccessInst);
         }
         invokePV(MemoryAccessInst, Ordering, __functionAddress);
+    }
+
+    // --- [ LLVMGetAtomicRMWBinOp ] ---
+
+    /** @since 10 */
+    @NativeType("LLVMAtomicRMWBinOp")
+    public static int LLVMGetAtomicRMWBinOp(@NativeType("LLVMValueRef") long AtomicRMWInst) {
+        long __functionAddress = Functions.GetAtomicRMWBinOp;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(AtomicRMWInst);
+        }
+        return invokePI(AtomicRMWInst, __functionAddress);
+    }
+
+    // --- [ LLVMSetAtomicRMWBinOp ] ---
+
+    /** @since 10 */
+    public static void LLVMSetAtomicRMWBinOp(@NativeType("LLVMValueRef") long AtomicRMWInst, @NativeType("LLVMAtomicRMWBinOp") int BinOp) {
+        long __functionAddress = Functions.SetAtomicRMWBinOp;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(AtomicRMWInst);
+        }
+        invokePV(AtomicRMWInst, BinOp, __functionAddress);
     }
 
     // --- [ LLVMBuildTrunc ] ---
@@ -12568,6 +13367,41 @@ public class LLVMCore {
         }
     }
 
+    // --- [ LLVMBuildFreeze ] ---
+
+    /** Unsafe version of: {@link #LLVMBuildFreeze BuildFreeze} */
+    public static long nLLVMBuildFreeze(long Builder, long Val, long Name) {
+        long __functionAddress = Functions.BuildFreeze;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+            check(Val);
+        }
+        return invokePPPP(Builder, Val, Name, __functionAddress);
+    }
+
+    /** @since 10 */
+    @NativeType("LLVMValueRef")
+    public static long LLVMBuildFreeze(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("char const *") ByteBuffer Name) {
+        if (CHECKS) {
+            checkNT1(Name);
+        }
+        return nLLVMBuildFreeze(Builder, Val, memAddress(Name));
+    }
+
+    /** @since 10 */
+    @NativeType("LLVMValueRef")
+    public static long LLVMBuildFreeze(@NativeType("LLVMBuilderRef") long Builder, @NativeType("LLVMValueRef") long Val, @NativeType("char const *") CharSequence Name) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(Name, true);
+            long NameEncoded = stack.getPointerAddress();
+            return nLLVMBuildFreeze(Builder, Val, NameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ LLVMBuildIsNull ] ---
 
     public static long nLLVMBuildIsNull(long Builder, long Val, long Name) {
@@ -12717,6 +13551,56 @@ public class LLVMCore {
             check(New);
         }
         return invokePPPPP(B, Ptr, Cmp, New, SuccessOrdering, FailureOrdering, SingleThread ? 1 : 0, __functionAddress);
+    }
+
+    // --- [ LLVMGetNumMaskElements ] ---
+
+    /**
+     * Get the number of elements in the mask of a {@code ShuffleVector} instruction.
+     *
+     * @since 11
+     */
+    @NativeType("unsigned")
+    public static int LLVMGetNumMaskElements(@NativeType("LLVMValueRef") long ShuffleVectorInst) {
+        long __functionAddress = Functions.GetNumMaskElements;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(ShuffleVectorInst);
+        }
+        return invokePI(ShuffleVectorInst, __functionAddress);
+    }
+
+    // --- [ LLVMGetUndefMaskElem ] ---
+
+    /**
+     * Returns a constant that specifies that the result of a {@code ShuffleVectorInst} is undefined.
+     *
+     * @since 11
+     */
+    public static int LLVMGetUndefMaskElem() {
+        long __functionAddress = Functions.GetUndefMaskElem;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return invokeI(__functionAddress);
+    }
+
+    // --- [ LLVMGetMaskValue ] ---
+
+    /**
+     * Get the mask value at position {@code Elt} in the mask of a {@code ShuffleVector} instruction.
+     *
+     * @return the result of {@link #LLVMGetUndefMaskElem GetUndefMaskElem} if the mask value is {@code undef} at that position.
+     *
+     * @since 11
+     */
+    public static int LLVMGetMaskValue(@NativeType("LLVMValueRef") long ShuffleVectorInst, @NativeType("unsigned") int Elt) {
+        long __functionAddress = Functions.GetMaskValue;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(ShuffleVectorInst);
+        }
+        return invokePI(ShuffleVectorInst, Elt, __functionAddress);
     }
 
     // --- [ LLVMIsAtomicSingleThread ] ---

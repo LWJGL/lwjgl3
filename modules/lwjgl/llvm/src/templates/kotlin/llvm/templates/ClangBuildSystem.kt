@@ -91,7 +91,7 @@ val ClangBuildSystem = "ClangBuildSystem".nativeClass(
 
     CXErrorCode(
         "ModuleMapDescriptor_setUmbrellaHeader",
-        "Sets the umbrealla header name that the module.map describes.",
+        "Sets the umbrella header name that the module.map describes.",
 
         CXModuleMapDescriptor("descriptor", ""),
         charUTF8.const.p("name", ""),
