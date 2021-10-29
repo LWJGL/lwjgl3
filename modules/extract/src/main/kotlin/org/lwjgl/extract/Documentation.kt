@@ -108,7 +108,7 @@ private fun CXComment.parse(doc: Documentation, builder: StringBuilder, context:
                             builder.append("&gt;")
                         }
                         else -> {
-                            if (!context.first && builder.isNotEmpty()) {
+                            if (!context.first && builder.isNotEmpty() && text.isNotEmpty()) {
                                 if (text[0].let { it == '-' || it == '*' }) {
                                     if (builder.last() == ':') {
                                         builder.append("\n")
@@ -233,6 +233,11 @@ private fun CXComment.parse(doc: Documentation, builder: StringBuilder, context:
                     "result"     -> {
                         parseChildren(doc, doc.returnDoc, context)
                     }
+                    "retval" -> {
+                        doc.returnDoc.append(" {@code ")
+                        parseChildren(doc, doc.returnDoc, context)
+                        doc.returnDoc.append("}")
+                    }
                     "sa"         -> {
                         for (i in 0 until clang_Comment_getNumChildren(this)) {
                             stack.push().use { frame ->
@@ -250,6 +255,10 @@ private fun CXComment.parse(doc: Documentation, builder: StringBuilder, context:
                     }
                     "todo"       -> {
                         builder.append("TODO: ")
+                        parseChildren(doc, builder, context)
+                    }
+                    "warning" -> {
+                        builder.append("Warning: ")
                         parseChildren(doc, builder, context)
                     }
                     else         -> {
