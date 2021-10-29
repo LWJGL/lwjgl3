@@ -565,10 +565,18 @@ internal fun CXCursor.parseMacro(
         }
 
         try {
+            var negative = false
             val token = tokens.asSequence()
                 .drop(1)
                 .filter {
-                    clang_getTokenKind(it) != CXToken_Punctuation || when (clang_getTokenSpelling(context.tu, it, stack.str).str) {
+                    val kind = clang_getTokenKind(it)
+                    if (kind == CXToken_Punctuation) {
+                        if (clang_getTokenSpelling(context.tu, it, stack.str).str == "-") {
+                            negative = true
+                        }
+                        return@filter false
+                    }
+                    when (clang_getTokenSpelling(context.tu, it, stack.str).str) {
                         "(", ")" -> false
                         else     -> true
                     }
@@ -590,7 +598,7 @@ internal fun CXCursor.parseMacro(
                         if (spelling.startsWith('\"')) {
                             parseStringConstant(context.header, name, spelling, null)
                         } else {
-                            parseConstant(context.header, name, spelling, null)
+                            parseConstant(context.header, name, if (negative) "-$spelling" else spelling, null)
                         }
                     )
                 }
