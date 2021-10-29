@@ -266,7 +266,7 @@ val ovrExtensionProperties = struct(Module.OVR, "OVRExtensionProperties", native
     uint32_t("extensionVersion", "OpenXR-like version. Version compatibility is identified by the extension documentation.")
 }
 
-val ovrHmdColorDesc = struct(Module.OVR, "ovrHmdColorDesc", nativeName = "ovrHmdColorDesc", mutable = false) {
+val ovrHmdColorDesc = struct(Module.OVR, "ovrHmdColorDesc", nativeName = "ovrHmdColorDesc") {
     alignas("POINTER_SIZE")
 
     ovrColorSpace(

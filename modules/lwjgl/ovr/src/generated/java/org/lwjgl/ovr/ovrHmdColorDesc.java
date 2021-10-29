@@ -70,6 +70,21 @@ public class ovrHmdColorDesc extends Struct implements NativeResource {
     @NativeType("ovrColorSpace")
     public int ColorSpace() { return nColorSpace(address()); }
 
+    /** Sets the specified value to the {@link #ColorSpace} field. */
+    public ovrHmdColorDesc ColorSpace(@NativeType("ovrColorSpace") int value) { nColorSpace(address(), value); return this; }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public ovrHmdColorDesc set(ovrHmdColorDesc src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
     // -----------------------------------
 
     /** Returns a new {@code ovrHmdColorDesc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -187,6 +202,9 @@ public class ovrHmdColorDesc extends Struct implements NativeResource {
     /** Unsafe version of {@link #ColorSpace}. */
     public static int nColorSpace(long struct) { return UNSAFE.getInt(null, struct + ovrHmdColorDesc.COLORSPACE); }
 
+    /** Unsafe version of {@link #ColorSpace(int) ColorSpace}. */
+    public static void nColorSpace(long struct, int value) { UNSAFE.putInt(null, struct + ovrHmdColorDesc.COLORSPACE, value); }
+
     // -----------------------------------
 
     /** An array of {@link ovrHmdColorDesc} structs. */
@@ -228,6 +246,9 @@ public class ovrHmdColorDesc extends Struct implements NativeResource {
         /** @return the value of the {@link ovrHmdColorDesc#ColorSpace} field. */
         @NativeType("ovrColorSpace")
         public int ColorSpace() { return ovrHmdColorDesc.nColorSpace(address()); }
+
+        /** Sets the specified value to the {@link ovrHmdColorDesc#ColorSpace} field. */
+        public ovrHmdColorDesc.Buffer ColorSpace(@NativeType("ovrColorSpace") int value) { ovrHmdColorDesc.nColorSpace(address(), value); return this; }
 
     }
 
