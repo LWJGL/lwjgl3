@@ -21,6 +21,13 @@ import static org.testng.Assert.*;
 @Test
 public class OpusTest {
 
+    private static ByteBuffer mapChannels(ByteBuffer mapping) {
+        for (int i = 0; i < mapping.remaining(); i++) {
+            mapping.put(mapping.position() + i, (byte)i);
+        }
+        return mapping;
+    }
+
     /**
      * Bindings of encode/decode functions depend on internal codec state. This method tests if LWJGL reads the channel count from the correct struct offsets.
      */
@@ -36,11 +43,11 @@ public class OpusTest {
             testChannels(opus_decoder_create(48000, 2, error), error, 8, 2, Opus::opus_decoder_destroy);
 
             testChannels(
-                opus_multistream_encoder_create(48000, 1, 0, stack.malloc(1), application, error),
+                opus_multistream_encoder_create(48000, 1, 0, mapChannels(stack.malloc(1)), application, error),
                 error, 0, 1, OpusMultistream::opus_multistream_encoder_destroy
             );
             testChannels(
-                opus_multistream_encoder_create(48000, 254, 1, stack.malloc(255), application, error),
+                opus_multistream_encoder_create(48000, 254, 1, mapChannels(stack.malloc(255)), application, error),
                 error, 0, 255, OpusMultistream::opus_multistream_encoder_destroy
             );
 
