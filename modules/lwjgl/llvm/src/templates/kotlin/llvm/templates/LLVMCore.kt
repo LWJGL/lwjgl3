@@ -1527,9 +1527,9 @@ val LLVMCore = "LLVMCore".nativeClass(
         "ScalableVectorType",
         """
         Create a vector type that contains a defined type and has a scalable number of elements.
- 
+
         The created type will exist in the context thats its element type exists in.
- 
+
         See {@code llvm::ScalableVectorType::get()}.
         """,
 
@@ -3168,7 +3168,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         Copies the name of an overloaded intrinsic identified by a given list of parameter types.
 
         Unlike #IntrinsicGetName(), the caller is responsible for freeing the returned string.
-        
+
         This version also supports unnamed types.
         """,
 
@@ -3396,7 +3396,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         "AddGlobalIFunc",
         """
         Add a global indirect function to a module under a specified name.
-        
+
         See {@code llvm::GlobalIFunc::create()}
         """,
 
@@ -3414,9 +3414,9 @@ val LLVMCore = "LLVMCore".nativeClass(
         "GetNamedGlobalIFunc",
         """
         Obtain a {@code GlobalIFunc} value from a {@code Module} by its name.
-        
+
         The returned value corresponds to a {@code llvm::GlobalIFunc} value.
-        
+
         See {@code llvm::Module::getNamedIFunc()}
         """,
 
@@ -3431,7 +3431,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         "GetFirstGlobalIFunc",
         """
         Obtain an iterator to the first {@code GlobalIFunc} in a {@code Module}.
-        
+
         See {@code llvm::Module::ifunc_begin()}
         """,
 
@@ -3444,7 +3444,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         "GetLastGlobalIFunc",
         """
         Obtain an iterator to the last {@code GlobalIFunc} in a {@code Module}.
-        
+
         See {@code llvm::Module::ifunc_end()}.
         """,
 
@@ -3457,7 +3457,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         "GetNextGlobalIFunc",
         """
         Advance a {@code GlobalIFunc} iterator to the next {@code GlobalIFunc}.
-     
+
         Returns #NULL if the iterator was already at the end and there are no more global aliases.
         """,
 
@@ -3470,7 +3470,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         "GetPreviousGlobalIFunc",
         """
         Decrement a {@code GlobalIFunc} iterator to the previous {@code GlobalIFunc}.
-     
+
         Returns #NULL if the iterator was already at the beginning and there are no previous global aliases.
         """,
 
@@ -3496,7 +3496,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         "SetGlobalIFuncResolver",
         """
         Sets the resolver function associated with this indirect function.
-        
+
         See {@code llvm::GlobalIFunc::setResolver()}
         """,
 
@@ -3510,7 +3510,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         "EraseGlobalIFunc",
         """
         Remove a global indirect function from its parent module and delete it.
-        
+
         See {@code llvm::GlobalIFunc::eraseFromParent()}
         """,
 
@@ -3523,9 +3523,9 @@ val LLVMCore = "LLVMCore".nativeClass(
         "RemoveGlobalIFunc",
         """
         Remove a global indirect function from its parent module.
-        
+
         This unlinks the global indirect function from its containing module but keeps it alive.
-        
+
         See {@code llvm::GlobalIFunc::removeFromParent()}
         """,
 
@@ -3762,9 +3762,9 @@ val LLVMCore = "LLVMCore".nativeClass(
         "InsertExistingBasicBlockAfterInsertBlock",
         """
         Insert the given basic block after the insertion point of the given builder.
-     
+
         The insertion point must be valid.
-     
+
         See {@code llvm::Function::BasicBlockListType::insertAfter()}.        
         """,
 
@@ -3778,7 +3778,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         "AppendExistingBasicBlock",
         """
         Append the given basic block to the basic block list of the given function.
-     
+
         See {@code llvm::Function::BasicBlockListType::push_back()}
         """,
 
@@ -4448,7 +4448,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         "GetCurrentDebugLocation2",
         """
         Get location information used by debugging information.
-        
+
         See {@code llvm::IRBuilder::getCurrentDebugLocation()}.
         """,
 
@@ -4492,7 +4492,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         "BuilderGetDefaultFPMathTag",
         """
         Get the default floating-point math metadata for a given builder.
-        
+
         See {@code llvm::IRBuilder::getDefaultFPMathTag()}
         """,
 

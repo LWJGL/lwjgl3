@@ -19,7 +19,7 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         "OrcCreateLLJITBuilder",
         """
         Create an {@code LLVMOrcLLJITBuilder}.
-     
+
         The client owns the resulting {@code LLJITBuilder} and should dispose of it using #OrcDisposeLLJITBuilder() once they are done with it.
         """,
 
@@ -30,7 +30,7 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         "OrcDisposeLLJITBuilder",
         """
         Dispose of an {@code LLVMOrcLLJITBuilderRef}.
-        
+
         This should only be called if ownership has not been passed to {@code LLVMOrcCreateLLJIT} (e.g. because some error prevented that function from being
         called).        
         """,
@@ -42,10 +42,10 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         "OrcLLJITBuilderSetJITTargetMachineBuilder",
         """
         Set the {@code JITTargetMachineBuilder} to be used when constructing the {@code LLJIT} instance.
-        
+
         Calling this function is optional: if it is not called then the {@code LLJITBuilder} will use {@code JITTargeTMachineBuilder::detectHost} to construct
         a {@code JITTargetMachineBuilder}.
-     
+
         This function takes ownership of the {@code JTMB} argument: clients should not dispose of the {@code JITTargetMachineBuilder} after calling this
         function.
         """,
@@ -69,10 +69,10 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         "OrcCreateLLJIT",
         """
         Create an {@code LLJIT} instance from an {@code LLJITBuilder}.
-     
+
         This operation takes ownership of the {@code Builder} argument: clients should not dispose of the builder after calling this function (even if the
         function returns an error). If a null {@code Builder} argument is provided then a default-constructed {@code LLJITBuilder} will be used.
-     
+
         On success the resulting {@code LLJIT} instance is uniquely owned by the client and automatically manages the memory of all JIT'd code and all modules
         that are transferred to it (e.g. via #OrcLLJITAddLLVMIRModule()). Disposing of the {@code LLJIT} instance will free all memory managed by the JIT,
         including JIT'd code and not-yet compiled modules.
@@ -93,7 +93,7 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         "OrcLLJITGetExecutionSession",
         """
         Get a reference to the {@code ExecutionSession} for this {@code LLJIT} instance.
-     
+
         The {@code ExecutionSession} is owned by the {@code LLJIT} instance. The client is not responsible for managing its memory.
         """,
 
@@ -104,7 +104,7 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         "OrcLLJITGetMainJITDylib",
         """
         Return a reference to the Main {@code JITDylib}.
-     
+
         The {@code JITDylib} is owned by the {@code LLJIT} instance. The client is not responsible for managing its memory.        
         """,
 
@@ -130,9 +130,9 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         """
         Mangles the given string according to the {@code LLJIT} instance's {@code DataLayout}, then interns the result in the {@code SymbolStringPool} and
         returns a reference to the pool entry.
-        
-        Clients should call {@code LLVMOrcReleaseSymbolStringPoolEntry()} to decrement the ref-count on the pool entry once they are finished with this value.
-        """, // TODO: change LLVMOrcReleaseSymbolStringPoolEntry to link
+
+        Clients should call #OrcReleaseSymbolStringPoolEntry() to decrement the ref-count on the pool entry once they are finished with this value.
+        """,
 
         LLVMOrcLLJITRef("J", ""),
         charUTF8.const.p("UnmangledName", "")
@@ -143,7 +143,7 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         """
         Add a buffer representing an object file to the given {@code JITDylib} in the given {@code LLJIT} instance. This operation transfers ownership of the
         buffer to the {@code LLJIT} instance. The buffer should not be disposed of or referenced once this function returns.
-     
+
         Resources associated with the given object will be tracked by the given {@code JITDylib}'s default resource tracker.        
         """,
 
@@ -157,7 +157,7 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         """
         Add a buffer representing an object file to the given {@code ResourceTracker}'s {@code JITDylib} in the given {@code LLJIT} instance. This operation
         transfers ownership of the buffer to the {@code LLJIT} instance. The buffer should not be disposed of or referenced once this function returns.
-     
+
         Resources associated with the given object will be tracked by {@code ResourceTracker} {@code RT}.        
         """,
 
@@ -173,7 +173,7 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         """
         Add an IR module to the given {@code JITDylib} in the given {@code LLJIT} instance. This operation transfers ownership of the {@code TSM} argument to
         the {@code LLJIT} instance. The {@code TSM} argument should not be disposed of or referenced once this function returns.
-     
+
         Resources associated with the given {@code Module} will be tracked by the given {@code JITDylib}'s default resource tracker.
         """,
 
@@ -187,7 +187,7 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         """
         Add an IR module to the given {@code ResourceTracker}'s {@code JITDylib} in the given {@code LLJIT} instance. This operation transfers ownership of the
         {@code TSM} argument to the {@code LLJIT} instance. The {@code TSM} argument should not be disposed of or referenced once this function returns.
-     
+
         Resources associated with the given {@code Module} will be tracked by {@code ResourceTracker} {@code RT}.        
         """,
 
@@ -202,7 +202,7 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         "OrcLLJITLookup",
         """
         Look up the given symbol in the main {@code JITDylib} of the given {@code LLJIT} instance.
-     
+
         This operation does not take ownership of the Name argument.        
         """,
 
@@ -242,7 +242,7 @@ val LLVMLLJIT = "LLVMLLJIT".nativeClass(
         "OrcLLJITGetDataLayoutStr",
         """
         Get the {@code LLJIT} instance's default data layout string.
-     
+
         This string is owned by the {@code LLJIT} instance and does not need to be freed by the caller.
         """,
 

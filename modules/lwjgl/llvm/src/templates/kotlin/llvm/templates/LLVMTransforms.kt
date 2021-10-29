@@ -180,10 +180,10 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         "AddInternalizePassWithMustPreservePredicate",
         """
         Create and add the internalize pass to the given pass manager with the provided preservation callback.
-     
+
         The context parameter is forwarded to the callback on each invocation. As such, it is the responsibility of the caller to extend its lifetime until
         execution of this pass has finished.
-     
+
         See {@code llvm::createInternalizePass} function.
         """,
 
@@ -212,7 +212,7 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         "RunPasses",
         """
         Construct and run a set of passes over a module.
- 
+
         This function takes a string with the passes that should be used. The format of this string is the same as opt's {@code -passes} argument for the new
         pass manager. Individual passes may be specified, separated by commas. Full pipelines may also be invoked using {@code default<O3>} and friends. See
         {@code opt} for full reference of the Passes format.
@@ -230,7 +230,7 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         "CreatePassBuilderOptions",
         """
         Create a new set of options for a {@code PassBuilder}.
- 
+
         Ownership of the returned instance is given to the client, and they are responsible for it. The client should call #DisposePassBuilderOptions() to free
         the pass builder options.
         """,

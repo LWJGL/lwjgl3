@@ -467,7 +467,7 @@ typedef struct {
         "set_debug_options",
         """
         Parses options immediately, making them available as early as possible.
-        
+
         For example during executing {@code codegen::InitTargetOptionsFromCodeGenFlags}. Since parsing shud only happen once, only one of
         #codegen_debug_options() or {@code lto_set_debug_options} should be called.
         """,
@@ -482,9 +482,9 @@ typedef struct {
         "codegen_debug_options",
         """
         Sets options to help debug codegen bugs.
-        
+
         Since parsing should only happen once, only one of {@code lto_codegen_debug_options} or #set_debug_options() should be called.
- 
+
         This function takes one or more options separated by spaces. Warning: passing file paths through this function may confuse the argument parser if the
         paths contain spaces.
         """,
@@ -525,7 +525,7 @@ typedef struct {
         Set whether to embed uselists in bitcode.
 
         Sets whether #codegen_write_merged_modules() should embed uselists in output bitcode. This should be turned on for all {@code -save-temps} output.
-       
+
         """,
 
         lto_code_gen_t("cg", ""),
@@ -536,7 +536,7 @@ typedef struct {
         "input_create",
         """
         Creates an LTO input file from a buffer.
-        
+
         The path argument is used for diagnotics as this function otherwise does not know which file the given buffer is associated with.
         """,
 
@@ -629,10 +629,7 @@ typedef struct {
 
     void(
         "thinlto_codegen_process",
-        """
-        Optimize and codegen all the modules added to the codegenerator using ThinLTO. Resulting objects are accessible using #thinlto_module_get_object().
-       
-        """,
+        "Optimize and codegen all the modules added to the codegenerator using ThinLTO. Resulting objects are accessible using #thinlto_module_get_object().",
 
         thinlto_code_gen_t("cg", ""),
 
@@ -783,7 +780,7 @@ typedef struct {
         """
         Adds a symbol to the list of global symbols that must exist in the final generated code. If a function is not listed there, it might be inlined into
         every usage and optimized away. For every single module, the functions referenced from code outside of the ThinLTO modules need to be added here.
-       
+
         """,
 
         thinlto_code_gen_t("cg", ""),

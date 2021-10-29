@@ -163,9 +163,9 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
     EnumConstant(
         """
         Describes the kind of macro declaration used for {@code LLVMDIBuilderCreateMacro}. ({@code LLVMDWARFMacinfoRecordType})
-        
+
         See {@code llvm::dwarf::MacinfoRecordType}.
-        
+
         Note: Values are from {@code DW_MACINFO_*} constants in the DWARF specification.
         """,
 
@@ -457,7 +457,7 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DIFileGetDirectory",
         """
         Get the directory of a given file.
-        
+
         See {@code DIFile::getDirectory()}
         """,
 
@@ -471,7 +471,7 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DIFileGetFilename",
         """
         Get the name of a given file.
-        
+
         See {@code DIFile::getFilename()}.
         """,
 
@@ -485,7 +485,7 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DIFileGetSource",
         """
         Get the source of a given file.
-        
+
         See {@code DIFile::getSource()}.
         """,
 
@@ -535,7 +535,7 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DIBuilderCreateTempMacroFile",
         """
         Create debugging information temporary entry for a macro file.
-        
+
         List of macro node direct children will be calculated by {@code DIBuilder}, using the {@code ParentMacroFile} relationship.
         """,
 
@@ -1004,7 +1004,7 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DIGlobalVariableExpressionGetVariable",
         """
         Retrieves the {@code DIVariable} associated with this global variable expression.
-        
+
         See {@code llvm::DIGlobalVariableExpression::getVariable()}.
         """,
 
@@ -1056,7 +1056,7 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DIVariableGetLine",
         """
         Get the source line where this {@code DIVariable} is declared.
-        
+
         See {@code DIVariable::getLine()}.
         """,
 
@@ -1219,7 +1219,7 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "DISubprogramGetLine",
         """
         Get the line associated with a given subprogram.
-        
+
         See {@code DISubprogram::getLine()}.
         """,
 
@@ -1232,7 +1232,7 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "InstructionGetDebugLoc",
         """
         Get the debug location for the given instruction.
-     
+
         See {@code llvm::Instruction::getDebugLoc()}
         """,
 
@@ -1245,9 +1245,9 @@ val LLVMDebugInfo = "LLVMDebugInfo".nativeClass(
         "InstructionSetDebugLoc",
         """
         Set the debug location for the given instruction.
-     
+
         To clear the location metadata of the given instruction, pass #NULL to {@code Loc}.
-     
+
         See {@code llvm::Instruction::setDebugLoc()}        
         """,
 

@@ -245,7 +245,7 @@ public class LLVMLLJIT {
      * Mangles the given string according to the {@code LLJIT} instance's {@code DataLayout}, then interns the result in the {@code SymbolStringPool} and
      * returns a reference to the pool entry.
      * 
-     * <p>Clients should call {@code LLVMOrcReleaseSymbolStringPoolEntry()} to decrement the ref-count on the pool entry once they are finished with this value.</p>
+     * <p>Clients should call {@link LLVMOrc#LLVMOrcReleaseSymbolStringPoolEntry OrcReleaseSymbolStringPoolEntry} to decrement the ref-count on the pool entry once they are finished with this value.</p>
      */
     @NativeType("LLVMOrcSymbolStringPoolEntryRef")
     public static long LLVMOrcLLJITMangleAndIntern(@NativeType("LLVMOrcLLJITRef") long J, @NativeType("char const *") ByteBuffer UnmangledName) {
@@ -259,7 +259,7 @@ public class LLVMLLJIT {
      * Mangles the given string according to the {@code LLJIT} instance's {@code DataLayout}, then interns the result in the {@code SymbolStringPool} and
      * returns a reference to the pool entry.
      * 
-     * <p>Clients should call {@code LLVMOrcReleaseSymbolStringPoolEntry()} to decrement the ref-count on the pool entry once they are finished with this value.</p>
+     * <p>Clients should call {@link LLVMOrc#LLVMOrcReleaseSymbolStringPoolEntry OrcReleaseSymbolStringPoolEntry} to decrement the ref-count on the pool entry once they are finished with this value.</p>
      */
     @NativeType("LLVMOrcSymbolStringPoolEntryRef")
     public static long LLVMOrcLLJITMangleAndIntern(@NativeType("LLVMOrcLLJITRef") long J, @NativeType("char const *") CharSequence UnmangledName) {

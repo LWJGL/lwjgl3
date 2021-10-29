@@ -31,7 +31,7 @@ val LLVMOrc = "LLVMOrc".nativeClass(
     EnumConstant(
         """
         Lookup kind. ({@code LLVMOrcLookupKind})
-        
+
         This can be used by definition generators when deciding whether to produce a definition for a requested symbol.
 
         This enum should be kept in sync with {@code llvm::orc::LookupKind}.
@@ -44,7 +44,7 @@ val LLVMOrc = "LLVMOrc".nativeClass(
     EnumConstant(
         """
         {@code JITDylib} lookup flags. ({@code LLVMOrcJITDylibLookupFlags})
-        
+
         This can be used by definition generators when deciding whether to produce a definition for a requested symbol.
 
         This enum should be kept in sync with {@code llvm::orc::JITDylibLookupFlags}.
@@ -57,7 +57,7 @@ val LLVMOrc = "LLVMOrc".nativeClass(
     EnumConstant(
         """
         Symbol lookup flags for lookup sets. ({@code LLVMOrcSymbolLookupFlags})
-        
+
         This should be kept in sync with {@code llvm::orc::SymbolLookupFlags}.
         """,
 

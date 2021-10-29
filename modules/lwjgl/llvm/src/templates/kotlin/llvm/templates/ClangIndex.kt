@@ -3730,7 +3730,7 @@ void foo <float , 2147483649, true>();""")}
         "Type_getValueType",
         """
         Gets the type contained by this atomic type.
-        
+
         If a non-atomic type is passed in, an invalid type is returned.
         """,
 
@@ -4966,7 +4966,7 @@ void foo <float , 2147483649, true>();""")}
         """
         If cursor is a statement declaration tries to evaluate the statement and if its variable, tries to evaluate its initializer, into its corresponding
         type.
-        
+
         If it's an expression, tries to evaluate the expression.
         """,
 
