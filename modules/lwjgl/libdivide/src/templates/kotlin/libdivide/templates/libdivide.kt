@@ -498,11 +498,11 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     NativeName("libdivide_s16_do")..internal..int16_t("s16_do_ref", "", int16_t("numer", ""), libdivide_s16_t.const.p("denom", ""))
     customMethod(
         """
-    public static short libdivide_s16_do(@NativeType("int16_t") short numer, @NativeType("struct libdivide_s16_t const *") LibDivideS16 denom) {
-        byte more  = denom.more();
-        int  shift = more & LIBDIVIDE_16_SHIFT_MASK;
+    public static short libdivide_s16_do(@NativeType("int16_t") short numer, @NativeType("struct libdivide_s16_t const *") LibDivideS16 denom) { return libdivide_s16_do(numer, denom.magic(), denom.more()); }
+    public static short libdivide_s16_do(@NativeType("int16_t") short numer, @NativeType("int16_t") short magic, @NativeType("uint8_t") byte more) {
+        int shift = more & LIBDIVIDE_16_SHIFT_MASK;
 
-        if (denom.magic() == 0) {
+        if (magic == 0) {
             int sign = more >> 7;
             int mask = (1 << shift) - 1;
             int q    = numer + ((numer >> 15) & mask);
@@ -510,7 +510,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
             q = (q ^ sign) - sign;
             return (short)q;
         } else {
-            int uq = libdivide_mullhi_s16(denom.magic(), numer);
+            int uq = libdivide_mullhi_s16(magic, numer);
             if ((more & LIBDIVIDE_ADD_MARKER) != 0) {
                 int sign = more >> 7;
                 uq += (numer ^ sign) - sign;
@@ -525,14 +525,14 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     NativeName("libdivide_u16_do")..internal..uint16_t("u16_do_ref", "", uint16_t("numer", ""), libdivide_u16_t.const.p("denom", ""))
     customMethod(
         """
-    public static short libdivide_u16_do(@NativeType("uint16_t") short numer, @NativeType("struct libdivide_u16_t const *") LibDivideU16 denom) {
+    public static short libdivide_u16_do(@NativeType("uint16_t") short numer, @NativeType("struct libdivide_u16_t const *") LibDivideU16 denom) { return libdivide_u16_do(numer, denom.magic(), denom.more()); }
+    public static short libdivide_u16_do(@NativeType("uint16_t") short numer, @NativeType("uint16_t") short magic, @NativeType("uint8_t") byte more) {
         int n = Short.toUnsignedInt(numer);
 
-        byte more = denom.more();
-        if (denom.magic() == 0) {
+        if (magic == 0) {
             return (short)(n >>> more);
         } else {
-            int q = libdivide_mullhi_u16(denom.magic(), numer);
+            int q = libdivide_mullhi_u16(magic, numer);
             if ((more & LIBDIVIDE_ADD_MARKER) != 0) {
                 int t = ((n - q) >>> 1) + q;
                 return (short)(t >>> (more & LIBDIVIDE_16_SHIFT_MASK));
@@ -545,11 +545,11 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     NativeName("libdivide_s32_do")..internal..int32_t("s32_do_ref", "", int32_t("numer", ""), libdivide_s32_t.const.p("denom", ""))
     customMethod(
         """
-    public static int libdivide_s32_do(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_t const *") LibDivideS32 denom) {
-        byte more  = denom.more();
-        int  shift = more & LIBDIVIDE_32_SHIFT_MASK;
+    public static int libdivide_s32_do(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_t const *") LibDivideS32 denom) { return libdivide_s32_do(numer, denom.magic(), denom.more()); }
+    public static int libdivide_s32_do(@NativeType("int32_t") int numer, @NativeType("int32_t") int magic, @NativeType("uint8_t") byte more) {
+        int shift = more & LIBDIVIDE_32_SHIFT_MASK;
 
-        if (denom.magic() == 0) {
+        if (magic == 0) {
             int sign = more >> 7;
             int mask = (1 << shift) - 1;
             int q    = numer + ((numer >> 31) & mask);
@@ -557,7 +557,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
             q = (q ^ sign) - sign;
             return q;
         } else {
-            int uq = libdivide_mullhi_s32(denom.magic(), numer);
+            int uq = libdivide_mullhi_s32(magic, numer);
             if ((more & LIBDIVIDE_ADD_MARKER) != 0) {
                 int sign = more >> 7;
                 uq += (numer ^ sign) - sign;
@@ -572,12 +572,12 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     NativeName("libdivide_u32_do")..internal..uint32_t("u32_do_ref", "", uint32_t("numer", ""), libdivide_u32_t.const.p("denom", ""))
     customMethod(
         """
-    public static int libdivide_u32_do(@NativeType("uint32_t") int numer, @NativeType("struct libdivide_u32_t const *") LibDivideU32 denom) {
-        byte more = denom.more();
-        if (denom.magic() == 0) {
+    public static int libdivide_u32_do(@NativeType("uint32_t") int numer, @NativeType("struct libdivide_u32_t const *") LibDivideU32 denom) { return libdivide_u32_do(numer, denom.magic(), denom.more()); }
+    public static int libdivide_u32_do(@NativeType("uint32_t") int numer, @NativeType("uint32_t") int magic, @NativeType("uint8_t") byte more) {
+        if (magic == 0) {
             return numer >>> more;
         } else {
-            int q = libdivide_mullhi_u32(denom.magic(), numer);
+            int q = libdivide_mullhi_u32(magic, numer);
             if ((more & LIBDIVIDE_ADD_MARKER) != 0) {
                 int t = ((numer - q) >>> 1) + q;
                 return t >>> (more & LIBDIVIDE_32_SHIFT_MASK);
@@ -590,10 +590,9 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     NativeName("libdivide_s64_do")..internal..int64_t("s64_do_ref", "", int64_t("numer", ""), libdivide_s64_t.const.p("denom", ""))
     customMethod(
         """
-    public static long libdivide_s64_do(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_t const *") LibDivideS64 denom) {
-        byte more  = denom.more();
-        long magic = denom.magic();
-        int  shift = more & LIBDIVIDE_64_SHIFT_MASK;
+    public static long libdivide_s64_do(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_t const *") LibDivideS64 denom) { return libdivide_s64_do(numer, denom.magic(), denom.more()); }
+    public static long libdivide_s64_do(@NativeType("int64_t") long numer, @NativeType("int64_t") long magic, @NativeType("uint8_t") byte more) {
+        int shift = more & LIBDIVIDE_64_SHIFT_MASK;
 
         if (magic == 0L) {
             long mask = (1L << shift) - 1L;
@@ -618,12 +617,12 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     NativeName("libdivide_u64_do")..internal..uint64_t("u64_do_ref", "", uint64_t("numer", ""), libdivide_u64_t.const.p("denom", ""))
     customMethod(
         """
-    public static long libdivide_u64_do(@NativeType("uint64_t") long numer, @NativeType("struct libdivide_u64_t const *") LibDivideU64 denom) {
-        byte more = denom.more();
-        if (denom.magic() == 0L) {
+    public static long libdivide_u64_do(@NativeType("uint64_t") long numer, @NativeType("struct libdivide_u64_t const *") LibDivideU64 denom) { return libdivide_u64_do(numer, denom.magic(), denom.more()); }
+    public static long libdivide_u64_do(@NativeType("uint64_t") long numer, @NativeType("uint64_t") long magic, @NativeType("uint8_t") byte more) {
+        if (magic == 0L) {
             return numer >>> more;
         } else {
-            long q = mathMultiplyHighU64(denom.magic(), numer);
+            long q = mathMultiplyHighU64(magic, numer);
             if ((more & LIBDIVIDE_ADD_MARKER) != 0) {
                 long t = ((numer - q) >>> 1) + q;
                 return t >>> (more & LIBDIVIDE_64_SHIFT_MASK);
@@ -636,12 +635,11 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     NativeName("libdivide_s16_branchfree_do")..internal..int16_t("s16_branchfree_do_ref", "", int16_t("numer", ""), libdivide_s16_branchfree_t.const.p("denom", ""))
     customMethod(
         """
-    public static short libdivide_s16_branchfree_do(@NativeType("int16_t") short numer, @NativeType("struct libdivide_s16_branchfree_t const *") LibDivideS16BranchFree denom) {
-        byte  more  = denom.more();
-        int   shift = more & LIBDIVIDE_16_SHIFT_MASK;
-        int   sign  = more >> 7;
-        short magic = denom.magic();
-        int   q     = libdivide_mullhi_s16(magic, numer);
+    public static short libdivide_s16_branchfree_do(@NativeType("int16_t") short numer, @NativeType("struct libdivide_s16_branchfree_t const *") LibDivideS16BranchFree denom) { return libdivide_s16_branchfree_do(numer, denom.magic(), denom.more()); }
+    public static short libdivide_s16_branchfree_do(@NativeType("int16_t") short numer, @NativeType("int16_t") short magic, @NativeType("uint8_t") byte more) {
+        int shift = more & LIBDIVIDE_16_SHIFT_MASK;
+        int sign  = more >> 7;
+        int    q  = libdivide_mullhi_s16(magic, numer);
         q += numer;
 
         int q_sign = q >> 15;
@@ -657,21 +655,21 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     NativeName("libdivide_u16_branchfree_do")..internal..uint16_t("u16_branchfree_do_ref", "", uint16_t("numer", ""), libdivide_u16_branchfree_t.const.p("denom", ""))
     customMethod(
         """
-    public static short libdivide_u16_branchfree_do(@NativeType("uint16_t") short numer, @NativeType("struct libdivide_u16_branchfree_t const *") LibDivideU16BranchFree denom) {
-        int q = libdivide_mullhi_u16(denom.magic(), numer);
+    public static short libdivide_u16_branchfree_do(@NativeType("uint16_t") short numer, @NativeType("struct libdivide_u16_branchfree_t const *") LibDivideU16BranchFree denom) { return libdivide_u16_branchfree_do(numer, denom.magic(), denom.more()); }
+    public static short libdivide_u16_branchfree_do(@NativeType("uint16_t") short numer, @NativeType("uint16_t") short magic, @NativeType("uint8_t") byte more) {
+        int q = libdivide_mullhi_u16(magic, numer);
         int t = ((Short.toUnsignedInt(numer) - q) >>> 1) + q;
-        return (short)(t >>> denom.more());
+        return (short)(t >>> more);
     }""")
     
     NativeName("libdivide_s32_branchfree_do")..internal..int32_t("s32_branchfree_do_ref", "", int32_t("numer", ""), libdivide_s32_branchfree_t.const.p("denom", ""))
     customMethod(
         """
-    public static int libdivide_s32_branchfree_do(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_branchfree_t const *") LibDivideS32BranchFree denom) {
-        byte more  = denom.more();
-        int  shift = more & LIBDIVIDE_32_SHIFT_MASK;
-        int  sign  = more >> 7;
-        int  magic = denom.magic();
-        int  q     = libdivide_mullhi_s32(magic, numer);
+    public static int libdivide_s32_branchfree_do(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_branchfree_t const *") LibDivideS32BranchFree denom) { return libdivide_s32_branchfree_do(numer, denom.magic(), denom.more()); }
+    public static int libdivide_s32_branchfree_do(@NativeType("int32_t") int numer, @NativeType("int32_t") int magic, @NativeType("uint8_t") byte more) {
+        int shift = more & LIBDIVIDE_32_SHIFT_MASK;
+        int sign  = more >> 7;
+        int q     = libdivide_mullhi_s32(magic, numer);
         q += numer;
 
         int q_sign = q >> 31;
@@ -687,20 +685,20 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     NativeName("libdivide_u32_branchfree_do")..internal..uint32_t("u32_branchfree_do_ref", "", uint32_t("numer", ""), libdivide_u32_branchfree_t.const.p("denom", ""))
     customMethod(
         """
-    public static int libdivide_u32_branchfree_do(@NativeType("uint32_t") int numer, @NativeType("struct libdivide_u32_branchfree_t const *") LibDivideU32BranchFree denom) {
-        int q = libdivide_mullhi_u32(denom.magic(), numer);
+    public static int libdivide_u32_branchfree_do(@NativeType("uint32_t") int numer, @NativeType("struct libdivide_u32_branchfree_t const *") LibDivideU32BranchFree denom) { return libdivide_u32_branchfree_do(numer, denom.magic(), denom.more()); }
+    public static int libdivide_u32_branchfree_do(@NativeType("uint32_t") int numer, @NativeType("uint32_t") int magic, @NativeType("uint8_t") byte more) {
+        int q = libdivide_mullhi_u32(magic, numer);
         int t = ((numer - q) >>> 1) + q;
-        return t >>> denom.more();
+        return t >>> more;
     }""")
 
     NativeName("libdivide_s64_branchfree_do")..internal..int64_t("s64_branchfree_do_ref", "", int64_t("numer", ""), libdivide_s64_branchfree_t.const.p("denom", ""))
     customMethod(
         """
-    public static long libdivide_s64_branchfree_do(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_branchfree_t const *") LibDivideS64BranchFree denom) {
-        byte more  = denom.more();
+    public static long libdivide_s64_branchfree_do(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_branchfree_t const *") LibDivideS64BranchFree denom) { return libdivide_s64_branchfree_do(numer, denom.magic(), denom.more()); }
+    public static long libdivide_s64_branchfree_do(@NativeType("int64_t") long numer, @NativeType("int64_t") long magic, @NativeType("uint8_t") byte more) {
         int  shift = more & LIBDIVIDE_64_SHIFT_MASK;
         long sign  = more >> 7;
-        long magic = denom.magic();
         long q     = mathMultiplyHighS64(magic, numer);
         q += numer;
 
@@ -716,10 +714,11 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     NativeName("libdivide_u64_branchfree_do")..internal..uint64_t("u64_branchfree_do_ref", "", uint64_t("numer", ""), libdivide_u64_branchfree_t.const.p("denom", ""))
     customMethod(
         """
-    public static long libdivide_u64_branchfree_do(@NativeType("uint64_t") long numer, @NativeType("struct libdivide_u64_branchfree_t const *") LibDivideU64BranchFree denom) {
-        long q = mathMultiplyHighU64(denom.magic(), numer);
+    public static long libdivide_u64_branchfree_do(@NativeType("uint64_t") long numer, @NativeType("struct libdivide_u64_branchfree_t const *") LibDivideU64BranchFree denom) { return libdivide_u64_branchfree_do(numer, denom.magic(), denom.more()); }
+    public static long libdivide_u64_branchfree_do(@NativeType("uint64_t") long numer, @NativeType("uint64_t") long magic, @NativeType("uint8_t") byte more) {
+        long q = mathMultiplyHighU64(magic, numer);
         long t = ((numer - q) >>> 1) + q;
-        return t >>> denom.more();
+        return t >>> more;
     }""")
 
     int16_t("s16_recover", "", libdivide_s16_t.const.p("denom", ""))
