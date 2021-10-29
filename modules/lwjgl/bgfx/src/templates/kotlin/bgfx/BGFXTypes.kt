@@ -331,10 +331,10 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
         ) {
             documentation =
                 """
-            Prints a debug message.
-
-            Not thread safe and it can be called from any thread.
-            """
+                Prints a debug message.
+    
+                Not thread safe and it can be called from any thread.
+                """
         }
     }("trace_vargs", "the debug message callback")
     Module.BGFX.callback {

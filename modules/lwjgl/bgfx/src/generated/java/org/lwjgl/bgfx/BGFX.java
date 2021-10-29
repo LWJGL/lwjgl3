@@ -1491,7 +1491,7 @@ public class BGFX {
      * @param _conversion conversion type. One of:<br><table><tr><td>{@link #BGFX_TOPOLOGY_CONVERT_TRI_LIST_FLIP_WINDING TOPOLOGY_CONVERT_TRI_LIST_FLIP_WINDING}</td><td>{@link #BGFX_TOPOLOGY_CONVERT_TRI_STRIP_FLIP_WINDING TOPOLOGY_CONVERT_TRI_STRIP_FLIP_WINDING}</td></tr><tr><td>{@link #BGFX_TOPOLOGY_CONVERT_TRI_LIST_TO_LINE_LIST TOPOLOGY_CONVERT_TRI_LIST_TO_LINE_LIST}</td><td>{@link #BGFX_TOPOLOGY_CONVERT_TRI_STRIP_TO_TRI_LIST TOPOLOGY_CONVERT_TRI_STRIP_TO_TRI_LIST}</td></tr><tr><td>{@link #BGFX_TOPOLOGY_CONVERT_LINE_STRIP_TO_LINE_LIST TOPOLOGY_CONVERT_LINE_STRIP_TO_LINE_LIST}</td></tr></table>
      * @param _dst        destination index buffer. If this argument is {@code NULL} function will return number of indices after conversion
      * @param _indices    source indices
-     * @param _index32    set to `true` if input indices are 32-bit
+     * @param _index32    set to {@code true} if input indices are 32-bit
      *
      * @return number of output indices after conversion
      */
@@ -1506,7 +1506,7 @@ public class BGFX {
      * @param _conversion conversion type. One of:<br><table><tr><td>{@link #BGFX_TOPOLOGY_CONVERT_TRI_LIST_FLIP_WINDING TOPOLOGY_CONVERT_TRI_LIST_FLIP_WINDING}</td><td>{@link #BGFX_TOPOLOGY_CONVERT_TRI_STRIP_FLIP_WINDING TOPOLOGY_CONVERT_TRI_STRIP_FLIP_WINDING}</td></tr><tr><td>{@link #BGFX_TOPOLOGY_CONVERT_TRI_LIST_TO_LINE_LIST TOPOLOGY_CONVERT_TRI_LIST_TO_LINE_LIST}</td><td>{@link #BGFX_TOPOLOGY_CONVERT_TRI_STRIP_TO_TRI_LIST TOPOLOGY_CONVERT_TRI_STRIP_TO_TRI_LIST}</td></tr><tr><td>{@link #BGFX_TOPOLOGY_CONVERT_LINE_STRIP_TO_LINE_LIST TOPOLOGY_CONVERT_LINE_STRIP_TO_LINE_LIST}</td></tr></table>
      * @param _dst        destination index buffer. If this argument is {@code NULL} function will return number of indices after conversion
      * @param _indices    source indices
-     * @param _index32    set to `true` if input indices are 32-bit
+     * @param _index32    set to {@code true} if input indices are 32-bit
      *
      * @return number of output indices after conversion
      */
@@ -1521,7 +1521,7 @@ public class BGFX {
      * @param _conversion conversion type. One of:<br><table><tr><td>{@link #BGFX_TOPOLOGY_CONVERT_TRI_LIST_FLIP_WINDING TOPOLOGY_CONVERT_TRI_LIST_FLIP_WINDING}</td><td>{@link #BGFX_TOPOLOGY_CONVERT_TRI_STRIP_FLIP_WINDING TOPOLOGY_CONVERT_TRI_STRIP_FLIP_WINDING}</td></tr><tr><td>{@link #BGFX_TOPOLOGY_CONVERT_TRI_LIST_TO_LINE_LIST TOPOLOGY_CONVERT_TRI_LIST_TO_LINE_LIST}</td><td>{@link #BGFX_TOPOLOGY_CONVERT_TRI_STRIP_TO_TRI_LIST TOPOLOGY_CONVERT_TRI_STRIP_TO_TRI_LIST}</td></tr><tr><td>{@link #BGFX_TOPOLOGY_CONVERT_LINE_STRIP_TO_LINE_LIST TOPOLOGY_CONVERT_LINE_STRIP_TO_LINE_LIST}</td></tr></table>
      * @param _dst        destination index buffer. If this argument is {@code NULL} function will return number of indices after conversion
      * @param _indices    source indices
-     * @param _index32    set to `true` if input indices are 32-bit
+     * @param _index32    set to {@code true} if input indices are 32-bit
      *
      * @return number of output indices after conversion
      */
@@ -1554,7 +1554,7 @@ public class BGFX {
      * @param _vertices pointer to first vertex represented as float x, y, z. Must contain at least number of vertices referenced by index buffer.
      * @param _stride   vertex stride
      * @param _indices  source indices
-     * @param _index32  set to `true` if input indices are 32-bit
+     * @param _index32  set to {@code true} if input indices are 32-bit
      */
     public static void bgfx_topology_sort_tri_list(@NativeType("bgfx_topology_sort_t") int _sort, @NativeType("void *") ByteBuffer _dst, @NativeType("float const *") FloatBuffer _dir, @NativeType("float const *") FloatBuffer _pos, @NativeType("void const *") ByteBuffer _vertices, @NativeType("uint32_t") int _stride, @NativeType("void const *") ByteBuffer _indices, @NativeType("bool") boolean _index32) {
         if (CHECKS) {
@@ -1574,7 +1574,7 @@ public class BGFX {
      * @param _vertices pointer to first vertex represented as float x, y, z. Must contain at least number of vertices referenced by index buffer.
      * @param _stride   vertex stride
      * @param _indices  source indices
-     * @param _index32  set to `true` if input indices are 32-bit
+     * @param _index32  set to {@code true} if input indices are 32-bit
      */
     public static void bgfx_topology_sort_tri_list(@NativeType("bgfx_topology_sort_t") int _sort, @NativeType("void *") ShortBuffer _dst, @NativeType("float const *") FloatBuffer _dir, @NativeType("float const *") FloatBuffer _pos, @NativeType("void const *") ByteBuffer _vertices, @NativeType("uint32_t") int _stride, @NativeType("void const *") ShortBuffer _indices, @NativeType("bool") boolean _index32) {
         if (CHECKS) {
@@ -1594,7 +1594,7 @@ public class BGFX {
      * @param _vertices pointer to first vertex represented as float x, y, z. Must contain at least number of vertices referenced by index buffer.
      * @param _stride   vertex stride
      * @param _indices  source indices
-     * @param _index32  set to `true` if input indices are 32-bit
+     * @param _index32  set to {@code true} if input indices are 32-bit
      */
     public static void bgfx_topology_sort_tri_list(@NativeType("bgfx_topology_sort_t") int _sort, @NativeType("void *") IntBuffer _dst, @NativeType("float const *") FloatBuffer _dir, @NativeType("float const *") FloatBuffer _pos, @NativeType("void const *") ByteBuffer _vertices, @NativeType("uint32_t") int _stride, @NativeType("void const *") IntBuffer _indices, @NativeType("bool") boolean _index32) {
         if (CHECKS) {
@@ -2172,12 +2172,14 @@ public class BGFX {
 
     /**
      * Prints into internal debug text character-buffer (VGA-compatible text mode).
+     * 
+     * <p><b>LWJGL note</b>: This is a vararg function that should be called with {@link Functions#dbg_text_printf dbg_text_printf} via the libffi bindings.</p>
      *
      * @param _x      x coordinate
      * @param _y      y coordinate
      * @param _attr   color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette (ANSI
      *                escape codes).
-     * @param _format `printf` style format
+     * @param _format {@code printf} style format
      */
     public static void bgfx_dbg_text_printf(@NativeType("uint16_t") int _x, @NativeType("uint16_t") int _y, @NativeType("uint8_t") int _attr, @NativeType("char const *") ByteBuffer _format) {
         if (CHECKS) {
@@ -2188,12 +2190,14 @@ public class BGFX {
 
     /**
      * Prints into internal debug text character-buffer (VGA-compatible text mode).
+     * 
+     * <p><b>LWJGL note</b>: This is a vararg function that should be called with {@link Functions#dbg_text_printf dbg_text_printf} via the libffi bindings.</p>
      *
      * @param _x      x coordinate
      * @param _y      y coordinate
      * @param _attr   color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette (ANSI
      *                escape codes).
-     * @param _format `printf` style format
+     * @param _format {@code printf} style format
      */
     public static void bgfx_dbg_text_printf(@NativeType("uint16_t") int _x, @NativeType("uint16_t") int _y, @NativeType("uint8_t") int _attr, @NativeType("char const *") CharSequence _format) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -2223,7 +2227,7 @@ public class BGFX {
      * @param _x       x coordinate
      * @param _y       y coordinate
      * @param _attr    color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette.
-     * @param _format  `printf` style format
+     * @param _format  {@code printf} style format
      * @param _argList additional arguments for format string
      */
     public static void bgfx_dbg_text_vprintf(@NativeType("uint16_t") int _x, @NativeType("uint16_t") int _y, @NativeType("uint8_t") int _attr, @NativeType("char const *") ByteBuffer _format, @NativeType("va_list") long _argList) {
@@ -2239,7 +2243,7 @@ public class BGFX {
      * @param _x       x coordinate
      * @param _y       y coordinate
      * @param _attr    color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette.
-     * @param _format  `printf` style format
+     * @param _format  {@code printf} style format
      * @param _argList additional arguments for format string
      */
     public static void bgfx_dbg_text_vprintf(@NativeType("uint16_t") int _x, @NativeType("uint16_t") int _y, @NativeType("uint8_t") int _attr, @NativeType("char const *") CharSequence _format, @NativeType("va_list") long _argList) {
@@ -3561,7 +3565,7 @@ public class BGFX {
      * same handle, but the handle reference count will be incremented. This means that the same number of {@link #bgfx_destroy_uniform destroy_uniform} must be called to properly
      * destroy the uniform.</p>
      * 
-     * <p>Predefined uniforms (declared in `bgfx_shader.sh`):</p>
+     * <p>Predefined uniforms (declared in {@code bgfx_shader.sh}):</p>
      * 
      * <ul>
      * <li>{@code u_viewRect vec4(x, y, width, height)} - view rectangle for current view, in pixels.</li>
@@ -3599,7 +3603,7 @@ public class BGFX {
      * same handle, but the handle reference count will be incremented. This means that the same number of {@link #bgfx_destroy_uniform destroy_uniform} must be called to properly
      * destroy the uniform.</p>
      * 
-     * <p>Predefined uniforms (declared in `bgfx_shader.sh`):</p>
+     * <p>Predefined uniforms (declared in {@code bgfx_shader.sh}):</p>
      * 
      * <ul>
      * <li>{@code u_viewRect vec4(x, y, width, height)} - view rectangle for current view, in pixels.</li>

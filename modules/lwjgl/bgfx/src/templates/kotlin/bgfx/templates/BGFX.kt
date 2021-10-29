@@ -965,7 +965,7 @@ RGBA16S
             PointerMapping.DATA_INT
         )..void.const.p("_indices", "source indices"),
         AutoSizeShr("(_index32 ? 2 : 1)", "_indices")..uint32_t("_numIndices", "number of input indices"),
-        bool("_index32", "set to `true` if input indices are 32-bit"),
+        bool("_index32", "set to {@code true} if input indices are 32-bit"),
 
         returnDoc = "number of output indices after conversion"
     )
@@ -998,7 +998,7 @@ RGBA16S
             PointerMapping.DATA_INT
         )..void.const.p("_indices", "source indices"),
         AutoSizeShr("(_index32 ? 2 : 1)", "_indices")..uint32_t("_numIndices", "number of input indices"),
-        bool("_index32", "set to `true` if input indices are 32-bit")
+        bool("_index32", "set to {@code true} if input indices are 32-bit")
     )
 
     uint8_t(
@@ -1150,7 +1150,11 @@ RGBA16S
 
     void(
         "dbg_text_printf",
-        "Prints into internal debug text character-buffer (VGA-compatible text mode).",
+        """
+        Prints into internal debug text character-buffer (VGA-compatible text mode).
+        
+        <b>LWJGL note</b>: This is a vararg function that should be called with {@link Functions\#dbg_text_printf dbg_text_printf} via the libffi bindings.
+        """,
 
         MapToInt..uint16_t("_x", "x coordinate"),
         MapToInt..uint16_t("_y", "y coordinate"),
@@ -1161,7 +1165,7 @@ RGBA16S
             escape codes).
             """
         ),
-        charASCII.const.p("_format", "`printf` style format")
+        charASCII.const.p("_format", "{@code printf} style format")
     )
 
     void(
@@ -1174,7 +1178,7 @@ RGBA16S
             "_attr",
             "color palette. Where top 4-bits represent index of background, and bottom 4-bits represent foreground color from standard VGA text palette."
         ),
-        charASCII.const.p("_format", "`printf` style format"),
+        charASCII.const.p("_format", "{@code printf} style format"),
         va_list("_argList", "additional arguments for format string")
     )
 
@@ -1855,7 +1859,7 @@ RGBA16S
         same handle, but the handle reference count will be incremented. This means that the same number of #destroy_uniform() must be called to properly
         destroy the uniform.
 
-        Predefined uniforms (declared in `bgfx_shader.sh`):
+        Predefined uniforms (declared in {@code bgfx_shader.sh}):
         ${ul(
             "{@code u_viewRect vec4(x, y, width, height)} - view rectangle for current view, in pixels.",
             "{@code u_viewTexel vec4(1.0/width, 1.0/height, undef, undef)} - inverse width and height",
