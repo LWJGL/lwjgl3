@@ -78,7 +78,7 @@ public class DynamicLinkLoader {
     public static long dlopen(@Nullable @NativeType("char const *") CharSequence filename, int mode) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCIISafe(filename, true);
+            stack.nUTF8Safe(filename, true);
             long filenameEncoded = filename == null ? NULL : stack.getPointerAddress();
             return ndlopen(filenameEncoded, mode);
         } finally {

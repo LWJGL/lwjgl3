@@ -55,7 +55,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_LINUX, nativeSubPath = "
         {@code filename} is #NULL, then the returned handle is for the main program.
         """,
 
-        nullable..charASCII.const.p("filename", "the name of the dynamic library to open, or #NULL"),
+        nullable..charUTF8.const.p("filename", "the name of the dynamic library to open, or #NULL"),
         int("mode", "a bitfield", Modes, LinkMode.BITFIELD)
     )
 

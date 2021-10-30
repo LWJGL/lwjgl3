@@ -24,7 +24,7 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
     public static MacOSXLibraryBundle getWithIdentifier(String bundleID) {
         long filePath = NULL;
         try (MemoryStack stack = stackPush()) {
-            filePath = CString2CFString(stack.ASCII(bundleID), kCFStringEncodingASCII);
+            filePath = CString2CFString(stack.UTF8(bundleID), kCFStringEncodingUTF8);
 
             long bundleRef = CFBundleGetBundleWithIdentifier(filePath);
             if (bundleRef == NULL) {

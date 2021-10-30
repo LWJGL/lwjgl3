@@ -171,7 +171,7 @@ public class DynamicLinkLoader {
     public static long dlopen(@Nullable @NativeType("char const *") CharSequence path, int mode) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCIISafe(path, true);
+            stack.nUTF8Safe(path, true);
             long pathEncoded = path == null ? NULL : stack.getPointerAddress();
             return ndlopen(pathEncoded, mode);
         } finally {
