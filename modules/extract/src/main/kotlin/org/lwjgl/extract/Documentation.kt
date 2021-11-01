@@ -29,15 +29,16 @@ internal class Documentation(
         return doc.toString().trim()
             .let { if (it.startsWith("-")) it.substring(1).trim() else it }
             .let {
-                /*if (it.isEmpty())
+                if (it.isEmpty()) {
                     ""
-                else*/
-                "${it[0].let { f ->
-                    if (it.length < 2 || !it[1].isUpperCase())
-                        f.lowercase()
-                    else
-                        f
-                }}${it.substring(1, if (it.endsWith('.') && it.indexOf('.') == it.lastIndex) it.lastIndex else it.length)}"
+                } else {
+                    "${it[0].let { f ->
+                        if (it.length < 2 || !it[1].isUpperCase())
+                            f.lowercase()
+                        else
+                            f
+                    }}${it.substring(1, if (it.endsWith('.') && it.indexOf('.') == it.lastIndex) it.lastIndex else it.length)}"
+                }
             }
     }
 }

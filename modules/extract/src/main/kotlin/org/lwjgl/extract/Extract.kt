@@ -331,6 +331,7 @@ internal fun parse(
                             cursor.parseMacro(context, constants)
                         }
                     }
+                    CXCursor_UnexposedDecl,
                     CXCursor_InclusionDirective,
                     CXCursor_MacroExpansion  -> {
                     }
