@@ -14,13 +14,13 @@ typedef void (APIENTRY *glClientWaitSemaphoreui64NVXPROC) (jint, intptr_t, intpt
 EXTERN_C_ENTER
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_NVXProgressFence_glCreateProgressFenceNVX(JNIEnv *__env, jclass clazz) {
-    glCreateProgressFenceNVXPROC glCreateProgressFenceNVX = (glCreateProgressFenceNVXPROC)tlsGetFunction(2214);
+    glCreateProgressFenceNVXPROC glCreateProgressFenceNVX = (glCreateProgressFenceNVXPROC)tlsGetFunction(2217);
     UNUSED_PARAM(clazz)
     return (jint)glCreateProgressFenceNVX();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXProgressFence_nglSignalSemaphoreui64NVX__IIJJ(JNIEnv *__env, jclass clazz, jint signalGpu, jint fenceObjectCount, jlong semaphoreArrayAddress, jlong fenceValueArrayAddress) {
-    glSignalSemaphoreui64NVXPROC glSignalSemaphoreui64NVX = (glSignalSemaphoreui64NVXPROC)tlsGetFunction(2215);
+    glSignalSemaphoreui64NVXPROC glSignalSemaphoreui64NVX = (glSignalSemaphoreui64NVXPROC)tlsGetFunction(2218);
     intptr_t semaphoreArray = (intptr_t)semaphoreArrayAddress;
     intptr_t fenceValueArray = (intptr_t)fenceValueArrayAddress;
     UNUSED_PARAM(clazz)
@@ -28,7 +28,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXProgressFence_nglSignalSemaphore
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXProgressFence_nglWaitSemaphoreui64NVX__IIJJ(JNIEnv *__env, jclass clazz, jint waitGpu, jint fenceObjectCount, jlong semaphoreArrayAddress, jlong fenceValueArrayAddress) {
-    glWaitSemaphoreui64NVXPROC glWaitSemaphoreui64NVX = (glWaitSemaphoreui64NVXPROC)tlsGetFunction(2216);
+    glWaitSemaphoreui64NVXPROC glWaitSemaphoreui64NVX = (glWaitSemaphoreui64NVXPROC)tlsGetFunction(2219);
     intptr_t semaphoreArray = (intptr_t)semaphoreArrayAddress;
     intptr_t fenceValueArray = (intptr_t)fenceValueArrayAddress;
     UNUSED_PARAM(clazz)
@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXProgressFence_nglWaitSemaphoreui
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXProgressFence_nglClientWaitSemaphoreui64NVX__IJJ(JNIEnv *__env, jclass clazz, jint fenceObjectCount, jlong semaphoreArrayAddress, jlong fenceValueArrayAddress) {
-    glClientWaitSemaphoreui64NVXPROC glClientWaitSemaphoreui64NVX = (glClientWaitSemaphoreui64NVXPROC)tlsGetFunction(2217);
+    glClientWaitSemaphoreui64NVXPROC glClientWaitSemaphoreui64NVX = (glClientWaitSemaphoreui64NVXPROC)tlsGetFunction(2220);
     intptr_t semaphoreArray = (intptr_t)semaphoreArrayAddress;
     intptr_t fenceValueArray = (intptr_t)fenceValueArrayAddress;
     UNUSED_PARAM(clazz)

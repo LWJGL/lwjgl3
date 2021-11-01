@@ -12,13 +12,13 @@ typedef void (APIENTRY *glGetFramebufferParameterivMESAPROC) (jint, jint, intptr
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_MESAFramebufferFlipY_glFramebufferParameteriMESA(JNIEnv *__env, jclass clazz, jint target, jint pname, jint param) {
-    glFramebufferParameteriMESAPROC glFramebufferParameteriMESA = (glFramebufferParameteriMESAPROC)tlsGetFunction(1901);
+    glFramebufferParameteriMESAPROC glFramebufferParameteriMESA = (glFramebufferParameteriMESAPROC)tlsGetFunction(1904);
     UNUSED_PARAM(clazz)
     glFramebufferParameteriMESA(target, pname, param);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_MESAFramebufferFlipY_nglGetFramebufferParameterivMESA__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
-    glGetFramebufferParameterivMESAPROC glGetFramebufferParameterivMESA = (glGetFramebufferParameterivMESAPROC)tlsGetFunction(1902);
+    glGetFramebufferParameterivMESAPROC glGetFramebufferParameterivMESA = (glGetFramebufferParameterivMESAPROC)tlsGetFunction(1905);
     intptr_t params = (intptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetFramebufferParameterivMESA(target, pname, params);
