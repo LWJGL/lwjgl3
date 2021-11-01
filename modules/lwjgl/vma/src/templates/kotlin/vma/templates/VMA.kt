@@ -2066,6 +2066,68 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         "DEFRAGMENTATION_FLAG_INCREMENTAL".enum("", 0x1)
     )
 
+    EnumConstant(
+        "Flags to be passed as ##VmaVirtualBlockCreateInfo{@code ::flags}. ({@code VmaVirtualBlockCreateFlagBits})",
+
+        "VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT".enum(
+            """
+            Enables alternative, linear allocation algorithm in this virtual block.
+
+            Specify this flag to enable linear allocation algorithm, which always creates new allocations after last one and doesn't reuse space from
+            allocations freed in between. It trades memory consumption for simplified algorithm and data structure, which has better performance and uses less
+            memory for metadata.
+
+            By using this flag, you can achieve behavior of free-at-once, stack, ring buffer, and double stack.
+            """,
+            0x00000001
+        ),
+        "VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT".enum(
+            """
+            Enables alternative, buddy allocation algorithm in this virtual block.
+
+            It operates on a tree of blocks, each having size that is a power of two and a half of its parent's size. Comparing to default algorithm, this one
+            provides faster allocation and deallocation and decreased external fragmentation, at the expense of more memory wasted (internal fragmentation).
+            """
+        ),
+        "VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK".enum(
+            "Bit mask to extract only {@code ALGORITHM} bits from entire set of flags.",
+            "VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT | VMA_VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT"
+        )
+    )
+
+    EnumConstant(
+        "Flags to be passed as ##VmaVirtualAllocationCreateInfo{@code ::flags}. ({@code VmaVirtualAllocationCreateFlagBits})",
+
+        "VIRTUAL_ALLOCATION_CREATE_UPPER_ADDRESS_BIT".enum(
+            """
+            Allocation will be created from upper stack in a double stack pool.
+
+            This flag is only allowed for virtual blocks created with #VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT flag.
+            """,
+            "VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT"
+        ),
+        "VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT".enum(
+            "Allocation strategy that tries to minimize memory usage.",
+            "VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT"
+        ),
+        "VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT".enum(
+            "Allocation strategy that tries to minimize allocation time.",
+            "VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT"
+        ),
+        "VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_FRAGMENTATION_BIT".enum(
+            "Allocation strategy that tries to minimize memory fragmentation.",
+            "VMA_ALLOCATION_CREATE_STRATEGY_MIN_FRAGMENTATION_BIT"
+        ),
+        "VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK".enum(
+            """
+            A bit mask to extract only {@code STRATEGY} bits from entire set of flags.
+
+            These stategy flags are binary compatible with equivalent flags in {@code VmaAllocationCreateFlagBits}.
+            """,
+            "VMA_ALLOCATION_CREATE_STRATEGY_MASK"
+        )
+    )
+
     VkResult(
         "CreateAllocator",
         """
@@ -2178,7 +2240,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
 
     void(
         "BuildStatsString",
-        "Builds and returns statistics as string in JSON format.",
+        "Builds and returns statistics as a null-terminated string in JSON format.",
 
         VmaAllocator("allocator", ""),
         Check(1)..charASCII.p.p("ppStatsString", "must be freed using #FreeStatsString() function"),
@@ -3052,5 +3114,125 @@ vmaFreeMemory(allocator, allocation);""")}
         VmaAllocator("allocator", ""),
         VkImage("image", ""),
         nullable..VmaAllocation("allocation", "")
+    )
+
+    VkResult(
+        "CreateVirtualBlock",
+        "Creates new {@code VmaVirtualBlock} object.",
+
+        VmaVirtualBlockCreateInfo.const.p("pCreateInfo", "parameters for creation"),
+        Check(1)..VmaVirtualBlock.p("pVirtualBlock", "returned virtual block object or #NULL if creation failed")
+    )
+
+    void(
+        "DestroyVirtualBlock",
+        """
+        Destroys {@code VmaVirtualBlock} object.
+
+        Please note that you should consciously handle virtual allocations that could remain unfreed in the block. You should either free them individually
+        using #VirtualFree() or call #ClearVirtualBlock() if you are sure this is what you want. If you do neither, an assert is called.
+
+        If you keep pointers to some additional metadata associated with your virtual allocations in their {@code pUserData}, don't forget to free them.
+        """,
+
+        VmaVirtualBlock("virtualBlock", "")
+    )
+
+    VkBool32(
+        "IsVirtualBlockEmpty",
+        "Returns true of the {@code VmaVirtualBlock} is empty - contains 0 virtual allocations and has all its space available for new allocations.",
+
+        VmaVirtualBlock("virtualBlock", "")
+    )
+
+    void(
+        "GetVirtualAllocationInfo",
+        "Returns information about a specific virtual allocation within a virtual block, like its size and {@code pUserData} pointer.",
+
+        VmaVirtualBlock("virtualBlock", ""),
+        VkDeviceSize("offset", ""),
+        VmaVirtualAllocationInfo.p("pVirtualAllocInfo", "")
+    )
+
+    VkResult(
+        "VirtualAllocate",
+        """
+        Allocates new virtual allocation inside given {@code VmaVirtualBlock}.
+
+        There is no handle type for a virtual allocation. Virtual allocations within a specific virtual block are uniquely identified by their offsets.
+
+        If the allocation fails due to not enough free space available, {@code VK_ERROR_OUT_OF_DEVICE_MEMORY} is returned (despite the function doesn't ever
+        allocate actual GPU memory).
+        """,
+
+        VmaVirtualBlock("virtualBlock", ""),
+        VmaVirtualAllocationCreateInfo.const.p("pCreateInfo", ""),
+        Check(1)..VkDeviceSize.p("pOffset", "")
+    )
+
+    void(
+        "VirtualFree",
+        "Frees virtual allocation inside given {@code VmaVirtualBlock}.",
+
+        VmaVirtualBlock("virtualBlock", ""),
+        VkDeviceSize("offset", "")
+    )
+
+    void(
+        "ClearVirtualBlock",
+        """
+        Frees all virtual allocations inside given {@code VmaVirtualBlock}.
+
+        You must either call this function or free each virtual allocation individually with #VirtualFree() before destroying a virtual block. Otherwise, an
+        assert is called.
+
+        If you keep pointer to some additional metadata associated with your virtual allocation in its {@code pUserData}, don't forget to free it as well.
+        """,
+
+        VmaVirtualBlock("virtualBlock", "")
+    )
+
+    void(
+        "SetVirtualAllocationUserData",
+        "Changes custom pointer associated with given virtual allocation.",
+
+        VmaVirtualBlock("virtualBlock", ""),
+        VkDeviceSize("offset", ""),
+        opaque_p("pUserData", "")
+    )
+
+    void(
+        "CalculateVirtualBlockStats",
+        "Calculates and returns statistics about virtual allocations and memory usage in given {@code VmaVirtualBlock}.",
+
+        VmaVirtualBlock("virtualBlock", ""),
+        VmaStatInfo.p("pStatInfo", "")
+    )
+
+    void(
+        "BuildVirtualBlockStatsString",
+        """
+        Builds and returns a null-terminated string in JSON format with information about given {@code VmaVirtualBlock}.
+
+        Returned string must be freed using #FreeVirtualBlockStatsString().
+        """,
+
+        VmaVirtualBlock("virtualBlock", "virtual block"),
+        Check(1)..charUTF8.p.p("ppStatsString", "returned string"),
+        VkBool32(
+            "detailedMap",
+            """
+            pass {@code VK_FALSE} to only obtain statistics as returned by #CalculateVirtualBlockStats(). Pass {@code VK_TRUE} to also obtain full list of
+            allocations and free spaces.
+            """
+        )
+    )
+
+    void(
+        "FreeVirtualBlockStatsString",
+        "Frees a string returned by #BuildVirtualBlockStatsString().",
+
+        VmaVirtualBlock("virtualBlock", ""),
+        Unsafe..char.p("pStatsString", "")
     )
 }

@@ -11,6 +11,7 @@ val VmaAllocation = "VmaAllocation".handle
 val VmaAllocator = "VmaAllocator".handle
 val VmaDefragmentationContext = "VmaDefragmentationContext".handle
 val VmaPool = "VmaPool".handle
+val VmaVirtualBlock = "VmaVirtualBlock".handle
 
 val VmaAllocationCreateFlags = "VmaAllocationCreateFlags".enumType
 val VmaAllocatorCreateFlags = "VmaAllocatorCreateFlags".enumType
@@ -18,6 +19,8 @@ val VmaDefragmentationFlags = "VmaDefragmentationFlags".enumType
 val VmaMemoryUsage = "VmaMemoryUsage".enumType
 val VmaPoolCreateFlags = "VmaPoolCreateFlags".enumType
 val VmaRecordFlags = "VmaRecordFlags".enumType
+val VmaVirtualAllocationCreateFlags = typedef(VkFlags, "VmaVirtualAllocationCreateFlags")
+val VmaVirtualBlockCreateFlagBits = "VmaVirtualBlockCreateFlagBits".enumType
 
 val PFN_vmaAllocateDeviceMemoryFunction = Module.VMA.callback {
     void(
@@ -725,4 +728,79 @@ val VmaDefragmentationStats = struct(Module.VMA, "VmaDefragmentationStats", muta
     VkDeviceSize("bytesFreed", "total number of bytes that have been released to the system by freeing empty {@code VkDeviceMemory} objects")
     uint32_t("allocationsMoved", "tumber of allocations that have been moved to different places")
     uint32_t("deviceMemoryBlocksFreed", "number of empty {@code VkDeviceMemory} objects that have been released to the system")
+}
+
+val VmaVirtualBlockCreateInfo = struct(Module.VMA, "VmaVirtualBlockCreateInfo") {
+    javaImport("org.lwjgl.vulkan.*")
+    documentation = "Parameters of created {@code VmaVirtualBlock} object to be passed to #CreateVirtualBlock()."
+
+    VkDeviceSize(
+        "size",
+        """
+        total size of the virtual block.
+
+        Sizes can be expressed in bytes or any units you want as long as you are consistent in using them. For example, if you allocate from some array of
+        structures, 1 can mean single instance of entire structure.
+        """
+    )
+    VmaVirtualBlockCreateFlagBits("flags", "use combination of {@code VmaVirtualBlockCreateFlagBits}").links("VIRTUAL_BLOCK_CREATE_\\w+", LinkMode.BITFIELD)
+    nullable..VkAllocationCallbacks.const.p(
+        "pAllocationCallbacks",
+        """
+        custom CPU memory allocation callbacks. Optional.
+
+        Optional, can be null. When specified, they will be used for all CPU-side memory allocations.
+        """
+    )
+}
+
+val VmaVirtualAllocationCreateInfo = struct(Module.VMA, "VmaVirtualAllocationCreateInfo") {
+    documentation = "Parameters of created virtual allocation to be passed to #VirtualAllocate()."
+
+    VkDeviceSize(
+        "size",
+        """
+        size of the allocation.
+
+        Cannot be zero.
+        """
+    )
+    VkDeviceSize(
+        "alignment",
+        """
+        required alignment of the allocation. Optional.
+
+        Must be power of two. Special value 0 has the same meaning as 1 - means no special alignment is required, so allocation can start at any offset.
+        """
+    )
+    VmaVirtualAllocationCreateFlags("flags", "use combination of {@code VmaVirtualAllocationCreateFlagBits}").links("VIRTUAL_ALLOCATION_CREATE_\\w+", LinkMode.BITFIELD)
+    opaque_p(
+        "pUserData",
+        """
+        custom pointer to be associated with the allocation. Optional.
+
+        It can be any value and can be used for user-defined purposes. It can be fetched or changed later.
+        """
+    )
+}
+
+val VmaVirtualAllocationInfo = struct(Module.VMA, "VmaVirtualAllocationInfo", mutable = false) {
+    documentation = "Parameters of an existing virtual allocation, returned by #GetVirtualAllocationInfo()."
+
+    VkDeviceSize(
+        "size",
+        """
+        size of the allocation.
+
+        Same value as passed in ##VmaVirtualAllocationCreateInfo{@code ::size}.
+        """
+    )
+    opaque_p(
+        "pUserData",
+        """
+        custom pointer associated with the allocation.
+
+        Same value as passed in ##VmaVirtualAllocationCreateInfo{@code ::pUserData} or to #SetVirtualAllocationUserData().
+        """
+    )
 }

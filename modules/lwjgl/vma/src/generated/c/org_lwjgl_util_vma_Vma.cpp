@@ -433,4 +433,78 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaDestroyImage(JNIEnv *__en
     vmaDestroyImage(allocator, (VkImage)image, allocation);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCreateVirtualBlock(JNIEnv *__env, jclass clazz, jlong pCreateInfoAddress, jlong pVirtualBlockAddress) {
+    VmaVirtualBlockCreateInfo const *pCreateInfo = (VmaVirtualBlockCreateInfo const *)(intptr_t)pCreateInfoAddress;
+    VmaVirtualBlock *pVirtualBlock = (VmaVirtualBlock *)(intptr_t)pVirtualBlockAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaCreateVirtualBlock(pCreateInfo, pVirtualBlock);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaDestroyVirtualBlock(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress) {
+    VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(intptr_t)virtualBlockAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaDestroyVirtualBlock(virtualBlock);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaIsVirtualBlockEmpty(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress) {
+    VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(intptr_t)virtualBlockAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaIsVirtualBlockEmpty(virtualBlock);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetVirtualAllocationInfo(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong offset, jlong pVirtualAllocInfoAddress) {
+    VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(intptr_t)virtualBlockAddress;
+    VmaVirtualAllocationInfo *pVirtualAllocInfo = (VmaVirtualAllocationInfo *)(intptr_t)pVirtualAllocInfoAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaGetVirtualAllocationInfo(virtualBlock, (VkDeviceSize)offset, pVirtualAllocInfo);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaVirtualAllocate(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong pCreateInfoAddress, jlong pOffsetAddress) {
+    VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(intptr_t)virtualBlockAddress;
+    VmaVirtualAllocationCreateInfo const *pCreateInfo = (VmaVirtualAllocationCreateInfo const *)(intptr_t)pCreateInfoAddress;
+    VkDeviceSize *pOffset = (VkDeviceSize *)(intptr_t)pOffsetAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)vmaVirtualAllocate(virtualBlock, pCreateInfo, pOffset);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaVirtualFree(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong offset) {
+    VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(intptr_t)virtualBlockAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaVirtualFree(virtualBlock, (VkDeviceSize)offset);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaClearVirtualBlock(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress) {
+    VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(intptr_t)virtualBlockAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaClearVirtualBlock(virtualBlock);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaSetVirtualAllocationUserData(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong offset, jlong pUserDataAddress) {
+    VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(intptr_t)virtualBlockAddress;
+    void *pUserData = (void *)(intptr_t)pUserDataAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaSetVirtualAllocationUserData(virtualBlock, (VkDeviceSize)offset, pUserData);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCalculateVirtualBlockStats(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong pStatInfoAddress) {
+    VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(intptr_t)virtualBlockAddress;
+    VmaStatInfo *pStatInfo = (VmaStatInfo *)(intptr_t)pStatInfoAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaCalculateVirtualBlockStats(virtualBlock, pStatInfo);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaBuildVirtualBlockStatsString(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong ppStatsStringAddress, jint detailedMap) {
+    VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(intptr_t)virtualBlockAddress;
+    char **ppStatsString = (char **)(intptr_t)ppStatsStringAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaBuildVirtualBlockStatsString(virtualBlock, ppStatsString, (VkBool32)detailedMap);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaFreeVirtualBlockStatsString(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong pStatsStringAddress) {
+    VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(intptr_t)virtualBlockAddress;
+    char *pStatsString = (char *)(intptr_t)pStatsStringAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaFreeVirtualBlockStatsString(virtualBlock, pStatsString);
+}
+
 EXTERN_C_EXIT

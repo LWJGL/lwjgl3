@@ -1933,6 +1933,63 @@ public class Vma {
     /** Flags to be used in {@link #vmaDefragmentationBegin DefragmentationBegin}. {@code VmaDefragmentationFlagBits} */
     public static final int VMA_DEFRAGMENTATION_FLAG_INCREMENTAL = 0x1;
 
+    /**
+     * Flags to be passed as {@link VmaVirtualBlockCreateInfo}{@code ::flags}. ({@code VmaVirtualBlockCreateFlagBits})
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT} - 
+     * Enables alternative, linear allocation algorithm in this virtual block.
+     * 
+     * <p>Specify this flag to enable linear allocation algorithm, which always creates new allocations after last one and doesn't reuse space from
+     * allocations freed in between. It trades memory consumption for simplified algorithm and data structure, which has better performance and uses less
+     * memory for metadata.</p>
+     * 
+     * <p>By using this flag, you can achieve behavior of free-at-once, stack, ring buffer, and double stack.</p>
+     * </li>
+     * <li>{@link #VMA_VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT} - 
+     * Enables alternative, buddy allocation algorithm in this virtual block.
+     * 
+     * <p>It operates on a tree of blocks, each having size that is a power of two and a half of its parent's size. Comparing to default algorithm, this one
+     * provides faster allocation and deallocation and decreased external fragmentation, at the expense of more memory wasted (internal fragmentation).</p>
+     * </li>
+     * <li>{@link #VMA_VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK} - Bit mask to extract only {@code ALGORITHM} bits from entire set of flags.</li>
+     * </ul>
+     */
+    public static final int
+        VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT = 0x1,
+        VMA_VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT  = 0x2,
+        VMA_VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK       = VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT | VMA_VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT;
+
+    /**
+     * Flags to be passed as {@link VmaVirtualAllocationCreateInfo}{@code ::flags}. ({@code VmaVirtualAllocationCreateFlagBits})
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VMA_VIRTUAL_ALLOCATION_CREATE_UPPER_ADDRESS_BIT VIRTUAL_ALLOCATION_CREATE_UPPER_ADDRESS_BIT} - 
+     * Allocation will be created from upper stack in a double stack pool.
+     * 
+     * <p>This flag is only allowed for virtual blocks created with {@link #VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT} flag.</p>
+     * </li>
+     * <li>{@link #VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT} - Allocation strategy that tries to minimize memory usage.</li>
+     * <li>{@link #VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT} - Allocation strategy that tries to minimize allocation time.</li>
+     * <li>{@link #VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_FRAGMENTATION_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_FRAGMENTATION_BIT} - Allocation strategy that tries to minimize memory fragmentation.</li>
+     * <li>{@link #VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK} - 
+     * A bit mask to extract only {@code STRATEGY} bits from entire set of flags.
+     * 
+     * <p>These stategy flags are binary compatible with equivalent flags in {@code VmaAllocationCreateFlagBits}.</p>
+     * </li>
+     * </ul>
+     */
+    public static final int
+        VMA_VIRTUAL_ALLOCATION_CREATE_UPPER_ADDRESS_BIT              = VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT,
+        VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT        = VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT,
+        VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT          = VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT,
+        VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_FRAGMENTATION_BIT = VMA_ALLOCATION_CREATE_STRATEGY_MIN_FRAGMENTATION_BIT,
+        VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK                  = VMA_ALLOCATION_CREATE_STRATEGY_MASK;
+
     protected Vma() {
         throw new UnsupportedOperationException();
     }
@@ -2105,7 +2162,7 @@ public class Vma {
     public static native void nvmaBuildStatsString(long allocator, long ppStatsString, int detailedMap);
 
     /**
-     * Builds and returns statistics as string in JSON format.
+     * Builds and returns statistics as a null-terminated string in JSON format.
      *
      * @param ppStatsString must be freed using {@link #vmaFreeStatsString FreeStatsString} function
      */
@@ -3232,6 +3289,192 @@ public class Vma {
             check(allocator);
         }
         nvmaDestroyImage(allocator, image, allocation);
+    }
+
+    // --- [ vmaCreateVirtualBlock ] ---
+
+    /** Unsafe version of: {@link #vmaCreateVirtualBlock CreateVirtualBlock} */
+    public static native int nvmaCreateVirtualBlock(long pCreateInfo, long pVirtualBlock);
+
+    /**
+     * Creates new {@code VmaVirtualBlock} object.
+     *
+     * @param pCreateInfo   parameters for creation
+     * @param pVirtualBlock returned virtual block object or {@code NULL} if creation failed
+     */
+    @NativeType("VkResult")
+    public static int vmaCreateVirtualBlock(@NativeType("VmaVirtualBlockCreateInfo const *") VmaVirtualBlockCreateInfo pCreateInfo, @NativeType("VmaVirtualBlock *") PointerBuffer pVirtualBlock) {
+        if (CHECKS) {
+            check(pVirtualBlock, 1);
+            VmaVirtualBlockCreateInfo.validate(pCreateInfo.address());
+        }
+        return nvmaCreateVirtualBlock(pCreateInfo.address(), memAddress(pVirtualBlock));
+    }
+
+    // --- [ vmaDestroyVirtualBlock ] ---
+
+    /** Unsafe version of: {@link #vmaDestroyVirtualBlock DestroyVirtualBlock} */
+    public static native void nvmaDestroyVirtualBlock(long virtualBlock);
+
+    /**
+     * Destroys {@code VmaVirtualBlock} object.
+     * 
+     * <p>Please note that you should consciously handle virtual allocations that could remain unfreed in the block. You should either free them individually
+     * using {@link #vmaVirtualFree VirtualFree} or call {@link #vmaClearVirtualBlock ClearVirtualBlock} if you are sure this is what you want. If you do neither, an assert is called.</p>
+     * 
+     * <p>If you keep pointers to some additional metadata associated with your virtual allocations in their {@code pUserData}, don't forget to free them.</p>
+     */
+    public static void vmaDestroyVirtualBlock(@NativeType("VmaVirtualBlock") long virtualBlock) {
+        if (CHECKS) {
+            check(virtualBlock);
+        }
+        nvmaDestroyVirtualBlock(virtualBlock);
+    }
+
+    // --- [ vmaIsVirtualBlockEmpty ] ---
+
+    /** Unsafe version of: {@link #vmaIsVirtualBlockEmpty IsVirtualBlockEmpty} */
+    public static native int nvmaIsVirtualBlockEmpty(long virtualBlock);
+
+    /** Returns true of the {@code VmaVirtualBlock} is empty - contains 0 virtual allocations and has all its space available for new allocations. */
+    @NativeType("VkBool32")
+    public static boolean vmaIsVirtualBlockEmpty(@NativeType("VmaVirtualBlock") long virtualBlock) {
+        if (CHECKS) {
+            check(virtualBlock);
+        }
+        return nvmaIsVirtualBlockEmpty(virtualBlock) != 0;
+    }
+
+    // --- [ vmaGetVirtualAllocationInfo ] ---
+
+    /** Unsafe version of: {@link #vmaGetVirtualAllocationInfo GetVirtualAllocationInfo} */
+    public static native void nvmaGetVirtualAllocationInfo(long virtualBlock, long offset, long pVirtualAllocInfo);
+
+    /** Returns information about a specific virtual allocation within a virtual block, like its size and {@code pUserData} pointer. */
+    public static void vmaGetVirtualAllocationInfo(@NativeType("VmaVirtualBlock") long virtualBlock, @NativeType("VkDeviceSize") long offset, @NativeType("VmaVirtualAllocationInfo *") VmaVirtualAllocationInfo pVirtualAllocInfo) {
+        if (CHECKS) {
+            check(virtualBlock);
+        }
+        nvmaGetVirtualAllocationInfo(virtualBlock, offset, pVirtualAllocInfo.address());
+    }
+
+    // --- [ vmaVirtualAllocate ] ---
+
+    /** Unsafe version of: {@link #vmaVirtualAllocate VirtualAllocate} */
+    public static native int nvmaVirtualAllocate(long virtualBlock, long pCreateInfo, long pOffset);
+
+    /**
+     * Allocates new virtual allocation inside given {@code VmaVirtualBlock}.
+     * 
+     * <p>There is no handle type for a virtual allocation. Virtual allocations within a specific virtual block are uniquely identified by their offsets.</p>
+     * 
+     * <p>If the allocation fails due to not enough free space available, {@code VK_ERROR_OUT_OF_DEVICE_MEMORY} is returned (despite the function doesn't ever
+     * allocate actual GPU memory).</p>
+     */
+    @NativeType("VkResult")
+    public static int vmaVirtualAllocate(@NativeType("VmaVirtualBlock") long virtualBlock, @NativeType("VmaVirtualAllocationCreateInfo const *") VmaVirtualAllocationCreateInfo pCreateInfo, @NativeType("VkDeviceSize *") LongBuffer pOffset) {
+        if (CHECKS) {
+            check(virtualBlock);
+            check(pOffset, 1);
+            VmaVirtualAllocationCreateInfo.validate(pCreateInfo.address());
+        }
+        return nvmaVirtualAllocate(virtualBlock, pCreateInfo.address(), memAddress(pOffset));
+    }
+
+    // --- [ vmaVirtualFree ] ---
+
+    /** Unsafe version of: {@link #vmaVirtualFree VirtualFree} */
+    public static native void nvmaVirtualFree(long virtualBlock, long offset);
+
+    /** Frees virtual allocation inside given {@code VmaVirtualBlock}. */
+    public static void vmaVirtualFree(@NativeType("VmaVirtualBlock") long virtualBlock, @NativeType("VkDeviceSize") long offset) {
+        if (CHECKS) {
+            check(virtualBlock);
+        }
+        nvmaVirtualFree(virtualBlock, offset);
+    }
+
+    // --- [ vmaClearVirtualBlock ] ---
+
+    /** Unsafe version of: {@link #vmaClearVirtualBlock ClearVirtualBlock} */
+    public static native void nvmaClearVirtualBlock(long virtualBlock);
+
+    /**
+     * Frees all virtual allocations inside given {@code VmaVirtualBlock}.
+     * 
+     * <p>You must either call this function or free each virtual allocation individually with {@link #vmaVirtualFree VirtualFree} before destroying a virtual block. Otherwise, an
+     * assert is called.</p>
+     * 
+     * <p>If you keep pointer to some additional metadata associated with your virtual allocation in its {@code pUserData}, don't forget to free it as well.</p>
+     */
+    public static void vmaClearVirtualBlock(@NativeType("VmaVirtualBlock") long virtualBlock) {
+        if (CHECKS) {
+            check(virtualBlock);
+        }
+        nvmaClearVirtualBlock(virtualBlock);
+    }
+
+    // --- [ vmaSetVirtualAllocationUserData ] ---
+
+    /** Unsafe version of: {@link #vmaSetVirtualAllocationUserData SetVirtualAllocationUserData} */
+    public static native void nvmaSetVirtualAllocationUserData(long virtualBlock, long offset, long pUserData);
+
+    /** Changes custom pointer associated with given virtual allocation. */
+    public static void vmaSetVirtualAllocationUserData(@NativeType("VmaVirtualBlock") long virtualBlock, @NativeType("VkDeviceSize") long offset, @NativeType("void *") long pUserData) {
+        if (CHECKS) {
+            check(virtualBlock);
+            check(pUserData);
+        }
+        nvmaSetVirtualAllocationUserData(virtualBlock, offset, pUserData);
+    }
+
+    // --- [ vmaCalculateVirtualBlockStats ] ---
+
+    /** Unsafe version of: {@link #vmaCalculateVirtualBlockStats CalculateVirtualBlockStats} */
+    public static native void nvmaCalculateVirtualBlockStats(long virtualBlock, long pStatInfo);
+
+    /** Calculates and returns statistics about virtual allocations and memory usage in given {@code VmaVirtualBlock}. */
+    public static void vmaCalculateVirtualBlockStats(@NativeType("VmaVirtualBlock") long virtualBlock, @NativeType("VmaStatInfo *") VmaStatInfo pStatInfo) {
+        if (CHECKS) {
+            check(virtualBlock);
+        }
+        nvmaCalculateVirtualBlockStats(virtualBlock, pStatInfo.address());
+    }
+
+    // --- [ vmaBuildVirtualBlockStatsString ] ---
+
+    /** Unsafe version of: {@link #vmaBuildVirtualBlockStatsString BuildVirtualBlockStatsString} */
+    public static native void nvmaBuildVirtualBlockStatsString(long virtualBlock, long ppStatsString, int detailedMap);
+
+    /**
+     * Builds and returns a null-terminated string in JSON format with information about given {@code VmaVirtualBlock}.
+     * 
+     * <p>Returned string must be freed using {@link #vmaFreeVirtualBlockStatsString FreeVirtualBlockStatsString}.</p>
+     *
+     * @param virtualBlock  virtual block
+     * @param ppStatsString returned string
+     * @param detailedMap   pass {@code VK_FALSE} to only obtain statistics as returned by {@link #vmaCalculateVirtualBlockStats CalculateVirtualBlockStats}. Pass {@code VK_TRUE} to also obtain full list of
+     *                      allocations and free spaces.
+     */
+    public static void vmaBuildVirtualBlockStatsString(@NativeType("VmaVirtualBlock") long virtualBlock, @NativeType("char **") PointerBuffer ppStatsString, @NativeType("VkBool32") boolean detailedMap) {
+        if (CHECKS) {
+            check(virtualBlock);
+            check(ppStatsString, 1);
+        }
+        nvmaBuildVirtualBlockStatsString(virtualBlock, memAddress(ppStatsString), detailedMap ? 1 : 0);
+    }
+
+    // --- [ vmaFreeVirtualBlockStatsString ] ---
+
+    /** Unsafe version of: {@link #vmaFreeVirtualBlockStatsString FreeVirtualBlockStatsString} */
+    public static native void nvmaFreeVirtualBlockStatsString(long virtualBlock, long pStatsString);
+
+    /** Frees a string returned by {@link #vmaBuildVirtualBlockStatsString BuildVirtualBlockStatsString}. */
+    public static void vmaFreeVirtualBlockStatsString(@NativeType("VmaVirtualBlock") long virtualBlock, @NativeType("char *") ByteBuffer pStatsString) {
+        if (CHECKS) {
+            check(virtualBlock);
+        }
+        nvmaFreeVirtualBlockStatsString(virtualBlock, memAddress(pStatsString));
     }
 
 }
