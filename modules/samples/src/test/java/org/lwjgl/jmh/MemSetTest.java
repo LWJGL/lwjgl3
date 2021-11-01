@@ -4,10 +4,10 @@
  */
 package org.lwjgl.jmh;
 
+import org.lwjgl.*;
 import org.openjdk.jmh.annotations.*;
 import sun.misc.*;
 
-import java.nio.*;
 import java.util.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
@@ -18,102 +18,71 @@ public class MemSetTest {
 
     private static final Unsafe UNSAFE = Bench.getUnsafeInstance();
 
-    private static final int BUFFER_SIZE = 128 * 1024;
+    private static final int ARRAY_COUNT = 2048;
+    private static final int MAX_SIZE    = 260;
 
-    private static final long m = nmemAlignedAlloc(64, BUFFER_SIZE);
+    private byte[][]      arrays;
+    private PointerBuffer buffers;
+    private int[]         offsets;
 
-    private static final byte[] a = new byte[BUFFER_SIZE];
+    @Param("0")
+    private byte value;
 
-    @Param({"32", "256", "1024"})
-    public int length;
+    @Setup
+    public void setup() {
+        Random rand = new Random(7);
+
+        arrays = new byte[ARRAY_COUNT][];
+        buffers = memAllocPointer(ARRAY_COUNT);
+        offsets = new int[ARRAY_COUNT];
+        for (int i = 0; i < ARRAY_COUNT; i++) {
+            int len = 8 + rand.nextInt(MAX_SIZE - 8);
+
+            arrays[i] = new byte[len];
+            buffers.put(i, nmemAlloc(len));
+            offsets[i] = i % 16 != 0 ? 0 : rand.nextInt(8); // 25% unaligned head
+        }
+    }
+
+    @TearDown
+    public void tearDown() {
+        for (int i = 0; i < buffers.capacity(); i++) {
+            nmemFree(buffers.get(i));
+        }
+        buffers.free();
+    }
 
     @Benchmark
     public void offheap_LWJGL() {
-        memSet(m, 0, length);
+        for (int i = 0; i < buffers.capacity(); i++) {
+            int offset = offsets[i];
+            memSet(buffers.get(i) + offset, value, arrays[i].length - offset);
+        }
     }
 
     @Benchmark
     public void offheap_baseline() {
-        UNSAFE.setMemory(null, m, length, (byte)0);
-    }
-
-    @Benchmark
-    public void offheap_java() {
-        memSetLoop(m, (byte)0, length);
+        for (int i = 0; i < buffers.capacity(); i++) {
+            int offset = offsets[i];
+            UNSAFE.setMemory(null, buffers.get(i) + offset, arrays[i].length - offset, value);
+        }
     }
 
     @Benchmark
     public void offheap_libc() {
-        nmemset(m, 0, length);
+        for (int i = 0; i < buffers.capacity(); i++) {
+            int offset = offsets[i];
+            nmemset(buffers.get(i) + offset, value, arrays[i].length - offset);
+        }
     }
 
     @Benchmark
     public void array_baseline() {
-        Arrays.fill(a, 0, length, (byte)0);
-    }
-
-    @Benchmark
-    public void array_libc() {
-        nmemset(a, 0, length);
-    }
-
-    private static void memSetLoop(long dst, byte value, int bytes) {
-        int i = 0;
-
-        int  misalignment = (int)dst & 7;
-        long fill         = fill(value);
-
-        if (8 <= bytes) {
-            if (misalignment != 0) {
-                UNSAFE.putLong(null, dst - misalignment, merge(UNSAFE.getLong(null, dst - misalignment), fill, shr(-1L, misalignment)));
-                i += 8 - misalignment;
-            }
-
-            // Aligned longs for performance
-            for (; i <= bytes - 8; i += 8) {
-                UNSAFE.putLong(null, dst + i, fill);
-            }
-        } else if (misalignment != 0 && 0 < bytes) {
-            UNSAFE.putLong(null, dst - misalignment, merge(UNSAFE.getLong(null, dst - misalignment), fill, shr(shl(-1L, 8 - bytes), misalignment)));
-            i += 8 - misalignment;
+        for (int i = 0; i < arrays.length; i++) {
+            byte[] array  = arrays[i];
+            int    offset = offsets[i];
+            Arrays.fill(array, offset, array.length, value);
         }
-
-        // Aligned tail
-        if (i < bytes) {
-            UNSAFE.putLong(null, dst + i, merge(UNSAFE.getLong(null, dst + i), fill, shl(-1L, 8 - (bytes - i))));
-        }
-    }
-
-    private static long shl(long value, int bytes) {
-        if (ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN) {
-            return value << (bytes << 3);
-        } else {
-            return value >>> (bytes << 3);
-        }
-    }
-
-    private static long shr(long value, int bytes) {
-        if (ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN) {
-            return value >>> (bytes << 3);
-        } else {
-            return value << (bytes << 3);
-        }
-    }
-
-    private static long merge(long a, long b, long mask) {
-        return a ^ ((a ^ b) & mask);
-    }
-
-    private static long fill(byte value) {
-        long fill = value;
-
-        if (value != 0) {
-            fill |= fill << 8;
-            fill |= fill << 16;
-            fill |= fill << 32;
-        }
-
-        return fill;
     }
 
 }

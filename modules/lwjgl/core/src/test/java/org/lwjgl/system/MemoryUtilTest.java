@@ -65,24 +65,44 @@ public class MemoryUtilTest {
     }
 
     public void testMemSet() {
-        ByteBuffer buffer = BufferUtils.createByteBuffer(32);
-        for (int i = 0; i < buffer.capacity(); i++) {
-            buffer.put(i, (byte)i);
-        }
+        for (int size = 2; size <= (1 << 16); size <<= 1) {
+            for (int offset = -1; offset <= 1; offset++) {
+                ByteBuffer buffer = memAlloc(size + offset);
+                for (int i = 0; i < buffer.capacity(); i++) {
+                    buffer.put(i, (byte)0);
+                }
+                memSet(memAddress(buffer), 0x7F, buffer.capacity());
+                for (int i = 0; i < buffer.capacity(); i++) {
+                    assertEquals(buffer.get(i), 0x7F);
+                }
+                memFree(buffer);
+            }
 
-        memSet(memAddress(buffer), 0x7F, buffer.capacity());
+            for (int misalignment = 1; misalignment < 8; misalignment++) {
+                ByteBuffer aligned = memAlloc(size + 8);
+                for (int i = 0; i < aligned.capacity(); i++) {
+                    aligned.put(i, (byte)0);
+                }
 
-        for (int i = 0; i < buffer.capacity(); i++) {
-            assertEquals(buffer.get(i), 0x7F);
+                ByteBuffer buffer = memSlice(aligned, misalignment, size);
+                memSet(memAddress(buffer), 0x7F, buffer.capacity());
+                assertEquals(aligned.get(misalignment - 1), 0);
+                for (int i = 0; i < buffer.capacity(); i++) {
+                    assertEquals(buffer.get(i), 0x7F);
+                }
+                assertEquals(aligned.get(misalignment + size), 0);
+
+                memFree(aligned);
+            }
         }
     }
 
     public void testMemSetMisaligned() {
+        long ref = nmemAlloc(16);
+        long mem = nmemAlloc(16);
         for (int i = 0; i < 16; i++) {
-            for (int j = 0; j <= (16 - i); j++) {
+            for (int j = 1; j <= (16 - i); j++) {
                 // cannot trust the memSet in nmemCalloc yet
-                long ref = nmemAlloc(16);
-                long mem = nmemAlloc(16);
                 memSetReference(ref, 0, 16);
                 memSetReference(mem, 0, 16);
 
@@ -93,11 +113,10 @@ public class MemoryUtilTest {
                 for (int k = 0; k < 16; k++) {
                     assertEquals(memGetByte(mem + k), memGetByte(ref + k));
                 }
-
-                nmemFree(mem);
-                nmemFree(ref);
             }
         }
+        nmemFree(mem);
+        nmemFree(ref);
     }
 
     private static void memSetReference(long m, int value, int bytes) {

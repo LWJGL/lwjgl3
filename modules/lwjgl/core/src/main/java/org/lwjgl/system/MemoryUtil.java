@@ -1784,69 +1784,47 @@ public final class MemoryUtil {
          */
 
         //UNSAFE.setMemory(dst, bytes, (byte)(value & 0xFF));
-        if (256L <= bytes) {
-            nmemset(ptr, value, bytes);
-            return;
-        }
-
-        if (BITS64) {
-            memSet64(ptr, value, (int)bytes);
+        if (bytes < 256L && ((int)ptr & 7) == 0) {
+            int length = (int)bytes & 0xFF;
+            if (BITS64) {
+                memSet64(ptr, value, length);
+            } else {
+                memSet32((int)ptr, value, length);
+            }
         } else {
-            memSet32((int)ptr, value, (int)bytes);
+            nmemset(ptr, value, bytes);
         }
     }
     private static void memSet64(long ptr, int value, int bytes) {
         long fill = (value & 0xFF) * FILL_PATTERN_64;
 
-        int i = 0,
-            length = bytes & 0xFF;
-
-        int misalignment = (int)ptr & 7;
-        if (misalignment != 0 && length != 0) {
-            long aligned = ptr - misalignment;
-            UNSAFE.putLong(null, aligned, merge(
-                UNSAFE.getLong(null, aligned),
-                fill,
-                SHIFT.right(SHIFT.left(-1L, max(0, 8 - length)), misalignment) // 0x0000FFFFFFFF0000
-            ));
-            i += 8 - misalignment;
-            ptr += 8 - misalignment;
-        }
+        int remaining = bytes;
 
         // Aligned longs for performance
-        for (; i <= length - 8; i += 8, ptr += 8) {
+        while (8 <= remaining) {
             UNSAFE.putLong(null, ptr, fill);
+            remaining -= 8;
+
+            ptr += 8;
         }
 
-        int tail = length - i;
-        if (0 < tail) {
+        if (remaining != 0) {
             // Aligned tail
-            UNSAFE.putLong(null, ptr, merge(
-                fill,
-                UNSAFE.getLong(null, ptr),
-                SHIFT.right(-1L, tail) // 0x00000000FFFFFFFF
-            ));
+            long mask = SHIFT.right(-1L, remaining);
+            UNSAFE.putLong(null, ptr, fill ^ ((fill ^ UNSAFE.getLong(null, ptr)) & mask));
         }
     }
     private static void memSet32(int ptr, int value, int bytes) {
         int fill = (value & 0xFF) * FILL_PATTERN_32;
 
-        int i = 0,
-            length = bytes & 0xFF;
-
-        int misalignment = ptr & 3;
-        if (misalignment != 0) {
-            for (int len = min(4 - misalignment, length); i < len; i++) {
-                UNSAFE.putByte(null, (long)(ptr + i), (byte)fill);
-            }
-        }
+        int i = 0;
 
         // Aligned ints for performance
-        for (; i <= length - 4; i += 4) {
+        for (; i <= bytes - 4; i += 4) {
             UNSAFE.putInt(null, (long)(ptr + i), fill);
         }
 
-        for (; i < length; i++) {
+        for (; i < bytes; i++) {
             UNSAFE.putByte(null, (long)(ptr + i), (byte)fill);
         }
     }

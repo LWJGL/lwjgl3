@@ -872,7 +872,7 @@
             <jvmarg value="-XstartOnFirstThread" if:set="platform.macos"/>
             <!--<jvmarg value="-Xcheck:jni"/>-->
 
-            <jvmarg line="-XX:+UnlockDiagnosticVMOptions -XX:+TraceClassLoading -XX:+LogCompilation" if:set="jitwatch"/>
+            <jvmarg line="-XX:+UnlockDiagnosticVMOptions -XX:+LogCompilation" if:set="jitwatch"/>
             <jvmarg line="-XX:+PrintAssembly -XX:PrintAssemblyOptions=intel -XX:-TieredCompilation -XX:-UseCompressedOops" if:set="jitwatch"/>
             <jvmarg line="-XX:LogFile=${jitwatch}" if:set="jitwatch"/>
 
