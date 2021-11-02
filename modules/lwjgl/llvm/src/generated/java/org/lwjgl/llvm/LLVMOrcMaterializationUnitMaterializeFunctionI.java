@@ -50,7 +50,7 @@ public interface LLVMOrcMaterializationUnitMaterializeFunctionI extends Callback
      * <p>Ownership of the {@code Ctx} and {@code MR} arguments passes to the callback which must adhere to the {@code LLVMOrcMaterializationResponsibilityRef}
      * contract (see comment for that type).</p>
      * 
-     * <p>If this callback is called then the {@link LLVMOrcMaterializationUnitDestroy} callback will NOT be called.</p>
+     * <p>If this callback is called then the {@link LLVMOrcMaterializationUnitDestroyFunction} callback will NOT be called.</p>
      */
     void invoke(@NativeType("void *") long Ctx, @NativeType("LLVMOrcMaterializationResponsibilityRef") long MR);
 

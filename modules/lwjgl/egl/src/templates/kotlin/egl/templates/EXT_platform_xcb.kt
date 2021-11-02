@@ -16,7 +16,7 @@ val EXT_platform_xcb = "EXTPlatformXCB".nativeClassEGL("EXT_platform_xcb", postf
 
         The native X11 resources required by this extension are xcb resources. All X11 types discussed here are defined by the header {@code xcb.h}.
         
-        Requires ${EXT_platform_base.link} and ${EXT_client_extensions.link} to query its existence without a display.
+        Requires ${EXT_platform_base.link} and ${registryLink("EXT", "EGL_EXT_client_extensions")} to query its existence without a display.
         """
 
     IntConstant(

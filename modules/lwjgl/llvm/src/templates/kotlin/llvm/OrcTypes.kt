@@ -128,7 +128,7 @@ val LLVMOrcMaterializationUnitMaterializeFunction = Module.LLVM.callback {
         Ownership of the {@code Ctx} and {@code MR} arguments passes to the callback which must adhere to the {@code LLVMOrcMaterializationResponsibilityRef}
         contract (see comment for that type).
 
-        If this callback is called then the ##LLVMOrcMaterializationUnitDestroy callback will NOT be called.
+        If this callback is called then the ##LLVMOrcMaterializationUnitDestroyFunction callback will NOT be called.
         """,
 
         opaque_p("Ctx", ""),

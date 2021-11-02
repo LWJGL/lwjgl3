@@ -220,8 +220,10 @@ public class OVR {
      * the deeper saturated chromaticity values.</p>
      * 
      * <p>Using {@link #ovrColorSpace_Unmanaged ColorSpace_Unmanaged} will force the runtime to skip color correction on to the provided content. This is not recommended unless the app
-     * developer is sure about what they're doing. {@code ovrColorSpace_Unmanaged} is mostly useful for research & experimentation, but not for software
-     * distribution. This is because unless the client is applying the necessary corrections for each HMD type, the results seen in the HMD will be uncalibrated. This is especially true for future HMDs where the color space is not yet known or defined, leading to colors that might look too dull or saturated.</p>
+     * developer is sure about what they're doing. {@code ovrColorSpace_Unmanaged} is mostly useful for research &amp; experimentation, but not for software
+     * distribution. This is because unless the client is applying the necessary corrections for each HMD type, the results seen in the HMD will be
+     * uncalibrated. This is especially true for future HMDs where the color space is not yet known or defined, leading to colors that might look too dull or
+     * saturated.</p>
      * 
      * <p>Requested rectilinear-mirror outputs are composited without any color space adjustment. However, if client requests a post-distortion (i.e.
      * non-rectilinear) mirror output, it will be provided with the same color adjustment that was applied for the HMD output. Therefore, post-distortion

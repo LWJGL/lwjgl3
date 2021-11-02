@@ -12,7 +12,7 @@ package org.lwjgl.egl;
  * 
  * <p>The native X11 resources required by this extension are xcb resources. All X11 types discussed here are defined by the header {@code xcb.h}.</p>
  * 
- * <p>Requires {@link EXTPlatformBase EXT_platform_base} and {@link  EXT_client_extensions} to query its existence without a display.</p>
+ * <p>Requires {@link EXTPlatformBase EXT_platform_base} and <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_client_extensions.txt">EXT_platform_xcb</a> to query its existence without a display.</p>
  */
 public final class EXTPlatformXCB {
 

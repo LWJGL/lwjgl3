@@ -1185,8 +1185,8 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>It is recommended to create custom memory pools for such allocations. Define and fill in your {@code VkExportMemoryAllocateInfoKHR} structure and
  * attach it to {@link VmaPoolCreateInfo}{@code ::pMemoryAllocateNext} while creating the custom pool. Please note that the structure must remain alive and
- * unchanged for the whole lifetime of the {@link VmaPool}, not only while creating it, as no copy of the structure is made, but its original pointer is used
- * for each allocation instead.</p>
+ * unchanged for the whole lifetime of the {@code VmaPool}, not only while creating it, as no copy of the structure is made, but its original pointer is
+ * used for each allocation instead.</p>
  * 
  * <p>If you want to export all memory allocated by the library from certain memory types, also dedicated allocations or other allocations made from default
  * pools, an alternative solution is to fill in {@link VmaAllocatorCreateInfo}{@code ::pTypeExternalMemoryHandleTypes}. It should point to an array with

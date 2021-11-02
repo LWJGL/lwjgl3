@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * <h3>Introduction</h3>
  * 
- * <p>This is the documentation for the <b>libopusfile</Introduction> C API.</p>
+ * <p>This is the documentation for the <b>libopusfile</b> C API.</p>
  * 
  * <p>The libopusfile package provides a convenient high-level API for decoding and basic manipulation of all Ogg Opus audio streams. libopusfile is
  * implemented as a layer on top of Xiph.Org's reference <a target="_blank" href="https://www.xiph.org/ogg/doc/libogg/reference.html">libogg</a> and
@@ -53,13 +53,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>The libopusfile API always decodes files to 48 kHz. The original sample rate is not preserved by the lossy compression, though it is stored in the
  * header to allow you to resample to it after decoding (the libopusfile API does not currently provide a resampler, but the
- * <a target="_blank" href="https://www.speex.org/docs/manual/speex-manual/{@link node7.html#SECTION00760000000000000000}">the Speex resampler</a> is a good choice if you need
+ * <a target="_blank" href="https://www.speex.org/docs/manual/speex-manual/node7.html#SECTION00760000000000000000">the Speex resampler</a> is a good choice if you need
  * one). In general, if you are playing back the audio, you should leave it at 48 kHz, provided your audio hardware supports it. When decoding to a file,
  * it may be worth resampling back to the original sample rate, so as not to surprise users who might not expect the sample rate to change after encoding
  * to Opus and decoding.</p>
  * 
  * <p>Opus files can contain anywhere from 1 to 255 channels of audio. The channel mappings for up to 8 channels are the same as the
- * <a target="_blank" href="https://www.xiph.org/vorbis/doc/{@link Vorbis_I_spec.html#x1}-810004.3.9">Vorbis mappings</a>. A special stereo API can convert everything to 2
+ * <a target="_blank" href="https://www.xiph.org/vorbis/doc/Vorbis_I_spec.html#x1-810004.3.9">Vorbis mappings</a>. A special stereo API can convert everything to 2
  * channels, making it simple to support multichannel files in an application which only has stereo output. Although the libopusfile ABI provides support
  * for the theoretical maximum number of channels, the current implementation does not support files with more than 8 channels, as they do not have
  * well-defined channel mappings.</p>
@@ -2067,7 +2067,7 @@ public class OpusFile {
      *
      * @param _of  the {@code OggOpusFile} from which to read
      * @param _pcm a buffer in which to store the output PCM samples, as signed native-endian 16-bit values at 48 kHz with a nominal range of {@code [-32768,32767)}.
-     *             Multiple channels are interleaved using the <a target="_blank" href="https://www.xiph.org/vorbis/doc/{@link Vorbis_I_spec.html#x1}-810004.3.9">Vorbis channel ordering</a>.
+     *             Multiple channels are interleaved using the <a target="_blank" href="https://www.xiph.org/vorbis/doc/Vorbis_I_spec.html#x1-810004.3.9">Vorbis channel ordering</a>.
      *             This must have room for at least {@code _buf_size} values.
      * @param _li  the index of the link this data was decoded from.
      *             
@@ -2143,7 +2143,7 @@ public class OpusFile {
      * @param _of  the {@code OggOpusFile} from which to read
      * @param _pcm a buffer in which to store the output PCM samples as signed floats at 48 kHz with a nominal range of {@code [-1.0,1.0]}.
      *             
-     *             <p>Multiple channels are interleaved using the <a target="_blank" href="https://www.xiph.org/vorbis/doc/{@link Vorbis_I_spec.html#x1}-810004.3.9">Vorbis channel ordering</a>.
+     *             <p>Multiple channels are interleaved using the <a target="_blank" href="https://www.xiph.org/vorbis/doc/Vorbis_I_spec.html#x1-810004.3.9">Vorbis channel ordering</a>.
      *             This must have room for at least {@code _buf_size} floats.</p>
      * @param _li  the index of the link this data was decoded from.
      *             
